@@ -145,3 +145,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Latest locked and committed:** RULE-104 (Option A with eligibility protections). A single discrete “for each” instruction fixes its eligible-object processing set at instruction start; newly eligible objects are not added, and original objects are not automatically removed from the list. This **does not** bypass later explicit eligibility, installation, source-dependent conditions, or costs; continuous effects end upon source removal. Ordinary triggers cannot interrupt the current effect (RULE-014/015). Compatible with RULE-010, RULE-083/088/090, RULE-102/103; no locked override. Master Design commit: `5b5e1dbaaf863917f71e31f270689d87c5d45ad5`.
 
 **Next open question:** RULE-105 — whether one “for each” instruction generates one event for its aggregate effect or separate events for each object processed, especially prevention gains. Must reconcile with RULE-074–077 before approval; no commit. No code changes or tests verified.
+
+
+## Design-rule update — 2026-11-11: RULE-105
+
+**Latest locked and committed:** RULE-105 Option A — a single discrete “for each” instruction that grants prevention generates **one aggregate prevention-gain event** if its total gain is positive, regardless of objects processed. Each eligible triggered ability responds at most once per event subject to frequency restrictions; separately written gain instructions remain separate events (RULE-076), and distinct abilities can each respond (RULE-078). Generated triggers resolve after the originating ability via FIFO (RULE-014/015). Example: 3 Software × 2 CHAR = 6 CHAR, one gain event, one +1 BW trigger. Conflict audit: RULE-074–079 and RULE-103/104 preserved; no overrides. Master Design commit `0a798daeb0f6aa934ccce8e872cc0494215ca08d`.
+
+**Next open question:** RULE-106 — should this single aggregate-event convention apply to other “for each” instructions producing non-prevention events (e.g., Trace reductions, BW gains), or remain prevention-specific until separately defined? Audit existing event rules before any commit. Not approved. No code changes or tests verified.
