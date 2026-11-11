@@ -1219,3 +1219,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software reads: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” The Runner has **three installed copies** and performs a qualifying shuffle. The effect activates **once total**, granting **2 CHAR prevention**, **not 6**. The shared allowance is consumed for all three copies until the per-turn reset.
 
 **Compatibility:** Per-copy trigger limits remain the default (RULE-057); explicit shared limits within a card remain governed by RULE-056. Per-turn reset follows RULE-027/028. Multiple different abilities may still qualify from one event unless limited by explicit text (RULE-054/055).
+
+
+## 125. RULE-059 — Installing new copies does not reset a consumed global trigger limit (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A globally shared trigger-frequency allowance belongs to the **card's shared ability across all installed copies**, not to any particular installed instance. If the global allowance has already been consumed during the current turn, **installing another copy of that card later in the same turn does not restore or reset the allowance**. The newly installed copy inherits the consumed state until the normal per-turn reset (RULE-027/028).
+
+**Canonical example:** One installed Software has “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” A shuffle activates it once for **2 CHAR prevention**. The Runner then installs a second copy and shuffles again during the same turn. **No second activation** occurs, because the shared global allowance remains consumed.
+
+**Compatibility:** Explicit global limits override per-copy limits (RULE-058), while ordinary independent per-copy limits remain the default (RULE-057). The global allowance resets at the beginning of each turn under RULE-027/028.
+
+**OPEN:** Whether a globally consumed limit persists if all copies leave play and another copy is installed later in the same turn.
