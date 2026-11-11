@@ -712,3 +712,17 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Priority relationship:** If expiration times differ, RULE-005 still requires consuming the **earliest-expiring eligible** resource first. RULE-004 establishes the overarching temporary-before-ongoing principle. This tie rule does not allow ineligible resources or cross-type prevention.
 
 **OPEN:** A deterministic engine tie-breaker for mechanically distinct same-expiration resources if no specific card text resolves the conflict.
+
+
+## 73. RULE-007 — Prevention multipliers apply to specified existing pools; encourage stacking (LOCKED, 2026-11-10)
+
+**Explicit user decision:** Card effects **stacking and synergizing is encouraged** as a central deckbuilding feature. Do **not** impose an implicit restriction that multipliers can only affect newly generated prevention. Interpret prevention multiplier wording by its **scope**:
+- **“Double your prevention”** doubles **all three current prevention pools**: CHAR, SYN, and VOID.
+- **“Double your CHAR prevention”** doubles the **entire current CHAR prevention pool**, including contributions already accumulated from multiple cards. Example: three cards collectively provide **15 CHAR prevention**; doubling CHAR prevention produces **30 CHAR prevention**.
+- **“The first defensive card you play each Runner turn prevents twice as much CHAR”** instead modifies **that individual card's contribution**, not the entire accumulated pool, as illustrated under SOFT-014.
+
+**Design intent:** Encourage players to discover powerful interactions among multiple cards and Hardware/Ghostware; stacking effects should be supported, not automatically suppressed as exponential synergy. Wording determines whether a multiplier applies to a single contribution or an already-accumulated pool.
+
+**Accounting:** The engine must preserve source/duration bookkeeping necessary for RULE-004/005/006 and GHOST-001 even when a multiplier affects a displayed pooled total.
+
+**OPEN:** Precise ordering and rounding for multiple simultaneous multipliers, and how pool-wide multipliers distribute across contributions of different expiration durations. Do not assume repeated passive reapplication every frame/turn; timing must be specified.
