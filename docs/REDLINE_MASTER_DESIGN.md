@@ -683,3 +683,12 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Duration and accounting:** Node-long Origin Ghostware prevention **does not expire at the beginning of the next Runner turn** under SOFT-013; that expiration applies to temporary prevention. For correct accounting alongside DMG-002's shared per-type prevention totals, the game must retain sufficient **duration/source bookkeeping** to expire temporary contributions while preserving any unspent Node-long reserve; this is **not** a return to player-selected shield consumption. Exact internal allocation between temporary and Node-long prevention when both coexist remains **OPEN**.
 
 **Archetype implication:** Other Runners may specialize in SYN or VOID prevention using different Origin Ghostware; these are design possibilities, not locked starting abilities.
+
+
+## 70. RULE-004 — Temporary resources spent before ongoing resources (LOCKED, 2026-11-10)
+
+**Explicit user decision — universal game rule:** Whenever multiple eligible interchangeable resources, prevention reserves, or effects can satisfy the same expenditure, cost, or requirement, **temporary resources are consumed first, before permanent or ongoing resources**. This is a general REDLINE priority rule, not merely a shield rule. Apply automatically without requiring the Runner to select individual resources. Explicit card text or a more specific rule may override the default priority.
+
+**CHAR prevention example:** Runner has 3 temporary CHAR prevention plus 6 Node-long CHAR prevention from Origin Ghostware, for a displayed total of 9. Incoming CHAR 4 consumes the 3 temporary first, then 1 Node-long, leaving 5 Node-long CHAR prevention and 0 temporary. This is consistent with the single displayed pool per damage type (DMG-002) while preserving behind-the-scenes duration bookkeeping (GHOST-001).
+
+**Scope:** The priority applies only when the candidate resources/effects are **eligible and interchangeable for the same requirement**; it does not make a CHAR reserve eligible to pay SYN/VOID, bypass a printed cost, or allow an ineligible effect to be spent. Exact priority among multiple resources with equal duration remains OPEN.
