@@ -901,3 +901,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** RULE-020 (explicit per-card limits), RULE-021 (independent copies except explicit shared outcome limits), RULE-023/024 (replay costs), and RULE-025 (uninterrupted replay sequence) continue to apply. This does not introduce a universal trigger cap.
 
 **OPEN:** Whether failed or unpaid replay attempts count as plays for frequency-limit bookkeeping; exact reset timing of limits phrased only as “per turn.”
+
+
+## 93. RULE-027 — Per-turn trigger limits reset at every side's turn start (LOCKED, 2026-11-10)
+
+**Explicit user approval:** An ability limited to **“once per turn”** (or another explicit **per-turn** frequency) refreshes its allowance at the **start of every turn**, including **both Runner turns and Corporation turns**. A persistent ability may therefore trigger once on the Runner turn and once on the following Corporation turn, provided the relevant trigger condition occurs in each turn.
+
+**Example:** An installed defensive Software with a “once per turn” trigger can activate on the Runner turn and again on the Corporation turn after its allowance resets. This does **not** permit the Runner to play cards during the Corporation turn; existing persistent effects can trigger automatically (SOFT-011).
+
+**Compatibility:** Explicit frequency restrictions continue to apply per ability (RULE-020), independent copies follow RULE-021, and replay does not reset a used allowance within the same turn (RULE-026). **OPEN:** Text specifying “once during your turn,” “once during the Runner's turn,” or other narrower windows follows its explicit wording; exact turn-boundary event ordering relative to start-of-turn triggers is not yet defined.
