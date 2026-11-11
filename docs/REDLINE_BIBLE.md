@@ -295,3 +295,8 @@ Resolve SYN X in this order:
 
 
 **Damage terminology lock (2026-11-11):** **CHAR** is deprecated and replaced by **BURN damage**. **BURN X reduces Runner Vitae by X**, subject to applicable BURN prevention. Earlier CHAR labels, examples, and prevention-pool references in this document are to be read as BURN. SYN remains mandatory Runner-selected discard with its approved overflow rule; VOID remains distinct. This is a terminology replacement, not an additional damage type.
+
+
+### Colloquial terminology — CHAR (CANON, 2026-11-11)
+
+In-world, **BURN damage** is colloquially called **“CHAR”**, evoking **charred flesh**. **BURN** remains the sole official mechanical damage keyword for damage that reduces Runner **Vitae (VIT)**. **CHAR** may appear in character dialogue, slang, flavour text, and worldbuilding, but must not be presented as a separate damage type or substituted for BURN in rules text, numerical effects, or mechanical UI labels.
