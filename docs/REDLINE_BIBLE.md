@@ -76,14 +76,14 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 - **Language drift:** Corporate DAC became colloquial CAP. Runners speak of **burning** a CAP; the original formal classification survives as history rather than everyday speech.
 - **Cultural contrast:** Corporate certification and underground imitation invite skepticism, black-market humor, and unreliable assurances.
 
-**CANON mechanical cross-reference:** JACK OUT is a distinct CAP, not a universal free action. Its use consumes the CAP, costs no BW, cannot function under LOCKDOWN, retreats to the preceding junction, fully resets the abandoned node, grants no node-completion rewards, reduces TRACE by an amount not yet specified, and does not heal Integrity or remove VOID. Precise activation windows, inventory limits, and acquisition are **OPEN**. Detailed rules belong in the Master Design.
+**CANON mechanical cross-reference:** JACK OUT is a distinct CAP, not a universal free action. Its use consumes the CAP, costs no BW, cannot function under LOCKDOWN, retreats to the preceding junction, fully resets the abandoned node, grants no node-completion rewards, reduces TRACE by an amount not yet specified, and does not heal Vitae or remove VOID. Precise activation windows, inventory limits, and acquisition are **OPEN**. Detailed rules belong in the Master Design.
 
 **DIRECTION:** CAPS demonstrate how an ordinary gameplay category can carry a history, a tactile ritual, an economy, a vocabulary, and a sense of place. Future concepts should aspire to this degree of coherence without copying the same origin story.
 
 ### Other canonical language anchors
 
-- **CHAR:** Integrity loss; flesh harmed by hostile ICE.
-- **SYN:** Runner-selected hand discard; each unfulfilled point causes 2 Integrity damage after available cards are discarded (RULE-126).
+- **CHAR:** Vitae loss; flesh harmed by hostile ICE.
+- **SYN:** Runner-selected hand discard; each unfulfilled point causes 2 Vitae damage after available cards are discarded (RULE-126).
 - **VOID:** Persistent loss of consciousness expressed as reduced DRAW; removal requires a specialized recovery node.
 - **ICE / DEADLOCK / TRACE / LOCKDOWN:** Functional network vocabulary with consequential gameplay meanings. The fiction should respect those meanings rather than use them as interchangeable decoration.
 
@@ -273,10 +273,10 @@ This is the central question, not merely whether a Runner can evade cameras, esc
 
 Resolve SYN X in this order:
 1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
-2. Each unfulfilled point of SYN causes **2 Integrity damage**.
-3. Apply that Integrity damage **after** discarding the available cards.
+2. Each unfulfilled point of SYN causes **2 Vitae damage**.
+3. Apply that Vitae damage **after** discarding the available cards.
 
-| SYN X | Hand | Discarded | Integrity damage |
+| SYN X | Hand | Discarded | Vitae damage |
 |---:|---:|---:|---:|
 | 3 | 3 | 3 | 0 |
 | 3 | 2 | 2 | 2 |
@@ -284,6 +284,11 @@ Resolve SYN X in this order:
 | 3 | 0 | 0 | 6 |
 | 5 | 2 | 2 | 6 |
 
-**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
 
-**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
+
+
+## Vitae / VIT — Runner health terminology (LOCKED, 2026-11-11)
+
+**Vitae** is the canonical name of the Runner's health resource, abbreviated **VIT** in compact UI, cards, and status displays. The former term is deprecated. **BURN damage** reduces Vitae; SYN and VOID retain their separate mechanics, except for any explicitly defined BURN overflow.
