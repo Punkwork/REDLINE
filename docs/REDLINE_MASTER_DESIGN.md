@@ -640,3 +640,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **User-provided design example (illustrative, not a finalized card):** A Hardware ability could read: **“The first defensive card you play each Runner turn prevents twice as much CHAR.”** Thus, a first defensive card with **Prevent 3 CHAR** instead prevents **6 CHAR**; a second card with **Prevent 2 CHAR** still prevents 2. Their separately tracked protections **accumulate to 8 total CHAR prevention**. The Hardware card's name and final wording are OPEN; this example establishes that a modifier may apply to an individual defensive card while total available prevention accumulates.
 
 **OPEN:** When several separately tracked shields could prevent the same incoming CHAR, which shield is consumed first (Runner choice versus a fixed order); interactions with conditional shields.
+
+
+## 66. SOFT-015 — Unified CHAR prevention pool (LOCKED, 2026-11-10)
+
+**Explicit user correction:** All defensive cards and effects contribute their calculated CHAR prevention to **one shared numerical prevention pool**. Apply any modifiers to the individual card/effect's prevention amount **before** adding it to the pool. Once contributed, there are **no separately tracked shield values** and no choice of which shield absorbs incoming damage. Incoming CHAR is deducted from this **single prevention pool**; only any excess CHAR gets through as Integrity damage. Remaining unused temporary prevention expires at the **beginning of the next Runner turn** per SOFT-013.
+
+**Example:** First defensive card prevents 3 CHAR, doubled by Hardware to 6; second prevents 2. Total prevention pool = 8. Incoming 5 CHAR consumes 5 pool points, leaving 3. No shield selection/consumption order exists.
+
+**Precedence:** This **supersedes SOFT-014's assertion that shields remain separately tracked**. SOFT-014's concept of independently calculating card-specific prevention modifiers and cumulative protection remains valid, but the resulting prevention is pooled into **one value**.
