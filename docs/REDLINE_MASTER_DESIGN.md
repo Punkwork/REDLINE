@@ -326,3 +326,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **OPEN:** exact return destination (draw pile, discard pile, or deck collection); whether early uninstallation returns the card immediately and where; exceptional Node exits including JACK OUT; effect ordering at Node end. Do not silently invent any of these.
 
 **Taxonomy:** Deck includes both Hardware and Software cards; Viruses and ICEbreakers are subtypes of Software; Ghostware remains permanent non-card upgrades. CAPS classification remains unresolved.
+
+
+## 30. TAX-005 — CAPS are consumable injectable code outside deck (LOCKED, 2026-11-10)
+
+**Explicit user decision:** **CAPS are consumable, single-use injectable code devices outside the Runner's deck.** They are a distinct mechanical category, **not Hardware cards or Software cards**. The Runner activates/injects a CAP and consumes it; it is not drawn or played from the Runner's deck. This resolves the earlier classification ambiguity and agrees with the REDLINE Bible's separate CAPS category.
+
+**Preserve established fiction:** CAP (plural CAPS), colloquial term descended from corporate DAC; ritual **Flip. Inject. Discard.** JACK OUT remains a distinct CAP, not a universal free action, subject to its existing specific restrictions and unresolved conflict with forward-only Node traversal.
+
+**OPEN:** CAPS inventory, acquisition, general activation costs/windows, specific effects beyond already established examples. Do not apply Hardware's installed DRAW penalty or Node-end recycling to CAPS.
