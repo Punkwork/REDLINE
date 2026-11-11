@@ -1756,3 +1756,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to half the CHAR prevention gained in that event, rounded down.” The Runner gains **7 CHAR prevention** and A's trigger is queued. Before resolution, **5 CHAR prevention** is lost, leaving **2**. If A's trigger remains eligible to resolve, it attempts to grant **floor(7 / 2) = 3 BW**, not floor(2 / 2) = 1 BW, subject to applicable BW restrictions.
 
 **Compatibility:** Extends RULE-111's event-referenced quantities; preserves RULE-107's recorded actual magnitude, RULE-110's distinction between event properties and current-state variables, and existing source-removal cancellation, costs, conditions, and FIFO timing. No general rounding convention beyond the card's explicit “rounded down” text is established.
+
+
+## 178. RULE-113 — Explicit reward maximum applies to original event-referenced magnitude (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a triggered ability computes a reward using the **original recorded magnitude of the triggering event**, any **explicit maximum on that reward** is applied to the result. Changes to the current resource pool after the triggering event do not alter the recorded event magnitude or the reward calculation. This card-specific maximum does not establish a universal BW cap.
+
+**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a maximum of 5 BW.” The Runner gains **8 CHAR prevention**, triggering A. Before A's queued trigger resolves, the Runner's current CHAR prevention pool falls to **3**. If the trigger remains eligible to resolve, the reward is **min(8, 5) = 5 BW**, subject to other applicable resource restrictions, **not 3 or 8 BW**.
+
+**Compatibility:** RULE-111 preserves the triggering event's original actual magnitude for event-referenced rewards; RULE-112 applies arithmetic to that recorded magnitude; RULE-110 distinguishes event properties from current-state variables. Trigger eligibility, source-removal cancellation, conditions, costs and FIFO timing remain unchanged. RULE-108 remains deferred.
