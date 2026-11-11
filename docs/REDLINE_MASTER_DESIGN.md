@@ -1210,3 +1210,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** The Runner installs **two copies** of Software reading: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 CHAR prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle incorporating discard cards qualifies for both options on each copy. Each copy independently chooses **one** option, allowing a total of **4 CHAR prevention**, **2 BW**, or **2 CHAR prevention plus 1 BW**. Both copies' own once-per-turn allowances are then consumed.
 
 **Compatibility:** Independent per-copy triggers are consistent with RULE-021; shared limits within each copy follow RULE-056; explicit global restrictions override per-copy allowances. Per-turn allowances reset under RULE-027/028, and simultaneous Runner-controlled triggers follow RULE-011.
+
+
+## 124. RULE-058 — Explicit global trigger limits shared across all installed copies (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When card text explicitly imposes a **global trigger-frequency restriction across all installed copies of that card**, all those copies share **one allowance**, rather than each copy having an independent activation. The global restriction overrides the default per-copy trigger allowances (RULE-021/057) only when stated explicitly.
+
+**Canonical example:** Software reads: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” The Runner has **three installed copies** and performs a qualifying shuffle. The effect activates **once total**, granting **2 CHAR prevention**, **not 6**. The shared allowance is consumed for all three copies until the per-turn reset.
+
+**Compatibility:** Per-copy trigger limits remain the default (RULE-057); explicit shared limits within a card remain governed by RULE-056. Per-turn reset follows RULE-027/028. Multiple different abilities may still qualify from one event unless limited by explicit text (RULE-054/055).
