@@ -744,3 +744,12 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Example:** 6 Node-long CHAR prevention from Ghostware + 4 temporary CHAR prevention from Software = 10 total. A doubling effect resolves, yielding **12 Node-long + 8 temporary = 20 total**. The temporary 8 is consumed before the Node-long 12 under RULE-004/005. If another card later adds 3 CHAR prevention, total becomes **23**, not 26. A second subsequent doubling resolves against the then-current **23**, producing **46** (RULE-008), preserving each contribution's duration.
 
 **Scope:** “Double your prevention” applies this snapshot operation to each of CHAR, SYN, and VOID; a type-specific multiplier affects only its named pool (RULE-007). No retroactive multiplication of already-spent prevention.
+
+
+## 76. RULE-010 — Resolve card instructions in printed order (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A card's instructions resolve **sequentially in their printed order, top to bottom**, unless the card or a more-specific rule explicitly says otherwise. Earlier instructions change game state before later instructions resolve. This works with RULE-002 (fulfill as much as possible), RULE-003 (distinguish costs, instructions, and conditional rewards), and RULE-009 (snapshot multipliers evaluate the current pool at the moment of resolution). Required costs are paid before their associated effects resolve.
+
+**Example:** Starting with 10 CHAR prevention, **“Gain 5 CHAR prevention. Double your CHAR prevention.”** resolves **10 → 15 → 30**. The reverse wording, **“Double your CHAR prevention. Gain 5 CHAR prevention.”**, resolves **10 → 20 → 25**. Printed order therefore matters for synergies and is intentional.
+
+**OPEN:** Ordering of multiple simultaneous triggers from different cards/effects, distinct from instructions printed sequentially on one card.
