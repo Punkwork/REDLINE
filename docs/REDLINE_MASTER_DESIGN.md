@@ -1604,3 +1604,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software ability reads “Draw cards equal to your DRAW. Gain +2 DRAW. Then draw cards equal to your DRAW again.” Starting at DRAW 5, the first instruction draws **5 cards**. The intervening bonus increases effective DRAW to **7**. The second, distinct draw instruction then draws **7 cards**, subject to existing draw-shortfall rules.
 
 **Compatibility:** RULE-098 snapshots each individual draw instruction at its start; RULE-096/097 bar retroactive hand changes or automatic extra draws. Draw-trigger timing and the resolution of other effects remain governed by their existing locked rules. This rule does not imply that a single instruction recalculates its target between cards.
+
+
+## 166. RULE-100 — Queued DRAW-based ability snapshots DRAW when queued (LOCKED, 2026-11-11)
+
+**Explicit user approval — Option B:** When a triggered Software ability whose instruction is “Draw cards equal to your DRAW” enters the FIFO trigger queue, **fix its DRAW-based card count using the effective DRAW at the moment it is queued**. Changes to DRAW while that ability waits in the queue do **not** change the fixed card count when it later resolves.
+
+**Canonical example:** Effective DRAW is **5** when the triggered ability “Draw cards equal to your DRAW” is queued. Before the ability begins resolving, another effect grants **+3 DRAW**, raising effective DRAW to **8**. The queued ability still instructs the Runner to draw **5 cards**, not 8, subject to the existing draw-shortfall rules.
+
+**Compatibility and precedence:** This is an **explicit queued-trigger exception** to RULE-098's default of determining a DRAW-based instruction's quantity when that instruction begins resolving. RULE-099 still applies to separate instructions within a resolving ability where no earlier queued snapshot governs. RULE-081/082/085 source-removal cancellation, FIFO ordering, and existing draw-trigger timing remain unchanged. The snapshot does not guarantee that a cancelled ability resolves. Whether a queued ability containing *multiple* separate DRAW-based instructions snapshots all of them at queue time remains **OPEN**; do not infer that extension from this single-instruction example.
