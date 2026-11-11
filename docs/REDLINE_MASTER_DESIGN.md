@@ -631,3 +631,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Example:** Play “Prevent 3 CHAR” on Runner turn. The following corporate response deals 1 CHAR; 2 unused protection remains until the start of the next Runner turn, then expires.
 
 **OPEN:** Whether multiple independent shield effects combine into one pool or remain separately tracked; exact ordering of start-of-turn cleanup relative to other start-of-turn triggers.
+
+
+## 65. SOFT-014 — Independent defensive effects; cumulative CHAR prevention (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Multiple active shields/defensive effects remain **separate, individually tracked effects**, but their CHAR prevention **accumulates** against incoming CHAR. They are **not merged into a single effect or shield pool**. This allows card-specific modifiers, triggers, and interactions to affect one shield without modifying the others. Any unused temporary protection expires at the beginning of the next Runner turn per SOFT-013.
+
+**User-provided design example (illustrative, not a finalized card):** A Hardware ability could read: **“The first defensive card you play each Runner turn prevents twice as much CHAR.”** Thus, a first defensive card with **Prevent 3 CHAR** instead prevents **6 CHAR**; a second card with **Prevent 2 CHAR** still prevents 2. Their separately tracked protections **accumulate to 8 total CHAR prevention**. The Hardware card's name and final wording are OPEN; this example establishes that a modifier may apply to an individual defensive card while total available prevention accumulates.
+
+**OPEN:** When several separately tracked shields could prevent the same incoming CHAR, which shield is consumed first (Runner choice versus a fixed order); interactions with conditional shields.
