@@ -138,3 +138,10 @@ Exact dates for individual decisions, complete card lists, test output, commits,
 **Decision:** RULE-103 LOCKED (Option A). A single discrete “for each” instruction snapshots a referenced variable numeric value once at instruction start for all processed objects. Later distinct instructions take fresh snapshots under RULE-102. Ordinary generated triggers do not interrupt the current ability (RULE-014/015), and prevention event granularity (RULE-074–077) is unchanged. Conflict review found no existing locked rule overridden.
 
 **Master Design commit:** `a33b7a95fe3d1bf10dd400498d4a5d9942222204`. **Code changes:** None. **Tests:** None. **Next:** RULE-104, decide eligible-object-set timing in one for-each instruction; not yet approved.
+
+
+## 2026-11-11 — RULE-104 approved and locked after conflict review
+
+**Decision:** User selected Option A with eligibility protections. A discrete “for each” instruction snapshots its object processing set at instruction start; new objects are excluded and originally selected objects stay on the processing list. Explicit costs, eligibility/installed-status conditions, source-removal mechanics and continuous-effect expiration retain precedence. Ordinary triggered changes remain deferred under RULE-014/015. No override of existing locked rules found.
+
+**Master Design commit:** `5b5e1dbaaf863917f71e31f270689d87c5d45ad5`. **Code changes:** None. **Tests:** None. **Next:** RULE-105, clarify prevention-gain event granularity for a single per-object instruction, subject to RULE-074–077 conflict check; not approved.
