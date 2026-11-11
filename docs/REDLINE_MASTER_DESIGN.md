@@ -762,3 +762,10 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Example:** Runner currently has **5 CHAR prevention**. Two installed Software effects trigger together on playing a defensive card: one **grants 3 CHAR prevention**, the other **doubles current CHAR prevention**. Runner may resolve **+3 first, then double** to produce **(5 + 3) × 2 = 16**, instead of **(5 × 2) + 3 = 13**.
 
 **Scope:** This rule specifies the ordering of **simultaneous Runner-controlled triggers**. It does not yet specify ordering of simultaneous Corporation-controlled triggers or cross-controller triggers, which remain OPEN.
+
+
+## 78. RULE-012 — Corporation orders simultaneous Corporation-controlled triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When **multiple Corporation-controlled effects trigger simultaneously**, the **Corporation determines their resolution order**. Each chosen triggered effect resolves **completely** before the next begins; instructions within each effect follow printed order under RULE-010. This mirrors RULE-011 for Runner-controlled simultaneous triggers.
+
+**Scope:** The rule concerns **ordering of already-triggered Corporation effects**, not playing reactive cards during the Corporation turn; SOFT-011's restriction on Runner card play remains unchanged. The order of simultaneous triggers **controlled by different sides** remains OPEN.
