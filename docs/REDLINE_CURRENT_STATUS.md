@@ -138,3 +138,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Latest locked and committed:** RULE-103 (Option A) — one discrete “for each” instruction using a variable numeric value snapshots that value once at the instruction's start and reuses it for each eligible object. Separate later instructions independently recalculate under RULE-102. Illustrative Trace 6 across three Software cards stays 6 for all per-card calculations, even if a legally permitted change occurs during processing. This does not authorize queued triggers to interrupt the current ability or change prevention-gain event granularity. Conflict check: compatible with RULE-010, RULE-014/015, RULE-074–077, RULE-098, RULE-102; no override. Master Design commit: `a33b7a95fe3d1bf10dd400498d4a5d9942222204`.
 
 **Next open question:** RULE-104 — when a single “for each” instruction refers to eligible objects, whether the eligible object set is determined at instruction start or reevaluated as objects enter/leave during processing. Check existing rules before approval/commit; not locked. No code changes or tests verified.
+
+
+## Design-rule update — 2026-11-11: RULE-104
+
+**Latest locked and committed:** RULE-104 (Option A with eligibility protections). A single discrete “for each” instruction fixes its eligible-object processing set at instruction start; newly eligible objects are not added, and original objects are not automatically removed from the list. This **does not** bypass later explicit eligibility, installation, source-dependent conditions, or costs; continuous effects end upon source removal. Ordinary triggers cannot interrupt the current effect (RULE-014/015). Compatible with RULE-010, RULE-083/088/090, RULE-102/103; no locked override. Master Design commit: `5b5e1dbaaf863917f71e31f270689d87c5d45ad5`.
+
+**Next open question:** RULE-105 — whether one “for each” instruction generates one event for its aggregate effect or separate events for each object processed, especially prevention gains. Must reconcile with RULE-074–077 before approval; no commit. No code changes or tests verified.
