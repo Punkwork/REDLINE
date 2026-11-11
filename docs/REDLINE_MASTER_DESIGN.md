@@ -1201,3 +1201,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** One installed Software reads: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 CHAR prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle involving discard cards satisfies both conditions, but the Runner chooses **either 2 CHAR prevention or 1 BW**, **not both**. The shared limit is then used for that turn.
 
 **Compatibility:** Independently written abilities trigger separately by default (RULE-055); explicit shared limits override this (RULE-020). The per-turn shared allowance resets under RULE-027/028. Shuffle event classification remains governed by RULE-050–054.
+
+
+## 123. RULE-057 — Shared trigger limits tracked independently per installed copy (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Each **installed instance** of a Software card has its **own allowance** for an explicit grouped/shared trigger restriction such as **“Once per turn, choose one”** (RULE-056). Multiple copies may each select one eligible benefit when the same event qualifies, unless the card explicitly imposes a **global/shared-across-copies** limit.
+
+**Canonical example:** The Runner installs **two copies** of Software reading: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 CHAR prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle incorporating discard cards qualifies for both options on each copy. Each copy independently chooses **one** option, allowing a total of **4 CHAR prevention**, **2 BW**, or **2 CHAR prevention plus 1 BW**. Both copies' own once-per-turn allowances are then consumed.
+
+**Compatibility:** Independent per-copy triggers are consistent with RULE-021; shared limits within each copy follow RULE-056; explicit global restrictions override per-copy allowances. Per-turn allowances reset under RULE-027/028, and simultaneous Runner-controlled triggers follow RULE-011.
