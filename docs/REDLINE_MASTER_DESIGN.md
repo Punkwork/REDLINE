@@ -1487,3 +1487,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A's ability reads “Gain 3 CHAR prevention. Then draw 2 cards.” After granting **3 CHAR prevention**, A is removed from play. Its already resolving ability **still draws 2 cards**, assuming at least 2 cards are available through draw/discard piles; if fewer are available, draw as many as possible under RULE-034/037.
 
 **Compatibility:** Confirms that the in-progress resolution protection of RULE-083 applies to **all remaining instructions**, not only prevention gains. Pending, not-yet-resolving triggers from removed Software are still cancelled (RULE-081/082/085). Draw-generated triggers queue until the current effect completes (RULE-033/039).
+
+
+## 153. RULE-087 — Conditional rewards remain valid after source removal during resolution (LOCKED, 2026-11-11)
+
+**Explicit user approval:** If an installed Software ability has **already begun resolving**, removing the source Software card during that resolution **does not invalidate a conditional reward** whose requirement is successfully fulfilled. The remaining instructions continue normally and the condition is evaluated based on what actually happened, not on whether the source is still installed.
+
+**Canonical example:** Software A reads “Draw 2 cards. If you do, gain 5 CHAR prevention.” During the draw, another effect removes A from play. If **both cards are actually drawn**, the “If you do” requirement is satisfied and the Runner **gains 5 CHAR prevention**. If fewer than two cards are drawn, the conditional reward **does not occur**, regardless of source removal.
+
+**Compatibility:** Conditional draws require full completion (RULE-038); draw-triggered effects wait until the card ability finishes (RULE-033/039); already resolving abilities continue after source removal (RULE-083/086). Other pending triggers from removed Software remain cancelled (RULE-081/082/085).
