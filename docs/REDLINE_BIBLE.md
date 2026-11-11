@@ -300,3 +300,20 @@ Resolve SYN X in this order:
 ### Colloquial terminology — CHAR (CANON, 2026-11-11)
 
 In-world, **BURN damage** is colloquially called **“CHAR”**, evoking **charred flesh**. **BURN** remains the sole official mechanical damage keyword for damage that reduces Runner **Vitae (VIT)**. **CHAR** may appear in character dialogue, slang, flavour text, and worldbuilding, but must not be presented as a separate damage type or substituted for BURN in rules text, numerical effects, or mechanical UI labels.
+
+
+## RULE-127 — SyN prevention, mandatory discard, and overflow BURN (LOCKED, 2026-11-11)
+
+**Approved resolution order:** When the Runner receives **SyN X**:
+
+1. **Apply SyN prevention:** Deduct available SyN prevention from incoming SyN, consuming no more prevention than the incoming amount.
+2. **Determine unprevented SyN:** Resolve only the remaining SyN amount.
+3. **Mandatory discard:** The Runner **MUST** choose and discard as many cards as possible from their current hand, up to the unprevented SyN amount. The Runner chooses *which* cards, but **cannot** voluntarily keep eligible cards and take BURN instead.
+4. **Calculate overflow:** Each point of unprevented SyN not fulfilled by a card discard generates **2 BURN damage**, per RULE-126.
+5. **Resolve BURN:** After mandatory discards, apply any available **BURN prevention** to the generated BURN damage; only unprevented BURN reduces **Vitae (VIT)**.
+
+**Example:** Incoming SyN 5, SyN prevention 2, and 1 card in hand: 3 SyN remains; the Runner must discard that 1 card; 2 SyN overflow generates **4 BURN**. Apply BURN prevention, if any, before reducing Vitae.
+
+**Priority and scope:** RULE-127 specifies the resolution sequence and prevention interaction for RULE-126. **SyN** is Runner-selected *mandatory* discard; **BURN** is the official Vitae-damaging keyword; **CHAR** is only colloquial slang for BURN in the World Bible; **VOID** is distinct. This rule does not invent additional prevention resources or change the previously established prevention-pool duration/stacking rules. Any unspecified simultaneous trigger timing remains open.
+
+**Regression expectations:** Test full/partial/no SyN prevention, full/partial/empty hand, compulsory discard, BURN prevention of overflow, and zero-Vitae defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
