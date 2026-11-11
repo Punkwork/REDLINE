@@ -1496,3 +1496,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A reads “Draw 2 cards. If you do, gain 5 CHAR prevention.” During the draw, another effect removes A from play. If **both cards are actually drawn**, the “If you do” requirement is satisfied and the Runner **gains 5 CHAR prevention**. If fewer than two cards are drawn, the conditional reward **does not occur**, regardless of source removal.
 
 **Compatibility:** Conditional draws require full completion (RULE-038); draw-triggered effects wait until the card ability finishes (RULE-033/039); already resolving abilities continue after source removal (RULE-083/086). Other pending triggers from removed Software remain cancelled (RULE-081/082/085).
+
+
+## 154. RULE-088 — Explicit installed-source conditions override continued resolution (LOCKED, 2026-11-11)
+
+**Explicit user approval:** An installed Software ability that has **already begun resolving** normally continues after its source leaves play (RULE-083), but **explicit conditions requiring that Software to remain installed** must still be satisfied at the point the condition is checked. Continuing resolution does **not** waive or override an expressly stated installed-source requirement.
+
+**Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 CHAR prevention.” The ability begins resolving, but A is removed during the draw. The Runner **still completes the draw of 2 cards** (assuming cards are available). At the conditional instruction, A is **not installed**, so the Runner gains **0 CHAR prevention**. The fact that both cards were drawn does not satisfy the distinct explicit installation condition.
+
+**Compatibility:** Already resolving abilities finish after source removal (RULE-083/086); successfully completed conditional draws remain valid when their conditions are met (RULE-087); however, explicit conditions are independently enforced (RULE-003/038). Pending queued abilities from removed Software are cancelled (RULE-081/082/085).
