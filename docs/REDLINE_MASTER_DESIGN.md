@@ -1415,3 +1415,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain 1 BW.” Installed Software B reads “Whenever you gain SYN prevention, draw 1 card.” The Runner plays “Gain 3 CHAR prevention and 2 SYN prevention.” This **single instruction** produces **one gain event** (RULE-077) that satisfies both conditions. Software A queues **+1 BW** and Software B queues **draw 1 card**, each **once**. The Runner chooses their order, and both resolve after the originating card finishes.
 
 **Compatibility:** Multiple distinct triggered abilities may respond to the same event (RULE-055); Runner orders simultaneous Runner-controlled triggers (RULE-011); queued triggers wait until the current effect completes and follow established queue ordering (RULE-014/015); one multi-type prevention instruction is one event (RULE-077).
+
+
+## 145. RULE-079 — Prevention gained from triggered abilities can generate further triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Prevention granted by a **triggered ability** counts as a new prevention-gain event, just like prevention granted by a played card or other effect. It can trigger further eligible abilities, producing **chained triggers**. Each resolving ability completes before its generated triggers resolve; newly generated triggers enter the existing **FIFO queue**. Genuinely infinite cycles are handled by existing loop detection and termination rules, without capping legitimate finite chains.
+
+**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Installed Software B reads “Whenever you gain SYN prevention, gain 1 BW.” Runner plays “Gain 3 CHAR prevention.” The 3 CHAR gain queues A. A resolves, granting 2 SYN prevention and queuing B. B subsequently resolves, granting 1 BW. Final gains: **3 CHAR prevention, 2 SYN prevention, 1 BW**, assuming no other effects.
+
+**Compatibility:** Triggered abilities resolve completely before their generated triggers (RULE-014); queue order is FIFO (RULE-015); infinite-loop safeguards follow RULE-016–019; gain-event granularity follows RULE-074–078.
