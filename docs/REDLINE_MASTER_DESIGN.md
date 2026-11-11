@@ -930,3 +930,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** Runner ends the previous turn with 8 temporary CHAR prevention scheduled to expire at the next Runner turn start. Those 8 expire before a start-of-turn ability doubles current CHAR prevention, so they are not doubled.
 
 **OPEN:** Exact placement of BW refresh, DRAW, Node-long prevention refresh, and other turn-start housekeeping relative to these steps. Do not infer their order from this rule.
+
+
+## 96. RULE-030 — Refresh BW before Runner start-of-turn triggered abilities (LOCKED, 2026-11-10)
+
+**Explicit user approval:** At the beginning of each **Runner turn**, refresh BW to the Runner's **full currently available amount**, including applicable modifiers to the baseline **4 BW**, **before** resolving any start-of-turn triggered abilities. Start-of-turn abilities that spend or modify BW therefore operate on freshly refreshed BW rather than the previous turn's remainder.
+
+**Established Runner turn-start order:** (1) reset applicable per-turn trigger-frequency allowances (RULE-028); (2) expire temporary effects scheduled to end at that Runner turn start (RULE-029); (3) refresh BW to its full currently available amount; (4) resolve start-of-turn triggered abilities in the established priority/queue order (RULE-011 through RULE-015).
+
+**Example:** Runner ended the previous turn at 0 BW and has a current full available BW amount of 4. At the next Runner turn start, BW becomes **4** before start-of-turn abilities resolve.
+
+**OPEN:** Timing of normal DRAW and other turn-start housekeeping relative to these steps; how effects that alter maximum BW during start-of-turn resolution update available BW.
