@@ -1003,3 +1003,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** Installed Software says “Whenever your discard pile is reshuffled into your draw pile, gain 2 CHAR prevention.” If **three actual reshuffles** occur during one draw operation, three triggers are queued and later grant **6 CHAR prevention total**, absent other modifiers or limits.
 
 **Clarification:** This rule does not cause an extra reshuffle when there are no eligible cards in the discard pile; it only counts reshuffles that actually occur. The precise conditions under which repeated reshuffles can occur during a single draw remain subject to the available card zones and normal draw rules (RULE-034).
+
+
+## 103. RULE-037 — No automatic penalty when draw and discard piles are empty (LOCKED, 2026-11-10)
+
+**Explicit user approval:** If an instruction requires drawing cards but **both the draw pile and discard pile contain no eligible cards**, draw **zero cards** and **continue resolving any remaining independent instructions**. Do **not** automatically inflict Integrity damage, other damage, or any penalty merely because a draw could not be fulfilled. If some cards are available, draw as many as possible (RULE-002/034).
+
+**Canonical example:** “Draw 3 cards. Gain 2 CHAR prevention.” With both draw and discard piles empty, draw **0 cards** and still gain **2 CHAR prevention**.
+
+**Compatibility:** Explicit costs and conditional wording such as “If you do” still follow RULE-003; a card may explicitly specify a consequence for an unsuccessful draw, but there is **no universal deck-exhaustion penalty**. Automatic reshuffling applies only when the discard pile has eligible cards (RULE-034).
