@@ -1586,3 +1586,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Runner starts the turn at DRAW 5 and draws 5 cards. Mid-turn, installed Software grants +3 DRAW, increasing effective DRAW to 8. **No 3-card immediate draw occurs.** DRAW 8 applies to the next applicable draw calculation that references DRAW.
 
 **Compatibility:** Complements RULE-096: neither increases nor decreases in DRAW retroactively alter completed draws. Explicit instructions to draw cards remain governed by their own wording. No new normal draw timing is established.
+
+
+## 164. RULE-098 — Snapshot DRAW when a draw instruction begins resolving (LOCKED, 2026-11-11)
+
+**Explicit user approval — Option A:** When an ability instructs the Runner to draw cards equal to their **DRAW**, determine the number of cards from the effective DRAW value **when that draw instruction begins resolving**. Changes to DRAW during the instruction do **not** increase or decrease the number of cards instructed to be drawn. Later applicable draw calculations use the then-current DRAW value.
+
+**Canonical example:** The Runner has DRAW 5. Software instructs “Draw cards equal to your DRAW.” The instruction begins with a target of **5 cards**. After 2 cards have been drawn, another effect raises effective DRAW to 8. The original instruction still draws **5 cards total**, not 8, subject to existing rules for drawing as many as possible if the deck cannot supply enough cards.
+
+**Compatibility:** RULE-096/097 prevent retroactive changes to completed draws; RULE-098 fixes the quantity for a draw instruction already underway. Existing draw-trigger timing and draw-shortfall rules remain unchanged. This does not specify how other variable numerical effects snapshot their values.
