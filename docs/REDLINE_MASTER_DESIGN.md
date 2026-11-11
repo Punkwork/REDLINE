@@ -572,3 +572,15 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **User's authoritative example:** A card reads **“When played: Discard a card. Gain X effect.”** If the Runner has **no other cards in hand** to discard, the Runner discards none and **still gains X**. If the Runner has an eligible card, they discard one (target chooses under RULE-001), then gain X. Likewise, “discard 3 CACHED cards” with only one CACHED card discards that one.
 
 **OPEN design distinction:** Future effects may explicitly specify an **additional mandatory cost** or conditional **“if you do”** requirement to gate a benefit, but the exact templating and general cost-payment rules have not yet been approved. Do not retroactively interpret a normal “Discard 1. Gain X” instruction as such a cost.
+
+
+## 59. RULE-003 — Instructions versus costs and conditional effects (LOCKED, 2026-11-10)
+
+**Explicit user approval:** REDLINE formally distinguishes **instructions** from **costs**. Ordinary instructions are fulfilled **as much as possible** under RULE-002, without cancelling other independent effects. A **cost** must be **paid in full** to activate/receive the associated effect. A **conditional** such as **“If you do”** grants its contingent benefit only if the specified action was actually performed successfully. **Never infer a cost** from an ordinary instruction; cost/condition must be explicit in card text or an applicable rule.
+
+**Examples:**
+- **“Discard 1 card. Gain X.”** With no eligible card to discard, discard none; still gain X.
+- **“Discard 1 card. If you do, gain X.”** With no eligible card to discard, do not gain X.
+- **“Cost: Discard 1 card. Effect: Gain X.”** With no eligible card to discard, cannot pay the cost and therefore cannot activate the associated effect.
+
+**Interaction:** RULE-001 still lets the target choose eligible objects when an effect requires a choice; RULE-002 governs partial fulfillment of instructions, but does **not** waive costs. Exact formatting/wording conventions may be refined later without changing this principle.
