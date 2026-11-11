@@ -1747,3 +1747,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Installed Software A reads “Whenever you gain at least 5 CHAR prevention in a single event, gain BW equal to the amount of CHAR prevention gained in that event.” The Runner gains **6 CHAR prevention**, qualifying the event and queuing A's trigger. Before that trigger resolves, the current CHAR prevention pool falls to **2**. If the queued trigger remains eligible to resolve, its reward attempts to grant **6 BW** (subject to applicable BW restrictions), **not 2 BW**, because the instruction references the recorded original event's gain.
 
 **Compatibility:** RULE-107 fixes the actual magnitude of an aggregate event; RULE-109 checks thresholds against that magnitude; RULE-110 fixes event-time qualification but evaluates current-state variables at instruction time. Explicit event-referenced quantities are event properties, not current-state variables. Source-removal cancellation (RULE-081/082/085), costs, conditions, frequency limits, and FIFO timing remain unchanged. This rule does not resolve deferred RULE-108.
+
+
+## 177. RULE-112 — Calculated event-based rewards use the original recorded event magnitude (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a triggered ability calculates a numerical reward from **the amount gained in its triggering event**, use the event's **original recorded actual gain**, even if the current resource pool has changed before the trigger resolves. Mathematical transformations of that event-referenced amount (including division and explicitly stated rounding) operate on the original event magnitude, not the remaining pool.
+
+**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to half the CHAR prevention gained in that event, rounded down.” The Runner gains **7 CHAR prevention** and A's trigger is queued. Before resolution, **5 CHAR prevention** is lost, leaving **2**. If A's trigger remains eligible to resolve, it attempts to grant **floor(7 / 2) = 3 BW**, not floor(2 / 2) = 1 BW, subject to applicable BW restrictions.
+
+**Compatibility:** Extends RULE-111's event-referenced quantities; preserves RULE-107's recorded actual magnitude, RULE-110's distinction between event properties and current-state variables, and existing source-removal cancellation, costs, conditions, and FIFO timing. No general rounding convention beyond the card's explicit “rounded down” text is established.
