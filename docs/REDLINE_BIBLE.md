@@ -82,7 +82,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 ### Other canonical language anchors
 
-- **CHAR:** Vitae loss; flesh harmed by hostile ICE.
+- **BURN:** Vitae loss; flesh harmed by hostile ICE.
 - **SYN:** Runner-selected hand discard; each unfulfilled point causes 2 Vitae damage after available cards are discarded (RULE-126).
 - **VOID:** Persistent loss of consciousness expressed as reduced DRAW; removal requires a specialized recovery node.
 - **ICE / DEADLOCK / TRACE / LOCKDOWN:** Functional network vocabulary with consequential gameplay meanings. The fiction should respect those meanings rather than use them as interchangeable decoration.
@@ -284,7 +284,7 @@ Resolve SYN X in this order:
 | 3 | 0 | 0 | 6 |
 | 5 | 2 | 2 | 6 |
 
-**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. BURN remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
 
 **Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
 
@@ -292,3 +292,6 @@ Resolve SYN X in this order:
 ## Vitae / VIT — Runner health terminology (LOCKED, 2026-11-11)
 
 **Vitae** is the canonical name of the Runner's health resource, abbreviated **VIT** in compact UI, cards, and status displays. The former term is deprecated. **BURN damage** reduces Vitae; SYN and VOID retain their separate mechanics, except for any explicitly defined BURN overflow.
+
+
+**Damage terminology lock (2026-11-11):** **CHAR** is deprecated and replaced by **BURN damage**. **BURN X reduces Runner Vitae by X**, subject to applicable BURN prevention. Earlier CHAR labels, examples, and prevention-pool references in this document are to be read as BURN. SYN remains mandatory Runner-selected discard with its approved overflow rule; VOID remains distinct. This is a terminology replacement, not an additional damage type.
