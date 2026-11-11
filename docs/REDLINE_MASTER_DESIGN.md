@@ -1370,10 +1370,21 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 140. RULE-074 — Doubling prevention counts as gaining prevention (LOCKED, 2026-11-10)
 
-**Explicit user approval:** When an effect **doubles a prevention pool**, any **positive increase** in that pool counts as **gaining prevention** of that type and therefore qualifies for effects triggered by gaining prevention. The doubling generates **one gain event per affected prevention pool** that actually increases; the amount gained is the difference between the post-doubling and pre-doubling values. Doubling a zero pool generates **no prevention-gain event**.
+**Explicit user approval:** When an effect **doubles a prevention pool**, any **positive increase** in that pool counts as **gaining prevention** of that type and therefore qualifies for effects triggered by gaining prevention. A **single doubling instruction** produces **one prevention-gain event** if it increases any prevention, even when it doubles several pools simultaneously. The amounts gained in each affected pool are their respective post-doubling minus pre-doubling differences. See RULE-075. Doubling a zero pool generates **no prevention-gain event**.
 
 **Canonical example:** Runner has **5 CHAR prevention** and installed Software: “Whenever you gain CHAR prevention, gain 1 BW.” Runner plays “Double your CHAR prevention.” CHAR prevention increases **5 → 10**, so the Runner **gains 5 CHAR prevention** and queues **one** +1 BW trigger. That trigger resolves after the doubling effect finishes under RULE-014/015.
 
-**Other prevention types:** The same principle applies to **SYN** and **VOID** prevention when doubled, subject to the wording of the triggered ability and the actual pool increased.
+**Other prevention types:** The same principle applies to **SYN** and **VOID** prevention when doubled, subject to the wording of the triggered ability and the actual pool increased. Doubling all three pools in **one instruction** is still **one gain event**, not three (RULE-075).
 
 **Compatibility:** Prevention multipliers compound and apply as snapshot effects (RULE-008/009); triggers generated during effect resolution queue until the effect completes (RULE-014/015); copied abilities obey the same rule (RULE-073).
+
+
+## 141. RULE-075 — A single multi-pool prevention doubling is one gain event (LOCKED, 2026-11-10)
+
+**Explicit user correction:** “Double all your prevention” is a **singular event**. Even if it increases **CHAR, SYN and VOID prevention simultaneously**, an installed ability reading “Whenever you gain prevention, gain 1 BW” triggers **once**, not once per prevention pool. Count the **single resolving gain-producing instruction/event**, not the number of prevention types affected, for an unrestricted “gain prevention” trigger.
+
+**Canonical example:** Runner has **5 CHAR, 3 SYN, 2 VOID prevention** and plays “Double all your prevention.” The pools become **10 CHAR, 6 SYN, 4 VOID**. Software reading “Whenever you gain prevention, gain 1 BW” generates **one trigger**, granting **1 BW total**, not 3 BW.
+
+**Type-specific triggers:** The event may involve multiple prevention types, so a distinct “Whenever you gain CHAR prevention” ability and a distinct “Whenever you gain SYN prevention” ability can each recognize the same event if their conditions are met; however, the **same** generic ability does not trigger multiple times simply because multiple pools increased.
+
+**Compatibility / clarification of RULE-074:** Doubling counts as gaining prevention if it increases prevention, but a **single multi-pool doubling instruction** generates **one gain event**, not a separate event for each affected pool. Independent sequential gain-producing instructions may produce separate events, subject to their text and ordinary trigger rules.
