@@ -1615,3 +1615,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** RULE-100 now explicitly aligns with RULE-098; it creates **no queue-time exception**. Under RULE-099, separate DRAW-based instructions within the same ability each calculate DRAW when their own instruction begins. FIFO trigger order, source-removal cancellation, and existing trigger timing remain unchanged.
 
 **Revision history:** RULE-100 was originally approved as Option B (snapshot at queue time) and committed in `17b5c4917290061064b75774fee4dadbc323a0a6`. After reviewing its conflict with RULE-098, the user explicitly instructed: “Change rule 100 to align with rule 98. Then proceed.” This revised text supersedes the prior RULE-100 wording.
+
+
+## 167. RULE-101 — Separate DRAW instructions in queued abilities each use current DRAW (LOCKED, 2026-11-11)
+
+**Explicit user approval — Option A (after conflict review):** When a triggered ability has been queued and later resolves with multiple separate instructions to “Draw cards equal to your DRAW,” **each instruction independently determines its target from effective DRAW when that instruction begins**. The ability's queue-entry DRAW value and the value at the start of the overall ability do not lock the later instructions. Each individual instruction's target remains fixed while it resolves.
+
+**Canonical example:** Ability text: “Draw cards equal to your DRAW. Gain +2 DRAW. Then draw cards equal to your DRAW again.” It enters the FIFO queue at DRAW **5**. Before resolution, DRAW rises to **8**. The first instruction draws **8**; the intervening +2 raises DRAW to **10**; the second instruction draws **10**, subject to existing draw-shortfall rules.
+
+**Conflict check:** Consistent with RULE-098 (snapshot each instruction at its start), RULE-099 (separate instructions recalculate), and revised RULE-100 (no queue-time snapshot). **No existing locked rule is overridden.** Existing trigger ordering, source-removal cancellation, and draw-shortfall handling are unchanged.
