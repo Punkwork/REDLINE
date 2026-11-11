@@ -1406,3 +1406,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** A Software card reads “Gain **3 CHAR prevention and 2 SYN prevention**.” Another installed Software reads “Whenever you gain prevention, gain 1 BW.” The instruction increases both CHAR and SYN pools, but generates **one** qualifying gain event and therefore **one +1 BW trigger**, resolved after the current card/ability completes.
 
 **Distinction:** One multi-pool instruction produces one event (RULE-075), whereas separate instructions “Gain 3 CHAR prevention. Gain 2 SYN prevention.” produce two events (RULE-076). Different type-specific abilities can each recognize the same event if their respective type was gained; the same generic trigger does not multiply by the number of pools affected. Instructions that increase no prevention generate no gain event.
+
+
+## 144. RULE-078 — One gain event can trigger multiple type-specific abilities (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A **single prevention-gain event** that increases multiple prevention types may satisfy **multiple distinct triggered abilities**, each of which triggers **once** if its own condition is met. This does not split the original gain instruction into multiple events. When the qualifying abilities are Runner-controlled and trigger simultaneously, the **Runner chooses their resolution order**. The originating card/ability completes before those queued triggers resolve.
+
+**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain 1 BW.” Installed Software B reads “Whenever you gain SYN prevention, draw 1 card.” The Runner plays “Gain 3 CHAR prevention and 2 SYN prevention.” This **single instruction** produces **one gain event** (RULE-077) that satisfies both conditions. Software A queues **+1 BW** and Software B queues **draw 1 card**, each **once**. The Runner chooses their order, and both resolve after the originating card finishes.
+
+**Compatibility:** Multiple distinct triggered abilities may respond to the same event (RULE-055); Runner orders simultaneous Runner-controlled triggers (RULE-011); queued triggers wait until the current effect completes and follow established queue ordering (RULE-014/015); one multi-type prevention instruction is one event (RULE-077).
