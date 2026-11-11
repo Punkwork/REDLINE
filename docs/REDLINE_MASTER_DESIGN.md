@@ -843,3 +843,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Design intent:** These are deliberate **card-level balance and design tools**, not universal caps on stacking, multiplicative synergies, prevention values, or other legitimate interactions (RULE-007/008/016/019). Other cards and effects may still trigger normally, subject to their own text and established queue/ordering rules.
 
 **OPEN:** Precise treatment of per-turn limits across Runner versus Corporation turns when text says only “turn”; timing of counter reset at Node boundaries; whether copies of the same named card track limits independently (unless a card specifies otherwise). Do not assume these details are locked.
+
+
+## 87. RULE-021 — Independent copies except explicit shared event/outcome limits (LOCKED, 2026-11-10)
+
+**Explicit user approval with qualification:** Multiple installed copies of the same Software card **normally trigger independently**, and each copy tracks its own card-specific trigger frequency limit (RULE-020). For example, two installed copies each reading “Once per turn: When you play a defensive card, gain 2 CHAR prevention” each trigger once, yielding **4 CHAR prevention** in total.
+
+**Explicit shared-limit exception:** If wording establishes an explicit limit on the **same event or outcome**, duplicating that wording must not compound beyond that limit. User's canonical example: two copies of “The first card you play is played twice” mean the first card is **played twice total**, **not twice and then twice more** (not four plays). A second copy cannot apply an additional doubling to that already doubled first play. Interpret “played twice” as an explicitly bounded outcome in this example, not as an unconstrained multiplicative stacking effect.
+
+**Scope:** Do not infer shared caps where card text does not establish them; independent ordinary triggers and intended stacking remain valid. Specific text overrides generic stacking rules. **OPEN:** Exact card text conventions for expressing shared event/outcome caps versus stacking multipliers, and how repeated-play effects interact with other “when played” triggers.
