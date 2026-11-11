@@ -48,9 +48,9 @@ This is an open inquiry, not a predetermined claim that humanity necessarily bec
 - **Turn order:** Runner acts; corporation then resolves remaining unbroken damage/Trace subroutines; breaking DEADLOCK permits advancement **after** the corporation turn. Do not skip retaliation or advance immediately when a DEADLOCK breaks.
 - **NEURAL DAMAGE X:** Runner chooses X cards from their current hand and discards them.
 - **SYNAPTIC DAMAGE X:** X randomly selected cards from the Runner's current hand are discarded.
-- Neither of those two hand-discard effects reduces Integrity or permanently destroys cards.
+- Neither of those two hand-discard effects reduces Vitae or permanently destroys cards.
 - **PURGE:** Reserved for corporation removal of virus counters.
-- **DEAD DROP:** Replaces Safehouse. Exactly one option: PATCH UP (+10 Integrity) or WIPE TRAIL (−20 Trace).
+- **DEAD DROP:** Replaces Safehouse. Exactly one option: PATCH UP (+10 Vitae) or WIPE TRAIL (−20 Trace).
 - **Hardware:** Recycled once at encounter end.
 - **PATCHWORK:** Persists on individual card instances.
 - **Ghostware:** Permanent and non-card.
@@ -104,7 +104,7 @@ Other archetypes (stealth, hardware engineering, aggressive breaking) remain bra
 6. **Prototype and tests:** Reference implementation and evidence, subordinate to approved design.
 
 **Priority specifications to prepare:**
-- Game Rules Specification: turn/action economy, ICE/DEADLOCK timing, BW, Trace, Integrity, zones, card lifecycle, win/loss.
+- Game Rules Specification: turn/action economy, ICE/DEADLOCK timing, BW, Trace, Vitae, zones, card lifecycle, win/loss.
 - Card & System Taxonomy: software, hardware, viruses, CAPS, Ghostware, PATCHWORK, corruption.
 - Encounter & Corporate AI: layers, node-wide systems, triggers, counterplay, timing.
 - Progression & Economy: Runner identities, decks, rewards, map, upgrades, run structure.
@@ -129,7 +129,7 @@ Other archetypes (stealth, hardware engineering, aggressive breaking) remain bra
 
 ## 11. Unresolved questions and explicit safeguards
 
-- Exact action economy, BW rules, Trace formula, Black ICE interactions, Integrity damage, and end-of-run conditions: **VERIFY/OPEN**.
+- Exact action economy, BW rules, Trace formula, Black ICE interactions, Vitae damage, and end-of-run conditions: **VERIFY/OPEN**.
 - Complete catalog of cards, ICE, upgrades, status effects, and numeric balance: **VERIFY/OPEN**.
 - Supporting defence lifecycle and behavioural-surveillance rules: **OPEN**.
 - Corruption injection and card-zone semantics: **OPEN**.
@@ -152,10 +152,10 @@ This is a **comprehensive design synopsis**, not a word-for-word transcript. It 
 
 Resolve SYN X in this order:
 1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
-2. Each unfulfilled point of SYN causes **2 Integrity damage**.
-3. Apply that Integrity damage **after** discarding the available cards.
+2. Each unfulfilled point of SYN causes **2 Vitae damage**.
+3. Apply that Vitae damage **after** discarding the available cards.
 
-| SYN X | Hand | Discarded | Integrity damage |
+| SYN X | Hand | Discarded | Vitae damage |
 |---:|---:|---:|---:|
 | 3 | 3 | 3 | 0 |
 | 3 | 2 | 2 | 2 |
@@ -163,6 +163,9 @@ Resolve SYN X in this order:
 | 3 | 0 | 0 | 6 |
 | 5 | 2 | 2 | 6 |
 
-**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
 
-**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
+
+
+**Terminology lock (2026-11-11):** **Vitae** is the canonical Runner health resource (abbreviated **VIT** in the World Bible). The former health-resource term is deprecated. **BURN damage** reduces Vitae. This terminology update does not itself change damage-resolution mechanics.
