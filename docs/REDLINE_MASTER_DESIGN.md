@@ -1685,3 +1685,18 @@ Distinct eligible triggered abilities may each respond **once** to the aggregate
 **Illustrative examples (not finalized card text):** “For each installed Software card, reduce Trace by 2” with three eligible cards reduces Trace by **6** (to the extent permitted by applicable rules) and produces **one** qualifying Trace-reduction event if Trace actually decreases. “For each installed Software card, gain 1 BW” with three eligible cards grants **3 BW** (subject to applicable restrictions) and produces **one** qualifying BW-gain event if BW actually increases. RULE-105 already establishes the analogous single prevention-gain event. In contrast, “Draw 3 cards” continues to produce **three individual actual draw events** when three cards are actually drawn (RULE-032/033); separate actual reshuffles remain distinct (RULE-036).
 
 **Conflict check:** Compatible with RULE-014/015, RULE-054/055, RULE-074–079, and RULE-102–105. Explicitly preserves individual draw events (RULE-032/033), actual reshuffles (RULE-036), and per-would-be-draw replacement decisions (RULE-040–043). Damage-specific event and application boundaries remain governed by their more-specific rules; this rule does not resolve new damage edge cases. **No existing locked rule is overridden.**
+
+
+## 173. RULE-107 — Aggregate events report actual total change (LOCKED, 2026-11-11)
+
+**Explicit user approval — exception-protected Option A following conflict audit:** When an aggregate event is generated under RULE-105 or RULE-106, its reported numerical magnitude equals the **total actual qualifying change** produced by that instruction, **not** the nominal amount per object or the amount originally attempted.
+
+If an instruction is only partially fulfilled, count only changes that actually occur. If **no qualifying change** occurs, **no corresponding change event** is generated.
+
+An amount-dependent triggered ability uses the aggregate event's reported magnitude, subject to the ability's own conditions, costs, timing, and frequency restrictions.
+
+This rule does **not** combine events that existing rules count individually, override **damage-application mechanics**, or alter explicit **per-object or per-occurrence effects**. More-specific locked rules and card text take precedence.
+
+**Illustrative example (not finalized card text):** “For each of 3 installed Software cards, reduce Trace by 2.” If starting Trace is **4** and applicable rules prevent it falling below zero, the attempted reduction is **6**, but actual reduction is **4**; the instruction generates **one** Trace-reduction event reporting magnitude **4**. An eligible “Whenever you reduce Trace, gain BW equal to the amount of Trace reduced” trigger attempts to grant **4 BW**, subject to applicable restrictions. This example **does not establish** a new Trace floor, BW cap, or other previously unspecified resource limit.
+
+**Conflict check:** Compatible with RULE-002/003 (partial fulfillment and costs), RULE-074/075 (actual prevention gain), RULE-076/077 (instruction boundaries), RULE-102/103 (numeric snapshots), RULE-104 (eligible-object set), RULE-105/106 (aggregate-event count), and RULE-014/015 (FIFO triggers). Individual draw/reshuffle/replacement events remain governed by RULE-032/033/036/040–043; damage mechanics and more-specific card text retain precedence. **No existing locked rule is overridden.**
