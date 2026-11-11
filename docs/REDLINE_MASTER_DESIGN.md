@@ -1174,3 +1174,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Draw pile **0**, discard pile **0**; card says “Shuffle 1 card from your hand into your draw pile.” The resulting draw pile contains **1 card**. Effects reading “Whenever you shuffle your draw pile” trigger **once**; effects reading “Whenever you reshuffle your discard pile into your draw pile” do **not** trigger.
 
 **Compatibility:** When discard cards actually participate in the combined shuffle under RULE-050/051, discard-reshuffle triggers qualify (RULE-052). One shuffle operation is still only one shuffle event; apply ordinary trigger queue and card-specific frequency limits.
+
+
+## 120. RULE-054 — One shuffle event may satisfy multiple trigger conditions (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A **single shuffle event** may simultaneously satisfy **multiple distinct trigger conditions**. Each eligible installed ability triggers once for that event, subject to its own card-specific frequency limits. This does **not** multiply the number of shuffle events. If the abilities are Runner-controlled and simultaneous, the **Runner chooses their resolution order** (RULE-011), with the existing trigger queue applying (RULE-014/015).
+
+**Canonical example:** Installed Card A: “Whenever you shuffle your draw pile, gain 2 CHAR prevention.” Installed Card B: “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” The Runner performs a **combined shuffle under revised RULE-050** incorporating cards from discard. This is **one shuffle event** (RULE-051), qualifying both as a general draw-pile shuffle (RULE-053) and as a discard-pile reshuffle (RULE-052). **Both Card A and Card B trigger once**, granting **2 CHAR prevention** and **1 BW** respectively; the Runner chooses their order of resolution.
+
+**Scope:** This does not imply that an ability can trigger multiple times from the same event merely because its condition is described in multiple ways.
