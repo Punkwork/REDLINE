@@ -12,7 +12,7 @@
 
 ## Confirmed design decisions
 1. Runner acts; corporation then fires all remaining unbroken damage/Trace subroutines; broken DEADLOCK allows advance after corp turn.
-2. NEURAL DAMAGE X = runner chooses X cards to discard from hand; SYNAPTIC DAMAGE X = X random hand cards discarded. Neither affects Integrity or permanently destroys cards.
+2. SYN X = Runner chooses and discards up to X cards from hand; each undiscarded point causes 2 Integrity damage after discards (RULE-126). NEURAL DAMAGE and SYNAPTIC DAMAGE are deprecated.
 3. PURGE = corporation removes virus counters.
 4. DEAD DROP (not Safehouse): exactly one of PATCH UP (+10 Integrity) or WIPE TRAIL (−20 Trace).
 5. Hardware recycled once per encounter end; PATCHWORK persists per card instance; Ghostware permanent non-card.
@@ -23,7 +23,7 @@
 | Area | Design | Code status | Testing |
 |---|---|---|---|
 | ICE timing / DEADLOCK | Locked | Previously represented in Python reference; inspect | Prior regressions reportedly passed; re-run |
-| NEURAL/SYNAPTIC discard | Locked | Verify against latest files | Test cases needed/verify |
+| SYN chosen discard + 2 Integrity per shortfall (RULE-126) | Locked | Verify against latest files | Five regression cases + sequencing |
 | Trace / Black ICE | Partially specified | Verify | Verify |
 | DEAD DROP choice | Locked | In named playtest baseline; inspect | Verify |
 | Hardware recycling | Locked | Previously reported | Verify exactly-once |
@@ -180,3 +180,25 @@ At session end: append a dated Development Log entry; update this Current Status
 **Latest locked and committed:** RULE-110 — event-time trigger qualification and resolution-time variable calculations. Determine eligibility against the event and applicable trigger conditions when the event occurs; aggregate event magnitudes and threshold results remain fixed (RULE-107/109). Variable numerical quantities in queued triggered abilities are calculated when each discrete instruction begins resolving (RULE-102), not at queue entry, unless explicit more-specific text directs otherwise. Preserve FIFO, explicit resolution-time conditions, frequency limits, installed-source requirements and pending Software-trigger cancellation under RULE-081/082/085; already resolving abilities retain RULE-083 protections. Example: +6 CHAR qualifies threshold 5 at Trace 8; Trace becomes 3 before reward instruction, so attempt +3 BW, if trigger survives. No locked override. Master Design commit `81c4ab95370b57345dcc8a41ba5e8a701d41e9ee`.
 
 **RULE-108 remains DEFERRED and NOT LOCKED.** **Next open question:** RULE-111 — when a trigger explicitly requires a condition both at event time and at resolution time, should its event qualification persist while its resolution-time condition is separately checked? Audit for existing rule coverage before approval. Not locked. No code changes or tests verified.
+
+
+## RULE-126 — SYN damage terminology and overflow (LOCKED, 2026-11-11)
+
+**Authoritative decision:** The active damage keyword is **SYN X** (also styled **SYN DAMAGE X** in the approved rule review). Legacy **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are deprecated; neither is an active separate damage type. SYN is **Runner-chosen** hand discard, never random discard. Historical mentions of the old terms elsewhere are superseded, not additional active mechanics.
+
+Resolve SYN X in this order:
+1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
+2. Each unfulfilled point of SYN causes **2 Integrity damage**.
+3. Apply that Integrity damage **after** discarding the available cards.
+
+| SYN X | Hand | Discarded | Integrity damage |
+|---:|---:|---:|---:|
+| 3 | 3 | 3 | 0 |
+| 3 | 2 | 2 | 2 |
+| 3 | 1 | 1 | 4 |
+| 3 | 0 | 0 | 6 |
+| 5 | 2 | 2 | 6 |
+
+**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
