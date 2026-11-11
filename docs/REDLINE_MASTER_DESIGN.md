@@ -879,3 +879,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** “Cost: Discard 1 card. Effect: Gain 5 CHAR prevention.” Played twice via replay: discard one card for the original resolution and another card for the second; if both are paid, gain **10 CHAR prevention total**. If the second discard cannot be paid, only the first resolution's 5 prevention is gained.
 
 **Compatibility:** Explicit card-level limits (RULE-020), shared outcome limits (RULE-021), and the trigger queue (RULE-014/015) still apply. **OPEN:** Exact replay timing and whether an unpaid replay counts for play-trigger frequency or “first card played” bookkeeping.
+
+
+## 91. RULE-025 — Uninterrupted replay sequence before queued triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect causes a card to be played multiple times, resolve the **entire replay sequence consecutively**, without interrupting between plays to resolve other pending triggered effects. Finish the first play completely, then the second play (and any additional plays permitted by explicit text); triggers generated during any of these plays are **enqueued** and resolve afterward according to the established FIFO ordering (RULE-014/015). This treats the granted sequence as one uninterrupted replay operation for trigger-processing purposes, while each play still independently resolves the card's instructions (RULE-022).
+
+**Example:** A card grants 3 CHAR prevention when played, and an installed Software triggers on gaining CHAR prevention. If the card is played twice, the two plays first grant **6 CHAR prevention** total; the triggered Software effects then resolve in queue order.
+
+**Costs:** The original BW cost is paid only once (RULE-023); any explicit non-BW costs are independently required for each play (RULE-024). If a later replay's non-BW cost cannot be paid, that resolution fails without reversing earlier completed plays. Explicit shared “played twice” limits remain in force (RULE-021).
+
+**OPEN:** Whether triggers already pending *before* a replay operation began can be delayed by a replay generated during a queued effect; precise event bookkeeping for unsuccessful replay attempts. Do not silently infer these edge cases.
