@@ -825,3 +825,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Illustrative notification:** “TRIGGER LOOP TERMINATED — Repeating interaction detected between [Card A] and [Card B]. Previously resolved effects preserved; unrelated effects continue.”
 
 **OPEN:** Exact UI presentation, notification duration, and diagnostic log format.
+
+
+## 85. RULE-019 — Repeated trigger-state detection principle (LOCKED, 2026-11-10)
+
+**Explicit user approval:** REDLINE's infinite-loop detection must be based on **repeated trigger-state/cycle analysis**, accounting for which effects trigger one another, relevant game state, and whether the chain has a genuine termination condition. The system must distinguish **genuinely nonterminating cycles** from **finite but extremely powerful combinations**, even those producing hundreds or thousands of prevention points. **Do not impose an arbitrary numerical cap on legitimate card synergies.**
+
+**Interaction with locked rules:** When a genuine infinite cycle is detected, terminate the perpetuating loop while preserving previously resolved effects and continuing unrelated queued effects (RULE-016/017), and notify the player of involved cards/effects (RULE-018). Respect FIFO queue ordering (RULE-015).
+
+**OPEN for implementation:** Exact state representation, cycle-detection algorithm, proof/heuristics for termination, performance safeguards, and identification of the minimal set of perpetuating triggers. The detection **principle** is LOCKED; no particular algorithm is yet approved.
