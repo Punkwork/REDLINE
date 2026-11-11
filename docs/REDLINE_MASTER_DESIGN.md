@@ -1230,3 +1230,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Explicit global limits override per-copy limits (RULE-058), while ordinary independent per-copy limits remain the default (RULE-057). The global allowance resets at the beginning of each turn under RULE-027/028.
 
 **OPEN:** Whether a globally consumed limit persists if all copies leave play and another copy is installed later in the same turn.
+
+
+## 126. RULE-060 — Global trigger limits persist after all copies leave play (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A globally shared trigger-frequency allowance is tracked by **card identity for the full turn**, even if **all installed copies leave play**. Uninstalling every copy and later installing another copy of the same card during that turn **does not reset a consumed global allowance**. The normal turn-start reset remains the only default reset (RULE-027/028), unless explicit card text provides otherwise.
+
+**Canonical example:** A globally once-per-turn shuffle ability triggers once. The Runner uninstalls all copies of that Software, then installs another copy in the same turn and shuffles again. The ability **does not trigger again** because its global allowance remains consumed.
+
+**Compatibility:** Global limits are shared across copies (RULE-058), and installing a new copy does not reset a consumed allowance (RULE-059). This rule clarifies that the consumed state persists even across a period with zero installed copies.
+
+**OPEN:** How globally limited abilities distinguish separate card identities or upgraded/modified variants when their names match.
