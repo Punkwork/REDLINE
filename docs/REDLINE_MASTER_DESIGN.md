@@ -129,7 +129,7 @@ engine/
 | HUB-002 | Exactly one: PATCH UP +10 Vitae / WIPE TRAIL −20 Trace | LOCKED | Prior project decision |
 | UI-001 | `[STR X]`, drag breaker to ICE, fixed inspection bay, HUD tooltips | LOCKED | Prior project decision |
 | UI-002 | Ghostware rack below RETURN; signature once with ORIGIN | LOCKED | Prior project decision |
-| CHAR-001 | Preserve six NUL/REM personality modes | LOCKED | Prior project decision |
+| BURN-001 | Preserve six NUL/REM personality modes | LOCKED | Prior project decision |
 | STORY-001 | First Signal is real synchronization transmission | LOCKED | Prior project decision |
 | ICE-001 | PAPER CUT Strength 0 with minor damage/discard/DEADLOCK | CONCEPT | Earlier design proposal |
 
@@ -241,31 +241,31 @@ The corporation's core is a **Central Node** within the corporate network and **
 **Explicit user confirmation:** **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are **DEPRECATED**; **VOID damage** is the current term for the former brain-damage concept. They must not be used as active game mechanics or terms in new rules, cards, tests, or implementation. Older mentions elsewhere in this document are historical and superseded by this section, pending editorial cleanup.
 
 **Current canonical terms (from 2026-11-09 design session archive):**
-- **CHAR X:** reduces Runner Vitae by X.
+- **BURN X:** reduces Runner Vitae by X.
 - **SYN X:** randomly discards X cards from the current hand.
 - **VOID X:** adds X persistent counters; each reduces effective DRAW by 1, with effective DRAW floor 1. VOID is only removable through specialized network recovery Nodes (e.g., eligible black-market uplink/shop), not ordinary cards or generic services.
 - **DRAW:** baseline 5 minus installed Hardware minus VOID counters plus modifiers, subject to minimum 1.
 - **BW:** baseline 4 per Runner turn; installing or uninstalling Hardware costs 1 BW; unused BW forfeited at turn end.
 
-**Migration warning:** The older 'NEURAL DAMAGE X = chosen discard' rule has no explicitly confirmed current equivalent in the archived CHAR/SYN/VOID set; do not silently remap it to SYN or invent a new keyword. Earlier 'VOID damage' maps historically to the persistent draw-loss concept now named VOID, not an additional active mechanic.
+**Migration warning:** The older 'NEURAL DAMAGE X = chosen discard' rule has no explicitly confirmed current equivalent in the archived BURN/SYN/VOID set; do not silently remap it to SYN or invent a new keyword. Earlier 'VOID damage' maps historically to the persistent draw-loss concept now named VOID, not an additional active mechanic.
 
 **Authority:** Explicit 2026-11-10 user confirmation and REDLINE_DESIGN_SESSION_2026-11-09 archive, later terminology addendum.
 
 
 ## 21. SYN X — Runner-selected discard (LOCKED, 2026-11-10)
 
-**Latest explicit user decision supersedes all prior random-discard definitions of SYN:** **SYN X** means the Runner **chooses and discards X cards from their current hand**. SYN is a hand-discard effect, not direct Vitae loss, VOID-counter gain, or permanent card destruction. **CHAR X** remains direct Vitae reduction; **VOID X** remains persistent draw reduction. **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** remain deprecated; **VOID damage** is the active replacement term. Earlier references to SYN as random discard (including section 20 above) are historical and superseded.
+**Latest explicit user decision supersedes all prior random-discard definitions of SYN:** **SYN X** means the Runner **chooses and discards X cards from their current hand**. SYN is a hand-discard effect, not direct Vitae loss, VOID-counter gain, or permanent card destruction. **BURN X** remains direct Vitae reduction; **VOID X** remains persistent draw reduction. **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** remain deprecated; **VOID damage** is the active replacement term. Earlier references to SYN as random discard (including section 20 above) are historical and superseded.
 
 **OPEN edge case:** If fewer than X cards remain in hand, determine whether the Runner discards all available cards or another rule applies. Preserve applicable discard-trigger effects under the existing end-of-turn rules where relevant.
 
 
 ## 22. SYN overflow — 2 Vitae per shortfall (superseded by RULE-126, 2026-11-11)
 
-When resolving **SYN X**, the Runner chooses and discards as many cards as possible, up to X, from their current hand. For every card of the required X that could not be discarded, the Runner suffers **2 CHAR** (i.e., 2 Vitae loss per missing card). Formula: `overflow_CHAR = 2 * max(0, X - number_of_cards_discarded)`. Example: SYN 3 with only 1 card in hand discards that card and causes 4 CHAR; SYN 4 with an empty hand causes 8 CHAR.
+When resolving **SYN X**, the Runner chooses and discards as many cards as possible, up to X, from their current hand. For every card of the required X that could not be discarded, the Runner suffers **2 BURN** (i.e., 2 Vitae loss per missing card). Formula: `overflow_CHAR = 2 * max(0, X - number_of_cards_discarded)`. Example: SYN 3 with only 1 card in hand discards that card and causes 4 BURN; SYN 4 with an empty hand causes 8 BURN.
 
 **Status:** Mechanic approved; the **2× multiplier is provisional for playtesting** and may be tuned based on results. SYN itself remains Runner-selected discard (section 21), not random discard. VOID remains distinct and is not automatically generated by SYN overflow. Evaluate high-SYN ICE against empty hands, installed-Hardware DRAW reductions, and VOID-impaired DRAW.
 
-**Resolution detail still OPEN:** exact sequencing of discard-triggered effects relative to overflow CHAR and other simultaneous effects; use existing immediate-run-defeat rule if Vitae reaches zero.
+**Resolution detail still OPEN:** exact sequencing of discard-triggered effects relative to overflow BURN and other simultaneous effects; use existing immediate-run-defeat rule if Vitae reaches zero.
 
 
 ## 23. RUN-006 — Three-corporation full run and First Signal data (LOCKED, 2026-11-10)
@@ -494,14 +494,14 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **LOCKED — user explicitly approved:** A single Software card **may have multiple subtypes/capabilities**, e.g. ICEbreaker + Virus, Virus + Extractor, or other combinations. These classifications are **not mutually exclusive**. This is intended to support diverse deck builds, Runner playstyles, and Runner personalities. Software remains the umbrella card category, and existing installation/BW/RAM/lifecycle rules apply unless overridden by an approved card rule.
 
-**USER-PROPOSED DESIGN EXAMPLE (not yet a finalized card):** A shield-like card can prevent **X CHAR** by **spending/burning CRED extracted during the previous turn**. This connects data extraction and defense, creating a choice between keeping CRED for Uplink Market purchases and consuming it for survival. Exact damage-to-CRED conversion, whether it can use only the previous turn's proceeds or any held CRED up to that amount, activation timing, BW/RAM, cap, and whether spent CRED is permanently deducted remain OPEN. Do not treat illustrative card name or stats as approved.
+**USER-PROPOSED DESIGN EXAMPLE (not yet a finalized card):** A shield-like card can prevent **X BURN** by **spending/burning CRED extracted during the previous turn**. This connects data extraction and defense, creating a choice between keeping CRED for Uplink Market purchases and consuming it for survival. Exact damage-to-CRED conversion, whether it can use only the previous turn's proceeds or any held CRED up to that amount, activation timing, BW/RAM, cap, and whether spent CRED is permanently deducted remain OPEN. Do not treat illustrative card name or stats as approved.
 
 **Terminology caution:** Here “burning CRED” means spending currency, not the existing **BURNED card** state; keep mechanically distinct.
 
 
 ## 50. SOFT-002 — Instant CRED shield and hand retention concept (2026-11-10)
 
-**LOCKED — user-confirmed CRED shield principles:** A shield-like **one-shot / instant Software card** is played from hand, its effect resolves immediately, and it **goes to the discard pile** rather than remaining installed. It protects against a limited amount of **CHAR** by **permanently spending CRED the Runner has already earned**. The CRED cost is **variable**, and the card has a **protection/spending limit**. Its tactical weakness is hand availability: the card may not be in hand when protection is needed. This is a card/mechanic concept, not yet a named, fully balanced card. Precise conversion rate, cap, activation window, BW play cost, and interpretation of “CRED extracted previous turn” are OPEN. Instant Software is distinct from persistent Software and does not automatically follow persistent installation lifecycle.
+**LOCKED — user-confirmed CRED shield principles:** A shield-like **one-shot / instant Software card** is played from hand, its effect resolves immediately, and it **goes to the discard pile** rather than remaining installed. It protects against a limited amount of **BURN** by **permanently spending CRED the Runner has already earned**. The CRED cost is **variable**, and the card has a **protection/spending limit**. Its tactical weakness is hand availability: the card may not be in hand when protection is needed. This is a card/mechanic concept, not yet a named, fully balanced card. Precise conversion rate, cap, activation window, BW play cost, and interpretation of “CRED extracted previous turn” are OPEN. Instant Software is distinct from persistent Software and does not automatically follow persistent installation lifecycle.
 
 **NEW DESIGN TOPIC — user requests thematic hand-retention abilities:** Runner should be able to gain abilities to **retain selected cards in hand across turns** despite normal end-turn hand discard. Exact rules, source of ability, hand-size interaction, duration, and limits OPEN.
 
@@ -608,7 +608,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Explicit user decision:** **All Runner cards must be played during the Runner's turn.** There are **no reactive card plays during the Corporation's turn** or during resolution of corporate/ICE subroutines. This includes Instant Software and defensive cards. The Runner must prepare defenses proactively before ending their turn.
 
-**Distinction:** An effect established by a card already played during the Runner's turn may operate or resolve during the subsequent corporate response according to its card text; that is **not** playing a new card out of turn. CACHE retention preserves access to cards for later Runner turns but does not grant out-of-turn play. The previously discussed CRED-powered instant shield therefore must be played proactively if it is to defend against incoming CHAR; precise shield effect duration/trigger and CRED-spending timing remain OPEN.
+**Distinction:** An effect established by a card already played during the Runner's turn may operate or resolve during the subsequent corporate response according to its card text; that is **not** playing a new card out of turn. CACHE retention preserves access to cards for later Runner turns but does not grant out-of-turn play. The previously discussed CRED-powered instant shield therefore must be played proactively if it is to defend against incoming BURN; precise shield effect duration/trigger and CRED-spending timing remain OPEN.
 
 **Supersedes:** The earlier assistant proposal to allow special reactive Instant Software during corporate response is rejected.
 
@@ -617,9 +617,9 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Explicit user approval:** A defensive card played during the Runner's turn normally provides its protection **through the immediately following Corporation response**. Any unused protection **expires at the end of that corporate response**. A card can **explicitly specify a longer duration**, overriding this default. This is a duration rule, not permission to play reactive cards: under SOFT-011, **all Runner cards must be played during the Runner's turn**.
 
-**Example:** An Instant Software shield played during the Runner's turn says **“Prevent 3 CHAR.”** During the following corporate response it can prevent up to 3 CHAR; if only 1 CHAR is dealt, the unused 2 protection expires after that response. The shield card itself follows the normal play → resolve → discard lifecycle; its already-established protection may continue until the response ends.
+**Example:** An Instant Software shield played during the Runner's turn says **“Prevent 3 BURN.”** During the following corporate response it can prevent up to 3 BURN; if only 1 BURN is dealt, the unused 2 protection expires after that response. The shield card itself follows the normal play → resolve → discard lifecycle; its already-established protection may continue until the response ends.
 
-**OPEN:** Exact stacking/consumption order of multiple protections, whether protection is shared across different damage instances by default (example above assumes a pool), and CRED-to-CHAR shield exchange rates.
+**OPEN:** Exact stacking/consumption order of multiple protections, whether protection is shared across different damage instances by default (example above assumes a pool), and CRED-to-BURN shield exchange rates.
 
 
 ## 64. SOFT-013 — Temporary effects expire at start of next Runner turn (LOCKED, 2026-11-10)
@@ -628,25 +628,25 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Clarification / precedence:** This **refines and supersedes SOFT-012's default expiration timestamp**. SOFT-012's proactive play requirement and protection through the Corporation response remain intact. Persistent installed Software, Hardware, and effects explicitly assigned longer durations continue under their own lifecycle/duration rules; this cleanup is for temporary shields and effects, not automatic removal of persistent Rig assets.
 
-**Example:** Play “Prevent 3 CHAR” on Runner turn. The following corporate response deals 1 CHAR; 2 unused protection remains until the start of the next Runner turn, then expires.
+**Example:** Play “Prevent 3 BURN” on Runner turn. The following corporate response deals 1 BURN; 2 unused protection remains until the start of the next Runner turn, then expires.
 
 **OPEN:** Whether multiple independent shield effects combine into one pool or remain separately tracked; exact ordering of start-of-turn cleanup relative to other start-of-turn triggers.
 
 
-## 65. SOFT-014 — Independent defensive effects; cumulative CHAR prevention (LOCKED, 2026-11-10)
+## 65. SOFT-014 — Independent defensive effects; cumulative BURN prevention (LOCKED, 2026-11-10)
 
-**Explicit user approval:** Multiple active shields/defensive effects remain **separate, individually tracked effects**, but their CHAR prevention **accumulates** against incoming CHAR. They are **not merged into a single effect or shield pool**. This allows card-specific modifiers, triggers, and interactions to affect one shield without modifying the others. Any unused temporary protection expires at the beginning of the next Runner turn per SOFT-013.
+**Explicit user approval:** Multiple active shields/defensive effects remain **separate, individually tracked effects**, but their BURN prevention **accumulates** against incoming BURN. They are **not merged into a single effect or shield pool**. This allows card-specific modifiers, triggers, and interactions to affect one shield without modifying the others. Any unused temporary protection expires at the beginning of the next Runner turn per SOFT-013.
 
-**User-provided design example (illustrative, not a finalized card):** A Hardware ability could read: **“The first defensive card you play each Runner turn prevents twice as much CHAR.”** Thus, a first defensive card with **Prevent 3 CHAR** instead prevents **6 CHAR**; a second card with **Prevent 2 CHAR** still prevents 2. Their separately tracked protections **accumulate to 8 total CHAR prevention**. The Hardware card's name and final wording are OPEN; this example establishes that a modifier may apply to an individual defensive card while total available prevention accumulates.
+**User-provided design example (illustrative, not a finalized card):** A Hardware ability could read: **“The first defensive card you play each Runner turn prevents twice as much BURN.”** Thus, a first defensive card with **Prevent 3 BURN** instead prevents **6 BURN**; a second card with **Prevent 2 BURN** still prevents 2. Their separately tracked protections **accumulate to 8 total BURN prevention**. The Hardware card's name and final wording are OPEN; this example establishes that a modifier may apply to an individual defensive card while total available prevention accumulates.
 
-**OPEN:** When several separately tracked shields could prevent the same incoming CHAR, which shield is consumed first (Runner choice versus a fixed order); interactions with conditional shields.
+**OPEN:** When several separately tracked shields could prevent the same incoming BURN, which shield is consumed first (Runner choice versus a fixed order); interactions with conditional shields.
 
 
-## 66. SOFT-015 — Unified CHAR prevention pool (LOCKED, 2026-11-10)
+## 66. SOFT-015 — Unified BURN prevention pool (LOCKED, 2026-11-10)
 
-**Explicit user correction:** All defensive cards and effects contribute their calculated CHAR prevention to **one shared numerical prevention pool**. Apply any modifiers to the individual card/effect's prevention amount **before** adding it to the pool. Once contributed, there are **no separately tracked shield values** and no choice of which shield absorbs incoming damage. Incoming CHAR is deducted from this **single prevention pool**; only any excess CHAR gets through as Vitae damage. Remaining unused temporary prevention expires at the **beginning of the next Runner turn** per SOFT-013.
+**Explicit user correction:** All defensive cards and effects contribute their calculated BURN prevention to **one shared numerical prevention pool**. Apply any modifiers to the individual card/effect's prevention amount **before** adding it to the pool. Once contributed, there are **no separately tracked shield values** and no choice of which shield absorbs incoming damage. Incoming BURN is deducted from this **single prevention pool**; only any excess BURN gets through as Vitae damage. Remaining unused temporary prevention expires at the **beginning of the next Runner turn** per SOFT-013.
 
-**Example:** First defensive card prevents 3 CHAR, doubled by Hardware to 6; second prevents 2. Total prevention pool = 8. Incoming 5 CHAR consumes 5 pool points, leaving 3. No shield selection/consumption order exists.
+**Example:** First defensive card prevents 3 BURN, doubled by Hardware to 6; second prevents 2. Total prevention pool = 8. Incoming 5 BURN consumes 5 pool points, leaving 3. No shield selection/consumption order exists.
 
 **Precedence:** This **supersedes SOFT-014's assertion that shields remain separately tracked**. SOFT-014's concept of independently calculating card-specific prevention modifiers and cumulative protection remains valid, but the resulting prevention is pooled into **one value**.
 
@@ -654,31 +654,31 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 ## 67. DMG-001 — Three distinct damage types and type-specific protection (LOCKED, 2026-11-10)
 
 **Explicit user approval:** REDLINE's **three damage types are distinct** and defenses do not cross-protect by default:
-- **CHAR X:** Reduces Runner Vitae by X; prevented by the shared **CHAR prevention pool** under SOFT-015.
+- **BURN X:** Reduces Runner Vitae by X; prevented by the shared **BURN prevention pool** under SOFT-015.
 - **SYN X:** Runner chooses and discards X cards from their current hand; this does not reduce Vitae. Requires an effect explicitly protecting against SYN to prevent it.
 - **VOID X:** Applies persistent DRAW reduction (subject to minimum DRAW rule). Requires an effect explicitly protecting against VOID to prevent it.
 
-A card may explicitly prevent multiple named damage types, but protection against one does **not** implicitly apply to another. The unified CHAR prevention pool is **CHAR-only**; it does not prevent SYN or VOID.
+A card may explicitly prevent multiple named damage types, but protection against one does **not** implicitly apply to another. The unified BURN prevention pool is **BURN-only**; it does not prevent SYN or VOID.
 
-**Example:** Runner has 6 CHAR prevention and receives CHAR 4 plus SYN 2. Four prevention is spent, leaving 2 in the CHAR pool; SYN 2 separately requires the Runner to choose and discard up to 2 eligible cards under RULE-001 and RULE-002.
+**Example:** Runner has 6 BURN prevention and receives BURN 4 plus SYN 2. Four prevention is spent, leaving 2 in the BURN pool; SYN 2 separately requires the Runner to choose and discard up to 2 eligible cards under RULE-001 and RULE-002.
 
 **OPEN:** Exact resource/pool mechanics for SYN- or VOID-specific prevention, if such cards are introduced.
 
 
 ## 68. DMG-002 — Three independent damage prevention pools (LOCKED, 2026-11-10)
 
-**Explicit user approval:** REDLINE has **three independent numerical prevention pools**, one each for **CHAR**, **SYN**, and **VOID**. Each defensive card/effect contributes its calculated prevention to the pool(s) for the **damage type(s) explicitly named** in its instructions. Contributions from multiple sources **sum within each matching pool**; pools are never interchangeable or cross-applied. On incoming damage of type X, deduct prevention from **that type's pool only**; any excess damage of that type resolves normally under its own rules. No individual shield consumption choice exists after contributions have entered a pool.
+**Explicit user approval:** REDLINE has **three independent numerical prevention pools**, one each for **BURN**, **SYN**, and **VOID**. Each defensive card/effect contributes its calculated prevention to the pool(s) for the **damage type(s) explicitly named** in its instructions. Contributions from multiple sources **sum within each matching pool**; pools are never interchangeable or cross-applied. On incoming damage of type X, deduct prevention from **that type's pool only**; any excess damage of that type resolves normally under its own rules. No individual shield consumption choice exists after contributions have entered a pool.
 
 **Duration:** Unused **temporary** prevention in each of the three pools expires at the **beginning of the next Runner turn**, following SOFT-013. Explicit longer-duration effects can follow their printed duration.
 
-**Example:** Runner has CHAR prevention 4, SYN prevention 2, VOID prevention 1. Incoming CHAR 3, SYN 3, VOID 2 leaves CHAR prevention 1; SYN prevention 0 with SYN 1 resolved (choose and discard 1 eligible card); VOID prevention 0 with VOID 1 applied.
+**Example:** Runner has BURN prevention 4, SYN prevention 2, VOID prevention 1. Incoming BURN 3, SYN 3, VOID 2 leaves BURN prevention 1; SYN prevention 0 with SYN 1 resolved (choose and discard 1 eligible card); VOID prevention 0 with VOID 1 applied.
 
 **Relationship to earlier rules:** Extends SOFT-015's single pooled-value approach to each distinct damage type without combining types, and completes DMG-001's previously OPEN question of whether SYN and VOID have prevention pools.
 
 
 ## 69. GHOST-001 — Node-based Origin Ghostware prevention (LOCKED, 2026-11-10)
 
-**Explicit user approval:** Runner **Origin Ghostware** may grant a fixed quantity of damage-type-specific prevention **once per Node**, supporting distinct Runner archetypes. **Illustrative synthetic body armor archetype:** At the **beginning of each Node**, grant **6 CHAR prevention**. This reserve remains available **across Runner turns and successive ICE encounters within the Node**, and incoming CHAR consumes it normally. At the **next Node**, the Origin Ghostware grants a fresh **6 CHAR prevention**. The armor's name, balance and final card presentation remain illustrative rather than finalized.
+**Explicit user approval:** Runner **Origin Ghostware** may grant a fixed quantity of damage-type-specific prevention **once per Node**, supporting distinct Runner archetypes. **Illustrative synthetic body armor archetype:** At the **beginning of each Node**, grant **6 BURN prevention**. This reserve remains available **across Runner turns and successive ICE encounters within the Node**, and incoming BURN consumes it normally. At the **next Node**, the Origin Ghostware grants a fresh **6 BURN prevention**. The armor's name, balance and final card presentation remain illustrative rather than finalized.
 
 **Duration and accounting:** Node-long Origin Ghostware prevention **does not expire at the beginning of the next Runner turn** under SOFT-013; that expiration applies to temporary prevention. For correct accounting alongside DMG-002's shared per-type prevention totals, the game must retain sufficient **duration/source bookkeeping** to expire temporary contributions while preserving any unspent Node-long reserve; this is **not** a return to player-selected shield consumption. Exact internal allocation between temporary and Node-long prevention when both coexist remains **OPEN**.
 
@@ -689,9 +689,9 @@ A card may explicitly prevent multiple named damage types, but protection agains
 
 **Explicit user decision — universal game rule:** Whenever multiple eligible interchangeable resources, prevention reserves, or effects can satisfy the same expenditure, cost, or requirement, **temporary resources are consumed first, before permanent or ongoing resources**. This is a general REDLINE priority rule, not merely a shield rule. Apply automatically without requiring the Runner to select individual resources. Explicit card text or a more specific rule may override the default priority.
 
-**CHAR prevention example:** Runner has 3 temporary CHAR prevention plus 6 Node-long CHAR prevention from Origin Ghostware, for a displayed total of 9. Incoming CHAR 4 consumes the 3 temporary first, then 1 Node-long, leaving 5 Node-long CHAR prevention and 0 temporary. This is consistent with the single displayed pool per damage type (DMG-002) while preserving behind-the-scenes duration bookkeeping (GHOST-001).
+**BURN prevention example:** Runner has 3 temporary BURN prevention plus 6 Node-long BURN prevention from Origin Ghostware, for a displayed total of 9. Incoming BURN 4 consumes the 3 temporary first, then 1 Node-long, leaving 5 Node-long BURN prevention and 0 temporary. This is consistent with the single displayed pool per damage type (DMG-002) while preserving behind-the-scenes duration bookkeeping (GHOST-001).
 
-**Scope:** The priority applies only when the candidate resources/effects are **eligible and interchangeable for the same requirement**; it does not make a CHAR reserve eligible to pay SYN/VOID, bypass a printed cost, or allow an ineligible effect to be spent. Exact priority among multiple resources with equal duration remains OPEN.
+**Scope:** The priority applies only when the candidate resources/effects are **eligible and interchangeable for the same requirement**; it does not make a BURN reserve eligible to pay SYN/VOID, bypass a printed cost, or allow an ineligible effect to be spent. Exact priority among multiple resources with equal duration remains OPEN.
 
 
 ## 71. RULE-005 — Earliest-expiring eligible resources consumed first (LOCKED, 2026-11-10)
@@ -717,9 +717,9 @@ A card may explicitly prevent multiple named damage types, but protection agains
 ## 73. RULE-007 — Prevention multipliers apply to specified existing pools; encourage stacking (LOCKED, 2026-11-10)
 
 **Explicit user decision:** Card effects **stacking and synergizing is encouraged** as a central deckbuilding feature. Do **not** impose an implicit restriction that multipliers can only affect newly generated prevention. Interpret prevention multiplier wording by its **scope**:
-- **“Double your prevention”** doubles **all three current prevention pools**: CHAR, SYN, and VOID.
-- **“Double your CHAR prevention”** doubles the **entire current CHAR prevention pool**, including contributions already accumulated from multiple cards. Example: three cards collectively provide **15 CHAR prevention**; doubling CHAR prevention produces **30 CHAR prevention**.
-- **“The first defensive card you play each Runner turn prevents twice as much CHAR”** instead modifies **that individual card's contribution**, not the entire accumulated pool, as illustrated under SOFT-014.
+- **“Double your prevention”** doubles **all three current prevention pools**: BURN, SYN, and VOID.
+- **“Double your BURN prevention”** doubles the **entire current BURN prevention pool**, including contributions already accumulated from multiple cards. Example: three cards collectively provide **15 BURN prevention**; doubling BURN prevention produces **30 BURN prevention**.
+- **“The first defensive card you play each Runner turn prevents twice as much BURN”** instead modifies **that individual card's contribution**, not the entire accumulated pool, as illustrated under SOFT-014.
 
 **Design intent:** Encourage players to discover powerful interactions among multiple cards and Hardware/Ghostware; stacking effects should be supported, not automatically suppressed as exponential synergy. Wording determines whether a multiplier applies to a single contribution or an already-accumulated pool.
 
@@ -730,7 +730,7 @@ A card may explicitly prevent multiple named damage types, but protection agains
 
 ## 74. RULE-008 — Prevention multipliers compound sequentially (LOCKED, 2026-11-10)
 
-**Explicit user approval:** Multiple effects that multiply a prevention pool **compound sequentially against the pool's current value**, not additively and not just against the initial contributions. For example, if the Runner has **15 CHAR prevention**, resolving **“Double your CHAR prevention”** twice yields **15 → 30 → 60**. Two doublings yield **×4**; three yield **×8**, provided each multiplier actually resolves.
+**Explicit user approval:** Multiple effects that multiply a prevention pool **compound sequentially against the pool's current value**, not additively and not just against the initial contributions. For example, if the Runner has **15 BURN prevention**, resolving **“Double your BURN prevention”** twice yields **15 → 30 → 60**. Two doublings yield **×4**; three yield **×8**, provided each multiplier actually resolves.
 
 **Design intent:** Powerful, potentially exponential stacking synergies are deliberate and encouraged. The exact wording of each card determines whether its multiplier affects a **whole pool** or an **individual card's contribution** (RULE-007).
 
@@ -741,16 +741,16 @@ A card may explicitly prevent multiple named damage types, but protection agains
 
 **Explicit user approval:** A card saying **“Double your [type] prevention”** doubles the **prevention amount currently present when the card's effect resolves**. It is a **one-time snapshot effect**, not an ongoing multiplier applied automatically to prevention granted afterward. When the current pool contains contributions with different durations, the doubling **preserves those durations proportionally** by doubling each existing contribution's remaining amount before recombining the displayed pool.
 
-**Example:** 6 Node-long CHAR prevention from Ghostware + 4 temporary CHAR prevention from Software = 10 total. A doubling effect resolves, yielding **12 Node-long + 8 temporary = 20 total**. The temporary 8 is consumed before the Node-long 12 under RULE-004/005. If another card later adds 3 CHAR prevention, total becomes **23**, not 26. A second subsequent doubling resolves against the then-current **23**, producing **46** (RULE-008), preserving each contribution's duration.
+**Example:** 6 Node-long BURN prevention from Ghostware + 4 temporary BURN prevention from Software = 10 total. A doubling effect resolves, yielding **12 Node-long + 8 temporary = 20 total**. The temporary 8 is consumed before the Node-long 12 under RULE-004/005. If another card later adds 3 BURN prevention, total becomes **23**, not 26. A second subsequent doubling resolves against the then-current **23**, producing **46** (RULE-008), preserving each contribution's duration.
 
-**Scope:** “Double your prevention” applies this snapshot operation to each of CHAR, SYN, and VOID; a type-specific multiplier affects only its named pool (RULE-007). No retroactive multiplication of already-spent prevention.
+**Scope:** “Double your prevention” applies this snapshot operation to each of BURN, SYN, and VOID; a type-specific multiplier affects only its named pool (RULE-007). No retroactive multiplication of already-spent prevention.
 
 
 ## 76. RULE-010 — Resolve card instructions in printed order (LOCKED, 2026-11-10)
 
 **Explicit user approval:** A card's instructions resolve **sequentially in their printed order, top to bottom**, unless the card or a more-specific rule explicitly says otherwise. Earlier instructions change game state before later instructions resolve. This works with RULE-002 (fulfill as much as possible), RULE-003 (distinguish costs, instructions, and conditional rewards), and RULE-009 (snapshot multipliers evaluate the current pool at the moment of resolution). Required costs are paid before their associated effects resolve.
 
-**Example:** Starting with 10 CHAR prevention, **“Gain 5 CHAR prevention. Double your CHAR prevention.”** resolves **10 → 15 → 30**. The reverse wording, **“Double your CHAR prevention. Gain 5 CHAR prevention.”**, resolves **10 → 20 → 25**. Printed order therefore matters for synergies and is intentional.
+**Example:** Starting with 10 BURN prevention, **“Gain 5 BURN prevention. Double your BURN prevention.”** resolves **10 → 15 → 30**. The reverse wording, **“Double your BURN prevention. Gain 5 BURN prevention.”**, resolves **10 → 20 → 25**. Printed order therefore matters for synergies and is intentional.
 
 **OPEN:** Ordering of multiple simultaneous triggers from different cards/effects, distinct from instructions printed sequentially on one card.
 
@@ -759,7 +759,7 @@ A card may explicitly prevent multiple named damage types, but protection agains
 
 **Explicit user approval:** When **multiple Runner-controlled effects trigger simultaneously**, the **Runner chooses their resolution order**. Resolve each chosen trigger's effect **completely** before moving to the next; within each effect, printed instructions still resolve in order under RULE-010. This deliberately supports strategic sequencing and powerful card synergies.
 
-**Example:** Runner currently has **5 CHAR prevention**. Two installed Software effects trigger together on playing a defensive card: one **grants 3 CHAR prevention**, the other **doubles current CHAR prevention**. Runner may resolve **+3 first, then double** to produce **(5 + 3) × 2 = 16**, instead of **(5 × 2) + 3 = 13**.
+**Example:** Runner currently has **5 BURN prevention**. Two installed Software effects trigger together on playing a defensive card: one **grants 3 BURN prevention**, the other **doubles current BURN prevention**. Runner may resolve **+3 first, then double** to produce **(5 + 3) × 2 = 16**, instead of **(5 × 2) + 3 = 13**.
 
 **Scope:** This rule specifies the ordering of **simultaneous Runner-controlled triggers**. It does not yet specify ordering of simultaneous Corporation-controlled triggers or cross-controller triggers, which remain OPEN.
 
@@ -786,7 +786,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** If resolving an effect causes another effect to trigger, the newly triggered effect **does not interrupt** the currently resolving effect. Instead, it enters a **pending trigger queue**. Finish **all instructions of the current effect in printed order** (RULE-010), then resolve pending triggers according to existing controller and active-side priority rules (RULE-011/012/013). Each triggered effect likewise resolves fully before proceeding to the next. No reactive Runner card play is permitted during the Corporation turn (SOFT-011).
 
-**Illustration:** Starting at 0 CHAR prevention, a played card says **“Gain 3 CHAR prevention. Double your CHAR prevention.”** Installed Software triggers on gaining CHAR prevention and grants +2 CHAR prevention. The +2 trigger waits while the played card resolves: **0 → 3 → 6**, then the queued +2 resolves to **8**. It does not interrupt between gaining 3 and doubling, which would have produced 10.
+**Illustration:** Starting at 0 BURN prevention, a played card says **“Gain 3 BURN prevention. Double your BURN prevention.”** Installed Software triggers on gaining BURN prevention and grants +2 BURN prevention. The +2 trigger waits while the played card resolves: **0 → 3 → 6**, then the queued +2 resolves to **8**. It does not interrupt between gaining 3 and doubling, which would have produced 10.
 
 **OPEN:** Detailed queue policy for newly generated triggers while other triggers are queued, especially whether newly generated triggers are inserted ahead of or behind existing pending triggers, subject to RULE-011/012/013.
 
@@ -813,7 +813,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When REDLINE detects a genuinely infinite/nonterminating trigger cycle under RULE-016, **cancel the repeating cycle** and its perpetuating triggers, **preserve all effects already resolved**, and **continue resolving unrelated pending effects** in the established FIFO trigger queue (RULE-014/015). Termination and continuation must be **deterministic**. Do not roll back legitimately resolved prevention, damage, resources, or other state changes merely because they were generated before loop detection.
 
-**Example:** If a loop generated **10 CHAR prevention** before being detected, that 10 remains; the nonterminating cycle is stopped; unrelated pending triggers continue to resolve.
+**Example:** If a loop generated **10 BURN prevention** before being detected, that 10 remains; the nonterminating cycle is stopped; unrelated pending triggers continue to resolve.
 
 **OPEN implementation detail:** The exact detection algorithm and how the engine identifies the minimal set of cycle-perpetuating queued triggers to cancel remain to be designed. The required observable behavior above is LOCKED.
 
@@ -847,7 +847,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 87. RULE-021 — Independent copies except explicit shared event/outcome limits (LOCKED, 2026-11-10)
 
-**Explicit user approval with qualification:** Multiple installed copies of the same Software card **normally trigger independently**, and each copy tracks its own card-specific trigger frequency limit (RULE-020). For example, two installed copies each reading “Once per turn: When you play a defensive card, gain 2 CHAR prevention” each trigger once, yielding **4 CHAR prevention** in total.
+**Explicit user approval with qualification:** Multiple installed copies of the same Software card **normally trigger independently**, and each copy tracks its own card-specific trigger frequency limit (RULE-020). For example, two installed copies each reading “Once per turn: When you play a defensive card, gain 2 BURN prevention” each trigger once, yielding **4 BURN prevention** in total.
 
 **Explicit shared-limit exception:** If wording establishes an explicit limit on the **same event or outcome**, duplicating that wording must not compound beyond that limit. User's canonical example: two copies of “The first card you play is played twice” mean the first card is **played twice total**, **not twice and then twice more** (not four plays). A second copy cannot apply an additional doubling to that already doubled first play. Interpret “played twice” as an explicitly bounded outcome in this example, not as an unconstrained multiplicative stacking effect.
 
@@ -856,7 +856,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 88. RULE-022 — Replayed cards resolve each play independently (LOCKED, 2026-11-10)
 
-**Explicit user approval:** When a card-play effect causes a card to be **played multiple times**, each actual play **resolves that card's printed instructions and applicable “when played” effects independently**, subject to explicit frequency restrictions and the existing trigger queue. Example: “The first card you play each turn is played twice” applied to “When played, gain 3 CHAR prevention” grants **6 CHAR prevention total**, from two separate plays.
+**Explicit user approval:** When a card-play effect causes a card to be **played multiple times**, each actual play **resolves that card's printed instructions and applicable “when played” effects independently**, subject to explicit frequency restrictions and the existing trigger queue. Example: “The first card you play each turn is played twice” applied to “When played, gain 3 BURN prevention” grants **6 BURN prevention total**, from two separate plays.
 
 **Compatibility:** The explicit “played twice” outcome limit remains in force under RULE-021: additional copies of the same replay-granting effect do **not** turn those two plays into four. Other applicable “when played” triggers can occur for each actual play, unless their own explicit limits (RULE-020) prevent them.
 
@@ -876,7 +876,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When an effect replays a card, the card's **BW cost is paid only for the original play** (RULE-023), but **each replayed resolution must independently pay any other explicit costs in full** (RULE-003). If the non-BW cost for an additional resolution cannot be paid, that resolution does not occur; any earlier completed resolutions remain valid.
 
-**Example:** “Cost: Discard 1 card. Effect: Gain 5 CHAR prevention.” Played twice via replay: discard one card for the original resolution and another card for the second; if both are paid, gain **10 CHAR prevention total**. If the second discard cannot be paid, only the first resolution's 5 prevention is gained.
+**Example:** “Cost: Discard 1 card. Effect: Gain 5 BURN prevention.” Played twice via replay: discard one card for the original resolution and another card for the second; if both are paid, gain **10 BURN prevention total**. If the second discard cannot be paid, only the first resolution's 5 prevention is gained.
 
 **Compatibility:** Explicit card-level limits (RULE-020), shared outcome limits (RULE-021), and the trigger queue (RULE-014/015) still apply. **OPEN:** Exact replay timing and whether an unpaid replay counts for play-trigger frequency or “first card played” bookkeeping.
 
@@ -885,7 +885,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When an effect causes a card to be played multiple times, resolve the **entire replay sequence consecutively**, without interrupting between plays to resolve other pending triggered effects. Finish the first play completely, then the second play (and any additional plays permitted by explicit text); triggers generated during any of these plays are **enqueued** and resolve afterward according to the established FIFO ordering (RULE-014/015). This treats the granted sequence as one uninterrupted replay operation for trigger-processing purposes, while each play still independently resolves the card's instructions (RULE-022).
 
-**Example:** A card grants 3 CHAR prevention when played, and an installed Software triggers on gaining CHAR prevention. If the card is played twice, the two plays first grant **6 CHAR prevention** total; the triggered Software effects then resolve in queue order.
+**Example:** A card grants 3 BURN prevention when played, and an installed Software triggers on gaining BURN prevention. If the card is played twice, the two plays first grant **6 BURN prevention** total; the triggered Software effects then resolve in queue order.
 
 **Costs:** The original BW cost is paid only once (RULE-023); any explicit non-BW costs are independently required for each play (RULE-024). If a later replay's non-BW cost cannot be paid, that resolution fails without reversing earlier completed plays. Explicit shared “played twice” limits remain in force (RULE-021).
 
@@ -896,7 +896,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** Replaying a card does **not** reset or bypass an explicit frequency restriction printed on that card or ability, such as **“Once per turn.”** Each replay is still a separate play for other applicable effects (RULE-022), but an ability whose per-turn allowance has already been used does not activate again merely because its card is replayed.
 
-**Canonical example:** “Once per turn: When played, gain 5 CHAR prevention.” If an effect causes this card to be played twice during the same turn, the limited ability activates **once total**, granting **5 CHAR prevention**, not 10.
+**Canonical example:** “Once per turn: When played, gain 5 BURN prevention.” If an effect causes this card to be played twice during the same turn, the limited ability activates **once total**, granting **5 BURN prevention**, not 10.
 
 **Compatibility:** RULE-020 (explicit per-card limits), RULE-021 (independent copies except explicit shared outcome limits), RULE-023/024 (replay costs), and RULE-025 (uninterrupted replay sequence) continue to apply. This does not introduce a universal trigger cap.
 
@@ -927,7 +927,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Established start-of-turn ordering:** (1) Reset applicable per-turn trigger limits (RULE-028); (2) remove effects scheduled to expire at this turn start; (3) resolve start-of-turn triggered abilities using the resulting game state.
 
-**Example:** Runner ends the previous turn with 8 temporary CHAR prevention scheduled to expire at the next Runner turn start. Those 8 expire before a start-of-turn ability doubles current CHAR prevention, so they are not doubled.
+**Example:** Runner ends the previous turn with 8 temporary BURN prevention scheduled to expire at the next Runner turn start. Those 8 expire before a start-of-turn ability doubles current BURN prevention, so they are not doubled.
 
 **OPEN:** Exact placement of BW refresh, DRAW, Node-long prevention refresh, and other turn-start housekeeping relative to these steps. Do not infer their order from this rule.
 
@@ -958,7 +958,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When the Runner performs the **normal start-of-turn DRAW**, draw **all cards in that DRAW operation uninterrupted** before resolving any triggered effects generated by drawing those cards. Enqueue the resulting triggers and resolve them afterward according to established FIFO queue ordering (RULE-014/015). Individual card-draw events can each generate a trigger, but the triggers do not interrupt the ongoing normal DRAW operation.
 
-**Canonical example:** An installed Software says “Whenever you draw a card, gain 1 CHAR prevention.” With normal DRAW **5**, the Runner first draws **all 5 cards**, then resolves **five draw-generated triggers**, gaining **5 CHAR prevention total** (assuming no other modifiers or limits).
+**Canonical example:** An installed Software says “Whenever you draw a card, gain 1 BURN prevention.” With normal DRAW **5**, the Runner first draws **all 5 cards**, then resolves **five draw-generated triggers**, gaining **5 BURN prevention total** (assuming no other modifiers or limits).
 
 **Compatibility:** Normal DRAW occurs after start-of-turn abilities (RULE-031). Explicit per-card trigger frequency limits (RULE-020/026) still apply. **OPEN:** Whether other multi-card draw effects beyond the normal DRAW use the same uninterrupted batching convention; exact timing of draw-replacement effects, if introduced.
 
@@ -967,7 +967,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** Extend RULE-032 beyond normal start-of-turn DRAW: **every effect instructing a player to draw multiple cards completes its full draw operation before any triggers generated by those draws resolve**. Individual cards drawn can generate their own triggers, which enter the pending queue and resolve afterward under the existing FIFO rules (RULE-014/015). Applies to normal DRAW, Instant Software “Draw X cards,” and other multi-card draw effects.
 
-**Example:** An Instant Software says “Draw 3 cards,” while an installed Software says “Whenever you draw a card, gain 1 CHAR prevention.” Draw **all 3 cards first**, then resolve the **three** draw-generated triggers, gaining **3 CHAR prevention** absent other modifiers or limits.
+**Example:** An Instant Software says “Draw 3 cards,” while an installed Software says “Whenever you draw a card, gain 1 BURN prevention.” Draw **all 3 cards first**, then resolve the **three** draw-generated triggers, gaining **3 BURN prevention** absent other modifiers or limits.
 
 **Compatibility:** Explicit trigger-frequency limits (RULE-020/026) still constrain the number of activations. Effects resolve in printed order (RULE-010), so uninterrupted drawing applies to the specific multi-card draw instruction, not automatically to all instructions on a card.
 
@@ -989,7 +989,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** If the discard pile is automatically shuffled into the draw pile **during an ongoing draw operation** (RULE-034), the **reshuffle itself occurs immediately** to make further drawing possible, but any **triggered abilities generated by that reshuffle are queued and do not resolve until the entire draw operation finishes**. Then process pending triggers under FIFO ordering (RULE-014/015). This extends the uninterrupted draw behavior of RULE-032/033 to shuffle-generated triggers.
 
-**Example:** An installed Software says “Whenever your discard pile is shuffled into your draw pile, gain 2 CHAR prevention.” During “Draw 3 cards,” only one card remains in the draw pile: draw that card, shuffle the discard pile to replenish the draw pile, enqueue the shuffle trigger, draw the remaining two cards, then resolve queued effects. The reshuffle-triggered Software grants **2 CHAR prevention** afterward.
+**Example:** An installed Software says “Whenever your discard pile is shuffled into your draw pile, gain 2 BURN prevention.” During “Draw 3 cards,” only one card remains in the draw pile: draw that card, shuffle the discard pile to replenish the draw pile, enqueue the shuffle trigger, draw the remaining two cards, then resolve queued effects. The reshuffle-triggered Software grants **2 BURN prevention** afterward.
 
 **Compatibility:** Any card-draw triggers generated during the same draw operation also wait until it completes; FIFO ordering follows the order in which triggers entered the queue, subject to simultaneous-trigger ordering rules (RULE-011/012/013). Explicit trigger frequency limits still apply (RULE-020/026).
 
@@ -1000,7 +1000,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a draw operation causes **multiple actual discard-pile reshuffles**, each reshuffle is a **separate event** and independently generates any applicable “whenever you reshuffle” triggers. All reshuffle-generated triggers **wait until the full draw operation finishes** (RULE-035), then resolve according to the FIFO queue (RULE-014/015). Explicit card-specific frequency limits (RULE-020/026) still apply.
 
-**Example:** Installed Software says “Whenever your discard pile is reshuffled into your draw pile, gain 2 CHAR prevention.” If **three actual reshuffles** occur during one draw operation, three triggers are queued and later grant **6 CHAR prevention total**, absent other modifiers or limits.
+**Example:** Installed Software says “Whenever your discard pile is reshuffled into your draw pile, gain 2 BURN prevention.” If **three actual reshuffles** occur during one draw operation, three triggers are queued and later grant **6 BURN prevention total**, absent other modifiers or limits.
 
 **Clarification:** This rule does not cause an extra reshuffle when there are no eligible cards in the discard pile; it only counts reshuffles that actually occur. The precise conditions under which repeated reshuffles can occur during a single draw remain subject to the available card zones and normal draw rules (RULE-034).
 
@@ -1009,7 +1009,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** If an instruction requires drawing cards but **both the draw pile and discard pile contain no eligible cards**, draw **zero cards** and **continue resolving any remaining independent instructions**. Do **not** automatically inflict Vitae damage, other damage, or any penalty merely because a draw could not be fulfilled. If some cards are available, draw as many as possible (RULE-002/034).
 
-**Canonical example:** “Draw 3 cards. Gain 2 CHAR prevention.” With both draw and discard piles empty, draw **0 cards** and still gain **2 CHAR prevention**.
+**Canonical example:** “Draw 3 cards. Gain 2 BURN prevention.” With both draw and discard piles empty, draw **0 cards** and still gain **2 BURN prevention**.
 
 **Compatibility:** Explicit costs and conditional wording such as “If you do” still follow RULE-003; a card may explicitly specify a consequence for an unsuccessful draw, but there is **no universal deck-exhaustion penalty**. Automatic reshuffling applies only when the discard pile has eligible cards (RULE-034).
 
@@ -1018,9 +1018,9 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** In card text of the form **“Draw X cards. If you do, [reward]”**, the **“If you do” condition is satisfied only if the full specified number X of cards was actually drawn**. If fewer cards are available, draw as many as possible under RULE-002/034/037, but do **not** grant the conditional reward under RULE-003.
 
-**Canonical example:** “Draw 3 cards. If you do, gain 5 CHAR prevention.” With only **2 eligible cards** across draw and discard piles, draw both, but **do not gain the 5 CHAR prevention**.
+**Canonical example:** “Draw 3 cards. If you do, gain 5 BURN prevention.” With only **2 eligible cards** across draw and discard piles, draw both, but **do not gain the 5 BURN prevention**.
 
-**Contrast:** “Draw 3 cards. Gain 5 CHAR prevention.” has no “If you do” condition, so the independent prevention instruction resolves even if fewer than 3 cards can be drawn (RULE-002).
+**Contrast:** “Draw 3 cards. Gain 5 BURN prevention.” has no “If you do” condition, so the independent prevention instruction resolves even if fewer than 3 cards can be drawn (RULE-002).
 
 **Compatibility:** Multi-card draws and their generated triggers remain uninterrupted (RULE-032/033), with automatic discard reshuffling where possible (RULE-034). This rule addresses conditional success, not a general deck-exhaustion penalty.
 
@@ -1029,14 +1029,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a card instructs the Runner to draw cards and then grants a conditional reward, **finish resolving the original card's printed instructions, including the conditional reward if its condition is met, before processing triggered effects generated by those draws**. Draw-generated triggers enter the FIFO queue and wait until the current effect finishes (RULE-010/014/015/033).
 
-**Canonical example:** “Draw 3 cards. If you do, gain 5 CHAR prevention.” With three cards available, draw all three uninterrupted, queue any draw-generated triggers, grant **5 CHAR prevention** as the card's conditional reward, then resolve queued triggers in FIFO order. If fewer than three cards are drawn, the reward is not granted (RULE-038), but triggers generated by cards actually drawn still resolve after the original card finishes.
+**Canonical example:** “Draw 3 cards. If you do, gain 5 BURN prevention.” With three cards available, draw all three uninterrupted, queue any draw-generated triggers, grant **5 BURN prevention** as the card's conditional reward, then resolve queued triggers in FIFO order. If fewer than three cards are drawn, the reward is not granted (RULE-038), but triggers generated by cards actually drawn still resolve after the original card finishes.
 
 **Scope:** This establishes ordering between an original card's subsequent printed instructions and triggers generated during its draw. It does not change the explicit frequency limits or the distinction between unconditional and conditional instructions (RULE-002/003).
 
 
 ## 106. RULE-040 — Draw replacement effects apply before draw events (LOCKED, 2026-11-10)
 
-**Explicit user approval:** Card text such as **“Whenever you would draw a card, you may gain 2 CHAR prevention instead”** is a **replacement effect**, not an ordinary after-the-fact trigger. Before the affected draw event occurs, the Runner chooses whether to **draw that card normally** or **replace that draw with 2 CHAR prevention**. If replaced, the card is not drawn, and effects that trigger upon **actually drawing** a card do not trigger from that replaced event.
+**Explicit user approval:** Card text such as **“Whenever you would draw a card, you may gain 2 BURN prevention instead”** is a **replacement effect**, not an ordinary after-the-fact trigger. Before the affected draw event occurs, the Runner chooses whether to **draw that card normally** or **replace that draw with 2 BURN prevention**. If replaced, the card is not drawn, and effects that trigger upon **actually drawing** a card do not trigger from that replaced event.
 
 **Timing:** Replacement choices are made **before each applicable draw event**, including during multi-card draws. They modify whether the event happens, and are therefore distinct from queued triggers. Ordinary draw-generated and reshuffle-generated triggers still wait until the uninterrupted draw operation finishes (RULE-032/033/035); allowing replacement choices does not authorize interrupting the draw operation to resolve queued triggers.
 
@@ -1047,7 +1047,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** If a **draw replacement effect** substitutes another benefit for one or more instructed draws, the replaced events **do not count as cards actually drawn** when checking whether an instruction such as **“Draw X cards. If you do, [reward]”** was completed. The conditional reward requires **X actual cards drawn**, consistent with RULE-038. Replacement benefits still apply normally (RULE-040).
 
-**Canonical example:** “Draw 3 cards. If you do, gain 5 CHAR prevention.” The Runner replaces one of the three draws with **2 CHAR prevention**, and actually draws the other two cards. Result: **2 cards drawn**, **2 CHAR prevention** from the replacement, and **no 5 CHAR prevention conditional reward**, because the full draw instruction was not satisfied.
+**Canonical example:** “Draw 3 cards. If you do, gain 5 BURN prevention.” The Runner replaces one of the three draws with **2 BURN prevention**, and actually draws the other two cards. Result: **2 cards drawn**, **2 BURN prevention** from the replacement, and **no 5 BURN prevention conditional reward**, because the full draw instruction was not satisfied.
 
 **Compatibility:** Draw-generated triggers only arise from cards actually drawn (RULE-040); the multi-card draw operation otherwise remains uninterrupted and its queued triggers resolve afterward (RULE-033/039). **OPEN:** Interaction among multiple competing replacement effects for the same would-be draw event.
 
@@ -1056,7 +1056,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When **multiple optional replacement effects** could replace the **same would-be card draw**, the Runner chooses **at most one** of those replacement effects for that draw. The Runner may instead choose to **draw the card normally**. Applying one replacement consumes/replaces that draw event; the other replacement effects cannot also claim benefits from that same draw.
 
-**Canonical example:** Installed Card A: “Whenever you would draw a card, you may gain 2 CHAR prevention instead.” Installed Card B: “Whenever you would draw a card, you may gain 1 BW instead.” For each would-be draw, choose exactly one of: (a) actually draw one card; (b) gain **2 CHAR prevention** instead; or (c) gain **1 BW** instead. **Never gain both replacement benefits for the same draw.**
+**Canonical example:** Installed Card A: “Whenever you would draw a card, you may gain 2 BURN prevention instead.” Installed Card B: “Whenever you would draw a card, you may gain 1 BW instead.” For each would-be draw, choose exactly one of: (a) actually draw one card; (b) gain **2 BURN prevention** instead; or (c) gain **1 BW** instead. **Never gain both replacement benefits for the same draw.**
 
 **Multiple-card draws:** Make the replacement choice independently for **each individual would-be draw**, while preserving uninterrupted resolution of the overall draw operation and deferring ordinary triggers until afterward (RULE-033/040).
 
@@ -1065,9 +1065,9 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 109. RULE-043 — Mandatory draw replacements take priority over optional replacements (LOCKED, 2026-11-10)
 
-**Explicit user approval:** When a **mandatory** draw replacement and an **optional** draw replacement are both applicable to the same would-be draw, the **mandatory replacement takes priority**, unless other card text **explicitly overrides** that precedence. A replacement reading **“Whenever you would draw a card, gain 2 CHAR prevention instead”** (without “may”) is mandatory. The Runner cannot elect to draw normally or choose a competing optional replacement while the mandatory replacement applies.
+**Explicit user approval:** When a **mandatory** draw replacement and an **optional** draw replacement are both applicable to the same would-be draw, the **mandatory replacement takes priority**, unless other card text **explicitly overrides** that precedence. A replacement reading **“Whenever you would draw a card, gain 2 BURN prevention instead”** (without “may”) is mandatory. The Runner cannot elect to draw normally or choose a competing optional replacement while the mandatory replacement applies.
 
-**Canonical example:** Card A (mandatory): “Whenever you would draw a card, gain 2 CHAR prevention instead.” Card B (optional): “Whenever you would draw a card, you may gain 1 BW instead.” For the affected draw, apply Card A and gain **2 CHAR prevention**; do **not** draw the card or gain Card B's optional **1 BW**, absent explicit override text.
+**Canonical example:** Card A (mandatory): “Whenever you would draw a card, gain 2 BURN prevention instead.” Card B (optional): “Whenever you would draw a card, you may gain 1 BW instead.” For the affected draw, apply Card A and gain **2 BURN prevention**; do **not** draw the card or gain Card B's optional **1 BW**, absent explicit override text.
 
 **Compatibility:** Only one replacement benefit applies to a single draw event (RULE-042). Replaced draws do not count as actual cards drawn for conditional rewards (RULE-041). Replacement effects occur before the affected draw rather than as queued post-draw triggers (RULE-040).
 
@@ -1078,7 +1078,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** If **two or more mandatory draw replacement effects** apply to the **same would-be draw event**, the **Runner chooses exactly one** of the competing mandatory replacements to apply. The unchosen mandatory replacements do not produce benefits from that draw. Because a mandatory replacement applies, the Runner cannot choose to perform the original draw normally, absent explicit overriding card text.
 
-**Canonical example:** Installed Card A: “Whenever you would draw a card, gain 2 CHAR prevention instead.” Installed Card B: “Whenever you would draw a card, gain 1 BW instead.” For each would-be draw, the Runner chooses **either 2 CHAR prevention or 1 BW**, **not both**, and does not draw the card.
+**Canonical example:** Installed Card A: “Whenever you would draw a card, gain 2 BURN prevention instead.” Installed Card B: “Whenever you would draw a card, gain 1 BW instead.” For each would-be draw, the Runner chooses **either 2 BURN prevention or 1 BW**, **not both**, and does not draw the card.
 
 **Compatibility:** Mandatory replacements have priority over optional replacements (RULE-043), only one replacement applies per draw (RULE-042), and replaced draws do not count as actually drawn for conditional rewards (RULE-041). The decision occurs before the affected draw event (RULE-040).
 
@@ -1089,7 +1089,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user decision:** Rejected the proposal that a “whenever you would draw” replacement can grant its substitute benefit when both draw and discard piles have no eligible cards. Approved the interpretation that **only would-be draws for which an eligible card is actually available may be replaced**. A draw instruction that cannot be fulfilled due to lack of eligible cards **does not generate a replacement benefit**.
 
-**Canonical example:** “Draw 3 cards,” with only **2 eligible cards** available across draw and discard piles, and an installed Software allowing each draw to be replaced with **2 CHAR prevention**. The Runner may (a) draw both cards, (b) replace one available draw to draw one card and gain 2 CHAR prevention, or (c) replace both available draws to gain 4 CHAR prevention and draw zero cards. The **third, unavailable draw cannot be replaced** and generates no prevention.
+**Canonical example:** “Draw 3 cards,” with only **2 eligible cards** available across draw and discard piles, and an installed Software allowing each draw to be replaced with **2 BURN prevention**. The Runner may (a) draw both cards, (b) replace one available draw to draw one card and gain 2 BURN prevention, or (c) replace both available draws to gain 4 BURN prevention and draw zero cards. The **third, unavailable draw cannot be replaced** and generates no prevention.
 
 **Compatibility:** This restriction applies to both mandatory and optional draw replacement effects (RULE-040/042/043/044). A replaced draw is not counted as an actual card drawn for conditional “If you do” rewards (RULE-041). Unavailable draws carry no automatic deck-exhaustion penalty (RULE-037). Normal discard reshuffling may supply available cards (RULE-034). **OPEN:** How to test availability if a replacement itself moves cards among zones or changes deck composition.
 
@@ -1109,7 +1109,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When the draw pile is empty but the discard pile contains eligible cards, **check draw availability across both piles** (RULE-046), then **resolve applicable draw replacement choices before performing an automatic discard-to-draw reshuffle**. If the Runner replaces the draw, **do not perform an automatic reshuffle for that replaced event**. If the Runner proceeds with the actual draw, **reshuffle the discard pile into the draw pile** under RULE-034 and then draw. An explicit replacement effect that itself moves or shuffles cards resolves according to its own text; that is distinct from an automatic reshuffle.
 
-**Canonical example:** Draw pile empty; discard pile contains 5 cards; installed Software reads “Whenever you would draw a card, you may gain 2 CHAR prevention instead.” The Runner may choose **2 CHAR prevention** and **no automatic reshuffle occurs**, hence no automatic reshuffle trigger from this draw. Alternatively, the Runner may draw normally, triggering the automatic reshuffle and then drawing the card.
+**Canonical example:** Draw pile empty; discard pile contains 5 cards; installed Software reads “Whenever you would draw a card, you may gain 2 BURN prevention instead.” The Runner may choose **2 BURN prevention** and **no automatic reshuffle occurs**, hence no automatic reshuffle trigger from this draw. Alternatively, the Runner may draw normally, triggering the automatic reshuffle and then drawing the card.
 
 **Compatibility:** No replacement benefit if both piles lack eligible drawable cards (RULE-045). Replaced draws do not trigger on-draw effects or satisfy conditional draw counts (RULE-040/041). Automatic reshuffle triggers, when an actual reshuffle occurs, are queued according to RULE-035/036.
 
@@ -1162,7 +1162,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When the discard pile is incorporated into an empty draw pile as part of the combined shuffle established by revised RULE-050 and RULE-051, the operation **qualifies as a discard-pile reshuffle** for effects reading “Whenever you reshuffle your discard pile into your draw pile.” It produces **one shuffle event** and therefore **one such trigger** per qualifying effect, subject to any explicit card-specific frequency restrictions.
 
-**Canonical example:** Draw pile empty, discard pile has 5 cards; Runner shuffles 1 card from hand into the draw pile. All 6 cards are combined and shuffled together once; discard becomes empty. Installed Software “Whenever you reshuffle your discard pile into your draw pile, gain 2 CHAR prevention” **triggers once**, granting **2 CHAR prevention**.
+**Canonical example:** Draw pile empty, discard pile has 5 cards; Runner shuffles 1 card from hand into the draw pile. All 6 cards are combined and shuffled together once; discard becomes empty. Installed Software “Whenever you reshuffle your discard pile into your draw pile, gain 2 BURN prevention” **triggers once**, granting **2 BURN prevention**.
 
 **Compatibility:** This is one event, not a discard reshuffle followed by a separate shuffle (RULE-051). Apply ordinary trigger queuing and timing (RULE-014/015/035/036). The specific discard-reshuffle trigger requires that cards actually be incorporated from discard; merely shuffling a card into an empty draw pile when discard is empty does not meet that wording.
 
@@ -1180,7 +1180,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** A **single shuffle event** may simultaneously satisfy **multiple distinct trigger conditions**. Each eligible installed ability triggers once for that event, subject to its own card-specific frequency limits. This does **not** multiply the number of shuffle events. If the abilities are Runner-controlled and simultaneous, the **Runner chooses their resolution order** (RULE-011), with the existing trigger queue applying (RULE-014/015).
 
-**Canonical example:** Installed Card A: “Whenever you shuffle your draw pile, gain 2 CHAR prevention.” Installed Card B: “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” The Runner performs a **combined shuffle under revised RULE-050** incorporating cards from discard. This is **one shuffle event** (RULE-051), qualifying both as a general draw-pile shuffle (RULE-053) and as a discard-pile reshuffle (RULE-052). **Both Card A and Card B trigger once**, granting **2 CHAR prevention** and **1 BW** respectively; the Runner chooses their order of resolution.
+**Canonical example:** Installed Card A: “Whenever you shuffle your draw pile, gain 2 BURN prevention.” Installed Card B: “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” The Runner performs a **combined shuffle under revised RULE-050** incorporating cards from discard. This is **one shuffle event** (RULE-051), qualifying both as a general draw-pile shuffle (RULE-053) and as a discard-pile reshuffle (RULE-052). **Both Card A and Card B trigger once**, granting **2 BURN prevention** and **1 BW** respectively; the Runner chooses their order of resolution.
 
 **Scope:** This does not imply that an ability can trigger multiple times from the same event merely because its condition is described in multiple ways.
 
@@ -1189,7 +1189,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a **single installed Software card** has **multiple separately written triggered abilities**, evaluate each ability **independently** against a qualifying event. If the event satisfies multiple abilities, **each triggers once** (subject to its own explicitly stated frequency limit), even though they appear on the **same card**. Runner-controlled simultaneous triggers are ordered by the Runner (RULE-011) and otherwise follow the established trigger queue (RULE-014/015).
 
-**Canonical example:** One Software card has both “Whenever you shuffle your draw pile, gain 2 CHAR prevention” and “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle that incorporates discard cards (RULE-050/051/052/053) satisfies **both** abilities. They each trigger **once**, granting **2 CHAR prevention** and **1 BW**, with the Runner choosing resolution order.
+**Canonical example:** One Software card has both “Whenever you shuffle your draw pile, gain 2 BURN prevention” and “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle that incorporates discard cards (RULE-050/051/052/053) satisfies **both** abilities. They each trigger **once**, granting **2 BURN prevention** and **1 BW**, with the Runner choosing resolution order.
 
 **Compatibility:** A single event can qualify multiple distinct abilities (RULE-054), including when those abilities share a card. This does not allow one individual ability to trigger multiple times from the same single event, and explicit “once per turn” or other card-specific limits still apply (RULE-020).
 
@@ -1198,7 +1198,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a card explicitly groups multiple triggered abilities under a **shared limit** such as **“Once per turn, choose one”**, that shared restriction overrides the default independence of separately written abilities (RULE-055). Even when one event qualifies for multiple listed triggers, the controller may choose **only one qualifying benefit** for that event, and doing so consumes the **shared once-per-turn allowance**. The other grouped benefit does not activate.
 
-**Canonical example:** One installed Software reads: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 CHAR prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle involving discard cards satisfies both conditions, but the Runner chooses **either 2 CHAR prevention or 1 BW**, **not both**. The shared limit is then used for that turn.
+**Canonical example:** One installed Software reads: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 BURN prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle involving discard cards satisfies both conditions, but the Runner chooses **either 2 BURN prevention or 1 BW**, **not both**. The shared limit is then used for that turn.
 
 **Compatibility:** Independently written abilities trigger separately by default (RULE-055); explicit shared limits override this (RULE-020). The per-turn shared allowance resets under RULE-027/028. Shuffle event classification remains governed by RULE-050–054.
 
@@ -1207,7 +1207,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** Each **installed instance** of a Software card has its **own allowance** for an explicit grouped/shared trigger restriction such as **“Once per turn, choose one”** (RULE-056). Multiple copies may each select one eligible benefit when the same event qualifies, unless the card explicitly imposes a **global/shared-across-copies** limit.
 
-**Canonical example:** The Runner installs **two copies** of Software reading: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 CHAR prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle incorporating discard cards qualifies for both options on each copy. Each copy independently chooses **one** option, allowing a total of **4 CHAR prevention**, **2 BW**, or **2 CHAR prevention plus 1 BW**. Both copies' own once-per-turn allowances are then consumed.
+**Canonical example:** The Runner installs **two copies** of Software reading: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 BURN prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle incorporating discard cards qualifies for both options on each copy. Each copy independently chooses **one** option, allowing a total of **4 BURN prevention**, **2 BW**, or **2 BURN prevention plus 1 BW**. Both copies' own once-per-turn allowances are then consumed.
 
 **Compatibility:** Independent per-copy triggers are consistent with RULE-021; shared limits within each copy follow RULE-056; explicit global restrictions override per-copy allowances. Per-turn allowances reset under RULE-027/028, and simultaneous Runner-controlled triggers follow RULE-011.
 
@@ -1216,7 +1216,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When card text explicitly imposes a **global trigger-frequency restriction across all installed copies of that card**, all those copies share **one allowance**, rather than each copy having an independent activation. The global restriction overrides the default per-copy trigger allowances (RULE-021/057) only when stated explicitly.
 
-**Canonical example:** Software reads: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” The Runner has **three installed copies** and performs a qualifying shuffle. The effect activates **once total**, granting **2 CHAR prevention**, **not 6**. The shared allowance is consumed for all three copies until the per-turn reset.
+**Canonical example:** Software reads: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 BURN prevention.” The Runner has **three installed copies** and performs a qualifying shuffle. The effect activates **once total**, granting **2 BURN prevention**, **not 6**. The shared allowance is consumed for all three copies until the per-turn reset.
 
 **Compatibility:** Per-copy trigger limits remain the default (RULE-057); explicit shared limits within a card remain governed by RULE-056. Per-turn reset follows RULE-027/028. Multiple different abilities may still qualify from one event unless limited by explicit text (RULE-054/055).
 
@@ -1225,7 +1225,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** A globally shared trigger-frequency allowance belongs to the **card's shared ability across all installed copies**, not to any particular installed instance. If the global allowance has already been consumed during the current turn, **installing another copy of that card later in the same turn does not restore or reset the allowance**. The newly installed copy inherits the consumed state until the normal per-turn reset (RULE-027/028).
 
-**Canonical example:** One installed Software has “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” A shuffle activates it once for **2 CHAR prevention**. The Runner then installs a second copy and shuffles again during the same turn. **No second activation** occurs, because the shared global allowance remains consumed.
+**Canonical example:** One installed Software has “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 BURN prevention.” A shuffle activates it once for **2 BURN prevention**. The Runner then installs a second copy and shuffles again during the same turn. **No second activation** occurs, because the shared global allowance remains consumed.
 
 **Compatibility:** Explicit global limits override per-copy limits (RULE-058), while ordinary independent per-copy limits remain the default (RULE-057). The global allowance resets at the beginning of each turn under RULE-027/028.
 
@@ -1258,7 +1258,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user correction superseding the original RULE-062:** PATCHWORK is an **augmentation/extension of the card's original ability**, not a separate independent trigger system. **Any restrictions applying to the original ability also apply to its PATCHWORK enhancement**, including once-per-turn, per-card, shared, and global-across-copies activation limits. PATCHWORK cannot circumvent an already-consumed original trigger allowance.
 
-**Canonical example:** Original Software ability: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” PATCHWORK augments that ability with **+1 CHAR prevention**. A qualifying shuffle with an available shared global allowance activates the modified card's ability for **3 CHAR prevention** (2 original + 1 PATCHWORK). Once the shared global allowance is consumed, neither the original portion nor its PATCHWORK augmentation can activate again during that turn.
+**Canonical example:** Original Software ability: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 BURN prevention.” PATCHWORK augments that ability with **+1 BURN prevention**. A qualifying shuffle with an available shared global allowance activates the modified card's ability for **3 BURN prevention** (2 original + 1 PATCHWORK). Once the shared global allowance is consumed, neither the original portion nor its PATCHWORK augmentation can activate again during that turn.
 
 **Compatibility:** PATCHWORK preserves original card identity (RULE-061). Global restrictions continue to apply across copies (RULE-058–060). The general independence of separately printed abilities (RULE-055) does **not** exempt PATCHWORK augmentations from restrictions attached to the original ability they modify.
 
@@ -1269,7 +1269,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When multiple installed copies of the **same underlying Software card** share a **global trigger activation allowance**, but differ in their **PATCHWORK enhancements**, the **Runner chooses which eligible installed copy's ability resolves** on a qualifying event. Resolve the selected copy's original ability together with its PATCHWORK augmentation, then consume the **single global allowance for all copies**. Other copies do not also resolve that globally restricted ability for the same event.
 
-**Canonical example:** Copy A is unmodified and grants **2 CHAR prevention** on a qualifying shuffle; Copy B has PATCHWORK augmenting the same ability to grant **5 CHAR prevention**. Both share a global once-per-turn limit. On a qualifying shuffle with the allowance available, the Runner chooses **either 2 CHAR prevention (A) or 5 CHAR prevention (B)**, not both. The global allowance is then consumed for all copies until reset.
+**Canonical example:** Copy A is unmodified and grants **2 BURN prevention** on a qualifying shuffle; Copy B has PATCHWORK augmenting the same ability to grant **5 BURN prevention**. Both share a global once-per-turn limit. On a qualifying shuffle with the allowance available, the Runner chooses **either 2 BURN prevention (A) or 5 BURN prevention (B)**, not both. The global allowance is then consumed for all copies until reset.
 
 **Compatibility:** Global restrictions apply across installed copies (RULE-058–060), PATCHWORK preserves identity (RULE-061) and inherits restrictions of the augmented ability (revised RULE-062). The choice of instance determines the modified outcome, not an additional activation.
 
@@ -1278,7 +1278,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When multiple copies of the same Software card share a global activation limit, the Runner may select **only an eligible installed copy** to resolve the globally limited ability. A PATCHWORK-modified copy in the discard pile or another inactive zone cannot be selected to provide its enhanced effect, **unless explicit card text permits activation from that zone**.
 
-**Canonical example:** Copy A is standard Software, **installed**, and its qualifying shuffle ability grants **2 CHAR prevention**. Copy B is PATCHWORK-modified Software, **in the discard pile**, and would grant **5 CHAR prevention** if installed. A qualifying shuffle occurs. Only Copy A is eligible to activate, granting **2 CHAR prevention** and consuming the shared global allowance. Copy B's enhanced benefit is unavailable while it remains in discard.
+**Canonical example:** Copy A is standard Software, **installed**, and its qualifying shuffle ability grants **2 BURN prevention**. Copy B is PATCHWORK-modified Software, **in the discard pile**, and would grant **5 BURN prevention** if installed. A qualifying shuffle occurs. Only Copy A is eligible to activate, granting **2 BURN prevention** and consuming the shared global allowance. Copy B's enhanced benefit is unavailable while it remains in discard.
 
 **Compatibility:** Runner chooses among eligible differently modified copies for a shared global activation (RULE-063). PATCHWORK preserves original card identity and inherits original restrictions (RULE-061/062); global limits remain shared across copies (RULE-058–060). Zone-specific exceptions require explicit text.
 
@@ -1287,7 +1287,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** Installing a **PATCHWORK-enhanced copy** of Software during a turn does **not** restore an already-consumed **globally shared trigger allowance** for the original ability it augments. The stronger modified benefit is unavailable until the global allowance resets normally, even if the enhanced copy was not installed when the allowance was first consumed.
 
-**Canonical example:** Installed standard Copy A activates a globally once-per-turn shuffle ability for **2 CHAR prevention**. Later in the same turn, the Runner installs PATCHWORK-enhanced Copy B, whose version of that same ability would grant **5 CHAR prevention**. A second qualifying shuffle occurs. **Copy B does not activate**; the global allowance was consumed by Copy A. At the normal start-of-turn reset, the allowance becomes available again and the Runner may select an eligible installed copy.
+**Canonical example:** Installed standard Copy A activates a globally once-per-turn shuffle ability for **2 BURN prevention**. Later in the same turn, the Runner installs PATCHWORK-enhanced Copy B, whose version of that same ability would grant **5 BURN prevention**. A second qualifying shuffle occurs. **Copy B does not activate**; the global allowance was consumed by Copy A. At the normal start-of-turn reset, the allowance becomes available again and the Runner may select an eligible installed copy.
 
 **Compatibility:** Global limits are shared across copies (RULE-058), persist across later installation (RULE-059) and complete uninstallation (RULE-060), PATCHWORK preserves identity (RULE-061) and inherits original restrictions (revised RULE-062), and only eligible installed copies can be selected (RULE-064). Reset timing follows RULE-027/028.
 
@@ -1296,7 +1296,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a PATCHWORK-enhanced Software card **temporarily leaves play and returns during the same turn**, any previously consumed **once-per-turn or applicable shared activation allowance remains consumed**. Temporary removal and re-entry do not create a fresh card identity or refresh activation eligibility. The PATCHWORK augmentation and original ability share the same restriction (RULE-062).
 
-**Canonical example:** An installed Software card has “Once per turn, whenever you shuffle your draw pile, gain 2 CHAR prevention,” augmented by PATCHWORK to grant **5 CHAR prevention** on activation. It activates once, is temporarily removed from play by ICE, and returns installed in the same turn. On another qualifying shuffle that turn, **it cannot activate again**. Its allowance resets only at the normal turn reset.
+**Canonical example:** An installed Software card has “Once per turn, whenever you shuffle your draw pile, gain 2 BURN prevention,” augmented by PATCHWORK to grant **5 BURN prevention** on activation. It activates once, is temporarily removed from play by ICE, and returns installed in the same turn. On another qualifying shuffle that turn, **it cannot activate again**. Its allowance resets only at the normal turn reset.
 
 **Compatibility:** PATCHWORK preserves underlying identity (RULE-061); restrictions extend to augmentation (RULE-062); installation cannot reset consumed global limits (RULE-059/065). Normal per-turn reset follows RULE-027/028. Explicit card text may define an exception.
 
@@ -1305,7 +1305,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When an effect explicitly **copies the entire PATCHWORK-enhanced Software card**, its temporary copy inherits the original card's **modified abilities and PATCHWORK augmentation**. The temporary copy is a distinct card instance and has its **own per-copy once-per-turn activation allowance**. Restrictions attached to the copied ability still apply to its augmentation; an explicitly **global limit across all copies** remains shared rather than becoming independent.
 
-**Canonical example:** Original Software: “Once per turn, whenever you shuffle your draw pile, gain 2 CHAR prevention.” PATCHWORK augments that benefit to **5 CHAR prevention**. An effect creates a temporary full-card copy. Both original and temporary copy have the **5 CHAR prevention** ability, and each may activate **once per turn**, provided each is otherwise eligible. If instead the ability says “once per turn, across all copies,” both share the **single global allowance**.
+**Canonical example:** Original Software: “Once per turn, whenever you shuffle your draw pile, gain 2 BURN prevention.” PATCHWORK augments that benefit to **5 BURN prevention**. An effect creates a temporary full-card copy. Both original and temporary copy have the **5 BURN prevention** ability, and each may activate **once per turn**, provided each is otherwise eligible. If instead the ability says “once per turn, across all copies,” both share the **single global allowance**.
 
 **Scope:** Copying the card's modified characteristics does not award an additional permanent PATCHWORK upgrade. Duration, disposition and zone of the temporary copy follow the creating effect, to be specified by that effect.
 
@@ -1316,7 +1316,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** A **new temporary full-card copy** of PATCHWORK-enhanced Software is a **new card instance** with its own **unused per-copy once-per-turn activation allowance**, even if the original Software card already activated that ability earlier in the same turn. The temporary copy inherits the card's PATCHWORK-modified ability but **does not inherit the original instance's activation history**. Explicit **global limits across all copies remain shared** and are not reset by copying.
 
-**Canonical example:** Original PATCHWORK-enhanced Software grants **5 CHAR prevention once per turn** when the Runner shuffles the draw pile. The original activates once. Later in the same turn, an effect creates a new temporary full-card copy. On a further qualifying shuffle, the new eligible temporary copy **may activate for 5 CHAR prevention**; the original may not activate again. If the printed ability instead states “once per turn, across all copies,” the already-consumed global allowance prevents the new copy from activating.
+**Canonical example:** Original PATCHWORK-enhanced Software grants **5 BURN prevention once per turn** when the Runner shuffles the draw pile. The original activates once. Later in the same turn, an effect creates a new temporary full-card copy. On a further qualifying shuffle, the new eligible temporary copy **may activate for 5 BURN prevention**; the original may not activate again. If the printed ability instead states “once per turn, across all copies,” the already-consumed global allowance prevents the new copy from activating.
 
 **Compatibility:** Full-card copies inherit PATCHWORK enhancements (RULE-067); PATCHWORK enhancements inherit original restrictions (RULE-062); new copies are distinct instances for per-copy limits (RULE-021), but global limits persist across copies and installations (RULE-058–060). Temporary removal and return of the *same* instance does not refresh its allowance (RULE-066).
 
@@ -1325,7 +1325,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** An effect that says **“Copy the triggered ability of one installed Software card. Resolve the copied ability”** copies the **currently PATCHWORK-modified ability**, not merely the unmodified printed ability. Resolving the copied ability does **not create another Software card**, does **not consume an additional activation of the original ability**, and does **not reset the original card's activation allowance**. The copy effect resolves that copied ability **once** as instructed.
 
-**Canonical example:** An installed Software card's triggered ability normally grants **2 CHAR prevention**; PATCHWORK augments that ability to **5 CHAR prevention**. An effect copies and resolves that triggered ability. The copied resolution grants **5 CHAR prevention**. The original card's activation history is unchanged by the copy effect.
+**Canonical example:** An installed Software card's triggered ability normally grants **2 BURN prevention**; PATCHWORK augments that ability to **5 BURN prevention**. An effect copies and resolves that triggered ability. The copied resolution grants **5 BURN prevention**. The original card's activation history is unchanged by the copy effect.
 
 **Distinction:** Copying an **ability** does not create a new card instance or fresh per-copy allowance. Copying an **entire card** creates a new instance with inherited PATCHWORK and its own per-copy allowance (RULE-067/068). PATCHWORK remains an extension of the original ability (revised RULE-062).
 
@@ -1336,7 +1336,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** An effect that explicitly instructs the Runner to **copy a triggered ability of an installed Software card and resolve the copied ability** may do so **even when the original card's once-per-turn activation allowance has already been consumed**. The copied resolution uses the **PATCHWORK-enhanced ability** (RULE-069). It is a resolution directed by the copy effect, **not another activation of the original trigger**; the original allowance remains consumed and is not reset.
 
-**Canonical example:** Installed Software has a PATCHWORK-enhanced ability: “Once per turn, whenever you shuffle your draw pile, gain **5 CHAR prevention**.” The original ability has already activated this turn. The Runner plays an effect: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” That copied resolution still grants **5 CHAR prevention**, and the original card cannot activate its own once-per-turn ability again until its normal reset.
+**Canonical example:** Installed Software has a PATCHWORK-enhanced ability: “Once per turn, whenever you shuffle your draw pile, gain **5 BURN prevention**.” The original ability has already activated this turn. The Runner plays an effect: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” That copied resolution still grants **5 BURN prevention**, and the original card cannot activate its own once-per-turn ability again until its normal reset.
 
 **Scope:** This permission requires an effect that **explicitly copies and resolves** the ability. Merely creating another qualifying trigger event does not bypass original limits. Copying an ability does not create a new Software card or fresh card-instance allowance (RULE-069), and PATCHWORK otherwise inherits restrictions of the original ability (RULE-062).
 
@@ -1345,7 +1345,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When an effect explicitly **copies and resolves an installed Software card's triggered ability**, the copied ability retains **all costs required for its benefit**, including costs in its PATCHWORK-enhanced version. The Runner must pay such costs in full for the copied resolution to grant the associated benefit. If the cost cannot be paid, the associated benefit is not granted. Copying the ability does not waive costs or consume an additional activation of the original ability.
 
-**Canonical example:** PATCHWORK-enhanced Software reads: “Once per turn, when you shuffle your draw pile, you may **discard 1 card** to gain **5 CHAR prevention**.” Another card says: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” The Runner must discard **1 card** to gain **5 CHAR prevention** from the copy. If unable or unwilling to pay that cost, the copied resolution grants **no CHAR prevention**. The original card's activation allowance is unchanged by the copied resolution.
+**Canonical example:** PATCHWORK-enhanced Software reads: “Once per turn, when you shuffle your draw pile, you may **discard 1 card** to gain **5 BURN prevention**.” Another card says: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” The Runner must discard **1 card** to gain **5 BURN prevention** from the copy. If unable or unwilling to pay that cost, the copied resolution grants **no BURN prevention**. The original card's activation allowance is unchanged by the copied resolution.
 
 **Compatibility:** Costs must be fully paid (RULE-003); copied triggered abilities include PATCHWORK enhancements (RULE-069); explicit copied resolutions are permitted even when the original activation allowance is consumed (RULE-070). The copied effect follows its own text without treating the original ability as activated again.
 
@@ -1354,7 +1354,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When an effect **copies and resolves a Software triggered ability**, it copies **all instructions of the complete PATCHWORK-enhanced ability** and executes them **in their original printed/modified order**, using the **current game state** at resolution. It does **not** copy only the numerical result of a prior activation.
 
-**Canonical example:** An installed Software ability enhanced through PATCHWORK reads: “When you shuffle your draw pile, **gain 3 CHAR prevention. Then double your CHAR prevention**.” If the Runner has **5 CHAR prevention** when the copied ability resolves, it first gains 3 (**5 → 8**) and then doubles the current pool (**8 → 16**), ending at **16 CHAR prevention**.
+**Canonical example:** An installed Software ability enhanced through PATCHWORK reads: “When you shuffle your draw pile, **gain 3 BURN prevention. Then double your BURN prevention**.” If the Runner has **5 BURN prevention** when the copied ability resolves, it first gains 3 (**5 → 8**) and then doubles the current pool (**8 → 16**), ending at **16 BURN prevention**.
 
 **Compatibility:** Instructions resolve in order (RULE-010); copied abilities include PATCHWORK modifications (RULE-069), can resolve when original activation limits are consumed if explicitly directed (RULE-070), and retain costs where applicable (RULE-071). Trigger queue handling remains governed by RULE-014/015.
 
@@ -1363,7 +1363,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** An effect that **copies and resolves a Software ability** must complete **all instructions of that copied ability** before any triggers generated by those instructions resolve. Generated triggers enter the existing queue and are processed afterward under normal ordering rules; they cannot interrupt the copied ability mid-resolution.
 
-**Canonical example:** The Runner has installed Software reading “Whenever you gain CHAR prevention, gain 1 BW.” A copied PATCHWORK-enhanced ability reads “Gain 3 CHAR prevention. Then double your CHAR prevention.” The Runner gains 3 prevention (queuing a BW trigger), then doubles the current prevention (queuing another BW trigger **if the doubling increases prevention and qualifies as a separate gain event**). Only after the copied ability fully finishes do the queued triggers resolve in FIFO order, granting **2 BW** if both events qualified.
+**Canonical example:** The Runner has installed Software reading “Whenever you gain BURN prevention, gain 1 BW.” A copied PATCHWORK-enhanced ability reads “Gain 3 BURN prevention. Then double your BURN prevention.” The Runner gains 3 prevention (queuing a BW trigger), then doubles the current prevention (queuing another BW trigger **if the doubling increases prevention and qualifies as a separate gain event**). Only after the copied ability fully finishes do the queued triggers resolve in FIFO order, granting **2 BW** if both events qualified.
 
 **Compatibility:** Chained triggers wait until the current effect completes (RULE-014); queued triggers follow FIFO (RULE-015); copied abilities reproduce full ordered instructions (RULE-072). This rule does not itself establish that every numerical modification is a “gain” event; trigger qualification follows the relevant effect wording and event semantics.
 
@@ -1372,7 +1372,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When an effect **doubles a prevention pool**, any **positive increase** in that pool counts as **gaining prevention** of that type and therefore qualifies for effects triggered by gaining prevention. A **single doubling instruction** produces **one prevention-gain event** if it increases any prevention, even when it doubles several pools simultaneously. The amounts gained in each affected pool are their respective post-doubling minus pre-doubling differences. See RULE-075. Doubling a zero pool generates **no prevention-gain event**.
 
-**Canonical example:** Runner has **5 CHAR prevention** and installed Software: “Whenever you gain CHAR prevention, gain 1 BW.” Runner plays “Double your CHAR prevention.” CHAR prevention increases **5 → 10**, so the Runner **gains 5 CHAR prevention** and queues **one** +1 BW trigger. That trigger resolves after the doubling effect finishes under RULE-014/015.
+**Canonical example:** Runner has **5 BURN prevention** and installed Software: “Whenever you gain BURN prevention, gain 1 BW.” Runner plays “Double your BURN prevention.” BURN prevention increases **5 → 10**, so the Runner **gains 5 BURN prevention** and queues **one** +1 BW trigger. That trigger resolves after the doubling effect finishes under RULE-014/015.
 
 **Other prevention types:** The same principle applies to **SYN** and **VOID** prevention when doubled, subject to the wording of the triggered ability and the actual pool increased. Doubling all three pools in **one instruction** is still **one gain event**, not three (RULE-075).
 
@@ -1381,11 +1381,11 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 141. RULE-075 — A single multi-pool prevention doubling is one gain event (LOCKED, 2026-11-10)
 
-**Explicit user correction:** “Double all your prevention” is a **singular event**. Even if it increases **CHAR, SYN and VOID prevention simultaneously**, an installed ability reading “Whenever you gain prevention, gain 1 BW” triggers **once**, not once per prevention pool. Count the **single resolving gain-producing instruction/event**, not the number of prevention types affected, for an unrestricted “gain prevention” trigger.
+**Explicit user correction:** “Double all your prevention” is a **singular event**. Even if it increases **BURN, SYN and VOID prevention simultaneously**, an installed ability reading “Whenever you gain prevention, gain 1 BW” triggers **once**, not once per prevention pool. Count the **single resolving gain-producing instruction/event**, not the number of prevention types affected, for an unrestricted “gain prevention” trigger.
 
-**Canonical example:** Runner has **5 CHAR, 3 SYN, 2 VOID prevention** and plays “Double all your prevention.” The pools become **10 CHAR, 6 SYN, 4 VOID**. Software reading “Whenever you gain prevention, gain 1 BW” generates **one trigger**, granting **1 BW total**, not 3 BW.
+**Canonical example:** Runner has **5 BURN, 3 SYN, 2 VOID prevention** and plays “Double all your prevention.” The pools become **10 BURN, 6 SYN, 4 VOID**. Software reading “Whenever you gain prevention, gain 1 BW” generates **one trigger**, granting **1 BW total**, not 3 BW.
 
-**Type-specific triggers:** The event may involve multiple prevention types, so a distinct “Whenever you gain CHAR prevention” ability and a distinct “Whenever you gain SYN prevention” ability can each recognize the same event if their conditions are met; however, the **same** generic ability does not trigger multiple times simply because multiple pools increased.
+**Type-specific triggers:** The event may involve multiple prevention types, so a distinct “Whenever you gain BURN prevention” ability and a distinct “Whenever you gain SYN prevention” ability can each recognize the same event if their conditions are met; however, the **same** generic ability does not trigger multiple times simply because multiple pools increased.
 
 **Compatibility / clarification of RULE-074:** Doubling counts as gaining prevention if it increases prevention, but a **single multi-pool doubling instruction** generates **one gain event**, not a separate event for each affected pool. Independent sequential gain-producing instructions may produce separate events, subject to their text and ordinary trigger rules.
 
@@ -1394,7 +1394,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a card or ability contains **multiple distinct instructions** that grant prevention, **each qualifying instruction generates a separate prevention-gain event**, even when the instructions are printed on the same card. A generic ability reading “Whenever you gain prevention, gain 1 BW” can therefore trigger once for each distinct gain instruction. Triggered effects are queued until the current card/ability finishes resolving.
 
-**Canonical example:** An Instant Software card reads “Gain 3 CHAR prevention. Gain 2 SYN prevention.” Another installed Software reads “Whenever you gain prevention, gain 1 BW.” The first instruction gains **3 CHAR prevention** and queues one +1 BW trigger. The second instruction gains **2 SYN prevention** and queues a second +1 BW trigger. After the card finishes resolving, both triggers resolve in FIFO order, granting **2 BW total**.
+**Canonical example:** An Instant Software card reads “Gain 3 BURN prevention. Gain 2 SYN prevention.” Another installed Software reads “Whenever you gain prevention, gain 1 BW.” The first instruction gains **3 BURN prevention** and queues one +1 BW trigger. The second instruction gains **2 SYN prevention** and queues a second +1 BW trigger. After the card finishes resolving, both triggers resolve in FIFO order, granting **2 BW total**.
 
 **Distinction:** One instruction that simultaneously doubles or increases several prevention pools generates **one** gain event (RULE-075); **two separate gain instructions** generate **two** events. Printed order and trigger queue rules remain RULE-010/014/015. No event is generated by an instruction that causes no positive prevention gain.
 
@@ -1403,16 +1403,16 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** A **single instruction** that grants multiple prevention types **simultaneously** produces **one prevention-gain event**, not a separate event per affected pool. A generic trigger such as “Whenever you gain prevention, gain 1 BW” activates **once** for that instruction if it produces any positive prevention gain.
 
-**Canonical example:** A Software card reads “Gain **3 CHAR prevention and 2 SYN prevention**.” Another installed Software reads “Whenever you gain prevention, gain 1 BW.” The instruction increases both CHAR and SYN pools, but generates **one** qualifying gain event and therefore **one +1 BW trigger**, resolved after the current card/ability completes.
+**Canonical example:** A Software card reads “Gain **3 BURN prevention and 2 SYN prevention**.” Another installed Software reads “Whenever you gain prevention, gain 1 BW.” The instruction increases both BURN and SYN pools, but generates **one** qualifying gain event and therefore **one +1 BW trigger**, resolved after the current card/ability completes.
 
-**Distinction:** One multi-pool instruction produces one event (RULE-075), whereas separate instructions “Gain 3 CHAR prevention. Gain 2 SYN prevention.” produce two events (RULE-076). Different type-specific abilities can each recognize the same event if their respective type was gained; the same generic trigger does not multiply by the number of pools affected. Instructions that increase no prevention generate no gain event.
+**Distinction:** One multi-pool instruction produces one event (RULE-075), whereas separate instructions “Gain 3 BURN prevention. Gain 2 SYN prevention.” produce two events (RULE-076). Different type-specific abilities can each recognize the same event if their respective type was gained; the same generic trigger does not multiply by the number of pools affected. Instructions that increase no prevention generate no gain event.
 
 
 ## 144. RULE-078 — One gain event can trigger multiple type-specific abilities (LOCKED, 2026-11-10)
 
 **Explicit user approval:** A **single prevention-gain event** that increases multiple prevention types may satisfy **multiple distinct triggered abilities**, each of which triggers **once** if its own condition is met. This does not split the original gain instruction into multiple events. When the qualifying abilities are Runner-controlled and trigger simultaneously, the **Runner chooses their resolution order**. The originating card/ability completes before those queued triggers resolve.
 
-**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain 1 BW.” Installed Software B reads “Whenever you gain SYN prevention, draw 1 card.” The Runner plays “Gain 3 CHAR prevention and 2 SYN prevention.” This **single instruction** produces **one gain event** (RULE-077) that satisfies both conditions. Software A queues **+1 BW** and Software B queues **draw 1 card**, each **once**. The Runner chooses their order, and both resolve after the originating card finishes.
+**Canonical example:** Installed Software A reads “Whenever you gain BURN prevention, gain 1 BW.” Installed Software B reads “Whenever you gain SYN prevention, draw 1 card.” The Runner plays “Gain 3 BURN prevention and 2 SYN prevention.” This **single instruction** produces **one gain event** (RULE-077) that satisfies both conditions. Software A queues **+1 BW** and Software B queues **draw 1 card**, each **once**. The Runner chooses their order, and both resolve after the originating card finishes.
 
 **Compatibility:** Multiple distinct triggered abilities may respond to the same event (RULE-055); Runner orders simultaneous Runner-controlled triggers (RULE-011); queued triggers wait until the current effect completes and follow established queue ordering (RULE-014/015); one multi-type prevention instruction is one event (RULE-077).
 
@@ -1421,7 +1421,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** Prevention granted by a **triggered ability** counts as a new prevention-gain event, just like prevention granted by a played card or other effect. It can trigger further eligible abilities, producing **chained triggers**. Each resolving ability completes before its generated triggers resolve; newly generated triggers enter the existing **FIFO queue**. Genuinely infinite cycles are handled by existing loop detection and termination rules, without capping legitimate finite chains.
 
-**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Installed Software B reads “Whenever you gain SYN prevention, gain 1 BW.” Runner plays “Gain 3 CHAR prevention.” The 3 CHAR gain queues A. A resolves, granting 2 SYN prevention and queuing B. B subsequently resolves, granting 1 BW. Final gains: **3 CHAR prevention, 2 SYN prevention, 1 BW**, assuming no other effects.
+**Canonical example:** Installed Software A reads “Whenever you gain BURN prevention, gain 2 SYN prevention.” Installed Software B reads “Whenever you gain SYN prevention, gain 1 BW.” Runner plays “Gain 3 BURN prevention.” The 3 BURN gain queues A. A resolves, granting 2 SYN prevention and queuing B. B subsequently resolves, granting 1 BW. Final gains: **3 BURN prevention, 2 SYN prevention, 1 BW**, assuming no other effects.
 
 **Compatibility:** Triggered abilities resolve completely before their generated triggers (RULE-014); queue order is FIFO (RULE-015); infinite-loop safeguards follow RULE-016–019; gain-event granularity follows RULE-074–078.
 
@@ -1430,7 +1430,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When multiple triggers are already waiting in the **FIFO queue**, a resolving ability's newly generated trigger is appended **behind all triggers already queued**. It cannot jump ahead of a previously queued trigger. For simultaneous Runner-controlled triggers, the Runner chooses their initial ordering; that choice determines their order in the queue.
 
-**Canonical example:** Software A: “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Software B: “Whenever you gain CHAR prevention, gain 1 BW.” Software C: “Whenever you gain SYN prevention, draw 1 card.” Gaining **3 CHAR prevention** triggers A and B simultaneously. The Runner chooses **A before B**. A resolves and gains **2 SYN prevention**, queuing C **after** B. The resulting resolution order is **A → B → C**, granting 2 SYN prevention, then 1 BW, then drawing 1 card. **A → C → B is not permitted** because B was already queued.
+**Canonical example:** Software A: “Whenever you gain BURN prevention, gain 2 SYN prevention.” Software B: “Whenever you gain BURN prevention, gain 1 BW.” Software C: “Whenever you gain SYN prevention, draw 1 card.” Gaining **3 BURN prevention** triggers A and B simultaneously. The Runner chooses **A before B**. A resolves and gains **2 SYN prevention**, queuing C **after** B. The resulting resolution order is **A → B → C**, granting 2 SYN prevention, then 1 BW, then drawing 1 card. **A → C → B is not permitted** because B was already queued.
 
 **Compatibility:** Confirms FIFO queue semantics (RULE-015), simultaneous Runner trigger ordering (RULE-011), and chained triggers from prevention gains (RULE-079). Each ability resolves completely before the next queued trigger (RULE-014).
 
@@ -1439,7 +1439,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user rejection of the alternative:** A triggered ability queued by **installed Software** does **not** survive removal of its source from play. If that Software is no longer installed **when its pending trigger would resolve**, the queued trigger is **cancelled** rather than resolving. The source must remain in play for its queued ability to resolve, **unless explicit card text provides an exception**.
 
-**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Software B reads “Whenever you gain CHAR prevention, gain 1 BW.” Both trigger on a CHAR prevention gain; Runner queues A before B. During A's resolution, another effect removes Software B from play. When B's queued trigger reaches the front of the FIFO queue, **cancel B's trigger**; it grants **no BW**.
+**Canonical example:** Software A reads “Whenever you gain BURN prevention, gain 2 SYN prevention.” Software B reads “Whenever you gain BURN prevention, gain 1 BW.” Both trigger on a BURN prevention gain; Runner queues A before B. During A's resolution, another effect removes Software B from play. When B's queued trigger reaches the front of the FIFO queue, **cancel B's trigger**; it grants **no BW**.
 
 **Compatibility:** Triggers otherwise resolve FIFO (RULE-015/080). This cancellation applies to **unresolved** triggers from Software no longer installed, not to benefits already resolved. Treatment of a removed card that returns before its queued trigger would resolve is a separate open edge case.
 
@@ -1457,7 +1457,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a Software triggered ability has **already begun resolving**, removing its source Software card from play **does not interrupt or cancel the remaining instructions of that currently resolving ability**. Resolve its full instructions in order, subject to their normal conditions and costs. This differs from unresolved queued triggers, which are immediately cancelled when their source leaves play (RULE-081/082).
 
-**Canonical example:** Software A's triggered ability reads “Gain 3 CHAR prevention. Then gain 2 SYN prevention.” The ability begins resolving and grants **3 CHAR prevention**. Another effect removes Software A from play before the second instruction. The currently resolving ability still completes, granting **2 SYN prevention**. Any **other unresolved queued triggers** from A are cancelled on removal.
+**Canonical example:** Software A's triggered ability reads “Gain 3 BURN prevention. Then gain 2 SYN prevention.” The ability begins resolving and grants **3 BURN prevention**. Another effect removes Software A from play before the second instruction. The currently resolving ability still completes, granting **2 SYN prevention**. Any **other unresolved queued triggers** from A are cancelled on removal.
 
 **Compatibility:** Current effects resolve to completion (RULE-010/014); unresolved triggers are cancelled upon source leaving play (RULE-081/082). This rule does not exempt the remaining instructions from explicit conditions or costs.
 
@@ -1466,7 +1466,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** When a Software ability has **already begun resolving** and its source Software card subsequently leaves play, the ability continues under RULE-083. Any **valid game events generated by its remaining instructions** can still trigger **other eligible installed Software**, even though the original ability's source is no longer installed. Removing the source cancels its **other unresolved queued triggers** (RULE-081/082), not the already resolving ability or the validity of events it creates.
 
-**Canonical example:** Software A's ability reads “Gain 3 CHAR prevention. Then gain 2 SYN prevention.” Software B, still installed, reads “Whenever you gain SYN prevention, gain 1 BW.” A begins resolving and grants **3 CHAR prevention**. A is removed from play. A's current ability continues, granting **2 SYN prevention**. This valid SYN gain triggers B; B's queued trigger resolves after the current ability finishes and grants **1 BW**, assuming B remains eligible.
+**Canonical example:** Software A's ability reads “Gain 3 BURN prevention. Then gain 2 SYN prevention.” Software B, still installed, reads “Whenever you gain SYN prevention, gain 1 BW.” A begins resolving and grants **3 BURN prevention**. A is removed from play. A's current ability continues, granting **2 SYN prevention**. This valid SYN gain triggers B; B's queued trigger resolves after the current ability finishes and grants **1 BW**, assuming B remains eligible.
 
 **Compatibility:** In-progress abilities finish after source removal (RULE-083); other pending triggers from removed Software are cancelled (RULE-081/082); valid prevention-gain events trigger eligible abilities (RULE-078/079); generated triggers queue until current resolution completes (RULE-014/015).
 
@@ -1475,7 +1475,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** A valid trigger generated by installed Software remains **pending** until its queued ability **begins resolving**. If its source Software leaves play **before resolution begins**, the pending trigger is **cancelled immediately**, even though the event that originally generated it was valid. No benefit from that cancelled trigger is granted.
 
-**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” The Runner gains CHAR prevention and A's trigger enters the queue. Another effect removes A before its trigger begins resolving. **Cancel A's queued trigger; do not grant 2 SYN prevention.**
+**Canonical example:** Software A reads “Whenever you gain BURN prevention, gain 2 SYN prevention.” The Runner gains BURN prevention and A's trigger enters the queue. Another effect removes A before its trigger begins resolving. **Cancel A's queued trigger; do not grant 2 SYN prevention.**
 
 **Resolution boundary:** A pending queued trigger is cancelled when its source leaves play (RULE-081/082); an ability that **has already begun resolving** continues to completion after source removal (RULE-083), and events it subsequently produces may still trigger other eligible Software (RULE-084). Reinstalling the source does not revive cancelled triggers (RULE-082).
 
@@ -1484,7 +1484,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** Once an installed Software ability has **begun resolving**, removal of its source Software during that resolution **does not interrupt any remaining draw instruction**. The ability finishes normally under the established card-draw rules, including automatic reshuffling and drawing as many cards as possible when insufficient cards are available.
 
-**Canonical example:** Software A's ability reads “Gain 3 CHAR prevention. Then draw 2 cards.” After granting **3 CHAR prevention**, A is removed from play. Its already resolving ability **still draws 2 cards**, assuming at least 2 cards are available through draw/discard piles; if fewer are available, draw as many as possible under RULE-034/037.
+**Canonical example:** Software A's ability reads “Gain 3 BURN prevention. Then draw 2 cards.” After granting **3 BURN prevention**, A is removed from play. Its already resolving ability **still draws 2 cards**, assuming at least 2 cards are available through draw/discard piles; if fewer are available, draw as many as possible under RULE-034/037.
 
 **Compatibility:** Confirms that the in-progress resolution protection of RULE-083 applies to **all remaining instructions**, not only prevention gains. Pending, not-yet-resolving triggers from removed Software are still cancelled (RULE-081/082/085). Draw-generated triggers queue until the current effect completes (RULE-033/039).
 
@@ -1493,7 +1493,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** If an installed Software ability has **already begun resolving**, removing the source Software card during that resolution **does not invalidate a conditional reward** whose requirement is successfully fulfilled. The remaining instructions continue normally and the condition is evaluated based on what actually happened, not on whether the source is still installed.
 
-**Canonical example:** Software A reads “Draw 2 cards. If you do, gain 5 CHAR prevention.” During the draw, another effect removes A from play. If **both cards are actually drawn**, the “If you do” requirement is satisfied and the Runner **gains 5 CHAR prevention**. If fewer than two cards are drawn, the conditional reward **does not occur**, regardless of source removal.
+**Canonical example:** Software A reads “Draw 2 cards. If you do, gain 5 BURN prevention.” During the draw, another effect removes A from play. If **both cards are actually drawn**, the “If you do” requirement is satisfied and the Runner **gains 5 BURN prevention**. If fewer than two cards are drawn, the conditional reward **does not occur**, regardless of source removal.
 
 **Compatibility:** Conditional draws require full completion (RULE-038); draw-triggered effects wait until the card ability finishes (RULE-033/039); already resolving abilities continue after source removal (RULE-083/086). Other pending triggers from removed Software remain cancelled (RULE-081/082/085).
 
@@ -1502,7 +1502,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval:** An installed Software ability that has **already begun resolving** normally continues after its source leaves play (RULE-083), but **explicit conditions requiring that Software to remain installed** must still be satisfied at the point the condition is checked. Continuing resolution does **not** waive or override an expressly stated installed-source requirement.
 
-**Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 CHAR prevention.” The ability begins resolving, but A is removed during the draw. The Runner **still completes the draw of 2 cards** (assuming cards are available). At the conditional instruction, A is **not installed**, so the Runner gains **0 CHAR prevention**. The fact that both cards were drawn does not satisfy the distinct explicit installation condition.
+**Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 BURN prevention.” The ability begins resolving, but A is removed during the draw. The Runner **still completes the draw of 2 cards** (assuming cards are available). At the conditional instruction, A is **not installed**, so the Runner gains **0 BURN prevention**. The fact that both cards were drawn does not satisfy the distinct explicit installation condition.
 
 **Compatibility:** Already resolving abilities finish after source removal (RULE-083/086); successfully completed conditional draws remain valid when their conditions are met (RULE-087); however, explicit conditions are independently enforced (RULE-003/038). Pending queued abilities from removed Software are cancelled (RULE-081/082/085).
 
@@ -1511,7 +1511,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user decision:** **No**—removing Software A and then reinstalling it means it is considered a **new installation/card instance**, not the still-installed source of the old ability. Reinstallation cannot retroactively satisfy an explicit condition referring to the original source instance.
 
-**Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 CHAR prevention.” A's ability begins resolving; during the draw, A is removed and then reinstalled before the condition is checked. The already-started ability completes its draw under RULE-083/086, but the original installed instance has left play. The newly installed instance does **not** count as “this Software” still being installed for that original ability. **No 5 CHAR prevention is granted.**
+**Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 BURN prevention.” A's ability begins resolving; during the draw, A is removed and then reinstalled before the condition is checked. The already-started ability completes its draw under RULE-083/086, but the original installed instance has left play. The newly installed instance does **not** count as “this Software” still being installed for that original ability. **No 5 BURN prevention is granted.**
 
 **Identity clarification:** Reinstallation creates a new **installed instance**, not a new physical card or card copy. It does not restore cancelled pending triggers (RULE-082), reset consumed global limits (RULE-059/060/065), or contradict the rule that temporarily removing/reinstalling the same Software card does not reset consumed activation limits (RULE-066). The current-resolution protection (RULE-083) does not preserve source identity for explicit installation conditions (RULE-088).
 
@@ -1632,7 +1632,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Scope and precedence:** This general rule **does not freeze continuous effects**, override **explicit card or rule timing instructions**, bypass **costs or conditions**, or change **resource expenditure and consumption priorities**. More-specific locked rules and explicit applicable card text take precedence. In particular, continuous Software effects continue updating under RULE-090–095; costs and conditions remain governed by RULE-003/038/071; and eligible resource consumption continues under RULE-004–006. Existing trigger ordering and FIFO resolution are unchanged.
 
-**Illustrative example (not a finalized card):** An ability reads “Gain CHAR prevention equal to your current Trace. Reduce Trace by 2. Gain CHAR prevention equal to your current Trace.” If Trace is 6 when the first instruction begins, the first gain is **6**; after Trace falls to 4, the second distinct gain is **4**, unless more-specific rules or card text direct otherwise. Changing Trace during an individual instruction does not retroactively change that instruction's already calculated amount.
+**Illustrative example (not a finalized card):** An ability reads “Gain BURN prevention equal to your current Trace. Reduce Trace by 2. Gain BURN prevention equal to your current Trace.” If Trace is 6 when the first instruction begins, the first gain is **6**; after Trace falls to 4, the second distinct gain is **4**, unless more-specific rules or card text direct otherwise. Changing Trace during an individual instruction does not retroactively change that instruction's already calculated amount.
 
 **Conflict review:** Extends RULE-098–101's per-instruction snapshot model beyond DRAW while preserving RULE-010 (printed order), RULE-008/009 (sequential snapshot prevention multipliers), and RULE-072 (copied abilities use current state). **No override of the cited locked mechanics is authorized by this rule.** Future edge cases with more-specific instructions must be evaluated against those rules rather than silently generalized.
 
@@ -1641,7 +1641,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Explicit user approval — Option A, after conflict check:** When **one discrete instruction** says to perform a variable-numeric calculation **for each** eligible object, snapshot the referenced variable numeric value **once, when that instruction begins resolving**, and use that same value for every object processed under that instruction. Do **not** recalculate the variable between objects merely because processing is sequential. A subsequent **separate instruction** takes its own snapshot under RULE-102.
 
-**Illustrative example (not finalized card text):** “For each installed Software card, gain CHAR prevention equal to your current Trace.” With three eligible Software cards and Trace **6** at instruction start, each per-card calculation uses **6**. If an otherwise legally permitted effect changes Trace to **4** during processing, the remaining calculations under this **same instruction** still use **6**. This example does **not** authorize ordinary queued triggers to interrupt the current instruction or ability; under RULE-014/015, such triggers wait until the current effect completes.
+**Illustrative example (not finalized card text):** “For each installed Software card, gain BURN prevention equal to your current Trace.” With three eligible Software cards and Trace **6** at instruction start, each per-card calculation uses **6**. If an otherwise legally permitted effect changes Trace to **4** during processing, the remaining calculations under this **same instruction** still use **6**. This example does **not** authorize ordinary queued triggers to interrupt the current instruction or ability; under RULE-014/015, such triggers wait until the current effect completes.
 
 **Compatibility / conflict check:** Clarifies RULE-102's instruction-level snapshot; preserves RULE-010 printed order, RULE-014/015 uninterrupted effect resolution and FIFO queue, and RULE-098's fixed per-instruction draw target. It does **not** change event counting or trigger granularity for prevention gains under RULE-074–077, nor alter eligibility, costs, conditions, continuous-effect updates, or resource expenditure priority. **No existing locked rule is overridden.**
 
@@ -1652,7 +1652,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 **Eligibility protections and precedence:** Membership in the initial processing set **does not establish or preserve eligibility for any separate explicit condition, cost, requirement to remain installed/in play, or source-dependent effect** checked later. Evaluate those requirements at their applicable times under existing rules. In particular, explicit installed-status conditions remain enforceable (RULE-088), continuous effects from departed installed instances end immediately (RULE-090), and source-removal/cancellation boundaries remain RULE-081–089. If a required action becomes impossible, apply existing partial-fulfillment and cost/condition rules (RULE-002/003); do not create benefits from ineligible or nonexistent sources. More-specific rules or card text take precedence.
 
-**Illustrative example (not finalized card text):** “For each installed Software card, gain 2 CHAR prevention.” If A, B, and C are installed when the instruction starts, the processing set is **{A, B, C}**. An ordinary triggered removal of C generated during resolution waits until the current ability completes (RULE-014/015), so all three contribute normally. If an otherwise legally permitted mid-instruction event removes C, C remains in the original processing list, **but** any explicitly required installed-status condition or source-dependent effect must still be satisfied when checked; this rule alone does not guarantee its benefit.
+**Illustrative example (not finalized card text):** “For each installed Software card, gain 2 BURN prevention.” If A, B, and C are installed when the instruction starts, the processing set is **{A, B, C}**. An ordinary triggered removal of C generated during resolution waits until the current ability completes (RULE-014/015), so all three contribute normally. If an otherwise legally permitted mid-instruction event removes C, C remains in the original processing list, **but** any explicitly required installed-status condition or source-dependent effect must still be satisfied when checked; this rule alone does not guarantee its benefit.
 
 **Conflict check:** Compatible with RULE-010, RULE-014/015, RULE-083/088, RULE-090, and RULE-102/103. The fixed **object set** is distinct from RULE-103's fixed **numeric value**. Does not alter event counting, trigger timing, continuous-effect recalculation, or costs. **No existing locked rule is overridden.**
 
@@ -1667,7 +1667,7 @@ Multiple separately written prevention-gain instructions continue to produce sep
 
 Generated triggers wait until the originating ability finishes and resolve under the established FIFO queue.
 
-**Illustrative application (not finalized card text):** “For each installed Software card, gain 2 CHAR prevention.” With three eligible installed Software cards, gain **6 CHAR prevention** and produce **one** prevention-gain event. An installed “Whenever you gain CHAR prevention, gain 1 BW” ability triggers **once** and grants **1 BW** when it resolves, subject to its limits. Two separate qualifying “for each” instructions instead generate **two** events under RULE-076.
+**Illustrative application (not finalized card text):** “For each installed Software card, gain 2 BURN prevention.” With three eligible installed Software cards, gain **6 BURN prevention** and produce **one** prevention-gain event. An installed “Whenever you gain BURN prevention, gain 1 BW” ability triggers **once** and grants **1 BW** when it resolves, subject to its limits. Two separate qualifying “for each” instructions instead generate **two** events under RULE-076.
 
 **Conflict check:** Consistent with RULE-074/075/077 (one qualifying gain-producing instruction/event), RULE-076 (distinct instructions are distinct events), RULE-078/055 (distinct abilities independently recognize one event), RULE-079 (chained prevention-gain triggers), and RULE-014/015 (deferred FIFO triggers). RULE-103/104 continue to govern the instruction's numerical snapshot and eligible-object set. **No existing locked rule is overridden.**
 
@@ -1714,7 +1714,7 @@ Threshold qualification does **not interrupt** the resolving instruction or abil
 
 This rule does **not** override individual draw events, reshuffles, draw replacements, damage-application mechanics, explicit per-object triggers, costs, conditions, or more-specific locked rules.
 
-**Illustrative example (not finalized card text):** “For each installed Software card, gain 2 CHAR prevention.” With three eligible cards, the instruction actually gains **6 CHAR prevention** and generates **one aggregate event**. An eligible “Whenever you gain at least 5 CHAR prevention in a single event, gain 2 BW” ability qualifies **once**, granting **2 BW** when it resolves (subject to applicable restrictions). If the instruction actually gains only **4 CHAR prevention**, the threshold is not met, regardless of any higher attempted amount.
+**Illustrative example (not finalized card text):** “For each installed Software card, gain 2 BURN prevention.” With three eligible cards, the instruction actually gains **6 BURN prevention** and generates **one aggregate event**. An eligible “Whenever you gain at least 5 BURN prevention in a single event, gain 2 BW” ability qualifies **once**, granting **2 BW** when it resolves (subject to applicable restrictions). If the instruction actually gains only **4 BURN prevention**, the threshold is not met, regardless of any higher attempted amount.
 
 **Conflict check:** Consistent with RULE-102/103 (numeric snapshots), RULE-104 (eligible-object set), RULE-105/106 (aggregate-event identity), RULE-107 (actual reported magnitude), RULE-014/015 (deferred FIFO timing), RULE-054/055/078 (independent triggered abilities), and RULE-020/026 (frequency limits). Specific draw, reshuffle, replacement, damage, cost and condition rules retain precedence. **No existing locked rule is overridden.**
 
@@ -1735,7 +1735,7 @@ Do **not** snapshot variable reward quantities when the trigger enters the queue
 
 Triggered abilities continue to resolve under the established **FIFO queue**. This rule does **not** change event identity, event counting, or the existing individual-event exceptions.
 
-**Illustrative example (not finalized card text):** Installed Software reads “Whenever you gain at least 5 CHAR prevention in a single event, gain BW equal to your current Trace.” The Runner gains **6 CHAR prevention** while Trace is **8**: the event qualifies and the trigger is queued. Before the trigger resolves, another effect reduces Trace to **3**. If the trigger survives all applicable source and condition checks, its BW-gain instruction uses Trace **3** and attempts to grant **3 BW**, subject to applicable restrictions. The original event's +6 CHAR magnitude and qualification remain unchanged.
+**Illustrative example (not finalized card text):** Installed Software reads “Whenever you gain at least 5 BURN prevention in a single event, gain BW equal to your current Trace.” The Runner gains **6 BURN prevention** while Trace is **8**: the event qualifies and the trigger is queued. Before the trigger resolves, another effect reduces Trace to **3**. If the trigger survives all applicable source and condition checks, its BW-gain instruction uses Trace **3** and attempts to grant **3 BW**, subject to applicable restrictions. The original event's +6 BURN magnitude and qualification remain unchanged.
 
 **Conflict check:** Compatible with RULE-014/015 (FIFO timing), RULE-054/055 (independent triggers), RULE-081/082/085 (source-removal cancellation), RULE-083/088 (resolving abilities and explicit installed conditions), RULE-098–103 (instruction-time numerical snapshots), RULE-107/109 (aggregate event magnitude and thresholds), and RULE-020/026 (frequency limits). **No existing locked rule is overridden.** RULE-108 mixed-direction event accounting remains **deferred and unlocked**.
 
@@ -1744,7 +1744,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a triggered ability's reward explicitly refers to **the amount gained in the event that triggered it**, use that event's **recorded actual magnitude**, even if the relevant current resource pool changes before the queued trigger resolves. The event's magnitude is established when the event occurs under RULE-107/109 and is not recalculated from the current pool. This is distinct from a reward expressly referring to a **current** game-state quantity, which is evaluated at instruction resolution under RULE-110.
 
-**Canonical example:** Installed Software A reads “Whenever you gain at least 5 CHAR prevention in a single event, gain BW equal to the amount of CHAR prevention gained in that event.” The Runner gains **6 CHAR prevention**, qualifying the event and queuing A's trigger. Before that trigger resolves, the current CHAR prevention pool falls to **2**. If the queued trigger remains eligible to resolve, its reward attempts to grant **6 BW** (subject to applicable BW restrictions), **not 2 BW**, because the instruction references the recorded original event's gain.
+**Canonical example:** Installed Software A reads “Whenever you gain at least 5 BURN prevention in a single event, gain BW equal to the amount of BURN prevention gained in that event.” The Runner gains **6 BURN prevention**, qualifying the event and queuing A's trigger. Before that trigger resolves, the current BURN prevention pool falls to **2**. If the queued trigger remains eligible to resolve, its reward attempts to grant **6 BW** (subject to applicable BW restrictions), **not 2 BW**, because the instruction references the recorded original event's gain.
 
 **Compatibility:** RULE-107 fixes the actual magnitude of an aggregate event; RULE-109 checks thresholds against that magnitude; RULE-110 fixes event-time qualification but evaluates current-state variables at instruction time. Explicit event-referenced quantities are event properties, not current-state variables. Source-removal cancellation (RULE-081/082/085), costs, conditions, frequency limits, and FIFO timing remain unchanged. This rule does not resolve deferred RULE-108.
 
@@ -1753,7 +1753,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a triggered ability calculates a numerical reward from **the amount gained in its triggering event**, use the event's **original recorded actual gain**, even if the current resource pool has changed before the trigger resolves. Mathematical transformations of that event-referenced amount (including division and explicitly stated rounding) operate on the original event magnitude, not the remaining pool.
 
-**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to half the CHAR prevention gained in that event, rounded down.” The Runner gains **7 CHAR prevention** and A's trigger is queued. Before resolution, **5 CHAR prevention** is lost, leaving **2**. If A's trigger remains eligible to resolve, it attempts to grant **floor(7 / 2) = 3 BW**, not floor(2 / 2) = 1 BW, subject to applicable BW restrictions.
+**Canonical example:** Software A reads “Whenever you gain BURN prevention, gain BW equal to half the BURN prevention gained in that event, rounded down.” The Runner gains **7 BURN prevention** and A's trigger is queued. Before resolution, **5 BURN prevention** is lost, leaving **2**. If A's trigger remains eligible to resolve, it attempts to grant **floor(7 / 2) = 3 BW**, not floor(2 / 2) = 1 BW, subject to applicable BW restrictions.
 
 **Compatibility:** Extends RULE-111's event-referenced quantities; preserves RULE-107's recorded actual magnitude, RULE-110's distinction between event properties and current-state variables, and existing source-removal cancellation, costs, conditions, and FIFO timing. No general rounding convention beyond the card's explicit “rounded down” text is established.
 
@@ -1762,7 +1762,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a triggered ability computes a reward using the **original recorded magnitude of the triggering event**, any **explicit maximum on that reward** is applied to the result. Changes to the current resource pool after the triggering event do not alter the recorded event magnitude or the reward calculation. This card-specific maximum does not establish a universal BW cap.
 
-**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a maximum of 5 BW.” The Runner gains **8 CHAR prevention**, triggering A. Before A's queued trigger resolves, the Runner's current CHAR prevention pool falls to **3**. If the trigger remains eligible to resolve, the reward is **min(8, 5) = 5 BW**, subject to other applicable resource restrictions, **not 3 or 8 BW**.
+**Canonical example:** Installed Software A reads “Whenever you gain BURN prevention, gain BW equal to the amount gained in that event, to a maximum of 5 BW.” The Runner gains **8 BURN prevention**, triggering A. Before A's queued trigger resolves, the Runner's current BURN prevention pool falls to **3**. If the trigger remains eligible to resolve, the reward is **min(8, 5) = 5 BW**, subject to other applicable resource restrictions, **not 3 or 8 BW**.
 
 **Compatibility:** RULE-111 preserves the triggering event's original actual magnitude for event-referenced rewards; RULE-112 applies arithmetic to that recorded magnitude; RULE-110 distinguishes event properties from current-state variables. Trigger eligibility, source-removal cancellation, conditions, costs and FIFO timing remain unchanged. RULE-108 remains deferred.
 
@@ -1771,7 +1771,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a triggered ability computes a reward using the **original recorded magnitude of the triggering event**, any **explicit minimum on that reward** applies after the event-referenced amount is determined. Subsequent changes to the current resource pool do not alter the triggering event's recorded magnitude or the resulting minimum-adjusted reward. A card-specific minimum does not establish a universal minimum BW gain.
 
-**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a minimum of 3 BW.” The Runner gains **1 CHAR prevention**, triggering A. Before A's queued trigger resolves, the current CHAR prevention pool rises to **6** through another effect. If A's trigger remains eligible to resolve, it attempts to grant **max(1, 3) = 3 BW**, subject to applicable resource restrictions, **not 1 or 6 BW**.
+**Canonical example:** Installed Software A reads “Whenever you gain BURN prevention, gain BW equal to the amount gained in that event, to a minimum of 3 BW.” The Runner gains **1 BURN prevention**, triggering A. Before A's queued trigger resolves, the current BURN prevention pool rises to **6** through another effect. If A's trigger remains eligible to resolve, it attempts to grant **max(1, 3) = 3 BW**, subject to applicable resource restrictions, **not 1 or 6 BW**.
 
 **Compatibility:** RULE-111 preserves the original recorded event magnitude; RULE-112 permits arithmetic using that magnitude; RULE-113 applies explicit maximums. RULE-110 continues to govern distinct current-state variables. Existing trigger timing, eligibility, source-removal cancellation, costs and conditions remain unchanged. RULE-108 remains deferred.
 
@@ -1780,7 +1780,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a triggered ability bases its reward on the **original recorded actual magnitude of its triggering event** and states both a **minimum and maximum** reward, compute the event-based reward and then constrain it to the stated inclusive range. This combines RULE-113 and RULE-114; it does not change the event's recorded magnitude or establish general resource caps.
 
-**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a minimum of 2 BW and a maximum of 5 BW.” If the triggering event actually gained **1 CHAR prevention**, attempt to grant **2 BW**; if **3 CHAR**, grant **3 BW**; if **8 CHAR**, grant **5 BW**. Formula: **min(5, max(2, original event CHAR gain))**, subject to applicable resource restrictions.
+**Canonical example:** Software A reads “Whenever you gain BURN prevention, gain BW equal to the amount gained in that event, to a minimum of 2 BW and a maximum of 5 BW.” If the triggering event actually gained **1 BURN prevention**, attempt to grant **2 BW**; if **3 BURN**, grant **3 BW**; if **8 BURN**, grant **5 BW**. Formula: **min(5, max(2, original event BURN gain))**, subject to applicable resource restrictions.
 
 **Compatibility:** RULE-107/111 preserve recorded actual event magnitude; RULE-112 permits arithmetic based on that magnitude; RULE-113 and RULE-114 establish explicit maxima and minima. RULE-110 continues to govern separately referenced current-state variables. Trigger eligibility, cancellation, costs, conditions, FIFO timing and the deferred status of RULE-108 remain unchanged.
 
@@ -1789,7 +1789,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a triggered ability calculates a reward by combining an **event-referenced magnitude** with an explicitly **current game-state quantity**, each input follows its own timing rule: use the **original recorded actual magnitude** of the triggering event (RULE-107/111), but evaluate the **current** quantity at the **start of the discrete reward instruction** (RULE-102/110). Apply the printed arithmetic to those values. Later resource changes do not rewrite the triggering event; earlier values of current-state variables are not snapshotted at trigger time.
 
-**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event multiplied by your current Trace.” Runner gains **3 CHAR prevention** at **Trace 4**, triggering A. Before its queued trigger resolves, Trace rises to **6**. If the trigger remains eligible, the reward attempts to grant **3 × 6 = 18 BW**, not 12 BW, subject to applicable resource restrictions.
+**Canonical example:** Installed Software A reads “Whenever you gain BURN prevention, gain BW equal to the amount gained in that event multiplied by your current Trace.” Runner gains **3 BURN prevention** at **Trace 4**, triggering A. Before its queued trigger resolves, Trace rises to **6**. If the trigger remains eligible, the reward attempts to grant **3 × 6 = 18 BW**, not 12 BW, subject to applicable resource restrictions.
 
 **Compatibility:** Preserves RULE-110's resolution-time current-value evaluation, RULE-111/112's original event-referenced magnitude, RULE-102/103's per-instruction value snapshot, and existing FIFO, eligibility, costs, conditions, source-removal cancellation. RULE-108 remains deferred.
 
@@ -1798,7 +1798,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a Software ability triggers “whenever” a qualifying event occurs, **each distinct qualifying event** generates its **own trigger instance** and retains its **own recorded actual event magnitude**, provided the source remains eligible and no applicable frequency limit or other restriction prevents the trigger. Do not merge separate events merely because their queued triggers have not yet resolved. Each queued trigger resolves independently in the existing FIFO order.
 
-**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event.” The Runner gains **3 CHAR prevention**, creating a qualifying event and a queued trigger for **3 BW**. Before it resolves, another effect grants **5 CHAR prevention**, a distinct qualifying event queuing another trigger for **5 BW**. If both triggers remain eligible, they separately attempt to grant **3 BW then 5 BW** in FIFO order, subject to applicable BW restrictions, **not one merged 8 BW trigger**.
+**Canonical example:** Installed Software A reads “Whenever you gain BURN prevention, gain BW equal to the amount gained in that event.” The Runner gains **3 BURN prevention**, creating a qualifying event and a queued trigger for **3 BW**. Before it resolves, another effect grants **5 BURN prevention**, a distinct qualifying event queuing another trigger for **5 BW**. If both triggers remain eligible, they separately attempt to grant **3 BW then 5 BW** in FIFO order, subject to applicable BW restrictions, **not one merged 8 BW trigger**.
 
 **Compatibility:** RULE-076 distinguishes separate gain instructions/events; RULE-105/106 aggregate gains that form a single instruction's event; RULE-107/109 establish actual event magnitudes and threshold qualification; RULE-111/112 preserve event-referenced quantities; RULE-014/015/080 govern FIFO, and RULE-020–027 and RULE-081/082/085 govern limits and cancellation. RULE-108 remains deferred.
 
@@ -1807,7 +1807,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When distinct qualifying events queue separate instances of a triggered ability whose reward combines **the magnitude of that specific triggering event** with a **current game-state variable**, each trigger retains its **own event's original recorded actual magnitude** and evaluates the current-state operand **independently at the start of its own discrete reward instruction**. A change in the current variable between resolutions affects later triggers but does not retroactively change earlier rewards or event magnitudes.
 
-**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event plus your current Trace.” Event 1 gains **3 CHAR prevention** and event 2 gains **5 CHAR prevention**, queuing two separate triggers. At the first reward instruction, Trace is **4**, so that trigger attempts to grant **3 + 4 = 7 BW**. Before the second reward instruction, Trace increases to **6**, so the second attempts to grant **5 + 6 = 11 BW**. Total attempted BW gain is **18 BW**, if both resolve and applicable resource restrictions permit it.
+**Canonical example:** Software A reads “Whenever you gain BURN prevention, gain BW equal to the amount gained in that event plus your current Trace.” Event 1 gains **3 BURN prevention** and event 2 gains **5 BURN prevention**, queuing two separate triggers. At the first reward instruction, Trace is **4**, so that trigger attempts to grant **3 + 4 = 7 BW**. Before the second reward instruction, Trace increases to **6**, so the second attempts to grant **5 + 6 = 11 BW**. Total attempted BW gain is **18 BW**, if both resolve and applicable resource restrictions permit it.
 
 **Compatibility:** RULE-102/103 govern per-instruction snapshots; RULE-107/111 fix event-referenced actual magnitudes; RULE-110/116 evaluate current-state operands at resolution; RULE-117 retains separate triggers for separate events. FIFO ordering, eligibility, costs, conditions, frequency limits, source-removal cancellation and the deferred status of RULE-108 remain unchanged.
 
@@ -1816,7 +1816,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a triggered ability contains multiple **discrete instructions** that each reference a **current game-state variable**, evaluate that variable independently **at the start of each instruction**, under RULE-102/103. Do not snapshot the variable once for the whole ability. If an intervening change is legally permitted under the existing resolution/timing rules, the later instruction uses the updated value. This rule **does not create an interruption window** between instructions.
 
-**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to your current Trace. Then gain CHAR prevention equal to your current Trace.” After the qualifying event, the first reward instruction begins at **Trace 4**, so it attempts to grant **4 BW**. Assuming a legally permitted intervening effect changes Trace to **6** before the second instruction begins, the second instruction attempts to grant **6 CHAR prevention**, not 4. All applicable resource restrictions and existing timing rules still apply.
+**Canonical example:** Software A reads “Whenever you gain BURN prevention, gain BW equal to your current Trace. Then gain BURN prevention equal to your current Trace.” After the qualifying event, the first reward instruction begins at **Trace 4**, so it attempts to grant **4 BW**. Assuming a legally permitted intervening effect changes Trace to **6** before the second instruction begins, the second instruction attempts to grant **6 BURN prevention**, not 4. All applicable resource restrictions and existing timing rules still apply.
 
 **Compatibility:** Clarifies RULE-102/103 and RULE-110's per-discrete-instruction resolution-time evaluation. Does not alter RULE-010 printed instruction order, RULE-014/015 FIFO timing, eligibility, costs, conditions, source-removal cancellation, or deferred RULE-108.
 
@@ -1825,7 +1825,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** Resolve a card or ability's discrete instructions in their printed order **without an automatic interruption window between them**. An intervening effect may occur only where an existing timing rule or explicit card text permits it. Newly generated triggered abilities remain queued until the current ability finishes resolving, following the existing FIFO rules. RULE-102/103/119 still require current-state quantities to be evaluated independently at the start of each discrete instruction; those rules **do not themselves permit an interruption**.
 
-**Canonical example:** Software A reads “Gain 4 BW. Then gain CHAR prevention equal to your current Trace.” Trace is **4** when A starts resolving. The first instruction attempts to grant **4 BW**. With no legally permitted intervening effect that changes Trace, the next instruction immediately uses **Trace 4** and attempts to grant **4 CHAR prevention**. Any triggers created during either instruction wait until A finishes, subject to existing timing, eligibility and resource restrictions.
+**Canonical example:** Software A reads “Gain 4 BW. Then gain BURN prevention equal to your current Trace.” Trace is **4** when A starts resolving. The first instruction attempts to grant **4 BW**. With no legally permitted intervening effect that changes Trace, the next instruction immediately uses **Trace 4** and attempts to grant **4 BURN prevention**. Any triggers created during either instruction wait until A finishes, subject to existing timing, eligibility and resource restrictions.
 
 **Compatibility:** Preserves RULE-010's printed order, RULE-014/015's queued-trigger timing and FIFO, RULE-102/103/119's per-instruction value evaluation, and all existing explicit exceptions. Does not create or remove any otherwise permitted interruption, nor resolve deferred RULE-108.
 
@@ -1834,7 +1834,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When one discrete instruction changes a game-state variable, a subsequent discrete instruction in the same resolving ability that refers to the **current** value of that variable uses the **updated game state** as it exists when that later instruction begins. Evaluate instructions in printed order; do not freeze the variable at ability start. This does not create an interruption window between ordinary instructions.
 
-**Canonical example:** Software A reads “Increase your Trace by 2. Then gain CHAR prevention equal to your current Trace.” The Runner begins at **Trace 3**. The first instruction increases Trace to **5**. The second instruction then attempts to grant **5 CHAR prevention**, using Trace 5 at the start of that instruction, subject to applicable restrictions.
+**Canonical example:** Software A reads “Increase your Trace by 2. Then gain BURN prevention equal to your current Trace.” The Runner begins at **Trace 3**. The first instruction increases Trace to **5**. The second instruction then attempts to grant **5 BURN prevention**, using Trace 5 at the start of that instruction, subject to applicable restrictions.
 
 **Compatibility:** RULE-010 governs printed instruction order; RULE-102/103/119 govern per-discrete-instruction current-value snapshots; RULE-120 forbids automatic interruption windows. Trigger timing, eligibility, resource limits, costs, conditions, source-removal cancellation and deferred RULE-108 remain unchanged.
 
@@ -1843,7 +1843,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When an earlier discrete instruction **reduces** a game-state variable, a subsequent discrete instruction in the same resolving ability that refers to that variable's **current** value uses the **actual reduced value** as it exists at the start of the later instruction. Apply the same per-instruction current-state evaluation to decreases as to increases under RULE-121; do not snapshot the variable at ability start.
 
-**Canonical example:** Software A reads “Reduce your Trace by 2. Then gain CHAR prevention equal to your current Trace.” The Runner begins at **Trace 5**. The first instruction reduces Trace to **3**. The second instruction then attempts to grant **3 CHAR prevention**, not 5, subject to applicable restrictions.
+**Canonical example:** Software A reads “Reduce your Trace by 2. Then gain BURN prevention equal to your current Trace.” The Runner begins at **Trace 5**. The first instruction reduces Trace to **3**. The second instruction then attempts to grant **3 BURN prevention**, not 5, subject to applicable restrictions.
 
 **Compatibility:** Preserves RULE-010 printed instruction order, RULE-102/103/119 per-instruction current-value snapshots, RULE-120 no automatic interruption, and RULE-121 updated values from earlier instructions. Existing resource floors/caps, trigger timing, costs, conditions, eligibility, source-removal cancellation and deferred RULE-108 remain unchanged.
 
@@ -1852,7 +1852,7 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 **Explicit user approval:** When a later discrete instruction refers to **the amount of a resource actually changed by an earlier instruction**, use the **actual change that occurred**, after applying applicable resource floors, caps, prevention, and other restrictions—not the printed or attempted change amount. The recorded actual change from that earlier instruction remains the referent even when the attempted amount exceeds what can occur.
 
-**Canonical example:** Software A reads “Reduce your Trace by 5. Then gain CHAR prevention equal to the amount of Trace actually reduced.” The Runner begins at **Trace 3**, and Trace cannot fall below **0**. The first instruction attempts to reduce Trace by 5 but actually reduces it by **3**, leaving Trace **0**. The second instruction attempts to grant **3 CHAR prevention**, not 5, subject to applicable restrictions.
+**Canonical example:** Software A reads “Reduce your Trace by 5. Then gain BURN prevention equal to the amount of Trace actually reduced.” The Runner begins at **Trace 3**, and Trace cannot fall below **0**. The first instruction attempts to reduce Trace by 5 but actually reduces it by **3**, leaving Trace **0**. The second instruction attempts to grant **3 BURN prevention**, not 5, subject to applicable restrictions.
 
 **Compatibility:** RULE-107 distinguishes actual from attempted event magnitudes; RULE-010 preserves printed instruction order; RULE-102/103/119 evaluate numerical quantities at each discrete instruction; RULE-121/122 apply updated game state to later instructions. Existing trigger timing, costs, conditions, eligibility, resource limits, source-removal cancellation, and deferred RULE-108 remain unchanged.
 
@@ -1883,9 +1883,12 @@ Resolve SYN X in this order:
 | 3 | 0 | 0 | 6 |
 | 5 | 2 | 2 | 6 |
 
-**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. BURN remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
 
 **Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
 
 
 **Terminology lock (2026-11-11):** **Vitae** is the canonical Runner health resource (abbreviated **VIT** in the World Bible). The former health-resource term is deprecated. **BURN damage** reduces Vitae. This terminology update does not itself change damage-resolution mechanics.
+
+
+**Damage terminology lock (2026-11-11):** **CHAR** is deprecated and replaced by **BURN damage**. **BURN X reduces Runner Vitae by X**, subject to applicable BURN prevention. Earlier CHAR labels, examples, and prevention-pool references in this document are to be read as BURN. SYN remains mandatory Runner-selected discard with its approved overflow rule; VOID remains distinct. This is a terminology replacement, not an additional damage type.
