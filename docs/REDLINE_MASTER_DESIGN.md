@@ -1828,3 +1828,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Gain 4 BW. Then gain CHAR prevention equal to your current Trace.” Trace is **4** when A starts resolving. The first instruction attempts to grant **4 BW**. With no legally permitted intervening effect that changes Trace, the next instruction immediately uses **Trace 4** and attempts to grant **4 CHAR prevention**. Any triggers created during either instruction wait until A finishes, subject to existing timing, eligibility and resource restrictions.
 
 **Compatibility:** Preserves RULE-010's printed order, RULE-014/015's queued-trigger timing and FIFO, RULE-102/103/119's per-instruction value evaluation, and all existing explicit exceptions. Does not create or remove any otherwise permitted interruption, nor resolve deferred RULE-108.
+
+
+## 186. RULE-121 — Earlier instructions update current values for later calculations (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When one discrete instruction changes a game-state variable, a subsequent discrete instruction in the same resolving ability that refers to the **current** value of that variable uses the **updated game state** as it exists when that later instruction begins. Evaluate instructions in printed order; do not freeze the variable at ability start. This does not create an interruption window between ordinary instructions.
+
+**Canonical example:** Software A reads “Increase your Trace by 2. Then gain CHAR prevention equal to your current Trace.” The Runner begins at **Trace 3**. The first instruction increases Trace to **5**. The second instruction then attempts to grant **5 CHAR prevention**, using Trace 5 at the start of that instruction, subject to applicable restrictions.
+
+**Compatibility:** RULE-010 governs printed instruction order; RULE-102/103/119 govern per-discrete-instruction current-value snapshots; RULE-120 forbids automatic interruption windows. Trigger timing, eligibility, resource limits, costs, conditions, source-removal cancellation and deferred RULE-108 remain unchanged.
