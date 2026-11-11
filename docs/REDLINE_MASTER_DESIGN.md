@@ -1050,3 +1050,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** “Draw 3 cards. If you do, gain 5 CHAR prevention.” The Runner replaces one of the three draws with **2 CHAR prevention**, and actually draws the other two cards. Result: **2 cards drawn**, **2 CHAR prevention** from the replacement, and **no 5 CHAR prevention conditional reward**, because the full draw instruction was not satisfied.
 
 **Compatibility:** Draw-generated triggers only arise from cards actually drawn (RULE-040); the multi-card draw operation otherwise remains uninterrupted and its queued triggers resolve afterward (RULE-033/039). **OPEN:** Interaction among multiple competing replacement effects for the same would-be draw event.
+
+
+## 108. RULE-042 — Choose one competing draw replacement per event (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When **multiple optional replacement effects** could replace the **same would-be card draw**, the Runner chooses **at most one** of those replacement effects for that draw. The Runner may instead choose to **draw the card normally**. Applying one replacement consumes/replaces that draw event; the other replacement effects cannot also claim benefits from that same draw.
+
+**Canonical example:** Installed Card A: “Whenever you would draw a card, you may gain 2 CHAR prevention instead.” Installed Card B: “Whenever you would draw a card, you may gain 1 BW instead.” For each would-be draw, choose exactly one of: (a) actually draw one card; (b) gain **2 CHAR prevention** instead; or (c) gain **1 BW** instead. **Never gain both replacement benefits for the same draw.**
+
+**Multiple-card draws:** Make the replacement choice independently for **each individual would-be draw**, while preserving uninterrupted resolution of the overall draw operation and deferring ordinary triggers until afterward (RULE-033/040).
+
+**Compatibility:** A replaced draw does not count as a card actually drawn for conditional draw rewards (RULE-041). **OPEN:** Mandatory replacement effects and precedence between mandatory and optional replacements, if introduced.
