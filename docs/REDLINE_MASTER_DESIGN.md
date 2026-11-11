@@ -816,3 +816,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** If a loop generated **10 CHAR prevention** before being detected, that 10 remains; the nonterminating cycle is stopped; unrelated pending triggers continue to resolve.
 
 **OPEN implementation detail:** The exact detection algorithm and how the engine identifies the minimal set of cycle-perpetuating queued triggers to cancel remain to be designed. The required observable behavior above is LOCKED.
+
+
+## 84. RULE-018 — Notify player when infinite trigger loop is terminated (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When REDLINE detects and terminates an infinite trigger cycle under RULE-016/017, show the player a **brief, informative notification** identifying the involved cards or effects and indicating that the repeating interaction was stopped. The notification should not unnecessarily interrupt play. Previously resolved effects remain preserved, and unrelated pending triggers continue normally. Record sufficient diagnostic information to help investigate unexpected card interactions during playtesting.
+
+**Illustrative notification:** “TRIGGER LOOP TERMINATED — Repeating interaction detected between [Card A] and [Card B]. Previously resolved effects preserved; unrelated effects continue.”
+
+**OPEN:** Exact UI presentation, notification duration, and diagnostic log format.
