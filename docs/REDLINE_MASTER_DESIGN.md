@@ -780,3 +780,12 @@ A card may explicitly prevent multiple named damage types, but protection agains
 Within each side's group of simultaneous triggers, that side chooses their order (RULE-011 for Runner, RULE-012 for Corporation). Each trigger resolves completely before the next, with instructions in printed order (RULE-010). This ordering rule does **not** permit out-of-turn card plays; SOFT-011 remains in force.
 
 **OPEN:** Exact handling of new triggers generated while another trigger is resolving (nested triggers/queue priority), if relevant.
+
+
+## 80. RULE-014 — Chained triggers queue until current effect finishes (LOCKED, 2026-11-10)
+
+**Explicit user approval:** If resolving an effect causes another effect to trigger, the newly triggered effect **does not interrupt** the currently resolving effect. Instead, it enters a **pending trigger queue**. Finish **all instructions of the current effect in printed order** (RULE-010), then resolve pending triggers according to existing controller and active-side priority rules (RULE-011/012/013). Each triggered effect likewise resolves fully before proceeding to the next. No reactive Runner card play is permitted during the Corporation turn (SOFT-011).
+
+**Illustration:** Starting at 0 CHAR prevention, a played card says **“Gain 3 CHAR prevention. Double your CHAR prevention.”** Installed Software triggers on gaining CHAR prevention and grants +2 CHAR prevention. The +2 trigger waits while the played card resolves: **0 → 3 → 6**, then the queued +2 resolves to **8**. It does not interrupt between gaining 3 and doubling, which would have produced 10.
+
+**OPEN:** Detailed queue policy for newly generated triggers while other triggers are queued, especially whether newly generated triggers are inserted ahead of or behind existing pending triggers, subject to RULE-011/012/013.
