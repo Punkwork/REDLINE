@@ -703,3 +703,12 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Relationship:** RULE-005 refines RULE-004's temporary-before-ongoing rule: priority is determined by **earliest expiration**, not merely a binary temporary/permanent distinction. The three damage-type pools remain distinct (DMG-002). No player selection is required.
 
 **OPEN:** Tie-breaking between eligible resources with identical expiration times.
+
+
+## 72. RULE-006 — Equal-expiration resource priority (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When two or more eligible, interchangeable resources or effects have **identical expiration timing** and are **mechanically equivalent for the expenditure**, the game may consume either automatically, **without prompting the Runner to choose**. If individual source effects make the distinction **mechanically meaningful**, preserve and resolve that distinction rather than silently treating the resources as equivalent. An explicit card or more-specific rule may govern such a case.
+
+**Priority relationship:** If expiration times differ, RULE-005 still requires consuming the **earliest-expiring eligible** resource first. RULE-004 establishes the overarching temporary-before-ongoing principle. This tie rule does not allow ineligible resources or cross-type prevention.
+
+**OPEN:** A deterministic engine tie-breaker for mechanically distinct same-expiration resources if no specific card text resolves the conflict.
