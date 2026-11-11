@@ -67,3 +67,18 @@ At session end: append a dated Development Log entry; update this Current Status
 **Next design tasks:** define supporting-defence lifecycle and counterplay; specify corruption triggers/destinations/exhaust semantics; explore panoptic visual language without compromising tactical clarity; investigate title availability before repository renaming.
 
 **Implementation:** No new mechanics or code changes verified from this design discussion. Existing gameplay and First Signal canon preserved.
+
+
+---
+
+## Design-rule session handoff — 2026-11-11
+
+**Authoritative rule source:** `docs/REDLINE_MASTER_DESIGN.md`. **Latest approved and committed rule: RULE-096** (DRAW changes do not retroactively remove cards already drawn). Rules through RULE-096 are saved in the Master Design; do not reopen them without explicit user direction.
+
+**Recent locked scope:** Software source removal and queued vs already-resolving abilities (RULE-081–089); continuous effects tied to installed instances, default stacking and explicit non-stacking, PATCHWORK strength and removal (RULE-090–095); DRAW non-retroactivity (RULE-096). An installed instance ends on removal; reinstallation creates a new installed instance, but does not reset protected activation limits. With explicit non-stacking text, the strongest eligible bonus applies; without it, separate copies stack.
+
+**Next unanswered design question — RULE-097 (NOT LOCKED):** If Runner draws 5 cards at turn start with DRAW 5, then installs +3 DRAW Software mid-turn, should no additional cards be drawn immediately, with DRAW 8 affecting the next applicable normal draw calculation? Assistant recommended yes; user has **not** answered. Ask this one question first when resuming.
+
+**Session boundary:** User requested stopping questions now and resuming tomorrow in a new chat. No code changes or tests were performed as part of this rule-design session. GitHub Master Design commit for RULE-096: `ce1bcbc341b03ca4662d223ba98d88ca34fd1593`. Earlier status and implementation-evidence matrix are not proof of current implementation; verify source separately.
+
+**Handoff prompt:** “Resume REDLINE design questions from RULE-097. Read the GitHub Master Design as authority; RULE-096 is the last locked rule. Ask one question at a time and commit each approved rule. Do not assume an unanswered proposal is locked.”
