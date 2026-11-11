@@ -663,3 +663,14 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Example:** Runner has 6 CHAR prevention and receives CHAR 4 plus SYN 2. Four prevention is spent, leaving 2 in the CHAR pool; SYN 2 separately requires the Runner to choose and discard up to 2 eligible cards under RULE-001 and RULE-002.
 
 **OPEN:** Exact resource/pool mechanics for SYN- or VOID-specific prevention, if such cards are introduced.
+
+
+## 68. DMG-002 — Three independent damage prevention pools (LOCKED, 2026-11-10)
+
+**Explicit user approval:** REDLINE has **three independent numerical prevention pools**, one each for **CHAR**, **SYN**, and **VOID**. Each defensive card/effect contributes its calculated prevention to the pool(s) for the **damage type(s) explicitly named** in its instructions. Contributions from multiple sources **sum within each matching pool**; pools are never interchangeable or cross-applied. On incoming damage of type X, deduct prevention from **that type's pool only**; any excess damage of that type resolves normally under its own rules. No individual shield consumption choice exists after contributions have entered a pool.
+
+**Duration:** Unused **temporary** prevention in each of the three pools expires at the **beginning of the next Runner turn**, following SOFT-013. Explicit longer-duration effects can follow their printed duration.
+
+**Example:** Runner has CHAR prevention 4, SYN prevention 2, VOID prevention 1. Incoming CHAR 3, SYN 3, VOID 2 leaves CHAR prevention 1; SYN prevention 0 with SYN 1 resolved (choose and discard 1 eligible card); VOID prevention 0 with VOID 1 applied.
+
+**Relationship to earlier rules:** Extends SOFT-015's single pooled-value approach to each distinct damage type without combining types, and completes DMG-001's previously OPEN question of whether SYN and VOID have prevention pools.
