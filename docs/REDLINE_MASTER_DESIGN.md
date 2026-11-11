@@ -547,3 +547,10 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Explicitly supported defensive design space:** ICE and corporate defenses may (a) **eliminate/discard all currently CACHED cards in hand**, or (b) **remove CACHE retention from cards in hand**, causing normal end-of-turn discard rather than immediate discard. These are distinct types of effects and can appear as ICE subroutines or other corporate defenses.
 
 **Terminology:** “Invalidate CACHE” (remove retention) and “Flush CACHE” (immediately discard cached cards) are illustrative labels only, **not locked keywords**. CACHE may be an applied retention status; stripping it should not automatically erase printed card text. Exact effect wording, timing, and counterplay are OPEN.
+
+
+## 56. SOFT-008 — Individual and mass CACHE targeting (LOCKED, 2026-11-10)
+
+**Explicit user approval:** ICE subroutines and corporate defenses may target **individual CACHED cards** or **all CACHED cards**, both for (a) **removing CACHE retention** and (b) **immediately discarding CACHED cards**. Thus four supported effect shapes are: single-card retention removal; all-card retention removal; single-card immediate discard; all-card immediate discard.
+
+**Interaction with SOFT-007:** Removing CACHE retention does **not** immediately discard the affected card(s); they remain in hand and follow normal end-of-turn discard unless played. An effect explicitly ordering discard moves affected CACHED card(s) immediately to the discard pile. No new named keywords or targeting selection method are locked by this decision.
