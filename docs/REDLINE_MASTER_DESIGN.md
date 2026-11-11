@@ -1700,3 +1700,22 @@ This rule does **not** combine events that existing rules count individually, ov
 **Illustrative example (not finalized card text):** “For each of 3 installed Software cards, reduce Trace by 2.” If starting Trace is **4** and applicable rules prevent it falling below zero, the attempted reduction is **6**, but actual reduction is **4**; the instruction generates **one** Trace-reduction event reporting magnitude **4**. An eligible “Whenever you reduce Trace, gain BW equal to the amount of Trace reduced” trigger attempts to grant **4 BW**, subject to applicable restrictions. This example **does not establish** a new Trace floor, BW cap, or other previously unspecified resource limit.
 
 **Conflict check:** Compatible with RULE-002/003 (partial fulfillment and costs), RULE-074/075 (actual prevention gain), RULE-076/077 (instruction boundaries), RULE-102/103 (numeric snapshots), RULE-104 (eligible-object set), RULE-105/106 (aggregate-event count), and RULE-014/015 (FIFO triggers). Individual draw/reshuffle/replacement events remain governed by RULE-032/033/036/040–043; damage mechanics and more-specific card text retain precedence. **No existing locked rule is overridden.**
+
+
+## 174. RULE-109 — Threshold triggers evaluate completed aggregate-event magnitude (LOCKED, 2026-11-11)
+
+**Explicit user approval — exception-protected Option A following conflict audit:** When a triggered ability requires an event to meet a numerical threshold, and that event is an aggregate event under RULE-105 or RULE-106, evaluate the threshold against the event's **total actual qualifying change**, as defined by RULE-107.
+
+Do **not** evaluate the threshold separately against each per-object contribution unless more-specific card text explicitly requires that treatment.
+
+An eligible triggered ability activates **at most once** for the qualifying aggregate event, subject to its own frequency restrictions.
+
+Threshold qualification does **not interrupt** the resolving instruction or ability. Generated triggers wait until the originating ability completes and resolve according to established **FIFO** rules.
+
+This rule does **not** override individual draw events, reshuffles, draw replacements, damage-application mechanics, explicit per-object triggers, costs, conditions, or more-specific locked rules.
+
+**Illustrative example (not finalized card text):** “For each installed Software card, gain 2 CHAR prevention.” With three eligible cards, the instruction actually gains **6 CHAR prevention** and generates **one aggregate event**. An eligible “Whenever you gain at least 5 CHAR prevention in a single event, gain 2 BW” ability qualifies **once**, granting **2 BW** when it resolves (subject to applicable restrictions). If the instruction actually gains only **4 CHAR prevention**, the threshold is not met, regardless of any higher attempted amount.
+
+**Conflict check:** Consistent with RULE-102/103 (numeric snapshots), RULE-104 (eligible-object set), RULE-105/106 (aggregate-event identity), RULE-107 (actual reported magnitude), RULE-014/015 (deferred FIFO timing), RULE-054/055/078 (independent triggered abilities), and RULE-020/026 (frequency limits). Specific draw, reshuffle, replacement, damage, cost and condition rules retain precedence. **No existing locked rule is overridden.**
+
+**Open question preserved:** RULE-108 mixed-direction aggregate-event accounting remains **deferred and not locked**, pending a concrete REDLINE card or mechanic requiring it.
