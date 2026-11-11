@@ -1263,3 +1263,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** PATCHWORK preserves original card identity (RULE-061). Global restrictions continue to apply across copies (RULE-058–060). The general independence of separately printed abilities (RULE-055) does **not** exempt PATCHWORK augmentations from restrictions attached to the original ability they modify.
 
 **Design clarification:** If a future PATCHWORK effect is intended to create an entirely new, separately limited ability rather than augment the existing ability, that exception requires explicit design approval; do not infer independence by default.
+
+
+## 129. RULE-063 — Runner selects which differently modified copy uses a shared global activation (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When multiple installed copies of the **same underlying Software card** share a **global trigger activation allowance**, but differ in their **PATCHWORK enhancements**, the **Runner chooses which eligible installed copy's ability resolves** on a qualifying event. Resolve the selected copy's original ability together with its PATCHWORK augmentation, then consume the **single global allowance for all copies**. Other copies do not also resolve that globally restricted ability for the same event.
+
+**Canonical example:** Copy A is unmodified and grants **2 CHAR prevention** on a qualifying shuffle; Copy B has PATCHWORK augmenting the same ability to grant **5 CHAR prevention**. Both share a global once-per-turn limit. On a qualifying shuffle with the allowance available, the Runner chooses **either 2 CHAR prevention (A) or 5 CHAR prevention (B)**, not both. The global allowance is then consumed for all copies until reset.
+
+**Compatibility:** Global restrictions apply across installed copies (RULE-058–060), PATCHWORK preserves identity (RULE-061) and inherits restrictions of the augmented ability (revised RULE-062). The choice of instance determines the modified outcome, not an additional activation.
