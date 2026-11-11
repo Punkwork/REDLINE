@@ -1103,3 +1103,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Replaced draws do not count as actual draws for conditional draw completion or draw triggers (RULE-040/041). This rule establishes the **availability test**, not any new permission to generate benefits from impossible draws.
 
 **OPEN:** Whether checking availability for a replacement with an empty draw pile itself triggers an automatic full-discard reshuffle before the replacement resolves; distinguish that from a replacement that explicitly moves cards from discard.
+
+
+## 113. RULE-047 — Resolve draw replacement choice before automatic reshuffling (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When the draw pile is empty but the discard pile contains eligible cards, **check draw availability across both piles** (RULE-046), then **resolve applicable draw replacement choices before performing an automatic discard-to-draw reshuffle**. If the Runner replaces the draw, **do not perform an automatic reshuffle for that replaced event**. If the Runner proceeds with the actual draw, **reshuffle the discard pile into the draw pile** under RULE-034 and then draw. An explicit replacement effect that itself moves or shuffles cards resolves according to its own text; that is distinct from an automatic reshuffle.
+
+**Canonical example:** Draw pile empty; discard pile contains 5 cards; installed Software reads “Whenever you would draw a card, you may gain 2 CHAR prevention instead.” The Runner may choose **2 CHAR prevention** and **no automatic reshuffle occurs**, hence no automatic reshuffle trigger from this draw. Alternatively, the Runner may draw normally, triggering the automatic reshuffle and then drawing the card.
+
+**Compatibility:** No replacement benefit if both piles lack eligible drawable cards (RULE-045). Replaced draws do not trigger on-draw effects or satisfy conditional draw counts (RULE-040/041). Automatic reshuffle triggers, when an actual reshuffle occurs, are queued according to RULE-035/036.
+
+**OPEN:** Ordering among explicit shuffle/move effects that change availability mid multi-card draw.
