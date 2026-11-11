@@ -1290,3 +1290,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Installed standard Copy A activates a globally once-per-turn shuffle ability for **2 CHAR prevention**. Later in the same turn, the Runner installs PATCHWORK-enhanced Copy B, whose version of that same ability would grant **5 CHAR prevention**. A second qualifying shuffle occurs. **Copy B does not activate**; the global allowance was consumed by Copy A. At the normal start-of-turn reset, the allowance becomes available again and the Runner may select an eligible installed copy.
 
 **Compatibility:** Global limits are shared across copies (RULE-058), persist across later installation (RULE-059) and complete uninstallation (RULE-060), PATCHWORK preserves identity (RULE-061) and inherits original restrictions (revised RULE-062), and only eligible installed copies can be selected (RULE-064). Reset timing follows RULE-027/028.
+
+
+## 132. RULE-066 — Temporary removal and return does not reset activation limits (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When a PATCHWORK-enhanced Software card **temporarily leaves play and returns during the same turn**, any previously consumed **once-per-turn or applicable shared activation allowance remains consumed**. Temporary removal and re-entry do not create a fresh card identity or refresh activation eligibility. The PATCHWORK augmentation and original ability share the same restriction (RULE-062).
+
+**Canonical example:** An installed Software card has “Once per turn, whenever you shuffle your draw pile, gain 2 CHAR prevention,” augmented by PATCHWORK to grant **5 CHAR prevention** on activation. It activates once, is temporarily removed from play by ICE, and returns installed in the same turn. On another qualifying shuffle that turn, **it cannot activate again**. Its allowance resets only at the normal turn reset.
+
+**Compatibility:** PATCHWORK preserves underlying identity (RULE-061); restrictions extend to augmentation (RULE-062); installation cannot reset consumed global limits (RULE-059/065). Normal per-turn reset follows RULE-027/028. Explicit card text may define an exception.
