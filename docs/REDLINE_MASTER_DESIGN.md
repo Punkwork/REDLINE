@@ -238,7 +238,7 @@ The corporation's core is a **Central Node** within the corporate network and **
 
 ## 20. Canonical harm terminology correction (LOCKED, 2026-11-10)
 
-**Explicit user confirmation:** **NEURAL DAMAGE**, **SYNAPTIC DAMAGE**, and **BRAIN DAMAGE** are **DEPRECATED**. They must not be used as active game mechanics or terms in new rules, cards, tests, or implementation. Older mentions elsewhere in this document are historical and superseded by this section, pending editorial cleanup.
+**Explicit user confirmation:** **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are **DEPRECATED**; **VOID damage** is the current term for the former brain-damage concept. They must not be used as active game mechanics or terms in new rules, cards, tests, or implementation. Older mentions elsewhere in this document are historical and superseded by this section, pending editorial cleanup.
 
 **Current canonical terms (from 2026-11-09 design session archive):**
 - **CHAR X:** reduces Runner Integrity by X.
@@ -247,14 +247,14 @@ The corporation's core is a **Central Node** within the corporate network and **
 - **DRAW:** baseline 5 minus installed Hardware minus VOID counters plus modifiers, subject to minimum 1.
 - **BW:** baseline 4 per Runner turn; installing or uninstalling Hardware costs 1 BW; unused BW forfeited at turn end.
 
-**Migration warning:** The older 'NEURAL DAMAGE X = chosen discard' rule has no explicitly confirmed current equivalent in the archived CHAR/SYN/VOID set; do not silently remap it to SYN or invent a new keyword. Earlier 'BRAIN DAMAGE' maps historically to the persistent draw-loss concept now named VOID, not an additional active mechanic.
+**Migration warning:** The older 'NEURAL DAMAGE X = chosen discard' rule has no explicitly confirmed current equivalent in the archived CHAR/SYN/VOID set; do not silently remap it to SYN or invent a new keyword. Earlier 'VOID damage' maps historically to the persistent draw-loss concept now named VOID, not an additional active mechanic.
 
 **Authority:** Explicit 2026-11-10 user confirmation and REDLINE_DESIGN_SESSION_2026-11-09 archive, later terminology addendum.
 
 
 ## 21. SYN X — Runner-selected discard (LOCKED, 2026-11-10)
 
-**Latest explicit user decision supersedes all prior random-discard definitions of SYN:** **SYN X** means the Runner **chooses and discards X cards from their current hand**. SYN is a hand-discard effect, not direct Integrity loss, VOID-counter gain, or permanent card destruction. **CHAR X** remains direct Integrity reduction; **VOID X** remains persistent draw reduction. **NEURAL DAMAGE**, **SYNAPTIC DAMAGE**, and **BRAIN DAMAGE** remain deprecated. Earlier references to SYN as random discard (including section 20 above) are historical and superseded.
+**Latest explicit user decision supersedes all prior random-discard definitions of SYN:** **SYN X** means the Runner **chooses and discards X cards from their current hand**. SYN is a hand-discard effect, not direct Integrity loss, VOID-counter gain, or permanent card destruction. **CHAR X** remains direct Integrity reduction; **VOID X** remains persistent draw reduction. **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** remain deprecated; **VOID damage** is the active replacement term. Earlier references to SYN as random discard (including section 20 above) are historical and superseded.
 
 **OPEN edge case:** If fewer than X cards remain in hand, determine whether the Runner discards all available cards or another rule applies. Preserve applicable discard-trigger effects under the existing end-of-turn rules where relevant.
 
