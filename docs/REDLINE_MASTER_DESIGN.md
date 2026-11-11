@@ -1299,3 +1299,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** An installed Software card has “Once per turn, whenever you shuffle your draw pile, gain 2 CHAR prevention,” augmented by PATCHWORK to grant **5 CHAR prevention** on activation. It activates once, is temporarily removed from play by ICE, and returns installed in the same turn. On another qualifying shuffle that turn, **it cannot activate again**. Its allowance resets only at the normal turn reset.
 
 **Compatibility:** PATCHWORK preserves underlying identity (RULE-061); restrictions extend to augmentation (RULE-062); installation cannot reset consumed global limits (RULE-059/065). Normal per-turn reset follows RULE-027/028. Explicit card text may define an exception.
+
+
+## 133. RULE-067 — Full-card temporary copies inherit PATCHWORK enhancements (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect explicitly **copies the entire PATCHWORK-enhanced Software card**, its temporary copy inherits the original card's **modified abilities and PATCHWORK augmentation**. The temporary copy is a distinct card instance and has its **own per-copy once-per-turn activation allowance**. Restrictions attached to the copied ability still apply to its augmentation; an explicitly **global limit across all copies** remains shared rather than becoming independent.
+
+**Canonical example:** Original Software: “Once per turn, whenever you shuffle your draw pile, gain 2 CHAR prevention.” PATCHWORK augments that benefit to **5 CHAR prevention**. An effect creates a temporary full-card copy. Both original and temporary copy have the **5 CHAR prevention** ability, and each may activate **once per turn**, provided each is otherwise eligible. If instead the ability says “once per turn, across all copies,” both share the **single global allowance**.
+
+**Scope:** Copying the card's modified characteristics does not award an additional permanent PATCHWORK upgrade. Duration, disposition and zone of the temporary copy follow the creating effect, to be specified by that effect.
+
+**Compatibility:** PATCHWORK is an extension of the original ability and inherits restrictions (RULE-062); only eligible installed Software copies activate installed abilities (RULE-064); per-copy vs global limits follow RULE-021/058–060.
