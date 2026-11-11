@@ -1655,3 +1655,18 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Illustrative example (not finalized card text):** “For each installed Software card, gain 2 CHAR prevention.” If A, B, and C are installed when the instruction starts, the processing set is **{A, B, C}**. An ordinary triggered removal of C generated during resolution waits until the current ability completes (RULE-014/015), so all three contribute normally. If an otherwise legally permitted mid-instruction event removes C, C remains in the original processing list, **but** any explicitly required installed-status condition or source-dependent effect must still be satisfied when checked; this rule alone does not guarantee its benefit.
 
 **Conflict check:** Compatible with RULE-010, RULE-014/015, RULE-083/088, RULE-090, and RULE-102/103. The fixed **object set** is distinct from RULE-103's fixed **numeric value**. Does not alter event counting, trigger timing, continuous-effect recalculation, or costs. **No existing locked rule is overridden.**
+
+
+## 171. RULE-105 — Aggregate prevention-gain event for a single “for each” instruction (LOCKED, 2026-11-11)
+
+**Explicit user approval — Option A, following conflict audit:** When a single discrete instruction grants prevention for each eligible object, the instruction produces **one aggregate prevention-gain event**, provided the total prevention gained is positive.
+
+The number of objects processed does not multiply the number of events. Each eligible triggered ability responds at most once to that event, subject to its own frequency restrictions.
+
+Multiple separately written prevention-gain instructions continue to produce separate events under RULE-076. Different triggered abilities may each respond to the same event under RULE-078.
+
+Generated triggers wait until the originating ability finishes and resolve under the established FIFO queue.
+
+**Illustrative application (not finalized card text):** “For each installed Software card, gain 2 CHAR prevention.” With three eligible installed Software cards, gain **6 CHAR prevention** and produce **one** prevention-gain event. An installed “Whenever you gain CHAR prevention, gain 1 BW” ability triggers **once** and grants **1 BW** when it resolves, subject to its limits. Two separate qualifying “for each” instructions instead generate **two** events under RULE-076.
+
+**Conflict check:** Consistent with RULE-074/075/077 (one qualifying gain-producing instruction/event), RULE-076 (distinct instructions are distinct events), RULE-078/055 (distinct abilities independently recognize one event), RULE-079 (chained prevention-gain triggers), and RULE-014/015 (deferred FIFO triggers). RULE-103/104 continue to govern the instruction's numerical snapshot and eligible-object set. **No existing locked rule is overridden.**
