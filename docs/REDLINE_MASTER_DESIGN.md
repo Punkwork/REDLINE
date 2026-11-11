@@ -1523,3 +1523,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A reads “While this Software is installed, gain +2 DRAW.” Removing A ends the original installed instance's **+2 DRAW** immediately. Reinstalling A establishes a new **+2 DRAW** effect. The two instances' effects do not overlap or stack: **+2 DRAW, not +4 DRAW**.
 
 **Compatibility:** Reinstallation is a new installed instance (RULE-089), but does not create a second physical card, restore cancelled pending triggers (RULE-082), or reset activation limits protected by RULE-066 and global-limit rules. Distinguish continuous effects, which require an installed source, from discrete abilities that have already begun resolving and therefore finish under RULE-083.
+
+
+## 157. RULE-091 — Continuous effects stack across separate installed Software copies (LOCKED, 2026-11-11)
+
+**Explicit user approval:** Multiple **separately installed Software instances** each contribute their own continuous effects. Identical continuous bonuses **stack additively by default**, unless card text or another explicit restriction states otherwise.
+
+**Canonical example:** Two distinct installed copies of Software A each read “While this Software is installed, gain +2 DRAW.” Both apply simultaneously, granting **+4 DRAW total**. If one instance leaves play, its contribution ends immediately under RULE-090, leaving **+2 DRAW** from the remaining instance.
+
+**Compatibility:** Each installed instance independently maintains its continuous effects (RULE-090). Reinstalling a removed physical card does not preserve the old installed instance or double-count its bonus (RULE-089/090). This stacking rule does not override explicit non-stacking or global restrictions.
