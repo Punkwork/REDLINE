@@ -1442,3 +1442,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Software B reads “Whenever you gain CHAR prevention, gain 1 BW.” Both trigger on a CHAR prevention gain; Runner queues A before B. During A's resolution, another effect removes Software B from play. When B's queued trigger reaches the front of the FIFO queue, **cancel B's trigger**; it grants **no BW**.
 
 **Compatibility:** Triggers otherwise resolve FIFO (RULE-015/080). This cancellation applies to **unresolved** triggers from Software no longer installed, not to benefits already resolved. Treatment of a removed card that returns before its queued trigger would resolve is a separate open edge case.
+
+
+## 148. RULE-082 — Leaving play immediately invalidates unresolved Software triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an installed Software card **leaves play**, **all of its unresolved queued triggered abilities are immediately cancelled**. Returning or reinstalling **that same card instance** before the cancelled trigger's former queue position would be processed **does not restore or revive** the cancelled trigger. Reinstallation may permit **new qualifying triggers** while the Software is eligible, but does not undo the cancellation.
+
+**Canonical example:** Software B has a pending triggered ability in the FIFO queue. B is removed from play, immediately cancelling its pending trigger. Another effect reinstalls the **same B card** before the queue reaches that position. The old trigger remains **cancelled** and grants no benefit; B may generate new triggers only on subsequent qualifying events, subject to applicable activation limits.
+
+**Compatibility:** Extends source-removal cancellation (RULE-081), preserves FIFO processing of surviving triggers (RULE-015/080), and does not reset consumed activation allowances through temporary removal/reinstallation (RULE-066). Already resolved effects remain intact.
