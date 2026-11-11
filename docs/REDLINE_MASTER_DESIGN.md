@@ -1505,3 +1505,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 CHAR prevention.” The ability begins resolving, but A is removed during the draw. The Runner **still completes the draw of 2 cards** (assuming cards are available). At the conditional instruction, A is **not installed**, so the Runner gains **0 CHAR prevention**. The fact that both cards were drawn does not satisfy the distinct explicit installation condition.
 
 **Compatibility:** Already resolving abilities finish after source removal (RULE-083/086); successfully completed conditional draws remain valid when their conditions are met (RULE-087); however, explicit conditions are independently enforced (RULE-003/038). Pending queued abilities from removed Software are cancelled (RULE-081/082/085).
+
+
+## 155. RULE-089 — Reinstalled Software is a new installed instance for source-specific conditions (LOCKED, 2026-11-11)
+
+**Explicit user decision:** **No**—removing Software A and then reinstalling it means it is considered a **new installation/card instance**, not the still-installed source of the old ability. Reinstallation cannot retroactively satisfy an explicit condition referring to the original source instance.
+
+**Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 CHAR prevention.” A's ability begins resolving; during the draw, A is removed and then reinstalled before the condition is checked. The already-started ability completes its draw under RULE-083/086, but the original installed instance has left play. The newly installed instance does **not** count as “this Software” still being installed for that original ability. **No 5 CHAR prevention is granted.**
+
+**Identity clarification:** Reinstallation creates a new **installed instance**, not a new physical card or card copy. It does not restore cancelled pending triggers (RULE-082), reset consumed global limits (RULE-059/060/065), or contradict the rule that temporarily removing/reinstalling the same Software card does not reset consumed activation limits (RULE-066). The current-resolution protection (RULE-083) does not preserve source identity for explicit installation conditions (RULE-088).
