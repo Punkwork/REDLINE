@@ -1451,3 +1451,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software B has a pending triggered ability in the FIFO queue. B is removed from play, immediately cancelling its pending trigger. Another effect reinstalls the **same B card** before the queue reaches that position. The old trigger remains **cancelled** and grants no benefit; B may generate new triggers only on subsequent qualifying events, subject to applicable activation limits.
 
 **Compatibility:** Extends source-removal cancellation (RULE-081), preserves FIFO processing of surviving triggers (RULE-015/080), and does not reset consumed activation allowances through temporary removal/reinstallation (RULE-066). Already resolved effects remain intact.
+
+
+## 149. RULE-083 — An ability already resolving completes after its source leaves play (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When a Software triggered ability has **already begun resolving**, removing its source Software card from play **does not interrupt or cancel the remaining instructions of that currently resolving ability**. Resolve its full instructions in order, subject to their normal conditions and costs. This differs from unresolved queued triggers, which are immediately cancelled when their source leaves play (RULE-081/082).
+
+**Canonical example:** Software A's triggered ability reads “Gain 3 CHAR prevention. Then gain 2 SYN prevention.” The ability begins resolving and grants **3 CHAR prevention**. Another effect removes Software A from play before the second instruction. The currently resolving ability still completes, granting **2 SYN prevention**. Any **other unresolved queued triggers** from A are cancelled on removal.
+
+**Compatibility:** Current effects resolve to completion (RULE-010/014); unresolved triggers are cancelled upon source leaving play (RULE-081/082). This rule does not exempt the remaining instructions from explicit conditions or costs.
