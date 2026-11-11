@@ -692,3 +692,14 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **CHAR prevention example:** Runner has 3 temporary CHAR prevention plus 6 Node-long CHAR prevention from Origin Ghostware, for a displayed total of 9. Incoming CHAR 4 consumes the 3 temporary first, then 1 Node-long, leaving 5 Node-long CHAR prevention and 0 temporary. This is consistent with the single displayed pool per damage type (DMG-002) while preserving behind-the-scenes duration bookkeeping (GHOST-001).
 
 **Scope:** The priority applies only when the candidate resources/effects are **eligible and interchangeable for the same requirement**; it does not make a CHAR reserve eligible to pay SYN/VOID, bypass a printed cost, or allow an ineligible effect to be spent. Exact priority among multiple resources with equal duration remains OPEN.
+
+
+## 71. RULE-005 — Earliest-expiring eligible resources consumed first (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Extend RULE-004 to a general priority based on **relative remaining duration**. When two or more **eligible, interchangeable** resources, prevention reserves, or effects could satisfy the same cost, requirement, or expenditure, the game **automatically consumes the one that expires soonest first**. A resource that is more temporary has higher consumption priority than one that lasts longer. This applies beyond damage prevention, subject to eligibility and explicit card/rule overrides.
+
+**Illustration:** A shield expiring at the beginning of the next Runner turn is spent before Node-long armor; Node-long armor is spent before an otherwise interchangeable reserve with an even longer duration or no expiration. The interface can present the combined available value while the engine tracks source/duration for priority and expiration.
+
+**Relationship:** RULE-005 refines RULE-004's temporary-before-ongoing rule: priority is determined by **earliest expiration**, not merely a binary temporary/permanent distinction. The three damage-type pools remain distinct (DMG-002). No player selection is required.
+
+**OPEN:** Tie-breaking between eligible resources with identical expiration times.
