@@ -834,3 +834,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Interaction with locked rules:** When a genuine infinite cycle is detected, terminate the perpetuating loop while preserving previously resolved effects and continuing unrelated queued effects (RULE-016/017), and notify the player of involved cards/effects (RULE-018). Respect FIFO queue ordering (RULE-015).
 
 **OPEN for implementation:** Exact state representation, cycle-detection algorithm, proof/heuristics for termination, performance safeguards, and identification of the minimal set of perpetuating triggers. The detection **principle** is LOCKED; no particular algorithm is yet approved.
+
+
+## 86. RULE-020 — Explicit card-specific trigger frequency limits (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Individual cards and abilities may specify **explicit trigger-frequency limits**, including **“Once per turn,” “Twice per Node,”** and **“The first time each turn.”** Such restrictions apply to the **specified card/ability**, not to REDLINE's trigger system globally. The engine tracks and enforces each ability's applicable count or first-occurrence condition over the printed period.
+
+**Design intent:** These are deliberate **card-level balance and design tools**, not universal caps on stacking, multiplicative synergies, prevention values, or other legitimate interactions (RULE-007/008/016/019). Other cards and effects may still trigger normally, subject to their own text and established queue/ordering rules.
+
+**OPEN:** Precise treatment of per-turn limits across Runner versus Corporation turns when text says only “turn”; timing of counter reset at Node boundaries; whether copies of the same named card track limits independently (unless a card specifies otherwise). Do not assume these details are locked.
