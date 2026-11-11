@@ -1012,3 +1012,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** “Draw 3 cards. Gain 2 CHAR prevention.” With both draw and discard piles empty, draw **0 cards** and still gain **2 CHAR prevention**.
 
 **Compatibility:** Explicit costs and conditional wording such as “If you do” still follow RULE-003; a card may explicitly specify a consequence for an unsuccessful draw, but there is **no universal deck-exhaustion penalty**. Automatic reshuffling applies only when the discard pile has eligible cards (RULE-034).
+
+
+## 104. RULE-038 — Conditional draw rewards require full completion (LOCKED, 2026-11-10)
+
+**Explicit user approval:** In card text of the form **“Draw X cards. If you do, [reward]”**, the **“If you do” condition is satisfied only if the full specified number X of cards was actually drawn**. If fewer cards are available, draw as many as possible under RULE-002/034/037, but do **not** grant the conditional reward under RULE-003.
+
+**Canonical example:** “Draw 3 cards. If you do, gain 5 CHAR prevention.” With only **2 eligible cards** across draw and discard piles, draw both, but **do not gain the 5 CHAR prevention**.
+
+**Contrast:** “Draw 3 cards. Gain 5 CHAR prevention.” has no “If you do” condition, so the independent prevention instruction resolves even if fewer than 3 cards can be drawn (RULE-002).
+
+**Compatibility:** Multi-card draws and their generated triggers remain uninterrupted (RULE-032/033), with automatic discard reshuffling where possible (RULE-034). This rule addresses conditional success, not a general deck-exhaustion penalty.
