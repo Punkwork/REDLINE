@@ -1241,3 +1241,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Global limits are shared across copies (RULE-058), and installing a new copy does not reset a consumed allowance (RULE-059). This rule clarifies that the consumed state persists even across a period with zero installed copies.
 
 **OPEN:** How globally limited abilities distinguish separate card identities or upgraded/modified variants when their names match.
+
+
+## 127. RULE-061 — PATCHWORK modifications preserve card identity for global trigger limits (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A **PATCHWORK modification** changes properties or abilities of an individual card instance but **does not change its underlying card identity** for the purposes of global trigger-frequency restrictions. Standard and PATCHWORK-modified copies of the same original Software card therefore **share the same global activation allowance** for a globally limited ability they retain.
+
+**Canonical example:** Copy A is standard Software; Copy B is a PATCHWORK-modified copy of that same Software with an additional ability. Both retain the same globally once-per-turn shuffle ability. If either copy activates that shared ability, its **global allowance is consumed for both copies** until the ordinary turn-start reset (RULE-027/028), even though one copy is modified. Copy B's additional PATCHWORK ability is governed by its own text and limits.
+
+**Compatibility:** Global limits apply across copies (RULE-058), survive installation changes (RULE-059/060), and track underlying card identity rather than PATCHWORK variant. This does not establish a shared limit for distinct additional abilities unless their text explicitly creates one.
+
+**OPEN:** Identity rules for cards transformed into a different named/base card, if such mechanics are introduced.
