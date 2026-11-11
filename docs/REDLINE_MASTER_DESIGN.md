@@ -1092,3 +1092,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** “Draw 3 cards,” with only **2 eligible cards** available across draw and discard piles, and an installed Software allowing each draw to be replaced with **2 CHAR prevention**. The Runner may (a) draw both cards, (b) replace one available draw to draw one card and gain 2 CHAR prevention, or (c) replace both available draws to gain 4 CHAR prevention and draw zero cards. The **third, unavailable draw cannot be replaced** and generates no prevention.
 
 **Compatibility:** This restriction applies to both mandatory and optional draw replacement effects (RULE-040/042/043/044). A replaced draw is not counted as an actual card drawn for conditional “If you do” rewards (RULE-041). Unavailable draws carry no automatic deck-exhaustion penalty (RULE-037). Normal discard reshuffling may supply available cards (RULE-034). **OPEN:** How to test availability if a replacement itself moves cards among zones or changes deck composition.
+
+
+## 112. RULE-046 — Draw availability includes discard pile for replacements (LOCKED, 2026-11-10)
+
+**Explicit user approval:** For purposes of checking whether a would-be draw is eligible for a draw replacement (RULE-045), **available drawable cards include eligible cards in both the draw pile and the discard pile**, because the discard pile can normally be reshuffled into the draw pile when needed (RULE-034). A replacement may apply when the draw pile is empty but the discard pile contains eligible cards. If both piles are empty, no replacement benefit can be generated.
+
+**Canonical example:** Replacement Software: “Instead of drawing a card, shuffle one card from your discard pile into your draw pile.” If the draw pile is empty and the discard pile contains at least one eligible card, the replacement **can activate** and move the card as instructed instead of drawing. If both piles are empty, the replacement cannot activate.
+
+**Compatibility:** Replaced draws do not count as actual draws for conditional draw completion or draw triggers (RULE-040/041). This rule establishes the **availability test**, not any new permission to generate benefits from impossible draws.
+
+**OPEN:** Whether checking availability for a replacement with an empty draw pile itself triggers an automatic full-discard reshuffle before the replacement resolves; distinguish that from a replacement that explicitly moves cards from discard.
