@@ -1568,3 +1568,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Installed Copy A grants **+2 DRAW**, while PATCHWORK-enhanced Copy B grants **+4 DRAW**, and both effects explicitly prohibit stacking. With both installed, the Runner has **+4 DRAW**. When Copy B leaves play, its bonus ends and the Runner immediately has **+2 DRAW** from Copy A.
 
 **Compatibility:** Installed-instance continuous effects end on removal (RULE-090); explicit non-stacking overrides default additive stacking (RULE-092); strongest eligible non-stacking bonus applies (RULE-094). Without explicit non-stacking text, additive stacking still applies (RULE-091/093).
+
+
+## 162. RULE-096 — DRAW changes do not retroactively affect cards already drawn (LOCKED, 2026-11-11)
+
+**Explicit user approval:** Changes to the Runner's current DRAW value, including changes caused by removing installed Software that grants a continuous DRAW bonus, affect **future draw calculations only**. They do **not** retroactively undo completed draws, discard cards already drawn, or otherwise reduce the Runner's current hand merely because DRAW has decreased.
+
+**Canonical example:** Base DRAW is **5**. Two installed Software copies grant explicitly non-stacking continuous bonuses: Copy A **+2 DRAW** and PATCHWORK-enhanced Copy B **+4 DRAW**. The stronger bonus applies, giving **DRAW 9**, and the Runner draws **9 cards** at the start of the turn. Later in that turn, Copy B leaves play. The effective DRAW value becomes **7** (base 5 + remaining bonus 2), but the Runner **keeps all 9 cards already drawn**. DRAW 7 applies to later calculations that reference DRAW, not to the completed draw.
+
+**Compatibility:** Explicitly non-stacking effects use the strongest eligible bonus (RULE-094); removing that source recalculates the active bonus (RULE-095); completed draws are not reversed. This rule does not itself grant an additional draw when DRAW increases mid-turn.
