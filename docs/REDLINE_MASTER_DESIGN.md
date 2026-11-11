@@ -861,3 +861,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** The explicit “played twice” outcome limit remains in force under RULE-021: additional copies of the same replay-granting effect do **not** turn those two plays into four. Other applicable “when played” triggers can occur for each actual play, unless their own explicit limits (RULE-020) prevent them.
 
 **OPEN:** Whether a replay pays the card's BW cost again, whether it counts as a new physical card leaving hand, and the exact timing of replay relative to other queued triggers. No answer is implied by this rule.
+
+
+## 89. RULE-023 — Replayed cards pay BW only once (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect causes a card to be played more than once, **pay that card's BW cost only for its original play**. Any additional plays granted by the replay effect resolve the card's instructions without paying its BW cost again. For example, a **2 BW** card played twice through a replay effect costs **2 BW total, not 4 BW**, while both plays resolve independently under RULE-022.
+
+**Compatibility:** An explicit “played twice” effect remains capped at two total plays despite duplicate sources (RULE-021). Explicit card-specific trigger-frequency limits still apply (RULE-020).
+
+**OPEN:** Whether any **non-BW costs** must be paid again on replay, and how card-specific costs and “If you do” conditions interact with replay. Do not assume free non-BW costs.
