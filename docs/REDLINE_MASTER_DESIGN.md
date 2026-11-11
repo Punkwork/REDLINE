@@ -1595,3 +1595,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** The Runner has DRAW 5. Software instructs “Draw cards equal to your DRAW.” The instruction begins with a target of **5 cards**. After 2 cards have been drawn, another effect raises effective DRAW to 8. The original instruction still draws **5 cards total**, not 8, subject to existing rules for drawing as many as possible if the deck cannot supply enough cards.
 
 **Compatibility:** RULE-096/097 prevent retroactive changes to completed draws; RULE-098 fixes the quantity for a draw instruction already underway. Existing draw-trigger timing and draw-shortfall rules remain unchanged. This does not specify how other variable numerical effects snapshot their values.
+
+
+## 165. RULE-099 — Each distinct DRAW-based draw instruction recalculates DRAW (LOCKED, 2026-11-11)
+
+**Explicit user approval — Option A:** Within a single resolving ability, **each separate instruction** to draw cards equal to DRAW uses the Runner's effective **DRAW when that particular instruction begins**. The DRAW value is not snapshotted once for the entire ability. Once an individual instruction begins, its target number remains fixed during that instruction under RULE-098.
+
+**Canonical example:** Software ability reads “Draw cards equal to your DRAW. Gain +2 DRAW. Then draw cards equal to your DRAW again.” Starting at DRAW 5, the first instruction draws **5 cards**. The intervening bonus increases effective DRAW to **7**. The second, distinct draw instruction then draws **7 cards**, subject to existing draw-shortfall rules.
+
+**Compatibility:** RULE-098 snapshots each individual draw instruction at its start; RULE-096/097 bar retroactive hand changes or automatic extra draws. Draw-trigger timing and the resolution of other effects remain governed by their existing locked rules. This rule does not imply that a single instruction recalculates its target between cards.
