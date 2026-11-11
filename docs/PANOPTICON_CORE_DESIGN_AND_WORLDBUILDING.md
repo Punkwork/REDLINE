@@ -144,3 +144,25 @@ Other archetypes (stealth, hardware engineering, aggressive breaking) remain bra
 This is a **comprehensive design synopsis**, not a word-for-word transcript. It synthesizes established REDLINE project materials and the November 10 design discussion. Where source materials did not establish exact mechanics, the document labels them OPEN rather than filling them in. The four existing authoritative documents remain in force. Future changes should carry a decision ID, status, source, and test expectation.
 
 **Suggested ChatGPT archive title:** PANOPTICON — Core Design & Worldbuilding.
+
+
+## RULE-126 — SYN damage terminology and overflow (LOCKED, 2026-11-11)
+
+**Authoritative decision:** The active damage keyword is **SYN X** (also styled **SYN DAMAGE X** in the approved rule review). Legacy **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are deprecated; neither is an active separate damage type. SYN is **Runner-chosen** hand discard, never random discard. Historical mentions of the old terms elsewhere are superseded, not additional active mechanics.
+
+Resolve SYN X in this order:
+1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
+2. Each unfulfilled point of SYN causes **2 Integrity damage**.
+3. Apply that Integrity damage **after** discarding the available cards.
+
+| SYN X | Hand | Discarded | Integrity damage |
+|---:|---:|---:|---:|
+| 3 | 3 | 3 | 0 |
+| 3 | 2 | 2 | 2 |
+| 3 | 1 | 1 | 4 |
+| 3 | 0 | 0 | 6 |
+| 5 | 2 | 2 | 6 |
+
+**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
