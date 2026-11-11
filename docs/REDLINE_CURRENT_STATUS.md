@@ -131,3 +131,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Latest locked and committed:** RULE-102 — discrete instructions using variable numerical values snapshot those values at the start of **each individual instruction**; separate instructions recalculate. Exception-protected: does not freeze continuous effects (RULE-090–095), override explicit timing, bypass costs/conditions (RULE-003/038/071), or change eligible resource spending priorities (RULE-004–006). More-specific locked rules/card text prevail. Extends DRAW timing (RULE-098–101) consistently; no authorized override. Master Design commit: `98bb8e85d79c999cb218ed27fc9167c78f380699`.
 
 **Next open question:** RULE-103 — when a discrete numeric instruction explicitly says “for each” and processes individual objects one at a time, whether it uses one instruction-start snapshot or recalculates for each object. Check RULE-102 and more-specific mechanics before committing; not approved. No code changes or tests verified. Prior open-question handoffs superseded.
+
+
+## Design-rule update — 2026-11-11: RULE-103
+
+**Latest locked and committed:** RULE-103 (Option A) — one discrete “for each” instruction using a variable numeric value snapshots that value once at the instruction's start and reuses it for each eligible object. Separate later instructions independently recalculate under RULE-102. Illustrative Trace 6 across three Software cards stays 6 for all per-card calculations, even if a legally permitted change occurs during processing. This does not authorize queued triggers to interrupt the current ability or change prevention-gain event granularity. Conflict check: compatible with RULE-010, RULE-014/015, RULE-074–077, RULE-098, RULE-102; no override. Master Design commit: `a33b7a95fe3d1bf10dd400498d4a5d9942222204`.
+
+**Next open question:** RULE-104 — when a single “for each” instruction refers to eligible objects, whether the eligible object set is determined at instruction start or reevaluated as objects enter/leave during processing. Check existing rules before approval/commit; not locked. No code changes or tests verified.
