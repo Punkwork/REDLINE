@@ -1532,3 +1532,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Two distinct installed copies of Software A each read “While this Software is installed, gain +2 DRAW.” Both apply simultaneously, granting **+4 DRAW total**. If one instance leaves play, its contribution ends immediately under RULE-090, leaving **+2 DRAW** from the remaining instance.
 
 **Compatibility:** Each installed instance independently maintains its continuous effects (RULE-090). Reinstalling a removed physical card does not preserve the old installed instance or double-count its bonus (RULE-089/090). This stacking rule does not override explicit non-stacking or global restrictions.
+
+
+## 158. RULE-092 — Explicit non-stacking text overrides default continuous-effect stacking (LOCKED, 2026-11-11)
+
+**Explicit user approval:** Continuous effects from separately installed Software instances normally stack (RULE-091), but **explicit non-stacking restrictions on a card override that default**. Multiple copies of the same Software with an expressly non-stacking continuous bonus do not add their bonuses together.
+
+**Canonical example:** Two installed copies of Software A each read “While this Software is installed, gain +2 DRAW. This effect does not stack with other copies of this Software.” Together they grant **+2 DRAW total**, **not +4 DRAW**, regardless of the number of such installed copies. If one copy leaves play, the other still grants **+2 DRAW**.
+
+**Compatibility:** Each installed instance maintains its own continuous effect while present (RULE-090), but contributions are combined subject to explicit restrictions (RULE-091). Removal of an instance ends its effect; no departed-instance bonus persists.
