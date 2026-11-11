@@ -807,3 +807,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Design requirement:** Distinguish genuinely nonterminating trigger cycles from finite combinations that legitimately produce very large numerical effects. A repeated trigger name alone is insufficient evidence of an infinite loop.
 
 **OPEN:** Exact cycle-detection algorithm, the precise trigger or effect suppressed when a cycle is detected, whether the player receives a notification, and how resolution continues after interruption. Do not treat these as locked until explicitly decided.
+
+
+## 83. RULE-017 — Preserve resolved effects when terminating infinite loops (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When REDLINE detects a genuinely infinite/nonterminating trigger cycle under RULE-016, **cancel the repeating cycle** and its perpetuating triggers, **preserve all effects already resolved**, and **continue resolving unrelated pending effects** in the established FIFO trigger queue (RULE-014/015). Termination and continuation must be **deterministic**. Do not roll back legitimately resolved prevention, damage, resources, or other state changes merely because they were generated before loop detection.
+
+**Example:** If a loop generated **10 CHAR prevention** before being detected, that 10 remains; the nonterminating cycle is stopped; unrelated pending triggers continue to resolve.
+
+**OPEN implementation detail:** The exact detection algorithm and how the engine identifies the minimal set of cycle-perpetuating queued triggers to cancel remain to be designed. The required observable behavior above is LOCKED.
