@@ -12,9 +12,9 @@
 
 ## Confirmed design decisions
 1. Runner acts; corporation then fires all remaining unbroken damage/Trace subroutines; broken DEADLOCK allows advance after corp turn.
-2. SYN X = Runner chooses and discards up to X cards from hand; each undiscarded point causes 2 Integrity damage after discards (RULE-126). NEURAL DAMAGE and SYNAPTIC DAMAGE are deprecated.
+2. SYN X = Runner chooses and discards up to X cards from hand; each undiscarded point causes 2 Vitae damage after discards (RULE-126). NEURAL DAMAGE and SYNAPTIC DAMAGE are deprecated.
 3. PURGE = corporation removes virus counters.
-4. DEAD DROP (not Safehouse): exactly one of PATCH UP (+10 Integrity) or WIPE TRAIL (−20 Trace).
+4. DEAD DROP (not Safehouse): exactly one of PATCH UP (+10 Vitae) or WIPE TRAIL (−20 Trace).
 5. Hardware recycled once per encounter end; PATCHWORK persists per card instance; Ghostware permanent non-card.
 6. UI: `[STR X]`, drag breakers to ICE, fixed ICE inspection bay, tooltips, Ghostware rack below RETURN, signature Ghostware once with ORIGIN.
 7. NUL/REM's six modes preserved; First Signal is real synchronization transmission.
@@ -23,7 +23,7 @@
 | Area | Design | Code status | Testing |
 |---|---|---|---|
 | ICE timing / DEADLOCK | Locked | Previously represented in Python reference; inspect | Prior regressions reportedly passed; re-run |
-| SYN chosen discard + 2 Integrity per shortfall (RULE-126) | Locked | Verify against latest files | Five regression cases + sequencing |
+| SYN chosen discard + 2 Vitae per shortfall (RULE-126) | Locked | Verify against latest files | Five regression cases + sequencing |
 | Trace / Black ICE | Partially specified | Verify | Verify |
 | DEAD DROP choice | Locked | In named playtest baseline; inspect | Verify |
 | Hardware recycling | Locked | Previously reported | Verify exactly-once |
@@ -188,10 +188,10 @@ At session end: append a dated Development Log entry; update this Current Status
 
 Resolve SYN X in this order:
 1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
-2. Each unfulfilled point of SYN causes **2 Integrity damage**.
-3. Apply that Integrity damage **after** discarding the available cards.
+2. Each unfulfilled point of SYN causes **2 Vitae damage**.
+3. Apply that Vitae damage **after** discarding the available cards.
 
-| SYN X | Hand | Discarded | Integrity damage |
+| SYN X | Hand | Discarded | Vitae damage |
 |---:|---:|---:|---:|
 | 3 | 3 | 3 | 0 |
 | 3 | 2 | 2 | 2 |
@@ -199,6 +199,9 @@ Resolve SYN X in this order:
 | 3 | 0 | 0 | 6 |
 | 5 | 2 | 2 | 6 |
 
-**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
 
-**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
+
+
+**Terminology lock (2026-11-11):** **Vitae** is the canonical Runner health resource (abbreviated **VIT** in the World Bible). The former health-resource term is deprecated. **BURN damage** reduces Vitae. This terminology update does not itself change damage-resolution mechanics.
