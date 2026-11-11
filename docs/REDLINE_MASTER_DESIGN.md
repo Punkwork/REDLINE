@@ -1810,3 +1810,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event plus your current Trace.” Event 1 gains **3 CHAR prevention** and event 2 gains **5 CHAR prevention**, queuing two separate triggers. At the first reward instruction, Trace is **4**, so that trigger attempts to grant **3 + 4 = 7 BW**. Before the second reward instruction, Trace increases to **6**, so the second attempts to grant **5 + 6 = 11 BW**. Total attempted BW gain is **18 BW**, if both resolve and applicable resource restrictions permit it.
 
 **Compatibility:** RULE-102/103 govern per-instruction snapshots; RULE-107/111 fix event-referenced actual magnitudes; RULE-110/116 evaluate current-state operands at resolution; RULE-117 retains separate triggers for separate events. FIFO ordering, eligibility, costs, conditions, frequency limits, source-removal cancellation and the deferred status of RULE-108 remain unchanged.
+
+
+## 184. RULE-119 — Multi-instruction triggered abilities recalculate current values per instruction (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a triggered ability contains multiple **discrete instructions** that each reference a **current game-state variable**, evaluate that variable independently **at the start of each instruction**, under RULE-102/103. Do not snapshot the variable once for the whole ability. If an intervening change is legally permitted under the existing resolution/timing rules, the later instruction uses the updated value. This rule **does not create an interruption window** between instructions.
+
+**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to your current Trace. Then gain CHAR prevention equal to your current Trace.” After the qualifying event, the first reward instruction begins at **Trace 4**, so it attempts to grant **4 BW**. Assuming a legally permitted intervening effect changes Trace to **6** before the second instruction begins, the second instruction attempts to grant **6 CHAR prevention**, not 4. All applicable resource restrictions and existing timing rules still apply.
+
+**Compatibility:** Clarifies RULE-102/103 and RULE-110's per-discrete-instruction resolution-time evaluation. Does not alter RULE-010 printed instruction order, RULE-014/015 FIFO timing, eligibility, costs, conditions, source-removal cancellation, or deferred RULE-108.
