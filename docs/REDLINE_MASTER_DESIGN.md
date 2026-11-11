@@ -994,3 +994,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Any card-draw triggers generated during the same draw operation also wait until it completes; FIFO ordering follows the order in which triggers entered the queue, subject to simultaneous-trigger ordering rules (RULE-011/012/013). Explicit trigger frequency limits still apply (RULE-020/026).
 
 **OPEN:** Whether the act of shuffling itself can modify the number of cards still to draw via replacement effects, if such effects are introduced.
+
+
+## 102. RULE-036 — Each actual reshuffle generates its own trigger (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When a draw operation causes **multiple actual discard-pile reshuffles**, each reshuffle is a **separate event** and independently generates any applicable “whenever you reshuffle” triggers. All reshuffle-generated triggers **wait until the full draw operation finishes** (RULE-035), then resolve according to the FIFO queue (RULE-014/015). Explicit card-specific frequency limits (RULE-020/026) still apply.
+
+**Example:** Installed Software says “Whenever your discard pile is reshuffled into your draw pile, gain 2 CHAR prevention.” If **three actual reshuffles** occur during one draw operation, three triggers are queued and later grant **6 CHAR prevention total**, absent other modifiers or limits.
+
+**Clarification:** This rule does not cause an extra reshuffle when there are no eligible cards in the discard pile; it only counts reshuffles that actually occur. The precise conditions under which repeated reshuffles can occur during a single draw remain subject to the available card zones and normal draw rules (RULE-034).
