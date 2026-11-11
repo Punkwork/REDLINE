@@ -649,3 +649,17 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Example:** First defensive card prevents 3 CHAR, doubled by Hardware to 6; second prevents 2. Total prevention pool = 8. Incoming 5 CHAR consumes 5 pool points, leaving 3. No shield selection/consumption order exists.
 
 **Precedence:** This **supersedes SOFT-014's assertion that shields remain separately tracked**. SOFT-014's concept of independently calculating card-specific prevention modifiers and cumulative protection remains valid, but the resulting prevention is pooled into **one value**.
+
+
+## 67. DMG-001 — Three distinct damage types and type-specific protection (LOCKED, 2026-11-10)
+
+**Explicit user approval:** REDLINE's **three damage types are distinct** and defenses do not cross-protect by default:
+- **CHAR X:** Reduces Runner Integrity by X; prevented by the shared **CHAR prevention pool** under SOFT-015.
+- **SYN X:** Runner chooses and discards X cards from their current hand; this does not reduce Integrity. Requires an effect explicitly protecting against SYN to prevent it.
+- **VOID X:** Applies persistent DRAW reduction (subject to minimum DRAW rule). Requires an effect explicitly protecting against VOID to prevent it.
+
+A card may explicitly prevent multiple named damage types, but protection against one does **not** implicitly apply to another. The unified CHAR prevention pool is **CHAR-only**; it does not prevent SYN or VOID.
+
+**Example:** Runner has 6 CHAR prevention and receives CHAR 4 plus SYN 2. Four prevention is spent, leaving 2 in the CHAR pool; SYN 2 separately requires the Runner to choose and discard up to 2 eligible cards under RULE-001 and RULE-002.
+
+**OPEN:** Exact resource/pool mechanics for SYN- or VOID-specific prevention, if such cards are introduced.
