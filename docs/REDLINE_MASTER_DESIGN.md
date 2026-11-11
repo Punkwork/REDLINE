@@ -753,3 +753,12 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Example:** Starting with 10 CHAR prevention, **“Gain 5 CHAR prevention. Double your CHAR prevention.”** resolves **10 → 15 → 30**. The reverse wording, **“Double your CHAR prevention. Gain 5 CHAR prevention.”**, resolves **10 → 20 → 25**. Printed order therefore matters for synergies and is intentional.
 
 **OPEN:** Ordering of multiple simultaneous triggers from different cards/effects, distinct from instructions printed sequentially on one card.
+
+
+## 77. RULE-011 — Runner orders simultaneous Runner-controlled triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When **multiple Runner-controlled effects trigger simultaneously**, the **Runner chooses their resolution order**. Resolve each chosen trigger's effect **completely** before moving to the next; within each effect, printed instructions still resolve in order under RULE-010. This deliberately supports strategic sequencing and powerful card synergies.
+
+**Example:** Runner currently has **5 CHAR prevention**. Two installed Software effects trigger together on playing a defensive card: one **grants 3 CHAR prevention**, the other **doubles current CHAR prevention**. Runner may resolve **+3 first, then double** to produce **(5 + 3) × 2 = 16**, instead of **(5 × 2) + 3 = 13**.
+
+**Scope:** This rule specifies the ordering of **simultaneous Runner-controlled triggers**. It does not yet specify ordering of simultaneous Corporation-controlled triggers or cross-controller triggers, which remain OPEN.
