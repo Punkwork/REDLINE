@@ -593,3 +593,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Important distinction:** Persistent Software installation has an established baseline cost of 1 BW (TAX-016). That **installation cost is not automatically applied to Instant Software**, which is played rather than installed. The universal/default BW **play cost** for Instant Software is still **OPEN**; card-specific costs may be printed. This section supersedes any earlier suggestion that all Instant Software necessarily costs 1 BW to play.
 
 **OPEN:** Default instant-card BW play cost (including whether zero-cost cards exist), exact timing windows for instant cards including defensive responses, and special destination exceptions (e.g. BURNED).
+
+
+## 61. SOFT-010 — Printed BW costs for Instant Software (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Every Instant Software card has its **own printed BW play cost**; **0 BW** is permitted. There is **no universal BW play cost** for Instant Software. A card may cost 0, 1, 2, or more BW as specified by its own design. The Runner must pay the card's BW cost to play it, subject to future explicit modifiers/waivers. After playing and resolving its instructions, it goes to the discard pile per SOFT-009 unless an explicit card effect specifies another destination.
+
+**Distinct from persistent Software:** The established **1 BW installation cost** for persistent Software remains separate and unchanged. Instant Software is played, not installed; it does not consume persistent RAM merely by being played.
+
+**OPEN:** Timing windows for playing Instant Software (including whether defensive reactions are possible during corporate response), any default maximum printed BW cost, and exceptions/discount effects.
