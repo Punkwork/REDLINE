@@ -1254,10 +1254,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **OPEN:** Identity rules for cards transformed into a different named/base card, if such mechanics are introduced.
 
 
-## 128. RULE-062 — PATCHWORK-added abilities trigger independently of original global limits (LOCKED, 2026-11-10)
+## 128. RULE-062 — PATCHWORK augments original abilities and inherits their restrictions (REVISED, LOCKED, 2026-11-10)
 
-**Explicit user approval:** An ability **added through PATCHWORK** is evaluated **independently** of the original card's globally limited ability, unless explicit card text links their restrictions. The original global limit governs **only the ability it explicitly restricts**; consuming that allowance does not suppress an additional PATCHWORK ability with its own trigger.
+**Explicit user correction superseding the original RULE-062:** PATCHWORK is an **augmentation/extension of the card's original ability**, not a separate independent trigger system. **Any restrictions applying to the original ability also apply to its PATCHWORK enhancement**, including once-per-turn, per-card, shared, and global-across-copies activation limits. PATCHWORK cannot circumvent an already-consumed original trigger allowance.
 
-**Canonical example:** Original Software ability: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” PATCHWORK adds: “Whenever you shuffle your draw pile, gain 1 CHAR prevention.” On a qualifying shuffle, the original ability grants **2 CHAR prevention** if its shared global allowance is unused; the PATCHWORK ability grants **1 CHAR prevention** regardless of whether the original global allowance was already consumed. When both trigger, total benefit is **3 CHAR prevention**. When the original allowance is already consumed, the PATCHWORK ability can still grant **1 CHAR prevention**.
+**Canonical example:** Original Software ability: “Once per turn, across all installed copies of this card, whenever you shuffle your draw pile, gain 2 CHAR prevention.” PATCHWORK augments that ability with **+1 CHAR prevention**. A qualifying shuffle with an available shared global allowance activates the modified card's ability for **3 CHAR prevention** (2 original + 1 PATCHWORK). Once the shared global allowance is consumed, neither the original portion nor its PATCHWORK augmentation can activate again during that turn.
 
-**Compatibility:** PATCHWORK preserves underlying card identity for original global limits (RULE-061); independent abilities are evaluated separately (RULE-055), subject to any explicit shared/global restrictions (RULE-056/058). Apply existing trigger ordering and queue rules (RULE-011/014/015).
+**Compatibility:** PATCHWORK preserves original card identity (RULE-061). Global restrictions continue to apply across copies (RULE-058–060). The general independence of separately printed abilities (RULE-055) does **not** exempt PATCHWORK augmentations from restrictions attached to the original ability they modify.
+
+**Design clarification:** If a future PATCHWORK effect is intended to create an entirely new, separately limited ability rather than augment the existing ability, that exception requires explicit design approval; do not infer independence by default.
