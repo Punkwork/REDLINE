@@ -769,3 +769,14 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Explicit user approval:** When **multiple Corporation-controlled effects trigger simultaneously**, the **Corporation determines their resolution order**. Each chosen triggered effect resolves **completely** before the next begins; instructions within each effect follow printed order under RULE-010. This mirrors RULE-011 for Runner-controlled simultaneous triggers.
 
 **Scope:** The rule concerns **ordering of already-triggered Corporation effects**, not playing reactive cards during the Corporation turn; SOFT-011's restriction on Runner card play remains unchanged. The order of simultaneous triggers **controlled by different sides** remains OPEN.
+
+
+## 79. RULE-013 — Active side resolves opposing simultaneous triggers first (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When Runner-controlled and Corporation-controlled effects trigger at the same moment, **the active side's triggered effects resolve first**:
+- **During the Runner's turn:** resolve Runner-controlled triggers first, then Corporation-controlled triggers.
+- **During the Corporation's turn:** resolve Corporation-controlled triggers first, then Runner-controlled triggers.
+
+Within each side's group of simultaneous triggers, that side chooses their order (RULE-011 for Runner, RULE-012 for Corporation). Each trigger resolves completely before the next, with instructions in printed order (RULE-010). This ordering rule does **not** permit out-of-turn card plays; SOFT-011 remains in force.
+
+**OPEN:** Exact handling of new triggers generated while another trigger is resolving (nested triggers/queue priority), if relevant.
