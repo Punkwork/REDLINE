@@ -259,7 +259,7 @@ The corporation's core is a **Central Node** within the corporate network and **
 **OPEN edge case:** If fewer than X cards remain in hand, determine whether the Runner discards all available cards or another rule applies. Preserve applicable discard-trigger effects under the existing end-of-turn rules where relevant.
 
 
-## 22. SYN overflow — 2× CHAR shortfall (LOCKED provisional balance, 2026-11-10)
+## 22. SYN overflow — 2 Integrity per shortfall (superseded by RULE-126, 2026-11-11)
 
 When resolving **SYN X**, the Runner chooses and discards as many cards as possible, up to X, from their current hand. For every card of the required X that could not be discarded, the Runner suffers **2 CHAR** (i.e., 2 Integrity loss per missing card). Formula: `overflow_CHAR = 2 * max(0, X - number_of_cards_discarded)`. Example: SYN 3 with only 1 card in hand discards that card and causes 4 CHAR; SYN 4 with an empty hand causes 8 CHAR.
 
@@ -1864,3 +1864,25 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Reduce your Trace by 3. If you reduced Trace this way, gain 2 BW.” The Runner begins at **Trace 0**, and Trace cannot fall below 0. The attempted reduction of 3 produces **0 actual Trace reduction**, so the “if you reduced” condition fails and the Runner gains **0 BW** from the conditional reward.
 
 **Compatibility:** RULE-003's cost and conditional success principles remain intact; RULE-107/123 distinguish attempted from actual resource changes; RULE-010 governs printed order. Does not change trigger timing, eligibility, source-removal cancellation, resource limits, or deferred RULE-108.
+
+
+## RULE-126 — SYN damage terminology and overflow (LOCKED, 2026-11-11)
+
+**Authoritative decision:** The active damage keyword is **SYN X** (also styled **SYN DAMAGE X** in the approved rule review). Legacy **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are deprecated; neither is an active separate damage type. SYN is **Runner-chosen** hand discard, never random discard. Historical mentions of the old terms elsewhere are superseded, not additional active mechanics.
+
+Resolve SYN X in this order:
+1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
+2. Each unfulfilled point of SYN causes **2 Integrity damage**.
+3. Apply that Integrity damage **after** discarding the available cards.
+
+| SYN X | Hand | Discarded | Integrity damage |
+|---:|---:|---:|---:|
+| 3 | 3 | 3 | 0 |
+| 3 | 2 | 2 | 2 |
+| 3 | 1 | 1 | 4 |
+| 3 | 0 | 0 | 6 |
+| 5 | 2 | 2 | 6 |
+
+**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
