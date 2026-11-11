@@ -344,3 +344,10 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Design rationale:** remove a complexity tax that discourages using acquired Hardware and compounds VOID's draw reduction. Hardware can be balanced through other mechanics, but no new equipment-slot limit or activation restriction is authorized by this change.
 
 **ICEbreakers:** Still classified as Software (TAX-003); whether they persist for one ICE or the whole Node remains OPEN. This DRAW change does not settle their duration.
+
+
+## 32. TAX-007 — ICEbreaker persistence across Node (LOCKED, 2026-11-10)
+
+**Explicit user decision:** ICEbreakers are **Software cards played from the Runner's hand** and **remain in play for the entire Node**, rather than expiring after the current ICE layer. They may therefore remain available across sequential ICE layers within the Node. This supersedes the previously OPEN ICEbreaker duration and retains their Software subtype classification.
+
+**OPEN — not approved by this decision:** Whether persistent Software has an active-slot/capacity limit; the number of slots; whether a limit includes only ICEbreakers or other persistent Software; whether Hardware uses the same capacity; replacement/uninstallation mechanics; exact return destination and timing for ICEbreaker cards at Node end. Candidate design for discussion: cap only persistent Software, not one-shot Software; test four active slots initially. No slot count or replacement rule is locked.
