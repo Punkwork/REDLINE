@@ -117,3 +117,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Authoritative correction:** At user's explicit direction, RULE-100's queue-time DRAW snapshot has been **replaced**. Queued triggered abilities now calculate each DRAW-based instruction from effective DRAW **when that instruction begins resolving** (RULE-098), not when the ability is queued. Example: queued at DRAW 5, DRAW rises to 8 before resolution, draw 8. RULE-099 continues to recalculate at each separate instruction. Master Design revision commit: `c39a5da2f0746d97662ed525bb35c7c8e1bd62a5`. Prior RULE-100 Option B and pending RULE-101 queue-snapshot question are superseded; retain earlier entries as historical only.
 
 **Next single design question (not locked):** RULE-101 — when a queued ability has multiple DRAW-based instructions and DRAW changes while queued and between instructions, confirm each instruction uses DRAW at its own resolution start. Do not commit RULE-101 without explicit approval. No code changes or tests verified.
+
+
+## Design-rule update — 2026-11-11: RULE-101
+
+**Latest locked and committed:** RULE-101 (Option A) — for a queued triggered ability with multiple separate DRAW-based draw instructions, each instruction uses effective DRAW when that individual instruction begins. Example: queued at DRAW 5, DRAW rises to 8 before resolution, first draw 8, gain +2 DRAW, second draw 10. **Conflict review:** aligns with RULE-098, RULE-099, and revised RULE-100; no overrides. Master Design commit: `7dafb193b9a86b6f4d2f4683f74d9cc1d439d121`.
+
+**Next open question:** RULE-102 — whether the instruction-start snapshot principle applies to other variable numeric quantities beyond DRAW, or remains specific to DRAW. Not approved. Ask one question and check for conflicts before committing. No code changes or tests verified. Previous open-question handoffs superseded.
