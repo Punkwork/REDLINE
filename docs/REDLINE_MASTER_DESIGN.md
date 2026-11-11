@@ -1183,3 +1183,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Installed Card A: “Whenever you shuffle your draw pile, gain 2 CHAR prevention.” Installed Card B: “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” The Runner performs a **combined shuffle under revised RULE-050** incorporating cards from discard. This is **one shuffle event** (RULE-051), qualifying both as a general draw-pile shuffle (RULE-053) and as a discard-pile reshuffle (RULE-052). **Both Card A and Card B trigger once**, granting **2 CHAR prevention** and **1 BW** respectively; the Runner chooses their order of resolution.
 
 **Scope:** This does not imply that an ability can trigger multiple times from the same event merely because its condition is described in multiple ways.
+
+
+## 121. RULE-055 — Separate abilities on one card independently trigger (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When a **single installed Software card** has **multiple separately written triggered abilities**, evaluate each ability **independently** against a qualifying event. If the event satisfies multiple abilities, **each triggers once** (subject to its own explicitly stated frequency limit), even though they appear on the **same card**. Runner-controlled simultaneous triggers are ordered by the Runner (RULE-011) and otherwise follow the established trigger queue (RULE-014/015).
+
+**Canonical example:** One Software card has both “Whenever you shuffle your draw pile, gain 2 CHAR prevention” and “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle that incorporates discard cards (RULE-050/051/052/053) satisfies **both** abilities. They each trigger **once**, granting **2 CHAR prevention** and **1 BW**, with the Runner choosing resolution order.
+
+**Compatibility:** A single event can qualify multiple distinct abilities (RULE-054), including when those abilities share a card. This does not allow one individual ability to trigger multiple times from the same single event, and explicit “once per turn” or other card-specific limits still apply (RULE-020).
