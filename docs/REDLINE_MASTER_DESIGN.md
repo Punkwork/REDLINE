@@ -890,3 +890,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Costs:** The original BW cost is paid only once (RULE-023); any explicit non-BW costs are independently required for each play (RULE-024). If a later replay's non-BW cost cannot be paid, that resolution fails without reversing earlier completed plays. Explicit shared “played twice” limits remain in force (RULE-021).
 
 **OPEN:** Whether triggers already pending *before* a replay operation began can be delayed by a replay generated during a queued effect; precise event bookkeeping for unsuccessful replay attempts. Do not silently infer these edge cases.
+
+
+## 92. RULE-026 — Replays do not reset explicit trigger-frequency limits (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Replaying a card does **not** reset or bypass an explicit frequency restriction printed on that card or ability, such as **“Once per turn.”** Each replay is still a separate play for other applicable effects (RULE-022), but an ability whose per-turn allowance has already been used does not activate again merely because its card is replayed.
+
+**Canonical example:** “Once per turn: When played, gain 5 CHAR prevention.” If an effect causes this card to be played twice during the same turn, the limited ability activates **once total**, granting **5 CHAR prevention**, not 10.
+
+**Compatibility:** RULE-020 (explicit per-card limits), RULE-021 (independent copies except explicit shared outcome limits), RULE-023/024 (replay costs), and RULE-025 (uninterrupted replay sequence) continue to apply. This does not introduce a universal trigger cap.
+
+**OPEN:** Whether failed or unpaid replay attempts count as plays for frequency-limit bookkeeping; exact reset timing of limits phrased only as “per turn.”
