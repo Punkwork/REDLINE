@@ -103,3 +103,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Latest locked and committed:** RULE-099 — each distinct draw instruction referencing DRAW calculates its target from effective DRAW at the start of that instruction, even if two such instructions occur within one ability. Example: DRAW 5; draw 5; gain +2 DRAW; draw 7. RULE-098 continues to fix each instruction's target once it starts. Master Design commit: `bc056f665eabf62a516956214128a650cba82a89`.
 
 **Next open question:** RULE-100 — if a DRAW-based draw instruction is queued for later resolution, whether its DRAW target is calculated on queueing or when the instruction actually begins. No approval yet. No code changes or tests verified. Prior open-question handoffs are historical and superseded.
+
+
+## Design-rule update — 2026-11-11: RULE-100
+
+**Latest locked and committed:** RULE-100 (Option B) — a queued triggered Software ability with a single “Draw cards equal to your DRAW” instruction fixes its draw count from effective DRAW when it enters the FIFO queue. Example: queued at DRAW 5, DRAW later increases to 8, ability still draws 5. This is an explicit exception to RULE-098's default instruction-start snapshot; existing source-removal cancellation remains in force. Master Design commit: `17b5c4917290061064b75774fee4dadbc323a0a6`.
+
+**Next open question:** RULE-101 — whether a queued ability containing *two separate* DRAW-based draw instructions snapshots both at queue time or only its first instruction, with the second calculated when reached. Not yet approved. No code changes or tests verified; earlier open-question handoffs are superseded.
