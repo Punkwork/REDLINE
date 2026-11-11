@@ -1348,3 +1348,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** PATCHWORK-enhanced Software reads: “Once per turn, when you shuffle your draw pile, you may **discard 1 card** to gain **5 CHAR prevention**.” Another card says: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” The Runner must discard **1 card** to gain **5 CHAR prevention** from the copy. If unable or unwilling to pay that cost, the copied resolution grants **no CHAR prevention**. The original card's activation allowance is unchanged by the copied resolution.
 
 **Compatibility:** Costs must be fully paid (RULE-003); copied triggered abilities include PATCHWORK enhancements (RULE-069); explicit copied resolutions are permitted even when the original activation allowance is consumed (RULE-070). The copied effect follows its own text without treating the original ability as activated again.
+
+
+## 138. RULE-072 — Copied abilities resolve complete instructions in original order (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect **copies and resolves a Software triggered ability**, it copies **all instructions of the complete PATCHWORK-enhanced ability** and executes them **in their original printed/modified order**, using the **current game state** at resolution. It does **not** copy only the numerical result of a prior activation.
+
+**Canonical example:** An installed Software ability enhanced through PATCHWORK reads: “When you shuffle your draw pile, **gain 3 CHAR prevention. Then double your CHAR prevention**.” If the Runner has **5 CHAR prevention** when the copied ability resolves, it first gains 3 (**5 → 8**) and then doubles the current pool (**8 → 16**), ending at **16 CHAR prevention**.
+
+**Compatibility:** Instructions resolve in order (RULE-010); copied abilities include PATCHWORK modifications (RULE-069), can resolve when original activation limits are consumed if explicitly directed (RULE-070), and retain costs where applicable (RULE-071). Trigger queue handling remains governed by RULE-014/015.
