@@ -563,3 +563,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Examples:** If Runner must discard one CACHED card, Runner chooses which CACHED card. If Runner must remove CACHE from one card, Runner chooses which. If Corporation is required to PURGE Virus counters, Corporation chooses eligible counters. The existing SYN X rule (Runner chooses cards to discard) is consistent with this default.
 
 **Exceptions:** An effect that explicitly names a particular target, defines a different chooser, or calls for random selection overrides this default. Do not assume the Corporation randomly selects affected CACHED cards absent such explicit wording. If insufficient eligible objects exist, follow the specific effect's instructions or a future general insufficiency rule (still OPEN).
+
+
+## 58. RULE-002 — Fulfill as much as possible; independent effects still resolve (LOCKED, 2026-11-10)
+
+**Explicit user decision:** When a mandatory effect instructs a target to perform an action and the target has fewer eligible objects/resources than requested, **perform as much of the instruction as possible**. An unfulfillable portion does **not** cause the whole card/effect to fail. **Subsequent effects still resolve**, unless an explicit rule or condition says otherwise.
+
+**User's authoritative example:** A card reads **“When played: Discard a card. Gain X effect.”** If the Runner has **no other cards in hand** to discard, the Runner discards none and **still gains X**. If the Runner has an eligible card, they discard one (target chooses under RULE-001), then gain X. Likewise, “discard 3 CACHED cards” with only one CACHED card discards that one.
+
+**OPEN design distinction:** Future effects may explicitly specify an **additional mandatory cost** or conditional **“if you do”** requirement to gate a benefit, but the exact templating and general cost-payment rules have not yet been approved. Do not retroactively interpret a normal “Discard 1. Gain X” instruction as such a cost.
