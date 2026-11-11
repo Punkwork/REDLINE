@@ -789,3 +789,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Illustration:** Starting at 0 CHAR prevention, a played card says **“Gain 3 CHAR prevention. Double your CHAR prevention.”** Installed Software triggers on gaining CHAR prevention and grants +2 CHAR prevention. The +2 trigger waits while the played card resolves: **0 → 3 → 6**, then the queued +2 resolves to **8**. It does not interrupt between gaining 3 and doubling, which would have produced 10.
 
 **OPEN:** Detailed queue policy for newly generated triggers while other triggers are queued, especially whether newly generated triggers are inserted ahead of or behind existing pending triggers, subject to RULE-011/012/013.
+
+
+## 81. RULE-015 — FIFO pending trigger queue (LOCKED, 2026-11-10)
+
+**Explicit user approval:** REDLINE's pending triggered effects resolve in **first-in, first-out (FIFO)** order. When an effect currently resolving generates a new trigger, that new trigger is appended to the **back of the existing pending queue** rather than jumping ahead of triggers already waiting. The current effect must complete before the next queued effect begins (RULE-014).
+
+**Example:** Triggers **A** and **B** are already waiting. Resolving **A** generates trigger **C**. Resolve in order **A → B → C**.
+
+**Compatibility with priority rules:** For triggers generated **simultaneously**, establish their relative enqueue order using controller choice (RULE-011/012) and active-side priority (RULE-013). After insertion, newly generated triggers do not overtake already-queued effects. Within each effect, printed instructions resolve top-to-bottom (RULE-010). This queue rule does not permit reactive card plays (SOFT-011).
