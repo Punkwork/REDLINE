@@ -1125,3 +1125,16 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Draw replacement requires an available drawable card at the time of the individual draw (RULE-045), including eligible cards in discard (RULE-046); replacement choices precede automatic reshuffling (RULE-047). A replaced draw is not an actual draw for draw triggers or conditional full-draw rewards (RULE-040/041). Normal multi-card draw instructions remain uninterrupted by queued ordinary triggers (RULE-033/039).
 
 **OPEN:** Whether cards returned to the draw pile by replacement are placed on top, bottom, or shuffled in, unless specified by card text; how multiple effects modify availability during a single draw event.
+
+
+## 115. RULE-049 — Draw-pile insertion destination must be explicit (LOCKED, 2026-11-10)
+
+**Explicit user direction:** Every card effect that **returns, moves, or inserts a card into the draw pile** must explicitly state **where** that card goes: **top of the draw pile**, **bottom of the draw pile**, or **shuffled into the draw pile**. **There is no default placement** for card effects.
+
+**Invalid/unfinished wording:** “Instead of drawing a card, return 1 card from your hand to your draw pile.” This does not specify placement and must be corrected during card design rather than silently interpreted by the engine.
+
+**Valid example:** “Instead of drawing a card, return 1 card from your hand to the **top** of your draw pile.” Other effects may explicitly specify the **bottom** or instruct the player to **shuffle** the card into the draw pile.
+
+**Compatibility:** Replacement effects can change draw availability for subsequent individual draws within a multi-card draw instruction (RULE-048). This rule does not alter the separate automatic reshuffle of the discard pile when drawing from an empty draw pile (RULE-034/047).
+
+**Implementation guidance:** Card definitions and validation should reject or flag draw-pile movement effects without an explicit destination.
