@@ -611,3 +611,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Distinction:** An effect established by a card already played during the Runner's turn may operate or resolve during the subsequent corporate response according to its card text; that is **not** playing a new card out of turn. CACHE retention preserves access to cards for later Runner turns but does not grant out-of-turn play. The previously discussed CRED-powered instant shield therefore must be played proactively if it is to defend against incoming CHAR; precise shield effect duration/trigger and CRED-spending timing remain OPEN.
 
 **Supersedes:** The earlier assistant proposal to allow special reactive Instant Software during corporate response is rejected.
+
+
+## 63. SOFT-012 — Default defensive protection duration (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A defensive card played during the Runner's turn normally provides its protection **through the immediately following Corporation response**. Any unused protection **expires at the end of that corporate response**. A card can **explicitly specify a longer duration**, overriding this default. This is a duration rule, not permission to play reactive cards: under SOFT-011, **all Runner cards must be played during the Runner's turn**.
+
+**Example:** An Instant Software shield played during the Runner's turn says **“Prevent 3 CHAR.”** During the following corporate response it can prevent up to 3 CHAR; if only 1 CHAR is dealt, the unused 2 protection expires after that response. The shield card itself follows the normal play → resolve → discard lifecycle; its already-established protection may continue until the response ends.
+
+**OPEN:** Exact stacking/consumption order of multiple protections, whether protection is shared across different damage instances by default (example above assumes a pool), and CRED-to-CHAR shield exchange rates.
