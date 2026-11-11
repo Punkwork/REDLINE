@@ -1061,3 +1061,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Multiple-card draws:** Make the replacement choice independently for **each individual would-be draw**, while preserving uninterrupted resolution of the overall draw operation and deferring ordinary triggers until afterward (RULE-033/040).
 
 **Compatibility:** A replaced draw does not count as a card actually drawn for conditional draw rewards (RULE-041). **OPEN:** Mandatory replacement effects and precedence between mandatory and optional replacements, if introduced.
+
+
+## 109. RULE-043 — Mandatory draw replacements take priority over optional replacements (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When a **mandatory** draw replacement and an **optional** draw replacement are both applicable to the same would-be draw, the **mandatory replacement takes priority**, unless other card text **explicitly overrides** that precedence. A replacement reading **“Whenever you would draw a card, gain 2 CHAR prevention instead”** (without “may”) is mandatory. The Runner cannot elect to draw normally or choose a competing optional replacement while the mandatory replacement applies.
+
+**Canonical example:** Card A (mandatory): “Whenever you would draw a card, gain 2 CHAR prevention instead.” Card B (optional): “Whenever you would draw a card, you may gain 1 BW instead.” For the affected draw, apply Card A and gain **2 CHAR prevention**; do **not** draw the card or gain Card B's optional **1 BW**, absent explicit override text.
+
+**Compatibility:** Only one replacement benefit applies to a single draw event (RULE-042). Replaced draws do not count as actual cards drawn for conditional rewards (RULE-041). Replacement effects occur before the affected draw rather than as queued post-draw triggers (RULE-040).
+
+**OPEN:** Ordering/selection when **multiple mandatory replacements** compete for the same draw event, and the exact meaning and resolution of explicit priority overrides.
