@@ -1624,3 +1624,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Ability text: “Draw cards equal to your DRAW. Gain +2 DRAW. Then draw cards equal to your DRAW again.” It enters the FIFO queue at DRAW **5**. Before resolution, DRAW rises to **8**. The first instruction draws **8**; the intervening +2 raises DRAW to **10**; the second instruction draws **10**, subject to existing draw-shortfall rules.
 
 **Conflict check:** Consistent with RULE-098 (snapshot each instruction at its start), RULE-099 (separate instructions recalculate), and revised RULE-100 (no queue-time snapshot). **No existing locked rule is overridden.** Existing trigger ordering, source-removal cancellation, and draw-shortfall handling are unchanged.
+
+
+## 168. RULE-102 — Snapshot variable numeric quantities per discrete instruction, with explicit protections (LOCKED, 2026-11-11)
+
+**Explicit user approval — exception-protected Option A following conflict audit:** When a **discrete instruction** calculates an effect using a **variable numerical value**, determine that value **when the instruction begins resolving**. Keep the calculated quantity fixed for **that instruction**. Each later, separate instruction independently calculates its variable quantity using the game state when **that later instruction** begins resolving.
+
+**Scope and precedence:** This general rule **does not freeze continuous effects**, override **explicit card or rule timing instructions**, bypass **costs or conditions**, or change **resource expenditure and consumption priorities**. More-specific locked rules and explicit applicable card text take precedence. In particular, continuous Software effects continue updating under RULE-090–095; costs and conditions remain governed by RULE-003/038/071; and eligible resource consumption continues under RULE-004–006. Existing trigger ordering and FIFO resolution are unchanged.
+
+**Illustrative example (not a finalized card):** An ability reads “Gain CHAR prevention equal to your current Trace. Reduce Trace by 2. Gain CHAR prevention equal to your current Trace.” If Trace is 6 when the first instruction begins, the first gain is **6**; after Trace falls to 4, the second distinct gain is **4**, unless more-specific rules or card text direct otherwise. Changing Trace during an individual instruction does not retroactively change that instruction's already calculated amount.
+
+**Conflict review:** Extends RULE-098–101's per-instruction snapshot model beyond DRAW while preserving RULE-010 (printed order), RULE-008/009 (sequential snapshot prevention multipliers), and RULE-072 (copied abilities use current state). **No override of the cited locked mechanics is authorized by this rule.** Future edge cases with more-specific instructions must be evaluated against those rules rather than silently generalized.
