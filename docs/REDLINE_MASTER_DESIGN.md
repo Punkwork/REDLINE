@@ -1339,3 +1339,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Installed Software has a PATCHWORK-enhanced ability: “Once per turn, whenever you shuffle your draw pile, gain **5 CHAR prevention**.” The original ability has already activated this turn. The Runner plays an effect: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” That copied resolution still grants **5 CHAR prevention**, and the original card cannot activate its own once-per-turn ability again until its normal reset.
 
 **Scope:** This permission requires an effect that **explicitly copies and resolves** the ability. Merely creating another qualifying trigger event does not bypass original limits. Copying an ability does not create a new Software card or fresh card-instance allowance (RULE-069), and PATCHWORK otherwise inherits restrictions of the original ability (RULE-062).
+
+
+## 137. RULE-071 — Copied abilities retain costs (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect explicitly **copies and resolves an installed Software card's triggered ability**, the copied ability retains **all costs required for its benefit**, including costs in its PATCHWORK-enhanced version. The Runner must pay such costs in full for the copied resolution to grant the associated benefit. If the cost cannot be paid, the associated benefit is not granted. Copying the ability does not waive costs or consume an additional activation of the original ability.
+
+**Canonical example:** PATCHWORK-enhanced Software reads: “Once per turn, when you shuffle your draw pile, you may **discard 1 card** to gain **5 CHAR prevention**.” Another card says: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” The Runner must discard **1 card** to gain **5 CHAR prevention** from the copy. If unable or unwilling to pay that cost, the copied resolution grants **no CHAR prevention**. The original card's activation allowance is unchanged by the copied resolution.
+
+**Compatibility:** Costs must be fully paid (RULE-003); copied triggered abilities include PATCHWORK enhancements (RULE-069); explicit copied resolutions are permitted even when the original activation allowance is consumed (RULE-070). The copied effect follows its own text without treating the original ability as activated again.
