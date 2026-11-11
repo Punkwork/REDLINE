@@ -1514,3 +1514,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A reads “Draw 2 cards. If this Software is still installed, gain 5 CHAR prevention.” A's ability begins resolving; during the draw, A is removed and then reinstalled before the condition is checked. The already-started ability completes its draw under RULE-083/086, but the original installed instance has left play. The newly installed instance does **not** count as “this Software” still being installed for that original ability. **No 5 CHAR prevention is granted.**
 
 **Identity clarification:** Reinstallation creates a new **installed instance**, not a new physical card or card copy. It does not restore cancelled pending triggers (RULE-082), reset consumed global limits (RULE-059/060/065), or contradict the rule that temporarily removing/reinstalling the same Software card does not reset consumed activation limits (RULE-066). The current-resolution protection (RULE-083) does not preserve source identity for explicit installation conditions (RULE-088).
+
+
+## 156. RULE-090 — Continuous Software effects belong to their installed instance (LOCKED, 2026-11-11)
+
+**Explicit user approval:** A continuous Software effect that applies **while its source Software is installed** belongs to that particular **installed instance**. When that instance leaves play, its continuous effect **ends immediately**. Reinstalling the same physical card creates a **new installed instance** that establishes its own continuous effect, rather than reviving or stacking the original effect.
+
+**Canonical example:** Software A reads “While this Software is installed, gain +2 DRAW.” Removing A ends the original installed instance's **+2 DRAW** immediately. Reinstalling A establishes a new **+2 DRAW** effect. The two instances' effects do not overlap or stack: **+2 DRAW, not +4 DRAW**.
+
+**Compatibility:** Reinstallation is a new installed instance (RULE-089), but does not create a second physical card, restore cancelled pending triggers (RULE-082), or reset activation limits protected by RULE-066 and global-limit rules. Distinguish continuous effects, which require an installed source, from discrete abilities that have already begun resolving and therefore finish under RULE-083.
