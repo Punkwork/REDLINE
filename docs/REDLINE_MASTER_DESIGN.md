@@ -1272,3 +1272,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Copy A is unmodified and grants **2 CHAR prevention** on a qualifying shuffle; Copy B has PATCHWORK augmenting the same ability to grant **5 CHAR prevention**. Both share a global once-per-turn limit. On a qualifying shuffle with the allowance available, the Runner chooses **either 2 CHAR prevention (A) or 5 CHAR prevention (B)**, not both. The global allowance is then consumed for all copies until reset.
 
 **Compatibility:** Global restrictions apply across installed copies (RULE-058–060), PATCHWORK preserves identity (RULE-061) and inherits restrictions of the augmented ability (revised RULE-062). The choice of instance determines the modified outcome, not an additional activation.
+
+
+## 130. RULE-064 — Only eligible installed copies can activate PATCHWORK-enhanced abilities (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When multiple copies of the same Software card share a global activation limit, the Runner may select **only an eligible installed copy** to resolve the globally limited ability. A PATCHWORK-modified copy in the discard pile or another inactive zone cannot be selected to provide its enhanced effect, **unless explicit card text permits activation from that zone**.
+
+**Canonical example:** Copy A is standard Software, **installed**, and its qualifying shuffle ability grants **2 CHAR prevention**. Copy B is PATCHWORK-modified Software, **in the discard pile**, and would grant **5 CHAR prevention** if installed. A qualifying shuffle occurs. Only Copy A is eligible to activate, granting **2 CHAR prevention** and consuming the shared global allowance. Copy B's enhanced benefit is unavailable while it remains in discard.
+
+**Compatibility:** Runner chooses among eligible differently modified copies for a shared global activation (RULE-063). PATCHWORK preserves original card identity and inherits original restrictions (RULE-061/062); global limits remain shared across copies (RULE-058–060). Zone-specific exceptions require explicit text.
