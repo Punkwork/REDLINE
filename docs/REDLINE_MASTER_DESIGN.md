@@ -1819,3 +1819,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to your current Trace. Then gain CHAR prevention equal to your current Trace.” After the qualifying event, the first reward instruction begins at **Trace 4**, so it attempts to grant **4 BW**. Assuming a legally permitted intervening effect changes Trace to **6** before the second instruction begins, the second instruction attempts to grant **6 CHAR prevention**, not 4. All applicable resource restrictions and existing timing rules still apply.
 
 **Compatibility:** Clarifies RULE-102/103 and RULE-110's per-discrete-instruction resolution-time evaluation. Does not alter RULE-010 printed instruction order, RULE-014/015 FIFO timing, eligibility, costs, conditions, source-removal cancellation, or deferred RULE-108.
+
+
+## 185. RULE-120 — No automatic interruption window between ordinary instructions (LOCKED, 2026-11-11)
+
+**Explicit user approval:** Resolve a card or ability's discrete instructions in their printed order **without an automatic interruption window between them**. An intervening effect may occur only where an existing timing rule or explicit card text permits it. Newly generated triggered abilities remain queued until the current ability finishes resolving, following the existing FIFO rules. RULE-102/103/119 still require current-state quantities to be evaluated independently at the start of each discrete instruction; those rules **do not themselves permit an interruption**.
+
+**Canonical example:** Software A reads “Gain 4 BW. Then gain CHAR prevention equal to your current Trace.” Trace is **4** when A starts resolving. The first instruction attempts to grant **4 BW**. With no legally permitted intervening effect that changes Trace, the next instruction immediately uses **Trace 4** and attempts to grant **4 CHAR prevention**. Any triggers created during either instruction wait until A finishes, subject to existing timing, eligibility and resource restrictions.
+
+**Compatibility:** Preserves RULE-010's printed order, RULE-014/015's queued-trigger timing and FIFO, RULE-102/103/119's per-instruction value evaluation, and all existing explicit exceptions. Does not create or remove any otherwise permitted interruption, nor resolve deferred RULE-108.
