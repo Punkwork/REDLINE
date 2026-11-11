@@ -224,3 +224,44 @@ NUL/REM is a witness and participant, not the whole setting. A CAP's discarded s
 **Scope:** This is a CANON worldbuilding guidepost, not a finalized technical explanation of the First Signal. The existing description of a literal synchronization transmission remains part of the storyline; its relationship to the recurring threshold of awareness and communication is still to be discovered. Do not assert a single cosmic origin, deterministic cycle, or definitive metaphysical explanation without further design approval.
 
 **Narrative application:** The Runner/NUL/REM relationship, human/AI tension, corporate control, neural signaling, and discoveries across the network can reflect this guidepost without announcing its meaning at the outset. Distinguish actual transmissions and observable signals from philosophical interpretations of consciousness.
+
+---
+
+## PANOPTICON — surveillance, confinement, and the transformation of humanity (2026-11-10)
+
+**Status: DIRECTION — foundational thematic pillar.** **Title status: working title PANOPTICON;** REDLINE remains the existing repository/document codename pending deliberate renaming and title clearance.
+
+### The governing question
+
+> **What does humanity become when it knows it is being permanently observed and monitored?**
+
+This is the central question, not merely whether a Runner can evade cameras, escape a prison, or discover an observer. PANOPTICON examines what permanent observation does to human consciousness, identity, behaviour, culture, creativity, intimacy, and the very idea of a private self. The question must remain genuinely open: the setting should not presuppose that humanity simply becomes less human, nor prescribe one uniform transformation.
+
+**DIRECTION — The internalized observer.** Surveillance need not always be actively enforced to change behaviour. People may anticipate scrutiny, adapt their actions, and eventually experience observation as normal, reassuring, necessary, or constitutive of identity. The possibility of observation may exert power even when no observer is visible.
+
+**DIRECTION — Generational transformation.** Explore a society whose inhabitants have lived with pervasive observation for so long that privacy may seem unfamiliar, suspect, or frightening. Different individuals and communities may respond differently: accommodation, performance, creativity, resistance, dependence, withdrawal, and unexpected new forms of social life. Avoid reducing everyone to frightened contemporary people transplanted into a dystopia.
+
+**DIRECTION — Control is more than detection.** Surveillance can classify, predict, condition, and constrain behaviour. The thematic focus is surveillance as a system of power, not merely an inventory of monitoring devices.
+
+**DIRECTION — The paradox of intrusion and imprisonment.** The Runner voluntarily penetrates a network designed to deny access, then faces systems designed to contain and observe them. The tension between being **locked out** and **locked in** should recur in setting, narrative, interface, and sound.
+
+### Architectural and visual language
+
+**DIRECTION — Lock motif.** Locks, deadbolts, sealed thresholds, vaults, airlocks, containment mechanisms, apertures, and claustrophobic spaces express restricted access and control. The core encounter rule — breaking ICE **DEADLOCK** subroutines to permit advancement after the corporation turn — is an especially important opportunity to give the game's central action a visual and auditory identity. Literal doors are optional, not mandatory.
+
+**DIRECTION — Panoptic network.** Inspired by the panopticon's asymmetry of visibility: a central or concealed observer can potentially watch the confined while the confined cannot know whether observation is occurring. Corporate network spaces may evoke surveillance prisons, concentric structures, opaque observation windows, impossible corridors, and watchful architecture, but need not literally reproduce a circular prison. Psychological pressure matters more than literal architectural fidelity.
+
+**DIRECTION — Mechanics should express theme.** Supporting corporate defences may observe Runner behaviour and react to patterns. The player may begin anticipating surveillance and voluntarily changing tactics. This should emerge from legible, fair, strategically interesting rules; never use the theme to excuse arbitrary punishment. No separate Observation resource is approved.
+
+**DIRECTION — The deck as confined space.** Corporate corruption can occupy draws and hand slots, limiting the Runner's available actions. This is a thematic connection, not an authorization to implement unapproved corruption cards or change established damage rules.
+
+### Narrative boundaries and open questions
+
+- **OPEN:** What transformations arise under permanent observation, and do they differ across communities or generations?
+- **OPEN:** What does it mean to be unobserved in this society? Could solitude itself become frightening?
+- **OPEN:** Is there a central observer, a distributed system, or something else? Do not decide this prematurely.
+- **OPEN:** How does NUL/REM's attentive, sometimes protective presence contrast with institutional observation?
+- **OPEN:** How, if at all, does this theme intersect with the First Signal and consciousness? The existing cosmological guidepost and actual synchronization transmission remain intact.
+- **OPEN:** Final title availability, typography, environmental art, surveillance gameplay details, and narrative resolution.
+
+**Editorial test:** Every major thematic use of surveillance should ask what observation *changes in people*, not merely what technology sees. Preserve ambiguity and human variation rather than converting the game into a predetermined lecture.
