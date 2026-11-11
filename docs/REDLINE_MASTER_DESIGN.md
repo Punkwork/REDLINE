@@ -250,3 +250,10 @@ The corporation's core is a **Central Node** within the corporate network and **
 **Migration warning:** The older 'NEURAL DAMAGE X = chosen discard' rule has no explicitly confirmed current equivalent in the archived CHAR/SYN/VOID set; do not silently remap it to SYN or invent a new keyword. Earlier 'BRAIN DAMAGE' maps historically to the persistent draw-loss concept now named VOID, not an additional active mechanic.
 
 **Authority:** Explicit 2026-11-10 user confirmation and REDLINE_DESIGN_SESSION_2026-11-09 archive, later terminology addendum.
+
+
+## 21. SYN X — Runner-selected discard (LOCKED, 2026-11-10)
+
+**Latest explicit user decision supersedes all prior random-discard definitions of SYN:** **SYN X** means the Runner **chooses and discards X cards from their current hand**. SYN is a hand-discard effect, not direct Integrity loss, VOID-counter gain, or permanent card destruction. **CHAR X** remains direct Integrity reduction; **VOID X** remains persistent draw reduction. **NEURAL DAMAGE**, **SYNAPTIC DAMAGE**, and **BRAIN DAMAGE** remain deprecated. Earlier references to SYN as random discard (including section 20 above) are historical and superseded.
+
+**OPEN edge case:** If fewer than X cards remain in hand, determine whether the Runner discards all available cards or another rule applies. Preserve applicable discard-trigger effects under the existing end-of-turn rules where relevant.
