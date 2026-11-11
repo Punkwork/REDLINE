@@ -77,3 +77,16 @@ RULE-127: pending review; not approved.
 **Example:** One ICE subroutine inflicts BURN 3 + SyN 3 + VOID 2. Runner has 10 VIT, 2 cards in hand, BURN prevention 1, no SyN/VOID prevention. Resolve BURN 3: prevent 1, lose 2 VIT (8 remain). Resolve SyN 3: mandatory discard 2, shortfall 1 generates 2 BURN; no BURN prevention remains, lose 2 VIT (6 remain). Resolve VOID 2: apply 2 persistent VOID counters. Queue generated triggers during these steps; resolve after the mixed-damage effect completes, if the run survives.
 
 **Defeat precedence:** Reaffirms RULE-RT-002's immediate run defeat at zero Vitae; no later damage, advancement, or queued recovery may reverse defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
+
+
+### RULE-129 amendment — reversed fixed damage order (LOCKED, 2026-11-11)
+
+**Explicit user revision supersedes the original RULE-129 ordering:** When one effect inflicts multiple damage types, the fixed component order is now **VOID → SyN → BURN**, regardless of controller or printed damage-type order. Any earlier RULE-129 statement of **BURN → SyN → VOID** is superseded and must not be used as the current resolution sequence.
+
+1. **VOID first:** Apply VOID prevention and then persistent DRAW reduction under the established DRAW floor; no retroactive change to cards already drawn.
+2. **SyN second:** Apply SyN prevention, mandatory Runner-selected discards, and immediately resolve any resulting **overflow BURN** using the current BURN prevention pool (RULE-126/127/128). Check for immediate defeat after any VIT reduction.
+3. **Direct BURN last:** Apply remaining BURN prevention to the effect's direct BURN component; unprevented BURN reduces Vitae (VIT). Check immediate defeat.
+
+**Triggers and defeat unchanged:** Queue damage/discard/prevention triggers until the complete mixed-damage effect finishes (RULE-014/015/129), unless VIT reaches zero, which ends the run immediately and cancels unresolved components and queued triggers (RULE-RT-002). This ordering is fixed, not dynamically optimized or re-sorted by outcome. Reversing component order does not intrinsically increase numerical damage: VOID does not reduce the current hand, and BURN prevention is still consumed by eligible damage in resolution order.
+
+**Revised example:** One effect inflicts BURN 3 + SyN 3 + VOID 2; Runner starts at 10 VIT, 2 cards in hand, BURN prevention 1, no SyN/VOID prevention. First apply VOID 2. Next SyN 3 forces discard of both cards and generates 2 overflow BURN; prevent 1, suffer 1 (9 VIT). Finally direct BURN 3 is unprevented (6 VIT). Queue eligible triggers until all components finish.
