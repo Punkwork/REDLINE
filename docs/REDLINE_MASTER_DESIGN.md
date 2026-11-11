@@ -1165,3 +1165,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Draw pile empty, discard pile has 5 cards; Runner shuffles 1 card from hand into the draw pile. All 6 cards are combined and shuffled together once; discard becomes empty. Installed Software “Whenever you reshuffle your discard pile into your draw pile, gain 2 CHAR prevention” **triggers once**, granting **2 CHAR prevention**.
 
 **Compatibility:** This is one event, not a discard reshuffle followed by a separate shuffle (RULE-051). Apply ordinary trigger queuing and timing (RULE-014/015/035/036). The specific discard-reshuffle trigger requires that cards actually be incorporated from discard; merely shuffling a card into an empty draw pile when discard is empty does not meet that wording.
+
+
+## 119. RULE-053 — General draw-pile shuffle differs from discard-pile reshuffle (LOCKED, 2026-11-10)
+
+**Explicit user approval:** An instruction to **shuffle a card into the draw pile** counts as **one general draw-pile shuffle event** even if the draw pile was empty and the resulting draw pile contains only one card. However, this does **not** qualify as a **discard-pile reshuffle** unless at least one card was actually incorporated from the discard pile.
+
+**Canonical example:** Draw pile **0**, discard pile **0**; card says “Shuffle 1 card from your hand into your draw pile.” The resulting draw pile contains **1 card**. Effects reading “Whenever you shuffle your draw pile” trigger **once**; effects reading “Whenever you reshuffle your discard pile into your draw pile” do **not** trigger.
+
+**Compatibility:** When discard cards actually participate in the combined shuffle under RULE-050/051, discard-reshuffle triggers qualify (RULE-052). One shuffle operation is still only one shuffle event; apply ordinary trigger queue and card-specific frequency limits.
