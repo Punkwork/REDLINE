@@ -910,3 +910,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** An installed defensive Software with a “once per turn” trigger can activate on the Runner turn and again on the Corporation turn after its allowance resets. This does **not** permit the Runner to play cards during the Corporation turn; existing persistent effects can trigger automatically (SOFT-011).
 
 **Compatibility:** Explicit frequency restrictions continue to apply per ability (RULE-020), independent copies follow RULE-021, and replay does not reset a used allowance within the same turn (RULE-026). **OPEN:** Text specifying “once during your turn,” “once during the Runner's turn,” or other narrower windows follows its explicit wording; exact turn-boundary event ordering relative to start-of-turn triggers is not yet defined.
+
+
+## 94. RULE-028 — Reset per-turn allowances before start-of-turn triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** At the beginning of **every Runner and Corporation turn**, first **reset all applicable per-turn trigger-frequency allowances** (RULE-027), and **then process abilities triggered at the start of that turn**. Start-of-turn abilities therefore use their freshly refreshed allowance, rather than being blocked by uses during the previous turn.
+
+**Example:** An ability reading “Once per turn: At the start of a turn, [effect]” is eligible to trigger at the beginning of each turn after its allowance refreshes, subject to its other conditions and normal trigger ordering/queue rules.
+
+**Compatibility:** This does not allow out-of-turn Runner card play (SOFT-011); it concerns triggered abilities already in effect. **OPEN:** Relative ordering among multiple start-of-turn triggers follows existing controller/active-side rules (RULE-011/012/013), but timing relative to other start-of-turn housekeeping such as BW refresh, DRAW, or expiration of temporary prevention requires separate decisions.
