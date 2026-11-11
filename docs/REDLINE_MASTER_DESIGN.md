@@ -1855,3 +1855,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Reduce your Trace by 5. Then gain CHAR prevention equal to the amount of Trace actually reduced.” The Runner begins at **Trace 3**, and Trace cannot fall below **0**. The first instruction attempts to reduce Trace by 5 but actually reduces it by **3**, leaving Trace **0**. The second instruction attempts to grant **3 CHAR prevention**, not 5, subject to applicable restrictions.
 
 **Compatibility:** RULE-107 distinguishes actual from attempted event magnitudes; RULE-010 preserves printed instruction order; RULE-102/103/119 evaluate numerical quantities at each discrete instruction; RULE-121/122 apply updated game state to later instructions. Existing trigger timing, costs, conditions, eligibility, resource limits, source-removal cancellation, and deferred RULE-108 remain unchanged.
+
+
+## 189. RULE-124 — Conditional “if you reduced” requires a positive actual reduction (LOCKED, 2026-11-11)
+
+**Explicit user approval:** A condition reading **“If you reduced [resource] this way”** is satisfied only if the referenced instruction **actually reduced that resource by a positive amount**. An attempted reduction that produces **zero actual change** does not satisfy the condition and grants no conditional reward. This rule addresses an effect condition, not whether an explicitly designated cost was fully paid; RULE-003 continues to govern costs.
+
+**Canonical example:** Software A reads “Reduce your Trace by 3. If you reduced Trace this way, gain 2 BW.” The Runner begins at **Trace 0**, and Trace cannot fall below 0. The attempted reduction of 3 produces **0 actual Trace reduction**, so the “if you reduced” condition fails and the Runner gains **0 BW** from the conditional reward.
+
+**Compatibility:** RULE-003's cost and conditional success principles remain intact; RULE-107/123 distinguish attempted from actual resource changes; RULE-010 governs printed order. Does not change trigger timing, eligibility, source-removal cancellation, resource limits, or deferred RULE-108.
