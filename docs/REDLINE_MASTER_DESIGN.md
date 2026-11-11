@@ -1156,3 +1156,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Trigger consequences:** An effect that triggers “Whenever you shuffle your draw pile” sees **one shuffle** and triggers once (subject to card-specific limits). A trigger explicitly requiring a **discard-pile reshuffle** must be evaluated according to its wording; do not silently equate all shuffle trigger conditions. Any resulting triggers follow the existing queue and resolution rules (RULE-014/015/035/036).
 
 **Compatibility:** RULE-050 (revised) establishes card movement; RULE-051 establishes single-event accounting. No automatic shuffle is implied when a card is placed explicitly on the top or bottom of the draw pile instead of being shuffled (RULE-049).
+
+
+## 118. RULE-052 — Combined shuffle qualifies as discard-pile reshuffle trigger (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When the discard pile is incorporated into an empty draw pile as part of the combined shuffle established by revised RULE-050 and RULE-051, the operation **qualifies as a discard-pile reshuffle** for effects reading “Whenever you reshuffle your discard pile into your draw pile.” It produces **one shuffle event** and therefore **one such trigger** per qualifying effect, subject to any explicit card-specific frequency restrictions.
+
+**Canonical example:** Draw pile empty, discard pile has 5 cards; Runner shuffles 1 card from hand into the draw pile. All 6 cards are combined and shuffled together once; discard becomes empty. Installed Software “Whenever you reshuffle your discard pile into your draw pile, gain 2 CHAR prevention” **triggers once**, granting **2 CHAR prevention**.
+
+**Compatibility:** This is one event, not a discard reshuffle followed by a separate shuffle (RULE-051). Apply ordinary trigger queuing and timing (RULE-014/015/035/036). The specific discard-reshuffle trigger requires that cards actually be incorporated from discard; merely shuffling a card into an empty draw pile when discard is empty does not meet that wording.
