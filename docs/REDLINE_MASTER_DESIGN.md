@@ -282,3 +282,15 @@ When resolving **SYN X**, the Runner chooses and discards as many cards as possi
 **Explicit user decision:** **Each corporation's Central Node resembles a final boss battle, but is structured as an ICE encounter.** All three corporations in a full run therefore have a climactic Central Node confrontation. This is a corporation-level climax, not the end of the three-corporation run until the third corporation is completed. Use the established ICE combat framework as the foundation rather than assuming a separate combat minigame. Corporate identity and presentation may distinguish the confrontation; do not invent mandatory phases, subroutines, rewards, or victory conditions.
 
 **OPEN:** precise boss mechanics and exceptions to standard ICE rules; the exact relationship between resolving the confrontation and accessing First Signal-related data; inter-corporation transitions and persistence.
+
+
+## 25. RUN-007 — Inter-corporation persistence and recovery (LOCKED, 2026-11-10)
+
+**Explicit user decision:** After completing a corporation and proceeding to the next corporation in the same three-corporation run:
+- **Carry forward** the Runner's **deck**, **Hardware**, and **Ghostware**.
+- **Fully restore Integrity**.
+- **Remove all VOID counters**.
+
+This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. The full run is still completed only after the third corporation. This transition-specific VOID removal is an explicit exception to the ordinary rule that VOID requires specialized network-node recovery; it is **not** an ordinary card or generic service.
+
+**OPEN:** TRACE treatment; temporary status effects; detailed transition timing, presentation and other resources; any special end-of-run recovery after corporation 3. Do not infer these.
