@@ -1719,3 +1719,22 @@ This rule does **not** override individual draw events, reshuffles, draw replace
 **Conflict check:** Consistent with RULE-102/103 (numeric snapshots), RULE-104 (eligible-object set), RULE-105/106 (aggregate-event identity), RULE-107 (actual reported magnitude), RULE-014/015 (deferred FIFO timing), RULE-054/055/078 (independent triggered abilities), and RULE-020/026 (frequency limits). Specific draw, reshuffle, replacement, damage, cost and condition rules retain precedence. **No existing locked rule is overridden.**
 
 **Open question preserved:** RULE-108 mixed-direction aggregate-event accounting remains **deferred and not locked**, pending a concrete REDLINE card or mechanic requiring it.
+
+
+## 175. RULE-110 — Event-time trigger qualification; resolution-time variable calculations (LOCKED, 2026-11-11)
+
+**Explicit user approval — exception-protected Option A following conflict audit:** When an event occurs, determine whether a triggered ability qualifies using the **event's properties** and the applicable trigger conditions **at that time**.
+
+For aggregate events, the event's reported actual magnitude and threshold qualification are established under RULE-107/109. Later game-state changes do **not** retroactively alter that event or its qualification.
+
+When the queued triggered ability begins resolving, calculate any **variable numerical quantity** referenced by each discrete instruction using the applicable game state **when that instruction begins resolving**, following RULE-102.
+
+Do **not** snapshot variable reward quantities when the trigger enters the queue unless explicit card text or a more-specific locked rule requires it.
+
+**Protections:** Qualifying does not guarantee resolution. Pending triggers from Software that leaves play are cancelled under RULE-081/082/085. Explicit costs, conditions, installed-status requirements, frequency limits, and more-specific card text remain enforceable. Already resolving abilities retain RULE-083's protections. An explicit condition such as “If your Trace is at least 5 when this ability resolves” is still evaluated at its stated resolution time; event-time qualification does not convert it into an event-time condition.
+
+Triggered abilities continue to resolve under the established **FIFO queue**. This rule does **not** change event identity, event counting, or the existing individual-event exceptions.
+
+**Illustrative example (not finalized card text):** Installed Software reads “Whenever you gain at least 5 CHAR prevention in a single event, gain BW equal to your current Trace.” The Runner gains **6 CHAR prevention** while Trace is **8**: the event qualifies and the trigger is queued. Before the trigger resolves, another effect reduces Trace to **3**. If the trigger survives all applicable source and condition checks, its BW-gain instruction uses Trace **3** and attempts to grant **3 BW**, subject to applicable restrictions. The original event's +6 CHAR magnitude and qualification remain unchanged.
+
+**Conflict check:** Compatible with RULE-014/015 (FIFO timing), RULE-054/055 (independent triggers), RULE-081/082/085 (source-removal cancellation), RULE-083/088 (resolving abilities and explicit installed conditions), RULE-098–103 (instruction-time numerical snapshots), RULE-107/109 (aggregate event magnitude and thresholds), and RULE-020/026 (frequency limits). **No existing locked rule is overridden.** RULE-108 mixed-direction event accounting remains **deferred and unlocked**.
