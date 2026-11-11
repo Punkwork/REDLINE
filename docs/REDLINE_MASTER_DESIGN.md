@@ -1478,3 +1478,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” The Runner gains CHAR prevention and A's trigger enters the queue. Another effect removes A before its trigger begins resolving. **Cancel A's queued trigger; do not grant 2 SYN prevention.**
 
 **Resolution boundary:** A pending queued trigger is cancelled when its source leaves play (RULE-081/082); an ability that **has already begun resolving** continues to completion after source removal (RULE-083), and events it subsequently produces may still trigger other eligible Software (RULE-084). Reinstalling the source does not revive cancelled triggers (RULE-082).
+
+
+## 152. RULE-086 — Drawing continues after resolving Software source is removed (LOCKED, 2026-11-11)
+
+**Explicit user approval:** Once an installed Software ability has **begun resolving**, removal of its source Software during that resolution **does not interrupt any remaining draw instruction**. The ability finishes normally under the established card-draw rules, including automatic reshuffling and drawing as many cards as possible when insufficient cards are available.
+
+**Canonical example:** Software A's ability reads “Gain 3 CHAR prevention. Then draw 2 cards.” After granting **3 CHAR prevention**, A is removed from play. Its already resolving ability **still draws 2 cards**, assuming at least 2 cards are available through draw/discard piles; if fewer are available, draw as many as possible under RULE-034/037.
+
+**Compatibility:** Confirms that the in-progress resolution protection of RULE-083 applies to **all remaining instructions**, not only prevention gains. Pending, not-yet-resolving triggers from removed Software are still cancelled (RULE-081/082/085). Draw-generated triggers queue until the current effect completes (RULE-033/039).
