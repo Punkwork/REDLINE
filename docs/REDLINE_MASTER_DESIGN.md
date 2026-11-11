@@ -1774,3 +1774,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a minimum of 3 BW.” The Runner gains **1 CHAR prevention**, triggering A. Before A's queued trigger resolves, the current CHAR prevention pool rises to **6** through another effect. If A's trigger remains eligible to resolve, it attempts to grant **max(1, 3) = 3 BW**, subject to applicable resource restrictions, **not 1 or 6 BW**.
 
 **Compatibility:** RULE-111 preserves the original recorded event magnitude; RULE-112 permits arithmetic using that magnitude; RULE-113 applies explicit maximums. RULE-110 continues to govern distinct current-state variables. Existing trigger timing, eligibility, source-removal cancellation, costs and conditions remain unchanged. RULE-108 remains deferred.
+
+
+## 180. RULE-115 — Event-referenced rewards obey explicit minimum and maximum (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a triggered ability bases its reward on the **original recorded actual magnitude of its triggering event** and states both a **minimum and maximum** reward, compute the event-based reward and then constrain it to the stated inclusive range. This combines RULE-113 and RULE-114; it does not change the event's recorded magnitude or establish general resource caps.
+
+**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a minimum of 2 BW and a maximum of 5 BW.” If the triggering event actually gained **1 CHAR prevention**, attempt to grant **2 BW**; if **3 CHAR**, grant **3 BW**; if **8 CHAR**, grant **5 BW**. Formula: **min(5, max(2, original event CHAR gain))**, subject to applicable resource restrictions.
+
+**Compatibility:** RULE-107/111 preserve recorded actual event magnitude; RULE-112 permits arithmetic based on that magnitude; RULE-113 and RULE-114 establish explicit maxima and minima. RULE-110 continues to govern separately referenced current-state variables. Trigger eligibility, cancellation, costs, conditions, FIFO timing and the deferred status of RULE-108 remain unchanged.
