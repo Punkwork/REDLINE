@@ -1138,3 +1138,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Replacement effects can change draw availability for subsequent individual draws within a multi-card draw instruction (RULE-048). This rule does not alter the separate automatic reshuffle of the discard pile when drawing from an empty draw pile (RULE-034/047).
 
 **Implementation guidance:** Card definitions and validation should reject or flag draw-pile movement effects without an explicit destination.
+
+
+## 116. RULE-050 — Shuffling a card into an empty draw pile does not reshuffle discard (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect explicitly instructs the Runner to **shuffle a specified card into the draw pile**, this operation only inserts/shuffles the specified card(s) into the draw pile. **It does not automatically reshuffle the discard pile**, even if the draw pile was empty. Automatic discard-to-draw reshuffling occurs only when an **actual draw** needs it (RULE-034/047), not merely because a card is moved into an empty draw pile.
+
+**Canonical example:** “Return 1 card from your hand and shuffle it into your draw pile.” With an **empty draw pile** and **5 cards in the discard pile**, the returned card becomes the **only card in the draw pile**; the five discarded cards remain in discard. No automatic discard-pile reshuffle or automatic reshuffle trigger occurs.
+
+**Compatibility:** Draw-pile insertion destination must be explicit (RULE-049). Subsequent actual draws use the draw pile as it then exists, and only reshuffle discard if the draw pile becomes empty and another actual draw is attempted (RULE-034/047).
