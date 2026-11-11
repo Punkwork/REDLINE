@@ -919,3 +919,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** An ability reading “Once per turn: At the start of a turn, [effect]” is eligible to trigger at the beginning of each turn after its allowance refreshes, subject to its other conditions and normal trigger ordering/queue rules.
 
 **Compatibility:** This does not allow out-of-turn Runner card play (SOFT-011); it concerns triggered abilities already in effect. **OPEN:** Relative ordering among multiple start-of-turn triggers follows existing controller/active-side rules (RULE-011/012/013), but timing relative to other start-of-turn housekeeping such as BW refresh, DRAW, or expiration of temporary prevention requires separate decisions.
+
+
+## 95. RULE-029 — Temporary expiration before start-of-turn triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** At the beginning of the Runner turn, **expire any temporary effects whose duration ends at that turn boundary before resolving start-of-turn triggered abilities**. This includes unused temporary prevention expiring at the start of the next Runner turn under SOFT-013 and DMG-002. Such expired prevention is unavailable for start-of-turn doubling or other effects. Persistent and Node-long prevention remain governed by their distinct durations.
+
+**Established start-of-turn ordering:** (1) Reset applicable per-turn trigger limits (RULE-028); (2) remove effects scheduled to expire at this turn start; (3) resolve start-of-turn triggered abilities using the resulting game state.
+
+**Example:** Runner ends the previous turn with 8 temporary CHAR prevention scheduled to expire at the next Runner turn start. Those 8 expire before a start-of-turn ability doubles current CHAR prevention, so they are not doubled.
+
+**OPEN:** Exact placement of BW refresh, DRAW, Node-long prevention refresh, and other turn-start housekeeping relative to these steps. Do not infer their order from this rule.
