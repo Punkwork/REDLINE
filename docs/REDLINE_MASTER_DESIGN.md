@@ -445,3 +445,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Preserve distinct BURN rule:** Cards BURNED during the Node remain removed from play through Node end and are **shuffled back into the draw pile when the next Node begins** (TAX-014); do not prematurely return them in the ordinary active-card cleanup.
 
 **OPEN:** Whether ordinary Node-end returned Hardware and Software go directly into the draw pile, discard pile, or a combined deck reshuffle; the user said “return to the deck,” not a specific pile. Do not assume a particular shuffle procedure. Normal cards already in draw/discard zones are unaffected unless separately specified.
+
+
+## 44. TAX-019 — Complete deck reshuffle at start of each Node (LOCKED, 2026-11-10)
+
+**Explicit user approval:** **Entering each new Node triggers a complete reshuffle of the Runner's deck**, incorporating Hardware and Software returned from active play at the end of the preceding Node, cards in the draw and discard piles, and cards previously BURNED during the preceding Node. All eligible cards are combined and shuffled into a fresh draw pile for the new Node. The Runner draws their starting hand under the ordinary DRAW rules.
+
+**Timing:** Node-end active Hardware/Software return to the deck (TAX-018); BURNED cards remain unavailable until the next Node begins (TAX-014); then all eligible deck cards are shuffled together. BURN is not permanent deletion. This resolves the Node-end return-pile ambiguity in TAX-018 by defining the next-Node combined reshuffle.
+
+**No implied reset:** A new Node does not itself remove VOID, restore Integrity, reset corporation-specific TRACE, or undo Ghostware/PATCHWORK upgrades; inter-corporation recovery rules remain separate.
