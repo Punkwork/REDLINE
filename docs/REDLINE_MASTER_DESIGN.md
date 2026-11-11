@@ -1837,3 +1837,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Increase your Trace by 2. Then gain CHAR prevention equal to your current Trace.” The Runner begins at **Trace 3**. The first instruction increases Trace to **5**. The second instruction then attempts to grant **5 CHAR prevention**, using Trace 5 at the start of that instruction, subject to applicable restrictions.
 
 **Compatibility:** RULE-010 governs printed instruction order; RULE-102/103/119 govern per-discrete-instruction current-value snapshots; RULE-120 forbids automatic interruption windows. Trigger timing, eligibility, resource limits, costs, conditions, source-removal cancellation and deferred RULE-108 remain unchanged.
+
+
+## 187. RULE-122 — Earlier decreases update current values for later instructions (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When an earlier discrete instruction **reduces** a game-state variable, a subsequent discrete instruction in the same resolving ability that refers to that variable's **current** value uses the **actual reduced value** as it exists at the start of the later instruction. Apply the same per-instruction current-state evaluation to decreases as to increases under RULE-121; do not snapshot the variable at ability start.
+
+**Canonical example:** Software A reads “Reduce your Trace by 2. Then gain CHAR prevention equal to your current Trace.” The Runner begins at **Trace 5**. The first instruction reduces Trace to **3**. The second instruction then attempts to grant **3 CHAR prevention**, not 5, subject to applicable restrictions.
+
+**Compatibility:** Preserves RULE-010 printed instruction order, RULE-102/103/119 per-instruction current-value snapshots, RULE-120 no automatic interruption, and RULE-121 updated values from earlier instructions. Existing resource floors/caps, trigger timing, costs, conditions, eligibility, source-removal cancellation and deferred RULE-108 remain unchanged.
