@@ -1433,3 +1433,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Software A: “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Software B: “Whenever you gain CHAR prevention, gain 1 BW.” Software C: “Whenever you gain SYN prevention, draw 1 card.” Gaining **3 CHAR prevention** triggers A and B simultaneously. The Runner chooses **A before B**. A resolves and gains **2 SYN prevention**, queuing C **after** B. The resulting resolution order is **A → B → C**, granting 2 SYN prevention, then 1 BW, then drawing 1 card. **A → C → B is not permitted** because B was already queued.
 
 **Compatibility:** Confirms FIFO queue semantics (RULE-015), simultaneous Runner trigger ordering (RULE-011), and chained triggers from prevention gains (RULE-079). Each ability resolves completely before the next queued trigger (RULE-014).
+
+
+## 147. RULE-081 — Removing Software cancels its unresolved queued triggers (LOCKED, 2026-11-10)
+
+**Explicit user rejection of the alternative:** A triggered ability queued by **installed Software** does **not** survive removal of its source from play. If that Software is no longer installed **when its pending trigger would resolve**, the queued trigger is **cancelled** rather than resolving. The source must remain in play for its queued ability to resolve, **unless explicit card text provides an exception**.
+
+**Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Software B reads “Whenever you gain CHAR prevention, gain 1 BW.” Both trigger on a CHAR prevention gain; Runner queues A before B. During A's resolution, another effect removes Software B from play. When B's queued trigger reaches the front of the FIFO queue, **cancel B's trigger**; it grants **no BW**.
+
+**Compatibility:** Triggers otherwise resolve FIFO (RULE-015/080). This cancellation applies to **unresolved** triggers from Software no longer installed, not to benefits already resolved. Treatment of a removed card that returns before its queued trigger would resolve is a separate open edge case.
