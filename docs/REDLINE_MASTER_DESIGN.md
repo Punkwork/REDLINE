@@ -1310,3 +1310,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Scope:** Copying the card's modified characteristics does not award an additional permanent PATCHWORK upgrade. Duration, disposition and zone of the temporary copy follow the creating effect, to be specified by that effect.
 
 **Compatibility:** PATCHWORK is an extension of the original ability and inherits restrictions (RULE-062); only eligible installed Software copies activate installed abilities (RULE-064); per-copy vs global limits follow RULE-021/058–060.
+
+
+## 134. RULE-068 — Newly created temporary copies start with unused per-copy activation allowances (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A **new temporary full-card copy** of PATCHWORK-enhanced Software is a **new card instance** with its own **unused per-copy once-per-turn activation allowance**, even if the original Software card already activated that ability earlier in the same turn. The temporary copy inherits the card's PATCHWORK-modified ability but **does not inherit the original instance's activation history**. Explicit **global limits across all copies remain shared** and are not reset by copying.
+
+**Canonical example:** Original PATCHWORK-enhanced Software grants **5 CHAR prevention once per turn** when the Runner shuffles the draw pile. The original activates once. Later in the same turn, an effect creates a new temporary full-card copy. On a further qualifying shuffle, the new eligible temporary copy **may activate for 5 CHAR prevention**; the original may not activate again. If the printed ability instead states “once per turn, across all copies,” the already-consumed global allowance prevents the new copy from activating.
+
+**Compatibility:** Full-card copies inherit PATCHWORK enhancements (RULE-067); PATCHWORK enhancements inherit original restrictions (RULE-062); new copies are distinct instances for per-copy limits (RULE-021), but global limits persist across copies and installations (RULE-058–060). Temporary removal and return of the *same* instance does not refresh its allowance (RULE-066).
