@@ -180,3 +180,25 @@ Exact dates for individual decisions, complete card lists, test output, commits,
 **Decision:** User explicitly approved exception-protected Option A after conflict audit. Trigger eligibility is evaluated at event time; event facts and aggregate threshold qualification do not retroactively change. Each variable-numeric reward instruction snapshots the applicable value when it begins resolving, not when queued, unless explicit more-specific text requires otherwise. Pending source-removal cancellation (RULE-081/082/085), already-resolving continuation (RULE-083), explicit conditions and installed requirements (RULE-003/088), frequency restrictions, and FIFO remain effective. No locked rule overridden.
 
 **Master Design commit:** `81c4ab95370b57345dcc8a41ba5e8a701d41e9ee`. **RULE-108:** deferred and unlocked. **Code changes:** None. **Tests:** None. **Next:** RULE-111, consider event-time trigger qualification alongside explicit resolution-time conditions; audit for redundancy and conflicts before approval.
+
+
+## RULE-126 — SYN damage terminology and overflow (LOCKED, 2026-11-11)
+
+**Authoritative decision:** The active damage keyword is **SYN X** (also styled **SYN DAMAGE X** in the approved rule review). Legacy **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are deprecated; neither is an active separate damage type. SYN is **Runner-chosen** hand discard, never random discard. Historical mentions of the old terms elsewhere are superseded, not additional active mechanics.
+
+Resolve SYN X in this order:
+1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
+2. Each unfulfilled point of SYN causes **2 Integrity damage**.
+3. Apply that Integrity damage **after** discarding the available cards.
+
+| SYN X | Hand | Discarded | Integrity damage |
+|---:|---:|---:|---:|
+| 3 | 3 | 3 | 0 |
+| 3 | 2 | 2 | 2 |
+| 3 | 1 | 1 | 4 |
+| 3 | 0 | 0 | 6 |
+| 5 | 2 | 2 | 6 |
+
+**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
