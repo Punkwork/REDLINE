@@ -83,3 +83,12 @@ Exact dates for individual decisions, complete card lists, test output, commits,
 **Files:** Master Design commit `1cbf10cbda21cc786c0d3e2cc10ad1b05cd288d2`; Current Status and Development Log handoff updates.
 
 **Code changes:** None. **Tests:** None. **Next:** Ask RULE-098 as a single open design question; commit only after approval.
+
+
+## 2026-11-11 — RULE-098 approved and locked
+
+**Decision:** RULE-098 LOCKED (user-approved Option A). A draw instruction referencing DRAW snapshots its target card count when that instruction begins resolving; changing DRAW mid-instruction does not change that target. Existing insufficient-card and trigger-order rules remain intact.
+
+**Files:** Master Design commit `d1cf5e9da1622c7e6c0be02bd6883a985844897a`; status/log updated for handoff.
+
+**Code changes:** None. **Tests run:** None. **Next:** RULE-099, distinguish two separate draw instructions within one ability; not yet approved.
