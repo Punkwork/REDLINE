@@ -404,3 +404,10 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Unchanged:** Unloaded Software that is not BURNED goes to the discard pile; unloading costs 0 BW and frees occupied RAM.
 
 **OPEN:** Exact zone and timing for returning BURNED cards at the start of the next Node (draw pile vs discard pile vs other); do not assume immediate hand access. BURN does not permanently remove the card from the run.
+
+
+## 39. TAX-014 — BURNED cards shuffle into draw pile at next Node (LOCKED, 2026-11-10)
+
+**Explicit user decision:** At the beginning of the **next Node**, all cards BURNED during the preceding Node are **returned to the Runner's draw pile and shuffled in**. They are **not** returned to hand or discard pile, and they cannot be drawn during the Node in which they were BURNED. This resolves the return-zone question left OPEN in TAX-013 and supersedes any previous next-encounter BURN return rule.
+
+**Complete BURN lifecycle:** BURN removes a card from play immediately; it stays unavailable through the rest of the current Node, including sequential ICE encounters; on entering the next Node, return BURNED cards to the draw pile and shuffle; they can subsequently be drawn normally. Unloaded non-BURNED Software still goes to discard at 0 BW.
