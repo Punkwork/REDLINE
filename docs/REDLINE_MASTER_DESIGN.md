@@ -602,3 +602,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Distinct from persistent Software:** The established **1 BW installation cost** for persistent Software remains separate and unchanged. Instant Software is played, not installed; it does not consume persistent RAM merely by being played.
 
 **OPEN:** Timing windows for playing Instant Software (including whether defensive reactions are possible during corporate response), any default maximum printed BW cost, and exceptions/discount effects.
+
+
+## 62. SOFT-011 — Runner-turn-only card play; no reactive plays (LOCKED, 2026-11-10)
+
+**Explicit user decision:** **All Runner cards must be played during the Runner's turn.** There are **no reactive card plays during the Corporation's turn** or during resolution of corporate/ICE subroutines. This includes Instant Software and defensive cards. The Runner must prepare defenses proactively before ending their turn.
+
+**Distinction:** An effect established by a card already played during the Runner's turn may operate or resolve during the subsequent corporate response according to its card text; that is **not** playing a new card out of turn. CACHE retention preserves access to cards for later Runner turns but does not grant out-of-turn play. The previously discussed CRED-powered instant shield therefore must be played proactively if it is to defend against incoming CHAR; precise shield effect duration/trigger and CRED-spending timing remain OPEN.
+
+**Supersedes:** The earlier assistant proposal to allow special reactive Instant Software during corporate response is rejected.
