@@ -418,3 +418,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Explicit user decision:** The **Rig** is defined as the **sum total of the Runner's Hardware, Software, CAPS, Ghostware, and PATCHWORK**. Software includes its subtypes ICEbreakers and Viruses. Rig is an umbrella term for this complete hacking setup, **not** an additional independent equipment category, card type, or separately installed item. The Runner's RAM capacity is a property of this setup, not a sixth item category within the Rig.
 
 **Scope:** This definition does not establish new Rig slots, upgrades, costs, or mechanics beyond those already specified for its constituent categories. Deck is a card collection/zone system, not separately listed by the user as a constituent Rig item.
+
+
+## 41. TAX-016 — Persistent Software installation costs 1 BW (LOCKED, 2026-11-10)
+
+**Explicit user decision:** **Installing persistent Software from hand costs 1 BW**, matching the existing Hardware installation cost. The Runner must also have enough free RAM to accommodate the Software card's variable RAM requirement; an installation that would exceed available RAM is illegal. Once installed, the Software occupies its required RAM until it leaves active play. ICEbreakers are persistent Software and follow this rule.
+
+**Current action-cost matrix:** Install Hardware **1 BW**; uninstall Hardware **1 BW**; install persistent Software **1 BW** plus sufficient RAM; unload persistent Software **0 BW** (unloaded, non-BURNED Software goes to discard pile). Hardware does not reduce DRAW.
+
+**OPEN:** BW costs and play timing for immediate/one-shot Software, RAM capacity loss handling, and exceptional removal/installation triggers. Do not infer those from this rule.
