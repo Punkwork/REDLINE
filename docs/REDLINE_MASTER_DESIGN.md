@@ -798,3 +798,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** Triggers **A** and **B** are already waiting. Resolving **A** generates trigger **C**. Resolve in order **A → B → C**.
 
 **Compatibility with priority rules:** For triggers generated **simultaneously**, establish their relative enqueue order using controller choice (RULE-011/012) and active-side priority (RULE-013). After insertion, newly generated triggers do not overtake already-queued effects. Within each effect, printed instructions resolve top-to-bottom (RULE-010). This queue rule does not permit reactive card plays (SOFT-011).
+
+
+## 82. RULE-016 — Detect and terminate infinite trigger loops (LOCKED, 2026-11-10)
+
+**Explicit user approval:** REDLINE must automatically **detect and stop infinite or nonterminating triggered-effect cycles**, rather than allowing the game to hang or crash. Detection and interruption must be **deterministic**. This safeguard must **not** impose an arbitrary general cap on legitimate finite stacking, compounding prevention multipliers, or other intended card synergies (RULE-007/008). It works alongside the noninterrupting FIFO trigger queue (RULE-014/015).
+
+**Design requirement:** Distinguish genuinely nonterminating trigger cycles from finite combinations that legitimately produce very large numerical effects. A repeated trigger name alone is insufficient evidence of an infinite loop.
+
+**OPEN:** Exact cycle-detection algorithm, the precise trigger or effect suppressed when a cycle is detected, whether the player receives a notification, and how resolution continues after interruption. Do not treat these as locked until explicitly decided.
