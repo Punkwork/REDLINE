@@ -674,3 +674,12 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Example:** Runner has CHAR prevention 4, SYN prevention 2, VOID prevention 1. Incoming CHAR 3, SYN 3, VOID 2 leaves CHAR prevention 1; SYN prevention 0 with SYN 1 resolved (choose and discard 1 eligible card); VOID prevention 0 with VOID 1 applied.
 
 **Relationship to earlier rules:** Extends SOFT-015's single pooled-value approach to each distinct damage type without combining types, and completes DMG-001's previously OPEN question of whether SYN and VOID have prevention pools.
+
+
+## 69. GHOST-001 — Node-based Origin Ghostware prevention (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Runner **Origin Ghostware** may grant a fixed quantity of damage-type-specific prevention **once per Node**, supporting distinct Runner archetypes. **Illustrative synthetic body armor archetype:** At the **beginning of each Node**, grant **6 CHAR prevention**. This reserve remains available **across Runner turns and successive ICE encounters within the Node**, and incoming CHAR consumes it normally. At the **next Node**, the Origin Ghostware grants a fresh **6 CHAR prevention**. The armor's name, balance and final card presentation remain illustrative rather than finalized.
+
+**Duration and accounting:** Node-long Origin Ghostware prevention **does not expire at the beginning of the next Runner turn** under SOFT-013; that expiration applies to temporary prevention. For correct accounting alongside DMG-002's shared per-type prevention totals, the game must retain sufficient **duration/source bookkeeping** to expire temporary contributions while preserving any unspent Node-long reserve; this is **not** a return to player-selected shield consumption. Exact internal allocation between temporary and Node-long prevention when both coexist remains **OPEN**.
+
+**Archetype implication:** Other Runners may specialize in SYN or VOID prevention using different Origin Ghostware; these are design possibilities, not locked starting abilities.
