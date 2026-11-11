@@ -1541,3 +1541,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Two installed copies of Software A each read “While this Software is installed, gain +2 DRAW. This effect does not stack with other copies of this Software.” Together they grant **+2 DRAW total**, **not +4 DRAW**, regardless of the number of such installed copies. If one copy leaves play, the other still grants **+2 DRAW**.
 
 **Compatibility:** Each installed instance maintains its own continuous effect while present (RULE-090), but contributions are combined subject to explicit restrictions (RULE-091). Removal of an instance ends its effect; no departed-instance bonus persists.
+
+
+## 159. RULE-093 — PATCHWORK-enhanced continuous bonuses stack unless explicitly restricted (LOCKED, 2026-11-11)
+
+**Explicit user correction:** Different PATCHWORK enhancements do **not** inherently impose any non-stacking restriction. Continuous bonuses from separately installed Software copies **add together**, including when their PATCHWORK modifications give different numerical strengths, unless the actual card text expressly prohibits stacking.
+
+**Canonical example:** Installed Software Copy A grants **+2 DRAW**, while separately installed PATCHWORK-enhanced Copy B grants **+4 DRAW**. With **no explicit non-stacking restriction on either copy**, the Runner receives **+6 DRAW total**, not +4. Do not infer a non-stacking clause from a hypothetical example or from the fact that the cards are copies of the same Software.
+
+**Compatibility:** Default additive stacking across installed instances (RULE-091) remains in force. RULE-092 applies **only when an explicit non-stacking restriction is present** in the relevant card text. Each instance's contribution ends when it leaves play (RULE-090).
