@@ -1140,10 +1140,19 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Implementation guidance:** Card definitions and validation should reject or flag draw-pile movement effects without an explicit destination.
 
 
-## 116. RULE-050 — Shuffling a card into an empty draw pile does not reshuffle discard (LOCKED, 2026-11-10)
+## 116. RULE-050 — Shuffling into an empty draw pile incorporates the discard pile (REVISED, LOCKED, 2026-11-10)
 
-**Explicit user approval:** When an effect explicitly instructs the Runner to **shuffle a specified card into the draw pile**, this operation only inserts/shuffles the specified card(s) into the draw pile. **It does not automatically reshuffle the discard pile**, even if the draw pile was empty. Automatic discard-to-draw reshuffling occurs only when an **actual draw** needs it (RULE-034/047), not merely because a card is moved into an empty draw pile.
+**Explicit user revision:** When an effect instructs the Runner to **shuffle one or more specified cards into an empty draw pile**, first include **all cards from the discard pile** together with the incoming specified cards, then shuffle the combined cards into the draw pile **as one shuffle event**. The discard pile becomes empty. This **replaces the original RULE-050** that kept discard cards untouched.
 
-**Canonical example:** “Return 1 card from your hand and shuffle it into your draw pile.” With an **empty draw pile** and **5 cards in the discard pile**, the returned card becomes the **only card in the draw pile**; the five discarded cards remain in discard. No automatic discard-pile reshuffle or automatic reshuffle trigger occurs.
+**Canonical example:** “Return 1 card from your hand and shuffle it into your draw pile.” With an empty draw pile and **5 cards in discard**, combine the 5 discarded cards and the 1 returned card, then shuffle them together as **one shuffle event**. The draw pile contains **6 cards**, and discard contains **0**.
 
-**Compatibility:** Draw-pile insertion destination must be explicit (RULE-049). Subsequent actual draws use the draw pile as it then exists, and only reshuffle discard if the draw pile becomes empty and another actual draw is attempted (RULE-034/047).
+**Scope:** This applies specifically when card text explicitly instructs a **shuffle into an empty draw pile**. It does not change the explicit top/bottom/shuffle destination requirement (RULE-049), the automatic reshuffle procedure for actual draws (RULE-034), or the replacement-before-automatic-reshuffle timing (RULE-047). See RULE-051 for trigger accounting.
+
+
+## 117. RULE-051 — Combined empty-pile shuffle counts as one shuffle event (LOCKED, 2026-11-10)
+
+**Explicit user approval of aligned RULE-050/051:** When shuffling one or more incoming cards into an **empty draw pile** with cards in discard, the discard cards and incoming cards are **combined first**, then shuffled together in **one operation**. This counts as **one shuffle event**, not separate discard-reshuffle and incoming-card-shuffle events.
+
+**Trigger consequences:** An effect that triggers “Whenever you shuffle your draw pile” sees **one shuffle** and triggers once (subject to card-specific limits). A trigger explicitly requiring a **discard-pile reshuffle** must be evaluated according to its wording; do not silently equate all shuffle trigger conditions. Any resulting triggers follow the existing queue and resolution rules (RULE-014/015/035/036).
+
+**Compatibility:** RULE-050 (revised) establishes card movement; RULE-051 establishes single-event accounting. No automatic shuffle is implied when a card is placed explicitly on the top or bottom of the draw pile instead of being shuffled (RULE-049).
