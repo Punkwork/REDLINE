@@ -506,3 +506,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **NEW DESIGN TOPIC — user requests thematic hand-retention abilities:** Runner should be able to gain abilities to **retain selected cards in hand across turns** despite normal end-turn hand discard. Exact rules, source of ability, hand-size interaction, duration, and limits OPEN.
 
 **ASSISTANT PROPOSAL, NOT LOCKED:** Keyword **CACHE X** for retaining up to X cards at turn end. Cards remain in hand, not installed; whether caching consumes RAM is OPEN. This is thematically based on computer caching, and could help retain a CRED-powered shield until needed. Do not treat the keyword or details as approved until user explicitly agrees.
+
+
+## 51. SOFT-003 — CACHE keyword (LOCKED, 2026-11-10)
+
+**Explicit user approval:** **CACHE** is REDLINE's official keyword for **retaining selected cards in the Runner's hand across the normal end-of-turn hand discard**. The word functions as both a noun and a verb: e.g. **“CACHE that card”** means designate that card to remain in hand. **CACHED** describes a card currently retained. **CACHE X** is the natural parameterized form for retaining up to X cards (e.g. CACHE 1, CACHE 2), subject to final wording. The keyword is intentionally evocative of computer caching and multiple everyday meanings.
+
+**Core distinction:** CACHED cards **stay in hand**, rather than being installed persistent Software in the Rig. Their retention is an exception to the normal end-of-turn hand discard.
+
+**OPEN:** Which abilities/cards grant CACHE, selection timing, retention duration, whether CACHED cards count toward the next turn's DRAW/hand size, any total CACHE limit, whether cards can remain CACHED over multiple turns, and special treatment at ICE-layer/Node boundaries. Do not infer these details as locked.
