@@ -96,3 +96,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Latest locked and committed:** RULE-098 — when a draw instruction based on DRAW begins resolving, its target card count is fixed using the effective DRAW at that moment. Subsequent changes to DRAW during the instruction do not change that target. Existing shortfall and draw-trigger timing rules continue to apply. Master Design commit: `d1cf5e9da1622c7e6c0be02bd6883a985844897a`.
 
 **Next open question:** RULE-099 — determine whether a DRAW change between two distinct draw instructions within the same resolving ability affects the second instruction. No approval yet; ask one question. No code changes or tests verified. Prior RULE-097 and RULE-098 open handoffs are historical and superseded.
+
+
+## Design-rule update — 2026-11-11: RULE-099
+
+**Latest locked and committed:** RULE-099 — each distinct draw instruction referencing DRAW calculates its target from effective DRAW at the start of that instruction, even if two such instructions occur within one ability. Example: DRAW 5; draw 5; gain +2 DRAW; draw 7. RULE-098 continues to fix each instruction's target once it starts. Master Design commit: `bc056f665eabf62a516956214128a650cba82a89`.
+
+**Next open question:** RULE-100 — if a DRAW-based draw instruction is queued for later resolution, whether its DRAW target is calculated on queueing or when the instruction actually begins. No approval yet. No code changes or tests verified. Prior open-question handoffs are historical and superseded.
