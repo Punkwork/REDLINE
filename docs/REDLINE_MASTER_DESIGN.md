@@ -1765,3 +1765,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a maximum of 5 BW.” The Runner gains **8 CHAR prevention**, triggering A. Before A's queued trigger resolves, the Runner's current CHAR prevention pool falls to **3**. If the trigger remains eligible to resolve, the reward is **min(8, 5) = 5 BW**, subject to other applicable resource restrictions, **not 3 or 8 BW**.
 
 **Compatibility:** RULE-111 preserves the triggering event's original actual magnitude for event-referenced rewards; RULE-112 applies arithmetic to that recorded magnitude; RULE-110 distinguishes event properties from current-state variables. Trigger eligibility, source-removal cancellation, conditions, costs and FIFO timing remain unchanged. RULE-108 remains deferred.
+
+
+## 179. RULE-114 — Explicit reward minimum applies to original event-referenced magnitude (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a triggered ability computes a reward using the **original recorded magnitude of the triggering event**, any **explicit minimum on that reward** applies after the event-referenced amount is determined. Subsequent changes to the current resource pool do not alter the triggering event's recorded magnitude or the resulting minimum-adjusted reward. A card-specific minimum does not establish a universal minimum BW gain.
+
+**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a minimum of 3 BW.” The Runner gains **1 CHAR prevention**, triggering A. Before A's queued trigger resolves, the current CHAR prevention pool rises to **6** through another effect. If A's trigger remains eligible to resolve, it attempts to grant **max(1, 3) = 3 BW**, subject to applicable resource restrictions, **not 1 or 6 BW**.
+
+**Compatibility:** RULE-111 preserves the original recorded event magnitude; RULE-112 permits arithmetic using that magnitude; RULE-113 applies explicit maximums. RULE-110 continues to govern distinct current-state variables. Existing trigger timing, eligibility, source-removal cancellation, costs and conditions remain unchanged. RULE-108 remains deferred.
