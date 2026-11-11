@@ -315,3 +315,14 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Explicit user decision:** **Viruses and ICEbreakers are both subsets of Software.** Because Software is represented through cards in the Runner's deck (TAX-002), both Viruses and ICEbreakers are card-based Software. Viruses retain their previously established deployable-software identity. ICEbreakers retain their ICE/subroutine interaction role (including drag-to-ICE UI direction).
 
 **Classification only:** This decision does not settle Virus counters, ICEbreaker costs, deployment timing, card destinations, or whether other card categories exist. CAPS, Ghostware, Hardware, PATCHWORK, and Rig remain separate entries pending their own classification decisions.
+
+
+## 29. TAX-004 — Hardware is installable, node-duration card (LOCKED, 2026-11-10)
+
+**Explicit user decision:** **Hardware is also represented by cards in the Runner's deck**, distinct from Software cards. The Runner **plays a Hardware card once to install it**. Its effect **persists for the duration of the entire Node**, including sequential ICE layers, then **ends when the Node ends**; the Hardware card **returns to the Runner's deck**. The Hardware is not consumed or permanently lost at Node completion.
+
+**Existing rules retained:** Installing Hardware costs 1 BW; uninstalling costs 1 BW. Each installed Hardware reduces effective DRAW by 1. Hardware recycling happens **exactly once at encounter end**; under the newly clarified node-duration rule, the normal recycling boundary for installed Hardware is **Node end**, not each individual ICE layer. This clarifies prior encounter-end ambiguity without defining all exceptional exits.
+
+**OPEN:** exact return destination (draw pile, discard pile, or deck collection); whether early uninstallation returns the card immediately and where; exceptional Node exits including JACK OUT; effect ordering at Node end. Do not silently invent any of these.
+
+**Taxonomy:** Deck includes both Hardware and Software cards; Viruses and ICEbreakers are subtypes of Software; Ghostware remains permanent non-card upgrades. CAPS classification remains unresolved.
