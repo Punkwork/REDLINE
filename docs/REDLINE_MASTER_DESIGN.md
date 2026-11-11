@@ -972,3 +972,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Explicit trigger-frequency limits (RULE-020/026) still constrain the number of activations. Effects resolve in printed order (RULE-010), so uninterrupted drawing applies to the specific multi-card draw instruction, not automatically to all instructions on a card.
 
 **OPEN:** Replacement/prevention effects that alter the actual number of cards drawn, and handling of deck exhaustion during multi-card draws.
+
+
+## 100. RULE-034 — Automatically reshuffle discard pile when draw pile empties (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When resolving a draw instruction and the **draw pile runs out**, automatically **shuffle the discard pile into a new draw pile**, then continue drawing until the instructed number of cards has been drawn or no eligible cards remain. This can occur partway through a multi-card draw. Do not terminate an otherwise fulfillable draw simply because the original draw pile is exhausted.
+
+**Canonical example:** “Draw 3 cards” with **1 card** in the draw pile and **8 cards** in the discard pile: draw the remaining card; shuffle the eight discarded cards into a new draw pile; draw two more cards. Draw-generated triggers wait until the full multi-card draw operation completes (RULE-032/033), then resolve in FIFO order (RULE-014/015).
+
+**No available cards:** If both draw and discard piles have no eligible cards, draw only as many as possible; the unfulfillable remainder is skipped under RULE-002. Any independent subsequent effects still resolve according to their text and existing rules.
+
+**OPEN:** Whether any special card states or restrictions exclude specific cards from reshuffling; timing of shuffle-triggered abilities, if introduced. No additional penalties for an empty draw pile are established by this rule.
