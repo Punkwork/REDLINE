@@ -33,7 +33,7 @@ The player is the **runner**; the opposing system is the **corporation**. Encoun
 |---|---|---|
 | **NEURAL DAMAGE X** | Runner **chooses** and discards **X cards from the current hand**. | **LOCKED** |
 | **SYNAPTIC DAMAGE X** | **X randomly selected cards** are discarded from the runner's **current hand**. | **LOCKED** |
-| **Integrity** | A separate player survivability/resource measure; **neither NEURAL nor SYNAPTIC DAMAGE reduces Integrity**. | **LOCKED distinction** |
+| **Vitae** | A separate player survivability/resource measure; **neither NEURAL nor SYNAPTIC DAMAGE reduces Vitae**. | **LOCKED distinction** |
 | **PURGE** | Reserved for the **corporation removing virus counters**. Do not reuse for runner discards or generic deletion. | **LOCKED** |
 | **DEADLOCK** | ICE subroutine gating runner advancement; breaking it allows advancement only after the corporation turn. | **LOCKED** |
 | **Trace** | Escalating pursuit/detection system; can be reduced at DEAD DROP. | **Established; formulas VERIFY** |
@@ -54,10 +54,10 @@ The player is the **runner**; the opposing system is the **corporation**. Encoun
 
 ## 5. DEAD DROP recovery choice
 **LOCKED:** **DEAD DROP** replaces the former **Safehouse** terminology. At DEAD DROP the runner chooses **exactly one** option:
-- **PATCH UP** — restore **+10 Integrity**.
+- **PATCH UP** — restore **+10 Vitae**.
 - **WIPE TRAIL** — reduce **Trace by 20**.
 
-Do not grant both in a single visit. Bounds (maximum Integrity / minimum Trace), visit timing, and any other services require **VERIFY**; do not assume additional recovery options.
+Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), visit timing, and any other services require **VERIFY**; do not assume additional recovery options.
 
 ## 6. Interface and player experience
 **Established decisions:**
@@ -120,13 +120,13 @@ engine/
 | LOOP-002 | Broken DEADLOCK allows advance **after** corp turn | LOCKED | Prior project decision |
 | MECH-001 | NEURAL DAMAGE X = runner chooses X hand cards to discard | LOCKED | Prior project decision |
 | MECH-002 | SYNAPTIC DAMAGE X = random X hand cards discarded | LOCKED | Prior project decision |
-| MECH-003 | Neither hand-discard damage type reduces Integrity or destroys cards permanently | LOCKED | Prior project decision |
+| MECH-003 | Neither hand-discard damage type reduces Vitae or destroys cards permanently | LOCKED | Prior project decision |
 | MECH-004 | PURGE reserved for corporation removing virus counters | LOCKED | Prior project decision |
 | PROG-001 | Recycle hardware once at encounter end | LOCKED | Prior project decision |
 | PROG-002 | PATCHWORK persists per card instance | LOCKED | Prior project decision |
 | PROG-003 | Ghostware permanent and non-card | LOCKED | Prior project decision |
 | HUB-001 | DEAD DROP replaces Safehouse | LOCKED | Prior project decision |
-| HUB-002 | Exactly one: PATCH UP +10 Integrity / WIPE TRAIL −20 Trace | LOCKED | Prior project decision |
+| HUB-002 | Exactly one: PATCH UP +10 Vitae / WIPE TRAIL −20 Trace | LOCKED | Prior project decision |
 | UI-001 | `[STR X]`, drag breaker to ICE, fixed inspection bay, HUD tooltips | LOCKED | Prior project decision |
 | UI-002 | Ghostware rack below RETURN; signature once with ORIGIN | LOCKED | Prior project decision |
 | CHAR-001 | Preserve six NUL/REM personality modes | LOCKED | Prior project decision |
@@ -134,7 +134,7 @@ engine/
 | ICE-001 | PAPER CUT Strength 0 with minor damage/discard/DEADLOCK | CONCEPT | Earlier design proposal |
 
 ## 11. Open specification backlog
-**High priority:** retrieve the full reference ZIP and earlier detailed design notes; verify complete card/ICE catalog, costs, turn/action economy, Trace formulas, Integrity damage, Black ICE rules, virus mechanics, win/loss conditions, and exact PATCHWORK/Ghostware effects. Capture reproducible tests for every LOCKED rule. Define Godot migration milestones.
+**High priority:** retrieve the full reference ZIP and earlier detailed design notes; verify complete card/ICE catalog, costs, turn/action economy, Trace formulas, Vitae damage, Black ICE rules, virus mechanics, win/loss conditions, and exact PATCHWORK/Ghostware effects. Capture reproducible tests for every LOCKED rule. Define Godot migration milestones.
 
 **Medium priority:** document progression map, economy/rewards, encounter generation, card rarity, tutorial/onboarding, complete narrative outline, and NUL/REM dialogue triggers.
 
@@ -178,7 +178,7 @@ This consolidation uses prior REDLINE project conversation context and summaries
 
 **RULE-RT-001 — LOCKED:** During the Runner action phase, the player voluntarily ends the turn using a designated END TURN button/icon, even with cards or BW remaining. Empty hand or zero BW alone does not automatically end the turn.
 
-**RULE-RT-002 — LOCKED:** If the Runner's health resource (currently named Integrity; rename OPEN) reaches 0, the entire run ends immediately in defeat. Pending actions, end-of-turn effects, corporation response, and advancement do not continue.
+**RULE-RT-002 — LOCKED:** If the Runner's health resource (Vitae; LOCKED terminology) reaches 0, the entire run ends immediately in defeat. Pending actions, end-of-turn effects, corporation response, and advancement do not continue.
 
 **RULE-RT-003/004/005 — LOCKED:** END TURN initiates a distinct Runner End-of-Turn Phase, before Corporation Response, in this exact order:
 1. Resolve applicable end-of-turn effects, including effects using or modifying BW.
@@ -241,7 +241,7 @@ The corporation's core is a **Central Node** within the corporate network and **
 **Explicit user confirmation:** **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are **DEPRECATED**; **VOID damage** is the current term for the former brain-damage concept. They must not be used as active game mechanics or terms in new rules, cards, tests, or implementation. Older mentions elsewhere in this document are historical and superseded by this section, pending editorial cleanup.
 
 **Current canonical terms (from 2026-11-09 design session archive):**
-- **CHAR X:** reduces Runner Integrity by X.
+- **CHAR X:** reduces Runner Vitae by X.
 - **SYN X:** randomly discards X cards from the current hand.
 - **VOID X:** adds X persistent counters; each reduces effective DRAW by 1, with effective DRAW floor 1. VOID is only removable through specialized network recovery Nodes (e.g., eligible black-market uplink/shop), not ordinary cards or generic services.
 - **DRAW:** baseline 5 minus installed Hardware minus VOID counters plus modifiers, subject to minimum 1.
@@ -254,18 +254,18 @@ The corporation's core is a **Central Node** within the corporate network and **
 
 ## 21. SYN X — Runner-selected discard (LOCKED, 2026-11-10)
 
-**Latest explicit user decision supersedes all prior random-discard definitions of SYN:** **SYN X** means the Runner **chooses and discards X cards from their current hand**. SYN is a hand-discard effect, not direct Integrity loss, VOID-counter gain, or permanent card destruction. **CHAR X** remains direct Integrity reduction; **VOID X** remains persistent draw reduction. **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** remain deprecated; **VOID damage** is the active replacement term. Earlier references to SYN as random discard (including section 20 above) are historical and superseded.
+**Latest explicit user decision supersedes all prior random-discard definitions of SYN:** **SYN X** means the Runner **chooses and discards X cards from their current hand**. SYN is a hand-discard effect, not direct Vitae loss, VOID-counter gain, or permanent card destruction. **CHAR X** remains direct Vitae reduction; **VOID X** remains persistent draw reduction. **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** remain deprecated; **VOID damage** is the active replacement term. Earlier references to SYN as random discard (including section 20 above) are historical and superseded.
 
 **OPEN edge case:** If fewer than X cards remain in hand, determine whether the Runner discards all available cards or another rule applies. Preserve applicable discard-trigger effects under the existing end-of-turn rules where relevant.
 
 
-## 22. SYN overflow — 2 Integrity per shortfall (superseded by RULE-126, 2026-11-11)
+## 22. SYN overflow — 2 Vitae per shortfall (superseded by RULE-126, 2026-11-11)
 
-When resolving **SYN X**, the Runner chooses and discards as many cards as possible, up to X, from their current hand. For every card of the required X that could not be discarded, the Runner suffers **2 CHAR** (i.e., 2 Integrity loss per missing card). Formula: `overflow_CHAR = 2 * max(0, X - number_of_cards_discarded)`. Example: SYN 3 with only 1 card in hand discards that card and causes 4 CHAR; SYN 4 with an empty hand causes 8 CHAR.
+When resolving **SYN X**, the Runner chooses and discards as many cards as possible, up to X, from their current hand. For every card of the required X that could not be discarded, the Runner suffers **2 CHAR** (i.e., 2 Vitae loss per missing card). Formula: `overflow_CHAR = 2 * max(0, X - number_of_cards_discarded)`. Example: SYN 3 with only 1 card in hand discards that card and causes 4 CHAR; SYN 4 with an empty hand causes 8 CHAR.
 
 **Status:** Mechanic approved; the **2× multiplier is provisional for playtesting** and may be tuned based on results. SYN itself remains Runner-selected discard (section 21), not random discard. VOID remains distinct and is not automatically generated by SYN overflow. Evaluate high-SYN ICE against empty hands, installed-Hardware DRAW reductions, and VOID-impaired DRAW.
 
-**Resolution detail still OPEN:** exact sequencing of discard-triggered effects relative to overflow CHAR and other simultaneous effects; use existing immediate-run-defeat rule if Integrity reaches zero.
+**Resolution detail still OPEN:** exact sequencing of discard-triggered effects relative to overflow CHAR and other simultaneous effects; use existing immediate-run-defeat rule if Vitae reaches zero.
 
 
 ## 23. RUN-006 — Three-corporation full run and First Signal data (LOCKED, 2026-11-10)
@@ -288,7 +288,7 @@ When resolving **SYN X**, the Runner chooses and discards as many cards as possi
 
 **Explicit user decision:** After completing a corporation and proceeding to the next corporation in the same three-corporation run:
 - **Carry forward** the Runner's **deck**, **Hardware**, and **Ghostware**.
-- **Fully restore Integrity**.
+- **Fully restore Vitae**.
 - **Remove all VOID counters**.
 
 This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. The full run is still completed only after the third corporation. This transition-specific VOID removal is an explicit exception to the ordinary rule that VOID requires specialized network-node recovery; it is **not** an ordinary card or generic service.
@@ -300,7 +300,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Explicit user decision:** **TRACE is corporation-specific.** On completion of one corporation and transition to the next, **TRACE resets to zero**; the prior corporation's TRACE does not carry over. Applies from corporation 1 to 2 and corporation 2 to 3.
 
-**Complete inter-corporation transition rule (RUN-007 + RUN-008):** Carry forward the deck, Hardware, and Ghostware; fully restore Integrity; remove all VOID counters; reset TRACE to zero. Other resources and transient conditions remain OPEN.
+**Complete inter-corporation transition rule (RUN-007 + RUN-008):** Carry forward the deck, Hardware, and Ghostware; fully restore Vitae; remove all VOID counters; reset TRACE to zero. Other resources and transient conditions remain OPEN.
 
 
 ## 27. TAX-002 — Software representation in deck (LOCKED, 2026-11-10)
@@ -453,7 +453,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Timing:** Node-end active Hardware/Software return to the deck (TAX-018); BURNED cards remain unavailable until the next Node begins (TAX-014); then all eligible deck cards are shuffled together. BURN is not permanent deletion. This resolves the Node-end return-pile ambiguity in TAX-018 by defining the next-Node combined reshuffle.
 
-**No implied reset:** A new Node does not itself remove VOID, restore Integrity, reset corporation-specific TRACE, or undo Ghostware/PATCHWORK upgrades; inter-corporation recovery rules remain separate.
+**No implied reset:** A new Node does not itself remove VOID, restore Vitae, reset corporation-specific TRACE, or undo Ghostware/PATCHWORK upgrades; inter-corporation recovery rules remain separate.
 
 
 ## 45. TAX-020 — Non-ICE service Nodes skip deck setup and cleanup (LOCKED, 2026-11-10)
@@ -644,7 +644,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 ## 66. SOFT-015 — Unified CHAR prevention pool (LOCKED, 2026-11-10)
 
-**Explicit user correction:** All defensive cards and effects contribute their calculated CHAR prevention to **one shared numerical prevention pool**. Apply any modifiers to the individual card/effect's prevention amount **before** adding it to the pool. Once contributed, there are **no separately tracked shield values** and no choice of which shield absorbs incoming damage. Incoming CHAR is deducted from this **single prevention pool**; only any excess CHAR gets through as Integrity damage. Remaining unused temporary prevention expires at the **beginning of the next Runner turn** per SOFT-013.
+**Explicit user correction:** All defensive cards and effects contribute their calculated CHAR prevention to **one shared numerical prevention pool**. Apply any modifiers to the individual card/effect's prevention amount **before** adding it to the pool. Once contributed, there are **no separately tracked shield values** and no choice of which shield absorbs incoming damage. Incoming CHAR is deducted from this **single prevention pool**; only any excess CHAR gets through as Vitae damage. Remaining unused temporary prevention expires at the **beginning of the next Runner turn** per SOFT-013.
 
 **Example:** First defensive card prevents 3 CHAR, doubled by Hardware to 6; second prevents 2. Total prevention pool = 8. Incoming 5 CHAR consumes 5 pool points, leaving 3. No shield selection/consumption order exists.
 
@@ -654,8 +654,8 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 ## 67. DMG-001 — Three distinct damage types and type-specific protection (LOCKED, 2026-11-10)
 
 **Explicit user approval:** REDLINE's **three damage types are distinct** and defenses do not cross-protect by default:
-- **CHAR X:** Reduces Runner Integrity by X; prevented by the shared **CHAR prevention pool** under SOFT-015.
-- **SYN X:** Runner chooses and discards X cards from their current hand; this does not reduce Integrity. Requires an effect explicitly protecting against SYN to prevent it.
+- **CHAR X:** Reduces Runner Vitae by X; prevented by the shared **CHAR prevention pool** under SOFT-015.
+- **SYN X:** Runner chooses and discards X cards from their current hand; this does not reduce Vitae. Requires an effect explicitly protecting against SYN to prevent it.
 - **VOID X:** Applies persistent DRAW reduction (subject to minimum DRAW rule). Requires an effect explicitly protecting against VOID to prevent it.
 
 A card may explicitly prevent multiple named damage types, but protection against one does **not** implicitly apply to another. The unified CHAR prevention pool is **CHAR-only**; it does not prevent SYN or VOID.
@@ -1007,7 +1007,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 103. RULE-037 — No automatic penalty when draw and discard piles are empty (LOCKED, 2026-11-10)
 
-**Explicit user approval:** If an instruction requires drawing cards but **both the draw pile and discard pile contain no eligible cards**, draw **zero cards** and **continue resolving any remaining independent instructions**. Do **not** automatically inflict Integrity damage, other damage, or any penalty merely because a draw could not be fulfilled. If some cards are available, draw as many as possible (RULE-002/034).
+**Explicit user approval:** If an instruction requires drawing cards but **both the draw pile and discard pile contain no eligible cards**, draw **zero cards** and **continue resolving any remaining independent instructions**. Do **not** automatically inflict Vitae damage, other damage, or any penalty merely because a draw could not be fulfilled. If some cards are available, draw as many as possible (RULE-002/034).
 
 **Canonical example:** “Draw 3 cards. Gain 2 CHAR prevention.” With both draw and discard piles empty, draw **0 cards** and still gain **2 CHAR prevention**.
 
@@ -1872,10 +1872,10 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 
 Resolve SYN X in this order:
 1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
-2. Each unfulfilled point of SYN causes **2 Integrity damage**.
-3. Apply that Integrity damage **after** discarding the available cards.
+2. Each unfulfilled point of SYN causes **2 Vitae damage**.
+3. Apply that Vitae damage **after** discarding the available cards.
 
-| SYN X | Hand | Discarded | Integrity damage |
+| SYN X | Hand | Discarded | Vitae damage |
 |---:|---:|---:|---:|
 | 3 | 3 | 3 | 0 |
 | 3 | 2 | 2 | 2 |
@@ -1883,6 +1883,9 @@ Resolve SYN X in this order:
 | 3 | 0 | 0 | 6 |
 | 5 | 2 | 2 | 6 |
 
-**Priority:** RULE-126 supersedes older no-Integrity-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Integrity damage; VOID remains persistent draw reduction. The approved overflow outcome is Integrity damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. CHAR remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
 
-**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Integrity ordering. RULE-127 remains pending.
+**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
+
+
+**Terminology lock (2026-11-11):** **Vitae** is the canonical Runner health resource (abbreviated **VIT** in the World Bible). The former health-resource term is deprecated. **BURN damage** reduces Vitae. This terminology update does not itself change damage-resolution mechanics.
