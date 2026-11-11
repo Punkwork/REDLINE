@@ -584,3 +584,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 - **“Cost: Discard 1 card. Effect: Gain X.”** With no eligible card to discard, cannot pay the cost and therefore cannot activate the associated effect.
 
 **Interaction:** RULE-001 still lets the target choose eligible objects when an effect requires a choice; RULE-002 governs partial fulfillment of instructions, but does **not** waive costs. Exact formatting/wording conventions may be refined later without changing this principle.
+
+
+## 60. SOFT-009 — Instant Software is the default card lifecycle (LOCKED, 2026-11-10)
+
+**Explicit user decision:** **Most cards in the Runner's deck are Instant Software.** Standard lifecycle: **play the card from hand → pay any applicable costs → perform its instructions → move the card to the discard pile.** Instructions/costs/conditions follow RULE-001, RULE-002 and RULE-003. Instant Software is played for an immediate effect; it is **not installed as persistent Software**, and therefore does not occupy persistent Rig RAM or remain active through the Node unless a specific card effect says otherwise.
+
+**Important distinction:** Persistent Software installation has an established baseline cost of 1 BW (TAX-016). That **installation cost is not automatically applied to Instant Software**, which is played rather than installed. The universal/default BW **play cost** for Instant Software is still **OPEN**; card-specific costs may be printed. This section supersedes any earlier suggestion that all Instant Software necessarily costs 1 BW to play.
+
+**OPEN:** Default instant-card BW play cost (including whether zero-cost cards exist), exact timing windows for instant cards including defensive responses, and special destination exceptions (e.g. BURNED).
