@@ -1330,3 +1330,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Distinction:** Copying an **ability** does not create a new card instance or fresh per-copy allowance. Copying an **entire card** creates a new instance with inherited PATCHWORK and its own per-copy allowance (RULE-067/068). PATCHWORK remains an extension of the original ability (revised RULE-062).
 
 **Scope note:** This rule addresses an effect explicitly instructing a copied ability to resolve; it does not establish that copying an ability grants permission to repeatedly activate the original restricted trigger.
+
+
+## 136. RULE-070 — Explicit copied-ability resolution works after original limit consumed (LOCKED, 2026-11-10)
+
+**Explicit user approval:** An effect that explicitly instructs the Runner to **copy a triggered ability of an installed Software card and resolve the copied ability** may do so **even when the original card's once-per-turn activation allowance has already been consumed**. The copied resolution uses the **PATCHWORK-enhanced ability** (RULE-069). It is a resolution directed by the copy effect, **not another activation of the original trigger**; the original allowance remains consumed and is not reset.
+
+**Canonical example:** Installed Software has a PATCHWORK-enhanced ability: “Once per turn, whenever you shuffle your draw pile, gain **5 CHAR prevention**.” The original ability has already activated this turn. The Runner plays an effect: “Copy the triggered ability of one installed Software card. Resolve the copied ability.” That copied resolution still grants **5 CHAR prevention**, and the original card cannot activate its own once-per-turn ability again until its normal reset.
+
+**Scope:** This permission requires an effect that **explicitly copies and resolves** the ability. Merely creating another qualifying trigger event does not bypass original limits. Copying an ability does not create a new Software card or fresh card-instance allowance (RULE-069), and PATCHWORK otherwise inherits restrictions of the original ability (RULE-062).
