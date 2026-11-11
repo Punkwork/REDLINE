@@ -735,3 +735,12 @@ A card may explicitly prevent multiple named damage types, but protection agains
 **Design intent:** Powerful, potentially exponential stacking synergies are deliberate and encouraged. The exact wording of each card determines whether its multiplier affects a **whole pool** or an **individual card's contribution** (RULE-007).
 
 **Still OPEN:** Ordering of simultaneous triggers/multipliers, mixed-duration contribution bookkeeping when a whole pool is multiplied, and any rounding rules for noninteger modifiers. This rule locks sequential compounding, not an unspecified trigger order.
+
+
+## 75. RULE-009 — Snapshot-based prevention pool multipliers preserve duration (LOCKED, 2026-11-10)
+
+**Explicit user approval:** A card saying **“Double your [type] prevention”** doubles the **prevention amount currently present when the card's effect resolves**. It is a **one-time snapshot effect**, not an ongoing multiplier applied automatically to prevention granted afterward. When the current pool contains contributions with different durations, the doubling **preserves those durations proportionally** by doubling each existing contribution's remaining amount before recombining the displayed pool.
+
+**Example:** 6 Node-long CHAR prevention from Ghostware + 4 temporary CHAR prevention from Software = 10 total. A doubling effect resolves, yielding **12 Node-long + 8 temporary = 20 total**. The temporary 8 is consumed before the Node-long 12 under RULE-004/005. If another card later adds 3 CHAR prevention, total becomes **23**, not 26. A second subsequent doubling resolves against the then-current **23**, producing **46** (RULE-008), preserving each contribution's duration.
+
+**Scope:** “Double your prevention” applies this snapshot operation to each of CHAR, SYN, and VOID; a type-specific multiplier affects only its named pool (RULE-007). No retroactive multiplication of already-spent prevention.
