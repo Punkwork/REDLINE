@@ -870,3 +870,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** An explicit “played twice” effect remains capped at two total plays despite duplicate sources (RULE-021). Explicit card-specific trigger-frequency limits still apply (RULE-020).
 
 **OPEN:** Whether any **non-BW costs** must be paid again on replay, and how card-specific costs and “If you do” conditions interact with replay. Do not assume free non-BW costs.
+
+
+## 90. RULE-024 — Non-BW costs paid for every replayed resolution (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect replays a card, the card's **BW cost is paid only for the original play** (RULE-023), but **each replayed resolution must independently pay any other explicit costs in full** (RULE-003). If the non-BW cost for an additional resolution cannot be paid, that resolution does not occur; any earlier completed resolutions remain valid.
+
+**Example:** “Cost: Discard 1 card. Effect: Gain 5 CHAR prevention.” Played twice via replay: discard one card for the original resolution and another card for the second; if both are paid, gain **10 CHAR prevention total**. If the second discard cannot be paid, only the first resolution's 5 prevention is gained.
+
+**Compatibility:** Explicit card-level limits (RULE-020), shared outcome limits (RULE-021), and the trigger queue (RULE-014/015) still apply. **OPEN:** Exact replay timing and whether an unpaid replay counts for play-trigger frequency or “first card played” bookkeeping.
