@@ -1192,3 +1192,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** One Software card has both “Whenever you shuffle your draw pile, gain 2 CHAR prevention” and “Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle that incorporates discard cards (RULE-050/051/052/053) satisfies **both** abilities. They each trigger **once**, granting **2 CHAR prevention** and **1 BW**, with the Runner choosing resolution order.
 
 **Compatibility:** A single event can qualify multiple distinct abilities (RULE-054), including when those abilities share a card. This does not allow one individual ability to trigger multiple times from the same single event, and explicit “once per turn” or other card-specific limits still apply (RULE-020).
+
+
+## 122. RULE-056 — Explicit shared trigger limits override independent abilities (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When a card explicitly groups multiple triggered abilities under a **shared limit** such as **“Once per turn, choose one”**, that shared restriction overrides the default independence of separately written abilities (RULE-055). Even when one event qualifies for multiple listed triggers, the controller may choose **only one qualifying benefit** for that event, and doing so consumes the **shared once-per-turn allowance**. The other grouped benefit does not activate.
+
+**Canonical example:** One installed Software reads: “Once per turn, choose one: (a) Whenever you shuffle your draw pile, gain 2 CHAR prevention; (b) Whenever you reshuffle your discard pile into your draw pile, gain 1 BW.” A combined shuffle involving discard cards satisfies both conditions, but the Runner chooses **either 2 CHAR prevention or 1 BW**, **not both**. The shared limit is then used for that turn.
+
+**Compatibility:** Independently written abilities trigger separately by default (RULE-055); explicit shared limits override this (RULE-020). The per-turn shared allowance resets under RULE-027/028. Shuffle event classification remains governed by RULE-050–054.
