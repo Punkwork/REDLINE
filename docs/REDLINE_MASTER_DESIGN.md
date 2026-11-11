@@ -1041,3 +1041,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Timing:** Replacement choices are made **before each applicable draw event**, including during multi-card draws. They modify whether the event happens, and are therefore distinct from queued triggers. Ordinary draw-generated and reshuffle-generated triggers still wait until the uninterrupted draw operation finishes (RULE-032/033/035); allowing replacement choices does not authorize interrupting the draw operation to resolve queued triggers.
 
 **OPEN:** How multiple simultaneous replacement effects interact or are ordered; whether a replaced draw counts as satisfying “Draw X cards. If you do” (not established here); and the treatment of mandatory rather than optional replacement text. Do not infer those edge cases without approval.
+
+
+## 107. RULE-041 — Replaced draws do not satisfy conditional draw requirements (LOCKED, 2026-11-10)
+
+**Explicit user approval:** If a **draw replacement effect** substitutes another benefit for one or more instructed draws, the replaced events **do not count as cards actually drawn** when checking whether an instruction such as **“Draw X cards. If you do, [reward]”** was completed. The conditional reward requires **X actual cards drawn**, consistent with RULE-038. Replacement benefits still apply normally (RULE-040).
+
+**Canonical example:** “Draw 3 cards. If you do, gain 5 CHAR prevention.” The Runner replaces one of the three draws with **2 CHAR prevention**, and actually draws the other two cards. Result: **2 cards drawn**, **2 CHAR prevention** from the replacement, and **no 5 CHAR prevention conditional reward**, because the full draw instruction was not satisfied.
+
+**Compatibility:** Draw-generated triggers only arise from cards actually drawn (RULE-040); the multi-card draw operation otherwise remains uninterrupted and its queued triggers resolve afterward (RULE-033/039). **OPEN:** Interaction among multiple competing replacement effects for the same would-be draw event.
