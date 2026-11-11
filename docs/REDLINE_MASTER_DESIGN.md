@@ -1670,3 +1670,18 @@ Generated triggers wait until the originating ability finishes and resolve under
 **Illustrative application (not finalized card text):** “For each installed Software card, gain 2 CHAR prevention.” With three eligible installed Software cards, gain **6 CHAR prevention** and produce **one** prevention-gain event. An installed “Whenever you gain CHAR prevention, gain 1 BW” ability triggers **once** and grants **1 BW** when it resolves, subject to its limits. Two separate qualifying “for each” instructions instead generate **two** events under RULE-076.
 
 **Conflict check:** Consistent with RULE-074/075/077 (one qualifying gain-producing instruction/event), RULE-076 (distinct instructions are distinct events), RULE-078/055 (distinct abilities independently recognize one event), RULE-079 (chained prevention-gain triggers), and RULE-014/015 (deferred FIFO triggers). RULE-103/104 continue to govern the instruction's numerical snapshot and eligible-object set. **No existing locked rule is overridden.**
+
+
+## 172. RULE-106 — General aggregate-event convention for “for each” instructions (LOCKED, 2026-11-11)
+
+**Explicit user approval — exception-protected Option A following conflict audit:** When a single discrete “for each” instruction produces repeated changes of the same event type across eligible objects, treat those changes as **one aggregate event** for generic triggers, provided a qualifying change actually occurs.
+
+The number of objects processed does not independently multiply generic trigger activations. Multiple separately written instructions remain separate event-producing instructions.
+
+**Exceptions:** This rule does **not** combine events that existing locked rules explicitly count individually, including **actual card draws**, **individual would-be draw replacements**, and **actual reshuffles**. It does not override **damage-application mechanics**, **explicit per-object or per-occurrence trigger wording**, **costs**, **conditions**, or **more-specific card text**.
+
+Distinct eligible triggered abilities may each respond **once** to the aggregate event, subject to their frequency restrictions. Generated triggers follow existing **FIFO timing**.
+
+**Illustrative examples (not finalized card text):** “For each installed Software card, reduce Trace by 2” with three eligible cards reduces Trace by **6** (to the extent permitted by applicable rules) and produces **one** qualifying Trace-reduction event if Trace actually decreases. “For each installed Software card, gain 1 BW” with three eligible cards grants **3 BW** (subject to applicable restrictions) and produces **one** qualifying BW-gain event if BW actually increases. RULE-105 already establishes the analogous single prevention-gain event. In contrast, “Draw 3 cards” continues to produce **three individual actual draw events** when three cards are actually drawn (RULE-032/033); separate actual reshuffles remain distinct (RULE-036).
+
+**Conflict check:** Compatible with RULE-014/015, RULE-054/055, RULE-074–079, and RULE-102–105. Explicitly preserves individual draw events (RULE-032/033), actual reshuffles (RULE-036), and per-would-be-draw replacement decisions (RULE-040–043). Damage-specific event and application boundaries remain governed by their more-specific rules; this rule does not resolve new damage edge cases. **No existing locked rule is overridden.**
