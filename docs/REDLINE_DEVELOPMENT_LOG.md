@@ -238,3 +238,20 @@ Resolve SYN X in this order:
 **Examples:** SyN overflow generates 4 BURN, prevention 3 → suffer 1 BURN, lose 1 VIT, suffered-BURN trigger may fire. Overflow 6, prevention 6 → suffer 0 BURN, lose 0 VIT, no suffered-BURN trigger. Overflow 4, prevention 0 → suffer 4 BURN, lose 4 VIT. A source-described BURN prevention effect is eligible against overflow BURN under this rule.
 
 **Compatibility:** RULE-127's order and compulsory discard remain unchanged. Three independent prevention pools (DMG-002), temporary prevention expiration (SOFT-013), and prohibition on reactive Runner card play during Corporation turns (SOFT-011) remain unchanged. **CHAR** is in-world slang only; **BURN** is the official mechanical term. **Status: LOCKED, explicitly approved 2026-11-11.**
+
+
+## RULE-129 — Simultaneous mixed damage resolution (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When **one effect** inflicts two or more of the three damage types, resolve its damage components in the **fixed order BURN → SyN → VOID**, regardless of the effect's controller or the printed order of the listed damage types. Treat the mixed-damage instruction as one uninterrupted resolving effect for trigger-queue timing, with components processed sequentially against the updated game state.
+
+1. **BURN component:** Spend applicable BURN prevention from the existing BURN pool; unprevented BURN reduces **Vitae (VIT)**. If VIT reaches zero, the run **ends immediately in defeat**. Stop; do not process remaining damage components or queued triggers.
+2. **SyN component:** Apply SyN prevention, then the Runner **MUST choose and discard** as many cards as possible up to unprevented SyN (RULE-127). Each missing discard generates **2 BURN** (RULE-126); resolve this overflow BURN immediately as part of the SyN component against the then-current BURN prevention pool. Only BURN actually suffered reduces VIT or qualifies for suffered-BURN triggers (RULE-128). If VIT reaches zero, immediately end the run; do not process VOID or queued triggers.
+3. **VOID component:** Apply VOID prevention from its separate pool; resolve remaining VOID as persistent DRAW reduction subject to the established DRAW floor. VOID does not retroactively change cards already drawn.
+
+**Triggers:** Damage-, discard-, and prevention-generated triggered effects are **queued as they arise**, not resolved between the mixed-damage components. Finish the entire mixed-damage effect before resolving its queued triggers under **RULE-014/015** (FIFO), with simultaneous enqueue priority under **RULE-011/012/013**. If immediate defeat occurs, the run ends and queued triggers do **not** resolve. Do not confuse this fixed *damage-component* order with the existing controller-selected order for separate simultaneous triggered effects; RULE-011/012 remain in force for those effects. The normal printed-order rule (RULE-010) still applies to other instructions and distinct effects; RULE-129 specifically overrides printed order for mixed damage components within one effect.
+
+**Prevention and source:** BURN, SyN, and VOID retain their independent prevention pools (DMG-002). SyN overflow BURN uses the BURN pool and the source-neutral application and suffered-only trigger conditions of RULE-128. No reactive Runner card plays during the Corporation turn (SOFT-011).
+
+**Example:** One ICE subroutine inflicts BURN 3 + SyN 3 + VOID 2. Runner has 10 VIT, 2 cards in hand, BURN prevention 1, no SyN/VOID prevention. Resolve BURN 3: prevent 1, lose 2 VIT (8 remain). Resolve SyN 3: mandatory discard 2, shortfall 1 generates 2 BURN; no BURN prevention remains, lose 2 VIT (6 remain). Resolve VOID 2: apply 2 persistent VOID counters. Queue generated triggers during these steps; resolve after the mixed-damage effect completes, if the run survives.
+
+**Defeat precedence:** Reaffirms RULE-RT-002's immediate run defeat at zero Vitae; no later damage, advancement, or queued recovery may reverse defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
