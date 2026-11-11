@@ -1281,3 +1281,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Copy A is standard Software, **installed**, and its qualifying shuffle ability grants **2 CHAR prevention**. Copy B is PATCHWORK-modified Software, **in the discard pile**, and would grant **5 CHAR prevention** if installed. A qualifying shuffle occurs. Only Copy A is eligible to activate, granting **2 CHAR prevention** and consuming the shared global allowance. Copy B's enhanced benefit is unavailable while it remains in discard.
 
 **Compatibility:** Runner chooses among eligible differently modified copies for a shared global activation (RULE-063). PATCHWORK preserves original card identity and inherits original restrictions (RULE-061/062); global limits remain shared across copies (RULE-058–060). Zone-specific exceptions require explicit text.
+
+
+## 131. RULE-065 — Installing PATCHWORK-enhanced copies does not reset consumed global limits (LOCKED, 2026-11-10)
+
+**Explicit user approval:** Installing a **PATCHWORK-enhanced copy** of Software during a turn does **not** restore an already-consumed **globally shared trigger allowance** for the original ability it augments. The stronger modified benefit is unavailable until the global allowance resets normally, even if the enhanced copy was not installed when the allowance was first consumed.
+
+**Canonical example:** Installed standard Copy A activates a globally once-per-turn shuffle ability for **2 CHAR prevention**. Later in the same turn, the Runner installs PATCHWORK-enhanced Copy B, whose version of that same ability would grant **5 CHAR prevention**. A second qualifying shuffle occurs. **Copy B does not activate**; the global allowance was consumed by Copy A. At the normal start-of-turn reset, the allowance becomes available again and the Runner may select an eligible installed copy.
+
+**Compatibility:** Global limits are shared across copies (RULE-058), persist across later installation (RULE-059) and complete uninstallation (RULE-060), PATCHWORK preserves identity (RULE-061) and inherits original restrictions (revised RULE-062), and only eligible installed copies can be selected (RULE-064). Reset timing follows RULE-027/028.
