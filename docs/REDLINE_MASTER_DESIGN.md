@@ -554,3 +554,12 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Explicit user approval:** ICE subroutines and corporate defenses may target **individual CACHED cards** or **all CACHED cards**, both for (a) **removing CACHE retention** and (b) **immediately discarding CACHED cards**. Thus four supported effect shapes are: single-card retention removal; all-card retention removal; single-card immediate discard; all-card immediate discard.
 
 **Interaction with SOFT-007:** Removing CACHE retention does **not** immediately discard the affected card(s); they remain in hand and follow normal end-of-turn discard unless played. An effect explicitly ordering discard moves affected CACHED card(s) immediately to the discard pile. No new named keywords or targeting selection method are locked by this decision.
+
+
+## 57. RULE-001 — Target chooses how to comply (LOCKED, 2026-11-10)
+
+**Explicit user rule:** When a game effect requires its **target** to take an action or choose affected objects, **the target chooses how and what to do to satisfy the requirement**, within the restrictions of the effect. The target does not gain the option to ignore a mandatory effect; it selects the eligible cards, counters, installed programs, etc., to fulfill it. This is a **general default targeting/selection rule**, not restricted to CACHE. Applies symmetrically to Runner and Corporation when each is the target.
+
+**Examples:** If Runner must discard one CACHED card, Runner chooses which CACHED card. If Runner must remove CACHE from one card, Runner chooses which. If Corporation is required to PURGE Virus counters, Corporation chooses eligible counters. The existing SYN X rule (Runner chooses cards to discard) is consistent with this default.
+
+**Exceptions:** An effect that explicitly names a particular target, defines a different chooser, or calls for random selection overrides this default. Do not assume the Corporation randomly selects affected CACHED cards absent such explicit wording. If insufficient eligible objects exist, follow the specific effect's instructions or a future general insufficiency rule (still OPEN).
