@@ -1846,3 +1846,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Reduce your Trace by 2. Then gain CHAR prevention equal to your current Trace.” The Runner begins at **Trace 5**. The first instruction reduces Trace to **3**. The second instruction then attempts to grant **3 CHAR prevention**, not 5, subject to applicable restrictions.
 
 **Compatibility:** Preserves RULE-010 printed instruction order, RULE-102/103/119 per-instruction current-value snapshots, RULE-120 no automatic interruption, and RULE-121 updated values from earlier instructions. Existing resource floors/caps, trigger timing, costs, conditions, eligibility, source-removal cancellation and deferred RULE-108 remain unchanged.
+
+
+## 188. RULE-123 — Later instructions use actual prior resource changes, not attempted amounts (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a later discrete instruction refers to **the amount of a resource actually changed by an earlier instruction**, use the **actual change that occurred**, after applying applicable resource floors, caps, prevention, and other restrictions—not the printed or attempted change amount. The recorded actual change from that earlier instruction remains the referent even when the attempted amount exceeds what can occur.
+
+**Canonical example:** Software A reads “Reduce your Trace by 5. Then gain CHAR prevention equal to the amount of Trace actually reduced.” The Runner begins at **Trace 3**, and Trace cannot fall below **0**. The first instruction attempts to reduce Trace by 5 but actually reduces it by **3**, leaving Trace **0**. The second instruction attempts to grant **3 CHAR prevention**, not 5, subject to applicable restrictions.
+
+**Compatibility:** RULE-107 distinguishes actual from attempted event magnitudes; RULE-010 preserves printed instruction order; RULE-102/103/119 evaluate numerical quantities at each discrete instruction; RULE-121/122 apply updated game state to later instructions. Existing trigger timing, costs, conditions, eligibility, resource limits, source-removal cancellation, and deferred RULE-108 remain unchanged.
