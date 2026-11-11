@@ -1083,3 +1083,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** Mandatory replacements have priority over optional replacements (RULE-043), only one replacement applies per draw (RULE-042), and replaced draws do not count as actually drawn for conditional rewards (RULE-041). The decision occurs before the affected draw event (RULE-040).
 
 **OPEN:** How an explicit card-text priority override affects selection among multiple mandatory replacements; interaction with replacement effects that change rather than fully substitute a draw.
+
+
+## 111. RULE-045 — Draw replacements require an available drawable card (LOCKED, 2026-11-10)
+
+**Explicit user decision:** Rejected the proposal that a “whenever you would draw” replacement can grant its substitute benefit when both draw and discard piles have no eligible cards. Approved the interpretation that **only would-be draws for which an eligible card is actually available may be replaced**. A draw instruction that cannot be fulfilled due to lack of eligible cards **does not generate a replacement benefit**.
+
+**Canonical example:** “Draw 3 cards,” with only **2 eligible cards** available across draw and discard piles, and an installed Software allowing each draw to be replaced with **2 CHAR prevention**. The Runner may (a) draw both cards, (b) replace one available draw to draw one card and gain 2 CHAR prevention, or (c) replace both available draws to gain 4 CHAR prevention and draw zero cards. The **third, unavailable draw cannot be replaced** and generates no prevention.
+
+**Compatibility:** This restriction applies to both mandatory and optional draw replacement effects (RULE-040/042/043/044). A replaced draw is not counted as an actual card drawn for conditional “If you do” rewards (RULE-041). Unavailable draws carry no automatic deck-exhaustion penalty (RULE-037). Normal discard reshuffling may supply available cards (RULE-034). **OPEN:** How to test availability if a replacement itself moves cards among zones or changes deck composition.
