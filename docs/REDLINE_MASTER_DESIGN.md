@@ -1559,3 +1559,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Installed Copy A grants **+2 DRAW**, while PATCHWORK-enhanced installed Copy B grants **+4 DRAW**. **If these effects explicitly do not stack**, the Runner receives **+4 DRAW total**, not +6. The non-stacking clause is essential to this result.
 
 **Distinction:** When there is **no explicit non-stacking restriction**, the same +2 and +4 contributions **do stack to +6 DRAW** under RULE-091/093. RULE-092 governs whether a non-stacking restriction applies at all; this rule determines the value when it does.
+
+
+## 161. RULE-095 — Removing strongest non-stacking Software recalculates remaining bonus (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When multiple installed Software copies grant continuous bonuses that **explicitly do not stack**, the strongest eligible bonus applies (RULE-094). If the source of that strongest bonus leaves play, its continuous contribution ends immediately and the effective bonus is **recalculated from the remaining eligible installed instances**. The remaining Software's continuous effect is already active; it need not trigger or activate again.
+
+**Canonical example:** Installed Copy A grants **+2 DRAW**, while PATCHWORK-enhanced Copy B grants **+4 DRAW**, and both effects explicitly prohibit stacking. With both installed, the Runner has **+4 DRAW**. When Copy B leaves play, its bonus ends and the Runner immediately has **+2 DRAW** from Copy A.
+
+**Compatibility:** Installed-instance continuous effects end on removal (RULE-090); explicit non-stacking overrides default additive stacking (RULE-092); strongest eligible non-stacking bonus applies (RULE-094). Without explicit non-stacking text, additive stacking still applies (RULE-091/093).
