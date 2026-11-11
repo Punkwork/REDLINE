@@ -82,3 +82,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Session boundary:** User requested stopping questions now and resuming tomorrow in a new chat. No code changes or tests were performed as part of this rule-design session. GitHub Master Design commit for RULE-096: `ce1bcbc341b03ca4662d223ba98d88ca34fd1593`. Earlier status and implementation-evidence matrix are not proof of current implementation; verify source separately.
 
 **Handoff prompt:** “Resume REDLINE design questions from RULE-097. Read the GitHub Master Design as authority; RULE-096 is the last locked rule. Ask one question at a time and commit each approved rule. Do not assume an unanswered proposal is locked.”
+
+
+## Design-rule update — 2026-11-11: RULE-097
+
+**Latest locked and committed:** RULE-097 — increasing DRAW mid-turn grants no immediate extra cards; updated DRAW applies to future applicable draw calculations. This complements RULE-096. Master Design commit: `1cbf10cbda21cc786c0d3e2cc10ad1b05cd288d2`.
+
+**Next:** RULE-098 is OPEN; ask one design question at a time. No code changes or tests verified. The preceding RULE-097 unanswered handoff above is historical and superseded by this update.
