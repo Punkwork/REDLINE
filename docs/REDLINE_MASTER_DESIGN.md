@@ -1114,3 +1114,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Compatibility:** No replacement benefit if both piles lack eligible drawable cards (RULE-045). Replaced draws do not trigger on-draw effects or satisfy conditional draw counts (RULE-040/041). Automatic reshuffle triggers, when an actual reshuffle occurs, are queued according to RULE-035/036.
 
 **OPEN:** Ordering among explicit shuffle/move effects that change availability mid multi-card draw.
+
+
+## 114. RULE-048 — Recalculate card availability before each draw in multi-card instructions (LOCKED, 2026-11-10)
+
+**Explicit user approval:** During a multi-card draw instruction (such as “Draw 3 cards”), **recalculate the availability of eligible drawable cards before each individual would-be draw**, accounting for changes to draw and discard piles caused by prior replacements in that same instruction. A replacement that returns a card to the draw pile can therefore make that card eligible for a **subsequent draw** in the same instruction, even when the initial pile sizes would not have supported that later draw.
+
+**Canonical example:** The draw pile initially contains **1 card**, the discard pile is empty, and installed Software says “Whenever you would draw a card, you may return 1 card from your hand to the draw pile instead.” The Runner may replace an eligible first draw by returning a card from hand to the draw pile. The updated draw pile is checked for the next would-be draw, allowing that card to be drawn or otherwise handled according to applicable replacement rules. Reassess availability for each further draw.
+
+**Compatibility:** Draw replacement requires an available drawable card at the time of the individual draw (RULE-045), including eligible cards in discard (RULE-046); replacement choices precede automatic reshuffling (RULE-047). A replaced draw is not an actual draw for draw triggers or conditional full-draw rewards (RULE-040/041). Normal multi-card draw instructions remain uninterrupted by queued ordinary triggers (RULE-033/039).
+
+**OPEN:** Whether cards returned to the draw pile by replacement are placed on top, bottom, or shuffled in, unless specified by card text; how multiple effects modify availability during a single draw event.
