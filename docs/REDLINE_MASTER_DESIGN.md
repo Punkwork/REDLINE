@@ -1577,3 +1577,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Base DRAW is **5**. Two installed Software copies grant explicitly non-stacking continuous bonuses: Copy A **+2 DRAW** and PATCHWORK-enhanced Copy B **+4 DRAW**. The stronger bonus applies, giving **DRAW 9**, and the Runner draws **9 cards** at the start of the turn. Later in that turn, Copy B leaves play. The effective DRAW value becomes **7** (base 5 + remaining bonus 2), but the Runner **keeps all 9 cards already drawn**. DRAW 7 applies to later calculations that reference DRAW, not to the completed draw.
 
 **Compatibility:** Explicitly non-stacking effects use the strongest eligible bonus (RULE-094); removing that source recalculates the active bonus (RULE-095); completed draws are not reversed. This rule does not itself grant an additional draw when DRAW increases mid-turn.
+
+
+## 163. RULE-097 — Mid-turn DRAW increases do not draw extra cards (LOCKED, 2026-11-11)
+
+**Explicit user approval — Option A:** An increase to the Runner's effective DRAW during a turn does **not** immediately draw additional cards. The increased DRAW applies to **future applicable draw calculations** only; a completed draw is not retroactively topped up.
+
+**Canonical example:** Runner starts the turn at DRAW 5 and draws 5 cards. Mid-turn, installed Software grants +3 DRAW, increasing effective DRAW to 8. **No 3-card immediate draw occurs.** DRAW 8 applies to the next applicable draw calculation that references DRAW.
+
+**Compatibility:** Complements RULE-096: neither increases nor decreases in DRAW retroactively alter completed draws. Explicit instructions to draw cards remain governed by their own wording. No new normal draw timing is established.
