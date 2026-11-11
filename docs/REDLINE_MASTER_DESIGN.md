@@ -1319,3 +1319,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Original PATCHWORK-enhanced Software grants **5 CHAR prevention once per turn** when the Runner shuffles the draw pile. The original activates once. Later in the same turn, an effect creates a new temporary full-card copy. On a further qualifying shuffle, the new eligible temporary copy **may activate for 5 CHAR prevention**; the original may not activate again. If the printed ability instead states “once per turn, across all copies,” the already-consumed global allowance prevents the new copy from activating.
 
 **Compatibility:** Full-card copies inherit PATCHWORK enhancements (RULE-067); PATCHWORK enhancements inherit original restrictions (RULE-062); new copies are distinct instances for per-copy limits (RULE-021), but global limits persist across copies and installations (RULE-058–060). Temporary removal and return of the *same* instance does not refresh its allowance (RULE-066).
+
+
+## 135. RULE-069 — Copied triggered abilities include PATCHWORK modifications (LOCKED, 2026-11-10)
+
+**Explicit user approval:** An effect that says **“Copy the triggered ability of one installed Software card. Resolve the copied ability”** copies the **currently PATCHWORK-modified ability**, not merely the unmodified printed ability. Resolving the copied ability does **not create another Software card**, does **not consume an additional activation of the original ability**, and does **not reset the original card's activation allowance**. The copy effect resolves that copied ability **once** as instructed.
+
+**Canonical example:** An installed Software card's triggered ability normally grants **2 CHAR prevention**; PATCHWORK augments that ability to **5 CHAR prevention**. An effect copies and resolves that triggered ability. The copied resolution grants **5 CHAR prevention**. The original card's activation history is unchanged by the copy effect.
+
+**Distinction:** Copying an **ability** does not create a new card instance or fresh per-copy allowance. Copying an **entire card** creates a new instance with inherited PATCHWORK and its own per-copy allowance (RULE-067/068). PATCHWORK remains an extension of the original ability (revised RULE-062).
+
+**Scope note:** This rule addresses an effect explicitly instructing a copied ability to resolve; it does not establish that copying an ability grants permission to repeatedly activate the original restricted trigger.
