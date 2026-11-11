@@ -941,3 +941,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Example:** Runner ended the previous turn at 0 BW and has a current full available BW amount of 4. At the next Runner turn start, BW becomes **4** before start-of-turn abilities resolve.
 
 **OPEN:** Timing of normal DRAW and other turn-start housekeeping relative to these steps; how effects that alter maximum BW during start-of-turn resolution update available BW.
+
+
+## 97. RULE-031 — Normal DRAW after start-of-turn abilities (LOCKED, 2026-11-10)
+
+**Explicit user approval:** At the start of each Runner turn, the Runner's **normal starting-hand DRAW occurs after start-of-turn triggered abilities and their queued effects have finished resolving**. This allows any start-of-turn abilities that modify DRAW to affect the number of cards drawn on that same turn.
+
+**Established Runner turn-start sequence:** (1) reset applicable per-turn trigger-frequency allowances (RULE-028); (2) expire temporary effects scheduled to end at that Runner turn start (RULE-029); (3) refresh BW to its full currently available amount (RULE-030); (4) resolve start-of-turn abilities and their queued triggers in established order; (5) calculate DRAW including VOID and other applicable modifiers, observing the minimum DRAW of 1; (6) draw the normal starting hand.
+
+**Example:** Base/current DRAW is 5; a start-of-turn ability grants +2 DRAW. Once the ability resolves, the Runner draws **7 cards** that turn.
+
+**Compatibility:** CACHED cards remain additive to normal DRAW (SOFT-004). **OPEN:** Exact timing and handling of any effects that trigger *on drawing* or *after drawing*, and deck exhaustion/reshuffle behavior during normal DRAW.
