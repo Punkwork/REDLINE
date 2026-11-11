@@ -1792,3 +1792,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event multiplied by your current Trace.” Runner gains **3 CHAR prevention** at **Trace 4**, triggering A. Before its queued trigger resolves, Trace rises to **6**. If the trigger remains eligible, the reward attempts to grant **3 × 6 = 18 BW**, not 12 BW, subject to applicable resource restrictions.
 
 **Compatibility:** Preserves RULE-110's resolution-time current-value evaluation, RULE-111/112's original event-referenced magnitude, RULE-102/103's per-instruction value snapshot, and existing FIFO, eligibility, costs, conditions, source-removal cancellation. RULE-108 remains deferred.
+
+
+## 182. RULE-117 — Distinct qualifying events create distinct event-referenced triggers (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a Software ability triggers “whenever” a qualifying event occurs, **each distinct qualifying event** generates its **own trigger instance** and retains its **own recorded actual event magnitude**, provided the source remains eligible and no applicable frequency limit or other restriction prevents the trigger. Do not merge separate events merely because their queued triggers have not yet resolved. Each queued trigger resolves independently in the existing FIFO order.
+
+**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event.” The Runner gains **3 CHAR prevention**, creating a qualifying event and a queued trigger for **3 BW**. Before it resolves, another effect grants **5 CHAR prevention**, a distinct qualifying event queuing another trigger for **5 BW**. If both triggers remain eligible, they separately attempt to grant **3 BW then 5 BW** in FIFO order, subject to applicable BW restrictions, **not one merged 8 BW trigger**.
+
+**Compatibility:** RULE-076 distinguishes separate gain instructions/events; RULE-105/106 aggregate gains that form a single instruction's event; RULE-107/109 establish actual event magnitudes and threshold qualification; RULE-111/112 preserve event-referenced quantities; RULE-014/015/080 govern FIFO, and RULE-020–027 and RULE-081/082/085 govern limits and cancellation. RULE-108 remains deferred.
