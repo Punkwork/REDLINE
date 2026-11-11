@@ -1424,3 +1424,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Installed Software B reads “Whenever you gain SYN prevention, gain 1 BW.” Runner plays “Gain 3 CHAR prevention.” The 3 CHAR gain queues A. A resolves, granting 2 SYN prevention and queuing B. B subsequently resolves, granting 1 BW. Final gains: **3 CHAR prevention, 2 SYN prevention, 1 BW**, assuming no other effects.
 
 **Compatibility:** Triggered abilities resolve completely before their generated triggers (RULE-014); queue order is FIFO (RULE-015); infinite-loop safeguards follow RULE-016–019; gain-event granularity follows RULE-074–078.
+
+
+## 146. RULE-080 — Previously queued triggers resolve before newly generated chained triggers (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When multiple triggers are already waiting in the **FIFO queue**, a resolving ability's newly generated trigger is appended **behind all triggers already queued**. It cannot jump ahead of a previously queued trigger. For simultaneous Runner-controlled triggers, the Runner chooses their initial ordering; that choice determines their order in the queue.
+
+**Canonical example:** Software A: “Whenever you gain CHAR prevention, gain 2 SYN prevention.” Software B: “Whenever you gain CHAR prevention, gain 1 BW.” Software C: “Whenever you gain SYN prevention, draw 1 card.” Gaining **3 CHAR prevention** triggers A and B simultaneously. The Runner chooses **A before B**. A resolves and gains **2 SYN prevention**, queuing C **after** B. The resulting resolution order is **A → B → C**, granting 2 SYN prevention, then 1 BW, then drawing 1 card. **A → C → B is not permitted** because B was already queued.
+
+**Compatibility:** Confirms FIFO queue semantics (RULE-015), simultaneous Runner trigger ordering (RULE-011), and chained triggers from prevention gains (RULE-079). Each ability resolves completely before the next queued trigger (RULE-014).
