@@ -620,3 +620,14 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Example:** An Instant Software shield played during the Runner's turn says **“Prevent 3 CHAR.”** During the following corporate response it can prevent up to 3 CHAR; if only 1 CHAR is dealt, the unused 2 protection expires after that response. The shield card itself follows the normal play → resolve → discard lifecycle; its already-established protection may continue until the response ends.
 
 **OPEN:** Exact stacking/consumption order of multiple protections, whether protection is shared across different damage instances by default (example above assumes a pool), and CRED-to-CHAR shield exchange rates.
+
+
+## 64. SOFT-013 — Temporary effects expire at start of next Runner turn (LOCKED, 2026-11-10)
+
+**Explicit user decision:** **At the beginning of each Runner turn, all unused temporary shields and effects end.** A defensive effect established during the Runner's turn remains available through the following Corporation response, but any unused portion expires **at the beginning of the next Runner turn**, rather than immediately at the end of the Corporation response.
+
+**Clarification / precedence:** This **refines and supersedes SOFT-012's default expiration timestamp**. SOFT-012's proactive play requirement and protection through the Corporation response remain intact. Persistent installed Software, Hardware, and effects explicitly assigned longer durations continue under their own lifecycle/duration rules; this cleanup is for temporary shields and effects, not automatic removal of persistent Rig assets.
+
+**Example:** Play “Prevent 3 CHAR” on Runner turn. The following corporate response deals 1 CHAR; 2 unused protection remains until the start of the next Runner turn, then expires.
+
+**OPEN:** Whether multiple independent shield effects combine into one pool or remain separately tracked; exact ordering of start-of-turn cleanup relative to other start-of-turn triggers.
