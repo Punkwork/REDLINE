@@ -1366,3 +1366,14 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Canonical example:** The Runner has installed Software reading “Whenever you gain CHAR prevention, gain 1 BW.” A copied PATCHWORK-enhanced ability reads “Gain 3 CHAR prevention. Then double your CHAR prevention.” The Runner gains 3 prevention (queuing a BW trigger), then doubles the current prevention (queuing another BW trigger **if the doubling increases prevention and qualifies as a separate gain event**). Only after the copied ability fully finishes do the queued triggers resolve in FIFO order, granting **2 BW** if both events qualified.
 
 **Compatibility:** Chained triggers wait until the current effect completes (RULE-014); queued triggers follow FIFO (RULE-015); copied abilities reproduce full ordered instructions (RULE-072). This rule does not itself establish that every numerical modification is a “gain” event; trigger qualification follows the relevant effect wording and event semantics.
+
+
+## 140. RULE-074 — Doubling prevention counts as gaining prevention (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When an effect **doubles a prevention pool**, any **positive increase** in that pool counts as **gaining prevention** of that type and therefore qualifies for effects triggered by gaining prevention. The doubling generates **one gain event per affected prevention pool** that actually increases; the amount gained is the difference between the post-doubling and pre-doubling values. Doubling a zero pool generates **no prevention-gain event**.
+
+**Canonical example:** Runner has **5 CHAR prevention** and installed Software: “Whenever you gain CHAR prevention, gain 1 BW.” Runner plays “Double your CHAR prevention.” CHAR prevention increases **5 → 10**, so the Runner **gains 5 CHAR prevention** and queues **one** +1 BW trigger. That trigger resolves after the doubling effect finishes under RULE-014/015.
+
+**Other prevention types:** The same principle applies to **SYN** and **VOID** prevention when doubled, subject to the wording of the triggered ability and the actual pool increased.
+
+**Compatibility:** Prevention multipliers compound and apply as snapshot effects (RULE-008/009); triggers generated during effect resolution queue until the effect completes (RULE-014/015); copied abilities obey the same rule (RULE-073).
