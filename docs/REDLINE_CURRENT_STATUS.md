@@ -124,3 +124,10 @@ At session end: append a dated Development Log entry; update this Current Status
 **Latest locked and committed:** RULE-101 (Option A) — for a queued triggered ability with multiple separate DRAW-based draw instructions, each instruction uses effective DRAW when that individual instruction begins. Example: queued at DRAW 5, DRAW rises to 8 before resolution, first draw 8, gain +2 DRAW, second draw 10. **Conflict review:** aligns with RULE-098, RULE-099, and revised RULE-100; no overrides. Master Design commit: `7dafb193b9a86b6f4d2f4683f74d9cc1d439d121`.
 
 **Next open question:** RULE-102 — whether the instruction-start snapshot principle applies to other variable numeric quantities beyond DRAW, or remains specific to DRAW. Not approved. Ask one question and check for conflicts before committing. No code changes or tests verified. Previous open-question handoffs superseded.
+
+
+## Design-rule update — 2026-11-11: RULE-102
+
+**Latest locked and committed:** RULE-102 — discrete instructions using variable numerical values snapshot those values at the start of **each individual instruction**; separate instructions recalculate. Exception-protected: does not freeze continuous effects (RULE-090–095), override explicit timing, bypass costs/conditions (RULE-003/038/071), or change eligible resource spending priorities (RULE-004–006). More-specific locked rules/card text prevail. Extends DRAW timing (RULE-098–101) consistently; no authorized override. Master Design commit: `98bb8e85d79c999cb218ed27fc9167c78f380699`.
+
+**Next open question:** RULE-103 — when a discrete numeric instruction explicitly says “for each” and processes individual objects one at a time, whether it uses one instruction-start snapshot or recalculates for each object. Check RULE-102 and more-specific mechanics before committing; not approved. No code changes or tests verified. Prior open-question handoffs superseded.
