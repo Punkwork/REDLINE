@@ -1783,3 +1783,12 @@ Triggered abilities continue to resolve under the established **FIFO queue**. Th
 **Canonical example:** Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event, to a minimum of 2 BW and a maximum of 5 BW.” If the triggering event actually gained **1 CHAR prevention**, attempt to grant **2 BW**; if **3 CHAR**, grant **3 BW**; if **8 CHAR**, grant **5 BW**. Formula: **min(5, max(2, original event CHAR gain))**, subject to applicable resource restrictions.
 
 **Compatibility:** RULE-107/111 preserve recorded actual event magnitude; RULE-112 permits arithmetic based on that magnitude; RULE-113 and RULE-114 establish explicit maxima and minima. RULE-110 continues to govern separately referenced current-state variables. Trigger eligibility, cancellation, costs, conditions, FIFO timing and the deferred status of RULE-108 remain unchanged.
+
+
+## 181. RULE-116 — Combine fixed triggering-event magnitude with resolution-time current resources (LOCKED, 2026-11-11)
+
+**Explicit user approval:** When a triggered ability calculates a reward by combining an **event-referenced magnitude** with an explicitly **current game-state quantity**, each input follows its own timing rule: use the **original recorded actual magnitude** of the triggering event (RULE-107/111), but evaluate the **current** quantity at the **start of the discrete reward instruction** (RULE-102/110). Apply the printed arithmetic to those values. Later resource changes do not rewrite the triggering event; earlier values of current-state variables are not snapshotted at trigger time.
+
+**Canonical example:** Installed Software A reads “Whenever you gain CHAR prevention, gain BW equal to the amount gained in that event multiplied by your current Trace.” Runner gains **3 CHAR prevention** at **Trace 4**, triggering A. Before its queued trigger resolves, Trace rises to **6**. If the trigger remains eligible, the reward attempts to grant **3 × 6 = 18 BW**, not 12 BW, subject to applicable resource restrictions.
+
+**Compatibility:** Preserves RULE-110's resolution-time current-value evaluation, RULE-111/112's original event-referenced magnitude, RULE-102/103's per-instruction value snapshot, and existing FIFO, eligibility, costs, conditions, source-removal cancellation. RULE-108 remains deferred.
