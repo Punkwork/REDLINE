@@ -852,3 +852,12 @@ Within each side's group of simultaneous triggers, that side chooses their order
 **Explicit shared-limit exception:** If wording establishes an explicit limit on the **same event or outcome**, duplicating that wording must not compound beyond that limit. User's canonical example: two copies of “The first card you play is played twice” mean the first card is **played twice total**, **not twice and then twice more** (not four plays). A second copy cannot apply an additional doubling to that already doubled first play. Interpret “played twice” as an explicitly bounded outcome in this example, not as an unconstrained multiplicative stacking effect.
 
 **Scope:** Do not infer shared caps where card text does not establish them; independent ordinary triggers and intended stacking remain valid. Specific text overrides generic stacking rules. **OPEN:** Exact card text conventions for expressing shared event/outcome caps versus stacking multipliers, and how repeated-play effects interact with other “when played” triggers.
+
+
+## 88. RULE-022 — Replayed cards resolve each play independently (LOCKED, 2026-11-10)
+
+**Explicit user approval:** When a card-play effect causes a card to be **played multiple times**, each actual play **resolves that card's printed instructions and applicable “when played” effects independently**, subject to explicit frequency restrictions and the existing trigger queue. Example: “The first card you play each turn is played twice” applied to “When played, gain 3 CHAR prevention” grants **6 CHAR prevention total**, from two separate plays.
+
+**Compatibility:** The explicit “played twice” outcome limit remains in force under RULE-021: additional copies of the same replay-granting effect do **not** turn those two plays into four. Other applicable “when played” triggers can occur for each actual play, unless their own explicit limits (RULE-020) prevent them.
+
+**OPEN:** Whether a replay pays the card's BW cost again, whether it counts as a new physical card leaving hand, and the exact timing of replay relative to other queued triggers. No answer is implied by this rule.
