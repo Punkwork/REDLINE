@@ -2343,3 +2343,18 @@ Resolve SYN X in this order:
 **Classification examples:** Icepicks = Executable; Basic Extractor = Executable despite automatic earnings; SYN BUFFER = Executable despite passive/automatic protection; PROBE / BURN Shield / GHOST SIGNAL = Packet. No existing card has yet been specifically approved as a Protocol.
 
 **Preserve unresolved design questions:** The exact physical placement/size of the **RACK**, Bloatware's full lifecycle, possible future exceptions to Protocol duration and their handling, and interactions with future card effects remain to be designed.
+
+
+## 42. Bloatware — ICE delivery, card-specific triggers, and persistence (APPROVED, 2026-11-11)
+
+**Bloatware** is the approved operating-type name for hostile Corporation-inserted cards that contaminate or interfere with the Rustler's deck and operations.
+
+- **Primary delivery:** Bloatware enters the Rustler's deck primarily through **ICE abilities and subroutines**. Other sources are possible but not yet defined.
+- **Insertion location:** The delivering ICE ability or subroutine determines the destination or placement of the inserted Bloatware card; there is no universal insertion location.
+- **Activation:** Triggers are **card-specific**, not universal. Possible printed triggers include **on draw, while held in hand, on discard, at end of turn, and on reshuffle**. A card may have multiple triggers or effects if printed.
+- **Hand-based effects:** Some Bloatware may impose **continuous effects while in the Rustler's hand**, without needing to be played or manually activated. In particular, some Bloatware **enhances the Corporation's ICE while held in the Rustler's hand**. The specific ICE enhancement, scope, timing, and numerical strength are defined by each card, not globally.
+- **Removal and persistence:** Both are **card-specific**. Some Bloatware can disappear after triggering, while others can remain through subsequent draws or reshuffles. Whether a particular Bloatware card carries over to another Node or is removed at Node completion is **not yet universally defined**; its printed rules must decide.
+- **Stacking:** Whether multiple copies of ICE-enhancing Bloatware stack has **not yet been decided**. Do not assume either automatic stacking or non-stacking.
+- **Illustrative only:** A hypothetical card that gives Corporation ICE +1 STR while held is an **example, not an approved card or balance value**.
+
+**Still open:** Exact removal mechanics for individual cards; per-card insertion, trigger, and carryover text; stacking policy; and concrete Bloatware card designs. Do not impose universal activation, removal, or Node-end cleanup rules on Bloatware.
