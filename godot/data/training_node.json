@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "implementation_status": "UNVERIFIED: requires import of frozen source-of-truth definitions",
+  "layers": [
+    {
+      "ice": []
+    },
+    {
+      "ice": []
+    },
+    {
+      "ice": []
+    }
+  ],
+  "generalist_deck": [],
+  "rules_reference": "Design freeze 03fc312; do not invent gameplay values"
+}
