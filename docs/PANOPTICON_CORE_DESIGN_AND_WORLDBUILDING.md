@@ -684,3 +684,8 @@ This subroutine resolves once per Corporation turn under normal Corporation Resp
 `[S2] TRACE 3`
 
 WATCHDOG supersedes any proposed name RATCHET; this change is a naming and notation decision, not a new effect or numerical balance change.
+
+
+## TRAINING-CRED-REBALANCE-002 — Training Node CRED reserves 10 / 15 / 25 (LOCKED, 2026-11-12)
+
+The three Training Node ICE encounter/layer **original finite CRED reserves** are now **Layer 1 = 10 CRED; Layer 2 = 15 CRED; Layer 3 = 25 CRED**. Total base reserves **50 CRED**. This expressly **supersedes the former provisional 15 / 25 / 40 CRED training reserves** (80 total) and any alternate 10 / 15 / 20 proposal. Apply the existing universal per-Node full-extraction bonus independently to each layer's reserve when fully depleted: **ceil(10% of original reserve)**, so bonuses **+1 / +2 / +3** and maximum payouts **11 / 17 / 28 CRED**, totaling **56 CRED** if all three layers are fully extracted. No bonus for partial extraction. Basic Extractor's existing 5-CRED per eligible end turn remains unchanged. This is the authoritative Training Node CRED schedule wherever historical numbers conflict.
