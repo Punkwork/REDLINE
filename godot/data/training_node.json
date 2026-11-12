@@ -1,17 +1,261 @@
 {
-  "schema_version": 1,
-  "implementation_status": "UNVERIFIED: requires import of frozen source-of-truth definitions",
-  "layers": [
+  "schema_version": 2,
+  "source_commit": "03fc312e635abb34dbca8be2f610c737ffedce90",
+  "status": "locked design imported; runtime implementation incomplete",
+  "runner": "GENERALIST",
+  "generalist_deck": [
     {
-      "ice": []
+      "id": "wall_icepick",
+      "quantity": 1,
+      "name": "WALL Icepick",
+      "classification": "executable",
+      "nature": "software",
+      "bw_cost": 1,
+      "ram_cost": 1,
+      "subtype": null,
+      "effect": {
+        "base_strength": 1,
+        "boost_bw": 1,
+        "boost_strength": 1,
+        "first_break_free_per_turn": true,
+        "break_bw": 1
+      }
     },
     {
-      "ice": []
+      "id": "sentry_icepick",
+      "quantity": 1,
+      "name": "SENTRY Icepick",
+      "classification": "executable",
+      "nature": "software",
+      "bw_cost": 1,
+      "ram_cost": 1,
+      "subtype": null,
+      "effect": {
+        "base_strength": 0,
+        "boost_bw": 1,
+        "boost_strength": 1,
+        "break_bw": 1
+      }
     },
     {
-      "ice": []
+      "id": "code_gate_icepick",
+      "quantity": 1,
+      "name": "CODE GATE Icepick",
+      "classification": "executable",
+      "nature": "software",
+      "bw_cost": 1,
+      "ram_cost": 1,
+      "subtype": null,
+      "effect": {
+        "base_strength": 3,
+        "boost_bw": 2,
+        "boost_strength": 1,
+        "break_bw": 1
+      }
+    },
+    {
+      "id": "basic_extractor",
+      "quantity": 1,
+      "name": "Basic Extractor",
+      "classification": "executable",
+      "nature": "software",
+      "bw_cost": 1,
+      "ram_cost": 1,
+      "subtype": null,
+      "effect": {
+        "end_turn_extract": 5
+      }
+    },
+    {
+      "id": "syn_buffer",
+      "quantity": 1,
+      "name": "SYN BUFFER",
+      "classification": "executable",
+      "nature": "hardware",
+      "bw_cost": 1,
+      "ram_cost": null,
+      "subtype": null,
+      "effect": {
+        "prevent_syn_per_encounter": 1,
+        "ram_requirement_status": "provisional"
+      }
+    },
+    {
+      "id": "pulp_shield",
+      "quantity": 3,
+      "name": "PULP Shield",
+      "classification": "packet",
+      "nature": "hardware",
+      "bw_cost": 1,
+      "ram_cost": 0,
+      "subtype": "CLOAK",
+      "effect": {
+        "temporary_pulp_prevention": 3
+      }
+    },
+    {
+      "id": "probe",
+      "quantity": 3,
+      "name": "PROBE",
+      "classification": "packet",
+      "nature": "software",
+      "bw_cost": 1,
+      "ram_cost": 0,
+      "subtype": "EXPLOIT",
+      "effect": {
+        "target_ice_strength_delta": -2,
+        "duration": "ice_lifecycle"
+      }
+    },
+    {
+      "id": "ghost_signal",
+      "quantity": 1,
+      "name": "GHOST SIGNAL",
+      "classification": "packet",
+      "nature": "software",
+      "bw_cost": 2,
+      "ram_cost": 0,
+      "subtype": "CLOAK",
+      "effect": {
+        "next_corporation_turn_first_trace_addition": 0,
+        "burned_until_next_node": true,
+        "uses_per_node": 1
+      }
     }
   ],
-  "generalist_deck": [],
-  "rules_reference": "Design freeze 03fc312; do not invent gameplay values"
+  "extraction": {
+    "bonus_percent": 10,
+    "rounding": "ceil",
+    "bonus_trigger": "full_layer_reserve_extraction",
+    "basic_extractor_per_end_turn": 5
+  },
+  "layers": [
+    {
+      "id": 1,
+      "cred_reserve": 10,
+      "full_extraction_bonus": 1,
+      "ice": [
+        {
+          "id": "white_picket_fence",
+          "name": "WHITE PICKET FENCE",
+          "type": "WALL",
+          "str": 3,
+          "subroutines": [
+            {
+              "index": 1,
+              "text": "PULP 5"
+            },
+            {
+              "index": 2,
+              "text": "DEADLOCK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "cred_reserve": 15,
+      "full_extraction_bonus": 2,
+      "ice": [
+        {
+          "id": "tollbooth",
+          "name": "TOLLBOOTH",
+          "type": "WALL",
+          "str": 5,
+          "subroutines": [
+            {
+              "index": 1,
+              "text": "TRACE 4"
+            },
+            {
+              "index": 2,
+              "text": "DEADLOCK"
+            }
+          ]
+        },
+        {
+          "id": "meatgrinder",
+          "name": "MEATGRINDER",
+          "type": "CODE GATE",
+          "str": 3,
+          "subroutines": [
+            {
+              "index": 1,
+              "text": "PULP 3"
+            },
+            {
+              "index": 2,
+              "text": "PULP 3"
+            },
+            {
+              "index": 3,
+              "text": "DEADLOCK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "cred_reserve": 25,
+      "full_extraction_bonus": 3,
+      "ice": [
+        {
+          "id": "overclock",
+          "name": "OVERCLOCK",
+          "type": "CODE GATE",
+          "str": 5,
+          "subroutines": [
+            {
+              "index": 1,
+              "text": "WATCHDOG gains +1 STR"
+            }
+          ]
+        },
+        {
+          "id": "hotwire",
+          "name": "HOTWIRE",
+          "type": "CODE GATE",
+          "str": 3,
+          "subroutines": [
+            {
+              "index": 1,
+              "text": "PULP 3"
+            },
+            {
+              "index": 2,
+              "text": "TRACE 3"
+            }
+          ]
+        },
+        {
+          "id": "watchdog",
+          "name": "WATCHDOG",
+          "type": "SENTRY",
+          "str": 3,
+          "subroutines": [
+            {
+              "index": 1,
+              "text": "PULP 4 + DEADLOCK"
+            },
+            {
+              "index": 2,
+              "text": "SyN 1"
+            },
+            {
+              "index": 3,
+              "text": "DEADLOCK"
+            }
+          ],
+          "reactive": {
+            "on": "play_cloak",
+            "strength_gain": 1,
+            "stacking": true,
+            "duration": "current_encounter"
+          }
+        }
+      ]
+    }
+  ]
 }
