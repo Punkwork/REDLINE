@@ -3,6 +3,10 @@ extends Control
 # Interactive vertical slice shell. Exact locked cards, ICE, and turn rules
 # must be imported from the authoritative design manifest before certification.
 const MANIFEST_PATH := "res://data/training_node.json"
+const SynOverlay = preload("res://scripts/syn_discard_overlay.gd")
+const Rules = preload("res://scripts/rules_engine.gd")
+var syn_overlay: Control
+var syn_demo_state: Dictionary = {}
 var manifest: Dictionary = {}
 var layer := 0
 var ice_index := 0
@@ -34,6 +38,12 @@ func _ready() -> void:
     action_button = Button.new()
     action_button.pressed.connect(_advance)
     outer.add_child(action_button)
+    var syn_demo := Button.new()
+    syn_demo.text = "TEST SyN 2 SELECTION (UI DEMO)"
+    syn_demo.pressed.connect(_test_syn_selection)
+    outer.add_child(syn_demo)
+    syn_overlay = SynOverlay.new()
+    add_child(syn_overlay)
     var restart := Button.new()
     restart.text = "Restart encounter"
     restart.pressed.connect(_restart)
@@ -42,6 +52,22 @@ func _ready() -> void:
     log_view.size_flags_vertical = Control.SIZE_EXPAND_FILL
     outer.add_child(log_view)
     _refresh()
+
+func _test_syn_selection() -> void:
+    # Isolated UI demo until the full turn engine supplies the live hand.
+    var cards: Array = []
+    for card in manifest.get("generalist_deck", []):
+        cards.append({"name": card.get("name", "Card")})
+        if cards.size() >= 4:
+            break
+    syn_demo_state = {"hand": cards, "discard": [], "vitae": 20, "log": []}
+    syn_overlay.begin_selection(syn_demo_state["hand"], 2, _on_syn_committed)
+
+func _on_syn_committed(indices: Array[int]) -> void:
+    if Rules.resolve_syn(syn_demo_state, 2, indices):
+        log_lines.append_array(syn_demo_state["log"])
+        log_lines.append("SyN UI demo only; not linked to encounter combat.")
+        _refresh()
 
 func _restart() -> void:
     layer = 0
