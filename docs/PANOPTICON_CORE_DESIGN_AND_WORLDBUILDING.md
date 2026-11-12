@@ -544,10 +544,17 @@ This section reconciles earlier dated design entries; older locked decisions rem
 **Precedence:** This explicitly resolves the return-visit question left open in TRACE-002. Read TRACE-002's “new Corporation” reset together with this rule: a newly entered Corporation **or a fresh return visit** starts at zero. TRACE-001's 50% warning-only and 100% location-compromise rules remain unchanged; the 100% deployment specifics remain OPEN.
 
 
-## RUN-001 — Strict forward-only run progression (LOCKED, approved 2026-11-11)
+## RUN-003 — Forward-only run progression reaffirmed (LOCKED, 2026-11-11; see original RUN-003)
 
 **Baseline navigation rule:** During a run, the Rustler **always progresses forward and never retraces their steps**. After leaving or completing an ICE encounter, Node, or Corporation, the Rustler cannot navigate backward to revisit that completed location or reverse the route. This is a run-level navigation constraint, not a restriction on taking multiple Rustler turns within an active encounter or on revisiting a Corporation in a separate new run.
 
 **TRACE reconciliation:** TRACE accumulates through consecutive ICE encounters and Nodes within the currently visited Corporation and resets to **0 when entering a new Corporation**. TRACE-003's earlier hypothetical rule for returning to a previously encountered Corporation is **non-operative during normal forward-only navigation** because the Rustler cannot backtrack to a completed Corporation. Keep TRACE-003 as a historical clarification for any future explicitly approved exception, not as permission to retrace a route. No such exception is approved here.
 
 **Scope:** This rule does not prescribe the number of encounters, Node topology, branching choices at unvisited forward paths, or a reverse-navigation mechanic. Do not infer any ability to backtrack from encounter-selection, logging, rewind/debugging, or prior design examples.
+
+
+## RUN-003 / RUN-004 — Existing junction and forward-route rules reaffirmed (2026-11-11)
+
+**This is a reconciliation of pre-existing approved rules, not a new choice.** Every corporate **Node is a junction offering multiple selectable forward paths**. The Rustler chooses the next forward route at each Node; previously passed Nodes lock behind the Rustler and **cannot be revisited** in that run. The network is presented as a circuitous, disorienting **lattice**, but apparent visual loops do not permit mechanical backtracking. A Node can present up to **five or six onward options**; that is an upper example, not a fixed required number. **Every available forward route reaches the Corporation core, and all complete routes contain the same number of Nodes**; there are no selectable dead ends or shortcuts in Node count. These principles were already established as RUN-002 (visual topology), RUN-003 (forward-only traversal and route choices), and RUN-004 (equal-length guaranteed core routes) in the master design on 2026-11-10.
+
+**Identifier reconciliation:** The later section titled “RUN-001 — Strict forward-only run progression” (2026-11-11) repeats the substance of existing **RUN-003**, and its identifier must **not** supersede the earlier **RUN-001 — Victory condition**. Treat that later section as a historical reaffirmation of RUN-003, **not** a second independent RUN-001. Any older OPEN notes suggesting backtracking, Node revisits, junction route selection, dead ends, or unequal path lengths are superseded by these locked rules. Do **not** re-open these settled questions without an explicit request to revise them. TRACE continues to reset on entering a new Corporation, not at each Node or ICE encounter.
