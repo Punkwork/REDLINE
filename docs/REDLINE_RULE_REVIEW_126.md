@@ -476,3 +476,14 @@ The **Generalist starter deck is exactly 12 physical cards**:
 **Latest explicit approval supersedes BREAKER-STARTER-004 and GENERALIST-STARTER-LOCK-001 only where they specify WALL Icepick base Strength 0:** The Generalist starter **WALL Icepick has base breaking Strength 1**. This restores the earlier Strength 1 baseline and is the **current authoritative value**; Strength 0 is historical and must not be used for current rules or playtesting.
 
 **All other approved WALL Icepick mechanics are unchanged:** Persistent Software Executable compatible with WALL ICE; **spend 1 BW for +1 breaking Strength** for the remainder of the current ICE encounter; **once per Rustler turn break one compatible WALL subroutine for 0 BW**, with subsequent compatible WALL subroutine breaks costing **1 BW each**. Every break requires the Icepick's current breaking Strength to meet or exceed the target WALL ICE's current Strength. Free breaks refresh each Rustler turn and do not accumulate. Installation and RAM requirements are unchanged. The Generalist starter deck remains exactly 12 cards, including one WALL Icepick and **zero Protocols**. No SENTRY or CODE GATE Icepick profile is changed.
+
+
+## CARD-SUBTYPE-001 — EXPLOIT / CLOAK and reactive SENTRY (LOCKED, 2026-11-12)
+
+**Functional subtypes are distinct from existing card classifications:** EXPLOIT denotes offensive cards that compromise, weaken, or manipulate hostile systems; CLOAK denotes defensive cards that protect the Rustler, conceal activity, or interfere with hostile detection and attacks. These functional subtypes are orthogonal to Hardware/Software and Packet/Executable classifications. Do not confuse CLOAK with a specific cloaking technology; its meaning includes physical damage prevention.
+
+**Generalist starter card subtype assignments (LOCKED):** PROBE = **EXPLOIT** (Software Packet); PULP Shield = **CLOAK** (Hardware Packet); GHOST SIGNAL (working card name) = **CLOAK** (Software Packet). No other starter cards receive a subtype from this decision. In particular, do not infer that all installed protective cards are CLOAK without separate approval.
+
+**SENTRY reactive ability (LOCKED):** **Whenever the Rustler plays a CLOAK card, this SENTRY gains +1 Strength.** Each distinct CLOAK card play triggers +1 Strength; the trigger is on playing a card, not on automatic activations of previously installed cards. The Strength bonus duration/reset timing and any encounter-specific stacking restrictions beyond the per-play trigger remain to be specified; do not silently treat a proposed duration as approved. The precise SENTRY starting Strength remains open.
+
+**Terminology:** EXPLOIT and CLOAK supersede proposed DEFENSE, SHROUD, SAFEGUARD, ASSAULT and COUNTERMEASURE names for these Rustler functional subtypes; COUNTERMEASURE remains available as Corporation terminology. This decision does not change card costs, effects, deck counts, or Icepick profiles.
