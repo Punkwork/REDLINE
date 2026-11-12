@@ -783,3 +783,18 @@ PULP 4 and DEADLOCK are **two effects on the same [S1] subroutine**, not separat
 `[S3] DEADLOCK`
 
 There are **two DEADLOCK effects**, one attached to [S1] together with PULP 4, and the other as standalone [S3]. **SyN 1 is its own independent [S2] subroutine** and has no DEADLOCK. Breaking [S1] neutralizes both PULP 4 and its attached DEADLOCK; breaking [S3] neutralizes its separate DEADLOCK. Both DEADLOCK effects must be neutralized to BREACH. This definitive layout supersedes both earlier incorrect versions: `[S1] PULP 4 / [S2] SyN 1 / [S3] DEADLOCK` and `[S1] PULP 4 + DEADLOCK / [S2] SyN 1`. WATCHDOG remains base STR 3, with its unchanged CLOAK-triggered +1 STR reactive ability.
+
+
+## TRAINING-NODE-PLAYTEST-LOCK-001 — Names and existing encounter values locked; implementation phase (2026-11-12)
+
+User confirms **all six ICE names** and **all existing Training Node values** for the playtest. Do not reopen naming or rebalance before actual playtesting. The ICE roster, in left-to-right resolution order, with required display format **NAME — TYPE — STR** and numbered subroutines:
+
+**Layer 1:** WHITE PICKET FENCE — WALL — STR 3: `[S1] PULP 5`; `[S2] DEADLOCK`.
+
+**Layer 2:** TOLLBOOTH — WALL — STR 5: `[S1] TRACE 4`; `[S2] DEADLOCK`. MEATGRINDER — CODE GATE — STR 3: `[S1] PULP 3`; `[S2] PULP 3`; `[S3] DEADLOCK`.
+
+**Layer 3:** OVERCLOCK — CODE GATE — STR 5: `[S1] WATCHDOG gains +1 STR.` HOTWIRE — CODE GATE — STR 3: `[S1] PULP 3`; `[S2] TRACE 3`. WATCHDOG — SENTRY — STR 3: `[S1] PULP 4 + DEADLOCK`; `[S2] SyN 1`; `[S3] DEADLOCK`. WATCHDOG reactive ability: whenever the Rustler plays a CLOAK card, WATCHDOG gains +1 STR for current encounter; stacks.
+
+**CRED reserves by layer:** 10 / 15 / 25 (total base 50); universal rounded-up 10% full-extraction bonuses +1 / +2 / +3, maximum total 56. Existing rules on turns, BW/RAM, 12-card Generalist deck, Icepicks, TRACE, VITAE, damage, extraction, BREACH, and reward resolution remain authoritative.
+
+**Next phase:** Implement an actually playable three-layer training-node prototype in **Godot**, edited/debugged using **Visual Studio**; validate established mechanics through playtesting before changing balance. This is a design freeze for the initial playtest, not a claim that implementation has been completed. Historical references to proposed ICE names/Strength/subroutines are superseded by this lock.
