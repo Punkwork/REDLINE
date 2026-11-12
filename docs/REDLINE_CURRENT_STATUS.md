@@ -597,3 +597,10 @@ This section reconciles earlier dated design entries; older locked decisions rem
 **New Corporation:** When the Rustler **encounters a new Corporation**, initialize the TRACE meter for that Corporation at **0**. TRACE accrued against the preceding Corporation does **not transfer** to the new Corporation. The 50% warning and 100% location-compromise thresholds apply to the current Corporation's meter.
 
 **Not decided:** Whether returning later to a previously encountered Corporation restores its earlier meter or starts a fresh tracking session, and the exact 100% defense-deployment mechanics, are not established by this decision. Do not assume a global run-wide TRACE meter or an ICE/Node reset.
+
+
+## TRACE-003 — Returning to a previously encountered Corporation resets TRACE (LOCKED, approved 2026-11-11)
+
+**Fresh intrusion reset:** Whenever the Rustler begins a **new encounter with a Corporation after having left that Corporation**, initialize that Corporation's TRACE meter at **0**, **even if the Rustler encountered that same Corporation earlier in the run**. Do not restore any TRACE accumulated during the earlier visit. TRACE continues to accumulate across ICE encounters and Nodes **during one uninterrupted visit** to the same Corporation; moving between its internal ICE layers or Nodes does not trigger a reset.
+
+**Precedence:** This explicitly resolves the return-visit question left open in TRACE-002. Read TRACE-002's “new Corporation” reset together with this rule: a newly entered Corporation **or a fresh return visit** starts at zero. TRACE-001's 50% warning-only and 100% location-compromise rules remain unchanged; the 100% deployment specifics remain OPEN.
