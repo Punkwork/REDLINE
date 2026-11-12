@@ -589,3 +589,25 @@ The Generalist starter **WALL Icepick** is a Persistent Software Executable comp
 **Complete current WALL Icepick profile:** Persistent Software Executable compatible with WALL ICE; **base breaking Strength 0**; spend **1 BW to gain +1 breaking Strength** for the remainder of the current ICE encounter (boosts stack); **once per Rustler turn, break one compatible WALL subroutine for 0 BW**; each additional compatible WALL subroutine break costs **1 BW**. All free and paid breaks require the Icepick's current breaking Strength to be at least the target WALL ICE's current Strength. The free break refreshes each Rustler turn, does not accumulate, and is limited to once per turn per installed Icepick. Existing installation and RAM requirements remain unchanged.
 
 **Balance intent:** The free once-per-turn subroutine break offsets the additional BW needed to boost from Strength 0. This decision changes only the WALL Icepick's base Strength, not the Sentry or Code Gate profiles or any other established rules.
+
+
+## GENERALIST-STARTER-LOCK-001 — Approved 12-card starter deck and no Protocols (LOCKED, 2026-11-12)
+
+The **Generalist starter deck is exactly 12 physical cards**:
+
+| Qty | Card | Operating classification | Nature | Play/install cost |
+| ---: | --- | --- | --- | --- |
+| 1 | WALL Icepick | Persistent Executable | Software | 1 BW install |
+| 1 | SENTRY Icepick | Persistent Executable | Software | 1 BW install |
+| 1 | CODE GATE Icepick | Persistent Executable | Software | 1 BW install |
+| 1 | Basic Extractor | Persistent Executable | Software | 1 BW install |
+| 1 | SYN BUFFER | Persistent Executable | Hardware | 1 BW install |
+| 3 | PULP Shield | Instant Packet | Hardware | 1 BW each |
+| 3 | PROBE | Instant Packet | Software | 1 BW each |
+| 1 | GHOST SIGNAL (working name) | Instant Packet | Software | 2 BW |
+
+**Composition:** **5 Executables, 7 Packets, 0 Protocols, 0 Bloatware** at the start of a Generalist run. This explicitly confirms **no Protocol cards in the starter deck**; Protocol remains an established card classification for other cards or later acquisitions. Bloatware may be inserted by Corporation effects during play, but is not part of the starting 12 cards.
+
+**Current approved abilities:** WALL Icepick: base breaking Strength **0**, +1 Strength for 1 BW for the remainder of the ICE encounter, first eligible WALL subroutine break **free once per Rustler turn**, subsequent breaks 1 BW each. SENTRY Icepick: base Strength 0, +1 Strength for 1 BW, break a compatible subroutine for 1 BW. CODE GATE Icepick: base Strength 3, +1 Strength for 2 BW, break a compatible subroutine for 1 BW. All breaks require sufficient breaker Strength. Basic Extractor: earn up to 5 CRED at each eligible Rustler end turn from current ICE encounter's finite reserve. SYN BUFFER: automatically prevent 1 SyN once per ICE encounter per independently installed copy. Each PULP Shield: +3 temporary PULP prevention to the shared pool. Each PROBE: reduce target ICE Strength by 2 for that ICE lifecycle. GHOST SIGNAL: reduce the first TRACE addition during the immediately following Corporation turn to 0, then BURNED until the next Node, usable once per Node.
+
+**Resource status:** Existing 1 RAM requirements for the four Software Executables remain as approved. SYN BUFFER's 1 RAM requirement remains **provisional and open for rebalancing**, not newly finalized here. GHOST SIGNAL is still a **working name**. Earlier 10-card starter lists, two-shield quantities, and WALL base Strength 1 are historical/superseded; they are not alternate active starter configurations. This lock confirms the starter deck composition, not the unresolved training ICE or balance details.
