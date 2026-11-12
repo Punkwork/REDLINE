@@ -854,3 +854,13 @@ In Training Node Layer 3, **WATCHDOG — SENTRY — STR 3** has the following ap
 `[S3] DEADLOCK`
 
 The user specifically reduced the proposed `[S2] SyN 2` to **`[S2] SyN 1`**. This replaces that earlier proposed value. WATCHDOG's existing reactive ability remains unchanged: whenever the Rustler plays a CLOAK card, WATCHDOG gains +1 STR for the current ICE encounter; bonuses stack. Do not alter the already-approved base STR 3. This entry approves the revised working subroutine roster; do not silently modify other ICE or mechanics.
+
+
+## TRAINING-WATCHDOG-SUBROUTINES-002 — PULP 4 and DEADLOCK share one subroutine (CORRECTION, 2026-11-12)
+
+Correct the preceding WATCHDOG roster: **WATCHDOG — SENTRY — STR 3** has **two** subroutines, not three:
+
+`[S1] PULP 4 + DEADLOCK`
+`[S2] SyN 1`
+
+PULP 4 and DEADLOCK are **two effects on the same [S1] subroutine**, not separately breakable subroutines. Breaking [S1] prevents both effects, including its DEADLOCK. This supersedes the prior `[S1] PULP 4 / [S2] SyN 1 / [S3] DEADLOCK` presentation. Existing CLOAK-triggered +1 STR reactive ability and base STR 3 remain unchanged. Preserve top-to-bottom [S#] numbering.
