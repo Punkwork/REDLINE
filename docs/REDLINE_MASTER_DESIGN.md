@@ -2582,3 +2582,14 @@ Correct the preceding WATCHDOG roster: **WATCHDOG — SENTRY — STR 3** has **t
 `[S2] SyN 1`
 
 PULP 4 and DEADLOCK are **two effects on the same [S1] subroutine**, not separately breakable subroutines. Breaking [S1] prevents both effects, including its DEADLOCK. This supersedes the prior `[S1] PULP 4 / [S2] SyN 1 / [S3] DEADLOCK` presentation. Existing CLOAK-triggered +1 STR reactive ability and base STR 3 remain unchanged. Preserve top-to-bottom [S#] numbering.
+
+
+## TRAINING-WATCHDOG-SUBROUTINES-003 — Final corrected three-subroutine layout (LOCKED, 2026-11-12)
+
+**WATCHDOG — SENTRY — STR 3** has **exactly three subroutines**, in order:
+
+`[S1] PULP 4 + DEADLOCK`
+`[S2] SyN 1`
+`[S3] DEADLOCK`
+
+There are **two DEADLOCK effects**, one attached to [S1] together with PULP 4, and the other as standalone [S3]. **SyN 1 is its own independent [S2] subroutine** and has no DEADLOCK. Breaking [S1] neutralizes both PULP 4 and its attached DEADLOCK; breaking [S3] neutralizes its separate DEADLOCK. Both DEADLOCK effects must be neutralized to BREACH. This definitive layout supersedes both earlier incorrect versions: `[S1] PULP 4 / [S2] SyN 1 / [S3] DEADLOCK` and `[S1] PULP 4 + DEADLOCK / [S2] SyN 1`. WATCHDOG remains base STR 3, with its unchanged CLOAK-triggered +1 STR reactive ability.
