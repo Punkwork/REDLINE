@@ -229,9 +229,9 @@ The corporation's core is a **Central Node** within the corporate network and **
 **Established examples of Node contents:**
 - One or more **layers of ICE** defending against intrusion.
 - **Black Market Uplink** access.
-- A space to **hack and augment the Runner's Rig**.
+- A space to **hack and augment the Runner's Console**.
 
-**Terminology:** **Rig** denotes the Runner's hacking/deck setup (inspired by the user's Neuromancer reference); its exact inventory, configuration, and interaction rules remain OPEN. A Black Market Uplink's available goods, costs, and timing are also OPEN.
+**Terminology:** **Console** denotes the Runner's hacking/deck setup (inspired by the user's Neuromancer reference); its exact inventory, configuration, and interaction rules remain OPEN. A Black Market Uplink's available goods, costs, and timing are also OPEN.
 
 **OPEN:** Whether a Node can combine multiple contents or always has one primary type; whether and how Node contents are revealed; further Node categories; the number and makeup of ICE layers; how noncombat Node visits end; whether all Node types share encounter lifecycle semantics; whether hardware recycling applies to all Node exits or only ICE encounters. Do not infer any of these from the examples.
 
@@ -314,7 +314,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Explicit user decision:** **Viruses and ICEbreakers are both subsets of Software.** Because Software is represented through cards in the Runner's deck (TAX-002), both Viruses and ICEbreakers are card-based Software. Viruses retain their previously established deployable-software identity. ICEbreakers retain their ICE/subroutine interaction role (including drag-to-ICE UI direction).
 
-**Classification only:** This decision does not settle Virus counters, ICEbreaker costs, deployment timing, card destinations, or whether other card categories exist. CAPS, Ghostware, Hardware, PATCHWORK, and Rig remain separate entries pending their own classification decisions.
+**Classification only:** This decision does not settle Virus counters, ICEbreaker costs, deployment timing, card destinations, or whether other card categories exist. CAPS, Ghostware, Hardware, PATCHWORK, and Console remain separate entries pending their own classification decisions.
 
 
 ## 29. TAX-004 — Hardware is installable, node-duration card (LOCKED, 2026-11-10)
@@ -413,11 +413,11 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 **Complete BURN lifecycle:** BURN removes a card from play immediately; it stays unavailable through the rest of the current Node, including sequential ICE encounters; on entering the next Node, return BURNED cards to the draw pile and shuffle; they can subsequently be drawn normally. Unloaded non-BURNED Software still goes to discard at 0 BW.
 
 
-## 40. TAX-015 — Rig definition (LOCKED, 2026-11-10)
+## 40. TAX-015 — Console definition (LOCKED, 2026-11-10)
 
-**Explicit user decision:** The **Rig** is defined as the **sum total of the Runner's Hardware, Software, CAPS, Ghostware, and PATCHWORK**. Software includes its subtypes ICEbreakers and Viruses. Rig is an umbrella term for this complete hacking setup, **not** an additional independent equipment category, card type, or separately installed item. The Runner's RAM capacity is a property of this setup, not a sixth item category within the Rig.
+**Explicit user decision:** The **Console** is defined as the **sum total of the Runner's Hardware, Software, CAPS, Ghostware, and PATCHWORK**. Software includes its subtypes ICEbreakers and Viruses. Console is an umbrella term for this complete hacking setup, **not** an additional independent equipment category, card type, or separately installed item. The Runner's RAM capacity is a property of this setup, not a sixth item category within the Console.
 
-**Scope:** This definition does not establish new Rig slots, upgrades, costs, or mechanics beyond those already specified for its constituent categories. Deck is a card collection/zone system, not separately listed by the user as a constituent Rig item.
+**Scope:** This definition does not establish new Console slots, upgrades, costs, or mechanics beyond those already specified for its constituent categories. Deck is a card collection/zone system, not separately listed by the user as a constituent Console item.
 
 
 ## 41. TAX-016 — Persistent Software installation costs 1 BW (LOCKED, 2026-11-10)
@@ -431,7 +431,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 ## 42. TAX-017 — Uninstalling RAM-granting Hardware requires legal remaining RAM (LOCKED, 2026-11-10)
 
-**Explicit user approval:** Before uninstalling Hardware that grants RAM, the Runner **must first unload sufficient active Software** so that remaining occupied RAM does not exceed the Rig's RAM capacity after the Hardware is removed. The Runner **cannot perform** the Hardware uninstall while it would cause occupied RAM to exceed available RAM. This is a player-directed prerequisite, **not** automatic forced removal of Software.
+**Explicit user approval:** Before uninstalling Hardware that grants RAM, the Runner **must first unload sufficient active Software** so that remaining occupied RAM does not exceed the Console's RAM capacity after the Hardware is removed. The Runner **cannot perform** the Hardware uninstall while it would cause occupied RAM to exceed available RAM. This is a player-directed prerequisite, **not** automatic forced removal of Software.
 
 **Costs and destinations remain unchanged:** Unloading persistent Software costs **0 BW** and sends non-BURNED Software to discard, immediately freeing RAM; uninstalling Hardware costs **1 BW**. Base RAM is **4**, and installed Hardware can increase it. This rule applies whenever a voluntary Hardware uninstall would reduce RAM capacity.
 
@@ -512,7 +512,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Explicit user approval:** **CACHE** is REDLINE's official keyword for **retaining selected cards in the Runner's hand across the normal end-of-turn hand discard**. The word functions as both a noun and a verb: e.g. **“CACHE that card”** means designate that card to remain in hand. **CACHED** describes a card currently retained. **CACHE X** is the natural parameterized form for retaining up to X cards (e.g. CACHE 1, CACHE 2), subject to final wording. The keyword is intentionally evocative of computer caching and multiple everyday meanings.
 
-**Core distinction:** CACHED cards **stay in hand**, rather than being installed persistent Software in the Rig. Their retention is an exception to the normal end-of-turn hand discard.
+**Core distinction:** CACHED cards **stay in hand**, rather than being installed persistent Software in the Console. Their retention is an exception to the normal end-of-turn hand discard.
 
 **OPEN:** Which abilities/cards grant CACHE, selection timing, retention duration, whether CACHED cards count toward the next turn's DRAW/hand size, any total CACHE limit, whether cards can remain CACHED over multiple turns, and special treatment at ICE-layer/Node boundaries. Do not infer these details as locked.
 
@@ -588,7 +588,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 ## 60. SOFT-009 — Instant Software is the default card lifecycle (LOCKED, 2026-11-10)
 
-**Explicit user decision:** **Most cards in the Runner's deck are Instant Software.** Standard lifecycle: **play the card from hand → pay any applicable costs → perform its instructions → move the card to the discard pile.** Instructions/costs/conditions follow RULE-001, RULE-002 and RULE-003. Instant Software is played for an immediate effect; it is **not installed as persistent Software**, and therefore does not occupy persistent Rig RAM or remain active through the Node unless a specific card effect says otherwise.
+**Explicit user decision:** **Most cards in the Runner's deck are Instant Software.** Standard lifecycle: **play the card from hand → pay any applicable costs → perform its instructions → move the card to the discard pile.** Instructions/costs/conditions follow RULE-001, RULE-002 and RULE-003. Instant Software is played for an immediate effect; it is **not installed as persistent Software**, and therefore does not occupy persistent Console RAM or remain active through the Node unless a specific card effect says otherwise.
 
 **Important distinction:** Persistent Software installation has an established baseline cost of 1 BW (TAX-016). That **installation cost is not automatically applied to Instant Software**, which is played rather than installed. The universal/default BW **play cost** for Instant Software is still **OPEN**; card-specific costs may be printed. This section supersedes any earlier suggestion that all Instant Software necessarily costs 1 BW to play.
 
@@ -626,7 +626,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Explicit user decision:** **At the beginning of each Runner turn, all unused temporary shields and effects end.** A defensive effect established during the Runner's turn remains available through the following Corporation response, but any unused portion expires **at the beginning of the next Runner turn**, rather than immediately at the end of the Corporation response.
 
-**Clarification / precedence:** This **refines and supersedes SOFT-012's default expiration timestamp**. SOFT-012's proactive play requirement and protection through the Corporation response remain intact. Persistent installed Software, Hardware, and effects explicitly assigned longer durations continue under their own lifecycle/duration rules; this cleanup is for temporary shields and effects, not automatic removal of persistent Rig assets.
+**Clarification / precedence:** This **refines and supersedes SOFT-012's default expiration timestamp**. SOFT-012's proactive play requirement and protection through the Corporation response remain intact. Persistent installed Software, Hardware, and effects explicitly assigned longer durations continue under their own lifecycle/duration rules; this cleanup is for temporary shields and effects, not automatic removal of persistent Console assets.
 
 **Example:** Play “Prevent 3 BURN” on Runner turn. The following corporate response deals 1 BURN; 2 unused protection remains until the start of the next Runner turn, then expires.
 
