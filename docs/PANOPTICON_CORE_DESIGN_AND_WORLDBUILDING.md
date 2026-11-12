@@ -526,3 +526,12 @@ This section reconciles earlier dated design entries; older locked decisions rem
 **Interaction with GHOST SIGNAL:** The approved unique GHOST SIGNAL Packet reduces the first TRACE attempt/addition during the Corporation's immediately following turn to zero, consistent with its printed first-attempt-only wording; it does not automatically reset the Rustler's existing accumulated TRACE or negate later TRACE additions. Its BURNED once-per-Node lifecycle is unchanged. Exact normalization of legacy TRACE terminology (including older TRACE 40 examples) to meter units/percentage, TRACE cap/floor and persistence/reset between encounters/Nodes remain **OPEN**. No percentage-to-printed-value conversion is approved here.
 
 **Precedence:** This section supersedes earlier notes describing TRACE accumulation, 50% consequences, or the nature of TRACE resolution as wholly undecided. It preserves all existing damage, BURNED, BREACHED, Bloatware, and Corporation Response rules.
+
+
+## TRACE-002 — Corporation-dependent TRACE persistence and reset (LOCKED, approved 2026-11-11)
+
+**Corporation scope:** The Rustler's accumulated TRACE belongs to the **Corporation currently being encountered**. TRACE is not reset merely because the Rustler moves between ICE encounters/layers or Nodes **within that same Corporation**; accumulated TRACE carries forward and remains subject to TRACE-001 countermeasures and thresholds.
+
+**New Corporation:** When the Rustler **encounters a new Corporation**, initialize the TRACE meter for that Corporation at **0**. TRACE accrued against the preceding Corporation does **not transfer** to the new Corporation. The 50% warning and 100% location-compromise thresholds apply to the current Corporation's meter.
+
+**Not decided:** Whether returning later to a previously encountered Corporation restores its earlier meter or starts a fresh tracking session, and the exact 100% defense-deployment mechanics, are not established by this decision. Do not assume a global run-wide TRACE meter or an ICE/Node reset.
