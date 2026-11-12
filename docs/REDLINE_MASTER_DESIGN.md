@@ -2540,3 +2540,19 @@ The Rustler starts with **30 VITAE** and a **TRACE meter capacity/maximum of 40 
 > **Grant the main SENTRY ICE +1 Strength.**
 
 This sole subroutine **resolves once per Corporation turn during the normal Corporation Response**, provided it remains eligible and unbroken. It is not a passive effect and does not activate more than once in the same Corporation turn. On each subsequent Corporation turn in which it resolves, it grants an additional +1 Strength; these bonuses **stack and last only until the end of the current ICE encounter**, consistent with TRAINING-THREE-ICE-SENTRY-001 and TRAINING-THREE-ICE-CODE-GATE-001. Breaking/preventing the subroutine prevents its resolution for that turn. CODE GATE A has **no additional subroutines**. Its provisional Strength 5 remains a working value, not newly locked by this decision. Main SENTRY base Strength remains 3.
+
+
+## TRAINING-THREE-ICE-WATCHDOG-001 — Main SENTRY named WATCHDOG (LOCKED, 2026-11-12)
+
+The **rightmost main SENTRY ICE** in the third training layer is officially named **WATCHDOG**. Its locked base Strength is **3 STR**. Its existing reactive ability is unchanged: whenever the Rustler plays a CLOAK card, **WATCHDOG gains +1 STR** for the current ICE encounter; multiple triggers stack.
+
+The **leftmost supporting CODE GATE 1** has exactly one subroutine, now printed in the approved canonical subroutine notation:
+
+`[S1] WATCHDOG gains +1 STR.`
+
+This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting CODE GATE 2's working list is:
+
+`[S1] PULP 3`
+`[S2] TRACE 3`
+
+WATCHDOG supersedes any proposed name RATCHET; this change is a naming and notation decision, not a new effect or numerical balance change.
