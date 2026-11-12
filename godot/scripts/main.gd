@@ -5,7 +5,7 @@ extends Control
 const MANIFEST_PATH := "res://data/training_node.json"
 const SynOverlay = preload("res://scripts/syn_discard_overlay.gd")
 const Rules = preload("res://scripts/rules_engine.gd")
-var syn_overlay: Control
+var syn_overlay: SynDiscardOverlay
 var syn_demo_state: Dictionary = {}
 var manifest: Dictionary = {}
 var layer := 0
