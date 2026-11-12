@@ -2440,3 +2440,15 @@ At **100% TRACE**, the Corporation identifies the Rustler's location, as establi
 ## BREAKER-STARTER-002 — Generalist WALL Icepick partial profile (APPROVED, 2026-11-12)
 
 The Generalist starter **WALL Icepick** is a **Persistent Software Executable** compatible with **WALL ICE**. Its **base breaking Strength is 1**. The Rustler may **spend 1 BW to increase its breaking Strength by 1**, with boosts accumulating for the **remainder of the current ICE encounter**, consistent with BREAKER-STARTER-001's starter Icepick Strength-boost duration. This approval defines only base Strength and Strength-boost cost/amount; the **BW cost to break an individual WALL subroutine remains OPEN** and must not be assumed. Existing starter Icepick installation and RAM rules are unchanged. This supersedes older notes saying all WALL Icepick profile details are undecided, but does not settle other training-encounter balance questions.
+
+
+## BREAKER-STARTER-003 — WALL Icepick subroutine-breaking profile (LOCKED, 2026-11-12)
+
+The Generalist starter **WALL Icepick** is a Persistent Software Executable compatible with WALL ICE, with **base breaking Strength 1** and **spend 1 BW for +1 breaking Strength for the remainder of the current ICE encounter** (BREAKER-STARTER-002). Its subroutine-breaking abilities are:
+
+- **Once per Rustler turn:** Break **one** subroutine on a compatible WALL ICE for **0 BW**.
+- **Additional breaks:** Spend **1 BW** to break **one** subroutine on a compatible WALL ICE; each further paid break costs 1 BW.
+- **Strength requirement:** Both free and paid breaks require the WALL Icepick's current breaking Strength to meet or exceed the target WALL ICE's current Strength, as with other Icepicks.
+- The free use **refreshes each Rustler turn**, not each encounter, and unused free breaks **do not accumulate**. It is one free break per turn for this installed Icepick, not one per target WALL or subroutine. Existing installation/RAM, card lifecycle, and encounter rules remain unchanged.
+
+**Status:** The three Generalist starter Icepick breaking profiles are now defined: Sentry (Strength 0; +1 per 1 BW; 1 BW per subroutine), Code Gate (Strength 3; +1 per 2 BW; 1 BW per subroutine), WALL (Strength 1; +1 per 1 BW; first eligible break each Rustler turn free; subsequent breaks 1 BW each). Earlier statements that WALL's breaking cost remains OPEN are superseded.
