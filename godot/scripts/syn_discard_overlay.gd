@@ -10,6 +10,19 @@ var _callback: Callable
 var _cards: GridContainer
 var _count_label: Label
 var _commit_button: Button
+const CYAN := Color(0.0, 0.88, 1.0)
+const CYAN_GLOW := Color(0.0, 0.75, 1.0, 0.38)
+
+func _card_style(selected: bool) -> StyleBoxFlat:
+    var style := StyleBoxFlat.new()
+    style.bg_color = Color(0.055, 0.09, 0.14) if selected else Color(0.10, 0.12, 0.16)
+    style.set_corner_radius_all(7)
+    style.set_border_width_all(3 if selected else 1)
+    style.border_color = CYAN if selected else Color(0.3, 0.39, 0.46)
+    if selected:
+        style.shadow_color = CYAN_GLOW
+        style.shadow_size = 14
+    return style
 
 func _ready() -> void:
     set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -71,7 +84,13 @@ func _render_cards() -> void:
         card.toggle_mode = true
         card.button_pressed = _selected.has(index)
         card.disabled = not _selected.has(index) and _selected.size() >= _required
-        card.modulate = Color(0.35, 1.0, 0.72) if _selected.has(index) else Color(0.86, 0.88, 0.94)
+        var chosen: bool = _selected.has(index)
+        card.add_theme_stylebox_override("normal", _card_style(chosen))
+        card.add_theme_stylebox_override("hover", _card_style(chosen))
+        card.add_theme_stylebox_override("pressed", _card_style(chosen))
+        card.add_theme_stylebox_override("disabled", _card_style(chosen))
+        card.add_theme_color_override("font_color", Color.WHITE)
+        card.add_theme_color_override("font_disabled_color", Color(0.6, 0.7, 0.75))
         card.pressed.connect(_toggle.bind(index))
         _cards.add_child(card)
     _count_label.text = "SELECT %d / %d" % [_selected.size(), _required]
