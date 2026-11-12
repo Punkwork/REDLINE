@@ -547,3 +547,14 @@ WATCHDOG supersedes any proposed name RATCHET; this change is a naming and notat
 ## TRAINING-CRED-REBALANCE-002 — Training Node CRED reserves 10 / 15 / 25 (LOCKED, 2026-11-12)
 
 The three Training Node ICE encounter/layer **original finite CRED reserves** are now **Layer 1 = 10 CRED; Layer 2 = 15 CRED; Layer 3 = 25 CRED**. Total base reserves **50 CRED**. This expressly **supersedes the former provisional 15 / 25 / 40 CRED training reserves** (80 total) and any alternate 10 / 15 / 20 proposal. Apply the existing universal per-Node full-extraction bonus independently to each layer's reserve when fully depleted: **ceil(10% of original reserve)**, so bonuses **+1 / +2 / +3** and maximum payouts **11 / 17 / 28 CRED**, totaling **56 CRED** if all three layers are fully extracted. No bonus for partial extraction. Basic Extractor's existing 5-CRED per eligible end turn remains unchanged. This is the authoritative Training Node CRED schedule wherever historical numbers conflict.
+
+
+## TRAINING-WATCHDOG-SUBROUTINES-001 — WATCHDOG subroutine adjustment (APPROVED, 2026-11-12)
+
+In Training Node Layer 3, **WATCHDOG — SENTRY — STR 3** has the following approved working subroutine list, in top-to-bottom resolution order:
+
+`[S1] PULP 4`
+`[S2] SyN 1`
+`[S3] DEADLOCK`
+
+The user specifically reduced the proposed `[S2] SyN 2` to **`[S2] SyN 1`**. This replaces that earlier proposed value. WATCHDOG's existing reactive ability remains unchanged: whenever the Rustler plays a CLOAK card, WATCHDOG gains +1 STR for the current ICE encounter; bonuses stack. Do not alter the already-approved base STR 3. This entry approves the revised working subroutine roster; do not silently modify other ICE or mechanics.
