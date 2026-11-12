@@ -717,3 +717,8 @@ This section reconciles earlier dated design entries; older locked decisions rem
 ## TRACE-004 — 100% TRACE Corporation countermeasures TBD (LOCKED boundary, 2026-11-11)
 
 At **100% TRACE**, the Corporation identifies the Rustler's location, as established by TRACE-001. **The specific Corporation countermeasures deployed at 100% TRACE are TBD and not yet designed or approved.** Do not presume reinforced ICE, a hunter program, a special encounter, damage, defeat, timing, duration, or any other particular mechanic. Earlier language about deployment of additional defenses expresses the intended narrative escalation only; the actual countermeasure rules remain **OPEN**. TRACE-001's 50% warning-only rule and TRACE-002/003 Corporation-scope reset rules remain unchanged.
+
+
+## BREAKER-STARTER-002 — Generalist WALL Icepick partial profile (APPROVED, 2026-11-12)
+
+The Generalist starter **WALL Icepick** is a **Persistent Software Executable** compatible with **WALL ICE**. Its **base breaking Strength is 1**. The Rustler may **spend 1 BW to increase its breaking Strength by 1**, with boosts accumulating for the **remainder of the current ICE encounter**, consistent with BREAKER-STARTER-001's starter Icepick Strength-boost duration. This approval defines only base Strength and Strength-boost cost/amount; the **BW cost to break an individual WALL subroutine remains OPEN** and must not be assumed. Existing starter Icepick installation and RAM rules are unchanged. This supersedes older notes saying all WALL Icepick profile details are undecided, but does not settle other training-encounter balance questions.
