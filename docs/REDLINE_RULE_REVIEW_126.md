@@ -517,3 +517,12 @@ The Rustler starts with **30 VITAE** and a **TRACE meter capacity/maximum of 40 
 ## VITAE-CAPACITY-001 — Starting VITAE is not maximum VITAE (LOCKED, 2026-11-12)
 
 **The Rustler starts with 30 VITAE. This is NEVER to be treated as a fixed or universal maximum.** The Rustler's initial MAX VITAE value and any general upper limit are **undefined / not yet specified**. Future cards and Ghostware can provide effects that **increase current VITAE** and/or **increase MAX VITAE**; these are distinct mechanics and must be represented separately. Do not infer that gaining current VITAE automatically increases MAX VITAE, or vice versa, unless a particular card explicitly says so. Do not hard-code MAX VITAE = 30 or silently introduce a fixed maximum in design or implementation. This clarification supersedes any suggestion in RUSTLER-STARTING-RESOURCES-001 or earlier notes that 30 might be a maximum. TRACE starting capacity remains 40, separate from VITAE.
+
+
+## TRAINING-THREE-ICE-CODE-GATE-A-002 — Sole subroutine and once-per-Corporation-turn timing (LOCKED, 2026-11-12)
+
+**CODE GATE A**, the **leftmost supporting CODE GATE** in the third training-layer three-ICE encounter, has **exactly one subroutine**:
+
+> **Grant the main SENTRY ICE +1 Strength.**
+
+This sole subroutine **resolves once per Corporation turn during the normal Corporation Response**, provided it remains eligible and unbroken. It is not a passive effect and does not activate more than once in the same Corporation turn. On each subsequent Corporation turn in which it resolves, it grants an additional +1 Strength; these bonuses **stack and last only until the end of the current ICE encounter**, consistent with TRAINING-THREE-ICE-SENTRY-001 and TRAINING-THREE-ICE-CODE-GATE-001. Breaking/preventing the subroutine prevents its resolution for that turn. CODE GATE A has **no additional subroutines**. Its provisional Strength 5 remains a working value, not newly locked by this decision. Main SENTRY base Strength remains 3.
