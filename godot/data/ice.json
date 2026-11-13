@@ -116,7 +116,7 @@
           "thermostat",
           "the_hearth"
         ],
-        "cred_reserve": 40
+        "cred_reserve": 55
       },
       "escape_ice": [
         "alarm_panel",
@@ -128,12 +128,12 @@
         {
           "encounter": 1,
           "random_escape_ice": 1,
-          "cred_reserve": 10
+          "cred_reserve": 15
         },
         {
           "encounter": 2,
           "random_escape_ice": 2,
-          "cred_reserve": 10
+          "cred_reserve": 15
         },
         {
           "encounter": 3,
@@ -142,7 +142,7 @@
             "house_call"
           ],
           "house_call_position": "left",
-          "cred_reserve": 10
+          "cred_reserve": 15
         }
       ],
       "escape_safehouse_after_encounter": [

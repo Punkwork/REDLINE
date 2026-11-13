@@ -219,10 +219,12 @@ When you take THE HEARTH's payload, HALCYON stops being a friendly gadget compan
 **Escape layout:**
 | Escape encounter | ICE | CRED reserve |
 |---|---|---|
-| **1** | 1 random escape ICE | 10 |
+| **1** | 1 random escape ICE | 15 |
 | **SAFEHOUSE** | (heal 10 VITAE or 1 PATCHWORK) | — |
-| **2** | 2 random escape ICE | 10 |
-| **3** | 1 random escape ICE + **HOUSE CALL** (support, left) | 10 |
+| **2** | 2 random escape ICE | 15 |
+| **3** | 1 random escape ICE + **HOUSE CALL** (support, left) | 15 |
+
+Escape reserves were 10 each; raised to 15 by UPL-008.
 
 The SAFEHOUSE's position is random (after encounter 1 or after encounter 2), and it's shown on the map.
 

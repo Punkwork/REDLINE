@@ -152,16 +152,16 @@
   },
   "cred_reserves": {
     "tier1": [
-      15,
-      20
+      20,
+      30
     ],
     "tier2": [
-      20,
-      25,
-      35
+      30,
+      35,
+      50
     ],
-    "central": 40,
-    "escape": 10
+    "central": 55,
+    "escape": 15
   },
   "map": {
     "infiltration_rows": 9,

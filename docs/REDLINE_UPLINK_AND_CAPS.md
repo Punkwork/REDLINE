@@ -98,14 +98,16 @@ Uplinks follow the corporation map structure in Core Rules §10.1 (APPROVED 2026
 
 ## 4. Economy check
 
-Rough CRED per corporation, for balance:
-- **ICE Nodes on the way in:** about 6 per route, paying about **20–35 CRED each** with reasonable extraction.
-- **Central Node:** up to **40**.
-- **Escape encounters:** single layers; their reserves are set with the escape ICE (CRED earned here can't be spent until the next corporation).
-- **Clean Node bonus:** about **+5–10**.
-- **Total:** roughly **160–250 CRED per corporation** (revised for the longer infiltration under UPL-007).
+**[CHANGED by UPL-008]** Card rewards now come once per ICE Node, about 30 per winning run (Core Rules §9.1, CORE-010). To make room for the Uplinks, every CRED reserve is raised by about 40% (`REDLINE_ICE_CORP1.md` §8.2).
 
-That buys about **4–7 cards, or a mix of cards, CAPS and a Wipe**, per corporation, across 2–3 Uplink visits. Enough to shape a deck, but not to buy everything, so choices matter. A careful ECHO with LONG GAME and SLOW DRIP should earn noticeably more; a fast RIOT noticeably less.
+Rough CRED per corporation, for balance:
+- **ICE Nodes on the way in:** about 6 per route, paying about **30–50 CRED each** with reasonable extraction (was 20–35).
+- **Central Node:** up to **55** (was 40).
+- **Escape encounters:** 15 each (was 10); CRED earned here can't be spent until the next corporation.
+- **Clean Node bonus:** about **+5–10**.
+- **Total:** roughly **230–350 CRED per corporation** (was 160–250).
+
+That buys about **6–9 cards, or a mix of cards, CAPS and Wipes**, per corporation, across 2–3 Uplink visits (was 4–7). Uplinks become the main place to **choose** a deck's direction, while Node rewards supply the steady stream of about 30 cards. Wipes matter more now: a player who buys a lot should also be removing basics. Enough to shape a deck, but not to buy everything, so choices matter. A careful ECHO with LONG GAME and SLOW DRIP should earn noticeably more; a fast RIOT noticeably less.
 
 ---
 
@@ -130,3 +132,9 @@ That buys about **4–7 cards, or a mix of cards, CAPS and a Wipe**, per corpora
 5. **Uplink layout:** reserve shelf with 2 of PROBE / PULP Shield / SCRUB (one randomly missing each visit), 6 random cards (4 shared + 2 Rustler) with one on sale, 3 CAPS (§3). — **APPROVED 2026-11-12 (UPL-005)**
 6. **Uplink services and card removal:** no reroll for now; **Clinic** at about 1 Uplink in 3 (remove all VOID for 50 CRED); **Wipe** at every Uplink (remove 1 card per visit, 50 CRED, +25 each use per run); **data purge** event at some SIGNAL UNCLEAR Nodes (remove 1 card for +5 TRACE or −5 VITAE) (§3, §3.1, §3.2). — **APPROVED 2026-11-12 (UPL-006)**
 7. **Corporation map structure and Uplink frequency:** 9 infiltration rows → Central Node → 4-Node escape (3 countermeasure ICE + 1 SAFEHOUSE, TRACE doubled, no leaving early, no JACK OUT); payload kept only on escape (*later changed by P5-009: the payload Ghostware is active immediately*); SAFEHOUSEs (heal 10 VITAE or 1 PATCHWORK) in 1–2 infiltration rows and once per escape; Uplinks possible in rows 3 and 6, row 9 is Uplink or DEAD DROP only; run length target 75–100 minutes (§3.3; Core Rules §10). — **APPROVED 2026-11-12 (UPL-007)**
+
+### Later amendments (Training Node playtest, 2026-11-12)
+
+| ID | Change |
+|---|---|
+| UPL-008 | **Bigger Uplink budget:** every CRED reserve raised about 40% (Tier 1: 20/30; Tier 2: 30/35/50; Central 55; escape 15) for about 230–350 CRED per corporation, or 6–9 Uplink cards (§4; `REDLINE_ICE_CORP1.md` §8.2). Pairs with CORE-010 (one card reward per ICE Node). Training Node reserves unchanged. |

@@ -142,7 +142,7 @@ HALCYON's home-assistant AI, the voice in every house. A three-ICE boss encounte
 
 - **Threat per Corporation Response:** about 14 if nothing is broken, and THE HEARTH grows each round (from its ability and THERMOSTAT).
 - **The fight's question:** break the supports first to slow THE HEARTH's growth, or rush THE HEARTH's two DEADLOCKs before it gets too strong?
-- **CRED reserve:** 40.
+- **CRED reserve:** 55 *(was 40; raised by UPL-008)*.
 - **Reward:** choose 1 of 3 Ghostware (Core Rules §10.2).
 
 ---
@@ -158,20 +158,23 @@ HALCYON's home-assistant AI, the voice in every house. A three-ICE boss encounte
 
 Support ICE are drawn from the same roster (a Tier 1 ICE can support a Tier 2 main). ICE always work exactly as printed: a support ICE's DEADLOCKs must also be broken to BREACH. Multi-ICE layers therefore take longer, which is why they have bigger CRED reserves.
 
-### 8.2 CRED reserves (working values)
+### 8.2 CRED reserves (working values) [CHANGED by UPL-008]
 | | Layer 1 | Layer 2 | Layer 3 |
 |---|---|---|---|
-| Tier 1 Node | 15 | 20 | — |
-| Tier 2 Node | 20 | 25 | 35 |
-| Central Node | 40 | — | — |
+| Tier 1 Node | 20 | 30 | — |
+| Tier 2 Node | 30 | 35 | 50 |
+| Central Node | 55 | — | — |
+| Escape encounter | 15 | — | — |
+
+Raised about 40% from the ICE-008 values (Tier 1: 15/20, Tier 2: 20/25/35, Central 40, escape 10) to give Uplinks a bigger budget now that card rewards come once per Node (CORE-010). The Training Node keeps its own 15/25/40.
 
 ### 8.2a Escape encounters (map structure from UPL-007)
 The escape (Core Rules §10.3) has **3 single-layer encounters** built from the corporation's **countermeasure ICE**, with TRACE gains doubled. For HALCYON, the escape uses its dedicated **security response** ICE (ALARM PANEL, MOTION SENSOR, DEADBOLT, PANIC BUTTON) with **HOUSE CALL** in the final encounter: see `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §4 (approved P5-007).
 
 ### 8.3 Example encounters
-- **Node 2, layer 1:** CAPTCHA alone. Reserve 15.
-- **Node 5, layer 2:** CONSENT FORM (support) + NANNY CAM (main). Reserve 25.
-- **Node 6, layer 3:** COOKIE WALL (support) + LOYALTY PROGRAM (support) + HOME ASSISTANT (main). Reserve 35.
+- **Node 2, layer 1:** CAPTCHA alone. Reserve 20.
+- **Node 5, layer 2:** CONSENT FORM (support) + NANNY CAM (main). Reserve 35.
+- **Node 6, layer 3:** COOKIE WALL (support) + LOYALTY PROGRAM (support) + HOME ASSISTANT (main). Reserve 50.
 
 ---
 
@@ -195,6 +198,6 @@ The escape (Core Rules §10.3) has **3 single-layer encounters** built from the 
 5. **The 12-ICE HALCYON roster** (§5). — **APPROVED 2026-11-12 (ICE-005)**
 6. **Black ICE: HOUSE CALL** (no DEADLOCK) (§6). — **APPROVED 2026-11-12 (ICE-006)**
 7. **Central Node: THE HEARTH** with SMART SPEAKER and THERMOSTAT (§7). — **APPROVED 2026-11-12 (ICE-007)**
-8. **Encounter composition and CRED reserves** (working values) (§8). — **APPROVED 2026-11-12 (ICE-008)**
+8. **Encounter composition and CRED reserves** (working values) (§8). — **APPROVED 2026-11-12 (ICE-008)**; reserves **raised by UPL-008**
 
 **Next:** Phase 3B — card pools: shared reward cards and Rustler-specific cards, including cards for the virus strains SCRAMBLE, BLIND, LEECH and WORM.
