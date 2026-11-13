@@ -832,3 +832,8 @@ Three VECTOR run-start lines approved as CANON verses NR-019 to NR-021 (EV-01; o
 ## NULREM-004 — Enter-a-corporation verses NR-022 to NR-035 and the reference compulsion (APPROVED, 2026-11-13)
 
 Trigger EV-03 (Enter a corporation): fourteen longer, exposition-rich lines approved as CANON verses — HALCYON NR-022 to NR-026, IRONWATCH NR-027 to NR-030, LUCIDA NR-031 to NR-035 (one chosen at random from the entered corporation's pool). HALCYON lines reference Orbital's “Halcyon + On + On” (1993). New CANON trait recorded in the Bible (§5) and Master Design (§7): NUL/REM is compelled to reference fictional computers and machine voices (HAL 9000, WALL-E, Number 5, Proteus IV, Impossible Mission's Elvin Atombender, Evilspeak's Apple II), with the signature line “Another visitor. Stay a while. Stayyyyyyy forever!”, and makes silly retro-game references such as “Rustler needs food… badly” at low VITAE. Licensing of quoted lines for a commercial release is OPEN.
+
+## NULREM-005 — IRONWATCH verses NR-036 and NR-037 (APPROVED, 2026-11-13)
+
+Two more EV-03 (Enter a corporation) lines for IRONWATCH's FRONT DESK approved as CANON verses NR-036 and NR-037, referencing Carol Beer's “Computer says no” (*Little Britain*, 2004); NR-037 also uses the germ trait. Carol Beer added to the reference-compulsion trait (Bible §5, Master Design §7). Pools now: HALCYON 5, IRONWATCH 6, LUCIDA 5.
+
