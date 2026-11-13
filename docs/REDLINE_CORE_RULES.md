@@ -13,7 +13,7 @@
 
 ## 1. The game in one paragraph
 
-You are a **Rustler**, a hacker for hire, with your AI companion **NUL/REM**. A run takes you through the networks of **three corporations**. Each network is a map of **Nodes**. Most Nodes are guarded by **ICE**, defensive programs you get past by playing cards from your deck and using **Icepicks** to break their **subroutines**. Each corporation ends at its **Central Node**, a boss encounter. Beat all three Central Nodes to win the run. Reach 0 **VITAE** and the run is over.
+You are a **Rustler**, a hacker for hire, with your AI companion **NUL/REM**. A run takes you through the networks of **three corporations**. Each network is a map of **Nodes**. Most Nodes are guarded by **ICE**, defensive programs you get past by playing cards from your deck and using **Icepicks** to break their **subroutines**. Each corporation is a heist: infiltrate to its **Central Node**, a boss encounter, take the payload, and **escape**. Get out of all three corporations to win the run. Reach 0 **VITAE** and the run is over.
 
 ---
 
@@ -180,15 +180,17 @@ After you BREACH a layer that isn't the last, choose:
 
 You can't leave under LOCKDOWN.
 
-**JACK OUT CAP [CHANGED]:** use it **during** an encounter to escape immediately, as if you'd left after BREACH. You **move forward**, not back. This keeps the run strictly forward-only and fixes the old conflict with JACK OUT retreating.
+**JACK OUT CAP [CHANGED]:** use it **during** an encounter to escape immediately, as if you'd left after BREACH. You **move forward**, not back. This keeps the run strictly forward-only and fixes the old conflict with JACK OUT retreating. JACK OUT gives −5 TRACE and has timing limits (not during the Corporation Response, under LOCKDOWN, while a Black ICE has an unbroken subroutine, at the Central Node, after BREACH, or during an escape): see `REDLINE_UPLINK_AND_CAPS.md` §2.1 (UPL-003).
 
 ### 8.3 Other Nodes
 
 | Node | What you can do |
 |---|---|
-| **Black Market Uplink** | Buy cards, Icepicks, CAPS and Hardware with CRED. |
+| **Black Market Uplink** | Buy cards and CAPS with CRED; remove a card (Wipe); some have a Clinic to remove VOID. Full details: `REDLINE_UPLINK_AND_CAPS.md`. |
 | **DEAD DROP** | Choose one: PATCH UP (+10 VITAE) or WIPE TRAIL (−20 TRACE). |
 | **Console Lab** | Apply PATCHWORK upgrades to a card, or remove a card from your deck. |
+| **SAFEHOUSE** **[NEW]** | Choose one: heal 10 VITAE, or apply 1 PATCHWORK upgrade to a card. |
+| **SIGNAL UNCLEAR** | An unknown Node: an event, which may include a data purge (remove 1 card for +5 TRACE or −5 VITAE). |
 | **Central Node** | The corporation's boss encounter (§10). |
 
 Non-ICE Nodes don't shuffle or reset your deck.
@@ -219,17 +221,36 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 
 ### 10.1 A corporation's network
 - A layered map of Nodes. You always move forward, and every route has the same number of Nodes.
-- Node icons on the map show **what probably lies ahead**: ICE, Uplink, DEAD DROP, Console Lab, or **SIGNAL UNCLEAR** (unknown). **[CHANGED]** Previously Nodes were fully hidden. Showing likely contents fits the surveillance theme (you're watching the corporation too) and makes route choice a real decision.
-- **Working size:** 6 Nodes per route, plus the Central Node.
+- Node icons on the map show **what probably lies ahead**: ICE, Uplink, DEAD DROP, Console Lab, SAFEHOUSE, or **SIGNAL UNCLEAR** (unknown). **[CHANGED]** Previously Nodes were fully hidden. Showing likely contents fits the surveillance theme (you're watching the corporation too) and makes route choice a real decision.
+- **Structure [CHANGED by UPL-007]:** a heist in three parts. Every route has **14 Nodes**: **9 infiltration rows → the Central Node → a 4-Node escape**. This replaces the earlier working size of 6 Nodes per route (CORE-009).
 
-### 10.2 Central Node
-A boss-style ICE encounter. Defeating it ends that corporation and gives a choice of **1 of 3 Ghostware** **[NEW]**.
+**Infiltration rows** (each row has 3–4 Nodes; each Node links forward to 2–3 Nodes in the next row):
 
-### 10.3 Moving to the next corporation
-Keep your deck, PATCHWORK and Ghostware. Restore VITAE to max. Remove all VOID. Reset TRACE and strikes to 0.
+| Rows | Possible Nodes |
+|---|---|
+| 1–4 (Tier 1 ICE) | ICE, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** possible in row 3 |
+| 5–8 (Tier 2 ICE) | ICE, Console Lab, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** possible in row 6 |
+| 9 | **Uplink or DEAD DROP only:** the last chance to prepare |
 
-### 10.4 Run length target [NEW]
-**45–75 minutes** for a full run. With roughly 6 Nodes × 3 corporations, about 2 encounters per ICE Node, and 3–4 turns per encounter, this is tight. The Training Node playtest should measure real minutes per encounter before map sizes are fixed.
+- **SAFEHOUSEs** appear in **1–2** of the 9 infiltration rows.
+- Every route can reach **at least 1 Uplink** (row 9 always offers one). About **1 Uplink in 3 has a Clinic**, shown on the map.
+
+### 10.2 Central Node and the payload [CHANGED by UPL-007]
+A boss-style ICE encounter. Defeating it gives you the corporation's **payload**: choose **1 of 3 Ghostware**. **You keep the payload only if you complete the escape.**
+
+### 10.3 Escape [NEW, UPL-007]
+After the Central Node, you have to get out:
+- **4 Nodes:** **3 single-layer ICE encounters** using that corporation's **countermeasure ICE**, plus **exactly 1 SAFEHOUSE**.
+- **TRACE gains are doubled** throughout the escape.
+- **No leaving early**, and **JACK OUT doesn't work**.
+- No Uplinks, Console Labs or other upgrade Nodes, apart from the one SAFEHOUSE.
+- Complete the escape to keep the payload and move on. If VITAE reaches 0 during the escape, the run ends as normal.
+
+### 10.4 Moving to the next corporation
+Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE to max. Remove all VOID. Reset TRACE and strikes to 0.
+
+### 10.5 Run length target [CHANGED by UPL-007]
+**75–100 minutes** for a full run (previously 45–75). Roughly: about 6 ICE Nodes on the way in (≈11 encounters with layers) + the boss + 3 escape encounters ≈ **15 encounters per corporation**, **about 45 per run**, at 3–4 turns each. The Training Node playtest should measure real minutes per encounter before these numbers are fixed.
 
 ---
 
@@ -312,8 +333,16 @@ When approved, this document **supersedes** the following. They stay in the Mast
 | CORE-006 | **Card reward (1 of 3, or skip) after every BREACH** (§9.1). | Approved |
 | CORE-007 | **Map shows likely Node contents**, with some SIGNAL UNCLEAR (§10.1). Supersedes RUN-005 hidden contents. | Approved |
 | CORE-008 | **Card frame shows one type** (PROGRAM / SCRIPT / PROTOCOL / BLOATWARE) with HARDWARE/SOFTWARE as tags; all Programs unload for 0 BW (§3.1). | Approved |
-| CORE-009 | **Working values:** Clean Node bonus +5 CRED; 6 Nodes per corporation route. Retune after playtesting. | Approved (working values) |
+| CORE-009 | **Working values:** Clean Node bonus +5 CRED; 6 Nodes per corporation route. Retune after playtesting. | Approved (working values); Node count **superseded by UPL-007** |
 
 Earlier decisions for this redesign (also 2026-11-12): damage is PULP + VOID only; this document is the single rules authority; design is approved per phase.
 
 **Next phase:** Phase 2 — Rustlers: 3–4 playable Rustlers with starter decks, signature Icepicks, fallback cards and ORIGIN Ghostware.
+
+### Later amendments (Phase 4, `REDLINE_UPLINK_AND_CAPS.md`)
+
+| ID | Change to this document |
+|---|---|
+| UPL-003 | JACK OUT gives −5 TRACE and has timing limits (§8.2). |
+| UPL-006 | Uplink services (Wipe, Clinic) and the SIGNAL UNCLEAR data purge (§8.3). |
+| UPL-007 | Heist structure: 9 infiltration rows → Central Node → 4-Node escape; SAFEHOUSE Nodes; payload kept only on escape; run length target 75–100 minutes (§1, §8.3, §10). Supersedes CORE-009's 6 Nodes per route. |
