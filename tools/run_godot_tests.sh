@@ -6,3 +6,5 @@ GODOT="${GODOT:-godot}"
 cd "$(dirname "$0")/.."
 "$GODOT" --headless --path godot --script res://tests/run_tests.gd
 "$GODOT" --headless --path godot --script res://tests/smoke_ui.gd
+# Optional, slower: economy simulation
+# "$GODOT" --headless --path godot --script res://tests/heist_sim.gd

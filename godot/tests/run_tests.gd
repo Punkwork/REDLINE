@@ -6,6 +6,8 @@ extends SceneTree
 const GameData = preload("res://scripts/data/game_data.gd")
 const RunState = preload("res://scripts/core/run_state.gd")
 const NodeRun = preload("res://scripts/core/node_run.gd")
+const Heist = preload("res://scripts/core/heist.gd")
+const Bot = preload("res://tests/bot.gd")
 
 var db
 var passed := 0
@@ -28,6 +30,9 @@ func _init() -> void:
 	test_ghost_signal()
 	test_full_extraction_bonus()
 	test_bot_plays_training_node()
+	test_caps()
+	test_uplink()
+	test_heists()
 	print("\n%d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
 
@@ -98,7 +103,7 @@ func test_str_and_boost() -> void:
 	node.start()
 	var ip = force_hand(node, "icepick_wall")
 	node.play_card(ip["uid"])
-	check(not node.break_check(ip["uid"], 0, 1)["ok"], "STR 1 can't break STR 3")
+	check(not node.break_subroutine(ip["uid"], 0, 1), "STR 1 can't break STR 3")
 	check(node.total_break_cost(ip["uid"], 0, 1) == 2, "2 boosts + free first break = 2 BW")
 	check(node.boost_and_break(ip["uid"], 0, 1), "boost and break")
 	check(node.bw == 1, "BW left 1")
@@ -152,7 +157,9 @@ func test_reward_at_node_end() -> void:
 	check(node.phase == "reward" and node.node_fully_cleared, "full clear offers the card reward")
 	check(is_equal_approx(float(node.rarity_odds()["rare"]), 0.25), "3 layers cleared: 25% rare")
 	node.choose_reward("")
-	check(node.phase == "node_complete" and node.run.deck.size() == 12, "skipping adds nothing")
+	check(node.phase == "completion" and node.completion_options.size() == 2, "full clear offers a CAP")
+	node.choose_completion(node.completion_options[0])
+	check(node.phase == "node_complete" and node.run.deck.size() == 12 and node.run.caps.size() >= 1, "skip card, take CAP")
 
 
 func test_shield_absorbs_pulp() -> void:
@@ -221,33 +228,20 @@ func test_ghost_signal() -> void:
 func test_full_extraction_bonus() -> void:
 	var node = new_node()
 	node.start()
-	node._extract(15, "test")
+	node._extract(15, "test", "extraction")
 	check(node.run.cred == 10 + 1, "10 extracted + 10%% bonus rounded up (cred %d)" % node.run.cred)
-	node._extract(5, "test")
+	node._extract(5, "test", "extraction")
 	check(node.run.cred == 11, "empty reserve pays nothing")
 
 
-## A simple greedy bot plays the whole Training Node, to catch crashes and loops.
+## The test bot plays the whole Training Node, to catch crashes and loops.
 func test_bot_plays_training_node() -> void:
 	var wins := 0
 	var added: Array = []
 	for seed_value in range(1, 21):
 		var node = new_node(seed_value, true)
 		node.start()
-		var guard := 0
-		while node.phase not in ["node_complete", "defeat"] and guard < 400:
-			guard += 1
-			match node.phase:
-				"ready_rig":
-					var opts: Array = node.ready_rig_options()
-					node.ready_rig_choose(opts[0]["uid"] if not opts.is_empty() else -1)
-				"player":
-					bot_turn(node)
-				"reward":
-					node.choose_reward(node.reward_options[0] if not node.reward_options.is_empty() else "")
-				"layer_choice":
-					node.go_deeper()
-		check(guard < 400, "bot finished (seed %d, phase %s)" % [seed_value, node.phase])
+		check(Bot.new().play_node(node), "bot finished (seed %d, phase %s)" % [seed_value, node.phase])
 		if node.phase == "node_complete":
 			wins += 1
 			added.append(node.run.deck.size() - 12)
@@ -256,45 +250,63 @@ func test_bot_plays_training_node() -> void:
 	check(wins > 0, "bot can clear the Training Node at least once")
 
 
-func bot_turn(node) -> void:
-	var progress := true
-	while progress and node.phase == "player":
-		progress = false
-		# 1. Break a DEADLOCK, then other subroutines, with the cheapest Icepick.
-		var best := []
-		for ip in node.installed_icepicks():
-			for i in node.ice_list.size():
-				var subs: Array = node.ice_list[i]["broken"]
-				for s in subs.size():
-					var cost: int = node.total_break_cost(ip["uid"], i, s)
-					if cost >= 0 and cost <= node.bw:
-						var is_dl: bool = node.ice_list[i]["def"]["subroutines"][s]["effects"].any(func(e): return e["op"] == "deadlock")
-						var score: int = (0 if is_dl else 100) + cost
-						if best.is_empty() or score < best[0]:
-							best = [score, ip["uid"], i, s]
-		# 2. Otherwise install a Program or play a Script.
-		if not best.is_empty() and best[0] < 100:
-			progress = node.boost_and_break(best[1], best[2], best[3])
-			continue
-		for inst in node.hand.duplicate():
-			if node.can_play(inst)["ok"] and node.card_def(inst)["type"] == "PROGRAM":
-				progress = node.play_card(inst["uid"])
-				break
-		if progress:
-			continue
-		if not best.is_empty():
-			progress = node.boost_and_break(best[1], best[2], best[3])
-			if progress:
-				continue
-		for inst in node.hand.duplicate():
-			if node.can_play(inst)["ok"] and node.card_def(inst)["type"] == "SCRIPT":
-				var target := 0
-				var high := -1
-				for i in node.ice_list.size():
-					if node.ice_str(i) > high:
-						high = node.ice_str(i)
-						target = i
-				progress = node.play_card(inst["uid"], target)
-				break
-	if node.phase == "player":
-		node.end_turn()
+## Every Rustler can play a whole HALCYON heist without the engine getting stuck.
+func test_heists() -> void:
+	for rid in ["generalist", "echo", "riot", "vector"]:
+		for i in 3:
+			var h = Heist.new()
+			h.setup(db, rid, 500 + i)
+			h.start()
+			check(h.rows.size() == 10, "9 rows + Central Node")
+			var uplink_rows := 0
+			for r in [2, 5, 8]:
+				if h.rows[r].any(func(n): return n["type"] == "uplink"):
+					uplink_rows += 1
+			check(uplink_rows == 3, "Uplinks in rows 3, 6 and 9")
+			Bot.new(i == 1).play_heist(h, 2)
+			check(h.phase == "summary", "%s heist %d finished (phase %s)" % [rid, i, h.phase])
+			check(h.summary_text().length() > 100, "summary written")
+
+
+func test_uplink() -> void:
+	var h = Heist.new()
+	h.setup(db, "generalist", 77)
+	h.start()
+	h.run.cred = 500
+	h._open_uplink(true)
+	var items: Array = h.room["items"]
+	check(items.filter(func(i): return i["shelf"] == "Reserve").size() == 2, "2 reserve cards")
+	check(items.filter(func(i): return i["shelf"] == "Cards").size() == 6, "6 shelf cards")
+	check(items.filter(func(i): return i.get("sale", false)).size() == 1, "1 card on sale")
+	check(items.filter(func(i): return i["kind"] == "cap").size() == 3, "3 CAPS")
+	var g := items.filter(func(i): return i["kind"] == "ghostware").size()
+	check(g >= 2 and g <= 3, "2-3 Ghostware")
+	var deck_before: int = h.run.deck.size()
+	var idx := -1
+	for i in items.size():
+		if items[i]["shelf"] == "Cards":
+			idx = i
+			break
+	var price: int = items[idx]["price"]
+	check(h.buy(idx), "buy a card")
+	check(h.run.cred == 500 - price and h.run.deck.size() == deck_before + 1, "CRED spent, card added")
+	check(not h.buy(idx), "can't buy twice")
+	h.start_wipe()
+	check(h.phase == "pick_card", "Wipe asks for a card")
+	h.resolve_pick(h.run.deck[0]["uid"])
+	check(h.run.deck.size() == deck_before and h.run.cred == 500 - price - 50, "Wipe removes a card for 50")
+	h.run.void_counters = 2
+	h.use_clinic()
+	check(h.run.void_counters == 0 and h.run.cred == 500 - price - 100, "Clinic removes VOID for 50")
+
+
+func test_caps() -> void:
+	var node = new_node()
+	node.start()
+	node.run.gain_cap("bulwark")
+	node.run.gain_cap("jack_out")
+	check(node.use_cap(0), "use BULWARK")
+	check(node.shield == 8, "+8 SHIELD")
+	check(node.use_cap(0), "use JACK OUT")
+	check(node.phase == "node_complete" and node.jacked_out, "JACK OUT ends the Node")
+	check(node.run.deck.size() == 12, "JACK OUT gives no card reward")
