@@ -828,3 +828,7 @@ First collaborative dialogue pass, trigger EV-01 (Run start) of the NUL/REM Dial
 ## NULREM-003 — VECTOR run-start lines and the germ trait (APPROVED, 2026-11-13)
 
 Three VECTOR run-start lines approved as CANON verses NR-019 to NR-021 (EV-01; one chosen at random). New CANON character trait recorded in the Bible (§5) and Master Design (§7): NUL/REM is fastidious about germs despite having no body or immune system; he worries about biological germs and dust in his casing, stays unbothered by computer viruses, and may claim illnesses he could never have had.
+
+## NULREM-004 — Enter-a-corporation verses NR-022 to NR-035 and the reference compulsion (APPROVED, 2026-11-13)
+
+Trigger EV-03 (Enter a corporation): fourteen longer, exposition-rich lines approved as CANON verses — HALCYON NR-022 to NR-026, IRONWATCH NR-027 to NR-030, LUCIDA NR-031 to NR-035 (one chosen at random from the entered corporation's pool). HALCYON lines reference Orbital's “Halcyon + On + On” (1993). New CANON trait recorded in the Bible (§5) and Master Design (§7): NUL/REM is compelled to reference fictional computers and machine voices (HAL 9000, WALL-E, Number 5, Proteus IV, Impossible Mission's Elvin Atombender, Evilspeak's Apple II), with the signature line “Another visitor. Stay a while. Stayyyyyyy forever!”, and makes silly retro-game references such as “Rustler needs food… badly” at low VITAE. Licensing of quoted lines for a commercial release is OPEN.

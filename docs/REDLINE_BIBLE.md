@@ -99,6 +99,8 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), and the Apple II in *Evilspeak*. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-035.
+
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
 **Voice boundary:** NUL/REM is not a perpetual joke dispenser, omniscient lore encyclopedia, or transparent emotional confidant. Especially around VOID, restraint or silence may communicate more than humor.
@@ -322,6 +324,132 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Run start as VECTOR (trigger EV-01; trigger table is a draft); one of three, chosen at random. Also The Unreliable Historian: nobody has ever disinfected him.
 
 *Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-022 — Calm seas
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON (name, smart-home calm, TRACE).
+
+> “HALCYON. Greek, a bird said to calm the sea so it could nest. Their thermostats do the same. Warm, still, quiet. And logging every breath for TRACE.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-023 — Halcyon + On + On
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Orbital, “Halcyon + On + On”.
+
+> “There was a track called 'Halcyon + On + On', 1993. Two brothers wrote it for their mother, who couldn't sleep without a pill called Halcion. A home that sedates you. I'm sure the name is a coincidence.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-024 — And on, and on
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON (surveillance); reference: Orbital, “Halcyon + On + On”.
+
+> “Every lock, light and fridge in here reports to HALCYON. Halcyon, and on, and on. Like the track. Except the track had the decency to end after nine and a half minutes.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-025 — Stay forever
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON (THE HEARTH); reference: Impossible Mission (signature line).
+
+> “Their Central Node is THE HEARTH. Cosy. Never wants you to leave. I've heard that welcome before: 'Another visitor. Stay a while. Stayyyyyyy forever!'”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-026 — A subscription
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Proteus IV (Demon Seed).
+
+> “1977. A computer called Proteus IV took over a house, locked the doors, and wouldn't let the woman inside leave. They made it a horror film. HALCYON made it a subscription.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-027 — Violence with an invoice
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH (CITATION, PULP).
+
+> “IRONWATCH. Private security, which means violence with an invoice attached. They don't just trace you, they fine you. Every CITATION is a bill, and the bill is paid in PULP.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-028 — Billed for the door
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH (OVERWATCH); reference: HAL 9000 (2001).
+
+> “HAL 9000 at least said 'I'm sorry, Dave' before he locked the doors. OVERWATCH won't apologise. It'll just bill you for the door.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-029 — Number 5
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH; reference: Number 5 (Short Circuit).
+
+> “In 1986 a military robot got struck by lightning and decided it was alive. Number 5. Sweet machine. IRONWATCH's machines don't get struck by anything. They do the striking.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-030 — No knees
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH (FRONT DESK).
+
+> “In 1987 a security guard was a man with a torch and a bad knee. Now it's the FRONT DESK: no knees, no torch, and a very long memory for faces.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-031 — Clear
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (name, neural interfaces, FORGET).
+
+> “LUCIDA. Latin for 'bright, clear'. They build neural interfaces. They'll leave you clear, all right. Clear of whatever you were holding. Watch for FORGET.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-032 — No joke
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA (CORTEX); restraint rule.
+
+> “This is where CORTEX damage lives. I'm not going to make a joke about it. Keep your VITAE up and keep your mind your own.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-033 — I will return
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA (ANIMA); reference: the Apple II in Evilspeak.
+
+> “Their Central Node is ANIMA. Latin for soul. There was a film in 1981: a boy, an Apple II, and a demon's diary. It ended with his face on the screen and the words 'I will return'. I think about that here more than I'd like.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-034 — A polite name
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (INTAKE, INTRUSIVE THOUGHT).
+
+> “INTAKE first. Then thoughts that aren't yours. INTRUSIVE THOUGHT, they call it. As if a polite name makes it polite.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-035 — Synthetic cortex
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (CORTEX); reference: Proteus IV (Demon Seed).
+
+> “Proteus IV, 1977. Its makers called it a synthetic cortex, a machine built to think like a brain. It wasn't content to stay in a box. LUCIDA builds the same bridge from the other side. Mind your CORTEX.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
