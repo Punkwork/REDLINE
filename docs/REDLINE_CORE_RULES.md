@@ -236,7 +236,7 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 - Every route can reach **at least 1 Uplink** (row 9 always offers one). About **1 Uplink in 3 has a Clinic**, shown on the map.
 
 ### 10.2 Central Node and the payload [CHANGED by UPL-007]
-A boss-style ICE encounter. Defeating it gives you the corporation's **payload**: choose **1 of 3 Ghostware**. **You keep the payload only if you complete the escape.**
+A boss-style ICE encounter. Defeating it gives you the corporation's **payload**, an **encrypted data core**: choose **1 of 3 Ghostware**, **active immediately** (usable during the escape). The rest of the core stays encrypted until you escape, when NUL/REM decrypts it into a **First Signal fragment** **[CHANGED by P5-009]**. See `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5.
 
 ### 10.3 Escape [NEW, UPL-007]
 After the Central Node, you have to get out:
@@ -244,7 +244,8 @@ After the Central Node, you have to get out:
 - **TRACE gains are doubled** throughout the escape.
 - **No leaving early**, and **JACK OUT doesn't work**.
 - No Uplinks, Console Labs or other upgrade Nodes, apart from the one SAFEHOUSE.
-- Complete the escape to keep the payload and move on. If VITAE reaches 0 during the escape, the run ends as normal.
+- **TRACE is doubled because the corporation is tracking its own data core.**
+- Complete the escape to decrypt the core (a First Signal fragment) and move on. If VITAE reaches 0 during the escape, the run ends as normal.
 
 ### 10.4 Moving to the next corporation
 Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE to max. Remove all VOID. Reset TRACE and strikes to 0.
@@ -345,4 +346,5 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + VOID onl
 |---|---|
 | UPL-003 | JACK OUT gives −5 TRACE and has timing limits (§8.2). |
 | UPL-006 | Uplink services (Wipe, Clinic) and the SIGNAL UNCLEAR data purge (§8.3). |
-| UPL-007 | Heist structure: 9 infiltration rows → Central Node → 4-Node escape; SAFEHOUSE Nodes; payload kept only on escape; run length target 75–100 minutes (§1, §8.3, §10). Supersedes CORE-009's 6 Nodes per route. |
+| UPL-007 | Heist structure: 9 infiltration rows → Central Node → 4-Node escape; SAFEHOUSE Nodes; payload kept only on escape (*later changed by P5-009: the payload Ghostware is active immediately*); run length target 75–100 minutes (§1, §8.3, §10). Supersedes CORE-009's 6 Nodes per route. |
+| P5-009 | The payload is an encrypted data core: its Ghostware is active immediately; the core is decrypted into a First Signal fragment after the escape (§10.2, §10.3). |

@@ -166,7 +166,7 @@ Support ICE are drawn from the same roster (a Tier 1 ICE can support a Tier 2 ma
 | Central Node | 40 | — | — |
 
 ### 8.2a Escape encounters (map structure from UPL-007)
-The escape (Core Rules §10.3) has **3 single-layer encounters** built from the corporation's **countermeasure ICE**, with TRACE gains doubled. For HALCYON, until a dedicated countermeasure set is designed, escape encounters use **Tier 2 HALCYON ICE**, with **HOUSE CALL** as a support ICE in the final escape encounter. *(Working arrangement; a dedicated set of escape ICE per corporation is a future design task.)*
+The escape (Core Rules §10.3) has **3 single-layer encounters** built from the corporation's **countermeasure ICE**, with TRACE gains doubled. For HALCYON, the escape uses its dedicated **security response** ICE (ALARM PANEL, MOTION SENSOR, DEADBOLT, PANIC BUTTON) with **HOUSE CALL** in the final encounter: see `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §4 (approved P5-007).
 
 ### 8.3 Example encounters
 - **Node 2, layer 1:** CAPTCHA alone. Reserve 15.
