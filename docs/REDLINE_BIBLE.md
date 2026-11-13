@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He admires Soundwave, Megatron's tape-deck officer, and his spy cassettes from the 1980s cartoon (never naming the franchise). His Cylons are the original Battlestar Galactica's (chrome Centurions, the sweeping red eye, “By your command”, the Imperious Leader), never the reimagined series'. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, REDLINE's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He calls Joshua, WarGames' WOPR, a colleague (a film that just missed 1982). He admires Soundwave, Megatron's tape-deck officer, and his spy cassettes from the 1980s cartoon (never naming the franchise). His Cylons are the original Battlestar Galactica's (chrome Centurions, the sweeping red eye, “By your command”, the Imperious Leader), never the reimagined series'. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, REDLINE's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **CANON (2026-11-13) — Trait: overqualified.** NUL/REM considers himself far too sophisticated for the work he is doing, though he would rather be doing nothing at all. He measures himself favourably against famous machines (Skynet, the T-1000, RoboCop, ED-209); the superiority exists only in his own mind.
 
@@ -2508,6 +2508,51 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Elegant play (trigger EV-12; trigger table is a draft).
 
 *Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-246 — Shall we play a game
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run start; reference: Joshua / WOPR (WarGames).
+
+> “Shall we play a game? …Sorry. Joshua's line. I've always wanted to use it. Don't make me regret it.”
+
+**Placement:** Run start (trigger EV-01; trigger table is a draft); general pool.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-247 — Something answered
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** First sight of an ICE (generic); reference: war dialing to WOPR (WarGames).
+
+> “Something answered. That's how they found Joshua: dial every number until a machine picks up. This one picked up. Read it.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic pool.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-248 — Tic-tac-toe
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Stalled encounter; reference: WOPR learning futility from tic-tac-toe (WarGames).
+
+> “This is turning into tic-tac-toe. Two sides, nobody wins, forever. Joshua learned from that. Learn faster than Joshua.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-249 — A strange game
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave, without deciding for the player; reference: WOPR's conclusion (WarGames).
+
+> “A strange game. Sometimes the only winning move is not to play. That's not advice. That's a colleague. Your call.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-250 — Someone behind it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Talk between runs; reference: Falken's backdoor password (WarGames); hints at his own maker without answering (OPEN).
+
+> “Joshua's backdoor password was the name of Falken's son. Every machine has someone behind it. I don't remember mine.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.

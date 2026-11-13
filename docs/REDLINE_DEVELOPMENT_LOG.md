@@ -965,3 +965,7 @@ Five lines approved as CANON verses referencing the Cylons of the original Battl
 
 Six lines approved as CANON verses referencing the 1980s cartoon without naming the franchise: NR-240 (EV-07 BREACH; “Laserbeak, eject”), NR-241 (EV-09; energon cubes, CRED inflation), NR-242 (EV-24 Uplink; spy cassettes), NR-243 (EV-37 Idle; Megatron's loyal tape deck), NR-244 (EV-15 Black ICE; Megatron) and NR-245 (EV-12 Elegant play; Soundwave's motto). Reference trait updated (Bible §5).
 
+## NULREM-037 — WarGames verses NR-246 to NR-250 (APPROVED, 2026-11-13)
+
+Five lines approved as CANON verses referencing Joshua / WOPR from WarGames: NR-246 (EV-01 Run start; “Shall we play a game?”), NR-247 (EV-05 generic first sight; war dialing), NR-248 (EV-10 Stalled; tic-tac-toe), NR-249 (EV-08 Go deeper or leave; the only winning move, without deciding for the player) and NR-250 (EV-36 Talk between runs; Falken's backdoor password, hinting at his own maker, OPEN). Reference trait updated (Bible §5).
+
