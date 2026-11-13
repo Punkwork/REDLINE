@@ -845,3 +845,7 @@ Two more EV-03 (Enter a corporation) lines approved as CANON verses, both refere
 
 Four more EV-03 (Enter a corporation) lines approved as CANON verses: NR-040 (HALCYON; Tron's Master Control Program, from chess program to the Pentagon, “End of line.”), NR-041 (IRONWATCH; Tron's Game Grid), NR-042 (LUCIDA; The Black Hole's humanoid crew, restraint rule) and NR-043 (IRONWATCH; Old B.O.B. and Maximilian). Added to the reference-compulsion trait (Bible §5, Master Design §7); NUL/REM identifies with Old B.O.B. Pools now: HALCYON 6, IRONWATCH 9, LUCIDA 7. A further Master Control line is planned for EV-30 (Central Node entry). To verify: “End of line” as the MCP's sign-off.
 
+## NULREM-008 — EV-03 verses NR-044 and NR-045: Marvin (APPROVED, 2026-11-13)
+
+Two final EV-03 (Enter a corporation) lines approved as CANON verses, referencing Marvin the Paranoid Android and Sirius Cybernetics' Genuine People Personalities: NR-044 (HALCYON; the delighted doors) and NR-045 (LUCIDA; the comparison he denies, Marvin's 576 billion years of waiting). Reference-compulsion trait updated (Bible §5, Master Design §7): Marvin is the comparison NUL/REM denies. EV-03 complete with 24 lines: HALCYON 7, IRONWATCH 9, LUCIDA 8.
+

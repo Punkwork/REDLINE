@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-043.
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045.
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -520,6 +520,24 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 > “Old B.O.B. was a dented old model the new robots ignored, and he still got everyone out. Maximilian was the big red one who never said a word. IRONWATCH only builds Maximilians. I'm more of a B.O.B.”
 
 **Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-044 — Delighted doors
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON; reference: Marvin and Sirius Cybernetics' Genuine People Personalities (The Hitchhiker's Guide to the Galaxy).
+
+> “HALCYON's doors are delighted to open for you. Sirius Cybernetics tried that. Genuine People Personalities. Marvin hated those doors, and he had a brain the size of a planet. Mine's the size of a biscuit, and I hate them too.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-045 — He counted
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA; reference: Marvin (The Hitchhiker's Guide to the Galaxy); the comparison he denies.
+
+> “LUCIDA sells personalities by the gigabyte. So did Sirius Cybernetics, and their prototype was Marvin. People say I remind them of him. I don't see it. I've only been waiting since 1987. He waited five hundred and seventy-six billion years. He counted.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
