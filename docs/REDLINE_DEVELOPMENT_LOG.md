@@ -929,3 +929,7 @@ Five lines approved as CANON verses referencing Kraftwerk's *Computer World* (19
 
 Two lines approved as CANON verses referencing Activision's Little Computer People (Commodore 64): NR-133 (EV-37 Idle; every computer has an occupant) and NR-134 (EV-19 KILLSWITCH fires; the free mail-in revival). Reference trait updated (Bible §5).
 
+## NULREM-028 — BBS and warez verses NR-135 to NR-138 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses: NR-135 (EV-04 BOOTING; dialling at 1200 baud, “Nodes don't sing anymore”), NR-136 (EV-13 TRACE reaches 20; the kitchen phone), NR-137 (EV-27 Card reward; upload/download ratios) and NR-138 (EV-24 Uplink; warez boards and cracktros). Reference trait updated (Bible §5).
+
