@@ -909,3 +909,7 @@ Four lines approved as CANON verses: NR-114 (EV-12 Elegant play; a Tetris), NR-1
 
 NR-114, NR-115 and NR-116 are RETIRED and replaced by v2 versions in which NUL/REM calls the Game Boy **DMG-01**, as if it were an old friend (Bible §5 updated). Placements unchanged.
 
+## NULREM-023 — Speak & Spell verses NR-118 to NR-120 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses: NR-118 (EV-06 DEADLOCK broken; “That. Is. Correct.”), NR-119 (EV-38 Repeated mistake; “That is incorrect”, in his head since 1982) and NR-120 (EV-33 First Signal fragment decrypted, the trigger's first line; E.T.'s Speak & Spell communicator; the Signal's content stays OPEN). Reference trait updated (Bible §5).
+
