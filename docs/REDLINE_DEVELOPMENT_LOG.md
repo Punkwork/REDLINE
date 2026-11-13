@@ -961,3 +961,7 @@ Designer decision: no bespoke NUL/REM line per ICE for now, because ICE names an
 
 Five lines approved as CANON verses referencing the Cylons of the original Battlestar Galactica only (designer direction; no reimagined-series elements such as resurrection or “toasters”): NR-235 (EV-11; the sweeping red eye), NR-236 (EV-08; “By your command”), NR-237 (EV-35; a Command Centurion and the Imperious Leader), NR-238 (EV-37; Lucifer) and NR-239 (EV-37; vocoder voices, with Kraftwerk). Reference trait updated (Bible §5).
 
+## NULREM-036 — Soundwave, Megatron and energon verses NR-240 to NR-245 (APPROVED, 2026-11-13)
+
+Six lines approved as CANON verses referencing the 1980s cartoon without naming the franchise: NR-240 (EV-07 BREACH; “Laserbeak, eject”), NR-241 (EV-09; energon cubes, CRED inflation), NR-242 (EV-24 Uplink; spy cassettes), NR-243 (EV-37 Idle; Megatron's loyal tape deck), NR-244 (EV-15 Black ICE; Megatron) and NR-245 (EV-12 Elegant play; Soundwave's motto). Reference trait updated (Bible §5).
+
