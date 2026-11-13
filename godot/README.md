@@ -6,12 +6,12 @@ Godot **4.3** (GDScript, Compatibility renderer). Open the `godot/` folder in th
 
 The main menu offers two modes.
 
-**HALCYON heist (economy playtest).** Choose any of the 4 Rustlers.
+**Corporation heist (economy playtest).** Choose HALCYON, IRONWATCH or LUCIDA, then any of the 4 Rustlers.
 - A 9-row map: Tier 1 ICE in rows 1–4 and Tier 2 in rows 5–8, Uplinks in rows 3 and 6, and an Uplink or DEAD DROP in row 9. SAFEHOUSEs appear in 1–2 rows.
 - SIGNAL UNCLEAR events, Console Labs, and THE HEARTH Central Node with its Ghostware payload. The escape isn't in this build yet.
 - **Black Market Uplink:** a reserve shelf, 6 cards with one on sale, 3 CAPS (one may be BOOTLEG), 2–3 Ghostware, Wipe, and a Clinic at about 1 Uplink in 3.
 - **CAPS:** all 12 work; JACK OUT follows its timing limits. You get CAPS from the full-clear completion reward and from the 20% drop after a BREACH.
-- **Ghostware:** the general pool and the HALCYON set work, apart from SIGNAL BOOSTER, which has no effect yet.
+- **Ghostware:** the general pool and all three corporation sets work, apart from SIGNAL BOOSTER, which has no effect yet.
 - **Run summary:** CRED earned by source, CRED spent by category, every purchase, cards added (rewards versus bought) and the route you took. **Copy summary to clipboard** lets you paste it into a chat for tuning.
 
 **Training Node:** the Generalist against 3 fixed layers. The reserves are 10/15/25.
@@ -51,7 +51,7 @@ GODOT=/path/to/godot tools/run_godot_tests.sh
 
 ## Not built yet
 
-- The escape, and corporations 2 and 3.
+- The escape, and chaining all 3 corporations into one run (each corporation is played on its own for now).
 - PATCHWORK and FUSE (SAFEHOUSE and Console Lab show them disabled), and the FRIENDLY RUSTLER trade's choice of card.
 - Fixer contracts and Ghostware fragments.
 - Discard choices. When ICE forces a discard, the right-most non-CACHED cards go for now.

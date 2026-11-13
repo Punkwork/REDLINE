@@ -139,6 +139,8 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 | **VOICE MIMIC** | Once per encounter, the first TRACE subroutine that would resolve **fails**. |
 | **AD BLOCKER** | Bloatware the corporation INSERTs always goes to your discard pile, never your hand or draw pile. |
 
+**Other corporations' sets:** IRONWATCH (KEVLAR WEAVE, BADGE CLONE, DASHCAM FEED) in `REDLINE_ICE_CORP2.md` §8; LUCIDA (LUCID DREAM, MEMORY BACKUP, NEURAL FIREWALL) in `REDLINE_ICE_CORP3.md` §9.
+
 ---
 
 ### 2.4 Earning Ghostware during infiltration (APPROVED 2026-11-12, P5-008)

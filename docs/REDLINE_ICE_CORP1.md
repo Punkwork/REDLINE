@@ -20,12 +20,14 @@
 - **SPAM** is HALCYON's signature Bloatware: junk that clogs your hand until you pay to clear it.
 - **First VOID appears late** (HOME ASSISTANT), as a warning of what's to come.
 
-### Proposed three-corporation arc
+### The three-corporation arc
 | Corporation | Theme | Main threat | Difficulty |
 |---|---|---|---|
 | **1. HALCYON** | Consumer surveillance | TRACE, Bloatware | Introductory |
-| **2.** (to be designed) | Private security / enforcement | PULP, aggressive Sentries | Mid |
-| **3.** (to be designed) | Neural interfaces | VOID, ICE that rewire your deck | Hard |
+| **2. IRONWATCH** | Private security and enforcement | PULP, aggressive Sentries | Mid |
+| **3. LUCIDA** | Neural interfaces | VOID, FORGET (ICE that rewire your deck) | Hard |
+
+IRONWATCH and LUCIDA are designed in `REDLINE_ICE_CORP2.md` and `REDLINE_ICE_CORP3.md` (approved 2026-11-13).
 
 Each corporation teaches and then tests one main threat, ending with VOID, the game's most frightening damage.
 

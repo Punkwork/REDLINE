@@ -112,6 +112,7 @@ WHITE PICKET FENCE — WALL — STR 3
 | **VOID X** | Gain X VOID counters (§6). |
 | **TRACE X** | Add X to your TRACE meter (§7). |
 | **DEADLOCK** | Blocks BREACH while unbroken. Does nothing on its own. |
+| **FORGET X** | X random non-CACHED cards in your hand are BURNED for the rest of the Node. *(LUCIDA; added by ICE3-002.)* |
 | Others | Printed on the ICE: strengthen other ICE, insert Bloatware, and so on. |
 
 One subroutine can have more than one effect (e.g. `[S1] PULP 4 + DEADLOCK`). Breaking it stops all of them.
@@ -366,3 +367,9 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + VOID onl
 | ID | Change to this document |
 |---|---|
 | CORE-010 | Card reward **once per ICE Node** at the end of the Node, not after every BREACH, and none in the escape; about 21 card rewards per winning run, about 30 cards added with Uplink purchases (UPL-008). Rarity odds improve with layers cleared (60/30/10, 45/40/15, 30/45/25). Leaving early still gets the card reward; JACK OUT doesn't. Node completion reward is now a CAP or a PATCHWORK upgrade (no rare card) (§4, §8.2, §9.1, §9.3). Supersedes CORE-006. |
+
+### Later amendments (corporations 2 and 3, 2026-11-13)
+
+| ID | Change to this document |
+|---|---|
+| ICE3-002 | New subroutine effect **FORGET X** (§5.2), introduced by LUCIDA (`REDLINE_ICE_CORP3.md` §3). |

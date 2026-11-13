@@ -32,6 +32,7 @@ var selected_target := -1
 var selected_icepick := -1
 var choice_picks: Array = []
 var show_deck := false
+var menu_corp := "halcyon"
 
 # Encounter screen
 var encounter_root: Control
@@ -82,11 +83,11 @@ func _start_training() -> void:
 	_refresh()
 
 
-func _start_heist(rustler_id: String, seed_value: int = 0) -> void:
+func _start_heist(rustler_id: String, seed_value: int = 0, corp_id: String = "") -> void:
 	mode = "heist"
 	node = null
 	heist = Heist.new()
-	heist.setup(db, rustler_id, seed_value)
+	heist.setup(db, rustler_id, seed_value, corp_id if corp_id != "" else menu_corp)
 	heist.changed.connect(_refresh)
 	heist.logged.connect(_on_log)
 	log_box.clear()
@@ -262,7 +263,21 @@ func _screen_menu() -> void:
 	_margin_box(screen_body)
 	screen_body.add_child(_label("REDLINE", 48, C_ACCENT))
 	screen_body.add_child(_label("Economy playtest build", 16, C_DIM))
-	screen_body.add_child(_label("\nHALCYON heist: 9 infiltration rows, Uplinks, events and the Central Node (no escape yet).\nChoose a Rustler:", 16, C_TEXT))
+	screen_body.add_child(_label("\nA corporation heist: 9 infiltration rows, Uplinks, events and the Central Node (no escape yet).\n1. Choose a corporation:", 16, C_TEXT))
+	var crow := HBoxContainer.new()
+	crow.add_theme_constant_override("separation", 8)
+	for cid in ["halcyon", "ironwatch", "lucida"]:
+		var c: Dictionary = db.corporations[cid]
+		var cb := Button.new()
+		cb.text = "%s%s\n%s · %s" % ["◉ " if menu_corp == cid else "", c["name"], c["theme"], c["main_threat"]]
+		cb.custom_minimum_size = Vector2(330, 56)
+		cb.add_theme_color_override("font_color", C_ACCENT if menu_corp == cid else C_TEXT)
+		cb.pressed.connect(func():
+			menu_corp = cid
+			_refresh())
+		crow.add_child(cb)
+	screen_body.add_child(crow)
+	screen_body.add_child(_label("2. Choose a Rustler to start:", 16, C_TEXT))
 	for rid in ["generalist", "echo", "riot", "vector"]:
 		var r: Dictionary = db.rustlers[rid]
 		var origin: Dictionary = db.ghostware[r["origin_ghostware"]]
@@ -304,7 +319,7 @@ func _header(title: String) -> void:
 
 
 func _screen_map() -> void:
-	_header("HALCYON — choose your next Node")
+	_header("%s — choose your next Node" % heist.corp["name"])
 	screen_body.add_child(_label("Left to right: rows 1–9, then the Central Node. You can move to the highlighted Nodes.", 13, C_DIM))
 	var grid := HBoxContainer.new()
 	grid.add_theme_constant_override("separation", 6)

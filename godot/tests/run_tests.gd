@@ -33,6 +33,7 @@ func _init() -> void:
 	test_caps()
 	test_uplink()
 	test_heists()
+	test_new_corporations()
 	print("\n%d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
 
@@ -248,6 +249,49 @@ func test_bot_plays_training_node() -> void:
 			check(node.run.deck.size() <= 13, "at most 1 card per Node")
 	print("Bot cleared the Training Node in %d/20 seeds; cards added per run: %s." % [wins, added])
 	check(wins > 0, "bot can clear the Training Node at least once")
+
+
+## IRONWATCH and LUCIDA mechanics: FORGET, end-of-turn Bloatware, ARMORY, and their Ghostware.
+func test_new_corporations() -> void:
+	var node = new_node()
+	node.setup(db, node.run, "lucida", [{"ice": ["sleep_tracker"], "cred_reserve": 10}])
+	node.start()
+	var before: int = node.hand.size()
+	node._forget(1)
+	check(node.hand.size() == before - 1 and node.burned.size() == 1, "FORGET burns a card from hand")
+	node.run.add_ghostware("memory_backup")
+	node._forget(1)
+	check(node.burned.size() == 1 and node.discard_pile.size() == 1, "MEMORY BACKUP: FORGET goes to discard")
+	node.hand.append(node.run.make_temp_card("intrusive_thought"))
+	var v: int = node.run.void_counters
+	node.end_turn()
+	check(node.run.void_counters == v + 1, "INTRUSIVE THOUGHT held at end of turn: VOID 1")
+	node.run.add_ghostware("lucid_dream")
+	node.run.void_counters = 4
+	node.hand.clear()
+	node._start_turn()
+	check(node.hand.size() == 3, "LUCID DREAM: DRAW can't go below 3")
+
+	var n2 = new_node()
+	n2.setup(db, n2.run, "ironwatch", [{"ice": ["armory", "checkpoint"], "cred_reserve": 10}])
+	n2.start()
+	var str_before: int = n2.ice_str(1)
+	n2._apply_ice_effects(db.ice["armory"]["subroutines"][0]["effects"], 0)
+	check(n2.ice_str(1) == str_before + 1 and n2.ice_str(0) == 5, "ARMORY: every other ICE +1 STR")
+	n2.hand.append(n2.run.make_temp_card("citation"))
+	n2.run.vitae = 30
+	n2.shield = 0
+	n2.run.add_ghostware("kevlar_weave")
+	n2._apply_ice_effects([{"op": "pulp", "n": 3}], 1)
+	check(n2.run.vitae == 28, "KEVLAR WEAVE: ICE PULP 3 deals 2")
+
+	for cid in ["ironwatch", "lucida"]:
+		for rid in ["generalist", "vector"]:
+			var h = Heist.new()
+			h.setup(db, rid, 900, cid)
+			h.start()
+			Bot.new().play_heist(h, 2)
+			check(h.phase == "summary", "%s heist with %s finished" % [cid, rid])
 
 
 ## Every Rustler can play a whole HALCYON heist without the engine getting stuck.

@@ -187,18 +187,21 @@ func _start_layer(index: int) -> void:
 	turn = 0
 	_log("-- Layer %d of %d: %s (CRED reserve %d) --" % [index + 1, layers.size(),
 			", ".join(ice_list.map(func(x): return x["def"]["name"])), reserve])
-	if run.has_ghostware("patient_zero"):
-		for i in ice_list.size():
-			_infect(i, "rot", 1)
-	if run.has_ghostware("hearth_key"):
-		for i in ice_list.size():
-			if ice_list[i]["def"]["type"] == "WALL":
-				ice_list[i]["str_mod"] -= 1
-				_log("HEARTH KEY: %s −1 STR." % ice_list[i]["def"]["name"])
+	_ghostware_effects("start_of_encounter")
 	if index == 0 and run.has_ghostware("first_contact"):
 		ice_list[-1]["str_mod"] -= 2
 		_log("FIRST CONTACT: %s −2 STR." % ice_list[-1]["def"]["name"])
 	_start_turn()
+
+
+## Applies the effects of owned Ghostware that fire at this timing (PATIENT ZERO, HEARTH KEY,
+## BADGE CLONE at "start_of_encounter"; DASHCAM FEED at "breach").
+func _ghostware_effects(timing: String) -> void:
+	for gid in run.ghostware:
+		for e in db.ghostware[gid].get("effects", []):
+			if str(e.get("when", "")) == timing:
+				_log("%s:" % db.ghostware[gid]["name"])
+				_apply_effect(e, -1, null)
 
 
 func _make_ice(ice_id: String) -> Dictionary:
@@ -236,7 +239,10 @@ func _start_turn() -> void:
 		if card_def(inst).get("script", "") == "replicator":
 			_replicate()
 	_start_of_turn_viruses()
-	var n: int = max(1, run.draw_size - run.void_counters)
+	var floor_draw := 1
+	if run.has_ghostware("lucid_dream"):
+		floor_draw = min(3, run.draw_size)
+	var n: int = max(floor_draw, run.draw_size - run.void_counters)
 	_draw(n)
 	_log("Turn %d: %d BW, drew %d." % [turn, bw, n])
 	changed.emit()
@@ -608,10 +614,11 @@ func end_turn() -> void:
 	for inst in installed:
 		if card_def(inst).has("extractor"):
 			_extract_for(inst)
-	for inst in hand:
-		if inst["id"] == "tracer":
-			_log("TRACER in hand: +3 TRACE.")
-			add_trace(3, false)
+	for inst in hand.duplicate():
+		for e in card_def(inst)["effects"]:
+			if str(e.get("when", "")) == "end_of_turn_in_hand":
+				_log("%s in hand:" % card_name(inst))
+				_apply_effect(e, -1, inst)
 	if _check_defeat():
 		return
 	if is_breached():
@@ -788,7 +795,11 @@ func _apply_ice_effects(effects: Array, ice_index: int) -> void:
 				pass
 			"pulp":
 				var n := int(e["n"]) + _ice_pulp_bonus(ice) - int(ice["virus"].get("scramble", 0))
+				if run.has_ghostware("kevlar_weave"):
+					n -= 1
 				take_pulp(max(0, n))
+			"forget":
+				_forget(int(e["n"]))
 			"trace":
 				var n2 := int(e["n"]) - int(ice["virus"].get("blind", 0))
 				add_trace(max(0, n2), true)
@@ -799,12 +810,15 @@ func _apply_ice_effects(effects: Array, ice_index: int) -> void:
 			"insert":
 				_insert_bloatware(e["card"], e["dest"], int(e.get("n", 1)))
 			"ice_gain_str":
-				var target := ice_index
-				if e["target"] != "self":
-					target = _ice_index_by_id(e["target"])
-				if target >= 0:
-					ice_list[target]["str_mod"] += int(e["n"])
-					_log("%s gains +%d STR." % [ice_list[target]["def"]["name"], int(e["n"])])
+				var targets: Array = [ice_index]
+				if e["target"] == "others":
+					targets = range(ice_list.size()).filter(func(k): return k != ice_index)
+				elif e["target"] != "self":
+					targets = [_ice_index_by_id(e["target"])]
+				for target in targets:
+					if target >= 0:
+						ice_list[target]["str_mod"] += int(e["n"])
+						_log("%s gains +%d STR." % [ice_list[target]["def"]["name"], int(e["n"])])
 			"purge":
 				_purge(ice_index)
 			"purge_all":
@@ -814,6 +828,23 @@ func _apply_ice_effects(effects: Array, ice_index: int) -> void:
 				_log("(Not yet implemented: ICE effect '%s')" % e["op"])
 		if phase == PHASE_DEFEAT:
 			return
+
+
+## FORGET X: X random non-CACHED cards in your hand are BURNED for the rest of the Node
+## (MEMORY BACKUP sends them to the discard pile instead).
+func _forget(n: int) -> void:
+	for i in n:
+		var options: Array = hand.filter(func(c): return not cached.has(c["uid"]))
+		if options.is_empty():
+			return
+		var inst = options[run.rng.randi_range(0, options.size() - 1)]
+		hand.erase(inst)
+		if run.has_ghostware("memory_backup"):
+			discard_pile.append(inst)
+			_log("FORGET: %s (MEMORY BACKUP: to your discard pile)." % card_name(inst))
+		else:
+			burned.append(inst)
+			_log("FORGET: %s is BURNED for the rest of the Node." % card_name(inst))
 
 
 func _purge(ice_index: int) -> void:
@@ -859,9 +890,12 @@ func describe_ice_effect(e: Dictionary) -> String:
 		"insert":
 			return "INSERT %s → %s" % [db.cards[e["card"]]["name"], String(e["dest"]).replace("_", " ")]
 		"ice_gain_str":
-			return "%s +%d STR" % [String(e["target"]).to_upper().replace("_", " "), int(e["n"])]
+			var who := "EVERY OTHER ICE" if e["target"] == "others" else String(e["target"]).to_upper().replace("_", " ")
+			return "%s +%d STR" % [who, int(e["n"])]
 		"purge_all":
 			return "PURGE ALL"
+		"forget":
+			return "FORGET %d" % int(e["n"])
 		_:
 			return String(e["op"]).to_upper()
 
@@ -896,6 +930,10 @@ func take_void(n: int) -> void:
 	if stabilizer and n > 0:
 		_log("STABILIZER prevents %d VOID." % n)
 		return
+	if n > 0 and run.has_ghostware("neural_firewall") and not once_per_encounter_used.get("neural_firewall", false):
+		once_per_encounter_used["neural_firewall"] = true
+		n -= 1
+		_log("NEURAL FIREWALL prevents 1 VOID.")
 	for inst in installed + rack:
 		for e in card_def(inst)["effects"]:
 			if e["op"] != "prevent_void" or n <= 0:
@@ -1044,6 +1082,10 @@ func _apply_effect(e: Dictionary, target_ice: int, source) -> void:
 		"suppress_abilities":
 			suppressed_types.append(e["ice_type"])
 			_log("%s abilities do nothing until the end of your turn." % e["ice_type"])
+		"pulp":
+			take_pulp(int(e["n"]))
+		"void":
+			take_void(int(e["n"]))
 		"draw":
 			_draw(int(e["n"]))
 		"gain_bw":
@@ -1092,6 +1134,8 @@ func _apply_effect(e: Dictionary, target_ice: int, source) -> void:
 		"burn_bloatware":
 			_ask_hand_cards("Choose a Bloatware in your hand to BURN.", int(e["n"]), "burn_bloatware",
 					func(i): return card_def(i)["type"] == "BLOATWARE")
+		"forget":
+			_forget(int(e["n"]))
 		"ram", "prevent_void", "deadlock", "trace_reduce_each", "redirect_insert":
 			pass   # passive: checked where they apply
 		_:
@@ -1297,6 +1341,7 @@ func _ice_index_by_id(ice_id: String) -> int:
 func _layer_cleared() -> void:
 	layers_cleared = layer_index + 1
 	_log("== Layer %d BREACHED (Corporation Response skipped) ==" % layers_cleared)
+	_ghostware_effects("breach")
 	var drop := float(db.raw["caps"]["rules"]["post_breach_drop_chance"])
 	if run.free_cap_slots() > 0 and run.rng.randf() < drop:
 		var id: String = run.random_cap_id()

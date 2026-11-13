@@ -16,11 +16,11 @@ The checker confirms every file parses, ids are unique, every reference points a
 
 | File | Contents | Source doc |
 |---|---|---|
-| `cards.json` | 94 cards: shared basics, 4 starter decks' cards, 31 shared reward cards, 9 per Rustler, 2 Bloatware. Fused versions sit on their SCRIPT under `fused`. | Rustlers, Card Pools, Upgrades §1.2a |
+| `cards.json` | 96 cards: shared basics, 4 starter decks' cards, 31 shared reward cards, 9 per Rustler, 4 Bloatware (SPAM, TRACER, CITATION, INTRUSIVE THOUGHT). Fused versions sit on their SCRIPT under `fused`. | Rustlers, Card Pools, Upgrades §1.2a |
 | `rustlers.json` | Starting stats, the 4 Rustlers, their starter decks, ORIGIN Ghostware, unlocks | Rustlers |
-| `ice.json` | Threat values, tiers, the Training Node and HALCYON (rosters, Central Node, escape layout), and all 28 ICE | HALCYON ICE, Upgrades §4, Core Rules §14 |
+| `ice.json` | Threat values, tiers, the Training Node and the 3 corporations HALCYON, IRONWATCH and LUCIDA (rosters, Black ICE, Central Node, escape layout, Ghostware set), and all 66 ICE | ICE Corp 1–3, Upgrades §4, Core Rules §14 |
 | `caps.json` | CAPS rules (slots, JACK OUT limits, Bootleg) and the 12 CAPS | Uplink & CAPS |
-| `ghostware.json` | Ghostware rules (payload, fragments, Uplink shelf, contracts) and 31 Ghostware: 4 origin, 20 general, 4 reserve (disabled), 3 HALCYON | Rustlers, Upgrades §2 |
+| `ghostware.json` | Ghostware rules (payload, fragments, Uplink shelf, contracts) and 37 Ghostware: 4 origin, 20 general, 4 reserve (disabled), 3 each for HALCYON, IRONWATCH and LUCIDA | Rustlers, Upgrades §2 |
 | `patchwork.json` | PATCHWORK rules, FUSE rules, the 12 mods | Upgrades §1 |
 | `events.json` | 9 SIGNAL UNCLEAR events with choices and weights | Upgrades §3 |
 | `contracts.json` | 8 fixer contracts | Upgrades §2.4 |
@@ -70,12 +70,13 @@ The checker confirms every file parses, ids are unique, every reference points a
 | `cache` | CACHE up to n cards in hand |
 | `discard` / `discard_hand` | Discard n cards (player's choice) / discard the whole hand |
 | `heal` / `max_vitae` | Heal n VITAE (capped at max) / change Max VITAE (raising it also heals) |
-| `pulp` / `void` | ICE damage: n PULP (blocked by SHIELD) / n VOID counters |
+| `pulp` / `void` | ICE damage: n PULP (blocked by SHIELD) / n VOID counters (also used by Bloatware with `when: end_of_turn_in_hand`) |
+| `forget` | ICE: n random non-CACHED cards in hand are BURNED for the Node (LUCIDA) |
 | `pulp_direct` | Lose n VITAE as a cost (not blocked by SHIELD) |
 | `prevent_void` | Prevent n VOID (`all`), with a `limit` |
 | `ice_str` | Change ICE STR by n (`target`, `duration`, optional `ice_type`, `n_per_10_trace`) |
 | `ice_str_set` | Set ICE STR to `value` for `duration` |
-| `ice_gain_str` | ICE ability/subroutine: `target` gains n STR for the encounter |
+| `ice_gain_str` | ICE ability/subroutine: `target` (`self`, `others` or an ICE id) gains n STR for the encounter |
 | `ice_pulp_bonus` | That ICE's PULP subroutines deal +n |
 | `str_floor` | That ICE's STR can't go below n |
 | `icepick_str` | Your Icepicks have +n STR |

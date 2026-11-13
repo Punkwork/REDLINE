@@ -17,7 +17,7 @@ DATA = Path(__file__).resolve().parent.parent / "godot" / "data"
 KNOWN_OPS = {
     "add_black_ice", "add_random_card", "break", "burn_bloatware", "cache", "cap_slots", "copy_virus",
     "deadlock", "discard", "discard_hand", "double_virus", "draw", "draw_stat", "extract",
-    "extract_multiplier", "gain_bw", "gain_cred", "gain_random_cap", "gain_random_ghostware", "heal",
+    "extract_multiplier", "forget", "gain_bw", "gain_cred", "gain_random_cap", "gain_random_ghostware", "heal",
     "ice_gain_str", "ice_pulp_bonus", "ice_str", "ice_str_set", "icepick_str", "infect", "insert",
     "jack_out", "lockdown", "max_vitae", "patchwork", "prevent_void", "pulp", "pulp_direct", "purge",
     "purge_all", "ram", "redirect_insert", "reduce_ice_pulp", "reduce_ice_trace", "remove_all_bloatware",
@@ -36,8 +36,10 @@ APPROVED_COUNTS = {
     "events": 9,
     "contracts": 8,
     "patchwork_mods": 12,
-    "halcyon_tier1": 5,
-    "halcyon_tier2": 7,
+    "corp_tier1": 5,
+    "corp_tier2": 7,
+    "corp_escape_ice": 4,
+    "corp_ghostware_set": 3,
 }
 
 errors = []
@@ -141,9 +143,19 @@ def main():
                 err(f"corporation {corp['id']}: unknown ghostware '{gid}'")
         if corp.get("signature_bloatware") and corp["signature_bloatware"] not in card_ids:
             err(f"corporation {corp['id']}: unknown bloatware '{corp['signature_bloatware']}'")
-        if corp["id"] == "halcyon":
-            if len(corp["tier1"]) != APPROVED_COUNTS["halcyon_tier1"] or len(corp["tier2"]) != APPROVED_COUNTS["halcyon_tier2"]:
-                err("halcyon: tier sizes differ from the approved 5 + 7")
+        if corp["id"] != "training":
+            if len(corp["tier1"]) != APPROVED_COUNTS["corp_tier1"] or len(corp["tier2"]) != APPROVED_COUNTS["corp_tier2"]:
+                err(f"{corp['id']}: tier sizes differ from the approved 5 + 7")
+            if len(corp["escape_ice"]) != APPROVED_COUNTS["corp_escape_ice"]:
+                err(f"{corp['id']}: expected 4 escape ICE")
+            if len(corp["ghostware_set"]) != APPROVED_COUNTS["corp_ghostware_set"]:
+                err(f"{corp['id']}: expected 3 Ghostware in its set")
+            if len(corp["central_node"]["ice_left_to_right"]) != 3:
+                err(f"{corp['id']}: the Central Node should have 3 ICE")
+            for gid in corp["ghostware_set"]:
+                g = next((x for x in ghost if x["id"] == gid), None)
+                if g and g["pool"] != corp["id"]:
+                    err(f"{corp['id']}: ghostware '{gid}' should be in pool '{corp['id']}'")
     for i in ice:
         is_main_candidate = i["tier"] in (1, 2, "escape", "training") or i.get("boss_role") == "main"
         has_deadlock = any(e["op"] == "deadlock" for s in i["subroutines"] for e in s["effects"])
@@ -197,7 +209,7 @@ def main():
                 err(f"{where}: unknown strain '{eff.get('strain')}'")
             if op == "insert" and eff.get("card") not in card_ids:
                 err(f"{where}: unknown card '{eff.get('card')}'")
-            if op == "ice_gain_str" and eff.get("target") not in ("self",) and eff.get("target") not in ice_ids:
+            if op == "ice_gain_str" and eff.get("target") not in ("self", "others") and eff.get("target") not in ice_ids:
                 err(f"{where}: unknown ice target '{eff.get('target')}'")
 
     return report()

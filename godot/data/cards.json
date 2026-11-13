@@ -1983,6 +1983,44 @@
           "when": "end_of_turn_in_hand"
         }
       ]
+    },
+    {
+      "id": "citation",
+      "name": "CITATION",
+      "type": "BLOATWARE",
+      "tags": [],
+      "owner": "corporation",
+      "pool": "bloatware",
+      "rarity": "special",
+      "cost_bw": 1,
+      "burned_after_use": true,
+      "text": "Pay 1 BW to clear it: it's BURNED for the rest of the Node. If CITATION is in your hand at the end of your turn: PULP 2.",
+      "effects": [
+        {
+          "op": "pulp",
+          "n": 2,
+          "when": "end_of_turn_in_hand"
+        }
+      ]
+    },
+    {
+      "id": "intrusive_thought",
+      "name": "INTRUSIVE THOUGHT",
+      "type": "BLOATWARE",
+      "tags": [],
+      "owner": "corporation",
+      "pool": "bloatware",
+      "rarity": "special",
+      "cost_bw": 1,
+      "burned_after_use": true,
+      "text": "Pay 1 BW to clear it: it's BURNED for the rest of the Node. If INTRUSIVE THOUGHT is in your hand at the end of your turn: VOID 1.",
+      "effects": [
+        {
+          "op": "void",
+          "n": 1,
+          "when": "end_of_turn_in_hand"
+        }
+      ]
     }
   ]
 }

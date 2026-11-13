@@ -399,6 +399,72 @@
           "limit": "always"
         }
       ]
+    },
+    {
+      "id": "kevlar_weave",
+      "name": "KEVLAR WEAVE",
+      "pool": "ironwatch",
+      "text": "PULP from ICE subroutines deals 1 less to you (minimum 0).",
+      "effects": [],
+      "script": "kevlar_weave"
+    },
+    {
+      "id": "badge_clone",
+      "name": "BADGE CLONE",
+      "pool": "ironwatch",
+      "text": "At the start of each encounter, every SENTRY gets −1 STR.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "all",
+          "ice_type": "SENTRY",
+          "n": -1,
+          "duration": "encounter",
+          "when": "start_of_encounter"
+        }
+      ]
+    },
+    {
+      "id": "dashcam_feed",
+      "name": "DASHCAM FEED",
+      "pool": "ironwatch",
+      "text": "Whenever you BREACH a layer, heal 3 VITAE.",
+      "effects": [
+        {
+          "op": "heal",
+          "n": 3,
+          "when": "breach"
+        }
+      ]
+    },
+    {
+      "id": "lucid_dream",
+      "name": "LUCID DREAM",
+      "pool": "lucida",
+      "text": "VOID can't reduce your DRAW below 3.",
+      "effects": [],
+      "script": "lucid_dream"
+    },
+    {
+      "id": "memory_backup",
+      "name": "MEMORY BACKUP",
+      "pool": "lucida",
+      "text": "Cards an ICE would FORGET go to your discard pile instead of being BURNED.",
+      "effects": [],
+      "script": "memory_backup"
+    },
+    {
+      "id": "neural_firewall",
+      "name": "NEURAL FIREWALL",
+      "pool": "lucida",
+      "text": "The first VOID you would gain each encounter is prevented.",
+      "effects": [
+        {
+          "op": "prevent_void",
+          "n": 1,
+          "limit": "once_per_encounter"
+        }
+      ]
     }
   ]
 }

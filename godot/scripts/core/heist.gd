@@ -1,5 +1,5 @@
 extends RefCounted
-## One corporation heist for the economy playtest: the 9 infiltration rows and the Central Node.
+## One corporation heist (HALCYON, IRONWATCH or LUCIDA) for the economy playtest: the 9 infiltration rows and the Central Node.
 ## (The escape isn't in this slice yet.) Owns the map, the non-ICE rooms (Uplink, DEAD DROP,
 ## SAFEHOUSE, Console Lab, SIGNAL UNCLEAR) and the playtest summary. ICE Nodes run in NodeRun.
 ##
@@ -39,8 +39,9 @@ var log_lines: Array[String] = []
 var start_msec := 0
 
 
-func setup(game_data, rustler_id: String, seed_value: int = 0) -> void:
+func setup(game_data, rustler_id: String, seed_value: int = 0, p_corp_id: String = "halcyon") -> void:
 	db = game_data
+	corp_id = p_corp_id
 	run = RunState.new()
 	run.setup(db, rustler_id, seed_value)
 	corp = db.corporations[corp_id]
@@ -571,7 +572,7 @@ func summary_text() -> String:
 	var s: Dictionary = run.stats
 	var lines: Array[String] = []
 	var minutes := float(Time.get_ticks_msec() - start_msec) / 60000.0
-	lines.append("REDLINE economy playtest — %s slice (9 rows + Central Node, no escape)" % corp["name"])
+	lines.append("REDLINE economy playtest — %s (9 rows + Central Node, no escape)" % corp["name"])
 	lines.append("Rustler: %s · Result: %s · Time: %.0f min" % [db.rustlers[run.rustler_id]["name"],
 			"Central Node cracked" if won else "flatlined at row %d" % (row_index + 1), minutes])
 	lines.append("End state: VITAE %d/%d · TRACE %d · strikes %d · VOID %d" % [run.vitae, run.max_vitae, run.trace, run.strikes, run.void_counters])

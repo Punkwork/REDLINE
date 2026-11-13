@@ -1,9 +1,11 @@
 {
   "version": "0.1",
   "source_docs": [
+    "REDLINE_CORE_RULES.md §14",
     "REDLINE_ICE_CORP1.md",
-    "REDLINE_UPGRADES_EVENTS_ESCAPE.md §4",
-    "REDLINE_CORE_RULES.md §14"
+    "REDLINE_ICE_CORP2.md",
+    "REDLINE_ICE_CORP3.md",
+    "REDLINE_UPGRADES_EVENTS_ESCAPE.md §4"
   ],
   "threat_values": {
     "pulp": 1,
@@ -12,7 +14,8 @@
     "insert": 2,
     "insert_draw_pile": 3,
     "void": 4,
-    "deadlock": 0
+    "deadlock": 0,
+    "forget": 3
   },
   "tiers": {
     "1": {
@@ -153,6 +156,142 @@
         "hearth_key",
         "voice_mimic",
         "ad_blocker"
+      ]
+    },
+    {
+      "id": "ironwatch",
+      "name": "IRONWATCH",
+      "theme": "Private security and enforcement",
+      "main_threat": "PULP, aggressive Sentries",
+      "signature_bloatware": "citation",
+      "black_ice": "lethal_force",
+      "tier1": [
+        "checkpoint",
+        "body_cam",
+        "patrol_drone",
+        "keycard_reader",
+        "barricade"
+      ],
+      "tier2": [
+        "blast_door",
+        "stun_turret",
+        "k9_unit",
+        "crowd_control",
+        "armory",
+        "interrogation",
+        "sniper_nest"
+      ],
+      "central_node": {
+        "ice_left_to_right": [
+          "dispatch",
+          "shock_trooper",
+          "overwatch"
+        ],
+        "cred_reserve": 35
+      },
+      "escape_ice": [
+        "roadblock",
+        "spike_strip",
+        "searchlight",
+        "pursuit_drone"
+      ],
+      "escape_layout": [
+        {
+          "encounter": 1,
+          "random_escape_ice": 1,
+          "cred_reserve": 10
+        },
+        {
+          "encounter": 2,
+          "random_escape_ice": 2,
+          "cred_reserve": 10
+        },
+        {
+          "encounter": 3,
+          "random_escape_ice": 1,
+          "plus": [
+            "lethal_force"
+          ],
+          "house_call_position": "left",
+          "cred_reserve": 10
+        }
+      ],
+      "escape_safehouse_after_encounter": [
+        1,
+        2
+      ],
+      "ghostware_set": [
+        "kevlar_weave",
+        "badge_clone",
+        "dashcam_feed"
+      ]
+    },
+    {
+      "id": "lucida",
+      "name": "LUCIDA",
+      "theme": "Neural interfaces",
+      "main_threat": "VOID, FORGET (ICE that rewire your deck)",
+      "signature_bloatware": "intrusive_thought",
+      "black_ice": "ego_death",
+      "tier1": [
+        "sleep_tracker",
+        "mood_scanner",
+        "dreamcatcher",
+        "focus_mode",
+        "neural_handshake"
+      ],
+      "tier2": [
+        "memory_palace",
+        "dream_ad",
+        "empathy_engine",
+        "neurolink",
+        "therapist",
+        "synapse_barrier",
+        "recall"
+      ],
+      "central_node": {
+        "ice_left_to_right": [
+          "memory_bank",
+          "limbic_loop",
+          "anima"
+        ],
+        "cred_reserve": 35
+      },
+      "escape_ice": [
+        "wake_signal",
+        "deja_vu",
+        "amnesia",
+        "sleep_paralysis"
+      ],
+      "escape_layout": [
+        {
+          "encounter": 1,
+          "random_escape_ice": 1,
+          "cred_reserve": 10
+        },
+        {
+          "encounter": 2,
+          "random_escape_ice": 2,
+          "cred_reserve": 10
+        },
+        {
+          "encounter": 3,
+          "random_escape_ice": 1,
+          "plus": [
+            "ego_death"
+          ],
+          "house_call_position": "left",
+          "cred_reserve": 10
+        }
+      ],
+      "escape_safehouse_after_encounter": [
+        1,
+        2
+      ],
+      "ghostware_set": [
+        "lucid_dream",
+        "memory_backup",
+        "neural_firewall"
       ]
     }
   ],
@@ -1003,6 +1142,1322 @@
         }
       ],
       "threat": 2
+    },
+    {
+      "id": "checkpoint",
+      "name": "CHECKPOINT",
+      "type": "WALL",
+      "str": 4,
+      "corp": "ironwatch",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3,
+      "tests": "Basic WALL breaking under PULP pressure"
+    },
+    {
+      "id": "body_cam",
+      "name": "BODY CAM",
+      "type": "SENTRY",
+      "str": 2,
+      "corp": "ironwatch",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "tests": "Choosing between TRACE and PULP"
+    },
+    {
+      "id": "patrol_drone",
+      "name": "PATROL DRONE",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you install a PROGRAM: PULP 1.",
+        "trigger": "player_installs",
+        "effects": [
+          {
+            "op": "pulp",
+            "n": 1
+          }
+        ],
+        "card_type": "PROGRAM"
+      },
+      "threat": 3,
+      "tests": "Setting up a big rig (Generalist)"
+    },
+    {
+      "id": "keycard_reader",
+      "name": "KEYCARD READER",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "discard",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3,
+      "tests": "Many small breaks; rewards CODE GATE Icepicks"
+    },
+    {
+      "id": "barricade",
+      "name": "BARRICADE",
+      "type": "WALL",
+      "str": 5,
+      "corp": "ironwatch",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "citation",
+              "dest": "discard",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "tests": "PROBE and boosting against high STR; the CITATION tax"
+    },
+    {
+      "id": "blast_door",
+      "name": "BLAST DOOR",
+      "type": "WALL",
+      "str": 6,
+      "corp": "ironwatch",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "tests": "Two DEADLOCKs behind high STR"
+    },
+    {
+      "id": "stun_turret",
+      "name": "STUN TURRET",
+      "type": "SENTRY",
+      "str": 4,
+      "corp": "ironwatch",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 6,
+      "tests": "Stacking SHIELD against double PULP"
+    },
+    {
+      "id": "k9_unit",
+      "name": "K9 UNIT",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you play a CLOAK card: +1 STR (this encounter; stacks).",
+        "trigger": "player_plays_tag",
+        "effects": [
+          {
+            "op": "ice_gain_str",
+            "target": "self",
+            "n": 1
+          }
+        ],
+        "tag": "CLOAK"
+      },
+      "threat": 6,
+      "tests": "Over-hiding (ECHO)"
+    },
+    {
+      "id": "crowd_control",
+      "name": "CROWD CONTROL",
+      "type": "CODE GATE",
+      "str": 4,
+      "corp": "ironwatch",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "discard",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 6,
+      "tests": "Hand disruption; CACHE"
+    },
+    {
+      "id": "armory",
+      "name": "ARMORY",
+      "type": "WALL",
+      "str": 5,
+      "corp": "ironwatch",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "ice_gain_str",
+              "target": "others",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3,
+      "tests": "A support that arms the others: break it first or race"
+    },
+    {
+      "id": "interrogation",
+      "name": "INTERROGATION",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "citation",
+              "dest": "hand",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 6,
+      "tests": "Bloatware in hand plus VOID; VOID BUFFER"
+    },
+    {
+      "id": "sniper_nest",
+      "name": "SNIPER NEST",
+      "type": "SENTRY",
+      "str": 5,
+      "corp": "ironwatch",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 6
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "While your TRACE is 20 or more, its PULP subroutines deal +2.",
+        "trigger": "constant",
+        "effects": [
+          {
+            "op": "ice_pulp_bonus",
+            "n": 2
+          }
+        ],
+        "if_trace_at_least": 20
+      },
+      "threat": 6,
+      "tests": "High TRACE (RIOT)"
+    },
+    {
+      "id": "lethal_force",
+      "name": "LETHAL FORCE",
+      "type": "SENTRY",
+      "str": 6,
+      "corp": "ironwatch",
+      "tier": "black_ice",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 5
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 5
+            }
+          ]
+        }
+      ],
+      "threat": 10,
+      "black_ice": true
+    },
+    {
+      "id": "dispatch",
+      "name": "DISPATCH",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "ice_gain_str",
+              "target": "overwatch",
+              "n": 1
+            }
+          ]
+        }
+      ],
+      "boss_role": "support"
+    },
+    {
+      "id": "shock_trooper",
+      "name": "SHOCK TROOPER",
+      "type": "SENTRY",
+      "str": 4,
+      "corp": "ironwatch",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "discard",
+              "n": 1
+            }
+          ]
+        }
+      ],
+      "boss_role": "support"
+    },
+    {
+      "id": "overwatch",
+      "name": "OVERWATCH",
+      "type": "SENTRY",
+      "str": 7,
+      "corp": "ironwatch",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "At the end of each Corporation Response: PULP 2.",
+        "trigger": "end_of_corp_response",
+        "effects": [
+          {
+            "op": "pulp",
+            "n": 2
+          }
+        ]
+      },
+      "boss_role": "main"
+    },
+    {
+      "id": "roadblock",
+      "name": "ROADBLOCK",
+      "type": "WALL",
+      "str": 5,
+      "corp": "ironwatch",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you play an EXPLOIT card: PULP 1.",
+        "trigger": "player_plays_tag",
+        "effects": [
+          {
+            "op": "pulp",
+            "n": 1
+          }
+        ],
+        "tag": "EXPLOIT"
+      },
+      "threat": 3
+    },
+    {
+      "id": "spike_strip",
+      "name": "SPIKE STRIP",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4
+    },
+    {
+      "id": "searchlight",
+      "name": "SEARCHLIGHT",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 5
+    },
+    {
+      "id": "pursuit_drone",
+      "name": "PURSUIT DRONE",
+      "type": "SENTRY",
+      "str": 4,
+      "corp": "ironwatch",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "At the end of each Corporation Response: +1 STR.",
+        "trigger": "end_of_corp_response",
+        "effects": [
+          {
+            "op": "ice_gain_str",
+            "target": "self",
+            "n": 1
+          }
+        ]
+      },
+      "threat": 4
+    },
+    {
+      "id": "sleep_tracker",
+      "name": "SLEEP TRACKER",
+      "type": "CODE GATE",
+      "str": 2,
+      "corp": "lucida",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "tests": "Learning FORGET"
+    },
+    {
+      "id": "mood_scanner",
+      "name": "MOOD SCANNER",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "lucida",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "tests": "Early VOID: break it or lose a card per draw"
+    },
+    {
+      "id": "dreamcatcher",
+      "name": "DREAMCATCHER",
+      "type": "WALL",
+      "str": 4,
+      "corp": "lucida",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "intrusive_thought",
+              "dest": "discard",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "tests": "The INTRUSIVE THOUGHT tax"
+    },
+    {
+      "id": "focus_mode",
+      "name": "FOCUS MODE",
+      "type": "WALL",
+      "str": 5,
+      "corp": "lucida",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "discard",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "tests": "PROBE and boosting against high STR"
+    },
+    {
+      "id": "neural_handshake",
+      "name": "NEURAL HANDSHAKE",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "lucida",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 5,
+      "tests": "Which loss hurts more: VITAE or a card"
+    },
+    {
+      "id": "memory_palace",
+      "name": "MEMORY PALACE",
+      "type": "WALL",
+      "str": 6,
+      "corp": "lucida",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            },
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 5,
+      "tests": "Two DEADLOCKs; FORGET while you boost"
+    },
+    {
+      "id": "dream_ad",
+      "name": "DREAM AD",
+      "type": "CODE GATE",
+      "str": 4,
+      "corp": "lucida",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "intrusive_thought",
+              "dest": "draw_pile",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 6,
+      "tests": "Bloatware that turns into VOID"
+    },
+    {
+      "id": "empathy_engine",
+      "name": "EMPATHY ENGINE",
+      "type": "SENTRY",
+      "str": 4,
+      "corp": "lucida",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you play an EXPLOIT card: TRACE 2.",
+        "trigger": "player_plays_tag",
+        "effects": [
+          {
+            "op": "trace",
+            "n": 2
+          }
+        ],
+        "tag": "EXPLOIT"
+      },
+      "threat": 7,
+      "tests": "Weakening ICE with EXPLOIT cards (RIOT, VECTOR)"
+    },
+    {
+      "id": "neurolink",
+      "name": "NEUROLINK",
+      "type": "SENTRY",
+      "str": 5,
+      "corp": "lucida",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 8,
+      "tests": "Heavy VOID: VOID prevention or a fast BREACH"
+    },
+    {
+      "id": "therapist",
+      "name": "THERAPIST",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "lucida",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "purge_all"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3,
+      "tests": "VECTOR (break [S1] first or lose your counters)"
+    },
+    {
+      "id": "synapse_barrier",
+      "name": "SYNAPSE BARRIER",
+      "type": "WALL",
+      "str": 5,
+      "corp": "lucida",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Its STR can't be reduced below 4.",
+        "trigger": "constant",
+        "effects": [
+          {
+            "op": "str_floor",
+            "n": 4
+          }
+        ]
+      },
+      "threat": 3,
+      "tests": "Boosting instead of PROBE"
+    },
+    {
+      "id": "recall",
+      "name": "RECALL",
+      "type": "CODE GATE",
+      "str": 4,
+      "corp": "lucida",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "discard",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 6,
+      "tests": "Hand disruption; CACHE"
+    },
+    {
+      "id": "ego_death",
+      "name": "EGO DEATH",
+      "type": "SENTRY",
+      "str": 6,
+      "corp": "lucida",
+      "tier": "black_ice",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        }
+      ],
+      "threat": 8,
+      "black_ice": true
+    },
+    {
+      "id": "memory_bank",
+      "name": "MEMORY BANK",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "lucida",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "ice_gain_str",
+              "target": "anima",
+              "n": 1
+            }
+          ]
+        }
+      ],
+      "boss_role": "support"
+    },
+    {
+      "id": "limbic_loop",
+      "name": "LIMBIC LOOP",
+      "type": "SENTRY",
+      "str": 4,
+      "corp": "lucida",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "intrusive_thought",
+              "dest": "hand",
+              "n": 1
+            }
+          ]
+        }
+      ],
+      "boss_role": "support"
+    },
+    {
+      "id": "anima",
+      "name": "ANIMA",
+      "type": "SENTRY",
+      "str": 7,
+      "corp": "lucida",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "At the end of each Corporation Response: FORGET 1.",
+        "trigger": "end_of_corp_response",
+        "effects": [
+          {
+            "op": "forget",
+            "n": 1
+          }
+        ]
+      },
+      "boss_role": "main"
+    },
+    {
+      "id": "wake_signal",
+      "name": "WAKE SIGNAL",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "lucida",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3
+    },
+    {
+      "id": "deja_vu",
+      "name": "DÉJÀ VU",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "lucida",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "intrusive_thought",
+              "dest": "hand",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4
+    },
+    {
+      "id": "amnesia",
+      "name": "AMNESIA",
+      "type": "WALL",
+      "str": 5,
+      "corp": "lucida",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Its STR can't be reduced below 3.",
+        "trigger": "constant",
+        "effects": [
+          {
+            "op": "str_floor",
+            "n": 3
+          }
+        ]
+      },
+      "threat": 3
+    },
+    {
+      "id": "sleep_paralysis",
+      "name": "SLEEP PARALYSIS",
+      "type": "SENTRY",
+      "str": 4,
+      "corp": "lucida",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you install a PROGRAM: +2 TRACE.",
+        "trigger": "player_installs",
+        "effects": [
+          {
+            "op": "trace",
+            "n": 2
+          }
+        ],
+        "card_type": "PROGRAM"
+      },
+      "threat": 4
     }
   ]
 }
