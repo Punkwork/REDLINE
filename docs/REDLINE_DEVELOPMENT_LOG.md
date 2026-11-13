@@ -917,3 +917,7 @@ Three lines approved as CANON verses: NR-118 (EV-06 DEADLOCK broken; “That. Is
 
 Four lines approved as CANON verses: Game & Watch, referenced generically: NR-121 (EV-10 Stalled encounter; Game A / Game B) and NR-122 (EV-37 Idle; the grey ghosts of unlit segments). His Casio calculator watch as an old friend: NR-123 (EV-37 Idle) and NR-124 (EV-09 CRED reserve fully extracted; upside-down calculator words). Reference trait updated (Bible §5).
 
+## NULREM-025 — Kraftwerk Computer World verses NR-125 to NR-129 (APPROVED, 2026-11-13)
+
+Five lines approved as CANON verses referencing Kraftwerk's *Computer World* (1981) by song title and theme, without quoting lyrics (copyright): NR-125 (EV-24 Uplink; “Pocket Calculator” and his Casio), NR-126 (EV-26 RAM gained; “Numbers”), NR-127 (EV-37 Idle; “Computer Love”, played through 1982), NR-128 (EV-03 HALCYON; “Home Computer”) and NR-129 (EV-27 Card reward; “It's More Fun to Compute”). Bible §5 1982 trait updated. **Rule recorded:** song lyrics are never quoted in NUL/REM's lines; titles and themes only.
+

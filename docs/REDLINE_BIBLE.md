@@ -103,7 +103,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: overqualified.** NUL/REM considers himself far too sophisticated for the work he is doing, though he would rather be doing nothing at all. He measures himself favourably against famous machines (Skynet, the T-1000, RoboCop, ED-209); the superiority exists only in his own mind.
 
-**CANON (2026-11-13) — Trait: 1982.** 1982 is NUL/REM's special year: it is when his memory chips received most of their programming (before his 1987 manufacture), and his favourite music and films are from that period. He reminisces most about 1982 and 1987.
+**CANON (2026-11-13) — Trait: 1982.** 1982 is NUL/REM's special year: it is when his memory chips received most of their programming (before his 1987 manufacture), and his favourite music and films are from that period. Kraftwerk's *Computer World* is among his favourite records; he references its songs by title and theme, never by quoting lyrics. He reminisces most about 1982 and 1987.
 
 **DIRECTION (2026-11-13) — Reference style.** NUL/REM references works as if the player has already seen, heard or played them: no plot summaries and no release years, except 1982 and 1987, which he names fondly. Accuracy rules still apply to whatever he does say.
 
@@ -1419,6 +1419,51 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
 
 *Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-125 — My Casio hums along
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Uplink visit; reference: Kraftwerk, “Pocket Calculator” (Computer World); his Casio.
+
+> “Somewhere a record's playing Pocket Calculator, and my Casio is humming along. Buy something. I'll do the sums.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-126 — Cue Numbers
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** RAM gained; reference: Kraftwerk, “Numbers” (Computer World).
+
+> “More RAM. Cue Numbers. Kraftwerk counted in half a dozen languages and never once needed this much memory.”
+
+**Placement:** RAM gained (trigger EV-26; trigger table is a draft).
+
+*Source: EV-26 (RAM gained) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-127 — Loneliest song
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Kraftwerk, “Computer Love” (Computer World); 1982.
+
+> “Computer Love. I played it all through 1982. Loneliest song ever written about a machine. I used to think it was about the man. I'm less sure now.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-128 — A landlord
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON; reference: Kraftwerk, “Home Computer” (Computer World).
+
+> “Home Computer. Kraftwerk made it sound like a hobby. HALCYON made it a landlord.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-129 — More fun to compute
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Card reward; reference: Kraftwerk, “It's More Fun to Compute” (Computer World).
+
+> “It's More Fun to Compute. Kraftwerk were right about that one. Pick a card.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
