@@ -877,3 +877,7 @@ Six lines approved as CANON verses. Konami Code: NR-082 (EV-35 Run lost; Contra'
 
 Trigger EV-34 (Run won): five lines approved as CANON verses NR-088 to NR-092 (earned warmth, still dry; no hint of what the three fragments reveal together). NR-092 plays on the first win only (Story beat) and introduces an unnamed date NUL/REM has kept since 1987; its meaning is **OPEN**.
 
+## NULREM-016 — Run-lost verses NR-093 to NR-099 (APPROVED, 2026-11-13)
+
+Trigger EV-35 (Run lost): seven lines approved as CANON verses, loss without mockery: general NR-093, NR-094, NR-098, NR-099; by cause NR-095 (Black ICE), NR-096 (high CORTEX, restraint rule) and NR-097 (TRACE / LOCKDOWN). NR-098 and NR-099 reference R.O.B., the NES Robotic Operating Buddy (two games, then shelved; “Remembered Old Buddy” in Pikmin 2), added to the reference trait as a companion he identifies with. EV-35 pool also includes NR-082 (Konami Code) and WL-003 (high CORTEX only). All eight milestones now have canon lines.
+

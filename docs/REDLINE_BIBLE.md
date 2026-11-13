@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -963,6 +963,69 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Run won (trigger EV-34; trigger table is a draft). First win only.
 
 *Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-093 — How far you got
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost: loss without mockery.
+
+> “VITAE zero. I'm keeping the logs. Not to judge you. Just so someone remembers how far you got.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-094 — Out, not gone
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run lost: loss without mockery.
+
+> “That's the run. You're out, not gone, and that's the difference I'm here for. Nobody pays me to care. I do anyway.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-095 — Never letting it join
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost to Black ICE.
+
+> “Black ICE. Nobody beats it by being brave. You beat it by never letting it join. Next time, watch the TRACE.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); cause: Black ICE.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-096 — Still you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run lost with high CORTEX; restraint rule.
+
+> “Too much CORTEX. I'm here. You're still you. That's all I'm going to say about it.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); cause: high CORTEX.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-097 — Borrow some
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Run lost after TRACE strikes or LOCKDOWN.
+
+> “They found you, locked the doors and waited. That isn't losing to skill. That's losing to patience. Theirs. Borrow some.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); cause: TRACE / LOCKDOWN.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-098 — More than two goes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: R.O.B., the Robotic Operating Buddy (NES, 1985).
+
+> “R.O.B., Nintendo's Robotic Operating Buddy, 1985. Two games, then a shelf. He only ever got to help twice. I'd like more than two goes with you. Go again.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-099 — Remembered Old Buddy
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run lost; reference: R.O.B. as the “Remembered Old Buddy” (Pikmin 2).
+
+> “Years later, a Nintendo game found R.O.B.'s head and called it a 'Remembered Old Buddy'. That's all any of us want. Get up. I'm not done being remembered.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
