@@ -229,12 +229,12 @@
       "ram": 1,
       "icepick": {
         "ice_type": "CODE GATE",
-        "str": 4,
-        "boost_bw": 1,
+        "str": 3,
+        "boost_bw": 2,
         "boost_str": 1,
         "break_bw": 1
       },
-      "text": "STR 4. Boost: 1 BW → +1 STR. Break: 1 BW.",
+      "text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW.",
       "effects": []
     },
     {
@@ -448,11 +448,11 @@
       "rarity": "starter",
       "cost_bw": 0,
       "trace": 2,
-      "text": "Gain 2 BW.",
+      "text": "Gain 1 BW.",
       "effects": [
         {
           "op": "gain_bw",
-          "n": 2
+          "n": 1
         }
       ]
     },
@@ -467,11 +467,11 @@
       "pool": "starter",
       "rarity": "starter",
       "cost_bw": 1,
-      "text": "−5 TRACE.",
+      "text": "−3 TRACE.",
       "effects": [
         {
           "op": "trace",
-          "n": -5
+          "n": -3
         }
       ]
     },
@@ -508,7 +508,7 @@
       "ram": 1,
       "icepick": {
         "ice_type": "SENTRY",
-        "str": 2,
+        "str": 0,
         "boost_bw": 1,
         "boost_str": 1,
         "break_bw": 1,
@@ -521,7 +521,7 @@
           }
         ]
       },
-      "text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Each break also INFECTs 1 ROT on that ICE.",
+      "text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. Each break also INFECTs 1 ROT on that ICE.",
       "effects": []
     },
     {
@@ -634,9 +634,10 @@
         "str": 3,
         "boost_bw": 1,
         "boost_str": 1,
-        "break_bw": 1
+        "break_bw": 1,
+        "free_first_break_each_turn": true
       },
-      "text": "STR 3. Boost: 1 BW → +1 STR. Break: 1 BW.",
+      "text": "STR 3. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break.",
       "effects": []
     },
     {

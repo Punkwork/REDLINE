@@ -15,7 +15,7 @@
     "insert_draw_pile": 3,
     "void": 4,
     "deadlock": 0,
-    "forget": 3
+    "forget": 2
   },
   "tiers": {
     "1": {
@@ -156,7 +156,15 @@
         "hearth_key",
         "voice_mimic",
         "ad_blocker"
-      ]
+      ],
+      "opener": {
+        "name": "COOKIE BANNER",
+        "ice_left_to_right": [
+          "accept_all",
+          "reject_all"
+        ],
+        "cred_reserve": 15
+      }
     },
     {
       "id": "ironwatch",
@@ -224,7 +232,15 @@
         "kevlar_weave",
         "badge_clone",
         "dashcam_feed"
-      ]
+      ],
+      "opener": {
+        "name": "FRONT DESK",
+        "ice_left_to_right": [
+          "turnstile",
+          "security_guard"
+        ],
+        "cred_reserve": 15
+      }
     },
     {
       "id": "lucida",
@@ -292,7 +308,15 @@
         "lucid_dream",
         "memory_backup",
         "neural_firewall"
-      ]
+      ],
+      "opener": {
+        "name": "INTAKE",
+        "ice_left_to_right": [
+          "baseline_scan",
+          "onboarding"
+        ],
+        "cred_reserve": 15
+      }
     }
   ],
   "ice": [
@@ -2458,6 +2482,203 @@
         "card_type": "PROGRAM"
       },
       "threat": 4
+    },
+    {
+      "id": "accept_all",
+      "name": "ACCEPT ALL",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": "opener",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "spam",
+              "dest": "draw_pile",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 1
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "opener_role": "support"
+    },
+    {
+      "id": "reject_all",
+      "name": "REJECT ALL",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": "opener",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "opener_role": "main",
+      "ability": {
+        "text": "BOOTING: its DEADLOCK can't be broken before your 3rd turn of the encounter.",
+        "trigger": "constant",
+        "effects": [
+          {
+            "op": "deadlock_lock",
+            "until_turn": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "turnstile",
+      "name": "TURNSTILE",
+      "type": "WALL",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": "opener",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "opener_role": "support"
+    },
+    {
+      "id": "security_guard",
+      "name": "SECURITY GUARD",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "ironwatch",
+      "tier": "opener",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "opener_role": "main",
+      "ability": {
+        "text": "BOOTING: its DEADLOCK can't be broken before your 3rd turn of the encounter.",
+        "trigger": "constant",
+        "effects": [
+          {
+            "op": "deadlock_lock",
+            "until_turn": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "baseline_scan",
+      "name": "BASELINE SCAN",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "lucida",
+      "tier": "opener",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        }
+      ],
+      "threat": 5,
+      "opener_role": "support"
+    },
+    {
+      "id": "onboarding",
+      "name": "ONBOARDING",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "lucida",
+      "tier": "opener",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "forget",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3,
+      "opener_role": "main",
+      "ability": {
+        "text": "BOOTING: its DEADLOCK can't be broken before your 3rd turn of the encounter.",
+        "trigger": "constant",
+        "effects": [
+          {
+            "op": "deadlock_lock",
+            "until_turn": 3
+          }
+        ]
+      }
     }
   ]
 }

@@ -18,7 +18,7 @@ const C_CRED := Color("f5d76e")
 const TYPE_COLORS := {"WALL": Color("4ea8de"), "CODE GATE": Color("c77dff"), "SENTRY": Color("ff6b6b")}
 const CARD_COLORS := {"PROGRAM": Color("4ea8de"), "SCRIPT": Color("3ddc97"), "PROTOCOL": Color("c77dff"),
 		"BLOATWARE": Color("7a8494")}
-const NODE_COLORS := {"ice_t1": Color("4ea8de"), "ice_t2": Color("c77dff"), "uplink": Color("f5d76e"),
+const NODE_COLORS := {"opener": Color("ff9f43"), "ice_t1": Color("4ea8de"), "ice_t2": Color("c77dff"), "uplink": Color("f5d76e"),
 		"dead_drop": Color("3ddc97"), "safehouse": Color("3ddc97"), "console_lab": Color("ffb000"),
 		"signal": Color("7a8494"), "central": Color("ff3860")}
 
@@ -356,7 +356,7 @@ func _screen_room() -> void:
 	match room["type"]:
 		"uplink":
 			_header("BLACK MARKET UPLINK" + ("  ·  CLINIC" if room["clinic"] else ""))
-			for shelf in ["Reserve", "Cards", "CAPS", "Ghostware"]:
+			for shelf in ["Cards", "CAPS", "Ghostware"]:
 				screen_body.add_child(_label(shelf.to_upper(), 15, C_DIM))
 				var row := HFlowContainer.new()
 				row.add_theme_constant_override("h_separation", 8)
@@ -567,6 +567,11 @@ func _sub_button(ice_index: int, sub_index: int) -> Button:
 	if ice["broken"][sub_index]:
 		b.text = "  ✕ S%d  %s  (broken)" % [sub_index + 1, text]
 		b.disabled = true
+		return b
+	if node.deadlock_locked(ice_index, sub_index):
+		b.text = "  ⧗ S%d  %s  (BOOTING)" % [sub_index + 1, text]
+		b.disabled = true
+		b.tooltip_text = "This DEADLOCK can't be broken yet."
 		return b
 	var cost := -1
 	if selected_icepick != -1:

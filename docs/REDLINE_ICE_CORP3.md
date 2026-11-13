@@ -33,10 +33,11 @@ LUCIDA follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): the t
 
 | Effect | What happens | Threat |
 |---|---|---|
-| **FORGET X** | X **random** non-CACHED cards in your hand are **BURNED** for the rest of the Node (Core Rules §3.2). If your hand has no such cards, nothing happens. | 3 per card |
+| **FORGET X** | X **random** non-CACHED cards in your hand go to the **bottom of your draw pile**. If your hand has no such cards, nothing happens. | 2 per card |
 
 - **CACHED cards are safe from FORGET.** CACHE (DEAD AIR, STASH, DEAD MAN'S POCKET) becomes a real defence against LUCIDA.
-- Unlike DISCARD, the card doesn't come back this Node, and you don't choose it.
+- Unlike DISCARD, you don't choose the card, and it comes back **before** your discard pile does: you've lost it for now, not for good.
+- **Changed by ICE3-002a:** FORGET first BURNED the cards for the rest of the Node. Simulation showed that could remove a Rustler's only fallback breaker (ECHO's single BACKDOOR, say) and leave an encounter impossible to BREACH, a soft-lock. Sending cards to the bottom of the draw pile keeps the sting without the dead end.
 - FORGET is a **corporation effect**: no player card uses it.
 
 ---
@@ -107,6 +108,21 @@ LUCIDA's central model, trained on millions of sleeping minds. A three-ICE boss 
 
 ---
 
+## 7a. Opening Node: INTAKE (row 1, OPEN-001)
+
+LUCIDA's new-user setup. Every route starts here (Core Rules §10.1a).
+
+| Position | ICE | Type | STR | Subroutines | Ability |
+|---|---|---|---|---|---|
+| Left (support) | **BASELINE SCAN** | SENTRY | 3 | [S1] FORGET 1 · [S2] PULP 2 | — |
+| Right (main) | **ONBOARDING** | CODE GATE | 3 | [S1] FORGET 1 · [S2] DEADLOCK | **BOOTING:** its DEADLOCK can't be broken before your 3rd turn of the encounter. |
+
+- **The lesson:** LUCIDA attacks your hand. **FORGET takes random cards, and CACHED cards are safe.** Protect the card you need for turn 3.
+- **The decisions (turns 1–2):** break the FORGET subroutines, or CACHE your key card and spend the BW elsewhere? Turn 3: break ONBOARDING's DEADLOCK, or stay to extract?
+- **Why no VOID here:** a VOID subroutine that repeats every turn on an ICE a Rustler can't break sends that Rustler into a VOID spiral (DRAW shrinks, so it finds its fallback even later). With two ICE, one Rustler is always off-type for both, so VOID first appears in rows 2–4 (MOOD SCANNER).
+- **CRED reserve:** 15. Rewards as a normal 1-layer Node.
+- **Measured** (starter decks, rushing test bot): Generalist and ECHO 3 turns; RIOT about 3.7; VECTOR about 5.4. Average about 3.8.
+
 ## 8. Escape ICE: waking up
 
 When you take ANIMA's core, LUCIDA tries to wake you before you can leave.
@@ -130,7 +146,7 @@ When you take ANIMA's core, LUCIDA tries to wake you before you can leave.
 | Ghostware | Effect |
 |---|---|
 | **LUCID DREAM** | VOID can't reduce your DRAW below 3. |
-| **MEMORY BACKUP** | Cards an ICE would FORGET go to your discard pile instead of being BURNED. |
+| **MEMORY BACKUP** | Whenever an ICE makes you FORGET, draw 1 card. *(Changed with ICE3-002a.)* |
 | **NEURAL FIREWALL** | The first VOID you would gain each encounter is prevented. |
 
 One of these is always among the 3 payload choices at ANIMA (P5-003).
@@ -151,10 +167,11 @@ One of these is always among the 3 payload choices at ANIMA (P5-003).
 ## 11. Decision record (APPROVED 2026-11-13, pre-approved by the designer)
 
 1. **LUCIDA** as the third corporation: neural interfaces; VOID and FORGET (§1). — **ICE3-001**
-2. **FORGET X:** X random non-CACHED cards in hand are BURNED for the Node; CACHED cards are safe; threat 3 per card (§3). — **ICE3-002**
+2. **FORGET X:** X random non-CACHED cards in hand are BURNED for the Node; CACHED cards are safe; threat 3 per card (§3). — **ICE3-002**; **changed by ICE3-002a** (2026-11-13): the cards go to the bottom of your draw pile instead, threat 2 per card, and MEMORY BACKUP becomes "draw 1 whenever you FORGET"
 3. **INTRUSIVE THOUGHT** Bloatware: pay 1 BW to clear; VOID 1 if held at end of turn (§4). — **ICE3-003**
 4. **The 12-ICE LUCIDA roster** (§5). — **ICE3-004**
 5. **Black ICE: EGO DEATH** (§6). — **ICE3-005**
 6. **Central Node: ANIMA** with MEMORY BANK and LIMBIC LOOP (§7). — **ICE3-006**
 7. **Escape ICE:** WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS, with EGO DEATH in encounter 3 (§8). — **ICE3-007**
 8. **LUCIDA Ghostware set:** LUCID DREAM, MEMORY BACKUP, NEURAL FIREWALL (§9). — **ICE3-008**
+9. **Opening Node: INTAKE** (BASELINE SCAN + ONBOARDING, BOOTING) (§7a). — **ICE3-009** (APPROVED 2026-11-13)

@@ -257,11 +257,14 @@ func test_new_corporations() -> void:
 	node.setup(db, node.run, "lucida", [{"ice": ["sleep_tracker"], "cred_reserve": 10}])
 	node.start()
 	var before: int = node.hand.size()
+	var pile: int = node.draw_pile.size()
 	node._forget(1)
-	check(node.hand.size() == before - 1 and node.burned.size() == 1, "FORGET burns a card from hand")
+	check(node.hand.size() == before - 1 and node.draw_pile.size() == pile + 1, "FORGET puts a card at the bottom of the draw pile")
+	check(node.draw_pile[0]["uid"] != -1 and node.burned.is_empty(), "FORGET doesn't BURN")
 	node.run.add_ghostware("memory_backup")
+	before = node.hand.size()
 	node._forget(1)
-	check(node.burned.size() == 1 and node.discard_pile.size() == 1, "MEMORY BACKUP: FORGET goes to discard")
+	check(node.hand.size() == before, "MEMORY BACKUP: FORGET 1, draw 1")
 	node.hand.append(node.run.make_temp_card("intrusive_thought"))
 	var v: int = node.run.void_counters
 	node.end_turn()
@@ -302,6 +305,7 @@ func test_heists() -> void:
 			h.setup(db, rid, 500 + i)
 			h.start()
 			check(h.rows.size() == 10, "9 rows + Central Node")
+			check(h.rows[0].size() == 1 and h.rows[0][0]["type"] == "opener" and h.rows[0][0]["links"].size() == 3, "row 1 is the Opening Node")
 			var uplink_rows := 0
 			for r in [2, 5, 8]:
 				if h.rows[r].any(func(n): return n["type"] == "uplink"):
@@ -319,7 +323,8 @@ func test_uplink() -> void:
 	h.run.cred = 500
 	h._open_uplink(true)
 	var items: Array = h.room["items"]
-	check(items.filter(func(i): return i["shelf"] == "Reserve").size() == 2, "2 reserve cards")
+	check(items.filter(func(i): return i["shelf"] == "Reserve").is_empty(), "no basic cards sold (BASIC-001)")
+	check(items.filter(func(i): return i["kind"] == "card" and db.cards[i["id"]]["pool"] != "reward").is_empty(), "only reward-pool cards")
 	check(items.filter(func(i): return i["shelf"] == "Cards").size() == 6, "6 shelf cards")
 	check(items.filter(func(i): return i.get("sale", false)).size() == 1, "1 card on sale")
 	check(items.filter(func(i): return i["kind"] == "cap").size() == 3, "3 CAPS")

@@ -62,7 +62,7 @@ func start() -> void:
 func _generate_map() -> void:
 	rows.clear()
 	var safehouse_rows: Array = []
-	var candidates: Array = [1, 3, 4, 6, 7]
+	var candidates: Array = [1, 3, 4, 6, 7]   # never row 1 (the Opening Node)
 	candidates.shuffle()
 	for i in run.rng.randi_range(1, 2):
 		safehouse_rows.append(candidates[i])
@@ -74,16 +74,18 @@ func _generate_map() -> void:
 			row[run.rng.randi_range(0, WIDTH - 1)]["type"] = "uplink"
 		if r == 8:
 			row = [{"type": "uplink", "data": {}}, {"type": "dead_drop", "data": {}}, {"type": "uplink", "data": {}}]
+		if r == 0:
+			row = [{"type": "opener", "data": {}}]
 		if safehouse_rows.has(r):
 			var options: Array = range(WIDTH).filter(func(c): return row[c]["type"] != "uplink")
 			row[options[run.rng.randi_range(0, options.size() - 1)]]["type"] = "safehouse"
-		if r < 8 and not row.any(func(n): return n["type"].begins_with("ice")):
+		if r > 0 and r < 8 and not row.any(func(n): return n["type"].begins_with("ice")):
 			var options2: Array = range(WIDTH).filter(func(c): return row[c]["type"] != "uplink" and row[c]["type"] != "safehouse")
 			if not options2.is_empty():
 				row[options2[0]]["type"] = "ice_t1" if r < 4 else "ice_t2"
-		for c in WIDTH:
+		for c in row.size():
 			var n: Dictionary = row[c]
-			n["links"] = range(max(0, c - 1), min(WIDTH, c + 2))
+			n["links"] = range(WIDTH) if r == 0 else range(max(0, c - 1), min(WIDTH, c + 2))
 			if n["type"] == "uplink":
 				n["data"]["clinic"] = run.rng.randf() < float(db.rules["uplink"]["clinic_chance"])
 			n["label"] = node_label(n)
@@ -108,6 +110,8 @@ func _roll_type(r: int) -> String:
 
 static func node_label(n: Dictionary) -> String:
 	match n["type"]:
+		"opener":
+			return "OPENING NODE"
 		"ice_t1":
 			return "ICE (Tier 1)"
 		"ice_t2":
@@ -131,7 +135,7 @@ func reachable() -> Array:
 	if phase != PHASE_MAP:
 		return []
 	if row_index < 0:
-		return range(WIDTH)
+		return range(rows[0].size())
 	return rows[row_index][pos]["links"]
 
 
@@ -146,6 +150,9 @@ func choose_node(c: int) -> void:
 			"earned_before": run.stats["cred_earned"], "notes": ""}
 	_log("-- Row %d: %s --" % [row_index + 1, n["label"]])
 	match n["type"]:
+		"opener":
+			var o: Dictionary = corp["opener"]
+			_start_encounter([{"ice": o["ice_left_to_right"], "cred_reserve": int(o["cred_reserve"])}], false)
 		"ice_t1":
 			_start_encounter(_ice_layers(1, run.rng.randi_range(1, 2)), false)
 		"ice_t2":
@@ -236,12 +243,7 @@ func _record_node() -> void:
 func _open_uplink(clinic: bool) -> void:
 	var u: Dictionary = db.rules["uplink"]
 	var prices: Dictionary = db.rules["prices"]
-	var items: Array = []
-	var reserve_pool: Array = u["reserve_pool"].duplicate()
-	reserve_pool.shuffle()
-	for i in int(u["reserve_shown"]):
-		var id: String = reserve_pool[i]
-		items.append({"kind": "card", "id": id, "price": int(prices["card"]["common"]), "shelf": "Reserve"})
+	var items: Array = []   # No basic cards are ever sold here (BASIC-001).
 	var taken: Array = []
 	for owner in ["shared", "shared", "shared", "shared", run.rustler_id, run.rustler_id]:
 		var rarity: String = run.roll_rarity()

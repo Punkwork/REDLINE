@@ -15,7 +15,7 @@ DATA = Path(__file__).resolve().parent.parent / "godot" / "data"
 
 # Every effect "op" the engine must implement. Keep in sync with godot/data/README.md.
 KNOWN_OPS = {
-    "add_black_ice", "add_random_card", "break", "burn_bloatware", "cache", "cap_slots", "copy_virus",
+    "add_black_ice", "add_random_card", "break", "burn_bloatware", "cache", "cap_slots", "copy_virus", "deadlock_lock",
     "deadlock", "discard", "discard_hand", "double_virus", "draw", "draw_stat", "extract",
     "extract_multiplier", "forget", "gain_bw", "gain_cred", "gain_random_cap", "gain_random_ghostware", "heal",
     "ice_gain_str", "ice_pulp_bonus", "ice_str", "ice_str_set", "icepick_str", "infect", "insert",
@@ -129,6 +129,7 @@ def main():
         for key in ("tier1", "tier2", "escape_ice"):
             refs += corp.get(key, [])
         refs += corp.get("central_node", {}).get("ice_left_to_right", [])
+        refs += corp.get("opener", {}).get("ice_left_to_right", [])
         for layer in corp.get("layers", []):
             refs += layer["ice"]
         for step in corp.get("escape_layout", []):
@@ -150,6 +151,8 @@ def main():
                 err(f"{corp['id']}: expected 4 escape ICE")
             if len(corp["ghostware_set"]) != APPROVED_COUNTS["corp_ghostware_set"]:
                 err(f"{corp['id']}: expected 3 Ghostware in its set")
+            if not corp.get("opener", {}).get("ice_left_to_right"):
+                err(f"{corp['id']}: missing its Opening Node (row 1)")
             if len(corp["central_node"]["ice_left_to_right"]) != 3:
                 err(f"{corp['id']}: the Central Node should have 3 ICE")
             for gid in corp["ghostware_set"]:
@@ -157,7 +160,8 @@ def main():
                 if g and g["pool"] != corp["id"]:
                     err(f"{corp['id']}: ghostware '{gid}' should be in pool '{corp['id']}'")
     for i in ice:
-        is_main_candidate = i["tier"] in (1, 2, "escape", "training") or i.get("boss_role") == "main"
+        is_main_candidate = (i["tier"] in (1, 2, "escape", "training") or i.get("boss_role") == "main"
+                             or i.get("opener_role") == "main")
         has_deadlock = any(e["op"] == "deadlock" for s in i["subroutines"] for e in s["effects"])
         if i["id"] in ("overclock", "hotwire"):  # Training Node supports (locked values)
             continue
@@ -195,9 +199,12 @@ def main():
         err("patchwork: expected 12 mods")
 
     rules = files["rules.json"]
-    for cid in rules["uplink"]["reserve_pool"]:
-        if cid not in card_ids:
-            err(f"rules.uplink.reserve_pool: unknown card '{cid}'")
+    if rules["uplink"].get("reserve_pool"):
+        err("rules.uplink: basic cards are never sold at the Uplink (BASIC-001)")
+    # BASIC-001: rewards and shops only ever offer reward-pool cards, never basics or starter cards
+    for cdef in cards:
+        if cdef["pool"] == "reward" and cdef["rarity"] in ("basic", "starter"):
+            err(f"card {cdef['id']}: basic/starter rarity in the reward pool")
 
     # Effects: known ops, and references inside effects.
     for fname, data in files.items():

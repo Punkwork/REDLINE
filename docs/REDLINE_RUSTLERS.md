@@ -94,7 +94,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
-| 1 | **HUSH** *(signature)* | PROGRAM — ICEPICK (CODE GATE) | 1 BW, 1 RAM | STR 4. Boost: 1 BW → +1 STR. Break: 1 BW. |
+| 1 | **HUSH** *(signature)* | PROGRAM — ICEPICK (CODE GATE) | 1 BW, 1 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. *(BASIC-001: was STR 4, boost 1 BW.)* |
 | 1 | **BACKDOOR** *(fallback)* | SCRIPT — EXPLOIT | 3 BW | Break 1 subroutine on **any** ICE with STR 3 or less. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
 | 1 | **SLOW DRIP** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. If you have gained no TRACE this encounter, extract 6 instead. |
@@ -128,9 +128,9 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 2 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, **+2 TRACE** | Target ICE: −2 STR this encounter. |
 | 1 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. |
 | 1 | **FEEDBACK** | SCRIPT — EXPLOIT | 2 BW | Target ICE: −1 STR this encounter for every 10 TRACE you have. |
-| 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, **+2 TRACE** | Gain 2 BW. |
+| 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, **+2 TRACE** | Gain 1 BW. *(BASIC-001: was 2 BW.)* |
 | 2 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
-| 1 | **LAY LOW** | SCRIPT — CLOAK | 1 BW | −5 TRACE. |
+| 1 | **LAY LOW** | SCRIPT — CLOAK | 1 BW | −3 TRACE. *(BASIC-001: was −5.)* |
 | 1 | **SMASH & GRAB** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 8 CRED, **+2 TRACE**. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
 
@@ -153,7 +153,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
-| 1 | **STINGER** *(signature)* | PROGRAM — ICEPICK (SENTRY) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. **Each break also INFECTs 1 ROT on that ICE.** |
+| 1 | **STINGER** *(signature)* | PROGRAM — ICEPICK (SENTRY) | 1 BW, 1 RAM | STR 0 *(BASIC-001: was 2)*. Boost: 1 BW → +1 STR. Break: 1 BW. **Each break also INFECTs 1 ROT on that ICE.** |
 | 1 | **RUNTIME ERROR** *(fallback)* | SCRIPT — EXPLOIT, VIRUS | 2 BW, +1 TRACE | Break 1 subroutine on **any** ICE with 2 or more virus counters. |
 | 3 | **INJECT** | SCRIPT — EXPLOIT, VIRUS | 1 BW | INFECT 2 ROT. |
 | 1 | **REPLICATOR** | PROGRAM — VIRUS | 1 BW, 1 RAM | Start of your turn: on every ICE with virus counters, add 1 counter of each strain already on it. |
@@ -175,7 +175,8 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 ## 7. Starter cards and the card pool
 
 - **Starter cards are Rustler-specific:** HUSH, BACKDOOR, SLEDGE, BRUTE FORCE, STINGER and the others never appear for other Rustlers.
-- **Shared basics:** PROBE, PULP Shield, GHOST SIGNAL and Basic Extractor appear in several starter decks and in Uplink reserve stock.
+- **Shared basics:** PROBE, PULP Shield, GHOST SIGNAL and Basic Extractor appear in several starter decks. They are never sold or offered as rewards (BASIC-001).
+- **Starter cards are the weakest cards** (Core Rules §3.1a, BASIC-001): every starter card has a clear upgrade in the reward pools, and Rustlers aim to stop drawing their original cards by the end of a run.
 - **Card rewards (1 of 3; once per ICE Node since CORE-010):** proposed mix of **2 cards from the shared pool + 1 from the Rustler's own pool**, so every Rustler can branch out while staying recognizable. The pools themselves are Phase 3.
 
 ---

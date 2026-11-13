@@ -105,6 +105,20 @@ IRONWATCH's command AI: every camera, drone and officer, coordinated. A three-IC
 
 ---
 
+## 6a. Opening Node: FRONT DESK (row 1, OPEN-001)
+
+The lobby of an IRONWATCH site. Every route starts here (Core Rules §10.1a).
+
+| Position | ICE | Type | STR | Subroutines | Ability |
+|---|---|---|---|---|---|
+| Left (support) | **TURNSTILE** | WALL | 3 | [S1] PULP 2 · [S2] PULP 2 | — |
+| Right (main) | **SECURITY GUARD** | SENTRY | 3 | [S1] PULP 2 · [S2] DEADLOCK | **BOOTING:** its DEADLOCK can't be broken before your 3rd turn of the encounter. |
+
+- **The lesson:** IRONWATCH is about PULP. **SHIELD blocks PULP point for point and expires at the start of your turn**, so you either block every turn or break the damage for good.
+- **The decisions (turns 1–2):** 6 PULP a turn if nothing is broken. Break TURNSTILE's two PULP subroutines (2 breaks, done for the encounter), or SHIELD each turn and spend the rest on an Extractor? Turn 3: break SECURITY GUARD's DEADLOCK, or stay to extract?
+- **CRED reserve:** 15. Rewards as a normal 1-layer Node.
+- **Measured** (starter decks, rushing test bot): Generalist and VECTOR 3 turns; RIOT about 4; ECHO about 5 (no WALL or SENTRY Icepick). Average about 3.7. About 3–7 VITAE lost.
+
 ## 7. Escape ICE: the manhunt
 
 When you take OVERWATCH's data core, IRONWATCH closes the district.
@@ -157,3 +171,4 @@ One of these is always among the 3 payload choices at OVERWATCH (P5-003).
 5. **Central Node: OVERWATCH** with DISPATCH and SHOCK TROOPER (§6). — **ICE2-005**
 6. **Escape ICE:** ROADBLOCK, SPIKE STRIP, SEARCHLIGHT, PURSUIT DRONE, with LETHAL FORCE in encounter 3 (§7). — **ICE2-006**
 7. **IRONWATCH Ghostware set:** KEVLAR WEAVE, BADGE CLONE, DASHCAM FEED (§8). — **ICE2-007**
+8. **Opening Node: FRONT DESK** (TURNSTILE + SECURITY GUARD, BOOTING) (§6a). — **ICE2-008** (APPROVED 2026-11-13)

@@ -71,13 +71,14 @@ An Uplink always offers the same layout, so players learn it quickly:
 
 | Shelf | What's on it | Notes |
 |---|---|---|
-| **Reserve shelf** | **2 of these 3:** **PROBE**, **PULP Shield**, **SCRUB** (one is randomly missing each visit) | Basic cards at common price (25). Every visit offers something useful, but not always the one you want. |
 | **Card shelf** (random) | **6 cards:** 4 shared + 2 from your Rustler's pool | Rarity rolled 60/30/10. **One random card is on sale at 50% off.** |
 | **CAP shelf** (random) | **3 CAPS** | Rarity rolled 60/30/10. One may be BOOTLEG (if §2.2 is approved). |
 
+**No basic cards are sold here** (BASIC-001, Core Rules §3.1a). The old reserve shelf (PROBE, PULP Shield, SCRUB) is removed: starter cards are the weakest cards, and Rustlers come to the Uplink to replace them, not to add more.
+
 - Each item can be bought once per visit. Buy as many as you can afford.
 - **No reroll** for now: what an Uplink offers is what you get. Revisit after playtesting if Uplinks feel too random.
-- **Prices** follow the card prices in `REDLINE_CARD_POOLS.md` §2: **40 / 60 / 90 CRED** (raised from 25 / 40 / 65 by UPL-008). Reserve-shelf basics cost the common price.
+- **Prices** follow the card prices in `REDLINE_CARD_POOLS.md` §2: **40 / 60 / 90 CRED** (raised from 25 / 40 / 65 by UPL-008).
 
 ### 3.1 Uplink services (APPROVED 2026-11-12, UPL-006)
 - **Wipe (every Uplink):** permanently remove **1 card** from your deck, once per visit. Costs **50 CRED** the first time in a run, then **+25 each further use** that run (50, 75, 100…).
@@ -129,7 +130,7 @@ With cards at 40 / 60 / 90 CRED (about 50 on average), that buys **2–3 cards p
 2. **The 12 CAPS** and their prices (20 / 35 / 55 CRED) (§2). — **APPROVED 2026-11-12 (UPL-002)**
 3. **JACK OUT gives −5 TRACE**, and can't be used during the Corporation Response, under LOCKDOWN, while a Black ICE has an unbroken subroutine, at the Central Node, or after BREACH; only between card plays (§2, §2.1, §5). — **APPROVED 2026-11-12 (UPL-003)**
 4. **Bootleg CAPS:** half price, 25% chance to fizzle for +3 TRACE; sold only at the Black Market Uplink, never given as rewards (§2.2). — **APPROVED 2026-11-12 (UPL-004)**
-5. **Uplink layout:** reserve shelf with 2 of PROBE / PULP Shield / SCRUB (one randomly missing each visit), 6 random cards (4 shared + 2 Rustler) with one on sale, 3 CAPS (§3). — **APPROVED 2026-11-12 (UPL-005)**
+5. **Uplink layout:** ~~reserve shelf with 2 of PROBE / PULP Shield / SCRUB~~ (removed by BASIC-001, 2026-11-13: basic cards are never sold), 6 random cards (4 shared + 2 Rustler) with one on sale, 3 CAPS (§3). — **APPROVED 2026-11-12 (UPL-005)**
 6. **Uplink services and card removal:** no reroll for now; **Clinic** at about 1 Uplink in 3 (remove all VOID for 50 CRED); **Wipe** at every Uplink (remove 1 card per visit, 50 CRED, +25 each use per run); **data purge** event at some SIGNAL UNCLEAR Nodes (remove 1 card for +5 TRACE or −5 VITAE) (§3, §3.1, §3.2). — **APPROVED 2026-11-12 (UPL-006)**
 7. **Corporation map structure and Uplink frequency:** 9 infiltration rows → Central Node → 4-Node escape (3 countermeasure ICE + 1 SAFEHOUSE, TRACE doubled, no leaving early, no JACK OUT); payload kept only on escape (*later changed by P5-009: the payload Ghostware is active immediately*); SAFEHOUSEs (heal 10 VITAE or 1 PATCHWORK) in 1–2 infiltration rows and once per escape; Uplinks possible in rows 3 and 6, row 9 is Uplink or DEAD DROP only; run length target 75–100 minutes (§3.3; Core Rules §10). — **APPROVED 2026-11-12 (UPL-007)**
 
@@ -137,4 +138,5 @@ With cards at 40 / 60 / 90 CRED (about 50 on average), that buys **2–3 cards p
 
 | ID | Change |
 |---|---|
+| BASIC-001 | **No basic cards at the Uplink:** the reserve shelf is removed (amends UPL-005). See Core Rules §3.1a. |
 | UPL-008 | **Leaner economy:** a winning run adds about 30 cards in total, including **2–3 bought per corporation**. Card prices raised to **40 / 60 / 90 CRED** (from 25 / 40 / 65); CRED reserves lowered about 20% (Tier 1: 10/15; Tier 2: 15/20/30; Central 35; escape 10 unchanged), for about 130–220 CRED per corporation (§3, §4; `REDLINE_CARD_POOLS.md` §2; `REDLINE_ICE_CORP1.md` §8.2). Pairs with CORE-010. |

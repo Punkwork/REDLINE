@@ -71,7 +71,8 @@ The checker confirms every file parses, ids are unique, every reference points a
 | `discard` / `discard_hand` | Discard n cards (player's choice) / discard the whole hand |
 | `heal` / `max_vitae` | Heal n VITAE (capped at max) / change Max VITAE (raising it also heals) |
 | `pulp` / `void` | ICE damage: n PULP (blocked by SHIELD) / n VOID counters (also used by Bloatware with `when: end_of_turn_in_hand`) |
-| `forget` | ICE: n random non-CACHED cards in hand are BURNED for the Node (LUCIDA) |
+| `forget` | ICE: n random non-CACHED cards in hand go to the bottom of the draw pile (LUCIDA) |
+| `deadlock_lock` | ICE ability (Opening Node BOOTING): its DEADLOCKs can't be broken before turn `until_turn` of the encounter |
 | `pulp_direct` | Lose n VITAE as a cost (not blocked by SHIELD) |
 | `prevent_void` | Prevent n VOID (`all`), with a `limit` |
 | `ice_str` | Change ICE STR by n (`target`, `duration`, optional `ice_type`, `n_per_10_trace`) |

@@ -170,6 +170,8 @@ Support ICE are drawn from the same roster (a Tier 1 ICE can support a Tier 2 ma
 
 Lowered about 20% from the ICE-008 values (Tier 1: 15/20, Tier 2: 20/25/35, Central 40) so a corporation's CRED buys about 2–3 cards at the raised prices (UPL-008). The Training Node uses its own 10/15/25 (Master Design, Training Node CRED schedule).
 
+| Opening Node (row 1) | 15 | — | — |
+
 ### 8.2a Escape encounters (map structure from UPL-007)
 The escape (Core Rules §10.3) has **3 single-layer encounters** built from the corporation's **countermeasure ICE**, with TRACE gains doubled. For HALCYON, the escape uses its dedicated **security response** ICE (ALARM PANEL, MOTION SENSOR, DEADBOLT, PANIC BUTTON) with **HOUSE CALL** in the final encounter: see `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §4 (approved P5-007).
 
@@ -179,6 +181,22 @@ The escape (Core Rules §10.3) has **3 single-layer encounters** built from the 
 - **Node 6, layer 3:** COOKIE WALL (support) + LOYALTY PROGRAM (support) + HOME ASSISTANT (main). Reserve 30.
 
 ---
+
+### 8.4 Opening Node: COOKIE BANNER (row 1, OPEN-001)
+
+HALCYON's consent banner: two buttons that look the same. Every route starts here (Core Rules §10.1a).
+
+| Position | ICE | Type | STR | Subroutines | Ability |
+|---|---|---|---|---|---|
+| Left (support) | **ACCEPT ALL** | CODE GATE | 3 | [S1] INSERT 1 SPAM into your draw pile · [S2] TRACE 1 | — |
+| Right (main) | **REJECT ALL** | CODE GATE | 3 | [S1] TRACE 2 · [S2] DEADLOCK | **BOOTING:** its DEADLOCK can't be broken before your 3rd turn of the encounter. |
+
+**BOOTING** (Opening Node main ICE only, OPEN-001): *its DEADLOCK can't be broken before your 3rd turn of the encounter.* This is the main ICE's one ability. Support ICE in an Opening Node have no DEADLOCK.
+
+- **The lesson:** the twins are almost identical. The one difference is that **only REJECT ALL has a DEADLOCK**: accepting is easy, rejecting is what gets you through. Only DEADLOCKs block BREACH, so read every ICE.
+- **The decisions (turns 1–2):** break ACCEPT ALL's SPAM before it clogs your deck, or spend the BW on an Extractor (reserve 15), PULP Shields or GHOST SIGNAL? Turn 3: break REJECT ALL's DEADLOCK, or stay to extract the rest?
+- **CRED reserve:** 15. Rewards as a normal 1-layer Node.
+- **Measured** (starter decks, rushing test bot): Generalist and ECHO 3 turns; RIOT about 4; VECTOR about 6.5 (no CODE GATE Icepick; RUNTIME ERROR needs INJECT first). Average about 4.
 
 ## 9. Every Rustler has a way through
 
@@ -201,5 +219,6 @@ The escape (Core Rules §10.3) has **3 single-layer encounters** built from the 
 6. **Black ICE: HOUSE CALL** (no DEADLOCK) (§6). — **APPROVED 2026-11-12 (ICE-006)**
 7. **Central Node: THE HEARTH** with SMART SPEAKER and THERMOSTAT (§7). — **APPROVED 2026-11-12 (ICE-007)**
 8. **Encounter composition and CRED reserves** (working values) (§8). — **APPROVED 2026-11-12 (ICE-008)**; reserves **lowered by UPL-008**
+9. **Opening Node: COOKIE BANNER** (ACCEPT ALL + REJECT ALL, BOOTING) (§8.4). — **APPROVED 2026-11-13 (OPEN-002)**
 
 **Next:** Phase 3B — card pools: shared reward cards and Rustler-specific cards, including cards for the virus strains SCRAMBLE, BLIND, LEECH and WORM.

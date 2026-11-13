@@ -295,6 +295,18 @@ func has_in_play(card_id_or_script: String) -> bool:
 	return false
 
 
+## BOOTING (Opening Node main ICE): its DEADLOCK subroutines can't be broken before turn N of the encounter.
+func deadlock_locked(ice_index: int, sub_index: int) -> bool:
+	var ice: Dictionary = ice_list[ice_index]
+	var effects: Array = ice["def"]["subroutines"][sub_index]["effects"]
+	if not effects.any(func(e): return e["op"] == "deadlock"):
+		return false
+	for e in ice["def"].get("ability", {}).get("effects", []):
+		if e["op"] == "deadlock_lock" and turn < int(e["until_turn"]):
+			return true
+	return false
+
+
 func is_breached() -> bool:
 	for ice in ice_list:
 		var subs: Array = ice["def"]["subroutines"]
@@ -376,6 +388,8 @@ func total_break_cost(icepick_uid: int, ice_index: int, sub_index: int) -> int:
 		return -1
 	var ice: Dictionary = ice_list[ice_index]
 	if sub_index >= ice["broken"].size() or ice["broken"][sub_index] or _type_surcharge(inst, ice) < 0:
+		return -1
+	if deadlock_locked(ice_index, sub_index):
 		return -1
 	var ip: Dictionary = card_def(inst)["icepick"]
 	var need := ice_str(ice_index)
@@ -488,6 +502,9 @@ func break_subroutine(icepick_uid: int, ice_index: int, sub_index: int) -> bool:
 		return false
 	var ice: Dictionary = ice_list[ice_index]
 	if ice["broken"][sub_index] or _type_surcharge(inst, ice) < 0:
+		return false
+	if deadlock_locked(ice_index, sub_index):
+		_log("Can't break: %s is still BOOTING." % ice["def"]["name"])
 		return false
 	if icepick_str(inst) < ice_str(ice_index):
 		_log("Can't break: STR %d < ICE STR %d." % [icepick_str(inst), ice_str(ice_index)])
@@ -830,21 +847,22 @@ func _apply_ice_effects(effects: Array, ice_index: int) -> void:
 			return
 
 
-## FORGET X: X random non-CACHED cards in your hand are BURNED for the rest of the Node
-## (MEMORY BACKUP sends them to the discard pile instead).
+## FORGET X: X random non-CACHED cards in your hand go to the bottom of your draw pile (ICE3-002a).
+## MEMORY BACKUP: draw 1 card whenever an ICE makes you FORGET.
 func _forget(n: int) -> void:
+	var forgot := 0
 	for i in n:
 		var options: Array = hand.filter(func(c): return not cached.has(c["uid"]))
 		if options.is_empty():
-			return
+			break
 		var inst = options[run.rng.randi_range(0, options.size() - 1)]
 		hand.erase(inst)
-		if run.has_ghostware("memory_backup"):
-			discard_pile.append(inst)
-			_log("FORGET: %s (MEMORY BACKUP: to your discard pile)." % card_name(inst))
-		else:
-			burned.append(inst)
-			_log("FORGET: %s is BURNED for the rest of the Node." % card_name(inst))
+		draw_pile.push_front(inst)
+		forgot += 1
+		_log("FORGET: %s goes to the bottom of your draw pile." % card_name(inst))
+	if forgot > 0 and run.has_ghostware("memory_backup"):
+		_log("MEMORY BACKUP: draw 1.")
+		_draw(1)
 
 
 func _purge(ice_index: int) -> void:
@@ -1199,7 +1217,7 @@ func _best_unbroken_subroutine(ice_index: int) -> int:
 	var best := -1
 	var best_score := -1
 	for s in subs.size():
-		if ice_list[ice_index]["broken"][s]:
+		if ice_list[ice_index]["broken"][s] or deadlock_locked(ice_index, s):
 			continue
 		var score := 0
 		for e in subs[s]["effects"]:

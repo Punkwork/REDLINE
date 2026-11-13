@@ -7,9 +7,9 @@ Godot **4.3** (GDScript, Compatibility renderer). Open the `godot/` folder in th
 The main menu offers two modes.
 
 **Corporation heist (economy playtest).** Choose HALCYON, IRONWATCH or LUCIDA, then any of the 4 Rustlers.
-- A 9-row map: Tier 1 ICE in rows 1–4 and Tier 2 in rows 5–8, Uplinks in rows 3 and 6, and an Uplink or DEAD DROP in row 9. SAFEHOUSEs appear in 1–2 rows.
+- A 9-row map: row 1 is the corporation's fixed **Opening Node** (a one-layer lesson with a BOOTING DEADLOCK), then Tier 1 ICE in rows 2–4 and Tier 2 in rows 5–8, Uplinks in rows 3 and 6, and an Uplink or DEAD DROP in row 9. SAFEHOUSEs appear in 1–2 rows.
 - SIGNAL UNCLEAR events, Console Labs, and THE HEARTH Central Node with its Ghostware payload. The escape isn't in this build yet.
-- **Black Market Uplink:** a reserve shelf, 6 cards with one on sale, 3 CAPS (one may be BOOTLEG), 2–3 Ghostware, Wipe, and a Clinic at about 1 Uplink in 3.
+- **Black Market Uplink:** 6 cards with one on sale (no basic cards; BASIC-001), 3 CAPS (one may be BOOTLEG), 2–3 Ghostware, Wipe, and a Clinic at about 1 Uplink in 3.
 - **CAPS:** all 12 work; JACK OUT follows its timing limits. You get CAPS from the full-clear completion reward and from the 20% drop after a BREACH.
 - **Ghostware:** the general pool and all three corporation sets work, apart from SIGNAL BOOSTER, which has no effect yet.
 - **Run summary:** CRED earned by source, CRED spent by category, every purchase, cards added (rewards versus bought) and the route you took. **Copy summary to clipboard** lets you paste it into a chat for tuning.
@@ -39,6 +39,7 @@ All prices, reserves and odds live in `data/rules.json` (`prices`, `cred_reserve
 | `tests/run_tests.gd` | Rules, CAPS and Uplink tests, plus bot playthroughs of the Training Node and of heists with every Rustler. |
 | `tests/smoke_ui.gd` | The bot plays the Training Node and 4 heists through the UI, to catch UI script errors. |
 | `tests/bot.gd` | A simple bot used by the tests and the simulation. |
+| `tests/opener_sim.gd` | Turns to BREACH each Opening Node, per Rustler (starter decks). |
 | `tests/heist_sim.gd` | Economy simulation: 80 heists per Rustler, with average CRED, cards and Uplink visits for winning runs. |
 
 Scripts use `preload` constants rather than `class_name` so they also run under `--script`.

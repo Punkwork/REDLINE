@@ -449,7 +449,7 @@
       "id": "memory_backup",
       "name": "MEMORY BACKUP",
       "pool": "lucida",
-      "text": "Cards an ICE would FORGET go to your discard pile instead of being BURNED.",
+      "text": "Whenever an ICE makes you FORGET, draw 1 card.",
       "effects": [],
       "script": "memory_backup"
     },

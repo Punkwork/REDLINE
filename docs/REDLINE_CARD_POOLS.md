@@ -47,12 +47,45 @@ So cards are priced consistently, **1 BW is worth about**:
 
 ---
 
+### 2.1 Starter-card audit (BASIC-001)
+
+Rule: every starter card is the weakest version of its role, with at least one clear upgrade in the reward pools for the Rustler who starts with it (Core Rules §3.1a). Basic cards are never sold or offered as rewards.
+
+| Starter card | Who starts with it | Clear upgrades | Change made |
+|---|---|---|---|
+| PROBE (−2 STR) | All | DEEP PROBE (twice the effect per card), BALANCED LOAD, STRESS TEST, KEYLOGGER | — |
+| PULP Shield (+3 SHIELD) | All | HARDENED SHELL, MIRROR, SURGE PROTECTOR | — |
+| GHOST SIGNAL | Generalist, ECHO, VECTOR | SCRUB (not BURNED), PROXY CHAIN, VANISH | — |
+| Basic Extractor (5 CRED) | All | DATA SIPHON, SKIMMER | — |
+| WALL Icepick | Generalist | **BATTERING RAM**, JACKHAMMER | BATTERING RAM gains a free first break each turn |
+| CODE GATE Icepick | Generalist | PASSKEY, RAINBOW TABLE | — |
+| SENTRY Icepick | Generalist | TASER, STUN BATON | — |
+| VOID BUFFER | Generalist | FAILSAFE | — |
+| HUSH | ECHO | PASSKEY, RAINBOW TABLE | **HUSH weakened:** STR 4 → 3, boost 1 → 2 BW (it was better than PASSKEY) |
+| BACKDOOR | ECHO | SIDE CHANNEL, SKELETON KEY, ADAPTER | — |
+| SLOW DRIP | ECHO | DATA SIPHON, SILENT PARTNER, LONG GAME | — |
+| SMOKESCREEN | ECHO | MIRROR, PATIENCE, PROXY CHAIN | — |
+| DEAD AIR | ECHO | STASH (CACHE 2) | — |
+| SLEDGE | RIOT | BATTERING RAM, JACKHAMMER (no TRACE per break) | (via BATTERING RAM) |
+| BRUTE FORCE | RIOT | WRECKING BALL, CHAINSAW, FLASHPOINT | — |
+| OVERLOAD | RIOT | SMASH, DEEP PROBE | — |
+| FEEDBACK | RIOT | SMASH, BERSERK | — |
+| ADRENAL SPIKE | RIOT | BURST, QUANTUM CORE, ROAR | **Weakened:** gain 2 BW → 1 BW (it beat BURST) |
+| LAY LOW | RIOT | SCRUB, CRASH CART, NO WITNESSES | **Weakened:** −5 → −3 TRACE (it beat SCRUB) |
+| SMASH & GRAB | RIOT | DATA SIPHON (no TRACE), SKIMMER | — |
+| STINGER | VECTOR | TASER, STUN BATON | **Weakened:** STR 2 → 0 (TASER had nothing over it) |
+| RUNTIME ERROR | VECTOR | HOST TAKEOVER, SKELETON KEY | — |
+| INJECT | VECTOR | WORMHOLE, COCKTAIL, FUSE → MEGADOSE | — |
+| REPLICATOR, OUTBREAK | VECTOR | INCUBATOR, PANDEMIC | — |
+
+**Effect on difficulty:** the starter decks got weaker, not the rewards stronger (apart from BATTERING RAM), so ICE didn't need raising. The Opening Nodes still take every Rustler 3+ turns (about 4 on average); their pace comes from BOOTING.
+
 ## 3. Shared pool (31 cards)
 
 ### 3.1 Icepicks — covering weak ICE types (7)
 | Card | Rarity | Type / tags | Cost | Effect |
 |---|---|---|---|---|
-| **BATTERING RAM** | Common | PROGRAM — ICEPICK (WALL) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. Break: 1 BW. |
+| **BATTERING RAM** | Common | PROGRAM — ICEPICK (WALL) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. **First break each turn free;** then 1 BW per break. *(BASIC-001: free first break added so it beats the WALL Icepick and SLEDGE.)* |
 | **JACKHAMMER** | Uncommon | PROGRAM — ICEPICK (WALL) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → **+2** STR. First break each turn free; then 1 BW. |
 | **PASSKEY** | Common | PROGRAM — ICEPICK (CODE GATE) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. Break: 1 BW. |
 | **RAINBOW TABLE** | Uncommon | PROGRAM — ICEPICK (CODE GATE) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. **Break: 1 BW for up to 2 subroutines** on the same ICE. |

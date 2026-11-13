@@ -136,12 +136,6 @@
     "clinic_void_removal": 50
   },
   "uplink": {
-    "reserve_pool": [
-      "probe",
-      "pulp_shield",
-      "scrub"
-    ],
-    "reserve_shown": 2,
     "cards": {
       "shared": 4,
       "rustler": 2
@@ -153,7 +147,8 @@
       3
     ],
     "clinic_chance": 0.33,
-    "reroll": false
+    "reroll": false,
+    "basic_cards_sold": false
   },
   "cred_reserves": {
     "tier1": [

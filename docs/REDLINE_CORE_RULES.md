@@ -54,6 +54,12 @@ Each card can also carry **tags**, shown under the type:
 
 > Mapping from the old classifications: Executable → PROGRAM; Packet → SCRIPT; Protocol → PROTOCOL; Bloatware → BLOATWARE.
 
+### 3.1a Starter cards are the weakest cards [NEW, BASIC-001 — structural rule]
+- **Every card in a starter deck is the weakest version of its role** (the shared basics PROBE, PULP Shield, GHOST SIGNAL and Basic Extractor, and each Rustler's own starter cards). Every card a Rustler can earn or buy is slightly or much better.
+- **Rustlers are trying to stop drawing their starter cards.** By the end of a good run, the deck should rarely draw an original card: rewards, purchases, Wipe, Console Lab removal and FUSE all serve that goal.
+- **Basic and starter cards are never offered** as rewards, at the Black Market Uplink, or by events. Only the reward pools are.
+- **Design check:** every starter card must have at least one reward card that's a clear upgrade for the Rustler who starts with it. When one doesn't, weaken the starter card first (or make the ICE stronger), rather than raising rewards. The current audit is in `REDLINE_CARD_POOLS.md` §2.1.
+
 ### 3.2 Card states
 
 - **CACHE:** a CACHED card stays in your hand at end of turn instead of being discarded. It stays until played or until the Node ends. CACHED cards are extra; they don't reduce your DRAW.
@@ -112,7 +118,7 @@ WHITE PICKET FENCE — WALL — STR 3
 | **VOID X** | Gain X VOID counters (§6). |
 | **TRACE X** | Add X to your TRACE meter (§7). |
 | **DEADLOCK** | Blocks BREACH while unbroken. Does nothing on its own. |
-| **FORGET X** | X random non-CACHED cards in your hand are BURNED for the rest of the Node. *(LUCIDA; added by ICE3-002.)* |
+| **FORGET X** | X random non-CACHED cards in your hand go to the **bottom of your draw pile**. *(LUCIDA; added by ICE3-002, changed by ICE3-002a.)* |
 | Others | Printed on the ICE: strengthen other ICE, insert Bloatware, and so on. |
 
 One subroutine can have more than one effect (e.g. `[S1] PULP 4 + DEADLOCK`). Breaking it stops all of them.
@@ -236,15 +242,31 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 - Node icons on the map show **what probably lies ahead**: ICE, Uplink, DEAD DROP, Console Lab, SAFEHOUSE, or **SIGNAL UNCLEAR** (unknown). **[CHANGED]** Previously Nodes were fully hidden. Showing likely contents fits the surveillance theme (you're watching the corporation too) and makes route choice a real decision.
 - **Structure [CHANGED by UPL-007]:** a heist in three parts. Every route has **14 Nodes**: **9 infiltration rows → the Central Node → a 4-Node escape**. This replaces the earlier working size of 6 Nodes per route (CORE-009).
 
-**Infiltration rows** (each row has 3–4 Nodes; each Node links forward to 2–3 Nodes in the next row):
+**Infiltration rows** (each row has 3–4 Nodes; each Node links forward to 2–3 Nodes in the next row). **Row 1 is always the corporation's Opening Node** **[NEW, OPEN-001]**: a single fixed Node that every route starts from (§10.1a).
 
 | Rows | Possible Nodes |
 |---|---|
-| 1–4 (Tier 1 ICE) | ICE, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** possible in row 3 |
+| 1 | The **Opening Node** only (§10.1a) |
+| 2–4 (Tier 1 ICE) | ICE, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** possible in row 3 |
 | 5–8 (Tier 2 ICE) | ICE, Console Lab, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** possible in row 6 |
 | 9 | **Uplink or DEAD DROP only:** the last chance to prepare |
 
-- **SAFEHOUSEs** appear in **1–2** of the 9 infiltration rows.
+- **SAFEHOUSEs** appear in **1–2** of the 9 infiltration rows (never row 1).
+
+### 10.1a The Opening Node [NEW, OPEN-001]
+Every corporation starts with the same designed encounter, so every run gets **one guaranteed card reward per corporation** and every corporation teaches its main lesson before the random rows begin.
+- **One layer, two ICE:** a **support** ICE with no DEADLOCK that supplies the pressure, and a **main** ICE that holds the only DEADLOCK.
+- **BOOTING:** the main ICE's DEADLOCK **can't be broken before your 3rd turn** of the encounter. Every Rustler needs **at least 3 turns**; turns 1–2 are for decisions: set up, extract (reserve **15 CRED**), defend, or break the support's subroutines.
+- **Low STR (3)** on both ICE, so every Rustler's fallback card can reach the DEADLOCK. Measured with the starter decks: **3 turns minimum, about 4 on average** across the four Rustlers.
+- Normal rewards: the Node's card reward (1-layer odds) and, as a full clear, the completion reward.
+
+| Corporation | Opening Node | Lesson |
+|---|---|---|
+| HALCYON | **COOKIE BANNER** (ACCEPT ALL + REJECT ALL) | Only DEADLOCKs block BREACH: read every ICE. |
+| IRONWATCH | **FRONT DESK** (TURNSTILE + SECURITY GUARD) | SHIELD blocks PULP and expires every turn: block it or break it. |
+| LUCIDA | **INTAKE** (BASELINE SCAN + ONBOARDING) | FORGET takes random cards, and CACHED cards are safe. |
+
+Details: `REDLINE_ICE_CORP1.md` §8.4, `REDLINE_ICE_CORP2.md` §6a, `REDLINE_ICE_CORP3.md` §7a.
 - Every route can reach **at least 1 Uplink** (row 9 always offers one). About **1 Uplink in 3 has a Clinic**, shown on the map.
 
 ### 10.2 Central Node and the payload [CHANGED by UPL-007]
@@ -373,3 +395,6 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + VOID onl
 | ID | Change to this document |
 |---|---|
 | ICE3-002 | New subroutine effect **FORGET X** (§5.2), introduced by LUCIDA (`REDLINE_ICE_CORP3.md` §3). |
+| ICE3-002a | FORGET sends cards to the **bottom of your draw pile** instead of BURNING them: BURNING could remove a Rustler's only fallback breaker and leave an encounter impossible to BREACH (found in simulation). |
+| BASIC-001 | **Structural rule: starter cards are the weakest cards** (§3.1a). Basic cards are no longer sold at the Uplink (amends UPL-005). Starter changes: HUSH STR 3 and boost 2 BW; STINGER STR 0; ADRENAL SPIKE gain 1 BW; LAY LOW −3 TRACE. BATTERING RAM gains a free first break each turn. |
+| OPEN-001 | **Row 1 is the corporation's Opening Node** (§10.1, §10.1a): a fixed one-layer encounter with a BOOTING main ICE (DEADLOCK unbreakable before your 3rd turn). Guarantees 1 card reward per corporation. |
