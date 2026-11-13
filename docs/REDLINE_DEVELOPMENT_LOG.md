@@ -941,3 +941,7 @@ Two lines approved as CANON verses: NR-139 (EV-07 BREACH; Amiga demo scrollers, 
 
 Two lines approved as CANON verses referencing Ferris Bueller's sampled coughs, played on an E-mu Emulator II (not a Fairlight CMI, which NUL/REM is keen to point out): NR-141 (EV-23 JACK OUT used) and NR-142 (EV-18 Low VITAE).
 
+## NULREM-031 — Ferris Bueller and the germ trait: NR-143 (APPROVED, 2026-11-13)
+
+One EV-37 (Idle) line approved as CANON verse NR-143: NUL/REM leans away from the screen at Ferris Bueller's sampled coughs, knowing they're samples (germ trait).
+

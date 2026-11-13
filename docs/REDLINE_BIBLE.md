@@ -1582,6 +1582,15 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-143 — I lean away anyway
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Ferris Bueller's sampled coughs; the germ trait.
+
+> “I've watched Ferris do the coughing scene more times than I'll admit. Every time, I lean away from the screen. They were samples. I know they were samples. I lean away anyway.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
