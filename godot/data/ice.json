@@ -66,22 +66,26 @@
         {
           "ice": [
             "white_picket_fence"
-          ]
+          ],
+          "cred_reserve": 15
         },
         {
           "ice": [
             "tollbooth",
             "meatgrinder"
-          ]
+          ],
+          "cred_reserve": 25
         },
         {
           "ice": [
             "overclock",
             "hotwire",
             "watchdog"
-          ]
+          ],
+          "cred_reserve": 40
         }
-      ]
+      ],
+      "cred_reserve_note": "15/25/40 per the Master Design's approved test-node reserves (working values)."
     },
     {
       "id": "halcyon",

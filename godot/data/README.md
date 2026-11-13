@@ -1,6 +1,6 @@
 # REDLINE game data
 
-Everything the game needs to know about its content: cards, Rustlers, ICE, CAPS, Ghostware, PATCHWORK, events, contracts, virus strains and the rule numbers. When the Godot project is created in `godot/`, these files are available at `res://data/`.
+Everything the game needs to know about its content: cards, Rustlers, ICE, CAPS, Ghostware, PATCHWORK, events, contracts, virus strains and the rule numbers. The Godot project in `godot/` loads them from `res://data/` (see `godot/README.md`).
 
 **The design documents in `docs/` are the authority.** These files are a faithful copy of the approved values (Phases 1–5, 2026-11-12) in a form the game can load. To change a value: change the design doc first (with a decision ID), then the data, then run the checker.
 
