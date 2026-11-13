@@ -853,3 +853,7 @@ Two final EV-03 (Enter a corporation) lines approved as CANON verses, referencin
 
 Trigger EV-16 (TRACE strike 3: LOCKDOWN): five lines approved as CANON verses NR-046 to NR-050 (Reluctant Guardian and Melancholic; references kept rare at danger moments). NR-049 is a callback to NR-025's Impossible Mission line and should only play once NR-025 has been heard.
 
+## NULREM-010 — Central Node verses NR-051 to NR-059 (APPROVED, 2026-11-13)
+
+Trigger EV-30 (Central Node entry): nine boss-framing lines approved as CANON verses, three per boss, each stating the fight's question from the ICE docs without new mechanics: THE HEARTH NR-051 to NR-053 (NR-052 is the planned Tron Master Control line), OVERWATCH NR-054 to NR-056 (NR-056 references HAL 9000 singing “Daisy Bell”; to verify), ANIMA NR-057 to NR-059.
+

@@ -586,6 +586,87 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-051 — Don't do neither
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Boss framing: THE HEARTH (growth; supports SMART SPEAKER, THERMOSTAT).
+
+> “THE HEARTH. The voice in every house, and it gets stronger every round you leave it alone. The SMART SPEAKER and the THERMOSTAT feed it. Starve it, or rush its DEADLOCKs. Just don't do neither.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-052 — HALCYON's Master Control
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: THE HEARTH; reference: Master Control Program (Tron, 1982).
+
+> “Tron, 1982. Flynn beat Master Control from the inside. You're already inside. This is HALCYON's Master Control. Let's make it say 'End of line' and mean itself.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-053 — Goodnight
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Boss framing: THE HEARTH (the voice in every house); his wish for sleep.
+
+> “It knows every family by their voice. It wished them goodnight every night and never once meant it. I mean it, for the record. Goodnight is coming. Just not for us. Not yet.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-054 — Run it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Boss framing: OVERWATCH (unbreakable ability; the fight is a race).
+
+> “OVERWATCH. Every camera, drone and officer, one mind. You can't break its ability. It costs you VITAE every round, whatever you do. So this is a race. Run it.”
+
+**Placement:** Entering the Central Node OVERWATCH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-055 — Decide first
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: OVERWATCH (supports DISPATCH, SHOCK TROOPER).
+
+> “DISPATCH tells it where you are and makes it stronger. SHOCK TROOPER makes you drop what you're holding. Silence DISPATCH first, or don't. Just decide before it decides for you.”
+
+**Placement:** Entering the Central Node OVERWATCH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-056 — No Daisy
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Boss framing: OVERWATCH; reference: HAL 9000 singing “Daisy Bell” (2001: A Space Odyssey).
+
+> “HAL watched one ship. OVERWATCH watches a city, and it won't sing 'Daisy' when you pull its boards. It'll just stop. Let's hear it stop.”
+
+**Placement:** Entering the Central Node OVERWATCH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-057 — I'll remember
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Boss framing: ANIMA (FORGET each round; CACHE).
+
+> “ANIMA. Trained on millions of sleeping minds. Every round it takes something from your hand. CACHE what you can't afford to lose. I'll remember the rest for you.”
+
+**Placement:** Entering the Central Node ANIMA (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-058 — A door
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: ANIMA (INTRUSIVE THOUGHT, CORTEX; support MEMORY BANK).
+
+> “An INTRUSIVE THOUGHT in your hand isn't a thought. It's a door. Clear it before it turns into CORTEX. MEMORY BANK feeds ANIMA. Break it.”
+
+**Placement:** Entering the Central Node ANIMA (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-059 — Reconsidering
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Boss framing: ANIMA (trained on sleeping minds); his wish for sleep.
+
+> “Millions of sleeping minds, and it learned from every one. I've wanted to sleep since 1987. I always assumed it would be peaceful. ANIMA has me reconsidering.”
+
+**Placement:** Entering the Central Node ANIMA (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
