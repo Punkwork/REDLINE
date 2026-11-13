@@ -849,3 +849,7 @@ Four more EV-03 (Enter a corporation) lines approved as CANON verses: NR-040 (HA
 
 Two final EV-03 (Enter a corporation) lines approved as CANON verses, referencing Marvin the Paranoid Android and Sirius Cybernetics' Genuine People Personalities: NR-044 (HALCYON; the delighted doors) and NR-045 (LUCIDA; the comparison he denies, Marvin's 576 billion years of waiting). Reference-compulsion trait updated (Bible §5, Master Design §7): Marvin is the comparison NUL/REM denies. EV-03 complete with 24 lines: HALCYON 7, IRONWATCH 9, LUCIDA 8.
 
+## NULREM-009 — LOCKDOWN verses NR-046 to NR-050 (APPROVED, 2026-11-13)
+
+Trigger EV-16 (TRACE strike 3: LOCKDOWN): five lines approved as CANON verses NR-046 to NR-050 (Reluctant Guardian and Melancholic; references kept rare at danger moments). NR-049 is a callback to NR-025's Impossible Mission line and should only play once NR-025 has been heard.
+

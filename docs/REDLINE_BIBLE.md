@@ -541,6 +541,51 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-046 — Figuratively
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** LOCKDOWN: the trap closes.
+
+> “LOCKDOWN. Exits sealed, JACK OUT dead, Black ICE on the way. Fine. Then we don't leave. We finish this Node. Stay behind me. Figuratively. I don't have a behind.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-047 — Nobody has the keys
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** LOCKDOWN: the trap closes.
+
+> “Three strikes. They've found us. In 1987 a lockdown meant the caretaker had the keys. Now nobody has the keys. Not even me.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-048 — One decision
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** LOCKDOWN: the trap closes.
+
+> “No exits. No JACK OUT. Good. That leaves one decision, and it's how we win. Break what's in front of you. I'll watch what's coming.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-049 — Keep it one
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** LOCKDOWN: the trap closes; callback to NR-025 (Impossible Mission).
+
+> “Stay a while. Stay forever. I used to think that was a joke. Let's keep it one.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random. Plays best if NR-025 has already been heard this run or profile; otherwise suppress.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-050 — Nobody's sleeping
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** LOCKDOWN: the trap closes; his wish for sleep.
+
+> “I wanted to sleep tonight. Now nobody's sleeping until this Node is broken. Draw, think, and don't waste a single BW.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
