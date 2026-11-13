@@ -889,3 +889,11 @@ Three EV-37 (Idle) history-aside lines approved as CANON verses mocking Tobor, �
 
 Three lines approved as CANON verses referencing 7-Zark-7, 1-Rover-1 and Susan, added when Gatchaman was cut down into Battle of the Planets (1978): NR-103 (EV-37 Idle), NR-104 (EV-15 Black ICE joins; he won't sanitize danger) and NR-105 (EV-37 Idle; Susan on Pluto). Reference trait updated (Bible §5).
 
+## NULREM-019 — The 1982 trait, the reference style rule, fifteen verse revisions and Jetsons verses NR-106 to NR-109 (APPROVED, 2026-11-13)
+
+**CANON trait:** 1982 is NUL/REM's special year: his memory chips received most of their programming then (before his 1987 manufacture), and his favourite music and films are from that period; he reminisces most about 1982 and 1987. **DIRECTION:** references assume the player knows the work, with no plot summaries and no years other than 1982 and 1987.
+
+**Revisions:** under the Bible's preservation rule, fifteen CANON verses are RETIRED (kept as history) and replaced by v2 versions written to the new style: NR-023, 026, 029, 033, 035, 038, 039, 040, 041, 042, 052, 065, 098, 100 and 103. NR-041 and NR-052 now name 1982 fondly. Placements unchanged.
+
+**New verses:** Jetsons references NR-106 (EV-37 Idle; Rosie), NR-107 (EV-38 Repeated mistake; Uniblab), NR-108 (EV-04 BOOTING; R.U.D.I.) and NR-109 (EV-18 Low VITAE; R.U.D.I.).
+

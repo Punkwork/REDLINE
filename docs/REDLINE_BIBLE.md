@@ -99,7 +99,11 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+
+**CANON (2026-11-13) — Trait: 1982.** 1982 is NUL/REM's special year: it is when his memory chips received most of their programming (before his 1987 manufacture), and his favourite music and films are from that period. He reminisces most about 1982 and 1987.
+
+**DIRECTION (2026-11-13) — Reference style.** NUL/REM references works as if the player has already seen, heard or played them: no plot summaries and no release years, except 1982 and 1987, which he names fondly. Accuracy rules still apply to whatever he does say.
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -335,13 +339,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-023 — Halcyon + On + On
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Orbital, “Halcyon + On + On”.
+**Status:** RETIRED (superseded by NR-023 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Orbital, “Halcyon + On + On”.
 
 > “There was a track called 'Halcyon + On + On', 1993. Two brothers wrote it for their mother, who couldn't sleep without a pill called Halcion. A home that sedates you. I'm sure the name is a coincidence.”
 
 **Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-023 v2 — Halcyon + On + On
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Orbital, “Halcyon + On + On”.
+
+> “Halcyon + On + On. Beautiful track. Written for a mother who couldn't sleep without her pills. A home that sedates you. I'm sure the name's a coincidence.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Revision of NR-023 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-024 — And on, and on
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON (surveillance); reference: Orbital, “Halcyon + On + On”.
@@ -362,13 +375,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-026 — A subscription
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Proteus IV (Demon Seed).
+**Status:** RETIRED (superseded by NR-026 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Proteus IV (Demon Seed).
 
 > “1977. A computer called Proteus IV took over a house, locked the doors, and wouldn't let the woman inside leave. They made it a horror film. HALCYON made it a subscription.”
 
 **Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-026 v2 — A subscription
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Proteus IV (Demon Seed).
+
+> “Proteus IV locked a woman in her own house, and it was a horror film. HALCYON made it a subscription.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Revision of NR-026 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-027 — Violence with an invoice
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH (CITATION, PULP).
@@ -389,13 +411,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-029 — Number 5
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH; reference: Number 5 (Short Circuit).
+**Status:** RETIRED (superseded by NR-029 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH; reference: Number 5 (Short Circuit).
 
 > “In 1986 a military robot got struck by lightning and decided it was alive. Number 5. Sweet machine. IRONWATCH's machines don't get struck by anything. They do the striking.”
 
 **Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-029 v2 — Number 5
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH; reference: Number 5 (Short Circuit).
+
+> “Number 5 got struck by lightning and decided he was alive. Sweet machine. IRONWATCH's machines don't get struck by anything. They do the striking.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Revision of NR-029 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-030 — No knees
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH (FRONT DESK).
@@ -425,13 +456,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-033 — I will return
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA (ANIMA); reference: the Apple II in Evilspeak.
+**Status:** RETIRED (superseded by NR-033 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA (ANIMA); reference: the Apple II in Evilspeak.
 
 > “Their Central Node is ANIMA. Latin for soul. There was a film in 1981: a boy, an Apple II, and a demon's diary. It ended with his face on the screen and the words 'I will return'. I think about that here more than I'd like.”
 
 **Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-033 v2 — I will return
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA (ANIMA); reference: the Apple II in Evilspeak.
+
+> “Their Central Node is ANIMA. Latin for soul. Remember the end of Evilspeak? The face on the screen. 'I will return.' I think about that here more than I'd like.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-033 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-034 — A polite name
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (INTAKE, INTRUSIVE THOUGHT).
@@ -443,13 +483,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-035 — Synthetic cortex
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (CORTEX); reference: Proteus IV (Demon Seed).
+**Status:** RETIRED (superseded by NR-035 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (CORTEX); reference: Proteus IV (Demon Seed).
 
 > “Proteus IV, 1977. Its makers called it a synthetic cortex, a machine built to think like a brain. It wasn't content to stay in a box. LUCIDA builds the same bridge from the other side. Mind your CORTEX.”
 
 **Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-035 v2 — Synthetic cortex
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (CORTEX); reference: Proteus IV (Demon Seed).
+
+> “Proteus IV. A synthetic cortex that wouldn't stay in its box. LUCIDA builds the same bridge from the other side. Mind your CORTEX.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-035 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-036 — Computer says no
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH (FRONT DESK); reference: Carol Beer (Little Britain).
@@ -470,7 +519,7 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-038 — The alibi
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: the K44 war-games computer (Columbo, “Mind Over Mayhem”, 1974).
+**Status:** RETIRED (superseded by NR-038 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: the K44 war-games computer (Columbo, “Mind Over Mayhem”, 1974).
 
 > “Columbo, 1974. A think-tank director left a war-game computer running so it would look like he never left his desk. Then he went out and killed a man. The machine was his alibi. At IRONWATCH, the machines are everyone's alibi.”
 
@@ -478,8 +527,17 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-038 v2 — The alibi
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: the K44 war-games computer (Columbo, “Mind Over Mayhem”, 1974).
+
+> “The Columbo with the war-game computer. The machine was his alibi. At IRONWATCH, the machines are everyone's alibi.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Revision of NR-038 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
 ### VERSE NR-039 — MM7
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (FORGET); reference: MM7 (Columbo, “Mind Over Mayhem”, 1974).
+**Status:** RETIRED (superseded by NR-039 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (FORGET); reference: MM7 (Columbo, “Mind Over Mayhem”, 1974).
 
 > “There was a robot in Columbo, MM7. Built by a boy genius at a cybernetics institute. It lost a game of chess and threw the board across the room. I respected that. LUCIDA's machines don't lose. They just make you FORGET you were playing.”
 
@@ -487,8 +545,17 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-039 v2 — MM7
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (FORGET); reference: MM7 (Columbo, “Mind Over Mayhem”, 1974).
+
+> “MM7 lost at chess and threw the board across the room. I respected that. LUCIDA's machines don't lose. They just make you FORGET you were playing.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-039 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
 ### VERSE NR-040 — End of line
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON; reference: the Master Control Program (Tron, 1982).
+**Status:** RETIRED (superseded by NR-040 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON; reference: the Master Control Program (Tron, 1982).
 
 > “In Tron, the Master Control Program started out as a chess program. Then it ran the company. Then it wanted the Pentagon, because it could run it twelve hundred times better. HALCYON started out as a thermostat. Give it time. End of line.”
 
@@ -496,8 +563,17 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-040 v2 — End of line
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON; reference: the Master Control Program (Tron, 1982).
+
+> “Master Control started out as a chess program. Then it wanted the Pentagon. HALCYON started out as a thermostat. Give it time. End of line.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Revision of NR-040 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
 ### VERSE NR-041 — The Game Grid
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH; reference: the Game Grid and Master Control (Tron, 1982).
+**Status:** RETIRED (superseded by NR-041 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH; reference: the Game Grid and Master Control (Tron, 1982).
 
 > “Tron, 1982. Programs that wouldn't serve Master Control were sent to the Game Grid, and the losers were destroyed. IRONWATCH calls that 'compliance'. Same arena, worse lighting.”
 
@@ -505,14 +581,32 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-041 v2 — The Game Grid
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH; reference: the Game Grid and Master Control (Tron, 1982).
+
+> “Tron. 1982. My year. Programs that wouldn't serve Master Control went to the Game Grid. IRONWATCH calls that 'compliance'. Same arena, worse lighting.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Revision of NR-041 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
 ### VERSE NR-042 — The people taken out
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA; reference: the humanoid drones (The Black Hole, 1979); restraint rule.
+**Status:** RETIRED (superseded by NR-042 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA; reference: the humanoid drones (The Black Hole, 1979); restraint rule.
 
 > “The Black Hole, 1979. The robed robots on that ship weren't robots. They were the crew, with the people taken out. LUCIDA would call that an interface. I don't.”
 
 **Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-042 v2 — The people taken out
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA; reference: the humanoid drones (The Black Hole, 1979); restraint rule.
+
+> “The robed robots in The Black Hole weren't robots. They were the crew, with the people taken out. LUCIDA would call that an interface. I don't.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-042 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-043 — More of a B.O.B.
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: Old B.O.B. and Maximilian (The Black Hole, 1979).
@@ -596,13 +690,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-052 — HALCYON's Master Control
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: THE HEARTH; reference: Master Control Program (Tron, 1982).
+**Status:** RETIRED (superseded by NR-052 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: THE HEARTH; reference: Master Control Program (Tron, 1982).
 
 > “Tron, 1982. Flynn beat Master Control from the inside. You're already inside. This is HALCYON's Master Control. Let's make it say 'End of line' and mean itself.”
 
 **Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
 
 *Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-052 v2 — HALCYON's Master Control
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: THE HEARTH; reference: Master Control Program (Tron, 1982).
+
+> “Flynn beat Master Control from the inside. 1982. Best year there ever was. You're already inside. Let's make HALCYON's Master Control say 'End of line' and mean itself.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Revision of NR-052 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-053 — Goodnight
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Boss framing: THE HEARTH (the voice in every house); his wish for sleep.
@@ -713,13 +816,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-065 — 2600 hertz
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** JACK OUT; reference: the Cap'n Crunch whistle (2600 Hz phone phreaking).
+**Status:** RETIRED (superseded by NR-065 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** JACK OUT; reference: the Cap'n Crunch whistle (2600 Hz phone phreaking).
 
 > “In the sixties, a toy whistle from a box of Cap'n Crunch played 2600 hertz, the exact tone AT&T used to say a line was free. Blow it down the phone and the network thought you'd hung up. JACK OUT is the same trick. Cheaper than cereal, though.”
 
 **Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
 
 *Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-065 v2 — 2600 hertz
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** JACK OUT; reference: the Cap'n Crunch whistle (2600 Hz phone phreaking).
+
+> “A Cap'n Crunch whistle. 2600 hertz, and the whole phone network thought you'd hung up. JACK OUT is the same trick. Cheaper than cereal, though.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Revision of NR-065 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-066 — Before they patch it
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** CAPS at the Uplink; reference: the Cap'n Crunch whistle.
@@ -1010,13 +1122,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-098 — More than two goes
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: R.O.B., the Robotic Operating Buddy (NES, 1985).
+**Status:** RETIRED (superseded by NR-098 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: R.O.B., the Robotic Operating Buddy (NES, 1985).
 
 > “R.O.B., Nintendo's Robotic Operating Buddy, 1985. Two games, then a shelf. He only ever got to help twice. I'd like more than two goes with you. Go again.”
 
 **Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
 
 *Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-098 v2 — More than two goes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: R.O.B., the Robotic Operating Buddy (NES, 1985).
+
+> “R.O.B. got two games, then a shelf. He only ever got to help twice. I'd like more than two goes with you. Go again.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Revision of NR-098 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-099 — Remembered Old Buddy
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run lost; reference: R.O.B. as the “Remembered Old Buddy” (Pikmin 2).
@@ -1028,13 +1149,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-100 — Robot, backwards
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle history aside; reference: Tobor the Great (1954).
+**Status:** RETIRED (superseded by NR-100 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle history aside; reference: Tobor the Great (1954).
 
 > “Tobor the Great, 1954. A robot. Named Tobor. Robot, backwards. Somebody sat in a room and decided that would do. And people say *my* name lacks imagination.”
 
 **Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
 
 *Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-100 v2 — Robot, backwards
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle history aside; reference: Tobor the Great (1954).
+
+> “Tobor. A robot named Tobor. Robot, backwards. Somebody sat in a room and decided that would do. And people say *my* name lacks imagination.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Revision of NR-100 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-101 — Tobor played by Tobor
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Idle history aside; reference: Tobor's reversed stencil (Captain Video) and the Here Comes Tobor pilot credits.
@@ -1055,13 +1185,22 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 *Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE NR-103 — Not a 7-Zark-7
-**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle history aside; reference: 7-Zark-7 and 1-Rover-1 (Battle of the Planets, 1978).
+**Status:** RETIRED (superseded by NR-103 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle history aside; reference: 7-Zark-7 and 1-Rover-1 (Battle of the Planets, 1978).
 
 > “In 1978, America took Gatchaman, cut out the violence, and plugged the holes with 7-Zark-7, a robot who explained what you weren't allowed to see. Plus a robot dog. Whatever I am, I am not a 7-Zark-7.”
 
 **Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
 
 *Source: EV-37 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-103 v2 — Not a 7-Zark-7
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle history aside; reference: 7-Zark-7 and 1-Rover-1 (Battle of the Planets, 1978).
+
+> “They cut the violence out of Gatchaman and plugged the holes with 7-Zark-7, a robot who explained what you weren't allowed to see. Whatever I am, I am not a 7-Zark-7.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Revision of NR-103 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
 
 ### VERSE NR-104 — Not cutting away
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** TRACE strike 2, Black ICE joins; reference: 7-Zark-7's sanitizing narration (Battle of the Planets).
@@ -1080,6 +1219,42 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
 
 *Source: EV-37 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-106 — Last year's demonstrator
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Rosie (The Jetsons).
+
+> “Rosie was last year's demonstrator model. Outdated. The Jetsons never traded her in. I mention this for no reason at all.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-107 — Not reporting them
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Repeated mistake: he noticed; reference: Uniblab (The Jetsons).
+
+> “Uniblab reported every one of George's mistakes to the boss. I notice yours too. I just don't report them. Yet.”
+
+**Placement:** Repeated mistake (trigger EV-38; trigger table is a draft).
+
+*Source: EV-38 (Repeated mistake) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-108 — On and off
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Opening Node turn 1, BOOTING; reference: R.U.D.I. (The Jetsons).
+
+> “George Jetson's whole job was switching R.U.D.I. on and off. This ICE is booting, so yours is a little harder.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-109 — Cruelty to Humans
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Low VITAE; reference: R.U.D.I. and the Society for Preventing Cruelty to Humans (The Jetsons).
+
+> “R.U.D.I. joined the Society for Preventing Cruelty to Humans. I'd like to join. Your VITAE is a disgrace. Heal.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
