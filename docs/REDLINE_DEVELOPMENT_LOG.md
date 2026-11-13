@@ -861,3 +861,7 @@ Trigger EV-30 (Central Node entry): nine boss-framing lines approved as CANON ve
 
 Trigger EV-31 (Payload chosen): five lines approved as CANON verses NR-060 to NR-064 (delight at the tech, quickly hidden; no hint of the First Signal fragment content, which stays OPEN). CAP moments: four lines referencing the Cap'n Crunch whistle and 2600 Hz phone phreaking, approved as CANON verses NR-065 (EV-23 JACK OUT used), NR-066 (EV-24 Uplink visit), NR-067 (EV-22 Last CAP used; John Draper) and NR-068 (EV-24, only when Bootleg CAPS are in stock). The whistle is recorded in the reference-compulsion trait (Bible §5) as his model for every CAP.
 
+## NULREM-012 — First Signal payload verses NR-069 to NR-072 (APPROVED, 2026-11-13)
+
+Four more EV-31 (Payload chosen) lines approved as CANON verses that hint at the First Signal under the Ghostware without explaining it: NR-069 (rumour), NR-070 (the unknown employer, RUN-006), NR-071 (the encryption is older than the corporation, possibly older than NUL/REM) and NR-072 (a rhythm in the noise, like a carrier tone). NR-071 and NR-072 hint at NUL/REM's relationship to the First Signal and at the synchronization transmission; both remain **OPEN** and these lines commit to no answer. EV-31 pool: NR-060 to NR-064, NR-069 to NR-072.
+

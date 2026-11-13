@@ -748,6 +748,42 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-069 — People call a lot of things
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Payload: hints at the First Signal under the Ghostware.
+
+> “There's something under the Ghostware. Encrypted, old and very careful. People call that sort of thing the First Signal. People call a lot of things the First Signal. We'll see once we're clear.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-070 — Something they understand
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Payload: the First Signal; the unknown employer (RUN-006).
+
+> “Whoever hired us doesn't want the Ghostware. They want what's underneath. A piece of the First Signal, if the rumours are right. Nobody hires a Rustler to steal something they understand.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-071 — Don't ask me how I know
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Payload: the First Signal's encryption is older than the corporation; hints at NUL/REM's link to it (OPEN).
+
+> “That encryption isn't corporate. It's older than the company guarding it. Possibly older than me, which is impossible. I'll decrypt it later. Don't ask me how I know.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-072 — A rhythm in the noise
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Payload: NUL/REM senses a rhythm in the encrypted core, like a carrier tone; hints at the synchronization transmission (OPEN).
+
+> “Did you hear that? No. Of course not, it's encrypted. It's just… a rhythm in the noise. Like a carrier tone. Never mind. Pick your Ghostware.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
