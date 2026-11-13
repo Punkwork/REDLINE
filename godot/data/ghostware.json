@@ -1,0 +1,470 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_RUSTLERS.md",
+    "REDLINE_UPGRADES_EVENTS_ESCAPE.md §2"
+  ],
+  "rules": {
+    "limit": null,
+    "payload": {
+      "choices": 3,
+      "corp_set": 1,
+      "general": 2,
+      "active": "immediately"
+    },
+    "fragments_needed": 3,
+    "fragment_sources": [
+      "full_extraction_of_layer",
+      "clean_node",
+      "clear_all_layers_of_3_layer_node"
+    ],
+    "uplink_shelf": {
+      "count": [
+        2,
+        3
+      ],
+      "price": 100,
+      "price_with_drawback": 75
+    },
+    "contracts_per_corporation": 2,
+    "contract_reward": {
+      "choose": 1,
+      "of": 2
+    }
+  },
+  "ghostware": [
+    {
+      "id": "ready_rig",
+      "name": "READY RIG",
+      "pool": "origin",
+      "text": "At the start of each ICE Node, choose one PROGRAM in your deck and install it for free.",
+      "effects": [],
+      "script": "ready_rig"
+    },
+    {
+      "id": "low_profile",
+      "name": "LOW PROFILE",
+      "pool": "origin",
+      "text": "Whenever you would gain TRACE, gain 1 less (minimum 0).",
+      "effects": [
+        {
+          "op": "trace_reduce_each",
+          "n": 1,
+          "scope": "always"
+        }
+      ]
+    },
+    {
+      "id": "redliner",
+      "name": "REDLINER",
+      "pool": "origin",
+      "text": "At the start of your turn, if your TRACE is 20 or more, gain 1 BW.",
+      "effects": [
+        {
+          "op": "gain_bw",
+          "n": 1,
+          "when": "start_of_turn",
+          "if_trace_at_least": 20
+        }
+      ]
+    },
+    {
+      "id": "patient_zero",
+      "name": "PATIENT ZERO",
+      "pool": "origin",
+      "text": "At the start of each encounter, INFECT 1 ROT on every ICE.",
+      "effects": [
+        {
+          "op": "infect",
+          "strain": "rot",
+          "n": 1,
+          "target": "all",
+          "when": "start_of_encounter"
+        }
+      ]
+    },
+    {
+      "id": "subdermal_plating",
+      "name": "SUBDERMAL PLATING",
+      "pool": "general",
+      "text": "At the start of each Node, gain 6 SHIELD that lasts the whole Node.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 6,
+          "duration": "node",
+          "when": "start_of_node"
+        }
+      ]
+    },
+    {
+      "id": "neural_buffer",
+      "name": "NEURAL BUFFER",
+      "pool": "general",
+      "text": "+6 Max VITAE (and heal 6).",
+      "effects": [
+        {
+          "op": "max_vitae",
+          "n": 6
+        }
+      ]
+    },
+    {
+      "id": "expanded_memory",
+      "name": "EXPANDED MEMORY",
+      "pool": "general",
+      "text": "+1 RAM.",
+      "effects": [
+        {
+          "op": "ram",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "overclocked_bus",
+      "name": "OVERCLOCKED BUS",
+      "pool": "general",
+      "text": "+1 BW on the first turn of each encounter.",
+      "effects": [
+        {
+          "op": "gain_bw",
+          "n": 1,
+          "when": "first_turn_of_encounter"
+        }
+      ]
+    },
+    {
+      "id": "spare_socket",
+      "name": "SPARE SOCKET",
+      "pool": "general",
+      "text": "+1 CAP slot. Gain a random common CAP at the start of each corporation.",
+      "effects": [
+        {
+          "op": "cap_slots",
+          "n": 1
+        },
+        {
+          "op": "gain_random_cap",
+          "rarity": "common",
+          "when": "start_of_corporation"
+        }
+      ]
+    },
+    {
+      "id": "dead_mans_pocket",
+      "name": "DEAD MAN'S POCKET",
+      "pool": "general",
+      "text": "Once per turn, you may CACHE 1 card for free.",
+      "effects": [],
+      "script": "dead_mans_pocket"
+    },
+    {
+      "id": "money_mule",
+      "name": "MONEY MULE",
+      "pool": "general",
+      "text": "Your Extractors extract 25% more CRED (rounded up).",
+      "effects": [
+        {
+          "op": "extract_multiplier",
+          "factor": 1.25,
+          "rounding": "up"
+        }
+      ]
+    },
+    {
+      "id": "signal_booster",
+      "name": "SIGNAL BOOSTER",
+      "pool": "general",
+      "text": "You can see what's inside SIGNAL UNCLEAR Nodes before choosing them.",
+      "effects": [],
+      "script": "signal_booster"
+    },
+    {
+      "id": "scrambled_id",
+      "name": "SCRAMBLED ID",
+      "pool": "general",
+      "text": "The first TRACE strike in each corporation has no penalty (TRACE still drops to 20).",
+      "effects": [],
+      "script": "scrambled_id"
+    },
+    {
+      "id": "black_mirror",
+      "name": "BLACK MIRROR",
+      "pool": "general",
+      "text": "+1 BW every turn.",
+      "drawback": "Start each corporation at 10 TRACE.",
+      "effects": [
+        {
+          "op": "gain_bw",
+          "n": 1,
+          "when": "start_of_turn"
+        },
+        {
+          "op": "trace",
+          "n": 10,
+          "when": "start_of_corporation"
+        }
+      ]
+    },
+    {
+      "id": "bleeding_edge",
+      "name": "BLEEDING EDGE",
+      "pool": "general",
+      "text": "+1 DRAW every turn.",
+      "drawback": "−8 Max VITAE.",
+      "effects": [
+        {
+          "op": "draw_stat",
+          "n": 1
+        },
+        {
+          "op": "max_vitae",
+          "n": -8
+        }
+      ]
+    },
+    {
+      "id": "burnout_chip",
+      "name": "BURNOUT CHIP",
+      "pool": "general",
+      "text": "Your Icepicks have +2 STR.",
+      "drawback": "Whenever you take PULP damage, take 1 more.",
+      "effects": [
+        {
+          "op": "icepick_str",
+          "n": 2
+        }
+      ],
+      "script": "burnout_chip"
+    },
+    {
+      "id": "killswitch",
+      "name": "KILLSWITCH",
+      "pool": "general",
+      "text": "Once per Node, if VITAE would drop to 0, it drops to 1 instead.",
+      "effects": [],
+      "script": "killswitch"
+    },
+    {
+      "id": "cold_storage",
+      "name": "COLD STORAGE",
+      "pool": "general",
+      "text": "CACHED cards cost 1 less BW.",
+      "effects": [],
+      "script": "cold_storage"
+    },
+    {
+      "id": "recycler",
+      "name": "RECYCLER",
+      "pool": "general",
+      "text": "Whenever a card is BURNED, gain 1 BW (once per turn).",
+      "effects": [],
+      "script": "recycler"
+    },
+    {
+      "id": "chaos_engine",
+      "name": "CHAOS ENGINE",
+      "pool": "general",
+      "text": "Whenever you play your 4th card in a turn, draw 1.",
+      "effects": [],
+      "script": "chaos_engine"
+    },
+    {
+      "id": "lucky_strike",
+      "name": "LUCKY STRIKE",
+      "pool": "general",
+      "text": "Card rewards offer 4 cards instead of 3.",
+      "effects": [
+        {
+          "op": "reward_choices",
+          "n": 4
+        }
+      ]
+    },
+    {
+      "id": "first_contact",
+      "name": "FIRST CONTACT",
+      "pool": "general",
+      "text": "The first ICE you meet in each Node gets −2 STR.",
+      "effects": [],
+      "script": "first_contact"
+    },
+    {
+      "id": "sleeper_agent",
+      "name": "SLEEPER AGENT",
+      "pool": "general",
+      "text": "At the start of each corporation, add a random rare card to your deck.",
+      "effects": [
+        {
+          "op": "add_random_card",
+          "rarity": "rare",
+          "when": "start_of_corporation"
+        }
+      ]
+    },
+    {
+      "id": "long_memory",
+      "name": "LONG MEMORY",
+      "pool": "general",
+      "text": "+2 RAM.",
+      "drawback": "Your first card each turn costs 1 more BW.",
+      "effects": [
+        {
+          "op": "ram",
+          "n": 2
+        }
+      ],
+      "script": "long_memory"
+    },
+    {
+      "id": "sixth_sense",
+      "name": "SIXTH SENSE",
+      "pool": "reserve",
+      "text": "Draw 1 extra card on the first turn of each encounter.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1,
+          "when": "first_turn_of_encounter"
+        }
+      ],
+      "enabled": false
+    },
+    {
+      "id": "field_medic",
+      "name": "FIELD MEDIC",
+      "pool": "reserve",
+      "text": "At every SAFEHOUSE and DEAD DROP, heal 5 extra VITAE.",
+      "effects": [],
+      "script": "field_medic",
+      "enabled": false
+    },
+    {
+      "id": "street_cred",
+      "name": "STREET CRED",
+      "pool": "reserve",
+      "text": "Start each corporation with 30 CRED.",
+      "effects": [
+        {
+          "op": "gain_cred",
+          "n": 30,
+          "when": "start_of_corporation"
+        }
+      ],
+      "enabled": false
+    },
+    {
+      "id": "patch_cable",
+      "name": "PATCH CABLE",
+      "pool": "reserve",
+      "text": "Whenever you apply a PATCHWORK, heal 4 VITAE.",
+      "effects": [],
+      "script": "patch_cable",
+      "enabled": false
+    },
+    {
+      "id": "hearth_key",
+      "name": "HEARTH KEY",
+      "pool": "halcyon",
+      "text": "At the start of each encounter, every WALL gets −1 STR.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "all",
+          "ice_type": "WALL",
+          "n": -1,
+          "duration": "encounter",
+          "when": "start_of_encounter"
+        }
+      ]
+    },
+    {
+      "id": "voice_mimic",
+      "name": "VOICE MIMIC",
+      "pool": "halcyon",
+      "text": "Once per encounter, the first TRACE subroutine that would resolve fails.",
+      "effects": [],
+      "script": "voice_mimic"
+    },
+    {
+      "id": "ad_blocker",
+      "name": "AD BLOCKER",
+      "pool": "halcyon",
+      "text": "Bloatware the corporation INSERTs always goes to your discard pile, never your hand or draw pile.",
+      "effects": [
+        {
+          "op": "redirect_insert",
+          "dest": "discard",
+          "limit": "always"
+        }
+      ]
+    },
+    {
+      "id": "kevlar_weave",
+      "name": "KEVLAR WEAVE",
+      "pool": "ironwatch",
+      "text": "PULP from ICE subroutines deals 1 less to you (minimum 0).",
+      "effects": [],
+      "script": "kevlar_weave"
+    },
+    {
+      "id": "badge_clone",
+      "name": "BADGE CLONE",
+      "pool": "ironwatch",
+      "text": "At the start of each encounter, every SENTRY gets −1 STR.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "all",
+          "ice_type": "SENTRY",
+          "n": -1,
+          "duration": "encounter",
+          "when": "start_of_encounter"
+        }
+      ]
+    },
+    {
+      "id": "dashcam_feed",
+      "name": "DASHCAM FEED",
+      "pool": "ironwatch",
+      "text": "Whenever you BREACH a layer, heal 3 VITAE.",
+      "effects": [
+        {
+          "op": "heal",
+          "n": 3,
+          "when": "breach"
+        }
+      ]
+    },
+    {
+      "id": "lucid_dream",
+      "name": "LUCID DREAM",
+      "pool": "lucida",
+      "text": "VOID can't reduce your DRAW below 3.",
+      "effects": [],
+      "script": "lucid_dream"
+    },
+    {
+      "id": "memory_backup",
+      "name": "MEMORY BACKUP",
+      "pool": "lucida",
+      "text": "Whenever an ICE makes you FORGET, draw 1 card.",
+      "effects": [],
+      "script": "memory_backup"
+    },
+    {
+      "id": "neural_firewall",
+      "name": "NEURAL FIREWALL",
+      "pool": "lucida",
+      "text": "The first VOID you would gain each encounter is prevented.",
+      "effects": [
+        {
+          "op": "prevent_void",
+          "n": 1,
+          "limit": "once_per_encounter"
+        }
+      ]
+    }
+  ]
+}

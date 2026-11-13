@@ -1,0 +1,2027 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_RUSTLERS.md",
+    "REDLINE_CARD_POOLS.md",
+    "REDLINE_ICE_CORP1.md",
+    "REDLINE_UPGRADES_EVENTS_ESCAPE.md"
+  ],
+  "cards": [
+    {
+      "id": "pulp_shield",
+      "name": "PULP Shield",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "basic",
+      "rarity": "basic",
+      "cost_bw": 1,
+      "text": "+3 SHIELD.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 3
+        }
+      ],
+      "fused": {
+        "id": "pulp_bulwark",
+        "name": "PULP BULWARK",
+        "text": "+5 SHIELD.",
+        "effects": [
+          {
+            "op": "shield",
+            "n": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "probe",
+      "name": "PROBE",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "shared",
+      "pool": "basic",
+      "rarity": "basic",
+      "cost_bw": 1,
+      "text": "Target ICE: −2 STR this encounter.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "target",
+          "n": -2,
+          "duration": "encounter"
+        }
+      ],
+      "fused": {
+        "id": "needle_probe",
+        "name": "NEEDLE PROBE",
+        "text": "Target ICE: −3 STR this encounter.",
+        "effects": [
+          {
+            "op": "ice_str",
+            "target": "target",
+            "n": -3,
+            "duration": "encounter"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ghost_signal",
+      "name": "GHOST SIGNAL",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "basic",
+      "rarity": "basic",
+      "cost_bw": 2,
+      "burned_after_use": true,
+      "text": "The first TRACE added in the next Corporation Response becomes 0. BURNED for the rest of the Node.",
+      "effects": [
+        {
+          "op": "trace_reduce_next",
+          "scope": "next_corp_response",
+          "amount": "all"
+        }
+      ]
+    },
+    {
+      "id": "basic_extractor",
+      "name": "Basic Extractor",
+      "type": "PROGRAM",
+      "tags": [
+        "EXTRACTOR"
+      ],
+      "owner": "shared",
+      "pool": "basic",
+      "rarity": "basic",
+      "cost_bw": 1,
+      "ram": 1,
+      "extractor": {
+        "cred": 5
+      },
+      "text": "End of your turn: extract 5 CRED.",
+      "effects": []
+    },
+    {
+      "id": "scrub",
+      "name": "SCRUB",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "−4 TRACE.",
+      "effects": [
+        {
+          "op": "trace",
+          "n": -4
+        }
+      ]
+    },
+    {
+      "id": "icepick_wall",
+      "name": "WALL Icepick",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "generalist",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "WALL",
+        "str": 1,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1,
+        "free_first_break_each_turn": true
+      },
+      "text": "STR 1. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break.",
+      "effects": []
+    },
+    {
+      "id": "icepick_code_gate",
+      "name": "CODE GATE Icepick",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "generalist",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "CODE GATE",
+        "str": 3,
+        "boost_bw": 2,
+        "boost_str": 1,
+        "break_bw": 1
+      },
+      "text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW.",
+      "effects": []
+    },
+    {
+      "id": "icepick_sentry",
+      "name": "SENTRY Icepick",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "generalist",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "SENTRY",
+        "str": 0,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1
+      },
+      "text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW.",
+      "effects": []
+    },
+    {
+      "id": "void_buffer",
+      "name": "VOID BUFFER",
+      "type": "PROGRAM",
+      "tags": [],
+      "owner": "generalist",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "text": "Once per encounter, prevent 1 VOID.",
+      "effects": [
+        {
+          "op": "prevent_void",
+          "n": 1,
+          "limit": "once_per_encounter"
+        }
+      ]
+    },
+    {
+      "id": "hush",
+      "name": "HUSH",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "echo",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "CODE GATE",
+        "str": 3,
+        "boost_bw": 2,
+        "boost_str": 1,
+        "break_bw": 1
+      },
+      "text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW.",
+      "effects": []
+    },
+    {
+      "id": "backdoor",
+      "name": "BACKDOOR",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "echo",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 3,
+      "text": "Break 1 subroutine on any ICE with STR 3 or less.",
+      "effects": [
+        {
+          "op": "break",
+          "scope": "any_type",
+          "max_ice_str": 3,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "slow_drip",
+      "name": "SLOW DRIP",
+      "type": "PROGRAM",
+      "tags": [
+        "EXTRACTOR"
+      ],
+      "owner": "echo",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "extractor": {
+        "cred": 3,
+        "cred_if_no_trace_this_encounter": 6
+      },
+      "text": "End of your turn: extract 3 CRED. If you have gained no TRACE this encounter, extract 6 instead.",
+      "effects": []
+    },
+    {
+      "id": "smokescreen",
+      "name": "SMOKESCREEN",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "echo",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "text": "+2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 2
+        },
+        {
+          "op": "trace_reduce_next",
+          "scope": "next_corp_response",
+          "amount": 2
+        }
+      ],
+      "fused": {
+        "id": "black_fog",
+        "name": "BLACK FOG",
+        "text": "+3 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 3.",
+        "effects": [
+          {
+            "op": "shield",
+            "n": 3
+          },
+          {
+            "op": "trace_reduce_next",
+            "scope": "next_corp_response",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "dead_air",
+      "name": "DEAD AIR",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "echo",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 0,
+      "text": "CACHE 1 card in your hand.",
+      "effects": [
+        {
+          "op": "cache",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "sledge",
+      "name": "SLEDGE",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "riot",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "WALL",
+        "str": 2,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1,
+        "free_first_break_each_turn": true,
+        "break_trace": 1
+      },
+      "text": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. Each break: +1 TRACE.",
+      "effects": []
+    },
+    {
+      "id": "brute_force",
+      "name": "BRUTE FORCE",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "riot",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "trace": 4,
+      "text": "Break 1 subroutine on any ICE with STR 4 or less.",
+      "effects": [
+        {
+          "op": "break",
+          "scope": "any_type",
+          "max_ice_str": 4,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "overload",
+      "name": "OVERLOAD",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "riot",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 0,
+      "trace": 2,
+      "text": "Target ICE: −2 STR this encounter.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "target",
+          "n": -2,
+          "duration": "encounter"
+        }
+      ],
+      "fused": {
+        "id": "meltdown",
+        "name": "MELTDOWN",
+        "text": "Target ICE: −3 STR this encounter.",
+        "effects": [
+          {
+            "op": "ice_str",
+            "target": "target",
+            "n": -3,
+            "duration": "encounter"
+          }
+        ]
+      }
+    },
+    {
+      "id": "feedback",
+      "name": "FEEDBACK",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "riot",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 2,
+      "text": "Target ICE: −1 STR this encounter for every 10 TRACE you have.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "target",
+          "n_per_10_trace": -1,
+          "duration": "encounter"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_spike",
+      "name": "ADRENAL SPIKE",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "riot",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 0,
+      "trace": 2,
+      "text": "Gain 1 BW.",
+      "effects": [
+        {
+          "op": "gain_bw",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "lay_low",
+      "name": "LAY LOW",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "riot",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "text": "−3 TRACE.",
+      "effects": [
+        {
+          "op": "trace",
+          "n": -3
+        }
+      ]
+    },
+    {
+      "id": "smash_and_grab",
+      "name": "SMASH & GRAB",
+      "type": "PROGRAM",
+      "tags": [
+        "EXTRACTOR"
+      ],
+      "owner": "riot",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "extractor": {
+        "cred": 8,
+        "trace_per_extract": 2
+      },
+      "text": "End of your turn: extract 8 CRED, +2 TRACE.",
+      "effects": []
+    },
+    {
+      "id": "stinger",
+      "name": "STINGER",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "vector",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "SENTRY",
+        "str": 0,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1,
+        "on_break": [
+          {
+            "op": "infect",
+            "strain": "rot",
+            "n": 1,
+            "target": "broken_ice"
+          }
+        ]
+      },
+      "text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. Each break also INFECTs 1 ROT on that ICE.",
+      "effects": []
+    },
+    {
+      "id": "runtime_error",
+      "name": "RUNTIME ERROR",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT",
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 2,
+      "trace": 1,
+      "text": "Break 1 subroutine on any ICE with 2 or more virus counters.",
+      "effects": [
+        {
+          "op": "break",
+          "scope": "any_type",
+          "min_virus_counters": 2,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "inject",
+      "name": "INJECT",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT",
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "text": "INFECT 2 ROT.",
+      "effects": [
+        {
+          "op": "infect",
+          "strain": "rot",
+          "n": 2,
+          "target": "target"
+        }
+      ],
+      "fused": {
+        "id": "megadose",
+        "name": "MEGADOSE",
+        "text": "INFECT 3 ROT.",
+        "effects": [
+          {
+            "op": "infect",
+            "strain": "rot",
+            "n": 3,
+            "target": "target"
+          }
+        ]
+      }
+    },
+    {
+      "id": "replicator",
+      "name": "REPLICATOR",
+      "type": "PROGRAM",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 1,
+      "ram": 1,
+      "text": "Start of your turn: on every ICE with virus counters, add 1 counter of each strain already on it.",
+      "effects": [],
+      "script": "replicator"
+    },
+    {
+      "id": "outbreak",
+      "name": "OUTBREAK",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "starter",
+      "rarity": "starter",
+      "cost_bw": 2,
+      "text": "Double the counters of every strain on target ICE.",
+      "effects": [
+        {
+          "op": "double_virus",
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "id": "battering_ram",
+      "name": "BATTERING RAM",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "WALL",
+        "str": 3,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1,
+        "free_first_break_each_turn": true
+      },
+      "text": "STR 3. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break.",
+      "effects": []
+    },
+    {
+      "id": "jackhammer",
+      "name": "JACKHAMMER",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "WALL",
+        "str": 2,
+        "boost_bw": 1,
+        "boost_str": 2,
+        "break_bw": 1,
+        "free_first_break_each_turn": true
+      },
+      "text": "STR 2. Boost: 1 BW → +2 STR. First break each turn free; then 1 BW.",
+      "effects": []
+    },
+    {
+      "id": "passkey",
+      "name": "PASSKEY",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "CODE GATE",
+        "str": 3,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1
+      },
+      "text": "STR 3. Boost: 1 BW → +1 STR. Break: 1 BW.",
+      "effects": []
+    },
+    {
+      "id": "rainbow_table",
+      "name": "RAINBOW TABLE",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "CODE GATE",
+        "str": 2,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1,
+        "subroutines_per_break": 2
+      },
+      "text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW for up to 2 subroutines on the same ICE.",
+      "effects": []
+    },
+    {
+      "id": "taser",
+      "name": "TASER",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "SENTRY",
+        "str": 2,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1
+      },
+      "text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW.",
+      "effects": []
+    },
+    {
+      "id": "stun_baton",
+      "name": "STUN BATON",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "SENTRY",
+        "str": 2,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 1,
+        "on_break": [
+          {
+            "op": "shield",
+            "n": 2
+          }
+        ]
+      },
+      "text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Each break: +2 SHIELD.",
+      "effects": []
+    },
+    {
+      "id": "skeleton_key",
+      "name": "SKELETON KEY",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "ram": 2,
+      "icepick": {
+        "ice_type": "ANY",
+        "str": 3,
+        "boost_bw": 2,
+        "boost_str": 1,
+        "break_bw": 1
+      },
+      "text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on WALL, CODE GATE and SENTRY.",
+      "effects": []
+    },
+    {
+      "id": "data_siphon",
+      "name": "DATA SIPHON",
+      "type": "PROGRAM",
+      "tags": [
+        "EXTRACTOR"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "ram": 1,
+      "extractor": {
+        "cred": 6
+      },
+      "text": "End of your turn: extract 6 CRED.",
+      "effects": []
+    },
+    {
+      "id": "skimmer",
+      "name": "SKIMMER",
+      "type": "PROGRAM",
+      "tags": [
+        "EXTRACTOR"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 0,
+      "ram": 1,
+      "extractor": {
+        "cred": 4
+      },
+      "text": "When installed: extract 4 CRED. End of your turn: extract 4 CRED.",
+      "effects": [
+        {
+          "op": "extract",
+          "n": 4,
+          "when": "installed"
+        }
+      ]
+    },
+    {
+      "id": "payday",
+      "name": "PAYDAY",
+      "type": "SCRIPT",
+      "tags": [
+        "EXTRACTOR",
+        "EXPLOIT"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 1,
+      "trace": 2,
+      "text": "Extract 12 CRED now.",
+      "effects": [
+        {
+          "op": "extract",
+          "n": 12
+        }
+      ]
+    },
+    {
+      "id": "hardened_shell",
+      "name": "HARDENED SHELL",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 2,
+      "text": "+7 SHIELD.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 7
+        }
+      ]
+    },
+    {
+      "id": "flinch",
+      "name": "FLINCH",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 0,
+      "burned_after_use": true,
+      "text": "+2 SHIELD. BURNED.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "mirror",
+      "name": "MIRROR",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "+3 SHIELD. Draw 1.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 3
+        },
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "surge_protector",
+      "name": "SURGE PROTECTOR",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "Start of each of your turns: +2 SHIELD.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 2,
+          "when": "start_of_turn"
+        }
+      ]
+    },
+    {
+      "id": "failsafe",
+      "name": "FAILSAFE",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "text": "The first time each encounter you would gain VOID, prevent all of it.",
+      "effects": [
+        {
+          "op": "prevent_void",
+          "n": "all",
+          "limit": "first_each_encounter"
+        }
+      ]
+    },
+    {
+      "id": "deep_probe",
+      "name": "DEEP PROBE",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 2,
+      "text": "Target ICE: −4 STR this encounter.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "target",
+          "n": -4,
+          "duration": "encounter"
+        }
+      ]
+    },
+    {
+      "id": "stress_test",
+      "name": "STRESS TEST",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "Every ICE: −1 STR this encounter.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "all",
+          "n": -1,
+          "duration": "encounter"
+        }
+      ]
+    },
+    {
+      "id": "keylogger",
+      "name": "KEYLOGGER",
+      "type": "PROGRAM",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "text": "Start of your turn: choose an ICE; it gets −1 STR this encounter.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "choose",
+          "n": -1,
+          "duration": "encounter",
+          "when": "start_of_turn"
+        }
+      ]
+    },
+    {
+      "id": "logic_bomb",
+      "name": "LOGIC BOMB",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 3,
+      "burned_after_use": true,
+      "text": "Target ICE's STR becomes 0 until the end of your turn. BURNED.",
+      "effects": [
+        {
+          "op": "ice_str_set",
+          "target": "target",
+          "value": 0,
+          "duration": "turn"
+        }
+      ]
+    },
+    {
+      "id": "defrag",
+      "name": "DEFRAG",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 0,
+      "text": "Draw 1.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "stash",
+      "name": "STASH",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "CACHE up to 2 cards in your hand.",
+      "effects": [
+        {
+          "op": "cache",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "stim_patch",
+      "name": "STIM PATCH",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 0,
+      "trace": 2,
+      "text": "Draw 2.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "burst",
+      "name": "BURST",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 0,
+      "burned_after_use": true,
+      "text": "Gain 1 BW. BURNED.",
+      "effects": [
+        {
+          "op": "gain_bw",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "co_processor",
+      "name": "CO-PROCESSOR",
+      "type": "PROGRAM",
+      "tags": [
+        "HARDWARE"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 2,
+      "ram": 0,
+      "text": "+1 RAM.",
+      "effects": [
+        {
+          "op": "ram",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "quantum_core",
+      "name": "QUANTUM CORE",
+      "type": "PROGRAM",
+      "tags": [
+        "HARDWARE"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "ram": 1,
+      "text": "Start of your turn: gain 1 BW.",
+      "effects": [
+        {
+          "op": "gain_bw",
+          "n": 1,
+          "when": "start_of_turn"
+        }
+      ]
+    },
+    {
+      "id": "proxy_chain",
+      "name": "PROXY CHAIN",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "Whenever you would gain TRACE during a Corporation Response, gain 1 less.",
+      "effects": [
+        {
+          "op": "trace_reduce_each",
+          "n": 1,
+          "scope": "corp_response"
+        }
+      ]
+    },
+    {
+      "id": "burn_notice",
+      "name": "BURN NOTICE",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "burned_after_use": true,
+      "text": "Halve your TRACE (round down). BURNED.",
+      "effects": [
+        {
+          "op": "trace_halve"
+        }
+      ]
+    },
+    {
+      "id": "spam_filter",
+      "name": "SPAM FILTER",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "The first Bloatware the corporation would INSERT each encounter goes to your discard pile instead.",
+      "effects": [
+        {
+          "op": "redirect_insert",
+          "dest": "discard",
+          "limit": "first_each_encounter"
+        }
+      ]
+    },
+    {
+      "id": "uninstaller",
+      "name": "UNINSTALLER",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "Choose a Bloatware in your hand: it's BURNED. Draw 1.",
+      "effects": [
+        {
+          "op": "burn_bloatware",
+          "n": 1
+        },
+        {
+          "op": "draw",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "patch_kit",
+      "name": "PATCH KIT",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "shared",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "burned_after_use": true,
+      "text": "Heal 4 VITAE. BURNED.",
+      "effects": [
+        {
+          "op": "heal",
+          "n": 4
+        }
+      ]
+    },
+    {
+      "id": "field_kit",
+      "name": "FIELD KIT",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "Search your draw pile for a PROGRAM and put it in your hand.",
+      "effects": [
+        {
+          "op": "tutor",
+          "card_type": "PROGRAM"
+        }
+      ]
+    },
+    {
+      "id": "toolbelt",
+      "name": "TOOLBELT",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "Your first Icepick boost each turn costs 0 BW.",
+      "effects": [],
+      "script": "toolbelt"
+    },
+    {
+      "id": "balanced_load",
+      "name": "BALANCED LOAD",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK",
+        "EXPLOIT"
+      ],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "+2 SHIELD. Target ICE: −1 STR this encounter.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 2
+        },
+        {
+          "op": "ice_str",
+          "target": "target",
+          "n": -1,
+          "duration": "encounter"
+        }
+      ]
+    },
+    {
+      "id": "hot_swap",
+      "name": "HOT SWAP",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 0,
+      "text": "Unload one of your PROGRAMS, then install a PROGRAM from your hand for 0 BW.",
+      "effects": [],
+      "script": "hot_swap"
+    },
+    {
+      "id": "adapter",
+      "name": "ADAPTER",
+      "type": "PROGRAM",
+      "tags": [],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "text": "Your Icepicks can break subroutines on any ICE type, for +1 BW per break.",
+      "effects": [],
+      "script": "adapter"
+    },
+    {
+      "id": "ram_upgrade",
+      "name": "RAM UPGRADE",
+      "type": "PROGRAM",
+      "tags": [
+        "HARDWARE"
+      ],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 0,
+      "text": "+1 RAM.",
+      "effects": [
+        {
+          "op": "ram",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "ready_stance",
+      "name": "READY STANCE",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 2,
+      "text": "On the first turn of each encounter, draw 1 extra card.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 1,
+          "when": "first_turn_of_encounter"
+        }
+      ]
+    },
+    {
+      "id": "multitool",
+      "name": "MULTITOOL",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "ANY",
+        "str": 2,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 2
+      },
+      "text": "STR 2. Boost: 1 BW → +1 STR. Break: 2 BW.",
+      "effects": []
+    },
+    {
+      "id": "jack_of_all_trades",
+      "name": "JACK OF ALL TRADES",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "generalist",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "text": "If you have a WALL, a CODE GATE and a SENTRY Icepick installed: on every ICE, break 1 subroutine for 0 BW using your matching Icepick. Each Icepick still needs enough STR.",
+      "effects": [],
+      "script": "jack_of_all_trades"
+    },
+    {
+      "id": "muffle",
+      "name": "MUFFLE",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 0,
+      "text": "−2 TRACE.",
+      "effects": [
+        {
+          "op": "trace",
+          "n": -2
+        }
+      ]
+    },
+    {
+      "id": "ghost_step",
+      "name": "GHOST STEP",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "Draw 2.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "patience",
+      "name": "PATIENCE",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "+4 SHIELD if you've gained no TRACE this encounter; otherwise +2 SHIELD.",
+      "effects": [],
+      "script": "patience"
+    },
+    {
+      "id": "decoy_signal",
+      "name": "DECOY SIGNAL",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "Until the end of your turn, SENTRY reactive abilities do nothing.",
+      "effects": [
+        {
+          "op": "suppress_abilities",
+          "ice_type": "SENTRY",
+          "duration": "turn"
+        }
+      ]
+    },
+    {
+      "id": "silent_partner",
+      "name": "SILENT PARTNER",
+      "type": "PROGRAM",
+      "tags": [
+        "EXTRACTOR"
+      ],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "extractor": {
+        "cred_per_cloak_played": 2
+      },
+      "text": "End of your turn: extract 2 CRED for each CLOAK card you played this turn.",
+      "effects": []
+    },
+    {
+      "id": "long_game",
+      "name": "LONG GAME",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "While your TRACE is under 10, your Extractors extract +2 CRED each.",
+      "effects": [],
+      "script": "long_game"
+    },
+    {
+      "id": "vanish",
+      "name": "VANISH",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 2,
+      "burned_after_use": true,
+      "text": "During the next Corporation Response, TRACE effects add nothing. BURNED.",
+      "effects": [
+        {
+          "op": "trace_block",
+          "scope": "next_corp_response"
+        }
+      ]
+    },
+    {
+      "id": "side_channel",
+      "name": "SIDE CHANNEL",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "ANY",
+        "str": 3,
+        "boost_bw": 2,
+        "boost_str": 1,
+        "break_bw": 2
+      },
+      "text": "STR 3. Boost: 2 BW → +1 STR. Break: 2 BW.",
+      "effects": []
+    },
+    {
+      "id": "blackout",
+      "name": "BLACKOUT",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "echo",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 3,
+      "burned_after_use": true,
+      "text": "Skip the next Corporation Response. BURNED.",
+      "effects": [
+        {
+          "op": "skip_corp_response"
+        }
+      ]
+    },
+    {
+      "id": "smash",
+      "name": "SMASH",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 0,
+      "trace": 3,
+      "text": "Target WALL: −4 STR this encounter.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "target",
+          "ice_type": "WALL",
+          "n": -4,
+          "duration": "encounter"
+        }
+      ]
+    },
+    {
+      "id": "roar",
+      "name": "ROAR",
+      "type": "SCRIPT",
+      "tags": [],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 0,
+      "trace": 3,
+      "text": "Draw 2.",
+      "effects": [
+        {
+          "op": "draw",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "crash_cart",
+      "name": "CRASH CART",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "−3 TRACE. +2 SHIELD.",
+      "effects": [
+        {
+          "op": "trace",
+          "n": -3
+        },
+        {
+          "op": "shield",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "pain_tolerance",
+      "name": "PAIN TOLERANCE",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "Start of your turn: if your TRACE is 20 or more, +2 SHIELD.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 2,
+          "when": "start_of_turn",
+          "if_trace_at_least": 20
+        }
+      ]
+    },
+    {
+      "id": "berserk",
+      "name": "BERSERK",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "While your TRACE is 20 or more, your EXPLOIT SCRIPTS cost 1 less BW (minimum 0).",
+      "effects": [],
+      "script": "berserk"
+    },
+    {
+      "id": "wrecking_ball",
+      "name": "WRECKING BALL",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "CODE GATE",
+        "str": 3,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 0,
+        "break_trace": 2
+      },
+      "text": "STR 3. Boost: 1 BW → +1 STR. Break: 0 BW, +2 TRACE.",
+      "effects": []
+    },
+    {
+      "id": "chainsaw",
+      "name": "CHAINSAW",
+      "type": "PROGRAM",
+      "tags": [
+        "ICEPICK"
+      ],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "ram": 1,
+      "icepick": {
+        "ice_type": "SENTRY",
+        "str": 2,
+        "boost_bw": 1,
+        "boost_str": 1,
+        "break_bw": 0,
+        "break_trace": 2
+      },
+      "text": "STR 2. Boost: 1 BW → +1 STR. Break: 0 BW, +2 TRACE.",
+      "effects": []
+    },
+    {
+      "id": "flashpoint",
+      "name": "FLASHPOINT",
+      "type": "SCRIPT",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "trace": 5,
+      "text": "Break 1 subroutine on every ICE with STR 3 or less.",
+      "effects": [
+        {
+          "op": "break",
+          "scope": "any_type",
+          "max_ice_str": 3,
+          "count": 1,
+          "target": "each_ice"
+        }
+      ]
+    },
+    {
+      "id": "no_witnesses",
+      "name": "NO WITNESSES",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "riot",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 1,
+      "burned_after_use": true,
+      "text": "If your TRACE is 30 or more, set it to 10. BURNED.",
+      "effects": [
+        {
+          "op": "trace_set",
+          "value": 10,
+          "if_trace_at_least": 30
+        }
+      ]
+    },
+    {
+      "id": "scrambler",
+      "name": "SCRAMBLER",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "INFECT 2 SCRAMBLE. (Each SCRAMBLE counter: this ICE's PULP subroutines deal 1 less.)",
+      "effects": [
+        {
+          "op": "infect",
+          "strain": "scramble",
+          "n": 2,
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "id": "blindfold",
+      "name": "BLINDFOLD",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "INFECT 2 BLIND. (Each BLIND counter: this ICE's TRACE subroutines add 1 less.)",
+      "effects": [
+        {
+          "op": "infect",
+          "strain": "blind",
+          "n": 2,
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "id": "leechware",
+      "name": "LEECHWARE",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "INFECT 2 LEECH. (Each LEECH counter: extract 1 CRED at the start of your turn.)",
+      "effects": [
+        {
+          "op": "infect",
+          "strain": "leech",
+          "n": 2,
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "id": "quarantine",
+      "name": "QUARANTINE",
+      "type": "SCRIPT",
+      "tags": [
+        "CLOAK"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "common",
+      "cost_bw": 1,
+      "text": "+1 SHIELD for each virus counter on target ICE (maximum +6).",
+      "effects": [
+        {
+          "op": "shield",
+          "n_per_virus_counter": 1,
+          "max": 6,
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "id": "wormhole",
+      "name": "WORMHOLE",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "INFECT 1 WORM and 1 ROT.",
+      "effects": [
+        {
+          "op": "infect",
+          "strain": "worm",
+          "n": 1,
+          "target": "target"
+        },
+        {
+          "op": "infect",
+          "strain": "rot",
+          "n": 1,
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "id": "cocktail",
+      "name": "COCKTAIL",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 2,
+      "text": "INFECT 1 of each strain (ROT, SCRAMBLE, BLIND, LEECH, WORM).",
+      "effects": [
+        {
+          "op": "infect",
+          "strain": "rot",
+          "n": 1,
+          "target": "target"
+        },
+        {
+          "op": "infect",
+          "strain": "scramble",
+          "n": 1,
+          "target": "target"
+        },
+        {
+          "op": "infect",
+          "strain": "blind",
+          "n": 1,
+          "target": "target"
+        },
+        {
+          "op": "infect",
+          "strain": "leech",
+          "n": 1,
+          "target": "target"
+        },
+        {
+          "op": "infect",
+          "strain": "worm",
+          "n": 1,
+          "target": "target"
+        }
+      ]
+    },
+    {
+      "id": "incubator",
+      "name": "INCUBATOR",
+      "type": "PROTOCOL",
+      "tags": [],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "uncommon",
+      "cost_bw": 1,
+      "text": "Whenever a PURGE removes virus counters from an ICE, INFECT 2 ROT on that ICE afterward.",
+      "effects": [],
+      "script": "incubator"
+    },
+    {
+      "id": "pandemic",
+      "name": "PANDEMIC",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 3,
+      "text": "Copy all virus counters on target ICE onto every other ICE.",
+      "effects": [
+        {
+          "op": "copy_virus",
+          "from": "target",
+          "to": "all_other"
+        }
+      ]
+    },
+    {
+      "id": "host_takeover",
+      "name": "HOST TAKEOVER",
+      "type": "SCRIPT",
+      "tags": [
+        "VIRUS",
+        "EXPLOIT"
+      ],
+      "owner": "vector",
+      "pool": "reward",
+      "rarity": "rare",
+      "cost_bw": 2,
+      "text": "Break 2 subroutines on target ICE with 5 or more virus counters.",
+      "effects": [
+        {
+          "op": "break",
+          "scope": "any_type",
+          "min_virus_counters": 5,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "spam",
+      "name": "SPAM",
+      "type": "BLOATWARE",
+      "tags": [],
+      "owner": "corporation",
+      "pool": "bloatware",
+      "rarity": "special",
+      "cost_bw": 1,
+      "burned_after_use": true,
+      "text": "Can't be played normally. Pay 1 BW to clear it: it's BURNED for the rest of the Node.",
+      "effects": [],
+      "script": "spam"
+    },
+    {
+      "id": "tracer",
+      "name": "TRACER",
+      "type": "BLOATWARE",
+      "tags": [],
+      "owner": "corporation",
+      "pool": "bloatware",
+      "rarity": "special",
+      "cost_bw": null,
+      "text": "Can't be played. If TRACER is in your hand at the end of your turn: +3 TRACE.",
+      "effects": [
+        {
+          "op": "trace",
+          "n": 3,
+          "when": "end_of_turn_in_hand"
+        }
+      ]
+    },
+    {
+      "id": "citation",
+      "name": "CITATION",
+      "type": "BLOATWARE",
+      "tags": [],
+      "owner": "corporation",
+      "pool": "bloatware",
+      "rarity": "special",
+      "cost_bw": 1,
+      "burned_after_use": true,
+      "text": "Pay 1 BW to clear it: it's BURNED for the rest of the Node. If CITATION is in your hand at the end of your turn: PULP 2.",
+      "effects": [
+        {
+          "op": "pulp",
+          "n": 2,
+          "when": "end_of_turn_in_hand"
+        }
+      ]
+    },
+    {
+      "id": "intrusive_thought",
+      "name": "INTRUSIVE THOUGHT",
+      "type": "BLOATWARE",
+      "tags": [],
+      "owner": "corporation",
+      "pool": "bloatware",
+      "rarity": "special",
+      "cost_bw": 1,
+      "burned_after_use": true,
+      "text": "Pay 1 BW to clear it: it's BURNED for the rest of the Node. If INTRUSIVE THOUGHT is in your hand at the end of your turn: VOID 1.",
+      "effects": [
+        {
+          "op": "void",
+          "n": 1,
+          "when": "end_of_turn_in_hand"
+        }
+      ]
+    }
+  ]
+}

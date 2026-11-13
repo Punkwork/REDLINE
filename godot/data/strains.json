@@ -1,0 +1,70 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_RUSTLERS.md §2"
+  ],
+  "strains": [
+    {
+      "id": "rot",
+      "name": "ROT",
+      "timing": "constant",
+      "per_counter": [
+        {
+          "op": "ice_str",
+          "n": -1,
+          "min": 0
+        }
+      ],
+      "text": "−1 STR (minimum 0)."
+    },
+    {
+      "id": "scramble",
+      "name": "SCRAMBLE",
+      "timing": "when_ice_acts",
+      "per_counter": [
+        {
+          "op": "reduce_ice_pulp",
+          "n": 1
+        }
+      ],
+      "text": "This ICE's PULP subroutines deal 1 less."
+    },
+    {
+      "id": "blind",
+      "name": "BLIND",
+      "timing": "when_ice_acts",
+      "per_counter": [
+        {
+          "op": "reduce_ice_trace",
+          "n": 1
+        }
+      ],
+      "text": "This ICE's TRACE subroutines add 1 less."
+    },
+    {
+      "id": "leech",
+      "name": "LEECH",
+      "timing": "start_of_your_turn",
+      "per_counter": [
+        {
+          "op": "extract",
+          "n": 1
+        }
+      ],
+      "text": "Extract 1 CRED."
+    },
+    {
+      "id": "worm",
+      "name": "WORM",
+      "timing": "start_of_your_turn",
+      "per_counter": [
+        {
+          "op": "spread_virus",
+          "to": "next_ice_right",
+          "n_each_strain": 1
+        }
+      ],
+      "text": "Put 1 counter of each strain on this ICE onto the next ICE to its right (if any)."
+    }
+  ]
+}

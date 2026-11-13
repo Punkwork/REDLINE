@@ -1,0 +1,81 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_UPGRADES_EVENTS_ESCAPE.md §2.4"
+  ],
+  "rules": {
+    "offered_per_corporation": 2,
+    "expires": "central_node",
+    "reward": "choose 1 of 2 Ghostware"
+  },
+  "contracts": [
+    {
+      "id": "quiet_job",
+      "name": "QUIET JOB",
+      "text": "Finish 3 ICE Nodes without TRACE reaching 20.",
+      "goal": {
+        "ice_nodes_completed_under_trace": 20,
+        "count": 3
+      }
+    },
+    {
+      "id": "big_score",
+      "name": "BIG SCORE",
+      "text": "Extract 100 CRED before the Central Node.",
+      "goal": {
+        "cred_extracted": 100
+      }
+    },
+    {
+      "id": "exterminator",
+      "name": "EXTERMINATOR",
+      "text": "Break 8 SENTRY subroutines.",
+      "goal": {
+        "subroutines_broken": 8,
+        "ice_type": "SENTRY"
+      }
+    },
+    {
+      "id": "demolition",
+      "name": "DEMOLITION",
+      "text": "Break 8 WALL subroutines.",
+      "goal": {
+        "subroutines_broken": 8,
+        "ice_type": "WALL"
+      }
+    },
+    {
+      "id": "codebreaker",
+      "name": "CODEBREAKER",
+      "text": "Break 8 CODE GATE subroutines.",
+      "goal": {
+        "subroutines_broken": 8,
+        "ice_type": "CODE GATE"
+      }
+    },
+    {
+      "id": "no_loose_ends",
+      "name": "NO LOOSE ENDS",
+      "text": "Clear every layer of 2 ICE Nodes.",
+      "goal": {
+        "nodes_fully_cleared": 2
+      }
+    },
+    {
+      "id": "clean_hands",
+      "name": "CLEAN HANDS",
+      "text": "Reach the Central Node without a TRACE strike.",
+      "goal": {
+        "strikes_at_central_node": 0
+      }
+    },
+    {
+      "id": "shopping_list",
+      "name": "SHOPPING LIST",
+      "text": "Apply 2 PATCHWORK (including FUSE).",
+      "goal": {
+        "patchwork_applied": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_UPLINK_AND_CAPS.md"
+  ],
+  "rules": {
+    "slots": 3,
+    "cost_bw": 0,
+    "usable": "your_turn_between_card_plays",
+    "post_breach_drop_chance": 0.2,
+    "lockdown_blocks": [
+      "jack_out"
+    ],
+    "jack_out_blocked_when": [
+      "corporation_response",
+      "lockdown",
+      "black_ice_unbroken_subroutine",
+      "central_node",
+      "after_breach",
+      "escape"
+    ],
+    "bootleg": {
+      "price_multiplier": 0.5,
+      "fizzle_chance": 0.25,
+      "fizzle_trace": 3,
+      "sources": [
+        "uplink"
+      ]
+    }
+  },
+  "caps": [
+    {
+      "id": "bw_spike",
+      "name": "BW SPIKE",
+      "rarity": "common",
+      "price": 20,
+      "text": "+2 BW this turn.",
+      "effects": [
+        {
+          "op": "gain_bw",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "bulwark",
+      "name": "BULWARK",
+      "rarity": "common",
+      "price": 20,
+      "text": "+8 SHIELD.",
+      "effects": [
+        {
+          "op": "shield",
+          "n": 8
+        }
+      ]
+    },
+    {
+      "id": "flush",
+      "name": "FLUSH",
+      "rarity": "common",
+      "price": 20,
+      "text": "−8 TRACE.",
+      "effects": [
+        {
+          "op": "trace",
+          "n": -8
+        }
+      ]
+    },
+    {
+      "id": "nanosuture",
+      "name": "NANOSUTURE",
+      "rarity": "common",
+      "price": 20,
+      "text": "Heal 8 VITAE.",
+      "effects": [
+        {
+          "op": "heal",
+          "n": 8
+        }
+      ]
+    },
+    {
+      "id": "cracker",
+      "name": "CRACKER",
+      "rarity": "common",
+      "price": 20,
+      "text": "Target ICE: −4 STR this encounter.",
+      "effects": [
+        {
+          "op": "ice_str",
+          "target": "target",
+          "n": -4,
+          "duration": "encounter"
+        }
+      ]
+    },
+    {
+      "id": "jack_out",
+      "name": "JACK OUT",
+      "rarity": "uncommon",
+      "price": 35,
+      "text": "Leave the encounter now and move forward. Keep banked CRED; no card reward or Node completion reward. −5 TRACE.",
+      "effects": [
+        {
+          "op": "jack_out"
+        },
+        {
+          "op": "trace",
+          "n": -5
+        }
+      ]
+    },
+    {
+      "id": "refresh",
+      "name": "REFRESH",
+      "rarity": "uncommon",
+      "price": 35,
+      "text": "Discard your hand, then draw 5.",
+      "effects": [
+        {
+          "op": "discard_hand"
+        },
+        {
+          "op": "draw",
+          "n": 5
+        }
+      ]
+    },
+    {
+      "id": "memory_spike",
+      "name": "MEMORY SPIKE",
+      "rarity": "uncommon",
+      "price": 35,
+      "text": "+2 RAM until the end of the Node.",
+      "effects": [
+        {
+          "op": "ram",
+          "n": 2,
+          "duration": "node"
+        }
+      ]
+    },
+    {
+      "id": "stabilizer",
+      "name": "STABILIZER",
+      "rarity": "uncommon",
+      "price": 35,
+      "text": "Prevent all VOID you would gain this encounter.",
+      "effects": [
+        {
+          "op": "prevent_void",
+          "n": "all",
+          "limit": "this_encounter"
+        }
+      ]
+    },
+    {
+      "id": "zero_day",
+      "name": "ZERO-DAY",
+      "rarity": "rare",
+      "price": 55,
+      "text": "Break 1 subroutine on any ICE, ignoring type and STR.",
+      "effects": [
+        {
+          "op": "break",
+          "scope": "any_type",
+          "ignore_str": true,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "system_restore",
+      "name": "SYSTEM RESTORE",
+      "rarity": "rare",
+      "price": 55,
+      "text": "Remove all Bloatware from your hand, draw pile and discard pile.",
+      "effects": [
+        {
+          "op": "remove_all_bloatware"
+        }
+      ]
+    },
+    {
+      "id": "new_identity",
+      "name": "NEW IDENTITY",
+      "rarity": "rare",
+      "price": 55,
+      "text": "Remove 1 TRACE strike, and set TRACE to 0.",
+      "effects": [
+        {
+          "op": "remove_strike",
+          "n": 1
+        },
+        {
+          "op": "trace_set",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}

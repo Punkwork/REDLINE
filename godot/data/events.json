@@ -1,0 +1,226 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_UPGRADES_EVENTS_ESCAPE.md §3"
+  ],
+  "events": [
+    {
+      "id": "data_purge",
+      "name": "DATA PURGE",
+      "text": "Remove 1 card from your deck. Pay +5 TRACE or −5 VITAE.",
+      "weight": 0.1071,
+      "choices": [
+        {
+          "label": "Pay +5 TRACE",
+          "effects": [
+            {
+              "op": "remove_card",
+              "n": 1
+            },
+            {
+              "op": "trace",
+              "n": 5
+            }
+          ]
+        },
+        {
+          "label": "Pay 5 VITAE",
+          "effects": [
+            {
+              "op": "remove_card",
+              "n": 1
+            },
+            {
+              "op": "pulp_direct",
+              "n": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abandoned_cache",
+      "name": "ABANDONED CACHE",
+      "text": "Choose: +25 CRED, or a random CAP (if you have a free slot).",
+      "weight": 0.1071,
+      "choices": [
+        {
+          "label": "+25 CRED",
+          "effects": [
+            {
+              "op": "gain_cred",
+              "n": 25
+            }
+          ]
+        },
+        {
+          "label": "Random CAP",
+          "effects": [
+            {
+              "op": "gain_random_cap"
+            }
+          ],
+          "requires": "free_cap_slot"
+        }
+      ]
+    },
+    {
+      "id": "ghost_in_the_wires",
+      "name": "GHOST IN THE WIRES",
+      "text": "NUL/REM finds something strange. Take a random rare card and +6 TRACE, or leave it.",
+      "weight": 0.1071,
+      "choices": [
+        {
+          "label": "Take it",
+          "effects": [
+            {
+              "op": "add_random_card",
+              "rarity": "rare"
+            },
+            {
+              "op": "trace",
+              "n": 6
+            }
+          ]
+        },
+        {
+          "label": "Leave it",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "friendly_rustler",
+      "name": "FRIENDLY RUSTLER",
+      "text": "Give 1 card from your deck, receive 1 random card one rarity higher (rare stays rare). Or decline.",
+      "weight": 0.1071,
+      "choices": [
+        {
+          "label": "Trade",
+          "effects": [
+            {
+              "op": "trade_up"
+            }
+          ]
+        },
+        {
+          "label": "Decline",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "honeypot",
+      "name": "HONEYPOT",
+      "text": "Take 40 CRED and +10 TRACE, or leave it.",
+      "weight": 0.1071,
+      "choices": [
+        {
+          "label": "Take it",
+          "effects": [
+            {
+              "op": "gain_cred",
+              "n": 40
+            },
+            {
+              "op": "trace",
+              "n": 10
+            }
+          ]
+        },
+        {
+          "label": "Leave it",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "black_clinic",
+      "name": "BLACK CLINIC",
+      "text": "Pay 6 VITAE to apply 1 PATCHWORK, or leave.",
+      "weight": 0.1071,
+      "choices": [
+        {
+          "label": "Pay 6 VITAE",
+          "effects": [
+            {
+              "op": "pulp_direct",
+              "n": 6
+            },
+            {
+              "op": "patchwork",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "label": "Leave",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "maintenance_window",
+      "name": "MAINTENANCE WINDOW",
+      "text": "Heal 6 VITAE and −5 TRACE.",
+      "weight": 0.1071,
+      "choices": [
+        {
+          "label": "Continue",
+          "effects": [
+            {
+              "op": "heal",
+              "n": 6
+            },
+            {
+              "op": "trace",
+              "n": -5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ambush",
+      "name": "AMBUSH",
+      "text": "A single-layer ICE encounter from the current tier, with normal rewards.",
+      "weight": 0.2,
+      "choices": [
+        {
+          "label": "Fight",
+          "effects": [
+            {
+              "op": "start_encounter",
+              "layers": 1,
+              "tier": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "black_market_broker",
+      "name": "BLACK MARKET BROKER",
+      "text": "Pay 15 VITAE for a random Ghostware, or decline.",
+      "weight": 0.05,
+      "choices": [
+        {
+          "label": "Pay 15 VITAE",
+          "effects": [
+            {
+              "op": "pulp_direct",
+              "n": 15
+            },
+            {
+              "op": "gain_random_ghostware"
+            }
+          ]
+        },
+        {
+          "label": "Decline",
+          "effects": []
+        }
+      ]
+    }
+  ]
+}

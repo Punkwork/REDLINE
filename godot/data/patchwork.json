@@ -1,0 +1,106 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_UPGRADES_EVENTS_ESCAPE.md §1"
+  ],
+  "rules": {
+    "per_card": 1,
+    "offer": 3,
+    "per_card_instance": true,
+    "bloatware_allowed": false,
+    "sources": [
+      "console_lab",
+      "safehouse",
+      "node_completion_reward",
+      "black_clinic_event"
+    ]
+  },
+  "fuse": {
+    "applies_to": "SCRIPT",
+    "copies": 2,
+    "multiplier": 1.5,
+    "rounding": "up",
+    "multiplies": "main_numbers_only",
+    "uses_patchwork_slot": true,
+    "refuse": false,
+    "fallback_name_suffix": " MK II",
+    "note": "Fused versions are defined on each card under 'fused' in cards.json."
+  },
+  "mods": [
+    {
+      "id": "optimized",
+      "name": "OPTIMIZED",
+      "applies_to": "any",
+      "text": "Costs 1 less BW (minimum 0).",
+      "restriction": "not on 0-BW cards"
+    },
+    {
+      "id": "silenced",
+      "name": "SILENCED",
+      "applies_to": "any",
+      "text": "Adds 2 less TRACE (minimum 0).",
+      "restriction": "only cards that add TRACE"
+    },
+    {
+      "id": "hardened",
+      "name": "HARDENED",
+      "applies_to": "any",
+      "text": "Also gives +2 SHIELD when played or installed."
+    },
+    {
+      "id": "linked",
+      "name": "LINKED",
+      "applies_to": "any",
+      "text": "Also draws 1 card when played or installed.",
+      "restriction": "not on cards that already draw"
+    },
+    {
+      "id": "compressed",
+      "name": "COMPRESSED",
+      "applies_to": "PROGRAM",
+      "text": "Uses 1 less RAM (minimum 0)."
+    },
+    {
+      "id": "preloaded",
+      "name": "PRELOADED",
+      "applies_to": "PROGRAM",
+      "text": "At the start of each ICE Node, this Program can be installed for free instead of being shuffled into your deck."
+    },
+    {
+      "id": "tuned",
+      "name": "TUNED",
+      "applies_to": "ICEPICK",
+      "text": "+1 base STR."
+    },
+    {
+      "id": "streamlined",
+      "name": "STREAMLINED",
+      "applies_to": "ICEPICK",
+      "text": "Each boost gives +1 extra STR."
+    },
+    {
+      "id": "deep_dig",
+      "name": "DEEP DIG",
+      "applies_to": "EXTRACTOR",
+      "text": "Extracts +2 CRED each time."
+    },
+    {
+      "id": "amplified",
+      "name": "AMPLIFIED",
+      "applies_to": "SCRIPT",
+      "text": "The card's main number is increased by half, rounded up."
+    },
+    {
+      "id": "sticky",
+      "name": "STICKY",
+      "applies_to": "SCRIPT",
+      "text": "When drawn, this card is automatically CACHED."
+    },
+    {
+      "id": "virulent",
+      "name": "VIRULENT",
+      "applies_to": "VIRUS",
+      "text": "INFECT 1 more counter of each strain the card places."
+    }
+  ]
+}
