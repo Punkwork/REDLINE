@@ -2383,6 +2383,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-39 (Konami Code entered) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
 
+### VERSE NR-232 — Lumber commodities
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** BREACH; unnamed reference: ValCom 17485 and AquaCom 89045 (Heartbeeps, 1981). The film is never named in the line.
+
+> “BREACH. Out we go, like those two companion robots walking out of the factory. A valet who specialised in lumber commodities, and a poolside hostess. I think about them more than is healthy.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-233 — Malfunctioning, but along
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** BREACH; unnamed reference: Crimebuster quoting regulations (Heartbeeps, 1981). The film is never named in the line.
+
+> “Through. Somewhere behind us a security robot is quoting regulations at an empty room. He'll be along. Malfunctioning, but along.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-234 — Less romantic
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** BREACH; the stolen data; unnamed reference: Phil, the baby robot built from spare parts (Heartbeeps, 1981). The film is never named in the line.
+
+> “BREACH. Two robots once built a baby out of spare parts on their way out. We're just stealing data. It feels less romantic, somehow.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 

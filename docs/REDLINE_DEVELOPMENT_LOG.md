@@ -949,3 +949,7 @@ One EV-37 (Idle) line approved as CANON verse NR-143: NUL/REM leans away from th
 
 88 lines from the review doc “NUL/REM Dialogue — Batch 2 (CANDIDATE)” approved as CANON verses, covering the 30 events that were short. Written to the designer's guidelines: the six modes in rotation; protectiveness toned down, with sleep as his real motive; stolen data at BREACH; CRED inflation jokes; seven Blade Runner references (world, not just characters) including whether androids dream of electric sheep (reference trait updated, Bible §5). New lore in NR-156: personality-ROM revisions 0.01 to 0.07 don't exist (**OPEN** thread). Hints at OPEN story threads in EV-29, EV-33 and EV-36 commit to no answer.
 
+## NULREM-033 — BREACH verses NR-232 to NR-234 (APPROVED, 2026-11-13)
+
+Three EV-07 (BREACH) lines approved as CANON verses referencing the robots of Heartbeeps (1981) without naming the film: NR-232 (the valet and the poolside hostess leaving the factory), NR-233 (the security robot quoting regulations) and NR-234 (the baby robot built from spare parts). BREACH now has 8 of its 15 lines.
+
