@@ -905,3 +905,7 @@ Three lines approved as CANON verses referencing 7-Zark-7, 1-Rover-1 and Susan, 
 
 Four lines approved as CANON verses: NR-114 (EV-12 Elegant play; a Tetris), NR-115 (EV-18 Low VITAE; four AA batteries and the dimming power light, to verify), NR-116 (EV-37 Idle; the grey brick, DMG-01, designed from 1987) and NR-117 (EV-21 Bloatware inserted; the wrong pieces stacking up). Reference trait updated (Bible §5).
 
+## NULREM-022 — DMG-01 as an old friend: NR-114 to NR-116 revised (APPROVED, 2026-11-13)
+
+NR-114, NR-115 and NR-116 are RETIRED and replaced by v2 versions in which NUL/REM calls the Game Boy **DMG-01**, as if it were an old friend (Bible §5 updated). Placements unchanged.
+
