@@ -901,3 +901,7 @@ Three lines approved as CANON verses referencing 7-Zark-7, 1-Rover-1 and Susan, 
 
 **CANON trait:** NUL/REM considers himself far too sophisticated for his work, though he would rather be doing nothing at all; his superiority over famous machines exists only in his own mind (Bible §5, Master Design §7). **Verses:** NR-110 (EV-37 Idle; Skynet), NR-111 (EV-37 Idle; the T-1000), NR-112 (EV-03 IRONWATCH; RoboCop) and NR-113 (EV-06 DEADLOCK broken; ED-209).
 
+## NULREM-021 — Game Boy and Tetris verses NR-114 to NR-117 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses: NR-114 (EV-12 Elegant play; a Tetris), NR-115 (EV-18 Low VITAE; four AA batteries and the dimming power light, to verify), NR-116 (EV-37 Idle; the grey brick, DMG-01, designed from 1987) and NR-117 (EV-21 Bloatware inserted; the wrong pieces stacking up). Reference trait updated (Bible §5).
+
