@@ -1699,7 +1699,7 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
 
-### VERSE NR-156 — Personality ROM rev 008
+### VERSE NR-156 — The missing revisions
 **Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Optional talk between runs; new lore: revisions 0.01 to 0.07 are missing (OPEN).
 
 > “Personality ROM, rev 0.08. Revisions 0.01 to 0.07 don't exist. I've checked. I'd like to know what happened to them.”
