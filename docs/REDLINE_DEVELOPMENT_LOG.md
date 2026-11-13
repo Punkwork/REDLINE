@@ -933,3 +933,7 @@ Two lines approved as CANON verses referencing Activision's Little Computer Peop
 
 Four lines approved as CANON verses: NR-135 (EV-04 BOOTING; dialling at 1200 baud, “Nodes don't sing anymore”), NR-136 (EV-13 TRACE reaches 20; the kitchen phone), NR-137 (EV-27 Card reward; upload/download ratios) and NR-138 (EV-24 Uplink; warez boards and cracktros). Reference trait updated (Bible §5).
 
+## NULREM-029 — Demoscene verses NR-139 and NR-140 (APPROVED, 2026-11-13)
+
+Two lines approved as CANON verses: NR-139 (EV-07 BREACH; Amiga demo scrollers, raster bars and greetings) and NR-140 (EV-37 Idle; FairLight, founded 1987 and named after the Fairlight CMI, the instrument behind Planet Rock's orchestra hit). Reference trait updated (Bible §5).
+
