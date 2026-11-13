@@ -824,3 +824,7 @@ Migrated in place: `REDLINE_MASTER_DESIGN.md`, `REDLINE_BIBLE.md` (rule sections
 ## NULREM-002 — Run-start verses NR-009 to NR-018 (APPROVED, 2026-11-13)
 
 First collaborative dialogue pass, trigger EV-01 (Run start) of the NUL/REM Dialogue Trigger Table. Ten lines approved and entered in the Bible as CANON verses NR-009 to NR-018: a general pool (NR-009 to NR-013), after a lost run (NR-014), after a won run (NR-015), and Rustler-specific lines for the Generalist, ECHO and RIOT (NR-016 to NR-018). The VECTOR line is being rewritten to give NUL/REM a strange relationship with germs (he has no body, so he should have none).
+
+## NULREM-003 — VECTOR run-start lines and the germ trait (APPROVED, 2026-11-13)
+
+Three VECTOR run-start lines approved as CANON verses NR-019 to NR-021 (EV-01; one chosen at random). New CANON character trait recorded in the Bible (§5) and Master Design (§7): NUL/REM is fastidious about germs despite having no body or immune system; he worries about biological germs and dust in his casing, stays unbothered by computer viruses, and may claim illnesses he could never have had.

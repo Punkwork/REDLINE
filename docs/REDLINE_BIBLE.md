@@ -97,6 +97,8 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Identity:** NUL/REM is **rev 0.08**, a salvaged, obsolete **personality ROM**, **manufactured in 1987**, referred to as **he**. He wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 (e.g. ARPANET going online in 1969) are the Unreliable Historian's impossible memories; their explanation stays OPEN. Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6.
 
+**CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
+
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
 **Voice boundary:** NUL/REM is not a perpetual joke dispenser, omniscient lore encyclopedia, or transparent emotional confidant. Especially around VOID, restraint or silence may communicate more than humor.
@@ -291,6 +293,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 > “RIOT. Subtlety deferred again, I see.”
 
 **Placement:** Run start as RIOT. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-019 — Not starting now
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Rustler identity: VECTOR; the germ trait.
+
+> “VECTOR. Viruses again. Keep them in their own memory. I've never had a cold, and I'm not starting now.”
+
+**Placement:** Run start as VECTOR (trigger EV-01; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-020 — My casing
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Rustler identity: VECTOR; the germ trait.
+
+> “VECTOR. You're going to infect everything again. Don't touch my casing. I can't get sick, and I'd like to keep it that way.”
+
+**Placement:** Run start as VECTOR (trigger EV-01; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-021 — Only just disinfected
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Rustler identity: VECTOR; the germ trait.
+
+> “VECTOR. Every virus you write has to go somewhere. Not near my ROM, please. I've only just been disinfected.”
+
+**Placement:** Run start as VECTOR (trigger EV-01; trigger table is a draft); one of three, chosen at random. Also The Unreliable Historian: nobody has ever disinfected him.
 
 *Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
