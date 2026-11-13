@@ -857,3 +857,7 @@ Trigger EV-16 (TRACE strike 3: LOCKDOWN): five lines approved as CANON verses NR
 
 Trigger EV-30 (Central Node entry): nine boss-framing lines approved as CANON verses, three per boss, each stating the fight's question from the ICE docs without new mechanics: THE HEARTH NR-051 to NR-053 (NR-052 is the planned Tron Master Control line), OVERWATCH NR-054 to NR-056 (NR-056 references HAL 9000 singing “Daisy Bell”; to verify), ANIMA NR-057 to NR-059.
 
+## NULREM-011 — Payload verses NR-060 to NR-064 and CAP verses NR-065 to NR-068 (APPROVED, 2026-11-13)
+
+Trigger EV-31 (Payload chosen): five lines approved as CANON verses NR-060 to NR-064 (delight at the tech, quickly hidden; no hint of the First Signal fragment content, which stays OPEN). CAP moments: four lines referencing the Cap'n Crunch whistle and 2600 Hz phone phreaking, approved as CANON verses NR-065 (EV-23 JACK OUT used), NR-066 (EV-24 Uplink visit), NR-067 (EV-22 Last CAP used; John Draper) and NR-068 (EV-24, only when Bootleg CAPS are in stock). The whistle is recorded in the reference-compulsion trait (Bible §5) as his model for every CAP.
+

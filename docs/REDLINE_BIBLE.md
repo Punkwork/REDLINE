@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045.
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068.
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -666,6 +666,87 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Entering the Central Node ANIMA (trigger EV-30; trigger table is a draft); one of three, chosen at random.
 
 *Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-060 — Adequate
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted / The Pedant · **Function:** Payload: delight at the tech, quickly hidden.
+
+> “Oh. Oh, that's beautiful. Look at that code. …I mean, it's adequate. Take it. Quickly, before I say something embarrassing.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-061 — With gloves on
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Payload: Ghostware active now; the rest of the core encrypted; the germ trait.
+
+> “Ghostware. Corporate tech, active now, and it works on the way out too. The rest of the core is encrypted. Don't open it. I'll do that once we're clear. Carefully. With gloves on.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-062 — It means it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Payload: delight; callback to NR-010 (READY).
+
+> “I haven't felt like this since a Commodore 64 said READY in 1987. I said it was lying. This time I think it means it. Don't tell anyone.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-063 — Choose for the escape
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Payload: choose for the escape; TRACE doubled.
+
+> “One of three. Choose for the escape, not for the fight you just won. They'll track that core the whole way out, and TRACE doubles.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-064 — They'll want it back
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted / The Cynic · **Function:** Payload: stolen tech; the escape ahead.
+
+> “Corporate engineering at its finest. Stolen, of course. The best things usually are. Now carry it like it's heavy, because they'll want it back.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-065 — 2600 hertz
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** JACK OUT; reference: the Cap'n Crunch whistle (2600 Hz phone phreaking).
+
+> “In the sixties, a toy whistle from a box of Cap'n Crunch played 2600 hertz, the exact tone AT&T used to say a line was free. Blow it down the phone and the network thought you'd hung up. JACK OUT is the same trick. Cheaper than cereal, though.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-066 — Before they patch it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** CAPS at the Uplink; reference: the Cap'n Crunch whistle.
+
+> “Every CAP is a Cap'n Crunch whistle. One tone, one trick, and the system lets you through. Then the phone company changed the system, and the whistle was a toy again. Use them before they patch it.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-067 — No tones left
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Last CAP; reference: John Draper, “Captain Crunch”.
+
+> “That was the last CAP. John Draper named himself after a cereal whistle and built a legend on one tone. You've got no tones left now. Just the deck. It'll have to be enough.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-068 — More reliable
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bootleg CAPS at the Uplink; reference: the Cap'n Crunch whistle.
+
+> “Bootleg CAPS. Half price, and one in four fizzles. The first phreaks hacked AT&T with a cereal-box whistle. Even that was more reliable than these.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft). Only when Bootleg CAPS are in stock.
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
