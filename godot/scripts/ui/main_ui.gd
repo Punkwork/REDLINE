@@ -315,8 +315,11 @@ func _build_overlay() -> void:
 				overlay_body.add_child(_choice("%s — %s" % [def["name"], def["text"]], func(): node.ready_rig_choose(inst["uid"])))
 			overlay_body.add_child(_choice("Skip", func(): node.ready_rig_choose(-1)))
 		NodeRun.PHASE_REWARD:
-			overlay_body.add_child(_label("LAYER %d BREACHED" % (node.layer_index + 1), 26, C_GOOD))
-			overlay_body.add_child(_label("The Corporation Response was skipped. Choose a card to add to your deck:", 15, C_TEXT))
+			var title := "NODE CLEARED" if node.node_fully_cleared else "LEAVING THE NODE"
+			overlay_body.add_child(_label(title, 26, C_GOOD))
+			var odds: Dictionary = node.rarity_odds()
+			overlay_body.add_child(_label("Node reward for %d layer(s) cleared (odds %d%% common / %d%% uncommon / %d%% rare).\nChoose a card to add to your deck:" % [
+					node.layers_cleared, roundi(odds["common"] * 100), roundi(odds["uncommon"] * 100), roundi(odds["rare"] * 100)], 15, C_TEXT))
 			for id in node.reward_options:
 				var def: Dictionary = db.cards[id]
 				var cost := "—" if def["cost_bw"] == null else str(int(def["cost_bw"]))
@@ -324,12 +327,12 @@ func _build_overlay() -> void:
 						func(): node.choose_reward(id)))
 			overlay_body.add_child(_choice("Skip the card", func(): node.choose_reward("")))
 		NodeRun.PHASE_LAYER_CHOICE:
-			overlay_body.add_child(_label("GO DEEPER?", 26, C_ACCENT))
+			overlay_body.add_child(_label("LAYER %d BREACHED — GO DEEPER?" % node.layers_cleared, 26, C_ACCENT))
 			var next: Dictionary = node.layers[node.layer_index + 1]
 			var names: Array = next["ice"].map(func(id): return db.ice[id]["name"])
 			overlay_body.add_child(_label("Layer %d: %s (CRED reserve %d)" % [node.layer_index + 2, ", ".join(names), int(next["cred_reserve"])], 15, C_TEXT))
-			overlay_body.add_child(_choice("Go deeper", func(): node.go_deeper()))
-			var leave := _choice("Leave the Node with what you have", func(): node.leave_node())
+			overlay_body.add_child(_choice("Go deeper (better card reward odds; full clear also earns the completion reward)", func(): node.go_deeper()))
+			var leave := _choice("Leave now and take the Node's card reward at %d-layer odds" % node.layers_cleared, func(): node.leave_node())
 			leave.disabled = not node.can_leave()
 			overlay_body.add_child(leave)
 		NodeRun.PHASE_NODE_COMPLETE:

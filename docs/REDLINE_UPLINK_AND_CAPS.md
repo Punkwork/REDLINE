@@ -19,7 +19,7 @@
 | **Using** | **0 BW**, at any time **during your turn**. Not during the Corporation Response (no reactive plays, SOFT-011). |
 | **After use** | The CAP is gone. |
 | **LOCKDOWN** | Only **JACK OUT** stops working under LOCKDOWN (existing canon). Other CAPS work normally. |
-| **Getting CAPS** | Buy them at Uplinks; choose one as a Node completion reward (Core Rules §9.3); and after each BREACH there's a **20% chance** of a random CAP drop, if you have a free slot. |
+| **Getting CAPS** | Buy them at Uplinks; choose one as a Node completion reward (Core Rules §9.3; since CORE-010 the completion choice is a CAP or a PATCHWORK upgrade); and after each BREACH there's a **20% chance** of a random CAP drop, if you have a free slot. |
 
 **On screen:** CAPS sit in a small rack beside your hand. Using one plays the flip–inject–discard animation.
 

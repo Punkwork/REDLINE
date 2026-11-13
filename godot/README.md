@@ -22,8 +22,8 @@ The full core loop is in:
 - BREACH, which skips the response
 - TRACE strikes and TRACER
 - Extractors with the full-extraction bonus
-- a 1-of-3 card reward
 - the go-deeper or leave choice
+- one 1-of-3 card reward per Node, at the end, with better odds the more layers you cleared (CORE-010)
 - the clean-Node CRED bonus
 - defeat and restart
 
@@ -53,7 +53,7 @@ GODOT=/path/to/godot tools/run_godot_tests.sh
 
 - The heist map, SAFEHOUSE, Uplinks, events and escape.
 - CAPS, PATCHWORK and FUSE.
-- The Node completion reward. A card reward is given per layer; the completion reward is only logged.
+- The Node completion reward (a CAP or a PATCHWORK upgrade). It is only logged for now.
 - The other three Rustlers and the HALCYON corporation (the data is already loaded).
 - Discard choices. When ICE forces a discard, the right-most non-CACHED cards go for now.
 - Card effect ops not implemented yet; they show in the log as "Not yet implemented": `cache`, `tutor`, `trace_reduce_each`, `trace_block`, `redirect_insert`, `burn_bloatware`, `suppress_abilities`, `skip_corp_response`, `copy_virus`. The Generalist's starter deck needs none of them.

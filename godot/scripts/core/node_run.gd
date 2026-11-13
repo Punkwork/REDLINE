@@ -9,9 +9,9 @@ extends RefCounted
 ##     node.start()                      # phase "ready_rig" or "player"
 ##     node.play_card(uid, target)       # during phase "player"
 ##     node.boost(icepick_uid) / node.break_subroutine(icepick_uid, ice_index, sub_index)
-##     node.end_turn()                   # Corporation Response, or BREACH -> phase "reward"
-##     node.choose_reward(card_id)       # phase "layer_choice" or "node_complete"
-##     node.go_deeper() / node.leave_node()
+##     node.end_turn()                   # Corporation Response, or BREACH -> "layer_choice" or "reward"
+##     node.go_deeper() / node.leave_node()   # during "layer_choice"; leaving -> "reward"
+##     node.choose_reward(card_id)       # once per Node, at the end (CORE-010) -> "node_complete"
 
 signal changed
 signal logged(text: String)
@@ -56,6 +56,8 @@ var trace_gained_this_encounter := false
 var trace_gained_this_node := false
 var lockdown := false
 var reward_options: Array = []
+var layers_cleared := 0         ## sets the card reward's rarity odds (CORE-010)
+var node_fully_cleared := false
 var log_lines: Array[String] = []
 
 const MAX_LOG := 200
@@ -91,6 +93,8 @@ func start() -> void:
 	lockdown = false
 	trace_gained_this_node = false
 	layer_index = 0
+	layers_cleared = 0
+	node_fully_cleared = false
 	_log("== Entering Node (%s) ==" % corporation_id)
 	if run.has_ghostware("ready_rig") and not ready_rig_options().is_empty():
 		phase = PHASE_READY_RIG
@@ -860,10 +864,30 @@ func _ice_index_by_id(ice_id: String) -> int:
 # ------------------------------------------------------------------ BREACH, rewards, leaving
 
 func _layer_cleared() -> void:
-	_log("== Layer %d BREACHED (Corporation Response skipped) ==" % (layer_index + 1))
+	layers_cleared = layer_index + 1
+	_log("== Layer %d BREACHED (Corporation Response skipped) ==" % layers_cleared)
+	if layers_cleared < layers.size():
+		phase = PHASE_LAYER_CHOICE
+		_log("Go deeper (layer %d, better card odds), or leave the Node now?" % (layers_cleared + 1))
+		changed.emit()
+	else:
+		node_fully_cleared = true
+		_offer_node_reward()
+
+
+## The Node's one card reward (CORE-010), given when the Node ends by full clear or by leaving.
+func _offer_node_reward() -> void:
 	reward_options = _roll_rewards()
 	phase = PHASE_REWARD
+	_log("Node reward: choose 1 of %d cards (odds for %d layer(s) cleared)." % [reward_options.size(), layers_cleared])
 	changed.emit()
+
+
+func rarity_odds() -> Dictionary:
+	var r: Dictionary = db.rules["rewards"]
+	var table: Dictionary = r.get("rarity_odds_by_layers_cleared", {})
+	var key := str(clampi(layers_cleared, 1, table.size()))
+	return table.get(key, r["rarity_odds"])
 
 
 func _roll_rewards() -> Array:
@@ -886,7 +910,7 @@ func _roll_rewards() -> Array:
 
 
 func _roll_rarity() -> String:
-	var odds: Dictionary = db.rules["rewards"]["rarity_odds"]
+	var odds := rarity_odds()
 	var roll: float = run.rng.randf()
 	if roll < float(odds["rare"]):
 		return "rare"
@@ -900,16 +924,10 @@ func choose_reward(card_id: String) -> void:
 	if phase != PHASE_REWARD:
 		return
 	if card_id != "":
-		var inst: Dictionary = run.add_card(card_id)
-		discard_pile.append(inst)   # joins this Node's cycle now, and the deck for later Nodes
+		run.add_card(card_id)
 		_log("Added %s to your deck." % db.cards[card_id]["name"])
 	reward_options.clear()
-	if layer_index + 1 < layers.size():
-		phase = PHASE_LAYER_CHOICE
-		_log("Go deeper (layer %d), or leave the Node with what you have?" % (layer_index + 2))
-	else:
-		_complete_node(true)
-	changed.emit()
+	_complete_node()
 
 
 func can_leave() -> bool:
@@ -925,14 +943,16 @@ func go_deeper() -> void:
 func leave_node() -> void:
 	if not can_leave():
 		return
-	_log("You leave the Node early (no completion reward).")
-	_complete_node(false)
+	_log("You leave the Node after %d layer(s). No completion reward." % layers_cleared)
+	_offer_node_reward()
 
 
-func _complete_node(all_layers: bool) -> void:
+func _complete_node() -> void:
 	phase = PHASE_NODE_COMPLETE
-	if all_layers:
-		_log("== Node complete: every layer cleared. (Completion reward: coming soon) ==")
+	if node_fully_cleared:
+		_log("== Node complete: every layer cleared. Completion reward: a CAP or a PATCHWORK upgrade (not in this build yet). ==")
+	else:
+		_log("== Node finished early. ==")
 	if not trace_gained_this_node:
 		run.cred += int(db.rules["rewards"]["clean_node_cred"])
 		_log("Clean Node: +%d CRED." % int(db.rules["rewards"]["clean_node_cred"]))

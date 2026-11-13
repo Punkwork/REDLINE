@@ -20,6 +20,7 @@ func _init() -> void:
 	test_str_and_boost()
 	test_wall_free_first_break()
 	test_breach_skips_response()
+	test_reward_at_node_end()
 	test_shield_absorbs_pulp()
 	test_trace_strike()
 	test_watchdog_cloak()
@@ -125,11 +126,33 @@ func test_breach_skips_response() -> void:
 	node.boost_and_break(ip["uid"], 0, 1)   # DEADLOCK only; PULP 5 unbroken
 	node.end_turn()
 	check(node.run.vitae == vitae_before, "BREACH skips the PULP subroutine")
-	check(node.phase == "reward" and node.reward_options.size() == 3, "3 reward choices")
-	node.choose_reward(node.reward_options[0])
-	check(node.phase == "layer_choice" and node.run.deck.size() == 13, "reward added; choose deeper/leave")
+	check(node.phase == "layer_choice" and node.reward_options.is_empty(), "no card reward after a layer (CORE-010)")
 	node.go_deeper()
 	check(node.layer_index == 1 and node.ice_list.size() == 2 and node.reserve == 25, "layer 2 set up")
+
+
+func test_reward_at_node_end() -> void:
+	# Leaving early after layer 1: one card reward at 1-layer odds, no completion reward.
+	var node = new_node()
+	node.start()
+	node._layer_cleared()
+	node.leave_node()
+	check(node.phase == "reward" and node.reward_options.size() == 3, "leaving early offers the Node's card reward")
+	check(is_equal_approx(float(node.rarity_odds()["rare"]), 0.1), "1 layer cleared: 10% rare")
+	node.choose_reward(node.reward_options[0])
+	check(node.phase == "node_complete" and node.run.deck.size() == 13 and not node.node_fully_cleared, "one card added, Node over")
+	# Clearing all three layers: exactly one card reward, at 3-layer odds.
+	node = new_node()
+	node.start()
+	for i in 3:
+		node._layer_cleared()
+		if node.phase == "layer_choice":
+			check(node.reward_options.is_empty(), "no reward between layers")
+			node.go_deeper()
+	check(node.phase == "reward" and node.node_fully_cleared, "full clear offers the card reward")
+	check(is_equal_approx(float(node.rarity_odds()["rare"]), 0.25), "3 layers cleared: 25% rare")
+	node.choose_reward("")
+	check(node.phase == "node_complete" and node.run.deck.size() == 12, "skipping adds nothing")
 
 
 func test_shield_absorbs_pulp() -> void:
@@ -207,6 +230,7 @@ func test_full_extraction_bonus() -> void:
 ## A simple greedy bot plays the whole Training Node, to catch crashes and loops.
 func test_bot_plays_training_node() -> void:
 	var wins := 0
+	var added: Array = []
 	for seed_value in range(1, 21):
 		var node = new_node(seed_value, true)
 		node.start()
@@ -226,7 +250,9 @@ func test_bot_plays_training_node() -> void:
 		check(guard < 400, "bot finished (seed %d, phase %s)" % [seed_value, node.phase])
 		if node.phase == "node_complete":
 			wins += 1
-	print("Bot cleared the Training Node in %d/20 seeds." % wins)
+			added.append(node.run.deck.size() - 12)
+			check(node.run.deck.size() <= 13, "at most 1 card per Node")
+	print("Bot cleared the Training Node in %d/20 seeds; cards added per run: %s." % [wins, added])
 	check(wins > 0, "bot can clear the Training Node at least once")
 
 

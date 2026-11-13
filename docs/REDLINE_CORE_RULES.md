@@ -79,7 +79,7 @@ Each card can also carry **tags**, shown under the type:
 
 **4.5 Cleanup:** discard every card in your hand that isn't CACHED.
 
-**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped** and you go straight to the rewards.
+**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped**. If more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**.
 
 **Defeat:** if VITAE reaches 0 at any moment, the run ends immediately.
 
@@ -175,8 +175,8 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 ### 8.2 Leaving early [NEW]
 
 After you BREACH a layer that isn't the last, choose:
-- **Go deeper:** next layer, bigger CRED reserve, better rewards.
-- **Leave the Node:** keep everything you've earned so far, skip the Node's completion reward, and move forward to choose your next Node.
+- **Go deeper:** next layer, bigger CRED reserve, and better odds on the Node's card reward (§9.1).
+- **Leave the Node:** keep everything you've earned so far, take the Node's card reward at the odds you've reached, skip the Node's completion reward, and move forward to choose your next Node.
 
 You can't leave under LOCKDOWN.
 
@@ -199,9 +199,20 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 ## 9. Rewards and economy
 
-### 9.1 After every BREACH [NEW]
-1. Keep any CRED your Extractors earned (it's banked the moment it's paid).
-2. **Choose 1 of 3 cards** to add to your deck, or skip.
+### 9.1 Card reward at the end of each ICE Node [CHANGED by CORE-010]
+1. CRED your Extractors earned is banked the moment it's paid, layer by layer.
+2. **Once per ICE Node**, when you finish it (by clearing every layer, or by leaving early): **choose 1 of 3 cards** to add to your deck, or skip. There is **no** card reward after the individual layers.
+3. **Deeper is better.** The rarity odds of each choice depend on how many layers you cleared in that Node:
+
+| Layers cleared | Common | Uncommon | Rare |
+|---|---|---|---|
+| 1 | 60% | 30% | 10% |
+| 2 | 45% | 40% | 15% |
+| 3 | 30% | 45% | 25% |
+
+4. **JACK OUT** forfeits the Node's card reward (UPL-003 is unchanged).
+
+**Why [CORE-010]:** a card after every BREACH gave about 45 card rewards per run. One per Node gives about **30 per winning run**: 6 ICE Nodes on the way in + the Central Node + 3 escape encounters (each its own Node) = 10 per corporation × 3. Fewer, better choices keep decks lean and make each pick matter. The odds table keeps going deeper worth the risk now that the extra reward per layer is gone.
 
 ### 9.2 Extraction (unchanged)
 - Each encounter has a **CRED reserve**, larger in deeper layers.
@@ -210,7 +221,7 @@ Non-ICE Nodes don't shuffle or reset your deck.
 - Staying in an encounter longer to extract more is a risk you choose.
 
 ### 9.3 Node completion [NEW]
-Clearing **every** layer of an ICE Node gives one extra reward: choose a rare card, a CAP, or a free PATCHWORK upgrade.
+Clearing **every** layer of an ICE Node gives one extra reward: choose a CAP or a free PATCHWORK upgrade. **[CHANGED by CORE-010]** The rare card option is removed; a full clear already gets the best card odds (§9.1), and this keeps card rewards at about 30 per run.
 
 ### 9.4 Clean Node bonus [NEW]
 Complete a Node without gaining any TRACE during it: **+5 CRED** (working value).
@@ -331,7 +342,7 @@ When approved, this document **supersedes** the following. They stay in the Mast
 | CORE-003 | **Max VITAE 30** at start; healing capped at Max VITAE; raising Max VITAE also raises current VITAE by the same amount (§2). Supersedes VITAE-CAPACITY-001. | Approved |
 | CORE-004 | **TRACE strike ladder** as written (§7). Fills TRACE-004. | Approved |
 | CORE-005 | **Leaving a Node early** between layers, and **JACK OUT moving forward** (§8.2). | Approved |
-| CORE-006 | **Card reward (1 of 3, or skip) after every BREACH** (§9.1). | Approved |
+| CORE-006 | **Card reward (1 of 3, or skip) after every BREACH** (§9.1). | Approved; **superseded by CORE-010** |
 | CORE-007 | **Map shows likely Node contents**, with some SIGNAL UNCLEAR (§10.1). Supersedes RUN-005 hidden contents. | Approved |
 | CORE-008 | **Card frame shows one type** (PROGRAM / SCRIPT / PROTOCOL / BLOATWARE) with HARDWARE/SOFTWARE as tags; all Programs unload for 0 BW (§3.1). | Approved |
 | CORE-009 | **Working values:** Clean Node bonus +5 CRED; 6 Nodes per corporation route. Retune after playtesting. | Approved (working values); Node count **superseded by UPL-007** |
@@ -348,3 +359,9 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + VOID onl
 | UPL-006 | Uplink services (Wipe, Clinic) and the SIGNAL UNCLEAR data purge (§8.3). |
 | UPL-007 | Heist structure: 9 infiltration rows → Central Node → 4-Node escape; SAFEHOUSE Nodes; payload kept only on escape (*later changed by P5-009: the payload Ghostware is active immediately*); run length target 75–100 minutes (§1, §8.3, §10). Supersedes CORE-009's 6 Nodes per route. |
 | P5-009 | The payload is an encrypted data core: its Ghostware is active immediately; the core is decrypted into a First Signal fragment after the escape (§10.2, §10.3). |
+
+### Later amendments (Training Node playtest, 2026-11-12)
+
+| ID | Change to this document |
+|---|---|
+| CORE-010 | Card reward **once per ICE Node** at the end of the Node, not after every BREACH; about 30 card rewards per winning run. Rarity odds improve with layers cleared (60/30/10, 45/40/15, 30/45/25). Leaving early still gets the card reward; JACK OUT doesn't. Node completion reward is now a CAP or a PATCHWORK upgrade (no rare card) (§4, §8.2, §9.1, §9.3). Supersedes CORE-006. |

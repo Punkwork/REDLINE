@@ -38,7 +38,7 @@ So cards are priced consistently, **1 BW is worth about**:
 | **Uncommon** | 30% | 40 CRED |
 | **Rare** | 10% | 65 CRED |
 
-- Card rewards after BREACH: **2 shared + 1 Rustler-specific** (approved RUSTLER-007). Each slot rolls its rarity separately.
+- Card rewards (once per ICE Node, CORE-010): **2 shared + 1 Rustler-specific** (approved RUSTLER-007). Each slot rolls its rarity separately.
 - **Node completion reward** (Core Rules §9.3): a choice of 3 cards, at least one of them **Rare**.
 - **Console Lab card removal:** 40 CRED (working).
 

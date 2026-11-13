@@ -176,7 +176,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 - **Starter cards are Rustler-specific:** HUSH, BACKDOOR, SLEDGE, BRUTE FORCE, STINGER and the others never appear for other Rustlers.
 - **Shared basics:** PROBE, PULP Shield, GHOST SIGNAL and Basic Extractor appear in several starter decks and in Uplink reserve stock.
-- **Card rewards (1 of 3 after each BREACH):** proposed mix of **2 cards from the shared pool + 1 from the Rustler's own pool**, so every Rustler can branch out while staying recognizable. The pools themselves are Phase 3.
+- **Card rewards (1 of 3; once per ICE Node since CORE-010):** proposed mix of **2 cards from the shared pool + 1 from the Rustler's own pool**, so every Rustler can branch out while staying recognizable. The pools themselves are Phase 3.
 
 ---
 
