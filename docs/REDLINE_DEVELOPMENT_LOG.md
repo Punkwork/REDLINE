@@ -820,3 +820,7 @@ Migrated in place: `REDLINE_MASTER_DESIGN.md`, `REDLINE_BIBLE.md` (rule sections
 **Identity (CANON):** NUL/REM is rev 0.08, a salvaged, obsolete personality ROM manufactured in 1987, referred to as "he"; he wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 are the Unreliable Historian's impossible memories; their explanation stays OPEN. Recorded in the Bible (§5) and the Master Design (§7).
 
 **Verses (CANON):** the seven approved tonal examples from `REDLINE_UI_NULREM_Design_For_Claude.md` §6 are entered in the Bible as NR-002 (Deadlock and hope), NR-003 (A lifestyle), NR-004 (Before manufacture), NR-005 (Hot dust), NR-006 (Sufficient room), NR-007 (Paper Cut) and NR-008 (Stationery), with exact wording preserved. Placements are suggestions (OPEN).
+
+## NULREM-002 — Run-start verses NR-009 to NR-018 (APPROVED, 2026-11-13)
+
+First collaborative dialogue pass, trigger EV-01 (Run start) of the NUL/REM Dialogue Trigger Table. Ten lines approved and entered in the Bible as CANON verses NR-009 to NR-018: a general pool (NR-009 to NR-013), after a lost run (NR-014), after a won run (NR-015), and Rustler-specific lines for the Generalist, ECHO and RIOT (NR-016 to NR-018). The VECTOR line is being rewritten to give NUL/REM a strange relationship with germs (he has no body, so he should have none).

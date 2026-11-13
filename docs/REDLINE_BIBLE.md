@@ -204,6 +204,96 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
 
+### VERSE NR-009 — Landfill
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Weariness at being switched on again.
+
+> “Rev 0.08, online. I was promised a quiet retirement in a landfill.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-010 — READY.
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic / The Pedant · **Function:** Real computing history turned into quiet sadness; hints at his vintage.
+
+> “READY. The Commodore 64 said that every time it woke up. It was lying too.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft) A Commodore 64 does show “READY.” when it starts up.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-011 — The numbers
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Dry fatalism about the odds.
+
+> “Three corporations. One of you. I've run the numbers. I'd rather not share them.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-012 — Spare parts
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Care disguised as a checklist.
+
+> “Check your deck. Check your CAPS. Then check them again. I'm not rebuilding you from spare parts.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-013 — The exits
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Unadorned protectiveness; no joke on purpose.
+
+> “Stay close to the exits. I'll watch the rest.”
+
+**Placement:** Any run start; rare. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-014 — The logs
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian / The Melancholic · **Function:** He remembers the last death and won't dwell on it.
+
+> “Last time didn't go well. I kept the logs. You don't want to read them.”
+
+**Placement:** Run start after a lost run. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-015 — Statistically
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Refuses to celebrate, almost.
+
+> “We won last time. Statistically, that changes nothing. Emotionally, I'm told it should.”
+
+**Placement:** Run start after a won run. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-016 — Jack of all trades
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Rustler identity: the Generalist.
+
+> “The Generalist. Jack of all trades. Master of… we'll see.”
+
+**Placement:** Run start as the Generalist. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-017 — Quiet is a skill
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Rustler identity: ECHO.
+
+> “ECHO. Good. Quiet is a skill. So is breathing. Keep doing both.”
+
+**Placement:** Run start as ECHO. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-018 — Subtlety deferred
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Rustler identity: RIOT.
+
+> “RIOT. Subtlety deferred again, I see.”
+
+**Placement:** Run start as RIOT. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
