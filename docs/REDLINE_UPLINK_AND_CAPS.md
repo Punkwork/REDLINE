@@ -90,8 +90,8 @@ An Uplink always offers the same layout, so players learn it quickly:
 
 ### 3.3 How often Uplinks appear
 Uplinks follow the corporation map structure in Core Rules §10.1 (APPROVED 2026-11-12, UPL-007):
-- An **Uplink** can appear in **row 3** and **row 6** of the 9 infiltration rows.
-- **Row 9** (just before the Central Node) offers **only Uplinks or DEAD DROPs**, so every route can reach at least one Uplink right before the boss.
+- An **Uplink** appears in **row 4** and **row 7** of the 10 infiltration rows (MAP-002; was rows 3 and 6 of 9).
+- **Row 10** (just before the Central Node) offers **only Uplinks or DEAD DROPs**, so every route can reach at least one Uplink right before the boss.
 - **No Uplinks during the escape.**
 - About **1 Uplink in 3** has a Clinic.
 
@@ -102,7 +102,7 @@ Uplinks follow the corporation map structure in Core Rules §10.1 (APPROVED 2026
 **[CHANGED by UPL-008]** Target: a winning run adds **about 30 cards in total**: about 21 Node card rewards (Core Rules §9.1, CORE-010) plus **2–3 cards bought per corporation**. So reserves are lower and cards cost more.
 
 Rough CRED per corporation, for balance:
-- **ICE Nodes on the way in:** about 6 per route, paying about **15–30 CRED each** with reasonable extraction (was 20–35).
+- **ICE Nodes on the way in:** about 6–7 per route (MAP-002), paying about **15–30 CRED each** with reasonable extraction (was 20–35).
 - **Central Node:** up to **35** (was 40).
 - **Escape encounters:** 10 each, spent at the next corporation.
 - **Clean Node bonus:** about **+5–10**.
@@ -138,5 +138,6 @@ With cards at 40 / 60 / 90 CRED (about 50 on average), that buys **2–3 cards p
 
 | ID | Change |
 |---|---|
+| MAP-002 | **10 infiltration rows:** Uplinks in rows 4 and 7, Uplink or DEAD DROP in row 10 (§3.3). See Core Rules §10.1. |
 | BASIC-001 | **No basic cards at the Uplink:** the reserve shelf is removed (amends UPL-005). See Core Rules §3.1a. |
 | UPL-008 | **Leaner economy:** a winning run adds about 30 cards in total, including **2–3 bought per corporation**. Card prices raised to **40 / 60 / 90 CRED** (from 25 / 40 / 65); CRED reserves lowered about 20% (Tier 1: 10/15; Tier 2: 15/20/30; Central 35; escape 10 unchanged), for about 130–220 CRED per corporation (§3, §4; `REDLINE_CARD_POOLS.md` §2; `REDLINE_ICE_CORP1.md` §8.2). Pairs with CORE-010. |

@@ -20,7 +20,7 @@ func _init() -> void:
 	for cid in corps:
 		var patient := true
 		print("\n=== %s · %s bot ===" % [db.corporations[cid]["name"], "Patient (extracts fully)" if patient else "Hasty (breaks ASAP)"])
-		print("Averages over winning runs only (full 9 rows + Central Node).")
+		print("Averages over winning runs only (full 10 rows + Central Node).")
 		print("Rustler     wins  earned  reserve  extr%  spent  rewards  bought  Uplinks  deck")
 		for rid in ["generalist", "echo", "riot", "vector"]:
 			var t := {"wins": 0, "earned": 0, "seen": 0, "extr": 0, "spent": 0, "rewards": 0, "bought": 0, "uplinks": 0, "deck": 0}

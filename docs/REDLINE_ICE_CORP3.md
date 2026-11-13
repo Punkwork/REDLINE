@@ -54,7 +54,7 @@ LUCIDA follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): the t
 
 ## 5. LUCIDA ICE roster
 
-### Tier 1 (rows 1–4)
+### Tier 1 (rows 2–5)
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|
@@ -64,7 +64,7 @@ LUCIDA follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): the t
 | **FOCUS MODE** | WALL | 5 | [S1] DISCARD 1 · [S2] DEADLOCK | — | 2 | PROBE and boosting against high STR |
 | **NEURAL HANDSHAKE** | CODE GATE | 3 | [S1] PULP 2 · [S2] FORGET 1 · [S3] DEADLOCK | — | 5 | Which loss hurts more: VITAE or a card |
 
-### Tier 2 (rows 5–8)
+### Tier 2 (rows 6–9)
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|
@@ -119,7 +119,7 @@ LUCIDA's new-user setup. Every route starts here (Core Rules §10.1a).
 
 - **The lesson:** LUCIDA attacks your hand. **FORGET takes random cards, and CACHED cards are safe.** Protect the card you need for turn 3.
 - **The decisions (turns 1–2):** break the FORGET subroutines, or CACHE your key card and spend the BW elsewhere? Turn 3: break ONBOARDING's DEADLOCK, or stay to extract?
-- **Why no VOID here:** a VOID subroutine that repeats every turn on an ICE a Rustler can't break sends that Rustler into a VOID spiral (DRAW shrinks, so it finds its fallback even later). With two ICE, one Rustler is always off-type for both, so VOID first appears in rows 2–4 (MOOD SCANNER).
+- **Why no VOID here:** a VOID subroutine that repeats every turn on an ICE a Rustler can't break sends that Rustler into a VOID spiral (DRAW shrinks, so it finds its fallback even later). With two ICE, one Rustler is always off-type for both, so VOID first appears in the Tier 1 rows 2–5 (MOOD SCANNER).
 - **CRED reserve:** 15. Rewards as a normal 1-layer Node.
 - **Measured** (starter decks, rushing test bot): Generalist and ECHO 3 turns; RIOT about 3.7; VECTOR about 5.4. Average about 3.8.
 

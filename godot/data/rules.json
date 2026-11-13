@@ -164,7 +164,7 @@
     "escape": 10
   },
   "map": {
-    "infiltration_rows": 9,
+    "infiltration_rows": 10,
     "row_width": [
       3,
       4
@@ -174,24 +174,27 @@
       3
     ],
     "rows": {
-      "1-4": [
+      "1": [
+        "opener"
+      ],
+      "2-5": [
         "ice_t1",
         "signal_unclear",
         "safehouse"
       ],
-      "3": [
+      "4": [
         "uplink"
       ],
-      "5-8": [
+      "6-9": [
         "ice_t2",
         "console_lab",
         "signal_unclear",
         "safehouse"
       ],
-      "6": [
+      "7": [
         "uplink"
       ],
-      "9": [
+      "10": [
         "uplink",
         "dead_drop"
       ]
@@ -205,6 +208,14 @@
       "safehouses": 1,
       "leave_early": false,
       "jack_out": false
+    },
+    "node_odds": {
+      "tier1_ice": 0.8,
+      "tier1_signal": 0.2,
+      "tier2_ice": 0.7,
+      "tier2_signal": 0.15,
+      "tier2_console_lab": 0.15,
+      "note": "Before SAFEHOUSE and Uplink placement. Tuned for about 6-7 ICE Nodes per route (MAP-002)."
     }
   },
   "nodes": {

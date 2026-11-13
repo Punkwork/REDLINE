@@ -51,7 +51,7 @@ IRONWATCH follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): th
 
 ## 4. IRONWATCH ICE roster
 
-### Tier 1 (rows 1–4)
+### Tier 1 (rows 2–5)
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|
@@ -61,7 +61,7 @@ IRONWATCH follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): th
 | **KEYCARD READER** | CODE GATE | 3 | [S1] DISCARD 1 · [S2] TRACE 1 · [S3] DEADLOCK | — | 3 | Many small breaks; rewards CODE GATE Icepicks |
 | **BARRICADE** | WALL | 5 | [S1] INSERT 1 CITATION into your discard pile · [S2] DEADLOCK | — | 2 | PROBE and boosting against high STR; the CITATION tax |
 
-### Tier 2 (rows 5–8)
+### Tier 2 (rows 6–9)
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|

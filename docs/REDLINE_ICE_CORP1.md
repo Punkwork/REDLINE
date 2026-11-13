@@ -50,8 +50,8 @@ To keep ICE comparable, each effect has a **threat value**. The total threat of 
 ### 2.2 Tiers
 | Tier | Where | STR | Threat per Corporation Response | Reactive abilities |
 |---|---|---|---|---|
-| **Tier 1** | Infiltration rows 1–4 | 2–5 | 2–5 | At most 1, mild |
-| **Tier 2** | Infiltration rows 5–8, and the escape | 3–6 | 4–8 | At most 1 |
+| **Tier 1** | Infiltration rows 2–5 (MAP-002) | 2–5 | 2–5 | At most 1, mild |
+| **Tier 2** | Infiltration rows 6–9 (MAP-002), and the escape | 3–6 | 4–8 | At most 1 |
 | **Boss** | Central Node | 6+ | 10–15 (whole encounter) | Yes |
 
 ### 2.3 Type identities
@@ -94,7 +94,7 @@ Both are removed at the end of the Node, as with all Bloatware.
 
 ## 5. HALCYON ICE roster
 
-### Tier 1 (rows 1–4)
+### Tier 1 (rows 2–5)
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|
@@ -104,7 +104,7 @@ Both are removed at the end of the Node, as with all Bloatware.
 | **CAPTCHA** | CODE GATE | 3 | [S1] DISCARD 1 · [S2] PULP 2 · [S3] DEADLOCK | — | 4 | Choosing which subroutine to break |
 | **DOORBELL CAM** | SENTRY | 2 | [S1] TRACE 3 + DEADLOCK | Whenever you play a CLOAK card: TRACE 1. | 3 | Over-hiding (ECHO) |
 
-### Tier 2 (rows 5–8)
+### Tier 2 (rows 6–9)
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|
@@ -154,8 +154,8 @@ HALCYON's home-assistant AI, the voice in every house. A three-ICE boss encounte
 ### 8.1 Composition by Node
 | Node | Layers | ICE per layer |
 |---|---|---|
-| Rows 1–4 (Tier 1) | 1–2 | 1 main; sometimes 1 support in layer 2 |
-| Rows 5–8 (Tier 2) | 2–3 | 1–2; layer 3 can have 2 supports + main |
+| Rows 2–5 (Tier 1) | 1–2 | 1 main; sometimes 1 support in layer 2 |
+| Rows 6–9 (Tier 2) | 2–3 | 1–2; layer 3 can have 2 supports + main |
 | Central | 1 | THE HEARTH encounter |
 
 Support ICE are drawn from the same roster (a Tier 1 ICE can support a Tier 2 main). ICE always work exactly as printed: a support ICE's DEADLOCKs must also be broken to BREACH. Multi-ICE layers therefore take longer, which is why they have bigger CRED reserves.

@@ -263,7 +263,7 @@ func _screen_menu() -> void:
 	_margin_box(screen_body)
 	screen_body.add_child(_label("REDLINE", 48, C_ACCENT))
 	screen_body.add_child(_label("Economy playtest build", 16, C_DIM))
-	screen_body.add_child(_label("\nA corporation heist: 9 infiltration rows, Uplinks, events and the Central Node (no escape yet).\n1. Choose a corporation:", 16, C_TEXT))
+	screen_body.add_child(_label("\nA corporation heist: 10 infiltration rows, Uplinks, events and the Central Node (no escape yet).\n1. Choose a corporation:", 16, C_TEXT))
 	var crow := HBoxContainer.new()
 	crow.add_theme_constant_override("separation", 8)
 	for cid in ["halcyon", "ironwatch", "lucida"]:
@@ -320,14 +320,14 @@ func _header(title: String) -> void:
 
 func _screen_map() -> void:
 	_header("%s — choose your next Node" % heist.corp["name"])
-	screen_body.add_child(_label("Left to right: rows 1–9, then the Central Node. You can move to the highlighted Nodes.", 13, C_DIM))
+	screen_body.add_child(_label("Left to right: rows 1–10, then the Central Node. You can move to the highlighted Nodes.", 13, C_DIM))
 	var grid := HBoxContainer.new()
 	grid.add_theme_constant_override("separation", 6)
 	var reach: Array = heist.reachable()
 	for r in heist.rows.size():
 		var col := VBoxContainer.new()
 		col.add_theme_constant_override("separation", 6)
-		col.add_child(_label("Row %d" % (r + 1) if r < 9 else "Core", 13, C_DIM))
+		col.add_child(_label("Row %d" % (r + 1) if r < Heist.ROWS else "Core", 13, C_DIM))
 		for c in heist.rows[r].size():
 			var n: Dictionary = heist.rows[r][c]
 			var b := Button.new()

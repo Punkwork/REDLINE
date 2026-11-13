@@ -145,7 +145,7 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 
 ### 2.4 Earning Ghostware during infiltration (APPROVED 2026-11-12, P5-008)
 
-Besides the payload, there are three ways to earn Ghostware in the 9 infiltration rows. Ghostware earned this way is **kept immediately**.
+Besides the payload, there are three ways to earn Ghostware in the 10 infiltration rows (MAP-002; was 9). Ghostware earned this way is **kept immediately**.
 
 **1. Ghostware FRAGMENTS.** Collect **3 fragments** → choose **1 of 3 Ghostware** right away. Earn a fragment for:
 - **fully extracting** an ICE layer's CRED reserve;

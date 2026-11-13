@@ -1,5 +1,5 @@
 extends RefCounted
-## One corporation heist (HALCYON, IRONWATCH or LUCIDA) for the economy playtest: the 9 infiltration rows and the Central Node.
+## One corporation heist (HALCYON, IRONWATCH or LUCIDA) for the economy playtest: the 10 infiltration rows and the Central Node.
 ## (The escape isn't in this slice yet.) Owns the map, the non-ICE rooms (Uplink, DEAD DROP,
 ## SAFEHOUSE, Console Lab, SIGNAL UNCLEAR) and the playtest summary. ICE Nodes run in NodeRun.
 ##
@@ -18,7 +18,10 @@ const PHASE_ROOM := "room"          ## uplink, dead_drop, safehouse, console_lab
 const PHASE_PICK := "pick_card"     ## choosing a card from the deck (removal, trade)
 const PHASE_SUMMARY := "summary"
 
-const ROWS := 9
+const ROWS := 10               ## infiltration rows (MAP-002): 1 Opening Node, 2–5 Tier 1, 6–9 Tier 2, 10 Uplink/DEAD DROP
+const LAST_T1_ROW := 4         ## 0-based: rows 2–5 are Tier 1
+const UPLINK_ROWS := [3, 6]    ## 0-based: rows 4 and 7 always offer an Uplink
+const FINAL_ROW := ROWS - 1    ## row 10: Uplink or DEAD DROP only
 const WIDTH := 3
 
 var db
@@ -53,7 +56,7 @@ func start() -> void:
 		_log(note)
 	_generate_map()
 	phase = PHASE_MAP
-	_log("== %s: infiltrate 9 rows to the Central Node. ==" % corp["name"])
+	_log("== %s: infiltrate 10 rows to the Central Node. ==" % corp["name"])
 	changed.emit()
 
 
@@ -62,7 +65,7 @@ func start() -> void:
 func _generate_map() -> void:
 	rows.clear()
 	var safehouse_rows: Array = []
-	var candidates: Array = [1, 3, 4, 6, 7]   # never row 1 (the Opening Node)
+	var candidates: Array = [1, 2, 4, 5, 7, 8]   # never the Opening Node, an Uplink row or row 10
 	candidates.shuffle()
 	for i in run.rng.randi_range(1, 2):
 		safehouse_rows.append(candidates[i])
@@ -70,19 +73,19 @@ func _generate_map() -> void:
 		var row: Array = []
 		for c in WIDTH:
 			row.append({"type": _roll_type(r), "data": {}})
-		if r == 2 or r == 5:
+		if UPLINK_ROWS.has(r):
 			row[run.rng.randi_range(0, WIDTH - 1)]["type"] = "uplink"
-		if r == 8:
+		if r == FINAL_ROW:
 			row = [{"type": "uplink", "data": {}}, {"type": "dead_drop", "data": {}}, {"type": "uplink", "data": {}}]
 		if r == 0:
 			row = [{"type": "opener", "data": {}}]
 		if safehouse_rows.has(r):
 			var options: Array = range(WIDTH).filter(func(c): return row[c]["type"] != "uplink")
 			row[options[run.rng.randi_range(0, options.size() - 1)]]["type"] = "safehouse"
-		if r > 0 and r < 8 and not row.any(func(n): return n["type"].begins_with("ice")):
+		if r > 0 and r < FINAL_ROW and not row.any(func(n): return n["type"].begins_with("ice")):
 			var options2: Array = range(WIDTH).filter(func(c): return row[c]["type"] != "uplink" and row[c]["type"] != "safehouse")
 			if not options2.is_empty():
-				row[options2[0]]["type"] = "ice_t1" if r < 4 else "ice_t2"
+				row[options2[0]]["type"] = "ice_t1" if r <= LAST_T1_ROW else "ice_t2"
 		for c in row.size():
 			var n: Dictionary = row[c]
 			n["links"] = range(WIDTH) if r == 0 else range(max(0, c - 1), min(WIDTH, c + 2))
@@ -92,18 +95,19 @@ func _generate_map() -> void:
 		rows.append(row)
 	rows.append([{"type": "central", "data": {}, "links": [], "label": "CENTRAL NODE"}])
 	for c in WIDTH:
-		rows[8][c]["links"] = [0]
+		rows[FINAL_ROW][c]["links"] = [0]
 
 
 func _roll_type(r: int) -> String:
 	var roll: float = run.rng.randf()
 	if r == 0:
 		return "ice_t1"
-	if r < 4:
-		return "ice_t1" if roll < 0.7 else "signal"
-	if roll < 0.6:
+	var odds: Dictionary = db.rules["map"]["node_odds"]
+	if r <= LAST_T1_ROW:
+		return "ice_t1" if roll < float(odds["tier1_ice"]) else "signal"
+	if roll < float(odds["tier2_ice"]):
 		return "ice_t2"
-	if roll < 0.8:
+	if roll < float(odds["tier2_ice"]) + float(odds["tier2_signal"]):
 		return "signal"
 	return "console_lab"
 
@@ -480,7 +484,7 @@ func _resolve_event_choice(i: int) -> void:
 			"trade_up":
 				pending = "trade_up"
 			"start_encounter":
-				var tier := 1 if row_index < 4 else 2
+				var tier := 1 if row_index <= LAST_T1_ROW else 2
 				var reserves: Array = db.rules["cred_reserves"]["tier%d" % tier]
 				room = {}
 				_start_encounter([{"ice": [_pick(_ice_pool(tier), [])], "cred_reserve": int(reserves[0])}], false)
@@ -574,7 +578,7 @@ func summary_text() -> String:
 	var s: Dictionary = run.stats
 	var lines: Array[String] = []
 	var minutes := float(Time.get_ticks_msec() - start_msec) / 60000.0
-	lines.append("REDLINE economy playtest — %s (9 rows + Central Node, no escape)" % corp["name"])
+	lines.append("REDLINE economy playtest — %s (10 rows + Central Node, no escape)" % corp["name"])
 	lines.append("Rustler: %s · Result: %s · Time: %.0f min" % [db.rustlers[run.rustler_id]["name"],
 			"Central Node cracked" if won else "flatlined at row %d" % (row_index + 1), minutes])
 	lines.append("End state: VITAE %d/%d · TRACE %d · strikes %d · VOID %d" % [run.vitae, run.max_vitae, run.trace, run.strikes, run.void_counters])

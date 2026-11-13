@@ -304,13 +304,13 @@ func test_heists() -> void:
 			var h = Heist.new()
 			h.setup(db, rid, 500 + i)
 			h.start()
-			check(h.rows.size() == 10, "9 rows + Central Node")
+			check(h.rows.size() == 11, "10 rows + Central Node")
 			check(h.rows[0].size() == 1 and h.rows[0][0]["type"] == "opener" and h.rows[0][0]["links"].size() == 3, "row 1 is the Opening Node")
 			var uplink_rows := 0
-			for r in [2, 5, 8]:
+			for r in [3, 6, 9]:
 				if h.rows[r].any(func(n): return n["type"] == "uplink"):
 					uplink_rows += 1
-			check(uplink_rows == 3, "Uplinks in rows 3, 6 and 9")
+			check(uplink_rows == 3, "Uplinks in rows 4, 7 and 10")
 			Bot.new(i == 1).play_heist(h, 2)
 			check(h.phase == "summary", "%s heist %d finished (phase %s)" % [rid, i, h.phase])
 			check(h.summary_text().length() > 100, "summary written")

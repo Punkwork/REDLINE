@@ -219,7 +219,7 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 4. **JACK OUT** forfeits the Node's card reward (UPL-003 is unchanged).
 
-**Why [CORE-010]:** the target is **about 30 cards added in a winning run, in total**, of which **2–3 per corporation are bought** at Uplinks (UPL-008). A card after every BREACH gave about 45 card rewards per run. One per ICE Node on the way in gives 6 + the Central Node = **7 per corporation, about 21 per run**; with 6–9 cards bought, that's **27–30 cards**. Fewer, better choices keep decks lean and make each pick matter. The odds table keeps going deeper worth the risk now that the extra reward per layer is gone.
+**Why [CORE-010]:** the target is **about 30 cards added in a winning run, in total**, of which **2–3 per corporation are bought** at Uplinks (UPL-008). A card after every BREACH gave about 45 card rewards per run. One per ICE Node on the way in gives 6–7 + the Central Node = **7–8 per corporation, about 22 per run** (MAP-002); with 6–9 cards bought, that's **28–31 cards**. Fewer, better choices keep decks lean and make each pick matter. The odds table keeps going deeper worth the risk now that the extra reward per layer is gone.
 
 ### 9.2 Extraction (unchanged)
 - Each encounter has a **CRED reserve**, larger in deeper layers.
@@ -240,18 +240,20 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 ### 10.1 A corporation's network
 - A layered map of Nodes. You always move forward, and every route has the same number of Nodes.
 - Node icons on the map show **what probably lies ahead**: ICE, Uplink, DEAD DROP, Console Lab, SAFEHOUSE, or **SIGNAL UNCLEAR** (unknown). **[CHANGED]** Previously Nodes were fully hidden. Showing likely contents fits the surveillance theme (you're watching the corporation too) and makes route choice a real decision.
-- **Structure [CHANGED by UPL-007]:** a heist in three parts. Every route has **14 Nodes**: **9 infiltration rows → the Central Node → a 4-Node escape**. This replaces the earlier working size of 6 Nodes per route (CORE-009).
+- **Structure [CHANGED by UPL-007]:** a heist in three parts. Every route has **15 Nodes**: **10 infiltration rows → the Central Node → a 4-Node escape** **[CHANGED by MAP-002: was 9 rows]**. This replaces the earlier working size of 6 Nodes per route (CORE-009).
 
 **Infiltration rows** (each row has 3–4 Nodes; each Node links forward to 2–3 Nodes in the next row). **Row 1 is always the corporation's Opening Node** **[NEW, OPEN-001]**: a single fixed Node that every route starts from (§10.1a).
 
 | Rows | Possible Nodes |
 |---|---|
 | 1 | The **Opening Node** only (§10.1a) |
-| 2–4 (Tier 1 ICE) | ICE, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** possible in row 3 |
-| 5–8 (Tier 2 ICE) | ICE, Console Lab, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** possible in row 6 |
-| 9 | **Uplink or DEAD DROP only:** the last chance to prepare |
+| 2–5 (Tier 1 ICE) | ICE (80%), SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** in row 4 |
+| 6–9 (Tier 2 ICE) | ICE (70%), Console Lab, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** in row 7 |
+| 10 | **Uplink or DEAD DROP only:** the last chance to prepare |
 
-- **SAFEHOUSEs** appear in **1–2** of the 9 infiltration rows (never row 1).
+**Why 10 rows [MAP-002]:** about **6–7 ICE Nodes per route** (measured: 6.2 on a random route plus about 0.2 AMBUSH events; up to about 9 on a route chosen for ICE), so about 7–8 card rewards per corporation with the Central Node. The ICE odds per row are in `rules.json` (`map.node_odds`).
+
+- **SAFEHOUSEs** appear in **1–2** of the 10 infiltration rows (never row 1, an Uplink row or row 10).
 
 ### 10.1a The Opening Node [NEW, OPEN-001]
 Every corporation starts with the same designed encounter, so every run gets **one guaranteed card reward per corporation** and every corporation teaches its main lesson before the random rows begin.
@@ -267,7 +269,7 @@ Every corporation starts with the same designed encounter, so every run gets **o
 | LUCIDA | **INTAKE** (BASELINE SCAN + ONBOARDING) | FORGET takes random cards, and CACHED cards are safe. |
 
 Details: `REDLINE_ICE_CORP1.md` §8.4, `REDLINE_ICE_CORP2.md` §6a, `REDLINE_ICE_CORP3.md` §7a.
-- Every route can reach **at least 1 Uplink** (row 9 always offers one). About **1 Uplink in 3 has a Clinic**, shown on the map.
+- Every route can reach **at least 1 Uplink** (row 10 always offers one). About **1 Uplink in 3 has a Clinic**, shown on the map.
 
 ### 10.2 Central Node and the payload [CHANGED by UPL-007]
 A boss-style ICE encounter. Defeating it gives you the corporation's **payload**, an **encrypted data core**: choose **1 of 3 Ghostware**, **active immediately** (usable during the escape). The rest of the core stays encrypted until you escape, when NUL/REM decrypts it into a **First Signal fragment** **[CHANGED by P5-009]**. See `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5.
@@ -286,7 +288,7 @@ After the Central Node, you have to get out:
 Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE to max. Remove all VOID. Reset TRACE and strikes to 0.
 
 ### 10.5 Run length target [CHANGED by UPL-007]
-**75–100 minutes** for a full run (previously 45–75). Roughly: about 6 ICE Nodes on the way in (≈11 encounters with layers) + the boss + 3 escape encounters ≈ **15 encounters per corporation**, **about 45 per run**, at 3–4 turns each. The Training Node playtest should measure real minutes per encounter before these numbers are fixed.
+**75–100 minutes** for a full run (previously 45–75). Roughly: about 6–7 ICE Nodes on the way in (≈12 encounters with layers) + the boss + 3 escape encounters ≈ **16 encounters per corporation**, **about 48 per run**, at 3–4 turns each (MAP-002 adds about one encounter per corporation). The Training Node playtest should measure real minutes per encounter before these numbers are fixed.
 
 ---
 
@@ -397,4 +399,5 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + VOID onl
 | ICE3-002 | New subroutine effect **FORGET X** (§5.2), introduced by LUCIDA (`REDLINE_ICE_CORP3.md` §3). |
 | ICE3-002a | FORGET sends cards to the **bottom of your draw pile** instead of BURNING them: BURNING could remove a Rustler's only fallback breaker and leave an encounter impossible to BREACH (found in simulation). |
 | BASIC-001 | **Structural rule: starter cards are the weakest cards** (§3.1a). Basic cards are no longer sold at the Uplink (amends UPL-005). Starter changes: HUSH STR 3 and boost 2 BW; STINGER STR 0; ADRENAL SPIKE gain 1 BW; LAY LOW −3 TRACE. BATTERING RAM gains a free first break each turn. |
+| MAP-002 | **10 infiltration rows** (was 9): row 1 Opening Node, rows 2–5 Tier 1 (Uplink in row 4), rows 6–9 Tier 2 (Uplink in row 7), row 10 Uplink or DEAD DROP. ICE odds 80% (Tier 1 rows) and 70% (Tier 2 rows), for about 6–7 ICE Nodes per route (§10.1, §10.5). Amends UPL-007. |
 | OPEN-001 | **Row 1 is the corporation's Opening Node** (§10.1, §10.1a): a fixed one-layer encounter with a BOOTING main ICE (DEADLOCK unbreakable before your 3rd turn). Guarantees 1 card reward per corporation. |
