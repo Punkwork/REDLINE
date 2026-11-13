@@ -925,3 +925,7 @@ Five lines approved as CANON verses referencing Kraftwerk's *Computer World* (19
 
 **CANON detail:** NUL/REM's internal clock plays a Roland TR-808 pattern instead of ticking; it got into his timing chips from Afrika Bambaataa's “Planet Rock” in 1982 (Bible §5). **Verses:** NR-130 (EV-37 Idle; the 808 clock), NR-131 (EV-12 Elegant play; “Boing, boom, tschak”, after the Kraftwerk track) and NR-132 (EV-10 Stalled encounter; the 808 rented for twenty dollars a session).
 
+## NULREM-027 — Little Computer People verses NR-133 and NR-134 (APPROVED, 2026-11-13)
+
+Two lines approved as CANON verses referencing Activision's Little Computer People (Commodore 64): NR-133 (EV-37 Idle; every computer has an occupant) and NR-134 (EV-19 KILLSWITCH fires; the free mail-in revival). Reference trait updated (Bible §5).
+
