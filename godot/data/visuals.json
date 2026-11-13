@@ -1,0 +1,46 @@
+{
+  "version": "0.1",
+  "notes": "Placeholder visual identity for the playtest build. Icons are white line art in res://assets/icons/<folder>/<id>.svg, tinted with the colours below. Card edges are drawn by scripts/ui/card_edge.gd, one style per owner.",
+  "icon_folders": {
+    "card_type": "card_types",
+    "rustler": "rustlers",
+    "corporation": "corps",
+    "cap": "caps",
+    "ghostware": "ghostware"
+  },
+  "card_types": {
+    "PROGRAM": {"color": "4ea8de"},
+    "SCRIPT": {"color": "3ddc97"},
+    "PROTOCOL": {"color": "c77dff"},
+    "BLOATWARE": {"color": "8a8f9c"}
+  },
+  "owners": {
+    "shared": {"color": "9aa5b8", "edge": "plain", "label": "SHARED"},
+    "generalist": {"color": "c9d1dc", "edge": "brackets", "label": "THE GENERALIST"},
+    "echo": {"color": "4dd0e1", "edge": "glow", "label": "ECHO"},
+    "riot": {"color": "ff5a36", "edge": "hazard", "label": "RIOT"},
+    "vector": {"color": "9ef01a", "edge": "spores", "label": "VECTOR"},
+    "corporation": {"color": "ff3860", "edge": "glitch", "label": "CORPORATION"}
+  },
+  "corporations": {
+    "training": {"color": "7a8494"},
+    "halcyon": {"color": "f6c177"},
+    "ironwatch": {"color": "7aa2f7"},
+    "lucida": {"color": "d291ff"}
+  },
+  "rarities": {
+    "basic": {"color": "7a8494"},
+    "common": {"color": "d8dee9"},
+    "uncommon": {"color": "3ddc97"},
+    "rare": {"color": "f5d76e"}
+  },
+  "ghostware_pools": {
+    "origin": {"color": "from_rustler"},
+    "general": {"color": "b8c0ff"},
+    "drawback": {"color": "ff6b6b"},
+    "reserve": {"color": "7a8494"},
+    "halcyon": {"color": "from_corporation"},
+    "ironwatch": {"color": "from_corporation"},
+    "lucida": {"color": "from_corporation"}
+  }
+}

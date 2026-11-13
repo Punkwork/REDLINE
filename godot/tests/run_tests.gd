@@ -8,6 +8,7 @@ const RunState = preload("res://scripts/core/run_state.gd")
 const NodeRun = preload("res://scripts/core/node_run.gd")
 const Heist = preload("res://scripts/core/heist.gd")
 const Bot = preload("res://tests/bot.gd")
+const Icons = preload("res://scripts/ui/icons.gd")
 
 var db
 var passed := 0
@@ -34,6 +35,7 @@ func _init() -> void:
 	test_uplink()
 	test_heists()
 	test_new_corporations()
+	test_icons()
 	print("\n%d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
 
@@ -359,3 +361,26 @@ func test_caps() -> void:
 	check(node.use_cap(0), "use JACK OUT")
 	check(node.phase == "node_complete" and node.jacked_out, "JACK OUT ends the Node")
 	check(node.run.deck.size() == 12, "JACK OUT gives no card reward")
+
+
+## Every card type, Rustler, corporation, CAP and Ghostware has an icon that loads, and the four
+## Rustlers have four different card edges.
+func test_icons() -> void:
+	var icons = Icons.new(db)
+	var missing: Array = []
+	var wanted := {"card_type": ["PROGRAM", "SCRIPT", "PROTOCOL", "BLOATWARE"], "rustler": db.rustlers.keys(),
+			"corporation": db.corporations.keys(), "cap": db.caps.keys(), "ghostware": db.ghostware.keys()}
+	var count := 0
+	for category in wanted:
+		for id in wanted[category]:
+			count += 1
+			var tex: Texture2D = icons.texture(category, id)
+			if tex == null or tex.get_width() < 16:
+				missing.append("%s/%s" % [category, id])
+	check(missing.is_empty(), "all %d icons load (missing: %s)" % [count, missing])
+	var edges := {}
+	for rid in db.rustlers:
+		edges[icons.owner_edge(rid)] = true
+	check(edges.size() == db.rustlers.size(), "each Rustler has its own card edge")
+	check(icons.ghostware_color("low_profile") == icons.rustler_color("echo"), "ORIGIN Ghostware takes its Rustler's colour")
+	check(icons.ghostware_color("kevlar_weave") == icons.corporation_color("ironwatch"), "corporation Ghostware takes its corporation's colour")

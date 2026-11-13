@@ -10,7 +10,7 @@ extends RefCounted
 
 const DATA_DIR := "res://data/"
 const FILES := ["cards", "rustlers", "ice", "caps", "ghostware", "patchwork",
-		"events", "contracts", "strains", "rules"]
+		"events", "contracts", "strains", "rules", "visuals"]
 
 var raw := {}            ## file name -> parsed Dictionary
 var cards := {}          ## card id -> card Dictionary (fused versions included, with "fused_from")
@@ -21,6 +21,7 @@ var ghostware := {}      ## ghostware id -> Dictionary
 var caps := {}           ## cap id -> Dictionary
 var strains := {}        ## strain id -> Dictionary
 var rules := {}          ## rules.json contents
+var visuals := {}        ## visuals.json contents (icon folders and colours)
 var errors: Array[String] = []
 
 
@@ -63,6 +64,7 @@ func load_all() -> bool:
 	for s in raw["strains"]["strains"]:
 		strains[s["id"]] = s
 	rules = raw["rules"]
+	visuals = raw["visuals"]
 	return true
 
 

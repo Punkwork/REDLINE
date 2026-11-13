@@ -26,6 +26,15 @@ On the map you can move to the next row's Nodes that are in the same column or n
 
 All prices, reserves and odds live in `data/rules.json` (`prices`, `cred_reserves`, `rewards`, `uplink`) and `data/ice.json`. Change them and replay; no code changes are needed.
 
+## Icons and card edges
+
+Every card type, Rustler, corporation, CAP and Ghostware has its own icon, and every card owner has its own card edge. All of it is placeholder art for the playtest, easy to swap.
+
+- **Icons:** white line-art SVGs in `assets/icons/` (`card_types/`, `rustlers/`, `corps/`, `caps/`, `ghostware/`), one file per id. The game tints them with the colours in `data/visuals.json`. To replace one, drop in a new SVG with the same file name (64×64, white strokes).
+- **Colours:** card types by type; CAPS by rarity; Ghostware by source (ORIGIN in its Rustler's colour, corporation sets in their corporation's colour, drawbacks in red, the rest periwinkle).
+- **Card edges** (`scripts/ui/card_edge.gd`): SHARED plain; THE GENERALIST corner brackets; ECHO a soft glow; RIOT cut corners with hazard stripes; VECTOR spores along the edge; Bloatware a broken, dashed edge. Each card also shows its type icon (top left), a rarity dot, and its Rustler's emblem (top right).
+- **Where they appear:** hand, rig, card rewards, the Uplink, card picks; CAPS and Ghostware as icons in the encounter bar, chips on the map and room screens, and on the payload and completion choices; Rustler and corporation emblems on the menu, screen headers, encounter bar and run summary.
+
 ## Layout
 
 | Path | What |
@@ -36,12 +45,16 @@ All prices, reserves and odds live in `data/rules.json` (`prices`, `cred_reserve
 | `scripts/core/node_run.gd` | The rules engine for one ICE Node: cards, Icepicks, CAPS, Ghostware, rewards. It has no UI code, so it is testable headless. |
 | `scripts/core/heist.gd` | One corporation heist: map, Uplink, rooms, events, Central Node and the economy summary. |
 | `scripts/ui/main_ui.gd` | The test UI, built in code. |
+| `scripts/ui/icons.gd` | Loads icons from `assets/icons/` and picks their colours from `data/visuals.json`. |
+| `scripts/ui/card_edge.gd` | The card frame StyleBox, one edge style per card owner. |
+| `assets/icons/` | The SVG icons (see above). |
 | `tests/run_tests.gd` | Rules, CAPS and Uplink tests, plus bot playthroughs of the Training Node and of heists with every Rustler. |
 | `tests/smoke_ui.gd` | The bot plays the Training Node and 4 heists through the UI, to catch UI script errors. |
 | `tests/bot.gd` | A simple bot used by the tests and the simulation. |
 | `tests/route_sim.gd` | Average Node types along random routes (ICE Nodes per route). |
 | `tests/opener_sim.gd` | Turns to BREACH each Opening Node, per Rustler (starter decks). |
 | `tests/heist_sim.gd` | Economy simulation: 80 heists per Rustler, with average CRED, cards and Uplink visits for winning runs. |
+| `tests/screenshots.gd` | Saves screenshots of the menu, an encounter, an Uplink, a card reward and the payload, to review the art. Needs a renderer: `godot --path godot --script res://tests/screenshots.gd -- /some/folder` (on a headless Linux box, wrap it in `xvfb-run`). |
 
 Scripts use `preload` constants rather than `class_name` so they also run under `--script`.
 

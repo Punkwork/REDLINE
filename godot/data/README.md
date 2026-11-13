@@ -8,7 +8,7 @@ Everything the game needs to know about its content: cards, Rustlers, ICE, CAPS,
 python3 tools/validate_data.py
 ```
 
-The checker confirms every file parses, ids are unique, every reference points at something real, starter decks have 12 cards, pools have their approved sizes, and every effect uses a known `op`.
+The checker confirms every file parses, every card type, Rustler, corporation, CAP and Ghostware has an icon in `godot/assets/icons/`, ids are unique, every reference points at something real, starter decks have 12 cards, pools have their approved sizes, and every effect uses a known `op`.
 
 ---
 
@@ -25,6 +25,7 @@ The checker confirms every file parses, ids are unique, every reference points a
 | `events.json` | 9 SIGNAL UNCLEAR events with choices and weights | Upgrades §3 |
 | `contracts.json` | 8 fixer contracts | Upgrades §2.4 |
 | `strains.json` | 5 virus strains with timing and per-counter effects | Rustlers §2 |
+| `visuals.json` | Placeholder visual identity: icon folders, and colours for card types, card owners (with their card edge style), corporations, rarities and Ghostware sources | — (playtest art, not a design decision) |
 | `rules.json` | Numbers the engine needs: turn, damage, TRACE strikes, rewards, prices, Uplink stock, CRED reserves, map, Node services | Core Rules, Card Pools, Uplink & CAPS, HALCYON ICE |
 
 ---

@@ -6,6 +6,8 @@ const GameData = preload("res://scripts/data/game_data.gd")
 const RunState = preload("res://scripts/core/run_state.gd")
 const NodeRun = preload("res://scripts/core/node_run.gd")
 const Heist = preload("res://scripts/core/heist.gd")
+const Icons = preload("res://scripts/ui/icons.gd")
+const CardEdge = preload("res://scripts/ui/card_edge.gd")
 
 const C_BG := Color("0b0d12")
 const C_PANEL := Color("151a23")
@@ -16,14 +18,13 @@ const C_GOOD := Color("3ddc97")
 const C_WARN := Color("ffb000")
 const C_CRED := Color("f5d76e")
 const TYPE_COLORS := {"WALL": Color("4ea8de"), "CODE GATE": Color("c77dff"), "SENTRY": Color("ff6b6b")}
-const CARD_COLORS := {"PROGRAM": Color("4ea8de"), "SCRIPT": Color("3ddc97"), "PROTOCOL": Color("c77dff"),
-		"BLOATWARE": Color("7a8494")}
 const NODE_COLORS := {"opener": Color("ff9f43"), "ice_t1": Color("4ea8de"), "ice_t2": Color("c77dff"), "uplink": Color("f5d76e"),
 		"dead_drop": Color("3ddc97"), "safehouse": Color("3ddc97"), "console_lab": Color("ffb000"),
 		"signal": Color("7a8494"), "central": Color("ff3860")}
 
 var db
-var mode := "menu"            ## "menu", "training", "heist"
+var icons                     ## Icons: textures and colours from data/visuals.json
+var mode := "menu"           ## "menu", "training", "heist"
 var heist
 var node                      ## the NodeRun on screen
 var training_run
@@ -37,6 +38,8 @@ var menu_corp := "halcyon"
 # Encounter screen
 var encounter_root: Control
 var stats_label: Label
+var enc_rustler_icon: TextureRect
+var enc_corp_icon: TextureRect
 var cap_row: HBoxContainer
 var ice_row: HBoxContainer
 var rig_row: HBoxContainer
@@ -57,6 +60,7 @@ func _ready() -> void:
 	if not db.load_all():
 		push_error("Data failed to load: %s" % [db.errors])
 		return
+	icons = Icons.new(db)
 	_build_layout()
 	_refresh()
 
@@ -127,8 +131,15 @@ func _build_layout() -> void:
 	main.add_theme_constant_override("separation", 8)
 	encounter_root.add_child(main)
 
+	var stats_row := HBoxContainer.new()
+	stats_row.add_theme_constant_override("separation", 10)
+	enc_rustler_icon = icons.icon_rect("rustler", "generalist", C_TEXT, 30)
+	enc_corp_icon = icons.icon_rect("corporation", "training", C_TEXT, 30)
 	stats_label = _label("", 18, C_TEXT)
-	main.add_child(_panel(stats_label))
+	stats_row.add_child(enc_rustler_icon)
+	stats_row.add_child(enc_corp_icon)
+	stats_row.add_child(stats_label)
+	main.add_child(_panel(stats_row))
 	cap_row = HBoxContainer.new()
 	cap_row.add_theme_constant_override("separation", 8)
 	main.add_child(cap_row)
@@ -142,7 +153,7 @@ func _build_layout() -> void:
 
 	main.add_child(_label("RIG  (installed Programs and Protocols — click an Icepick to use it for breaks)", 13, C_DIM))
 	rig_row = HBoxContainer.new()
-	rig_row.custom_minimum_size.y = 100
+	rig_row.custom_minimum_size.y = 120
 	rig_row.add_theme_constant_override("separation", 8)
 	main.add_child(rig_row)
 
@@ -155,7 +166,7 @@ func _build_layout() -> void:
 	main.add_child(hand_header)
 
 	var hand_area := HBoxContainer.new()
-	hand_area.custom_minimum_size.y = 165
+	hand_area.custom_minimum_size.y = 185
 	hand_area.add_theme_constant_override("separation", 12)
 	main.add_child(hand_area)
 	hand_row = HBoxContainer.new()
@@ -269,9 +280,14 @@ func _screen_menu() -> void:
 	for cid in ["halcyon", "ironwatch", "lucida"]:
 		var c: Dictionary = db.corporations[cid]
 		var cb := Button.new()
+		var ccol: Color = icons.corporation_color(cid)
 		cb.text = "%s%s\n%s · %s" % ["◉ " if menu_corp == cid else "", c["name"], c["theme"], c["main_threat"]]
-		cb.custom_minimum_size = Vector2(330, 56)
-		cb.add_theme_color_override("font_color", C_ACCENT if menu_corp == cid else C_TEXT)
+		cb.custom_minimum_size = Vector2(360, 64)
+		cb.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		_with_icon(cb, "corporation", cid, ccol, 40)
+		cb.add_theme_color_override("font_color", ccol if menu_corp == cid else C_TEXT)
+		cb.add_theme_stylebox_override("normal", _box(C_PANEL, ccol if menu_corp == cid else C_PANEL.lightened(0.15), 2))
+		cb.add_theme_stylebox_override("hover", _box(C_PANEL.lightened(0.1), ccol, 2))
 		cb.pressed.connect(func():
 			menu_corp = cid
 			_refresh())
@@ -281,19 +297,36 @@ func _screen_menu() -> void:
 	for rid in ["generalist", "echo", "riot", "vector"]:
 		var r: Dictionary = db.rustlers[rid]
 		var origin: Dictionary = db.ghostware[r["origin_ghostware"]]
-		screen_body.add_child(_choice("%s — %s\nORIGIN: %s — %s" % [r["name"], r["playstyle"], origin["name"], origin["text"]],
-				func(): _start_heist(rid)))
+		var rcol: Color = icons.rustler_color(rid)
+		var rrow := HBoxContainer.new()
+		rrow.add_theme_constant_override("separation", 8)
+		var rb := _choice("%s — %s\nORIGIN: %s — %s" % [r["name"], r["playstyle"], origin["name"], origin["text"]],
+				func(): _start_heist(rid))
+		rb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_with_icon(rb, "rustler", rid, rcol, 40)
+		_apply_edge(rb, rid, false, 10)
+		rrow.add_child(rb)
+		rrow.add_child(_chip("ghostware", origin["id"], icons.ghostware_color(origin["id"]), "ORIGIN: " + origin["name"], origin["text"]))
+		screen_body.add_child(rrow)
 	screen_body.add_child(_label("\nOr learn the basics:", 16, C_TEXT))
 	screen_body.add_child(_choice("Training Node (THE GENERALIST, 3 layers)", _start_training))
 
 
 func _header(title: String) -> void:
-	screen_body.add_child(_label(title, 28, C_ACCENT))
-	screen_body.add_child(_label(_status_line(), 16, C_TEXT))
 	var r = _run()
-	var g: Array = r.ghostware.map(func(id): return db.ghostware[id]["name"])
-	var caps: Array = r.caps.map(func(c): return db.caps[c["id"]]["name"] + (" (bootleg)" if c["bootleg"] else ""))
-	screen_body.add_child(_label("Ghostware: %s\nCAPS: %s" % [", ".join(g), ", ".join(caps) if not caps.is_empty() else "none"], 13, C_DIM))
+	var trow := HBoxContainer.new()
+	trow.add_theme_constant_override("separation", 10)
+	if heist != null:
+		trow.add_child(icons.icon_rect("corporation", heist.corp_id, icons.corporation_color(heist.corp_id), 36))
+	trow.add_child(_label(title, 28, C_ACCENT))
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	trow.add_child(spacer)
+	trow.add_child(icons.icon_rect("rustler", r.rustler_id, icons.rustler_color(r.rustler_id), 32))
+	trow.add_child(_label(db.rustlers[r.rustler_id]["name"], 18, icons.rustler_color(r.rustler_id)))
+	screen_body.add_child(trow)
+	screen_body.add_child(_label(_status_line(), 16, C_TEXT))
+	screen_body.add_child(_rack_row(r))
 	var row := HBoxContainer.new()
 	var deck_btn := Button.new()
 	deck_btn.text = "Hide deck" if show_deck else "View deck (%d)" % r.deck.size()
@@ -359,22 +392,23 @@ func _screen_room() -> void:
 			for shelf in ["Cards", "CAPS", "Ghostware"]:
 				screen_body.add_child(_label(shelf.to_upper(), 15, C_DIM))
 				var row := HFlowContainer.new()
-				row.add_theme_constant_override("h_separation", 8)
-				row.add_theme_constant_override("v_separation", 8)
+				row.add_theme_constant_override("h_separation", 10)
+				row.add_theme_constant_override("v_separation", 10)
 				for i in room["items"].size():
 					var item: Dictionary = room["items"][i]
 					if item["shelf"] != shelf:
 						continue
-					var b := Button.new()
-					b.custom_minimum_size = Vector2(220, 120)
-					b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-					b.add_theme_font_size_override("font_size", 12)
 					var price := "SOLD" if item.get("sold", false) else "%d CRED%s" % [item["price"], "  (SALE)" if item.get("sale", false) else ""]
-					b.text = "%s\n%s\n%s" % [heist.item_name(item), price, heist.item_text(item)]
+					var b: Button
+					if item["kind"] == "card":
+						var cdef: Dictionary = db.cards[item["id"]]
+						b = _card_button(cdef, "%s\n%s · %s\n%s\n%s" % [cdef["name"], cdef["type"], cdef["rarity"], price, cdef["text"]],
+								Vector2(220, 150), func(): heist.buy(i))
+					else:
+						b = _item_button(item, "%s\n%s\n%s" % [heist.item_name(item), price, heist.item_text(item)], func(): heist.buy(i))
 					var why: String = heist.can_buy(i)
 					b.disabled = why != ""
-					b.tooltip_text = why
-					b.pressed.connect(func(): heist.buy(i))
+					b.tooltip_text = why if why != "" else b.tooltip_text
 					row.add_child(b)
 				screen_body.add_child(row)
 			screen_body.add_child(_label("SERVICES", 15, C_DIM))
@@ -433,20 +467,19 @@ func _screen_pick() -> void:
 	flow.add_theme_constant_override("v_separation", 8)
 	for o in heist.pick_options():
 		var d: Dictionary = db.cards[o["id"]]
-		var b := Button.new()
-		b.custom_minimum_size = Vector2(200, 90)
-		b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		b.add_theme_font_size_override("font_size", 12)
-		b.add_theme_color_override("font_color", CARD_COLORS.get(d["type"], C_TEXT))
-		b.text = "%s\n%s · %s\n%s" % [d["name"], d["type"], d["rarity"], d["text"]]
-		b.pressed.connect(func(): heist.resolve_pick(o["uid"]))
-		flow.add_child(b)
+		flow.add_child(_card_button(d, "%s\n%s · %s\n%s" % [d["name"], d["type"], d["rarity"], d["text"]],
+				Vector2(200, 130), func(): heist.resolve_pick(o["uid"])))
 	screen_body.add_child(flow)
 	screen_body.add_child(_choice("Cancel", func(): heist.resolve_pick(-1)))
 
 
 func _screen_summary() -> void:
-	screen_body.add_child(_label("RUN SUMMARY" + ("  —  CENTRAL NODE CRACKED" if heist.won else "  —  FLATLINED"), 28, C_GOOD if heist.won else C_ACCENT))
+	var srow := HBoxContainer.new()
+	srow.add_theme_constant_override("separation", 10)
+	srow.add_child(icons.icon_rect("corporation", heist.corp_id, icons.corporation_color(heist.corp_id), 36))
+	srow.add_child(icons.icon_rect("rustler", heist.run.rustler_id, icons.rustler_color(heist.run.rustler_id), 36))
+	srow.add_child(_label("RUN SUMMARY" + ("  —  CENTRAL NODE CRACKED" if heist.won else "  —  FLATLINED"), 28, C_GOOD if heist.won else C_ACCENT))
+	screen_body.add_child(srow)
 	var row := HBoxContainer.new()
 	var copy := Button.new()
 	copy.text = "Copy summary to clipboard"
@@ -479,6 +512,13 @@ func _refresh_encounter() -> void:
 		r.trace, r.strikes, r.cred, node.ram_used, node.ram_capacity(), r.void_counters,
 		node.layer_index + 1, node.layers.size(), node.turn]
 	stats_label.add_theme_color_override("font_color", C_ACCENT if r.trace >= 30 else (C_WARN if r.trace >= 20 else C_TEXT))
+	enc_rustler_icon.texture = icons.texture("rustler", r.rustler_id)
+	enc_rustler_icon.self_modulate = icons.rustler_color(r.rustler_id)
+	enc_rustler_icon.tooltip_text = db.rustlers[r.rustler_id]["name"]
+	var cid: String = heist.corp_id if heist != null else "training"
+	enc_corp_icon.texture = icons.texture("corporation", cid)
+	enc_corp_icon.self_modulate = icons.corporation_color(cid)
+	enc_corp_icon.tooltip_text = db.corporations[cid]["name"]
 	piles_label.text = "Draw %d · Discard %d · Burned %d · CRED reserve %d%s" % [
 		node.draw_pile.size(), node.discard_pile.size(), node.burned.size(), node.reserve,
 		"   LOCKDOWN" if node.lockdown else ""]
@@ -511,6 +551,8 @@ func _build_caps() -> void:
 		var d: Dictionary = db.caps[cap["id"]]
 		var b := Button.new()
 		b.text = "%s%s" % [d["name"], " (bootleg)" if cap["bootleg"] else ""]
+		_with_icon(b, "cap", cap["id"], icons.cap_color(cap["id"]), 24)
+		b.add_theme_stylebox_override("normal", _box(C_PANEL, icons.cap_color(cap["id"]).darkened(0.3), 1))
 		b.tooltip_text = d["text"] + ("\nBOOTLEG: 25% fizzle, +3 TRACE." if cap["bootleg"] else "")
 		b.disabled = node.busy()
 		b.pressed.connect(func(): node.use_cap(slot, _target()))
@@ -520,7 +562,21 @@ func _build_caps() -> void:
 		p.text = "DEAD MAN'S POCKET: CACHE 1"
 		p.disabled = not node.can_pocket()
 		p.pressed.connect(node.pocket)
+		_with_icon(p, "ghostware", "dead_mans_pocket", icons.ghostware_color("dead_mans_pocket"), 24)
 		cap_row.add_child(p)
+	# Ghostware rack: one tinted icon per Ghostware; hover for its text.
+	if not r.ghostware.is_empty():
+		var spacer := Control.new()
+		spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		cap_row.add_child(spacer)
+		cap_row.add_child(_label("GHOSTWARE:", 14, C_DIM))
+		for gid in r.ghostware:
+			var g: Dictionary = db.ghostware[gid]
+			var gi: TextureRect = icons.icon_rect("ghostware", gid, icons.ghostware_color(gid), 28)
+			gi.mouse_filter = Control.MOUSE_FILTER_STOP
+			gi.tooltip_text = "%s%s\n%s%s" % [g["name"], "  (ORIGIN)" if g.get("pool", "") == "origin" else "", g["text"],
+					("\n⚠ " + g["drawback"]) if g.has("drawback") else ""]
+			cap_row.add_child(gi)
 
 
 func _build_ice() -> void:
@@ -600,7 +656,7 @@ func _build_rig() -> void:
 		var head: String = def["name"]
 		if def.has("icepick"):
 			head += "\n%s · STR %d" % [def["icepick"]["ice_type"], node.icepick_str(inst)]
-		box.add_child(_label(head, 14, CARD_COLORS.get(def["type"], C_TEXT)))
+		box.add_child(_label(head, 14, C_TEXT))
 		var row := HBoxContainer.new()
 		if def.has("icepick"):
 			var use := Button.new()
@@ -621,9 +677,7 @@ func _build_rig() -> void:
 			unl.pressed.connect(func(): node.unload(inst["uid"]))
 			row.add_child(unl)
 		box.add_child(row)
-		var panel := _panel(box)
-		var border: Color = C_ACCENT if selected_icepick == inst["uid"] else C_PANEL.lightened(0.15)
-		panel.add_theme_stylebox_override("panel", _box(C_PANEL, border, 2))
+		var panel := _card_panel(def, box, selected_icepick == inst["uid"])
 		panel.tooltip_text = def["text"]
 		rig_row.add_child(panel)
 	if node.installed.is_empty() and node.rack.is_empty():
@@ -634,19 +688,15 @@ func _build_hand() -> void:
 	_clear(hand_row)
 	for inst in node.hand:
 		var def: Dictionary = node.card_def(inst)
-		var b := Button.new()
-		b.custom_minimum_size = Vector2(150, 160)
-		b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		var cost := "—" if def["cost_bw"] == null else str(node.play_cost(inst))
 		var extra := "  RAM %d" % int(def["ram"]) if def.has("ram") else ""
 		var tr := "  +%d TRACE" % int(def["trace"]) if int(def.get("trace", 0)) > 0 else ""
-		b.text = "%s%s\n%s · %s BW%s%s\n\n%s" % ["[CACHED] " if node.cached.has(inst["uid"]) else "", def["name"], def["type"], cost, extra, tr, def["text"]]
-		b.add_theme_font_size_override("font_size", 12)
-		b.add_theme_color_override("font_color", CARD_COLORS.get(def["type"], C_TEXT))
+		var cached: bool = node.cached.has(inst["uid"])
+		var b := _card_button(def, "%s%s\n%s · %s BW%s%s\n\n%s" % ["[CACHED] " if cached else "", def["name"], def["type"], cost, extra, tr, def["text"]],
+				Vector2(150, 175), func(): node.play_card(inst["uid"], _target()), cached)
 		var check: Dictionary = node.can_play(inst)
 		b.disabled = not check["ok"]
 		b.tooltip_text = check["reason"] if not check["ok"] else def["text"]
-		b.pressed.connect(func(): node.play_card(inst["uid"], _target()))
 		hand_row.add_child(b)
 
 
@@ -667,7 +717,9 @@ func _build_overlay() -> void:
 						continue
 					seen[inst["id"]] = true
 					var def: Dictionary = node.card_def(inst)
-					overlay_body.add_child(_choice("%s — %s" % [def["name"], def["text"]], func(): node.ready_rig_choose(inst["uid"])))
+					var rr := _choice("%s — %s" % [def["name"], def["text"]], func(): node.ready_rig_choose(inst["uid"]))
+					_with_icon(rr, "card_type", def["type"], icons.card_type_color(def["type"]), 26)
+					overlay_body.add_child(rr)
 				overlay_body.add_child(_choice("Skip", func(): node.ready_rig_choose(-1)))
 			NodeRun.PHASE_LAYER_CHOICE:
 				_title("LAYER %d BREACHED — GO DEEPER?" % node.layers_cleared, C_ACCENT)
@@ -683,17 +735,22 @@ func _build_overlay() -> void:
 				var odds: Dictionary = node.rarity_odds()
 				_text("Card reward for %d layer(s) cleared (odds %d%% common / %d%% uncommon / %d%% rare):" % [
 						node.layers_cleared, roundi(odds["common"] * 100), roundi(odds["uncommon"] * 100), roundi(odds["rare"] * 100)])
+				var rflow := HFlowContainer.new()
+				rflow.add_theme_constant_override("h_separation", 10)
+				rflow.add_theme_constant_override("v_separation", 10)
 				for id in node.reward_options:
 					var def: Dictionary = db.cards[id]
 					var cost := "—" if def["cost_bw"] == null else str(int(def["cost_bw"]))
-					overlay_body.add_child(_choice("%s  (%s, %s BW, %s)\n%s" % [def["name"], def["type"], cost, def["rarity"], def["text"]],
-							func(): node.choose_reward(id)))
+					rflow.add_child(_card_button(def, "%s\n%s · %s BW · %s\n\n%s" % [def["name"], def["type"], cost, def["rarity"], def["text"]],
+							Vector2(178, 180), func(): node.choose_reward(id)))
+				overlay_body.add_child(rflow)
 				overlay_body.add_child(_choice("Skip the card", func(): node.choose_reward("")))
 			NodeRun.PHASE_COMPLETION:
 				_title("FULL CLEAR: COMPLETION REWARD", C_GOOD)
 				_text("Choose a CAP (%d free slot(s)). PATCHWORK isn't in this build yet." % _run().free_cap_slots())
 				for id in node.completion_options:
 					var b := _choice("%s — %s" % [db.caps[id]["name"], db.caps[id]["text"]], func(): node.choose_completion(id))
+					_with_icon(b, "cap", id, icons.cap_color(id), 30)
 					b.disabled = _run().free_cap_slots() <= 0
 					overlay_body.add_child(b)
 				overlay_body.add_child(_choice("Skip", func(): node.choose_completion("")))
@@ -702,8 +759,10 @@ func _build_overlay() -> void:
 				_text("Crack out one piece of usable tech. It's active immediately. The rest stays encrypted until you escape.")
 				for id in node.payload_options:
 					var g: Dictionary = db.ghostware[id]
-					overlay_body.add_child(_choice("%s — %s%s" % [g["name"], g["text"], ("  ⚠ " + g["drawback"]) if g.has("drawback") else ""],
-							func(): node.choose_payload(id)))
+					var pb := _choice("%s — %s%s" % [g["name"], g["text"], ("  ⚠ " + g["drawback"]) if g.has("drawback") else ""],
+							func(): node.choose_payload(id))
+					_with_icon(pb, "ghostware", id, icons.ghostware_color(id), 36)
+					overlay_body.add_child(pb)
 			NodeRun.PHASE_NODE_COMPLETE:
 				_title("NODE FINISHED", C_GOOD)
 				_text("CRED earned here: %d · total CRED %d · VITAE %d/%d · TRACE %d" % [node.cred_earned, _run().cred, _run().vitae, _run().max_vitae, _run().trace])
@@ -765,6 +824,160 @@ func _on_log(text: String) -> void:
 	var line := "[color=#%s]%s[/color]\n" % [color, text]
 	log_box.append_text(line)
 	side_log.append_text(line)
+
+
+# ------------------------------------------------------------------ icons and card frames
+
+## The emblem in a card's top-right corner: its Rustler's, or for Bloatware the current corporation's.
+## Shared cards have none; their plain edge marks them.
+func _owner_badge(def: Dictionary) -> TextureRect:
+	var owner: String = def.get("owner", "shared")
+	if db.rustlers.has(owner):
+		return icons.icon_rect("rustler", owner, icons.rustler_color(owner), 20)
+	if owner == "corporation":
+		var cid: String = _run().corporation_id if _run() != null else "training"
+		return icons.icon_rect("corporation", cid, icons.owner_color("corporation"), 20)
+	return null
+
+
+## A card's top strip: type icon and name (left), rarity dot, and owner emblem (right).
+func _card_header(def: Dictionary) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_theme_constant_override("separation", 4)
+	var tcol: Color = icons.card_type_color(def["type"])
+	row.add_child(icons.icon_rect("card_type", def["type"], tcol, 20))
+	var tl := _label(def["type"], 10, tcol)
+	tl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(tl)
+	var rarity: String = def.get("rarity", "")
+	if rarity in ["common", "uncommon", "rare"]:
+		var rl := _label("●", 10, icons.rarity_color(rarity))
+		rl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_child(rl)
+	var spacer := Control.new()
+	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(spacer)
+	var badge := _owner_badge(def)
+	if badge != null:
+		row.add_child(badge)
+	return row
+
+
+## Pins the card header to the top of a card button.
+func _add_card_badges(b: Button, def: Dictionary) -> void:
+	var header := _card_header(def)
+	header.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	header.offset_left = 8
+	header.offset_right = -8
+	header.offset_top = 5
+	header.offset_bottom = 25
+	b.add_child(header)
+
+
+func _apply_edge(b: Button, owner: String, selected := false, top_margin := 30) -> void:
+	var edge: String = icons.owner_edge(owner)
+	var col: Color = icons.owner_color(owner)
+	for st in ["normal", "hover", "pressed", "disabled"]:
+		b.add_theme_stylebox_override(st, CardEdge.make(edge, col, st, selected, top_margin))
+	b.add_theme_stylebox_override("hover_pressed", CardEdge.make(edge, col, "pressed", selected, top_margin))
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+
+
+## A card as a button: its owner's edge, type icon and owner emblem.
+func _card_button(def: Dictionary, text: String, min_size: Vector2, action: Callable, selected := false) -> Button:
+	var b := Button.new()
+	b.custom_minimum_size = min_size
+	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	b.text = text
+	b.add_theme_font_size_override("font_size", 12)
+	b.add_theme_color_override("font_color", C_TEXT)
+	b.add_theme_color_override("font_hover_color", Color.WHITE)
+	b.add_theme_color_override("font_disabled_color", C_DIM)
+	_apply_edge(b, def.get("owner", "shared"), selected)
+	_add_card_badges(b, def)
+	b.pressed.connect(action)
+	return b
+
+
+## A card as a panel (installed Programs and Protocols in the rig).
+func _card_panel(def: Dictionary, child: Control, selected := false) -> PanelContainer:
+	var p := PanelContainer.new()
+	var owner: String = def.get("owner", "shared")
+	p.add_theme_stylebox_override("panel", CardEdge.make(icons.owner_edge(owner), icons.owner_color(owner), "normal", selected, 8))
+	var v := VBoxContainer.new()
+	v.add_child(_card_header(def))
+	v.add_child(child)
+	p.add_child(v)
+	return p
+
+
+## An Uplink CAP or Ghostware: its icon above the text, bordered in its colour.
+func _item_button(item: Dictionary, text: String, action: Callable) -> Button:
+	var category: String = "cap" if item["kind"] == "cap" else "ghostware"
+	var col: Color = icons.cap_color(item["id"]) if category == "cap" else icons.ghostware_color(item["id"])
+	if item.get("bootleg", false):
+		col = C_WARN
+	var b := Button.new()
+	b.custom_minimum_size = Vector2(220, 150)
+	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	b.add_theme_font_size_override("font_size", 12)
+	b.text = text
+	_with_icon(b, category, item["id"], col, 36)
+	b.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	b.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
+	b.add_theme_stylebox_override("normal", _box(C_PANEL, col.darkened(0.2), 2))
+	b.add_theme_stylebox_override("hover", _box(C_PANEL.lightened(0.1), col, 2))
+	b.add_theme_stylebox_override("disabled", _box(C_PANEL.darkened(0.3), col.darkened(0.6), 1))
+	b.pressed.connect(action)
+	return b
+
+
+## Puts a tinted icon on a button.
+func _with_icon(b: Button, category: String, id: String, col: Color, px: int) -> void:
+	b.icon = icons.texture(category, id)
+	b.expand_icon = false
+	b.add_theme_constant_override("icon_max_width", px)
+	for k in ["icon_normal_color", "icon_hover_color", "icon_pressed_color", "icon_focus_color", "icon_hover_pressed_color"]:
+		b.add_theme_color_override(k, col)
+	b.add_theme_color_override("icon_disabled_color", Color(col, 0.35))
+
+
+## A small icon + name tag (Ghostware rack, CAPS, ORIGIN on the menu). Hover for the full text.
+func _chip(category: String, id: String, col: Color, text: String, tooltip: String) -> PanelContainer:
+	var p := PanelContainer.new()
+	p.add_theme_stylebox_override("panel", _box(C_PANEL, col.darkened(0.35), 1))
+	p.tooltip_text = tooltip
+	var h := HBoxContainer.new()
+	h.add_theme_constant_override("separation", 6)
+	h.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	h.add_child(icons.icon_rect(category, id, col, 22))
+	var l := _label(text, 13, col)
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	h.add_child(l)
+	p.add_child(h)
+	return p
+
+
+## Ghostware and CAPS as chips, for the header of map and room screens.
+func _rack_row(r) -> HFlowContainer:
+	var flow := HFlowContainer.new()
+	flow.add_theme_constant_override("h_separation", 6)
+	flow.add_theme_constant_override("v_separation", 6)
+	flow.add_child(_label("Ghostware:", 13, C_DIM))
+	for gid in r.ghostware:
+		var g: Dictionary = db.ghostware[gid]
+		flow.add_child(_chip("ghostware", gid, icons.ghostware_color(gid), g["name"],
+				g["text"] + (("\n⚠ " + g["drawback"]) if g.has("drawback") else "")))
+	flow.add_child(_label("   CAPS:", 13, C_DIM))
+	if r.caps.is_empty():
+		flow.add_child(_label("none", 13, C_DIM))
+	for c in r.caps:
+		var d: Dictionary = db.caps[c["id"]]
+		flow.add_child(_chip("cap", c["id"], C_WARN if c["bootleg"] else icons.cap_color(c["id"]),
+				d["name"] + (" (bootleg)" if c["bootleg"] else ""), d["text"]))
+	return flow
 
 
 # ------------------------------------------------------------------ helpers

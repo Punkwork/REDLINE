@@ -81,7 +81,8 @@ def unique(items, label):
 
 def main():
     files = {n: load(n) for n in ["cards.json", "rustlers.json", "ice.json", "caps.json", "ghostware.json",
-                                  "patchwork.json", "events.json", "contracts.json", "strains.json", "rules.json"]}
+                                  "patchwork.json", "events.json", "contracts.json", "strains.json", "rules.json",
+                                  "visuals.json"]}
     if errors:
         return report()
 
@@ -219,7 +220,45 @@ def main():
             if op == "ice_gain_str" and eff.get("target") not in ("self", "others") and eff.get("target") not in ice_ids:
                 err(f"{where}: unknown ice target '{eff.get('target')}'")
 
+    check_visuals(files, cards)
     return report()
+
+
+EDGES = {"plain", "brackets", "glow", "hazard", "spores", "glitch"}
+
+
+def check_visuals(files, cards):
+    """Every card type, owner, Rustler, corporation, CAP and Ghostware has a colour and an icon file."""
+    vis = files["visuals.json"]
+    icon_root = DATA.parent / "assets" / "icons"
+    folders = vis["icon_folders"]
+    wanted = {
+        "card_type": {c["type"] for c in cards},
+        "rustler": {r["id"] for r in files["rustlers.json"]["rustlers"]},
+        "corporation": {c["id"] for c in files["ice.json"]["corporations"]},
+        "cap": {c["id"] for c in files["caps.json"]["caps"]},
+        "ghostware": {g["id"] for g in files["ghostware.json"]["ghostware"]},
+    }
+    for category, ids in wanted.items():
+        for i in sorted(ids):
+            path = icon_root / folders[category] / f"{i.lower().replace(' ', '_')}.svg"
+            if not path.exists():
+                err(f"visuals: missing icon {path.relative_to(DATA.parent)}")
+    for t in wanted["card_type"]:
+        if t not in vis["card_types"]:
+            err(f"visuals: no colour for card type {t}")
+    for owner in {c["owner"] for c in cards}:
+        o = vis["owners"].get(owner)
+        if o is None:
+            err(f"visuals: no edge for card owner {owner}")
+        elif o.get("edge") not in EDGES:
+            err(f"visuals: owner {owner} has unknown edge '{o.get('edge')}'")
+    edges = [vis["owners"][r]["edge"] for r in wanted["rustler"] if r in vis["owners"]]
+    if len(edges) != len(set(edges)):
+        err("visuals: two Rustlers share a card edge")
+    for c in wanted["corporation"]:
+        if c not in vis["corporations"]:
+            err(f"visuals: no colour for corporation {c}")
 
 
 def report():
