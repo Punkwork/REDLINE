@@ -1,0 +1,212 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_CORE_RULES.md",
+    "REDLINE_CARD_POOLS.md",
+    "REDLINE_UPLINK_AND_CAPS.md",
+    "REDLINE_ICE_CORP1.md"
+  ],
+  "turn": {
+    "bw_per_turn": 4,
+    "draw": 5,
+    "shield_expires": "start_of_your_turn",
+    "unused_bw": "lost"
+  },
+  "damage": {
+    "types": [
+      "pulp",
+      "void"
+    ],
+    "void_draw_penalty_per_counter": 1,
+    "min_draw": 1,
+    "mixed_order": [
+      "void",
+      "pulp"
+    ],
+    "void_cleared": [
+      "next_corporation",
+      "clinic"
+    ]
+  },
+  "trace": {
+    "max": 40,
+    "warning": 20,
+    "strikes": [
+      {
+        "strike": 1,
+        "effects": [
+          {
+            "op": "insert",
+            "card": "tracer",
+            "dest": "draw_pile",
+            "n": 1
+          }
+        ],
+        "trace_after": 20
+      },
+      {
+        "strike": 2,
+        "effects": [
+          {
+            "op": "add_black_ice",
+            "position": "left"
+          }
+        ],
+        "trace_after": 20
+      },
+      {
+        "strike": 3,
+        "effects": [
+          {
+            "op": "lockdown",
+            "duration": "node"
+          },
+          {
+            "op": "add_black_ice",
+            "position": "left"
+          }
+        ],
+        "trace_after": 10
+      }
+    ],
+    "strikes_after_3rd": "repeat_3rd",
+    "reset": "new_corporation",
+    "escape_multiplier": 2
+  },
+  "rewards": {
+    "card_choices": 3,
+    "mix": {
+      "shared": 2,
+      "rustler": 1
+    },
+    "rarity_odds": {
+      "common": 0.6,
+      "uncommon": 0.3,
+      "rare": 0.1
+    },
+    "node_completion": [
+      "rare_card_choice",
+      "cap",
+      "patchwork"
+    ],
+    "clean_node_cred": 5,
+    "full_extraction_bonus": 0.1
+  },
+  "prices": {
+    "card": {
+      "common": 25,
+      "uncommon": 40,
+      "rare": 65
+    },
+    "cap": {
+      "common": 20,
+      "uncommon": 35,
+      "rare": 55
+    },
+    "ghostware": 100,
+    "ghostware_with_drawback": 75,
+    "console_lab_removal": 40,
+    "uplink_wipe": {
+      "base": 50,
+      "increase_per_use": 25
+    },
+    "clinic_void_removal": 50
+  },
+  "uplink": {
+    "reserve_pool": [
+      "probe",
+      "pulp_shield",
+      "scrub"
+    ],
+    "reserve_shown": 2,
+    "cards": {
+      "shared": 4,
+      "rustler": 2
+    },
+    "sale_discount": 0.5,
+    "caps": 3,
+    "ghostware": [
+      2,
+      3
+    ],
+    "clinic_chance": 0.33,
+    "reroll": false
+  },
+  "cred_reserves": {
+    "tier1": [
+      15,
+      20
+    ],
+    "tier2": [
+      20,
+      25,
+      35
+    ],
+    "central": 40,
+    "escape": 10
+  },
+  "map": {
+    "infiltration_rows": 9,
+    "row_width": [
+      3,
+      4
+    ],
+    "links_forward": [
+      2,
+      3
+    ],
+    "rows": {
+      "1-4": [
+        "ice_t1",
+        "signal_unclear",
+        "safehouse"
+      ],
+      "3": [
+        "uplink"
+      ],
+      "5-8": [
+        "ice_t2",
+        "console_lab",
+        "signal_unclear",
+        "safehouse"
+      ],
+      "6": [
+        "uplink"
+      ],
+      "9": [
+        "uplink",
+        "dead_drop"
+      ]
+    },
+    "safehouses_in_infiltration": [
+      1,
+      2
+    ],
+    "escape": {
+      "ice_encounters": 3,
+      "safehouses": 1,
+      "leave_early": false,
+      "jack_out": false
+    }
+  },
+  "nodes": {
+    "dead_drop": {
+      "patch_up_heal": 10,
+      "wipe_trail_trace": -20
+    },
+    "safehouse": {
+      "heal": 10,
+      "or": "patchwork"
+    },
+    "console_lab": {
+      "choose_one": [
+        "patchwork_free",
+        "remove_card_40_cred"
+      ]
+    }
+  },
+  "run_length_target_minutes": [
+    75,
+    100
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_RUSTLERS.md"
+  ],
+  "starting_stats": {
+    "vitae": 30,
+    "max_vitae": 30,
+    "bw_per_turn": 4,
+    "draw": 5,
+    "ram": 4,
+    "trace_max": 40,
+    "cap_slots": 3
+  },
+  "rustlers": [
+    {
+      "id": "generalist",
+      "name": "THE GENERALIST",
+      "difficulty": 1,
+      "unlock": "start",
+      "playstyle": "Balanced; an answer for everything.",
+      "quote": "A bit of everything. Enough of nothing.",
+      "origin_ghostware": "ready_rig",
+      "weak_against": [],
+      "starter_deck": [
+        {
+          "card": "icepick_wall",
+          "qty": 1
+        },
+        {
+          "card": "icepick_code_gate",
+          "qty": 1
+        },
+        {
+          "card": "icepick_sentry",
+          "qty": 1
+        },
+        {
+          "card": "basic_extractor",
+          "qty": 1
+        },
+        {
+          "card": "void_buffer",
+          "qty": 1
+        },
+        {
+          "card": "pulp_shield",
+          "qty": 3
+        },
+        {
+          "card": "probe",
+          "qty": 3
+        },
+        {
+          "card": "ghost_signal",
+          "qty": 1
+        }
+      ],
+      "training_node": true
+    },
+    {
+      "id": "echo",
+      "name": "ECHO",
+      "difficulty": 2,
+      "unlock": "complete_training_node",
+      "playstyle": "Quiet. Low TRACE, long encounters, more CRED.",
+      "quote": "If they never notice you, you were never there.",
+      "origin_ghostware": "low_profile",
+      "weak_against": [
+        "WALL",
+        "SENTRY"
+      ],
+      "starter_deck": [
+        {
+          "card": "hush",
+          "qty": 1
+        },
+        {
+          "card": "backdoor",
+          "qty": 1
+        },
+        {
+          "card": "basic_extractor",
+          "qty": 1
+        },
+        {
+          "card": "slow_drip",
+          "qty": 1
+        },
+        {
+          "card": "probe",
+          "qty": 2
+        },
+        {
+          "card": "pulp_shield",
+          "qty": 2
+        },
+        {
+          "card": "smokescreen",
+          "qty": 2
+        },
+        {
+          "card": "dead_air",
+          "qty": 1
+        },
+        {
+          "card": "ghost_signal",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "id": "riot",
+      "name": "RIOT",
+      "difficulty": 3,
+      "unlock": "defeat_central_node_2",
+      "playstyle": "Loud. Stronger at high TRACE.",
+      "quote": "Subtle is for people with time.",
+      "origin_ghostware": "redliner",
+      "weak_against": [
+        "CODE GATE",
+        "SENTRY"
+      ],
+      "starter_deck": [
+        {
+          "card": "sledge",
+          "qty": 1
+        },
+        {
+          "card": "brute_force",
+          "qty": 1
+        },
+        {
+          "card": "overload",
+          "qty": 2
+        },
+        {
+          "card": "probe",
+          "qty": 1
+        },
+        {
+          "card": "feedback",
+          "qty": 1
+        },
+        {
+          "card": "adrenal_spike",
+          "qty": 1
+        },
+        {
+          "card": "pulp_shield",
+          "qty": 2
+        },
+        {
+          "card": "lay_low",
+          "qty": 1
+        },
+        {
+          "card": "smash_and_grab",
+          "qty": 1
+        },
+        {
+          "card": "basic_extractor",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "id": "vector",
+      "name": "VECTOR",
+      "difficulty": 2,
+      "unlock": "defeat_central_node_1",
+      "playstyle": "Viruses. Weakens every ICE over time.",
+      "quote": "I don't break in. I wait for it to rot.",
+      "origin_ghostware": "patient_zero",
+      "weak_against": [
+        "WALL",
+        "CODE GATE"
+      ],
+      "starter_deck": [
+        {
+          "card": "stinger",
+          "qty": 1
+        },
+        {
+          "card": "runtime_error",
+          "qty": 1
+        },
+        {
+          "card": "inject",
+          "qty": 3
+        },
+        {
+          "card": "replicator",
+          "qty": 1
+        },
+        {
+          "card": "outbreak",
+          "qty": 1
+        },
+        {
+          "card": "probe",
+          "qty": 1
+        },
+        {
+          "card": "pulp_shield",
+          "qty": 2
+        },
+        {
+          "card": "basic_extractor",
+          "qty": 1
+        },
+        {
+          "card": "ghost_signal",
+          "qty": 1
+        }
+      ]
+    }
+  ]
+}

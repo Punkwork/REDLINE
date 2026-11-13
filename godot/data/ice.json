@@ -1,0 +1,1004 @@
+{
+  "version": "0.1",
+  "source_docs": [
+    "REDLINE_ICE_CORP1.md",
+    "REDLINE_UPGRADES_EVENTS_ESCAPE.md §4",
+    "REDLINE_CORE_RULES.md §14"
+  ],
+  "threat_values": {
+    "pulp": 1,
+    "trace": 1,
+    "discard": 2,
+    "insert": 2,
+    "insert_draw_pile": 3,
+    "void": 4,
+    "deadlock": 0
+  },
+  "tiers": {
+    "1": {
+      "rows": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "str": [
+        2,
+        5
+      ],
+      "threat": [
+        2,
+        5
+      ]
+    },
+    "2": {
+      "rows": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "str": [
+        3,
+        6
+      ],
+      "threat": [
+        4,
+        8
+      ]
+    },
+    "boss": {
+      "str_min": 6,
+      "threat": [
+        10,
+        15
+      ]
+    }
+  },
+  "corporations": [
+    {
+      "id": "training",
+      "name": "Training Node",
+      "rustlers": [
+        "generalist"
+      ],
+      "layers": [
+        {
+          "ice": [
+            "white_picket_fence"
+          ]
+        },
+        {
+          "ice": [
+            "tollbooth",
+            "meatgrinder"
+          ]
+        },
+        {
+          "ice": [
+            "overclock",
+            "hotwire",
+            "watchdog"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "halcyon",
+      "name": "HALCYON",
+      "theme": "Consumer smart-home surveillance",
+      "main_threat": "TRACE, Bloatware",
+      "signature_bloatware": "spam",
+      "black_ice": "house_call",
+      "tier1": [
+        "cookie_wall",
+        "terms_of_service",
+        "consent_form",
+        "captcha",
+        "doorbell_cam"
+      ],
+      "tier2": [
+        "smart_lock",
+        "panic_room",
+        "loyalty_program",
+        "firmware_update",
+        "nanny_cam",
+        "home_assistant",
+        "repo_drone"
+      ],
+      "central_node": {
+        "ice_left_to_right": [
+          "smart_speaker",
+          "thermostat",
+          "the_hearth"
+        ],
+        "cred_reserve": 40
+      },
+      "escape_ice": [
+        "alarm_panel",
+        "motion_sensor",
+        "deadbolt",
+        "panic_button"
+      ],
+      "escape_layout": [
+        {
+          "encounter": 1,
+          "random_escape_ice": 1,
+          "cred_reserve": 10
+        },
+        {
+          "encounter": 2,
+          "random_escape_ice": 2,
+          "cred_reserve": 10
+        },
+        {
+          "encounter": 3,
+          "random_escape_ice": 1,
+          "plus": [
+            "house_call"
+          ],
+          "house_call_position": "left",
+          "cred_reserve": 10
+        }
+      ],
+      "escape_safehouse_after_encounter": [
+        1,
+        2
+      ],
+      "ghostware_set": [
+        "hearth_key",
+        "voice_mimic",
+        "ad_blocker"
+      ]
+    }
+  ],
+  "ice": [
+    {
+      "id": "white_picket_fence",
+      "name": "WHITE PICKET FENCE",
+      "type": "WALL",
+      "str": 3,
+      "corp": "training",
+      "tier": "training",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 5
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tollbooth",
+      "name": "TOLLBOOTH",
+      "type": "WALL",
+      "str": 5,
+      "corp": "training",
+      "tier": "training",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meatgrinder",
+      "name": "MEATGRINDER",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "training",
+      "tier": "training",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "overclock",
+      "name": "OVERCLOCK",
+      "type": "CODE GATE",
+      "str": 5,
+      "corp": "training",
+      "tier": "training",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "ice_gain_str",
+              "target": "watchdog",
+              "n": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hotwire",
+      "name": "HOTWIRE",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "training",
+      "tier": "training",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "watchdog",
+      "name": "WATCHDOG",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "training",
+      "tier": "training",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "discard",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you play a CLOAK card, WATCHDOG gains +1 STR (this encounter; stacks).",
+        "trigger": "player_plays_tag",
+        "tag": "CLOAK",
+        "effects": [
+          {
+            "op": "ice_gain_str",
+            "target": "self",
+            "n": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "cookie_wall",
+      "name": "COOKIE WALL",
+      "type": "WALL",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "tests": "Basic WALL breaking"
+    },
+    {
+      "id": "terms_of_service",
+      "name": "TERMS OF SERVICE",
+      "type": "WALL",
+      "str": 5,
+      "corp": "halcyon",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "spam",
+              "dest": "discard",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "tests": "PROBE and boosting against high STR"
+    },
+    {
+      "id": "consent_form",
+      "name": "CONSENT FORM",
+      "type": "CODE GATE",
+      "str": 2,
+      "corp": "halcyon",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2,
+      "tests": "Many small breaks; rewards LOW PROFILE"
+    },
+    {
+      "id": "captcha",
+      "name": "CAPTCHA",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "discard",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "tests": "Choosing which subroutine to break"
+    },
+    {
+      "id": "doorbell_cam",
+      "name": "DOORBELL CAM",
+      "type": "SENTRY",
+      "str": 2,
+      "corp": "halcyon",
+      "tier": 1,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you play a CLOAK card: TRACE 1.",
+        "trigger": "player_plays_tag",
+        "tag": "CLOAK",
+        "effects": [
+          {
+            "op": "trace",
+            "n": 1
+          }
+        ]
+      },
+      "threat": 3,
+      "tests": "Over-hiding (ECHO)"
+    },
+    {
+      "id": "smart_lock",
+      "name": "SMART LOCK",
+      "type": "WALL",
+      "str": 6,
+      "corp": "halcyon",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "At the end of each Corporation Response: +1 STR.",
+        "trigger": "end_of_corp_response",
+        "effects": [
+          {
+            "op": "ice_gain_str",
+            "target": "self",
+            "n": 1
+          }
+        ]
+      },
+      "threat": 3,
+      "tests": "Long stays; extracting too long"
+    },
+    {
+      "id": "panic_room",
+      "name": "PANIC ROOM",
+      "type": "WALL",
+      "str": 4,
+      "corp": "halcyon",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 4,
+      "tests": "Two DEADLOCKs; WALL Icepick's free break"
+    },
+    {
+      "id": "loyalty_program",
+      "name": "LOYALTY PROGRAM",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "spam",
+              "dest": "draw_pile",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 5,
+      "tests": "Bloatware pressure across layers"
+    },
+    {
+      "id": "firmware_update",
+      "name": "FIRMWARE UPDATE",
+      "type": "CODE GATE",
+      "str": 4,
+      "corp": "halcyon",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "purge_all"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3,
+      "tests": "VECTOR"
+    },
+    {
+      "id": "nanny_cam",
+      "name": "NANNY CAM",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you install a PROGRAM: +1 STR.",
+        "trigger": "player_installs",
+        "card_type": "PROGRAM",
+        "effects": [
+          {
+            "op": "ice_gain_str",
+            "target": "self",
+            "n": 1
+          }
+        ]
+      },
+      "threat": 5,
+      "tests": "Installing everything at once"
+    },
+    {
+      "id": "home_assistant",
+      "name": "HOME ASSISTANT",
+      "type": "SENTRY",
+      "str": 4,
+      "corp": "halcyon",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "void",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 6,
+      "tests": "First VOID"
+    },
+    {
+      "id": "repo_drone",
+      "name": "REPO DRONE",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": 2,
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "While your TRACE is 20 or more, its PULP subroutines deal +2.",
+        "trigger": "constant",
+        "if_trace_at_least": 20,
+        "effects": [
+          {
+            "op": "ice_pulp_bonus",
+            "n": 2
+          }
+        ]
+      },
+      "threat": 8,
+      "tests": "High TRACE (RIOT)"
+    },
+    {
+      "id": "house_call",
+      "name": "HOUSE CALL",
+      "type": "SENTRY",
+      "str": 5,
+      "corp": "halcyon",
+      "tier": "black_ice",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        }
+      ],
+      "threat": 8,
+      "black_ice": true
+    },
+    {
+      "id": "smart_speaker",
+      "name": "SMART SPEAKER",
+      "type": "CODE GATE",
+      "str": 2,
+      "corp": "halcyon",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "spam",
+              "dest": "draw_pile",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 2
+            }
+          ]
+        }
+      ],
+      "boss_role": "support"
+    },
+    {
+      "id": "thermostat",
+      "name": "THERMOSTAT",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 2
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "ice_gain_str",
+              "target": "the_hearth",
+              "n": 1
+            }
+          ]
+        }
+      ],
+      "boss_role": "support"
+    },
+    {
+      "id": "the_hearth",
+      "name": "THE HEARTH",
+      "type": "SENTRY",
+      "str": 6,
+      "corp": "halcyon",
+      "tier": "boss",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "At the end of each Corporation Response: +1 STR.",
+        "trigger": "end_of_corp_response",
+        "effects": [
+          {
+            "op": "ice_gain_str",
+            "target": "self",
+            "n": 1
+          }
+        ]
+      },
+      "boss_role": "main"
+    },
+    {
+      "id": "alarm_panel",
+      "name": "ALARM PANEL",
+      "type": "CODE GATE",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "trace",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 3
+    },
+    {
+      "id": "motion_sensor",
+      "name": "MOTION SENSOR",
+      "type": "SENTRY",
+      "str": 3,
+      "corp": "halcyon",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 3
+            },
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Whenever you install a PROGRAM: +2 TRACE.",
+        "trigger": "player_installs",
+        "card_type": "PROGRAM",
+        "effects": [
+          {
+            "op": "trace",
+            "n": 2
+          }
+        ]
+      },
+      "threat": 3
+    },
+    {
+      "id": "deadbolt",
+      "name": "DEADBOLT",
+      "type": "WALL",
+      "str": 6,
+      "corp": "halcyon",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "pulp",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "ability": {
+        "text": "Its STR can't be reduced below 3.",
+        "trigger": "constant",
+        "effects": [
+          {
+            "op": "str_floor",
+            "n": 3
+          }
+        ]
+      },
+      "threat": 4
+    },
+    {
+      "id": "panic_button",
+      "name": "PANIC BUTTON",
+      "type": "CODE GATE",
+      "str": 2,
+      "corp": "halcyon",
+      "tier": "escape",
+      "subroutines": [
+        {
+          "effects": [
+            {
+              "op": "insert",
+              "card": "tracer",
+              "dest": "hand",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "effects": [
+            {
+              "op": "deadlock"
+            }
+          ]
+        }
+      ],
+      "threat": 2
+    }
+  ]
+}
