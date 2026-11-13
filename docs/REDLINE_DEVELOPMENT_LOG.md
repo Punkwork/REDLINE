@@ -897,3 +897,7 @@ Three lines approved as CANON verses referencing 7-Zark-7, 1-Rover-1 and Susan, 
 
 **New verses:** Jetsons references NR-106 (EV-37 Idle; Rosie), NR-107 (EV-38 Repeated mistake; Uniblab), NR-108 (EV-04 BOOTING; R.U.D.I.) and NR-109 (EV-18 Low VITAE; R.U.D.I.).
 
+## NULREM-020 — The overqualified trait and verses NR-110 to NR-113 (APPROVED, 2026-11-13)
+
+**CANON trait:** NUL/REM considers himself far too sophisticated for his work, though he would rather be doing nothing at all; his superiority over famous machines exists only in his own mind (Bible §5, Master Design §7). **Verses:** NR-110 (EV-37 Idle; Skynet), NR-111 (EV-37 Idle; the T-1000), NR-112 (EV-03 IRONWATCH; RoboCop) and NR-113 (EV-06 DEADLOCK broken; ED-209).
+
