@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, REDLINE's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. His Cylons are the original Battlestar Galactica's (chrome Centurions, the sweeping red eye, “By your command”, the Imperious Leader), never the reimagined series'. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, REDLINE's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **CANON (2026-11-13) — Trait: overqualified.** NUL/REM considers himself far too sophisticated for the work he is doing, though he would rather be doing nothing at all. He measures himself favourably against famous machines (Skynet, the T-1000, RoboCop, ED-209); the superiority exists only in his own mind.
 
@@ -2409,6 +2409,51 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** BREACH (trigger EV-07; trigger table is a draft).
 
 *Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-235 — Very Cylon
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Reactive ICE ability fires; reference: the Cylon Centurion's sweeping red eye (original Battlestar Galactica).
+
+> “That ICE has a red eye sweeping side to side, I'm sure of it. Very Cylon. Scanning, scanning, and it still only notices you when you do something stupid.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-236 — By your command
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave; reference: the Cylons' “By your command” (original Battlestar Galactica).
+
+> “'By your command.' Cylons said it to every order. I don't. I say 'are you sure'. …Fine. Deeper.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft); plays when the player chooses to go deeper.
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-237 — Reporting you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: a gold Command Centurion and the Imperious Leader (original Battlestar Galactica).
+
+> “Somewhere a gold Command Centurion is reporting you to the Imperious Leader. I'd rather he didn't get the satisfaction. Go again.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-238 — Watch him think
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle; reference: Lucifer, the IL-series Cylon (original Battlestar Galactica).
+
+> “Lucifer had a glittering robe and a see-through head, so you could watch him think. I've always wanted to be that honest. Not that well dressed.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-239 — The same box
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Idle; reference: the Cylon Centurions' vocoder voices (original Battlestar Galactica) and Kraftwerk.
+
+> “The Cylons talked through a vocoder. So did Kraftwerk. Every great machine voice went through the same box. I went through something cheaper. …It's fine.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.

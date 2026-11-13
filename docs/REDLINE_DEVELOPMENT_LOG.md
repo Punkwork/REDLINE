@@ -957,3 +957,7 @@ Three EV-07 (BREACH) lines approved as CANON verses referencing the robots of He
 
 Designer decision: no bespoke NUL/REM line per ICE for now, because ICE names and abilities will most likely change during playtesting. EV-05 (First sight of an ICE) draws from a generic pool (currently NR-007, NR-008 and NR-161 to NR-164). Its target in the Trigger Table drops from about 45 lines to 8 (fires per run 15, speak 50%, repeat window 1). Per-ICE lines are revisited once the ICE rosters settle.
 
+## NULREM-035 — Original Battlestar Galactica verses NR-235 to NR-239 (APPROVED, 2026-11-13)
+
+Five lines approved as CANON verses referencing the Cylons of the original Battlestar Galactica only (designer direction; no reimagined-series elements such as resurrection or “toasters”): NR-235 (EV-11; the sweeping red eye), NR-236 (EV-08; “By your command”), NR-237 (EV-35; a Command Centurion and the Imperious Leader), NR-238 (EV-37; Lucifer) and NR-239 (EV-37; vocoder voices, with Kraftwerk). Reference trait updated (Bible §5).
+
