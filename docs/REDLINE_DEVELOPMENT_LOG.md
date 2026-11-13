@@ -921,3 +921,7 @@ Four lines approved as CANON verses: Game & Watch, referenced generically: NR-12
 
 Five lines approved as CANON verses referencing Kraftwerk's *Computer World* (1981) by song title and theme, without quoting lyrics (copyright): NR-125 (EV-24 Uplink; “Pocket Calculator” and his Casio), NR-126 (EV-26 RAM gained; “Numbers”), NR-127 (EV-37 Idle; “Computer Love”, played through 1982), NR-128 (EV-03 HALCYON; “Home Computer”) and NR-129 (EV-27 Card reward; “It's More Fun to Compute”). Bible §5 1982 trait updated. **Rule recorded:** song lyrics are never quoted in NUL/REM's lines; titles and themes only.
 
+## NULREM-026 — The 808 clock and verses NR-130 to NR-132 (APPROVED, 2026-11-13)
+
+**CANON detail:** NUL/REM's internal clock plays a Roland TR-808 pattern instead of ticking; it got into his timing chips from Afrika Bambaataa's “Planet Rock” in 1982 (Bible §5). **Verses:** NR-130 (EV-37 Idle; the 808 clock), NR-131 (EV-12 Elegant play; “Boing, boom, tschak”, after the Kraftwerk track) and NR-132 (EV-10 Stalled encounter; the 808 rented for twenty dollars a session).
+

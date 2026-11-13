@@ -103,7 +103,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: overqualified.** NUL/REM considers himself far too sophisticated for the work he is doing, though he would rather be doing nothing at all. He measures himself favourably against famous machines (Skynet, the T-1000, RoboCop, ED-209); the superiority exists only in his own mind.
 
-**CANON (2026-11-13) — Trait: 1982.** 1982 is NUL/REM's special year: it is when his memory chips received most of their programming (before his 1987 manufacture), and his favourite music and films are from that period. Kraftwerk's *Computer World* is among his favourite records; he references its songs by title and theme, never by quoting lyrics. He reminisces most about 1982 and 1987.
+**CANON (2026-11-13) — Trait: 1982.** 1982 is NUL/REM's special year: it is when his memory chips received most of their programming (before his 1987 manufacture), and his favourite music and films are from that period. Kraftwerk's *Computer World* is among his favourite records; he references its songs by title and theme, never by quoting lyrics. His internal clock doesn't tick: it plays a Roland TR-808 pattern, which got into his timing chips from “Planet Rock” in 1982. He reminisces most about 1982 and 1987.
 
 **DIRECTION (2026-11-13) — Reference style.** NUL/REM references works as if the player has already seen, heard or played them: no plot summaries and no release years, except 1982 and 1987, which he names fondly. Accuracy rules still apply to whatever he does say.
 
@@ -1464,6 +1464,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
 
 *Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-130 — The 808 clock
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: the Roland TR-808 in “Planet Rock”; his 808 clock; 1982.
+
+> “My clock doesn't tick. It plays an 808 pattern. Boom, tick, clap, and that spacey cowbell. Planet Rock got into my timing chips in 1982 and never left. I'm not complaining.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-131 — Boing, boom, tschak
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Kraftwerk, “Boing Boom Tschak”; his 808 clock; delight quickly hidden.
+
+> “Boing, boom, tschak. That turn had a beat. Somewhere in me an 808 just went off. I'd dance if I had anything to dance with. …Moving on.”
+
+**Placement:** Elegant play, 3+ breaks in a turn (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-132 — Twenty dollars a session
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Stalled encounter; reference: the rented TR-808 behind “Planet Rock”.
+
+> “You're dragging. The 808 never drags. They rented one for twenty dollars a session, and it still kept better time than you. Pick it up.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
