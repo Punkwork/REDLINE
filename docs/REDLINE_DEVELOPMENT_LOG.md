@@ -841,3 +841,7 @@ Two more EV-03 (Enter a corporation) lines for IRONWATCH's FRONT DESK approved a
 
 Two more EV-03 (Enter a corporation) lines approved as CANON verses, both referencing *Columbo*, “Mind Over Mayhem” (1974): NR-038 (IRONWATCH; the K44 war-games computer as a murderer's alibi) and NR-039 (LUCIDA; MM7, the chess robot that threw the board). Both added to the reference-compulsion trait (Bible §5, Master Design §7). Pools now: HALCYON 5, IRONWATCH 7, LUCIDA 6.
 
+## NULREM-007 — EV-03 verses NR-040 to NR-043: Tron and The Black Hole (APPROVED, 2026-11-13)
+
+Four more EV-03 (Enter a corporation) lines approved as CANON verses: NR-040 (HALCYON; Tron's Master Control Program, from chess program to the Pentagon, “End of line.”), NR-041 (IRONWATCH; Tron's Game Grid), NR-042 (LUCIDA; The Black Hole's humanoid crew, restraint rule) and NR-043 (IRONWATCH; Old B.O.B. and Maximilian). Added to the reference-compulsion trait (Bible §5, Master Design §7); NUL/REM identifies with Old B.O.B. Pools now: HALCYON 6, IRONWATCH 9, LUCIDA 7. A further Master Control line is planned for EV-30 (Central Node entry). To verify: “End of line” as the MCP's sign-off.
+

@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), and the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”). His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-039.
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-043.
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -484,6 +484,42 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 > “There was a robot in Columbo, MM7. Built by a boy genius at a cybernetics institute. It lost a game of chess and threw the board across the room. I respected that. LUCIDA's machines don't lose. They just make you FORGET you were playing.”
 
 **Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-040 — End of line
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON; reference: the Master Control Program (Tron, 1982).
+
+> “In Tron, the Master Control Program started out as a chess program. Then it ran the company. Then it wanted the Pentagon, because it could run it twelve hundred times better. HALCYON started out as a thermostat. Give it time. End of line.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-041 — The Game Grid
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH; reference: the Game Grid and Master Control (Tron, 1982).
+
+> “Tron, 1982. Programs that wouldn't serve Master Control were sent to the Game Grid, and the losers were destroyed. IRONWATCH calls that 'compliance'. Same arena, worse lighting.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-042 — The people taken out
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA; reference: the humanoid drones (The Black Hole, 1979); restraint rule.
+
+> “The Black Hole, 1979. The robed robots on that ship weren't robots. They were the crew, with the people taken out. LUCIDA would call that an interface. I don't.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-043 — More of a B.O.B.
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: Old B.O.B. and Maximilian (The Black Hole, 1979).
+
+> “Old B.O.B. was a dented old model the new robots ignored, and he still got everyone out. Maximilian was the big red one who never said a word. IRONWATCH only builds Maximilians. I'm more of a B.O.B.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
