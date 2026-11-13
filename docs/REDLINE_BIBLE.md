@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, and Carol Beer's “Computer says no” (*Little Britain*). His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-037.
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), and the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”). His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-039.
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -466,6 +466,24 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 > “Every request goes through the FRONT DESK. It types, it pauses, it says no. Computer says no. At least this one doesn't cough on you. I'm still not standing near it.”
 
 **Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-038 — The alibi
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: the K44 war-games computer (Columbo, “Mind Over Mayhem”, 1974).
+
+> “Columbo, 1974. A think-tank director left a war-game computer running so it would look like he never left his desk. Then he went out and killed a man. The machine was his alibi. At IRONWATCH, the machines are everyone's alibi.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-039 — MM7
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (FORGET); reference: MM7 (Columbo, “Mind Over Mayhem”, 1974).
+
+> “There was a robot in Columbo, MM7. Built by a boy genius at a cybernetics institute. It lost a game of chess and threw the board across the room. I respected that. LUCIDA's machines don't lose. They just make you FORGET you were playing.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
 
 *Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 

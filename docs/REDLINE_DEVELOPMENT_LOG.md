@@ -837,3 +837,7 @@ Trigger EV-03 (Enter a corporation): fourteen longer, exposition-rich lines appr
 
 Two more EV-03 (Enter a corporation) lines for IRONWATCH's FRONT DESK approved as CANON verses NR-036 and NR-037, referencing Carol Beer's “Computer says no” (*Little Britain*, 2004); NR-037 also uses the germ trait. Carol Beer added to the reference-compulsion trait (Bible §5, Master Design §7). Pools now: HALCYON 5, IRONWATCH 6, LUCIDA 5.
 
+## NULREM-006 — EV-03 verses NR-038 and NR-039 (APPROVED, 2026-11-13)
+
+Two more EV-03 (Enter a corporation) lines approved as CANON verses, both referencing *Columbo*, “Mind Over Mayhem” (1974): NR-038 (IRONWATCH; the K44 war-games computer as a murderer's alibi) and NR-039 (LUCIDA; MM7, the chess robot that threw the board). Both added to the reference-compulsion trait (Bible §5, Master Design §7). Pools now: HALCYON 5, IRONWATCH 7, LUCIDA 6.
+
