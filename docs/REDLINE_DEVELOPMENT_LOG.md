@@ -953,3 +953,7 @@ One EV-37 (Idle) line approved as CANON verse NR-143: NUL/REM leans away from th
 
 Three EV-07 (BREACH) lines approved as CANON verses referencing the robots of Heartbeeps (1981) without naming the film: NR-232 (the valet and the poolside hostess leaving the factory), NR-233 (the security robot quoting regulations) and NR-234 (the baby robot built from spare parts). BREACH now has 8 of its 15 lines.
 
+## NULREM-034 — EV-05 uses generic lines; per-ICE lines deferred (APPROVED, 2026-11-13)
+
+Designer decision: no bespoke NUL/REM line per ICE for now, because ICE names and abilities will most likely change during playtesting. EV-05 (First sight of an ICE) draws from a generic pool (currently NR-007, NR-008 and NR-161 to NR-164). Its target in the Trigger Table drops from about 45 lines to 8 (fires per run 15, speak 50%, repeat window 1). Per-ICE lines are revisited once the ICE rosters settle.
+
