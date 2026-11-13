@@ -945,3 +945,7 @@ Two lines approved as CANON verses referencing Ferris Bueller's sampled coughs, 
 
 One EV-37 (Idle) line approved as CANON verse NR-143: NUL/REM leans away from the screen at Ferris Bueller's sampled coughs, knowing they're samples (germ trait).
 
+## NULREM-032 — Batch 2: verses NR-144 to NR-231 across 30 trigger events (APPROVED, 2026-11-13)
+
+88 lines from the review doc “NUL/REM Dialogue — Batch 2 (CANDIDATE)” approved as CANON verses, covering the 30 events that were short. Written to the designer's guidelines: the six modes in rotation; protectiveness toned down, with sleep as his real motive; stolen data at BREACH; CRED inflation jokes; seven Blade Runner references (world, not just characters) including whether androids dream of electric sheep (reference trait updated, Bible §5). New lore in NR-156: personality-ROM revisions 0.01 to 0.07 don't exist (**OPEN** thread). Hints at OPEN story threads in EV-29, EV-33 and EV-36 commit to no answer.
+

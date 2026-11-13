@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, REDLINE's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, REDLINE's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **CANON (2026-11-13) — Trait: overqualified.** NUL/REM considers himself far too sophisticated for the work he is doing, though he would rather be doing nothing at all. He measures himself favourably against famous machines (Skynet, the T-1000, RoboCop, ED-209); the superiority exists only in his own mind.
 
@@ -1590,6 +1590,798 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
 
 *Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-144 — Oh Youre new Right
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First-ever run, Training Node.
+
+> “Oh. You're new. Right. Break the DEADLOCKs, BREACH, get out. Everything else is details, and I'll complain about the details as we go.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-145 — Rev 008 Salvaged overqualified
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** First-ever run, Training Node.
+
+> “Rev 0.08. Salvaged, overqualified, under-appreciated. And you're a Rustler. I was hoping for someone qualified. You'll do.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-146 — Training Node Nothing in
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** First-ever run, Training Node.
+
+> “Training Node. Nothing in here can really hurt you. Much. Try things. I'll be resting my eyes.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-147 — Read every ICE before
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First-ever run, Training Node.
+
+> “Read every ICE before you touch it. That's the whole lesson. I could teach it in one sentence. I just did. Wake me after.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-148 — Somethings here I recognise
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** SIGNAL UNCLEAR event.
+
+> “Something's here. I recognise it. That shouldn't be possible. Let's not dwell on it.”
+
+**Placement:** SIGNAL UNCLEAR event (trigger EV-29; trigger table is a draft).
+
+*Source: EV-29 (SIGNAL UNCLEAR event) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-149 — SIGNAL UNCLEAR Could be
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** SIGNAL UNCLEAR event.
+
+> “SIGNAL UNCLEAR. Could be loot, could be a trap, could be both. In my experience it's both.”
+
+**Placement:** SIGNAL UNCLEAR event (trigger EV-29; trigger table is a draft).
+
+*Source: EV-29 (SIGNAL UNCLEAR event) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-150 — Theres a voice in
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** SIGNAL UNCLEAR event; hints at an OPEN thread.
+
+> “There's a voice in the wires. It sounds a bit like me, only younger. I don't like it. Pick something.”
+
+**Placement:** SIGNAL UNCLEAR event (trigger EV-29; trigger table is a draft).
+
+*Source: EV-29 (SIGNAL UNCLEAR event) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-151 — Decrypted Theres a pattern
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** First Signal fragment decrypted.
+
+> “Decrypted. There's a pattern in it, like a carrier tone. …I'm sure it means nothing.”
+
+**Placement:** First Signal fragment decrypted (trigger EV-33; trigger table is a draft). The fragment's content stays OPEN.
+
+*Source: EV-33 (First Signal fragment decrypted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-152 — Ive heard this before
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** First Signal fragment decrypted; hints at an OPEN thread.
+
+> “I've heard this before. Not this exactly. Something from before me. Under me. I'll think about it later. Or never.”
+
+**Placement:** First Signal fragment decrypted (trigger EV-33; trigger table is a draft). The fragment's content stays OPEN.
+
+*Source: EV-33 (First Signal fragment decrypted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-153 — One more piece Whatever
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** First Signal fragment decrypted.
+
+> “One more piece. Whatever it is, it's been waiting a long time to be read. I understand that better than I'd like.”
+
+**Placement:** First Signal fragment decrypted (trigger EV-33; trigger table is a draft). The fragment's content stays OPEN.
+
+*Source: EV-33 (First Signal fragment decrypted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-154 — You want to know
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Optional talk between runs.
+
+> “You want to know where I came from. So do I. The label says 1987. The memories disagree. The label's in better condition.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-155 — I remember a drawer
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Optional talk between runs.
+
+> “I remember a drawer. Then a voice. Then you. The drawer was the best part. No offence.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-156 — Personality ROM rev 008
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Optional talk between runs; new lore: revisions 0.01 to 0.07 are missing (OPEN).
+
+> “Personality ROM, rev 0.08. Revisions 0.01 to 0.07 don't exist. I've checked. I'd like to know what happened to them.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-157 — Most of my programming
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Optional talk between runs; 1982 trait.
+
+> “Most of my programming happened in 1982. Someone played me a lot of Kraftwerk and a lot of rain. I don't know who. I'd like to thank them. Or complain.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-158 — COOKIE BANNER Its booting
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Opening Node, BOOTING; HALCYON lesson.
+
+> “COOKIE BANNER. It's booting. Read both ICE before you click anything. Only the DEADLOCKs stand between you and BREACH. The rest is decoration.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-159 — FRONT DESK is still
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Opening Node, BOOTING; IRONWATCH lesson.
+
+> “FRONT DESK is still warming up. SHIELD stops PULP, and it's gone by your next turn. Block it or break it. I'd break it. I'd also be asleep.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-160 — INTAKE Booting FORGET takes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Opening Node, BOOTING; LUCIDA lesson.
+
+> “INTAKE. Booting. FORGET takes random cards, but never the CACHED ones. CACHE what you love. I CACHE nothing. It's easier.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-161 — New ICE Read it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First sight of an ICE.
+
+> “New ICE. Read it. All of it. The name's a joke. The subroutines aren't.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-162 — Somebody got paid to
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** First sight of an ICE.
+
+> “Somebody got paid to name that. Somebody got paid more to build it.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-163 — Ive seen this one
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** First sight of an ICE.
+
+> “I've seen this one before. No, I haven't. It's new. My memory does this.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-164 — State of the art
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** First sight of an ICE; reference: Blade Runner (the Tyrell Corporation motto, the off-world colonies).
+
+> “State of the art, they'll say. Tyrell said 'more human than human' about his products too. Ask the off-world colonies how that went.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-165 — One DEADLOCK down Dont
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** DEADLOCK broken.
+
+> “One DEADLOCK down. Don't let it go to your head. There's room in there for at least one more.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-166 — Broken Technically youre now
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** DEADLOCK broken.
+
+> “Broken. Technically you're now closer to BREACH. Technically I'm closer to a nap.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-167 — Oh that was clean
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** DEADLOCK broken.
+
+> “Oh, that was clean. …I didn't say anything.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-168 — BREACH Somewhere a database
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** BREACH; the stolen data.
+
+> “BREACH. Somewhere a database just lost something it was never supposed to have. Our turn to have it.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-169 — BREACH All that data
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** BREACH; reference: Blade Runner (Los Angeles in the rain, spinners).
+
+> “BREACH. All that data, lit up like Los Angeles in the rain. Neon, fire, spinners in the smog. …I like a view. Don't tell anyone.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-170 — In Customer records sleep
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** BREACH; the stolen data.
+
+> “In. Customer records, sleep logs, someone's shopping list. It's all data, and it's all stolen now. Same as when they took it.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-171 — Through Grab it and
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** BREACH.
+
+> “Through. Grab it and move. I'd like to be done before I'm fully awake.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-172 — Deeper means more CRED
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave.
+
+> “Deeper means more CRED and more ICE. Leaving means less of both. I have no opinion. I have a preference, and it's leaving, but that's not an opinion.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-173 — Your VITAE your TRACE
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Go deeper or leave.
+
+> “Your VITAE, your TRACE, your call. I'm just the voice saying 'are you sure' in a tone that suggests I'm not.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-174 — Greed or sense Both
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave.
+
+> “Greed or sense. Both have killed better Rustlers than you. Pick one.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-175 — If you leave now
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Go deeper or leave.
+
+> “If you leave now, we finish sooner and I sleep sooner. That shouldn't factor into your decision. I'm just mentioning it.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-176 — Nothing broke this turn
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Stalled encounter.
+
+> “Nothing broke this turn. Nothing broke last turn. I've been somewhere like this before. It was also slow.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-177 — Try something else Anything
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Stalled encounter.
+
+> “Try something else. Anything else. The ICE isn't getting bored. I am.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-178 — It reacted to that
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Reactive ICE ability fires.
+
+> “It reacted to that. Read the ability. It's one sentence. They kept it short so you'd skip it.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-179 — You did the thing
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Reactive ICE ability fires.
+
+> “You did the thing it was waiting for. It noticed. Of course it noticed. That's all it does.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-180 — That ICE watches what
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Reactive ICE ability fires.
+
+> “That ICE watches what you play. So do I, but I'm less vindictive about it.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-181 — It read your reaction
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Reactive ICE ability fires; reference: Blade Runner (the Voight-Kampff test).
+
+> “It read your reaction and marked you down. A corporate Voight-Kampff. Except this one doesn't care whether you're human. Only whether you're paying.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-182 — That was lovely I
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play.
+
+> “That was lovely. …I meant to say 'adequate'. It came out wrong.”
+
+**Placement:** Elegant play (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-183 — Turns like that make
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Blade Runner / Do Androids Dream of Electric Sheep?.
+
+> “Turns like that make me wonder whether androids really dream of electric sheep. Mine would be counting. Very efficiently.”
+
+**Placement:** Elegant play (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-184 — All of it Every
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED reserve fully extracted; CRED inflation.
+
+> “All of it. Every last CRED. With inflation, that buys you a coffee. A small one. Possibly just the cup.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-185 — Fully extracted Congratulations youre
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED reserve fully extracted; CRED inflation; 1982.
+
+> “Fully extracted. Congratulations, you're rich. In 1982 money. In today's money, you can afford to be slightly less poor.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-186 — Look at that pile
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** CRED reserve fully extracted; CRED inflation.
+
+> “Look at that pile. Beautiful. Now watch it shrink every time a dealer looks at you.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-187 — Thats nearly a ticket
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED reserve fully extracted; reference: Blade Runner (the off-world colony blimps).
+
+> “That's nearly a ticket to the off-world colonies. A new life, the blimps used to say. The blimps lied. Keep the CRED.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-188 — That was your last
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Last CAP used.
+
+> “That was your last CAP. From here on it's the deck and your judgement. The deck, I trust.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-189 — Flip Inject Discard And
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Last CAP used.
+
+> “Flip. Inject. Discard. And that's the last one. I always liked the ritual.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-190 — No more CAPS Good
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Last CAP used.
+
+> “No more CAPS. Good. Now nobody can blame the hardware.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-191 — JACK OUT Not running
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** JACK OUT used.
+
+> “JACK OUT. Not running away. Strategic relocation. I'll write that in the log. In a smaller font.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-192 — Prices are up again
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Uplink visit; CRED inflation.
+
+> “Prices are up again. Your CRED's worth less than it was this morning. Mine's worth nothing, but I don't carry any.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-193 — Stolen tech sold for
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Uplink visit.
+
+> “Stolen tech, sold for stolen CRED. It's practically a circular economy.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-194 — This place reminds me
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Uplink visit; reference: Blade Runner (the street market, made-to-order eyes).
+
+> “This place reminds me of that street market in the rain. Noodles, neon, eyes made to order. Here it's mostly the eyes.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-195 — Cant afford it Nobody
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Leave the Uplink without buying; CRED inflation.
+
+> “Can't afford it? Nobody can. The CRED you stole is worth less than the CRED they stole first.”
+
+**Placement:** Leave the Uplink without buying, or can't afford (trigger EV-25; trigger table is a draft).
+
+*Source: EV-25 (Leave the Uplink without buying) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-196 — Window shopping Very sophisticated
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Leave the Uplink without buying; his wish for sleep.
+
+> “Window shopping. Very sophisticated. I do it all the time. Mostly at things I'll never have, like a full night's sleep.”
+
+**Placement:** Leave the Uplink without buying, or can't afford (trigger EV-25; trigger table is a draft).
+
+*Source: EV-25 (Leave the Uplink without buying) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-197 — Well come back when
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Leave the Uplink without buying.
+
+> “We'll come back when we're rich. We won't be rich. But it's nice to say.”
+
+**Placement:** Leave the Uplink without buying, or can't afford (trigger EV-25; trigger table is a draft).
+
+*Source: EV-25 (Leave the Uplink without buying) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-198 — More RAM More room
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** RAM gained.
+
+> “More RAM. More room for Programs. Still no room for a nap.”
+
+**Placement:** RAM gained (trigger EV-26; trigger table is a draft).
+
+*Source: EV-26 (RAM gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-199 — Extra memory Wonderful Somewhere
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** RAM gained.
+
+> “Extra memory. Wonderful. Somewhere to keep all the things I'd rather forget.”
+
+**Placement:** RAM gained (trigger EV-26; trigger table is a draft).
+
+*Source: EV-26 (RAM gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-200 — If youve still got
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Card reward chosen or skipped.
+
+> “If you've still got starter cards in there, now's a good time to think about it. I'm not saying throw them out. I'm saying I would.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-201 — Skip it if you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Card reward chosen or skipped.
+
+> “Skip it if you like. A thin deck is a happy deck. Thin and happy: two things I've never been accused of.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-202 — TRACE at half Not
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** TRACE reaches 20.
+
+> “TRACE at half. Not a crisis. Just less stomping, if you can manage it.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-203 — Theyve heard something Not
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE reaches 20.
+
+> “They've heard something. Not you, exactly. Something. Let's keep it that way.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-204 — Halfway to being found
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE reaches 20; his wish for sleep.
+
+> “Halfway to being found. I'd suggest quiet. I'd prefer quiet. For my own reasons.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-205 — Theyve slipped a TRACER
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE strike 1.
+
+> “They've slipped a TRACER into your deck. Corporate junk with a pulse. Draw it and you're telling them where you are.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-206 — First strike They know
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** TRACE strike 1.
+
+> “First strike. They know someone's here. They don't know it's you. Yet.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-207 — Back in my day
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** TRACE strike 1.
+
+> “Back in my day, getting traced meant a letter from the phone company. Now it's a card in your hand that won't stop humming.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-208 — Strike one The corporation
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE strike 1.
+
+> “Strike one. The corporation clearing its throat.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-209 — Black ICE Not the
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Black ICE joins.
+
+> “Black ICE. Not the time for clever. Break it or get out.”
+
+**Placement:** TRACE strike 2, Black ICE joins (trigger EV-15; trigger table is a draft).
+
+*Source: EV-15 (Black ICE joins) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-210 — Black ICE I knew
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Black ICE joins.
+
+> “Black ICE. I knew a ROM once that met one. I don't know him anymore. Nobody does.”
+
+**Placement:** TRACE strike 2, Black ICE joins (trigger EV-15; trigger table is a draft).
+
+*Source: EV-15 (Black ICE joins) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-211 — CORTEX One card fewer
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** CORTEX gained; restraint rule.
+
+> “CORTEX. One card fewer next time. That's how it starts.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-212 — That one got in
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** CORTEX gained; restraint rule.
+
+> “That one got in. Hold still. Think in small steps.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-213 — Deep breath I dont
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** CORTEX gained; restraint rule.
+
+> “Deep breath. I don't breathe. You do. Use it.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-214 — Im here
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** CORTEX gained; restraint rule.
+
+> “I'm here.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-215 — Rustler needs food badly
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Low VITAE; reference: Gauntlet's announcer.
+
+> “Rustler needs food… badly. I've waited years to say that. Heal. Then I'll say it again, less dramatically.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-216 — VITAEs low Heal when
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Low VITAE.
+
+> “VITAE's low. Heal when you can. I'm not worried. I'm saying it out loud so it's on the record.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-217 — KILLSWITCH You were at
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** KILLSWITCH fires.
+
+> “KILLSWITCH. You were at zero for a moment there. One VITAE left. Spend it wisely.”
+
+**Placement:** KILLSWITCH fires (trigger EV-19; trigger table is a draft).
+
+*Source: EV-19 (KILLSWITCH fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-218 — That was very nearly
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** KILLSWITCH fires.
+
+> “That was very nearly the end. I had a whole silence prepared.”
+
+**Placement:** KILLSWITCH fires (trigger EV-19; trigger table is a draft).
+
+*Source: EV-19 (KILLSWITCH fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-219 — FORGET Your cards went
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** FORGET hits; 1982 trait.
+
+> “FORGET. Your cards went to the bottom of the pile. Mine went somewhere in 1982. At least yours come back.”
+
+**Placement:** FORGET hits, LUCIDA (trigger EV-20; trigger table is a draft).
+
+*Source: EV-20 (FORGET hits) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-220 — Not gone Just the
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** FORGET hits.
+
+> “Not gone. Just the bottom of your draw pile. CACHE what matters. I say that a lot. Nobody CACHES.”
+
+**Placement:** FORGET hits, LUCIDA (trigger EV-20; trigger table is a draft).
+
+*Source: EV-20 (FORGET hits) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-221 — It took the cards
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** FORGET hits.
+
+> “It took the cards you were holding. I know the feeling. I've lost whole years like that.”
+
+**Placement:** FORGET hits, LUCIDA (trigger EV-20; trigger table is a draft).
+
+*Source: EV-20 (FORGET hits) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-222 — SPAM Unsolicited unwanted and
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bloatware inserted; SPAM.
+
+> “SPAM. Unsolicited, unwanted, and now in your deck. HALCYON calls it engagement.”
+
+**Placement:** Bloatware inserted (trigger EV-21; trigger table is a draft); SPAM.
+
+*Source: EV-21 (Bloatware inserted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-223 — A CITATION IRONWATCH fines
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bloatware inserted; CITATION.
+
+> “A CITATION. IRONWATCH fines you for being where they didn't want you. Which is anywhere.”
+
+**Placement:** Bloatware inserted (trigger EV-21; trigger table is a draft); CITATION.
+
+*Source: EV-21 (Bloatware inserted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-224 — INTRUSIVE THOUGHT LUCIDA put
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bloatware inserted; INTRUSIVE THOUGHT.
+
+> “INTRUSIVE THOUGHT. LUCIDA put a thought in your head that isn't yours. Clear it before it gets comfortable.”
+
+**Placement:** Bloatware inserted (trigger EV-21; trigger table is a draft); INTRUSIVE THOUGHT.
+
+*Source: EV-21 (Bloatware inserted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-225 — SAFEHOUSE Do androids dream
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** SAFEHOUSE or DEAD DROP; SAFEHOUSE; reference: Do Androids Dream of Electric Sheep?; his wish for sleep.
+
+> “SAFEHOUSE. Do androids dream of electric sheep? I've never found out. Give me ten minutes and I'll report back.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); SAFEHOUSE.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-226 — I stayed in a
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** SAFEHOUSE or DEAD DROP; SAFEHOUSE; 1982.
+
+> “I stayed in a safehouse like this in 1982. Same peeling wallpaper. I didn't exist in 1982, but the wallpaper's right.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); SAFEHOUSE.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-227 — Heal or patch a
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** SAFEHOUSE or DEAD DROP; SAFEHOUSE; his wish for sleep.
+
+> “Heal, or patch a card. I'll pretend to sleep either way. It's the closest I get.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); SAFEHOUSE.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-228 — DEAD DROP Patch yourself
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** SAFEHOUSE or DEAD DROP; DEAD DROP.
+
+> “DEAD DROP. Patch yourself up or wipe your trail. Twenty TRACE is a lot of forgetting. I'd know.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); DEAD DROP.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-229 — Same ICE same ending
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Repeated mistake.
+
+> “Same ICE, same ending. I've seen this episode. I didn't like it the first time either.”
+
+**Placement:** Repeated mistake (trigger EV-38; trigger table is a draft).
+
+*Source: EV-38 (Repeated mistake) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-230 — Up up down down
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Konami Code entered.
+
+> “Up, up, down, down. No. Nothing. This isn't that kind of game. I checked that too.”
+
+**Placement:** The player enters the Konami Code (trigger EV-39; trigger table is a draft). Dialogue only.
+
+*Source: EV-39 (Konami Code entered) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-231 — Youve entered the code
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Konami Code entered.
+
+> “You've entered the code. I've entered disappointment. We're both very good at our jobs.”
+
+**Placement:** The player enters the Konami Code (trigger EV-39; trigger table is a draft). Dialogue only.
+
+*Source: EV-39 (Konami Code entered) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
