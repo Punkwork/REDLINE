@@ -798,3 +798,9 @@ User confirms **all six ICE names** and **all existing Training Node values** fo
 **CRED reserves by layer:** 10 / 15 / 25 (total base 50); universal rounded-up 10% full-extraction bonuses +1 / +2 / +3, maximum total 56. Existing rules on turns, BW/RAM, 12-card Generalist deck, Icepicks, TRACE, VITAE, damage, extraction, BREACH, and reward resolution remain authoritative.
 
 **Next phase:** Implement an actually playable three-layer training-node prototype in **Godot**, edited/debugged using **Visual Studio**; validate established mechanics through playtesting before changing balance. This is a design freeze for the initial playtest, not a claim that implementation has been completed. Historical references to proposed ICE names/Strength/subroutines are superseded by this lock.
+
+## DOCS-SYNC-001 — Simplified-redesign documents added to the repository (2026-11-13)
+
+The ten approved and proposed documents of the simplified redesign, written in the Claude "Panopticon" project, are now in `docs/`: `REDLINE_CORE_RULES.md` (rules authority since 2026-11-12), `REDLINE_RUSTLERS.md`, `REDLINE_CARD_POOLS.md`, `REDLINE_ICE_CORP1.md` (HALCYON), `REDLINE_ICE_CORP2.md` (IRONWATCH), `REDLINE_ICE_CORP3.md` (LUCIDA), `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_UPGRADES_EVENTS_ESCAPE.md`, `REDLINE_ENGINES.md` (ENG-001 to ENG-005, mechanics approved in principle, details proposed) and `REDLINE_PLAYTEST_CHECKLIST.md`.
+
+They include NAME-001 (ICE types WALL / CODE GATE / SENTRY renamed FORTRESS / SIGYL / VOID; VOID damage renamed CORTEX; no rules changed) and UPL-009 (JACK OUT works during the escape). Where they conflict with older entries in `REDLINE_MASTER_DESIGN.md`, the Core Rules decide (Core Rules §15). Earlier log entries keep their original names (e.g. WATCHDOG — SENTRY) as history.
