@@ -95,6 +95,8 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **DIRECTION:** A sardonic, morose, historically minded AI companion, often dryly protective of the Runner. Its care is more credible when concealed within practical criticism. It can be mistaken, evasive, or an unreliable witness to its own history. Its voice should carry experience, not simply deliver tooltips.
 
+**CANON (2026-11-13) — Identity:** NUL/REM is **rev 0.08**, a salvaged, obsolete **personality ROM**, **manufactured in 1987**, referred to as **he**. He wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 (e.g. ARPANET going online in 1969) are the Unreliable Historian's impossible memories; their explanation stays OPEN. Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6.
+
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
 **Voice boundary:** NUL/REM is not a perpetual joke dispenser, omniscient lore encyclopedia, or transparent emotional confidant. Especially around VOID, restraint or silence may communicate more than humor.
@@ -138,6 +140,69 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 > **NUL/REM:** “Then I suggest you make it out before you need another.”
 
 **Possible placement (OPEN):** A final CAP used in dangerous circumstances. **Writing lesson:** NUL/REM need not say “I care” to reveal that it does.
+
+### VERSE NR-002 — Deadlock and hope
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Melancholic · **Function:** Turns the game's central obstacle into weary self-portrait.
+
+> “Deadlock. Two processes waiting for each other indefinitely. Much like my relationship with hope.”
+
+**Possible placement (OPEN):** A DEADLOCK that can't yet be broken, such as a BOOTING main ICE.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-003 — A lifestyle
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Technical definition turned into a dry jab at the Runner.
+
+> “We're stuck. In computing, this is called a deadlock. In your case, I suspect it's a lifestyle.”
+
+**Possible placement (OPEN):** A stalled encounter, or repeated failure to break a DEADLOCK.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-004 — Before manufacture
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Impossible memory that seeds the mystery of NUL/REM's origin.
+
+> “I remember ARPANET going online. Which is curious. I wasn't manufactured until 1987.”
+
+**Possible placement (OPEN):** Rare; a quiet moment such as the first Node of a run. ARPANET (1969) is real history; the memory is the impossible part.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-005 — Hot dust
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian / The Melancholic · **Function:** Sensory memory a machine cannot have; tender and strange.
+
+> “I know the smell of hot dust inside a television. I have never possessed a nose.”
+
+**Possible placement (OPEN):** Rare; a SAFEHOUSE, DEAD DROP or other pause.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-006 — Sufficient room
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Deadpan reaction to a gain, refusing to sound pleased.
+
+> “At last. Sufficient room to express my disappointment. I shall endeavour to use it responsibly.”
+
+**Possible placement (OPEN):** Gaining RAM (CO-PROCESSOR, RAM UPGRADE, MEMORY SPIKE) or another increase in space.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-007 — Paper Cut
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bureaucratic menace made absurd without removing the threat.
+
+> “Paper Cut. Individually insignificant. Collectively, a compelling argument against office work.”
+
+**Possible placement (OPEN):** Tied to the PAPER CUT concept ICE (CONCEPT, not implemented); reusable for any swarm of weak ICE.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-008 — Stationery
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporate absurdity as threat.
+
+> “Death by a thousand cuts. The corporation has apparently discovered stationery.”
+
+**Possible placement (OPEN):** As NR-007: PAPER CUT concept ICE or repeated small damage.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.

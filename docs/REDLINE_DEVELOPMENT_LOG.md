@@ -814,3 +814,9 @@ Migrated in place: `REDLINE_MASTER_DESIGN.md`, `REDLINE_BIBLE.md` (rule sections
 ## DOCS-SYNC-002 — UI and NUL/REM handoff restored to the repository (2026-11-13)
 
 `REDLINE_UI_NULREM_Design_For_Claude.md` (Claude implementation handoff, 2026-11-07), cited as a source by the Master Design but missing from the repository, is added to `docs/` **verbatim** as a historical source. It predates later rules: its damage types (PHYSICAL / NEURAL / SYNAPTIC), Integrity, Memory, Grip, corporations VANTABLACK and AEGIS, Force Open, Crowbar and "Training Wall" are superseded by the Core Rules and NAME-001. Its NUL/REM personality bible, dialogue-system behaviour, hacker-history anchors and terminal presentation remain the most detailed NUL/REM source; its tonal example lines have not yet been entered in the Bible as verses.
+
+## NULREM-001 — NUL/REM identity canon and verses NR-002 to NR-008 (APPROVED, 2026-11-13)
+
+**Identity (CANON):** NUL/REM is rev 0.08, a salvaged, obsolete personality ROM manufactured in 1987, referred to as "he"; he wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 are the Unreliable Historian's impossible memories; their explanation stays OPEN. Recorded in the Bible (§5) and the Master Design (§7).
+
+**Verses (CANON):** the seven approved tonal examples from `REDLINE_UI_NULREM_Design_For_Claude.md` §6 are entered in the Bible as NR-002 (Deadlock and hope), NR-003 (A lifestyle), NR-004 (Before manufacture), NR-005 (Hot dust), NR-006 (Sufficient room), NR-007 (Paper Cut) and NR-008 (Stationery), with exact wording preserved. Placements are suggestions (OPEN).

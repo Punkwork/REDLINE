@@ -76,6 +76,8 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 ## 7. NUL/REM — companion character bible
 **Core characterization (LOCKED/DIRECTION):** dry, morose, sarcastic; intelligent but not infallible; quietly protective of the rustler; steeped in classic videogame, hacker, and retro-computing history. The voice should feel like an exhausted machine that has seen too much and occasionally finds something genuinely wonderful.
 
+**CANON (2026-11-13) — Identity:** NUL/REM is **rev 0.08**, a salvaged, obsolete **personality ROM**, **manufactured in 1987**, referred to as **he**. He wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 (e.g. ARPANET going online in 1969) are the Unreliable Historian's impossible memories; their explanation stays OPEN. Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6. Approved example lines are Bible verses NR-002 to NR-008.
+
 **Six preserved personality modes (LOCKED):**
 1. **The Pedant:** obscure hacker/computing history and precise technical corrections.
 2. **The Cynic:** sharp, economical one-line judgments.
