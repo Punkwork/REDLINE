@@ -913,3 +913,7 @@ NR-114, NR-115 and NR-116 are RETIRED and replaced by v2 versions in which NUL/R
 
 Three lines approved as CANON verses: NR-118 (EV-06 DEADLOCK broken; “That. Is. Correct.”), NR-119 (EV-38 Repeated mistake; “That is incorrect”, in his head since 1982) and NR-120 (EV-33 First Signal fragment decrypted, the trigger's first line; E.T.'s Speak & Spell communicator; the Signal's content stays OPEN). Reference trait updated (Bible §5).
 
+## NULREM-024 — Game & Watch and Casio verses NR-121 to NR-124 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses: Game & Watch, referenced generically: NR-121 (EV-10 Stalled encounter; Game A / Game B) and NR-122 (EV-37 Idle; the grey ghosts of unlit segments). His Casio calculator watch as an old friend: NR-123 (EV-37 Idle) and NR-124 (EV-09 CRED reserve fully extracted; upside-down calculator words). Reference trait updated (Bible §5).
+
