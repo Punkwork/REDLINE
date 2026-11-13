@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -864,6 +864,60 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Escape begins from LUCIDA (trigger EV-32; trigger table is a draft); one of three, chosen at random.
 
 *Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-082 — Thirty lives
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: the Konami Code (Contra, 1988).
+
+> “Up, up, down, down, left, right, left, right, B, A, start. Thirty lives in Contra. You get one. I checked. I'm sorry.”
+
+**Placement:** Run lost (trigger EV-35; trigger table is a draft).
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-083 — No code for this one
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Run start after a loss; reference: Kazuhisa Hashimoto and the Konami Code (Gradius, 1986).
+
+> “Kazuhisa Hashimoto couldn't beat his own game, so he wrote himself a cheat. There's no code for this one. Nobody here was kind enough to leave one in.”
+
+**Placement:** Run start after a lost run (trigger EV-01; trigger table is a draft); joins the after-loss pool with NR-014.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-084 — Only disappointed
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Easter egg: the player types the Konami Code; reference: Gradius III. Dialogue only, no reward.
+
+> “Nice try. In Gradius III, that code blew your ship up. Be grateful I'm only disappointed.”
+
+**Placement:** The player enters the Konami Code (trigger EV-39, new; trigger table is a draft). Dialogue only: the code grants nothing.
+
+*Source: EV-39 (Konami Code entered) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-085 — Reseating did
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Stalled encounter; reference: blowing on NES cartridges.
+
+> “Stuck? Don't blow on it. Nintendo printed it on the cartridges: your breath corrodes the pins. Blowing never fixed anything. Reseating did. Try a different line.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-086 — Mostly germs
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; reference: blowing on cartridges; the germ trait; NUL/REM as a cartridge.
+
+> “If you're thinking of pulling me out and blowing on my contacts, don't. That's how you get green corrosion. And germs. Mostly germs.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-087 — Not a harmonica
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** CAPS at the Uplink; CAPS as Disposable Autonomous Cartridges (Bible §4); reference: blowing on cartridges.
+
+> “It's a cartridge, not a harmonica. Flip. Inject. Discard. Breathing on it isn't one of the steps. Nintendo printed that on every box, and nobody listened then either.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.

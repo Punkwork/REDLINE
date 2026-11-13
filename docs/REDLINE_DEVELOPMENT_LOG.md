@@ -869,3 +869,7 @@ Four more EV-31 (Payload chosen) lines approved as CANON verses that hint at the
 
 Trigger EV-32 (Escape begins, TRACE doubled): nine lines approved as CANON verses, three per corporation, naming each corporation's escape ICE and final Black ICE: HALCYON NR-073 to NR-075 (HOUSE CALL; NR-075 notes JACK OUT works during the escape, UPL-009), IRONWATCH NR-076 to NR-078 (LETHAL FORCE; NR-078 references Number 5's escape in Short Circuit), LUCIDA NR-079 to NR-081 (EGO DEATH, restraint rule; NR-081 references WALL-E). The escape is described as three nodes. To verify: the Short Circuit and WALL-E details.
 
+## NULREM-014 — Konami Code and cartridge verses NR-082 to NR-087 (APPROVED, 2026-11-13)
+
+Six lines approved as CANON verses. Konami Code: NR-082 (EV-35 Run lost; Contra's 30 lives), NR-083 (EV-01 Run start after a loss; Kazuhisa Hashimoto) and NR-084 (new trigger **EV-39, Konami Code entered**: dialogue only, the code grants nothing; Gradius III). Blowing on cartridges (the example named in Master Design §7's dialogue guidance): NR-085 (EV-10 Stalled encounter), NR-086 (EV-37 Idle; germ trait) and NR-087 (EV-24 Uplink visit; CAPS are Disposable Autonomous Cartridges, Bible §4). Reference trait updated (Bible §5).
+
