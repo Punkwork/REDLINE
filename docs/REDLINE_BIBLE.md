@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -1026,6 +1026,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
 
 *Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-100 — Robot, backwards
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle history aside; reference: Tobor the Great (1954).
+
+> “Tobor the Great, 1954. A robot. Named Tobor. Robot, backwards. Somebody sat in a room and decided that would do. And people say *my* name lacks imagination.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-101 — Tobor played by Tobor
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Idle history aside; reference: Tobor's reversed stencil (Captain Video) and the Here Comes Tobor pilot credits.
+
+> “One story says Tobor got his name because someone stencilled ROBOT on him backwards. It's the only version that makes it forgivable. His TV pilot was credited 'Tobor played by Tobor'. Consistent, at least.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-102 — MER/LUN
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; his own name reversed; follows the Tobor joke.
+
+> “Spell my name backwards and you get MER/LUN. Not a word. That's called effort.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.

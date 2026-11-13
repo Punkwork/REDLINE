@@ -881,3 +881,7 @@ Trigger EV-34 (Run won): five lines approved as CANON verses NR-088 to NR-092 (e
 
 Trigger EV-35 (Run lost): seven lines approved as CANON verses, loss without mockery: general NR-093, NR-094, NR-098, NR-099; by cause NR-095 (Black ICE), NR-096 (high CORTEX, restraint rule) and NR-097 (TRACE / LOCKDOWN). NR-098 and NR-099 reference R.O.B., the NES Robotic Operating Buddy (two games, then shelved; “Remembered Old Buddy” in Pikmin 2), added to the reference trait as a companion he identifies with. EV-35 pool also includes NR-082 (Konami Code) and WL-003 (high CORTEX only). All eight milestones now have canon lines.
 
+## NULREM-017 — Idle verses NR-100 to NR-102: Tobor (APPROVED, 2026-11-13)
+
+Three EV-37 (Idle) history-aside lines approved as CANON verses mocking Tobor, “robot” spelled backwards: NR-100 (Tobor the Great, 1954), NR-101 (the reversed-stencil story from Captain Video; the Here Comes Tobor pilot credited “Tobor played by Tobor”) and NR-102 (NUL/REM reversed is MER/LUN). Reference trait updated (Bible §5).
+
