@@ -873,3 +873,7 @@ Trigger EV-32 (Escape begins, TRACE doubled): nine lines approved as CANON verse
 
 Six lines approved as CANON verses. Konami Code: NR-082 (EV-35 Run lost; Contra's 30 lives), NR-083 (EV-01 Run start after a loss; Kazuhisa Hashimoto) and NR-084 (new trigger **EV-39, Konami Code entered**: dialogue only, the code grants nothing; Gradius III). Blowing on cartridges (the example named in Master Design §7's dialogue guidance): NR-085 (EV-10 Stalled encounter), NR-086 (EV-37 Idle; germ trait) and NR-087 (EV-24 Uplink visit; CAPS are Disposable Autonomous Cartridges, Bible §4). Reference trait updated (Bible §5).
 
+## NULREM-015 — Run-won verses NR-088 to NR-092 (APPROVED, 2026-11-13)
+
+Trigger EV-34 (Run won): five lines approved as CANON verses NR-088 to NR-092 (earned warmth, still dry; no hint of what the three fragments reveal together). NR-092 plays on the first win only (Story beat) and introduces an unnamed date NUL/REM has kept since 1987; its meaning is **OPEN**.
+

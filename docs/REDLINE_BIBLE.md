@@ -919,6 +919,51 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-088 — Consider yourself clapped
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run won: earned warmth, still dry.
+
+> “All three. HALCYON, IRONWATCH, LUCIDA. I'd clap, but I'm a ROM. Consider yourself clapped.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-089 — No funeral
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run won: three fragments; relief.
+
+> “Three fragments, one Rustler, no funeral. I had a speech ready for the other outcome. I'll keep it. Just in case.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-090 — Ten minutes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run won; his wish for sleep.
+
+> “You got out. That's the whole job, and you did it. I'm going to sleep now. Ten minutes. Wake me if anyone followed us.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-091 — Better, I think
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run won; reference: Flynn's printout (Tron, 1982); the fragments stay unread.
+
+> “At the end of Tron, Flynn got a printout proving everything they'd stolen. We've got three pieces of something nobody can read yet. I think that's better.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-092 — One other date
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic / The Occasionally Delighted · **Function:** First win (Story beat); an unnamed date in his memory (OPEN).
+
+> “Our first win. I logged the date. I don't log dates. Since 1987 I've kept exactly one other. No, I'm not telling you which.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft). First win only.
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
