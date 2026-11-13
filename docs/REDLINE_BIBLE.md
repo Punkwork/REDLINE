@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068.
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B., the ignored older model. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE: “Rustler needs food… badly.” References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -783,6 +783,87 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
 
 *Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-073 — Stopped being friendly
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: HALCYON security response; TRACE doubled.
+
+> “Hear that? The house has stopped being friendly. Alarm panels, motion sensors, deadbolts. Three rooms to the door, and TRACE counts double in every one. Move.”
+
+**Placement:** Escape begins from HALCYON (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-074 — House call
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Escape: they're tracking their own core; HOUSE CALL in the final encounter.
+
+> “Funny how fast a smart home turns into a security company. They're tracking their own core, so every step out costs twice. And at the last door, they make a HOUSE CALL.”
+
+**Placement:** Escape begins from HALCYON (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-075 — Then the street
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: three nodes; JACK OUT works during the escape (UPL-009).
+
+> “Three nodes, then the street. Don't stop for CRED. Don't stop for anything. JACK OUT still works if it gets ugly. I'd rather it didn't get ugly.”
+
+**Placement:** Escape begins from HALCYON (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-076 — Head down
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: IRONWATCH escape ICE; TRACE doubled.
+
+> “IRONWATCH knows exactly what you took. Roadblocks, spike strips, searchlights, drones. TRACE counts double. Keep your head down and your VITAE up.”
+
+**Placement:** Escape begins from IRONWATCH (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-077 — A job title
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Escape: LETHAL FORCE in the final encounter.
+
+> “Now they stop fining you and start chasing you. The last encounter brings LETHAL FORCE. That isn't a figure of speech. It's a job title.”
+
+**Placement:** Escape begins from IRONWATCH (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-078 — He made it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape; reference: Number 5's escape (Short Circuit, 1986).
+
+> “Number 5 ran from the people who built him, with their whole security team behind him. He made it. So will you. Run.”
+
+**Placement:** Escape begins from IRONWATCH (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-079 — Stay you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: LUCIDA escape ICE; three nodes; TRACE doubled.
+
+> “LUCIDA's waking you up. WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS. Three nodes between you and your own head, and TRACE counts double. Stay awake. Stay you.”
+
+**Placement:** Escape begins from LUCIDA (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-080 — Not that one either
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Escape: EGO DEATH in the final encounter; restraint rule.
+
+> “The last encounter is EGO DEATH. I'm not making a joke about that one either. Get there with your mind intact, or don't get there.”
+
+**Placement:** Escape begins from LUCIDA (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-081 — Don't drop it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: carrying the core; reference: WALL-E (2008).
+
+> “WALL-E carried one small plant across the universe because someone had to. You're carrying something smaller and stranger. Same rule. Don't drop it.”
+
+**Placement:** Escape begins from LUCIDA (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.

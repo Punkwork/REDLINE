@@ -865,3 +865,7 @@ Trigger EV-31 (Payload chosen): five lines approved as CANON verses NR-060 to NR
 
 Four more EV-31 (Payload chosen) lines approved as CANON verses that hint at the First Signal under the Ghostware without explaining it: NR-069 (rumour), NR-070 (the unknown employer, RUN-006), NR-071 (the encryption is older than the corporation, possibly older than NUL/REM) and NR-072 (a rhythm in the noise, like a carrier tone). NR-071 and NR-072 hint at NUL/REM's relationship to the First Signal and at the synchronization transmission; both remain **OPEN** and these lines commit to no answer. EV-31 pool: NR-060 to NR-064, NR-069 to NR-072.
 
+## NULREM-013 — Escape verses NR-073 to NR-081 (APPROVED, 2026-11-13)
+
+Trigger EV-32 (Escape begins, TRACE doubled): nine lines approved as CANON verses, three per corporation, naming each corporation's escape ICE and final Black ICE: HALCYON NR-073 to NR-075 (HOUSE CALL; NR-075 notes JACK OUT works during the escape, UPL-009), IRONWATCH NR-076 to NR-078 (LETHAL FORCE; NR-078 references Number 5's escape in Short Circuit), LUCIDA NR-079 to NR-081 (EGO DEATH, restraint rule; NR-081 references WALL-E). The escape is described as three nodes. To verify: the Short Circuit and WALL-E details.
+
