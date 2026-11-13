@@ -937,3 +937,7 @@ Four lines approved as CANON verses: NR-135 (EV-04 BOOTING; dialling at 1200 bau
 
 Two lines approved as CANON verses: NR-139 (EV-07 BREACH; Amiga demo scrollers, raster bars and greetings) and NR-140 (EV-37 Idle; FairLight, founded 1987 and named after the Fairlight CMI, the instrument behind Planet Rock's orchestra hit). Reference trait updated (Bible §5).
 
+## NULREM-030 — Ferris Bueller verses NR-141 and NR-142 (APPROVED, 2026-11-13)
+
+Two lines approved as CANON verses referencing Ferris Bueller's sampled coughs, played on an E-mu Emulator II (not a Fairlight CMI, which NUL/REM is keen to point out): NR-141 (EV-23 JACK OUT used) and NR-142 (EV-18 Low VITAE).
+

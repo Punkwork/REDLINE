@@ -1564,6 +1564,24 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-141 — Enjoy your day off
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** JACK OUT used; reference: Ferris Bueller's sampled coughs on an E-mu Emulator II (not a Fairlight).
+
+> “JACK OUT. Very Ferris. He skipped a whole day with sampled coughs on an Emulator II. Not a Fairlight, people always say Fairlight. The cheap cousin. Still did the job. Enjoy your day off.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-142 — You're not faking
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Low VITAE; reference: Ferris Bueller faking illness with a sampler.
+
+> “Ferris faked sick with a sampler and a phone. You're not faking. I checked. Heal, and save the coughing for the Emulator.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
