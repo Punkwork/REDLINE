@@ -34,9 +34,11 @@ So cards are priced consistently, **1 BW is worth about**:
 
 | Rarity | Chance in a reward slot | Uplink price (working) |
 |---|---|---|
-| **Common** | 60% | 25 CRED |
-| **Uncommon** | 30% | 40 CRED |
-| **Rare** | 10% | 65 CRED |
+| **Common** | 60% | 40 CRED *(was 25)* |
+| **Uncommon** | 30% | 60 CRED *(was 40)* |
+| **Rare** | 10% | 90 CRED *(was 65)* |
+
+**Prices raised by UPL-008** so a corporation's CRED buys about **2–3 cards**, keeping a winning run at about 30 cards added in total (Core Rules §9.1).
 
 - Card rewards (once per ICE Node, CORE-010): **2 shared + 1 Rustler-specific** (approved RUSTLER-007). Each slot rolls its rarity separately.
 - **Rarity improves with depth** (CORE-010): the odds above are for a Node left after 1 layer. 2 layers cleared: 45/40/15%. 3 layers: 30/45/25%.
@@ -179,7 +181,7 @@ So cards are priced consistently, **1 BW is worth about**:
 ## 8. Phase 3B decision record (all APPROVED, 2026-11-12)
 
 1. **Card value guide** (§1): 1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 5 CRED; +2 TRACE pays for 1 BW; BURNED allows +50%. — **APPROVED 2026-11-12 (CARD-001)**
-2. **Rarity, reward odds and Uplink prices** (§2): 60/30/10%; 25/40/65 CRED; removal 40 CRED. — **APPROVED 2026-11-12 (CARD-002)**
+2. **Rarity, reward odds and Uplink prices** (§2): 60/30/10%; 25/40/65 CRED; removal 40 CRED. — **APPROVED 2026-11-12 (CARD-002)**; card prices **raised to 40/60/90 by UPL-008**
 3. **Shared pool** of 31 cards (§3). — **APPROVED 2026-11-12 (CARD-003)**
 4. **THE GENERALIST's pool** (§4). — **APPROVED 2026-11-12 (CARD-004)**
 5. **ECHO's pool** (§5). — **APPROVED 2026-11-12 (CARD-005)**

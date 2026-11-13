@@ -108,13 +108,18 @@
         "rare": 0.25
       }
     },
-    "target_card_rewards_per_run": 30
+    "card_reward_in_escape": false,
+    "target_cards_added_per_winning_run": 30,
+    "target_cards_bought_per_corporation": [
+      2,
+      3
+    ]
   },
   "prices": {
     "card": {
-      "common": 25,
-      "uncommon": 40,
-      "rare": 65
+      "common": 40,
+      "uncommon": 60,
+      "rare": 90
     },
     "cap": {
       "common": 20,
@@ -152,16 +157,16 @@
   },
   "cred_reserves": {
     "tier1": [
+      10,
+      15
+    ],
+    "tier2": [
+      15,
       20,
       30
     ],
-    "tier2": [
-      30,
-      35,
-      50
-    ],
-    "central": 55,
-    "escape": 15
+    "central": 35,
+    "escape": 10
   },
   "map": {
     "infiltration_rows": 9,

@@ -219,14 +219,12 @@ When you take THE HEARTH's payload, HALCYON stops being a friendly gadget compan
 **Escape layout:**
 | Escape encounter | ICE | CRED reserve |
 |---|---|---|
-| **1** | 1 random escape ICE | 15 |
+| **1** | 1 random escape ICE | 10 |
 | **SAFEHOUSE** | (heal 10 VITAE or 1 PATCHWORK) | — |
-| **2** | 2 random escape ICE | 15 |
-| **3** | 1 random escape ICE + **HOUSE CALL** (support, left) | 15 |
+| **2** | 2 random escape ICE | 10 |
+| **3** | 1 random escape ICE + **HOUSE CALL** (support, left) | 10 |
 
-Escape reserves were 10 each; raised to 15 by UPL-008.
-
-The SAFEHOUSE's position is random (after encounter 1 or after encounter 2), and it's shown on the map.
+The SAFEHOUSE's position is random (after encounter 1 or after encounter 2), and it's shown on the map. Escape encounters pay CRED but give **no card reward** (CORE-010).
 
 **Why these ICE:** each punishes a different habit at the worst time. ALARM PANEL and PANIC BUTTON hit TRACE while it's doubled; MOTION SENSOR punishes setting up a big rig; DEADBOLT ignores your PROBE stack. HOUSE CALL in the last encounter means the corporation's hunter is waiting at the door.
 

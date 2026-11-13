@@ -71,7 +71,7 @@ func test_start_of_node() -> void:
 	check(node.bw == 4, "4 BW")
 	check(node.run.deck.size() == 12, "12-card starter deck")
 	check(node.ice_list.size() == 1 and node.ice_list[0]["id"] == "white_picket_fence", "layer 1 ICE")
-	check(node.reserve == 15, "layer 1 reserve 15")
+	check(node.reserve == 10, "layer 1 reserve 10")
 
 	var rr = new_node(99, true)
 	rr.start()
@@ -128,7 +128,7 @@ func test_breach_skips_response() -> void:
 	check(node.run.vitae == vitae_before, "BREACH skips the PULP subroutine")
 	check(node.phase == "layer_choice" and node.reward_options.is_empty(), "no card reward after a layer (CORE-010)")
 	node.go_deeper()
-	check(node.layer_index == 1 and node.ice_list.size() == 2 and node.reserve == 25, "layer 2 set up")
+	check(node.layer_index == 1 and node.ice_list.size() == 2 and node.reserve == 15, "layer 2 set up")
 
 
 func test_reward_at_node_end() -> void:
@@ -222,9 +222,9 @@ func test_full_extraction_bonus() -> void:
 	var node = new_node()
 	node.start()
 	node._extract(15, "test")
-	check(node.run.cred == 15 + 2, "15 extracted + 10%% bonus rounded up (cred %d)" % node.run.cred)
+	check(node.run.cred == 10 + 1, "10 extracted + 10%% bonus rounded up (cred %d)" % node.run.cred)
 	node._extract(5, "test")
-	check(node.run.cred == 17, "empty reserve pays nothing")
+	check(node.run.cred == 11, "empty reserve pays nothing")
 
 
 ## A simple greedy bot plays the whole Training Node, to catch crashes and loops.

@@ -8,9 +8,9 @@ One Node: **the Generalist against the Training Node**, three layers.
 
 | Layer | ICE | CRED reserve |
 |---|---|---|
-| 1 | WHITE PICKET FENCE | 15 |
-| 2 | TOLLBOOTH, MEATGRINDER | 25 |
-| 3 | OVERCLOCK, HOTWIRE, WATCHDOG | 40 |
+| 1 | WHITE PICKET FENCE | 10 |
+| 2 | TOLLBOOTH, MEATGRINDER | 15 |
+| 3 | OVERCLOCK, HOTWIRE, WATCHDOG | 25 |
 
 The full core loop is in:
 - READY RIG

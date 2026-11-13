@@ -67,14 +67,14 @@
           "ice": [
             "white_picket_fence"
           ],
-          "cred_reserve": 15
+          "cred_reserve": 10
         },
         {
           "ice": [
             "tollbooth",
             "meatgrinder"
           ],
-          "cred_reserve": 25
+          "cred_reserve": 15
         },
         {
           "ice": [
@@ -82,10 +82,10 @@
             "hotwire",
             "watchdog"
           ],
-          "cred_reserve": 40
+          "cred_reserve": 25
         }
       ],
-      "cred_reserve_note": "15/25/40 per the Master Design's approved test-node reserves (working values)."
+      "cred_reserve_note": "10/15/25: the Master Design's authoritative Training Node CRED schedule (supersedes the provisional 15/25/40)."
     },
     {
       "id": "halcyon",
@@ -116,7 +116,7 @@
           "thermostat",
           "the_hearth"
         ],
-        "cred_reserve": 55
+        "cred_reserve": 35
       },
       "escape_ice": [
         "alarm_panel",
@@ -128,12 +128,12 @@
         {
           "encounter": 1,
           "random_escape_ice": 1,
-          "cred_reserve": 15
+          "cred_reserve": 10
         },
         {
           "encounter": 2,
           "random_escape_ice": 2,
-          "cred_reserve": 15
+          "cred_reserve": 10
         },
         {
           "encounter": 3,
@@ -142,7 +142,7 @@
             "house_call"
           ],
           "house_call_position": "left",
-          "cred_reserve": 15
+          "cred_reserve": 10
         }
       ],
       "escape_safehouse_after_encounter": [

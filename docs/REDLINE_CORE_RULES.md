@@ -201,7 +201,7 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 ### 9.1 Card reward at the end of each ICE Node [CHANGED by CORE-010]
 1. CRED your Extractors earned is banked the moment it's paid, layer by layer.
-2. **Once per ICE Node**, when you finish it (by clearing every layer, or by leaving early): **choose 1 of 3 cards** to add to your deck, or skip. There is **no** card reward after the individual layers.
+2. **Once per ICE Node**, when you finish it (by clearing every layer, or by leaving early): **choose 1 of 3 cards** to add to your deck, or skip. There is **no** card reward after the individual layers, and **none in the escape** (§10.3).
 3. **Deeper is better.** The rarity odds of each choice depend on how many layers you cleared in that Node:
 
 | Layers cleared | Common | Uncommon | Rare |
@@ -212,7 +212,7 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 4. **JACK OUT** forfeits the Node's card reward (UPL-003 is unchanged).
 
-**Why [CORE-010]:** a card after every BREACH gave about 45 card rewards per run. One per Node gives about **30 per winning run**: 6 ICE Nodes on the way in + the Central Node + 3 escape encounters (each its own Node) = 10 per corporation × 3. Fewer, better choices keep decks lean and make each pick matter. The odds table keeps going deeper worth the risk now that the extra reward per layer is gone.
+**Why [CORE-010]:** the target is **about 30 cards added in a winning run, in total**, of which **2–3 per corporation are bought** at Uplinks (UPL-008). A card after every BREACH gave about 45 card rewards per run. One per ICE Node on the way in gives 6 + the Central Node = **7 per corporation, about 21 per run**; with 6–9 cards bought, that's **27–30 cards**. Fewer, better choices keep decks lean and make each pick matter. The odds table keeps going deeper worth the risk now that the extra reward per layer is gone.
 
 ### 9.2 Extraction (unchanged)
 - Each encounter has a **CRED reserve**, larger in deeper layers.
@@ -254,6 +254,7 @@ After the Central Node, you have to get out:
 - **4 Nodes:** **3 single-layer ICE encounters** using that corporation's **countermeasure ICE**, plus **exactly 1 SAFEHOUSE**.
 - **TRACE gains are doubled** throughout the escape.
 - **No leaving early**, and **JACK OUT doesn't work**.
+- **No card rewards** in escape encounters (CORE-010). Extractors still earn CRED, which you spend at the next corporation's Uplinks.
 - No Uplinks, Console Labs or other upgrade Nodes, apart from the one SAFEHOUSE.
 - **TRACE is doubled because the corporation is tracking its own data core.**
 - Complete the escape to decrypt the core (a First Signal fragment) and move on. If VITAE reaches 0 during the escape, the run ends as normal.
@@ -364,4 +365,4 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + VOID onl
 
 | ID | Change to this document |
 |---|---|
-| CORE-010 | Card reward **once per ICE Node** at the end of the Node, not after every BREACH; about 30 card rewards per winning run. Rarity odds improve with layers cleared (60/30/10, 45/40/15, 30/45/25). Leaving early still gets the card reward; JACK OUT doesn't. Node completion reward is now a CAP or a PATCHWORK upgrade (no rare card) (§4, §8.2, §9.1, §9.3). Supersedes CORE-006. |
+| CORE-010 | Card reward **once per ICE Node** at the end of the Node, not after every BREACH, and none in the escape; about 21 card rewards per winning run, about 30 cards added with Uplink purchases (UPL-008). Rarity odds improve with layers cleared (60/30/10, 45/40/15, 30/45/25). Leaving early still gets the card reward; JACK OUT doesn't. Node completion reward is now a CAP or a PATCHWORK upgrade (no rare card) (§4, §8.2, §9.1, §9.3). Supersedes CORE-006. |
