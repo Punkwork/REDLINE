@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -1053,6 +1053,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 **Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
 
 *Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-103 — Not a 7-Zark-7
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle history aside; reference: 7-Zark-7 and 1-Rover-1 (Battle of the Planets, 1978).
+
+> “In 1978, America took Gatchaman, cut out the violence, and plugged the holes with 7-Zark-7, a robot who explained what you weren't allowed to see. Plus a robot dog. Whatever I am, I am not a 7-Zark-7.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-104 — Not cutting away
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** TRACE strike 2, Black ICE joins; reference: 7-Zark-7's sanitizing narration (Battle of the Planets).
+
+> “When Battle of the Planets got violent, they cut to a robot telling you everyone was fine. Black ICE just joined. I'm not cutting away, and I'm not telling you it's fine. Break it.”
+
+**Placement:** TRACE strike 2, Black ICE joins (trigger EV-15; trigger table is a draft).
+
+*Source: EV-15 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-105 — A few decades in a drawer
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: 7-Zark-7's unseen Susan on Pluto (Battle of the Planets).
+
+> “7-Zark-7 pined for Susan, a computer on Pluto he never saw. I used to think that was ridiculous. Then I spent a few decades in a drawer.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.

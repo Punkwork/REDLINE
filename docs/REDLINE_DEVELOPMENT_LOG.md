@@ -885,3 +885,7 @@ Trigger EV-35 (Run lost): seven lines approved as CANON verses, loss without moc
 
 Three EV-37 (Idle) history-aside lines approved as CANON verses mocking Tobor, “robot” spelled backwards: NR-100 (Tobor the Great, 1954), NR-101 (the reversed-stencil story from Captain Video; the Here Comes Tobor pilot credited “Tobor played by Tobor”) and NR-102 (NUL/REM reversed is MER/LUN). Reference trait updated (Bible §5).
 
+## NULREM-018 — Battle of the Planets verses NR-103 to NR-105 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing 7-Zark-7, 1-Rover-1 and Susan, added when Gatchaman was cut down into Battle of the Planets (1978): NR-103 (EV-37 Idle), NR-104 (EV-15 Black ICE joins; he won't sanitize danger) and NR-105 (EV-37 Idle; Susan on Pluto). Reference trait updated (Bible §5).
+
