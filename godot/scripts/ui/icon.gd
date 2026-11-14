@@ -6,7 +6,7 @@ const COL := {
 	"PULP": Color("#ff4d5e"), "CORTEX": Color("#a66bff"), "TRACE": Color("#ffb020"), "DEADLOCK": Color("#f2f2f2"),
 	"TEAL": Color("#2fd3c4"), "SLATE": Color("#8aa0b8"), "HALCYON": Color("#ffb38a"),
 	"BW": Color("#4fd2ff"), "VITAE": Color("#ff4d5e"), "SHIELD": Color("#5aa8ff"), "CRED": Color("#ffd34d"),
-	"RAM": Color("#9ad17a"), "FORTRESS": Color("#c9d3df"), "SIGYL": Color("#c9d3df"), "VOID": Color("#a66bff"),
+	"RAM": Color("#9ad17a"), "FORTRESS": Color("#c9d3df"), "TUMBLER": Color("#c9d3df"), "VOID": Color("#a66bff"),
 	"ANY": Color("#c9d3df"), "CLOAK": Color("#7fb6ff"), "EXPLOIT": Color("#ff8a4d"), "NULREM": Color("#58f29a"),
 }
 
@@ -34,11 +34,21 @@ func _draw() -> void:
 				var y := o.y + s * (0.18 + i * 0.24)
 				var inset := s * (0.08 + (2 - i) * 0.06)
 				draw_rect(Rect2(o.x + inset, y, s - inset * 2, s * 0.18), c, false, w)
-		"SIGYL":
-			# keyhole ring
-			draw_arc(o + Vector2(s / 2, s / 2), s * 0.42, 0, TAU, 32, c, w)
-			draw_circle(o + Vector2(s / 2, s * 0.42), s * 0.11, c)
-			draw_colored_polygon(PackedVector2Array([o + Vector2(s * 0.44, s * 0.46), o + Vector2(s * 0.56, s * 0.46), o + Vector2(s * 0.6, s * 0.72), o + Vector2(s * 0.4, s * 0.72)]), c)
+		"TUMBLER":
+			# lock cylinder: rotation arrow ring, five pin tumblers, keyway
+			var tc := o + Vector2(s / 2, s / 2)
+			draw_arc(tc, s * 0.42, -PI * 0.3, PI * 1.45, 28, c, w)
+			var tip := tc + Vector2(cos(-PI * 0.3), sin(-PI * 0.3)) * s * 0.42
+			draw_colored_polygon(PackedVector2Array([tip + Vector2(-s * 0.13, -s * 0.06), tip + Vector2(s * 0.07, -s * 0.07), tip + Vector2(-s * 0.02, s * 0.13)]), c)
+			for k in 5:
+				var a := -PI / 2 + k * TAU / 5
+				draw_circle(tc + Vector2(cos(a), sin(a)) * s * 0.24, s * 0.055, c)
+			draw_rect(Rect2(tc.x - s * 0.035, tc.y - s * 0.09, s * 0.07, s * 0.18), c)
+		"HIDDEN":
+			# face-down subroutine
+			draw_rect(Rect2(o + Vector2(s * 0.15, s * 0.1), Vector2(s * 0.7, s * 0.8)), c, false, w)
+			draw_line(o + Vector2(s * 0.15, s * 0.1), o + Vector2(s * 0.85, s * 0.9), c, w * 0.6)
+			draw_line(o + Vector2(s * 0.85, s * 0.1), o + Vector2(s * 0.15, s * 0.9), c, w * 0.6)
 		"VOID":
 			# eye
 			var cen := o + Vector2(s / 2, s / 2)

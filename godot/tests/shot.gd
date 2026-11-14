@@ -27,7 +27,11 @@ func _process(_d: float) -> bool:
 			main.refresh()
 		1:
 			_snap("02_ready_rig")
-			g.skip_ready_rig()
+			var rid := -1
+			for u in g.pending.options:
+				if g._find(g.draw_pile, u).id == "TUMBLER_ICEPICK":
+					rid = u
+			g.choose_ready_rig(rid)
 			main.refresh()
 		2:
 			_snap("03_encounter")
@@ -43,6 +47,13 @@ func _process(_d: float) -> bool:
 			main.refresh()
 		4:
 			_snap("05_after_response")
+			if g.phase == "CHOICE":
+				g.choose(g.hand[0].uid)
+			main._show_inspect(g.installed[0].inst.id if not g.installed.is_empty() else "")
+			main.refresh()
+			main._show_inspect(g.installed[0].inst.id if not g.installed.is_empty() else "")
+		5:
+			_snap("06_inspect")
 			return true
 	step += 1
 	return false

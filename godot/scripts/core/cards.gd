@@ -9,8 +9,8 @@ const DEFS := {
 	"FORTRESS_ICEPICK": {"name": "FORTRESS Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"pick": {"itype": "FORTRESS", "str": 1, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "free_first": true},
 		"text": "STR 1. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break."},
-	"SIGYL_ICEPICK": {"name": "SIGYL Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "SIGYL", "str": 3, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
+	"TUMBLER_ICEPICK": {"name": "TUMBLER Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
+		"pick": {"itype": "TUMBLER", "str": 3, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
 		"text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW."},
 	"VOID_ICEPICK": {"name": "VOID Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"pick": {"itype": "VOID", "str": 0, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
@@ -34,10 +34,10 @@ const DEFS := {
 		"pick": {"itype": "FORTRESS", "str": 2, "boost_cost": 1, "boost_amt": 2, "break_cost": 1, "free_first": true},
 		"text": "STR 2. Boost: 1 BW → +2 STR. First break each turn free; then 1 BW."},
 	"PASSKEY": {"name": "PASSKEY", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "COMMON",
-		"pick": {"itype": "SIGYL", "str": 3, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
+		"pick": {"itype": "TUMBLER", "str": 3, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
 		"text": "STR 3. Boost: 1 BW → +1 STR. Break: 1 BW."},
 	"RAINBOW_TABLE": {"name": "RAINBOW TABLE", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "UNCOMMON",
-		"pick": {"itype": "SIGYL", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "double": true},
+		"pick": {"itype": "TUMBLER", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "double": true},
 		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW for up to 2 subroutines on the same ICE."},
 	"TASER": {"name": "TASER", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "COMMON",
 		"pick": {"itype": "VOID", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
@@ -47,7 +47,7 @@ const DEFS := {
 		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Each break: +2 SHIELD."},
 	"SKELETON_KEY": {"name": "SKELETON KEY", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 2, "ram": 2, "rarity": "RARE",
 		"pick": {"itype": "ANY", "str": 3, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on FORTRESS, SIGYL and VOID."},
+		"text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on FORTRESS, TUMBLER and VOID."},
 	"DATA_SIPHON": {"name": "DATA SIPHON", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "COMMON",
 		"extract": 6, "text": "End of your turn: extract 6 CRED."},
 	"SKIMMER": {"name": "SKIMMER", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 0, "ram": 1, "rarity": "UNCOMMON",
@@ -109,7 +109,7 @@ const DEFS := {
 }
 
 const STARTER_GENERALIST := [
-	"FORTRESS_ICEPICK", "SIGYL_ICEPICK", "VOID_ICEPICK", "BASIC_EXTRACTOR", "CORTEX_BUFFER",
+	"FORTRESS_ICEPICK", "TUMBLER_ICEPICK", "VOID_ICEPICK", "BASIC_EXTRACTOR", "CORTEX_BUFFER",
 	"PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "PROBE", "PROBE", "PROBE", "GHOST_SIGNAL",
 ]
 

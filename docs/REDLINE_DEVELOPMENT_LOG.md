@@ -1000,3 +1000,28 @@ First playable of the fresh Godot build (see BUILD-001). Lives in `godot/`; open
 - **Out:** CAPS, Uplinks, PATCHWORK, the Central Node, other Rustlers and corporations.
 - **Architecture:** rules engine `scripts/core/game.gd` (no UI dependency) + `cards.gd`, `ice.gd`, `nulrem.gd`; UI in `scripts/ui/main.gd`. Headless tests: `godot --headless --path godot --script res://tests/test_game.gd` (50 pass, including a bot that clears the slice). `tests/shot.gd` renders screenshots under a virtual display.
 - **Export:** `export_presets.cfg` has a Windows Desktop preset (embedded PCK) writing to `build/` (git-ignored).
+
+## ROT-001 — TUMBLER ICE replace SIGYL; rotating subroutines (APPROVED, 2026-11-13)
+
+Playtest finding: the Rustler had too little to do each turn, so there was little choice and little tension. Designer decision:
+- **TUMBLER** replaces the **SIGYL** ICE type (and the SIGYL Icepick becomes the **TUMBLER Icepick**, same stats for now). FORTRESS and VOID are unchanged.
+- A TUMBLER has a pool of 1–8 subroutines and fewer **slots**. Only the subroutines in its slots are active. A cheap TUMBLER might have 2 subroutines and 1 slot; an expensive one 6 subroutines and 3 slots.
+- **Conveyor rotation:** at the start of each Rustler turn after the first, the window moves one step (slots showing 1-2-3 then show 2-3-4, then 3-4-5, wrapping round). The newly revealed set is what fires in that turn's Corporation Response, so the Rustler only learns the response at the start of their turn.
+- **Hidden subroutines** are face-down (the count is shown) and can't be broken. Only subroutines in a slot can be broken.
+- **Broken stays broken** for the rest of the encounter, even when it rotates out and back in.
+- **BREACH** needs every DEADLOCK on the ICE broken, including ones not yet seen. TUMBLERs carry several DEADLOCKs, so they must be broken as they rotate into view.
+- Slice pools (placeholders for playtest): ACCEPT ALL 2 subs/1 slot; REJECT ALL 4/2 (two DEADLOCKs, BOOTING); CONSENT FORM 4/2 (two DEADLOCKs); CAPTCHA 5/2 (two DEADLOCKs).
+
+**Docs to follow:** Core Rules, ICE docs, Card Pools, Master Design and Bible rule sections still say SIGYL and need a pass. No CANON NUL/REM verse mentions SIGYL.
+
+## FIX-001 — DISCARD subroutines resolve at the start of the Rustler's turn (APPROVED, 2026-11-13)
+
+A DISCARD subroutine that fires in the Corporation Response now resolves at the start of the Rustler's next turn, after the draw. (Previously it hit the old hand just before cleanup discarded it anyway.)
+
+## FIX-002 — Boost installed Icepicks; inspect installed cards (APPROVED, 2026-11-13)
+
+Installed Icepicks have a BOOST button in the rig (pay the boost cost for +STR; boosts last until the encounter ends; TOOLBELT makes the first boost each turn free). Hovering or clicking any installed Program or racked Protocol shows its full card.
+
+## TUNE-001 — Deadlier encounters (APPROVED, 2026-11-13)
+
+Encounters weren't deadly enough. Every ICE gets **+1 STR (OPENING)** or **+2 STR (T1 and Black ICE)**, and every ICE **PULP value is ×4/3, rounded up** (applied after the TUMBLER pools were set). Slice values: ACCEPT ALL 4, REJECT ALL 4, COOKIE WALL 5, TERMS OF SERVICE 7, CONSENT FORM 4, CAPTCHA 5, DOORBELL CAM 4, HOUSE CALL 7 (PULP 6). A simple bot that banks spare BW into boosts clears 9 of 30 seeded runs; all 21 deaths are at the final node (TERMS & CONDITIONS).

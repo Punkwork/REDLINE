@@ -34,6 +34,7 @@ var piles: Label
 var nr_text: Label
 var nr_mode: Label
 var overlay: Control
+var inspect: CenterContainer
 var tween: Tween
 
 # =====================================================================
@@ -174,6 +175,12 @@ func _build_layout() -> void:
 	nr_mode = _lbl("", 11, Color("#3f9a68"))
 	nv.add_child(nr_mode)
 
+	inspect = CenterContainer.new()
+	inspect.position = Vector2(236, 100)
+	inspect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	inspect.visible = false
+	inspect.z_index = 10
+	add_child(inspect)
 	overlay = Control.new()
 	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -350,10 +357,13 @@ func _build_info() -> void:
 		return
 	info.add_child(_lbl(g.node.name, 18, TEXT))
 	info.add_child(_lbl("LAYER %d of %d" % [g.layer + 1, g.node.layers.size()], 14, DIM))
-	var dl := g.deadlock_count()
+	var dl := g.deadlock_view()
 	var dh := HBoxContainer.new()
 	dh.add_child(RIcon.make("DEADLOCK", 16))
-	dh.add_child(_lbl(" DEADLOCKS %d of %d" % [dl.x, dl.y], 14, TEXT))
+	var dtxt := " DEADLOCKS %d of %d seen" % [dl.done, dl.seen]
+	if dl.unseen > 0:
+		dtxt += "  ·  %d subroutine%s unseen" % [dl.unseen, "" if dl.unseen == 1 else "s"]
+	dh.add_child(_lbl(dtxt, 14, TEXT))
 	info.add_child(dh)
 	info.add_child(_lbl("TURN %d" % g.enc.turn, 14, DIM))
 	var rh := HBoxContainer.new()
@@ -383,8 +393,20 @@ func _build_rig() -> void:
 		v.add_child(_lbl(d.name, 13, TEXT))
 		if d.has("pick"):
 			var extra := " (+%d)" % p.boost if p.boost > 0 else ""
-			var free := "  free break ready" if d.pick.get("free_first", false) and not p.free_used else ""
-			v.add_child(_lbl("STR %d%s%s" % [g.pick_str(p), extra, free], 12, DIM))
+			var sh := HBoxContainer.new()
+			sh.add_child(_lbl("STR %d%s" % [g.pick_str(p), extra], 13, TEXT))
+			var bchk := g.can_boost(p.inst.uid)
+			var bb := Button.new()
+			bb.text = "+%d STR · %s" % [d.pick.boost_amt, "FREE" if bchk.cost == 0 else "%d BW" % bchk.cost]
+			bb.tooltip_text = "Boost this Icepick. Boosts last until the encounter ends."
+			bb.add_theme_font_size_override("font_size", 11)
+			bb.disabled = not bchk.ok or targeting >= 0
+			var puid: int = p.inst.uid
+			bb.pressed.connect(func(): g.boost_pick(puid); refresh())
+			sh.add_child(bb)
+			v.add_child(sh)
+			if d.pick.get("free_first", false) and not p.free_used:
+				v.add_child(_lbl("free break ready", 11, Color("#58f29a")))
 		elif d.has("extract"):
 			v.add_child(_lbl("+%d CRED end of turn" % d.extract, 12, DIM))
 		v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -395,6 +417,7 @@ func _build_rig() -> void:
 		x.disabled = g.phase != "PLAYER"
 		x.pressed.connect(func(): g.unload(p.inst.uid); refresh())
 		row.add_child(x)
+		_make_inspectable(row, p.inst.id)
 		rig.add_child(row)
 	if not g.rack.is_empty():
 		rig.add_child(_lbl("RACK (Protocols)", 13, DIM))
@@ -405,8 +428,26 @@ func _build_rig() -> void:
 			sw.color = TYPE_COL.PROTOCOL
 			r.add_child(sw)
 			r.add_child(_lbl(" " + CardDB.def(c.id).name, 13, TEXT))
-			r.tooltip_text = CardDB.def(c.id).text
+			_make_inspectable(r, c.id)
 			rig.add_child(r)
+
+func _make_inspectable(c: Control, id: String) -> void:
+	## FIX-002: hover (or click) an installed card to see the full card beside the rig.
+	c.mouse_filter = Control.MOUSE_FILTER_PASS
+	c.mouse_entered.connect(func(): _show_inspect(id))
+	c.mouse_exited.connect(func(): _show_inspect(""))
+	c.gui_input.connect(func(ev):
+		if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
+			_show_inspect("" if inspect.visible else id))
+
+func _show_inspect(id: String) -> void:
+	_clear(inspect)
+	inspect.visible = id != ""
+	if id != "":
+		var cv := _card_view(id, -1)
+		cv.custom_minimum_size = Vector2(200, 270)
+		cv.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		inspect.add_child(cv)
 
 func _build_ice() -> void:
 	_clear(ice_row)
@@ -477,9 +518,20 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			var on: bool = g.enc.turn >= t + 1
 			bh.add_child(_lbl(" T%d " % (t + 1), 12, Color("#0b0e13") if on else DIM, RIcon.COL.TRACE if on else Color("#232a36")))
 		v.add_child(bh)
-	# subroutines
-	for s in d.subs.size():
-		v.add_child(_sub_row(i, s, d.subs[s], ice.broken[s]))
+	# subroutines (TUMBLERs: only the subroutines in its slots; the rest are face-down)
+	var act := g.active_subs(i)
+	var tumbler := IceDB.is_tumbler(ice.id)
+	for k in act.size():
+		var s: int = act[k]
+		v.add_child(_sub_row(i, s, d.subs[s], ice.broken[s], ("SLOT %d" % (k + 1)) if tumbler else ("[S%d]" % (s + 1))))
+	if tumbler:
+		var hid := g.hidden_count(i)
+		if hid > 0:
+			var hh := HBoxContainer.new()
+			for n in hid:
+				hh.add_child(RIcon.make("HIDDEN", 20, DIM))
+			hh.add_child(_lbl("  %d hidden · rotates 1 step each turn" % hid, 12, DIM))
+			v.add_child(hh)
 	if d.has("ability_text"):
 		var ah := HBoxContainer.new()
 		ah.add_child(RIcon.make("CLOAK" if d.ability == "CLOAK_TRACE" else "TRACE", 16))
@@ -490,10 +542,10 @@ func _ice_card(i: int, is_main: bool) -> Control:
 		v.add_child(ah)
 	return pc
 
-func _sub_row(i: int, s: int, effects: Array, broken: bool) -> Control:
+func _sub_row(i: int, s: int, effects: Array, broken: bool, tag: String) -> Control:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 6)
-	row.add_child(_lbl("[S%d]" % (s + 1), 13, DIM))
+	row.add_child(_lbl(tag, 12, DIM))
 	var chips := HFlowContainer.new()
 	chips.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for e in effects:
@@ -533,7 +585,7 @@ func _chip(e: Dictionary) -> Control:
 		"DEADLOCK":
 			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "DEADLOCK"
 		"DISCARD":
-			col = RIcon.COL.TEAL; icon = "CARD"; word = "DISCARD %d" % e.v
+			col = RIcon.COL.TEAL; icon = "CARD"; word = "DISCARD %d next turn" % e.v
 		"INSERT":
 			col = RIcon.COL.TEAL; icon = "CARD"; word = "INSERT %d %s → %s" % [e.v, e.card, "draw pile" if e.to == "draw" else "discard pile"]
 	var pc := PanelContainer.new()

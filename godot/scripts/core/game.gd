@@ -174,7 +174,7 @@ func _start_encounter() -> void:
 	var L: Dictionary = node.layers[layer]
 	enc = {"ice": [], "reserve": L.reserve, "reserve_start": L.reserve, "turn": 0, "breached": false,
 		"bonus_paid": false, "spam_filter_used": false, "cortex_buffer_used": false, "failsafe_used": false,
-		"reactive_said": false, "breaks_turn": 0, "ghost": false}
+		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0}
 	for id in L.ice:
 		enc.ice.append(_new_ice(id))
 	if pending_black:
@@ -191,15 +191,70 @@ func _start_encounter() -> void:
 func _new_ice(id: String) -> Dictionary:
 	var d := IceDB.def(id)
 	var broken := []
+	var seen := []
 	for s in d.subs:
 		broken.append(false)
-	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "rainbow": -1}
+		seen.append(false)
+	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "rainbow": -1}
+
+# =====================================================================
+# TUMBLER rotation (ROT-001): a conveyor window of `slots` over the subroutine pool.
+# =====================================================================
+
+func active_subs(i: int) -> Array:
+	## Pool indices of the subroutines in this ICE's slots, in slot order. Non-TUMBLERs: all of them.
+	var ice: Dictionary = enc.ice[i]
+	var d := IceDB.def(ice.id)
+	var out := []
+	if not IceDB.is_tumbler(ice.id):
+		for s in d.subs.size():
+			out.append(s)
+		return out
+	for k in IceDB.slots(ice.id):
+		out.append((ice.rot + k) % d.subs.size())
+	return out
+
+func is_active(i: int, s: int) -> bool:
+	return active_subs(i).has(s)
+
+func hidden_count(i: int) -> int:
+	var ice: Dictionary = enc.ice[i]
+	return IceDB.def(ice.id).subs.size() - active_subs(i).size()
+
+func _rotate_tumblers() -> void:
+	for i in enc.ice.size():
+		var ice: Dictionary = enc.ice[i]
+		if IceDB.is_tumbler(ice.id) and IceDB.slots(ice.id) < IceDB.def(ice.id).subs.size():
+			ice.rot = (ice.rot + 1) % IceDB.def(ice.id).subs.size()
+	_mark_seen()
+
+func _mark_seen() -> void:
+	for i in enc.ice.size():
+		for s in active_subs(i):
+			enc.ice[i].seen[s] = true
+
+func deadlock_view() -> Dictionary:
+	## What the Rustler knows: broken / seen DEADLOCKs, and how many subroutines are still unseen.
+	var done := 0
+	var seen_total := 0
+	var unseen := 0
+	for ice in enc.ice:
+		var d := IceDB.def(ice.id)
+		for s in d.subs.size():
+			if not ice.seen[s]:
+				unseen += 1
+			elif _has_deadlock(d.subs[s]):
+				seen_total += 1
+				if ice.broken[s]:
+					done += 1
+	return {"done": done, "seen": seen_total, "unseen": unseen}
 
 func _add_black_ice() -> void:
 	for ice in enc.ice:
 		if ice.id == "HOUSE_CALL":
 			return
 	enc.ice.push_front(_new_ice("HOUSE_CALL"))
+	_mark_seen()
 	_say("Black ICE HOUSE CALL joins on the left. It has no DEADLOCK.")
 
 func is_opening() -> bool:
@@ -211,6 +266,11 @@ func is_opening() -> bool:
 
 func _start_turn() -> void:
 	enc.turn += 1
+	# ROT-001: TUMBLERs rotate one step at the start of each Rustler turn after the first.
+	if enc.turn > 1:
+		_rotate_tumblers()
+	else:
+		_mark_seen()
 	bw = BW_PER_TURN
 	shield = 0
 	enc.breaks_turn = 0
@@ -229,6 +289,14 @@ func _start_turn() -> void:
 	phase = "PLAYER"
 	if is_opening() and enc.turn == 1:
 		_event("EV-04", {"corp": "HALCYON"})
+	# FIX-001: DISCARD subroutines resolve at the start of the Rustler's turn, after the draw.
+	if enc.pending_discard > 0:
+		var k: int = mini(enc.pending_discard, hand.size())
+		enc.pending_discard = 0
+		if k > 0:
+			pending = {"kind": "discard", "n": k}
+			phase = "CHOICE"
+			_say("DISCARD %d: choose from your new hand." % k)
 
 func draw_size() -> int:
 	return max(1, BASE_DRAW - cortex)
@@ -413,7 +481,7 @@ func response_preview() -> Array:
 	for i in enc.ice.size():
 		var ice: Dictionary = enc.ice[i]
 		var d := IceDB.def(ice.id)
-		for s in d.subs.size():
+		for s in active_subs(i):
 			steps.append({"ice": i, "sub": s, "name": d.name, "effects": d.subs[s], "skipped": ice.broken[s]})
 	return steps
 
@@ -447,9 +515,7 @@ func _apply_effect(e: Dictionary) -> void:
 		"CORTEX": add_cortex(e.v)
 		"DEADLOCK": pass
 		"DISCARD":
-			if not hand.is_empty():
-				pending = {"kind": "discard", "n": e.v}
-				phase = "CHOICE"
+			enc.pending_discard += e.v   # FIX-001: resolves after the next draw
 		"INSERT":
 			for i in e.v:
 				var inst := _new_inst(e.card)
@@ -479,7 +545,7 @@ func choose(uid: int) -> void:
 			if pending.n > 0 and not hand.is_empty():
 				return
 			pending = {}
-			_continue_response()
+			phase = "PLAYER"
 			return
 		"uninstaller":
 			var c := _take_from(hand, uid)
@@ -520,6 +586,8 @@ func break_info(i: int, s: int) -> Dictionary:
 	var d := IceDB.def(ice.id)
 	if ice.broken[s]:
 		return {"ok": false, "reason": "BROKEN"}
+	if not is_active(i, s):
+		return {"ok": false, "reason": "HIDDEN"}
 	if d.get("ability", "") == "BOOTING" and _has_deadlock(d.subs[s]) and enc.turn < 3:
 		return {"ok": false, "reason": "LOCKED until turn 3"}
 	var adapter := _installed_has("ADAPTER")
@@ -557,6 +625,30 @@ func break_info(i: int, s: int) -> Dictionary:
 		best.reason = "%d BW" % best.cost
 		best["short"] = true
 	return best
+
+func can_boost(uid: int) -> Dictionary:
+	## FIX-002: boost an installed Icepick by hand. Boosts last until the encounter ends.
+	if phase != "PLAYER":
+		return {"ok": false, "cost": 0}
+	var p := _installed_entry(uid)
+	if p.is_empty() or not CardDB.def(p.inst.id).has("pick"):
+		return {"ok": false, "cost": 0}
+	var pk: Dictionary = CardDB.def(p.inst.id).pick
+	var cost: int = pk.boost_cost
+	if _rack_has("TOOLBELT") and not enc.toolbelt_used:
+		cost = 0
+	return {"ok": bw >= cost, "cost": cost, "amt": pk.boost_amt}
+
+func boost_pick(uid: int) -> bool:
+	var chk := can_boost(uid)
+	if not chk.ok:
+		return false
+	var p := _installed_entry(uid)
+	bw -= chk.cost
+	p.boost += chk.amt
+	if _rack_has("TOOLBELT"):
+		enc.toolbelt_used = true
+	return true
 
 func break_sub(i: int, s: int) -> bool:
 	if phase != "PLAYER":
