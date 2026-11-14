@@ -24,6 +24,7 @@ func _process(_d: float) -> bool:
 	match step:
 		0:
 			_snap("01_map")
+			print("voice playing=", main.voice.playing, " stream=", main.voice.stream.resource_path if main.voice.stream else "none", " text=", main.nr_mode.text)
 			g.enter_node(0)
 			main.refresh()
 		1:

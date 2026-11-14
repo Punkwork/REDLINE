@@ -35,6 +35,10 @@ var nr_text: Label
 var nr_mode: Label
 var overlay: Control
 var inspect: CenterContainer
+## VOICE-001: NUL/REM reads every line aloud (pre-recorded, tools/voice_nulrem.py). M toggles the voice.
+var voice: AudioStreamPlayer
+var voice_on := true
+var voice_btn: Button
 ## PLAY-001: the Corporation Response plays one subroutine at a time over at least 5 seconds.
 const RESPONSE_MIN_SECONDS := 5.0
 var responding := false
@@ -85,12 +89,17 @@ func _make_theme() -> Theme:
 	return t
 
 func _load_flags() -> void:
-	first_run = not FileAccess.file_exists("user://redline_flags.json")
+	first_run = true
+	if FileAccess.file_exists("user://redline_flags.json"):
+		var data = JSON.parse_string(FileAccess.get_file_as_string("user://redline_flags.json"))
+		if data is Dictionary:
+			first_run = not data.get("first_run_done", true)
+			voice_on = data.get("voice_on", true)
 
 func _save_flags() -> void:
 	var f := FileAccess.open("user://redline_flags.json", FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"first_run_done": true}))
+		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on}))
 
 func _build_layout() -> void:
 	var bg := ColorRect.new()
@@ -171,10 +180,23 @@ func _build_layout() -> void:
 	var nh := HBoxContainer.new()
 	nh.add_child(RIcon.make("NULREM", 34))
 	var nt := VBoxContainer.new()
-	nt.add_child(_lbl("NUL/REM", 18, RIcon.COL.NULREM))
+	var tr := HBoxContainer.new()
+	var tl := _lbl("NUL/REM", 18, RIcon.COL.NULREM)
+	tl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	tr.add_child(tl)
+	voice_btn = Button.new()
+	voice_btn.tooltip_text = "NUL/REM's voice (M)"
+	voice_btn.add_theme_font_size_override("font_size", 10)
+	voice_btn.pressed.connect(_toggle_voice)
+	tr.add_child(voice_btn)
+	nt.add_child(tr)
 	nt.add_child(_lbl("personality ROM · rev 0.08", 11, Color("#3f9a68")))
+	nt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	nh.add_child(nt)
 	nv.add_child(nh)
+	voice = AudioStreamPlayer.new()
+	add_child(voice)
+	_update_voice_btn()
 	nr_text = _lbl("", 15, RIcon.COL.NULREM)
 	nr_text.autowrap_mode = TextServer.AUTOWRAP_WORD
 	nr_text.custom_minimum_size = Vector2(220, 0)
@@ -224,6 +246,8 @@ func _input(event: InputEvent) -> void:
 				_speak_event({"t": "EV-39"})
 		else:
 			konami_pos = 1 if event.keycode == KONAMI[0] else 0
+		if event.keycode == KEY_M:
+			_toggle_voice()
 		if event.keycode == KEY_ESCAPE and targeting >= 0:
 			targeting = -1
 			refresh()
@@ -358,8 +382,27 @@ func _speak_event(e: Dictionary) -> void:
 	nr_text.visible_ratio = 0.0
 	if tween:
 		tween.kill()
+	var type_time: float = clamp(line.text.length() / 45.0, 0.6, 3.5)
+	voice.stop()
+	var path := "res://audio/nulrem/%s.ogg" % str(line.id).replace(" ", "_")
+	if voice_on and ResourceLoader.exists(path):
+		var stream: AudioStream = load(path)
+		voice.stream = stream
+		voice.play()
+		type_time = max(0.6, stream.get_length() * 0.92)   # type in step with the voice
 	tween = create_tween()
-	tween.tween_property(nr_text, "visible_ratio", 1.0, clamp(line.text.length() / 45.0, 0.6, 3.5))
+	tween.tween_property(nr_text, "visible_ratio", 1.0, type_time)
+
+func _toggle_voice() -> void:
+	voice_on = not voice_on
+	if not voice_on:
+		voice.stop()
+	_update_voice_btn()
+	_save_flags()
+
+func _update_voice_btn() -> void:
+	voice_btn.text = "VOICE ON" if voice_on else "MUTED"
+	voice_btn.modulate = Color(1, 1, 1) if voice_on else Color(1, 1, 1, 0.5)
 
 func _build_hud() -> void:
 	_clear(hud)

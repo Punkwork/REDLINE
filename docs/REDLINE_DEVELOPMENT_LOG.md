@@ -1035,3 +1035,12 @@ VOID ICE subroutines start face-down. The Corporation Response fires them progre
 ## PLAY-001 — The Corporation Response plays out step by step (APPROVED, 2026-11-13, playtest presentation)
 
 For playtests, the Corporation Response lasts at least 5 seconds. Each unbroken subroutine flashes one at a time, in resolution order (left→right, top→bottom), and its effects (VITAE, SHIELD, TRACE, SPAM inserted, and so on) are applied only at the moment it flashes. The response preview marks the subroutine firing now, dims the ones already fired, and counts "Resolving n of m". A VOID subroutine is revealed as it flashes. The time is split evenly across the subroutines (5 s ÷ (count + 1) per step); a response with nothing to fire still takes 5 s. Input is locked until the response finishes.
+
+## VOICE-001 — NUL/REM reads every line aloud (APPROVED, 2026-11-13)
+
+Every NUL/REM line is spoken as it types out. Designer chose, from samples: a clear neural voice rather than a robotic synth, British male, slow and flat for a dry, deadpan delivery, played through an "old speaker" (slightly pitched down, small-speaker band, light overdrive, short cabinet echo) so he still sounds like a machine.
+
+- **Production:** `tools/voice_nulrem.py` renders each exported line to `godot/audio/nulrem/<ID>.ogg` with Kokoro-82M (Apache-2.0, via kokoro-onnx), voice `bm_lewis`, speed 0.85, then the sox effect chain. It re-renders only lines whose spoken text changed (`manifest.json`). Run it after `tools/export_nulrem.py` whenever the Bible's lines change.
+- **Pronunciation:** the tool rewrites a speech copy of each line (the on-screen text is unchanged): ALL-CAPS game terms are read as words, and a small table covers names, initials and numbers (NUL/REM → "null rem", VITAE → "vee tie", R.U.D.I. → "Rudy", DMG-01 → "D M G zero one", 0.08 → "zero point zero eight", Halcyon + On + On → "Halcyon and On and On", 1982 → "nineteen eighty two").
+- **In game:** the typewriter is paced to the audio. A VOICE ON/OFF button in the NUL/REM panel (or the M key) mutes him; the choice is saved.
+- **Rejected:** espeak-ng robot voices (Speak & Spell crunch, ring-mod, metallic): not clear enough. The voice is styled on a deadpan delivery but does not imitate any real person.
