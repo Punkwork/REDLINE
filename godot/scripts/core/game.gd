@@ -175,7 +175,7 @@ func _start_encounter() -> void:
 	var L: Dictionary = node.layers[layer]
 	enc = {"ice": [], "reserve": L.reserve, "reserve_start": L.reserve, "turn": 0, "breached": false,
 		"bonus_paid": false, "spam_filter_used": false, "cortex_buffer_used": false, "failsafe_used": false,
-		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0}
+		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0, "bw_drain": 0, "bw_drained": 0}
 	for id in L.ice:
 		enc.ice.append(_new_ice(id))
 	if pending_black:
@@ -280,7 +280,12 @@ func _start_turn() -> void:
 		_rotate_tumblers()
 	else:
 		_mark_seen()
-	bw = BW_PER_TURN
+	# DET-001: a DETAINER's −1 BW from the last Corporation Response lands on this turn.
+	bw = maxi(0, BW_PER_TURN - enc.bw_drain)
+	enc.bw_drained = enc.bw_drain
+	if enc.bw_drain > 0:
+		_say("DETAINER: −%d BW this turn." % enc.bw_drain)
+	enc.bw_drain = 0
 	shield = 0
 	enc.breaks_turn = 0
 	for p in installed:
@@ -544,6 +549,7 @@ func _apply_effect(e: Dictionary) -> void:
 		"TRACE": add_trace(e.v, true)
 		"CORTEX": add_cortex(e.v)
 		"DEADLOCK": pass
+		"BW_DRAIN": enc.bw_drain += e.v
 		"DISCARD":
 			enc.pending_discard += e.v   # FIX-001: resolves after the next draw
 		"INSERT":

@@ -6,8 +6,9 @@ extends RefCounted
 ## Each Rustler turn after the first, the window moves one step (conveyor). TUMBLER pools are placeholders for playtest.
 
 const DEFS := {
-	"ACCEPT_ALL": {"name": "ACCEPT ALL", "type": "TUMBLER", "str": 4, "tier": "OPENING", "slots": 1,
-		"subs": [[{"k": "INSERT", "card": "SPAM", "to": "draw", "v": 1}], [{"k": "PULP", "v": 3}]]},
+	# DETAINER (DET-001): a TUMBLER subtype (about 1 in 5 TUMBLERs). Its S1 is always −1 BW; at most 1 per encounter.
+	"ACCEPT_ALL": {"name": "ACCEPT ALL", "type": "TUMBLER", "subtype": "DETAINER", "str": 4, "tier": "OPENING", "slots": 1,
+		"subs": [[{"k": "BW_DRAIN", "v": 1}], [{"k": "INSERT", "card": "SPAM", "to": "draw", "v": 1}], [{"k": "PULP", "v": 3}]]},
 	"REJECT_ALL": {"name": "REJECT ALL", "type": "TUMBLER", "str": 4, "tier": "OPENING", "slots": 2, "ability": "BOOTING",
 		"ability_text": "BOOTING: its DEADLOCKs can't be broken before your 3rd turn of the encounter.",
 		"subs": [[{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 4}]]},
@@ -42,6 +43,16 @@ const MAP := [
 
 static func def(id: String) -> Dictionary:
 	return DEFS[id]
+
+static func is_detainer(id: String) -> bool:
+	return DEFS[id].get("subtype", "") == "DETAINER"
+
+static func detainers_in(ids: Array) -> int:
+	var n := 0
+	for id in ids:
+		if is_detainer(id):
+			n += 1
+	return n
 
 static func is_tumbler(id: String) -> bool:
 	return DEFS[id].type == "TUMBLER"

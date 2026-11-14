@@ -1044,3 +1044,12 @@ Every NUL/REM line is spoken as it types out. Designer chose, from samples: a cl
 - **Pronunciation:** the tool rewrites a speech copy of each line (the on-screen text is unchanged): ALL-CAPS game terms are read as words, and a small table covers names, initials and numbers (NUL/REM → "null rem", VITAE → "vee tie", R.U.D.I. → "Rudy", DMG-01 → "D M G zero one", 0.08 → "zero point zero eight", Halcyon + On + On → "Halcyon and On and On", 1982 → "nineteen eighty two").
 - **In game:** the typewriter is paced to the audio. A VOICE ON/OFF button in the NUL/REM panel (or the M key) mutes him; the choice is saved.
 - **Rejected:** espeak-ng robot voices (Speak & Spell crunch, ring-mod, metallic): not clear enough. The voice is styled on a deadpan delivery but does not imitate any real person.
+
+## DET-001 — DETAINER: a TUMBLER subtype that drains BW (APPROVED, 2026-11-13)
+
+- About **20% of TUMBLER ICE** carry the subtype **DETAINER**.
+- **At most 1 DETAINER per encounter.**
+- A DETAINER's **S1 is always −1 BW**: when it fires in a Corporation Response, the Rustler has 1 less BW on their next turn. It fires on the Corporation's first response, so the Rustler loses 1 BW on their 2nd turn. Because a DETAINER is a TUMBLER, the −1 BW rotates away and comes back round; breaking it stops it for the rest of the encounter (broken stays broken).
+- **Visuals:** a cyan DETAINER tag after the type; the −1 BW chip uses the BW colour and icon ("−1 BW next turn"); the response preview adds "BW −1 next turn"; on the drained turn the HUD shows "−1 DETAINED" beside the BW pips.
+- **Slice:** ACCEPT ALL (COOKIE BANNER, the node every run passes through) is the DETAINER. Pool: −1 BW, SPAM, PULP 3 in 1 slot. It is 1 of the slice's 4 TUMBLERs.
+- With the DETAINER, a simple bot clears 13 of 30 seeded runs (all deaths still at TERMS & CONDITIONS).

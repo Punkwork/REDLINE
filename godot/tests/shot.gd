@@ -53,6 +53,7 @@ func _process(_d: float) -> bool:
 				_snap("05_response_%d" % flashes)
 				return false
 			_snap("05b_after_response")
+			print("turn ", g.enc.turn, " bw ", g.bw)
 			if g.phase == "CHOICE":
 				g.choose(g.hand[0].uid)
 			main._show_inspect(g.installed[0].inst.id if not g.installed.is_empty() else "")

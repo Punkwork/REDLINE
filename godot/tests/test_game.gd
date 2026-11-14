@@ -42,6 +42,7 @@ func _init() -> void:
 	test_captcha_discard()
 	test_boost_installed()
 	test_void_reveal()
+	test_detainer_rules()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -63,30 +64,31 @@ func test_opening_node() -> void:
 	check(g.hand.size() == 5, "draw 5")
 	check(g.bw == 4, "4 BW")
 	check(g.ram_used() == 1, "rig uses 1 RAM")
-	# ROT-001: ACCEPT ALL (TUMBLER, 1 slot of 2), REJECT ALL (TUMBLER, 2 slots of 4: DL, TRACE 3, DL, PULP 3).
+	# ROT-001 + DET-001: ACCEPT ALL (DETAINER TUMBLER, 1 slot of 3: −1 BW, SPAM, PULP 3);
+	# REJECT ALL (TUMBLER, 2 slots of 4: DL, TRACE 3, DL, PULP 3).
 	check(g.active_subs(0) == [0] and g.active_subs(1) == [0, 1], "turn 1 slots")
+	check(g.response_preview()[0].effects[0].k == "BW_DRAIN", "DETAINER S1 is −1 BW")
 	check(g.break_info(1, 0).reason.begins_with("LOCKED"), "BOOTING locks DEADLOCK on turn 1")
 	check(g.break_info(1, 2).reason == "HIDDEN", "hidden subroutine can't be broken")
-	check(g.break_info(0, 0).cost == 3, "ACCEPT ALL STR 4: 1 boost (2 BW) + break 1 BW")
-	check(g.break_sub(0, 0), "break ACCEPT ALL SPAM")
+	check(g.break_info(1, 1).cost == 3, "REJECT ALL STR 4: 1 boost (2 BW) + break 1 BW")
+	check(g.break_sub(1, 1), "break TRACE 3")
 	check(g.bw == 1 and g.pick_str(g.installed[0]) == 4, "1 BW left, Icepick stays boosted")
-	var pv := g.response_preview()
-	check(pv.size() == 3 and pv[0].skipped and not pv[2].skipped, "preview shows only active subroutines")
 	var dv := g.deadlock_view()
-	check(dv.seen == 1 and dv.unseen == 3, "DEADLOCK view: 1 seen, 3 unseen (got %s)" % str(dv))
+	check(dv.seen == 1 and dv.unseen == 4, "DEADLOCK view: 1 seen, 4 unseen (got %s)" % str(dv))
 	g.end_turn()
-	check(g.trace == 3, "TRACE 3 resolved (got %d)" % g.trace)
-	check(g.enc.turn == 2 and g.active_subs(0) == [1] and g.active_subs(1) == [1, 2], "conveyor: one step on turn 2")
+	check(g.trace == 0, "broken TRACE didn't fire")
+	check(g.enc.turn == 2 and g.bw == 3 and g.enc.bw_drained == 1, "DETAINER: −1 BW on turn 2 (bw %d)" % g.bw)
+	check(g.active_subs(0) == [1] and g.active_subs(1) == [1, 2], "conveyor: one step on turn 2")
+	check(g.response_preview()[1].skipped, "broken TRACE 3 stays broken in its new slot")
 	check(g.break_info(1, 2).reason.begins_with("LOCKED"), "still BOOTING on turn 2")
 	g.end_turn()
-	check(g.vitae == 27 and g.trace == 6, "ACCEPT ALL PULP 3 + TRACE 3 (vitae %d trace %d)" % [g.vitae, g.trace])
-	check(g.enc.turn == 3 and g.active_subs(0) == [0] and g.active_subs(1) == [2, 3], "conveyor wraps")
-	check(g.response_preview()[0].skipped, "broken subroutine stays broken when it comes back")
+	check(g.bw == 4 and uid_of(g, g.draw_pile + g.hand + g.discard, "SPAM") > 0, "BW back to 4; SPAM inserted")
+	check(g.enc.turn == 3 and g.active_subs(0) == [2] and g.active_subs(1) == [2, 3], "turn 3 slots")
 	check(g.break_sub(1, 2), "DEADLOCK breakable on turn 3")
 	check(not g.enc.breached, "a seen but unbroken DEADLOCK remains")
 	g.end_turn()
-	check(g.vitae == 23, "PULP 4 resolved (got %d)" % g.vitae)
-	check(g.active_subs(1) == [3, 0], "first DEADLOCK rotates back in")
+	check(g.vitae == 23, "PULP 3 + PULP 4 (got %d)" % g.vitae)
+	check(g.active_subs(0) == [0] and g.active_subs(1) == [3, 0], "conveyor wraps; −1 BW and first DEADLOCK return")
 	g.break_sub(1, 0)
 	check(g.enc.breached, "BREACH after every DEADLOCK is broken")
 	var t := g.trace
@@ -184,6 +186,18 @@ func test_void_reveal() -> void:
 	check(g.vitae == v0 - 6 and h.seen[0] and not h.seen[1], "HOUSE CALL sub 1 fired and revealed (vitae %d)" % g.vitae)
 	check(g.active_subs(0) == [0, 1], "then subs 1 and 2")
 
+func test_detainer_rules() -> void:
+	var total := 0
+	for row in IceDB.MAP:
+		for n in row:
+			for L in n.get("layers", []):
+				check(IceDB.detainers_in(L.ice) <= 1, "at most 1 DETAINER in %s" % n.name)
+				total += IceDB.detainers_in(L.ice)
+	for id in IceDB.DEFS:
+		if IceDB.is_detainer(id):
+			check(IceDB.is_tumbler(id) and IceDB.def(id).subs[0][0].k == "BW_DRAIN", "%s: DETAINER is a TUMBLER with −1 BW at S1" % id)
+	check(total >= 1, "the slice has a DETAINER")
+
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
 	g.new_run()
@@ -227,8 +241,9 @@ func test_spam_and_filter() -> void:
 	g.choose_ready_rig(uid_of(g, g.draw_pile, "TUMBLER_ICEPICK"))
 	var sf := put_in_hand(g, "SPAM_FILTER")
 	g.play_card(sf)
-	g.end_turn()   # ACCEPT ALL inserts SPAM into draw pile -> filtered to discard
-	check(uid_of(g, g.discard, "SPAM") > 0 or uid_of(g, g.hand, "SPAM") > 0, "SPAM FILTER sends SPAM to discard")
+	g.end_turn()   # turn 1: ACCEPT ALL −1 BW
+	g.end_turn()   # turn 2: ACCEPT ALL inserts SPAM into draw pile -> filtered to discard
+	check(g.enc.spam_filter_used, "SPAM FILTER sent the SPAM to the discard pile")
 	var sp := put_in_hand(g, "SPAM")
 	var bw0 := g.bw
 	g.play_card(sp)

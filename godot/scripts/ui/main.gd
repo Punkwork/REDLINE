@@ -418,6 +418,8 @@ func _build_hud() -> void:
 	if g.bw > Game.BW_PER_TURN:
 		bwbox.add_child(_lbl("+%d" % (g.bw - Game.BW_PER_TURN), 15, RIcon.COL.BW))
 	bwbox.add_child(_lbl(" BW %d" % g.bw, 15, RIcon.COL.BW))
+	if not g.enc.is_empty() and g.enc.get("bw_drained", 0) > 0 and g.phase in ["PLAYER", "CHOICE"]:
+		bwbox.add_child(_lbl(" −%d DETAINED " % g.enc.bw_drained, 12, Color("#0b0e13"), RIcon.COL.BW))
 	hud.add_child(bwbox)
 	var tb := HBoxContainer.new()
 	tb.add_child(RIcon.make("TRACE", 22))
@@ -592,7 +594,13 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	head.add_child(RIcon.make(d.type, 34))
 	var nm := VBoxContainer.new()
 	nm.add_child(_lbl(d.name, 19, TEXT))
-	nm.add_child(_lbl(d.type, 12, DIM))
+	if d.get("subtype", "") == "DETAINER":
+		var th := HBoxContainer.new()
+		th.add_child(_lbl(d.type + " · ", 12, DIM))
+		th.add_child(_lbl(" DETAINER ", 11, Color("#0b0e13"), RIcon.COL.BW))
+		nm.add_child(th)
+	else:
+		nm.add_child(_lbl(d.type, 12, DIM))
 	nm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(nm)
 	var cur := g.ice_str(i)
@@ -697,6 +705,8 @@ func _chip(e: Dictionary) -> Control:
 			col = RIcon.COL.TRACE; icon = "TRACE"; word = "TRACE %d" % e.v
 		"DEADLOCK":
 			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "DEADLOCK"
+		"BW_DRAIN":
+			col = RIcon.COL.BW; icon = "BW"; word = "−%d BW next turn" % e.v
 		"DISCARD":
 			col = RIcon.COL.TEAL; icon = "CARD"; word = "DISCARD %d next turn" % e.v
 		"INSERT":
@@ -760,12 +770,20 @@ func _build_preview() -> void:
 	for c in g.hand:
 		if c.id == "TRACER":
 			tracer += 3
+	var drain := 0
+	for st in g.response_preview():
+		if not st.skipped and not st.hidden:
+			for e in st.effects:
+				if e.k == "BW_DRAIN":
+					drain += e.v
 	var absorbed: int = min(g.shield, pulp)
 	var parts := []
 	if pulp > 0:
 		parts.append("PULP %d → SHIELD absorbs %d, VITAE −%d" % [pulp, absorbed, pulp - absorbed])
 	if tr + tracer > 0:
 		parts.append("TRACE +%d → %d / 40" % [tr + tracer, min(40, g.trace + tr + tracer)])
+	if drain > 0:
+		parts.append("BW −%d next turn" % drain)
 	if unknown > 0:
 		parts.append("+ %d hidden subroutine%s" % [unknown, "" if unknown == 1 else "s"])
 	preview_total.text = "If you end turn: " + ("  ·  ".join(parts) if not parts.is_empty() else "no damage, no TRACE")
@@ -776,6 +794,7 @@ func _effect_word(e: Dictionary) -> String:
 	match e.k:
 		"INSERT": return "INSERT %s" % e.card
 		"DEADLOCK": return "DEADLOCK"
+		"BW_DRAIN": return "−%d BW" % e.v
 		_: return "%s %d" % [e.k, e.get("v", 0)]
 
 func _circled(n: int) -> String:
