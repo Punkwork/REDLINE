@@ -1,4 +1,6 @@
 # PANOPTICON — CURRENT PROJECT STATUS
+
+- **Repo:** always github.com/Punkwork/REDLINE (the game is PANOPTICON; the repo keeps the REDLINE name). Latest build: VIRUS-001 (WORM), 2026-11-14.
 **As of:** 2026-11-09  
 **Purpose:** fast, reliable start-of-day briefing. Update at every session handoff.
 
