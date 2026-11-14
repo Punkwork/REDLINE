@@ -981,3 +981,7 @@ Four lines approved as CANON verses referencing D.A.R.Y.L.: NR-254 (EV-12 Elegan
 
 Three lines approved as CANON verses referencing the Ultimate Computer from Superman III: NR-258 (EV-09; Gus Gorman's half cents, CRED inflation), NR-259 (EV-05 generic first sight; the acid rated danger level zero; completes the generic pool at 8 of 8) and NR-260 (EV-37 Idle; Robert Vaughn as Ross Webster and the voice of Proteus IV, linking to NR-026 v2 and NR-035 v2).
 
+## NULREM-041 — Revenge of the Nerds verses NR-261 to NR-263 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing how computers are used in Revenge of the Nerds, focused on the engineering rather than the film's mocking framing of Lamar: NR-261 (EV-27 Card reward; the javelin built for Lamar's throw), NR-262 (EV-37 Idle; the computer-driven win) and NR-263 (EV-34 Run won; brains won). A fourth candidate for EV-12 was declined.
+

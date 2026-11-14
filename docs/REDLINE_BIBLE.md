@@ -2644,6 +2644,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-261 — Built for his arm
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Card reward; reference: the computer-designed javelin built for Lamar's throw (Revenge of the Nerds).
+
+> “The nerds studied how Lamar actually threw and built a javelin for his arm, not for the textbook. It won. Pick cards for how you play, not how the manual says to.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-262 — That week, they did
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; reference: the nerds' computer-driven win over the jocks (Revenge of the Nerds).
+
+> “The nerds beat the jocks with a computer, a robot and a song. The jocks had muscles. I'd like to say brains always win. They don't. But that week, they did.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-263 — That's my fan
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run won; reference: the nerds taking the house from the jocks (Revenge of the Nerds).
+
+> “Brains won. The nerds took the house from the jocks, and you just took everything from three corporations. I'm not cheering. That's my fan.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
