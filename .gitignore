@@ -8,7 +8,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -218,3 +217,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+build/
+godot/.godot/

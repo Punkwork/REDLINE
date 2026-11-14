@@ -1,4 +1,4 @@
-# REDLINE — DEVELOPMENT LOG
+# PANOPTICON — DEVELOPMENT LOG
 **Initialized:** 2026-11-09  
 **Policy:** append dated entries; distinguish reported outcomes from verified tests.
 
@@ -798,3 +798,485 @@ User confirms **all six ICE names** and **all existing Training Node values** fo
 **CRED reserves by layer:** 10 / 15 / 25 (total base 50); universal rounded-up 10% full-extraction bonuses +1 / +2 / +3, maximum total 56. Existing rules on turns, BW/RAM, 12-card Generalist deck, Icepicks, TRACE, VITAE, damage, extraction, BREACH, and reward resolution remain authoritative.
 
 **Next phase:** Implement an actually playable three-layer training-node prototype in **Godot**, edited/debugged using **Visual Studio**; validate established mechanics through playtesting before changing balance. This is a design freeze for the initial playtest, not a claim that implementation has been completed. Historical references to proposed ICE names/Strength/subroutines are superseded by this lock.
+
+## DOCS-SYNC-001 — Simplified-redesign documents added to the repository (2026-11-13)
+
+The ten approved and proposed documents of the simplified redesign, written in the Claude "Panopticon" project, are now in `docs/`: `REDLINE_CORE_RULES.md` (rules authority since 2026-11-12), `REDLINE_RUSTLERS.md`, `REDLINE_CARD_POOLS.md`, `REDLINE_ICE_CORP1.md` (HALCYON), `REDLINE_ICE_CORP2.md` (IRONWATCH), `REDLINE_ICE_CORP3.md` (LUCIDA), `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_UPGRADES_EVENTS_ESCAPE.md`, `REDLINE_ENGINES.md` (ENG-001 to ENG-005, mechanics approved in principle, details proposed) and `REDLINE_PLAYTEST_CHECKLIST.md`.
+
+They include NAME-001 (ICE types WALL / CODE GATE / SENTRY renamed FORTRESS / SIGYL / VOID; VOID damage renamed CORTEX; no rules changed) and UPL-009 (JACK OUT works during the escape). Where they conflict with older entries in `REDLINE_MASTER_DESIGN.md`, the Core Rules decide (Core Rules §15). Earlier log entries keep their original names (e.g. WATCHDOG — SENTRY) as history.
+
+## NAME-001 — ICE types and CORTEX damage renamed across the repository (2026-11-13)
+
+To move away from Netrunner's vocabulary, ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules: −1 DRAW per counter, removed between corporations or at a Clinic). VOID ICE are the main source of CORTEX damage, but any ICE can deal it. No rules changed.
+
+Migrated in place: `REDLINE_MASTER_DESIGN.md`, `REDLINE_BIBLE.md` (rule sections only), `REDLINE_CURRENT_STATUS.md`, `PANOPTICON_CORE_DESIGN_AND_WORLDBUILDING.md`, plus all simplified-redesign docs. Rule and decision IDs keep their original names (e.g. TRAINING-THREE-ICE-SENTRY-001). Not migrated, by design: this append-only log (earlier entries keep the old names as history) and `REDLINE_RULE_REVIEW_126.md` (a historical review). In the Bible's world sections, **VOID** stays the in-world name for the erasure of consciousness and CANON verse WL-003 is unchanged; how in-world VOID relates to CORTEX and VOID ICE is **OPEN** for designer review.
+
+## DOCS-SYNC-002 — UI and NUL/REM handoff restored to the repository (2026-11-13)
+
+`REDLINE_UI_NULREM_Design_For_Claude.md` (Claude implementation handoff, 2026-11-07), cited as a source by the Master Design but missing from the repository, is added to `docs/` **verbatim** as a historical source. It predates later rules: its damage types (PHYSICAL / NEURAL / SYNAPTIC), Integrity, Memory, Grip, corporations VANTABLACK and AEGIS, Force Open, Crowbar and "Training Wall" are superseded by the Core Rules and NAME-001. Its NUL/REM personality bible, dialogue-system behaviour, hacker-history anchors and terminal presentation remain the most detailed NUL/REM source; its tonal example lines have not yet been entered in the Bible as verses.
+
+## NULREM-001 — NUL/REM identity canon and verses NR-002 to NR-008 (APPROVED, 2026-11-13)
+
+**Identity (CANON):** NUL/REM is rev 0.08, a salvaged, obsolete personality ROM manufactured in 1987, referred to as "he"; he wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 are the Unreliable Historian's impossible memories; their explanation stays OPEN. Recorded in the Bible (§5) and the Master Design (§7).
+
+**Verses (CANON):** the seven approved tonal examples from `REDLINE_UI_NULREM_Design_For_Claude.md` §6 are entered in the Bible as NR-002 (Deadlock and hope), NR-003 (A lifestyle), NR-004 (Before manufacture), NR-005 (Hot dust), NR-006 (Sufficient room), NR-007 (Paper Cut) and NR-008 (Stationery), with exact wording preserved. Placements are suggestions (OPEN).
+
+## NULREM-002 — Run-start verses NR-009 to NR-018 (APPROVED, 2026-11-13)
+
+First collaborative dialogue pass, trigger EV-01 (Run start) of the NUL/REM Dialogue Trigger Table. Ten lines approved and entered in the Bible as CANON verses NR-009 to NR-018: a general pool (NR-009 to NR-013), after a lost run (NR-014), after a won run (NR-015), and Rustler-specific lines for the Generalist, ECHO and RIOT (NR-016 to NR-018). The VECTOR line is being rewritten to give NUL/REM a strange relationship with germs (he has no body, so he should have none).
+
+## NULREM-003 — VECTOR run-start lines and the germ trait (APPROVED, 2026-11-13)
+
+Three VECTOR run-start lines approved as CANON verses NR-019 to NR-021 (EV-01; one chosen at random). New CANON character trait recorded in the Bible (§5) and Master Design (§7): NUL/REM is fastidious about germs despite having no body or immune system; he worries about biological germs and dust in his casing, stays unbothered by computer viruses, and may claim illnesses he could never have had.
+
+## NULREM-004 — Enter-a-corporation verses NR-022 to NR-035 and the reference compulsion (APPROVED, 2026-11-13)
+
+Trigger EV-03 (Enter a corporation): fourteen longer, exposition-rich lines approved as CANON verses — HALCYON NR-022 to NR-026, IRONWATCH NR-027 to NR-030, LUCIDA NR-031 to NR-035 (one chosen at random from the entered corporation's pool). HALCYON lines reference Orbital's “Halcyon + On + On” (1993). New CANON trait recorded in the Bible (§5) and Master Design (§7): NUL/REM is compelled to reference fictional computers and machine voices (HAL 9000, WALL-E, Number 5, Proteus IV, Impossible Mission's Elvin Atombender, Evilspeak's Apple II), with the signature line “Another visitor. Stay a while. Stayyyyyyy forever!”, and makes silly retro-game references such as “Rustler needs food… badly” at low VITAE. Licensing of quoted lines for a commercial release is OPEN.
+
+## NULREM-005 — IRONWATCH verses NR-036 and NR-037 (APPROVED, 2026-11-13)
+
+Two more EV-03 (Enter a corporation) lines for IRONWATCH's FRONT DESK approved as CANON verses NR-036 and NR-037, referencing Carol Beer's “Computer says no” (*Little Britain*, 2004); NR-037 also uses the germ trait. Carol Beer added to the reference-compulsion trait (Bible §5, Master Design §7). Pools now: HALCYON 5, IRONWATCH 6, LUCIDA 5.
+
+## NULREM-006 — EV-03 verses NR-038 and NR-039 (APPROVED, 2026-11-13)
+
+Two more EV-03 (Enter a corporation) lines approved as CANON verses, both referencing *Columbo*, “Mind Over Mayhem” (1974): NR-038 (IRONWATCH; the K44 war-games computer as a murderer's alibi) and NR-039 (LUCIDA; MM7, the chess robot that threw the board). Both added to the reference-compulsion trait (Bible §5, Master Design §7). Pools now: HALCYON 5, IRONWATCH 7, LUCIDA 6.
+
+## NULREM-007 — EV-03 verses NR-040 to NR-043: Tron and The Black Hole (APPROVED, 2026-11-13)
+
+Four more EV-03 (Enter a corporation) lines approved as CANON verses: NR-040 (HALCYON; Tron's Master Control Program, from chess program to the Pentagon, “End of line.”), NR-041 (IRONWATCH; Tron's Game Grid), NR-042 (LUCIDA; The Black Hole's humanoid crew, restraint rule) and NR-043 (IRONWATCH; Old B.O.B. and Maximilian). Added to the reference-compulsion trait (Bible §5, Master Design §7); NUL/REM identifies with Old B.O.B. Pools now: HALCYON 6, IRONWATCH 9, LUCIDA 7. A further Master Control line is planned for EV-30 (Central Node entry). To verify: “End of line” as the MCP's sign-off.
+
+## NULREM-008 — EV-03 verses NR-044 and NR-045: Marvin (APPROVED, 2026-11-13)
+
+Two final EV-03 (Enter a corporation) lines approved as CANON verses, referencing Marvin the Paranoid Android and Sirius Cybernetics' Genuine People Personalities: NR-044 (HALCYON; the delighted doors) and NR-045 (LUCIDA; the comparison he denies, Marvin's 576 billion years of waiting). Reference-compulsion trait updated (Bible §5, Master Design §7): Marvin is the comparison NUL/REM denies. EV-03 complete with 24 lines: HALCYON 7, IRONWATCH 9, LUCIDA 8.
+
+## NULREM-009 — LOCKDOWN verses NR-046 to NR-050 (APPROVED, 2026-11-13)
+
+Trigger EV-16 (TRACE strike 3: LOCKDOWN): five lines approved as CANON verses NR-046 to NR-050 (Reluctant Guardian and Melancholic; references kept rare at danger moments). NR-049 is a callback to NR-025's Impossible Mission line and should only play once NR-025 has been heard.
+
+## NULREM-010 — Central Node verses NR-051 to NR-059 (APPROVED, 2026-11-13)
+
+Trigger EV-30 (Central Node entry): nine boss-framing lines approved as CANON verses, three per boss, each stating the fight's question from the ICE docs without new mechanics: THE HEARTH NR-051 to NR-053 (NR-052 is the planned Tron Master Control line), OVERWATCH NR-054 to NR-056 (NR-056 references HAL 9000 singing “Daisy Bell”; to verify), ANIMA NR-057 to NR-059.
+
+## NULREM-011 — Payload verses NR-060 to NR-064 and CAP verses NR-065 to NR-068 (APPROVED, 2026-11-13)
+
+Trigger EV-31 (Payload chosen): five lines approved as CANON verses NR-060 to NR-064 (delight at the tech, quickly hidden; no hint of the First Signal fragment content, which stays OPEN). CAP moments: four lines referencing the Cap'n Crunch whistle and 2600 Hz phone phreaking, approved as CANON verses NR-065 (EV-23 JACK OUT used), NR-066 (EV-24 Uplink visit), NR-067 (EV-22 Last CAP used; John Draper) and NR-068 (EV-24, only when Bootleg CAPS are in stock). The whistle is recorded in the reference-compulsion trait (Bible §5) as his model for every CAP.
+
+## NULREM-012 — First Signal payload verses NR-069 to NR-072 (APPROVED, 2026-11-13)
+
+Four more EV-31 (Payload chosen) lines approved as CANON verses that hint at the First Signal under the Ghostware without explaining it: NR-069 (rumour), NR-070 (the unknown employer, RUN-006), NR-071 (the encryption is older than the corporation, possibly older than NUL/REM) and NR-072 (a rhythm in the noise, like a carrier tone). NR-071 and NR-072 hint at NUL/REM's relationship to the First Signal and at the synchronization transmission; both remain **OPEN** and these lines commit to no answer. EV-31 pool: NR-060 to NR-064, NR-069 to NR-072.
+
+## NULREM-013 — Escape verses NR-073 to NR-081 (APPROVED, 2026-11-13)
+
+Trigger EV-32 (Escape begins, TRACE doubled): nine lines approved as CANON verses, three per corporation, naming each corporation's escape ICE and final Black ICE: HALCYON NR-073 to NR-075 (HOUSE CALL; NR-075 notes JACK OUT works during the escape, UPL-009), IRONWATCH NR-076 to NR-078 (LETHAL FORCE; NR-078 references Number 5's escape in Short Circuit), LUCIDA NR-079 to NR-081 (EGO DEATH, restraint rule; NR-081 references WALL-E). The escape is described as three nodes. To verify: the Short Circuit and WALL-E details.
+
+## NULREM-014 — Konami Code and cartridge verses NR-082 to NR-087 (APPROVED, 2026-11-13)
+
+Six lines approved as CANON verses. Konami Code: NR-082 (EV-35 Run lost; Contra's 30 lives), NR-083 (EV-01 Run start after a loss; Kazuhisa Hashimoto) and NR-084 (new trigger **EV-39, Konami Code entered**: dialogue only, the code grants nothing; Gradius III). Blowing on cartridges (the example named in Master Design §7's dialogue guidance): NR-085 (EV-10 Stalled encounter), NR-086 (EV-37 Idle; germ trait) and NR-087 (EV-24 Uplink visit; CAPS are Disposable Autonomous Cartridges, Bible §4). Reference trait updated (Bible §5).
+
+## NULREM-015 — Run-won verses NR-088 to NR-092 (APPROVED, 2026-11-13)
+
+Trigger EV-34 (Run won): five lines approved as CANON verses NR-088 to NR-092 (earned warmth, still dry; no hint of what the three fragments reveal together). NR-092 plays on the first win only (Story beat) and introduces an unnamed date NUL/REM has kept since 1987; its meaning is **OPEN**.
+
+## NULREM-016 — Run-lost verses NR-093 to NR-099 (APPROVED, 2026-11-13)
+
+Trigger EV-35 (Run lost): seven lines approved as CANON verses, loss without mockery: general NR-093, NR-094, NR-098, NR-099; by cause NR-095 (Black ICE), NR-096 (high CORTEX, restraint rule) and NR-097 (TRACE / LOCKDOWN). NR-098 and NR-099 reference R.O.B., the NES Robotic Operating Buddy (two games, then shelved; “Remembered Old Buddy” in Pikmin 2), added to the reference trait as a companion he identifies with. EV-35 pool also includes NR-082 (Konami Code) and WL-003 (high CORTEX only). All eight milestones now have canon lines.
+
+## NULREM-017 — Idle verses NR-100 to NR-102: Tobor (APPROVED, 2026-11-13)
+
+Three EV-37 (Idle) history-aside lines approved as CANON verses mocking Tobor, “robot” spelled backwards: NR-100 (Tobor the Great, 1954), NR-101 (the reversed-stencil story from Captain Video; the Here Comes Tobor pilot credited “Tobor played by Tobor”) and NR-102 (NUL/REM reversed is MER/LUN). Reference trait updated (Bible §5).
+
+## NULREM-018 — Battle of the Planets verses NR-103 to NR-105 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing 7-Zark-7, 1-Rover-1 and Susan, added when Gatchaman was cut down into Battle of the Planets (1978): NR-103 (EV-37 Idle), NR-104 (EV-15 Black ICE joins; he won't sanitize danger) and NR-105 (EV-37 Idle; Susan on Pluto). Reference trait updated (Bible §5).
+
+## NULREM-019 — The 1982 trait, the reference style rule, fifteen verse revisions and Jetsons verses NR-106 to NR-109 (APPROVED, 2026-11-13)
+
+**CANON trait:** 1982 is NUL/REM's special year: his memory chips received most of their programming then (before his 1987 manufacture), and his favourite music and films are from that period; he reminisces most about 1982 and 1987. **DIRECTION:** references assume the player knows the work, with no plot summaries and no years other than 1982 and 1987.
+
+**Revisions:** under the Bible's preservation rule, fifteen CANON verses are RETIRED (kept as history) and replaced by v2 versions written to the new style: NR-023, 026, 029, 033, 035, 038, 039, 040, 041, 042, 052, 065, 098, 100 and 103. NR-041 and NR-052 now name 1982 fondly. Placements unchanged.
+
+**New verses:** Jetsons references NR-106 (EV-37 Idle; Rosie), NR-107 (EV-38 Repeated mistake; Uniblab), NR-108 (EV-04 BOOTING; R.U.D.I.) and NR-109 (EV-18 Low VITAE; R.U.D.I.).
+
+## NULREM-020 — The overqualified trait and verses NR-110 to NR-113 (APPROVED, 2026-11-13)
+
+**CANON trait:** NUL/REM considers himself far too sophisticated for his work, though he would rather be doing nothing at all; his superiority over famous machines exists only in his own mind (Bible §5, Master Design §7). **Verses:** NR-110 (EV-37 Idle; Skynet), NR-111 (EV-37 Idle; the T-1000), NR-112 (EV-03 IRONWATCH; RoboCop) and NR-113 (EV-06 DEADLOCK broken; ED-209).
+
+## NULREM-021 — Game Boy and Tetris verses NR-114 to NR-117 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses: NR-114 (EV-12 Elegant play; a Tetris), NR-115 (EV-18 Low VITAE; four AA batteries and the dimming power light, to verify), NR-116 (EV-37 Idle; the grey brick, DMG-01, designed from 1987) and NR-117 (EV-21 Bloatware inserted; the wrong pieces stacking up). Reference trait updated (Bible §5).
+
+## NULREM-022 — DMG-01 as an old friend: NR-114 to NR-116 revised (APPROVED, 2026-11-13)
+
+NR-114, NR-115 and NR-116 are RETIRED and replaced by v2 versions in which NUL/REM calls the Game Boy **DMG-01**, as if it were an old friend (Bible §5 updated). Placements unchanged.
+
+## NULREM-023 — Speak & Spell verses NR-118 to NR-120 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses: NR-118 (EV-06 DEADLOCK broken; “That. Is. Correct.”), NR-119 (EV-38 Repeated mistake; “That is incorrect”, in his head since 1982) and NR-120 (EV-33 First Signal fragment decrypted, the trigger's first line; E.T.'s Speak & Spell communicator; the Signal's content stays OPEN). Reference trait updated (Bible §5).
+
+## NULREM-024 — Game & Watch and Casio verses NR-121 to NR-124 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses: Game & Watch, referenced generically: NR-121 (EV-10 Stalled encounter; Game A / Game B) and NR-122 (EV-37 Idle; the grey ghosts of unlit segments). His Casio calculator watch as an old friend: NR-123 (EV-37 Idle) and NR-124 (EV-09 CRED reserve fully extracted; upside-down calculator words). Reference trait updated (Bible §5).
+
+## NULREM-025 — Kraftwerk Computer World verses NR-125 to NR-129 (APPROVED, 2026-11-13)
+
+Five lines approved as CANON verses referencing Kraftwerk's *Computer World* (1981) by song title and theme, without quoting lyrics (copyright): NR-125 (EV-24 Uplink; “Pocket Calculator” and his Casio), NR-126 (EV-26 RAM gained; “Numbers”), NR-127 (EV-37 Idle; “Computer Love”, played through 1982), NR-128 (EV-03 HALCYON; “Home Computer”) and NR-129 (EV-27 Card reward; “It's More Fun to Compute”). Bible §5 1982 trait updated. **Rule recorded:** song lyrics are never quoted in NUL/REM's lines; titles and themes only.
+
+## NULREM-026 — The 808 clock and verses NR-130 to NR-132 (APPROVED, 2026-11-13)
+
+**CANON detail:** NUL/REM's internal clock plays a Roland TR-808 pattern instead of ticking; it got into his timing chips from Afrika Bambaataa's “Planet Rock” in 1982 (Bible §5). **Verses:** NR-130 (EV-37 Idle; the 808 clock), NR-131 (EV-12 Elegant play; “Boing, boom, tschak”, after the Kraftwerk track) and NR-132 (EV-10 Stalled encounter; the 808 rented for twenty dollars a session).
+
+## NULREM-027 — Little Computer People verses NR-133 and NR-134 (APPROVED, 2026-11-13)
+
+Two lines approved as CANON verses referencing Activision's Little Computer People (Commodore 64): NR-133 (EV-37 Idle; every computer has an occupant) and NR-134 (EV-19 KILLSWITCH fires; the free mail-in revival). Reference trait updated (Bible §5).
+
+## NULREM-028 — BBS and warez verses NR-135 to NR-138 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses: NR-135 (EV-04 BOOTING; dialling at 1200 baud, “Nodes don't sing anymore”), NR-136 (EV-13 TRACE reaches 20; the kitchen phone), NR-137 (EV-27 Card reward; upload/download ratios) and NR-138 (EV-24 Uplink; warez boards and cracktros). Reference trait updated (Bible §5).
+
+## NULREM-029 — Demoscene verses NR-139 and NR-140 (APPROVED, 2026-11-13)
+
+Two lines approved as CANON verses: NR-139 (EV-07 BREACH; Amiga demo scrollers, raster bars and greetings) and NR-140 (EV-37 Idle; FairLight, founded 1987 and named after the Fairlight CMI, the instrument behind Planet Rock's orchestra hit). Reference trait updated (Bible §5).
+
+## NULREM-030 — Ferris Bueller verses NR-141 and NR-142 (APPROVED, 2026-11-13)
+
+Two lines approved as CANON verses referencing Ferris Bueller's sampled coughs, played on an E-mu Emulator II (not a Fairlight CMI, which NUL/REM is keen to point out): NR-141 (EV-23 JACK OUT used) and NR-142 (EV-18 Low VITAE).
+
+## NULREM-031 — Ferris Bueller and the germ trait: NR-143 (APPROVED, 2026-11-13)
+
+One EV-37 (Idle) line approved as CANON verse NR-143: NUL/REM leans away from the screen at Ferris Bueller's sampled coughs, knowing they're samples (germ trait).
+
+## NULREM-032 — Batch 2: verses NR-144 to NR-231 across 30 trigger events (APPROVED, 2026-11-13)
+
+88 lines from the review doc “NUL/REM Dialogue — Batch 2 (CANDIDATE)” approved as CANON verses, covering the 30 events that were short. Written to the designer's guidelines: the six modes in rotation; protectiveness toned down, with sleep as his real motive; stolen data at BREACH; CRED inflation jokes; seven Blade Runner references (world, not just characters) including whether androids dream of electric sheep (reference trait updated, Bible §5). New lore in NR-156: personality-ROM revisions 0.01 to 0.07 don't exist (**OPEN** thread). Hints at OPEN story threads in EV-29, EV-33 and EV-36 commit to no answer.
+
+## NULREM-033 — BREACH verses NR-232 to NR-234 (APPROVED, 2026-11-13)
+
+Three EV-07 (BREACH) lines approved as CANON verses referencing the robots of Heartbeeps (1981) without naming the film: NR-232 (the valet and the poolside hostess leaving the factory), NR-233 (the security robot quoting regulations) and NR-234 (the baby robot built from spare parts). BREACH now has 8 of its 15 lines.
+
+## NULREM-034 — EV-05 uses generic lines; per-ICE lines deferred (APPROVED, 2026-11-13)
+
+Designer decision: no bespoke NUL/REM line per ICE for now, because ICE names and abilities will most likely change during playtesting. EV-05 (First sight of an ICE) draws from a generic pool (currently NR-007, NR-008 and NR-161 to NR-164). Its target in the Trigger Table drops from about 45 lines to 8 (fires per run 15, speak 50%, repeat window 1). Per-ICE lines are revisited once the ICE rosters settle.
+
+## NULREM-035 — Original Battlestar Galactica verses NR-235 to NR-239 (APPROVED, 2026-11-13)
+
+Five lines approved as CANON verses referencing the Cylons of the original Battlestar Galactica only (designer direction; no reimagined-series elements such as resurrection or “toasters”): NR-235 (EV-11; the sweeping red eye), NR-236 (EV-08; “By your command”), NR-237 (EV-35; a Command Centurion and the Imperious Leader), NR-238 (EV-37; Lucifer) and NR-239 (EV-37; vocoder voices, with Kraftwerk). Reference trait updated (Bible §5).
+
+## NULREM-036 — Soundwave, Megatron and energon verses NR-240 to NR-245 (APPROVED, 2026-11-13)
+
+Six lines approved as CANON verses referencing the 1980s cartoon without naming the franchise: NR-240 (EV-07 BREACH; “Laserbeak, eject”), NR-241 (EV-09; energon cubes, CRED inflation), NR-242 (EV-24 Uplink; spy cassettes), NR-243 (EV-37 Idle; Megatron's loyal tape deck), NR-244 (EV-15 Black ICE; Megatron) and NR-245 (EV-12 Elegant play; Soundwave's motto). Reference trait updated (Bible §5).
+
+## NULREM-037 — WarGames verses NR-246 to NR-250 (APPROVED, 2026-11-13)
+
+Five lines approved as CANON verses referencing Joshua / WOPR from WarGames: NR-246 (EV-01 Run start; “Shall we play a game?”), NR-247 (EV-05 generic first sight; war dialing), NR-248 (EV-10 Stalled; tic-tac-toe), NR-249 (EV-08 Go deeper or leave; the only winning move, without deciding for the player) and NR-250 (EV-36 Talk between runs; Falken's backdoor password, hinting at his own maker, OPEN). Reference trait updated (Bible §5).
+
+## NULREM-038 — Andromeda Strain verses NR-251 to NR-253 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing The Andromeda Strain: NR-251 (EV-37 Idle; a microorganism, not a virus; germ trait), NR-252 (EV-13 TRACE reaches 20; the jammed teletype bell) and NR-253 (EV-28 SAFEHOUSE; four levels of decontamination; germ trait).
+
+## NULREM-039 — D.A.R.Y.L. verses NR-254 to NR-257 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses referencing D.A.R.Y.L.: NR-254 (EV-12 Elegant play; Pole Position, a 1982 game), NR-255 (EV-09; the ATM, CRED inflation), NR-256 (EV-36 Talk between runs; Daryl's amnesia against NUL/REM's excess of memory) and NR-257 (EV-23 JACK OUT; the stolen SR-71).
+
+## NULREM-040 — Superman III verses NR-258 to NR-260 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing the Ultimate Computer from Superman III: NR-258 (EV-09; Gus Gorman's half cents, CRED inflation), NR-259 (EV-05 generic first sight; the acid rated danger level zero; completes the generic pool at 8 of 8) and NR-260 (EV-37 Idle; Robert Vaughn as Ross Webster and the voice of Proteus IV, linking to NR-026 v2 and NR-035 v2).
+
+## NULREM-041 — Revenge of the Nerds verses NR-261 to NR-263 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing how computers are used in Revenge of the Nerds, focused on the engineering rather than the film's mocking framing of Lamar: NR-261 (EV-27 Card reward; the javelin built for Lamar's throw), NR-262 (EV-37 Idle; the computer-driven win) and NR-263 (EV-34 Run won; brains won). A fourth candidate for EV-12 was declined.
+
+## BUILD-001 — Godot build to start anew (APPROVED, 2026-11-13)
+
+Designer decision: the next session focuses on a Godot 4 build. An earlier Godot playtest of the first Node exists, but the new build starts fresh from `REDLINE_CORE_RULES.md` and the simplified-redesign docs, because the game has changed substantially since that playtest. The earlier playtest and the Python/Pygame archive remain reference material only.
+
+
+## BUILD-002 — Godot 4.3 HALCYON vertical slice (BUILT, 2026-11-13)
+
+First playable of the fresh Godot build (see BUILD-001). Lives in `godot/`; open `godot/project.godot` in Godot 4.3 (GL Compatibility).
+
+- **In:** Generalist with READY RIG; a 4-row HALCYON route (COOKIE BANNER with BOOTING → CAPTCHA or CONSENT WALL → SAFEHOUSE or DOORBELL → TERMS & CONDITIONS, 2 layers); full turn and Corporation Response rules (left→right, top→bottom, cleanup after); DEADLOCK/BREACH; go deeper or leave; reserves with the 10% clean bonus; SPAM; TRACE strikes (TRACER, HOUSE CALL, LOCKDOWN + Black ICE); depth-based card rewards (2 shared + 1 Generalist, 60/30/10 → 30/45/25).
+- **Visual cues:** per the ICE Design doc: type icon (FORTRESS slab, SIGYL keyhole, VOID eye), frame = role (MAIN heavy, SUPPORT thin, BLACK ICE inverted red with NO DEADLOCK), effect chip colours (PULP red, CORTEX violet, TRACE amber, DEADLOCK white, teal hand/deck, slate support), HALCYON peach band, large STR top right with base shown when changed, BW break cost on each subroutine, BOOTING T1–T3 pips, numbered Corporation Response preview with totals. All icons are drawn in code (`scripts/ui/icon.gd`).
+- **NUL/REM:** speaks CANON Bible lines exported by `tools/export_nulrem.py` → `godot/data/nulrem_lines.json` (re-run after Bible changes). Speak chance per trigger, filters by Rustler/corp/cause, repeat suppression of the last 40. EV-37 idle at 60 s; Konami code → EV-39; first-run flag for EV-02.
+- **Out:** CAPS, Uplinks, PATCHWORK, the Central Node, other Rustlers and corporations.
+- **Architecture:** rules engine `scripts/core/game.gd` (no UI dependency) + `cards.gd`, `ice.gd`, `nulrem.gd`; UI in `scripts/ui/main.gd`. Headless tests: `godot --headless --path godot --script res://tests/test_game.gd` (50 pass, including a bot that clears the slice). `tests/shot.gd` renders screenshots under a virtual display.
+- **Export:** `export_presets.cfg` has a Windows Desktop preset (embedded PCK) writing to `build/` (git-ignored).
+
+## ROT-001 — TUMBLER ICE replace SIGYL; rotating subroutines (APPROVED, 2026-11-13)
+
+Playtest finding: the Rustler had too little to do each turn, so there was little choice and little tension. Designer decision:
+- **TUMBLER** replaces the **SIGYL** ICE type (and the SIGYL Icepick becomes the **TUMBLER Icepick**, same stats for now). FORTRESS and VOID are unchanged.
+- A TUMBLER has a pool of 1–8 subroutines and fewer **slots**. Only the subroutines in its slots are active. A cheap TUMBLER might have 2 subroutines and 1 slot; an expensive one 6 subroutines and 3 slots.
+- **Conveyor rotation:** at the start of each Rustler turn after the first, the window moves one step (slots showing 1-2-3 then show 2-3-4, then 3-4-5, wrapping round). The newly revealed set is what fires in that turn's Corporation Response, so the Rustler only learns the response at the start of their turn.
+- **Hidden subroutines** are face-down (the count is shown) and can't be broken. Only subroutines in a slot can be broken.
+- **Broken stays broken** for the rest of the encounter, even when it rotates out and back in.
+- **BREACH** needs every DEADLOCK on the ICE broken, including ones not yet seen. TUMBLERs carry several DEADLOCKs, so they must be broken as they rotate into view.
+- Slice pools (placeholders for playtest): ACCEPT ALL 2 subs/1 slot; REJECT ALL 4/2 (two DEADLOCKs, BOOTING); CONSENT FORM 4/2 (two DEADLOCKs); CAPTCHA 5/2 (two DEADLOCKs).
+
+**Docs to follow:** Core Rules, ICE docs, Card Pools, Master Design and Bible rule sections still say SIGYL and need a pass. No CANON NUL/REM verse mentions SIGYL.
+
+## FIX-001 — DISCARD subroutines resolve at the start of the Rustler's turn (APPROVED, 2026-11-13)
+
+A DISCARD subroutine that fires in the Corporation Response now resolves at the start of the Rustler's next turn, after the draw. (Previously it hit the old hand just before cleanup discarded it anyway.)
+
+## FIX-002 — Boost installed Icepicks; inspect installed cards (APPROVED, 2026-11-13)
+
+Installed Icepicks have a BOOST button in the rig (pay the boost cost for +STR; boosts last until the encounter ends; TOOLBELT makes the first boost each turn free). Hovering or clicking any installed Program or racked Protocol shows its full card.
+
+## TUNE-001 — Deadlier encounters (APPROVED, 2026-11-13)
+
+Encounters weren't deadly enough. Every ICE gets **+1 STR (OPENING)** or **+2 STR (T1 and Black ICE)**, and every ICE **PULP value is ×4/3, rounded up** (applied after the TUMBLER pools were set). Slice values: ACCEPT ALL 4, REJECT ALL 4, COOKIE WALL 5, TERMS OF SERVICE 7, CONSENT FORM 4, CAPTCHA 5, DOORBELL CAM 4, HOUSE CALL 7 (PULP 6). A simple bot that banks spare BW into boosts clears 9 of 30 seeded runs; all 21 deaths are at the final node (TERMS & CONDITIONS).
+
+## VOID-001 — VOID ICE reveal a subroutine each time one first fires (APPROVED, 2026-11-13)
+
+VOID ICE subroutines start face-down. The Corporation Response fires them progressively: response 1 fires subroutine 1 (revealed as it fires), response 2 fires subroutines 1 and 2 (2 revealed), and so on until all fire every response. A revealed subroutine stays revealed for the rest of the encounter. Face-down subroutines can't be broken (same rule as TUMBLERs); a broken one doesn't fire. The response preview shows a hidden firing as "? (hidden)" and adds it to the totals line as a hidden subroutine. Black ICE HOUSE CALL is VOID, so it also reveals one subroutine per response from the moment it joins.
+
+**Fix (same session):** `tools/export_nulrem.py` let a verse with no **Placement:** line (NR-002's "Possible placement (OPEN)") swallow the next verse, so NUL/REM could speak raw markdown and NR-009 was missing. Verses are now matched one at a time, and the exporter refuses any line containing markdown.
+
+## PLAY-001 — The Corporation Response plays out step by step (APPROVED, 2026-11-13, playtest presentation)
+
+For playtests, the Corporation Response lasts at least 5 seconds. Each unbroken subroutine flashes one at a time, in resolution order (left→right, top→bottom), and its effects (VITAE, SHIELD, TRACE, SPAM inserted, and so on) are applied only at the moment it flashes. The response preview marks the subroutine firing now, dims the ones already fired, and counts "Resolving n of m". A VOID subroutine is revealed as it flashes. The time is split evenly across the subroutines (5 s ÷ (count + 1) per step); a response with nothing to fire still takes 5 s. Input is locked until the response finishes.
+
+## VOICE-001 — NUL/REM reads every line aloud (APPROVED, 2026-11-13)
+
+Every NUL/REM line is spoken as it types out. Designer chose, from samples: a clear neural voice rather than a robotic synth, British male, slow and flat for a dry, deadpan delivery, played through an "old speaker" (slightly pitched down, small-speaker band, light overdrive, short cabinet echo) so he still sounds like a machine.
+
+- **Production:** `tools/voice_nulrem.py` renders each exported line to `godot/audio/nulrem/<ID>.ogg` with Kokoro-82M (Apache-2.0, via kokoro-onnx), voice `bm_lewis`, speed 0.85, then the sox effect chain. It re-renders only lines whose spoken text changed (`manifest.json`). Run it after `tools/export_nulrem.py` whenever the Bible's lines change.
+- **Pronunciation:** the tool rewrites a speech copy of each line (the on-screen text is unchanged): ALL-CAPS game terms are read as words, and a small table covers names, initials and numbers (NUL/REM → "null rem", VITAE → "vee tie", R.U.D.I. → "Rudy", DMG-01 → "D M G zero one", 0.08 → "zero point zero eight", Halcyon + On + On → "Halcyon and On and On", 1982 → "nineteen eighty two").
+- **In game:** the typewriter is paced to the audio. A VOICE ON/OFF button in the NUL/REM panel (or the M key) mutes him; the choice is saved.
+- **Rejected:** espeak-ng robot voices (Speak & Spell crunch, ring-mod, metallic): not clear enough. The voice is styled on a deadpan delivery but does not imitate any real person.
+
+## DET-001 — DETAINER: a TUMBLER subtype that drains BW (APPROVED, 2026-11-13)
+
+- About **20% of TUMBLER ICE** carry the subtype **DETAINER**.
+- **At most 1 DETAINER per encounter.**
+- A DETAINER's **S1 is always −1 BW**: when it fires in a Corporation Response, the Rustler has 1 less BW on their next turn. It fires on the Corporation's first response, so the Rustler loses 1 BW on their 2nd turn. Because a DETAINER is a TUMBLER, the −1 BW rotates away and comes back round; breaking it stops it for the rest of the encounter (broken stays broken).
+- **Visuals:** a cyan DETAINER tag after the type; the −1 BW chip uses the BW colour and icon ("−1 BW next turn"); the response preview adds "BW −1 next turn"; on the drained turn the HUD shows "−1 DETAINED" beside the BW pips.
+- **Slice:** ACCEPT ALL (COOKIE BANNER, the node every run passes through) is the DETAINER. Pool: −1 BW, SPAM, PULP 3 in 1 slot. It is 1 of the slice's 4 TUMBLERs.
+- With the DETAINER, a simple bot clears 13 of 30 seeded runs (all deaths still at TERMS & CONDITIONS).
+
+## PULP-001 — FORTRESSES carry PULP, with varied values (APPROVED, 2026-11-13)
+
+Playtest: the slice had about half the PULP subroutines the designer expected, and too few real decisions ("the player did what they could, not what they should"). FORTRESSES now carry PULP, with values that differ from ICE to ICE (working range 1–5, fixed per subroutine so the Rustler can plan):
+- **COOKIE WALL** (STR 5): [S1] PULP 2 · [S2] TRACE 2 · [S3] DEADLOCK
+- **TERMS OF SERVICE** (STR 7): [S1] PULP 5 · [S2] INSERT 1 SPAM → discard pile · [S3] DEADLOCK
+- **AUTO-RENEW** (new FORTRESS, T1, STR 4): [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK — escalating, like a subscription that creeps up. Joins CAPTCHA as the support ICE in the row-2 CAPTCHA node.
+- Non-Black PULP subroutines in the slice: 4 → 9. A simple bot clears 12 of 30 seeded runs, and deaths now spread across the route (TERMS & CONDITIONS 15, CAPTCHA 2, DOORBELL 1); survivors finish with 5–28 VITAE.
+- **Assumption to confirm:** values are fixed per subroutine, not rolled each time.
+
+## ICEBIBLE-001 — ICE type identities (APPROVED, 2026-11-13); passive abilities kept for consideration
+
+Designer decisions, recorded in the new **ICE Rules Bible** doc (https://claude.ai/artifact/DnSnz3Pfgqqvd7nkwuBsdc):
+- **FORTRESS:** generally the highest STR; fewer subroutines, almost all PULP; the odd other effect; TRACE rare.
+- **TUMBLER:** where the quirks and puzzles happen.
+- **VOID:** where the deadly happens.
+
+The bible also holds PROPOSED STR/subroutine budgets per type and tier, general ICE practices ("should, not could"), and an audit of the slice ICE (4 of 9 fit; DOORBELL CAM, CAPTCHA and AUTO-RENEW need changes). No ICE changed yet.
+
+All 14 proposed passive abilities are kept for consideration in the **Ice Passive Abilities** doc (https://claude.ai/artifact/6dDZTwDj8Hv9RkhJbucrd6): power ranking (1–5) with a budget cost scale, what each could break and its guardrail, combinations to forbid, and a suggested first playtest set (AUTO-RENEW HARDENING, COOKIE WALL TOLL, CONSENT FORM RELAY, TERMS OF SERVICE SEQUENCED). ALARM's threshold moved to TRACE 30, because strike 1 resets TRACE to 20.
+
+## PASSIVE-001 — Subtypes and passive abilities on the slice ICE (BUILT for playtest, 2026-11-13)
+
+Each slice ICE gets the subtype and one passive from the Ice Passive Abilities doc:
+
+| ICE | Type · subtype | Passive |
+|---|---|---|
+| ACCEPT ALL | TUMBLER · DETAINER | — (the DETAINER's −1 BW only; the encounter already has BOOTING) |
+| REJECT ALL | TUMBLER | BOOTING (unchanged) |
+| COOKIE WALL | FORTRESS · TOLLHOUSE | TOLL: breaks cost +1 BW, except the DEADLOCK |
+| TERMS OF SERVICE | FORTRESS · VAULT | SEQUENCED: break left to right |
+| AUTO-RENEW | FORTRESS · RATCHET | HARDENING: +1 STR after each response (max +3) |
+| CONSENT FORM | TUMBLER · SWITCHBOARD | RELAY: ICE to its right +2 STR while it has an unbroken subroutine |
+| CAPTCHA | TUMBLER · SNARE | TRIPWIRE: each break adds TRACE 1 |
+| DOORBELL CAM | VOID · WATCHER | WATCHER (was its CLOAK → TRACE ability) |
+| HOUSE CALL | Black VOID | none (Black ICE get no passives) |
+
+All pass the doc's guardrails (max 2 passive ICE per encounter; no TOLL with the DETAINER; no HARDENING beside RELAY or BOOTING). Ice stats unchanged; the ICE Rules Bible audit changes are not applied yet.
+
+**30-run bot test (same seeds 100–129, random routes):**
+
+| | Before passives (PULP-001) | With passives |
+|---|---|---|
+| Runs cleared | 12 / 30 | 11 / 30 |
+| Deaths: CAPTCHA node | 2 | 8 |
+| Deaths: DOORBELL node | 1 | 1 |
+| Deaths: TERMS & CONDITIONS | 15 | 10 |
+| Survivors' average end VITAE | 17.8 | 14.0 |
+
+Reading: the CAPTCHA node (AUTO-RENEW HARDENING + CAPTCHA TRIPWIRE) became the new danger spot; runs that get past it reach the end with less VITAE. The bot doesn't play around passives (it breaks TRIPWIRE subroutines freely and ignores RELAY order), so a human should do better than these numbers.
+
+## BUILD-003 — All four Rustlers in the HALCYON slice (BUILT for playtest, 2026-11-14)
+
+The slice now starts with a Rustler choice: THE GENERALIST, ECHO, RIOT or VECTOR, built from `REDLINE_RUSTLERS.md` and `REDLINE_CARD_POOLS.md` §5–7 (SIGYL read as TUMBLER since ROT-001, so HUSH and WRECKING BALL are TUMBLER Icepicks).
+
+- **ORIGIN Ghostware:** READY RIG (Generalist only); LOW PROFILE (ECHO: every TRACE gain is 1 less); REDLINER (RIOT: +1 BW at the start of your turn at TRACE 20+); PATIENT ZERO (VECTOR: 1 ROT on every ICE at the start of each encounter).
+- **Starter decks** (12 each) and **reward pools** (9 each; the reward's third card comes from the chosen Rustler's pool). INCUBATOR is left out of the slice pool because no slice ICE PURGEs.
+- **Virus strains** (RUSTLER-002): ROT (−1 STR), SCRAMBLE (PULP −1 when it acts), BLIND (TRACE −1 when it acts), LEECH (1 CRED at the start of your turn), WORM. Counters show as coloured chips on the ICE card. **Interpretation to confirm:** WORM *copies* 1 counter of each strain to the ICE on the right (the doc says "put … onto", which could mean move).
+- **Card breaks:** BACKDOOR, BRUTE FORCE, RUNTIME ERROR and HOST TAKEOVER let you pick a subroutine; FLASHPOINT auto-picks (DEADLOCK first, then the biggest PULP). Card breaks obey hidden subroutines, BOOTING and SEQUENCED, and trigger TRIPWIRE; TOLL applies to Icepick breaks only.
+- **Other new rules:** CACHE (DEAD AIR), SMOKESCREEN, VANISH, BLACKOUT, DECOY SIGNAL, SILENT PARTNER, LONG GAME, BERSERK cost reduction, PAIN TOLERANCE, per-break TRACE (SLEDGE, WRECKING BALL, CHAINSAW) and per-break ROT (STINGER).
+- **Fix found by the RIOT simulation:** a break that adds TRACE could cause strike 2, which pushes HOUSE CALL in on the left and shifted every ICE index mid-break. Breaks are now recorded before their TRACE is applied.
+- NUL/REM's Rustler-specific lines now follow the chosen Rustler.
+
+**30-run bot test per Rustler** (seeds 100–129, random routes; the bot now spends card breaks first, avoids useless STR cuts and sheds TRACE near a strike):
+
+| Rustler | Cleared | Deaths by node | Survivors' avg end VITAE |
+|---|---|---|---|
+| ECHO | 23 / 30 | CAPTCHA 4, DOORBELL 3 | 14.7 |
+| GENERALIST | 10 / 30 | T&C 11, DOORBELL 5, CAPTCHA 3, CONSENT WALL 1 | 18.9 |
+| VECTOR | 9 / 30 | CAPTCHA 10, DOORBELL 7, T&C 4 | 14.1 |
+| RIOT | 1 / 30 | CAPTCHA 15, T&C 6, COOKIE BANNER 3, CONSENT WALL 3, DOORBELL 2 | 9.0 |
+
+**Design findings for playtest:**
+- HALCYON is TUMBLER-heavy (4 of the slice's 8 non-Black ICE). ECHO's HUSH is a TUMBLER Icepick and LOW PROFILE erases the many small TRACE subroutines, so ECHO is far ahead. RIOT and VECTOR each have **one** card that gets through a TUMBLER (BRUTE FORCE, RUNTIME ERROR) and struggle.
+- RIOT's TRACE climbs fast enough to reach strike 2 (HOUSE CALL) in the CAPTCHA node, where TRIPWIRE adds TRACE on every break.
+- OUTBREAK + REPLICATOR grow ROT without limit (a traced run reached ROT 385). Harmless while STR floors at 0, but anything that counts virus counters (QUARANTINE caps at 6, HOST TAKEOVER needs 5) becomes trivial.
+- The Rustlers doc still says SIGYL in places; it needs the TUMBLER rename pass.
+
+## PURGE-001 — The corporation PURGES virus counters at a rising limit (APPROVED, 2026-11-14)
+
+- At the start of its turn, the corporation adds up the virus counters on every ICE in the encounter. At or above its **PURGE limit**, it removes them all **instead of taking its turn**, and the Rustler's turn begins.
+- **HALCYON: limit 10, +5 after each purge** (10 → 15 → 20), reset each encounter.
+- **No meter and no preview warning (designer: it should be a surprise).** The purge is announced only as it happens, during the Corporation Response playback.
+- A purge isn't a Corporation Response: TUMBLERs still rotate (the Rustler's turn starts), but VOID ICE reveal nothing new and HARDENING doesn't grow (BLACKOUT now follows the same rule).
+- **INCUBATOR** returns to VECTOR's reward pool: after a purge it INFECTs 2 ROT on each purged ICE.
+- **30-run bot test, VECTOR:** 12 / 30 cleared (9 before), with 60 purges across 29 of the 30 runs (about 2 per run). A purge removes VECTOR's ROT but also skips a whole turn of damage; for now the skipped turn is worth more. The bot doesn't trigger purges on purpose, so a player who learns the limit could do so deliberately. If that shows up in playtest, the fallback options are: every ICE gets +1 STR after a purge, or purge-then-respond.
+
+## UI-002 — Encounter CRED meter (APPROVED, 2026-11-14)
+
+Each encounter shows a CRED meter in the info bar: a gold bar with "left / total CRED" for that encounter's reserve. At 0 remaining, the number shows in red (for now).
+
+## ECHO-001 — ECHO's starter deck: 3 PROBE, 3 PULP Shield (APPROVED, 2026-11-14)
+
+- **Out of the starter deck, into ECHO's reward pool:** SLOW DRIP and GHOST SIGNAL (both Common in the pool, so ECHO's pool is now 11 cards).
+- **In:** a 3rd PROBE and a 3rd PULP Shield. Deck stays at 12: HUSH, BACKDOOR, Basic Extractor, PROBE ×3, PULP Shield ×3, SMOKESCREEN ×2, DEAD AIR.
+- **Exception noted:** GHOST SIGNAL is a shared basic; offering it as a reward breaks BASIC-001 ("basics are never offered"). Accepted for ECHO's pool only; the other Rustlers never see it as a reward.
+- **Assumption to confirm:** both cards sit at Common rarity in the pool.
+- **30-run bot test, ECHO:** 22 / 30 cleared (23 before); survivors' average end VITAE 18.7 (14.7 before). `REDLINE_RUSTLERS.md` §4 updated.
+
+## ECHO-002 — HUSH starts at STR 1 (APPROVED, 2026-11-14)
+
+HUSH (ECHO's TUMBLER Icepick): STR 3 → **1**; boost (2 BW → +1 STR) and break (1 BW) unchanged. 30-run bot test, ECHO: **23 / 30** cleared (22 after ECHO-001), survivors' average end VITAE 16.5 (18.7). The lower STR barely moved the result: boosts last the whole encounter and ECHO now has 3 PROBEs, so the extra cost is paid once per encounter, and LOW PROFILE keeps TRACE low while ECHO takes the extra turns.
+
+## ECHO-003 — GHOST SIGNAL back in ECHO's starter deck; one SMOKESCREEN out (APPROVED, 2026-11-14)
+
+GHOST SIGNAL is a shared basic, so it returns to ECHO's starter deck and leaves ECHO's reward pool (BASIC-001 holds again; the ECHO-001 exception is withdrawn). SLOW DRIP stays in the pool (Common).
+
+**Card removed in its place: one SMOKESCREEN** (designer asked Claude to choose). Reason: SMOKESCREEN and GHOST SIGNAL do the same job (cut the first TRACE of the next Corporation Response), and ECHO's TRACE control is what makes it the strongest Rustler. Tested both candidates on the 30-run bot: without a SMOKESCREEN, ECHO clears **20 / 30**; without DEAD AIR, 22 / 30. DEAD AIR also stays because CACHING BACKDOOR is ECHO's signature play (and the bot under-uses it).
+
+**ECHO's starter deck now:** HUSH, BACKDOOR, Basic Extractor, PROBE ×3, PULP Shield ×3, SMOKESCREEN, DEAD AIR, GHOST SIGNAL.
+
+## ECHO-004 — HUSH starts at STR 0 (APPROVED, 2026-11-14)
+
+HUSH: STR 1 → **0** (boost 2 BW → +1 STR, break 1 BW unchanged). 30-run bot test, ECHO: **14 / 30** cleared (20 at STR 1); deaths CAPTCHA 8, DOORBELL 5, TERMS & CONDITIONS 3; survivors' average end VITAE 16.4. Against STR 4–5 TUMBLERs, HUSH now needs 8–10 BW of boosts before its first break, which puts ECHO level with VECTOR (12) and the Generalist (10), matching its 2-star difficulty.
+
+## GHOST-011 — BURNOUT CHIP's drawback doubled (APPROVED, 2026-11-14)
+
+BURNOUT CHIP (general Ghostware, drawback): Icepicks +2 STR for the run; **whenever you take PULP damage, take 2 more** (was 1 more). `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.2 updated. Not yet in the slice (Ghostware isn't built).
+
+## RIOT-001 — WITHDRAWN (2026-11-14)
+
+The designer kept FEEDBACK in RIOT's starter deck and declined a second BRUTE FORCE. RIOT's deck is unchanged: SLEDGE, BRUTE FORCE, OVERLOAD ×2, PROBE, FEEDBACK, ADRENAL SPIKE, PULP Shield ×2, LAY LOW, SMASH & GRAB, Basic Extractor (30-run bot: 1 / 30). Tested variants for reference: FEEDBACK → 2nd BRUTE FORCE 10 / 30; BRUTE FORCE reaching STR 5: 0 / 30; ADRENAL SPIKE → 2nd LAY LOW: 3 / 30.
+
+Clarified (no change): SLEDGE's first break each turn costs 0 BW, later breaks 1 BW each, and every break (including the free one) adds +1 TRACE.
+
+## RIOT-002 — RIOT at 15 cards with SHATTER (BUILT for playtest, 2026-11-14)
+
+Designer's proposal, built as specified:
+- **SHATTER** (new RIOT starter SCRIPT, EXPLOIT): **0 BW, +5 TRACE.** Play only if an Icepick broke a subroutine on an ICE above STR 2 this turn. Break up to 2 subroutines on an ICE at STR 0. (Card breaks still respect hidden subroutines, BOOTING and SEQUENCED.)
+- **Deck 12 → 15:** +1 SHATTER, +2 PROBE, +1 PULP Shield, −1 OVERLOAD. Now: SLEDGE, BRUTE FORCE, SHATTER, OVERLOAD, PROBE ×3, FEEDBACK, ADRENAL SPIKE, PULP Shield ×3, LAY LOW, SMASH & GRAB, Basic Extractor.
+- **Fix found while building:** a card's own TRACE cost can cause a strike that adds HOUSE CALL on the left; the card's target now follows the same ICE.
+
+**30-run bot test (RIOT):** 1 / 30 cleared (unchanged); **SHATTER was playable only once in 30 runs.** Why: SLEDGE is RIOT's only Icepick and breaks only FORTRESSES, so the condition needs a FORTRESS in the encounter. 4 of the slice's 7 encounters have none (including the Opening Node), and where there is one, the same turn must also see SLEDGE installed and boosted, another ICE already at STR 0, and SHATTER in hand.
+
+Variants tested (not adopted, for discussion):
+
+| SHATTER variant | Cleared | SHATTER played |
+|---|---|---|
+| As specified (0 BW) | 1 / 30 | 1 time |
+| Any break (Icepick or card, e.g. BRUTE FORCE) on an ICE above STR 2 counts | 1 / 30 | 5 times |
+| Targets an ICE at STR 2 or less | 1 / 30 | 2 times |
+| Both of the above | 1 / 30 | 8 times |
+| Condition is TRACE 20–39 instead | 3 / 30 | 49 times |
+| TRACE 20–39, targets STR 2 or less | 3 / 30 | 53 times |
+
+Even when SHATTER fires often, its +5 TRACE pushes RIOT from the redline into strike 1–2 (HOUSE CALL). For comparison, OVERDRIVE (SLEDGE breaks any ICE type while TRACE is 20–39) reached 7–9 / 30.
+
+## RIOT-003 — SHATTER redesigned (BUILT for playtest, 2026-11-14)
+
+**SHATTER** (RIOT starter SCRIPT, EXPLOIT): **1 BW, +3 TRACE.** Choose an ICE: this turn, SLEDGE can break that ICE's subroutines whatever its type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter (its boosts are lost; boosting again starts from 0). Replaces RIOT-002's SHATTER. **Interpretations to confirm:** "any 1 icebreaker" read as any 1 ICE; "reduced to 0" lasts until the encounter ends (SLEDGE is back to STR 2 next encounter).
+
+**30-run bot test (RIOT, 15-card deck):** 2 / 30 cleared; SHATTER played 30 times in 17 runs; deaths CAPTCHA 10, DOORBELL 6, COOKIE BANNER 5, T&C 5, CONSENT WALL 2. With a milder price (SLEDGE only loses its boosts, back to STR 2): 3 / 30.
+
+Why it's still low: one SHATTER in 15 cards is drawn about one turn in three, and each play usually buys one or two breaks (SLEDGE needs 2–3 boosts to reach a STR 4–5 TUMBLER), after which SLEDGE starts again from 0.
+
+## RIOT-004 — RIOT's new values (APPROVED, 2026-11-14)
+
+Profiling RIOT's deaths (27 of 30 runs) showed it was dying from TRACE, not from a lack of breaks: 20 of 27 at strike 2 or more, HOUSE CALL present in 17. SMASH & GRAB's +2 TRACE every turn was the steady source.
+
+**Decisions:**
+- **SMASH & GRAB:** extract 8 CRED; **+1 TRACE while your TRACE is under 20** (was +2 every turn). It drives RIOT up to the redline, then goes quiet.
+- **SHATTER** stays as RIOT-003: 1 BW, **+3 TRACE**; SLEDGE breaks the chosen ICE of any type this turn, then drops to STR 0 for the rest of the encounter.
+- **RIOT's starting deck is the 15-card deck** (RIOT-002): SLEDGE, BRUTE FORCE, SHATTER, OVERLOAD, PROBE ×3, FEEDBACK, ADRENAL SPIKE, PULP Shield ×3, LAY LOW, SMASH & GRAB, Basic Extractor.
+
+**30-run bot test (all Rustlers, same bot):** ECHO 14 / 30 · VECTOR 12 / 30 · GENERALIST 10 / 30 · **RIOT 8 / 30** (was 1–3). SHATTER played 48 times in 21 runs. Variants tried: SMASH & GRAB no TRACE 10 / 30; +2 under 20 only 6 / 30; SHATTER without TRACE 1–3 / 30; SHATTER lasting the whole encounter 3 / 30.
+
+## TEST-001 — 3 BW per turn (test only; BW stays at 4)
+
+30-run bot test with BW_PER_TURN = 3 (everything else current): ECHO 9 / 30 (14 at 4 BW), GENERALIST 8 (10), RIOT 8 (8), VECTOR 7 (12). The Rustlers bunch together at 7–9; RIOT is unaffected because REDLINER restores a 4th BW at TRACE 20+; set-up Rustlers (ECHO, VECTOR) lose most; the CAPTCHA node becomes the main wall. A DETAINER would leave a 2-BW turn. Designer: leave BW at 4 for now; kept for reference.
+
+## NAME-002 — The game is PANOPTICON (APPROVED, 2026-11-14)
+
+Designer: REDLINE was the previous iteration; the game is now called **PANOPTICON** (completing TITLE-001's "intentional rename"). Scope chosen: **text only.**
+- Renamed: the game name in every doc's text (including the Bible's rule sections, as an explicit designer decision rather than a silent CANON edit), the Godot project and window title, and the Windows build (`PANOPTICON_HALCYON_slice.exe`).
+- Kept: `REDLINE_*.md` file names, code paths and identifiers, the save file, the GitHub repository name (Punkwork/REDLINE; renaming it is the designer's call on GitHub), and earlier dev-log entries, which stay as written.
+- Not a game-name use, so unchanged: RIOT's ORIGIN **REDLINER** and the "redline" TRACE band (20–39).
+- No NUL/REM dialogue verse mentions REDLINE.
+- Still to sync: the project's copies of the docs (`claude/REDLINE_*.md` in the Panopticon project).
+
+## DRAW-001 — DRAW 6 (APPROVED, 2026-11-14)
+
+Playtest: with 4 BW and 5 cards there was little to decide about what not to play. Base **DRAW is now 6** (CORTEX still lowers it, minimum 1). 30-run bot test, DRAW 6 vs 5: GENERALIST 13 / 30 (10), ECHO 15 (14), VECTOR 8 (12), RIOT 1 (8). Cards left unplayed per turn rose from about 2.5–3.2 to 3.3–4.8.
+- **RIOT** collapses with the bot because the bot plays every cheap card, and RIOT's cheap cards add TRACE (19 of its 29 deaths at TERMS & CONDITIONS, SHATTER played 82 times). A player choosing what not to play avoids that; RIOT needs re-checking with real play.
+- **VECTOR** drops because more virus cards drive more PURGES (86 in 28 runs, up from 60).
+
+## PULP-002 — PULP curves on the harder FORTRESSES (APPROVED, 2026-11-14)
+
+Playtest: still not enough PULP. Designer's curves, one value per Corporation Response (looping after 9):
+
+| Curve | Values | Total over 9 turns |
+|---|---|---|
+| **A · SEQUENTIAL** | 2, 3, 4, 2, 3, 4, 2, 3, 4 | 27 |
+| **B · RANDOM** | 5, 3, 2, 6, 2, 3, 6, 2, 1, shuffled into a random order for each ICE | 30 |
+| **C · HAMMER** | 4, 3, 4, 9, 3, 4, 3, 8, 2 | 40 |
+
+- **Placed on the harder FORTRESSES only** (designer): **COOKIE WALL** (STR 5) gains [S3] PULP curve B before its DEADLOCK; **TERMS OF SERVICE** (STR 7, the final node) gains [S3] PULP curve C. AUTO-RENEW keeps its fixed PULP 1, 2, 3. Curve A is defined for later ICE.
+- A curve's step counts the Corporation Responses that ICE has been through (a PURGE or BLACKOUT turn doesn't count). SCRAMBLE lowers curve PULP like any PULP.
+- **On screen:** A and C show this turn's value (e.g. "PULP 9 · HAMMER"); B shows "PULP ? · RANDOM", and the response preview adds "+ random PULP (1–6)". Hovering a curve chip shows its sequence.
+
+**30-run bot test (DRAW 6, curves on):** GENERALIST 10 / 30 · ECHO 6 · VECTOR 2 · RIOT 1. PULP reaching VITAE per encounter is now 6.7–9.3 (was 5.7–7.8), and survivors finish lower (ECHO 6.3, RIOT 2.0 average end VITAE).
+
+## REEL-001 — TUMBLER slots spin like slot-machine reels (APPROVED, 2026-11-14)
+
+- Each TUMBLER slot is drawn as a reel window: a dark recessed frame with shading at the top and bottom edge, like a drum curving away.
+- When a TUMBLER rotates at the start of the Rustler's turn, each slot's strip rolls **downward**: the subroutine that was in the slot, a blur of passing subroutines (random icons, so nothing hidden is revealed), then this turn's subroutine. The reel spins fast, slows, runs slightly past the stop and clunks back with a flash.
+- **Staggered stops:** slot 1 stops first and each later slot spins about 0.5 s longer (0.95 s, 1.45 s, 1.95 s…), like real reels. Input is held until every reel has stopped.
+- **Slot labels now name the subroutine** ("SLOT 2 · S1"). Playtest confusion: on REJECT ALL, breaking S3's DEADLOCK and then seeing S1's DEADLOCK roll into slot 2 looked like the same DEADLOCK coming back unbroken. It was the second of REJECT ALL's two DEADLOCKs (turn-by-turn replay confirmed broken subroutines stay broken). The suggested follow-ups (show the DEADLOCK total on TUMBLERs; one DEADLOCK on REJECT ALL) are awaiting the designer.
+
+## RUN-001 — END RUN button (APPROVED, 2026-11-14)
+
+An END RUN button (bottom right, red) asks "END THIS RUN?" with YES, END THE RUN / KEEP PLAYING. Yes: the Rustler fails (NUL/REM's run-lost line, EV-35), then the game returns to the start menu (Rustler choice). Not available while the Corporation Response or the reels are playing.
+
+## VECTOR-001 — PATIENT ZERO infects one chosen ICE (APPROVED, 2026-11-14)
+
+VECTOR's ORIGIN Ghostware PATIENT ZERO: **at the start of each encounter, choose an ICE: INFECT 1 ROT on it** (was 1 ROT on every ICE). In the slice, each ICE card shows a "PATIENT ZERO · INFECT 1 ROT HERE" button before VECTOR's first move. 30-run bot test (VECTOR, DRAW 6 + PULP curves; the bot picks the ICE with the most unbroken DEADLOCKs): **5 / 30** cleared (2 before); corporation PURGES fell from 49 to 12, because fewer counters reach the limit. `REDLINE_RUSTLERS.md` §6 and Core Rules amendments updated.
+
+Open: WORM copy vs move (WORMHOLE, COCKTAIL) — currently copy.
+
+## VIRUS-001 — WORM becomes a break (APPROVED, 2026-11-14)
+
+**Was:** each WORM counter copied 1 counter of each strain onto the ICE to the right at the start of your turn.
+**Now:** on your turn, at any time, remove 2 WORM from an ICE to break 1 subroutine on that ICE, your choice. Normal break limits apply (active or revealed, BOOTING, SEQUENCED). It needs no Icepick, ignores the ICE's STR, costs no BW (TOLL doesn't apply), and works only on the Rustler's turn (designer-confirmed). A WORM break is still a break, so TRIPWIRE applies.
+
+- Engine: `Game.worm_ok(i)` and `Game.use_worm(i)`; the subroutine is chosen through the card-break choice limited to that ICE. The copy step was removed from `_virus_turn`.
+- UI: ICE cards with 2+ WORM show a "WORM · REMOVE 2 TO BREAK A SUBROUTINE" button. WORMHOLE text and the WORM tooltip updated.
+- Tests: 134 passed (test_worm covers no Icepick, STR 5 ICE, 0 BW on TOLL, turn only). VECTOR sim: 5/30 cleared (unchanged; WORM is only in VECTOR's reward pool, so it rarely comes up in the starter-deck sim).
+- No Windows build yet (the designer asked to wait for the go-ahead).

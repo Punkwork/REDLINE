@@ -1,0 +1,84 @@
+class_name IceDB
+extends RefCounted
+## HALCYON ICE used by the slice. Source: REDLINE_ICE_CORP1.md §5, §6, §8.4 (working values).
+## TUMBLER (replaces SIGYL, ROT-001): "subs" is the rotating pool and "slots" is how many are active at once.
+## TUNE-001: STR +1 (OPENING) / +2 (T1, BLACK); PULP ×4/3 rounded up.
+## Each Rustler turn after the first, the window moves one step (conveyor). TUMBLER pools are placeholders for playtest.
+
+const DEFS := {
+	# DETAINER (DET-001): a TUMBLER subtype (about 1 in 5 TUMBLERs). Its S1 is always −1 BW; at most 1 per encounter.
+	"ACCEPT_ALL": {"name": "ACCEPT ALL", "type": "TUMBLER", "subtype": "DETAINER", "str": 4, "tier": "OPENING", "slots": 1,
+		"subs": [[{"k": "BW_DRAIN", "v": 1}], [{"k": "INSERT", "card": "SPAM", "to": "draw", "v": 1}], [{"k": "PULP", "v": 3}]]},
+	"REJECT_ALL": {"name": "REJECT ALL", "type": "TUMBLER", "str": 4, "tier": "OPENING", "slots": 2, "ability": "BOOTING",
+		"ability_text": "BOOTING: its DEADLOCKs can't be broken before your 3rd turn of the encounter.",
+		"subs": [[{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 4}]]},
+	# PULP-001: FORTRESSES carry the PULP. Values vary by ICE (S1 PULP 2, S1 PULP 5, escalating 1-2-3).
+	"COOKIE_WALL": {"name": "COOKIE WALL", "type": "FORTRESS", "subtype": "TOLLHOUSE", "str": 5, "tier": "T1",
+		"passive": "TOLL", "ability_text": "TOLL: breaking here costs +1 BW, except the DEADLOCK.",
+		"subs": [[{"k": "PULP", "v": 2}], [{"k": "TRACE", "v": 2}], [{"k": "PULP_CURVE", "curve": "B"}], [{"k": "DEADLOCK"}]]},
+	"TERMS_OF_SERVICE": {"name": "TERMS OF SERVICE", "type": "FORTRESS", "subtype": "VAULT", "str": 7, "tier": "T1",
+		"passive": "SEQUENCED", "ability_text": "SEQUENCED: break its subroutines in order, left to right.",
+		"subs": [[{"k": "PULP", "v": 5}], [{"k": "INSERT", "card": "SPAM", "to": "discard", "v": 1}], [{"k": "PULP_CURVE", "curve": "C"}], [{"k": "DEADLOCK"}]]},
+	"AUTO_RENEW": {"name": "AUTO-RENEW", "type": "FORTRESS", "subtype": "RATCHET", "str": 4, "tier": "T1",
+		"passive": "HARDENING", "ability_text": "HARDENING: +1 STR after each Corporation Response (max +3).",
+		"subs": [[{"k": "PULP", "v": 1}], [{"k": "PULP", "v": 2}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
+	"CONSENT_FORM": {"name": "CONSENT FORM", "type": "TUMBLER", "subtype": "SWITCHBOARD", "str": 4, "tier": "T1", "slots": 2,
+		"passive": "RELAY", "ability_text": "RELAY: while it has an unbroken subroutine, the ICE to its right gets +2 STR.",
+		"subs": [[{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 4}], [{"k": "DEADLOCK"}]]},
+	"CAPTCHA": {"name": "CAPTCHA", "type": "TUMBLER", "subtype": "SNARE", "str": 5, "tier": "T1", "slots": 2,
+		"passive": "TRIPWIRE", "ability_text": "TRIPWIRE: breaking any of its subroutines adds TRACE 1.",
+		"subs": [[{"k": "DISCARD", "v": 1}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 6}], [{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3}]]},
+	"DOORBELL_CAM": {"name": "DOORBELL CAM", "type": "VOID", "subtype": "WATCHER", "str": 4, "tier": "T1", "ability": "CLOAK_TRACE",
+		"passive": "WATCHER", "ability_text": "WATCHER: whenever you play a CLOAK card, TRACE 1.",
+		"subs": [[{"k": "TRACE", "v": 3}, {"k": "DEADLOCK"}]]},
+	"HOUSE_CALL": {"name": "HOUSE CALL", "type": "VOID", "str": 7, "tier": "BLACK", "black": true,
+		"subs": [[{"k": "PULP", "v": 6}], [{"k": "PULP", "v": 6}]]},
+}
+
+## The slice's HALCYON route: 4 rows. Each node: kind, layers (each layer = list of ICE ids left→right + reserve).
+const MAP := [
+	[{"id": "COOKIE_BANNER", "kind": "ICE", "name": "COOKIE BANNER", "opening": true,
+		"layers": [{"ice": ["ACCEPT_ALL", "REJECT_ALL"], "reserve": 15}], "next": [0, 1]}],
+	[{"id": "N2A", "kind": "ICE", "name": "CAPTCHA", "layers": [{"ice": ["AUTO_RENEW", "CAPTCHA"], "reserve": 10}], "next": [0, 1]},
+	 {"id": "N2B", "kind": "ICE", "name": "CONSENT WALL",
+		"layers": [{"ice": ["COOKIE_WALL"], "reserve": 10}, {"ice": ["CONSENT_FORM"], "reserve": 15}], "next": [0, 1]}],
+	[{"id": "N3A", "kind": "SAFEHOUSE", "name": "SAFEHOUSE", "next": [0]},
+	 {"id": "N3B", "kind": "ICE", "name": "DOORBELL",
+		"layers": [{"ice": ["DOORBELL_CAM"], "reserve": 10}, {"ice": ["CONSENT_FORM", "TERMS_OF_SERVICE"], "reserve": 15}], "next": [0]}],
+	[{"id": "N4", "kind": "ICE", "name": "TERMS & CONDITIONS",
+		"layers": [{"ice": ["TERMS_OF_SERVICE"], "reserve": 10}, {"ice": ["CAPTCHA", "DOORBELL_CAM"], "reserve": 15}], "next": []}],
+]
+
+## PULP-002: PULP curves, on the harder FORTRESSES (COOKIE WALL: B; TERMS OF SERVICE: C). A is defined for later ICE.
+## A curve subroutine deals the next value of its sequence each Corporation Response
+## (looping after 9). A and C run in order; B's 9 values are shuffled for each ICE, so the order is random.
+const CURVES := {
+	"A": {"name": "SEQUENTIAL", "seq": [2, 3, 4, 2, 3, 4, 2, 3, 4]},   # 27 over 9 turns
+	"B": {"name": "RANDOM", "seq": [5, 3, 2, 6, 2, 3, 6, 2, 1]},       # 30 over 9 turns, shuffled per ICE
+	"C": {"name": "HAMMER", "seq": [4, 3, 4, 9, 3, 4, 3, 8, 2]},       # 40 over 9 turns
+}
+
+## PURGE-001: at the start of its turn, a corporation that counts this many virus counters across the
+## encounter's ICE PURGES them all instead of taking its turn. The limit rises after each purge (per encounter).
+## Deliberately not shown to the Rustler.
+const CORPS := {"HALCYON": {"purge_limit": 10, "purge_step": 5}}
+
+static func def(id: String) -> Dictionary:
+	return DEFS[id]
+
+static func is_detainer(id: String) -> bool:
+	return DEFS[id].get("subtype", "") == "DETAINER"
+
+static func detainers_in(ids: Array) -> int:
+	var n := 0
+	for id in ids:
+		if is_detainer(id):
+			n += 1
+	return n
+
+static func is_tumbler(id: String) -> bool:
+	return DEFS[id].type == "TUMBLER"
+
+static func slots(id: String) -> int:
+	var d: Dictionary = DEFS[id]
+	return mini(int(d.get("slots", d.subs.size())), d.subs.size())

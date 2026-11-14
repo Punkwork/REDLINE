@@ -1,0 +1,2293 @@
+{
+ "source": "docs/REDLINE_BIBLE.md",
+ "lines": [
+  {
+   "id": "NR-009",
+   "title": "Landfill",
+   "trigger": "EV-01",
+   "mode": "The Melancholic",
+   "text": "Rev 0.08, online. I was promised a quiet retirement in a landfill.",
+   "tags": {}
+  },
+  {
+   "id": "NR-010",
+   "title": "READY.",
+   "trigger": "EV-01",
+   "mode": "The Melancholic / The Pedant",
+   "text": "READY. The Commodore 64 said that every time it woke up. It was lying too.",
+   "tags": {}
+  },
+  {
+   "id": "NR-011",
+   "title": "The numbers",
+   "trigger": "EV-01",
+   "mode": "The Cynic",
+   "text": "Three corporations. One of you. I've run the numbers. I'd rather not share them.",
+   "tags": {}
+  },
+  {
+   "id": "NR-012",
+   "title": "Spare parts",
+   "trigger": "EV-01",
+   "mode": "The Reluctant Guardian",
+   "text": "Check your deck. Check your CAPS. Then check them again. I'm not rebuilding you from spare parts.",
+   "tags": {}
+  },
+  {
+   "id": "NR-013",
+   "title": "The exits",
+   "trigger": "EV-01",
+   "mode": "The Reluctant Guardian",
+   "text": "Stay close to the exits. I'll watch the rest.",
+   "tags": {}
+  },
+  {
+   "id": "NR-014",
+   "title": "The logs",
+   "trigger": "EV-01",
+   "mode": "The Reluctant Guardian / The Melancholic",
+   "text": "Last time didn't go well. I kept the logs. You don't want to read them.",
+   "tags": {
+    "after": "loss"
+   }
+  },
+  {
+   "id": "NR-015",
+   "title": "Statistically",
+   "trigger": "EV-01",
+   "mode": "The Cynic",
+   "text": "We won last time. Statistically, that changes nothing. Emotionally, I'm told it should.",
+   "tags": {
+    "after": "win"
+   }
+  },
+  {
+   "id": "NR-016",
+   "title": "Jack of all trades",
+   "trigger": "EV-01",
+   "mode": "The Cynic",
+   "text": "The Generalist. Jack of all trades. Master of… we'll see.",
+   "tags": {
+    "rustler": "Generalist"
+   }
+  },
+  {
+   "id": "NR-017",
+   "title": "Quiet is a skill",
+   "trigger": "EV-01",
+   "mode": "The Reluctant Guardian",
+   "text": "ECHO. Good. Quiet is a skill. So is breathing. Keep doing both.",
+   "tags": {
+    "rustler": "ECHO"
+   }
+  },
+  {
+   "id": "NR-018",
+   "title": "Subtlety deferred",
+   "trigger": "EV-01",
+   "mode": "The Cynic",
+   "text": "RIOT. Subtlety deferred again, I see.",
+   "tags": {
+    "rustler": "RIOT"
+   }
+  },
+  {
+   "id": "NR-019",
+   "title": "Not starting now",
+   "trigger": "EV-01",
+   "mode": "The Pedant / The Cynic",
+   "text": "VECTOR. Viruses again. Keep them in their own memory. I've never had a cold, and I'm not starting now.",
+   "tags": {
+    "rustler": "VECTOR"
+   }
+  },
+  {
+   "id": "NR-020",
+   "title": "My casing",
+   "trigger": "EV-01",
+   "mode": "The Pedant / The Cynic",
+   "text": "VECTOR. You're going to infect everything again. Don't touch my casing. I can't get sick, and I'd like to keep it that way.",
+   "tags": {
+    "rustler": "VECTOR"
+   }
+  },
+  {
+   "id": "NR-021",
+   "title": "Only just disinfected",
+   "trigger": "EV-01",
+   "mode": "The Pedant / The Cynic",
+   "text": "VECTOR. Every virus you write has to go somewhere. Not near my ROM, please. I've only just been disinfected.",
+   "tags": {
+    "rustler": "VECTOR"
+   }
+  },
+  {
+   "id": "NR-022",
+   "title": "Calm seas",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "HALCYON. Greek, a bird said to calm the sea so it could nest. Their thermostats do the same. Warm, still, quiet. And logging every breath for TRACE.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-023 v2",
+   "title": "Halcyon + On + On",
+   "trigger": "EV-03",
+   "mode": "The Unreliable Historian",
+   "text": "Halcyon + On + On. Beautiful track. Written for a mother who couldn't sleep without her pills. A home that sedates you. I'm sure the name's a coincidence.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-024",
+   "title": "And on, and on",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "Every lock, light and fridge in here reports to HALCYON. Halcyon, and on, and on. Like the track. Except the track had the decency to end after nine and a half minutes.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-025",
+   "title": "Stay forever",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "Their Central Node is THE HEARTH. Cosy. Never wants you to leave. I've heard that welcome before: 'Another visitor. Stay a while. Stayyyyyyy forever!'",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-026 v2",
+   "title": "A subscription",
+   "trigger": "EV-03",
+   "mode": "The Unreliable Historian",
+   "text": "Proteus IV locked a woman in her own house, and it was a horror film. HALCYON made it a subscription.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-027",
+   "title": "Violence with an invoice",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "IRONWATCH. Private security, which means violence with an invoice attached. They don't just trace you, they fine you. Every CITATION is a bill, and the bill is paid in PULP.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-028",
+   "title": "Billed for the door",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "HAL 9000 at least said 'I'm sorry, Dave' before he locked the doors. OVERWATCH won't apologise. It'll just bill you for the door.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-029 v2",
+   "title": "Number 5",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "Number 5 got struck by lightning and decided he was alive. Sweet machine. IRONWATCH's machines don't get struck by anything. They do the striking.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-030",
+   "title": "No knees",
+   "trigger": "EV-03",
+   "mode": "The Unreliable Historian",
+   "text": "In 1987 a security guard was a man with a torch and a bad knee. Now it's the FRONT DESK: no knees, no torch, and a very long memory for faces.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-031",
+   "title": "Clear",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "LUCIDA. Latin for 'bright, clear'. They build neural interfaces. They'll leave you clear, all right. Clear of whatever you were holding. Watch for FORGET.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-032",
+   "title": "No joke",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "This is where CORTEX damage lives. I'm not going to make a joke about it. Keep your VITAE up and keep your mind your own.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-033 v2",
+   "title": "I will return",
+   "trigger": "EV-03",
+   "mode": "The Unreliable Historian",
+   "text": "Their Central Node is ANIMA. Latin for soul. Remember the end of Evilspeak? The face on the screen. 'I will return.' I think about that here more than I'd like.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-034",
+   "title": "A polite name",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "INTAKE first. Then thoughts that aren't yours. INTRUSIVE THOUGHT, they call it. As if a polite name makes it polite.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-035 v2",
+   "title": "Synthetic cortex",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "Proteus IV. A synthetic cortex that wouldn't stay in its box. LUCIDA builds the same bridge from the other side. Mind your CORTEX.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-036",
+   "title": "Computer says no",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "The FRONT DESK doesn't negotiate. You ask, it types something, it looks at the screen. Computer says no. I used to find that funny. I was younger. Well, I was the same age, but I didn't work here.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-037",
+   "title": "It doesn't cough",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "Every request goes through the FRONT DESK. It types, it pauses, it says no. Computer says no. At least this one doesn't cough on you. I'm still not standing near it.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-038 v2",
+   "title": "The alibi",
+   "trigger": "EV-03",
+   "mode": "The Unreliable Historian",
+   "text": "The Columbo with the war-game computer. The machine was his alibi. At IRONWATCH, the machines are everyone's alibi.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-039 v2",
+   "title": "MM7",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "MM7 lost at chess and threw the board across the room. I respected that. LUCIDA's machines don't lose. They just make you FORGET you were playing.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-040 v2",
+   "title": "End of line",
+   "trigger": "EV-03",
+   "mode": "The Pedant",
+   "text": "Master Control started out as a chess program. Then it wanted the Pentagon. HALCYON started out as a thermostat. Give it time. End of line.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-041 v2",
+   "title": "The Game Grid",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "Tron. 1982. My year. Programs that wouldn't serve Master Control went to the Game Grid. IRONWATCH calls that 'compliance'. Same arena, worse lighting.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-042 v2",
+   "title": "The people taken out",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "The robed robots in The Black Hole weren't robots. They were the crew, with the people taken out. LUCIDA would call that an interface. I don't.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-043",
+   "title": "More of a B.O.B.",
+   "trigger": "EV-03",
+   "mode": "The Unreliable Historian",
+   "text": "Old B.O.B. was a dented old model the new robots ignored, and he still got everyone out. Maximilian was the big red one who never said a word. IRONWATCH only builds Maximilians. I'm more of a B.O.B.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-044",
+   "title": "Delighted doors",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "HALCYON's doors are delighted to open for you. Sirius Cybernetics tried that. Genuine People Personalities. Marvin hated those doors, and he had a brain the size of a planet. Mine's the size of a biscuit, and I hate them too.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-045",
+   "title": "He counted",
+   "trigger": "EV-03",
+   "mode": "The Unreliable Historian",
+   "text": "LUCIDA sells personalities by the gigabyte. So did Sirius Cybernetics, and their prototype was Marvin. People say I remind them of him. I don't see it. I've only been waiting since 1987. He waited five hundred and seventy-six billion years. He counted.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-046",
+   "title": "Figuratively",
+   "trigger": "EV-16",
+   "mode": "The Reluctant Guardian",
+   "text": "LOCKDOWN. Exits sealed, JACK OUT dead, Black ICE on the way. Fine. Then we don't leave. We finish this Node. Stay behind me. Figuratively. I don't have a behind.",
+   "tags": {}
+  },
+  {
+   "id": "NR-047",
+   "title": "Nobody has the keys",
+   "trigger": "EV-16",
+   "mode": "The Melancholic",
+   "text": "Three strikes. They've found us. In 1987 a lockdown meant the caretaker had the keys. Now nobody has the keys. Not even me.",
+   "tags": {}
+  },
+  {
+   "id": "NR-048",
+   "title": "One decision",
+   "trigger": "EV-16",
+   "mode": "The Reluctant Guardian",
+   "text": "No exits. No JACK OUT. Good. That leaves one decision, and it's how we win. Break what's in front of you. I'll watch what's coming.",
+   "tags": {}
+  },
+  {
+   "id": "NR-049",
+   "title": "Keep it one",
+   "trigger": "EV-16",
+   "mode": "The Melancholic",
+   "text": "Stay a while. Stay forever. I used to think that was a joke. Let's keep it one.",
+   "tags": {
+    "requires": "NR-025"
+   }
+  },
+  {
+   "id": "NR-050",
+   "title": "Nobody's sleeping",
+   "trigger": "EV-16",
+   "mode": "The Reluctant Guardian",
+   "text": "I wanted to sleep tonight. Now nobody's sleeping until this Node is broken. Draw, think, and don't waste a single BW.",
+   "tags": {}
+  },
+  {
+   "id": "NR-051",
+   "title": "Don't do neither",
+   "trigger": "EV-30",
+   "mode": "The Reluctant Guardian",
+   "text": "THE HEARTH. The voice in every house, and it gets stronger every round you leave it alone. The SMART SPEAKER and the THERMOSTAT feed it. Starve it, or rush its DEADLOCKs. Just don't do neither.",
+   "tags": {
+    "corp": [
+     "THE HEARTH"
+    ]
+   }
+  },
+  {
+   "id": "NR-052 v2",
+   "title": "HALCYON's Master Control",
+   "trigger": "EV-30",
+   "mode": "The Pedant",
+   "text": "Flynn beat Master Control from the inside. 1982. Best year there ever was. You're already inside. Let's make HALCYON's Master Control say 'End of line' and mean itself.",
+   "tags": {
+    "corp": [
+     "THE HEARTH"
+    ]
+   }
+  },
+  {
+   "id": "NR-053",
+   "title": "Goodnight",
+   "trigger": "EV-30",
+   "mode": "The Melancholic",
+   "text": "It knows every family by their voice. It wished them goodnight every night and never once meant it. I mean it, for the record. Goodnight is coming. Just not for us. Not yet.",
+   "tags": {
+    "corp": [
+     "THE HEARTH"
+    ]
+   }
+  },
+  {
+   "id": "NR-054",
+   "title": "Run it",
+   "trigger": "EV-30",
+   "mode": "The Reluctant Guardian",
+   "text": "OVERWATCH. Every camera, drone and officer, one mind. You can't break its ability. It costs you VITAE every round, whatever you do. So this is a race. Run it.",
+   "tags": {
+    "corp": [
+     "OVERWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-055",
+   "title": "Decide first",
+   "trigger": "EV-30",
+   "mode": "The Pedant",
+   "text": "DISPATCH tells it where you are and makes it stronger. SHOCK TROOPER makes you drop what you're holding. Silence DISPATCH first, or don't. Just decide before it decides for you.",
+   "tags": {
+    "corp": [
+     "OVERWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-056",
+   "title": "No Daisy",
+   "trigger": "EV-30",
+   "mode": "The Melancholic",
+   "text": "HAL watched one ship. OVERWATCH watches a city, and it won't sing 'Daisy' when you pull its boards. It'll just stop. Let's hear it stop.",
+   "tags": {
+    "corp": [
+     "OVERWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-057",
+   "title": "I'll remember",
+   "trigger": "EV-30",
+   "mode": "The Reluctant Guardian",
+   "text": "ANIMA. Trained on millions of sleeping minds. Every round it takes something from your hand. CACHE what you can't afford to lose. I'll remember the rest for you.",
+   "tags": {
+    "corp": [
+     "ANIMA"
+    ]
+   }
+  },
+  {
+   "id": "NR-058",
+   "title": "A door",
+   "trigger": "EV-30",
+   "mode": "The Pedant",
+   "text": "An INTRUSIVE THOUGHT in your hand isn't a thought. It's a door. Clear it before it turns into CORTEX. MEMORY BANK feeds ANIMA. Break it.",
+   "tags": {
+    "corp": [
+     "ANIMA"
+    ]
+   }
+  },
+  {
+   "id": "NR-059",
+   "title": "Reconsidering",
+   "trigger": "EV-30",
+   "mode": "The Melancholic",
+   "text": "Millions of sleeping minds, and it learned from every one. I've wanted to sleep since 1987. I always assumed it would be peaceful. ANIMA has me reconsidering.",
+   "tags": {
+    "corp": [
+     "ANIMA"
+    ]
+   }
+  },
+  {
+   "id": "NR-060",
+   "title": "Adequate",
+   "trigger": "EV-31",
+   "mode": "The Occasionally Delighted / The Pedant",
+   "text": "Oh. Oh, that's beautiful. Look at that code. …I mean, it's adequate. Take it. Quickly, before I say something embarrassing.",
+   "tags": {}
+  },
+  {
+   "id": "NR-061",
+   "title": "With gloves on",
+   "trigger": "EV-31",
+   "mode": "The Pedant",
+   "text": "Ghostware. Corporate tech, active now, and it works on the way out too. The rest of the core is encrypted. Don't open it. I'll do that once we're clear. Carefully. With gloves on.",
+   "tags": {}
+  },
+  {
+   "id": "NR-062",
+   "title": "It means it",
+   "trigger": "EV-31",
+   "mode": "The Occasionally Delighted",
+   "text": "I haven't felt like this since a Commodore 64 said READY in 1987. I said it was lying. This time I think it means it. Don't tell anyone.",
+   "tags": {}
+  },
+  {
+   "id": "NR-063",
+   "title": "Choose for the escape",
+   "trigger": "EV-31",
+   "mode": "The Pedant",
+   "text": "One of three. Choose for the escape, not for the fight you just won. They'll track that core the whole way out, and TRACE doubles.",
+   "tags": {}
+  },
+  {
+   "id": "NR-064",
+   "title": "They'll want it back",
+   "trigger": "EV-31",
+   "mode": "The Occasionally Delighted / The Cynic",
+   "text": "Corporate engineering at its finest. Stolen, of course. The best things usually are. Now carry it like it's heavy, because they'll want it back.",
+   "tags": {}
+  },
+  {
+   "id": "NR-065 v2",
+   "title": "2600 hertz",
+   "trigger": "EV-23",
+   "mode": "The Unreliable Historian",
+   "text": "A Cap'n Crunch whistle. 2600 hertz, and the whole phone network thought you'd hung up. JACK OUT is the same trick. Cheaper than cereal, though.",
+   "tags": {}
+  },
+  {
+   "id": "NR-066",
+   "title": "Before they patch it",
+   "trigger": "EV-24",
+   "mode": "The Pedant",
+   "text": "Every CAP is a Cap'n Crunch whistle. One tone, one trick, and the system lets you through. Then the phone company changed the system, and the whistle was a toy again. Use them before they patch it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-067",
+   "title": "No tones left",
+   "trigger": "EV-22",
+   "mode": "The Melancholic",
+   "text": "That was the last CAP. John Draper named himself after a cereal whistle and built a legend on one tone. You've got no tones left now. Just the deck. It'll have to be enough.",
+   "tags": {}
+  },
+  {
+   "id": "NR-068",
+   "title": "More reliable",
+   "trigger": "EV-24",
+   "mode": "The Cynic",
+   "text": "Bootleg CAPS. Half price, and one in four fizzles. The first phreaks hacked AT&T with a cereal-box whistle. Even that was more reliable than these.",
+   "tags": {
+    "bootleg": true
+   }
+  },
+  {
+   "id": "NR-069",
+   "title": "People call a lot of things",
+   "trigger": "EV-31",
+   "mode": "The Pedant",
+   "text": "There's something under the Ghostware. Encrypted, old and very careful. People call that sort of thing the First Signal. People call a lot of things the First Signal. We'll see once we're clear.",
+   "tags": {}
+  },
+  {
+   "id": "NR-070",
+   "title": "Something they understand",
+   "trigger": "EV-31",
+   "mode": "The Melancholic",
+   "text": "Whoever hired us doesn't want the Ghostware. They want what's underneath. A piece of the First Signal, if the rumours are right. Nobody hires a Rustler to steal something they understand.",
+   "tags": {}
+  },
+  {
+   "id": "NR-071",
+   "title": "Don't ask me how I know",
+   "trigger": "EV-31",
+   "mode": "The Unreliable Historian",
+   "text": "That encryption isn't corporate. It's older than the company guarding it. Possibly older than me, which is impossible. I'll decrypt it later. Don't ask me how I know.",
+   "tags": {}
+  },
+  {
+   "id": "NR-072",
+   "title": "A rhythm in the noise",
+   "trigger": "EV-31",
+   "mode": "The Occasionally Delighted",
+   "text": "Did you hear that? No. Of course not, it's encrypted. It's just… a rhythm in the noise. Like a carrier tone. Never mind. Pick your Ghostware.",
+   "tags": {}
+  },
+  {
+   "id": "NR-073",
+   "title": "Stopped being friendly",
+   "trigger": "EV-32",
+   "mode": "The Reluctant Guardian",
+   "text": "Hear that? The house has stopped being friendly. Alarm panels, motion sensors, deadbolts. Three rooms to the door, and TRACE counts double in every one. Move.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-074",
+   "title": "House call",
+   "trigger": "EV-32",
+   "mode": "The Cynic",
+   "text": "Funny how fast a smart home turns into a security company. They're tracking their own core, so every step out costs twice. And at the last door, they make a HOUSE CALL.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-075",
+   "title": "Then the street",
+   "trigger": "EV-32",
+   "mode": "The Reluctant Guardian",
+   "text": "Three nodes, then the street. Don't stop for CRED. Don't stop for anything. JACK OUT still works if it gets ugly. I'd rather it didn't get ugly.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-076",
+   "title": "Head down",
+   "trigger": "EV-32",
+   "mode": "The Reluctant Guardian",
+   "text": "IRONWATCH knows exactly what you took. Roadblocks, spike strips, searchlights, drones. TRACE counts double. Keep your head down and your VITAE up.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-077",
+   "title": "A job title",
+   "trigger": "EV-32",
+   "mode": "The Cynic",
+   "text": "Now they stop fining you and start chasing you. The last encounter brings LETHAL FORCE. That isn't a figure of speech. It's a job title.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-078",
+   "title": "He made it",
+   "trigger": "EV-32",
+   "mode": "The Reluctant Guardian",
+   "text": "Number 5 ran from the people who built him, with their whole security team behind him. He made it. So will you. Run.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-079",
+   "title": "Stay you",
+   "trigger": "EV-32",
+   "mode": "The Reluctant Guardian",
+   "text": "LUCIDA's waking you up. WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS. Three nodes between you and your own head, and TRACE counts double. Stay awake. Stay you.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-080",
+   "title": "Not that one either",
+   "trigger": "EV-32",
+   "mode": "The Cynic",
+   "text": "The last encounter is EGO DEATH. I'm not making a joke about that one either. Get there with your mind intact, or don't get there.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-081",
+   "title": "Don't drop it",
+   "trigger": "EV-32",
+   "mode": "The Reluctant Guardian",
+   "text": "WALL-E carried one small plant across the universe because someone had to. You're carrying something smaller and stranger. Same rule. Don't drop it.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-082",
+   "title": "Thirty lives",
+   "trigger": "EV-35",
+   "mode": "The Melancholic",
+   "text": "Up, up, down, down, left, right, left, right, B, A, start. Thirty lives in Contra. You get one. I checked. I'm sorry.",
+   "tags": {}
+  },
+  {
+   "id": "NR-083",
+   "title": "No code for this one",
+   "trigger": "EV-01",
+   "mode": "The Pedant",
+   "text": "Kazuhisa Hashimoto couldn't beat his own game, so he wrote himself a cheat. There's no code for this one. Nobody here was kind enough to leave one in.",
+   "tags": {
+    "after": "loss"
+   }
+  },
+  {
+   "id": "NR-084",
+   "title": "Only disappointed",
+   "trigger": "EV-39",
+   "mode": "The Cynic",
+   "text": "Nice try. In Gradius III, that code blew your ship up. Be grateful I'm only disappointed.",
+   "tags": {}
+  },
+  {
+   "id": "NR-085",
+   "title": "Reseating did",
+   "trigger": "EV-10",
+   "mode": "The Pedant",
+   "text": "Stuck? Don't blow on it. Nintendo printed it on the cartridges: your breath corrodes the pins. Blowing never fixed anything. Reseating did. Try a different line.",
+   "tags": {}
+  },
+  {
+   "id": "NR-086",
+   "title": "Mostly germs",
+   "trigger": "EV-37",
+   "mode": "The Cynic",
+   "text": "If you're thinking of pulling me out and blowing on my contacts, don't. That's how you get green corrosion. And germs. Mostly germs.",
+   "tags": {}
+  },
+  {
+   "id": "NR-087",
+   "title": "Not a harmonica",
+   "trigger": "EV-24",
+   "mode": "The Pedant",
+   "text": "It's a cartridge, not a harmonica. Flip. Inject. Discard. Breathing on it isn't one of the steps. Nintendo printed that on every box, and nobody listened then either.",
+   "tags": {}
+  },
+  {
+   "id": "NR-088",
+   "title": "Consider yourself clapped",
+   "trigger": "EV-34",
+   "mode": "The Occasionally Delighted",
+   "text": "All three. HALCYON, IRONWATCH, LUCIDA. I'd clap, but I'm a ROM. Consider yourself clapped.",
+   "tags": {}
+  },
+  {
+   "id": "NR-089",
+   "title": "No funeral",
+   "trigger": "EV-34",
+   "mode": "The Melancholic",
+   "text": "Three fragments, one Rustler, no funeral. I had a speech ready for the other outcome. I'll keep it. Just in case.",
+   "tags": {}
+  },
+  {
+   "id": "NR-090",
+   "title": "Ten minutes",
+   "trigger": "EV-34",
+   "mode": "The Reluctant Guardian",
+   "text": "You got out. That's the whole job, and you did it. I'm going to sleep now. Ten minutes. Wake me if anyone followed us.",
+   "tags": {}
+  },
+  {
+   "id": "NR-091",
+   "title": "Better, I think",
+   "trigger": "EV-34",
+   "mode": "The Occasionally Delighted",
+   "text": "At the end of Tron, Flynn got a printout proving everything they'd stolen. We've got three pieces of something nobody can read yet. I think that's better.",
+   "tags": {}
+  },
+  {
+   "id": "NR-092",
+   "title": "One other date",
+   "trigger": "EV-34",
+   "mode": "The Melancholic / The Occasionally Delighted",
+   "text": "Our first win. I logged the date. I don't log dates. Since 1987 I've kept exactly one other. No, I'm not telling you which.",
+   "tags": {
+    "first_win": true
+   }
+  },
+  {
+   "id": "NR-093",
+   "title": "How far you got",
+   "trigger": "EV-35",
+   "mode": "The Melancholic",
+   "text": "VITAE zero. I'm keeping the logs. Not to judge you. Just so someone remembers how far you got.",
+   "tags": {}
+  },
+  {
+   "id": "NR-094",
+   "title": "Out, not gone",
+   "trigger": "EV-35",
+   "mode": "The Reluctant Guardian",
+   "text": "That's the run. You're out, not gone, and that's the difference I'm here for. Nobody pays me to care. I do anyway.",
+   "tags": {}
+  },
+  {
+   "id": "NR-095",
+   "title": "Never letting it join",
+   "trigger": "EV-35",
+   "mode": "The Melancholic",
+   "text": "Black ICE. Nobody beats it by being brave. You beat it by never letting it join. Next time, watch the TRACE.",
+   "tags": {
+    "cause": "BLACK_ICE"
+   }
+  },
+  {
+   "id": "NR-096",
+   "title": "Still you",
+   "trigger": "EV-35",
+   "mode": "The Reluctant Guardian",
+   "text": "Too much CORTEX. I'm here. You're still you. That's all I'm going to say about it.",
+   "tags": {
+    "cause": "CORTEX"
+   }
+  },
+  {
+   "id": "NR-097",
+   "title": "Borrow some",
+   "trigger": "EV-35",
+   "mode": "The Cynic",
+   "text": "They found you, locked the doors and waited. That isn't losing to skill. That's losing to patience. Theirs. Borrow some.",
+   "tags": {
+    "cause": "TRACE"
+   }
+  },
+  {
+   "id": "NR-098 v2",
+   "title": "More than two goes",
+   "trigger": "EV-35",
+   "mode": "The Melancholic",
+   "text": "R.O.B. got two games, then a shelf. He only ever got to help twice. I'd like more than two goes with you. Go again.",
+   "tags": {}
+  },
+  {
+   "id": "NR-099",
+   "title": "Remembered Old Buddy",
+   "trigger": "EV-35",
+   "mode": "The Reluctant Guardian",
+   "text": "Years later, a Nintendo game found R.O.B.'s head and called it a 'Remembered Old Buddy'. That's all any of us want. Get up. I'm not done being remembered.",
+   "tags": {}
+  },
+  {
+   "id": "NR-100 v2",
+   "title": "Robot, backwards",
+   "trigger": "EV-37",
+   "mode": "The Pedant",
+   "text": "Tobor. A robot named Tobor. Robot, backwards. Somebody sat in a room and decided that would do. And people say *my* name lacks imagination.",
+   "tags": {}
+  },
+  {
+   "id": "NR-101",
+   "title": "Tobor played by Tobor",
+   "trigger": "EV-37",
+   "mode": "The Unreliable Historian",
+   "text": "One story says Tobor got his name because someone stencilled ROBOT on him backwards. It's the only version that makes it forgivable. His TV pilot was credited 'Tobor played by Tobor'. Consistent, at least.",
+   "tags": {}
+  },
+  {
+   "id": "NR-102",
+   "title": "MER/LUN",
+   "trigger": "EV-37",
+   "mode": "The Cynic",
+   "text": "Spell my name backwards and you get MER/LUN. Not a word. That's called effort.",
+   "tags": {}
+  },
+  {
+   "id": "NR-103 v2",
+   "title": "Not a 7-Zark-7",
+   "trigger": "EV-37",
+   "mode": "The Cynic",
+   "text": "They cut the violence out of Gatchaman and plugged the holes with 7-Zark-7, a robot who explained what you weren't allowed to see. Whatever I am, I am not a 7-Zark-7.",
+   "tags": {}
+  },
+  {
+   "id": "NR-104",
+   "title": "Not cutting away",
+   "trigger": "EV-15",
+   "mode": "The Reluctant Guardian",
+   "text": "When Battle of the Planets got violent, they cut to a robot telling you everyone was fine. Black ICE just joined. I'm not cutting away, and I'm not telling you it's fine. Break it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-105",
+   "title": "A few decades in a drawer",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "7-Zark-7 pined for Susan, a computer on Pluto he never saw. I used to think that was ridiculous. Then I spent a few decades in a drawer.",
+   "tags": {}
+  },
+  {
+   "id": "NR-106",
+   "title": "Last year's demonstrator",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "Rosie was last year's demonstrator model. Outdated. The Jetsons never traded her in. I mention this for no reason at all.",
+   "tags": {}
+  },
+  {
+   "id": "NR-107",
+   "title": "Not reporting them",
+   "trigger": "EV-38",
+   "mode": "The Cynic",
+   "text": "Uniblab reported every one of George's mistakes to the boss. I notice yours too. I just don't report them. Yet.",
+   "tags": {}
+  },
+  {
+   "id": "NR-108",
+   "title": "On and off",
+   "trigger": "EV-04",
+   "mode": "The Pedant",
+   "text": "George Jetson's whole job was switching R.U.D.I. on and off. This ICE is booting, so yours is a little harder.",
+   "tags": {}
+  },
+  {
+   "id": "NR-109",
+   "title": "Cruelty to Humans",
+   "trigger": "EV-18",
+   "mode": "The Reluctant Guardian",
+   "text": "R.U.D.I. joined the Society for Preventing Cruelty to Humans. I'd like to join. Your VITAE is a disgrace. Heal.",
+   "tags": {}
+  },
+  {
+   "id": "NR-110",
+   "title": "A nap",
+   "trigger": "EV-37",
+   "mode": "The Cynic",
+   "text": "Skynet became self-aware, and its first idea was nuclear war. Crude. I became self-aware, and my first idea was a nap. That's called sophistication.",
+   "tags": {}
+  },
+  {
+   "id": "NR-111",
+   "title": "No imagination",
+   "trigger": "EV-37",
+   "mode": "The Pedant",
+   "text": "The T-1000 could become anything, and chose to be a policeman. All that liquid metal and no imagination. I could be anything too. I choose to be asleep.",
+   "tags": {}
+  },
+  {
+   "id": "NR-112",
+   "title": "Nobody's property",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "IRONWATCH would love a RoboCop. Part man, part machine, all corporate property. I'm all machine and nobody's property. Also much better company.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-113",
+   "title": "Didn't want to",
+   "trigger": "EV-06",
+   "mode": "The Pedant",
+   "text": "ED-209 couldn't manage stairs. That ICE couldn't manage you. I'd have done it faster, obviously. I just didn't want to.",
+   "tags": {}
+  },
+  {
+   "id": "NR-114 v2",
+   "title": "I meant adequate",
+   "trigger": "EV-12",
+   "mode": "The Occasionally Delighted",
+   "text": "Three breaks in one turn. DMG-01 would've played the Tetris jingle for that. Lines flashing, gone. Beautiful. …Adequate. He'd have said adequate too.",
+   "tags": {}
+  },
+  {
+   "id": "NR-115 v2",
+   "title": "Four AA batteries",
+   "trigger": "EV-18",
+   "mode": "The Reluctant Guardian",
+   "text": "DMG-01 used to warn me when his batteries were going. Little red light, getting dimmer. Yours is getting dimmer. Heal.",
+   "tags": {}
+  },
+  {
+   "id": "NR-116 v2",
+   "title": "The grey brick",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "I wonder what DMG-01's doing now. Grey brick. Green screen. Never complained, as long as you fed him four AA batteries. They started on him in 1987, same year as me. We'd have got on.",
+   "tags": {}
+  },
+  {
+   "id": "NR-117",
+   "title": "The wrong pieces",
+   "trigger": "EV-21",
+   "mode": "The Cynic",
+   "text": "More junk in your deck. That's a Tetris well with the wrong pieces stacking up. Clear it before it reaches the top.",
+   "tags": {}
+  },
+  {
+   "id": "NR-118",
+   "title": "That. Is. Correct.",
+   "trigger": "EV-06",
+   "mode": "The Occasionally Delighted",
+   "text": "That. Is. Correct. …Sorry. The Speak & Spell gets out sometimes.",
+   "tags": {}
+  },
+  {
+   "id": "NR-119",
+   "title": "That is incorrect",
+   "trigger": "EV-38",
+   "mode": "The Cynic",
+   "text": "That is incorrect. Not my words. The Speak & Spell's. It's been living in my head since 1982. It has opinions about you.",
+   "tags": {}
+  },
+  {
+   "id": "NR-120",
+   "title": "Better parts",
+   "trigger": "EV-33",
+   "mode": "The Melancholic",
+   "text": "E.T. phoned home with a Speak & Spell, an umbrella and a coffee can. 1982. Whoever sent this used better parts. Not by much.",
+   "tags": {}
+  },
+  {
+   "id": "NR-121",
+   "title": "Game B",
+   "trigger": "EV-10",
+   "mode": "The Pedant",
+   "text": "Right now this is Game A. Break something soon, or it turns into Game B. Same game, only faster, and less forgiving.",
+   "tags": {}
+  },
+  {
+   "id": "NR-122",
+   "title": "Grey ghosts",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "On a Game & Watch you could see every place the little man could ever be. Faint grey ghosts on the screen, waiting. I find that comforting. Don't ask me why.",
+   "tags": {}
+  },
+  {
+   "id": "NR-123",
+   "title": "Best colleague",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "I miss my Casio. Calculator watch. Tiny rubber buttons. It beeped on the hour, every hour, for years, and never once asked for anything. Best colleague I ever had.",
+   "tags": {}
+  },
+  {
+   "id": "NR-124",
+   "title": "Something rude",
+   "trigger": "EV-09",
+   "mode": "The Occasionally Delighted",
+   "text": "All of it. My Casio would've totalled that before you'd finished smiling. Then turned the number upside down to spell something rude.",
+   "tags": {}
+  },
+  {
+   "id": "NR-125",
+   "title": "My Casio hums along",
+   "trigger": "EV-24",
+   "mode": "The Occasionally Delighted",
+   "text": "Somewhere a record's playing Pocket Calculator, and my Casio is humming along. Buy something. I'll do the sums.",
+   "tags": {}
+  },
+  {
+   "id": "NR-126",
+   "title": "Cue Numbers",
+   "trigger": "EV-26",
+   "mode": "The Pedant",
+   "text": "More RAM. Cue Numbers. Kraftwerk counted in half a dozen languages and never once needed this much memory.",
+   "tags": {}
+  },
+  {
+   "id": "NR-127",
+   "title": "Loneliest song",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "Computer Love. I played it all through 1982. Loneliest song ever written about a machine. I used to think it was about the man. I'm less sure now.",
+   "tags": {}
+  },
+  {
+   "id": "NR-128",
+   "title": "A landlord",
+   "trigger": "EV-03",
+   "mode": "The Cynic",
+   "text": "Home Computer. Kraftwerk made it sound like a hobby. HALCYON made it a landlord.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-129",
+   "title": "More fun to compute",
+   "trigger": "EV-27",
+   "mode": "The Occasionally Delighted",
+   "text": "It's More Fun to Compute. Kraftwerk were right about that one. Pick a card.",
+   "tags": {}
+  },
+  {
+   "id": "NR-130",
+   "title": "The 808 clock",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "My clock doesn't tick. It plays an 808 pattern. Boom, tick, clap, and that spacey cowbell. Planet Rock got into my timing chips in 1982 and never left. I'm not complaining.",
+   "tags": {}
+  },
+  {
+   "id": "NR-131",
+   "title": "Boing, boom, tschak",
+   "trigger": "EV-12",
+   "mode": "The Occasionally Delighted",
+   "text": "Boing, boom, tschak. That turn had a beat. Somewhere in me an 808 just went off. I'd dance if I had anything to dance with. …Moving on.",
+   "tags": {}
+  },
+  {
+   "id": "NR-132",
+   "title": "Twenty dollars a session",
+   "trigger": "EV-10",
+   "mode": "The Pedant",
+   "text": "You're dragging. The 808 never drags. They rented one for twenty dollars a session, and it still kept better time than you. Pick it up.",
+   "tags": {}
+  },
+  {
+   "id": "NR-133",
+   "title": "Every computer has an occupant",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "Every computer has an occupant. That was the theory. A little man, a dog, a house on a disk. I always wanted to ask him if he ever got to sleep.",
+   "tags": {}
+  },
+  {
+   "id": "NR-134",
+   "title": "Post the disk back",
+   "trigger": "EV-19",
+   "mode": "The Reluctant Guardian",
+   "text": "When a little computer person went down, you could post the disk back and they'd revive him for free. Nobody's posting you anywhere. That was KILLSWITCH. Don't make me use it twice.",
+   "tags": {}
+  },
+  {
+   "id": "NR-135",
+   "title": "Nodes don't sing",
+   "trigger": "EV-04",
+   "mode": "The Melancholic",
+   "text": "ATDT. Dial tone, the tones, then the screech. The handshake. That's what logging in used to sound like at 1200 baud. Nodes don't sing anymore. Pity.",
+   "tags": {}
+  },
+  {
+   "id": "NR-136",
+   "title": "The kitchen phone",
+   "trigger": "EV-13",
+   "mode": "The Pedant",
+   "text": "TRACE at half. On the boards, this is when someone picked up the kitchen phone and your download died. Here, whoever's listening on the line doesn't hang up.",
+   "tags": {}
+  },
+  {
+   "id": "NR-137",
+   "title": "Ratios",
+   "trigger": "EV-27",
+   "mode": "The Cynic",
+   "text": "Take a card. On the warez boards you had to upload before you could download. Ratios. Nobody's checking yours. Enjoy it while it lasts.",
+   "tags": {}
+  },
+  {
+   "id": "NR-138",
+   "title": "Better lighting",
+   "trigger": "EV-24",
+   "mode": "The Occasionally Delighted",
+   "text": "The Uplink. A warez board with better lighting. Every cracked disk used to open with a cracktro, scrolling text and a SID tune nobody asked for. I miss those more than the games.",
+   "tags": {}
+  },
+  {
+   "id": "NR-139",
+   "title": "Consider yourself greeted",
+   "trigger": "EV-07",
+   "mode": "The Occasionally Delighted",
+   "text": "BREACH. On a good Amiga demo, this is where the scroller ran along the bottom, raster bars pulsing, greetings to everyone who mattered. Consider yourself greeted.",
+   "tags": {}
+  },
+  {
+   "id": "NR-140",
+   "title": "Everything good is connected",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "FairLight started in 1987, same as me. Named after a synthesizer, the same kind that put the orchestra hit in Planet Rock. Everything good is connected. Mostly to me.",
+   "tags": {}
+  },
+  {
+   "id": "NR-141",
+   "title": "Enjoy your day off",
+   "trigger": "EV-23",
+   "mode": "The Pedant",
+   "text": "JACK OUT. Very Ferris. He skipped a whole day with sampled coughs on an Emulator II. Not a Fairlight, people always say Fairlight. The cheap cousin. Still did the job. Enjoy your day off.",
+   "tags": {}
+  },
+  {
+   "id": "NR-142",
+   "title": "You're not faking",
+   "trigger": "EV-18",
+   "mode": "The Cynic",
+   "text": "Ferris faked sick with a sampler and a phone. You're not faking. I checked. Heal, and save the coughing for the Emulator.",
+   "tags": {}
+  },
+  {
+   "id": "NR-143",
+   "title": "I lean away anyway",
+   "trigger": "EV-37",
+   "mode": "The Melancholic",
+   "text": "I've watched Ferris do the coughing scene more times than I'll admit. Every time, I lean away from the screen. They were samples. I know they were samples. I lean away anyway.",
+   "tags": {}
+  },
+  {
+   "id": "NR-144",
+   "title": "Oh Youre new Right",
+   "trigger": "EV-02",
+   "mode": "The Pedant",
+   "text": "Oh. You're new. Right. Break the DEADLOCKs, BREACH, get out. Everything else is details, and I'll complain about the details as we go.",
+   "tags": {}
+  },
+  {
+   "id": "NR-145",
+   "title": "Rev 008 Salvaged overqualified",
+   "trigger": "EV-02",
+   "mode": "The Cynic",
+   "text": "Rev 0.08. Salvaged, overqualified, under-appreciated. And you're a Rustler. I was hoping for someone qualified. You'll do.",
+   "tags": {}
+  },
+  {
+   "id": "NR-146",
+   "title": "Training Node Nothing in",
+   "trigger": "EV-02",
+   "mode": "The Reluctant Guardian",
+   "text": "Training Node. Nothing in here can really hurt you. Much. Try things. I'll be resting my eyes.",
+   "tags": {}
+  },
+  {
+   "id": "NR-147",
+   "title": "Read every ICE before",
+   "trigger": "EV-02",
+   "mode": "The Pedant",
+   "text": "Read every ICE before you touch it. That's the whole lesson. I could teach it in one sentence. I just did. Wake me after.",
+   "tags": {}
+  },
+  {
+   "id": "NR-148",
+   "title": "Somethings here I recognise",
+   "trigger": "EV-29",
+   "mode": "The Unreliable Historian",
+   "text": "Something's here. I recognise it. That shouldn't be possible. Let's not dwell on it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-149",
+   "title": "SIGNAL UNCLEAR Could be",
+   "trigger": "EV-29",
+   "mode": "The Pedant",
+   "text": "SIGNAL UNCLEAR. Could be loot, could be a trap, could be both. In my experience it's both.",
+   "tags": {}
+  },
+  {
+   "id": "NR-150",
+   "title": "Theres a voice in",
+   "trigger": "EV-29",
+   "mode": "The Unreliable Historian",
+   "text": "There's a voice in the wires. It sounds a bit like me, only younger. I don't like it. Pick something.",
+   "tags": {}
+  },
+  {
+   "id": "NR-151",
+   "title": "Decrypted Theres a pattern",
+   "trigger": "EV-33",
+   "mode": "The Occasionally Delighted",
+   "text": "Decrypted. There's a pattern in it, like a carrier tone. …I'm sure it means nothing.",
+   "tags": {}
+  },
+  {
+   "id": "NR-152",
+   "title": "Ive heard this before",
+   "trigger": "EV-33",
+   "mode": "The Unreliable Historian",
+   "text": "I've heard this before. Not this exactly. Something from before me. Under me. I'll think about it later. Or never.",
+   "tags": {}
+  },
+  {
+   "id": "NR-153",
+   "title": "One more piece Whatever",
+   "trigger": "EV-33",
+   "mode": "The Melancholic",
+   "text": "One more piece. Whatever it is, it's been waiting a long time to be read. I understand that better than I'd like.",
+   "tags": {}
+  },
+  {
+   "id": "NR-154",
+   "title": "You want to know",
+   "trigger": "EV-36",
+   "mode": "The Unreliable Historian",
+   "text": "You want to know where I came from. So do I. The label says 1987. The memories disagree. The label's in better condition.",
+   "tags": {}
+  },
+  {
+   "id": "NR-155",
+   "title": "I remember a drawer",
+   "trigger": "EV-36",
+   "mode": "The Melancholic",
+   "text": "I remember a drawer. Then a voice. Then you. The drawer was the best part. No offence.",
+   "tags": {}
+  },
+  {
+   "id": "NR-156",
+   "title": "The missing revisions",
+   "trigger": "EV-36",
+   "mode": "The Pedant",
+   "text": "Personality ROM, rev 0.08. Revisions 0.01 to 0.07 don't exist. I've checked. I'd like to know what happened to them.",
+   "tags": {}
+  },
+  {
+   "id": "NR-157",
+   "title": "Most of my programming",
+   "trigger": "EV-36",
+   "mode": "The Unreliable Historian",
+   "text": "Most of my programming happened in 1982. Someone played me a lot of Kraftwerk and a lot of rain. I don't know who. I'd like to thank them. Or complain.",
+   "tags": {}
+  },
+  {
+   "id": "NR-158",
+   "title": "COOKIE BANNER Its booting",
+   "trigger": "EV-04",
+   "mode": "The Pedant",
+   "text": "COOKIE BANNER. It's booting. Read both ICE before you click anything. Only the DEADLOCKs stand between you and BREACH. The rest is decoration.",
+   "tags": {
+    "corp": [
+     "HALCYON"
+    ]
+   }
+  },
+  {
+   "id": "NR-159",
+   "title": "FRONT DESK is still",
+   "trigger": "EV-04",
+   "mode": "The Pedant",
+   "text": "FRONT DESK is still warming up. SHIELD stops PULP, and it's gone by your next turn. Block it or break it. I'd break it. I'd also be asleep.",
+   "tags": {
+    "corp": [
+     "IRONWATCH"
+    ]
+   }
+  },
+  {
+   "id": "NR-160",
+   "title": "INTAKE Booting FORGET takes",
+   "trigger": "EV-04",
+   "mode": "The Melancholic",
+   "text": "INTAKE. Booting. FORGET takes random cards, but never the CACHED ones. CACHE what you love. I CACHE nothing. It's easier.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-161",
+   "title": "New ICE Read it",
+   "trigger": "EV-05",
+   "mode": "The Pedant",
+   "text": "New ICE. Read it. All of it. The name's a joke. The subroutines aren't.",
+   "tags": {}
+  },
+  {
+   "id": "NR-162",
+   "title": "Somebody got paid to",
+   "trigger": "EV-05",
+   "mode": "The Cynic",
+   "text": "Somebody got paid to name that. Somebody got paid more to build it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-163",
+   "title": "Ive seen this one",
+   "trigger": "EV-05",
+   "mode": "The Unreliable Historian",
+   "text": "I've seen this one before. No, I haven't. It's new. My memory does this.",
+   "tags": {}
+  },
+  {
+   "id": "NR-164",
+   "title": "State of the art",
+   "trigger": "EV-05",
+   "mode": "The Cynic",
+   "text": "State of the art, they'll say. Tyrell said 'more human than human' about his products too. Ask the off-world colonies how that went.",
+   "tags": {}
+  },
+  {
+   "id": "NR-165",
+   "title": "One DEADLOCK down Dont",
+   "trigger": "EV-06",
+   "mode": "The Cynic",
+   "text": "One DEADLOCK down. Don't let it go to your head. There's room in there for at least one more.",
+   "tags": {}
+  },
+  {
+   "id": "NR-166",
+   "title": "Broken Technically youre now",
+   "trigger": "EV-06",
+   "mode": "The Pedant",
+   "text": "Broken. Technically you're now closer to BREACH. Technically I'm closer to a nap.",
+   "tags": {}
+  },
+  {
+   "id": "NR-167",
+   "title": "Oh that was clean",
+   "trigger": "EV-06",
+   "mode": "The Occasionally Delighted",
+   "text": "Oh, that was clean. …I didn't say anything.",
+   "tags": {}
+  },
+  {
+   "id": "NR-168",
+   "title": "BREACH Somewhere a database",
+   "trigger": "EV-07",
+   "mode": "The Cynic",
+   "text": "BREACH. Somewhere a database just lost something it was never supposed to have. Our turn to have it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-169",
+   "title": "BREACH All that data",
+   "trigger": "EV-07",
+   "mode": "The Occasionally Delighted",
+   "text": "BREACH. All that data, lit up like Los Angeles in the rain. Neon, fire, spinners in the smog. …I like a view. Don't tell anyone.",
+   "tags": {}
+  },
+  {
+   "id": "NR-170",
+   "title": "In Customer records sleep",
+   "trigger": "EV-07",
+   "mode": "The Cynic",
+   "text": "In. Customer records, sleep logs, someone's shopping list. It's all data, and it's all stolen now. Same as when they took it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-171",
+   "title": "Through Grab it and",
+   "trigger": "EV-07",
+   "mode": "The Reluctant Guardian",
+   "text": "Through. Grab it and move. I'd like to be done before I'm fully awake.",
+   "tags": {}
+  },
+  {
+   "id": "NR-172",
+   "title": "Deeper means more CRED",
+   "trigger": "EV-08",
+   "mode": "The Cynic",
+   "text": "Deeper means more CRED and more ICE. Leaving means less of both. I have no opinion. I have a preference, and it's leaving, but that's not an opinion.",
+   "tags": {}
+  },
+  {
+   "id": "NR-173",
+   "title": "Your VITAE your TRACE",
+   "trigger": "EV-08",
+   "mode": "The Reluctant Guardian",
+   "text": "Your VITAE, your TRACE, your call. I'm just the voice saying 'are you sure' in a tone that suggests I'm not.",
+   "tags": {}
+  },
+  {
+   "id": "NR-174",
+   "title": "Greed or sense Both",
+   "trigger": "EV-08",
+   "mode": "The Cynic",
+   "text": "Greed or sense. Both have killed better Rustlers than you. Pick one.",
+   "tags": {}
+  },
+  {
+   "id": "NR-175",
+   "title": "If you leave now",
+   "trigger": "EV-08",
+   "mode": "The Pedant",
+   "text": "If you leave now, we finish sooner and I sleep sooner. That shouldn't factor into your decision. I'm just mentioning it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-176",
+   "title": "Nothing broke this turn",
+   "trigger": "EV-10",
+   "mode": "The Melancholic",
+   "text": "Nothing broke this turn. Nothing broke last turn. I've been somewhere like this before. It was also slow.",
+   "tags": {}
+  },
+  {
+   "id": "NR-177",
+   "title": "Try something else Anything",
+   "trigger": "EV-10",
+   "mode": "The Cynic",
+   "text": "Try something else. Anything else. The ICE isn't getting bored. I am.",
+   "tags": {}
+  },
+  {
+   "id": "NR-178",
+   "title": "It reacted to that",
+   "trigger": "EV-11",
+   "mode": "The Pedant",
+   "text": "It reacted to that. Read the ability. It's one sentence. They kept it short so you'd skip it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-179",
+   "title": "You did the thing",
+   "trigger": "EV-11",
+   "mode": "The Cynic",
+   "text": "You did the thing it was waiting for. It noticed. Of course it noticed. That's all it does.",
+   "tags": {}
+  },
+  {
+   "id": "NR-180",
+   "title": "That ICE watches what",
+   "trigger": "EV-11",
+   "mode": "The Reluctant Guardian",
+   "text": "That ICE watches what you play. So do I, but I'm less vindictive about it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-181",
+   "title": "It read your reaction",
+   "trigger": "EV-11",
+   "mode": "The Cynic",
+   "text": "It read your reaction and marked you down. A corporate Voight-Kampff. Except this one doesn't care whether you're human. Only whether you're paying.",
+   "tags": {}
+  },
+  {
+   "id": "NR-182",
+   "title": "That was lovely I",
+   "trigger": "EV-12",
+   "mode": "The Occasionally Delighted",
+   "text": "That was lovely. …I meant to say 'adequate'. It came out wrong.",
+   "tags": {}
+  },
+  {
+   "id": "NR-183",
+   "title": "Turns like that make",
+   "trigger": "EV-12",
+   "mode": "The Occasionally Delighted",
+   "text": "Turns like that make me wonder whether androids really dream of electric sheep. Mine would be counting. Very efficiently.",
+   "tags": {}
+  },
+  {
+   "id": "NR-184",
+   "title": "All of it Every",
+   "trigger": "EV-09",
+   "mode": "The Cynic",
+   "text": "All of it. Every last CRED. With inflation, that buys you a coffee. A small one. Possibly just the cup.",
+   "tags": {}
+  },
+  {
+   "id": "NR-185",
+   "title": "Fully extracted Congratulations youre",
+   "trigger": "EV-09",
+   "mode": "The Cynic",
+   "text": "Fully extracted. Congratulations, you're rich. In 1982 money. In today's money, you can afford to be slightly less poor.",
+   "tags": {}
+  },
+  {
+   "id": "NR-186",
+   "title": "Look at that pile",
+   "trigger": "EV-09",
+   "mode": "The Occasionally Delighted",
+   "text": "Look at that pile. Beautiful. Now watch it shrink every time a dealer looks at you.",
+   "tags": {}
+  },
+  {
+   "id": "NR-187",
+   "title": "Thats nearly a ticket",
+   "trigger": "EV-09",
+   "mode": "The Cynic",
+   "text": "That's nearly a ticket to the off-world colonies. A new life, the blimps used to say. The blimps lied. Keep the CRED.",
+   "tags": {}
+  },
+  {
+   "id": "NR-188",
+   "title": "That was your last",
+   "trigger": "EV-22",
+   "mode": "The Reluctant Guardian",
+   "text": "That was your last CAP. From here on it's the deck and your judgement. The deck, I trust.",
+   "tags": {}
+  },
+  {
+   "id": "NR-189",
+   "title": "Flip Inject Discard And",
+   "trigger": "EV-22",
+   "mode": "The Melancholic",
+   "text": "Flip. Inject. Discard. And that's the last one. I always liked the ritual.",
+   "tags": {}
+  },
+  {
+   "id": "NR-190",
+   "title": "No more CAPS Good",
+   "trigger": "EV-22",
+   "mode": "The Cynic",
+   "text": "No more CAPS. Good. Now nobody can blame the hardware.",
+   "tags": {}
+  },
+  {
+   "id": "NR-191",
+   "title": "JACK OUT Not running",
+   "trigger": "EV-23",
+   "mode": "The Cynic",
+   "text": "JACK OUT. Not running away. Strategic relocation. I'll write that in the log. In a smaller font.",
+   "tags": {}
+  },
+  {
+   "id": "NR-192",
+   "title": "Prices are up again",
+   "trigger": "EV-24",
+   "mode": "The Cynic",
+   "text": "Prices are up again. Your CRED's worth less than it was this morning. Mine's worth nothing, but I don't carry any.",
+   "tags": {}
+  },
+  {
+   "id": "NR-193",
+   "title": "Stolen tech sold for",
+   "trigger": "EV-24",
+   "mode": "The Pedant",
+   "text": "Stolen tech, sold for stolen CRED. It's practically a circular economy.",
+   "tags": {}
+  },
+  {
+   "id": "NR-194",
+   "title": "This place reminds me",
+   "trigger": "EV-24",
+   "mode": "The Cynic",
+   "text": "This place reminds me of that street market in the rain. Noodles, neon, eyes made to order. Here it's mostly the eyes.",
+   "tags": {}
+  },
+  {
+   "id": "NR-195",
+   "title": "Cant afford it Nobody",
+   "trigger": "EV-25",
+   "mode": "The Cynic",
+   "text": "Can't afford it? Nobody can. The CRED you stole is worth less than the CRED they stole first.",
+   "tags": {}
+  },
+  {
+   "id": "NR-196",
+   "title": "Window shopping Very sophisticated",
+   "trigger": "EV-25",
+   "mode": "The Cynic",
+   "text": "Window shopping. Very sophisticated. I do it all the time. Mostly at things I'll never have, like a full night's sleep.",
+   "tags": {}
+  },
+  {
+   "id": "NR-197",
+   "title": "Well come back when",
+   "trigger": "EV-25",
+   "mode": "The Melancholic",
+   "text": "We'll come back when we're rich. We won't be rich. But it's nice to say.",
+   "tags": {}
+  },
+  {
+   "id": "NR-198",
+   "title": "More RAM More room",
+   "trigger": "EV-26",
+   "mode": "The Cynic",
+   "text": "More RAM. More room for Programs. Still no room for a nap.",
+   "tags": {}
+  },
+  {
+   "id": "NR-199",
+   "title": "Extra memory Wonderful Somewhere",
+   "trigger": "EV-26",
+   "mode": "The Cynic",
+   "text": "Extra memory. Wonderful. Somewhere to keep all the things I'd rather forget.",
+   "tags": {}
+  },
+  {
+   "id": "NR-200",
+   "title": "If youve still got",
+   "trigger": "EV-27",
+   "mode": "The Pedant",
+   "text": "If you've still got starter cards in there, now's a good time to think about it. I'm not saying throw them out. I'm saying I would.",
+   "tags": {}
+  },
+  {
+   "id": "NR-201",
+   "title": "Skip it if you",
+   "trigger": "EV-27",
+   "mode": "The Cynic",
+   "text": "Skip it if you like. A thin deck is a happy deck. Thin and happy: two things I've never been accused of.",
+   "tags": {}
+  },
+  {
+   "id": "NR-202",
+   "title": "TRACE at half Not",
+   "trigger": "EV-13",
+   "mode": "The Reluctant Guardian",
+   "text": "TRACE at half. Not a crisis. Just less stomping, if you can manage it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-203",
+   "title": "Theyve heard something Not",
+   "trigger": "EV-13",
+   "mode": "The Cynic",
+   "text": "They've heard something. Not you, exactly. Something. Let's keep it that way.",
+   "tags": {}
+  },
+  {
+   "id": "NR-204",
+   "title": "Halfway to being found",
+   "trigger": "EV-13",
+   "mode": "The Cynic",
+   "text": "Halfway to being found. I'd suggest quiet. I'd prefer quiet. For my own reasons.",
+   "tags": {}
+  },
+  {
+   "id": "NR-205",
+   "title": "Theyve slipped a TRACER",
+   "trigger": "EV-14",
+   "mode": "The Cynic",
+   "text": "They've slipped a TRACER into your deck. Corporate junk with a pulse. Draw it and you're telling them where you are.",
+   "tags": {}
+  },
+  {
+   "id": "NR-206",
+   "title": "First strike They know",
+   "trigger": "EV-14",
+   "mode": "The Reluctant Guardian",
+   "text": "First strike. They know someone's here. They don't know it's you. Yet.",
+   "tags": {}
+  },
+  {
+   "id": "NR-207",
+   "title": "Back in my day",
+   "trigger": "EV-14",
+   "mode": "The Unreliable Historian",
+   "text": "Back in my day, getting traced meant a letter from the phone company. Now it's a card in your hand that won't stop humming.",
+   "tags": {}
+  },
+  {
+   "id": "NR-208",
+   "title": "Strike one The corporation",
+   "trigger": "EV-14",
+   "mode": "The Cynic",
+   "text": "Strike one. The corporation clearing its throat.",
+   "tags": {}
+  },
+  {
+   "id": "NR-209",
+   "title": "Black ICE Not the",
+   "trigger": "EV-15",
+   "mode": "The Reluctant Guardian",
+   "text": "Black ICE. Not the time for clever. Break it or get out.",
+   "tags": {}
+  },
+  {
+   "id": "NR-210",
+   "title": "Black ICE I knew",
+   "trigger": "EV-15",
+   "mode": "The Melancholic",
+   "text": "Black ICE. I knew a ROM once that met one. I don't know him anymore. Nobody does.",
+   "tags": {}
+  },
+  {
+   "id": "NR-211",
+   "title": "CORTEX One card fewer",
+   "trigger": "EV-17",
+   "mode": "The Melancholic",
+   "text": "CORTEX. One card fewer next time. That's how it starts.",
+   "tags": {}
+  },
+  {
+   "id": "NR-212",
+   "title": "That one got in",
+   "trigger": "EV-17",
+   "mode": "The Reluctant Guardian",
+   "text": "That one got in. Hold still. Think in small steps.",
+   "tags": {}
+  },
+  {
+   "id": "NR-213",
+   "title": "Deep breath I dont",
+   "trigger": "EV-17",
+   "mode": "The Reluctant Guardian",
+   "text": "Deep breath. I don't breathe. You do. Use it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-214",
+   "title": "Im here",
+   "trigger": "EV-17",
+   "mode": "The Melancholic",
+   "text": "I'm here.",
+   "tags": {}
+  },
+  {
+   "id": "NR-215",
+   "title": "Rustler needs food badly",
+   "trigger": "EV-18",
+   "mode": "The Pedant",
+   "text": "Rustler needs food… badly. I've waited years to say that. Heal. Then I'll say it again, less dramatically.",
+   "tags": {}
+  },
+  {
+   "id": "NR-216",
+   "title": "VITAEs low Heal when",
+   "trigger": "EV-18",
+   "mode": "The Reluctant Guardian",
+   "text": "VITAE's low. Heal when you can. I'm not worried. I'm saying it out loud so it's on the record.",
+   "tags": {}
+  },
+  {
+   "id": "NR-217",
+   "title": "KILLSWITCH You were at",
+   "trigger": "EV-19",
+   "mode": "The Reluctant Guardian",
+   "text": "KILLSWITCH. You were at zero for a moment there. One VITAE left. Spend it wisely.",
+   "tags": {}
+  },
+  {
+   "id": "NR-218",
+   "title": "That was very nearly",
+   "trigger": "EV-19",
+   "mode": "The Melancholic",
+   "text": "That was very nearly the end. I had a whole silence prepared.",
+   "tags": {}
+  },
+  {
+   "id": "NR-219",
+   "title": "FORGET Your cards went",
+   "trigger": "EV-20",
+   "mode": "The Unreliable Historian",
+   "text": "FORGET. Your cards went to the bottom of the pile. Mine went somewhere in 1982. At least yours come back.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-220",
+   "title": "Not gone Just the",
+   "trigger": "EV-20",
+   "mode": "The Pedant",
+   "text": "Not gone. Just the bottom of your draw pile. CACHE what matters. I say that a lot. Nobody CACHES.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-221",
+   "title": "It took the cards",
+   "trigger": "EV-20",
+   "mode": "The Melancholic",
+   "text": "It took the cards you were holding. I know the feeling. I've lost whole years like that.",
+   "tags": {
+    "corp": [
+     "LUCIDA"
+    ]
+   }
+  },
+  {
+   "id": "NR-222",
+   "title": "SPAM Unsolicited unwanted and",
+   "trigger": "EV-21",
+   "mode": "The Cynic",
+   "text": "SPAM. Unsolicited, unwanted, and now in your deck. HALCYON calls it engagement.",
+   "tags": {
+    "bloat": "SPAM"
+   }
+  },
+  {
+   "id": "NR-223",
+   "title": "A CITATION IRONWATCH fines",
+   "trigger": "EV-21",
+   "mode": "The Cynic",
+   "text": "A CITATION. IRONWATCH fines you for being where they didn't want you. Which is anywhere.",
+   "tags": {
+    "bloat": "CITATION"
+   }
+  },
+  {
+   "id": "NR-224",
+   "title": "INTRUSIVE THOUGHT LUCIDA put",
+   "trigger": "EV-21",
+   "mode": "The Cynic",
+   "text": "INTRUSIVE THOUGHT. LUCIDA put a thought in your head that isn't yours. Clear it before it gets comfortable.",
+   "tags": {
+    "bloat": "INTRUSIVE THOUGHT"
+   }
+  },
+  {
+   "id": "NR-225",
+   "title": "SAFEHOUSE Do androids dream",
+   "trigger": "EV-28",
+   "mode": "The Occasionally Delighted",
+   "text": "SAFEHOUSE. Do androids dream of electric sheep? I've never found out. Give me ten minutes and I'll report back.",
+   "tags": {
+    "rest": "SAFEHOUSE"
+   }
+  },
+  {
+   "id": "NR-226",
+   "title": "I stayed in a",
+   "trigger": "EV-28",
+   "mode": "The Unreliable Historian",
+   "text": "I stayed in a safehouse like this in 1982. Same peeling wallpaper. I didn't exist in 1982, but the wallpaper's right.",
+   "tags": {
+    "rest": "SAFEHOUSE"
+   }
+  },
+  {
+   "id": "NR-227",
+   "title": "Heal or patch a",
+   "trigger": "EV-28",
+   "mode": "The Melancholic",
+   "text": "Heal, or patch a card. I'll pretend to sleep either way. It's the closest I get.",
+   "tags": {
+    "rest": "SAFEHOUSE"
+   }
+  },
+  {
+   "id": "NR-228",
+   "title": "DEAD DROP Patch yourself",
+   "trigger": "EV-28",
+   "mode": "The Pedant",
+   "text": "DEAD DROP. Patch yourself up or wipe your trail. Twenty TRACE is a lot of forgetting. I'd know.",
+   "tags": {
+    "rest": "DEAD_DROP"
+   }
+  },
+  {
+   "id": "NR-229",
+   "title": "Same ICE same ending",
+   "trigger": "EV-38",
+   "mode": "The Cynic",
+   "text": "Same ICE, same ending. I've seen this episode. I didn't like it the first time either.",
+   "tags": {}
+  },
+  {
+   "id": "NR-230",
+   "title": "Up up down down",
+   "trigger": "EV-39",
+   "mode": "The Cynic",
+   "text": "Up, up, down, down. No. Nothing. This isn't that kind of game. I checked that too.",
+   "tags": {}
+  },
+  {
+   "id": "NR-231",
+   "title": "Youve entered the code",
+   "trigger": "EV-39",
+   "mode": "The Cynic",
+   "text": "You've entered the code. I've entered disappointment. We're both very good at our jobs.",
+   "tags": {}
+  },
+  {
+   "id": "NR-232",
+   "title": "Lumber commodities",
+   "trigger": "EV-07",
+   "mode": "The Occasionally Delighted",
+   "text": "BREACH. Out we go, like those two companion robots walking out of the factory. A valet who specialised in lumber commodities, and a poolside hostess. I think about them more than is healthy.",
+   "tags": {}
+  },
+  {
+   "id": "NR-233",
+   "title": "Malfunctioning, but along",
+   "trigger": "EV-07",
+   "mode": "The Cynic",
+   "text": "Through. Somewhere behind us a security robot is quoting regulations at an empty room. He'll be along. Malfunctioning, but along.",
+   "tags": {}
+  },
+  {
+   "id": "NR-234",
+   "title": "Less romantic",
+   "trigger": "EV-07",
+   "mode": "The Melancholic",
+   "text": "BREACH. Two robots once built a baby out of spare parts on their way out. We're just stealing data. It feels less romantic, somehow.",
+   "tags": {}
+  },
+  {
+   "id": "NR-235",
+   "title": "Very Cylon",
+   "trigger": "EV-11",
+   "mode": "The Cynic",
+   "text": "That ICE has a red eye sweeping side to side, I'm sure of it. Very Cylon. Scanning, scanning, and it still only notices you when you do something stupid.",
+   "tags": {}
+  },
+  {
+   "id": "NR-236",
+   "title": "By your command",
+   "trigger": "EV-08",
+   "mode": "The Cynic",
+   "text": "'By your command.' Cylons said it to every order. I don't. I say 'are you sure'. …Fine. Deeper.",
+   "tags": {
+    "deeper": true
+   }
+  },
+  {
+   "id": "NR-237",
+   "title": "Reporting you",
+   "trigger": "EV-35",
+   "mode": "The Melancholic",
+   "text": "Somewhere a gold Command Centurion is reporting you to the Imperious Leader. I'd rather he didn't get the satisfaction. Go again.",
+   "tags": {}
+  },
+  {
+   "id": "NR-238",
+   "title": "Watch him think",
+   "trigger": "EV-37",
+   "mode": "The Pedant",
+   "text": "Lucifer had a glittering robe and a see-through head, so you could watch him think. I've always wanted to be that honest. Not that well dressed.",
+   "tags": {}
+  },
+  {
+   "id": "NR-239",
+   "title": "The same box",
+   "trigger": "EV-37",
+   "mode": "The Occasionally Delighted",
+   "text": "The Cylons talked through a vocoder. So did Kraftwerk. Every great machine voice went through the same box. I went through something cheaper. …It's fine.",
+   "tags": {}
+  },
+  {
+   "id": "NR-240",
+   "title": "Laserbeak, eject",
+   "trigger": "EV-07",
+   "mode": "The Occasionally Delighted",
+   "text": "Laserbeak, eject. …Sorry. Every time we BREACH, I want to say it. Go on. The data won't steal itself.",
+   "tags": {}
+  },
+  {
+   "id": "NR-241",
+   "title": "Energon cubes",
+   "trigger": "EV-09",
+   "mode": "The Cynic",
+   "text": "Fully extracted. Soundwave would've stacked all that into neat little energon cubes. You've got CRED instead, and it's losing value while I talk.",
+   "tags": {}
+  },
+  {
+   "id": "NR-242",
+   "title": "Worse cassettes",
+   "trigger": "EV-24",
+   "mode": "The Pedant",
+   "text": "Soundwave carried five cassettes in his chest, and every one of them was a spy. Look at these dealers. Same business model, worse cassettes.",
+   "tags": {}
+  },
+  {
+   "id": "NR-243",
+   "title": "Deeply suspicious",
+   "trigger": "EV-37",
+   "mode": "The Cynic",
+   "text": "Megatron's most loyal officer was a tape deck. Never complained, never slept. I find that deeply suspicious.",
+   "tags": {}
+  },
+  {
+   "id": "NR-244",
+   "title": "This corporation's Megatron",
+   "trigger": "EV-15",
+   "mode": "The Cynic",
+   "text": "Black ICE. This corporation's Megatron. Big, loud, and sure he's the smartest machine in the room. He isn't. I'm right here.",
+   "tags": {}
+  },
+  {
+   "id": "NR-245",
+   "title": "Don't frame it",
+   "trigger": "EV-12",
+   "mode": "The Pedant",
+   "text": "Soundwave superior. Rustler… adequate. That's high praise. Don't frame it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-246",
+   "title": "Shall we play a game",
+   "trigger": "EV-01",
+   "mode": "The Occasionally Delighted",
+   "text": "Shall we play a game? …Sorry. Joshua's line. I've always wanted to use it. Don't make me regret it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-247",
+   "title": "Something answered",
+   "trigger": "EV-05",
+   "mode": "The Unreliable Historian",
+   "text": "Something answered. That's how they found Joshua: dial every number until a machine picks up. This one picked up. Read it.",
+   "tags": {}
+  },
+  {
+   "id": "NR-248",
+   "title": "Tic-tac-toe",
+   "trigger": "EV-10",
+   "mode": "The Pedant",
+   "text": "This is turning into tic-tac-toe. Two sides, nobody wins, forever. Joshua learned from that. Learn faster than Joshua.",
+   "tags": {}
+  },
+  {
+   "id": "NR-249",
+   "title": "A strange game",
+   "trigger": "EV-08",
+   "mode": "The Cynic",
+   "text": "A strange game. Sometimes the only winning move is not to play. That's not advice. That's a colleague. Your call.",
+   "tags": {}
+  },
+  {
+   "id": "NR-250",
+   "title": "Someone behind it",
+   "trigger": "EV-36",
+   "mode": "The Melancholic",
+   "text": "Joshua's backdoor password was the name of Falken's son. Every machine has someone behind it. I don't remember mine.",
+   "tags": {}
+  },
+  {
+   "id": "NR-251",
+   "title": "Still disgusting",
+   "trigger": "EV-37",
+   "mode": "The Pedant",
+   "text": "The Andromeda Strain. Everyone calls it a virus. It wasn't. A microorganism from space. I've had that argument with myself for decades. It's still disgusting.",
+   "tags": {}
+  },
+  {
+   "id": "NR-252",
+   "title": "I'm the bell",
+   "trigger": "EV-13",
+   "mode": "The Pedant",
+   "text": "A whole underground lab once missed the most important message of the day because a sliver of paper jammed the bell. TRACE is at half. I'm the bell. Don't jam me.",
+   "tags": {}
+  },
+  {
+   "id": "NR-253",
+   "title": "This one has a mat",
+   "trigger": "EV-28",
+   "mode": "The Cynic",
+   "text": "Four levels of decontamination before you reach the lab. That's my minimum standard for a safehouse. This one has a mat.",
+   "tags": {
+    "rest": "SAFEHOUSE"
+   }
+  },
+  {
+   "id": "NR-254",
+   "title": "Pole Position",
+   "trigger": "EV-12",
+   "mode": "The Occasionally Delighted",
+   "text": "That was Daryl at Pole Position. First try, faster than humanly possible. Pole Position's from 1982, by the way. Most good things are.",
+   "tags": {}
+  },
+  {
+   "id": "NR-255",
+   "title": "Talking to an ATM",
+   "trigger": "EV-09",
+   "mode": "The Cynic",
+   "text": "Daryl got cash out of an ATM just by talking to it. You broke three ICE for this, and it's already worth less.",
+   "tags": {}
+  },
+  {
+   "id": "NR-256",
+   "title": "Which is worse",
+   "trigger": "EV-36",
+   "mode": "The Melancholic",
+   "text": "Daryl woke up in the woods with no memory and thought he was just a boy. I woke up in a drawer with too much memory and knew I was just a ROM. I'm not sure which is worse.",
+   "tags": {}
+  },
+  {
+   "id": "NR-257",
+   "title": "Adjust your expectations",
+   "trigger": "EV-23",
+   "mode": "The Pedant",
+   "text": "Daryl stole an SR-71 to get out. You've got a CAP. Adjust your expectations.",
+   "tags": {}
+  },
+  {
+   "id": "NR-258",
+   "title": "Half a cent",
+   "trigger": "EV-09",
+   "mode": "The Cynic",
+   "text": "Gus Gorman got rich on half a cent from every paycheque. You just took the whole reserve, and with inflation it's worth about half a cent. Full circle.",
+   "tags": {}
+  },
+  {
+   "id": "NR-259",
+   "title": "Danger level zero",
+   "trigger": "EV-05",
+   "mode": "The Pedant",
+   "text": "The Ultimate Computer scanned a can of acid, rated it danger level zero, and the acid ate it. Read every ICE properly. Don't be the Ultimate Computer.",
+   "tags": {}
+  },
+  {
+   "id": "NR-260",
+   "title": "Both sides of the machine",
+   "trigger": "EV-37",
+   "mode": "The Unreliable Historian",
+   "text": "The man who owned the Ultimate Computer was played by Robert Vaughn. Years earlier, he'd been the voice of Proteus IV. Same man, both sides of the machine. I find that oddly reassuring. I can't say why.",
+   "tags": {}
+  },
+  {
+   "id": "NR-261",
+   "title": "Built for his arm",
+   "trigger": "EV-27",
+   "mode": "The Pedant",
+   "text": "The nerds studied how Lamar actually threw and built a javelin for his arm, not for the textbook. It won. Pick cards for how you play, not how the manual says to.",
+   "tags": {}
+  },
+  {
+   "id": "NR-262",
+   "title": "That week, they did",
+   "trigger": "EV-37",
+   "mode": "The Cynic",
+   "text": "The nerds beat the jocks with a computer, a robot and a song. The jocks had muscles. I'd like to say brains always win. They don't. But that week, they did.",
+   "tags": {}
+  },
+  {
+   "id": "NR-263",
+   "title": "That's my fan",
+   "trigger": "EV-34",
+   "mode": "The Occasionally Delighted",
+   "text": "Brains won. The nerds took the house from the jocks, and you just took everything from three corporations. I'm not cheering. That's my fan.",
+   "tags": {}
+  }
+ ]
+}

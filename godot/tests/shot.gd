@@ -1,0 +1,80 @@
+extends SceneTree
+# Renders the main scene in several states and saves PNGs to user:// (dev check only).
+
+var main: Node
+var step := 0
+var frames := 0
+var flashes := 0
+
+func _initialize() -> void:
+	main = load("res://scenes/Main.tscn").instantiate()
+	root.add_child(main)
+
+func _snap(name: String) -> void:
+	var img := root.get_viewport().get_texture().get_image()
+	img.save_png(OS.get_environment("SHOT_DIR") + "/" + name + ".png")
+	print("shot ", name)
+
+func _process(_d: float) -> bool:
+	frames += 1
+	if frames < (12 if step == 4 else 30):
+		return false
+	frames = 0
+	var g = main.g
+	match step:
+		0:
+			if g.phase == "SELECT":
+				main._start_as("GENERALIST")
+				g = main.g
+			_snap("01_map")
+			print("voice playing=", main.voice.playing, " stream=", main.voice.stream.resource_path if main.voice.stream else "none", " text=", main.nr_mode.text)
+			g.enter_node(0)
+			main.refresh()
+		1:
+			_snap("02_ready_rig")
+			var rid := -1
+			for u in g.pending.options:
+				if g._find(g.draw_pile, u).id == "TUMBLER_ICEPICK":
+					rid = u
+			g.choose_ready_rig(rid)
+			main.refresh()
+		2:
+			_snap("03_encounter")
+			# play a couple of installs if possible
+			for c in g.hand.duplicate():
+				if g.can_play(c.uid).ok and CardDB.def(c.id).type == "PROGRAM":
+					g.play_card(c.uid, -1)
+					break
+			main.refresh()
+		3:
+			_snap("04_after_install")
+			main._on_end_turn()
+			frames = 0
+		4:
+			if g.phase == "RESPONSE":
+				flashes += 1
+				_snap("05_response_%d" % flashes)
+				return false
+			_snap("05b_after_response")
+			print("turn ", g.enc.turn, " bw ", g.bw)
+			if g.phase == "CHOICE":
+				g.choose(g.hand[0].uid)
+			main._show_inspect(g.installed[0].inst.id if not g.installed.is_empty() else "")
+			main.refresh()
+			main._show_inspect(g.installed[0].inst.id if not g.installed.is_empty() else "")
+		5:
+			_snap("06_inspect")
+			g.new_run()
+			g.entered_corp = true
+			g.row = 0
+			g.available = [0, 1]
+			g.enter_node(1)
+			main._show_inspect("")
+			if g.phase == "READY_RIG":
+				g.skip_ready_rig()
+			main.refresh()
+		6:
+			_snap("07_void")
+			return true
+	step += 1
+	return false

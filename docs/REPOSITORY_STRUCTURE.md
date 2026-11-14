@@ -1,6 +1,6 @@
-# REDLINE — Repository Structure
+# PANOPTICON — Repository Structure
 
-REDLINE is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the intended production engine; the Python/Pygame prototype is a gameplay reference, not the production build.
+PANOPTICON is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the intended production engine; the Python/Pygame prototype is a gameplay reference, not the production build.
 
 ## Layout
 
@@ -9,6 +9,13 @@ REDLINE is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the int
   - `REDLINE_BIBLE.md` — consolidated creative/world and design reference.
   - `REDLINE_CURRENT_STATUS.md` — current handoff and verified implementation status.
   - `REDLINE_DEVELOPMENT_LOG.md` — dated development history and decisions.
+  - Simplified redesign (2026-11-12 onward; `REDLINE_CORE_RULES.md` is the rules authority where it conflicts with older entries):
+    - `REDLINE_CORE_RULES.md` — core rules authority.
+    - `REDLINE_RUSTLERS.md`, `REDLINE_CARD_POOLS.md` — Rustlers, starter decks and reward pools.
+    - `REDLINE_ICE_CORP1.md`, `REDLINE_ICE_CORP2.md`, `REDLINE_ICE_CORP3.md` — HALCYON, IRONWATCH and LUCIDA ICE.
+    - `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_UPGRADES_EVENTS_ESCAPE.md` — economy, CAPS, PATCHWORK, Ghostware, events, escape.
+    - `REDLINE_ENGINES.md` — engine mechanics (ENG-001 to ENG-005).
+    - `REDLINE_PLAYTEST_CHECKLIST.md` — playtest QA checklist.
 - `godot/` — Godot 4 production project (put `project.godot` here when real source is imported).
 - `prototypes/python/` — original Python/Pygame reference implementation and its related source.
 - `assets/art/` — visual source and game art.

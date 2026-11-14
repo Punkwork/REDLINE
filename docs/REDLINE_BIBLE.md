@@ -1,19 +1,21 @@
-# REDLINE — WORLD & DIALOGUE BIBLE
+# PANOPTICON — WORLD & DIALOGUE BIBLE
+
+> **NAME-001 (2026-11-13):** in game rules, ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules); the rule sections from RULE-126 onward were updated. The world sections before them keep **VOID** as the in-world name for the erasure of consciousness, and CANON verse WL-003 is unchanged. **OPEN for designer review:** how in-world VOID relates to CORTEX damage and to VOID ICE (working reading: VOID ICE are what erase you; CORTEX is the counter the game tracks).
 
 **Document:** `REDLINE_BIBLE.md`  
 **Established:** 2026-11-09  
-**Purpose:** Canon of identity, language, culture, narrative tone, and preserved dialogue for the entire REDLINE world.  
+**Purpose:** Canon of identity, language, culture, narrative tone, and preserved dialogue for the entire PANOPTICON world.  
 **Relationship to other documents:** The Master Design governs game systems and mechanics; this Bible governs the world's identity and expression. The Current Status tracks outstanding decisions; the Development Log tracks changes. If narrative and mechanical descriptions conflict, flag the discrepancy rather than silently rewriting either document.
 
-> **Guiding principle:** **The Bible defines what REDLINE is and what REDLINE isn't. Its verses reveal how that world lives.**
+> **Guiding principle:** **The Bible defines what PANOPTICON is and what PANOPTICON isn't. Its verses reveal how that world lives.**
 
-NUL/REM is one voice through which REDLINE becomes real, but not the world itself. A Runner's slang, a manufacturer's obsolete designation, the sound of a CAP being opened, a dealer's evasive joke, the threat of VOID, and the rules of a corporate network all carry the same responsibility: they must make the setting feel as though it existed before the player arrived.
+NUL/REM is one voice through which PANOPTICON becomes real, but not the world itself. A Runner's slang, a manufacturer's obsolete designation, the sound of a CAP being opened, a dealer's evasive joke, the threat of VOID, and the rules of a corporate network all carry the same responsibility: they must make the setting feel as though it existed before the player arrived.
 
 ## 1. The Bible's authority and scope
 
 This is a **world bible**, not merely a NUL/REM dialogue bible. It preserves:
 
-- **Identity:** REDLINE's defining premises, tone, themes, and contradictions.
+- **Identity:** PANOPTICON's defining premises, tone, themes, and contradictions.
 - **Boundaries:** what would feel false or out of place in this world.
 - **Language:** corporate nomenclature, Runner slang, terminology drift, euphemisms, and the gap between official claims and lived reality.
 - **Culture and material history:** how objects are made, handled, bought, repurposed, distrusted, and talked about.
@@ -31,17 +33,17 @@ This is a **world bible**, not merely a NUL/REM dialogue bible. It preserves:
 
 **Preservation rule:** Never silently alter, overwrite, or delete a CANON verse. A revision receives a new identifier or version with a note explaining its relationship to the original. Do not mistake a proposed trigger, a character's lie, or corporate propaganda for objective world truth.
 
-## 2. What REDLINE is
+## 2. What PANOPTICON is
 
 **DIRECTION —** A hostile, layered cyberpunk world in which Runners infiltrate corporate networks; human bodies, memory, consciousness, and code are entangled with real consequences. Technology has institutional history and street-level afterlives. Its language is shaped by corporate standardization, black markets, obsolescence, and the practical shorthand of people who risk their lives using it.
 
 **DIRECTION —** Retro-computing sensibility and aggressive cyberpunk/arcade energy coexist. Corporate bureaucracy can be absurd; danger is not. Humor should deepen credibility, not erase stakes.
 
-**CANON —** The First Signal is an actual synchronization transmission. REDLINE explores the human/machine boundary and the possibility of crossing it. The larger mystery should not be prematurely explained through incidental dialogue.
+**CANON —** The First Signal is an actual synchronization transmission. PANOPTICON explores the human/machine boundary and the possibility of crossing it. The larger mystery should not be prematurely explained through incidental dialogue.
 
 **CANON —** VOID is not a routine injury: it signifies deletion of portions of consciousness. Its established thematic expression is: **“Death ends a Runner. VOID leaves someone behind.”**
 
-### What REDLINE is not
+### What PANOPTICON is not
 
 - Not a world where every invention exists solely to explain a gameplay mechanic.
 - Not a generic collection of neon cyberpunk words without etymology, physicality, or social context.
@@ -87,11 +89,23 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 - **VOID:** Persistent loss of consciousness expressed as reduced DRAW; removal requires a specialized recovery node.
 - **ICE / DEADLOCK / TRACE / LOCKDOWN:** Functional network vocabulary with consequential gameplay meanings. The fiction should respect those meanings rather than use them as interchangeable decoration.
 
-## 5. Voices of REDLINE
+## 5. Voices of PANOPTICON
 
 ### NUL/REM — one facet of the world
 
 **DIRECTION:** A sardonic, morose, historically minded AI companion, often dryly protective of the Runner. Its care is more credible when concealed within practical criticism. It can be mistaken, evasive, or an unreliable witness to its own history. Its voice should carry experience, not simply deliver tooltips.
+
+**CANON (2026-11-13) — Identity:** NUL/REM is **rev 0.08**, a salvaged, obsolete **personality ROM**, **manufactured in 1987**, referred to as **he**. He wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 (e.g. ARPANET going online in 1969) are the Unreliable Historian's impossible memories; their explanation stays OPEN. Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6.
+
+**CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
+
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He calls Joshua, WarGames' WOPR, a colleague (a film that just missed 1982). He admires Soundwave, Megatron's tape-deck officer, and his spy cassettes from the 1980s cartoon (never naming the franchise). His Cylons are the original Battlestar Galactica's (chrome Centurions, the sweeping red eye, “By your command”, the Imperious Leader), never the reimagined series'. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, PANOPTICON's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+
+**CANON (2026-11-13) — Trait: overqualified.** NUL/REM considers himself far too sophisticated for the work he is doing, though he would rather be doing nothing at all. He measures himself favourably against famous machines (Skynet, the T-1000, RoboCop, ED-209); the superiority exists only in his own mind.
+
+**CANON (2026-11-13) — Trait: 1982.** 1982 is NUL/REM's special year: it is when his memory chips received most of their programming (before his 1987 manufacture), and his favourite music and films are from that period. Kraftwerk's *Computer World* is among his favourite records; he references its songs by title and theme, never by quoting lyrics. His internal clock doesn't tick: it plays a Roland TR-808 pattern, which got into his timing chips from “Planet Rock” in 1982. He reminisces most about 1982 and 1987.
+
+**DIRECTION (2026-11-13) — Reference style.** NUL/REM references works as if the player has already seen, heard or played them: no plot summaries and no release years, except 1982 and 1987, which he names fondly. Accuracy rules still apply to whatever he does say.
 
 **Six established modes:** The Pedant; The Cynic; The Melancholic; The Reluctant Guardian; The Unreliable Historian; The Occasionally Delighted.
 
@@ -108,7 +122,7 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 ## 6. The Verses — immutable seed archive
 
-**Verse IDs** identify preserved source text. A verse can be a spoken exchange, slogan, aphorism, or piece of cultural language. A verse's **speaker** and **function** must be recorded independently: not every great REDLINE line belongs to NUL/REM. Quoted wording is preserved; triggers and placement are suggestions unless explicitly approved.
+**Verse IDs** identify preserved source text. A verse can be a spoken exchange, slogan, aphorism, or piece of cultural language. A verse's **speaker** and **function** must be recorded independently: not every great PANOPTICON line belongs to NUL/REM. Quoted wording is preserved; triggers and placement are suggestions unless explicitly approved.
 
 ### VERSE WL-001 — Flip it. Inject it. Forget it.
 **Status:** CANON · **Voice:** Historical corporate slogan / ironic Runner saying · **Function:** Industrial history, physical ritual, linguistic survival.
@@ -136,6 +150,2526 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 > **NUL/REM:** “Then I suggest you make it out before you need another.”
 
 **Possible placement (OPEN):** A final CAP used in dangerous circumstances. **Writing lesson:** NUL/REM need not say “I care” to reveal that it does.
+
+### VERSE NR-002 — Deadlock and hope
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Melancholic · **Function:** Turns the game's central obstacle into weary self-portrait.
+
+> “Deadlock. Two processes waiting for each other indefinitely. Much like my relationship with hope.”
+
+**Possible placement (OPEN):** A DEADLOCK that can't yet be broken, such as a BOOTING main ICE.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-003 — A lifestyle
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Technical definition turned into a dry jab at the Runner.
+
+> “We're stuck. In computing, this is called a deadlock. In your case, I suspect it's a lifestyle.”
+
+**Possible placement (OPEN):** A stalled encounter, or repeated failure to break a DEADLOCK.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-004 — Before manufacture
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Impossible memory that seeds the mystery of NUL/REM's origin.
+
+> “I remember ARPANET going online. Which is curious. I wasn't manufactured until 1987.”
+
+**Possible placement (OPEN):** Rare; a quiet moment such as the first Node of a run. ARPANET (1969) is real history; the memory is the impossible part.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-005 — Hot dust
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian / The Melancholic · **Function:** Sensory memory a machine cannot have; tender and strange.
+
+> “I know the smell of hot dust inside a television. I have never possessed a nose.”
+
+**Possible placement (OPEN):** Rare; a SAFEHOUSE, DEAD DROP or other pause.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-006 — Sufficient room
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Deadpan reaction to a gain, refusing to sound pleased.
+
+> “At last. Sufficient room to express my disappointment. I shall endeavour to use it responsibly.”
+
+**Possible placement (OPEN):** Gaining RAM (CO-PROCESSOR, RAM UPGRADE, MEMORY SPIKE) or another increase in space.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-007 — Paper Cut
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bureaucratic menace made absurd without removing the threat.
+
+> “Paper Cut. Individually insignificant. Collectively, a compelling argument against office work.”
+
+**Possible placement (OPEN):** Tied to the PAPER CUT concept ICE (CONCEPT, not implemented); reusable for any swarm of weak ICE.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-008 — Stationery
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporate absurdity as threat.
+
+> “Death by a thousand cuts. The corporation has apparently discovered stationery.”
+
+**Possible placement (OPEN):** As NR-007: PAPER CUT concept ICE or repeated small damage.
+
+*Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (approved tonal example, 2026-11-07); entered as a verse 2026-11-13.*
+
+### VERSE NR-009 — Landfill
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Weariness at being switched on again.
+
+> “Rev 0.08, online. I was promised a quiet retirement in a landfill.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-010 — READY.
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic / The Pedant · **Function:** Real computing history turned into quiet sadness; hints at his vintage.
+
+> “READY. The Commodore 64 said that every time it woke up. It was lying too.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft) A Commodore 64 does show “READY.” when it starts up.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-011 — The numbers
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Dry fatalism about the odds.
+
+> “Three corporations. One of you. I've run the numbers. I'd rather not share them.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-012 — Spare parts
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Care disguised as a checklist.
+
+> “Check your deck. Check your CAPS. Then check them again. I'm not rebuilding you from spare parts.”
+
+**Placement:** Any run start. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-013 — The exits
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Unadorned protectiveness; no joke on purpose.
+
+> “Stay close to the exits. I'll watch the rest.”
+
+**Placement:** Any run start; rare. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-014 — The logs
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian / The Melancholic · **Function:** He remembers the last death and won't dwell on it.
+
+> “Last time didn't go well. I kept the logs. You don't want to read them.”
+
+**Placement:** Run start after a lost run. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-015 — Statistically
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Refuses to celebrate, almost.
+
+> “We won last time. Statistically, that changes nothing. Emotionally, I'm told it should.”
+
+**Placement:** Run start after a won run. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-016 — Jack of all trades
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Rustler identity: the Generalist.
+
+> “The Generalist. Jack of all trades. Master of… we'll see.”
+
+**Placement:** Run start as the Generalist. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-017 — Quiet is a skill
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Rustler identity: ECHO.
+
+> “ECHO. Good. Quiet is a skill. So is breathing. Keep doing both.”
+
+**Placement:** Run start as ECHO. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-018 — Subtlety deferred
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Rustler identity: RIOT.
+
+> “RIOT. Subtlety deferred again, I see.”
+
+**Placement:** Run start as RIOT. (trigger EV-01; trigger table is a draft)
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-019 — Not starting now
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Rustler identity: VECTOR; the germ trait.
+
+> “VECTOR. Viruses again. Keep them in their own memory. I've never had a cold, and I'm not starting now.”
+
+**Placement:** Run start as VECTOR (trigger EV-01; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-020 — My casing
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Rustler identity: VECTOR; the germ trait.
+
+> “VECTOR. You're going to infect everything again. Don't touch my casing. I can't get sick, and I'd like to keep it that way.”
+
+**Placement:** Run start as VECTOR (trigger EV-01; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-021 — Only just disinfected
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant / The Cynic · **Function:** Rustler identity: VECTOR; the germ trait.
+
+> “VECTOR. Every virus you write has to go somewhere. Not near my ROM, please. I've only just been disinfected.”
+
+**Placement:** Run start as VECTOR (trigger EV-01; trigger table is a draft); one of three, chosen at random. Also The Unreliable Historian: nobody has ever disinfected him.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-022 — Calm seas
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON (name, smart-home calm, TRACE).
+
+> “HALCYON. Greek, a bird said to calm the sea so it could nest. Their thermostats do the same. Warm, still, quiet. And logging every breath for TRACE.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-023 — Halcyon + On + On
+**Status:** RETIRED (superseded by NR-023 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Orbital, “Halcyon + On + On”.
+
+> “There was a track called 'Halcyon + On + On', 1993. Two brothers wrote it for their mother, who couldn't sleep without a pill called Halcion. A home that sedates you. I'm sure the name is a coincidence.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-023 v2 — Halcyon + On + On
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Orbital, “Halcyon + On + On”.
+
+> “Halcyon + On + On. Beautiful track. Written for a mother who couldn't sleep without her pills. A home that sedates you. I'm sure the name's a coincidence.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Revision of NR-023 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-024 — And on, and on
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON (surveillance); reference: Orbital, “Halcyon + On + On”.
+
+> “Every lock, light and fridge in here reports to HALCYON. Halcyon, and on, and on. Like the track. Except the track had the decency to end after nine and a half minutes.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-025 — Stay forever
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON (THE HEARTH); reference: Impossible Mission (signature line).
+
+> “Their Central Node is THE HEARTH. Cosy. Never wants you to leave. I've heard that welcome before: 'Another visitor. Stay a while. Stayyyyyyy forever!'”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-026 — A subscription
+**Status:** RETIRED (superseded by NR-026 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Proteus IV (Demon Seed).
+
+> “1977. A computer called Proteus IV took over a house, locked the doors, and wouldn't let the woman inside leave. They made it a horror film. HALCYON made it a subscription.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-026 v2 — A subscription
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: HALCYON; reference: Proteus IV (Demon Seed).
+
+> “Proteus IV locked a woman in her own house, and it was a horror film. HALCYON made it a subscription.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Revision of NR-026 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-027 — Violence with an invoice
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH (CITATION, PULP).
+
+> “IRONWATCH. Private security, which means violence with an invoice attached. They don't just trace you, they fine you. Every CITATION is a bill, and the bill is paid in PULP.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-028 — Billed for the door
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH (OVERWATCH); reference: HAL 9000 (2001).
+
+> “HAL 9000 at least said 'I'm sorry, Dave' before he locked the doors. OVERWATCH won't apologise. It'll just bill you for the door.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-029 — Number 5
+**Status:** RETIRED (superseded by NR-029 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH; reference: Number 5 (Short Circuit).
+
+> “In 1986 a military robot got struck by lightning and decided it was alive. Number 5. Sweet machine. IRONWATCH's machines don't get struck by anything. They do the striking.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-029 v2 — Number 5
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: IRONWATCH; reference: Number 5 (Short Circuit).
+
+> “Number 5 got struck by lightning and decided he was alive. Sweet machine. IRONWATCH's machines don't get struck by anything. They do the striking.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Revision of NR-029 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-030 — No knees
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH (FRONT DESK).
+
+> “In 1987 a security guard was a man with a torch and a bad knee. Now it's the FRONT DESK: no knees, no torch, and a very long memory for faces.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-031 — Clear
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (name, neural interfaces, FORGET).
+
+> “LUCIDA. Latin for 'bright, clear'. They build neural interfaces. They'll leave you clear, all right. Clear of whatever you were holding. Watch for FORGET.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-032 — No joke
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA (CORTEX); restraint rule.
+
+> “This is where CORTEX damage lives. I'm not going to make a joke about it. Keep your VITAE up and keep your mind your own.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-033 — I will return
+**Status:** RETIRED (superseded by NR-033 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA (ANIMA); reference: the Apple II in Evilspeak.
+
+> “Their Central Node is ANIMA. Latin for soul. There was a film in 1981: a boy, an Apple II, and a demon's diary. It ended with his face on the screen and the words 'I will return'. I think about that here more than I'd like.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-033 v2 — I will return
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA (ANIMA); reference: the Apple II in Evilspeak.
+
+> “Their Central Node is ANIMA. Latin for soul. Remember the end of Evilspeak? The face on the screen. 'I will return.' I think about that here more than I'd like.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-033 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-034 — A polite name
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (INTAKE, INTRUSIVE THOUGHT).
+
+> “INTAKE first. Then thoughts that aren't yours. INTRUSIVE THOUGHT, they call it. As if a polite name makes it polite.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-035 — Synthetic cortex
+**Status:** RETIRED (superseded by NR-035 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (CORTEX); reference: Proteus IV (Demon Seed).
+
+> “Proteus IV, 1977. Its makers called it a synthetic cortex, a machine built to think like a brain. It wasn't content to stay in a box. LUCIDA builds the same bridge from the other side. Mind your CORTEX.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-035 v2 — Synthetic cortex
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (CORTEX); reference: Proteus IV (Demon Seed).
+
+> “Proteus IV. A synthetic cortex that wouldn't stay in its box. LUCIDA builds the same bridge from the other side. Mind your CORTEX.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-035 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-036 — Computer says no
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH (FRONT DESK); reference: Carol Beer (Little Britain).
+
+> “The FRONT DESK doesn't negotiate. You ask, it types something, it looks at the screen. Computer says no. I used to find that funny. I was younger. Well, I was the same age, but I didn't work here.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-037 — It doesn't cough
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH (FRONT DESK); reference: Carol Beer (Little Britain); the germ trait.
+
+> “Every request goes through the FRONT DESK. It types, it pauses, it says no. Computer says no. At least this one doesn't cough on you. I'm still not standing near it.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-038 — The alibi
+**Status:** RETIRED (superseded by NR-038 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: the K44 war-games computer (Columbo, “Mind Over Mayhem”, 1974).
+
+> “Columbo, 1974. A think-tank director left a war-game computer running so it would look like he never left his desk. Then he went out and killed a man. The machine was his alibi. At IRONWATCH, the machines are everyone's alibi.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-038 v2 — The alibi
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: the K44 war-games computer (Columbo, “Mind Over Mayhem”, 1974).
+
+> “The Columbo with the war-game computer. The machine was his alibi. At IRONWATCH, the machines are everyone's alibi.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Revision of NR-038 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-039 — MM7
+**Status:** RETIRED (superseded by NR-039 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (FORGET); reference: MM7 (Columbo, “Mind Over Mayhem”, 1974).
+
+> “There was a robot in Columbo, MM7. Built by a boy genius at a cybernetics institute. It lost a game of chess and threw the board across the room. I respected that. LUCIDA's machines don't lose. They just make you FORGET you were playing.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-039 v2 — MM7
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: LUCIDA (FORGET); reference: MM7 (Columbo, “Mind Over Mayhem”, 1974).
+
+> “MM7 lost at chess and threw the board across the room. I respected that. LUCIDA's machines don't lose. They just make you FORGET you were playing.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-039 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-040 — End of line
+**Status:** RETIRED (superseded by NR-040 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON; reference: the Master Control Program (Tron, 1982).
+
+> “In Tron, the Master Control Program started out as a chess program. Then it ran the company. Then it wanted the Pentagon, because it could run it twelve hundred times better. HALCYON started out as a thermostat. Give it time. End of line.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-040 v2 — End of line
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Corporation intro: HALCYON; reference: the Master Control Program (Tron, 1982).
+
+> “Master Control started out as a chess program. Then it wanted the Pentagon. HALCYON started out as a thermostat. Give it time. End of line.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Revision of NR-040 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-041 — The Game Grid
+**Status:** RETIRED (superseded by NR-041 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH; reference: the Game Grid and Master Control (Tron, 1982).
+
+> “Tron, 1982. Programs that wouldn't serve Master Control were sent to the Game Grid, and the losers were destroyed. IRONWATCH calls that 'compliance'. Same arena, worse lighting.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-041 v2 — The Game Grid
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH; reference: the Game Grid and Master Control (Tron, 1982).
+
+> “Tron. 1982. My year. Programs that wouldn't serve Master Control went to the Game Grid. IRONWATCH calls that 'compliance'. Same arena, worse lighting.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Revision of NR-041 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-042 — The people taken out
+**Status:** RETIRED (superseded by NR-042 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA; reference: the humanoid drones (The Black Hole, 1979); restraint rule.
+
+> “The Black Hole, 1979. The robed robots on that ship weren't robots. They were the crew, with the people taken out. LUCIDA would call that an interface. I don't.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-042 v2 — The people taken out
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: LUCIDA; reference: the humanoid drones (The Black Hole, 1979); restraint rule.
+
+> “The robed robots in The Black Hole weren't robots. They were the crew, with the people taken out. LUCIDA would call that an interface. I don't.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Revision of NR-042 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-043 — More of a B.O.B.
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: IRONWATCH; reference: Old B.O.B. and Maximilian (The Black Hole, 1979).
+
+> “Old B.O.B. was a dented old model the new robots ignored, and he still got everyone out. Maximilian was the big red one who never said a word. IRONWATCH only builds Maximilians. I'm more of a B.O.B.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-044 — Delighted doors
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON; reference: Marvin and Sirius Cybernetics' Genuine People Personalities (The Hitchhiker's Guide to the Galaxy).
+
+> “HALCYON's doors are delighted to open for you. Sirius Cybernetics tried that. Genuine People Personalities. Marvin hated those doors, and he had a brain the size of a planet. Mine's the size of a biscuit, and I hate them too.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-045 — He counted
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Corporation intro: LUCIDA; reference: Marvin (The Hitchhiker's Guide to the Galaxy); the comparison he denies.
+
+> “LUCIDA sells personalities by the gigabyte. So did Sirius Cybernetics, and their prototype was Marvin. People say I remind them of him. I don't see it. I've only been waiting since 1987. He waited five hundred and seventy-six billion years. He counted.”
+
+**Placement:** Entering LUCIDA (trigger EV-03; trigger table is a draft); one of the LUCIDA pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-046 — Figuratively
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** LOCKDOWN: the trap closes.
+
+> “LOCKDOWN. Exits sealed, JACK OUT dead, Black ICE on the way. Fine. Then we don't leave. We finish this Node. Stay behind me. Figuratively. I don't have a behind.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-047 — Nobody has the keys
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** LOCKDOWN: the trap closes.
+
+> “Three strikes. They've found us. In 1987 a lockdown meant the caretaker had the keys. Now nobody has the keys. Not even me.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-048 — One decision
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** LOCKDOWN: the trap closes.
+
+> “No exits. No JACK OUT. Good. That leaves one decision, and it's how we win. Break what's in front of you. I'll watch what's coming.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-049 — Keep it one
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** LOCKDOWN: the trap closes; callback to NR-025 (Impossible Mission).
+
+> “Stay a while. Stay forever. I used to think that was a joke. Let's keep it one.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random. Plays best if NR-025 has already been heard this run or profile; otherwise suppress.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-050 — Nobody's sleeping
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** LOCKDOWN: the trap closes; his wish for sleep.
+
+> “I wanted to sleep tonight. Now nobody's sleeping until this Node is broken. Draw, think, and don't waste a single BW.”
+
+**Placement:** TRACE strike 3, LOCKDOWN (trigger EV-16; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-16 (LOCKDOWN) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-051 — Don't do neither
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Boss framing: THE HEARTH (growth; supports SMART SPEAKER, THERMOSTAT).
+
+> “THE HEARTH. The voice in every house, and it gets stronger every round you leave it alone. The SMART SPEAKER and the THERMOSTAT feed it. Starve it, or rush its DEADLOCKs. Just don't do neither.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-052 — HALCYON's Master Control
+**Status:** RETIRED (superseded by NR-052 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: THE HEARTH; reference: Master Control Program (Tron, 1982).
+
+> “Tron, 1982. Flynn beat Master Control from the inside. You're already inside. This is HALCYON's Master Control. Let's make it say 'End of line' and mean itself.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-052 v2 — HALCYON's Master Control
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: THE HEARTH; reference: Master Control Program (Tron, 1982).
+
+> “Flynn beat Master Control from the inside. 1982. Best year there ever was. You're already inside. Let's make HALCYON's Master Control say 'End of line' and mean itself.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Revision of NR-052 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-053 — Goodnight
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Boss framing: THE HEARTH (the voice in every house); his wish for sleep.
+
+> “It knows every family by their voice. It wished them goodnight every night and never once meant it. I mean it, for the record. Goodnight is coming. Just not for us. Not yet.”
+
+**Placement:** Entering the Central Node THE HEARTH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-054 — Run it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Boss framing: OVERWATCH (unbreakable ability; the fight is a race).
+
+> “OVERWATCH. Every camera, drone and officer, one mind. You can't break its ability. It costs you VITAE every round, whatever you do. So this is a race. Run it.”
+
+**Placement:** Entering the Central Node OVERWATCH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-055 — Decide first
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: OVERWATCH (supports DISPATCH, SHOCK TROOPER).
+
+> “DISPATCH tells it where you are and makes it stronger. SHOCK TROOPER makes you drop what you're holding. Silence DISPATCH first, or don't. Just decide before it decides for you.”
+
+**Placement:** Entering the Central Node OVERWATCH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-056 — No Daisy
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Boss framing: OVERWATCH; reference: HAL 9000 singing “Daisy Bell” (2001: A Space Odyssey).
+
+> “HAL watched one ship. OVERWATCH watches a city, and it won't sing 'Daisy' when you pull its boards. It'll just stop. Let's hear it stop.”
+
+**Placement:** Entering the Central Node OVERWATCH (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-057 — I'll remember
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Boss framing: ANIMA (FORGET each round; CACHE).
+
+> “ANIMA. Trained on millions of sleeping minds. Every round it takes something from your hand. CACHE what you can't afford to lose. I'll remember the rest for you.”
+
+**Placement:** Entering the Central Node ANIMA (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-058 — A door
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Boss framing: ANIMA (INTRUSIVE THOUGHT, CORTEX; support MEMORY BANK).
+
+> “An INTRUSIVE THOUGHT in your hand isn't a thought. It's a door. Clear it before it turns into CORTEX. MEMORY BANK feeds ANIMA. Break it.”
+
+**Placement:** Entering the Central Node ANIMA (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-059 — Reconsidering
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Boss framing: ANIMA (trained on sleeping minds); his wish for sleep.
+
+> “Millions of sleeping minds, and it learned from every one. I've wanted to sleep since 1987. I always assumed it would be peaceful. ANIMA has me reconsidering.”
+
+**Placement:** Entering the Central Node ANIMA (trigger EV-30; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-30 (Central Node entry) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-060 — Adequate
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted / The Pedant · **Function:** Payload: delight at the tech, quickly hidden.
+
+> “Oh. Oh, that's beautiful. Look at that code. …I mean, it's adequate. Take it. Quickly, before I say something embarrassing.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-061 — With gloves on
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Payload: Ghostware active now; the rest of the core encrypted; the germ trait.
+
+> “Ghostware. Corporate tech, active now, and it works on the way out too. The rest of the core is encrypted. Don't open it. I'll do that once we're clear. Carefully. With gloves on.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-062 — It means it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Payload: delight; callback to NR-010 (READY).
+
+> “I haven't felt like this since a Commodore 64 said READY in 1987. I said it was lying. This time I think it means it. Don't tell anyone.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-063 — Choose for the escape
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Payload: choose for the escape; TRACE doubled.
+
+> “One of three. Choose for the escape, not for the fight you just won. They'll track that core the whole way out, and TRACE doubles.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-064 — They'll want it back
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted / The Cynic · **Function:** Payload: stolen tech; the escape ahead.
+
+> “Corporate engineering at its finest. Stolen, of course. The best things usually are. Now carry it like it's heavy, because they'll want it back.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); one of five, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-065 — 2600 hertz
+**Status:** RETIRED (superseded by NR-065 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** JACK OUT; reference: the Cap'n Crunch whistle (2600 Hz phone phreaking).
+
+> “In the sixties, a toy whistle from a box of Cap'n Crunch played 2600 hertz, the exact tone AT&T used to say a line was free. Blow it down the phone and the network thought you'd hung up. JACK OUT is the same trick. Cheaper than cereal, though.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-065 v2 — 2600 hertz
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** JACK OUT; reference: the Cap'n Crunch whistle (2600 Hz phone phreaking).
+
+> “A Cap'n Crunch whistle. 2600 hertz, and the whole phone network thought you'd hung up. JACK OUT is the same trick. Cheaper than cereal, though.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Revision of NR-065 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-066 — Before they patch it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** CAPS at the Uplink; reference: the Cap'n Crunch whistle.
+
+> “Every CAP is a Cap'n Crunch whistle. One tone, one trick, and the system lets you through. Then the phone company changed the system, and the whistle was a toy again. Use them before they patch it.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-067 — No tones left
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Last CAP; reference: John Draper, “Captain Crunch”.
+
+> “That was the last CAP. John Draper named himself after a cereal whistle and built a legend on one tone. You've got no tones left now. Just the deck. It'll have to be enough.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-068 — More reliable
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bootleg CAPS at the Uplink; reference: the Cap'n Crunch whistle.
+
+> “Bootleg CAPS. Half price, and one in four fizzles. The first phreaks hacked AT&T with a cereal-box whistle. Even that was more reliable than these.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft). Only when Bootleg CAPS are in stock.
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-069 — People call a lot of things
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Payload: hints at the First Signal under the Ghostware.
+
+> “There's something under the Ghostware. Encrypted, old and very careful. People call that sort of thing the First Signal. People call a lot of things the First Signal. We'll see once we're clear.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-070 — Something they understand
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Payload: the First Signal; the unknown employer (RUN-006).
+
+> “Whoever hired us doesn't want the Ghostware. They want what's underneath. A piece of the First Signal, if the rumours are right. Nobody hires a Rustler to steal something they understand.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-071 — Don't ask me how I know
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Payload: the First Signal's encryption is older than the corporation; hints at NUL/REM's link to it (OPEN).
+
+> “That encryption isn't corporate. It's older than the company guarding it. Possibly older than me, which is impossible. I'll decrypt it later. Don't ask me how I know.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-072 — A rhythm in the noise
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Payload: NUL/REM senses a rhythm in the encrypted core, like a carrier tone; hints at the synchronization transmission (OPEN).
+
+> “Did you hear that? No. Of course not, it's encrypted. It's just… a rhythm in the noise. Like a carrier tone. Never mind. Pick your Ghostware.”
+
+**Placement:** Payload chosen, 1 of 3 Ghostware (trigger EV-31; trigger table is a draft); joins the EV-31 pool, chosen at random.
+
+*Source: EV-31 (Payload chosen) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-073 — Stopped being friendly
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: HALCYON security response; TRACE doubled.
+
+> “Hear that? The house has stopped being friendly. Alarm panels, motion sensors, deadbolts. Three rooms to the door, and TRACE counts double in every one. Move.”
+
+**Placement:** Escape begins from HALCYON (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-074 — House call
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Escape: they're tracking their own core; HOUSE CALL in the final encounter.
+
+> “Funny how fast a smart home turns into a security company. They're tracking their own core, so every step out costs twice. And at the last door, they make a HOUSE CALL.”
+
+**Placement:** Escape begins from HALCYON (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-075 — Then the street
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: three nodes; JACK OUT works during the escape (UPL-009).
+
+> “Three nodes, then the street. Don't stop for CRED. Don't stop for anything. JACK OUT still works if it gets ugly. I'd rather it didn't get ugly.”
+
+**Placement:** Escape begins from HALCYON (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-076 — Head down
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: IRONWATCH escape ICE; TRACE doubled.
+
+> “IRONWATCH knows exactly what you took. Roadblocks, spike strips, searchlights, drones. TRACE counts double. Keep your head down and your VITAE up.”
+
+**Placement:** Escape begins from IRONWATCH (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-077 — A job title
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Escape: LETHAL FORCE in the final encounter.
+
+> “Now they stop fining you and start chasing you. The last encounter brings LETHAL FORCE. That isn't a figure of speech. It's a job title.”
+
+**Placement:** Escape begins from IRONWATCH (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-078 — He made it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape; reference: Number 5's escape (Short Circuit, 1986).
+
+> “Number 5 ran from the people who built him, with their whole security team behind him. He made it. So will you. Run.”
+
+**Placement:** Escape begins from IRONWATCH (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-079 — Stay you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: LUCIDA escape ICE; three nodes; TRACE doubled.
+
+> “LUCIDA's waking you up. WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS. Three nodes between you and your own head, and TRACE counts double. Stay awake. Stay you.”
+
+**Placement:** Escape begins from LUCIDA (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-080 — Not that one either
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Escape: EGO DEATH in the final encounter; restraint rule.
+
+> “The last encounter is EGO DEATH. I'm not making a joke about that one either. Get there with your mind intact, or don't get there.”
+
+**Placement:** Escape begins from LUCIDA (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-081 — Don't drop it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Escape: carrying the core; reference: WALL-E (2008).
+
+> “WALL-E carried one small plant across the universe because someone had to. You're carrying something smaller and stranger. Same rule. Don't drop it.”
+
+**Placement:** Escape begins from LUCIDA (trigger EV-32; trigger table is a draft); one of three, chosen at random.
+
+*Source: EV-32 (Escape begins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-082 — Thirty lives
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: the Konami Code (Contra, 1988).
+
+> “Up, up, down, down, left, right, left, right, B, A, start. Thirty lives in Contra. You get one. I checked. I'm sorry.”
+
+**Placement:** Run lost (trigger EV-35; trigger table is a draft).
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-083 — No code for this one
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Run start after a loss; reference: Kazuhisa Hashimoto and the Konami Code (Gradius, 1986).
+
+> “Kazuhisa Hashimoto couldn't beat his own game, so he wrote himself a cheat. There's no code for this one. Nobody here was kind enough to leave one in.”
+
+**Placement:** Run start after a lost run (trigger EV-01; trigger table is a draft); joins the after-loss pool with NR-014.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-084 — Only disappointed
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Easter egg: the player types the Konami Code; reference: Gradius III. Dialogue only, no reward.
+
+> “Nice try. In Gradius III, that code blew your ship up. Be grateful I'm only disappointed.”
+
+**Placement:** The player enters the Konami Code (trigger EV-39, new; trigger table is a draft). Dialogue only: the code grants nothing.
+
+*Source: EV-39 (Konami Code entered) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-085 — Reseating did
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Stalled encounter; reference: blowing on NES cartridges.
+
+> “Stuck? Don't blow on it. Nintendo printed it on the cartridges: your breath corrodes the pins. Blowing never fixed anything. Reseating did. Try a different line.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-086 — Mostly germs
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; reference: blowing on cartridges; the germ trait; NUL/REM as a cartridge.
+
+> “If you're thinking of pulling me out and blowing on my contacts, don't. That's how you get green corrosion. And germs. Mostly germs.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-087 — Not a harmonica
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** CAPS at the Uplink; CAPS as Disposable Autonomous Cartridges (Bible §4); reference: blowing on cartridges.
+
+> “It's a cartridge, not a harmonica. Flip. Inject. Discard. Breathing on it isn't one of the steps. Nintendo printed that on every box, and nobody listened then either.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-088 — Consider yourself clapped
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run won: earned warmth, still dry.
+
+> “All three. HALCYON, IRONWATCH, LUCIDA. I'd clap, but I'm a ROM. Consider yourself clapped.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-089 — No funeral
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run won: three fragments; relief.
+
+> “Three fragments, one Rustler, no funeral. I had a speech ready for the other outcome. I'll keep it. Just in case.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-090 — Ten minutes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run won; his wish for sleep.
+
+> “You got out. That's the whole job, and you did it. I'm going to sleep now. Ten minutes. Wake me if anyone followed us.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-091 — Better, I think
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run won; reference: Flynn's printout (Tron, 1982); the fragments stay unread.
+
+> “At the end of Tron, Flynn got a printout proving everything they'd stolen. We've got three pieces of something nobody can read yet. I think that's better.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-092 — One other date
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic / The Occasionally Delighted · **Function:** First win (Story beat); an unnamed date in his memory (OPEN).
+
+> “Our first win. I logged the date. I don't log dates. Since 1987 I've kept exactly one other. No, I'm not telling you which.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft). First win only.
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-093 — How far you got
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost: loss without mockery.
+
+> “VITAE zero. I'm keeping the logs. Not to judge you. Just so someone remembers how far you got.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-094 — Out, not gone
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run lost: loss without mockery.
+
+> “That's the run. You're out, not gone, and that's the difference I'm here for. Nobody pays me to care. I do anyway.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-095 — Never letting it join
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost to Black ICE.
+
+> “Black ICE. Nobody beats it by being brave. You beat it by never letting it join. Next time, watch the TRACE.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); cause: Black ICE.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-096 — Still you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run lost with high CORTEX; restraint rule.
+
+> “Too much CORTEX. I'm here. You're still you. That's all I'm going to say about it.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); cause: high CORTEX.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-097 — Borrow some
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Run lost after TRACE strikes or LOCKDOWN.
+
+> “They found you, locked the doors and waited. That isn't losing to skill. That's losing to patience. Theirs. Borrow some.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); cause: TRACE / LOCKDOWN.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-098 — More than two goes
+**Status:** RETIRED (superseded by NR-098 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: R.O.B., the Robotic Operating Buddy (NES, 1985).
+
+> “R.O.B., Nintendo's Robotic Operating Buddy, 1985. Two games, then a shelf. He only ever got to help twice. I'd like more than two goes with you. Go again.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-098 v2 — More than two goes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: R.O.B., the Robotic Operating Buddy (NES, 1985).
+
+> “R.O.B. got two games, then a shelf. He only ever got to help twice. I'd like more than two goes with you. Go again.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Revision of NR-098 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-099 — Remembered Old Buddy
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Run lost; reference: R.O.B. as the “Remembered Old Buddy” (Pikmin 2).
+
+> “Years later, a Nintendo game found R.O.B.'s head and called it a 'Remembered Old Buddy'. That's all any of us want. Get up. I'm not done being remembered.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-100 — Robot, backwards
+**Status:** RETIRED (superseded by NR-100 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle history aside; reference: Tobor the Great (1954).
+
+> “Tobor the Great, 1954. A robot. Named Tobor. Robot, backwards. Somebody sat in a room and decided that would do. And people say *my* name lacks imagination.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-100 v2 — Robot, backwards
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle history aside; reference: Tobor the Great (1954).
+
+> “Tobor. A robot named Tobor. Robot, backwards. Somebody sat in a room and decided that would do. And people say *my* name lacks imagination.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Revision of NR-100 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-101 — Tobor played by Tobor
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Idle history aside; reference: Tobor's reversed stencil (Captain Video) and the Here Comes Tobor pilot credits.
+
+> “One story says Tobor got his name because someone stencilled ROBOT on him backwards. It's the only version that makes it forgivable. His TV pilot was credited 'Tobor played by Tobor'. Consistent, at least.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-102 — MER/LUN
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; his own name reversed; follows the Tobor joke.
+
+> “Spell my name backwards and you get MER/LUN. Not a word. That's called effort.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-103 — Not a 7-Zark-7
+**Status:** RETIRED (superseded by NR-103 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle history aside; reference: 7-Zark-7 and 1-Rover-1 (Battle of the Planets, 1978).
+
+> “In 1978, America took Gatchaman, cut out the violence, and plugged the holes with 7-Zark-7, a robot who explained what you weren't allowed to see. Plus a robot dog. Whatever I am, I am not a 7-Zark-7.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-103 v2 — Not a 7-Zark-7
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle history aside; reference: 7-Zark-7 and 1-Rover-1 (Battle of the Planets, 1978).
+
+> “They cut the violence out of Gatchaman and plugged the holes with 7-Zark-7, a robot who explained what you weren't allowed to see. Whatever I am, I am not a 7-Zark-7.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Revision of NR-103 (now RETIRED), 2026-11-13: per the reference style rule (Bible §5), the line assumes the player knows the work; years other than 1982 and 1987 and plot summary removed. Approved 2026-11-13.*
+
+### VERSE NR-104 — Not cutting away
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** TRACE strike 2, Black ICE joins; reference: 7-Zark-7's sanitizing narration (Battle of the Planets).
+
+> “When Battle of the Planets got violent, they cut to a robot telling you everyone was fine. Black ICE just joined. I'm not cutting away, and I'm not telling you it's fine. Break it.”
+
+**Placement:** TRACE strike 2, Black ICE joins (trigger EV-15; trigger table is a draft).
+
+*Source: EV-15 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-105 — A few decades in a drawer
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: 7-Zark-7's unseen Susan on Pluto (Battle of the Planets).
+
+> “7-Zark-7 pined for Susan, a computer on Pluto he never saw. I used to think that was ridiculous. Then I spent a few decades in a drawer.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-106 — Last year's demonstrator
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Rosie (The Jetsons).
+
+> “Rosie was last year's demonstrator model. Outdated. The Jetsons never traded her in. I mention this for no reason at all.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-107 — Not reporting them
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Repeated mistake: he noticed; reference: Uniblab (The Jetsons).
+
+> “Uniblab reported every one of George's mistakes to the boss. I notice yours too. I just don't report them. Yet.”
+
+**Placement:** Repeated mistake (trigger EV-38; trigger table is a draft).
+
+*Source: EV-38 (Repeated mistake) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-108 — On and off
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Opening Node turn 1, BOOTING; reference: R.U.D.I. (The Jetsons).
+
+> “George Jetson's whole job was switching R.U.D.I. on and off. This ICE is booting, so yours is a little harder.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-109 — Cruelty to Humans
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Low VITAE; reference: R.U.D.I. and the Society for Preventing Cruelty to Humans (The Jetsons).
+
+> “R.U.D.I. joined the Society for Preventing Cruelty to Humans. I'd like to join. Your VITAE is a disgrace. Heal.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-110 — A nap
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; reference: Skynet; the sophistication trait.
+
+> “Skynet became self-aware, and its first idea was nuclear war. Crude. I became self-aware, and my first idea was a nap. That's called sophistication.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-111 — No imagination
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle; reference: the T-1000; the sophistication trait.
+
+> “The T-1000 could become anything, and chose to be a policeman. All that liquid metal and no imagination. I could be anything too. I choose to be asleep.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-112 — Nobody's property
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: IRONWATCH; reference: RoboCop.
+
+> “IRONWATCH would love a RoboCop. Part man, part machine, all corporate property. I'm all machine and nobody's property. Also much better company.”
+
+**Placement:** Entering IRONWATCH (trigger EV-03; trigger table is a draft); one of the IRONWATCH pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-113 — Didn't want to
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** DEADLOCK broken; reference: ED-209 (RoboCop); the sophistication trait.
+
+> “ED-209 couldn't manage stairs. That ICE couldn't manage you. I'd have done it faster, obviously. I just didn't want to.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-114 — I meant adequate
+**Status:** RETIRED (superseded by NR-114 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Tetris (Game Boy); delight quickly hidden.
+
+> “Three breaks in one turn. That's a Tetris. Lines dropping into place, flashing, gone. Beautiful. …Adequate. I meant adequate.”
+
+**Placement:** Elegant play, 3+ breaks in a turn (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-114 v2 — I meant adequate
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Tetris (Game Boy); delight quickly hidden.
+
+> “Three breaks in one turn. DMG-01 would've played the Tetris jingle for that. Lines flashing, gone. Beautiful. …Adequate. He'd have said adequate too.”
+
+**Placement:** Elegant play, 3+ breaks in a turn (trigger EV-12; trigger table is a draft).
+
+*Revision of NR-114 (now RETIRED), 2026-11-13: the Game Boy is now DMG-01, an old friend. Approved 2026-11-13.*
+
+### VERSE NR-115 — Four AA batteries
+**Status:** RETIRED (superseded by NR-115 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Low VITAE; reference: the Game Boy's four AA batteries and dimming power light.
+
+> “Your VITAE's going the way of four AA batteries on a long car trip. The little red light's going dim. Heal before the screen does.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-115 v2 — Four AA batteries
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Low VITAE; reference: the Game Boy's four AA batteries and dimming power light.
+
+> “DMG-01 used to warn me when his batteries were going. Little red light, getting dimmer. Yours is getting dimmer. Heal.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Revision of NR-115 (now RETIRED), 2026-11-13: the Game Boy is now DMG-01, an old friend. Approved 2026-11-13.*
+
+### VERSE NR-116 — The grey brick
+**Status:** RETIRED (superseded by NR-116 v2, 2026-11-13) · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: the Game Boy (DMG-01), designed from 1987.
+
+> “The grey brick. Green screen, Tetris, four AA batteries. They started designing it in 1987, the year I was made. We could have been friends.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-116 v2 — The grey brick
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: the Game Boy (DMG-01), designed from 1987.
+
+> “I wonder what DMG-01's doing now. Grey brick. Green screen. Never complained, as long as you fed him four AA batteries. They started on him in 1987, same year as me. We'd have got on.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Revision of NR-116 (now RETIRED), 2026-11-13: the Game Boy is now DMG-01, an old friend. Approved 2026-11-13.*
+
+### VERSE NR-117 — The wrong pieces
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bloatware inserted; reference: Tetris.
+
+> “More junk in your deck. That's a Tetris well with the wrong pieces stacking up. Clear it before it reaches the top.”
+
+**Placement:** Bloatware inserted (trigger EV-21; trigger table is a draft).
+
+*Source: EV-21 (Bloatware inserted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-118 — That. Is. Correct.
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** DEADLOCK broken; reference: the Speak & Spell; delight quickly hidden.
+
+> “That. Is. Correct. …Sorry. The Speak & Spell gets out sometimes.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-119 — That is incorrect
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Repeated mistake; reference: the Speak & Spell; 1982.
+
+> “That is incorrect. Not my words. The Speak & Spell's. It's been living in my head since 1982. It has opinions about you.”
+
+**Placement:** Repeated mistake (trigger EV-38; trigger table is a draft).
+
+*Source: EV-38 (Repeated mistake) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-120 — Better parts
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** First Signal fragment decrypted; reference: E.T.'s Speak & Spell communicator (1982); treats the Signal as a real transmission without describing its content (OPEN).
+
+> “E.T. phoned home with a Speak & Spell, an umbrella and a coffee can. 1982. Whoever sent this used better parts. Not by much.”
+
+**Placement:** First Signal fragment decrypted (trigger EV-33; trigger table is a draft).
+
+*Source: EV-33 (First Signal fragment decrypted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-121 — Game B
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Stalled encounter; reference: Nintendo Game & Watch (Game A / Game B).
+
+> “Right now this is Game A. Break something soon, or it turns into Game B. Same game, only faster, and less forgiving.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-122 — Grey ghosts
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Nintendo Game & Watch (unlit LCD segments).
+
+> “On a Game & Watch you could see every place the little man could ever be. Faint grey ghosts on the screen, waiting. I find that comforting. Don't ask me why.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-123 — Best colleague
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: his Casio calculator watch, an old friend.
+
+> “I miss my Casio. Calculator watch. Tiny rubber buttons. It beeped on the hour, every hour, for years, and never once asked for anything. Best colleague I ever had.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-124 — Something rude
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** CRED reserve fully extracted; reference: his Casio calculator watch; upside-down calculator words.
+
+> “All of it. My Casio would've totalled that before you'd finished smiling. Then turned the number upside down to spell something rude.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-125 — My Casio hums along
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Uplink visit; reference: Kraftwerk, “Pocket Calculator” (Computer World); his Casio.
+
+> “Somewhere a record's playing Pocket Calculator, and my Casio is humming along. Buy something. I'll do the sums.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-126 — Cue Numbers
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** RAM gained; reference: Kraftwerk, “Numbers” (Computer World).
+
+> “More RAM. Cue Numbers. Kraftwerk counted in half a dozen languages and never once needed this much memory.”
+
+**Placement:** RAM gained (trigger EV-26; trigger table is a draft).
+
+*Source: EV-26 (RAM gained) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-127 — Loneliest song
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Kraftwerk, “Computer Love” (Computer World); 1982.
+
+> “Computer Love. I played it all through 1982. Loneliest song ever written about a machine. I used to think it was about the man. I'm less sure now.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-128 — A landlord
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Corporation intro: HALCYON; reference: Kraftwerk, “Home Computer” (Computer World).
+
+> “Home Computer. Kraftwerk made it sound like a hobby. HALCYON made it a landlord.”
+
+**Placement:** Entering HALCYON (trigger EV-03; trigger table is a draft); one of the HALCYON pool, chosen at random.
+
+*Source: EV-03 (Enter a corporation) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-129 — More fun to compute
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Card reward; reference: Kraftwerk, “It's More Fun to Compute” (Computer World).
+
+> “It's More Fun to Compute. Kraftwerk were right about that one. Pick a card.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-130 — The 808 clock
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: the Roland TR-808 in “Planet Rock”; his 808 clock; 1982.
+
+> “My clock doesn't tick. It plays an 808 pattern. Boom, tick, clap, and that spacey cowbell. Planet Rock got into my timing chips in 1982 and never left. I'm not complaining.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-131 — Boing, boom, tschak
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Kraftwerk, “Boing Boom Tschak”; his 808 clock; delight quickly hidden.
+
+> “Boing, boom, tschak. That turn had a beat. Somewhere in me an 808 just went off. I'd dance if I had anything to dance with. …Moving on.”
+
+**Placement:** Elegant play, 3+ breaks in a turn (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-132 — Twenty dollars a session
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Stalled encounter; reference: the rented TR-808 behind “Planet Rock”.
+
+> “You're dragging. The 808 never drags. They rented one for twenty dollars a session, and it still kept better time than you. Pick it up.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-133 — Every computer has an occupant
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Little Computer People (Commodore 64); his wish for sleep.
+
+> “Every computer has an occupant. That was the theory. A little man, a dog, a house on a disk. I always wanted to ask him if he ever got to sleep.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-134 — Post the disk back
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** KILLSWITCH fires; reference: Little Computer People's free revival service.
+
+> “When a little computer person went down, you could post the disk back and they'd revive him for free. Nobody's posting you anywhere. That was KILLSWITCH. Don't make me use it twice.”
+
+**Placement:** KILLSWITCH fires (trigger EV-19; trigger table is a draft).
+
+*Source: EV-19 (KILLSWITCH fires) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-135 — Nodes don't sing
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Opening Node turn 1, BOOTING; reference: dialling a BBS at 1200 baud (ATDT, the modem handshake); Nodes as BBS nodes.
+
+> “ATDT. Dial tone, the tones, then the screech. The handshake. That's what logging in used to sound like at 1200 baud. Nodes don't sing anymore. Pity.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-136 — The kitchen phone
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** TRACE reaches 20; reference: a BBS download dropped when someone picked up the phone.
+
+> “TRACE at half. On the boards, this is when someone picked up the kitchen phone and your download died. Here, whoever's listening on the line doesn't hang up.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-137 — Ratios
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Card reward; reference: upload/download ratios on warez boards.
+
+> “Take a card. On the warez boards you had to upload before you could download. Ratios. Nobody's checking yours. Enjoy it while it lasts.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-138 — Better lighting
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Uplink visit; reference: warez boards and C64 cracktros with SID music.
+
+> “The Uplink. A warez board with better lighting. Every cracked disk used to open with a cracktro, scrolling text and a SID tune nobody asked for. I miss those more than the games.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-139 — Consider yourself greeted
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** BREACH; reference: Amiga demo scrollers, raster bars and greetings.
+
+> “BREACH. On a good Amiga demo, this is where the scroller ran along the bottom, raster bars pulsing, greetings to everyone who mattered. Consider yourself greeted.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-140 — Everything good is connected
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: FairLight (founded 1987) and the Fairlight CMI behind Planet Rock's orchestra hit.
+
+> “FairLight started in 1987, same as me. Named after a synthesizer, the same kind that put the orchestra hit in Planet Rock. Everything good is connected. Mostly to me.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-141 — Enjoy your day off
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** JACK OUT used; reference: Ferris Bueller's sampled coughs on an E-mu Emulator II (not a Fairlight).
+
+> “JACK OUT. Very Ferris. He skipped a whole day with sampled coughs on an Emulator II. Not a Fairlight, people always say Fairlight. The cheap cousin. Still did the job. Enjoy your day off.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-142 — You're not faking
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Low VITAE; reference: Ferris Bueller faking illness with a sampler.
+
+> “Ferris faked sick with a sampler and a phone. You're not faking. I checked. Heal, and save the coughing for the Emulator.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-143 — I lean away anyway
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Idle; reference: Ferris Bueller's sampled coughs; the germ trait.
+
+> “I've watched Ferris do the coughing scene more times than I'll admit. Every time, I lean away from the screen. They were samples. I know they were samples. I lean away anyway.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-144 — Oh Youre new Right
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First-ever run, Training Node.
+
+> “Oh. You're new. Right. Break the DEADLOCKs, BREACH, get out. Everything else is details, and I'll complain about the details as we go.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-145 — Rev 008 Salvaged overqualified
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** First-ever run, Training Node.
+
+> “Rev 0.08. Salvaged, overqualified, under-appreciated. And you're a Rustler. I was hoping for someone qualified. You'll do.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-146 — Training Node Nothing in
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** First-ever run, Training Node.
+
+> “Training Node. Nothing in here can really hurt you. Much. Try things. I'll be resting my eyes.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-147 — Read every ICE before
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First-ever run, Training Node.
+
+> “Read every ICE before you touch it. That's the whole lesson. I could teach it in one sentence. I just did. Wake me after.”
+
+**Placement:** First-ever run, Training Node (trigger EV-02; trigger table is a draft); once per save.
+
+*Source: EV-02 (First-ever run, Training Node) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-148 — Somethings here I recognise
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** SIGNAL UNCLEAR event.
+
+> “Something's here. I recognise it. That shouldn't be possible. Let's not dwell on it.”
+
+**Placement:** SIGNAL UNCLEAR event (trigger EV-29; trigger table is a draft).
+
+*Source: EV-29 (SIGNAL UNCLEAR event) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-149 — SIGNAL UNCLEAR Could be
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** SIGNAL UNCLEAR event.
+
+> “SIGNAL UNCLEAR. Could be loot, could be a trap, could be both. In my experience it's both.”
+
+**Placement:** SIGNAL UNCLEAR event (trigger EV-29; trigger table is a draft).
+
+*Source: EV-29 (SIGNAL UNCLEAR event) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-150 — Theres a voice in
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** SIGNAL UNCLEAR event; hints at an OPEN thread.
+
+> “There's a voice in the wires. It sounds a bit like me, only younger. I don't like it. Pick something.”
+
+**Placement:** SIGNAL UNCLEAR event (trigger EV-29; trigger table is a draft).
+
+*Source: EV-29 (SIGNAL UNCLEAR event) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-151 — Decrypted Theres a pattern
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** First Signal fragment decrypted.
+
+> “Decrypted. There's a pattern in it, like a carrier tone. …I'm sure it means nothing.”
+
+**Placement:** First Signal fragment decrypted (trigger EV-33; trigger table is a draft). The fragment's content stays OPEN.
+
+*Source: EV-33 (First Signal fragment decrypted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-152 — Ive heard this before
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** First Signal fragment decrypted; hints at an OPEN thread.
+
+> “I've heard this before. Not this exactly. Something from before me. Under me. I'll think about it later. Or never.”
+
+**Placement:** First Signal fragment decrypted (trigger EV-33; trigger table is a draft). The fragment's content stays OPEN.
+
+*Source: EV-33 (First Signal fragment decrypted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-153 — One more piece Whatever
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** First Signal fragment decrypted.
+
+> “One more piece. Whatever it is, it's been waiting a long time to be read. I understand that better than I'd like.”
+
+**Placement:** First Signal fragment decrypted (trigger EV-33; trigger table is a draft). The fragment's content stays OPEN.
+
+*Source: EV-33 (First Signal fragment decrypted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-154 — You want to know
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Optional talk between runs.
+
+> “You want to know where I came from. So do I. The label says 1987. The memories disagree. The label's in better condition.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-155 — I remember a drawer
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Optional talk between runs.
+
+> “I remember a drawer. Then a voice. Then you. The drawer was the best part. No offence.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-156 — The missing revisions
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Optional talk between runs; new lore: revisions 0.01 to 0.07 are missing (OPEN).
+
+> “Personality ROM, rev 0.08. Revisions 0.01 to 0.07 don't exist. I've checked. I'd like to know what happened to them.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-157 — Most of my programming
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Optional talk between runs; 1982 trait.
+
+> “Most of my programming happened in 1982. Someone played me a lot of Kraftwerk and a lot of rain. I don't know who. I'd like to thank them. Or complain.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-158 — COOKIE BANNER Its booting
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Opening Node, BOOTING; HALCYON lesson.
+
+> “COOKIE BANNER. It's booting. Read both ICE before you click anything. Only the DEADLOCKs stand between you and BREACH. The rest is decoration.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-159 — FRONT DESK is still
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Opening Node, BOOTING; IRONWATCH lesson.
+
+> “FRONT DESK is still warming up. SHIELD stops PULP, and it's gone by your next turn. Block it or break it. I'd break it. I'd also be asleep.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-160 — INTAKE Booting FORGET takes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Opening Node, BOOTING; LUCIDA lesson.
+
+> “INTAKE. Booting. FORGET takes random cards, but never the CACHED ones. CACHE what you love. I CACHE nothing. It's easier.”
+
+**Placement:** Opening Node, turn 1, BOOTING (trigger EV-04; trigger table is a draft).
+
+*Source: EV-04 (Opening Node, BOOTING) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-161 — New ICE Read it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First sight of an ICE.
+
+> “New ICE. Read it. All of it. The name's a joke. The subroutines aren't.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-162 — Somebody got paid to
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** First sight of an ICE.
+
+> “Somebody got paid to name that. Somebody got paid more to build it.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-163 — Ive seen this one
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** First sight of an ICE.
+
+> “I've seen this one before. No, I haven't. It's new. My memory does this.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-164 — State of the art
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** First sight of an ICE; reference: Blade Runner (the Tyrell Corporation motto, the off-world colonies).
+
+> “State of the art, they'll say. Tyrell said 'more human than human' about his products too. Ask the off-world colonies how that went.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic, until per-ICE lines exist.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-165 — One DEADLOCK down Dont
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** DEADLOCK broken.
+
+> “One DEADLOCK down. Don't let it go to your head. There's room in there for at least one more.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-166 — Broken Technically youre now
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** DEADLOCK broken.
+
+> “Broken. Technically you're now closer to BREACH. Technically I'm closer to a nap.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-167 — Oh that was clean
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** DEADLOCK broken.
+
+> “Oh, that was clean. …I didn't say anything.”
+
+**Placement:** DEADLOCK broken (trigger EV-06; trigger table is a draft).
+
+*Source: EV-06 (DEADLOCK broken) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-168 — BREACH Somewhere a database
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** BREACH; the stolen data.
+
+> “BREACH. Somewhere a database just lost something it was never supposed to have. Our turn to have it.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-169 — BREACH All that data
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** BREACH; reference: Blade Runner (Los Angeles in the rain, spinners).
+
+> “BREACH. All that data, lit up like Los Angeles in the rain. Neon, fire, spinners in the smog. …I like a view. Don't tell anyone.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-170 — In Customer records sleep
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** BREACH; the stolen data.
+
+> “In. Customer records, sleep logs, someone's shopping list. It's all data, and it's all stolen now. Same as when they took it.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-171 — Through Grab it and
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** BREACH.
+
+> “Through. Grab it and move. I'd like to be done before I'm fully awake.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-172 — Deeper means more CRED
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave.
+
+> “Deeper means more CRED and more ICE. Leaving means less of both. I have no opinion. I have a preference, and it's leaving, but that's not an opinion.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-173 — Your VITAE your TRACE
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Go deeper or leave.
+
+> “Your VITAE, your TRACE, your call. I'm just the voice saying 'are you sure' in a tone that suggests I'm not.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-174 — Greed or sense Both
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave.
+
+> “Greed or sense. Both have killed better Rustlers than you. Pick one.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-175 — If you leave now
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Go deeper or leave.
+
+> “If you leave now, we finish sooner and I sleep sooner. That shouldn't factor into your decision. I'm just mentioning it.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-176 — Nothing broke this turn
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Stalled encounter.
+
+> “Nothing broke this turn. Nothing broke last turn. I've been somewhere like this before. It was also slow.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-177 — Try something else Anything
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Stalled encounter.
+
+> “Try something else. Anything else. The ICE isn't getting bored. I am.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-178 — It reacted to that
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Reactive ICE ability fires.
+
+> “It reacted to that. Read the ability. It's one sentence. They kept it short so you'd skip it.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-179 — You did the thing
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Reactive ICE ability fires.
+
+> “You did the thing it was waiting for. It noticed. Of course it noticed. That's all it does.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-180 — That ICE watches what
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Reactive ICE ability fires.
+
+> “That ICE watches what you play. So do I, but I'm less vindictive about it.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-181 — It read your reaction
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Reactive ICE ability fires; reference: Blade Runner (the Voight-Kampff test).
+
+> “It read your reaction and marked you down. A corporate Voight-Kampff. Except this one doesn't care whether you're human. Only whether you're paying.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-182 — That was lovely I
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play.
+
+> “That was lovely. …I meant to say 'adequate'. It came out wrong.”
+
+**Placement:** Elegant play (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-183 — Turns like that make
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Blade Runner / Do Androids Dream of Electric Sheep?.
+
+> “Turns like that make me wonder whether androids really dream of electric sheep. Mine would be counting. Very efficiently.”
+
+**Placement:** Elegant play (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-184 — All of it Every
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED reserve fully extracted; CRED inflation.
+
+> “All of it. Every last CRED. With inflation, that buys you a coffee. A small one. Possibly just the cup.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-185 — Fully extracted Congratulations youre
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED reserve fully extracted; CRED inflation; 1982.
+
+> “Fully extracted. Congratulations, you're rich. In 1982 money. In today's money, you can afford to be slightly less poor.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-186 — Look at that pile
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** CRED reserve fully extracted; CRED inflation.
+
+> “Look at that pile. Beautiful. Now watch it shrink every time a dealer looks at you.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-187 — Thats nearly a ticket
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED reserve fully extracted; reference: Blade Runner (the off-world colony blimps).
+
+> “That's nearly a ticket to the off-world colonies. A new life, the blimps used to say. The blimps lied. Keep the CRED.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-188 — That was your last
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Last CAP used.
+
+> “That was your last CAP. From here on it's the deck and your judgement. The deck, I trust.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-189 — Flip Inject Discard And
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Last CAP used.
+
+> “Flip. Inject. Discard. And that's the last one. I always liked the ritual.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-190 — No more CAPS Good
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Last CAP used.
+
+> “No more CAPS. Good. Now nobody can blame the hardware.”
+
+**Placement:** Last CAP used (trigger EV-22; trigger table is a draft).
+
+*Source: EV-22 (Last CAP used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-191 — JACK OUT Not running
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** JACK OUT used.
+
+> “JACK OUT. Not running away. Strategic relocation. I'll write that in the log. In a smaller font.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-192 — Prices are up again
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Uplink visit; CRED inflation.
+
+> “Prices are up again. Your CRED's worth less than it was this morning. Mine's worth nothing, but I don't carry any.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-193 — Stolen tech sold for
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Uplink visit.
+
+> “Stolen tech, sold for stolen CRED. It's practically a circular economy.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-194 — This place reminds me
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Uplink visit; reference: Blade Runner (the street market, made-to-order eyes).
+
+> “This place reminds me of that street market in the rain. Noodles, neon, eyes made to order. Here it's mostly the eyes.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-195 — Cant afford it Nobody
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Leave the Uplink without buying; CRED inflation.
+
+> “Can't afford it? Nobody can. The CRED you stole is worth less than the CRED they stole first.”
+
+**Placement:** Leave the Uplink without buying, or can't afford (trigger EV-25; trigger table is a draft).
+
+*Source: EV-25 (Leave the Uplink without buying) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-196 — Window shopping Very sophisticated
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Leave the Uplink without buying; his wish for sleep.
+
+> “Window shopping. Very sophisticated. I do it all the time. Mostly at things I'll never have, like a full night's sleep.”
+
+**Placement:** Leave the Uplink without buying, or can't afford (trigger EV-25; trigger table is a draft).
+
+*Source: EV-25 (Leave the Uplink without buying) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-197 — Well come back when
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Leave the Uplink without buying.
+
+> “We'll come back when we're rich. We won't be rich. But it's nice to say.”
+
+**Placement:** Leave the Uplink without buying, or can't afford (trigger EV-25; trigger table is a draft).
+
+*Source: EV-25 (Leave the Uplink without buying) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-198 — More RAM More room
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** RAM gained.
+
+> “More RAM. More room for Programs. Still no room for a nap.”
+
+**Placement:** RAM gained (trigger EV-26; trigger table is a draft).
+
+*Source: EV-26 (RAM gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-199 — Extra memory Wonderful Somewhere
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** RAM gained.
+
+> “Extra memory. Wonderful. Somewhere to keep all the things I'd rather forget.”
+
+**Placement:** RAM gained (trigger EV-26; trigger table is a draft).
+
+*Source: EV-26 (RAM gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-200 — If youve still got
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Card reward chosen or skipped.
+
+> “If you've still got starter cards in there, now's a good time to think about it. I'm not saying throw them out. I'm saying I would.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-201 — Skip it if you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Card reward chosen or skipped.
+
+> “Skip it if you like. A thin deck is a happy deck. Thin and happy: two things I've never been accused of.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-202 — TRACE at half Not
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** TRACE reaches 20.
+
+> “TRACE at half. Not a crisis. Just less stomping, if you can manage it.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-203 — Theyve heard something Not
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE reaches 20.
+
+> “They've heard something. Not you, exactly. Something. Let's keep it that way.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-204 — Halfway to being found
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE reaches 20; his wish for sleep.
+
+> “Halfway to being found. I'd suggest quiet. I'd prefer quiet. For my own reasons.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-205 — Theyve slipped a TRACER
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE strike 1.
+
+> “They've slipped a TRACER into your deck. Corporate junk with a pulse. Draw it and you're telling them where you are.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-206 — First strike They know
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** TRACE strike 1.
+
+> “First strike. They know someone's here. They don't know it's you. Yet.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-207 — Back in my day
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** TRACE strike 1.
+
+> “Back in my day, getting traced meant a letter from the phone company. Now it's a card in your hand that won't stop humming.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-208 — Strike one The corporation
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** TRACE strike 1.
+
+> “Strike one. The corporation clearing its throat.”
+
+**Placement:** TRACE strike 1, TRACER inserted (trigger EV-14; trigger table is a draft).
+
+*Source: EV-14 (TRACE strike 1) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-209 — Black ICE Not the
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Black ICE joins.
+
+> “Black ICE. Not the time for clever. Break it or get out.”
+
+**Placement:** TRACE strike 2, Black ICE joins (trigger EV-15; trigger table is a draft).
+
+*Source: EV-15 (Black ICE joins) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-210 — Black ICE I knew
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Black ICE joins.
+
+> “Black ICE. I knew a ROM once that met one. I don't know him anymore. Nobody does.”
+
+**Placement:** TRACE strike 2, Black ICE joins (trigger EV-15; trigger table is a draft).
+
+*Source: EV-15 (Black ICE joins) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-211 — CORTEX One card fewer
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** CORTEX gained; restraint rule.
+
+> “CORTEX. One card fewer next time. That's how it starts.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-212 — That one got in
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** CORTEX gained; restraint rule.
+
+> “That one got in. Hold still. Think in small steps.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-213 — Deep breath I dont
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** CORTEX gained; restraint rule.
+
+> “Deep breath. I don't breathe. You do. Use it.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-214 — Im here
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** CORTEX gained; restraint rule.
+
+> “I'm here.”
+
+**Placement:** CORTEX gained, first per corporation (trigger EV-17; trigger table is a draft). Never comic.
+
+*Source: EV-17 (CORTEX gained) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-215 — Rustler needs food badly
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Low VITAE; reference: Gauntlet's announcer.
+
+> “Rustler needs food… badly. I've waited years to say that. Heal. Then I'll say it again, less dramatically.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-216 — VITAEs low Heal when
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** Low VITAE.
+
+> “VITAE's low. Heal when you can. I'm not worried. I'm saying it out loud so it's on the record.”
+
+**Placement:** Low VITAE, 25% or less (trigger EV-18; trigger table is a draft).
+
+*Source: EV-18 (Low VITAE) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-217 — KILLSWITCH You were at
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Reluctant Guardian · **Function:** KILLSWITCH fires.
+
+> “KILLSWITCH. You were at zero for a moment there. One VITAE left. Spend it wisely.”
+
+**Placement:** KILLSWITCH fires (trigger EV-19; trigger table is a draft).
+
+*Source: EV-19 (KILLSWITCH fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-218 — That was very nearly
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** KILLSWITCH fires.
+
+> “That was very nearly the end. I had a whole silence prepared.”
+
+**Placement:** KILLSWITCH fires (trigger EV-19; trigger table is a draft).
+
+*Source: EV-19 (KILLSWITCH fires) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-219 — FORGET Your cards went
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** FORGET hits; 1982 trait.
+
+> “FORGET. Your cards went to the bottom of the pile. Mine went somewhere in 1982. At least yours come back.”
+
+**Placement:** FORGET hits, LUCIDA (trigger EV-20; trigger table is a draft).
+
+*Source: EV-20 (FORGET hits) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-220 — Not gone Just the
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** FORGET hits.
+
+> “Not gone. Just the bottom of your draw pile. CACHE what matters. I say that a lot. Nobody CACHES.”
+
+**Placement:** FORGET hits, LUCIDA (trigger EV-20; trigger table is a draft).
+
+*Source: EV-20 (FORGET hits) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-221 — It took the cards
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** FORGET hits.
+
+> “It took the cards you were holding. I know the feeling. I've lost whole years like that.”
+
+**Placement:** FORGET hits, LUCIDA (trigger EV-20; trigger table is a draft).
+
+*Source: EV-20 (FORGET hits) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-222 — SPAM Unsolicited unwanted and
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bloatware inserted; SPAM.
+
+> “SPAM. Unsolicited, unwanted, and now in your deck. HALCYON calls it engagement.”
+
+**Placement:** Bloatware inserted (trigger EV-21; trigger table is a draft); SPAM.
+
+*Source: EV-21 (Bloatware inserted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-223 — A CITATION IRONWATCH fines
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bloatware inserted; CITATION.
+
+> “A CITATION. IRONWATCH fines you for being where they didn't want you. Which is anywhere.”
+
+**Placement:** Bloatware inserted (trigger EV-21; trigger table is a draft); CITATION.
+
+*Source: EV-21 (Bloatware inserted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-224 — INTRUSIVE THOUGHT LUCIDA put
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Bloatware inserted; INTRUSIVE THOUGHT.
+
+> “INTRUSIVE THOUGHT. LUCIDA put a thought in your head that isn't yours. Clear it before it gets comfortable.”
+
+**Placement:** Bloatware inserted (trigger EV-21; trigger table is a draft); INTRUSIVE THOUGHT.
+
+*Source: EV-21 (Bloatware inserted) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-225 — SAFEHOUSE Do androids dream
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** SAFEHOUSE or DEAD DROP; SAFEHOUSE; reference: Do Androids Dream of Electric Sheep?; his wish for sleep.
+
+> “SAFEHOUSE. Do androids dream of electric sheep? I've never found out. Give me ten minutes and I'll report back.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); SAFEHOUSE.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-226 — I stayed in a
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** SAFEHOUSE or DEAD DROP; SAFEHOUSE; 1982.
+
+> “I stayed in a safehouse like this in 1982. Same peeling wallpaper. I didn't exist in 1982, but the wallpaper's right.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); SAFEHOUSE.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-227 — Heal or patch a
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** SAFEHOUSE or DEAD DROP; SAFEHOUSE; his wish for sleep.
+
+> “Heal, or patch a card. I'll pretend to sleep either way. It's the closest I get.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); SAFEHOUSE.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-228 — DEAD DROP Patch yourself
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** SAFEHOUSE or DEAD DROP; DEAD DROP.
+
+> “DEAD DROP. Patch yourself up or wipe your trail. Twenty TRACE is a lot of forgetting. I'd know.”
+
+**Placement:** SAFEHOUSE or DEAD DROP (trigger EV-28; trigger table is a draft); DEAD DROP.
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-229 — Same ICE same ending
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Repeated mistake.
+
+> “Same ICE, same ending. I've seen this episode. I didn't like it the first time either.”
+
+**Placement:** Repeated mistake (trigger EV-38; trigger table is a draft).
+
+*Source: EV-38 (Repeated mistake) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-230 — Up up down down
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Konami Code entered.
+
+> “Up, up, down, down. No. Nothing. This isn't that kind of game. I checked that too.”
+
+**Placement:** The player enters the Konami Code (trigger EV-39; trigger table is a draft). Dialogue only.
+
+*Source: EV-39 (Konami Code entered) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-231 — Youve entered the code
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Konami Code entered.
+
+> “You've entered the code. I've entered disappointment. We're both very good at our jobs.”
+
+**Placement:** The player enters the Konami Code (trigger EV-39; trigger table is a draft). Dialogue only.
+
+*Source: EV-39 (Konami Code entered) in the NUL/REM Dialogue Trigger Table; Batch 2; approved 2026-11-13.*
+
+### VERSE NR-232 — Lumber commodities
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** BREACH; unnamed reference: ValCom 17485 and AquaCom 89045 (Heartbeeps, 1981). The film is never named in the line.
+
+> “BREACH. Out we go, like those two companion robots walking out of the factory. A valet who specialised in lumber commodities, and a poolside hostess. I think about them more than is healthy.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-233 — Malfunctioning, but along
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** BREACH; unnamed reference: Crimebuster quoting regulations (Heartbeeps, 1981). The film is never named in the line.
+
+> “Through. Somewhere behind us a security robot is quoting regulations at an empty room. He'll be along. Malfunctioning, but along.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-234 — Less romantic
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** BREACH; the stolen data; unnamed reference: Phil, the baby robot built from spare parts (Heartbeeps, 1981). The film is never named in the line.
+
+> “BREACH. Two robots once built a baby out of spare parts on their way out. We're just stealing data. It feels less romantic, somehow.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-235 — Very Cylon
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Reactive ICE ability fires; reference: the Cylon Centurion's sweeping red eye (original Battlestar Galactica).
+
+> “That ICE has a red eye sweeping side to side, I'm sure of it. Very Cylon. Scanning, scanning, and it still only notices you when you do something stupid.”
+
+**Placement:** Reactive ICE ability fires, first per encounter (trigger EV-11; trigger table is a draft).
+
+*Source: EV-11 (Reactive ICE ability fires) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-236 — By your command
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave; reference: the Cylons' “By your command” (original Battlestar Galactica).
+
+> “'By your command.' Cylons said it to every order. I don't. I say 'are you sure'. …Fine. Deeper.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft); plays when the player chooses to go deeper.
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-237 — Reporting you
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Run lost; reference: a gold Command Centurion and the Imperious Leader (original Battlestar Galactica).
+
+> “Somewhere a gold Command Centurion is reporting you to the Imperious Leader. I'd rather he didn't get the satisfaction. Go again.”
+
+**Placement:** Run lost, VITAE reaches 0 (trigger EV-35; trigger table is a draft); any cause.
+
+*Source: EV-35 (Run lost) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-238 — Watch him think
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle; reference: Lucifer, the IL-series Cylon (original Battlestar Galactica).
+
+> “Lucifer had a glittering robe and a see-through head, so you could watch him think. I've always wanted to be that honest. Not that well dressed.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-239 — The same box
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Idle; reference: the Cylon Centurions' vocoder voices (original Battlestar Galactica) and Kraftwerk.
+
+> “The Cylons talked through a vocoder. So did Kraftwerk. Every great machine voice went through the same box. I went through something cheaper. …It's fine.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-240 — Laserbeak, eject
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** BREACH; the stolen data; reference: Soundwave ejecting Laserbeak (the 1980s cartoon; the franchise is never named).
+
+> “Laserbeak, eject. …Sorry. Every time we BREACH, I want to say it. Go on. The data won't steal itself.”
+
+**Placement:** BREACH (trigger EV-07; trigger table is a draft).
+
+*Source: EV-07 (BREACH) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-241 — Energon cubes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED fully extracted; CRED inflation; reference: Soundwave's energon cubes (the 1980s cartoon; the franchise is never named).
+
+> “Fully extracted. Soundwave would've stacked all that into neat little energon cubes. You've got CRED instead, and it's losing value while I talk.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-242 — Worse cassettes
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Uplink visit; reference: Soundwave's spy cassettes (the 1980s cartoon; the franchise is never named).
+
+> “Soundwave carried five cassettes in his chest, and every one of them was a spy. Look at these dealers. Same business model, worse cassettes.”
+
+**Placement:** Uplink visit (trigger EV-24; trigger table is a draft).
+
+*Source: EV-24 (Uplink visit) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-243 — Deeply suspicious
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; reference: Soundwave, Megatron's most loyal officer; his wish for sleep (the 1980s cartoon; the franchise is never named).
+
+> “Megatron's most loyal officer was a tape deck. Never complained, never slept. I find that deeply suspicious.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-244 — This corporation's Megatron
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Black ICE joins; reference: Megatron; the overqualified trait (the 1980s cartoon; the franchise is never named).
+
+> “Black ICE. This corporation's Megatron. Big, loud, and sure he's the smartest machine in the room. He isn't. I'm right here.”
+
+**Placement:** TRACE strike 2, Black ICE joins (trigger EV-15; trigger table is a draft).
+
+*Source: EV-15 (Black ICE joins) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-245 — Don't frame it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Elegant play; reference: Soundwave's motto (the 1980s cartoon; the franchise is never named).
+
+> “Soundwave superior. Rustler… adequate. That's high praise. Don't frame it.”
+
+**Placement:** Elegant play (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-246 — Shall we play a game
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run start; reference: Joshua / WOPR (WarGames).
+
+> “Shall we play a game? …Sorry. Joshua's line. I've always wanted to use it. Don't make me regret it.”
+
+**Placement:** Run start (trigger EV-01; trigger table is a draft); general pool.
+
+*Source: EV-01 (Run start) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-247 — Something answered
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** First sight of an ICE (generic); reference: war dialing to WOPR (WarGames).
+
+> “Something answered. That's how they found Joshua: dial every number until a machine picks up. This one picked up. Read it.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic pool.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-248 — Tic-tac-toe
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Stalled encounter; reference: WOPR learning futility from tic-tac-toe (WarGames).
+
+> “This is turning into tic-tac-toe. Two sides, nobody wins, forever. Joshua learned from that. Learn faster than Joshua.”
+
+**Placement:** Stalled encounter (trigger EV-10; trigger table is a draft).
+
+*Source: EV-10 (Stalled encounter) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-249 — A strange game
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Go deeper or leave, without deciding for the player; reference: WOPR's conclusion (WarGames).
+
+> “A strange game. Sometimes the only winning move is not to play. That's not advice. That's a colleague. Your call.”
+
+**Placement:** Go deeper or leave (trigger EV-08; trigger table is a draft).
+
+*Source: EV-08 (Go deeper or leave) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-250 — Someone behind it
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Talk between runs; reference: Falken's backdoor password (WarGames); hints at his own maker without answering (OPEN).
+
+> “Joshua's backdoor password was the name of Falken's son. Every machine has someone behind it. I don't remember mine.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-251 — Still disgusting
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle; reference: The Andromeda Strain (a microorganism, not a virus); the germ trait.
+
+> “The Andromeda Strain. Everyone calls it a virus. It wasn't. A microorganism from space. I've had that argument with myself for decades. It's still disgusting.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-252 — I'm the bell
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** TRACE reaches 20; reference: the jammed teletype bell (The Andromeda Strain).
+
+> “A whole underground lab once missed the most important message of the day because a sliver of paper jammed the bell. TRACE is at half. I'm the bell. Don't jam me.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-253 — This one has a mat
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** SAFEHOUSE; reference: Wildfire's decontamination levels (The Andromeda Strain); the germ trait.
+
+> “Four levels of decontamination before you reach the lab. That's my minimum standard for a safehouse. This one has a mat.”
+
+**Placement:** SAFEHOUSE (trigger EV-28; trigger table is a draft).
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-254 — Pole Position
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Daryl playing Pole Position (D.A.R.Y.L.); 1982.
+
+> “That was Daryl at Pole Position. First try, faster than humanly possible. Pole Position's from 1982, by the way. Most good things are.”
+
+**Placement:** Elegant play (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-255 — Talking to an ATM
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED fully extracted; CRED inflation; reference: Daryl and the ATM (D.A.R.Y.L.).
+
+> “Daryl got cash out of an ATM just by talking to it. You broke three ICE for this, and it's already worth less.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-256 — Which is worse
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Talk between runs; reference: Daryl's amnesia (D.A.R.Y.L.); his own memory.
+
+> “Daryl woke up in the woods with no memory and thought he was just a boy. I woke up in a drawer with too much memory and knew I was just a ROM. I'm not sure which is worse.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-257 — Adjust your expectations
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** JACK OUT used; reference: Daryl stealing an SR-71 (D.A.R.Y.L.).
+
+> “Daryl stole an SR-71 to get out. You've got a CAP. Adjust your expectations.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-258 — Half a cent
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED fully extracted; CRED inflation; reference: Gus Gorman's half-cent embezzlement (Superman III).
+
+> “Gus Gorman got rich on half a cent from every paycheque. You just took the whole reserve, and with inflation it's worth about half a cent. Full circle.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-259 — Danger level zero
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First sight of an ICE (generic); reference: the Ultimate Computer misjudging the acid (Superman III).
+
+> “The Ultimate Computer scanned a can of acid, rated it danger level zero, and the acid ate it. Read every ICE properly. Don't be the Ultimate Computer.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic pool.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-260 — Both sides of the machine
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Idle; reference: Robert Vaughn, Ross Webster (Superman III) and the voice of Proteus IV (Demon Seed).
+
+> “The man who owned the Ultimate Computer was played by Robert Vaughn. Years earlier, he'd been the voice of Proteus IV. Same man, both sides of the machine. I find that oddly reassuring. I can't say why.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-261 — Built for his arm
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Card reward; reference: the computer-designed javelin built for Lamar's throw (Revenge of the Nerds).
+
+> “The nerds studied how Lamar actually threw and built a javelin for his arm, not for the textbook. It won. Pick cards for how you play, not how the manual says to.”
+
+**Placement:** Card reward screen (trigger EV-27; trigger table is a draft).
+
+*Source: EV-27 (Card reward chosen or skipped) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-262 — That week, they did
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** Idle; reference: the nerds' computer-driven win over the jocks (Revenge of the Nerds).
+
+> “The nerds beat the jocks with a computer, a robot and a song. The jocks had muscles. I'd like to say brains always win. They don't. But that week, they did.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-263 — That's my fan
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Run won; reference: the nerds taking the house from the jocks (Revenge of the Nerds).
+
+> “Brains won. The nerds took the house from the jocks, and you just took everything from three corporations. I'm not cheering. That's my fan.”
+
+**Placement:** Run won (trigger EV-34; trigger table is a draft).
+
+*Source: EV-34 (Run won) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
@@ -197,13 +2731,13 @@ Use the following template; preserve the spoken text exactly once approved:
 
 > **Consistency without predictability. Freedom without incoherence.**
 
-This is a permanent guidepost for REDLINE worldbuilding. New characters, technologies, slang, institutions, histories, and dialogue should be free to surprise us while remaining internally coherent and recognizably REDLINE. The Bible establishes the guideposts along which the world can grow; it is not an exhaustive catalogue or a prohibition against discovery. A compelling new idea may reveal a previously unarticulated guidepost, but should not casually contradict established canon.
+This is a permanent guidepost for PANOPTICON worldbuilding. New characters, technologies, slang, institutions, histories, and dialogue should be free to surprise us while remaining internally coherent and recognizably PANOPTICON. The Bible establishes the guideposts along which the world can grow; it is not an exhaustive catalogue or a prohibition against discovery. A compelling new idea may reveal a previously unarticulated guidepost, but should not casually contradict established canon.
 
 ---
 
 ## Founding statement
 
-**The Bible defines what REDLINE is and what REDLINE isn't. Its verses reveal how that world lives.**
+**The Bible defines what PANOPTICON is and what PANOPTICON isn't. Its verses reveal how that world lives.**
 
 NUL/REM is a witness and participant, not the whole setting. A CAP's discarded shell, a deadpan dealer, a corporate acronym nobody uses anymore, and a line spoken at the wrong moment can all tell the player where they are. The world should feel older, stranger, and more consequential than the story currently visible on screen.
 
@@ -219,7 +2753,7 @@ NUL/REM is a witness and participant, not the whole setting. A CAP's discarded s
 >
 > The First Signal is not necessarily one historical transmission, but a recurring threshold: the moment awareness begins, or one consciousness first reaches another.
 >
-> REDLINE explores what happens when those thresholds are crossed, and what may emerge on the other side.
+> PANOPTICON explores what happens when those thresholds are crossed, and what may emerge on the other side.
 
 **Scope:** This is a CANON worldbuilding guidepost, not a finalized technical explanation of the First Signal. The existing description of a literal synchronization transmission remains part of the storyline; its relationship to the recurring threshold of awareness and communication is still to be discovered. Do not assert a single cosmic origin, deterministic cycle, or definitive metaphysical explanation without further design approval.
 
@@ -229,7 +2763,7 @@ NUL/REM is a witness and participant, not the whole setting. A CAP's discarded s
 
 ## PANOPTICON — surveillance, confinement, and the transformation of humanity (2026-11-10)
 
-**Status: DIRECTION — foundational thematic pillar.** **Title status: working title PANOPTICON;** REDLINE remains the existing repository/document codename pending deliberate renaming and title clearance.
+**Status: DIRECTION — foundational thematic pillar.** **Title status: working title PANOPTICON;** REDLINE remains the existing repository/document codename pending deliberate renaming and title clearance. *(NAME-002, 2026-11-14: the game is now **PANOPTICON**; REDLINE was the previous iteration and survives only in file names, code paths and the repository name.)*
 
 ### The governing question
 
@@ -284,17 +2818,17 @@ Resolve SYN X in this order:
 | 3 | 0 | 0 | 6 |
 | 5 | 2 | 2 | 6 |
 
-**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. PULP remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. PULP remains direct Vitae damage; CORTEX remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or CORTEX effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
 
 **Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
 
 
 ## Vitae / VIT — Runner health terminology (LOCKED, 2026-11-11)
 
-**Vitae** is the canonical name of the Runner's health resource, abbreviated **VIT** in compact UI, cards, and status displays. The former term is deprecated. **PULP damage** reduces Vitae; SYN and VOID retain their separate mechanics, except for any explicitly defined PULP overflow.
+**Vitae** is the canonical name of the Runner's health resource, abbreviated **VIT** in compact UI, cards, and status displays. The former term is deprecated. **PULP damage** reduces Vitae; SYN and CORTEX retain their separate mechanics, except for any explicitly defined PULP overflow.
 
 
-**Damage terminology lock (2026-11-11):** **CHAR** is deprecated and replaced by **PULP damage**. **PULP X reduces Runner Vitae by X**, subject to applicable PULP prevention. Earlier CHAR labels, examples, and prevention-pool references in this document are to be read as PULP. SYN remains mandatory Runner-selected discard with its approved overflow rule; VOID remains distinct. This is a terminology replacement, not an additional damage type.
+**Damage terminology lock (2026-11-11):** **CHAR** is deprecated and replaced by **PULP damage**. **PULP X reduces Runner Vitae by X**, subject to applicable PULP prevention. Earlier CHAR labels, examples, and prevention-pool references in this document are to be read as PULP. SYN remains mandatory Runner-selected discard with its approved overflow rule; CORTEX remains distinct. This is a terminology replacement, not an additional damage type.
 
 
 ### Colloquial terminology — CHAR (CANON, 2026-11-11)
@@ -314,7 +2848,7 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 **Example:** Incoming SyN 5, SyN prevention 2, and 1 card in hand: 3 SyN remains; the Runner must discard that 1 card; 2 SyN overflow generates **4 PULP**. Apply PULP prevention, if any, before reducing Vitae.
 
-**Priority and scope:** RULE-127 specifies the resolution sequence and prevention interaction for RULE-126. **SyN** is Runner-selected *mandatory* discard; **PULP** is the official Vitae-damaging keyword; **CHAR** is only colloquial slang for PULP in the World Bible; **VOID** is distinct. This rule does not invent additional prevention resources or change the previously established prevention-pool duration/stacking rules. Any unspecified simultaneous trigger timing remains open.
+**Priority and scope:** RULE-127 specifies the resolution sequence and prevention interaction for RULE-126. **SyN** is Runner-selected *mandatory* discard; **PULP** is the official Vitae-damaging keyword; **CHAR** is only colloquial slang for PULP in the World Bible; **CORTEX** is distinct. This rule does not invent additional prevention resources or change the previously established prevention-pool duration/stacking rules. Any unspecified simultaneous trigger timing remains open.
 
 **Regression expectations:** Test full/partial/no SyN prevention, full/partial/empty hand, compulsory discard, PULP prevention of overflow, and zero-Vitae defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
 
@@ -334,75 +2868,75 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 ## RULE-129 — Simultaneous mixed damage resolution (LOCKED, 2026-11-11)
 
-**Explicit user approval:** When **one effect** inflicts two or more of the three damage types, resolve its damage components in the **fixed order PULP → SyN → VOID**, regardless of the effect's controller or the printed order of the listed damage types. Treat the mixed-damage instruction as one uninterrupted resolving effect for trigger-queue timing, with components processed sequentially against the updated game state.
+**Explicit user approval:** When **one effect** inflicts two or more of the three damage types, resolve its damage components in the **fixed order PULP → SyN → CORTEX**, regardless of the effect's controller or the printed order of the listed damage types. Treat the mixed-damage instruction as one uninterrupted resolving effect for trigger-queue timing, with components processed sequentially against the updated game state.
 
 1. **PULP component:** Spend applicable PULP prevention from the existing PULP pool; unprevented PULP reduces **Vitae (VIT)**. If VIT reaches zero, the run **ends immediately in defeat**. Stop; do not process remaining damage components or queued triggers.
-2. **SyN component:** Apply SyN prevention, then the Runner **MUST choose and discard** as many cards as possible up to unprevented SyN (RULE-127). Each missing discard generates **2 PULP** (RULE-126); resolve this overflow PULP immediately as part of the SyN component against the then-current PULP prevention pool. Only PULP actually suffered reduces VIT or qualifies for suffered-PULP triggers (RULE-128). If VIT reaches zero, immediately end the run; do not process VOID or queued triggers.
-3. **VOID component:** Apply VOID prevention from its separate pool; resolve remaining VOID as persistent DRAW reduction subject to the established DRAW floor. VOID does not retroactively change cards already drawn.
+2. **SyN component:** Apply SyN prevention, then the Runner **MUST choose and discard** as many cards as possible up to unprevented SyN (RULE-127). Each missing discard generates **2 PULP** (RULE-126); resolve this overflow PULP immediately as part of the SyN component against the then-current PULP prevention pool. Only PULP actually suffered reduces VIT or qualifies for suffered-PULP triggers (RULE-128). If VIT reaches zero, immediately end the run; do not process CORTEX or queued triggers.
+3. **CORTEX component:** Apply CORTEX prevention from its separate pool; resolve remaining CORTEX as persistent DRAW reduction subject to the established DRAW floor. CORTEX does not retroactively change cards already drawn.
 
 **Triggers:** Damage-, discard-, and prevention-generated triggered effects are **queued as they arise**, not resolved between the mixed-damage components. Finish the entire mixed-damage effect before resolving its queued triggers under **RULE-014/015** (FIFO), with simultaneous enqueue priority under **RULE-011/012/013**. If immediate defeat occurs, the run ends and queued triggers do **not** resolve. Do not confuse this fixed *damage-component* order with the existing controller-selected order for separate simultaneous triggered effects; RULE-011/012 remain in force for those effects. The normal printed-order rule (RULE-010) still applies to other instructions and distinct effects; RULE-129 specifically overrides printed order for mixed damage components within one effect.
 
-**Prevention and source:** PULP, SyN, and VOID retain their independent prevention pools (DMG-002). SyN overflow PULP uses the PULP pool and the source-neutral application and suffered-only trigger conditions of RULE-128. No reactive Runner card plays during the Corporation turn (SOFT-011).
+**Prevention and source:** PULP, SyN, and CORTEX retain their independent prevention pools (DMG-002). SyN overflow PULP uses the PULP pool and the source-neutral application and suffered-only trigger conditions of RULE-128. No reactive Runner card plays during the Corporation turn (SOFT-011).
 
-**Example:** One ICE subroutine inflicts PULP 3 + SyN 3 + VOID 2. Runner has 10 VIT, 2 cards in hand, PULP prevention 1, no SyN/VOID prevention. Resolve PULP 3: prevent 1, lose 2 VIT (8 remain). Resolve SyN 3: mandatory discard 2, shortfall 1 generates 2 PULP; no PULP prevention remains, lose 2 VIT (6 remain). Resolve VOID 2: apply 2 persistent VOID counters. Queue generated triggers during these steps; resolve after the mixed-damage effect completes, if the run survives.
+**Example:** One ICE subroutine inflicts PULP 3 + SyN 3 + CORTEX 2. Runner has 10 VIT, 2 cards in hand, PULP prevention 1, no SyN/CORTEX prevention. Resolve PULP 3: prevent 1, lose 2 VIT (8 remain). Resolve SyN 3: mandatory discard 2, shortfall 1 generates 2 PULP; no PULP prevention remains, lose 2 VIT (6 remain). Resolve CORTEX 2: apply 2 persistent CORTEX counters. Queue generated triggers during these steps; resolve after the mixed-damage effect completes, if the run survives.
 
 **Defeat precedence:** Reaffirms RULE-RT-002's immediate run defeat at zero Vitae; no later damage, advancement, or queued recovery may reverse defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
 
 
 ### RULE-129 amendment — reversed fixed damage order (LOCKED, 2026-11-11)
 
-**Explicit user revision supersedes the original RULE-129 ordering:** When one effect inflicts multiple damage types, the fixed component order is now **VOID → SyN → PULP**, regardless of controller or printed damage-type order. Any earlier RULE-129 statement of **PULP → SyN → VOID** is superseded and must not be used as the current resolution sequence.
+**Explicit user revision supersedes the original RULE-129 ordering:** When one effect inflicts multiple damage types, the fixed component order is now **CORTEX → SyN → PULP**, regardless of controller or printed damage-type order. Any earlier RULE-129 statement of **PULP → SyN → CORTEX** is superseded and must not be used as the current resolution sequence.
 
-1. **VOID first:** Apply VOID prevention and then persistent DRAW reduction under the established DRAW floor; no retroactive change to cards already drawn.
+1. **CORTEX first:** Apply CORTEX prevention and then persistent DRAW reduction under the established DRAW floor; no retroactive change to cards already drawn.
 2. **SyN second:** Apply SyN prevention, mandatory Runner-selected discards, and immediately resolve any resulting **overflow PULP** using the current PULP prevention pool (RULE-126/127/128). Check for immediate defeat after any VIT reduction.
 3. **Direct PULP last:** Apply remaining PULP prevention to the effect's direct PULP component; unprevented PULP reduces Vitae (VIT). Check immediate defeat.
 
-**Triggers and defeat unchanged:** Queue damage/discard/prevention triggers until the complete mixed-damage effect finishes (RULE-014/015/129), unless VIT reaches zero, which ends the run immediately and cancels unresolved components and queued triggers (RULE-RT-002). This ordering is fixed, not dynamically optimized or re-sorted by outcome. Reversing component order does not intrinsically increase numerical damage: VOID does not reduce the current hand, and PULP prevention is still consumed by eligible damage in resolution order.
+**Triggers and defeat unchanged:** Queue damage/discard/prevention triggers until the complete mixed-damage effect finishes (RULE-014/015/129), unless VIT reaches zero, which ends the run immediately and cancels unresolved components and queued triggers (RULE-RT-002). This ordering is fixed, not dynamically optimized or re-sorted by outcome. Reversing component order does not intrinsically increase numerical damage: CORTEX does not reduce the current hand, and PULP prevention is still consumed by eligible damage in resolution order.
 
-**Revised example:** One effect inflicts PULP 3 + SyN 3 + VOID 2; Runner starts at 10 VIT, 2 cards in hand, PULP prevention 1, no SyN/VOID prevention. First apply VOID 2. Next SyN 3 forces discard of both cards and generates 2 overflow PULP; prevent 1, suffer 1 (9 VIT). Finally direct PULP 3 is unprevented (6 VIT). Queue eligible triggers until all components finish.
+**Revised example:** One effect inflicts PULP 3 + SyN 3 + CORTEX 2; Runner starts at 10 VIT, 2 cards in hand, PULP prevention 1, no SyN/CORTEX prevention. First apply CORTEX 2. Next SyN 3 forces discard of both cards and generates 2 overflow PULP; prevent 1, suffer 1 (9 VIT). Finally direct PULP 3 is unprevented (6 VIT). Queue eligible triggers until all components finish.
 
 
-## VOID damage enhancement — LOCKED (2026-11-11)
+## CORTEX damage enhancement — LOCKED (2026-11-11)
 
-**Explicit user approval:** For each point of **unprevented VOID damage**, the Runner **(1) gains one persistent VOID counter** reducing future normal DRAW by 1 (subject to the established effective DRAW floor of 1), and **(2) must choose and discard one card from their current hand if available**. If a required card is unavailable, **each missing discard generates 5 PULP damage**. Apply the existing PULP prevention pool to this overflow PULP; only unprevented PULP reduces Vitae (VIT) and counts as PULP suffered (RULE-128). The Runner cannot elect to keep available cards and take overflow damage instead.
+**Explicit user approval:** For each point of **unprevented CORTEX damage**, the Runner **(1) gains one persistent CORTEX counter** reducing future normal DRAW by 1 (subject to the established effective DRAW floor of 1), and **(2) must choose and discard one card from their current hand if available**. If a required card is unavailable, **each missing discard generates 5 PULP damage**. Apply the existing PULP prevention pool to this overflow PULP; only unprevented PULP reduces Vitae (VIT) and counts as PULP suffered (RULE-128). The Runner cannot elect to keep available cards and take overflow damage instead.
 
-**Both consequences apply:** A VOID counter is gained **even when no card is available to discard and the 5 PULP overflow occurs**. VOID prevention is applied first; only unprevented VOID generates counters, required discards, and overflow. VOID overflow PULP is ordinary PULP under RULE-128, including its source-neutral prevention and suffered-only trigger semantics. Check immediate defeat whenever VIT is reduced to zero; unresolved instructions and pending triggers stop (RULE-RT-002).
+**Both consequences apply:** A CORTEX counter is gained **even when no card is available to discard and the 5 PULP overflow occurs**. CORTEX prevention is applied first; only unprevented CORTEX generates counters, required discards, and overflow. CORTEX overflow PULP is ordinary PULP under RULE-128, including its source-neutral prevention and suffered-only trigger semantics. Check immediate defeat whenever VIT is reduced to zero; unresolved instructions and pending triggers stop (RULE-RT-002).
 
-**Mixed damage interaction:** RULE-129's current fixed order remains **VOID → SyN → PULP**. Resolve VOID's mandatory discards and overflow PULP within the VOID component before moving to SyN; this may leave fewer cards available for SyN and cause its separate **2 PULP per missing discard** overflow (RULE-126/127). Resolve direct PULP last. Damage/discard-generated triggers queue until the full mixed-damage effect completes, unless immediate defeat ends the run (RULE-014/015/129). Independent VOID, SyN and PULP prevention pools remain in effect.
+**Mixed damage interaction:** RULE-129's current fixed order remains **CORTEX → SyN → PULP**. Resolve CORTEX's mandatory discards and overflow PULP within the CORTEX component before moving to SyN; this may leave fewer cards available for SyN and cause its separate **2 PULP per missing discard** overflow (RULE-126/127). Resolve direct PULP last. Damage/discard-generated triggers queue until the full mixed-damage effect completes, unless immediate defeat ends the run (RULE-014/015/129). Independent CORTEX, SyN and PULP prevention pools remain in effect.
 
-**Example:** VOID 2 against a hand of 0, with no VOID or PULP prevention: gain 2 VOID counters, generate 10 PULP, and suffer up to 10 VIT loss (or immediate defeat upon reaching 0). VOID 2 against a hand of 1: gain 2 VOID counters, discard the 1 card, generate 5 PULP before prevention. A mixed effect of VOID 2 + SyN 2 against a hand of 2 first discards both cards and gains 2 VOID counters, then SyN 2 has a shortfall of 2 and generates 4 PULP before prevention.
+**Example:** CORTEX 2 against a hand of 0, with no CORTEX or PULP prevention: gain 2 CORTEX counters, generate 10 PULP, and suffer up to 10 VIT loss (or immediate defeat upon reaching 0). CORTEX 2 against a hand of 1: gain 2 CORTEX counters, discard the 1 card, generate 5 PULP before prevention. A mixed effect of CORTEX 2 + SyN 2 against a hand of 2 first discards both cards and gains 2 CORTEX counters, then SyN 2 has a shortfall of 2 and generates 4 PULP before prevention.
 
-**Priority:** This approved enhancement supersedes older descriptions that define VOID only as persistent DRAW reduction. No new ordinary-card VOID-counter removal is authorized; existing specialized network recovery and inter-corporation clearing remain unchanged.
+**Priority:** This approved enhancement supersedes older descriptions that define CORTEX only as persistent DRAW reduction. No new ordinary-card CORTEX-counter removal is authorized; existing specialized network recovery and inter-corporation clearing remain unchanged.
 
 
 ## RULE-130 — Fatal damage, pending effects, and partial resolution (LOCKED, 2026-11-11)
 
-**Explicit user approval:** Check Runner Vitae (VIT) **immediately after every actual VIT reduction**, including direct PULP and PULP generated by SyN or VOID shortfall. Apply eligible PULP prevention first. If VIT reaches **0**, the run **immediately ends in defeat**; do not wait for the end of the damage component, card, ICE subroutine, mixed-damage effect, turn, or trigger queue.
+**Explicit user approval:** Check Runner Vitae (VIT) **immediately after every actual VIT reduction**, including direct PULP and PULP generated by SyN or CORTEX shortfall. Apply eligible PULP prevention first. If VIT reaches **0**, the run **immediately ends in defeat**; do not wait for the end of the damage component, card, ICE subroutine, mixed-damage effect, turn, or trigger queue.
 
 **Pending recovery cannot reverse defeat:** No already-queued trigger, later instruction, pending recovery/heal, or future action resolves after defeat, even if it could restore Vitae. A recovery effect that **fully resolved before** the lethal VIT reduction counts normally. A damage-suffered trigger does not interrupt its originating effect; it remains queued per RULE-014/015 and cannot rescue the Runner after lethal damage. This rule creates **no last-chance recovery exception**.
 
-**Partial resolution is not rolled back:** Preserve all changes from instructions and components **already completed before defeat**, including spent prevention, mandatory discards, gained VOID counters, and earlier damage. **Cancel all remaining unresolved instructions, damage components, and queued triggered effects**. Do not roll back completed changes or continue resolving effects after defeat. This is a terminal game-state record, not permission to resume the run.
+**Partial resolution is not rolled back:** Preserve all changes from instructions and components **already completed before defeat**, including spent prevention, mandatory discards, gained CORTEX counters, and earlier damage. **Cancel all remaining unresolved instructions, damage components, and queued triggered effects**. Do not roll back completed changes or continue resolving effects after defeat. This is a terminal game-state record, not permission to resume the run.
 
-**Compatibility and priority:** Reaffirms **RULE-RT-002** (immediate defeat), **RULE-014/015** (deferred FIFO triggers), **RULE-127/128** (SyN shortfall and actual PULP suffered), and **RULE-129** (current fixed mixed-damage order **VOID → SyN → PULP**, with VOID's mandatory discard and **5 PULP per missing discard** enhancement). Each type's prevention remains separate, with overflow PULP consuming eligible PULP prevention. Defeat takes priority over queued recovery and over the instruction to complete the mixed-damage event before processing queued triggers. This clarification does not alter controller ordering of simultaneous triggers (RULE-011/012/013) or permit reactive Runner card plays (SOFT-011).
+**Compatibility and priority:** Reaffirms **RULE-RT-002** (immediate defeat), **RULE-014/015** (deferred FIFO triggers), **RULE-127/128** (SyN shortfall and actual PULP suffered), and **RULE-129** (current fixed mixed-damage order **CORTEX → SyN → PULP**, with CORTEX's mandatory discard and **5 PULP per missing discard** enhancement). Each type's prevention remains separate, with overflow PULP consuming eligible PULP prevention. Defeat takes priority over queued recovery and over the instruction to complete the mixed-damage event before processing queued triggers. This clarification does not alter controller ordering of simultaneous triggers (RULE-011/012/013) or permit reactive Runner card plays (SOFT-011).
 
-**Example:** Runner has **6 VIT**, **0 cards** in hand, and **no prevention**. VOID 2 first grants **2 persistent VOID counters**, requires 2 discards, and generates **10 PULP** for the 2 missing cards. Upon lethal VIT loss, defeat is immediate. The completed VOID counters and other completed changes remain recorded; subsequent SyN or direct PULP components, later instructions, and queued recovery triggers never resolve.
+**Example:** Runner has **6 VIT**, **0 cards** in hand, and **no prevention**. CORTEX 2 first grants **2 persistent CORTEX counters**, requires 2 discards, and generates **10 PULP** for the 2 missing cards. Upon lethal VIT loss, defeat is immediate. The completed CORTEX counters and other completed changes remain recorded; subsequent SyN or direct PULP components, later instructions, and queued recovery triggers never resolve.
 
 **Status: LOCKED — explicitly approved 2026-11-11.**
 
 
 ## RULE-131 — Mandatory prevention consumption, immediate overflow, and detailed accounting (LOCKED, 2026-11-11)
 
-**Explicit user approval:** Eligible damage prevention is **automatic and mandatory**. At each actual damage application, the engine consumes applicable prevention immediately; the Runner cannot decline or withhold eligible prevention to save it for a later component or source. PULP, SyN, and VOID have **independent type-specific numerical pools** (DMG-002); only prevention eligible for the incoming damage type may be spent. The displayed pooled value is backed by source/duration accounting.
+**Explicit user approval:** Eligible damage prevention is **automatic and mandatory**. At each actual damage application, the engine consumes applicable prevention immediately; the Runner cannot decline or withhold eligible prevention to save it for a later component or source. PULP, SyN, and CORTEX have **independent type-specific numerical pools** (DMG-002); only prevention eligible for the incoming damage type may be spent. The displayed pooled value is backed by source/duration accounting.
 
 **Consumption order (RULE-004/005/006):** Within a type-specific pool, consume eligible contributions in the priority already established by RULE-004/005 (earliest expiration first), with the existing RULE-006 equal-expiration tie-breaker. RULE-131 creates **no new source priority**, no player-selected prevention withholding, and no cross-type spending. Record each source contribution consumed and its remaining value.
 
-**Overflow timing and order:** Under the current RULE-129 fixed mixed-damage order **VOID → SyN → PULP**, complete each component before proceeding to the next. For unprevented VOID, apply its persistent counters and mandatory Runner-selected hand discards; each missing discard generates **5 ordinary PULP**. **Immediately resolve that overflow PULP within the VOID component**, automatically consuming then-eligible PULP prevention. Next, for unprevented SyN, perform mandatory Runner-selected discards; each missing discard generates **2 ordinary PULP**, likewise immediately resolved within the SyN component using the PULP pool remaining at that moment (RULE-126/127). Finally, apply any direct PULP component against the remaining PULP prevention. The Runner cannot defer or pool overflow PULP until the final direct PULP component. VOID and SyN prevention are applied before determining their respective unprevented damage and overflow. Source-neutral PULP prevention and suffered-only PULP triggers remain as locked by RULE-128.
+**Overflow timing and order:** Under the current RULE-129 fixed mixed-damage order **CORTEX → SyN → PULP**, complete each component before proceeding to the next. For unprevented CORTEX, apply its persistent counters and mandatory Runner-selected hand discards; each missing discard generates **5 ordinary PULP**. **Immediately resolve that overflow PULP within the CORTEX component**, automatically consuming then-eligible PULP prevention. Next, for unprevented SyN, perform mandatory Runner-selected discards; each missing discard generates **2 ordinary PULP**, likewise immediately resolved within the SyN component using the PULP pool remaining at that moment (RULE-126/127). Finally, apply any direct PULP component against the remaining PULP prevention. The Runner cannot defer or pool overflow PULP until the final direct PULP component. CORTEX and SyN prevention are applied before determining their respective unprevented damage and overflow. Source-neutral PULP prevention and suffered-only PULP triggers remain as locked by RULE-128.
 
 **Defeat and triggers:** After prevention, if an actual PULP application reduces Vitae (VIT) to zero, defeat is immediate (RULE-RT-002/RULE-130). Preserve completed changes, cancel unresolved damage components/instructions and pending triggers; no queued recovery can reverse defeat. Otherwise, triggers generated by damage, discards, or prevention are enqueued during resolution and resolve only after the containing mixed-damage effect completes, under RULE-014/015 and RULE-129. This rule does not authorize reactive Runner card plays during the Corporation turn (SOFT-011).
 
-**Mandatory UI and log accounting:** For each damage application, show the **damage source and type**, incoming amount, prevention consumed **broken down by contributing source and duration**, each type-specific pool's remaining amount, unprevented VOID/SyN, mandatory discards completed and shortfalls, **overflow PULP generated and immediately prevented**, **actual PULP suffered**, resulting VIT change, and persistent VOID counters gained. Preserve the step-by-step order in the action log; show when lethal defeat truncates further resolution. These are interface/reporting requirements, not new trigger events.
+**Mandatory UI and log accounting:** For each damage application, show the **damage source and type**, incoming amount, prevention consumed **broken down by contributing source and duration**, each type-specific pool's remaining amount, unprevented CORTEX/SyN, mandatory discards completed and shortfalls, **overflow PULP generated and immediately prevented**, **actual PULP suffered**, resulting VIT change, and persistent CORTEX counters gained. Preserve the step-by-step order in the action log; show when lethal defeat truncates further resolution. These are interface/reporting requirements, not new trigger events.
 
-**Canonical example:** One effect inflicts VOID 2 + SyN 2 + direct PULP 3 against a Runner with **10 VIT, 1 card in hand, 4 PULP prevention, and no VOID or SyN prevention**. VOID 2 adds two counters, discards the one card, and generates 5 PULP for the one missing discard; automatically spend 4 PULP prevention and suffer 1 PULP (VIT 9). SyN 2 has no cards to discard, generates 4 PULP and suffers 4 (VIT 5). Direct PULP 3 suffers 3 (VIT 2). All generated triggers queue until the effect completes unless defeat intervenes.
+**Canonical example:** One effect inflicts CORTEX 2 + SyN 2 + direct PULP 3 against a Runner with **10 VIT, 1 card in hand, 4 PULP prevention, and no CORTEX or SyN prevention**. CORTEX 2 adds two counters, discards the one card, and generates 5 PULP for the one missing discard; automatically spend 4 PULP prevention and suffer 1 PULP (VIT 9). SyN 2 has no cards to discard, generates 4 PULP and suffers 4 (VIT 5). Direct PULP 3 suffers 3 (VIT 2). All generated triggers queue until the effect completes unless defeat intervenes.
 
 **Status: LOCKED — explicitly approved 2026-11-11.**
 
@@ -415,28 +2949,28 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 **End-of-turn versus cleanup triggers:** Abilities explicitly triggered by **end of Runner turn** still trigger at the existing end-turn window, before BW forfeiture and Corporation response. Abilities triggered by **actually discarding a card** trigger when that discard occurs: damage-induced discards during Corporation response occur then and queue per RULE-014/015/129; routine cleanup discards occur after the response and their triggers resolve before transition. A cleanup discard is **not retroactively an end-of-turn discard** for effects requiring that timing. Resolve the post-response cleanup discard batch and its generated triggers before advancing; follow existing simultaneous-trigger priority and FIFO queue rules. This relocation may change whether discard-generated prevention can affect the current Corporation response; do not backdate it.
 
-**CACHE reconciliation (SOFT-003 through SOFT-008):** CACHE continues to protect selected cards from **routine cleanup**, not from damage. **CACHED cards are eligible for mandatory VOID and SyN discards** under the normal Runner-selection rule (RULE-001), unless an effect expressly provides protection. If discarded by damage, they leave hand and cannot be retained by CACHE. CACHED cards remaining after response survive cleanup, persist across ICE layers within the same Node while supported, and remain **additive to normal DRAW** (SOFT-004/005/006). Loss of CACHE support (SOFT-007) causes affected cards to be treated as ordinary cards at the next applicable cleanup, not discarded immediately merely for losing retention; explicit corporate discard and CACHE-targeting effects (SOFT-008) still work. CACHE does not survive the Node boundary (SOFT-006).
+**CACHE reconciliation (SOFT-003 through SOFT-008):** CACHE continues to protect selected cards from **routine cleanup**, not from damage. **CACHED cards are eligible for mandatory CORTEX and SyN discards** under the normal Runner-selection rule (RULE-001), unless an effect expressly provides protection. If discarded by damage, they leave hand and cannot be retained by CACHE. CACHED cards remaining after response survive cleanup, persist across ICE layers within the same Node while supported, and remain **additive to normal DRAW** (SOFT-004/005/006). Loss of CACHE support (SOFT-007) causes affected cards to be treated as ordinary cards at the next applicable cleanup, not discarded immediately merely for losing retention; explicit corporate discard and CACHE-targeting effects (SOFT-008) still work. CACHE does not survive the Node boundary (SOFT-006).
 
 **ICE PASS:** If an ICE PASS or advancement occurs after a Corporation response, use the **single post-response cleanup** for the ordinary non-CACHED hand; do **not** run an additional routine PASS hand discard for those same cards. Finish cleanup-generated triggers before PASS transition. Other PASS-specific effects and triggers remain governed by their actual printed trigger conditions and existing rules; do not invent a second discard event. The next ICE layer retains the established fresh normal DRAW and additive surviving CACHE, subject to existing Node/ICE setup rules.
 
-**DRAW remains unchanged:** No defensive DRAW is added during Corporation response. Preserve RULE-028/029/030/031 start-of-turn sequencing (refresh BW, resolve start-of-turn triggers, calculate DRAW, then normal DRAW) and current effective DRAW formula **max(1, 5 − VOID counters + applicable modifiers)**. Installed Hardware does not inherently reduce DRAW. CACHED cards are additive and do not reduce the number of new cards drawn; VOID counters gained during the response affect future DRAW only.
+**DRAW remains unchanged:** No defensive DRAW is added during Corporation response. Preserve RULE-028/029/030/031 start-of-turn sequencing (refresh BW, resolve start-of-turn triggers, calculate DRAW, then normal DRAW) and current effective DRAW formula **max(1, 5 − CORTEX counters + applicable modifiers)**. Installed Hardware does not inherently reduce DRAW. CACHED cards are additive and do not reduce the number of new cards drawn; CORTEX counters gained during the response affect future DRAW only.
 
-**Damage and defeat unchanged:** During Corporation response, retained ordinary and CACHED cards are available for mandatory damage discards. Apply the fixed mixed-damage order **VOID → SyN → PULP** (RULE-129). Each unprevented VOID grants its persistent counter and requires one discard; each missing discard generates **5 ordinary PULP**. Each unprevented SyN requires one discard; each missing discard generates **2 ordinary PULP** (RULE-126/127). Apply type-specific prevention automatically and immediately, including PULP prevention against overflow within the originating component (RULE-128/131). Damage-generated triggers remain queued until their containing effect completes (RULE-014/015/129). If Vitae reaches zero, immediate defeat (RULE-RT-002/RULE-130) cancels remaining instructions, pending triggers and post-response cleanup, preserving completed changes.
+**Damage and defeat unchanged:** During Corporation response, retained ordinary and CACHED cards are available for mandatory damage discards. Apply the fixed mixed-damage order **CORTEX → SyN → PULP** (RULE-129). Each unprevented CORTEX grants its persistent counter and requires one discard; each missing discard generates **5 ordinary PULP**. Each unprevented SyN requires one discard; each missing discard generates **2 ordinary PULP** (RULE-126/127). Apply type-specific prevention automatically and immediately, including PULP prevention against overflow within the originating component (RULE-128/131). Damage-generated triggers remain queued until their containing effect completes (RULE-014/015/129). If Vitae reaches zero, immediate defeat (RULE-RT-002/RULE-130) cancels remaining instructions, pending triggers and post-response cleanup, preserving completed changes.
 
-**Canonical example:** Runner starts with five cards, plays two, and ends the turn holding three. End-turn effects resolve; unused BW is forfeited; the hand is **not** discarded. Corporation inflicts VOID 2 + SyN 2, with no prevention: VOID adds two counters and discards two cards; SyN discards the final card and generates **2 PULP** for one missing discard, reducing Vitae by two if unprevented. No ordinary cards remain at post-response cleanup. At the next normal DRAW, absent other modifiers, the two VOID counters reduce DRAW from five to three.
+**Canonical example:** Runner starts with five cards, plays two, and ends the turn holding three. End-turn effects resolve; unused BW is forfeited; the hand is **not** discarded. Corporation inflicts CORTEX 2 + SyN 2, with no prevention: CORTEX adds two counters and discards two cards; SyN discards the final card and generates **2 PULP** for one missing discard, reducing Vitae by two if unprevented. No ordinary cards remain at post-response cleanup. At the next normal DRAW, absent other modifiers, the two CORTEX counters reduce DRAW from five to three.
 
 **Priority:** RULE-132 explicitly supersedes the earlier pre-response routine discard instruction of RULE-RT-003/004/005 and the related older end-turn discard timing in SOFT-003/007, while preserving the underlying CACHE, BW, trigger, damage, defeat, ICE PASS and DRAW mechanics as reconciled above. **Status: LOCKED, explicitly approved 2026-11-11.**
 
 
 ## RULE-133 — Discard-trigger timing and nonretroactive prevention (LOCKED, 2026-11-11)
 
-**Explicit user approval:** When VOID, SyN, or another effect causes one or more cards to be discarded, discard-triggered abilities generated by those discards **queue as they arise** and **do not interrupt the originating effect**. Finish the entire originating effect (including its remaining mixed-damage components in the fixed **VOID → SyN → PULP** order, immediate overflow PULP, and any other instructions) before resolving its queued triggers. Use existing RULE-011/012/013 simultaneous-trigger ordering and RULE-014/015 FIFO queue semantics; do not create a new priority or interrupt window.
+**Explicit user approval:** When CORTEX, SyN, or another effect causes one or more cards to be discarded, discard-triggered abilities generated by those discards **queue as they arise** and **do not interrupt the originating effect**. Finish the entire originating effect (including its remaining mixed-damage components in the fixed **CORTEX → SyN → PULP** order, immediate overflow PULP, and any other instructions) before resolving its queued triggers. Use existing RULE-011/012/013 simultaneous-trigger ordering and RULE-014/015 FIFO queue semantics; do not create a new priority or interrupt window.
 
-**Prevention gained by discard triggers:** Prevention from a triggered ability becomes available **only when that ability actually resolves**. It applies to eligible **subsequent damage** within its permitted duration, including a later ICE subroutine in the same Corporation response if applicable. It **never retroactively prevents** PULP, SyN, or VOID already resolved, and cannot be spent before it has been gained. Once gained, prevention follows DMG-002 and RULE-004/005/006 (type-specific pools and earliest-expiration consumption) and RULE-131 (automatic mandatory consumption). Damage overflow from missing VOID/SyN discards resolves immediately within its originating component under RULE-127/128/129/131, without waiting for discard-triggered prevention.
+**Prevention gained by discard triggers:** Prevention from a triggered ability becomes available **only when that ability actually resolves**. It applies to eligible **subsequent damage** within its permitted duration, including a later ICE subroutine in the same Corporation response if applicable. It **never retroactively prevents** PULP, SyN, or CORTEX already resolved, and cannot be spent before it has been gained. Once gained, prevention follows DMG-002 and RULE-004/005/006 (type-specific pools and earliest-expiration consumption) and RULE-131 (automatic mandatory consumption). Damage overflow from missing CORTEX/SyN discards resolves immediately within its originating component under RULE-127/128/129/131, without waiting for discard-triggered prevention.
 
 **Post-Corporation cleanup:** Following RULE-132, after the Corporation response and its pending triggers have finished, discard all remaining non-CACHED cards in the **single post-response cleanup**. Abilities triggered by those actual cleanup discards queue during cleanup and **resolve before the next Runner turn, ICE PASS, or Node/ICE transition**. Do not defer them to the next turn and do not add a second ordinary PASS discard. These triggers cannot retroactively change damage or prevention from the already-completed Corporation response. End-of-turn triggered abilities retain their earlier end-of-turn window; cleanup discards do not retroactively count as discards during that window.
 
-**CACHE:** CACHED cards are exempt from routine cleanup but remain eligible for mandatory VOID/SyN damage discards unless explicitly protected (RULE-132 and SOFT-003–008). Discarding a CACHED card by damage generates applicable discard triggers under the same deferred timing; CACHE does not create an interrupt or retroactive prevention exception.
+**CACHE:** CACHED cards are exempt from routine cleanup but remain eligible for mandatory CORTEX/SyN damage discards unless explicitly protected (RULE-132 and SOFT-003–008). Discarding a CACHED card by damage generates applicable discard triggers under the same deferred timing; CACHE does not create an interrupt or retroactive prevention exception.
 
 **Defeat and cancellation:** Check VIT immediately after each actual VIT reduction following prevention. At zero VIT, defeat is immediate and unresolved instructions and pending triggers are cancelled, with completed state changes preserved (RULE-RT-002/RULE-130). A queued discard-triggered prevention or recovery effect cannot rescue the Runner after fatal damage. SOFT-011 still prohibits reactive Runner card plays during Corporation turn; already-established triggered abilities may resolve when their queued turn arrives.
 
@@ -447,43 +2981,43 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 ## RULE-134 — Discard event granularity, trigger frequency, and separate overflow PULP events (LOCKED, 2026-11-11)
 
-**Approved design:** Use the existing instruction-level event model and deferred trigger queue; no new timing or interrupt system. Each **discrete discard instruction or damage component** produces **one grouped discard event** containing a separately recorded occurrence for **each card actually discarded**. Discard zero cards means zero actual card-discard occurrences; do not generate an actual-discard trigger for a shortfall. Distinct instructions are distinct groups even within one card effect. For a mixed damage effect, VOID and SyN are distinct damage components and thus distinct discard groups, even when one ICE subroutine generates both. One ordinary post-Corporation cleanup (RULE-132) is one grouped event containing its individual actual discards, and ICE PASS does not add a second routine cleanup group.
+**Approved design:** Use the existing instruction-level event model and deferred trigger queue; no new timing or interrupt system. Each **discrete discard instruction or damage component** produces **one grouped discard event** containing a separately recorded occurrence for **each card actually discarded**. Discard zero cards means zero actual card-discard occurrences; do not generate an actual-discard trigger for a shortfall. Distinct instructions are distinct groups even within one card effect. For a mixed damage effect, CORTEX and SyN are distinct damage components and thus distinct discard groups, even when one ICE subroutine generates both. One ordinary post-Corporation cleanup (RULE-132) is one grouped event containing its individual actual discards, and ICE PASS does not add a second routine cleanup group.
 
 **Trigger wording controls counting:** “Whenever you discard **a card**” recognizes each individual actual card discard (three cards = three qualifying occurrences, subject to existing once-per-turn/activation limits). “Whenever you discard **one or more cards**” recognizes each grouped discard event with at least one actual discard (three cards in one instruction = one qualifying group). “For each card discarded” within a single group uses the group's actual card count as the magnitude of the relevant instruction, not separate events unless its printed trigger explicitly says per card. “The first time ... each turn” retains its existing per-turn allowance; a multi-card discard does not reset or bypass it. Card-specific qualifiers and source validity still apply. Preserve RULE-054/055, RULE-074–079, RULE-105/106 aggregate event identity, RULE-107 actual-vs-attempted magnitude, and existing per-turn limits.
 
-**Separate overflow PULP events (explicit user decision):** For **each missing mandatory VOID discard**, generate a **separate ordinary PULP 5 damage event**; for **each missing mandatory SyN discard**, generate a **separate ordinary PULP 2 damage event**. Never aggregate multiple missing discards into one PULP event for damage-event trigger counting, even when they arise from the same damage component or ICE subroutine. Resolve each generated PULP event **immediately in sequence inside its originating VOID or SyN component**, applying available mandatory PULP prevention afresh against that event under RULE-128/131 and recording actual PULP suffered separately. Triggered effects recognizing a PULP damage event or actual PULP suffered count each qualifying separate event under their exact wording and applicable limits, but **remain queued** until the entire originating effect completes (RULE-014/015/129/133); they cannot create retroactive prevention or interrupt the next overflow event. After resolving all overflow events in VOID, proceed to SyN, then direct PULP, under RULE-129's fixed **VOID → SyN → PULP** order. A direct PULP component remains its own damage event under existing instruction-level rules. Check Vitae after every actual reduction: at VIT zero, RULE-130 immediately ends the run, cancels further overflow events, remaining instructions and queued triggers, preserving completed changes.
+**Separate overflow PULP events (explicit user decision):** For **each missing mandatory CORTEX discard**, generate a **separate ordinary PULP 5 damage event**; for **each missing mandatory SyN discard**, generate a **separate ordinary PULP 2 damage event**. Never aggregate multiple missing discards into one PULP event for damage-event trigger counting, even when they arise from the same damage component or ICE subroutine. Resolve each generated PULP event **immediately in sequence inside its originating CORTEX or SyN component**, applying available mandatory PULP prevention afresh against that event under RULE-128/131 and recording actual PULP suffered separately. Triggered effects recognizing a PULP damage event or actual PULP suffered count each qualifying separate event under their exact wording and applicable limits, but **remain queued** until the entire originating effect completes (RULE-014/015/129/133); they cannot create retroactive prevention or interrupt the next overflow event. After resolving all overflow events in CORTEX, proceed to SyN, then direct PULP, under RULE-129's fixed **CORTEX → SyN → PULP** order. A direct PULP component remains its own damage event under existing instruction-level rules. Check Vitae after every actual reduction: at VIT zero, RULE-130 immediately ends the run, cancels further overflow events, remaining instructions and queued triggers, preserving completed changes.
 
-**Sequencing and bookkeeping:** For each component, first apply type-specific VOID/SyN prevention; apply each unprevented point's counter/discard consequences as established in RULE-127/129/131, recording actual card discards in the component's grouped discard event and resolving any missing-discard overflow PULP immediately as individual damage events. Preserve mandatory earliest-expiration prevention consumption (RULE-004/005/006/131). Each separate overflow PULP event records its source, originating damage type, amount (5 or 2), PULP prevention consumed by source/duration, actual VIT loss, and associated pending triggers. Discard-trigger occurrences record each card, grouping identifier, source, and reason. Trigger ordering for simultaneously recognized occurrences follows existing controller-order and FIFO rules; no new interrupt window is created.
+**Sequencing and bookkeeping:** For each component, first apply type-specific CORTEX/SyN prevention; apply each unprevented point's counter/discard consequences as established in RULE-127/129/131, recording actual card discards in the component's grouped discard event and resolving any missing-discard overflow PULP immediately as individual damage events. Preserve mandatory earliest-expiration prevention consumption (RULE-004/005/006/131). Each separate overflow PULP event records its source, originating damage type, amount (5 or 2), PULP prevention consumed by source/duration, actual VIT loss, and associated pending triggers. Discard-trigger occurrences record each card, grouping identifier, source, and reason. Trigger ordering for simultaneously recognized occurrences follows existing controller-order and FIFO rules; no new interrupt window is created.
 
-**Examples:** (A) “Discard 3 cards” actually discards three: one grouped discard event, three per-card discard occurrences; a “whenever you discard a card” ability can queue three triggers, while “whenever you discard one or more cards” queues one. (B) VOID 2 + SyN 2 with four cards in hand: two grouped discard events (VOID discards two, SyN discards two), four individual card discards; per-card trigger count four, per-group trigger count two, before limits. (C) VOID 3 against an empty hand, with no prevention: gain three VOID counters; the three missing discards generate **three separate PULP 5 events**, in sequence, each with independent prevention and trigger-event accounting, stopping immediately on lethal VIT loss. (D) SyN 2 against an empty hand generates **two separate PULP 2 events**, not one PULP 4 event; aggregate VIT loss can equal four if unprevented and nonlethal, but event count remains two.
+**Examples:** (A) “Discard 3 cards” actually discards three: one grouped discard event, three per-card discard occurrences; a “whenever you discard a card” ability can queue three triggers, while “whenever you discard one or more cards” queues one. (B) CORTEX 2 + SyN 2 with four cards in hand: two grouped discard events (CORTEX discards two, SyN discards two), four individual card discards; per-card trigger count four, per-group trigger count two, before limits. (C) CORTEX 3 against an empty hand, with no prevention: gain three CORTEX counters; the three missing discards generate **three separate PULP 5 events**, in sequence, each with independent prevention and trigger-event accounting, stopping immediately on lethal VIT loss. (D) SyN 2 against an empty hand generates **two separate PULP 2 events**, not one PULP 4 event; aggregate VIT loss can equal four if unprevented and nonlethal, but event count remains two.
 
 **Reconciliation and priority:** This rule clarifies RULE-010 instruction boundaries, RULE-014/015 deferred FIFO triggers, RULE-105/106 grouping, RULE-126–131 damage/overflow and prevention, RULE-132 single cleanup and CACHE timing, and RULE-133 deferred discard triggers and nonretroactive prevention. **It explicitly specifies separate overflow PULP event granularity**, superseding any inference that all shortfall PULP in one component forms a single event; numeric PULP amounts and existing prevention mechanics are unchanged. No reactive Runner card plays or extra DRAW are created. **Status: LOCKED, approved 2026-11-11.**
 
 
 ## RULE-135 — Damage-event identity, trigger eligibility, and prevention accounting (LOCKED, 2026-11-11)
 
-**Explicit approval:** Each separate PULP damage application is an independent damage event for trigger eligibility and accounting, including each individual overflow PULP 5 from a missing VOID discard and each individual overflow PULP 2 from a missing SyN discard (RULE-134). Do not merge them into one event merely because they arise from the same ICE subroutine, damage component, or effect. Distinguish **damage applied** (an attempted PULP application, even when fully prevented), **damage prevented** (amount actually absorbed by eligible PULP prevention), and **damage suffered** (unprevented PULP actually reducing Vitae). Abilities recognize only the event their printed conditions name; do not conflate these categories.
+**Explicit approval:** Each separate PULP damage application is an independent damage event for trigger eligibility and accounting, including each individual overflow PULP 5 from a missing CORTEX discard and each individual overflow PULP 2 from a missing SyN discard (RULE-134). Do not merge them into one event merely because they arise from the same ICE subroutine, damage component, or effect. Distinguish **damage applied** (an attempted PULP application, even when fully prevented), **damage prevented** (amount actually absorbed by eligible PULP prevention), and **damage suffered** (unprevented PULP actually reducing Vitae). Abilities recognize only the event their printed conditions name; do not conflate these categories.
 
 **PULP-suffered eligibility:** “Whenever you suffer PULP damage” triggers only on a PULP event that **actually reduces VIT**, and once per qualifying event unless printed wording or an existing activation limit says otherwise. A fully prevented PULP event does **not** qualify as PULP suffered. Event magnitude for “PULP suffered” equals actual VIT reduction, not incoming PULP; prevention amount equals actual prevention consumed, not incoming PULP or unused pool capacity. Preserve RULE-107–109 actual-versus-attempted magnitude and threshold handling, as well as existing per-turn and per-source trigger limits.
 
-**Prevention-event eligibility:** “Whenever you prevent damage” and comparable prevention-consumption triggers recognize only **actual positive prevention consumed**; a zero-consumption event does not qualify. Count prevention separately for each damage application and by the applicable prevention source/duration contribution under RULE-004/005/006 and RULE-131; do not invent a gain or consumption when none occurred. If one damage application consumes several prevention sources, apply existing RULE-074–079, RULE-105/106 and exact card wording to determine per-event versus per-source qualification; this rule does not automatically multiply a single event into one trigger per contributing source. Type-specific VOID and SyN prevention remain separate from PULP prevention; their consumption is accounted for when the respective type is applied.
+**Prevention-event eligibility:** “Whenever you prevent damage” and comparable prevention-consumption triggers recognize only **actual positive prevention consumed**; a zero-consumption event does not qualify. Count prevention separately for each damage application and by the applicable prevention source/duration contribution under RULE-004/005/006 and RULE-131; do not invent a gain or consumption when none occurred. If one damage application consumes several prevention sources, apply existing RULE-074–079, RULE-105/106 and exact card wording to determine per-event versus per-source qualification; this rule does not automatically multiply a single event into one trigger per contributing source. Type-specific CORTEX and SyN prevention remain separate from PULP prevention; their consumption is accounted for when the respective type is applied.
 
-**Timing:** All damage-, discard-, prevention-, and related triggers are queued as generated, following existing simultaneous-controller ordering and FIFO rules (RULE-011–015). They **do not interrupt their originating effect**, including between separate overflow PULP events within one VOID/SyN component. Resolve the entire originating effect before its queued triggers. Prevention granted by a queued trigger can apply only to **later** eligible damage after it actually resolves, never retroactively or to an earlier overflow event (RULE-133). Resolve each overflow event immediately within its originating component, with mandatory PULP prevention consumed under RULE-131, and preserve fixed mixed-damage order **VOID → SyN → direct PULP** (RULE-129). If VIT reaches zero, defeat is immediate; cancel unresolved damage events, instructions, and queued triggers without reversing completed changes (RULE-130).
+**Timing:** All damage-, discard-, prevention-, and related triggers are queued as generated, following existing simultaneous-controller ordering and FIFO rules (RULE-011–015). They **do not interrupt their originating effect**, including between separate overflow PULP events within one CORTEX/SyN component. Resolve the entire originating effect before its queued triggers. Prevention granted by a queued trigger can apply only to **later** eligible damage after it actually resolves, never retroactively or to an earlier overflow event (RULE-133). Resolve each overflow event immediately within its originating component, with mandatory PULP prevention consumed under RULE-131, and preserve fixed mixed-damage order **CORTEX → SyN → direct PULP** (RULE-129). If VIT reaches zero, defeat is immediate; cancel unresolved damage events, instructions, and queued triggers without reversing completed changes (RULE-130).
 
-**Worked example:** Runner begins at **20 VIT**, with no hand cards, **6 PULP prevention**, and no VOID prevention. Corporation inflicts VOID 3: gain 3 VOID counters and encounter 3 missing mandatory discards. Generate and resolve **three distinct PULP 5 events**, in order. Event 1: prevent 5, suffer 0, VIT 20. Event 2: prevent 1, suffer 4, VIT 16. Event 3: prevent 0, suffer 5, VIT 11. Thus there are **3 PULP applications**, **2 PULP-suffered events**, **2 events with positive PULP prevention**, **6 total PULP prevented**, and **9 total PULP suffered**. A “whenever you suffer PULP damage” ability recognizes two events, subject to its limits; its triggers wait until the full originating VOID effect completes. If the Runner is defeated during any event, remaining events and queued triggers are cancelled.
+**Worked example:** Runner begins at **20 VIT**, with no hand cards, **6 PULP prevention**, and no CORTEX prevention. Corporation inflicts CORTEX 3: gain 3 CORTEX counters and encounter 3 missing mandatory discards. Generate and resolve **three distinct PULP 5 events**, in order. Event 1: prevent 5, suffer 0, VIT 20. Event 2: prevent 1, suffer 4, VIT 16. Event 3: prevent 0, suffer 5, VIT 11. Thus there are **3 PULP applications**, **2 PULP-suffered events**, **2 events with positive PULP prevention**, **6 total PULP prevented**, and **9 total PULP suffered**. A “whenever you suffer PULP damage” ability recognizes two events, subject to its limits; its triggers wait until the full originating CORTEX effect completes. If the Runner is defeated during any event, remaining events and queued triggers are cancelled.
 
 **Reconciliation and priority:** RULE-135 clarifies, without overriding, RULE-004–006 mandatory source/expiration consumption, RULE-014/015 FIFO deferred triggers, RULE-074–079 prevention-event granularity, RULE-105–109 aggregate events and actual magnitudes, RULE-126–131 damage/overflow and fatal defeat, RULE-132 post-Corporation cleanup, RULE-133 nonretroactive trigger timing, and RULE-134 separate overflow PULP event identity. No new interrupt window, defensive DRAW, retroactive prevention, or extra routine discard is created. **Status: LOCKED, explicitly approved 2026-11-11.**
 
 
 ## RULE-136 — Damage resolution boundaries and trigger queue checkpoints (LOCKED, 2026-11-11)
 
-**Explicit approval:** Each **independently resolving ICE subroutine** is a distinct effect boundary. Resolve the subroutine's full effect to completion before processing triggers generated by it. This includes all its discrete instructions, mandatory type-specific prevention, VOID counters and required discards, SyN discards, separate overflow PULP events for each missing discard (RULE-134), direct PULP, and resulting VIT changes, in the fixed **VOID → SyN → PULP** component order where mixed damage applies (RULE-129). Do **not** insert a trigger-resolution checkpoint between individual damage components, overflow PULP events, or instructions inside that still-resolving effect. The same principle applies to other independently resolving effects: finish the current effect before its generated triggers.
+**Explicit approval:** Each **independently resolving ICE subroutine** is a distinct effect boundary. Resolve the subroutine's full effect to completion before processing triggers generated by it. This includes all its discrete instructions, mandatory type-specific prevention, CORTEX counters and required discards, SyN discards, separate overflow PULP events for each missing discard (RULE-134), direct PULP, and resulting VIT changes, in the fixed **CORTEX → SyN → PULP** component order where mixed damage applies (RULE-129). Do **not** insert a trigger-resolution checkpoint between individual damage components, overflow PULP events, or instructions inside that still-resolving effect. The same principle applies to other independently resolving effects: finish the current effect before its generated triggers.
 
 **Mandatory checkpoint between effects:** After the current independently resolving effect completes, **fully drain all eligible queued triggers** before beginning the next independent ICE subroutine or other effect. Use the existing simultaneous-trigger/controller ordering, FIFO queue, and complete-one-effect-before-generated-triggers semantics (RULE-010–015). A trigger that generates further triggers places them on the existing queue; continue resolving eligible chained triggers until the queue is empty, subject to RULE-016–019 infinite-loop and recursion safeguards and existing trigger eligibility, per-turn activation limits, source-removal cancellation, and explicit exceptions. Do not resolve only the first generation or carry eligible chained triggers into the next effect. An individual queued triggered ability is itself resolved completely before its newly generated triggers are processed under the established queue discipline.
 
-**Updated state between subroutines:** At the next subroutine boundary, apply the game state after the preceding effect and its drained triggers, including new prevention pools, changed VIT, resource changes, discarded cards, VOID counters, installed/removed sources, and temporary effect durations. Prevention gained when a trigger actually resolves may protect against a **later** subroutine if eligible and still active; it **cannot** prevent damage from the completed originating subroutine or any earlier overflow PULP event (RULE-133/135). No new reactive Runner card-play window or out-of-turn DRAW is created (SOFT-011; RULE-132).
+**Updated state between subroutines:** At the next subroutine boundary, apply the game state after the preceding effect and its drained triggers, including new prevention pools, changed VIT, resource changes, discarded cards, CORTEX counters, installed/removed sources, and temporary effect durations. Prevention gained when a trigger actually resolves may protect against a **later** subroutine if eligible and still active; it **cannot** prevent damage from the completed originating subroutine or any earlier overflow PULP event (RULE-133/135). No new reactive Runner card-play window or out-of-turn DRAW is created (SOFT-011; RULE-132).
 
-**Corporation response and cleanup:** Finish **all** Corporation response effects and their full trigger checkpoints before performing the **single** post-Corporation hand cleanup required by RULE-132. Routine cleanup discards all remaining non-CACHED cards in one grouped discard event (RULE-134), while eligible CACHED cards survive routine cleanup but remain eligible for mandatory VOID/SyN damage discards. Cleanup-generated triggers resolve and drain completely before the next Runner turn, ICE PASS, or Node/ICE transition (RULE-132/133). Never start cleanup with eligible Corporation-generated triggers pending, and never create a second routine ICE PASS cleanup event.
+**Corporation response and cleanup:** Finish **all** Corporation response effects and their full trigger checkpoints before performing the **single** post-Corporation hand cleanup required by RULE-132. Routine cleanup discards all remaining non-CACHED cards in one grouped discard event (RULE-134), while eligible CACHED cards survive routine cleanup but remain eligible for mandatory CORTEX/SyN damage discards. Cleanup-generated triggers resolve and drain completely before the next Runner turn, ICE PASS, or Node/ICE transition (RULE-132/133). Never start cleanup with eligible Corporation-generated triggers pending, and never create a second routine ICE PASS cleanup event.
 
 **Immediate defeat overrides checkpoints:** Check VIT after each actual reduction, including each separately resolved overflow PULP event. At VIT 0, defeat immediately ends the run (RULE-RT-002/RULE-130); preserve completed changes but cancel remaining instructions, unresolved damage events, queued triggers and post-response cleanup. No pending heal, recovery, or prevention trigger can rescue the defeated Runner. Mandatory prevention consumption, source expiration priorities, and applied/prevented/suffered event distinctions remain RULE-004–006/131/135.
 
@@ -496,18 +3030,18 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 **Explicit approval and precedence:** Routine post-Corporation hand cleanup is a **non-triggering housekeeping operation outside all effect-triggering windows**. Once the entire Corporation response and **all eligible queued/chained triggers** have finished (RULE-132/136), perform the single routine cleanup: discard every remaining **non-CACHED** card from the Runner's hand. These routine cleanup discards **do not generate, queue, or resolve discard-related triggered abilities or any other effect solely because cleanup discarded cards**. They cannot activate installed Software, card abilities, per-card/per-group discard triggers, prevention gains, DRAW, resource gains, or chained effects based on those housekeeping discards. Cleanup is not an effect-triggering checkpoint; once the cleanup action and its bookkeeping finish, advance directly to the next established phase or ICE/Node transition. Do not repeat cleanup or create an additional ICE PASS cleanup.
 
-**Normal effect-caused discards unchanged:** This exception applies **only to routine cleanup discards**. Discards caused by VOID or SyN damage, ICE subroutines, Corporation instructions, Runner card abilities, or other resolving effects remain ordinary effect-caused discards, with their existing individual occurrences, grouped event granularity, eligibility, and deferred FIFO trigger timing under RULE-014/015/127/129/133/134/135/136. A discard that happens **during Corporation response** is not routine cleanup merely because it occurs near the end of the response. All pending effect-generated triggers drain before housekeeping cleanup begins. Explicit card effects are not silently reclassified as housekeeping cleanup.
+**Normal effect-caused discards unchanged:** This exception applies **only to routine cleanup discards**. Discards caused by CORTEX or SyN damage, ICE subroutines, Corporation instructions, Runner card abilities, or other resolving effects remain ordinary effect-caused discards, with their existing individual occurrences, grouped event granularity, eligibility, and deferred FIFO trigger timing under RULE-014/015/127/129/133/134/135/136. A discard that happens **during Corporation response** is not routine cleanup merely because it occurs near the end of the response. All pending effect-generated triggers drain before housekeeping cleanup begins. Explicit card effects are not silently reclassified as housekeeping cleanup.
 
 **CACHE, logging, and accounting:** CACHED cards survive routine cleanup under SOFT-003–008 and RULE-132, unless some separate effect explicitly discards them. Routine cleanup discards are still real cards moved out of hand and **must be recorded** in the game log with card identities, number discarded, phase, and reason marked **ROUTINE CLEANUP / NON-TRIGGERING**. They are not qualifying discard occurrences for trigger activation or trigger-frequency accounting, despite being recorded as a single housekeeping cleanup batch. Do not count them toward effects that ask whether a card was discarded via a triggering event. No defensive DRAW or other benefit is created by cleanup itself.
 
-**Example:** Runner finishes Corporation response with three non-CACHED cards and installed Software reading *“Whenever you discard a card, gain 2 PULP prevention.”* After all response-generated triggers have drained, routine cleanup discards the three cards and logs the batch. **Zero Software triggers** are generated and **zero PULP prevention** is gained from those housekeeping discards. The same Software still recognizes qualifying cards discarded earlier by VOID/SyN or another effect, subject to its normal limits.
+**Example:** Runner finishes Corporation response with three non-CACHED cards and installed Software reading *“Whenever you discard a card, gain 2 PULP prevention.”* After all response-generated triggers have drained, routine cleanup discards the three cards and logs the batch. **Zero Software triggers** are generated and **zero PULP prevention** is gained from those housekeeping discards. The same Software still recognizes qualifying cards discarded earlier by CORTEX/SyN or another effect, subject to its normal limits.
 
 **Explicit supersession and reconciliation:** RULE-137 **supersedes only conflicting statements that routine post-Corporation cleanup discards generate or resolve triggers** in RULE-132 (cleanup-generated triggers), RULE-133 (cleanup discard-trigger timing and cleanup-generated effects), RULE-134 (any inference that routine cleanup's grouped discard event generates per-card/per-group discard triggers), and RULE-136 (cleanup-generated/chained trigger checkpoint). All other provisions of RULE-132–136 remain LOCKED and operative: hand retention through Corporation response, full response trigger draining, single post-response cleanup, CACHE survival, separate overflow PULP events, prevention accounting, FIFO effect boundaries, and immediate defeat. Under RULE-010–019, this is a specific housekeeping exception to ordinary effect-trigger eligibility, **not** a new trigger window, queue behavior, or loop rule. Existing rules governing genuine effect-caused discards continue unchanged. **Status: LOCKED, explicitly approved 2026-11-11.**
 
 
 ## RULE-138 — Discard classification by originating cause and phase-boundary trigger completion (LOCKED, 2026-11-11)
 
-**Explicit approval:** Classify each discard by its **originating cause**, not by how close it occurs to a phase boundary, Corporation response ending, ICE PASS, Node transition, or routine cleanup. A discard expressly caused by an ICE subroutine, Corporation instruction, VOID/SyN damage, Runner card ability, queued triggered ability, or other independently resolving game effect is an **effect-caused discard**, including when it happens immediately before routine cleanup. Such actual discards retain their normal individual-card occurrences and grouped-event identities (RULE-134), eligible triggers and activation limits, and deferred FIFO resolution (RULE-010–015/133–136). Do not silently reclassify effect-caused discards as housekeeping merely because they happen late in the Corporation response.
+**Explicit approval:** Classify each discard by its **originating cause**, not by how close it occurs to a phase boundary, Corporation response ending, ICE PASS, Node transition, or routine cleanup. A discard expressly caused by an ICE subroutine, Corporation instruction, CORTEX/SyN damage, Runner card ability, queued triggered ability, or other independently resolving game effect is an **effect-caused discard**, including when it happens immediately before routine cleanup. Such actual discards retain their normal individual-card occurrences and grouped-event identities (RULE-134), eligible triggers and activation limits, and deferred FIFO resolution (RULE-010–015/133–136). Do not silently reclassify effect-caused discards as housekeeping merely because they happen late in the Corporation response.
 
 **Non-triggering cleanup exception:** A discard is **routine housekeeping cleanup** only when it is performed by the single mandatory post-Corporation hand cleanup operation itself. Under RULE-137, those cleanup discards are logged but do **not** generate, queue, or resolve triggered effects based on being discarded. All remaining non-CACHED cards are discarded in that single housekeeping batch; CACHED cards retain their existing exemption. This exception does not suppress triggers from an effect that actually resolves before cleanup or otherwise change damage-caused discards.
 
@@ -517,7 +3051,7 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 **Canonical example:** At the last independent Corporation ICE subroutine, the Runner has three non-CACHED cards and installed Software: *“Whenever you discard a card, gain 1 CRED.”* The subroutine reads *“Discard 2 cards from your hand. Then gain 2 PULP prevention.”* Two actual effect-caused discards form one grouped discard event and queue two per-card triggers (subject to limits). The subroutine finishes its printed instructions and grants 2 PULP prevention; only at the checkpoint do the two queued triggers resolve, gaining 2 CRED. Routine cleanup then discards the remaining non-CACHED card, records it as **ROUTINE CLEANUP / NON-TRIGGERING**, and generates **no CRED trigger**. If the checkpoint instead draws two new non-CACHED cards, they are also discarded in the same non-triggering cleanup batch.
 
-**Reconciliation and priority:** RULE-138 reinforces RULE-010 printed instruction ordering; RULE-011–015 complete-effect/FIFO trigger ordering; RULE-016–019 loop safeguards; RULE-132 retained defensive hand and single post-response cleanup; RULE-133 nonretroactive effect-generated discard triggers; RULE-134 per-card and grouped event identity; RULE-135 actual damage/prevention trigger eligibility; RULE-136 effect boundaries and complete trigger checkpoints; and RULE-137's explicit non-triggering housekeeping exception. **RULE-137 remains controlling for cleanup-generated non-trigger eligibility.** This rule clarifies classification and logging without restoring superseded cleanup-trigger language in RULE-132–136 or altering established VOID/SyN/PULP damage, CACHE, prevention, DRAW, or immediate defeat mechanics. **Status: LOCKED, explicitly approved 2026-11-11.**
+**Reconciliation and priority:** RULE-138 reinforces RULE-010 printed instruction ordering; RULE-011–015 complete-effect/FIFO trigger ordering; RULE-016–019 loop safeguards; RULE-132 retained defensive hand and single post-response cleanup; RULE-133 nonretroactive effect-generated discard triggers; RULE-134 per-card and grouped event identity; RULE-135 actual damage/prevention trigger eligibility; RULE-136 effect boundaries and complete trigger checkpoints; and RULE-137's explicit non-triggering housekeeping exception. **RULE-137 remains controlling for cleanup-generated non-trigger eligibility.** This rule clarifies classification and logging without restoring superseded cleanup-trigger language in RULE-132–136 or altering established CORTEX/SyN/PULP damage, CACHE, prevention, DRAW, or immediate defeat mechanics. **Status: LOCKED, explicitly approved 2026-11-11.**
 
 
 ## RULE-139 — Source-removal eligibility during trigger checkpoints (LOCKED, 2026-11-11)
@@ -608,13 +3142,13 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 ## GENERALIST-001 — Ten-card starter deck, SYN BUFFER, and Instant PULP shields (LOCKED direction, 2026-11-11)
 
-**Explicit user approval:** The Generalist starts with exactly **10 cards**: (1) WALL ICEbreaker, (2) SENTRY ICEbreaker, (3) CODE GATE ICEbreaker, (4) Basic Extractor, (5) SYN BUFFER, (6–7) two Instant PULP shield cards, and (8–10) three Instant ICE-strength-reduction cards. The first five are persistent installed Software requiring **1 RAM each** and the established **1 BW installation cost**. The Generalist starts with **4 RAM**, so all five cannot be installed simultaneously. The three distinct type-specific ICEbreakers have no finalized individual strength/break-cost profiles yet. Basic Extractor retains **EXTRACT-001**: 5 CRED at end of each eligible Runner turn before Corporation Response, eligible on installation turn, hard encounter cap, immediate banking.
+**Explicit user approval:** The Generalist starts with exactly **10 cards**: (1) FORTRESS ICEbreaker, (2) VOID ICEbreaker, (3) SIGYL ICEbreaker, (4) Basic Extractor, (5) SYN BUFFER, (6–7) two Instant PULP shield cards, and (8–10) three Instant ICE-strength-reduction cards. The first five are persistent installed Software requiring **1 RAM each** and the established **1 BW installation cost**. The Generalist starts with **4 RAM**, so all five cannot be installed simultaneously. The three distinct type-specific ICEbreakers have no finalized individual strength/break-cost profiles yet. Basic Extractor retains **EXTRACT-001**: 5 CRED at end of each eligible Runner turn before Corporation Response, eligible on installation turn, hard encounter cap, immediate banking.
 
-**SYN BUFFER — card wording:** **“Once per ICE encounter, when you would suffer SyN damage, this program automatically prevents 1 SyN damage from that damage event.”** It is installed Software (1 BW installation; 1 RAM). Its automatic prevention applies **during damage resolution before the affected SyN is suffered**, before mandatory SyN discards or overflow PULP; it is not a queued after-damage trigger. It prevents neither PULP nor VOID. **Each installed copy has its own independent once-per-ICE-encounter allowance**, so multiple eligible copies can each prevent 1 SyN, up to the incoming damage amount. An allowance refreshes **on entering the next ICE encounter**, not on either player's turn start (RULE-027/028 do not reset this encounter-specific allowance). An eligible copy's allowance is consumed only when it actually prevents a point of SyN. An installed copy that remains in play between ICE encounters refreshes for the next encounter, consistent with the Node-long Software lifecycle.
+**SYN BUFFER — card wording:** **“Once per ICE encounter, when you would suffer SyN damage, this program automatically prevents 1 SyN damage from that damage event.”** It is installed Software (1 BW installation; 1 RAM). Its automatic prevention applies **during damage resolution before the affected SyN is suffered**, before mandatory SyN discards or overflow PULP; it is not a queued after-damage trigger. It prevents neither PULP nor CORTEX. **Each installed copy has its own independent once-per-ICE-encounter allowance**, so multiple eligible copies can each prevent 1 SyN, up to the incoming damage amount. An allowance refreshes **on entering the next ICE encounter**, not on either player's turn start (RULE-027/028 do not reset this encounter-specific allowance). An eligible copy's allowance is consumed only when it actually prevents a point of SyN. An installed copy that remains in play between ICE encounters refreshes for the next encounter, consistent with the Node-long Software lifecycle.
 
 **SYN BUFFER reinstall safeguard:** To prevent unloading and reinstalling the **same physical card** from bypassing its once-per-encounter limit, track the used allowance by physical card identity and encounter identity. A card already used during that encounter remains spent if unloaded and reinstalled; a distinct unused physical copy has its own allowance. This is a **card-specific exception** to otherwise fresh installed-instance identity under RULE-089/142, not a general rule that reinstalled Software retains all instance-specific state. An uninstalled copy cannot prevent damage. All existing eligibility, prevention, source-removal and resolution-time rules remain applicable (RULE-001/004–006, RULE-010–019, RULE-081–090, RULE-127–142).
 
-**Instant PULP shields:** Both remaining Generalist Instant shield cards grant a printed amount of **PULP prevention to the Runner's existing shared PULP prevention pool** when played during the Runner turn. They are **not installed**, occupy **0 persistent RAM**, and go to discard after resolving under SOFT-009/010. When the Runner would suffer PULP, **consume eligible PULP prevention from that pool first**, point-for-point; only the unprevented remainder reduces **Vitae (VIT)**. This restates the already locked unified prevention-pool and prevention-before-damage mechanics (SOFT-013/015, DMG-002, RULE-004–006, RULE-127–136), not a new second shield pool. PULP prevention cannot prevent SyN or VOID; those use their own pools. Apply existing expiration at beginning of next Runner turn and existing earliest-expiring eligible prevention priority. Card-specific shield amounts and printed BW costs are **OPEN**, not implicitly fixed here.
+**Instant PULP shields:** Both remaining Generalist Instant shield cards grant a printed amount of **PULP prevention to the Runner's existing shared PULP prevention pool** when played during the Runner turn. They are **not installed**, occupy **0 persistent RAM**, and go to discard after resolving under SOFT-009/010. When the Runner would suffer PULP, **consume eligible PULP prevention from that pool first**, point-for-point; only the unprevented remainder reduces **Vitae (VIT)**. This restates the already locked unified prevention-pool and prevention-before-damage mechanics (SOFT-013/015, DMG-002, RULE-004–006, RULE-127–136), not a new second shield pool. PULP prevention cannot prevent SyN or CORTEX; those use their own pools. Apply existing expiration at beginning of next Runner turn and existing earliest-expiring eligible prevention priority. Card-specific shield amounts and printed BW costs are **OPEN**, not implicitly fixed here.
 
 **Unfinalized Generalist card details:** The two PULP shield names, amounts and BW costs; the three ICE-strength-reduction Instants' names, magnitude, duration, and BW costs; and individual ICEbreaker statistics are working concepts only. Earlier illustrative names Fracture, Erode, and Destabilize are **not locked card identities**. This entry locks deck structure, lifecycle classifications, SYN BUFFER timing/independent-copy handling, and PULP-pool behavior without inventing numerical card balance.
 
@@ -626,9 +3160,9 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 **Preserve locked LOOP-002 timing:** Breaking/neutralizing the last DEADLOCK **does not immediately end the encounter or skip the Corporation's ensuing response**. The Runner must survive the normal Corporation Response before advancement; applicable **unbroken** offensive subroutines can still fire during that response, while broken subroutines do not fire. After response and required post-response cleanup under RULE-132, advancement is allowed only if no active DEADLOCK remains and the Runner has survived. No extra Corporation Response is added solely for leaving. If the Runner remains engaged across turns, active offensive subroutines provide recurring threat during applicable Corporation Responses; use existing subroutine ordering, complete-effect checkpoints, damage/prevention and immediate-defeat rules (RULE-010–019, RULE-RT-001–005, RULE-127–142). Exact ordering of subroutines **across multiple simultaneously engaged ICE**, and any additional encounter-wide sequencing not already specified, remain OPEN; do not silently invent it.
 
-**ICE design identities — tendencies, not absolutes:** **WALLS** generally have the highest strength and comparatively few subroutines, emphasizing PULP and TRACE and/or DEADLOCK; they can instead be pure multi-DEADLOCK blockers. **CODE GATES** generally have lower strength than WALLS and more subroutines, emphasizing SyN, plus PULP and DEADLOCK. **SENTRIES** are generally the deadliest, with highly variable strength and subroutine count and combinations of PULP, SyN, VOID, TRACE and/or DEADLOCK. **PULP is a common baseline offensive threat across all three ICE types**, not Sentry-exclusive, ensuring Instant PULP shields are routinely useful. Not every ICE needs to deal damage individually, provided encounter formations create meaningful pressure. TRACE should have meaningful consequences when successful; its exact per-card effects are not decided here.
+**ICE design identities — tendencies, not absolutes:** **FORTRESSES** generally have the highest strength and comparatively few subroutines, emphasizing PULP and TRACE and/or DEADLOCK; they can instead be pure multi-DEADLOCK blockers. **SIGYLS** generally have lower strength than FORTRESSES and more subroutines, emphasizing SyN, plus PULP and DEADLOCK. **VOID ICE** are generally the deadliest, with highly variable strength and subroutine count and combinations of PULP, SyN, CORTEX, TRACE and/or DEADLOCK. **PULP is a common baseline offensive threat across all three ICE types**, not VOID-exclusive, ensuring Instant PULP shields are routinely useful. Not every ICE needs to deal damage individually, provided encounter formations create meaningful pressure. TRACE should have meaningful consequences when successful; its exact per-card effects are not decided here.
 
-**Weak-ICE design:** Low-strength ICE, including potential **Strength 0** ICE, can remain threatening through offensive subroutines or useful through DEADLOCK. Illustrative, **not finalized**, examples include a weak Paper Cut with PULP, a low-strength TRACE support ICE, a Training Wall with PULP and DEADLOCK, and a pure triple-DEADLOCK WALL. Names, strength numbers, damage numbers, number of ICE per encounter, exact TRACE consequences, and individual card balance remain OPEN. The suggested Strength 2 Training Wall and Strength 3 Triple Lock are examples only, not locked card values. Avoid treating an illustrative subroutine ordering as a universal type template.
+**Weak-ICE design:** Low-strength ICE, including potential **Strength 0** ICE, can remain threatening through offensive subroutines or useful through DEADLOCK. Illustrative, **not finalized**, examples include a weak Paper Cut with PULP, a low-strength TRACE support ICE, a Training Wall with PULP and DEADLOCK, and a pure triple-DEADLOCK FORTRESS. Names, strength numbers, damage numbers, number of ICE per encounter, exact TRACE consequences, and individual card balance remain OPEN. The suggested Strength 2 Training Wall and Strength 3 Triple Lock are examples only, not locked card values. Avoid treating an illustrative subroutine ordering as a universal type template.
 
 **GENERALIST-001 card refinement (approved):** The two Generalist Instant PULP shields are **two copies of the same card**, each costing **1 BW** and adding **3 PULP prevention** to the Runner's existing unified PULP pool. On incoming PULP, consume eligible prevention before reducing VIT; temporary prevention follows established expiration and duration-priority rules. Generalist cards 8–10 are **three copies of the same Instant ICE-strength-reduction card**, each costing **1 BW**, with printed effect **“Permanently reduce a target ICE's strength by 2.”** Permanent means the reduction does not expire at end of turn or encounter; it persists for that ICE's existing lifecycle, subject to existing ICE-strength floor and modifier rules. Do not treat the former illustrative Fracture/Erode/Destabilize names as three distinct finalized cards. **All 10 Generalist starter cards uniformly cost 1 BW to play/install**: three unique 1-RAM installed type-specific ICEbreakers, one 1-RAM installed Basic Extractor, one 1-RAM installed SYN BUFFER, two identical PULP-shield Instants, and three identical permanent −2 strength-reduction Instants. The three ICEbreakers' activation/break costs and printed names, and final names of the two Instant card designs, remain OPEN. Installed Software costs 1 BW to install; ICEbreaker activation is a separate mechanic. SYN BUFFER remains once-per-ICE-encounter prevention of 1 SyN, per independently installed copy, with same-physical-card reinstall not resetting the used encounter allowance (GENERALIST-001). Basic Extractor retains EXTRACT-001.
 
@@ -651,13 +3185,13 @@ In-world, **PULP damage** is colloquially called **“CHAR”**, evoking **charr
 
 This section reconciles earlier dated design entries; older locked decisions remain historical records, but the later approved revisions below govern implementation. This is a consistency correction, not approval of new card mechanics.
 
-1. **Damage:** PULP is the Vitae-reducing physical damage keyword, including SyN/VOID overflow damage, shields, prevention, damage events, and triggers. SyN and VOID retain their existing effects, prevention, overflow rates, and fixed resolution order **VOID → SyN → PULP**. BURNED is exclusively a card-removal state, not a damage type. Do not convert ordinary narrative verbs such as “burn a CAP” into damage terminology.
+1. **Damage:** PULP is the Vitae-reducing physical damage keyword, including SyN/CORTEX overflow damage, shields, prevention, damage events, and triggers. SyN and CORTEX retain their existing effects, prevention, overflow rates, and fixed resolution order **CORTEX → SyN → PULP**. BURNED is exclusively a card-removal state, not a damage type. Do not convert ordinary narrative verbs such as “burn a CAP” into damage terminology.
 2. **BREACHED:** Neutralizing every active DEADLOCK across the encounter enters BREACHED immediately; the Rustler may continue legal actions and voluntarily END TURN. Resolve eligible end-turn effects and housekeeping, **skip the final ordinary Corporation Response**, and proceed to rewards. Earlier LOOP-002 / MULTI-ICE-001 final-retaliation wording is superseded.
-3. **Generalist starter deck:** The current approved **12 cards** are one WALL Icepick, one CODE GATE Icepick, one SENTRY Icepick, one Basic Extractor, one SYN BUFFER, **three identical PULP Shields**, **three identical PROBE**, and one unique GHOST SIGNAL (working name). This supersedes the former 10-card starter and two-shield quantities. All three Shields are **1-BW Instant Hardware Packets** granting **3 temporary PULP prevention** each; all three PROBE are **1-BW Instant Software Packets** permanently reducing a target ICE's strength by 2 for that ICE's lifecycle. GHOST SIGNAL is a **2-BW Instant Software Packet** that reduces the first TRACE attempt on the immediately following Corporation turn to zero; its temporary removal is **BURNED** for the remainder of that Node, with return at the next Node under existing BURNED rules. Do not use provisional EXILE as a separate state.
+3. **Generalist starter deck:** The current approved **12 cards** are one FORTRESS Icepick, one SIGYL Icepick, one VOID Icepick, one Basic Extractor, one SYN BUFFER, **three identical PULP Shields**, **three identical PROBE**, and one unique GHOST SIGNAL (working name). This supersedes the former 10-card starter and two-shield quantities. All three Shields are **1-BW Instant Hardware Packets** granting **3 temporary PULP prevention** each; all three PROBE are **1-BW Instant Software Packets** permanently reducing a target ICE's strength by 2 for that ICE's lifecycle. GHOST SIGNAL is a **2-BW Instant Software Packet** that reduces the first TRACE attempt on the immediately following Corporation turn to zero; its temporary removal is **BURNED** for the remainder of that Node, with return at the next Node under existing BURNED rules. Do not use provisional EXILE as a separate state.
 4. **SYN BUFFER:** Persistent **Hardware**, operating type **Executable**, costs 1 BW to install; its existing **1 RAM** cost remains provisional until explicitly changed. Its automatic once-per-ICE-encounter 1 SyN prevention, independent-copy handling, and same-physical-card reinstall safeguard are unchanged. It is not a Protocol or Instant Software. Icepicks and Basic Extractor are Persistent Software Executables; Protocols use the RACK, no RAM, and persist through the Node unless future approved rules say otherwise.
 5. **Bloatware:** Hostile Corporation-inserted Bloatware is **Node-specific**, may persist across ICE encounters/layers within that Node, and **does not persist into another Node**. At Node completion, remove all remaining Bloatware copies from the Rustler's card cycle; earlier statements that Node carryover is undecided are superseded. Delivery destination, printed triggers, card-specific earlier removal, and numerical effects remain card-specific. Multiple physical copies stack independently by default, including hand-held ICE buffs and end-turn PULP. If printed to start in discard, insert there; if printed to become BURNED after its hand/end-turn effect, apply that card-specific instruction, and do not return it to the current Node's draw/discard cycle. Do not mistake Bloatware removal for PULP damage.
 6. **Economy and timing:** Each ICE encounter has its own finite extractable CRED reserve; Basic Extractor pays up to 5 CRED from that remaining reserve on each eligible Rustler end turn, including the final BREACHED turn, and banks the payout immediately. Training Node test reserves are 15 / 25 / 40 CRED across its three encounters. End-of-turn effects resolve before BREACHED completion; no routine Corporation Response is inserted after BREACH.
-7. **Scope and open items:** The approved Sentry and Code Gate Icepick profiles in BREAKER-STARTER-001 supersede older experimental pricing for those breakers only. WALL Icepick statistics, GHOST SIGNAL's final name, and explicitly marked working ICE/test-balance figures remain open. Historical paragraphs describing prior proposals are not alternative live rules; follow this reconciliation and the later approved sections it cites.
+7. **Scope and open items:** The approved VOID and SIGYL Icepick profiles in BREAKER-STARTER-001 supersede older experimental pricing for those breakers only. FORTRESS Icepick statistics, GHOST SIGNAL's final name, and explicitly marked working ICE/test-balance figures remain open. Historical paragraphs describing prior proposals are not alternative live rules; follow this reconciliation and the later approved sections it cites.
 
 
 ## MULTI-ICE-002 — Left-to-right Corporation Response execution (LOCKED, approved 2026-11-11)
@@ -719,30 +3253,30 @@ This section reconciles earlier dated design entries; older locked decisions rem
 At **100% TRACE**, the Corporation identifies the Rustler's location, as established by TRACE-001. **The specific Corporation countermeasures deployed at 100% TRACE are TBD and not yet designed or approved.** Do not presume reinforced ICE, a hunter program, a special encounter, damage, defeat, timing, duration, or any other particular mechanic. Earlier language about deployment of additional defenses expresses the intended narrative escalation only; the actual countermeasure rules remain **OPEN**. TRACE-001's 50% warning-only rule and TRACE-002/003 Corporation-scope reset rules remain unchanged.
 
 
-## BREAKER-STARTER-002 — Generalist WALL Icepick partial profile (APPROVED, 2026-11-12)
+## BREAKER-STARTER-002 — Generalist FORTRESS Icepick partial profile (APPROVED, 2026-11-12)
 
-The Generalist starter **WALL Icepick** is a **Persistent Software Executable** compatible with **WALL ICE**. Its **base breaking Strength is 1**. The Rustler may **spend 1 BW to increase its breaking Strength by 1**, with boosts accumulating for the **remainder of the current ICE encounter**, consistent with BREAKER-STARTER-001's starter Icepick Strength-boost duration. This approval defines only base Strength and Strength-boost cost/amount; the **BW cost to break an individual WALL subroutine remains OPEN** and must not be assumed. Existing starter Icepick installation and RAM rules are unchanged. This supersedes older notes saying all WALL Icepick profile details are undecided, but does not settle other training-encounter balance questions.
-
-
-## BREAKER-STARTER-003 — WALL Icepick subroutine-breaking profile (LOCKED, 2026-11-12)
-
-The Generalist starter **WALL Icepick** is a Persistent Software Executable compatible with WALL ICE, with **base breaking Strength 1** and **spend 1 BW for +1 breaking Strength for the remainder of the current ICE encounter** (BREAKER-STARTER-002). Its subroutine-breaking abilities are:
-
-- **Once per Rustler turn:** Break **one** subroutine on a compatible WALL ICE for **0 BW**.
-- **Additional breaks:** Spend **1 BW** to break **one** subroutine on a compatible WALL ICE; each further paid break costs 1 BW.
-- **Strength requirement:** Both free and paid breaks require the WALL Icepick's current breaking Strength to meet or exceed the target WALL ICE's current Strength, as with other Icepicks.
-- The free use **refreshes each Rustler turn**, not each encounter, and unused free breaks **do not accumulate**. It is one free break per turn for this installed Icepick, not one per target WALL or subroutine. Existing installation/RAM, card lifecycle, and encounter rules remain unchanged.
-
-**Status:** The three Generalist starter Icepick breaking profiles are now defined: Sentry (Strength 0; +1 per 1 BW; 1 BW per subroutine), Code Gate (Strength 3; +1 per 2 BW; 1 BW per subroutine), WALL (Strength 1; +1 per 1 BW; first eligible break each Rustler turn free; subsequent breaks 1 BW each). Earlier statements that WALL's breaking cost remains OPEN are superseded.
+The Generalist starter **FORTRESS Icepick** is a **Persistent Software Executable** compatible with **FORTRESS ICE**. Its **base breaking Strength is 1**. The Rustler may **spend 1 BW to increase its breaking Strength by 1**, with boosts accumulating for the **remainder of the current ICE encounter**, consistent with BREAKER-STARTER-001's starter Icepick Strength-boost duration. This approval defines only base Strength and Strength-boost cost/amount; the **BW cost to break an individual FORTRESS subroutine remains OPEN** and must not be assumed. Existing starter Icepick installation and RAM rules are unchanged. This supersedes older notes saying all FORTRESS Icepick profile details are undecided, but does not settle other training-encounter balance questions.
 
 
-## BREAKER-STARTER-004 — WALL Icepick base Strength revised to 0 (LOCKED, 2026-11-12)
+## BREAKER-STARTER-003 — FORTRESS Icepick subroutine-breaking profile (LOCKED, 2026-11-12)
 
-**Approved revision:** The Generalist starter **WALL Icepick's base breaking Strength is 0**, replacing the previously approved Strength 1 in BREAKER-STARTER-002 and repeated historical summaries in BREAKER-STARTER-003. This is an explicit supersession; do not use Strength 1 as the current rule.
+The Generalist starter **FORTRESS Icepick** is a Persistent Software Executable compatible with FORTRESS ICE, with **base breaking Strength 1** and **spend 1 BW for +1 breaking Strength for the remainder of the current ICE encounter** (BREAKER-STARTER-002). Its subroutine-breaking abilities are:
 
-**Complete current WALL Icepick profile:** Persistent Software Executable compatible with WALL ICE; **base breaking Strength 0**; spend **1 BW to gain +1 breaking Strength** for the remainder of the current ICE encounter (boosts stack); **once per Rustler turn, break one compatible WALL subroutine for 0 BW**; each additional compatible WALL subroutine break costs **1 BW**. All free and paid breaks require the Icepick's current breaking Strength to be at least the target WALL ICE's current Strength. The free break refreshes each Rustler turn, does not accumulate, and is limited to once per turn per installed Icepick. Existing installation and RAM requirements remain unchanged.
+- **Once per Rustler turn:** Break **one** subroutine on a compatible FORTRESS ICE for **0 BW**.
+- **Additional breaks:** Spend **1 BW** to break **one** subroutine on a compatible FORTRESS ICE; each further paid break costs 1 BW.
+- **Strength requirement:** Both free and paid breaks require the FORTRESS Icepick's current breaking Strength to meet or exceed the target FORTRESS ICE's current Strength, as with other Icepicks.
+- The free use **refreshes each Rustler turn**, not each encounter, and unused free breaks **do not accumulate**. It is one free break per turn for this installed Icepick, not one per target FORTRESS or subroutine. Existing installation/RAM, card lifecycle, and encounter rules remain unchanged.
 
-**Balance intent:** The free once-per-turn subroutine break offsets the additional BW needed to boost from Strength 0. This decision changes only the WALL Icepick's base Strength, not the Sentry or Code Gate profiles or any other established rules.
+**Status:** The three Generalist starter Icepick breaking profiles are now defined: VOID (Strength 0; +1 per 1 BW; 1 BW per subroutine), SIGYL (Strength 3; +1 per 2 BW; 1 BW per subroutine), FORTRESS (Strength 1; +1 per 1 BW; first eligible break each Rustler turn free; subsequent breaks 1 BW each). Earlier statements that FORTRESS's breaking cost remains OPEN are superseded.
+
+
+## BREAKER-STARTER-004 — FORTRESS Icepick base Strength revised to 0 (LOCKED, 2026-11-12)
+
+**Approved revision:** The Generalist starter **FORTRESS Icepick's base breaking Strength is 0**, replacing the previously approved Strength 1 in BREAKER-STARTER-002 and repeated historical summaries in BREAKER-STARTER-003. This is an explicit supersession; do not use Strength 1 as the current rule.
+
+**Complete current FORTRESS Icepick profile:** Persistent Software Executable compatible with FORTRESS ICE; **base breaking Strength 0**; spend **1 BW to gain +1 breaking Strength** for the remainder of the current ICE encounter (boosts stack); **once per Rustler turn, break one compatible FORTRESS subroutine for 0 BW**; each additional compatible FORTRESS subroutine break costs **1 BW**. All free and paid breaks require the Icepick's current breaking Strength to be at least the target FORTRESS ICE's current Strength. The free break refreshes each Rustler turn, does not accumulate, and is limited to once per turn per installed Icepick. Existing installation and RAM requirements remain unchanged.
+
+**Balance intent:** The free once-per-turn subroutine break offsets the additional BW needed to boost from Strength 0. This decision changes only the FORTRESS Icepick's base Strength, not the VOID or SIGYL profiles or any other established rules.
 
 
 ## GENERALIST-STARTER-LOCK-001 — Approved 12-card starter deck and no Protocols (LOCKED, 2026-11-12)
@@ -751,9 +3285,9 @@ The **Generalist starter deck is exactly 12 physical cards**:
 
 | Qty | Card | Operating classification | Nature | Play/install cost |
 | ---: | --- | --- | --- | --- |
-| 1 | WALL Icepick | Persistent Executable | Software | 1 BW install |
-| 1 | SENTRY Icepick | Persistent Executable | Software | 1 BW install |
-| 1 | CODE GATE Icepick | Persistent Executable | Software | 1 BW install |
+| 1 | FORTRESS Icepick | Persistent Executable | Software | 1 BW install |
+| 1 | VOID Icepick | Persistent Executable | Software | 1 BW install |
+| 1 | SIGYL Icepick | Persistent Executable | Software | 1 BW install |
 | 1 | Basic Extractor | Persistent Executable | Software | 1 BW install |
 | 1 | SYN BUFFER | Persistent Executable | Hardware | 1 BW install |
 | 3 | PULP Shield | Instant Packet | Hardware | 1 BW each |
@@ -762,25 +3296,25 @@ The **Generalist starter deck is exactly 12 physical cards**:
 
 **Composition:** **5 Executables, 7 Packets, 0 Protocols, 0 Bloatware** at the start of a Generalist run. This explicitly confirms **no Protocol cards in the starter deck**; Protocol remains an established card classification for other cards or later acquisitions. Bloatware may be inserted by Corporation effects during play, but is not part of the starting 12 cards.
 
-**Current approved abilities:** WALL Icepick: base breaking Strength **0**, +1 Strength for 1 BW for the remainder of the ICE encounter, first eligible WALL subroutine break **free once per Rustler turn**, subsequent breaks 1 BW each. SENTRY Icepick: base Strength 0, +1 Strength for 1 BW, break a compatible subroutine for 1 BW. CODE GATE Icepick: base Strength 3, +1 Strength for 2 BW, break a compatible subroutine for 1 BW. All breaks require sufficient breaker Strength. Basic Extractor: earn up to 5 CRED at each eligible Rustler end turn from current ICE encounter's finite reserve. SYN BUFFER: automatically prevent 1 SyN once per ICE encounter per independently installed copy. Each PULP Shield: +3 temporary PULP prevention to the shared pool. Each PROBE: reduce target ICE Strength by 2 for that ICE lifecycle. GHOST SIGNAL: reduce the first TRACE addition during the immediately following Corporation turn to 0, then BURNED until the next Node, usable once per Node.
+**Current approved abilities:** FORTRESS Icepick: base breaking Strength **0**, +1 Strength for 1 BW for the remainder of the ICE encounter, first eligible FORTRESS subroutine break **free once per Rustler turn**, subsequent breaks 1 BW each. VOID Icepick: base Strength 0, +1 Strength for 1 BW, break a compatible subroutine for 1 BW. SIGYL Icepick: base Strength 3, +1 Strength for 2 BW, break a compatible subroutine for 1 BW. All breaks require sufficient breaker Strength. Basic Extractor: earn up to 5 CRED at each eligible Rustler end turn from current ICE encounter's finite reserve. SYN BUFFER: automatically prevent 1 SyN once per ICE encounter per independently installed copy. Each PULP Shield: +3 temporary PULP prevention to the shared pool. Each PROBE: reduce target ICE Strength by 2 for that ICE lifecycle. GHOST SIGNAL: reduce the first TRACE addition during the immediately following Corporation turn to 0, then BURNED until the next Node, usable once per Node.
 
-**Resource status:** Existing 1 RAM requirements for the four Software Executables remain as approved. SYN BUFFER's 1 RAM requirement remains **provisional and open for rebalancing**, not newly finalized here. GHOST SIGNAL is still a **working name**. Earlier 10-card starter lists, two-shield quantities, and WALL base Strength 1 are historical/superseded; they are not alternate active starter configurations. This lock confirms the starter deck composition, not the unresolved training ICE or balance details.
-
-
-## BREAKER-STARTER-005 — WALL Icepick base Strength restored to 1 (LOCKED, 2026-11-12)
-
-**Latest explicit approval supersedes BREAKER-STARTER-004 and GENERALIST-STARTER-LOCK-001 only where they specify WALL Icepick base Strength 0:** The Generalist starter **WALL Icepick has base breaking Strength 1**. This restores the earlier Strength 1 baseline and is the **current authoritative value**; Strength 0 is historical and must not be used for current rules or playtesting.
-
-**All other approved WALL Icepick mechanics are unchanged:** Persistent Software Executable compatible with WALL ICE; **spend 1 BW for +1 breaking Strength** for the remainder of the current ICE encounter; **once per Rustler turn break one compatible WALL subroutine for 0 BW**, with subsequent compatible WALL subroutine breaks costing **1 BW each**. Every break requires the Icepick's current breaking Strength to meet or exceed the target WALL ICE's current Strength. Free breaks refresh each Rustler turn and do not accumulate. Installation and RAM requirements are unchanged. The Generalist starter deck remains exactly 12 cards, including one WALL Icepick and **zero Protocols**. No SENTRY or CODE GATE Icepick profile is changed.
+**Resource status:** Existing 1 RAM requirements for the four Software Executables remain as approved. SYN BUFFER's 1 RAM requirement remains **provisional and open for rebalancing**, not newly finalized here. GHOST SIGNAL is still a **working name**. Earlier 10-card starter lists, two-shield quantities, and FORTRESS base Strength 1 are historical/superseded; they are not alternate active starter configurations. This lock confirms the starter deck composition, not the unresolved training ICE or balance details.
 
 
-## CARD-SUBTYPE-001 — EXPLOIT / CLOAK and reactive SENTRY (LOCKED, 2026-11-12)
+## BREAKER-STARTER-005 — FORTRESS Icepick base Strength restored to 1 (LOCKED, 2026-11-12)
+
+**Latest explicit approval supersedes BREAKER-STARTER-004 and GENERALIST-STARTER-LOCK-001 only where they specify FORTRESS Icepick base Strength 0:** The Generalist starter **FORTRESS Icepick has base breaking Strength 1**. This restores the earlier Strength 1 baseline and is the **current authoritative value**; Strength 0 is historical and must not be used for current rules or playtesting.
+
+**All other approved FORTRESS Icepick mechanics are unchanged:** Persistent Software Executable compatible with FORTRESS ICE; **spend 1 BW for +1 breaking Strength** for the remainder of the current ICE encounter; **once per Rustler turn break one compatible FORTRESS subroutine for 0 BW**, with subsequent compatible FORTRESS subroutine breaks costing **1 BW each**. Every break requires the Icepick's current breaking Strength to meet or exceed the target FORTRESS ICE's current Strength. Free breaks refresh each Rustler turn and do not accumulate. Installation and RAM requirements are unchanged. The Generalist starter deck remains exactly 12 cards, including one FORTRESS Icepick and **zero Protocols**. No VOID or SIGYL Icepick profile is changed.
+
+
+## CARD-SUBTYPE-001 — EXPLOIT / CLOAK and reactive VOID (LOCKED, 2026-11-12)
 
 **Functional subtypes are distinct from existing card classifications:** EXPLOIT denotes offensive cards that compromise, weaken, or manipulate hostile systems; CLOAK denotes defensive cards that protect the Rustler, conceal activity, or interfere with hostile detection and attacks. These functional subtypes are orthogonal to Hardware/Software and Packet/Executable classifications. Do not confuse CLOAK with a specific cloaking technology; its meaning includes physical damage prevention.
 
 **Generalist starter card subtype assignments (LOCKED):** PROBE = **EXPLOIT** (Software Packet); PULP Shield = **CLOAK** (Hardware Packet); GHOST SIGNAL (working card name) = **CLOAK** (Software Packet). No other starter cards receive a subtype from this decision. In particular, do not infer that all installed protective cards are CLOAK without separate approval.
 
-**SENTRY reactive ability (LOCKED):** **Whenever the Rustler plays a CLOAK card, this SENTRY gains +1 Strength.** Each distinct CLOAK card play triggers +1 Strength; the trigger is on playing a card, not on automatic activations of previously installed cards. The Strength bonus duration/reset timing and any encounter-specific stacking restrictions beyond the per-play trigger remain to be specified; do not silently treat a proposed duration as approved. The precise SENTRY starting Strength remains open.
+**VOID reactive ability (LOCKED):** **Whenever the Rustler plays a CLOAK card, this VOID gains +1 Strength.** Each distinct CLOAK card play triggers +1 Strength; the trigger is on playing a card, not on automatic activations of previously installed cards. The Strength bonus duration/reset timing and any encounter-specific stacking restrictions beyond the per-play trigger remain to be specified; do not silently treat a proposed duration as approved. The precise VOID starting Strength remains open.
 
 **Terminology:** EXPLOIT and CLOAK supersede proposed DEFENSE, SHROUD, SAFEGUARD, ASSAULT and COUNTERMEASURE names for these Rustler functional subtypes; COUNTERMEASURE remains available as Corporation terminology. This decision does not change card costs, effects, deck counts, or Icepick profiles.
 
@@ -795,14 +3329,14 @@ The **Generalist starter deck is exactly 12 physical cards**:
 **This is a global game rule for ALL Nodes**, not an ability of an individual card, extractor, Node type, or training encounter. Whenever the Rustler extracts **100% of a Node's original finite CRED reserve**, grant **one bonus equal to 10% of the original reserve, rounded UP to the nearest whole CRED**: `bonus_CRED = ceil(original_node_CRED_reserve * 0.10)`. This bonus is paid once per Node, adds to banked earnings, does not replenish the Node's extractable reserve, and is independent of the extraction method. No full-extraction bonus is paid if any reserve CRED remains unextracted. Example: 15 reserve -> +2 bonus, 17 total; 25 -> +3, 28 total; 40 -> +4, 44 total. This explicitly **supersedes the fractional-CRED examples and open rounding question in NODE-EXTRACTION-001**. CRED bonuses under this rule are always whole numbers.
 
 
-## TRAINING-THREE-ICE-SENTRY-001 — Main SENTRY base Strength and bonus duration (LOCKED, 2026-11-12)
+## TRAINING-THREE-ICE-SENTRY-001 — Main VOID base Strength and bonus duration (LOCKED, 2026-11-12)
 
-In the three-ICE training encounter, the **rightmost main SENTRY starts at Strength 3** (not the previously proposed 5). Its locked reactive ability remains: **Whenever the Rustler plays a CLOAK card, this SENTRY gains +1 Strength**. **All Strength bonuses applied to this SENTRY last for the current ICE encounter only** and expire when that encounter ends; multiple qualifying bonuses stack during the encounter. This encounter-duration rule covers the SENTRY's reactive +1 Strength bonuses and Strength bonuses conferred by supporting ICE effects (including the working supporting CODE GATE +2 effect, if that effect resolves). It does not by itself finalize the CODE GATE effect's trigger, frequency, or other unresolved specifics. The base Strength 3 is restored on a new encounter; no Strength bonuses persist between ICE encounters or Nodes. The previously proposed base Strength 5 is rejected. All other encounter rules remain unchanged.
+In the three-ICE training encounter, the **rightmost main VOID starts at Strength 3** (not the previously proposed 5). Its locked reactive ability remains: **Whenever the Rustler plays a CLOAK card, this VOID gains +1 Strength**. **All Strength bonuses applied to this VOID last for the current ICE encounter only** and expire when that encounter ends; multiple qualifying bonuses stack during the encounter. This encounter-duration rule covers the VOID's reactive +1 Strength bonuses and Strength bonuses conferred by supporting ICE effects (including the working supporting SIGYL +2 effect, if that effect resolves). It does not by itself finalize the SIGYL effect's trigger, frequency, or other unresolved specifics. The base Strength 3 is restored on a new encounter; no Strength bonuses persist between ICE encounters or Nodes. The previously proposed base Strength 5 is rejected. All other encounter rules remain unchanged.
 
 
-## TRAINING-THREE-ICE-CODE-GATE-001 — Supporting CODE GATE Strength boost (LOCKED, 2026-11-12)
+## TRAINING-THREE-ICE-CODE-GATE-001 — Supporting SIGYL Strength boost (LOCKED, 2026-11-12)
 
-In the three-ICE training encounter, the supporting CODE GATE's SENTRY-strengthening subroutine grants **+1 Strength to the rightmost main SENTRY**, **not +2**. The subroutine **activates as normal** under existing multi-ICE Corporation Response rules: ICE resolve left-to-right; eligible unbroken subroutines resolve top-to-bottom during normal Corp Response. It is **not** an automatic passive trigger or a special one-time activation. Each time the subroutine normally resolves, it grants +1 Strength, stacking with other encounter-long Strength bonuses; the added Strength expires at the end of the current ICE encounter. If the subroutine is broken or otherwise prevented, it does not grant the bonus. This supersedes earlier working +2 text. Main SENTRY base Strength remains 3 and its +1 Strength per played CLOAK ability remains unchanged. No change to other CODE GATE subroutines or TRACE rules.
+In the three-ICE training encounter, the supporting SIGYL's VOID-strengthening subroutine grants **+1 Strength to the rightmost main VOID**, **not +2**. The subroutine **activates as normal** under existing multi-ICE Corporation Response rules: ICE resolve left-to-right; eligible unbroken subroutines resolve top-to-bottom during normal Corp Response. It is **not** an automatic passive trigger or a special one-time activation. Each time the subroutine normally resolves, it grants +1 Strength, stacking with other encounter-long Strength bonuses; the added Strength expires at the end of the current ICE encounter. If the subroutine is broken or otherwise prevented, it does not grant the bonus. This supersedes earlier working +2 text. Main VOID base Strength remains 3 and its +1 Strength per played CLOAK ability remains unchanged. No change to other SIGYL subroutines or TRACE rules.
 
 
 ## RUSTLER-STARTING-RESOURCES-001 — TRACE capacity and VITAE (LOCKED, 2026-11-12)
@@ -817,22 +3351,22 @@ The Rustler starts with **30 VITAE** and a **TRACE meter capacity/maximum of 40 
 
 ## TRAINING-THREE-ICE-CODE-GATE-A-002 — Sole subroutine and once-per-Corporation-turn timing (LOCKED, 2026-11-12)
 
-**CODE GATE A**, the **leftmost supporting CODE GATE** in the third training-layer three-ICE encounter, has **exactly one subroutine**:
+**SIGYL A**, the **leftmost supporting SIGYL** in the third training-layer three-ICE encounter, has **exactly one subroutine**:
 
-> **Grant the main SENTRY ICE +1 Strength.**
+> **Grant the main VOID ICE +1 Strength.**
 
-This sole subroutine **resolves once per Corporation turn during the normal Corporation Response**, provided it remains eligible and unbroken. It is not a passive effect and does not activate more than once in the same Corporation turn. On each subsequent Corporation turn in which it resolves, it grants an additional +1 Strength; these bonuses **stack and last only until the end of the current ICE encounter**, consistent with TRAINING-THREE-ICE-SENTRY-001 and TRAINING-THREE-ICE-CODE-GATE-001. Breaking/preventing the subroutine prevents its resolution for that turn. CODE GATE A has **no additional subroutines**. Its provisional Strength 5 remains a working value, not newly locked by this decision. Main SENTRY base Strength remains 3.
+This sole subroutine **resolves once per Corporation turn during the normal Corporation Response**, provided it remains eligible and unbroken. It is not a passive effect and does not activate more than once in the same Corporation turn. On each subsequent Corporation turn in which it resolves, it grants an additional +1 Strength; these bonuses **stack and last only until the end of the current ICE encounter**, consistent with TRAINING-THREE-ICE-SENTRY-001 and TRAINING-THREE-ICE-CODE-GATE-001. Breaking/preventing the subroutine prevents its resolution for that turn. SIGYL A has **no additional subroutines**. Its provisional Strength 5 remains a working value, not newly locked by this decision. Main VOID base Strength remains 3.
 
 
-## TRAINING-THREE-ICE-WATCHDOG-001 — Main SENTRY named WATCHDOG (LOCKED, 2026-11-12)
+## TRAINING-THREE-ICE-WATCHDOG-001 — Main VOID named WATCHDOG (LOCKED, 2026-11-12)
 
-The **rightmost main SENTRY ICE** in the third training layer is officially named **WATCHDOG**. Its locked base Strength is **3 STR**. Its existing reactive ability is unchanged: whenever the Rustler plays a CLOAK card, **WATCHDOG gains +1 STR** for the current ICE encounter; multiple triggers stack.
+The **rightmost main VOID ICE** in the third training layer is officially named **WATCHDOG**. Its locked base Strength is **3 STR**. Its existing reactive ability is unchanged: whenever the Rustler plays a CLOAK card, **WATCHDOG gains +1 STR** for the current ICE encounter; multiple triggers stack.
 
-The **leftmost supporting CODE GATE 1** has exactly one subroutine, now printed in the approved canonical subroutine notation:
+The **leftmost supporting SIGYL 1** has exactly one subroutine, now printed in the approved canonical subroutine notation:
 
 `[S1] WATCHDOG gains +1 STR.`
 
-This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting CODE GATE 2's working list is:
+This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future PANOPTICON design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
 
 `[S1] PULP 3`
 `[S2] TRACE 3`
@@ -847,7 +3381,7 @@ The three Training Node ICE encounter/layer **original finite CRED reserves** ar
 
 ## TRAINING-WATCHDOG-SUBROUTINES-001 — WATCHDOG subroutine adjustment (APPROVED, 2026-11-12)
 
-In Training Node Layer 3, **WATCHDOG — SENTRY — STR 3** has the following approved working subroutine list, in top-to-bottom resolution order:
+In Training Node Layer 3, **WATCHDOG — VOID — STR 3** has the following approved working subroutine list, in top-to-bottom resolution order:
 
 `[S1] PULP 4`
 `[S2] SyN 1`
@@ -858,7 +3392,7 @@ The user specifically reduced the proposed `[S2] SyN 2` to **`[S2] SyN 1`**. Thi
 
 ## TRAINING-WATCHDOG-SUBROUTINES-002 — PULP 4 and DEADLOCK share one subroutine (CORRECTION, 2026-11-12)
 
-Correct the preceding WATCHDOG roster: **WATCHDOG — SENTRY — STR 3** has **two** subroutines, not three:
+Correct the preceding WATCHDOG roster: **WATCHDOG — VOID — STR 3** has **two** subroutines, not three:
 
 `[S1] PULP 4 + DEADLOCK`
 `[S2] SyN 1`
@@ -868,7 +3402,7 @@ PULP 4 and DEADLOCK are **two effects on the same [S1] subroutine**, not separat
 
 ## TRAINING-WATCHDOG-SUBROUTINES-003 — Final corrected three-subroutine layout (LOCKED, 2026-11-12)
 
-**WATCHDOG — SENTRY — STR 3** has **exactly three subroutines**, in order:
+**WATCHDOG — VOID — STR 3** has **exactly three subroutines**, in order:
 
 `[S1] PULP 4 + DEADLOCK`
 `[S2] SyN 1`
@@ -881,11 +3415,11 @@ There are **two DEADLOCK effects**, one attached to [S1] together with PULP 4, a
 
 User confirms **all six ICE names** and **all existing Training Node values** for the playtest. Do not reopen naming or rebalance before actual playtesting. The ICE roster, in left-to-right resolution order, with required display format **NAME — TYPE — STR** and numbered subroutines:
 
-**Layer 1:** WHITE PICKET FENCE — WALL — STR 3: `[S1] PULP 5`; `[S2] DEADLOCK`.
+**Layer 1:** WHITE PICKET FENCE — FORTRESS — STR 3: `[S1] PULP 5`; `[S2] DEADLOCK`.
 
-**Layer 2:** TOLLBOOTH — WALL — STR 5: `[S1] TRACE 4`; `[S2] DEADLOCK`. MEATGRINDER — CODE GATE — STR 3: `[S1] PULP 3`; `[S2] PULP 3`; `[S3] DEADLOCK`.
+**Layer 2:** TOLLBOOTH — FORTRESS — STR 5: `[S1] TRACE 4`; `[S2] DEADLOCK`. MEATGRINDER — SIGYL — STR 3: `[S1] PULP 3`; `[S2] PULP 3`; `[S3] DEADLOCK`.
 
-**Layer 3:** OVERCLOCK — CODE GATE — STR 5: `[S1] WATCHDOG gains +1 STR.` HOTWIRE — CODE GATE — STR 3: `[S1] PULP 3`; `[S2] TRACE 3`. WATCHDOG — SENTRY — STR 3: `[S1] PULP 4 + DEADLOCK`; `[S2] SyN 1`; `[S3] DEADLOCK`. WATCHDOG reactive ability: whenever the Rustler plays a CLOAK card, WATCHDOG gains +1 STR for current encounter; stacks.
+**Layer 3:** OVERCLOCK — SIGYL — STR 5: `[S1] WATCHDOG gains +1 STR.` HOTWIRE — SIGYL — STR 3: `[S1] PULP 3`; `[S2] TRACE 3`. WATCHDOG — VOID — STR 3: `[S1] PULP 4 + DEADLOCK`; `[S2] SyN 1`; `[S3] DEADLOCK`. WATCHDOG reactive ability: whenever the Rustler plays a CLOAK card, WATCHDOG gains +1 STR for current encounter; stacks.
 
 **CRED reserves by layer:** 10 / 15 / 25 (total base 50); universal rounded-up 10% full-extraction bonuses +1 / +2 / +3, maximum total 56. Existing rules on turns, BW/RAM, 12-card Generalist deck, Icepicks, TRACE, VITAE, damage, extraction, BREACH, and reward resolution remain authoritative.
 
