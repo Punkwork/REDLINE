@@ -214,14 +214,14 @@ const STARTER_GENERALIST := [
 	"PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "PROBE", "PROBE", "PROBE", "GHOST_SIGNAL",
 ]
 
-# ECHO-001: SLOW DRIP and GHOST SIGNAL moved to ECHO's reward pool; ECHO starts with 3 PROBE and 3 PULP Shield.
+# ECHO-001: SLOW DRIP moved to ECHO's reward pool; ECHO starts with 3 PROBE and 3 PULP Shield.
+# ECHO-003: GHOST SIGNAL (a shared basic, BASIC-001) back in the starter deck; one SMOKESCREEN out.
 const STARTER_ECHO := [
 	"HUSH", "BACKDOOR", "BASIC_EXTRACTOR", "PROBE", "PROBE", "PROBE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD",
-	"SMOKESCREEN", "SMOKESCREEN", "DEAD_AIR",
+	"SMOKESCREEN", "DEAD_AIR", "GHOST_SIGNAL",
 ]
 ## Cards offered in a Rustler's reward pool besides those tagged with "pool" (rarity used for the reward roll).
-## ECHO-001 makes GHOST SIGNAL an exception to BASIC-001 (basics are never offered), for ECHO only.
-const POOL_EXTRA := {"ECHO": {"SLOW_DRIP": "COMMON", "GHOST_SIGNAL": "COMMON"}}
+const POOL_EXTRA := {"ECHO": {"SLOW_DRIP": "COMMON"}}
 const STARTER_RIOT := [
 	"SLEDGE", "BRUTE_FORCE", "OVERLOAD", "OVERLOAD", "PROBE", "FEEDBACK", "ADRENAL_SPIKE",
 	"PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "SMASH_AND_GRAB", "BASIC_EXTRACTOR",

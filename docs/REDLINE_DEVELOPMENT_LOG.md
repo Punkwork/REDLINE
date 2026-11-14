@@ -1155,3 +1155,11 @@ Each encounter shows a CRED meter in the info bar: a gold bar with "left / total
 ## ECHO-002 — HUSH starts at STR 1 (APPROVED, 2026-11-14)
 
 HUSH (ECHO's TUMBLER Icepick): STR 3 → **1**; boost (2 BW → +1 STR) and break (1 BW) unchanged. 30-run bot test, ECHO: **23 / 30** cleared (22 after ECHO-001), survivors' average end VITAE 16.5 (18.7). The lower STR barely moved the result: boosts last the whole encounter and ECHO now has 3 PROBEs, so the extra cost is paid once per encounter, and LOW PROFILE keeps TRACE low while ECHO takes the extra turns.
+
+## ECHO-003 — GHOST SIGNAL back in ECHO's starter deck; one SMOKESCREEN out (APPROVED, 2026-11-14)
+
+GHOST SIGNAL is a shared basic, so it returns to ECHO's starter deck and leaves ECHO's reward pool (BASIC-001 holds again; the ECHO-001 exception is withdrawn). SLOW DRIP stays in the pool (Common).
+
+**Card removed in its place: one SMOKESCREEN** (designer asked Claude to choose). Reason: SMOKESCREEN and GHOST SIGNAL do the same job (cut the first TRACE of the next Corporation Response), and ECHO's TRACE control is what makes it the strongest Rustler. Tested both candidates on the 30-run bot: without a SMOKESCREEN, ECHO clears **20 / 30**; without DEAD AIR, 22 / 30. DEAD AIR also stays because CACHING BACKDOOR is ECHO's signature play (and the bot under-uses it).
+
+**ECHO's starter deck now:** HUSH, BACKDOOR, Basic Extractor, PROBE ×3, PULP Shield ×3, SMOKESCREEN, DEAD AIR, GHOST SIGNAL.

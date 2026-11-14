@@ -99,10 +99,12 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
 | 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. *(ECHO-001: was 2.)* |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(ECHO-001: was 2.)* |
-| 2 | **SMOKESCREEN** | SCRIPT — CLOAK | 1 BW | +2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2. |
+| 1 | **SMOKESCREEN** | SCRIPT — CLOAK | 1 BW | +2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2. *(ECHO-003: was 2.)* |
 | 1 | **DEAD AIR** | SCRIPT — CLOAK | 0 BW | CACHE 1 card in your hand. |
 
-> **ECHO-001 (2026-11-14):** SLOW DRIP and GHOST SIGNAL left the starter deck and joined ECHO's reward pool (both Common), making room for a 3rd PROBE and a 3rd PULP Shield. GHOST SIGNAL in ECHO's pool is a deliberate exception to BASIC-001 (basics are never offered as rewards), for ECHO only.
+| 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | As Generalist. |
+
+> **ECHO-001 / ECHO-003 (2026-11-14):** SLOW DRIP left the starter deck for ECHO's reward pool (Common), making room for a 3rd PROBE and a 3rd PULP Shield. GHOST SIGNAL stays in the starter deck because it's a shared basic (BASIC-001); one SMOKESCREEN was removed instead.
 
 ### ORIGIN Ghostware — LOW PROFILE
 **Whenever you would gain TRACE, gain 1 less (minimum 0).**
