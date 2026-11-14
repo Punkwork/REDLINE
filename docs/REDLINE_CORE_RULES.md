@@ -49,7 +49,7 @@ Every card shows **one type** on its frame:
 Each card can also carry **tags**, shown under the type:
 - **EXPLOIT** — attacks or weakens corporate systems.
 - **CLOAK** — protects you or hides you.
-- **ICEPICK (FORTRESS / SIGYL / VOID)**, **EXTRACTOR**, **VIRUS** — what the card does.
+- **ICEPICK (FORTRESS / TUMBLER / VOID)**, **EXTRACTOR**, **VIRUS** — what the card does. *(TUMBLER replaced SIGYL, ROT-001.)*
 - **HARDWARE / SOFTWARE** — **[CHANGED]** now a flavour tag only. It has no rules effect unless a card specifically mentions it.
 
 > Mapping from the old classifications: Executable → PROGRAM; Packet → SCRIPT; Protocol → PROTOCOL; Bloatware → BLOATWARE.
@@ -70,22 +70,28 @@ Each card can also carry **tags**, shown under the type:
 ## 4. Turn structure
 
 **4.1 Start of your turn**
-1. Refill BW to 4.
+1. Refill BW to 4, minus any BW a DETAINER drained in the last Corporation Response (§5.5).
 2. Your SHIELD from last turn expires.
-3. Resolve "start of turn" effects.
-4. Draw cards equal to your DRAW.
+3. **TUMBLERS rotate** one step (not on your first turn of an encounter; §5.4).
+4. Resolve "start of turn" effects (including virus strains, §5.7).
+5. Draw cards equal to your DRAW (6).
+6. **Resolve any DISCARD** that ICE dealt in the last Corporation Response: choose the cards from your new hand. *(FIX-001: a DISCARD used to hit the old hand just before cleanup discarded it anyway.)*
 
-**4.2 Your turn:** play cards, install Programs, deploy Protocols, use Icepicks, in any order. End when you choose by pressing **END TURN**.
+**4.2 Your turn:** play cards, install Programs, deploy Protocols, use Icepicks, in any order. You can **boost an installed Icepick** at any time on your turn by paying its boost cost; boosts last until the encounter ends *(FIX-002)*. End when you choose by pressing **END TURN**.
 
 **4.3 End of your turn**
 1. Resolve "end of turn" effects (for example, Extractors pay out).
 2. Unused BW is lost.
 
-**4.4 Corporation Response:** each ICE acts in turn, **left to right**. Each unbroken subroutine on that ICE resolves **top to bottom**. Broken subroutines do nothing.
+**4.4 Corporation Response:**
+1. **PURGE check** *(PURGE-001)*: if the virus counters on the encounter's ICE add up to the corporation's PURGE limit or more, it removes them all **instead of taking its turn**, and your turn begins (§5.7).
+2. Otherwise each ICE acts in turn, **left to right**. Each unbroken subroutine **that is active** resolves **top to bottom**: on a TUMBLER only the subroutines in its slots (§5.4); on a VOID, subroutines 1 to N on its Nth response, face-down ones included (§5.6). Broken subroutines do nothing.
+
+*Presentation (PLAY-001): the response takes at least 5 seconds; each subroutine flashes in turn, and its effects apply only as it flashes.*
 
 **4.5 Cleanup:** discard every card in your hand that isn't CACHED.
 
-**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped**. If more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**.
+**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. This includes DEADLOCKs you haven't seen yet: a TUMBLER's hidden DEADLOCKs must each be broken as they rotate into a slot, and a VOID's once they have fired *(ROT-001, VOID-001)*. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped**. If more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**.
 
 **Defeat:** if VITAE reaches 0 at any moment, the run ends immediately.
 
@@ -105,7 +111,11 @@ WHITE PICKET FENCE — FORTRESS — STR 3
 [S2] DEADLOCK
 ```
 
-- **Types:** **FORTRESS** (high STR, few subroutines, blocks progress), **SIGYL** (lower STR, more subroutines), **VOID** (most dangerous, varied). VOID ICE are the main source of CORTEX damage, but any ICE can deal it. *(Renamed from WALL, CODE GATE and SENTRY by NAME-001.)*
+- **Types** *(ICEBIBLE-001; see the ICE Rules Bible)*:
+  - **FORTRESS** — generally the highest STR; few subroutines, almost all PULP (the odd other effect; TRACE rare). Everything is visible and fires every turn.
+  - **TUMBLER** — where the quirks and puzzles happen. Its subroutines rotate through a few slots (§5.4). *(Replaced SIGYL, ROT-001.)*
+  - **VOID** — where the deadly happens. Its subroutines start face-down (§5.6). VOID ICE are the main source of CORTEX damage, but any ICE can deal it.
+  - *(WALL, CODE GATE and SENTRY were renamed by NAME-001.)*
 - **STR** is the ICE's strength. Your Icepick needs equal or higher strength to break it.
 - The **main ICE** is always the right-most; support ICE sit to its left.
 - Every encounter has at least one **DEADLOCK** somewhere.
@@ -117,6 +127,8 @@ WHITE PICKET FENCE — FORTRESS — STR 3
 | **PULP X** | Take X damage (SHIELD first, then VITAE). |
 | **PULP (curve)** | *(PULP-002)* Take the next value of the subroutine's PULP curve (SHIELD first, then VITAE). The curve moves one step each Corporation Response the ICE goes through (a PURGE or BLACKOUT turn doesn't count) and loops after 9. **A · SEQUENTIAL:** 2, 3, 4, 2, 3, 4, 2, 3, 4 (27). **B · RANDOM:** 5, 3, 2, 6, 2, 3, 6, 2, 1 in a random order for each ICE (30); the ICE card shows "PULP ?". **C · HAMMER:** 4, 3, 4, 9, 3, 4, 3, 8, 2 (40). SCRAMBLE lowers it like any PULP. |
 | **CORTEX X** | Gain X CORTEX counters (§6). |
+| **−X BW** | You have X less BW on your next turn. The DETAINER's signature (§5.5). |
+| **DISCARD X** | Discard X cards of your choice **at the start of your next turn, after you draw** (FIX-001). |
 | **TRACE X** | Add X to your TRACE meter (§7). |
 | **DEADLOCK** | Blocks BREACH while unbroken. Does nothing on its own. |
 | **FORGET X** | X random non-CACHED cards in your hand go to the **bottom of your draw pile**. *(LUCIDA; added by ICE3-002, changed by ICE3-002a.)* |
@@ -129,10 +141,38 @@ One subroutine can have more than one effect (e.g. `[S1] PULP 4 + DEADLOCK`). Br
 1. Install an **Icepick** matching the ICE's type.
 2. Its **STR must be at least the ICE's current STR.** Boost it if needed: each Icepick lists its boost cost. Boosts last until the encounter ends.
 3. Pay the Icepick's **break cost** to break one subroutine.
+4. **You can only break what you can see:** a TUMBLER subroutine must be in a slot, and a VOID subroutine must have been revealed. Cards that break subroutines (BACKDOOR, BRUTE FORCE…) follow the same limits.
 
 You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of the encounter).
 
 **Screen rule [NEW]:** when you drag an Icepick onto an ICE, the game shows the **total BW needed** to break each subroutine from the current state, including boosts and STR reductions. Players should never have to do this sum themselves.
+
+### 5.4 TUMBLER rotation [NEW, ROT-001]
+
+- A TUMBLER has a **pool** of 1–8 subroutines and fewer **slots**. Only the subroutines in its slots are active; the rest are **face-down** (the card shows how many).
+- **Conveyor:** at the start of each of your turns after the first, the window moves one step: slots showing S1-S2-S3 then show S2-S3-S4, then S3-S4-S5, wrapping round. The newly revealed set is what fires when you end that turn, so you only learn the response at the start of your turn.
+- **Broken stays broken** for the rest of the encounter, even after it rotates out and back in.
+- TUMBLERS carry **several DEADLOCKs**, which must each be broken while in a slot (§4 BREACH).
+- *Presentation (REEL-001):* each slot is a slot-machine reel that spins on rotation; slots are labelled with the subroutine they hold ("SLOT 2 · S1").
+
+### 5.5 Subtypes and passive abilities [NEW, DET-001 and PASSIVE-001]
+
+- **Subtypes** give ICE a personality and a home for **passive abilities**: rules that apply all encounter without a subroutine firing. The full list, power ranking and guardrails are in the **Ice Passive Abilities** doc; the personalities are in the **ICE Rules Bible**.
+- **DETAINER** (TUMBLER subtype, LOCKED): about 1 TUMBLER in 5. Its **S1 is always −1 BW** (you have 1 less BW next turn). **At most 1 DETAINER per encounter.**
+- **Passives in the playtest slice:** TOLL (breaks cost +1 BW, except the DEADLOCK), SEQUENCED (break left to right), HARDENING (+1 STR after each response, max +3), RELAY (the ICE to its right +2 STR while this has an unbroken subroutine), TRIPWIRE (each break +1 TRACE), WATCHER (each CLOAK card +1 TRACE), BOOTING (DEADLOCKs unbreakable before your 3rd turn).
+- **Guardrails:** at most one passive per ICE, at most two passive ICE per Tier 1 encounter; Black ICE have none.
+
+### 5.6 VOID reveal [NEW, VOID-001]
+
+- A VOID's subroutines start **face-down**. Its 1st Corporation Response fires subroutine 1 (revealed as it fires); the 2nd fires subroutines 1 and 2; and so on until all fire every response.
+- A revealed subroutine stays revealed for the encounter; face-down ones can't be broken.
+- The response preview shows a face-down firing as "? (hidden)". Black ICE HOUSE CALL is a VOID and follows the same rule from the moment it joins.
+
+### 5.7 Virus counters and the corporation PURGE [NEW, RUSTLER-002 and PURGE-001]
+
+- **Strains** (placed by INFECT): **ROT** −1 STR each; **SCRAMBLE** this ICE's PULP −1 each when it acts; **BLIND** this ICE's TRACE −1 each when it acts; **LEECH** extract 1 CRED each at the start of your turn; **WORM** at the start of your turn, copy 1 counter of each strain on this ICE onto the ICE to its right, per WORM counter *(copy vs move still to confirm)*.
+- **PURGE:** at the start of its turn the corporation counts every virus counter on the encounter's ICE. At or above its **PURGE limit** it removes them all instead of taking its turn. **HALCYON: limit 10, +5 after each purge** (10 → 15 → 20), reset each encounter. The limit is **never shown** to the Rustler.
+- A PURGE or BLACKOUT turn isn't a Corporation Response: TUMBLERS still rotate (your turn starts), but VOIDS reveal nothing new, HARDENING doesn't grow and PULP curves don't advance.
 
 ---
 
@@ -317,7 +357,7 @@ Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE t
 | Qty | Card | Type | Cost | Effect |
 |---:|---|---|---|---|
 | 1 | FORTRESS Icepick | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 1. Boost: 1 BW +1 STR. First break each turn free, then 1 BW per break. |
-| 1 | SIGYL Icepick | PROGRAM — ICEPICK (SIGYL) | 1 BW, 1 RAM | STR 3. Boost: 2 BW +1 STR. Break: 1 BW. |
+| 1 | TUMBLER Icepick | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 3. Boost: 2 BW +1 STR. Break: 1 BW. *(Was the SIGYL Icepick; ROT-001.)* |
 | 1 | VOID Icepick | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 0. Boost: 1 BW +1 STR. Break: 1 BW. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
 | 1 | **CORTEX BUFFER** **[CHANGED]** | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. *(Replaces SYN BUFFER, since SyN is removed. Deliberately not tagged CLOAK, so installing it doesn't power up WATCHDOG.)* |
@@ -425,4 +465,14 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 | PULP-002 | **PULP curves** (§5.2): a subroutine can deal a sequence of PULP values instead of a fixed number (A sequential, B random, C hammer). — **APPROVED 2026-11-14** |
 | RUN-001 | **END RUN:** the player may end the run at any time outside the Corporation Response (with a confirmation). The Rustler fails and the game returns to the start menu. — **APPROVED 2026-11-14** |
 
-*Rules decided on 2026-11-13/14 and recorded in the development log but not yet written into this document's sections: TUMBLER rotation (ROT-001), DISCARD timing (FIX-001), Icepick boosts lasting the encounter (FIX-002), DETAINER (DET-001), VOID reveal (VOID-001), passive abilities and subtypes (PASSIVE-001), the corporation PURGE (PURGE-001).*
+| ROT-001 | **TUMBLER replaces SIGYL**; subroutines rotate through slots on a conveyor; only slotted subroutines can be broken; broken stays broken; BREACH needs every DEADLOCK (§4, §5.4). — **APPROVED 2026-11-13** |
+| FIX-001 | **DISCARD** from a subroutine resolves at the start of your next turn, after the draw (§4.1, §5.2). — **APPROVED 2026-11-13** |
+| FIX-002 | **Boost installed Icepicks** at any time on your turn; boosts last the encounter (§4.2). — **APPROVED 2026-11-13** |
+| TUNE-001 | ICE **STR +1** (Opening) / **+2** (Tier 1, Black ICE) and **PULP ×4/3** rounded up (values in `REDLINE_ICE_CORP1.md` §5.0). — **APPROVED 2026-11-13** |
+| DET-001 | **DETAINER** TUMBLER subtype: S1 −1 BW next turn; ~20% of TUMBLERS; max 1 per encounter (§5.5). — **APPROVED 2026-11-13** |
+| VOID-001 | **VOID reveal**: face-down subroutines fire progressively and are revealed as they fire (§5.6). — **APPROVED 2026-11-13** |
+| PLAY-001 | The Corporation Response **plays out over at least 5 seconds**, one subroutine at a time (§4.4). — **APPROVED 2026-11-13** |
+| ICEBIBLE-001 | **Type identities**: FORTRESS hits hard (highest STR, mostly PULP), TUMBLER is the puzzle, VOID is deadly (§5.1). — **APPROVED 2026-11-13** |
+| PASSIVE-001 | **Subtypes and passive abilities** on the slice ICE (§5.5). — **BUILT for playtest 2026-11-13** |
+| PURGE-001 | **Corporation PURGE** at a hidden, rising virus-counter limit (§4.4, §5.7). — **APPROVED 2026-11-14** |
+| REEL-001 | TUMBLER slots shown as **slot-machine reels**, labelled with their subroutine (§5.4). — **APPROVED 2026-11-14** |
