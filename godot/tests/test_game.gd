@@ -47,6 +47,7 @@ func _init() -> void:
 	test_rustlers()
 	test_purge()
 	test_shatter()
+	test_pulp_curves()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -210,7 +211,7 @@ func test_passives() -> void:
 	g.entered_corp = true
 	start_node(g, 1, 1, "FORTRESS_ICEPICK")   # COOKIE WALL: TOLL
 	var c := g.break_info(0, 0)
-	var dl := g.break_info(0, 2)
+	var dl := g.break_info(0, 3)
 	check(c.cost == dl.cost + 1, "TOLL: +1 BW except on the DEADLOCK (%d vs %d)" % [c.cost, dl.cost])
 	g = Game.new(14)
 	g.new_run()
@@ -268,8 +269,8 @@ func test_rustlers() -> void:
 	var bd := put_in_hand(g, "BACKDOOR")
 	g.bw = 4
 	check(g.play_card(bd) and g.phase == "CHOICE" and g.pending.kind == "card_break", "BACKDOOR asks for a subroutine")
-	check(g.card_break_ok(0, 2) and not g.card_break_ok(0, 5 - 5 + 0) == false, "BACKDOOR can break the DEADLOCK")
-	g.choose_sub(0, 2)
+	check(g.card_break_ok(0, 3), "BACKDOOR can break the DEADLOCK")
+	g.choose_sub(0, 3)
 	check(g.enc.breached and g.phase == "PLAYER", "BACKDOOR breaks the DEADLOCK: BREACH")
 	# RIOT: REDLINER, SLEDGE adds TRACE
 	g = Game.new(23)
@@ -299,7 +300,7 @@ func test_rustlers() -> void:
 	var rt := put_in_hand(g, "RUNTIME_ERROR")
 	g.bw = 4
 	check(g.play_card(rt), "RUNTIME ERROR plays with 2+ virus counters")
-	g.choose_sub(0, 2)
+	g.choose_sub(0, 3)
 	check(g.enc.breached, "RUNTIME ERROR breaks the DEADLOCK")
 
 func test_purge() -> void:
@@ -355,6 +356,28 @@ func test_shatter() -> void:
 	var sl: Dictionary = g._installed_entry(g.installed.filter(func(p): return p.inst.id == "SLEDGE")[0].inst.uid)
 	check(g.pick_str(sl) == 0, "SLEDGE drops to STR 0 after the turn (got %d)" % g.pick_str(sl))
 	check(g.break_info(1, g.active_subs(1)[0]).reason.begins_with("NO") or g.enc.ice[1].broken[g.active_subs(1)[0]], "SHATTER lasts one turn")
+
+func test_pulp_curves() -> void:
+	var g := Game.new(51)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, 1, 1, "")   # COOKIE WALL: [S3] curve B
+	var a_ice := {"corp_turns": 0, "curves": {"A": IceDB.CURVES.A.seq.duplicate()}, "virus": {}}
+	var seen := []
+	for t in 6:
+		seen.append(g.effect_value(a_ice, {"k": "PULP_CURVE", "curve": "A"}).v)
+		a_ice.corp_turns += 1
+	check(seen == [2, 3, 4, 2, 3, 4], "curve A: 2, 3, 4 repeating (got %s)" % str(seen))
+	var c := g._new_ice("TERMS_OF_SERVICE")
+	c.corp_turns = 3
+	check(g.effect_value(c, {"k": "PULP_CURVE", "curve": "C"}).v == 9, "curve C hammers 9 on its 4th response")
+	var b := g._new_ice("COOKIE_WALL")
+	var bs: Array = b.curves.B.duplicate()
+	bs.sort()
+	check(bs == [1, 2, 2, 2, 3, 3, 5, 6, 6], "curve B: the 9 values, shuffled")
+	g.infect(0, "SCRAMBLE", 1)
+	var raw: int = int(g.enc.ice[0].curves.B[0])
+	check(g.effect_value(g.enc.ice[0], {"k": "PULP_CURVE", "curve": "B"}).v == maxi(0, raw - 1), "SCRAMBLE lowers a curve's PULP too")
 
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
@@ -422,8 +445,8 @@ func test_go_deeper_keeps_programs() -> void:
 	g.entered_corp = true
 	start_node(g, 1, 1, "FORTRESS_ICEPICK")   # COOKIE WALL (FORTRESS 3) then CONSENT FORM
 	# FORTRESS Icepick STR 1 vs COOKIE WALL STR 5 → 4 boosts (4 BW) + free first break
-	check(g.break_info(0, 2).cost == 4, "COOKIE WALL DEADLOCK costs 4 BW")
-	g.break_sub(0, 2)
+	check(g.break_info(0, 3).cost == 4, "COOKIE WALL DEADLOCK costs 4 BW")
+	g.break_sub(0, 3)
 	check(g.enc.breached, "COOKIE WALL breached")
 	g.end_turn()
 	check(g.phase == "DEEPER", "go deeper or leave")
@@ -456,6 +479,7 @@ func sim_many() -> void:
 
 func sim_rustler(who: String) -> void:
 	var done := 0
+	var ps := {"incoming": 0, "absorbed": 0, "hits": 0, "black": 0, "encounters": 0}
 	var purges := 0
 	var purge_runs := 0
 	var shat := 0
@@ -481,6 +505,8 @@ func sim_rustler(who: String) -> void:
 						g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
 				"PLAYER": bot_turn(g)
 		purges += g.purges_run
+		for k in ps:
+			ps[k] += g.pulp_stats[k]
 		shat += int(g.played.get("SHATTER", 0))
 		if g.played.has("SHATTER"):
 			shat_runs += 1
@@ -494,6 +520,8 @@ func sim_rustler(who: String) -> void:
 	var avg := 0.0
 	for x in vit:
 		avg += x
+	var en: float = max(1, ps.encounters)
+	print("  pulp %s: per encounter %.1f incoming (%.1f from Black ICE), %.1f absorbed by SHIELD, %.1f to VITAE, %.1f hits" % [who, ps.incoming / en, ps.black / en, ps.absorbed / en, (ps.incoming - ps.absorbed) / en, ps.hits / en])
 	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; purges %d in %d runs; SHATTER played %d times in %d runs" % [who, done, str(rows), avg / max(1, vit.size()), purges, purge_runs, shat, shat_runs])
 
 func needed_types(g: Game) -> Array:

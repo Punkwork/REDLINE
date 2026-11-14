@@ -23,6 +23,9 @@ func _process(_d: float) -> bool:
 	var g = main.g
 	match step:
 		0:
+			if g.phase == "SELECT":
+				main._start_as("GENERALIST")
+				g = main.g
 			_snap("01_map")
 			print("voice playing=", main.voice.playing, " stream=", main.voice.stream.resource_path if main.voice.stream else "none", " text=", main.nr_mode.text)
 			g.enter_node(0)
@@ -64,8 +67,9 @@ func _process(_d: float) -> bool:
 			g.new_run()
 			g.entered_corp = true
 			g.row = 0
-			g.available = [0]
-			g.enter_node(0)
+			g.available = [0, 1]
+			g.enter_node(1)
+			main._show_inspect("")
 			if g.phase == "READY_RIG":
 				g.skip_ready_rig()
 			main.refresh()

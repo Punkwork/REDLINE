@@ -1237,3 +1237,19 @@ Designer: REDLINE was the previous iteration; the game is now called **PANOPTICO
 Playtest: with 4 BW and 5 cards there was little to decide about what not to play. Base **DRAW is now 6** (CORTEX still lowers it, minimum 1). 30-run bot test, DRAW 6 vs 5: GENERALIST 13 / 30 (10), ECHO 15 (14), VECTOR 8 (12), RIOT 1 (8). Cards left unplayed per turn rose from about 2.5–3.2 to 3.3–4.8.
 - **RIOT** collapses with the bot because the bot plays every cheap card, and RIOT's cheap cards add TRACE (19 of its 29 deaths at TERMS & CONDITIONS, SHATTER played 82 times). A player choosing what not to play avoids that; RIOT needs re-checking with real play.
 - **VECTOR** drops because more virus cards drive more PURGES (86 in 28 runs, up from 60).
+
+## PULP-002 — PULP curves on the harder FORTRESSES (APPROVED, 2026-11-14)
+
+Playtest: still not enough PULP. Designer's curves, one value per Corporation Response (looping after 9):
+
+| Curve | Values | Total over 9 turns |
+|---|---|---|
+| **A · SEQUENTIAL** | 2, 3, 4, 2, 3, 4, 2, 3, 4 | 27 |
+| **B · RANDOM** | 5, 3, 2, 6, 2, 3, 6, 2, 1, shuffled into a random order for each ICE | 30 |
+| **C · HAMMER** | 4, 3, 4, 9, 3, 4, 3, 8, 2 | 40 |
+
+- **Placed on the harder FORTRESSES only** (designer): **COOKIE WALL** (STR 5) gains [S3] PULP curve B before its DEADLOCK; **TERMS OF SERVICE** (STR 7, the final node) gains [S3] PULP curve C. AUTO-RENEW keeps its fixed PULP 1, 2, 3. Curve A is defined for later ICE.
+- A curve's step counts the Corporation Responses that ICE has been through (a PURGE or BLACKOUT turn doesn't count). SCRAMBLE lowers curve PULP like any PULP.
+- **On screen:** A and C show this turn's value (e.g. "PULP 9 · HAMMER"); B shows "PULP ? · RANDOM", and the response preview adds "+ random PULP (1–6)". Hovering a curve chip shows its sequence.
+
+**30-run bot test (DRAW 6, curves on):** GENERALIST 10 / 30 · ECHO 6 · VECTOR 2 · RIOT 1. PULP reaching VITAE per encounter is now 6.7–9.3 (was 5.7–7.8), and survivors finish lower (ECHO 6.3, RIOT 2.0 average end VITAE).

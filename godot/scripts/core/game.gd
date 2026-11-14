@@ -14,6 +14,7 @@ const CLEAN_NODE_BONUS := 5
 var rng := RandomNumberGenerator.new()
 
 # --- run state ---
+var pulp_stats := {"incoming": 0, "absorbed": 0, "hits": 0, "black": 0, "encounters": 0}   # playtest stats
 var played := {}            # playtest stats: card id → times played
 var purges_run := 0          # PURGE-001: run total, for playtest stats
 var rustler := "GENERALIST"   # RUSTLER-001: GENERALIST, ECHO, RIOT or VECTOR
@@ -197,6 +198,7 @@ func _start_encounter() -> void:
 			_event("EV-05", {"ice": ice.id})
 	for p in installed:
 		p.boost = 0
+	pulp_stats.encounters += 1
 	# PATIENT ZERO (VECTOR ORIGIN): every ICE starts with 1 ROT.
 	if rustler == "VECTOR":
 		for i in enc.ice.size():
@@ -210,7 +212,24 @@ func _new_ice(id: String) -> Dictionary:
 	for s in d.subs:
 		broken.append(false)
 		seen.append(false)
-	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {}}
+	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {},
+		"corp_turns": 0, "curves": _curves_for(d)}
+
+func _curves_for(d: Dictionary) -> Dictionary:
+	## PULP-002: each curve this ICE uses, as its own sequence (B shuffled with the run's RNG).
+	var out := {}
+	for sub in d.subs:
+		for e in sub:
+			if e.k == "PULP_CURVE" and not out.has(e.curve):
+				var seq: Array = IceDB.CURVES[e.curve].seq.duplicate()
+				if e.curve == "B":
+					for k in range(seq.size() - 1, 0, -1):
+						var j := rng.randi_range(0, k)
+						var t = seq[k]
+						seq[k] = seq[j]
+						seq[j] = t
+				out[e.curve] = seq
+	return out
 
 # =====================================================================
 # TUMBLER rotation (ROT-001): a conveyor window of `slots` over the subroutine pool.
@@ -685,6 +704,9 @@ func response_finish() -> void:
 	for ice in enc.get("resp_void", []):
 		ice.responses += 1
 	# HARDENING: +1 STR after each Corporation Response, up to +3 (a PURGE or BLACKOUT turn isn't a response).
+	if not enc.skipped:
+		for ice in enc.ice:
+			ice.corp_turns += 1   # PULP-002: curves advance one step per Corporation Response
 	for ice in ([] if enc.skipped else enc.ice):
 		if IceDB.def(ice.id).get("passive", "") == "HARDENING" and ice.get("harden", 0) < 3:
 			ice["harden"] = ice.get("harden", 0) + 1
@@ -1019,6 +1041,11 @@ func _end_ice_node() -> void:
 
 func take_pulp(n: int) -> void:
 	var absorbed: int = min(shield, n)
+	pulp_stats.incoming += n
+	pulp_stats.absorbed += absorbed
+	pulp_stats.hits += 1
+	if not enc.is_empty() and enc.ice.any(func(x): return x.id == "HOUSE_CALL"):
+		pulp_stats.black += n
 	shield -= absorbed
 	vitae -= n - absorbed
 	if vitae <= 0:
@@ -1302,8 +1329,13 @@ func virus_total(i: int) -> int:
 func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
 	## SCRAMBLE and BLIND act when this ICE acts: each counter lowers PULP / TRACE by 1.
 	var v: Dictionary = ice.get("virus", {})
+	if e.k == "PULP_CURVE":
+		var seq: Array = ice.curves[e.curve]
+		e = {"k": "PULP", "v": int(seq[int(ice.corp_turns) % seq.size()]), "curve": e.curve}
 	if e.k == "PULP" and v.get("SCRAMBLE", 0) > 0:
-		return {"k": "PULP", "v": maxi(0, e.v - int(v.SCRAMBLE))}
+		var out := e.duplicate()
+		out.v = maxi(0, e.v - int(v.SCRAMBLE))
+		return out
 	if e.k == "TRACE" and v.get("BLIND", 0) > 0:
 		return {"k": "TRACE", "v": maxi(0, e.v - int(v.BLIND))}
 	return e

@@ -15,10 +15,10 @@ const DEFS := {
 	# PULP-001: FORTRESSES carry the PULP. Values vary by ICE (S1 PULP 2, S1 PULP 5, escalating 1-2-3).
 	"COOKIE_WALL": {"name": "COOKIE WALL", "type": "FORTRESS", "subtype": "TOLLHOUSE", "str": 5, "tier": "T1",
 		"passive": "TOLL", "ability_text": "TOLL: breaking here costs +1 BW, except the DEADLOCK.",
-		"subs": [[{"k": "PULP", "v": 2}], [{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}]]},
+		"subs": [[{"k": "PULP", "v": 2}], [{"k": "TRACE", "v": 2}], [{"k": "PULP_CURVE", "curve": "B"}], [{"k": "DEADLOCK"}]]},
 	"TERMS_OF_SERVICE": {"name": "TERMS OF SERVICE", "type": "FORTRESS", "subtype": "VAULT", "str": 7, "tier": "T1",
 		"passive": "SEQUENCED", "ability_text": "SEQUENCED: break its subroutines in order, left to right.",
-		"subs": [[{"k": "PULP", "v": 5}], [{"k": "INSERT", "card": "SPAM", "to": "discard", "v": 1}], [{"k": "DEADLOCK"}]]},
+		"subs": [[{"k": "PULP", "v": 5}], [{"k": "INSERT", "card": "SPAM", "to": "discard", "v": 1}], [{"k": "PULP_CURVE", "curve": "C"}], [{"k": "DEADLOCK"}]]},
 	"AUTO_RENEW": {"name": "AUTO-RENEW", "type": "FORTRESS", "subtype": "RATCHET", "str": 4, "tier": "T1",
 		"passive": "HARDENING", "ability_text": "HARDENING: +1 STR after each Corporation Response (max +3).",
 		"subs": [[{"k": "PULP", "v": 1}], [{"k": "PULP", "v": 2}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
@@ -48,6 +48,15 @@ const MAP := [
 	[{"id": "N4", "kind": "ICE", "name": "TERMS & CONDITIONS",
 		"layers": [{"ice": ["TERMS_OF_SERVICE"], "reserve": 10}, {"ice": ["CAPTCHA", "DOORBELL_CAM"], "reserve": 15}], "next": []}],
 ]
+
+## PULP-002: PULP curves, on the harder FORTRESSES (COOKIE WALL: B; TERMS OF SERVICE: C). A is defined for later ICE.
+## A curve subroutine deals the next value of its sequence each Corporation Response
+## (looping after 9). A and C run in order; B's 9 values are shuffled for each ICE, so the order is random.
+const CURVES := {
+	"A": {"name": "SEQUENTIAL", "seq": [2, 3, 4, 2, 3, 4, 2, 3, 4]},   # 27 over 9 turns
+	"B": {"name": "RANDOM", "seq": [5, 3, 2, 6, 2, 3, 6, 2, 1]},       # 30 over 9 turns, shuffled per ICE
+	"C": {"name": "HAMMER", "seq": [4, 3, 4, 9, 3, 4, 3, 8, 2]},       # 40 over 9 turns
+}
 
 ## PURGE-001: at the start of its turn, a corporation that counts this many virus counters across the
 ## encounter's ICE PURGES them all instead of taking its turn. The limit rises after each purge (per encounter).
