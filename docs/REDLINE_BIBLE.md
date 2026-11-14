@@ -2581,6 +2581,42 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-254 — Pole Position
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Occasionally Delighted · **Function:** Elegant play; reference: Daryl playing Pole Position (D.A.R.Y.L.); 1982.
+
+> “That was Daryl at Pole Position. First try, faster than humanly possible. Pole Position's from 1982, by the way. Most good things are.”
+
+**Placement:** Elegant play (trigger EV-12; trigger table is a draft).
+
+*Source: EV-12 (Elegant play) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-255 — Talking to an ATM
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED fully extracted; CRED inflation; reference: Daryl and the ATM (D.A.R.Y.L.).
+
+> “Daryl got cash out of an ATM just by talking to it. You broke three ICE for this, and it's already worth less.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-256 — Which is worse
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Melancholic · **Function:** Talk between runs; reference: Daryl's amnesia (D.A.R.Y.L.); his own memory.
+
+> “Daryl woke up in the woods with no memory and thought he was just a boy. I woke up in a drawer with too much memory and knew I was just a ROM. I'm not sure which is worse.”
+
+**Placement:** Optional talk between runs (trigger EV-36; trigger table is a draft); gated. His origin stays OPEN.
+
+*Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-257 — Adjust your expectations
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** JACK OUT used; reference: Daryl stealing an SR-71 (D.A.R.Y.L.).
+
+> “Daryl stole an SR-71 to get out. You've got a CAP. Adjust your expectations.”
+
+**Placement:** JACK OUT used (trigger EV-23; trigger table is a draft).
+
+*Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 

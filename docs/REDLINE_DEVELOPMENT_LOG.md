@@ -973,3 +973,7 @@ Five lines approved as CANON verses referencing Joshua / WOPR from WarGames: NR-
 
 Three lines approved as CANON verses referencing The Andromeda Strain: NR-251 (EV-37 Idle; a microorganism, not a virus; germ trait), NR-252 (EV-13 TRACE reaches 20; the jammed teletype bell) and NR-253 (EV-28 SAFEHOUSE; four levels of decontamination; germ trait).
 
+## NULREM-039 — D.A.R.Y.L. verses NR-254 to NR-257 (APPROVED, 2026-11-13)
+
+Four lines approved as CANON verses referencing D.A.R.Y.L.: NR-254 (EV-12 Elegant play; Pole Position, a 1982 game), NR-255 (EV-09; the ATM, CRED inflation), NR-256 (EV-36 Talk between runs; Daryl's amnesia against NUL/REM's excess of memory) and NR-257 (EV-23 JACK OUT; the stolen SR-71).
+
