@@ -1163,3 +1163,7 @@ GHOST SIGNAL is a shared basic, so it returns to ECHO's starter deck and leaves 
 **Card removed in its place: one SMOKESCREEN** (designer asked Claude to choose). Reason: SMOKESCREEN and GHOST SIGNAL do the same job (cut the first TRACE of the next Corporation Response), and ECHO's TRACE control is what makes it the strongest Rustler. Tested both candidates on the 30-run bot: without a SMOKESCREEN, ECHO clears **20 / 30**; without DEAD AIR, 22 / 30. DEAD AIR also stays because CACHING BACKDOOR is ECHO's signature play (and the bot under-uses it).
 
 **ECHO's starter deck now:** HUSH, BACKDOOR, Basic Extractor, PROBE ×3, PULP Shield ×3, SMOKESCREEN, DEAD AIR, GHOST SIGNAL.
+
+## ECHO-004 — HUSH starts at STR 0 (APPROVED, 2026-11-14)
+
+HUSH: STR 1 → **0** (boost 2 BW → +1 STR, break 1 BW unchanged). 30-run bot test, ECHO: **14 / 30** cleared (20 at STR 1); deaths CAPTCHA 8, DOORBELL 5, TERMS & CONDITIONS 3; survivors' average end VITAE 16.4. Against STR 4–5 TUMBLERs, HUSH now needs 8–10 BW of boosts before its first break, which puts ECHO level with VECTOR (12) and the Generalist (10), matching its 2-star difficulty.
