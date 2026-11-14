@@ -195,7 +195,7 @@ const DEFS := {
 	"QUARANTINE": {"name": "QUARANTINE", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON", "pool": "VECTOR", "target": true,
 		"text": "+1 SHIELD for each virus counter on target ICE (maximum +6)."},
 	"WORMHOLE": {"name": "WORMHOLE", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 1, "rarity": "UNCOMMON", "pool": "VECTOR", "target": true,
-		"infect": {"WORM": 1, "ROT": 1}, "text": "INFECT 1 WORM and 1 ROT. (Each WORM: at the start of your turn, copy 1 counter of each strain here onto the ICE to its right. Each ROT: −1 STR.)"},
+		"infect": {"WORM": 1, "ROT": 1}, "text": "INFECT 1 WORM and 1 ROT. (WORM: on your turn, remove 2 WORM from an ICE to break 1 of its subroutines. Each ROT: −1 STR.)"},
 	"COCKTAIL": {"name": "COCKTAIL", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 2, "rarity": "UNCOMMON", "pool": "VECTOR", "target": true,
 		"infect": {"ROT": 1, "SCRAMBLE": 1, "BLIND": 1, "LEECH": 1, "WORM": 1}, "text": "INFECT 1 of each strain (ROT, SCRAMBLE, BLIND, LEECH, WORM)."},
 	"INCUBATOR": {"name": "INCUBATOR", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON", "pool": "VECTOR",

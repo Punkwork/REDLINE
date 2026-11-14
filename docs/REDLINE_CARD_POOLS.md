@@ -201,7 +201,7 @@ Rule: every starter card is the weakest version of its role, with at least one c
 | **BLINDFOLD** | Common | SCRIPT — VIRUS | 1 BW | INFECT 2 BLIND. *(Each BLIND counter: this ICE's TRACE subroutines add 1 less.)* |
 | **LEECHWARE** | Common | SCRIPT — VIRUS | 1 BW | INFECT 2 LEECH. *(Each LEECH counter: extract 1 CRED at the start of your turn.)* |
 | **QUARANTINE** | Common | SCRIPT — CLOAK | 1 BW | +1 SHIELD for each virus counter on target ICE (maximum +6). |
-| **WORMHOLE** | Uncommon | SCRIPT — VIRUS | 1 BW | INFECT 1 WORM and 1 ROT. *(Each WORM counter: at the start of your turn, put 1 counter of each strain on this ICE onto the next ICE to its right. Each ROT counter: −1 STR.)* |
+| **WORMHOLE** | Uncommon | SCRIPT — VIRUS | 1 BW | INFECT 1 WORM and 1 ROT. *(WORM: on your turn, remove 2 WORM from an ICE to break 1 of its subroutines. Each ROT counter: −1 STR.)* *(VIRUS-001)* |
 | **COCKTAIL** | Uncommon | SCRIPT — VIRUS | 2 BW | INFECT 1 of each strain (ROT, SCRAMBLE, BLIND, LEECH, WORM). |
 | **INCUBATOR** | Uncommon | PROTOCOL | 1 BW | Whenever a PURGE removes virus counters from an ICE, INFECT 2 ROT on that ICE afterward. |
 | **PANDEMIC** | Rare | SCRIPT — VIRUS | 3 BW | Copy all virus counters on target ICE onto every other ICE. |

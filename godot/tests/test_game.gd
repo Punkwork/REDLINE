@@ -50,6 +50,7 @@ func _init() -> void:
 	test_pulp_curves()
 	test_end_run()
 	test_patient_zero()
+	test_worm()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -398,6 +399,20 @@ func test_patient_zero() -> void:
 	g.choose_ice(1)
 	check(g.virus_total(0) == 0 and g.enc.ice[1].virus.get("ROT", 0) == 1 and g.phase == "PLAYER", "only the chosen ICE gets 1 ROT")
 
+func test_worm() -> void:
+	var g := Game.new(81)
+	g.new_run("VECTOR")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")   # COOKIE WALL
+	g.infect(0, "WORM", 1)
+	check(not g.worm_ok(0), "1 WORM isn't enough")
+	g.infect(0, "WORM", 2)
+	check(g.worm_ok(0) and g.use_worm(0) and g.phase == "CHOICE", "spend 2 WORM: choose a subroutine")
+	check(g.enc.ice[0].virus.WORM == 1, "2 WORM removed")
+	check(g.card_break_ok(0, 3) and not g.card_break_ok(1, 0) if g.enc.ice.size() > 1 else g.card_break_ok(0, 3), "only subroutines on that ICE")
+	g.choose_sub(0, 3)
+	check(g.enc.breached and g.phase == "PLAYER", "WORM breaks the chosen DEADLOCK")
+
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
 	g.new_run()
@@ -630,6 +645,14 @@ func bot_turn(g: Game) -> void:
 					g.play_card(c.uid, m)
 					progress = true
 					break
+		if progress:
+			continue
+		# 1c. VECTOR: spend WORM to break
+		for i in g.enc.ice.size():
+			if g.worm_ok(i) and g.use_worm(i):
+				bot_choose_sub(g)
+				progress = true
+				break
 		if progress:
 			continue
 		# 2. Icepick breaks (rescan after each: a break can add Black ICE on the left)

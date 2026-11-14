@@ -11,7 +11,7 @@ const RUSTLER_COL := {"GENERALIST": Color("#e6ebf2"), "ECHO": Color("#7fb6ff"), 
 const STRAIN_COL := {"ROT": Color("#9ad17a"), "SCRAMBLE": Color("#ff4d5e"), "BLIND": Color("#ffb020"), "LEECH": Color("#ffd34d"), "WORM": Color("#c7b9ff")}
 const STRAIN_TIP := {"ROT": "Each ROT: −1 STR.", "SCRAMBLE": "Each SCRAMBLE: this ICE's PULP subroutines deal 1 less.",
 	"BLIND": "Each BLIND: this ICE's TRACE subroutines add 1 less.", "LEECH": "Each LEECH: extract 1 CRED at the start of your turn.",
-	"WORM": "Each WORM: at the start of your turn, copy 1 counter of each strain here onto the ICE to its right."}
+	"WORM": "WORM: on your turn, remove 2 WORM from this ICE to break 1 of its subroutines (your choice)."}
 const TYPE_COL := {"PROGRAM": Color("#4fd2ff"), "SCRIPT": Color("#e6ebf2"), "PROTOCOL": Color("#7ee081"), "BLOATWARE": Color("#b08a5a")}
 const RARITY_COL := {"COMMON": Color("#c9d3df"), "UNCOMMON": Color("#5aa8ff"), "RARE": Color("#ffb020"), "STARTER": Color("#6c7787"), "BLOAT": Color("#b08a5a")}
 const PRIORITY := ["EV-35", "EV-16", "EV-15", "EV-14", "EV-02", "EV-01", "EV-03", "EV-04", "EV-18", "EV-07", "EV-13",
@@ -773,6 +773,15 @@ func _ice_card(i: int, is_main: bool) -> Control:
 		vrow.add_child(RIcon.make("VIRUS", 18))
 		vrow.add_child(vh)
 		v.add_child(vrow)
+		if int(ice.virus.get("WORM", 0)) >= 2:
+			var wb := Button.new()
+			wb.text = "WORM · REMOVE 2 TO BREAK A SUBROUTINE"
+			wb.add_theme_color_override("font_color", STRAIN_COL.WORM)
+			wb.add_theme_font_size_override("font_size", 12)
+			wb.disabled = not g.worm_ok(i) or targeting >= 0
+			wb.tooltip_text = "Remove 2 WORM from this ICE, then choose one of its subroutines to break."
+			wb.pressed.connect(func(): g.use_worm(i); refresh())
+			v.add_child(wb)
 	if d.has("ability_text"):
 		var ah := HBoxContainer.new()
 		var pk: String = d.get("passive", d.get("ability", ""))

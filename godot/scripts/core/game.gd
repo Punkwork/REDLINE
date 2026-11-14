@@ -1040,6 +1040,28 @@ func _end_ice_node() -> void:
 # Damage, healing, TRACE (Core Rules §6, §7)
 # =====================================================================
 
+func worm_ok(i: int) -> bool:
+	## VIRUS-001: on your turn, spend 2 WORM on an ICE to break one of its subroutines.
+	if phase != "PLAYER" or i < 0 or i >= enc.ice.size():
+		return false
+	if int(enc.ice[i].virus.get("WORM", 0)) < 2:
+		return false
+	for s in IceDB.def(enc.ice[i].id).subs.size():
+		if sub_breakable(i, s):
+			return true
+	return false
+
+func use_worm(i: int) -> bool:
+	if not worm_ok(i):
+		return false
+	enc.ice[i].virus.WORM = int(enc.ice[i].virus.WORM) - 2
+	if enc.ice[i].virus.WORM <= 0:
+		enc.ice[i].virus.erase("WORM")
+	pending = {"kind": "card_break", "n": 1, "ice": i, "breaker": {"n": 1, "same_ice": true}, "card": "WORM"}
+	phase = "CHOICE"
+	_say("WORM: choose a subroutine on %s to break." % IceDB.def(enc.ice[i].id).name)
+	return true
+
 func choose_ice(i: int) -> void:
 	## PATIENT ZERO's choice.
 	if phase != "CHOICE" or pending.get("kind", "") != "patient_zero" or i < 0 or i >= enc.ice.size():
@@ -1365,13 +1387,6 @@ func _virus_turn() -> void:
 				for k in enc.ice[i].virus.keys():
 					if enc.ice[i].virus[k] > 0:
 						infect(i, k, 1)
-		# WORM: copy 1 counter of each strain here onto the ICE to the right, per WORM counter.
-		for i in range(enc.ice.size() - 2, -1, -1):
-			var w: int = int(enc.ice[i].virus.get("WORM", 0))
-			for n in w:
-				for k in enc.ice[i].virus.keys():
-					if enc.ice[i].virus[k] > 0:
-						infect(i + 1, k, 1)
 	for i in enc.ice.size():
 		var l: int = int(enc.ice[i].virus.get("LEECH", 0))
 		if l > 0:

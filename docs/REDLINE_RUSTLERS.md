@@ -48,9 +48,9 @@ Viruses were an OPEN subtype (TAX-001). This general rule lets different viruses
 | **SCRAMBLE** | When this ICE acts | This ICE's PULP subroutines deal 1 less |
 | **BLIND** | When this ICE acts | This ICE's TRACE subroutines add 1 less |
 | **LEECH** | Your turn | Extract 1 CRED |
-| **WORM** | Your turn | Put 1 counter of each strain on this ICE onto the next ICE to its right (if any) |
+| **WORM** | Your turn (any time) | Remove 2 WORM from this ICE: break 1 of its subroutines, your choice (VIRUS-001) |
 
-VECTOR's starter deck uses only **ROT**. The other strains appear as card rewards (Phase 3), so VECTOR players can build toward defence (SCRAMBLE, BLIND), CRED (LEECH) or multi-ICE encounters (WORM).
+VECTOR's starter deck uses only **ROT**. The other strains appear as card rewards (Phase 3), so VECTOR players can build toward defence (SCRAMBLE, BLIND), CRED (LEECH) or free breaks (WORM).
 
 > PROBE's −2 STR and ROT counters stack. The difference: PROBE is instant and fixed; ROT starts small and grows.
 

@@ -170,7 +170,7 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 
 ### 5.7 Virus counters and the corporation PURGE [NEW, RUSTLER-002 and PURGE-001]
 
-- **Strains** (placed by INFECT): **ROT** −1 STR each; **SCRAMBLE** this ICE's PULP −1 each when it acts; **BLIND** this ICE's TRACE −1 each when it acts; **LEECH** extract 1 CRED each at the start of your turn; **WORM** at the start of your turn, copy 1 counter of each strain on this ICE onto the ICE to its right, per WORM counter *(copy vs move still to confirm)*.
+- **Strains** (placed by INFECT): **ROT** −1 STR each; **SCRAMBLE** this ICE's PULP −1 each when it acts; **BLIND** this ICE's TRACE −1 each when it acts; **LEECH** extract 1 CRED each at the start of your turn; **WORM** on your turn, at any time, remove 2 WORM counters from an ICE to break 1 subroutine on that ICE of your choice (normal break rules apply: it must be active or revealed, not locked by BOOTING, and SEQUENCED order is respected; it costs no BW and no breaker) *(VIRUS-001)*.
 - **PURGE:** at the start of its turn the corporation counts every virus counter on the encounter's ICE. At or above its **PURGE limit** it removes them all instead of taking its turn. **HALCYON: limit 10, +5 after each purge** (10 → 15 → 20), reset each encounter. The limit is **never shown** to the Rustler.
 - A PURGE or BLACKOUT turn isn't a Corporation Response: TUMBLERS still rotate (your turn starts), but VOIDS reveal nothing new, HARDENING doesn't grow and PULP curves don't advance.
 
@@ -475,5 +475,6 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 | ICEBIBLE-001 | **Type identities**: FORTRESS hits hard (highest STR, mostly PULP), TUMBLER is the puzzle, VOID is deadly (§5.1). — **APPROVED 2026-11-13** |
 | PASSIVE-001 | **Subtypes and passive abilities** on the slice ICE (§5.5). — **BUILT for playtest 2026-11-13** |
 | PURGE-001 | **Corporation PURGE** at a hidden, rising virus-counter limit (§4.4, §5.7). — **APPROVED 2026-11-14** |
+| VIRUS-001 | **WORM** (was: copy counters to the ICE on the right at turn start): on your turn, at any time, remove 2 WORM counters from an ICE to break 1 subroutine on that ICE of your choice (normal break rules apply: it must be active or revealed, not locked by BOOTING, and SEQUENCED order is respected; it costs no BW and no breaker). — **APPROVED 2026-11-14** |
 | VECTOR-001 | **PATIENT ZERO** (VECTOR's ORIGIN): at the start of each encounter, **choose an ICE** and INFECT 1 ROT on it (was every ICE). — **APPROVED 2026-11-14** |
 | REEL-001 | TUMBLER slots shown as **slot-machine reels**, labelled with their subroutine (§5.4). — **APPROVED 2026-11-14** |

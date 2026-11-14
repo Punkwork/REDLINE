@@ -1270,3 +1270,13 @@ An END RUN button (bottom right, red) asks "END THIS RUN?" with YES, END THE RUN
 VECTOR's ORIGIN Ghostware PATIENT ZERO: **at the start of each encounter, choose an ICE: INFECT 1 ROT on it** (was 1 ROT on every ICE). In the slice, each ICE card shows a "PATIENT ZERO · INFECT 1 ROT HERE" button before VECTOR's first move. 30-run bot test (VECTOR, DRAW 6 + PULP curves; the bot picks the ICE with the most unbroken DEADLOCKs): **5 / 30** cleared (2 before); corporation PURGES fell from 49 to 12, because fewer counters reach the limit. `REDLINE_RUSTLERS.md` §6 and Core Rules amendments updated.
 
 Open: WORM copy vs move (WORMHOLE, COCKTAIL) — currently copy.
+
+## VIRUS-001 — WORM becomes a break (APPROVED, 2026-11-14)
+
+**Was:** each WORM counter copied 1 counter of each strain onto the ICE to the right at the start of your turn.
+**Now:** on your turn, at any time, remove 2 WORM from an ICE to break 1 subroutine on that ICE, your choice. Normal break limits apply (active or revealed, BOOTING, SEQUENCED). It costs no BW and needs no breaker. A WORM break is still a break, so TRIPWIRE applies.
+
+- Engine: `Game.worm_ok(i)` and `Game.use_worm(i)`; the subroutine is chosen through the card-break choice limited to that ICE. The copy step was removed from `_virus_turn`.
+- UI: ICE cards with 2+ WORM show a "WORM · REMOVE 2 TO BREAK A SUBROUTINE" button. WORMHOLE text and the WORM tooltip updated.
+- Tests: 130 passed (new test_worm). VECTOR sim: 5/30 cleared (unchanged; WORM is only in VECTOR's reward pool, so it rarely comes up in the starter-deck sim).
+- No Windows build yet (the designer asked to wait for the go-ahead).
