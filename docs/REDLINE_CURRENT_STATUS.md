@@ -1,16 +1,28 @@
 # PANOPTICON — CURRENT PROJECT STATUS
 
 - **Repo:** always github.com/Punkwork/REDLINE (the game is PANOPTICON; the repo keeps the REDLINE name). Latest build: VIRUS-001 (WORM), 2026-11-14.
-**As of:** 2026-11-09  
+**As of:** 2026-11-14
 **Purpose:** fast, reliable start-of-day briefing. Update at every session handoff.
 
 > **NAME-001 (2026-11-13):** ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules). Terms in this document were updated to match; rule and decision IDs keep their original names (e.g. TRAINING-THREE-ICE-SENTRY-001). See `REDLINE_CORE_RULES.md` (NAME-001).
 
-## Session handoff — 2026-11-14 (latest)
+## Verification handoff — 2026-11-14: QA-HALCYON-001 / UI-003 / CI-001
+
+- Work starts from `8a7dad9` on a separate stabilization branch; game rules, cards, ICE values, and open design decisions are unchanged.
+- VECTOR screenshot setup now resolves PATIENT ZERO and checks every injected card play plus expected virus/choice/break/reserve state. The artificial nine-card hand is not a gameplay baseline.
+- Large hands stay inside a horizontally scrollable, clipped hand area. Card sizes remain readable; pile counters use separate lines. Rebuilding the hand explicitly refreshes the scroll range and preserves position.
+- Verified locally with official Godot 4.3 on Linux: import, **134/134 rules checks**, all three original screenshot scripts, and the new large-hand geometry/input script (6, 7, 9, 10, 16 cards; 10 PNGs). Mouse-wheel scroll, final-card clicks, refresh position, and no overlap with actions/counters pass.
+- The 30-seed bot simulation reproduces GENERALIST 10/30, ECHO 6/30, VECTOR 5/30, RIOT 1/30. No balance values or thresholds were changed.
+- Windows release export is generated with the matching official template. This establishes export success, **not** a Windows runtime test. The 61-check live checklist is still pending; see `HALCYON_PLAYTEST_GUIDE.md` for slice-appropriate checks and N/A items.
+- GitHub workflow added for import, rules, screenshot/input verification, and Windows build artifacts; actual hosted run results must be checked on Actions, not inferred from the YAML.
+- **Merge caution:** PR #1 is not simply redundant: its head `c42adc5` contains a separate JSON-driven heist engine, data, icons, and tests absent from PR #2. PR #2 remains this task's agreed HALCYON baseline. Neither PR is merged by this stabilization task.
+- `REDLINE_CORE_RULES.md` and its later decisions remain the rules authority. The early baseline/evidence sections below are historical unless explicitly updated; they are not a live rules checklist.
+
+## Session handoff — 2026-11-14 (latest design handoff)
 
 - **Game name:** PANOPTICON (NAME-002); REDLINE survives only in file names, code paths and the repo name.
 - **Playtest build:** `PANOPTICON_HALCYON_slice` (Godot 4.3, Windows): all four Rustlers, DRAW 6, TUMBLER reels, PULP curves, passives and subtypes, corporation PURGE, END RUN, NUL/REM voiced (VOICE-001).
-- **Rustler balance (30-run bot, DRAW 6 + PULP curves):** GENERALIST 10 / 30, ECHO 6, VECTOR 2, RIOT 1. The bot plays every card it can, so DRAW 6 numbers are pessimistic, especially for RIOT and VECTOR.
+- **Rustler balance (30-run bot, DRAW 6 + PULP curves):** GENERALIST 10 / 30, ECHO 6, VECTOR 5, RIOT 1. Reproduced on 2026-11-14 with seeds 100–129 after PATIENT ZERO/WORM; this supersedes the earlier VECTOR 2/30 report. The bot plays every card it can, so DRAW 6 numbers are pessimistic, especially for RIOT and VECTOR.
 - **Open for the designer:** REJECT ALL's two DEADLOCKs (show the DEADLOCK total on TUMBLERs? one DEADLOCK on REJECT ALL?); the ICE Rules Bible audit; reward-card refinement; syncing the Panopticon project's doc copies.
 - **Core Rules are current** with every rule decided on 2026-11-13/14: start-of-turn order, DISCARD timing, Icepick boosts, PURGE check, BREACH with hidden DEADLOCKs, type identities, TUMBLER rotation (§5.4), subtypes and passives (§5.5), VOID reveal (§5.6), virus strains and PURGE (§5.7), DRAW 6, PULP curves, END RUN. Slice ICE values: `REDLINE_ICE_CORP1.md` §5.0.
 - **Other docs still to update for ROT-001:** the ICE, Card Pools and Rustlers docs still say SIGYL in places (Core Rules and the slice values are done).
@@ -54,7 +66,7 @@
 | Ghostware / ORIGIN | Locked | Previously reported | Verify |
 | NUL/REM UI/dialogue | Character direction set | Verify | Live UI testing needed |
 | PAPER CUT ICE | Concept only | **Not confirmed implemented** | Balance/test pending |
-| Godot 4 production build | HALCYON vertical slice (BUILD-002) | Headless tests 50/50; bot clears slice | Windows export works |
+| Godot 4 production build | HALCYON vertical slice | 134/134 headless rules checks; full-run test verifies termination, not guaranteed victory | Windows x86_64 export generated on Linux; live Windows playtest pending |
 
 ## Known outstanding work
 - Acquire/inspect latest source archive and regression scripts.

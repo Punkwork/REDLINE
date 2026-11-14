@@ -1280,3 +1280,23 @@ Open: WORM copy vs move (WORMHOLE, COCKTAIL) — currently copy.
 - UI: ICE cards with 2+ WORM show a "WORM · REMOVE 2 TO BREAK A SUBROUTINE" button. WORMHOLE text and the WORM tooltip updated.
 - Tests: 134 passed (test_worm covers no Icepick, STR 5 ICE, 0 BW on TOLL, turn only). VECTOR sim: 5/30 cleared (unchanged; WORM is only in VECTOR's reward pool, so it rarely comes up in the starter-deck sim).
 - No Windows build yet (the designer asked to wait for the go-ahead).
+
+
+## 2026-11-14 — QA-HALCYON-001 / UI-003 / CI-001: playtest stabilization (Codex)
+
+**Baseline:** `8a7dad98f97cb8b25950d25fdf4764f01e319e75` on `docs/simplified-redesign-sync`; work isolated on `codex/halcyon-playtest-stabilization`. User authorized screenshot repair, large-hand verification, tests, Windows export, and preparation for live playtest before consolidation.
+
+**Changes:** repaired `godot/tests/shot_rustlers.gd` to resolve PATIENT ZERO before INJECT/SCRAMBLER/RUNTIME ERROR, reject failed plays, verify intended states, and check PNG writes. `godot/scripts/ui/main.gd` now clips and horizontally scrolls the hand at readable card size, refreshes the scrollbar range after deferred card layout, preserves scroll position, and puts pile counts on separate lines. Added `godot/tests/shot_hand.gd`, an Actions verification/export workflow, and `docs/HALCYON_PLAYTEST_GUIDE.md`; refreshed status and this handoff. No gameplay rules or balance edits.
+
+**Executed locally:** official Godot `4.3.stable.official.77dcf97d8`, Linux, isolated Xvfb 1600×900 and software OpenGL:
+- `godot --headless --path godot --editor --import --quit` — exit 0.
+- `godot --headless --path godot --script res://tests/test_game.gd` — **134 passed, 0 failed**.
+- `SIM=1` with the same rules command — **134/134**, GENERALIST 10/30, ECHO 6/30, VECTOR 5/30, RIOT 1/30 (seeds 100–129); unchanged baseline.
+- Original `shot_rustlers.gd`, `shot.gd`, `shot_reel.gd` and new `shot_hand.gd` under the virtual display — exit 0, no script/parse/assertion errors. A combined run produced 41 PNGs; the timed animation scripts' frame counts can vary. Large-hand script verifies 6/7/9/10/16 cards, mouse-wheel scrolling, full last-card visibility, mouse-click play, stable refresh position, and separation from END TURN/pile counters.
+- `godot --headless --path godot --export-release "Windows Desktop"` — Windows x86_64 release export generated using official matching 4.3 export template. The final export includes the presentation fixes; the artifact workflow exports its checked commit.
+
+**Limits:** Xvfb reports unsupported V-Sync; original screenshot scripts may emit shutdown resource-use warnings. No Windows executable runtime or live designer checklist was performed. No CI success is asserted merely by adding a workflow. Bot termination does not guard balance. No new license, naming, CORTEX/VOID, REJECT ALL, or other open decision was settled.
+
+**Merge review:** PR #1 (`docs/simplified-design`, `c42adc5`) contains an alternate JSON-backed heist implementation, data, icons, and tests; it is not wholly contained in PR #2. Preserve it for deliberate comparison rather than assuming PR #2 is a complete code superset. No merge/rebase/deletion was performed.
+
+**Next dependency:** designer Windows playtest via `HALCYON_PLAYTEST_GUIDE.md`. Record action → actual → expected and source commit, then fix confirmed problems before merging the baseline or changing balance.
