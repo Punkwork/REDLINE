@@ -214,10 +214,14 @@ const STARTER_GENERALIST := [
 	"PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "PROBE", "PROBE", "PROBE", "GHOST_SIGNAL",
 ]
 
+# ECHO-001: SLOW DRIP and GHOST SIGNAL moved to ECHO's reward pool; ECHO starts with 3 PROBE and 3 PULP Shield.
 const STARTER_ECHO := [
-	"HUSH", "BACKDOOR", "BASIC_EXTRACTOR", "SLOW_DRIP", "PROBE", "PROBE", "PULP_SHIELD", "PULP_SHIELD",
-	"SMOKESCREEN", "SMOKESCREEN", "DEAD_AIR", "GHOST_SIGNAL",
+	"HUSH", "BACKDOOR", "BASIC_EXTRACTOR", "PROBE", "PROBE", "PROBE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD",
+	"SMOKESCREEN", "SMOKESCREEN", "DEAD_AIR",
 ]
+## Cards offered in a Rustler's reward pool besides those tagged with "pool" (rarity used for the reward roll).
+## ECHO-001 makes GHOST SIGNAL an exception to BASIC-001 (basics are never offered), for ECHO only.
+const POOL_EXTRA := {"ECHO": {"SLOW_DRIP": "COMMON", "GHOST_SIGNAL": "COMMON"}}
 const STARTER_RIOT := [
 	"SLEDGE", "BRUTE_FORCE", "OVERLOAD", "OVERLOAD", "PROBE", "FEEDBACK", "ADRENAL_SPIKE",
 	"PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "SMASH_AND_GRAB", "BASIC_EXTRACTOR",
@@ -258,5 +262,9 @@ static func reward_pool(pool: String, rarity: String) -> Array:
 			continue
 		var p: String = d.get("pool", "SHARED")
 		if p == pool:
+			out.append(id)
+	var extra: Dictionary = POOL_EXTRA.get(pool, {})
+	for id in extra:
+		if extra[id] == rarity:
 			out.append(id)
 	return out

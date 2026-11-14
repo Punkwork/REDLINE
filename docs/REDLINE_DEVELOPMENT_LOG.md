@@ -1143,3 +1143,11 @@ The slice now starts with a Rustler choice: THE GENERALIST, ECHO, RIOT or VECTOR
 ## UI-002 — Encounter CRED meter (APPROVED, 2026-11-14)
 
 Each encounter shows a CRED meter in the info bar: a gold bar with "left / total CRED" for that encounter's reserve. At 0 remaining, the number shows in red (for now).
+
+## ECHO-001 — ECHO's starter deck: 3 PROBE, 3 PULP Shield (APPROVED, 2026-11-14)
+
+- **Out of the starter deck, into ECHO's reward pool:** SLOW DRIP and GHOST SIGNAL (both Common in the pool, so ECHO's pool is now 11 cards).
+- **In:** a 3rd PROBE and a 3rd PULP Shield. Deck stays at 12: HUSH, BACKDOOR, Basic Extractor, PROBE ×3, PULP Shield ×3, SMOKESCREEN ×2, DEAD AIR.
+- **Exception noted:** GHOST SIGNAL is a shared basic; offering it as a reward breaks BASIC-001 ("basics are never offered"). Accepted for ECHO's pool only; the other Rustlers never see it as a reward.
+- **Assumption to confirm:** both cards sit at Common rarity in the pool.
+- **30-run bot test, ECHO:** 22 / 30 cleared (23 before); survivors' average end VITAE 18.7 (14.7 before). `REDLINE_RUSTLERS.md` §4 updated.
