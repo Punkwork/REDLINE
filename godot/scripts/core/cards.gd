@@ -221,10 +221,9 @@ const STARTER_ECHO := [
 	"SMOKESCREEN", "DEAD_AIR", "GHOST_SIGNAL",
 ]
 ## Cards offered in a Rustler's reward pool besides those tagged with "pool" (rarity used for the reward roll).
-const POOL_EXTRA := {"ECHO": {"SLOW_DRIP": "COMMON"}, "RIOT": {"FEEDBACK": "COMMON"}}
-# RIOT-001: FEEDBACK moved to RIOT's reward pool; a 2nd BRUTE FORCE in its place.
+const POOL_EXTRA := {"ECHO": {"SLOW_DRIP": "COMMON"}}
 const STARTER_RIOT := [
-	"SLEDGE", "BRUTE_FORCE", "BRUTE_FORCE", "OVERLOAD", "OVERLOAD", "PROBE", "ADRENAL_SPIKE",
+	"SLEDGE", "BRUTE_FORCE", "OVERLOAD", "OVERLOAD", "PROBE", "FEEDBACK", "ADRENAL_SPIKE",
 	"PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "SMASH_AND_GRAB", "BASIC_EXTRACTOR",
 ]
 const STARTER_VECTOR := [
