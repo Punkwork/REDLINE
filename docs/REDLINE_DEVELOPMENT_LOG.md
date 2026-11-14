@@ -1218,3 +1218,7 @@ Profiling RIOT's deaths (27 of 30 runs) showed it was dying from TRACE, not from
 - **RIOT's starting deck is the 15-card deck** (RIOT-002): SLEDGE, BRUTE FORCE, SHATTER, OVERLOAD, PROBE ×3, FEEDBACK, ADRENAL SPIKE, PULP Shield ×3, LAY LOW, SMASH & GRAB, Basic Extractor.
 
 **30-run bot test (all Rustlers, same bot):** ECHO 14 / 30 · VECTOR 12 / 30 · GENERALIST 10 / 30 · **RIOT 8 / 30** (was 1–3). SHATTER played 48 times in 21 runs. Variants tried: SMASH & GRAB no TRACE 10 / 30; +2 under 20 only 6 / 30; SHATTER without TRACE 1–3 / 30; SHATTER lasting the whole encounter 3 / 30.
+
+## TEST-001 — 3 BW per turn (test only; BW stays at 4)
+
+30-run bot test with BW_PER_TURN = 3 (everything else current): ECHO 9 / 30 (14 at 4 BW), GENERALIST 8 (10), RIOT 8 (8), VECTOR 7 (12). The Rustlers bunch together at 7–9; RIOT is unaffected because REDLINER restores a 4th BW at TRACE 20+; set-up Rustlers (ECHO, VECTOR) lose most; the CAPTCHA node becomes the main wall. A DETAINER would leave a 2-BW turn. Designer: leave BW at 4 for now; kept for reference.
