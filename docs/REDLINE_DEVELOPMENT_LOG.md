@@ -969,3 +969,7 @@ Six lines approved as CANON verses referencing the 1980s cartoon without naming 
 
 Five lines approved as CANON verses referencing Joshua / WOPR from WarGames: NR-246 (EV-01 Run start; “Shall we play a game?”), NR-247 (EV-05 generic first sight; war dialing), NR-248 (EV-10 Stalled; tic-tac-toe), NR-249 (EV-08 Go deeper or leave; the only winning move, without deciding for the player) and NR-250 (EV-36 Talk between runs; Falken's backdoor password, hinting at his own maker, OPEN). Reference trait updated (Bible §5).
 
+## NULREM-038 — Andromeda Strain verses NR-251 to NR-253 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing The Andromeda Strain: NR-251 (EV-37 Idle; a microorganism, not a virus; germ trait), NR-252 (EV-13 TRACE reaches 20; the jammed teletype bell) and NR-253 (EV-28 SAFEHOUSE; four levels of decontamination; germ trait).
+

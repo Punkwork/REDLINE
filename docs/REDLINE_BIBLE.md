@@ -2554,6 +2554,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-36 (Optional talk between runs) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-251 — Still disgusting
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** Idle; reference: The Andromeda Strain (a microorganism, not a virus); the germ trait.
+
+> “The Andromeda Strain. Everyone calls it a virus. It wasn't. A microorganism from space. I've had that argument with myself for decades. It's still disgusting.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-252 — I'm the bell
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** TRACE reaches 20; reference: the jammed teletype bell (The Andromeda Strain).
+
+> “A whole underground lab once missed the most important message of the day because a sliver of paper jammed the bell. TRACE is at half. I'm the bell. Don't jam me.”
+
+**Placement:** TRACE reaches 20 (trigger EV-13; trigger table is a draft).
+
+*Source: EV-13 (TRACE reaches 20) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-253 — This one has a mat
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** SAFEHOUSE; reference: Wildfire's decontamination levels (The Andromeda Strain); the germ trait.
+
+> “Four levels of decontamination before you reach the lab. That's my minimum standard for a safehouse. This one has a mat.”
+
+**Placement:** SAFEHOUSE (trigger EV-28; trigger table is a draft).
+
+*Source: EV-28 (SAFEHOUSE or DEAD DROP) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
