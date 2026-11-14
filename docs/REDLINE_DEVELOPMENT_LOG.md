@@ -977,3 +977,7 @@ Three lines approved as CANON verses referencing The Andromeda Strain: NR-251 (E
 
 Four lines approved as CANON verses referencing D.A.R.Y.L.: NR-254 (EV-12 Elegant play; Pole Position, a 1982 game), NR-255 (EV-09; the ATM, CRED inflation), NR-256 (EV-36 Talk between runs; Daryl's amnesia against NUL/REM's excess of memory) and NR-257 (EV-23 JACK OUT; the stolen SR-71).
 
+## NULREM-040 — Superman III verses NR-258 to NR-260 (APPROVED, 2026-11-13)
+
+Three lines approved as CANON verses referencing the Ultimate Computer from Superman III: NR-258 (EV-09; Gus Gorman's half cents, CRED inflation), NR-259 (EV-05 generic first sight; the acid rated danger level zero; completes the generic pool at 8 of 8) and NR-260 (EV-37 Idle; Robert Vaughn as Ross Webster and the voice of Proteus IV, linking to NR-026 v2 and NR-035 v2).
+

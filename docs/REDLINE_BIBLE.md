@@ -2617,6 +2617,33 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 *Source: EV-23 (JACK OUT used) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
 
+### VERSE NR-258 — Half a cent
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Cynic · **Function:** CRED fully extracted; CRED inflation; reference: Gus Gorman's half-cent embezzlement (Superman III).
+
+> “Gus Gorman got rich on half a cent from every paycheque. You just took the whole reserve, and with inflation it's worth about half a cent. Full circle.”
+
+**Placement:** CRED reserve fully extracted (trigger EV-09; trigger table is a draft).
+
+*Source: EV-09 (CRED reserve fully extracted) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-259 — Danger level zero
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Pedant · **Function:** First sight of an ICE (generic); reference: the Ultimate Computer misjudging the acid (Superman III).
+
+> “The Ultimate Computer scanned a can of acid, rated it danger level zero, and the acid ate it. Read every ICE properly. Don't be the Ultimate Computer.”
+
+**Placement:** First sight of an ICE (trigger EV-05; trigger table is a draft); generic pool.
+
+*Source: EV-05 (First sight of an ICE) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
+### VERSE NR-260 — Both sides of the machine
+**Status:** CANON · **Voice:** NUL/REM · **Mode:** The Unreliable Historian · **Function:** Idle; reference: Robert Vaughn, Ross Webster (Superman III) and the voice of Proteus IV (Demon Seed).
+
+> “The man who owned the Ultimate Computer was played by Robert Vaughn. Years earlier, he'd been the voice of Proteus IV. Same man, both sides of the machine. I find that oddly reassuring. I can't say why.”
+
+**Placement:** Idle, no input for 60 seconds (trigger EV-37; trigger table is a draft).
+
+*Source: EV-37 (Idle) in the NUL/REM Dialogue Trigger Table; approved 2026-11-13.*
+
 ### VERSE WL-003 — Death and VOID
 **Status:** CANON · **Voice:** World aphorism, speaker unassigned · **Function:** Stakes, existential horror, moral identity.
 
