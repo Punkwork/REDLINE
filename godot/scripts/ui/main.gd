@@ -1,5 +1,5 @@
 extends Control
-## REDLINE vertical slice UI. Everything is built in code from the Game state; refresh() rebuilds the views.
+## PANOPTICON vertical slice UI. Everything is built in code from the Game state; refresh() rebuilds the views.
 ## Visual language: ICE Design doc (icon = type, frame = role, chip colour = effect, response preview).
 
 const BG := Color("#0b0e13")
@@ -1117,7 +1117,7 @@ func _overlay_safehouse() -> void:
 	v.add_child(b)
 
 func _overlay_select() -> void:
-	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 5, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
+	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)

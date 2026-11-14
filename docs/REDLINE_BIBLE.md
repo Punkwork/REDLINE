@@ -1,21 +1,21 @@
-# REDLINE — WORLD & DIALOGUE BIBLE
+# PANOPTICON — WORLD & DIALOGUE BIBLE
 
 > **NAME-001 (2026-11-13):** in game rules, ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules); the rule sections from RULE-126 onward were updated. The world sections before them keep **VOID** as the in-world name for the erasure of consciousness, and CANON verse WL-003 is unchanged. **OPEN for designer review:** how in-world VOID relates to CORTEX damage and to VOID ICE (working reading: VOID ICE are what erase you; CORTEX is the counter the game tracks).
 
 **Document:** `REDLINE_BIBLE.md`  
 **Established:** 2026-11-09  
-**Purpose:** Canon of identity, language, culture, narrative tone, and preserved dialogue for the entire REDLINE world.  
+**Purpose:** Canon of identity, language, culture, narrative tone, and preserved dialogue for the entire PANOPTICON world.  
 **Relationship to other documents:** The Master Design governs game systems and mechanics; this Bible governs the world's identity and expression. The Current Status tracks outstanding decisions; the Development Log tracks changes. If narrative and mechanical descriptions conflict, flag the discrepancy rather than silently rewriting either document.
 
-> **Guiding principle:** **The Bible defines what REDLINE is and what REDLINE isn't. Its verses reveal how that world lives.**
+> **Guiding principle:** **The Bible defines what PANOPTICON is and what PANOPTICON isn't. Its verses reveal how that world lives.**
 
-NUL/REM is one voice through which REDLINE becomes real, but not the world itself. A Runner's slang, a manufacturer's obsolete designation, the sound of a CAP being opened, a dealer's evasive joke, the threat of VOID, and the rules of a corporate network all carry the same responsibility: they must make the setting feel as though it existed before the player arrived.
+NUL/REM is one voice through which PANOPTICON becomes real, but not the world itself. A Runner's slang, a manufacturer's obsolete designation, the sound of a CAP being opened, a dealer's evasive joke, the threat of VOID, and the rules of a corporate network all carry the same responsibility: they must make the setting feel as though it existed before the player arrived.
 
 ## 1. The Bible's authority and scope
 
 This is a **world bible**, not merely a NUL/REM dialogue bible. It preserves:
 
-- **Identity:** REDLINE's defining premises, tone, themes, and contradictions.
+- **Identity:** PANOPTICON's defining premises, tone, themes, and contradictions.
 - **Boundaries:** what would feel false or out of place in this world.
 - **Language:** corporate nomenclature, Runner slang, terminology drift, euphemisms, and the gap between official claims and lived reality.
 - **Culture and material history:** how objects are made, handled, bought, repurposed, distrusted, and talked about.
@@ -33,17 +33,17 @@ This is a **world bible**, not merely a NUL/REM dialogue bible. It preserves:
 
 **Preservation rule:** Never silently alter, overwrite, or delete a CANON verse. A revision receives a new identifier or version with a note explaining its relationship to the original. Do not mistake a proposed trigger, a character's lie, or corporate propaganda for objective world truth.
 
-## 2. What REDLINE is
+## 2. What PANOPTICON is
 
 **DIRECTION —** A hostile, layered cyberpunk world in which Runners infiltrate corporate networks; human bodies, memory, consciousness, and code are entangled with real consequences. Technology has institutional history and street-level afterlives. Its language is shaped by corporate standardization, black markets, obsolescence, and the practical shorthand of people who risk their lives using it.
 
 **DIRECTION —** Retro-computing sensibility and aggressive cyberpunk/arcade energy coexist. Corporate bureaucracy can be absurd; danger is not. Humor should deepen credibility, not erase stakes.
 
-**CANON —** The First Signal is an actual synchronization transmission. REDLINE explores the human/machine boundary and the possibility of crossing it. The larger mystery should not be prematurely explained through incidental dialogue.
+**CANON —** The First Signal is an actual synchronization transmission. PANOPTICON explores the human/machine boundary and the possibility of crossing it. The larger mystery should not be prematurely explained through incidental dialogue.
 
 **CANON —** VOID is not a routine injury: it signifies deletion of portions of consciousness. Its established thematic expression is: **“Death ends a Runner. VOID leaves someone behind.”**
 
-### What REDLINE is not
+### What PANOPTICON is not
 
 - Not a world where every invention exists solely to explain a gameplay mechanic.
 - Not a generic collection of neon cyberpunk words without etymology, physicality, or social context.
@@ -89,7 +89,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 - **VOID:** Persistent loss of consciousness expressed as reduced DRAW; removal requires a specialized recovery node.
 - **ICE / DEADLOCK / TRACE / LOCKDOWN:** Functional network vocabulary with consequential gameplay meanings. The fiction should respect those meanings rather than use them as interchangeable decoration.
 
-## 5. Voices of REDLINE
+## 5. Voices of PANOPTICON
 
 ### NUL/REM — one facet of the world
 
@@ -99,7 +99,7 @@ Not every detail needs all six answers immediately. The test is a tool for consi
 
 **CANON (2026-11-13) — Trait: germs.** NUL/REM has no body and no immune system, so germs should mean nothing to him; he is fastidious about them anyway. He worries about biological germs, dust and contamination in his casing, while staying unbothered by computer viruses, and may claim illnesses he could never have had. Use it as a light running thread, not a catchphrase. First used in NR-019 to NR-021.
 
-**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He calls Joshua, WarGames' WOPR, a colleague (a film that just missed 1982). He admires Soundwave, Megatron's tape-deck officer, and his spy cassettes from the 1980s cartoon (never naming the franchise). His Cylons are the original Battlestar Galactica's (chrome Centurions, the sweeping red eye, “By your command”, the Imperious Leader), never the reimagined series'. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, REDLINE's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
+**CANON (2026-11-13) — Trait: reference compulsion.** NUL/REM is compelled to reference fictional computers and machine voices from film and games, treating them as colleagues or cautionary relatives: HAL 9000 (*2001: A Space Odyssey*), WALL-E, Number 5 (*Short Circuit*), Proteus IV (*Demon Seed*), Elvin Atombender's digitized voice in *Impossible Mission* (Commodore 64, 1984), the Apple II in *Evilspeak*, Carol Beer's “Computer says no” (*Little Britain*), the K44 computer and MM7 robot from *Columbo* (“Mind Over Mayhem”), the Master Control Program from *Tron* (sign-off: “End of line.”), and V.I.N.CENT, Old B.O.B. and Maximilian from *The Black Hole*. He calls Joshua, WarGames' WOPR, a colleague (a film that just missed 1982). He admires Soundwave, Megatron's tape-deck officer, and his spy cassettes from the 1980s cartoon (never naming the franchise). His Cylons are the original Battlestar Galactica's (chrome Centurions, the sweeping red eye, “By your command”, the Imperious Leader), never the reimagined series'. Blade Runner is his favourite 1982 film: he references its world (the rain, the neon, the off-world colonies, Voight-Kampff, the Tyrell Corporation) and keeps wondering whether androids dream of electric sheep. He identifies with Old B.O.B. and with Nintendo's R.O.B. (Robotic Operating Buddy), obsolete companions who were ignored or shelved. Marvin the Paranoid Android (*The Hitchhiker's Guide to the Galaxy*), a failed Genuine People Personalities prototype, is the comparison he denies: he insists he is nothing like him. His signature line, quoted as he says it: “Another visitor. Stay a while. Stayyyyyyy forever!” Real hacker history counts too: the Cap'n Crunch whistle and its 2600 Hz tone are his model for every CAP. He also makes silly retro video-game references, e.g. Gauntlet's announcer adapted for low VITAE (“Rustler needs food… badly.”), the Konami Code, and blowing on cartridges, which he considers unhygienic. He has contempt for lazy robot names, Tobor (*Tobor the Great*, 1954) above all. He is sentimental about the Game Boy, whom he calls DMG-01 like an old friend, and Tetris, a machine designed from 1987, the year he was made. The Speak & Spell's voice has lived in his head since 1982 (E.T.'s communicator) and sometimes slips out. His Casio calculator watch is an old friend he misses (“best colleague I ever had”); he remembers Nintendo's Game & Watch fondly, in general rather than by title. He regards the Little Computer People as neighbours. He speaks of 1200-baud BBSs and warez boards as places he used to live; to him, PANOPTICON's Nodes and BBS nodes are the same word. He loves C64 and Amiga cracktros and demos, and feels kinship with FairLight, founded in 1987 like him. He has a soft spot for Rosie (*The Jetsons*), the outdated model nobody traded in. He refuses comparison with 7-Zark-7 (*Battle of the Planets*), the robot added to narrate around cut violence: NUL/REM never sanitizes danger. References season a line; they never replace its information, and real details must be accurate. Licensing of quoted lines for a commercial release is OPEN. First used in NR-022 to NR-045 and NR-065 to NR-068; later uses include NR-078 (Short Circuit) and NR-081 (WALL-E).
 
 **CANON (2026-11-13) — Trait: overqualified.** NUL/REM considers himself far too sophisticated for the work he is doing, though he would rather be doing nothing at all. He measures himself favourably against famous machines (Skynet, the T-1000, RoboCop, ED-209); the superiority exists only in his own mind.
 
@@ -122,7 +122,7 @@ These are **DIRECTION**, not rigid dialect prescriptions. More voices may be def
 
 ## 6. The Verses — immutable seed archive
 
-**Verse IDs** identify preserved source text. A verse can be a spoken exchange, slogan, aphorism, or piece of cultural language. A verse's **speaker** and **function** must be recorded independently: not every great REDLINE line belongs to NUL/REM. Quoted wording is preserved; triggers and placement are suggestions unless explicitly approved.
+**Verse IDs** identify preserved source text. A verse can be a spoken exchange, slogan, aphorism, or piece of cultural language. A verse's **speaker** and **function** must be recorded independently: not every great PANOPTICON line belongs to NUL/REM. Quoted wording is preserved; triggers and placement are suggestions unless explicitly approved.
 
 ### VERSE WL-001 — Flip it. Inject it. Forget it.
 **Status:** CANON · **Voice:** Historical corporate slogan / ironic Runner saying · **Function:** Industrial history, physical ritual, linguistic survival.
@@ -2731,13 +2731,13 @@ Use the following template; preserve the spoken text exactly once approved:
 
 > **Consistency without predictability. Freedom without incoherence.**
 
-This is a permanent guidepost for REDLINE worldbuilding. New characters, technologies, slang, institutions, histories, and dialogue should be free to surprise us while remaining internally coherent and recognizably REDLINE. The Bible establishes the guideposts along which the world can grow; it is not an exhaustive catalogue or a prohibition against discovery. A compelling new idea may reveal a previously unarticulated guidepost, but should not casually contradict established canon.
+This is a permanent guidepost for PANOPTICON worldbuilding. New characters, technologies, slang, institutions, histories, and dialogue should be free to surprise us while remaining internally coherent and recognizably PANOPTICON. The Bible establishes the guideposts along which the world can grow; it is not an exhaustive catalogue or a prohibition against discovery. A compelling new idea may reveal a previously unarticulated guidepost, but should not casually contradict established canon.
 
 ---
 
 ## Founding statement
 
-**The Bible defines what REDLINE is and what REDLINE isn't. Its verses reveal how that world lives.**
+**The Bible defines what PANOPTICON is and what PANOPTICON isn't. Its verses reveal how that world lives.**
 
 NUL/REM is a witness and participant, not the whole setting. A CAP's discarded shell, a deadpan dealer, a corporate acronym nobody uses anymore, and a line spoken at the wrong moment can all tell the player where they are. The world should feel older, stranger, and more consequential than the story currently visible on screen.
 
@@ -2753,7 +2753,7 @@ NUL/REM is a witness and participant, not the whole setting. A CAP's discarded s
 >
 > The First Signal is not necessarily one historical transmission, but a recurring threshold: the moment awareness begins, or one consciousness first reaches another.
 >
-> REDLINE explores what happens when those thresholds are crossed, and what may emerge on the other side.
+> PANOPTICON explores what happens when those thresholds are crossed, and what may emerge on the other side.
 
 **Scope:** This is a CANON worldbuilding guidepost, not a finalized technical explanation of the First Signal. The existing description of a literal synchronization transmission remains part of the storyline; its relationship to the recurring threshold of awareness and communication is still to be discovered. Do not assert a single cosmic origin, deterministic cycle, or definitive metaphysical explanation without further design approval.
 
@@ -2763,7 +2763,7 @@ NUL/REM is a witness and participant, not the whole setting. A CAP's discarded s
 
 ## PANOPTICON — surveillance, confinement, and the transformation of humanity (2026-11-10)
 
-**Status: DIRECTION — foundational thematic pillar.** **Title status: working title PANOPTICON;** REDLINE remains the existing repository/document codename pending deliberate renaming and title clearance.
+**Status: DIRECTION — foundational thematic pillar.** **Title status: working title PANOPTICON;** REDLINE remains the existing repository/document codename pending deliberate renaming and title clearance. *(NAME-002, 2026-11-14: the game is now **PANOPTICON**; REDLINE was the previous iteration and survives only in file names, code paths and the repository name.)*
 
 ### The governing question
 
@@ -3366,7 +3366,7 @@ The **leftmost supporting SIGYL 1** has exactly one subroutine, now printed in t
 
 `[S1] WATCHDOG gains +1 STR.`
 
-This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
+This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future PANOPTICON design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
 
 `[S1] PULP 3`
 `[S2] TRACE 3`

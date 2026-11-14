@@ -1,4 +1,4 @@
-# REDLINE — DEVELOPMENT LOG
+# PANOPTICON — DEVELOPMENT LOG
 **Initialized:** 2026-11-09  
 **Policy:** append dated entries; distinguish reported outcomes from verified tests.
 
@@ -1222,3 +1222,18 @@ Profiling RIOT's deaths (27 of 30 runs) showed it was dying from TRACE, not from
 ## TEST-001 — 3 BW per turn (test only; BW stays at 4)
 
 30-run bot test with BW_PER_TURN = 3 (everything else current): ECHO 9 / 30 (14 at 4 BW), GENERALIST 8 (10), RIOT 8 (8), VECTOR 7 (12). The Rustlers bunch together at 7–9; RIOT is unaffected because REDLINER restores a 4th BW at TRACE 20+; set-up Rustlers (ECHO, VECTOR) lose most; the CAPTCHA node becomes the main wall. A DETAINER would leave a 2-BW turn. Designer: leave BW at 4 for now; kept for reference.
+
+## NAME-002 — The game is PANOPTICON (APPROVED, 2026-11-14)
+
+Designer: REDLINE was the previous iteration; the game is now called **PANOPTICON** (completing TITLE-001's "intentional rename"). Scope chosen: **text only.**
+- Renamed: the game name in every doc's text (including the Bible's rule sections, as an explicit designer decision rather than a silent CANON edit), the Godot project and window title, and the Windows build (`PANOPTICON_HALCYON_slice.exe`).
+- Kept: `REDLINE_*.md` file names, code paths and identifiers, the save file, the GitHub repository name (Punkwork/REDLINE; renaming it is the designer's call on GitHub), and earlier dev-log entries, which stay as written.
+- Not a game-name use, so unchanged: RIOT's ORIGIN **REDLINER** and the "redline" TRACE band (20–39).
+- No NUL/REM dialogue verse mentions REDLINE.
+- Still to sync: the project's copies of the docs (`claude/REDLINE_*.md` in the Panopticon project).
+
+## DRAW-001 — DRAW 6 (APPROVED, 2026-11-14)
+
+Playtest: with 4 BW and 5 cards there was little to decide about what not to play. Base **DRAW is now 6** (CORTEX still lowers it, minimum 1). 30-run bot test, DRAW 6 vs 5: GENERALIST 13 / 30 (10), ECHO 15 (14), VECTOR 8 (12), RIOT 1 (8). Cards left unplayed per turn rose from about 2.5–3.2 to 3.3–4.8.
+- **RIOT** collapses with the bot because the bot plays every cheap card, and RIOT's cheap cards add TRACE (19 of its 29 deaths at TERMS & CONDITIONS, SHATTER played 82 times). A player choosing what not to play avoids that; RIOT needs re-checking with real play.
+- **VECTOR** drops because more virus cards drive more PURGES (86 in 28 runs, up from 60).

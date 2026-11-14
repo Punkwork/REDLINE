@@ -1,4 +1,4 @@
-# REDLINE — ICE: SECOND CORPORATION (IRONWATCH)
+# PANOPTICON — ICE: SECOND CORPORATION (IRONWATCH)
 **Version:** 0.1
 **Date:** 2026-11-13
 **Status:** **APPROVED 2026-11-13** (pre-approved by the designer; decision record in §10). Follows the ICE design rules in `REDLINE_ICE_CORP1.md` §2 (ICE-002) and the encounter structure in §8 of that document, with the CRED reserves from UPL-008.

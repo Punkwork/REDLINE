@@ -3,9 +3,9 @@
 > **NAME-001 (2026-11-13):** ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules). Terms in this document were updated to match; rule and decision IDs keep their original names (e.g. TRAINING-THREE-ICE-SENTRY-001). See `REDLINE_CORE_RULES.md` (NAME-001).
 
 **Date:** 2026-11-10  
-**Project:** PANOPTICON (preferred working title); REDLINE remains the GitHub repository and development codename.  
+**Project:** PANOPTICON. REDLINE was the previous iteration; it remains only in file names, code paths and the GitHub repository name (NAME-002).  
 **Document status:** Structured design-session consolidation, not a verbatim transcript or a replacement for the Master Design and World Bible.  
-**Sources:** REDLINE design discussions, `docs/REDLINE_MASTER_DESIGN.md`, `docs/REDLINE_BIBLE.md`, `docs/REDLINE_CURRENT_STATUS.md`, `docs/REDLINE_DEVELOPMENT_LOG.md`, and the design-session archive dated 2026-11-10.  
+**Sources:** PANOPTICON design discussions, `docs/REDLINE_MASTER_DESIGN.md`, `docs/REDLINE_BIBLE.md`, `docs/REDLINE_CURRENT_STATUS.md`, `docs/REDLINE_DEVELOPMENT_LOG.md`, and the design-session archive dated 2026-11-10.  
 **Evidence boundary:** No new implementation, test results, or title clearance is asserted.
 
 ## 1. Purpose and governing principle
@@ -20,7 +20,7 @@ This is an open inquiry, not a predetermined claim that humanity necessarily bec
 
 **DECIDED:** An original, **single-player cyberpunk roguelike deckbuilder**. Its play identity is tactical card combat, evolving decks, resource constraints, synergistic builds, procedural variation, and Runner identities. It is not a Netrunner adaptation. Shared genre terminology and mechanical resemblance require a targeted originality audit, not indiscriminate removal of effective systems.
 
-**DIRECTION:** PANOPTICON is the preferred working title, subject to clearance. Retain REDLINE paths and identifiers until a deliberate rename.
+**DIRECTION:** PANOPTICON is the preferred working title, subject to clearance. Retain REDLINE paths and identifiers until a deliberate rename. *(NAME-002, 2026-11-14: the game is now **PANOPTICON**; REDLINE was the previous iteration and survives only in file names, code paths and the repository name.)*
 
 **Production:** Godot 4 is the chosen engine. Python/Pygame is historical reference and regression evidence, not the authority for future design.
 
@@ -143,7 +143,7 @@ Other archetypes (stealth, hardware engineering, aggressive breaking) remain bra
 
 ## 12. Provenance and maintenance
 
-This is a **comprehensive design synopsis**, not a word-for-word transcript. It synthesizes established REDLINE project materials and the November 10 design discussion. Where source materials did not establish exact mechanics, the document labels them OPEN rather than filling them in. The four existing authoritative documents remain in force. Future changes should carry a decision ID, status, source, and test expectation.
+This is a **comprehensive design synopsis**, not a word-for-word transcript. It synthesizes established PANOPTICON project materials and the November 10 design discussion. Where source materials did not establish exact mechanics, the document labels them OPEN rather than filling them in. The four existing authoritative documents remain in force. Future changes should carry a decision ID, status, source, and test expectation.
 
 **Suggested ChatGPT archive title:** PANOPTICON — Core Design & Worldbuilding.
 
@@ -680,7 +680,7 @@ The **leftmost supporting SIGYL 1** has exactly one subroutine, now printed in t
 
 `[S1] WATCHDOG gains +1 STR.`
 
-This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
+This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future PANOPTICON design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
 
 `[S1] PULP 3`
 `[S2] TRACE 3`

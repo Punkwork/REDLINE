@@ -1,11 +1,11 @@
 class_name Game
 extends RefCounted
-## REDLINE rules engine for the vertical slice. No UI code here, so it can be tested headless.
+## PANOPTICON rules engine for the vertical slice. No UI code here, so it can be tested headless.
 ## Rules: REDLINE_CORE_RULES.md v0.2 (§2 resources, §4 turn, §5 ICE, §6 damage, §7 TRACE, §8 Nodes, §9 rewards, §10.1a Opening Node).
 
 const MAX_TRACE := 40
 const BW_PER_TURN := 4
-const BASE_DRAW := 5
+const BASE_DRAW := 6   # DRAW-001 (was 5)
 const BASE_RAM := 4
 const START_VITAE := 30
 const SAFEHOUSE_HEAL := 10

@@ -1,7 +1,7 @@
-# REDLINE — Playtest QA checklist
+# PANOPTICON — Playtest QA checklist
 **Version:** 0.1 · **Date:** 2026-11-13
 
-Use one copy per playtest run. The live, fill-in version is the **REDLINE Playtest QA Checklist** Sheet (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
+Use one copy per playtest run. The live, fill-in version is the **PANOPTICON Playtest QA Checklist** Sheet (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
 **For every run:** play one corporation heist (choose the corporation and Rustler on the main menu), then press **Copy summary to clipboard** on the summary screen and paste it into the Run log. The summary gives CRED earned and spent, purchases, cards added, and the route, which answers most of the Economy, Deck and Map checks.
 

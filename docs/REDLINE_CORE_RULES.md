@@ -1,4 +1,4 @@
-# REDLINE — CORE RULES
+# PANOPTICON — CORE RULES
 **Version:** 0.2 (Phase 1 of the simplified redesign)
 **Date:** 2026-11-12
 **Status:** **APPROVED 2026-11-12.** All nine Phase 1 decisions were approved by the designer (see §16). This document is now the **rules authority**, replacing the scattered rule entries in `REDLINE_MASTER_DESIGN.md` (see §15).
@@ -22,7 +22,7 @@ You are a **Rustler**, a hacker for hire, with your AI companion **NUL/REM**. A 
 | Resource | What it is | Start value | Resets |
 |---|---|---|---|
 | **BW** (bandwidth) | Spent to play cards and use Icepicks | 4 per turn | Refills each of your turns; unused BW is lost |
-| **DRAW** | Cards drawn each turn | 5 | — reduced by CORTEX (§6) |
+| **DRAW** | Cards drawn each turn | **6** *(DRAW-001: was 5)* | — reduced by CORTEX (§6) |
 | **RAM** | Space for installed Programs | 4 | — Hardware can raise it |
 | **VITAE** | Your health. 0 = run over | 30 | **[CHANGED]** Max VITAE starts at 30. Healing can't exceed Max VITAE. Cards and Ghostware can raise Max VITAE; raising it also adds the same amount to current VITAE (as in Slay the Spire) |
 | **SHIELD** | Blocks incoming PULP | 0 | **[CHANGED]** One pool. Expires at the start of your next turn |
@@ -408,7 +408,7 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 
 | ID | Change to this document |
 |---|---|
-| NAME-001 | **ICE types and a damage type renamed, no rules changed.** ICE types: WALL → **FORTRESS**, CODE GATE → **SIGYL**, SENTRY → **VOID**. Damage: VOID → **CORTEX** (same counters: −1 DRAW each). VOID ICE are the main source of CORTEX damage, but any ICE can deal it. Card and tag names follow (e.g. VOID BUFFER → CORTEX BUFFER; ICEPICK (WALL) → ICEPICK (FORTRESS)); ICE names such as COOKIE WALL are unchanged. Applied across all REDLINE docs; earlier decision records that say WALL, CODE GATE, SENTRY or VOID now read with the new names. Moves away from Netrunner's ICE vocabulary. — **APPROVED 2026-11-13** |
+| NAME-001 | **ICE types and a damage type renamed, no rules changed.** ICE types: WALL → **FORTRESS**, CODE GATE → **SIGYL**, SENTRY → **VOID**. Damage: VOID → **CORTEX** (same counters: −1 DRAW each). VOID ICE are the main source of CORTEX damage, but any ICE can deal it. Card and tag names follow (e.g. VOID BUFFER → CORTEX BUFFER; ICEPICK (WALL) → ICEPICK (FORTRESS)); ICE names such as COOKIE WALL are unchanged. Applied across all PANOPTICON docs; earlier decision records that say WALL, CODE GATE, SENTRY or VOID now read with the new names. Moves away from Netrunner's ICE vocabulary. — **APPROVED 2026-11-13** |
 
 ### Later amendments (JACK OUT, 2026-11-13)
 

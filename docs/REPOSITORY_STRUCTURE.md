@@ -1,6 +1,6 @@
-# REDLINE — Repository Structure
+# PANOPTICON — Repository Structure
 
-REDLINE is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the intended production engine; the Python/Pygame prototype is a gameplay reference, not the production build.
+PANOPTICON is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the intended production engine; the Python/Pygame prototype is a gameplay reference, not the production build.
 
 ## Layout
 

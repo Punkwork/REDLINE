@@ -1,4 +1,4 @@
-# REDLINE — CARD POOLS
+# PANOPTICON — CARD POOLS
 **Version:** 0.1 (Phase 3B of the simplified redesign)
 **Date:** 2026-11-12
 **Status:** **APPROVED 2026-11-12.** All seven Phase 3B decisions (CARD-001 to CARD-007) were approved by the designer (§8). Builds on `REDLINE_CORE_RULES.md` v0.2, `REDLINE_RUSTLERS.md` v0.1 and `REDLINE_ICE_CORP1.md` v0.1.

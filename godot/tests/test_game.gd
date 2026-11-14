@@ -65,7 +65,7 @@ func test_opening_node() -> void:
 	check(g.phase == "READY_RIG", "READY RIG offered")
 	g.choose_ready_rig(uid_of(g, g.draw_pile, "TUMBLER_ICEPICK"))
 	check(g.phase == "PLAYER", "turn starts")
-	check(g.hand.size() == 5, "draw 5")
+	check(g.hand.size() == Game.BASE_DRAW, "draw %d" % Game.BASE_DRAW)
 	check(g.bw == 4, "4 BW")
 	check(g.ram_used() == 1, "rig uses 1 RAM")
 	# ROT-001 + DET-001: ACCEPT ALL (DETAINER TUMBLER, 1 slot of 3: −1 BW, SPAM, PULP 3);
@@ -151,9 +151,9 @@ func test_captcha_discard() -> void:
 	start_node(g, 1, 0, "TUMBLER_ICEPICK")
 	g.end_turn()
 	check(g.phase == "CHOICE" and g.pending.kind == "discard", "CAPTCHA DISCARD asks at the start of the next turn")
-	check(g.hand.size() == 5 and g.enc.turn == 2, "the new hand is drawn first")
+	check(g.hand.size() == Game.BASE_DRAW and g.enc.turn == 2, "the new hand is drawn first")
 	g.choose(g.hand[0].uid)
-	check(g.phase == "PLAYER" and g.hand.size() == 4, "discard 1, then play")
+	check(g.phase == "PLAYER" and g.hand.size() == Game.BASE_DRAW - 1, "discard 1, then play")
 	check(g.vitae == 24, "AUTO-RENEW PULP 1+2+3 hit on turn 1 (vitae %d); CAPTCHA's PULP 6 was hidden" % g.vitae)
 	check(g.is_active(1, 2), "PULP rotated into a slot")
 

@@ -1,4 +1,4 @@
-# REDLINE — MASTER GAME DESIGN DOCUMENT
+# PANOPTICON — MASTER GAME DESIGN DOCUMENT
 **Version:** 0.1 consolidated baseline  
 **Prepared:** 2026-11-09  
 **Authority:** Design reference; not proof of code implementation  
@@ -9,7 +9,7 @@
 > **Preservation rule:** Do not silently replace a LOCKED decision. Record revisions in the decision register, including rationale and date. Do not convert concepts into implemented features without code and test evidence.
 
 ## 1. High concept and creative pillars
-REDLINE is a cyberpunk rustler-versus-corporation, card-driven game with ICE encounters, hacking, escalating Trace, and a narrative concerning the boundary between humans and machines. Its aesthetic combines retro-computing, CRT-era interface language, and high-energy arcade/cyberpunk visual influences (including the feel of *Tempest 2000*). The player is accompanied by **NUL/REM**, a sardonic, intermittently protective artificial companion.
+PANOPTICON is a cyberpunk rustler-versus-corporation, card-driven game with ICE encounters, hacking, escalating Trace, and a narrative concerning the boundary between humans and machines. Its aesthetic combines retro-computing, CRT-era interface language, and high-energy arcade/cyberpunk visual influences (including the feel of *Tempest 2000*). The player is accompanied by **NUL/REM**, a sardonic, intermittently protective artificial companion.
 
 **Design pillars (DIRECTION):** meaningful tactical decisions; clear and consistent terminology; legible ICE encounters; persistent consequences and build customization; an evocative retro-computing identity; humour and melancholy without undercutting danger; narrative ambiguity about human/machine synchronization.
 
@@ -91,7 +91,7 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 **OPEN:** exact trigger table, frequency caps, sample dialogue library, audio/voice treatment, relationship progression, and the full explanation of NUL/REM's origins.
 
 ## 8. Story and worldbuilding
-**Established narrative canon:** **The First Signal** is an **actual synchronization transmission**, not merely a metaphor or fabricated legend. REDLINE explores the **human/machine boundary** and the possibility of crossing it. The world includes a hidden-AI mystery and cipher fragments.
+**Established narrative canon:** **The First Signal** is an **actual synchronization transmission**, not merely a metaphor or fabricated legend. PANOPTICON explores the **human/machine boundary** and the possibility of crossing it. The world includes a hidden-AI mystery and cipher fragments.
 
 **Intentionally unresolved story questions:**
 - What does the hidden AI actually want?
@@ -151,13 +151,13 @@ engine/
 - Every new rule should receive an ID, status, and test expectation. Every implementation claim should identify a source file, commit, or passing test. A chat summary alone does not certify a build.
 
 ### Source/provenance note
-This consolidation uses prior REDLINE project conversation context and summaries of earlier handoff documents, notably `REDLINE_CURRENT_STATE_FOR_CLAUDE_2026-11-08.md`, `REDLINE_UI_NULREM_Design_For_Claude.md`, and earlier narrative notes. Their complete contents and the actual ZIP were **not accessible for direct inspection here**; therefore this is a careful baseline, **not a complete extraction of every past card or mechanic**. Missing specifics are explicitly marked VERIFY/OPEN rather than invented.
+This consolidation uses prior PANOPTICON project conversation context and summaries of earlier handoff documents, notably `REDLINE_CURRENT_STATE_FOR_CLAUDE_2026-11-08.md`, `REDLINE_UI_NULREM_Design_For_Claude.md`, and earlier narrative notes. Their complete contents and the actual ZIP were **not accessible for direct inspection here**; therefore this is a careful baseline, **not a complete extraction of every past card or mechanic**. Missing specifics are explicitly marked VERIFY/OPEN rather than invented.
 
 ---
 
 ## 13. PANOPTICON thematic and structural design direction — 2026-11-10
 
-**TITLE-001 — DIRECTION:** **PANOPTICON** is the preferred working title, subject to storefront/trademark availability and an intentional rename process. REDLINE remains the repository and document codename for now. No existing technical path or identifier is implicitly renamed.
+**TITLE-001 — DIRECTION:** **PANOPTICON** is the preferred working title, subject to storefront/trademark availability and an intentional rename process. REDLINE remains the repository and document codename for now. *(NAME-002, 2026-11-14: the game is now **PANOPTICON**; REDLINE was the previous iteration and survives only in file names, code paths and the repository name.)* No existing technical path or identifier is implicitly renamed.
 
 **THEME-001 — DIRECTION:** Central question: **“What does humanity become when it knows it is being permanently observed and monitored?”** Explore behavioural, cultural, and psychological transformation under perpetual surveillance without assuming one inevitable answer. Worldbuilding authority: `REDLINE_BIBLE.md`, PANOPTICON section.
 
@@ -173,7 +173,7 @@ This consolidation uses prior REDLINE project conversation context and summaries
 
 **TAX-001 — DIRECTION:** Viruses are a subtype of deployable software. The game-state definitions of hardware, software, installed viruses, virus counters, and their interactions remain to be specified. **PURGE** remains reserved for corporation removal of virus counters.
 
-**ORIG-001 — DIRECTION:** REDLINE/PANOPTICON remains fundamentally an original **single-player roguelike deckbuilder**. Shared cyberpunk genre vocabulary must not determine its narrative identity or substitute for distinct mechanics and worldbuilding.
+**ORIG-001 — DIRECTION:** PANOPTICON remains fundamentally an original **single-player roguelike deckbuilder**. Shared cyberpunk genre vocabulary must not determine its narrative identity or substitute for distinct mechanics and worldbuilding.
 
 **OPEN / implementation safeguard:** No card statistics, corruption injection cadence, Observer rules, surveillance resources, art assets, or story answers in this section are approved implementation specifications. Record explicit approval and tests before implementation.
 
@@ -311,7 +311,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 **Explicit user decision for the Master Classification Matrix:** **Software is represented through cards in the Rustler's deck.** Software is a card-based category. **Viruses** remain an established subtype of deployable Software, so their software representation follows this card-based taxonomy, while exact deployment/counter mechanics remain OPEN.
 
-**Do not infer:** that all cards are Software; that Hardware, CAPS, or Ghostware are Software; or that Software's exact play, install, duration, and discard mechanics have all been specified. Ghostware remains permanent and non-card. CAPS classification versus Hardware remains an explicit unresolved discrepancy between the user's recent statement and the REDLINE Bible.
+**Do not infer:** that all cards are Software; that Hardware, CAPS, or Ghostware are Software; or that Software's exact play, install, duration, and discard mechanics have all been specified. Ghostware remains permanent and non-card. CAPS classification versus Hardware remains an explicit unresolved discrepancy between the user's recent statement and the PANOPTICON Bible.
 
 
 ## 28. TAX-003 — Viruses and Icepicks are Software subtypes (LOCKED, 2026-11-10)
@@ -334,7 +334,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 ## 30. TAX-005 — CAPS are consumable injectable code outside deck (LOCKED, 2026-11-10)
 
-**Explicit user decision:** **CAPS are consumable, single-use injectable code devices outside the Rustler's deck.** They are a distinct mechanical category, **not Hardware cards or Software cards**. The Rustler activates/injects a CAP and consumes it; it is not drawn or played from the Rustler's deck. This resolves the earlier classification ambiguity and agrees with the REDLINE Bible's separate CAPS category.
+**Explicit user decision:** **CAPS are consumable, single-use injectable code devices outside the Rustler's deck.** They are a distinct mechanical category, **not Hardware cards or Software cards**. The Rustler activates/injects a CAP and consumes it; it is not drawn or played from the Rustler's deck. This resolves the earlier classification ambiguity and agrees with the PANOPTICON Bible's separate CAPS category.
 
 **Preserve established fiction:** CAP (plural CAPS), colloquial term descended from corporate DAC; ritual **Flip. Inject. Discard.** JACK OUT remains a distinct CAP, not a universal free action, subject to its existing specific restrictions and unresolved conflict with forward-only Node traversal.
 
@@ -514,7 +514,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 ## 51. SOFT-003 — CACHE keyword (LOCKED, 2026-11-10)
 
-**Explicit user approval:** **CACHE** is REDLINE's official keyword for **retaining selected cards in the Rustler's hand across the normal end-of-turn hand discard**. The word functions as both a noun and a verb: e.g. **“CACHE that card”** means designate that card to remain in hand. **CACHED** describes a card currently retained. **CACHE X** is the natural parameterized form for retaining up to X cards (e.g. CACHE 1, CACHE 2), subject to final wording. The keyword is intentionally evocative of computer caching and multiple everyday meanings.
+**Explicit user approval:** **CACHE** is PANOPTICON's official keyword for **retaining selected cards in the Rustler's hand across the normal end-of-turn hand discard**. The word functions as both a noun and a verb: e.g. **“CACHE that card”** means designate that card to remain in hand. **CACHED** describes a card currently retained. **CACHE X** is the natural parameterized form for retaining up to X cards (e.g. CACHE 1, CACHE 2), subject to final wording. The keyword is intentionally evocative of computer caching and multiple everyday meanings.
 
 **Core distinction:** CACHED cards **stay in hand**, rather than being installed persistent Software in the Console. Their retention is an exception to the normal end-of-turn hand discard.
 
@@ -580,7 +580,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 ## 59. RULE-003 — Instructions versus costs and conditional effects (LOCKED, 2026-11-10)
 
-**Explicit user approval:** REDLINE formally distinguishes **instructions** from **costs**. Ordinary instructions are fulfilled **as much as possible** under RULE-002, without cancelling other independent effects. A **cost** must be **paid in full** to activate/receive the associated effect. A **conditional** such as **“If you do”** grants its contingent benefit only if the specified action was actually performed successfully. **Never infer a cost** from an ordinary instruction; cost/condition must be explicit in card text or an applicable rule.
+**Explicit user approval:** PANOPTICON formally distinguishes **instructions** from **costs**. Ordinary instructions are fulfilled **as much as possible** under RULE-002, without cancelling other independent effects. A **cost** must be **paid in full** to activate/receive the associated effect. A **conditional** such as **“If you do”** grants its contingent benefit only if the specified action was actually performed successfully. **Never infer a cost** from an ordinary instruction; cost/condition must be explicit in card text or an applicable rule.
 
 **Examples:**
 - **“Discard 1 card. Gain X.”** With no eligible card to discard, discard none; still gain X.
@@ -657,7 +657,7 @@ This applies at the transitions from corporation 1 to 2 and corporation 2 to 3. 
 
 ## 67. DMG-001 — Three distinct damage types and type-specific protection (LOCKED, 2026-11-10)
 
-**Explicit user approval:** REDLINE's **three damage types are distinct** and defenses do not cross-protect by default:
+**Explicit user approval:** PANOPTICON's **three damage types are distinct** and defenses do not cross-protect by default:
 - **PULP X:** Reduces Rustler Vitae by X; prevented by the shared **PULP prevention pool** under SOFT-015.
 - **SYN X:** Rustler chooses and discards X cards from their current hand; this does not reduce Vitae. Requires an effect explicitly protecting against SYN to prevent it.
 - **CORTEX X:** Applies persistent DRAW reduction (subject to minimum DRAW rule). Requires an effect explicitly protecting against CORTEX to prevent it.
@@ -671,7 +671,7 @@ A card may explicitly prevent multiple named damage types, but protection agains
 
 ## 68. DMG-002 — Three independent damage prevention pools (LOCKED, 2026-11-10)
 
-**Explicit user approval:** REDLINE has **three independent numerical prevention pools**, one each for **PULP**, **SYN**, and **CORTEX**. Each defensive card/effect contributes its calculated prevention to the pool(s) for the **damage type(s) explicitly named** in its instructions. Contributions from multiple sources **sum within each matching pool**; pools are never interchangeable or cross-applied. On incoming damage of type X, deduct prevention from **that type's pool only**; any excess damage of that type resolves normally under its own rules. No individual shield consumption choice exists after contributions have entered a pool.
+**Explicit user approval:** PANOPTICON has **three independent numerical prevention pools**, one each for **PULP**, **SYN**, and **CORTEX**. Each defensive card/effect contributes its calculated prevention to the pool(s) for the **damage type(s) explicitly named** in its instructions. Contributions from multiple sources **sum within each matching pool**; pools are never interchangeable or cross-applied. On incoming damage of type X, deduct prevention from **that type's pool only**; any excess damage of that type resolves normally under its own rules. No individual shield consumption choice exists after contributions have entered a pool.
 
 **Duration:** Unused **temporary** prevention in each of the three pools expires at the **beginning of the next Rustler turn**, following SOFT-013. Explicit longer-duration effects can follow their printed duration.
 
@@ -691,7 +691,7 @@ A card may explicitly prevent multiple named damage types, but protection agains
 
 ## 70. RULE-004 — Temporary resources spent before ongoing resources (LOCKED, 2026-11-10)
 
-**Explicit user decision — universal game rule:** Whenever multiple eligible interchangeable resources, prevention reserves, or effects can satisfy the same expenditure, cost, or requirement, **temporary resources are consumed first, before permanent or ongoing resources**. This is a general REDLINE priority rule, not merely a shield rule. Apply automatically without requiring the Rustler to select individual resources. Explicit card text or a more specific rule may override the default priority.
+**Explicit user decision — universal game rule:** Whenever multiple eligible interchangeable resources, prevention reserves, or effects can satisfy the same expenditure, cost, or requirement, **temporary resources are consumed first, before permanent or ongoing resources**. This is a general PANOPTICON priority rule, not merely a shield rule. Apply automatically without requiring the Rustler to select individual resources. Explicit card text or a more specific rule may override the default priority.
 
 **PULP prevention example:** Rustler has 3 temporary PULP prevention plus 6 Node-long PULP prevention from Origin Ghostware, for a displayed total of 9. Incoming PULP 4 consumes the 3 temporary first, then 1 Node-long, leaving 5 Node-long PULP prevention and 0 temporary. This is consistent with the single displayed pool per damage type (DMG-002) while preserving behind-the-scenes duration bookkeeping (GHOST-001).
 
@@ -797,7 +797,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 81. RULE-015 — FIFO pending trigger queue (LOCKED, 2026-11-10)
 
-**Explicit user approval:** REDLINE's pending triggered effects resolve in **first-in, first-out (FIFO)** order. When an effect currently resolving generates a new trigger, that new trigger is appended to the **back of the existing pending queue** rather than jumping ahead of triggers already waiting. The current effect must complete before the next queued effect begins (RULE-014).
+**Explicit user approval:** PANOPTICON's pending triggered effects resolve in **first-in, first-out (FIFO)** order. When an effect currently resolving generates a new trigger, that new trigger is appended to the **back of the existing pending queue** rather than jumping ahead of triggers already waiting. The current effect must complete before the next queued effect begins (RULE-014).
 
 **Example:** Triggers **A** and **B** are already waiting. Resolving **A** generates trigger **C**. Resolve in order **A → B → C**.
 
@@ -806,7 +806,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 82. RULE-016 — Detect and terminate infinite trigger loops (LOCKED, 2026-11-10)
 
-**Explicit user approval:** REDLINE must automatically **detect and stop infinite or nonterminating triggered-effect cycles**, rather than allowing the game to hang or crash. Detection and interruption must be **deterministic**. This safeguard must **not** impose an arbitrary general cap on legitimate finite stacking, compounding prevention multipliers, or other intended card synergies (RULE-007/008). It works alongside the noninterrupting FIFO trigger queue (RULE-014/015).
+**Explicit user approval:** PANOPTICON must automatically **detect and stop infinite or nonterminating triggered-effect cycles**, rather than allowing the game to hang or crash. Detection and interruption must be **deterministic**. This safeguard must **not** impose an arbitrary general cap on legitimate finite stacking, compounding prevention multipliers, or other intended card synergies (RULE-007/008). It works alongside the noninterrupting FIFO trigger queue (RULE-014/015).
 
 **Design requirement:** Distinguish genuinely nonterminating trigger cycles from finite combinations that legitimately produce very large numerical effects. A repeated trigger name alone is insufficient evidence of an infinite loop.
 
@@ -815,7 +815,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 83. RULE-017 — Preserve resolved effects when terminating infinite loops (LOCKED, 2026-11-10)
 
-**Explicit user approval:** When REDLINE detects a genuinely infinite/nonterminating trigger cycle under RULE-016, **cancel the repeating cycle** and its perpetuating triggers, **preserve all effects already resolved**, and **continue resolving unrelated pending effects** in the established FIFO trigger queue (RULE-014/015). Termination and continuation must be **deterministic**. Do not roll back legitimately resolved prevention, damage, resources, or other state changes merely because they were generated before loop detection.
+**Explicit user approval:** When PANOPTICON detects a genuinely infinite/nonterminating trigger cycle under RULE-016, **cancel the repeating cycle** and its perpetuating triggers, **preserve all effects already resolved**, and **continue resolving unrelated pending effects** in the established FIFO trigger queue (RULE-014/015). Termination and continuation must be **deterministic**. Do not roll back legitimately resolved prevention, damage, resources, or other state changes merely because they were generated before loop detection.
 
 **Example:** If a loop generated **10 PULP prevention** before being detected, that 10 remains; the nonterminating cycle is stopped; unrelated pending triggers continue to resolve.
 
@@ -824,7 +824,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 84. RULE-018 — Notify player when infinite trigger loop is terminated (LOCKED, 2026-11-10)
 
-**Explicit user approval:** When REDLINE detects and terminates an infinite trigger cycle under RULE-016/017, show the player a **brief, informative notification** identifying the involved cards or effects and indicating that the repeating interaction was stopped. The notification should not unnecessarily interrupt play. Previously resolved effects remain preserved, and unrelated pending triggers continue normally. Record sufficient diagnostic information to help investigate unexpected card interactions during playtesting.
+**Explicit user approval:** When PANOPTICON detects and terminates an infinite trigger cycle under RULE-016/017, show the player a **brief, informative notification** identifying the involved cards or effects and indicating that the repeating interaction was stopped. The notification should not unnecessarily interrupt play. Previously resolved effects remain preserved, and unrelated pending triggers continue normally. Record sufficient diagnostic information to help investigate unexpected card interactions during playtesting.
 
 **Illustrative notification:** “TRIGGER LOOP TERMINATED — Repeating interaction detected between [Card A] and [Card B]. Previously resolved effects preserved; unrelated effects continue.”
 
@@ -833,7 +833,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 85. RULE-019 — Repeated trigger-state detection principle (LOCKED, 2026-11-10)
 
-**Explicit user approval:** REDLINE's infinite-loop detection must be based on **repeated trigger-state/cycle analysis**, accounting for which effects trigger one another, relevant game state, and whether the chain has a genuine termination condition. The system must distinguish **genuinely nonterminating cycles** from **finite but extremely powerful combinations**, even those producing hundreds or thousands of prevention points. **Do not impose an arbitrary numerical cap on legitimate card synergies.**
+**Explicit user approval:** PANOPTICON's infinite-loop detection must be based on **repeated trigger-state/cycle analysis**, accounting for which effects trigger one another, relevant game state, and whether the chain has a genuine termination condition. The system must distinguish **genuinely nonterminating cycles** from **finite but extremely powerful combinations**, even those producing hundreds or thousands of prevention points. **Do not impose an arbitrary numerical cap on legitimate card synergies.**
 
 **Interaction with locked rules:** When a genuine infinite cycle is detected, terminate the perpetuating loop while preserving previously resolved effects and continuing unrelated queued effects (RULE-016/017), and notify the player of involved cards/effects (RULE-018). Respect FIFO queue ordering (RULE-015).
 
@@ -842,7 +842,7 @@ Within each side's group of simultaneous triggers, that side chooses their order
 
 ## 86. RULE-020 — Explicit card-specific trigger frequency limits (LOCKED, 2026-11-10)
 
-**Explicit user approval:** Individual cards and abilities may specify **explicit trigger-frequency limits**, including **“Once per turn,” “Twice per Node,”** and **“The first time each turn.”** Such restrictions apply to the **specified card/ability**, not to REDLINE's trigger system globally. The engine tracks and enforces each ability's applicable count or first-occurrence condition over the printed period.
+**Explicit user approval:** Individual cards and abilities may specify **explicit trigger-frequency limits**, including **“Once per turn,” “Twice per Node,”** and **“The first time each turn.”** Such restrictions apply to the **specified card/ability**, not to PANOPTICON's trigger system globally. The engine tracks and enforces each ability's applicable count or first-occurrence condition over the printed period.
 
 **Design intent:** These are deliberate **card-level balance and design tools**, not universal caps on stacking, multiplicative synergies, prevention values, or other legitimate interactions (RULE-007/008/016/019). Other cards and effects may still trigger normally, subject to their own text and established queue/ordering rules.
 
@@ -1722,7 +1722,7 @@ This rule does **not** override individual draw events, reshuffles, draw replace
 
 **Conflict check:** Consistent with RULE-102/103 (numeric snapshots), RULE-104 (eligible-object set), RULE-105/106 (aggregate-event identity), RULE-107 (actual reported magnitude), RULE-014/015 (deferred FIFO timing), RULE-054/055/078 (independent triggered abilities), and RULE-020/026 (frequency limits). Specific draw, reshuffle, replacement, damage, cost and condition rules retain precedence. **No existing locked rule is overridden.**
 
-**Open question preserved:** RULE-108 mixed-direction aggregate-event accounting remains **deferred and not locked**, pending a concrete REDLINE card or mechanic requiring it.
+**Open question preserved:** RULE-108 mixed-direction aggregate-event accounting remains **deferred and not locked**, pending a concrete PANOPTICON card or mechanic requiring it.
 
 
 ## 175. RULE-110 — Event-time trigger qualification; resolution-time variable calculations (LOCKED, 2026-11-11)
@@ -2330,7 +2330,7 @@ Resolve SYN X in this order:
 
 **Approved 12-card Generalist starter deck (revised classification):** 1 FORTRESS Icepick (Persistent Software); 1 SIGYL Icepick (Persistent Software); 1 VOID Icepick (Persistent Software); 1 Basic Extractor (Persistent Software); 1 SYN BUFFER (Persistent Hardware); 3 identical PULP Shields (Instant Hardware); 3 identical PROBE cards (Instant Software); 1 GHOST SIGNAL (Instant Software, unique, existing once-per-Node removal from draw cycle). Total **12 physical cards**. This replaces older 10-card and outdated classification descriptions, not the approved individual card effects or costs.
 
-**Open taxonomy redesign, not yet a rule:** The user is considering a second, function-first classification comparable to Slay the Spire's Attack / Skill / Power / Status / Curse. Do not presume REDLINE has only two total card types: Hardware and Software are currently the two established **Rustler-deck nature types**, while CAPS, Ghostware, PATCHWORK, and special/reward cards have distinct rules; the classification of Corporation-inserted negative cards (e.g. transient Status versus persistent Curse) has **not yet been approved or comprehensively defined**. Future functional classes, card-frame shapes, interaction with Hardware/Software, and whether hostile cards are a third nature type are OPEN. The user-proposed VOID trigger referencing **Hardware played** remains an encounter-design proposal; whether +1 or +2 STR, duration, and trigger timing are still OPEN. Reclassifying Shields/SYN BUFFER does not silently finalize that trigger.
+**Open taxonomy redesign, not yet a rule:** The user is considering a second, function-first classification comparable to Slay the Spire's Attack / Skill / Power / Status / Curse. Do not presume PANOPTICON has only two total card types: Hardware and Software are currently the two established **Rustler-deck nature types**, while CAPS, Ghostware, PATCHWORK, and special/reward cards have distinct rules; the classification of Corporation-inserted negative cards (e.g. transient Status versus persistent Curse) has **not yet been approved or comprehensively defined**. Future functional classes, card-frame shapes, interaction with Hardware/Software, and whether hostile cards are a third nature type are OPEN. The user-proposed VOID trigger referencing **Hardware played** remains an encounter-design proposal; whether +1 or +2 STR, duration, and trigger timing are still OPEN. Reclassifying Shields/SYN BUFFER does not silently finalize that trigger.
 
 
 ## 41. Operating behaviour taxonomy — Executable / Protocol / Packet / Bloatware (APPROVED, 2026-11-11)
@@ -2554,7 +2554,7 @@ The **leftmost supporting SIGYL 1** has exactly one subroutine, now printed in t
 
 `[S1] WATCHDOG gains +1 STR.`
 
-This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
+This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future PANOPTICON design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
 
 `[S1] PULP 3`
 `[S2] TRACE 3`

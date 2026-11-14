@@ -1,4 +1,4 @@
-# REDLINE Rule Review — RULE-126
+# PANOPTICON Rule Review — RULE-126
 
 **Status:** APPROVED AND LOCKED in the rule review
 **Title:** SyN DAMAGE Overflow
@@ -536,7 +536,7 @@ The **leftmost supporting CODE GATE 1** has exactly one subroutine, now printed 
 
 `[S1] WATCHDOG gains +1 STR.`
 
-This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting CODE GATE 2's working list is:
+This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future PANOPTICON design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting CODE GATE 2's working list is:
 
 `[S1] PULP 3`
 `[S2] TRACE 3`

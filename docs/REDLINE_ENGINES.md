@@ -1,11 +1,11 @@
-# REDLINE — ENGINES (Phase 6 of the simplified redesign)
+# PANOPTICON — ENGINES (Phase 6 of the simplified redesign)
 **Version:** 0.1
 **Date:** 2026-11-13
 **Status:** **Mechanics APPROVED in principle 2026-11-13** (designer: "work on all 5 new mechanics. Approved"). **The details in this document (names, numbers, example cards) are PROPOSED working values** awaiting approval (decision record in §8). Builds on the approved Core Rules, Rustlers, Card Pools, ICE (NAME-001) and Uplink documents.
 
-**Why this phase:** research into Slay the Spire's Defect (doc: *Why Defect builds get replayed: lessons for REDLINE*) found that its most replayed builds share one engine with several ways to finish, one amplifier that upgrades the whole engine, and real "hold or cash out" decisions. REDLINE already has much of this spread thin (VECTOR's strains, Programs, Extractors, PROTOCOLS). This phase adds the five missing pieces.
+**Why this phase:** research into Slay the Spire's Defect (doc: *Why Defect builds get replayed: lessons for PANOPTICON*) found that its most replayed builds share one engine with several ways to finish, one amplifier that upgrades the whole engine, and real "hold or cash out" decisions. PANOPTICON already has much of this spread thin (VECTOR's strains, Programs, Extractors, PROTOCOLS). This phase adds the five missing pieces.
 
-**One REDLINE constraint shapes every rule here: ICE have no HP.** Engines can't "deal damage" to ICE. Their jobs are the game's real levers: **−STR**, **SHIELD**, **CRED**, **−TRACE** and **BW**.
+**One PANOPTICON constraint shapes every rule here: ICE have no HP.** Engines can't "deal damage" to ICE. Their jobs are the game's real levers: **−STR**, **SHIELD**, **CRED**, **−TRACE** and **BW**.
 
 > All numbers are **working values** for playtesting. Nothing here changes existing cards; new cards are examples for the Phase 3B-style pool work that follows.
 
@@ -34,7 +34,7 @@
 
 AMP can't go below 0. **Screen rule:** AMP appears on the HUD beside RAM once it's above 0; affected numbers on cards show their amplified value.
 
-**Why:** one card that upgrades the whole engine makes every reward screen tense (Defect's Focus). Because REDLINE's engines feed CRED, SHIELD and −STR rather than damage, AMP scales the economy and the defence, which the playtest must watch (CRED targets in UPL-008).
+**Why:** one card that upgrades the whole engine makes every reward screen tense (Defect's Focus). Because PANOPTICON's engines feed CRED, SHIELD and −STR rather than damage, AMP scales the economy and the defence, which the playtest must watch (CRED targets in UPL-008).
 
 **Example cards (pool work, working values):**
 
@@ -55,7 +55,7 @@ AMP can't go below 0. **Screen rule:** AMP appears on the HUD beside RAM once it
 - Many UNLOAD Programs store **CHARGE** while they run, and their UNLOAD effect scales with it. Holding grows the payoff; unloading frees the RAM now.
 - Unloading is still not allowed during the Corporation Response (your turn only).
 
-**Why:** Defect's best moments are "hold the Dark orb or fire it now". Today unloading a Program does nothing, so REDLINE has no cash-out decision. This adds one without new resources, and it pairs with FREE RAM cards (ENG-005): unloading frees RAM mid-turn.
+**Why:** Defect's best moments are "hold the Dark orb or fire it now". Today unloading a Program does nothing, so PANOPTICON has no cash-out decision. This adds one without new resources, and it pairs with FREE RAM cards (ENG-005): unloading frees RAM mid-turn.
 
 **Example cards:**
 
@@ -73,7 +73,7 @@ AMP can't go below 0. **Screen rule:** AMP appears on the HUD beside RAM once it
 
 > *"I don't hack the system. I schedule it."*
 
-**Playstyle:** CRON runs **PROCESSES**, small background jobs that work every turn on their own, then KILLs them for a burst at the right moment. Slow first turns, strong once the queue is full. CRON is REDLINE's version of Defect: the engine lives on the player, where PURGE can't touch it (VECTOR's lives on the ICE).
+**Playstyle:** CRON runs **PROCESSES**, small background jobs that work every turn on their own, then KILLs them for a burst at the right moment. Slow first turns, strong once the queue is full. CRON is PANOPTICON's version of Defect: the engine lives on the player, where PURGE can't touch it (VECTOR's lives on the ICE).
 
 ### 4.1 PROCESS rules
 1. **THREADS:** CRON has **3 THREADS** (slots), shown in a row beside the RACK. Maximum 6.
@@ -141,7 +141,7 @@ SHIELD from SANDBOX's RUN lands at the end of your turn, so it protects during t
 
 **Rule:** cards may refer to **FREE RAM** (§1) or to your **RAM being full** (FREE RAM 0). Both are checked when the effect resolves.
 
-**Why:** Defect's orb-slot count is a dial (few slots for fast Evokes, many for Frost). RAM can be REDLINE's dial: a few big Programs, or a full rig. With ENG-002, unloading a Program mid-turn changes FREE RAM, which creates combos.
+**Why:** Defect's orb-slot count is a dial (few slots for fast Evokes, many for Frost). RAM can be PANOPTICON's dial: a few big Programs, or a full rig. With ENG-002, unloading a Program mid-turn changes FREE RAM, which creates combos.
 
 **Example cards:**
 

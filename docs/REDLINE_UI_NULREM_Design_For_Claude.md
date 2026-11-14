@@ -1,10 +1,10 @@
-# REDLINE — UI, Interactions & NUL/REM Character Design
+# PANOPTICON — UI, Interactions & NUL/REM Character Design
 ## Claude implementation handoff · 2026-11-07
 
 **Scope:** Visual presentation, controls, selection screens, card readability, dialogue system and character writing. Engine combat rules and resource economy are specified separately in `REDLINE_ICEbreaker_Strength_Economy_Design_For_Claude.md`. Do not change combat rules to solve a rendering problem.
 
 ## 1. Visual identity — Atomic Salvage
-- REDLINE is the **working title**; no replacement title is approved.
+- **PANOPTICON** is the title (NAME-002, 2026-11-14); REDLINE was the previous iteration.
 - Interface resembles a salvaged 1950s atomic-age computer: chipped cream enamel, rusted metal, brass frames, Bakelite switches, amber pilot lamps, green phosphor CRTs, clearly visible scanlines and physical punch cards.
 - Corporate ICE is comparatively pristine, institutional and intimidating.
 - Header/logo concept: geometric atomic-age typography with an atomic-brain icon. ICE visual scale should be roughly 25% larger than the earlier baseline; verify layouts at target window sizes.

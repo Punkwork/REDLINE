@@ -1,4 +1,4 @@
-# REDLINE — CURRENT PROJECT STATUS
+# PANOPTICON — CURRENT PROJECT STATUS
 **As of:** 2026-11-09  
 **Purpose:** fast, reliable start-of-day briefing. Update at every session handoff.
 
@@ -14,7 +14,7 @@
 - **Still open for designer decision:** in-world VOID vs CORTEX; the CRON Rustler name; ENG-001 to ENG-005 details; NUL/REM's origin and the First Signal fragments; licensing of quoted lines.
 
 ## At a glance
-- **Project:** REDLINE, cyberpunk runner-versus-corporation card game with ICE and companion NUL/REM.
+- **Project:** PANOPTICON, cyberpunk runner-versus-corporation card game with ICE and companion NUL/REM.
 - **Production engine:** **Godot 4** (chosen).
 - **Gameplay reference:** Python/Pygame archive `REDLINE_Dead_Drop_Final_Playtest.zip` (previously identified; not inspected today).
 - **Design baseline:** `REDLINE_MASTER_DESIGN.md`.
@@ -58,7 +58,7 @@
 **P3 — Godot migration:** scope first playable vertical slice with rules parity.
 
 ## Handoff prompt for tomorrow
-> REDLINE: Start today's development session. Use `REDLINE_MASTER_DESIGN.md` as the authority, review `REDLINE_CURRENT_STATUS.md` and the latest `REDLINE_DEVELOPMENT_LOG.md` entry. First summarize yesterday's decisions, unresolved issues, and today's three priorities. Do not assume code exists merely because a feature is designed.
+> PANOPTICON: Start today's development session. Use `REDLINE_MASTER_DESIGN.md` as the authority, review `REDLINE_CURRENT_STATUS.md` and the latest `REDLINE_DEVELOPMENT_LOG.md` entry. First summarize yesterday's decisions, unresolved issues, and today's three priorities. Do not assume code exists merely because a feature is designed.
 
 ## Update discipline
 At session end: append a dated Development Log entry; update this Current Status; modify Master Design **only** for approved design changes, with decision IDs and statuses. Record test commands/results and changed filenames wherever possible.
@@ -67,7 +67,7 @@ At session end: append a dated Development Log entry; update this Current Status
 
 ## Design handoff — 2026-11-10: PANOPTICON
 
-**Preferred working title:** PANOPTICON; REDLINE remains the development/repository codename until intentional rename and availability checks.
+**Title:** PANOPTICON (NAME-002, 2026-11-14). REDLINE was the previous iteration; it remains only in file names, code paths and the repository name. Storefront/trademark availability is still to check.
 
 **Foundational thematic direction:** **What does humanity become when it knows it is being permanently observed and monitored?** Explore internalized observation, loss or transformation of privacy, behavioural self-regulation, diverse social adaptations, and the possibility that being unobserved becomes unsettling. Do not predetermine the answer.
 
@@ -92,7 +92,7 @@ At session end: append a dated Development Log entry; update this Current Status
 
 **Session boundary:** User requested stopping questions now and resuming tomorrow in a new chat. No code changes or tests were performed as part of this rule-design session. GitHub Master Design commit for RULE-096: `ce1bcbc341b03ca4662d223ba98d88ca34fd1593`. Earlier status and implementation-evidence matrix are not proof of current implementation; verify source separately.
 
-**Handoff prompt:** “Resume REDLINE design questions from RULE-097. Read the GitHub Master Design as authority; RULE-096 is the last locked rule. Ask one question at a time and commit each approved rule. Do not assume an unanswered proposal is locked.”
+**Handoff prompt:** “Resume PANOPTICON design questions from RULE-097. Read the GitHub Master Design as authority; RULE-096 is the last locked rule. Ask one question at a time and commit each approved rule. Do not assume an unanswered proposal is locked.”
 
 
 ## Design-rule update — 2026-11-11: RULE-097
@@ -751,7 +751,7 @@ The **leftmost supporting SIGYL 1** has exactly one subroutine, now printed in t
 
 `[S1] WATCHDOG gains +1 STR.`
 
-This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
+This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future PANOPTICON design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting SIGYL 2's working list is:
 
 `[S1] PULP 3`
 `[S2] TRACE 3`

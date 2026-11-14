@@ -1,4 +1,4 @@
-# REDLINE — RUSTLERS
+# PANOPTICON — RUSTLERS
 **Version:** 0.1 (Phase 2 of the simplified redesign)
 **Date:** 2026-11-12
 **Status:** **APPROVED 2026-11-12.** All eight Phase 2 decisions (RUSTLER-001 to RUSTLER-008) were approved by the designer (§9). Builds on `REDLINE_CORE_RULES.md` v0.2 (approved).
@@ -16,7 +16,7 @@
 | **RIOT** | Loud. Gets stronger at high TRACE, flirts with strikes | **SLEDGE** (FORTRESS) | SIGYL, VOID | **REDLINER** | ★★★ |
 | **VECTOR** | Viruses. Weakens every ICE over time | **STINGER** (VOID) | FORTRESS, SIGYL (until infected) | **PATIENT ZERO** | ★★☆ |
 
-**Shared starting stats:** 30 VITAE (Max 30), 4 BW, DRAW 5, 4 RAM, TRACE 0 of 40. Rustlers differ through their decks and ORIGIN Ghostware, not their base stats, so the core numbers stay easy to learn.
+**Shared starting stats:** 30 VITAE (Max 30), 4 BW, DRAW 6 (DRAW-001), 4 RAM, TRACE 0 of 40. Rustlers differ through their decks and ORIGIN Ghostware, not their base stats, so the core numbers stay easy to learn.
 
 **Fallback rule (from Core Rules §12):** every Rustler except the Generalist has one **fallback** card that can break a subroutine on **any** ICE type, at a cost that fits their style: BW for ECHO, TRACE for RIOT, virus setup for VECTOR.
 

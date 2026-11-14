@@ -1,4 +1,4 @@
-# REDLINE — ICE: FIRST CORPORATION
+# PANOPTICON — ICE: FIRST CORPORATION
 **Version:** 0.1.1 (Phase 3A of the simplified redesign)
 **Date:** 2026-11-12
 **Status:** **APPROVED 2026-11-12.** All eight Phase 3A decisions (ICE-001 to ICE-008) were approved by the designer (§10). Builds on `REDLINE_CORE_RULES.md` v0.2 and `REDLINE_RUSTLERS.md` v0.1. **v0.1.1:** tier rows and escape encounters updated to match the approved map structure (UPL-007).

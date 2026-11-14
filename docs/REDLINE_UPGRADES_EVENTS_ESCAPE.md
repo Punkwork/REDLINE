@@ -1,4 +1,4 @@
-# REDLINE — PATCHWORK, GHOSTWARE, EVENTS & ESCAPE ICE
+# PANOPTICON — PATCHWORK, GHOSTWARE, EVENTS & ESCAPE ICE
 **Version:** 0.1 (Phase 5 of the simplified redesign)
 **Date:** 2026-11-12
 **Status:** **APPROVED 2026-11-12.** All nine Phase 5 decisions (P5-001 to P5-009) were approved by the designer (§5). P5-010 (KILLSWITCH clarifications) added and approved 2026-11-13. Builds on the approved Core Rules, Rustlers, HALCYON ICE, Card Pools, and Uplink & CAPS documents.

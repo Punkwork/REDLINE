@@ -235,7 +235,7 @@ const STARTER_VECTOR := [
 	"PULP_SHIELD", "PULP_SHIELD", "BASIC_EXTRACTOR", "GHOST_SIGNAL",
 ]
 
-## RUSTLER-001..008 (REDLINE_RUSTLERS.md). Shared stats: 30 VITAE, 4 BW, DRAW 5, 4 RAM.
+## RUSTLER-001..008 (REDLINE_RUSTLERS.md). Shared stats: 30 VITAE, 4 BW, DRAW 6, 4 RAM.
 const RUSTLERS := {
 	"GENERALIST": {"name": "THE GENERALIST", "quote": "A bit of everything. Enough of nothing.", "difficulty": 1,
 		"style": "Balanced: an Icepick for every ICE type.", "origin": "READY RIG",

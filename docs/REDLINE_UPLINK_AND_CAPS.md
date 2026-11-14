@@ -1,4 +1,4 @@
-# REDLINE — BLACK MARKET UPLINK & CAPS
+# PANOPTICON — BLACK MARKET UPLINK & CAPS
 **Version:** 0.1 (Phase 4 of the simplified redesign)
 **Date:** 2026-11-12
 **Status:** **APPROVED 2026-11-12.** All seven Phase 4 decisions (UPL-001 to UPL-007) were approved by the designer (§6). Builds on the approved Core Rules, Rustlers, HALCYON ICE and Card Pools documents; UPL-003, UPL-006 and UPL-007 also amend the Core Rules.
