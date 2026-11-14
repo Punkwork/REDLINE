@@ -1025,3 +1025,9 @@ Installed Icepicks have a BOOST button in the rig (pay the boost cost for +STR; 
 ## TUNE-001 — Deadlier encounters (APPROVED, 2026-11-13)
 
 Encounters weren't deadly enough. Every ICE gets **+1 STR (OPENING)** or **+2 STR (T1 and Black ICE)**, and every ICE **PULP value is ×4/3, rounded up** (applied after the TUMBLER pools were set). Slice values: ACCEPT ALL 4, REJECT ALL 4, COOKIE WALL 5, TERMS OF SERVICE 7, CONSENT FORM 4, CAPTCHA 5, DOORBELL CAM 4, HOUSE CALL 7 (PULP 6). A simple bot that banks spare BW into boosts clears 9 of 30 seeded runs; all 21 deaths are at the final node (TERMS & CONDITIONS).
+
+## VOID-001 — VOID ICE reveal a subroutine each time one first fires (APPROVED, 2026-11-13)
+
+VOID ICE subroutines start face-down. The Corporation Response fires them progressively: response 1 fires subroutine 1 (revealed as it fires), response 2 fires subroutines 1 and 2 (2 revealed), and so on until all fire every response. A revealed subroutine stays revealed for the rest of the encounter. Face-down subroutines can't be broken (same rule as TUMBLERs); a broken one doesn't fire. The response preview shows a hidden firing as "? (hidden)" and adds it to the totals line as a hidden subroutine. Black ICE HOUSE CALL is VOID, so it also reveals one subroutine per response from the moment it joins.
+
+**Fix (same session):** `tools/export_nulrem.py` let a verse with no **Placement:** line (NR-002's "Possible placement (OPEN)") swallow the next verse, so NUL/REM could speak raw markdown and NR-009 was missing. Verses are now matched one at a time, and the exporter refuses any line containing markdown.

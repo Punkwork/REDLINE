@@ -14,7 +14,9 @@ BIBLE = ROOT / "docs" / "REDLINE_BIBLE.md"
 OUT = ROOT / "godot" / "data" / "nulrem_lines.json"
 
 VERSE = re.compile(
-    r"### VERSE (NR-\d+(?: v2)?) — ([^\n]*)\n\*\*Status:\*\* (\w+)(.*?)\n\n> “(.*?)”\n\n(\*\*Placement:\*\*[^\n]*)",
+    # Meta and line must stay inside one verse: a verse without a **Placement:** line
+    # (e.g. "Possible placement (OPEN)") must not swallow the next verse.
+    r"### VERSE (NR-\d+(?: v2)?) — ([^\n]*)\n\*\*Status:\*\* (\w+)((?:(?!### VERSE).)*?)\n\n> “([^”]*)”\n\n(\*\*Placement:\*\*[^\n]*)",
     re.S,
 )
 
@@ -66,6 +68,7 @@ def main() -> None:
         vid, title, status, meta, line, placement = m.groups()
         if status != "CANON":
             continue
+        assert "###" not in line and "**" not in line, vid
         trig = re.findall(r"EV-\d\d", placement)
         if not trig:
             continue

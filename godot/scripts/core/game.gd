@@ -195,7 +195,7 @@ func _new_ice(id: String) -> Dictionary:
 	for s in d.subs:
 		broken.append(false)
 		seen.append(false)
-	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "rainbow": -1}
+	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1}
 
 # =====================================================================
 # TUMBLER rotation (ROT-001): a conveyor window of `slots` over the subroutine pool.
@@ -206,6 +206,11 @@ func active_subs(i: int) -> Array:
 	var ice: Dictionary = enc.ice[i]
 	var d := IceDB.def(ice.id)
 	var out := []
+	if d.type == "VOID":
+		# VOID-001: response n fires subs 1..n; each is revealed when it first fires.
+		for s in mini(ice.responses + 1, d.subs.size()):
+			out.append(s)
+		return out
 	if not IceDB.is_tumbler(ice.id):
 		for s in d.subs.size():
 			out.append(s)
@@ -218,6 +223,7 @@ func is_active(i: int, s: int) -> bool:
 	return active_subs(i).has(s)
 
 func hidden_count(i: int) -> int:
+	## Face-down subroutines outside the slots (TUMBLER) or not yet fired (VOID, beyond this response).
 	var ice: Dictionary = enc.ice[i]
 	return IceDB.def(ice.id).subs.size() - active_subs(i).size()
 
@@ -230,6 +236,8 @@ func _rotate_tumblers() -> void:
 
 func _mark_seen() -> void:
 	for i in enc.ice.size():
+		if IceDB.def(enc.ice[i].id).type == "VOID":
+			continue   # VOID subroutines are revealed only when they fire
 		for s in active_subs(i):
 			enc.ice[i].seen[s] = true
 
@@ -482,7 +490,7 @@ func response_preview() -> Array:
 		var ice: Dictionary = enc.ice[i]
 		var d := IceDB.def(ice.id)
 		for s in active_subs(i):
-			steps.append({"ice": i, "sub": s, "name": d.name, "effects": d.subs[s], "skipped": ice.broken[s]})
+			steps.append({"ice": i, "sub": s, "name": d.name, "effects": d.subs[s], "skipped": ice.broken[s], "hidden": not ice.seen[s]})
 	return steps
 
 func _begin_response() -> void:
@@ -491,6 +499,12 @@ func _begin_response() -> void:
 	for st in response_preview():
 		if not st.skipped:
 			response_queue.append(st)
+	for i in enc.ice.size():
+		var ice: Dictionary = enc.ice[i]
+		if IceDB.def(ice.id).type == "VOID":
+			for s in active_subs(i):
+				ice.seen[s] = true
+			ice.responses += 1
 	_continue_response()
 
 func _continue_response() -> void:
@@ -586,7 +600,7 @@ func break_info(i: int, s: int) -> Dictionary:
 	var d := IceDB.def(ice.id)
 	if ice.broken[s]:
 		return {"ok": false, "reason": "BROKEN"}
-	if not is_active(i, s):
+	if not is_active(i, s) or not ice.seen[s]:
 		return {"ok": false, "reason": "HIDDEN"}
 	if d.get("ability", "") == "BOOTING" and _has_deadlock(d.subs[s]) and enc.turn < 3:
 		return {"ok": false, "reason": "LOCKED until turn 3"}

@@ -54,6 +54,16 @@ func _process(_d: float) -> bool:
 			main._show_inspect(g.installed[0].inst.id if not g.installed.is_empty() else "")
 		5:
 			_snap("06_inspect")
+			g.new_run()
+			g.entered_corp = true
+			g.row = 1
+			g.available = [1]
+			g.enter_node(1)
+			if g.phase == "READY_RIG":
+				g.skip_ready_rig()
+			main.refresh()
+		6:
+			_snap("07_void")
 			return true
 	step += 1
 	return false

@@ -41,6 +41,7 @@ func _init() -> void:
 	test_trace_strikes()
 	test_captcha_discard()
 	test_boost_installed()
+	test_void_reveal()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -161,6 +162,27 @@ func test_boost_installed() -> void:
 	if g.phase == "CHOICE":
 		g.choose(g.hand[0].uid)
 	check(g.pick_str(p) == 4, "boost lasts the encounter")
+
+func test_void_reveal() -> void:
+	var g := Game.new(12)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, 2, 1, "VOID_ICEPICK")   # DOORBELL CAM: [TRACE 3 + DEADLOCK]
+	check(g.break_info(0, 0).reason == "HIDDEN", "VOID sub hidden on turn 1")
+	var pv := g.response_preview()
+	check(pv.size() == 1 and pv[0].hidden, "it still fires, unseen")
+	g.end_turn()
+	check(g.trace == 3 and g.enc.ice[0].seen[0], "fired and revealed (trace %d)" % g.trace)
+	check(g.break_info(0, 0).reason != "HIDDEN", "revealed sub breakable on turn 2 (BW permitting)")
+	# HOUSE CALL (VOID, 2 subs): response 1 fires sub 1, response 2 fires subs 1 and 2
+	var h := g._new_ice("HOUSE_CALL")
+	g.enc.ice.push_front(h)
+	check(g.active_subs(0) == [0], "black VOID: only sub 1 fires first")
+	g.break_sub(1, 0)
+	var v0 := g.vitae
+	g.end_turn()
+	check(g.vitae == v0 - 6 and h.seen[0] and not h.seen[1], "HOUSE CALL sub 1 fired and revealed (vitae %d)" % g.vitae)
+	check(g.active_subs(0) == [0, 1], "then subs 1 and 2")
 
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)

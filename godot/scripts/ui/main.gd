@@ -523,15 +523,21 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	var tumbler := IceDB.is_tumbler(ice.id)
 	for k in act.size():
 		var s: int = act[k]
+		if not ice.seen[s]:
+			var fh := HBoxContainer.new()
+			fh.add_child(_lbl("[S%d]" % (s + 1), 12, DIM))
+			fh.add_child(RIcon.make("HIDDEN", 20, RIcon.COL.VOID))
+			fh.add_child(_lbl("  ? fires this turn · revealed when it fires", 12, RIcon.COL.VOID))
+			v.add_child(fh)
+			continue
 		v.add_child(_sub_row(i, s, d.subs[s], ice.broken[s], ("SLOT %d" % (k + 1)) if tumbler else ("[S%d]" % (s + 1))))
-	if tumbler:
-		var hid := g.hidden_count(i)
-		if hid > 0:
-			var hh := HBoxContainer.new()
-			for n in hid:
-				hh.add_child(RIcon.make("HIDDEN", 20, DIM))
-			hh.add_child(_lbl("  %d hidden · rotates 1 step each turn" % hid, 12, DIM))
-			v.add_child(hh)
+	var hid := g.hidden_count(i)
+	if hid > 0:
+		var hh := HBoxContainer.new()
+		for n in hid:
+			hh.add_child(RIcon.make("HIDDEN", 20, DIM))
+		hh.add_child(_lbl("  %d hidden · %s" % [hid, "rotates 1 step each turn" if tumbler else "one more fires each turn"], 12, DIM))
+		v.add_child(hh)
 	if d.has("ability_text"):
 		var ah := HBoxContainer.new()
 		ah.add_child(RIcon.make("CLOAK" if d.ability == "CLOAK_TRACE" else "TRACE", 16))
@@ -616,8 +622,14 @@ func _build_preview() -> void:
 	var tr := 0
 	var ghost: bool = g.enc.ghost
 	var proxy := g._rack_count("PROXY_CHAIN")
+	var unknown := 0
 	for st in g.response_preview():
 		var txt := []
+		if st.hidden and not st.skipped:
+			unknown += 1
+			preview.add_child(_lbl("%s %s ? (hidden)" % [_circled(n), st.name], 12, RIcon.COL.VOID))
+			n += 1
+			continue
 		for e in st.effects:
 			txt.append(_effect_word(e))
 			if not st.skipped:
@@ -644,6 +656,8 @@ func _build_preview() -> void:
 		parts.append("PULP %d → SHIELD absorbs %d, VITAE −%d" % [pulp, absorbed, pulp - absorbed])
 	if tr + tracer > 0:
 		parts.append("TRACE +%d → %d / 40" % [tr + tracer, min(40, g.trace + tr + tracer)])
+	if unknown > 0:
+		parts.append("+ %d hidden subroutine%s" % [unknown, "" if unknown == 1 else "s"])
 	preview_total.text = "If you end turn: " + ("  ·  ".join(parts) if not parts.is_empty() else "no damage, no TRACE")
 
 func _effect_word(e: Dictionary) -> String:
