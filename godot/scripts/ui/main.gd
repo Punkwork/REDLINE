@@ -35,6 +35,12 @@ var nr_text: Label
 var nr_mode: Label
 var overlay: Control
 var inspect: CenterContainer
+## PLAY-001: the Corporation Response plays one subroutine at a time over at least 5 seconds.
+const RESPONSE_MIN_SECONDS := 5.0
+var responding := false
+var flash := {}        # {ref, sub} of the subroutine firing now
+var fired: Array = []  # [{ref, sub}] already fired this response
+var resp_total := 0
 var tween: Tween
 
 # =====================================================================
@@ -46,6 +52,7 @@ func _ready() -> void:
 	_load_flags()
 	nr = NulRem.new()
 	g = Game.new()
+	g.animate = true
 	_build_layout()
 	_new_run()
 
@@ -188,6 +195,7 @@ func _build_layout() -> void:
 
 func _new_run() -> void:
 	g = Game.new()
+	g.animate = true
 	g.new_run()
 	if first_run:
 		g.events.append({"t": "EV-02"})
@@ -224,9 +232,50 @@ func _input(event: InputEvent) -> void:
 		refresh()
 
 func _on_end_turn() -> void:
+	if responding:
+		return
 	targeting = -1
 	g.end_turn()
 	refresh()
+	if g.phase == "RESPONSE":
+		_play_response()
+
+func _play_response() -> void:
+	responding = true
+	fired = []
+	flash = {}
+	resp_total = g.response_queue.size()
+	var gap: float = RESPONSE_MIN_SECONDS / float(resp_total + 1)
+	refresh()
+	await get_tree().create_timer(gap * 0.6).timeout
+	while not g.response_queue.is_empty() and g.phase == "RESPONSE":
+		var st: Dictionary = g.response_queue[0]
+		flash = {"ref": st.ref, "sub": st.sub}
+		g.response_step()        # values change only now, as it flashes
+		refresh()
+		await get_tree().create_timer(gap).timeout
+		fired.append(flash)
+	flash = {}
+	await get_tree().create_timer(gap * 0.4).timeout
+	g.response_finish()
+	responding = false
+	fired = []
+	refresh()
+
+func _is_flash(ice: Dictionary, s: int) -> bool:
+	return not flash.is_empty() and is_same(flash.ref, ice) and flash.sub == s
+
+func _was_fired(ice: Dictionary, s: int) -> bool:
+	for f in fired:
+		if is_same(f.ref, ice) and f.sub == s:
+			return true
+	return false
+
+func _pulse(c: Control) -> void:
+	c.modulate = Color(1.8, 1.8, 1.8)
+	var tw := c.create_tween().set_loops(3)
+	tw.tween_property(c, "modulate", Color(1, 1, 1), 0.14)
+	tw.tween_property(c, "modulate", Color(1.8, 1.8, 1.8), 0.14)
 
 func _on_card(uid: int) -> void:
 	if g.phase != "PLAYER":
@@ -530,7 +579,22 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			fh.add_child(_lbl("  ? fires this turn · revealed when it fires", 12, RIcon.COL.VOID))
 			v.add_child(fh)
 			continue
-		v.add_child(_sub_row(i, s, d.subs[s], ice.broken[s], ("SLOT %d" % (k + 1)) if tumbler else ("[S%d]" % (s + 1))))
+		var srow := _sub_row(i, s, d.subs[s], ice.broken[s], ("SLOT %d" % (k + 1)) if tumbler else ("[S%d]" % (s + 1)))
+		if _is_flash(ice, s):
+			var fp := PanelContainer.new()
+			var fsb := StyleBoxFlat.new()
+			fsb.bg_color = Color(1, 0.3, 0.35, 0.22)
+			fsb.border_color = Color("#ff4d5e")
+			fsb.set_border_width_all(2)
+			fsb.set_corner_radius_all(4)
+			fp.add_theme_stylebox_override("panel", fsb)
+			fp.add_child(srow)
+			v.add_child(fp)
+			_pulse(fp)
+			continue
+		if _was_fired(ice, s):
+			srow.modulate = Color(1, 1, 1, 0.55)
+		v.add_child(srow)
 	var hid := g.hidden_count(i)
 	if hid > 0:
 		var hh := HBoxContainer.new()
@@ -641,7 +705,10 @@ func _build_preview() -> void:
 						ghost = false
 						t = 0
 					tr += max(0, t - proxy)
-		var l := _lbl("%s %s %s" % [_circled(n), st.name, " + ".join(txt)], 12, DIM if st.skipped else TEXT)
+		var sref: Dictionary = g.enc.ice[st.ice]
+		var now := _is_flash(sref, st.sub)
+		var done := _was_fired(sref, st.sub)
+		var l := _lbl("%s%s %s %s" % ["▶ " if now else "", _circled(n), st.name, " + ".join(txt)], 13 if now else 12, Color("#ff4d5e") if now else (DIM if st.skipped or done else TEXT))
 		if st.skipped:
 			l.text += " (skipped)"
 		preview.add_child(l)
@@ -659,6 +726,8 @@ func _build_preview() -> void:
 	if unknown > 0:
 		parts.append("+ %d hidden subroutine%s" % [unknown, "" if unknown == 1 else "s"])
 	preview_total.text = "If you end turn: " + ("  ·  ".join(parts) if not parts.is_empty() else "no damage, no TRACE")
+	if responding:
+		preview_total.text = "Resolving %d of %d…" % [fired.size() + (0 if flash.is_empty() else 1), resp_total]
 
 func _effect_word(e: Dictionary) -> String:
 	match e.k:

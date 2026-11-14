@@ -4,6 +4,7 @@ extends SceneTree
 var main: Node
 var step := 0
 var frames := 0
+var flashes := 0
 
 func _initialize() -> void:
 	main = load("res://scenes/Main.tscn").instantiate()
@@ -16,7 +17,7 @@ func _snap(name: String) -> void:
 
 func _process(_d: float) -> bool:
 	frames += 1
-	if frames < 30:
+	if frames < (12 if step == 4 else 30):
 		return false
 	frames = 0
 	var g = main.g
@@ -43,10 +44,14 @@ func _process(_d: float) -> bool:
 			main.refresh()
 		3:
 			_snap("04_after_install")
-			g.end_turn()
-			main.refresh()
+			main._on_end_turn()
+			frames = 0
 		4:
-			_snap("05_after_response")
+			if g.phase == "RESPONSE":
+				flashes += 1
+				_snap("05_response_%d" % flashes)
+				return false
+			_snap("05b_after_response")
 			if g.phase == "CHOICE":
 				g.choose(g.hand[0].uid)
 			main._show_inspect(g.installed[0].inst.id if not g.installed.is_empty() else "")

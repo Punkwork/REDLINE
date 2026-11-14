@@ -52,6 +52,7 @@ var reward_note := ""
 # --- choices and the response queue ---
 var pending: Dictionary = {}  # {kind, ...}
 var response_queue: Array = []
+var animate := false          # UI plays the Corporation Response step by step (PLAY-001)
 
 # --- output for UI and NUL/REM ---
 var events: Array = []        # [{t: "EV-07", ...}]
@@ -496,26 +497,41 @@ func response_preview() -> Array:
 func _begin_response() -> void:
 	phase = "RESPONSE"
 	response_queue = []
+	enc["resp_void"] = []
 	for st in response_preview():
+		var ice: Dictionary = enc.ice[st.ice]
+		st["ref"] = ice
 		if not st.skipped:
 			response_queue.append(st)
-	for i in enc.ice.size():
-		var ice: Dictionary = enc.ice[i]
-		if IceDB.def(ice.id).type == "VOID":
-			for s in active_subs(i):
-				ice.seen[s] = true
-			ice.responses += 1
-	_continue_response()
+		if IceDB.def(ice.id).type == "VOID" and not enc.resp_void.has(ice):
+			enc.resp_void.append(ice)
+	if not animate:
+		_continue_response()
 
 func _continue_response() -> void:
 	while not response_queue.is_empty():
-		var st: Dictionary = response_queue.pop_front()
-		for e in st.effects:
-			_apply_effect(e)
-			if phase == "DEAD":
-				return
-			if not pending.is_empty():
-				return
+		response_step()
+		if phase == "DEAD":
+			return
+	response_finish()
+
+func response_step() -> Dictionary:
+	## PLAY-001: resolve one subroutine. The UI calls this once per flash so values change only as each fires.
+	if response_queue.is_empty():
+		return {}
+	var st: Dictionary = response_queue.pop_front()
+	st.ref.seen[st.sub] = true   # VOID: revealed as it fires
+	for e in st.effects:
+		_apply_effect(e)
+		if phase == "DEAD":
+			break
+	return st
+
+func response_finish() -> void:
+	if phase == "DEAD":
+		return
+	for ice in enc.get("resp_void", []):
+		ice.responses += 1
 	enc.ghost = false
 	_cleanup()
 	if phase == "DEAD":
@@ -642,16 +658,14 @@ func break_info(i: int, s: int) -> Dictionary:
 
 func can_boost(uid: int) -> Dictionary:
 	## FIX-002: boost an installed Icepick by hand. Boosts last until the encounter ends.
-	if phase != "PLAYER":
-		return {"ok": false, "cost": 0}
 	var p := _installed_entry(uid)
 	if p.is_empty() or not CardDB.def(p.inst.id).has("pick"):
-		return {"ok": false, "cost": 0}
+		return {"ok": false, "cost": 0, "amt": 0}
 	var pk: Dictionary = CardDB.def(p.inst.id).pick
 	var cost: int = pk.boost_cost
-	if _rack_has("TOOLBELT") and not enc.toolbelt_used:
+	if _rack_has("TOOLBELT") and not enc.get("toolbelt_used", true):
 		cost = 0
-	return {"ok": bw >= cost, "cost": cost, "amt": pk.boost_amt}
+	return {"ok": phase == "PLAYER" and bw >= cost, "cost": cost, "amt": pk.boost_amt}
 
 func boost_pick(uid: int) -> bool:
 	var chk := can_boost(uid)
