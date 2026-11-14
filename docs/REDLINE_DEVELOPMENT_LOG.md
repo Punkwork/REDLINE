@@ -1053,3 +1053,12 @@ Every NUL/REM line is spoken as it types out. Designer chose, from samples: a cl
 - **Visuals:** a cyan DETAINER tag after the type; the −1 BW chip uses the BW colour and icon ("−1 BW next turn"); the response preview adds "BW −1 next turn"; on the drained turn the HUD shows "−1 DETAINED" beside the BW pips.
 - **Slice:** ACCEPT ALL (COOKIE BANNER, the node every run passes through) is the DETAINER. Pool: −1 BW, SPAM, PULP 3 in 1 slot. It is 1 of the slice's 4 TUMBLERs.
 - With the DETAINER, a simple bot clears 13 of 30 seeded runs (all deaths still at TERMS & CONDITIONS).
+
+## PULP-001 — FORTRESSES carry PULP, with varied values (APPROVED, 2026-11-13)
+
+Playtest: the slice had about half the PULP subroutines the designer expected, and too few real decisions ("the player did what they could, not what they should"). FORTRESSES now carry PULP, with values that differ from ICE to ICE (working range 1–5, fixed per subroutine so the Rustler can plan):
+- **COOKIE WALL** (STR 5): [S1] PULP 2 · [S2] TRACE 2 · [S3] DEADLOCK
+- **TERMS OF SERVICE** (STR 7): [S1] PULP 5 · [S2] INSERT 1 SPAM → discard pile · [S3] DEADLOCK
+- **AUTO-RENEW** (new FORTRESS, T1, STR 4): [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK — escalating, like a subscription that creeps up. Joins CAPTCHA as the support ICE in the row-2 CAPTCHA node.
+- Non-Black PULP subroutines in the slice: 4 → 9. A simple bot clears 12 of 30 seeded runs, and deaths now spread across the route (TERMS & CONDITIONS 15, CAPTCHA 2, DOORBELL 1); survivors finish with 5–28 VITAE.
+- **Assumption to confirm:** values are fixed per subroutine, not rolled each time.

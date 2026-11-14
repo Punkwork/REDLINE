@@ -63,9 +63,9 @@ func _process(_d: float) -> bool:
 			_snap("06_inspect")
 			g.new_run()
 			g.entered_corp = true
-			g.row = 1
-			g.available = [1]
-			g.enter_node(1)
+			g.row = 0
+			g.available = [0]
+			g.enter_node(0)
 			if g.phase == "READY_RIG":
 				g.skip_ready_rig()
 			main.refresh()

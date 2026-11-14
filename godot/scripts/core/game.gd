@@ -70,6 +70,7 @@ func _init(seed_value: int = -1) -> void:
 
 func new_run() -> void:
 	run_deck.clear()
+	log.clear()
 	for id in CardDB.STARTER_GENERALIST:
 		run_deck.append(_new_inst(id))
 	vitae = START_VITAE

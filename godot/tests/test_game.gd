@@ -148,8 +148,8 @@ func test_captcha_discard() -> void:
 	check(g.hand.size() == 5 and g.enc.turn == 2, "the new hand is drawn first")
 	g.choose(g.hand[0].uid)
 	check(g.phase == "PLAYER" and g.hand.size() == 4, "discard 1, then play")
-	check(g.vitae == 30, "no PULP on turn 1 (PULP 6 was hidden)")
-	check(g.is_active(0, 2), "PULP 4 rotated into a slot")
+	check(g.vitae == 24, "AUTO-RENEW PULP 1+2+3 hit on turn 1 (vitae %d); CAPTCHA's PULP 6 was hidden" % g.vitae)
+	check(g.is_active(1, 2), "PULP rotated into a slot")
 
 func test_boost_installed() -> void:
 	var g := Game.new(11)
@@ -264,8 +264,8 @@ func test_go_deeper_keeps_programs() -> void:
 	g.entered_corp = true
 	start_node(g, 1, 1, "FORTRESS_ICEPICK")   # COOKIE WALL (FORTRESS 3) then CONSENT FORM
 	# FORTRESS Icepick STR 1 vs COOKIE WALL STR 5 → 4 boosts (4 BW) + free first break
-	check(g.break_info(0, 1).cost == 4, "COOKIE WALL DEADLOCK costs 4 BW")
-	g.break_sub(0, 1)
+	check(g.break_info(0, 2).cost == 4, "COOKIE WALL DEADLOCK costs 4 BW")
+	g.break_sub(0, 2)
 	check(g.enc.breached, "COOKIE WALL breached")
 	g.end_turn()
 	check(g.phase == "DEEPER", "go deeper or leave")
