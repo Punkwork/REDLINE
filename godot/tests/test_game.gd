@@ -407,11 +407,23 @@ func test_worm() -> void:
 	g.infect(0, "WORM", 1)
 	check(not g.worm_ok(0), "1 WORM isn't enough")
 	g.infect(0, "WORM", 2)
+	var bw0: int = g.bw
+	g.installed.clear()   # no Icepick in the rig
 	check(g.worm_ok(0) and g.use_worm(0) and g.phase == "CHOICE", "spend 2 WORM: choose a subroutine")
 	check(g.enc.ice[0].virus.WORM == 1, "2 WORM removed")
 	check(g.card_break_ok(0, 3) and not g.card_break_ok(1, 0) if g.enc.ice.size() > 1 else g.card_break_ok(0, 3), "only subroutines on that ICE")
 	g.choose_sub(0, 3)
 	check(g.enc.breached and g.phase == "PLAYER", "WORM breaks the chosen DEADLOCK")
+	g.infect(0, "WORM", 2)
+	var bw1: int = g.bw
+	check(bw1 == bw0, "WORM costs no BW, even on a TOLL ICE")
+	g.enc.ice[0].broken[0] = false
+	check(g.worm_ok(0) and g.use_worm(0), "no Icepick and no STR needed (STR 5 ICE)")
+	g.choose_sub(0, 0)
+	check(g.bw == bw0 and g.enc.ice[0].broken[0], "TOLL subroutine broken for 0 BW")
+	g.infect(0, "WORM", 2)
+	g.phase = "RESPONSE"
+	check(not g.worm_ok(0), "WORM can't be used outside your turn")
 
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
