@@ -119,3 +119,12 @@ These are examples, not instructions to repeat them every encounter. Preserve wi
 
 ## 10. Implementation status and separation of concerns
 These are **approved design requirements and proposed content**, not claims that the current ZIP implements them. UI should read combat eligibility, resources and state from the engine; the engine owns subroutine resolution, discard logic, Trace, draw taxes and advancement. Do not duplicate combat rules in rendering code. For complete mechanics and test matrices consult the companion ICEbreaker document.
+
+## Playtest build additions (2026-11-14)
+
+- **TUMBLER reels (REEL-001):** each TUMBLER slot is a slot-machine window (dark recessed frame, shaded top and bottom edges). On rotation each slot rolls downward through the previous subroutine and a blur of random icons (revealing nothing hidden), slows, overshoots slightly and clunks into place with a flash. Slots stop one after another (0.95 s, then +0.5 s per later slot); input is held until all have stopped.
+- **Slot labels** name the subroutine in the slot: "SLOT 2 · S1".
+- **PULP curve chips (PULP-002):** "PULP 9 · HAMMER" or "PULP 3 · SEQUENTIAL" (this turn's value); "PULP ? · RANDOM" for curve B, with "+ random PULP (1–6)" added to the response preview. Hovering a curve chip shows its sequence.
+- **END RUN (RUN-001):** red button bottom right; confirmation "END THIS RUN?" — YES, END THE RUN / KEEP PLAYING. Yes: the Rustler fails, NUL/REM's run-lost line plays, then the start menu (Rustler choice).
+- **CRED meter (UI-002):** gold bar "left / total CRED" for the encounter's reserve; 0 shows in red.
+

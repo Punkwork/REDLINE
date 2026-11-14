@@ -4,7 +4,15 @@
 
 > **NAME-001 (2026-11-13):** ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules). Terms in this document were updated to match; rule and decision IDs keep their original names (e.g. TRAINING-THREE-ICE-SENTRY-001). See `REDLINE_CORE_RULES.md` (NAME-001).
 
-## Session handoff — 2026-11-13 (latest)
+## Session handoff — 2026-11-14 (latest)
+
+- **Game name:** PANOPTICON (NAME-002); REDLINE survives only in file names, code paths and the repo name.
+- **Playtest build:** `PANOPTICON_HALCYON_slice` (Godot 4.3, Windows): all four Rustlers, DRAW 6, TUMBLER reels, PULP curves, passives and subtypes, corporation PURGE, END RUN, NUL/REM voiced (VOICE-001).
+- **Rustler balance (30-run bot, DRAW 6 + PULP curves):** GENERALIST 10 / 30, ECHO 6, VECTOR 2, RIOT 1. The bot plays every card it can, so DRAW 6 numbers are pessimistic, especially for RIOT and VECTOR.
+- **Open for the designer:** REJECT ALL's two DEADLOCKs (show the DEADLOCK total on TUMBLERs? one DEADLOCK on REJECT ALL?); the ICE Rules Bible audit; WORM copy vs move; reward-card refinement; syncing the Panopticon project's doc copies; writing the 2026-11-13/14 rules into Core Rules sections.
+- **Next session focus (designer):** playtest the PANOPTICON slice, then refine reward cards.
+
+## Session handoff — 2026-11-13
 **Next session focus (designer):** playtest the **Godot 4.3 HALCYON slice** (BUILD-002), then extend it with CAPS, Uplinks and PATCHWORK.
 
 - **Rules authority:** `REDLINE_CORE_RULES.md` (simplified redesign, NAME-001, UPL-009), with the ICE, card-pool, Rustler, Uplink/CAPS, upgrades/escape and engines docs in `docs/`. Older conflicting Master Design entries are superseded (Core Rules §15).

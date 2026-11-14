@@ -94,7 +94,25 @@ Both are removed at the end of the Node, as with all Bloatware.
 
 ## 5. HALCYON ICE roster
 
-### Tier 1 (rows 2–5)
+### 5.0 Current playtest values (Godot slice, 2026-11-14)
+
+These supersede the Tier 1 table below and the Opening Node ICE (§8.4) **for the playtest slice**. Changes since the original roster: SIGYL → TUMBLER with rotating slots (ROT-001), DETAINER (DET-001), STR +1/+2 and PULP ×4/3 (TUNE-001), FORTRESSES carry the PULP (PULP-001), PULP curves (PULP-002), subtypes and passives (PASSIVE-001). AUTO-RENEW is new.
+
+| ICE | Type · subtype | STR | Subroutines | Passive / ability |
+|---|---|---|---|---|
+| **ACCEPT ALL** *(Opening, support)* | TUMBLER · DETAINER | 4 | 1 slot of 3: −1 BW next turn · INSERT 1 SPAM → draw pile · PULP 3 | — |
+| **REJECT ALL** *(Opening, main)* | TUMBLER | 4 | 2 slots of 4: DEADLOCK · TRACE 3 · DEADLOCK · PULP 4 | BOOTING |
+| **COOKIE WALL** | FORTRESS · TOLLHOUSE | 5 | [S1] PULP 2 · [S2] TRACE 2 · [S3] PULP curve B (random) · [S4] DEADLOCK | TOLL |
+| **TERMS OF SERVICE** | FORTRESS · VAULT | 7 | [S1] PULP 5 · [S2] INSERT 1 SPAM → discard pile · [S3] PULP curve C (hammer) · [S4] DEADLOCK | SEQUENCED |
+| **AUTO-RENEW** *(new)* | FORTRESS · RATCHET | 4 | [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK | HARDENING |
+| **CONSENT FORM** | TUMBLER · SWITCHBOARD | 4 | 2 slots of 4: TRACE 2 · DEADLOCK · PULP 4 · DEADLOCK | RELAY |
+| **CAPTCHA** | TUMBLER · SNARE | 5 | 2 slots of 5: DISCARD 1 (next turn) · DEADLOCK · PULP 6 · DEADLOCK · TRACE 3 | TRIPWIRE |
+| **DOORBELL CAM** | VOID · WATCHER | 4 | [S1] TRACE 3 + DEADLOCK (face-down until it fires) | WATCHER (CLOAK card → TRACE 1) |
+| **HOUSE CALL** *(Black ICE)* | VOID | 7 | [S1] PULP 6 · [S2] PULP 6 (revealed as they fire) | — |
+
+**Slice route:** COOKIE BANNER (ACCEPT ALL + REJECT ALL) → CAPTCHA (AUTO-RENEW + CAPTCHA) or CONSENT WALL (COOKIE WALL, then CONSENT FORM) → SAFEHOUSE or DOORBELL (DOORBELL CAM, then CONSENT FORM + TERMS OF SERVICE) → TERMS & CONDITIONS (TERMS OF SERVICE, then CAPTCHA + DOORBELL CAM). The ICE Rules Bible audit (DOORBELL CAM not deadly, CAPTCHA's VOID-sized PULP 6, AUTO-RENEW's low STR) is not yet applied.
+
+### Tier 1 (rows 2–5) — original roster
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|

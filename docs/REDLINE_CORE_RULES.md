@@ -115,6 +115,7 @@ WHITE PICKET FENCE — FORTRESS — STR 3
 | Effect | What happens |
 |---|---|
 | **PULP X** | Take X damage (SHIELD first, then VITAE). |
+| **PULP (curve)** | *(PULP-002)* Take the next value of the subroutine's PULP curve (SHIELD first, then VITAE). The curve moves one step each Corporation Response the ICE goes through (a PURGE or BLACKOUT turn doesn't count) and loops after 9. **A · SEQUENTIAL:** 2, 3, 4, 2, 3, 4, 2, 3, 4 (27). **B · RANDOM:** 5, 3, 2, 6, 2, 3, 6, 2, 1 in a random order for each ICE (30); the ICE card shows "PULP ?". **C · HAMMER:** 4, 3, 4, 9, 3, 4, 3, 8, 2 (40). SCRAMBLE lowers it like any PULP. |
 | **CORTEX X** | Gain X CORTEX counters (§6). |
 | **TRACE X** | Add X to your TRACE meter (§7). |
 | **DEADLOCK** | Blocks BREACH while unbroken. Does nothing on its own. |
@@ -415,3 +416,13 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 | ID | Change to this document |
 |---|---|
 | UPL-009 | **JACK OUT works during the escape** (§8.2, §10.3). The "not during an escape" limit added by UPL-007 is removed as unnecessary. Its other limits still apply, so it can't be used in escape encounter 3 while the Black ICE (HOUSE CALL, LETHAL FORCE, EGO DEATH) has an unbroken subroutine. — **APPROVED 2026-11-13** |
+
+### Later amendments (2026-11-14)
+
+| ID | Change to this document |
+|---|---|
+| DRAW-001 | **DRAW is 6** (was 5), still reduced by CORTEX (§2). With 4 BW, choosing what *not* to play becomes a decision every turn. — **APPROVED 2026-11-14** |
+| PULP-002 | **PULP curves** (§5.2): a subroutine can deal a sequence of PULP values instead of a fixed number (A sequential, B random, C hammer). — **APPROVED 2026-11-14** |
+| RUN-001 | **END RUN:** the player may end the run at any time outside the Corporation Response (with a confirmation). The Rustler fails and the game returns to the start menu. — **APPROVED 2026-11-14** |
+
+*Rules decided on 2026-11-13/14 and recorded in the development log but not yet written into this document's sections: TUMBLER rotation (ROT-001), DISCARD timing (FIX-001), Icepick boosts lasting the encounter (FIX-002), DETAINER (DET-001), VOID reveal (VOID-001), passive abilities and subtypes (PASSIVE-001), the corporation PURGE (PURGE-001).*
