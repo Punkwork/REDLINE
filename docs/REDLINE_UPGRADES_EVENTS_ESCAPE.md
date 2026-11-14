@@ -112,7 +112,7 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 | **SCRAMBLED ID** | The first TRACE strike in each corporation has no penalty (TRACE still drops to 20). |
 | **BLACK MIRROR** *(drawback)* | **+1 BW every turn.** ⚠ Start each corporation at **10 TRACE**. |
 | **BLEEDING EDGE** *(drawback)* | **+1 DRAW every turn.** ⚠ **−8 Max VITAE.** |
-| **BURNOUT CHIP** *(drawback)* | **Your Icepicks have +2 STR.** ⚠ Whenever you take PULP damage, take 1 more. |
+| **BURNOUT CHIP** *(drawback)* | **Your Icepicks have +2 STR.** ⚠ Whenever you take PULP damage, take 2 more. *(GHOST-011: was 1 more.)* |
 | **KILLSWITCH** | Once per Node, if **damage** would drop your VITAE to 0, it drops to 1 instead. *(Full rules: §2.2a.)* |
 | **COLD STORAGE** | CACHED cards cost 1 less BW. |
 | **RECYCLER** | Whenever a card is BURNED, gain 1 BW (once per turn). |

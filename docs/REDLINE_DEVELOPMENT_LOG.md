@@ -1167,3 +1167,7 @@ GHOST SIGNAL is a shared basic, so it returns to ECHO's starter deck and leaves 
 ## ECHO-004 — HUSH starts at STR 0 (APPROVED, 2026-11-14)
 
 HUSH: STR 1 → **0** (boost 2 BW → +1 STR, break 1 BW unchanged). 30-run bot test, ECHO: **14 / 30** cleared (20 at STR 1); deaths CAPTCHA 8, DOORBELL 5, TERMS & CONDITIONS 3; survivors' average end VITAE 16.4. Against STR 4–5 TUMBLERs, HUSH now needs 8–10 BW of boosts before its first break, which puts ECHO level with VECTOR (12) and the Generalist (10), matching its 2-star difficulty.
+
+## GHOST-011 — BURNOUT CHIP's drawback doubled (APPROVED, 2026-11-14)
+
+BURNOUT CHIP (general Ghostware, drawback): Icepicks +2 STR for the run; **whenever you take PULP damage, take 2 more** (was 1 more). `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.2 updated. Not yet in the slice (Ghostware isn't built).
