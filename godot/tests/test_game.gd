@@ -46,6 +46,7 @@ func _init() -> void:
 	test_passives()
 	test_rustlers()
 	test_purge()
+	test_shatter()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -332,6 +333,27 @@ func test_purge() -> void:
 		g.choose(g.hand[0].uid)
 	check(g.enc.ice[0].virus.get("ROT", 0) == 2, "INCUBATOR: 2 ROT after the purge")
 
+func test_shatter() -> void:
+	var g := Game.new(41)
+	g.new_run("RIOT")
+	check(g.run_deck.size() == 15, "RIOT-002: 15-card deck")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")   # COOKIE WALL (FORTRESS STR 5), layer 1
+	var sh := put_in_hand(g, "SHATTER")
+	g.bw = 10
+	check(not g.can_play(sh).ok, "SHATTER needs an Icepick break on an ICE above STR 2 first")
+	install(g, "SLEDGE")
+	g.bw = 10
+	g.break_sub(0, 0)          # COOKIE WALL is STR 5 when broken
+	check(g.enc.big_break, "an Icepick break above STR 2 is recorded")
+	check(not g.can_play(sh).ok, "still no ICE at STR 0")
+	g.enc.ice[0].str_mod = -10
+	var t := g.trace
+	check(g.play_card(sh, 0) and g.phase == "CHOICE", "SHATTER plays on an ICE at STR 0")
+	g.choose_sub(0, 1)
+	g.choose_sub(0, 2)
+	check(g.enc.breached and g.trace >= t + 5, "SHATTER breaks 2 subroutines (+5 TRACE)")
+
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
 	g.new_run()
@@ -434,6 +456,8 @@ func sim_rustler(who: String) -> void:
 	var done := 0
 	var purges := 0
 	var purge_runs := 0
+	var shat := 0
+	var shat_runs := 0
 	var rows := {}
 	var vit := []
 	for seed in range(100, 130):
@@ -455,6 +479,9 @@ func sim_rustler(who: String) -> void:
 						g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
 				"PLAYER": bot_turn(g)
 		purges += g.purges_run
+		shat += int(g.played.get("SHATTER", 0))
+		if g.played.has("SHATTER"):
+			shat_runs += 1
 		if g.purges_run > 0:
 			purge_runs += 1
 		if g.phase == "SLICE_DONE":
@@ -465,7 +492,7 @@ func sim_rustler(who: String) -> void:
 	var avg := 0.0
 	for x in vit:
 		avg += x
-	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; purges %d in %d runs" % [who, done, str(rows), avg / max(1, vit.size()), purges, purge_runs])
+	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; purges %d in %d runs; SHATTER played %d times in %d runs" % [who, done, str(rows), avg / max(1, vit.size()), purges, purge_runs, shat, shat_runs])
 
 func needed_types(g: Game) -> Array:
 	var t := []

@@ -120,17 +120,18 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 **Playstyle:** loud. Most of RIOT's cards are cheap but add TRACE. Above 20 TRACE, RIOT gets an extra BW every turn, and the game becomes managing how close to a strike you dare to get. Fast encounters, low CRED, high risk.
 
-### Starter deck (12)
+### Starter deck (15 — RIOT-002, playtest)
 
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
 | 1 | **SLEDGE** *(signature)* | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. **Each break: +1 TRACE.** |
 | 1 | **BRUTE FORCE** *(fallback)* | SCRIPT — EXPLOIT | 1 BW, **+4 TRACE** | Break 1 subroutine on **any** ICE with STR 4 or less. |
-| 2 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, **+2 TRACE** | Target ICE: −2 STR this encounter. |
-| 1 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. |
+| 1 | **SHATTER** | SCRIPT — EXPLOIT | 0 BW, **+5 TRACE** | Play only if an Icepick broke a subroutine on an ICE above STR 2 this turn. Break up to 2 subroutines on an ICE at STR 0. *(RIOT-002, new.)* |
+| 1 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, **+2 TRACE** | Target ICE: −2 STR this encounter. *(RIOT-002: was 2.)* |
+| 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. *(RIOT-002: was 1.)* |
 | 1 | **FEEDBACK** | SCRIPT — EXPLOIT | 2 BW | Target ICE: −1 STR this encounter for every 10 TRACE you have. |
 | 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, **+2 TRACE** | Gain 1 BW. *(BASIC-001: was 2 BW.)* |
-| 2 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
+| 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(RIOT-002: was 2.)* |
 | 1 | **LAY LOW** | SCRIPT — CLOAK | 1 BW | −3 TRACE. *(BASIC-001: was −5.)* |
 | 1 | **SMASH & GRAB** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 8 CRED, **+2 TRACE**. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |

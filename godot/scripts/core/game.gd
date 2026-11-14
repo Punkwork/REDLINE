@@ -14,6 +14,7 @@ const CLEAN_NODE_BONUS := 5
 var rng := RandomNumberGenerator.new()
 
 # --- run state ---
+var played := {}            # playtest stats: card id → times played
 var purges_run := 0          # PURGE-001: run total, for playtest stats
 var rustler := "GENERALIST"   # RUSTLER-001: GENERALIST, ECHO, RIOT or VECTOR
 var phase := "MAP"            # MAP, READY_RIG, PLAYER, RESPONSE, CHOICE, DEEPER, REWARD, SAFEHOUSE, SLICE_DONE, DEAD
@@ -305,6 +306,7 @@ func _start_turn() -> void:
 		_say("REDLINER: +1 BW.")
 	enc.decoy = false
 	enc.cloak_turn = 0
+	enc.big_break = false
 	_virus_turn()
 	shield = 0
 	if trace >= 20:
@@ -372,13 +374,15 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id)}
 	if d.has("breaker") and not d.breaker.get("same_ice", false) and _breaker_targets(d.breaker, -1).is_empty():
 		return {"ok": false, "reason": "No subroutine it can break"}
+	if d.get("needs_big_break", false) and not enc.get("big_break", false):
+		return {"ok": false, "reason": "Needs an Icepick break on an ICE above STR 2 this turn"}
 	if d.has("breaker") and d.breaker.get("same_ice", false):
 		var any := false
 		for i in enc.ice.size():
 			if not _breaker_targets(d.breaker, i).is_empty():
 				any = true
 		if not any:
-			return {"ok": false, "reason": "No ICE with 5+ virus counters"}
+			return {"ok": false, "reason": "No ICE at STR 0 with a subroutine to break" if d.breaker.has("max_str") else "No ICE with 5+ virus counters"}
 	if inst.id == "FLASHPOINT" and _flashpoint_targets().is_empty():
 		return {"ok": false, "reason": "No ICE at STR 3 or less"}
 	if d.type == "PROGRAM" and ram_used() + d.get("ram", 0) > ram_total():
@@ -399,16 +403,20 @@ func play_card(uid: int, target: int = -1) -> bool:
 		_say("%s needs a %s." % [d.name, d.target_type])
 		return false
 	if d.has("breaker") and d.breaker.get("same_ice", false) and (target < 0 or _breaker_targets(d.breaker, target).is_empty()):
-		_say("Choose an ICE with 5 or more virus counters.")
+		_say("Choose an ICE at STR 0." if d.breaker.has("max_str") else "Choose an ICE with 5 or more virus counters.")
 		return false
 	_take_from(hand, uid)
+	played[inst.id] = int(played.get(inst.id, 0)) + 1
 	bw -= card_cost(inst.id)
 	if d.type == "BLOATWARE":
 		burned.append(inst)  # SPAM: pay 1 BW to clear it
 		_say("SPAM cleared.")
 		return true
+	var target_ref: Dictionary = enc.ice[target] if target >= 0 and target < enc.ice.size() else {}
 	if d.get("trace_cost", 0) > 0:
 		add_trace(d.trace_cost, false)
+	if not target_ref.is_empty():
+		target = enc.ice.find(target_ref)
 	match d.type:
 		"PROGRAM":
 			installed.append({"inst": inst, "boost": 0, "free_used": false})
@@ -496,7 +504,7 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 					for k in src:
 						infect(j, k, src[k])
 		"QUARANTINE": shield += mini(6, virus_total(target))
-		"BACKDOOR", "BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER":
+		"BACKDOOR", "BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER", "SHATTER":
 			var br: Dictionary = CardDB.def(inst.id).breaker
 			pending = {"kind": "card_break", "n": br.n, "ice": target if br.get("same_ice", false) else -1,
 				"breaker": br, "card_uid": inst.uid, "card": CardDB.def(inst.id).name}
@@ -851,6 +859,8 @@ func break_sub(i: int, s: int) -> bool:
 	var p := _installed_entry(info.uid)
 	var pk: Dictionary = CardDB.def(p.inst.id).pick
 	var ice: Dictionary = enc.ice[i]
+	if ice_str(i) > 2:
+		enc.big_break = true   # SHATTER's condition
 	bw -= info.cost
 	if info.boosts > 0:
 		p.boost += info.boosts * pk.boost_amt

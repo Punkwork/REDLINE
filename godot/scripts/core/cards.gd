@@ -145,6 +145,9 @@ const DEFS := {
 		"text": "Target ICE: −1 STR this encounter for every 10 TRACE you have."},
 	"ADRENAL_SPIKE": {"name": "ADRENAL SPIKE", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 2, "rarity": "STARTER",
 		"text": "Gain 1 BW. (+2 TRACE)"},
+	"SHATTER": {"name": "SHATTER", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 5, "rarity": "STARTER", "target": true,
+		"breaker": {"n": 2, "max_str": 0, "same_ice": true}, "needs_big_break": true,
+		"text": "Play only if an Icepick broke a subroutine on an ICE above STR 2 this turn. Break up to 2 subroutines on an ICE at STR 0. (+5 TRACE)"},
 	"LAY_LOW": {"name": "LAY LOW", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER", "text": "−3 TRACE."},
 	"SMASH_AND_GRAB": {"name": "SMASH & GRAB", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"extract": 8, "extract_trace": 2, "text": "End of your turn: extract 8 CRED, +2 TRACE."},
@@ -222,9 +225,10 @@ const STARTER_ECHO := [
 ]
 ## Cards offered in a Rustler's reward pool besides those tagged with "pool" (rarity used for the reward roll).
 const POOL_EXTRA := {"ECHO": {"SLOW_DRIP": "COMMON"}}
+# RIOT-002 (playtest): 15 cards. +1 SHATTER, +2 PROBE, +1 PULP Shield, −1 OVERLOAD.
 const STARTER_RIOT := [
-	"SLEDGE", "BRUTE_FORCE", "OVERLOAD", "OVERLOAD", "PROBE", "FEEDBACK", "ADRENAL_SPIKE",
-	"PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "SMASH_AND_GRAB", "BASIC_EXTRACTOR",
+	"SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "FEEDBACK", "ADRENAL_SPIKE",
+	"PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "SMASH_AND_GRAB", "BASIC_EXTRACTOR",
 ]
 const STARTER_VECTOR := [
 	"STINGER", "RUNTIME_ERROR", "INJECT", "INJECT", "INJECT", "REPLICATOR", "OUTBREAK", "PROBE",

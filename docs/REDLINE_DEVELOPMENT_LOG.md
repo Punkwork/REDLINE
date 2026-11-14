@@ -1177,3 +1177,25 @@ BURNOUT CHIP (general Ghostware, drawback): Icepicks +2 STR for the run; **whene
 The designer kept FEEDBACK in RIOT's starter deck and declined a second BRUTE FORCE. RIOT's deck is unchanged: SLEDGE, BRUTE FORCE, OVERLOAD ×2, PROBE, FEEDBACK, ADRENAL SPIKE, PULP Shield ×2, LAY LOW, SMASH & GRAB, Basic Extractor (30-run bot: 1 / 30). Tested variants for reference: FEEDBACK → 2nd BRUTE FORCE 10 / 30; BRUTE FORCE reaching STR 5: 0 / 30; ADRENAL SPIKE → 2nd LAY LOW: 3 / 30.
 
 Clarified (no change): SLEDGE's first break each turn costs 0 BW, later breaks 1 BW each, and every break (including the free one) adds +1 TRACE.
+
+## RIOT-002 — RIOT at 15 cards with SHATTER (BUILT for playtest, 2026-11-14)
+
+Designer's proposal, built as specified:
+- **SHATTER** (new RIOT starter SCRIPT, EXPLOIT): **0 BW, +5 TRACE.** Play only if an Icepick broke a subroutine on an ICE above STR 2 this turn. Break up to 2 subroutines on an ICE at STR 0. (Card breaks still respect hidden subroutines, BOOTING and SEQUENCED.)
+- **Deck 12 → 15:** +1 SHATTER, +2 PROBE, +1 PULP Shield, −1 OVERLOAD. Now: SLEDGE, BRUTE FORCE, SHATTER, OVERLOAD, PROBE ×3, FEEDBACK, ADRENAL SPIKE, PULP Shield ×3, LAY LOW, SMASH & GRAB, Basic Extractor.
+- **Fix found while building:** a card's own TRACE cost can cause a strike that adds HOUSE CALL on the left; the card's target now follows the same ICE.
+
+**30-run bot test (RIOT):** 1 / 30 cleared (unchanged); **SHATTER was playable only once in 30 runs.** Why: SLEDGE is RIOT's only Icepick and breaks only FORTRESSES, so the condition needs a FORTRESS in the encounter. 4 of the slice's 7 encounters have none (including the Opening Node), and where there is one, the same turn must also see SLEDGE installed and boosted, another ICE already at STR 0, and SHATTER in hand.
+
+Variants tested (not adopted, for discussion):
+
+| SHATTER variant | Cleared | SHATTER played |
+|---|---|---|
+| As specified (0 BW) | 1 / 30 | 1 time |
+| Any break (Icepick or card, e.g. BRUTE FORCE) on an ICE above STR 2 counts | 1 / 30 | 5 times |
+| Targets an ICE at STR 2 or less | 1 / 30 | 2 times |
+| Both of the above | 1 / 30 | 8 times |
+| Condition is TRACE 20–39 instead | 3 / 30 | 49 times |
+| TRACE 20–39, targets STR 2 or less | 3 / 30 | 53 times |
+
+Even when SHATTER fires often, its +5 TRACE pushes RIOT from the redline into strike 1–2 (HOUSE CALL). For comparison, OVERDRIVE (SLEDGE breaks any ICE type while TRACE is 20–39) reached 7–9 / 30.
