@@ -1039,6 +1039,14 @@ func _end_ice_node() -> void:
 # Damage, healing, TRACE (Core Rules §6, §7)
 # =====================================================================
 
+func abandon() -> void:
+	## RUN-001: the player ends the run; the Rustler fails.
+	phase = "DEAD"
+	pending = {}
+	response_queue = []
+	_say("Run ended. The Rustler failed.")
+	_event("EV-35")
+
 func take_pulp(n: int) -> void:
 	var absorbed: int = min(shield, n)
 	pulp_stats.incoming += n

@@ -48,6 +48,7 @@ func _init() -> void:
 	test_purge()
 	test_shatter()
 	test_pulp_curves()
+	test_end_run()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -378,6 +379,13 @@ func test_pulp_curves() -> void:
 	g.infect(0, "SCRAMBLE", 1)
 	var raw: int = int(g.enc.ice[0].curves.B[0])
 	check(g.effect_value(g.enc.ice[0], {"k": "PULP_CURVE", "curve": "B"}).v == maxi(0, raw - 1), "SCRAMBLE lowers a curve's PULP too")
+
+func test_end_run() -> void:
+	var g := Game.new(61)
+	g.new_run("RIOT")
+	g.enter_node(0)
+	g.abandon()
+	check(g.phase == "DEAD", "END RUN: the Rustler fails")
 
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)

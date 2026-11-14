@@ -1253,3 +1253,14 @@ Playtest: still not enough PULP. Designer's curves, one value per Corporation Re
 - **On screen:** A and C show this turn's value (e.g. "PULP 9 · HAMMER"); B shows "PULP ? · RANDOM", and the response preview adds "+ random PULP (1–6)". Hovering a curve chip shows its sequence.
 
 **30-run bot test (DRAW 6, curves on):** GENERALIST 10 / 30 · ECHO 6 · VECTOR 2 · RIOT 1. PULP reaching VITAE per encounter is now 6.7–9.3 (was 5.7–7.8), and survivors finish lower (ECHO 6.3, RIOT 2.0 average end VITAE).
+
+## REEL-001 — TUMBLER slots spin like slot-machine reels (APPROVED, 2026-11-14)
+
+- Each TUMBLER slot is drawn as a reel window: a dark recessed frame with shading at the top and bottom edge, like a drum curving away.
+- When a TUMBLER rotates at the start of the Rustler's turn, each slot's strip rolls **downward**: the subroutine that was in the slot, a blur of passing subroutines (random icons, so nothing hidden is revealed), then this turn's subroutine. The reel spins fast, slows, runs slightly past the stop and clunks back with a flash.
+- **Staggered stops:** slot 1 stops first and each later slot spins about 0.5 s longer (0.95 s, 1.45 s, 1.95 s…), like real reels. Input is held until every reel has stopped.
+- **Slot labels now name the subroutine** ("SLOT 2 · S1"). Playtest confusion: on REJECT ALL, breaking S3's DEADLOCK and then seeing S1's DEADLOCK roll into slot 2 looked like the same DEADLOCK coming back unbroken. It was the second of REJECT ALL's two DEADLOCKs (turn-by-turn replay confirmed broken subroutines stay broken). The suggested follow-ups (show the DEADLOCK total on TUMBLERs; one DEADLOCK on REJECT ALL) are awaiting the designer.
+
+## RUN-001 — END RUN button (APPROVED, 2026-11-14)
+
+An END RUN button (bottom right, red) asks "END THIS RUN?" with YES, END THE RUN / KEEP PLAYING. Yes: the Rustler fails (NUL/REM's run-lost line, EV-35), then the game returns to the start menu (Rustler choice). Not available while the Corporation Response or the reels are playing.

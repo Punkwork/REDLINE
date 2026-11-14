@@ -47,6 +47,15 @@ var voice_btn: Button
 ## PLAY-001: the Corporation Response plays one subroutine at a time over at least 5 seconds.
 const RESPONSE_MIN_SECONDS := 5.0
 var responding := false
+## REEL-001: TUMBLER slots are slot-machine reels; they spin when the TUMBLER rotates.
+const REEL_H := 33.0
+var spin := {}            # ICE index → its slots' subroutines before the rotation
+var spinning := false
+var spin_built := false
+var spin_deferred := false
+var blocker: Control
+var endrun_btn: Button
+var confirming_end := false
 var flash := {}        # {ref, sub} of the subroutine firing now
 var fired: Array = []  # [{ref, sub}] already fired this response
 var resp_total := 0
@@ -171,6 +180,14 @@ func _build_layout() -> void:
 	end_btn.add_theme_font_size_override("font_size", 22)
 	end_btn.pressed.connect(_on_end_turn)
 	add_child(end_btn)
+	endrun_btn = Button.new()   # RUN-001
+	endrun_btn.text = "END RUN"
+	endrun_btn.position = Vector2(1352, 846)
+	endrun_btn.size = Vector2(236, 36)
+	endrun_btn.add_theme_font_size_override("font_size", 13)
+	endrun_btn.add_theme_color_override("font_color", Color("#ff6b78"))
+	endrun_btn.pressed.connect(_confirm_end_run)
+	add_child(endrun_btn)
 	piles = _lbl("", 13, DIM)
 	piles.position = Vector2(1352, 724)
 	piles.size = Vector2(236, 80)
@@ -215,6 +232,11 @@ func _build_layout() -> void:
 	inspect.visible = false
 	inspect.z_index = 10
 	add_child(inspect)
+	blocker = Control.new()   # swallows clicks while the reels spin
+	blocker.set_anchors_preset(Control.PRESET_FULL_RECT)
+	blocker.mouse_filter = Control.MOUSE_FILTER_STOP
+	blocker.visible = false
+	add_child(blocker)
 	overlay = Control.new()
 	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -292,9 +314,35 @@ func _play_response() -> void:
 		fired.append(flash)
 	flash = {}
 	await get_tree().create_timer(gap * 0.4).timeout
+	var before := {}
+	var enc_ref: Dictionary = g.enc
+	for i in g.enc.ice.size():
+		if IceDB.is_tumbler(g.enc.ice[i].id):
+			before[i] = g.active_subs(i)
 	g.response_finish()
 	responding = false
 	fired = []
+	spin = {}
+	if is_same(g.enc, enc_ref) and g.phase in ["PLAYER", "CHOICE"]:
+		for i in before:
+			if i < g.enc.ice.size() and g.active_subs(i) != before[i]:
+				spin[i] = before[i]
+	if spin.is_empty():
+		refresh()
+		return
+	var longest := 0
+	for i in spin:
+		longest = maxi(longest, spin[i].size())
+	spinning = true
+	spin_built = false
+	blocker.visible = true
+	refresh()
+	spin_built = true
+	await get_tree().create_timer(_reel_time(longest - 1) + 0.35).timeout
+	spinning = false
+	spin = {}
+	blocker.visible = false
+	spin_deferred = false
 	refresh()
 
 func _is_flash(ice: Dictionary, s: int) -> bool:
@@ -344,6 +392,9 @@ func _on_break(i: int, s: int) -> void:
 # =====================================================================
 
 func refresh() -> void:
+	if spinning and spin_built:
+		spin_deferred = true   # don't rebuild (and restart) the reels mid-spin
+		return
 	_handle_events()
 	_build_hud()
 	_build_info()
@@ -354,6 +405,8 @@ func refresh() -> void:
 	var in_enc: bool = not g.enc.is_empty() and g.phase in ["PLAYER", "CHOICE", "RESPONSE"]
 	end_btn.disabled = g.phase != "PLAYER"
 	end_btn.visible = in_enc
+	endrun_btn.visible = g.phase not in ["SELECT", "DEAD", "SLICE_DONE"]
+	endrun_btn.disabled = responding
 	log_label.text = "  ·  ".join(g.log.slice(max(0, g.log.size() - 3)))
 	if g.phase == "CHOICE" and g.pending.get("kind", "") == "card_break":
 		log_label.text = "%s: choose a subroutine to break (%d left)." % [g.pending.card, g.pending.n]
@@ -611,7 +664,7 @@ func _ice_card(i: int, is_main: bool) -> Control:
 		if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 			_on_ice_clicked(i))
 	var v := VBoxContainer.new()
-	v.add_theme_constant_override("separation", 7)
+	v.add_theme_constant_override("separation", 5)
 	pc.add_child(v)
 	# corporation band, tier badge, role tab
 	var band := HBoxContainer.new()
@@ -667,7 +720,8 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			fh.add_child(_lbl("  ? fires this turn · revealed when it fires", 12, RIcon.COL.VOID))
 			v.add_child(fh)
 			continue
-		var srow := _sub_row(i, s, d.subs[s], ice.broken[s], ("SLOT %d" % (k + 1)) if tumbler else ("[S%d]" % (s + 1)))
+		var srow := _sub_row(i, s, d.subs[s], ice.broken[s], ("SLOT %d · S%d" % [k + 1, s + 1]) if tumbler else ("[S%d]" % (s + 1)))
+		var content: Control = srow
 		if _is_flash(ice, s):
 			var fp := PanelContainer.new()
 			var fsb := StyleBoxFlat.new()
@@ -677,12 +731,18 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			fsb.set_corner_radius_all(4)
 			fp.add_theme_stylebox_override("panel", fsb)
 			fp.add_child(srow)
-			v.add_child(fp)
 			_pulse(fp)
-			continue
-		if _was_fired(ice, s):
+			content = fp
+		elif _was_fired(ice, s):
 			srow.modulate = Color(1, 1, 1, 0.55)
-		v.add_child(srow)
+		if tumbler:
+			var prev_row: Control = null
+			if spin.has(i) and k < spin[i].size():
+				var ps: int = spin[i][k]
+				prev_row = _sub_row(i, ps, d.subs[ps], ice.broken[ps], "SLOT %d · S%d" % [k + 1, ps + 1])
+			v.add_child(_reel(content, prev_row, k, spin.has(i)))
+		else:
+			v.add_child(content)
 	var hid := g.hidden_count(i)
 	if hid > 0:
 		var hh := HBoxContainer.new()
@@ -717,6 +777,107 @@ func _ice_card(i: int, is_main: bool) -> Control:
 		ah.add_child(al)
 		v.add_child(ah)
 	return pc
+
+func _reel_time(k: int) -> float:
+	return 0.95 + 0.5 * k   # each later slot spins longer, so the reels stop one after another
+
+func _reel(final_row: Control, prev_row: Control, k: int, spin_now: bool) -> Control:
+	## A slot-machine window. The real row sets the window's size; while spinning, a strip of rows
+	## rolls downward over it (the previous subroutine, a blur of others, then this turn's) and clunks to a stop.
+	var frame := PanelContainer.new()
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color("#0a0e14")
+	sb.border_color = Color("#3a4658")
+	sb.set_border_width_all(1)
+	sb.set_corner_radius_all(4)
+	sb.content_margin_left = 3
+	sb.content_margin_right = 3
+	frame.add_theme_stylebox_override("panel", sb)
+	var holder := MarginContainer.new()
+	holder.custom_minimum_size = Vector2(0, REEL_H)
+	holder.clip_contents = true
+	frame.add_child(holder)
+	final_row.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	holder.add_child(final_row)
+	if spin_now:
+		final_row.modulate.a = 0.0
+		var win := Control.new()
+		win.clip_contents = true
+		win.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		holder.add_child(win)
+		var strip := VBoxContainer.new()
+		strip.add_theme_constant_override("separation", 0)
+		strip.set_anchors_preset(Control.PRESET_TOP_WIDE)
+		strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		win.add_child(strip)
+		var landing: Control = final_row.duplicate()
+		landing.modulate.a = 1.0
+		var rows: Array = [landing]
+		for n in 7 + 4 * k:
+			rows.append(_reel_blur_row())
+		rows.append(prev_row if prev_row != null else _reel_blur_row())
+		for r in rows:
+			var cell := MarginContainer.new()
+			cell.custom_minimum_size = Vector2(0, REEL_H)
+			cell.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			r.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			cell.add_child(r)
+			strip.add_child(cell)
+		var n_rows: int = rows.size()
+		strip.position.y = -(n_rows - 1) * REEL_H
+		strip.modulate = Color(1, 1, 1, 0.75)
+		var dur := _reel_time(k)
+		var tw := strip.create_tween()
+		# fast spin that slows down, runs slightly past the stop, then clunks back into place
+		tw.tween_property(strip, "position:y", REEL_H * 0.22, dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+		tw.parallel().tween_property(strip, "modulate", Color(1, 1, 1, 1), dur * 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		tw.tween_property(strip, "position:y", 0.0, 0.16).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tw.tween_callback(func():
+			final_row.modulate.a = 1.0
+			win.queue_free()
+			frame.modulate = Color(1.7, 1.7, 1.7)
+			var fl := frame.create_tween()
+			fl.tween_property(frame, "modulate", Color(1, 1, 1), 0.3))
+	# glass: darker at the top and bottom edges of the window, like a reel drum curving away
+	var glass := Control.new()
+	glass.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	holder.add_child(glass)
+	for top in [true, false]:
+		var shade := TextureRect.new()
+		var grad := Gradient.new()
+		grad.set_color(0, Color(0, 0, 0, 0.7) if top else Color(0, 0, 0, 0))
+		grad.set_color(1, Color(0, 0, 0, 0) if top else Color(0, 0, 0, 0.7))
+		var gt := GradientTexture2D.new()
+		gt.gradient = grad
+		gt.fill_from = Vector2(0, 0)
+		gt.fill_to = Vector2(0, 1)
+		gt.width = 4
+		gt.height = 32
+		shade.texture = gt
+		shade.stretch_mode = TextureRect.STRETCH_SCALE
+		shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		shade.set_anchors_preset(Control.PRESET_TOP_WIDE if top else Control.PRESET_BOTTOM_WIDE)
+		if top:
+			shade.offset_bottom = 8
+		else:
+			shade.offset_top = -8
+		glass.add_child(shade)
+	return frame
+
+func _reel_blur_row() -> Control:
+	## A subroutine passing by too fast to read (random icons, so it reveals nothing).
+	var h := HBoxContainer.new()
+	h.add_theme_constant_override("separation", 10)
+	h.add_child(_lbl("· · ·", 12, DIM))
+	var kinds := ["PULP", "TRACE", "DEADLOCK", "BW", "CARD", "CORTEX"]
+	for n in 2 + randi() % 2:
+		h.add_child(RIcon.make(kinds[randi() % kinds.size()], 18, Color(0.55, 0.6, 0.7, 0.5)))
+	var streak := ColorRect.new()
+	streak.color = Color(0.6, 0.66, 0.78, 0.18)
+	streak.custom_minimum_size = Vector2(90 + randi() % 120, 3)
+	streak.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	h.add_child(streak)
+	return h
 
 func _sub_row(i: int, s: int, effects: Array, broken: bool, tag: String) -> Control:
 	var row := HBoxContainer.new()
@@ -971,6 +1132,23 @@ func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 
 func _build_overlay() -> void:
 	_clear(overlay)
+	if confirming_end:
+		var v := _dim_box("END THIS RUN?", "Your Rustler fails and the run is over. You'll return to the start menu to choose a Rustler.", 620)
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 16)
+		var yes := Button.new()
+		yes.text = "YES, END THE RUN"
+		yes.custom_minimum_size = Vector2(260, 52)
+		yes.add_theme_color_override("font_color", Color("#ff6b78"))
+		yes.pressed.connect(_end_run)
+		var no := Button.new()
+		no.text = "KEEP PLAYING"
+		no.custom_minimum_size = Vector2(260, 52)
+		no.pressed.connect(func(): confirming_end = false; refresh())
+		row.add_child(yes)
+		row.add_child(no)
+		v.add_child(row)
+		return
 	match g.phase:
 		"SELECT": _overlay_select()
 		"MAP": _overlay_map()
@@ -986,6 +1164,21 @@ func _build_overlay() -> void:
 		"SAFEHOUSE": _overlay_safehouse()
 		"SLICE_DONE": _overlay_end("SLICE COMPLETE", "You made it through HALCYON's first rows.\nVITAE %d · CRED %d · TRACE %d · strikes %d · deck %d cards" % [g.vitae, g.cred, g.trace, g.strikes, g.run_deck.size()])
 		"DEAD": _overlay_end("VITAE 0", "The run is over.")
+
+func _confirm_end_run() -> void:
+	if responding or spinning:
+		return
+	confirming_end = true
+	refresh()
+
+func _end_run() -> void:
+	## The Rustler fails: NUL/REM gets his line, then back to the start menu.
+	confirming_end = false
+	g.abandon()
+	refresh()
+	_clear(overlay)
+	await get_tree().create_timer(2.5).timeout
+	_new_run()
 
 func _dim_box(title: String, sub: String, w: float = 900) -> VBoxContainer:
 	var dim := ColorRect.new()

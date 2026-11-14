@@ -10,9 +10,9 @@ const COL := {
 	"ANY": Color("#c9d3df"), "CLOAK": Color("#7fb6ff"), "EXPLOIT": Color("#ff8a4d"), "NULREM": Color("#58f29a"), "VIRUS": Color("#9ad17a"),
 }
 
-var kind := "BW"
-var color := Color.WHITE
-var thick := 2.0
+@export var kind := "BW"
+@export var color := Color.WHITE
+@export var thick := 2.0
 
 static func make(k: String, size_px: float = 22.0, c: Color = Color(0, 0, 0, 0)) -> RIcon:
 	var ic := RIcon.new()
