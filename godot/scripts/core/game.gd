@@ -14,6 +14,7 @@ const CLEAN_NODE_BONUS := 5
 var rng := RandomNumberGenerator.new()
 
 # --- run state ---
+var purges_run := 0          # PURGE-001: run total, for playtest stats
 var rustler := "GENERALIST"   # RUSTLER-001: GENERALIST, ECHO, RIOT or VECTOR
 var phase := "MAP"            # MAP, READY_RIG, PLAYER, RESPONSE, CHOICE, DEEPER, REWARD, SAFEHOUSE, SLICE_DONE, DEAD
 var vitae := START_VITAE
@@ -182,7 +183,8 @@ func _start_encounter() -> void:
 	enc = {"ice": [], "reserve": L.reserve, "reserve_start": L.reserve, "turn": 0, "breached": false,
 		"bonus_paid": false, "spam_filter_used": false, "cortex_buffer_used": false, "failsafe_used": false,
 		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0, "bw_drain": 0, "bw_drained": 0,
-		"trace_gained_enc": 0, "smoke": 0, "vanish": false, "blackout": false, "decoy": false, "cloak_turn": 0}
+		"trace_gained_enc": 0, "smoke": 0, "vanish": false, "blackout": false, "decoy": false, "cloak_turn": 0,
+		"purge_limit": IceDB.CORPS.HALCYON.purge_limit, "purges": 0, "purged_now": false, "skipped": false}
 	for id in L.ice:
 		enc.ice.append(_new_ice(id))
 	if pending_black:
@@ -617,8 +619,18 @@ func _begin_response() -> void:
 	phase = "RESPONSE"
 	response_queue = []
 	enc["resp_void"] = []
+	# PURGE-001: too many virus counters, so the corporation spends its turn purging them.
+	var total := 0
+	for i in enc.ice.size():
+		total += virus_total(i)
+	if total > 0 and total >= enc.purge_limit:
+		_purge(total)
+		if not animate:
+			response_finish()
+		return
 	if enc.blackout:
 		enc.blackout = false
+		enc.skipped = true
 		_say("BLACKOUT: the Corporation Response is skipped.")
 		if not animate:
 			response_finish()
@@ -657,13 +669,15 @@ func response_finish() -> void:
 		return
 	for ice in enc.get("resp_void", []):
 		ice.responses += 1
-	# HARDENING: +1 STR after each Corporation Response, up to +3.
-	for ice in enc.ice:
+	# HARDENING: +1 STR after each Corporation Response, up to +3 (a PURGE or BLACKOUT turn isn't a response).
+	for ice in ([] if enc.skipped else enc.ice):
 		if IceDB.def(ice.id).get("passive", "") == "HARDENING" and ice.get("harden", 0) < 3:
 			ice["harden"] = ice.get("harden", 0) + 1
 	enc.ghost = false
 	enc.smoke = 0
 	enc.vanish = false
+	enc.skipped = false
+	enc.purged_now = false
 	_cleanup()
 	if phase == "DEAD":
 		return
@@ -1303,3 +1317,18 @@ func _installed_count(id: String) -> int:
 		if p.inst.id == id:
 			n += 1
 	return n
+
+func _purge(total: int) -> void:
+	## Remove every virus counter; INCUBATOR re-infects 2 ROT on each ICE that was purged.
+	var incub := _rack_count("INCUBATOR")
+	for i in enc.ice.size():
+		var had := virus_total(i) > 0
+		enc.ice[i].virus = {}
+		if had and incub > 0:
+			infect(i, "ROT", 2 * incub)
+	enc.purges += 1
+	purges_run += 1
+	enc.purge_limit += IceDB.CORPS.HALCYON.purge_step
+	enc.purged_now = true
+	enc.skipped = true
+	_say("HALCYON PURGES %d virus counters instead of taking its turn." % total)

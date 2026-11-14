@@ -182,7 +182,7 @@ const DEFS := {
 	"OUTBREAK": {"name": "OUTBREAK", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 2, "rarity": "STARTER", "target": true,
 		"text": "Double the counters of every strain on target ICE."},
 
-	# --- VECTOR pool (Card Pools §7). INCUBATOR is left out of the slice: no slice ICE PURGEs. ---
+	# --- VECTOR pool (Card Pools §7). INCUBATOR triggers on the corporation's PURGE (PURGE-001). ---
 	"SCRAMBLER": {"name": "SCRAMBLER", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 1, "rarity": "COMMON", "pool": "VECTOR", "target": true,
 		"infect": {"SCRAMBLE": 2}, "text": "INFECT 2 SCRAMBLE. (Each SCRAMBLE: this ICE's PULP subroutines deal 1 less.)"},
 	"BLINDFOLD": {"name": "BLINDFOLD", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 1, "rarity": "COMMON", "pool": "VECTOR", "target": true,
@@ -195,7 +195,7 @@ const DEFS := {
 		"infect": {"WORM": 1, "ROT": 1}, "text": "INFECT 1 WORM and 1 ROT. (Each WORM: at the start of your turn, copy 1 counter of each strain here onto the ICE to its right. Each ROT: −1 STR.)"},
 	"COCKTAIL": {"name": "COCKTAIL", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 2, "rarity": "UNCOMMON", "pool": "VECTOR", "target": true,
 		"infect": {"ROT": 1, "SCRAMBLE": 1, "BLIND": 1, "LEECH": 1, "WORM": 1}, "text": "INFECT 1 of each strain (ROT, SCRAMBLE, BLIND, LEECH, WORM)."},
-	"INCUBATOR": {"name": "INCUBATOR", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON", "pool": "VECTOR", "slice_excluded": true,
+	"INCUBATOR": {"name": "INCUBATOR", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON", "pool": "VECTOR",
 		"text": "Whenever a PURGE removes virus counters from an ICE, INFECT 2 ROT on that ICE afterward."},
 	"PANDEMIC": {"name": "PANDEMIC", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 3, "rarity": "RARE", "pool": "VECTOR", "target": true,
 		"text": "Copy all virus counters on target ICE onto every other ICE."},

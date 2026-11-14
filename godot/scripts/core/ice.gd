@@ -49,6 +49,11 @@ const MAP := [
 		"layers": [{"ice": ["TERMS_OF_SERVICE"], "reserve": 10}, {"ice": ["CAPTCHA", "DOORBELL_CAM"], "reserve": 15}], "next": []}],
 ]
 
+## PURGE-001: at the start of its turn, a corporation that counts this many virus counters across the
+## encounter's ICE PURGES them all instead of taking its turn. The limit rises after each purge (per encounter).
+## Deliberately not shown to the Rustler.
+const CORPS := {"HALCYON": {"purge_limit": 10, "purge_step": 5}}
+
 static func def(id: String) -> Dictionary:
 	return DEFS[id]
 

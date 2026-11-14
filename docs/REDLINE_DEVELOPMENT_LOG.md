@@ -1130,3 +1130,12 @@ The slice now starts with a Rustler choice: THE GENERALIST, ECHO, RIOT or VECTOR
 - RIOT's TRACE climbs fast enough to reach strike 2 (HOUSE CALL) in the CAPTCHA node, where TRIPWIRE adds TRACE on every break.
 - OUTBREAK + REPLICATOR grow ROT without limit (a traced run reached ROT 385). Harmless while STR floors at 0, but anything that counts virus counters (QUARANTINE caps at 6, HOST TAKEOVER needs 5) becomes trivial.
 - The Rustlers doc still says SIGYL in places; it needs the TUMBLER rename pass.
+
+## PURGE-001 — The corporation PURGES virus counters at a rising limit (APPROVED, 2026-11-14)
+
+- At the start of its turn, the corporation adds up the virus counters on every ICE in the encounter. At or above its **PURGE limit**, it removes them all **instead of taking its turn**, and the Rustler's turn begins.
+- **HALCYON: limit 10, +5 after each purge** (10 → 15 → 20), reset each encounter.
+- **No meter and no preview warning (designer: it should be a surprise).** The purge is announced only as it happens, during the Corporation Response playback.
+- A purge isn't a Corporation Response: TUMBLERs still rotate (the Rustler's turn starts), but VOID ICE reveal nothing new and HARDENING doesn't grow (BLACKOUT now follows the same rule).
+- **INCUBATOR** returns to VECTOR's reward pool: after a purge it INFECTs 2 ROT on each purged ICE.
+- **30-run bot test, VECTOR:** 12 / 30 cleared (9 before), with 60 purges across 29 of the 30 runs (about 2 per run). A purge removes VECTOR's ROT but also skips a whole turn of damage; for now the skipped turn is worth more. The bot doesn't trigger purges on purpose, so a player who learns the limit could do so deliberately. If that shows up in playtest, the fallback options are: every ICE gets +1 STR after a purge, or purge-then-respond.

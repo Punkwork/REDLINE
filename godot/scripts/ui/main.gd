@@ -834,6 +834,11 @@ func _build_preview() -> void:
 	preview_total.text = "If you end turn: " + ("  ·  ".join(parts) if not parts.is_empty() else "no damage, no TRACE")
 	if responding:
 		preview_total.text = "Resolving %d of %d…" % [fired.size() + (0 if flash.is_empty() else 1), resp_total]
+		if g.enc.get("purged_now", false):
+			preview_total.text = "HALCYON PURGES every virus counter instead of taking its turn."
+			preview_total.add_theme_color_override("font_color", STRAIN_COL.ROT)
+		else:
+			preview_total.remove_theme_color_override("font_color")
 
 func _effect_word(e: Dictionary) -> String:
 	match e.k:

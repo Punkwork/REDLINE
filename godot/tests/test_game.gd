@@ -45,6 +45,7 @@ func _init() -> void:
 	test_detainer_rules()
 	test_passives()
 	test_rustlers()
+	test_purge()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -294,6 +295,37 @@ func test_rustlers() -> void:
 	g.choose_sub(0, 2)
 	check(g.enc.breached, "RUNTIME ERROR breaks the DEADLOCK")
 
+func test_purge() -> void:
+	var g := Game.new(31)
+	g.new_run("VECTOR")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")   # COOKIE WALL; PATIENT ZERO gives 1 ROT
+	g.infect(0, "ROT", 9)     # 10 counters: HALCYON's limit
+	var v0 := g.vitae
+	var t0 := g.trace
+	g.end_turn()
+	if g.phase == "CHOICE":
+		g.choose(g.hand[0].uid)
+	check(g.virus_total(0) == 0, "PURGE removes every virus counter")
+	check(g.vitae == v0 and g.trace == t0, "PURGE replaces the Corporation Response (no PULP, no TRACE)")
+	check(g.enc.purge_limit == 15 and g.enc.purges == 1, "limit rises to 15 after a purge")
+	g.infect(0, "ROT", 12)
+	g.end_turn()
+	if g.phase == "CHOICE":
+		g.choose(g.hand[0].uid)
+	check(g.virus_total(0) == 12, "12 counters is under the new limit: no purge")
+	# INCUBATOR re-infects after a purge
+	g = Game.new(32)
+	g.new_run("VECTOR")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")
+	install(g, "INCUBATOR")
+	g.infect(0, "ROT", 9)
+	g.end_turn()
+	if g.phase == "CHOICE":
+		g.choose(g.hand[0].uid)
+	check(g.enc.ice[0].virus.get("ROT", 0) == 2, "INCUBATOR: 2 ROT after the purge")
+
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
 	g.new_run()
@@ -393,6 +425,8 @@ func sim_many() -> void:
 
 func sim_rustler(who: String) -> void:
 	var done := 0
+	var purges := 0
+	var purge_runs := 0
 	var rows := {}
 	var vit := []
 	for seed in range(100, 130):
@@ -413,6 +447,9 @@ func sim_rustler(who: String) -> void:
 					else:
 						g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
 				"PLAYER": bot_turn(g)
+		purges += g.purges_run
+		if g.purges_run > 0:
+			purge_runs += 1
 		if g.phase == "SLICE_DONE":
 			done += 1
 			vit.append(g.vitae)
@@ -421,7 +458,7 @@ func sim_rustler(who: String) -> void:
 	var avg := 0.0
 	for x in vit:
 		avg += x
-	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f" % [who, done, str(rows), avg / max(1, vit.size())])
+	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; purges %d in %d runs" % [who, done, str(rows), avg / max(1, vit.size()), purges, purge_runs])
 
 func needed_types(g: Game) -> Array:
 	var t := []
