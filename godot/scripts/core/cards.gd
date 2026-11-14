@@ -103,8 +103,8 @@ const DEFS := {
 
 	# --- ECHO starter (Rustlers §4; HUSH is the TUMBLER Icepick since ROT-001) ---
 	"HUSH": {"name": "HUSH", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "TUMBLER", "str": 1, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 1. Boost: 2 BW → +1 STR. Break: 1 BW."},
+		"pick": {"itype": "TUMBLER", "str": 0, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
+		"text": "STR 0. Boost: 2 BW → +1 STR. Break: 1 BW."},
 	"BACKDOOR": {"name": "BACKDOOR", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 3, "rarity": "STARTER",
 		"breaker": {"n": 1, "max_str": 3}, "text": "Break 1 subroutine on any ICE with STR 3 or less."},
 	"SLOW_DRIP": {"name": "SLOW DRIP", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
