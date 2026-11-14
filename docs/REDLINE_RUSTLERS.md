@@ -166,9 +166,11 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | As Generalist. |
 
 ### ORIGIN Ghostware — PATIENT ZERO
-**At the start of each encounter, INFECT 1 ROT on every ICE.**
+**At the start of each encounter, choose an ICE: INFECT 1 ROT on it.** *(VECTOR-001, 2026-11-14: was "on every ICE".)*
 
 **Why:** every ICE starts at −1 STR and is already a valid target for REPLICATOR, so VECTOR's engine starts on turn 1 instead of turn 2–3. It's especially strong against multi-ICE encounters, which is where VECTOR should shine.
+
+**VECTOR-001:** VECTOR now picks where the infection starts (usually the main ICE, or a support ICE it wants to WORM rightward from), so PATIENT ZERO is a decision rather than a blanket effect, and the encounter's virus count grows more slowly (fewer corporation PURGES).
 
 **How VECTOR wins an encounter:** turn 1, INJECT the most dangerous ICE and install REPLICATOR. Each turn, counters grow by 1 per infected ICE. Once an ICE has 2+ counters, RUNTIME ERROR breaks any of its subroutines; once its STR is low enough, even STINGER can be boosted cheaply. OUTBREAK turns a slow infection into a sudden collapse.
 

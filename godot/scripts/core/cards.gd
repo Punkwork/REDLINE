@@ -251,7 +251,7 @@ const RUSTLERS := {
 		"starter": STARTER_RIOT, "nulrem": "RIOT"},
 	"VECTOR": {"name": "VECTOR", "quote": "I don't break in. I wait for it to rot.", "difficulty": 2,
 		"style": "Viruses: weakens every ICE over time. Strong vs VOIDS.", "origin": "PATIENT ZERO",
-		"origin_text": "At the start of each encounter, INFECT 1 ROT on every ICE.",
+		"origin_text": "At the start of each encounter, choose an ICE: INFECT 1 ROT on it.",
 		"starter": STARTER_VECTOR, "nulrem": "VECTOR"},
 }
 

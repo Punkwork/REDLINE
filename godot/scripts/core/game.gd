@@ -199,11 +199,12 @@ func _start_encounter() -> void:
 	for p in installed:
 		p.boost = 0
 	pulp_stats.encounters += 1
-	# PATIENT ZERO (VECTOR ORIGIN): every ICE starts with 1 ROT.
-	if rustler == "VECTOR":
-		for i in enc.ice.size():
-			infect(i, "ROT", 1)
 	_start_turn()
+	# PATIENT ZERO (VECTOR ORIGIN, VECTOR-001): choose an ICE; it starts with 1 ROT.
+	if rustler == "VECTOR" and phase == "PLAYER":
+		pending = {"kind": "patient_zero"}
+		phase = "CHOICE"
+		_say("PATIENT ZERO: choose an ICE to INFECT with 1 ROT.")
 
 func _new_ice(id: String) -> Dictionary:
 	var d := IceDB.def(id)
@@ -1038,6 +1039,14 @@ func _end_ice_node() -> void:
 # =====================================================================
 # Damage, healing, TRACE (Core Rules §6, §7)
 # =====================================================================
+
+func choose_ice(i: int) -> void:
+	## PATIENT ZERO's choice.
+	if phase != "CHOICE" or pending.get("kind", "") != "patient_zero" or i < 0 or i >= enc.ice.size():
+		return
+	infect(i, "ROT", 1)
+	pending = {}
+	phase = "PLAYER"
 
 func abandon() -> void:
 	## RUN-001: the player ends the run; the Rustler fails.

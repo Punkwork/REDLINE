@@ -49,6 +49,7 @@ func _init() -> void:
 	test_shatter()
 	test_pulp_curves()
 	test_end_run()
+	test_patient_zero()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -115,6 +116,8 @@ func start_node(g: Game, row: int, idx: int, rig: String) -> void:
 		g.choose_ready_rig(uid_of(g, g.draw_pile, rig))
 	if g.phase == "CHOICE" and g.pending.kind == "discard":
 		g.choose(g.hand[0].uid)
+	if g.phase == "CHOICE" and g.pending.kind == "patient_zero":
+		g.choose_ice(0)
 
 func test_shield_and_pulp() -> void:
 	var g := Game.new(2)
@@ -291,7 +294,7 @@ func test_rustlers() -> void:
 	g.new_run("VECTOR")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")   # COOKIE WALL STR 5
-	check(g.enc.ice[0].virus.get("ROT", 0) == 1 and g.ice_str(0) == 4, "PATIENT ZERO: 1 ROT, −1 STR")
+	check(g.enc.ice[0].virus.get("ROT", 0) == 1 and g.ice_str(0) == 4, "PATIENT ZERO: the chosen ICE gets 1 ROT, −1 STR")
 	var inj := put_in_hand(g, "INJECT")
 	g.bw = 4
 	g.play_card(inj, 0)
@@ -386,6 +389,14 @@ func test_end_run() -> void:
 	g.enter_node(0)
 	g.abandon()
 	check(g.phase == "DEAD", "END RUN: the Rustler fails")
+
+func test_patient_zero() -> void:
+	var g := Game.new(71)
+	g.new_run("VECTOR")
+	g.enter_node(0)
+	check(g.phase == "CHOICE" and g.pending.kind == "patient_zero", "VECTOR-001: PATIENT ZERO asks for an ICE")
+	g.choose_ice(1)
+	check(g.virus_total(0) == 0 and g.enc.ice[1].virus.get("ROT", 0) == 1 and g.phase == "PLAYER", "only the chosen ICE gets 1 ROT")
 
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
@@ -509,6 +520,8 @@ func sim_rustler(who: String) -> void:
 				"CHOICE":
 					if g.pending.kind == "card_break":
 						bot_choose_sub(g)
+					elif g.pending.kind == "patient_zero":
+						g.choose_ice(main_ice(g))
 					else:
 						g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
 				"PLAYER": bot_turn(g)

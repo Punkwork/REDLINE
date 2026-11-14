@@ -475,4 +475,5 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 | ICEBIBLE-001 | **Type identities**: FORTRESS hits hard (highest STR, mostly PULP), TUMBLER is the puzzle, VOID is deadly (§5.1). — **APPROVED 2026-11-13** |
 | PASSIVE-001 | **Subtypes and passive abilities** on the slice ICE (§5.5). — **BUILT for playtest 2026-11-13** |
 | PURGE-001 | **Corporation PURGE** at a hidden, rising virus-counter limit (§4.4, §5.7). — **APPROVED 2026-11-14** |
+| VECTOR-001 | **PATIENT ZERO** (VECTOR's ORIGIN): at the start of each encounter, **choose an ICE** and INFECT 1 ROT on it (was every ICE). — **APPROVED 2026-11-14** |
 | REEL-001 | TUMBLER slots shown as **slot-machine reels**, labelled with their subroutine (§5.4). — **APPROVED 2026-11-14** |

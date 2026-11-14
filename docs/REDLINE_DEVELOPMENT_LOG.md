@@ -1264,3 +1264,9 @@ Playtest: still not enough PULP. Designer's curves, one value per Corporation Re
 ## RUN-001 — END RUN button (APPROVED, 2026-11-14)
 
 An END RUN button (bottom right, red) asks "END THIS RUN?" with YES, END THE RUN / KEEP PLAYING. Yes: the Rustler fails (NUL/REM's run-lost line, EV-35), then the game returns to the start menu (Rustler choice). Not available while the Corporation Response or the reels are playing.
+
+## VECTOR-001 — PATIENT ZERO infects one chosen ICE (APPROVED, 2026-11-14)
+
+VECTOR's ORIGIN Ghostware PATIENT ZERO: **at the start of each encounter, choose an ICE: INFECT 1 ROT on it** (was 1 ROT on every ICE). In the slice, each ICE card shows a "PATIENT ZERO · INFECT 1 ROT HERE" button before VECTOR's first move. 30-run bot test (VECTOR, DRAW 6 + PULP curves; the bot picks the ICE with the most unbroken DEADLOCKs): **5 / 30** cleared (2 before); corporation PURGES fell from 49 to 12, because fewer counters reach the limit. `REDLINE_RUSTLERS.md` §6 and Core Rules amendments updated.
+
+Open: WORM copy vs move (WORMHOLE, COCKTAIL) — currently copy.

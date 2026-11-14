@@ -410,6 +410,8 @@ func refresh() -> void:
 	log_label.text = "  ·  ".join(g.log.slice(max(0, g.log.size() - 3)))
 	if g.phase == "CHOICE" and g.pending.get("kind", "") == "card_break":
 		log_label.text = "%s: choose a subroutine to break (%d left)." % [g.pending.card, g.pending.n]
+	if g.phase == "CHOICE" and g.pending.get("kind", "") == "patient_zero":
+		log_label.text = "PATIENT ZERO: choose an ICE to INFECT with 1 ROT."
 	if targeting >= 0:
 		log_label.text = "Choose an ICE for %s (right-click or Esc to cancel)." % CardDB.def(g.find_card(targeting).id).name
 	piles.text = "DECK %d   DISCARD %d   BURNED %d" % [g.draw_pile.size(), g.discard.size(), g.burned.size()] if in_enc else ""
@@ -708,6 +710,12 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			var on: bool = g.enc.turn >= t + 1
 			bh.add_child(_lbl(" T%d " % (t + 1), 12, Color("#0b0e13") if on else DIM, RIcon.COL.TRACE if on else Color("#232a36")))
 		v.add_child(bh)
+	if g.phase == "CHOICE" and g.pending.get("kind", "") == "patient_zero":
+		var pzb := Button.new()
+		pzb.text = "PATIENT ZERO · INFECT 1 ROT HERE"
+		pzb.add_theme_color_override("font_color", STRAIN_COL.ROT)
+		pzb.pressed.connect(func(): g.choose_ice(i); refresh())
+		v.add_child(pzb)
 	# subroutines (TUMBLERs: only the subroutines in its slots; the rest are face-down)
 	var act := g.active_subs(i)
 	var tumbler := IceDB.is_tumbler(ice.id)
