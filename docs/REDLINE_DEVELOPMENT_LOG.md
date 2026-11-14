@@ -989,3 +989,14 @@ Three lines approved as CANON verses referencing how computers are used in Reven
 
 Designer decision: the next session focuses on a Godot 4 build. An earlier Godot playtest of the first Node exists, but the new build starts fresh from `REDLINE_CORE_RULES.md` and the simplified-redesign docs, because the game has changed substantially since that playtest. The earlier playtest and the Python/Pygame archive remain reference material only.
 
+
+## BUILD-002 — Godot 4.3 HALCYON vertical slice (BUILT, 2026-11-13)
+
+First playable of the fresh Godot build (see BUILD-001). Lives in `godot/`; open `godot/project.godot` in Godot 4.3 (GL Compatibility).
+
+- **In:** Generalist with READY RIG; a 4-row HALCYON route (COOKIE BANNER with BOOTING → CAPTCHA or CONSENT WALL → SAFEHOUSE or DOORBELL → TERMS & CONDITIONS, 2 layers); full turn and Corporation Response rules (left→right, top→bottom, cleanup after); DEADLOCK/BREACH; go deeper or leave; reserves with the 10% clean bonus; SPAM; TRACE strikes (TRACER, HOUSE CALL, LOCKDOWN + Black ICE); depth-based card rewards (2 shared + 1 Generalist, 60/30/10 → 30/45/25).
+- **Visual cues:** per the ICE Design doc: type icon (FORTRESS slab, SIGYL keyhole, VOID eye), frame = role (MAIN heavy, SUPPORT thin, BLACK ICE inverted red with NO DEADLOCK), effect chip colours (PULP red, CORTEX violet, TRACE amber, DEADLOCK white, teal hand/deck, slate support), HALCYON peach band, large STR top right with base shown when changed, BW break cost on each subroutine, BOOTING T1–T3 pips, numbered Corporation Response preview with totals. All icons are drawn in code (`scripts/ui/icon.gd`).
+- **NUL/REM:** speaks CANON Bible lines exported by `tools/export_nulrem.py` → `godot/data/nulrem_lines.json` (re-run after Bible changes). Speak chance per trigger, filters by Rustler/corp/cause, repeat suppression of the last 40. EV-37 idle at 60 s; Konami code → EV-39; first-run flag for EV-02.
+- **Out:** CAPS, Uplinks, PATCHWORK, the Central Node, other Rustlers and corporations.
+- **Architecture:** rules engine `scripts/core/game.gd` (no UI dependency) + `cards.gd`, `ice.gd`, `nulrem.gd`; UI in `scripts/ui/main.gd`. Headless tests: `godot --headless --path godot --script res://tests/test_game.gd` (50 pass, including a bot that clears the slice). `tests/shot.gd` renders screenshots under a virtual display.
+- **Export:** `export_presets.cfg` has a Windows Desktop preset (embedded PCK) writing to `build/` (git-ignored).

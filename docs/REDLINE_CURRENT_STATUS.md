@@ -5,10 +5,10 @@
 > **NAME-001 (2026-11-13):** ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules). Terms in this document were updated to match; rule and decision IDs keep their original names (e.g. TRAINING-THREE-ICE-SENTRY-001). See `REDLINE_CORE_RULES.md` (NAME-001).
 
 ## Session handoff — 2026-11-13 (latest)
-**Next session focus (designer):** get a **Godot 4 build** ready.
+**Next session focus (designer):** playtest the **Godot 4.3 HALCYON slice** (BUILD-002), then extend it with CAPS, Uplinks and PATCHWORK.
 
 - **Rules authority:** `REDLINE_CORE_RULES.md` (simplified redesign, NAME-001, UPL-009), with the ICE, card-pool, Rustler, Uplink/CAPS, upgrades/escape and engines docs in `docs/`. Older conflicting Master Design entries are superseded (Core Rules §15).
-- **Repository state:** `godot/` contains only `.gitkeep`. An earlier Godot playtest of the first Node exists outside the repository, but the designer has decided to **build anew** from the current rules, since the game has changed substantially since then. The old playtest and the Python/Pygame archive are reference only.
+- **Repository state:** `godot/` holds the BUILD-002 HALCYON vertical slice (rules engine, icon UI, NUL/REM lines, 50 headless tests passing). An earlier Godot playtest of the first Node exists outside the repository, but the designer has decided to **build anew** from the current rules, since the game has changed substantially since then. The old playtest and the Python/Pygame archive are reference only.
 - **NUL/REM dialogue:** 263 verses (NR-001 to NR-263, with v2 revisions) in `REDLINE_BIBLE.md`, mapped to the 39 triggers of the NUL/REM Dialogue Trigger Table (draft, a Claude Sheet). Trigger-table and dialogue-system design is ready to implement.
 - **Open PR:** #2 (`docs/simplified-redesign-sync`) holds all 2026-11-13 documentation work and is **not yet merged**.
 - **Still open for designer decision:** in-world VOID vs CORTEX; the CRON Rustler name; ENG-001 to ENG-005 details; NUL/REM's origin and the First Signal fragments; licensing of quoted lines.
@@ -42,7 +42,7 @@
 | Ghostware / ORIGIN | Locked | Previously reported | Verify |
 | NUL/REM UI/dialogue | Character direction set | Verify | Live UI testing needed |
 | PAPER CUT ICE | Concept only | **Not confirmed implemented** | Balance/test pending |
-| Godot 4 production build | Target chosen | **Unknown** | Unknown |
+| Godot 4 production build | HALCYON vertical slice (BUILD-002) | Headless tests 50/50; bot clears slice | Windows export works |
 
 ## Known outstanding work
 - Acquire/inspect latest source archive and regression scripts.
