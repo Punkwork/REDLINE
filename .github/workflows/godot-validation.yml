@@ -1,0 +1,100 @@
+name: Godot validation and Windows playtest build
+
+on:
+  push:
+    paths:
+      - 'godot/**'
+      - '.github/workflows/godot-validation.yml'
+  pull_request:
+    paths:
+      - 'godot/**'
+      - '.github/workflows/godot-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: godot-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: '4.3'
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Godot editor
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 -o /tmp/godot.zip \
+            "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          echo '7de56444b130b10af84d19c7e0cf63cf9e9937ee4ba94364c3b7dd114253ca21  /tmp/godot.zip' | sha256sum --check
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          chmod +x /tmp/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64
+          echo /tmp/godot >> "$GITHUB_PATH"
+      - name: Import and run rules checks
+        shell: bash
+        run: |
+          GODOT="Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$GODOT" --headless --path godot --editor --import --quit 2>&1 | tee /tmp/import.log
+          "$GODOT" --headless --path godot --script res://tests/test_game.gd 2>&1 | tee /tmp/rules.log
+          if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
+      - name: Verify screenshot states and large-hand interaction
+        shell: bash
+        env:
+          SHOT_DIR: ${{ github.workspace }}/build/screenshots
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          mkdir -p "$SHOT_DIR"
+          for script in shot_rustlers shot_hand shot shot_reel; do
+            xvfb-run -a -s '-screen 0 1600x900x24' timeout 120 \
+              "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
+              --rendering-driver opengl3 --path godot --script "res://tests/${script}.gd" \
+              2>&1 | tee "/tmp/${script}.log"
+            if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' "/tmp/${script}.log"; then exit 1; fi
+          done
+      - name: Upload screenshots and test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: panopticon-verification
+          path: |
+            build/screenshots/*.png
+            /tmp/import.log
+            /tmp/rules.log
+            /tmp/shot*.log
+          retention-days: 14
+      - name: Install matching Windows release template
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 -o /tmp/templates.tpz \
+            "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          echo 'f5f10dbaf56a7908349e64b94ea8c2c93c2cc11fb1014c9565b68a2bb437b922  /tmp/templates.tpz' | sha256sum --check
+          unzip -q /tmp/templates.tpz templates/windows_release_x86_64.exe templates/version.txt -d /tmp/export
+          mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          cp /tmp/export/templates/* "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"
+      - name: Export Windows playtest build
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          mkdir -p build/windows
+          "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --headless --path godot \
+            --export-release 'Windows Desktop' ../build/windows/PANOPTICON_HALCYON_slice.exe \
+            2>&1 | tee /tmp/export.log
+          if grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/export.log; then exit 1; fi
+          cp docs/HALCYON_PLAYTEST_GUIDE.md build/windows/README.md
+          cp docs/REDLINE_PLAYTEST_CHECKLIST.md build/windows/
+          (cd build/windows && sha256sum PANOPTICON_HALCYON_slice.exe > SHA256SUMS.txt)
+      - name: Upload Windows playtest build
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: PANOPTICON-HALCYON-Windows-x86_64
+          path: build/windows/
+          if-no-files-found: error
+          retention-days: 14

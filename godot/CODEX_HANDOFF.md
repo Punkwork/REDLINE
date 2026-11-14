@@ -123,3 +123,17 @@ The rules authority is `docs/REDLINE_CORE_RULES.md`. Slice ICE values are in `do
 - Each commit carries the decision ID it implements, for example `VIRUS-001: …`, and appends the decision to `docs/REDLINE_DEVELOPMENT_LOG.md`.
 - Don't mark anything implemented or tested without reproducible evidence (`docs/REPOSITORY_STRUCTURE.md` ground rule 4).
 - `game.gd` is UI-free and fully testable headless. Keep rules there and keep presentation in `scripts/ui/`.
+
+
+## 8. Codex follow-up — 2026-11-14 (latest engineering handoff)
+
+This follow-up supersedes known issues 1/1a and the stale test-count part of issue 4 above. Work is on `codex/halcyon-playtest-stabilization`, based on `8a7dad9`; original code/rules baseline remains unchanged except for UI presentation.
+
+- **QA-HALCYON-001:** screenshot fixture resolves PATIENT ZERO first, checks every card play and expected state, and fails on rejected actions or PNG-write failures.
+- **UI-003:** readable cards scroll inside the bounded hand area; all cards remain reachable. Scroll range is recalculated after deferred layout and position survives refresh. Counters no longer share a long overflowing line. Automated display/input checks cover hands of 6/7/9/10/16 cards, actual mouse wheel and card clicks.
+- **CI-001:** workflow verifies import, 134 rules checks and all four screenshot scripts; push builds export a Windows artifact with the guide/checklist. Hosted success must be verified separately on Actions.
+- **Verified locally:** Godot 4.3 Linux; import and rules 134/134; all screenshot scripts; large-hand input checks; Windows export generation. Bot results reproduce 10/30 GENERALIST, 6/30 ECHO, 5/30 VECTOR, 1/30 RIOT. No rules or card-value changes.
+- **Still pending:** real Windows runtime/playtest, subjective readability/audio/difficulty, remaining original handoff issues and open decisions. `docs/HALCYON_PLAYTEST_GUIDE.md` distinguishes applicable checks from unimplemented full-game features.
+- **Merge correction:** PR #1 contains a separate heist implementation and JSON/assets absent from PR #2, so “PR #2 is the superset” above must not be interpreted as a verified code-superset claim. Keep PR #1 for explicit review; no PR was merged.
+
+The exact changed files and final revision are available in the stabilization PR. Continue from that revision after checking whether Claude or the designer has made newer changes.

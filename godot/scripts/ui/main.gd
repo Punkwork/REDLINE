@@ -33,6 +33,9 @@ var ice_row: HBoxContainer
 var preview: HBoxContainer
 var preview_total: Label
 var hand_row: HBoxContainer
+var hand_scroll: ScrollContainer
+var hand_hint: Label
+var hand_revision := 0
 var log_label: Label
 var end_btn: Button
 var piles: Label
@@ -166,12 +169,25 @@ func _build_layout() -> void:
 	log_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	add_child(log_label)
 
+	# UI-003: preserve readable card sizes; larger hands scroll inside the hand
+	# area instead of expanding under the action column and pile counters.
+	hand_hint = _lbl("", 12, DIM)
+	hand_hint.position = Vector2(244, 578)
+	hand_hint.size = Vector2(1090, 20)
+	add_child(hand_hint)
+	hand_scroll = ScrollContainer.new()
+	hand_scroll.position = Vector2(244, 600)
+	hand_scroll.size = Vector2(1090, 256)
+	hand_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	hand_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	hand_scroll.follow_focus = true
+	add_child(hand_scroll)
 	hand_row = HBoxContainer.new()
-	hand_row.position = Vector2(244, 600)
-	hand_row.size = Vector2(1090, 230)
+	hand_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hand_row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	hand_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	hand_row.add_theme_constant_override("separation", 8)
-	add_child(hand_row)
+	hand_scroll.add_child(hand_row)
 
 	end_btn = Button.new()
 	end_btn.text = "END TURN"
@@ -414,7 +430,7 @@ func refresh() -> void:
 		log_label.text = "PATIENT ZERO: choose an ICE to INFECT with 1 ROT."
 	if targeting >= 0:
 		log_label.text = "Choose an ICE for %s (right-click or Esc to cancel)." % CardDB.def(g.find_card(targeting).id).name
-	piles.text = "DECK %d   DISCARD %d   BURNED %d" % [g.draw_pile.size(), g.discard.size(), g.burned.size()] if in_enc else ""
+	piles.text = "DECK %d\nDISCARD %d\nBURNED %d" % [g.draw_pile.size(), g.discard.size(), g.burned.size()] if in_enc else ""
 	_build_overlay()
 
 func _handle_events() -> void:
@@ -1064,9 +1080,13 @@ func _circled(n: int) -> String:
 	return c[n - 1] if n <= c.size() else str(n)
 
 func _build_hand() -> void:
+	hand_revision += 1
+	var scroll_position := hand_scroll.scroll_horizontal
 	_clear(hand_row)
+	hand_hint.text = ""
 	if g.enc.is_empty() or not (g.phase in ["PLAYER", "CHOICE", "RESPONSE"]):
 		return
+	hand_hint.text = "HAND %d · scroll over the cards or drag the scrollbar to see more" % g.hand.size()
 	for c in g.hand:
 		var cv := _card_view(c.id, c.uid, targeting == c.uid)
 		if c.get("cached", false):
@@ -1081,6 +1101,19 @@ func _build_hand() -> void:
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				_on_card(uid))
 		hand_row.add_child(cv)
+	_restore_hand_scroll(scroll_position, hand_revision)
+
+func _restore_hand_scroll(position_x: int, revision: int) -> void:
+	# Card labels update their minimum sizes after the hierarchy is rebuilt.
+	# Re-sort the viewport after those updates; otherwise its scrollbar may
+	# retain the previous hand's range. Ignore superseded refresh requests.
+	await get_tree().process_frame
+	if revision != hand_revision:
+		return
+	hand_scroll.queue_sort()
+	await get_tree().process_frame
+	if revision == hand_revision:
+		hand_scroll.scroll_horizontal = position_x
 
 func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 	var d := CardDB.def(id)
