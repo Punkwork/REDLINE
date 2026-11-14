@@ -1139,3 +1139,7 @@ The slice now starts with a Rustler choice: THE GENERALIST, ECHO, RIOT or VECTOR
 - A purge isn't a Corporation Response: TUMBLERs still rotate (the Rustler's turn starts), but VOID ICE reveal nothing new and HARDENING doesn't grow (BLACKOUT now follows the same rule).
 - **INCUBATOR** returns to VECTOR's reward pool: after a purge it INFECTs 2 ROT on each purged ICE.
 - **30-run bot test, VECTOR:** 12 / 30 cleared (9 before), with 60 purges across 29 of the 30 runs (about 2 per run). A purge removes VECTOR's ROT but also skips a whole turn of damage; for now the skipped turn is worth more. The bot doesn't trigger purges on purpose, so a player who learns the limit could do so deliberately. If that shows up in playtest, the fallback options are: every ICE gets +1 STR after a purge, or purge-then-respond.
+
+## UI-002 — Encounter CRED meter (APPROVED, 2026-11-14)
+
+Each encounter shows a CRED meter in the info bar: a gold bar with "left / total CRED" for that encounter's reserve. At 0 remaining, the number shows in red (for now).

@@ -40,6 +40,11 @@ func _process(_d: float) -> bool:
 			main.refresh()
 		2:
 			_snap("r3_card_break")
+			g.choose_sub(1, 1)
+			g.extract(15)
+			main.refresh()
+		3:
+			_snap("r4_cred_empty")
 			return true
 	step += 1
 	return false

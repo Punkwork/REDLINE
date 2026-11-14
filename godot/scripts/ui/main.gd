@@ -478,9 +478,28 @@ func _build_info() -> void:
 	dh.add_child(_lbl(dtxt, 14, TEXT))
 	info.add_child(dh)
 	info.add_child(_lbl("TURN %d" % g.enc.turn, 14, DIM))
+	# CRED meter (UI-002): this encounter's reserve, left / total; 0 shows in red.
 	var rh := HBoxContainer.new()
+	rh.add_theme_constant_override("separation", 6)
 	rh.add_child(RIcon.make("CRED", 16))
-	rh.add_child(_lbl(" RESERVE %d" % g.enc.reserve, 14, RIcon.COL.CRED))
+	var left: int = g.enc.reserve
+	var total: int = max(1, g.enc.reserve_start)
+	var bar := Control.new()
+	bar.custom_minimum_size = Vector2(120, 14)
+	bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var back := ColorRect.new()
+	back.color = Color("#26303f")
+	back.size = Vector2(120, 14)
+	bar.add_child(back)
+	var fill := ColorRect.new()
+	fill.color = RIcon.COL.CRED
+	fill.size = Vector2(120.0 * float(left) / float(total), 14)
+	bar.add_child(fill)
+	rh.add_child(bar)
+	var red := Color("#ff4d5e")
+	rh.add_child(_lbl("%d" % left, 15, red if left == 0 else RIcon.COL.CRED))
+	rh.add_child(_lbl("/ %d CRED" % g.enc.reserve_start, 13, DIM))
+	rh.tooltip_text = "CRED left to extract in this encounter."
 	info.add_child(rh)
 	if g.enc.breached:
 		info.add_child(_lbl("BREACHED", 18, Color("#58f29a")))
