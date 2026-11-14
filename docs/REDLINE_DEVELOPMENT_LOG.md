@@ -1151,3 +1151,7 @@ Each encounter shows a CRED meter in the info bar: a gold bar with "left / total
 - **Exception noted:** GHOST SIGNAL is a shared basic; offering it as a reward breaks BASIC-001 ("basics are never offered"). Accepted for ECHO's pool only; the other Rustlers never see it as a reward.
 - **Assumption to confirm:** both cards sit at Common rarity in the pool.
 - **30-run bot test, ECHO:** 22 / 30 cleared (23 before); survivors' average end VITAE 18.7 (14.7 before). `REDLINE_RUSTLERS.md` §4 updated.
+
+## ECHO-002 — HUSH starts at STR 1 (APPROVED, 2026-11-14)
+
+HUSH (ECHO's TUMBLER Icepick): STR 3 → **1**; boost (2 BW → +1 STR) and break (1 BW) unchanged. 30-run bot test, ECHO: **23 / 30** cleared (22 after ECHO-001), survivors' average end VITAE 16.5 (18.7). The lower STR barely moved the result: boosts last the whole encounter and ECHO now has 3 PROBEs, so the extra cost is paid once per encounter, and LOW PROFILE keeps TRACE low while ECHO takes the extra turns.

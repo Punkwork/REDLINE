@@ -94,7 +94,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
-| 1 | **HUSH** *(signature)* | PROGRAM — ICEPICK (SIGYL) | 1 BW, 1 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. *(BASIC-001: was STR 4, boost 1 BW.)* |
+| 1 | **HUSH** *(signature)* | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 1. Boost: 2 BW → +1 STR. Break: 1 BW. *(BASIC-001: was STR 4, boost 1 BW. ECHO-002: STR 3 → 1. ROT-001: SIGYL → TUMBLER.)* |
 | 1 | **BACKDOOR** *(fallback)* | SCRIPT — EXPLOIT | 3 BW | Break 1 subroutine on **any** ICE with STR 3 or less. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
 | 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. *(ECHO-001: was 2.)* |
