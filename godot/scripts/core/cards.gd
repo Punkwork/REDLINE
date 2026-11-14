@@ -150,7 +150,7 @@ const DEFS := {
 		"text": "This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. (+3 TRACE)"},
 	"LAY_LOW": {"name": "LAY LOW", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER", "text": "−3 TRACE."},
 	"SMASH_AND_GRAB": {"name": "SMASH & GRAB", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"extract": 8, "extract_trace": 2, "text": "End of your turn: extract 8 CRED, +2 TRACE."},
+		"extract": 8, "extract_trace": 1, "extract_trace_below": 20, "text": "End of your turn: extract 8 CRED. +1 TRACE while your TRACE is under 20."},
 
 	# --- RIOT pool (Card Pools §6; SIGYL → TUMBLER) ---
 	"SMASH": {"name": "SMASH", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 3, "rarity": "COMMON", "pool": "RIOT",

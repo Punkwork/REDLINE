@@ -1207,3 +1207,14 @@ Even when SHATTER fires often, its +5 TRACE pushes RIOT from the redline into st
 **30-run bot test (RIOT, 15-card deck):** 2 / 30 cleared; SHATTER played 30 times in 17 runs; deaths CAPTCHA 10, DOORBELL 6, COOKIE BANNER 5, T&C 5, CONSENT WALL 2. With a milder price (SLEDGE only loses its boosts, back to STR 2): 3 / 30.
 
 Why it's still low: one SHATTER in 15 cards is drawn about one turn in three, and each play usually buys one or two breaks (SLEDGE needs 2–3 boosts to reach a STR 4–5 TUMBLER), after which SLEDGE starts again from 0.
+
+## RIOT-004 — RIOT's new values (APPROVED, 2026-11-14)
+
+Profiling RIOT's deaths (27 of 30 runs) showed it was dying from TRACE, not from a lack of breaks: 20 of 27 at strike 2 or more, HOUSE CALL present in 17. SMASH & GRAB's +2 TRACE every turn was the steady source.
+
+**Decisions:**
+- **SMASH & GRAB:** extract 8 CRED; **+1 TRACE while your TRACE is under 20** (was +2 every turn). It drives RIOT up to the redline, then goes quiet.
+- **SHATTER** stays as RIOT-003: 1 BW, **+3 TRACE**; SLEDGE breaks the chosen ICE of any type this turn, then drops to STR 0 for the rest of the encounter.
+- **RIOT's starting deck is the 15-card deck** (RIOT-002): SLEDGE, BRUTE FORCE, SHATTER, OVERLOAD, PROBE ×3, FEEDBACK, ADRENAL SPIKE, PULP Shield ×3, LAY LOW, SMASH & GRAB, Basic Extractor.
+
+**30-run bot test (all Rustlers, same bot):** ECHO 14 / 30 · VECTOR 12 / 30 · GENERALIST 10 / 30 · **RIOT 8 / 30** (was 1–3). SHATTER played 48 times in 21 runs. Variants tried: SMASH & GRAB no TRACE 10 / 30; +2 under 20 only 6 / 30; SHATTER without TRACE 1–3 / 30; SHATTER lasting the whole encounter 3 / 30.

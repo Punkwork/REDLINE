@@ -587,7 +587,7 @@ func end_turn() -> void:
 			if d.has("extract_quiet") and enc.trace_gained_enc == 0:
 				amt = d.extract_quiet
 			extract(amt + long_game)
-			if d.get("extract_trace", 0) > 0:
+			if d.get("extract_trace", 0) > 0 and trace < d.get("extract_trace_below", 9999):
 				add_trace(d.extract_trace, false)
 		elif p.inst.id == "SILENT_PARTNER":
 			if enc.cloak_turn > 0:
