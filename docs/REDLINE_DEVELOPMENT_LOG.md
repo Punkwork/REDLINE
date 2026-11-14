@@ -1062,3 +1062,14 @@ Playtest: the slice had about half the PULP subroutines the designer expected, a
 - **AUTO-RENEW** (new FORTRESS, T1, STR 4): [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK — escalating, like a subscription that creeps up. Joins CAPTCHA as the support ICE in the row-2 CAPTCHA node.
 - Non-Black PULP subroutines in the slice: 4 → 9. A simple bot clears 12 of 30 seeded runs, and deaths now spread across the route (TERMS & CONDITIONS 15, CAPTCHA 2, DOORBELL 1); survivors finish with 5–28 VITAE.
 - **Assumption to confirm:** values are fixed per subroutine, not rolled each time.
+
+## ICEBIBLE-001 — ICE type identities (APPROVED, 2026-11-13); passive abilities kept for consideration
+
+Designer decisions, recorded in the new **ICE Rules Bible** doc (https://claude.ai/artifact/DnSnz3Pfgqqvd7nkwuBsdc):
+- **FORTRESS:** generally the highest STR; fewer subroutines, almost all PULP; the odd other effect; TRACE rare.
+- **TUMBLER:** where the quirks and puzzles happen.
+- **VOID:** where the deadly happens.
+
+The bible also holds PROPOSED STR/subroutine budgets per type and tier, general ICE practices ("should, not could"), and an audit of the slice ICE (4 of 9 fit; DOORBELL CAM, CAPTCHA and AUTO-RENEW need changes). No ICE changed yet.
+
+All 14 proposed passive abilities are kept for consideration in the **Ice Passive Abilities** doc (https://claude.ai/artifact/6dDZTwDj8Hv9RkhJbucrd6): power ranking (1–5) with a budget cost scale, what each could break and its guardrail, combinations to forbid, and a suggested first playtest set (AUTO-RENEW HARDENING, COOKIE WALL TOLL, CONSENT FORM RELAY, TERMS OF SERVICE SEQUENCED). ALARM's threshold moved to TRACE 30, because strike 1 resets TRACE to 20.
