@@ -985,3 +985,7 @@ Three lines approved as CANON verses referencing the Ultimate Computer from Supe
 
 Three lines approved as CANON verses referencing how computers are used in Revenge of the Nerds, focused on the engineering rather than the film's mocking framing of Lamar: NR-261 (EV-27 Card reward; the javelin built for Lamar's throw), NR-262 (EV-37 Idle; the computer-driven win) and NR-263 (EV-34 Run won; brains won). A fourth candidate for EV-12 was declined.
 
+## BUILD-001 — Godot build to start anew (APPROVED, 2026-11-13)
+
+Designer decision: the next session focuses on a Godot 4 build. An earlier Godot playtest of the first Node exists, but the new build starts fresh from `REDLINE_CORE_RULES.md` and the simplified-redesign docs, because the game has changed substantially since that playtest. The earlier playtest and the Python/Pygame archive remain reference material only.
+

@@ -8,7 +8,7 @@
 **Next session focus (designer):** get a **Godot 4 build** ready.
 
 - **Rules authority:** `REDLINE_CORE_RULES.md` (simplified redesign, NAME-001, UPL-009), with the ICE, card-pool, Rustler, Uplink/CAPS, upgrades/escape and engines docs in `docs/`. Older conflicting Master Design entries are superseded (Core Rules §15).
-- **Repository state:** `godot/` contains only `.gitkeep`, so there is no Godot project yet. The Python/Pygame playtest archive is **not** in the repository; it is needed if the build should start from the existing prototype.
+- **Repository state:** `godot/` contains only `.gitkeep`. An earlier Godot playtest of the first Node exists outside the repository, but the designer has decided to **build anew** from the current rules, since the game has changed substantially since then. The old playtest and the Python/Pygame archive are reference only.
 - **NUL/REM dialogue:** 263 verses (NR-001 to NR-263, with v2 revisions) in `REDLINE_BIBLE.md`, mapped to the 39 triggers of the NUL/REM Dialogue Trigger Table (draft, a Claude Sheet). Trigger-table and dialogue-system design is ready to implement.
 - **Open PR:** #2 (`docs/simplified-redesign-sync`) holds all 2026-11-13 documentation work and is **not yet merged**.
 - **Still open for designer decision:** in-world VOID vs CORTEX; the CRON Rustler name; ENG-001 to ENG-005 details; NUL/REM's origin and the First Signal fragments; licensing of quoted lines.
