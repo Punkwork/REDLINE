@@ -43,6 +43,7 @@ func _init() -> void:
 	test_boost_installed()
 	test_void_reveal()
 	test_detainer_rules()
+	test_passives()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -198,6 +199,41 @@ func test_detainer_rules() -> void:
 			check(IceDB.is_tumbler(id) and IceDB.def(id).subs[0][0].k == "BW_DRAIN", "%s: DETAINER is a TUMBLER with −1 BW at S1" % id)
 	check(total >= 1, "the slice has a DETAINER")
 
+func test_passives() -> void:
+	var g := Game.new(13)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, 1, 1, "FORTRESS_ICEPICK")   # COOKIE WALL: TOLL
+	var c := g.break_info(0, 0)
+	var dl := g.break_info(0, 2)
+	check(c.cost == dl.cost + 1, "TOLL: +1 BW except on the DEADLOCK (%d vs %d)" % [c.cost, dl.cost])
+	g = Game.new(14)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, 3, 0, "FORTRESS_ICEPICK")   # TERMS & CONDITIONS layer 1: TOS SEQUENCED
+	check(g.break_info(0, 2).reason == "BREAK S1 FIRST", "SEQUENCED blocks the DEADLOCK")
+	g = Game.new(15)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # AUTO-RENEW (HARDENING) + CAPTCHA (TRIPWIRE)
+	var s0 := g.ice_str(0)
+	g.end_turn()
+	if g.phase == "CHOICE":
+		g.choose(g.hand[0].uid)
+	check(g.ice_str(0) == s0 + 1, "HARDENING +1 STR after a response")
+	g.bw = 10
+	var t := g.trace
+	var sub: int = g.active_subs(1)[0]
+	if g.break_sub(1, sub):
+		check(g.trace == t + 1, "TRIPWIRE adds TRACE 1 per break")
+	g = Game.new(16)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, 2, 1, "VOID_ICEPICK")
+	g.layer = 1
+	g._start_encounter()                    # CONSENT FORM (RELAY) + TERMS OF SERVICE
+	check(g.ice_str(1) == 9, "RELAY gives the ICE to its right +2 STR")
+
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
 	g.new_run()
@@ -232,7 +268,7 @@ func test_rainbow_and_toolbelt() -> void:
 	g.bw = 4
 	# TERMS OF SERVICE STR 7 vs FORTRESS Icepick STR 1: 6 boosts at 1 BW, first boost free (TOOLBELT), first break free
 	var c2 := g.break_info(1, 0)
-	check(c2.cost == 5, "TOOLBELT makes the first boost free (got %s)" % str(c2))
+	check(c2.cost == 7, "TOOLBELT (TOS STR 9 with CONSENT FORM's RELAY) makes the first boost free (got %s)" % str(c2))
 
 func test_spam_and_filter() -> void:
 	var g := Game.new(7)

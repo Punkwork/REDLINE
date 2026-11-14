@@ -538,6 +538,10 @@ func response_finish() -> void:
 		return
 	for ice in enc.get("resp_void", []):
 		ice.responses += 1
+	# HARDENING: +1 STR after each Corporation Response, up to +3.
+	for ice in enc.ice:
+		if IceDB.def(ice.id).get("passive", "") == "HARDENING" and ice.get("harden", 0) < 3:
+			ice["harden"] = ice.get("harden", 0) + 1
 	enc.ghost = false
 	_cleanup()
 	if phase == "DEAD":
@@ -612,7 +616,14 @@ func ice_str(i: int) -> int:
 	var ice: Dictionary = enc.ice[i]
 	if ice.bomb:
 		return 0
-	return max(0, IceDB.def(ice.id).str + ice.str_mod)
+	var v: int = IceDB.def(ice.id).str + ice.str_mod + ice.get("harden", 0)
+	# RELAY: the ICE to the left props this one up while it has an unbroken subroutine.
+	if i > 0 and IceDB.def(enc.ice[i - 1].id).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false):
+		v += 2
+	return max(0, v)
+
+func passive(i: int) -> String:
+	return IceDB.def(enc.ice[i].id).get("passive", "")
 
 func pick_str(p: Dictionary) -> int:
 	return CardDB.def(p.inst.id).pick.str + p.boost
@@ -627,6 +638,12 @@ func break_info(i: int, s: int) -> Dictionary:
 		return {"ok": false, "reason": "HIDDEN"}
 	if d.get("ability", "") == "BOOTING" and _has_deadlock(d.subs[s]) and enc.turn < 3:
 		return {"ok": false, "reason": "LOCKED until turn 3"}
+	# SEQUENCED: subroutines are broken left to right.
+	if d.get("passive", "") == "SEQUENCED":
+		for k in s:
+			if not ice.broken[k]:
+				return {"ok": false, "reason": "BREAK S%d FIRST" % (k + 1)}
+	var toll: int = 1 if d.get("passive", "") == "TOLL" and not _has_deadlock(d.subs[s]) else 0
 	var adapter := _installed_has("ADAPTER")
 	var best := {}
 	for p in installed:
@@ -651,7 +668,7 @@ func break_info(i: int, s: int) -> Dictionary:
 			free = true
 		elif pk.get("double", false) and ice.rainbow == p.inst.uid:
 			brk = 0
-		var cost: int = boost_bw + brk + extra
+		var cost: int = boost_bw + brk + extra + toll
 		var better: bool = best.is_empty() or cost < best.cost or (cost == best.cost and pk.get("double", false))
 		if better:
 			best = {"ok": true, "cost": cost, "uid": p.inst.uid, "boosts": boosts, "free": free, "reason": ""}
@@ -707,6 +724,8 @@ func break_sub(i: int, s: int) -> bool:
 		shield += pk.shield_per_break
 	ice.broken[s] = true
 	enc.breaks_turn += 1
+	if IceDB.def(ice.id).get("passive", "") == "TRIPWIRE":
+		add_trace(1, false)
 	var d := IceDB.def(ice.id)
 	if _has_deadlock(d.subs[s]):
 		_event("EV-06")

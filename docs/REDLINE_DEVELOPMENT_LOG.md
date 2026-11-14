@@ -1073,3 +1073,33 @@ Designer decisions, recorded in the new **ICE Rules Bible** doc (https://claude.
 The bible also holds PROPOSED STR/subroutine budgets per type and tier, general ICE practices ("should, not could"), and an audit of the slice ICE (4 of 9 fit; DOORBELL CAM, CAPTCHA and AUTO-RENEW need changes). No ICE changed yet.
 
 All 14 proposed passive abilities are kept for consideration in the **Ice Passive Abilities** doc (https://claude.ai/artifact/6dDZTwDj8Hv9RkhJbucrd6): power ranking (1–5) with a budget cost scale, what each could break and its guardrail, combinations to forbid, and a suggested first playtest set (AUTO-RENEW HARDENING, COOKIE WALL TOLL, CONSENT FORM RELAY, TERMS OF SERVICE SEQUENCED). ALARM's threshold moved to TRACE 30, because strike 1 resets TRACE to 20.
+
+## PASSIVE-001 — Subtypes and passive abilities on the slice ICE (BUILT for playtest, 2026-11-13)
+
+Each slice ICE gets the subtype and one passive from the Ice Passive Abilities doc:
+
+| ICE | Type · subtype | Passive |
+|---|---|---|
+| ACCEPT ALL | TUMBLER · DETAINER | — (the DETAINER's −1 BW only; the encounter already has BOOTING) |
+| REJECT ALL | TUMBLER | BOOTING (unchanged) |
+| COOKIE WALL | FORTRESS · TOLLHOUSE | TOLL: breaks cost +1 BW, except the DEADLOCK |
+| TERMS OF SERVICE | FORTRESS · VAULT | SEQUENCED: break left to right |
+| AUTO-RENEW | FORTRESS · RATCHET | HARDENING: +1 STR after each response (max +3) |
+| CONSENT FORM | TUMBLER · SWITCHBOARD | RELAY: ICE to its right +2 STR while it has an unbroken subroutine |
+| CAPTCHA | TUMBLER · SNARE | TRIPWIRE: each break adds TRACE 1 |
+| DOORBELL CAM | VOID · WATCHER | WATCHER (was its CLOAK → TRACE ability) |
+| HOUSE CALL | Black VOID | none (Black ICE get no passives) |
+
+All pass the doc's guardrails (max 2 passive ICE per encounter; no TOLL with the DETAINER; no HARDENING beside RELAY or BOOTING). Ice stats unchanged; the ICE Rules Bible audit changes are not applied yet.
+
+**30-run bot test (same seeds 100–129, random routes):**
+
+| | Before passives (PULP-001) | With passives |
+|---|---|---|
+| Runs cleared | 12 / 30 | 11 / 30 |
+| Deaths: CAPTCHA node | 2 | 8 |
+| Deaths: DOORBELL node | 1 | 1 |
+| Deaths: TERMS & CONDITIONS | 15 | 10 |
+| Survivors' average end VITAE | 17.8 | 14.0 |
+
+Reading: the CAPTCHA node (AUTO-RENEW HARDENING + CAPTCHA TRIPWIRE) became the new danger spot; runs that get past it reach the end with less VITAE. The bot doesn't play around passives (it breaks TRIPWIRE subroutines freely and ignores RELAY order), so a human should do better than these numbers.

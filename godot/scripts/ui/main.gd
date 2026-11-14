@@ -594,10 +594,10 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	head.add_child(RIcon.make(d.type, 34))
 	var nm := VBoxContainer.new()
 	nm.add_child(_lbl(d.name, 19, TEXT))
-	if d.get("subtype", "") == "DETAINER":
+	if d.get("subtype", "") != "":
 		var th := HBoxContainer.new()
 		th.add_child(_lbl(d.type + " · ", 12, DIM))
-		th.add_child(_lbl(" DETAINER ", 11, Color("#0b0e13"), RIcon.COL.BW))
+		th.add_child(_lbl(" %s " % d.subtype, 11, Color("#0b0e13"), RIcon.COL.BW if d.subtype == "DETAINER" else Color("#c7b9ff")))
 		nm.add_child(th)
 	else:
 		nm.add_child(_lbl(d.type, 12, DIM))
@@ -655,7 +655,10 @@ func _ice_card(i: int, is_main: bool) -> Control:
 		v.add_child(hh)
 	if d.has("ability_text"):
 		var ah := HBoxContainer.new()
-		ah.add_child(RIcon.make("CLOAK" if d.ability == "CLOAK_TRACE" else "TRACE", 16))
+		var pk: String = d.get("passive", d.get("ability", ""))
+		var picon := {"CLOAK_TRACE": "CLOAK", "WATCHER": "CLOAK", "BOOTING": "TRACE", "TOLL": "BW", "SEQUENCED": "DEADLOCK",
+			"HARDENING": "STR", "RELAY": "STR", "TRIPWIRE": "TRACE"}
+		ah.add_child(RIcon.make(picon.get(pk, "ICE"), 16))
 		var al := _lbl(" " + d.ability_text, 12, Color("#c7b9ff"))
 		al.autowrap_mode = TextServer.AUTOWRAP_WORD
 		al.custom_minimum_size = Vector2(250, 0)
