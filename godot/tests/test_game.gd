@@ -44,6 +44,7 @@ func _init() -> void:
 	test_void_reveal()
 	test_detainer_rules()
 	test_passives()
+	test_rustlers()
 	test_extraction_bonus()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
@@ -108,6 +109,8 @@ func start_node(g: Game, row: int, idx: int, rig: String) -> void:
 	g.enter_node(idx)
 	if g.phase == "READY_RIG":
 		g.choose_ready_rig(uid_of(g, g.draw_pile, rig))
+	if g.phase == "CHOICE" and g.pending.kind == "discard":
+		g.choose(g.hand[0].uid)
 
 func test_shield_and_pulp() -> void:
 	var g := Game.new(2)
@@ -234,6 +237,63 @@ func test_passives() -> void:
 	g._start_encounter()                    # CONSENT FORM (RELAY) + TERMS OF SERVICE
 	check(g.ice_str(1) == 9, "RELAY gives the ICE to its right +2 STR")
 
+func test_rustlers() -> void:
+	# ECHO: no READY RIG, LOW PROFILE, SLOW DRIP, BACKDOOR
+	var g := Game.new(21)
+	g.new_run("ECHO")
+	check(g.run_deck.size() == 12 and uid_of(g, g.run_deck, "HUSH") > 0, "ECHO starter deck")
+	g.enter_node(0)
+	check(g.phase == "PLAYER", "ECHO skips READY RIG")
+	g.add_trace(3, false)
+	check(g.trace == 2, "LOW PROFILE: TRACE 3 becomes 2")
+	g.trace = 0
+	g.enc.trace_gained_enc = 0
+	install(g, "SLOW_DRIP")
+	var c0 := g.cred
+	g.end_turn()
+	check(g.cred - c0 >= 6, "SLOW DRIP extracts 6 when quiet (got %d)" % (g.cred - c0))
+	g = Game.new(22)
+	g.new_run("ECHO")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")   # COOKIE WALL STR 5
+	g.enc.ice[0].str_mod = -2
+	var bd := put_in_hand(g, "BACKDOOR")
+	g.bw = 4
+	check(g.play_card(bd) and g.phase == "CHOICE" and g.pending.kind == "card_break", "BACKDOOR asks for a subroutine")
+	check(g.card_break_ok(0, 2) and not g.card_break_ok(0, 5 - 5 + 0) == false, "BACKDOOR can break the DEADLOCK")
+	g.choose_sub(0, 2)
+	check(g.enc.breached and g.phase == "PLAYER", "BACKDOOR breaks the DEADLOCK: BREACH")
+	# RIOT: REDLINER, SLEDGE adds TRACE
+	g = Game.new(23)
+	g.new_run("RIOT")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")
+	install(g, "SLEDGE")
+	g.bw = 4
+	var t0 := g.trace
+	g.break_sub(0, 0)
+	check(g.trace == t0 + 1, "SLEDGE: each break +1 TRACE")
+	g.trace = 25
+	g.end_turn()
+	check(g.bw == 5, "REDLINER: 5 BW at TRACE 20+ (got %d)" % g.bw)
+	# VECTOR: PATIENT ZERO, INJECT, SCRAMBLE, RUNTIME ERROR
+	g = Game.new(24)
+	g.new_run("VECTOR")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")   # COOKIE WALL STR 5
+	check(g.enc.ice[0].virus.get("ROT", 0) == 1 and g.ice_str(0) == 4, "PATIENT ZERO: 1 ROT, −1 STR")
+	var inj := put_in_hand(g, "INJECT")
+	g.bw = 4
+	g.play_card(inj, 0)
+	check(g.virus_total(0) == 3 and g.ice_str(0) == 2, "INJECT: +2 ROT")
+	g.infect(0, "SCRAMBLE", 1)
+	check(g.effect_value(g.enc.ice[0], {"k": "PULP", "v": 2}).v == 1, "SCRAMBLE: PULP 2 deals 1")
+	var rt := put_in_hand(g, "RUNTIME_ERROR")
+	g.bw = 4
+	check(g.play_card(rt), "RUNTIME ERROR plays with 2+ virus counters")
+	g.choose_sub(0, 2)
+	check(g.enc.breached, "RUNTIME ERROR breaks the DEADLOCK")
+
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
 	g.new_run()
@@ -328,12 +388,16 @@ func test_full_slice_path() -> void:
 	print("  bot: phase=%s vitae=%d trace=%d strikes=%d cred=%d deck=%d steps=%d" % [g.phase, g.vitae, g.trace, g.strikes, g.cred, g.run_deck.size(), guard])
 
 func sim_many() -> void:
+	for who in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:
+		sim_rustler(who)
+
+func sim_rustler(who: String) -> void:
 	var done := 0
 	var rows := {}
 	var vit := []
 	for seed in range(100, 130):
 		var g := Game.new(seed)
-		g.new_run()
+		g.new_run(who)
 		var guard := 0
 		while g.phase != "SLICE_DONE" and g.phase != "DEAD" and guard < 3000:
 			guard += 1
@@ -343,14 +407,21 @@ func sim_many() -> void:
 				"SAFEHOUSE": g.safehouse_heal()
 				"DEEPER": g.go_deeper()
 				"REWARD": g.choose_reward(g.reward_options[0])
-				"CHOICE": g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
+				"CHOICE":
+					if g.pending.kind == "card_break":
+						bot_choose_sub(g)
+					else:
+						g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
 				"PLAYER": bot_turn(g)
 		if g.phase == "SLICE_DONE":
 			done += 1
 			vit.append(g.vitae)
 		else:
 			rows[g.node.get("name", "?")] = rows.get(g.node.get("name", "?"), 0) + 1
-	print("  sim: %d/30 cleared; deaths by node %s; end VITAE of survivors %s" % [done, str(rows), str(vit)])
+	var avg := 0.0
+	for x in vit:
+		avg += x
+	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f" % [who, done, str(rows), avg / max(1, vit.size())])
 
 func needed_types(g: Game) -> Array:
 	var t := []
@@ -367,32 +438,107 @@ func bot_rig(g: Game) -> int:
 			return u
 	return g.pending.options[0]
 
+func main_ice(g: Game) -> int:
+	## The ICE the bot pushes on: the one with the most unbroken DEADLOCKs, rightmost on ties.
+	var best: int = g.enc.ice.size() - 1
+	var most := -1
+	for i in g.enc.ice.size():
+		var d := IceDB.def(g.enc.ice[i].id)
+		var n := 0
+		for s in d.subs.size():
+			if Game._has_deadlock(d.subs[s]) and not g.enc.ice[i].broken[s]:
+				n += 1
+		if n >= most:
+			most = n
+			best = i
+	return best
+
+func trace_safe(g: Game, d: Dictionary) -> bool:
+	return g.trace + int(d.get("trace_cost", 0)) < 38
+
+func bot_choose_sub(g: Game) -> void:
+	var targets: Array = g._breaker_targets(g.pending.breaker, g.pending.ice)
+	var pick: Vector2i = targets[0]
+	for t in targets:
+		if Game._has_deadlock(IceDB.def(g.enc.ice[t.x].id).subs[t.y]):
+			pick = t
+	g.choose_sub(pick.x, pick.y)
+
 func bot_turn(g: Game) -> void:
-	# install the Icepicks this Node needs, play probes and shields, then break what it can.
+	# install what this Node needs, weaken the main ICE, break what it can, then defend.
 	var t := needed_types(g)
 	t.append("VOID")  # HOUSE CALL
 	for c in g.hand.duplicate():
 		var d := CardDB.def(c.id)
-		if d.has("pick") and (t.has(d.pick.itype) or d.pick.itype == "ANY") and g.can_play(c.uid).ok:
-			g.play_card(c.uid)
-	for c in g.hand.duplicate():
-		if c.id == "PROBE" and g.can_play(c.uid).ok:
-			g.play_card(c.uid, g.enc.ice.size() - 1)
+		if d.type == "PROGRAM" and g.can_play(c.uid).ok:
+			if not d.has("pick") or t.has(d.pick.itype) or d.pick.itype == "ANY":
+				g.play_card(c.uid)
+	# TRACE sense: shed TRACE when close to a strike before spending BW elsewhere.
+	if g.trace >= 28:
+		for c in g.hand.duplicate():
+			if c.id in ["LAY_LOW", "CRASH_CART", "SCRUB", "MUFFLE", "NO_WITNESSES", "BURN_NOTICE"] and g.can_play(c.uid).ok:
+				g.play_card(c.uid)
+	var m := main_ice(g)
 	var progress := true
-	while progress:
+	var guard := 0
+	while progress and guard < 40 and g.phase == "PLAYER" and not g.enc.breached:
+		guard += 1
 		progress = false
+		m = main_ice(g)
+		# 1. card breaks first (they are the scarce way through off-type ICE)
+		for c in g.hand.duplicate():
+			var d := CardDB.def(c.id)
+			if (d.has("breaker") or c.id == "FLASHPOINT") and g.can_play(c.uid).ok and trace_safe(g, d):
+				var tgt := m
+				if d.has("breaker") and d.breaker.get("same_ice", false):
+					for i in g.enc.ice.size():
+						if not g._breaker_targets(d.breaker, i).is_empty():
+							tgt = i
+				if g.play_card(c.uid, tgt):
+					while g.phase == "CHOICE" and g.pending.get("kind", "") == "card_break":
+						bot_choose_sub(g)
+					progress = true
+					break
+		if progress:
+			continue
+		# 2. Icepick breaks (rescan after each: a break can add Black ICE on the left)
 		for i in g.enc.ice.size():
-			var subs: Array = IceDB.def(g.enc.ice[i].id).subs
-			for s in subs.size():
-				if g.break_info(i, s).ok:
+			if progress:
+				break
+			for s in IceDB.def(g.enc.ice[i].id).subs.size():
+				if g.phase == "PLAYER" and g.break_info(i, s).ok:
 					g.break_sub(i, s)
 					progress = true
+					break
+		if progress:
+			continue
+		# 3. one useful targeted script: weaken or infect the main ICE while that still matters
+		for c in g.hand.duplicate():
+			var d := CardDB.def(c.id)
+			if d.type != "SCRIPT" or not d.get("target", false) or d.has("breaker") or c.id == "QUARANTINE" or not g.can_play(c.uid).ok or not trace_safe(g, d):
+				continue
+			if d.has("target_type") and IceDB.def(g.enc.ice[m].id).type != d.target_type:
+				continue
+			var useful: bool = g.ice_str(m) > 0 or (d.has("infect") and g.virus_total(m) < 2)
+			if c.id == "PANDEMIC" or c.id == "OUTBREAK":
+				useful = g.virus_total(m) >= 2 and g.ice_str(m) > 0
+			if useful and g.play_card(c.uid, m):
+				progress = true
+				break
 	for c in g.hand.duplicate():
-		if c.id == "PULP_SHIELD" and g.can_play(c.uid).ok:
-			g.play_card(c.uid)
+		var d := CardDB.def(c.id)
+		if g.phase != "PLAYER" or d.type != "SCRIPT" or d.get("target", false) and c.id != "QUARANTINE" or d.has("breaker"):
+			continue
+		if c.id in ["NO_WITNESSES", "BURN_NOTICE"] and g.trace < 30:
+			continue
+		if g.can_play(c.uid).ok and trace_safe(g, d):
+			g.play_card(c.uid, m)
+			if g.phase == "CHOICE" and g.pending.get("kind", "") == "cache":
+				g.choose(g.pending.options[0])
 	# bank leftover BW into boosts (they last the encounter)
 	for p in g.installed:
 		if g.bw > 0 and CardDB.def(p.inst.id).has("pick") and t.has(CardDB.def(p.inst.id).pick.itype):
 			while g.can_boost(p.inst.uid).ok and g.can_boost(p.inst.uid).cost > 0:
 				g.boost_pick(p.inst.uid)
-	g.end_turn()
+	if g.phase == "PLAYER":
+		g.end_turn()

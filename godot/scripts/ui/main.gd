@@ -7,6 +7,11 @@ const PANEL := Color("#141922")
 const PANEL_2 := Color("#1b2230")
 const TEXT := Color("#e6ebf2")
 const DIM := Color("#8b95a5")
+const RUSTLER_COL := {"GENERALIST": Color("#e6ebf2"), "ECHO": Color("#7fb6ff"), "RIOT": Color("#ff6a3d"), "VECTOR": Color("#9ad17a")}
+const STRAIN_COL := {"ROT": Color("#9ad17a"), "SCRAMBLE": Color("#ff4d5e"), "BLIND": Color("#ffb020"), "LEECH": Color("#ffd34d"), "WORM": Color("#c7b9ff")}
+const STRAIN_TIP := {"ROT": "Each ROT: −1 STR.", "SCRAMBLE": "Each SCRAMBLE: this ICE's PULP subroutines deal 1 less.",
+	"BLIND": "Each BLIND: this ICE's TRACE subroutines add 1 less.", "LEECH": "Each LEECH: extract 1 CRED at the start of your turn.",
+	"WORM": "Each WORM: at the start of your turn, copy 1 counter of each strain here onto the ICE to its right."}
 const TYPE_COL := {"PROGRAM": Color("#4fd2ff"), "SCRIPT": Color("#e6ebf2"), "PROTOCOL": Color("#7ee081"), "BLOATWARE": Color("#b08a5a")}
 const RARITY_COL := {"COMMON": Color("#c9d3df"), "UNCOMMON": Color("#5aa8ff"), "RARE": Color("#ffb020"), "STARTER": Color("#6c7787"), "BLOAT": Color("#b08a5a")}
 const PRIORITY := ["EV-35", "EV-16", "EV-15", "EV-14", "EV-02", "EV-01", "EV-03", "EV-04", "EV-18", "EV-07", "EV-13",
@@ -218,7 +223,13 @@ func _build_layout() -> void:
 func _new_run() -> void:
 	g = Game.new()
 	g.animate = true
-	g.new_run()
+	g.phase = "SELECT"   # RUSTLER-001: choose a Rustler first
+	targeting = -1
+	refresh()
+
+func _start_as(who: String) -> void:
+	g.new_run(who)
+	nr.rustler = CardDB.RUSTLERS[who].nulrem
 	if first_run:
 		g.events.append({"t": "EV-02"})
 		g.events = g.events.filter(func(e): return e.t != "EV-01")
@@ -344,6 +355,8 @@ func refresh() -> void:
 	end_btn.disabled = g.phase != "PLAYER"
 	end_btn.visible = in_enc
 	log_label.text = "  ·  ".join(g.log.slice(max(0, g.log.size() - 3)))
+	if g.phase == "CHOICE" and g.pending.get("kind", "") == "card_break":
+		log_label.text = "%s: choose a subroutine to break (%d left)." % [g.pending.card, g.pending.n]
 	if targeting >= 0:
 		log_label.text = "Choose an ICE for %s (right-click or Esc to cancel)." % CardDB.def(g.find_card(targeting).id).name
 	piles.text = "DECK %d   DISCARD %d   BURNED %d" % [g.draw_pile.size(), g.discard.size(), g.burned.size()] if in_enc else ""
@@ -438,6 +451,11 @@ func _build_hud() -> void:
 	if not g.installed.is_empty():
 		hud.add_child(_stat("RAM", "%d / %d" % [g.ram_used(), g.ram_total()]))
 	hud.add_child(_stat("DRAW", "%d" % g.draw_size()))
+	if g.phase != "SELECT":
+		var rc := _lbl("  %s · %s  " % [CardDB.RUSTLERS[g.rustler].name, CardDB.RUSTLERS[g.rustler].origin], 13, Color("#0b0e13"), RUSTLER_COL[g.rustler])
+		rc.tooltip_text = CardDB.RUSTLERS[g.rustler].origin_text
+		rc.mouse_filter = Control.MOUSE_FILTER_PASS
+		hud.add_child(rc)
 	var corp := _lbl("  HALCYON  ", 14, Color("#2a1a10"))
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = RIcon.COL.HALCYON
@@ -653,6 +671,21 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			hh.add_child(RIcon.make("HIDDEN", 20, DIM))
 		hh.add_child(_lbl("  %d hidden · %s" % [hid, "rotates 1 step each turn" if tumbler else "one more fires each turn"], 12, DIM))
 		v.add_child(hh)
+	if not ice.virus.is_empty():
+		var vh := HFlowContainer.new()
+		vh.add_theme_constant_override("h_separation", 6)
+		for k in Game.STRAINS:
+			var n: int = int(ice.virus.get(k, 0))
+			if n <= 0:
+				continue
+			var chip := _lbl(" %s %d " % [k, n], 12, Color("#0b0e13"), STRAIN_COL[k])
+			chip.tooltip_text = STRAIN_TIP[k]
+			chip.mouse_filter = Control.MOUSE_FILTER_PASS
+			vh.add_child(chip)
+		var vrow := HBoxContainer.new()
+		vrow.add_child(RIcon.make("VIRUS", 18))
+		vrow.add_child(vh)
+		v.add_child(vrow)
 	if d.has("ability_text"):
 		var ah := HBoxContainer.new()
 		var pk: String = d.get("passive", d.get("ability", ""))
@@ -678,6 +711,14 @@ func _sub_row(i: int, s: int, effects: Array, broken: bool, tag: String) -> Cont
 	if broken:
 		row.modulate = Color(1, 1, 1, 0.4)
 		row.add_child(_lbl("BROKEN", 12, DIM))
+		return row
+	if g.phase == "CHOICE" and g.pending.get("kind", "") == "card_break":
+		var cb := Button.new()
+		cb.custom_minimum_size = Vector2(92, 30)
+		cb.text = "BREAK · %s" % g.pending.card
+		cb.disabled = not g.card_break_ok(i, s)
+		cb.pressed.connect(func(): g.choose_sub(i, s); refresh())
+		row.add_child(cb)
 		return row
 	var info := g.break_info(i, s)
 	var b := Button.new()
@@ -750,7 +791,8 @@ func _build_preview() -> void:
 			preview.add_child(_lbl("%s %s ? (hidden)" % [_circled(n), st.name], 12, RIcon.COL.VOID))
 			n += 1
 			continue
-		for e in st.effects:
+		for e0 in st.effects:
+			var e: Dictionary = g.effect_value(g.enc.ice[st.ice], e0)
 			txt.append(_effect_word(e))
 			if not st.skipped:
 				if e.k == "PULP":
@@ -810,6 +852,9 @@ func _build_hand() -> void:
 		return
 	for c in g.hand:
 		var cv := _card_view(c.id, c.uid, targeting == c.uid)
+		if c.get("cached", false):
+			var cb := _lbl(" CACHED ", 10, Color("#0b0e13"), RIcon.COL.CLOAK)
+			cv.get_child(0).add_child(cb)
 		var chk := g.can_play(c.uid)
 		if not chk.ok:
 			cv.modulate = Color(1, 1, 1, 0.55)
@@ -851,7 +896,8 @@ func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 	v.add_child(nl)
 	var cost := HBoxContainer.new()
 	cost.add_child(RIcon.make("BW", 16))
-	cost.add_child(_lbl("%d " % d.bw, 13, RIcon.COL.BW))
+	var shown_cost: int = g.card_cost(id) if not g.enc.is_empty() else d.bw
+	cost.add_child(_lbl("%d " % shown_cost, 13, RIcon.COL.BW))
 	if d.type == "PROGRAM":
 		cost.add_child(RIcon.make("RAM", 16))
 		cost.add_child(_lbl("%d " % d.get("ram", 0), 13, RIcon.COL.RAM))
@@ -870,6 +916,9 @@ func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 		elif t == "EXTRACTOR":
 			tags.add_child(RIcon.make("CRED", 14))
 			tags.add_child(_lbl(" EXTRACTOR", 10, RIcon.COL.CRED))
+		elif t == "VIRUS":
+			tags.add_child(RIcon.make("VIRUS", 16))
+			tags.add_child(_lbl(" VIRUS ", 10, RIcon.COL.VIRUS))
 	v.add_child(tags)
 	var tx := _lbl(d.text, 11, Color("#c4ccd8"))
 	tx.autowrap_mode = TextServer.AUTOWRAP_WORD
@@ -884,6 +933,7 @@ func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 func _build_overlay() -> void:
 	_clear(overlay)
 	match g.phase:
+		"SELECT": _overlay_select()
 		"MAP": _overlay_map()
 		"READY_RIG": _overlay_options("READY RIG", "Generalist ORIGIN: choose one PROGRAM in your deck. It starts installed for free; your first hand stays full.", g.pending.options, g.draw_pile, func(u): g.choose_ready_rig(u); refresh(), "Skip", func(): g.skip_ready_rig(); refresh())
 		"CHOICE":
@@ -891,6 +941,7 @@ func _build_overlay() -> void:
 				"discard": _overlay_options("DISCARD %d" % g.pending.n, "CAPTCHA: choose a card in your hand to discard.", g.hand.map(func(c): return c.uid), g.hand, func(u): g.choose(u); refresh())
 				"uninstaller": _overlay_options("UNINSTALLER", "Choose a Bloatware in your hand to BURN.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
 				"field_kit": _overlay_options("FIELD KIT", "Choose a PROGRAM from your draw pile.", g.pending.options, g.draw_pile, func(u): g.choose(u); refresh())
+				"cache": _overlay_options("DEAD AIR", "Choose a card to CACHE: it stays in your hand at the end of your turn.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
 		"DEEPER": _overlay_deeper()
 		"REWARD": _overlay_reward()
 		"SAFEHOUSE": _overlay_safehouse()
@@ -1040,6 +1091,42 @@ func _overlay_safehouse() -> void:
 	b.text = "Apply 1 PATCHWORK upgrade (not in this slice)"
 	b.disabled = true
 	v.add_child(b)
+
+func _overlay_select() -> void:
+	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 5, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14)
+	v.add_child(row)
+	for who in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:
+		var r: Dictionary = CardDB.RUSTLERS[who]
+		var b := Button.new()
+		b.custom_minimum_size = Vector2(320, 300)
+		b.clip_text = false
+		var col := VBoxContainer.new()
+		col.set_anchors_preset(Control.PRESET_FULL_RECT)
+		col.offset_left = 16
+		col.offset_right = -16
+		col.offset_top = 14
+		col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		col.add_theme_constant_override("separation", 8)
+		col.add_child(_lbl(r.name, 22, RUSTLER_COL[who]))
+		col.add_child(_lbl("★".repeat(r.difficulty) + "☆".repeat(3 - r.difficulty), 14, DIM))
+		for txt in ["\"%s\"" % r.quote, r.style]:
+			var l := _lbl(txt, 13, TEXT if txt == r.style else DIM)
+			l.autowrap_mode = TextServer.AUTOWRAP_WORD
+			l.custom_minimum_size = Vector2(286, 0)
+			col.add_child(l)
+		col.add_child(_lbl("ORIGIN · " + r.origin, 13, RIcon.COL.NULREM))
+		var ot := _lbl(r.origin_text, 12, Color("#a8d8b9"))
+		ot.autowrap_mode = TextServer.AUTOWRAP_WORD
+		ot.custom_minimum_size = Vector2(286, 0)
+		col.add_child(ot)
+		for c in col.get_children():
+			c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(col)
+		var w: String = who
+		b.pressed.connect(func(): _start_as(w))
+		row.add_child(b)
 
 func _overlay_end(title: String, sub: String) -> void:
 	var v := _dim_box(title, sub, 700)

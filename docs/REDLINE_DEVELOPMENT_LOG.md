@@ -1103,3 +1103,30 @@ All pass the doc's guardrails (max 2 passive ICE per encounter; no TOLL with the
 | Survivors' average end VITAE | 17.8 | 14.0 |
 
 Reading: the CAPTCHA node (AUTO-RENEW HARDENING + CAPTCHA TRIPWIRE) became the new danger spot; runs that get past it reach the end with less VITAE. The bot doesn't play around passives (it breaks TRIPWIRE subroutines freely and ignores RELAY order), so a human should do better than these numbers.
+
+## BUILD-003 — All four Rustlers in the HALCYON slice (BUILT for playtest, 2026-11-14)
+
+The slice now starts with a Rustler choice: THE GENERALIST, ECHO, RIOT or VECTOR, built from `REDLINE_RUSTLERS.md` and `REDLINE_CARD_POOLS.md` §5–7 (SIGYL read as TUMBLER since ROT-001, so HUSH and WRECKING BALL are TUMBLER Icepicks).
+
+- **ORIGIN Ghostware:** READY RIG (Generalist only); LOW PROFILE (ECHO: every TRACE gain is 1 less); REDLINER (RIOT: +1 BW at the start of your turn at TRACE 20+); PATIENT ZERO (VECTOR: 1 ROT on every ICE at the start of each encounter).
+- **Starter decks** (12 each) and **reward pools** (9 each; the reward's third card comes from the chosen Rustler's pool). INCUBATOR is left out of the slice pool because no slice ICE PURGEs.
+- **Virus strains** (RUSTLER-002): ROT (−1 STR), SCRAMBLE (PULP −1 when it acts), BLIND (TRACE −1 when it acts), LEECH (1 CRED at the start of your turn), WORM. Counters show as coloured chips on the ICE card. **Interpretation to confirm:** WORM *copies* 1 counter of each strain to the ICE on the right (the doc says "put … onto", which could mean move).
+- **Card breaks:** BACKDOOR, BRUTE FORCE, RUNTIME ERROR and HOST TAKEOVER let you pick a subroutine; FLASHPOINT auto-picks (DEADLOCK first, then the biggest PULP). Card breaks obey hidden subroutines, BOOTING and SEQUENCED, and trigger TRIPWIRE; TOLL applies to Icepick breaks only.
+- **Other new rules:** CACHE (DEAD AIR), SMOKESCREEN, VANISH, BLACKOUT, DECOY SIGNAL, SILENT PARTNER, LONG GAME, BERSERK cost reduction, PAIN TOLERANCE, per-break TRACE (SLEDGE, WRECKING BALL, CHAINSAW) and per-break ROT (STINGER).
+- **Fix found by the RIOT simulation:** a break that adds TRACE could cause strike 2, which pushes HOUSE CALL in on the left and shifted every ICE index mid-break. Breaks are now recorded before their TRACE is applied.
+- NUL/REM's Rustler-specific lines now follow the chosen Rustler.
+
+**30-run bot test per Rustler** (seeds 100–129, random routes; the bot now spends card breaks first, avoids useless STR cuts and sheds TRACE near a strike):
+
+| Rustler | Cleared | Deaths by node | Survivors' avg end VITAE |
+|---|---|---|---|
+| ECHO | 23 / 30 | CAPTCHA 4, DOORBELL 3 | 14.7 |
+| GENERALIST | 10 / 30 | T&C 11, DOORBELL 5, CAPTCHA 3, CONSENT WALL 1 | 18.9 |
+| VECTOR | 9 / 30 | CAPTCHA 10, DOORBELL 7, T&C 4 | 14.1 |
+| RIOT | 1 / 30 | CAPTCHA 15, T&C 6, COOKIE BANNER 3, CONSENT WALL 3, DOORBELL 2 | 9.0 |
+
+**Design findings for playtest:**
+- HALCYON is TUMBLER-heavy (4 of the slice's 8 non-Black ICE). ECHO's HUSH is a TUMBLER Icepick and LOW PROFILE erases the many small TRACE subroutines, so ECHO is far ahead. RIOT and VECTOR each have **one** card that gets through a TUMBLER (BRUTE FORCE, RUNTIME ERROR) and struggle.
+- RIOT's TRACE climbs fast enough to reach strike 2 (HOUSE CALL) in the CAPTCHA node, where TRIPWIRE adds TRACE on every break.
+- OUTBREAK + REPLICATOR grow ROT without limit (a traced run reached ROT 385). Harmless while STR floors at 0, but anything that counts virus counters (QUARANTINE caps at 6, HOST TAKEOVER needs 5) becomes trivial.
+- The Rustlers doc still says SIGYL in places; it needs the TUMBLER rename pass.

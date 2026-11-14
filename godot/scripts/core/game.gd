@@ -14,6 +14,7 @@ const CLEAN_NODE_BONUS := 5
 var rng := RandomNumberGenerator.new()
 
 # --- run state ---
+var rustler := "GENERALIST"   # RUSTLER-001: GENERALIST, ECHO, RIOT or VECTOR
 var phase := "MAP"            # MAP, READY_RIG, PLAYER, RESPONSE, CHOICE, DEEPER, REWARD, SAFEHOUSE, SLICE_DONE, DEAD
 var vitae := START_VITAE
 var max_vitae := START_VITAE
@@ -68,10 +69,11 @@ func _init(seed_value: int = -1) -> void:
 # Run setup and map
 # =====================================================================
 
-func new_run() -> void:
+func new_run(who: String = "GENERALIST") -> void:
+	rustler = who
 	run_deck.clear()
 	log.clear()
-	for id in CardDB.STARTER_GENERALIST:
+	for id in CardDB.RUSTLERS[rustler].starter:
 		run_deck.append(_new_inst(id))
 	vitae = START_VITAE
 	max_vitae = START_VITAE
@@ -146,6 +148,9 @@ func _start_ice_node() -> void:
 	installed = []
 	rack = []
 	# READY RIG (Generalist ORIGIN): install one PROGRAM from the deck for free before the first draw.
+	if rustler != "GENERALIST":
+		_start_encounter()
+		return
 	var options := []
 	for c in draw_pile:
 		if CardDB.def(c.id).type == "PROGRAM":
@@ -176,7 +181,8 @@ func _start_encounter() -> void:
 	var L: Dictionary = node.layers[layer]
 	enc = {"ice": [], "reserve": L.reserve, "reserve_start": L.reserve, "turn": 0, "breached": false,
 		"bonus_paid": false, "spam_filter_used": false, "cortex_buffer_used": false, "failsafe_used": false,
-		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0, "bw_drain": 0, "bw_drained": 0}
+		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0, "bw_drain": 0, "bw_drained": 0,
+		"trace_gained_enc": 0, "smoke": 0, "vanish": false, "blackout": false, "decoy": false, "cloak_turn": 0}
 	for id in L.ice:
 		enc.ice.append(_new_ice(id))
 	if pending_black:
@@ -188,6 +194,10 @@ func _start_encounter() -> void:
 			_event("EV-05", {"ice": ice.id})
 	for p in installed:
 		p.boost = 0
+	# PATIENT ZERO (VECTOR ORIGIN): every ICE starts with 1 ROT.
+	if rustler == "VECTOR":
+		for i in enc.ice.size():
+			infect(i, "ROT", 1)
 	_start_turn()
 
 func _new_ice(id: String) -> Dictionary:
@@ -197,7 +207,7 @@ func _new_ice(id: String) -> Dictionary:
 	for s in d.subs:
 		broken.append(false)
 		seen.append(false)
-	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1}
+	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {}}
 
 # =====================================================================
 # TUMBLER rotation (ROT-001): a conveyor window of `slots` over the subroutine pool.
@@ -287,7 +297,16 @@ func _start_turn() -> void:
 	if enc.bw_drain > 0:
 		_say("DETAINER: −%d BW this turn." % enc.bw_drain)
 	enc.bw_drain = 0
+	# REDLINER (RIOT ORIGIN): +1 BW at the start of your turn while TRACE is 20 or more.
+	if rustler == "RIOT" and trace >= 20:
+		bw += 1
+		_say("REDLINER: +1 BW.")
+	enc.decoy = false
+	enc.cloak_turn = 0
+	_virus_turn()
 	shield = 0
+	if trace >= 20:
+		shield += 2 * _rack_count("PAIN_TOLERANCE")
 	enc.breaks_turn = 0
 	for p in installed:
 		p.free_used = false
@@ -347,8 +366,19 @@ func can_play(uid: int) -> Dictionary:
 	var d := CardDB.def(inst.id)
 	if d.get("unplayable", false):
 		return {"ok": false, "reason": "Can't be played"}
-	if bw < d.bw:
-		return {"ok": false, "reason": "Need %d BW" % d.bw}
+	if bw < card_cost(inst.id):
+		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id)}
+	if d.has("breaker") and not d.breaker.get("same_ice", false) and _breaker_targets(d.breaker, -1).is_empty():
+		return {"ok": false, "reason": "No subroutine it can break"}
+	if d.has("breaker") and d.breaker.get("same_ice", false):
+		var any := false
+		for i in enc.ice.size():
+			if not _breaker_targets(d.breaker, i).is_empty():
+				any = true
+		if not any:
+			return {"ok": false, "reason": "No ICE with 5+ virus counters"}
+	if inst.id == "FLASHPOINT" and _flashpoint_targets().is_empty():
+		return {"ok": false, "reason": "No ICE at STR 3 or less"}
 	if d.type == "PROGRAM" and ram_used() + d.get("ram", 0) > ram_total():
 		return {"ok": false, "reason": "Not enough RAM"}
 	return {"ok": true, "reason": ""}
@@ -363,8 +393,14 @@ func play_card(uid: int, target: int = -1) -> bool:
 	if d.get("target", false) and (target < 0 or target >= enc.ice.size()):
 		_say("Choose an ICE for %s." % d.name)
 		return false
+	if d.has("target_type") and IceDB.def(enc.ice[target].id).type != d.target_type:
+		_say("%s needs a %s." % [d.name, d.target_type])
+		return false
+	if d.has("breaker") and d.breaker.get("same_ice", false) and (target < 0 or _breaker_targets(d.breaker, target).is_empty()):
+		_say("Choose an ICE with 5 or more virus counters.")
+		return false
 	_take_from(hand, uid)
-	bw -= d.bw
+	bw -= card_cost(inst.id)
 	if d.type == "BLOATWARE":
 		burned.append(inst)  # SPAM: pay 1 BW to clear it
 		_say("SPAM cleared.")
@@ -388,6 +424,7 @@ func play_card(uid: int, target: int = -1) -> bool:
 				else:
 					discard.append(inst)
 	if d.tags.has("CLOAK"):
+		enc.cloak_turn += 1
 		_reactive_cloak()
 	_check_low_vitae()
 	return true
@@ -396,6 +433,73 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 	match inst.id:
 		"PULP_SHIELD": shield += 3
 		"PROBE": enc.ice[target].str_mod -= 2
+		# ECHO
+		"SMOKESCREEN":
+			shield += 2
+			enc.smoke = 2
+		"DEAD_AIR":
+			var opts := []
+			for c in hand:
+				if not c.cached:
+					opts.append(c.uid)
+			if not opts.is_empty():
+				pending = {"kind": "cache", "options": opts, "card_uid": inst.uid}
+				discard.append(inst)
+				phase = "CHOICE"
+		"MUFFLE": trace = maxi(0, trace - 2)
+		"GHOST_STEP": draw_cards(2)
+		"PATIENCE": shield += 4 if enc.trace_gained_enc == 0 else 2
+		"DECOY_SIGNAL": enc.decoy = true
+		"VANISH":
+			enc.vanish = true
+			return true
+		"BLACKOUT":
+			enc.blackout = true
+			return true
+		# RIOT
+		"OVERLOAD": enc.ice[target].str_mod -= 2
+		"FEEDBACK": enc.ice[target].str_mod -= trace / 10
+		"ADRENAL_SPIKE": bw += 1
+		"LAY_LOW": trace = maxi(0, trace - 3)
+		"SMASH": enc.ice[target].str_mod -= 4
+		"ROAR": draw_cards(2)
+		"CRASH_CART":
+			trace = maxi(0, trace - 3)
+			shield += 2
+		"FLASHPOINT":
+			var refs := []
+			for st in _flashpoint_targets():
+				refs.append([enc.ice[st.x], st.y])
+			for r in refs:
+				var idx: int = enc.ice.find(r[0])
+				if idx >= 0 and sub_breakable(idx, r[1]):
+					_do_break(idx, r[1])
+		"NO_WITNESSES":
+			if trace >= 30:
+				trace = 10
+			return true
+		# VECTOR
+		"INJECT", "SCRAMBLER", "BLINDFOLD", "LEECHWARE", "WORMHOLE", "COCKTAIL":
+			var inf: Dictionary = CardDB.def(inst.id).infect
+			for k in inf:
+				infect(target, k, inf[k])
+		"OUTBREAK":
+			var vv: Dictionary = enc.ice[target].virus
+			for k in vv.keys():
+				vv[k] = vv[k] * 2
+		"PANDEMIC":
+			var src: Dictionary = enc.ice[target].virus.duplicate()
+			for j in enc.ice.size():
+				if j != target:
+					for k in src:
+						infect(j, k, src[k])
+		"QUARANTINE": shield += mini(6, virus_total(target))
+		"BACKDOOR", "BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER":
+			var br: Dictionary = CardDB.def(inst.id).breaker
+			pending = {"kind": "card_break", "n": br.n, "ice": target if br.get("same_ice", false) else -1,
+				"breaker": br, "card_uid": inst.uid, "card": CardDB.def(inst.id).name}
+			discard.append(inst)
+			phase = "CHOICE"
 		"GHOST_SIGNAL":
 			enc.ghost = true
 			return true
@@ -465,10 +569,19 @@ func end_turn() -> void:
 	if phase != "PLAYER":
 		return
 	# §4.3 end of turn: Extractors pay out; TRACER in hand adds TRACE.
+	var long_game: int = 2 * _rack_count("LONG_GAME") if trace < 10 else 0
 	for p in installed:
 		var d := CardDB.def(p.inst.id)
 		if d.has("extract"):
-			extract(d.extract)
+			var amt: int = d.extract
+			if d.has("extract_quiet") and enc.trace_gained_enc == 0:
+				amt = d.extract_quiet
+			extract(amt + long_game)
+			if d.get("extract_trace", 0) > 0:
+				add_trace(d.extract_trace, false)
+		elif p.inst.id == "SILENT_PARTNER":
+			if enc.cloak_turn > 0:
+				extract(2 * enc.cloak_turn + long_game)
 	for c in hand:
 		if c.id == "TRACER":
 			add_trace(3, false)
@@ -504,6 +617,12 @@ func _begin_response() -> void:
 	phase = "RESPONSE"
 	response_queue = []
 	enc["resp_void"] = []
+	if enc.blackout:
+		enc.blackout = false
+		_say("BLACKOUT: the Corporation Response is skipped.")
+		if not animate:
+			response_finish()
+		return
 	for st in response_preview():
 		var ice: Dictionary = enc.ice[st.ice]
 		st["ref"] = ice
@@ -528,7 +647,7 @@ func response_step() -> Dictionary:
 	var st: Dictionary = response_queue.pop_front()
 	st.ref.seen[st.sub] = true   # VOID: revealed as it fires
 	for e in st.effects:
-		_apply_effect(e)
+		_apply_effect(effect_value(st.ref, e))
 		if phase == "DEAD":
 			break
 	return st
@@ -543,6 +662,8 @@ func response_finish() -> void:
 		if IceDB.def(ice.id).get("passive", "") == "HARDENING" and ice.get("harden", 0) < 3:
 			ice["harden"] = ice.get("harden", 0) + 1
 	enc.ghost = false
+	enc.smoke = 0
+	enc.vanish = false
 	_cleanup()
 	if phase == "DEAD":
 		return
@@ -588,6 +709,11 @@ func choose(uid: int) -> void:
 			pending = {}
 			phase = "PLAYER"
 			return
+		"cache":
+			var cc := _find(hand, uid)
+			if not cc.is_empty():
+				cc.cached = true
+				_say("%s is CACHED." % CardDB.def(cc.id).name)
 		"uninstaller":
 			var c := _take_from(hand, uid)
 			burned.append(c)
@@ -616,7 +742,7 @@ func ice_str(i: int) -> int:
 	var ice: Dictionary = enc.ice[i]
 	if ice.bomb:
 		return 0
-	var v: int = IceDB.def(ice.id).str + ice.str_mod + ice.get("harden", 0)
+	var v: int = IceDB.def(ice.id).str + ice.str_mod + ice.get("harden", 0) - int(ice.virus.get("ROT", 0))
 	# RELAY: the ICE to the left props this one up while it has an unbroken subroutine.
 	if i > 0 and IceDB.def(enc.ice[i - 1].id).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false):
 		v += 2
@@ -722,10 +848,21 @@ func break_sub(i: int, s: int) -> bool:
 		ice.rainbow = -1 if ice.rainbow == p.inst.uid else p.inst.uid
 	if pk.get("shield_per_break", 0) > 0:
 		shield += pk.shield_per_break
+	# Mark the break first: TRACE from the break can cause a strike that adds Black ICE on the left
+	# and shifts every ICE index.
+	_do_break(i, s)
+	if pk.get("rot_per_break", 0) > 0:
+		var v: Dictionary = ice.virus
+		v["ROT"] = int(v.get("ROT", 0)) + pk.rot_per_break
+	if pk.get("trace_per_break", 0) > 0:
+		add_trace(pk.trace_per_break, false)
+	return true
+
+func _do_break(i: int, s: int) -> bool:
+	## What happens whenever a subroutine breaks, by Icepick or by card.
+	var ice: Dictionary = enc.ice[i]
 	ice.broken[s] = true
 	enc.breaks_turn += 1
-	if IceDB.def(ice.id).get("passive", "") == "TRIPWIRE":
-		add_trace(1, false)
 	var d := IceDB.def(ice.id)
 	if _has_deadlock(d.subs[s]):
 		_event("EV-06")
@@ -735,6 +872,8 @@ func break_sub(i: int, s: int) -> bool:
 		enc.breached = true
 		_event("EV-07")
 		_say("BREACH. Press END TURN: the Corporation Response is skipped.")
+	if d.get("passive", "") == "TRIPWIRE":
+		add_trace(1, false)
 	return true
 
 func _all_deadlocks_broken() -> bool:
@@ -805,7 +944,7 @@ func _roll_rewards(cleared: int) -> Array:
 	var odds := {1: [60, 30, 10], 2: [45, 40, 15], 3: [30, 45, 25]}
 	var o: Array = odds.get(clamp(cleared, 1, 3))
 	var out := []
-	for pool in ["SHARED", "SHARED", "GENERALIST"]:
+	for pool in ["SHARED", "SHARED", rustler]:
 		var roll := rng.randi_range(1, 100)
 		var rar := "COMMON"
 		if roll > o[0] + o[1]:
@@ -880,7 +1019,18 @@ func _check_low_vitae() -> void:
 		_event("EV-18")
 
 func add_trace(n: int, during_response: bool) -> void:
-	if during_response:
+	if during_response and enc.get("vanish", false):
+		_say("VANISH: TRACE %d adds nothing." % n)
+		return
+	# LOW PROFILE (ECHO ORIGIN): every TRACE gain is 1 less.
+	if rustler == "ECHO" and n > 0:
+		n -= 1
+	if during_response and enc.get("smoke", 0) > 0 and n > 0:
+		var cut: int = mini(n, enc.smoke)
+		enc.smoke = 0
+		n -= cut
+		_say("SMOKESCREEN: TRACE reduced by %d." % cut)
+	if during_response and n > 0:
 		if enc.get("ghost", false):
 			enc.ghost = false
 			_say("GHOST SIGNAL: TRACE %d reduced to 0." % n)
@@ -892,6 +1042,8 @@ func add_trace(n: int, during_response: bool) -> void:
 	var before := trace
 	trace += n
 	trace_gained_node += n
+	if not enc.is_empty():
+		enc.trace_gained_enc += n
 	if before < 20 and trace >= 20 and trace < MAX_TRACE:
 		_event("EV-13")
 	while trace >= MAX_TRACE:
@@ -923,6 +1075,8 @@ func _strike() -> void:
 			_event("EV-16")
 
 func _reactive_cloak() -> void:
+	if enc.decoy:
+		return
 	for ice in enc.ice:
 		if IceDB.def(ice.id).get("ability", "") == "CLOAK_TRACE":
 			add_trace(1, false)
@@ -1009,3 +1163,143 @@ func find_card(uid: int) -> Dictionary:
 			return c
 	var p := _installed_entry(uid)
 	return p.get("inst", {})
+
+
+# =====================================================================
+# Rustler cards: costs, card-based breaks, viruses (RUSTLER-001..008)
+# =====================================================================
+
+func card_cost(id: String) -> int:
+	var d := CardDB.def(id)
+	var c: int = d.bw
+	# BERSERK: EXPLOIT SCRIPTS cost 1 less BW while TRACE is 20 or more.
+	if d.type == "SCRIPT" and d.tags.has("EXPLOIT") and trace >= 20 and _rack_has("BERSERK"):
+		c = maxi(0, c - 1)
+	return c
+
+func sub_breakable(i: int, s: int) -> bool:
+	## Shared limits for any break: in a slot, seen, unbroken, not BOOTING-locked, SEQUENCED order.
+	var ice: Dictionary = enc.ice[i]
+	var d := IceDB.def(ice.id)
+	if ice.broken[s] or not is_active(i, s) or not ice.seen[s]:
+		return false
+	if d.get("ability", "") == "BOOTING" and _has_deadlock(d.subs[s]) and enc.turn < 3:
+		return false
+	if d.get("passive", "") == "SEQUENCED":
+		for k in s:
+			if not ice.broken[k]:
+				return false
+	return true
+
+func _breaker_ok_ice(br: Dictionary, i: int) -> bool:
+	if br.has("max_str") and ice_str(i) > br.max_str:
+		return false
+	if br.has("min_virus") and virus_total(i) < br.min_virus:
+		return false
+	return true
+
+func _breaker_targets(br: Dictionary, only_ice: int) -> Array:
+	var out := []
+	for i in enc.ice.size():
+		if only_ice >= 0 and i != only_ice:
+			continue
+		if not _breaker_ok_ice(br, i):
+			continue
+		for s in IceDB.def(enc.ice[i].id).subs.size():
+			if sub_breakable(i, s):
+				out.append(Vector2i(i, s))
+	return out
+
+func card_break_ok(i: int, s: int) -> bool:
+	if phase != "CHOICE" or pending.get("kind", "") != "card_break":
+		return false
+	return _breaker_targets(pending.breaker, pending.ice).has(Vector2i(i, s))
+
+func choose_sub(i: int, s: int) -> void:
+	if not card_break_ok(i, s):
+		return
+	_do_break(i, s)
+	pending.n -= 1
+	if pending.breaker.get("same_ice", false):
+		pending.ice = i
+	if pending.n <= 0 or _breaker_targets(pending.breaker, pending.ice).is_empty():
+		pending = {}
+		phase = "PLAYER"
+
+func _best_sub(i: int) -> int:
+	## Auto-pick for FLASHPOINT: a DEADLOCK first, then the biggest PULP, then the first breakable.
+	var d := IceDB.def(enc.ice[i].id)
+	var best := -1
+	var score := -1
+	for s in d.subs.size():
+		if not sub_breakable(i, s):
+			continue
+		var sc := 1
+		for e in d.subs[s]:
+			if e.k == "DEADLOCK":
+				sc = 100
+			elif e.k == "PULP":
+				sc = maxi(sc, 10 + e.v)
+		if sc > score:
+			score = sc
+			best = s
+	return best
+
+func _flashpoint_targets() -> Array:
+	var out := []
+	for i in enc.ice.size():
+		if ice_str(i) <= 3:
+			var s := _best_sub(i)
+			if s >= 0:
+				out.append(Vector2i(i, s))
+	return out
+
+const STRAINS := ["ROT", "SCRAMBLE", "BLIND", "LEECH", "WORM"]
+
+func infect(i: int, strain: String, n: int) -> void:
+	if i < 0 or i >= enc.ice.size() or n <= 0:
+		return
+	var v: Dictionary = enc.ice[i].virus
+	v[strain] = int(v.get(strain, 0)) + n
+
+func virus_total(i: int) -> int:
+	var t := 0
+	for k in enc.ice[i].virus:
+		t += int(enc.ice[i].virus[k])
+	return t
+
+func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
+	## SCRAMBLE and BLIND act when this ICE acts: each counter lowers PULP / TRACE by 1.
+	var v: Dictionary = ice.get("virus", {})
+	if e.k == "PULP" and v.get("SCRAMBLE", 0) > 0:
+		return {"k": "PULP", "v": maxi(0, e.v - int(v.SCRAMBLE))}
+	if e.k == "TRACE" and v.get("BLIND", 0) > 0:
+		return {"k": "TRACE", "v": maxi(0, e.v - int(v.BLIND))}
+	return e
+
+func _virus_turn() -> void:
+	## "Your turn" strains and REPLICATOR, at the start of the Rustler's turn.
+	if enc.turn > 1:
+		for r in _installed_count("REPLICATOR"):
+			for i in enc.ice.size():
+				for k in enc.ice[i].virus.keys():
+					if enc.ice[i].virus[k] > 0:
+						infect(i, k, 1)
+		# WORM: copy 1 counter of each strain here onto the ICE to the right, per WORM counter.
+		for i in range(enc.ice.size() - 2, -1, -1):
+			var w: int = int(enc.ice[i].virus.get("WORM", 0))
+			for n in w:
+				for k in enc.ice[i].virus.keys():
+					if enc.ice[i].virus[k] > 0:
+						infect(i + 1, k, 1)
+	for i in enc.ice.size():
+		var l: int = int(enc.ice[i].virus.get("LEECH", 0))
+		if l > 0:
+			extract(l)
+
+func _installed_count(id: String) -> int:
+	var n := 0
+	for p in installed:
+		if p.inst.id == id:
+			n += 1
+	return n

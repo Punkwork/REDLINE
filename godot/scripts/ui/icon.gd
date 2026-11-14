@@ -7,7 +7,7 @@ const COL := {
 	"TEAL": Color("#2fd3c4"), "SLATE": Color("#8aa0b8"), "HALCYON": Color("#ffb38a"),
 	"BW": Color("#4fd2ff"), "VITAE": Color("#ff4d5e"), "SHIELD": Color("#5aa8ff"), "CRED": Color("#ffd34d"),
 	"RAM": Color("#9ad17a"), "FORTRESS": Color("#c9d3df"), "TUMBLER": Color("#c9d3df"), "VOID": Color("#a66bff"),
-	"ANY": Color("#c9d3df"), "CLOAK": Color("#7fb6ff"), "EXPLOIT": Color("#ff8a4d"), "NULREM": Color("#58f29a"),
+	"ANY": Color("#c9d3df"), "CLOAK": Color("#7fb6ff"), "EXPLOIT": Color("#ff8a4d"), "NULREM": Color("#58f29a"), "VIRUS": Color("#9ad17a"),
 }
 
 var kind := "BW"
@@ -44,6 +44,16 @@ func _draw() -> void:
 				var a := -PI / 2 + k * TAU / 5
 				draw_circle(tc + Vector2(cos(a), sin(a)) * s * 0.24, s * 0.055, c)
 			draw_rect(Rect2(tc.x - s * 0.035, tc.y - s * 0.09, s * 0.07, s * 0.18), c)
+		"VIRUS":
+			# virion: core with six spikes
+			var vc := o + Vector2(s / 2, s / 2)
+			draw_arc(vc, s * 0.24, 0, TAU, 20, c, w)
+			for k in 6:
+				var a := k * TAU / 6
+				var p1 := vc + Vector2(cos(a), sin(a)) * s * 0.26
+				var p2 := vc + Vector2(cos(a), sin(a)) * s * 0.44
+				draw_line(p1, p2, c, w)
+				draw_circle(p2, s * 0.05, c)
 		"HIDDEN":
 			# face-down subroutine
 			draw_rect(Rect2(o + Vector2(s * 0.15, s * 0.1), Vector2(s * 0.7, s * 0.8)), c, false, w)
