@@ -145,9 +145,9 @@ const DEFS := {
 		"text": "Target ICE: −1 STR this encounter for every 10 TRACE you have."},
 	"ADRENAL_SPIKE": {"name": "ADRENAL SPIKE", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 2, "rarity": "STARTER",
 		"text": "Gain 1 BW. (+2 TRACE)"},
-	"SHATTER": {"name": "SHATTER", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 5, "rarity": "STARTER", "target": true,
-		"breaker": {"n": 2, "max_str": 0, "same_ice": true}, "needs_big_break": true,
-		"text": "Play only if an Icepick broke a subroutine on an ICE above STR 2 this turn. Break up to 2 subroutines on an ICE at STR 0. (+5 TRACE)"},
+	# RIOT-003: SHATTER redesigned.
+	"SHATTER": {"name": "SHATTER", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "trace_cost": 3, "rarity": "STARTER", "target": true,
+		"text": "This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. (+3 TRACE)"},
 	"LAY_LOW": {"name": "LAY LOW", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER", "text": "−3 TRACE."},
 	"SMASH_AND_GRAB": {"name": "SMASH & GRAB", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"extract": 8, "extract_trace": 2, "text": "End of your turn: extract 8 CRED, +2 TRACE."},

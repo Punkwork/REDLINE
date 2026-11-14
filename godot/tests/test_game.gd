@@ -338,21 +338,23 @@ func test_shatter() -> void:
 	g.new_run("RIOT")
 	check(g.run_deck.size() == 15, "RIOT-002: 15-card deck")
 	g.entered_corp = true
-	start_node(g, 1, 1, "")   # COOKIE WALL (FORTRESS STR 5), layer 1
-	var sh := put_in_hand(g, "SHATTER")
-	g.bw = 10
-	check(not g.can_play(sh).ok, "SHATTER needs an Icepick break on an ICE above STR 2 first")
+	start_node(g, 1, 0, "")   # AUTO-RENEW (FORTRESS) + CAPTCHA (TUMBLER)
 	install(g, "SLEDGE")
 	g.bw = 10
-	g.break_sub(0, 0)          # COOKIE WALL is STR 5 when broken
-	check(g.enc.big_break, "an Icepick break above STR 2 is recorded")
-	check(not g.can_play(sh).ok, "still no ICE at STR 0")
-	g.enc.ice[0].str_mod = -10
+	var cap: int = g.active_subs(1)[0]
+	check(g.break_info(1, cap).reason.begins_with("NO"), "SLEDGE can't break a TUMBLER")
+	var sh := put_in_hand(g, "SHATTER")
 	var t := g.trace
-	check(g.play_card(sh, 0) and g.phase == "CHOICE", "SHATTER plays on an ICE at STR 0")
-	g.choose_sub(0, 1)
-	g.choose_sub(0, 2)
-	check(g.enc.breached and g.trace >= t + 5, "SHATTER breaks 2 subroutines (+5 TRACE)")
+	check(g.play_card(sh, 1) and g.trace >= t + 3, "SHATTER on CAPTCHA (+3 TRACE)")
+	check(g.break_info(1, cap).ok, "SLEDGE now breaks CAPTCHA")
+	check(g.break_info(0, 0).ok, "SLEDGE still breaks FORTRESSES")
+	g.break_sub(1, cap)
+	g.end_turn()
+	if g.phase == "CHOICE":
+		g.choose(g.hand[0].uid)
+	var sl: Dictionary = g._installed_entry(g.installed.filter(func(p): return p.inst.id == "SLEDGE")[0].inst.uid)
+	check(g.pick_str(sl) == 0, "SLEDGE drops to STR 0 after the turn (got %d)" % g.pick_str(sl))
+	check(g.break_info(1, g.active_subs(1)[0]).reason.begins_with("NO") or g.enc.ice[1].broken[g.active_subs(1)[0]], "SHATTER lasts one turn")
 
 func test_extraction_bonus() -> void:
 	var g := Game.new(5)
@@ -572,6 +574,15 @@ func bot_turn(g: Game) -> void:
 					break
 		if progress:
 			continue
+		# 1b. RIOT: SHATTER the main ICE so SLEDGE can break it this turn
+		if g.enc.get("shatter_ice") == null and g.installed.any(func(p): return p.inst.id == "SLEDGE") and IceDB.def(g.enc.ice[m].id).type != "FORTRESS":
+			for c in g.hand.duplicate():
+				if c.id == "SHATTER" and g.can_play(c.uid).ok and trace_safe(g, CardDB.def(c.id)):
+					g.play_card(c.uid, m)
+					progress = true
+					break
+		if progress:
+			continue
 		# 2. Icepick breaks (rescan after each: a break can add Black ICE on the left)
 		for i in g.enc.ice.size():
 			if progress:
@@ -586,7 +597,7 @@ func bot_turn(g: Game) -> void:
 		# 3. one useful targeted script: weaken or infect the main ICE while that still matters
 		for c in g.hand.duplicate():
 			var d := CardDB.def(c.id)
-			if d.type != "SCRIPT" or not d.get("target", false) or d.has("breaker") or c.id == "QUARANTINE" or not g.can_play(c.uid).ok or not trace_safe(g, d):
+			if d.type != "SCRIPT" or not d.get("target", false) or d.has("breaker") or c.id in ["QUARANTINE", "SHATTER"] or not g.can_play(c.uid).ok or not trace_safe(g, d):
 				continue
 			if d.has("target_type") and IceDB.def(g.enc.ice[m].id).type != d.target_type:
 				continue

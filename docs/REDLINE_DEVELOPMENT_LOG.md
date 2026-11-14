@@ -1199,3 +1199,11 @@ Variants tested (not adopted, for discussion):
 | TRACE 20–39, targets STR 2 or less | 3 / 30 | 53 times |
 
 Even when SHATTER fires often, its +5 TRACE pushes RIOT from the redline into strike 1–2 (HOUSE CALL). For comparison, OVERDRIVE (SLEDGE breaks any ICE type while TRACE is 20–39) reached 7–9 / 30.
+
+## RIOT-003 — SHATTER redesigned (BUILT for playtest, 2026-11-14)
+
+**SHATTER** (RIOT starter SCRIPT, EXPLOIT): **1 BW, +3 TRACE.** Choose an ICE: this turn, SLEDGE can break that ICE's subroutines whatever its type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter (its boosts are lost; boosting again starts from 0). Replaces RIOT-002's SHATTER. **Interpretations to confirm:** "any 1 icebreaker" read as any 1 ICE; "reduced to 0" lasts until the encounter ends (SLEDGE is back to STR 2 next encounter).
+
+**30-run bot test (RIOT, 15-card deck):** 2 / 30 cleared; SHATTER played 30 times in 17 runs; deaths CAPTCHA 10, DOORBELL 6, COOKIE BANNER 5, T&C 5, CONSENT WALL 2. With a milder price (SLEDGE only loses its boosts, back to STR 2): 3 / 30.
+
+Why it's still low: one SHATTER in 15 cards is drawn about one turn in three, and each play usually buys one or two breaks (SLEDGE needs 2–3 boosts to reach a STR 4–5 TUMBLER), after which SLEDGE starts again from 0.

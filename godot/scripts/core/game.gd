@@ -306,7 +306,6 @@ func _start_turn() -> void:
 		_say("REDLINER: +1 BW.")
 	enc.decoy = false
 	enc.cloak_turn = 0
-	enc.big_break = false
 	_virus_turn()
 	shield = 0
 	if trace >= 20:
@@ -374,8 +373,6 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id)}
 	if d.has("breaker") and not d.breaker.get("same_ice", false) and _breaker_targets(d.breaker, -1).is_empty():
 		return {"ok": false, "reason": "No subroutine it can break"}
-	if d.get("needs_big_break", false) and not enc.get("big_break", false):
-		return {"ok": false, "reason": "Needs an Icepick break on an ICE above STR 2 this turn"}
 	if d.has("breaker") and d.breaker.get("same_ice", false):
 		var any := false
 		for i in enc.ice.size():
@@ -504,7 +501,10 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 					for k in src:
 						infect(j, k, src[k])
 		"QUARANTINE": shield += mini(6, virus_total(target))
-		"BACKDOOR", "BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER", "SHATTER":
+		"SHATTER":
+			enc["shatter_ice"] = enc.ice[target]
+			_say("SHATTER: SLEDGE can break %s this turn." % IceDB.def(enc.ice[target].id).name)
+		"BACKDOOR", "BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER":
 			var br: Dictionary = CardDB.def(inst.id).breaker
 			pending = {"kind": "card_break", "n": br.n, "ice": target if br.get("same_ice", false) else -1,
 				"breaker": br, "card_uid": inst.uid, "card": CardDB.def(inst.id).name}
@@ -596,6 +596,13 @@ func end_turn() -> void:
 		if c.id == "TRACER":
 			add_trace(3, false)
 	bw = 0
+	# SHATTER's price: SLEDGE drops to STR 0 for the rest of the encounter.
+	if enc.get("shatter_ice") != null:
+		enc.shatter_ice = null
+		for p in installed:
+			if p.inst.id == "SLEDGE":
+				p.boost = -CardDB.def("SLEDGE").pick.str
+		_say("SHATTER: SLEDGE drops to STR 0.")
 	for ice in enc.ice:
 		ice.bomb = false
 	if enc.turn >= 6 and enc.breaks_turn == 0 and not enc.breached:
@@ -800,7 +807,9 @@ func break_info(i: int, s: int) -> Dictionary:
 			continue
 		var pk: Dictionary = cd.pick
 		var extra := 0
-		if pk.itype != "ANY" and pk.itype != d.type:
+		# SHATTER: SLEDGE breaks the chosen ICE whatever its type, this turn only.
+		var shattered: bool = p.inst.id == "SLEDGE" and enc.get("shatter_ice") != null and is_same(enc.get("shatter_ice"), ice)
+		if pk.itype != "ANY" and pk.itype != d.type and not shattered:
 			if not adapter:
 				continue
 			extra = 1
@@ -859,8 +868,6 @@ func break_sub(i: int, s: int) -> bool:
 	var p := _installed_entry(info.uid)
 	var pk: Dictionary = CardDB.def(p.inst.id).pick
 	var ice: Dictionary = enc.ice[i]
-	if ice_str(i) > 2:
-		enc.big_break = true   # SHATTER's condition
 	bw -= info.cost
 	if info.boosts > 0:
 		p.boost += info.boosts * pk.boost_amt

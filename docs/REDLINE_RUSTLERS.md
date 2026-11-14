@@ -126,7 +126,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 |---:|---|---|---|---|
 | 1 | **SLEDGE** *(signature)* | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. **Each break: +1 TRACE.** |
 | 1 | **BRUTE FORCE** *(fallback)* | SCRIPT — EXPLOIT | 1 BW, **+4 TRACE** | Break 1 subroutine on **any** ICE with STR 4 or less. |
-| 1 | **SHATTER** | SCRIPT — EXPLOIT | 0 BW, **+5 TRACE** | Play only if an Icepick broke a subroutine on an ICE above STR 2 this turn. Break up to 2 subroutines on an ICE at STR 0. *(RIOT-002, new.)* |
+| 1 | **SHATTER** | SCRIPT — EXPLOIT | 1 BW, **+3 TRACE** | This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. *(RIOT-002 new; RIOT-003 redesigned.)* |
 | 1 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, **+2 TRACE** | Target ICE: −2 STR this encounter. *(RIOT-002: was 2.)* |
 | 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. *(RIOT-002: was 1.)* |
 | 1 | **FEEDBACK** | SCRIPT — EXPLOIT | 2 BW | Target ICE: −1 STR this encounter for every 10 TRACE you have. |
