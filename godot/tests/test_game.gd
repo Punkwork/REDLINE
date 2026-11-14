@@ -273,6 +273,8 @@ func test_rustlers() -> void:
 	# RIOT: REDLINER, SLEDGE adds TRACE
 	g = Game.new(23)
 	g.new_run("RIOT")
+	check(g.run_deck.size() == 12 and g.run_deck.filter(func(c): return c.id == "BRUTE_FORCE").size() == 2 and uid_of(g, g.run_deck, "FEEDBACK") < 0, "RIOT-001: 2 BRUTE FORCE, no FEEDBACK")
+	check(CardDB.reward_pool("RIOT", "COMMON").has("FEEDBACK"), "RIOT-001: FEEDBACK in RIOT's reward pool")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")
 	install(g, "SLEDGE")
@@ -427,7 +429,8 @@ func test_full_slice_path() -> void:
 
 func sim_many() -> void:
 	for who in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:
-		sim_rustler(who)
+		if OS.get_environment("SIM_ONLY") == "" or OS.get_environment("SIM_ONLY") == who:
+			sim_rustler(who)
 
 func sim_rustler(who: String) -> void:
 	var done := 0

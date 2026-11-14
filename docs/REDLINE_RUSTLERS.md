@@ -125,15 +125,16 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
 | 1 | **SLEDGE** *(signature)* | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. **Each break: +1 TRACE.** |
-| 1 | **BRUTE FORCE** *(fallback)* | SCRIPT — EXPLOIT | 1 BW, **+4 TRACE** | Break 1 subroutine on **any** ICE with STR 4 or less. |
+| 2 | **BRUTE FORCE** *(fallback)* | SCRIPT — EXPLOIT | 1 BW, **+4 TRACE** | Break 1 subroutine on **any** ICE with STR 4 or less. *(RIOT-001: was 1.)* |
 | 2 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, **+2 TRACE** | Target ICE: −2 STR this encounter. |
 | 1 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. |
-| 1 | **FEEDBACK** | SCRIPT — EXPLOIT | 2 BW | Target ICE: −1 STR this encounter for every 10 TRACE you have. |
 | 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, **+2 TRACE** | Gain 1 BW. *(BASIC-001: was 2 BW.)* |
 | 2 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 1 | **LAY LOW** | SCRIPT — CLOAK | 1 BW | −3 TRACE. *(BASIC-001: was −5.)* |
 | 1 | **SMASH & GRAB** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 8 CRED, **+2 TRACE**. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
+
+> **RIOT-001 (2026-11-14):** FEEDBACK (2 BW: target ICE −1 STR for every 10 TRACE you have) left the starter deck for RIOT's reward pool (Common); a 2nd BRUTE FORCE took its place. RIOT's only way through TUMBLERS and VOIDS was a single BRUTE FORCE.
 
 ### ORIGIN Ghostware — REDLINER
 **At the start of your turn, if your TRACE is 20 or more, gain 1 BW.**

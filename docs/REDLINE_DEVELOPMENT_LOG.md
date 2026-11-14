@@ -1171,3 +1171,13 @@ HUSH: STR 1 → **0** (boost 2 BW → +1 STR, break 1 BW unchanged). 30-run bot 
 ## GHOST-011 — BURNOUT CHIP's drawback doubled (APPROVED, 2026-11-14)
 
 BURNOUT CHIP (general Ghostware, drawback): Icepicks +2 STR for the run; **whenever you take PULP damage, take 2 more** (was 1 more). `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.2 updated. Not yet in the slice (Ghostware isn't built).
+
+## RIOT-001 — RIOT's starter deck: 2 BRUTE FORCE; FEEDBACK to the reward pool (APPROVED, 2026-11-14)
+
+Problem (30-run bot test): RIOT cleared 1 / 30. SLEDGE breaks only FORTRESSES, and the slice has 4 TUMBLERS and 2 VOIDS, so a single BRUTE FORCE was RIOT's only way through most ICE; without it in hand RIOT took hits and gained TRACE until strike 2 (HOUSE CALL), mostly in the CAPTCHA node.
+
+Variants tested (30 runs each): FEEDBACK → 2nd BRUTE FORCE **10 / 30**; BRUTE FORCE reaching STR 5: 0 / 30; ADRENAL SPIKE → 2nd LAY LOW: 3 / 30; the first combined with either: 8 / 30.
+
+**Decision:** FEEDBACK leaves the starter deck for RIOT's reward pool (Common); a 2nd BRUTE FORCE takes its place. Deck: SLEDGE, BRUTE FORCE ×2, OVERLOAD ×2, PROBE, ADRENAL SPIKE, PULP Shield ×2, LAY LOW, SMASH & GRAB, Basic Extractor. Each BRUTE FORCE still costs +4 TRACE, so RIOT's push-your-luck stays.
+
+Clarified (no change): SLEDGE's first break each turn costs 0 BW, later breaks 1 BW each, and every break (including the free one) adds +1 TRACE.
