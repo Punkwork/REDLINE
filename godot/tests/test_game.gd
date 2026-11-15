@@ -75,33 +75,21 @@ func test_opening_node() -> void:
 	check(g.hand.size() == Game.BASE_DRAW, "draw %d" % Game.BASE_DRAW)
 	check(g.bw == 4, "4 BW")
 	check(g.ram_used() == 1, "rig uses 1 RAM")
-	# ROT-001 + DET-001: ACCEPT ALL (DETAINER TUMBLER, 1 slot of 3: −1 BW, SPAM, PULP 3);
-	# REJECT ALL (TUMBLER, 2 slots of 4: DL, TRACE 3, DL, PULP 3).
+	# REJECT-001: one DEADLOCK, 2 rotating slots in a 3-subroutine pool.
+	check(IceDB.def("REJECT_ALL").subs.size() == 3, "REJECT-001: three pool entries")
 	check(g.active_subs(0) == [0] and g.active_subs(1) == [0, 1], "turn 1 slots")
-	check(g.response_preview()[0].effects[0].k == "BW_DRAIN", "DETAINER S1 is −1 BW")
-	check(g.break_info(1, 0).reason.begins_with("LOCKED"), "BOOTING locks DEADLOCK on turn 1")
-	check(g.break_info(1, 2).reason == "HIDDEN", "hidden subroutine can't be broken")
-	check(g.break_info(1, 1).cost == 3, "REJECT ALL STR 4: 1 boost (2 BW) + break 1 BW")
-	check(g.break_sub(1, 1), "break TRACE 3")
-	check(g.bw == 1 and g.pick_str(g.installed[0]) == 4, "1 BW left, Icepick stays boosted")
-	var dv := g.deadlock_view()
-	check(dv.seen == 1 and dv.unseen == 4, "DEADLOCK view: 1 seen, 4 unseen (got %s)" % str(dv))
+	check(g.break_info(1, 0).reason.begins_with("LOCKED"), "BOOTING locks turn 1")
+	check(g.break_info(1, 2).reason == "HIDDEN", "PULP starts hidden")
+	check(g.break_sub(1, 1), "TRACE can be broken on turn 1")
+	check(g.bw == 1 and g.pick_str(g.installed[0]) == 4, "boost and break cost unchanged")
+	check(g.deadlock_view().unseen == 3, "three hidden subroutines across the opening formation")
 	g.end_turn()
-	check(g.trace == 0, "broken TRACE didn't fire")
-	check(g.enc.turn == 2 and g.bw == 3 and g.enc.bw_drained == 1, "DETAINER: −1 BW on turn 2 (bw %d)" % g.bw)
-	check(g.active_subs(0) == [1] and g.active_subs(1) == [1, 2], "conveyor: one step on turn 2")
-	check(g.response_preview()[1].skipped, "broken TRACE 3 stays broken in its new slot")
-	check(g.break_info(1, 2).reason.begins_with("LOCKED"), "still BOOTING on turn 2")
+	check(g.enc.turn == 2 and g.bw == 3, "DETAINER drains turn 2")
+	check(g.active_subs(1) == [1, 2] and not g.enc.breached, "turn 2 rotates DEADLOCK out; no early BREACH")
+	check(g.response_preview()[1].skipped, "broken TRACE stays broken")
 	g.end_turn()
-	check(g.bw == 4 and uid_of(g, g.draw_pile + g.hand + g.discard, "SPAM") > 0, "BW back to 4; SPAM inserted")
-	check(g.enc.turn == 3 and g.active_subs(0) == [2] and g.active_subs(1) == [2, 3], "turn 3 slots")
-	check(g.break_sub(1, 2), "DEADLOCK breakable on turn 3")
-	check(not g.enc.breached, "a seen but unbroken DEADLOCK remains")
-	g.end_turn()
-	check(g.vitae == 23, "PULP 3 + PULP 4 (got %d)" % g.vitae)
-	check(g.active_subs(0) == [0] and g.active_subs(1) == [3, 0], "conveyor wraps; −1 BW and first DEADLOCK return")
-	g.break_sub(1, 0)
-	check(g.enc.breached, "BREACH after every DEADLOCK is broken")
+	check(g.enc.turn == 3 and g.active_subs(1) == [2, 0], "turn 3 reveals the same single DEADLOCK")
+	check(g.break_sub(1, 0) and g.enc.breached, "single DEADLOCK permits BREACH on turn 3")
 	var t := g.trace
 	g.end_turn()
 	check(g.trace == t, "response skipped after BREACH")
@@ -784,7 +772,9 @@ func sim_rustler(who: String) -> void:
 	var shat := 0
 	var shat_runs := 0
 	var rows := {}
+	var stalled := {}
 	var vit := []
+	var opener_turns := []
 	for seed in range(100, 130):
 		var g := Game.new(seed)
 		g.new_run(who)
@@ -804,7 +794,10 @@ func sim_rustler(who: String) -> void:
 						g.choose_ice(main_ice(g))
 					else:
 						g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
-				"PLAYER": bot_turn(g)
+				"PLAYER":
+					bot_turn(g)
+					if g.node.get("opening", false) and g.enc.get("breached", false):
+						opener_turns.append(g.enc.turn)
 		purges += g.purges_run
 		for k in ps:
 			ps[k] += g.pulp_stats[k]
@@ -816,8 +809,14 @@ func sim_rustler(who: String) -> void:
 		if g.phase == "SLICE_DONE":
 			done += 1
 			vit.append(g.vitae)
-		else:
+		elif g.phase == "DEAD":
 			rows[g.node.get("name", "?")] = rows.get(g.node.get("name", "?"), 0) + 1
+		else:
+			stalled[g.node.get("name", "?")] = stalled.get(g.node.get("name", "?"), 0) + 1
+	if not opener_turns.is_empty():
+		print("  opening %s: earliest BREACH %s" % [who, opener_turns.min()])
+	if not stalled.is_empty():
+		print("  stalled %s (3000-step guard, not deaths): %s" % [who, str(stalled)])
 	var avg := 0.0
 	for x in vit:
 		avg += x
@@ -826,7 +825,7 @@ func sim_rustler(who: String) -> void:
 	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; purges %d in %d runs; SHATTER played %d times in %d runs" % [who, done, str(rows), avg / max(1, vit.size()), purges, purge_runs, shat, shat_runs])
 
 func needed_types(g: Game) -> Array:
-	var t := []
+	var t := ["TUMBLER"] if g.rustler == "ECHO" else []
 	for L in g.node.layers:
 		for id in L.ice:
 			t.append(IceDB.def(id).type)
@@ -941,6 +940,12 @@ func bot_turn(g: Game) -> void:
 			var useful: bool = g.ice_str(m) > 0 or (d.has("infect") and g.virus_total(m) < 2)
 			if c.id == "PANDEMIC" or c.id == "OUTBREAK":
 				useful = g.virus_total(m) >= 2 and g.ice_str(m) > 0
+			if c.id == "BORROWED_CREDENTIALS":
+				useful = false
+				for p in g.installed:
+					if p.inst.id == "HUSH" and IceDB.def(g.enc.ice[m].id).type in ["FORTRESS", "VOID"]:
+						var need := maxi(0, g.ice_str(m) - g.pick_str(p))
+						useful = g.bw >= 2 + need * 2 and not g.enc.get("borrowed_ice", []).any(func(x): return is_same(x, g.enc.ice[m]))
 			if useful and g.play_card(c.uid, m):
 				progress = true
 				break

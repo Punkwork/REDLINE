@@ -27,7 +27,6 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | ID | What | Docs (done) | Build change | Owner | Status |
 |---|---|---|---|---|---|
-| **REJECT-001** | REJECT ALL has **one DEADLOCK**: pool DEADLOCK · TRACE 3 · PULP 4, 2 slots. Earliest BREACH stays turn 3 with BOOTING. | `REDLINE_ICE_CORP1.md` §5.0, §10 item 10 | `godot/scripts/core/ice.gd` → `REJECT_ALL.subs`: remove the third entry (the second DEADLOCK). Update any test that expects two DEADLOCKs on REJECT ALL. Re-run the Opening Node bot turns (target: never before turn 3). | Codex | TO DO |
 
 **Next build: everything in `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010), approved as written on 2026-11-15.** Suggested order, so each step can be playtested before the next; numbers are working values. Where a system isn't in the slice yet (Uplink, Console Lab, PATCHWORK, Ghostware), build the part that touches it when that system arrives, and say so in the log.
 
@@ -46,6 +45,12 @@ This is the one list of work that has been **decided but not finished**, so Code
 **Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
 
 ---
+
+## Built — awaiting designer playtest
+
+| IDs | Change | Commit reference |
+|---|---|---|
+| REJECT-001 | REJECT ALL has one DEADLOCK in its three-entry pool; BOOTING remains turn 3. Updated opening rules checks and bot timing reporting. | **BUILT** — `playtest3-step0` (commit tag) |
 
 ## Waiting on the designer
 

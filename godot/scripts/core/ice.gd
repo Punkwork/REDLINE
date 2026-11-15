@@ -11,7 +11,7 @@ const DEFS := {
 		"subs": [[{"k": "BW_DRAIN", "v": 1}], [{"k": "INSERT", "card": "SPAM", "to": "draw", "v": 1}], [{"k": "PULP", "v": 3}]]},
 	"REJECT_ALL": {"name": "REJECT ALL", "type": "TUMBLER", "str": 4, "tier": "OPENING", "slots": 2, "ability": "BOOTING",
 		"ability_text": "BOOTING: its DEADLOCKs can't be broken before your 3rd turn of the encounter.",
-		"subs": [[{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 4}]]},
+		"subs": [[{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3}], [{"k": "PULP", "v": 4}]]},
 	# PULP-001: FORTRESSES carry the PULP. Values vary by ICE (S1 PULP 2, S1 PULP 5, escalating 1-2-3).
 	"COOKIE_WALL": {"name": "COOKIE WALL", "type": "FORTRESS", "subtype": "TOLLHOUSE", "str": 5, "tier": "T1",
 		"passive": "TOLL", "ability_text": "TOLL: breaking here costs +1 BW, except the DEADLOCK.",
