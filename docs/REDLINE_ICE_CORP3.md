@@ -175,3 +175,12 @@ One of these is always among the 3 payload choices at ANIMA (P5-003).
 7. **Escape ICE:** WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS, with EGO DEATH in encounter 3 (§8). — **ICE3-007**
 8. **LUCIDA Ghostware set:** LUCID DREAM, MEMORY BACKUP, NEURAL FIREWALL (§9). — **ICE3-008**
 9. **Opening Node: INTAKE** (BASELINE SCAN + ONBOARDING, BOOTING) (§7a). — **ICE3-009** (APPROVED 2026-11-13)
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-013 | New Tier 2 ICE **RECURRING DREAM** (TUMBLER 4; whenever you REBOOT: FORGET 1). — **APPROVED 2026-11-15** |
+| PACE-008 | Layers and reserves as in `REDLINE_ICE_CORP1.md` amendments. — **APPROVED 2026-11-15** |

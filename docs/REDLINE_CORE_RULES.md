@@ -504,3 +504,22 @@ This supersedes the **5-CRED amount only** in EXTRACT-001 and older starter tabl
 ## ECHO-005 — BORROWED CREDENTIALS targeted dual-cost SCRIPT (APPROVED, 2026-11-14)
 
 ECHO's BACKDOOR is replaced by **BORROWED CREDENTIALS**: **1 BW + 8 CRED**, SCRIPT — EXPLOIT. Select a FORTRESS or VOID when playing it; HUSH may break that selected ICE for this Rustler turn using normal Strength, boosts and break costs. The SCRIPT does not break anything by itself. Validate the target and availability of both resources before payment; a rejected play spends neither and leaves the card in hand. On success discard the SCRIPT normally. The target-specific compatibility expires at Rustler turn end. See `REDLINE_RUSTLERS.md` ECHO-005 for the complete card revision. This supersedes BACKDOOR's earlier direct-break profile only; other Icepicks and costs are unchanged.
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-001 | **FOOTPRINT** (cards in your deck, Bloatware not counted) shown at all times with a **cap per corporation**: HALCYON 22, IRONWATCH 29, LUCIDA 35 (§2 screen rule, §10.1). **Bloat tax:** at the start of each ICE Node, gain TRACE equal to FOOTPRINT − the cap (§8.1). GHOST band (6+ below the cap): +1 DRAW on the first turn of each encounter is optional (DSY-001b). — **APPROVED 2026-11-15** |
+| DSY-002 | Screen rules: FOOTPRINT / cap, draw chance per card this encounter, COVERAGE panel (a breaker for each ICE type), tag density (§2). — **APPROVED 2026-11-15** |
+| DSY-003 | **DECOMPILE:** the full-clear card reward (§9.1) also offers removing 1 card from your deck. Floor 10 cards; can't leave an ICE type with no breaker. — **APPROVED 2026-11-15** |
+| DSY-006 | Deck-size targets **18–22 / 24–29 / 30–35** at the end of HALCYON / IRONWATCH / LUCIDA replace §9.1's "about 30 cards added". — **APPROVED 2026-11-15** |
+| DSY-007 | **REBOOT** (§3.2, §4.1): when you need to draw and your draw pile is empty, shuffle your discard pile into it, then keep drawing. "Whenever you REBOOT" effects are ENGINE effects. — **APPROVED 2026-11-15** |
+| DSY-009 | **UNDERFLOW:** ICE STR can go below 0 (§5.3); ROT's minimum 0 is removed (§5.7). **MARGIN** (Icepick STR − ICE STR) shown in the break preview; **OVERKILL X** keyword. — **APPROVED 2026-11-15** |
+| DSY-011 | **CHAIN [TAG]** keyword: a bonus if the last card you played this turn had that tag. HUD shows "Last played". — **APPROVED 2026-11-15** |
+| DSY-012 | **HOLD 1:** at the end of your turn you may CACHE 1 card in hand for free (§3.2, §4.5). Off in the Training Node. — **APPROVED 2026-11-15** |
+| PACE-001 | Encounter length targets **4–5 turns early, 5–8 mid–late**, boss 7–8, escape 4–5, replace §10.5's 3–4 turns. — **APPROVED 2026-11-15** |
+| PACE-003 | **DEADLOCK ×N** subroutines need N breaks (§5.2). BOOTING moves to the 4th turn **only if** playtest 2 shows the Opening Node breached before turn 4 (would amend §10.1a). — **APPROVED 2026-11-15** |
+| PACE-005 | **ESCALATE ↑:** a TRACE, DISCARD or FORGET subroutine that grows by 1 each time it resolves (§5.2). — **APPROVED 2026-11-15** |
+| PACE-008 | **Fewer layers:** Tier 1 Nodes 1 layer, Tier 2 Nodes 1–2 (§8.1). Card reward odds re-based (§9.1): Tier 1 1-layer = 60/30/10; Tier 2 1-layer = 45/40/15; Tier 2 2-layer = 30/45/25. Run length assumes 10–11 encounters per corporation (§10.5). — **APPROVED 2026-11-15** |

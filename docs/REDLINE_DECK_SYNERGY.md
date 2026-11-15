@@ -1,7 +1,7 @@
 # PANOPTICON — DECK MANAGEMENT & SYNERGY
-**Version:** 0.3 (proposal; foundation for Phase 7 pool redesign)
+**Version:** 1.0 (approved; foundation for Phase 7 pool redesign)
 **Date:** 2026-11-15
-**Status:** **PROPOSED.** Nothing here is approved except the end-of-run deck-size target set by the designer (DSY-006). Decision record in §12 (DSY-001 to DSY-014). Builds on the approved Core Rules, Rustlers, Card Pools, ICE (all three corporations), Uplink & CAPS, Upgrades, the Engines proposal (ENG-001 to ENG-005) and the Pacing proposal (PACE-001 to PACE-010).
+**Status:** **APPROVED 2026-11-15** (designer: "Approve everything as written"), all decisions DSY-001 to DSY-014, **to be implemented in the next build**. Numbers stay **working values** to tune in playtest. Optional and conditional items stay optional or conditional as written (DSY-001b). Decision record in §12. Builds on the approved Core Rules, Rustlers, Card Pools, ICE (all three corporations), Uplink & CAPS, Upgrades, the Engines doc (ENG-001 to ENG-005) and the Pacing doc (PACE-001 to PACE-010).
 
 **Designer's goal (2026-11-15):** the player should build a **lean, synergistic deck** by drafting carefully and removing weak cards, so key cards come up often and the player is **steering an engine**, not just playing whatever is in hand.
 
@@ -267,7 +267,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 
 ---
 
-## 10. Changes to existing documents (if approved)
+## 10. Changes to existing documents (approved 2026-11-15; recorded as amendments in each doc)
 
 | Document | Section | Change |
 |---|---|---|
@@ -296,7 +296,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 5. **COMPILE, REFACTOR, Ghostware, corporation pushback ICE** (DSY-004/005/013).
 6. **Phase 7** pools, built on the grammar in §5.1.
 
-**New playtest checks (add to `REDLINE_PLAYTEST_CHECKLIST.md`):**
+**New playtest checks (added to `REDLINE_PLAYTEST_CHECKLIST.md` v0.2):**
 
 | ID | Check | Target |
 |---|---|---|
@@ -315,19 +315,19 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 
 | ID | Decision | Status |
 |---|---|---|
-| DSY-001 | **FOOTPRINT** shown at all times; **FOOTPRINT cap per corporation** (HALCYON 22, IRONWATCH 29, LUCIDA 35); **bloat tax:** TRACE equal to FOOTPRINT − the cap at the start of each ICE Node. (DSY-001b, optional: GHOST band, 6 or more below the cap, +1 DRAW on the first turn of each encounter.) | Proposed |
-| DSY-002 | **Screen rules:** FOOTPRINT / cap, draw chance per card this encounter, COVERAGE panel, tag density. | Proposed |
-| DSY-003 | **DECOMPILE** on the card reward screen (full clears only, CORE-011): remove 1 card instead of taking one; 10-card floor; coverage guard. | Proposed |
-| DSY-004 | **COMPILE:** 2 different SCRIPTs sharing a tag → 1 card, summed cost (max 4 BW), both effects and tags; uses the PATCHWORK slot. | Proposed |
-| DSY-005 | **REFACTOR** Uplink service: 1 PATCHWORK / FUSE / COMPILE, once per visit; 50 CRED working, priced after playtest 2. | Proposed |
-| DSY-006 | **Deck size 30–35 by the end of LUCIDA** (designer, 2026-11-15). Stage targets **18–22 / 24–29 / 30–35** replace "about 30 cards added"; card prices stay at 40 / 60 / 90 pending playtest 2's CRED totals. | **End-of-run target set by the designer 2026-11-15**; stage targets proposed |
-| DSY-007 | **REBOOT** defined (empty draw pile → shuffle discard pile in); "Whenever you REBOOT" effects are ENGINE effects, priced at about 1.5 triggers per encounter (DRAW 6). | Proposed |
-| DSY-008 | **SCAN X** keyword; in-Node BURN cards. | Proposed |
-| DSY-009 | **UNDERFLOW** (ICE STR can go below 0; ROT minimum removed), **MARGIN**, **OVERKILL X**; **ZEROED** noted for RIOT's pool. | Proposed |
-| DSY-010 | **Virus cash-out** cards (CULL, HARVEST pattern), alongside WORM. | Proposed |
-| DSY-011 | **CHAIN [TAG]** keyword, based on the last card played this turn. | Proposed |
-| DSY-012 | **HOLD 1:** CACHE 1 card free at the end of each turn; DEAD MAN'S POCKET → 2. Off in the Training Node. | Proposed |
-| DSY-013 | **Corporation pushback:** FREE TRIAL, PATTERN ANALYSIS, RECURRING DREAM (working). | Proposed |
-| DSY-014 | **Synergy grammar for Phase 7:** each archetype is one currency loop (SOURCE / AMPLIFIER / CASH OUT / ROUTER) plus one lean-deck payoff, with at least one CASH OUT card. | Proposed |
+| DSY-001 | **FOOTPRINT** shown at all times; **FOOTPRINT cap per corporation** (HALCYON 22, IRONWATCH 29, LUCIDA 35); **bloat tax:** TRACE equal to FOOTPRINT − the cap at the start of each ICE Node. (DSY-001b, optional: GHOST band, 6 or more below the cap, +1 DRAW on the first turn of each encounter.) | **APPROVED 2026-11-15** |
+| DSY-002 | **Screen rules:** FOOTPRINT / cap, draw chance per card this encounter, COVERAGE panel, tag density. | **APPROVED 2026-11-15** |
+| DSY-003 | **DECOMPILE** on the card reward screen (full clears only, CORE-011): remove 1 card instead of taking one; 10-card floor; coverage guard. | **APPROVED 2026-11-15** |
+| DSY-004 | **COMPILE:** 2 different SCRIPTs sharing a tag → 1 card, summed cost (max 4 BW), both effects and tags; uses the PATCHWORK slot. | **APPROVED 2026-11-15** |
+| DSY-005 | **REFACTOR** Uplink service: 1 PATCHWORK / FUSE / COMPILE, once per visit; 50 CRED working, priced after playtest 2. | **APPROVED 2026-11-15** |
+| DSY-006 | **Deck size 30–35 by the end of LUCIDA** (designer, 2026-11-15). Stage targets **18–22 / 24–29 / 30–35** replace "about 30 cards added"; card prices stay at 40 / 60 / 90 pending playtest 2's CRED totals. | **APPROVED 2026-11-15** |
+| DSY-007 | **REBOOT** defined (empty draw pile → shuffle discard pile in); "Whenever you REBOOT" effects are ENGINE effects, priced at about 1.5 triggers per encounter (DRAW 6). | **APPROVED 2026-11-15** |
+| DSY-008 | **SCAN X** keyword; in-Node BURN cards. | **APPROVED 2026-11-15** |
+| DSY-009 | **UNDERFLOW** (ICE STR can go below 0; ROT minimum removed), **MARGIN**, **OVERKILL X**; **ZEROED** noted for RIOT's pool. | **APPROVED 2026-11-15** |
+| DSY-010 | **Virus cash-out** cards (CULL, HARVEST pattern), alongside WORM. | **APPROVED 2026-11-15** |
+| DSY-011 | **CHAIN [TAG]** keyword, based on the last card played this turn. | **APPROVED 2026-11-15** |
+| DSY-012 | **HOLD 1:** CACHE 1 card free at the end of each turn; DEAD MAN'S POCKET → 2. Off in the Training Node. | **APPROVED 2026-11-15** |
+| DSY-013 | **Corporation pushback:** FREE TRIAL, PATTERN ANALYSIS, RECURRING DREAM (working). | **APPROVED 2026-11-15** |
+| DSY-014 | **Synergy grammar for Phase 7:** each archetype is one currency loop (SOURCE / AMPLIFIER / CASH OUT / ROUTER) plus one lean-deck payoff, with at least one CASH OUT card. | **APPROVED 2026-11-15** |
 
 **Deliberately not proposed:** a hard deck-size cap (except the ONE-TRICK Ghostware), HP on ICE, or new damage types. The ENG-001 to ENG-005 engines are kept and connected to this system rather than replaced.

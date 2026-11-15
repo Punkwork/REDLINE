@@ -222,3 +222,16 @@ Rule: every starter card is the weakest version of its role, with at least one c
 7. **VECTOR's pool** (§7), with strain reminder text on each strain card. — **APPROVED 2026-11-12 (CARD-007)**
 
 **After this phase:** the full design for HALCYON-based runs is complete and ready to build in Godot and playtest. Remaining design work would be the second and third corporations, more Ghostware (the Central Node rewards), CAPS, and Uplink stock rules.
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-006 | Card prices stay at 40 / 60 / 90 CRED pending playtest 2's CRED totals (§2). — **APPROVED 2026-11-15** |
+| DSY-007 | Value guide (§1): REBOOT effects are priced for about 1.5 triggers per encounter. — **APPROVED 2026-11-15** |
+| DSY-011 | Value guide (§1): a common's CHAIN bonus is about +50% of its main number. — **APPROVED 2026-11-15** |
+| DSY-014 | Phase 7 pools: each archetype is one currency loop (SOURCE / AMPLIFIER / CASH OUT / ROUTER) plus one lean-deck payoff, with at least one CASH OUT card. Example cards: `REDLINE_DECK_SYNERGY.md` §9. — **APPROVED 2026-11-15** |
+| PACE-007 | Each Rustler pool needs at least 2 HULL engines by uncommon; reward cards show a DRILL / HULL / COVERAGE icon. — **APPROVED 2026-11-15** |
+| PACE-008 | Reward odds by layers cleared are re-based for the new layer counts (see Core Rules amendments) (§2). — **APPROVED 2026-11-15** |

@@ -223,3 +223,12 @@ Designer selected the BORROWED CREDENTIALS proposal and explicitly confirmed **1
 Both resources must be available, and target validation occurs before paying them or removing the card from hand. Missing/invalid targets or insufficient BW/CRED leave costs and the card untouched. A valid play pays **exactly 1 BW and 8 CRED**, puts the SCRIPT in discard, and does not add TRACE. The grant expires at this Rustler turn's end and does not persist between layers. It refers to the selected ICE object, so index changes do not redirect it. Separate successful copies can cover separate targets during that same turn. It can be played before installing HUSH, but the Rustler still needs HUSH installed and sufficient Strength/BW to actually break.
 
 This replaces BACKDOOR's former 3-BW direct subroutine break on STR ≤3 ICE; that older effect is no longer in the starter card. Shared/reward-pool cards and other Rustlers' starters are unchanged.
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-009 | ROT: "minimum 0" removed (§2); ICE STR can go below 0 (UNDERFLOW). — **APPROVED 2026-11-15** |
+| PACE-009 | Rustler watch list for longer encounters, especially RIOT's TRACE (`REDLINE_PACING.md` §8). — **APPROVED 2026-11-15** |

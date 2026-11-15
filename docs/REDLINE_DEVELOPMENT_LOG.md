@@ -1368,3 +1368,11 @@ Added CRED-cost display to card frames, revised the original BACKDOOR regression
 **Docs added (Claude, written in the Panopticon project 2026-11-15):** `REDLINE_DECK_SYNERGY.md` v0.3 (DSY-001 to DSY-014, PROPOSED), `REDLINE_PACING.md` v0.2 (PACE-001 to PACE-010, PROPOSED), and copies of the designer's `ICE Rules Bible` and `Ice Passive Abilities` Claude Docs as `REDLINE_ICE_RULES_BIBLE.md` and `REDLINE_ICE_PASSIVES.md`. **Docs changed:** `REDLINE_ICE_CORP1.md` (REJECT-001), `REDLINE_PLAYTEST_CHECKLIST.md` v0.1.1 (G1 and G5 targets for 30–35 cards), `REPOSITORY_STRUCTURE.md` (new docs, HANDOFF, working branch).
 
 **Code changes:** none. **Tests run:** none (no Godot in Claude's environment). The proposals' numbers are working values, not tested.
+
+## 2026-11-15 — DSY-001 to DSY-014 and PACE-001 to PACE-010 approved for the next build (Claude)
+
+**Designer decision:** "Approve everything as written", to be implemented in the next build. `REDLINE_DECK_SYNERGY.md` → v1.0 and `REDLINE_PACING.md` → v1.0, every decision marked **APPROVED 2026-11-15**. Numbers remain working values to tune in playtest. Optional and conditional items stay as written: DSY-001b (GHOST +1 DRAW) optional; PACE-003's BOOTING-on-turn-4 only if playtest 2 shows an Opening Node breach before turn 4; PACE-006's safety valves held in reserve.
+
+**Docs amended** (a "Later amendments (deck synergy and pacing)" table added to each, which wins where it conflicts with older section text): Core Rules, Card Pools, Uplink & CAPS, Upgrades/Events/Escape, Rustlers, Engines, ICE Corp 1–3. `REDLINE_PLAYTEST_CHECKLIST.md` → v0.2 (B1, C1, K1 revised; C9–C11, G6–G11 added). `HANDOFF.md`: build work listed for Codex in five synergy steps plus pacing; Claude tasks for scoring the slice and Phase 7 pools.
+
+**Code changes:** none. **Tests run:** none.

@@ -1,11 +1,11 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.1.1 · **Date:** 2026-11-15 *(0.1: 2026-11-13)*
+**Version:** 0.2 · **Date:** 2026-11-15 *(0.1: 2026-11-13)*
 
 Use one copy per playtest run. The live, fill-in version is the **PANOPTICON Playtest QA Checklist** Sheet (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
 **For every run:** play one corporation heist (choose the corporation and Rustler on the main menu), then press **Copy summary to clipboard** on the summary screen and paste it into the Run log. The summary gives CRED earned and spent, purchases, cards added, and the route, which answers most of the Economy, Deck and Map checks.
 
-Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006).
+Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then.
 
 
 ## Setup
@@ -19,7 +19,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 
 | ID | Check | Target / what good looks like | Result | Notes |
 |---|---|---|---|---|
-| B1 | Turn you BREACHED the Opening Node. | 3–4 turns; never under 3 | | |
+| B1 | Turn you BREACHED the Opening Node. | 4–5 turns; never under 3 (PACE-001; under 4 triggers PACE-003's BOOTING change) | | |
 | B2 | Turns 1–2 had a real decision: extract, defend, break the support ICE, or CACHE. | Yes, and you weren't just waiting | | |
 | B3 | BOOTING was clear on screen: you knew why the DEADLOCK couldn't be broken yet. | Understood without reading the log | | |
 | B4 | The corporation's lesson landed (HALCYON: only DEADLOCKs block BREACH; IRONWATCH: SHIELD expires each turn; LUCIDA: FORGET and CACHE). | You could say the lesson afterwards | | |
@@ -28,7 +28,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 
 | ID | Check | Target / what good looks like | Result | Notes |
 |---|---|---|---|---|
-| C1 | Typical encounter length. | 3–4 turns | | |
+| C1 | Typical encounter length. | Early 4–5 · mid–late 5–8 (PACE-001) | | |
 | C2 | The Corporation Response order (left to right, top to bottom) was readable in the log. | You could predict the next response | | |
 | C3 | The break cost on each subroutine button matched what you actually paid. | Always matched | | |
 | C4 | Reactive ICE abilities (WATCHDOG, PATROL DRONE, K9 UNIT…) were noticed before they hurt. | No surprises after the first time | | |
@@ -36,6 +36,9 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | C6 | In multi-ICE layers, choosing which ICE to break first mattered. | Yes | | |
 | C7 | Off-type ICE (no matching Icepick) felt hard but not hopeless; the fallback card was reachable. | Hard, never stuck | | |
 | C8 | Any ICE that felt unfair, trivial or confusing (name it in Notes). | None | | |
+| C9 | VITAE lost per encounter (note each). | Early 2–3 · mid–late 3–4 for an on-curve deck (PACE-004) | | |
+| C10 | You broke a threat subroutine instead of rushing the DEADLOCKs, and it was worth it. | Most encounters past the Opening Node | | |
+| C11 | Rising threat (PULP curves, HARDENING, ESCALATE ↑) was noticed and planned around. | Yes | | |
 
 ## Rustler
 
@@ -80,6 +83,12 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | G3 | Going deeper gave noticeably better card choices. | Yes | | |
 | G4 | The full-clear completion CAP was worth going deeper for. | Sometimes | | |
 | G5 | Deck size at the end of the corporation. | HALCYON 18–22 · IRONWATCH 24–29 · LUCIDA 30–35 | | |
+| G6 | Times you chose DECOMPILE over a card you liked *(after DSY-003)*. | At least once per corporation: a real choice | | |
+| G7 | REBOOTs per encounter *(after DSY-007)*. | About 1.5 on target; 2+ in the GHOST band | | |
+| G8 | A turn where the order of plays mattered *(after DSY-011, CHAIN)*. | Most encounters | | |
+| G9 | You held a card for a planned combo *(after DSY-012, HOLD 1)*. | Most encounters | | |
+| G10 | Bloat tax: did you pay it, and was it fair? *(after DSY-001)* | Rare in good runs; a clear warning in bad ones | | |
+| G11 | At the Central Node, you could name your deck's loop in one sentence. | Yes | | |
 
 ## CAPS & Ghostware
 
@@ -110,7 +119,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 
 | ID | Check | Target / what good looks like | Result | Notes |
 |---|---|---|---|---|
-| K1 | Minutes per encounter. | 2–4 | | |
+| K1 | Minutes per encounter. | 3–6 (PACE-008) | | |
 | K2 | Minutes for the whole corporation. | 25–33 (75–100 per 3-corporation run) | | |
 | K3 | Any stretch that felt like a grind (where?). | None | | |
 
