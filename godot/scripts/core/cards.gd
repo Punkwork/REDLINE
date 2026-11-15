@@ -315,6 +315,73 @@ const DEFS := {
 		"chain": "CLOAK",
 		"text": "−2 TRACE. CHAIN CLOAK: draw 1."
 	},
+	"SCALPEL": {
+		"name": "SCALPEL",
+		"type": "PROGRAM",
+		"tags": [
+			"ICEPICK"
+		],
+		"bw": 1,
+		"ram": 1,
+		"rarity": "UNCOMMON",
+		"pick": {
+			"itype": "TUMBLER",
+			"str": 2,
+			"boost_cost": 1,
+			"boost_amt": 1,
+			"break_cost": 1,
+			"overkill": 2
+		},
+		"text": "STR 2. Boost 1 BW: +1 STR. Break 1 BW. OVERKILL 2: break costs 0 BW."
+	},
+	"STACK_SMASH": {
+		"name": "STACK SMASH",
+		"type": "SCRIPT",
+		"tags": [
+			"EXPLOIT"
+		],
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"pool": "RIOT",
+		"target": true,
+		"text": "Target ICE −1 STR per EXPLOIT played this turn, including this."
+	},
+	"INTEGER_UNDERFLOW": {
+		"name": "INTEGER UNDERFLOW",
+		"type": "SCRIPT",
+		"tags": [
+			"EXPLOIT"
+		],
+		"bw": 2,
+		"rarity": "RARE",
+		"pool": "RIOT",
+		"target": true,
+		"text": "Break up to 3 subroutines: one per point target STR is below zero. BURNED."
+	},
+	"CULL": {
+		"name": "CULL",
+		"type": "SCRIPT",
+		"tags": [
+			"VIRUS"
+		],
+		"bw": 1,
+		"rarity": "COMMON",
+		"pool": "VECTOR",
+		"target": true,
+		"text": "Remove up to 3 virus counters from target ICE; +2 SHIELD each."
+	},
+	"HARVEST": {
+		"name": "HARVEST",
+		"type": "SCRIPT",
+		"tags": [
+			"VIRUS"
+		],
+		"bw": 0,
+		"rarity": "UNCOMMON",
+		"pool": "VECTOR",
+		"target": true,
+		"text": "Remove all LEECH from target ICE; extract 3 CRED each."
+	},
 }
 
 const STARTER_GENERALIST := [

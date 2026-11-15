@@ -9,6 +9,7 @@ func run() -> void:
  step1()
  step2()
  step3()
+ step4()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -94,7 +95,7 @@ func step3() -> void:
  var pivot := g._new_inst("PIVOT"); g.hand.append(pivot)
  var before := g.ice_str(0)
  g.play_card(pivot.uid, 0)
- check.call(g.ice_str(0) == maxi(0, before - 3), "PIVOT CHAIN CLOAK grants extra reduction")
+ check.call(g.ice_str(0) == before - 3, "PIVOT CHAIN CLOAK grants extra reduction")
  var tags: Array = g.enc.last_tags.duplicate()
  g.installed.append({"inst": g._new_inst("TUMBLER_ICEPICK"), "boost": 5, "free_used": false})
  g.break_sub(0, 0)
@@ -131,3 +132,28 @@ func step3() -> void:
  check.call(chain.enc.chain_draws.values()[0] == 2 and chain.draw_pile.size() == 1, "KILL CHAIN capped at two triggers; HANDOFF has three direct chain draws")
  chain.end_turn()
  check.call(chain.enc.last_tags.is_empty(), "CHAIN resets each Rustler turn")
+
+func step4() -> void:
+ var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30
+ g.enc.ice[0].str_mod = -10
+ check.call(g.ice_str(0) == -6, "UNDERFLOW permits negative STR")
+ g.enc.ice[0].str_floor = 3
+ check.call(g.ice_str(0) == 3, "explicit STR floor overrides UNDERFLOW")
+ g.enc.ice[0].erase("str_floor"); g.enc.ice[0].harden = 2
+ check.call(g.ice_str(0) == -4, "HARDENING raises negative STR normally")
+ g.enc.ice[0].bomb = true
+ check.call(g.ice_str(0) == 0, "LOGIC BOMB sets negative STR to zero")
+ g.enc.ice[0].bomb = false
+ g.installed.append({"inst": g._new_inst("SCALPEL"), "boost": 0, "free_used": false})
+ check.call(g.break_info(0, 0).margin == 6 and g.break_info(0, 0).cost == 0, "SCALPEL OVERKILL uses MARGIN")
+ g.amp = 2; g.infect(0, "ROT", 1)
+ check.call(g.ice_str(0) == -7, "ROT AMP applied once to strain effect")
+ g.infect(0, "LEECH", 4)
+ var c := g._new_inst("CULL"); g.hand.append(c); g.play_card(c.uid, 0)
+ g.cull_strain("ROT"); g.cull_strain("LEECH"); g.cull_strain("LEECH")
+ check.call(g.shield == 6 and g.enc.ice[0].virus.LEECH == 2 and g.phase == "PLAYER", "CULL spends chosen strains, maximum three")
+ var h := g._new_inst("HARVEST"); g.hand.append(h)
+ var cred := g.cred; g.play_card(h.uid, 0)
+ check.call(g.cred == cred + 6 and not g.enc.ice[0].virus.has("LEECH"), "HARVEST spends all LEECH for reserve-limited extraction")
+ var u := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(u); g.play_card(u.uid, 0)
+ check.call(g.phase == "CHOICE" and g.pending.n == 3 and not g._find(g.burned, u.uid).is_empty(), "INTEGER UNDERFLOW caps at three and burns")

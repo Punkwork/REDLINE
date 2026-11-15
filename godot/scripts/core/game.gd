@@ -550,6 +550,23 @@ func play_card(uid: int, target: int = -1) -> bool:
 
 func _resolve_script(inst: Dictionary, target: int) -> bool:
 	match inst.id:
+		"STACK_SMASH": enc.ice[target].str_mod -= int(enc.tag_counts.get("EXPLOIT", 0))
+		"INTEGER_UNDERFLOW":
+			var n := mini(3, maxi(0, -ice_str(target)))
+			var br := {"same_ice": true}
+			if n > 0 and not _breaker_targets(br, target).is_empty():
+				pending = {"kind": "card_break", "n": n, "ice": target, "breaker": br, "card_uid": inst.uid, "card": "INTEGER UNDERFLOW"}
+				burned.append(inst)
+				phase = "CHOICE"
+			return true
+		"CULL":
+			if virus_total(target) > 0:
+				pending = {"kind": "cull", "ice_ref": enc.ice[target], "n": 3, "card_uid": inst.uid}
+				discard.append(inst)
+				phase = "CHOICE"
+		"HARVEST":
+			extract(3 * int(enc.ice[target].virus.get("LEECH", 0)))
+			enc.ice[target].virus.erase("LEECH")
 		"PIVOT": enc.ice[target].str_mod -= 3 if inst.get("chain_active", false) else 2
 		"COVER_FIRE": shield += 5 if inst.get("chain_active", false) else 3
 		"HANDOFF":
@@ -996,11 +1013,11 @@ func ice_str(i: int) -> int:
 	var ice: Dictionary = enc.ice[i]
 	if ice.bomb:
 		return 0
-	var v: int = IceDB.def(ice.id).str + ice.str_mod + ice.get("harden", 0) - int(ice.virus.get("ROT", 0))
+	var v: int = IceDB.def(ice.id).str + ice.str_mod + ice.get("harden", 0) - int(ice.virus.get("ROT", 0)) - (amp if ice.virus.get("ROT", 0) > 0 else 0)
 	# RELAY: the ICE to the left props this one up while it has an unbroken subroutine.
 	if i > 0 and IceDB.def(enc.ice[i - 1].id).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false):
 		v += 2
-	return max(0, v)
+	return maxi(int(ice.get("str_floor", IceDB.def(ice.id).get("str_floor", -99999))), v)
 
 func passive(i: int) -> String:
 	return IceDB.def(enc.ice[i].id).get("passive", "")
@@ -1044,7 +1061,8 @@ func break_info(i: int, s: int) -> Dictionary:
 		var boost_bw: int = boosts * pk.boost_cost
 		if boosts > 0 and _rack_has("TOOLBELT") and not enc.toolbelt_used:
 			boost_bw -= pk.boost_cost
-		var brk: int = pk.break_cost
+		var margin: int = pick_str(p) + boosts * pk.boost_amt - ice_str(i)
+		var brk: int = 0 if pk.has("overkill") and margin >= pk.overkill else pk.break_cost
 		var free := false
 		if pk.get("free_first", false) and not p.free_used:
 			brk = 0
@@ -1054,7 +1072,7 @@ func break_info(i: int, s: int) -> Dictionary:
 		var cost: int = boost_bw + brk + extra + toll
 		var better: bool = best.is_empty() or cost < best.cost or (cost == best.cost and pk.get("double", false))
 		if better:
-			best = {"ok": true, "cost": cost, "uid": p.inst.uid, "boosts": boosts, "free": free, "reason": ""}
+			best = {"ok": true, "cost": cost, "uid": p.inst.uid, "boosts": boosts, "free": free, "reason": "", "margin": margin}
 	if best.is_empty():
 		return {"ok": false, "reason": "NO %s ICEPICK" % d.type}
 	if best.cost > bw:
@@ -1589,10 +1607,10 @@ func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
 		e = {"k": "PULP", "v": int(seq[int(ice.corp_turns) % seq.size()]), "curve": e.curve}
 	if e.k == "PULP" and v.get("SCRAMBLE", 0) > 0:
 		var out := e.duplicate()
-		out.v = maxi(0, e.v - int(v.SCRAMBLE))
+		out.v = maxi(0, e.v - int(v.SCRAMBLE) - amp)
 		return out
 	if e.k == "TRACE" and v.get("BLIND", 0) > 0:
-		return {"k": "TRACE", "v": maxi(0, e.v - int(v.BLIND))}
+		return {"k": "TRACE", "v": maxi(0, e.v - int(v.BLIND) - amp)}
 	return e
 
 func _virus_turn() -> void:
@@ -1606,7 +1624,7 @@ func _virus_turn() -> void:
 	for i in enc.ice.size():
 		var l: int = int(enc.ice[i].virus.get("LEECH", 0))
 		if l > 0:
-			extract(l)
+			extract(l + amp)
 
 func _installed_count(id: String) -> int:
 	var n := 0
@@ -1712,3 +1730,15 @@ func _chain_bonus() -> void:
 		if card.id == "KILL_CHAIN" and int(enc.chain_draws.get(card.uid, 0)) < 2:
 			enc.chain_draws[card.uid] = int(enc.chain_draws.get(card.uid, 0)) + 1
 			draw_cards(1)
+
+func cull_strain(strain: String = "") -> void:
+	if phase != "CHOICE" or pending.get("kind") != "cull": return
+	var v: Dictionary = pending.ice_ref.virus
+	if strain != "":
+		if int(v.get(strain, 0)) <= 0: return
+		v[strain] -= 1
+		shield += 2
+		pending.n -= 1
+	if strain == "" or pending.n == 0 or v.values().all(func(n): return n == 0):
+		pending = {}
+		phase = "PLAYER"

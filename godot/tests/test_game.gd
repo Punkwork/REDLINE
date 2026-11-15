@@ -975,6 +975,9 @@ func bot_turn(g: Game) -> void:
 		g.end_turn()
 
 func bot_choice(g: Game) -> void:
+	if g.pending.get("kind") == "cull":
+		g.cull_strain()
+		return
 	match g.pending.get("kind", ""):
 		"scan": g.finish_scan()
 		"card_break": bot_choose_sub(g)

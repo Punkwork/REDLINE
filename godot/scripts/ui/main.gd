@@ -733,7 +733,7 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	head.add_child(nm)
 	var cur := g.ice_str(i)
 	var sv := VBoxContainer.new()
-	sv.add_child(_lbl("STR %d" % cur, 28, TEXT))
+	sv.add_child(_lbl("STR %d" % cur, 28, Color("#ff4d5e") if cur < 0 else TEXT))
 	if cur != d.str:
 		sv.add_child(_lbl("base %d" % d.str, 11, DIM))
 	head.add_child(sv)
@@ -962,7 +962,7 @@ func _sub_row(i: int, s: int, effects: Array, broken: bool, tag: String) -> Cont
 	var b := Button.new()
 	b.custom_minimum_size = Vector2(92, 30)
 	if info.ok:
-		b.text = "FREE" if info.cost == 0 else "BREAK %d BW" % info.cost
+		b.text = ("FREE" if info.cost == 0 else "BREAK %d BW" % info.cost) + " · MARGIN %d" % info.get("margin", 0)
 		if info.boosts > 0:
 			b.tooltip_text = "Includes %d boost(s)." % info.boosts
 	else:
@@ -1235,6 +1235,18 @@ func _build_overlay() -> void:
 		"READY_RIG": _overlay_options("READY RIG", "Generalist ORIGIN: choose one PROGRAM in your deck. It starts installed for free; your first hand stays full.", g.pending.options, g.draw_pile, func(u): g.choose_ready_rig(u); refresh(), "Skip", func(): g.skip_ready_rig(); refresh())
 		"CHOICE":
 			match g.pending.kind:
+				"cull":
+					var panel := _dim_box("CULL", "Choose up to %d more counters to remove." % g.pending.n)
+					for strain in g.pending.ice_ref.virus:
+						if g.pending.ice_ref.virus[strain] > 0:
+							var b := Button.new()
+							b.text = strain + " (%d)" % g.pending.ice_ref.virus[strain]
+							b.pressed.connect(func(): g.cull_strain(strain); refresh())
+							panel.add_child(b)
+					var done := Button.new()
+					done.text = "Finish"
+					done.pressed.connect(func(): g.cull_strain(); refresh())
+					panel.add_child(done)
 				"hold": _overlay_options("HOLD %d" % g.pending.n, "Optionally CACHE a hand card before end-turn effects and the Corporation Response.", g.pending.options, g.hand, _on_hold_choice, "Finish turn / skip remaining HOLD", func(): _on_hold_choice(-1))
 				"scan":
 					_overlay_options("SCAN 3", "Click cards to bottom them, in selection order; click again to undo. Selected: %s" % str(g.pending.bottom), g.pending.cards.map(func(c): return c.uid), g.pending.cards, func(u): g.choose(u); refresh(), "Finish SCAN, then draw 1", func(): g.finish_scan(); refresh())
