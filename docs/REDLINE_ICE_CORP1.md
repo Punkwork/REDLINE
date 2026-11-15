@@ -241,3 +241,15 @@ HALCYON's consent banner: two buttons that look the same. Every route starts her
 10. **REJECT ALL has one DEADLOCK** (§5.0): its pool is DEADLOCK · TRACE 3 · PULP 4 in 2 slots (the second DEADLOCK is removed). Reason: in playtest, the second DEADLOCK rotating into view looked like the first coming back unbroken (REEL-001). The DEADLOCK is in a slot on turns 1 and 3, so with BOOTING the earliest BREACH stays turn 3. Matches Core Rules §10.1a ("a main ICE that holds the only DEADLOCK"). — **APPROVED 2026-11-15 (REJECT-001)**. *Build: not yet applied; `godot/scripts/core/ice.gd` REJECT_ALL needs the third pool entry removed.*
 
 **Next:** Phase 3B — card pools: shared reward cards and Rustler-specific cards, including cards for the virus strains SCRAMBLE, BLIND, LEECH and WORM.
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| PACE-002 | Pacing levers in order: reveal timing (TUMBLER rotation, VOID reveal), then more DEADLOCKs on more ICE (2 ICE / 2 DEADLOCKs early); support ICE may carry a DEADLOCK from Tier 2 on (§2.4, §8.1). — **APPROVED 2026-11-15** |
+| PACE-005 | Threat budget (§2.1): PULP curves and ESCALATE count at their average over the stage's target turns. — **APPROVED 2026-11-15** |
+| PACE-008 | Layers (§8.1): Tier 1 Nodes 1 layer; Tier 2 Nodes 1–2. CRED reserves per layer +50% (§8.2). — **APPROVED 2026-11-15** |
+| PACE-010 | Every ICE layer gets a BREACH WORK score and REVEAL FLOOR; score the HALCYON slice first, from playtest 2. — **APPROVED 2026-11-15** |
+| DSY-013 | New Tier 2 ICE **FREE TRIAL** (TUMBLER 4; whenever you REBOOT: INSERT 1 SPAM into your draw pile) (`REDLINE_DECK_SYNERGY.md` §8). — **APPROVED 2026-11-15** |

@@ -266,3 +266,14 @@ This replaces the temporary arrangement in `REDLINE_ICE_CORP1.md` §8.2a.
 | ID | Change to this document |
 |---|---|
 | P5-010 | **KILLSWITCH clarified** (§2.2a): triggers on damage only, never on VITAE you pay; VITAE costs can't be chosen if they'd leave you below 1 VITAE; once per Node (a multi-layer Node counts as one); recharges between escape encounters (each is a Node); Max VITAE loss isn't damage; READY / SPENT shown on the rack, highlighted log line when it triggers. — **APPROVED 2026-11-13** |
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-004 | **COMPILE** (alongside FUSE, §1.2a): 2 different SCRIPTs that share a tag become 1 card; summed cost (max 4 BW), both effects and tags; uses the PATCHWORK slot. — **APPROVED 2026-11-15** |
+| DSY-012 | **DEAD MAN'S POCKET** becomes "you may CACHE up to 2 cards for free each turn" (§2.2), since HOLD 1 gives everyone 1. — **APPROVED 2026-11-15** |
+| DSY-001 / DSY-007 | New Ghostware candidates for the general pool: HEARTBEAT, MINIMAL INSTALL, DEDUPLICATOR, ONE-TRICK (`REDLINE_DECK_SYNERGY.md` §9.3). — **APPROVED 2026-11-15** |
+| PACE-006 | Safety valves held in reserve: Max VITAE 35 → 40, full-clear heal 3, a second SAFEHOUSE; used only if playtests run hot. — **APPROVED 2026-11-15** |

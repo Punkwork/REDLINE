@@ -1,11 +1,11 @@
 # PANOPTICON — ENCOUNTER PACING & SCALING
-**Version:** 0.2 (proposal)
+**Version:** 1.0 (approved)
 **Date:** 2026-11-15
-**Status:** **PROPOSED.** Nothing here is approved. Decision record in §10 (PACE-001 to PACE-010). Builds on the approved Core Rules, ICE (all three corporations), Card Pools and Uplink & CAPS documents, and on the proposals in `REDLINE_ENGINES.md` and `REDLINE_DECK_SYNERGY.md`.
+**Status:** **APPROVED 2026-11-15** (designer: "Approve everything as written"), all decisions PACE-001 to PACE-010, **to be implemented in the next build**. Numbers stay **working values**; conditional items stay conditional as written (PACE-003's BOOTING change, PACE-006's safety valves). Decision record in §10. Builds on the approved Core Rules, ICE (all three corporations), Card Pools and Uplink & CAPS documents, and on `REDLINE_ENGINES.md` and `REDLINE_DECK_SYNERGY.md`.
 
 **Designer's goal (2026-11-15):** encounters should last **4–5 turns in the early game** and **5–8 turns in the mid to late game**. Rustlers shouldn't die because encounters are longer, and their deck builds should scale so they can BREACH stronger ICE.
 
-> All numbers are **working values** for playtesting. **Replaces** the current encounter-length targets of 3–4 turns (Core Rules §10.5, checklist C1) once approved.
+> All numbers are **working values** for playtesting. **Replaces** the encounter-length targets of 3–4 turns (Core Rules §10.5, checklist C1).
 
 **v0.2 changes (synced with build 0.2.0-playtest.2 and the 2026-11-14 decisions):** "where the game is today" now uses the slice's actual ICE (TUNE-001, ROT-001, VOID-001, PULP-002, PASSIVE-001) and the bot results, which show the slice is **more deadly** than this budget, not too short (§2); TUMBLER rotation and VOID reveal added as the first pacing levers (§3); ESCALATE narrowed, because PULP curves (PULP-002) and HARDENING already do most of its job (§4.2); fallback STR limits updated for BORROWED CREDENTIALS (ECHO-005) (§3); DRAW 6 (DRAW-001) and CORE-011 / EXTRACT-002 noted where they matter (§6.1, §7).
 **v0.1.1:** §6.1 updated for the deck-size targets (30–35 cards by the end of LUCIDA, DSY-006).
@@ -187,7 +187,7 @@ Every ICE layer gets a **BREACH WORK score** and a **REVEAL FLOOR** next to its 
 
 **Order of work:** score the HALCYON slice first (COOKIE BANNER, CAPTCHA, CONSENT WALL, DOORBELL, TERMS & CONDITIONS), using playtest 2's measured turns and VITAE; then IRONWATCH and LUCIDA, then the Central Nodes and the escape ICE.
 
-**Playtest checks (update `REDLINE_PLAYTEST_CHECKLIST.md`):**
+**Playtest checks (added to `REDLINE_PLAYTEST_CHECKLIST.md` v0.2):**
 
 | ID | Check | Target |
 |---|---|---|
@@ -200,19 +200,19 @@ Every ICE layer gets a **BREACH WORK score** and a **REVEAL FLOOR** next to its 
 
 ---
 
-## 10. Decision record (all PROPOSED, 2026-11-15)
+## 10. Decision record (all APPROVED, 2026-11-15)
 
 | ID | Decision | Status |
 |---|---|---|
-| PACE-001 | **Pacing model and targets:** turns ≈ BREACH WORK ÷ (OUTPUT − DEFENCE), never below the REVEAL FLOOR; targets early 4–5, early–mid 5, mid 5–7, late 6–8, boss 7–8, escape 4–5 turns, with the BREACH WORK and threat values in §2. Replaces the 3–4-turn target. | Proposed |
-| PACE-002 | **Reveal timing first, then more DEADLOCKs on more ICE:** 2 ICE / 2 DEADLOCKs per layer early, rising to 3 ICE / 3–4 late; support ICE may carry a DEADLOCK from Tier 2 on. | Proposed |
-| PACE-003 | **DEADLOCK ×N** (needs N breaks; ×2 from early–mid, ×3 late and bosses; mainly for FORTRESSES); STR grows about +1 per corporation; **BOOTING on the 4th turn** only if playtest 2 shows the Opening Node breached before turn 4 (would amend OPEN-001). | Proposed |
-| PACE-004 | **VITAE budget per encounter** (§4.1) as a design check for every layer, settled against playtest 2's measured VITAE loss. | Proposed |
-| PACE-005 | **Rising threat:** use PULP curves (PULP-002), HARDENING and VOID reveal first; **ESCALATE ↑** only for TRACE, DISCARD and FORGET; budgeted at their average value. Early tiers: at most half of an ICE's threat is PULP or CORTEX. | Proposed |
-| PACE-006 | **Safety valves**, used only if playtests run hot: Max VITAE 35 → 40, full-clear heal 3, a second SAFEHOUSE. | Proposed (held in reserve) |
-| PACE-007 | **DRILL / HULL / COVERAGE** as the deckbuilding needs, shown on reward cards; each Rustler pool has at least 2 HULL engines by uncommon. | Proposed |
-| PACE-008 | **Fewer layers:** Tier 1 Nodes 1 layer, Tier 2 Nodes 1–2; card reward odds re-based; CRED reserves per layer +50%; minutes per encounter 3–6. Amends ICE-008, CORE-010 odds table, UPL-008 reserves, Core Rules §10.5. | Proposed |
-| PACE-009 | **Rustler watch list** (§8), especially RIOT's TRACE over longer encounters. | Proposed |
-| PACE-010 | **BREACH WORK score and REVEAL FLOOR** for every ICE layer, with stage-typical Icepicks (§9); score the HALCYON slice first, from playtest 2's measurements. | Proposed |
+| PACE-001 | **Pacing model and targets:** turns ≈ BREACH WORK ÷ (OUTPUT − DEFENCE), never below the REVEAL FLOOR; targets early 4–5, early–mid 5, mid 5–7, late 6–8, boss 7–8, escape 4–5 turns, with the BREACH WORK and threat values in §2. Replaces the 3–4-turn target. | **APPROVED 2026-11-15** |
+| PACE-002 | **Reveal timing first, then more DEADLOCKs on more ICE:** 2 ICE / 2 DEADLOCKs per layer early, rising to 3 ICE / 3–4 late; support ICE may carry a DEADLOCK from Tier 2 on. | **APPROVED 2026-11-15** |
+| PACE-003 | **DEADLOCK ×N** (needs N breaks; ×2 from early–mid, ×3 late and bosses; mainly for FORTRESSES); STR grows about +1 per corporation; **BOOTING on the 4th turn** only if playtest 2 shows the Opening Node breached before turn 4 (would amend OPEN-001). | **APPROVED 2026-11-15** |
+| PACE-004 | **VITAE budget per encounter** (§4.1) as a design check for every layer, settled against playtest 2's measured VITAE loss. | **APPROVED 2026-11-15** |
+| PACE-005 | **Rising threat:** use PULP curves (PULP-002), HARDENING and VOID reveal first; **ESCALATE ↑** only for TRACE, DISCARD and FORGET; budgeted at their average value. Early tiers: at most half of an ICE's threat is PULP or CORTEX. | **APPROVED 2026-11-15** |
+| PACE-006 | **Safety valves**, used only if playtests run hot: Max VITAE 35 → 40, full-clear heal 3, a second SAFEHOUSE. | **APPROVED 2026-11-15** (held in reserve) |
+| PACE-007 | **DRILL / HULL / COVERAGE** as the deckbuilding needs, shown on reward cards; each Rustler pool has at least 2 HULL engines by uncommon. | **APPROVED 2026-11-15** |
+| PACE-008 | **Fewer layers:** Tier 1 Nodes 1 layer, Tier 2 Nodes 1–2; card reward odds re-based; CRED reserves per layer +50%; minutes per encounter 3–6. Amends ICE-008, CORE-010 odds table, UPL-008 reserves, Core Rules §10.5. | **APPROVED 2026-11-15** |
+| PACE-009 | **Rustler watch list** (§8), especially RIOT's TRACE over longer encounters. | **APPROVED 2026-11-15** |
+| PACE-010 | **BREACH WORK score and REVEAL FLOOR** for every ICE layer, with stage-typical Icepicks (§9); score the HALCYON slice first, from playtest 2's measurements. | **APPROVED 2026-11-15** |
 
 **Next:** in playtest 2, record turns and VITAE lost for each slice encounter; then score them (PACE-010) and decide whether to change the ICE, the budget, or both.

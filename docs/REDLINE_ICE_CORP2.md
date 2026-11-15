@@ -172,3 +172,12 @@ One of these is always among the 3 payload choices at OVERWATCH (P5-003).
 6. **Escape ICE:** ROADBLOCK, SPIKE STRIP, SEARCHLIGHT, PURSUIT DRONE, with LETHAL FORCE in encounter 3 (§7). — **ICE2-006**
 7. **IRONWATCH Ghostware set:** KEVLAR WEAVE, BADGE CLONE, DASHCAM FEED (§8). — **ICE2-007**
 8. **Opening Node: FRONT DESK** (TURNSTILE + SECURITY GUARD, BOOTING) (§6a). — **ICE2-008** (APPROVED 2026-11-13)
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-013 | New Tier 2 ICE **PATTERN ANALYSIS** (VOID 4; whenever you get a CHAIN bonus: PULP 1). — **APPROVED 2026-11-15** |
+| PACE-008 | Layers and reserves as in `REDLINE_ICE_CORP1.md` amendments. — **APPROVED 2026-11-15** |

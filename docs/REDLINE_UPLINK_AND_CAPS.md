@@ -143,3 +143,12 @@ With cards at 40 / 60 / 90 CRED (about 50 on average), that buys **2–3 cards p
 | BASIC-001 | **No basic cards at the Uplink:** the reserve shelf is removed (amends UPL-005). See Core Rules §3.1a. |
 | UPL-008 | **Leaner economy:** a winning run adds about 30 cards in total, including **2–3 bought per corporation**. Card prices raised to **40 / 60 / 90 CRED** (from 25 / 40 / 65); CRED reserves lowered about 20% (Tier 1: 10/15; Tier 2: 15/20/30; Central 35; escape 10 unchanged), for about 130–220 CRED per corporation (§3, §4; `REDLINE_CARD_POOLS.md` §2; `REDLINE_ICE_CORP1.md` §8.2). Pairs with CORE-010. |
 | UPL-009 | **JACK OUT works during the escape** (§2.1): the escape limit from UPL-007 is removed as unnecessary; the other five limits stay. See Core Rules §10.3. — **APPROVED 2026-11-13** |
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-005 | **REFACTOR** Uplink service: once per visit, apply 1 PATCHWORK, FUSE or COMPILE for 50 CRED (working value) (§3.1). — **APPROVED 2026-11-15** |
+| PACE-008 | CRED reserves per layer +50% to keep 130–220 CRED per corporation with fewer layers (§4). — **APPROVED 2026-11-15** |

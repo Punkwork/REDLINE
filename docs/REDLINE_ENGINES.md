@@ -178,3 +178,11 @@ SHIELD from SANDBOX's RUN lands at the end of your turn, so it protects during t
 **Before final approval:** simulate CRON's Opening Node turns (target 3–4, like OPEN-001), AMP's effect on CRED per corporation (target 130–220, UPL-008), and SANDBOX + CRONTAB against IRONWATCH's PULP.
 
 **Next:** Phase 7 — pool redesign into archetypes (VECTOR first, then CRON), using these mechanics.
+
+### Later amendments (deck synergy and pacing, APPROVED 2026-11-15)
+
+The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010) as written, for the next build. **Where these amendments conflict with the text above, the amendments win;** the full rules are in those two docs.
+
+| ID | Change to this document |
+|---|---|
+| DSY-007 | "Whenever you REBOOT" effects are ENGINE effects (§1), so AMP applies. — **APPROVED 2026-11-15** |
