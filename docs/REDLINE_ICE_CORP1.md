@@ -1,5 +1,5 @@
 # PANOPTICON — ICE: FIRST CORPORATION
-**Version:** 0.1.1 (Phase 3A of the simplified redesign)
+**Version:** 0.1.2 (Phase 3A of the simplified redesign)
 **Date:** 2026-11-12
 **Status:** **APPROVED 2026-11-12.** All eight Phase 3A decisions (ICE-001 to ICE-008) were approved by the designer (§10). Builds on `REDLINE_CORE_RULES.md` v0.2 and `REDLINE_RUSTLERS.md` v0.1. **v0.1.1:** tier rows and escape encounters updated to match the approved map structure (UPL-007).
 
@@ -101,7 +101,7 @@ These supersede the Tier 1 table below and the Opening Node ICE (§8.4) **for th
 | ICE | Type · subtype | STR | Subroutines | Passive / ability |
 |---|---|---|---|---|
 | **ACCEPT ALL** *(Opening, support)* | TUMBLER · DETAINER | 4 | 1 slot of 3: −1 BW next turn · INSERT 1 SPAM → draw pile · PULP 3 | — |
-| **REJECT ALL** *(Opening, main)* | TUMBLER | 4 | 2 slots of 4: DEADLOCK · TRACE 3 · DEADLOCK · PULP 4 | BOOTING |
+| **REJECT ALL** *(Opening, main)* | TUMBLER | 4 | 2 slots of 3: DEADLOCK · TRACE 3 · PULP 4 *(REJECT-001: one DEADLOCK; was 2 slots of 4 with a second DEADLOCK)* | BOOTING |
 | **COOKIE WALL** | FORTRESS · TOLLHOUSE | 5 | [S1] PULP 2 · [S2] TRACE 2 · [S3] PULP curve B (random) · [S4] DEADLOCK | TOLL |
 | **TERMS OF SERVICE** | FORTRESS · VAULT | 7 | [S1] PULP 5 · [S2] INSERT 1 SPAM → discard pile · [S3] PULP curve C (hammer) · [S4] DEADLOCK | SEQUENCED |
 | **AUTO-RENEW** *(new)* | FORTRESS · RATCHET | 4 | [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK | HARDENING |
@@ -238,5 +238,6 @@ HALCYON's consent banner: two buttons that look the same. Every route starts her
 7. **Central Node: THE HEARTH** with SMART SPEAKER and THERMOSTAT (§7). — **APPROVED 2026-11-12 (ICE-007)**
 8. **Encounter composition and CRED reserves** (working values) (§8). — **APPROVED 2026-11-12 (ICE-008)**; reserves **lowered by UPL-008**
 9. **Opening Node: COOKIE BANNER** (ACCEPT ALL + REJECT ALL, BOOTING) (§8.4). — **APPROVED 2026-11-13 (OPEN-002)**
+10. **REJECT ALL has one DEADLOCK** (§5.0): its pool is DEADLOCK · TRACE 3 · PULP 4 in 2 slots (the second DEADLOCK is removed). Reason: in playtest, the second DEADLOCK rotating into view looked like the first coming back unbroken (REEL-001). The DEADLOCK is in a slot on turns 1 and 3, so with BOOTING the earliest BREACH stays turn 3. Matches Core Rules §10.1a ("a main ICE that holds the only DEADLOCK"). — **APPROVED 2026-11-15 (REJECT-001)**. *Build: not yet applied; `godot/scripts/core/ice.gd` REJECT_ALL needs the third pool entry removed.*
 
 **Next:** Phase 3B — card pools: shared reward cards and Rustler-specific cards, including cards for the virus strains SCRAMBLE, BLIND, LEECH and WORM.

@@ -1355,3 +1355,16 @@ Added CRED-cost display to card frames, revised the original BACKDOOR regression
 **Validation:** official Godot 4.3 Linux import and rules suite, **227 passed / 0 failed**; five virtual-display screenshot scripts include the new `shot_playtest2.gd` end-to-end UI scenario. That scenario selects BORROWED CREDENTIALS then its target, checks payment of exactly 1 BW and 8 CRED, breaks with HUSH, and presses the early-exit control to verify no reward. Large-hand checks now render the new dual-cost card as well. Added the scenario to the Actions workflow. Existing virtual-display V-Sync/resource-shutdown diagnostics are not Windows-runtime results.
 
 **Delivery:** push the reviewed changes to the stabilization branch with a lease; GitHub Actions verifies and exports a fresh Windows x86_64 package plus guide/checklist/checksums. The actual hosted result and artifact identify the exact release commit. No source merge to main or historical-branch consolidation is performed. Designer Windows playtest remains the next validation step.
+
+
+## 2026-11-15 — HANDOFF-001 / REJECT-001: shared to-do file, working branch, design sync (Claude)
+
+**Designer decisions (2026-11-15):**
+- **HANDOFF-001:** Codex and Claude coordinate through `docs/HANDOFF.md`, a shared list of decided-but-unfinished work with owners and statuses. The repo is the source of truth; the Claude project holds copies. **One working branch: `codex/halcyon-playtest-stabilization`**; changes arrive as pull requests into it. Claude now has write access to the repository.
+- **REJECT-001:** REJECT ALL has **one DEADLOCK** (pool DEADLOCK · TRACE 3 · PULP 4, 2 slots), resolving the REEL-001 confusion. Recorded in `REDLINE_ICE_CORP1.md`; **build change not made** (listed for Codex in HANDOFF).
+- **VIRUS-001 confirmed:** WORM counters are spent to break; they don't spread. The "copy vs move" note under VECTOR-001 no longer applies.
+- **DSY-006 (end-of-run target only):** decks should be **30–35 cards by the end of LUCIDA**.
+
+**Docs added (Claude, written in the Panopticon project 2026-11-15):** `REDLINE_DECK_SYNERGY.md` v0.3 (DSY-001 to DSY-014, PROPOSED), `REDLINE_PACING.md` v0.2 (PACE-001 to PACE-010, PROPOSED), and copies of the designer's `ICE Rules Bible` and `Ice Passive Abilities` Claude Docs as `REDLINE_ICE_RULES_BIBLE.md` and `REDLINE_ICE_PASSIVES.md`. **Docs changed:** `REDLINE_ICE_CORP1.md` (REJECT-001), `REDLINE_PLAYTEST_CHECKLIST.md` v0.1.1 (G1 and G5 targets for 30–35 cards), `REPOSITORY_STRUCTURE.md` (new docs, HANDOFF, working branch).
+
+**Code changes:** none. **Tests run:** none (no Godot in Claude's environment). The proposals' numbers are working values, not tested.
