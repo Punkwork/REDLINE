@@ -36,6 +36,9 @@ func install(g: Game, id: String) -> void:
 	check(g.play_card(u), "install " + id)
 
 func _init() -> void:
+	var cases = load("res://tests/synergy_cases.gd").new()
+	cases.check = check
+	cases.run()
 	test_opening_node()
 	test_shield_and_pulp()
 	test_trace_strikes()
@@ -775,6 +778,8 @@ func sim_rustler(who: String) -> void:
 	var stalled := {}
 	var vit := []
 	var opener_turns := []
+	var deck_total := 0
+	var tax_total := 0
 	for seed in range(100, 130):
 		var g := Game.new(seed)
 		g.new_run(who)
@@ -798,6 +803,8 @@ func sim_rustler(who: String) -> void:
 					bot_turn(g)
 					if g.node.get("opening", false) and g.enc.get("breached", false):
 						opener_turns.append(g.enc.turn)
+		deck_total += g.footprint()
+		tax_total += g.bloat_tax_paid
 		purges += g.purges_run
 		for k in ps:
 			ps[k] += g.pulp_stats[k]
@@ -813,6 +820,7 @@ func sim_rustler(who: String) -> void:
 			rows[g.node.get("name", "?")] = rows.get(g.node.get("name", "?"), 0) + 1
 		else:
 			stalled[g.node.get("name", "?")] = stalled.get(g.node.get("name", "?"), 0) + 1
+	print("  deck %s: avg end size %.2f; avg bloat tax paid %.2f TRACE" % [who, float(deck_total) / 30, float(tax_total) / 30])
 	if not opener_turns.is_empty():
 		print("  opening %s: earliest BREACH %s" % [who, opener_turns.min()])
 	if not stalled.is_empty():

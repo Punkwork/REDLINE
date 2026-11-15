@@ -32,6 +32,10 @@ var available: Array = [0]    # node indices selectable in row+1
 var path: Array = []          # visited node ids
 var seen_ice := {}            # EV-05: first sight per ICE (per save, here per run)
 var entered_corp := false
+var corporation := "HALCYON"
+var ghost_draw_enabled := false # DSY-001b: optional, OFF by default.
+var bloat_tax_paid := 0
+var node_tax_pending := false
 
 # --- node / encounter state ---
 var node: Dictionary = {}
@@ -88,6 +92,7 @@ func new_run(who: String = "GENERALIST") -> void:
 	available = [0]
 	path.clear()
 	phase = "MAP"
+	bloat_tax_paid = 0
 	_event("EV-01")
 
 func _new_inst(id: String) -> Dictionary:
@@ -134,6 +139,7 @@ func _complete_map_step() -> void:
 # =====================================================================
 
 func _start_ice_node() -> void:
+	node_tax_pending = true
 	layer = 0
 	layers_cleared = 0
 	lockdown = false
@@ -199,6 +205,14 @@ func _start_encounter() -> void:
 	for p in installed:
 		p.boost = 0
 	pulp_stats.encounters += 1
+	if node_tax_pending:
+		node_tax_pending = false
+		var tax := maxi(0, footprint() - footprint_cap())
+		var before_tax := trace_gained_node
+		if tax > 0:
+			add_trace(tax, false)
+			bloat_tax_paid += trace_gained_node - before_tax
+			_say("BLOAT TAX: FOOTPRINT %d / %d; +%d TRACE before Rustler modifiers." % [footprint(), footprint_cap(), tax])
 	_start_turn()
 	# PATIENT ZERO (VECTOR ORIGIN, VECTOR-001): choose an ICE; it starts with 1 ROT.
 	if rustler == "VECTOR" and phase == "PLAYER":
@@ -340,6 +354,8 @@ func _start_turn() -> void:
 	if _rack_has("SURGE_PROTECTOR"):
 		shield += 2 * _rack_count("SURGE_PROTECTOR")
 	var n := draw_size()
+	if enc.turn == 1 and ghost_draw_enabled and footprint_band() == "GHOST":
+		n += 1
 	if enc.turn == 1 and _rack_has("READY_STANCE"):
 		n += _rack_count("READY_STANCE")
 	draw_cards(n)
@@ -1486,3 +1502,79 @@ func _purge(total: int) -> void:
 	enc.purged_now = true
 	enc.skipped = true
 	_say("HALCYON PURGES %d virus counters instead of taking its turn." % total)
+
+# DSY-001/002/003/006: permanent deck analysis and pruning.
+func footprint(deck: Array = []) -> int:
+	if deck.is_empty(): deck = run_deck
+	var count := 0
+	for card in deck:
+		if CardDB.def(card.id).type != "BLOATWARE": count += 1
+	return count
+
+func footprint_cap() -> int:
+	return int({"HALCYON": 22, "IRONWATCH": 29, "LUCIDA": 35}.get(corporation, 22))
+
+func footprint_band() -> String:
+	if footprint() <= footprint_cap() - 6: return "GHOST"
+	return "LEAN" if footprint() <= footprint_cap() else "HEAVY"
+
+func coverage(deck: Array = []) -> Dictionary:
+	if deck.is_empty(): deck = run_deck
+	var result := {"FORTRESS": false, "TUMBLER": false, "VOID": false}
+	var ids := deck.map(func(c): return c.id)
+	for card in deck:
+		var d := CardDB.def(card.id)
+		if d.has("pick"):
+			for kind in result:
+				if d.pick.itype in [kind, "ANY"]: result[kind] = true
+		if d.has("breaker") or card.id == "FLASHPOINT":
+			for kind in result: result[kind] = true
+		if card.id == "BORROWED_CREDENTIALS" and ids.has("HUSH"):
+			result.FORTRESS = true; result.VOID = true
+		if card.id == "SHATTER" and ids.has("SLEDGE"):
+			for kind in result: result[kind] = true
+	return result
+
+func tag_density() -> Dictionary:
+	var result := {}
+	for card in run_deck:
+		for tag in CardDB.def(card.id).tags:
+			result[tag] = int(result.get(tag, 0)) + 1
+	return result
+
+func draw_chance(id: String, extra_cards: int = 0, extra_copies: int = 0) -> float:
+	# Nominal stage length 5/6/7 turns, no replacement within the estimate.
+	var size := footprint() + extra_cards
+	if size <= 0: return 0.0
+	var copies := run_deck.filter(func(c): return c.id == id).size() + extra_copies
+	var turns := int({"HALCYON": 5, "IRONWATCH": 6, "LUCIDA": 7}.get(corporation, 5))
+	var draws := mini(size, draw_size() * turns)
+	var miss := 1.0
+	for k in draws:
+		miss *= maxf(0.0, float(size - copies - k) / float(size - k))
+	return 100.0 * (1.0 - miss)
+
+func coverage_text(deck: Array = []) -> String:
+	var c := coverage(deck)
+	return "COVERAGE: FORTRESS %s · TUMBLER %s · VOID %s" % ["✓" if c.FORTRESS else "✗", "✓" if c.TUMBLER else "✗", "✓" if c.VOID else "✗"]
+
+func can_decompile(uid: int) -> Dictionary:
+	if footprint() <= 10: return {"ok": false, "reason": "10-card floor"}
+	var card := _find(run_deck, uid)
+	if card.is_empty() or CardDB.def(card.id).type == "BLOATWARE": return {"ok": false, "reason": "Not a permanent deck card"}
+	var after := run_deck.filter(func(c): return c.uid != uid)
+	for kind in coverage(after):
+		if not coverage(after)[kind]: return {"ok": false, "reason": "Would lose " + kind + " COVERAGE"}
+	return {"ok": true, "reason": ""}
+
+func begin_decompile() -> void:
+	if phase == "REWARD": phase = "DECOMPILE"
+
+func decompile(uid: int) -> bool:
+	if phase != "DECOMPILE" or not can_decompile(uid).ok: return false
+	var card := _take_from(run_deck, uid)
+	_say("DECOMPILE: removed " + CardDB.def(card.id).name)
+	reward_options.clear()
+	_end_ice_node()
+	_complete_map_step()
+	return true

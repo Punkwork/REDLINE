@@ -32,7 +32,6 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **Step 1 — DSY-001, 002, 003, 006** | FOOTPRINT on the deck icon with the corporation cap (HALCYON 22 / IRONWATCH 29 / LUCIDA 35); bloat tax (TRACE = FOOTPRINT − cap at each ICE Node start); draw chance per card, COVERAGE panel, tag density; **DECOMPILE** on the full-clear reward screen (floor 10, coverage guard). DSY-001b (GHOST +1 DRAW) behind an option, **off** by default. | Synergy §2, §3.1, §3.4 | Codex | TO DO |
 | **Step 2 — DSY-007, 008** | **REBOOT** (empty draw pile → shuffle discard in; "Whenever you REBOOT" ENGINE triggers, AMP applies; HUD countdown); **SCAN X**; in-Node BURN; example cards WARM BOOT, ROLLING RESTART, FORCE REBOOT, SHORT LOOP, PORT SCAN, GARBAGE COLLECT, TAIL CALL. | Synergy §4, §9.1 | Codex | TO DO |
 | **Step 3 — DSY-011, 012** | **CHAIN [TAG]** (last card played this turn; HUD "Last played"); **HOLD 1** (free CACHE of 1 card at end of turn; off in the Training Node; DEAD MAN'S POCKET → 2); cards PIVOT, COVER FIRE, KILL CHAIN, HANDOFF (ECHO). | Synergy §6, §9 | Codex | TO DO |
 | **Step 4 — DSY-009, 010** | **UNDERFLOW** (ICE STR below 0, shown in red; ROT minimum removed), **MARGIN** in the break preview, **OVERKILL X**; check LOGIC BOMB, HARDENING, RELAY, STR floors; cards SCALPEL, STACK SMASH, INTEGER UNDERFLOW (RIOT), CULL, HARVEST (VECTOR). | Synergy §5.3–5.4, §9 | Codex | TO DO |
@@ -50,6 +49,7 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| DSY-001, DSY-002, DSY-003, DSY-006 | FOOTPRINT/caps and bands, per-Node bloat TRACE, optional GHOST draw OFF, duplicate-aware draw estimates and key-card previews, COVERAGE/tag density, and guarded full-clear DECOMPILE. | **BUILT** — `playtest3-step1` (commit tag) |
 | REJECT-001 | REJECT ALL has one DEADLOCK in its three-entry pool; BOOTING remains turn 3. Updated opening rules checks and bot timing reporting. | **BUILT** — `playtest3-step0` (commit tag) |
 
 ## Waiting on the designer

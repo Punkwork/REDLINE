@@ -20,6 +20,7 @@ const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LE
 
 var g: Game
 var nr: NulRem
+var deck_open := false
 var targeting := -1
 var konami_pos := 0
 var idle := 0.0
@@ -208,6 +209,12 @@ func _build_layout() -> void:
 	piles.position = Vector2(1352, 724)
 	piles.size = Vector2(236, 80)
 	add_child(piles)
+	var deck_button := Button.new()
+	deck_button.text = "DECK / COVERAGE"
+	deck_button.position = Vector2(1352, 807)
+	deck_button.size = Vector2(236, 32)
+	deck_button.pressed.connect(func(): deck_open = true; refresh())
+	add_child(deck_button)
 
 	var np := _panel(Vector2(1346, 100), Vector2(244, 520), Color("#07120c"), Color("#2c7a4f"))
 	var nv := VBoxContainer.new()
@@ -430,7 +437,9 @@ func refresh() -> void:
 		log_label.text = "PATIENT ZERO: choose an ICE to INFECT with 1 ROT."
 	if targeting >= 0:
 		log_label.text = "Choose an ICE for %s (right-click or Esc to cancel)." % CardDB.def(g.find_card(targeting).id).name
-	piles.text = "DECK %d\nDISCARD %d\nBURNED %d" % [g.draw_pile.size(), g.discard.size(), g.burned.size()] if in_enc else ""
+	piles.text = "FOOTPRINT %d / %d · %s\nDECK %d · DISCARD %d · BURNED %d" % [g.footprint(), g.footprint_cap(), g.footprint_band(), g.draw_pile.size(), g.discard.size(), g.burned.size()]
+	piles.autowrap_mode = TextServer.AUTOWRAP_WORD
+	piles.add_theme_color_override("font_color", Color("#ff6b78") if g.footprint_band() == "HEAVY" else Color("#9ad17a"))
 	_build_overlay()
 
 func _handle_events() -> void:
@@ -1216,7 +1225,11 @@ func _build_overlay() -> void:
 		row.add_child(no)
 		v.add_child(row)
 		return
+	if deck_open:
+		_overlay_deck(false)
+		return
 	match g.phase:
+		"DECOMPILE": _overlay_deck(true)
 		"SELECT": _overlay_select()
 		"MAP": _overlay_map()
 		"READY_RIG": _overlay_options("READY RIG", "Generalist ORIGIN: choose one PROGRAM in your deck. It starts installed for free; your first hand stays full.", g.pending.options, g.draw_pile, func(u): g.choose_ready_rig(u); refresh(), "Skip", func(): g.skip_ready_rig(); refresh())
@@ -1369,12 +1382,23 @@ func _overlay_reward() -> void:
 	v.add_child(row)
 	for id in g.reward_options:
 		var cv := _card_view(id, -1)
+		cv.tooltip_text = "Draw chance this encounter: %.0f%%" % g.draw_chance(id, 1, 1)
+		var key_note := ""
+		for key in g.run_deck:
+			if CardDB.def(key.id).has("pick"):
+				key_note += "%s: %.0f%% → %.0f%%\n" % [CardDB.def(key.id).name, g.draw_chance(key.id), g.draw_chance(key.id, 1, 1 if key.id == id else 0)]
+		cv.tooltip_text += "\nTaking this adds one card. Key-card estimates:\n" + key_note
 		var cid: String = id
 		cv.gui_input.connect(func(ev):
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				g.choose_reward(cid)
 				refresh())
 		row.add_child(cv)
+	var pruning := Button.new()
+	pruning.text = "DECOMPILE · remove a deck card instead"
+	pruning.pressed.connect(func(): g.begin_decompile(); refresh())
+	v.add_child(pruning)
+	v.add_child(_lbl(g.coverage_text(), 12, DIM))
 	var b := Button.new()
 	b.text = "Skip (a thin deck is a happy deck)"
 	b.pressed.connect(func(): g.choose_reward(""); refresh())
@@ -1395,6 +1419,11 @@ func _overlay_safehouse() -> void:
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
 	v.add_child(_lbl("HALCYON PLAYTEST 2 · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	var option := CheckBox.new()
+	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
+	option.button_pressed = g.ghost_draw_enabled
+	option.toggled.connect(func(on): g.ghost_draw_enabled = on)
+	v.add_child(option)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
@@ -1489,3 +1518,30 @@ class TraceBar extends Control:
 		draw_rect(Rect2(0, 0, w * clamp(value / 40.0, 0.0, 1.0), h), col)
 		draw_line(Vector2(w / 2, -2), Vector2(w / 2, h + 2), Color("#e6ebf2"), 2)
 		draw_rect(Rect2(0, 0, w, h), Color("#5b4a2a"), false, 1)
+
+func _overlay_deck(removing: bool) -> void:
+	var v := _dim_box("DECOMPILE" if removing else "DECK ANALYSIS", "FOOTPRINT %d / %d · %s\n%s\nTag density: %s" % [g.footprint(), g.footprint_cap(), g.footprint_band(), g.coverage_text(), str(g.tag_density())], 1100)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1000, 400)
+	v.add_child(scroll)
+	var list := VBoxContainer.new()
+	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(list)
+	for card in g.run_deck:
+		var b := Button.new()
+		b.text = "%s · Draw chance this encounter: %.0f%%" % [CardDB.def(card.id).name, g.draw_chance(card.id)]
+		if removing:
+			var why := g.can_decompile(card.uid)
+			b.disabled = not why.ok
+			b.tooltip_text = why.reason
+			b.pressed.connect(func(): g.decompile(card.uid); refresh())
+		else:
+			b.pressed.connect(func(): _show_inspect(card.id))
+		list.add_child(b)
+	var close := Button.new()
+	close.text = "Back"
+	close.pressed.connect(func():
+		deck_open = false
+		if removing: g.phase = "REWARD"
+		refresh())
+	v.add_child(close)
