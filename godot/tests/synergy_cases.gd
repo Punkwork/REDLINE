@@ -2,11 +2,13 @@ extends RefCounted
 var check: Callable
 func game(who: String = "GENERALIST") -> Game:
  var g := Game.new(400)
+ g.hold_enabled = false
  g.new_run(who)
  return g
 func run() -> void:
  step1()
  step2()
+ step3()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -85,3 +87,47 @@ func step2() -> void:
  check.call(not g._find(g.hand, retrieve.uid).is_empty(), "TAIL CALL retrieves the selected SCRIPT")
  var fresh := game("ECHO"); fresh.enter_node(0)
  check.call(fresh.amp == 0 and fresh.burned.is_empty(), "Node begins with no AMP or burned cards")
+func step3() -> void:
+ var g := game("ECHO"); g.enter_node(0)
+ g.hand.clear(); g.bw = 30
+ var shield := g._new_inst("PULP_SHIELD"); g.hand.append(shield); g.play_card(shield.uid)
+ var pivot := g._new_inst("PIVOT"); g.hand.append(pivot)
+ var before := g.ice_str(0)
+ g.play_card(pivot.uid, 0)
+ check.call(g.ice_str(0) == maxi(0, before - 3), "PIVOT CHAIN CLOAK grants extra reduction")
+ var tags: Array = g.enc.last_tags.duplicate()
+ g.installed.append({"inst": g._new_inst("TUMBLER_ICEPICK"), "boost": 5, "free_used": false})
+ g.break_sub(0, 0)
+ check.call(g.enc.last_tags == tags, "Icepick use does not change CHAIN")
+ var cover := g._new_inst("COVER_FIRE"); g.hand.append(cover)
+ var shield_before := g.shield
+ g.play_card(cover.uid)
+ check.call(g.shield == shield_before + 5, "COVER FIRE CHAIN EXPLOIT")
+ var hold := game("ECHO"); hold.enter_node(0); hold.hold_enabled = true
+ var uid: int = hold.hand[0].uid
+ hold.end_turn()
+ check.call(hold.phase == "CHOICE" and hold.pending.kind == "hold" and hold.pending.n == 1, "HOLD 1 offered at turn end")
+ hold.choose(uid)
+ check.call(hold._find(hold.hand, uid).cached and hold.enc.turn == 2, "HOLD survives cleanup and fresh draw")
+ hold.end_turn(); hold.choose(-1)
+ check.call(hold.enc.turn == 3, "HOLD can be skipped")
+ var training := game("ECHO"); training.enter_node(0); training.hold_enabled = true
+ training.node = training.node.duplicate(true); training.node.training = true
+ training.end_turn()
+ check.call(training.enc.turn == 2, "HOLD disabled in Training Node")
+ var pocket := game("ECHO"); pocket.enter_node(0); pocket.hold_enabled = true
+ pocket.ghostware.append("DEAD_MANS_POCKET")
+ pocket.end_turn()
+ var one: int = pocket.pending.options[0]; pocket.choose(one)
+ check.call(pocket.phase == "CHOICE" and pocket.pending.n == 1, "DEAD MAN'S POCKET offers two choices")
+ var two: int = pocket.pending.options[0]; pocket.choose(two)
+ check.call(pocket.hand.filter(func(c): return c.cached).size() == 2, "two cards retained")
+ var chain := game("ECHO"); chain.enter_node(0); chain.bw = 30
+ chain.rack.append(chain._new_inst("KILL_CHAIN"))
+ chain.hand.clear(); chain.draw_pile.clear(); chain.discard.clear()
+ for i in 6: chain.draw_pile.append(chain._new_inst("PROBE"))
+ for i in 4:
+  var h := chain._new_inst("HANDOFF"); chain.hand.append(h); chain.play_card(h.uid)
+ check.call(chain.enc.chain_draws.values()[0] == 2 and chain.draw_pile.size() == 1, "KILL CHAIN capped at two triggers; HANDOFF has three direct chain draws")
+ chain.end_turn()
+ check.call(chain.enc.last_tags.is_empty(), "CHAIN resets each Rustler turn")

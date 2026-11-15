@@ -437,7 +437,7 @@ func refresh() -> void:
 		log_label.text = "PATIENT ZERO: choose an ICE to INFECT with 1 ROT."
 	if targeting >= 0:
 		log_label.text = "Choose an ICE for %s (right-click or Esc to cancel)." % CardDB.def(g.find_card(targeting).id).name
-	piles.text = "FOOTPRINT %d / %d · %s\nDECK %d · DISCARD %d · BURNED %d" % [g.footprint(), g.footprint_cap(), g.footprint_band(), g.draw_pile.size(), g.discard.size(), g.burned.size()] + "\nREBOOT in ~%d turn(s) · AMP %d" % [int(ceil(float(g.draw_pile.size()) / maxi(1, g.draw_size()))), g.amp]
+	piles.text = "FOOTPRINT %d / %d · %s\nDECK %d · DISCARD %d · BURNED %d" % [g.footprint(), g.footprint_cap(), g.footprint_band(), g.draw_pile.size(), g.discard.size(), g.burned.size()] + "\nLast played: %s" % "/".join(g.enc.get("last_tags", [])) + "\nREBOOT in ~%d turn(s) · AMP %d" % [int(ceil(float(g.draw_pile.size()) / maxi(1, g.draw_size()))), g.amp]
 	piles.autowrap_mode = TextServer.AUTOWRAP_WORD
 	piles.add_theme_color_override("font_color", Color("#ff6b78") if g.footprint_band() == "HEAVY" else Color("#9ad17a"))
 	_build_overlay()
@@ -1235,6 +1235,7 @@ func _build_overlay() -> void:
 		"READY_RIG": _overlay_options("READY RIG", "Generalist ORIGIN: choose one PROGRAM in your deck. It starts installed for free; your first hand stays full.", g.pending.options, g.draw_pile, func(u): g.choose_ready_rig(u); refresh(), "Skip", func(): g.skip_ready_rig(); refresh())
 		"CHOICE":
 			match g.pending.kind:
+				"hold": _overlay_options("HOLD %d" % g.pending.n, "Optionally CACHE a hand card before end-turn effects and the Corporation Response.", g.pending.options, g.hand, _on_hold_choice, "Finish turn / skip remaining HOLD", func(): _on_hold_choice(-1))
 				"scan":
 					_overlay_options("SCAN 3", "Click cards to bottom them, in selection order; click again to undo. Selected: %s" % str(g.pending.bottom), g.pending.cards.map(func(c): return c.uid), g.pending.cards, func(u): g.choose(u); refresh(), "Finish SCAN, then draw 1", func(): g.finish_scan(); refresh())
 				"burn_hand": _overlay_options("GARBAGE COLLECT", "BURN another hand card for this Node, then draw 1.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
@@ -1335,7 +1336,11 @@ func _overlay_options(title: String, sub: String, uids: Array, source: Array, on
 	var row := HFlowContainer.new()
 	row.add_theme_constant_override("h_separation", 10)
 	row.add_theme_constant_override("v_separation", 10)
-	v.add_child(row)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1100, 300)
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	v.add_child(scroll)
+	scroll.add_child(row)
 	for u in uids:
 		var c := {}
 		for x in source:
@@ -1549,3 +1554,8 @@ func _overlay_deck(removing: bool) -> void:
 		if removing: g.phase = "REWARD"
 		refresh())
 	v.add_child(close)
+
+func _on_hold_choice(uid: int) -> void:
+	g.choose(uid)
+	refresh()
+	if g.phase == "RESPONSE" and not responding: _play_response()

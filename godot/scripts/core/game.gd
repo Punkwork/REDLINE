@@ -36,6 +36,8 @@ var corporation := "HALCYON"
 var ghost_draw_enabled := false # DSY-001b: optional, OFF by default.
 var bloat_tax_paid := 0
 var node_tax_pending := false
+var hold_enabled := true
+var ghostware: Array[String] = []
 var amp := 0
 var reboots := 0
 var drawing_depth := 0
@@ -331,6 +333,9 @@ func is_opening() -> bool:
 
 func _start_turn() -> void:
 	enc.turn += 1
+	enc["last_tags"] = []
+	enc["tag_counts"] = {}
+	enc["chain_draws"] = {}
 	# ROT-001: TUMBLERs rotate one step at the start of each Rustler turn after the first.
 	if enc.turn > 1:
 		_rotate_tumblers()
@@ -504,6 +509,10 @@ func play_card(uid: int, target: int = -1) -> bool:
 		_say("Choose an ICE at STR 0." if d.breaker.has("max_str") else "Choose an ICE with 5 or more virus counters.")
 		return false
 	_take_from(hand, uid)
+	inst["chain_active"] = enc.get("last_tags", []).has(d.get("chain", ""))
+	enc["last_tags"] = d.tags.duplicate()
+	for tag in d.tags:
+		enc.tag_counts[tag] = int(enc.tag_counts.get(tag, 0)) + 1
 	played[inst.id] = int(played.get(inst.id, 0)) + 1
 	bw -= card_cost(inst.id)
 	cred -= int(d.get("cred_cost", 0))
@@ -532,6 +541,7 @@ func play_card(uid: int, target: int = -1) -> bool:
 					burned.append(inst)
 				else:
 					discard.append(inst)
+	if inst.get("chain_active", false): _chain_bonus()
 	if d.tags.has("CLOAK"):
 		enc.cloak_turn += 1
 		_reactive_cloak()
@@ -540,6 +550,11 @@ func play_card(uid: int, target: int = -1) -> bool:
 
 func _resolve_script(inst: Dictionary, target: int) -> bool:
 	match inst.id:
+		"PIVOT": enc.ice[target].str_mod -= 3 if inst.get("chain_active", false) else 2
+		"COVER_FIRE": shield += 5 if inst.get("chain_active", false) else 3
+		"HANDOFF":
+			trace = maxi(0, trace - 2)
+			if inst.get("chain_active", false): draw_cards(1)
 		"FORCE_REBOOT":
 			force_reboot()
 			return true
@@ -739,8 +754,15 @@ func _expire_temporary_cache() -> void:
 			_say("%s: temporary CACHE expires." % CardDB.def(card.id).name)
 
 func end_turn() -> void:
-	if phase != "PLAYER":
+	if phase != "PLAYER": return
+	var options := hand.filter(func(c): return not c.cached or c.has("cache_turns")).map(func(c): return c.uid)
+	if hold_enabled and not node.get("training", false) and not str(node.get("id", "")).begins_with("TRAINING") and not options.is_empty():
+		pending = {"kind": "hold", "options": options, "n": 2 if ghostware.has("DEAD_MANS_POCKET") else 1}
+		phase = "CHOICE"
 		return
+	_end_turn_effects()
+
+func _end_turn_effects() -> void:
 	# §4.3 end of turn: Extractors pay out; TRACER in hand adds TRACE.
 	var long_game: int = 2 * _rack_count("LONG_GAME") if trace < 10 else 0
 	for p in installed:
@@ -892,6 +914,20 @@ func choose(uid: int) -> void:
 	if pending.is_empty():
 		return
 	var kind: String = pending.kind
+	if kind == "hold":
+		if uid != -1:
+			if not pending.options.has(uid): return
+			var card := _find(hand, uid)
+			if card.is_empty(): return
+			card.cached = true
+			card.erase("cache_turns")
+			pending.options.erase(uid)
+			pending.n -= 1
+			if pending.n > 0 and not pending.options.is_empty(): return
+		pending = {}
+		phase = "PLAYER"
+		_end_turn_effects()
+		return
 	if kind == "scan":
 		if pending.cards.any(func(c): return c.uid == uid):
 			if pending.bottom.has(uid): pending.bottom.erase(uid)
@@ -1669,3 +1705,10 @@ func decompile(uid: int) -> bool:
 	_end_ice_node()
 	_complete_map_step()
 	return true
+
+func _chain_bonus() -> void:
+	_say("CHAIN bonus.")
+	for card in rack.duplicate():
+		if card.id == "KILL_CHAIN" and int(enc.chain_draws.get(card.uid, 0)) < 2:
+			enc.chain_draws[card.uid] = int(enc.chain_draws.get(card.uid, 0)) + 1
+			draw_cards(1)

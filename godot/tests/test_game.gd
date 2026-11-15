@@ -69,7 +69,7 @@ func _init() -> void:
 	quit(1 if fails > 0 else 0)
 
 func test_opening_node() -> void:
-	var g := Game.new(1)
+	var g := legacy_game(1)
 	g.new_run()
 	g.enter_node(0)
 	check(g.phase == "READY_RIG", "READY RIG offered")
@@ -115,7 +115,7 @@ func start_node(g: Game, row: int, idx: int, rig: String) -> void:
 		g.choose_ice(0)
 
 func test_borrowed_credentials() -> void:
-	var g := Game.new(110)
+	var g := legacy_game(110)
 	g.new_run("ECHO")
 	check(g.run_deck.size() == 12 and uid_of(g, g.run_deck, "BORROWED_CREDENTIALS") > 0 and uid_of(g, g.run_deck, "BACKDOOR") < 0, "ECHO-005: BORROWED CREDENTIALS replaces BACKDOOR")
 	g.entered_corp = true
@@ -142,13 +142,13 @@ func test_borrowed_credentials() -> void:
 	check(g.break_sub(0, 0) and g.bw == before_bw - 2, "selected ICE's TOLL remains in effect")
 	g.end_turn()
 	check(not g.enc.has("borrowed_ice") and not g.break_info(0, 3).ok, "compatibility expires at this Rustler turn end")
-	var opening := Game.new(111)
+	var opening := legacy_game(111)
 	opening.new_run("ECHO")
 	opening.enter_node(0)
 	var wrong := put_in_hand(opening, "BORROWED_CREDENTIALS")
 	opening.cred = 8
 	check(not opening.play_card(wrong, 0) and opening.bw == 4 and opening.cred == 8, "TUMBLER is not a valid off-type target")
-	var v := Game.new(112)
+	var v := legacy_game(112)
 	v.new_run("ECHO")
 	v.entered_corp = true
 	start_node(v, 2, 1, "")
@@ -170,7 +170,7 @@ func test_borrowed_credentials() -> void:
 	check(not v.enc.has("borrowed_ice"), "compatibility does not carry into another layer")
 
 func test_shield_and_pulp() -> void:
-	var g := Game.new(2)
+	var g := legacy_game(2)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # CAPTCHA: DISCARD 1, PULP 2, DEADLOCK
@@ -183,7 +183,7 @@ func test_shield_and_pulp() -> void:
 	check(g.shield == 0 and g.vitae == 27, "overflow to VITAE")
 
 func test_trace_strikes() -> void:
-	var g := Game.new(3)
+	var g := legacy_game(3)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "TUMBLER_ICEPICK")
@@ -200,7 +200,7 @@ func test_trace_strikes() -> void:
 	check(g.trace >= before + 3, "TRACER in hand adds 3 TRACE")
 
 func test_captcha_discard() -> void:
-	var g := Game.new(4)
+	var g := legacy_game(4)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "TUMBLER_ICEPICK")
@@ -213,7 +213,7 @@ func test_captcha_discard() -> void:
 	check(g.is_active(1, 2), "PULP rotated into a slot")
 
 func test_boost_installed() -> void:
-	var g := Game.new(11)
+	var g := legacy_game(11)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # CAPTCHA STR 5
@@ -227,7 +227,7 @@ func test_boost_installed() -> void:
 	check(g.pick_str(p) == 4, "boost lasts the encounter")
 
 func test_void_reveal() -> void:
-	var g := Game.new(12)
+	var g := legacy_game(12)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 2, 1, "VOID_ICEPICK")   # DOORBELL CAM: [TRACE 3 + DEADLOCK]
@@ -260,19 +260,19 @@ func test_detainer_rules() -> void:
 	check(total >= 1, "the slice has a DETAINER")
 
 func test_passives() -> void:
-	var g := Game.new(13)
+	var g := legacy_game(13)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 1, "FORTRESS_ICEPICK")   # COOKIE WALL: TOLL
 	var c := g.break_info(0, 0)
 	var dl := g.break_info(0, 3)
 	check(c.cost == dl.cost + 1, "TOLL: +1 BW except on the DEADLOCK (%d vs %d)" % [c.cost, dl.cost])
-	g = Game.new(14)
+	g = legacy_game(14)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 3, 0, "FORTRESS_ICEPICK")   # TERMS & CONDITIONS layer 1: TOS SEQUENCED
 	check(g.break_info(0, 2).reason == "BREAK S1 FIRST", "SEQUENCED blocks the DEADLOCK")
-	g = Game.new(15)
+	g = legacy_game(15)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # AUTO-RENEW (HARDENING) + CAPTCHA (TRIPWIRE)
@@ -286,7 +286,7 @@ func test_passives() -> void:
 	var sub: int = g.active_subs(1)[0]
 	if g.break_sub(1, sub):
 		check(g.trace == t + 1, "TRIPWIRE adds TRACE 1 per break")
-	g = Game.new(16)
+	g = legacy_game(16)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 2, 1, "VOID_ICEPICK")
@@ -296,7 +296,7 @@ func test_passives() -> void:
 
 func test_rustlers() -> void:
 	# ECHO: no READY RIG, LOW PROFILE, SLOW DRIP, BORROWED CREDENTIALS
-	var g := Game.new(21)
+	var g := legacy_game(21)
 	g.new_run("ECHO")
 	check(g.run_deck.size() == 12 and uid_of(g, g.run_deck, "HUSH") > 0, "ECHO starter deck")
 	var probes := g.run_deck.filter(func(c): return c.id == "PROBE").size()
@@ -315,7 +315,7 @@ func test_rustlers() -> void:
 	var c0 := g.cred
 	g.end_turn()
 	check(g.cred - c0 >= 6, "SLOW DRIP extracts 6 when quiet (got %d)" % (g.cred - c0))
-	g = Game.new(22)
+	g = legacy_game(22)
 	g.new_run("ECHO")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")   # COOKIE WALL STR 5
@@ -330,7 +330,7 @@ func test_rustlers() -> void:
 	g.break_sub(0, 3)
 	check(g.enc.breached and g.phase == "PLAYER", "HUSH breaks the DEADLOCK: BREACH")
 	# RIOT: REDLINER, SLEDGE adds TRACE
-	g = Game.new(23)
+	g = legacy_game(23)
 	g.new_run("RIOT")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")
@@ -343,7 +343,7 @@ func test_rustlers() -> void:
 	g.end_turn()
 	check(g.bw == 5, "REDLINER: 5 BW at TRACE 20+ (got %d)" % g.bw)
 	# VECTOR: PATIENT ZERO, INJECT, SCRAMBLE, RUNTIME ERROR
-	g = Game.new(24)
+	g = legacy_game(24)
 	g.new_run("VECTOR")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")   # COOKIE WALL STR 5
@@ -361,7 +361,7 @@ func test_rustlers() -> void:
 	check(g.enc.breached, "RUNTIME ERROR breaks the DEADLOCK")
 
 func test_purge() -> void:
-	var g := Game.new(31)
+	var g := legacy_game(31)
 	g.new_run("VECTOR")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")   # COOKIE WALL; PATIENT ZERO gives 1 ROT
@@ -380,7 +380,7 @@ func test_purge() -> void:
 		g.choose(g.hand[0].uid)
 	check(g.virus_total(0) == 12, "12 counters is under the new limit: no purge")
 	# INCUBATOR re-infects after a purge
-	g = Game.new(32)
+	g = legacy_game(32)
 	g.new_run("VECTOR")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")
@@ -392,7 +392,7 @@ func test_purge() -> void:
 	check(g.enc.ice[0].virus.get("ROT", 0) == 2, "INCUBATOR: 2 ROT after the purge")
 
 func test_shatter() -> void:
-	var g := Game.new(41)
+	var g := legacy_game(41)
 	g.new_run("RIOT")
 	check(g.run_deck.size() == 15, "RIOT-002: 15-card deck")
 	g.entered_corp = true
@@ -415,7 +415,7 @@ func test_shatter() -> void:
 	check(g.break_info(1, g.active_subs(1)[0]).reason.begins_with("NO") or g.enc.ice[1].broken[g.active_subs(1)[0]], "SHATTER lasts one turn")
 
 func test_pulp_curves() -> void:
-	var g := Game.new(51)
+	var g := legacy_game(51)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 1, "")   # COOKIE WALL: [S3] curve B
@@ -437,14 +437,14 @@ func test_pulp_curves() -> void:
 	check(g.effect_value(g.enc.ice[0], {"k": "PULP_CURVE", "curve": "B"}).v == maxi(0, raw - 1), "SCRAMBLE lowers a curve's PULP too")
 
 func test_end_run() -> void:
-	var g := Game.new(61)
+	var g := legacy_game(61)
 	g.new_run("RIOT")
 	g.enter_node(0)
 	g.abandon()
 	check(g.phase == "DEAD", "END RUN: the Rustler fails")
 
 func test_patient_zero() -> void:
-	var g := Game.new(71)
+	var g := legacy_game(71)
 	g.new_run("VECTOR")
 	g.enter_node(0)
 	check(g.phase == "CHOICE" and g.pending.kind == "patient_zero", "VECTOR-001: PATIENT ZERO asks for an ICE")
@@ -452,7 +452,7 @@ func test_patient_zero() -> void:
 	check(g.virus_total(0) == 0 and g.enc.ice[1].virus.get("ROT", 0) == 1 and g.phase == "PLAYER", "only the chosen ICE gets 1 ROT")
 
 func test_worm() -> void:
-	var g := Game.new(81)
+	var g := legacy_game(81)
 	g.new_run("VECTOR")
 	g.entered_corp = true
 	start_node(g, 1, 1, "")   # COOKIE WALL
@@ -478,7 +478,7 @@ func test_worm() -> void:
 	check(not g.worm_ok(0), "WORM can't be used outside your turn")
 
 func test_extraction_reserve_cap() -> void:
-	var g := Game.new(5)
+	var g := legacy_game(5)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "BASIC_EXTRACTOR")   # reserve 10
@@ -503,7 +503,7 @@ func test_extraction_reserve_cap() -> void:
 		g.choose(g.hand[0].uid)
 	check(g.cred == 10 and g.enc.reserve == 0, "final extraction is capped at the remaining 1 CRED, with no bonus")
 	for reserve in [10, 15, 25, 40]:
-		var capped := Game.new(108)
+		var capped := legacy_game(108)
 		capped.new_run("ECHO")
 		capped.enter_node(0)
 		capped.enc.reserve = reserve
@@ -519,7 +519,7 @@ func test_extraction_reserve_cap() -> void:
 		check(capped.cred == 7 + reserve and capped.enc.reserve == 0, "empty reserve never generates more CRED")
 		check(capped.events.filter(func(e): return e.t == "EV-09").size() == 1, "full-extraction notification fires once, not on repeated empty extraction")
 		check(not capped.log.any(func(line): return "CRED bonus" in line), "extraction no longer logs a CRED bonus")
-	var echo := Game.new(109)
+	var echo := legacy_game(109)
 	echo.new_run("ECHO")
 	echo.enter_node(0)
 	install(echo, "BASIC_EXTRACTOR")
@@ -528,7 +528,7 @@ func test_extraction_reserve_cap() -> void:
 	check(echo.enc.reserve == 0 and echo.cred == 15, "ECHO + Basic Extractor empties COOKIE BANNER in five 3-CRED payouts, not 17 CRED")
 
 func test_rainbow_and_toolbelt() -> void:
-	var g := Game.new(6)
+	var g := legacy_game(6)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 2, 1, "TUMBLER_ICEPICK")   # DOORBELL node, layer 1 DOORBELL CAM (VOID)
@@ -550,7 +550,7 @@ func test_rainbow_and_toolbelt() -> void:
 	check(c2.cost == 7, "TOOLBELT (TOS STR 9 with CONSENT FORM's RELAY) makes the first boost free (got %s)" % str(c2))
 
 func test_spam_and_filter() -> void:
-	var g := Game.new(7)
+	var g := legacy_game(7)
 	g.new_run()
 	g.enter_node(0)
 	g.choose_ready_rig(uid_of(g, g.draw_pile, "TUMBLER_ICEPICK"))
@@ -565,7 +565,7 @@ func test_spam_and_filter() -> void:
 	check(g.bw == bw0 - 1 and uid_of(g, g.burned, "SPAM") > 0, "SPAM cleared for 1 BW, BURNED")
 
 func test_cloak_reactive() -> void:
-	var g := Game.new(8)
+	var g := legacy_game(8)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 2, 1, "VOID_ICEPICK")   # DOORBELL CAM
@@ -574,7 +574,7 @@ func test_cloak_reactive() -> void:
 	check(g.trace == 1, "DOORBELL CAM: CLOAK card adds TRACE 1")
 
 func test_go_deeper_keeps_programs() -> void:
-	var g := Game.new(9)
+	var g := legacy_game(9)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 1, "FORTRESS_ICEPICK")   # COOKIE WALL (FORTRESS 3) then CONSENT FORM
@@ -589,7 +589,7 @@ func test_go_deeper_keeps_programs() -> void:
 	check(g.enc.ice[0].id == "CONSENT_FORM", "layer 2 ICE")
 
 func smash_fixture() -> Game:
-	var g := Game.new(105)
+	var g := legacy_game(105)
 	g.new_run("RIOT")
 	g.enter_node(0)
 	install(g, "SMASH_AND_GRAB")
@@ -635,7 +635,7 @@ func test_smash_and_grab_cache() -> void:
 	check(g.phase == "RESPONSE" and not chosen.cached and not chosen.has("cache_turns"), "CACHE expires at the END of next Rustler turn, before the response")
 	g._continue_response()
 	check(g._find(g.hand, target).is_empty() and uid_of(g, g.discard, "PULP_SHIELD") > 0, "expired card follows normal post-response cleanup")
-	var layers := Game.new(106)
+	var layers := legacy_game(106)
 	layers.new_run("RIOT")
 	layers.row = 0
 	layers.available = [1]
@@ -676,7 +676,7 @@ func test_smash_and_grab_cache() -> void:
 	check(free.bw == 4 and free.phase == "PLAYER" and free.pending.is_empty(), "ordinary free unload does not grant CACHE")
 
 func reward_fixture(map_row: int = 1, map_index: int = 1) -> Game:
-	var g := Game.new(107)
+	var g := legacy_game(107)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, map_row, map_index, "BASIC_EXTRACTOR")
@@ -746,7 +746,7 @@ func test_node_card_reward_requires_full_clear() -> void:
 
 func test_full_slice_path() -> void:
 	## A simple bot plays the whole slice: break the cheapest subroutines, prioritising DEADLOCKs.
-	var g := Game.new(10)
+	var g := legacy_game(10)
 	g.new_run()
 	var guard := 0
 	while g.phase != "SLICE_DONE" and g.phase != "DEAD" and guard < 2000:
@@ -761,6 +761,11 @@ func test_full_slice_path() -> void:
 			"PLAYER": bot_turn(g)
 	check(g.phase == "SLICE_DONE" or g.phase == "DEAD", "bot finishes the slice (phase %s, row %d)" % [g.phase, g.row])
 	print("  bot: phase=%s vitae=%d trace=%d strikes=%d cred=%d deck=%d steps=%d" % [g.phase, g.vitae, g.trace, g.strikes, g.cred, g.run_deck.size(), guard])
+
+func legacy_game(seed_value: int = -1) -> Game:
+	var g := Game.new(seed_value)
+	g.hold_enabled = false # Legacy fixtures test their original action, not the new optional prompt.
+	return g
 
 func sim_many() -> void:
 	for who in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:

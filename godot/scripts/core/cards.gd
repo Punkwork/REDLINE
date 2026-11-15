@@ -272,6 +272,49 @@ const DEFS := {
 		"tags": [],
 		"text": "Put a SCRIPT from discard into your hand."
 	},
+	"PIVOT": {
+		"name": "PIVOT",
+		"type": "SCRIPT",
+		"tags": [
+			"EXPLOIT"
+		],
+		"bw": 1,
+		"rarity": "COMMON",
+		"target": true,
+		"chain": "CLOAK",
+		"text": "Target ICE −2 STR. CHAIN CLOAK: −1 more."
+	},
+	"COVER_FIRE": {
+		"name": "COVER FIRE",
+		"type": "SCRIPT",
+		"tags": [
+			"CLOAK"
+		],
+		"bw": 1,
+		"rarity": "COMMON",
+		"chain": "EXPLOIT",
+		"text": "+3 SHIELD. CHAIN EXPLOIT: +2 more."
+	},
+	"KILL_CHAIN": {
+		"name": "KILL CHAIN",
+		"type": "PROTOCOL",
+		"tags": [],
+		"bw": 2,
+		"rarity": "RARE",
+		"text": "Whenever you get a CHAIN bonus, draw 1 (maximum 2 per turn)."
+	},
+	"HANDOFF": {
+		"name": "HANDOFF",
+		"type": "SCRIPT",
+		"tags": [
+			"CLOAK"
+		],
+		"bw": 0,
+		"rarity": "COMMON",
+		"pool": "ECHO",
+		"chain": "CLOAK",
+		"text": "−2 TRACE. CHAIN CLOAK: draw 1."
+	},
 }
 
 const STARTER_GENERALIST := [

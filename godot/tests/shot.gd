@@ -49,6 +49,7 @@ func _process(_d: float) -> bool:
 		3:
 			_snap("04_after_install")
 			main._on_end_turn()
+			if g.pending.get("kind", "") == "hold": main._on_hold_choice(-1)
 			frames = 0
 		4:
 			if g.phase == "RESPONSE":
