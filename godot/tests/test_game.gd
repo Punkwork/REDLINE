@@ -107,12 +107,21 @@ func start_node(g: Game, row: int, idx: int, rig: String) -> void:
 	g.row = row - 1
 	g.available = [idx]
 	g.enter_node(idx)
+	legacy_layer_fixture(g)
 	if g.phase == "READY_RIG":
 		g.choose_ready_rig(uid_of(g, g.draw_pile, rig))
 	if g.phase == "CHOICE" and g.pending.kind == "discard":
 		g.choose(g.hand[0].uid)
 	if g.phase == "CHOICE" and g.pending.kind == "patient_zero":
 		g.choose_ice(0)
+
+func legacy_layer_fixture(g: Game) -> void:
+	# Isolate old transition tests from the PACE-008 production map. Never change IceDB.MAP.
+	g.node = g.node.duplicate(true)
+	match g.node.id:
+		"N2B": g.node.layers.append({"ice": ["CONSENT_FORM"], "reserve": 15})
+		"N3B": g.node.layers.append({"ice": ["CONSENT_FORM", "TERMS_OF_SERVICE"], "reserve": 15})
+		"N4": g.node.layers.append({"ice": ["CAPTCHA", "DOORBELL_CAM"], "reserve": 15})
 
 func test_borrowed_credentials() -> void:
 	var g := legacy_game(110)
@@ -481,7 +490,8 @@ func test_extraction_reserve_cap() -> void:
 	var g := legacy_game(5)
 	g.new_run()
 	g.entered_corp = true
-	start_node(g, 1, 0, "BASIC_EXTRACTOR")   # reserve 10
+	start_node(g, 1, 0, "BASIC_EXTRACTOR")
+	g.enc.reserve = 10 # Fixed payout-cap fixture, independent of PACE-008 map reserves.
 	# This fixture measures four payouts, independently of encounter damage.
 	g.vitae = 100
 	g.max_vitae = 100
@@ -523,9 +533,9 @@ func test_extraction_reserve_cap() -> void:
 	echo.new_run("ECHO")
 	echo.enter_node(0)
 	install(echo, "BASIC_EXTRACTOR")
-	for _i in 5:
+	for _i in 8:
 		echo.end_turn()
-	check(echo.enc.reserve == 0 and echo.cred == 15, "ECHO + Basic Extractor empties COOKIE BANNER in five 3-CRED payouts, not 17 CRED")
+	check(echo.enc.reserve == 0 and echo.cred == 23, "ECHO + Basic Extractor cannot exceed the new 23-CRED reserve")
 
 func test_rainbow_and_toolbelt() -> void:
 	var g := legacy_game(6)
@@ -604,7 +614,7 @@ func test_smash_and_grab_cache() -> void:
 		payout.trace = start_trace
 		payout.enc.breached = true
 		payout.end_turn()
-		check(payout.enc.reserve == 12, "SMASH & GRAB extracts 3 from the reserve")
+		check(payout.enc.reserve == 20, "SMASH & GRAB extracts 3 from the reserve")
 		check(payout.trace == (20 if start_trace == 19 else 20), "SMASH & GRAB adds 1 TRACE only below 20")
 	var g := smash_fixture()
 	var program: int = g.installed[0].inst.uid
@@ -640,6 +650,7 @@ func test_smash_and_grab_cache() -> void:
 	layers.row = 0
 	layers.available = [1]
 	layers.enter_node(1)
+	legacy_layer_fixture(layers)
 	install(layers, "SMASH_AND_GRAB")
 	var across := put_in_hand(layers, "PULP_SHIELD")
 	layers.uninstall_cache(layers.installed[0].inst.uid)

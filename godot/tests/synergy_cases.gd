@@ -11,6 +11,12 @@ func run() -> void:
  step3()
  step4()
  step5()
+ pacing()
+ edge_regressions()
+ engine_amp_regressions()
+ coverage_and_escalation_regressions()
+ ordered_compile_regression()
+ integer_strike_regression()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -197,3 +203,111 @@ func step5() -> void:
  check.call(minimal.vitae == vit - 1, "PATTERN ANALYSIS reacts to CHAIN")
  minimal.enc.ice.assign([minimal._new_ice("RECURRING_DREAM")]); minimal.hand.append(minimal._new_inst("PROBE")); minimal.draw_pile.clear(); minimal.discard.clear(); minimal.force_reboot()
  check.call(minimal.hand.is_empty() and minimal.draw_pile.size() == 1, "RECURRING DREAM FORGETS on REBOOT")
+
+func pacing() -> void:
+ var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 50
+ check.call(IceDB.MAP[1][1].layers.size() == 1 and IceDB.MAP[2][1].layers.size() == 1 and IceDB.MAP[3][0].layers.size() == 1, "PACE-008 all slice Tier 1 Nodes have one layer")
+ check.call(g.enc.reserve == 23 and IceDB.MAP[1][0].layers[0].reserve == 15, "reserves +50%, half CRED rounded up")
+ check.call(g.reward_odds(1) == [60, 30, 10], "Tier 1 one-layer reward odds")
+ g.node = g.node.duplicate(true); g.node.tier = "T2"
+ check.call(g.reward_odds(1) == [45, 40, 15] and g.reward_odds(2) == [30, 45, 25], "Tier 2 rebased reward odds")
+ var fixture := {"name": "TEST", "type": "FORTRESS", "str": 0, "subs": [[{"k": "DEADLOCK", "v": 2}], [{"k": "TRACE", "v": 1, "escalate": true}], [{"k": "DISCARD", "v": 1, "escalate": true}], [{"k": "FORGET", "v": 1, "escalate": true}]]}
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW", fixture)]); g.enc.ice[0].seen.fill(true)
+ g.installed.append({"inst": g._new_inst("FORTRESS_ICEPICK"), "boost": 0, "free_used": false})
+ check.call(g.break_sub(0, 0) and not g.enc.ice[0].broken[0] and g.deadlock_count() == Vector2i(1, 2), "DEADLOCK x2 first paid break records 1/2")
+ g.infect(0, "WORM", 2); g.use_worm(0); g.choose_sub(0, 0)
+ check.call(g.enc.ice[0].broken[0] and g.enc.breached and g.deadlock_count() == Vector2i(2, 2), "WORM removes exactly one DEADLOCK step")
+ var h := game("ECHO"); h.enter_node(0); h.hand.clear(); h.bw = 30
+ h.enc.ice.assign([h._new_ice("AUTO_RENEW", fixture)]); h.enc.ice[0].seen.fill(true)
+ var brute := h._new_inst("BRUTE_FORCE"); h.hand.append(brute); h.play_card(brute.uid); h.choose_sub(0, 0)
+ check.call(not h.enc.ice[0].broken[0] and h.enc.ice[0].break_progress[0] == 1, "card break removes one DEADLOCK step")
+ h.phase = "PLAYER"; h.pending = {}; h.animate = true; h.end_turn()
+ h.response_step() # DEADLOCK
+ h.response_step() # TRACE
+ check.call(h.effect_value(h.enc.ice[0], fixture.subs[1][0]).v == 2, "ESCALATE grows only after actual resolution, preview is next value")
+ h.response_step(); h.response_step()
+ check.call(h.effect_value(h.enc.ice[0], fixture.subs[2][0]).v == 2 and h.effect_value(h.enc.ice[0], fixture.subs[3][0]).v == 2, "DISCARD and FORGET escalate independently")
+ check.call(CardDB.roles("SCALPEL").has("↯ DRILL") and CardDB.roles("WARM_BOOT").has("▣ HULL") and CardDB.roles("ADAPTER").has("◇ COVERAGE"), "reward need roles")
+
+func edge_regressions() -> void:
+ var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30
+ g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")]); g.enc.ice[1].str_mod = -10
+ check.call(g.ice_str(1) == -4, "RELAY raises an underflowed neighbor by two")
+ for floor_value in [3, 4, 3]:
+  g.enc.ice[1].str_floor = floor_value
+  check.call(g.ice_str(1) == floor_value, "explicit 3/4/3 ICE floors remain authoritative")
+ g.enc.ice[1].erase("str_floor")
+ g.rack.append(g._new_inst("MINIMALIST")); g.enc.ice[1].seen.fill(true)
+ g.installed.append({"inst": g._new_inst("FORTRESS_ICEPICK"), "boost": 0, "free_used": false})
+ check.call(g.break_info(1, 0).cost == 0, "MINIMALIST GHOST first break is free")
+ g._do_break(1, 0)
+ check.call(g.break_info(1, 1).cost == 0, "FORTRESS first-pick-free remains independent until actually used")
+ g.trace = 20
+ var z := g._new_inst("ZERO_FOOTPRINT"); g.hand.append(z); g.play_card(z.uid)
+ check.call(g.trace == 10 and g.burned[0].id == "ZERO_FOOTPRINT", "ZERO FOOTPRINT caps relief at ten and burns")
+ check.call(CardDB.def("COMPILED::BLACKOUT::VANISH").bw == 4, "COMPILE BW cost capped at four")
+ var compiled := g._new_inst("COMPILED::ZERO_FOOTPRINT::PULP_SHIELD"); g.hand.append(compiled)
+ var shield := g.shield; g.play_card(compiled.uid)
+ check.call(g.shield == shield + 3 and not g._find(g.burned, compiled.uid).is_empty(), "compiled burn executes both halves then burns combined card")
+ g.ghostware.append("ONE_TRICK")
+ while g.footprint() < 18: g.run_deck.append(g._new_inst("PROBE"))
+ g.phase = "REWARD"; g.reward_options = ["PROBE"]
+ var count := g.run_deck.size(); g.choose_reward("PROBE")
+ check.call(g.run_deck.size() == count, "ONE-TRICK blocks card reward growth at cap minus four")
+ var f := game("ECHO"); f.enter_node(0); f.hand.clear(); f.discard.clear(); f.draw_pile.clear()
+ var protected := f._new_inst("PROBE"); protected.cached = true; f.hand.append(protected)
+ f._apply_effect({"k": "FORGET", "v": 3})
+ check.call(f.hand.size() == 1, "FORGET respects CACHE and insufficient hand")
+ f.rack.append(f._new_inst("SHORT_LOOP")); f.rack.append(f._new_inst("ROLLING_RESTART"))
+ f.draw_pile.append(f._new_inst("PROBE")); f.draw_pile.append(f._new_inst("PROBE"))
+ var bw := f.bw; f.force_reboot()
+ check.call(f.hand.size() == 3 and f.bw == bw + 1 and f.amp == 1, "SHORT LOOP draws and adds BW before later rack AMP trigger")
+
+func engine_amp_regressions() -> void:
+ var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30; g.amp = 2
+ g.installed.append({"inst": g._new_inst("SILENT_PARTNER"), "boost": 0, "free_used": false})
+ g.enc.cloak_turn = 2
+ var cred := g.cred; g.end_turn()
+ check.call(g.cred == cred + 6, "SILENT PARTNER AMP once per payout")
+ var r := game("RIOT"); r.enter_node(0); r.amp = 3; r.trace = 20
+ r.rack.append(r._new_inst("PAIN_TOLERANCE")); r._start_turn()
+ check.call(r.shield == 5, "PAIN TOLERANCE turn ENGINE receives AMP")
+ check.call(r.card_text("WARM_BOOT").contains("8 SHIELD"), "amplified card output visible in text")
+ r._end_ice_node()
+ check.call(r.amp == 0, "AMP expires at Node end")
+
+func coverage_and_escalation_regressions() -> void:
+ var g := game("ECHO"); g.enter_node(0)
+ var cards := [g._new_inst("COMPILED::BRUTE_FORCE::PROBE")]
+ check.call(g.coverage(cards).values().all(func(x): return x), "compiled fallback retains COVERAGE capability")
+ var definition := {"name": "ESC", "type": "FORTRESS", "str": 0, "subs": [[{"k": "TRACE", "v": 1, "escalate": true}], [{"k": "DEADLOCK", "v": 3}]]}
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW", definition)]); g.enc.ice[0].seen.fill(true)
+ g.enc.ice[0].broken[0] = true; g.animate = true
+ g.end_turn()
+ while not g.response_queue.is_empty(): g.response_step()
+ check.call(g.effect_value(g.enc.ice[0], definition.subs[0][0]).v == 1, "broken ESCALATE does not grow")
+ g.phase = "PLAYER"; g.enc.ice[0].broken[0] = false; g.enc.blackout = true; g.end_turn()
+ check.call(g.effect_value(g.enc.ice[0], definition.subs[0][0]).v == 1, "skipped response does not escalate")
+ g.phase = "PLAYER"; g.enc.blackout = false; g.enc.breached = false
+ g._do_break(0, 1); g._do_break(0, 1)
+ check.call(not g.enc.ice[0].broken[1] and g.enc.ice[0].break_progress[1] == 2, "DEADLOCK x3 needs its third step")
+ g._do_break(0, 1)
+ check.call(g.enc.breached, "third DEADLOCK step permits BREACH")
+
+func ordered_compile_regression() -> void:
+ var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 30
+ check.call(g.footprint_band() == "GHOST", "numeric GHOST threshold includes RIOT starter 15")
+ g.enc.ice.assign([g._new_ice("COOKIE_WALL")]); g.enc.ice[0].seen.fill(true)
+ var c := g._new_inst("COMPILED::PROBE::BRUTE_FORCE"); g.hand.append(c)
+ check.call(g.play_card(c.uid, 0) and g.ice_str(0) == 3 and g.phase == "CHOICE", "compiled STR reduction enables subsequent conditional breaker")
+ g.choose_sub(0, 3)
+ check.call(g.enc.breached and g.discard[0].id == c.id, "compiled fallback finishes with one physical card")
+
+func integer_strike_regression() -> void:
+ var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 30
+ g.enc.ice.assign([g._new_ice("CAPTCHA")]); g.enc.ice[0].seen.fill(true); g.enc.ice[0].str_mod = -8
+ var target: Dictionary = g.enc.ice[0]
+ g.trace = 39; g.strikes = 1
+ var c := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(c); g.play_card(c.uid, 0)
+ g.choose_sub(0, 1)
+ check.call(g.pending.ice == 1 and is_same(g.enc.ice[1], target) and g.card_break_ok(1, 0), "INTEGER keeps same target after TRIPWIRE strike shifts ICE indices")

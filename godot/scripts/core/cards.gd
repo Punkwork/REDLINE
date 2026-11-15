@@ -478,3 +478,15 @@ static func reward_pool(pool: String, rarity: String) -> Array:
 		if extra[id] == rarity:
 			out.append(id)
 	return out
+
+static func roles(id: String) -> Array:
+	var d := def(id)
+	var out := []
+	if d.has("pick") or d.has("breaker") or id in ["ADAPTER", "BORROWED_CREDENTIALS", "SHATTER", "FLASHPOINT"]: out.append("◇ COVERAGE")
+	if d.has("pick") or d.tags.has("VIRUS") or id in ["PROBE", "OVERLOAD", "DEEP_PROBE", "SMASH", "PIVOT", "STACK_SMASH", "INTEGER_UNDERFLOW", "FIELD_KIT", "STRESS_TEST", "LOGIC_BOMB", "MINIMALIST"]: out.append("↯ DRILL")
+	if id in ["SURGE_PROTECTOR", "WARM_BOOT", "STUN_BATON"]: out.append("▣ HULL")
+	if d.has("compiled"):
+		for part in d.compiled:
+			for role in roles(part):
+				if not out.has(role): out.append(role)
+	return out

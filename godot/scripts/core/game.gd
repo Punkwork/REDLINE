@@ -88,6 +88,12 @@ func _init(seed_value: int = -1) -> void:
 # =====================================================================
 
 func new_run(who: String = "GENERALIST") -> void:
+	amp = 0
+	bloat_tax_paid = 0
+	ghostware.clear()
+	compiled_queue.clear()
+	compiled_owner = {}
+	compiled_target = {}
 	rustler = who
 	run_deck.clear()
 	log.clear()
@@ -234,15 +240,15 @@ func _start_encounter() -> void:
 		phase = "CHOICE"
 		_say("PATIENT ZERO: choose an ICE to INFECT with 1 ROT.")
 
-func _new_ice(id: String) -> Dictionary:
-	var d := IceDB.def(id)
+func _new_ice(id: String, definition: Dictionary = {}) -> Dictionary:
+	var d := IceDB.def(id) if definition.is_empty() else definition
 	var broken := []
 	var seen := []
 	for s in d.subs:
 		broken.append(false)
 		seen.append(false)
-	return {"id": id, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {},
-		"corp_turns": 0, "curves": _curves_for(d)}
+	return {"id": id, "definition": d, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {},
+		"break_progress": d.subs.map(func(_s): return 0), "escalation": {}, "corp_turns": 0, "curves": _curves_for(d)}
 
 func _curves_for(d: Dictionary) -> Dictionary:
 	## PULP-002: each curve this ICE uses, as its own sequence (B shuffled with the run's RNG).
@@ -267,18 +273,18 @@ func _curves_for(d: Dictionary) -> Dictionary:
 func active_subs(i: int) -> Array:
 	## Pool indices of the subroutines in this ICE's slots, in slot order. Non-TUMBLERs: all of them.
 	var ice: Dictionary = enc.ice[i]
-	var d := IceDB.def(ice.id)
+	var d := ice_definition(ice)
 	var out := []
 	if d.type == "VOID":
 		# VOID-001: response n fires subs 1..n; each is revealed when it first fires.
 		for s in mini(ice.responses + 1, d.subs.size()):
 			out.append(s)
 		return out
-	if not IceDB.is_tumbler(ice.id):
+	if d.type != "TUMBLER":
 		for s in d.subs.size():
 			out.append(s)
 		return out
-	for k in IceDB.slots(ice.id):
+	for k in int(d.get("slots", d.subs.size())):
 		out.append((ice.rot + k) % d.subs.size())
 	return out
 
@@ -288,18 +294,18 @@ func is_active(i: int, s: int) -> bool:
 func hidden_count(i: int) -> int:
 	## Face-down subroutines outside the slots (TUMBLER) or not yet fired (VOID, beyond this response).
 	var ice: Dictionary = enc.ice[i]
-	return IceDB.def(ice.id).subs.size() - active_subs(i).size()
+	return ice_definition(ice).subs.size() - active_subs(i).size()
 
 func _rotate_tumblers() -> void:
 	for i in enc.ice.size():
 		var ice: Dictionary = enc.ice[i]
-		if IceDB.is_tumbler(ice.id) and IceDB.slots(ice.id) < IceDB.def(ice.id).subs.size():
-			ice.rot = (ice.rot + 1) % IceDB.def(ice.id).subs.size()
+		if ice_definition(ice).type == "TUMBLER" and int(ice_definition(ice).get("slots", ice_definition(ice).subs.size())) < ice_definition(ice).subs.size():
+			ice.rot = (ice.rot + 1) % ice_definition(ice).subs.size()
 	_mark_seen()
 
 func _mark_seen() -> void:
 	for i in enc.ice.size():
-		if IceDB.def(enc.ice[i].id).type == "VOID":
+		if ice_definition(enc.ice[i]).type == "VOID":
 			continue   # VOID subroutines are revealed only when they fire
 		for s in active_subs(i):
 			enc.ice[i].seen[s] = true
@@ -310,14 +316,13 @@ func deadlock_view() -> Dictionary:
 	var seen_total := 0
 	var unseen := 0
 	for ice in enc.ice:
-		var d := IceDB.def(ice.id)
+		var d := ice_definition(ice)
 		for s in d.subs.size():
 			if not ice.seen[s]:
 				unseen += 1
 			elif _has_deadlock(d.subs[s]):
-				seen_total += 1
-				if ice.broken[s]:
-					done += 1
+				seen_total += deadlock_steps(d.subs[s])
+				done += deadlock_steps(d.subs[s]) if ice.broken[s] else int(ice.break_progress[s])
 	return {"done": done, "seen": seen_total, "unseen": unseen}
 
 func _add_black_ice() -> void:
@@ -360,7 +365,7 @@ func _start_turn() -> void:
 	_virus_turn()
 	shield = 0
 	if trace >= 20:
-		shield += 2 * _rack_count("PAIN_TOLERANCE")
+		shield += (2 + amp) * _rack_count("PAIN_TOLERANCE")
 	enc.breaks_turn = 0
 	for p in installed:
 		p.free_used = false
@@ -429,7 +434,7 @@ func _drain_reboots() -> void:
 			break
 		if ghostware.has("HEARTBEAT"): trace = maxi(0, trace - 2)
 		for ice in enc.ice.duplicate():
-			match IceDB.def(ice.id).get("ability", ""):
+			match ice_definition(ice).get("ability", ""):
 				"REBOOT_SPAM": _apply_effect({"k": "INSERT", "card": "SPAM", "to": "draw", "v": 1})
 				"REBOOT_FORGET": _apply_effect({"k": "FORGET", "v": 1})
 		for card in rack.duplicate():
@@ -485,7 +490,7 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id)}
 	if cred < int(d.get("cred_cost", 0)):
 		return {"ok": false, "reason": "Need %d CRED" % d.cred_cost}
-	if d.has("target_types") and not enc.ice.any(func(ice): return d.target_types.has(IceDB.def(ice.id).type)):
+	if d.has("target_types") and not enc.ice.any(func(ice): return d.target_types.has(ice_definition(ice).type)):
 		return {"ok": false, "reason": "Need a FORTRESS or VOID target"}
 	if d.has("breaker") and not d.breaker.get("same_ice", false) and _breaker_targets(d.breaker, -1).is_empty():
 		return {"ok": false, "reason": "No subroutine it can break"}
@@ -512,10 +517,10 @@ func play_card(uid: int, target: int = -1) -> bool:
 	if d.get("target", false) and (target < 0 or target >= enc.ice.size()):
 		_say("Choose an ICE for %s." % d.name)
 		return false
-	if d.has("target_type") and IceDB.def(enc.ice[target].id).type != d.target_type:
+	if d.has("target_type") and ice_definition(enc.ice[target]).type != d.target_type:
 		_say("%s needs a %s." % [d.name, d.target_type])
 		return false
-	if d.has("target_types") and not d.target_types.has(IceDB.def(enc.ice[target].id).type):
+	if d.has("target_types") and not d.target_types.has(ice_definition(enc.ice[target]).type):
 		_say("Choose a FORTRESS or VOID for %s." % d.name)
 		return false
 	if d.has("breaker") and d.breaker.get("same_ice", false) and (target < 0 or _breaker_targets(d.breaker, target).is_empty()):
@@ -523,9 +528,8 @@ func play_card(uid: int, target: int = -1) -> bool:
 		return false
 	for part_id in d.get("compiled", []):
 		var part := CardDB.def(part_id)
-		if part.has("target_types") and not part.target_types.has(IceDB.def(enc.ice[target].id).type): return false
-		if part.has("target_type") and part.target_type != IceDB.def(enc.ice[target].id).type: return false
-		if part.has("breaker") and _breaker_targets(part.breaker, target if part.breaker.get("same_ice", false) else -1).is_empty(): return false
+		if part.has("target_types") and not part.target_types.has(ice_definition(enc.ice[target]).type): return false
+		if part.has("target_type") and part.target_type != ice_definition(enc.ice[target]).type: return false
 	_take_from(hand, uid)
 	inst["previous_tags"] = enc.get("last_tags", []).duplicate()
 	inst["chain_active"] = enc.get("last_tags", []).has(d.get("chain", ""))
@@ -685,15 +689,16 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"QUARANTINE": shield += mini(6, virus_total(target))
 		"SHATTER":
 			enc["shatter_ice"] = enc.ice[target]
-			_say("SHATTER: SLEDGE can break %s this turn." % IceDB.def(enc.ice[target].id).name)
+			_say("SHATTER: SLEDGE can break %s this turn." % ice_definition(enc.ice[target]).name)
 		"BORROWED_CREDENTIALS":
 			if not enc.has("borrowed_ice"):
 				enc.borrowed_ice = []
 			if not enc.borrowed_ice.any(func(ice): return is_same(ice, enc.ice[target])):
 				enc.borrowed_ice.append(enc.ice[target])
-			_say("BORROWED CREDENTIALS: HUSH can break %s this turn." % IceDB.def(enc.ice[target].id).name)
+			_say("BORROWED CREDENTIALS: HUSH can break %s this turn." % ice_definition(enc.ice[target]).name)
 		"BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER":
 			var br: Dictionary = CardDB.def(inst.id).breaker
+			if _breaker_targets(br, target if br.get("same_ice", false) else -1).is_empty(): return false
 			pending = {"kind": "card_break", "n": br.n, "ice": target if br.get("same_ice", false) else -1,
 				"breaker": br, "card_uid": inst.uid, "card": CardDB.def(inst.id).name}
 			discard.append(inst)
@@ -822,7 +827,7 @@ func _end_turn_effects() -> void:
 				add_trace(d.extract_trace, false)
 		elif p.inst.id == "SILENT_PARTNER":
 			if enc.cloak_turn > 0:
-				extract(2 * enc.cloak_turn + long_game)
+				extract(2 * enc.cloak_turn + amp + long_game)
 	for c in hand:
 		if c.id == "TRACER":
 			add_trace(3, false)
@@ -858,7 +863,7 @@ func response_preview() -> Array:
 		return steps
 	for i in enc.ice.size():
 		var ice: Dictionary = enc.ice[i]
-		var d := IceDB.def(ice.id)
+		var d := ice_definition(ice)
 		for s in active_subs(i):
 			steps.append({"ice": i, "sub": s, "name": d.name, "effects": d.subs[s], "skipped": ice.broken[s], "hidden": not ice.seen[s]})
 	return steps
@@ -888,7 +893,7 @@ func _begin_response() -> void:
 		st["ref"] = ice
 		if not st.skipped:
 			response_queue.append(st)
-		if IceDB.def(ice.id).type == "VOID" and not enc.resp_void.has(ice):
+		if ice_definition(ice).type == "VOID" and not enc.resp_void.has(ice):
 			enc.resp_void.append(ice)
 	if not animate:
 		_continue_response()
@@ -908,6 +913,8 @@ func response_step() -> Dictionary:
 	st.ref.seen[st.sub] = true   # VOID: revealed as it fires
 	for e in st.effects:
 		_apply_effect(effect_value(st.ref, e))
+		var key := escalation_key(st.ref, e)
+		if key != "": st.ref.escalation[key] = int(st.ref.escalation.get(key, 0)) + 1
 		if phase == "DEAD":
 			break
 	return st
@@ -922,7 +929,7 @@ func response_finish() -> void:
 		for ice in enc.ice:
 			ice.corp_turns += 1   # PULP-002: curves advance one step per Corporation Response
 	for ice in ([] if enc.skipped else enc.ice):
-		if IceDB.def(ice.id).get("passive", "") == "HARDENING" and ice.get("harden", 0) < 3:
+		if ice_definition(ice).get("passive", "") == "HARDENING" and ice.get("harden", 0) < 3:
 			ice["harden"] = ice.get("harden", 0) + 1
 	enc.ghost = false
 	enc.smoke = 0
@@ -1052,14 +1059,14 @@ func ice_str(i: int) -> int:
 	var ice: Dictionary = enc.ice[i]
 	if ice.bomb:
 		return 0
-	var v: int = IceDB.def(ice.id).str + ice.str_mod + ice.get("harden", 0) - int(ice.virus.get("ROT", 0)) - (amp if ice.virus.get("ROT", 0) > 0 else 0)
+	var v: int = ice_definition(ice).str + ice.str_mod + ice.get("harden", 0) - int(ice.virus.get("ROT", 0)) - (amp if ice.virus.get("ROT", 0) > 0 else 0)
 	# RELAY: the ICE to the left props this one up while it has an unbroken subroutine.
-	if i > 0 and IceDB.def(enc.ice[i - 1].id).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false):
+	if i > 0 and ice_definition(enc.ice[i - 1]).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false):
 		v += 2
-	return maxi(int(ice.get("str_floor", IceDB.def(ice.id).get("str_floor", -99999))), v)
+	return maxi(int(ice.get("str_floor", ice_definition(ice).get("str_floor", -99999))), v)
 
 func passive(i: int) -> String:
-	return IceDB.def(enc.ice[i].id).get("passive", "")
+	return ice_definition(enc.ice[i]).get("passive", "")
 
 func pick_str(p: Dictionary) -> int:
 	return CardDB.def(p.inst.id).pick.str + p.boost
@@ -1067,7 +1074,7 @@ func pick_str(p: Dictionary) -> int:
 func break_info(i: int, s: int) -> Dictionary:
 	## Cheapest way to break subroutine s on ICE i from the current state, boosts included (screen rule §5.3).
 	var ice: Dictionary = enc.ice[i]
-	var d := IceDB.def(ice.id)
+	var d := ice_definition(ice)
 	if ice.broken[s]:
 		return {"ok": false, "reason": "BROKEN"}
 	if not is_active(i, s) or not ice.seen[s]:
@@ -1176,9 +1183,10 @@ func break_sub(i: int, s: int) -> bool:
 func _do_break(i: int, s: int) -> bool:
 	## What happens whenever a subroutine breaks, by Icepick or by card.
 	var ice: Dictionary = enc.ice[i]
-	ice.broken[s] = true
+	ice.break_progress[s] += 1
+	ice.broken[s] = ice.break_progress[s] >= deadlock_steps(ice_definition(ice).subs[s])
 	enc.breaks_turn += 1
-	var d := IceDB.def(ice.id)
+	var d := ice_definition(ice)
 	if _has_deadlock(d.subs[s]):
 		_event("EV-06")
 	if enc.breaks_turn == 3:
@@ -1193,7 +1201,7 @@ func _do_break(i: int, s: int) -> bool:
 
 func _all_deadlocks_broken() -> bool:
 	for ice in enc.ice:
-		var d := IceDB.def(ice.id)
+		var d := ice_definition(ice)
 		for s in d.subs.size():
 			if _has_deadlock(d.subs[s]) and not ice.broken[s]:
 				return false
@@ -1203,12 +1211,11 @@ func deadlock_count() -> Vector2i:
 	var total := 0
 	var done := 0
 	for ice in enc.ice:
-		var d := IceDB.def(ice.id)
+		var d := ice_definition(ice)
 		for s in d.subs.size():
 			if _has_deadlock(d.subs[s]):
-				total += 1
-				if ice.broken[s]:
-					done += 1
+				total += deadlock_steps(d.subs[s])
+				done += deadlock_steps(d.subs[s]) if ice.broken[s] else int(ice.break_progress[s])
 	return Vector2i(done, total)
 
 static func _has_deadlock(effects: Array) -> bool:
@@ -1266,7 +1273,7 @@ func _finish_node(full: bool) -> void:
 func _roll_rewards(cleared: int) -> Array:
 	## 2 shared + 1 Rustler-specific (RUSTLER-007); each slot rolls rarity by depth (Core Rules §9.1).
 	var odds := {1: [60, 30, 10], 2: [45, 40, 15], 3: [30, 45, 25]}
-	var o: Array = odds.get(clamp(cleared, 1, 3))
+	var o: Array = reward_odds(cleared)
 	var out := []
 	for pool in ["SHARED", "SHARED", rustler]:
 		var roll := rng.randi_range(1, 100)
@@ -1296,6 +1303,9 @@ func choose_reward(id: String) -> void:
 	_complete_map_step()
 
 func _end_ice_node() -> void:
+	amp = 0
+	compiled_queue.clear()
+	compiled_owner = {}
 	## Node end: everything returns to the deck; Bloatware is removed (Core Rules §3.1).
 	hand = []
 	draw_pile = []
@@ -1316,7 +1326,7 @@ func worm_ok(i: int) -> bool:
 		return false
 	if int(enc.ice[i].virus.get("WORM", 0)) < 2:
 		return false
-	for s in IceDB.def(enc.ice[i].id).subs.size():
+	for s in ice_definition(enc.ice[i]).subs.size():
 		if sub_breakable(i, s):
 			return true
 	return false
@@ -1329,7 +1339,7 @@ func use_worm(i: int) -> bool:
 		enc.ice[i].virus.erase("WORM")
 	pending = {"kind": "card_break", "n": 1, "ice": i, "breaker": {"n": 1, "same_ice": true}, "card": "WORM"}
 	phase = "CHOICE"
-	_say("WORM: choose a subroutine on %s to break." % IceDB.def(enc.ice[i].id).name)
+	_say("WORM: choose a subroutine on %s to break." % ice_definition(enc.ice[i]).name)
 	return true
 
 func choose_ice(i: int) -> void:
@@ -1445,7 +1455,7 @@ func _reactive_cloak() -> void:
 	if enc.decoy:
 		return
 	for ice in enc.ice:
-		if IceDB.def(ice.id).get("ability", "") == "CLOAK_TRACE":
+		if ice_definition(ice).get("ability", "") == "CLOAK_TRACE":
 			add_trace(1, false)
 			if not enc.reactive_said:
 				enc.reactive_said = true
@@ -1551,7 +1561,7 @@ func card_cost(id: String) -> int:
 func sub_breakable(i: int, s: int) -> bool:
 	## Shared limits for any break: in a slot, seen, unbroken, not BOOTING-locked, SEQUENCED order.
 	var ice: Dictionary = enc.ice[i]
-	var d := IceDB.def(ice.id)
+	var d := ice_definition(ice)
 	if ice.broken[s] or not is_active(i, s) or not ice.seen[s]:
 		return false
 	if d.get("ability", "") == "BOOTING" and _has_deadlock(d.subs[s]) and enc.turn < 3:
@@ -1576,7 +1586,7 @@ func _breaker_targets(br: Dictionary, only_ice: int) -> Array:
 			continue
 		if not _breaker_ok_ice(br, i):
 			continue
-		for s in IceDB.def(enc.ice[i].id).subs.size():
+		for s in ice_definition(enc.ice[i]).subs.size():
 			if sub_breakable(i, s):
 				out.append(Vector2i(i, s))
 	return out
@@ -1593,17 +1603,18 @@ func choose_sub(i: int, s: int) -> void:
 func _choose_sub(i: int, s: int) -> void:
 	if not card_break_ok(i, s):
 		return
+	var target_ref: Dictionary = enc.ice[i]
 	_do_break(i, s)
 	pending.n -= 1
 	if pending.breaker.get("same_ice", false):
-		pending.ice = i
+		pending.ice = enc.ice.find(target_ref)
 	if pending.n <= 0 or _breaker_targets(pending.breaker, pending.ice).is_empty():
 		pending = {}
 		phase = "PLAYER"
 
 func _best_sub(i: int) -> int:
 	## Auto-pick for FLASHPOINT: a DEADLOCK first, then the biggest PULP, then the first breakable.
-	var d := IceDB.def(enc.ice[i].id)
+	var d := ice_definition(enc.ice[i])
 	var best := -1
 	var score := -1
 	for s in d.subs.size():
@@ -1644,6 +1655,10 @@ func virus_total(i: int) -> int:
 	return t
 
 func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
+	var key := escalation_key(ice, e)
+	if key != "":
+		e = e.duplicate()
+		e.v += int(ice.escalation.get(key, 0))
 	## SCRAMBLE and BLIND act when this ICE acts: each counter lowers PULP / TRACE by 1.
 	var v: Dictionary = ice.get("virus", {})
 	if e.k == "PULP_CURVE":
@@ -1654,7 +1669,9 @@ func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
 		out.v = maxi(0, e.v - int(v.SCRAMBLE) - amp)
 		return out
 	if e.k == "TRACE" and v.get("BLIND", 0) > 0:
-		return {"k": "TRACE", "v": maxi(0, e.v - int(v.BLIND) - amp)}
+		var out := e.duplicate()
+		out.v = maxi(0, e.v - int(v.BLIND) - amp)
+		return out
 	return e
 
 func _virus_turn() -> void:
@@ -1711,16 +1728,20 @@ func coverage(deck: Array = []) -> Dictionary:
 	if deck.is_empty(): deck = run_deck
 	var result := {"FORTRESS": false, "TUMBLER": false, "VOID": false}
 	var ids := deck.map(func(c): return c.id)
+	var capabilities := []
 	for card in deck:
-		var d := CardDB.def(card.id)
+		capabilities.append(card.id)
+		capabilities.append_array(CardDB.def(card.id).get("compiled", []))
+	for id in capabilities:
+		var d := CardDB.def(id)
 		if d.has("pick"):
 			for kind in result:
 				if d.pick.itype in [kind, "ANY"]: result[kind] = true
-		if d.has("breaker") or card.id == "FLASHPOINT":
+		if d.has("breaker") or id == "FLASHPOINT" or id == "INTEGER_UNDERFLOW":
 			for kind in result: result[kind] = true
-		if card.id == "BORROWED_CREDENTIALS" and ids.has("HUSH"):
+		if id == "BORROWED_CREDENTIALS" and ids.has("HUSH"):
 			result.FORTRESS = true; result.VOID = true
-		if card.id == "SHATTER" and ids.has("SLEDGE"):
+		if id == "SHATTER" and ids.has("SLEDGE"):
 			for kind in result: result[kind] = true
 	return result
 
@@ -1770,7 +1791,7 @@ func decompile(uid: int) -> bool:
 
 func _chain_bonus() -> void:
 	for ice in enc.ice.duplicate():
-		if IceDB.def(ice.id).get("ability", "") == "CHAIN_PULP": take_pulp(1)
+		if ice_definition(ice).get("ability", "") == "CHAIN_PULP": take_pulp(1)
 	_say("CHAIN bonus.")
 	for card in rack.duplicate():
 		if card.id == "KILL_CHAIN" and int(enc.chain_draws.get(card.uid, 0)) < 2:
@@ -1825,3 +1846,36 @@ func _resume_compiled() -> void:
 		if compiled_burn: burned.append(compiled_owner)
 		else: discard.append(compiled_owner)
 		compiled_owner = {}
+
+static func deadlock_steps(effects: Array) -> int:
+	for e in effects:
+		if e.k == "DEADLOCK": return maxi(1, int(e.get("v", 1)))
+	return 1
+
+func escalation_key(ice: Dictionary, e: Dictionary) -> String:
+	if not e.get("escalate", false) or not e.k in ["TRACE", "DISCARD", "FORGET"]: return ""
+	var subs: Array = ice_definition(ice).subs
+	for si in subs.size():
+		for ei in subs[si].size():
+			if is_same(subs[si][ei], e): return "%d:%d" % [si, ei]
+	return ""
+
+func reward_odds(cleared: int) -> Array:
+	var depth := clampi(cleared, 1, 3)
+	if node.get("tier", "T1") == "T2": depth = mini(3, cleared + 1)
+	return {1: [60, 30, 10], 2: [45, 40, 15], 3: [30, 45, 25]}[depth]
+
+func ice_definition(ice: Dictionary) -> Dictionary:
+	return ice.get("definition", IceDB.def(ice.id))
+
+func card_text(id: String) -> String:
+	var d := CardDB.def(id)
+	if amp == 0: return d.text
+	if d.has("extract"):
+		return d.text + " Current payout: %d CRED (+%d AMP)." % [int(d.extract) + amp, amp]
+	match id:
+		"WARM_BOOT": return "Whenever you REBOOT: +%d SHIELD (AMP included)." % (5 + amp)
+		"SHORT_LOOP": return "Whenever you REBOOT: +%d BW, draw %d (AMP included)." % [1 + amp, 2 + amp]
+		"SURGE_PROTECTOR", "PAIN_TOLERANCE": return d.text + " Current SHIELD: %d (AMP included)." % (2 + amp)
+		"SILENT_PARTNER": return d.text + " +%d AMP per payout." % amp
+	return d.text

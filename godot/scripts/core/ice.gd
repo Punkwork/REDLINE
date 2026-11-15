@@ -41,15 +41,15 @@ const DEFS := {
 ## The slice's HALCYON route: 4 rows. Each node: kind, layers (each layer = list of ICE ids left→right + reserve).
 const MAP := [
 	[{"id": "COOKIE_BANNER", "kind": "ICE", "name": "COOKIE BANNER", "opening": true,
-		"layers": [{"ice": ["ACCEPT_ALL", "REJECT_ALL"], "reserve": 15}], "next": [0, 1]}],
-	[{"id": "N2A", "kind": "ICE", "name": "CAPTCHA", "layers": [{"ice": ["AUTO_RENEW", "CAPTCHA"], "reserve": 10}], "next": [0, 1]},
+		"layers": [{"ice": ["ACCEPT_ALL", "REJECT_ALL"], "reserve": 23}], "next": [0, 1]}],
+	[{"id": "N2A", "kind": "ICE", "name": "CAPTCHA", "layers": [{"ice": ["AUTO_RENEW", "CAPTCHA"], "reserve": 15}], "next": [0, 1]},
 	 {"id": "N2B", "kind": "ICE", "name": "CONSENT WALL",
-		"layers": [{"ice": ["COOKIE_WALL"], "reserve": 10}, {"ice": ["CONSENT_FORM"], "reserve": 15}], "next": [0, 1]}],
+		"layers": [{"ice": ["COOKIE_WALL"], "reserve": 15}], "next": [0, 1]}],
 	[{"id": "N3A", "kind": "SAFEHOUSE", "name": "SAFEHOUSE", "next": [0]},
 	 {"id": "N3B", "kind": "ICE", "name": "DOORBELL",
-		"layers": [{"ice": ["DOORBELL_CAM"], "reserve": 10}, {"ice": ["CONSENT_FORM", "TERMS_OF_SERVICE"], "reserve": 15}], "next": [0]}],
+		"layers": [{"ice": ["DOORBELL_CAM"], "reserve": 15}], "next": [0]}],
 	[{"id": "N4", "kind": "ICE", "name": "TERMS & CONDITIONS",
-		"layers": [{"ice": ["TERMS_OF_SERVICE"], "reserve": 10}, {"ice": ["FREE_TRIAL", "DOORBELL_CAM"], "reserve": 15}], "next": []}],
+		"layers": [{"ice": ["TERMS_OF_SERVICE"], "reserve": 15}], "next": []}],
 ]
 
 ## PULP-002: PULP curves, on the harder FORTRESSES (COOKIE WALL: B; TERMS OF SERVICE: C). A is defined for later ICE.
