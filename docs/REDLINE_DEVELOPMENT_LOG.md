@@ -1556,3 +1556,42 @@ Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
   sim VECTOR: 8/30 cleared; deaths by node { "DOORBELL": 12, "TERMS & CONDITIONS": 6, "CAPTCHA": 4 }; survivors' avg end VITAE 9.0; purges 23 in 20 runs; SHATTER played 0 times in 0 runs
 TESTS: 264 passed, 0 failed
 ```
+
+
+## 2026-11-15 — DSY-004,005,013: Add SAFEHOUSE COMPILE and corporation pushback hooks (Codex)
+
+**Commit reference:** `playtest3-step5` (tag on this step commit).
+
+**Changed:** SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; FREE TRIAL on the final HALCYON layer.
+
+**Interpretations to confirm:** The explicit shared-tag requirement overrides the contradictory PROBE × PULP SHIELD example. Compilation order is chosen by selecting cards in order. Targeted halves use the selected ICE; costs are prepaid once. SAFEHOUSE compilation replaces healing. Compiled cards burn if either half burns. MINIMALIST waives the full first-break BW action cost. Other-corporation reactive ICE have definitions and tested hooks, not map placement.
+
+**Deferred:** REFACTOR 50-CRED Uplink service, PATCHWORK/FUSE acquisition and modifications, DEDUPLICATOR, Ghostware acquisition, and IRONWATCH/LUCIDA routes are absent from this slice; no acquisition or Uplink flow invented.
+
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
+
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+
+  bot: phase=SLICE_DONE vitae=7 trace=13 strikes=0 cred=16 deck=15 steps=28
+  deck GENERALIST: avg end size 14.57; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  stalled GENERALIST (3000-step guard, not deaths): { "CAPTCHA": 1 }
+  pulp GENERALIST: per encounter 137.5 incoming (1.3 from Black ICE), 131.1 absorbed by SHIELD, 6.3 to VITAE, 66.8 hits
+  sim GENERALIST: 13/30 cleared; deaths by node { "TERMS & CONDITIONS": 12, "DOORBELL": 4 }; survivors' avg end VITAE 15.8; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.20; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  stalled ECHO (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1, "CAPTCHA": 3 }
+  pulp ECHO: per encounter 80.7 incoming (0.0 from Black ICE), 73.5 absorbed by SHIELD, 7.2 to VITAE, 26.7 hits
+  sim ECHO: 8/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "DOORBELL": 7, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 10.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.47; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  pulp RIOT: per encounter 9.9 incoming (2.0 from Black ICE), 3.7 absorbed by SHIELD, 6.2 to VITAE, 2.7 hits
+  sim RIOT: 10/30 cleared; deaths by node { "DOORBELL": 8, "TERMS & CONDITIONS": 10, "CAPTCHA": 2 }; survivors' avg end VITAE 16.6; purges 0 in 0 runs; SHATTER played 77 times in 29 runs
+  deck VECTOR: avg end size 14.10; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  stalled VECTOR (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1 }
+  pulp VECTOR: per encounter 10.1 incoming (0.0 from Black ICE), 2.8 absorbed by SHIELD, 7.4 to VITAE, 2.9 hits
+  sim VECTOR: 5/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "DOORBELL": 13, "CAPTCHA": 5 }; survivors' avg end VITAE 8.2; purges 23 in 20 runs; SHATTER played 0 times in 0 runs
+TESTS: 278 passed, 0 failed
+```

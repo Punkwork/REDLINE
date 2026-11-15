@@ -20,6 +20,8 @@ const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LE
 
 var g: Game
 var nr: NulRem
+var compile_first := -1
+var compile_open := false
 var deck_open := false
 var targeting := -1
 var konami_pos := 0
@@ -1225,6 +1227,9 @@ func _build_overlay() -> void:
 		row.add_child(no)
 		v.add_child(row)
 		return
+	if compile_open:
+		_overlay_compile()
+		return
 	if deck_open:
 		_overlay_deck(false)
 		return
@@ -1433,8 +1438,8 @@ func _overlay_safehouse() -> void:
 	a.pressed.connect(func(): g.safehouse_heal(); refresh())
 	v.add_child(a)
 	var b := Button.new()
-	b.text = "Apply 1 PATCHWORK upgrade (not in this slice)"
-	b.disabled = true
+	b.text = "COMPILE two different SCRIPTs sharing a tag (instead of healing)"
+	b.pressed.connect(func(): compile_open = true; compile_first = -1; refresh())
 	v.add_child(b)
 
 func _overlay_select() -> void:
@@ -1571,3 +1576,12 @@ func _on_hold_choice(uid: int) -> void:
 	g.choose(uid)
 	refresh()
 	if g.phase == "RESPONSE" and not responding: _play_response()
+
+func _overlay_compile() -> void:
+	var opts: Array = g.run_deck.filter(func(c): return CardDB.def(c.id).type == "SCRIPT" and not CardDB.def(c.id).has("compiled") and (compile_first == -1 or g.can_compile(compile_first, c.uid))).map(func(c): return c.uid)
+	_overlay_options("COMPILE", "Choose the first effect." if compile_first == -1 else "Choose the second effect. Order is final; compiled cards cannot be compiled or fused again.", opts, g.run_deck, func(uid):
+		if compile_first == -1: compile_first = uid
+		else:
+			g.compile_cards(compile_first, uid)
+			compile_open = false
+		refresh(), "Cancel", func(): compile_open = false; refresh())

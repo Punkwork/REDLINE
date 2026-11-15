@@ -32,7 +32,6 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **Step 5 — DSY-004, 005, 013** | **COMPILE**, **REFACTOR** (50 CRED), Ghostware HEARTBEAT / MINIMAL INSTALL / DEDUPLICATOR / ONE-TRICK, CLEAN BUILD (Generalist); pushback ICE FREE TRIAL (HALCYON T2), PATTERN ANALYSIS, RECURRING DREAM. | Synergy §3.2–3.3, §8, §9 | Codex | TO DO |
 | **Pacing — PACE-003, 005, 007, 008** | **DEADLOCK ×N** (counter `1/2`); **ESCALATE ↑** for TRACE / DISCARD / FORGET (shows next value); DRILL / HULL / COVERAGE icon on reward cards; **fewer layers** (Tier 1 = 1 layer, Tier 2 = 1–2), re-based reward odds, CRED reserves +50%. In the slice: CONSENT WALL becomes 1 layer; check DOORBELL and TERMS & CONDITIONS against the Tier rules. | Pacing §3, §4.2, §6, §7 | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
@@ -46,6 +45,7 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| DSY-004,005,013 | SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; FREE TRIAL on the final HALCYON layer. | **BUILT** — `playtest3-step5` (commit tag) |
 | DSY-009,010 | Negative ICE STR, MARGIN previews, SCALPEL, STACK SMASH, INTEGER UNDERFLOW, CULL and HARVEST; AMP on virus effects. | **BUILT** — `playtest3-step4` (commit tag) |
 | DSY-011,012 | CHAIN tracks successful card plays; PIVOT, COVER FIRE, HANDOFF and KILL CHAIN; HOLD 1 and DEAD MAN’S POCKET HOLD 2; scrollable choices. | **BUILT** — `playtest3-step3` (commit tag) |
 | DSY-007, DSY-008 | REBOOT queues drain only after draws finish; AMP and seven specified cards, SCAN bottom-order choice, in-Node BURN and discard retrieval, HUD reboot estimate, and bot choice handling. | **BUILT** — `playtest3-step2` (commit tag) |

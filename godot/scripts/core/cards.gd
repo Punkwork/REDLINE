@@ -382,6 +382,33 @@ const DEFS := {
 		"target": true,
 		"text": "Remove all LEECH from target ICE; extract 3 CRED each."
 	},
+	"CLEAN_BUILD": {
+		"name": "CLEAN BUILD",
+		"type": "PROTOCOL",
+		"tags": [],
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"pool": "GENERALIST",
+		"text": "Your COMPILED cards cost 1 less BW."
+	},
+	"MINIMALIST": {
+		"name": "MINIMALIST",
+		"type": "PROTOCOL",
+		"tags": [],
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"text": "While GHOST, your first break each turn costs 0 BW."
+	},
+	"ZERO_FOOTPRINT": {
+		"name": "ZERO FOOTPRINT",
+		"type": "SCRIPT",
+		"tags": [
+			"CLOAK"
+		],
+		"bw": 1,
+		"rarity": "RARE",
+		"text": "Reduce TRACE by cards below cap, maximum 10. BURNED."
+	},
 }
 
 const STARTER_GENERALIST := [
@@ -428,6 +455,13 @@ const RUSTLERS := {
 }
 
 static func def(id: String) -> Dictionary:
+	if id.begins_with("COMPILED::"):
+		var parts := id.split("::")
+		var a := def(parts[1]); var b := def(parts[2])
+		var tags: Array = a.tags.duplicate()
+		for tag in b.tags:
+			if not tags.has(tag): tags.append(tag)
+		return {"name": a.name + " ⨯ " + b.name, "type": "SCRIPT", "tags": tags, "bw": mini(4, a.bw + b.bw), "trace_cost": int(a.get("trace_cost", 0)) + int(b.get("trace_cost", 0)), "cred_cost": int(a.get("cred_cost", 0)) + int(b.get("cred_cost", 0)), "rarity": "RARE", "compiled": [parts[1], parts[2]], "target": a.get("target", false) or b.get("target", false), "text": a.text + " THEN " + b.text}
 	return DEFS[id]
 
 static func reward_pool(pool: String, rarity: String) -> Array:

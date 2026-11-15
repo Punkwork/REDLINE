@@ -10,6 +10,7 @@ func run() -> void:
  step2()
  step3()
  step4()
+ step5()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -157,3 +158,42 @@ func step4() -> void:
  check.call(g.cred == cred + 6 and not g.enc.ice[0].virus.has("LEECH"), "HARVEST spends all LEECH for reserve-limited extraction")
  var u := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(u); g.play_card(u.uid, 0)
  check.call(g.phase == "CHOICE" and g.pending.n == 3 and not g._find(g.burned, u.uid).is_empty(), "INTEGER UNDERFLOW caps at three and burns")
+func step5() -> void:
+ var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 20
+ var a := g._new_inst("PROBE"); var b := g._new_inst("DEEP_PROBE")
+ g.run_deck.append(a); g.run_deck.append(b)
+ check.call(g.can_compile(a.uid, b.uid), "COMPILE different scripts sharing EXPLOIT")
+ check.call(not g.can_compile(g.run_deck[0].uid, a.uid), "COMPILE rejects non-SCRIPT")
+ g.phase = "SAFEHOUSE"
+ check.call(g.compile_cards(a.uid, b.uid), "SAFEHOUSE COMPILE consumes its service choice")
+ var id := "COMPILED::PROBE::DEEP_PROBE"
+ check.call(CardDB.def(id).bw == 3 and CardDB.def(id).tags == ["EXPLOIT"], "compiled summed cost and union tags")
+ g.phase = "PLAYER"; g.hand.append(g._new_inst(id))
+ var before := g.ice_str(0)
+ g.play_card(g.hand[0].uid, 0)
+ check.call(g.ice_str(0) == before - 6 and g.discard.size() == 1, "both compiled effects execute, single physical discard")
+ g.rack.append(g._new_inst("CLEAN_BUILD"))
+ check.call(g.card_cost(id) == 2, "CLEAN BUILD discount")
+ g.hand.clear(); g.draw_pile.clear(); g.discard.clear()
+ var c := g._new_inst("COMPILED::PORT_SCAN::GARBAGE_COLLECT")
+ # Untagged scripts cannot actually be compiled, so use two CLOAK scripts for playable queue instead.
+ c.id = "COMPILED::DEAD_AIR::PULP_SHIELD"
+ g.hand.append(c); var victim := g._new_inst("PROBE"); g.hand.append(victim)
+ var sh := g.shield; g.play_card(c.uid)
+ check.call(g.phase == "CHOICE" and g.shield == sh, "compiled second effect waits for first choice")
+ g.choose(victim.uid)
+ check.call(g.shield == sh + 3 and g.discard.size() == 1 and g.discard[0].id == c.id, "compiled continuation preserves one card identity")
+ g.ghostware.append("HEARTBEAT"); g.trace = 6; g.force_reboot()
+ check.call(g.trace == 4, "HEARTBEAT REBOOT trace relief")
+ var one := game("ECHO"); one.ghostware.append("ONE_TRICK"); one.enter_node(0)
+ check.call(one.bw == 5, "ONE-TRICK BW every turn")
+ var minimal := game("ECHO"); minimal.ghostware.append("MINIMAL_INSTALL"); minimal.enter_node(0)
+ check.call(minimal.amp == 1, "MINIMAL INSTALL starts GHOST Node with AMP")
+ minimal.enc.ice.assign([minimal._new_ice("FREE_TRIAL")]); minimal.hand.clear(); minimal.draw_pile.clear(); minimal.discard.clear()
+ minimal.force_reboot()
+ check.call(minimal.draw_pile.size() == 1 and minimal.draw_pile[0].id == "SPAM", "FREE TRIAL inserts SPAM per REBOOT")
+ minimal.enc.ice.assign([minimal._new_ice("PATTERN_ANALYSIS")]); minimal.shield = 0
+ var vit := minimal.vitae; minimal._chain_bonus()
+ check.call(minimal.vitae == vit - 1, "PATTERN ANALYSIS reacts to CHAIN")
+ minimal.enc.ice.assign([minimal._new_ice("RECURRING_DREAM")]); minimal.hand.append(minimal._new_inst("PROBE")); minimal.draw_pile.clear(); minimal.discard.clear(); minimal.force_reboot()
+ check.call(minimal.hand.is_empty() and minimal.draw_pile.size() == 1, "RECURRING DREAM FORGETS on REBOOT")
