@@ -62,7 +62,7 @@ Each card can also carry **tags**, shown under the type:
 
 ### 3.2 Card states
 
-- **CACHE:** a CACHED card stays in your hand at end of turn instead of being discarded. It stays until played or until the Node ends. CACHED cards are extra; they don't reduce your DRAW.
+- **CACHE:** a CACHED card stays in your hand at end of turn instead of being discarded. It stays until played or until the Node ends, **unless its card effect specifies an earlier expiry**. CACHED cards are extra; they don't reduce your DRAW. SMASH & GRAB's paid uninstall (RIOT-005) CACHES another hand card until the end of the Rustler's next turn; see `REDLINE_RUSTLERS.md` for the full approved effect.
 - **BURNED:** the card is removed from play for the rest of the Node and shuffled back into your deck when the next Node begins.
 
 ---
@@ -141,7 +141,7 @@ One subroutine can have more than one effect (e.g. `[S1] PULP 4 + DEADLOCK`). Br
 1. Install an **Icepick** matching the ICE's type.
 2. Its **STR must be at least the ICE's current STR.** Boost it if needed: each Icepick lists its boost cost. Boosts last until the encounter ends.
 3. Pay the Icepick's **break cost** to break one subroutine.
-4. **You can only break what you can see:** a TUMBLER subroutine must be in a slot, and a VOID subroutine must have been revealed. Cards that break subroutines (BACKDOOR, BRUTE FORCE…) follow the same limits.
+4. **You can only break what you can see:** a TUMBLER subroutine must be in a slot, and a VOID subroutine must have been revealed. Cards that break subroutines (BRUTE FORCE, RUNTIME ERROR…) follow the same limits.
 
 You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of the encounter).
 
@@ -225,8 +225,8 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 ### 8.2 Leaving early [NEW]
 
 After you BREACH a layer that isn't the last, choose:
-- **Go deeper:** next layer, bigger CRED reserve, and better odds on the Node's card reward (§9.1).
-- **Leave the Node:** keep everything you've earned so far, take the Node's card reward at the odds you've reached, skip the Node's completion reward, and move forward to choose your next Node.
+- **Go deeper:** take on the next layer and its CRED reserve. You must BREACH the final layer to earn the Node's card reward (§9.1; CORE-011).
+- **Leave the Node:** keep banked CRED, but receive **no card reward** and no Node completion reward. Perform normal Node cleanup and move forward to choose your next Node. **CORE-011 supersedes the former early-exit card reward.**
 
 You can't leave under LOCKDOWN.
 
@@ -251,8 +251,8 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 ### 9.1 Card reward at the end of each ICE Node [CHANGED by CORE-010]
 1. CRED your Extractors earned is banked the moment it's paid, layer by layer.
-2. **Once per ICE Node**, when you finish it (by clearing every layer, or by leaving early): **choose 1 of 3 cards** to add to your deck, or skip. There is **no** card reward after the individual layers, and **none in the escape** (§10.3).
-3. **Deeper is better.** The rarity odds of each choice depend on how many layers you cleared in that Node:
+2. **Once per fully cleared ICE Node**, after you **BREACH the final ICE layer** and complete the encounter: **choose 1 of 3 cards** to add to your deck, or skip. **Leaving early gives no card reward**, even if earlier layers were breached (CORE-011). There is **no** card reward after individual layers, and **none in the escape** (§10.3).
+3. **Deeper is better.** For a fully cleared Node, the rarity odds of each choice depend on its total number of cleared layers. These odds do not grant rewards for partial clears:
 
 | Layers cleared | Common | Uncommon | Rare |
 |---|---|---|---|
@@ -264,10 +264,10 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 **Why [CORE-010]:** the target is **about 30 cards added in a winning run, in total**, of which **2–3 per corporation are bought** at Uplinks (UPL-008). A card after every BREACH gave about 45 card rewards per run. One per ICE Node on the way in gives 6–7 + the Central Node = **7–8 per corporation, about 22 per run** (MAP-002); with 6–9 cards bought, that's **28–31 cards**. Fewer, better choices keep decks lean and make each pick matter. The odds table keeps going deeper worth the risk now that the extra reward per layer is gone.
 
-### 9.2 Extraction (unchanged)
+### 9.2 Extraction (CORE-012: reserve-only payouts)
 - Each encounter has a **CRED reserve**, larger in deeper layers.
 - **Extractors** (Programs) pay CRED from that reserve at the end of your turn.
-- Empty a layer's reserve completely and get a **bonus of 10% of it, rounded up**.
+- Extraction transfers only CRED actually remaining in the reserve. **There is no full-extraction bonus.** A 15-CRED reserve pays at most **15 CRED through extraction**, not 17; once empty, further extraction pays 0 (CORE-012).
 - Staying in an encounter longer to extract more is a risk you choose.
 
 ### 9.3 Node completion [NEW]
@@ -359,7 +359,7 @@ Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE t
 | 1 | FORTRESS Icepick | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 1. Boost: 1 BW +1 STR. First break each turn free, then 1 BW per break. |
 | 1 | TUMBLER Icepick | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 3. Boost: 2 BW +1 STR. Break: 1 BW. *(Was the SIGYL Icepick; ROT-001.)* |
 | 1 | VOID Icepick | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 0. Boost: 1 BW +1 STR. Break: 1 BW. |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
+| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 1 | **CORTEX BUFFER** **[CHANGED]** | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. *(Replaces SYN BUFFER, since SyN is removed. Deliberately not tagged CLOAK, so installing it doesn't power up WATCHDOG.)* |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE gets −2 STR for this encounter. |
@@ -433,7 +433,7 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 
 | ID | Change to this document |
 |---|---|
-| CORE-010 | Card reward **once per ICE Node** at the end of the Node, not after every BREACH, and none in the escape; about 21 card rewards per winning run, about 30 cards added with Uplink purchases (UPL-008). Rarity odds improve with layers cleared (60/30/10, 45/40/15, 30/45/25). Leaving early still gets the card reward; JACK OUT doesn't. Node completion reward is now a CAP or a PATCHWORK upgrade (no rare card) (§4, §8.2, §9.1, §9.3). Supersedes CORE-006. |
+| CORE-010 | Card reward **once per ICE Node** at the end of the Node, not after every BREACH, and none in the escape; about 21 card rewards per winning run, about 30 cards added with Uplink purchases (UPL-008). Rarity odds improve with layers cleared (60/30/10, 45/40/15, 30/45/25). Early-exit reward provision superseded by **CORE-011**: neither leaving early nor JACK OUT grants a card reward. Node completion reward is now a CAP or a PATCHWORK upgrade (no rare card) (§4, §8.2, §9.1, §9.3). Supersedes CORE-006. |
 
 ### Later amendments (corporations 2 and 3, 2026-11-13)
 
@@ -478,3 +478,29 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 | VIRUS-001 | **WORM** (was: copy counters to the ICE on the right at turn start): on your turn, at any time, remove 2 WORM counters from an ICE to break 1 subroutine on that ICE of your choice (normal break rules apply: it must be active or revealed, not locked by BOOTING, and SEQUENCED order is respected; it needs no Icepick, ignores the ICE's STR, costs no BW (TOLL doesn't apply) and can only be used on your turn). — **APPROVED 2026-11-14** |
 | VECTOR-001 | **PATIENT ZERO** (VECTOR's ORIGIN): at the start of each encounter, **choose an ICE** and INFECT 1 ROT on it (was every ICE). — **APPROVED 2026-11-14** |
 | REEL-001 | TUMBLER slots shown as **slot-machine reels**, labelled with their subroutine (§5.4). — **APPROVED 2026-11-14** |
+
+
+## CORE-011 — Card reward requires final-layer BREACH (APPROVED, 2026-11-14)
+
+The designer explicitly revises early-exit rewards: **if the Rustler leaves a Node before breaching its final ICE layer, no end-of-Node card reward is awarded**. Breaching one or more earlier layers is insufficient. Leaving early bypasses the card-reward screen and reward generation, performs normal Node-end cleanup, and moves forward to the next map choice (or slice completion when appropriate). Banked CRED, existing extraction/clean-node CRED rules, LOCKDOWN exit restrictions, and normal route progression are unchanged. A full clear still offers its usual three-card choice, of which the Rustler may take one or skip. No new per-layer card reward is introduced.
+
+This supersedes CORE-010 **only where it granted a card reward for leaving early**, including its earlier §8.2/§9.1 wording and examples in supporting documents. Final-layer breach and the established voluntary END TURN/completion sequence remain required. Escape encounters still grant no card rewards. Card-count/economy projections from the earlier early-reward model are historical targets to re-evaluate in playtesting, not a reason to restore the removed reward.
+
+
+## CORE-012 — Remove the full-extraction CRED bonus (APPROVED, 2026-11-14)
+
+The designer explicitly removes the **10% rounded-up full-extraction bonus** from both the game and its rules. Extraction pays only what is actually transferred from the remaining finite reserve: `payout = min(extraction amount, remaining reserve)`. Depleting a reserve does not create or refill CRED and does not award any additional CRED. Empty reserves pay 0 on subsequent attempts. Example: COOKIE BANNER's **15-CRED** reserve contributes exactly **15 CRED** when fully extracted, not 17.
+
+This **removes/supersedes NODE-EXTRACTION-001 and NODE-EXTRACTION-002** and all historical training/economy examples that added the bonus. Reserve sizes, printed extraction amounts, banked CRED, full-extraction notifications, and unrelated explicitly defined rewards are unchanged. In particular, the separate §9.4 Clean Node rule is not a full-extraction bonus and is unchanged by this instruction. The earlier full-extraction bonus is not an alternative active rule.
+
+
+## EXTRACT-002 — Basic Extractor pays 3 CRED per turn (APPROVED, 2026-11-14)
+
+The designer reduces **Basic Extractor** from 5 to **3 CRED at the end of each eligible Rustler turn**. This is the shared Basic Extractor card in all four starter decks. Installation remains **1 BW / 1 RAM**, and normal eligible end-turn timing, including the final BREACHED turn, is unchanged. Payout remains capped by the current encounter's remaining reserve, banked immediately, and grants **no full-extraction bonus** (CORE-012). A reserve of 15 takes five unmodified 3-CRED payouts to empty; if only 1 CRED remains, the final payout is 1.
+
+This supersedes the **5-CRED amount only** in EXTRACT-001 and older starter tables/examples. It does not change other named Extractors' printed rates or SMASH & GRAB's separate paid uninstall/CACHE ability.
+
+
+## ECHO-005 — BORROWED CREDENTIALS targeted dual-cost SCRIPT (APPROVED, 2026-11-14)
+
+ECHO's BACKDOOR is replaced by **BORROWED CREDENTIALS**: **1 BW + 8 CRED**, SCRIPT — EXPLOIT. Select a FORTRESS or VOID when playing it; HUSH may break that selected ICE for this Rustler turn using normal Strength, boosts and break costs. The SCRIPT does not break anything by itself. Validate the target and availability of both resources before payment; a rejected play spends neither and leaves the card in hand. On success discard the SCRIPT normally. The target-specific compatibility expires at Rustler turn end. See `REDLINE_RUSTLERS.md` ECHO-005 for the complete card revision. This supersedes BACKDOOR's earlier direct-break profile only; other Icepicks and costs are unchanged.

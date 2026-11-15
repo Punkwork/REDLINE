@@ -69,7 +69,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | FORTRESS Icepick | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 1. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. |
 | 1 | SIGYL Icepick | PROGRAM — ICEPICK (SIGYL) | 1 BW, 1 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. |
 | 1 | VOID Icepick | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
+| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 1 | CORTEX BUFFER | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. |
@@ -95,8 +95,8 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
 | 1 | **HUSH** *(signature)* | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 0. Boost: 2 BW → +1 STR. Break: 1 BW. *(BASIC-001: was STR 4, boost 1 BW. ECHO-002: STR 3 → 1; ECHO-004: → 0. ROT-001: SIGYL → TUMBLER.)* |
-| 1 | **BACKDOOR** *(fallback)* | SCRIPT — EXPLOIT | 3 BW | Break 1 subroutine on **any** ICE with STR 3 or less. |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
+| 1 | **BORROWED CREDENTIALS** *(fallback; replaces BACKDOOR)* | SCRIPT — EXPLOIT | **1 BW + 8 CRED** | Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. |
+| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. *(ECHO-001: was 2.)* |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(ECHO-001: was 2.)* |
 | 1 | **SMOKESCREEN** | SCRIPT — CLOAK | 1 BW | +2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2. *(ECHO-003: was 2.)* |
@@ -110,7 +110,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 **Why:** it turns every small TRACE subroutine (TRACE 1–3) into nearly nothing, so ECHO can stay in an encounter turn after turn to fill both Extractors. It rewards ECHO's plan without making TRACE irrelevant: big TRACE hits still land.
 
-**How ECHO wins an encounter:** install HUSH and both Extractors early, Shield and Smokescreen through the Corporation Responses, and BREACH only once the CRED reserve is empty for the full-extraction bonus. Against a FORTRESS or VOID, use PROBE to bring it down to STR 3, then pay 3 BW for BACKDOOR, or CACHE BACKDOOR with DEAD AIR until the moment it's needed.
+**How ECHO wins an encounter:** install HUSH and both Extractors early, Shield and Smokescreen through the Corporation Responses, and weigh the risk of staying to empty the CRED reserve before BREACH. Extraction pays only the reserve's CRED; there is **no full-extraction bonus** (CORE-012). Against a FORTRESS or VOID, use PROBE and HUSH boosts to meet its Strength, then play **BORROWED CREDENTIALS (1 BW + 8 CRED)** on the chosen ICE. HUSH gains compatibility with that ICE for this turn, not free breaks or automatic success. DEAD AIR can retain the SCRIPT until it is needed.
 
 ---
 
@@ -133,8 +133,8 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, **+2 TRACE** | Gain 1 BW. *(BASIC-001: was 2 BW.)* |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(RIOT-002: was 2.)* |
 | 1 | **LAY LOW** | SCRIPT — CLOAK | 1 BW | −3 TRACE. *(BASIC-001: was −5.)* |
-| 1 | **SMASH & GRAB** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 8 CRED. **+1 TRACE while your TRACE is under 20.** *(RIOT-004: was +2 TRACE every turn.)* |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
+| 1 | **SMASH & GRAB** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract **3 CRED**. **+1 TRACE while your TRACE is under 20.** Spend **1 BW to uninstall** this Program and choose **another card in your hand** to CACHE until the **end of your next Rustler turn**. *(RIOT-005 supersedes RIOT-004 extraction.)* |
+| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 
 ### ORIGIN Ghostware — REDLINER
 **At the start of your turn, if your TRACE is 20 or more, gain 1 BW.**
@@ -162,7 +162,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | **OUTBREAK** | SCRIPT — VIRUS | 2 BW | Double the counters of every strain on target ICE. |
 | 1 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. |
 | 2 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 5 CRED. |
+| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | As Generalist. |
 
 ### ORIGIN Ghostware — PATIENT ZERO
@@ -178,7 +178,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 ## 7. Starter cards and the card pool
 
-- **Starter cards are Rustler-specific:** HUSH, BACKDOOR, SLEDGE, BRUTE FORCE, STINGER and the others never appear for other Rustlers.
+- **Starter cards are Rustler-specific:** HUSH, BORROWED CREDENTIALS, SLEDGE, BRUTE FORCE, STINGER and the others never appear for other Rustlers.
 - **Shared basics:** PROBE, PULP Shield, GHOST SIGNAL and Basic Extractor appear in several starter decks. They are never sold or offered as rewards (BASIC-001).
 - **Starter cards are the weakest cards** (Core Rules §3.1a, BASIC-001): every starter card has a clear upgrade in the reward pools, and Rustlers aim to stop drawing their original cards by the end of a run.
 - **Card rewards (1 of 3; once per ICE Node since CORE-010):** proposed mix of **2 cards from the shared pool + 1 from the Rustler's own pool**, so every Rustler can branch out while staying recognizable. The pools themselves are Phase 3.
@@ -205,3 +205,21 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 8. **Training Node is Generalist-only**; unlock order ECHO → VECTOR → RIOT (§8). — **APPROVED 2026-11-12 (RUSTLER-008)**
 
 **Next phase:** Phase 3 — Cards and ICE: the shared and Rustler card pools, the ICE roster for the first corporation (including PURGE ICE, Black ICE and the Tracer Bloatware), and the first Central Node.
+
+
+## RIOT-005 — SMASH & GRAB extraction and paid uninstall/CACHE (APPROVED, 2026-11-14)
+
+Designer instruction: installation stays **1 BW / 1 RAM**. At each eligible Rustler end turn, extract **3 CRED**, subject to the existing reserve rules, and add **1 TRACE if current TRACE is below 20**. This replaces the former 8-CRED extraction.
+
+During the Rustler turn, pay **1 BW** and uninstall SMASH & GRAB to the discard pile, immediately freeing its RAM. Choose **another card currently in the Rustler's hand**, not SMASH & GRAB, and CACHE it until **the end of the Rustler's next turn**. It survives current-turn cleanup and remains available on the next turn; CACHE expires after that turn's end-turn effects, before its Corporation Response. It then follows normal cleanup unless another retention effect applies. A layer transition does not consume or restart the duration. Node end still clears Node-specific CACHE under the normal rules. Playing or otherwise moving the temporarily CACHED card out of hand ends this temporary retention; future redraws do not inherit it.
+
+The activated ability needs an installed source, 1 BW, and a hand target. If these are unavailable it does not spend BW or uninstall. The standard **0-BW unload without CACHE** remains available; it is distinct from this paid ability. An already indefinite CACHE effect is not shortened by the temporary effect. Other cards' existing CACHE behavior is unchanged.
+
+
+## ECHO-005 — BACKDOOR replaced by BORROWED CREDENTIALS (APPROVED, 2026-11-14)
+
+Designer selected the BORROWED CREDENTIALS proposal and explicitly confirmed **1 BW + 8 CRED** (the 8 is CRED, not TRACE). It is a **SCRIPT — EXPLOIT**, replacing ECHO's single BACKDOOR starter copy; the deck stays at 12 cards. It requires selecting a **FORTRESS or VOID ICE** when played. For the current Rustler turn only, **HUSH can break subroutines on that chosen ICE** using its ordinary Strength checks, boost costs and break costs. No subroutine is broken merely by playing the SCRIPT; hidden-subroutine, BOOTING, TOLL and other normal restrictions remain in force. HUSH retains its normal TUMBLER compatibility.
+
+Both resources must be available, and target validation occurs before paying them or removing the card from hand. Missing/invalid targets or insufficient BW/CRED leave costs and the card untouched. A valid play pays **exactly 1 BW and 8 CRED**, puts the SCRIPT in discard, and does not add TRACE. The grant expires at this Rustler turn's end and does not persist between layers. It refers to the selected ICE object, so index changes do not redirect it. Separate successful copies can cover separate targets during that same turn. It can be played before installing HUSH, but the Rustler still needs HUSH installed and sufficient Strength/BW to actually break.
+
+This replaces BACKDOOR's former 3-BW direct subroutine break on STR ≤3 ICE; that older effect is no longer in the starter card. Shared/reward-pool cards and other Rustlers' starters are unchanged.

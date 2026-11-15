@@ -4,6 +4,7 @@ config_version=5
 [application]
 
 config/name="PANOPTICON"
+config/version="0.2.0-playtest.2"
 config/description="PANOPTICON vertical slice: HALCYON, all four Rustlers"
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")

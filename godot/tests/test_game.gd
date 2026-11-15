@@ -45,17 +45,20 @@ func _init() -> void:
 	test_detainer_rules()
 	test_passives()
 	test_rustlers()
+	test_borrowed_credentials()
 	test_purge()
 	test_shatter()
 	test_pulp_curves()
 	test_end_run()
 	test_patient_zero()
 	test_worm()
-	test_extraction_bonus()
+	test_extraction_reserve_cap()
 	test_rainbow_and_toolbelt()
 	test_spam_and_filter()
 	test_cloak_reactive()
 	test_go_deeper_keeps_programs()
+	test_smash_and_grab_cache()
+	test_node_card_reward_requires_full_clear()
 	test_full_slice_path()
 	if OS.get_environment("SIM") != "":
 		sim_many()
@@ -119,6 +122,61 @@ func start_node(g: Game, row: int, idx: int, rig: String) -> void:
 		g.choose(g.hand[0].uid)
 	if g.phase == "CHOICE" and g.pending.kind == "patient_zero":
 		g.choose_ice(0)
+
+func test_borrowed_credentials() -> void:
+	var g := Game.new(110)
+	g.new_run("ECHO")
+	check(g.run_deck.size() == 12 and uid_of(g, g.run_deck, "BORROWED_CREDENTIALS") > 0 and uid_of(g, g.run_deck, "BACKDOOR") < 0, "ECHO-005: BORROWED CREDENTIALS replaces BACKDOOR")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")
+	install(g, "HUSH")
+	var card := put_in_hand(g, "BORROWED_CREDENTIALS")
+	g.bw = 4
+	g.cred = 7
+	check(not g.can_play(card).ok and not g.play_card(card, 0) and g.bw == 4 and g.cred == 7, "8 CRED is mandatory; failed payment spends nothing")
+	g.cred = 8
+	g.bw = 0
+	check(not g.play_card(card, 0) and g.cred == 8, "1 BW is also mandatory")
+	g.bw = 4
+	check(not g.play_card(card) and not g.play_card(card, 99) and g.bw == 4 and g.cred == 8 and not g._find(g.hand, card).is_empty(), "ICE selection is mandatory and invalid targets cost nothing")
+	# Distinct ICE references ensure compatibility is target-specific.
+	g.enc.ice.append(g._new_ice("AUTO_RENEW"))
+	check(g.play_card(card, 0) and g.bw == 3 and g.cred == 0, "successful targeted play pays exactly 1 BW and 8 CRED")
+	check(g._find(g.hand, card).is_empty() and not g._find(g.discard, card).is_empty() and g.phase == "PLAYER", "SCRIPT resolves to discard; no automatic break choice")
+	check(not g.break_info(0, 0).ok and g.break_info(0, 0).cost == 12, "normal HUSH Strength/boost/break and TOLL costs still apply")
+	g.installed[0].boost = 5
+	check(g.break_info(0, 3).ok and g.break_info(0, 3).cost == 1, "sufficient HUSH Strength enables its normal 1-BW break")
+	check(not g.break_info(1, 0).ok, "another FORTRESS is not implicitly covered")
+	var before_bw := g.bw
+	check(g.break_sub(0, 0) and g.bw == before_bw - 2, "selected ICE's TOLL remains in effect")
+	g.end_turn()
+	check(not g.enc.has("borrowed_ice") and not g.break_info(0, 3).ok, "compatibility expires at this Rustler turn end")
+	var opening := Game.new(111)
+	opening.new_run("ECHO")
+	opening.enter_node(0)
+	var wrong := put_in_hand(opening, "BORROWED_CREDENTIALS")
+	opening.cred = 8
+	check(not opening.play_card(wrong, 0) and opening.bw == 4 and opening.cred == 8, "TUMBLER is not a valid off-type target")
+	var v := Game.new(112)
+	v.new_run("ECHO")
+	v.entered_corp = true
+	start_node(v, 2, 1, "")
+	install(v, "HUSH")
+	v.installed[0].boost = 10
+	v.cred = 8
+	v.bw = 4
+	var vc := put_in_hand(v, "BORROWED_CREDENTIALS")
+	check(v.play_card(vc, 0), "VOID can be selected")
+	check(not v.break_info(0, 0).ok, "compatibility does not reveal or bypass hidden VOID subroutines")
+	v.enc.ice[0].responses = 1
+	v.enc.ice[0].seen[0] = true
+	check(v.break_info(0, 0).ok and v.break_sub(0, 0), "revealed VOID subroutine can be broken by HUSH")
+	var after_trace := v.trace
+	check(after_trace == 0, "the extra cost is CRED, not TRACE")
+	v.end_turn()
+	check(v.phase == "DEEPER", "normal voluntary END TURN still completes a breached layer")
+	v.go_deeper()
+	check(not v.enc.has("borrowed_ice"), "compatibility does not carry into another layer")
 
 func test_shield_and_pulp() -> void:
 	var g := Game.new(2)
@@ -246,7 +304,7 @@ func test_passives() -> void:
 	check(g.ice_str(1) == 9, "RELAY gives the ICE to its right +2 STR")
 
 func test_rustlers() -> void:
-	# ECHO: no READY RIG, LOW PROFILE, SLOW DRIP, BACKDOOR
+	# ECHO: no READY RIG, LOW PROFILE, SLOW DRIP, BORROWED CREDENTIALS
 	var g := Game.new(21)
 	g.new_run("ECHO")
 	check(g.run_deck.size() == 12 and uid_of(g, g.run_deck, "HUSH") > 0, "ECHO starter deck")
@@ -271,12 +329,15 @@ func test_rustlers() -> void:
 	g.entered_corp = true
 	start_node(g, 1, 1, "")   # COOKIE WALL STR 5
 	g.enc.ice[0].str_mod = -2
-	var bd := put_in_hand(g, "BACKDOOR")
+	install(g, "HUSH")
+	g.installed[0].boost = 3
+	var bd := put_in_hand(g, "BORROWED_CREDENTIALS")
 	g.bw = 4
-	check(g.play_card(bd) and g.phase == "CHOICE" and g.pending.kind == "card_break", "BACKDOOR asks for a subroutine")
-	check(g.card_break_ok(0, 3), "BACKDOOR can break the DEADLOCK")
-	g.choose_sub(0, 3)
-	check(g.enc.breached and g.phase == "PLAYER", "BACKDOOR breaks the DEADLOCK: BREACH")
+	g.cred = 8
+	check(g.play_card(bd, 0) and g.phase == "PLAYER", "BORROWED CREDENTIALS requires an ICE and enables HUSH")
+	check(g.break_info(0, 3).ok and g.bw == 3 and g.cred == 0, "HUSH can break the chosen ICE after 1 BW + 8 CRED payment")
+	g.break_sub(0, 3)
+	check(g.enc.breached and g.phase == "PLAYER", "HUSH breaks the DEADLOCK: BREACH")
 	# RIOT: REDLINER, SLEDGE adds TRACE
 	g = Game.new(23)
 	g.new_run("RIOT")
@@ -425,19 +486,55 @@ func test_worm() -> void:
 	g.phase = "RESPONSE"
 	check(not g.worm_ok(0), "WORM can't be used outside your turn")
 
-func test_extraction_bonus() -> void:
+func test_extraction_reserve_cap() -> void:
 	var g := Game.new(5)
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "BASIC_EXTRACTOR")   # reserve 10
+	# This fixture measures four payouts, independently of encounter damage.
+	g.vitae = 100
+	g.max_vitae = 100
+	check(CardDB.def("BASIC_EXTRACTOR").extract == 3, "EXTRACT-002: Basic Extractor pays 3 CRED per turn")
 	g.end_turn()
 	if g.phase == "CHOICE":
 		g.choose(g.hand[0].uid)
-	check(g.cred == 5, "extract 5 (got %d)" % g.cred)
+	check(g.cred == 3 and g.enc.reserve == 7, "extract 3 (got %d)" % g.cred)
 	g.end_turn()
 	if g.phase == "CHOICE":
 		g.choose(g.hand[0].uid)
-	check(g.cred == 11 and g.enc.reserve == 0, "reserve emptied + 10%% bonus (got %d)" % g.cred)
+	check(g.cred == 6 and g.enc.reserve == 4, "second turn extracts another 3 CRED")
+	g.end_turn()
+	if g.phase == "CHOICE":
+		g.choose(g.hand[0].uid)
+	check(g.cred == 9 and g.enc.reserve == 1, "third turn leaves 1 CRED in the reserve")
+	g.end_turn()
+	if g.phase == "CHOICE":
+		g.choose(g.hand[0].uid)
+	check(g.cred == 10 and g.enc.reserve == 0, "final extraction is capped at the remaining 1 CRED, with no bonus")
+	for reserve in [10, 15, 25, 40]:
+		var capped := Game.new(108)
+		capped.new_run("ECHO")
+		capped.enter_node(0)
+		capped.enc.reserve = reserve
+		capped.enc.reserve_start = reserve
+		capped.cred = 7
+		capped.events.clear()
+		capped.extract(5)
+		check(capped.cred == 12 and capped.enc.reserve == reserve - 5, "partial extraction transfers only actual CRED")
+		capped.extract(100)
+		check(capped.cred == 7 + reserve and capped.enc.reserve == 0, "%d reserve pays at most %d, no rounded-up bonus" % [reserve, reserve])
+		capped.extract(100)
+		capped.extract(0)
+		check(capped.cred == 7 + reserve and capped.enc.reserve == 0, "empty reserve never generates more CRED")
+		check(capped.events.filter(func(e): return e.t == "EV-09").size() == 1, "full-extraction notification fires once, not on repeated empty extraction")
+		check(not capped.log.any(func(line): return "CRED bonus" in line), "extraction no longer logs a CRED bonus")
+	var echo := Game.new(109)
+	echo.new_run("ECHO")
+	echo.enter_node(0)
+	install(echo, "BASIC_EXTRACTOR")
+	for _i in 5:
+		echo.end_turn()
+	check(echo.enc.reserve == 0 and echo.cred == 15, "ECHO + Basic Extractor empties COOKIE BANNER in five 3-CRED payouts, not 17 CRED")
 
 func test_rainbow_and_toolbelt() -> void:
 	var g := Game.new(6)
@@ -499,6 +596,162 @@ func test_go_deeper_keeps_programs() -> void:
 	g.go_deeper()
 	check(g.layer == 1 and g.installed.size() == 1 and g.installed[0].boost == 0, "programs stay, boosts reset")
 	check(g.enc.ice[0].id == "CONSENT_FORM", "layer 2 ICE")
+
+func smash_fixture() -> Game:
+	var g := Game.new(105)
+	g.new_run("RIOT")
+	g.enter_node(0)
+	install(g, "SMASH_AND_GRAB")
+	g.bw = 4
+	return g
+
+func test_smash_and_grab_cache() -> void:
+	var d := CardDB.def("SMASH_AND_GRAB")
+	check(d.bw == 1 and d.ram == 1 and d.extract == 3, "RIOT-005: install 1 BW / 1 RAM, extract 3 CRED")
+	for start_trace in [19, 20]:
+		var payout := smash_fixture()
+		payout.trace = start_trace
+		payout.enc.breached = true
+		payout.end_turn()
+		check(payout.enc.reserve == 12, "SMASH & GRAB extracts 3 from the reserve")
+		check(payout.trace == (20 if start_trace == 19 else 20), "SMASH & GRAB adds 1 TRACE only below 20")
+	var g := smash_fixture()
+	var program: int = g.installed[0].inst.uid
+	var target := put_in_hand(g, "PULP_SHIELD")
+	var before_ram := g.ram_used()
+	g.bw = 0
+	check(not g.uninstall_cache(program) and g.installed.size() == 1, "paid CACHE requires 1 BW without uninstalling on failure")
+	g.bw = 4
+	check(not g.uninstall_cache(-1) and g.bw == 4, "paid CACHE rejects an invalid source without spending BW")
+	check(g.uninstall_cache(program), "paid CACHE opens the hand choice")
+	check(g.bw == 3 and g.ram_used() == before_ram - 1 and uid_of(g, g.discard, "SMASH_AND_GRAB") == program, "paid uninstall costs 1 BW, frees RAM, and discards the Program")
+	check(g.pending.kind == "cache" and g.pending.options.has(target) and not g.pending.options.has(program), "another hand card is selected, not SMASH & GRAB")
+	g.choose(program)
+	check(g.phase == "CHOICE", "discarded Program cannot be chosen for CACHE")
+	g.choose(target)
+	var chosen := g._find(g.hand, target)
+	check(g.phase == "PLAYER" and chosen.cached and chosen.cache_turns == 2, "chosen hand card is CACHED until next turn ends")
+	# Ensure cleanup, rather than a possible immediate redraw, controls visibility.
+	g.draw_pile.clear()
+	for _i in 30:
+		g.draw_pile.append(g._new_inst("PROBE"))
+	var reserve: int = g.enc.reserve
+	g.end_turn()
+	check(not g._find(g.hand, target).is_empty() and chosen.cached and chosen.cache_turns == 1, "CACHE survives the activation turn cleanup and next normal draw")
+	check(g.enc.reserve == reserve, "uninstalled SMASH & GRAB no longer extracts")
+	g.animate = true
+	g.end_turn()
+	check(g.phase == "RESPONSE" and not chosen.cached and not chosen.has("cache_turns"), "CACHE expires at the END of next Rustler turn, before the response")
+	g._continue_response()
+	check(g._find(g.hand, target).is_empty() and uid_of(g, g.discard, "PULP_SHIELD") > 0, "expired card follows normal post-response cleanup")
+	var layers := Game.new(106)
+	layers.new_run("RIOT")
+	layers.row = 0
+	layers.available = [1]
+	layers.enter_node(1)
+	install(layers, "SMASH_AND_GRAB")
+	var across := put_in_hand(layers, "PULP_SHIELD")
+	layers.uninstall_cache(layers.installed[0].inst.uid)
+	layers.choose(across)
+	var retained := layers._find(layers.hand, across)
+	layers.enc.breached = true
+	layers.end_turn()
+	check(layers.phase == "DEEPER" and retained.cached and retained.cache_turns == 1, "CACHE survives a breached layer's cleanup")
+	layers.go_deeper()
+	check(layers.enc.turn == 1 and retained.cached and retained.cache_turns == 1, "layer transition does not consume or reset the duration")
+	layers.animate = true
+	layers.end_turn()
+	check(not retained.cached, "CACHE expires next Rustler turn even though layer turn counter reset")
+	var played := smash_fixture()
+	var play_target := put_in_hand(played, "PULP_SHIELD")
+	played.uninstall_cache(played.installed[0].inst.uid)
+	played.choose(play_target)
+	check(played.play_card(play_target), "temporarily CACHED card is playable")
+	var played_card := played._find(played.discard, play_target)
+	check(not played_card.cached and not played_card.has("cache_turns"), "playing a card removes temporary CACHE before a future redraw")
+	var ordinary := smash_fixture()
+	var permanent := put_in_hand(ordinary, "PROBE")
+	ordinary._find(ordinary.hand, permanent).cached = true
+	ordinary.uninstall_cache(ordinary.installed[0].inst.uid)
+	ordinary.choose(permanent)
+	ordinary.end_turn()
+	ordinary.end_turn()
+	check(ordinary._find(ordinary.hand, permanent).cached and not ordinary._find(ordinary.hand, permanent).has("cache_turns"), "existing indefinite CACHE is not shortened")
+	var empty := smash_fixture()
+	empty.hand.clear()
+	check(not empty.uninstall_cache(empty.installed[0].inst.uid) and empty.bw == 4 and empty.installed.size() == 1, "no hand target: no BW spent and no uninstall")
+	var free := smash_fixture()
+	free.unload(free.installed[0].inst.uid)
+	check(free.bw == 4 and free.phase == "PLAYER" and free.pending.is_empty(), "ordinary free unload does not grant CACHE")
+
+func reward_fixture(map_row: int = 1, map_index: int = 1) -> Game:
+	var g := Game.new(107)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, map_row, map_index, "BASIC_EXTRACTOR")
+	g.installed.clear()
+	g.trace = 5
+	g.trace_gained_node = 5
+	g.cred = 17
+	return g
+
+func test_node_card_reward_requires_full_clear() -> void:
+	var early := reward_fixture()
+	var deck_size := early.run_deck.size()
+	early.enc.breached = true
+	early.end_turn()
+	check(early.phase == "DEEPER" and early.reward_options.is_empty(), "CORE-011: first layer offers deeper/leave, not cards")
+	# Stale offers must not survive the early-exit path or be claimable later.
+	early.reward_options = ["DEEP_PROBE"]
+	early.reward_note = "stale reward"
+	early.events.clear()
+	var rng_before: int = early.rng.state
+	early.leave_node()
+	check(early.phase == "MAP" and early.row == 1 and early.available == [0, 1], "early exit advances directly to the next map choices")
+	check(early.reward_options.is_empty() and early.reward_note == "", "early exit clears reward offers and text")
+	check(not early.events.any(func(e): return e.t == "EV-27"), "early exit does not emit a card-reward event")
+	check(early.rng.state == rng_before, "early exit does not roll card rewards")
+	check(early.cred == 17 and early.run_deck.size() == deck_size, "early exit preserves banked CRED without adding cards")
+	check(early.enc.is_empty() and early.hand.is_empty() and early.installed.is_empty(), "early exit performs normal Node cleanup")
+	early.choose_reward("DEEP_PROBE")
+	check(early.run_deck.size() == deck_size, "no reward can be claimed after early exit")
+	var three := reward_fixture()
+	three.node = three.node.duplicate(true)
+	three.node.layers.append(three.node.layers[1].duplicate(true))
+	three.enc.breached = true
+	three.end_turn()
+	three.go_deeper()
+	three.enc.breached = true
+	three.end_turn()
+	check(three.phase == "DEEPER" and three.layers_cleared == 2, "three-layer fixture has two breached layers")
+	three.leave_node()
+	check(three.phase == "MAP" and three.reward_options.is_empty(), "two of three layers cleared still earns no card reward")
+	var full := reward_fixture()
+	full.enc.breached = true
+	full.end_turn()
+	full.go_deeper()
+	full.enc.breached = true
+	full.end_turn()
+	check(full.phase == "REWARD" and full.reward_options.size() == 3 and full.layers_cleared == 2, "breaching the final layer still offers three cards")
+	full.choose_reward(full.reward_options[0])
+	check(full.run_deck.size() == deck_size + 1 and full.phase == "MAP", "full-clear card reward remains claimable")
+	var final_map := reward_fixture(3, 0)
+	final_map.enc.breached = true
+	final_map.end_turn()
+	final_map.leave_node()
+	check(final_map.phase == "SLICE_DONE" and final_map.reward_options.is_empty(), "early exit from the last map Node ends the slice without a card reward")
+	var locked := reward_fixture()
+	locked.enc.breached = true
+	locked.end_turn()
+	locked.lockdown = true
+	locked.leave_node()
+	check(locked.phase == "DEEPER", "LOCKDOWN still prohibits early exit")
+	var clean := reward_fixture()
+	clean.trace_gained_node = 0
+	clean.enc.breached = true
+	clean.end_turn()
+	clean.leave_node()
+	check(clean.cred == 17 + Game.CLEAN_NODE_BONUS and clean.reward_options.is_empty(), "existing clean-node CRED bonus is unchanged; no card is awarded")
 
 func test_full_slice_path() -> void:
 	## A simple bot plays the whole slice: break the cheapest subroutines, prioritising DEADLOCKs.

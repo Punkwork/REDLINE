@@ -611,6 +611,17 @@ func _build_rig() -> void:
 				v.add_child(_lbl("free break ready", 11, Color("#58f29a")))
 		elif d.has("extract"):
 			v.add_child(_lbl("+%d CRED end of turn" % d.extract, 12, DIM))
+		if d.get("uninstall_cache", false):
+			var cache_action := Button.new()
+			cache_action.name = "SmashGrabCache"
+			cache_action.text = "CACHE · 1 BW"
+			var cache_check := g.can_uninstall_cache(p.inst.uid)
+			cache_action.tooltip_text = "Uninstall this Program; choose another hand card to CACHE until the end of your next turn." if cache_check.ok else cache_check.reason
+			cache_action.add_theme_font_size_override("font_size", 11)
+			cache_action.disabled = not cache_check.ok or targeting >= 0
+			var cache_uid: int = p.inst.uid
+			cache_action.pressed.connect(func(): g.uninstall_cache(cache_uid); refresh())
+			v.add_child(cache_action)
 		v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(v)
 		var x := Button.new()
@@ -1090,7 +1101,10 @@ func _build_hand() -> void:
 	for c in g.hand:
 		var cv := _card_view(c.id, c.uid, targeting == c.uid)
 		if c.get("cached", false):
-			var cb := _lbl(" CACHED ", 10, Color("#0b0e13"), RIcon.COL.CLOAK)
+			var cache_label := " CACHED "
+			if c.has("cache_turns"):
+				cache_label = " CACHE · NEXT TURN " if c.cache_turns > 1 else " CACHE · THIS TURN "
+			var cb := _lbl(cache_label, 10, Color("#0b0e13"), RIcon.COL.CLOAK)
 			cv.get_child(0).add_child(cb)
 		var chk := g.can_play(c.uid)
 		if not chk.ok:
@@ -1154,6 +1168,9 @@ func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 	if d.get("trace_cost", 0) > 0:
 		cost.add_child(RIcon.make("TRACE", 16))
 		cost.add_child(_lbl("+%d" % d.trace_cost, 13, RIcon.COL.TRACE))
+	if d.get("cred_cost", 0) > 0:
+		cost.add_child(RIcon.make("CRED", 16))
+		cost.add_child(_lbl("%d" % d.cred_cost, 13, RIcon.COL.CRED))
 	v.add_child(cost)
 	var tags := HBoxContainer.new()
 	if d.has("pick"):
@@ -1208,7 +1225,7 @@ func _build_overlay() -> void:
 				"discard": _overlay_options("DISCARD %d" % g.pending.n, "CAPTCHA: choose a card in your hand to discard.", g.hand.map(func(c): return c.uid), g.hand, func(u): g.choose(u); refresh())
 				"uninstaller": _overlay_options("UNINSTALLER", "Choose a Bloatware in your hand to BURN.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
 				"field_kit": _overlay_options("FIELD KIT", "Choose a PROGRAM from your draw pile.", g.pending.options, g.draw_pile, func(u): g.choose(u); refresh())
-				"cache": _overlay_options("DEAD AIR", "Choose a card to CACHE: it stays in your hand at the end of your turn.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
+				"cache": _overlay_options(g.pending.get("title", "DEAD AIR"), g.pending.get("description", "Choose a card to CACHE: it stays in your hand at the end of your turn."), g.pending.options, g.hand, func(u): g.choose(u); refresh())
 		"DEEPER": _overlay_deeper()
 		"REWARD": _overlay_reward()
 		"SAFEHOUSE": _overlay_safehouse()
@@ -1324,7 +1341,7 @@ func _overlay_deeper() -> void:
 	var nxt: Dictionary = g.node.layers[g.layer + 1]
 	var names: Array = nxt.ice.map(func(x): return IceDB.def(x).name)
 	var v := _dim_box("BREACHED · LAYER %d of %d" % [g.layer + 1, g.node.layers.size()],
-		"Go deeper for a bigger CRED reserve and better card odds, or leave now and keep what you've earned (this Node's card reward at the odds you've reached). Next layer: %s · reserve %d." % [" + ".join(names), nxt.reserve], 900)
+		"BREACH the final layer to earn this Node's card reward. Leave now to keep banked CRED, but forfeit the card and completion rewards. Next layer: %s · reserve %d." % [" + ".join(names), nxt.reserve], 900)
 	var h := HBoxContainer.new()
 	h.add_theme_constant_override("separation", 16)
 	var a := Button.new()
@@ -1332,7 +1349,8 @@ func _overlay_deeper() -> void:
 	a.custom_minimum_size = Vector2(240, 56)
 	a.pressed.connect(func(): g.go_deeper(); refresh())
 	var b := Button.new()
-	b.text = "LEAVE THE NODE"
+	b.text = "LEAVE · NO CARD REWARD"
+	b.name = "LeaveNodeEarly"
 	b.custom_minimum_size = Vector2(240, 56)
 	b.pressed.connect(func(): g.leave_node(); refresh())
 	h.add_child(a)
@@ -1376,6 +1394,7 @@ func _overlay_safehouse() -> void:
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
+	v.add_child(_lbl("HALCYON PLAYTEST 2 · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)

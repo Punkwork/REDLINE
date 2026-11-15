@@ -51,7 +51,7 @@ func _run() -> void:
 		_check(g.phase == "PLAYER", "PATIENT ZERO is resolved")
 		# Deliberately oversized fixture, not a claim about VECTOR's base DRAW.
 		g.hand.clear()
-		var ids := ["STINGER", "REPLICATOR", "INJECT", "RUNTIME_ERROR", "PROBE", "OUTBREAK"]
+		var ids := ["SMASH_AND_GRAB", "BORROWED_CREDENTIALS", "REPLICATOR", "INJECT", "RUNTIME_ERROR", "PROBE", "OUTBREAK", "STINGER"]
 		for i in count - 1:
 			g.hand.append(g._new_inst(ids[i % ids.size()]))
 		var shield := g._new_inst("PULP_SHIELD")
@@ -99,6 +99,30 @@ func _run() -> void:
 		await _settle()
 		_check(g._find(g.hand, shield.uid).is_empty() and g.bw == bw_before - 1 and g.shield == 3, "last card can be clicked and plays normally")
 		_check(g.phase == "PLAYER", "card click does not activate END TURN")
+	# RIOT-005: the rig button must activate the paid uninstall and show a
+	# hand-card choice, not CACHE the discarded extractor itself.
+	main._start_as("RIOT")
+	var riot: Game = main.g
+	riot.enter_node(0)
+	var source := riot._new_inst("SMASH_AND_GRAB")
+	riot.hand.append(source)
+	_check(riot.play_card(source.uid), "install SMASH & GRAB for UI check")
+	var target := riot._new_inst("PULP_SHIELD")
+	riot.hand.append(target)
+	main.refresh()
+	await _settle()
+	var action: Button = main.find_child("SmashGrabCache", true, false)
+	_check(action != null and not action.disabled, "paid CACHE action is available in the rig")
+	if action != null:
+		action.pressed.emit()
+		await _settle()
+		_check(riot.phase == "CHOICE" and riot.pending.options.has(target.uid) and not riot.pending.options.has(source.uid), "rig action opens the correct hand-card choice")
+		_snap("smash_grab_choose")
+		riot.choose(target.uid)
+		main.refresh()
+		await _settle()
+		_check(riot._find(riot.hand, target.uid).cached and riot._installed_entry(source.uid).is_empty(), "hand card is CACHED and the extractor is uninstalled")
+		_snap("smash_grab_cached")
 	print("HAND LAYOUT: %d failures" % failures)
 	main.free()
 	quit(1 if failures else 0)

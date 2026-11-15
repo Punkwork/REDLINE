@@ -16,7 +16,7 @@ const DEFS := {
 		"pick": {"itype": "VOID", "str": 0, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
 		"text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW."},
 	"BASIC_EXTRACTOR": {"name": "Basic Extractor", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"extract": 5, "text": "End of your turn: extract 5 CRED."},
+		"extract": 3, "text": "End of your turn: extract 3 CRED."},
 	"CORTEX_BUFFER": {"name": "CORTEX BUFFER", "type": "PROGRAM", "tags": [], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"text": "Once per encounter, prevent 1 CORTEX."},
 	"PULP_SHIELD": {"name": "PULP Shield", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER",
@@ -105,8 +105,9 @@ const DEFS := {
 	"HUSH": {"name": "HUSH", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"pick": {"itype": "TUMBLER", "str": 0, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
 		"text": "STR 0. Boost: 2 BW → +1 STR. Break: 1 BW."},
-	"BACKDOOR": {"name": "BACKDOOR", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 3, "rarity": "STARTER",
-		"breaker": {"n": 1, "max_str": 3}, "text": "Break 1 subroutine on any ICE with STR 3 or less."},
+	"BORROWED_CREDENTIALS": {"name": "BORROWED CREDENTIALS", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "cred_cost": 8, "rarity": "STARTER",
+		"target": true, "target_types": ["FORTRESS", "VOID"],
+		"text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements and break costs. Costs 8 CRED."},
 	"SLOW_DRIP": {"name": "SLOW DRIP", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"extract": 3, "extract_quiet": 6, "text": "End of your turn: extract 3 CRED. If you have gained no TRACE this encounter, extract 6 instead."},
 	"SMOKESCREEN": {"name": "SMOKESCREEN", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER",
@@ -150,7 +151,8 @@ const DEFS := {
 		"text": "This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. (+3 TRACE)"},
 	"LAY_LOW": {"name": "LAY LOW", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER", "text": "−3 TRACE."},
 	"SMASH_AND_GRAB": {"name": "SMASH & GRAB", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"extract": 8, "extract_trace": 1, "extract_trace_below": 20, "text": "End of your turn: extract 8 CRED. +1 TRACE while your TRACE is under 20."},
+		"extract": 3, "extract_trace": 1, "extract_trace_below": 20, "uninstall_cache": true,
+		"text": "End turn: extract 3 CRED; +1 TRACE if below 20. 1 BW: uninstall this; CACHE another card in hand until the end of your next turn."},
 
 	# --- RIOT pool (Card Pools §6; SIGYL → TUMBLER) ---
 	"SMASH": {"name": "SMASH", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 3, "rarity": "COMMON", "pool": "RIOT",
@@ -220,7 +222,7 @@ const STARTER_GENERALIST := [
 # ECHO-001: SLOW DRIP moved to ECHO's reward pool; ECHO starts with 3 PROBE and 3 PULP Shield.
 # ECHO-003: GHOST SIGNAL (a shared basic, BASIC-001) back in the starter deck; one SMOKESCREEN out.
 const STARTER_ECHO := [
-	"HUSH", "BACKDOOR", "BASIC_EXTRACTOR", "PROBE", "PROBE", "PROBE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD",
+	"HUSH", "BORROWED_CREDENTIALS", "BASIC_EXTRACTOR", "PROBE", "PROBE", "PROBE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD",
 	"SMOKESCREEN", "DEAD_AIR", "GHOST_SIGNAL",
 ]
 ## Cards offered in a Rustler's reward pool besides those tagged with "pool" (rarity used for the reward roll).

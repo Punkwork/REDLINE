@@ -466,6 +466,8 @@ Resolve SYN X in this order:
 
 ## EXTRACT-001 — Basic Extractor payout timing, cap, and banking (LOCKED, approved 2026-11-11)
 
+> **Rate superseded by EXTRACT-002 (2026-11-14): Basic Extractor now pays 3 CRED per eligible end turn, not 5.** Timing/capping/banking remain as applicable under the current Core Rules. Original rate examples below are historical.
+
 **Explicit user approval:** An installed **Basic Extractor** is persistent Software, requiring **1 RAM** and **1 BW to install** under TAX-016. Its printed ability is: **“At the end of your Runner turn, extract 5 CRED from the current ICE encounter's remaining CRED reserve.”** The 5 CRED is a fixed printed payout, not a universal payout for other Extractor profiles.
 
 **Timing:** When the Runner selects END TURN, enter the established Runner End-of-Turn Phase. The installed Basic Extractor's end-of-Runner-turn ability qualifies in that existing window, alongside other eligible end-of-turn abilities, and is ordered and resolved under RULE-010–019, including controller/simultaneous ordering, FIFO, complete-effect and trigger-drain checkpoints, and loop safeguards. It is **not** a newly inserted priority phase or a payout automatically placed ahead of other end-turn effects. Finish eligible end-turn effects and generated triggers, then forfeit remaining BW, then resolve Corporation Response, then perform the single non-triggering post-Corporation hand cleanup under RULE-132/137/138. This reconciles RULE-RT-001–005 with RULE-132's superseding cleanup relocation. The payout occurs **before Corporation Response**, not after survival of it.
@@ -633,12 +635,16 @@ The **Generalist starter deck is exactly 12 physical cards**:
 **Terminology:** EXPLOIT and CLOAK supersede proposed DEFENSE, SHROUD, SAFEGUARD, ASSAULT and COUNTERMEASURE names for these Rustler functional subtypes; COUNTERMEASURE remains available as Corporation terminology. This decision does not change card costs, effects, deck counts, or Icepick profiles.
 
 
-## NODE-EXTRACTION-001 — Full extraction bonus (LOCKED, 2026-11-12)
+## NODE-EXTRACTION-001 — Full extraction bonus (HISTORICAL — REMOVED by CORE-012, 2026-11-14)
+
+> **Not an active rule.** The designer removed this extraction bonus on 2026-11-14. Current extraction is reserve-only under `REDLINE_CORE_RULES.md` §9.2 / CORE-012. The original text below is retained as decision history, including superseded payout examples.
 
 **General Node rule:** If the Rustler extracts **all CRED in a Node's finite extractable CRED reserve (100%)**, award a **one-time bonus equal to 10% of that Node's original CRED reserve**. The bonus is additional earned CRED, **not** a refill of the Node's reserve, and does not count as CRED remaining to extract. It applies regardless of which eligible extraction effect empties the reserve; it is **not** exclusive to Basic Extractor. Award immediately when the reserve reaches zero through extraction; do not award again for the same Node. A Node not fully extracted receives no full-extraction bonus. Example original reserves: 15 CRED -> +1.5 CRED (16.5 total), 25 -> +2.5 (27.5 total), 40 -> +4 (44 total). **Fractional CRED handling/rounding is not yet defined**; these examples express the exact 10% mathematical bonus and must not be interpreted as a finalized fractional-CRED accounting rule.
 
 
-## NODE-EXTRACTION-002 — General Node full-extraction bonus rounding (LOCKED, 2026-11-12)
+## NODE-EXTRACTION-002 — General Node full-extraction bonus rounding (HISTORICAL — REMOVED by CORE-012, 2026-11-14)
+
+> **Not an active rule.** The designer removed this extraction bonus on 2026-11-14. Current extraction is reserve-only under `REDLINE_CORE_RULES.md` §9.2 / CORE-012. The original text below is retained as decision history, including superseded payout examples.
 
 **This is a global game rule for ALL Nodes**, not an ability of an individual card, extractor, Node type, or training encounter. Whenever the Rustler extracts **100% of a Node's original finite CRED reserve**, grant **one bonus equal to 10% of the original reserve, rounded UP to the nearest whole CRED**: `bonus_CRED = ceil(original_node_CRED_reserve * 0.10)`. This bonus is paid once per Node, adds to banked earnings, does not replenish the Node's extractable reserve, and is independent of the extraction method. No full-extraction bonus is paid if any reserve CRED remains unextracted. Example: 15 reserve -> +2 bonus, 17 total; 25 -> +3, 28 total; 40 -> +4, 44 total. This explicitly **supersedes the fractional-CRED examples and open rounding question in NODE-EXTRACTION-001**. CRED bonuses under this rule are always whole numbers.
 

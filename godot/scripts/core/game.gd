@@ -183,7 +183,7 @@ func skip_ready_rig() -> void:
 func _start_encounter() -> void:
 	var L: Dictionary = node.layers[layer]
 	enc = {"ice": [], "reserve": L.reserve, "reserve_start": L.reserve, "turn": 0, "breached": false,
-		"bonus_paid": false, "spam_filter_used": false, "cortex_buffer_used": false, "failsafe_used": false,
+		"spam_filter_used": false, "cortex_buffer_used": false, "failsafe_used": false,
 		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0, "bw_drain": 0, "bw_drained": 0,
 		"trace_gained_enc": 0, "smoke": 0, "vanish": false, "blackout": false, "decoy": false, "cloak_turn": 0,
 		"purge_limit": IceDB.CORPS.HALCYON.purge_limit, "purges": 0, "purged_now": false, "skipped": false}
@@ -391,6 +391,10 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Can't be played"}
 	if bw < card_cost(inst.id):
 		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id)}
+	if cred < int(d.get("cred_cost", 0)):
+		return {"ok": false, "reason": "Need %d CRED" % d.cred_cost}
+	if d.has("target_types") and not enc.ice.any(func(ice): return d.target_types.has(IceDB.def(ice.id).type)):
+		return {"ok": false, "reason": "Need a FORTRESS or VOID target"}
 	if d.has("breaker") and not d.breaker.get("same_ice", false) and _breaker_targets(d.breaker, -1).is_empty():
 		return {"ok": false, "reason": "No subroutine it can break"}
 	if d.has("breaker") and d.breaker.get("same_ice", false):
@@ -419,12 +423,16 @@ func play_card(uid: int, target: int = -1) -> bool:
 	if d.has("target_type") and IceDB.def(enc.ice[target].id).type != d.target_type:
 		_say("%s needs a %s." % [d.name, d.target_type])
 		return false
+	if d.has("target_types") and not d.target_types.has(IceDB.def(enc.ice[target].id).type):
+		_say("Choose a FORTRESS or VOID for %s." % d.name)
+		return false
 	if d.has("breaker") and d.breaker.get("same_ice", false) and (target < 0 or _breaker_targets(d.breaker, target).is_empty()):
 		_say("Choose an ICE at STR 0." if d.breaker.has("max_str") else "Choose an ICE with 5 or more virus counters.")
 		return false
 	_take_from(hand, uid)
 	played[inst.id] = int(played.get(inst.id, 0)) + 1
 	bw -= card_cost(inst.id)
+	cred -= int(d.get("cred_cost", 0))
 	if d.type == "BLOATWARE":
 		burned.append(inst)  # SPAM: pay 1 BW to clear it
 		_say("SPAM cleared.")
@@ -524,7 +532,13 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"SHATTER":
 			enc["shatter_ice"] = enc.ice[target]
 			_say("SHATTER: SLEDGE can break %s this turn." % IceDB.def(enc.ice[target].id).name)
-		"BACKDOOR", "BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER":
+		"BORROWED_CREDENTIALS":
+			if not enc.has("borrowed_ice"):
+				enc.borrowed_ice = []
+			if not enc.borrowed_ice.any(func(ice): return is_same(ice, enc.ice[target])):
+				enc.borrowed_ice.append(enc.ice[target])
+			_say("BORROWED CREDENTIALS: HUSH can break %s this turn." % IceDB.def(enc.ice[target].id).name)
+		"BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER":
 			var br: Dictionary = CardDB.def(inst.id).breaker
 			pending = {"kind": "card_break", "n": br.n, "ice": target if br.get("same_ice", false) else -1,
 				"breaker": br, "card_uid": inst.uid, "card": CardDB.def(inst.id).name}
@@ -595,6 +609,42 @@ func unload(uid: int) -> void:
 			installed.remove_at(i)
 			return
 
+func can_uninstall_cache(uid: int) -> Dictionary:
+	if phase != "PLAYER":
+		return {"ok": false, "reason": "Not your turn"}
+	var program := _installed_entry(uid)
+	if program.is_empty() or not CardDB.def(program.inst.id).get("uninstall_cache", false):
+		return {"ok": false, "reason": "SMASH & GRAB must be installed"}
+	if bw < 1:
+		return {"ok": false, "reason": "Need 1 BW"}
+	if hand.filter(func(c): return c.uid != uid).is_empty():
+		return {"ok": false, "reason": "Need another card in hand to CACHE"}
+	return {"ok": true, "reason": ""}
+
+func uninstall_cache(uid: int) -> bool:
+	if not can_uninstall_cache(uid).ok:
+		return false
+	var options := hand.filter(func(c): return c.uid != uid).map(func(c): return c.uid)
+	bw -= 1
+	unload(uid)
+	# Two end-turn checkpoints: the activation turn, then the next Rustler
+	# turn. Count turns, not enc.turn, which restarts at each ICE layer.
+	pending = {"kind": "cache", "options": options, "cache_turns": 2,
+		"title": "SMASH & GRAB", "description": "Choose another card in your hand. CACHE expires at the end of your next Rustler turn."}
+	phase = "CHOICE"
+	_say("SMASH & GRAB uninstalled for 1 BW. Choose a hand card to CACHE.")
+	return true
+
+func _expire_temporary_cache() -> void:
+	for card in hand:
+		if not card.has("cache_turns"):
+			continue
+		card.cache_turns -= 1
+		if card.cache_turns <= 0:
+			card.cached = false
+			card.erase("cache_turns")
+			_say("%s: temporary CACHE expires." % CardDB.def(card.id).name)
+
 func end_turn() -> void:
 	if phase != "PLAYER":
 		return
@@ -615,6 +665,8 @@ func end_turn() -> void:
 	for c in hand:
 		if c.id == "TRACER":
 			add_trace(3, false)
+	_expire_temporary_cache()
+	enc.erase("borrowed_ice")
 	bw = 0
 	# SHATTER's price: SLEDGE drops to STR 0 for the rest of the encounter.
 	if enc.get("shatter_ice") != null:
@@ -763,9 +815,16 @@ func choose(uid: int) -> void:
 			return
 		"cache":
 			var cc := _find(hand, uid)
-			if not cc.is_empty():
-				cc.cached = true
-				_say("%s is CACHED." % CardDB.def(cc.id).name)
+			if cc.is_empty():
+				return
+			if pending.has("cache_turns"):
+				# Do not shorten an already indefinite CACHE effect.
+				if not cc.cached or cc.has("cache_turns"):
+					cc.cache_turns = maxi(int(cc.get("cache_turns", 0)), int(pending.cache_turns))
+			else:
+				cc.erase("cache_turns")
+			cc.cached = true
+			_say("%s is CACHED." % CardDB.def(cc.id).name)
 		"uninstaller":
 			var c := _take_from(hand, uid)
 			burned.append(c)
@@ -832,7 +891,8 @@ func break_info(i: int, s: int) -> Dictionary:
 		var extra := 0
 		# SHATTER: SLEDGE breaks the chosen ICE whatever its type, this turn only.
 		var shattered: bool = p.inst.id == "SLEDGE" and enc.get("shatter_ice") != null and is_same(enc.get("shatter_ice"), ice)
-		if pk.itype != "ANY" and pk.itype != d.type and not shattered:
+		var borrowed: bool = p.inst.id == "HUSH" and enc.get("borrowed_ice", []).any(func(target): return is_same(target, ice))
+		if pk.itype != "ANY" and pk.itype != d.type and not shattered and not borrowed:
 			if not adapter:
 				continue
 			extra = 1
@@ -988,7 +1048,16 @@ func _finish_node(full: bool) -> void:
 	if trace_gained_node == 0:
 		cred += CLEAN_NODE_BONUS
 		_say("Clean Node: +%d CRED." % CLEAN_NODE_BONUS)
-	reward_note = "Full clear: completion reward (CAP or PATCHWORK) is not in this slice." if full else ""
+	# CORE-011: leaving before the final layer forfeits the card reward.
+	# Do not roll offers, emit the reward event, or stop at a reward screen.
+	reward_options = []
+	reward_note = ""
+	if not full:
+		_say("Left the Node early: no card reward.")
+		_end_ice_node()
+		_complete_map_step()
+		return
+	reward_note = "Full clear: completion reward (CAP or PATCHWORK) is not in this slice."
 	reward_options = _roll_rewards(layers_cleared)
 	phase = "REWARD"
 	_event("EV-27")
@@ -1191,11 +1260,10 @@ func extract(n: int) -> void:
 	var amt: int = min(n, enc.reserve)
 	enc.reserve -= amt
 	cred += amt
-	if enc.reserve == 0 and not enc.bonus_paid and enc.reserve_start > 0:
-		enc.bonus_paid = true
-		var bonus := int(ceil(enc.reserve_start * 0.1))
-		cred += bonus
-		_say("Reserve fully extracted: +%d CRED bonus." % bonus)
+	# CORE-012: extraction only transfers the remaining reserve; no bonus.
+	# Keep the full-extraction notification on the actual depletion event.
+	if amt > 0 and enc.reserve == 0:
+		_say("Reserve fully extracted.")
 		_event("EV-09")
 
 # =====================================================================
@@ -1228,6 +1296,11 @@ func _take_from(a: Array, uid: int) -> Dictionary:
 		if a[i].uid == uid:
 			var c: Dictionary = a[i]
 			a.remove_at(i)
+			if is_same(a, hand) and c.has("cache_turns"):
+				# The duration applies only while retained in this hand, not to
+				# later redraws of the same physical card after play/discard.
+				c.cached = false
+				c.erase("cache_turns")
 			return c
 	return {}
 

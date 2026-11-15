@@ -1300,3 +1300,58 @@ Open: WORM copy vs move (WORMHOLE, COCKTAIL) — currently copy.
 **Merge review:** PR #1 (`docs/simplified-design`, `c42adc5`) contains an alternate JSON-backed heist implementation, data, icons, and tests; it is not wholly contained in PR #2. Preserve it for deliberate comparison rather than assuming PR #2 is a complete code superset. No merge/rebase/deletion was performed.
 
 **Next dependency:** designer Windows playtest via `HALCYON_PLAYTEST_GUIDE.md`. Record action → actual → expected and source commit, then fix confirmed problems before merging the baseline or changing balance.
+
+
+## 2026-11-14 — RIOT-005 / CORE-011: designer-requested local gameplay fixes; build held
+
+**RIOT-005 (explicit designer instruction):** SMASH & GRAB installs for 1 BW / 1 RAM, extracts 3 CRED at end turn instead of 8, and retains +1 TRACE only while below 20. Spend 1 BW to uninstall it to discard and choose another card in hand to CACHE. Designer clarified expiry is **the end of the Rustler's next turn**, not the activation turn, and the cached card is another hand card, not the uninstalled Program. Implemented a distinct rig action/choice, immediate cost/RAM release, bounded retention counted across layer boundaries, expiry before the following Corporation Response, and removal of the temporary marker on leaving hand. Ordinary free unload has no CACHE benefit; existing indefinite CACHE is not shortened.
+
+**CORE-011 (explicit designer revision):** leaving a Node before breaching the final ICE layer gives **no card reward**. Early exit clears pending offers, does not roll rewards or emit EV-27, performs normal Node teardown, and advances directly to the map or slice completion. Full clears keep the usual choice; CRED and exit restrictions are unchanged. Updated the leave dialog, Core Rules and Card Pools to supersede the prior early-exit reward rule.
+
+**Verification:** official Godot 4.3 Linux, rules script **181 passed / 0 failed**. New checks cover SMASH & GRAB extraction/TRACE boundaries, cost/target validation, paid uninstall, temporary CACHE timing, layer transition, and independent existing CACHE; early exit after 1/2 and 2/3 layers, no reward RNG/event/stale claim, full-clear reward, last-map-Node exit, cleanup/CRED and LOCKDOWN. RIOT-005 virtual-display checks passed for the actual rig button and chosen hand card; 12 images generated including 6–16 card hands. Known virtual-display/shutdown resource warnings persist. No Windows runtime claim.
+
+**Delivery hold:** user said “don't rebuild just yet.” No export, push, or hosted workflow was triggered for these local changes. The downloadable artifact at 807f003 predates them. Keep fixes together locally until the user is ready to rebuild; do not silently push the auto-building branch.
+
+
+## 2026-11-14 — CORE-012: full-extraction CRED bonus removed (local, build held)
+
+**Explicit designer instruction:** “let's remove the bonus and remove the bonus rule from the game rules. record this change in the appropriate documentation”. This follows ECHO receiving 17 CRED from COOKIE BANNER's 15-CRED reserve (15 extracted + former rounded-up 10% bonus of 2).
+
+**Implementation:** removed additional CRED payment and `bonus_paid` state from `game.gd`. Full depletion still logs “Reserve fully extracted.” and emits EV-09 on the actual positive-to-zero transfer; repeated attempts on an empty reserve neither pay CRED nor re-emit depletion. Only actual reserve CRED is transferred. No change to other rewards or the separate Clean Node bonus.
+
+**Documentation:** removed the bonus from Core Rules §9.2; recorded CORE-012 superseding NODE-EXTRACTION-001/002; corrected ECHO's strategy text; marked the older extraction-bonus entries in Master Design, World Bible, Core Design/Worldbuilding, Rule Review 126 and Current Status as historical/removed. Their old examples remain only as clearly superseded history. Updated Current Status and Codex handoff; no canon verses were changed.
+
+**Verification:** `godot --headless --path godot --script res://tests/test_game.gd` using official 4.3 Linux: **203 passed, 0 failed**. Regression renamed `test_extraction_reserve_cap`; it covers partial/final/over-sized/repeated-empty transfers for reserves 10/15/25/40, preservation of existing banked CRED, single depletion notification, no bonus log, and an ECHO + Basic Extractor COOKIE BANNER payout of exactly 15 after three end turns. Prior RIOT-005 and CORE-011 checks remain passing.
+
+**Delivery:** still local; no push, export, or CI triggered because the designer requested holding the rebuild. The 807f003 downloadable Windows artifact still has the old bonus until the next authorized build.
+
+
+## 2026-11-14 — EXTRACT-002: Basic Extractor reduced to 3 CRED (local, build held)
+
+**Designer instruction:** “Revise extractor to extract 3 Creds a turn instead of 5.” Applied to **Basic Extractor**, the shared 5-CRED starter Program; no other named Extractor was changed. Printed extraction and card text now say 3. Installation remains 1 BW / 1 RAM. All four starter tables, Core Rules and Card Pools were synchronized; EXTRACT-002 supersedes EXTRACT-001's former payout amount. Older EXTRACT-001 sections have explicit rate-supersession notes.
+
+**Executed:** official Godot 4.3 Linux rules command, **206 passed / 0 failed**. Tests verify 3/3/3/1 payouts from a 10-CRED reserve and five 3-CRED payouts from COOKIE BANNER's 15, with no full-extraction bonus. The four-turn extraction fixture has extra test-only health to isolate payout checks from combat death; production health was not changed. All earlier local fixes pass.
+
+**Hold remains:** no push, export or hosted CI; user has not requested a new build.
+
+
+## 2026-11-14 — ECHO-005: BORROWED CREDENTIALS replaces BACKDOOR (local, build held)
+
+**Designer instruction:** revise BACKDOOR to the proposed BORROWED CREDENTIALS SCRIPT, require an ICE choice when playing, and confirmed “1 BW + 8 cred”. Replaced the starter ID/definition with BORROWED_CREDENTIALS. Valid FORTRESS/VOID targeting grants HUSH compatibility with that specific ICE this turn; normal Strength/boost/break costs, reveal rules and passive restrictions remain. Both costs and target are checked before spending; successful plays pay 1 BW + 8 CRED and resolve to discard, not an automatic subroutine break. Compatibility expires at end turn and on new encounters. Existing HUSH/TUMBLER matching is unchanged.
+
+Added CRED-cost display to card frames, revised the original BACKDOOR regression, added coverage for payment failure, missing/invalid ICE, FORTRESS/VOID compatibility, other-target exclusion, hidden VOID restrictions, actual HUSH breaks, expiry and layer boundaries. Updated Core Rules, Rustlers, Card Pools, Current Status and Codex handoff.
+
+**Executed:** official Godot 4.3 Linux rules script **227 passed, 0 failed**. All previous local changes remain included. Bot strategy was not rewritten; earlier ECHO bot win rates do not establish balance of this new card.
+
+**Delivery hold:** no push or build/export/hosted CI triggered. The published 807f003 executable predates these local changes.
+
+
+## 2026-11-14 — BUILD-PLAYTEST-002: accumulated gameplay fixes released for the next playtest
+
+**Authorization:** designer requested “build the next playtest version”, lifting the explicit delivery hold. Starting point is 807f003 on `codex/halcyon-playtest-stabilization`; latest branch head was checked before publication to preserve other work.
+
+**Included:** RIOT-005, CORE-011, CORE-012, EXTRACT-002 and ECHO-005 as recorded above. No additional card balance or open design decisions are introduced. Set `application/config/version` to **0.2.0-playtest.2** and label Rustler selection **HALCYON PLAYTEST 2**. Updated the bundled guide with all changes, distinguishing the previous executable.
+
+**Validation:** official Godot 4.3 Linux import and rules suite, **227 passed / 0 failed**; five virtual-display screenshot scripts include the new `shot_playtest2.gd` end-to-end UI scenario. That scenario selects BORROWED CREDENTIALS then its target, checks payment of exactly 1 BW and 8 CRED, breaks with HUSH, and presses the early-exit control to verify no reward. Large-hand checks now render the new dual-cost card as well. Added the scenario to the Actions workflow. Existing virtual-display V-Sync/resource-shutdown diagnostics are not Windows-runtime results.
+
+**Delivery:** push the reviewed changes to the stabilization branch with a lease; GitHub Actions verifies and exports a fresh Windows x86_64 package plus guide/checklist/checksums. The actual hosted result and artifact identify the exact release commit. No source merge to main or historical-branch consolidation is performed. Designer Windows playtest remains the next validation step.

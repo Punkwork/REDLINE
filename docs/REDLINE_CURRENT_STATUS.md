@@ -6,6 +6,44 @@
 
 > **NAME-001 (2026-11-13):** ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules). Terms in this document were updated to match; rule and decision IDs keep their original names (e.g. TRAINING-THREE-ICE-SENTRY-001). See `REDLINE_CORE_RULES.md` (NAME-001).
 
+## HALCYON Playtest 2 delivery — 2026-11-14 (latest)
+
+**Build hold lifted:** the designer requested “build the next playtest version”. The older no-push/no-rebuild notes below describe the preceding feedback session, not an active hold.
+
+- Version **0.2.0-playtest.2**, visibly labeled **HALCYON PLAYTEST 2** on Rustler selection.
+- Includes **RIOT-005** (SMASH & GRAB 3 CRED + paid temporary CACHE), **CORE-011** (no early-exit card reward), **CORE-012** (no full-extraction bonus), **EXTRACT-002** (Basic Extractor 3 CRED), and **ECHO-005** (BORROWED CREDENTIALS replaces BACKDOOR; **1 BW + 8 CRED**, chosen FORTRESS/VOID enables HUSH this turn).
+- Local official Godot 4.3 rules suite: **227 passed, 0 failed**. Screenshot/input checks include readable large hands, paid CACHE, selecting/paying for BORROWED CREDENTIALS, and leaving through the UI without a card reward. Five screenshot scripts now run in the workflow.
+- The branch workflow exports the checked revision and attaches the Windows package, verification images/logs, guide and checksums. Hosted results/download must be read from that run, not inferred from local tests. The old 807f003 Windows artifact is Playtest 1 and lacks these gameplay changes.
+- Rules remain in `REDLINE_CORE_RULES.md` and current approved revisions. No PR merges, open-rule decisions, bot strategy rewrite, or real Windows runtime/playtest is asserted.
+
+## Latest local card revision — 2026-11-14: ECHO-005 (not rebuilt)
+
+- BACKDOOR is replaced by **BORROWED CREDENTIALS**, a **1 BW + 8 CRED SCRIPT**. Select a FORTRESS or VOID; HUSH gains compatibility with that selected ICE this turn, with normal Strength/boost/break costs. Invalid targeting or insufficient funds spends nothing. ECHO still starts with 12 cards.
+- Card frame now displays the additional CRED cost. Current Core Rules, Rustlers and Card Pools reflect the replacement.
+- **227/227 rules checks pass locally** in Godot 4.3, including dual costs, target validation, normal break restrictions, expiry and layer boundaries. The simple bot has not been taught to plan around the new paid compatibility ability; its old ECHO balance results are not validation of this revision.
+- No push, export/rebuild or hosted CI: designer's build hold remains in force. Published 807f003 is still the pre-revision artifact.
+
+## Latest local fix — 2026-11-14: EXTRACT-002 (not rebuilt)
+
+- Shared **Basic Extractor now pays 3 CRED per eligible end turn**, down from 5. Install cost remains 1 BW / 1 RAM. Other Extractors are unchanged; SMASH & GRAB already pays 3 under RIOT-005.
+- Updated all four starter-deck tables, the Core Rules card entry, Card Pools audit and EXTRACT-002 decision. EXTRACT-001's old rate is explicitly superseded.
+- **206/206 rules checks pass locally** in Godot 4.3: 3-CRED turn payouts, a partial final payout of 1 from a 10 reserve, and five payouts totaling 15 for ECHO/COOKIE BANNER; prior fixes remain passing.
+- Still no push, rebuild/export, or hosted CI. The downloadable 807f003 build does not include these local gameplay revisions.
+
+## Latest local fix — 2026-11-14: CORE-012 (not rebuilt)
+
+- Removed the rounded-up 10% full-extraction CRED bonus from the engine and Core Rules. COOKIE BANNER extraction is capped at its **15-CRED reserve**, not 17. Empty reserves pay no more CRED.
+- Preserved the depletion notification and unrelated CRED sources; the separate Clean Node rule is unchanged. Historical NODE-EXTRACTION-001/002 entries are explicitly retired below and in the archival design documents.
+- **203/203 rules checks pass locally** in official Godot 4.3, including an ECHO/Basic Extractor COOKIE BANNER regression and reserve caps of 10/15/25/40.
+- Build hold remains: no push, Windows rebuild, or hosted CI for CORE-012, CORE-011, or RIOT-005. The published 807f003 artifact predates all three fixes.
+
+## Local fixes — 2026-11-14: RIOT-005 / CORE-011 (not rebuilt)
+
+- **SMASH & GRAB:** 1 BW install / 1 RAM, end-turn extraction **3 CRED**, +1 TRACE only below 20. New **1 BW uninstall-and-CACHE** action selects another hand card until the **end of the next Rustler turn**; ordinary free unload grants no CACHE.
+- **Early Node exit:** no card reward unless the final ICE layer is breached and completed. Early exit cleans up and advances directly to the map/slice completion; banked CRED remains. The on-screen leave warning and Core Rules/Card Pools descriptions now agree.
+- **Local Godot 4.3 checks: 181 passed, 0 failed** (includes both fixes). RIOT-005 display/input smoke passed, including the rig action and hand-card selection; this was performed before CORE-011's text/exit-flow update. Headless startup after the combined changes passes.
+- **Build hold:** designer explicitly said not to rebuild yet. These source changes have not been pushed, exported, or run through hosted CI. The previously downloadable Windows artifact and green GitHub run describe **807f003**, before these gameplay changes.
+
 ## Verification handoff — 2026-11-14: QA-HALCYON-001 / UI-003 / CI-001
 
 - Work starts from `8a7dad9` on a separate stabilization branch; game rules, cards, ICE values, and open design decisions are unchanged.
@@ -535,6 +573,8 @@ Resolve SYN X in this order:
 
 ## EXTRACT-001 — Basic Extractor payout timing, cap, and banking (LOCKED, approved 2026-11-11)
 
+> **Rate superseded by EXTRACT-002 (2026-11-14): Basic Extractor now pays 3 CRED per eligible end turn, not 5.** Timing/capping/banking remain as applicable under the current Core Rules. Original rate examples below are historical.
+
 **Explicit user approval:** An installed **Basic Extractor** is persistent Software, requiring **1 RAM** and **1 BW to install** under TAX-016. Its printed ability is: **“At the end of your Runner turn, extract 5 CRED from the current ICE encounter's remaining CRED reserve.”** The 5 CRED is a fixed printed payout, not a universal payout for other Extractor profiles.
 
 **Timing:** When the Runner selects END TURN, enter the established Runner End-of-Turn Phase. The installed Basic Extractor's end-of-Runner-turn ability qualifies in that existing window, alongside other eligible end-of-turn abilities, and is ordered and resolved under RULE-010–019, including controller/simultaneous ordering, FIFO, complete-effect and trigger-drain checkpoints, and loop safeguards. It is **not** a newly inserted priority phase or a payout automatically placed ahead of other end-turn effects. Finish eligible end-turn effects and generated triggers, then forfeit remaining BW, then resolve Corporation Response, then perform the single non-triggering post-Corporation hand cleanup under RULE-132/137/138. This reconciles RULE-RT-001–005 with RULE-132's superseding cleanup relocation. The payout occurs **before Corporation Response**, not after survival of it.
@@ -728,12 +768,16 @@ The **Generalist starter deck is exactly 12 physical cards**:
 **Terminology:** EXPLOIT and CLOAK supersede proposed DEFENSE, SHROUD, SAFEGUARD, ASSAULT and COUNTERMEASURE names for these Rustler functional subtypes; COUNTERMEASURE remains available as Corporation terminology. This decision does not change card costs, effects, deck counts, or Icepick profiles.
 
 
-## NODE-EXTRACTION-001 — Full extraction bonus (LOCKED, 2026-11-12)
+## NODE-EXTRACTION-001 — Full extraction bonus (HISTORICAL — REMOVED by CORE-012, 2026-11-14)
+
+> **Not an active rule.** The designer removed this extraction bonus on 2026-11-14. Current extraction is reserve-only under `REDLINE_CORE_RULES.md` §9.2 / CORE-012. The original text below is retained as decision history, including superseded payout examples.
 
 **General Node rule:** If the Rustler extracts **all CRED in a Node's finite extractable CRED reserve (100%)**, award a **one-time bonus equal to 10% of that Node's original CRED reserve**. The bonus is additional earned CRED, **not** a refill of the Node's reserve, and does not count as CRED remaining to extract. It applies regardless of which eligible extraction effect empties the reserve; it is **not** exclusive to Basic Extractor. Award immediately when the reserve reaches zero through extraction; do not award again for the same Node. A Node not fully extracted receives no full-extraction bonus. Example original reserves: 15 CRED -> +1.5 CRED (16.5 total), 25 -> +2.5 (27.5 total), 40 -> +4 (44 total). **Fractional CRED handling/rounding is not yet defined**; these examples express the exact 10% mathematical bonus and must not be interpreted as a finalized fractional-CRED accounting rule.
 
 
-## NODE-EXTRACTION-002 — General Node full-extraction bonus rounding (LOCKED, 2026-11-12)
+## NODE-EXTRACTION-002 — General Node full-extraction bonus rounding (HISTORICAL — REMOVED by CORE-012, 2026-11-14)
+
+> **Not an active rule.** The designer removed this extraction bonus on 2026-11-14. Current extraction is reserve-only under `REDLINE_CORE_RULES.md` §9.2 / CORE-012. The original text below is retained as decision history, including superseded payout examples.
 
 **This is a global game rule for ALL Nodes**, not an ability of an individual card, extractor, Node type, or training encounter. Whenever the Rustler extracts **100% of a Node's original finite CRED reserve**, grant **one bonus equal to 10% of the original reserve, rounded UP to the nearest whole CRED**: `bonus_CRED = ceil(original_node_CRED_reserve * 0.10)`. This bonus is paid once per Node, adds to banked earnings, does not replenish the Node's extractable reserve, and is independent of the extraction method. No full-extraction bonus is paid if any reserve CRED remains unextracted. Example: 15 reserve -> +2 bonus, 17 total; 25 -> +3, 28 total; 40 -> +4, 44 total. This explicitly **supersedes the fractional-CRED examples and open rounding question in NODE-EXTRACTION-001**. CRED bonuses under this rule are always whole numbers.
 

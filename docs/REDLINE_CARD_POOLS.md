@@ -40,8 +40,8 @@ So cards are priced consistently, **1 BW is worth about**:
 
 **Prices raised by UPL-008** so a corporation's CRED buys about **2–3 cards**, keeping a winning run at about 30 cards added in total (Core Rules §9.1).
 
-- Card rewards (once per ICE Node, CORE-010): **2 shared + 1 Rustler-specific** (approved RUSTLER-007). Each slot rolls its rarity separately.
-- **Rarity improves with depth** (CORE-010): the odds above are for a Node left after 1 layer. 2 layers cleared: 45/40/15%. 3 layers: 30/45/25%.
+- Card rewards (once per **fully cleared** ICE Node, CORE-010 as amended by CORE-011; **none for leaving early**): **2 shared + 1 Rustler-specific** (approved RUSTLER-007). Each slot rolls its rarity separately.
+- **Rarity improves with depth** (CORE-010): the odds above are for a fully cleared 1-layer Node. Fully cleared 2-layer Nodes: 45/40/15%. Fully cleared 3-layer Nodes: 30/45/25%. Partial clears give no card reward (CORE-011).
 - **Node completion reward** (Core Rules §9.3): a CAP or a free PATCHWORK upgrade (no longer a card, since CORE-010).
 - **Console Lab card removal:** 40 CRED (working).
 
@@ -56,13 +56,13 @@ Rule: every starter card is the weakest version of its role, with at least one c
 | PROBE (−2 STR) | All | DEEP PROBE (twice the effect per card), BALANCED LOAD, STRESS TEST, KEYLOGGER | — |
 | PULP Shield (+3 SHIELD) | All | HARDENED SHELL, MIRROR, SURGE PROTECTOR | — |
 | GHOST SIGNAL | Generalist, ECHO, VECTOR | SCRUB (not BURNED), PROXY CHAIN, VANISH | — |
-| Basic Extractor (5 CRED) | All | DATA SIPHON, SKIMMER | — |
+| Basic Extractor (3 CRED) | All | DATA SIPHON, SKIMMER | — |
 | FORTRESS Icepick | Generalist | **BATTERING RAM**, JACKHAMMER | BATTERING RAM gains a free first break each turn |
 | SIGYL Icepick | Generalist | PASSKEY, RAINBOW TABLE | — |
 | VOID Icepick | Generalist | TASER, STUN BATON | — |
 | CORTEX BUFFER | Generalist | FAILSAFE | — |
 | HUSH | ECHO | PASSKEY, RAINBOW TABLE | **HUSH weakened:** STR 4 → 3, boost 1 → 2 BW (it was better than PASSKEY) |
-| BACKDOOR | ECHO | SIDE CHANNEL, SKELETON KEY, ADAPTER | — |
+| BORROWED CREDENTIALS | ECHO | SIDE CHANNEL, SKELETON KEY, ADAPTER | ECHO-005: replaces BACKDOOR; 1 BW + 8 CRED for chosen-ICE HUSH compatibility this turn |
 | SLOW DRIP | ECHO | DATA SIPHON, SILENT PARTNER, LONG GAME | — |
 | SMOKESCREEN | ECHO | MIRROR, PATIENCE, PROXY CHAIN | — |
 | DEAD AIR | ECHO | STASH (CACHE 2) | — |

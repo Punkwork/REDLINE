@@ -137,3 +137,51 @@ This follow-up supersedes known issues 1/1a and the stale test-count part of iss
 - **Merge correction:** PR #1 contains a separate heist implementation and JSON/assets absent from PR #2, so “PR #2 is the superset” above must not be interpreted as a verified code-superset claim. Keep PR #1 for explicit review; no PR was merged.
 
 The exact changed files and final revision are available in the stabilization PR. Continue from that revision after checking whether Claude or the designer has made newer changes.
+
+
+## 9. Local gameplay fixes — 2026-11-14 (build/export hold)
+
+The user requested two changes after the 807f003 playtest artifact:
+
+- **RIOT-005:** SMASH & GRAB extracts 3 CRED, still adds 1 TRACE only below 20. Its 1-BW paid uninstall goes to discard and CACHES **another chosen hand card until the end of the Rustler's next turn**. Duration crosses layers correctly; ordinary free unload is separate and grants no CACHE.
+- **CORE-011:** early exit before breaching the final ICE layer gives **no card reward**. Go straight through Node cleanup to map/slice completion. Preserve CRED; keep full-clear rewards.
+
+Rules/docs, core engine, card definition, UI and regressions were updated locally. **181 rules checks pass**. The RIOT-005 rig/hand-choice display check also passed. These edits are **not in the published 807f003 Windows build or hosted test results**.
+
+**Explicit user hold:** do not rebuild yet. No push/export/CI was triggered for these fixes. Preserve them while collecting further feedback. Only update the auto-building GitHub branch when the user resumes delivery.
+
+
+## 10. CORE-012 — extraction bonus removed (local, 2026-11-14)
+
+Designer removed the full-extraction bonus. Extraction now transfers only remaining reserve CRED: COOKIE BANNER pays **15**, not 17, through extraction. No bonus flag/payment remains; EV-09/full-extraction notification stays, with no repeats from an empty reserve. The separate Clean Node reward and other CRED sources are unchanged.
+
+Core Rules §9.2 and ECHO strategy are updated. NODE-EXTRACTION-001/002 are explicitly historical/removed in legacy docs; CORE-012 is the current decision. **203 rules checks pass locally** with Godot 4.3, including ECHO's 15-CRED case and cap/empty/depletion-event regressions. RIOT-005 and CORE-011 remain included and passing.
+
+**Do not rebuild/push yet:** user hold still applies. All three gameplay fixes remain local and absent from the published 807f003 playtest artifact.
+
+
+## 11. EXTRACT-002 — Basic Extractor 3 CRED (local, 2026-11-14)
+
+The shared **Basic Extractor** now extracts **3 CRED per eligible end turn**, not 5; install stays 1 BW / 1 RAM. Applies to the same card in all starter decks. Other Extractors are unchanged. EXTRACT-002 and active card tables document the revision; historical EXTRACT-001's rate is marked superseded. **206 rules checks pass locally**, including capped final extraction and ECHO's five-turn 15-CRED payout.
+
+No push or rebuild: hold remains, and the 807f003 downloadable artifact predates RIOT-005, CORE-011, CORE-012 and EXTRACT-002.
+
+
+## 12. ECHO-005 — BORROWED CREDENTIALS (local, 2026-11-14)
+
+Replaces ECHO's BACKDOOR with a **1 BW + 8 CRED SCRIPT** requiring a chosen FORTRESS or VOID. HUSH can break that selected ICE **this turn only** with normal Strength/boost/break costs; it is not a direct/free break. Card ID is BORROWED_CREDENTIALS. Both costs/target are validated before payment. UI shows the CRED cost. Active docs and starter entry are updated; ECHO still has 12 cards.
+
+**227 rules checks pass locally** with Godot 4.3. Tests cover dual costs, targeting, compatibility, ordinary restrictions, expiry and layer transition. The simple bot is not adapted to plan this ability, so prior ECHO balance figures are historical.
+
+**No push or rebuild:** explicit hold persists. The Windows artifact at 807f003 still predates all accumulated local gameplay fixes.
+
+
+## 13. HALCYON Playtest 2 delivery authorized — 2026-11-14 (latest)
+
+**User explicitly requested the next playtest build, lifting the preceding no-push/no-rebuild hold.** Preserve those earlier entries as history; do not treat them as a continuing hold.
+
+Version is **0.2.0-playtest.2** with a visible selection-screen label. All five gameplay revisions (RIOT-005, CORE-011, CORE-012, EXTRACT-002, ECHO-005) are included. The old executable/artifact at 807f003 predates them.
+
+**Local verification:** official Godot 4.3; **227/227 rules checks**. UI coverage includes 6–16 card hands, SMASH & GRAB's rig/hand choice, BORROWED CREDENTIALS target selection and exact 1 BW + 8 CRED payment, its normal HUSH break, and the early-exit warning/control returning to map without a card reward. Added `tests/shot_playtest2.gd` to CI, alongside the four existing scripts. Known virtual-display V-Sync/shutdown-resource warnings remain documented; no Windows runtime claim.
+
+The checked GitHub revision's successful push workflow is the source of the new Windows artifact and verification images/logs. Use `docs/HALCYON_PLAYTEST_GUIDE.md` included in the ZIP. All code is on the stabilization branch/PR #3; no main-branch merge or PR #1/#2 consolidation is implied.

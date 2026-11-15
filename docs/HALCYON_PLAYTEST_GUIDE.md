@@ -1,6 +1,16 @@
-# PANOPTICON — HALCYON slice playtest
+# PANOPTICON — HALCYON Playtest 2 (0.2.0-playtest.2)
 
 This is a development playtest build, not the complete three-corporation game.
+
+## Changes in Playtest 2
+
+- **Basic Extractor:** 3 CRED per turn, down from 5.
+- **No full-extraction bonus:** a 15-CRED reserve pays 15 through extraction, not 17. The separate Clean Node reward remains.
+- **Early Node exit:** no card reward unless the final ICE layer is breached and completed.
+- **SMASH & GRAB:** extract 3 CRED; +1 TRACE while below 20. Its paid 1-BW uninstall lets you CACHE another chosen hand card until the end of your next Rustler turn. Ordinary free unload grants no CACHE.
+- **ECHO:** BACKDOOR is replaced by **BORROWED CREDENTIALS**, a SCRIPT costing **1 BW + 8 CRED**. Select a FORTRESS or VOID; HUSH may break that ICE this turn with normal Strength/boost/break costs. Select the card, then click the target ICE. Invalid or unaffordable plays spend neither resource.
+
+Confirm the selection screen says **HALCYON PLAYTEST 2** so you know you are not running the previous executable.
 
 ## Get and run the Windows build
 
