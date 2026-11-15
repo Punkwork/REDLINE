@@ -1,11 +1,11 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.1 · **Date:** 2026-11-13
+**Version:** 0.1.1 · **Date:** 2026-11-15 *(0.1: 2026-11-13)*
 
 Use one copy per playtest run. The live, fill-in version is the **PANOPTICON Playtest QA Checklist** Sheet (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
 **For every run:** play one corporation heist (choose the corporation and Rustler on the main menu), then press **Copy summary to clipboard** on the summary screen and paste it into the Run log. The summary gives CRED earned and spent, purchases, cards added, and the route, which answers most of the Economy, Deck and Map checks.
 
-Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5).
+Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006).
 
 
 ## Setup
@@ -75,11 +75,11 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 
 | ID | Check | Target / what good looks like | Result | Notes |
 |---|---|---|---|---|
-| G1 | Cards added this corporation (rewards + bought). | About 10 (7–8 rewards + 2–3 bought) | | |
+| G1 | Cards added vs removed this corporation (rewards + bought; removals by Wipe, Console Lab, data purge, FUSE). | About 8 added, about 2 removed (net +6 to +10) | | |
 | G2 | Reward choices were interesting; note how often you skipped. | At least 1 of 3 worth taking | | |
 | G3 | Going deeper gave noticeably better card choices. | Yes | | |
 | G4 | The full-clear completion CAP was worth going deeper for. | Sometimes | | |
-| G5 | Deck size at the end of the corporation. | About 20–22 | | |
+| G5 | Deck size at the end of the corporation. | HALCYON 18–22 · IRONWATCH 24–29 · LUCIDA 30–35 | | |
 
 ## CAPS & Ghostware
 
