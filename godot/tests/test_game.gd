@@ -757,7 +757,7 @@ func test_full_slice_path() -> void:
 			"SAFEHOUSE": g.safehouse_heal()
 			"DEEPER": g.go_deeper()
 			"REWARD": g.choose_reward(g.reward_options[0])
-			"CHOICE": g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
+			"CHOICE": bot_choice(g)
 			"PLAYER": bot_turn(g)
 	check(g.phase == "SLICE_DONE" or g.phase == "DEAD", "bot finishes the slice (phase %s, row %d)" % [g.phase, g.row])
 	print("  bot: phase=%s vitae=%d trace=%d strikes=%d cred=%d deck=%d steps=%d" % [g.phase, g.vitae, g.trace, g.strikes, g.cred, g.run_deck.size(), guard])
@@ -792,13 +792,7 @@ func sim_rustler(who: String) -> void:
 				"SAFEHOUSE": g.safehouse_heal()
 				"DEEPER": g.go_deeper()
 				"REWARD": g.choose_reward(g.reward_options[0])
-				"CHOICE":
-					if g.pending.kind == "card_break":
-						bot_choose_sub(g)
-					elif g.pending.kind == "patient_zero":
-						g.choose_ice(main_ice(g))
-					else:
-						g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
+				"CHOICE": bot_choice(g)
 				"PLAYER":
 					bot_turn(g)
 					if g.node.get("opening", false) and g.enc.get("breached", false):
@@ -974,3 +968,10 @@ func bot_turn(g: Game) -> void:
 				g.boost_pick(p.inst.uid)
 	if g.phase == "PLAYER":
 		g.end_turn()
+
+func bot_choice(g: Game) -> void:
+	match g.pending.get("kind", ""):
+		"scan": g.finish_scan()
+		"card_break": bot_choose_sub(g)
+		"patient_zero": g.choose_ice(main_ice(g))
+		_: g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])

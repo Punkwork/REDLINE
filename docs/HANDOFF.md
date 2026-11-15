@@ -32,7 +32,6 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **Step 2 — DSY-007, 008** | **REBOOT** (empty draw pile → shuffle discard in; "Whenever you REBOOT" ENGINE triggers, AMP applies; HUD countdown); **SCAN X**; in-Node BURN; example cards WARM BOOT, ROLLING RESTART, FORCE REBOOT, SHORT LOOP, PORT SCAN, GARBAGE COLLECT, TAIL CALL. | Synergy §4, §9.1 | Codex | TO DO |
 | **Step 3 — DSY-011, 012** | **CHAIN [TAG]** (last card played this turn; HUD "Last played"); **HOLD 1** (free CACHE of 1 card at end of turn; off in the Training Node; DEAD MAN'S POCKET → 2); cards PIVOT, COVER FIRE, KILL CHAIN, HANDOFF (ECHO). | Synergy §6, §9 | Codex | TO DO |
 | **Step 4 — DSY-009, 010** | **UNDERFLOW** (ICE STR below 0, shown in red; ROT minimum removed), **MARGIN** in the break preview, **OVERKILL X**; check LOGIC BOMB, HARDENING, RELAY, STR floors; cards SCALPEL, STACK SMASH, INTEGER UNDERFLOW (RIOT), CULL, HARVEST (VECTOR). | Synergy §5.3–5.4, §9 | Codex | TO DO |
 | **Step 5 — DSY-004, 005, 013** | **COMPILE**, **REFACTOR** (50 CRED), Ghostware HEARTBEAT / MINIMAL INSTALL / DEDUPLICATOR / ONE-TRICK, CLEAN BUILD (Generalist); pushback ICE FREE TRIAL (HALCYON T2), PATTERN ANALYSIS, RECURRING DREAM. | Synergy §3.2–3.3, §8, §9 | Codex | TO DO |
@@ -49,6 +48,7 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| DSY-007, DSY-008 | REBOOT queues drain only after draws finish; AMP and seven specified cards, SCAN bottom-order choice, in-Node BURN and discard retrieval, HUD reboot estimate, and bot choice handling. | **BUILT** — `playtest3-step2` (commit tag) |
 | DSY-001, DSY-002, DSY-003, DSY-006 | FOOTPRINT/caps and bands, per-Node bloat TRACE, optional GHOST draw OFF, duplicate-aware draw estimates and key-card previews, COVERAGE/tag density, and guarded full-clear DECOMPILE. | **BUILT** — `playtest3-step1` (commit tag) |
 | REJECT-001 | REJECT ALL has one DEADLOCK in its three-entry pool; BOOTING remains turn 3. Updated opening rules checks and bot timing reporting. | **BUILT** — `playtest3-step0` (commit tag) |
 

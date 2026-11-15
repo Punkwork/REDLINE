@@ -36,6 +36,11 @@ var corporation := "HALCYON"
 var ghost_draw_enabled := false # DSY-001b: optional, OFF by default.
 var bloat_tax_paid := 0
 var node_tax_pending := false
+var amp := 0
+var reboots := 0
+var drawing_depth := 0
+var pending_reboots := 0
+var draining_reboots := false
 
 # --- node / encounter state ---
 var node: Dictionary = {}
@@ -140,6 +145,9 @@ func _complete_map_step() -> void:
 
 func _start_ice_node() -> void:
 	node_tax_pending = true
+	amp = 0
+	reboots = 0
+	pending_reboots = 0
 	layer = 0
 	layers_cleared = 0
 	lockdown = false
@@ -352,7 +360,7 @@ func _start_turn() -> void:
 		ice.bomb = false
 		ice.rainbow = -1
 	if _rack_has("SURGE_PROTECTOR"):
-		shield += 2 * _rack_count("SURGE_PROTECTOR")
+		shield += (2 + amp) * _rack_count("SURGE_PROTECTOR")
 	var n := draw_size()
 	if enc.turn == 1 and ghost_draw_enabled and footprint_band() == "GHOST":
 		n += 1
@@ -375,14 +383,62 @@ func draw_size() -> int:
 	return max(1, BASE_DRAW - cortex)
 
 func draw_cards(n: int) -> void:
+	drawing_depth += 1
 	for i in n:
 		if draw_pile.is_empty():
-			if discard.is_empty():
-				return
-			draw_pile = discard
-			discard = []
+			if discard.is_empty(): break
+			draw_pile.assign(discard)
+			discard.clear()
 			_shuffle(draw_pile)
+			_queue_reboot()
 		hand.append(draw_pile.pop_back())
+	drawing_depth -= 1
+	if drawing_depth == 0: _drain_reboots()
+
+func _queue_reboot() -> void:
+	reboots += 1
+	pending_reboots += 1
+	_say("REBOOT %d." % reboots)
+
+func force_reboot() -> void:
+	draw_pile.append_array(discard)
+	discard.clear()
+	_shuffle(draw_pile)
+	_queue_reboot()
+	if drawing_depth == 0: _drain_reboots()
+
+func _drain_reboots() -> void:
+	if draining_reboots: return
+	draining_reboots = true
+	var guard := 0
+	while pending_reboots > 0 and phase != "DEAD":
+		pending_reboots -= 1
+		guard += 1
+		if guard > 128:
+			_say("REBOOT loop safeguard reached; stop resolving the repeating trigger chain.")
+			pending_reboots = 0
+			break
+		for card in rack.duplicate():
+			match card.id:
+				"WARM_BOOT": shield += 5 + amp
+				"ROLLING_RESTART": amp += 1
+				"SHORT_LOOP":
+					bw += 1 + amp
+					draw_cards(2 + amp)
+	draining_reboots = false
+
+func finish_scan() -> void:
+	if pending.get("kind", "") != "scan": return
+	var top: Array = pending.cards
+	var bottom: Array = []
+	for uid in pending.bottom:
+		bottom.append(_take_from(top, uid))
+	bottom.reverse()
+	top.reverse()
+	draw_pile = bottom + draw_pile + top
+	pending = {}
+	phase = "PLAYER"
+	draw_cards(1)
 
 func ram_total() -> int:
 	var t := BASE_RAM
@@ -403,6 +459,8 @@ func can_play(uid: int) -> Dictionary:
 	if inst.is_empty():
 		return {"ok": false, "reason": "Not in hand"}
 	var d := CardDB.def(inst.id)
+	if inst.id == "GARBAGE_COLLECT" and hand.size() < 2:
+		return {"ok": false, "reason": "Need another hand card to BURN"}
 	if d.get("unplayable", false):
 		return {"ok": false, "reason": "Can't be played"}
 	if bw < card_cost(inst.id):
@@ -482,6 +540,25 @@ func play_card(uid: int, target: int = -1) -> bool:
 
 func _resolve_script(inst: Dictionary, target: int) -> bool:
 	match inst.id:
+		"FORCE_REBOOT":
+			force_reboot()
+			return true
+		"PORT_SCAN":
+			var cards := []
+			for _i in mini(3, draw_pile.size()): cards.append(draw_pile.pop_back())
+			pending = {"kind": "scan", "cards": cards, "bottom": [], "card_uid": inst.uid}
+			discard.append(inst)
+			phase = "CHOICE"
+		"GARBAGE_COLLECT":
+			pending = {"kind": "burn_hand", "options": hand.map(func(c): return c.uid), "card_uid": inst.uid}
+			discard.append(inst)
+			phase = "CHOICE"
+		"TAIL_CALL":
+			var opts := discard.filter(func(c): return CardDB.def(c.id).type == "SCRIPT").map(func(c): return c.uid)
+			if not opts.is_empty():
+				pending = {"kind": "retrieve", "options": opts, "card_uid": inst.uid}
+				discard.append(inst)
+				phase = "CHOICE"
 		"PULP_SHIELD": shield += 3
 		"PROBE": enc.ice[target].str_mod -= 2
 		# ECHO
@@ -669,9 +746,9 @@ func end_turn() -> void:
 	for p in installed:
 		var d := CardDB.def(p.inst.id)
 		if d.has("extract"):
-			var amt: int = d.extract
+			var amt: int = d.extract + amp
 			if d.has("extract_quiet") and enc.trace_gained_enc == 0:
-				amt = d.extract_quiet
+				amt = d.extract_quiet + amp
 			extract(amt + long_game)
 			if d.get("extract_trace", 0) > 0 and trace < d.get("extract_trace_below", 9999):
 				add_trace(d.extract_trace, false)
@@ -815,9 +892,23 @@ func choose(uid: int) -> void:
 	if pending.is_empty():
 		return
 	var kind: String = pending.kind
+	if kind == "scan":
+		if pending.cards.any(func(c): return c.uid == uid):
+			if pending.bottom.has(uid): pending.bottom.erase(uid)
+			else: pending.bottom.append(uid)
+		return
 	if not pending.get("options", [uid]).has(uid) and kind != "discard":
 		return
 	match kind:
+		"burn_hand":
+			var card := _take_from(hand, uid)
+			if card.is_empty(): return
+			burned.append(card)
+			draw_cards(1)
+		"retrieve":
+			var card := _take_from(discard, uid)
+			if card.is_empty(): return
+			hand.append(card)
 		"discard":
 			var c := _take_from(hand, uid)
 			if c.is_empty():

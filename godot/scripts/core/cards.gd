@@ -212,6 +212,66 @@ const DEFS := {
 		"text": "Can't be played normally. Pay 1 BW to clear it: it's BURNED for the rest of the Node."},
 	"TRACER": {"name": "TRACER", "type": "BLOATWARE", "tags": [], "bw": 0, "rarity": "BLOAT", "unplayable": true,
 		"text": "Can't be played. If TRACER is in your hand at the end of your turn: +3 TRACE."},
+	"WARM_BOOT": {
+		"name": "WARM BOOT",
+		"type": "PROTOCOL",
+		"bw": 1,
+		"rarity": "COMMON",
+		"tags": [
+			"ENGINE"
+		],
+		"text": "Whenever you REBOOT: +5 SHIELD."
+	},
+	"ROLLING_RESTART": {
+		"name": "ROLLING RESTART",
+		"type": "PROTOCOL",
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"tags": [],
+		"text": "Whenever you REBOOT: +1 AMP."
+	},
+	"FORCE_REBOOT": {
+		"name": "FORCE REBOOT",
+		"type": "SCRIPT",
+		"bw": 0,
+		"rarity": "UNCOMMON",
+		"tags": [],
+		"text": "Shuffle discard into draw pile. This is a REBOOT. BURNED."
+	},
+	"SHORT_LOOP": {
+		"name": "SHORT LOOP",
+		"type": "PROTOCOL",
+		"bw": 2,
+		"rarity": "RARE",
+		"tags": [
+			"ENGINE"
+		],
+		"text": "Whenever you REBOOT: gain 1 BW and draw 2."
+	},
+	"PORT_SCAN": {
+		"name": "PORT SCAN",
+		"type": "SCRIPT",
+		"bw": 0,
+		"rarity": "COMMON",
+		"tags": [],
+		"text": "SCAN 3, then draw 1."
+	},
+	"GARBAGE_COLLECT": {
+		"name": "GARBAGE COLLECT",
+		"type": "SCRIPT",
+		"bw": 0,
+		"rarity": "COMMON",
+		"tags": [],
+		"text": "BURN 1 other hand card for this Node. Draw 1."
+	},
+	"TAIL_CALL": {
+		"name": "TAIL CALL",
+		"type": "SCRIPT",
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"tags": [],
+		"text": "Put a SCRIPT from discard into your hand."
+	},
 }
 
 const STARTER_GENERALIST := [
