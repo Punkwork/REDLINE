@@ -32,9 +32,11 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
+| **ZEROED-001** | **Revert UNDERFLOW** (built in `playtest3-step4`): ICE STR floors at 0; a reduction past 0 is lost (later STR gains rise from 0); ROT keeps minimum 0 (spare ROT holds the ICE at 0). Remove the red negative display; MARGIN previews stay. **ZEROED** keyword: per-ICE, per-encounter flag set the first time STR drops from above 0 to 0 (any source); bonus only if the card that did it prints ZEROED; floored ICE and ICE starting at 0 can't be ZEROED; ZEROED marker on the ICE. Replace INTEGER UNDERFLOW with **NULL POINTER** once the card is approved. Update `synergy_cases.gd` (negative STR checks) and `HALCYON_PLAYTEST_GUIDE.md`. | Synergy §5.3, §5.3a, §9.2; Core Rules §5.3 | Codex | TO DO |
+| **ZEROED-001 cards** | NULL POINTER, FLATLINE, KNOCKOUT, SECOND WIND are **PROPOSED**; build only after the designer approves them. | Synergy §9.2 | Designer | WAITING |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
-| **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool; write up RIOT's ZEROED keyword. | Synergy §5.1, Pacing §6 | Claude | TO DO |
+| **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
 **Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
 
@@ -47,7 +49,7 @@ This is the one list of work that has been **decided but not finished**, so Code
 | UI-004 | HOLD and READY RIG choices use a single horizontal scrolling row; full card height and last-card access verified. | **BUILT** — `codex/horizontal-choice-menus` |
 | PACE-003,005,007,008 | DEADLOCK ×N progress for paid/card/WORM breaks; independent ESCALATE counters for TRACE/DISCARD/FORGET; reward need icons and visible draw chance; Tier 1 one-layer route; tier-aware reward odds; +50% reserves; version/label 0.3.0-playtest.3 / HALCYON PLAYTEST 3; post-merge-only Windows export; updated playtest guide and nine new UI fixtures. Final regression review also completed AMP for SILENT PARTNER/PAIN TOLERANCE, amplified card text, compiled fallback coverage, and Node/run state resets. | **BUILT** — `playtest3-pacing` (commit tag) |
 | DSY-004,005,013 | SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; corporation pushback ICE definitions and triggers (Tier 2 placement deferred after PACE-008). | **BUILT** — `playtest3-step5` (commit tag) |
-| DSY-009,010 | Negative ICE STR, MARGIN previews, SCALPEL, STACK SMASH, INTEGER UNDERFLOW, CULL and HARVEST; AMP on virus effects. | **BUILT** — `playtest3-step4` (commit tag) |
+| DSY-009,010 | Negative ICE STR *(to revert: ZEROED-001)*, MARGIN previews, SCALPEL, STACK SMASH, INTEGER UNDERFLOW, CULL and HARVEST; AMP on virus effects. | **BUILT** — `playtest3-step4` (commit tag) |
 | DSY-011,012 | CHAIN tracks successful card plays; PIVOT, COVER FIRE, HANDOFF and KILL CHAIN; HOLD 1 and DEAD MAN’S POCKET HOLD 2; scrollable choices. | **BUILT** — `playtest3-step3` (commit tag) |
 | DSY-007, DSY-008 | REBOOT queues drain only after draws finish; AMP and seven specified cards, SCAN bottom-order choice, in-Node BURN and discard retrieval, HUD reboot estimate, and bot choice handling. | **BUILT** — `playtest3-step2` (commit tag) |
 | DSY-001, DSY-002, DSY-003, DSY-006 | FOOTPRINT/caps and bands, per-Node bloat TRACE, optional GHOST draw OFF, duplicate-aware draw estimates and key-card previews, COVERAGE/tag density, and guarded full-clear DECOMPILE. | **BUILT** — `playtest3-step1` (commit tag) |
@@ -61,7 +63,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 - Ghostware acquisition/selection, DEDUPLICATOR with FUSE, and CAPS. HEARTBEAT, MINIMAL INSTALL, ONE-TRICK and DEAD MAN’S POCKET effects have tested state hooks.
 - DSY-013: Tier 2 FREE TRIAL placement and other corporation maps. All three pushback definitions/triggers are tested. This four-row map is Tier 1, so the final pacing step removes the temporary Step 5 Tier 2 placement.
 - PACE-003/005: notation and engine support tested; no unspecified multipliers or ESCALATE assignments invented for existing ICE. The controlled UI fixture shows both.
-- DSY-014/PACE-007 Phase 7 HULL engines, RIOT ZEROED design, and PACE-004/010 manual scoring remain with their existing owners below.
+- DSY-014/PACE-007 Phase 7 HULL engines, and PACE-004/010 manual scoring remain with their existing owners below.
 - Windows export/launch: export is gated to the post-merge stabilization-branch push. Feature/PR CI verifies code/screenshots only. Human Windows launch and playtest remain outstanding.
 - Conditional turn-4 BOOTING and PACE-006 safety valves intentionally excluded.
 

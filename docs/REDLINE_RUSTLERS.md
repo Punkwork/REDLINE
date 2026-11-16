@@ -230,6 +230,7 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 
 | ID | Change to this document |
 |---|---|
-| DSY-009 | ROT: "minimum 0" removed (§2); ICE STR can go below 0 (UNDERFLOW). — **APPROVED 2026-11-15** |
+| DSY-009 | ~~ROT: "minimum 0" removed (§2); ICE STR can go below 0 (UNDERFLOW).~~ Withdrawn by ZEROED-001: ROT keeps "minimum 0" as printed in §2. — **APPROVED 2026-11-15; reversed 2026-11-16** |
 | PACE-009 | Rustler watch list for longer encounters, especially RIOT's TRACE (`REDLINE_PACING.md` §8). — **APPROVED 2026-11-15** |
 | ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |
+| ZEROED-001 | ICE STR can't go below 0; **ZEROED** keyword (once per ICE per encounter) joins RIOT's Phase 7 pool (`REDLINE_DECK_SYNERGY.md` §5.3a). — **APPROVED 2026-11-16** |

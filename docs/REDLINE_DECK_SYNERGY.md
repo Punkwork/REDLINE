@@ -1,5 +1,5 @@
 # PANOPTICON — DECK MANAGEMENT & SYNERGY
-**Version:** 1.0 (approved; foundation for Phase 7 pool redesign)
+**Version:** 1.1 (approved; foundation for Phase 7 pool redesign)
 **Date:** 2026-11-15
 **Status:** **APPROVED 2026-11-15** (designer: "Approve everything as written"), all decisions DSY-001 to DSY-014, **to be implemented in the next build**. Numbers stay **working values** to tune in playtest. Optional and conditional items stay optional or conditional as written (DSY-001b). Decision record in §12. Builds on the approved Core Rules, Rustlers, Card Pools, ICE (all three corporations), Uplink & CAPS, Upgrades, the Engines doc (ENG-001 to ENG-005) and the Pacing doc (PACE-001 to PACE-010).
 
@@ -9,6 +9,7 @@
 
 > All numbers are **working values** for playtesting. This doc should be settled **before** Phase 7 (pool redesign into archetypes), because Phase 7's archetypes should be built from the keywords below.
 
+**v1.1 changes (2026-11-16, ZEROED-001):** ICE STR **can't go below 0** after all; UNDERFLOW is withdrawn because negative STR meant too much counting for the player (designer). DSY-009 amended (§5.3, §12); **ZEROED** written up as a keyword, once per ICE (§5.3a); INTEGER UNDERFLOW replaced by NULL POINTER (§9.2); RIOT and VECTOR loops updated (§5.2, §7).
 **v0.3 changes (synced with build 0.2.0-playtest.2 and the 2026-11-14 decisions):** **DRAW 6** (DRAW-001) in the draw-chance table and REBOOT pricing (§1, §4.1); **SIGYL → TUMBLER** (ROT-001) in card and ICE text; **CORE-011** (card rewards only for fully cleared Nodes) and **EXTRACT-002 / CORE-012** (Basic Extractor 3 CRED, no full-extraction bonus) in the reward and economy notes (§3); **RIOT's 15-card starter** (RIOT-004) in §2.1; the HALCYON pushback ICE renamed **FREE TRIAL**, because HALCYON already has an ICE called AUTO-RENEW (§8).
 **v0.2 changes:** deck-size targets 18–22 / 24–29 / 30–35; FOOTPRINT cap per corporation; FOOTPRINT-based cards and Ghostware re-pointed to the new bands.
 
@@ -21,7 +22,7 @@ Without changes, the current design pushes decks **toward about 40 cards or more
 | Skill | What the player does | Rules that support it |
 |---|---|---|
 | **PRUNE** | Keep the deck at or below the corporation's cap, and strong | FOOTPRINT on screen, the bloat tax, DECOMPILE on every card reward, COMPILE, REFACTOR (§2–§3) |
-| **BUILD** | Put together a loop where cards feed each other | REBOOT payoffs, the **currency loop** (UNDERFLOW and OVERKILL, virus cash-outs, AMP, CHARGE) (§4–§5) |
+| **BUILD** | Put together a loop where cards feed each other | REBOOT payoffs, the **currency loop** (ZEROED and OVERKILL, virus cash-outs, AMP, CHARGE) (§4–§5) |
 | **STEER** | Choose the order of plays and plan across turns | EXPLOIT CHAIN, HOLD 1, SCAN, in-Node BURN (§4, §6) |
 
 **The main idea:** a leaner deck draws its key cards more often. PANOPTICON should also **show** that, **pay off** for it (REBOOT), make it **cheap to pursue** (DECOMPILE), and make a **bloated deck cost TRACE**. A bigger deck leaves a bigger footprint, and in PANOPTICON that's how they find you.
@@ -159,23 +160,38 @@ Every reward card should play **one clear role** for one **currency**:
 
 | Currency | Lives on | Source | Amplifier | Cash out | Feeds into |
 |---|---|---|---|---|---|
-| **−STR / UNDERFLOW** (§5.3) | ICE | PROBE, OVERLOAD, ROT, FUZZER | STACK SMASH, CHAIN EXPLOIT | OVERKILL, INTEGER UNDERFLOW | Cheaper breaks → BW for everything else |
-| **Virus counters** | ICE | INJECT, strains | REPLICATOR, OUTBREAK, AMP | HOST TAKEOVER, WORM breaks, CULL, HARVEST (§5.4) | ROT → UNDERFLOW; LEECH → CRED |
+| **−STR / ZEROED** (§5.3) | ICE | PROBE, OVERLOAD, ROT, FUZZER | STACK SMASH, CHAIN EXPLOIT | ZEROED bonuses, NULL POINTER, OVERKILL | Cheaper breaks → BW for everything else |
+| **Virus counters** | ICE | INJECT, strains | REPLICATOR, OUTBREAK, AMP | HOST TAKEOVER, WORM breaks, CULL, HARVEST (§5.4) | ROT → STR to 0; LEECH → CRED |
 | **AMP** | You | GAIN STAGE, ROLLING RESTART | REBOOT frequency | (constant) | Strains, PROCESSES, Extractors |
 | **CHARGE** | Programs | SLUSH FUND, BUFFER OVERFLOW, ZOMBIE | Time | UNLOAD, KILL | −STR, CRED, SHIELD |
 | **CHAIN** (§6.1) | The turn | Tag density | Compiled cards (two tags) | CHAIN bonuses | Whichever tag you chain |
 | **REBOOT** (§4.1) | The deck | Low FOOTPRINT, in-Node BURN | FORCE REBOOT | REBOOT effects | AMP, BW, SHIELD, −TRACE |
 | **TRACE** | You | Loud cards | REDLINER | FEEDBACK, NO WITNESSES | RIOT's BW |
 
-The important links are **across** currencies: ROT feeds UNDERFLOW, REBOOT feeds AMP, AMP feeds strains and PROCESSES, OVERKILL refunds BW. This gives two-archetype hybrids (VECTOR ROT + UNDERFLOW, CRON + REBOOT) a real reason to exist. A 30–35-card deck has room for **one main loop plus a second, smaller one**, which a 20-card deck doesn't.
+The important links are **across** currencies: ROT drives ICE to 0 STR, REBOOT feeds AMP, AMP feeds strains and PROCESSES, OVERKILL refunds BW. This gives two-archetype hybrids (VECTOR ROT + OVERKILL, CRON + REBOOT) a real reason to exist. A 30–35-card deck has room for **one main loop plus a second, smaller one**, which a 20-card deck doesn't.
 
-### 5.3 UNDERFLOW, MARGIN and OVERKILL: payoffs for stacking STR (DSY-009) [CHANGED: STR minimum]
-Today, any STR reduction beyond what your Icepick needs is wasted. Proposal:
-- **UNDERFLOW:** ICE STR **can go below 0.** It's shown in red as a negative number. ROT's "minimum 0" is removed.
-- **MARGIN** = your Icepick's STR − the ICE's STR at the moment you break. Boosting your Icepick and lowering the ICE both raise it, so **one number covers both kinds of STR stacking.** The break preview (Core Rules §5.3 screen rule) shows MARGIN.
-- **OVERKILL X:** a keyword on Icepicks and cards: *"If MARGIN is X or more when this breaks, [bonus]."*
-- **Existing cards and ICE that need checking:** DEADBOLT / SYNAPSE BARRIER / AMNESIA ("can't go below 3/4/3") still work as written. HARDENING (+1 STR after each response) and RELAY (+2 STR to the ICE on its right) raise an underflowed ICE normally. LOGIC BOMB sets STR to 0, so it **raises** an underflowed ICE; reword it to "−X STR equal to its current STR" or leave it as an intentional anti-synergy. BRUTE FORCE, ZOMBIE and FLASHPOINT ("STR X or less") work naturally.
-- **Related idea (RIOT, discussed 2026-11-15):** a **ZEROED** keyword — *"If this card brings target ICE from above 0 STR to 0 or less, [bonus]"* — as RIOT's payoff for driving one ICE down. Not yet written up; to be added with RIOT's Phase 7 pool.
+### 5.3 STR floor, MARGIN and OVERKILL (DSY-009, amended by ZEROED-001)
+**ZEROED-001 (designer, 2026-11-16):** "0 STR is a good bottom." The original DSY-009 let ICE STR go below 0 (UNDERFLOW). That's withdrawn: negative numbers meant too much confusion and counting for the player. *(UNDERFLOW was built in playtest 3 step 4; the build needs reverting, see HANDOFF.)*
+
+- **STR floor:** ICE STR **can't go below 0**. A reduction that would take it below 0 takes it to 0, and **the rest is lost**: what you see on the ICE is its real STR. If the ICE later gains STR (HARDENING, RELAY, ARMORY, a boss support), it rises from 0.
+- **ROT** keeps its "minimum 0" (Rustlers §2, restored). ROT is the one reduction that isn't lost, because it's counters you can see: an ICE with more ROT than STR shows 0, and if it gains STR, the spare ROT holds it at 0 until the gain is larger. Spare ROT counters still count as virus counters (RUNTIME ERROR, HOST TAKEOVER, QUARANTINE, CULL, the PURGE limit), so once an ICE is at 0, VECTOR's best play is to **cash out** the surplus.
+- **MARGIN** = your Icepick's STR − the ICE's STR at the moment you break, shown by the game in the break preview (the player doesn't count it). With the floor, lowering the ICE raises MARGIN only until the ICE reaches 0; after that, only Icepick boosts raise it.
+- **OVERKILL X:** a keyword on Icepicks and cards: *"If MARGIN is X or more when this breaks, [bonus]."* Unchanged.
+- **Existing cards and ICE:** DEADBOLT / SYNAPSE BARRIER / AMNESIA ("can't go below 3/4/3") work as written and can never be ZEROED. HARDENING and RELAY raise an ICE from 0 normally. LOGIC BOMB ("STR becomes 0 until the end of your turn") works as written and has no anti-synergy any more. BRUTE FORCE, ZOMBIE and FLASHPOINT ("STR X or less") are unchanged.
+
+### 5.3a ZEROED (ZEROED-001) [NEW keyword, RIOT]
+**ZEROED: [bonus]** on a card means: *if this card brings target ICE from above 0 STR to 0, [bonus].* It's RIOT's payoff for driving one ICE all the way down in one push.
+
+**Base rules:**
+1. **Once per ICE.** Each ICE can be ZEROED **only once per encounter**: the first time its STR goes from above 0 to 0. After that, no ZEROED bonus can trigger on that ICE again this encounter, even if its STR rises and drops back to 0.
+2. **Anything can use it up.** The first drop to 0 counts as that ICE's ZEROED whatever caused it (PROBE, ROT, FUZZER, LOGIC BOMB, another ZEROED card). The bonus only happens if the card that did it prints **ZEROED**. So the order matters: weaken with ordinary cards first, finish with the ZEROED card.
+3. **Some ICE can't be ZEROED:** an ICE that starts the encounter at 0 STR, and an ICE whose STR can't be reduced below a floor above 0 (DEADBOLT, SYNAPSE BARRIER, AMNESIA).
+4. **Timing:** the bonus resolves as part of the card, right after its STR reduction. If a card ZEROES several ICE at once, its bonus resolves once for each.
+5. **Screen rule:** a ZEROED ICE shows a **ZEROED** marker for the rest of the encounter, so the player can see its once-per-ICE chance is spent. A ZEROED card in hand highlights the ICE it would ZERO this play.
+
+**Why:** with a floor at 0, every point past 0 is wasted, so the payoff has to sit at 0 itself. ZEROED makes "exactly to 0, with the right card last" a small puzzle without any counting below zero, and once-per-ICE stops it repeating on ICE that bounce back up (HARDENING, THERMOSTAT, ARMORY).
+
+**Pricing (CARD-001 addition, working):** a common's ZEROED bonus is worth about **1 BW** (like a CHAIN bonus); an uncommon's can be a break or BW. ZEROED cards go in **RIOT's pool**; RIOT's ZEROED bonuses should lean on **−TRACE**, which also answers PACE-009 (RIOT dies to TRACE strikes).
 
 ### 5.4 Virus cash-outs (DSY-010) [NEW cards]
 Virus counters mostly pile up; WORM (VIRUS-001) is the first strain you spend. More cards that **remove counters for a burst** create VECTOR's hold-or-cash-out decision: spend them now, or let REPLICATOR keep growing them. The corporation **PURGE** (PURGE-001: a hidden, rising limit on total counters) makes this sharper: every counter you cash out lowers the total, so cashing out also delays the next PURGE.
@@ -205,8 +221,8 @@ Virus counters mostly pile up; WORM (VIRUS-001) is the first strain you spend. M
 |---|---|---|---|
 | **Generalist** | COMPILE and CHAIN: alternate EXPLOIT and CLOAK; compiled cards bridge both | READY RIG plus a deck at or below the cap makes setup reliable | COVERAGE: it needs all three types, and every cut tests that |
 | **ECHO** | REBOOT plus CLOAK CHAIN: small deck, every REBOOT sheds TRACE, long extraction stays | The deck most likely to live in the GHOST band | WATCHER ICE (DOORBELL CAM) punish CLOAK chains; BORROWED CREDENTIALS costs CRED |
-| **RIOT** | UNDERFLOW and OVERKILL plus EXPLOIT CHAIN: stack OVERLOAD and PROBE far below 0, then cash out (ZEROED, §5.3) | Starts at 15 cards, so pruning matters early | TRACE from loud cards **and** the bloat tax; EMPATHY ENGINE, ROADBLOCK |
-| **VECTOR** | Virus counters → ROT UNDERFLOW → cash out (WORM, CULL, HARVEST, HOST TAKEOVER) | REPLICATOR and OUTBREAK come up every encounter | The corporation PURGE: cash out before it hits |
+| **RIOT** | ZEROED plus EXPLOIT CHAIN: weaken one ICE with OVERLOAD and PROBE, finish it with a ZEROED card for the bonus, then break it cheaply (§5.3a) | Starts at 15 cards, so pruning matters early | TRACE from loud cards **and** the bloat tax; EMPATHY ENGINE, ROADBLOCK |
+| **VECTOR** | Virus counters → ROT takes ICE to 0 → cash out the surplus (WORM, CULL, HARVEST, HOST TAKEOVER) | REPLICATOR and OUTBREAK come up every encounter | The corporation PURGE: cash out before it hits |
 | **CRON** | AMP via REBOOT (ROLLING RESTART), KILL as the cash-out | REBOOTs pump AMP into every PROCESS | Slow start; THREAD count |
 
 ---
@@ -252,7 +268,10 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 |---|---|---|---|---|---|
 | **HANDOFF** | ECHO | Common | SCRIPT — CLOAK | 0 BW | −2 TRACE. **CHAIN CLOAK:** draw 1. |
 | **STACK SMASH** | RIOT | Uncommon | SCRIPT — EXPLOIT | 1 BW | Target ICE −1 STR for each EXPLOIT card you've played this turn (including this one). |
-| **INTEGER UNDERFLOW** | RIOT | Rare | SCRIPT — EXPLOIT | 2 BW | Break 1 subroutine on target ICE (DEADLOCKs included) for each point its STR is below 0 (maximum 3). Normal limits apply: only active or revealed subroutines, BOOTING and SEQUENCED respected. BURNED. |
+| **NULL POINTER** *(replaces INTEGER UNDERFLOW, ZEROED-001)* | RIOT | Rare | SCRIPT — EXPLOIT | 2 BW | Target ICE at 0 STR: break 2 of its subroutines (DEADLOCKs included). Normal limits apply: only active or revealed subroutines, BOOTING and SEQUENCED respected. BURNED. |
+| **FLATLINE** *(ZEROED-001, proposed)* | RIOT | Common | SCRIPT — EXPLOIT | 0 BW, +2 TRACE | Target ICE −2 STR this encounter. **ZEROED:** −4 TRACE. |
+| **KNOCKOUT** *(ZEROED-001, proposed)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 1 BW | Target ICE −3 STR this encounter. **ZEROED:** break 1 of its subroutines (normal limits apply). |
+| **SECOND WIND** *(ZEROED-001, proposed)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 0 BW | Target ICE −1 STR this encounter. **ZEROED:** gain 1 BW. |
 | **CULL** | VECTOR | Common | SCRIPT — VIRUS | 1 BW | Remove up to 3 virus counters from target ICE: +2 SHIELD for each one removed. |
 | **HARVEST** | VECTOR | Uncommon | SCRIPT — VIRUS | 0 BW | Remove all LEECH from target ICE: extract 3 CRED for each one removed. |
 | **CLEAN BUILD** | Generalist | Uncommon | PROTOCOL | 1 BW | Your COMPILED cards cost 1 less BW. |
@@ -273,11 +292,11 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 |---|---|---|
 | Core Rules | §2 screen rule | FOOTPRINT and cap, REBOOT countdown, "Last played" tag (DSY-001/002/007/011) |
 | Core Rules | §3.2 | Add REBOOT; add HOLD 1 (DSY-007, DSY-012) |
-| Core Rules | §5.3 | STR may go below 0 (UNDERFLOW); MARGIN shown in the break preview (DSY-009) |
+| Core Rules | §5.3 | ICE STR can't go below 0 (ZEROED-001 replaces UNDERFLOW); MARGIN shown in the break preview; ZEROED keyword (DSY-009, ZEROED-001) |
 | Core Rules | §8.1 | Bloat tax at ICE Node start, against the corporation's cap (DSY-001) |
 | Core Rules | §9.1 | DECOMPILE option on full-clear rewards; deck-size targets 18–22 / 24–29 / 30–35 replace "about 30 cards added" (DSY-003, DSY-006) |
 | Core Rules | §10.1 | FOOTPRINT cap per corporation (22 / 29 / 35) (DSY-001) |
-| Core Rules | §5.7 | ROT: "minimum 0" removed (DSY-009) |
+| Core Rules | §5.7 | ROT keeps "minimum 0" (ZEROED-001 reverses the DSY-009 removal) |
 | Card Pools | §1 | Value guide: CHAIN bonus ≈ +50%; REBOOT effects priced at about 1.5 triggers per encounter (DSY-007) |
 | Upgrades | §1.2 | COMPILE alongside FUSE (DSY-004); DEAD MAN'S POCKET → CACHE 2 (DSY-012) |
 | Uplink & CAPS | §3.1 | REFACTOR service (DSY-005) |
@@ -292,7 +311,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 1. **Economy and UI only, no new cards:** FOOTPRINT + cap + hit rate + COVERAGE, DECOMPILE, bloat tax, new targets (DSY-001/002/003/006). Uses today's pools. This alone answers "do decks land at 30–35, and do players feel the cap?"
 2. **REBOOT + SCAN + in-Node BURN** (DSY-007/008) with 4–6 example cards.
 3. **CHAIN + HOLD 1** (DSY-011/012).
-4. **UNDERFLOW / OVERKILL / ZEROED + virus cash-outs** (DSY-009/010).
+4. **STR floor / OVERKILL / ZEROED + virus cash-outs** (DSY-009/010, ZEROED-001).
 5. **COMPILE, REFACTOR, Ghostware, corporation pushback ICE** (DSY-004/005/013).
 6. **Phase 7** pools, built on the grammar in §5.1.
 
@@ -323,7 +342,9 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | DSY-006 | **Deck size 30–35 by the end of LUCIDA** (designer, 2026-11-15). Stage targets **18–22 / 24–29 / 30–35** replace "about 30 cards added"; card prices stay at 40 / 60 / 90 pending playtest 2's CRED totals. | **APPROVED 2026-11-15** |
 | DSY-007 | **REBOOT** defined (empty draw pile → shuffle discard pile in); "Whenever you REBOOT" effects are ENGINE effects, priced at about 1.5 triggers per encounter (DRAW 6). | **APPROVED 2026-11-15** |
 | DSY-008 | **SCAN X** keyword; in-Node BURN cards. | **APPROVED 2026-11-15** |
-| DSY-009 | **UNDERFLOW** (ICE STR can go below 0; ROT minimum removed), **MARGIN**, **OVERKILL X**; **ZEROED** noted for RIOT's pool. | **APPROVED 2026-11-15** |
+| DSY-009 | **MARGIN**, **OVERKILL X**; **ZEROED** for RIOT's pool. *(Originally also UNDERFLOW: ICE STR below 0, ROT minimum removed. Withdrawn by ZEROED-001.)* | **APPROVED 2026-11-15; amended 2026-11-16 (ZEROED-001)** |
+| ZEROED-001 | **ICE STR can't go below 0**; reductions past 0 are lost; ROT keeps "minimum 0". **ZEROED** keyword (§5.3a): bonus when this card takes an ICE from above 0 to 0; **once per ICE per encounter**, used up by the first drop to 0 from any source; floored ICE can't be ZEROED. | **APPROVED 2026-11-16** (designer: "0 STR is a good bottom… it results in too much confusion and counting for the player"; ZEROED once per ICE) |
+| ZEROED-001 cards | NULL POINTER replaces INTEGER UNDERFLOW; example ZEROED cards FLATLINE, KNOCKOUT, SECOND WIND (§9.2); ZEROED bonus ≈ 1 BW for a common. | **PROPOSED 2026-11-16** (working values) |
 | DSY-010 | **Virus cash-out** cards (CULL, HARVEST pattern), alongside WORM. | **APPROVED 2026-11-15** |
 | DSY-011 | **CHAIN [TAG]** keyword, based on the last card played this turn. | **APPROVED 2026-11-15** |
 | DSY-012 | **HOLD 1:** CACHE 1 card free at the end of each turn; DEAD MAN'S POCKET → 2. Off in the Training Node. | **APPROVED 2026-11-15** |

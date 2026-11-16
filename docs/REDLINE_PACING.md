@@ -135,7 +135,7 @@ As encounters get longer, the deck's OUTPUT has to grow from about 4 to about 10
 
 | Need | What it means | Cards and systems that deliver it |
 |---|---|---|
-| **DRILL** | More BREACH WORK per BW | Better Icepicks (BATTERING RAM, RAINBOW TABLE, JACKHAMMER), STR stacking and UNDERFLOW (DSY-009), virus counters and WORM breaks, FIELD KIT, PATCHWORK TUNED / STREAMLINED |
+| **DRILL** | More BREACH WORK per BW | Better Icepicks (BATTERING RAM, RAINBOW TABLE, JACKHAMMER), STR stacking to 0 and ZEROED (DSY-009, ZEROED-001), virus counters and WORM breaks, FIELD KIT, PATCHWORK TUNED / STREAMLINED |
 | **HULL** | Defence that doesn't cost a card every turn | SURGE PROTECTOR, HOT STANDBY, STUN BATON, SANDBOX, WARM BOOT, HEADROOM, SUBDERMAL PLATING, KEVLAR WEAVE |
 | **COVERAGE** | An answer for every ICE type, now that DEADLOCKs spread across types | Off-type Icepicks, any-type Icepicks (SKELETON KEY, MULTITOOL), fallback upgrades, ADAPTER |
 
