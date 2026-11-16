@@ -1353,10 +1353,12 @@ func _overlay_map() -> void:
 
 func _overlay_options(title: String, sub: String, uids: Array, source: Array, on_pick: Callable, alt_text: String = "", on_alt: Callable = Callable()) -> void:
 	var v := _dim_box(title, sub, 1200)
-	var row := HFlowContainer.new()
-	row.add_theme_constant_override("h_separation", 10)
-	row.add_theme_constant_override("v_separation", 10)
+	var row := HBoxContainer.new()
+	row.name = "ChoiceCardRow"
+	row.add_theme_constant_override("separation", 10)
 	var scroll := ScrollContainer.new()
+	scroll.name = "ChoiceCardScroll"
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	scroll.custom_minimum_size = Vector2(1100, 300)
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	v.add_child(scroll)
