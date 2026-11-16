@@ -59,7 +59,7 @@ Two things to keep in mind:
 
 Raising STR alone breaks the game: fallback cards have limits (BRUTE FORCE: STR 4 or less; BORROWED CREDENTIALS only lends HUSH to one ICE for one turn and costs 8 CRED; ZOMBIE needs CHARGE equal to the STR), so an off-type ICE becomes a wall. Use these levers, in this order:
 
-0. **Reveal timing (already in the game).** Where a TUMBLER's DEADLOCKs sit in its pool, and how many slots it has, sets the earliest turn you can BREACH (ROT-001). A VOID's DEADLOCK can't be broken until it has fired (VOID-001). These set length **without adding damage**, so they're the first lever to reach for. Example: REJECT ALL (2 slots of 4: DEADLOCK · TRACE 3 · DEADLOCK · PULP 4) shows its second DEADLOCK on turn 2.
+0. **Reveal timing (already in the game).** Where a TUMBLER's DEADLOCKs sit in its pool, and how many slots it has, sets the earliest turn you can BREACH (ROT-001). A VOID's DEADLOCK can't be broken until it has fired (VOID-001). These set length **without adding damage**, so they're the first lever to reach for. *(TUMBLE-001, 2026-11-16: breaking a TUMBLER subroutine pulls the next one into a slot at once, so a TUMBLER's REVEAL FLOOR now drops with every break, not only with turns. Score TUMBLER layers counting breaks as reveals.)* Example: REJECT ALL (2 slots of 4: DEADLOCK · TRACE 3 · DEADLOCK · PULP 4) shows its second DEADLOCK on turn 2.
 
 1. **More DEADLOCKs, on more ICE (PACE-002).**
 
@@ -216,3 +216,10 @@ Every ICE layer gets a **BREACH WORK score** and a **REVEAL FLOOR** next to its 
 | PACE-010 | **BREACH WORK score and REVEAL FLOOR** for every ICE layer, with stage-typical Icepicks (§9); score the HALCYON slice first, from playtest 2's measurements. | **APPROVED 2026-11-15** |
 
 **Next:** in playtest 2, record turns and VITAE lost for each slice encounter; then score them (PACE-010) and decide whether to change the ICE, the budget, or both.
+
+### Later amendments (2026-11-16)
+
+| ID | Change to this document |
+|---|---|
+| ZEROED-001 | ICE STR stops at 0; DRILL now reads "STR stacking to 0 and ZEROED" (§6). — **APPROVED 2026-11-16** |
+| TUMBLE-001 | Broken TUMBLER subroutines drop out and the rest tumble forward, so breaks reveal subroutines sooner (§3 lever 0). Rescore TUMBLER layers for PACE-010 with this rule. — **APPROVED 2026-11-16** |

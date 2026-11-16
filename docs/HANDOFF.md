@@ -19,21 +19,28 @@ This is the one list of work that has been **decided but not finished**, so Code
    - **Start:** pull the working branch; read this file, then the latest entries of `REDLINE_DEVELOPMENT_LOG.md`.
    - **End:** move finished items to *Done* (with the commit), add new items, and add a dated log entry that says who wrote it (`(Codex)` or `(Claude)`).
 
+6. **Development log size (LOG-001).** Keep `REDLINE_DEVELOPMENT_LOG.md` under about **60 KB** so Claude can rewrite the project copy in one pass. When it grows past that, move the oldest dated entries, whole, to the end of `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` (oldest first, nothing reworded) and note the move in the log. Entries stay append-only; the archive is never edited except to append.
+
 **Statuses:** **TO DO** (decided, not started) · **IN PROGRESS** (name who) · **BUILT** (in code, needs a playtest or check) · **DONE** · **WAITING** (needs a designer decision).
 
 ---
 
 ## To build (approved, not yet in the build)
 
-| ID | What | Docs (done) | Build change | Owner | Status |
-|---|---|---|---|---|---|
+### Start here (Codex): decisions made 2026-11-16
+Build these first, in this order; each is fully specified in the rows below and in the docs named there.
+1. **ZEROED-001** (revert negative STR, ZEROED flag and marker), then **ZEROED-001 cards**.
+2. **TUMBLE-001** (TUMBLER tumble rule).
+3. Docs only, no build: **ROT-001 sync** (every remaining SIGYL now reads TUMBLER; non-slice TUMBLERS still need slot counts) and the **development log split** (older entries moved to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`).
+Log each step in `REDLINE_DEVELOPMENT_LOG.md` with the decision ID, as usual.
 
 **Next build: everything in `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010), approved as written on 2026-11-15.** Suggested order, so each step can be playtested before the next; numbers are working values. Where a system isn't in the slice yet (Uplink, Console Lab, PATCHWORK, Ghostware), build the part that touches it when that system arrives, and say so in the log.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **ZEROED-001** | **Revert UNDERFLOW** (built in `playtest3-step4`): ICE STR floors at 0; a reduction past 0 is lost (later STR gains rise from 0); ROT keeps minimum 0 (spare ROT holds the ICE at 0). Remove the red negative display; MARGIN previews stay. **ZEROED** keyword: per-ICE, per-encounter flag set the first time STR drops from above 0 to 0 (any source); bonus only if the card that did it prints ZEROED; floored ICE and ICE starting at 0 can't be ZEROED; ZEROED marker on the ICE. Replace INTEGER UNDERFLOW with **NULL POINTER** once the card is approved. Update `synergy_cases.gd` (negative STR checks) and `HALCYON_PLAYTEST_GUIDE.md`. | Synergy §5.3, §5.3a, §9.2; Core Rules §5.3 | Codex | TO DO |
-| **ZEROED-001 cards** | NULL POINTER, FLATLINE, KNOCKOUT, SECOND WIND are **PROPOSED**; build only after the designer approves them. | Synergy §9.2 | Designer | WAITING |
+| **ZEROED-001** | **Revert UNDERFLOW** (built in `playtest3-step4`): ICE STR floors at 0; a reduction past 0 is lost (later STR gains rise from 0); ROT keeps minimum 0 (spare ROT holds the ICE at 0). Remove the red negative display; MARGIN previews stay. **ZEROED** keyword: per-ICE, per-encounter flag set the first time STR drops from above 0 to 0 (any source); the bonus only if the card that did it prints ZEROED; floored ICE and ICE starting at 0 can't be ZEROED; ZEROED marker on the ICE. Update `synergy_cases.gd` (negative STR checks) and `HALCYON_PLAYTEST_GUIDE.md`. | Synergy §5.3, §5.3a; Core Rules §5.3, §5.7 | Codex | TO DO |
+| **ZEROED-001 cards** | RIOT pool: **NULL POINTER** replaces INTEGER UNDERFLOW (Rare, 2 BW, BURNED: target ICE at 0 STR, break 2 subroutines incl. DEADLOCKs, normal limits). New **FLATLINE** (Common, 0 BW +2 TRACE: −2 STR; ZEROED −4 TRACE), **KNOCKOUT** (Uncommon, 1 BW: −3 STR; ZEROED break 1 subroutine), **SECOND WIND** (Uncommon, 0 BW: −1 STR; ZEROED +1 BW). All SCRIPT — EXPLOIT. Tag ZEROED cards DRILL on the reward screen. | Synergy §9.2 | Codex | TO DO |
+| **TUMBLE-001** | **TUMBLER tumble:** breaking a slotted subroutine (Icepick, card or WORM break) removes it from the pool; the slots after it shift back one; the next unbroken pool subroutine (wrapping, skipping broken and showing ones) enters the last slot face up and **active at once** (breakable now; fires this turn's response if unbroken). Rotation steps through unbroken subroutines only and stops when unbroken ≤ slots (spare slots empty). DEADLOCK ×N tumbles only on its last break; BOOTING still applies. Reel animation: broken strip drops away, the others slide and the new one rolls in (REEL-001 style). Tests: break slot 1 and slot 2 on CAPTCHA; wrap-around; pool shrinking below slot count; WORM and card breaks; DEADLOCK ×2; BOOTING on REJECT ALL; TRIPWIRE still adds TRACE per break; response preview updates after each tumble. Re-run the 30-run bot for all Rustlers and log the change in clears and turns. | Core Rules §5.4; ICE Corp 1 amendments; ICE Rules Bible | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
@@ -75,6 +82,8 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | REEL-001 follow-up | Show the DEADLOCK total on TUMBLER cards? (REJECT-001 fixes REJECT ALL; CONSENT FORM and CAPTCHA still carry two.) | Dev log, REEL-001 | WAITING |
 | RIOT-003 | Confirm two readings of SHATTER: "any 1 icebreaker" means any 1 ICE; SLEDGE stays at STR 0 until the encounter ends. | Dev log, RIOT-003 | WAITING |
 | PULP-001 | Confirm FORTRESS PULP values are fixed per subroutine, not rolled. | Dev log, PULP-001 | WAITING |
+| ZEROED-001 reading | Does **any** drop to 0 (PROBE, ROT, LOGIC BOMB) use up an ICE's one ZEROED, or only a ZEROED card? Written as "any cause" so the ZEROED card has to land last. | Synergy §5.3a rule 2 | WAITING (build as written unless changed) |
+| TUMBLE-001 reading | A subroutine that tumbles in is active at once (it can fire in this turn's response). Alternative: it waits until next turn. | Core Rules §5.4 | WAITING (build as written unless changed) |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
 
 ---
@@ -85,4 +94,6 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 |---|---|---|
 | VIRUS-001 copy/move | Closed: WORM counters are **spent to break** (VIRUS-001); they don't spread to other ICE. The earlier copy-or-move question no longer applies (designer, 2026-11-15). | — (no change needed) |
 | HANDOFF | This file created; working branch chosen. | 2026-11-15 (Claude), PR #4 |
+| ROT-001 sync | Remaining SIGYL labels → TUMBLER in Card Pools, Rustlers, ICE Corp 1–3, Upgrades, Engines. | 2026-11-16 (Claude) |
+| LOG-001 | Development log split: entries up to 2026-11-14 moved to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`; the live log keeps 2026-11-15 on. | 2026-11-16 (Claude) |
 | DSY / PACE approval | Designer approved both docs as written for the next build; amendments recorded in Core Rules, Card Pools, Uplink & CAPS, Upgrades, Rustlers, Engines and the three ICE docs; checklist v0.2. | 2026-11-15 (Claude) |

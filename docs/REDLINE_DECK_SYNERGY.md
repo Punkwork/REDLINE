@@ -269,9 +269,9 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | **HANDOFF** | ECHO | Common | SCRIPT — CLOAK | 0 BW | −2 TRACE. **CHAIN CLOAK:** draw 1. |
 | **STACK SMASH** | RIOT | Uncommon | SCRIPT — EXPLOIT | 1 BW | Target ICE −1 STR for each EXPLOIT card you've played this turn (including this one). |
 | **NULL POINTER** *(replaces INTEGER UNDERFLOW, ZEROED-001)* | RIOT | Rare | SCRIPT — EXPLOIT | 2 BW | Target ICE at 0 STR: break 2 of its subroutines (DEADLOCKs included). Normal limits apply: only active or revealed subroutines, BOOTING and SEQUENCED respected. BURNED. |
-| **FLATLINE** *(ZEROED-001, proposed)* | RIOT | Common | SCRIPT — EXPLOIT | 0 BW, +2 TRACE | Target ICE −2 STR this encounter. **ZEROED:** −4 TRACE. |
-| **KNOCKOUT** *(ZEROED-001, proposed)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 1 BW | Target ICE −3 STR this encounter. **ZEROED:** break 1 of its subroutines (normal limits apply). |
-| **SECOND WIND** *(ZEROED-001, proposed)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 0 BW | Target ICE −1 STR this encounter. **ZEROED:** gain 1 BW. |
+| **FLATLINE** *(ZEROED-001)* | RIOT | Common | SCRIPT — EXPLOIT | 0 BW, +2 TRACE | Target ICE −2 STR this encounter. **ZEROED:** −4 TRACE. |
+| **KNOCKOUT** *(ZEROED-001)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 1 BW | Target ICE −3 STR this encounter. **ZEROED:** break 1 of its subroutines (normal limits apply). |
+| **SECOND WIND** *(ZEROED-001)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 0 BW | Target ICE −1 STR this encounter. **ZEROED:** gain 1 BW. |
 | **CULL** | VECTOR | Common | SCRIPT — VIRUS | 1 BW | Remove up to 3 virus counters from target ICE: +2 SHIELD for each one removed. |
 | **HARVEST** | VECTOR | Uncommon | SCRIPT — VIRUS | 0 BW | Remove all LEECH from target ICE: extract 3 CRED for each one removed. |
 | **CLEAN BUILD** | Generalist | Uncommon | PROTOCOL | 1 BW | Your COMPILED cards cost 1 less BW. |
@@ -344,7 +344,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | DSY-008 | **SCAN X** keyword; in-Node BURN cards. | **APPROVED 2026-11-15** |
 | DSY-009 | **MARGIN**, **OVERKILL X**; **ZEROED** for RIOT's pool. *(Originally also UNDERFLOW: ICE STR below 0, ROT minimum removed. Withdrawn by ZEROED-001.)* | **APPROVED 2026-11-15; amended 2026-11-16 (ZEROED-001)** |
 | ZEROED-001 | **ICE STR can't go below 0**; reductions past 0 are lost; ROT keeps "minimum 0". **ZEROED** keyword (§5.3a): bonus when this card takes an ICE from above 0 to 0; **once per ICE per encounter**, used up by the first drop to 0 from any source; floored ICE can't be ZEROED. | **APPROVED 2026-11-16** (designer: "0 STR is a good bottom… it results in too much confusion and counting for the player"; ZEROED once per ICE) |
-| ZEROED-001 cards | NULL POINTER replaces INTEGER UNDERFLOW; example ZEROED cards FLATLINE, KNOCKOUT, SECOND WIND (§9.2); ZEROED bonus ≈ 1 BW for a common. | **PROPOSED 2026-11-16** (working values) |
+| ZEROED-001 cards | NULL POINTER replaces INTEGER UNDERFLOW; example ZEROED cards FLATLINE, KNOCKOUT, SECOND WIND (§9.2); ZEROED bonus ≈ 1 BW for a common. | **APPROVED 2026-11-16** (designer: "Approved for all those card changes"; working values) |
 | DSY-010 | **Virus cash-out** cards (CULL, HARVEST pattern), alongside WORM. | **APPROVED 2026-11-15** |
 | DSY-011 | **CHAIN [TAG]** keyword, based on the last card played this turn. | **APPROVED 2026-11-15** |
 | DSY-012 | **HOLD 1:** CACHE 1 card free at the end of each turn; DEAD MAN'S POCKET → 2. Off in the Training Node. | **APPROVED 2026-11-15** |

@@ -22,7 +22,8 @@ Each type owns one kind of threat, and its rules follow from that threat.
 
 ### TUMBLER: the puzzle
 - **APPROVED:** TUMBLERS are **where the quirks and puzzles happen**.
-- **LOCKED (ROT-001):** a pool of 1–8 subroutines turns through fewer slots, one step per Rustler turn (conveyor). Only subroutines in a slot can be broken; broken stays broken; BREACH needs every DEADLOCK, and TUMBLERS carry several.
+- **LOCKED (ROT-001):** a pool of 1–8 subroutines turns through fewer slots, one step per Rustler turn (conveyor). Only subroutines in a slot can be broken; BREACH needs every DEADLOCK, and TUMBLERS carry several.
+- **APPROVED (TUMBLE-001, 2026-11-16):** a broken subroutine drops out of the pool and the unbroken ones **tumble** into its place: the slots after it slide back and the next unbroken subroutine enters the last slot, active at once. Rotation skips broken subroutines and stops once everything left is showing (Core Rules §5.4). *Design note:* give TUMBLERS a pool at least 2 larger than their slots, or breaking empties them in a turn or two; place DEADLOCKs knowing each break pulls the next subroutine forward.
 - **PROPOSED:** most passive abilities live on TUMBLERS (see the Ice Passive Abilities doc).
 - **LOCKED (DET-001):** about 1 in 5 TUMBLERS is a **DETAINER** whose S1 is −1 BW next turn; at most 1 DETAINER per encounter.
 
