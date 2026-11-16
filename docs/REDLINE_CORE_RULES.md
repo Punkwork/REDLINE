@@ -145,13 +145,20 @@ One subroutine can have more than one effect (e.g. `[S1] PULP 4 + DEADLOCK`). Br
 
 You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of the encounter).
 
+**STR floor [ZEROED-001]:** ICE STR **can't go below 0**. A reduction that would take it lower takes it to 0 and the rest is lost, so the STR shown is the real STR. If the ICE gains STR later, it rises from 0. (ROT is the exception: spare ROT counters stay on the ICE and keep holding it at 0, §5.7.)
+
+**ZEROED [ZEROED-001]:** a card that says **ZEROED: [bonus]** gives that bonus if it takes target ICE from above 0 STR to 0. **Each ICE can be ZEROED only once per encounter:** the first time its STR drops to 0, from any cause, uses up its ZEROED, and the bonus happens only if the card that did it prints ZEROED. An ICE that starts at 0, or that can't be reduced below a floor above 0, can't be ZEROED. A ZEROED ICE shows a marker for the rest of the encounter.
+
 **Screen rule [NEW]:** when you drag an Icepick onto an ICE, the game shows the **total BW needed** to break each subroutine from the current state, including boosts and STR reductions. Players should never have to do this sum themselves.
 
 ### 5.4 TUMBLER rotation [NEW, ROT-001]
 
 - A TUMBLER has a **pool** of 1–8 subroutines and fewer **slots**. Only the subroutines in its slots are active; the rest are **face-down** (the card shows how many).
 - **Conveyor:** at the start of each of your turns after the first, the window moves one step: slots showing S1-S2-S3 then show S2-S3-S4, then S3-S4-S5, wrapping round. The newly revealed set is what fires when you end that turn, so you only learn the response at the start of your turn.
-- **Broken stays broken** for the rest of the encounter, even after it rotates out and back in.
+- **TUMBLE [TUMBLE-001]:** a broken subroutine **drops out of the pool** for the rest of the encounter. When you break a subroutine that's in a slot, the unbroken subroutines in the slots after it **slide back one slot** to close the gap, and the **next unbroken subroutine in pool order tumbles into the last slot**, face up (wrapping round the pool, skipping broken ones). A subroutine that tumbles in is **active at once**: you can break it this turn if you can pay, and if you don't, it fires in this turn's Corporation Response. Each turn's conveyor step then moves through the **unbroken subroutines only**.
+- **Running out:** once a TUMBLER has no more unbroken subroutines than slots, they all show, rotation stops, and any spare slots stay empty.
+- **Edge cases:** card breaks (BRUTE FORCE, RUNTIME ERROR, NULL POINTER…) and WORM breaks tumble the same way. A DEADLOCK ×N only drops out when its last break lands. BOOTING still applies to a DEADLOCK that tumbles in early. A TUMBLER with nothing left to tumble in just shows fewer subroutines.
+- *Example:* CAPTCHA (2 slots of 5: DISCARD 1 · DEADLOCK · PULP 6 · DEADLOCK · TRACE 3) shows DISCARD 1 · DEADLOCK on turn 1. Break the DEADLOCK and PULP 6 tumbles into slot 2: break it too, and the second DEADLOCK tumbles in. Every break shows you something new, and sometimes pulls a worse subroutine into this turn's response.
 - TUMBLERS carry **several DEADLOCKs**, which must each be broken while in a slot (§4 BREACH).
 - *Presentation (REEL-001):* each slot is a slot-machine reel that spins on rotation; slots are labelled with the subroutine they hold ("SLOT 2 · S1").
 
@@ -170,7 +177,7 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 
 ### 5.7 Virus counters and the corporation PURGE [NEW, RUSTLER-002 and PURGE-001]
 
-- **Strains** (placed by INFECT): **ROT** −1 STR each; **SCRAMBLE** this ICE's PULP −1 each when it acts; **BLIND** this ICE's TRACE −1 each when it acts; **LEECH** extract 1 CRED each at the start of your turn; **WORM** on your turn, at any time, remove 2 WORM counters from an ICE to break 1 subroutine on that ICE of your choice (normal break rules apply: it must be active or revealed, not locked by BOOTING, and SEQUENCED order is respected; it needs no Icepick, ignores the ICE's STR, costs no BW (TOLL doesn't apply) and can only be used on your turn) *(VIRUS-001)*.
+- **Strains** (placed by INFECT): **ROT** −1 STR each (minimum 0; spare ROT keeps the ICE at 0 if it gains STR, §5.3); **SCRAMBLE** this ICE's PULP −1 each when it acts; **BLIND** this ICE's TRACE −1 each when it acts; **LEECH** extract 1 CRED each at the start of your turn; **WORM** on your turn, at any time, remove 2 WORM counters from an ICE to break 1 subroutine on that ICE of your choice (normal break rules apply: it must be active or revealed, not locked by BOOTING, and SEQUENCED order is respected; it needs no Icepick, ignores the ICE's STR, costs no BW (TOLL doesn't apply) and can only be used on your turn) *(VIRUS-001)*.
 - **PURGE:** at the start of its turn the corporation counts every virus counter on the encounter's ICE. At or above its **PURGE limit** it removes them all instead of taking its turn. **HALCYON: limit 10, +5 after each purge** (10 → 15 → 20), reset each encounter. The limit is **never shown** to the Rustler.
 - A PURGE or BLACKOUT turn isn't a Corporation Response: TUMBLERS still rotate (your turn starts), but VOIDS reveal nothing new, HARDENING doesn't grow and PULP curves don't advance.
 
@@ -516,10 +523,12 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | DSY-003 | **DECOMPILE:** the full-clear card reward (§9.1) also offers removing 1 card from your deck. Floor 10 cards; can't leave an ICE type with no breaker. — **APPROVED 2026-11-15** |
 | DSY-006 | Deck-size targets **18–22 / 24–29 / 30–35** at the end of HALCYON / IRONWATCH / LUCIDA replace §9.1's "about 30 cards added". — **APPROVED 2026-11-15** |
 | DSY-007 | **REBOOT** (§3.2, §4.1): when you need to draw and your draw pile is empty, shuffle your discard pile into it, then keep drawing. "Whenever you REBOOT" effects are ENGINE effects. — **APPROVED 2026-11-15** |
-| DSY-009 | **UNDERFLOW:** ICE STR can go below 0 (§5.3); ROT's minimum 0 is removed (§5.7). **MARGIN** (Icepick STR − ICE STR) shown in the break preview; **OVERKILL X** keyword. — **APPROVED 2026-11-15** |
+| DSY-009 | **MARGIN** (Icepick STR − ICE STR) shown in the break preview; **OVERKILL X** keyword. *(Its UNDERFLOW part, STR below 0 and ROT's minimum removed, is withdrawn by ZEROED-001.)* — **APPROVED 2026-11-15; amended 2026-11-16** |
 | DSY-011 | **CHAIN [TAG]** keyword: a bonus if the last card you played this turn had that tag. HUD shows "Last played". — **APPROVED 2026-11-15** |
 | DSY-012 | **HOLD 1:** at the end of your turn you may CACHE 1 card in hand for free (§3.2, §4.5). Off in the Training Node. — **APPROVED 2026-11-15** |
 | PACE-001 | Encounter length targets **4–5 turns early, 5–8 mid–late**, boss 7–8, escape 4–5, replace §10.5's 3–4 turns. — **APPROVED 2026-11-15** |
 | PACE-003 | **DEADLOCK ×N** subroutines need N breaks (§5.2). BOOTING moves to the 4th turn **only if** playtest 2 shows the Opening Node breached before turn 4 (would amend §10.1a). — **APPROVED 2026-11-15** |
 | PACE-005 | **ESCALATE ↑:** a TRACE, DISCARD or FORGET subroutine that grows by 1 each time it resolves (§5.2). — **APPROVED 2026-11-15** |
 | PACE-008 | **Fewer layers:** Tier 1 Nodes 1 layer, Tier 2 Nodes 1–2 (§8.1). Card reward odds re-based (§9.1): Tier 1 1-layer = 60/30/10; Tier 2 1-layer = 45/40/15; Tier 2 2-layer = 30/45/25. Run length assumes 10–11 encounters per corporation (§10.5). — **APPROVED 2026-11-15** |
+| ZEROED-001 | **ICE STR can't go below 0**; reductions past 0 are lost; ROT keeps its minimum 0 (§5.3, §5.7). **ZEROED** keyword, **once per ICE per encounter** (§5.3). Replaces DSY-009's UNDERFLOW: too much confusion and counting for the player. — **APPROVED 2026-11-16** (designer) |
+| TUMBLE-001 | **TUMBLE:** a broken TUMBLER subroutine drops out of the pool; the unbroken ones slide into its place and the next unbroken one tumbles into the last slot, active at once; the conveyor skips broken subroutines; rotation stops when every unbroken subroutine is showing (§5.4). Replaces "broken stays broken… rotates out and back in". — **APPROVED 2026-11-16** (designer) |

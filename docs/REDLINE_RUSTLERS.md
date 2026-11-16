@@ -12,9 +12,9 @@
 | Rustler | Playstyle | Signature Icepick | Weak against | ORIGIN Ghostware | Difficulty |
 |---|---|---|---|---|---|
 | **THE GENERALIST** | Balanced; an answer for everything | One of each type | Nothing in particular; nothing outstanding | **READY RIG** | ★☆☆ |
-| **ECHO** | Quiet. Low TRACE, long encounters, more CRED | **HUSH** (SIGYL) | FORTRESS, VOID | **LOW PROFILE** | ★★☆ |
-| **RIOT** | Loud. Gets stronger at high TRACE, flirts with strikes | **SLEDGE** (FORTRESS) | SIGYL, VOID | **REDLINER** | ★★★ |
-| **VECTOR** | Viruses. Weakens every ICE over time | **STINGER** (VOID) | FORTRESS, SIGYL (until infected) | **PATIENT ZERO** | ★★☆ |
+| **ECHO** | Quiet. Low TRACE, long encounters, more CRED | **HUSH** (TUMBLER) | FORTRESS, VOID | **LOW PROFILE** | ★★☆ |
+| **RIOT** | Loud. Gets stronger at high TRACE, flirts with strikes | **SLEDGE** (FORTRESS) | TUMBLER, VOID | **REDLINER** | ★★★ |
+| **VECTOR** | Viruses. Weakens every ICE over time | **STINGER** (VOID) | FORTRESS, TUMBLER (until infected) | **PATIENT ZERO** | ★★☆ |
 
 **Shared starting stats:** 30 VITAE (Max 30), 4 BW, DRAW 6 (DRAW-001), 4 RAM, TRACE 0 of 40. Rustlers differ through their decks and ORIGIN Ghostware, not their base stats, so the core numbers stay easy to learn.
 
@@ -67,7 +67,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
 | 1 | FORTRESS Icepick | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 1. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. |
-| 1 | SIGYL Icepick | PROGRAM — ICEPICK (SIGYL) | 1 BW, 1 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. |
+| 1 | TUMBLER Icepick | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. |
 | 1 | VOID Icepick | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 1 | CORTEX BUFFER | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. |
@@ -86,7 +86,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 > *"If they never notice you, you were never there."*
 
-**Playstyle:** quiet. Avoids TRACE, which lets ECHO stay in encounters longer and extract more CRED than anyone else. Strong against SIGYLS; has to pay heavily in BW to get past other ICE.
+**Playstyle:** quiet. Avoids TRACE, which lets ECHO stay in encounters longer and extract more CRED than anyone else. Strong against TUMBLERS; has to pay heavily in BW to get past other ICE.
 
 **Built-in tension:** most of ECHO's protection is CLOAK cards, and some VOID ICE (like WATCHDOG) get stronger every time a CLOAK card is played. Choosing when *not* to hide is ECHO's skill test.
 
@@ -230,5 +230,7 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 
 | ID | Change to this document |
 |---|---|
-| DSY-009 | ROT: "minimum 0" removed (§2); ICE STR can go below 0 (UNDERFLOW). — **APPROVED 2026-11-15** |
+| DSY-009 | ~~ROT: "minimum 0" removed (§2); ICE STR can go below 0 (UNDERFLOW).~~ Withdrawn by ZEROED-001: ROT keeps "minimum 0" as printed in §2. — **APPROVED 2026-11-15; reversed 2026-11-16** |
 | PACE-009 | Rustler watch list for longer encounters, especially RIOT's TRACE (`REDLINE_PACING.md` §8). — **APPROVED 2026-11-15** |
+| ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |
+| ZEROED-001 | ICE STR can't go below 0; **ZEROED** keyword (once per ICE per encounter) joins RIOT's Phase 7 pool (`REDLINE_DECK_SYNERGY.md` §5.3a). — **APPROVED 2026-11-16** |

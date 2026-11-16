@@ -58,23 +58,23 @@ LUCIDA follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): the t
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|
-| **SLEEP TRACKER** | SIGYL | 2 | [S1] TRACE 1 · [S2] FORGET 1 · [S3] DEADLOCK | — | 4 | Learning FORGET |
+| **SLEEP TRACKER** | TUMBLER | 2 | [S1] TRACE 1 · [S2] FORGET 1 · [S3] DEADLOCK | — | 4 | Learning FORGET |
 | **MOOD SCANNER** | VOID | 3 | [S1] CORTEX 1 + DEADLOCK | — | 4 | Early CORTEX: break it or lose a card per draw |
 | **DREAMCATCHER** | FORTRESS | 4 | [S1] INSERT 1 INTRUSIVE THOUGHT into your discard pile · [S2] DEADLOCK | — | 2 | The INTRUSIVE THOUGHT tax |
 | **FOCUS MODE** | FORTRESS | 5 | [S1] DISCARD 1 · [S2] DEADLOCK | — | 2 | PROBE and boosting against high STR |
-| **NEURAL HANDSHAKE** | SIGYL | 3 | [S1] PULP 2 · [S2] FORGET 1 · [S3] DEADLOCK | — | 5 | Which loss hurts more: VITAE or a card |
+| **NEURAL HANDSHAKE** | TUMBLER | 3 | [S1] PULP 2 · [S2] FORGET 1 · [S3] DEADLOCK | — | 5 | Which loss hurts more: VITAE or a card |
 
 ### Tier 2 (rows 6–9)
 
 | ICE | Type | STR | Subroutines | Reactive ability | Threat | Tests |
 |---|---|---|---|---|---|---|
 | **MEMORY PALACE** | FORTRESS | 6 | [S1] FORGET 1 + PULP 2 · [S2] DEADLOCK · [S3] DEADLOCK | — | 5 | Two DEADLOCKs; FORGET while you boost |
-| **DREAM AD** | SIGYL | 4 | [S1] INSERT 2 INTRUSIVE THOUGHT into your draw pile · [S2] DEADLOCK | — | 6 | Bloatware that turns into CORTEX |
+| **DREAM AD** | TUMBLER | 4 | [S1] INSERT 2 INTRUSIVE THOUGHT into your draw pile · [S2] DEADLOCK | — | 6 | Bloatware that turns into CORTEX |
 | **EMPATHY ENGINE** | VOID | 4 | [S1] CORTEX 1 · [S2] PULP 3 + DEADLOCK | Whenever you play an EXPLOIT card: TRACE 2. | 7+ | Weakening ICE with EXPLOIT cards (RIOT, VECTOR) |
 | **NEUROLINK** | VOID | 5 | [S1] CORTEX 1 · [S2] CORTEX 1 + DEADLOCK | — | 8 | Heavy CORTEX: CORTEX prevention or a fast BREACH |
-| **THERAPIST** | SIGYL | 3 | [S1] PURGE ALL · [S2] FORGET 1 · [S3] DEADLOCK | — | 3 + anti-virus | VECTOR (break [S1] first or lose your counters) |
+| **THERAPIST** | TUMBLER | 3 | [S1] PURGE ALL · [S2] FORGET 1 · [S3] DEADLOCK | — | 3 + anti-virus | VECTOR (break [S1] first or lose your counters) |
 | **SYNAPSE BARRIER** | FORTRESS | 5 | [S1] PULP 3 + DEADLOCK | Its STR can't be reduced below 4. | 3 | Boosting instead of PROBE |
-| **RECALL** | SIGYL | 4 | [S1] DISCARD 2 · [S2] TRACE 2 + DEADLOCK | — | 6 | Hand disruption; CACHE |
+| **RECALL** | TUMBLER | 4 | [S1] DISCARD 2 · [S2] TRACE 2 + DEADLOCK | — | 6 | Hand disruption; CACHE |
 
 ---
 
@@ -97,7 +97,7 @@ LUCIDA's central model, trained on millions of sleeping minds. A three-ICE boss 
 
 | Position | ICE | Type | STR | Subroutines | Reactive ability |
 |---|---|---|---|---|---|
-| Left (support) | **MEMORY BANK** | SIGYL | 3 | [S1] FORGET 1 · [S2] ANIMA +1 STR | — |
+| Left (support) | **MEMORY BANK** | TUMBLER | 3 | [S1] FORGET 1 · [S2] ANIMA +1 STR | — |
 | Middle (support) | **LIMBIC LOOP** | VOID | 4 | [S1] PULP 2 · [S2] INSERT 1 INTRUSIVE THOUGHT into your hand | — |
 | Right (main) | **ANIMA** | VOID | 7 | [S1] CORTEX 1 · [S2] PULP 3 · [S3] DEADLOCK · [S4] DEADLOCK | At the end of each Corporation Response: FORGET 1. |
 
@@ -115,7 +115,7 @@ LUCIDA's new-user setup. Every route starts here (Core Rules §10.1a).
 | Position | ICE | Type | STR | Subroutines | Ability |
 |---|---|---|---|---|---|
 | Left (support) | **BASELINE SCAN** | VOID | 3 | [S1] FORGET 1 · [S2] PULP 2 | — |
-| Right (main) | **ONBOARDING** | SIGYL | 3 | [S1] FORGET 1 · [S2] DEADLOCK | **BOOTING:** its DEADLOCK can't be broken before your 3rd turn of the encounter. |
+| Right (main) | **ONBOARDING** | TUMBLER | 3 | [S1] FORGET 1 · [S2] DEADLOCK | **BOOTING:** its DEADLOCK can't be broken before your 3rd turn of the encounter. |
 
 - **The lesson:** LUCIDA attacks your hand. **FORGET takes random cards, and CACHED cards are safe.** Protect the card you need for turn 3.
 - **The decisions (turns 1–2):** break the FORGET subroutines, or CACHE your key card and spend the BW elsewhere? Turn 3: break ONBOARDING's DEADLOCK, or stay to extract?
@@ -129,7 +129,7 @@ When you take ANIMA's core, LUCIDA tries to wake you before you can leave.
 
 | ICE | Type | STR | Subroutines | Ability | Threat* |
 |---|---|---|---|---|---|
-| **WAKE SIGNAL** | SIGYL | 3 | [S1] TRACE 3 · [S2] DEADLOCK | — | 3 (6 while escaping) |
+| **WAKE SIGNAL** | TUMBLER | 3 | [S1] TRACE 3 · [S2] DEADLOCK | — | 3 (6 while escaping) |
 | **DÉJÀ VU** | VOID | 3 | [S1] INSERT 1 INTRUSIVE THOUGHT into your hand · [S2] PULP 2 + DEADLOCK | — | 4 |
 | **AMNESIA** | FORTRESS | 5 | [S1] FORGET 1 · [S2] DEADLOCK | Its STR can't be reduced below 3. | 3 |
 | **SLEEP PARALYSIS** | VOID | 4 | [S1] CORTEX 1 + DEADLOCK | Whenever you install a PROGRAM: +2 TRACE. | 4+ |
@@ -159,7 +159,7 @@ One of these is always among the 3 payload choices at ANIMA (P5-003).
 |---|---|---|---|
 | **Generalist** | SLEEP TRACKER, FOCUS MODE | NEUROLINK, MOOD SCANNER (CORTEX) | CORTEX BUFFER blocks the first CORTEX each encounter; the VOID Icepick is cheap to boost |
 | **ECHO** | SLEEP TRACKER, NEURAL HANDSHAKE, RECALL (HUSH) | MOOD SCANNER, NEUROLINK, the FORTRESSES | DEAD AIR CACHEs BACKDOOR safe from FORGET; LOW PROFILE shrugs off TRACE 1–2 |
-| **RIOT** | FOCUS MODE, MEMORY PALACE, SYNAPSE BARRIER (SLEDGE boosts past the STR floor) | EMPATHY ENGINE (EXPLOIT → TRACE), the SIGYLS | BRUTE FORCE early, before TRACE builds; LAY LOW before Tier 2 |
+| **RIOT** | FOCUS MODE, MEMORY PALACE, SYNAPSE BARRIER (SLEDGE boosts past the STR floor) | EMPATHY ENGINE (EXPLOIT → TRACE), the TUMBLERS | BRUTE FORCE early, before TRACE builds; LAY LOW before Tier 2 |
 | **VECTOR** | Multi-ICE layers, ANIMA's supports | THERAPIST (PURGE ALL), SYNAPSE BARRIER (STR floor 4 limits ROT) | RUNTIME ERROR on THERAPIST's [S1] first; STINGER for the VOID ICE |
 
 ---
@@ -184,3 +184,4 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 |---|---|
 | DSY-013 | New Tier 2 ICE **RECURRING DREAM** (TUMBLER 4; whenever you REBOOT: FORGET 1). — **APPROVED 2026-11-15** |
 | PACE-008 | Layers and reserves as in `REDLINE_ICE_CORP1.md` amendments. — **APPROVED 2026-11-15** |
+| ROT-001 sync | Remaining SIGYL ICE relabelled **TUMBLER**. Their subroutines are listed as before; **slot counts and pool order are not yet designed** for TUMBLERS outside the playtest slice. Until then, read each listed set as the pool. — designer instruction 2026-11-16 |

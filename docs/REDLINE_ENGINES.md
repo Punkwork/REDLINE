@@ -113,7 +113,7 @@ SHIELD from SANDBOX's RUN lands at the end of your turn, so it protects during t
 
 **Fallback check (Core Rules §12, OPEN-001):** ZOMBIE gains 1 CHARGE per turn, so a ZOMBIE spawned on turn 1 can break an STR 3 DEADLOCK on turn 3 or 4. That fits BOOTING's 3-turn Opening Nodes. Simulate before approval.
 
-**Weak against:** SIGYL and VOID ICE (PIPE is a FORTRESS Icepick), fast encounters, and K9 UNIT / DOORBELL CAM (SANDBOX is CLOAK). **Strong in:** long multi-ICE layers and Opening Nodes.
+**Weak against:** TUMBLER and VOID ICE (PIPE is a FORTRESS Icepick), fast encounters, and K9 UNIT / DOORBELL CAM (SANDBOX is CLOAK). **Strong in:** long multi-ICE layers and Opening Nodes.
 
 ### 4.4 ORIGIN Ghostware — CRONTAB
 **At the start of each encounter, SPAWN 1 SANDBOX.** *(CRON's Cracked Core: the engine is running before your first card.)*
@@ -186,3 +186,4 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | ID | Change to this document |
 |---|---|
 | DSY-007 | "Whenever you REBOOT" effects are ENGINE effects (§1), so AMP applies. — **APPROVED 2026-11-15** |
+| ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |

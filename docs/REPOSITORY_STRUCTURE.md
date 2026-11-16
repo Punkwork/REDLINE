@@ -8,7 +8,8 @@ PANOPTICON is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the 
   - `REDLINE_MASTER_DESIGN.md` — design authority; preserve LOCKED decisions unless explicitly revised.
   - `REDLINE_BIBLE.md` — consolidated creative/world and design reference.
   - `REDLINE_CURRENT_STATUS.md` — current handoff and verified implementation status.
-  - `REDLINE_DEVELOPMENT_LOG.md` — dated development history and decisions.
+  - `REDLINE_DEVELOPMENT_LOG.md` — dated development history and decisions (recent entries; kept under about 60 KB).
+  - `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` — older log entries, moved unchanged (LOG-001).
   - Simplified redesign (2026-11-12 onward; `REDLINE_CORE_RULES.md` is the rules authority where it conflicts with older entries):
     - `REDLINE_CORE_RULES.md` — core rules authority.
     - `REDLINE_RUSTLERS.md`, `REDLINE_CARD_POOLS.md` — Rustlers, starter decks and reward pools.

@@ -58,7 +58,7 @@ IRONWATCH follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): th
 | **CHECKPOINT** | FORTRESS | 4 | [S1] PULP 3 · [S2] DEADLOCK | — | 3 | Basic FORTRESS breaking under PULP pressure |
 | **BODY CAM** | VOID | 2 | [S1] TRACE 2 · [S2] PULP 2 + DEADLOCK | — | 4 | Choosing between TRACE and PULP |
 | **PATROL DRONE** | VOID | 3 | [S1] PULP 3 + DEADLOCK | Whenever you install a PROGRAM: PULP 1. | 3+ | Setting up a big rig (Generalist) |
-| **KEYCARD READER** | SIGYL | 3 | [S1] DISCARD 1 · [S2] TRACE 1 · [S3] DEADLOCK | — | 3 | Many small breaks; rewards SIGYL Icepicks |
+| **KEYCARD READER** | TUMBLER | 3 | [S1] DISCARD 1 · [S2] TRACE 1 · [S3] DEADLOCK | — | 3 | Many small breaks; rewards TUMBLER Icepicks |
 | **BARRICADE** | FORTRESS | 5 | [S1] INSERT 1 CITATION into your discard pile · [S2] DEADLOCK | — | 2 | PROBE and boosting against high STR; the CITATION tax |
 
 ### Tier 2 (rows 6–9)
@@ -68,9 +68,9 @@ IRONWATCH follows the approved ICE design rules (`REDLINE_ICE_CORP1.md` §2): th
 | **BLAST DOOR** | FORTRESS | 6 | [S1] PULP 4 · [S2] DEADLOCK · [S3] DEADLOCK | — | 4 | Two DEADLOCKs behind high STR |
 | **STUN TURRET** | VOID | 4 | [S1] PULP 3 · [S2] PULP 3 + DEADLOCK | — | 6 | Stacking SHIELD against double PULP |
 | **K9 UNIT** | VOID | 3 | [S1] PULP 2 · [S2] PULP 2 · [S3] TRACE 2 + DEADLOCK | Whenever you play a CLOAK card: +1 STR (this encounter; stacks). | 6 | Over-hiding (ECHO) |
-| **CROWD CONTROL** | SIGYL | 4 | [S1] DISCARD 2 · [S2] PULP 2 + DEADLOCK | — | 6 | Hand disruption; CACHE |
+| **CROWD CONTROL** | TUMBLER | 4 | [S1] DISCARD 2 · [S2] PULP 2 + DEADLOCK | — | 6 | Hand disruption; CACHE |
 | **ARMORY** | FORTRESS | 5 | [S1] EVERY OTHER ICE +1 STR · [S2] PULP 3 + DEADLOCK | — | 3 + support | A support that arms the others: break it first or race |
-| **INTERROGATION** | SIGYL | 3 | [S1] INSERT 1 CITATION into your hand · [S2] CORTEX 1 · [S3] DEADLOCK | — | 6 | Bloatware in hand plus CORTEX; CORTEX BUFFER |
+| **INTERROGATION** | TUMBLER | 3 | [S1] INSERT 1 CITATION into your hand · [S2] CORTEX 1 · [S3] DEADLOCK | — | 6 | Bloatware in hand plus CORTEX; CORTEX BUFFER |
 | **SNIPER NEST** | VOID | 5 | [S1] PULP 6 + DEADLOCK | While your TRACE is 20 or more, its PULP subroutines deal +2. | 6 (8) | High TRACE (RIOT) |
 
 ---
@@ -94,7 +94,7 @@ IRONWATCH's command AI: every camera, drone and officer, coordinated. A three-IC
 
 | Position | ICE | Type | STR | Subroutines | Reactive ability |
 |---|---|---|---|---|---|
-| Left (support) | **DISPATCH** | SIGYL | 3 | [S1] TRACE 2 · [S2] OVERWATCH +1 STR | — |
+| Left (support) | **DISPATCH** | TUMBLER | 3 | [S1] TRACE 2 · [S2] OVERWATCH +1 STR | — |
 | Middle (support) | **SHOCK TROOPER** | VOID | 4 | [S1] PULP 3 · [S2] DISCARD 1 | — |
 | Right (main) | **OVERWATCH** | VOID | 7 | [S1] PULP 4 · [S2] TRACE 2 · [S3] DEADLOCK · [S4] DEADLOCK | At the end of each Corporation Response: PULP 2. |
 
@@ -126,7 +126,7 @@ When you take OVERWATCH's data core, IRONWATCH closes the district.
 | ICE | Type | STR | Subroutines | Ability | Threat* |
 |---|---|---|---|---|---|
 | **ROADBLOCK** | FORTRESS | 5 | [S1] PULP 3 · [S2] DEADLOCK | Whenever you play an EXPLOIT card: PULP 1. | 3+ |
-| **SPIKE STRIP** | SIGYL | 3 | [S1] CORTEX 1 · [S2] DEADLOCK | — | 4 |
+| **SPIKE STRIP** | TUMBLER | 3 | [S1] CORTEX 1 · [S2] DEADLOCK | — | 4 |
 | **SEARCHLIGHT** | VOID | 3 | [S1] TRACE 3 · [S2] PULP 2 + DEADLOCK | — | 5 (8 while escaping) |
 | **PURSUIT DRONE** | VOID | 4 | [S1] PULP 4 + DEADLOCK | At the end of each Corporation Response: +1 STR. | 4, rising |
 | **LETHAL FORCE** *(Black ICE)* | VOID | 6 | [S1] PULP 5 · [S2] PULP 5 | — | 10 |
@@ -181,3 +181,4 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 |---|---|
 | DSY-013 | New Tier 2 ICE **PATTERN ANALYSIS** (VOID 4; whenever you get a CHAIN bonus: PULP 1). — **APPROVED 2026-11-15** |
 | PACE-008 | Layers and reserves as in `REDLINE_ICE_CORP1.md` amendments. — **APPROVED 2026-11-15** |
+| ROT-001 sync | Remaining SIGYL ICE relabelled **TUMBLER**. Their subroutines are listed as before; **slot counts and pool order are not yet designed** for TUMBLERS outside the playtest slice. Until then, read each listed set as the pool. — designer instruction 2026-11-16 |
