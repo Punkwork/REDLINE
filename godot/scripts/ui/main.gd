@@ -20,6 +20,9 @@ const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LE
 
 var g: Game
 var nr: NulRem
+var compile_first := -1
+var compile_open := false
+var deck_open := false
 var targeting := -1
 var konami_pos := 0
 var idle := 0.0
@@ -208,6 +211,12 @@ func _build_layout() -> void:
 	piles.position = Vector2(1352, 724)
 	piles.size = Vector2(236, 80)
 	add_child(piles)
+	var deck_button := Button.new()
+	deck_button.text = "DECK / COVERAGE"
+	deck_button.position = Vector2(1352, 807)
+	deck_button.size = Vector2(236, 32)
+	deck_button.pressed.connect(func(): deck_open = true; refresh())
+	add_child(deck_button)
 
 	var np := _panel(Vector2(1346, 100), Vector2(244, 520), Color("#07120c"), Color("#2c7a4f"))
 	var nv := VBoxContainer.new()
@@ -430,7 +439,9 @@ func refresh() -> void:
 		log_label.text = "PATIENT ZERO: choose an ICE to INFECT with 1 ROT."
 	if targeting >= 0:
 		log_label.text = "Choose an ICE for %s (right-click or Esc to cancel)." % CardDB.def(g.find_card(targeting).id).name
-	piles.text = "DECK %d\nDISCARD %d\nBURNED %d" % [g.draw_pile.size(), g.discard.size(), g.burned.size()] if in_enc else ""
+	piles.text = "FOOTPRINT %d / %d · %s\nDECK %d · DISCARD %d · BURNED %d" % [g.footprint(), g.footprint_cap(), g.footprint_band(), g.draw_pile.size(), g.discard.size(), g.burned.size()] + "\nLast played: %s" % "/".join(g.enc.get("last_tags", [])) + "\nREBOOT in ~%d turn(s) · AMP %d" % [int(ceil(float(g.draw_pile.size()) / maxi(1, g.draw_size()))), g.amp]
+	piles.autowrap_mode = TextServer.AUTOWRAP_WORD
+	piles.add_theme_color_override("font_color", Color("#ff6b78") if g.footprint_band() == "HEAVY" else Color("#9ad17a"))
 	_build_overlay()
 
 func _handle_events() -> void:
@@ -672,7 +683,7 @@ func _build_ice() -> void:
 
 func _ice_card(i: int, is_main: bool) -> Control:
 	var ice: Dictionary = g.enc.ice[i]
-	var d := IceDB.def(ice.id)
+	var d := g.ice_definition(ice)
 	var black: bool = d.get("black", false)
 	var pc := PanelContainer.new()
 	pc.custom_minimum_size = Vector2(320 if is_main else 290, 350)
@@ -724,7 +735,7 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	head.add_child(nm)
 	var cur := g.ice_str(i)
 	var sv := VBoxContainer.new()
-	sv.add_child(_lbl("STR %d" % cur, 28, TEXT))
+	sv.add_child(_lbl("STR %d" % cur, 28, Color("#ff4d5e") if cur < 0 else TEXT))
 	if cur != d.str:
 		sv.add_child(_lbl("base %d" % d.str, 11, DIM))
 	head.add_child(sv)
@@ -949,11 +960,13 @@ func _sub_row(i: int, s: int, effects: Array, broken: bool, tag: String) -> Cont
 		cb.pressed.connect(func(): g.choose_sub(i, s); refresh())
 		row.add_child(cb)
 		return row
+	if Game.deadlock_steps(g.ice_definition(g.enc.ice[i]).subs[s]) > 1:
+		row.add_child(_lbl("%d/%d" % [g.enc.ice[i].break_progress[s], Game.deadlock_steps(g.ice_definition(g.enc.ice[i]).subs[s])], 12, TEXT))
 	var info := g.break_info(i, s)
 	var b := Button.new()
 	b.custom_minimum_size = Vector2(92, 30)
 	if info.ok:
-		b.text = "FREE" if info.cost == 0 else "BREAK %d BW" % info.cost
+		b.text = ("FREE" if info.cost == 0 else "BREAK %d BW" % info.cost) + " · MARGIN %d" % info.get("margin", 0)
 		if info.boosts > 0:
 			b.tooltip_text = "Includes %d boost(s)." % info.boosts
 	else:
@@ -979,13 +992,14 @@ func _chip(e: Dictionary) -> Control:
 		"TRACE":
 			col = RIcon.COL.TRACE; icon = "TRACE"; word = "TRACE %d" % e.v
 		"DEADLOCK":
-			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "DEADLOCK"
+			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "DEADLOCK" + (" ×%d" % e.v if e.get("v", 1) > 1 else "")
 		"BW_DRAIN":
 			col = RIcon.COL.BW; icon = "BW"; word = "−%d BW next turn" % e.v
 		"DISCARD":
 			col = RIcon.COL.TEAL; icon = "CARD"; word = "DISCARD %d next turn" % e.v
 		"INSERT":
 			col = RIcon.COL.TEAL; icon = "CARD"; word = "INSERT %d %s → %s" % [e.v, e.card, "draw pile" if e.to == "draw" else "discard pile"]
+	if e.get("escalate", false): word += " ↑"
 	var pc := PanelContainer.new()
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color(col.r, col.g, col.b, 0.16)
@@ -1187,7 +1201,7 @@ func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 			tags.add_child(RIcon.make("VIRUS", 16))
 			tags.add_child(_lbl(" VIRUS ", 10, RIcon.COL.VIRUS))
 	v.add_child(tags)
-	var tx := _lbl(d.text, 11, Color("#c4ccd8"))
+	var tx := _lbl(g.card_text(id), 11, Color("#c4ccd8"))
 	tx.autowrap_mode = TextServer.AUTOWRAP_WORD
 	tx.custom_minimum_size = Vector2(132, 0)
 	v.add_child(tx)
@@ -1216,12 +1230,36 @@ func _build_overlay() -> void:
 		row.add_child(no)
 		v.add_child(row)
 		return
+	if compile_open:
+		_overlay_compile()
+		return
+	if deck_open:
+		_overlay_deck(false)
+		return
 	match g.phase:
+		"DECOMPILE": _overlay_deck(true)
 		"SELECT": _overlay_select()
 		"MAP": _overlay_map()
 		"READY_RIG": _overlay_options("READY RIG", "Generalist ORIGIN: choose one PROGRAM in your deck. It starts installed for free; your first hand stays full.", g.pending.options, g.draw_pile, func(u): g.choose_ready_rig(u); refresh(), "Skip", func(): g.skip_ready_rig(); refresh())
 		"CHOICE":
 			match g.pending.kind:
+				"cull":
+					var panel := _dim_box("CULL", "Choose up to %d more counters to remove." % g.pending.n)
+					for strain in g.pending.ice_ref.virus:
+						if g.pending.ice_ref.virus[strain] > 0:
+							var b := Button.new()
+							b.text = strain + " (%d)" % g.pending.ice_ref.virus[strain]
+							b.pressed.connect(func(): g.cull_strain(strain); refresh())
+							panel.add_child(b)
+					var done := Button.new()
+					done.text = "Finish"
+					done.pressed.connect(func(): g.cull_strain(); refresh())
+					panel.add_child(done)
+				"hold": _overlay_options("HOLD %d" % g.pending.n, "Optionally CACHE a hand card before end-turn effects and the Corporation Response.", g.pending.options, g.hand, _on_hold_choice, "Finish turn / skip remaining HOLD", func(): _on_hold_choice(-1))
+				"scan":
+					_overlay_options("SCAN 3", "Click cards to bottom them, in selection order; click again to undo. Selected: %s" % " → ".join(g.pending.bottom.map(func(uid): return CardDB.def(g._find(g.pending.cards, uid).id).name)), g.pending.cards.map(func(c): return c.uid), g.pending.cards, func(u): g.choose(u); refresh(), "Finish SCAN, then draw 1", func(): g.finish_scan(); refresh())
+				"burn_hand": _overlay_options("GARBAGE COLLECT", "BURN another hand card for this Node, then draw 1.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
+				"retrieve": _overlay_options("TAIL CALL", "Choose a SCRIPT from discard.", g.pending.options, g.discard, func(u): g.choose(u); refresh())
 				"discard": _overlay_options("DISCARD %d" % g.pending.n, "CAPTCHA: choose a card in your hand to discard.", g.hand.map(func(c): return c.uid), g.hand, func(u): g.choose(u); refresh())
 				"uninstaller": _overlay_options("UNINSTALLER", "Choose a Bloatware in your hand to BURN.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
 				"field_kit": _overlay_options("FIELD KIT", "Choose a PROGRAM from your draw pile.", g.pending.options, g.draw_pile, func(u): g.choose(u); refresh())
@@ -1318,7 +1356,11 @@ func _overlay_options(title: String, sub: String, uids: Array, source: Array, on
 	var row := HFlowContainer.new()
 	row.add_theme_constant_override("h_separation", 10)
 	row.add_theme_constant_override("v_separation", 10)
-	v.add_child(row)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1100, 300)
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	v.add_child(scroll)
+	scroll.add_child(row)
 	for u in uids:
 		var c := {}
 		for x in source:
@@ -1359,8 +1401,8 @@ func _overlay_deeper() -> void:
 	v.add_child(_lbl("VITAE %d · TRACE %d / 40 · CRED %d" % [g.vitae, g.trace, g.cred], 14, DIM))
 
 func _overlay_reward() -> void:
-	var odds := {1: "60 / 30 / 10", 2: "45 / 40 / 15", 3: "30 / 45 / 25"}
-	var sub := "Choose 1 card to add to your deck, or skip. Odds after %d layer%s (common / uncommon / rare): %s." % [g.layers_cleared, "" if g.layers_cleared == 1 else "s", odds.get(clamp(g.layers_cleared, 1, 3))]
+	var odds := g.reward_odds(g.layers_cleared)
+	var sub := "Choose 1 card to add to your deck, or skip. Odds after %d layer%s (common / uncommon / rare): %s." % [g.layers_cleared, "" if g.layers_cleared == 1 else "s", "%d / %d / %d" % odds]
 	if g.reward_note != "":
 		sub += "\n" + g.reward_note
 	var v := _dim_box("CARD REWARD", sub, 900)
@@ -1368,13 +1410,28 @@ func _overlay_reward() -> void:
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
 	for id in g.reward_options:
+		var offer := VBoxContainer.new()
+		row.add_child(offer)
+		offer.add_child(_lbl(" · ".join(CardDB.roles(id)), 12, TEXT))
+		offer.add_child(_lbl("Draw this encounter: %.0f%%" % g.draw_chance(id, 1, 1), 11, DIM))
 		var cv := _card_view(id, -1)
+		cv.tooltip_text = "Draw chance this encounter: %.0f%%" % g.draw_chance(id, 1, 1)
+		var key_note := ""
+		for key in g.run_deck:
+			if CardDB.def(key.id).has("pick"):
+				key_note += "%s: %.0f%% → %.0f%%\n" % [CardDB.def(key.id).name, g.draw_chance(key.id), g.draw_chance(key.id, 1, 1 if key.id == id else 0)]
+		cv.tooltip_text += "\nTaking this adds one card. Key-card estimates:\n" + key_note
 		var cid: String = id
 		cv.gui_input.connect(func(ev):
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				g.choose_reward(cid)
 				refresh())
-		row.add_child(cv)
+		offer.add_child(cv)
+	var pruning := Button.new()
+	pruning.text = "DECOMPILE · remove a deck card instead"
+	pruning.pressed.connect(func(): g.begin_decompile(); refresh())
+	v.add_child(pruning)
+	v.add_child(_lbl(g.coverage_text(), 12, DIM))
 	var b := Button.new()
 	b.text = "Skip (a thin deck is a happy deck)"
 	b.pressed.connect(func(): g.choose_reward(""); refresh())
@@ -1388,13 +1445,18 @@ func _overlay_safehouse() -> void:
 	a.pressed.connect(func(): g.safehouse_heal(); refresh())
 	v.add_child(a)
 	var b := Button.new()
-	b.text = "Apply 1 PATCHWORK upgrade (not in this slice)"
-	b.disabled = true
+	b.text = "COMPILE two different SCRIPTs sharing a tag (instead of healing)"
+	b.pressed.connect(func(): compile_open = true; compile_first = -1; refresh())
 	v.add_child(b)
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
-	v.add_child(_lbl("HALCYON PLAYTEST 2 · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	v.add_child(_lbl("HALCYON PLAYTEST 3 · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	var option := CheckBox.new()
+	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
+	option.button_pressed = g.ghost_draw_enabled
+	option.toggled.connect(func(on): g.ghost_draw_enabled = on)
+	v.add_child(option)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
@@ -1489,3 +1551,44 @@ class TraceBar extends Control:
 		draw_rect(Rect2(0, 0, w * clamp(value / 40.0, 0.0, 1.0), h), col)
 		draw_line(Vector2(w / 2, -2), Vector2(w / 2, h + 2), Color("#e6ebf2"), 2)
 		draw_rect(Rect2(0, 0, w, h), Color("#5b4a2a"), false, 1)
+
+func _overlay_deck(removing: bool) -> void:
+	var v := _dim_box("DECOMPILE" if removing else "DECK ANALYSIS", "FOOTPRINT %d / %d · %s\n%s\nTag density: %s" % [g.footprint(), g.footprint_cap(), g.footprint_band(), g.coverage_text(), str(g.tag_density())], 1100)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1000, 400)
+	v.add_child(scroll)
+	var list := VBoxContainer.new()
+	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(list)
+	for card in g.run_deck:
+		var b := Button.new()
+		b.text = "%s · Draw chance this encounter: %.0f%%" % [CardDB.def(card.id).name, g.draw_chance(card.id)]
+		if removing:
+			var why := g.can_decompile(card.uid)
+			b.disabled = not why.ok
+			b.tooltip_text = why.reason
+			b.pressed.connect(func(): g.decompile(card.uid); refresh())
+		else:
+			b.pressed.connect(func(): _show_inspect(card.id))
+		list.add_child(b)
+	var close := Button.new()
+	close.text = "Back"
+	close.pressed.connect(func():
+		deck_open = false
+		if removing: g.phase = "REWARD"
+		refresh())
+	v.add_child(close)
+
+func _on_hold_choice(uid: int) -> void:
+	g.choose(uid)
+	refresh()
+	if g.phase == "RESPONSE" and not responding: _play_response()
+
+func _overlay_compile() -> void:
+	var opts: Array = g.run_deck.filter(func(c): return CardDB.def(c.id).type == "SCRIPT" and not CardDB.def(c.id).has("compiled") and (compile_first == -1 or g.can_compile(compile_first, c.uid))).map(func(c): return c.uid)
+	_overlay_options("COMPILE", "Choose the first effect." if compile_first == -1 else "Choose the second effect. Order is final; compiled cards cannot be compiled or fused again.", opts, g.run_deck, func(uid):
+		if compile_first == -1: compile_first = uid
+		else:
+			g.compile_cards(compile_first, uid)
+			compile_open = false
+		refresh(), "Cancel", func(): compile_open = false; refresh())

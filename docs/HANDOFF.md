@@ -27,18 +27,11 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 | ID | What | Docs (done) | Build change | Owner | Status |
 |---|---|---|---|---|---|
-| **REJECT-001** | REJECT ALL has **one DEADLOCK**: pool DEADLOCK · TRACE 3 · PULP 4, 2 slots. Earliest BREACH stays turn 3 with BOOTING. | `REDLINE_ICE_CORP1.md` §5.0, §10 item 10 | `godot/scripts/core/ice.gd` → `REJECT_ALL.subs`: remove the third entry (the second DEADLOCK). Update any test that expects two DEADLOCKs on REJECT ALL. Re-run the Opening Node bot turns (target: never before turn 3). | Codex | TO DO |
 
 **Next build: everything in `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010), approved as written on 2026-11-15.** Suggested order, so each step can be playtested before the next; numbers are working values. Where a system isn't in the slice yet (Uplink, Console Lab, PATCHWORK, Ghostware), build the part that touches it when that system arrives, and say so in the log.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **Step 1 — DSY-001, 002, 003, 006** | FOOTPRINT on the deck icon with the corporation cap (HALCYON 22 / IRONWATCH 29 / LUCIDA 35); bloat tax (TRACE = FOOTPRINT − cap at each ICE Node start); draw chance per card, COVERAGE panel, tag density; **DECOMPILE** on the full-clear reward screen (floor 10, coverage guard). DSY-001b (GHOST +1 DRAW) behind an option, **off** by default. | Synergy §2, §3.1, §3.4 | Codex | TO DO |
-| **Step 2 — DSY-007, 008** | **REBOOT** (empty draw pile → shuffle discard in; "Whenever you REBOOT" ENGINE triggers, AMP applies; HUD countdown); **SCAN X**; in-Node BURN; example cards WARM BOOT, ROLLING RESTART, FORCE REBOOT, SHORT LOOP, PORT SCAN, GARBAGE COLLECT, TAIL CALL. | Synergy §4, §9.1 | Codex | TO DO |
-| **Step 3 — DSY-011, 012** | **CHAIN [TAG]** (last card played this turn; HUD "Last played"); **HOLD 1** (free CACHE of 1 card at end of turn; off in the Training Node; DEAD MAN'S POCKET → 2); cards PIVOT, COVER FIRE, KILL CHAIN, HANDOFF (ECHO). | Synergy §6, §9 | Codex | TO DO |
-| **Step 4 — DSY-009, 010** | **UNDERFLOW** (ICE STR below 0, shown in red; ROT minimum removed), **MARGIN** in the break preview, **OVERKILL X**; check LOGIC BOMB, HARDENING, RELAY, STR floors; cards SCALPEL, STACK SMASH, INTEGER UNDERFLOW (RIOT), CULL, HARVEST (VECTOR). | Synergy §5.3–5.4, §9 | Codex | TO DO |
-| **Step 5 — DSY-004, 005, 013** | **COMPILE**, **REFACTOR** (50 CRED), Ghostware HEARTBEAT / MINIMAL INSTALL / DEDUPLICATOR / ONE-TRICK, CLEAN BUILD (Generalist); pushback ICE FREE TRIAL (HALCYON T2), PATTERN ANALYSIS, RECURRING DREAM. | Synergy §3.2–3.3, §8, §9 | Codex | TO DO |
-| **Pacing — PACE-003, 005, 007, 008** | **DEADLOCK ×N** (counter `1/2`); **ESCALATE ↑** for TRACE / DISCARD / FORGET (shows next value); DRILL / HULL / COVERAGE icon on reward cards; **fewer layers** (Tier 1 = 1 layer, Tier 2 = 1–2), re-based reward odds, CRED reserves +50%. In the slice: CONSENT WALL becomes 1 layer; check DOORBELL and TERMS & CONDITIONS against the Tier rules. | Pacing §3, §4.2, §6, §7 | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool; write up RIOT's ZEROED keyword. | Synergy §5.1, Pacing §6 | Claude | TO DO |
@@ -46,6 +39,30 @@ This is the one list of work that has been **decided but not finished**, so Code
 **Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
 
 ---
+
+## Built — awaiting designer playtest
+
+| IDs | Change | Commit reference |
+|---|---|---|
+| PACE-003,005,007,008 | DEADLOCK ×N progress for paid/card/WORM breaks; independent ESCALATE counters for TRACE/DISCARD/FORGET; reward need icons and visible draw chance; Tier 1 one-layer route; tier-aware reward odds; +50% reserves; version/label 0.3.0-playtest.3 / HALCYON PLAYTEST 3; post-merge-only Windows export; updated playtest guide and nine new UI fixtures. Final regression review also completed AMP for SILENT PARTNER/PAIN TOLERANCE, amplified card text, compiled fallback coverage, and Node/run state resets. | **BUILT** — `playtest3-pacing` (commit tag) |
+| DSY-004,005,013 | SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; corporation pushback ICE definitions and triggers (Tier 2 placement deferred after PACE-008). | **BUILT** — `playtest3-step5` (commit tag) |
+| DSY-009,010 | Negative ICE STR, MARGIN previews, SCALPEL, STACK SMASH, INTEGER UNDERFLOW, CULL and HARVEST; AMP on virus effects. | **BUILT** — `playtest3-step4` (commit tag) |
+| DSY-011,012 | CHAIN tracks successful card plays; PIVOT, COVER FIRE, HANDOFF and KILL CHAIN; HOLD 1 and DEAD MAN’S POCKET HOLD 2; scrollable choices. | **BUILT** — `playtest3-step3` (commit tag) |
+| DSY-007, DSY-008 | REBOOT queues drain only after draws finish; AMP and seven specified cards, SCAN bottom-order choice, in-Node BURN and discard retrieval, HUD reboot estimate, and bot choice handling. | **BUILT** — `playtest3-step2` (commit tag) |
+| DSY-001, DSY-002, DSY-003, DSY-006 | FOOTPRINT/caps and bands, per-Node bloat TRACE, optional GHOST draw OFF, duplicate-aware draw estimates and key-card previews, COVERAGE/tag density, and guarded full-clear DECOMPILE. | **BUILT** — `playtest3-step1` (commit tag) |
+| REJECT-001 | REJECT ALL has one DEADLOCK in its three-entry pool; BOOTING remains turn 3. Updated opening rules checks and bot timing reporting. | **BUILT** — `playtest3-step0` (commit tag) |
+
+Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALCYON_PLAYTEST3_IMPLEMENTATION.md).
+
+## Deferred beyond this slice (playtest 3)
+
+- DSY-004/005: PATCHWORK/FUSE modifications, Console Lab/BLACK CLINIC/Node completion upgrades, and Uplink REFACTOR (50 CRED, once per visit). SAFEHOUSE COMPILE works now; other service flows do not exist.
+- Ghostware acquisition/selection, DEDUPLICATOR with FUSE, and CAPS. HEARTBEAT, MINIMAL INSTALL, ONE-TRICK and DEAD MAN’S POCKET effects have tested state hooks.
+- DSY-013: Tier 2 FREE TRIAL placement and other corporation maps. All three pushback definitions/triggers are tested. This four-row map is Tier 1, so the final pacing step removes the temporary Step 5 Tier 2 placement.
+- PACE-003/005: notation and engine support tested; no unspecified multipliers or ESCALATE assignments invented for existing ICE. The controlled UI fixture shows both.
+- DSY-014/PACE-007 Phase 7 HULL engines, RIOT ZEROED design, and PACE-004/010 manual scoring remain with their existing owners below.
+- Windows export/launch: export is gated to the post-merge stabilization-branch push. Feature/PR CI verifies code/screenshots only. Human Windows launch and playtest remain outstanding.
+- Conditional turn-4 BOOTING and PACE-006 safety valves intentionally excluded.
 
 ## Waiting on the designer
 

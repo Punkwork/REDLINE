@@ -212,6 +212,203 @@ const DEFS := {
 		"text": "Can't be played normally. Pay 1 BW to clear it: it's BURNED for the rest of the Node."},
 	"TRACER": {"name": "TRACER", "type": "BLOATWARE", "tags": [], "bw": 0, "rarity": "BLOAT", "unplayable": true,
 		"text": "Can't be played. If TRACER is in your hand at the end of your turn: +3 TRACE."},
+	"WARM_BOOT": {
+		"name": "WARM BOOT",
+		"type": "PROTOCOL",
+		"bw": 1,
+		"rarity": "COMMON",
+		"tags": [
+			"ENGINE"
+		],
+		"text": "Whenever you REBOOT: +5 SHIELD."
+	},
+	"ROLLING_RESTART": {
+		"name": "ROLLING RESTART",
+		"type": "PROTOCOL",
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"tags": [],
+		"text": "Whenever you REBOOT: +1 AMP."
+	},
+	"FORCE_REBOOT": {
+		"name": "FORCE REBOOT",
+		"type": "SCRIPT",
+		"bw": 0,
+		"rarity": "UNCOMMON",
+		"tags": [],
+		"text": "Shuffle discard into draw pile. This is a REBOOT. BURNED."
+	},
+	"SHORT_LOOP": {
+		"name": "SHORT LOOP",
+		"type": "PROTOCOL",
+		"bw": 2,
+		"rarity": "RARE",
+		"tags": [
+			"ENGINE"
+		],
+		"text": "Whenever you REBOOT: gain 1 BW and draw 2."
+	},
+	"PORT_SCAN": {
+		"name": "PORT SCAN",
+		"type": "SCRIPT",
+		"bw": 0,
+		"rarity": "COMMON",
+		"tags": [],
+		"text": "SCAN 3, then draw 1."
+	},
+	"GARBAGE_COLLECT": {
+		"name": "GARBAGE COLLECT",
+		"type": "SCRIPT",
+		"bw": 0,
+		"rarity": "COMMON",
+		"tags": [],
+		"text": "BURN 1 other hand card for this Node. Draw 1."
+	},
+	"TAIL_CALL": {
+		"name": "TAIL CALL",
+		"type": "SCRIPT",
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"tags": [],
+		"text": "Put a SCRIPT from discard into your hand."
+	},
+	"PIVOT": {
+		"name": "PIVOT",
+		"type": "SCRIPT",
+		"tags": [
+			"EXPLOIT"
+		],
+		"bw": 1,
+		"rarity": "COMMON",
+		"target": true,
+		"chain": "CLOAK",
+		"text": "Target ICE −2 STR. CHAIN CLOAK: −1 more."
+	},
+	"COVER_FIRE": {
+		"name": "COVER FIRE",
+		"type": "SCRIPT",
+		"tags": [
+			"CLOAK"
+		],
+		"bw": 1,
+		"rarity": "COMMON",
+		"chain": "EXPLOIT",
+		"text": "+3 SHIELD. CHAIN EXPLOIT: +2 more."
+	},
+	"KILL_CHAIN": {
+		"name": "KILL CHAIN",
+		"type": "PROTOCOL",
+		"tags": [],
+		"bw": 2,
+		"rarity": "RARE",
+		"text": "Whenever you get a CHAIN bonus, draw 1 (maximum 2 per turn)."
+	},
+	"HANDOFF": {
+		"name": "HANDOFF",
+		"type": "SCRIPT",
+		"tags": [
+			"CLOAK"
+		],
+		"bw": 0,
+		"rarity": "COMMON",
+		"pool": "ECHO",
+		"chain": "CLOAK",
+		"text": "−2 TRACE. CHAIN CLOAK: draw 1."
+	},
+	"SCALPEL": {
+		"name": "SCALPEL",
+		"type": "PROGRAM",
+		"tags": [
+			"ICEPICK"
+		],
+		"bw": 1,
+		"ram": 1,
+		"rarity": "UNCOMMON",
+		"pick": {
+			"itype": "TUMBLER",
+			"str": 2,
+			"boost_cost": 1,
+			"boost_amt": 1,
+			"break_cost": 1,
+			"overkill": 2
+		},
+		"text": "STR 2. Boost 1 BW: +1 STR. Break 1 BW. OVERKILL 2: break costs 0 BW."
+	},
+	"STACK_SMASH": {
+		"name": "STACK SMASH",
+		"type": "SCRIPT",
+		"tags": [
+			"EXPLOIT"
+		],
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"pool": "RIOT",
+		"target": true,
+		"text": "Target ICE −1 STR per EXPLOIT played this turn, including this."
+	},
+	"INTEGER_UNDERFLOW": {
+		"name": "INTEGER UNDERFLOW",
+		"type": "SCRIPT",
+		"tags": [
+			"EXPLOIT"
+		],
+		"bw": 2,
+		"rarity": "RARE",
+		"pool": "RIOT",
+		"target": true,
+		"text": "Break up to 3 subroutines: one per point target STR is below zero. BURNED."
+	},
+	"CULL": {
+		"name": "CULL",
+		"type": "SCRIPT",
+		"tags": [
+			"VIRUS"
+		],
+		"bw": 1,
+		"rarity": "COMMON",
+		"pool": "VECTOR",
+		"target": true,
+		"text": "Remove up to 3 virus counters from target ICE; +2 SHIELD each."
+	},
+	"HARVEST": {
+		"name": "HARVEST",
+		"type": "SCRIPT",
+		"tags": [
+			"VIRUS"
+		],
+		"bw": 0,
+		"rarity": "UNCOMMON",
+		"pool": "VECTOR",
+		"target": true,
+		"text": "Remove all LEECH from target ICE; extract 3 CRED each."
+	},
+	"CLEAN_BUILD": {
+		"name": "CLEAN BUILD",
+		"type": "PROTOCOL",
+		"tags": [],
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"pool": "GENERALIST",
+		"text": "Your COMPILED cards cost 1 less BW."
+	},
+	"MINIMALIST": {
+		"name": "MINIMALIST",
+		"type": "PROTOCOL",
+		"tags": [],
+		"bw": 1,
+		"rarity": "UNCOMMON",
+		"text": "While GHOST, your first break each turn costs 0 BW."
+	},
+	"ZERO_FOOTPRINT": {
+		"name": "ZERO FOOTPRINT",
+		"type": "SCRIPT",
+		"tags": [
+			"CLOAK"
+		],
+		"bw": 1,
+		"rarity": "RARE",
+		"text": "Reduce TRACE by cards below cap, maximum 10. BURNED."
+	},
 }
 
 const STARTER_GENERALIST := [
@@ -258,6 +455,13 @@ const RUSTLERS := {
 }
 
 static func def(id: String) -> Dictionary:
+	if id.begins_with("COMPILED::"):
+		var parts := id.split("::")
+		var a := def(parts[1]); var b := def(parts[2])
+		var tags: Array = a.tags.duplicate()
+		for tag in b.tags:
+			if not tags.has(tag): tags.append(tag)
+		return {"name": a.name + " ⨯ " + b.name, "type": "SCRIPT", "tags": tags, "bw": mini(4, a.bw + b.bw), "trace_cost": int(a.get("trace_cost", 0)) + int(b.get("trace_cost", 0)), "cred_cost": int(a.get("cred_cost", 0)) + int(b.get("cred_cost", 0)), "rarity": "RARE", "compiled": [parts[1], parts[2]], "target": a.get("target", false) or b.get("target", false), "text": a.text + " THEN " + b.text}
 	return DEFS[id]
 
 static func reward_pool(pool: String, rarity: String) -> Array:
@@ -273,4 +477,16 @@ static func reward_pool(pool: String, rarity: String) -> Array:
 	for id in extra:
 		if extra[id] == rarity:
 			out.append(id)
+	return out
+
+static func roles(id: String) -> Array:
+	var d := def(id)
+	var out := []
+	if d.has("pick") or d.has("breaker") or id in ["ADAPTER", "BORROWED_CREDENTIALS", "SHATTER", "FLASHPOINT"]: out.append("◇ COVERAGE")
+	if d.has("pick") or d.tags.has("VIRUS") or id in ["PROBE", "OVERLOAD", "DEEP_PROBE", "SMASH", "PIVOT", "STACK_SMASH", "INTEGER_UNDERFLOW", "FIELD_KIT", "STRESS_TEST", "LOGIC_BOMB", "MINIMALIST"]: out.append("↯ DRILL")
+	if id in ["SURGE_PROTECTOR", "WARM_BOOT", "STUN_BATON"]: out.append("▣ HULL")
+	if d.has("compiled"):
+		for part in d.compiled:
+			for role in roles(part):
+				if not out.has(role): out.append(role)
 	return out

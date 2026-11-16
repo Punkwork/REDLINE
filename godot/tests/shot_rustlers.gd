@@ -68,7 +68,7 @@ func _process(_d: float) -> bool:
 			g.choose_sub(1, 1)
 			if not _require(g.phase == "PLAYER" and g.enc.ice[1].broken[1], "chosen subroutine was not broken"):
 				return true
-			g.extract(15)
+			g.extract(g.enc.reserve)
 			if not _require(g.enc.reserve == 0, "expected an empty CRED reserve"):
 				return true
 			main.refresh()

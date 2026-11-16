@@ -11,7 +11,7 @@ const DEFS := {
 		"subs": [[{"k": "BW_DRAIN", "v": 1}], [{"k": "INSERT", "card": "SPAM", "to": "draw", "v": 1}], [{"k": "PULP", "v": 3}]]},
 	"REJECT_ALL": {"name": "REJECT ALL", "type": "TUMBLER", "str": 4, "tier": "OPENING", "slots": 2, "ability": "BOOTING",
 		"ability_text": "BOOTING: its DEADLOCKs can't be broken before your 3rd turn of the encounter.",
-		"subs": [[{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 4}]]},
+		"subs": [[{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3}], [{"k": "PULP", "v": 4}]]},
 	# PULP-001: FORTRESSES carry the PULP. Values vary by ICE (S1 PULP 2, S1 PULP 5, escalating 1-2-3).
 	"COOKIE_WALL": {"name": "COOKIE WALL", "type": "FORTRESS", "subtype": "TOLLHOUSE", "str": 5, "tier": "T1",
 		"passive": "TOLL", "ability_text": "TOLL: breaking here costs +1 BW, except the DEADLOCK.",
@@ -33,20 +33,23 @@ const DEFS := {
 		"subs": [[{"k": "TRACE", "v": 3}, {"k": "DEADLOCK"}]]},
 	"HOUSE_CALL": {"name": "HOUSE CALL", "type": "VOID", "str": 7, "tier": "BLACK", "black": true,
 		"subs": [[{"k": "PULP", "v": 6}], [{"k": "PULP", "v": 6}]]},
+	"FREE_TRIAL": {"name": "FREE TRIAL", "type": "TUMBLER", "str": 4, "tier": "T2", "slots": 2, "ability": "REBOOT_SPAM", "ability_text": "Whenever you REBOOT: INSERT 1 SPAM into draw.", "subs": [[{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
+	"PATTERN_ANALYSIS": {"name": "PATTERN ANALYSIS", "type": "VOID", "str": 4, "tier": "T2", "ability": "CHAIN_PULP", "subs": [[{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
+	"RECURRING_DREAM": {"name": "RECURRING DREAM", "type": "TUMBLER", "str": 4, "tier": "T2", "slots": 2, "ability": "REBOOT_FORGET", "subs": [[{"k": "FORGET", "v": 1}], [{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}]]},
 }
 
 ## The slice's HALCYON route: 4 rows. Each node: kind, layers (each layer = list of ICE ids left→right + reserve).
 const MAP := [
 	[{"id": "COOKIE_BANNER", "kind": "ICE", "name": "COOKIE BANNER", "opening": true,
-		"layers": [{"ice": ["ACCEPT_ALL", "REJECT_ALL"], "reserve": 15}], "next": [0, 1]}],
-	[{"id": "N2A", "kind": "ICE", "name": "CAPTCHA", "layers": [{"ice": ["AUTO_RENEW", "CAPTCHA"], "reserve": 10}], "next": [0, 1]},
+		"layers": [{"ice": ["ACCEPT_ALL", "REJECT_ALL"], "reserve": 23}], "next": [0, 1]}],
+	[{"id": "N2A", "kind": "ICE", "name": "CAPTCHA", "layers": [{"ice": ["AUTO_RENEW", "CAPTCHA"], "reserve": 15}], "next": [0, 1]},
 	 {"id": "N2B", "kind": "ICE", "name": "CONSENT WALL",
-		"layers": [{"ice": ["COOKIE_WALL"], "reserve": 10}, {"ice": ["CONSENT_FORM"], "reserve": 15}], "next": [0, 1]}],
+		"layers": [{"ice": ["COOKIE_WALL"], "reserve": 15}], "next": [0, 1]}],
 	[{"id": "N3A", "kind": "SAFEHOUSE", "name": "SAFEHOUSE", "next": [0]},
 	 {"id": "N3B", "kind": "ICE", "name": "DOORBELL",
-		"layers": [{"ice": ["DOORBELL_CAM"], "reserve": 10}, {"ice": ["CONSENT_FORM", "TERMS_OF_SERVICE"], "reserve": 15}], "next": [0]}],
+		"layers": [{"ice": ["DOORBELL_CAM"], "reserve": 15}], "next": [0]}],
 	[{"id": "N4", "kind": "ICE", "name": "TERMS & CONDITIONS",
-		"layers": [{"ice": ["TERMS_OF_SERVICE"], "reserve": 10}, {"ice": ["CAPTCHA", "DOORBELL_CAM"], "reserve": 15}], "next": []}],
+		"layers": [{"ice": ["TERMS_OF_SERVICE"], "reserve": 15}], "next": []}],
 ]
 
 ## PULP-002: PULP curves, on the harder FORTRESSES (COOKIE WALL: B; TERMS OF SERVICE: C). A is defined for later ICE.

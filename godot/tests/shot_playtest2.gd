@@ -31,6 +31,9 @@ func _run() -> void:
 	g.row = 0
 	g.available = [1]
 	g.enter_node(1)
+	# Explicit multilayer fixture for the early-exit regression; production Tier 1 is one layer.
+	g.node = g.node.duplicate(true)
+	g.node.layers.append({"ice": ["CONSENT_FORM"], "reserve": 23})
 	# Fixture funds/cards isolate the new interaction from shuffle luck.
 	g.hand.clear()
 	var hush := g._new_inst("HUSH")
@@ -53,6 +56,7 @@ func _run() -> void:
 	_snap("playtest2_echo_paid")
 	main._on_break(0, 3)
 	main._on_end_turn()
+	if g.pending.get("kind", "") == "hold": main._on_hold_choice(-1)
 	await _settle()
 	_check(g.phase == "DEEPER", "nonfinal breached layer offers a choice")
 	_snap("playtest2_leave_warning")
