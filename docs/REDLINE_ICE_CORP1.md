@@ -56,7 +56,7 @@ To keep ICE comparable, each effect has a **threat value**. The total threat of 
 
 ### 2.3 Type identities
 - **FORTRESS:** high STR, 1–2 subroutines. Hard to get into, not very dangerous once you're there.
-- **SIGYL:** lower STR, 2–3 subroutines. Easy to reach, more to break.
+- **TUMBLER:** lower STR; a pool of subroutines that rotate through a few slots (ROT-001). Easy to reach, more to break, and you only see this turn's slots. *(Replaced SIGYL.)*
 - **VOID:** medium STR, the most dangerous effects and reactive abilities. The main source of CORTEX damage, though any ICE can deal it (NAME-001).
 
 ### 2.4 Other rules
@@ -118,8 +118,8 @@ These supersede the Tier 1 table below and the Opening Node ICE (§8.4) **for th
 |---|---|---|---|---|---|---|
 | **COOKIE WALL** | FORTRESS | 3 | [S1] TRACE 2 · [S2] DEADLOCK | — | 2 | Basic FORTRESS breaking |
 | **TERMS OF SERVICE** | FORTRESS | 5 | [S1] INSERT 1 SPAM into your discard pile · [S2] DEADLOCK | — | 2 | PROBE and boosting against high STR |
-| **CONSENT FORM** | SIGYL | 2 | [S1] TRACE 1 · [S2] TRACE 1 · [S3] DEADLOCK | — | 2 | Many small breaks; rewards ECHO's LOW PROFILE |
-| **CAPTCHA** | SIGYL | 3 | [S1] DISCARD 1 · [S2] PULP 2 · [S3] DEADLOCK | — | 4 | Choosing which subroutine to break |
+| **CONSENT FORM** | TUMBLER | 2 | [S1] TRACE 1 · [S2] TRACE 1 · [S3] DEADLOCK | — | 2 | Many small breaks; rewards ECHO's LOW PROFILE |
+| **CAPTCHA** | TUMBLER | 3 | [S1] DISCARD 1 · [S2] PULP 2 · [S3] DEADLOCK | — | 4 | Choosing which subroutine to break |
 | **DOORBELL CAM** | VOID | 2 | [S1] TRACE 3 + DEADLOCK | Whenever you play a CLOAK card: TRACE 1. | 3 | Over-hiding (ECHO) |
 
 ### Tier 2 (rows 6–9)
@@ -128,8 +128,8 @@ These supersede the Tier 1 table below and the Opening Node ICE (§8.4) **for th
 |---|---|---|---|---|---|---|
 | **SMART LOCK** | FORTRESS | 6 | [S1] PULP 3 + DEADLOCK | At the end of each Corporation Response: +1 STR. | 3, rising | Long stays; extracting too long |
 | **PANIC ROOM** | FORTRESS | 4 | [S1] PULP 4 · [S2] DEADLOCK · [S3] DEADLOCK | — | 4 | Two DEADLOCKs; FORTRESS Icepick's free break |
-| **LOYALTY PROGRAM** | SIGYL | 3 | [S1] INSERT 1 SPAM into your draw pile · [S2] TRACE 2 + DEADLOCK | — | 5 | Bloatware pressure across layers |
-| **FIRMWARE UPDATE** | SIGYL | 4 | [S1] PURGE ALL · [S2] PULP 3 · [S3] DEADLOCK | — | 3 + anti-virus | VECTOR (break [S1] first or lose your counters) |
+| **LOYALTY PROGRAM** | TUMBLER | 3 | [S1] INSERT 1 SPAM into your draw pile · [S2] TRACE 2 + DEADLOCK | — | 5 | Bloatware pressure across layers |
+| **FIRMWARE UPDATE** | TUMBLER | 4 | [S1] PURGE ALL · [S2] PULP 3 · [S3] DEADLOCK | — | 3 + anti-virus | VECTOR (break [S1] first or lose your counters) |
 | **NANNY CAM** | VOID | 3 | [S1] PULP 3 · [S2] TRACE 2 + DEADLOCK | Whenever you install a PROGRAM: +1 STR. | 5 | Installing everything at once (Generalist) |
 | **HOME ASSISTANT** | VOID | 4 | [S1] CORTEX 1 · [S2] PULP 2 + DEADLOCK | — | 6 | First CORTEX: break [S1] or lose a card per draw |
 | **REPO DRONE** | VOID | 3 | [S1] PULP 4 · [S2] PULP 4 + DEADLOCK | While your TRACE is 20 or more, its PULP subroutines deal +2. | 8 | High TRACE (RIOT) |
@@ -156,8 +156,8 @@ HALCYON's home-assistant AI, the voice in every house. A three-ICE boss encounte
 
 | Position | ICE | Type | STR | Subroutines | Reactive ability |
 |---|---|---|---|---|---|
-| Left (support) | **SMART SPEAKER** | SIGYL | 2 | [S1] INSERT 1 SPAM into your draw pile · [S2] TRACE 2 | — |
-| Middle (support) | **THERMOSTAT** | SIGYL | 3 | [S1] PULP 2 · [S2] THE HEARTH +1 STR | — |
+| Left (support) | **SMART SPEAKER** | TUMBLER | 2 | [S1] INSERT 1 SPAM into your draw pile · [S2] TRACE 2 | — |
+| Middle (support) | **THERMOSTAT** | TUMBLER | 3 | [S1] PULP 2 · [S2] THE HEARTH +1 STR | — |
 | Right (main) | **THE HEARTH** | VOID | 6 | [S1] PULP 4 · [S2] TRACE 3 · [S3] DEADLOCK · [S4] DEADLOCK | At the end of each Corporation Response: +1 STR. |
 
 - **Threat per Corporation Response:** about 14 if nothing is broken, and THE HEARTH grows each round (from its ability and THERMOSTAT).
@@ -206,15 +206,15 @@ HALCYON's consent banner: two buttons that look the same. Every route starts her
 
 | Position | ICE | Type | STR | Subroutines | Ability |
 |---|---|---|---|---|---|
-| Left (support) | **ACCEPT ALL** | SIGYL | 3 | [S1] INSERT 1 SPAM into your draw pile · [S2] TRACE 1 | — |
-| Right (main) | **REJECT ALL** | SIGYL | 3 | [S1] TRACE 2 · [S2] DEADLOCK | **BOOTING:** its DEADLOCK can't be broken before your 3rd turn of the encounter. |
+| Left (support) | **ACCEPT ALL** | TUMBLER | 3 | [S1] INSERT 1 SPAM into your draw pile · [S2] TRACE 1 | — |
+| Right (main) | **REJECT ALL** | TUMBLER | 3 | [S1] TRACE 2 · [S2] DEADLOCK | **BOOTING:** its DEADLOCK can't be broken before your 3rd turn of the encounter. |
 
 **BOOTING** (Opening Node main ICE only, OPEN-001): *its DEADLOCK can't be broken before your 3rd turn of the encounter.* This is the main ICE's one ability. Support ICE in an Opening Node have no DEADLOCK.
 
 - **The lesson:** the twins are almost identical. The one difference is that **only REJECT ALL has a DEADLOCK**: accepting is easy, rejecting is what gets you through. Only DEADLOCKs block BREACH, so read every ICE.
 - **The decisions (turns 1–2):** break ACCEPT ALL's SPAM before it clogs your deck, or spend the BW on an Extractor (reserve 15), PULP Shields or GHOST SIGNAL? Turn 3: break REJECT ALL's DEADLOCK, or stay to extract the rest?
 - **CRED reserve:** 15. Rewards as a normal 1-layer Node.
-- **Measured** (starter decks, rushing test bot): Generalist and ECHO 3 turns; RIOT about 4; VECTOR about 6.5 (no SIGYL Icepick; RUNTIME ERROR needs INJECT first). Average about 4.
+- **Measured** (starter decks, rushing test bot): Generalist and ECHO 3 turns; RIOT about 4; VECTOR about 6.5 (no TUMBLER Icepick; RUNTIME ERROR needs INJECT first). Average about 4.
 
 ## 9. Every Rustler has a way through
 
@@ -222,7 +222,7 @@ HALCYON's consent banner: two buttons that look the same. Every route starts her
 |---|---|---|---|
 | **Generalist** | Everything Tier 1 | NANNY CAM (punishes installing many Programs) | READY RIG installs one Program before the encounter starts |
 | **ECHO** | CONSENT FORM, DOORBELL CAM (LOW PROFILE cancels TRACE 1) | FORTRESSES, SMART LOCK, REPO DRONE | PROBE + BACKDOOR; SLOW DRIP rewards quiet layers |
-| **RIOT** | FORTRESSES (SLEDGE), SMART LOCK (fast breaks) | REPO DRONE at high TRACE, SIGYLS | LAY LOW to drop under 20 TRACE; BRUTE FORCE |
+| **RIOT** | FORTRESSES (SLEDGE), SMART LOCK (fast breaks) | REPO DRONE at high TRACE, TUMBLERS | LAY LOW to drop under 20 TRACE; BRUTE FORCE |
 | **VECTOR** | Multi-ICE layers, THE HEARTH's supports | FIRMWARE UPDATE (PURGE ALL) | Break FIRMWARE UPDATE's [S1] first with RUNTIME ERROR |
 
 ---
@@ -253,3 +253,4 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | PACE-008 | Layers (§8.1): Tier 1 Nodes 1 layer; Tier 2 Nodes 1–2. CRED reserves per layer +50% (§8.2). — **APPROVED 2026-11-15** |
 | PACE-010 | Every ICE layer gets a BREACH WORK score and REVEAL FLOOR; score the HALCYON slice first, from playtest 2. — **APPROVED 2026-11-15** |
 | DSY-013 | New Tier 2 ICE **FREE TRIAL** (TUMBLER 4; whenever you REBOOT: INSERT 1 SPAM into your draw pile) (`REDLINE_DECK_SYNERGY.md` §8). — **APPROVED 2026-11-15** |
+| ROT-001 sync | Remaining SIGYL ICE relabelled **TUMBLER**. Their subroutines are listed as before; **slot counts and pool order are not yet designed** for TUMBLERS outside the playtest slice. Until then, read each listed set as the pool. — designer instruction 2026-11-16 |

@@ -58,7 +58,7 @@ Rule: every starter card is the weakest version of its role, with at least one c
 | GHOST SIGNAL | Generalist, ECHO, VECTOR | SCRUB (not BURNED), PROXY CHAIN, VANISH | — |
 | Basic Extractor (3 CRED) | All | DATA SIPHON, SKIMMER | — |
 | FORTRESS Icepick | Generalist | **BATTERING RAM**, JACKHAMMER | BATTERING RAM gains a free first break each turn |
-| SIGYL Icepick | Generalist | PASSKEY, RAINBOW TABLE | — |
+| TUMBLER Icepick | Generalist | PASSKEY, RAINBOW TABLE | — |
 | VOID Icepick | Generalist | TASER, STUN BATON | — |
 | CORTEX BUFFER | Generalist | FAILSAFE | — |
 | HUSH | ECHO | PASSKEY, RAINBOW TABLE | **HUSH weakened:** STR 4 → 3, boost 1 → 2 BW (it was better than PASSKEY) |
@@ -87,11 +87,11 @@ Rule: every starter card is the weakest version of its role, with at least one c
 |---|---|---|---|---|
 | **BATTERING RAM** | Common | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. **First break each turn free;** then 1 BW per break. *(BASIC-001: free first break added so it beats the FORTRESS Icepick and SLEDGE.)* |
 | **JACKHAMMER** | Uncommon | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → **+2** STR. First break each turn free; then 1 BW. |
-| **PASSKEY** | Common | PROGRAM — ICEPICK (SIGYL) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. Break: 1 BW. |
-| **RAINBOW TABLE** | Uncommon | PROGRAM — ICEPICK (SIGYL) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. **Break: 1 BW for up to 2 subroutines** on the same ICE. |
+| **PASSKEY** | Common | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. Break: 1 BW. |
+| **RAINBOW TABLE** | Uncommon | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. **Break: 1 BW for up to 2 subroutines** on the same ICE. |
 | **TASER** | Common | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. |
 | **STUN BATON** | Uncommon | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. **Each break: +2 SHIELD.** |
-| **SKELETON KEY** | Rare | PROGRAM — ICEPICK (any type) | 2 BW, 2 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on FORTRESS, SIGYL and VOID. |
+| **SKELETON KEY** | Rare | PROGRAM — ICEPICK (any type) | 2 BW, 2 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on FORTRESS, TUMBLER and VOID. |
 
 ### 3.2 Extractors and CRED (3)
 | Card | Rarity | Type / tags | Cost | Effect |
@@ -155,7 +155,7 @@ Rule: every starter card is the weakest version of its role, with at least one c
 | **RAM UPGRADE** | Uncommon | PROGRAM — HARDWARE | 1 BW, 0 RAM | +1 RAM. |
 | **READY STANCE** | Uncommon | PROTOCOL | 2 BW | On the first turn of each encounter, draw 1 extra card. |
 | **MULTITOOL** | Rare | PROGRAM — ICEPICK (any type) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 2 BW. |
-| **JACK OF ALL TRADES** | Rare | SCRIPT — EXPLOIT | 2 BW | If you have a FORTRESS, a SIGYL and a VOID Icepick installed: on every ICE, break 1 subroutine for 0 BW using your matching Icepick. Each Icepick still needs enough STR. |
+| **JACK OF ALL TRADES** | Rare | SCRIPT — EXPLOIT | 2 BW | If you have a FORTRESS, a TUMBLER and a VOID Icepick installed: on every ICE, break 1 subroutine for 0 BW using your matching Icepick. Each Icepick still needs enough STR. |
 
 ---
 
@@ -186,7 +186,7 @@ Rule: every starter card is the weakest version of its role, with at least one c
 | **CRASH CART** | Common | SCRIPT — CLOAK | 1 BW | −3 TRACE. +2 SHIELD. |
 | **PAIN TOLERANCE** | Uncommon | PROTOCOL | 1 BW | Start of your turn: if your TRACE is 20 or more, +2 SHIELD. |
 | **BERSERK** | Uncommon | PROTOCOL | 1 BW | While your TRACE is 20 or more, your EXPLOIT SCRIPTS cost 1 less BW (minimum 0). |
-| **WRECKING BALL** | Uncommon | PROGRAM — ICEPICK (SIGYL) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. **Break: 0 BW, +2 TRACE.** |
+| **WRECKING BALL** | Uncommon | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. **Break: 0 BW, +2 TRACE.** |
 | **CHAINSAW** | Uncommon | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. **Break: 0 BW, +2 TRACE.** |
 | **FLASHPOINT** | Rare | SCRIPT — EXPLOIT | 2 BW, +5 TRACE | Break 1 subroutine on every ICE with STR 3 or less. |
 | **NO WITNESSES** | Rare | SCRIPT — CLOAK | 1 BW | If your TRACE is 30 or more, set it to 10. BURNED. |
@@ -235,3 +235,4 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | DSY-014 | Phase 7 pools: each archetype is one currency loop (SOURCE / AMPLIFIER / CASH OUT / ROUTER) plus one lean-deck payoff, with at least one CASH OUT card. Example cards: `REDLINE_DECK_SYNERGY.md` §9. — **APPROVED 2026-11-15** |
 | PACE-007 | Each Rustler pool needs at least 2 HULL engines by uncommon; reward cards show a DRILL / HULL / COVERAGE icon. — **APPROVED 2026-11-15** |
 | PACE-008 | Reward odds by layers cleared are re-based for the new layer counts (see Core Rules amendments) (§2). — **APPROVED 2026-11-15** |
+| ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |

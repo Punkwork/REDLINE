@@ -172,7 +172,7 @@ Fragments carry over between corporations. The fragment counter is shown beside 
 | **BIG SCORE** | Extract 100 CRED before the Central Node. |
 | **EXTERMINATOR** | Break 8 VOID subroutines. |
 | **DEMOLITION** | Break 8 FORTRESS subroutines. |
-| **CODEBREAKER** | Break 8 SIGYL subroutines. |
+| **CODEBREAKER** | Break 8 TUMBLER subroutines. |
 | **NO LOOSE ENDS** | Clear every layer of 2 ICE Nodes. |
 | **CLEAN HANDS** | Reach the Central Node without a TRACE strike. |
 | **SHOPPING LIST** | Apply 2 PATCHWORK (including FUSE). |
@@ -223,10 +223,10 @@ When you take THE HEARTH's payload, HALCYON stops being a friendly gadget compan
 
 | ICE | Type | STR | Subroutines | Ability | Threat* |
 |---|---|---|---|---|---|
-| **ALARM PANEL** | SIGYL | 3 | [S1] TRACE 3 · [S2] DEADLOCK | — | 3 (6 while escaping) |
+| **ALARM PANEL** | TUMBLER | 3 | [S1] TRACE 3 · [S2] DEADLOCK | — | 3 (6 while escaping) |
 | **MOTION SENSOR** | VOID | 3 | [S1] PULP 3 + DEADLOCK | Whenever you install a PROGRAM: +2 TRACE. | 3+ |
 | **DEADBOLT** | FORTRESS | 6 | [S1] PULP 4 · [S2] DEADLOCK | Its STR can't be reduced below 3. | 4 |
-| **PANIC BUTTON** | SIGYL | 2 | [S1] INSERT 1 TRACER into your hand · [S2] DEADLOCK | — | 2 + TRACER |
+| **PANIC BUTTON** | TUMBLER | 2 | [S1] INSERT 1 TRACER into your hand · [S2] DEADLOCK | — | 2 + TRACER |
 | **HOUSE CALL** *(existing Black ICE)* | VOID | 5 | [S1] PULP 4 · [S2] PULP 4 | — | 8 |
 
 \*Remember that TRACE gains are **doubled** during the escape (UPL-007).
@@ -277,3 +277,4 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | DSY-012 | **DEAD MAN'S POCKET** becomes "you may CACHE up to 2 cards for free each turn" (§2.2), since HOLD 1 gives everyone 1. — **APPROVED 2026-11-15** |
 | DSY-001 / DSY-007 | New Ghostware candidates for the general pool: HEARTBEAT, MINIMAL INSTALL, DEDUPLICATOR, ONE-TRICK (`REDLINE_DECK_SYNERGY.md` §9.3). — **APPROVED 2026-11-15** |
 | PACE-006 | Safety valves held in reserve: Max VITAE 35 → 40, full-clear heal 3, a second SAFEHOUSE; used only if playtests run hot. — **APPROVED 2026-11-15** |
+| ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |
