@@ -25,6 +25,7 @@ func _run() -> void:
  g.end_turn()
  check(g.pending.get("kind") == "hold", "HOLD UI opens")
  await snap("playtest3_hold")
+ await check_choice_row("HOLD")
  g.choose(-1)
  # SCAN fixture: model choice and UI rendered together.
  g.hand.clear(); g.bw = 30
@@ -47,7 +48,30 @@ func _run() -> void:
  g.phase = "PLAYER"; g.enc.ice.assign([g._new_ice("COOKIE_WALL", definition)]); g.enc.ice[0].seen.fill(true)
  g._do_break(0, 0)
  await snap("playtest3_deadlock_escalate")
+ # Generalist READY RIG with deliberately overflowing PROGRAM choices.
+ main._start_as("GENERALIST")
+ g = main.g
+ for i in 10: g.run_deck.append(g._new_inst("BASIC_EXTRACTOR"))
+ g.enter_node(0)
+ check(g.phase == "READY_RIG", "Generalist READY RIG opens")
+ await snap("playtest3_ready_rig_horizontal")
+ await check_choice_row("READY RIG")
  print("PLAYTEST 3 UI: %d failures" % failures)
  main.queue_free()
  for i in 15: await process_frame
  quit(1 if failures else 0)
+
+func check_choice_row(label: String) -> void:
+ var row: HBoxContainer = main.find_child("ChoiceCardRow", true, false)
+ var scroll: ScrollContainer = main.find_child("ChoiceCardScroll", true, false)
+ check(row != null and scroll != null, label + " uses a horizontal scroll row")
+ if row == null or scroll == null: return
+ var cards := row.get_children()
+ check(cards.size() > 1, label + " has multiple cards")
+ for i in range(1, cards.size()):
+  check(is_equal_approx(cards[i].position.y, cards[0].position.y) and cards[i].position.x > cards[i - 1].position.x, label + " cards align horizontally")
+  check(cards[i].size.y <= scroll.size.y, label + " full card height fits")
+ scroll.scroll_horizontal = int(scroll.get_h_scroll_bar().max_value)
+ for i in 3: await process_frame
+ var last: Control = cards.back()
+ check(scroll.get_global_rect().encloses(last.get_global_rect()), label + " final card accessible by horizontal scrolling")
