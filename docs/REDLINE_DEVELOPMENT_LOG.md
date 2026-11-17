@@ -404,3 +404,7 @@ LOG-001 moved the oldest whole live entries to the archive unchanged.
 ## 2026-11-17 — FACADE-001 approved (Claude)
 
 **Designer:** "Correct. Approved." `REDLINE_CORPORATE_FACADES.md` is approved as written and recorded as FACADE-001 in the master design doc (three degrees of watching; IRONWATCH concourse and LUCIDA solarium with their hostile reveals; plaque colours; interface copy; ICE appliance list; art briefs). Status lines updated in the facades doc, ICE Corp 2/3 and Visual Language §2.3. HANDOFF: FACADE-001 moved to *Done*; its open questions 4–6 (HALCYON copy, when to generate art, escape ICE) remain WAITING. No art generated yet. **Code changes:** none.
+
+## 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude)
+
+**Designer:** "for number one, yes. For number two, yes. And for number three, wait." Wrote §2a in `REDLINE_CORPORATE_FACADES.md`: HALCYON's motif (sunrise fan) and non-fight copy (consent, remembered, reward proposed; status, cracking, strike and Mask-off lines reuse approved VIS-001 copy). Art for IRONWATCH and LUCIDA is to be generated now: HANDOFF Codex TO DO FACADE-ART-001. Escape ICE deferred. Master design doc FACADE-001 updated; HANDOFF WAITING row for the HALCYON copy review. **Code changes:** none.

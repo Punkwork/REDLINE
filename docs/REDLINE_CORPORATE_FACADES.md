@@ -1,6 +1,6 @@
 # PANOPTICON — CORPORATE FACADES: RAYGUN GOTHIC FOR EACH CORPORATION
 **Version:** 0.1 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** FACADE-001
-**Status:** **APPROVED 2026-11-17** by the designer ("Correct. Approved."); recorded as FACADE-001 in `REDLINE_MASTER_DESIGN.md`. Copy and numbers are working values. Questions 4–6 in §6 are still open.
+**Status:** **APPROVED 2026-11-17** by the designer ("Correct. Approved."); recorded as FACADE-001 in `REDLINE_MASTER_DESIGN.md`. Copy and numbers are working values. §6 questions 4–6 answered the same day; HALCYON's new interface copy (§2a) is PROPOSED.
 **Builds on:** the Raygun Gothic direction and VISUAL-DECISIONS-2026-11-17 / VISUAL-APPROVALS-002 / RUSTLER-LOOK-001 in `REDLINE_MASTER_DESIGN.md`; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`); the HALCYON Chrome Deco encounter (CHROME-001). ICE rosters: `REDLINE_ICE_CORP1.md` to `CORP3.md`.
 
 **Goal:** give IRONWATCH and LUCIDA the same treatment HALCYON got in CHROME-001, so that each corporation is a polished Raygun Gothic facade that sells a **different degree of surveillance** as a customer benefit, and the player can feel the difference in routine interactions, not only in the fights.
@@ -36,6 +36,26 @@ Every facade is built from the same vocabulary, so the three read as one world:
 - **ICE:** each ICE is a **domestic or civic appliance** from that corporation's product line, built as a chrome-and-enamel shell with a live face (CHROME-001 method: illustrated empty shell, live face parts, live text and buttons).
 - **Rule plaques:** enamel service plaques in the corporation's colours (CHROME-001), always opaque, always at least 4.5:1.
 - **The reveal:** the hostile background is an **edit of the same hall** at the same perspective. Nothing is added that wasn't there; the decoration is revealed to be the machinery (CHROME-001 step 4). Cracking shows about 20% of it (VISUAL-APPROVALS-002).
+
+---
+
+## 2a. HALCYON — "halcyon home" (interface copy PROPOSED, 2026-11-17)
+
+HALCYON's atrium, mascots, plaques and break states are approved (CHROME-001, VISUAL-APPROVALS-002). The designer asked for its non-fight copy to match the other two (FACADE-001 question 4). Lines marked *(approved)* already exist in VIS-001; the rest are **proposed**.
+
+**The facade:** a sunlit pearl-and-celadon atrium that feels like the lobby of the perfect home. **Signature motif:** the **sunrise fan**, the Deco fan over the sealed door, used on the wordmark and in loading animations.
+
+| Moment | Copy (working) |
+|---|---|
+| Consent prompt | "Let HALCYON learn your routine, so your home is ready before you are. **[Make it effortless]**" (the decline link reads "Do it all myself") |
+| Remembered | "Welcome home. You're back 12 minutes later than usual. We kept the kettle warm." |
+| Reward | "Comfort score 96. Your home now unlocks as you approach: no keys, ever." |
+| Status toast | "Everyone is home." *(approved, background tile)* |
+| Cracking toast | "Is everything okay? We're just checking on you." *(approved)* |
+| Strike modal | **"We see you."** / "HALCYON has located you. We've added something to help us keep in touch." *(approved)* |
+| Mask off | ICE wording: "Your plan cannot be cancelled." *(approved)*; background: "Doors will not open." *(approved)* |
+
+**Bloatware:** TRACER and SPAM keep their approved footers, *"We just want to stay in touch."* and *"Recommended for you."*
 
 ---
 
@@ -180,6 +200,6 @@ Follow the HALCYON assets' format so the encounter code can swap them in: **1586
 1. ~~Approve the three-degrees table (§1) as the corporate voice for all interfaces?~~ **Approved 2026-11-17.**
 2. ~~Approve IRONWATCH's concourse and LUCIDA's solarium (§3–4), or adjust the setting?~~ **Approved 2026-11-17.**
 3. ~~Approve the plaque colours and the ICE appliance list, or mark the ones to change?~~ **Approved 2026-11-17.**
-4. Should HALCYON get the same non-fight interface copy (consent, remembered, reward) written next, for consistency?
-5. Generate the art now, or after the HALCYON playtest?
-6. The escape ICE of both corporations (ROADBLOCK, SPIKE STRIP, SEARCHLIGHT, PURSUIT DRONE; WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS) aren't drawn yet. Do them in the same pass, or later?
+4. ~~Should HALCYON get the same non-fight interface copy?~~ **Yes (2026-11-17).** Written in §2a; the new lines await review.
+5. ~~Generate the art now, or after the HALCYON playtest?~~ **Now (2026-11-17).** Codex generates the §5 backgrounds and shells.
+6. ~~Draw the escape ICE in the same pass?~~ **Wait (2026-11-17).** The escape ICE (ROADBLOCK, SPIKE STRIP, SEARCHLIGHT, PURSUIT DRONE; WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS) are deferred.

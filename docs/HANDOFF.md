@@ -34,6 +34,7 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
+| **FACADE-ART-001** | Generate the IRONWATCH and LUCIDA friendly and hostile backgrounds and the Opening Node + Tier 1 mascot shells from the art briefs; record exact prompts in `SOURCES.md`; wire the backgrounds into the corporation skins; refresh fixtures. Escape ICE deferred. | Facades §5; master design FACADE-001 | Codex | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
@@ -84,7 +85,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| FACADE-001 follow-ups | Facades approved. Still open: write HALCYON's matching non-fight copy? Generate the IRONWATCH/LUCIDA art now or after the HALCYON playtest? Draw the escape ICE in the same pass? | `REDLINE_CORPORATE_FACADES.md` §6 | WAITING |
+| FACADE-001 HALCYON copy | Review HALCYON's proposed non-fight interface copy (consent, remembered, reward). Escape ICE art is deferred by the designer. | `REDLINE_CORPORATE_FACADES.md` §2a | WAITING |
 
 ---
 
