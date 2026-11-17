@@ -13,6 +13,21 @@ REDLINE is a cyberpunk rustler-versus-corporation, card-driven game with ICE enc
 
 **Production direction (LOCKED):** **Godot 4** is the target production engine. The existing **Python/Pygame** build remains the gameplay reference and regression baseline; migration must preserve tested behaviour rather than inventing replacement rules.
 
+### Raygun Gothic and corporate surveillance — DIRECTION (2026-11-17)
+
+Raygun Gothic is the public face of a slightly askew cyberpunk world. The three corporations combine the geometric polish and faith in progress of Art Deco with the Atomic Age promise that technology will make life brighter, easier, and safer. Their public image is immaculate, relentlessly cheerful, and a little too sweet. Underneath it, surveillance is a business model. Each corporation watches to a different degree, and each packages that access as a benefit.
+
+This is a primary design principle for the game’s world, writing, and entire interface. Carry the same visual language through navigation, menus, account screens, consent prompts, dashboards, and status messages as well as the cards. Use stepped frames and symmetrical layouts, polished metal, and bright Atomic Age motifs. Let each corporation’s surveillance model shape what its interfaces ask for, what they remember, and what they present as a reward. Players should be able to feel the differences between the corporations in routine interactions.
+
+The surrealism comes from the sincerity of the sales pitch. A cheerful orbit animation celebrates a newly linked data source. A pastel settings screen promises, “Fewer interruptions. We’ll recognize you automatically.” A service dashboard remembers places the player never disclosed. As the implications grow darker, the design stays immaculate and the corporate voice stays warm. The player should understand both why someone would welcome the service and what the corporation gains when they do.
+
+#### Visual precedents
+
+- [Five Ton Crane’s Raygun Gothic Rocketship](https://fivetoncrane.org/project-item/the-raygun-gothic-rocketship/) combines a polished, finned exterior with a tactile cockpit drawn from 1930s through early 1950s science fiction.
+- [Starship Titanic](https://store.steampowered.com/app/467290/Starship_Titanic/) puts Deco luxury, retrofuturist consoles, and robot attendants inside a single passenger experience.
+- [Dr. Grordbort’s](https://www.gregbroadmore.com/portfolio/dr-grordborts) gives imagined space-age technology the heft and finish of fabricated objects.
+- [BioShock’s Rapture](https://irrationalgames.ghoststorygames.com/insider/from-the-vault-evolution/) carries Deco styling from its architecture into the machines people use.
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.
