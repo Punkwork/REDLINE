@@ -34,9 +34,6 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **DEPRECATE-001** | Remove LOGIC BOMB from play (reward pool and any decks) and RELAY from play (CONSENT FORM keeps its subroutines and STR with no passive). Update or retire the tests that use them; keep the definitions in code only if needed for old saves. No other values change. | Master design, DEPRECATE-001 | Codex | TO DO |
-| **ICE-AUDIT-001** | Apply the new HALCYON values: CAPTCHA STR 4, TRACE 2 replaces PULP 6; AUTO-RENEW STR 5; DOORBELL CAM STR 3, [S1] PULP 4 · [S2] CORTEX 1 · [S3] DEADLOCK, WATCHER kept; CONSENT FORM and REJECT ALL PULP 3. Re-run bot sims; refresh VIS-001/CHROME-001 screenshots that show CAPTCHA PULP 6. | Master design, ICE-AUDIT-001; ICE Corp 1 §5.0 | Codex | TO DO |
-| **PULP-001 roll** | FORTRESS fixed-value PULP: roll ahead of each Corporation Response (working timing: start of the Rustler turn): printed −2..+2, about 30% of rolls ±3 instead, minimum 1, Game RNG. Show the exact rolled value on the ICE and in the response strip, and fire that value. Lethal mood reads the shown value. PULP-002 curves do not roll; curve B shows its next value instead of "PULP ?". | Master design, PULP-001 | Codex | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
@@ -48,6 +45,10 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| DEPRECATE-001 | Removed LOGIC BOMB and RELAY; replaced the rare SCRIPT specimen with PAYDAY. | **BUILT** — `2bea490` |
+| ICE-AUDIT-001 | Applied the approved HALCYON ICE revisions. | **BUILT** — `0ac64c3` |
+| PULP-001 roll | Published seeded FORTRESS PULP rolls and exact PULP-002 curve values. | **BUILT** — `b44254c` |
+| HALCYON validation and fixtures | Reran the 30-seed simulations and refreshed VIS-001, CHROME-001 and CARDS-001 fixtures. | **BUILT** — [validation commit entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-17--validate-halcyon-and-refresh-fixtures-codex) |
 | CARDS-001 | Heavy SCRIPT/PROGRAM/PROTOCOL slot-cartridge templates; external BW rating tabs; brown/olive/teal board faces, oxide-red Whirlwind Bloatware and direct-print titles; common/uncommon/rare finish details; protected protrusions; nine close-ups and six/eight-card captures. Types, rarity weights, costs and rules unchanged. | **BUILT** — `cards-001-board-textures` · Art approved 2026-11-17 (VISUAL-APPROVALS-002); playtest pending |
 | CHROME-001 | Refine the CAPTCHA encounter in the designer-selected Chrome Deco direction: readable real rules/cards, illustrated mascot shells, atrium, corporate escalation and native interaction feedback. Ten full-screen PNGs refreshed against the current CARDS-001 treatment; pearl-enamel ICE service plaques; type-specific heavy slot cartridges with outside BW tabs and restrained rarity finishes. | **BUILT** — `chrome-001-enamel` (code `chrome-001-step5`) · Art approved 2026-11-17 (VISUAL-APPROVALS-002); playtest pending |
 | VIS-001 | The Friendly Lie encounter: fonts/skins, zine hand/HUD, mascot scans and moods, corporation break states, drag/motion/accessibility, seven PNG review fixtures. Visual only; ZEROED/TUMBLE integrated first. | **BUILT** — `vis-001g` (steps `vis-001a`–`vis-001g`) · Art approved 2026-11-17 (VISUAL-APPROVALS-002); playtest pending |

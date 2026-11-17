@@ -4,82 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-15 — DSY-004,005,013: Add SAFEHOUSE COMPILE and corporation pushback hooks (Codex)
-
-**Commit reference:** `playtest3-step5` (tag on this step commit).
-
-**Changed:** SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; FREE TRIAL on the final HALCYON layer.
-
-**Interpretations to confirm:** The explicit shared-tag requirement overrides the contradictory PROBE × PULP SHIELD example. Compilation order is chosen by selecting cards in order. Targeted halves use the selected ICE; costs are prepaid once. SAFEHOUSE compilation replaces healing. Compiled cards burn if either half burns. MINIMALIST waives the full first-break BW action cost. Other-corporation reactive ICE have definitions and tested hooks, not map placement.
-
-**Deferred:** REFACTOR 50-CRED Uplink service, PATCHWORK/FUSE acquisition and modifications, DEDUPLICATOR, Ghostware acquisition, and IRONWATCH/LUCIDA routes are absent from this slice; no acquisition or Uplink flow invented.
-
-**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
-
-```text
-Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
-
-  bot: phase=SLICE_DONE vitae=7 trace=13 strikes=0 cred=16 deck=15 steps=28
-  deck GENERALIST: avg end size 14.57; avg bloat tax paid 0.00 TRACE
-  opening GENERALIST: earliest BREACH 3
-  stalled GENERALIST (3000-step guard, not deaths): { "CAPTCHA": 1 }
-  pulp GENERALIST: per encounter 137.5 incoming (1.3 from Black ICE), 131.1 absorbed by SHIELD, 6.3 to VITAE, 66.8 hits
-  sim GENERALIST: 13/30 cleared; deaths by node { "TERMS & CONDITIONS": 12, "DOORBELL": 4 }; survivors' avg end VITAE 15.8; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
-  deck ECHO: avg end size 14.20; avg bloat tax paid 0.00 TRACE
-  opening ECHO: earliest BREACH 3
-  stalled ECHO (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1, "CAPTCHA": 3 }
-  pulp ECHO: per encounter 80.7 incoming (0.0 from Black ICE), 73.5 absorbed by SHIELD, 7.2 to VITAE, 26.7 hits
-  sim ECHO: 8/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "DOORBELL": 7, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 10.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
-  deck RIOT: avg end size 17.47; avg bloat tax paid 0.00 TRACE
-  opening RIOT: earliest BREACH 3
-  pulp RIOT: per encounter 9.9 incoming (2.0 from Black ICE), 3.7 absorbed by SHIELD, 6.2 to VITAE, 2.7 hits
-  sim RIOT: 10/30 cleared; deaths by node { "DOORBELL": 8, "TERMS & CONDITIONS": 10, "CAPTCHA": 2 }; survivors' avg end VITAE 16.6; purges 0 in 0 runs; SHATTER played 77 times in 29 runs
-  deck VECTOR: avg end size 14.10; avg bloat tax paid 0.00 TRACE
-  opening VECTOR: earliest BREACH 3
-  stalled VECTOR (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1 }
-  pulp VECTOR: per encounter 10.1 incoming (0.0 from Black ICE), 2.8 absorbed by SHIELD, 7.4 to VITAE, 2.9 hits
-  sim VECTOR: 5/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "DOORBELL": 13, "CAPTCHA": 5 }; survivors' avg end VITAE 8.2; purges 23 in 20 runs; SHATTER played 0 times in 0 runs
-TESTS: 278 passed, 0 failed
-```
-
-
-## 2026-11-15 — PACE-003,005,007,008: Add pacing mechanics and prepare HALCYON PLAYTEST 3 (Codex)
-
-**Commit reference:** `playtest3-pacing` (tag on this step commit).
-
-**Changed:** DEADLOCK ×N progress for paid/card/WORM breaks; independent ESCALATE counters for TRACE/DISCARD/FORGET; reward need icons and visible draw chance; Tier 1 one-layer route; tier-aware reward odds; +50% reserves; version/label 0.3.0-playtest.3 / HALCYON PLAYTEST 3; post-merge-only Windows export; updated playtest guide and nine new UI fixtures. Final regression review also completed AMP for SILENT PARTNER/PAIN TOLERANCE, amplified card text, compiled fallback coverage, and Node/run state resets.
-
-**Interpretations to confirm:** All four slice rows are Opening/Tier 1 (ICE Corp 1 §5.0 and Pacing §7); retain each Node’s first layer and remove later layers, without rebalance. FREE TRIAL remains Tier 2 data/trigger only after this cut, superseding its temporary Step 5 placement. 15 ×1.5 CRED rounds up to whole 23. No existing ICE receives an unspecified ×N or ESCALATE assignment; controlled fixtures exercise both. Cards outside the DRILL/HULL/COVERAGE definitions have no misleading role label. REBOOT resolves rack effects in installation order; ROLLING RESTART gains a fixed one AMP rather than amplifying its own AMP production. A finite repeating-trigger guard prevents recursive draw loops from hanging the app. Numeric GHOST thresholds override contradictory RIOT starter prose: 15 is in HALCYON GHOST. Compiled effects resolve against the board in order; a conditional break half with no eligible subroutine does nothing, so a preceding STR reduction can enable it.
-
-**Deferred:** No conditional BOOTING/safety-valve changes. Tier 2 map placement, other corporations, Uplink/REFACTOR, PATCHWORK/FUSE, Ghostware acquisition/DEDUPLICATOR and CAPS remain deferred as listed in HANDOFF. Phase 7 HULL pools, ZEROED and manual BREACH WORK scoring retain their existing owners. Windows export happens after merge; Windows launch/human playtest have not been run.
-
-**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
-
-```text
-Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
-
-  bot: phase=SLICE_DONE vitae=7 trace=8 strikes=0 cred=26 deck=15 steps=24
-  deck GENERALIST: avg end size 15.37; avg bloat tax paid 0.00 TRACE
-  opening GENERALIST: earliest BREACH 3
-  stalled GENERALIST (3000-step guard, not deaths): { "CAPTCHA": 1 }
-  pulp GENERALIST: per encounter 181.2 incoming (0.0 from Black ICE), 175.8 absorbed by SHIELD, 5.4 to VITAE, 89.4 hits
-  sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
-  deck ECHO: avg end size 14.80; avg bloat tax paid 0.00 TRACE
-  opening ECHO: earliest BREACH 3
-  pulp ECHO: per encounter 14.5 incoming (0.0 from Black ICE), 5.2 absorbed by SHIELD, 9.3 to VITAE, 4.4 hits
-  sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
-  deck RIOT: avg end size 18.20; avg bloat tax paid 0.00 TRACE
-  opening RIOT: earliest BREACH 3
-  pulp RIOT: per encounter 9.6 incoming (0.8 from Black ICE), 4.1 absorbed by SHIELD, 5.6 to VITAE, 2.8 hits
-  sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; purges 0 in 0 runs; SHATTER played 18 times in 12 runs
-  deck VECTOR: avg end size 14.87; avg bloat tax paid 0.00 TRACE
-  opening VECTOR: earliest BREACH 3
-  pulp VECTOR: per encounter 12.5 incoming (0.0 from Black ICE), 4.2 absorbed by SHIELD, 8.3 to VITAE, 3.6 hits
-  sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; purges 12 in 12 runs; SHATTER played 0 times in 0 runs
-TESTS: 310 passed, 0 failed
-```
-
-
 ## 2026-11-15 — UI-004: horizontal card-choice menus (Codex)
 
 **Request:** First Windows playtest showed HOLD and Generalist READY RIG cards wrapping vertically, hiding most choices. Display the cards horizontally.
@@ -455,3 +379,24 @@ Applied the five approved ICE edits. DOORBELL CAM uses the existing VOID reveal 
 A seeded roll at the start of the Rustler turn is shared by the ICE, response strip, mood and resolution. PULP-002 curves keep their sequences and publish the next value, including curve B. SCRAMBLE applies after the roll.
 
 **Interpretations to confirm:** Each eligible unbroken subroutine gets an independent roll at turn start, even if the response is later skipped. Revealed effects drive mood; a hidden CORTEX subroutine does not tip off the player.
+
+## 2026-11-17 — Validate HALCYON and refresh fixtures (Codex)
+
+Godot 4.3 import passed, as did all 363 rules checks and all nine screenshot scripts, including 173 Friendly Lie and 621 cartridge checks and all five Chrome stages. Refreshed VIS-001, CHROME-001 and the three CARDS-001 encounter captures. The rare PAYDAY close-up was replaced in DEPRECATE-001. The other card close-ups matched their committed renders byte-for-byte. Design reference images were preserved.
+
+VIS-001 turn 3 now shows wary AUTO-RENEW and wary CAPTCHA, with TRACE 2 and TRACE 3 on CAPTCHA. CHROME-001 02b shows lethal AUTO-RENEW from its rolled PULP 6 and wary CAPTCHA with those same TRACE slots. CHROME-001 04a/04b start at turn 1 with wary mascots. In 04c, Mask Off still forces all mascots lethal.
+
+Seeds 100–129 per Rustler. Deaths are by Node and exclude 3,000-step guard stalls. No balance changes were made in response.
+
+| Rustler | Clears (baseline → now) | Deaths by Node (baseline → now) | Mean survivor VITAE |
+|---|---:|---|---:|
+| GENERALIST | 25 → 21 | CAPTCHA 2 → 6; TERMS & CONDITIONS 1 → 1; DOORBELL 0 → 2 | 16.2 → 17.0 |
+| ECHO | 17 → 11 | CAPTCHA 3 → 4; TERMS & CONDITIONS 9 → 14; CONSENT WALL 1 → 1 | 9.5 → 11.8 |
+| RIOT | 25 → 13 | CAPTCHA 4 → 3; TERMS & CONDITIONS 1 → 6; DOORBELL 0 → 7 | 15.2 → 16.2 |
+| VECTOR | 20 → 17 | CAPTCHA 6 → 2; TERMS & CONDITIONS 4 → 10; DOORBELL 0 → 1 | 10.7 → 11.5 |
+
+The baseline had two GENERALIST stalls. This run had one RIOT stall at DOORBELL. Adding rolls to the seeded Game RNG changes which random draws are consumed by other systems, so this comparison measures the combined changes.
+
+**Interpretations to confirm:** Kept the existing chronological PNG filenames even where the named mood now belongs to a different ICE or is absent. The four-type still comparison has no affected card or encounter state. No Windows build was started.
+
+LOG-001 moved the oldest whole live entries to the archive unchanged.
