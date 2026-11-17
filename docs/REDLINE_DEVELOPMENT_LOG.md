@@ -493,3 +493,7 @@ Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stage
 ## 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude)
 
 **Designer:** "the rustler is always going to see what pulp damage the corporation is going to deliver next turn with that subroutine. So there is no surprise for the rustler." Recorded in the master design doc and Core Rules: the roll is made ahead of time (working timing: start of the Rustler turn), shown as an exact number, and that value fires; the lethal mood reads it. HANDOFF build row updated; the WAITING row now only asks about PULP-002 curves, including curve B's "PULP ?". **Code changes:** none.
+
+## 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude)
+
+**Designer:** approved Claude's recommendation ("Yes, record it that way."). PULP-002 curves A/B/C do not get the ±2/±3 roll; all curves show their next value before firing, so curve B drops "PULP ?". Recorded in the master design doc and Core Rules §5.2; HANDOFF build row updated, WAITING row closed. **Code changes:** none.
