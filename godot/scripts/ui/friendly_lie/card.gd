@@ -15,9 +15,11 @@ var drag_started := false
 var motion: Tween
 class CorporateArt extends Control:
  func _draw() -> void:
-  draw_style_box(FriendlyLook.style(Color("#FFE5E5"),Color.TRANSPARENT,0,6),Rect2(Vector2.ZERO,size))
-  draw_arc(Vector2(size.x/2,12),4,0,TAU,24,FriendlyLook.RED,2,true)
-  draw_arc(Vector2(size.x/2,32),9,PI,TAU,24,FriendlyLook.RED,2,true)
+  var c:=Vector2(size.x/2,8)
+  draw_line(c+Vector2(0,7),c-Vector2(0,3),Color("#FFF9E9"),2,true)
+  draw_circle(c-Vector2(0,4),2,Color("#FFF9E9"))
+  draw_arc(c,7,-PI*0.8,-PI*0.2,20,Color("#FFF9E9"),1,true)
+  draw_arc(c,12,-PI*0.8,-PI*0.2,20,Color("#FFF9E9"),1,true)
 class ArtBox extends Control:
  func _draw() -> void:
   var r:=Rect2(Vector2.ZERO,size)
@@ -39,18 +41,19 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var rarity: String=d.get("rarity","COMMON")
  var label_top:=38 if d.type=="PROGRAM" else (30 if d.type=="PROTOCOL" else 24)
  var label_bottom:=218 if d.type=="PROGRAM" else 211
- if corp: label_top=8; label_bottom=234
+ if corp: label_top=60; label_bottom=212
+ var printed_ink:=Color("#FFF9E9")
  body = Control.new(); body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); body.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(body)
  var bg := FriendlyLook.panel(Color.WHITE if corp else FriendlyLook.PAPER, FriendlyLook.RED if corp else FriendlyLook.TONER, 3, view.skin.radius / 2 if corp else 0)
  bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); bg.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(bg)
+ bg.hide()
+ var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
  if not corp:
-  bg.hide()
-  var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
   var finish:=CartridgeFinish.new(); finish.name="RarityFinish"; finish.rarity=rarity; finish.size=CARD_SIZE; body.add_child(finish)
- var title_ink:=Color("#4A3B32") if d.type=="SCRIPT" else (Color("#24564E") if d.type=="PROTOCOL" else FriendlyLook.SLATE)
- var head := FriendlyLook.panel(FriendlyLook.RED if corp else Color.TRANSPARENT)
+ var title_ink:=printed_ink
+ var head := FriendlyLook.panel(Color.TRANSPARENT)
  head.position = Vector2(15, label_top); head.size = Vector2(130, 40); head.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(head)
- var title := FriendlyLook.label(d.name.to_upper(), 10 if d.name.length() > 25 else (11 if d.name.length()>15 else 12), FriendlyLook.TONER if corp else title_ink, view.skin.bold_font if corp else FriendlyLook.BOLD)
+ var title := FriendlyLook.label(d.name.to_upper(), 10 if d.name.length() > 25 else (11 if d.name.length()>15 else 12), title_ink, view.skin.bold_font if corp else FriendlyLook.BOLD)
  title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; title.position = Vector2(19, label_top+1); title.size = Vector2(104, 39)
  var title_size:=int(title.get_theme_font_size("font_size"))
  var title_font: Font=view.skin.bold_font if corp else FriendlyLook.BOLD
@@ -64,7 +67,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var rule: String = view.game.card_text(id)
  var art_h := 44.0 if rule.length()<100 else (32.0 if rule.length()<145 else (16.0 if rule.length()<280 else 0.0))
  var art_y:=label_top+44
- var type_h:=14 if rule.length()>280 else 26
+ if corp: art_h=18
+ var type_h:=14 if corp or rule.length()>280 else 26
  var art := FriendlyLook.label("" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
  art.position = Vector2(16, art_y); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
  if not corp and art_h>10:
@@ -82,26 +86,26 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(16,art_y); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
  var category: String=d.type + (" · " + view.skin.corporation if corp else " · " + rarity)
  if not corp and not d.tags.is_empty() and type_h>14: category+="\n"+" / ".join(d.tags)
- var type_line := FriendlyLook.label(category, 8, Color("#4A5568") if corp else Color("#3A3A3A"), view.skin.font if corp else FriendlyLook.MONO)
+ var type_line := FriendlyLook.label(category, 8, printed_ink, view.skin.font if corp else FriendlyLook.MONO)
  type_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; type_line.position = Vector2(16, art_y+art_h+3); type_line.size = Vector2(128, type_h); body.add_child(type_line)
  var rules := RichTextLabel.new(); rules.mouse_filter = Control.MOUSE_FILTER_IGNORE; rules.bbcode_enabled = true; rules.scroll_active = false
  var font: Font = view.skin.font if corp else FriendlyLook.MONO
  var cached: Dictionary = view.game._find(view.game.hand, uid)
- var cache_h := 15 if cached.get("cached", false) else 0
+ var cache_h := 18 if cached.get("cached", false) else 0
  var y := art_y+art_h+type_h+6
- var available := label_bottom - y - cache_h - (20 if corp else 0)
+ var available := label_bottom - y - cache_h - (20 if corp and cache_h==0 else 0)
  var font_size := 11
  while font_size > 7 and font.get_multiline_string_size(rule, HORIZONTAL_ALIGNMENT_LEFT, 128, font_size).y > available: font_size -= 1
- rules.add_theme_font_override("normal_font", font); rules.add_theme_font_size_override("normal_font_size", font_size); rules.add_theme_color_override("default_color", FriendlyLook.TONER)
+ rules.add_theme_font_override("normal_font", font); rules.add_theme_font_size_override("normal_font_size", font_size); rules.add_theme_color_override("default_color", printed_ink)
  var re := RegEx.new(); re.compile("([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)")
  rules.text = re.sub(rule, "[bgcolor=#E4FF3A][color=#111111]$1[/color][/bgcolor]", true)
  rules.position = Vector2(16, y); rules.size = Vector2(128, available); body.add_child(rules)
- if corp:
-  var footer := FriendlyLook.label("We just want to stay in touch." if id=="TRACER" else "Recommended for you.",9,Color("#4A5568"),view.skin.font)
-  footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; footer.position=Vector2(16,214); footer.size=Vector2(128,19); body.add_child(footer)
+ if corp and cache_h==0:
+  var footer := FriendlyLook.label("We just want to stay in touch." if id=="TRACER" else "Recommended for you.",8,printed_ink,view.skin.font)
+  footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; footer.position=Vector2(16,192); footer.size=Vector2(128,19); body.add_child(footer)
  if cache_h > 0:
-  var cached_tag := FriendlyLook.label("CACHED" + (" · TEMP" if cached.has("cache_turns") else ""), 9, FriendlyLook.TONER, FriendlyLook.BOLD)
-  cached_tag.position = Vector2(16, label_bottom-12); body.add_child(cached_tag)
+  var cached_tag := FriendlyLook.label("CACHED" + (" · TEMP" if cached.has("cache_turns") else ""), 9, printed_ink, FriendlyLook.BOLD)
+  cached_tag.position = Vector2(16, label_bottom-17); body.add_child(cached_tag)
  tooltip_text = d.name + " · " + d.type + " · " + rarity + "\n" + rule
  if uid >= 0:
   var chk: Dictionary = view.game.can_play(uid)
@@ -142,4 +146,4 @@ func _notification(what: int) -> void:
 
 func _has_point(point: Vector2) -> bool:
  # Components and the BW tab are interactive even where they protrude beyond the label body.
- return (Rect2(Vector2.ZERO,CARD_SIZE) if corporate else PHYSICAL_RECT).has_point(point)
+ return PHYSICAL_RECT.has_point(point)

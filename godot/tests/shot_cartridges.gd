@@ -3,7 +3,7 @@ extends SceneTree
 var main: Node
 var failures:=0
 var checks:=0
-const EXAMPLES:=["DEEP_PROBE","STRESS_TEST","LOGIC_BOMB","PASSKEY","JACKHAMMER","SKELETON_KEY","TOOLBELT","SURGE_PROTECTOR","FAILSAFE"]
+const EXAMPLES:=["DEEP_PROBE","STRESS_TEST","LOGIC_BOMB","PASSKEY","JACKHAMMER","SKELETON_KEY","TOOLBELT","SURGE_PROTECTOR","FAILSAFE","TRACER","SPAM"]
 func _initialize() -> void: call_deferred("run")
 func check(ok: bool, message: String) -> void:
  checks+=1
@@ -18,7 +18,7 @@ func check_card(card: FriendlyCard) -> void:
   if child.name=="TonerIllustration": check(child.size.x<=128 and child.size.y<=44,"art stays inside its frame")
   if child is CartridgeFinish: check(child.rarity==d.rarity,"authored rarity preserved")
  var shells:=card.find_children("SlotCartridge","TextureRect",true,false)
- if d.type!="BLOATWARE": check(shells.size()==1 and shells[0].size==FriendlyCard.PHYSICAL_RECT.size,"chassis extends beyond paper card")
+ check(shells.size()==1 and shells[0].size==FriendlyCard.PHYSICAL_RECT.size,"chassis extends beyond paper card")
 func run() -> void:
  main=load("res://scenes/Main.tscn").instantiate(); root.add_child(main); main.voice_on=false; main.voice.stop(); await settle()
  main._start_as("GENERALIST"); var g: Game=main.g
@@ -50,6 +50,9 @@ func run() -> void:
  ids.append(combined)
  for id in ids:
   var card:=FriendlyCard.new(); card.setup(main.friendly,id,-1); staging.add_child(card)
+ for id in ["TRACER","SPAM"]:
+  var inst:=g._new_inst(id); inst.cached=true; g.hand.append(inst)
+  var card:=FriendlyCard.new(); card.setup(main.friendly,id,inst.uid); staging.add_child(card)
  await settle(2)
  for card in staging.get_children(): check_card(card)
  staging.queue_free()
@@ -66,5 +69,10 @@ func run() -> void:
   if count==6 or count==8:
    var path:=OS.get_environment("SHOT_DIR").path_join("encounter-cartridges-%d.png"%count)
    check(root.get_texture().get_image().save_png(path)==OK,"save encounter")
+ # Corporate junk is a bulky physical module but keeps its real unplayability/clear costs.
+ g.hand.clear()
+ for id in ["PROBE","PASSKEY","TOOLBELT","TRACER","SPAM","PULP_SHIELD"]: g.hand.append(g._new_inst(id))
+ main.refresh(); await settle()
+ check(root.get_texture().get_image().save_png(OS.get_environment("SHOT_DIR").path_join("encounter-whirlwind-bloat.png"))==OK,"save mixed bloat hand")
  print("CARTRIDGE UI: %d checks, %d failures"%[checks,failures])
  main.voice.stop(); main.voice.stream=null; main.queue_free(); await settle(); quit(1 if failures else 0)

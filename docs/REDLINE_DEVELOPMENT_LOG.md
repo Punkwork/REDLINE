@@ -4,15 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-15 — DSY-001 to DSY-014 and PACE-001 to PACE-010 approved for the next build (Claude)
-
-**Designer decision:** "Approve everything as written", to be implemented in the next build. `REDLINE_DECK_SYNERGY.md` → v1.0 and `REDLINE_PACING.md` → v1.0, every decision marked **APPROVED 2026-11-15**. Numbers remain working values to tune in playtest. Optional and conditional items stay as written: DSY-001b (GHOST +1 DRAW) optional; PACE-003's BOOTING-on-turn-4 only if playtest 2 shows an Opening Node breach before turn 4; PACE-006's safety valves held in reserve.
-
-**Docs amended** (a "Later amendments (deck synergy and pacing)" table added to each, which wins where it conflicts with older section text): Core Rules, Card Pools, Uplink & CAPS, Upgrades/Events/Escape, Rustlers, Engines, ICE Corp 1–3. `REDLINE_PLAYTEST_CHECKLIST.md` → v0.2 (B1, C1, K1 revised; C9–C11, G6–G11 added). `HANDOFF.md`: build work listed for Codex in five synergy steps plus pacing; Claude tasks for scoring the slice and Phase 7 pools.
-
-**Code changes:** none. **Tests run:** none.
-
-
 ## 2026-11-15 — REJECT-001: Use one DEADLOCK on REJECT ALL (Codex)
 
 **Commit reference:** `playtest3-step0` (tag on this step commit).
@@ -524,3 +515,14 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Validation:** 357 rules checks and 612 cartridge UI checks pass, including authored/compiled text fit and protruding bounds. Five Chrome stages pass; refreshed nine close-ups, six/eight-card captures and ten encounter review PNGs. The earlier dated whole entry was appended unchanged to the archive under LOG-001 to keep this live log below about 60 KB.
 
 **Review:** material tint and direct-print title treatment are proposed visual refinements. PR #12 is updated, not merged; designer approval of the integrated revision is still required under the existing merge instruction. No gameplay data, rarity odds or costs changed.
+
+
+## 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex)
+
+**Commit tag:** `cards-001-board-palette`.
+
+**Designer choices:** A/C/D board colours selected for card faces; Whirlwind #3 selected as Bloatware prototype. The pale Bloatware plate was rejected (“No card should have a white background for the text”). Brown Bloatware was then rejected for matching SCRIPT; oxide-red D received “Perfect”. That confirms the D material choice; no approval of the entire PR/merge is inferred.
+
+**Changed:** tobacco-brown SCRIPT, earthy olive PROGRAM, muted blue-green PROTOCOL; direct light printing on real board-style textures. BLOATWARE now has the Whirlwind-inspired protective U-handle, paired tubes, open cage/stacked boards and oxide-red phenolic face. Names, costs and rules are live controls. TRACER/SPAM remain BLOATWARE with unchanged unplayability/clear/TRACE rules; both now use the same component-aware bounds as other cartridges. Cached Bloatware retains full rules and CACHED marker; optional corporate flavour footer yields space when cached. No white card text panels remain. A–D review labels denote the four types; source-reference letters A/C/D remain palette provenance.
+
+**Validation:** Godot 4.3 import, 357 rules checks and 170 Friendly Lie UI checks pass. Extended cartridge fixture passes 625 checks and covers all authored/compiled texts, both Bloatware examples including cached text, component bounds and a mixed-type hand. Selected older log entry appended unchanged to the archive under LOG-001. Asset sources/guide/status/HANDOFF and PNGs are updated. No card definitions, rarity weights, costs or gameplay values changed. PR #12 remains open for integrated review before merge.
