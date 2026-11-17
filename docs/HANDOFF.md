@@ -28,16 +28,12 @@ This is the one list of work that has been **decided but not finished**, so Code
 ## To build (approved, not yet in the build)
 
 ### Start here (Codex): decisions made 2026-11-16
-Build these first, in this order; each is fully specified in the rows below and in the docs named there.
-2. **TUMBLE-001** (TUMBLER tumble rule).
-3. Docs only, no build: **ROT-001 sync** (every remaining SIGYL now reads TUMBLER; non-slice TUMBLERS still need slot counts) and the **development log split** (older entries moved to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`).
-Log each step in `REDLINE_DEVELOPMENT_LOG.md` with the decision ID, as usual.
+ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below. ROT-001 documentation sync and LOG-001 split were already completed in PR #8. No remaining Codex TO DO rows from this block.
 
 **Next build: everything in `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010), approved as written on 2026-11-15.** Suggested order, so each step can be playtested before the next; numbers are working values. Where a system isn't in the slice yet (Uplink, Console Lab, PATCHWORK, Ghostware), build the part that touches it when that system arrives, and say so in the log.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **TUMBLE-001** | **TUMBLER tumble:** breaking a slotted subroutine (Icepick, card or WORM break) removes it from the pool; the slots after it shift back one; the next unbroken pool subroutine (wrapping, skipping broken and showing ones) enters the last slot face up and **active at once** (breakable now; fires this turn's response if unbroken). Rotation steps through unbroken subroutines only and stops when unbroken ≤ slots (spare slots empty). DEADLOCK ×N tumbles only on its last break; BOOTING still applies. Reel animation: broken strip drops away, the others slide and the new one rolls in (REEL-001 style). Tests: break slot 1 and slot 2 on CAPTCHA; wrap-around; pool shrinking below slot count; WORM and card breaks; DEADLOCK ×2; BOOTING on REJECT ALL; TRIPWIRE still adds TRACE per break; response preview updates after each tumble. Re-run the 30-run bot for all Rustlers and log the change in clears and turns. | Core Rules §5.4; ICE Corp 1 amendments; ICE Rules Bible | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
@@ -50,6 +46,7 @@ Log each step in `REDLINE_DEVELOPMENT_LOG.md` with the decision ID, as usual.
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| TUMBLE-001 | Remove broken TUMBLER subs and tumble immediately active replacements | **BUILT** — `zeroed-tumble-step3` |
 | ZEROED-001-cards | Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards | **BUILT** — `zeroed-tumble-step2` |
 | ZEROED-001 | Restore STR floor and track once-per-ICE ZEROED | **BUILT** — `zeroed-tumble-step1` |
 | UI-004 | HOLD and READY RIG choices use a single horizontal scrolling row; full card height and last-card access verified. | **BUILT** — `codex/horizontal-choice-menus` |

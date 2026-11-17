@@ -352,3 +352,28 @@ sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2,
 sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
 TESTS: 331 passed, 0 failed
 ```
+
+
+## 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex)
+
+**Commit tag:** `zeroed-tumble-step3`.
+
+**Changed:** Remove broken TUMBLER subs and tumble immediately active replacements
+
+**Interpretations to confirm:** None.
+
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
+
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 3.09; avg cleared-run turns 9.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5; turns per non-stalled encounter 3.91; avg cleared-run turns 12.6
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2; turns per non-stalled encounter 3.14; avg cleared-run turns 10.9
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7; turns per non-stalled encounter 3.61; avg cleared-run turns 12.9
+TESTS: 352 passed, 0 failed
+```
+
+**TUMBLE comparison with Step 2 (same seeds/policy):** clears GENERALIST 29→25, ECHO 20→17, RIOT 24→25, VECTOR 20→20. Turns per non-stalled encounter: GENERALIST 2.84→3.09, ECHO 4.06→3.91, RIOT 3.19→3.14, VECTOR 3.69→3.61. GENERALIST stalls at the action guard rose from 1 to 2; these are not deaths. The bot takes the first shared reward, so the new RIOT reward cards are exercised by deterministic card tests rather than normally drafted by this policy.
+
+**UI verification:** all six display-backed scripts pass, including actual SCAN/CULL choices, horizontal HOLD/READY RIG access, ZEROED target highlighting and marker, tumble motion, immediate breakability during animation, and settled slots. Existing negative-STR and opening-rotation assertions were updated in place. Stable subroutine IDs remain for labels/history; broken entries are filtered out of the circulating pool.
+
+**Candidate requested by designer:** “give me a build I can download.” The existing CI export gate now also permits this exact feature branch; it still excludes other feature branches and PR events. The candidate remains version 0.3.0-playtest.3 and displays ZEROED + TUMBLE. Its ZIP includes BUILD_COMMIT.txt. No merge or direct push to stabilization is performed.

@@ -8,4 +8,6 @@ ZEROED-001: STR bottoms at zero, ordinary excess reduction is discarded, spare R
 
 RIOT rewards now include NULL POINTER (replacing INTEGER UNDERFLOW), FLATLINE, KNOCKOUT and SECOND WIND. Printed ZEROED bonuses resolve immediately after the reduction, including ordered COMPILE effects. Reward cards show DRILL and eligible targets are highlighted.
 
-Validation: 331 rules checks pass; each Rustler ran 30 seeds. Exact summaries and interpretations are in the development log. This feature branch has not been merged or exported; the existing Windows artifact predates ZEROED changes. Follow HANDOFF for remaining authorized work.
+TUMBLE-001: broken TUMBLER subs leave the active pool; incoming subs are immediately active/revealed. Rotation skips removed entries and stops when all remaining entries fit. The reel shows dropping, sliding and incoming strips; spare slots show EMPTY. DEADLOCK ×N only tumbles on completion.
+
+Validation: 352 rules checks pass; six display-backed screenshot scripts pass; each Rustler ran 30 seeds. Exact summaries and interpretations are in the development log. The requested Windows candidate is delivered from this feature branch, with a ZEROED + TUMBLE selection label and source commit manifest. It is not merged into stabilization. HANDOFF remains the only task list.

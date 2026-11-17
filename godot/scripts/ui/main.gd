@@ -56,6 +56,8 @@ var responding := false
 ## REEL-001: TUMBLER slots are slot-machine reels; they spin when the TUMBLER rotates.
 const REEL_H := 33.0
 var spin := {}            # ICE index → its slots' subroutines before the rotation
+var tumble: Dictionary = {}
+var previous_slots: Array = []
 var spinning := false
 var spin_built := false
 var spin_deferred := false
@@ -420,6 +422,7 @@ func refresh() -> void:
 	if spinning and spin_built:
 		spin_deferred = true   # don't rebuild (and restart) the reels mid-spin
 		return
+	_detect_tumbles()
 	_handle_events()
 	_build_hud()
 	_build_info()
@@ -763,7 +766,10 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	# subroutines (TUMBLERs: only the subroutines in its slots; the rest are face-down)
 	var act := g.active_subs(i)
 	var tumbler := IceDB.is_tumbler(ice.id)
-	for k in act.size():
+	for k in (int(d.get("slots", act.size())) if tumbler else act.size()):
+		if k >= act.size():
+			v.add_child(_tumble_reel(i, k, -1, _lbl("SLOT %d · EMPTY" % (k + 1), 12, DIM)))
+			continue
 		var s: int = act[k]
 		if not ice.seen[s]:
 			var fh := HBoxContainer.new()
@@ -792,7 +798,7 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			if spin.has(i) and k < spin[i].size():
 				var ps: int = spin[i][k]
 				prev_row = _sub_row(i, ps, d.subs[ps], ice.broken[ps], "SLOT %d · S%d" % [k + 1, ps + 1])
-			v.add_child(_reel(content, prev_row, k, spin.has(i)))
+			v.add_child(_tumble_reel(i, k, s, content) if tumble.has(i) else _reel(content, prev_row, k, spin.has(i)))
 		else:
 			v.add_child(content)
 	var hid := g.hidden_count(i)
@@ -1459,7 +1465,7 @@ func _overlay_safehouse() -> void:
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
-	v.add_child(_lbl("HALCYON PLAYTEST 3 · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	v.add_child(_lbl("HALCYON PLAYTEST 3 · ZEROED + TUMBLE · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
 	var option := CheckBox.new()
 	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
 	option.button_pressed = g.ghost_draw_enabled
@@ -1600,3 +1606,46 @@ func _overlay_compile() -> void:
 			g.compile_cards(compile_first, uid)
 			compile_open = false
 		refresh(), "Cancel", func(): compile_open = false; refresh())
+
+func _detect_tumbles() -> void:
+	tumble.clear()
+	var current := []
+	for i in g.enc.get("ice", []).size():
+		var ice: Dictionary = g.enc.ice[i]
+		if g.ice_definition(ice).type != "TUMBLER": continue
+		var showing := g.active_subs(i)
+		for prior in previous_slots:
+			if is_same(prior.ice, ice) and prior.subs != showing and prior.subs.any(func(s): return ice.broken[s]):
+				tumble[i] = prior.subs
+		current.append({"ice": ice, "subs": showing.duplicate()})
+	previous_slots = current
+
+func _tumble_reel(i: int, slot: int, sub: int, final_row: Control) -> Control:
+	var frame := _reel(final_row, null, slot, false)
+	if not tumble.has(i): return frame
+	var prior: Array = tumble[i]
+	var old_slot: int = prior.find(sub) if sub >= 0 else -1
+	if old_slot == slot: return frame
+	var holder: Control = frame.get_child(0)
+	final_row.modulate.a = 0.0
+	var window := Control.new()
+	window.name = "TumbleMotion"
+	window.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	window.clip_contents = true
+	holder.add_child(window)
+	if slot < prior.size() and g.enc.ice[i].broken[prior[slot]]:
+		var removed := _sub_row(i, prior[slot], g.ice_definition(g.enc.ice[i]).subs[prior[slot]], true, "BROKEN")
+		removed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		window.add_child(removed)
+		var drop := removed.create_tween().set_parallel(true)
+		drop.tween_property(removed, "position:y", float(REEL_H), 0.28)
+		drop.tween_property(removed, "modulate:a", 0.0, 0.28)
+	var arriving: Control = final_row.duplicate()
+	arriving.modulate.a = 1.0
+	arriving.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	window.add_child(arriving)
+	arriving.position.y = float(REEL_H * (old_slot - slot)) if old_slot >= 0 else -float(REEL_H)
+	var slide := arriving.create_tween()
+	slide.tween_property(arriving, "position:y", 0.0, 0.42).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	slide.tween_callback(func(): final_row.modulate.a = 1.0; window.queue_free())
+	return frame

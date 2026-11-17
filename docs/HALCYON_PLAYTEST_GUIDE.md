@@ -1,22 +1,22 @@
 # PANOPTICON — HALCYON PLAYTEST 3 (0.3.0-playtest.3)
 
 This development slice covers four Rustlers and HALCYON's first four map rows.
-The selection screen must say **HALCYON PLAYTEST 3**. Record the source commit,
+This candidate includes **ZEROED + TUMBLE**; the selection screen says **HALCYON PLAYTEST 3 · ZEROED + TUMBLE**. Record the source commit,
 Rustler, Node, turn and cards with feedback.
 
 ## Get the Windows build after merge
 
-After the playtest-3 PR is merged into `codex/halcyon-playtest-stabilization`, open
-**GitHub → Actions → Godot validation and Windows playtest build**, then its
-successful **push** run on that branch. Download
-**PANOPTICON-HALCYON-PLAYTEST-3-0.3.0-playtest.3-Windows-x86_64** from Artifacts
-(sign-in may be required). Extract it and run `PANOPTICON_HALCYON_slice.exe`.
-The resources are embedded; Godot is not required. Keep the included checklist.
-The executable is unsigned. Windows launch verification remains a manual check.
+The designer requested a downloadable ZEROED + TUMBLE candidate before merge.
+Open **GitHub → Actions → Godot validation and Windows playtest build**, then the
+successful **push** run on `codex/zeroed-tumble-2026-11-16`. Download the Windows
+artifact, extract it, and run `PANOPTICON_HALCYON_slice.exe`. Godot is not required.
+`BUILD_COMMIT.txt` identifies the exact source revision. This candidate keeps
+version `0.3.0-playtest.3`; use the ZEROED + TUMBLE selection label and commit to
+distinguish it from older Playtest 3 downloads. The executable is unsigned.
 
-Feature-branch and PR runs validate rules and screenshots; **they do not export
-Windows**. The post-merge run exports version `0.3.0-playtest.3` using Godot 4.3
-and matching templates, includes this guide, and writes SHA256SUMS.txt.
+Only the stabilization branch and this specifically requested candidate branch
+export Windows on push. Pull-request checks validate code and screenshots.
+The candidate remains separate from the stabilization branch until its PR merges.
 
 ## What to try
 
@@ -34,6 +34,7 @@ and matching templates, includes this guide, and writes SHA256SUMS.txt.
 | BURN | GARBAGE COLLECT chooses another hand card to burn, then draws one. Burned cards return next Node; the permanent deck is not pruned. TAIL CALL retrieves a chosen SCRIPT from discard. |
 | CHAIN | HUD shows last card's tags. PIVOT follows CLOAK for −3 rather than −2 STR; COVER FIRE follows EXPLOIT for 5 rather than 3 SHIELD. HANDOFF follows CLOAK to draw one. KILL CHAIN draws once per bonus, at most twice per turn per copy. Playing Programs / Protocols changes the last card; Icepick actions do not. Resets each turn. |
 | HOLD 1 | END TURN opens an optional hand-card choice before end-turn effects. Pick one to CACHE or skip. It stays through cleanup until played or Node end. DEAD AIR and SMASH & GRAB still supply additional CACHE. Training disables HOLD. |
+| TUMBLER TUMBLE | Breaking a slotted subroutine removes it for this encounter. Later slots slide back and the next unbroken pool entry wraps into the last slot, active immediately. It is breakable now and fires this turn if left unbroken. Rotation skips removed entries and stops when all survivors fit; spare slots show EMPTY. Partial DEADLOCK ×N breaks stay put until the last step. BOOTING and TRIPWIRE remain. Try CAPTCHA: break DISCARD or its first DEADLOCK and watch the incoming PULP. Icepick, card and WORM breaks all tumble. |
 | STR floor / ZEROED | ICE STR bottoms at 0. Excess ordinary reduction is lost; later gains rise from 0. Spare ROT counters remain and keep holding STR at 0. The first drop from positive STR to 0, by any source, consumes that ICE’s one ZEROED for the encounter and shows a ZEROED marker. ICE starting at 0 or protected by a positive STR floor cannot be ZEROED. Only a card printing ZEROED receives a bonus. |
 | MARGIN / OVERKILL | Break buttons show effective Icepick STR minus ICE STR after required boosts. SCALPEL's OVERKILL 2 makes its break component free. TOLL and boosts remain additional costs. STACK SMASH counts EXPLOIT plays including itself. Normal reveal, BOOTING and SEQUENCED restrictions remain. |
 | RIOT ZEROED cards | FLATLINE: 0 BW, +2 TRACE, −2 target STR; ZEROED −4 TRACE. KNOCKOUT: 1 BW, −3 STR; ZEROED break one visible/active subroutine. SECOND WIND: 0 BW, −1 STR; ZEROED +1 BW. Orange ICE borders identify targets a playable ZEROED card in hand would finish. Rewards label these cards DRILL. Bonuses occur only on the first positive-to-zero transition. |
@@ -74,7 +75,8 @@ acquisition flow or changed ICE numbers:
 For a developer screen check, run `godot --path godot --script
 res://tests/shot_playtest3.gd` with an existing `SHOT_DIR` directory and display.
 It renders deck analysis, HOLD, SCAN, CULL/STR floor, reward roles, DECOMPILE,
-COMPILE, and an explicitly controlled DEADLOCK ×2 / ESCALATE fixture.
+COMPILE, ZEROED target highlighting/markers, TUMBLE motion and settled slots,
+and an explicitly controlled DEADLOCK ×2 / ESCALATE fixture.
 
 ## Existing mechanics and scope
 

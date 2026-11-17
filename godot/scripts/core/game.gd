@@ -284,8 +284,10 @@ func active_subs(i: int) -> Array:
 		for s in d.subs.size():
 			out.append(s)
 		return out
-	for k in int(d.get("slots", d.subs.size())):
-		out.append((ice.rot + k) % d.subs.size())
+	for offset in d.subs.size():
+		var sub: int = (ice.rot + offset) % d.subs.size()
+		if not ice.broken[sub]: out.append(sub)
+		if out.size() >= int(d.get("slots", d.subs.size())): break
 	return out
 
 func is_active(i: int, s: int) -> bool:
@@ -294,13 +296,20 @@ func is_active(i: int, s: int) -> bool:
 func hidden_count(i: int) -> int:
 	## Face-down subroutines outside the slots (TUMBLER) or not yet fired (VOID, beyond this response).
 	var ice: Dictionary = enc.ice[i]
+	if ice_definition(ice).type == "TUMBLER": return ice.broken.count(false) - active_subs(i).size()
 	return ice_definition(ice).subs.size() - active_subs(i).size()
 
 func _rotate_tumblers() -> void:
 	for i in enc.ice.size():
 		var ice: Dictionary = enc.ice[i]
-		if ice_definition(ice).type == "TUMBLER" and int(ice_definition(ice).get("slots", ice_definition(ice).subs.size())) < ice_definition(ice).subs.size():
-			ice.rot = (ice.rot + 1) % ice_definition(ice).subs.size()
+		var d := ice_definition(ice)
+		var active := active_subs(i)
+		if d.type == "TUMBLER" and ice.broken.count(false) > int(d.get("slots", d.subs.size())):
+			for offset in range(1, d.subs.size() + 1):
+				var candidate: int = (int(active[0]) + offset) % d.subs.size()
+				if not ice.broken[candidate]:
+					ice.rot = candidate
+					break
 	_mark_seen()
 
 func _mark_seen() -> void:
@@ -1225,6 +1234,10 @@ func _do_break(i: int, s: int) -> bool:
 	var ice: Dictionary = enc.ice[i]
 	ice.break_progress[s] += 1
 	ice.broken[s] = ice.break_progress[s] >= deadlock_steps(ice_definition(ice).subs[s])
+	if ice.broken[s] and ice_definition(ice).type == "TUMBLER":
+		var showing := active_subs(i)
+		if not showing.is_empty(): ice.rot = showing[0]
+		_mark_seen() # Tumbled-in subs are active and face up before any next choice/preview.
 	_sync_strengths()
 	enc.breaks_turn += 1
 	var d := ice_definition(ice)
