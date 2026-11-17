@@ -28,20 +28,12 @@ This is the one list of work that has been **decided but not finished**, so Code
 ## To build (approved, not yet in the build)
 
 ### Start here (Codex): decisions made 2026-11-16
-Build these first, in this order; each is fully specified in the rows below and in the docs named there.
-1. **ZEROED-001** (revert negative STR, ZEROED flag and marker), then **ZEROED-001 cards**.
-2. **TUMBLE-001** (TUMBLER tumble rule).
-3. Docs only, no build: **ROT-001 sync** (every remaining SIGYL now reads TUMBLER; non-slice TUMBLERS still need slot counts) and the **development log split** (older entries moved to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`).
-Log each step in `REDLINE_DEVELOPMENT_LOG.md` with the decision ID, as usual.
+ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below. ROT-001 documentation sync and LOG-001 split were already completed in PR #8. No remaining Codex TO DO rows from this block. VIS-001 is also built on its feature branch; see Built below for the review tag.
 
 **Next build: everything in `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010), approved as written on 2026-11-15.** Suggested order, so each step can be playtested before the next; numbers are working values. Where a system isn't in the slice yet (Uplink, Console Lab, PATCHWORK, Ghostware), build the part that touches it when that system arrives, and say so in the log.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **ZEROED-001** | **Revert UNDERFLOW** (built in `playtest3-step4`): ICE STR floors at 0; a reduction past 0 is lost (later STR gains rise from 0); ROT keeps minimum 0 (spare ROT holds the ICE at 0). Remove the red negative display; MARGIN previews stay. **ZEROED** keyword: per-ICE, per-encounter flag set the first time STR drops from above 0 to 0 (any source); the bonus only if the card that did it prints ZEROED; floored ICE and ICE starting at 0 can't be ZEROED; ZEROED marker on the ICE. Update `synergy_cases.gd` (negative STR checks) and `HALCYON_PLAYTEST_GUIDE.md`. | Synergy §5.3, §5.3a; Core Rules §5.3, §5.7 | Codex | TO DO |
-| **ZEROED-001 cards** | RIOT pool: **NULL POINTER** replaces INTEGER UNDERFLOW (Rare, 2 BW, BURNED: target ICE at 0 STR, break 2 subroutines incl. DEADLOCKs, normal limits). New **FLATLINE** (Common, 0 BW +2 TRACE: −2 STR; ZEROED −4 TRACE), **KNOCKOUT** (Uncommon, 1 BW: −3 STR; ZEROED break 1 subroutine), **SECOND WIND** (Uncommon, 0 BW: −1 STR; ZEROED +1 BW). All SCRIPT — EXPLOIT. Tag ZEROED cards DRILL on the reward screen. | Synergy §9.2 | Codex | TO DO |
-| **TUMBLE-001** | **TUMBLER tumble:** breaking a slotted subroutine (Icepick, card or WORM break) removes it from the pool; the slots after it shift back one; the next unbroken pool subroutine (wrapping, skipping broken and showing ones) enters the last slot face up and **active at once** (breakable now; fires this turn's response if unbroken). Rotation steps through unbroken subroutines only and stops when unbroken ≤ slots (spare slots empty). DEADLOCK ×N tumbles only on its last break; BOOTING still applies. Reel animation: broken strip drops away, the others slide and the new one rolls in (REEL-001 style). Tests: break slot 1 and slot 2 on CAPTCHA; wrap-around; pool shrinking below slot count; WORM and card breaks; DEADLOCK ×2; BOOTING on REJECT ALL; TRIPWIRE still adds TRACE per break; response preview updates after each tumble. Re-run the 30-run bot for all Rustlers and log the change in clears and turns. | Core Rules §5.4; ICE Corp 1 amendments; ICE Rules Bible | Codex | TO DO |
-| **VIS-001** | **Visual language: The Friendly Lie** (direction B, chosen by the designer 2026-11-17). Corporations as friendly consumer apps, ICE as mascots with moods (cheery / wary / lethal / knocked out) plus NUL/REM scan tags, Rustler as photocopied zine, 6-card hand, corporation break states (Cracking at TRACE 20+, Strike modal, Mask off at strike 2+). Build steps VIS-001a–g; reference images, placeholder backgrounds and mascot SVGs in `docs/visual/`. Replaces the look (not the requirements) of `REDLINE_UI_NULREM_Design_For_Claude.md`. No rules change. | `REDLINE_VISUAL_LANGUAGE.md` Part 3 | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
@@ -54,6 +46,10 @@ Log each step in `REDLINE_DEVELOPMENT_LOG.md` with the decision ID, as usual.
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| VIS-001 | The Friendly Lie encounter: fonts/skins, zine hand/HUD, mascot scans and moods, corporation break states, drag/motion/accessibility, seven PNG review fixtures. Visual only; ZEROED/TUMBLE integrated first. | **BUILT** — `vis-001g` (steps `vis-001a`–`vis-001g`) |
+| TUMBLE-001 | Remove broken TUMBLER subs and tumble immediately active replacements | **BUILT** — `zeroed-tumble-step3` |
+| ZEROED-001-cards | Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards | **BUILT** — `zeroed-tumble-step2` |
+| ZEROED-001 | Restore STR floor and track once-per-ICE ZEROED | **BUILT** — `zeroed-tumble-step1` |
 | UI-004 | HOLD and READY RIG choices use a single horizontal scrolling row; full card height and last-card access verified. | **BUILT** — `codex/horizontal-choice-menus` |
 | PACE-003,005,007,008 | DEADLOCK ×N progress for paid/card/WORM breaks; independent ESCALATE counters for TRACE/DISCARD/FORGET; reward need icons and visible draw chance; Tier 1 one-layer route; tier-aware reward odds; +50% reserves; version/label 0.3.0-playtest.3 / HALCYON PLAYTEST 3; post-merge-only Windows export; updated playtest guide and nine new UI fixtures. Final regression review also completed AMP for SILENT PARTNER/PAIN TOLERANCE, amplified card text, compiled fallback coverage, and Node/run state resets. | **BUILT** — `playtest3-pacing` (commit tag) |
 | DSY-004,005,013 | SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; corporation pushback ICE definitions and triggers (Tier 2 placement deferred after PACE-008). | **BUILT** — `playtest3-step5` (commit tag) |
@@ -79,12 +75,13 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
+| ZEROED-001 interpretation | Positive STR floors also constrain LOGIC BOMB; its displayed STR stays at the floor and it cannot consume ZEROED. Loss of RELAY discards any resulting non-ROT deficit so later gains rise from zero. These readings preserve the explicit floor and no-hidden-debt rules. | Codex implementation log, 2026-11-17 | WAITING |
 | ICEBIBLE audit | Apply the ICE Rules Bible audit to the slice (DOORBELL CAM not deadly; CAPTCHA's PULP 6; AUTO-RENEW STR; TUMBLER PULP cap on REJECT ALL and CONSENT FORM)? | `REDLINE_ICE_RULES_BIBLE.md`, audit table | WAITING |
 | REEL-001 follow-up | Show the DEADLOCK total on TUMBLER cards? (REJECT-001 fixes REJECT ALL; CONSENT FORM and CAPTCHA still carry two.) | Dev log, REEL-001 | WAITING |
 | RIOT-003 | Confirm two readings of SHATTER: "any 1 icebreaker" means any 1 ICE; SLEDGE stays at STR 0 until the encounter ends. | Dev log, RIOT-003 | WAITING |
 | PULP-001 | Confirm FORTRESS PULP values are fixed per subroutine, not rolled. | Dev log, PULP-001 | WAITING |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
-| VIS-001 details | Maximum hand size (not set; VIS-001 fans 7+ cards); the lethal-mood threshold (working value: PULP 5+ or any CORTEX in the ICE's next response); the proposal silhouettes and wording for slice ICE not yet drawn. | `REDLINE_VISUAL_LANGUAGE.md` §2.4, §2.6 | WAITING |
+| VIS-001 details | Maximum hand size (not set; VIS-001 fans 7+ cards); the lethal-mood threshold (working value: PULP 5+ or any CORTEX in the ICE's next response); the proposal silhouettes and wording for slice ICE not yet drawn; individual-hit lethal threshold, three-mascot scaling, motion timings and real-conveyor turn-3 fixture differences recorded in the VIS-001 log. | `REDLINE_VISUAL_LANGUAGE.md` §2.4, §2.6 | WAITING |
 
 ---
 

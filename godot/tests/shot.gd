@@ -16,6 +16,7 @@ func _snap(name: String) -> void:
 	print("shot ", name)
 
 func _process(_d: float) -> bool:
+	if step == 99: return false
 	frames += 1
 	if frames < (12 if step == 4 else 30):
 		return false
@@ -76,6 +77,16 @@ func _process(_d: float) -> bool:
 			main.refresh()
 		6:
 			_snap("07_void")
-			return true
+			step = 99
+			call_deferred("_finish")
+			return false
 	step += 1
 	return false
+
+func _finish() -> void:
+	# Let the audio mixer release the last NUL/REM stream before tearing down the tree.
+	main.voice.stop()
+	main.voice.stream = null
+	main.queue_free()
+	for i in 15: await process_frame
+	quit()

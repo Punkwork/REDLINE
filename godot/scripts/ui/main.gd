@@ -18,6 +18,10 @@ const PRIORITY := ["EV-35", "EV-16", "EV-15", "EV-14", "EV-02", "EV-01", "EV-03"
 	"EV-08", "EV-27", "EV-28", "EV-11", "EV-12", "EV-09", "EV-10", "EV-17", "EV-05", "EV-21", "EV-26", "EV-06", "EV-37", "EV-39"]
 const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LEFT, KEY_RIGHT, KEY_B, KEY_A]
 
+@export var lethal_pulp_threshold := 5
+var friendly: FriendlyEncounter
+var legacy_widgets: Array = []
+var friendly_skin: CorporationSkin = preload("res://themes/halcyon.tres")
 var g: Game
 var nr: NulRem
 var compile_first := -1
@@ -49,6 +53,7 @@ var inspect: CenterContainer
 ## VOICE-001: NUL/REM reads every line aloud (pre-recorded, tools/voice_nulrem.py). M toggles the voice.
 var voice: AudioStreamPlayer
 var voice_on := true
+var reduced_motion := false
 var voice_btn: Button
 ## PLAY-001: the Corporation Response plays one subroutine at a time over at least 5 seconds.
 const RESPONSE_MIN_SECONDS := 5.0
@@ -56,6 +61,8 @@ var responding := false
 ## REEL-001: TUMBLER slots are slot-machine reels; they spin when the TUMBLER rotates.
 const REEL_H := 33.0
 var spin := {}            # ICE index → its slots' subroutines before the rotation
+var tumble: Dictionary = {}
+var previous_slots: Array = []
 var spinning := false
 var spin_built := false
 var spin_deferred := false
@@ -78,6 +85,7 @@ func _ready() -> void:
 	g = Game.new()
 	g.animate = true
 	_build_layout()
+	_install_friendly()
 	_new_run()
 
 func _make_theme() -> Theme:
@@ -115,11 +123,12 @@ func _load_flags() -> void:
 		if data is Dictionary:
 			first_run = not data.get("first_run_done", true)
 			voice_on = data.get("voice_on", true)
+			reduced_motion = data.get("reduced_motion", false)
 
 func _save_flags() -> void:
 	var f := FileAccess.open("user://redline_flags.json", FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on}))
+		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on, "reduced_motion": reduced_motion}))
 
 func _build_layout() -> void:
 	var bg := ColorRect.new()
@@ -275,6 +284,7 @@ func _new_run() -> void:
 	refresh()
 
 func _start_as(who: String) -> void:
+	friendly.reset_session()
 	g.new_run(who)
 	nr.rustler = CardDB.RUSTLERS[who].nulrem
 	if first_run:
@@ -335,6 +345,8 @@ func _play_response() -> void:
 		flash = {"ref": st.ref, "sub": st.sub}
 		g.response_step()        # values change only now, as it flashes
 		refresh()
+		while friendly.visible and friendly.strike_overlay.visible:
+			await get_tree().process_frame
 		await get_tree().create_timer(gap).timeout
 		fired.append(flash)
 	flash = {}
@@ -352,7 +364,8 @@ func _play_response() -> void:
 		for i in before:
 			if i < g.enc.ice.size() and g.active_subs(i) != before[i]:
 				spin[i] = before[i]
-	if spin.is_empty():
+	if spin.is_empty() or reduced_motion:
+		spin = {}
 		refresh()
 		return
 	var longest := 0
@@ -380,6 +393,7 @@ func _was_fired(ice: Dictionary, s: int) -> bool:
 	return false
 
 func _pulse(c: Control) -> void:
+	if reduced_motion: return
 	c.modulate = Color(1.8, 1.8, 1.8)
 	var tw := c.create_tween().set_loops(3)
 	tw.tween_property(c, "modulate", Color(1, 1, 1), 0.14)
@@ -420,7 +434,15 @@ func refresh() -> void:
 	if spinning and spin_built:
 		spin_deferred = true   # don't rebuild (and restart) the reels mid-spin
 		return
+	_detect_tumbles()
 	_handle_events()
+	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE"]
+	friendly.visible = friendly_active
+	for widget in legacy_widgets: widget.visible = not friendly_active
+	if friendly_active:
+		friendly.sync(g)
+		_build_overlay()
+		return
 	_build_hud()
 	_build_info()
 	_build_rig()
@@ -485,6 +507,9 @@ func _speak_event(e: Dictionary) -> void:
 		voice.stream = stream
 		voice.play()
 		type_time = max(0.6, stream.get_length() * 0.92)   # type in step with the voice
+	if reduced_motion:
+		nr_text.visible_ratio = 1.0
+		return
 	tween = create_tween()
 	tween.tween_property(nr_text, "visible_ratio", 1.0, type_time)
 
@@ -668,7 +693,10 @@ func _show_inspect(id: String) -> void:
 	_clear(inspect)
 	inspect.visible = id != ""
 	if id != "":
-		var cv := _card_view(id, -1)
+		var cv: Control
+		if is_instance_valid(friendly) and friendly.visible:
+			var paper := FriendlyCard.new(); paper.setup(friendly,id,-1); cv=paper
+		else: cv = _card_view(id, -1)
 		cv.custom_minimum_size = Vector2(200, 270)
 		cv.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		inspect.add_child(cv)
@@ -689,7 +717,11 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	pc.custom_minimum_size = Vector2(320 if is_main else 290, 350)
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color("#0a0a0c") if black else PANEL
-	sb.border_color = Color("#ff4d5e") if black else (Color("#e6ebf2") if is_main else Color("#4a5568"))
+	var zeroed_targets := g.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction", 0) > 0 and g.can_play(c.uid).ok and g.would_zero(i, int(CardDB.def(c.id).get("zeroed_reduction", 0))))
+	if not zeroed_targets.is_empty():
+		sb.set_border_width_all(3)
+		pc.tooltip_text = "ZEROED available: " + " / ".join(zeroed_targets.map(func(c): return CardDB.def(c.id).name))
+	sb.border_color = Color("#ffb020") if not zeroed_targets.is_empty() else (Color("#ff4d5e") if black else (Color("#e6ebf2") if is_main else Color("#4a5568")))
 	sb.set_border_width_all(4 if is_main or black else 1)
 	if targeting >= 0:
 		sb.border_color = Color("#4fd2ff")
@@ -735,11 +767,13 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	head.add_child(nm)
 	var cur := g.ice_str(i)
 	var sv := VBoxContainer.new()
-	sv.add_child(_lbl("STR %d" % cur, 28, Color("#ff4d5e") if cur < 0 else TEXT))
+	sv.add_child(_lbl("STR %d" % cur, 28, TEXT))
 	if cur != d.str:
 		sv.add_child(_lbl("base %d" % d.str, 11, DIM))
 	head.add_child(sv)
 	v.add_child(head)
+	if ice.get("zeroed", false):
+		v.add_child(_lbl("ZEROED", 12, Color("#ffb020")))
 	# BOOTING pips
 	if d.get("ability", "") == "BOOTING":
 		var bh := HBoxContainer.new()
@@ -757,7 +791,10 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	# subroutines (TUMBLERs: only the subroutines in its slots; the rest are face-down)
 	var act := g.active_subs(i)
 	var tumbler := IceDB.is_tumbler(ice.id)
-	for k in act.size():
+	for k in (int(d.get("slots", act.size())) if tumbler else act.size()):
+		if k >= act.size():
+			v.add_child(_tumble_reel(i, k, -1, _lbl("SLOT %d · EMPTY" % (k + 1), 12, DIM)))
+			continue
 		var s: int = act[k]
 		if not ice.seen[s]:
 			var fh := HBoxContainer.new()
@@ -786,7 +823,7 @@ func _ice_card(i: int, is_main: bool) -> Control:
 			if spin.has(i) and k < spin[i].size():
 				var ps: int = spin[i][k]
 				prev_row = _sub_row(i, ps, d.subs[ps], ice.broken[ps], "SLOT %d · S%d" % [k + 1, ps + 1])
-			v.add_child(_reel(content, prev_row, k, spin.has(i)))
+			v.add_child(_tumble_reel(i, k, s, content) if tumble.has(i) else _reel(content, prev_row, k, spin.has(i)))
 		else:
 			v.add_child(content)
 	var hid := g.hidden_count(i)
@@ -854,7 +891,7 @@ func _reel(final_row: Control, prev_row: Control, k: int, spin_now: bool) -> Con
 	frame.add_child(holder)
 	final_row.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	holder.add_child(final_row)
-	if spin_now:
+	if spin_now and not reduced_motion:
 		final_row.modulate.a = 0.0
 		var win := Control.new()
 		win.clip_contents = true
@@ -893,6 +930,7 @@ func _reel(final_row: Control, prev_row: Control, k: int, spin_now: bool) -> Con
 			frame.modulate = Color(1.7, 1.7, 1.7)
 			var fl := frame.create_tween()
 			fl.tween_property(frame, "modulate", Color(1, 1, 1), 0.3))
+	if is_instance_valid(friendly) and friendly.visible: return frame
 	# glass: darker at the top and bottom edges of the window, like a reel drum curving away
 	var glass := Control.new()
 	glass.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -1370,7 +1408,9 @@ func _overlay_options(title: String, sub: String, uids: Array, source: Array, on
 				c = x
 		if c.is_empty():
 			continue
-		var cv := _card_view(c.id, u)
+		friendly.game = g
+		var cv := FriendlyCard.new()
+		cv.setup(friendly, c.id, -1)
 		cv.gui_input.connect(func(ev):
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				on_pick.call(u))
@@ -1453,12 +1493,17 @@ func _overlay_safehouse() -> void:
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
-	v.add_child(_lbl("HALCYON PLAYTEST 3 · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	v.add_child(_lbl("HALCYON PLAYTEST 3 · ZEROED + TUMBLE · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
 	var option := CheckBox.new()
 	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
 	option.button_pressed = g.ghost_draw_enabled
 	option.toggled.connect(func(on): g.ghost_draw_enabled = on)
 	v.add_child(option)
+	var motion_option := CheckBox.new()
+	motion_option.text = "Reduced motion"
+	motion_option.button_pressed = reduced_motion
+	motion_option.toggled.connect(set_reduced_motion)
+	v.add_child(motion_option)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
@@ -1594,3 +1639,63 @@ func _overlay_compile() -> void:
 			g.compile_cards(compile_first, uid)
 			compile_open = false
 		refresh(), "Cancel", func(): compile_open = false; refresh())
+
+func _detect_tumbles() -> void:
+	tumble.clear()
+	var current := []
+	for i in g.enc.get("ice", []).size():
+		var ice: Dictionary = g.enc.ice[i]
+		if g.ice_definition(ice).type != "TUMBLER": continue
+		var showing := g.active_subs(i)
+		for prior in previous_slots:
+			if is_same(prior.ice, ice) and prior.subs != showing and prior.subs.any(func(s): return ice.broken[s]):
+				tumble[i] = prior.subs
+		current.append({"ice": ice, "subs": showing.duplicate()})
+	previous_slots = current
+
+func _tumble_reel(i: int, slot: int, sub: int, final_row: Control) -> Control:
+	var frame := _reel(final_row, null, slot, false)
+	if not tumble.has(i) or reduced_motion: return frame
+	var prior: Array = tumble[i]
+	var old_slot: int = prior.find(sub) if sub >= 0 else -1
+	if old_slot == slot: return frame
+	var holder: Control = frame.get_child(0)
+	final_row.modulate.a = 0.0
+	var window := Control.new()
+	window.name = "TumbleMotion"
+	window.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	window.clip_contents = true
+	holder.add_child(window)
+	if slot < prior.size() and g.enc.ice[i].broken[prior[slot]]:
+		var removed := _sub_row(i, prior[slot], g.ice_definition(g.enc.ice[i]).subs[prior[slot]], true, "BROKEN")
+		removed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		window.add_child(removed)
+		var drop := removed.create_tween().set_parallel(true)
+		drop.tween_property(removed, "position:y", float(REEL_H), 0.28)
+		drop.tween_property(removed, "modulate:a", 0.0, 0.28)
+	var arriving: Control = final_row.duplicate()
+	arriving.modulate.a = 1.0
+	arriving.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	window.add_child(arriving)
+	arriving.position.y = float(REEL_H * (old_slot - slot)) if old_slot >= 0 else -float(REEL_H)
+	var slide := arriving.create_tween()
+	slide.tween_property(arriving, "position:y", 0.0, 0.42).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	slide.tween_callback(func(): final_row.modulate.a = 1.0; window.queue_free())
+	return frame
+
+func _install_friendly() -> void:
+	for child in get_children():
+		if child is Control and child not in [overlay, inspect, blocker]: legacy_widgets.append(child)
+	friendly = FriendlyEncounter.new()
+	friendly.ui = self
+	friendly.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(friendly)
+	move_child(friendly, blocker.get_index())
+
+func set_reduced_motion(value: bool) -> void:
+	reduced_motion = value
+	if value and tween:
+		tween.kill()
+		nr_text.visible_ratio = 1.0
+	_save_flags()
+	refresh()

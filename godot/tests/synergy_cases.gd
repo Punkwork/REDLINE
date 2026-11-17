@@ -16,7 +16,11 @@ func run() -> void:
  engine_amp_regressions()
  coverage_and_escalation_regressions()
  ordered_compile_regression()
- integer_strike_regression()
+ null_pointer_strike_regression()
+ zeroed_lifecycle()
+ zeroed_cards()
+ tumbler_removal()
+ selected_icepick()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -102,7 +106,7 @@ func step3() -> void:
  var pivot := g._new_inst("PIVOT"); g.hand.append(pivot)
  var before := g.ice_str(0)
  g.play_card(pivot.uid, 0)
- check.call(g.ice_str(0) == before - 3, "PIVOT CHAIN CLOAK grants extra reduction")
+ check.call(g.ice_str(0) == maxi(0, before - 3), "PIVOT CHAIN CLOAK grants extra reduction")
  var tags: Array = g.enc.last_tags.duplicate()
  g.installed.append({"inst": g._new_inst("TUMBLER_ICEPICK"), "boost": 5, "free_used": false})
  g.break_sub(0, 0)
@@ -142,19 +146,20 @@ func step3() -> void:
 
 func step4() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30
- g.enc.ice[0].str_mod = -10
- check.call(g.ice_str(0) == -6, "UNDERFLOW permits negative STR")
+ g.reduce_ice_str(0, 10)
+ check.call(g.ice_str(0) == 0 and g.enc.ice[0].str_mod == -4, "ZEROED floor discards excess ordinary reduction")
+ check.call(g.enc.ice[0].zeroed, "ordinary reduction consumes first ZEROED")
  g.enc.ice[0].str_floor = 3
- check.call(g.ice_str(0) == 3, "explicit STR floor overrides UNDERFLOW")
- g.enc.ice[0].erase("str_floor"); g.enc.ice[0].harden = 2
- check.call(g.ice_str(0) == -4, "HARDENING raises negative STR normally")
- g.enc.ice[0].bomb = true
- check.call(g.ice_str(0) == 0, "LOGIC BOMB sets negative STR to zero")
- g.enc.ice[0].bomb = false
- g.installed.append({"inst": g._new_inst("SCALPEL"), "boost": 0, "free_used": false})
- check.call(g.break_info(0, 0).margin == 6 and g.break_info(0, 0).cost == 0, "SCALPEL OVERKILL uses MARGIN")
- g.amp = 2; g.infect(0, "ROT", 1)
- check.call(g.ice_str(0) == -7, "ROT AMP applied once to strain effect")
+ check.call(g.ice_str(0) == 3, "explicit STR floor remains")
+ g.enc.ice[0].erase("str_floor"); g.enc.ice[0].harden = 2; g._sync_strengths()
+ check.call(g.ice_str(0) == 2, "HARDENING rises from zero without hidden debt")
+ var bomb := g._new_inst("LOGIC_BOMB"); g.hand.append(bomb); g.play_card(bomb.uid, 0)
+ check.call(g.ice_str(0) == 0, "LOGIC BOMB sets STR to zero")
+ g.enc.ice[0].bomb = false; g._sync_strengths()
+ g.installed.append({"inst": g._new_inst("SCALPEL"), "boost": 2, "free_used": false})
+ check.call(g.break_info(0, 0).margin == 2 and g.break_info(0, 0).cost == 0, "SCALPEL OVERKILL uses nonnegative ICE STR")
+ g.amp = 2; g.infect(0, "ROT", 10)
+ check.call(g.ice_str(0) == 0 and g.enc.ice[0].virus.ROT == 10, "ROT retains spare counters at minimum zero")
  g.infect(0, "LEECH", 4)
  var c := g._new_inst("CULL"); g.hand.append(c); g.play_card(c.uid, 0)
  g.cull_strain("ROT"); g.cull_strain("LEECH"); g.cull_strain("LEECH")
@@ -162,8 +167,8 @@ func step4() -> void:
  var h := g._new_inst("HARVEST"); g.hand.append(h)
  var cred := g.cred; g.play_card(h.uid, 0)
  check.call(g.cred == cred + 6 and not g.enc.ice[0].virus.has("LEECH"), "HARVEST spends all LEECH for reserve-limited extraction")
- var u := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(u); g.play_card(u.uid, 0)
- check.call(g.phase == "CHOICE" and g.pending.n == 3 and not g._find(g.burned, u.uid).is_empty(), "INTEGER UNDERFLOW caps at three and burns")
+ var u := g._new_inst("NULL_POINTER"); g.hand.append(u); g.play_card(u.uid, 0)
+ check.call(g.phase == "CHOICE" and g.pending.n == 2 and not g._find(g.burned, u.uid).is_empty(), "NULL POINTER breaks two at zero and burns")
 func step5() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 20
  var a := g._new_inst("PROBE"); var b := g._new_inst("DEEP_PROBE")
@@ -177,7 +182,7 @@ func step5() -> void:
  g.phase = "PLAYER"; g.hand.append(g._new_inst(id))
  var before := g.ice_str(0)
  g.play_card(g.hand[0].uid, 0)
- check.call(g.ice_str(0) == before - 6 and g.discard.size() == 1, "both compiled effects execute, single physical discard")
+ check.call(g.ice_str(0) == maxi(0, before - 6) and g.discard.size() == 1, "both compiled effects execute, single physical discard")
  g.rack.append(g._new_inst("CLEAN_BUILD"))
  check.call(g.card_cost(id) == 2, "CLEAN BUILD discount")
  g.hand.clear(); g.draw_pile.clear(); g.discard.clear()
@@ -231,8 +236,8 @@ func pacing() -> void:
 
 func edge_regressions() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30
- g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")]); g.enc.ice[1].str_mod = -10
- check.call(g.ice_str(1) == -4, "RELAY raises an underflowed neighbor by two")
+ g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")]); g.reduce_ice_str(1, 10)
+ check.call(g.ice_str(1) == 0, "RELAY included in capped reduction")
  for floor_value in [3, 4, 3]:
   g.enc.ice[1].str_floor = floor_value
   check.call(g.ice_str(1) == floor_value, "explicit 3/4/3 ICE floors remain authoritative")
@@ -303,11 +308,146 @@ func ordered_compile_regression() -> void:
  g.choose_sub(0, 3)
  check.call(g.enc.breached and g.discard[0].id == c.id, "compiled fallback finishes with one physical card")
 
-func integer_strike_regression() -> void:
+func null_pointer_strike_regression() -> void:
  var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 30
- g.enc.ice.assign([g._new_ice("CAPTCHA")]); g.enc.ice[0].seen.fill(true); g.enc.ice[0].str_mod = -8
+ g.enc.ice.assign([g._new_ice("CAPTCHA")]); g.enc.ice[0].seen.fill(true)
+ g.reduce_ice_str(0, 8); g.trace = 39; g.strikes = 1
+ var c := g._new_inst("NULL_POINTER"); g.hand.append(c); g.play_card(c.uid, 0)
  var target: Dictionary = g.enc.ice[0]
- g.trace = 39; g.strikes = 1
- var c := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(c); g.play_card(c.uid, 0)
  g.choose_sub(0, 1)
- check.call(g.pending.ice == 1 and is_same(g.enc.ice[1], target) and g.card_break_ok(1, 0), "INTEGER keeps same target after TRIPWIRE strike shifts ICE indices")
+ check.call(g.pending.ice == 1 and is_same(g.enc.ice[1], target) and g.card_break_ok(1, 0), "NULL POINTER keeps target through TRIPWIRE strike")
+
+func zeroed_lifecycle() -> void:
+ var g := game("RIOT"); g.enter_node(0)
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")])
+ check.call(g.would_zero(0, 4), "fresh positive ICE eligible")
+ g.infect(0, "ROT", 8)
+ check.call(g.enc.ice[0].zeroed and g.ice_str(0) == 0, "ROT consumes ZEROED")
+ g.enc.ice[0].harden = 3; g._sync_strengths()
+ check.call(g.ice_str(0) == 0, "spare ROT holds HARDENING at zero")
+ g.enc.ice[0].virus.clear(); g._sync_strengths()
+ check.call(g.ice_str(0) == 7 and not g.reduce_ice_str(0, 20), "recovery and second zero grant no second chance")
+ var fresh := g._new_ice("AUTO_RENEW")
+ check.call(not fresh.zeroed, "new encounter has fresh ZEROED state")
+ var floor_def := {"name": "FLOOR", "type": "FORTRESS", "str": 4, "str_floor": 3, "subs": [[{"k": "DEADLOCK"}]]}
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW", floor_def)])
+ g.reduce_ice_str(0, 20); g.infect(0, "ROT", 20)
+ check.call(g.ice_str(0) == 3 and not g.enc.ice[0].zeroed, "positive floor never ZEROED")
+ var zero_def := {"name": "ZERO", "type": "FORTRESS", "str": 0, "subs": [[{"k": "DEADLOCK"}]]}
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW", zero_def)])
+ g.enc.ice[0].harden = 2; g._sync_strengths(); g.reduce_ice_str(0, 2)
+ check.call(not g.enc.ice[0].zeroed, "starts-at-zero ICE stays ineligible after gaining STR")
+ g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")])
+ g.reduce_ice_str(1, 5) # Effective 6 to 1, RELAY keeps 2.
+ g.enc.ice[0].broken.fill(true); g._sync_strengths()
+ check.call(g.ice_str(1) == 0 and g.enc.ice[1].zeroed, "RELAY loss consumes ZEROED and excess loss is discarded")
+ g.enc.ice[1].harden = 1; g._sync_strengths()
+ check.call(g.ice_str(1) == 1, "STR gains rise from zero after RELAY loss")
+
+func zeroed_cards() -> void:
+ var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 20; g.trace = 10
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.ice[0].seen.fill(true)
+ g.reduce_ice_str(0, 2)
+ var flat := g._new_inst("FLATLINE"); g.hand.append(flat); g.play_card(flat.uid, 0)
+ check.call(g.ice_str(0) == 0 and g.enc.ice[0].zeroed and g.trace == 8, "FLATLINE pays +2 TRACE then ZEROED relieves four")
+ var again := g._new_inst("FLATLINE"); g.hand.append(again); g.play_card(again.uid, 0)
+ check.call(g.trace == 10, "FLATLINE at already-zero ICE gives no bonus")
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.ice[0].seen.fill(true)
+ g.reduce_ice_str(0, 1)
+ var k := g._new_inst("KNOCKOUT"); g.hand.append(k); g.play_card(k.uid, 0)
+ check.call(g.phase == "CHOICE" and g.pending.n == 1 and g.card_break_ok(0, 3), "KNOCKOUT ZEROED opens normal break choice including DEADLOCK")
+ g.choose_sub(0, 3)
+ check.call(g.enc.breached and not g._find(g.discard, k.uid).is_empty(), "KNOCKOUT choice discards once")
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.breached = false
+ g.reduce_ice_str(0, 3)
+ var w := g._new_inst("SECOND_WIND"); g.hand.append(w); var before := g.bw; g.play_card(w.uid, 0)
+ check.call(g.bw == before + 1, "SECOND WIND costs zero and gains one BW on ZEROED")
+ var b := game("RIOT"); b.enter_node(0); b.hand.clear(); b.bw = 20
+ b.enc.ice.assign([b._new_ice("REJECT_ALL")]); b.enc.ice[0].seen.fill(true)
+ b.reduce_ice_str(0, 4)
+ var n := b._new_inst("NULL_POINTER"); b.hand.append(n)
+ check.call(b.play_card(n.uid, 0) and not b.card_break_ok(0, 0), "NULL POINTER respects BOOTING")
+ b.choose_sub(0, 1)
+ check.call(b.card_break_ok(0, 2), "NULL POINTER can take immediately tumbled PULP")
+ b.choose_sub(0, 2)
+ check.call(b.phase == "PLAYER" and not b._find(b.burned, n.uid).is_empty(), "NULL POINTER finishes when no legal breaks remain")
+ var positive := game("RIOT"); positive.enter_node(0); positive.hand.clear()
+ var bad := positive._new_inst("NULL_POINTER"); positive.hand.append(bad); var bw := positive.bw
+ check.call(not positive.play_card(bad.uid, 0) and positive.bw == bw, "NULL POINTER rejects positive STR before payment")
+ var ordinary := game("RIOT"); ordinary.enter_node(0); ordinary.hand.clear(); ordinary.bw = 20
+ ordinary.enc.ice.assign([ordinary._new_ice("AUTO_RENEW")]); ordinary.reduce_ice_str(0, 4)
+ ordinary.enc.ice[0].harden = 1; ordinary._sync_strengths()
+ var no_bonus := ordinary._new_inst("SECOND_WIND"); ordinary.hand.append(no_bonus); bw = ordinary.bw; ordinary.play_card(no_bonus.uid, 0)
+ check.call(ordinary.bw == bw, "ordinary first zero consumes future printed-card bonus")
+ check.call(CardDB.roles("FLATLINE").has("↯ DRILL") and CardDB.roles("KNOCKOUT").has("↯ DRILL") and CardDB.roles("SECOND_WIND").has("↯ DRILL"), "all ZEROED cards labelled DRILL")
+ var compile := game("RIOT"); compile.enter_node(0); compile.hand.clear(); compile.bw = 20
+ compile.enc.ice.assign([compile._new_ice("AUTO_RENEW")])
+ var combo := compile._new_inst("COMPILED::PROBE::FLATLINE"); compile.hand.append(combo); compile.trace = 10; compile.play_card(combo.uid, 0)
+ check.call(compile.enc.ice[0].zeroed and compile.trace == 8 and compile.discard[0].id == combo.id, "compiled ordinary reduction then printed ZEROED resolves in order")
+
+func tumble_game() -> Game:
+ var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 100
+ g.enc.ice.assign([g._new_ice("CAPTCHA")]); g._mark_seen()
+ g.installed.append({"inst": g._new_inst("PASSKEY"), "boost": 20, "free_used": false})
+ return g
+func tumbler_removal() -> void:
+ var g := tumble_game()
+ check.call(g.active_subs(0) == [0, 1], "CAPTCHA initial slots")
+ g.break_sub(0, 0)
+ check.call(g.active_subs(0) == [1, 2] and g.enc.ice[0].seen[2] and g.break_info(0, 2).ok, "break slot one slides slot two and reveals immediately breakable PULP")
+ check.call(g.trace == 1 and g.response_preview().any(func(st): return st.sub == 2 and not st.skipped), "TRIPWIRE fires and response includes incoming sub this turn")
+ check.call(not g.response_preview().any(func(st): return st.sub == 0), "removed sub absent from response")
+ var second := tumble_game(); second.break_sub(0, 1)
+ check.call(second.active_subs(0) == [0, 2] and second.break_info(0, 2).ok, "break slot two keeps slot one and tumbles next sub")
+ second.break_sub(0, 2)
+ check.call(second.active_subs(0) == [0, 3] and second.enc.ice[0].seen[3], "second break reveals next DEADLOCK this turn")
+ var wrap := tumble_game(); wrap.enc.ice[0].rot = 4; wrap._mark_seen(); wrap.break_sub(0, 0)
+ check.call(wrap.active_subs(0) == [4, 1], "tumble wraps and skips removed sub")
+ wrap.break_sub(0, 4)
+ check.call(wrap.active_subs(0) == [1, 2], "breaking first wrapped slot preserves following slot")
+ wrap._rotate_tumblers()
+ check.call(wrap.active_subs(0) == [2, 3], "rotation steps through only unbroken pool")
+ wrap.break_sub(0, 2)
+ check.call(wrap.active_subs(0) == [3, 1], "unbroken equals slots retains cyclic order")
+ var frozen := wrap.active_subs(0); wrap._rotate_tumblers()
+ check.call(wrap.active_subs(0) == frozen, "rotation stops when all remaining subs show")
+ wrap.break_sub(0, 3)
+ check.call(wrap.active_subs(0) == [1] and wrap.hidden_count(0) == 0, "pool smaller than slots shows only one and no hidden broken subs")
+ wrap.break_sub(0, 1)
+ check.call(wrap.active_subs(0).is_empty() and wrap.hidden_count(0) == 0, "empty pool has empty slots")
+ var worm := tumble_game(); worm.infect(0, "WORM", 2); worm.use_worm(0); worm.choose_sub(0, 0)
+ check.call(worm.active_subs(0) == [1, 2] and worm.trace == 1, "WORM break tumbles and pays TRIPWIRE")
+ var card := tumble_game(); card.reduce_ice_str(0, 5)
+ var n := card._new_inst("NULL_POINTER"); card.hand.append(n); card.play_card(n.uid, 0); card.choose_sub(0, 1)
+ check.call(card.card_break_ok(0, 2), "card's second break can choose new incoming sub")
+ card.choose_sub(0, 2)
+ check.call(card.active_subs(0) == [0, 3] and card.trace == 2, "NULL POINTER removes exactly two steps, both tumble")
+ var multi := tumble_game()
+ var definition := {"name": "DOUBLE", "type": "TUMBLER", "str": 0, "slots": 1, "subs": [[{"k": "DEADLOCK", "v": 2}], [{"k": "TRACE", "v": 1}]]}
+ multi.enc.ice.assign([multi._new_ice("CAPTCHA", definition)]); multi._mark_seen()
+ multi.break_sub(0, 0)
+ check.call(multi.active_subs(0) == [0] and not multi.enc.ice[0].broken[0], "DEADLOCK x2 first step does not tumble")
+ multi.break_sub(0, 0)
+ check.call(multi.active_subs(0) == [1] and multi.enc.ice[0].seen[1], "DEADLOCK x2 final step tumbles")
+ var boot := tumble_game(); boot.enc.ice.assign([boot._new_ice("REJECT_ALL")]); boot.enc.ice[0].rot = 1; boot._mark_seen()
+ boot.break_sub(0, 1)
+ check.call(boot.active_subs(0) == [2, 0] and boot.break_info(0, 0).reason.begins_with("LOCKED"), "BOOTING applies while other subs tumble")
+ boot.enc.turn = 3
+ check.call(boot.break_info(0, 0).ok, "BOOTING unlocks on turn three with shrunk pool")
+
+func selected_icepick() -> void:
+ var g := tumble_game()
+ var cheap: int = g.installed[0].inst.uid
+ var chosen := {"inst":g._new_inst("TUMBLER_ICEPICK"),"boost":5,"free_used":false}
+ g.installed.append(chosen)
+ var auto := g.break_info(0,0)
+ var info := g.break_info(0,0,chosen.inst.uid)
+ check.call(auto.uid==cheap and info.uid==chosen.inst.uid, "dragged Icepick is selected without changing automatic cheapest break")
+ var before := g.bw
+ check.call(g.break_sub(0,0,chosen.inst.uid) and g.bw==before-info.cost and g.enc.ice[0].broken[0], "selected Icepick pays its normal cost and breaks the target")
+ var wrong := {"inst":g._new_inst("VOID_ICEPICK"),"boost":20,"free_used":false}; g.installed.append(wrong)
+ before=g.bw
+ check.call(not g.break_sub(0,1,wrong.inst.uid) and g.bw==before and not g.enc.ice[0].broken[1], "incompatible dragged Icepick spends nothing")
+ check.call(not g.break_sub(0,1,999999) and g.bw==before, "missing dragged Icepick cannot fall back to another one")
+ g.bw=0
+ check.call(not g.break_sub(0,1,chosen.inst.uid) and g.bw==0 and not g.enc.ice[0].broken[1], "unaffordable selected Icepick spends nothing")

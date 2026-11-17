@@ -1,22 +1,22 @@
 # PANOPTICON — HALCYON PLAYTEST 3 (0.3.0-playtest.3)
 
 This development slice covers four Rustlers and HALCYON's first four map rows.
-The selection screen must say **HALCYON PLAYTEST 3**. Record the source commit,
+This candidate includes **ZEROED + TUMBLE**; the selection screen says **HALCYON PLAYTEST 3 · ZEROED + TUMBLE**. Record the source commit,
 Rustler, Node, turn and cards with feedback.
 
 ## Get the Windows build after merge
 
-After the playtest-3 PR is merged into `codex/halcyon-playtest-stabilization`, open
-**GitHub → Actions → Godot validation and Windows playtest build**, then its
-successful **push** run on that branch. Download
-**PANOPTICON-HALCYON-PLAYTEST-3-0.3.0-playtest.3-Windows-x86_64** from Artifacts
-(sign-in may be required). Extract it and run `PANOPTICON_HALCYON_slice.exe`.
-The resources are embedded; Godot is not required. Keep the included checklist.
-The executable is unsigned. Windows launch verification remains a manual check.
+The designer requested a downloadable ZEROED + TUMBLE candidate before merge.
+Open **GitHub → Actions → Godot validation and Windows playtest build**, then the
+successful **push** run on `codex/zeroed-tumble-2026-11-16`. Download the Windows
+artifact, extract it, and run `PANOPTICON_HALCYON_slice.exe`. Godot is not required.
+`BUILD_COMMIT.txt` identifies the exact source revision. This candidate keeps
+version `0.3.0-playtest.3`; use the ZEROED + TUMBLE selection label and commit to
+distinguish it from older Playtest 3 downloads. The executable is unsigned.
 
-Feature-branch and PR runs validate rules and screenshots; **they do not export
-Windows**. The post-merge run exports version `0.3.0-playtest.3` using Godot 4.3
-and matching templates, includes this guide, and writes SHA256SUMS.txt.
+Only the stabilization branch and this specifically requested candidate branch
+export Windows on push. Pull-request checks validate code and screenshots.
+The candidate remains separate from the stabilization branch until its PR merges.
 
 ## What to try
 
@@ -34,8 +34,11 @@ and matching templates, includes this guide, and writes SHA256SUMS.txt.
 | BURN | GARBAGE COLLECT chooses another hand card to burn, then draws one. Burned cards return next Node; the permanent deck is not pruned. TAIL CALL retrieves a chosen SCRIPT from discard. |
 | CHAIN | HUD shows last card's tags. PIVOT follows CLOAK for −3 rather than −2 STR; COVER FIRE follows EXPLOIT for 5 rather than 3 SHIELD. HANDOFF follows CLOAK to draw one. KILL CHAIN draws once per bonus, at most twice per turn per copy. Playing Programs / Protocols changes the last card; Icepick actions do not. Resets each turn. |
 | HOLD 1 | END TURN opens an optional hand-card choice before end-turn effects. Pick one to CACHE or skip. It stays through cleanup until played or Node end. DEAD AIR and SMASH & GRAB still supply additional CACHE. Training disables HOLD. |
-| UNDERFLOW | ICE STR may be negative; the number turns red. Existing explicit floors still prevail, HARDENING and RELAY add normally, LOGIC BOMB sets exactly zero. |
-| MARGIN / OVERKILL | Break buttons show effective Icepick STR minus ICE STR after required boosts. SCALPEL's OVERKILL 2 makes its break component free. TOLL and boosts remain additional costs. STACK SMASH counts EXPLOIT plays including itself. INTEGER UNDERFLOW burns to break up to three steps according to negative STR; normal reveal, BOOTING and SEQUENCED restrictions remain. |
+| TUMBLER TUMBLE | Breaking a slotted subroutine removes it for this encounter. Later slots slide back and the next unbroken pool entry wraps into the last slot, active immediately. It is breakable now and fires this turn if left unbroken. Rotation skips removed entries and stops when all survivors fit; spare slots show EMPTY. Partial DEADLOCK ×N breaks stay put until the last step. BOOTING and TRIPWIRE remain. Try CAPTCHA: break DISCARD or its first DEADLOCK and watch the incoming PULP. Icepick, card and WORM breaks all tumble. |
+| STR floor / ZEROED | ICE STR bottoms at 0. Excess ordinary reduction is lost; later gains rise from 0. Spare ROT counters remain and keep holding STR at 0. The first drop from positive STR to 0, by any source, consumes that ICE’s one ZEROED for the encounter and shows a ZEROED marker. ICE starting at 0 or protected by a positive STR floor cannot be ZEROED. Only a card printing ZEROED receives a bonus. |
+| MARGIN / OVERKILL | Break buttons show effective Icepick STR minus ICE STR after required boosts. SCALPEL's OVERKILL 2 makes its break component free. TOLL and boosts remain additional costs. STACK SMASH counts EXPLOIT plays including itself. Normal reveal, BOOTING and SEQUENCED restrictions remain. |
+| RIOT ZEROED cards | FLATLINE: 0 BW, +2 TRACE, −2 target STR; ZEROED −4 TRACE. KNOCKOUT: 1 BW, −3 STR; ZEROED break one visible/active subroutine. SECOND WIND: 0 BW, −1 STR; ZEROED +1 BW. Orange ICE borders identify targets a playable ZEROED card in hand would finish. Rewards label these cards DRILL. Bonuses occur only on the first positive-to-zero transition. |
+| NULL POINTER | Replaces INTEGER UNDERFLOW. 2 BW, target ICE at 0 STR, break two subroutines including DEADLOCKs, BURNED. Normal reveal, BOOTING, SEQUENCED and DEADLOCK ×N step limits apply. Invalid positive-STR targets spend nothing. |
 | Virus cash-outs | CULL lets you select up to three individual counters, with 2 SHIELD each; Finish stops early. HARVEST removes all target LEECH for 3 CRED each, capped by reserve. WORM continues spending two counters for one break step. |
 | COMPILE | At SAFEHOUSE choose COMPILE instead of healing. Select two **different SCRIPT IDs sharing a tag**, first effect then second. They become one permanent card with union tags and both effects; summed BW cost capped at four, plus summed TRACE / CRED costs. Choices resolve in order; targeted halves use the selected ICE. Either half burning burns the combined card. Cannot compile the result again. CLEAN BUILD reduces its BW cost. |
 | Lean-deck cards | MINIMALIST gives the first break action each turn free while GHOST. ZERO FOOTPRINT burns for TRACE relief equal to cards below cap, maximum ten. Find these and the other new cards in reward pools; offers are random. |
@@ -45,7 +48,7 @@ and matching templates, includes this guide, and writes SHA256SUMS.txt.
 New shared cards: WARM BOOT, ROLLING RESTART, FORCE REBOOT, SHORT LOOP,
 PORT SCAN, GARBAGE COLLECT, TAIL CALL, PIVOT, COVER FIRE, KILL CHAIN,
 SCALPEL, MINIMALIST, ZERO FOOTPRINT. Rustler additions: HANDOFF (ECHO),
-STACK SMASH / INTEGER UNDERFLOW (RIOT), CULL / HARVEST (VECTOR), CLEAN BUILD
+STACK SMASH / NULL POINTER / FLATLINE / KNOCKOUT / SECOND WIND (RIOT), CULL / HARVEST (VECTOR), CLEAN BUILD
 (GENERALIST).
 
 ## Implemented hooks, outside the natural route
@@ -71,8 +74,9 @@ acquisition flow or changed ICE numbers:
 
 For a developer screen check, run `godot --path godot --script
 res://tests/shot_playtest3.gd` with an existing `SHOT_DIR` directory and display.
-It renders deck analysis, HOLD, SCAN, CULL/UNDERFLOW, reward roles, DECOMPILE,
-COMPILE, and an explicitly controlled DEADLOCK ×2 / ESCALATE fixture.
+It renders deck analysis, HOLD, SCAN, CULL/STR floor, reward roles, DECOMPILE,
+COMPILE, ZEROED target highlighting/markers, TUMBLE motion and settled slots,
+and an explicitly controlled DEADLOCK ×2 / ESCALATE fixture.
 
 ## Existing mechanics and scope
 
@@ -93,3 +97,17 @@ remain outside this slice. Conditional turn-4 BOOTING and PACE-006 safety valves
 were not implemented. Mark applicable full-game checklist items **N/A — outside
 this slice**. Bot results measure this simple policy, including reported stalls;
 they do not establish human balance or full-run deck-size targets.
+
+## VIS-001 — The Friendly Lie encounter candidate
+
+The visual candidate is on `codex/vis-001-friendly-lie`, targeting stabilization. It includes ZEROED/TUMBLE first and keeps the existing gameplay/version. The PNG fixtures are embedded in its PR and stored in `docs/visual/fixtures/vis-001/`. A new Windows release has not been exported from this visual branch.
+
+- Corporate app background and mascot objects sit above the Rustler's paper/toner interface. The black scan tag under each mascot is the rules authority: STR, passive text, subroutine effects, DEADLOCK progress, hidden entries, broken history, viruses and ZEROED. Scroll the encounter area when there are extra rule rows. The white NEXT RESPONSE strip follows the actual upcoming response and scrolls horizontally if needed.
+- Cheery faces become wary when something on that ICE is broken or TRACE reaches 20. A next-response PULP hit of 5+ or positive CORTEX makes that ICE lethal; the working threshold is tunable in the main scene inspector. Biggest visible PULP and newly tumbled entries receive red chips. Hidden effects remain `? HIDDEN` until the existing reveal rule permits disclosure. BREACH knocks the mascots out while keeping the scans readable.
+- At TRACE 20 the background flickers, panels split at the edges, and a one-time corporate toast appears. Strike 1 shows “We see you.” and the TRACER that Game actually inserted; click to dismiss or wait 2.5 seconds. TRACE in the HUD is the real post-strike value. Strike 2 keeps the hostile background and brings in HOUSE CALL; all corporate mascots become lethal. Rustler controls and rule text keep their style.
+- Six full-size paper cards fit the hand; seven or more overlap in a fan. Hover a card to raise it, or use the mouse wheel / left and right arrow keys while browsing the hand. Right-click to inspect. No maximum hand size was added. Corporate TRACER/SPAM look deliberately different from Rustler cards.
+- Installed Programs and Protocols appear in the taped RIG/RACK strip above the hand. Drag an installed Icepick onto a visible subroutine to use that particular pick. Hover shows legality/cost; illegal drops spend nothing. Click its name for inspection, use `+STR` for manual boosts, and use its existing unload/CACHE actions as appropriate. Normal click-to-break still selects the cheapest legal Icepick.
+- Drag a playable hand card onto the encounter/ICE to play it; targeted cards require a compatible ICE. DOORBELL CAM follows the hovered/dragged card with its pupil. Dragging a CLOAK card shows the current WATCHER TRACE consequence. Its hidden subroutine stays hidden. BW slits fill from the left as BW is spent; numeric BW remains authoritative for bonuses.
+- Toggle REDUCED MOTION on selection or in the encounter. It persists across launches and removes ambient bob/blink, shake, flicker, reels and typing. State changes remain readable, and the Corporation Response still takes at least five seconds. VOICE / M and END RUN keep their existing functions.
+
+The turn-3 fixture advances two real Corporation Responses and resolves CAPTCHA's discard choice. Actual TUMBLER rotation means PULP 6 occupies slot 1 and TRACE 3 tumbles into slot 2 after the second DEADLOCK is broken. The mockup's alternative slot arrangement is not forced into gameplay. Preparation cards/budgets and the eight-card hand are deterministic test fixtures, not claims about starting decks or balance.

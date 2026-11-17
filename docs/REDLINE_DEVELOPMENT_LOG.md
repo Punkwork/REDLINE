@@ -320,3 +320,138 @@ TESTS: 310 passed, 0 failed
 **Designer decision:** direction B chosen from three explorations (A Phosphor, B The Friendly Lie, C Watchtower): "I do really like the B option the friendly lie … I think this is a more suitable direction." Further requests in the same session: one encounter screen per corporation with its own background and palette; Rustlers draw 6 cards (maximum hand size not decided); show how the friendly face breaks and what full TRACE looks like; give ICE a personality that flips from cheery to lethal; put the mascots into the encounter screen; hand it to Codex.
 
 **Docs added:** `REDLINE_VISUAL_LANGUAGE.md` (Part 1 brief, Part 2 design, Part 3 build steps VIS-001a–g); `docs/visual/reference/` (10 PNGs), `docs/visual/backgrounds/` (4 placeholder JPGs), `docs/visual/mascots/` (9 SVGs). **Atomic Salvage deprecated (designer):** "I would deprecate that atomic salvage look." A deprecation note heads `REDLINE_UI_NULREM_Design_For_Claude.md` §1. §2.10 records that VIS-001 replaces the look of `REDLINE_UI_NULREM_Design_For_Claude.md` (Atomic Salvage) but keeps its requirements (drag-to-ICE chips, BW slits, no clipped text, REEL-001, END RUN, CRED meter, NUL/REM personality). **HANDOFF:** VIS-001 row (Codex, TO DO), a WAITING row (hand size, lethal threshold, proposal silhouettes). **Code changes:** none. **Tests:** none.
+
+## 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex)
+
+**Commit tag:** `zeroed-tumble-step1`.
+
+**Changed:** Restore STR floor and track once-per-ICE ZEROED
+
+**Interpretations to confirm:** Positive STR floors also constrain LOGIC BOMB; its displayed STR stays at the floor and it cannot consume ZEROED. Loss of RELAY discards any resulting non-ROT deficit so later gains rise from zero. These readings preserve the explicit floor and no-hidden-debt rules.
+
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
+
+```text
+sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 2.84; avg cleared-run turns 9.8
+sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; turns per non-stalled encounter 4.06; avg cleared-run turns 12.9
+sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; turns per non-stalled encounter 3.19; avg cleared-run turns 10.5
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
+TESTS: 320 passed, 0 failed
+```
+
+
+## 2026-11-17 — ZEROED-001-cards: Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards (Codex)
+
+**Commit tag:** `zeroed-tumble-step2`.
+
+**Changed:** Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards
+
+**Interpretations to confirm:** None.
+
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
+
+```text
+sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 2.84; avg cleared-run turns 9.8
+sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; turns per non-stalled encounter 4.06; avg cleared-run turns 12.9
+sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; turns per non-stalled encounter 3.19; avg cleared-run turns 10.5
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
+TESTS: 331 passed, 0 failed
+```
+
+
+## 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex)
+
+**Commit tag:** `zeroed-tumble-step3`.
+
+**Changed:** Remove broken TUMBLER subs and tumble immediately active replacements
+
+**Interpretations to confirm:** None.
+
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
+
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 3.09; avg cleared-run turns 9.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5; turns per non-stalled encounter 3.91; avg cleared-run turns 12.6
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2; turns per non-stalled encounter 3.14; avg cleared-run turns 10.9
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7; turns per non-stalled encounter 3.61; avg cleared-run turns 12.9
+TESTS: 352 passed, 0 failed
+```
+
+**TUMBLE comparison with Step 2 (same seeds/policy):** clears GENERALIST 29→25, ECHO 20→17, RIOT 24→25, VECTOR 20→20. Turns per non-stalled encounter: GENERALIST 2.84→3.09, ECHO 4.06→3.91, RIOT 3.19→3.14, VECTOR 3.69→3.61. GENERALIST stalls at the action guard rose from 1 to 2; these are not deaths. The bot takes the first shared reward, so the new RIOT reward cards are exercised by deterministic card tests rather than normally drafted by this policy.
+
+**UI verification:** all six display-backed scripts pass, including actual SCAN/CULL choices, horizontal HOLD/READY RIG access, ZEROED target highlighting and marker, tumble motion, immediate breakability during animation, and settled slots. Existing negative-STR and opening-rotation assertions were updated in place. Stable subroutine IDs remain for labels/history; broken entries are filtered out of the circulating pool.
+
+**Candidate requested by designer:** “give me a build I can download.” The existing CI export gate now also permits this exact feature branch; it still excludes other feature branches and PR events. The candidate remains version 0.3.0-playtest.3 and displays ZEROED + TUMBLE. Its ZIP includes BUILD_COMMIT.txt. No merge or direct push to stabilization is performed.
+
+
+## 2026-11-17 — VIS-001a: fixed Rustler theme and corporation skin resources (Codex)
+
+**Commit tag:** `vis-001a`. Added DM Sans variable font (400/500/700 UI weights), Space Mono regular/bold, both SIL OFL licenses, fixed toner/paper/highlighter Rustler theme, and HALCYON/IRONWATCH/LUCIDA skin resources. HALCYON is selected for the slice; the other corporations are data only. Runtime copies of the supplied backgrounds and mascot SVGs are packaged under Godot assets so exports do not depend on files outside res://.
+
+**Interpretations to confirm:** only HALCYON has supplied hostile background art; the other two resources leave that texture unset rather than reusing HALCYON art. Corporate fonts and palettes are isolated from the invariant Rustler theme.
+
+**Validation:** Godot 4.3 editor import and script/resource parsing. No gameplay data or values changed. ZEROED/TUMBLE from PR #9 were integrated into this feature branch first; stabilization itself is unchanged.
+
+
+## 2026-11-17 — VIS-001b: encounter scaffold and paper hand (Codex)
+
+**Commit tag:** `vis-001b`. Added a 1600×1000 encounter presentation inside the existing main controller: corporate app background, node/TRACE tags, reserve and deck data, fixed zine HUD, response strip, stationary NUL/REM note, RIG/RACK strip, END TURN and END RUN. Existing map/reward/choice flows remain with the controller. Six 146×218 paper cards use hard shadows and highlights; 7+ fan without changing deck or hand limits. Hover, wheel and arrow browsing bring each card forward. Bloatware uses the corporate font, rounded white body and red header.
+
+**Interpretations to confirm:** long card rules progressively reduce the art placeholder and font size to retain all rule text; full text also remains available in inspection/tooltips. Extremely large hands keep readable individual cards and use fan browsing, rather than imposing a cap. BW slits represent spending from the left; numeric BW remains authoritative for bonuses.
+
+**Validation:** Godot 4.3 import and display-backed encounter render, including six actual game cards. This step establishes layout; mascot/scan replacement follows in VIS-001c. No gameplay values changed.
+
+
+## 2026-11-17 — VIS-001c: mascot silhouettes and independent scan tags (Codex)
+
+**Commit tag:** `vis-001c`. Recreated COOKIE WALL banner/cookie, CAPTCHA widget/grid/eye, DOORBELL pill/lens and AUTO-RENEW credit card. Added simple proposed ACCEPT ALL pill, REJECT ALL link, TERMS OF SERVICE document, CONSENT FORM clipboard and HOUSE CALL silhouette. Separate face features trace the supplied SVG coordinates. Primary corporate buttons represent DEADLOCKs; scan tags retain exact rule text, states, progress, hidden pool counts, passive rules and virus actions. Existing reel/tumble presentation is reused. Hidden effects remain hidden rather than being disclosed by decoration.
+
+**Interpretations to confirm — proposed copy (cheery / wary / lethal):** ACCEPT ALL: “Make yourself at home!” / “We noticed you hesitating.” / “YOUR CONSENT IS ASSUMED.” REJECT ALL: “You may change your preferences.” / “Are you absolutely sure?” / “THERE IS NO OPT OUT.” TERMS OF SERVICE: “A few little terms before we begin!” / “You haven't read the fine print.” / “YOU ALREADY AGREED.” CONSENT FORM: “Your choices matter to us!” / “We saved your preferences. All of them.” / “CONSENT IS MANDATORY.” HOUSE CALL: “Your technician is on the way!” / “Please stay where you are.” / “WE KNOW YOU'RE HOME.” FREE TRIAL (fallback for existing test data): “Try us. No strings attached!” / “Your trial is almost over.” / “YOU CANNOT CANCEL.” Proposal shapes follow the spec's table; final illustration remains out of scope.
+
+**Validation:** Godot 4.3 parsing and display-backed render checked against reference 08. Rule chips are independent of the corporate face and wording. Mascot/scan columns scroll only when the rule content needs more space, preserving text. No gameplay changes.
+
+
+## 2026-11-17 — VIS-001d: per-ICE mood ladder and threat wording (Codex)
+
+**Commit tag:** `vis-001d`. Mood is computed from the actual next-response effects and broken state: cheery, wary, lethal, then knocked out on BREACH. Black ICE and Mask off force lethal. The main scene exposes `lethal_pulp_threshold` (default 5) for tuning. Facial features, panel colors/corners, speech and price-sticker wording follow mood; rule wording and values do not. New tumbled entries are remembered for the current turn; biggest visible PULP is red in both scan and response. Card-choice previews also use the paper card component.
+
+**Interpretations to confirm:** the PULP threshold applies to the largest individual subroutine, not the sum of an ICE's PULP, to reproduce reference 08 (AUTO-RENEW 1+2+3 remains cheery) and 09 (incoming CAPTCHA PULP 6 becomes lethal). Any positive CORTEX qualifies. Hidden rules remain “? HIDDEN”; random curve values remain “PULP ?”, even when the mascot telegraphs danger. Red rule chips use toner text rather than white for 4.5:1 contrast.
+
+**Validation:** code/resource parsing and state-based mood calculations; the final VIS-001g fixtures exercise the real turn-1/turn-3 board. No rules, card stats or corporation values changed.
+
+
+## 2026-11-17 — VIS-001e: Cracking, strike disclosure and Mask off (Codex)
+
+**Commit tag:** `vis-001e`. TRACE/strike state drives the app background and corporate edges; the Rustler theme stays fixed. Added a one-time checking-on-you toast, background-only glitch bands, the PAST 50% tag and NUL/REM countdown. First strike displays the hostile “We see you.” modal and a corporate TRACER card, then returns to Cracking; strike 2+ keeps the hostile background and square red/black mascots. The reserve meter and actual post-strike TRACE remain visible.
+
+**Interpretations to confirm:** Cracking persists after strike 1 even if TRACE is reduced below 20, since the Friendly definition requires no strikes. The modal shows the real post-strike TRACE of 20 in the HUD rather than faking 40; its copy describes the strike and inserted TRACER. The toast lasts 3 seconds; the modal lasts 2.5 seconds or until dismissed. SPAM's proposed footer is “Recommended for you.” A red rule chip uses toner text for contrast. All distortion stays behind opaque text panels.
+
+**Validation:** Godot 4.3 parser; state changes read Game.trace/strikes and never insert cards or Black ICE themselves. Only the existing game rules cause those changes. Live-state fixture screenshots follow in VIS-001g.
+
+
+## 2026-11-17 — VIS-001f: live drag targets, mascot motion and reduced motion (Codex)
+
+**Commit tag:** `vis-001f`. Added installed-Icepick drag targets with legality/cost tooltips, card drag previews and dashed hand gaps, VOID pupil tracking, and WATCHER's actual TRACE warning. The existing break API accepts an optional selected Icepick; omitted selection still uses the cheapest legal pick. Added cheery bob/blinks, wary brows, lethal shake/glow, response lunges, break flinch/strike-through, knockout slide and scan peel, background cross-fade, strike-card flight and Mask-off transition. Reduced motion is persistent and available on both selection and encounter screens; it removes ambient/reel motion, flashes and typing without shortening response timing.
+
+**Interpretations to confirm:** FORTRESS bob period is 3.6 s; VOID amplitude is 0.3 px; TUMBLER fidget is ±0.35°. Card snaps are linear 90 ms. The scan's knockout peel moves/tilts without fading its rules, retaining readability. Strike flight is 350 ms and toast entry is 180 ms. Cosmetic blink randomness uses a separate generator, never Game's RNG. WATCHER shows 0 additional TRACE for ECHO or active DECOY SIGNAL. Existing reel glass is omitted over the new scan text. These are presentation choices, not approved rule changes.
+
+**Validation:** Godot 4.3 import, display render, full rules suite **357 passed, 0 failed**. Five new rules regressions cover explicit Icepick selection, unchanged automatic selection/cost, incompatible/missing pick, and insufficient BW; invalid drops spend nothing. No gameplay numbers changed. Display interaction and screenshot fixtures are checked in VIS-001g.
+
+
+## 2026-11-17 — VIS-001g: live fixtures, readability and interaction regression (Codex)
+
+**Commit tag:** `vis-001g`. Added seven phone-review PNG fixtures: friendly turn 1, wary/lethal turn 3, Cracking, Strike 1, Mask off, DOORBELL CAM card drag and eight-card hand. Updated the existing large-hand test in place for fan browsing and real last-card clicks at 6/7/8/9/10/16 cards. Added native card and selected-Icepick drag checks, actual strike/TRACER/Black ICE checks, tunable moods, hidden VOID rules, reduced-motion timing, BREACH mood and full authored-card text fit. All 112 authored card definitions fit their rule text. Retained ZEROED target borders and paper inspection; response chips flash with the firing rule. CI runs all seven display scripts at a fitting desktop size. The guide/status are updated in place; HANDOFF is the sole task list. Audio was muted during final visual checks at the designer's request; no audio assets or dialogue were changed.
+
+**Interpretations to confirm:** The turn-3 fixture advances two real responses and resolves DISCARD normally. The real conveyor has PULP 6 in slot 1 and a new TRACE 3 in slot 2 after breaking S4; it is not rearranged to force mockup 09's slots. Fixture preparation uses granted cards/BW, and the eight-card hand is deliberately constructed, not a starting-deck claim. Three-mascot boards scale silhouettes to 80% while retaining full-size scans. Longer scans scroll vertically and the response strip scrolls horizontally; hand cards never shrink. Long NUL/REM notes fit by reducing type to a minimum of 8 px. Red buttons/Bloatware headers use toner rather than pale text for contrast. Proposed wording and silhouette choices in VIS-001c remain unapproved.
+
+**Validation:** Godot 4.3 imports; full rules suite **357 passed, 0 failed**. Seven display-backed scripts pass; Friendly Lie has **170 checks, 0 failures**. Large-hand and playtest 2/3 interaction tests report zero failures. Minimum five-second response timing is checked with reduced motion enabled. Thirty seeds per Rustler exactly match the pre-VIS ZEROED/TUMBLE results (including two GENERALIST stalls; not deaths):
+
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7
+TESTS: 357 passed, 0 failed
+```
+
+Average end deck sizes GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE for each. No gameplay values changed by VIS-001; the optional Icepick-selection API preserves existing default costs/selection. ZEROED/TUMBLE PR #9 was integrated locally before VIS; the visual PR includes that dependency and targets stabilization without pushing to or merging it. Designer visual approval and a Windows playtest remain outstanding.

@@ -50,8 +50,8 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
           mkdir -p "$SHOT_DIR"
-          for script in shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel; do
-            xvfb-run -a -s '-screen 0 1600x900x24' timeout 120 \
+          for script in shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel shot_friendly_lie; do
+            xvfb-run -a -s '-screen 0 1600x1100x24' timeout 120 \
               "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
               --rendering-driver opengl3 --path godot --script "res://tests/${script}.gd" \
               2>&1 | tee "/tmp/${script}.log"
@@ -69,7 +69,7 @@ jobs:
             /tmp/shot*.log
           retention-days: 14
       - name: Install matching Windows release template
-        if: github.event_name == 'push' && github.ref == 'refs/heads/codex/halcyon-playtest-stabilization'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/halcyon-playtest-stabilization' || github.ref == 'refs/heads/codex/zeroed-tumble-2026-11-16')
         shell: bash
         run: |
           curl --fail --location --retry 3 -o /tmp/templates.tpz \
@@ -79,7 +79,7 @@ jobs:
           mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
           cp /tmp/export/templates/* "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"
       - name: Export Windows playtest build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/codex/halcyon-playtest-stabilization'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/halcyon-playtest-stabilization' || github.ref == 'refs/heads/codex/zeroed-tumble-2026-11-16')
         shell: bash
         run: |
           mkdir -p build/windows
@@ -88,10 +88,11 @@ jobs:
             2>&1 | tee /tmp/export.log
           if grep -E 'SCRIPT ERROR|Parse Error|ERROR:' /tmp/export.log; then exit 1; fi
           cp docs/HALCYON_PLAYTEST_GUIDE.md build/windows/README.md
+          git rev-parse HEAD > build/windows/BUILD_COMMIT.txt
           cp docs/REDLINE_PLAYTEST_CHECKLIST.md build/windows/
           (cd build/windows && sha256sum PANOPTICON_HALCYON_slice.exe > SHA256SUMS.txt)
       - name: Upload Windows playtest build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/codex/halcyon-playtest-stabilization'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/halcyon-playtest-stabilization' || github.ref == 'refs/heads/codex/zeroed-tumble-2026-11-16')
         uses: actions/upload-artifact@v4
         with:
           name: PANOPTICON-HALCYON-PLAYTEST-3-0.3.0-playtest.3-Windows-x86_64
