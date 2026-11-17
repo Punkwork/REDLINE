@@ -497,3 +497,8 @@ Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stage
 ## 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude)
 
 **Designer:** approved Claude's recommendation ("Yes, record it that way."). PULP-002 curves A/B/C do not get the ±2/±3 roll; all curves show their next value before firing, so curve B drops "PULP ?". Recorded in the master design doc and Core Rules §5.2; HANDOFF build row updated, WAITING row closed. **Code changes:** none.
+
+## 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude)
+
+**Designer:** "yes, apply the same contrast fix as script" for PROTOCOL, whose blue-green face measured amber 4.18:1. `card.gd` now applies the soft face shade per type: SCRIPT #2A1C10 at 55%, PROTOCOL #0C1E1C at 45% (fitted to the face measured from `protocol.png`, 14,28,136,182). Measured after: PROTOCOL amber 6.68:1 / ivory 9.62:1; SCRIPT 6.69 / 9.64; PROGRAM unchanged 6.91 / 9.97. Validation: rules 357/0, cartridge UI 625/0, Chrome stages 1–5 0 failures; cards-001 and chrome-001 fixtures refreshed. Committed with [skip ci].
+**Designer:** "big swings equally likely up and down is okay" (PULP-001 ±3 sign 50/50), recorded in the master design doc. The start-of-turn roll timing and equal odds within −2..+2 remain working values.
