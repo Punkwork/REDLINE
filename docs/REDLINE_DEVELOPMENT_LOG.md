@@ -486,3 +486,7 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 ## 2026-11-17 — MAIN-001: HANDOFF points to main (Claude)
 
 **Designer instruction:** fix the contradiction between `HANDOFF.md` and the shared working agreement. Rule 1 now says to work on `main` under `AGENTS.md` / `CLAUDE.md` (the former working branch was merged at a523502); rule 2 and the session-start step say `main`. Added a MAIN-001 row to *Done*. **Found, not changed:** `.github/workflows/godot-validation.yml` only runs the Windows export on pushes to `codex/halcyon-playtest-stabilization` or `codex/zeroed-tumble-2026-11-16`, so pushes to `main` never export. CI belongs to Codex; raised with the designer. **Code changes:** none.
+
+## 2026-11-17 — MAIN-001: Windows export runs on main (Claude)
+
+**Designer instruction:** make the Windows export run from `main`. In `.github/workflows/godot-validation.yml`, the three Windows steps (install template, export, upload) now run on pushes to `main` instead of `codex/halcyon-playtest-stabilization` / `codex/zeroed-tumble-2026-11-16`. Validation, rules and screenshot steps are unchanged; the workflow still triggers only on changes under `godot/` or to the workflow file. HANDOFF's deferred Windows line updated to match.

@@ -69,7 +69,7 @@ jobs:
             /tmp/shot*.log
           retention-days: 14
       - name: Install matching Windows release template
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/halcyon-playtest-stabilization' || github.ref == 'refs/heads/codex/zeroed-tumble-2026-11-16')
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           curl --fail --location --retry 3 -o /tmp/templates.tpz \
@@ -79,7 +79,7 @@ jobs:
           mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
           cp /tmp/export/templates/* "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"
       - name: Export Windows playtest build
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/halcyon-playtest-stabilization' || github.ref == 'refs/heads/codex/zeroed-tumble-2026-11-16')
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           mkdir -p build/windows
@@ -92,7 +92,7 @@ jobs:
           cp docs/REDLINE_PLAYTEST_CHECKLIST.md build/windows/
           (cd build/windows && sha256sum PANOPTICON_HALCYON_slice.exe > SHA256SUMS.txt)
       - name: Upload Windows playtest build
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/codex/halcyon-playtest-stabilization' || github.ref == 'refs/heads/codex/zeroed-tumble-2026-11-16')
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: PANOPTICON-HALCYON-PLAYTEST-3-0.3.0-playtest.3-Windows-x86_64

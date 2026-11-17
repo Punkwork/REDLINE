@@ -70,7 +70,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 - DSY-013: Tier 2 FREE TRIAL placement and other corporation maps. All three pushback definitions/triggers are tested. This four-row map is Tier 1, so the final pacing step removes the temporary Step 5 Tier 2 placement.
 - PACE-003/005: notation and engine support tested; no unspecified multipliers or ESCALATE assignments invented for existing ICE. The controlled UI fixture shows both.
 - DSY-014/PACE-007 Phase 7 HULL engines, and PACE-004/010 manual scoring remain with their existing owners below.
-- Windows export/launch: export is gated to the post-merge stabilization-branch push. Feature/PR CI verifies code/screenshots only. Human Windows launch and playtest remain outstanding.
+- Windows export/launch: export runs on pushes to `main` (MAIN-001). Feature/PR CI verifies code/screenshots only. Human Windows launch and playtest remain outstanding.
 - Conditional turn-4 BOOTING and PACE-006 safety valves intentionally excluded.
 
 ## Waiting on the designer
