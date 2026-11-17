@@ -47,14 +47,17 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   bg.hide()
   var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
   var finish:=CartridgeFinish.new(); finish.name="RarityFinish"; finish.rarity=rarity; finish.size=CARD_SIZE; body.add_child(finish)
- var head := FriendlyLook.panel(FriendlyLook.RED if corp else FriendlyLook.TONER)
+ var title_ink:=Color("#4A3B32") if d.type=="SCRIPT" else (Color("#24564E") if d.type=="PROTOCOL" else FriendlyLook.SLATE)
+ var head := FriendlyLook.panel(FriendlyLook.RED if corp else Color.TRANSPARENT)
  head.position = Vector2(15, label_top); head.size = Vector2(130, 40); head.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(head)
- var title := FriendlyLook.label(d.name.to_upper(), 10 if d.name.length() > 25 else (11 if d.name.length()>15 else 12), FriendlyLook.TONER if corp else FriendlyLook.PAPER, view.skin.bold_font if corp else FriendlyLook.BOLD)
+ var title := FriendlyLook.label(d.name.to_upper(), 10 if d.name.length() > 25 else (11 if d.name.length()>15 else 12), FriendlyLook.TONER if corp else title_ink, view.skin.bold_font if corp else FriendlyLook.BOLD)
  title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; title.position = Vector2(19, label_top+1); title.size = Vector2(104, 39)
  var title_size:=int(title.get_theme_font_size("font_size"))
  var title_font: Font=view.skin.bold_font if corp else FriendlyLook.BOLD
  while title_size>7 and title_font.get_multiline_string_size(title.text,HORIZONTAL_ALIGNMENT_LEFT,104,title_size).y>39: title_size-=1
  title.add_theme_font_size_override("font_size",title_size); body.add_child(title)
+ if not corp:
+  var separator:=ColorRect.new(); separator.color=Color("#9CADA666"); separator.position=Vector2(19,label_top+39); separator.size=Vector2(122,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(separator)
  var circle := CostCircle.new(); circle.position = Vector2(142, 5); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
  var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, FriendlyLook.TONER, FriendlyLook.BOLD)
  cost.position = Vector2(143, 5); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)

@@ -4,18 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-15 — HANDOFF-001 / REJECT-001: shared to-do file, working branch, design sync (Claude)
-
-**Designer decisions (2026-11-15):**
-- **HANDOFF-001:** Codex and Claude coordinate through `docs/HANDOFF.md`, a shared list of decided-but-unfinished work with owners and statuses. The repo is the source of truth; the Claude project holds copies. **One working branch: `codex/halcyon-playtest-stabilization`**; changes arrive as pull requests into it. Claude now has write access to the repository.
-- **REJECT-001:** REJECT ALL has **one DEADLOCK** (pool DEADLOCK · TRACE 3 · PULP 4, 2 slots), resolving the REEL-001 confusion. Recorded in `REDLINE_ICE_CORP1.md`; **build change not made** (listed for Codex in HANDOFF).
-- **VIRUS-001 confirmed:** WORM counters are spent to break; they don't spread. The "copy vs move" note under VECTOR-001 no longer applies.
-- **DSY-006 (end-of-run target only):** decks should be **30–35 cards by the end of LUCIDA**.
-
-**Docs added (Claude, written in the Panopticon project 2026-11-15):** `REDLINE_DECK_SYNERGY.md` v0.3 (DSY-001 to DSY-014, PROPOSED), `REDLINE_PACING.md` v0.2 (PACE-001 to PACE-010, PROPOSED), and copies of the designer's `ICE Rules Bible` and `Ice Passive Abilities` Claude Docs as `REDLINE_ICE_RULES_BIBLE.md` and `REDLINE_ICE_PASSIVES.md`. **Docs changed:** `REDLINE_ICE_CORP1.md` (REJECT-001), `REDLINE_PLAYTEST_CHECKLIST.md` v0.1.1 (G1 and G5 targets for 30–35 cards), `REPOSITORY_STRUCTURE.md` (new docs, HANDOFF, working branch).
-
-**Code changes:** none. **Tests run:** none (no Godot in Claude's environment). The proposals' numbers are working values, not tested.
-
 ## 2026-11-15 — DSY-001 to DSY-014 and PACE-001 to PACE-010 approved for the next build (Claude)
 
 **Designer decision:** "Approve everything as written", to be implemented in the next build. `REDLINE_DECK_SYNERGY.md` → v1.0 and `REDLINE_PACING.md` → v1.0, every decision marked **APPROVED 2026-11-15**. Numbers remain working values to tune in playtest. Optional and conditional items stay as written: DSY-001b (GHOST +1 DRAW) optional; PACE-003's BOOTING-on-turn-4 only if playtest 2 shows an Opening Node breach before turn 4; PACE-006's safety valves held in reserve.
@@ -525,3 +513,14 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Validation:** Godot 4.3 imports; 357 rules pass and 30-seed bot summaries match the pre-card baseline (GENERALIST/ECHO/RIOT/VECTOR clears 25/17/25/20, survivor VITAE 16.2/9.5/15.2/10.7). Nine UI scripts pass. Cartridge fixture: 612 checks / zero failures, including all 112 authored rule texts, the longest legal shared-tag compiled SCRIPT pair, actual rarity, illustration bounds and 6-/8-/16-card protrusion bounds. Existing native hand clicks, HOLD/READY RIG, reward, SCAN/CULL/ZEROED/TUMBLE and five-second reduced-motion response checks remain. Nine individual close-up PNGs plus six/eight-card encounter captures are in `docs/visual/fixtures/cards-001/` and the downloadable ZIP.
 
 **Review:** physical finish details and motif reuse are proposed art choices. Labels/costs remain live data; no gameplay is baked into textures. The revised PR #12 remains open against the shared game branch and awaits designer approval before merge. Audio/Windows export are outside this task. Asset provenance, guide, status and the shared HANDOFF are updated in place.
+
+
+## 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex)
+
+**Commit tag:** `cards-001-lightfaces`.
+
+**Designer feedback:** black title backgrounds and dark beige card faces do not fit the chassis. Removed the opaque black title strip; dark titles now print directly on each inset face with a restrained separator. Generated edits preserve the three carriers and change only the blank face: near-white ivory instruction stock for SCRIPT, cool pearl instrument plate for PROGRAM, pale celadon enamel for PROTOCOL. Hardware, protrusions, outside BW tab, rarity details, authored metadata and rules are unchanged. The corporate Bloatware treatment remains separate.
+
+**Validation:** 357 rules checks and 612 cartridge UI checks pass, including authored/compiled text fit and protruding bounds. Five Chrome stages pass; refreshed nine close-ups, six/eight-card captures and ten encounter review PNGs. The earlier dated whole entry was appended unchanged to the archive under LOG-001 to keep this live log below about 60 KB.
+
+**Review:** material tint and direct-print title treatment are proposed visual refinements. PR #12 is updated, not merged; designer approval of the integrated revision is still required under the existing merge instruction. No gameplay data, rarity odds or costs changed.
