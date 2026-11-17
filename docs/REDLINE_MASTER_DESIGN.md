@@ -49,6 +49,19 @@ Only choices the designer explicitly made on 2026-11-17 are recorded here. Every
 
 **RUSTLER-LOOK-001 — Two Rustler styles kept on purpose (APPROVED, 2026-11-17).** The Rustler's cards are 1950s salvaged hardware (CARDS-001), while the Rustler HUD, Node and TRACE tags, END TURN and NUL/REM notes stay in the photocopied zine style. This is a deliberate exception to Visual Language Rule 1 ("Your side never changes"), not a mismatch to fix. Each corporation will have a different look. The HUD will probably change in the near future; until the designer decides that change, keep the HUD as it is. Designer: "B Each corp will have a different look. The HUD will probably change in the near future, but I want to keep it this way for now."
 
+**VISUAL-APPROVALS-002 — Prototype art and working values approved (APPROVED, 2026-11-17).** The designer approved every item below, which had been waiting for review. Designer: "Okay, all those changes that you listed are all approved." Numbers stay tunable presentation values; approval means build from them, not that they can never change. Sources: the 2026-11-17 VIS-001, CHROME-001 and CARDS-001 entries in `REDLINE_DEVELOPMENT_LOG.md`.
+
+- **CHROME-001 (HALCYON encounter), commits 15ae99e–4c2135e:** the generated calm and hostile atrium art and the CAPTCHA/AUTO-RENEW appliance shells; six shared collage illustrations assigned by card role (no per-card art yet); a 20% reveal of the hostile atrium during Cracking; pearl-enamel ICE plaques (pearl `#EDF4F0`, slate `#20343B`, teal `#165B55`) that stay clean in Mask off; the layered silver rim, small Deco fan and placeholder HALCYON wordmark on mascots; mascot carriers at 82% with two ICE and 70% with three; a 2.5-second break confirmation in a header at the top of the screen.
+- **CARDS-001 (cartridges), commits 083df86–b7e3747:** the integrated set; rarity finishes (common plain, uncommon two notches and a brass fitting, rare three notches and finer metalwork, with full rarity labels); instrument amber `#D6B675`, glowing amber numbers `#F2CD87` with a faint halo, and a dark BW badge with amber numerals; the four board surface textures.
+- **VIS-001 (all corporations), commits a66a630–c96e522:**
+  - **Hand size:** no maximum for now; hands of 7 or more fan out instead of shrinking.
+  - **Lethal mood:** an ICE turns lethal when a single subroutine in its next response deals PULP 5 or more, or any CORTEX (tunable `lethal_pulp_threshold`, default 5); Mask off and Black ICE are always lethal.
+  - **Undrawn ICE:** the placeholder silhouettes for ACCEPT ALL, REJECT ALL, TERMS OF SERVICE, CONSENT FORM and HOUSE CALL, and their cheery / wary / lethal wording as logged in VIS-001c (FREE TRIAL's fallback lines included).
+  - **Motion:** FORTRESS bob 3.6 s, VOID 0.3 px, TUMBLER ±0.35° fidget, linear 90 ms card snaps, 350 ms strike-card flight, 180 ms toast entry, toast 3 s, strike modal 2.5 s or until dismissed.
+  - **Cracking after a strike:** the corporation stays in Cracking after strike 1, even if TRACE drops below 20.
+
+Not covered by this approval: the rules questions still listed in `HANDOFF.md` (ZEROED-001 interpretation, ICE Rules Bible audit, REEL-001, RIOT-003, PULP-001) and PR #1.
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.
