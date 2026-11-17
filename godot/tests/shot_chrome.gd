@@ -29,7 +29,17 @@ func run() -> void:
  var g:=start()
  var stage:=int(OS.get_environment("CHROME_STAGE"))
  if stage==1: await snapshot("01-layout-and-readability")
- elif stage==2: await snapshot("02-mascots-cheery")
+ elif stage==2:
+  await snapshot("02a-mascots-cheery")
+  var c:=g._new_inst("TUMBLER_ICEPICK"); g.hand.append(c); g.bw=8; check(g.play_card(c.uid),"fixture installs TUMBLER Icepick")
+  g.boost_pick(c.uid); g.boost_pick(c.uid)
+  g.bw=4; check(g.break_sub(0,0),"break AUTO-RENEW S1")
+  for turn in 2:
+   g.end_turn()
+   while g.phase=="CHOICE" and g.pending.get("kind")=="discard": g.choose(g.hand[0].uid)
+  check(g.enc.turn==3 and g.ice_str(0)==6,"real HARDENING and turn 3")
+  check(g.break_sub(1,3),"actual CAPTCHA S4 break")
+  main.refresh(); await snapshot("02b-mascots-wary-and-lethal")
  elif stage==3: await snapshot("03-welcome-atrium")
  elif stage==4:
   g.add_trace(26,false); main.refresh(); await snapshot("04a-cracking")

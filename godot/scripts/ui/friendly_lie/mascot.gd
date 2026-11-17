@@ -11,6 +11,7 @@ var previous_mood := ""
 var just_broken := false
 var glow: Panel
 var applied_knockout := false
+var chrome: ChromeFrame
 const WORDS := {
  "COOKIE_WALL": ["We use cookies to make your visit sweeter!", "You declined 2 cookies. Interesting.", "COOKIES ARE NOT OPTIONAL."],
  "CAPTCHA": ["Just one quick check!", "Hmm. Try that again.", "WRONG ANSWER."],
@@ -58,6 +59,7 @@ func setup(owner_view, i: int, state: String) -> void:
  body = FriendlyLook.panel(accent if id in ["AUTO_RENEW", "FREE_TRIAL", "ACCEPT_ALL"] and not lethal else fill, accent if lethal else Color("#D5DCE5"), 2 if lethal else 0, radius, 4)
  var soft := body.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; soft.shadow_color = Color(0,0,0,0.12); soft.shadow_size=14; soft.shadow_offset=Vector2(0,7); body.add_theme_stylebox_override("panel",soft)
  body.mouse_filter = Control.MOUSE_FILTER_PASS; place(body,body_rect.position,body_rect.size)
+ chrome=ChromeFrame.new(); chrome.name="ChromeEnamel"; chrome.position=body_rect.position; chrome.size=body_rect.size; chrome.radius=radius; chrome.enamel=(accent if id=="AUTO_RENEW" and not lethal else fill); chrome.hostile=lethal; chrome.credit_card=id=="AUTO_RENEW"; add_child(chrome)
  body.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: view.click_ice(index))
  face = FriendlyFace.new(); face.reduced_motion=view.reduced_motion; face.kind = face_kind; face.mood = mood; face.ink = view.skin.ink; face.accent = accent; place(face,face_rect.position,face_rect.size)
@@ -67,8 +69,10 @@ func setup(owner_view, i: int, state: String) -> void:
   for point in [Vector2(38,85),Vector2(88,142),Vector2(30,135)]:
    var crumb := FriendlyLook.label("•",20,Color("#8D5A2A")); place(crumb,point)
  if id in ["AUTO_RENEW", "FREE_TRIAL"]:
+  place(FriendlyLook.label("HALCYON",10,ink,view.skin.bold_font),Vector2(64,20))
+  var product:=FriendlyLook.label("AUTO-\nRENEW" if id=="AUTO_RENEW" else "FREE\nTRIAL",15,ink,view.skin.bold_font); place(product,Vector2(62,85),Vector2(86,48))
   place(FriendlyLook.panel(Color("#F2D77E"),Color.TRANSPARENT,0,6),Vector2(62,35),Vector2(35,26))
-  place(FriendlyLook.label("•••• 4417",12,ink,view.skin.font),Vector2(62,147))
+  place(FriendlyLook.label("•••• 4417",13,ink,view.skin.font),Vector2(62,147))
   var sticker := FriendlyLook.panel(FriendlyLook.RED if lethal else Color.WHITE,Color.TRANSPARENT,0,18)
   place(sticker,Vector2(195,-4),Vector2(174,32))
   var words := "NO REFUNDS" if lethal else ("Renews next turn" if wary else "FREE for 30 days!")
@@ -98,14 +102,16 @@ func setup(owner_view, i: int, state: String) -> void:
   if id=="AUTO_RENEW": line="We noticed unusual activity on your plan."
   elif id=="CAPTCHA": line="Are you sure you're human?"
  if mood == "knocked_out": line = "SESSION ENDED."
- var speech := FriendlyLook.panel(fill,accent if lethal else Color.TRANSPARENT,2 if lethal else 0,0 if lethal else 18,3)
+ var speech := FriendlyLook.panel(fill,accent if lethal else Color("#91A7AA"),2 if lethal else 1,0 if lethal else 14,3)
  var speech_pos := Vector2(294,38)
- var speech_size := Vector2(180,82)
+ var speech_size := Vector2(180,100)
  if id == "COOKIE_WALL": speech_pos=Vector2(122,72); speech_size=Vector2(188,78)
  if id == "ACCEPT_ALL": speech_pos=Vector2(290,3); speech_size=Vector2(185,57)
  var soft_speech := speech.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; soft_speech.shadow_color=Color(0,0,0,0.10); soft_speech.shadow_size=12; soft_speech.shadow_offset=Vector2(0,5); speech.add_theme_stylebox_override("panel",soft_speech)
  place(speech,speech_pos,speech_size); speech.mouse_filter=Control.MOUSE_FILTER_IGNORE
- var copy := FriendlyLook.label(line,16,ink,view.skin.bold_font); copy.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; copy.position=Vector2(12,10); copy.size=speech_size-Vector2(24,18); speech.add_child(copy)
+ var copy_size:=18
+ while copy_size>14 and view.skin.bold_font.get_multiline_string_size(line,HORIZONTAL_ALIGNMENT_LEFT,speech_size.x-24,copy_size).y>speech_size.y-18: copy_size-=1
+ var copy := FriendlyLook.label(line,copy_size,ink,view.skin.bold_font); copy.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; copy.position=Vector2(12,10); copy.size=speech_size-Vector2(24,18); speech.add_child(copy)
  var d: Dictionary = view.game.ice_definition(ice)
  for sub in d.subs.size():
   if not Game._has_deadlock(d.subs[sub]): continue
@@ -117,7 +123,7 @@ func setup(owner_view, i: int, state: String) -> void:
   var chk: Dictionary = view.break_info(index,sub)
   action.add_theme_color_override("font_disabled_color",FriendlyLook.TONER if lethal else ink)
   for button_state in ["normal","hover","disabled"]:
-   var button_style := action.get_theme_stylebox(button_state).duplicate() as StyleBoxFlat; button_style.border_color=accent; button_style.set_border_width_all(1); action.add_theme_stylebox_override(button_state,button_style)
+   var button_style := action.get_theme_stylebox(button_state).duplicate() as StyleBoxFlat; button_style.border_color=FriendlyLook.RED if lethal else Color("#6D878C"); button_style.set_border_width_all(1); action.add_theme_stylebox_override(button_state,button_style)
   action.disabled = not chk.ok; action.tooltip_text = "DEADLOCK · " + ("BROKEN" if done else chk.get("reason", ""))
   var pos := Vector2(86,188); var extent := Vector2(210,34)
   if id == "CAPTCHA": pos=Vector2(54,198); extent=Vector2(202,28)
@@ -125,6 +131,8 @@ func setup(owner_view, i: int, state: String) -> void:
   if id == "COOKIE_WALL": pos=Vector2(320,94); extent=Vector2(140,40)
   if id == "REJECT_ALL": pos=Vector2(145,94); extent=Vector2(146,28)
   place(action,pos,extent)
+  if done:
+   action.modulate.a=0.85
   break # The primary button remains ticked when it drops out; further locks remain in the scan.
 
 func _ready() -> void:
