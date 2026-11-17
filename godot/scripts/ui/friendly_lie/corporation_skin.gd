@@ -16,3 +16,11 @@ extends Resource
 @export var font: Font
 @export var medium_font: Font
 @export var bold_font: Font
+@export var plaque_ground := FriendlyLook.ENAMEL
+@export var plaque_ink := FriendlyLook.SLATE
+@export var plaque_accent := FriendlyLook.SERVICE_TEAL
+@export var plaque_muted := FriendlyLook.MUTED_INK
+@export var mascot_shells: Dictionary = {}
+@export var cracking_copy := "Is everything okay? We're just checking on you."
+@export var strike_title := "We see you."
+@export var strike_copy := "HALCYON has located you. We've added something to help us keep in touch."

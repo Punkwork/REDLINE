@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="CorporationSkin" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="CorporationSkin" load_steps=15 format=3]
 [ext_resource type="Script" path="res://scripts/ui/friendly_lie/corporation_skin.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/friendly_lie/backgrounds/ironwatch-app.jpg" id="2"]
-[ext_resource type="Texture2D" path="res://assets/friendly_lie/backgrounds/halcyon-hostile.jpg" id="3"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-concourse.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-concourse-hostile.png" id="3"]
 [ext_resource type="FontFile" path="res://assets/fonts/DM-Sans.ttf" id="4"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-turnstile-shell.png" id="shell0"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-security-guard-shell.png" id="shell1"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-checkpoint-shell.png" id="shell2"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-body-cam-shell.png" id="shell3"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-patrol-drone-shell.png" id="shell4"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-keycard-reader-shell.png" id="shell5"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/ironwatch-barricade-shell.png" id="shell6"]
 [sub_resource type="FontVariation" id="font400"]
 base_font = ExtResource("4")
 variation_opentype = {"wght": 400}
@@ -19,6 +26,7 @@ app_name = "IRONWATCH SafeStreets"
 radius = 14
 header_style = "IRONWATCH · VISITOR SERVICES"
 background = ExtResource("2")
+hostile_background = ExtResource("3")
 font = SubResource("font400")
 medium_font = SubResource("font500")
 bold_font = SubResource("font700")
@@ -28,3 +36,19 @@ deep = Color(0.121569, 0.227451, 0.372549, 1)
 extra = Color(0.862745, 0.901961, 0.949020, 1)
 secondary = Color(0.862745, 0.901961, 0.949020, 1)
 ink = Color(0.078431, 0.141176, 0.227451, 1)
+plaque_ground = Color(0.933333, 0.945098, 0.960784, 1)
+plaque_ink = Color(0.078431, 0.141176, 0.227451, 1)
+plaque_accent = Color(0.478431, 0.352941, 0.047059, 1)
+plaque_muted = Color(0.305882, 0.352941, 0.419608, 1)
+mascot_shells = {
+"TURNSTILE": ExtResource("shell0"),
+"SECURITY_GUARD": ExtResource("shell1"),
+"CHECKPOINT": ExtResource("shell2"),
+"BODY_CAM": ExtResource("shell3"),
+"PATROL_DRONE": ExtResource("shell4"),
+"KEYCARD_READER": ExtResource("shell5"),
+"BARRICADE": ExtResource("shell6")
+}
+cracking_copy = "Please keep your hands where the camera can see them. It's for everyone's safety."
+strike_title = "Stay where you are."
+strike_copy = "IRONWATCH has identified you. An officer will be with you shortly."

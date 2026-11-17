@@ -88,7 +88,9 @@ func _ready() -> void:
  var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), FriendlyLook.PAPER); deck.position = Vector2(1360, 916); deck.size = Vector2(200, 28); add_child(deck)
  end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), FriendlyLook.TONER, FriendlyLook.RED); end_run_button.position = Vector2(1360, 951); end_run_button.size = Vector2(200, 29); add_child(end_run_button)
  toast = FriendlyLook.panel(Color.WHITE,FriendlyLook.RED,1,18,3); toast.position=Vector2(530,110); toast.size=Vector2(540,34); toast.z_index=5; add_child(toast)
- var toast_text := FriendlyLook.label("Is everything okay? We're just checking on you.",15,skin.ink,skin.font); toast_text.position=Vector2(15,6); toast.add_child(toast_text); toast.hide()
+ var toast_text := FriendlyLook.label(skin.cracking_copy,15,skin.ink,skin.font); toast_text.position=Vector2(15,6); toast.add_child(toast_text); toast.hide()
+ if skin.corporation!="HALCYON":
+  toast_text.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; toast_text.size=Vector2(420,42); toast.size=Vector2(450,54)
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
  motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
  motion_button.position=Vector2(1360,718); motion_button.size=Vector2(200,28); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
@@ -119,7 +121,7 @@ func sync(model: Game) -> void:
  node_tag.size.x = FriendlyLook.BOLD.get_string_size("NODE: " + game.node.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 29).x + 28
  at(node_tag, FriendlyLook.label("NODE: " + game.node.name, 29, FriendlyLook.PAPER, FriendlyLook.BOLD), Vector2(12, 0), Vector2(700, 46))
  var node_meta := FriendlyLook.panel(FriendlyLook.HIGHLIGHT); at(node_tag, node_meta, Vector2(0, 48), Vector2(540, 30))
- at(node_meta, FriendlyLook.label("HALCYON · %s · LAYER %d/%d · TURN %d" % ["OPENING" if game.is_opening() else game.node.get("tier", "TIER 1"), game.layer + 1, game.node.layers.size(), game.enc.turn], 13, FriendlyLook.TONER, FriendlyLook.BOLD), Vector2(9, 4))
+ at(node_meta, FriendlyLook.label("%s · %s · LAYER %d/%d · TURN %d" % [skin.corporation,"OPENING" if game.is_opening() else game.node.get("tier", "TIER 1"), game.layer + 1, game.node.layers.size(), game.enc.turn], 13, FriendlyLook.TONER, FriendlyLook.BOLD), Vector2(9, 4))
  at(trace_tag, FriendlyLook.label("TRACE", 13, FriendlyLook.PAPER), Vector2(14, 12))
  var bar := ProgressBar.new(); bar.min_value = 0; bar.max_value = Game.MAX_TRACE; bar.value = game.trace; bar.show_percentage = false
  bar.add_theme_stylebox_override("background", FriendlyLook.style(Color("#3A3A3A"))); bar.add_theme_stylebox_override("fill", FriendlyLook.style(FriendlyLook.RED))
@@ -305,13 +307,19 @@ func effect_text(ice: Dictionary, source: Dictionary) -> String:
  if e.k == "DISCARD": return "DISCARD %d next turn" % e.v + (" ↑" if e.get("escalate",false) else "")
  if e.k == "INSERT": return "INSERT %d %s → %s" % [e.v,e.card,e.to]
  return ui._effect_word(e) + (" ↑" if e.get("escalate",false) else "")
-func rule_chip(text: String, state: String = "normal") -> Control:
+func rule_chip(text: String, state: String = "normal", plaque: bool = false) -> Control:
  var chip := PanelContainer.new(); chip.mouse_filter=Control.MOUSE_FILTER_PASS
  var bg := FriendlyLook.PAPER; var ink := FriendlyLook.TONER
  if state == "deadlock": bg=FriendlyLook.HIGHLIGHT
  if state == "new": bg=FriendlyLook.RED
  if state in ["broken","hidden"]: bg=Color("#DCE7E3") if state=="broken" else Color("#F8FBF9"); ink=FriendlyLook.MUTED_INK
- var style := FriendlyLook.style(bg); style.set_content_margin_all(3); chip.add_theme_stylebox_override("panel",style)
+ var corporate_palette := plaque and skin.corporation!="HALCYON"
+ if corporate_palette:
+  bg=skin.plaque_ground.darkened(0.035) if state=="broken" else skin.plaque_ground
+  ink=skin.plaque_muted if state in ["broken","hidden"] else (skin.plaque_accent if state in ["deadlock","new"] else skin.plaque_ink)
+ var is_emphasis := corporate_palette and state in ["deadlock","new"]
+ var style := FriendlyLook.style(bg,ink if is_emphasis else Color.TRANSPARENT,1 if is_emphasis else 0)
+ style.set_content_margin_all(3); chip.add_theme_stylebox_override("panel",style)
  chip.add_child(FriendlyLook.label(text,14,ink,FriendlyLook.BOLD))
  if state in ["broken","hidden"]:
   chip.draw.connect(func():
@@ -329,16 +337,16 @@ func scan_tag(i: int) -> Control:
  panel.custom_minimum_size=Vector2(scan_width,0)
  var candidates:=game.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction",0)>0 and game.can_play(c.uid).ok and game.would_zero(i,int(CardDB.def(c.id).get("zeroed_reduction",0))))
  var eligible:=not candidates.is_empty()
- var style := FriendlyLook.style(FriendlyLook.ENAMEL,FriendlyLook.AMBER if eligible else Color("#A2B6BA"),3 if eligible else 2,12,5); style.shadow_color=Color("#243C4533"); style.shadow_offset=Vector2(0,4); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
+ var style := FriendlyLook.style(skin.plaque_ground,FriendlyLook.AMBER if eligible else Color("#A2B6BA"),3 if eligible else 2,12,5); style.shadow_color=Color("#243C4533"); style.shadow_offset=Vector2(0,4); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
  if eligible: panel.tooltip_text="ZEROED available: "+" / ".join(candidates.map(func(c): return CardDB.def(c.id).name))
  var list := VBoxContainer.new(); list.add_theme_constant_override("separation",4); panel.add_child(list)
  var heading := HBoxContainer.new(); list.add_child(heading)
- var name := FriendlyLook.label(d.name,17,FriendlyLook.SLATE,skin.bold_font); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
+ var name := FriendlyLook.label(d.name,17,skin.plaque_ink,skin.bold_font); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
  var delta: int = game.ice_str(i)-int(d.str)
- heading.add_child(FriendlyLook.label("STR %d%s" % [game.ice_str(i)," ↑%d" % delta if delta>0 else ""],15,FriendlyLook.SERVICE_TEAL,FriendlyLook.BOLD))
- var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · "),12,FriendlyLook.MUTED_INK)
+ heading.add_child(FriendlyLook.label("STR %d%s" % [game.ice_str(i)," ↑%d" % delta if delta>0 else ""],15,skin.plaque_accent,FriendlyLook.BOLD))
+ var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · "),12,skin.plaque_muted)
  meta.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; meta.custom_minimum_size.x=scan_width-24; list.add_child(meta)
- if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",10,FriendlyLook.SERVICE_TEAL))
+ if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",10,skin.plaque_accent))
  var rows: Array = game.active_subs(i).duplicate()
  if d.type == "TUMBLER":
   for s in d.subs.size():
@@ -350,7 +358,7 @@ func scan_tag(i: int) -> Control:
   var row := HBoxContainer.new(); row.add_theme_constant_override("separation",6)
   var slot: int = game.active_subs(i).find(s)
   var label := "SLOT %d · S%d" % [slot+1,s+1] if d.type=="TUMBLER" and slot>=0 else "S%d" % (s+1)
-  var tag := FriendlyLook.label(label,12,FriendlyLook.MUTED_INK); tag.custom_minimum_size.x=85; row.add_child(tag)
+  var tag := FriendlyLook.label(label,12,skin.plaque_muted); tag.custom_minimum_size.x=85; row.add_child(tag)
   var hidden: bool = not ice.seen[s]
   var words := []
   if hidden: words.append("? HIDDEN")
@@ -364,31 +372,31 @@ func scan_tag(i: int) -> Control:
   if new_subs(i).has(s) and not ice.broken[s]: tag.text += " · NEW"
   var state := "broken" if ice.broken[s] else ("hidden" if hidden else ("deadlock" if Game._has_deadlock(d.subs[s]) else "normal"))
   if not hidden and not ice.broken[s] and (loud or new_subs(i).has(s)): state="new"
-  var chip := rule_chip(" + ".join(words),state)
+  var chip := rule_chip(" + ".join(words),state,true)
   chip.tooltip_text = "\n".join(words); row.add_child(chip)
   if ui._is_flash(ice,s):
-   var firing:=chip.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; firing.border_color=FriendlyLook.SERVICE_TEAL; firing.set_border_width_all(2); chip.add_theme_stylebox_override("panel",firing); ui._pulse(chip)
+   var firing:=chip.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; firing.border_color=skin.plaque_accent; firing.set_border_width_all(2); chip.add_theme_stylebox_override("panel",firing); ui._pulse(chip)
   if not hidden and not ice.broken[s]:
    var info := break_info(i,s)
-   var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),Color("#DDEAE5"),FriendlyLook.SLATE)
-   action.add_theme_color_override("font_disabled_color",FriendlyLook.MUTED_INK); action.disabled = not info.ok; action.tooltip_text = info.get("reason", "") + (" · MARGIN %d" % info.margin if info.has("margin") else ""); row.add_child(action)
-  if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],12,FriendlyLook.SLATE))
+   var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),Color("#DDEAE5") if skin.corporation=="HALCYON" else skin.plaque_ground,skin.plaque_ink)
+   action.add_theme_color_override("font_disabled_color",skin.plaque_muted); action.disabled = not info.ok; action.tooltip_text = info.get("reason", "") + (" · MARGIN %d" % info.margin if info.has("margin") else ""); row.add_child(action)
+  if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],12,skin.plaque_ink))
   var wrapped_row := drop_wrapper(row,i,s)
   if d.type=="TUMBLER" and slot>=0 and ui.spin.has(i) and not reduced_motion:
    var wrapped: Control = ui._reel(wrapped_row,null,slot,true); list.add_child(wrapped)
   elif d.type=="TUMBLER" and slot>=0 and ui.tumble.has(i) and not reduced_motion: list.add_child(ui._tumble_reel(i,slot,s,wrapped_row))
   else: list.add_child(wrapped_row)
  if game.hidden_count(i)>0 and d.type=="TUMBLER":
-  var pool := HBoxContainer.new(); pool.add_child(FriendlyLook.label("POOL",10,FriendlyLook.MUTED_INK)); pool.add_child(rule_chip("? HIDDEN ×%d" % game.hidden_count(i),"hidden")); list.add_child(pool)
- var passive := FriendlyLook.label(d.get("ability_text",""),12,FriendlyLook.MUTED_INK); passive.custom_minimum_size.x=scan_width-24; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
+  var pool := HBoxContainer.new(); pool.add_child(FriendlyLook.label("POOL",10,skin.plaque_muted)); pool.add_child(rule_chip("? HIDDEN ×%d" % game.hidden_count(i),"hidden",true)); list.add_child(pool)
+ var passive := FriendlyLook.label(d.get("ability_text",""),12,skin.plaque_muted); passive.custom_minimum_size.x=scan_width-24; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
  if not ice.virus.is_empty():
   var counts := []
   for strain in ice.virus:
    if ice.virus[strain]>0: counts.append("%s %d" % [strain,ice.virus[strain]])
-  var strains := FriendlyLook.label(" · ".join(counts),12,FriendlyLook.SERVICE_TEAL); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
+  var strains := FriendlyLook.label(" · ".join(counts),12,skin.plaque_accent); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
   if game.worm_ok(i): list.add_child(FriendlyLook.button("SPEND 2 WORM · BREAK 1",func(): game.use_worm(i); ui.refresh()))
  if game.pending.get("kind")=="patient_zero": list.add_child(FriendlyLook.button("INFECT THIS ICE",func(): game.choose_ice(i); ui.refresh()))
- var tape := ColorRect.new(); tape.color=FriendlyLook.SERVICE_TEAL; tape.size=Vector2(76,3); tape.position=Vector2(scan_width/2-38,3); tape.rotation_degrees=0; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
+ var tape := ColorRect.new(); tape.color=skin.plaque_accent; tape.size=Vector2(76,3); tape.position=Vector2(scan_width/2-38,3); tape.rotation_degrees=0; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
  panel.draw.connect(func(): panel.draw_line(Vector2(14,3),Vector2(panel.size.x-14,3),Color.WHITE,2,true))
  return panel
 
@@ -429,7 +437,7 @@ func apply_background() -> void:
 func dismiss_strike() -> void:
  var was_visible := strike_overlay.visible
  strike_overlay.hide(); strike_until=0; apply_background()
- if was_visible and not reduced_motion:
+ if was_visible and not reduced_motion and skin.corporation=="HALCYON":
   var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(1090,265); tracer.z_index=150; add_child(tracer)
   var flight := tracer.create_tween().set_parallel(true); flight.tween_property(tracer,"position",Vector2(1445,780),0.35); flight.tween_property(tracer,"scale",Vector2(0.15,0.15),0.35); flight.chain().tween_callback(tracer.queue_free)
 func strike_flash() -> void:
@@ -437,17 +445,19 @@ func strike_flash() -> void:
  var light := flash.create_tween(); light.tween_property(flash,"modulate:a",0.0,0.3); light.tween_callback(flash.queue_free)
 func build_strike() -> void:
  clear(strike_overlay)
- var dim := ColorRect.new(); dim.color=Color(0.05,0,0,0.5); dim.size=Vector2(1600,1000); dim.mouse_filter=Control.MOUSE_FILTER_IGNORE; strike_overlay.add_child(dim)
+ var dim := ColorRect.new(); dim.color=Color(0.05,0,0,0.5 if skin.corporation=="HALCYON" else 0.10); dim.size=Vector2(1600,1000); dim.mouse_filter=Control.MOUSE_FILTER_IGNORE; strike_overlay.add_child(dim)
  var modal := FriendlyLook.panel(Color("#140809"),FriendlyLook.RED,2,skin.radius); modal.position=Vector2(295,200); modal.size=Vector2(1010,400); strike_overlay.add_child(modal)
  modal.mouse_filter=Control.MOUSE_FILTER_PASS
  var chrome_modal:=ChromeFrame.new(); chrome_modal.name="StrikeChrome"; chrome_modal.hostile=true; chrome_modal.radius=skin.radius; chrome_modal.size=modal.size; modal.add_child(chrome_modal)
  at(modal,FriendlyLook.label("TRACE STRIKE 1 OF 3",16,FriendlyLook.RED,FriendlyLook.BOLD),Vector2(32,30))
- at(modal,FriendlyLook.label("We see you.",68,Color("#F6E7E7"),skin.bold_font),Vector2(32,64))
- var line := FriendlyLook.label("HALCYON has located you. We've added something to help us keep in touch.",20,Color("#E4B5B7"),skin.font); line.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; at(modal,line,Vector2(32,166),Vector2(660,70))
- at(modal,FriendlyLook.label("+1 TRACER shuffled into your draw pile",15,FriendlyLook.HIGHLIGHT),Vector2(32,260))
+ at(modal,FriendlyLook.label(skin.strike_title,68,Color("#F6E7E7"),skin.bold_font),Vector2(32,64))
+ var line := FriendlyLook.label(skin.strike_copy,20,Color("#E4B5B7"),skin.font); line.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; at(modal,line,Vector2(32,166),Vector2(660,70))
+ if skin.corporation=="HALCYON":
+  at(modal,FriendlyLook.label("+1 TRACER shuffled into your draw pile",15,FriendlyLook.HIGHLIGHT),Vector2(32,260))
  at(modal,FriendlyLook.label("TRACE drops to 20",15,FriendlyLook.HIGHLIGHT),Vector2(32,290))
  at(modal,FriendlyLook.label("next strike: BLACK ICE joins this encounter",13,FriendlyLook.PAPER),Vector2(32,322))
- var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(790,65); tracer.scale=Vector2(1.2,1.2); tracer.rotation_degrees=3; modal.add_child(tracer)
+ if skin.corporation=="HALCYON":
+  var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(790,65); tracer.scale=Vector2(1.2,1.2); tracer.rotation_degrees=3; modal.add_child(tracer)
  at(modal,FriendlyLook.button("CONTINUE",dismiss_strike,FriendlyLook.RED,FriendlyLook.TONER,skin.radius,skin.bold_font),Vector2(32,353),Vector2(160,32))
 
 func previous_mascot(i: int) -> Dictionary:

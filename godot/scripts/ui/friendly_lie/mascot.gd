@@ -22,8 +22,50 @@ const WORDS := {
  "TERMS_OF_SERVICE": ["A few little terms before we begin!", "You haven't read the fine print.", "YOU ALREADY AGREED."],
  "CONSENT_FORM": ["Your choices matter to us!", "We saved your preferences. All of them.", "CONSENT IS MANDATORY."],
  "HOUSE_CALL": ["Your technician is on the way!", "Please stay where you are.", "WE KNOW YOU'RE HOME."],
- "FREE_TRIAL": ["Try us. No strings attached!", "Your trial is almost over.", "YOU CANNOT CANCEL."]}
-const BUTTONS := {"COOKIE_WALL": "Accept all", "CAPTCHA": "I'm not a robot", "DOORBELL_CAM": "○", "AUTO_RENEW": "Keep my plan", "REJECT_ALL": "Reject all", "TERMS_OF_SERVICE": "I have read and agree", "CONSENT_FORM": "Submit", "FREE_TRIAL": "Start free trial"}
+ "FREE_TRIAL": ["Try us. No strings attached!", "Your trial is almost over.", "YOU CANNOT CANCEL."],
+ "TURNSTILE": ["Single file, please!", "One at a time.", "NO ENTRY."],
+ "SECURITY_GUARD": ["Hi there! Just a quick check.", "How's your day going? Be honest.", "DON'T MOVE."],
+ "CHECKPOINT": ["Have a safe trip!", "Pull over, please.", "STEP OUT OF THE VEHICLE."],
+ "BODY_CAM": ["Smile, you're on camera!", "This is being recorded.", "EVIDENCE."],
+ "PATROL_DRONE": ["Patrolling for your peace of mind!", "Hold still.", "TARGET ACQUIRED."],
+ "KEYCARD_READER": ["Beep! Welcome!", "Card not recognised.", "ACCESS DENIED."],
+ "BARRICADE": ["This way, folks!", "Please wait behind the line.", "NO FURTHER."],
+ "BASELINE_SCAN": ["Let's find your baseline!", "Hmm, that's unusual.", "ABNORMAL."],
+ "ONBOARDING": ["Welcome! Step 1 of 3.", "Let's try that step again.", "YOU WILL COMPLETE ONBOARDING."],
+ "SLEEP_TRACKER": ["Sweet dreams!", "You tossed and turned.", "WE SAW EVERYTHING."],
+ "MOOD_SCANNER": ["How are we feeling today?", "That's not how you feel.", "INCORRECT FEELING."],
+ "DREAMCATCHER": ["Only good dreams tonight!", "That one's ours now.", "WE KEEP THEM."],
+ "FOCUS_MODE": ["Let's tune out distractions!", "You're drifting.", "THINK OF NOTHING."],
+ "NEURAL_HANDSHAKE": ["Nice to meet you, in here!", "Hold still, I'm connecting.", "I'M IN."]}
+const BUTTONS := {"COOKIE_WALL": "Accept all", "CAPTCHA": "I'm not a robot", "DOORBELL_CAM": "○", "AUTO_RENEW": "Keep my plan", "REJECT_ALL": "Reject all", "TERMS_OF_SERVICE": "I have read and agree", "CONSENT_FORM": "Submit", "FREE_TRIAL": "Start free trial",
+ "SECURITY_GUARD": "Check in",
+ "CHECKPOINT": "Show your pass",
+ "BODY_CAM": "Smile",
+ "PATROL_DRONE": "Wave hello",
+ "KEYCARD_READER": "Tap your card",
+ "BARRICADE": "Wait here",
+ "ONBOARDING": "Begin",
+ "SLEEP_TRACKER": "Goodnight",
+ "MOOD_SCANNER": "How am I?",
+ "DREAMCATCHER": "Catch it",
+ "FOCUS_MODE": "Focus",
+ "NEURAL_HANDSHAKE": "Connect"}
+const SHELL_FACE_CENTERS := {
+ "TURNSTILE": Vector2(0.50,0.25),
+ "SECURITY_GUARD": Vector2(0.50,0.45),
+ "CHECKPOINT": Vector2(0.16,0.15),
+ "BODY_CAM": Vector2(0.52,0.50),
+ "PATROL_DRONE": Vector2(0.50,0.80),
+ "KEYCARD_READER": Vector2(0.52,0.30),
+ "BARRICADE": Vector2(0.90,0.15),
+ "BASELINE_SCAN": Vector2(0.50,0.45),
+ "ONBOARDING": Vector2(0.50,0.54),
+ "SLEEP_TRACKER": Vector2(0.50,0.53),
+ "MOOD_SCANNER": Vector2(0.55,0.27),
+ "DREAMCATCHER": Vector2(0.49,0.43),
+ "FOCUS_MODE": Vector2(0.43,0.31),
+ "NEURAL_HANDSHAKE": Vector2(0.49,0.60)
+}
 func place(child: Control, pos: Vector2, extent: Vector2 = Vector2.ZERO) -> Control:
  child.position = pos
  if extent != Vector2.ZERO: child.size = extent
@@ -49,10 +91,18 @@ func setup(owner_view, i: int, state: String) -> void:
   "TERMS_OF_SERVICE": body_rect = Rect2(65,0,235,225); face_rect = Rect2(120,0,90,85); radius = 4
   "CONSENT_FORM": body_rect = Rect2(65,5,235,220); face_rect = Rect2(138,15,85,80); radius = 8
   "HOUSE_CALL": body_rect = Rect2(65,8,235,215); face_rect = Rect2(132,58,100,100); face_kind = "house"; radius = 0
- if lethal:
+ var facade_shell: Texture2D = view.skin.mascot_shells.get(id)
+ if facade_shell != null:
+  var native := facade_shell.get_size()
+  var fitted := native * minf(250.0 / native.x, 186.0 / native.y)
+  body_rect = Rect2(Vector2(162.0,100.0) - fitted / 2.0, fitted)
+  var face_size := Vector2(54,54)
+  face_rect = Rect2(body_rect.position + fitted * SHELL_FACE_CENTERS[id] - face_size / 2.0, face_size)
+  face_kind = "eye" if id in ["BODY_CAM","PATROL_DRONE","CHECKPOINT","MOOD_SCANNER","DREAMCATCHER"] else "face"
+ if lethal and facade_shell == null:
   glow = FriendlyLook.panel(Color("#E5484D18"), FriendlyLook.RED, 2, radius, 12); place(glow,body_rect.position-Vector2(5,5),body_rect.size+Vector2(10,10)); glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
   var red_glow := glow.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; red_glow.shadow_color=Color("#E5484D66"); red_glow.shadow_size=18; glow.add_theme_stylebox_override("panel",red_glow)
- if view.corporation_state=="cracking":
+ if view.corporation_state=="cracking" and facade_shell == null:
   for sign in [-1,1]:
    var split := FriendlyLook.panel(Color.TRANSPARENT,FriendlyLook.RED if sign<0 else Color("#77ABDF"),3,radius)
    split.mouse_filter=Control.MOUSE_FILTER_IGNORE; place(split,body_rect.position+Vector2(sign*3,0),body_rect.size)
@@ -65,6 +115,17 @@ func setup(owner_view, i: int, state: String) -> void:
   var enamel_art:=TextureRect.new(); enamel_art.name="IllustratedShell"; enamel_art.texture=load("res://assets/friendly_lie/chrome/"+("auto-renew-shell.png" if id=="AUTO_RENEW" else "captcha-shell.png")); enamel_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; enamel_art.stretch_mode=TextureRect.STRETCH_SCALE; enamel_art.mouse_filter=Control.MOUSE_FILTER_IGNORE
   enamel_art.modulate=Color(0.30,0.09,0.12) if lethal else (Color(1.0,0.88,0.64) if wary else Color.WHITE)
   place(enamel_art,body_rect.position-Vector2(5,5),body_rect.size+Vector2(10,10))
+ if facade_shell != null:
+  body.self_modulate.a=0.0; chrome.hide()
+  var shell := TextureRect.new()
+  shell.name="FacadeShell"; shell.texture=facade_shell; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+  shell.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  shell.modulate=Color("#D1949E") if lethal and view.skin.corporation=="IRONWATCH" else (Color("#B9A2FF") if lethal else Color.WHITE)
+  place(shell,body_rect.position,body_rect.size)
+ if facade_shell != null and id in ["BASELINE_SCAN","DREAMCATCHER"]:
+  var inset := FriendlyLook.panel(view.skin.plaque_ground,view.skin.plaque_accent,2,27)
+  inset.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  place(inset,face_rect.position,face_rect.size)
  body.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: view.click_ice(index))
  face = FriendlyFace.new(); face.reduced_motion=view.reduced_motion; face.kind = face_kind; face.mood = mood; face.ink = view.skin.ink; face.accent = accent; place(face,face_rect.position,face_rect.size)

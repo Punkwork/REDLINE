@@ -34,7 +34,6 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **FACADE-ART-001** | Generate the IRONWATCH and LUCIDA friendly and hostile backgrounds and the Opening Node + Tier 1 mascot shells from the art briefs; record exact prompts in `SOURCES.md`; wire the backgrounds into the corporation skins; refresh fixtures. Escape ICE deferred. | Facades §5; master design FACADE-001 | Codex | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
@@ -46,6 +45,7 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| FACADE-ART-001 | Four backgrounds, fourteen transparent shells, corporate palettes, prompt provenance, and eight Opening Node captures. | **BUILT** — [Codex art and validation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-17--facade-art-001-ironwatch-and-lucida-art-codex) |
 | DEPRECATE-001 | Removed LOGIC BOMB and RELAY; replaced the rare SCRIPT specimen with PAYDAY. | **BUILT** — `2bea490` |
 | ICE-AUDIT-001 | Applied the approved HALCYON ICE revisions. | **BUILT** — `0ac64c3` |
 | PULP-001 roll | Published seeded FORTRESS PULP rolls and exact PULP-002 curve values. | **BUILT** — `b44254c` |

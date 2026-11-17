@@ -408,3 +408,11 @@ LOG-001 moved the oldest whole live entries to the archive unchanged.
 ## 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude)
 
 **Designer:** "for number one, yes. For number two, yes. And for number three, wait." Wrote §2a in `REDLINE_CORPORATE_FACADES.md`: HALCYON's motif (sunrise fan) and non-fight copy (consent, remembered, reward proposed; status, cracking, strike and Mask-off lines reuse approved VIS-001 copy). Art for IRONWATCH and LUCIDA is to be generated now: HANDOFF Codex TO DO FACADE-ART-001. Escape ICE deferred. Master design doc FACADE-001 updated; HANDOFF WAITING row for the HALCYON copy review. **Code changes:** none.
+
+## 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex)
+
+Generated the 1586 × 992 concourse and solarium pairs from the approved briefs. Both hostile scenes were edited directly from their friendly originals. Cropped fourteen transparent Opening and Tier 1 shells from the two generated sheets. Recorded exact prompts, both hostile edits, the IRONWATCH retry, and references in `godot/assets/friendly_lie/chrome/SOURCES.md`. The skins provide the new art, opaque porcelain and pearl plaques, and approved Cracking and Strike copy. Escape ICE art is deferred.
+
+Validated with Godot 4.3 import, 363 rules checks, and eight `shot_facade.gd` captures in `docs/visual/fixtures/facade-001/`. Lowest measured plaque contrast, including the Strike scrim, was 5.20:1 for IRONWATCH and 5.47:1 for LUCIDA. No plaque contains image textures. HALCYON's existing Friendly Lie regression passed 173 checks. No Windows build.
+
+**Interpretations to confirm:** FRONT DESK and INTAKE are presentation fixtures using their documented Opening ICE. They hold their roster across the four states to review the artwork without implementing a new route or Black ICE. Mask Off previews the hostile environment and mood. The hostile edits maintain visually aligned framing, with small local rendering differences.

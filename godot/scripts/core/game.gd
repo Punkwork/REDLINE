@@ -1939,7 +1939,7 @@ func reward_odds(cleared: int) -> Array:
 	return {1: [60, 30, 10], 2: [45, 40, 15], 3: [30, 45, 25]}[depth]
 
 func ice_definition(ice: Dictionary) -> Dictionary:
-	return ice.get("definition", IceDB.def(ice.id))
+	return ice.definition if ice.has("definition") else IceDB.def(ice.id)
 
 func card_text(id: String) -> String:
 	var d := CardDB.def(id)
