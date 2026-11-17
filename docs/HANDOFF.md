@@ -1,0 +1,101 @@
+# PANOPTICON — HANDOFF (shared to-do for Codex and Claude)
+**Started:** 2026-11-15 · **Owner of decisions:** the designer (John Stevers)
+
+This is the one list of work that has been **decided but not finished**, so Codex and Claude never work from different pictures of the game. The design docs say *what* the game is; the development log says *what happened*; this file says *what's next and who does it*.
+
+---
+
+## How we work
+
+1. **One working branch: `codex/halcyon-playtest-stabilization`** (designer, 2026-11-15). Start every session from its latest commit. Put your changes on a short-lived branch and open a pull request **into this branch**; don't push to it directly. `main` is out of date (last change 2026-11-12) and isn't used until the designer decides to merge.
+2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes them from this branch.
+3. **Who does what.**
+   - **Claude:** design docs and proposals, playtest analysis, this file, the project copies.
+   - **Codex:** the Godot build (`godot/`), tests, exports, `REDLINE_CURRENT_STATUS.md`.
+   - **Either:** small doc fixes that follow a decision already recorded.
+   - **Only the designer** marks a decision APPROVED. A proposal stays PROPOSED until the designer says so in a session, and the session's log entry quotes or records that.
+4. **Every change has a decision ID** (e.g. REJECT-001) that appears in the design doc, in this file and in the development log.
+5. **Session routine.**
+   - **Start:** pull the working branch; read this file, then the latest entries of `REDLINE_DEVELOPMENT_LOG.md`.
+   - **End:** move finished items to *Done* (with the commit), add new items, and add a dated log entry that says who wrote it (`(Codex)` or `(Claude)`).
+
+6. **Development log size (LOG-001).** Keep `REDLINE_DEVELOPMENT_LOG.md` under about **60 KB** so Claude can rewrite the project copy in one pass. When it grows past that, move the oldest dated entries, whole, to the end of `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` (oldest first, nothing reworded) and note the move in the log. Entries stay append-only; the archive is never edited except to append.
+
+**Statuses:** **TO DO** (decided, not started) · **IN PROGRESS** (name who) · **BUILT** (in code, needs a playtest or check) · **DONE** · **WAITING** (needs a designer decision).
+
+---
+
+## To build (approved, not yet in the build)
+
+### Start here (Codex): decisions made 2026-11-16
+ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below. ROT-001 documentation sync and LOG-001 split were already completed in PR #8. No remaining Codex TO DO rows from this block. VIS-001 is also built on its feature branch; see Built below for the review tag.
+
+**Next build: everything in `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010), approved as written on 2026-11-15.** Suggested order, so each step can be playtested before the next; numbers are working values. Where a system isn't in the slice yet (Uplink, Console Lab, PATCHWORK, Ghostware), build the part that touches it when that system arrives, and say so in the log.
+
+| ID | What to build | Spec | Owner | Status |
+|---|---|---|---|---|
+| **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
+| **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
+| **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
+
+**Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
+
+---
+
+## Built — awaiting designer playtest
+
+| IDs | Change | Commit reference |
+|---|---|---|
+| CARDS-001 | Heavy SCRIPT/PROGRAM/PROTOCOL slot-cartridge templates; external BW rating tabs; brown/olive/teal board faces, oxide-red Whirlwind Bloatware and direct-print titles; common/uncommon/rare finish details; protected protrusions; nine close-ups and six/eight-card captures. Types, rarity weights, costs and rules unchanged. | **BUILT** — `cards-001-board-textures` |
+| CHROME-001 | Refine the CAPTCHA encounter in the designer-selected Chrome Deco direction: readable real rules/cards, illustrated mascot shells, atrium, corporate escalation and native interaction feedback. Ten refreshed full-screen PNG samples; pearl-enamel ICE service plaques; type-specific heavy slot cartridges with outside BW tabs and restrained rarity finishes; prototype art and final fidelity await review. | **BUILT** — `chrome-001-enamel` (code `chrome-001-step5`) |
+| VIS-001 | The Friendly Lie encounter: fonts/skins, zine hand/HUD, mascot scans and moods, corporation break states, drag/motion/accessibility, seven PNG review fixtures. Visual only; ZEROED/TUMBLE integrated first. | **BUILT** — `vis-001g` (steps `vis-001a`–`vis-001g`) |
+| TUMBLE-001 | Remove broken TUMBLER subs and tumble immediately active replacements | **BUILT** — `zeroed-tumble-step3` |
+| ZEROED-001-cards | Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards | **BUILT** — `zeroed-tumble-step2` |
+| ZEROED-001 | Restore STR floor and track once-per-ICE ZEROED | **BUILT** — `zeroed-tumble-step1` |
+| UI-004 | HOLD and READY RIG choices use a single horizontal scrolling row; full card height and last-card access verified. | **BUILT** — `codex/horizontal-choice-menus` |
+| PACE-003,005,007,008 | DEADLOCK ×N progress for paid/card/WORM breaks; independent ESCALATE counters for TRACE/DISCARD/FORGET; reward need icons and visible draw chance; Tier 1 one-layer route; tier-aware reward odds; +50% reserves; version/label 0.3.0-playtest.3 / HALCYON PLAYTEST 3; post-merge-only Windows export; updated playtest guide and nine new UI fixtures. Final regression review also completed AMP for SILENT PARTNER/PAIN TOLERANCE, amplified card text, compiled fallback coverage, and Node/run state resets. | **BUILT** — `playtest3-pacing` (commit tag) |
+| DSY-004,005,013 | SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; corporation pushback ICE definitions and triggers (Tier 2 placement deferred after PACE-008). | **BUILT** — `playtest3-step5` (commit tag) |
+| DSY-009,010 | Negative ICE STR *(to revert: ZEROED-001)*, MARGIN previews, SCALPEL, STACK SMASH, INTEGER UNDERFLOW, CULL and HARVEST; AMP on virus effects. | **BUILT** — `playtest3-step4` (commit tag) |
+| DSY-011,012 | CHAIN tracks successful card plays; PIVOT, COVER FIRE, HANDOFF and KILL CHAIN; HOLD 1 and DEAD MAN’S POCKET HOLD 2; scrollable choices. | **BUILT** — `playtest3-step3` (commit tag) |
+| DSY-007, DSY-008 | REBOOT queues drain only after draws finish; AMP and seven specified cards, SCAN bottom-order choice, in-Node BURN and discard retrieval, HUD reboot estimate, and bot choice handling. | **BUILT** — `playtest3-step2` (commit tag) |
+| DSY-001, DSY-002, DSY-003, DSY-006 | FOOTPRINT/caps and bands, per-Node bloat TRACE, optional GHOST draw OFF, duplicate-aware draw estimates and key-card previews, COVERAGE/tag density, and guarded full-clear DECOMPILE. | **BUILT** — `playtest3-step1` (commit tag) |
+| REJECT-001 | REJECT ALL has one DEADLOCK in its three-entry pool; BOOTING remains turn 3. Updated opening rules checks and bot timing reporting. | **BUILT** — `playtest3-step0` (commit tag) |
+
+Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALCYON_PLAYTEST3_IMPLEMENTATION.md).
+
+## Deferred beyond this slice (playtest 3)
+
+- DSY-004/005: PATCHWORK/FUSE modifications, Console Lab/BLACK CLINIC/Node completion upgrades, and Uplink REFACTOR (50 CRED, once per visit). SAFEHOUSE COMPILE works now; other service flows do not exist.
+- Ghostware acquisition/selection, DEDUPLICATOR with FUSE, and CAPS. HEARTBEAT, MINIMAL INSTALL, ONE-TRICK and DEAD MAN’S POCKET effects have tested state hooks.
+- DSY-013: Tier 2 FREE TRIAL placement and other corporation maps. All three pushback definitions/triggers are tested. This four-row map is Tier 1, so the final pacing step removes the temporary Step 5 Tier 2 placement.
+- PACE-003/005: notation and engine support tested; no unspecified multipliers or ESCALATE assignments invented for existing ICE. The controlled UI fixture shows both.
+- DSY-014/PACE-007 Phase 7 HULL engines, and PACE-004/010 manual scoring remain with their existing owners below.
+- Windows export/launch: export is gated to the post-merge stabilization-branch push. Feature/PR CI verifies code/screenshots only. Human Windows launch and playtest remain outstanding.
+- Conditional turn-4 BOOTING and PACE-006 safety valves intentionally excluded.
+
+## Waiting on the designer
+
+| ID | Question | Where it came from | Status |
+|---|---|---|---|
+| ZEROED-001 interpretation | Positive STR floors also constrain LOGIC BOMB; its displayed STR stays at the floor and it cannot consume ZEROED. Loss of RELAY discards any resulting non-ROT deficit so later gains rise from zero. These readings preserve the explicit floor and no-hidden-debt rules. | Codex implementation log, 2026-11-17 | WAITING |
+| ICEBIBLE audit | Apply the ICE Rules Bible audit to the slice (DOORBELL CAM not deadly; CAPTCHA's PULP 6; AUTO-RENEW STR; TUMBLER PULP cap on REJECT ALL and CONSENT FORM)? | `REDLINE_ICE_RULES_BIBLE.md`, audit table | WAITING |
+| REEL-001 follow-up | Show the DEADLOCK total on TUMBLER cards? (REJECT-001 fixes REJECT ALL; CONSENT FORM and CAPTCHA still carry two.) | Dev log, REEL-001 | WAITING |
+| RIOT-003 | Confirm two readings of SHATTER: "any 1 icebreaker" means any 1 ICE; SLEDGE stays at STR 0 until the encounter ends. | Dev log, RIOT-003 | WAITING |
+| PULP-001 | Confirm FORTRESS PULP values are fixed per subroutine, not rolled. | Dev log, PULP-001 | WAITING |
+| PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
+| CHROME-001 art review | Review the actual Godot samples against the corrected concept: provisional shell/environment art, shared collage motifs, UI spacing, 20% Cracking reveal and two-ICE fidelity. The designer rejected the first flat/thin-rim samples; refreshed PNGs supersede them. | Designer feedback and CHROME-001 implementation log, 2026-11-17 | WAITING |
+| VIS-001 details | Maximum hand size (not set; VIS-001 fans 7+ cards); the lethal-mood threshold (working value: PULP 5+ or any CORTEX in the ICE's next response); the proposal silhouettes and wording for slice ICE not yet drawn; individual-hit lethal threshold, three-mascot scaling, motion timings and real-conveyor turn-3 fixture differences recorded in the VIS-001 log. | `REDLINE_VISUAL_LANGUAGE.md` §2.4, §2.6 | WAITING |
+
+---
+
+## Done
+
+| ID | What | Commit / date |
+|---|---|---|
+| VIRUS-001 copy/move | Closed: WORM counters are **spent to break** (VIRUS-001); they don't spread to other ICE. The earlier copy-or-move question no longer applies (designer, 2026-11-15). | — (no change needed) |
+| HANDOFF | This file created; working branch chosen. | 2026-11-15 (Claude), PR #4 |
+| ROT-001 sync | Remaining SIGYL labels → TUMBLER in Card Pools, Rustlers, ICE Corp 1–3, Upgrades, Engines. | 2026-11-16 (Claude) |
+| LOG-001 | Development log split: entries up to 2026-11-14 moved to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`; the live log keeps 2026-11-15 on. | 2026-11-16 (Claude) |
+| ZEROED-001 / TUMBLE-001 readings | Designer confirmed both (2026-11-16): any drop to 0 STR uses up an ICE's one ZEROED; a subroutine that tumbles in is active at once. Build as specified above. | 2026-11-16 (designer) |
+| DSY / PACE approval | Designer approved both docs as written for the next build; amendments recorded in Core Rules, Card Pools, Uplink & CAPS, Upgrades, Rustlers, Engines and the three ICE docs; checklist v0.2. | 2026-11-15 (Claude) |
+| VIS-001 doc | `REDLINE_VISUAL_LANGUAGE.md` and `docs/visual/` (reference images, placeholder backgrounds, mascot SVGs) added for Codex. | 2026-11-17 (Claude) |

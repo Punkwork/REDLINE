@@ -1,800 +1,516 @@
-# REDLINE — DEVELOPMENT LOG
+# PANOPTICON — DEVELOPMENT LOG
 **Initialized:** 2026-11-09  
 **Policy:** append dated entries; distinguish reported outcomes from verified tests.
 
-## Historical reconstruction — through 2026-11-08
-*This entry consolidates known milestones; it is not a day-by-day reconstruction.*
+**LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-### Design work established
-- Runner/corporation ICE timing: runner action, then corporation fires remaining unbroken damage/Trace subroutines; broken DEADLOCK permits advancement after corporation turn.
-- Damage terminology settled: NEURAL DAMAGE (chosen hand discard), SYNAPTIC DAMAGE (random hand discard); neither affects Vitae or permanently destroys cards. PURGE reserved for corporation virus-counter removal.
-- DEAD DROP replaced Safehouse; mandatory choice of PATCH UP (+10 Vitae) **or** WIPE TRAIL (−20 Trace).
-- Encounter-end hardware recycling occurs once; PATCHWORK belongs to individual card instances; Ghostware is permanent and non-card.
-- UI direction established for ICE inspection, drag breakers, `[STR X]` labels, HUD tooltips, Ghostware rack and ORIGIN display.
-- NUL/REM six personality modes and retro-computing voice established; PAPER CUT Strength 0 ICE discussed as a concept, not a shipped card.
-- Narrative established that the First Signal is a real synchronization transmission; key hidden-AI/cipher/synchronization questions left unresolved.
+## 2026-11-15 — DSY-001, DSY-002, DSY-003, DSY-006: Add footprint pressure, deck analysis and DECOMPILE (Codex)
 
-### Engineering baseline (reported, not independently retested here)
-- Python/Pygame reference archive: `REDLINE_Dead_Drop_Final_Playtest.zip`.
-- Known file layout: `main.py`, `visual.py`, `engine/run.py`, `engine/content.py`, `engine/model.py`, and regression scripts.
-- Prior handoff reported automated tests passing; Windows/Pygame live UI playtesting incomplete.
-- Godot 4 selected as production engine; Python/Pygame retained as reference.
+**Commit reference:** `playtest3-step1` (tag on this step commit).
+
+**Changed:** FOOTPRINT/caps and bands, per-Node bloat TRACE, optional GHOST draw OFF, duplicate-aware draw estimates and key-card previews, COVERAGE/tag density, and guarded full-clear DECOMPILE.
+
+**Interpretations to confirm:** Draw estimates use nominal stage lengths of 5/6/7 Rustler turns for HALCYON/IRONWATCH/LUCIDA. Conditional fallback cards count toward coverage; BORROWED CREDENTIALS requires HUSH and SHATTER requires SLEDGE. Existing TRACE modifiers apply to bloat tax; reported tax is actual TRACE gained. Empty-card reward skips still work.
+
+**Deferred:** Playable IRONWATCH/LUCIDA are outside the slice; their cap values are supported by the analysis API. Deck-editing services outside full-clear rewards are later work.
+
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
+
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
 
-### Historical gaps
-Exact dates for individual decisions, complete card lists, test output, commits, and code diffs have not been recovered. Do not backfill invented entries.
+  bot: phase=SLICE_DONE vitae=10 trace=16 strikes=0 cred=16 deck=15 steps=28
+  deck GENERALIST: avg end size 14.07; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  pulp GENERALIST: per encounter 13.2 incoming (1.7 from Black ICE), 5.8 absorbed by SHIELD, 7.4 to VITAE, 3.5 hits
+  sim GENERALIST: 3/30 cleared; deaths by node { "CONSENT WALL": 4, "TERMS & CONDITIONS": 10, "DOORBELL": 13 }; survivors' avg end VITAE 18.7; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.43; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  pulp ECHO: per encounter 9.8 incoming (0.0 from Black ICE), 3.2 absorbed by SHIELD, 6.7 to VITAE, 3.0 hits
+  sim ECHO: 14/30 cleared; deaths by node { "DOORBELL": 6, "CAPTCHA": 4, "TERMS & CONDITIONS": 6 }; survivors' avg end VITAE 12.9; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.20; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  pulp RIOT: per encounter 11.1 incoming (1.9 from Black ICE), 4.1 absorbed by SHIELD, 7.0 to VITAE, 2.9 hits
+  sim RIOT: 3/30 cleared; deaths by node { "DOORBELL": 15, "TERMS & CONDITIONS": 10, "CAPTCHA": 2 }; survivors' avg end VITAE 14.0; purges 0 in 0 runs; SHATTER played 67 times in 29 runs
+  deck VECTOR: avg end size 14.17; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  pulp VECTOR: per encounter 11.3 incoming (0.1 from Black ICE), 3.6 absorbed by SHIELD, 7.8 to VITAE, 3.2 hits
+  sim VECTOR: 7/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 9, "DOORBELL": 9 }; survivors' avg end VITAE 7.0; purges 22 in 17 runs; SHATTER played 0 times in 0 runs
+TESTS: 233 passed, 0 failed
+```
 
-## 2026-11-09 — Documentation foundation
-**Completed:** Created the three permanent reference documents: Master Design, Development Log, Current Status. Consolidated confirmed rules, narrative, UI, character direction, technical baseline, and unresolved items. Added canonical decision IDs and evidence/status distinctions.
 
-**Code changes:** None.  
-**Tests run:** None.  
-**New gameplay decisions:** None; documentation only.
+## 2026-11-15 — DSY-007, DSY-008: Add REBOOT engines, SCAN and in-Node card routing (Codex)
 
-**Next:** (1) review Master Design for omissions; (2) obtain and inspect latest source ZIP and any detailed design files; (3) reconcile implementation status and regression coverage; (4) define first Godot 4 migration milestone.
+**Commit reference:** `playtest3-step2` (tag on this step commit).
+
+**Changed:** REBOOT queues drain only after draws finish; AMP and seven specified cards, SCAN bottom-order choice, in-Node BURN and discard retrieval, HUD reboot estimate, and bot choice handling.
+
+**Interpretations to confirm:** SCAN does not itself reshuffle; selected bottom cards are ordered first-selected-first-drawn when reached. FORCE REBOOT counts even with an empty discard. ROLLING RESTART adds its printed +1 AMP without self-amplification; SHIELD/BW/draw ENGINE outputs gain current AMP. A 128-trigger repeating-chain safeguard prevents unbounded loops. One RIOT bot run stalled at the guard rather than dying; it is reported separately.
+
+**Deferred:** CRON/PROCESS and unbuilt corporation systems remain deferred; AMP support for the existing virus outputs is completed with the UNDERFLOW/virus step.
+
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
+
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
 
----
-## Daily entry template
-### YYYY-MM-DD — Session title
-**Goal:**  
-**Completed:**  
-**Decisions (IDs/status):**  
-**Files changed / commits:**  
-**Tests run and results:**  
-**Bugs discovered / resolved:**  
-**Open questions:**  
-**Handoff for next session:**  
+  bot: phase=SLICE_DONE vitae=10 trace=17 strikes=0 cred=16 deck=15 steps=46
+  deck GENERALIST: avg end size 14.23; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  pulp GENERALIST: per encounter 14.5 incoming (1.8 from Black ICE), 7.4 absorbed by SHIELD, 7.0 to VITAE, 4.8 hits
+  sim GENERALIST: 8/30 cleared; deaths by node { "CONSENT WALL": 3, "TERMS & CONDITIONS": 11, "CAPTCHA": 3, "DOORBELL": 5 }; survivors' avg end VITAE 13.6; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.40; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  pulp ECHO: per encounter 10.7 incoming (0.0 from Black ICE), 3.9 absorbed by SHIELD, 6.8 to VITAE, 3.2 hits
+  sim ECHO: 12/30 cleared; deaths by node { "DOORBELL": 11, "TERMS & CONDITIONS": 4, "CAPTCHA": 3 }; survivors' avg end VITAE 10.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.30; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  stalled RIOT (3000-step guard, not deaths): { "CAPTCHA": 1 }
+  pulp RIOT: per encounter 10.9 incoming (2.2 from Black ICE), 3.9 absorbed by SHIELD, 7.0 to VITAE, 2.8 hits
+  sim RIOT: 4/30 cleared; deaths by node { "TERMS & CONDITIONS": 15, "DOORBELL": 8, "CAPTCHA": 2 }; survivors' avg end VITAE 14.5; purges 0 in 0 runs; SHATTER played 81 times in 30 runs
+  deck VECTOR: avg end size 14.13; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  pulp VECTOR: per encounter 11.6 incoming (0.0 from Black ICE), 3.3 absorbed by SHIELD, 8.3 to VITAE, 3.2 hits
+  sim VECTOR: 7/30 cleared; deaths by node { "TERMS & CONDITIONS": 10, "DOORBELL": 9, "CAPTCHA": 4 }; survivors' avg end VITAE 7.4; purges 19 in 16 runs; SHATTER played 0 times in 0 runs
+TESTS: 244 passed, 0 failed
+```
 
----
 
-## 2026-11-10 — PANOPTICON thematic documentation
+## 2026-11-15 — DSY-011,012: Add CHAIN and HOLD (Codex)
 
-**Goal:** Preserve the surveillance/panopticon design conversation as durable project documentation.
+**Commit reference:** `playtest3-step3` (tag on this step commit).
+
+**Changed:** CHAIN tracks successful card plays; PIVOT, COVER FIRE, HANDOFF and KILL CHAIN; HOLD 1 and DEAD MAN’S POCKET HOLD 2; scrollable choices.
+
+**Interpretations to confirm:** HOLD can retain a temporary cached card as ordinary CACHE. CHAIN effects are card-triggered rather than per-turn AMP processes. Bot stalls are reported separately from deaths.
+
+**Deferred:** Ghostware acquisition and CAPS remain absent from the slice; the pocket effect is exercised through the Ghostware state hook.
+
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
+
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+
+  bot: phase=SLICE_DONE vitae=2 trace=18 strikes=0 cred=34 deck=15 steps=29
+  deck GENERALIST: avg end size 14.50; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  stalled GENERALIST (3000-step guard, not deaths): { "DOORBELL": 1 }
+  pulp GENERALIST: per encounter 266.4 incoming (259.4 from Black ICE), 260.3 absorbed by SHIELD, 6.1 to VITAE, 45.2 hits
+  sim GENERALIST: 12/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "DOORBELL": 7, "CONSENT WALL": 1 }; survivors' avg end VITAE 15.8; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.23; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  stalled ECHO (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1, "CAPTCHA": 2 }
+  pulp ECHO: per encounter 10.4 incoming (0.0 from Black ICE), 3.0 absorbed by SHIELD, 7.3 to VITAE, 3.1 hits
+  sim ECHO: 9/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "DOORBELL": 8, "CONSENT WALL": 1 }; survivors' avg end VITAE 11.4; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.53; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  pulp RIOT: per encounter 10.7 incoming (2.8 from Black ICE), 4.1 absorbed by SHIELD, 6.6 to VITAE, 2.7 hits
+  sim RIOT: 12/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "DOORBELL": 7, "CAPTCHA": 2 }; survivors' avg end VITAE 10.8; purges 0 in 0 runs; SHATTER played 86 times in 30 runs
+  deck VECTOR: avg end size 14.20; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  pulp VECTOR: per encounter 10.0 incoming (0.0 from Black ICE), 2.7 absorbed by SHIELD, 7.3 to VITAE, 2.8 hits
+  sim VECTOR: 6/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "DOORBELL": 14, "CAPTCHA": 4 }; survivors' avg end VITAE 5.7; purges 25 in 23 runs; SHATTER played 0 times in 0 runs
+TESTS: 255 passed, 0 failed
+```
+
+
+## 2026-11-15 — DSY-009,010: Add UNDERFLOW OVERKILL and virus cash-outs (Codex)
+
+**Commit reference:** `playtest3-step4` (tag on this step commit).
+
+**Changed:** Negative ICE STR, MARGIN previews, SCALPEL, STACK SMASH, INTEGER UNDERFLOW, CULL and HARVEST; AMP on virus effects.
+
+**Interpretations to confirm:** LOGIC BOMB sets even negative STR to exactly zero. Explicit STR floors prevail. TOLL remains an additional cost when OVERKILL waives the break cost.
+
+**Deferred:** ZEROED has no approved numbers or card definition and remains a later RIOT-pool design. Other-corporation floor ICE are not on this map.
+
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
+
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+
+  bot: phase=SLICE_DONE vitae=7 trace=17 strikes=0 cred=16 deck=15 steps=28
+  deck GENERALIST: avg end size 14.77; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  pulp GENERALIST: per encounter 7.2 incoming (1.1 from Black ICE), 1.6 absorbed by SHIELD, 5.6 to VITAE, 1.9 hits
+  sim GENERALIST: 15/30 cleared; deaths by node { "TERMS & CONDITIONS": 11, "DOORBELL": 4 }; survivors' avg end VITAE 16.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.33; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  stalled ECHO (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1, "CAPTCHA": 2 }
+  pulp ECHO: per encounter 9.8 incoming (0.0 from Black ICE), 2.8 absorbed by SHIELD, 7.0 to VITAE, 3.1 hits
+  sim ECHO: 10/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "CAPTCHA": 5, "DOORBELL": 5, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.1; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.53; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  pulp RIOT: per encounter 10.3 incoming (2.5 from Black ICE), 3.9 absorbed by SHIELD, 6.4 to VITAE, 2.6 hits
+  sim RIOT: 12/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "DOORBELL": 8, "CAPTCHA": 1 }; survivors' avg end VITAE 13.3; purges 0 in 0 runs; SHATTER played 79 times in 30 runs
+  deck VECTOR: avg end size 14.30; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  pulp VECTOR: per encounter 9.3 incoming (0.0 from Black ICE), 2.4 absorbed by SHIELD, 6.9 to VITAE, 2.6 hits
+  sim VECTOR: 8/30 cleared; deaths by node { "DOORBELL": 12, "TERMS & CONDITIONS": 6, "CAPTCHA": 4 }; survivors' avg end VITAE 9.0; purges 23 in 20 runs; SHATTER played 0 times in 0 runs
+TESTS: 264 passed, 0 failed
+```
 
-**Documented directions:** Preferred working title PANOPTICON (clearance pending); central question of humanity's transformation under permanent observation; lock/DEADLOCK imagery; locked-out versus locked-in tension; panoptic architecture and psychological surveillance; ICE as the primary defender with layer-local or node-persistent supporting defences; deck contamination and behavioural surveillance as unfinalized gameplay concepts; viruses as deployable software subtype.
 
-**Boundaries:** Existing ICE timing, VOID, NEURAL/SYNAPTIC damage, PURGE, First Signal canon, and gameplay architecture remain unchanged. Surveillance mechanics, corruption cards, title clearance, and narrative answers remain open.
+## 2026-11-15 — DSY-004,005,013: Add SAFEHOUSE COMPILE and corporation pushback hooks (Codex)
 
-**Code changes:** None. **Tests run:** None. **Documentation:** Bible, Master Design, Development Log, and Current Status updated.
+**Commit reference:** `playtest3-step5` (tag on this step commit).
 
+**Changed:** SAFEHOUSE COMPILE with ordered effects, combined costs and tags, interactive continuations, CLEAN BUILD; MINIMALIST and ZERO FOOTPRINT; Ghostware effect hooks; FREE TRIAL on the final HALCYON layer.
 
----
+**Interpretations to confirm:** The explicit shared-tag requirement overrides the contradictory PROBE × PULP SHIELD example. Compilation order is chosen by selecting cards in order. Targeted halves use the selected ICE; costs are prepaid once. SAFEHOUSE compilation replaces healing. Compiled cards burn if either half burns. MINIMALIST waives the full first-break BW action cost. Other-corporation reactive ICE have definitions and tested hooks, not map placement.
 
-## 2026-11-11 — Software lifecycle, continuous bonuses and DRAW rules
+**Deferred:** REFACTOR 50-CRED Uplink service, PATCHWORK/FUSE acquisition and modifications, DEDUPLICATOR, Ghostware acquisition, and IRONWATCH/LUCIDA routes are absent from this slice; no acquisition or Uplink flow invented.
 
-**Goal:** Lock fine-grained gameplay semantics in the Master Design, one user-approved question at a time.
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
 
-**Completed:** Approved and committed RULE-084 through RULE-096 during this session; preceding RULE-081–083 already documented. Clarified queued trigger cancellation versus continuing in-progress abilities; valid trigger events after source removal; conditional installation requirements; reinstall as new installed instance; termination and stacking of continuous effects; explicit non-stacking uses strongest bonus; recomputation after removal; no retroactive card removal when DRAW decreases.
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
 
-**Decisions:** RULE-084–096 LOCKED. User clarified that PATCHWORK +2 and +4 DRAW bonuses total **+6 without explicit non-stacking text** (RULE-093), but **+4 when non-stacking text is present** (RULE-094). The original installation and a later reinstallation are different installed instances (RULE-089).
+  bot: phase=SLICE_DONE vitae=7 trace=13 strikes=0 cred=16 deck=15 steps=28
+  deck GENERALIST: avg end size 14.57; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  stalled GENERALIST (3000-step guard, not deaths): { "CAPTCHA": 1 }
+  pulp GENERALIST: per encounter 137.5 incoming (1.3 from Black ICE), 131.1 absorbed by SHIELD, 6.3 to VITAE, 66.8 hits
+  sim GENERALIST: 13/30 cleared; deaths by node { "TERMS & CONDITIONS": 12, "DOORBELL": 4 }; survivors' avg end VITAE 15.8; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.20; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  stalled ECHO (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1, "CAPTCHA": 3 }
+  pulp ECHO: per encounter 80.7 incoming (0.0 from Black ICE), 73.5 absorbed by SHIELD, 7.2 to VITAE, 26.7 hits
+  sim ECHO: 8/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "DOORBELL": 7, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 10.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.47; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  pulp RIOT: per encounter 9.9 incoming (2.0 from Black ICE), 3.7 absorbed by SHIELD, 6.2 to VITAE, 2.7 hits
+  sim RIOT: 10/30 cleared; deaths by node { "DOORBELL": 8, "TERMS & CONDITIONS": 10, "CAPTCHA": 2 }; survivors' avg end VITAE 16.6; purges 0 in 0 runs; SHATTER played 77 times in 29 runs
+  deck VECTOR: avg end size 14.10; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  stalled VECTOR (3000-step guard, not deaths): { "TERMS & CONDITIONS": 1 }
+  pulp VECTOR: per encounter 10.1 incoming (0.0 from Black ICE), 2.8 absorbed by SHIELD, 7.4 to VITAE, 2.9 hits
+  sim VECTOR: 5/30 cleared; deaths by node { "TERMS & CONDITIONS": 6, "DOORBELL": 13, "CAPTCHA": 5 }; survivors' avg end VITAE 8.2; purges 23 in 20 runs; SHATTER played 0 times in 0 runs
+TESTS: 278 passed, 0 failed
+```
 
-**Files changed:** `docs/REDLINE_MASTER_DESIGN.md` (RULE-084–096), and this handoff update to status/log. Last Master Design commit: `ce1bcbc341b03ca4662d223ba98d88ca34fd1593`.
 
-**Code changes:** None. **Tests run:** None. **Implementation claims:** Not verified in this session.
+## 2026-11-15 — PACE-003,005,007,008: Add pacing mechanics and prepare HALCYON PLAYTEST 3 (Codex)
 
-**Open question:** RULE-097 — whether a mid-turn DRAW increase automatically draws extra cards; proposal made, **not answered or locked**.
+**Commit reference:** `playtest3-pacing` (tag on this step commit).
 
-**Handoff:** User requested a new chat tomorrow. Begin at RULE-097, ask one question at a time, commit only explicit approvals. Master Design is authoritative; do not infer that approved rules have been implemented in game code.
+**Changed:** DEADLOCK ×N progress for paid/card/WORM breaks; independent ESCALATE counters for TRACE/DISCARD/FORGET; reward need icons and visible draw chance; Tier 1 one-layer route; tier-aware reward odds; +50% reserves; version/label 0.3.0-playtest.3 / HALCYON PLAYTEST 3; post-merge-only Windows export; updated playtest guide and nine new UI fixtures. Final regression review also completed AMP for SILENT PARTNER/PAIN TOLERANCE, amplified card text, compiled fallback coverage, and Node/run state resets.
 
+**Interpretations to confirm:** All four slice rows are Opening/Tier 1 (ICE Corp 1 §5.0 and Pacing §7); retain each Node’s first layer and remove later layers, without rebalance. FREE TRIAL remains Tier 2 data/trigger only after this cut, superseding its temporary Step 5 placement. 15 ×1.5 CRED rounds up to whole 23. No existing ICE receives an unspecified ×N or ESCALATE assignment; controlled fixtures exercise both. Cards outside the DRILL/HULL/COVERAGE definitions have no misleading role label. REBOOT resolves rack effects in installation order; ROLLING RESTART gains a fixed one AMP rather than amplifying its own AMP production. A finite repeating-trigger guard prevents recursive draw loops from hanging the app. Numeric GHOST thresholds override contradictory RIOT starter prose: 15 is in HALCYON GHOST. Compiled effects resolve against the board in order; a conditional break half with no eligible subroutine does nothing, so a preceding STR reduction can enable it.
 
-## 2026-11-11 — RULE-097 approved and locked
+**Deferred:** No conditional BOOTING/safety-valve changes. Tier 2 map placement, other corporations, Uplink/REFACTOR, PATCHWORK/FUSE, Ghostware acquisition/DEDUPLICATOR and CAPS remain deferred as listed in HANDOFF. Phase 7 HULL pools, ZEROED and manual BREACH WORK scoring retain their existing owners. Windows export happens after merge; Windows launch/human playtest have not been run.
 
-**Decision:** RULE-097 LOCKED. A mid-turn increase in DRAW does not grant immediate extra cards; the new value applies to future applicable draw calculations. Complements RULE-096.
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
 
-**Files:** Master Design commit `1cbf10cbda21cc786c0d3e2cc10ad1b05cd288d2`; Current Status and Development Log handoff updates.
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
 
-**Code changes:** None. **Tests:** None. **Next:** Ask RULE-098 as a single open design question; commit only after approval.
+  bot: phase=SLICE_DONE vitae=7 trace=8 strikes=0 cred=26 deck=15 steps=24
+  deck GENERALIST: avg end size 15.37; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  stalled GENERALIST (3000-step guard, not deaths): { "CAPTCHA": 1 }
+  pulp GENERALIST: per encounter 181.2 incoming (0.0 from Black ICE), 175.8 absorbed by SHIELD, 5.4 to VITAE, 89.4 hits
+  sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.80; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  pulp ECHO: per encounter 14.5 incoming (0.0 from Black ICE), 5.2 absorbed by SHIELD, 9.3 to VITAE, 4.4 hits
+  sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 18.20; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  pulp RIOT: per encounter 9.6 incoming (0.8 from Black ICE), 4.1 absorbed by SHIELD, 5.6 to VITAE, 2.8 hits
+  sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; purges 0 in 0 runs; SHATTER played 18 times in 12 runs
+  deck VECTOR: avg end size 14.87; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  pulp VECTOR: per encounter 12.5 incoming (0.0 from Black ICE), 4.2 absorbed by SHIELD, 8.3 to VITAE, 3.6 hits
+  sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; purges 12 in 12 runs; SHATTER played 0 times in 0 runs
+TESTS: 310 passed, 0 failed
+```
 
 
-## 2026-11-11 — RULE-098 approved and locked
+## 2026-11-15 — UI-004: horizontal card-choice menus (Codex)
 
-**Decision:** RULE-098 LOCKED (user-approved Option A). A draw instruction referencing DRAW snapshots its target card count when that instruction begins resolving; changing DRAW mid-instruction does not change that target. Existing insufficient-card and trigger-order rules remain intact.
+**Request:** First Windows playtest showed HOLD and Generalist READY RIG cards wrapping vertically, hiding most choices. Display the cards horizontally.
 
-**Files:** Master Design commit `d1cf5e9da1622c7e6c0be02bd6883a985844897a`; status/log updated for handoff.
+**Changed:** Replaced the shared choice menu's HFlowContainer with an HBoxContainer and explicitly enabled horizontal scrolling. All choice cards remain in one row; the full height fits above the scrollbar. This also fixes other menus using the same helper.
 
-**Code changes:** None. **Tests run:** None. **Next:** RULE-099, distinguish two separate draw instructions within one ability; not yet approved.
+**Verification:** Godot 4.3 full rules suite: 310 passed, 0 failed. The display-backed playtest-3 script passes with zero failures, including horizontal alignment/full-height checks for HOLD and READY RIG, an overflowing READY RIG fixture, and scrolling until its final card is fully visible. Ten fixture screenshots render.
 
+**Delivery:** Feature branch `codex/horizontal-choice-menus`, targeting `codex/halcyon-playtest-stabilization`. The existing Windows ZIP remains unchanged until this fix is merged and the stabilization workflow exports it.
 
-## 2026-11-11 — RULE-099 approved and locked
 
-**Decision:** RULE-099 LOCKED (user-approved Option A). Each distinct DRAW-based draw instruction within a single ability recalculates its card count at that instruction's start; the target remains fixed during that instruction under RULE-098. Example: draw 5, gain +2 DRAW, then draw 7.
+## 2026-11-16 — ZEROED-001: ICE STR floors at 0; ZEROED keyword, once per ICE; ROT-001 doc sync (Claude)
 
-**Files:** Master Design commit `bc056f665eabf62a516956214128a650cba82a89`; status/log updated for handoff.
+**Designer decisions (2026-11-16):**
+- **ZEROED-001 (APPROVED):** "I think 0 str is a good bottom … it results in too much confusion and counting for the player." ICE STR can't go below 0; DSY-009's UNDERFLOW is withdrawn and ROT keeps its "minimum 0". A reduction past 0 is lost; spare ROT counters keep an ICE at 0 if it gains STR. MARGIN and OVERKILL stay (the game shows MARGIN).
+- **ZEROED keyword (APPROVED), "once per ICE":** a card's ZEROED bonus triggers if it takes target ICE from above 0 to 0. Each ICE can be ZEROED once per encounter; the first drop to 0 from any cause uses it up, so the ZEROED card has to land last. Floored ICE (DEADBOLT, SYNAPSE BARRIER, AMNESIA) and ICE starting at 0 can't be ZEROED. The "any cause" reading is Claude's write-up for the designer to confirm.
+- **Cards (PROPOSED):** NULL POINTER replaces INTEGER UNDERFLOW (target ICE at 0 STR: break 2 subroutines, BURNED); RIOT ZEROED examples FLATLINE (ZEROED: −4 TRACE), KNOCKOUT (ZEROED: break 1), SECOND WIND (ZEROED: +1 BW).
+- **ROT-001 sync:** remaining SIGYL labels in Card Pools, Rustlers, ICE Corp 1–3, Upgrades and Engines changed to TUMBLER; non-slice TUMBLERS still need slot counts.
 
-**Code changes:** None. **Tests run:** None. **Next:** Ask RULE-100 as one open design question about queued DRAW-based draw instructions; commit only after approval.
+**Docs changed:** `REDLINE_DECK_SYNERGY.md` v1.1 (§0, §5.2, §5.3 rewritten, new §5.3a ZEROED, §7, §9.2, §10, §11, §12); Core Rules §5.3, §5.7 and amendments; Rustlers, Pacing amendments; HANDOFF (build item for Codex: revert negative STR from `playtest3-step4`, add ZEROED flag). **Code changes:** none. **Tests:** none.
 
+## 2026-11-16 — ZEROED-001 cards approved; TUMBLE-001; LOG-001; Codex handoff (Claude)
 
-## 2026-11-11 — RULE-100 approved and locked
+**Designer decisions (2026-11-16):**
+- **ZEROED-001 cards (APPROVED):** "Approved for all those card changes you made." NULL POINTER replaces INTEGER UNDERFLOW; FLATLINE, KNOCKOUT and SECOND WIND join RIOT's pool (`REDLINE_DECK_SYNERGY.md` §9.2).
+- **TUMBLE-001 (APPROVED):** "if a subroutine is broken, any unbroken subroutines slide 'tumble' into (its) place." Written up in Core Rules §5.4: a broken TUMBLER subroutine leaves the pool; the slots after it shift back; the next unbroken subroutine tumbles into the last slot, active at once; rotation skips broken subroutines and stops once every unbroken one is showing. Replaces "broken stays broken… rotates out and back in", and removes the REEL-001 confusion at its source. Two readings for the designer to confirm (HANDOFF, Waiting): a tumbled-in subroutine is active at once; and any drop to 0 uses up an ICE's ZEROED.
+- **LOG-001:** this log is split. Entries from 2026-11-08 to 2026-11-14 moved unchanged to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`; the live log is kept under about 60 KB so the Claude project copy can be rewritten in one pass.
 
-**Decision:** RULE-100 LOCKED (user-approved Option B). For a queued triggered Software ability instructing “Draw cards equal to your DRAW,” the card count is fixed when the ability enters the FIFO queue, not when it starts resolving. DRAW 5 at queueing remains a 5-card draw even if DRAW rises to 8 before resolution. Explicit exception to RULE-098; cancellation rules remain unchanged.
+**Docs changed:** Core Rules (§5.4, amendments), ICE Rules Bible (TUMBLER), ICE Corp 1 and Pacing (amendments), Deck Synergy (§9.2, §12), HANDOFF (a "Start here (Codex)" block listing today's build work in order; ZEROED-001, ZEROED-001 cards and TUMBLE-001 rows; two Waiting rows; LOG-001 rule). **Code changes:** none. **Tests:** none.
 
-**Files:** Master Design commit `17b5c4917290061064b75774fee4dadbc323a0a6`; Current Status and Development Log updated for handoff.
+## 2026-11-16 — ZEROED-001 and TUMBLE-001 readings confirmed (Claude)
 
-**Code changes:** None. **Tests run:** None. **Next:** RULE-101 asks how queue-time snapshots apply to multiple separate DRAW instructions in one queued ability; no decision yet.
+**Designer decision:** "Confirmed on both." (1) Any drop to 0 STR, from any source, uses up an ICE's one ZEROED; the bonus only comes from a card that prints ZEROED (Synergy §5.3a rule 2, Core Rules §5.3). (2) A TUMBLER subroutine that tumbles into a slot is active at once: breakable that turn, and it fires in that turn's Corporation Response if unbroken (Core Rules §5.4). Both readings were already written this way; the two WAITING rows in HANDOFF are closed. **Code changes:** none. **Tests:** none.
 
+## 2026-11-17 — VIS-001: visual language "The Friendly Lie" handed to Codex (Claude)
 
-## 2026-11-11 — RULE-100 revised to remove conflict with RULE-098
+**Designer decision:** direction B chosen from three explorations (A Phosphor, B The Friendly Lie, C Watchtower): "I do really like the B option the friendly lie … I think this is a more suitable direction." Further requests in the same session: one encounter screen per corporation with its own background and palette; Rustlers draw 6 cards (maximum hand size not decided); show how the friendly face breaks and what full TRACE looks like; give ICE a personality that flips from cheery to lethal; put the mascots into the encounter screen; hand it to Codex.
 
-**User-directed correction:** User requested “Change rule 100 to align with rule 98. Then proceed.” Original RULE-100 Option B (queue-time DRAW snapshot) was replaced in canonical Master Design. Revised RULE-100 uses effective DRAW when the draw instruction begins resolving, even if its ability was queued earlier. RULE-098 and RULE-099 remain unchanged. Prior RULE-100 approval and commit `17b5c4917290061064b75774fee4dadbc323a0a6` remain in this log for audit history, **not** as active canon.
+**Docs added:** `REDLINE_VISUAL_LANGUAGE.md` (Part 1 brief, Part 2 design, Part 3 build steps VIS-001a–g); `docs/visual/reference/` (10 PNGs), `docs/visual/backgrounds/` (4 placeholder JPGs), `docs/visual/mascots/` (9 SVGs). **Atomic Salvage deprecated (designer):** "I would deprecate that atomic salvage look." A deprecation note heads `REDLINE_UI_NULREM_Design_For_Claude.md` §1. §2.10 records that VIS-001 replaces the look of `REDLINE_UI_NULREM_Design_For_Claude.md` (Atomic Salvage) but keeps its requirements (drag-to-ICE chips, BW slits, no clipped text, REEL-001, END RUN, CRED meter, NUL/REM personality). **HANDOFF:** VIS-001 row (Codex, TO DO), a WAITING row (hand size, lethal threshold, proposal silhouettes). **Code changes:** none. **Tests:** none.
 
-**Master Design correction commit:** `c39a5da2f0746d97662ed525bb35c7c8e1bd62a5`. **Code changes:** None. **Tests:** None. **Next:** Ask one RULE-101 design question consistent with revised RULE-100; no automatic approval.
+## 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex)
 
+**Commit tag:** `zeroed-tumble-step1`.
 
-## 2026-11-11 — RULE-101 approved and locked
+**Changed:** Restore STR floor and track once-per-ICE ZEROED
 
-**Decision:** RULE-101 LOCKED (Option A). A queued ability's separate DRAW-based instructions independently recalculate effective DRAW when each instruction starts resolving: queued at DRAW 5, increased to 8 before resolution, draw 8, gain +2 DRAW, draw 10. Conflict review found no override of RULE-098, RULE-099, or revised RULE-100.
+**Interpretations to confirm:** Positive STR floors also constrain LOGIC BOMB; its displayed STR stays at the floor and it cannot consume ZEROED. Loss of RELAY discards any resulting non-ROT deficit so later gains rise from zero. These readings preserve the explicit floor and no-hidden-debt rules.
 
-**Master Design commit:** `7dafb193b9a86b6f4d2f4683f74d9cc1d439d121`. Status/log updated. **Code changes:** None. **Tests:** None. **Next:** RULE-102, whether snapshot timing generalizes to non-DRAW numeric instructions; not approved.
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
 
+```text
+sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 2.84; avg cleared-run turns 9.8
+sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; turns per non-stalled encounter 4.06; avg cleared-run turns 12.9
+sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; turns per non-stalled encounter 3.19; avg cleared-run turns 10.5
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
+TESTS: 320 passed, 0 failed
+```
 
-## 2026-11-11 — RULE-102 approved and locked after conflict audit
 
-**Decision:** User approved the exception-protected Option A. Each discrete variable-numeric instruction fixes its calculated quantity when that instruction starts; later distinct instructions independently recalculate. Preserves continuous-effect recalculation, explicit timing, costs/conditions, and resource spending priorities. Conflict audit considered RULE-003–010, RULE-038, RULE-071–072, RULE-090–095, and RULE-098–101; no blanket override was approved.
+## 2026-11-17 — ZEROED-001-cards: Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards (Codex)
 
-**Master Design commit:** `98bb8e85d79c999cb218ed27fc9167c78f380699`. **Code changes:** None. **Tests:** None. **Next:** RULE-103, clarify per-object processing inside one discrete instruction, subject to conflict review; not approved.
+**Commit tag:** `zeroed-tumble-step2`.
 
+**Changed:** Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards
 
-## 2026-11-11 — RULE-103 approved and locked after conflict check
+**Interpretations to confirm:** None.
 
-**Decision:** RULE-103 LOCKED (Option A). A single discrete “for each” instruction snapshots a referenced variable numeric value once at instruction start for all processed objects. Later distinct instructions take fresh snapshots under RULE-102. Ordinary generated triggers do not interrupt the current ability (RULE-014/015), and prevention event granularity (RULE-074–077) is unchanged. Conflict review found no existing locked rule overridden.
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
 
-**Master Design commit:** `a33b7a95fe3d1bf10dd400498d4a5d9942222204`. **Code changes:** None. **Tests:** None. **Next:** RULE-104, decide eligible-object-set timing in one for-each instruction; not yet approved.
+```text
+sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 2.84; avg cleared-run turns 9.8
+sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; turns per non-stalled encounter 4.06; avg cleared-run turns 12.9
+sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; turns per non-stalled encounter 3.19; avg cleared-run turns 10.5
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
+TESTS: 331 passed, 0 failed
+```
 
 
-## 2026-11-11 — RULE-104 approved and locked after conflict review
+## 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex)
 
-**Decision:** User selected Option A with eligibility protections. A discrete “for each” instruction snapshots its object processing set at instruction start; new objects are excluded and originally selected objects stay on the processing list. Explicit costs, eligibility/installed-status conditions, source-removal mechanics and continuous-effect expiration retain precedence. Ordinary triggered changes remain deferred under RULE-014/015. No override of existing locked rules found.
+**Commit tag:** `zeroed-tumble-step3`.
 
-**Master Design commit:** `5b5e1dbaaf863917f71e31f270689d87c5d45ad5`. **Code changes:** None. **Tests:** None. **Next:** RULE-105, clarify prevention-gain event granularity for a single per-object instruction, subject to RULE-074–077 conflict check; not approved.
+**Changed:** Remove broken TUMBLER subs and tumble immediately active replacements
 
+**Interpretations to confirm:** None.
 
-## 2026-11-11 — RULE-105 approved and locked
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
 
-**Decision:** User explicitly approved Option A and exact aggregate-event wording after conflict audit. One “for each” prevention-granting instruction produces one aggregate prevention-gain event when total gain is positive. Per-object repetitions do not multiply triggers; separate gain instructions generate separate events under RULE-076; multiple distinct abilities may each recognize the event under RULE-078; FIFO timing unchanged. RULE-074–079, RULE-014/015, RULE-103/104 checked; no override.
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 3.09; avg cleared-run turns 9.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5; turns per non-stalled encounter 3.91; avg cleared-run turns 12.6
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2; turns per non-stalled encounter 3.14; avg cleared-run turns 10.9
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7; turns per non-stalled encounter 3.61; avg cleared-run turns 12.9
+TESTS: 352 passed, 0 failed
+```
 
-**Master Design commit:** `0a798daeb0f6aa934ccce8e872cc0494215ca08d`. **Code changes:** None. **Tests:** None. **Next:** RULE-106, consider extending aggregate-event granularity to non-prevention “for each” instructions; not approved.
+**TUMBLE comparison with Step 2 (same seeds/policy):** clears GENERALIST 29→25, ECHO 20→17, RIOT 24→25, VECTOR 20→20. Turns per non-stalled encounter: GENERALIST 2.84→3.09, ECHO 4.06→3.91, RIOT 3.19→3.14, VECTOR 3.69→3.61. GENERALIST stalls at the action guard rose from 1 to 2; these are not deaths. The bot takes the first shared reward, so the new RIOT reward cards are exercised by deterministic card tests rather than normally drafted by this policy.
 
+**UI verification:** all six display-backed scripts pass, including actual SCAN/CULL choices, horizontal HOLD/READY RIG access, ZEROED target highlighting and marker, tumble motion, immediate breakability during animation, and settled slots. Existing negative-STR and opening-rotation assertions were updated in place. Stable subroutine IDs remain for labels/history; broken entries are filtered out of the circulating pool.
 
-## 2026-11-11 — RULE-106 approved and locked
+**Candidate requested by designer:** “give me a build I can download.” The existing CI export gate now also permits this exact feature branch; it still excludes other feature branches and PR events. The candidate remains version 0.3.0-playtest.3 and displays ZEROED + TUMBLE. Its ZIP includes BUILD_COMMIT.txt. No merge or direct push to stabilization is performed.
 
-**Decision:** User explicitly approved the exception-protected general aggregate-event convention. One “for each” instruction making repeated same-type changes generates one aggregate event for generic triggers when a qualifying change occurs; distinct instructions remain distinct. Explicit carve-outs preserve per-card draw events (RULE-032/033), individual would-be-draw replacement handling (RULE-040–043), actual reshuffles (RULE-036), damage mechanics, explicit per-object/per-occurrence triggers, costs/conditions and more-specific text. Other triggered abilities may each recognize the event, with FIFO timing unchanged. No locked rule override.
 
-**Master Design commit:** `7b096f35ce1365793fa287388d88d129fd91a48d`. **Code changes:** None. **Tests:** None. **Next:** RULE-107, clarify the numeric amount exposed by an aggregate event to amount-dependent triggered abilities; not approved.
+## 2026-11-17 — VIS-001a: fixed Rustler theme and corporation skin resources (Codex)
 
+**Commit tag:** `vis-001a`. Added DM Sans variable font (400/500/700 UI weights), Space Mono regular/bold, both SIL OFL licenses, fixed toner/paper/highlighter Rustler theme, and HALCYON/IRONWATCH/LUCIDA skin resources. HALCYON is selected for the slice; the other corporations are data only. Runtime copies of the supplied backgrounds and mascot SVGs are packaged under Godot assets so exports do not depend on files outside res://.
 
-## 2026-11-11 — RULE-107 approved and locked
+**Interpretations to confirm:** only HALCYON has supplied hostile background art; the other two resources leave that texture unset rather than reusing HALCYON art. Corporate fonts and palettes are isolated from the invariant Rustler theme.
 
-**Decision:** User explicitly approved exception-protected Option A after conflict audit. An aggregate event reports the total actual qualifying numerical change from its instruction; partial resolution counts only realized changes, zero qualifying change creates no corresponding change event, and amount-dependent triggered abilities use the reported magnitude subject to their normal restrictions. Individual draw, reshuffle, replacement, damage and explicit per-object events remain unaffected. RULE-002/003, RULE-074–077, RULE-102–106, RULE-014/015 checked; no override.
+**Validation:** Godot 4.3 editor import and script/resource parsing. No gameplay data or values changed. ZEROED/TUMBLE from PR #9 were integrated into this feature branch first; stabilization itself is unchanged.
 
-**Master Design commit:** `7eb582c7dfdaee9ad1be17075e4c0247b721501b`. **Code changes:** None. **Tests:** None. **Next:** RULE-108, consider net versus directional event magnitude if one aggregate instruction produces both positive and negative changes; not approved.
 
+## 2026-11-17 — VIS-001b: encounter scaffold and paper hand (Codex)
 
-## 2026-11-11 — RULE-109 approved and locked
+**Commit tag:** `vis-001b`. Added a 1600×1000 encounter presentation inside the existing main controller: corporate app background, node/TRACE tags, reserve and deck data, fixed zine HUD, response strip, stationary NUL/REM note, RIG/RACK strip, END TURN and END RUN. Existing map/reward/choice flows remain with the controller. Six 146×218 paper cards use hard shadows and highlights; 7+ fan without changing deck or hand limits. Hover, wheel and arrow browsing bring each card forward. Bloatware uses the corporate font, rounded white body and red header.
 
-**Decision:** User explicitly approved exception-protected Option A after conflict audit. Threshold-trigger qualification uses the completed aggregate event's total actual qualifying magnitude (RULE-107) instead of individual per-object contributions, absent more-specific text. Each eligible triggered ability activates at most once per event subject to frequency restrictions. Deferred FIFO timing and draw, reshuffle, replacement, damage, cost and condition protections remain unchanged. No locked-rule overrides.
+**Interpretations to confirm:** long card rules progressively reduce the art placeholder and font size to retain all rule text; full text also remains available in inspection/tooltips. Extremely large hands keep readable individual cards and use fan browsing, rather than imposing a cap. BW slits represent spending from the left; numeric BW remains authoritative for bonuses.
 
-**Master Design commit:** `045a991465a39fb573792560a19a591a09ff70eb`. **RULE-108:** deferred, not locked or committed. **Code changes:** None. **Tests:** None. **Next:** RULE-110, distinguish event-time trigger qualification from resolution-time reevaluation, subject to conflict audit; not approved.
+**Validation:** Godot 4.3 import and display-backed encounter render, including six actual game cards. This step establishes layout; mascot/scan replacement follows in VIS-001c. No gameplay values changed.
 
 
-## 2026-11-11 — RULE-110 approved and locked
+## 2026-11-17 — VIS-001c: mascot silhouettes and independent scan tags (Codex)
 
-**Decision:** User explicitly approved exception-protected Option A after conflict audit. Trigger eligibility is evaluated at event time; event facts and aggregate threshold qualification do not retroactively change. Each variable-numeric reward instruction snapshots the applicable value when it begins resolving, not when queued, unless explicit more-specific text requires otherwise. Pending source-removal cancellation (RULE-081/082/085), already-resolving continuation (RULE-083), explicit conditions and installed requirements (RULE-003/088), frequency restrictions, and FIFO remain effective. No locked rule overridden.
+**Commit tag:** `vis-001c`. Recreated COOKIE WALL banner/cookie, CAPTCHA widget/grid/eye, DOORBELL pill/lens and AUTO-RENEW credit card. Added simple proposed ACCEPT ALL pill, REJECT ALL link, TERMS OF SERVICE document, CONSENT FORM clipboard and HOUSE CALL silhouette. Separate face features trace the supplied SVG coordinates. Primary corporate buttons represent DEADLOCKs; scan tags retain exact rule text, states, progress, hidden pool counts, passive rules and virus actions. Existing reel/tumble presentation is reused. Hidden effects remain hidden rather than being disclosed by decoration.
 
-**Master Design commit:** `81c4ab95370b57345dcc8a41ba5e8a701d41e9ee`. **RULE-108:** deferred and unlocked. **Code changes:** None. **Tests:** None. **Next:** RULE-111, consider event-time trigger qualification alongside explicit resolution-time conditions; audit for redundancy and conflicts before approval.
+**Interpretations to confirm — proposed copy (cheery / wary / lethal):** ACCEPT ALL: “Make yourself at home!” / “We noticed you hesitating.” / “YOUR CONSENT IS ASSUMED.” REJECT ALL: “You may change your preferences.” / “Are you absolutely sure?” / “THERE IS NO OPT OUT.” TERMS OF SERVICE: “A few little terms before we begin!” / “You haven't read the fine print.” / “YOU ALREADY AGREED.” CONSENT FORM: “Your choices matter to us!” / “We saved your preferences. All of them.” / “CONSENT IS MANDATORY.” HOUSE CALL: “Your technician is on the way!” / “Please stay where you are.” / “WE KNOW YOU'RE HOME.” FREE TRIAL (fallback for existing test data): “Try us. No strings attached!” / “Your trial is almost over.” / “YOU CANNOT CANCEL.” Proposal shapes follow the spec's table; final illustration remains out of scope.
 
+**Validation:** Godot 4.3 parsing and display-backed render checked against reference 08. Rule chips are independent of the corporate face and wording. Mascot/scan columns scroll only when the rule content needs more space, preserving text. No gameplay changes.
 
-## RULE-126 — SYN damage terminology and overflow (LOCKED, 2026-11-11)
 
-**Authoritative decision:** The active damage keyword is **SYN X** (also styled **SYN DAMAGE X** in the approved rule review). Legacy **NEURAL DAMAGE** and **SYNAPTIC DAMAGE** are deprecated; neither is an active separate damage type. SYN is **Runner-chosen** hand discard, never random discard. Historical mentions of the old terms elsewhere are superseded, not additional active mechanics.
+## 2026-11-17 — VIS-001d: per-ICE mood ladder and threat wording (Codex)
 
-Resolve SYN X in this order:
-1. The Runner chooses and discards as many cards as possible from their current hand, up to X.
-2. Each unfulfilled point of SYN causes **2 Vitae damage**.
-3. Apply that Vitae damage **after** discarding the available cards.
+**Commit tag:** `vis-001d`. Mood is computed from the actual next-response effects and broken state: cheery, wary, lethal, then knocked out on BREACH. Black ICE and Mask off force lethal. The main scene exposes `lethal_pulp_threshold` (default 5) for tuning. Facial features, panel colors/corners, speech and price-sticker wording follow mood; rule wording and values do not. New tumbled entries are remembered for the current turn; biggest visible PULP is red in both scan and response. Card-choice previews also use the paper card component.
 
-| SYN X | Hand | Discarded | Vitae damage |
-|---:|---:|---:|---:|
-| 3 | 3 | 3 | 0 |
-| 3 | 2 | 2 | 2 |
-| 3 | 1 | 1 | 4 |
-| 3 | 0 | 0 | 6 |
-| 5 | 2 | 2 | 6 |
+**Interpretations to confirm:** the PULP threshold applies to the largest individual subroutine, not the sum of an ICE's PULP, to reproduce reference 08 (AUTO-RENEW 1+2+3 remains cheery) and 09 (incoming CAPTCHA PULP 6 becomes lethal). Any positive CORTEX qualifies. Hidden rules remain “? HIDDEN”; random curve values remain “PULP ?”, even when the mascot telegraphs danger. Red rule chips use toner text rather than white for 4.5:1 contrast.
 
-**Priority:** RULE-126 supersedes older no-Vitae-loss statements for hand-discard damage and older random-discard SYN definitions. PULP remains direct Vitae damage; VOID remains persistent draw reduction. The approved overflow outcome is Vitae damage; do not silently reinterpret it as a separate SYN discard or VOID effect. Other prevention and trigger sequencing rules remain subject to their explicit text; do not invent unresolved interactions.
+**Validation:** code/resource parsing and state-based mood calculations; the final VIS-001g fixtures exercise the real turn-1/turn-3 board. No rules, card stats or corporation values changed.
 
-**Source:** `REDLINE_RULE_REVIEW_126.md`, approved and locked 2026-11-11. **Regression:** verify all five table cases and discard-before-Vitae ordering. RULE-127 remains pending.
 
+## 2026-11-17 — VIS-001e: Cracking, strike disclosure and Mask off (Codex)
 
-**Terminology lock (2026-11-11):** **Vitae** is the canonical Runner health resource (abbreviated **VIT** in the World Bible). The former health-resource term is deprecated. **PULP damage** reduces Vitae. This terminology update does not itself change damage-resolution mechanics.
+**Commit tag:** `vis-001e`. TRACE/strike state drives the app background and corporate edges; the Rustler theme stays fixed. Added a one-time checking-on-you toast, background-only glitch bands, the PAST 50% tag and NUL/REM countdown. First strike displays the hostile “We see you.” modal and a corporate TRACER card, then returns to Cracking; strike 2+ keeps the hostile background and square red/black mascots. The reserve meter and actual post-strike TRACE remain visible.
 
+**Interpretations to confirm:** Cracking persists after strike 1 even if TRACE is reduced below 20, since the Friendly definition requires no strikes. The modal shows the real post-strike TRACE of 20 in the HUD rather than faking 40; its copy describes the strike and inserted TRACER. The toast lasts 3 seconds; the modal lasts 2.5 seconds or until dismissed. SPAM's proposed footer is “Recommended for you.” A red rule chip uses toner text for contrast. All distortion stays behind opaque text panels.
 
-**Damage terminology lock (2026-11-11):** **CHAR** is deprecated and replaced by **PULP damage**. **PULP X reduces Runner Vitae by X**, subject to applicable PULP prevention. Earlier CHAR labels, examples, and prevention-pool references in this document are to be read as PULP. SYN remains mandatory Runner-selected discard with its approved overflow rule; VOID remains distinct. This is a terminology replacement, not an additional damage type.
+**Validation:** Godot 4.3 parser; state changes read Game.trace/strikes and never insert cards or Black ICE themselves. Only the existing game rules cause those changes. Live-state fixture screenshots follow in VIS-001g.
 
 
-## RULE-127 — SyN prevention, mandatory discard, and overflow PULP (LOCKED, 2026-11-11)
+## 2026-11-17 — VIS-001f: live drag targets, mascot motion and reduced motion (Codex)
 
-**Approved resolution order:** When the Runner receives **SyN X**:
+**Commit tag:** `vis-001f`. Added installed-Icepick drag targets with legality/cost tooltips, card drag previews and dashed hand gaps, VOID pupil tracking, and WATCHER's actual TRACE warning. The existing break API accepts an optional selected Icepick; omitted selection still uses the cheapest legal pick. Added cheery bob/blinks, wary brows, lethal shake/glow, response lunges, break flinch/strike-through, knockout slide and scan peel, background cross-fade, strike-card flight and Mask-off transition. Reduced motion is persistent and available on both selection and encounter screens; it removes ambient/reel motion, flashes and typing without shortening response timing.
 
-1. **Apply SyN prevention:** Deduct available SyN prevention from incoming SyN, consuming no more prevention than the incoming amount.
-2. **Determine unprevented SyN:** Resolve only the remaining SyN amount.
-3. **Mandatory discard:** The Runner **MUST** choose and discard as many cards as possible from their current hand, up to the unprevented SyN amount. The Runner chooses *which* cards, but **cannot** voluntarily keep eligible cards and take PULP instead.
-4. **Calculate overflow:** Each point of unprevented SyN not fulfilled by a card discard generates **2 PULP damage**, per RULE-126.
-5. **Resolve PULP:** After mandatory discards, apply any available **PULP prevention** to the generated PULP damage; only unprevented PULP reduces **Vitae (VIT)**.
+**Interpretations to confirm:** FORTRESS bob period is 3.6 s; VOID amplitude is 0.3 px; TUMBLER fidget is ±0.35°. Card snaps are linear 90 ms. The scan's knockout peel moves/tilts without fading its rules, retaining readability. Strike flight is 350 ms and toast entry is 180 ms. Cosmetic blink randomness uses a separate generator, never Game's RNG. WATCHER shows 0 additional TRACE for ECHO or active DECOY SIGNAL. Existing reel glass is omitted over the new scan text. These are presentation choices, not approved rule changes.
 
-**Example:** Incoming SyN 5, SyN prevention 2, and 1 card in hand: 3 SyN remains; the Runner must discard that 1 card; 2 SyN overflow generates **4 PULP**. Apply PULP prevention, if any, before reducing Vitae.
+**Validation:** Godot 4.3 import, display render, full rules suite **357 passed, 0 failed**. Five new rules regressions cover explicit Icepick selection, unchanged automatic selection/cost, incompatible/missing pick, and insufficient BW; invalid drops spend nothing. No gameplay numbers changed. Display interaction and screenshot fixtures are checked in VIS-001g.
 
-**Priority and scope:** RULE-127 specifies the resolution sequence and prevention interaction for RULE-126. **SyN** is Runner-selected *mandatory* discard; **PULP** is the official Vitae-damaging keyword; **CHAR** is only colloquial slang for PULP in the World Bible; **VOID** is distinct. This rule does not invent additional prevention resources or change the previously established prevention-pool duration/stacking rules. Any unspecified simultaneous trigger timing remains open.
 
-**Regression expectations:** Test full/partial/no SyN prevention, full/partial/empty hand, compulsory discard, PULP prevention of overflow, and zero-Vitae defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
+## 2026-11-17 — VIS-001g: live fixtures, readability and interaction regression (Codex)
 
+**Commit tag:** `vis-001g`. Added seven phone-review PNG fixtures: friendly turn 1, wary/lethal turn 3, Cracking, Strike 1, Mask off, DOORBELL CAM card drag and eight-card hand. Updated the existing large-hand test in place for fan browsing and real last-card clicks at 6/7/8/9/10/16 cards. Added native card and selected-Icepick drag checks, actual strike/TRACER/Black ICE checks, tunable moods, hidden VOID rules, reduced-motion timing, BREACH mood and full authored-card text fit. All 112 authored card definitions fit their rule text. Retained ZEROED target borders and paper inspection; response chips flash with the firing rule. CI runs all seven display scripts at a fitting desktop size. The guide/status are updated in place; HANDOFF is the sole task list. Audio was muted during final visual checks at the designer's request; no audio assets or dialogue were changed.
 
-## RULE-128 — SyN overflow PULP classification and triggers (LOCKED, 2026-11-11)
+**Interpretations to confirm:** The turn-3 fixture advances two real responses and resolves DISCARD normally. The real conveyor has PULP 6 in slot 1 and a new TRACE 3 in slot 2 after breaking S4; it is not rearranged to force mockup 09's slots. Fixture preparation uses granted cards/BW, and the eight-card hand is deliberately constructed, not a starting-deck claim. Three-mascot boards scale silhouettes to 80% while retaining full-size scans. Longer scans scroll vertically and the response strip scrolls horizontally; hand cards never shrink. Long NUL/REM notes fit by reducing type to a minimum of 8 px. Red buttons/Bloatware headers use toner rather than pale text for contrast. Proposed wording and silhouette choices in VIS-001c remain unapproved.
 
-**Explicit user approval:** PULP generated by SyN overflow under RULE-126/127 is **ordinary PULP damage** for all mechanical purposes, not a fourth damage type. After SyN prevention and mandatory Runner-selected discard, each unfulfilled SyN point generates **2 PULP**; resolve that PULP against the shared PULP prevention pool, and reduce **Vitae (VIT)** only by the unprevented remainder.
+**Validation:** Godot 4.3 imports; full rules suite **357 passed, 0 failed**. Seven display-backed scripts pass; Friendly Lie has **170 checks, 0 failures**. Large-hand and playtest 2/3 interaction tests report zero failures. Minimum five-second response timing is checked with reduced motion enabled. Thirty seeds per Rustler exactly match the pre-VIS ZEROED/TUMBLE results (including two GENERALIST stalls; not deaths):
 
-**Source-neutral application (explicit choice):** PULP prevention and PULP-related effects apply to overflow PULP **regardless of the damage's source**, even where an effect describes a particular source (for example, “prevent PULP from ICE”). For RULE-128 interactions, source descriptors do **not** exclude SyN-overflow PULP. This explicit exception supersedes the source-restriction option in the draft proposal; it does not change the distinction between damage types or permit other damage types to use PULP prevention.
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7
+TESTS: 357 passed, 0 failed
+```
 
-**Trigger rule (explicit choice):** Only **actual PULP suffered**—the positive reduction of Vitae after prevention—counts for PULP-damage triggers. Merely generating, proposing, or fully preventing PULP **does not** trigger PULP-damage abilities. Effects requiring “when you suffer PULP” require **at least 1 VIT lost**. Do not introduce a separate “PULP generated” trigger category under RULE-128. Effects expressly referring to prevention itself are outside this PULP-damage-trigger rule and retain their printed conditions; their general timing remains governed by existing trigger rules.
+Average end deck sizes GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE for each. No gameplay values changed by VIS-001; the optional Icepick-selection API preserves existing default costs/selection. ZEROED/TUMBLE PR #9 was integrated locally before VIS; the visual PR includes that dependency and targets stabilization without pushing to or merging it. Designer visual approval and a Windows playtest remain outstanding.
 
-**Examples:** SyN overflow generates 4 PULP, prevention 3 → suffer 1 PULP, lose 1 VIT, suffered-PULP trigger may fire. Overflow 6, prevention 6 → suffer 0 PULP, lose 0 VIT, no suffered-PULP trigger. Overflow 4, prevention 0 → suffer 4 PULP, lose 4 VIT. A source-described PULP prevention effect is eligible against overflow PULP under this rule.
+## 2026-11-17 — CHROME-001 step 1: real encounter layout and readability (Codex)
 
-**Compatibility:** RULE-127's order and compulsory discard remain unchanged. Three independent prevention pools (DMG-002), temporary prevention expiration (SOFT-013), and prohibition on reactive Runner card play during Corporation turns (SOFT-011) remain unchanged. **CHAR** is in-world slang only; **PULP** is the official mechanical term. **Status: LOCKED, explicitly approved 2026-11-11.**
+**Direction:** designer: “I agree with your assessment. Work on those items in that order. Giving samples or examples in png format for each step”. Refine one playable CAPTCHA encounter in Chrome Deco, retaining actual rules and the Rustler paper layer. Working branch is unchanged; this feature locally includes the reviewed VIS-001 PR #11 dependency, which remains open.
 
+**Changed:** larger scan headings, rules and passive text; full-size scan panels; smaller illustration carriers preserve separate actor/flinch transforms. CHAIN tags sit in the rig strip; deck counters use three unclipped lines. Added a per-step screenshot fixture using real Generalist READY RIG, cards, AUTO-RENEW and CAPTCHA. All art/state values remain presentation only.
 
-## RULE-129 — Simultaneous mixed damage resolution (LOCKED, 2026-11-11)
+**Sample:** `01-layout-and-readability.png`. Godot 4.3 stage-1 fixture reports zero failures, including actual card text fit and scan width. **Interpretations to confirm:** two-ICE silhouettes use 82% carriers to give rules more room; three-ICE carriers use 70%. These scales are working presentation values. No gameplay values changed.
 
-**Explicit user approval:** When **one effect** inflicts two or more of the three damage types, resolve its damage components in the **fixed order PULP → SyN → VOID**, regardless of the effect's controller or the printed order of the listed damage types. Treat the mixed-damage instruction as one uninterrupted resolving effect for trigger-queue timing, with components processed sequentially against the updated game state.
+## 2026-11-17 — CHROME-001 step 2: chrome/enamel mascot objects (Codex)
 
-1. **PULP component:** Spend applicable PULP prevention from the existing PULP pool; unprevented PULP reduces **Vitae (VIT)**. If VIT reaches zero, the run **ends immediately in defeat**. Stop; do not process remaining damage components or queued triggers.
-2. **SyN component:** Apply SyN prevention, then the Runner **MUST choose and discard** as many cards as possible up to unprevented SyN (RULE-127). Each missing discard generates **2 PULP** (RULE-126); resolve this overflow PULP immediately as part of the SyN component against the then-current PULP prevention pool. Only PULP actually suffered reduces VIT or qualifies for suffered-PULP triggers (RULE-128). If VIT reaches zero, immediately end the run; do not process VOID or queued triggers.
-3. **VOID component:** Apply VOID prevention from its separate pool; resolve remaining VOID as persistent DRAW reduction subject to the established DRAW floor. VOID does not retroactively change cards already drawn.
+**Changed:** layered silver/chrome rims, pearl/mint enamel, restrained Deco ribs and card-corner fan, more substantial speech bubbles and corporate name/wordmark. AUTO-RENEW retains its card/chip silhouette and CAPTCHA its eye/grid widget. Individual face parts and actual mood computations are retained; the Rustler paper layer is unchanged. Speech scales to fit rather than clipping.
 
-**Triggers:** Damage-, discard-, and prevention-generated triggered effects are **queued as they arise**, not resolved between the mixed-damage components. Finish the entire mixed-damage effect before resolving its queued triggers under **RULE-014/015** (FIFO), with simultaneous enqueue priority under **RULE-011/012/013**. If immediate defeat occurs, the run ends and queued triggers do **not** resolve. Do not confuse this fixed *damage-component* order with the existing controller-selected order for separate simultaneous triggered effects; RULE-011/012 remain in force for those effects. The normal printed-order rule (RULE-010) still applies to other instructions and distinct effects; RULE-129 specifically overrides printed order for mixed damage components within one effect.
+**Samples:** `02a-mascots-cheery.png`, `02b-mascots-wary-and-lethal.png`. Godot stage-2 fixture reports zero failures: two actual Corporation Responses produce AUTO-RENEW STR 6 and the actual active CAPTCHA DEADLOCK can be broken to show lethal PULP 6. **Interpretations to confirm:** the six-layer silver rim and small geometric card fan are proposed construction details; the HALCYON wordmark is a placeholder. Background is deliberately still the old placeholder until step 3. No rule values changed.
 
-**Prevention and source:** PULP, SyN, and VOID retain their independent prevention pools (DMG-002). SyN overflow PULP uses the PULP pool and the source-neutral application and suffered-only trigger conditions of RULE-128. No reactive Runner card plays during the Corporation turn (SOFT-011).
+## 2026-11-17 — CHROME-001 step 3: architectural atrium and illustrated materials (Codex)
 
-**Example:** One ICE subroutine inflicts PULP 3 + SyN 3 + VOID 2. Runner has 10 VIT, 2 cards in hand, PULP prevention 1, no SyN/VOID prevention. Resolve PULP 3: prevent 1, lose 2 VIT (8 remain). Resolve SyN 3: mandatory discard 2, shortfall 1 generates 2 PULP; no PULP prevention remains, lose 2 VIT (6 remain). Resolve VOID 2: apply 2 persistent VOID counters. Queue generated triggers during these steps; resolve after the mixed-damage effect completes, if the run survives.
+**Correction from designer:** “Those dont look anything like Chrome Deco corporate luxury above, photocopied Rustler resistance below”. The first thin-rim samples did not meet the target. A corrected concept PNG established the visual benchmark; this implementation now uses a dedicated pearl/celadon/chrome atrium, illustrated transparent appliance shells and monochrome collage card art. This replaces the blurred app placeholder for HALCYON. Face features, text and controls remain live and separate from artwork; the architecture contains no baked-in game UI. Paper cards and rules retain their own contrast.
 
-**Defeat precedence:** Reaffirms RULE-RT-002's immediate run defeat at zero Vitae; no later damage, advancement, or queued recovery may reverse defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
+**Sample:** `03-welcome-atrium.png`, captured from Godot. Stage 3 reports zero failures for actual rules/cards, scan width and illustration bounds. Fixed TextureRect sizing order so illustrations cannot grow to source-atlas size over rules/neighbouring cards. **Interpretations to confirm:** generated shell art is provisional; six collage motifs are assigned by card role rather than final individual illustrations. Detailed architecture is visible at full opacity; all rule panels remain opaque. This is the revised implementation direction, not a claim of exact pixel identity with the concept. Asset provenance is in the asset folder. No gameplay values changed.
 
+## 2026-11-17 — CHROME-001 step 4: the same atrium reveals its purpose (Codex)
 
-### RULE-129 amendment — reversed fixed damage order (LOCKED, 2026-11-11)
+**Changed:** hostile background is an illustrated edit of the same atrium/perspective, revealing clean observation galleries, cameras, processing rails and restraint cradles under controlled red light. Cracking exposes a restrained 20% glimpse beneath the existing warnings; strike 1 switches to the hostile lighting and a sculpted chrome modal; strike 2 keeps the revealed environment. Generated backgrounds contain no game text. The actual Game strike/TRACER/Black ICE transitions still own the state. Paper cards and counters keep their style.
 
-**Explicit user revision supersedes the original RULE-129 ordering:** When one effect inflicts multiple damage types, the fixed component order is now **VOID → SyN → PULP**, regardless of controller or printed damage-type order. Any earlier RULE-129 statement of **PULP → SyN → VOID** is superseded and must not be used as the current resolution sequence.
+**Samples:** `04a-cracking.png`, `04b-first-strike.png`, `04c-mask-off.png`. Stage-4 Godot fixture reports zero failures, including readable cards/illustration bounds and scan widths in the three-ICE state. **Interpretations to confirm:** 20% Cracking reveal is a working compositing value; scene treatment and generated environment art are provisional. No game rule, TRACE threshold or card insertion behaviour changed.
 
-1. **VOID first:** Apply VOID prevention and then persistent DRAW reduction under the established DRAW floor; no retroactive change to cards already drawn.
-2. **SyN second:** Apply SyN prevention, mandatory Runner-selected discards, and immediately resolve any resulting **overflow PULP** using the current PULP prevention pool (RULE-126/127/128). Check for immediate defeat after any VIT reduction.
-3. **Direct PULP last:** Apply remaining PULP prevention to the effect's direct PULP component; unprevented PULP reduces Vitae (VIT). Check immediate defeat.
+## 2026-11-17 — CHROME-001 step 5: clear interactions and refreshed five-step review set (Codex)
 
-**Triggers and defeat unchanged:** Queue damage/discard/prevention triggers until the complete mixed-damage effect finishes (RULE-014/015/129), unless VIT reaches zero, which ends the run immediately and cancels unresolved components and queued triggers (RULE-RT-002). This ordering is fixed, not dynamically optimized or re-sorted by outcome. Reversing component order does not intrinsically increase numerical damage: VOID does not reduce the current hand, and PULP prevention is still consumed by eligible damage in resolution order.
+**Commit tag:** `chrome-001-step5`. Legal subroutine targets get dashed lime outlines and a solid hover border; the separate top-center feedback panel shows the actual selected Icepick, target, BW cost and MARGIN, or the engine's rejection reason. Successful breaks confirm actual BW spent and update the struck rule/mood. The drag cursor is small; duplicate native tooltips are suppressed during drag to avoid covering rules. Raised/targeted hand cards get a lime paper edge. Normal click-to-break, hidden rules, immediate TUMBLE and reduced motion remain. Eight UI scripts run in CI, including native compatible/incompatible Chrome drags and bounded card illustrations. No core Game/CardDB/IceDB files or rule values were changed by CHROME-001.
 
-**Revised example:** One effect inflicts PULP 3 + SyN 3 + VOID 2; Runner starts at 10 VIT, 2 cards in hand, PULP prevention 1, no SyN/VOID prevention. First apply VOID 2. Next SyN 3 forces discard of both cards and generates 2 overflow PULP; prevent 1, suffer 1 (9 VIT). Finally direct PULP 3 is unprevented (6 VIT). Queue eligible triggers until all components finish.
+**Samples:** ten separate full-screen Godot PNGs: 01 layout, 02a cheery / 02b wary-lethal, 03 atrium, 04a Cracking / 04b strike / 04c Mask off, 05a legal target / 05b broken rule / 05c incompatible target. The first two steps were refreshed with the revised art and supersede the rejected flat/thin-rim samples. These are live captures, distinct from the generated concept benchmark. All samples are committed under `docs/visual/fixtures/chrome-001/`; workspace downloads also have a ZIP.
 
+**Validation:** Godot 4.3 imports; **357 rules checks passed, 0 failed**. All eight display-backed scripts exit 0 without script/assertion errors. Friendly Lie remains **170 checks, 0 failures** (including all 112 authored card texts); large-hand/playtest2/playtest3 checks report zero failures. All five per-step Chrome fixtures report zero failures, including native selected-pick cost/confirmation, incompatible-target explanation and no payment on a rejected drop. Render review caught and fixed an atlas TextureRect sizing issue; card illustration bounds are now checked. Thirty seeds per Rustler reproduce the pre-Chrome baseline:
 
-## VOID damage enhancement — LOCKED (2026-11-11)
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7
+TESTS: 357 passed, 0 failed
+```
 
-**Explicit user approval:** For each point of **unprevented VOID damage**, the Runner **(1) gains one persistent VOID counter** reducing future normal DRAW by 1 (subject to the established effective DRAW floor of 1), and **(2) must choose and discard one card from their current hand if available**. If a required card is unavailable, **each missing discard generates 5 PULP damage**. Apply the existing PULP prevention pool to this overflow PULP; only unprevented PULP reduces Vitae (VIT) and counts as PULP suffered (RULE-128). The Runner cannot elect to keep available cards and take overflow damage instead.
+GENERALIST also has two stalls, counted separately from deaths. Mean end decks GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE each.
 
-**Both consequences apply:** A VOID counter is gained **even when no card is available to discard and the 5 PULP overflow occurs**. VOID prevention is applied first; only unprevented VOID generates counters, required discards, and overflow. VOID overflow PULP is ordinary PULP under RULE-128, including its source-neutral prevention and suffered-only trigger semantics. Check immediate defeat whenever VIT is reduced to zero; unresolved instructions and pending triggers stop (RULE-RT-002).
+**Interpretations to confirm:** 2.5-second break confirmation and header placement are working UI choices. Illustrated shells, shared collage motifs and detailed backgrounds remain prototype art; final fidelity to the concept and undrawn ICE/copy await designer review. This implements one encounter direction, not a completed whole-game art collection. Audio development, Windows export and manual Windows playtest are deferred. One feature PR targets stabilization and includes unmerged PR #11/#9 dependencies; nothing was merged or pushed directly to the working branch. The guide/status/HANDOFF are updated in place; design documents and Claude project copies are unchanged.
 
-**Mixed damage interaction:** RULE-129's current fixed order remains **VOID → SyN → PULP**. Resolve VOID's mandatory discards and overflow PULP within the VOID component before moving to SyN; this may leave fewer cards available for SyN and cause its separate **2 PULP per missing discard** overflow (RULE-126/127). Resolve direct PULP last. Damage/discard-generated triggers queue until the full mixed-damage effect completes, unless immediate defeat ends the run (RULE-014/015/129). Independent VOID, SyN and PULP prevention pools remain in effect.
+**Sample delivery:** `chrome-001-review` stores the ten selected PNGs. The download ZIP excludes unrelated regression screenshots; `chrome-001-step5` identifies the implementation commit.
 
-**Example:** VOID 2 against a hand of 0, with no VOID or PULP prevention: gain 2 VOID counters, generate 10 PULP, and suffer up to 10 VIT loss (or immediate defeat upon reaching 0). VOID 2 against a hand of 1: gain 2 VOID counters, discard the 1 card, generate 5 PULP before prevention. A mixed effect of VOID 2 + SyN 2 against a hand of 2 first discards both cards and gains 2 VOID counters, then SyN 2 has a shortfall of 2 and generates 4 PULP before prevention.
+## 2026-11-17 — CHROME-001 plaque revision: pearl enamel instead of black ICE panels (Codex)
 
-**Priority:** This approved enhancement supersedes older descriptions that define VOID only as persistent DRAW reduction. No new ordinary-card VOID-counter removal is authorized; existing specialized network recovery and inter-corporation clearing remain unchanged.
+**Commit tag:** `chrome-001-enamel`.
 
+**Designer request:** “The black backgrounds on the ice in the images don’t work with the rest of the design. Find an appropriate change … atomic age /art deco / clean friendly corporation design.” Also: “Once approved, commit pr #12 to the shared game branch.” This authorizes the revision and a merge after designer approval of the result; no merge is performed in this revision.
 
-## RULE-130 — Fatal damage, pending effects, and partial resolution (LOCKED, 2026-11-11)
+**Changed:** the ICE rule surfaces are now corporate pearl-enamel service plaques with dark slate text, silver edges/soft shadows, a restrained teal service mark and corporate heading font. Hidden/broken chips use pale surfaces while preserving dashed borders and strike-through. Costs remain legible; TUMBLER reel frames match the enamel. Legal target outlines use dark teal instead of lime against the light panels; invalid targets remain red. The Rustler paper/toner hand/HUD remain distinct. Dark hostile mascot shells still communicate Mask off; this removes the large black rule rectangles beneath them without hiding any rules.
 
-**Explicit user approval:** Check Runner Vitae (VIT) **immediately after every actual VIT reduction**, including direct PULP and PULP generated by SyN or VOID shortfall. Apply eligible PULP prevention first. If VIT reaches **0**, the run **immediately ends in defeat**; do not wait for the end of the damage component, card, ICE subroutine, mixed-damage effect, turn, or trigger queue.
+**Validation:** Godot 4.3 import and 357 rules checks pass; Friendly Lie 170 checks pass; all five Chrome screenshot stages pass, including actual legal/incompatible native drops and no payment on invalid drops. Refreshed ten full-screen PNGs and the download ZIP. Calculated text contrast: slate/enamel 11.64:1, muted text/enamel 6.25:1, muted text/broken chip 5.51:1, teal/enamel 7.06:1. No rule values changed. The five-step samples in the existing PR are updated in place.
 
-**Pending recovery cannot reverse defeat:** No already-queued trigger, later instruction, pending recovery/heal, or future action resolves after defeat, even if it could restore Vitae. A recovery effect that **fully resolved before** the lethal VIT reduction counts normally. A damage-suffered trigger does not interrupt its originating effect; it remains queued per RULE-014/015 and cannot rescue the Runner after lethal damage. This rule creates **no last-chance recovery exception**.
+**Interpretations to confirm:** enamel plaques stay clean even in Mask off, reinforcing the corporation's immaculate administrative cruelty. Pearl #EDF4F0, slate #20343B and teal #165B55 are working presentation colors. Final art/fidelity approval remains with the designer. PR #12 remains open targeting `codex/halcyon-playtest-stabilization`; merge is pending that approval.
 
-**Partial resolution is not rolled back:** Preserve all changes from instructions and components **already completed before defeat**, including spent prevention, mandatory discards, gained VOID counters, and earlier damage. **Cancel all remaining unresolved instructions, damage components, and queued triggered effects**. Do not roll back completed changes or continue resolving effects after defeat. This is a terminal game-state record, not permission to resume the run.
+## 2026-11-17 — CARDS-001: heavy type-specific 1950s slot cartridges (Codex)
 
-**Compatibility and priority:** Reaffirms **RULE-RT-002** (immediate defeat), **RULE-014/015** (deferred FIFO triggers), **RULE-127/128** (SyN shortfall and actual PULP suffered), and **RULE-129** (current fixed mixed-damage order **VOID → SyN → PULP**, with VOID's mandatory discard and **5 PULP per missing discard** enhancement). Each type's prevention remains separate, with overflow PULP consuming eligible PULP prevention. Defeat takes priority over queued recovery and over the instruction to complete the mixed-damage event before processing queued triggers. This clarification does not alter controller ordering of simultaneous triggers (RULE-011/012/013) or permit reactive Runner card plays (SOFT-011).
+**Designer request:** distinct templates for Scripts/other types, subtle common/uncommon/rare differences, vacuum tubes/transistors/exposed wiring/metal/resistors; cards should feel heavy with protruding parts and BW costs mostly outside the white interior. The designer said “Looks good” to the blank carrier art; integrated rules/layout remain for review. No merge authorization for this finished revision is inferred from that art feedback.
 
-**Example:** Runner has **6 VIT**, **0 cards** in hand, and **no prevention**. VOID 2 first grants **2 persistent VOID counters**, requires 2 discards, and generates **10 PULP** for the 2 missing cards. Upon lethal VIT loss, defeat is immediate. The completed VOID counters and other completed changes remain recorded; subsequent SyN or direct PULP components, later instructions, and queued recovery triggers never resolve.
+**Changed:** SCRIPT stamped steel/Bakelite fuse-and-resistor carrier; PROGRAM cast-aluminum/tube/transistor cassette; PROTOCOL celadon relay/terminal module. Paper labels and live rules sit on the chassis. BW mounts on the upper-right metal tab. Common is plain/single-notch, uncommon has two notches and a brass fitting, rare three notches and fine double-metal detail; full authored rarity labels remain. STARTER and BLOAT classifications remain. Three generated frames are prototype art; Bloatware retains its corporate treatment. Cards are 164×244 with component bounds extending 10 px sideways / 12 px vertically. A shallower hand fan, raised hand/rack spacing and padded choices protect the hardware; protrusions participate in hit-testing. Reward offers and inspection use the same carriers. No card definitions, rarity weights, costs or rules changed.
 
-**Status: LOCKED — explicitly approved 2026-11-11.**
+**Validation:** Godot 4.3 imports; 357 rules pass and 30-seed bot summaries match the pre-card baseline (GENERALIST/ECHO/RIOT/VECTOR clears 25/17/25/20, survivor VITAE 16.2/9.5/15.2/10.7). Nine UI scripts pass. Cartridge fixture: 612 checks / zero failures, including all 112 authored rule texts, the longest legal shared-tag compiled SCRIPT pair, actual rarity, illustration bounds and 6-/8-/16-card protrusion bounds. Existing native hand clicks, HOLD/READY RIG, reward, SCAN/CULL/ZEROED/TUMBLE and five-second reduced-motion response checks remain. Nine individual close-up PNGs plus six/eight-card encounter captures are in `docs/visual/fixtures/cards-001/` and the downloadable ZIP.
 
+**Review:** physical finish details and motif reuse are proposed art choices. Labels/costs remain live data; no gameplay is baked into textures. The revised PR #12 remains open against the shared game branch and awaits designer approval before merge. Audio/Windows export are outside this task. Asset provenance, guide, status and the shared HANDOFF are updated in place.
 
-## RULE-131 — Mandatory prevention consumption, immediate overflow, and detailed accounting (LOCKED, 2026-11-11)
 
-**Explicit user approval:** Eligible damage prevention is **automatic and mandatory**. At each actual damage application, the engine consumes applicable prevention immediately; the Runner cannot decline or withhold eligible prevention to save it for a later component or source. PULP, SyN, and VOID have **independent type-specific numerical pools** (DMG-002); only prevention eligible for the incoming damage type may be spent. The displayed pooled value is backed by source/duration accounting.
+## 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex)
 
-**Consumption order (RULE-004/005/006):** Within a type-specific pool, consume eligible contributions in the priority already established by RULE-004/005 (earliest expiration first), with the existing RULE-006 equal-expiration tie-breaker. RULE-131 creates **no new source priority**, no player-selected prevention withholding, and no cross-type spending. Record each source contribution consumed and its remaining value.
+**Commit tag:** `cards-001-lightfaces`.
 
-**Overflow timing and order:** Under the current RULE-129 fixed mixed-damage order **VOID → SyN → PULP**, complete each component before proceeding to the next. For unprevented VOID, apply its persistent counters and mandatory Runner-selected hand discards; each missing discard generates **5 ordinary PULP**. **Immediately resolve that overflow PULP within the VOID component**, automatically consuming then-eligible PULP prevention. Next, for unprevented SyN, perform mandatory Runner-selected discards; each missing discard generates **2 ordinary PULP**, likewise immediately resolved within the SyN component using the PULP pool remaining at that moment (RULE-126/127). Finally, apply any direct PULP component against the remaining PULP prevention. The Runner cannot defer or pool overflow PULP until the final direct PULP component. VOID and SyN prevention are applied before determining their respective unprevented damage and overflow. Source-neutral PULP prevention and suffered-only PULP triggers remain as locked by RULE-128.
+**Designer feedback:** black title backgrounds and dark beige card faces do not fit the chassis. Removed the opaque black title strip; dark titles now print directly on each inset face with a restrained separator. Generated edits preserve the three carriers and change only the blank face: near-white ivory instruction stock for SCRIPT, cool pearl instrument plate for PROGRAM, pale celadon enamel for PROTOCOL. Hardware, protrusions, outside BW tab, rarity details, authored metadata and rules are unchanged. The corporate Bloatware treatment remains separate.
 
-**Defeat and triggers:** After prevention, if an actual PULP application reduces Vitae (VIT) to zero, defeat is immediate (RULE-RT-002/RULE-130). Preserve completed changes, cancel unresolved damage components/instructions and pending triggers; no queued recovery can reverse defeat. Otherwise, triggers generated by damage, discards, or prevention are enqueued during resolution and resolve only after the containing mixed-damage effect completes, under RULE-014/015 and RULE-129. This rule does not authorize reactive Runner card plays during the Corporation turn (SOFT-011).
+**Validation:** 357 rules checks and 612 cartridge UI checks pass, including authored/compiled text fit and protruding bounds. Five Chrome stages pass; refreshed nine close-ups, six/eight-card captures and ten encounter review PNGs. The earlier dated whole entry was appended unchanged to the archive under LOG-001 to keep this live log below about 60 KB.
 
-**Mandatory UI and log accounting:** For each damage application, show the **damage source and type**, incoming amount, prevention consumed **broken down by contributing source and duration**, each type-specific pool's remaining amount, unprevented VOID/SyN, mandatory discards completed and shortfalls, **overflow PULP generated and immediately prevented**, **actual PULP suffered**, resulting VIT change, and persistent VOID counters gained. Preserve the step-by-step order in the action log; show when lethal defeat truncates further resolution. These are interface/reporting requirements, not new trigger events.
+**Review:** material tint and direct-print title treatment are proposed visual refinements. PR #12 is updated, not merged; designer approval of the integrated revision is still required under the existing merge instruction. No gameplay data, rarity odds or costs changed.
 
-**Canonical example:** One effect inflicts VOID 2 + SyN 2 + direct PULP 3 against a Runner with **10 VIT, 1 card in hand, 4 PULP prevention, and no VOID or SyN prevention**. VOID 2 adds two counters, discards the one card, and generates 5 PULP for the one missing discard; automatically spend 4 PULP prevention and suffer 1 PULP (VIT 9). SyN 2 has no cards to discard, generates 4 PULP and suffers 4 (VIT 5). Direct PULP 3 suffers 3 (VIT 2). All generated triggers queue until the effect completes unless defeat intervenes.
 
-**Status: LOCKED — explicitly approved 2026-11-11.**
+## 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex)
 
+**Commit tag:** `cards-001-board-palette`.
 
-## RULE-132 — Post-Corporation hand cleanup and defensive hand retention (LOCKED, 2026-11-11)
+**Designer choices:** A/C/D board colours selected for card faces; Whirlwind #3 selected as Bloatware prototype. The pale Bloatware plate was rejected (“No card should have a white background for the text”). Brown Bloatware was then rejected for matching SCRIPT; oxide-red D received “Perfect”. That confirms the D material choice; no approval of the entire PR/merge is inferred.
 
-**Explicit user approval:** Ordinary unplayed cards **remain in the Runner's hand through the Corporation Response Phase** and are available for mandatory damage discards. Move routine non-CACHED hand cleanup **after the entire Corporation response and its queued triggers**, before beginning the next Runner turn or transitioning to another ICE layer. This **supersedes only the pre-Corporation hand-discard timing** in RULE-RT-003/004/005; retain the established end-of-turn effects, BW forfeiture, and Corporation response sequencing.
+**Changed:** tobacco-brown SCRIPT, earthy olive PROGRAM, muted blue-green PROTOCOL; direct light printing on real board-style textures. BLOATWARE now has the Whirlwind-inspired protective U-handle, paired tubes, open cage/stacked boards and oxide-red phenolic face. Names, costs and rules are live controls. TRACER/SPAM remain BLOATWARE with unchanged unplayability/clear/TRACE rules; both now use the same component-aware bounds as other cartridges. Cached Bloatware retains full rules and CACHED marker; optional corporate flavour footer yields space when cached. No white card text panels remain. A–D review labels denote the four types; source-reference letters A/C/D remain palette provenance.
 
-**Revised turn order:** (1) Runner voluntarily selects END TURN (RULE-RT-001); (2) resolve Runner end-of-turn effects, including applicable BW effects and their triggered consequences; (3) **forfeit all remaining BW** (set available BW to zero); (4) enter and fully resolve Corporation Response, including ICE subroutines, damage and all applicable queued triggers; (5) if the run survives, perform **one post-response cleanup**, discarding all remaining non-CACHED cards from hand and resolving resulting discard triggers under RULE-014/015; (6) only after cleanup and its triggers finish, proceed to the next Runner turn, ICE PASS, or Node/ICE transition as applicable. **No routine hand discard takes place between steps 2 and 4.**
+**Validation:** Godot 4.3 import, 357 rules checks and 170 Friendly Lie UI checks pass. Extended cartridge fixture passes 625 checks and covers all authored/compiled texts, both Bloatware examples including cached text, component bounds and a mixed-type hand. Selected older log entry appended unchanged to the archive under LOG-001. Asset sources/guide/status/HANDOFF and PNGs are updated. No card definitions, rarity weights, costs or gameplay values changed. PR #12 remains open for integrated review before merge.
 
-**End-of-turn versus cleanup triggers:** Abilities explicitly triggered by **end of Runner turn** still trigger at the existing end-turn window, before BW forfeiture and Corporation response. Abilities triggered by **actually discarding a card** trigger when that discard occurs: damage-induced discards during Corporation response occur then and queue per RULE-014/015/129; routine cleanup discards occur after the response and their triggers resolve before transition. A cleanup discard is **not retroactively an end-of-turn discard** for effects requiring that timing. Resolve the post-response cleanup discard batch and its generated triggers before advancing; follow existing simultaneous-trigger priority and FIFO queue rules. This relocation may change whether discard-generated prevention can affect the current Corporation response; do not backdate it.
+## 2026-11-17 — CARDS-001: instrument amber accents (Codex)
 
-**CACHE reconciliation (SOFT-003 through SOFT-008):** CACHE continues to protect selected cards from **routine cleanup**, not from damage. **CACHED cards are eligible for mandatory VOID and SyN discards** under the normal Runner-selection rule (RULE-001), unless an effect expressly provides protection. If discarded by damage, they leave hand and cannot be retained by CACHE. CACHED cards remaining after response survive cleanup, persist across ICE layers within the same Node while supported, and remain **additive to normal DRAW** (SOFT-004/005/006). Loss of CACHE support (SOFT-007) causes affected cards to be treated as ordinary cards at the next applicable cleanup, not discarded immediately merely for losing retention; explicit corporate discard and CACHE-targeting effects (SOFT-008) still work. CACHE does not survive the Node boundary (SOFT-006).
+**Commit tag:** `cards-001-amber`. Replaced neon yellow-green with warm instrument amber (`#D6B675`) for the shared highlight and printed numeric highlights. The brass/gauge reference fits the selected brown, olive, teal and oxide-red boards. BW badges, selection accents and shared HUD controls inherit the same colour. No rules or costs changed.
 
-**ICE PASS:** If an ICE PASS or advancement occurs after a Corporation response, use the **single post-response cleanup** for the ordinary non-CACHED hand; do **not** run an additional routine PASS hand discard for those same cards. Finish cleanup-generated triggers before PASS transition. Other PASS-specific effects and triggers remain governed by their actual printed trigger conditions and existing rules; do not invent a second discard event. The next ICE layer retains the established fresh normal DRAW and additive surviving CACHE, subject to existing Node/ICE setup rules.
+**Interpretations to confirm:** exact amber hue is a visual proposal for designer review. PR #12 remains open.
 
-**DRAW remains unchanged:** No defensive DRAW is added during Corporation response. Preserve RULE-028/029/030/031 start-of-turn sequencing (refresh BW, resolve start-of-turn triggers, calculate DRAW, then normal DRAW) and current effective DRAW formula **max(1, 5 − VOID counters + applicable modifiers)**. Installed Hardware does not inherently reduce DRAW. CACHED cards are additive and do not reduce the number of new cards drawn; VOID counters gained during the response affect future DRAW only.
+**Validation:** 357 rules checks and 625 cartridge UI checks pass; updated four-type PNG rendered from live Godot controls.
 
-**Damage and defeat unchanged:** During Corporation response, retained ordinary and CACHED cards are available for mandatory damage discards. Apply the fixed mixed-damage order **VOID → SyN → PULP** (RULE-129). Each unprevented VOID grants its persistent counter and requires one discard; each missing discard generates **5 ordinary PULP**. Each unprevented SyN requires one discard; each missing discard generates **2 ordinary PULP** (RULE-126/127). Apply type-specific prevention automatically and immediately, including PULP prevention against overflow within the originating component (RULE-128/131). Damage-generated triggers remain queued until their containing effect completes (RULE-014/015/129). If Vitae reaches zero, immediate defeat (RULE-RT-002/RULE-130) cancels remaining instructions, pending triggers and post-response cleanup, preserving completed changes.
+## 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex)
 
-**Canonical example:** Runner starts with five cards, plays two, and ends the turn holding three. End-turn effects resolve; unused BW is forfeited; the hand is **not** discarded. Corporation inflicts VOID 2 + SyN 2, with no prevention: VOID adds two counters and discards two cards; SyN discards the final card and generates **2 PULP** for one missing discard, reducing Vitae by two if unprevented. No ordinary cards remain at post-response cleanup. At the next normal DRAW, absent other modifiers, the two VOID counters reduce DRAW from five to three.
+**Commit tag:** `cards-001-amber-glow`. Designer requested glowing amber text instead of highlighted backgrounds. Numeric rule text now uses warm amber ink (`#F2CD87`) with a faint translucent amber halo; removed rectangular fills. External BW badges use a dark instrument face and glowing amber numerals. Board textures stay visible.
 
-**Priority:** RULE-132 explicitly supersedes the earlier pre-response routine discard instruction of RULE-RT-003/004/005 and the related older end-turn discard timing in SOFT-003/007, while preserving the underlying CACHE, BW, trigger, damage, defeat, ICE PASS and DRAW mechanics as reconciled above. **Status: LOCKED, explicitly approved 2026-11-11.**
+**Interpretations to confirm:** restrained halo intensity and dark BW instrument face are proposed treatments. No gameplay changes. 625 cartridge UI checks pass; refreshed live-control comparison and card/hand PNGs. PR #12 remains open for review.
 
+## 2026-11-17 — CARDS-001: distinct board surface textures (Codex)
 
-## RULE-133 — Discard-trigger timing and nonretroactive prevention (LOCKED, 2026-11-11)
+**Commit tag:** `cards-001-board-textures`. Added subtle stationary procedural material grain behind card printing: pressed phenolic fibres for brown SCRIPT, woven laminate for olive PROGRAM, brushed resin for teal PROTOCOL, mottled Bakelite for oxide-red BLOATWARE. Inset feathered bounds protect chassis and contacts; text/illustrations draw above the texture. Existing palette and amber text glow retained.
 
-**Explicit user approval:** When VOID, SyN, or another effect causes one or more cards to be discarded, discard-triggered abilities generated by those discards **queue as they arise** and **do not interrupt the originating effect**. Finish the entire originating effect (including its remaining mixed-damage components in the fixed **VOID → SyN → PULP** order, immediate overflow PULP, and any other instructions) before resolving its queued triggers. Use existing RULE-011/012/013 simultaneous-trigger ordering and RULE-014/015 FIFO queue semantics; do not create a new priority or interrupt window.
-
-**Prevention gained by discard triggers:** Prevention from a triggered ability becomes available **only when that ability actually resolves**. It applies to eligible **subsequent damage** within its permitted duration, including a later ICE subroutine in the same Corporation response if applicable. It **never retroactively prevents** PULP, SyN, or VOID already resolved, and cannot be spent before it has been gained. Once gained, prevention follows DMG-002 and RULE-004/005/006 (type-specific pools and earliest-expiration consumption) and RULE-131 (automatic mandatory consumption). Damage overflow from missing VOID/SyN discards resolves immediately within its originating component under RULE-127/128/129/131, without waiting for discard-triggered prevention.
-
-**Post-Corporation cleanup:** Following RULE-132, after the Corporation response and its pending triggers have finished, discard all remaining non-CACHED cards in the **single post-response cleanup**. Abilities triggered by those actual cleanup discards queue during cleanup and **resolve before the next Runner turn, ICE PASS, or Node/ICE transition**. Do not defer them to the next turn and do not add a second ordinary PASS discard. These triggers cannot retroactively change damage or prevention from the already-completed Corporation response. End-of-turn triggered abilities retain their earlier end-of-turn window; cleanup discards do not retroactively count as discards during that window.
-
-**CACHE:** CACHED cards are exempt from routine cleanup but remain eligible for mandatory VOID/SyN damage discards unless explicitly protected (RULE-132 and SOFT-003–008). Discarding a CACHED card by damage generates applicable discard triggers under the same deferred timing; CACHE does not create an interrupt or retroactive prevention exception.
-
-**Defeat and cancellation:** Check VIT immediately after each actual VIT reduction following prevention. At zero VIT, defeat is immediate and unresolved instructions and pending triggers are cancelled, with completed state changes preserved (RULE-RT-002/RULE-130). A queued discard-triggered prevention or recovery effect cannot rescue the Runner after fatal damage. SOFT-011 still prohibits reactive Runner card plays during Corporation turn; already-established triggered abilities may resolve when their queued turn arrives.
-
-**Canonical example:** Runner has 10 VIT, three cards in hand, no prevention, and installed Software reading *“Whenever you discard a card, gain 2 PULP prevention.”* One Corporation subroutine inflicts **SyN 2 + direct PULP 4**. SyN discards two Runner-chosen cards, queuing two prevention-gain triggers; the triggers do **not** resolve yet. Direct PULP 4 is unprevented, reducing VIT to **6**. Once the subroutine's full effect finishes, the two queued triggers resolve under FIFO and grant **4 PULP prevention** in total (subject to applicable ability limits and source validity). That prevention may protect against a later subroutine but cannot prevent the earlier 4 PULP. If the Runner had been defeated during the subroutine, the queued triggers would instead be cancelled.
-
-**Priority and reconciliation:** RULE-133 **clarifies, rather than overrides**, RULE-014/015 deferred-trigger resolution; RULE-127/128/129/130/131 damage ordering, prevention, overflow, and fatal damage; RULE-132 post-response cleanup and ICE PASS; and SOFT-003–008 CACHE. It introduces **no retroactive protection, extra DRAW, out-of-turn Runner card-play window, or new discard event**. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-134 — Discard event granularity, trigger frequency, and separate overflow PULP events (LOCKED, 2026-11-11)
-
-**Approved design:** Use the existing instruction-level event model and deferred trigger queue; no new timing or interrupt system. Each **discrete discard instruction or damage component** produces **one grouped discard event** containing a separately recorded occurrence for **each card actually discarded**. Discard zero cards means zero actual card-discard occurrences; do not generate an actual-discard trigger for a shortfall. Distinct instructions are distinct groups even within one card effect. For a mixed damage effect, VOID and SyN are distinct damage components and thus distinct discard groups, even when one ICE subroutine generates both. One ordinary post-Corporation cleanup (RULE-132) is one grouped event containing its individual actual discards, and ICE PASS does not add a second routine cleanup group.
-
-**Trigger wording controls counting:** “Whenever you discard **a card**” recognizes each individual actual card discard (three cards = three qualifying occurrences, subject to existing once-per-turn/activation limits). “Whenever you discard **one or more cards**” recognizes each grouped discard event with at least one actual discard (three cards in one instruction = one qualifying group). “For each card discarded” within a single group uses the group's actual card count as the magnitude of the relevant instruction, not separate events unless its printed trigger explicitly says per card. “The first time ... each turn” retains its existing per-turn allowance; a multi-card discard does not reset or bypass it. Card-specific qualifiers and source validity still apply. Preserve RULE-054/055, RULE-074–079, RULE-105/106 aggregate event identity, RULE-107 actual-vs-attempted magnitude, and existing per-turn limits.
-
-**Separate overflow PULP events (explicit user decision):** For **each missing mandatory VOID discard**, generate a **separate ordinary PULP 5 damage event**; for **each missing mandatory SyN discard**, generate a **separate ordinary PULP 2 damage event**. Never aggregate multiple missing discards into one PULP event for damage-event trigger counting, even when they arise from the same damage component or ICE subroutine. Resolve each generated PULP event **immediately in sequence inside its originating VOID or SyN component**, applying available mandatory PULP prevention afresh against that event under RULE-128/131 and recording actual PULP suffered separately. Triggered effects recognizing a PULP damage event or actual PULP suffered count each qualifying separate event under their exact wording and applicable limits, but **remain queued** until the entire originating effect completes (RULE-014/015/129/133); they cannot create retroactive prevention or interrupt the next overflow event. After resolving all overflow events in VOID, proceed to SyN, then direct PULP, under RULE-129's fixed **VOID → SyN → PULP** order. A direct PULP component remains its own damage event under existing instruction-level rules. Check Vitae after every actual reduction: at VIT zero, RULE-130 immediately ends the run, cancels further overflow events, remaining instructions and queued triggers, preserving completed changes.
-
-**Sequencing and bookkeeping:** For each component, first apply type-specific VOID/SyN prevention; apply each unprevented point's counter/discard consequences as established in RULE-127/129/131, recording actual card discards in the component's grouped discard event and resolving any missing-discard overflow PULP immediately as individual damage events. Preserve mandatory earliest-expiration prevention consumption (RULE-004/005/006/131). Each separate overflow PULP event records its source, originating damage type, amount (5 or 2), PULP prevention consumed by source/duration, actual VIT loss, and associated pending triggers. Discard-trigger occurrences record each card, grouping identifier, source, and reason. Trigger ordering for simultaneously recognized occurrences follows existing controller-order and FIFO rules; no new interrupt window is created.
-
-**Examples:** (A) “Discard 3 cards” actually discards three: one grouped discard event, three per-card discard occurrences; a “whenever you discard a card” ability can queue three triggers, while “whenever you discard one or more cards” queues one. (B) VOID 2 + SyN 2 with four cards in hand: two grouped discard events (VOID discards two, SyN discards two), four individual card discards; per-card trigger count four, per-group trigger count two, before limits. (C) VOID 3 against an empty hand, with no prevention: gain three VOID counters; the three missing discards generate **three separate PULP 5 events**, in sequence, each with independent prevention and trigger-event accounting, stopping immediately on lethal VIT loss. (D) SyN 2 against an empty hand generates **two separate PULP 2 events**, not one PULP 4 event; aggregate VIT loss can equal four if unprevented and nonlethal, but event count remains two.
-
-**Reconciliation and priority:** This rule clarifies RULE-010 instruction boundaries, RULE-014/015 deferred FIFO triggers, RULE-105/106 grouping, RULE-126–131 damage/overflow and prevention, RULE-132 single cleanup and CACHE timing, and RULE-133 deferred discard triggers and nonretroactive prevention. **It explicitly specifies separate overflow PULP event granularity**, superseding any inference that all shortfall PULP in one component forms a single event; numeric PULP amounts and existing prevention mechanics are unchanged. No reactive Runner card plays or extra DRAW are created. **Status: LOCKED, approved 2026-11-11.**
-
-
-## RULE-135 — Damage-event identity, trigger eligibility, and prevention accounting (LOCKED, 2026-11-11)
-
-**Explicit approval:** Each separate PULP damage application is an independent damage event for trigger eligibility and accounting, including each individual overflow PULP 5 from a missing VOID discard and each individual overflow PULP 2 from a missing SyN discard (RULE-134). Do not merge them into one event merely because they arise from the same ICE subroutine, damage component, or effect. Distinguish **damage applied** (an attempted PULP application, even when fully prevented), **damage prevented** (amount actually absorbed by eligible PULP prevention), and **damage suffered** (unprevented PULP actually reducing Vitae). Abilities recognize only the event their printed conditions name; do not conflate these categories.
-
-**PULP-suffered eligibility:** “Whenever you suffer PULP damage” triggers only on a PULP event that **actually reduces VIT**, and once per qualifying event unless printed wording or an existing activation limit says otherwise. A fully prevented PULP event does **not** qualify as PULP suffered. Event magnitude for “PULP suffered” equals actual VIT reduction, not incoming PULP; prevention amount equals actual prevention consumed, not incoming PULP or unused pool capacity. Preserve RULE-107–109 actual-versus-attempted magnitude and threshold handling, as well as existing per-turn and per-source trigger limits.
-
-**Prevention-event eligibility:** “Whenever you prevent damage” and comparable prevention-consumption triggers recognize only **actual positive prevention consumed**; a zero-consumption event does not qualify. Count prevention separately for each damage application and by the applicable prevention source/duration contribution under RULE-004/005/006 and RULE-131; do not invent a gain or consumption when none occurred. If one damage application consumes several prevention sources, apply existing RULE-074–079, RULE-105/106 and exact card wording to determine per-event versus per-source qualification; this rule does not automatically multiply a single event into one trigger per contributing source. Type-specific VOID and SyN prevention remain separate from PULP prevention; their consumption is accounted for when the respective type is applied.
-
-**Timing:** All damage-, discard-, prevention-, and related triggers are queued as generated, following existing simultaneous-controller ordering and FIFO rules (RULE-011–015). They **do not interrupt their originating effect**, including between separate overflow PULP events within one VOID/SyN component. Resolve the entire originating effect before its queued triggers. Prevention granted by a queued trigger can apply only to **later** eligible damage after it actually resolves, never retroactively or to an earlier overflow event (RULE-133). Resolve each overflow event immediately within its originating component, with mandatory PULP prevention consumed under RULE-131, and preserve fixed mixed-damage order **VOID → SyN → direct PULP** (RULE-129). If VIT reaches zero, defeat is immediate; cancel unresolved damage events, instructions, and queued triggers without reversing completed changes (RULE-130).
-
-**Worked example:** Runner begins at **20 VIT**, with no hand cards, **6 PULP prevention**, and no VOID prevention. Corporation inflicts VOID 3: gain 3 VOID counters and encounter 3 missing mandatory discards. Generate and resolve **three distinct PULP 5 events**, in order. Event 1: prevent 5, suffer 0, VIT 20. Event 2: prevent 1, suffer 4, VIT 16. Event 3: prevent 0, suffer 5, VIT 11. Thus there are **3 PULP applications**, **2 PULP-suffered events**, **2 events with positive PULP prevention**, **6 total PULP prevented**, and **9 total PULP suffered**. A “whenever you suffer PULP damage” ability recognizes two events, subject to its limits; its triggers wait until the full originating VOID effect completes. If the Runner is defeated during any event, remaining events and queued triggers are cancelled.
-
-**Reconciliation and priority:** RULE-135 clarifies, without overriding, RULE-004–006 mandatory source/expiration consumption, RULE-014/015 FIFO deferred triggers, RULE-074–079 prevention-event granularity, RULE-105–109 aggregate events and actual magnitudes, RULE-126–131 damage/overflow and fatal defeat, RULE-132 post-Corporation cleanup, RULE-133 nonretroactive trigger timing, and RULE-134 separate overflow PULP event identity. No new interrupt window, defensive DRAW, retroactive prevention, or extra routine discard is created. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-136 — Damage resolution boundaries and trigger queue checkpoints (LOCKED, 2026-11-11)
-
-**Explicit approval:** Each **independently resolving ICE subroutine** is a distinct effect boundary. Resolve the subroutine's full effect to completion before processing triggers generated by it. This includes all its discrete instructions, mandatory type-specific prevention, VOID counters and required discards, SyN discards, separate overflow PULP events for each missing discard (RULE-134), direct PULP, and resulting VIT changes, in the fixed **VOID → SyN → PULP** component order where mixed damage applies (RULE-129). Do **not** insert a trigger-resolution checkpoint between individual damage components, overflow PULP events, or instructions inside that still-resolving effect. The same principle applies to other independently resolving effects: finish the current effect before its generated triggers.
-
-**Mandatory checkpoint between effects:** After the current independently resolving effect completes, **fully drain all eligible queued triggers** before beginning the next independent ICE subroutine or other effect. Use the existing simultaneous-trigger/controller ordering, FIFO queue, and complete-one-effect-before-generated-triggers semantics (RULE-010–015). A trigger that generates further triggers places them on the existing queue; continue resolving eligible chained triggers until the queue is empty, subject to RULE-016–019 infinite-loop and recursion safeguards and existing trigger eligibility, per-turn activation limits, source-removal cancellation, and explicit exceptions. Do not resolve only the first generation or carry eligible chained triggers into the next effect. An individual queued triggered ability is itself resolved completely before its newly generated triggers are processed under the established queue discipline.
-
-**Updated state between subroutines:** At the next subroutine boundary, apply the game state after the preceding effect and its drained triggers, including new prevention pools, changed VIT, resource changes, discarded cards, VOID counters, installed/removed sources, and temporary effect durations. Prevention gained when a trigger actually resolves may protect against a **later** subroutine if eligible and still active; it **cannot** prevent damage from the completed originating subroutine or any earlier overflow PULP event (RULE-133/135). No new reactive Runner card-play window or out-of-turn DRAW is created (SOFT-011; RULE-132).
-
-**Corporation response and cleanup:** Finish **all** Corporation response effects and their full trigger checkpoints before performing the **single** post-Corporation hand cleanup required by RULE-132. Routine cleanup discards all remaining non-CACHED cards in one grouped discard event (RULE-134), while eligible CACHED cards survive routine cleanup but remain eligible for mandatory VOID/SyN damage discards. Cleanup-generated triggers resolve and drain completely before the next Runner turn, ICE PASS, or Node/ICE transition (RULE-132/133). Never start cleanup with eligible Corporation-generated triggers pending, and never create a second routine ICE PASS cleanup event.
-
-**Immediate defeat overrides checkpoints:** Check VIT after each actual reduction, including each separately resolved overflow PULP event. At VIT 0, defeat immediately ends the run (RULE-RT-002/RULE-130); preserve completed changes but cancel remaining instructions, unresolved damage events, queued triggers and post-response cleanup. No pending heal, recovery, or prevention trigger can rescue the defeated Runner. Mandatory prevention consumption, source expiration priorities, and applied/prevented/suffered event distinctions remain RULE-004–006/131/135.
-
-**Canonical example:** Runner begins at **12 VIT**, with no PULP prevention, and has installed Software: *“Whenever you suffer PULP damage, gain 3 PULP prevention.”* Corporation resolves two independent unbroken ICE subroutines. Subroutine 1 inflicts **PULP 4**; Runner suffers 4, dropping to **8 VIT**, and queues the Software trigger. Subroutine 1 finishes; at its checkpoint the queued trigger resolves, granting **3 PULP prevention**. Subroutine 2 inflicts **PULP 5**; mandatory prevention absorbs 3, Runner suffers 2 and drops to **6 VIT**. The second suffered-damage trigger queues for the checkpoint **after subroutine 2**, not during it. If both PULP instructions were within one independently resolving effect, no checkpoint would occur between them and the new prevention would not apply until afterward.
-
-**Compatibility and priority:** RULE-136 establishes explicit checkpoints **without changing** RULE-010 printed instruction order, RULE-011–015 trigger ordering/FIFO/complete-effect semantics, RULE-016–019 loop safeguards, RULE-126–131 damage types, prevention, overflow and immediate defeat, RULE-132 post-response cleanup and DRAW/CACHE timing, RULE-133 nonretroactive prevention, RULE-134 grouped discard events and separate overflow PULP event identity, or RULE-135 actual-versus-attempted event eligibility. A subroutine is an effect boundary only when it is independently resolving; explicit text defining a single combined effect or existing exceptions retains its established effect boundary. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-137 — Routine post-Corporation cleanup is non-triggering housekeeping (LOCKED, 2026-11-11)
-
-**Explicit approval and precedence:** Routine post-Corporation hand cleanup is a **non-triggering housekeeping operation outside all effect-triggering windows**. Once the entire Corporation response and **all eligible queued/chained triggers** have finished (RULE-132/136), perform the single routine cleanup: discard every remaining **non-CACHED** card from the Runner's hand. These routine cleanup discards **do not generate, queue, or resolve discard-related triggered abilities or any other effect solely because cleanup discarded cards**. They cannot activate installed Software, card abilities, per-card/per-group discard triggers, prevention gains, DRAW, resource gains, or chained effects based on those housekeeping discards. Cleanup is not an effect-triggering checkpoint; once the cleanup action and its bookkeeping finish, advance directly to the next established phase or ICE/Node transition. Do not repeat cleanup or create an additional ICE PASS cleanup.
-
-**Normal effect-caused discards unchanged:** This exception applies **only to routine cleanup discards**. Discards caused by VOID or SyN damage, ICE subroutines, Corporation instructions, Runner card abilities, or other resolving effects remain ordinary effect-caused discards, with their existing individual occurrences, grouped event granularity, eligibility, and deferred FIFO trigger timing under RULE-014/015/127/129/133/134/135/136. A discard that happens **during Corporation response** is not routine cleanup merely because it occurs near the end of the response. All pending effect-generated triggers drain before housekeeping cleanup begins. Explicit card effects are not silently reclassified as housekeeping cleanup.
-
-**CACHE, logging, and accounting:** CACHED cards survive routine cleanup under SOFT-003–008 and RULE-132, unless some separate effect explicitly discards them. Routine cleanup discards are still real cards moved out of hand and **must be recorded** in the game log with card identities, number discarded, phase, and reason marked **ROUTINE CLEANUP / NON-TRIGGERING**. They are not qualifying discard occurrences for trigger activation or trigger-frequency accounting, despite being recorded as a single housekeeping cleanup batch. Do not count them toward effects that ask whether a card was discarded via a triggering event. No defensive DRAW or other benefit is created by cleanup itself.
-
-**Example:** Runner finishes Corporation response with three non-CACHED cards and installed Software reading *“Whenever you discard a card, gain 2 PULP prevention.”* After all response-generated triggers have drained, routine cleanup discards the three cards and logs the batch. **Zero Software triggers** are generated and **zero PULP prevention** is gained from those housekeeping discards. The same Software still recognizes qualifying cards discarded earlier by VOID/SyN or another effect, subject to its normal limits.
-
-**Explicit supersession and reconciliation:** RULE-137 **supersedes only conflicting statements that routine post-Corporation cleanup discards generate or resolve triggers** in RULE-132 (cleanup-generated triggers), RULE-133 (cleanup discard-trigger timing and cleanup-generated effects), RULE-134 (any inference that routine cleanup's grouped discard event generates per-card/per-group discard triggers), and RULE-136 (cleanup-generated/chained trigger checkpoint). All other provisions of RULE-132–136 remain LOCKED and operative: hand retention through Corporation response, full response trigger draining, single post-response cleanup, CACHE survival, separate overflow PULP events, prevention accounting, FIFO effect boundaries, and immediate defeat. Under RULE-010–019, this is a specific housekeeping exception to ordinary effect-trigger eligibility, **not** a new trigger window, queue behavior, or loop rule. Existing rules governing genuine effect-caused discards continue unchanged. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-138 — Discard classification by originating cause and phase-boundary trigger completion (LOCKED, 2026-11-11)
-
-**Explicit approval:** Classify each discard by its **originating cause**, not by how close it occurs to a phase boundary, Corporation response ending, ICE PASS, Node transition, or routine cleanup. A discard expressly caused by an ICE subroutine, Corporation instruction, VOID/SyN damage, Runner card ability, queued triggered ability, or other independently resolving game effect is an **effect-caused discard**, including when it happens immediately before routine cleanup. Such actual discards retain their normal individual-card occurrences and grouped-event identities (RULE-134), eligible triggers and activation limits, and deferred FIFO resolution (RULE-010–015/133–136). Do not silently reclassify effect-caused discards as housekeeping merely because they happen late in the Corporation response.
-
-**Non-triggering cleanup exception:** A discard is **routine housekeeping cleanup** only when it is performed by the single mandatory post-Corporation hand cleanup operation itself. Under RULE-137, those cleanup discards are logged but do **not** generate, queue, or resolve triggered effects based on being discarded. All remaining non-CACHED cards are discarded in that single housekeeping batch; CACHED cards retain their existing exemption. This exception does not suppress triggers from an effect that actually resolves before cleanup or otherwise change damage-caused discards.
-
-**Strict transition checkpoint:** Complete the entire final Corporation effect, then **fully drain all eligible effect-generated triggers and any chained triggers** under RULE-014–019 and RULE-136 **before** routine cleanup begins. If an effect-generated discard causes a trigger that draws or otherwise adds non-CACHED cards to hand, those cards are present when routine cleanup starts and are discarded as part of its non-triggering housekeeping batch unless separately CACHED or otherwise explicitly protected. No eligible Corporation-generated trigger carries into or across cleanup. After the non-triggering cleanup and its bookkeeping, proceed directly to the established next phase, ICE PASS, or Node transition; no additional routine cleanup or cleanup trigger checkpoint is created.
-
-**Logging and auditability:** Record **effect-caused** and **housekeeping** discards as distinct cause classifications. For effect-caused discards, log the originating effect/source, phase, individual card identities and count, grouped discard event identifier, actual qualifying occurrences, and queued/resolved/cancelled triggers as appropriate. For housekeeping discards, log the phase, card identities and count, reason **ROUTINE CLEANUP / NON-TRIGGERING**, and zero generated triggers. Keep the physical discard record even though housekeeping discards are ineligible for discard-trigger frequency or event counting under RULE-137. Preserve existing source eligibility, card-text limits, and mandatory event bookkeeping; do not invent a new interrupt or reaction window.
-
-**Canonical example:** At the last independent Corporation ICE subroutine, the Runner has three non-CACHED cards and installed Software: *“Whenever you discard a card, gain 1 CRED.”* The subroutine reads *“Discard 2 cards from your hand. Then gain 2 PULP prevention.”* Two actual effect-caused discards form one grouped discard event and queue two per-card triggers (subject to limits). The subroutine finishes its printed instructions and grants 2 PULP prevention; only at the checkpoint do the two queued triggers resolve, gaining 2 CRED. Routine cleanup then discards the remaining non-CACHED card, records it as **ROUTINE CLEANUP / NON-TRIGGERING**, and generates **no CRED trigger**. If the checkpoint instead draws two new non-CACHED cards, they are also discarded in the same non-triggering cleanup batch.
-
-**Reconciliation and priority:** RULE-138 reinforces RULE-010 printed instruction ordering; RULE-011–015 complete-effect/FIFO trigger ordering; RULE-016–019 loop safeguards; RULE-132 retained defensive hand and single post-response cleanup; RULE-133 nonretroactive effect-generated discard triggers; RULE-134 per-card and grouped event identity; RULE-135 actual damage/prevention trigger eligibility; RULE-136 effect boundaries and complete trigger checkpoints; and RULE-137's explicit non-triggering housekeeping exception. **RULE-137 remains controlling for cleanup-generated non-trigger eligibility.** This rule clarifies classification and logging without restoring superseded cleanup-trigger language in RULE-132–136 or altering established VOID/SyN/PULP damage, CACHE, prevention, DRAW, or immediate defeat mechanics. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-139 — Source-removal eligibility during trigger checkpoints (LOCKED, 2026-11-11)
-
-**Explicit approval:** If an installed Software source leaves play **before its queued triggered ability begins resolving**, cancel that source's unresolved queued triggers immediately under RULE-081/082/085, regardless of their earlier event-time qualification. **Reinstalling the same physical Software card does not revive those cancelled triggers** and does not reset previously consumed activation allowances under RULE-066/089. A new installed instance is not a retroactive continuation of the departed source. This rule creates no exception to existing event-time eligibility, trigger frequency limits, or explicit source-validity requirements.
-
-**Already-resolving abilities:** Once a triggered ability **has begun resolving**, removal of its Software source does **not** interrupt or cancel that currently resolving ability. Finish its remaining instructions in the established order under RULE-010/014 and RULE-083/086, while enforcing all explicit conditions, costs, required installed status, and other legal requirements at their specified check times (RULE-003/088). Source removal ends source-dependent continuous effects as already established (RULE-090). Events legally generated by the remaining instructions may still qualify other eligible Software for triggers (RULE-084). Other queued, not-yet-resolving triggers from the removed source are cancelled.
-
-**Checkpoint continuation and FIFO:** During RULE-136's mandatory between-effect checkpoint, cancelling a removed source's pending triggers **does not end the checkpoint** or cancel unrelated triggers from other valid sources. Continue processing the existing FIFO queue, skipping/cancelling ineligible entries, resolving each eligible ability fully before processing triggers it generates, and fully draining eligible chained triggers before advancing to the next independently resolving ICE subroutine, other effect, or phase boundary. Retain simultaneous-trigger ordering (RULE-011–013), FIFO (RULE-014/015), and deterministic infinite-loop detection/termination with preservation of completed effects and unrelated queued triggers (RULE-016–019). The rule creates no reactive Runner card-play window or new trigger timing window.
-
-**Corporation response and housekeeping:** The same source-removal checks apply to Corporation-response effect-generated trigger checkpoints. Complete all eligible effect-generated triggers before post-Corporation routine cleanup (RULE-136/138). Routine cleanup discards remain **non-triggering housekeeping** outside effect-triggering windows under RULE-137; RULE-139 does not restore any cleanup-generated triggers or add a cleanup checkpoint. Classify and log effect-caused versus housekeeping discards by originating cause under RULE-138.
-
-**Example:** Two installed Software cards, A and B, each qualify from a PULP-suffered event. Their triggers queue in established order. A's trigger begins resolving; a legal effect during its instructions removes A. A's **currently resolving** ability finishes subject to its remaining conditions/costs, but all **other unresolved queued triggers from A** are cancelled. B's unrelated eligible queued trigger remains and resolves in FIFO order; any further eligible chained triggers are fully drained before the next independent subroutine. Reinstalling A later cannot revive its cancelled entries or reset protected usage limits. If A instead leaves play **before its trigger begins**, that pending A trigger is cancelled.
-
-**Reconciliation and priority:** RULE-139 clarifies the interaction of RULE-014/015 completed-effect and FIFO semantics, RULE-016–019 loop safeguards, RULE-066 activation persistence, RULE-081/082/085 queued-source cancellation, RULE-083/084/086 already-resolving effects and generated events, RULE-088/089/090 explicit installed conditions, new installed instances, and continuous effects, and RULE-136–138 checkpoints, non-triggering housekeeping cleanup, and cause-based discard classification. It **does not override** those locked rules; existing card-specific conditions, costs, source identity, timing, and fatal defeat cancellation (RULE-130) remain controlling. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-140 — Historical trigger-event snapshots and current-state resolution checks (LOCKED, 2026-11-11)
-
-**Explicit approval — historical event facts:** When an event occurs, determine which triggered abilities qualify from that event and the applicable game state **at event time**. Preserve an immutable historical record for each queued trigger: originating event identity/type and source, actual qualifying magnitude (not an attempted or nominal amount), affected card/object identities and relevant event-time facts, trigger source/installed-instance identity, and applicable event-time thresholds or limitations. Subsequent changes in VIT, DRAW, resources, prevention, hand, installed Software, or other state **do not retroactively change the original event, its magnitude, or whether the event qualified**. Event grouping and actual-versus-attempted magnitude continue to follow RULE-105–109 and RULE-134/135, including distinct damage and overflow PULP events and individual discard occurrences.
-
-**Explicit conditions and current-state instructions:** Historical qualification **does not freeze the entire future game state**. At the time a queued triggered ability begins resolving, check source validity and any expressly applicable resolution-time conditions, costs, required installed status, activation limits, or other prerequisites against the **then-current** game state. Evaluate later instruction-specific requirements at their specified instruction times. If a discrete instruction computes a variable numeric value such as DRAW or Trace, take the **instruction-start snapshot** required by RULE-098–104, not a queue-entry or event-time snapshot, unless explicit card text or a more-specific rule says otherwise. Preserve any expressly historical value (e.g., “equal to the PULP damage you suffered in that event”) from the original event record; do not recalculate it from current VIT or prevention. Once an instruction starts, keep its applicable snapshot fixed for that instruction. For “for each” instructions, preserve the instruction-start object set and numeric snapshot with existing eligibility protections (RULE-103/104). Continuous effects still update under RULE-090–095; previously completed draws are not retroactively changed (RULE-096/097).
-
-**Previously qualified triggers and cancellation:** An event-qualified trigger remains historically qualified even if the current game state later changes; **mere state change does not cancel it**. Nevertheless, a pending trigger is cancelled if its Software source leaves play before resolution begins under RULE-081/082/085/139; reinstalling the card does not revive cancelled triggers or reset protected activation allowances (RULE-066/089/139). Explicit conditions and costs may cause a previously qualified ability or instruction to fail or be only partially fulfilled under RULE-002/003/088, without rewriting the event history. Once a valid ability begins resolving, its source leaving play does not cancel its already-resolving instructions, subject to explicit requirements (RULE-083/084/086–088/139). At VIT 0, immediate defeat cancels unresolved instructions and queued triggers under RULE-130; the event snapshot does not protect them from defeat.
-
-**Ordering and checkpoints:** Resolve the current independently resolving effect fully before any generated triggers, then process qualified and still-eligible triggers in established simultaneous/controller order and FIFO (RULE-010–015/136). Continue fully draining eligible chained triggers before the next independent effect, subject to RULE-016–019 loop safeguards; source removal only cancels that source's unresolved entries, not unrelated eligible entries (RULE-139). Trigger snapshots do not create an interrupt, reactive Runner play, or new checkpoint. Before post-Corporation routine cleanup, drain all effect-generated triggers (RULE-136/138); cleanup discards are non-triggering housekeeping outside effect-triggering windows (RULE-137), classified and logged separately (RULE-138).
-
-**Canonical example:** Runner at 10 VIT suffers an unprevented **PULP 3** event, reaching 7 VIT. Software A reads “Whenever you suffer PULP damage, gain 2 PULP prevention.” Software B reads “Whenever you suffer PULP damage, if your VIT is 10 or less **when this resolves**, gain 1 CRED.” Both qualify at event time and enter the FIFO queue with the historical **PULP 3 suffered** event recorded. A resolves first, gaining 2 prevention; this cannot retroactively reduce the original PULP 3. When B begins resolving, check its explicitly resolution-time VIT threshold against **current** VIT: at 7 it gains 1 CRED; if an intervening legal effect instead raised VIT above 10, that condition fails without undoing B's historical event qualification. If B's source left play before B began, its pending trigger would instead be cancelled under RULE-139. A queued “Draw cards equal to your DRAW” instruction similarly uses current DRAW **when that instruction begins**, not DRAW from the triggering event (RULE-098–101).
-
-**Reconciliation and precedence:** This rule clarifies RULE-010–019 (printed order, simultaneous/controller order, FIFO, complete-effect boundaries, chained triggers, loop safeguards); RULE-081–095 (pending versus resolving source validity, instance identity, explicit conditions, continuous effects); RULE-096–104 (DRAW and variable-value instruction-start snapshots and eligible object sets); RULE-105–109 (aggregate event identity, actual magnitude, threshold qualification); and RULE-134–139 (discard/damage event identity, deferred trigger checkpoints, housekeeping exception, cause-based logging, and source removal). It **does not override** more-specific card text, source-removal cancellation, explicit conditions/costs, existing event granularity, prevention timing, mandatory cleanup, or immediate defeat. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-141 — Target selection, historical object identity, and invalid-target fulfillment (LOCKED, 2026-11-11)
-
-**Explicit approval — instruction-time target selection:** Unless explicit card text or a more-specific locked rule directs otherwise, select the target(s) for a queued triggered ability **when each relevant targeting instruction begins resolving**, **not** when the triggering event occurs or the ability enters the FIFO queue. Determine the eligible target set using the **current game state** at that instruction's start. A newly installed or newly eligible object may be chosen if it meets all current requirements; an object that has left play or become ineligible cannot be chosen merely because it was available at queue entry. Preserve the established RULE-001 authority of the affected player/target to choose how to comply when applicable; this rule does not silently transfer choice to the trigger controller. Respect printed instruction order (RULE-010) and explicit targeting restrictions.
-
-**Historical references are fixed:** If an ability refers to **“that card,” “that Software,” “the card discarded,”** or another object identified by the original triggering event, preserve that object's **historical identity** in the immutable RULE-140 event snapshot. Do not substitute another object automatically if the original moves zones, leaves play, changes status, or becomes unavailable. An ability may affect that historical object only when its instructions and applicable zone, identity, cost, and eligibility requirements legally permit it at resolution time. Historical identity does not guarantee continued target eligibility, return rights, or presence in any particular zone. If card text expressly permits a new or replacement selection, follow that text.
-
-**Invalid targets, costs, and partial fulfillment:** When a required target is missing or ineligible at its instruction's applicable check time, apply RULE-002's **fulfill-as-much-as-possible** and independent-instruction principles, together with RULE-003's distinction between instructions, costs, and conditional effects. Do not automatically cancel an entire already-qualified ability solely because one target or one instruction cannot be fulfilled; continue independent legal instructions in printed order, unless explicit conditions, costs, or more-specific text require otherwise. Do not waive a mandatory cost, fabricate a target, retarget a historical reference, or grant a conditional reward whose required condition fails. If the trigger source leaves play before resolution, cancel its pending triggers under RULE-081–085/139; if already resolving, finish as legally possible under RULE-083–088/139. Previously qualified event-time trigger eligibility remains historical under RULE-140, subject to these validity checks.
-
-**Separate instructions versus one “for each” instruction:** Each **separate targeting instruction** selects eligible targets independently at its own instruction start, unless an earlier instruction explicitly fixes an object that later instructions refer back to. This does **not** alter RULE-104: one discrete “for each” instruction snapshots its eligible processing set **once at that instruction's start**, with existing later-condition, cost, and installed-status protections; do not dynamically add objects during that same instruction. Instruction-start variable numeric snapshots remain RULE-098–103, and separate instructions can use changed current state. Historical event snapshots (RULE-140) and instruction-start target/object-set snapshots are distinct concepts.
-
-**Queue and phase compatibility:** Trigger qualification, controller/simultaneous ordering, FIFO queue discipline, full effect boundaries, and chained-trigger checkpoints remain RULE-010–019/136. Target selection does not create a new interruption or reactive Runner card-play window. Source-removal and continuous-effect behavior remain RULE-081–095/139. Effect-generated triggers fully drain before routine post-Corporation cleanup (RULE-136/138); housekeeping cleanup remains non-triggering (RULE-137), with cause-based discard logging (RULE-138). Immediate defeat still cancels unresolved effects/triggers under RULE-130.
-
-**Canonical example:** Runner has Software A, B, and C installed. Two independently eligible queued triggered abilities will resolve in FIFO order. The first instructs removal of an installed Software card, and the applicable chooser removes C. The second reads “Choose an installed Software card. Grant it +2 strength until end of turn.” **Assuming the second trigger's source remains valid**, when its targeting instruction begins only A and B remain eligible; C is not a legal selection. If instead the second ability says “Grant **that discarded Software card** +2 strength,” its event-linked historical card identity remains fixed and no different Software may be substituted; whether the instruction can legally affect the original depends on current zone and explicit card requirements. If the instruction is impossible, independent remaining instructions still resolve to the extent permitted by RULE-002/003.
-
-**Reconciliation and priority:** RULE-141 establishes the default instruction-time targeting convention while preserving RULE-001–003 (chooser, partial fulfillment, conditions/costs); RULE-010–019 (printed order, FIFO and loop safeguards); RULE-081–095 (pending/resolving Software source, installed instances, and continuous effects); RULE-096–104 (instruction-start variable and eligible-object snapshots); and RULE-136–140 (effect checkpoints, non-triggering housekeeping, cause-based discards, source cancellation, immutable event facts and current-state requirements). Explicit card text and more-specific locked rules override this general default where they establish a different target selection or validity timing. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-142 — Physical card identity versus installed-instance identity across zone changes (LOCKED, 2026-11-11)
-
-**Explicit approval — persistent card identity, new installed instance:** Each physical card retains its underlying card identity as it moves between hand, deck, discard, installed play, and other legal zones. **Every installation creates a new installed instance**, even when the same physical Software card is reinstalled. The previous installed instance ends immediately upon leaving play (RULE-089/090). Preserve a stable physical-card identifier separately from an installed-instance identifier and its entry/exit history. A zone change does not by itself make a newly installed instance a continuation of the previous one.
-
-**Historical references distinguish the two identities:** Under RULE-140/141, “that card,” “the card discarded,” and other references to a physical card preserve the original physical-card identity, subject to the instruction's permitted zone, location, costs, conditions, and current eligibility. A reference specifically to “that installed Software,” its prior installation, or an effect tied to that **installed instance** does **not** automatically transfer to a later installation of the same physical card. Do not substitute a different physical card or a new installed instance for a historical target merely because the former target is unavailable. Explicit card text or a more-specific locked rule may authorize a different result. An ability returning an identified card from a specified zone can do so only if that same physical card is legally in the required zone when the instruction resolves; historical identity alone neither moves it nor guarantees eligibility.
-
-**Instance-specific state and no revival:** On departure, the prior installed instance's continuous effects end under RULE-090–095; installation-specific bonuses, modifiers, counters, and other effects attached solely to that instance do not automatically attach to the new installation. Reinstallation **never revives cancelled unresolved triggers** from the departed source (RULE-081/082/085/139), resurrects expired instance-specific continuous effects, or resets protected/consumed activation allowances (RULE-066/089/139). Preserve any effects or counters explicitly defined by their own rules to persist on the physical card across zones; this general rule does not silently erase independently persistent state or create a blanket zone-change reset. A new instance may generate new triggers only from new qualifying events, within existing limits and validity requirements.
-
-**Queued effects, target validity, and resolving abilities:** If an otherwise valid queued instruction references a **specific former installed instance**, removing and reinstalling its physical card does not make the new instance a legal substitute. Apply RULE-141's instruction-time target validity and RULE-001–003 impossibility, costs, and partial-fulfillment rules. If the queued triggered ability's **own source** leaves play before resolution begins, cancel it under RULE-139; reinstallation cannot revive it. An ability already resolving continues as legally possible despite source removal, subject to explicit installed-status conditions and costs (RULE-083/088/139). This rule does not change RULE-102–104's instruction-start variable-value snapshots or fixed “for each” processing sets, nor RULE-140's immutable event facts.
-
-**Canonical example:** A valid separate Software effect queues an instruction “Grant **that installed Software** +2 strength,” referencing installed instance A-1. A legal intervening effect removes A-1, and the same physical card A is later reinstalled as instance A-2. A-2 is **not** A-1; the queued instruction cannot silently apply its +2 to A-2. If the instruction instead references “**that card**” and explicitly permits its present zone and status, it continues to identify physical card A, though it must still meet all current legal requirements when the instruction resolves. Unresolved triggers originating from A-1 were cancelled on removal; no reinstall restores them. This example presupposes the separate effect's source remains valid and all intervening actions are legally permitted by existing timing rules.
-
-**Reconciliation and priority:** RULE-142 confirms RULE-066 (activation allowances), RULE-081–089 (source-removal, already-resolving abilities, and new installed-instance identity), RULE-090–095 (continuous-effect lifecycle and stacking), RULE-102–104 (instruction-time values and eligible processing sets), and RULE-139–141 (pending-source cancellation, historical event snapshots, historical object identity, instruction-time target selection, and invalid-target partial fulfillment). It does not create a reactive play window, alter FIFO checkpoints, restore cleanup-generated triggers under RULE-137, or supersede explicit persistence, zone, target, or card-specific requirements. Immediate defeat and other more-specific cancellation rules remain controlling. **Status: LOCKED, explicitly approved 2026-11-11.**
-
-
-## RULE-143 — Historical card references cannot bypass specified-zone requirements (LOCKED CLARIFICATION, 2026-11-11)
-
-**Explicit user approval — specified zone is mandatory:** When an ability refers to a historically identified physical card and instructs an action **from a specified zone**, the identified card must actually occupy that specified zone **when the relevant instruction begins resolving and at any later check explicitly required by the instruction**. If the card has moved to another zone, the specified-zone instruction cannot be fulfilled. Historical card identity (RULE-140–142) does not grant permission to retrieve, move, reveal, or otherwise affect the card from a different zone. **Do not substitute another card or a newly installed instance** unless explicit card text or a more-specific rule authorizes substitution. Apply RULE-002/003 and RULE-141: an impossible instruction fails without automatically cancelling other independent legal instructions; required costs and conditions remain binding.
-
-**Canonical example:** An otherwise valid triggered ability reads, “Whenever you discard a Software card, return **that card from your discard pile to your hand**.” Software A is discarded, qualifying the trigger and fixing A's historical physical-card identity. Before that trigger resolves, a legal intervening effect shuffles A from the discard pile into the deck. On resolution, A is **not in the discard pile**. The return instruction **fails**; A **remains in the deck**, and the player may **not** retrieve A from the deck or select another Software card instead. The original discard event and qualification remain historically recorded; inability to fulfill the later instruction does not retroactively undo them.
-
-**Reconciliation and scope:** This clarification preserves RULE-001–003 (choice, partial fulfillment, costs and conditions), RULE-010–019 (instruction order and trigger queue), RULE-081–104 (source validity, installed-instance identity and instruction-time snapshots), RULE-137–140 (cleanup classification, event identity and historical qualification), RULE-141 (instruction-time target validity), and RULE-142 (physical-card versus installed-instance identity). The clarification **does not approve or lock the other proposed RULE-143 policies** on tracking through hidden zones, information disclosure, or player-visible log redaction; those remain open for separate review. Explicit card text and more-specific locked rules retain precedence. **Status: LOCKED clarification, explicitly approved 2026-11-11.**
-
-## EXTRACT-001 — Basic Extractor payout timing, cap, and banking (LOCKED, approved 2026-11-11)
-
-**Explicit user approval:** An installed **Basic Extractor** is persistent Software, requiring **1 RAM** and **1 BW to install** under TAX-016. Its printed ability is: **“At the end of your Runner turn, extract 5 CRED from the current ICE encounter's remaining CRED reserve.”** The 5 CRED is a fixed printed payout, not a universal payout for other Extractor profiles.
-
-**Timing:** When the Runner selects END TURN, enter the established Runner End-of-Turn Phase. The installed Basic Extractor's end-of-Runner-turn ability qualifies in that existing window, alongside other eligible end-of-turn abilities, and is ordered and resolved under RULE-010–019, including controller/simultaneous ordering, FIFO, complete-effect and trigger-drain checkpoints, and loop safeguards. It is **not** a newly inserted priority phase or a payout automatically placed ahead of other end-turn effects. Finish eligible end-turn effects and generated triggers, then forfeit remaining BW, then resolve Corporation Response, then perform the single non-triggering post-Corporation hand cleanup under RULE-132/137/138. This reconciles RULE-RT-001–005 with RULE-132's superseding cleanup relocation. The payout occurs **before Corporation Response**, not after survival of it.
-
-**Installation-turn eligibility:** Basic Extractor installed during the current Runner turn qualifies for payout at that turn's end, provided it remains installed and eligible when the end-turn trigger is generated. No default startup delay applies. If it is unloaded before END TURN, no trigger qualifies. If its source leaves play after qualification but **before** the queued ability begins resolving, cancel that pending trigger; reinstalling the same physical card does not revive it (RULE-081–090, RULE-139/142). Once an ability has begun resolving, apply the existing source-removal continuation rule subject to explicit requirements, costs, and resolution-time conditions; do not invent an unconditional cancellation or revival (RULE-083/088/139–142).
-
-**Finite encounter reserve:** ECON-002's hard **per-ICE-encounter CRED cap** governs every extraction payout. On resolving Basic Extractor's payout, award **min(5 CRED, the current encounter's unextracted CRED reserve)**, never a negative amount. Reduce that reserve by the actual awarded amount; when it is empty, award 0. Multiple legally installed Extractors, if present, use the reserve remaining at their respective resolution times and follow existing trigger ordering; their combined payouts cannot exceed the cap. The encounter cap's exact numerical size and whether it is visible or hidden remain OPEN. Do not impose a new universal limit on installed Extractors or override other Extractor payout profiles.
-
-**Immediate banking:** CRED actually awarded by a resolving Extractor is **banked immediately upon resolution**, with no survival-or-ICE-PASS condition. Subsequent Corporation retaliation does not retroactively revoke already banked CRED. If VIT reaches 0, immediate defeat ends the run and cancels unresolved effects/triggers under RULE-RT-002/RULE-130; no later pending payout resolves. Existing event snapshots, trigger eligibility, resolution-time conditions, and source/target identity restrictions (RULE-136–142) apply without exception.
-
-**Encounter transitions:** Each ICE encounter has its own finite reserve. An installed Extractor that remains legally in play may qualify in a later ICE encounter under its printed ability and the established Node Software lifecycle; no payout occurs outside an eligible current ICE encounter or beyond that encounter's reserve. Whether extraction is possible after ICE PASS, specific reserve sizes, visibility, and more complex Extractor timing profiles remain open except as expressly fixed here. No new out-of-turn Runner card-play window is created.
-
-**Status:** LOCKED — explicitly approved. Reconciles ECON-002/003; TAX-009/016; RULE-RT-001–005; RULE-010–019; RULE-132; RULE-136–142. All other previously locked rules remain in force.
-
-## GENERALIST-001 — Ten-card starter deck, SYN BUFFER, and Instant PULP shields (LOCKED direction, 2026-11-11)
-
-**Explicit user approval:** The Generalist starts with exactly **10 cards**: (1) WALL ICEbreaker, (2) SENTRY ICEbreaker, (3) CODE GATE ICEbreaker, (4) Basic Extractor, (5) SYN BUFFER, (6–7) two Instant PULP shield cards, and (8–10) three Instant ICE-strength-reduction cards. The first five are persistent installed Software requiring **1 RAM each** and the established **1 BW installation cost**. The Generalist starts with **4 RAM**, so all five cannot be installed simultaneously. The three distinct type-specific ICEbreakers have no finalized individual strength/break-cost profiles yet. Basic Extractor retains **EXTRACT-001**: 5 CRED at end of each eligible Runner turn before Corporation Response, eligible on installation turn, hard encounter cap, immediate banking.
-
-**SYN BUFFER — card wording:** **“Once per ICE encounter, when you would suffer SyN damage, this program automatically prevents 1 SyN damage from that damage event.”** It is installed Software (1 BW installation; 1 RAM). Its automatic prevention applies **during damage resolution before the affected SyN is suffered**, before mandatory SyN discards or overflow PULP; it is not a queued after-damage trigger. It prevents neither PULP nor VOID. **Each installed copy has its own independent once-per-ICE-encounter allowance**, so multiple eligible copies can each prevent 1 SyN, up to the incoming damage amount. An allowance refreshes **on entering the next ICE encounter**, not on either player's turn start (RULE-027/028 do not reset this encounter-specific allowance). An eligible copy's allowance is consumed only when it actually prevents a point of SyN. An installed copy that remains in play between ICE encounters refreshes for the next encounter, consistent with the Node-long Software lifecycle.
-
-**SYN BUFFER reinstall safeguard:** To prevent unloading and reinstalling the **same physical card** from bypassing its once-per-encounter limit, track the used allowance by physical card identity and encounter identity. A card already used during that encounter remains spent if unloaded and reinstalled; a distinct unused physical copy has its own allowance. This is a **card-specific exception** to otherwise fresh installed-instance identity under RULE-089/142, not a general rule that reinstalled Software retains all instance-specific state. An uninstalled copy cannot prevent damage. All existing eligibility, prevention, source-removal and resolution-time rules remain applicable (RULE-001/004–006, RULE-010–019, RULE-081–090, RULE-127–142).
-
-**Instant PULP shields:** Both remaining Generalist Instant shield cards grant a printed amount of **PULP prevention to the Runner's existing shared PULP prevention pool** when played during the Runner turn. They are **not installed**, occupy **0 persistent RAM**, and go to discard after resolving under SOFT-009/010. When the Runner would suffer PULP, **consume eligible PULP prevention from that pool first**, point-for-point; only the unprevented remainder reduces **Vitae (VIT)**. This restates the already locked unified prevention-pool and prevention-before-damage mechanics (SOFT-013/015, DMG-002, RULE-004–006, RULE-127–136), not a new second shield pool. PULP prevention cannot prevent SyN or VOID; those use their own pools. Apply existing expiration at beginning of next Runner turn and existing earliest-expiring eligible prevention priority. Card-specific shield amounts and printed BW costs are **OPEN**, not implicitly fixed here.
-
-**Unfinalized Generalist card details:** The two PULP shield names, amounts and BW costs; the three ICE-strength-reduction Instants' names, magnitude, duration, and BW costs; and individual ICEbreaker statistics are working concepts only. Earlier illustrative names Fracture, Erode, and Destabilize are **not locked card identities**. This entry locks deck structure, lifecycle classifications, SYN BUFFER timing/independent-copy handling, and PULP-pool behavior without inventing numerical card balance.
-
-**Status:** Approved and recorded. Reconcile with TAX-009/016, ECON-002/003, EXTRACT-001, SOFT-009–015, DMG-002, RULE-004–006, RULE-010–019, RULE-027/028, RULE-081–090, RULE-127–142. Preserve more-specific existing rules and no out-of-turn Runner card plays.
-
-## ICE-DESIGN-001 / MULTI-ICE-001 — ICE roles, multi-ICE encounters and DEADLOCK gating (APPROVED, 2026-11-11)
-
-**Design direction approved by user:** ICE encounters can contain **one or multiple ICE**. An encounter must have **at least one DEADLOCK subroutine across its ICE**, but **not every ICE needs DEADLOCK**. An individual ICE may have only offensive subroutines (e.g., one PULP or TRACE), only DEADLOCK subroutines, or a mixture. **One ICE may have three separate DEADLOCK subroutines and no damage subroutines**; each is a distinct subroutine to neutralize. There is no fixed one-DEADLOCK-per-ICE or mandatory one-offense-per-ICE rule. A multi-ICE formation can combine a pure blocking ICE with several weaker offensive/support ICE. All active DEADLOCK subroutines in the encounter must be broken, bypassed, or otherwise legally neutralized to qualify for advancement.
-
-**Preserve locked LOOP-002 timing:** Breaking/neutralizing the last DEADLOCK **does not immediately end the encounter or skip the Corporation's ensuing response**. The Runner must survive the normal Corporation Response before advancement; applicable **unbroken** offensive subroutines can still fire during that response, while broken subroutines do not fire. After response and required post-response cleanup under RULE-132, advancement is allowed only if no active DEADLOCK remains and the Runner has survived. No extra Corporation Response is added solely for leaving. If the Runner remains engaged across turns, active offensive subroutines provide recurring threat during applicable Corporation Responses; use existing subroutine ordering, complete-effect checkpoints, damage/prevention and immediate-defeat rules (RULE-010–019, RULE-RT-001–005, RULE-127–142). Exact ordering of subroutines **across multiple simultaneously engaged ICE**, and any additional encounter-wide sequencing not already specified, remain OPEN; do not silently invent it.
-
-**ICE design identities — tendencies, not absolutes:** **WALLS** generally have the highest strength and comparatively few subroutines, emphasizing PULP and TRACE and/or DEADLOCK; they can instead be pure multi-DEADLOCK blockers. **CODE GATES** generally have lower strength than WALLS and more subroutines, emphasizing SyN, plus PULP and DEADLOCK. **SENTRIES** are generally the deadliest, with highly variable strength and subroutine count and combinations of PULP, SyN, VOID, TRACE and/or DEADLOCK. **PULP is a common baseline offensive threat across all three ICE types**, not Sentry-exclusive, ensuring Instant PULP shields are routinely useful. Not every ICE needs to deal damage individually, provided encounter formations create meaningful pressure. TRACE should have meaningful consequences when successful; its exact per-card effects are not decided here.
-
-**Weak-ICE design:** Low-strength ICE, including potential **Strength 0** ICE, can remain threatening through offensive subroutines or useful through DEADLOCK. Illustrative, **not finalized**, examples include a weak Paper Cut with PULP, a low-strength TRACE support ICE, a Training Wall with PULP and DEADLOCK, and a pure triple-DEADLOCK WALL. Names, strength numbers, damage numbers, number of ICE per encounter, exact TRACE consequences, and individual card balance remain OPEN. The suggested Strength 2 Training Wall and Strength 3 Triple Lock are examples only, not locked card values. Avoid treating an illustrative subroutine ordering as a universal type template.
-
-**GENERALIST-001 card refinement (approved):** The two Generalist Instant PULP shields are **two copies of the same card**, each costing **1 BW** and adding **3 PULP prevention** to the Runner's existing unified PULP pool. On incoming PULP, consume eligible prevention before reducing VIT; temporary prevention follows established expiration and duration-priority rules. Generalist cards 8–10 are **three copies of the same Instant ICE-strength-reduction card**, each costing **1 BW**, with printed effect **“Permanently reduce a target ICE's strength by 2.”** Permanent means the reduction does not expire at end of turn or encounter; it persists for that ICE's existing lifecycle, subject to existing ICE-strength floor and modifier rules. Do not treat the former illustrative Fracture/Erode/Destabilize names as three distinct finalized cards. **All 10 Generalist starter cards uniformly cost 1 BW to play/install**: three unique 1-RAM installed type-specific ICEbreakers, one 1-RAM installed Basic Extractor, one 1-RAM installed SYN BUFFER, two identical PULP-shield Instants, and three identical permanent −2 strength-reduction Instants. The three ICEbreakers' activation/break costs and printed names, and final names of the two Instant card designs, remain OPEN. Installed Software costs 1 BW to install; ICEbreaker activation is a separate mechanic. SYN BUFFER remains once-per-ICE-encounter prevention of 1 SyN, per independently installed copy, with same-physical-card reinstall not resetting the used encounter allowance (GENERALIST-001). Basic Extractor retains EXTRACT-001.
-
-**Status:** User explicitly requested recording and committing these approved design principles. Preserve existing locked LOOP-002, RULE-132, EXTRACT-001, GENERALIST-001 and other rules; do not interpret examples as approved numerical ICE cards.
-
-## LOOP-002-SUPERSESSION-001 — BREACHED encounter skips final Corporation Response (LOCKED, approved 2026-11-11)
-
-**Explicit supersession:** This decision replaces only the portion of LOOP-002 and related MULTI-ICE-001 text requiring a final Corporation Response after all active DEADLOCK subroutines across every ICE in the current encounter have been neutralized. Earlier statements that the Runner must survive an ensuing Corporation Response *after* clearing the last DEADLOCK are superseded by this later locked rule. All other existing Corporation Responses during an uncleared encounter remain in force.
-
-**BREACHED state:** Immediately when all active DEADLOCK subroutines across all ICE in an encounter are broken, bypassed, or otherwise legally neutralized, the encounter becomes **BREACHED** (eligible to finish). This does **not** automatically end the Runner turn or transition to rewards. The Runner retains control and may continue legal Runner-turn actions, including playing cards, spending BW, and using installed programs, until voluntarily selecting **END TURN**.
-
-**Completion sequence:** On END TURN while BREACHED, resolve normal eligible Runner end-of-turn effects (including applicable Basic Extractor payout) and the established BW-forfeiture/end-turn procedures. **Skip the ordinary Corporation Response for this cleared encounter**: no remaining unbroken offensive ICE subroutines execute as a final routine response. Perform the applicable post-turn/encounter housekeeping without manufacturing a response or triggering cleanup effects, then complete the encounter and proceed to the **Reward Step**. No extra Runner turn, exit action, or final Corporation Response is required. The Runner must still be alive and all DEADLOCKs neutralized at completion.
-
-**Scope:** This is a universal encounter-clearance rule, not a change to normal offensive subroutine behavior on earlier turns while DEADLOCK remains. It does not authorize automatic victory at the instant the final DEADLOCK breaks, erase damage already resolved, or create an implicit final retaliation. Any exceptional printed on-breach/on-exit card ability would require its own explicit approved wording and timing; none is established here. Preserve RULE-132's non-triggering housekeeping principle, other existing trigger/prevention rules, and voluntary END TURN. Where older documents conflict, this later specific supersession controls.
-
-**Not decided here:** ICEbreaker activation/BW costs, White Picket Fence's finalized card statistics, and any special breach-triggered abilities remain uncommitted proposals.
-
-
-## RULES-CONSISTENCY-AUDIT-2026-11-11 — Current implementation precedence (LOCKED reconciliation)
-
-This section reconciles earlier dated design entries; older locked decisions remain historical records, but the later approved revisions below govern implementation. This is a consistency correction, not approval of new card mechanics.
-
-1. **Damage:** PULP is the Vitae-reducing physical damage keyword, including SyN/VOID overflow damage, shields, prevention, damage events, and triggers. SyN and VOID retain their existing effects, prevention, overflow rates, and fixed resolution order **VOID → SyN → PULP**. BURNED is exclusively a card-removal state, not a damage type. Do not convert ordinary narrative verbs such as “burn a CAP” into damage terminology.
-2. **BREACHED:** Neutralizing every active DEADLOCK across the encounter enters BREACHED immediately; the Rustler may continue legal actions and voluntarily END TURN. Resolve eligible end-turn effects and housekeeping, **skip the final ordinary Corporation Response**, and proceed to rewards. Earlier LOOP-002 / MULTI-ICE-001 final-retaliation wording is superseded.
-3. **Generalist starter deck:** The current approved **12 cards** are one WALL Icepick, one CODE GATE Icepick, one SENTRY Icepick, one Basic Extractor, one SYN BUFFER, **three identical PULP Shields**, **three identical PROBE**, and one unique GHOST SIGNAL (working name). This supersedes the former 10-card starter and two-shield quantities. All three Shields are **1-BW Instant Hardware Packets** granting **3 temporary PULP prevention** each; all three PROBE are **1-BW Instant Software Packets** permanently reducing a target ICE's strength by 2 for that ICE's lifecycle. GHOST SIGNAL is a **2-BW Instant Software Packet** that reduces the first TRACE attempt on the immediately following Corporation turn to zero; its temporary removal is **BURNED** for the remainder of that Node, with return at the next Node under existing BURNED rules. Do not use provisional EXILE as a separate state.
-4. **SYN BUFFER:** Persistent **Hardware**, operating type **Executable**, costs 1 BW to install; its existing **1 RAM** cost remains provisional until explicitly changed. Its automatic once-per-ICE-encounter 1 SyN prevention, independent-copy handling, and same-physical-card reinstall safeguard are unchanged. It is not a Protocol or Instant Software. Icepicks and Basic Extractor are Persistent Software Executables; Protocols use the RACK, no RAM, and persist through the Node unless future approved rules say otherwise.
-5. **Bloatware:** Hostile Corporation-inserted Bloatware is **Node-specific**, may persist across ICE encounters/layers within that Node, and **does not persist into another Node**. At Node completion, remove all remaining Bloatware copies from the Rustler's card cycle; earlier statements that Node carryover is undecided are superseded. Delivery destination, printed triggers, card-specific earlier removal, and numerical effects remain card-specific. Multiple physical copies stack independently by default, including hand-held ICE buffs and end-turn PULP. If printed to start in discard, insert there; if printed to become BURNED after its hand/end-turn effect, apply that card-specific instruction, and do not return it to the current Node's draw/discard cycle. Do not mistake Bloatware removal for PULP damage.
-6. **Economy and timing:** Each ICE encounter has its own finite extractable CRED reserve; Basic Extractor pays up to 5 CRED from that remaining reserve on each eligible Rustler end turn, including the final BREACHED turn, and banks the payout immediately. Training Node test reserves are 15 / 25 / 40 CRED across its three encounters. End-of-turn effects resolve before BREACHED completion; no routine Corporation Response is inserted after BREACH.
-7. **Scope and open items:** The approved Sentry and Code Gate Icepick profiles in BREAKER-STARTER-001 supersede older experimental pricing for those breakers only. WALL Icepick statistics, GHOST SIGNAL's final name, and explicitly marked working ICE/test-balance figures remain open. Historical paragraphs describing prior proposals are not alternative live rules; follow this reconciliation and the later approved sections it cites.
-
-
-## MULTI-ICE-002 — Left-to-right Corporation Response execution (LOCKED, approved 2026-11-11)
-
-**ICE placement:** The **main ICE is always the right-most ICE** in each encounter. Any supporting/secondary ICE occupy positions to its left. This is the encounter's displayed ICE order.
-
-**Normal Corporation Response:** Begin with the **left-most ICE** and move **one ICE at a time from left to right**. For the current ICE, resolve each **unbroken, otherwise eligible subroutine individually from top to bottom**, in its printed/displayed order. Skip broken or otherwise neutralized subroutines. Complete that ICE's subroutine sequence before advancing to the ICE immediately to its right. Continue through the **right-most main ICE**, which resolves last. Effects from an earlier resolved subroutine apply according to their normal timing and duration, and may affect later subroutines or ICE; do not execute all ICE simultaneously or allow either player to freely reorder them.
-
-**Preserved rules:** Apply the established per-subroutine timing, prevention, trigger queues, resolution-time validity, and immediate defeat rules as normal. This ordering does **not** invent a new modifier duration, stacking rule, TRACE consequence, or special DEADLOCK effect. All active DEADLOCKs across all ICE still must be neutralized to BREACH. If the encounter is already **BREACHED** when the Rustler ends the turn, the locked LOOP-002-SUPERSESSION-001 exception **skips the entire ordinary Corporation Response**; do not run this left-to-right sequence after BREACH. Earlier descriptions marking multi-ICE Corporation Response ordering OPEN are superseded by MULTI-ICE-002.
-
-
-## TRACE-001 — Cumulative TRACE meter and warning threshold (LOCKED, approved 2026-11-11)
-
-**TRACE is a cumulative tracking value against the Rustler**, represented by a meter with significant **50% and 100% marks**, not an opposed skill check. Corporation ICE subroutines, Bloatware, and other explicitly printed effects add their specified TRACE amounts to the Rustler's accumulated TRACE. Rustler effects may reduce an incoming TRACE addition before it is applied, or lower TRACE already on the meter, as specified by the effect. Use the normal MULTI-ICE-002 left-to-right/top-to-bottom Corporation Response order for TRACE-bearing subroutines and established card-effect timing for other TRACE sources. Do not treat a printed TRACE addition as an automatic opposed contest.
-
-**50% TRACE — warning only (Option C):** Reaching, exceeding, or crossing the **50%** meter mark **does not itself cause an automatic penalty, Corporation Response, extra defense, damage, or other trigger**. It is a visible warning and a condition that **individual printed card effects may explicitly check** (for example, effects worded to apply while TRACE is at or above 50%). Such effects operate only under their own printed conditions and existing timing/trigger rules. Repeated crossings of 50% do not independently generate events or penalties.
-
-**100% TRACE — location compromised:** At **100%**, the Corporation **identifies the Rustler's location** and **deploys additional defenses intended to eliminate the intruder**. This escalation is approved in principle, **not an automatic declaration of Rustler defeat**. The exact deployment package, its timing and duration, whether TRACE can subsequently be reduced, and whether/how another 100% crossing matters remain **OPEN**; do not invent these mechanics. The 50% warning rule does not dilute the approved 100% location-compromise consequence.
-
-**Interaction with GHOST SIGNAL:** The approved unique GHOST SIGNAL Packet reduces the first TRACE attempt/addition during the Corporation's immediately following turn to zero, consistent with its printed first-attempt-only wording; it does not automatically reset the Rustler's existing accumulated TRACE or negate later TRACE additions. Its BURNED once-per-Node lifecycle is unchanged. Exact normalization of legacy TRACE terminology (including older TRACE 40 examples) to meter units/percentage, TRACE cap/floor and persistence/reset between encounters/Nodes remain **OPEN**. No percentage-to-printed-value conversion is approved here.
-
-**Precedence:** This section supersedes earlier notes describing TRACE accumulation, 50% consequences, or the nature of TRACE resolution as wholly undecided. It preserves all existing damage, BURNED, BREACHED, Bloatware, and Corporation Response rules.
-
-
-## TRACE-002 — Corporation-dependent TRACE persistence and reset (LOCKED, approved 2026-11-11)
-
-**Corporation scope:** The Rustler's accumulated TRACE belongs to the **Corporation currently being encountered**. TRACE is not reset merely because the Rustler moves between ICE encounters/layers or Nodes **within that same Corporation**; accumulated TRACE carries forward and remains subject to TRACE-001 countermeasures and thresholds.
-
-**New Corporation:** When the Rustler **encounters a new Corporation**, initialize the TRACE meter for that Corporation at **0**. TRACE accrued against the preceding Corporation does **not transfer** to the new Corporation. The 50% warning and 100% location-compromise thresholds apply to the current Corporation's meter.
-
-**Not decided:** Whether returning later to a previously encountered Corporation restores its earlier meter or starts a fresh tracking session, and the exact 100% defense-deployment mechanics, are not established by this decision. Do not assume a global run-wide TRACE meter or an ICE/Node reset.
-
-
-## TRACE-003 — Returning to a previously encountered Corporation resets TRACE (LOCKED, approved 2026-11-11)
-
-**Fresh intrusion reset:** Whenever the Rustler begins a **new encounter with a Corporation after having left that Corporation**, initialize that Corporation's TRACE meter at **0**, **even if the Rustler encountered that same Corporation earlier in the run**. Do not restore any TRACE accumulated during the earlier visit. TRACE continues to accumulate across ICE encounters and Nodes **during one uninterrupted visit** to the same Corporation; moving between its internal ICE layers or Nodes does not trigger a reset.
-
-**Precedence:** This explicitly resolves the return-visit question left open in TRACE-002. Read TRACE-002's “new Corporation” reset together with this rule: a newly entered Corporation **or a fresh return visit** starts at zero. TRACE-001's 50% warning-only and 100% location-compromise rules remain unchanged; the 100% deployment specifics remain OPEN.
-
-
-## RUN-003 — Forward-only run progression reaffirmed (LOCKED, 2026-11-11; see original RUN-003)
-
-**Baseline navigation rule:** During a run, the Rustler **always progresses forward and never retraces their steps**. After leaving or completing an ICE encounter, Node, or Corporation, the Rustler cannot navigate backward to revisit that completed location or reverse the route. This is a run-level navigation constraint, not a restriction on taking multiple Rustler turns within an active encounter or on revisiting a Corporation in a separate new run.
-
-**TRACE reconciliation:** TRACE accumulates through consecutive ICE encounters and Nodes within the currently visited Corporation and resets to **0 when entering a new Corporation**. TRACE-003's earlier hypothetical rule for returning to a previously encountered Corporation is **non-operative during normal forward-only navigation** because the Rustler cannot backtrack to a completed Corporation. Keep TRACE-003 as a historical clarification for any future explicitly approved exception, not as permission to retrace a route. No such exception is approved here.
-
-**Scope:** This rule does not prescribe the number of encounters, Node topology, branching choices at unvisited forward paths, or a reverse-navigation mechanic. Do not infer any ability to backtrack from encounter-selection, logging, rewind/debugging, or prior design examples.
-
-
-## RUN-003 / RUN-004 — Existing junction and forward-route rules reaffirmed (2026-11-11)
-
-**This is a reconciliation of pre-existing approved rules, not a new choice.** Every corporate **Node is a junction offering multiple selectable forward paths**. The Rustler chooses the next forward route at each Node; previously passed Nodes lock behind the Rustler and **cannot be revisited** in that run. The network is presented as a circuitous, disorienting **lattice**, but apparent visual loops do not permit mechanical backtracking. A Node can present up to **five or six onward options**; that is an upper example, not a fixed required number. **Every available forward route reaches the Corporation core, and all complete routes contain the same number of Nodes**; there are no selectable dead ends or shortcuts in Node count. These principles were already established as RUN-002 (visual topology), RUN-003 (forward-only traversal and route choices), and RUN-004 (equal-length guaranteed core routes) in the master design on 2026-11-10.
-
-**Identifier reconciliation:** The later section titled “RUN-001 — Strict forward-only run progression” (2026-11-11) repeats the substance of existing **RUN-003**, and its identifier must **not** supersede the earlier **RUN-001 — Victory condition**. Treat that later section as a historical reaffirmation of RUN-003, **not** a second independent RUN-001. Any older OPEN notes suggesting backtracking, Node revisits, junction route selection, dead ends, or unequal path lengths are superseded by these locked rules. Do **not** re-open these settled questions without an explicit request to revise them. TRACE continues to reset on entering a new Corporation, not at each Node or ICE encounter.
-
-
-## TRACE-004 — 100% TRACE Corporation countermeasures TBD (LOCKED boundary, 2026-11-11)
-
-At **100% TRACE**, the Corporation identifies the Rustler's location, as established by TRACE-001. **The specific Corporation countermeasures deployed at 100% TRACE are TBD and not yet designed or approved.** Do not presume reinforced ICE, a hunter program, a special encounter, damage, defeat, timing, duration, or any other particular mechanic. Earlier language about deployment of additional defenses expresses the intended narrative escalation only; the actual countermeasure rules remain **OPEN**. TRACE-001's 50% warning-only rule and TRACE-002/003 Corporation-scope reset rules remain unchanged.
-
-
-## BREAKER-STARTER-002 — Generalist WALL Icepick partial profile (APPROVED, 2026-11-12)
-
-The Generalist starter **WALL Icepick** is a **Persistent Software Executable** compatible with **WALL ICE**. Its **base breaking Strength is 1**. The Rustler may **spend 1 BW to increase its breaking Strength by 1**, with boosts accumulating for the **remainder of the current ICE encounter**, consistent with BREAKER-STARTER-001's starter Icepick Strength-boost duration. This approval defines only base Strength and Strength-boost cost/amount; the **BW cost to break an individual WALL subroutine remains OPEN** and must not be assumed. Existing starter Icepick installation and RAM rules are unchanged. This supersedes older notes saying all WALL Icepick profile details are undecided, but does not settle other training-encounter balance questions.
-
-
-## BREAKER-STARTER-003 — WALL Icepick subroutine-breaking profile (LOCKED, 2026-11-12)
-
-The Generalist starter **WALL Icepick** is a Persistent Software Executable compatible with WALL ICE, with **base breaking Strength 1** and **spend 1 BW for +1 breaking Strength for the remainder of the current ICE encounter** (BREAKER-STARTER-002). Its subroutine-breaking abilities are:
-
-- **Once per Rustler turn:** Break **one** subroutine on a compatible WALL ICE for **0 BW**.
-- **Additional breaks:** Spend **1 BW** to break **one** subroutine on a compatible WALL ICE; each further paid break costs 1 BW.
-- **Strength requirement:** Both free and paid breaks require the WALL Icepick's current breaking Strength to meet or exceed the target WALL ICE's current Strength, as with other Icepicks.
-- The free use **refreshes each Rustler turn**, not each encounter, and unused free breaks **do not accumulate**. It is one free break per turn for this installed Icepick, not one per target WALL or subroutine. Existing installation/RAM, card lifecycle, and encounter rules remain unchanged.
-
-**Status:** The three Generalist starter Icepick breaking profiles are now defined: Sentry (Strength 0; +1 per 1 BW; 1 BW per subroutine), Code Gate (Strength 3; +1 per 2 BW; 1 BW per subroutine), WALL (Strength 1; +1 per 1 BW; first eligible break each Rustler turn free; subsequent breaks 1 BW each). Earlier statements that WALL's breaking cost remains OPEN are superseded.
-
-
-## BREAKER-STARTER-004 — WALL Icepick base Strength revised to 0 (LOCKED, 2026-11-12)
-
-**Approved revision:** The Generalist starter **WALL Icepick's base breaking Strength is 0**, replacing the previously approved Strength 1 in BREAKER-STARTER-002 and repeated historical summaries in BREAKER-STARTER-003. This is an explicit supersession; do not use Strength 1 as the current rule.
-
-**Complete current WALL Icepick profile:** Persistent Software Executable compatible with WALL ICE; **base breaking Strength 0**; spend **1 BW to gain +1 breaking Strength** for the remainder of the current ICE encounter (boosts stack); **once per Rustler turn, break one compatible WALL subroutine for 0 BW**; each additional compatible WALL subroutine break costs **1 BW**. All free and paid breaks require the Icepick's current breaking Strength to be at least the target WALL ICE's current Strength. The free break refreshes each Rustler turn, does not accumulate, and is limited to once per turn per installed Icepick. Existing installation and RAM requirements remain unchanged.
-
-**Balance intent:** The free once-per-turn subroutine break offsets the additional BW needed to boost from Strength 0. This decision changes only the WALL Icepick's base Strength, not the Sentry or Code Gate profiles or any other established rules.
-
-
-## GENERALIST-STARTER-LOCK-001 — Approved 12-card starter deck and no Protocols (LOCKED, 2026-11-12)
-
-The **Generalist starter deck is exactly 12 physical cards**:
-
-| Qty | Card | Operating classification | Nature | Play/install cost |
-| ---: | --- | --- | --- | --- |
-| 1 | WALL Icepick | Persistent Executable | Software | 1 BW install |
-| 1 | SENTRY Icepick | Persistent Executable | Software | 1 BW install |
-| 1 | CODE GATE Icepick | Persistent Executable | Software | 1 BW install |
-| 1 | Basic Extractor | Persistent Executable | Software | 1 BW install |
-| 1 | SYN BUFFER | Persistent Executable | Hardware | 1 BW install |
-| 3 | PULP Shield | Instant Packet | Hardware | 1 BW each |
-| 3 | PROBE | Instant Packet | Software | 1 BW each |
-| 1 | GHOST SIGNAL (working name) | Instant Packet | Software | 2 BW |
-
-**Composition:** **5 Executables, 7 Packets, 0 Protocols, 0 Bloatware** at the start of a Generalist run. This explicitly confirms **no Protocol cards in the starter deck**; Protocol remains an established card classification for other cards or later acquisitions. Bloatware may be inserted by Corporation effects during play, but is not part of the starting 12 cards.
-
-**Current approved abilities:** WALL Icepick: base breaking Strength **0**, +1 Strength for 1 BW for the remainder of the ICE encounter, first eligible WALL subroutine break **free once per Rustler turn**, subsequent breaks 1 BW each. SENTRY Icepick: base Strength 0, +1 Strength for 1 BW, break a compatible subroutine for 1 BW. CODE GATE Icepick: base Strength 3, +1 Strength for 2 BW, break a compatible subroutine for 1 BW. All breaks require sufficient breaker Strength. Basic Extractor: earn up to 5 CRED at each eligible Rustler end turn from current ICE encounter's finite reserve. SYN BUFFER: automatically prevent 1 SyN once per ICE encounter per independently installed copy. Each PULP Shield: +3 temporary PULP prevention to the shared pool. Each PROBE: reduce target ICE Strength by 2 for that ICE lifecycle. GHOST SIGNAL: reduce the first TRACE addition during the immediately following Corporation turn to 0, then BURNED until the next Node, usable once per Node.
-
-**Resource status:** Existing 1 RAM requirements for the four Software Executables remain as approved. SYN BUFFER's 1 RAM requirement remains **provisional and open for rebalancing**, not newly finalized here. GHOST SIGNAL is still a **working name**. Earlier 10-card starter lists, two-shield quantities, and WALL base Strength 1 are historical/superseded; they are not alternate active starter configurations. This lock confirms the starter deck composition, not the unresolved training ICE or balance details.
-
-
-## BREAKER-STARTER-005 — WALL Icepick base Strength restored to 1 (LOCKED, 2026-11-12)
-
-**Latest explicit approval supersedes BREAKER-STARTER-004 and GENERALIST-STARTER-LOCK-001 only where they specify WALL Icepick base Strength 0:** The Generalist starter **WALL Icepick has base breaking Strength 1**. This restores the earlier Strength 1 baseline and is the **current authoritative value**; Strength 0 is historical and must not be used for current rules or playtesting.
-
-**All other approved WALL Icepick mechanics are unchanged:** Persistent Software Executable compatible with WALL ICE; **spend 1 BW for +1 breaking Strength** for the remainder of the current ICE encounter; **once per Rustler turn break one compatible WALL subroutine for 0 BW**, with subsequent compatible WALL subroutine breaks costing **1 BW each**. Every break requires the Icepick's current breaking Strength to meet or exceed the target WALL ICE's current Strength. Free breaks refresh each Rustler turn and do not accumulate. Installation and RAM requirements are unchanged. The Generalist starter deck remains exactly 12 cards, including one WALL Icepick and **zero Protocols**. No SENTRY or CODE GATE Icepick profile is changed.
-
-
-## CARD-SUBTYPE-001 — EXPLOIT / CLOAK and reactive SENTRY (LOCKED, 2026-11-12)
-
-**Functional subtypes are distinct from existing card classifications:** EXPLOIT denotes offensive cards that compromise, weaken, or manipulate hostile systems; CLOAK denotes defensive cards that protect the Rustler, conceal activity, or interfere with hostile detection and attacks. These functional subtypes are orthogonal to Hardware/Software and Packet/Executable classifications. Do not confuse CLOAK with a specific cloaking technology; its meaning includes physical damage prevention.
-
-**Generalist starter card subtype assignments (LOCKED):** PROBE = **EXPLOIT** (Software Packet); PULP Shield = **CLOAK** (Hardware Packet); GHOST SIGNAL (working card name) = **CLOAK** (Software Packet). No other starter cards receive a subtype from this decision. In particular, do not infer that all installed protective cards are CLOAK without separate approval.
-
-**SENTRY reactive ability (LOCKED):** **Whenever the Rustler plays a CLOAK card, this SENTRY gains +1 Strength.** Each distinct CLOAK card play triggers +1 Strength; the trigger is on playing a card, not on automatic activations of previously installed cards. The Strength bonus duration/reset timing and any encounter-specific stacking restrictions beyond the per-play trigger remain to be specified; do not silently treat a proposed duration as approved. The precise SENTRY starting Strength remains open.
-
-**Terminology:** EXPLOIT and CLOAK supersede proposed DEFENSE, SHROUD, SAFEGUARD, ASSAULT and COUNTERMEASURE names for these Rustler functional subtypes; COUNTERMEASURE remains available as Corporation terminology. This decision does not change card costs, effects, deck counts, or Icepick profiles.
-
-
-## NODE-EXTRACTION-001 — Full extraction bonus (LOCKED, 2026-11-12)
-
-**General Node rule:** If the Rustler extracts **all CRED in a Node's finite extractable CRED reserve (100%)**, award a **one-time bonus equal to 10% of that Node's original CRED reserve**. The bonus is additional earned CRED, **not** a refill of the Node's reserve, and does not count as CRED remaining to extract. It applies regardless of which eligible extraction effect empties the reserve; it is **not** exclusive to Basic Extractor. Award immediately when the reserve reaches zero through extraction; do not award again for the same Node. A Node not fully extracted receives no full-extraction bonus. Example original reserves: 15 CRED -> +1.5 CRED (16.5 total), 25 -> +2.5 (27.5 total), 40 -> +4 (44 total). **Fractional CRED handling/rounding is not yet defined**; these examples express the exact 10% mathematical bonus and must not be interpreted as a finalized fractional-CRED accounting rule.
-
-
-## NODE-EXTRACTION-002 — General Node full-extraction bonus rounding (LOCKED, 2026-11-12)
-
-**This is a global game rule for ALL Nodes**, not an ability of an individual card, extractor, Node type, or training encounter. Whenever the Rustler extracts **100% of a Node's original finite CRED reserve**, grant **one bonus equal to 10% of the original reserve, rounded UP to the nearest whole CRED**: `bonus_CRED = ceil(original_node_CRED_reserve * 0.10)`. This bonus is paid once per Node, adds to banked earnings, does not replenish the Node's extractable reserve, and is independent of the extraction method. No full-extraction bonus is paid if any reserve CRED remains unextracted. Example: 15 reserve -> +2 bonus, 17 total; 25 -> +3, 28 total; 40 -> +4, 44 total. This explicitly **supersedes the fractional-CRED examples and open rounding question in NODE-EXTRACTION-001**. CRED bonuses under this rule are always whole numbers.
-
-
-## TRAINING-THREE-ICE-SENTRY-001 — Main SENTRY base Strength and bonus duration (LOCKED, 2026-11-12)
-
-In the three-ICE training encounter, the **rightmost main SENTRY starts at Strength 3** (not the previously proposed 5). Its locked reactive ability remains: **Whenever the Rustler plays a CLOAK card, this SENTRY gains +1 Strength**. **All Strength bonuses applied to this SENTRY last for the current ICE encounter only** and expire when that encounter ends; multiple qualifying bonuses stack during the encounter. This encounter-duration rule covers the SENTRY's reactive +1 Strength bonuses and Strength bonuses conferred by supporting ICE effects (including the working supporting CODE GATE +2 effect, if that effect resolves). It does not by itself finalize the CODE GATE effect's trigger, frequency, or other unresolved specifics. The base Strength 3 is restored on a new encounter; no Strength bonuses persist between ICE encounters or Nodes. The previously proposed base Strength 5 is rejected. All other encounter rules remain unchanged.
-
-
-## TRAINING-THREE-ICE-CODE-GATE-001 — Supporting CODE GATE Strength boost (LOCKED, 2026-11-12)
-
-In the three-ICE training encounter, the supporting CODE GATE's SENTRY-strengthening subroutine grants **+1 Strength to the rightmost main SENTRY**, **not +2**. The subroutine **activates as normal** under existing multi-ICE Corporation Response rules: ICE resolve left-to-right; eligible unbroken subroutines resolve top-to-bottom during normal Corp Response. It is **not** an automatic passive trigger or a special one-time activation. Each time the subroutine normally resolves, it grants +1 Strength, stacking with other encounter-long Strength bonuses; the added Strength expires at the end of the current ICE encounter. If the subroutine is broken or otherwise prevented, it does not grant the bonus. This supersedes earlier working +2 text. Main SENTRY base Strength remains 3 and its +1 Strength per played CLOAK ability remains unchanged. No change to other CODE GATE subroutines or TRACE rules.
-
-
-## RUSTLER-STARTING-RESOURCES-001 — TRACE capacity and VITAE (LOCKED, 2026-11-12)
-
-The Rustler starts with **30 VITAE** and a **TRACE meter capacity/maximum of 40 TRACE points**. The TRACE meter is visually displayed as 0–100% of its current 40-point capacity, while printed TRACE values are actual TRACE points (e.g., TRACE 3 adds 3 points, equivalent to 7.5% of a 40-point meter). At capacity 40, the 50% warning threshold is 20 TRACE points and 100% detection threshold is 40 TRACE points. Existing TRACE persistence/reset rules and the still-undetermined Corporation countermeasures upon reaching 100% remain unchanged. This establishes starting VITAE as 30; it does not by itself establish whether 30 is a hard VITAE maximum or how VITAE regeneration works. This supersedes earlier unresolved TRACE numeric normalization and any conflicting provisional starting VITAE values.
-
-
-## VITAE-CAPACITY-001 — Starting VITAE is not maximum VITAE (LOCKED, 2026-11-12)
-
-**The Rustler starts with 30 VITAE. This is NEVER to be treated as a fixed or universal maximum.** The Rustler's initial MAX VITAE value and any general upper limit are **undefined / not yet specified**. Future cards and Ghostware can provide effects that **increase current VITAE** and/or **increase MAX VITAE**; these are distinct mechanics and must be represented separately. Do not infer that gaining current VITAE automatically increases MAX VITAE, or vice versa, unless a particular card explicitly says so. Do not hard-code MAX VITAE = 30 or silently introduce a fixed maximum in design or implementation. This clarification supersedes any suggestion in RUSTLER-STARTING-RESOURCES-001 or earlier notes that 30 might be a maximum. TRACE starting capacity remains 40, separate from VITAE.
-
-
-## TRAINING-THREE-ICE-CODE-GATE-A-002 — Sole subroutine and once-per-Corporation-turn timing (LOCKED, 2026-11-12)
-
-**CODE GATE A**, the **leftmost supporting CODE GATE** in the third training-layer three-ICE encounter, has **exactly one subroutine**:
-
-> **Grant the main SENTRY ICE +1 Strength.**
-
-This sole subroutine **resolves once per Corporation turn during the normal Corporation Response**, provided it remains eligible and unbroken. It is not a passive effect and does not activate more than once in the same Corporation turn. On each subsequent Corporation turn in which it resolves, it grants an additional +1 Strength; these bonuses **stack and last only until the end of the current ICE encounter**, consistent with TRAINING-THREE-ICE-SENTRY-001 and TRAINING-THREE-ICE-CODE-GATE-001. Breaking/preventing the subroutine prevents its resolution for that turn. CODE GATE A has **no additional subroutines**. Its provisional Strength 5 remains a working value, not newly locked by this decision. Main SENTRY base Strength remains 3.
-
-
-## TRAINING-THREE-ICE-WATCHDOG-001 — Main SENTRY named WATCHDOG (LOCKED, 2026-11-12)
-
-The **rightmost main SENTRY ICE** in the third training layer is officially named **WATCHDOG**. Its locked base Strength is **3 STR**. Its existing reactive ability is unchanged: whenever the Rustler plays a CLOAK card, **WATCHDOG gains +1 STR** for the current ICE encounter; multiple triggers stack.
-
-The **leftmost supporting CODE GATE 1** has exactly one subroutine, now printed in the approved canonical subroutine notation:
-
-`[S1] WATCHDOG gains +1 STR.`
-
-This subroutine resolves once per Corporation turn under normal Corporation Response rules if eligible and unbroken. Each resolved bonus stacks and lasts for the current ICE encounter. All ICE subroutine lists in future REDLINE design work should use `[S1]`, `[S2]`, etc., in top-to-bottom resolution order. For example, the other supporting CODE GATE 2's working list is:
-
-`[S1] PULP 3`
-`[S2] TRACE 3`
-
-WATCHDOG supersedes any proposed name RATCHET; this change is a naming and notation decision, not a new effect or numerical balance change.
-
-
-## TRAINING-CRED-REBALANCE-002 — Training Node CRED reserves 10 / 15 / 25 (LOCKED, 2026-11-12)
-
-The three Training Node ICE encounter/layer **original finite CRED reserves** are now **Layer 1 = 10 CRED; Layer 2 = 15 CRED; Layer 3 = 25 CRED**. Total base reserves **50 CRED**. This expressly **supersedes the former provisional 15 / 25 / 40 CRED training reserves** (80 total) and any alternate 10 / 15 / 20 proposal. Apply the existing universal per-Node full-extraction bonus independently to each layer's reserve when fully depleted: **ceil(10% of original reserve)**, so bonuses **+1 / +2 / +3** and maximum payouts **11 / 17 / 28 CRED**, totaling **56 CRED** if all three layers are fully extracted. No bonus for partial extraction. Basic Extractor's existing 5-CRED per eligible end turn remains unchanged. This is the authoritative Training Node CRED schedule wherever historical numbers conflict.
-
-
-## TRAINING-WATCHDOG-SUBROUTINES-001 — WATCHDOG subroutine adjustment (APPROVED, 2026-11-12)
-
-In Training Node Layer 3, **WATCHDOG — SENTRY — STR 3** has the following approved working subroutine list, in top-to-bottom resolution order:
-
-`[S1] PULP 4`
-`[S2] SyN 1`
-`[S3] DEADLOCK`
-
-The user specifically reduced the proposed `[S2] SyN 2` to **`[S2] SyN 1`**. This replaces that earlier proposed value. WATCHDOG's existing reactive ability remains unchanged: whenever the Rustler plays a CLOAK card, WATCHDOG gains +1 STR for the current ICE encounter; bonuses stack. Do not alter the already-approved base STR 3. This entry approves the revised working subroutine roster; do not silently modify other ICE or mechanics.
-
-
-## TRAINING-WATCHDOG-SUBROUTINES-002 — PULP 4 and DEADLOCK share one subroutine (CORRECTION, 2026-11-12)
-
-Correct the preceding WATCHDOG roster: **WATCHDOG — SENTRY — STR 3** has **two** subroutines, not three:
-
-`[S1] PULP 4 + DEADLOCK`
-`[S2] SyN 1`
-
-PULP 4 and DEADLOCK are **two effects on the same [S1] subroutine**, not separately breakable subroutines. Breaking [S1] prevents both effects, including its DEADLOCK. This supersedes the prior `[S1] PULP 4 / [S2] SyN 1 / [S3] DEADLOCK` presentation. Existing CLOAK-triggered +1 STR reactive ability and base STR 3 remain unchanged. Preserve top-to-bottom [S#] numbering.
-
-
-## TRAINING-WATCHDOG-SUBROUTINES-003 — Final corrected three-subroutine layout (LOCKED, 2026-11-12)
-
-**WATCHDOG — SENTRY — STR 3** has **exactly three subroutines**, in order:
-
-`[S1] PULP 4 + DEADLOCK`
-`[S2] SyN 1`
-`[S3] DEADLOCK`
-
-There are **two DEADLOCK effects**, one attached to [S1] together with PULP 4, and the other as standalone [S3]. **SyN 1 is its own independent [S2] subroutine** and has no DEADLOCK. Breaking [S1] neutralizes both PULP 4 and its attached DEADLOCK; breaking [S3] neutralizes its separate DEADLOCK. Both DEADLOCK effects must be neutralized to BREACH. This definitive layout supersedes both earlier incorrect versions: `[S1] PULP 4 / [S2] SyN 1 / [S3] DEADLOCK` and `[S1] PULP 4 + DEADLOCK / [S2] SyN 1`. WATCHDOG remains base STR 3, with its unchanged CLOAK-triggered +1 STR reactive ability.
-
-
-## TRAINING-NODE-PLAYTEST-LOCK-001 — Names and existing encounter values locked; implementation phase (2026-11-12)
-
-User confirms **all six ICE names** and **all existing Training Node values** for the playtest. Do not reopen naming or rebalance before actual playtesting. The ICE roster, in left-to-right resolution order, with required display format **NAME — TYPE — STR** and numbered subroutines:
-
-**Layer 1:** WHITE PICKET FENCE — WALL — STR 3: `[S1] PULP 5`; `[S2] DEADLOCK`.
-
-**Layer 2:** TOLLBOOTH — WALL — STR 5: `[S1] TRACE 4`; `[S2] DEADLOCK`. MEATGRINDER — CODE GATE — STR 3: `[S1] PULP 3`; `[S2] PULP 3`; `[S3] DEADLOCK`.
-
-**Layer 3:** OVERCLOCK — CODE GATE — STR 5: `[S1] WATCHDOG gains +1 STR.` HOTWIRE — CODE GATE — STR 3: `[S1] PULP 3`; `[S2] TRACE 3`. WATCHDOG — SENTRY — STR 3: `[S1] PULP 4 + DEADLOCK`; `[S2] SyN 1`; `[S3] DEADLOCK`. WATCHDOG reactive ability: whenever the Rustler plays a CLOAK card, WATCHDOG gains +1 STR for current encounter; stacks.
-
-**CRED reserves by layer:** 10 / 15 / 25 (total base 50); universal rounded-up 10% full-extraction bonuses +1 / +2 / +3, maximum total 56. Existing rules on turns, BW/RAM, 12-card Generalist deck, Icepicks, TRACE, VITAE, damage, extraction, BREACH, and reward resolution remain authoritative.
-
-**Next phase:** Implement an actually playable three-layer training-node prototype in **Godot**, edited/debugged using **Visual Studio**; validate established mechanics through playtesting before changing balance. This is a design freeze for the initial playtest, not a claim that implementation has been completed. Historical references to proposed ICE names/Strength/subroutines are superseded by this lock.
+**Interpretations to confirm:** these four material patterns and their restrained intensity are proposed for review. No gameplay changes. 625 cartridge UI checks pass. Refreshed four-type comparison and card/hand fixtures. Oldest whole log entry appended unchanged to the archive under LOG-001.

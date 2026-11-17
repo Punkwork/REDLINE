@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=5 format=3]
+[ext_resource type="FontFile" path="res://assets/fonts/SpaceMono-Regular.ttf" id="1"]
+[ext_resource type="FontFile" path="res://assets/fonts/SpaceMono-Bold.ttf" id="2"]
+[sub_resource type="StyleBoxFlat" id="normal"]
+bg_color = Color(0.066667, 0.066667, 0.066667, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.968627, 0.968627, 0.94902, 1)
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+[sub_resource type="StyleBoxFlat" id="hover"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+[resource]
+default_font = ExtResource("1")
+default_font_size = 13
+Label/colors/font_color = Color(0.968627, 0.968627, 0.94902, 1)
+Button/fonts/font = ExtResource("2")
+Button/styles/normal = SubResource("normal")
+Button/styles/hover = SubResource("hover")
+Button/styles/pressed = SubResource("hover")
