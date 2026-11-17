@@ -6,14 +6,14 @@ var reduced_motion := false
 func arrange() -> void:
  var count := get_child_count()
  if count == 0: return
- var step := minf(158.0, (size.x - 174.0) / maxf(1, count - 1))
- var span := 146.0 + step * (count - 1)
+ var step := minf(178.0, (size.x - 196.0) / maxf(1, count - 1))
+ var span := FriendlyCard.CARD_SIZE.x + step * (count - 1)
  for i in count:
   var c = get_child(i)
   var t := (float(i) / maxf(1, count - 1) - 0.5) * 2
-  c.rest_position = Vector2((size.x - span) * 0.5 + i * step, 8 + (12 * t * t if count >= 7 else 0))
-  c.rest_rotation = deg_to_rad(t * 5 if count >= 7 else float((c.uid % 5) - 2))
-  c.pivot_offset = Vector2(73, 109); c.position = c.rest_position; c.rotation = c.rest_rotation; c.z_index = i
+  c.rest_position = Vector2((size.x - span) * 0.5 + i * step, 10 + (2 * t * t if count >= 7 else 0))
+  c.rest_rotation = deg_to_rad(t * 2 if count >= 7 else float((c.uid % 3) - 1))
+  c.pivot_offset = FriendlyCard.CARD_SIZE/2; c.position = c.rest_position; c.rotation = c.rest_rotation; c.z_index = i
 func focus_card(card: Control) -> void:
  grab_focus()
  if card.motion: card.motion.kill()

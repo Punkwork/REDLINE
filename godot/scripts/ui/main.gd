@@ -694,10 +694,11 @@ func _show_inspect(id: String) -> void:
 	inspect.visible = id != ""
 	if id != "":
 		var cv: Control
-		if is_instance_valid(friendly) and friendly.visible:
+		if is_instance_valid(friendly):
+			friendly.game=g
 			var paper := FriendlyCard.new(); paper.setup(friendly,id,-1); cv=paper
 		else: cv = _card_view(id, -1)
-		cv.custom_minimum_size = Vector2(200, 270)
+		cv.custom_minimum_size = FriendlyCard.CARD_SIZE if cv is FriendlyCard else Vector2(200,270)
 		cv.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		inspect.add_child(cv)
 
@@ -1400,7 +1401,13 @@ func _overlay_options(title: String, sub: String, uids: Array, source: Array, on
 	scroll.custom_minimum_size = Vector2(1100, 300)
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	v.add_child(scroll)
-	scroll.add_child(row)
+	var padding := MarginContainer.new()
+	padding.add_theme_constant_override("margin_top",14)
+	padding.add_theme_constant_override("margin_bottom",14)
+	padding.add_theme_constant_override("margin_left",12)
+	padding.add_theme_constant_override("margin_right",12)
+	scroll.add_child(padding)
+	padding.add_child(row)
 	for u in uids:
 		var c := {}
 		for x in source:
@@ -1456,7 +1463,8 @@ func _overlay_reward() -> void:
 		row.add_child(offer)
 		offer.add_child(_lbl(" · ".join(CardDB.roles(id)), 12, TEXT))
 		offer.add_child(_lbl("Draw this encounter: %.0f%%" % g.draw_chance(id, 1, 1), 11, DIM))
-		var cv := _card_view(id, -1)
+		friendly.game=g
+		var cv := FriendlyCard.new(); cv.setup(friendly,id,-1)
 		cv.tooltip_text = "Draw chance this encounter: %.0f%%" % g.draw_chance(id, 1, 1)
 		var key_note := ""
 		for key in g.run_deck:
@@ -1468,7 +1476,7 @@ func _overlay_reward() -> void:
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				g.choose_reward(cid)
 				refresh())
-		offer.add_child(cv)
+		var carrier := MarginContainer.new(); carrier.add_theme_constant_override("margin_top",14); carrier.add_theme_constant_override("margin_bottom",14); carrier.add_theme_constant_override("margin_left",12); carrier.add_theme_constant_override("margin_right",12); carrier.add_child(cv); offer.add_child(carrier)
 	var pruning := Button.new()
 	pruning.text = "DECOMPILE · remove a deck card instead"
 	pruning.pressed.connect(func(): g.begin_decompile(); refresh())

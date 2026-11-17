@@ -25,8 +25,8 @@ func _geometry() -> void:
  _check(bound.end.x<=view.end_button.position.x,"hand stays left of END TURN")
  _check(not bound.intersects(view.pile_text.get_global_rect()),"hand stays clear of pile counters")
  for card in view.hand.get_children():
-  _check(card.size==Vector2(146,218),"cards retain their printed size")
-  _check(card.rest_position.x>=0 and card.rest_position.x+146<=view.hand.size.x,"fan has no clipped outer cards")
+  _check(card.size==FriendlyCard.CARD_SIZE,"cards retain their printed size")
+  _check(card.rest_position.x>=0 and card.rest_position.x+FriendlyCard.CARD_SIZE.x<=view.hand.size.x,"fan has no clipped outer cards")
 func _run() -> void:
  main=load("res://scenes/Main.tscn").instantiate(); root.add_child(main)
  await _settle()
