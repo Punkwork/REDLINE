@@ -30,6 +30,23 @@ The surrealism comes from the sincerity of the sales pitch. A cheerful orbit ani
 - [Dr. Grordbort’s](https://www.gregbroadmore.com/portfolio/dr-grordborts) gives imagined space-age technology the heft and finish of fabricated objects.
 - [BioShock’s Rapture](https://irrationalgames.ghoststorygames.com/insider/from-the-vault-evolution/) carries Deco styling from its architecture into the machines people use.
 
+### VISUAL-DECISIONS-2026-11-17 — Approved visual decisions from VIS-001, CHROME-001 and CARDS-001 (APPROVED, 2026-11-17)
+
+Only choices the designer explicitly made on 2026-11-17 are recorded here. Everything else in that work (final art, working values, and Codex's "Interpretations to confirm") remains under review; see `docs/HANDOFF.md`, *Waiting on the designer*. Detail: `docs/REDLINE_VISUAL_LANGUAGE.md`, `docs/REDLINE_DEVELOPMENT_LOG.md` (2026-11-17 entries), and `docs/visual/`.
+
+| Decision | Designer's words | Commit |
+|---|---|---|
+| **The Friendly Lie (direction B)** is the visual direction: the corporations present as friendly consumer products and their ICE as that product's interface; the Rustler layer is visibly separate. Chosen over A *Phosphor* and C *Watchtower*. | “I do really like the B option the friendly lie … I think this is a more suitable direction” | 100a2aa |
+| **Atomic Salvage is deprecated.** It no longer sets the look; the requirements in `REDLINE_UI_NULREM_Design_For_Claude.md` still apply (see Visual Language §2.10). | “I would deprecate that atomic salvage look” | 100a2aa |
+| **Rustlers draw 6 cards a turn.** | VIS-001 brief: “Rustlers draw 6 cards a turn” | 100a2aa |
+| **Chrome Deco encounter:** corporate luxury above, the Rustler's photocopied resistance below. HALCYON's CAPTCHA encounter is the first implementation. | “Chrome Deco corporate luxury above, photocopied Rustler resistance below” | 15ae99e |
+| **No black panels behind ICE rules.** ICE rule surfaces follow the corporation's Atomic Age / Art Deco service look; the prototype uses pearl-enamel plaques. | “The black backgrounds on the ice in the images don’t work with the rest of the design … atomic age /art deco / clean friendly corporation design” | 4c2135e |
+| **Cards are heavy, type-specific 1950s slot cartridges** with protruding parts and the BW cost mostly outside the text area. | Blank carrier art: “Looks good” | 083df86 |
+| **Card board colours:** tobacco brown for SCRIPT, olive for PROGRAM, blue-green for PROTOCOL (review options A, C and D). | A/C/D selected | 744f3dc |
+| **No white text backgrounds on any card.** | “No card should have a white background for the text” | 744f3dc |
+| **Bloatware uses the Whirlwind design on an oxide-red board,** distinct from SCRIPT's brown. | Whirlwind #3 selected; oxide red: “Perfect” | 744f3dc |
+| **Highlighted numbers on cards glow as amber text** instead of sitting on highlighted blocks. | Requested glowing amber text instead of highlighted backgrounds | 29c660c |
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.

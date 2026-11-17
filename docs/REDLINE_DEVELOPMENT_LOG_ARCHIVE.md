@@ -1417,3 +1417,41 @@ TESTS: 219 passed, 0 failed
 
 
 <!-- LOG-001: oldest whole live-log entry appended on 2026-11-17. -->
+
+
+## 2026-11-15 — DSY-001, DSY-002, DSY-003, DSY-006: Add footprint pressure, deck analysis and DECOMPILE (Codex)
+
+**Commit reference:** `playtest3-step1` (tag on this step commit).
+
+**Changed:** FOOTPRINT/caps and bands, per-Node bloat TRACE, optional GHOST draw OFF, duplicate-aware draw estimates and key-card previews, COVERAGE/tag density, and guarded full-clear DECOMPILE.
+
+**Interpretations to confirm:** Draw estimates use nominal stage lengths of 5/6/7 Rustler turns for HALCYON/IRONWATCH/LUCIDA. Conditional fallback cards count toward coverage; BORROWED CREDENTIALS requires HUSH and SHATTER requires SLEDGE. Existing TRACE modifiers apply to bloat tax; reported tax is actual TRACE gained. Empty-card reward skips still work.
+
+**Deferred:** Playable IRONWATCH/LUCIDA are outside the slice; their cap values are supported by the analysis API. Deck-editing services outside full-clear rewards are later work.
+
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
+
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+
+  bot: phase=SLICE_DONE vitae=10 trace=16 strikes=0 cred=16 deck=15 steps=28
+  deck GENERALIST: avg end size 14.07; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  pulp GENERALIST: per encounter 13.2 incoming (1.7 from Black ICE), 5.8 absorbed by SHIELD, 7.4 to VITAE, 3.5 hits
+  sim GENERALIST: 3/30 cleared; deaths by node { "CONSENT WALL": 4, "TERMS & CONDITIONS": 10, "DOORBELL": 13 }; survivors' avg end VITAE 18.7; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.43; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  pulp ECHO: per encounter 9.8 incoming (0.0 from Black ICE), 3.2 absorbed by SHIELD, 6.7 to VITAE, 3.0 hits
+  sim ECHO: 14/30 cleared; deaths by node { "DOORBELL": 6, "CAPTCHA": 4, "TERMS & CONDITIONS": 6 }; survivors' avg end VITAE 12.9; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.20; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  pulp RIOT: per encounter 11.1 incoming (1.9 from Black ICE), 4.1 absorbed by SHIELD, 7.0 to VITAE, 2.9 hits
+  sim RIOT: 3/30 cleared; deaths by node { "DOORBELL": 15, "TERMS & CONDITIONS": 10, "CAPTCHA": 2 }; survivors' avg end VITAE 14.0; purges 0 in 0 runs; SHATTER played 67 times in 29 runs
+  deck VECTOR: avg end size 14.17; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  pulp VECTOR: per encounter 11.3 incoming (0.1 from Black ICE), 3.6 absorbed by SHIELD, 7.8 to VITAE, 3.2 hits
+  sim VECTOR: 7/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 9, "DOORBELL": 9 }; survivors' avg end VITAE 7.0; purges 22 in 17 runs; SHATTER played 0 times in 0 runs
+TESTS: 233 passed, 0 failed
+```
+
+<!-- LOG-001: oldest whole live-log entry appended on 2026-11-17 (Claude). -->
