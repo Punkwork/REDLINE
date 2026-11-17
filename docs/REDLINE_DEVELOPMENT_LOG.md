@@ -418,3 +418,12 @@ TESTS: 352 passed, 0 failed
 **Interpretations to confirm:** the PULP threshold applies to the largest individual subroutine, not the sum of an ICE's PULP, to reproduce reference 08 (AUTO-RENEW 1+2+3 remains cheery) and 09 (incoming CAPTCHA PULP 6 becomes lethal). Any positive CORTEX qualifies. Hidden rules remain “? HIDDEN”; random curve values remain “PULP ?”, even when the mascot telegraphs danger. Red rule chips use toner text rather than white for 4.5:1 contrast.
 
 **Validation:** code/resource parsing and state-based mood calculations; the final VIS-001g fixtures exercise the real turn-1/turn-3 board. No rules, card stats or corporation values changed.
+
+
+## 2026-11-17 — VIS-001e: Cracking, strike disclosure and Mask off (Codex)
+
+**Commit tag:** `vis-001e`. TRACE/strike state drives the app background and corporate edges; the Rustler theme stays fixed. Added a one-time checking-on-you toast, background-only glitch bands, the PAST 50% tag and NUL/REM countdown. First strike displays the hostile “We see you.” modal and a corporate TRACER card, then returns to Cracking; strike 2+ keeps the hostile background and square red/black mascots. The reserve meter and actual post-strike TRACE remain visible.
+
+**Interpretations to confirm:** Cracking persists after strike 1 even if TRACE is reduced below 20, since the Friendly definition requires no strikes. The modal shows the real post-strike TRACE of 20 in the HUD rather than faking 40; its copy describes the strike and inserted TRACER. The toast lasts 3 seconds; the modal lasts 2.5 seconds or until dismissed. SPAM's proposed footer is “Recommended for you.” A red rule chip uses toner text for contrast. All distortion stays behind opaque text panels.
+
+**Validation:** Godot 4.3 parser; state changes read Game.trace/strikes and never insert cards or Black ICE themselves. Only the existing game rules cause those changes. Live-state fixture screenshots follow in VIS-001g.

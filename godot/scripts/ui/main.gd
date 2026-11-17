@@ -282,6 +282,7 @@ func _new_run() -> void:
 	refresh()
 
 func _start_as(who: String) -> void:
+	friendly.reset_session()
 	g.new_run(who)
 	nr.rustler = CardDB.RUSTLERS[who].nulrem
 	if first_run:

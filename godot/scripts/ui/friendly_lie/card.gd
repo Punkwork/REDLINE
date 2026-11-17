@@ -9,6 +9,11 @@ var body: Control
 var rest_position := Vector2.ZERO
 var rest_rotation := 0.0
 var drag_started := false
+class CorporateArt extends Control:
+ func _draw() -> void:
+  draw_style_box(FriendlyLook.style(Color("#FFE5E5"),Color.TRANSPARENT,0,6),Rect2(Vector2.ZERO,size))
+  draw_arc(Vector2(size.x/2,12),4,0,TAU,24,FriendlyLook.RED,2,true)
+  draw_arc(Vector2(size.x/2,32),9,PI,TAU,24,FriendlyLook.RED,2,true)
 class CostCircle extends Control:
  func _draw() -> void: draw_circle(Vector2(13, 13), 13, FriendlyLook.HIGHLIGHT)
 func setup(owner_view, id: String, card_uid: int) -> void:
@@ -30,22 +35,27 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  cost.position = Vector2(115, 8); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
  var rule: String = view.game.card_text(id)
  var art_h := 42.0 if rule.length() < 145 else (22.0 if rule.length() < 280 else 4.0)
- var art := FriendlyLook.label("◉" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
+ var art := FriendlyLook.label("" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
  art.position = Vector2(9, 49); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
- var type_line := FriendlyLook.label(d.type + (" · " + "/".join(d.tags) if not d.tags.is_empty() else ""), 8, Color("#4A5568") if corp else Color("#3A3A3A"), view.skin.font if corp else FriendlyLook.MONO)
+ if corp:
+  var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(9,49); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
+ var type_line := FriendlyLook.label(d.type + (" · " + view.skin.corporation if corp else (" · " + "/".join(d.tags) if not d.tags.is_empty() else "")), 8, Color("#4A5568") if corp else Color("#3A3A3A"), view.skin.font if corp else FriendlyLook.MONO)
  type_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; type_line.position = Vector2(9, 54 + art_h); type_line.size = Vector2(128, 24); body.add_child(type_line)
  var rules := RichTextLabel.new(); rules.mouse_filter = Control.MOUSE_FILTER_IGNORE; rules.bbcode_enabled = true; rules.scroll_active = false
  var font: Font = view.skin.font if corp else FriendlyLook.MONO
  var cached: Dictionary = view.game._find(view.game.hand, uid)
  var cache_h := 15 if cached.get("cached", false) else 0
  var y := 80 + art_h
- var available := 210 - y - cache_h
+ var available := 210 - y - cache_h - (20 if corp else 0)
  var font_size := 11
  while font_size > 7 and font.get_multiline_string_size(rule, HORIZONTAL_ALIGNMENT_LEFT, 128, font_size).y > available: font_size -= 1
  rules.add_theme_font_override("normal_font", font); rules.add_theme_font_size_override("normal_font_size", font_size); rules.add_theme_color_override("default_color", FriendlyLook.TONER)
  var re := RegEx.new(); re.compile("([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)")
  rules.text = re.sub(rule, "[bgcolor=#E4FF3A][color=#111111]$1[/color][/bgcolor]", true)
  rules.position = Vector2(9, y); rules.size = Vector2(128, available); body.add_child(rules)
+ if corp:
+  var footer := FriendlyLook.label("We just want to stay in touch." if id=="TRACER" else "Recommended for you.",9,Color("#4A5568"),view.skin.font)
+  footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; footer.position=Vector2(9,195); footer.size=Vector2(128,19); body.add_child(footer)
  if cache_h > 0:
   var cached_tag := FriendlyLook.label("CACHED" + (" · TEMP" if cached.has("cache_turns") else ""), 9, FriendlyLook.TONER, FriendlyLook.BOLD)
   cached_tag.position = Vector2(9, 199); body.add_child(cached_tag)

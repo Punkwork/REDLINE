@@ -45,6 +45,10 @@ func setup(owner_view, i: int, state: String) -> void:
   "HOUSE_CALL": body_rect = Rect2(65,8,235,215); face_rect = Rect2(132,58,100,100); face_kind = "house"; radius = 0
  if lethal:
   var glow := FriendlyLook.panel(Color("#E5484D18"), FriendlyLook.RED, 2, radius, 12); place(glow,body_rect.position-Vector2(5,5),body_rect.size+Vector2(10,10)); glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ if view.corporation_state=="cracking":
+  for sign in [-1,1]:
+   var split := FriendlyLook.panel(Color.TRANSPARENT,FriendlyLook.RED if sign<0 else Color("#77ABDF"),3,radius)
+   split.mouse_filter=Control.MOUSE_FILTER_IGNORE; place(split,body_rect.position+Vector2(sign*3,0),body_rect.size)
  body = FriendlyLook.panel(accent if id in ["AUTO_RENEW", "FREE_TRIAL", "ACCEPT_ALL"] and not lethal else fill, accent if lethal else Color("#D5DCE5"), 2 if lethal else 0, radius, 4)
  var soft := body.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; soft.shadow_color = Color(0,0,0,0.12); soft.shadow_size=14; soft.shadow_offset=Vector2(0,7); body.add_theme_stylebox_override("panel",soft)
  body.mouse_filter = Control.MOUSE_FILTER_PASS; place(body,body_rect.position,body_rect.size)
@@ -102,6 +106,9 @@ func setup(owner_view, i: int, state: String) -> void:
   elif d.get("ability", "") == "BOOTING" and view.game.enc.turn < 3: text = "LOCKED · " + text
   var action := FriendlyLook.button(text,func(): view.break_action(index,sub), FriendlyLook.RED if lethal else Color.WHITE, ink,0 if lethal else 18,view.skin.bold_font)
   var chk: Dictionary = view.break_info(index,sub)
+  action.add_theme_color_override("font_disabled_color",ink)
+  for button_state in ["normal","hover","disabled"]:
+   var button_style := action.get_theme_stylebox(button_state).duplicate() as StyleBoxFlat; button_style.border_color=accent; button_style.set_border_width_all(1); action.add_theme_stylebox_override(button_state,button_style)
   action.disabled = not chk.ok; action.tooltip_text = "DEADLOCK · " + ("BROKEN" if done else chk.get("reason", ""))
   var pos := Vector2(86,188); var extent := Vector2(210,34)
   if id == "CAPTCHA": pos=Vector2(54,198); extent=Vector2(202,28)

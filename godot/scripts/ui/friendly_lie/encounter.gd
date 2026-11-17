@@ -26,12 +26,25 @@ var drag_source: Control
 var reduced_motion := false
 var hand_signature := ""
 var new_subroutines: Array = []
+var corporation_state := "friendly"
+var previous_trace := 0
+var previous_strikes := 0
+var warned := false
+var strike_until := 0.0
+var toast_until := 0.0
+var strike_overlay: Control
+var toast: Panel
+var app_ground: ColorRect
+var glitch_layer: Control
 func _ready() -> void:
  theme = FriendlyLook.THEME
  mouse_filter = Control.MOUSE_FILTER_IGNORE
  skin = ui.friendly_skin
- var ground := ColorRect.new(); ground.color = skin.ground; ground.position = Vector2.ZERO; ground.size = Vector2(1600, 1000); ground.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(ground)
+ app_ground = ColorRect.new(); app_ground.color = skin.ground; app_ground.position = Vector2.ZERO; app_ground.size = Vector2(1600, 1000); app_ground.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(app_ground)
  background = TextureRect.new(); background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 0.75; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
+ glitch_layer = Control.new(); glitch_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(glitch_layer)
+ for y in [192,362,557,853]:
+  var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
  node_tag = FriendlyLook.panel(FriendlyLook.TONER); node_tag.position = Vector2(40, 32); node_tag.size = Vector2(720, 86); node_tag.rotation_degrees = -1.0; add_child(node_tag)
  trace_tag = FriendlyLook.panel(FriendlyLook.TONER); trace_tag.position = Vector2(972, 32); trace_tag.size = Vector2(588, 106); trace_tag.rotation_degrees = 0.7; add_child(trace_tag)
  ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(150, 146); ice_scroll.size = Vector2(1300, 466); ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
@@ -42,6 +55,7 @@ func _ready() -> void:
  note = FriendlyLook.panel(FriendlyLook.TONER); note.position = Vector2(248, 680); note.size = Vector2(1104, 44); note.rotation_degrees = -0.4; add_child(note)
  note_text = FriendlyLook.label("", 12, FriendlyLook.HIGHLIGHT); note_text.position = Vector2(10, 4); note_text.size = Vector2(900, 36); note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
  var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.position = Vector2(995, 7); voice.size = Vector2(100, 30); note.add_child(voice)
+ var rig_ground := FriendlyLook.panel(FriendlyLook.TONER); rig_ground.position=Vector2(248,726); rig_ground.size=Vector2(1104,28); add_child(rig_ground)
  var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(248, 726); rig_scroll.size = Vector2(1104, 28); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
  rig_row = HBoxContainer.new(); rig_row.add_theme_constant_override("separation", 8); rig_scroll.add_child(rig_row)
  hand = FriendlyHand.new(); hand.position = Vector2(248, 758); hand.size = Vector2(1104, 232); hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
@@ -50,6 +64,11 @@ func _ready() -> void:
  end_button = FriendlyLook.button("END TURN →", func(): ui._on_end_turn()); end_button.position = Vector2(1360, 842); end_button.size = Vector2(200, 65); end_button.add_theme_font_size_override("font_size", 20); add_child(end_button)
  var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), FriendlyLook.PAPER); deck.position = Vector2(1360, 916); deck.size = Vector2(200, 28); add_child(deck)
  end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), FriendlyLook.TONER, FriendlyLook.RED); end_run_button.position = Vector2(1360, 951); end_run_button.size = Vector2(200, 29); add_child(end_run_button)
+ toast = FriendlyLook.panel(Color.WHITE,FriendlyLook.RED,1,18,3); toast.position=Vector2(530,110); toast.size=Vector2(540,34); toast.z_index=5; add_child(toast)
+ var toast_text := FriendlyLook.label("Is everything okay? We're just checking on you.",15,skin.ink,skin.font); toast_text.position=Vector2(15,6); toast.add_child(toast_text); toast.hide()
+ strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
+ strike_overlay.gui_input.connect(func(e):
+  if e is InputEventMouseButton and e.pressed: dismiss_strike())
  log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 607); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
 func clear(node: Node) -> void:
  for child in node.get_children(): node.remove_child(child); child.queue_free()
@@ -60,6 +79,7 @@ func at(parent: Node, control: Control, pos: Vector2, extent: Vector2 = Vector2.
 func sync(model: Game) -> void:
  game = model
  if game.enc.is_empty(): return
+ update_corporation()
  clear(node_tag); clear(trace_tag); clear(bottom_hud)
  node_tag.size.x = FriendlyLook.BOLD.get_string_size("NODE: " + game.node.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 29).x + 28
  at(node_tag, FriendlyLook.label("NODE: " + game.node.name, 29, FriendlyLook.PAPER, FriendlyLook.BOLD), Vector2(12, 0), Vector2(700, 46))
@@ -72,8 +92,9 @@ func sync(model: Game) -> void:
  var tick := ColorRect.new(); tick.color = FriendlyLook.PAPER; tick.mouse_filter = Control.MOUSE_FILTER_IGNORE; at(trace_tag, tick, Vector2(205, 10), Vector2(2, 28))
  at(trace_tag, FriendlyLook.label("%d/40" % game.trace, 25, FriendlyLook.RED if game.trace >= 20 else FriendlyLook.PAPER, FriendlyLook.BOLD), Vector2(340, 2))
  at(trace_tag, FriendlyLook.label("STRIKES " + "■".repeat(mini(3, game.strikes)) + "□".repeat(maxi(0, 3 - game.strikes)), 13, FriendlyLook.RED), Vector2(450, 12))
- at(trace_tag, FriendlyLook.label("CRED %d  ·  RESERVE %d/%d  ·  RAM %d/%d" % [game.cred, game.enc.reserve, game.enc.reserve_start, game.ram_used(), game.ram_total()], 12, FriendlyLook.PAPER), Vector2(14, 45))
- at(trace_tag, FriendlyLook.label("FOOTPRINT %d/%d · %s · AMP %d" % [game.footprint(), game.footprint_cap(), game.footprint_band(), game.amp], 11, FriendlyLook.HIGHLIGHT), Vector2(14, 73))
+ at(trace_tag, FriendlyLook.label("CRED %d  ·  RESERVE %d/%d  ·  RAM %d/%d" % [game.cred, game.enc.reserve, game.enc.reserve_start, game.ram_used(), game.ram_total()], 12, FriendlyLook.RED if game.enc.reserve==0 else FriendlyLook.PAPER), Vector2(14, 45))
+ var reserve := ProgressBar.new(); reserve.max_value=maxi(1,game.enc.reserve_start); reserve.value=game.enc.reserve; reserve.show_percentage=false; reserve.add_theme_stylebox_override("background",FriendlyLook.style(Color("#3A3A3A"))); reserve.add_theme_stylebox_override("fill",FriendlyLook.style(FriendlyLook.HIGHLIGHT)); at(trace_tag,reserve,Vector2(14,65),Vector2(264,3))
+ at(trace_tag, FriendlyLook.label("PAST 50% · THEY'RE LOOKING" if corporation_state=="cracking" else "FOOTPRINT %d/%d · %s · AMP %d" % [game.footprint(),game.footprint_cap(),game.footprint_band(),game.amp],11,FriendlyLook.RED if corporation_state=="cracking" else FriendlyLook.HIGHLIGHT),Vector2(14,73))
  var stats := [["BW", str(game.bw), FriendlyLook.HIGHLIGHT], ["VITAE", "%d/%d" % [game.vitae, game.max_vitae], FriendlyLook.PAPER], ["SHIELD", str(game.shield), FriendlyLook.PAPER], ["NEXT DRAW", str(game.draw_size()), FriendlyLook.PAPER]]
  for i in stats.size():
   at(bottom_hud, FriendlyLook.label(stats[i][0], 11, FriendlyLook.PAPER), Vector2(12, i * 52 + 15))
@@ -82,7 +103,7 @@ func sync(model: Game) -> void:
    var line := ColorRect.new(); line.color = Color("#3A3A3A"); at(bottom_hud, line, Vector2(0, i * 52), Vector2(200, 2))
  for i in Game.BW_PER_TURN:
   var slit := ColorRect.new(); slit.color = FriendlyLook.HIGHLIGHT if i < maxi(0, Game.BW_PER_TURN - game.bw) else Color("#3A3A3A"); at(bottom_hud, slit, Vector2(12 + i * 16, 39), Vector2(12, 5))
- pile_text.text = "DECK %d · DISCARD %d\nREBOOT ~%d turns\nLast: %s" % [game.draw_pile.size(), game.discard.size(), int(ceil(float(game.draw_pile.size()) / maxi(1, game.draw_size()))), "/".join(game.enc.get("last_tags", []))]
+ pile_text.text = "DECK %d · DISCARD %d\nFP %d/%d · %s\nREBOOT ~%d · AMP %d\nLast: %s" % [game.draw_pile.size(), game.discard.size(),game.footprint(),game.footprint_cap(),game.footprint_band(),int(ceil(float(game.draw_pile.size())/maxi(1,game.draw_size()))),game.amp,"/".join(game.enc.get("last_tags",[]))]
  end_button.disabled = game.phase != "PLAYER" or ui.responding
  end_run_button.disabled = ui.responding
  track_new_subs()
@@ -91,8 +112,14 @@ func sync(model: Game) -> void:
  log_text.tooltip_text = "\n".join(game.log)
 func _process(_dt: float) -> void:
  if not visible or not is_instance_valid(ui): return
- note_text.text = "NUL/REM: " + ui.nr_text.text
- note_text.visible_ratio = ui.nr_text.visible_ratio
+ var context := ""
+ if corporation_state=="mask_off": context="the mask is off. one more strike and we can't leave. "
+ elif corporation_state=="cracking": context="%d TRACE to a strike. " % maxi(0,Game.MAX_TRACE-game.trace)
+ note_text.text="NUL/REM: " + context + ui.nr_text.text
+ note_text.visible_ratio=ui.nr_text.visible_ratio if context=="" else 1.0
+ var now := Time.get_ticks_msec()/1000.0
+ toast.visible=now<toast_until
+ if strike_overlay.visible and now>=strike_until: dismiss_strike()
 func build_rig() -> void:
  clear(rig_row)
  rig_row.add_child(FriendlyLook.label("RIG / RACK", 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
@@ -271,3 +298,37 @@ func scan_tag(i: int) -> Control:
  if game.pending.get("kind")=="patient_zero": list.add_child(FriendlyLook.button("INFECT THIS ICE",func(): game.choose_ice(i); ui.refresh()))
  var tape := ColorRect.new(); tape.color=FriendlyLook.HIGHLIGHT; tape.size=Vector2(60,12); tape.position=Vector2(145,-6); tape.rotation_degrees=2; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
  return panel
+
+func reset_session() -> void:
+ previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
+ if is_instance_valid(strike_overlay): strike_overlay.hide()
+func update_corporation() -> void:
+ var now := Time.get_ticks_msec()/1000.0
+ corporation_state="mask_off" if game.strikes>=2 else ("cracking" if game.trace>=20 or game.strikes==1 else "friendly")
+ if not warned and previous_trace<20 and game.trace>=20:
+  warned=true; toast_until=now+3.0
+ if game.strikes==1 and previous_strikes==0:
+  strike_until=now+2.5; build_strike(); strike_overlay.show()
+ if game.strikes>=2: strike_overlay.hide()
+ previous_trace=game.trace; previous_strikes=game.strikes
+ apply_background()
+func apply_background() -> void:
+ var hostile := corporation_state=="mask_off" or strike_overlay.visible
+ app_ground.color=Color("#14070A") if hostile else skin.ground
+ background.texture=skin.hostile_background if hostile and skin.hostile_background!=null else skin.background
+ glitch_layer.visible=corporation_state=="cracking" and not reduced_motion
+func dismiss_strike() -> void:
+ strike_overlay.hide(); strike_until=0; apply_background()
+func build_strike() -> void:
+ clear(strike_overlay)
+ var dim := ColorRect.new(); dim.color=Color(0.05,0,0,0.5); dim.size=Vector2(1600,1000); dim.mouse_filter=Control.MOUSE_FILTER_IGNORE; strike_overlay.add_child(dim)
+ var modal := FriendlyLook.panel(Color("#140809"),FriendlyLook.RED,2,skin.radius); modal.position=Vector2(295,200); modal.size=Vector2(1010,400); strike_overlay.add_child(modal)
+ modal.mouse_filter=Control.MOUSE_FILTER_PASS
+ at(modal,FriendlyLook.label("TRACE STRIKE 1 OF 3",16,FriendlyLook.RED,FriendlyLook.BOLD),Vector2(32,30))
+ at(modal,FriendlyLook.label("We see you.",68,Color("#F6E7E7"),skin.bold_font),Vector2(32,64))
+ var line := FriendlyLook.label("HALCYON has located you. We've added something to help us keep in touch.",20,Color("#E4B5B7"),skin.font); line.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; at(modal,line,Vector2(32,166),Vector2(660,70))
+ at(modal,FriendlyLook.label("+1 TRACER shuffled into your draw pile",15,FriendlyLook.HIGHLIGHT),Vector2(32,260))
+ at(modal,FriendlyLook.label("TRACE drops to 20",15,FriendlyLook.HIGHLIGHT),Vector2(32,290))
+ at(modal,FriendlyLook.label("next strike: BLACK ICE joins this encounter",13,FriendlyLook.PAPER),Vector2(32,322))
+ var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(790,65); tracer.scale=Vector2(1.2,1.2); tracer.rotation_degrees=3; modal.add_child(tracer)
+ at(modal,FriendlyLook.button("CONTINUE",dismiss_strike,FriendlyLook.RED,FriendlyLook.TONER,skin.radius,skin.bold_font),Vector2(32,353),Vector2(160,32))
