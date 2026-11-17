@@ -76,7 +76,7 @@ func _ready() -> void:
  hand = FriendlyHand.new(); hand.position = Vector2(248, 758); hand.size = Vector2(1104, 232); hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
  bottom_hud = FriendlyLook.panel(FriendlyLook.TONER); bottom_hud.position = Vector2(40, 770); bottom_hud.size = Vector2(200, 212); add_child(bottom_hud)
  var piles_paper:=FriendlyLook.panel(FriendlyLook.PAPER); piles_paper.position=Vector2(1358,766); piles_paper.size=Vector2(204,70); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
- pile_text = FriendlyLook.label("", 11, FriendlyLook.TONER); pile_text.position = Vector2(1364, 770); pile_text.size = Vector2(198, 64); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
+ pile_text = FriendlyLook.label("", 12, FriendlyLook.TONER); pile_text.position = Vector2(1364, 770); pile_text.size = Vector2(198, 64); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
  end_button = FriendlyLook.button("END TURN →", func(): ui._on_end_turn()); end_button.position = Vector2(1360, 842); end_button.size = Vector2(200, 65); end_button.add_theme_font_size_override("font_size", 20); add_child(end_button)
  var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), FriendlyLook.PAPER); deck.position = Vector2(1360, 916); deck.size = Vector2(200, 28); add_child(deck)
  end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), FriendlyLook.TONER, FriendlyLook.RED); end_run_button.position = Vector2(1360, 951); end_run_button.size = Vector2(200, 29); add_child(end_run_button)
@@ -128,7 +128,7 @@ func sync(model: Game) -> void:
    var line := ColorRect.new(); line.color = Color("#3A3A3A"); at(bottom_hud, line, Vector2(0, i * 52), Vector2(200, 2))
  for i in mini(12,bw_capacity):
   var slit := ColorRect.new(); slit.color = FriendlyLook.HIGHLIGHT if i<maxi(0,bw_capacity-game.bw) else Color("#3A3A3A"); at(bottom_hud,slit,Vector2(12+i*14,39),Vector2(10,5))
- pile_text.text = "DECK %d · DISCARD %d\nFP %d/%d · %s\nREBOOT ~%d · AMP %d\nLast: %s" % [game.draw_pile.size(), game.discard.size(),game.footprint(),game.footprint_cap(),game.footprint_band(),int(ceil(float(game.draw_pile.size())/maxi(1,game.draw_size()))),game.amp,"/".join(game.enc.get("last_tags",[]))]
+ pile_text.text = "DECK %d · DISCARD %d\nFP %d/%d · %s\nREBOOT ~%d · AMP %d" % [game.draw_pile.size(), game.discard.size(),game.footprint(),game.footprint_cap(),game.footprint_band(),int(ceil(float(game.draw_pile.size())/maxi(1,game.draw_size()))),game.amp]
  end_button.disabled = game.phase != "PLAYER" or ui.responding
  end_run_button.disabled = ui.responding
  track_new_subs()
@@ -165,7 +165,7 @@ func _process(_dt: float) -> void:
   flicker_frames=maxi(0,flicker_frames-1)
 func build_rig() -> void:
  clear(rig_row)
- rig_row.add_child(FriendlyLook.label("RIG / RACK", 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
+ rig_row.add_child(FriendlyLook.label("RIG / RACK · CHAIN " + ("/".join(game.enc.get("last_tags",[])) if not game.enc.get("last_tags",[]).is_empty() else "—"), 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
  for p in game.installed:
   var d := CardDB.def(p.inst.id)
   var text: String = d.name
@@ -192,14 +192,14 @@ func build_ice() -> void:
   mascot.previous_mood=prior.get("mood", "")
   mascot.just_broken=not prior.is_empty() and game.enc.ice[i].broken.count(true)>prior.broken.count(true)
   mascot.setup(self,i,mood_for(i))
-  if game.enc.ice.size()==3:
-   var stage:=Control.new(); stage.custom_minimum_size=Vector2(400,184); column.add_child(stage); stage.add_child(mascot); mascot.scale=Vector2(0.8,0.8); mascot.pivot_offset=Vector2.ZERO
-  else: column.add_child(mascot)
+  # Scale the illustration carrier, not the actor's flinch transform or any rule text.
+  var stage:=Control.new(); stage.name="MascotStage"; stage.custom_minimum_size=Vector2(400 if game.enc.ice.size()==3 else 480,190); column.add_child(stage)
+  var carrier:=Control.new(); carrier.name="IllustrationScale"; carrier.scale=Vector2(0.70,0.70) if game.enc.ice.size()==3 else Vector2(0.82,0.82); carrier.position=Vector2(32 if game.enc.ice.size()==3 else 42,0); stage.add_child(carrier); carrier.add_child(mascot)
   var scan := scan_tag(i); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
    scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
 func build_response() -> void:
- clear(response); response.add_child(FriendlyLook.label("NEXT RESPONSE ▸", 13, FriendlyLook.TONER, FriendlyLook.BOLD))
+ clear(response); response.add_child(FriendlyLook.label("NEXT RESPONSE ▸", 15, FriendlyLook.TONER, FriendlyLook.BOLD))
  for step in game.response_preview():
   if step.skipped: continue
   var words := []
@@ -292,7 +292,7 @@ func rule_chip(text: String, state: String = "normal") -> Control:
  if state == "new": bg=FriendlyLook.RED
  if state in ["broken","hidden"]: bg=FriendlyLook.TONER; ink=FriendlyLook.GREY if state == "broken" else FriendlyLook.PAPER
  var style := FriendlyLook.style(bg); style.set_content_margin_all(3); chip.add_theme_stylebox_override("panel",style)
- chip.add_child(FriendlyLook.label(text,11,ink,FriendlyLook.BOLD))
+ chip.add_child(FriendlyLook.label(text,14,ink,FriendlyLook.BOLD))
  if state in ["broken","hidden"]:
   chip.draw.connect(func():
    var r := Rect2(Vector2(1,1),chip.size-Vector2(2,2))
@@ -305,18 +305,19 @@ func rule_chip(text: String, state: String = "normal") -> Control:
  return chip
 func scan_tag(i: int) -> Control:
  var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
- var panel := PanelContainer.new(); panel.custom_minimum_size=Vector2(350,0)
+ var panel := PanelContainer.new(); var scan_width:=380 if game.enc.ice.size()==3 else 440
+ panel.custom_minimum_size=Vector2(scan_width,0)
  var candidates:=game.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction",0)>0 and game.can_play(c.uid).ok and game.would_zero(i,int(CardDB.def(c.id).get("zeroed_reduction",0))))
  var eligible:=not candidates.is_empty()
  var style := FriendlyLook.style(FriendlyLook.TONER,FriendlyLook.AMBER if eligible else FriendlyLook.TONER,3 if eligible else 2,0,5); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
  if eligible: panel.tooltip_text="ZEROED available: "+" / ".join(candidates.map(func(c): return CardDB.def(c.id).name))
  var list := VBoxContainer.new(); list.add_theme_constant_override("separation",4); panel.add_child(list)
  var heading := HBoxContainer.new(); list.add_child(heading)
- var name := FriendlyLook.label(d.name,14,FriendlyLook.PAPER,FriendlyLook.BOLD); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
+ var name := FriendlyLook.label(d.name,17,FriendlyLook.PAPER,FriendlyLook.BOLD); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
  var delta: int = game.ice_str(i)-int(d.str)
- heading.add_child(FriendlyLook.label("STR %d%s" % [game.ice_str(i)," ↑%d" % delta if delta>0 else ""],13,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD))
- var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · "),10,FriendlyLook.GREY)
- meta.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; meta.custom_minimum_size.x=326; list.add_child(meta)
+ heading.add_child(FriendlyLook.label("STR %d%s" % [game.ice_str(i)," ↑%d" % delta if delta>0 else ""],15,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD))
+ var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · "),12,FriendlyLook.GREY)
+ meta.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; meta.custom_minimum_size.x=scan_width-24; list.add_child(meta)
  if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",10,FriendlyLook.HIGHLIGHT))
  var rows: Array = game.active_subs(i).duplicate()
  if d.type == "TUMBLER":
@@ -329,7 +330,7 @@ func scan_tag(i: int) -> Control:
   var row := HBoxContainer.new(); row.add_theme_constant_override("separation",6)
   var slot: int = game.active_subs(i).find(s)
   var label := "SLOT %d · S%d" % [slot+1,s+1] if d.type=="TUMBLER" and slot>=0 else "S%d" % (s+1)
-  var tag := FriendlyLook.label(label,10,FriendlyLook.GREY); tag.custom_minimum_size.x=85; row.add_child(tag)
+  var tag := FriendlyLook.label(label,12,FriendlyLook.GREY); tag.custom_minimum_size.x=85; row.add_child(tag)
   var hidden: bool = not ice.seen[s]
   var words := []
   if hidden: words.append("? HIDDEN")
@@ -351,7 +352,7 @@ func scan_tag(i: int) -> Control:
    var info := break_info(i,s)
    var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),FriendlyLook.TONER,FriendlyLook.PAPER)
    action.disabled = not info.ok; action.tooltip_text = info.get("reason", "") + (" · MARGIN %d" % info.margin if info.has("margin") else ""); row.add_child(action)
-  if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],10,FriendlyLook.PAPER))
+  if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],12,FriendlyLook.PAPER))
   var wrapped_row := drop_wrapper(row,i,s)
   if d.type=="TUMBLER" and slot>=0 and ui.spin.has(i) and not reduced_motion:
    var wrapped: Control = ui._reel(wrapped_row,null,slot,true); list.add_child(wrapped)
@@ -359,15 +360,15 @@ func scan_tag(i: int) -> Control:
   else: list.add_child(wrapped_row)
  if game.hidden_count(i)>0 and d.type=="TUMBLER":
   var pool := HBoxContainer.new(); pool.add_child(FriendlyLook.label("POOL",10,FriendlyLook.GREY)); pool.add_child(rule_chip("? HIDDEN ×%d" % game.hidden_count(i),"hidden")); list.add_child(pool)
- var passive := FriendlyLook.label(d.get("ability_text",""),10,FriendlyLook.GREY); passive.custom_minimum_size.x=326; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
+ var passive := FriendlyLook.label(d.get("ability_text",""),12,FriendlyLook.GREY); passive.custom_minimum_size.x=scan_width-24; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
  if not ice.virus.is_empty():
   var counts := []
   for strain in ice.virus:
    if ice.virus[strain]>0: counts.append("%s %d" % [strain,ice.virus[strain]])
-  var strains := FriendlyLook.label(" · ".join(counts),10,FriendlyLook.HIGHLIGHT); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
+  var strains := FriendlyLook.label(" · ".join(counts),12,FriendlyLook.HIGHLIGHT); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
   if game.worm_ok(i): list.add_child(FriendlyLook.button("SPEND 2 WORM · BREAK 1",func(): game.use_worm(i); ui.refresh()))
  if game.pending.get("kind")=="patient_zero": list.add_child(FriendlyLook.button("INFECT THIS ICE",func(): game.choose_ice(i); ui.refresh()))
- var tape := ColorRect.new(); tape.color=FriendlyLook.HIGHLIGHT; tape.size=Vector2(60,12); tape.position=Vector2(145,-6); tape.rotation_degrees=2; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
+ var tape := ColorRect.new(); tape.color=FriendlyLook.HIGHLIGHT; tape.size=Vector2(60,12); tape.position=Vector2(scan_width/2-30,-6); tape.rotation_degrees=2; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
  return panel
 
 func reset_session() -> void:

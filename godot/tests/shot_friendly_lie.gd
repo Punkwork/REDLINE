@@ -91,7 +91,7 @@ func run() -> void:
  await drag(card.get_global_rect().get_center(),Vector2(1130,475))
  check(root.gui_is_dragging() and main.friendly.dragging_uid==card.uid and card.placeholder,"native drag leaves a hand gap")
  check(main.friendly.watcher_warning.visible,"CLOAK drag warns about WATCHER")
- var mascot: FriendlyMascot=main.friendly.ice_row.get_child(0).get_child(0)
+ var mascot: FriendlyMascot=main.friendly.ice_row.find_children("*","FriendlyMascot",true,false)[0]
  check(mascot.face.look.x>0,"VOID pupil follows dragged card")
  check(g.response_preview()[0].hidden and not g.enc.ice[0].seen[0],"VOID rule remains hidden")
  await snap("vis_06_doorbell_drag")
@@ -121,7 +121,7 @@ func run() -> void:
  var scene_before:=str(g.response_preview())
  main.set_reduced_motion(true); await settle()
  check(main.friendly.reduced_motion and not main.friendly.glitch_layer.visible,"reduced motion suppresses glitch")
- mascot=main.friendly.ice_row.get_child(0).get_child(0)
+ mascot=main.friendly.ice_row.find_children("*","FriendlyMascot",true,false)[0]
  var old_position:=mascot.position; var old_rotation:=mascot.rotation
  await settle(20)
  check(mascot.position==old_position and mascot.rotation==old_rotation,"reduced-motion mascot stays still")

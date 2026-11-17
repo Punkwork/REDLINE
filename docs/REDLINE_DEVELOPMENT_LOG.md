@@ -455,3 +455,11 @@ TESTS: 357 passed, 0 failed
 ```
 
 Average end deck sizes GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE for each. No gameplay values changed by VIS-001; the optional Icepick-selection API preserves existing default costs/selection. ZEROED/TUMBLE PR #9 was integrated locally before VIS; the visual PR includes that dependency and targets stabilization without pushing to or merging it. Designer visual approval and a Windows playtest remain outstanding.
+
+## 2026-11-17 — CHROME-001 step 1: real encounter layout and readability (Codex)
+
+**Direction:** designer: “I agree with your assessment. Work on those items in that order. Giving samples or examples in png format for each step”. Refine one playable CAPTCHA encounter in Chrome Deco, retaining actual rules and the Rustler paper layer. Working branch is unchanged; this feature locally includes the reviewed VIS-001 PR #11 dependency, which remains open.
+
+**Changed:** larger scan headings, rules and passive text; full-size scan panels; smaller illustration carriers preserve separate actor/flinch transforms. CHAIN tags sit in the rig strip; deck counters use three unclipped lines. Added a per-step screenshot fixture using real Generalist READY RIG, cards, AUTO-RENEW and CAPTCHA. All art/state values remain presentation only.
+
+**Sample:** `01-layout-and-readability.png`. Godot 4.3 stage-1 fixture reports zero failures, including actual card text fit and scan width. **Interpretations to confirm:** two-ICE silhouettes use 82% carriers to give rules more room; three-ICE carriers use 70%. These scales are working presentation values. No gameplay values changed.
