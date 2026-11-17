@@ -49,6 +49,11 @@ var next_flicker := 0.0
 var flicker_frames := 0
 var card_positions := {}
 var last_note := ""
+var feedback_panel: Panel
+var feedback_label: Label
+var feedback_until:=0.0
+var feedback_message:=""
+var drag_description:=""
 var bw_capacity := Game.BW_PER_TURN
 var last_encounter: Dictionary = {}
 var last_turn := -1
@@ -91,6 +96,9 @@ func _ready() -> void:
  watcher_text=FriendlyLook.label("",12,FriendlyLook.TONER,FriendlyLook.BOLD); watcher_text.position=Vector2(8,7); watcher_warning.add_child(watcher_text); watcher_warning.hide()
  strike_overlay.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed: dismiss_strike())
+ feedback_panel=FriendlyLook.panel(FriendlyLook.TONER,FriendlyLook.HIGHLIGHT,2); feedback_panel.position=Vector2(606,32); feedback_panel.size=Vector2(350,82); feedback_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(feedback_panel); feedback_panel.hide()
+ feedback_label=FriendlyLook.label("",12,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD); feedback_label.position=Vector2(10,7); feedback_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; feedback_label.size=Vector2(330,70); feedback_panel.add_child(feedback_label)
+ var log_paper:=FriendlyLook.panel(FriendlyLook.PAPER); log_paper.position=Vector2(248,607); log_paper.size=Vector2(1104,13); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
  log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 607); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
 func clear(node: Node) -> void:
  for child in node.get_children(): node.remove_child(child); child.queue_free()
@@ -154,6 +162,14 @@ func _process(_dt: float) -> void:
  var now := Time.get_ticks_msec()/1000.0
  toast.visible=now<toast_until
  if strike_overlay.visible and now>=strike_until: dismiss_strike()
+ feedback_panel.visible=dragging_uid>=0 or now<feedback_until
+ if dragging_uid>=0:
+  var source: Dictionary=game.find_card(dragging_uid)
+  if source.is_empty():
+   var installed_source: Dictionary=game._installed_entry(dragging_uid)
+   if not installed_source.is_empty(): source=installed_source.inst
+  feedback_label.text=(CardDB.def(source.id).name+"\n" if not source.is_empty() else "") + (drag_description if drag_description!="" else "Drop on a compatible rule row.")
+ else: feedback_label.text=feedback_message
  watcher_warning.visible=false
  if dragging_uid>=0 and drag_kind=="card":
   var c := game.find_card(dragging_uid)
@@ -234,9 +250,9 @@ func build_hand() -> void:
    c.position=card_positions.get(c.uid,destination+Vector2(0,7))
    c.motion=c.create_tween(); c.motion.tween_property(c,"position",destination,0.09).set_trans(Tween.TRANS_LINEAR)
 func begin_drag(data: Dictionary, source: Control) -> void:
- dragging_uid = data.uid; drag_kind = data.kind; drag_source = source; hover_uid = data.uid
+ dragging_uid = data.uid; drag_kind = data.kind; drag_source = source; hover_uid = data.uid; drag_description=""
 func end_drag() -> void:
- dragging_uid = -1; drag_kind = ""; hover_uid = -1; drag_source = null
+ dragging_uid = -1; drag_kind = ""; hover_uid = -1; drag_source = null; drag_description=""
 func click_ice(i: int) -> void:
  if game.phase == "CHOICE" and game.pending.get("kind") == "patient_zero": game.choose_ice(i); ui.refresh()
  else: ui._on_ice_clicked(i)
@@ -246,7 +262,10 @@ func break_info(i: int, sub: int) -> Dictionary:
  return game.break_info(i,sub)
 func break_action(i: int, sub: int) -> void:
  if game.phase == "CHOICE" and game.pending.get("kind") == "card_break": game.choose_sub(i,sub); ui.refresh()
- else: ui._on_break(i,sub)
+ else:
+  var ice: Dictionary=game.enc.ice[i]; var before: int=ice.break_progress[sub]; var cost: int=game.bw
+  ui._on_break(i,sub)
+  if ice.break_progress[sub]>before: show_break_feedback(ice,sub,cost-game.bw)
 func mood_for(i: int) -> String:
  if game.enc.get("breached",false): return "knocked_out"
  var ice: Dictionary = game.enc.ice[i]
@@ -374,7 +393,7 @@ func scan_tag(i: int) -> Control:
  return panel
 
 func reset_session() -> void:
- mascot_history.clear(); card_positions.clear(); last_encounter={}; last_turn=-1; previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
+ feedback_until=0; feedback_message=""; end_drag(); mascot_history.clear(); card_positions.clear(); last_encounter={}; last_turn=-1; previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
  if is_instance_valid(strike_overlay): strike_overlay.hide()
 func update_corporation() -> void:
  var now := Time.get_ticks_msec()/1000.0
@@ -460,3 +479,7 @@ func _can_drop_data(at: Vector2, data) -> bool:
 func _drop_data(at: Vector2, data) -> void:
  if not _can_drop_data(at,data): return
  game.play_card(int(data.uid)); end_drag(); ui.refresh()
+
+func show_break_feedback(ice: Dictionary, subroutine: int, cost: int) -> void:
+ feedback_message=("BROKEN" if ice.broken[subroutine] else "BREAK STEP")+" · "+game.ice_definition(ice).name+" · S%d\n%d BW spent · rules updated"%[subroutine+1,cost]
+ feedback_until=Time.get_ticks_msec()/1000.0+2.5

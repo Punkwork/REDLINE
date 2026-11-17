@@ -46,6 +46,7 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| CHROME-001 | Refine the CAPTCHA encounter in the designer-selected Chrome Deco direction: readable real rules/cards, illustrated mascot shells, atrium, corporate escalation and native interaction feedback. Ten refreshed full-screen PNG samples; prototype art and final fidelity await review. | **BUILT** — `chrome-001-step5` |
 | VIS-001 | The Friendly Lie encounter: fonts/skins, zine hand/HUD, mascot scans and moods, corporation break states, drag/motion/accessibility, seven PNG review fixtures. Visual only; ZEROED/TUMBLE integrated first. | **BUILT** — `vis-001g` (steps `vis-001a`–`vis-001g`) |
 | TUMBLE-001 | Remove broken TUMBLER subs and tumble immediately active replacements | **BUILT** — `zeroed-tumble-step3` |
 | ZEROED-001-cards | Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards | **BUILT** — `zeroed-tumble-step2` |
@@ -81,6 +82,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | RIOT-003 | Confirm two readings of SHATTER: "any 1 icebreaker" means any 1 ICE; SLEDGE stays at STR 0 until the encounter ends. | Dev log, RIOT-003 | WAITING |
 | PULP-001 | Confirm FORTRESS PULP values are fixed per subroutine, not rolled. | Dev log, PULP-001 | WAITING |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
+| CHROME-001 art review | Review the actual Godot samples against the corrected concept: provisional shell/environment art, shared collage motifs, UI spacing, 20% Cracking reveal and two-ICE fidelity. The designer rejected the first flat/thin-rim samples; refreshed PNGs supersede them. | Designer feedback and CHROME-001 implementation log, 2026-11-17 | WAITING |
 | VIS-001 details | Maximum hand size (not set; VIS-001 fans 7+ cards); the lethal-mood threshold (working value: PULP 5+ or any CORTEX in the ICE's next response); the proposal silhouettes and wording for slice ICE not yet drawn; individual-hit lethal threshold, three-mascot scaling, motion timings and real-conveyor turn-3 fixture differences recorded in the VIS-001 log. | `REDLINE_VISUAL_LANGUAGE.md` §2.4, §2.6 | WAITING |
 
 ---

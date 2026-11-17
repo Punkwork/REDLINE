@@ -20,9 +20,9 @@ func focus_card(card: Control) -> void:
  selected = card.get_index()
  card.z_index = 100
  card.rotation = 0.0
- card.position = card.rest_position - Vector2(0, 28)
+ card.position = card.rest_position - Vector2(0, 28); card.queue_redraw()
 func release_card(card: Control) -> void:
- card.z_index = card.get_index(); card.rotation = card.rest_rotation; card.position = card.rest_position
+ card.z_index = card.get_index(); card.rotation = card.rest_rotation; card.position = card.rest_position; card.queue_redraw()
 func browse(direction: int) -> void:
  if get_child_count() == 0: return
  for child in get_children(): release_card(child)

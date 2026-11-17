@@ -85,6 +85,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  queue_redraw()
 func _draw() -> void:
  draw_rect(Rect2(Vector2(5, 5), size), FriendlyLook.TONER)
+ if uid>=0 and (z_index==100 or view.ui.targeting==uid): draw_rect(Rect2(Vector2(-4,-4),size+Vector2(8,8)),FriendlyLook.HIGHLIGHT)
  if placeholder:
   draw_rect(Rect2(Vector2.ZERO, size), Color("#F7F7F2"))
   var rect := Rect2(Vector2(2, 2), size - Vector2(4, 4))

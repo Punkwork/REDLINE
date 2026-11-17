@@ -111,3 +111,14 @@ The visual candidate is on `codex/vis-001-friendly-lie`, targeting stabilization
 - Toggle REDUCED MOTION on selection or in the encounter. It persists across launches and removes ambient bob/blink, shake, flicker, reels and typing. State changes remain readable, and the Corporation Response still takes at least five seconds. VOICE / M and END RUN keep their existing functions.
 
 The turn-3 fixture advances two real Corporation Responses and resolves CAPTCHA's discard choice. Actual TUMBLER rotation means PULP 6 occupies slot 1 and TRACE 3 tumbles into slot 2 after the second DEADLOCK is broken. The mockup's alternative slot arrangement is not forced into gameplay. Preparation cards/budgets and the eight-card hand are deterministic test fixtures, not claims about starting decks or balance.
+
+
+## CHROME-001 — playable Chrome Deco encounter refinement
+
+This candidate is on `codex/chrome-deco-encounter`, targeting stabilization and including the unmerged VIS-001 dependency. No Windows build was exported for this experiment. The ten PNGs in `docs/visual/fixtures/chrome-001/` are captures of the live Godot encounter, not generated UI mockups. The earlier rejected flat/thin-rim samples have been superseded by refreshed samples.
+
+The CAPTCHA fixture uses actual AUTO-RENEW/CAPTCHA stats and Generalist cards. The atrium and pearl/chrome mascot shells are illustration assets; every face, rule, cost and control remains live. Taped scan panels keep a solid backing against the detailed architecture. Card art is a six-motif prototype atlas, reused by role while preserving authored card text. It does not introduce new cards or effects.
+
+At TRACE 20 the same atrium reveals a partial surveillance view. First strike shows hostile lighting and the existing “We see you.” modal; second strike reveals the cameras, processing rails and restraint stations while the paper interface remains unchanged. All thresholds and TRACER/Black ICE effects still come from Game.
+
+For the interaction sample, drag the installed FORTRESS Icepick onto AUTO-RENEW S1. Legal rows have dashed lime outlines; the hovered target has a solid outline and the separate top-center feedback box shows the exact BW cost and MARGIN. In this fixture the initial break costs 3 BW including boosts. Release to break: the rule is struck through, AUTO-RENEW becomes wary, and the feedback confirms the cost. Dragging that FORTRESS pick onto CAPTCHA instead shows a red outline and “NO TUMBLER ICEPICK”; releasing spends nothing. The small drag cursor avoids putting a duplicate card-length label or native tooltip over rules. Card hover/keyboard browsing raises the card with a lime paper edge. Existing reduced-motion and five-second-response behaviour remain.
