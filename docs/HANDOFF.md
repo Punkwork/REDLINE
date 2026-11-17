@@ -28,13 +28,12 @@ This is the one list of work that has been **decided but not finished**, so Code
 ## To build (approved, not yet in the build)
 
 ### Start here (Codex): decisions made 2026-11-16
-ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below. ROT-001 documentation sync and LOG-001 split were already completed in PR #8. No remaining Codex TO DO rows from this block.
+ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below. ROT-001 documentation sync and LOG-001 split were already completed in PR #8. No remaining Codex TO DO rows from this block. VIS-001 is also built on its feature branch; see Built below for the review tag.
 
 **Next build: everything in `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLINE_PACING.md` (PACE-001 to PACE-010), approved as written on 2026-11-15.** Suggested order, so each step can be playtested before the next; numbers are working values. Where a system isn't in the slice yet (Uplink, Console Lab, PATCHWORK, Ghostware), build the part that touches it when that system arrives, and say so in the log.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **VIS-001** | **Visual language: The Friendly Lie** (direction B, chosen by the designer 2026-11-17). Corporations as friendly consumer apps, ICE as mascots with moods (cheery / wary / lethal / knocked out) plus NUL/REM scan tags, Rustler as photocopied zine, 6-card hand, corporation break states (Cracking at TRACE 20+, Strike modal, Mask off at strike 2+). Build steps VIS-001a–g; reference images, placeholder backgrounds and mascot SVGs in `docs/visual/`. Replaces the look (not the requirements) of `REDLINE_UI_NULREM_Design_For_Claude.md`. No rules change. | `REDLINE_VISUAL_LANGUAGE.md` Part 3 | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
@@ -47,6 +46,7 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| VIS-001 | The Friendly Lie encounter: fonts/skins, zine hand/HUD, mascot scans and moods, corporation break states, drag/motion/accessibility, seven PNG review fixtures. Visual only; ZEROED/TUMBLE integrated first. | **BUILT** — `vis-001g` (steps `vis-001a`–`vis-001g`) |
 | TUMBLE-001 | Remove broken TUMBLER subs and tumble immediately active replacements | **BUILT** — `zeroed-tumble-step3` |
 | ZEROED-001-cards | Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards | **BUILT** — `zeroed-tumble-step2` |
 | ZEROED-001 | Restore STR floor and track once-per-ICE ZEROED | **BUILT** — `zeroed-tumble-step1` |
@@ -81,7 +81,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | RIOT-003 | Confirm two readings of SHATTER: "any 1 icebreaker" means any 1 ICE; SLEDGE stays at STR 0 until the encounter ends. | Dev log, RIOT-003 | WAITING |
 | PULP-001 | Confirm FORTRESS PULP values are fixed per subroutine, not rolled. | Dev log, PULP-001 | WAITING |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
-| VIS-001 details | Maximum hand size (not set; VIS-001 fans 7+ cards); the lethal-mood threshold (working value: PULP 5+ or any CORTEX in the ICE's next response); the proposal silhouettes and wording for slice ICE not yet drawn. | `REDLINE_VISUAL_LANGUAGE.md` §2.4, §2.6 | WAITING |
+| VIS-001 details | Maximum hand size (not set; VIS-001 fans 7+ cards); the lethal-mood threshold (working value: PULP 5+ or any CORTEX in the ICE's next response); the proposal silhouettes and wording for slice ICE not yet drawn; individual-hit lethal threshold, three-mascot scaling, motion timings and real-conveyor turn-3 fixture differences recorded in the VIS-001 log. | `REDLINE_VISUAL_LANGUAGE.md` §2.4, §2.6 | WAITING |
 
 ---
 

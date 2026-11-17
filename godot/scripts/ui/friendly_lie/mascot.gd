@@ -72,7 +72,7 @@ func setup(owner_view, i: int, state: String) -> void:
   var sticker := FriendlyLook.panel(FriendlyLook.RED if lethal else Color.WHITE,Color.TRANSPARENT,0,18)
   place(sticker,Vector2(195,-4),Vector2(174,32))
   var words := "NO REFUNDS" if lethal else ("Renews next turn" if wary else "FREE for 30 days!")
-  var sticker_text := FriendlyLook.label(words,13, Color.WHITE if lethal else view.skin.deep,view.skin.bold_font); sticker_text.position=Vector2(10,5); sticker.add_child(sticker_text)
+  var sticker_text := FriendlyLook.label(words,13, FriendlyLook.TONER if lethal else view.skin.deep,view.skin.bold_font); sticker_text.position=Vector2(10,5); sticker.add_child(sticker_text)
  if id == "CAPTCHA":
   var challenge := FriendlyLook.label("PROVE IT." if lethal else "Let's make sure you're human!",13,ink,view.skin.bold_font); challenge.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; challenge.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER; place(challenge,Vector2(54,83),Vector2(203,40))
   for tile in 9:
@@ -113,9 +113,9 @@ func setup(owner_view, i: int, state: String) -> void:
   var done: bool = ice.broken[sub]
   if done: text = "✓ " + text
   elif d.get("ability", "") == "BOOTING" and view.game.enc.turn < 3: text = "LOCKED · " + text
-  var action := FriendlyLook.button(text,func(): view.break_action(index,sub), FriendlyLook.RED if lethal else Color.WHITE, ink,0 if lethal else 18,view.skin.bold_font)
+  var action := FriendlyLook.button(text,func(): view.break_action(index,sub), FriendlyLook.RED if lethal else Color.WHITE, FriendlyLook.TONER if lethal else ink,0 if lethal else 18,view.skin.bold_font)
   var chk: Dictionary = view.break_info(index,sub)
-  action.add_theme_color_override("font_disabled_color",ink)
+  action.add_theme_color_override("font_disabled_color",FriendlyLook.TONER if lethal else ink)
   for button_state in ["normal","hover","disabled"]:
    var button_style := action.get_theme_stylebox(button_state).duplicate() as StyleBoxFlat; button_style.border_color=accent; button_style.set_border_width_all(1); action.add_theme_stylebox_override(button_state,button_style)
   action.disabled = not chk.ok; action.tooltip_text = "DEADLOCK · " + ("BROKEN" if done else chk.get("reason", ""))

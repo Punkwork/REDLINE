@@ -33,7 +33,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); bg.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(bg)
  var head := FriendlyLook.panel(FriendlyLook.RED if corp else FriendlyLook.TONER)
  head.position = Vector2(3, 3); head.size = Vector2(140, 40); head.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(head)
- var title := FriendlyLook.label(d.name.to_upper(), 11 if d.name.length() > 25 else 13, FriendlyLook.PAPER, view.skin.bold_font if corp else FriendlyLook.BOLD)
+ var title := FriendlyLook.label(d.name.to_upper(), 11 if d.name.length() > 25 else 13, FriendlyLook.TONER if corp else FriendlyLook.PAPER, view.skin.bold_font if corp else FriendlyLook.BOLD)
  title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; title.position = Vector2(8, 4); title.size = Vector2(105, 38); body.add_child(title)
  var circle := CostCircle.new(); circle.position = Vector2(114, 9); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
  var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, FriendlyLook.TONER, FriendlyLook.BOLD)

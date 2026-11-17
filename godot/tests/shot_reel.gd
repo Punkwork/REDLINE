@@ -14,6 +14,7 @@ func _snap(name: String) -> void:
 	print("shot ", name)
 
 func _process(_d: float) -> bool:
+	if step == 99: return false
 	frames += 1
 	var g: Game = main.g
 	match step:
@@ -54,5 +55,15 @@ func _process(_d: float) -> bool:
 			if frames < 20:
 				return false
 			_snap("endrun_confirm")
-			return true
+			step = 99
+			call_deferred("_finish")
+			return false
 	return false
+
+func _finish() -> void:
+	# Let the audio mixer release the last NUL/REM stream before tearing down the tree.
+	main.voice.stop()
+	main.voice.stream = null
+	main.queue_free()
+	for i in 15: await process_frame
+	quit()

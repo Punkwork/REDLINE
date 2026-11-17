@@ -693,7 +693,10 @@ func _show_inspect(id: String) -> void:
 	_clear(inspect)
 	inspect.visible = id != ""
 	if id != "":
-		var cv := _card_view(id, -1)
+		var cv: Control
+		if is_instance_valid(friendly) and friendly.visible:
+			var paper := FriendlyCard.new(); paper.setup(friendly,id,-1); cv=paper
+		else: cv = _card_view(id, -1)
 		cv.custom_minimum_size = Vector2(200, 270)
 		cv.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		inspect.add_child(cv)

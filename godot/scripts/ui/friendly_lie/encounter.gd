@@ -47,6 +47,7 @@ var watcher_text: Label
 var next_flicker := 0.0
 var flicker_frames := 0
 var card_positions := {}
+var last_note := ""
 var bw_capacity := Game.BW_PER_TURN
 var last_encounter: Dictionary = {}
 var last_turn := -1
@@ -61,8 +62,8 @@ func _ready() -> void:
   var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
  node_tag = FriendlyLook.panel(FriendlyLook.TONER); node_tag.position = Vector2(40, 32); node_tag.size = Vector2(720, 86); node_tag.rotation_degrees = -1.0; add_child(node_tag)
  trace_tag = FriendlyLook.panel(FriendlyLook.TONER); trace_tag.position = Vector2(972, 32); trace_tag.size = Vector2(588, 106); trace_tag.rotation_degrees = 0.7; add_child(trace_tag)
- ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(150, 146); ice_scroll.size = Vector2(1300, 466); ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
- ice_row = HBoxContainer.new(); ice_row.add_theme_constant_override("separation", 42); ice_row.alignment = BoxContainer.ALIGNMENT_CENTER; ice_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL; ice_scroll.add_child(ice_row)
+ ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(150, 136); ice_scroll.size = Vector2(1300, 476); ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
+ ice_row = HBoxContainer.new(); ice_row.add_theme_constant_override("separation", 42); ice_row.alignment = BoxContainer.ALIGNMENT_CENTER; ice_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL; var ice_margin:=MarginContainer.new(); ice_margin.add_theme_constant_override("margin_top",10); ice_margin.size_flags_horizontal=Control.SIZE_EXPAND_FILL; ice_scroll.add_child(ice_margin); ice_margin.add_child(ice_row)
  var strip := FriendlyLook.panel(FriendlyLook.PAPER, FriendlyLook.TONER, 3); strip.position = Vector2(248, 620); strip.size = Vector2(1104, 49); add_child(strip)
  var rs := ScrollContainer.new(); rs.position = Vector2(10, 7); rs.size = Vector2(1084, 36); rs.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; strip.add_child(rs)
  response = HBoxContainer.new(); response.add_theme_constant_override("separation", 7); rs.add_child(response)
@@ -74,6 +75,7 @@ func _ready() -> void:
  rig_row = HBoxContainer.new(); rig_row.add_theme_constant_override("separation", 8); rig_scroll.add_child(rig_row)
  hand = FriendlyHand.new(); hand.position = Vector2(248, 758); hand.size = Vector2(1104, 232); hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
  bottom_hud = FriendlyLook.panel(FriendlyLook.TONER); bottom_hud.position = Vector2(40, 770); bottom_hud.size = Vector2(200, 212); add_child(bottom_hud)
+ var piles_paper:=FriendlyLook.panel(FriendlyLook.PAPER); piles_paper.position=Vector2(1358,766); piles_paper.size=Vector2(204,70); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
  pile_text = FriendlyLook.label("", 11, FriendlyLook.TONER); pile_text.position = Vector2(1364, 770); pile_text.size = Vector2(198, 64); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
  end_button = FriendlyLook.button("END TURN →", func(): ui._on_end_turn()); end_button.position = Vector2(1360, 842); end_button.size = Vector2(200, 65); end_button.add_theme_font_size_override("font_size", 20); add_child(end_button)
  var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), FriendlyLook.PAPER); deck.position = Vector2(1360, 916); deck.size = Vector2(200, 28); add_child(deck)
@@ -141,6 +143,11 @@ func _process(_dt: float) -> void:
  if corporation_state=="mask_off": context="the mask is off. one more strike and we can't leave. "
  elif corporation_state=="cracking": context="%d TRACE to a strike. " % maxi(0,Game.MAX_TRACE-game.trace)
  note_text.text="NUL/REM: " + context + ui.nr_text.text
+ if last_note!=note_text.text:
+  last_note=note_text.text; note_text.tooltip_text=note_text.text
+  var fs:=12
+  while fs>8 and FriendlyLook.MONO.get_multiline_string_size(note_text.text,HORIZONTAL_ALIGNMENT_LEFT,900,fs).y>36: fs-=1
+  note_text.add_theme_font_size_override("font_size",fs)
  note_text.visible_ratio=ui.nr_text.visible_ratio if context=="" else 1.0
  var now := Time.get_ticks_msec()/1000.0
  toast.visible=now<toast_until
@@ -149,7 +156,7 @@ func _process(_dt: float) -> void:
  if dragging_uid>=0 and drag_kind=="card":
   var c := game.find_card(dragging_uid)
   if not c.is_empty() and CardDB.def(c.id).tags.has("CLOAK") and game.enc.get("ice",[]).any(func(ice): return game.ice_definition(ice).get("ability","")=="CLOAK_TRACE"):
-   watcher_warning.show(); watcher_text.text="WATCHER: play this CLOAK card · +%d TRACE" % (0 if game.rustler=="ECHO" or game.enc.get("decoy",false) else 1)
+   watcher_warning.show(); watcher_warning.position=Vector2(40 if get_global_mouse_position().x>800 else 1050,550); watcher_text.text="WATCHER: play this CLOAK card · +%d TRACE" % (0 if game.rustler=="ECHO" or game.enc.get("decoy",false) else 1)
  if reduced_motion: glitch_layer.hide()
  elif corporation_state=="cracking":
   if now>=next_flicker:
@@ -179,12 +186,15 @@ func build_rig() -> void:
 func build_ice() -> void:
  clear(ice_row)
  for i in game.enc.ice.size():
-  var column := VBoxContainer.new(); column.add_theme_constant_override("separation",9); column.custom_minimum_size.x=480; ice_row.add_child(column)
+  var column := VBoxContainer.new(); column.add_theme_constant_override("separation",9); column.custom_minimum_size.x=400 if game.enc.ice.size()==3 else 480; ice_row.add_child(column)
   var mascot := FriendlyMascot.new()
   var prior := previous_mascot(i)
   mascot.previous_mood=prior.get("mood", "")
   mascot.just_broken=not prior.is_empty() and game.enc.ice[i].broken.count(true)>prior.broken.count(true)
-  mascot.setup(self,i,mood_for(i)); column.add_child(mascot)
+  mascot.setup(self,i,mood_for(i))
+  if game.enc.ice.size()==3:
+   var stage:=Control.new(); stage.custom_minimum_size=Vector2(400,184); column.add_child(stage); stage.add_child(mascot); mascot.scale=Vector2(0.8,0.8); mascot.pivot_offset=Vector2.ZERO
+  else: column.add_child(mascot)
   var scan := scan_tag(i); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
    scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
@@ -296,7 +306,10 @@ func rule_chip(text: String, state: String = "normal") -> Control:
 func scan_tag(i: int) -> Control:
  var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
  var panel := PanelContainer.new(); panel.custom_minimum_size=Vector2(350,0)
- var style := FriendlyLook.style(FriendlyLook.TONER,FriendlyLook.TONER,2,0,5); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
+ var candidates:=game.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction",0)>0 and game.can_play(c.uid).ok and game.would_zero(i,int(CardDB.def(c.id).get("zeroed_reduction",0))))
+ var eligible:=not candidates.is_empty()
+ var style := FriendlyLook.style(FriendlyLook.TONER,FriendlyLook.AMBER if eligible else FriendlyLook.TONER,3 if eligible else 2,0,5); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
+ if eligible: panel.tooltip_text="ZEROED available: "+" / ".join(candidates.map(func(c): return CardDB.def(c.id).name))
  var list := VBoxContainer.new(); list.add_theme_constant_override("separation",4); panel.add_child(list)
  var heading := HBoxContainer.new(); list.add_child(heading)
  var name := FriendlyLook.label(d.name,14,FriendlyLook.PAPER,FriendlyLook.BOLD); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
@@ -332,6 +345,8 @@ func scan_tag(i: int) -> Control:
   if not hidden and not ice.broken[s] and (loud or new_subs(i).has(s)): state="new"
   var chip := rule_chip(" + ".join(words),state)
   chip.tooltip_text = "\n".join(words); row.add_child(chip)
+  if ui._is_flash(ice,s):
+   var firing:=chip.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; firing.border_color=FriendlyLook.HIGHLIGHT; firing.set_border_width_all(2); chip.add_theme_stylebox_override("panel",firing); ui._pulse(chip)
   if not hidden and not ice.broken[s]:
    var info := break_info(i,s)
    var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),FriendlyLook.TONER,FriendlyLook.PAPER)
