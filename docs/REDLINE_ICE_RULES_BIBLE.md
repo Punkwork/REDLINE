@@ -19,6 +19,7 @@ Each type owns one kind of threat, and its rules follow from that threat.
 - **APPROVED:** **fewer subroutines**, and they are **almost all PULP**. The odd other effect is allowed; **TRACE is rare**.
 - **LOCKED:** subroutines never rotate or hide; everything fires every turn, so the threat is plain and the question is how much you can afford to break.
 - **PROPOSED:** PULP values vary from ICE to ICE (1–5 in Tier 1) so no two FORTRESSES feel the same (PULP-001).
+- **APPROVED (PULP-001, 2026-11-17):** each FORTRESS PULP value is **rolled each time it fires**, with slight variation so the Rustler can still plan. Range and display are open (master design, PULP-001).
 
 ### TUMBLER: the puzzle
 - **APPROVED:** TUMBLERS are **where the quirks and puzzles happen**.
