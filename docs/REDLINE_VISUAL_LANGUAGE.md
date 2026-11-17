@@ -36,7 +36,7 @@ Reference images are in `docs/visual/reference/`. They were made at **1600 × 10
 | **The corporation** | Background, ICE mascots, corporate Bloatware | A soft, friendly consumer app: pastel, rounded, **DM Sans**, cheerful wording |
 | **The Rustler** | Hand, HUD, TRACE meter, Node tag, NUL/REM, every rules readout | A photocopied zine taped over the app: black toner, off-white paper, highlighter yellow, **Space Mono**, hard shadows, slight rotations |
 
-**Rule 1 — Your side never changes.** The Rustler layer looks the same in every corporation and every state, friendly or hostile. Only the corporation's world changes around you.
+**Rule 1 — Your side never changes.** The Rustler layer looks the same in every corporation and every state, friendly or hostile. Only the corporation's world changes around you. *(Amended 2026-11-17, RUSTLER-LOOK-001 in the master design doc: the cards are now 1950s salvaged hardware (CARDS-001) while the HUD stays zine, on purpose. The HUD will probably change later; keep it as is until the designer decides.)*
 **Rule 2 — The rules are always in zine style.** Every subroutine's effect (PULP 2, DISCARD 1, DEADLOCK, ? HIDDEN) is printed as a black-and-yellow zine chip, however the ICE looks or what it says. The friendly wording is flavour; the chip is the rule.
 **Rule 3 — The DEADLOCK is always the corporation's friendly button** ("Keep my plan", "I'm not a robot", "Check in", "Begin"). NUL/REM's line: *"the button is the lock. break it."* While BOOTING applies, the button shows a lock until the 3rd turn.
 

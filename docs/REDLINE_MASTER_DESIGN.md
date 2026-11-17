@@ -47,6 +47,8 @@ Only choices the designer explicitly made on 2026-11-17 are recorded here. Every
 | **Bloatware uses the Whirlwind design on an oxide-red board,** distinct from SCRIPT's brown. | Whirlwind #3 selected; oxide red: “Perfect” | 744f3dc |
 | **Highlighted numbers on cards glow as amber text** instead of sitting on highlighted blocks. | Requested glowing amber text instead of highlighted backgrounds | 29c660c |
 
+**RUSTLER-LOOK-001 — Two Rustler styles kept on purpose (APPROVED, 2026-11-17).** The Rustler's cards are 1950s salvaged hardware (CARDS-001), while the Rustler HUD, Node and TRACE tags, END TURN and NUL/REM notes stay in the photocopied zine style. This is a deliberate exception to Visual Language Rule 1 ("Your side never changes"), not a mismatch to fix. Each corporation will have a different look. The HUD will probably change in the near future; until the designer decides that change, keep the HUD as it is. Designer: "B Each corp will have a different look. The HUD will probably change in the near future, but I want to keep it this way for now."
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.
