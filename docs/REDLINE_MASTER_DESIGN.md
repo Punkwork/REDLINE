@@ -66,6 +66,8 @@ Not covered by this approval: the rules questions still listed in `HANDOFF.md` (
 
 **PULP-001 — FORTRESS PULP is rolled each time, with slight variation (APPROVED, 2026-11-17).** A FORTRESS PULP subroutine does **not** deal the same fixed amount every time; its value is rolled each time it fires. The variation is **slight**, so the Rustler can still plan to some degree. This answers the open PULP-001 question ("fixed per subroutine, not rolled?") the other way: rolled. Designer: "For number 4, they are rolled each time. They should be slightly variable so that the rustler can plan to some degree." **OPEN:** how wide the roll is for each printed value, how it's shown before it fires, and how it relates to PULP-002 curves (curve B is already random). Don't build a range until those are decided.
 
+**RIOT-003 — SHATTER readings confirmed (APPROVED, 2026-11-17).** SHATTER (RIOT starter SCRIPT, EXPLOIT; 1 BW, +3 TRACE): "any 1 icebreaker" means SLEDGE can break the subroutines of **any one chosen ICE, whatever its type**, this turn. At the end of that turn SLEDGE drops to **STR 0 for the rest of the encounter** (boosts lost; boosting again starts from 0) and is back to its normal STR 2 at the next encounter. Designer: "For number 3, that is correct."
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.

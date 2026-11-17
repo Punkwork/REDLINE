@@ -477,3 +477,7 @@ Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stage
 ## 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude)
 
 **Designer decision:** "For number 4, they are rolled each time. They should be slightly variable so that the rustler can plan to some degree." Reverses the 2026-11-13 working assumption (fixed per subroutine). Recorded in the master design doc and the ICE Rules Bible. The roll's width, its on-screen display and its relation to PULP-002 curves are open; HANDOFF's PULP-001 row now asks those questions. Nothing to build until they're answered. **Code changes:** none.
+
+## 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude)
+
+**Designer decision:** "For number 3, that is correct." SHATTER lets SLEDGE break any one chosen ICE of any type this turn; SLEDGE then stays at STR 0 until the encounter ends and returns to STR 2 next encounter. Matches the build, so nothing changes in code. Recorded in the master design doc and Rustlers doc; HANDOFF row moved to *Done*.
