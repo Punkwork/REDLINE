@@ -56,7 +56,7 @@ func _ready() -> void:
  mouse_filter = Control.MOUSE_FILTER_PASS
  skin = ui.friendly_skin
  app_ground = ColorRect.new(); app_ground.color = skin.ground; app_ground.position = Vector2.ZERO; app_ground.size = Vector2(1600, 1000); app_ground.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(app_ground)
- background = TextureRect.new(); background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 0.75; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
+ background = TextureRect.new(); background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 1.0; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
  glitch_layer = Control.new(); glitch_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(glitch_layer)
  for y in [192,362,557,853]:
   var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
@@ -401,7 +401,7 @@ func apply_background() -> void:
   if background_fade: background_fade.kill()
   if is_instance_valid(fade_layer): fade_layer.queue_free()
   fade_layer=TextureRect.new(); fade_layer.texture=target; fade_layer.size=Vector2(1600,1000); fade_layer.modulate.a=0.0; fade_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(fade_layer); move_child(fade_layer,background.get_index()+1)
-  background_fade=create_tween(); background_fade.tween_property(fade_layer,"modulate:a",0.75,0.3)
+  background_fade=create_tween(); background_fade.tween_property(fade_layer,"modulate:a",1.0,0.3)
   background_fade.tween_callback(func(): background.texture=target; fade_layer.queue_free())
  glitch_layer.visible=false
 func dismiss_strike() -> void:

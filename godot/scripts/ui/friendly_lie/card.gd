@@ -39,10 +39,19 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, FriendlyLook.TONER, FriendlyLook.BOLD)
  cost.position = Vector2(115, 8); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
  var rule: String = view.game.card_text(id)
- var art_h := 42.0 if rule.length() < 145 else (22.0 if rule.length() < 280 else 4.0)
+ var art_h := 64.0 if rule.length()<100 else (44.0 if rule.length()<145 else (22.0 if rule.length()<280 else 4.0))
  var art := FriendlyLook.label("" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
  art.position = Vector2(9, 49); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
  if not corp and art_h>10:
+  art.hide()
+  var atlas:=preload("res://assets/friendly_lie/chrome/toner-illustrations.png")
+  var index:=0
+  if d.has("pick"): index=1
+  elif d.get("extract",0)>0: index=2
+  elif id=="PULP_SHIELD": index=3+posmod(uid,2)
+  elif id=="CORTEX_BUFFER" or d.type=="PROTOCOL": index=5
+  var tile:=AtlasTexture.new(); tile.atlas=atlas; tile.filter_clip=true; tile.region=Rect2(Vector2((index%3)*atlas.get_width()/3,(index/3 as int)*atlas.get_height()/2),Vector2(atlas.get_width()/3,atlas.get_height()/2))
+  var illustration:=TextureRect.new(); illustration.name="TonerIllustration"; illustration.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; illustration.texture=tile; illustration.position=Vector2(9,49); illustration.size=Vector2(128,art_h); illustration.clip_contents=true; illustration.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED; illustration.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(illustration)
   var box := ArtBox.new(); box.position=Vector2(9,49); box.size=Vector2(128,art_h); box.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(box)
  if corp:
   var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(9,49); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)

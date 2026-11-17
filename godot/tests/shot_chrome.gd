@@ -55,6 +55,7 @@ func run() -> void:
  for c in main.friendly.hand.get_children():
   for child in c.body.get_children():
    if child is RichTextLabel: check(child.get_content_height()<=child.size.y+1,"real card rules fit: "+c.card_id)
+   if child.name=="TonerIllustration": check(child.size.x<=128 and child.size.y<=64,"illustration does not cover rules or neighbouring cards")
  print("CHROME STAGE %d: %d failures"%[stage,failures])
  main.voice.stop(); main.voice.stream=null; main.queue_free(); await settle(); quit(1 if failures else 0)
 func interaction(g: Game) -> void:

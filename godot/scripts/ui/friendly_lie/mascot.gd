@@ -60,6 +60,11 @@ func setup(owner_view, i: int, state: String) -> void:
  var soft := body.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; soft.shadow_color = Color(0,0,0,0.12); soft.shadow_size=14; soft.shadow_offset=Vector2(0,7); body.add_theme_stylebox_override("panel",soft)
  body.mouse_filter = Control.MOUSE_FILTER_PASS; place(body,body_rect.position,body_rect.size)
  chrome=ChromeFrame.new(); chrome.name="ChromeEnamel"; chrome.position=body_rect.position; chrome.size=body_rect.size; chrome.radius=radius; chrome.enamel=(accent if id=="AUTO_RENEW" and not lethal else fill); chrome.hostile=lethal; chrome.credit_card=id=="AUTO_RENEW"; add_child(chrome)
+ if id in ["AUTO_RENEW","CAPTCHA"]:
+  body.self_modulate.a=0.0; chrome.hide()
+  var enamel_art:=TextureRect.new(); enamel_art.name="IllustratedShell"; enamel_art.texture=load("res://assets/friendly_lie/chrome/"+("auto-renew-shell.png" if id=="AUTO_RENEW" else "captcha-shell.png")); enamel_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; enamel_art.stretch_mode=TextureRect.STRETCH_SCALE; enamel_art.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  enamel_art.modulate=Color(0.30,0.09,0.12) if lethal else (Color(1.0,0.88,0.64) if wary else Color.WHITE)
+  place(enamel_art,body_rect.position-Vector2(5,5),body_rect.size+Vector2(10,10))
  body.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: view.click_ice(index))
  face = FriendlyFace.new(); face.reduced_motion=view.reduced_motion; face.kind = face_kind; face.mood = mood; face.ink = view.skin.ink; face.accent = accent; place(face,face_rect.position,face_rect.size)
@@ -71,7 +76,7 @@ func setup(owner_view, i: int, state: String) -> void:
  if id in ["AUTO_RENEW", "FREE_TRIAL"]:
   place(FriendlyLook.label("HALCYON",10,ink,view.skin.bold_font),Vector2(64,20))
   var product:=FriendlyLook.label("AUTO-\nRENEW" if id=="AUTO_RENEW" else "FREE\nTRIAL",15,ink,view.skin.bold_font); place(product,Vector2(62,85),Vector2(86,48))
-  place(FriendlyLook.panel(Color("#F2D77E"),Color.TRANSPARENT,0,6),Vector2(62,35),Vector2(35,26))
+  if id!="AUTO_RENEW": place(FriendlyLook.panel(Color("#F2D77E"),Color.TRANSPARENT,0,6),Vector2(62,35),Vector2(35,26))
   place(FriendlyLook.label("•••• 4417",13,ink,view.skin.font),Vector2(62,147))
   var sticker := FriendlyLook.panel(FriendlyLook.RED if lethal else Color.WHITE,Color.TRANSPARENT,0,18)
   place(sticker,Vector2(195,-4),Vector2(174,32))
@@ -83,6 +88,7 @@ func setup(owner_view, i: int, state: String) -> void:
    var strong: bool = tile in [1,4,8]
    var color: Color = accent if strong else (Color("#3C1014") if lethal else accent.lightened(0.65))
    var square := FriendlyLook.panel(color,Color.TRANSPARENT,0,0 if lethal else 4); square.mouse_filter=Control.MOUSE_FILTER_IGNORE; place(square,Vector2(54+(tile%3)*69,126+(tile/3 as int)*22),Vector2(64,19))
+   var tile_art:=TextureRect.new(); tile_art.texture=preload("res://assets/friendly_lie/chrome/atrium.png"); tile_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; tile_art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED; tile_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; tile_art.modulate=Color(1.0,0.2,0.25) if lethal else Color(0.75,0.85,0.82); place(tile_art,Vector2(56+(tile%3)*69,128+(tile/3 as int)*22),Vector2(60,15))
  if id == "TERMS_OF_SERVICE":
   for line in 5:
    var rule := ColorRect.new(); rule.color=Color("#C9A3A5") if lethal else Color("#CCD5D0"); rule.mouse_filter=Control.MOUSE_FILTER_IGNORE; place(rule,Vector2(81,96+line*13),Vector2(190-(line%3)*25,3))
