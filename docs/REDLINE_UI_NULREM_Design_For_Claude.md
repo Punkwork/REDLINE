@@ -3,7 +3,9 @@
 
 **Scope:** Visual presentation, controls, selection screens, card readability, dialogue system and character writing. Engine combat rules and resource economy are specified separately in `REDLINE_ICEbreaker_Strength_Economy_Design_For_Claude.md`. Do not change combat rules to solve a rendering problem.
 
-## 1. Visual identity — Atomic Salvage
+> **DEPRECATED LOOK (VIS-001, designer, 2026-11-17):** "I would deprecate that atomic salvage look." The visual identity in §1 (Atomic Salvage) and the visual styling in §3, §4, §5 and §7 are replaced by `REDLINE_VISUAL_LANGUAGE.md` (The Friendly Lie). The **functional and readability requirements** in this doc still apply (see `REDLINE_VISUAL_LANGUAGE.md` §2.10), and §6 (NUL/REM personality) is unchanged.
+
+## 1. Visual identity — Atomic Salvage *(DEPRECATED — VIS-001)*
 - **PANOPTICON** is the title (NAME-002, 2026-11-14); REDLINE was the previous iteration.
 - Interface resembles a salvaged 1950s atomic-age computer: chipped cream enamel, rusted metal, brass frames, Bakelite switches, amber pilot lamps, green phosphor CRTs, clearly visible scanlines and physical punch cards.
 - Corporate ICE is comparatively pristine, institutional and intimidating.
