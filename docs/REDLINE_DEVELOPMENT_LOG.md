@@ -420,3 +420,9 @@ Validated with Godot 4.3 import, 363 rules checks, and eight `shot_facade.gd` ca
 ## 2026-11-17 — FACADE-001: HALCYON non-fight copy approved (Codex)
 
 Designer approved the consent, remembered activity and reward lines as written in Facades §2a and will review them in playtesting. Recorded the approval in the master design and moved the decision to Done in HANDOFF.
+
+## 2026-11-17 — HALCYON PLAYTEST 4 Windows build (Codex)
+
+Godot 4.3 pre-flight passed 363 rules checks and all ten screenshot scripts (five Chrome stages, 173 Friendly Lie checks, 621 cartridge checks). Seeds 100–129 reproduced 21/11/13/17 clears and 17.0/11.8/16.2/11.5 mean survivor VITAE for GENERALIST/ECHO/RIOT/VECTOR. One RIOT run stalled at DOORBELL.
+
+Tagged `b6b0971e017e6e88929ff1a4a6e67cadfaa2f516` as `playtest-4`. [Actions validation and export](https://github.com/Punkwork/REDLINE/actions/runs/44202252857) passed and uploaded `PANOPTICON-HALCYON-PLAYTEST-4-0.4.0-playtest.4-Windows-x86_64`. Verified `BUILD_COMMIT.txt`, the guide and checklist v0.3, and the executable SHA-256 `3736797caa582f92110473758f235397fe16b12373ea6f829d51b8bf8b16d8b2`. Windows launch and playtest are pending with the designer.

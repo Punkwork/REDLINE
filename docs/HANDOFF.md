@@ -74,7 +74,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 - DSY-013: Tier 2 FREE TRIAL placement and other corporation maps. All three pushback definitions/triggers are tested. This four-row map is Tier 1, so the final pacing step removes the temporary Step 5 Tier 2 placement.
 - PACE-003/005: notation and engine support tested; no unspecified multipliers or ESCALATE assignments invented for existing ICE. The controlled UI fixture shows both.
 - DSY-014/PACE-007 Phase 7 HULL engines, and PACE-004/010 manual scoring remain with their existing owners below.
-- Windows export/launch: export runs on pushes to `main` (MAIN-001). Feature/PR CI verifies code/screenshots only. Human Windows launch and playtest remain outstanding.
+- Windows export/launch: export runs on pushes to `main` (MAIN-001). Feature/PR CI verifies code/screenshots only. HALCYON PLAYTEST 4 is available. Windows launch and playtest are pending with the designer.
 - Conditional turn-4 BOOTING and PACE-006 safety valves intentionally excluded.
 
 ## Open asset provenance
@@ -92,6 +92,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| HALCYON PLAYTEST 4 Windows build | Exported and verified the Windows x86-64 artifact with QA checklist v0.3. Windows launch and playtest are pending with the designer. | `b6b0971`, tag `playtest-4`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44202252857) |
 | FACADE-001 HALCYON copy | Designer approved the consent, remembered activity and reward lines for review in playtesting. | 2026-11-17 (designer; recorded by Codex) |
 | VIRUS-001 copy/move | Closed: WORM counters are **spent to break** (VIRUS-001); they don't spread to other ICE. The earlier copy-or-move question no longer applies (designer, 2026-11-15). | — (no change needed) |
 | HANDOFF | This file created; working branch chosen. | 2026-11-15 (Claude), PR #4 |
