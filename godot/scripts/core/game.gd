@@ -586,14 +586,17 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 			trace = maxi(0, trace - mini(10, maxi(0, footprint_cap() - footprint())))
 			return true
 		"STACK_SMASH": reduce_ice_str(target, int(enc.tag_counts.get("EXPLOIT", 0)))
-		"INTEGER_UNDERFLOW":
-			var n := mini(3, maxi(0, -ice_str(target)))
-			var br := {"same_ice": true}
-			if n > 0 and not _breaker_targets(br, target).is_empty():
-				pending = {"kind": "card_break", "n": n, "ice": target, "breaker": br, "card_uid": inst.uid, "card": "INTEGER UNDERFLOW"}
-				burned.append(inst)
-				phase = "CHOICE"
-			return true
+		"FLATLINE", "KNOCKOUT", "SECOND_WIND":
+			if reduce_ice_str(target, int(CardDB.def(inst.id).zeroed_reduction)):
+				match inst.id:
+					"FLATLINE": trace = maxi(0, trace - 4)
+					"SECOND_WIND": bw += 1
+					"KNOCKOUT":
+						var br := {"same_ice": true}
+						if not _breaker_targets(br, target).is_empty():
+							pending = {"kind": "card_break", "n": 1, "ice": target, "breaker": br, "card_uid": inst.uid, "card": "KNOCKOUT"}
+							discard.append(inst)
+							phase = "CHOICE"
 		"CULL":
 			if virus_total(target) > 0:
 				pending = {"kind": "cull", "ice_ref": enc.ice[target], "n": 3, "card_uid": inst.uid}
@@ -698,13 +701,15 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 			if not enc.borrowed_ice.any(func(ice): return is_same(ice, enc.ice[target])):
 				enc.borrowed_ice.append(enc.ice[target])
 			_say("BORROWED CREDENTIALS: HUSH can break %s this turn." % ice_definition(enc.ice[target]).name)
-		"BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER":
+		"BRUTE_FORCE", "RUNTIME_ERROR", "HOST_TAKEOVER", "NULL_POINTER":
 			var br: Dictionary = CardDB.def(inst.id).breaker
 			if _breaker_targets(br, target if br.get("same_ice", false) else -1).is_empty(): return false
 			pending = {"kind": "card_break", "n": br.n, "ice": target if br.get("same_ice", false) else -1,
 				"breaker": br, "card_uid": inst.uid, "card": CardDB.def(inst.id).name}
-			discard.append(inst)
+			if inst.id == "NULL_POINTER": burned.append(inst)
+			else: discard.append(inst)
 			phase = "CHOICE"
+			return inst.id == "NULL_POINTER"
 		"GHOST_SIGNAL":
 			enc.ghost = true
 			return true
@@ -1776,7 +1781,7 @@ func coverage(deck: Array = []) -> Dictionary:
 		if d.has("pick"):
 			for kind in result:
 				if d.pick.itype in [kind, "ANY"]: result[kind] = true
-		if d.has("breaker") or id == "FLASHPOINT" or id == "INTEGER_UNDERFLOW":
+		if d.has("breaker") or id == "FLASHPOINT" or id == "NULL_POINTER":
 			for kind in result: result[kind] = true
 		if id == "BORROWED_CREDENTIALS" and ids.has("HUSH"):
 			result.FORTRESS = true; result.VOID = true

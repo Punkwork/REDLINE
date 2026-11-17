@@ -16,8 +16,9 @@ func run() -> void:
  engine_amp_regressions()
  coverage_and_escalation_regressions()
  ordered_compile_regression()
- integer_strike_regression()
+ null_pointer_strike_regression()
  zeroed_lifecycle()
+ zeroed_cards()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -164,8 +165,8 @@ func step4() -> void:
  var h := g._new_inst("HARVEST"); g.hand.append(h)
  var cred := g.cred; g.play_card(h.uid, 0)
  check.call(g.cred == cred + 6 and not g.enc.ice[0].virus.has("LEECH"), "HARVEST spends all LEECH for reserve-limited extraction")
- var u := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(u); g.play_card(u.uid, 0)
- check.call(g.phase == "PLAYER" and not g._find(g.burned, u.uid).is_empty(), "withdrawn negative-STR effect burns without breaks until replacement")
+ var u := g._new_inst("NULL_POINTER"); g.hand.append(u); g.play_card(u.uid, 0)
+ check.call(g.phase == "CHOICE" and g.pending.n == 2 and not g._find(g.burned, u.uid).is_empty(), "NULL POINTER breaks two at zero and burns")
 func step5() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 20
  var a := g._new_inst("PROBE"); var b := g._new_inst("DEEP_PROBE")
@@ -305,12 +306,14 @@ func ordered_compile_regression() -> void:
  g.choose_sub(0, 3)
  check.call(g.enc.breached and g.discard[0].id == c.id, "compiled fallback finishes with one physical card")
 
-func integer_strike_regression() -> void:
+func null_pointer_strike_regression() -> void:
  var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 30
  g.enc.ice.assign([g._new_ice("CAPTCHA")]); g.enc.ice[0].seen.fill(true)
  g.reduce_ice_str(0, 8); g.trace = 39; g.strikes = 1
- var c := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(c); g.play_card(c.uid, 0)
- check.call(g.phase == "PLAYER" and g.trace == 39, "withdrawn negative-STR cash-out cannot break at zero")
+ var c := g._new_inst("NULL_POINTER"); g.hand.append(c); g.play_card(c.uid, 0)
+ var target: Dictionary = g.enc.ice[0]
+ g.choose_sub(0, 1)
+ check.call(g.pending.ice == 1 and is_same(g.enc.ice[1], target) and g.card_break_ok(1, 0), "NULL POINTER keeps target through TRIPWIRE strike")
 
 func zeroed_lifecycle() -> void:
  var g := game("RIOT"); g.enter_node(0)
@@ -338,3 +341,42 @@ func zeroed_lifecycle() -> void:
  check.call(g.ice_str(1) == 0 and g.enc.ice[1].zeroed, "RELAY loss consumes ZEROED and excess loss is discarded")
  g.enc.ice[1].harden = 1; g._sync_strengths()
  check.call(g.ice_str(1) == 1, "STR gains rise from zero after RELAY loss")
+
+func zeroed_cards() -> void:
+ var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 20; g.trace = 10
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.ice[0].seen.fill(true)
+ g.reduce_ice_str(0, 2)
+ var flat := g._new_inst("FLATLINE"); g.hand.append(flat); g.play_card(flat.uid, 0)
+ check.call(g.ice_str(0) == 0 and g.enc.ice[0].zeroed and g.trace == 8, "FLATLINE pays +2 TRACE then ZEROED relieves four")
+ var again := g._new_inst("FLATLINE"); g.hand.append(again); g.play_card(again.uid, 0)
+ check.call(g.trace == 10, "FLATLINE at already-zero ICE gives no bonus")
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.ice[0].seen.fill(true)
+ g.reduce_ice_str(0, 1)
+ var k := g._new_inst("KNOCKOUT"); g.hand.append(k); g.play_card(k.uid, 0)
+ check.call(g.phase == "CHOICE" and g.pending.n == 1 and g.card_break_ok(0, 3), "KNOCKOUT ZEROED opens normal break choice including DEADLOCK")
+ g.choose_sub(0, 3)
+ check.call(g.enc.breached and not g._find(g.discard, k.uid).is_empty(), "KNOCKOUT choice discards once")
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.breached = false
+ g.reduce_ice_str(0, 3)
+ var w := g._new_inst("SECOND_WIND"); g.hand.append(w); var before := g.bw; g.play_card(w.uid, 0)
+ check.call(g.bw == before + 1, "SECOND WIND costs zero and gains one BW on ZEROED")
+ var b := game("RIOT"); b.enter_node(0); b.hand.clear(); b.bw = 20
+ b.enc.ice.assign([b._new_ice("REJECT_ALL")]); b.enc.ice[0].seen.fill(true)
+ b.reduce_ice_str(0, 4)
+ var n := b._new_inst("NULL_POINTER"); b.hand.append(n)
+ check.call(b.play_card(n.uid, 0) and not b.card_break_ok(0, 0), "NULL POINTER respects BOOTING")
+ b.choose_sub(0, 1)
+ check.call(b.phase == "PLAYER" and not b._find(b.burned, n.uid).is_empty(), "NULL POINTER finishes when no legal breaks remain")
+ var positive := game("RIOT"); positive.enter_node(0); positive.hand.clear()
+ var bad := positive._new_inst("NULL_POINTER"); positive.hand.append(bad); var bw := positive.bw
+ check.call(not positive.play_card(bad.uid, 0) and positive.bw == bw, "NULL POINTER rejects positive STR before payment")
+ var ordinary := game("RIOT"); ordinary.enter_node(0); ordinary.hand.clear(); ordinary.bw = 20
+ ordinary.enc.ice.assign([ordinary._new_ice("AUTO_RENEW")]); ordinary.reduce_ice_str(0, 4)
+ ordinary.enc.ice[0].harden = 1; ordinary._sync_strengths()
+ var no_bonus := ordinary._new_inst("SECOND_WIND"); ordinary.hand.append(no_bonus); bw = ordinary.bw; ordinary.play_card(no_bonus.uid, 0)
+ check.call(ordinary.bw == bw, "ordinary first zero consumes future printed-card bonus")
+ check.call(CardDB.roles("FLATLINE").has("↯ DRILL") and CardDB.roles("KNOCKOUT").has("↯ DRILL") and CardDB.roles("SECOND_WIND").has("↯ DRILL"), "all ZEROED cards labelled DRILL")
+ var compile := game("RIOT"); compile.enter_node(0); compile.hand.clear(); compile.bw = 20
+ compile.enc.ice.assign([compile._new_ice("AUTO_RENEW")])
+ var combo := compile._new_inst("COMPILED::PROBE::FLATLINE"); compile.hand.append(combo); compile.trace = 10; compile.play_card(combo.uid, 0)
+ check.call(compile.enc.ice[0].zeroed and compile.trace == 8 and compile.discard[0].id == combo.id, "compiled ordinary reduction then printed ZEROED resolves in order")
