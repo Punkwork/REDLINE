@@ -3,7 +3,7 @@ extends SceneTree
 var main: Node
 var failures:=0
 var checks:=0
-const EXAMPLES:=["DEEP_PROBE","STRESS_TEST","LOGIC_BOMB","PASSKEY","JACKHAMMER","SKELETON_KEY","TOOLBELT","SURGE_PROTECTOR","FAILSAFE","TRACER","SPAM"]
+const EXAMPLES:=["DEEP_PROBE","STRESS_TEST","PAYDAY","PASSKEY","JACKHAMMER","SKELETON_KEY","TOOLBELT","SURGE_PROTECTOR","FAILSAFE","TRACER","SPAM"]
 func _initialize() -> void: call_deferred("run")
 func check(ok: bool, message: String) -> void:
  checks+=1

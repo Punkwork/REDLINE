@@ -439,3 +439,9 @@ At the designer's request, pushed and verified annotated archive tags for `docs/
 ## 2026-11-17 — Playtest checklist v0.3 and the live QA Sheet (Claude)
 
 Closes HANDOFF "Checklist v0.2". The live Sheet (claude.ai artifact "REDLINE Playtest QA Checklist", last changed 2026-11-15) was still on v0.1.1: updated B1/C1/K1 targets to the PACE values and added C9–C11 and G6–G11. `REDLINE_PLAYTEST_CHECKLIST.md` is now v0.3 with checks for today's decisions: C12–C14 (rolled PULP shown and dealt, plannable swings, curves show next value), C15 (TUMBLE-001), C16 (ICE-AUDIT-001), D4 (RIOT-003), L5 (READ-001), L6–L8 (moods, corporation states, visual coherence), M5 (DEPRECATE-001); the Sheet carries the same 82 rows. HANDOFF: PR #1 row closed (archived by Codex in 65a47f2). **Code changes:** none.
+
+## 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex)
+
+Removed the card and passive from runtime. CONSENT FORM retains its STR and subroutines. Updated regression coverage and replaced the rare SCRIPT sample with PAYDAY.
+
+**Interpretations to confirm:** The slice has no persisted run decks, so no legacy LOGIC BOMB runtime definition is needed. PAYDAY is the replacement sample.

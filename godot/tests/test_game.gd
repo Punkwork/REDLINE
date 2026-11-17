@@ -300,8 +300,8 @@ func test_passives() -> void:
 	g.entered_corp = true
 	start_node(g, 2, 1, "VOID_ICEPICK")
 	g.layer = 1
-	g._start_encounter()                    # CONSENT FORM (RELAY) + TERMS OF SERVICE
-	check(g.ice_str(1) == 9, "RELAY gives the ICE to its right +2 STR")
+	g._start_encounter()                    # CONSENT FORM + TERMS OF SERVICE
+	check(g.ice_str(1) == 7 and g.passive(0).is_empty(), "CONSENT FORM has no passive and does not boost its neighbour")
 
 func test_rustlers() -> void:
 	# ECHO: no READY RIG, LOW PROFILE, SLOW DRIP, BORROWED CREDENTIALS
@@ -557,7 +557,7 @@ func test_rainbow_and_toolbelt() -> void:
 	g.bw = 4
 	# TERMS OF SERVICE STR 7 vs FORTRESS Icepick STR 1: 6 boosts at 1 BW, first boost free (TOOLBELT), first break free
 	var c2 := g.break_info(1, 0)
-	check(c2.cost == 7, "TOOLBELT (TOS STR 9 with CONSENT FORM's RELAY) makes the first boost free (got %s)" % str(c2))
+	check(c2.cost == 5, "TOOLBELT (TOS STR 7) makes the first boost free (got %s)" % str(c2))
 
 func test_spam_and_filter() -> void:
 	var g := legacy_game(7)

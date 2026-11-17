@@ -247,7 +247,7 @@ func _new_ice(id: String, definition: Dictionary = {}) -> Dictionary:
 	for s in d.subs:
 		broken.append(false)
 		seen.append(false)
-	return {"id": id, "definition": d, "str_mod": 0, "zeroed": false, "zeroed_blocked": d.str <= 0 or int(d.get("str_floor", 0)) > 0, "last_str": int(d.str), "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {},
+	return {"id": id, "definition": d, "str_mod": 0, "zeroed": false, "zeroed_blocked": d.str <= 0 or int(d.get("str_floor", 0)) > 0, "last_str": int(d.str), "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {},
 		"break_progress": d.subs.map(func(_s): return 0), "escalation": {}, "corp_turns": 0, "curves": _curves_for(d)}
 
 func _curves_for(d: Dictionary) -> Dictionary:
@@ -380,7 +380,6 @@ func _start_turn() -> void:
 		p.free_used = false
 	enc["toolbelt_used"] = false
 	for ice in enc.ice:
-		ice.bomb = false
 		ice.rainbow = -1
 	_sync_strengths()
 	if _rack_has("SURGE_PROTECTOR"):
@@ -733,11 +732,6 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"STRESS_TEST":
 			for i in enc.ice.size():
 				reduce_ice_str(i, 1)
-		"LOGIC_BOMB":
-			_sync_strengths()
-			enc.ice[target].bomb = true
-			_sync_strengths()
-			return true
 		"DEFRAG": draw_cards(1)
 		"STIM_PATCH": draw_cards(2)
 		"BURST":
@@ -859,8 +853,6 @@ func _end_turn_effects() -> void:
 			if p.inst.id == "SLEDGE":
 				p.boost = -CardDB.def("SLEDGE").pick.str
 		_say("SHATTER: SLEDGE drops to STR 0.")
-	for ice in enc.ice:
-		ice.bomb = false
 	_sync_strengths()
 	if enc.turn >= 6 and enc.breaks_turn == 0 and not enc.breached:
 		_event("EV-10")
@@ -1081,13 +1073,11 @@ func _strength_floor(ice: Dictionary) -> int:
 func _raw_strength(i: int) -> int:
 	var ice: Dictionary = enc.ice[i]
 	var value: int = ice_definition(ice).str + ice.str_mod + ice.get("harden", 0)
-	if i > 0 and ice_definition(enc.ice[i - 1]).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false): value += 2
 	return value
 
 func ice_str(i: int) -> int:
 	var ice: Dictionary = enc.ice[i]
 	var floor_value := _strength_floor(ice)
-	if ice.bomb: return floor_value
 	var rot: int = int(ice.virus.get("ROT", 0))
 	return maxi(floor_value, _raw_strength(i) - rot - (amp if rot > 0 else 0))
 
@@ -1096,7 +1086,7 @@ func _sync_strengths() -> void:
 	for i in enc.ice.size():
 		var ice: Dictionary = enc.ice[i]
 		var floor_value := _strength_floor(ice)
-		if not ice.bomb and _raw_strength(i) < floor_value:
+		if _raw_strength(i) < floor_value:
 			ice.str_mod += floor_value - _raw_strength(i)
 		var current := ice_str(i)
 		if int(ice.get("last_str", current)) > 0 and current == 0 and not ice.get("zeroed_blocked", false) and floor_value == 0:

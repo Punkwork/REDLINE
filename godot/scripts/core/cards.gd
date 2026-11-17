@@ -65,8 +65,6 @@ const DEFS := {
 		"text": "Target ICE: −4 STR this encounter."},
 	"STRESS_TEST": {"name": "STRESS TEST", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "rarity": "UNCOMMON",
 		"text": "Every ICE: −1 STR this encounter."},
-	"LOGIC_BOMB": {"name": "LOGIC BOMB", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 3, "rarity": "RARE", "target": true,
-		"text": "Target ICE's STR becomes 0 until the end of your turn. BURNED."},
 	"DEFRAG": {"name": "DEFRAG", "type": "SCRIPT", "tags": [], "bw": 0, "rarity": "COMMON", "text": "Draw 1."},
 	"STIM_PATCH": {"name": "STIM PATCH", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 2, "rarity": "UNCOMMON",
 		"text": "Draw 2. (+2 TRACE)"},
@@ -479,7 +477,7 @@ static func roles(id: String) -> Array:
 	var d := def(id)
 	var out := []
 	if d.has("pick") or d.has("breaker") or id in ["ADAPTER", "BORROWED_CREDENTIALS", "SHATTER", "FLASHPOINT"]: out.append("◇ COVERAGE")
-	if d.has("pick") or d.tags.has("VIRUS") or d.has("zeroed_reduction") or id in ["PROBE", "OVERLOAD", "DEEP_PROBE", "SMASH", "PIVOT", "STACK_SMASH", "NULL_POINTER", "FIELD_KIT", "STRESS_TEST", "LOGIC_BOMB", "MINIMALIST"]: out.append("↯ DRILL")
+	if d.has("pick") or d.tags.has("VIRUS") or d.has("zeroed_reduction") or id in ["PROBE", "OVERLOAD", "DEEP_PROBE", "SMASH", "PIVOT", "STACK_SMASH", "NULL_POINTER", "FIELD_KIT", "STRESS_TEST", "MINIMALIST"]: out.append("↯ DRILL")
 	if id in ["SURGE_PROTECTOR", "WARM_BOOT", "STUN_BATON"]: out.append("▣ HULL")
 	if d.has("compiled"):
 		for part in d.compiled:

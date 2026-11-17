@@ -23,7 +23,6 @@ const DEFS := {
 		"passive": "HARDENING", "ability_text": "HARDENING: +1 STR after each Corporation Response (max +3).",
 		"subs": [[{"k": "PULP", "v": 1}], [{"k": "PULP", "v": 2}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
 	"CONSENT_FORM": {"name": "CONSENT FORM", "type": "TUMBLER", "subtype": "SWITCHBOARD", "str": 4, "tier": "T1", "slots": 2,
-		"passive": "RELAY", "ability_text": "RELAY: while it has an unbroken subroutine, the ICE to its right gets +2 STR.",
 		"subs": [[{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 4}], [{"k": "DEADLOCK"}]]},
 	"CAPTCHA": {"name": "CAPTCHA", "type": "TUMBLER", "subtype": "SNARE", "str": 5, "tier": "T1", "slots": 2,
 		"passive": "TRIPWIRE", "ability_text": "TRIPWIRE: breaking any of its subroutines adds TRACE 1.",

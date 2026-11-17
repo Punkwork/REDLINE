@@ -153,10 +153,8 @@ func step4() -> void:
  check.call(g.ice_str(0) == 3, "explicit STR floor remains")
  g.enc.ice[0].erase("str_floor"); g.enc.ice[0].harden = 2; g._sync_strengths()
  check.call(g.ice_str(0) == 2, "HARDENING rises from zero without hidden debt")
- var bomb := g._new_inst("LOGIC_BOMB"); g.hand.append(bomb); g.play_card(bomb.uid, 0)
- check.call(g.ice_str(0) == 0, "LOGIC BOMB sets STR to zero")
- g.enc.ice[0].bomb = false; g._sync_strengths()
- g.installed.append({"inst": g._new_inst("SCALPEL"), "boost": 2, "free_used": false})
+ g.reduce_ice_str(0, 2)
+ g.installed.append({"inst": g._new_inst("SCALPEL"), "boost": 0, "free_used": false})
  check.call(g.break_info(0, 0).margin == 2 and g.break_info(0, 0).cost == 0, "SCALPEL OVERKILL uses nonnegative ICE STR")
  g.amp = 2; g.infect(0, "ROT", 10)
  check.call(g.ice_str(0) == 0 and g.enc.ice[0].virus.ROT == 10, "ROT retains spare counters at minimum zero")
@@ -237,7 +235,7 @@ func pacing() -> void:
 func edge_regressions() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30
  g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")]); g.reduce_ice_str(1, 10)
- check.call(g.ice_str(1) == 0, "RELAY included in capped reduction")
+ check.call(g.ice_str(1) == 0, "Reduction caps at zero without a passive bonus")
  for floor_value in [3, 4, 3]:
   g.enc.ice[1].str_floor = floor_value
   check.call(g.ice_str(1) == floor_value, "explicit 3/4/3 ICE floors remain authoritative")
@@ -338,11 +336,10 @@ func zeroed_lifecycle() -> void:
  g.enc.ice[0].harden = 2; g._sync_strengths(); g.reduce_ice_str(0, 2)
  check.call(not g.enc.ice[0].zeroed, "starts-at-zero ICE stays ineligible after gaining STR")
  g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")])
- g.reduce_ice_str(1, 5) # Effective 6 to 1, RELAY keeps 2.
- g.enc.ice[0].broken.fill(true); g._sync_strengths()
- check.call(g.ice_str(1) == 0 and g.enc.ice[1].zeroed, "RELAY loss consumes ZEROED and excess loss is discarded")
+ g.reduce_ice_str(1, 10)
+ check.call(g.ice_str(1) == 0 and g.enc.ice[1].zeroed, "Excess reduction consumes ZEROED and excess loss is discarded")
  g.enc.ice[1].harden = 1; g._sync_strengths()
- check.call(g.ice_str(1) == 1, "STR gains rise from zero after RELAY loss")
+ check.call(g.ice_str(1) == 1, "STR gains rise from zero after excess reduction")
 
 func zeroed_cards() -> void:
  var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 20; g.trace = 10

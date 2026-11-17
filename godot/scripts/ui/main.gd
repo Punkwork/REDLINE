@@ -862,7 +862,7 @@ func _ice_card(i: int, is_main: bool) -> Control:
 		var ah := HBoxContainer.new()
 		var pk: String = d.get("passive", d.get("ability", ""))
 		var picon := {"CLOAK_TRACE": "CLOAK", "WATCHER": "CLOAK", "BOOTING": "TRACE", "TOLL": "BW", "SEQUENCED": "DEADLOCK",
-			"HARDENING": "STR", "RELAY": "STR", "TRIPWIRE": "TRACE"}
+			"HARDENING": "STR", "TRIPWIRE": "TRACE"}
 		ah.add_child(RIcon.make(picon.get(pk, "ICE"), 16))
 		var al := _lbl(" " + d.ability_text, 12, Color("#c7b9ff"))
 		al.autowrap_mode = TextServer.AUTOWRAP_WORD
