@@ -24,7 +24,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var head := FriendlyLook.panel(FriendlyLook.RED if corp else FriendlyLook.TONER)
  head.position = Vector2(3, 3); head.size = Vector2(140, 40); head.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(head)
  var title := FriendlyLook.label(d.name.to_upper(), 11 if d.name.length() > 25 else 13, FriendlyLook.PAPER, view.skin.bold_font if corp else FriendlyLook.BOLD)
- title.position = Vector2(8, 4); title.size = Vector2(105, 38); title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; body.add_child(title)
+ title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; title.position = Vector2(8, 4); title.size = Vector2(105, 38); body.add_child(title)
  var circle := CostCircle.new(); circle.position = Vector2(114, 9); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
  var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, FriendlyLook.TONER, FriendlyLook.BOLD)
  cost.position = Vector2(115, 8); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
@@ -33,7 +33,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var art := FriendlyLook.label("◉" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
  art.position = Vector2(9, 49); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
  var type_line := FriendlyLook.label(d.type + (" · " + "/".join(d.tags) if not d.tags.is_empty() else ""), 8, Color("#4A5568") if corp else Color("#3A3A3A"), view.skin.font if corp else FriendlyLook.MONO)
- type_line.position = Vector2(9, 54 + art_h); type_line.size = Vector2(128, 24); type_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; body.add_child(type_line)
+ type_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; type_line.position = Vector2(9, 54 + art_h); type_line.size = Vector2(128, 24); body.add_child(type_line)
  var rules := RichTextLabel.new(); rules.mouse_filter = Control.MOUSE_FILTER_IGNORE; rules.bbcode_enabled = true; rules.scroll_active = false
  var font: Font = view.skin.font if corp else FriendlyLook.MONO
  var cached: Dictionary = view.game._find(view.game.hand, uid)
