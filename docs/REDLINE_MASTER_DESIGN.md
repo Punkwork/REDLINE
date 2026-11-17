@@ -70,6 +70,20 @@ Not covered by this approval: the rules questions still listed in `HANDOFF.md` (
 
 **TUMBLE-001 / REEL-001 — Broken TUMBLER subroutines tumble out at once; no DEADLOCK counter (APPROVED, 2026-11-17).** Reaffirms TUMBLE-001 (designer, 2026-11-16; Core Rules §5.4): as soon as a TUMBLER subroutine is broken it **disappears**, and the **next unbroken subroutine in sequence** tumbles in to take its place, active at once. Broken subroutines never come back into view. TUMBLERS still rotate once each turn as normal. Because a broken DEADLOCK can no longer reappear, the REEL-001 follow-up (show a DEADLOCK total on TUMBLER cards) is **not needed** and is closed. Built and tested (`zeroed-tumble-step3`). Designer: "as soon as a subroutine is broken on a tumbler, the broken sub disappears to reveal the next subroutine in sequence, which needs to be an unbroken subroutine … Tumblers still tumble once each turn as normal."
 
+**ICE-AUDIT-001 — ICE Rules Bible audit applied to the HALCYON slice before the playtest (APPROVED, 2026-11-17).** Designer: "apply the changes to the Halcyon ICE now. That is before the playtest." Choices for the either/or rows made by the designer in session (CAPTCHA: TRACE 2; CONSENT FORM and REJECT ALL: PULP 3).
+
+| ICE | Was | Now |
+|---|---|---|
+| CAPTCHA (TUMBLER · SNARE) | STR 5; 2 slots of 5: DISCARD 1 · DEADLOCK · **PULP 6** · DEADLOCK · TRACE 3 | **STR 4**; 2 slots of 5: DISCARD 1 · DEADLOCK · **TRACE 2** · DEADLOCK · TRACE 3 |
+| AUTO-RENEW (FORTRESS · RATCHET) | STR 4 | **STR 5** (subroutines unchanged) |
+| DOORBELL CAM (VOID · WATCHER) | STR 4; [S1] TRACE 3 + DEADLOCK | **STR 3; [S1] PULP 4 · [S2] CORTEX 1 · [S3] DEADLOCK**; WATCHER kept |
+| CONSENT FORM (TUMBLER · SWITCHBOARD) | PULP 4 | **PULP 3** (rest unchanged; no passive per DEPRECATE-001) |
+| REJECT ALL (TUMBLER) | PULP 4 | **PULP 3** (rest unchanged, one DEADLOCK per REJECT-001) |
+
+COOKIE WALL keeps its TRACE 2 as the only FORTRESS TRACE. ACCEPT ALL, TERMS OF SERVICE and HOUSE CALL are unchanged. *Side effect:* CAPTCHA no longer carries PULP 6, so it won't turn lethal the way the approved VIS-001/CHROME-001 screenshots show; those images need refreshing once this is built.
+
+**PULP-001 — Roll size (APPROVED, 2026-11-17).** Each time a FORTRESS fixed-value PULP subroutine fires, roll its value around the printed number: usually **printed −2 to +2**; on about **30% of rolls** (about once every 3–4) the swing is instead **printed −3 or +3**. It is random, not on a schedule. **A roll never goes below PULP 1.** Designer: "the roll should be +2, -2 with once every 3 to 4 turns, a +3 or a -3", and chose a random chance over a fixed rhythm. *Working values for Codex to confirm in the log:* each value in −2..+2 equally likely; ±3 sign 50/50; the roll uses the Game RNG (seeded, reproducible). **Still OPEN:** how the possible range is shown before the subroutine fires, whether PULP-002 curves (COOKIE WALL S3, TERMS OF SERVICE S3) also roll, and how the VIS-001 lethal-mood threshold (PULP 5+) reads a rolled value.
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.

@@ -35,6 +35,8 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
 | **DEPRECATE-001** | Remove LOGIC BOMB from play (reward pool and any decks) and RELAY from play (CONSENT FORM keeps its subroutines and STR with no passive). Update or retire the tests that use them; keep the definitions in code only if needed for old saves. No other values change. | Master design, DEPRECATE-001 | Codex | TO DO |
+| **ICE-AUDIT-001** | Apply the new HALCYON values: CAPTCHA STR 4, TRACE 2 replaces PULP 6; AUTO-RENEW STR 5; DOORBELL CAM STR 3, [S1] PULP 4 · [S2] CORTEX 1 · [S3] DEADLOCK, WATCHER kept; CONSENT FORM and REJECT ALL PULP 3. Re-run bot sims; refresh VIS-001/CHROME-001 screenshots that show CAPTCHA PULP 6. | Master design, ICE-AUDIT-001; ICE Corp 1 §5.0 | Codex | TO DO |
+| **PULP-001 roll** | FORTRESS fixed-value PULP rolls each time it fires: printed −2..+2, about 30% of rolls ±3 instead, minimum 1, Game RNG. Leave curves and on-screen display as they are until PULP-001 display is decided. | Master design, PULP-001 | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
@@ -82,8 +84,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ICEBIBLE audit | Apply the ICE Rules Bible audit to the slice (DOORBELL CAM not deadly; CAPTCHA's PULP 6; AUTO-RENEW STR; TUMBLER PULP cap on REJECT ALL and CONSENT FORM)? | `REDLINE_ICE_RULES_BIBLE.md`, audit table | WAITING |
-| PULP-001 range | FORTRESS PULP is now rolled each time with slight variation (designer, 2026-11-17). How wide is the roll for each printed value, how is it shown before it fires, and how does it relate to PULP-002 curves? | Master design, PULP-001 | WAITING |
+| PULP-001 display | How is a rolled FORTRESS PULP shown before it fires? Do PULP-002 curves also roll? How does the lethal mood (PULP 5+) read a rolled value? | Master design, PULP-001 | WAITING |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
 
 ---
@@ -102,6 +103,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | ZEROED-001 interpretation | Closed: LOGIC BOMB and RELAY deprecated (DEPRECATE-001), so their floor/deficit readings no longer apply. | 2026-11-17 (designer; recorded by Claude) |
 | RIOT-003 readings | Designer confirmed: SHATTER lets SLEDGE break any one chosen ICE of any type this turn; SLEDGE then stays at STR 0 until the encounter ends. Already built this way. | 2026-11-17 (designer; recorded by Claude) |
 | REEL-001 follow-up | Closed: no DEADLOCK total on TUMBLER cards. TUMBLE-001 already removes broken subroutines at once and tumbles in the next unbroken one, so a broken DEADLOCK never reappears (designer reaffirmed). | 2026-11-17 (designer; recorded by Claude) |
+| ICEBIBLE audit / PULP-001 | Designer applied the audit to the slice before the playtest (ICE-AUDIT-001) and set the FORTRESS PULP roll (PULP-001). Build rows added above. | 2026-11-17 (designer; recorded by Claude) |
 | MAIN-001 | Shared working agreement (`AGENTS.md`, `CLAUDE.md`) makes `main` the source of truth for Codex and Claude; `codex/chrome-deco-encounter` (including halcyon-playtest-stabilization and VIS-001) merged into `main`; approved Nov 17 visual decisions recorded in the master design doc. | aea16de, a523502, dd64768 · 2026-11-17 (Claude) |
 | CHROME-001 screenshot refresh | Reran all five screenshot stages and replaced the ten PNGs under their original names with the current amber and textured CARDS-001 treatment. | 2026-11-17 (Codex) |
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |

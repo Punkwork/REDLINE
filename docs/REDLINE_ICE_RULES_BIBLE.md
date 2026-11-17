@@ -19,7 +19,7 @@ Each type owns one kind of threat, and its rules follow from that threat.
 - **APPROVED:** **fewer subroutines**, and they are **almost all PULP**. The odd other effect is allowed; **TRACE is rare**.
 - **LOCKED:** subroutines never rotate or hide; everything fires every turn, so the threat is plain and the question is how much you can afford to break.
 - **PROPOSED:** PULP values vary from ICE to ICE (1–5 in Tier 1) so no two FORTRESSES feel the same (PULP-001).
-- **APPROVED (PULP-001, 2026-11-17):** each FORTRESS PULP value is **rolled each time it fires**, with slight variation so the Rustler can still plan. Range and display are open (master design, PULP-001).
+- **APPROVED (PULP-001, 2026-11-17):** each FORTRESS PULP value is **rolled each time it fires**, with slight variation so the Rustler can still plan. Roll: printed −2..+2, about 30% of the time ±3 instead, never below 1 (master design, PULP-001). Display and curve interaction are open.
 
 ### TUMBLER: the puzzle
 - **APPROVED:** TUMBLERS are **where the quirks and puzzles happen**.
@@ -171,7 +171,7 @@ The common thread: every encounter should offer more good breaks than the Rustle
 
 ## Audit of the HALCYON slice ICE
 
-Four of the nine slice ICE already fit; the biggest gap is DOORBELL CAM, a VOID that isn't deadly. Nothing below has been changed in the build yet.
+Four of the nine slice ICE already fit; the biggest gap is DOORBELL CAM, a VOID that isn't deadly. **Applied by the designer on 2026-11-17 (ICE-AUDIT-001, master design doc):** CAPTCHA STR 4 with TRACE 2 in place of PULP 6; AUTO-RENEW STR 5; DOORBELL CAM STR 3 with PULP 4 · CORTEX 1 · DEADLOCK; CONSENT FORM and REJECT ALL PULP 3. The table below is the original audit.
 
 | ICE | Type, STR | Fits? | Change to fit the bible |
 |---|---|---|---|

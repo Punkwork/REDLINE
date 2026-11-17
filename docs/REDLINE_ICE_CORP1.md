@@ -101,16 +101,16 @@ These supersede the Tier 1 table below and the Opening Node ICE (§8.4) **for th
 | ICE | Type · subtype | STR | Subroutines | Passive / ability |
 |---|---|---|---|---|
 | **ACCEPT ALL** *(Opening, support)* | TUMBLER · DETAINER | 4 | 1 slot of 3: −1 BW next turn · INSERT 1 SPAM → draw pile · PULP 3 | — |
-| **REJECT ALL** *(Opening, main)* | TUMBLER | 4 | 2 slots of 3: DEADLOCK · TRACE 3 · PULP 4 *(REJECT-001: one DEADLOCK; was 2 slots of 4 with a second DEADLOCK)* | BOOTING |
+| **REJECT ALL** *(Opening, main)* | TUMBLER | 4 | 2 slots of 3: DEADLOCK · TRACE 3 · PULP 3 *(ICE-AUDIT-001: was PULP 4)* *(REJECT-001: one DEADLOCK; was 2 slots of 4 with a second DEADLOCK)* | BOOTING |
 | **COOKIE WALL** | FORTRESS · TOLLHOUSE | 5 | [S1] PULP 2 · [S2] TRACE 2 · [S3] PULP curve B (random) · [S4] DEADLOCK | TOLL |
 | **TERMS OF SERVICE** | FORTRESS · VAULT | 7 | [S1] PULP 5 · [S2] INSERT 1 SPAM → discard pile · [S3] PULP curve C (hammer) · [S4] DEADLOCK | SEQUENCED |
-| **AUTO-RENEW** *(new)* | FORTRESS · RATCHET | 4 | [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK | HARDENING |
-| **CONSENT FORM** | TUMBLER · SWITCHBOARD | 4 | 2 slots of 4: TRACE 2 · DEADLOCK · PULP 4 · DEADLOCK | ~~RELAY~~ none (DEPRECATE-001) |
-| **CAPTCHA** | TUMBLER · SNARE | 5 | 2 slots of 5: DISCARD 1 (next turn) · DEADLOCK · PULP 6 · DEADLOCK · TRACE 3 | TRIPWIRE |
-| **DOORBELL CAM** | VOID · WATCHER | 4 | [S1] TRACE 3 + DEADLOCK (face-down until it fires) | WATCHER (CLOAK card → TRACE 1) |
+| **AUTO-RENEW** *(new)* | FORTRESS · RATCHET | 5 *(ICE-AUDIT-001: was 4)* | [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK | HARDENING |
+| **CONSENT FORM** | TUMBLER · SWITCHBOARD | 4 | 2 slots of 4: TRACE 2 · DEADLOCK · PULP 3 · DEADLOCK *(ICE-AUDIT-001: was PULP 4)* | ~~RELAY~~ none (DEPRECATE-001) |
+| **CAPTCHA** | TUMBLER · SNARE | 4 *(ICE-AUDIT-001: was 5)* | 2 slots of 5: DISCARD 1 (next turn) · DEADLOCK · TRACE 2 · DEADLOCK · TRACE 3 *(ICE-AUDIT-001: was PULP 6)* | TRIPWIRE |
+| **DOORBELL CAM** | VOID · WATCHER | 3 *(ICE-AUDIT-001: was 4)* | [S1] PULP 4 · [S2] CORTEX 1 · [S3] DEADLOCK (face-down until each fires) *(ICE-AUDIT-001: was [S1] TRACE 3 + DEADLOCK)* | WATCHER (CLOAK card → TRACE 1) |
 | **HOUSE CALL** *(Black ICE)* | VOID | 7 | [S1] PULP 6 · [S2] PULP 6 (revealed as they fire) | — |
 
-**Slice route:** COOKIE BANNER (ACCEPT ALL + REJECT ALL) → CAPTCHA (AUTO-RENEW + CAPTCHA) or CONSENT WALL (COOKIE WALL, then CONSENT FORM) → SAFEHOUSE or DOORBELL (DOORBELL CAM, then CONSENT FORM + TERMS OF SERVICE) → TERMS & CONDITIONS (TERMS OF SERVICE, then CAPTCHA + DOORBELL CAM). The ICE Rules Bible audit (DOORBELL CAM not deadly, CAPTCHA's VOID-sized PULP 6, AUTO-RENEW's low STR) is not yet applied.
+**Slice route:** COOKIE BANNER (ACCEPT ALL + REJECT ALL) → CAPTCHA (AUTO-RENEW + CAPTCHA) or CONSENT WALL (COOKIE WALL, then CONSENT FORM) → SAFEHOUSE or DOORBELL (DOORBELL CAM, then CONSENT FORM + TERMS OF SERVICE) → TERMS & CONDITIONS (TERMS OF SERVICE, then CAPTCHA + DOORBELL CAM). The ICE Rules Bible audit (DOORBELL CAM not deadly, CAPTCHA's VOID-sized PULP 6, AUTO-RENEW's low STR) was applied on 2026-11-17 (ICE-AUDIT-001); the rows above show the new values.
 
 ### Tier 1 (rows 2–5) — original roster
 

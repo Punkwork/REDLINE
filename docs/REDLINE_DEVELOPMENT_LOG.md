@@ -485,3 +485,7 @@ Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stage
 ## 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude)
 
 **Designer:** a broken TUMBLER subroutine disappears at once and the next unbroken subroutine in sequence tumbles in; TUMBLERS still rotate once each turn. This is TUMBLE-001 (approved 2026-11-16, built `zeroed-tumble-step3`), so no DEADLOCK counter is needed. Added TUMBLE-001 to the master design doc (it was only in Core Rules) and closed the REEL-001 follow-up in HANDOFF. **Code changes:** none.
+
+## 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude)
+
+**Designer decisions:** "apply the changes to the Halcyon ICE now. That is before the playtest." and "the roll should be +2, -2 with once every 3 to 4 turns, a +3 or a -3." In-session choices: CAPTCHA's PULP 6 becomes TRACE 2; CONSENT FORM and REJECT ALL PULP 4 become PULP 3; the ±3 swing is a random ~30% chance, not a fixed rhythm. **Recorded:** ICE-AUDIT-001 and the PULP-001 roll in the master design doc; ICE Corp 1 §5.0 slice table; ICE Rules Bible audit note; Core Rules PULP X row. **Assumptions stated for confirmation:** a roll never goes below PULP 1; −2..+2 equally likely; ±3 sign 50/50; Game RNG. **HANDOFF:** two Codex TO DO rows (ICE-AUDIT-001, PULP-001 roll); new WAITING row PULP-001 display (pre-fire display, curves, lethal-mood threshold). **Code changes:** none.
