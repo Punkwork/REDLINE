@@ -15,6 +15,8 @@
 
 **Why it fits PANOPTICON:** the second step of surveillance is enforcement. The friendly devices of HALCYON become the evidence IRONWATCH uses to stop you, search you and hurt you. Its ICE are named after policing hardware and procedures.
 
+**Look (PROPOSED, FACADE-001):** a Raygun Gothic civic security concourse in navy enamel and brass that sells safety and status; each ICE is a security appliance. See `REDLINE_CORPORATE_FACADES.md` §3.
+
 **How it plays:**
 - **Lots of PULP.** SHIELD matters more than anywhere else. Unbroken subroutines hit hard, and its Black ICE is the most dangerous in the game.
 - **Aggressive VOID ICE** react to what you do: installing (PATROL DRONE), hiding (K9 UNIT), attacking (ROADBLOCK).

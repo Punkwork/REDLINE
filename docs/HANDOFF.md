@@ -84,6 +84,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
+| FACADE-001 | Review the proposed Raygun Gothic facades for IRONWATCH and LUCIDA: three degrees of watching, atriums and hostile reveals, plaque colours, interface copy, ICE appliance list, art briefs. Six questions in §6. | `REDLINE_CORPORATE_FACADES.md` | WAITING |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
 
 ---
