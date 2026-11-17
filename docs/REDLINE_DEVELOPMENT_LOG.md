@@ -501,3 +501,5 @@ TESTS: 357 passed, 0 failed
 GENERALIST also has two stalls, counted separately from deaths. Mean end decks GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE each.
 
 **Interpretations to confirm:** 2.5-second break confirmation and header placement are working UI choices. Illustrated shells, shared collage motifs and detailed backgrounds remain prototype art; final fidelity to the concept and undrawn ICE/copy await designer review. This implements one encounter direction, not a completed whole-game art collection. Audio development, Windows export and manual Windows playtest are deferred. One feature PR targets stabilization and includes unmerged PR #11/#9 dependencies; nothing was merged or pushed directly to the working branch. The guide/status/HANDOFF are updated in place; design documents and Claude project copies are unchanged.
+
+**Sample delivery:** `chrome-001-review` stores the ten selected PNGs. The download ZIP excludes unrelated regression screenshots; `chrome-001-step5` identifies the implementation commit.
