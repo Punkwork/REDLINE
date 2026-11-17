@@ -5,6 +5,7 @@ var ui
 var game: Game
 var skin: CorporationSkin
 var background: TextureRect
+var surveillance_layer: TextureRect
 var node_tag: Panel
 var trace_tag: Panel
 var bottom_hud: Panel
@@ -56,7 +57,8 @@ func _ready() -> void:
  mouse_filter = Control.MOUSE_FILTER_PASS
  skin = ui.friendly_skin
  app_ground = ColorRect.new(); app_ground.color = skin.ground; app_ground.position = Vector2.ZERO; app_ground.size = Vector2(1600, 1000); app_ground.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(app_ground)
- background = TextureRect.new(); background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 1.0; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
+ background = TextureRect.new(); background.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 1.0; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
+ surveillance_layer=TextureRect.new(); surveillance_layer.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; surveillance_layer.texture=skin.hostile_background; surveillance_layer.size=Vector2(1600,1000); surveillance_layer.stretch_mode=TextureRect.STRETCH_SCALE; surveillance_layer.modulate.a=0.20; surveillance_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(surveillance_layer); surveillance_layer.hide()
  glitch_layer = Control.new(); glitch_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(glitch_layer)
  for y in [192,362,557,853]:
   var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
@@ -389,6 +391,7 @@ func update_corporation() -> void:
  previous_trace=game.trace; previous_strikes=game.strikes
  apply_background()
 func apply_background() -> void:
+ surveillance_layer.visible=corporation_state=="cracking" and not strike_overlay.visible
  var hostile := corporation_state=="mask_off" or strike_overlay.visible
  app_ground.color=Color("#14070A") if hostile else skin.ground
  var target: Texture2D = skin.hostile_background if hostile and skin.hostile_background!=null else skin.background
@@ -400,7 +403,7 @@ func apply_background() -> void:
   background_target=target
   if background_fade: background_fade.kill()
   if is_instance_valid(fade_layer): fade_layer.queue_free()
-  fade_layer=TextureRect.new(); fade_layer.texture=target; fade_layer.size=Vector2(1600,1000); fade_layer.modulate.a=0.0; fade_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(fade_layer); move_child(fade_layer,background.get_index()+1)
+  fade_layer=TextureRect.new(); fade_layer.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; fade_layer.texture=target; fade_layer.size=Vector2(1600,1000); fade_layer.modulate.a=0.0; fade_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(fade_layer); move_child(fade_layer,background.get_index()+1)
   background_fade=create_tween(); background_fade.tween_property(fade_layer,"modulate:a",1.0,0.3)
   background_fade.tween_callback(func(): background.texture=target; fade_layer.queue_free())
  glitch_layer.visible=false
@@ -418,6 +421,7 @@ func build_strike() -> void:
  var dim := ColorRect.new(); dim.color=Color(0.05,0,0,0.5); dim.size=Vector2(1600,1000); dim.mouse_filter=Control.MOUSE_FILTER_IGNORE; strike_overlay.add_child(dim)
  var modal := FriendlyLook.panel(Color("#140809"),FriendlyLook.RED,2,skin.radius); modal.position=Vector2(295,200); modal.size=Vector2(1010,400); strike_overlay.add_child(modal)
  modal.mouse_filter=Control.MOUSE_FILTER_PASS
+ var chrome_modal:=ChromeFrame.new(); chrome_modal.name="StrikeChrome"; chrome_modal.hostile=true; chrome_modal.radius=skin.radius; chrome_modal.size=modal.size; modal.add_child(chrome_modal)
  at(modal,FriendlyLook.label("TRACE STRIKE 1 OF 3",16,FriendlyLook.RED,FriendlyLook.BOLD),Vector2(32,30))
  at(modal,FriendlyLook.label("We see you.",68,Color("#F6E7E7"),skin.bold_font),Vector2(32,64))
  var line := FriendlyLook.label("HALCYON has located you. We've added something to help us keep in touch.",20,Color("#E4B5B7"),skin.font); line.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; at(modal,line,Vector2(32,166),Vector2(660,70))

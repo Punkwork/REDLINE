@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CorporationSkin" load_steps=8 format=3]
 [ext_resource type="Script" path="res://scripts/ui/friendly_lie/corporation_skin.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/atrium.png" id="2"]
-[ext_resource type="Texture2D" path="res://assets/friendly_lie/backgrounds/halcyon-hostile.jpg" id="3"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/chrome/atrium-hostile.png" id="3"]
 [ext_resource type="FontFile" path="res://assets/fonts/DM-Sans.ttf" id="4"]
 [sub_resource type="FontVariation" id="font400"]
 base_font = ExtResource("4")
