@@ -1,6 +1,6 @@
 # PANOPTICON — CORPORATE FACADES: RAYGUN GOTHIC FOR EACH CORPORATION
 **Version:** 0.1 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** FACADE-001
-**Status:** **PROPOSED**, awaiting the designer. Nothing here is approved until the master design doc says so.
+**Status:** **APPROVED 2026-11-17** by the designer ("Correct. Approved."); recorded as FACADE-001 in `REDLINE_MASTER_DESIGN.md`. Copy and numbers are working values. Questions 4–6 in §6 are still open.
 **Builds on:** the Raygun Gothic direction and VISUAL-DECISIONS-2026-11-17 / VISUAL-APPROVALS-002 / RUSTLER-LOOK-001 in `REDLINE_MASTER_DESIGN.md`; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`); the HALCYON Chrome Deco encounter (CHROME-001). ICE rosters: `REDLINE_ICE_CORP1.md` to `CORP3.md`.
 
 **Goal:** give IRONWATCH and LUCIDA the same treatment HALCYON got in CHROME-001, so that each corporation is a polished Raygun Gothic facade that sells a **different degree of surveillance** as a customer benefit, and the player can feel the difference in routine interactions, not only in the fights.
@@ -163,7 +163,7 @@ Radius 32 stays (VIS-001).
 
 ---
 
-## 5. Art briefs for generation (when approved)
+## 5. Art briefs for generation
 
 Follow the HALCYON assets' format so the encounter code can swap them in: **1586 × 992, no text, no UI**, central door at the horizontal centre, vanishing point at about 40% height, the lower 45% kept as open floor (hand and HUD sit there), symmetrical composition, the hostile image an **edit of the friendly one at the identical perspective**. Record the exact prompts, edit prompts, references and model in `godot/assets/friendly_lie/chrome/SOURCES.md` **at the time of generation** (the HALCYON prompts were lost).
 

@@ -76,7 +76,7 @@ Hostile HALCYON background ground: `#14070A`.
 
 ### 2.3 The corporation backgrounds (task 1)
 
-> **2026-11-17:** HALCYON's blurred-app placeholder was replaced by the Chrome Deco atrium (CHROME-001, approved). The Raygun Gothic facades for IRONWATCH and LUCIDA, with their interface voice and ICE appliances, are proposed in `REDLINE_CORPORATE_FACADES.md` (FACADE-001, PROPOSED). The placeholders below stay until that is approved and built.
+> **2026-11-17:** HALCYON's blurred-app placeholder was replaced by the Chrome Deco atrium (CHROME-001, approved). The Raygun Gothic facades for IRONWATCH and LUCIDA, with their interface voice and ICE appliances, are in `REDLINE_CORPORATE_FACADES.md` (FACADE-001, APPROVED 2026-11-17). The placeholders below stay until that art is generated and built.
 
 Each background is the corporation's **own cheerful app, blurred** (about 5 px blur, 75% opacity) behind the encounter, so the fight happens inside its product. Placeholders are in `docs/visual/backgrounds/` (2400 × 1500 JPG); final art can replace them later.
 

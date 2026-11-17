@@ -84,7 +84,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| FACADE-001 | Review the proposed Raygun Gothic facades for IRONWATCH and LUCIDA: three degrees of watching, atriums and hostile reveals, plaque colours, interface copy, ICE appliance list, art briefs. Six questions in §6. | `REDLINE_CORPORATE_FACADES.md` | WAITING |
+| FACADE-001 follow-ups | Facades approved. Still open: write HALCYON's matching non-fight copy? Generate the IRONWATCH/LUCIDA art now or after the HALCYON playtest? Draw the escape ICE in the same pass? | `REDLINE_CORPORATE_FACADES.md` §6 | WAITING |
 
 ---
 
@@ -106,6 +106,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | PULP-001 curves | Decided: curves keep their designed patterns and do not roll; every curve shows its next value (curve B no longer "PULP ?"). | 2026-11-17 (designer; recorded by Claude) |
 | PR #1 vs this branch | Closed: PR #1 closed and its work archived at tag `archive/docs/simplified-design` (designer, 2026-11-17; Codex 65a47f2). | 2026-11-17 |
 | Checklist v0.2 / v0.3 | `REDLINE_PLAYTEST_CHECKLIST.md` v0.3 adds checks for the 2026-11-17 decisions (C12–C16, D4, L5–L8, M5). The live Sheet "REDLINE Playtest QA Checklist" now matches it: v0.2 targets for B1, C1, K1 and rows C9–C11, G6–G11 added, plus the v0.3 rows (82 rows; Result dropdown extended). | 2026-11-17 (Claude) |
+| FACADE-001 | Raygun Gothic facades for IRONWATCH and LUCIDA approved by the designer; recorded in the master design doc. | 2026-11-17 (designer; recorded by Claude) |
 | MAIN-001 | Shared working agreement (`AGENTS.md`, `CLAUDE.md`) makes `main` the source of truth for Codex and Claude; `codex/chrome-deco-encounter` (including halcyon-playtest-stabilization and VIS-001) merged into `main`; approved Nov 17 visual decisions recorded in the master design doc. | aea16de, a523502, dd64768 · 2026-11-17 (Claude) |
 | CHROME-001 screenshot refresh | Reran all five screenshot stages and replaced the ten PNGs under their original names with the current amber and textured CARDS-001 treatment. | 2026-11-17 (Codex) |
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |

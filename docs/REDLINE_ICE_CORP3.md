@@ -15,7 +15,7 @@
 
 **Why it fits PANOPTICON:** the last step of surveillance is inside your head. HALCYON watched your home and IRONWATCH watched the street; LUCIDA watches your thoughts, and edits them. Its ICE are named after wellness products and the mind. This is where the First Signal story should feel closest.
 
-**Look (PROPOSED, FACADE-001):** a Raygun Gothic wellness solarium in lilac pearl and rose-copper that sells peace of mind; each ICE is a wellness device. See `REDLINE_CORPORATE_FACADES.md` §4.
+**Look (APPROVED 2026-11-17, FACADE-001):** a Raygun Gothic wellness solarium in lilac pearl and rose-copper that sells peace of mind; each ICE is a wellness device. See `REDLINE_CORPORATE_FACADES.md` §4.
 
 **How it plays:**
 - **CORTEX from Tier 1.** CORTEX counters stay for the whole corporation (Core Rules §6), so every unbroken CORTEX subroutine makes the rest of the heist harder.
