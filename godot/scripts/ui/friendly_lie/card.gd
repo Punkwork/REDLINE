@@ -48,6 +48,36 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); bg.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(bg)
  bg.hide()
  var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
+ # A stationary material layer sits behind printing, inset from chassis and contacts.
+ var grain:=ColorRect.new(); grain.name="BoardMaterialGrain"; grain.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ var grain_rect:=Rect2(11,26,136,176)
+ if d.type=="PROGRAM": grain_rect=Rect2(12,49,135,159)
+ elif d.type=="PROTOCOL": grain_rect=Rect2(13,32,134,172)
+ elif corp: grain_rect=Rect2(15,66,132,139)
+ grain.position=grain_rect.position; grain.size=grain_rect.size
+ var grain_shader:=Shader.new()
+ grain_shader.code="""shader_type canvas_item;
+ uniform int material_kind = 0;
+ float hash(vec2 p) { return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+ float noise(vec2 p) {
+  vec2 i=floor(p), f=fract(p); f=f*f*(3.0-2.0*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);
+ }
+ void fragment() {
+  vec2 p=UV*vec2(136.0,176.0);
+  float grain=noise(p*2.2)-0.5;
+  float material=0.0;
+  if(material_kind==0) { material=(noise(p*vec2(0.32,1.5))-0.5)*0.65+grain*0.35; }
+  else if(material_kind==1) { material=sin(p.x*4.1)*sin(p.y*4.1)*0.27+grain*0.25; }
+  else if(material_kind==2) { material=(noise(p*vec2(2.0,0.075))-0.5)*0.75+grain*0.2; }
+  else { material=(noise(p*0.10)-0.5)*0.6+(noise(p*0.43)-0.5)*0.4+grain*0.15; }
+  float edge=smoothstep(0.0,0.035,UV.x)*smoothstep(0.0,0.035,1.0-UV.x)*smoothstep(0.0,0.025,UV.y)*smoothstep(0.0,0.025,1.0-UV.y);
+  COLOR=vec4(material>0.0 ? vec3(0.94,0.85,0.65) : vec3(0.12,0.16,0.12),abs(material)*0.26*edge);
+ }
+ """
+ var grain_material:=ShaderMaterial.new(); grain_material.shader=grain_shader
+ grain_material.set_shader_parameter("material_kind",["SCRIPT","PROGRAM","PROTOCOL","BLOATWARE"].find(d.type))
+ grain.material=grain_material; body.add_child(grain)
  if not corp:
   var finish:=CartridgeFinish.new(); finish.name="RarityFinish"; finish.rarity=rarity; finish.size=CARD_SIZE; body.add_child(finish)
  var title_ink:=printed_ink

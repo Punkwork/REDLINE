@@ -4,38 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-15 — REJECT-001: Use one DEADLOCK on REJECT ALL (Codex)
-
-**Commit reference:** `playtest3-step0` (tag on this step commit).
-
-**Changed:** REJECT ALL has one DEADLOCK in its three-entry pool; BOOTING remains turn 3. Updated opening rules checks and bot timing reporting.
-
-**Interpretations to confirm:** The bot now installs/pre-boosts HUSH for BORROWED CREDENTIALS off-type coverage; stalled simulations are reported separately from deaths. These are harness corrections, not balance changes. Earliest observed opening BREACH was turn 3 for all Rustlers.
-
-**Deferred:** Conditional BOOTING-on-turn-4 and safety valves remain excluded.
-
-**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
-
-```text
-Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
-
-  bot: phase=SLICE_DONE vitae=10 trace=16 strikes=0 cred=16 deck=15 steps=28
-  opening GENERALIST: earliest BREACH 3
-  pulp GENERALIST: per encounter 13.2 incoming (1.7 from Black ICE), 5.8 absorbed by SHIELD, 7.4 to VITAE, 3.5 hits
-  sim GENERALIST: 3/30 cleared; deaths by node { "CONSENT WALL": 4, "TERMS & CONDITIONS": 10, "DOORBELL": 13 }; survivors' avg end VITAE 18.7; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
-  opening ECHO: earliest BREACH 3
-  pulp ECHO: per encounter 9.8 incoming (0.0 from Black ICE), 3.2 absorbed by SHIELD, 6.7 to VITAE, 3.0 hits
-  sim ECHO: 14/30 cleared; deaths by node { "DOORBELL": 6, "CAPTCHA": 4, "TERMS & CONDITIONS": 6 }; survivors' avg end VITAE 12.9; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
-  opening RIOT: earliest BREACH 3
-  pulp RIOT: per encounter 11.1 incoming (1.9 from Black ICE), 4.1 absorbed by SHIELD, 7.0 to VITAE, 2.9 hits
-  sim RIOT: 3/30 cleared; deaths by node { "DOORBELL": 15, "TERMS & CONDITIONS": 10, "CAPTCHA": 2 }; survivors' avg end VITAE 14.0; purges 0 in 0 runs; SHATTER played 67 times in 29 runs
-  opening VECTOR: earliest BREACH 3
-  pulp VECTOR: per encounter 11.3 incoming (0.1 from Black ICE), 3.6 absorbed by SHIELD, 7.8 to VITAE, 3.2 hits
-  sim VECTOR: 7/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 9, "DOORBELL": 9 }; survivors' avg end VITAE 7.0; purges 22 in 17 runs; SHATTER played 0 times in 0 runs
-TESTS: 219 passed, 0 failed
-```
-
-
 ## 2026-11-15 — DSY-001, DSY-002, DSY-003, DSY-006: Add footprint pressure, deck analysis and DECOMPILE (Codex)
 
 **Commit reference:** `playtest3-step1` (tag on this step commit).
@@ -540,3 +508,9 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Commit tag:** `cards-001-amber-glow`. Designer requested glowing amber text instead of highlighted backgrounds. Numeric rule text now uses warm amber ink (`#F2CD87`) with a faint translucent amber halo; removed rectangular fills. External BW badges use a dark instrument face and glowing amber numerals. Board textures stay visible.
 
 **Interpretations to confirm:** restrained halo intensity and dark BW instrument face are proposed treatments. No gameplay changes. 625 cartridge UI checks pass; refreshed live-control comparison and card/hand PNGs. PR #12 remains open for review.
+
+## 2026-11-17 — CARDS-001: distinct board surface textures (Codex)
+
+**Commit tag:** `cards-001-board-textures`. Added subtle stationary procedural material grain behind card printing: pressed phenolic fibres for brown SCRIPT, woven laminate for olive PROGRAM, brushed resin for teal PROTOCOL, mottled Bakelite for oxide-red BLOATWARE. Inset feathered bounds protect chassis and contacts; text/illustrations draw above the texture. Existing palette and amber text glow retained.
+
+**Interpretations to confirm:** these four material patterns and their restrained intensity are proposed for review. No gameplay changes. 625 cartridge UI checks pass. Refreshed four-type comparison and card/hand fixtures. Oldest whole log entry appended unchanged to the archive under LOG-001.
