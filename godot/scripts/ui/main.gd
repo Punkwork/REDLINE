@@ -18,6 +18,7 @@ const PRIORITY := ["EV-35", "EV-16", "EV-15", "EV-14", "EV-02", "EV-01", "EV-03"
 	"EV-08", "EV-27", "EV-28", "EV-11", "EV-12", "EV-09", "EV-10", "EV-17", "EV-05", "EV-21", "EV-26", "EV-06", "EV-37", "EV-39"]
 const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LEFT, KEY_RIGHT, KEY_B, KEY_A]
 
+@export var lethal_pulp_threshold := 5
 var friendly: FriendlyEncounter
 var legacy_widgets: Array = []
 var friendly_skin: CorporationSkin = preload("res://themes/halcyon.tres")
@@ -1393,7 +1394,9 @@ func _overlay_options(title: String, sub: String, uids: Array, source: Array, on
 				c = x
 		if c.is_empty():
 			continue
-		var cv := _card_view(c.id, u)
+		friendly.game = g
+		var cv := FriendlyCard.new()
+		cv.setup(friendly, c.id, -1)
 		cv.gui_input.connect(func(ev):
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				on_pick.call(u))

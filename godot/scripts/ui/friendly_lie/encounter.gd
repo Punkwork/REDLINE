@@ -25,6 +25,7 @@ var drag_kind := ""
 var drag_source: Control
 var reduced_motion := false
 var hand_signature := ""
+var new_subroutines: Array = []
 func _ready() -> void:
  theme = FriendlyLook.THEME
  mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -84,6 +85,7 @@ func sync(model: Game) -> void:
  pile_text.text = "DECK %d · DISCARD %d\nREBOOT ~%d turns\nLast: %s" % [game.draw_pile.size(), game.discard.size(), int(ceil(float(game.draw_pile.size()) / maxi(1, game.draw_size()))), "/".join(game.enc.get("last_tags", []))]
  end_button.disabled = game.phase != "PLAYER" or ui.responding
  end_run_button.disabled = ui.responding
+ track_new_subs()
  build_rig(); build_ice(); build_response(); build_hand()
  log_text.text = " · ".join(game.log.slice(maxi(0, game.log.size() - 2)))
  log_text.tooltip_text = "\n".join(game.log)
@@ -123,9 +125,14 @@ func build_response() -> void:
    for e in step.effects:
     var effect := game.effect_value(game.enc.ice[step.ice], e)
     words.append("PULP ?" if effect.get("curve", "") == "B" else ui._effect_word(effect))
-  var chip := FriendlyLook.label(" + ".join(words), 12, FriendlyLook.TONER, FriendlyLook.BOLD)
-  chip.tooltip_text = step.name; chip.mouse_filter = Control.MOUSE_FILTER_PASS
-  var panel := PanelContainer.new(); var sb := FriendlyLook.style(FriendlyLook.PAPER, FriendlyLook.TONER, 1); sb.set_content_margin_all(3); panel.add_theme_stylebox_override("panel", sb); panel.add_child(chip); response.add_child(panel)
+  var danger := false
+  if not step.hidden:
+   for source in step.effects:
+    var e := game.effect_value(game.enc.ice[step.ice],source)
+    if e.k=="PULP" and e.get("curve", "")!="B" and int(e.get("v",0))==biggest_hit() and biggest_hit()>0: danger=true
+  var chip := rule_chip(" + ".join(words),"new" if danger else "normal")
+  chip.tooltip_text = step.name; response.add_child(chip)
+
 func build_hand() -> void:
  var signature := str(game.hand) + str(game.enc.get("last_tags", [])) + str(game.bw) + str(game.amp) + str(game.phase) + str(ui.targeting)
  if signature == hand_signature: return
@@ -148,7 +155,38 @@ func break_info(i: int, sub: int) -> Dictionary:
 func break_action(i: int, sub: int) -> void:
  if game.phase == "CHOICE" and game.pending.get("kind") == "card_break": game.choose_sub(i,sub); ui.refresh()
  else: ui._on_break(i,sub)
-func mood_for(_i: int) -> String: return "cheery"
+func mood_for(i: int) -> String:
+ if game.enc.get("breached",false): return "knocked_out"
+ var ice: Dictionary = game.enc.ice[i]
+ if game.strikes>=2 or game.ice_definition(ice).get("black",false): return "lethal"
+ for step in game.response_preview():
+  if step.ice != i or step.skipped: continue
+  for source in step.effects:
+   var e := game.effect_value(ice,source)
+   if (e.k=="PULP" and int(e.get("v",0))>=ui.lethal_pulp_threshold) or (e.k=="CORTEX" and int(e.get("v",0))>0): return "lethal"
+ return "wary" if game.trace>=20 or ice.broken.has(true) else "cheery"
+func biggest_hit() -> int:
+ var biggest := 0
+ for step in game.response_preview():
+  if step.skipped or step.hidden: continue
+  for source in step.effects:
+   var e := game.effect_value(game.enc.ice[step.ice],source)
+   if e.k=="PULP" and e.get("curve", "")!="B": biggest=maxi(biggest,int(e.get("v",0)))
+ return biggest
+func new_subs(i: int) -> Array:
+ var ice: Dictionary = game.enc.ice[i]
+ for item in new_subroutines:
+  if is_same(item.ice,ice) and item.turn==game.enc.turn: return item.subs
+ return []
+func track_new_subs() -> void:
+ var current := []
+ for i in game.enc.ice.size():
+  var subs: Array = new_subs(i).duplicate()
+  if ui.tumble.has(i):
+   for sub in game.active_subs(i):
+    if not ui.tumble[i].has(sub) and not subs.has(sub): subs.append(sub)
+  current.append({"ice":game.enc.ice[i],"turn":game.enc.turn,"subs":subs})
+ new_subroutines=current
 func effect_text(ice: Dictionary, source: Dictionary) -> String:
  var e := game.effect_value(ice,source)
  if e.k == "DEADLOCK": return "DEADLOCK" + (" ×%d" % e.v if e.get("v",1) > 1 else "")
@@ -202,7 +240,14 @@ func scan_tag(i: int) -> Control:
   if hidden: words.append("? HIDDEN")
   else:
    for e in d.subs[s]: words.append(effect_text(ice,e))
+  var loud := false
+  if not hidden:
+   for source in d.subs[s]:
+    var effect := game.effect_value(ice,source)
+    if effect.k=="PULP" and effect.get("curve", "")!="B" and int(effect.get("v",0))==biggest_hit() and biggest_hit()>0: loud=true
+  if new_subs(i).has(s) and not ice.broken[s]: tag.text += " · NEW"
   var state := "broken" if ice.broken[s] else ("hidden" if hidden else ("deadlock" if Game._has_deadlock(d.subs[s]) else "normal"))
+  if not hidden and not ice.broken[s] and (loud or new_subs(i).has(s)): state="new"
   var chip := rule_chip(" + ".join(words),state)
   chip.tooltip_text = "\n".join(words); row.add_child(chip)
   if not hidden and not ice.broken[s]:
