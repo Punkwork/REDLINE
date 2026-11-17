@@ -36,7 +36,7 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 |---|---|---|---|---|
 | **DEPRECATE-001** | Remove LOGIC BOMB from play (reward pool and any decks) and RELAY from play (CONSENT FORM keeps its subroutines and STR with no passive). Update or retire the tests that use them; keep the definitions in code only if needed for old saves. No other values change. | Master design, DEPRECATE-001 | Codex | TO DO |
 | **ICE-AUDIT-001** | Apply the new HALCYON values: CAPTCHA STR 4, TRACE 2 replaces PULP 6; AUTO-RENEW STR 5; DOORBELL CAM STR 3, [S1] PULP 4 · [S2] CORTEX 1 · [S3] DEADLOCK, WATCHER kept; CONSENT FORM and REJECT ALL PULP 3. Re-run bot sims; refresh VIS-001/CHROME-001 screenshots that show CAPTCHA PULP 6. | Master design, ICE-AUDIT-001; ICE Corp 1 §5.0 | Codex | TO DO |
-| **PULP-001 roll** | FORTRESS fixed-value PULP rolls each time it fires: printed −2..+2, about 30% of rolls ±3 instead, minimum 1, Game RNG. Leave curves and on-screen display as they are until PULP-001 display is decided. | Master design, PULP-001 | Codex | TO DO |
+| **PULP-001 roll** | FORTRESS fixed-value PULP: roll ahead of each Corporation Response (working timing: start of the Rustler turn): printed −2..+2, about 30% of rolls ±3 instead, minimum 1, Game RNG. Show the exact rolled value on the ICE and in the response strip, and fire that value. Lethal mood reads the shown value. Leave PULP-002 curves unchanged until PULP-001 curves is decided. | Master design, PULP-001 | Codex | TO DO |
 | **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
@@ -84,7 +84,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| PULP-001 display | How is a rolled FORTRESS PULP shown before it fires? Do PULP-002 curves also roll? How does the lethal mood (PULP 5+) read a rolled value? | Master design, PULP-001 | WAITING |
+| PULP-001 curves | Rolled FORTRESS PULP is always shown before it fires (decided). Do PULP-002 curves also roll? Should curve B (RANDOM), now "PULP ?", show its next value? | Master design, PULP-001 | WAITING |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
 
 ---

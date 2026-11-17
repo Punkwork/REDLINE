@@ -124,7 +124,7 @@ WHITE PICKET FENCE — FORTRESS — STR 3
 
 | Effect | What happens |
 |---|---|
-| **PULP X** | Take X damage (SHIELD first, then VITAE). *(PULP-001, 2026-11-17: on a FORTRESS, X is rolled each time it fires: printed −2..+2, about 30% of rolls ±3 instead, never below 1.)* |
+| **PULP X** | Take X damage (SHIELD first, then VITAE). *(PULP-001, 2026-11-17: on a FORTRESS, X is rolled each time it fires: printed −2..+2, about 30% of rolls ±3 instead, never below 1. The roll is made ahead of time and shown, so the Rustler always knows the exact value before it fires.)* |
 | **PULP (curve)** | *(PULP-002)* Take the next value of the subroutine's PULP curve (SHIELD first, then VITAE). The curve moves one step each Corporation Response the ICE goes through (a PURGE or BLACKOUT turn doesn't count) and loops after 9. **A · SEQUENTIAL:** 2, 3, 4, 2, 3, 4, 2, 3, 4 (27). **B · RANDOM:** 5, 3, 2, 6, 2, 3, 6, 2, 1 in a random order for each ICE (30); the ICE card shows "PULP ?". **C · HAMMER:** 4, 3, 4, 9, 3, 4, 3, 8, 2 (40). SCRAMBLE lowers it like any PULP. |
 | **CORTEX X** | Gain X CORTEX counters (§6). |
 | **−X BW** | You have X less BW on your next turn. The DETAINER's signature (§5.5). |
