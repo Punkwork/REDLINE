@@ -48,6 +48,21 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); bg.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(bg)
  bg.hide()
  var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
+ # READ-001: the tobacco-brown SCRIPT face was too light for amber/ivory printing
+ # (amber 3.55:1). A soft-edged shade darkens only the face, below the grain,
+ # to about amber 6.8:1 / ivory 9.8:1, matching PROGRAM. Chassis art is untouched.
+ if d.type=="SCRIPT":
+  var shade:=ColorRect.new(); shade.name="ScriptFaceShade"; shade.mouse_filter=Control.MOUSE_FILTER_IGNORE
+  shade.position=Vector2(11,21); shade.size=Vector2(139,188)
+  var shade_shader:=Shader.new()
+  shade_shader.code="""shader_type canvas_item;
+ void fragment() {
+  float edge=smoothstep(0.0,0.035,UV.x)*smoothstep(0.0,0.035,1.0-UV.x)*smoothstep(0.0,0.025,UV.y)*smoothstep(0.0,0.025,1.0-UV.y);
+  COLOR=vec4(42.0/255.0,28.0/255.0,16.0/255.0,0.55*edge);
+ }
+ """
+  var shade_material:=ShaderMaterial.new(); shade_material.shader=shade_shader; shade.material=shade_material
+  body.add_child(shade)
  # A stationary material layer sits behind printing, inset from chassis and contacts.
  var grain:=ColorRect.new(); grain.name="BoardMaterialGrain"; grain.mouse_filter=Control.MOUSE_FILTER_IGNORE
  var grain_rect:=Rect2(11,26,136,176)
