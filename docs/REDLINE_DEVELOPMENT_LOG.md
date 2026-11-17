@@ -503,3 +503,15 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Interpretations to confirm:** 2.5-second break confirmation and header placement are working UI choices. Illustrated shells, shared collage motifs and detailed backgrounds remain prototype art; final fidelity to the concept and undrawn ICE/copy await designer review. This implements one encounter direction, not a completed whole-game art collection. Audio development, Windows export and manual Windows playtest are deferred. One feature PR targets stabilization and includes unmerged PR #11/#9 dependencies; nothing was merged or pushed directly to the working branch. The guide/status/HANDOFF are updated in place; design documents and Claude project copies are unchanged.
 
 **Sample delivery:** `chrome-001-review` stores the ten selected PNGs. The download ZIP excludes unrelated regression screenshots; `chrome-001-step5` identifies the implementation commit.
+
+## 2026-11-17 — CHROME-001 plaque revision: pearl enamel instead of black ICE panels (Codex)
+
+**Commit tag:** `chrome-001-enamel`.
+
+**Designer request:** “The black backgrounds on the ice in the images don’t work with the rest of the design. Find an appropriate change … atomic age /art deco / clean friendly corporation design.” Also: “Once approved, commit pr #12 to the shared game branch.” This authorizes the revision and a merge after designer approval of the result; no merge is performed in this revision.
+
+**Changed:** the ICE rule surfaces are now corporate pearl-enamel service plaques with dark slate text, silver edges/soft shadows, a restrained teal service mark and corporate heading font. Hidden/broken chips use pale surfaces while preserving dashed borders and strike-through. Costs remain legible; TUMBLER reel frames match the enamel. Legal target outlines use dark teal instead of lime against the light panels; invalid targets remain red. The Rustler paper/toner hand/HUD remain distinct. Dark hostile mascot shells still communicate Mask off; this removes the large black rule rectangles beneath them without hiding any rules.
+
+**Validation:** Godot 4.3 import and 357 rules checks pass; Friendly Lie 170 checks pass; all five Chrome screenshot stages pass, including actual legal/incompatible native drops and no payment on invalid drops. Refreshed ten full-screen PNGs and the download ZIP. Calculated text contrast: slate/enamel 11.64:1, muted text/enamel 6.25:1, muted text/broken chip 5.51:1, teal/enamel 7.06:1. No rule values changed. The five-step samples in the existing PR are updated in place.
+
+**Interpretations to confirm:** enamel plaques stay clean even in Mask off, reinforcing the corporation's immaculate administrative cruelty. Pearl #EDF4F0, slate #20343B and teal #165B55 are working presentation colors. Final art/fidelity approval remains with the designer. PR #12 remains open targeting `codex/halcyon-playtest-stabilization`; merge is pending that approval.

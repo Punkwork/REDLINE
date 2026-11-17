@@ -311,7 +311,7 @@ func rule_chip(text: String, state: String = "normal") -> Control:
  var bg := FriendlyLook.PAPER; var ink := FriendlyLook.TONER
  if state == "deadlock": bg=FriendlyLook.HIGHLIGHT
  if state == "new": bg=FriendlyLook.RED
- if state in ["broken","hidden"]: bg=FriendlyLook.TONER; ink=FriendlyLook.GREY if state == "broken" else FriendlyLook.PAPER
+ if state in ["broken","hidden"]: bg=Color("#DCE7E3") if state=="broken" else Color("#F8FBF9"); ink=FriendlyLook.MUTED_INK
  var style := FriendlyLook.style(bg); style.set_content_margin_all(3); chip.add_theme_stylebox_override("panel",style)
  chip.add_child(FriendlyLook.label(text,14,ink,FriendlyLook.BOLD))
  if state in ["broken","hidden"]:
@@ -330,16 +330,16 @@ func scan_tag(i: int) -> Control:
  panel.custom_minimum_size=Vector2(scan_width,0)
  var candidates:=game.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction",0)>0 and game.can_play(c.uid).ok and game.would_zero(i,int(CardDB.def(c.id).get("zeroed_reduction",0))))
  var eligible:=not candidates.is_empty()
- var style := FriendlyLook.style(FriendlyLook.TONER,FriendlyLook.AMBER if eligible else FriendlyLook.TONER,3 if eligible else 2,0,5); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
+ var style := FriendlyLook.style(FriendlyLook.ENAMEL,FriendlyLook.AMBER if eligible else Color("#A2B6BA"),3 if eligible else 2,12,5); style.shadow_color=Color("#243C4533"); style.shadow_offset=Vector2(0,4); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
  if eligible: panel.tooltip_text="ZEROED available: "+" / ".join(candidates.map(func(c): return CardDB.def(c.id).name))
  var list := VBoxContainer.new(); list.add_theme_constant_override("separation",4); panel.add_child(list)
  var heading := HBoxContainer.new(); list.add_child(heading)
- var name := FriendlyLook.label(d.name,17,FriendlyLook.PAPER,FriendlyLook.BOLD); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
+ var name := FriendlyLook.label(d.name,17,FriendlyLook.SLATE,skin.bold_font); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
  var delta: int = game.ice_str(i)-int(d.str)
- heading.add_child(FriendlyLook.label("STR %d%s" % [game.ice_str(i)," ↑%d" % delta if delta>0 else ""],15,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD))
- var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · "),12,FriendlyLook.GREY)
+ heading.add_child(FriendlyLook.label("STR %d%s" % [game.ice_str(i)," ↑%d" % delta if delta>0 else ""],15,FriendlyLook.SERVICE_TEAL,FriendlyLook.BOLD))
+ var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · "),12,FriendlyLook.MUTED_INK)
  meta.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; meta.custom_minimum_size.x=scan_width-24; list.add_child(meta)
- if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",10,FriendlyLook.HIGHLIGHT))
+ if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",10,FriendlyLook.SERVICE_TEAL))
  var rows: Array = game.active_subs(i).duplicate()
  if d.type == "TUMBLER":
   for s in d.subs.size():
@@ -351,7 +351,7 @@ func scan_tag(i: int) -> Control:
   var row := HBoxContainer.new(); row.add_theme_constant_override("separation",6)
   var slot: int = game.active_subs(i).find(s)
   var label := "SLOT %d · S%d" % [slot+1,s+1] if d.type=="TUMBLER" and slot>=0 else "S%d" % (s+1)
-  var tag := FriendlyLook.label(label,12,FriendlyLook.GREY); tag.custom_minimum_size.x=85; row.add_child(tag)
+  var tag := FriendlyLook.label(label,12,FriendlyLook.MUTED_INK); tag.custom_minimum_size.x=85; row.add_child(tag)
   var hidden: bool = not ice.seen[s]
   var words := []
   if hidden: words.append("? HIDDEN")
@@ -368,28 +368,29 @@ func scan_tag(i: int) -> Control:
   var chip := rule_chip(" + ".join(words),state)
   chip.tooltip_text = "\n".join(words); row.add_child(chip)
   if ui._is_flash(ice,s):
-   var firing:=chip.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; firing.border_color=FriendlyLook.HIGHLIGHT; firing.set_border_width_all(2); chip.add_theme_stylebox_override("panel",firing); ui._pulse(chip)
+   var firing:=chip.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; firing.border_color=FriendlyLook.SERVICE_TEAL; firing.set_border_width_all(2); chip.add_theme_stylebox_override("panel",firing); ui._pulse(chip)
   if not hidden and not ice.broken[s]:
    var info := break_info(i,s)
-   var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),FriendlyLook.TONER,FriendlyLook.PAPER)
-   action.disabled = not info.ok; action.tooltip_text = info.get("reason", "") + (" · MARGIN %d" % info.margin if info.has("margin") else ""); row.add_child(action)
-  if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],12,FriendlyLook.PAPER))
+   var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),Color("#DDEAE5"),FriendlyLook.SLATE)
+   action.add_theme_color_override("font_disabled_color",FriendlyLook.MUTED_INK); action.disabled = not info.ok; action.tooltip_text = info.get("reason", "") + (" · MARGIN %d" % info.margin if info.has("margin") else ""); row.add_child(action)
+  if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],12,FriendlyLook.SLATE))
   var wrapped_row := drop_wrapper(row,i,s)
   if d.type=="TUMBLER" and slot>=0 and ui.spin.has(i) and not reduced_motion:
    var wrapped: Control = ui._reel(wrapped_row,null,slot,true); list.add_child(wrapped)
   elif d.type=="TUMBLER" and slot>=0 and ui.tumble.has(i) and not reduced_motion: list.add_child(ui._tumble_reel(i,slot,s,wrapped_row))
   else: list.add_child(wrapped_row)
  if game.hidden_count(i)>0 and d.type=="TUMBLER":
-  var pool := HBoxContainer.new(); pool.add_child(FriendlyLook.label("POOL",10,FriendlyLook.GREY)); pool.add_child(rule_chip("? HIDDEN ×%d" % game.hidden_count(i),"hidden")); list.add_child(pool)
- var passive := FriendlyLook.label(d.get("ability_text",""),12,FriendlyLook.GREY); passive.custom_minimum_size.x=scan_width-24; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
+  var pool := HBoxContainer.new(); pool.add_child(FriendlyLook.label("POOL",10,FriendlyLook.MUTED_INK)); pool.add_child(rule_chip("? HIDDEN ×%d" % game.hidden_count(i),"hidden")); list.add_child(pool)
+ var passive := FriendlyLook.label(d.get("ability_text",""),12,FriendlyLook.MUTED_INK); passive.custom_minimum_size.x=scan_width-24; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
  if not ice.virus.is_empty():
   var counts := []
   for strain in ice.virus:
    if ice.virus[strain]>0: counts.append("%s %d" % [strain,ice.virus[strain]])
-  var strains := FriendlyLook.label(" · ".join(counts),12,FriendlyLook.HIGHLIGHT); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
+  var strains := FriendlyLook.label(" · ".join(counts),12,FriendlyLook.SERVICE_TEAL); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
   if game.worm_ok(i): list.add_child(FriendlyLook.button("SPEND 2 WORM · BREAK 1",func(): game.use_worm(i); ui.refresh()))
  if game.pending.get("kind")=="patient_zero": list.add_child(FriendlyLook.button("INFECT THIS ICE",func(): game.choose_ice(i); ui.refresh()))
- var tape := ColorRect.new(); tape.color=FriendlyLook.HIGHLIGHT; tape.size=Vector2(60,12); tape.position=Vector2(scan_width/2-30,-6); tape.rotation_degrees=2; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
+ var tape := ColorRect.new(); tape.color=FriendlyLook.SERVICE_TEAL; tape.size=Vector2(76,3); tape.position=Vector2(scan_width/2-38,3); tape.rotation_degrees=0; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
+ panel.draw.connect(func(): panel.draw_line(Vector2(14,3),Vector2(panel.size.x-14,3),Color.WHITE,2,true))
  return panel
 
 func reset_session() -> void:

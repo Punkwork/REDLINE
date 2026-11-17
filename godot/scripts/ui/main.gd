@@ -878,8 +878,8 @@ func _reel(final_row: Control, prev_row: Control, k: int, spin_now: bool) -> Con
 	## rolls downward over it (the previous subroutine, a blur of others, then this turn's) and clunks to a stop.
 	var frame := PanelContainer.new()
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color("#0a0e14")
-	sb.border_color = Color("#3a4658")
+	sb.bg_color = FriendlyLook.ENAMEL if is_instance_valid(friendly) and friendly.visible else Color("#0a0e14")
+	sb.border_color = Color("#A2B6BA") if is_instance_valid(friendly) and friendly.visible else Color("#3a4658")
 	sb.set_border_width_all(1)
 	sb.set_corner_radius_all(4)
 	sb.content_margin_left = 3

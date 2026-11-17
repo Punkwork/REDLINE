@@ -43,9 +43,9 @@ func _draw() -> void:
  if not get_viewport().gui_is_dragging(): return
  var rect:=Rect2(Vector2(1,1),size-Vector2(2,2))
  var hovering:=get_global_rect().has_point(get_global_mouse_position())
- if hovering: draw_rect(rect,FriendlyLook.HIGHLIGHT if allowed else FriendlyLook.RED,false,3)
+ if hovering: draw_rect(rect,FriendlyLook.SERVICE_TEAL if allowed else Color("#A62639"),false,3)
  elif allowed and sub>=0:
-  for edge in [[rect.position,Vector2(rect.end.x,rect.position.y)],[Vector2(rect.end.x,rect.position.y),rect.end],[rect.end,Vector2(rect.position.x,rect.end.y)],[Vector2(rect.position.x,rect.end.y),rect.position]]: draw_dashed_line(edge[0],edge[1],FriendlyLook.HIGHLIGHT,1,5)
+  for edge in [[rect.position,Vector2(rect.end.x,rect.position.y)],[Vector2(rect.end.x,rect.position.y),rect.end],[rect.end,Vector2(rect.position.x,rect.end.y)],[Vector2(rect.position.x,rect.end.y),rect.position]]: draw_dashed_line(edge[0],edge[1],FriendlyLook.SERVICE_TEAL,1,5)
 
 func _gui_input(event: InputEvent) -> void:
  if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT:
