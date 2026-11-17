@@ -39,9 +39,9 @@ Every facade is built from the same vocabulary, so the three read as one world:
 
 ---
 
-## 2a. HALCYON — "halcyon home" (interface copy PROPOSED, 2026-11-17)
+## 2a. HALCYON — "halcyon home" (interface copy APPROVED, 2026-11-17)
 
-HALCYON's atrium, mascots, plaques and break states are approved (CHROME-001, VISUAL-APPROVALS-002). The designer asked for its non-fight copy to match the other two (FACADE-001 question 4). Lines marked *(approved)* already exist in VIS-001; the rest are **proposed**.
+HALCYON's atrium, mascots, plaques and break states are approved (CHROME-001, VISUAL-APPROVALS-002). The designer asked for its non-fight copy to match the other two (FACADE-001 question 4). The designer approved the consent, remembered activity and reward lines on 2026-11-17 for review in playtesting. Lines marked *(approved)* already exist in VIS-001.
 
 **The facade:** a sunlit pearl-and-celadon atrium that feels like the lobby of the perfect home. **Signature motif:** the **sunrise fan**, the Deco fan over the sealed door, used on the wordmark and in loading animations.
 
@@ -200,6 +200,6 @@ Follow the HALCYON assets' format so the encounter code can swap them in: **1586
 1. ~~Approve the three-degrees table (§1) as the corporate voice for all interfaces?~~ **Approved 2026-11-17.**
 2. ~~Approve IRONWATCH's concourse and LUCIDA's solarium (§3–4), or adjust the setting?~~ **Approved 2026-11-17.**
 3. ~~Approve the plaque colours and the ICE appliance list, or mark the ones to change?~~ **Approved 2026-11-17.**
-4. ~~Should HALCYON get the same non-fight interface copy?~~ **Yes (2026-11-17).** Written in §2a; the new lines await review.
+4. ~~Should HALCYON get the same non-fight interface copy?~~ **Yes (2026-11-17).** The copy in §2a is approved for review in playtesting.
 5. ~~Generate the art now, or after the HALCYON playtest?~~ **Now (2026-11-17).** Codex generates the §5 backgrounds and shells.
 6. ~~Draw the escape ICE in the same pass?~~ **Wait (2026-11-17).** The escape ICE (ROADBLOCK, SPIKE STRIP, SEARCHLIGHT, PURSUIT DRONE; WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS) are deferred.

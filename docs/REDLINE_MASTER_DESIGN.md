@@ -91,7 +91,8 @@ COOKIE WALL keeps its TRACE 2 as the only FORTRESS TRACE. ACCEPT ALL, TERMS OF S
 - **LUCIDA "lucida rest":** a domed wellness solarium in lilac pearl and rose-copper; signature motif the halo orbit; hostile reveal at the same perspective (halo rings as cranial scanners, restraint cradles, one-way glass, a dome of lenses) (§4).
 - **Plaque colours** (contrast checked), non-fight interface copy, strike and Mask-off lines, the **ICE appliance list** with silhouettes, faces, DEADLOCK buttons and mood lines, and Bloatware footers as written (§3–4). Copy and numbers stay working values.
 - **Art briefs** (§5) are the basis for generating the backgrounds and mascot shells; prompts must be recorded in `SOURCES.md` at generation time.
-- **Follow-ups decided (2026-11-17):** HALCYON gets matching non-fight copy (written in §2a, PROPOSED); the IRONWATCH and LUCIDA art is generated **now**, before the HALCYON playtest; the escape ICE of both corporations **wait**. Designer: "for number one, yes. For number two, yes. And for number three, wait."
+- **Follow-ups decided (2026-11-17):** HALCYON gets matching non-fight copy (written in §2a); the IRONWATCH and LUCIDA art is generated **now**, before the HALCYON playtest; the escape ICE of both corporations **wait**. Designer: "for number one, yes. For number two, yes. And for number three, wait."
+- **HALCYON non-fight copy (APPROVED, 2026-11-17):** The designer approved the consent, remembered activity and reward copy in §2a and will review it in playtesting.
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.

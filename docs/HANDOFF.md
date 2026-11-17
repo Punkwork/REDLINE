@@ -85,7 +85,6 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| FACADE-001 HALCYON copy | Review HALCYON's proposed non-fight interface copy (consent, remembered, reward). Escape ICE art is deferred by the designer. | `REDLINE_CORPORATE_FACADES.md` §2a | WAITING |
 
 ---
 
@@ -93,6 +92,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| FACADE-001 HALCYON copy | Designer approved the consent, remembered activity and reward lines for review in playtesting. | 2026-11-17 (designer; recorded by Codex) |
 | VIRUS-001 copy/move | Closed: WORM counters are **spent to break** (VIRUS-001); they don't spread to other ICE. The earlier copy-or-move question no longer applies (designer, 2026-11-15). | — (no change needed) |
 | HANDOFF | This file created; working branch chosen. | 2026-11-15 (Claude), PR #4 |
 | ROT-001 sync | Remaining SIGYL labels → TUMBLER in Card Pools, Rustlers, ICE Corp 1–3, Upgrades, Engines. | 2026-11-16 (Claude) |
