@@ -81,7 +81,7 @@ func interaction(g: Game) -> void:
  mouse(to,false); await settle()
  check(g.enc.ice[0].broken[0] and g.bw==before-cost,"native drop breaks at normal cost")
  await snapshot("05b-broken-subroutine")
- check(main.friendly.feedback_label.text.contains("BROKEN") and main.friendly.mood_for(0)=="wary","successful break has confirmation and wary mood")
+ check(main.friendly.feedback_label.text.contains("BROKEN") and main.friendly.mood_for(0)==("lethal" if main.friendly.biggest_hit()>=5 else "wary"),"successful break confirms cost; remaining roll determines mood")
  # An incompatible native drop must explain itself and spend no remaining BW.
  for child in main.friendly.rig_row.get_children():
   if child is FriendlyRigChip: chip=child; break

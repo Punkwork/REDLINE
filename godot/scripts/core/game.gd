@@ -349,6 +349,23 @@ func is_opening() -> bool:
 # Turn structure (Core Rules §4)
 # =====================================================================
 
+func _roll_fortress_pulp() -> void:
+	for ice in enc.ice:
+		var definition := ice_definition(ice)
+		if definition.type != "FORTRESS":
+			continue
+		var rolls := []
+		for sub_index in definition.subs.size():
+			if ice.broken[sub_index]:
+				continue
+			for effect in definition.subs[sub_index]:
+				if effect.k != "PULP" or not effect.has("v"):
+					continue
+				var big_swing := rng.randf() < 0.30
+				var swing := 3 * (1 - 2 * rng.randi_range(0, 1)) if big_swing else rng.randi_range(-2, 2)
+				rolls.append({"source": effect, "value": maxi(1, int(effect.v) + swing)})
+		ice["pulp_rolls"] = rolls
+
 func _start_turn() -> void:
 	enc.turn += 1
 	enc["last_tags"] = []
@@ -359,6 +376,7 @@ func _start_turn() -> void:
 		_rotate_tumblers()
 	else:
 		_mark_seen()
+	_roll_fortress_pulp()
 	# DET-001: a DETAINER's −1 BW from the last Corporation Response lands on this turn.
 	bw = maxi(0, BW_PER_TURN - enc.bw_drain) + (1 if ghostware.has("ONE_TRICK") else 0)
 	enc.bw_drained = enc.bw_drain
@@ -1703,6 +1721,12 @@ func virus_total(i: int) -> int:
 
 func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
 	var key := escalation_key(ice, e)
+	if e.k == "PULP":
+		for roll in ice.get("pulp_rolls", []):
+			if is_same(roll.source, e):
+				e = e.duplicate()
+				e.v = roll.value
+				break
 	if key != "":
 		e = e.duplicate()
 		e.v += int(ice.escalation.get(key, 0))

@@ -44,7 +44,8 @@ func run() -> void:
  main=load("res://scenes/Main.tscn").instantiate(); root.add_child(main); main.voice_on=false; main.voice.stop(); await settle()
  var g:=start()
  check(g.enc.ice[0].id=="AUTO_RENEW" and g.enc.ice[1].id=="CAPTCHA","turn 1 uses actual CAPTCHA node")
- check(main.friendly.mood_for(0)=="cheery" and main.friendly.mood_for(1)=="cheery","turn 1 both cheery")
+ check(main.friendly.mood_for(1)=="cheery","turn 1 CAPTCHA is cheery")
+ check((main.friendly.mood_for(0)=="lethal") == (main.friendly.biggest_hit()>=5),"AUTO-RENEW mood follows the published roll")
  check(g.hand.size()==6 and g.draw_pile.size()==6,"normal Generalist hand/deck counts")
  await snap("vis_01_friendly_turn1"); cards_readable()
  # Two real responses advance HARDENING and the live conveyor. No rotation is fabricated.
@@ -58,12 +59,19 @@ func run() -> void:
  main.refresh()
  check(g.break_sub(1,3),"turn 3 active CAPTCHA DEADLOCK broken")
  main.refresh(); await settle(35)
- check(main.friendly.mood_for(0)=="wary" and main.friendly.mood_for(1)=="wary","turn 3 both wary after the DEADLOCK break")
- check(main.friendly.biggest_hit()==3,"AUTO-RENEW supplies the biggest PULP hit")
+ var expected_hit := 0
+ for step in g.response_preview():
+  if step.skipped or step.hidden: continue
+  for source in step.effects:
+   var effect := g.effect_value(g.enc.ice[step.ice], source)
+   if effect.k=="PULP": expected_hit=maxi(expected_hit,effect.v)
+ check(main.friendly.mood_for(1)=="wary","turn 3 CAPTCHA is wary after the DEADLOCK break")
+ check((main.friendly.mood_for(0)=="lethal") == (expected_hit>=5),"AUTO-RENEW turn 3 mood follows the published roll")
+ check(main.friendly.biggest_hit()==expected_hit,"biggest hit matches the rolled response")
  check(main.friendly.new_subs(1).has(4),"actual newly tumbled TRACE recorded")
  var preview:=str(g.response_preview())
  main.lethal_pulp_threshold=7
- check(main.friendly.mood_for(1)=="wary" and str(g.response_preview())==preview,"threshold tunes presentation only")
+ check(main.friendly.mood_for(0)=="wary" and str(g.response_preview())==preview,"threshold tunes presentation only")
  main.lethal_pulp_threshold=5
  await snap("vis_02_wary_lethal_turn3")
  g.add_trace(26-g.trace,false); main.refresh()
@@ -146,6 +154,13 @@ func run() -> void:
    if Game._has_deadlock(definition.subs[sub]): g._do_break(i,sub)
  main.refresh(); await settle()
  check(g.enc.breached and main.friendly.mood_for(0)=="knocked_out","BREACH produces knocked-out mood")
+ g=start(0,1)
+ await settle()
+ var curve: Dictionary=g.ice_definition(g.enc.ice[0]).subs[2][0]
+ var shown: String="PULP %d · RANDOM" % g.effect_value(g.enc.ice[0],curve).v
+ check(main.friendly.effect_text(g.enc.ice[0],curve)==shown,"curve B publishes its next number on ICE")
+ var response_text: Array=main.friendly.response.find_children("*","Label",true,false).map(func(label): return label.text)
+ check(response_text.has(shown),"response strip publishes the same curve B number")
  main.set_reduced_motion(false)
  print("FRIENDLY LIE: %d checks, %d failures"%[checks,failures])
  main.voice.stop(); main.voice.stream=null

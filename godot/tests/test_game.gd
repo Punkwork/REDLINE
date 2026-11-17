@@ -52,6 +52,7 @@ func _init() -> void:
 	test_purge()
 	test_shatter()
 	test_pulp_curves()
+	test_fortress_pulp()
 	test_end_run()
 	test_patient_zero()
 	test_worm()
@@ -213,12 +214,16 @@ func test_captcha_discard() -> void:
 	g.new_run()
 	g.entered_corp = true
 	start_node(g, 1, 0, "TUMBLER_ICEPICK")
+	var pulp := 0
+	for step in g.response_preview():
+		for effect in step.effects:
+			if effect.k == "PULP": pulp += g.effect_value(g.enc.ice[step.ice], effect).v
 	g.end_turn()
 	check(g.phase == "CHOICE" and g.pending.kind == "discard", "CAPTCHA DISCARD asks at the start of the next turn")
 	check(g.hand.size() == Game.BASE_DRAW and g.enc.turn == 2, "the new hand is drawn first")
 	g.choose(g.hand[0].uid)
 	check(g.phase == "PLAYER" and g.hand.size() == Game.BASE_DRAW - 1, "discard 1, then play")
-	check(g.vitae == 24, "AUTO-RENEW PULP 1+2+3 hit on turn 1 (vitae %d); CAPTCHA's TRACE 2 was hidden" % g.vitae)
+	check(g.vitae == 30 - pulp, "AUTO-RENEW deals its published turn-1 PULP total")
 	check(g.is_active(1, 2), "TRACE 2 rotated into a slot")
 
 func test_boost_installed() -> void:
@@ -423,6 +428,43 @@ func test_shatter() -> void:
 	var sl: Dictionary = g._installed_entry(g.installed.filter(func(p): return p.inst.id == "SLEDGE")[0].inst.uid)
 	check(g.pick_str(sl) == 0, "SLEDGE drops to STR 0 after the turn (got %d)" % g.pick_str(sl))
 	check(g.break_info(1, g.active_subs(1)[0]).reason.begins_with("NO") or g.enc.ice[1].broken[g.active_subs(1)[0]], "SHATTER lasts one turn")
+
+func test_fortress_pulp() -> void:
+	var g := legacy_game(92)
+	g.new_run()
+	g.entered_corp = true
+	start_node(g, 1, 0, "TUMBLER_ICEPICK")
+	var ice := g._new_ice("TERMS_OF_SERVICE")
+	g.enc.ice.assign([ice])
+	var fixed: Dictionary = g.ice_definition(ice).subs[0][0]
+	var curve: Dictionary = g.ice_definition(ice).subs[2][0]
+	var curve_before: int = g.effect_value(ice, curve).v
+	var swings := {-3: 0, 3: 0}
+	var bounds_ok := true
+	var saw_minimum := false
+	g.enc.ice.append(g._new_ice("AUTO_RENEW"))
+	var low: Dictionary = IceDB.def("AUTO_RENEW").subs[0][0]
+	for seed in 3000:
+		g.rng.seed = seed
+		g._roll_fortress_pulp()
+		var delta: int = g.effect_value(ice, fixed).v - fixed.v
+		bounds_ok = bounds_ok and absi(delta) <= 3 and g.effect_value(g.enc.ice[1], low).v >= 1
+		saw_minimum = saw_minimum or g.effect_value(g.enc.ice[1], low).v == 1
+		if swings.has(delta): swings[delta] += 1
+	check(bounds_ok and saw_minimum, "FORTRESS PULP is bounded by ±3 and clamps at 1")
+	check(absf(float(swings[-3] + swings[3]) / 3000.0 - 0.30) < 0.04, "about 30% of FORTRESS PULP rolls swing by 3")
+	check(absi(swings[-3] - swings[3]) < 100, "big swings are balanced by sign")
+	check(g.effect_value(ice, curve).v == curve_before, "rolling fixed PULP leaves the curve alone")
+	g.enc.ice.pop_back()
+	for i in range(1, ice.broken.size()): ice.broken[i] = true
+	var preview: int = g.effect_value(ice, fixed).v
+	g.infect(0, "SCRAMBLE", 1)
+	var reduced: int = g.effect_value(ice, fixed).v
+	check(reduced == preview - 1, "SCRAMBLE lowers the already-rolled preview")
+	g.shield = 0
+	var before := g.vitae
+	g.end_turn()
+	check(g.vitae == before - reduced, "the shown, reduced PULP is the amount dealt")
 
 func test_pulp_curves() -> void:
 	var g := legacy_game(51)

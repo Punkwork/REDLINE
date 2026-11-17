@@ -449,3 +449,9 @@ Removed the card and passive from runtime. CONSENT FORM retains its STR and subr
 ## 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex)
 
 Applied the five approved ICE edits. DOORBELL CAM uses the existing VOID reveal progression and keeps WATCHER. Updated regression fixtures for the new values. Rules suite: 357 passed, zero failed.
+
+## 2026-11-17 — PULP-001: publish FORTRESS rolls before the response (Codex)
+
+A seeded roll at the start of the Rustler turn is shared by the ICE, response strip, mood and resolution. PULP-002 curves keep their sequences and publish the next value, including curve B. SCRAMBLE applies after the roll.
+
+**Interpretations to confirm:** Each eligible unbroken subroutine gets an independent roll at turn start, even if the response is later skipped. Revealed effects drive mood; a hidden CORTEX subroutine does not tip off the player.

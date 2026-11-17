@@ -980,7 +980,8 @@ func _sub_row(i: int, s: int, effects: Array, broken: bool, tag: String) -> Cont
 	var chips := HFlowContainer.new()
 	chips.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for e0 in effects:
-		var ch := _chip(g.effect_value(g.enc.ice[i], e0) if e0.k == "PULP_CURVE" else e0)
+		var effect: Dictionary = g.effect_value(g.enc.ice[i], e0) if e0.k in ["PULP", "PULP_CURVE"] else e0
+		var ch := _chip(effect)
 		if e0.k == "PULP_CURVE":
 			var cv: Dictionary = IceDB.CURVES[e0.curve]
 			ch.tooltip_text = "%s PULP curve: deals the next value each Corporation Response (%s)." % [cv.name, ", ".join(cv.seq.map(func(x): return str(x))) if e0.curve != "B" else "9 values from 1 to 6, in a random order"]
@@ -1025,7 +1026,7 @@ func _chip(e: Dictionary) -> Control:
 		"PULP":
 			col = RIcon.COL.PULP; icon = "PULP"; word = "PULP %d" % e.v
 			if e.has("curve"):
-				word = ("PULP ?" if e.curve == "B" else "PULP %d" % e.v) + " · " + IceDB.CURVES[e.curve].name
+				word = word + " · " + IceDB.CURVES[e.curve].name
 		"CORTEX":
 			col = RIcon.COL.CORTEX; icon = "CORTEX"; word = "CORTEX %d" % e.v
 		"TRACE":
@@ -1068,7 +1069,6 @@ func _build_preview() -> void:
 	var ghost: bool = g.enc.ghost
 	var proxy := g._rack_count("PROXY_CHAIN")
 	var unknown := 0
-	var random_pulp := 0
 	for st in g.response_preview():
 		var txt := []
 		if st.hidden and not st.skipped:
@@ -1078,11 +1078,6 @@ func _build_preview() -> void:
 			continue
 		for e0 in st.effects:
 			var e: Dictionary = g.effect_value(g.enc.ice[st.ice], e0)
-			if e.get("curve", "") == "B":
-				txt.append("PULP ?")
-				if not st.skipped:
-					random_pulp += 1
-				continue
 			txt.append(_effect_word(e))
 			if not st.skipped:
 				if e.k == "PULP":
@@ -1119,8 +1114,6 @@ func _build_preview() -> void:
 		parts.append("TRACE +%d → %d / 40" % [tr + tracer, min(40, g.trace + tr + tracer)])
 	if drain > 0:
 		parts.append("BW −%d next turn" % drain)
-	if random_pulp > 0:
-		parts.append("+ random PULP (1–6)")
 	if unknown > 0:
 		parts.append("+ %d hidden subroutine%s" % [unknown, "" if unknown == 1 else "s"])
 	preview_total.text = "If you end turn: " + ("  ·  ".join(parts) if not parts.is_empty() else "no damage, no TRACE")

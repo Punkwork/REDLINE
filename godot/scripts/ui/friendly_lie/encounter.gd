@@ -224,13 +224,12 @@ func build_response() -> void:
   if step.hidden: words.append("? HIDDEN")
   else:
    for e in step.effects:
-    var effect := game.effect_value(game.enc.ice[step.ice], e)
     words.append(effect_text(game.enc.ice[step.ice],e))
   var danger := false
   if not step.hidden:
    for source in step.effects:
     var e := game.effect_value(game.enc.ice[step.ice],source)
-    if e.k=="PULP" and e.get("curve", "")!="B" and int(e.get("v",0))==biggest_hit() and biggest_hit()>0: danger=true
+    if e.k=="PULP" and int(e.get("v",0))==biggest_hit() and biggest_hit()>0: danger=true
   var chip := rule_chip(" + ".join(words),"new" if danger else "normal")
   chip.tooltip_text = step.name; response.add_child(chip)
 
@@ -271,7 +270,7 @@ func mood_for(i: int) -> String:
  var ice: Dictionary = game.enc.ice[i]
  if game.strikes>=2 or game.ice_definition(ice).get("black",false): return "lethal"
  for step in game.response_preview():
-  if step.ice != i or step.skipped: continue
+  if step.ice != i or step.skipped or step.hidden: continue
   for source in step.effects:
    var e := game.effect_value(ice,source)
    if (e.k=="PULP" and int(e.get("v",0))>=ui.lethal_pulp_threshold) or (e.k=="CORTEX" and int(e.get("v",0))>0): return "lethal"
@@ -282,7 +281,7 @@ func biggest_hit() -> int:
   if step.skipped or step.hidden: continue
   for source in step.effects:
    var e := game.effect_value(game.enc.ice[step.ice],source)
-   if e.k=="PULP" and e.get("curve", "")!="B": biggest=maxi(biggest,int(e.get("v",0)))
+   if e.k=="PULP": biggest=maxi(biggest,int(e.get("v",0)))
  return biggest
 func new_subs(i: int) -> Array:
  var ice: Dictionary = game.enc.ice[i]
@@ -301,7 +300,7 @@ func track_new_subs() -> void:
 func effect_text(ice: Dictionary, source: Dictionary) -> String:
  var e := game.effect_value(ice,source)
  if e.k == "DEADLOCK": return "DEADLOCK" + (" ×%d" % e.v if e.get("v",1) > 1 else "")
- if e.get("curve", "") == "B": return "PULP ? · RANDOM"
+ if e.get("curve", "") == "B": return "PULP %d · RANDOM" % e.v
  if e.k == "BW_DRAIN": return "−%d BW next turn" % e.v
  if e.k == "DISCARD": return "DISCARD %d next turn" % e.v + (" ↑" if e.get("escalate",false) else "")
  if e.k == "INSERT": return "INSERT %d %s → %s" % [e.v,e.card,e.to]
