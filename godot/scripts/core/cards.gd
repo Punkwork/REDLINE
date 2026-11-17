@@ -346,18 +346,14 @@ const DEFS := {
 		"target": true,
 		"text": "Target ICE −1 STR per EXPLOIT played this turn, including this."
 	},
-	"INTEGER_UNDERFLOW": {
-		"name": "INTEGER UNDERFLOW",
-		"type": "SCRIPT",
-		"tags": [
-			"EXPLOIT"
-		],
-		"bw": 2,
-		"rarity": "RARE",
-		"pool": "RIOT",
-		"target": true,
-		"text": "Break up to 3 subroutines: one per point target STR is below zero. BURNED."
-	},
+	"NULL_POINTER": {"name": "NULL POINTER", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 2, "rarity": "RARE", "pool": "RIOT", "target": true,
+		"breaker": {"n": 2, "same_ice": true, "max_str": 0}, "text": "Target ICE at 0 STR: break 2 subroutines, DEADLOCKs included. Normal limits apply. BURNED."},
+	"FLATLINE": {"name": "FLATLINE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 2, "rarity": "COMMON", "pool": "RIOT", "target": true, "zeroed_reduction": 2,
+		"text": "Target ICE −2 STR. ZEROED: −4 TRACE."},
+	"KNOCKOUT": {"name": "KNOCKOUT", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "rarity": "UNCOMMON", "pool": "RIOT", "target": true, "zeroed_reduction": 3,
+		"text": "Target ICE −3 STR. ZEROED: break 1 subroutine (normal limits)."},
+	"SECOND_WIND": {"name": "SECOND WIND", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "rarity": "UNCOMMON", "pool": "RIOT", "target": true, "zeroed_reduction": 1,
+		"text": "Target ICE −1 STR. ZEROED: gain 1 BW."},
 	"CULL": {
 		"name": "CULL",
 		"type": "SCRIPT",
@@ -483,7 +479,7 @@ static func roles(id: String) -> Array:
 	var d := def(id)
 	var out := []
 	if d.has("pick") or d.has("breaker") or id in ["ADAPTER", "BORROWED_CREDENTIALS", "SHATTER", "FLASHPOINT"]: out.append("◇ COVERAGE")
-	if d.has("pick") or d.tags.has("VIRUS") or id in ["PROBE", "OVERLOAD", "DEEP_PROBE", "SMASH", "PIVOT", "STACK_SMASH", "INTEGER_UNDERFLOW", "FIELD_KIT", "STRESS_TEST", "LOGIC_BOMB", "MINIMALIST"]: out.append("↯ DRILL")
+	if d.has("pick") or d.tags.has("VIRUS") or d.has("zeroed_reduction") or id in ["PROBE", "OVERLOAD", "DEEP_PROBE", "SMASH", "PIVOT", "STACK_SMASH", "NULL_POINTER", "FIELD_KIT", "STRESS_TEST", "LOGIC_BOMB", "MINIMALIST"]: out.append("↯ DRILL")
 	if id in ["SURGE_PROTECTOR", "WARM_BOOT", "STUN_BATON"]: out.append("▣ HULL")
 	if d.has("compiled"):
 		for part in d.compiled:
