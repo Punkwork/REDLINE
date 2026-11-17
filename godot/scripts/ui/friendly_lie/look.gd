@@ -2,7 +2,7 @@ class_name FriendlyLook
 extends RefCounted
 const TONER := Color("#111111")
 const PAPER := Color("#F7F7F2")
-const HIGHLIGHT := Color("#E4FF3A")
+const HIGHLIGHT := Color("#D6B675")
 const RED := Color("#E5484D")
 const GREY := Color("#A9A9A0")
 const ENAMEL := Color("#EDF4F0")

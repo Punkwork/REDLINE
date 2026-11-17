@@ -526,3 +526,11 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Changed:** tobacco-brown SCRIPT, earthy olive PROGRAM, muted blue-green PROTOCOL; direct light printing on real board-style textures. BLOATWARE now has the Whirlwind-inspired protective U-handle, paired tubes, open cage/stacked boards and oxide-red phenolic face. Names, costs and rules are live controls. TRACER/SPAM remain BLOATWARE with unchanged unplayability/clear/TRACE rules; both now use the same component-aware bounds as other cartridges. Cached Bloatware retains full rules and CACHED marker; optional corporate flavour footer yields space when cached. No white card text panels remain. A–D review labels denote the four types; source-reference letters A/C/D remain palette provenance.
 
 **Validation:** Godot 4.3 import, 357 rules checks and 170 Friendly Lie UI checks pass. Extended cartridge fixture passes 625 checks and covers all authored/compiled texts, both Bloatware examples including cached text, component bounds and a mixed-type hand. Selected older log entry appended unchanged to the archive under LOG-001. Asset sources/guide/status/HANDOFF and PNGs are updated. No card definitions, rarity weights, costs or gameplay values changed. PR #12 remains open for integrated review before merge.
+
+## 2026-11-17 — CARDS-001: instrument amber accents (Codex)
+
+**Commit tag:** `cards-001-amber`. Replaced neon yellow-green with warm instrument amber (`#D6B675`) for the shared highlight and printed numeric highlights. The brass/gauge reference fits the selected brown, olive, teal and oxide-red boards. BW badges, selection accents and shared HUD controls inherit the same colour. No rules or costs changed.
+
+**Interpretations to confirm:** exact amber hue is a visual proposal for designer review. PR #12 remains open.
+
+**Validation:** 357 rules checks and 625 cartridge UI checks pass; updated four-type PNG rendered from live Godot controls.

@@ -98,7 +98,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  while font_size > 7 and font.get_multiline_string_size(rule, HORIZONTAL_ALIGNMENT_LEFT, 128, font_size).y > available: font_size -= 1
  rules.add_theme_font_override("normal_font", font); rules.add_theme_font_size_override("normal_font_size", font_size); rules.add_theme_color_override("default_color", printed_ink)
  var re := RegEx.new(); re.compile("([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)")
- rules.text = re.sub(rule, "[bgcolor=#E4FF3A][color=#111111]$1[/color][/bgcolor]", true)
+ rules.text = re.sub(rule, "[bgcolor=#D6B675][color=#111111]$1[/color][/bgcolor]", true)
  rules.position = Vector2(16, y); rules.size = Vector2(128, available); body.add_child(rules)
  if corp and cache_h==0:
   var footer := FriendlyLook.label("We just want to stay in touch." if id=="TRACER" else "Recommended for you.",8,printed_ink,view.skin.font)
