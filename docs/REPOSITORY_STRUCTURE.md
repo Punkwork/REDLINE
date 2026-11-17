@@ -40,4 +40,4 @@ PANOPTICON is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the 
 
 ## Initial repository setup
 
-The structure was initialized on 2026-11-10. At that point, only the root README, .gitignore, and authoritative docs were present; the implementation folders are intentionally empty placeholders. An original pre-documentation branch is retained at `backup/pre-authoritative-docs-2026-11-10`.
+The structure was initialized on 2026-11-10. At that point, only the root README, .gitignore, and authoritative docs were present; the implementation folders are intentionally empty placeholders. The original pre-documentation commit is preserved by the annotated tag `archive/backup/pre-authoritative-docs-2026-11-10`.
