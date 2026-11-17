@@ -37,7 +37,6 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 | **DEPRECATE-001** | Remove LOGIC BOMB from play (reward pool and any decks) and RELAY from play (CONSENT FORM keeps its subroutines and STR with no passive). Update or retire the tests that use them; keep the definitions in code only if needed for old saves. No other values change. | Master design, DEPRECATE-001 | Codex | TO DO |
 | **ICE-AUDIT-001** | Apply the new HALCYON values: CAPTCHA STR 4, TRACE 2 replaces PULP 6; AUTO-RENEW STR 5; DOORBELL CAM STR 3, [S1] PULP 4 · [S2] CORTEX 1 · [S3] DEADLOCK, WATCHER kept; CONSENT FORM and REJECT ALL PULP 3. Re-run bot sims; refresh VIS-001/CHROME-001 screenshots that show CAPTCHA PULP 6. | Master design, ICE-AUDIT-001; ICE Corp 1 §5.0 | Codex | TO DO |
 | **PULP-001 roll** | FORTRESS fixed-value PULP: roll ahead of each Corporation Response (working timing: start of the Rustler turn): printed −2..+2, about 30% of rolls ±3 instead, minimum 1, Game RNG. Show the exact rolled value on the ICE and in the response strip, and fire that value. Lethal mood reads the shown value. PULP-002 curves do not roll; curve B shows its next value instead of "PULP ?". | Master design, PULP-001 | Codex | TO DO |
-| **Checklist v0.2** | New and revised checks (B1, C1, C9–C11, G6–G11, K1) into the Playtest QA Sheet. | `REDLINE_PLAYTEST_CHECKLIST.md` | Claude | TO DO |
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
@@ -85,7 +84,6 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
 | FACADE-001 | Review the proposed Raygun Gothic facades for IRONWATCH and LUCIDA: three degrees of watching, atriums and hostile reveals, plaque colours, interface copy, ICE appliance list, art briefs. Six questions in §6. | `REDLINE_CORPORATE_FACADES.md` | WAITING |
-| PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
 
 ---
 
@@ -105,6 +103,8 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | REEL-001 follow-up | Closed: no DEADLOCK total on TUMBLER cards. TUMBLE-001 already removes broken subroutines at once and tumbles in the next unbroken one, so a broken DEADLOCK never reappears (designer reaffirmed). | 2026-11-17 (designer; recorded by Claude) |
 | ICEBIBLE audit / PULP-001 | Designer applied the audit to the slice before the playtest (ICE-AUDIT-001) and set the FORTRESS PULP roll (PULP-001). Build rows added above. | 2026-11-17 (designer; recorded by Claude) |
 | PULP-001 curves | Decided: curves keep their designed patterns and do not roll; every curve shows its next value (curve B no longer "PULP ?"). | 2026-11-17 (designer; recorded by Claude) |
+| PR #1 vs this branch | Closed: PR #1 closed and its work archived at tag `archive/docs/simplified-design` (designer, 2026-11-17; Codex 65a47f2). | 2026-11-17 |
+| Checklist v0.2 / v0.3 | `REDLINE_PLAYTEST_CHECKLIST.md` v0.3 adds checks for the 2026-11-17 decisions (C12–C16, D4, L5–L8, M5). The live Sheet "REDLINE Playtest QA Checklist" now matches it: v0.2 targets for B1, C1, K1 and rows C9–C11, G6–G11 added, plus the v0.3 rows (82 rows; Result dropdown extended). | 2026-11-17 (Claude) |
 | MAIN-001 | Shared working agreement (`AGENTS.md`, `CLAUDE.md`) makes `main` the source of truth for Codex and Claude; `codex/chrome-deco-encounter` (including halcyon-playtest-stabilization and VIS-001) merged into `main`; approved Nov 17 visual decisions recorded in the master design doc. | aea16de, a523502, dd64768 · 2026-11-17 (Claude) |
 | CHROME-001 screenshot refresh | Reran all five screenshot stages and replaced the ten PNGs under their original names with the current amber and textured CARDS-001 treatment. | 2026-11-17 (Codex) |
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |

@@ -1,11 +1,11 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.2 · **Date:** 2026-11-15 *(0.1: 2026-11-13)*
+**Version:** 0.3 · **Date:** 2026-11-17 *(0.2: 2026-11-15 · 0.1: 2026-11-13)*
 
 Use one copy per playtest run. The live, fill-in version is the **PANOPTICON Playtest QA Checklist** Sheet (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
 **For every run:** play one corporation heist (choose the corporation and Rustler on the main menu), then press **Copy summary to clipboard** on the summary screen and paste it into the Run log. The summary gives CRED earned and spent, purchases, cards added, and the route, which answers most of the Economy, Deck and Map checks.
 
-Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then.
+Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then. **v0.3 (2026-11-17):** checks for the designer decisions of 2026-11-17: rolled FORTRESS PULP and visible next values (PULP-001), TUMBLE-001, the HALCYON ICE audit (ICE-AUDIT-001), SHATTER (RIOT-003), card readability (READ-001), the encounter visuals (VIS-001 / CHROME-001 / CARDS-001) and the LOGIC BOMB / RELAY removal (DEPRECATE-001). Checks marked *(after X)* apply once X is in the build.
 
 
 ## Setup
@@ -39,6 +39,11 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | C9 | VITAE lost per encounter (note each). | Early 2–3 · mid–late 3–4 for an on-curve deck (PACE-004) | | |
 | C10 | You broke a threat subroutine instead of rushing the DEADLOCKs, and it was worth it. | Most encounters past the Opening Node | | |
 | C11 | Rising threat (PULP curves, HARDENING, ESCALATE ↑) was noticed and planned around. | Yes | | |
+| C12 | Rolled FORTRESS PULP: the number shown before the Corporation Response was the number dealt (less your reductions) *(after PULP-001)*. | Always matched; no surprise | | |
+| C13 | Rolled PULP felt plannable: you saw a big swing (±3) a turn ahead and planned SHIELD or a break around it *(after PULP-001)*. | Yes; name any roll that felt unfair | | |
+| C14 | Every PULP curve showed its next value; COOKIE WALL never showed "PULP ?" *(after PULP-001)*. | Always | | |
+| C15 | Breaking a TUMBLER subroutine removed it at once and the next unbroken one tumbled in; a broken DEADLOCK never reappeared (TUMBLE-001). | Always | | |
+| C16 | HALCYON after the audit: DOORBELL CAM felt deadly, CAPTCHA felt like a puzzle rather than a damage spike, AUTO-RENEW was the stronger ICE beside CAPTCHA *(after ICE-AUDIT-001)*. | Yes | | |
 
 ## Rustler
 
@@ -47,6 +52,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | D1 | The Rustler's playstyle came through (Generalist balanced, ECHO quiet, RIOT loud, VECTOR viruses). | Clearly | | |
 | D2 | The ORIGIN Ghostware mattered in most encounters. | Yes | | |
 | D3 | Starter cards were being replaced (BASIC-001): by the Central Node you drew mostly earned cards. | Few starter cards drawn late | | |
+| D4 | RIOT: SHATTER let SLEDGE break the chosen ICE whatever its type, and SLEDGE then stayed at STR 0 for the rest of the encounter (RIOT-003). | As described | | |
 
 ## Damage & risk
 
@@ -131,6 +137,10 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | L2 | The log was readable and key events stood out. | Yes | | |
 | L3 | On the map, it was clear which Nodes you could reach. | Yes | | |
 | L4 | The Uplink was clear: prices, and why you couldn't buy something. | Yes | | |
+| L5 | Card text was readable on every card type, including brown SCRIPT and blue-green PROTOCOL (READ-001). | Readable at normal distance | | |
+| L6 | The angriest-looking ICE was the one about to hit hardest; mood matched the shown numbers (VIS-001, PULP-001). | Yes, before reading numbers | | |
+| L7 | Corporation states were clear: Cracking, Strike and Mask off looked different, and your cards and HUD never changed (VIS-001, RUSTLER-LOOK-001). | Yes | | |
+| L8 | The encounter looked like one product: atrium, ICE plaques and cartridges sat well together (CHROME-001, CARDS-001). Note anything that looked out of place. | Yes | | |
 
 ## Bugs
 
@@ -140,6 +150,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | M2 | "(Not yet implemented…)" lines in the log: copy them into Notes. | None | | |
 | M3 | A number or text that didn't match what a card or ICE says. | None | | |
 | M4 | Anything that blocked progress. | None | | |
+| M5 | LOGIC BOMB or RELAY appeared anywhere (rewards, decks, CONSENT FORM's passive) *(after DEPRECATE-001)*. | Never | | |
 
 ## Overall
 
