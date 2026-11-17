@@ -1455,3 +1455,42 @@ TESTS: 233 passed, 0 failed
 ```
 
 <!-- LOG-001: oldest whole live-log entry appended on 2026-11-17 (Claude). -->
+
+## 2026-11-15 — DSY-007, DSY-008: Add REBOOT engines, SCAN and in-Node card routing (Codex)
+
+**Commit reference:** `playtest3-step2` (tag on this step commit).
+
+**Changed:** REBOOT queues drain only after draws finish; AMP and seven specified cards, SCAN bottom-order choice, in-Node BURN and discard retrieval, HUD reboot estimate, and bot choice handling.
+
+**Interpretations to confirm:** SCAN does not itself reshuffle; selected bottom cards are ordered first-selected-first-drawn when reached. FORCE REBOOT counts even with an empty discard. ROLLING RESTART adds its printed +1 AMP without self-amplification; SHIELD/BW/draw ENGINE outputs gain current AMP. A 128-trigger repeating-chain safeguard prevents unbounded loops. One RIOT bot run stalled at the guard rather than dying; it is reported separately.
+
+**Deferred:** CRON/PROCESS and unbuilt corporation systems remain deferred; AMP support for the existing virus outputs is completed with the UNDERFLOW/virus step.
+
+**Executed:** official Godot 4.3 Linux; full rules suite followed by the 30-seed sim for each Rustler (seeds 100–129), via `SIM=1 godot --headless --path godot --script res://tests/test_game.gd`.
+
+```text
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+
+  bot: phase=SLICE_DONE vitae=10 trace=17 strikes=0 cred=16 deck=15 steps=46
+  deck GENERALIST: avg end size 14.23; avg bloat tax paid 0.00 TRACE
+  opening GENERALIST: earliest BREACH 3
+  pulp GENERALIST: per encounter 14.5 incoming (1.8 from Black ICE), 7.4 absorbed by SHIELD, 7.0 to VITAE, 4.8 hits
+  sim GENERALIST: 8/30 cleared; deaths by node { "CONSENT WALL": 3, "TERMS & CONDITIONS": 11, "CAPTCHA": 3, "DOORBELL": 5 }; survivors' avg end VITAE 13.6; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck ECHO: avg end size 14.40; avg bloat tax paid 0.00 TRACE
+  opening ECHO: earliest BREACH 3
+  pulp ECHO: per encounter 10.7 incoming (0.0 from Black ICE), 3.9 absorbed by SHIELD, 6.8 to VITAE, 3.2 hits
+  sim ECHO: 12/30 cleared; deaths by node { "DOORBELL": 11, "TERMS & CONDITIONS": 4, "CAPTCHA": 3 }; survivors' avg end VITAE 10.2; purges 0 in 0 runs; SHATTER played 0 times in 0 runs
+  deck RIOT: avg end size 17.30; avg bloat tax paid 0.00 TRACE
+  opening RIOT: earliest BREACH 3
+  stalled RIOT (3000-step guard, not deaths): { "CAPTCHA": 1 }
+  pulp RIOT: per encounter 10.9 incoming (2.2 from Black ICE), 3.9 absorbed by SHIELD, 7.0 to VITAE, 2.8 hits
+  sim RIOT: 4/30 cleared; deaths by node { "TERMS & CONDITIONS": 15, "DOORBELL": 8, "CAPTCHA": 2 }; survivors' avg end VITAE 14.5; purges 0 in 0 runs; SHATTER played 81 times in 30 runs
+  deck VECTOR: avg end size 14.13; avg bloat tax paid 0.00 TRACE
+  opening VECTOR: earliest BREACH 3
+  pulp VECTOR: per encounter 11.6 incoming (0.0 from Black ICE), 3.3 absorbed by SHIELD, 8.3 to VITAE, 3.2 hits
+  sim VECTOR: 7/30 cleared; deaths by node { "TERMS & CONDITIONS": 10, "DOORBELL": 9, "CAPTCHA": 4 }; survivors' avg end VITAE 7.4; purges 19 in 16 runs; SHATTER played 0 times in 0 runs
+TESTS: 244 passed, 0 failed
+```
+
+
+<!-- LOG-001: oldest whole live-log entry appended on 2026-11-17 (Codex). -->
