@@ -64,7 +64,7 @@ Its S1 is always −1 BW next turn; about 1 TUMBLER in 5; at most 1 per encounte
 ### SWITCHBOARD: routes power to the ICE beside it
 | Ability | Rule | Power | Watch out for |
 |---|---|---|---|
-| **RELAY** | While this ICE has an unbroken subroutine, the ICE to its right gets +2 STR. | 4 | Two RELAYs stack to +4. Max 1 per encounter; never beside HARDENING. |
+| **RELAY** *(DEPRECATED 2026-11-17, DEPRECATE-001)* | While this ICE has an unbroken subroutine, the ICE to its right gets +2 STR. | 4 | Two RELAYs stack to +4. Max 1 per encounter; never beside HARDENING. |
 
 ### SHELL GAME: hides what it is and what comes next
 | Ability | Rule | Power | Watch out for |
@@ -144,7 +144,7 @@ Four passives, one per slice ICE, so each route through HALCYON meets a differen
 |---|---|---|
 | AUTO-RENEW (FORTRESS) | HARDENING | A subscription that creeps up; its PULP 1-2-3 already escalates. |
 | COOKIE WALL (FORTRESS) | TOLL | Cookies cost you something every time you click past them. |
-| CONSENT FORM (TUMBLER) | RELAY | It props up TERMS OF SERVICE beside it in the DOORBELL node. |
+| CONSENT FORM (TUMBLER) | ~~RELAY~~ none (DEPRECATE-001) | It props up TERMS OF SERVICE beside it in the DOORBELL node. |
 | TERMS OF SERVICE (FORTRESS) | SEQUENCED | You have to read it in order: PULP 5, then SPAM, then the DEADLOCK. |
 
 Built into the slice on 2026-11-13 (PASSIVE-001), plus CAPTCHA as a SNARE with TRIPWIRE and DOORBELL CAM as a WATCHER. 30-run bot test: 11 of 30 runs cleared (12 before passives); the CAPTCHA node became the main danger spot.

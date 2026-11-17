@@ -105,7 +105,7 @@ These supersede the Tier 1 table below and the Opening Node ICE (§8.4) **for th
 | **COOKIE WALL** | FORTRESS · TOLLHOUSE | 5 | [S1] PULP 2 · [S2] TRACE 2 · [S3] PULP curve B (random) · [S4] DEADLOCK | TOLL |
 | **TERMS OF SERVICE** | FORTRESS · VAULT | 7 | [S1] PULP 5 · [S2] INSERT 1 SPAM → discard pile · [S3] PULP curve C (hammer) · [S4] DEADLOCK | SEQUENCED |
 | **AUTO-RENEW** *(new)* | FORTRESS · RATCHET | 4 | [S1] PULP 1 · [S2] PULP 2 · [S3] PULP 3 · [S4] DEADLOCK | HARDENING |
-| **CONSENT FORM** | TUMBLER · SWITCHBOARD | 4 | 2 slots of 4: TRACE 2 · DEADLOCK · PULP 4 · DEADLOCK | RELAY |
+| **CONSENT FORM** | TUMBLER · SWITCHBOARD | 4 | 2 slots of 4: TRACE 2 · DEADLOCK · PULP 4 · DEADLOCK | ~~RELAY~~ none (DEPRECATE-001) |
 | **CAPTCHA** | TUMBLER · SNARE | 5 | 2 slots of 5: DISCARD 1 (next turn) · DEADLOCK · PULP 6 · DEADLOCK · TRACE 3 | TRIPWIRE |
 | **DOORBELL CAM** | VOID · WATCHER | 4 | [S1] TRACE 3 + DEADLOCK (face-down until it fires) | WATCHER (CLOAK card → TRACE 1) |
 | **HOUSE CALL** *(Black ICE)* | VOID | 7 | [S1] PULP 6 · [S2] PULP 6 (revealed as they fire) | — |

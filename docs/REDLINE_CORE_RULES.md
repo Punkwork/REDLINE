@@ -166,7 +166,7 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 
 - **Subtypes** give ICE a personality and a home for **passive abilities**: rules that apply all encounter without a subroutine firing. The full list, power ranking and guardrails are in the **Ice Passive Abilities** doc; the personalities are in the **ICE Rules Bible**.
 - **DETAINER** (TUMBLER subtype, LOCKED): about 1 TUMBLER in 5. Its **S1 is always −1 BW** (you have 1 less BW next turn). **At most 1 DETAINER per encounter.**
-- **Passives in the playtest slice:** TOLL (breaks cost +1 BW, except the DEADLOCK), SEQUENCED (break left to right), HARDENING (+1 STR after each response, max +3), RELAY (the ICE to its right +2 STR while this has an unbroken subroutine), TRIPWIRE (each break +1 TRACE), WATCHER (each CLOAK card +1 TRACE), BOOTING (DEADLOCKs unbreakable before your 3rd turn).
+- **Passives in the playtest slice:** TOLL (breaks cost +1 BW, except the DEADLOCK), SEQUENCED (break left to right), HARDENING (+1 STR after each response, max +3), ~~RELAY~~ (deprecated 2026-11-17, DEPRECATE-001), TRIPWIRE (each break +1 TRACE), WATCHER (each CLOAK card +1 TRACE), BOOTING (DEADLOCKs unbreakable before your 3rd turn).
 - **Guardrails:** at most one passive per ICE, at most two passive ICE per Tier 1 encounter; Black ICE have none.
 
 ### 5.6 VOID reveal [NEW, VOID-001]

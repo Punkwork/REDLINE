@@ -465,3 +465,7 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 ## 2026-11-17 — CHROME-001 / CARDS-001 / MAIN-001 follow-up (Codex)
 
 Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stages passed. Amber numbers on brown SCRIPT faces are harder to read. Synced status and handoff and documented nine assets, including oxide-red Whirlwind Bloatware. Exact prompts/model IDs and the corrected concept PNG were unavailable. No Windows export. LOG-001 moved the oldest whole live entry to the archive unchanged.
+
+## 2026-11-17 — DEPRECATE-001: LOGIC BOMB and RELAY deprecated (Claude)
+
+**Designer decision:** "Let's deprecate logic bomb and relay for now. They don't work in the current rules environment." Recorded DEPRECATE-001 in the master design doc. Marked deprecated, not deleted, in Card Pools (LOGIC BOMB), ICE Passives, Core Rules §passives, Deck Synergy, ICE Corp 1 and the ICE Rules Bible (RELAY). CONSENT FORM and SWITCHBOARD have no passive for now. HANDOFF: ZEROED-001 interpretation closed; new Codex TO DO row to remove both from the build. Note: the approved CARDS-001 fixture `script-rare-logic_bomb.png` still shows LOGIC BOMB as a rarity sample. **Code changes:** none.

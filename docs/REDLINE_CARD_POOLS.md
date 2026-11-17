@@ -115,7 +115,7 @@ Rule: every starter card is the weakest version of its role, with at least one c
 | **DEEP PROBE** | Common | SCRIPT — EXPLOIT | 2 BW | Target ICE: −4 STR this encounter. |
 | **STRESS TEST** | Uncommon | SCRIPT — EXPLOIT | 1 BW | Every ICE: −1 STR this encounter. |
 | **KEYLOGGER** | Uncommon | PROGRAM — EXPLOIT | 1 BW, 1 RAM | Start of your turn: choose an ICE; it gets −1 STR this encounter. |
-| **LOGIC BOMB** | Rare | SCRIPT — EXPLOIT | 3 BW | Target ICE's STR becomes 0 until the end of your turn. BURNED. |
+| **LOGIC BOMB** *(DEPRECATED 2026-11-17, DEPRECATE-001)* | Rare | SCRIPT — EXPLOIT | 3 BW | Target ICE's STR becomes 0 until the end of your turn. BURNED. |
 
 ### 3.5 Cards, BW and RAM (6)
 | Card | Rarity | Type / tags | Cost | Effect |

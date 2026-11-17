@@ -62,6 +62,8 @@ Only choices the designer explicitly made on 2026-11-17 are recorded here. Every
 
 Not covered by this approval: the rules questions still listed in `HANDOFF.md` (ZEROED-001 interpretation, ICE Rules Bible audit, REEL-001, RIOT-003, PULP-001) and PR #1.
 
+**DEPRECATE-001 — LOGIC BOMB and RELAY deprecated for now (APPROVED, 2026-11-17).** The rare SCRIPT **LOGIC BOMB** ("Target ICE's STR becomes 0 until the end of your turn. BURNED.") and the ICE passive **RELAY** ("While this ICE has an unbroken subroutine, the ICE to its right gets +2 STR.") are removed from play. Reason: they don't work in the current rules (the STR floor and ZEROED rules, DSY-009/010 and ZEROED-001). This closes the ZEROED-001 interpretation question about them. Their definitions stay in the docs, marked deprecated, so they can be revised and brought back later. **Effects:** LOGIC BOMB leaves the reward pool; CONSENT FORM (the slice's only RELAY ICE) keeps its subroutines and STR and has **no passive** until the designer gives it one; SWITCHBOARD, whose passive was RELAY, has no passive for now. Designer: "Let's deprecate logic bomb and relay for now. They don't work in the current rules environment."
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.

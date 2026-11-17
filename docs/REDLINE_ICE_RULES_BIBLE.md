@@ -89,7 +89,7 @@ DETAINERS began as queue managers: "your call is important to us", hold music, a
 
 SWITCHBOARDS were load balancers, routing spare capacity to whichever system was under the heaviest strain. Under attack, the heaviest strain is always the ICE you're trying to break, so the SWITCHBOARD feeds it. Silence the operator and the line beside it goes quiet.
 
-*Passive: RELAY.*
+*Passive: ~~RELAY~~ none for now (RELAY deprecated 2026-11-17, DEPRECATE-001).*
 
 #### SHELL GAME
 *Personality: carnival hustler, all patter and misdirection.*
