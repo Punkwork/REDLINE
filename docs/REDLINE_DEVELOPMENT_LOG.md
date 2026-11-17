@@ -427,3 +427,12 @@ TESTS: 352 passed, 0 failed
 **Interpretations to confirm:** Cracking persists after strike 1 even if TRACE is reduced below 20, since the Friendly definition requires no strikes. The modal shows the real post-strike TRACE of 20 in the HUD rather than faking 40; its copy describes the strike and inserted TRACER. The toast lasts 3 seconds; the modal lasts 2.5 seconds or until dismissed. SPAM's proposed footer is “Recommended for you.” A red rule chip uses toner text for contrast. All distortion stays behind opaque text panels.
 
 **Validation:** Godot 4.3 parser; state changes read Game.trace/strikes and never insert cards or Black ICE themselves. Only the existing game rules cause those changes. Live-state fixture screenshots follow in VIS-001g.
+
+
+## 2026-11-17 — VIS-001f: live drag targets, mascot motion and reduced motion (Codex)
+
+**Commit tag:** `vis-001f`. Added installed-Icepick drag targets with legality/cost tooltips, card drag previews and dashed hand gaps, VOID pupil tracking, and WATCHER's actual TRACE warning. The existing break API accepts an optional selected Icepick; omitted selection still uses the cheapest legal pick. Added cheery bob/blinks, wary brows, lethal shake/glow, response lunges, break flinch/strike-through, knockout slide and scan peel, background cross-fade, strike-card flight and Mask-off transition. Reduced motion is persistent and available on both selection and encounter screens; it removes ambient/reel motion, flashes and typing without shortening response timing.
+
+**Interpretations to confirm:** FORTRESS bob period is 3.6 s; VOID amplitude is 0.3 px; TUMBLER fidget is ±0.35°. Card snaps are linear 90 ms. The scan's knockout peel moves/tilts without fading its rules, retaining readability. Strike flight is 350 ms and toast entry is 180 ms. Cosmetic blink randomness uses a separate generator, never Game's RNG. WATCHER shows 0 additional TRACE for ECHO or active DECOY SIGNAL. Existing reel glass is omitted over the new scan text. These are presentation choices, not approved rule changes.
+
+**Validation:** Godot 4.3 import, display render, full rules suite **357 passed, 0 failed**. Five new rules regressions cover explicit Icepick selection, unchanged automatic selection/cost, incompatible/missing pick, and insufficient BW; invalid drops spend nothing. No gameplay numbers changed. Display interaction and screenshot fixtures are checked in VIS-001g.

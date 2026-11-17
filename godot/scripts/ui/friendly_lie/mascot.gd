@@ -1,11 +1,16 @@
 class_name FriendlyMascot
-extends Control
-var view
+extends FriendlyDropTarget
 var index := 0
 var mood := "cheery"
 var face: FriendlyFace
 var body: Panel
 var base_position := Vector2.ZERO
+var motion_offset := Vector2.ZERO
+var clock := 0.0
+var previous_mood := ""
+var just_broken := false
+var glow: Panel
+var applied_knockout := false
 const WORDS := {
  "COOKIE_WALL": ["We use cookies to make your visit sweeter!", "You declined 2 cookies. Interesting.", "COOKIES ARE NOT OPTIONAL."],
  "CAPTCHA": ["Just one quick check!", "Hmm. Try that again.", "WRONG ANSWER."],
@@ -23,7 +28,7 @@ func place(child: Control, pos: Vector2, extent: Vector2 = Vector2.ZERO) -> Cont
  if extent != Vector2.ZERO: child.size = extent
  add_child(child); return child
 func setup(owner_view, i: int, state: String) -> void:
- view = owner_view; index = i; mood = state; custom_minimum_size = Vector2(480, 230); size = custom_minimum_size
+ view = owner_view; ice_ref=view.game.enc.ice[i]; index = i; mood = state; custom_minimum_size = Vector2(480, 230); size = custom_minimum_size
  mouse_filter = Control.MOUSE_FILTER_PASS
  var ice: Dictionary = view.game.enc.ice[i]; var id: String = ice.id
  var lethal := mood == "lethal"; var wary := mood == "wary"
@@ -44,7 +49,8 @@ func setup(owner_view, i: int, state: String) -> void:
   "CONSENT_FORM": body_rect = Rect2(65,5,235,220); face_rect = Rect2(138,15,85,80); radius = 8
   "HOUSE_CALL": body_rect = Rect2(65,8,235,215); face_rect = Rect2(132,58,100,100); face_kind = "house"; radius = 0
  if lethal:
-  var glow := FriendlyLook.panel(Color("#E5484D18"), FriendlyLook.RED, 2, radius, 12); place(glow,body_rect.position-Vector2(5,5),body_rect.size+Vector2(10,10)); glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  glow = FriendlyLook.panel(Color("#E5484D18"), FriendlyLook.RED, 2, radius, 12); place(glow,body_rect.position-Vector2(5,5),body_rect.size+Vector2(10,10)); glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  var red_glow := glow.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; red_glow.shadow_color=Color("#E5484D66"); red_glow.shadow_size=18; glow.add_theme_stylebox_override("panel",red_glow)
  if view.corporation_state=="cracking":
   for sign in [-1,1]:
    var split := FriendlyLook.panel(Color.TRANSPARENT,FriendlyLook.RED if sign<0 else Color("#77ABDF"),3,radius)
@@ -54,7 +60,7 @@ func setup(owner_view, i: int, state: String) -> void:
  body.mouse_filter = Control.MOUSE_FILTER_PASS; place(body,body_rect.position,body_rect.size)
  body.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: view.click_ice(index))
- face = FriendlyFace.new(); face.kind = face_kind; face.mood = mood; face.ink = view.skin.ink; face.accent = accent; place(face,face_rect.position,face_rect.size)
+ face = FriendlyFace.new(); face.reduced_motion=view.reduced_motion; face.kind = face_kind; face.mood = mood; face.ink = view.skin.ink; face.accent = accent; place(face,face_rect.position,face_rect.size)
  if id == "COOKIE_WALL":
   var cookie := FriendlyLook.panel(Color("#DFAF71") if not lethal else Color("#140809"), Color("#8D5A2A") if not lethal else accent, 3, 50)
   cookie.mouse_filter = Control.MOUSE_FILTER_IGNORE; place(cookie, Vector2(15,65), Vector2(100,100)); move_child(cookie,face.get_index()); face.move_to_front()
@@ -88,6 +94,9 @@ func setup(owner_view, i: int, state: String) -> void:
   var joined := FriendlyLook.label("BLACK ICE · JOINED AT STRIKE %d" % view.game.strikes,11,FriendlyLook.TONER,FriendlyLook.BOLD); joined.position=Vector2(8,3); black_header.add_child(joined)
  var entries: Array = WORDS.get(id, ["Just a quick check!", "Please stay on this screen.", "ACCESS DENIED."])
  var line: String = entries[2 if lethal else (1 if wary else 0)]
+ if view.corporation_state=="cracking" and not lethal:
+  if id=="AUTO_RENEW": line="We noticed unusual activity on your plan."
+  elif id=="CAPTCHA": line="Are you sure you're human?"
  if mood == "knocked_out": line = "SESSION ENDED."
  var speech := FriendlyLook.panel(fill,accent if lethal else Color.TRANSPARENT,2 if lethal else 0,0 if lethal else 18,3)
  var speech_pos := Vector2(294,38)
@@ -117,3 +126,41 @@ func setup(owner_view, i: int, state: String) -> void:
   if id == "REJECT_ALL": pos=Vector2(145,94); extent=Vector2(146,28)
   place(action,pos,extent)
   break # The primary button remains ticked when it drops out; further locks remain in the scan.
+
+func _ready() -> void:
+ pivot_offset=Vector2(240,115)
+ if view.reduced_motion: return
+ if just_broken:
+  scale=Vector2(0.9,0.9); create_tween().tween_property(self,"scale",Vector2.ONE,0.08)
+ if mood=="wary" and previous_mood=="cheery":
+  var brows: Control = face.features.brows
+  brows.position.y=-3; brows.create_tween().tween_property(brows,"position:y",0.0,0.15)
+ if view.corporation_state=="mask_off" and view.state_before_refresh!="mask_off":
+  var style := body.get_theme_stylebox("panel") as StyleBoxFlat
+  style.bg_color=view.skin.accent
+  var peel := create_tween().set_parallel(true)
+  peel.tween_property(style,"bg_color",Color("#140809"),0.3)
+  peel.tween_method(func(v): style.set_corner_radius_all(int(v)),view.skin.radius,0,0.3)
+ if view.game.ice_definition(view.game.enc.ice[index]).get("black",false) and previous_mood=="":
+  motion_offset.y=-60; create_tween().tween_property(self,"motion_offset",Vector2.ZERO,0.3)
+ if mood=="knocked_out":
+  applied_knockout=true
+  var ko := create_tween().set_parallel(true); ko.tween_property(self,"motion_offset",Vector2(0,44),0.4); ko.tween_property(self,"modulate:a",0.0,0.4)
+ for sub in view.game.ice_definition(view.game.enc.ice[index]).subs.size():
+  if view.ui._is_flash(view.game.enc.ice[index],sub):
+   var lunge := create_tween(); lunge.tween_property(self,"motion_offset",Vector2(0,12),0.12); lunge.tween_property(self,"motion_offset",Vector2.ZERO,0.12); break
+func _process(delta: float) -> void:
+ if not is_visible_in_tree() or not is_instance_valid(view) or not is_instance_valid(face) or view.game.enc.is_empty() or index>=view.game.enc.ice.size(): return
+ clock+=delta
+ var target: Vector2 = view.interaction_position()
+ var direction := (target-face.get_global_rect().get_center())/Vector2(260,180) if target!=Vector2.INF else Vector2.ZERO
+ face.look=Vector2(clampf(direction.x,-1,1),clampf(direction.y,-1,1))
+ if view.reduced_motion: return
+ var d: Dictionary = view.game.ice_definition(view.game.enc.ice[index])
+ var bob := 0.0
+ if mood=="cheery":
+  bob=sin(clock*TAU/(3.6 if d.type=="FORTRESS" else 2.4))*(0.3 if d.type=="VOID" else 4.0)
+  if d.type=="TUMBLER": rotation_degrees=sin(clock*5)*0.35
+ var shake := sin(clock*180)*2 if mood=="lethal" and previous_mood!="lethal" and clock<0.06 else 0.0
+ position=base_position+motion_offset+Vector2(shake,bob)
+ if is_instance_valid(glow): glow.modulate.a=0.65+0.35*(sin(clock*TAU)*0.5+0.5)

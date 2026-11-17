@@ -9,11 +9,16 @@ var body: Control
 var rest_position := Vector2.ZERO
 var rest_rotation := 0.0
 var drag_started := false
+var motion: Tween
 class CorporateArt extends Control:
  func _draw() -> void:
   draw_style_box(FriendlyLook.style(Color("#FFE5E5"),Color.TRANSPARENT,0,6),Rect2(Vector2.ZERO,size))
   draw_arc(Vector2(size.x/2,12),4,0,TAU,24,FriendlyLook.RED,2,true)
   draw_arc(Vector2(size.x/2,32),9,PI,TAU,24,FriendlyLook.RED,2,true)
+class ArtBox extends Control:
+ func _draw() -> void:
+  var r:=Rect2(Vector2.ZERO,size)
+  for edge in [[r.position,Vector2(r.end.x,0)],[Vector2(r.end.x,0),r.end],[r.end,Vector2(0,r.end.y)],[Vector2(0,r.end.y),r.position]]: draw_dashed_line(edge[0],edge[1],FriendlyLook.GREY,1,5)
 class CostCircle extends Control:
  func _draw() -> void: draw_circle(Vector2(13, 13), 13, FriendlyLook.HIGHLIGHT)
 func setup(owner_view, id: String, card_uid: int) -> void:
@@ -37,6 +42,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var art_h := 42.0 if rule.length() < 145 else (22.0 if rule.length() < 280 else 4.0)
  var art := FriendlyLook.label("" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
  art.position = Vector2(9, 49); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
+ if not corp and art_h>10:
+  var box := ArtBox.new(); box.position=Vector2(9,49); box.size=Vector2(128,art_h); box.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(box)
  if corp:
   var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(9,49); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
  var type_line := FriendlyLook.label(d.type + (" · " + view.skin.corporation if corp else (" · " + "/".join(d.tags) if not d.tags.is_empty() else "")), 8, Color("#4A5568") if corp else Color("#3A3A3A"), view.skin.font if corp else FriendlyLook.MONO)

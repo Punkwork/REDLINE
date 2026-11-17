@@ -36,9 +36,23 @@ var strike_overlay: Control
 var toast: Panel
 var app_ground: ColorRect
 var glitch_layer: Control
+var mascot_history: Array = []
+var state_before_refresh := "friendly"
+var background_target: Texture2D
+var background_fade: Tween
+var fade_layer: TextureRect
+var motion_button: Button
+var watcher_warning: Panel
+var watcher_text: Label
+var next_flicker := 0.0
+var flicker_frames := 0
+var card_positions := {}
+var bw_capacity := Game.BW_PER_TURN
+var last_encounter: Dictionary = {}
+var last_turn := -1
 func _ready() -> void:
  theme = FriendlyLook.THEME
- mouse_filter = Control.MOUSE_FILTER_IGNORE
+ mouse_filter = Control.MOUSE_FILTER_PASS
  skin = ui.friendly_skin
  app_ground = ColorRect.new(); app_ground.color = skin.ground; app_ground.position = Vector2.ZERO; app_ground.size = Vector2(1600, 1000); app_ground.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(app_ground)
  background = TextureRect.new(); background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 0.75; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
@@ -67,6 +81,10 @@ func _ready() -> void:
  toast = FriendlyLook.panel(Color.WHITE,FriendlyLook.RED,1,18,3); toast.position=Vector2(530,110); toast.size=Vector2(540,34); toast.z_index=5; add_child(toast)
  var toast_text := FriendlyLook.label("Is everything okay? We're just checking on you.",15,skin.ink,skin.font); toast_text.position=Vector2(15,6); toast.add_child(toast_text); toast.hide()
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
+ motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
+ motion_button.position=Vector2(1360,718); motion_button.size=Vector2(200,28); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
+ watcher_warning=FriendlyLook.panel(FriendlyLook.RED); watcher_warning.position=Vector2(1030,540); watcher_warning.size=Vector2(510,36); watcher_warning.z_index=150; watcher_warning.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(watcher_warning)
+ watcher_text=FriendlyLook.label("",12,FriendlyLook.TONER,FriendlyLook.BOLD); watcher_text.position=Vector2(8,7); watcher_warning.add_child(watcher_text); watcher_warning.hide()
  strike_overlay.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed: dismiss_strike())
  log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 607); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
@@ -79,6 +97,11 @@ func at(parent: Node, control: Control, pos: Vector2, extent: Vector2 = Vector2.
 func sync(model: Game) -> void:
  game = model
  if game.enc.is_empty(): return
+ reduced_motion=ui.reduced_motion
+ motion_button.text="REDUCED MOTION: " + ("ON" if reduced_motion else "OFF")
+ if not is_same(last_encounter,game.enc) or last_turn!=game.enc.turn: bw_capacity=maxi(Game.BW_PER_TURN,game.bw)
+ else: bw_capacity=maxi(bw_capacity,game.bw)
+ last_encounter=game.enc; last_turn=game.enc.turn
  update_corporation()
  clear(node_tag); clear(trace_tag); clear(bottom_hud)
  node_tag.size.x = FriendlyLook.BOLD.get_string_size("NODE: " + game.node.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 29).x + 28
@@ -101,13 +124,15 @@ func sync(model: Game) -> void:
   at(bottom_hud, FriendlyLook.label(stats[i][1], 22, stats[i][2], FriendlyLook.BOLD), Vector2(99, i * 52 + 5))
   if i > 0:
    var line := ColorRect.new(); line.color = Color("#3A3A3A"); at(bottom_hud, line, Vector2(0, i * 52), Vector2(200, 2))
- for i in Game.BW_PER_TURN:
-  var slit := ColorRect.new(); slit.color = FriendlyLook.HIGHLIGHT if i < maxi(0, Game.BW_PER_TURN - game.bw) else Color("#3A3A3A"); at(bottom_hud, slit, Vector2(12 + i * 16, 39), Vector2(12, 5))
+ for i in mini(12,bw_capacity):
+  var slit := ColorRect.new(); slit.color = FriendlyLook.HIGHLIGHT if i<maxi(0,bw_capacity-game.bw) else Color("#3A3A3A"); at(bottom_hud,slit,Vector2(12+i*14,39),Vector2(10,5))
  pile_text.text = "DECK %d · DISCARD %d\nFP %d/%d · %s\nREBOOT ~%d · AMP %d\nLast: %s" % [game.draw_pile.size(), game.discard.size(),game.footprint(),game.footprint_cap(),game.footprint_band(),int(ceil(float(game.draw_pile.size())/maxi(1,game.draw_size()))),game.amp,"/".join(game.enc.get("last_tags",[]))]
  end_button.disabled = game.phase != "PLAYER" or ui.responding
  end_run_button.disabled = ui.responding
  track_new_subs()
  build_rig(); build_ice(); build_response(); build_hand()
+ mascot_history=[]
+ for i in game.enc.ice.size(): mascot_history.append({"ice":game.enc.ice[i],"mood":mood_for(i),"broken":game.enc.ice[i].broken.duplicate()})
  log_text.text = " · ".join(game.log.slice(maxi(0, game.log.size() - 2)))
  log_text.tooltip_text = "\n".join(game.log)
 func _process(_dt: float) -> void:
@@ -120,6 +145,17 @@ func _process(_dt: float) -> void:
  var now := Time.get_ticks_msec()/1000.0
  toast.visible=now<toast_until
  if strike_overlay.visible and now>=strike_until: dismiss_strike()
+ watcher_warning.visible=false
+ if dragging_uid>=0 and drag_kind=="card":
+  var c := game.find_card(dragging_uid)
+  if not c.is_empty() and CardDB.def(c.id).tags.has("CLOAK") and game.enc.get("ice",[]).any(func(ice): return game.ice_definition(ice).get("ability","")=="CLOAK_TRACE"):
+   watcher_warning.show(); watcher_text.text="WATCHER: play this CLOAK card · +%d TRACE" % (0 if game.rustler=="ECHO" or game.enc.get("decoy",false) else 1)
+ if reduced_motion: glitch_layer.hide()
+ elif corporation_state=="cracking":
+  if now>=next_flicker:
+   flicker_frames=3; next_flicker=now+4.0+fmod(now,4.0)
+  glitch_layer.visible=flicker_frames>0
+  flicker_frames=maxi(0,flicker_frames-1)
 func build_rig() -> void:
  clear(rig_row)
  rig_row.add_child(FriendlyLook.label("RIG / RACK", 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
@@ -127,11 +163,15 @@ func build_rig() -> void:
   var d := CardDB.def(p.inst.id)
   var text: String = d.name
   if d.has("pick"): text += " · STR %d · BOOST %d / BREAK %d" % [game.pick_str(p), d.pick.boost_cost, d.pick.break_cost]
-  var chip := FriendlyLook.button(text, func(): ui._show_inspect(p.inst.id), FriendlyLook.TONER, FriendlyLook.PAPER)
+  var chip: Button
+  if d.has("pick"):
+   var draggable := FriendlyRigChip.new(); draggable.view=self; draggable.uid=p.inst.uid; draggable.text=text; draggable.pressed.connect(func(): ui._show_inspect(p.inst.id)); draggable.add_theme_color_override("font_color",FriendlyLook.PAPER); chip=draggable
+  else: chip=FriendlyLook.button(text,func(): ui._show_inspect(p.inst.id),FriendlyLook.TONER,FriendlyLook.PAPER)
   chip.tooltip_text = game.card_text(p.inst.id); rig_row.add_child(chip)
   if d.has("pick"):
    rig_row.add_child(FriendlyLook.button("+STR", func(): game.boost_pick(p.inst.uid); ui.refresh()))
-  if d.get("uninstall_cache", false): rig_row.add_child(FriendlyLook.button("UNINSTALL 1 BW", func(): game.uninstall_cache(p.inst.uid); ui.refresh()))
+  if d.get("uninstall_cache", false):
+   var cache_action := FriendlyLook.button("UNINSTALL 1 BW", func(): game.uninstall_cache(p.inst.uid); ui.refresh()); cache_action.name="SmashGrabCache"; cache_action.disabled=game.bw<1 or game.hand.is_empty(); rig_row.add_child(cache_action)
   rig_row.add_child(FriendlyLook.button("×", func(): game.unload(p.inst.uid); ui.refresh(), FriendlyLook.PAPER))
  for c in game.rack:
   var d := CardDB.def(c.id)
@@ -140,8 +180,14 @@ func build_ice() -> void:
  clear(ice_row)
  for i in game.enc.ice.size():
   var column := VBoxContainer.new(); column.add_theme_constant_override("separation",9); column.custom_minimum_size.x=480; ice_row.add_child(column)
-  var mascot := FriendlyMascot.new(); mascot.setup(self,i,mood_for(i)); column.add_child(mascot)
+  var mascot := FriendlyMascot.new()
+  var prior := previous_mascot(i)
+  mascot.previous_mood=prior.get("mood", "")
+  mascot.just_broken=not prior.is_empty() and game.enc.ice[i].broken.count(true)>prior.broken.count(true)
+  mascot.setup(self,i,mood_for(i)); column.add_child(mascot)
   var scan := scan_tag(i); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
+  if mood_for(i)=="knocked_out" and not reduced_motion:
+   scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
 func build_response() -> void:
  clear(response); response.add_child(FriendlyLook.label("NEXT RESPONSE ▸", 13, FriendlyLook.TONER, FriendlyLook.BOLD))
  for step in game.response_preview():
@@ -151,7 +197,7 @@ func build_response() -> void:
   else:
    for e in step.effects:
     var effect := game.effect_value(game.enc.ice[step.ice], e)
-    words.append("PULP ?" if effect.get("curve", "") == "B" else ui._effect_word(effect))
+    words.append(effect_text(game.enc.ice[step.ice],e))
   var danger := false
   if not step.hidden:
    for source in step.effects:
@@ -164,10 +210,17 @@ func build_hand() -> void:
  var signature := str(game.hand) + str(game.enc.get("last_tags", [])) + str(game.bw) + str(game.amp) + str(game.phase) + str(ui.targeting)
  if signature == hand_signature: return
  hand_signature = signature
+ card_positions.clear()
+ for old in hand.get_children(): card_positions[old.uid]=old.position
  clear(hand)
  for c in game.hand:
   var card := FriendlyCard.new(); card.setup(self, c.id, c.uid); hand.add_child(card)
- hand.arrange()
+ hand.reduced_motion=reduced_motion; hand.arrange()
+ if not reduced_motion:
+  for c in hand.get_children():
+   var destination: Vector2=c.rest_position
+   c.position=card_positions.get(c.uid,destination+Vector2(0,7))
+   c.motion=c.create_tween(); c.motion.tween_property(c,"position",destination,0.09).set_trans(Tween.TRANS_LINEAR)
 func begin_drag(data: Dictionary, source: Control) -> void:
  dragging_uid = data.uid; drag_kind = data.kind; drag_source = source; hover_uid = data.uid
 func end_drag() -> void:
@@ -237,6 +290,8 @@ func rule_chip(text: String, state: String = "normal") -> Control:
  if state == "broken":
   var overlay := Control.new(); overlay.mouse_filter=Control.MOUSE_FILTER_IGNORE; chip.add_child(overlay)
   var line := ColorRect.new(); line.color=ink; line.mouse_filter=Control.MOUSE_FILTER_IGNORE; line.anchor_right=1; line.anchor_top=0.5; line.anchor_bottom=0.5; line.offset_top=-1; line.offset_bottom=0; overlay.add_child(line)
+  if not reduced_motion:
+   overlay.ready.connect(func(): line.scale.x=0.0; var strike:=line.create_tween(); strike.tween_property(line,"scale:x",1.0,0.15))
  return chip
 func scan_tag(i: int) -> Control:
  var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
@@ -282,10 +337,11 @@ func scan_tag(i: int) -> Control:
    var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),FriendlyLook.TONER,FriendlyLook.PAPER)
    action.disabled = not info.ok; action.tooltip_text = info.get("reason", "") + (" · MARGIN %d" % info.margin if info.has("margin") else ""); row.add_child(action)
   if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],10,FriendlyLook.PAPER))
-  if d.type=="TUMBLER" and slot>=0 and ui.spin.has(i):
-   var wrapped: Control = ui._reel(row,null,slot,true); list.add_child(wrapped)
-  elif d.type=="TUMBLER" and slot>=0 and ui.tumble.has(i): list.add_child(ui._tumble_reel(i,slot,s,row))
-  else: list.add_child(row)
+  var wrapped_row := drop_wrapper(row,i,s)
+  if d.type=="TUMBLER" and slot>=0 and ui.spin.has(i) and not reduced_motion:
+   var wrapped: Control = ui._reel(wrapped_row,null,slot,true); list.add_child(wrapped)
+  elif d.type=="TUMBLER" and slot>=0 and ui.tumble.has(i) and not reduced_motion: list.add_child(ui._tumble_reel(i,slot,s,wrapped_row))
+  else: list.add_child(wrapped_row)
  if game.hidden_count(i)>0 and d.type=="TUMBLER":
   var pool := HBoxContainer.new(); pool.add_child(FriendlyLook.label("POOL",10,FriendlyLook.GREY)); pool.add_child(rule_chip("? HIDDEN ×%d" % game.hidden_count(i),"hidden")); list.add_child(pool)
  var passive := FriendlyLook.label(d.get("ability_text",""),10,FriendlyLook.GREY); passive.custom_minimum_size.x=326; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
@@ -300,25 +356,47 @@ func scan_tag(i: int) -> Control:
  return panel
 
 func reset_session() -> void:
- previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
+ mascot_history.clear(); card_positions.clear(); last_encounter={}; last_turn=-1; previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
  if is_instance_valid(strike_overlay): strike_overlay.hide()
 func update_corporation() -> void:
  var now := Time.get_ticks_msec()/1000.0
+ state_before_refresh=corporation_state
  corporation_state="mask_off" if game.strikes>=2 else ("cracking" if game.trace>=20 or game.strikes==1 else "friendly")
  if not warned and previous_trace<20 and game.trace>=20:
   warned=true; toast_until=now+3.0
+  if not reduced_motion:
+   toast.position.y=96; toast.create_tween().tween_property(toast,"position:y",110.0,0.18)
  if game.strikes==1 and previous_strikes==0:
   strike_until=now+2.5; build_strike(); strike_overlay.show()
+  if not reduced_motion: strike_flash()
  if game.strikes>=2: strike_overlay.hide()
  previous_trace=game.trace; previous_strikes=game.strikes
  apply_background()
 func apply_background() -> void:
  var hostile := corporation_state=="mask_off" or strike_overlay.visible
  app_ground.color=Color("#14070A") if hostile else skin.ground
- background.texture=skin.hostile_background if hostile and skin.hostile_background!=null else skin.background
- glitch_layer.visible=corporation_state=="cracking" and not reduced_motion
+ var target: Texture2D = skin.hostile_background if hostile and skin.hostile_background!=null else skin.background
+ if reduced_motion:
+  if background_fade: background_fade.kill()
+  if is_instance_valid(fade_layer): fade_layer.queue_free()
+  background.texture=target; background_target=target
+ elif background_target!=target:
+  background_target=target
+  if background_fade: background_fade.kill()
+  if is_instance_valid(fade_layer): fade_layer.queue_free()
+  fade_layer=TextureRect.new(); fade_layer.texture=target; fade_layer.size=Vector2(1600,1000); fade_layer.modulate.a=0.0; fade_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(fade_layer); move_child(fade_layer,background.get_index()+1)
+  background_fade=create_tween(); background_fade.tween_property(fade_layer,"modulate:a",0.75,0.3)
+  background_fade.tween_callback(func(): background.texture=target; fade_layer.queue_free())
+ glitch_layer.visible=false
 func dismiss_strike() -> void:
+ var was_visible := strike_overlay.visible
  strike_overlay.hide(); strike_until=0; apply_background()
+ if was_visible and not reduced_motion:
+  var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(1090,265); tracer.z_index=150; add_child(tracer)
+  var flight := tracer.create_tween().set_parallel(true); flight.tween_property(tracer,"position",Vector2(1445,780),0.35); flight.tween_property(tracer,"scale",Vector2(0.15,0.15),0.35); flight.chain().tween_callback(tracer.queue_free)
+func strike_flash() -> void:
+ var flash := ColorRect.new(); flash.color=Color("#E5484D55"); flash.size=Vector2(1600,1000); flash.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(flash); move_child(flash,glitch_layer.get_index()+1)
+ var light := flash.create_tween(); light.tween_property(flash,"modulate:a",0.0,0.3); light.tween_callback(flash.queue_free)
 func build_strike() -> void:
  clear(strike_overlay)
  var dim := ColorRect.new(); dim.color=Color(0.05,0,0,0.5); dim.size=Vector2(1600,1000); dim.mouse_filter=Control.MOUSE_FILTER_IGNORE; strike_overlay.add_child(dim)
@@ -332,3 +410,33 @@ func build_strike() -> void:
  at(modal,FriendlyLook.label("next strike: BLACK ICE joins this encounter",13,FriendlyLook.PAPER),Vector2(32,322))
  var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(790,65); tracer.scale=Vector2(1.2,1.2); tracer.rotation_degrees=3; modal.add_child(tracer)
  at(modal,FriendlyLook.button("CONTINUE",dismiss_strike,FriendlyLook.RED,FriendlyLook.TONER,skin.radius,skin.bold_font),Vector2(32,353),Vector2(160,32))
+
+func previous_mascot(i: int) -> Dictionary:
+ for item in mascot_history:
+  if is_same(item.ice,game.enc.ice[i]): return item
+ return {}
+func interaction_position() -> Vector2:
+ if dragging_uid>=0: return get_global_mouse_position()
+ for card in hand.get_children():
+  if card.uid==hover_uid: return card.get_global_rect().get_center()
+ return Vector2.INF
+func card_target_ok(uid: int, i: int) -> bool:
+ if game.phase!="PLAYER" or not game.can_play(uid).ok: return false
+ var inst := game.find_card(uid)
+ if inst.is_empty(): return false
+ var d := CardDB.def(inst.id)
+ if d.has("target_types") and not d.target_types.has(game.ice_definition(game.enc.ice[i]).type): return false
+ if d.has("target_type") and d.target_type!=game.ice_definition(game.enc.ice[i]).type: return false
+ if d.has("breaker") and d.breaker.get("same_ice",false): return not game._breaker_targets(d.breaker,i).is_empty()
+ return true
+func drop_wrapper(row: Control, i: int, sub: int) -> Control:
+ var wrap := MarginContainer.new(); wrap.add_child(row)
+ var drop := FriendlyDropTarget.new(); drop.view=self; drop.ice_ref=game.enc.ice[i]; drop.sub=sub; drop.mouse_filter=Control.MOUSE_FILTER_PASS; drop.tooltip_text=break_info(i,sub).get("reason", ""); wrap.add_child(drop)
+ return wrap
+func _can_drop_data(at: Vector2, data) -> bool:
+ if not data is Dictionary or data.get("kind")!="card" or at.y>=726: return false
+ var inst := game.find_card(int(data.uid))
+ return not inst.is_empty() and not CardDB.def(inst.id).get("target",false) and game.can_play(inst.uid).ok
+func _drop_data(at: Vector2, data) -> void:
+ if not _can_drop_data(at,data): return
+ game.play_card(int(data.uid)); end_drag(); ui.refresh()

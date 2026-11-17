@@ -8,6 +8,11 @@ var accent := Color("#7FD8BE")
 var look := Vector2.ZERO
 var features := {}
 var blink := 1.0
+var reduced_motion := false
+var clock := 0.0
+var next_blink := 4.0
+var blink_end := 0.0
+var cosmetic_rng := RandomNumberGenerator.new()
 class Feature extends Control:
  var face: FriendlyFace
  var feature: String
@@ -16,6 +21,17 @@ func _ready() -> void:
  mouse_filter = Control.MOUSE_FILTER_IGNORE
  for name in ["shell", "eyes", "pupil", "brows", "mouth", "blush"]:
   var part := Feature.new(); part.face = self; part.feature = name; part.name = name.capitalize(); part.size = size; part.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(part); features[name] = part
+ cosmetic_rng.seed=hash(kind+str(get_instance_id()))
+ next_blink=cosmetic_rng.randf_range(3.0,6.0)
+ redraw_features()
+func _process(delta: float) -> void:
+ if not is_visible_in_tree(): return
+ clock+=delta
+ if not reduced_motion and clock>=next_blink:
+  blink_end=clock+0.12; next_blink=clock+cosmetic_rng.randf_range(3.0,6.0)
+ var value := 0.08 if not reduced_motion and clock<blink_end else 1.0
+ for feature in ["eyes","pupil"]:
+  if features.has(feature): features[feature].pivot_offset=size/2; features[feature].scale.y=value
  redraw_features()
 func redraw_features() -> void:
  for p in features.values(): p.queue_redraw()

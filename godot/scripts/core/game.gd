@@ -1120,7 +1120,7 @@ func passive(i: int) -> String:
 func pick_str(p: Dictionary) -> int:
 	return CardDB.def(p.inst.id).pick.str + p.boost
 
-func break_info(i: int, s: int) -> Dictionary:
+func break_info(i: int, s: int, pick_uid: int = -1) -> Dictionary:
 	## Cheapest way to break subroutine s on ICE i from the current state, boosts included (screen rule §5.3).
 	var ice: Dictionary = enc.ice[i]
 	var d := ice_definition(ice)
@@ -1139,6 +1139,7 @@ func break_info(i: int, s: int) -> Dictionary:
 	var adapter := _installed_has("ADAPTER")
 	var best := {}
 	for p in installed:
+		if pick_uid >= 0 and p.inst.uid != pick_uid: continue
 		var cd := CardDB.def(p.inst.id)
 		if not cd.has("pick"):
 			continue
@@ -1199,10 +1200,10 @@ func boost_pick(uid: int) -> bool:
 		enc.toolbelt_used = true
 	return true
 
-func break_sub(i: int, s: int) -> bool:
+func break_sub(i: int, s: int, pick_uid: int = -1) -> bool:
 	if phase != "PLAYER":
 		return false
-	var info := break_info(i, s)
+	var info := break_info(i, s, pick_uid)
 	if not info.ok:
 		return false
 	var p := _installed_entry(info.uid)

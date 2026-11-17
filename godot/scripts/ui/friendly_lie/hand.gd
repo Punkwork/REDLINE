@@ -16,6 +16,7 @@ func arrange() -> void:
   c.pivot_offset = Vector2(73, 109); c.position = c.rest_position; c.rotation = c.rest_rotation; c.z_index = i
 func focus_card(card: Control) -> void:
  grab_focus()
+ if card.motion: card.motion.kill()
  selected = card.get_index()
  card.z_index = 100
  card.rotation = 0.0

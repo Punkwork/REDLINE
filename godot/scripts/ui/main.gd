@@ -53,6 +53,7 @@ var inspect: CenterContainer
 ## VOICE-001: NUL/REM reads every line aloud (pre-recorded, tools/voice_nulrem.py). M toggles the voice.
 var voice: AudioStreamPlayer
 var voice_on := true
+var reduced_motion := false
 var voice_btn: Button
 ## PLAY-001: the Corporation Response plays one subroutine at a time over at least 5 seconds.
 const RESPONSE_MIN_SECONDS := 5.0
@@ -122,11 +123,12 @@ func _load_flags() -> void:
 		if data is Dictionary:
 			first_run = not data.get("first_run_done", true)
 			voice_on = data.get("voice_on", true)
+			reduced_motion = data.get("reduced_motion", false)
 
 func _save_flags() -> void:
 	var f := FileAccess.open("user://redline_flags.json", FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on}))
+		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on, "reduced_motion": reduced_motion}))
 
 func _build_layout() -> void:
 	var bg := ColorRect.new()
@@ -343,6 +345,8 @@ func _play_response() -> void:
 		flash = {"ref": st.ref, "sub": st.sub}
 		g.response_step()        # values change only now, as it flashes
 		refresh()
+		while friendly.visible and friendly.strike_overlay.visible:
+			await get_tree().process_frame
 		await get_tree().create_timer(gap).timeout
 		fired.append(flash)
 	flash = {}
@@ -360,7 +364,8 @@ func _play_response() -> void:
 		for i in before:
 			if i < g.enc.ice.size() and g.active_subs(i) != before[i]:
 				spin[i] = before[i]
-	if spin.is_empty():
+	if spin.is_empty() or reduced_motion:
+		spin = {}
 		refresh()
 		return
 	var longest := 0
@@ -388,6 +393,7 @@ func _was_fired(ice: Dictionary, s: int) -> bool:
 	return false
 
 func _pulse(c: Control) -> void:
+	if reduced_motion: return
 	c.modulate = Color(1.8, 1.8, 1.8)
 	var tw := c.create_tween().set_loops(3)
 	tw.tween_property(c, "modulate", Color(1, 1, 1), 0.14)
@@ -501,6 +507,9 @@ func _speak_event(e: Dictionary) -> void:
 		voice.stream = stream
 		voice.play()
 		type_time = max(0.6, stream.get_length() * 0.92)   # type in step with the voice
+	if reduced_motion:
+		nr_text.visible_ratio = 1.0
+		return
 	tween = create_tween()
 	tween.tween_property(nr_text, "visible_ratio", 1.0, type_time)
 
@@ -879,7 +888,7 @@ func _reel(final_row: Control, prev_row: Control, k: int, spin_now: bool) -> Con
 	frame.add_child(holder)
 	final_row.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	holder.add_child(final_row)
-	if spin_now:
+	if spin_now and not reduced_motion:
 		final_row.modulate.a = 0.0
 		var win := Control.new()
 		win.clip_contents = true
@@ -918,6 +927,7 @@ func _reel(final_row: Control, prev_row: Control, k: int, spin_now: bool) -> Con
 			frame.modulate = Color(1.7, 1.7, 1.7)
 			var fl := frame.create_tween()
 			fl.tween_property(frame, "modulate", Color(1, 1, 1), 0.3))
+	if is_instance_valid(friendly) and friendly.visible: return frame
 	# glass: darker at the top and bottom edges of the window, like a reel drum curving away
 	var glass := Control.new()
 	glass.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -1486,6 +1496,11 @@ func _overlay_select() -> void:
 	option.button_pressed = g.ghost_draw_enabled
 	option.toggled.connect(func(on): g.ghost_draw_enabled = on)
 	v.add_child(option)
+	var motion_option := CheckBox.new()
+	motion_option.text = "Reduced motion"
+	motion_option.button_pressed = reduced_motion
+	motion_option.toggled.connect(set_reduced_motion)
+	v.add_child(motion_option)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
@@ -1637,7 +1652,7 @@ func _detect_tumbles() -> void:
 
 func _tumble_reel(i: int, slot: int, sub: int, final_row: Control) -> Control:
 	var frame := _reel(final_row, null, slot, false)
-	if not tumble.has(i): return frame
+	if not tumble.has(i) or reduced_motion: return frame
 	var prior: Array = tumble[i]
 	var old_slot: int = prior.find(sub) if sub >= 0 else -1
 	if old_slot == slot: return frame
@@ -1673,3 +1688,11 @@ func _install_friendly() -> void:
 	friendly.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(friendly)
 	move_child(friendly, blocker.get_index())
+
+func set_reduced_motion(value: bool) -> void:
+	reduced_motion = value
+	if value and tween:
+		tween.kill()
+		nr_text.visible_ratio = 1.0
+	_save_flags()
+	refresh()

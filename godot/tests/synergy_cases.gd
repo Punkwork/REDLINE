@@ -20,6 +20,7 @@ func run() -> void:
  zeroed_lifecycle()
  zeroed_cards()
  tumbler_removal()
+ selected_icepick()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -433,3 +434,20 @@ func tumbler_removal() -> void:
  check.call(boot.active_subs(0) == [2, 0] and boot.break_info(0, 0).reason.begins_with("LOCKED"), "BOOTING applies while other subs tumble")
  boot.enc.turn = 3
  check.call(boot.break_info(0, 0).ok, "BOOTING unlocks on turn three with shrunk pool")
+
+func selected_icepick() -> void:
+ var g := tumble_game()
+ var cheap: int = g.installed[0].inst.uid
+ var chosen := {"inst":g._new_inst("TUMBLER_ICEPICK"),"boost":5,"free_used":false}
+ g.installed.append(chosen)
+ var auto := g.break_info(0,0)
+ var info := g.break_info(0,0,chosen.inst.uid)
+ check.call(auto.uid==cheap and info.uid==chosen.inst.uid, "dragged Icepick is selected without changing automatic cheapest break")
+ var before := g.bw
+ check.call(g.break_sub(0,0,chosen.inst.uid) and g.bw==before-info.cost and g.enc.ice[0].broken[0], "selected Icepick pays its normal cost and breaks the target")
+ var wrong := {"inst":g._new_inst("VOID_ICEPICK"),"boost":20,"free_used":false}; g.installed.append(wrong)
+ before=g.bw
+ check.call(not g.break_sub(0,1,wrong.inst.uid) and g.bw==before and not g.enc.ice[0].broken[1], "incompatible dragged Icepick spends nothing")
+ check.call(not g.break_sub(0,1,999999) and g.bw==before, "missing dragged Icepick cannot fall back to another one")
+ g.bw=0
+ check.call(not g.break_sub(0,1,chosen.inst.uid) and g.bw==0 and not g.enc.ice[0].broken[1], "unaffordable selected Icepick spends nothing")
