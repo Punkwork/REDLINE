@@ -7,8 +7,8 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 ## How we work
 
-1. **One working branch: `codex/halcyon-playtest-stabilization`** (designer, 2026-11-15). Start every session from its latest commit. Put your changes on a short-lived branch and open a pull request **into this branch**; don't push to it directly. `main` is out of date (last change 2026-11-12) and isn't used until the designer decides to merge.
-2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes them from this branch.
+1. **Work on `main`** (designer, 2026-11-17; replaces the 2026-11-15 rule that used `codex/halcyon-playtest-stabilization`). Follow the working agreement in `AGENTS.md` / `CLAUDE.md`: start from the latest `main`, record design decisions in `REDLINE_MASTER_DESIGN.md`, report the commit where finished work lives, and ask the designer before creating a branch. The former working branch was merged into `main` at a523502 and is no longer used.
+2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes them from `main`.
 3. **Who does what.**
    - **Claude:** design docs and proposals, playtest analysis, this file, the project copies.
    - **Codex:** the Godot build (`godot/`), tests, exports, `REDLINE_CURRENT_STATUS.md`.
@@ -16,7 +16,7 @@ This is the one list of work that has been **decided but not finished**, so Code
    - **Only the designer** marks a decision APPROVED. A proposal stays PROPOSED until the designer says so in a session, and the session's log entry quotes or records that.
 4. **Every change has a decision ID** (e.g. REJECT-001) that appears in the design doc, in this file and in the development log.
 5. **Session routine.**
-   - **Start:** pull the working branch; read this file, then the latest entries of `REDLINE_DEVELOPMENT_LOG.md`.
+   - **Start:** pull `main`; read this file, then the latest entries of `REDLINE_DEVELOPMENT_LOG.md`.
    - **End:** move finished items to *Done* (with the commit), add new items, and add a dated log entry that says who wrote it (`(Codex)` or `(Claude)`).
 
 6. **Development log size (LOG-001).** Keep `REDLINE_DEVELOPMENT_LOG.md` under about **60 KB** so Claude can rewrite the project copy in one pass. When it grows past that, move the oldest dated entries, whole, to the end of `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` (oldest first, nothing reworded) and note the move in the log. Entries stay append-only; the archive is never edited except to append.
@@ -98,4 +98,5 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | LOG-001 | Development log split: entries up to 2026-11-14 moved to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`; the live log keeps 2026-11-15 on. | 2026-11-16 (Claude) |
 | ZEROED-001 / TUMBLE-001 readings | Designer confirmed both (2026-11-16): any drop to 0 STR uses up an ICE's one ZEROED; a subroutine that tumbles in is active at once. Build as specified above. | 2026-11-16 (designer) |
 | DSY / PACE approval | Designer approved both docs as written for the next build; amendments recorded in Core Rules, Card Pools, Uplink & CAPS, Upgrades, Rustlers, Engines and the three ICE docs; checklist v0.2. | 2026-11-15 (Claude) |
+| MAIN-001 | Shared working agreement (`AGENTS.md`, `CLAUDE.md`) makes `main` the source of truth for Codex and Claude; `codex/chrome-deco-encounter` (including halcyon-playtest-stabilization and VIS-001) merged into `main`; approved Nov 17 visual decisions recorded in the master design doc. | aea16de, a523502, dd64768 · 2026-11-17 (Claude) |
 | VIS-001 doc | `REDLINE_VISUAL_LANGUAGE.md` and `docs/visual/` (reference images, placeholder backgrounds, mascot SVGs) added for Codex. | 2026-11-17 (Claude) |
