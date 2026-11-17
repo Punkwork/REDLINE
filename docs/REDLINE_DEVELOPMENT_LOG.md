@@ -481,3 +481,7 @@ Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stage
 ## 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude)
 
 **Designer decision:** "For number 3, that is correct." SHATTER lets SLEDGE break any one chosen ICE of any type this turn; SLEDGE then stays at STR 0 until the encounter ends and returns to STR 2 next encounter. Matches the build, so nothing changes in code. Recorded in the master design doc and Rustlers doc; HANDOFF row moved to *Done*.
+
+## 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude)
+
+**Designer:** a broken TUMBLER subroutine disappears at once and the next unbroken subroutine in sequence tumbles in; TUMBLERS still rotate once each turn. This is TUMBLE-001 (approved 2026-11-16, built `zeroed-tumble-step3`), so no DEADLOCK counter is needed. Added TUMBLE-001 to the master design doc (it was only in Core Rules) and closed the REEL-001 follow-up in HANDOFF. **Code changes:** none.

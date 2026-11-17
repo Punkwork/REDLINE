@@ -83,7 +83,6 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
 | ICEBIBLE audit | Apply the ICE Rules Bible audit to the slice (DOORBELL CAM not deadly; CAPTCHA's PULP 6; AUTO-RENEW STR; TUMBLER PULP cap on REJECT ALL and CONSENT FORM)? | `REDLINE_ICE_RULES_BIBLE.md`, audit table | WAITING |
-| REEL-001 follow-up | Show the DEADLOCK total on TUMBLER cards? (REJECT-001 fixes REJECT ALL; CONSENT FORM and CAPTCHA still carry two.) | Dev log, REEL-001 | WAITING |
 | PULP-001 range | FORTRESS PULP is now rolled each time with slight variation (designer, 2026-11-17). How wide is the roll for each printed value, how is it shown before it fires, and how does it relate to PULP-002 curves? | Master design, PULP-001 | WAITING |
 | PR #1 vs this branch | PR #1 (`docs/simplified-design`) has an alternate JSON-backed build that isn't contained in PR #2. Compare before anything merges to `main`. | Dev log, 2026-11-14 (Codex) | WAITING |
 
@@ -102,6 +101,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | VISUAL-APPROVALS-002 | Designer approved the CHROME-001 art review, CARDS-001 as a whole, and the VIS-001 details (hand size, lethal threshold, undrawn ICE and wording, motion timings, Cracking after a strike). Recorded in the master design doc. | 2026-11-17 (designer; recorded by Claude) |
 | ZEROED-001 interpretation | Closed: LOGIC BOMB and RELAY deprecated (DEPRECATE-001), so their floor/deficit readings no longer apply. | 2026-11-17 (designer; recorded by Claude) |
 | RIOT-003 readings | Designer confirmed: SHATTER lets SLEDGE break any one chosen ICE of any type this turn; SLEDGE then stays at STR 0 until the encounter ends. Already built this way. | 2026-11-17 (designer; recorded by Claude) |
+| REEL-001 follow-up | Closed: no DEADLOCK total on TUMBLER cards. TUMBLE-001 already removes broken subroutines at once and tumbles in the next unbroken one, so a broken DEADLOCK never reappears (designer reaffirmed). | 2026-11-17 (designer; recorded by Claude) |
 | MAIN-001 | Shared working agreement (`AGENTS.md`, `CLAUDE.md`) makes `main` the source of truth for Codex and Claude; `codex/chrome-deco-encounter` (including halcyon-playtest-stabilization and VIS-001) merged into `main`; approved Nov 17 visual decisions recorded in the master design doc. | aea16de, a523502, dd64768 · 2026-11-17 (Claude) |
 | CHROME-001 screenshot refresh | Reran all five screenshot stages and replaced the ten PNGs under their original names with the current amber and textured CARDS-001 treatment. | 2026-11-17 (Codex) |
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |

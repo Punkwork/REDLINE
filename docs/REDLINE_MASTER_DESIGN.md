@@ -68,6 +68,8 @@ Not covered by this approval: the rules questions still listed in `HANDOFF.md` (
 
 **RIOT-003 — SHATTER readings confirmed (APPROVED, 2026-11-17).** SHATTER (RIOT starter SCRIPT, EXPLOIT; 1 BW, +3 TRACE): "any 1 icebreaker" means SLEDGE can break the subroutines of **any one chosen ICE, whatever its type**, this turn. At the end of that turn SLEDGE drops to **STR 0 for the rest of the encounter** (boosts lost; boosting again starts from 0) and is back to its normal STR 2 at the next encounter. Designer: "For number 3, that is correct."
 
+**TUMBLE-001 / REEL-001 — Broken TUMBLER subroutines tumble out at once; no DEADLOCK counter (APPROVED, 2026-11-17).** Reaffirms TUMBLE-001 (designer, 2026-11-16; Core Rules §5.4): as soon as a TUMBLER subroutine is broken it **disappears**, and the **next unbroken subroutine in sequence** tumbles in to take its place, active at once. Broken subroutines never come back into view. TUMBLERS still rotate once each turn as normal. Because a broken DEADLOCK can no longer reappear, the REEL-001 follow-up (show a DEADLOCK total on TUMBLER cards) is **not needed** and is closed. Built and tested (`zeroed-tumble-step3`). Designer: "as soon as a subroutine is broken on a tumbler, the broken sub disappears to reveal the next subroutine in sequence, which needs to be an unbroken subroutine … Tumblers still tumble once each turn as normal."
+
 ## 2. Player, corporation, and encounter loop
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.
