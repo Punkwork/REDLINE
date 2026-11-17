@@ -177,9 +177,9 @@ Follow the HALCYON assets' format so the encounter code can swap them in: **1586
 
 ## 6. Open questions for the designer
 
-1. Approve the three-degrees table (§1) as the corporate voice for all interfaces?
-2. Approve IRONWATCH's concourse and LUCIDA's solarium (§3–4), or adjust the setting?
-3. Approve the plaque colours and the ICE appliance list, or mark the ones to change?
+1. ~~Approve the three-degrees table (§1) as the corporate voice for all interfaces?~~ **Approved 2026-11-17.**
+2. ~~Approve IRONWATCH's concourse and LUCIDA's solarium (§3–4), or adjust the setting?~~ **Approved 2026-11-17.**
+3. ~~Approve the plaque colours and the ICE appliance list, or mark the ones to change?~~ **Approved 2026-11-17.**
 4. Should HALCYON get the same non-fight interface copy (consent, remembered, reward) written next, for consistency?
-5. When approved: generate the art now, or after the HALCYON playtest?
+5. Generate the art now, or after the HALCYON playtest?
 6. The escape ICE of both corporations (ROADBLOCK, SPIKE STRIP, SEARCHLIGHT, PURSUIT DRONE; WAKE SIGNAL, DÉJÀ VU, AMNESIA, SLEEP PARALYSIS) aren't drawn yet. Do them in the same pass, or later?
