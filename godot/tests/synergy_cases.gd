@@ -318,13 +318,13 @@ func null_pointer_strike_regression() -> void:
 func zeroed_lifecycle() -> void:
  var g := game("RIOT"); g.enter_node(0)
  g.enc.ice.assign([g._new_ice("AUTO_RENEW")])
- check.call(g.would_zero(0, 4), "fresh positive ICE eligible")
+ check.call(g.would_zero(0, 5), "fresh positive ICE eligible")
  g.infect(0, "ROT", 8)
  check.call(g.enc.ice[0].zeroed and g.ice_str(0) == 0, "ROT consumes ZEROED")
  g.enc.ice[0].harden = 3; g._sync_strengths()
  check.call(g.ice_str(0) == 0, "spare ROT holds HARDENING at zero")
  g.enc.ice[0].virus.clear(); g._sync_strengths()
- check.call(g.ice_str(0) == 7 and not g.reduce_ice_str(0, 20), "recovery and second zero grant no second chance")
+ check.call(g.ice_str(0) == 8 and not g.reduce_ice_str(0, 20), "recovery and second zero grant no second chance")
  var fresh := g._new_ice("AUTO_RENEW")
  check.call(not fresh.zeroed, "new encounter has fresh ZEROED state")
  var floor_def := {"name": "FLOOR", "type": "FORTRESS", "str": 4, "str_floor": 3, "subs": [[{"k": "DEADLOCK"}]]}
@@ -344,19 +344,19 @@ func zeroed_lifecycle() -> void:
 func zeroed_cards() -> void:
  var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 20; g.trace = 10
  g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.ice[0].seen.fill(true)
- g.reduce_ice_str(0, 2)
+ g.reduce_ice_str(0, 3)
  var flat := g._new_inst("FLATLINE"); g.hand.append(flat); g.play_card(flat.uid, 0)
  check.call(g.ice_str(0) == 0 and g.enc.ice[0].zeroed and g.trace == 8, "FLATLINE pays +2 TRACE then ZEROED relieves four")
  var again := g._new_inst("FLATLINE"); g.hand.append(again); g.play_card(again.uid, 0)
  check.call(g.trace == 10, "FLATLINE at already-zero ICE gives no bonus")
  g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.ice[0].seen.fill(true)
- g.reduce_ice_str(0, 1)
+ g.reduce_ice_str(0, 2)
  var k := g._new_inst("KNOCKOUT"); g.hand.append(k); g.play_card(k.uid, 0)
  check.call(g.phase == "CHOICE" and g.pending.n == 1 and g.card_break_ok(0, 3), "KNOCKOUT ZEROED opens normal break choice including DEADLOCK")
  g.choose_sub(0, 3)
  check.call(g.enc.breached and not g._find(g.discard, k.uid).is_empty(), "KNOCKOUT choice discards once")
  g.enc.ice.assign([g._new_ice("AUTO_RENEW")]); g.enc.breached = false
- g.reduce_ice_str(0, 3)
+ g.reduce_ice_str(0, 4)
  var w := g._new_inst("SECOND_WIND"); g.hand.append(w); var before := g.bw; g.play_card(w.uid, 0)
  check.call(g.bw == before + 1, "SECOND WIND costs zero and gains one BW on ZEROED")
  var b := game("RIOT"); b.enter_node(0); b.hand.clear(); b.bw = 20
@@ -372,13 +372,14 @@ func zeroed_cards() -> void:
  var bad := positive._new_inst("NULL_POINTER"); positive.hand.append(bad); var bw := positive.bw
  check.call(not positive.play_card(bad.uid, 0) and positive.bw == bw, "NULL POINTER rejects positive STR before payment")
  var ordinary := game("RIOT"); ordinary.enter_node(0); ordinary.hand.clear(); ordinary.bw = 20
- ordinary.enc.ice.assign([ordinary._new_ice("AUTO_RENEW")]); ordinary.reduce_ice_str(0, 4)
+ ordinary.enc.ice.assign([ordinary._new_ice("AUTO_RENEW")]); ordinary.reduce_ice_str(0, 5)
  ordinary.enc.ice[0].harden = 1; ordinary._sync_strengths()
  var no_bonus := ordinary._new_inst("SECOND_WIND"); ordinary.hand.append(no_bonus); bw = ordinary.bw; ordinary.play_card(no_bonus.uid, 0)
  check.call(ordinary.bw == bw, "ordinary first zero consumes future printed-card bonus")
  check.call(CardDB.roles("FLATLINE").has("↯ DRILL") and CardDB.roles("KNOCKOUT").has("↯ DRILL") and CardDB.roles("SECOND_WIND").has("↯ DRILL"), "all ZEROED cards labelled DRILL")
  var compile := game("RIOT"); compile.enter_node(0); compile.hand.clear(); compile.bw = 20
  compile.enc.ice.assign([compile._new_ice("AUTO_RENEW")])
+ compile.reduce_ice_str(0, 1)
  var combo := compile._new_inst("COMPILED::PROBE::FLATLINE"); compile.hand.append(combo); compile.trace = 10; compile.play_card(combo.uid, 0)
  check.call(compile.enc.ice[0].zeroed and compile.trace == 8 and compile.discard[0].id == combo.id, "compiled ordinary reduction then printed ZEROED resolves in order")
 

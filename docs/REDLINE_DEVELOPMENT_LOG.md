@@ -445,3 +445,7 @@ Closes HANDOFF "Checklist v0.2". The live Sheet (claude.ai artifact "REDLINE Pla
 Removed the card and passive from runtime. CONSENT FORM retains its STR and subroutines. Updated regression coverage and replaced the rare SCRIPT sample with PAYDAY.
 
 **Interpretations to confirm:** The slice has no persisted run decks, so no legacy LOGIC BOMB runtime definition is needed. PAYDAY is the replacement sample.
+
+## 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex)
+
+Applied the five approved ICE edits. DOORBELL CAM uses the existing VOID reveal progression and keeps WATCHER. Updated regression fixtures for the new values. Rules suite: 357 passed, zero failed.

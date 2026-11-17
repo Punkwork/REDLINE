@@ -54,12 +54,12 @@ func run() -> void:
  for turn in 2:
   g.end_turn()
   while g.phase=="CHOICE" and g.pending.get("kind")=="discard": g.choose(g.hand[0].uid)
- check(g.enc.turn==3 and g.ice_str(0)==6,"two responses produce turn 3 STR 6")
+ check(g.enc.turn==3 and g.ice_str(0)==7,"two responses produce turn 3 STR 7")
  main.refresh()
  check(g.break_sub(1,3),"turn 3 active CAPTCHA DEADLOCK broken")
  main.refresh(); await settle(35)
- check(main.friendly.mood_for(0)=="wary" and main.friendly.mood_for(1)=="lethal","turn 3 wary plus lethal")
- check(main.friendly.biggest_hit()==6,"biggest hit is actual PULP 6")
+ check(main.friendly.mood_for(0)=="wary" and main.friendly.mood_for(1)=="wary","turn 3 both wary after the DEADLOCK break")
+ check(main.friendly.biggest_hit()==3,"AUTO-RENEW supplies the biggest PULP hit")
  check(main.friendly.new_subs(1).has(4),"actual newly tumbled TRACE recorded")
  var preview:=str(g.response_preview())
  main.lethal_pulp_threshold=7

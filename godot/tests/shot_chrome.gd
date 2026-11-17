@@ -40,7 +40,7 @@ func run() -> void:
   for turn in 2:
    g.end_turn()
    while g.phase=="CHOICE" and g.pending.get("kind")=="discard": g.choose(g.hand[0].uid)
-  check(g.enc.turn==3 and g.ice_str(0)==6,"real HARDENING and turn 3")
+  check(g.enc.turn==3 and g.ice_str(0)==7,"real HARDENING and turn 3")
   check(g.break_sub(1,3),"actual CAPTCHA S4 break")
   main.refresh(); await snapshot("02b-mascots-wary-and-lethal")
  elif stage==3: await snapshot("03-welcome-atrium")
@@ -75,7 +75,7 @@ func interaction(g: Game) -> void:
  motion(from+Vector2(30,-30),true,Vector2(30,-30)); await settle(3)
  motion(to,true,to-from); await settle(3)
  check(root.gui_is_dragging(),"native Icepick drag active")
- check(target.allowed and main.friendly.feedback_panel.visible and main.friendly.feedback_label.text.contains("3 BW"),"legal drag has visible exact BW feedback")
+ check(target.allowed and main.friendly.feedback_panel.visible and main.friendly.feedback_label.text.contains("4 BW"),"legal drag has visible exact BW feedback")
  await snapshot("05a-legal-icepick-target")
  var before:=g.bw; var cost: int=g.break_info(0,0,chip.uid).cost
  mouse(to,false); await settle()

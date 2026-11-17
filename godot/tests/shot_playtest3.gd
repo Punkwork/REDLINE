@@ -53,7 +53,7 @@ func _run() -> void:
  await snap("playtest3_deadlock_escalate")
  # Authorized ZEROED and TUMBLE fixtures.
  main._start_as("RIOT"); g = main.g; g.enter_node(0); g.hand.clear(); g.bw = 40
- g.enc.ice.assign([g._new_ice("CAPTCHA")]); g._mark_seen(); g.reduce_ice_str(0, 4)
+ g.enc.ice.assign([g._new_ice("CAPTCHA")]); g._mark_seen(); g.reduce_ice_str(0, 3)
  g.installed.append({"inst": g._new_inst("PASSKEY"), "boost": 20, "free_used": false})
  var zero_card := g._new_inst("SECOND_WIND"); g.hand.append(zero_card)
  await snap("zeroed_target_highlight")

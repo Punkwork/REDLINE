@@ -168,9 +168,9 @@ func test_borrowed_credentials() -> void:
 	var vc := put_in_hand(v, "BORROWED_CREDENTIALS")
 	check(v.play_card(vc, 0), "VOID can be selected")
 	check(not v.break_info(0, 0).ok, "compatibility does not reveal or bypass hidden VOID subroutines")
-	v.enc.ice[0].responses = 1
-	v.enc.ice[0].seen[0] = true
-	check(v.break_info(0, 0).ok and v.break_sub(0, 0), "revealed VOID subroutine can be broken by HUSH")
+	v.enc.ice[0].responses = 2
+	v.enc.ice[0].seen.fill(true)
+	check(v.break_info(0, 2).ok and v.break_sub(0, 2), "revealed VOID subroutine can be broken by HUSH")
 	var after_trace := v.trace
 	check(after_trace == 0, "the extra cost is CRED, not TRACE")
 	v.end_turn()
@@ -182,7 +182,7 @@ func test_shield_and_pulp() -> void:
 	var g := legacy_game(2)
 	g.new_run()
 	g.entered_corp = true
-	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # CAPTCHA: DISCARD 1, PULP 2, DEADLOCK
+	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # CAPTCHA starts with DISCARD 1 and DEADLOCK
 	var u := put_in_hand(g, "PULP_SHIELD")
 	g.play_card(u)
 	check(g.shield == 3, "+3 SHIELD")
@@ -218,14 +218,14 @@ func test_captcha_discard() -> void:
 	check(g.hand.size() == Game.BASE_DRAW and g.enc.turn == 2, "the new hand is drawn first")
 	g.choose(g.hand[0].uid)
 	check(g.phase == "PLAYER" and g.hand.size() == Game.BASE_DRAW - 1, "discard 1, then play")
-	check(g.vitae == 24, "AUTO-RENEW PULP 1+2+3 hit on turn 1 (vitae %d); CAPTCHA's PULP 6 was hidden" % g.vitae)
-	check(g.is_active(1, 2), "PULP rotated into a slot")
+	check(g.vitae == 24, "AUTO-RENEW PULP 1+2+3 hit on turn 1 (vitae %d); CAPTCHA's TRACE 2 was hidden" % g.vitae)
+	check(g.is_active(1, 2), "TRACE 2 rotated into a slot")
 
 func test_boost_installed() -> void:
 	var g := legacy_game(11)
 	g.new_run()
 	g.entered_corp = true
-	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # CAPTCHA STR 5
+	start_node(g, 1, 0, "TUMBLER_ICEPICK")   # CAPTCHA STR 4
 	var p: Dictionary = g.installed[0]
 	var c := g.can_boost(p.inst.uid)
 	check(c.ok and c.cost == 2, "TUMBLER Icepick boost costs 2 BW")
@@ -239,12 +239,13 @@ func test_void_reveal() -> void:
 	var g := legacy_game(12)
 	g.new_run()
 	g.entered_corp = true
-	start_node(g, 2, 1, "VOID_ICEPICK")   # DOORBELL CAM: [TRACE 3 + DEADLOCK]
+	start_node(g, 2, 1, "VOID_ICEPICK")   # DOORBELL CAM: PULP 4, CORTEX 1, DEADLOCK
 	check(g.break_info(0, 0).reason == "HIDDEN", "VOID sub hidden on turn 1")
 	var pv := g.response_preview()
 	check(pv.size() == 1 and pv[0].hidden, "it still fires, unseen")
 	g.end_turn()
-	check(g.trace == 3 and g.enc.ice[0].seen[0], "fired and revealed (trace %d)" % g.trace)
+	check(g.vitae == 26 and g.enc.ice[0].seen == [true, false, false], "DOORBELL CAM fires only PULP 4 and reveals it")
+	check(g.active_subs(0) == [0, 1], "DOORBELL CORTEX joins the second response")
 	check(g.break_info(0, 0).reason != "HIDDEN", "revealed sub breakable on turn 2 (BW permitting)")
 	# HOUSE CALL (VOID, 2 subs): response 1 fires sub 1, response 2 fires subs 1 and 2
 	var h := g._new_ice("HOUSE_CALL")
