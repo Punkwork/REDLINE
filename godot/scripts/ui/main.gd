@@ -1494,7 +1494,7 @@ func _overlay_safehouse() -> void:
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
-	v.add_child(_lbl("HALCYON PLAYTEST 3 · ZEROED + TUMBLE · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	v.add_child(_lbl("HALCYON PLAYTEST 4 · ZEROED + TUMBLE · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
 	var option := CheckBox.new()
 	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
 	option.button_pressed = g.ghost_draw_enabled
