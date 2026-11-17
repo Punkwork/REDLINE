@@ -796,12 +796,20 @@ func sim_rustler(who: String) -> void:
 	var opener_turns := []
 	var deck_total := 0
 	var tax_total := 0
+	var measured_turns := 0
+	var measured_encounters := 0
+	var clear_turns := 0
 	for seed in range(100, 130):
 		var g := Game.new(seed)
 		g.new_run(who)
 		var guard := 0
+		var tracked_enc: Dictionary = {}
+		var run_turns := 0
 		while g.phase != "SLICE_DONE" and g.phase != "DEAD" and guard < 3000:
 			guard += 1
+			if not g.enc.is_empty() and not is_same(g.enc, tracked_enc):
+				run_turns += int(tracked_enc.get("turn", 0))
+				tracked_enc = g.enc
 			match g.phase:
 				"MAP": g.enter_node(g.available[g.rng.randi_range(0, g.available.size() - 1)])
 				"READY_RIG": g.choose_ready_rig(bot_rig(g))
@@ -813,6 +821,11 @@ func sim_rustler(who: String) -> void:
 					bot_turn(g)
 					if g.node.get("opening", false) and g.enc.get("breached", false):
 						opener_turns.append(g.enc.turn)
+		run_turns += int(tracked_enc.get("turn", 0))
+		if g.phase in ["SLICE_DONE", "DEAD"]:
+			measured_turns += run_turns
+			measured_encounters += int(g.pulp_stats.encounters)
+		if g.phase == "SLICE_DONE": clear_turns += run_turns
 		deck_total += g.footprint()
 		tax_total += g.bloat_tax_paid
 		purges += g.purges_run
@@ -840,7 +853,7 @@ func sim_rustler(who: String) -> void:
 		avg += x
 	var en: float = max(1, ps.encounters)
 	print("  pulp %s: per encounter %.1f incoming (%.1f from Black ICE), %.1f absorbed by SHIELD, %.1f to VITAE, %.1f hits" % [who, ps.incoming / en, ps.black / en, ps.absorbed / en, (ps.incoming - ps.absorbed) / en, ps.hits / en])
-	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; purges %d in %d runs; SHATTER played %d times in %d runs" % [who, done, str(rows), avg / max(1, vit.size()), purges, purge_runs, shat, shat_runs])
+	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; turns per non-stalled encounter %.2f; avg cleared-run turns %.1f" % [who, done, str(rows), avg / max(1, vit.size()), float(measured_turns) / maxi(1, measured_encounters), float(clear_turns) / maxi(1, done)])
 
 func needed_types(g: Game) -> Array:
 	var t := ["TUMBLER"] if g.rustler == "ECHO" else []

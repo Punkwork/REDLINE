@@ -17,6 +17,7 @@ func run() -> void:
  coverage_and_escalation_regressions()
  ordered_compile_regression()
  integer_strike_regression()
+ zeroed_lifecycle()
 func step1() -> void:
  var g := game()
  check.call(g.footprint() == 12 and g.footprint_cap() == 22 and g.footprint_band() == "GHOST", "DSY footprint baseline")
@@ -102,7 +103,7 @@ func step3() -> void:
  var pivot := g._new_inst("PIVOT"); g.hand.append(pivot)
  var before := g.ice_str(0)
  g.play_card(pivot.uid, 0)
- check.call(g.ice_str(0) == before - 3, "PIVOT CHAIN CLOAK grants extra reduction")
+ check.call(g.ice_str(0) == maxi(0, before - 3), "PIVOT CHAIN CLOAK grants extra reduction")
  var tags: Array = g.enc.last_tags.duplicate()
  g.installed.append({"inst": g._new_inst("TUMBLER_ICEPICK"), "boost": 5, "free_used": false})
  g.break_sub(0, 0)
@@ -142,19 +143,20 @@ func step3() -> void:
 
 func step4() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30
- g.enc.ice[0].str_mod = -10
- check.call(g.ice_str(0) == -6, "UNDERFLOW permits negative STR")
+ g.reduce_ice_str(0, 10)
+ check.call(g.ice_str(0) == 0 and g.enc.ice[0].str_mod == -4, "ZEROED floor discards excess ordinary reduction")
+ check.call(g.enc.ice[0].zeroed, "ordinary reduction consumes first ZEROED")
  g.enc.ice[0].str_floor = 3
- check.call(g.ice_str(0) == 3, "explicit STR floor overrides UNDERFLOW")
- g.enc.ice[0].erase("str_floor"); g.enc.ice[0].harden = 2
- check.call(g.ice_str(0) == -4, "HARDENING raises negative STR normally")
- g.enc.ice[0].bomb = true
- check.call(g.ice_str(0) == 0, "LOGIC BOMB sets negative STR to zero")
- g.enc.ice[0].bomb = false
- g.installed.append({"inst": g._new_inst("SCALPEL"), "boost": 0, "free_used": false})
- check.call(g.break_info(0, 0).margin == 6 and g.break_info(0, 0).cost == 0, "SCALPEL OVERKILL uses MARGIN")
- g.amp = 2; g.infect(0, "ROT", 1)
- check.call(g.ice_str(0) == -7, "ROT AMP applied once to strain effect")
+ check.call(g.ice_str(0) == 3, "explicit STR floor remains")
+ g.enc.ice[0].erase("str_floor"); g.enc.ice[0].harden = 2; g._sync_strengths()
+ check.call(g.ice_str(0) == 2, "HARDENING rises from zero without hidden debt")
+ var bomb := g._new_inst("LOGIC_BOMB"); g.hand.append(bomb); g.play_card(bomb.uid, 0)
+ check.call(g.ice_str(0) == 0, "LOGIC BOMB sets STR to zero")
+ g.enc.ice[0].bomb = false; g._sync_strengths()
+ g.installed.append({"inst": g._new_inst("SCALPEL"), "boost": 2, "free_used": false})
+ check.call(g.break_info(0, 0).margin == 2 and g.break_info(0, 0).cost == 0, "SCALPEL OVERKILL uses nonnegative ICE STR")
+ g.amp = 2; g.infect(0, "ROT", 10)
+ check.call(g.ice_str(0) == 0 and g.enc.ice[0].virus.ROT == 10, "ROT retains spare counters at minimum zero")
  g.infect(0, "LEECH", 4)
  var c := g._new_inst("CULL"); g.hand.append(c); g.play_card(c.uid, 0)
  g.cull_strain("ROT"); g.cull_strain("LEECH"); g.cull_strain("LEECH")
@@ -163,7 +165,7 @@ func step4() -> void:
  var cred := g.cred; g.play_card(h.uid, 0)
  check.call(g.cred == cred + 6 and not g.enc.ice[0].virus.has("LEECH"), "HARVEST spends all LEECH for reserve-limited extraction")
  var u := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(u); g.play_card(u.uid, 0)
- check.call(g.phase == "CHOICE" and g.pending.n == 3 and not g._find(g.burned, u.uid).is_empty(), "INTEGER UNDERFLOW caps at three and burns")
+ check.call(g.phase == "PLAYER" and not g._find(g.burned, u.uid).is_empty(), "withdrawn negative-STR effect burns without breaks until replacement")
 func step5() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 20
  var a := g._new_inst("PROBE"); var b := g._new_inst("DEEP_PROBE")
@@ -177,7 +179,7 @@ func step5() -> void:
  g.phase = "PLAYER"; g.hand.append(g._new_inst(id))
  var before := g.ice_str(0)
  g.play_card(g.hand[0].uid, 0)
- check.call(g.ice_str(0) == before - 6 and g.discard.size() == 1, "both compiled effects execute, single physical discard")
+ check.call(g.ice_str(0) == maxi(0, before - 6) and g.discard.size() == 1, "both compiled effects execute, single physical discard")
  g.rack.append(g._new_inst("CLEAN_BUILD"))
  check.call(g.card_cost(id) == 2, "CLEAN BUILD discount")
  g.hand.clear(); g.draw_pile.clear(); g.discard.clear()
@@ -231,8 +233,8 @@ func pacing() -> void:
 
 func edge_regressions() -> void:
  var g := game("ECHO"); g.enter_node(0); g.hand.clear(); g.bw = 30
- g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")]); g.enc.ice[1].str_mod = -10
- check.call(g.ice_str(1) == -4, "RELAY raises an underflowed neighbor by two")
+ g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")]); g.reduce_ice_str(1, 10)
+ check.call(g.ice_str(1) == 0, "RELAY included in capped reduction")
  for floor_value in [3, 4, 3]:
   g.enc.ice[1].str_floor = floor_value
   check.call(g.ice_str(1) == floor_value, "explicit 3/4/3 ICE floors remain authoritative")
@@ -305,9 +307,34 @@ func ordered_compile_regression() -> void:
 
 func integer_strike_regression() -> void:
  var g := game("RIOT"); g.enter_node(0); g.hand.clear(); g.bw = 30
- g.enc.ice.assign([g._new_ice("CAPTCHA")]); g.enc.ice[0].seen.fill(true); g.enc.ice[0].str_mod = -8
- var target: Dictionary = g.enc.ice[0]
- g.trace = 39; g.strikes = 1
+ g.enc.ice.assign([g._new_ice("CAPTCHA")]); g.enc.ice[0].seen.fill(true)
+ g.reduce_ice_str(0, 8); g.trace = 39; g.strikes = 1
  var c := g._new_inst("INTEGER_UNDERFLOW"); g.hand.append(c); g.play_card(c.uid, 0)
- g.choose_sub(0, 1)
- check.call(g.pending.ice == 1 and is_same(g.enc.ice[1], target) and g.card_break_ok(1, 0), "INTEGER keeps same target after TRIPWIRE strike shifts ICE indices")
+ check.call(g.phase == "PLAYER" and g.trace == 39, "withdrawn negative-STR cash-out cannot break at zero")
+
+func zeroed_lifecycle() -> void:
+ var g := game("RIOT"); g.enter_node(0)
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW")])
+ check.call(g.would_zero(0, 4), "fresh positive ICE eligible")
+ g.infect(0, "ROT", 8)
+ check.call(g.enc.ice[0].zeroed and g.ice_str(0) == 0, "ROT consumes ZEROED")
+ g.enc.ice[0].harden = 3; g._sync_strengths()
+ check.call(g.ice_str(0) == 0, "spare ROT holds HARDENING at zero")
+ g.enc.ice[0].virus.clear(); g._sync_strengths()
+ check.call(g.ice_str(0) == 7 and not g.reduce_ice_str(0, 20), "recovery and second zero grant no second chance")
+ var fresh := g._new_ice("AUTO_RENEW")
+ check.call(not fresh.zeroed, "new encounter has fresh ZEROED state")
+ var floor_def := {"name": "FLOOR", "type": "FORTRESS", "str": 4, "str_floor": 3, "subs": [[{"k": "DEADLOCK"}]]}
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW", floor_def)])
+ g.reduce_ice_str(0, 20); g.infect(0, "ROT", 20)
+ check.call(g.ice_str(0) == 3 and not g.enc.ice[0].zeroed, "positive floor never ZEROED")
+ var zero_def := {"name": "ZERO", "type": "FORTRESS", "str": 0, "subs": [[{"k": "DEADLOCK"}]]}
+ g.enc.ice.assign([g._new_ice("AUTO_RENEW", zero_def)])
+ g.enc.ice[0].harden = 2; g._sync_strengths(); g.reduce_ice_str(0, 2)
+ check.call(not g.enc.ice[0].zeroed, "starts-at-zero ICE stays ineligible after gaining STR")
+ g.enc.ice.assign([g._new_ice("CONSENT_FORM"), g._new_ice("AUTO_RENEW")])
+ g.reduce_ice_str(1, 5) # Effective 6 to 1, RELAY keeps 2.
+ g.enc.ice[0].broken.fill(true); g._sync_strengths()
+ check.call(g.ice_str(1) == 0 and g.enc.ice[1].zeroed, "RELAY loss consumes ZEROED and excess loss is discarded")
+ g.enc.ice[1].harden = 1; g._sync_strengths()
+ check.call(g.ice_str(1) == 1, "STR gains rise from zero after RELAY loss")

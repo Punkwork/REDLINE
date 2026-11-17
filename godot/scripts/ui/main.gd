@@ -689,7 +689,11 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	pc.custom_minimum_size = Vector2(320 if is_main else 290, 350)
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color("#0a0a0c") if black else PANEL
-	sb.border_color = Color("#ff4d5e") if black else (Color("#e6ebf2") if is_main else Color("#4a5568"))
+	var zeroed_targets := g.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction", 0) > 0 and g.can_play(c.uid).ok and g.would_zero(i, int(CardDB.def(c.id).get("zeroed_reduction", 0))))
+	if not zeroed_targets.is_empty():
+		sb.set_border_width_all(3)
+		pc.tooltip_text = "ZEROED available: " + " / ".join(zeroed_targets.map(func(c): return CardDB.def(c.id).name))
+	sb.border_color = Color("#ffb020") if not zeroed_targets.is_empty() else (Color("#ff4d5e") if black else (Color("#e6ebf2") if is_main else Color("#4a5568")))
 	sb.set_border_width_all(4 if is_main or black else 1)
 	if targeting >= 0:
 		sb.border_color = Color("#4fd2ff")
@@ -735,11 +739,13 @@ func _ice_card(i: int, is_main: bool) -> Control:
 	head.add_child(nm)
 	var cur := g.ice_str(i)
 	var sv := VBoxContainer.new()
-	sv.add_child(_lbl("STR %d" % cur, 28, Color("#ff4d5e") if cur < 0 else TEXT))
+	sv.add_child(_lbl("STR %d" % cur, 28, TEXT))
 	if cur != d.str:
 		sv.add_child(_lbl("base %d" % d.str, 11, DIM))
 	head.add_child(sv)
 	v.add_child(head)
+	if ice.get("zeroed", false):
+		v.add_child(_lbl("ZEROED", 12, Color("#ffb020")))
 	# BOOTING pips
 	if d.get("ability", "") == "BOOTING":
 		var bh := HBoxContainer.new()

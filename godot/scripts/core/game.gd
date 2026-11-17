@@ -247,7 +247,7 @@ func _new_ice(id: String, definition: Dictionary = {}) -> Dictionary:
 	for s in d.subs:
 		broken.append(false)
 		seen.append(false)
-	return {"id": id, "definition": d, "str_mod": 0, "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {},
+	return {"id": id, "definition": d, "str_mod": 0, "zeroed": false, "zeroed_blocked": d.str <= 0 or int(d.get("str_floor", 0)) > 0, "last_str": int(d.str), "bomb": false, "broken": broken, "seen": seen, "rot": 0, "responses": 0, "rainbow": -1, "virus": {},
 		"break_progress": d.subs.map(func(_s): return 0), "escalation": {}, "corp_turns": 0, "curves": _curves_for(d)}
 
 func _curves_for(d: Dictionary) -> Dictionary:
@@ -373,6 +373,7 @@ func _start_turn() -> void:
 	for ice in enc.ice:
 		ice.bomb = false
 		ice.rainbow = -1
+	_sync_strengths()
 	if _rack_has("SURGE_PROTECTOR"):
 		shield += (2 + amp) * _rack_count("SURGE_PROTECTOR")
 	var n := draw_size()
@@ -444,6 +445,7 @@ func _drain_reboots() -> void:
 				"SHORT_LOOP":
 					bw += 1 + amp
 					draw_cards(2 + amp)
+		_sync_strengths()
 	draining_reboots = false
 
 func finish_scan() -> void:
@@ -583,7 +585,7 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"ZERO_FOOTPRINT":
 			trace = maxi(0, trace - mini(10, maxi(0, footprint_cap() - footprint())))
 			return true
-		"STACK_SMASH": enc.ice[target].str_mod -= int(enc.tag_counts.get("EXPLOIT", 0))
+		"STACK_SMASH": reduce_ice_str(target, int(enc.tag_counts.get("EXPLOIT", 0)))
 		"INTEGER_UNDERFLOW":
 			var n := mini(3, maxi(0, -ice_str(target)))
 			var br := {"same_ice": true}
@@ -600,7 +602,7 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"HARVEST":
 			extract(3 * int(enc.ice[target].virus.get("LEECH", 0)))
 			enc.ice[target].virus.erase("LEECH")
-		"PIVOT": enc.ice[target].str_mod -= 3 if inst.get("chain_active", false) else 2
+		"PIVOT": reduce_ice_str(target, 3 if inst.get("chain_active", false) else 2)
 		"COVER_FIRE": shield += 5 if inst.get("chain_active", false) else 3
 		"HANDOFF":
 			trace = maxi(0, trace - 2)
@@ -625,7 +627,7 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 				discard.append(inst)
 				phase = "CHOICE"
 		"PULP_SHIELD": shield += 3
-		"PROBE": enc.ice[target].str_mod -= 2
+		"PROBE": reduce_ice_str(target, 2)
 		# ECHO
 		"SMOKESCREEN":
 			shield += 2
@@ -650,11 +652,11 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 			enc.blackout = true
 			return true
 		# RIOT
-		"OVERLOAD": enc.ice[target].str_mod -= 2
-		"FEEDBACK": enc.ice[target].str_mod -= trace / 10
+		"OVERLOAD": reduce_ice_str(target, 2)
+		"FEEDBACK": reduce_ice_str(target, trace / 10)
 		"ADRENAL_SPIKE": bw += 1
 		"LAY_LOW": trace = maxi(0, trace - 3)
-		"SMASH": enc.ice[target].str_mod -= 4
+		"SMASH": reduce_ice_str(target, 4)
 		"ROAR": draw_cards(2)
 		"CRASH_CART":
 			trace = maxi(0, trace - 3)
@@ -713,12 +715,14 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"MIRROR":
 			shield += 3
 			draw_cards(1)
-		"DEEP_PROBE": enc.ice[target].str_mod -= 4
+		"DEEP_PROBE": reduce_ice_str(target, 4)
 		"STRESS_TEST":
-			for ice in enc.ice:
-				ice.str_mod -= 1
+			for i in enc.ice.size():
+				reduce_ice_str(i, 1)
 		"LOGIC_BOMB":
+			_sync_strengths()
 			enc.ice[target].bomb = true
+			_sync_strengths()
 			return true
 		"DEFRAG": draw_cards(1)
 		"STIM_PATCH": draw_cards(2)
@@ -735,7 +739,7 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"PAYDAY": extract(12)
 		"BALANCED_LOAD":
 			shield += 2
-			enc.ice[target].str_mod -= 1
+			reduce_ice_str(target, 1)
 		"UNINSTALLER":
 			var opts := []
 			for c in hand:
@@ -843,6 +847,7 @@ func _end_turn_effects() -> void:
 		_say("SHATTER: SLEDGE drops to STR 0.")
 	for ice in enc.ice:
 		ice.bomb = false
+	_sync_strengths()
 	if enc.turn >= 6 and enc.breaks_turn == 0 and not enc.breached:
 		_event("EV-10")
 	if enc.breached:
@@ -931,6 +936,7 @@ func response_finish() -> void:
 	for ice in ([] if enc.skipped else enc.ice):
 		if ice_definition(ice).get("passive", "") == "HARDENING" and ice.get("harden", 0) < 3:
 			ice["harden"] = ice.get("harden", 0) + 1
+	_sync_strengths()
 	enc.ghost = false
 	enc.smoke = 0
 	enc.vanish = false
@@ -1055,15 +1061,44 @@ func _cleanup() -> void:
 # Breaking ICE (Core Rules §5.3)
 # =====================================================================
 
+func _strength_floor(ice: Dictionary) -> int:
+	return maxi(0, int(ice.get("str_floor", ice_definition(ice).get("str_floor", 0))))
+
+func _raw_strength(i: int) -> int:
+	var ice: Dictionary = enc.ice[i]
+	var value: int = ice_definition(ice).str + ice.str_mod + ice.get("harden", 0)
+	if i > 0 and ice_definition(enc.ice[i - 1]).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false): value += 2
+	return value
+
 func ice_str(i: int) -> int:
 	var ice: Dictionary = enc.ice[i]
-	if ice.bomb:
-		return 0
-	var v: int = ice_definition(ice).str + ice.str_mod + ice.get("harden", 0) - int(ice.virus.get("ROT", 0)) - (amp if ice.virus.get("ROT", 0) > 0 else 0)
-	# RELAY: the ICE to the left props this one up while it has an unbroken subroutine.
-	if i > 0 and ice_definition(enc.ice[i - 1]).get("passive", "") == "RELAY" and enc.ice[i - 1].broken.has(false):
-		v += 2
-	return maxi(int(ice.get("str_floor", ice_definition(ice).get("str_floor", -99999))), v)
+	var floor_value := _strength_floor(ice)
+	if ice.bomb: return floor_value
+	var rot: int = int(ice.virus.get("ROT", 0))
+	return maxi(floor_value, _raw_strength(i) - rot - (amp if rot > 0 else 0))
+
+func _sync_strengths() -> void:
+	# Ordinary reductions cannot leave hidden debt. ROT counters are retained separately.
+	for i in enc.ice.size():
+		var ice: Dictionary = enc.ice[i]
+		var floor_value := _strength_floor(ice)
+		if not ice.bomb and _raw_strength(i) < floor_value:
+			ice.str_mod += floor_value - _raw_strength(i)
+		var current := ice_str(i)
+		if int(ice.get("last_str", current)) > 0 and current == 0 and not ice.get("zeroed_blocked", false) and floor_value == 0:
+			ice.zeroed = true
+		ice.last_str = current
+
+func would_zero(i: int, reduction: int) -> bool:
+	var ice: Dictionary = enc.ice[i]
+	return not ice.get("zeroed", false) and not ice.get("zeroed_blocked", false) and _strength_floor(ice) == 0 and ice_str(i) > 0 and reduction >= ice_str(i)
+
+func reduce_ice_str(i: int, amount: int) -> bool:
+	_sync_strengths()
+	var triggers := would_zero(i, amount)
+	enc.ice[i].str_mod -= mini(maxi(0, amount), maxi(0, ice_str(i) - _strength_floor(enc.ice[i])))
+	_sync_strengths()
+	return triggers
 
 func passive(i: int) -> String:
 	return ice_definition(enc.ice[i]).get("passive", "")
@@ -1175,7 +1210,7 @@ func break_sub(i: int, s: int) -> bool:
 	_do_break(i, s)
 	if pk.get("rot_per_break", 0) > 0:
 		var v: Dictionary = ice.virus
-		v["ROT"] = int(v.get("ROT", 0)) + pk.rot_per_break
+		infect(enc.ice.find(ice), "ROT", pk.rot_per_break)
 	if pk.get("trace_per_break", 0) > 0:
 		add_trace(pk.trace_per_break, false)
 	return true
@@ -1185,6 +1220,7 @@ func _do_break(i: int, s: int) -> bool:
 	var ice: Dictionary = enc.ice[i]
 	ice.break_progress[s] += 1
 	ice.broken[s] = ice.break_progress[s] >= deadlock_steps(ice_definition(ice).subs[s])
+	_sync_strengths()
 	enc.breaks_turn += 1
 	var d := ice_definition(ice)
 	if _has_deadlock(d.subs[s]):
@@ -1646,7 +1682,9 @@ func infect(i: int, strain: String, n: int) -> void:
 	if i < 0 or i >= enc.ice.size() or n <= 0:
 		return
 	var v: Dictionary = enc.ice[i].virus
+	_sync_strengths()
 	v[strain] = int(v.get(strain, 0)) + n
+	_sync_strengths()
 
 func virus_total(i: int) -> int:
 	var t := 0
@@ -1702,6 +1740,7 @@ func _purge(total: int) -> void:
 		enc.ice[i].virus = {}
 		if had and incub > 0:
 			infect(i, "ROT", 2 * incub)
+	_sync_strengths()
 	enc.purges += 1
 	purges_run += 1
 	enc.purge_limit += IceDB.CORPS.HALCYON.purge_step
@@ -1808,6 +1847,7 @@ func _cull_strain(strain: String = "") -> void:
 	if strain != "":
 		if int(v.get(strain, 0)) <= 0: return
 		v[strain] -= 1
+		_sync_strengths()
 		shield += 2
 		pending.n -= 1
 	if strain == "" or pending.n == 0 or v.values().all(func(n): return n == 0):
