@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CorporationSkin" load_steps=8 format=3]
+[ext_resource type="Script" path="res://scripts/ui/friendly_lie/corporation_skin.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/backgrounds/lucida-app.jpg" id="2"]
+[ext_resource type="Texture2D" path="res://assets/friendly_lie/backgrounds/halcyon-hostile.jpg" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/DM-Sans.ttf" id="4"]
+[sub_resource type="FontVariation" id="font400"]
+base_font = ExtResource("4")
+variation_opentype = {"wght": 400}
+[sub_resource type="FontVariation" id="font500"]
+base_font = ExtResource("4")
+variation_opentype = {"wght": 500}
+[sub_resource type="FontVariation" id="font700"]
+base_font = ExtResource("4")
+variation_opentype = {"wght": 700}
+[resource]
+script = ExtResource("1")
+corporation = "LUCIDA"
+app_name = "lucida rest"
+radius = 32
+header_style = ""
+background = ExtResource("2")
+font = SubResource("font400")
+medium_font = SubResource("font500")
+bold_font = SubResource("font700")
+ground = Color(0.937255, 0.913725, 0.980392, 1)
+accent = Color(0.788235, 0.713725, 0.949020, 1)
+deep = Color(0.294118, 0.231373, 0.478431, 1)
+extra = Color(1.000000, 0.850980, 0.780392, 1)
+secondary = Color(1.000000, 0.850980, 0.780392, 1)
+ink = Color(0.180392, 0.137255, 0.313725, 1)

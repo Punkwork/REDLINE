@@ -18,6 +18,7 @@ const PRIORITY := ["EV-35", "EV-16", "EV-15", "EV-14", "EV-02", "EV-01", "EV-03"
 	"EV-08", "EV-27", "EV-28", "EV-11", "EV-12", "EV-09", "EV-10", "EV-17", "EV-05", "EV-21", "EV-26", "EV-06", "EV-37", "EV-39"]
 const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LEFT, KEY_RIGHT, KEY_B, KEY_A]
 
+var friendly_skin: CorporationSkin = preload("res://themes/halcyon.tres")
 var g: Game
 var nr: NulRem
 var compile_first := -1
