@@ -28,7 +28,7 @@ class CostCircle extends Control:
  func _draw() -> void:
   draw_circle(Vector2(14,15),15,Color("#253237"))
   draw_circle(Vector2(13,13),14,Color("#D3DEDB"))
-  draw_circle(Vector2(13,13),11.5,FriendlyLook.HIGHLIGHT)
+  draw_circle(Vector2(13,13),11.5,Color("#29352F"))
   draw_line(Vector2(3,3),Vector2(7,3),Color.WHITE,1,true)
 func setup(owner_view, id: String, card_uid: int) -> void:
  view = owner_view; card_id = id; uid = card_uid
@@ -62,7 +62,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  if not corp:
   var separator:=ColorRect.new(); separator.color=Color("#9CADA666"); separator.position=Vector2(19,label_top+39); separator.size=Vector2(122,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(separator)
  var circle := CostCircle.new(); circle.position = Vector2(142, 5); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
- var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, FriendlyLook.TONER, FriendlyLook.BOLD)
+ var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, Color("#F2CD87"), FriendlyLook.BOLD)
+ cost.add_theme_color_override("font_shadow_color", Color("#D6B67580")); cost.add_theme_constant_override("shadow_offset_x", 0); cost.add_theme_constant_override("shadow_offset_y", 0); cost.add_theme_constant_override("shadow_outline_size", 2)
  cost.position = Vector2(143, 5); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
  var rule: String = view.game.card_text(id)
  var art_h := 44.0 if rule.length()<100 else (32.0 if rule.length()<145 else (16.0 if rule.length()<280 else 0.0))
@@ -98,7 +99,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  while font_size > 7 and font.get_multiline_string_size(rule, HORIZONTAL_ALIGNMENT_LEFT, 128, font_size).y > available: font_size -= 1
  rules.add_theme_font_override("normal_font", font); rules.add_theme_font_size_override("normal_font_size", font_size); rules.add_theme_color_override("default_color", printed_ink)
  var re := RegEx.new(); re.compile("([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)")
- rules.text = re.sub(rule, "[bgcolor=#D6B675][color=#111111]$1[/color][/bgcolor]", true)
+ rules.text = re.sub(rule, "[outline_size=2][outline_color=#D6B67535][color=#F2CD87]$1[/color][/outline_color][/outline_size]", true)
  rules.position = Vector2(16, y); rules.size = Vector2(128, available); body.add_child(rules)
  if corp and cache_h==0:
   var footer := FriendlyLook.label("We just want to stay in touch." if id=="TRACER" else "Recommended for you.",8,printed_ink,view.skin.font)

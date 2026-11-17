@@ -534,3 +534,9 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Interpretations to confirm:** exact amber hue is a visual proposal for designer review. PR #12 remains open.
 
 **Validation:** 357 rules checks and 625 cartridge UI checks pass; updated four-type PNG rendered from live Godot controls.
+
+## 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex)
+
+**Commit tag:** `cards-001-amber-glow`. Designer requested glowing amber text instead of highlighted backgrounds. Numeric rule text now uses warm amber ink (`#F2CD87`) with a faint translucent amber halo; removed rectangular fills. External BW badges use a dark instrument face and glowing amber numerals. Board textures stay visible.
+
+**Interpretations to confirm:** restrained halo intensity and dark BW instrument face are proposed treatments. No gameplay changes. 625 cartridge UI checks pass; refreshed live-control comparison and card/hand PNGs. PR #12 remains open for review.

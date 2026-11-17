@@ -46,7 +46,7 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | IDs | Change | Commit reference |
 |---|---|---|
-| CARDS-001 | Heavy SCRIPT/PROGRAM/PROTOCOL slot-cartridge templates; external BW rating tabs; brown/olive/teal board faces, oxide-red Whirlwind Bloatware and direct-print titles; common/uncommon/rare finish details; protected protrusions; nine close-ups and six/eight-card captures. Types, rarity weights, costs and rules unchanged. | **BUILT** — `cards-001-amber` |
+| CARDS-001 | Heavy SCRIPT/PROGRAM/PROTOCOL slot-cartridge templates; external BW rating tabs; brown/olive/teal board faces, oxide-red Whirlwind Bloatware and direct-print titles; common/uncommon/rare finish details; protected protrusions; nine close-ups and six/eight-card captures. Types, rarity weights, costs and rules unchanged. | **BUILT** — `cards-001-amber-glow` |
 | CHROME-001 | Refine the CAPTCHA encounter in the designer-selected Chrome Deco direction: readable real rules/cards, illustrated mascot shells, atrium, corporate escalation and native interaction feedback. Ten refreshed full-screen PNG samples; pearl-enamel ICE service plaques; type-specific heavy slot cartridges with outside BW tabs and restrained rarity finishes; prototype art and final fidelity await review. | **BUILT** — `chrome-001-enamel` (code `chrome-001-step5`) |
 | VIS-001 | The Friendly Lie encounter: fonts/skins, zine hand/HUD, mascot scans and moods, corporation break states, drag/motion/accessibility, seven PNG review fixtures. Visual only; ZEROED/TUMBLE integrated first. | **BUILT** — `vis-001g` (steps `vis-001a`–`vis-001g`) |
 | TUMBLE-001 | Remove broken TUMBLER subs and tumble immediately active replacements | **BUILT** — `zeroed-tumble-step3` |
