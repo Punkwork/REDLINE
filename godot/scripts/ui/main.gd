@@ -18,6 +18,8 @@ const PRIORITY := ["EV-35", "EV-16", "EV-15", "EV-14", "EV-02", "EV-01", "EV-03"
 	"EV-08", "EV-27", "EV-28", "EV-11", "EV-12", "EV-09", "EV-10", "EV-17", "EV-05", "EV-21", "EV-26", "EV-06", "EV-37", "EV-39"]
 const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LEFT, KEY_RIGHT, KEY_B, KEY_A]
 
+var friendly: FriendlyEncounter
+var legacy_widgets: Array = []
 var friendly_skin: CorporationSkin = preload("res://themes/halcyon.tres")
 var g: Game
 var nr: NulRem
@@ -81,6 +83,7 @@ func _ready() -> void:
 	g = Game.new()
 	g.animate = true
 	_build_layout()
+	_install_friendly()
 	_new_run()
 
 func _make_theme() -> Theme:
@@ -425,6 +428,13 @@ func refresh() -> void:
 		return
 	_detect_tumbles()
 	_handle_events()
+	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE"]
+	friendly.visible = friendly_active
+	for widget in legacy_widgets: widget.visible = not friendly_active
+	if friendly_active:
+		friendly.sync(g)
+		_build_overlay()
+		return
 	_build_hud()
 	_build_info()
 	_build_rig()
@@ -1650,3 +1660,12 @@ func _tumble_reel(i: int, slot: int, sub: int, final_row: Control) -> Control:
 	slide.tween_property(arriving, "position:y", 0.0, 0.42).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	slide.tween_callback(func(): final_row.modulate.a = 1.0; window.queue_free())
 	return frame
+
+func _install_friendly() -> void:
+	for child in get_children():
+		if child is Control and child not in [overlay, inspect, blocker]: legacy_widgets.append(child)
+	friendly = FriendlyEncounter.new()
+	friendly.ui = self
+	friendly.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(friendly)
+	move_child(friendly, blocker.get_index())

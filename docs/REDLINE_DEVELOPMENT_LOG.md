@@ -391,3 +391,12 @@ TESTS: 352 passed, 0 failed
 **Interpretations to confirm:** only HALCYON has supplied hostile background art; the other two resources leave that texture unset rather than reusing HALCYON art. Corporate fonts and palettes are isolated from the invariant Rustler theme.
 
 **Validation:** Godot 4.3 editor import and script/resource parsing. No gameplay data or values changed. ZEROED/TUMBLE from PR #9 were integrated into this feature branch first; stabilization itself is unchanged.
+
+
+## 2026-11-17 — VIS-001b: encounter scaffold and paper hand (Codex)
+
+**Commit tag:** `vis-001b`. Added a 1600×1000 encounter presentation inside the existing main controller: corporate app background, node/TRACE tags, reserve and deck data, fixed zine HUD, response strip, stationary NUL/REM note, RIG/RACK strip, END TURN and END RUN. Existing map/reward/choice flows remain with the controller. Six 146×218 paper cards use hard shadows and highlights; 7+ fan without changing deck or hand limits. Hover, wheel and arrow browsing bring each card forward. Bloatware uses the corporate font, rounded white body and red header.
+
+**Interpretations to confirm:** long card rules progressively reduce the art placeholder and font size to retain all rule text; full text also remains available in inspection/tooltips. Extremely large hands keep readable individual cards and use fan browsing, rather than imposing a cap. BW slits represent spending from the left; numeric BW remains authoritative for bonuses.
+
+**Validation:** Godot 4.3 import and display-backed encounter render, including six actual game cards. This step establishes layout; mascot/scan replacement follows in VIS-001c. No gameplay values changed.
