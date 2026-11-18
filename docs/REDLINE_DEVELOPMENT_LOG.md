@@ -4,12 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CHROME-001 step 4: the same atrium reveals its purpose (Codex)
-
-**Changed:** hostile background is an illustrated edit of the same atrium/perspective, revealing clean observation galleries, cameras, processing rails and restraint cradles under controlled red light. Cracking exposes a restrained 20% glimpse beneath the existing warnings; strike 1 switches to the hostile lighting and a sculpted chrome modal; strike 2 keeps the revealed environment. Generated backgrounds contain no game text. The actual Game strike/TRACER/Black ICE transitions still own the state. Paper cards and counters keep their style.
-
-**Samples:** `04a-cracking.png`, `04b-first-strike.png`, `04c-mask-off.png`. Stage-4 Godot fixture reports zero failures, including readable cards/illustration bounds and scan widths in the three-ICE state. **Interpretations to confirm:** 20% Cracking reveal is a working compositing value; scene treatment and generated environment art are provisional. No game rule, TRACE threshold or card insertion behaviour changed.
-
 ## 2026-11-17 — CHROME-001 step 5: clear interactions and refreshed five-step review set (Codex)
 
 **Commit tag:** `chrome-001-step5`. Legal subroutine targets get dashed lime outlines and a solid hover border; the separate top-center feedback panel shows the actual selected Icepick, target, BW cost and MARGIN, or the engine's rejection reason. Successful breaks confirm actual BW spent and update the struck rule/mood. The drag cursor is small; duplicate native tooltips are suppressed during drag to avoid covering rules. Raised/targeted hand cards get a lime paper edge. Normal click-to-break, hidden rules, immediate TUMBLE and reduced motion remain. Eight UI scripts run in CI, including native compatible/incompatible Chrome drags and bounded card illustrations. No core Game/CardDB/IceDB files or rule values were changed by CHROME-001.
@@ -414,3 +408,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 ## 2026-11-18 — EVENT-002/003: choices in every event; a 10th event (Claude)
 
 Designer: one random room should give "+5 max vitae or choose a random rare card", and "Giving the rustler choices in each of these random rooms helps to make them feel less unfair." Answers: add it as a 10th event; MAINTENANCE WINDOW gets a choice; the rule covers every event except AMBUSH. Upgrades §3 now lists 10 events: EVENT-002 rule, MAINTENANCE WINDOW = heal 6 VITAE or −5 TRACE, new CARE PACKAGE, odds AMBUSH 20% / BROKER 5% / eight others about 9.4% each. Master register; HANDOFF row for Claude Code. **Interpretations to confirm:** the name CARE PACKAGE; +5 Max VITAE also raises current VITAE by 5 and lasts the run; MAINTENANCE WINDOW is either/or (it used to give both). **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — EVENT-004 direction: powerful Ghostware, permanent Bloatware (Claude)
+
+Designer: a random event offering "a specific ghostware that bestows a negative, a permanent bloatware in their deck that can't be removed through normal means"; it's "a benefit to the rustler, but because of how powerful it is, it comes with a negative"; a dedicated Ghostware (option B) that "needs designing". Recorded as DIRECTION in the master register, a "planned, in design" note in Upgrades §3, and a HANDOFF design task (Claude) carrying Claude's first-draft proposal (one Ghostware and Bloatware per corporation) and the open questions. Nothing approved beyond the direction. **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 4: the same atrium reveals its purpose (Codex).
