@@ -1,6 +1,6 @@
 # PANOPTICON — THE ARCHIPELAGO: BEING TRACED MEANS DISAPPEARING
-**Version:** 0.3 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ARCH-001
-**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the specific names and sample lines are still for approval as copy. No rules change.
+**Version:** 0.4 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ARCH-001
+**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the programme small print and the 15 relocation lines are approved (ARCH-LINES-001); the island name pool is still working copy. No rules change.
 **Builds on:** ZINE-002 (`REDLINE_ATOMIC_DECO_PUNK.md` §2.2, especially reason 4 in §2.2.2, "the traced disappear from the record"); the Friendly Lie and the corporation states (`REDLINE_VISUAL_LANGUAGE.md`); FACADE-001; LUCIDA edits the record (ADP §6.3); SIGNAL-001 (ADP §8); defeat in `REDLINE_CORE_RULES.md` §4.
 
 ---
@@ -42,25 +42,37 @@ The **Archipelago** is the network of corporate facilities where traced people g
 Designer: **"The island names should resemble names of long-term care residences and the more generic the name the better."**
 
 - **Every island is named like a long-term care home:** a soft nature word plus a residence word (Manor, Residence, Lodge, Place, Gardens, Care Centre). No ™, no slogans, no corporate brand in the name itself. The blandness is the point: a name you've driven past a hundred times and never thought about.
-- **The corporation appears only in small print underneath:** "A HALCYON Care Community" · "An IRONWATCH Supported Living Residence" · "A LUCIDA Rest & Recovery Home". Same Poiret One / DM Sans rules as any corporate copy.
+- **The corporation appears only in small print underneath, as its programme name (APPROVED 2026-11-18):** *Halcyon Homesteads™* (HALCYON), *SafeHarbor Residences™* (IRONWATCH), *Long Rest Retreats™* (LUCIDA). The island is bland; the trademark lives only in the fine print, e.g. **Sunnyside Manor** / *A Halcyon Homesteads™ community*. Same Poiret One / DM Sans rules as any corporate copy.
 - **There are many islands, and the names repeat across corporations.** The same kind of name could belong to any of them, which quietly hints that they're one system (SIGNAL-001) without saying so.
 - **Avoid exact names of well-known real care chains** (check before final copy); generic word combinations are fine.
 
 **Working name pool (for approval):**
 
-| Corporation | Working names | Small-print line |
+| Corporation | Working names | Small print (programme, APPROVED) |
 |---|---|---|
-| **HALCYON** | Sunnyside Manor · Maple Grove Residence · Brookside Place | "A HALCYON Care Community" |
-| **IRONWATCH** | Pine Ridge Residence · Cedar Hill Care Centre · Stonebrook Lodge | "An IRONWATCH Supported Living Residence" |
-| **LUCIDA** | Willow Creek Lodge · Meadowview Gardens · Quiet Waters Home | "A LUCIDA Rest & Recovery Home" |
+| **HALCYON** | Sunnyside Manor · Maple Grove Residence · Brookside Place | *A Halcyon Homesteads™ community* |
+| **IRONWATCH** | Pine Ridge Residence · Cedar Hill Care Centre · Stonebrook Lodge | *A SafeHarbor Residences™ property* |
+| **LUCIDA** | Willow Creek Lodge · Meadowview Gardens · Quiet Waters Home | *A Long Rest Retreats™ home* |
 
-**What each corporation says when someone goes (working, for approval):**
+**Relocation lines (ARCH-LINES-001, APPROVED 2026-11-18).** Designer: "Relocation lines i leave up to your discretion"; all 15 approved ("Perfect- add them"). `[NAME]` is the lost Rustler. The defeat notice (§5) picks one line from the run's corporation; when a line names an island, it can be swapped for any island in that corporation's pool. Lines marked † let the menace show through a little more.
 
-| Corporation | Line |
-|---|---|
-| **HALCYON** | "They've moved to Sunnyside Manor. We'll take care of it." |
-| **IRONWATCH** | "They're at Pine Ridge now. They're safe. Stay where you are." |
-| **LUCIDA** | "They're resting at Willow Creek. Let's not wake them." |
+| # | Corporation | Line |
+|---:|---|---|
+| 1 | HALCYON | "[NAME] has moved to Sunnyside Manor. We'll take care of it." |
+| 2 | HALCYON | "[NAME]'s room is ready at Maple Grove. Everything has been arranged." |
+| 3 | HALCYON | "Good news! [NAME] has found a quieter home at Brookside Place." |
+| 4 | HALCYON | "[NAME] won't be needing their things anymore. We've donated them on their behalf." † |
+| 5 | HALCYON | "Visiting hours at Sunnyside Manor are being updated. We'll let you know." |
+| 6 | IRONWATCH | "[NAME] has been placed in protective residence at Pine Ridge. They're safe now." |
+| 7 | IRONWATCH | "For their own safety, [NAME] has been moved to Cedar Hill Care Centre." |
+| 8 | IRONWATCH | "[NAME] is at Stonebrook Lodge now. There's no need to ask again." † |
+| 9 | IRONWATCH | "Your block is safer today. [NAME] is being looked after at Pine Ridge." |
+| 10 | IRONWATCH | "Thank you for your concern. [NAME]'s location is private, for everyone's protection." † |
+| 11 | LUCIDA | "[NAME] is resting at Willow Creek. Let's not wake them." |
+| 12 | LUCIDA | "[NAME] has begun a long rest at Meadowview Gardens. Breathe in." |
+| 13 | LUCIDA | "[NAME] was so tired. Quiet Waters will help them sleep." |
+| 14 | LUCIDA | "[NAME] is dreaming now. You can dream about them too." † |
+| 15 | LUCIDA | "Shh. [NAME] is settling in at Willow Creek. Settle in with them." † |
 
 - On corporate maps the islands appear as **care homes, parks or "under development"** plots, each with its generic name. On the Rustlers' defaced tourist map (ADP §6.5) they're circled in marker and labelled with dates.
 - **No one comes back (APPROVED 2026-11-18).** Designer: "4 no." There is no rescue, return or escape from the Archipelago, in rules or in story. The zines can argue about rumours, but no rumour is ever confirmed.
@@ -91,7 +103,7 @@ The rules stay exactly as they are (Core Rules §4: the run ends when VITAE reac
 | **TRACE rising, Cracking** | Already the corporation noticing you. At high bleed, a corporate toast can slip and mention "accommodation" or "a quiet place" (leak table, ADP §4.3). |
 | **Strike modal** ("Stay where you are.") | The knock on the door. |
 | **Mask off** | The arrest happening in daylight: the corporation stops pretending. |
-| **Defeat (the run ends)** | **No death animation.** The rig goes quiet; the screen holds on the empty workstation. A corporate notice in Poiret One: *"[RUSTLER] has moved to [ISLAND NAME]. We'll take care of it."* Then a page of *THE CARBON* in plain type: Rustler, issue number, where they were taken (the island's name, crossed out and rewritten as "the Archipelago"), "Taken to the Archipelago." |
+| **Defeat (the run ends)** | **No death animation.** The rig goes quiet; the screen holds on the empty workstation. A corporate notice in Poiret One: one of the run corporation's approved relocation lines (§4.0, ARCH-LINES-001), with the island name and its programme small print. Then a page of *THE CARBON* in plain type: Rustler, issue number, where they were taken (the island's name, crossed out and rewritten as "the Archipelago"), "Taken to the Archipelago." |
 | **Between runs** | The corporate side never mentions lost Rustlers again (they're unpersons). The zines do. |
 
 **THE CARBON remembers across runs.** Every Rustler lost in a run is added to a local, persistent list (like the ads' stats file, ADP §6.1: local only, deletable). The player can open it from DEAD DROP: a growing, typed, carbon-faded record of everyone they've lost. That's the samizdat answer to disappearance, and it gives each defeat weight without punishing the player mechanically. After the reveal (§4.1), the player understands what the list really was.
@@ -124,6 +136,6 @@ Log under **ARCH-001** in `REDLINE_DEVELOPMENT_LOG.md`; note anything invented a
 |---|---|---|
 | **ARCH-1a** | **Defeat screen:** replace any death framing with the relocation notice (Poiret One, corporate skin of the run's corporation) followed by a *THE CARBON* page (Space Mono or a typewriter face, carbon-faded decoration that never touches glyph contrast). Reduced-motion version. | Defeat in a HALCYON fixture shows both; contrast passes 4.5:1. |
 | **ARCH-1b** | **THE CARBON record:** a local file (`user://carbon.json`) appending Rustler, issue number, corporation, Node and date on each defeat; viewable from DEAD DROP; deletable from settings. | Entries survive restarts; deleting the file empties the record; nothing leaves the machine. |
-| **ARCH-1c** | **Copy and guards:** the island name pool, small-print lines and corporate relocation lines (§4.0) and the Archipelago lines (§6) added to the copy tables with approval status. Tests: the word "Archipelago" never appears in a corporate-tagged or rules-tagged string; the word "gulag" never appears in any on-screen string; every line that states or explains what the islands are for is tagged `reveal` and covered by the SIG-5d guard. | The tests pass, and each fails when a line breaks its rule. |
+| **ARCH-1c** | **Copy and guards:** the island name pool, programme small print and the 15 approved relocation lines (§4.0, approved status recorded per line) and the Archipelago lines (§6) added to the copy tables with approval status. Tests: the word "Archipelago" never appears in a corporate-tagged or rules-tagged string; the word "gulag" never appears in any on-screen string; every line that states or explains what the islands are for is tagged `reveal` and covered by the SIG-5d guard. | The tests pass, and each fails when a line breaks its rule. |
 
 **Out of scope for now:** the reveal and end sequence (shared with SIGNAL-001's out-of-scope list), final copy, and any island location or visit (none planned: no one comes back).
