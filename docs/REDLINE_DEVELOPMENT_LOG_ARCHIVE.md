@@ -1793,3 +1793,29 @@ TESTS: 352 passed, 0 failed
 **Interpretations to confirm:** Cracking persists after strike 1 even if TRACE is reduced below 20, since the Friendly definition requires no strikes. The modal shows the real post-strike TRACE of 20 in the HUD rather than faking 40; its copy describes the strike and inserted TRACER. The toast lasts 3 seconds; the modal lasts 2.5 seconds or until dismissed. SPAM's proposed footer is “Recommended for you.” A red rule chip uses toner text for contrast. All distortion stays behind opaque text panels.
 
 **Validation:** Godot 4.3 parser; state changes read Game.trace/strikes and never insert cards or Black ICE themselves. Only the existing game rules cause those changes. Live-state fixture screenshots follow in VIS-001g.
+
+## 2026-11-17 — VIS-001f: live drag targets, mascot motion and reduced motion (Codex)
+
+**Commit tag:** `vis-001f`. Added installed-Icepick drag targets with legality/cost tooltips, card drag previews and dashed hand gaps, VOID pupil tracking, and WATCHER's actual TRACE warning. The existing break API accepts an optional selected Icepick; omitted selection still uses the cheapest legal pick. Added cheery bob/blinks, wary brows, lethal shake/glow, response lunges, break flinch/strike-through, knockout slide and scan peel, background cross-fade, strike-card flight and Mask-off transition. Reduced motion is persistent and available on both selection and encounter screens; it removes ambient/reel motion, flashes and typing without shortening response timing.
+
+**Interpretations to confirm:** FORTRESS bob period is 3.6 s; VOID amplitude is 0.3 px; TUMBLER fidget is ±0.35°. Card snaps are linear 90 ms. The scan's knockout peel moves/tilts without fading its rules, retaining readability. Strike flight is 350 ms and toast entry is 180 ms. Cosmetic blink randomness uses a separate generator, never Game's RNG. WATCHER shows 0 additional TRACE for ECHO or active DECOY SIGNAL. Existing reel glass is omitted over the new scan text. These are presentation choices, not approved rule changes.
+
+**Validation:** Godot 4.3 import, display render, full rules suite **357 passed, 0 failed**. Five new rules regressions cover explicit Icepick selection, unchanged automatic selection/cost, incompatible/missing pick, and insufficient BW; invalid drops spend nothing. No gameplay numbers changed. Display interaction and screenshot fixtures are checked in VIS-001g.
+
+## 2026-11-17 — VIS-001g: live fixtures, readability and interaction regression (Codex)
+
+**Commit tag:** `vis-001g`. Added seven phone-review PNG fixtures: friendly turn 1, wary/lethal turn 3, Cracking, Strike 1, Mask off, DOORBELL CAM card drag and eight-card hand. Updated the existing large-hand test in place for fan browsing and real last-card clicks at 6/7/8/9/10/16 cards. Added native card and selected-Icepick drag checks, actual strike/TRACER/Black ICE checks, tunable moods, hidden VOID rules, reduced-motion timing, BREACH mood and full authored-card text fit. All 112 authored card definitions fit their rule text. Retained ZEROED target borders and paper inspection; response chips flash with the firing rule. CI runs all seven display scripts at a fitting desktop size. The guide/status are updated in place; HANDOFF is the sole task list. Audio was muted during final visual checks at the designer's request; no audio assets or dialogue were changed.
+
+**Interpretations to confirm:** The turn-3 fixture advances two real responses and resolves DISCARD normally. The real conveyor has PULP 6 in slot 1 and a new TRACE 3 in slot 2 after breaking S4; it is not rearranged to force mockup 09's slots. Fixture preparation uses granted cards/BW, and the eight-card hand is deliberately constructed, not a starting-deck claim. Three-mascot boards scale silhouettes to 80% while retaining full-size scans. Longer scans scroll vertically and the response strip scrolls horizontally; hand cards never shrink. Long NUL/REM notes fit by reducing type to a minimum of 8 px. Red buttons/Bloatware headers use toner rather than pale text for contrast. Proposed wording and silhouette choices in VIS-001c remain unapproved.
+
+**Validation:** Godot 4.3 imports; full rules suite **357 passed, 0 failed**. Seven display-backed scripts pass; Friendly Lie has **170 checks, 0 failures**. Large-hand and playtest 2/3 interaction tests report zero failures. Minimum five-second response timing is checked with reduced motion enabled. Thirty seeds per Rustler exactly match the pre-VIS ZEROED/TUMBLE results (including two GENERALIST stalls; not deaths):
+
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7
+TESTS: 357 passed, 0 failed
+```
+
+Average end deck sizes GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE for each. No gameplay values changed by VIS-001; the optional Icepick-selection API preserves existing default costs/selection. ZEROED/TUMBLE PR #9 was integrated locally before VIS; the visual PR includes that dependency and targets stabilization without pushing to or merging it. Designer visual approval and a Windows playtest remain outstanding.

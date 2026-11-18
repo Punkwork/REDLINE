@@ -1,6 +1,8 @@
 # PANOPTICON — Playtest QA checklist
 **Version:** 0.6 · **Date:** 2026-11-18 · **For build:** HALCYON PLAYTEST 6, `0.6.0-playtest.6` (tag `playtest-6`)
 
+Build source `22eb17f`. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44314368001) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44314368001/artifacts/14431722167)
+
 Use one copy per playtest run. The live, fill-in version is the **REDLINE Playtest QA Checklist** Sheet ([link](https://claude.ai/artifact/1ARG6jjW9cp34EGq23drFk)) (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
 **For every run:** choose a Rustler and play the available HALCYON route. Record the route, cards, CRED and result manually. Mark summary export and whole-heist checks N/A for this slice.

@@ -6,7 +6,7 @@ Playtest 6 adds corporate newsreels and hesitation lines, local personalized ads
 
 ## Get the Windows build
 
-Open the successful build run on `release` under **GitHub → Actions → Godot validation and Windows playtest build**. Download `PANOPTICON-HALCYON-PLAYTEST-6-0.6.0-playtest.6-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
+Open the successful Playtest 6 build on `release`. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44314368001) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44314368001/artifacts/14431722167) Download `PANOPTICON-HALCYON-PLAYTEST-6-0.6.0-playtest.6-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
 
 Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt` contains the executable's SHA-256. Use the bundled **Playtest QA Checklist v0.5** (`REDLINE_PLAYTEST_CHECKLIST.md`). Mark checks for unavailable routes, features, or later mechanics **N/A**.
 
