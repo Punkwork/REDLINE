@@ -85,7 +85,8 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ADP-001 | Still open in `REDLINE_ATOMIC_DECO_PUNK.md` §7: grafts (ADP-3c); whether the Cracking reveal grows with bleed (Q4); a Deco display face (Q5); whether barcodes and punch cards ever mean something in play (Q6). Approved and ready for Codex: Phase 1 (ADP-1a–e), then ADP-3a and ADP-3b. | Claude, 2026-11-17 | Partly answered |
+| ADP-001 | Phase 2 (voice leaks, hesitation lines, corporate vocabulary) not yet approved. Approved and ready for Codex: Phase 1 (ADP-1a–f), then Phase 3 (ADP-3a–c). | Claude, 2026-11-17 | Partly answered |
+| SIGNAL-001 | The seven questions in `REDLINE_ATOMIC_DECO_PUNK.md` §8: one card per corporation?; what the player knows and when (RUN-006); the umbrella corporation and its name; its signal vs the First Signal; a name that doesn't clash with the Black Market Uplink; keeping synchronization ambiguous; losing or varying cards. No build until answered. | Designer direction, recorded by Claude, 2026-11-17 | Open |
 
 ---
 

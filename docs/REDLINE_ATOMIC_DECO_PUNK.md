@@ -1,6 +1,6 @@
 # PANOPTICON — ATOMIC DECO PUNK: MAKING THE SPLIT REALITY FELT
-**Version:** 0.2 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
-**Status:** **Partly approved (2026-11-17).** Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1), **Phase 1** (Part 3), and the two deliberately unsettling features, **ads that know you (ADP-3a)** and **LUCIDA record edits (ADP-3b)**. Everything else is still CONCEPT; the open questions are in §7. Build only approved tasks.
+**Version:** 0.3 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
+**Status:** **Mostly approved (2026-11-17).** Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1); the **hostile reveal growing with bleed** from 20% to 60% (§2); **Poiret One** for corporate headlines (§3.5); **Phase 1** and **Phase 3** (Part 3: bleed and sound; ads that know you, LUCIDA record edits, grafts). The designer also set a story direction, **SIGNAL-001: three punch cards** (§8), whose details are open. Still CONCEPT: Phase 2 and the "later" ideas. Open questions are in §7. Build only approved tasks.
 **Builds on:** *Atomic Deco Punk — DIRECTION* in `REDLINE_MASTER_DESIGN.md` §1; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`, VIS-001); CHROME-001; CARDS-001; RUSTLER-LOOK-001; FACADE-001 (`REDLINE_CORPORATE_FACADES.md`).
 **For:** Codex (Godot build, `godot/`).
 
@@ -37,7 +37,7 @@ What that means for design (the principles are the designer's; the examples are 
 | **The machine code is barcodes and punch cards** | This world's equivalent of QR codes. Rustlers write to machines in barcode strips and punched holes; it's how their paper talks to corporate systems. | A barcode strip printed along a zine's edge, punched-hole rows along a cartridge label, a punched-tape tail on a NUL/REM note, a jammer pattern made of punched holes. |
 
 **Rules for using it**
-- The codes are **decoration and world-building**, not a second rules channel. They never replace readable rule text (ADP-R1, readability rules). If a code ever needs to *mean* something in play, the designer decides that separately.
+- Barcodes and punched strips in general are **decoration and world-building**, not a second rules channel. They never replace readable rule text (ADP-R1, readability rules). **The exception is the three First Signal punch cards** (SIGNAL-001, §8), which are the run's goal.
 - **No QR codes anywhere** in the Rustler layer: barcodes and punch cards only.
 - The **cartridges** (CARDS-001) already fit this definition; future card art should show the hack (what was bolted on, and why). For instance, GHOST SIGNAL (a CLOAK card) could be the Möbius-strip foil jammer.
 - The **zine HUD stays as it is for now** (RUSTLER-LOOK-001). This definition is the brief for its redesign whenever the designer revisits the HUD, and it shapes the seam (§3.2).
@@ -51,7 +51,7 @@ What that means for design (the principles are the designer's; the examples are 
 | Strike modal on screen | 0.8 |
 | Mask off (strike 2+) | 1.0 |
 
-The 0.2 at the start of Cracking is the approved 20% hostile reveal; the reveal now grows with bleed instead of staying fixed (needs designer approval, §7 Q4). Bleed changes smoothly over about 400 ms (instantly with reduced motion).
+The 0.2 at the start of Cracking is the approved 20% hostile reveal. **The reveal grows with bleed, from 20% at TRACE 20 to 60% at TRACE 39 (APPROVED 2026-11-17).** Designer: "the hostile reveal should grow as trace rises, from 20% to 60%". Bleed changes smoothly over about 400 ms (instantly with reduced motion).
 
 ## 3. Visual
 
@@ -70,8 +70,14 @@ The corporations should feel like systems the player is a speck inside, not stor
 ### 3.4 The rig wears under pressure
 The Rustler layer shows strain as bleed rises, like a hand-built rig running hot: more toner speckle and slight misregistration of the panel shadows (the paper), tape lifting at panel corners, foil crinkle and a faint flicker on the barcode and punched-hole strips (the bolted-on tech, §2.1). **Only on panel surfaces, borders, shadows and decorative strips, never on glyphs** (readability rule). At bleed 1.0 it should look like a rig held together by hand, still fully readable.
 
-### 3.5 A Deco display face (needs a designer choice)
-DM Sans stays for corporate body copy. Corporate wordmarks, plaque titles, strike modals and propaganda could use one open-licence Deco display face, so the corporations read as monumental. Candidates: **Limelight**, **Poiret One** (both OFL, Google Fonts). On the Rustler side, stencil and hand lettering could join Space Mono for scrawls and graffiti (§4.3). No build task until the designer picks.
+### 3.5 Poiret One for corporate headlines (APPROVED 2026-11-17)
+Designer: "I think a deco display face is ideal for corporate headlines, Poiret One suits headlines". DM Sans stays for corporate body copy, buttons and rule text.
+
+**Where Poiret One goes:** corporate wordmarks ("halcyon home", "IRONWATCH SafeStreets", "lucida rest"), background headlines ("Good morning.", "Your block is safe.", "Breathe in."), strike-modal headlines ("We see you.", "Stay where you are.", "Let's rest now."), Node-entry and loading-screen titles, newsreel cards, propaganda and ads (§6.1).
+
+**Where it doesn't:** rules, numbers, plaques' rule lines, buttons, toasts' body text, anything under about 28 px. Poiret One is a thin, hairline face; at small sizes or over busy art it fails the readability rules. Use it large, on a solid enamel or plaque ground, and check 4.5:1 contrast like any other text. It's never used on the Rustler side.
+
+On the Rustler side, stencil and hand lettering could join Space Mono for scrawls and graffiti (§4.3); that's part of Phase 2.
 
 ## 4. Tone and language
 
@@ -151,9 +157,10 @@ Designer: "2 yes".
 | Step | What | Where (current code) | Done when |
 |---|---|---|---|
 | **ADP-1a** | **Bleed value** (ADP-R2): a pure function of TRACE, strikes and whether the strike modal is showing, using the curve in §2. Smooth changes over ~400 ms; instant with `reduced_motion`. Expose the value for every presentation system; never read by rules code. | Computed next to `corporation_state` in `scripts/ui/friendly_lie/encounter.gd` (`update_corporation()`); the curve in the data file. | Unit tests cover each row of the §2 table, the post-strike floor of 0.2, and reduced motion. A debug readout shows bleed in the playtest build. |
-| **ADP-1b** | **Reveal follows bleed** (§2): the `surveillance_layer` opacity can follow bleed instead of switching on at Cracking; Strike and Mask off still swap to the full hostile background as now. **Q4 is still open:** build it behind a data flag `reveal_follows_bleed`, default **false** (fixed approved 20%). | `apply_background()` in `encounter.gd`. | With the flag off, Cracking looks exactly as now. With it on, TRACE 20 matches the approved 20% and grows to the TRACE-39 value. Strike and Mask off look exactly as before either way. |
+| **ADP-1b** | **Reveal follows bleed** (§2, approved): the `surveillance_layer` opacity follows bleed through Cracking, **20% at TRACE 20 to 60% at TRACE 39**, instead of a fixed 20%; Strike and Mask off still swap to the full hostile background as now. Keep the 20% and 60% ends in the data file. | `apply_background()` in `encounter.gd`. | TRACE 20 shows 20%, TRACE 39 shows 60%, values between are linear; Strike and Mask off look exactly as before. |
 | **ADP-1c** | **Rig wear** (§3.4, updated for ZINE-001): a CanvasItem shader on zine panel surfaces, borders and shadows (toner speckle, shadow misregistration up to 2 px, edge darkening), scaled by bleed; plus simple overlays for lifting tape corners. Add a thin decorative barcode or punched-hole strip to the Node and TRACE tags (§2.1; no QR codes), which flickers faintly at high bleed. **Never applied to text nodes.** A cap for reduced motion (static speckle, no flicker). | Zine panels built in `encounter.gd` / `look.gd`; shader under `godot/themes/`. | Screenshots at bleed 0, 0.4 and 1.0 show the wear; every label still passes 4.5:1 contrast; no shader touches a glyph. |
 | **ADP-1d** | **Two-track music** (§5.1): an `AudioStreamSynchronized` (Godot 4.3+) with stems *corporate*, *rustler* and *drone*. Stem volumes follow bleed. Wow and flutter on the corporate stem: a slow LFO on its pitch (±0 cents at bleed 0, up to about ±35 cents at 0.6), back to exactly in tune at 1.0. The corporate chime on strike. Separate music volume setting. **Placeholder stems:** short loops are fine (generated tones or simple synthesis); final music is out of scope. Record every source in `godot/audio/SOURCES.md`. | New `scripts/ui/friendly_lie/music.gd`; stems under `godot/audio/music/`. | In a scripted run from TRACE 0 to Mask off, the mix and detune audibly follow the §5.1 table; the stems stay in sync; the volume slider and mute work. |
+| **ADP-1f** | **Poiret One** (§3.5): add `PoiretOne-Regular.ttf` and its OFL licence under `godot/assets/fonts/` (source: the `google/fonts` repository, `ofl/poiretone/`), recorded in the fonts `SOURCES.md`; add a `display_font` to the corporation skin; use it only in the places §3.5 lists, at 28 px or more. | `corporation_skin.gd`, `encounter.gd`, `assets/fonts/`. | HALCYON's wordmark, background headline and strike-modal headline use Poiret One; nothing under 28 px or on the Rustler side does; contrast passes 4.5:1. |
 | **ADP-1e** | **Mechanical card sounds** (§5.2): sound hooks for card seated, Icepick drag, subroutine broken, END TURN, Bloatware shuffled in. Placeholder samples are fine. | `hand.gd`, `drop_target.gd`, `encounter.gd`. | Each action plays its sound once; no sound plays on hover alone. |
 
 ### Phase 2 — Voice (flavour text only; CONCEPT, not yet approved)
@@ -164,9 +171,9 @@ Designer: "2 yes".
 | **ADP-2b** | **Hesitation lines** (§6.2): a hover timer per card (threshold 4 s, cooldown 20 s, max one per turn), shown in the speech bubble of the ICE with the highest mood. Disabled while dragging. | Hovering 4 s shows the right mood line; it never repeats within the cooldown; nothing in the game state changes. |
 | **ADP-2c** | **Corporate flavour vocabulary** (§4.1): trademarked words in toasts and non-fight copy, patent plates on mascot shells, a newsreel line on the loading screen. | The HALCYON slice shows each at least once; the copy is logged for approval. |
 
-### Phase 3 — Paranoia features (ADP-3a and ADP-3b APPROVED 2026-11-17; ADP-3c still CONCEPT)
+### Phase 3 — Paranoia features (APPROVED 2026-11-17)
 
-Designer: "for #3 yes i want two deliberately unsettling features". Build 3a and 3b after Phase 1. Grafts (3c) weren't part of that answer and wait.
+Designer: "for #3 yes i want two deliberately unsettling features" (3a, 3b) and "GRAFTS - yes - it's a great extension of the theme to salvage ice parts on upgraded cards" (3c). Build after Phase 1.
 
 | Step | What | Done when |
 |---|---|---|
@@ -188,7 +195,41 @@ Designer: "for #3 yes i want two deliberately unsettling features". Build 3a and
 
 1. ~~Adopt ADP-R1?~~ **Yes (2026-11-17)**, with the zine redefined (§2.1).
 2. ~~Approve Phase 1?~~ **Yes (2026-11-17).**
-3. ~~Ads from real play data and LUCIDA rewriting the record?~~ **Yes to both (2026-11-17).** Still open: **grafts** (§3.1, ADP-3c)?
-4. Should the hostile reveal **grow with bleed** through Cracking (from the approved 20% at TRACE 20 to about 60% at TRACE 39), or stay fixed at 20%?
-5. Display face for corporate headlines: Limelight, Poiret One, another, or none?
-6. **New, from ZINE-001:** should the barcodes and punch cards ever *mean* something in play (for example, a punched pattern you have to match to jam an ICE), or stay decoration and world-building?
+3. ~~Ads from real play data, LUCIDA rewriting the record, grafts?~~ **Yes to all three (2026-11-17).**
+4. ~~Should the hostile reveal grow with bleed?~~ **Yes, 20% to 60% (2026-11-17).**
+5. ~~Display face?~~ **Poiret One, for corporate headlines (2026-11-17).**
+6. ~~Should punch cards ever mean something in play?~~ **Yes: the three First Signal punch cards (SIGNAL-001, §8).** Its own open questions are in §8.
+7. Approve **Phase 2** (voice leaks, hesitation lines, corporate vocabulary)?
+
+---
+
+## 8. SIGNAL-001 — The three punch cards (DIRECTION, 2026-11-17)
+
+**The designer's direction:**
+
+> "Since this game is about the first signal (as one of the central themes) the player could be collecting 1 of 3 punch cards from each corporation in order to process an uplink signal that jams the umbrella corporation's signal that would finalize the merging of man and machine."
+
+**Working reading:** there are **three punch cards**, one held by each corporation. Taking a corporation's card is what the Rustler steals there. With all three, the Rustler can run a signal that **jams the umbrella corporation's signal**, the one that would complete the merging of human and machine.
+
+**How it fits what's already locked** (Master Design):
+- **RUN-006** says a full run is three corporations, and in each one the Rustler steals data central to the First Signal. The punch card **is** that data, made physical. It also fills RUN-006's open item "exact final victory trigger after the third corporation": processing the three cards.
+- **STORY-001 / §8:** the First Signal is a real synchronization transmission. The cards give the run a physical, collectable shape around it, and they're a natural form for the **cipher fragments** already in the world.
+- **ZINE-001:** this world's machine code is punch cards, so the most important data in the game is a punch card. The device that processes the three could be a zine device: a hand-built reader, foil and paper and relays (the designer's Möbius-strip foil antenna is a natural part of it).
+- **Atomic Deco Punk:** each card is a corporate artefact (that corporation's card stock, colour, emblem and patent print) carrying holes punched by something older. The Rustler's hand-built reader is what reads it. Corporate object, zine purpose.
+
+**Presentation proposals (CONCEPT):**
+- On BREACH of a corporation's central Node, the card arrives as a physical object (from a pneumatic tube or the core's slot, §3.3) and is added to a three-slot card holder taped into the zine HUD: "1/3", "2/3", "3/3".
+- Each card shows its holes. The holes of all three cards line up into one pattern only when they're stacked, so the player can see they belong together before knowing what they are.
+- NUL/REM reacts to each card; the existing First Signal lines (EV-33, "First Signal fragment decrypted") are a natural fit for card 1, 2 and 3.
+
+**Open questions for the designer:**
+1. **One card per corporation (three in total), or three per corporation of which the player takes one?** The working reading is one per corporation.
+2. **What the player knows, and when.** RUN-006 (LOCKED) says the Rustler doesn't fully understand the data or know who hired them. Does the purpose (jamming the umbrella corporation's signal) stay hidden until the third card, and only show at the end?
+3. **The umbrella corporation:** is it a new, fourth entity that owns HALCYON, IRONWATCH and LUCIDA? What's its name? (Avoid "Umbrella", which is Resident Evil's corporation.) Is it the employer, the enemy, or both?
+4. **Its signal and the First Signal:** is the umbrella corporation's signal the First Signal itself, a copy, or a second transmission built on it?
+5. **The name.** "Uplink" already means the **Black Market Uplink** shop (`REDLINE_UPLINK_AND_CAPS.md`). Should the jamming device have another name, such as *the jammer* or *the counter-signal*?
+6. **Synchronization stays ambiguous?** Master §8 keeps open whether synchronization is evolution, liberation or assimilation, and asks not to settle it early. Jamming the merge suggests the corporations' version is assimilation. Should the game leave room to doubt whether jamming it was right?
+7. **Can a card be lost** (for example on a failed run, or at a DEAD DROP choice), and is each corporation's card always the same, or does it vary by run?
+
+No build task until these are answered; the presentation proposals then become Phase 5.
+
