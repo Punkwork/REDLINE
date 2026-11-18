@@ -247,7 +247,7 @@ You can't leave under LOCKDOWN.
 | **DEAD DROP** | Choose one: PATCH UP (+10 VITAE) or WIPE TRAIL (−20 TRACE). |
 | **Console Lab** | Apply PATCHWORK upgrades to a card, or remove a card from your deck. |
 | **SAFEHOUSE** **[NEW]** | Choose one: heal 10 VITAE, or apply 1 PATCHWORK upgrade to a card. |
-| **SIGNAL UNCLEAR** | An unknown Node: an event, which may include a data purge (remove 1 card for +5 TRACE or −5 VITAE). |
+| **SIGNAL UNCLEAR** | An unknown Node: an event, which may include a data purge (remove 1 card for +7 TRACE or −5 VITAE; UPL-006a). |
 | **Central Node** | The corporation's boss encounter (§10). |
 
 Non-ICE Nodes don't shuffle or reset your deck.
@@ -433,6 +433,7 @@ Earlier decisions for this redesign (also 2026-11-12): damage is PULP + CORTEX o
 |---|---|
 | UPL-003 | JACK OUT gives −5 TRACE and has timing limits (§8.2). |
 | UPL-006 | Uplink services (Wipe, Clinic) and the SIGNAL UNCLEAR data purge (§8.3). |
+| UPL-006a | Data purge's TRACE cost raised from +5 to **+7**; the −5 VITAE option is unchanged (designer, 2026-11-18). |
 | UPL-007 | Heist structure: 9 infiltration rows → Central Node → 4-Node escape; SAFEHOUSE Nodes; payload kept only on escape (*later changed by P5-009: the payload Ghostware is active immediately*); run length target 75–100 minutes (§1, §8.3, §10). Supersedes CORE-009's 6 Nodes per route. |
 | P5-009 | The payload is an encrypted data core: its Ghostware is active immediately; the core is decrypted into a First Signal fragment after the escape (§10.2, §10.3). |
 

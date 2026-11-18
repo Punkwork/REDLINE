@@ -201,7 +201,7 @@ Each SIGNAL UNCLEAR Node holds one random event. Choices are always shown with t
 
 | Event | What happens |
 |---|---|
-| **DATA PURGE** *(approved, UPL-006)* | Remove 1 card from your deck. Pay **+5 TRACE** or **−5 VITAE**. |
+| **DATA PURGE** *(approved, UPL-006; cost changed by UPL-006a)* | Remove 1 card from your deck. Pay **+7 TRACE** or **−5 VITAE**. |
 | **ABANDONED CACHE** | Choose: **+25 CRED**, or a **random CAP** (if you have a free slot). |
 | **GHOST IN THE WIRES** | NUL/REM finds something strange. Choose: take a **random rare card** and **+6 TRACE**, or leave it. |
 | **FRIENDLY RUSTLER** | Another Rustler offers a trade: give **1 card** from your deck, receive **1 random card one rarity higher** (rare stays rare). Or decline. |

@@ -87,7 +87,7 @@ An Uplink always offers the same layout, so players learn it quickly:
 
 ### 3.2 Card removal elsewhere
 - **Console Lab:** remove a card for **40 CRED** (flat; CARD-002). Cheaper than Wipe, but rarer.
-- **Data purge (some SIGNAL UNCLEAR Nodes):** an event that lets you remove **1 card for free**, at a cost of **+5 TRACE or −5 VITAE** (your choice).
+- **Data purge (some SIGNAL UNCLEAR Nodes):** an event that lets you remove **1 card for free**, at a cost of **+7 TRACE or −5 VITAE** (your choice; UPL-006a, 2026-11-18, was +5 TRACE).
 
 ### 3.3 How often Uplinks appear
 Uplinks follow the corporation map structure in Core Rules §10.1 (APPROVED 2026-11-12, UPL-007):
