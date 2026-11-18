@@ -93,7 +93,6 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ZINE-002 / ARCH-001 copy | Approve the working copy: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the island name pool (generic care-home names, ARCH-NAMES-001) and the polite anti-paper lines. (Relocation lines and programme names approved 2026-11-18: ARCH-LINES-001.) Can be decided with the next copy pack. The historical summaries (ADP §2.2.1, ARCH §2) need a fact-check before they inform on-screen text. | ADP §2.2; ARCH §4–6 | WAITING |
 
 ---
 
@@ -101,6 +100,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| ZINE-002 / ARCH-001 copy (ARCH-COPY-001) | Approved: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the nine island names, the defeat framing copy and the polite anti-paper lines. Still to do before on-screen use: fact-check the historical summaries (ADP §2.2.1, ARCH §2) and check the island names against well-known real care chains. | 2026-11-18 (designer: "All approved"; recorded by Claude) |
 | ZINE-003 SAMIZINE | Design canvas built and reviewed in three rounds; spec `REDLINE_SAMIZINE.md`, boards, review PDF and canvas sources in `docs/visual/samizine/`. ARCH-SLANG-001 (’Pelago) and ARCH-NAMES-001 / ARCH-LINES-001 recorded. | 2026-11-18 (designer; recorded by Claude) |
 | ADP §1.1 / ZINE-002 / ARCH-001 docs | Atompunk comparison (term stays); the zine as the underworld's samizdat; `REDLINE_ARCHIPELAGO.md` approved (decisions 1–4); ADP v0.8 links §8 to ARCH-001; decisions recorded in the master design doc. | 2026-11-18 (designer; recorded by Claude) |
 | HALCYON PLAYTEST 5 Windows build | Exported and verified the Windows x86-64 package with checklist v0.5. Windows launch and playtest are pending with the designer. | `98bad5f`, tag `playtest-5`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44232607877), [artifact](https://github.com/Punkwork/REDLINE/actions/runs/44232607877/artifacts/14395388972) |

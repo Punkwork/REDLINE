@@ -98,7 +98,7 @@ This also explains ZINE-001's look. Every corporate machine fingerprints what it
 
 #### 2.2.3 How zines are made and passed
 
-| Samizdat practice | Panopticon zine (working examples, for approval) |
+| Samizdat practice | Panopticon zine (APPROVED 2026-11-18, ARCH-COPY-001) |
 |---|---|
 | **Typewriter and carbon copies; later copies are fainter** | Zines are typed, stencilled or hand-lettered, and copied by carbon, hand-cranked mimeograph or salvaged, rewired copiers. **Copy generation is visible:** a crisp zine came straight from its maker; a faded, misregistered one has passed through many hands. (Decoration only; never on rule text.) |
 | **The reader's duty to copy** | Every zine ends with the same instruction: *read it, copy it, pass it on.* Mastheads can carry a hand tally: "COPY 5 OF 5 — MAKE 5 MORE." |
@@ -106,8 +106,8 @@ This also explains ZINE-001's look. Every corporate machine fingerprints what it
 | **Magnitizdat** | Cassette dubs of pirate broadcasts, crew messages and music. The Rustler music track (§5.1, 4-track cassette) is literally magnitizdat; pirate radio (§5.3) is its live form. |
 | **Roentgenizdat (bone music)** | Records cut into salvaged corporate film: LUCIDA sleep-scan film, HALCYON appliance-display sheets. A natural art piece for DEAD DROP (§6.6). |
 | **Tamizdat** | Material that comes in from outside the city. *Could* tie to the Black Market Uplink as a smuggling route; needs a story decision, so not assumed. |
-| **The *Chronicle of Current Events*** | **An underworld ledger** (working title *THE CARBON*): a dry, dated, factual bulletin of who got traced, which blocks went dark and which ICE changed. Its voice is deliberately plain, the one Rustler voice that isn't irreverent, because its job is to be believed. ARCH-001 makes it the record of the player's own lost Rustlers. |
-| **The danger of possession** | In the fiction, holding a zine is a risk. The corporations never forbid it; they discourage it politely ("Paper can carry germs. Try HALCYON Clean Reader™." / "Unlicensed print may contain misinformation. IRONWATCH is here to help."). Flavour only; no rule penalises the player. |
+| **The *Chronicle of Current Events*** | **An underworld ledger, *THE CARBON*** (title approved 2026-11-18): a dry, dated, factual bulletin of who got traced, which blocks went dark and which ICE changed. Its voice is deliberately plain, the one Rustler voice that isn't irreverent, because its job is to be believed. ARCH-001 makes it the record of the player's own lost Rustlers. |
+| **The danger of possession** | In the fiction, holding a zine is a risk. The corporations never forbid it; they discourage it politely ("Paper can carry germs. Try HALCYON Clean Reader™." / "Unlicensed print may contain misinformation. IRONWATCH is here to help."). Flavour only; no rule penalises the player. (Lines approved 2026-11-18.) |
 
 #### 2.2.4 What the zine carries
 

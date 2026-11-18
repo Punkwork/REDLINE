@@ -1,6 +1,6 @@
 # PANOPTICON — THE ARCHIPELAGO: BEING TRACED MEANS DISAPPEARING
-**Version:** 0.6 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ARCH-001
-**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the programme small print and the 15 relocation lines are approved (ARCH-LINES-001); the island name pool is still working copy. On screen the Rustlers always say **’Pelago** (ARCH-SLANG-001, §3 rule 6). No rules change.
+**Version:** 0.7 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ARCH-001
+**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the programme small print and the 15 relocation lines are approved (ARCH-LINES-001); the island name pool, the defeat framing copy and the on-screen ’Pelago uses (§6) are approved too (ARCH-COPY-001, designer: "All approved"). On screen the Rustlers always say **’Pelago** (ARCH-SLANG-001, §3 rule 6). No rules change.
 **Builds on:** ZINE-002 (`REDLINE_ATOMIC_DECO_PUNK.md` §2.2, especially reason 4 in §2.2.2, "the traced disappear from the record"); the Friendly Lie and the corporation states (`REDLINE_VISUAL_LANGUAGE.md`); FACADE-001; LUCIDA edits the record (ADP §6.3); SIGNAL-001 (ADP §8); defeat in `REDLINE_CORE_RULES.md` §4.
 
 ---
@@ -47,7 +47,7 @@ Designer: **"The island names should resemble names of long-term care residences
 - **There are many islands, and the names repeat across corporations.** The same kind of name could belong to any of them, which quietly hints that they're one system (SIGNAL-001) without saying so.
 - **Avoid exact names of well-known real care chains** (check before final copy); generic word combinations are fine.
 
-**Working name pool (for approval):**
+**Island name pool (APPROVED 2026-11-18, ARCH-COPY-001):**
 
 | Corporation | Working names | Small print (programme, APPROVED) |
 |---|---|---|
@@ -99,7 +99,7 @@ Designer: "2 y".
 
 The rules stay exactly as they are (Core Rules §4: the run ends when VITAE reaches 0; the TRACE strike ladder in §7). What changes is how the game *frames* those moments.
 
-| Moment (existing rule) | Framing (working copy, for approval) |
+| Moment (existing rule) | Framing (APPROVED 2026-11-18) |
 |---|---|
 | **TRACE rising, Cracking** | Already the corporation noticing you. At high bleed, a corporate toast can slip and mention "accommodation" or "a quiet place" (leak table, ADP §4.3). |
 | **Strike modal** ("Stay where you are.") | The knock on the door. |
@@ -111,7 +111,7 @@ The rules stay exactly as they are (Core Rules §4: the run ends when VITAE reac
 
 **LUCIDA's version:** in LUCIDA runs, flavour lines about a lost Rustler can be quietly rewritten, the way unpersons were retouched out of photos (ADP §6.3 rules apply: flavour only, marked with ✎, rules lines never touched).
 
-## 6. Where the word appears on screen, as ’Pelago (working, for approval)
+## 6. Where the word appears on screen, as ’Pelago (APPROVED 2026-11-18)
 
 - **The zines:** *THE CARBON*'s entries ("Taken to the ’Pelago."); a recurring zine column, *NOTES FROM THE ’PELAGO* (rumours, unconfirmed, contradictory).
 - **The defeated-Rustler page** (§5).
