@@ -37,8 +37,8 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
-| **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
+| **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | WAITING on Playtest 6 results and the bot sims (designer, 2026-11-18) |
+| **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | WAITING on Playtest 6 results (designer, 2026-11-18) |
 
 **Claude Code migration (DEV-001, approved 2026-11-18):**
 
