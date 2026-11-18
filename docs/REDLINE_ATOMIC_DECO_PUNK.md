@@ -1,6 +1,6 @@
 # PANOPTICON — ATOMIC DECO PUNK: MAKING THE SPLIT REALITY FELT
-**Version:** 0.4 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
-**Status:** **Mostly approved (2026-11-17).** Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1); the **hostile reveal growing with bleed** from 20% to 60% (§2); **Poiret One** for corporate headlines (§3.5); **Phase 1** and **Phase 3** (Part 3: bleed and sound; ads that know you, LUCIDA record edits, grafts). The designer also approved **SIGNAL-001: three First Signal punch cards** (§8); its presentation (§8.3) and build tasks (Phase 5) wait for approval. Still CONCEPT: Phase 2 and the "later" ideas. Open questions are in §7. Build only approved tasks.
+**Version:** 0.5 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
+**Status:** **Approved (2026-11-17)**, except the "later" ideas, which have no build tasks yet. Approval history: Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1); the **hostile reveal growing with bleed** from 20% to 60% (§2); **Poiret One** for corporate headlines (§3.5); **Phase 1** and **Phase 3** (Part 3: bleed and sound; ads that know you, LUCIDA record edits, grafts). The designer also approved **SIGNAL-001: three First Signal punch cards** (§8); its presentation (§8.3) and build tasks (Phase 5) wait for approval. Still CONCEPT: Phase 2 and the "later" ideas. Open questions are in §7. Build only approved tasks.
 **Builds on:** *Atomic Deco Punk — DIRECTION* in `REDLINE_MASTER_DESIGN.md` §1; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`, VIS-001); CHROME-001; CARDS-001; RUSTLER-LOOK-001; FACADE-001 (`REDLINE_CORPORATE_FACADES.md`).
 **For:** Codex (Godot build, `godot/`).
 
@@ -163,7 +163,9 @@ Designer: "2 yes".
 | **ADP-1f** | **Poiret One** (§3.5): add `PoiretOne-Regular.ttf` and its OFL licence under `godot/assets/fonts/` (source: the `google/fonts` repository, `ofl/poiretone/`), recorded in the fonts `SOURCES.md`; add a `display_font` to the corporation skin; use it only in the places §3.5 lists, at 28 px or more. | `corporation_skin.gd`, `encounter.gd`, `assets/fonts/`. | HALCYON's wordmark, background headline and strike-modal headline use Poiret One; nothing under 28 px or on the Rustler side does; contrast passes 4.5:1. |
 | **ADP-1e** | **Mechanical card sounds** (§5.2): sound hooks for card seated, Icepick drag, subroutine broken, END TURN, Bloatware shuffled in. Placeholder samples are fine. | `hand.gd`, `drop_target.gd`, `encounter.gd`. | Each action plays its sound once; no sound plays on hover alone. |
 
-### Phase 2 — Voice (flavour text only; CONCEPT, not yet approved)
+### Phase 2 — Voice (flavour text only; APPROVED 2026-11-17)
+
+Designer: "Phase 2 absolutely approved." Build after Phase 1.
 
 | Step | What | Done when |
 |---|---|---|
@@ -199,9 +201,11 @@ Designer: "for #3 yes i want two deliberately unsettling features" (3a, 3b) and 
 4. ~~Should the hostile reveal grow with bleed?~~ **Yes, 20% to 60% (2026-11-17).**
 5. ~~Display face?~~ **Poiret One, for corporate headlines (2026-11-17).**
 6. ~~Should punch cards ever mean something in play?~~ **Yes: the three First Signal punch cards (SIGNAL-001, §8), now approved.**
-7. Approve **Phase 2** (voice leaks, hesitation lines, corporate vocabulary)?
-8. Approve the **punch-card presentation** (§8.3) and **Phase 5** (SIG-5a–d)? Keep the working names COUNTER-SIGNAL and MÖBIUS?
-9. Confirm the umbrella AI is the **hidden AI** in the master doc's story questions?
+7. ~~Approve Phase 2?~~ **Yes (2026-11-17).**
+8. ~~Approve the punch-card presentation and Phase 5? Names?~~ **Yes; names SYNCHRONIZATION SCRAMBLER / SCRAMBLE SYNC and M0'B\*L∞P (2026-11-17).**
+9. ~~Is the umbrella AI the hidden AI?~~ **Yes (2026-11-17).**
+
+No questions are open in this doc. Build order: **Phase 1 → Phase 2 → Phase 3 → Phase 5**, with Phase 4 fixtures added as each phase lands.
 
 ---
 
@@ -219,33 +223,44 @@ Designer: "for #3 yes i want two deliberately unsettling features" (3a, 3b) and 
 | What does the player know, and when? | **The purpose stays hidden until the end.** Designer: "yes." This keeps RUN-006: the Rustler doesn't know what the data means or who's behind it. |
 | The umbrella | **"Umbrella" is a description, not a name: it's an AI that controls all three corporations.** Designer: "it really is an AI who controls all corporations, it is unknown until after all 3 cards are attained." |
 | Its signal and the First Signal | **The First Signal is the first sign of consciousness in any being, from the cellular level to the macro.** In the game, the First Signal being referred to is the **machines' attempt to reach a higher consciousness by merging with humanity.** There have been many attempts through history. **Speech synthesis** was the machines' main method, which is why NUL/REM keeps referring to it; eventually they decided the way was **synchronization with humans**. Keep it vague until the end. |
-| A name for the jamming signal | "Any appropriate name will do." **Working names (Claude):** the signal is **the COUNTER-SIGNAL**; the hand-built device that reads the three cards and sends it is **the MÖBIUS**, after the designer's Möbius-strip foil antenna (ZINE-001). Both avoid "Uplink", which is the Black Market Uplink shop. |
+| Names | **The jamming signal is the SYNCHRONIZATION SCRAMBLER**, "SCRAMBLE SYNC" for short (the command the Rustler runs). Designer: "more important-sounding names, like Synchroniztion-Scrambler or scramble sync". **The hand-built device that reads the three cards is the M0'B\*L∞P**, pronounced "Mow Bee Loop" (after the Möbius-strip foil antenna, ZINE-001). Designer: "let's call it something punk, like M0'B\*Loop, pronounced Mow Bee Loop. With the oo's in loop looking like an 8 on its side to represent the loop." Neither clashes with the Black Market Uplink. See §8.4 for how to write and render the name. |
 | Is jamming right? | **The game leaves doubt.** Designer: "it could be all 3" (evolution, liberation, assimilation). **The Rustler jams it because going against whatever the corporations want is the Rustler's MO**, not because the game says it's right. |
 | Can cards be lost or vary? | **No, for now.** Each run is discrete (roguelike), and each corporation always gives the same card: HALCYON's card, IRONWATCH's card, LUCIDA's card. |
 
 **Fit with existing canon:**
 - The Bible's guidepost *"Every consciousness has a first signal"* (a recurring threshold where awareness begins or reaches another) is the general idea; the AI's attempt to synchronize with humans is the instance the game is about. STORY-001 (a real synchronization transmission) still holds: it's the AI's.
 - NUL/REM's speech-synthesis references (the Speak & Spell lines, the vocoder idle line) are now seeds of the reveal. One approved line already reads, about a decrypted fragment: *"E.T. phoned home with a Speak & Spell, an umbrella and a coffee can."* The word "umbrella" is already planted.
-- *Interpretation to confirm:* the umbrella AI is the **hidden AI** in the master doc's §8 story questions.
+- **The umbrella AI is the hidden AI** in the master doc's §8 story questions (confirmed by the designer, 2026-11-17: "yes it is.").
 
 ### 8.2 Writing rules until the end
 
-- **Before the third card,** nothing on screen names the AI, says it controls the corporations, or explains the cards, the merge or the COUNTER-SIGNAL. The cards are "the data" or "the job".
+- **Before the third card,** nothing on screen names the AI, says it controls the corporations, or explains the cards, the merge or the SYNCHRONIZATION SCRAMBLER. The cards are "the data" or "the job".
 - **Hints are allowed** and should be oblique: speech synthesis, machine voices, old transmissions, the holes lining up, corporate copy that sounds a little too similar across all three corporations ("We'll take care of it." / "You're in good hands." / "Rest easy."). Nothing a player could take as an explanation.
 - **After the third card,** the reveal: the three corporations are one AI's faces, and it's about to complete the synchronization. Even then, the game doesn't say whether that would be evolution, liberation or assimilation. NUL/REM can doubt; the Rustler chooses to jam it anyway, because that's what Rustlers do.
 - The unknown employer (RUN-006) stays open; this doesn't decide who hired the Rustler.
 
-### 8.3 Presentation (CONCEPT, for approval)
+### 8.3 Presentation (APPROVED, 2026-11-17)
+
+Designer: "approved".
 
 - **Each card is a corporate artefact:** that corporation's card stock, colour, emblem and patent print (HALCYON mint and silver, IRONWATCH navy and brass, LUCIDA lilac and rose-copper), carrying holes that look older than the print.
 - **Arrival:** on BREACH of a corporation's central Node, the card comes out of the core's slot or a pneumatic tube (§3.3) as a physical object, with a NUL/REM line (EV-33 lines fit).
 - **The holder:** a three-slot card holder taped to the zine HUD, "1/3", "2/3", "3/3". (RUSTLER-LOOK-001 keeps the HUD as it is; this is a small addition to it, for approval.)
 - **The holes line up.** When the cards are shown stacked, their holes start forming one pattern; it's only complete with all three. The player can see they belong together long before knowing why.
-- **The end:** after the third card, the reveal (§8.2), then the MÖBIUS is assembled from paper, foil and relays, reads the three cards and sends the COUNTER-SIGNAL. This sequence needs its own script and storyboard; not part of the first build.
+- **The end:** after the third card, the reveal (§8.2), then the M0'B\*L∞P is assembled from paper, foil and relays, reads the three cards and sends the SYNCHRONIZATION SCRAMBLER. This sequence needs its own script and storyboard; not part of the first build.
 
 ---
 
-## Part 3b — Build tasks for SIGNAL-001 (Phase 5, waiting for approval of §8.3)
+### 8.4 Writing and rendering M0'B\*L∞P
+
+- **In docs and code text** write it `M0'B*Loop` (ASCII, so it's searchable); in code identifiers use `moebloop`.
+- **On screen** it's a wordmark: capital M, the digit zero, apostrophe, capital B, asterisk, then "L", the **two o's drawn as one sideways 8 (∞)**, then "P": **M0'B\*L∞P**. Rustler style (Space Mono or hand-stencilled), never Poiret One: it's a Rustler device.
+- If the font has no ∞ glyph, draw the wordmark as an image or a custom-drawn glyph; don't fall back to a mismatched font.
+- **Accessibility:** wherever the wordmark is an image or uses ∞, give screen readers and subtitles the spoken name "Mow Bee Loop"; voice lines say "Mow Bee Loop".
+
+---
+
+## Part 3b — Build tasks for SIGNAL-001 (Phase 5, APPROVED 2026-11-17)
 
 Same rules as Part 3: log under **SIGNAL-001** in `REDLINE_DEVELOPMENT_LOG.md`; nothing in the encounter rules changes.
 
@@ -254,6 +269,6 @@ Same rules as Part 3: log under **SIGNAL-001** in `REDLINE_DEVELOPMENT_LOG.md`; 
 | **SIG-5a** | **Card data and run state:** one fixed punch-card definition per corporation (id, corporation, hole pattern, art references); the run records which cards the Rustler holds; a card is awarded on BREACH of that corporation's central Node; a new run starts with none. No loss, no variation (§8.1). | Tests: each corporation awards its own card exactly once per run; cards survive save/load within a run; a new run has none. |
 | **SIG-5b** | **Hole patterns:** three 12-column × 8-row hole patterns, designed so each one alone looks like ordinary data and the three stacked form one recognisable figure (placeholder figure is fine; the designer picks the final one). | A fixture shows each card alone and the three stacked. |
 | **SIG-5c** | **Card holder and arrival** (§8.3): the three-slot holder on the HUD; the arrival animation and NUL/REM line on BREACH; reduced-motion version. Placeholder card art in each corporation's colours. | Screenshots: holder at 0/3, 1/3 and 3/3; the arrival on a HALCYON central-Node BREACH. |
-| **SIG-5d** | **Writing guard** (§8.2): every line that mentions the AI, the merge or the COUNTER-SIGNAL is tagged `reveal`; a test fails if a `reveal` line can show before the third card. | The test passes, and fails when a `reveal` line is wired to an earlier trigger. |
+| **SIG-5d** | **Writing guard** (§8.2): every line that mentions the AI, the merge or the SYNCHRONIZATION SCRAMBLER is tagged `reveal`; a test fails if a `reveal` line can show before the third card. | The test passes, and fails when a `reveal` line is wired to an earlier trigger. |
 
-**Out of scope for now:** the end sequence (reveal, MÖBIUS assembly, COUNTER-SIGNAL), and the final card art and hole figure.
+**Out of scope for now:** the end sequence (reveal, M0'B\*L∞P assembly, SCRAMBLE SYNC), and the final card art and hole figure.

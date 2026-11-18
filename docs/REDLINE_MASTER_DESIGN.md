@@ -38,7 +38,7 @@ The surrealism comes from the sincerity of the sales pitch. A cheerful orbit ani
 - [Dr. Grordbort’s](https://www.gregbroadmore.com/portfolio/dr-grordborts) gives imagined space-age technology the heft and finish of fabricated objects.
 - [BioShock’s Rapture](https://irrationalgames.ghoststorygames.com/insider/from-the-vault-evolution/) carries Deco styling from its architecture into the machines people use.
 
-#### ADP-001 — Making the split reality felt (MOSTLY APPROVED, 2026-11-17)
+#### ADP-001 — Making the split reality felt (APPROVED, 2026-11-17)
 
 Claude's response to the direction above, saved as **`docs/REDLINE_ATOMIC_DECO_PUNK.md`** at the designer's request, with build tasks for Codex. It builds on The Friendly Lie, CHROME-001, CARDS-001, RUSTLER-LOOK-001 and FACADE-001 and changes none of them or any rule.
 
@@ -50,7 +50,9 @@ Claude's response to the direction above, saved as **`docs/REDLINE_ATOMIC_DECO_P
 - **Phase 1 build tasks (ADP-1a–f):** the bleed value (ADP-R2), the growing reveal, rig wear on the zine panels, two-track music, Poiret One, mechanical card sounds. Designer: "2 yes".
 - **Phase 3 build tasks (ADP-3a–c):** **ads that know you** (written from local play data, with an off switch), **LUCIDA rewriting flavour lines in the event log** (never rules lines), and **grafts** (salvaged ICE parts as art on PATCHWORK-upgraded card instances; no rules effect). Designer: "for #3 yes i want two deliberately unsettling features"; "GRAFTS - yes - it's a great extension of the theme to salvage ice parts on upgraded cards". Build after Phase 1.
 
-**Still CONCEPT:** Phase 2 (voice leaks, hesitation lines, corporate vocabulary) and the later ideas (HUD seam, industrial background layers, radio, defaced tourist map, DEAD DROP workbench, watching crowd).
+- **Phase 2 build tasks (ADP-2a–c):** voice leaks and graffiti, ICE hesitation lines, corporate flavour vocabulary. Designer: "Phase 2 absolutely approved."
+
+**Still CONCEPT (no build tasks yet):** the later ideas (HUD seam, industrial background layers, radio, defaced tourist map, DEAD DROP workbench, watching crowd).
 
 ### VISUAL-DECISIONS-2026-11-17 — Approved visual decisions from VIS-001, CHROME-001 and CARDS-001 (APPROVED, 2026-11-17)
 
@@ -194,7 +196,7 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 **Established narrative canon:** **The First Signal** is an **actual synchronization transmission**, not merely a metaphor or fabricated legend. PANOPTICON explores the **human/machine boundary** and the possibility of crossing it. The world includes a hidden-AI mystery and cipher fragments.
 
 **Intentionally unresolved story questions:**
-- What does the hidden AI actually want?
+- What does the hidden AI actually want? *(Designer-level answer, SIGNAL-001: a higher consciousness through synchronization with humans; it is the umbrella AI behind all three corporations. Unrevealed in the game until the end.)*
 - What is NUL/REM's relationship to the First Signal or the hidden AI?
 - What purpose do the cipher fragments serve?
 - Is synchronization **evolution**, **liberation**, **assimilation**, or some combination?
@@ -207,9 +209,11 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 - **What the First Signal is.** Generally, the first sign of consciousness in any being, from the cellular level to the macro (consistent with the Bible guidepost "Every consciousness has a first signal"). In the game, the First Signal is the **machines' attempt to reach a higher consciousness by merging with humanity**. There have been many attempts through history; **speech synthesis** was the machines' main method (hence NUL/REM's references to it), until they decided the way was **synchronization with humans**. STORY-001 holds: the transmission is real, and it's the AI's. **Keep it vague in the game until the end.**
 - **The purpose stays hidden** until after the third card (RUN-006 kept: the Rustler doesn't know the data's significance). The unknown employer remains OPEN.
 - **Doubt stays.** Synchronization "could be all 3" of evolution, liberation and assimilation; the game doesn't settle it. **The Rustler jams it because going against whatever the corporations want is the Rustler's MO.**
-- **Names:** "any appropriate name will do". Working names: the **COUNTER-SIGNAL** (the jamming signal) and the **MÖBIUS** (the hand-built zine device that reads the cards, after ZINE-001's Möbius-strip antenna); neither clashes with the Black Market Uplink.
+- **Names:** the jamming signal is the **SYNCHRONIZATION SCRAMBLER**, "SCRAMBLE SYNC" for short. The hand-built zine device that reads the three cards is the **M0'B\*Loop**, pronounced "Mow Bee Loop", with the two o's drawn as one sideways 8 (∞) on screen: M0'B\*L∞P. Designer: "more important-sounding names, like Synchroniztion-Scrambler or scramble sync, and as for moebius - let's call it something punk, like M0'B\*Loop, pronounced Mow Bee Loop. With the oo's in loop looking like an 8 on its side to represent the loop." Neither clashes with the Black Market Uplink.
+- **The umbrella AI is the hidden AI** in the questions above. Designer: "yes it is." So "What does the hidden AI actually want?" has a designer-level answer (a higher consciousness through synchronization with humans), which stays unrevealed in the game until the end.
+- **Presentation and Phase 5 build tasks approved** (corporate card stock per corporation, arrival on BREACH of the central Node, a three-slot holder on the HUD, holes that only complete a pattern when stacked; SIG-5a–d). Designer: "approved".
 
-Detail, writing rules until the end, presentation proposals and build tasks (Phase 5, waiting for approval): `REDLINE_ATOMIC_DECO_PUNK.md` §8 and Part 3b. *Interpretation to confirm:* the umbrella AI is the hidden AI in the questions above; if so, "What does the hidden AI actually want?" now has a designer-level answer (higher consciousness through synchronization), still unrevealed in the game.
+Detail, writing rules until the end, presentation, how to render the M0'B\*Loop name, and build tasks (Phase 5): `REDLINE_ATOMIC_DECO_PUNK.md` §8 and Part 3b. The end sequence (reveal, assembling the M0'B\*Loop, SCRAMBLE SYNC) is still to be designed.
 
 ## 9. Technical architecture and migration
 **Reference build identified:** `REDLINE_Dead_Drop_Final_Playtest.zip` (Python/Pygame). Reported structure includes:

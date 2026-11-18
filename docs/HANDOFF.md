@@ -37,6 +37,8 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
+**Atomic Deco Punk and the punch cards (approved 2026-11-17):** build from `REDLINE_ATOMIC_DECO_PUNK.md` in order **Phase 1 (ADP-1a–f) → Phase 2 (ADP-2a–c) → Phase 3 (ADP-3a–c) → Phase 5 (SIG-5a–d)**, adding Phase 4 fixtures (ADP-4a) as each phase lands. Owner: Codex. Status: Phase 1 TO DO.
+
 **Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
 
 ---
@@ -85,8 +87,6 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ADP-001 | Phase 2 (voice leaks, hesitation lines, corporate vocabulary) not yet approved. Approved and ready for Codex: Phase 1 (ADP-1a–f), then Phase 3 (ADP-3a–c). | Claude, 2026-11-17 | Partly answered |
-| SIGNAL-001 | Decided except: approve the punch-card presentation (`REDLINE_ATOMIC_DECO_PUNK.md` §8.3) and Phase 5 (SIG-5a–d); keep the working names COUNTER-SIGNAL and MÖBIUS; confirm the umbrella AI is the hidden AI. No Phase 5 build until approved. | Designer, recorded by Claude, 2026-11-17 | Mostly answered |
 
 ---
 
