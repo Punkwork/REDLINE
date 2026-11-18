@@ -7,3 +7,5 @@ Poiret One Regular and its SIL OFL 1.1 license were downloaded from https://gith
 
 - Stardos Stencil — Google Fonts, SIL OFL.
 - Permanent Marker — Google Fonts, Apache 2.0.
+
+- Special Elite — Google Fonts, Apache 2.0.

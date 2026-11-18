@@ -1,5 +1,7 @@
 extends "res://tests/shot_adp.gd"
 
+const FACADE := preload("res://tests/shot_facade.gd")
+
 func capture(name: String) -> void:
  await settle()
  check(root.get_texture().get_image().save_png(OS.get_environment("SHOT_DIR").path_join(name + ".png")) == OK, name)
@@ -16,12 +18,25 @@ func run() -> void:
  main.personalized_ads = true
  main._show_newsreel("GENERALIST")
  await capture("adp-profile-ad")
+ var halcyon := main
+ root.remove_child(halcyon)
+ main = load("res://scenes/Main.tscn").instantiate()
+ main.friendly_skin = FriendlyLook.skin("LUCIDA")
+ root.add_child(main)
+ main.voice_on = false
+ main.personalized_ads = false
  var g := start()
+ g.corporation = "LUCIDA"
+ var opening: Dictionary = FACADE.OPENINGS.LUCIDA
+ g.node = {"id": "INTAKE", "name": opening.name, "layers": [{}]}
+ g.enc.ice.clear()
+ for ice in opening.ice:
+  g.enc.ice.append(g._new_ice(ice[0], ice[1]))
+ g._mark_seen()
  g._say("Rule 6")
  var rule_index := g.log.size() - 1
  check(not g.rewrite_flavour(rule_index, "Quiet"), "rules are guarded")
- g.corporation = "LUCIDA"
- g._say_flavour("break_notice")
+ g._do_break(0, 0)
  var flavour_index := g.log.size() - 1
  g._update_lucida_record()
  check(g.log[flavour_index] == "You disturbed the quiet.", "original is visible immediately")
@@ -30,6 +45,11 @@ func run() -> void:
  check(g.log[flavour_index] == "✎ You rested here." and g.log[rule_index] == "Rule 6", "only flavour is edited")
  main.refresh()
  await capture("adp-lucida-record")
+ root.remove_child(main)
+ main.queue_free()
+ main = halcyon
+ root.add_child(main)
+ view = main.friendly
  g = start()
  g._do_break(1, 0)
  var inst := g._new_inst("PULP_SHIELD")

@@ -33,6 +33,7 @@ var path: Array = []          # visited node ids
 var seen_ice := {}            # EV-05: first sight per ICE (per save, here per run)
 var entered_corp := false
 var corporation := "HALCYON"
+var punch_cards: Array[String] = []
 var ghost_draw_enabled := false # DSY-001b: optional, OFF by default.
 var bloat_tax_paid := 0
 var node_tax_pending := false
@@ -100,6 +101,7 @@ func new_run(who: String = "GENERALIST") -> void:
 	compiled_owner = {}
 	compiled_target = {}
 	rustler = who
+	punch_cards.clear()
 	run_deck.clear()
 	log.clear()
 	log_tags.clear()
@@ -1253,10 +1255,32 @@ func _do_break(i: int, s: int) -> bool:
 	if not enc.breached and _all_deadlocks_broken():
 		enc.breached = true
 		_event("EV-07")
+		if node.get("central", false) and layer == node.layers.size() - 1:
+			_award_punch_card()
 		_say("BREACH. Press END TURN: the Corporation Response is skipped.")
 	if d.get("passive", "") == "TRIPWIRE":
 		add_trace(1, false)
 	return true
+
+func _award_punch_card() -> void:
+	if not SignalCards.DATA.has(corporation) or punch_cards.has(corporation): return
+	punch_cards.append(corporation)
+	_event("PUNCH_CARD", {"corp": corporation})
+
+# Presentation fields for a resumed run; the slice currently has no resume screen.
+func save_presentation() -> Dictionary:
+	var grafts := {}
+	for card in run_deck:
+		if card.has("graft"): grafts[str(card.uid)] = card.graft
+	return {"punch_cards": punch_cards.duplicate(), "grafts": grafts}
+
+func restore_presentation(data: Dictionary) -> void:
+	punch_cards = SignalCards.restore(data.get("punch_cards", []))
+	var grafts: Dictionary = data.get("grafts", {})
+	for card in run_deck:
+		var graft: String = grafts.get(str(card.uid), "")
+		card.erase("graft")
+		if graft in GRAFT_PARTS: card.graft = graft
 
 func _all_deadlocks_broken() -> bool:
 	for ice in enc.ice:

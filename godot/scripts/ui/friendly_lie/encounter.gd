@@ -72,6 +72,7 @@ var leak := ""
 var note_serial := -1
 var graffiti: Control
 var graffiti_count := 0
+var shell_graffiti := {}
 var mascots: Array[FriendlyMascot] = []
 var hover_card := -1
 var hover_time := 0.0
@@ -83,8 +84,15 @@ var hesitation_line := ""
 var hesitation_until := 0.0
 var early_toast := false
 var tomorrow_toast := false
+var mask_toast := false
 var toast_text: Label
 var toast_reply: Label
+var punch_holder: Panel
+var punch_count: Label
+var punch_shadow: Control
+var last_punches: Array = []
+var punch_arrival: Panel
+var arrival_until := 0.0
 func _ready() -> void:
  theme = FriendlyLook.THEME
  mouse_filter = Control.MOUSE_FILTER_PASS
@@ -162,6 +170,20 @@ func _ready() -> void:
  toast_reply = FriendlyLook.label("", 14, FriendlyLook.TONER, ADP_MARKER)
  at(toast, toast_reply, Vector2(8, 80), Vector2(184, 20))
  toast.hide()
+ punch_arrival = FriendlyLook.panel(FriendlyLook.TONER, FriendlyLook.HIGHLIGHT, 1, 5)
+ at(self, punch_arrival, Vector2(40, 626), Vector2(200, 105))
+ punch_arrival.clip_contents = true
+ punch_arrival.hide()
+ punch_holder = FriendlyLook.panel(FriendlyLook.TONER, FriendlyLook.PAPER, 1, 4)
+ at(self, punch_holder, Vector2(40, 734), Vector2(200, 31))
+ punch_holder.clip_contents = true
+ punch_count = FriendlyLook.label("", 13, FriendlyLook.PAPER, FriendlyLook.BOLD)
+ at(punch_holder, punch_count, Vector2(8, 5))
+ punch_shadow = Control.new()
+ punch_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ punch_holder.add_child(punch_shadow)
+ var inspect_punches := FriendlyLook.button("VIEW", func(): ui.open_punches(), FriendlyLook.TONER, FriendlyLook.PAPER)
+ at(punch_holder, inspect_punches, Vector2(149, 2), Vector2(48, 26))
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
  motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
  motion_button.position=Vector2(1360,718); motion_button.size=Vector2(200,28); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
@@ -207,6 +229,7 @@ func sync(model: Game) -> void:
  else: bw_capacity=maxi(bw_capacity,game.bw)
  last_encounter=game.enc; last_turn=game.enc.turn
  update_corporation()
+ update_punch_holder()
  clear(node_tag); clear(trace_tag); clear(bottom_hud)
  node_tag.size.x = FriendlyLook.BOLD.get_string_size("NODE: " + game.node.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 29).x + 28
  at(node_tag, FriendlyLook.label("NODE: " + game.node.name, 29, FriendlyLook.PAPER, FriendlyLook.BOLD), Vector2(12, 0), Vector2(700, 46))
@@ -261,7 +284,8 @@ func _process(_dt: float) -> void:
   note_text.add_theme_font_size_override("font_size",fs)
  note_text.visible_ratio=ui.nr_text.visible_ratio if context=="" and leak.is_empty() else 1.0
  var now := Time.get_ticks_msec()/1000.0
- toast.visible=now<toast_until
+ punch_arrival.visible = now < arrival_until
+ toast.visible=now<toast_until and not punch_arrival.visible
  if strike_overlay.visible and now>=strike_until: dismiss_strike()
  feedback_panel.visible=dragging_uid>=0 or now<feedback_until
  if dragging_uid>=0:
@@ -353,9 +377,9 @@ func build_ice() -> void:
   var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25
   var stage := Control.new()
   stage.name = "MascotStage"
-  stage.custom_minimum_size = Vector2(width, 238)
-  column.add_child(drop_wrapper(stage,i,-1))
   var plate := AdpCopy.pick("plate", skin.corporation, 0, {"ice": game.enc.ice[i].id})
+  stage.custom_minimum_size = Vector2(width, 238 if plate.is_empty() else 254)
+  column.add_child(drop_wrapper(stage,i,-1))
   if not plate.is_empty():
    var plaque := FriendlyLook.label(plate.text, 10, FriendlyLook.TONER, skin.font)
    plaque.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -363,14 +387,14 @@ func build_ice() -> void:
    enamel.mouse_filter = Control.MOUSE_FILTER_IGNORE
    enamel.add_child(plaque)
    plaque.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-   column.add_child(enamel)
-   enamel.custom_minimum_size.y = 15
+   at(stage, enamel, Vector2(0, 238), Vector2(width, 15))
   var carrier := Control.new()
   carrier.name = "IllustrationScale"
   carrier.scale = Vector2.ONE * illustration_scale
   carrier.position.x = (width - mascot.size.x * illustration_scale) / 2.0
   stage.add_child(carrier)
   carrier.add_child(mascot)
+  if game.enc.ice[i].id == "AUTO_RENEW": add_shell_graffiti(mascot)
   var scan := scan_tag(i); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
    scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
@@ -566,6 +590,8 @@ func reset_session() -> void:
  reset_voice()
  hesitation_cooldown = 0.0
  hesitation_index.clear()
+ last_punches = []
+ arrival_until = 0.0
 func update_corporation() -> void:
  var now := Time.get_ticks_msec()/1000.0
  state_before_refresh=corporation_state
@@ -706,6 +732,7 @@ func reset_voice() -> void:
  note_serial = -1
  clear(graffiti)
  graffiti_count = 0
+ shell_graffiti = {}
  hover_card = -1
  hover_time = 0.0
  hesitation_turn = -1
@@ -713,20 +740,21 @@ func reset_voice() -> void:
  hesitation_until = 0.0
  early_toast = false
  tomorrow_toast = false
+ mask_toast = false
  toast_until = 0.0
 
-func graffiti_label(line: Dictionary) -> PanelContainer:
+func graffiti_label(line: Dictionary, font_px: int = 12, padding: int = 3) -> PanelContainer:
  var paper := PanelContainer.new()
  paper.mouse_filter = Control.MOUSE_FILTER_IGNORE
  var style := StyleBoxFlat.new()
  style.bg_color = FriendlyLook.TONER
- style.set_content_margin_all(3)
+ style.set_content_margin_all(padding)
  paper.add_theme_stylebox_override("panel", style)
  var font: Font = ADP_STENCIL if line.style == "S" else ADP_MARKER
  if line.style == "P":
   paper.add_child(PunchedLetters.new(line.text))
  else:
-  var px := 12
+  var px := font_px
   while px > 8 and font.get_string_size(line.text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x > 194:
    px -= 1
   paper.add_child(FriendlyLook.label(line.text, px, FriendlyLook.PAPER, font))
@@ -734,6 +762,10 @@ func graffiti_label(line: Dictionary) -> PanelContainer:
 
 func show_voice_toast(line: String, now: float) -> void:
  toast_text.text = line
+ var px := 15
+ while px > 10 and skin.font.get_multiline_string_size(line, HORIZONTAL_ALIGNMENT_LEFT, 184, px).y > 72:
+  px -= 1
+ toast_text.add_theme_font_size_override("font_size", px)
  toast_until = now + 3.0
 
 func update_voice(delta: float) -> void:
@@ -753,11 +785,23 @@ func update_voice(delta: float) -> void:
  var targets := [Vector2(40, 568), Vector2(40, 593), Vector2(1360, 640), Vector2(1360, 675)]
  var count := int({"A": 1, "B": 2, "C": 4}.get(band, 0))
  while graffiti_count < count:
-  var line := AdpCopy.pick("graffiti", skin.corporation, graffiti_count + game.row)
+  var index := SignalCards.ORDER.find(game.corporation)
+  var shared := band == "C" and count - 1 == graffiti_count and index > 0
+  var line := AdpCopy.pick("graffiti", "" if shared else skin.corporation, graffiti_count + game.row)
   if line.is_empty(): break
-  var tag := graffiti_label(line)
-  at(graffiti, tag, targets[graffiti_count])
+  var shell := -1
+  if graffiti_count == 1:
+   shell = game.enc.ice.map(func(ice): return ice.id).find("AUTO_RENEW")
+  if shell >= 0:
+   shell_graffiti = line
+   add_shell_graffiti(mascots[shell])
+  else:
+   at(graffiti, graffiti_label(line), targets[graffiti_count])
   graffiti_count += 1
+ if band == "C" and corporation_state == "mask_off" and not mask_toast:
+  mask_toast = true
+  var line := AdpCopy.pick("reply", skin.corporation, 0)
+  if not line.is_empty(): show_voice_toast(line.trigger, now)
  if now >= toast_until:
   if not early_toast and band in ["", "A"] and game.enc.turn >= 2:
    early_toast = true
@@ -769,6 +813,9 @@ func update_voice(delta: float) -> void:
    if not line.is_empty(): show_voice_toast(line.text, now)
  var reply := AdpCopy.pick("reply", skin.corporation, 0, {"trigger": toast_text.text})
  toast_reply.text = reply.get("text", "") if band == "C" else ""
+ if not toast_reply.text.is_empty():
+  var font: Font = ADP_STENCIL if reply.style == "S" else ADP_MARKER
+  toast_reply.add_theme_font_override("font", font)
  update_hesitation(delta, now)
 
 func update_hesitation(delta: float, now: float) -> void:
@@ -803,3 +850,36 @@ func update_hesitation(delta: float, now: float) -> void:
  for i in mascots.size():
   var line := hesitation_line if eligible and i == hesitation_ice and now < hesitation_until and hesitation_turn == game.enc.turn else ""
   mascots[i].set_hesitation(line)
+
+func update_punch_holder() -> void:
+ if last_punches == game.punch_cards and punch_shadow.get_child_count() != 0: return
+ clear(punch_shadow)
+ punch_count.text = "%d/3" % game.punch_cards.size()
+ for i in SignalCards.ORDER.size():
+  var corp: String = SignalCards.ORDER[i]
+  var has_card := game.punch_cards.has(corp)
+  var card := PunchStock.new([corp] if has_card else [])
+  var target := Vector2(40 + i * 36, 5)
+  at(punch_shadow, card, target, Vector2(32, 21))
+  if has_card and not last_punches.has(corp) and not reduced_motion:
+   card.position.y = -21
+   card.create_tween().tween_property(card, "position:y", target.y, 0.32).set_trans(Tween.TRANS_CUBIC)
+ last_punches = game.punch_cards.duplicate()
+
+func add_shell_graffiti(mascot: FriendlyMascot) -> void:
+ if shell_graffiti.is_empty(): return
+ # The Auto-Renew card has an unused strip above its action and below the account digits.
+ var stamp := graffiti_label(shell_graffiti, 10, 2)
+ stamp.name = "ShellGraffiti"
+ at(mascot, stamp, Vector2(62, 168))
+
+func present_punch_arrival(corp: String) -> void:
+ clear(punch_arrival)
+ var card := PunchStock.new([corp])
+ at(punch_arrival, card, Vector2(24, 20), Vector2(152, 65))
+ var slot := FriendlyLook.panel(FriendlyLook.SLATE, FriendlyLook.PAPER, 1, 2)
+ at(punch_arrival, slot, Vector2(18, 12), Vector2(164, 8))
+ if not ui.reduced_motion:
+  card.position.y = -49
+  card.create_tween().tween_property(card, "position:y", 20, 0.38).set_trans(Tween.TRANS_CUBIC)
+ arrival_until = Time.get_ticks_msec() / 1000.0 + 3.0

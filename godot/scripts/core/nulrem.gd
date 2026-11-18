@@ -7,7 +7,7 @@ const SPEAK := {
 	"EV-01": 1.0, "EV-02": 1.0, "EV-03": 1.0, "EV-04": 1.0, "EV-05": 0.6, "EV-06": 0.35, "EV-07": 0.5,
 	"EV-08": 0.8, "EV-09": 0.9, "EV-10": 0.8, "EV-11": 1.0, "EV-12": 0.9, "EV-13": 1.0, "EV-14": 1.0,
 	"EV-15": 1.0, "EV-16": 1.0, "EV-17": 1.0, "EV-18": 1.0, "EV-21": 0.5, "EV-26": 0.8, "EV-27": 0.5,
-	"EV-28": 1.0, "EV-35": 1.0, "EV-37": 1.0, "EV-39": 1.0,
+	"EV-28": 1.0, "EV-33": 1.0, "EV-35": 1.0, "EV-37": 1.0, "EV-39": 1.0,
 }
 
 var lines: Array = []
@@ -30,7 +30,9 @@ func pick(trigger: String, ctx: Dictionary = {}) -> Dictionary:
 		return {}
 	var pool := []
 	for l in lines:
-		if l.trigger != trigger:
+		if l.trigger != trigger or not ArchCopy.valid_line(l):
+			continue
+		if l.get("tag") == "reveal" and not ArchCopy.may_show(l, ctx.get("punch_cards", [])):
 			continue
 		var t: Dictionary = l.tags
 		if t.has("rustler") and t.rustler != rustler:

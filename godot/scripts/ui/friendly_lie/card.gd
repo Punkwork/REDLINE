@@ -122,6 +122,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var type_h:=14 if corp or rule.length()>280 else 26
  var art := FriendlyLook.label("" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
  art.position = Vector2(16, art_y); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
+ var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
  if not corp and art_h>10:
   art.hide()
   var atlas:=preload("res://assets/friendly_lie/chrome/toner-illustrations.png")
@@ -132,16 +133,12 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   elif id=="CORTEX_BUFFER" or d.type=="PROTOCOL": index=5
   var tile:=AtlasTexture.new(); tile.atlas=atlas; tile.filter_clip=true; tile.region=Rect2(Vector2((index%3)*atlas.get_width()/3,(index/3 as int)*atlas.get_height()/2),Vector2(atlas.get_width()/3,atlas.get_height()/2))
   var illustration:=TextureRect.new(); illustration.name="TonerIllustration"; illustration.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; illustration.texture=tile; illustration.position=Vector2(16,art_y); illustration.size=Vector2(128,art_h); illustration.clip_contents=true; illustration.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED; illustration.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(illustration)
-  var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
   if graft in Game.GRAFT_PARTS:
    illustration.hide()
-   var overlay := GraftArt.new()
-   overlay.name = graft
-   overlay.position = illustration.position
-   overlay.size = illustration.size
-   overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-   body.add_child(overlay)
+   add_graft_art(graft, Rect2(illustration.position, illustration.size))
   var box := ArtBox.new(); box.position=Vector2(16,art_y); box.size=Vector2(128,art_h); box.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(box)
+ if not corp and art_h <= 10 and graft in Game.GRAFT_PARTS:
+  add_graft_art(graft, Rect2(149, 75, 20, 22))
  if corp:
   var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(16,art_y); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
  var category: String=d.type + (" · " + view.skin.corporation if corp else " · " + rarity)
@@ -174,6 +171,14 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   mouse_exited.connect(func(): view.hover_uid = -1; view.hand.release_card(self))
  gui_input.connect(_card_input)
  queue_redraw()
+func add_graft_art(graft: String, bounds: Rect2) -> void:
+ var overlay := GraftArt.new()
+ overlay.name = graft
+ overlay.position = bounds.position
+ overlay.size = bounds.size
+ overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ body.add_child(overlay)
+
 func _draw() -> void:
  draw_rect(Rect2(Vector2(4,22),size-Vector2(0,18)),FriendlyLook.TONER)
  if uid>=0 and (z_index==100 or view.ui.targeting==uid): draw_rect(PHYSICAL_RECT.grow(2),FriendlyLook.HIGHLIGHT,false,3)

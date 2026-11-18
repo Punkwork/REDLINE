@@ -146,5 +146,20 @@
 {"id":"newsreel-145","kind":"newsreel","corp":"LUCIDA","text":"Tonight, while you sleep, LUCIDA tidies up the day: a little worry here, a sharp word there. Wake up lighter. Tomorrow, together.","tag":"hint","approval":"approved","title":"Rest, Reimagined"},
 {"id":"newsreel-146","kind":"newsreel","corp":"LUCIDA","text":"With Dreamsave™, every good dream is kept safe, so you never lose one again. Tomorrow, together.","tag":"hint","approval":"approved","title":"Your Dreams, Saved"},
 {"id":"newsreel-147","kind":"newsreel","corp":"LUCIDA","text":"Mrs. Avery used to lie awake at night. Now she can't remember why. Tomorrow, together.","tag":"hint","approval":"approved","title":"A Quieter Mind"},
-{"id":"graffiti-148","kind":"graffiti","corp":"","text":"SAME SMILE, DIFFERENT BADGE","tag":"hint","approval":"approved","style":"S","band":"C"}
+{"id":"graffiti-148","kind":"graffiti","corp":"","text":"SAME SMILE, DIFFERENT BADGE","tag":"hint","approval":"approved","style":"S","band":"C"},
+{"id":"product-1","kind":"product","corp":"HALCYON","text":"HALCYON Welcome™","description":"The door that unlocks as you approach","tag":"flavour","approval":"approved"},
+{"id":"product-2","kind":"product","corp":"IRONWATCH","text":"SafeStreets Courtesy™","description":"Location sharing \"so officers can reach you\"","tag":"flavour","approval":"approved"},
+{"id":"product-3","kind":"product","corp":"LUCIDA","text":"Gentle Adjust™","description":"Changes made while you sleep","tag":"flavour","approval":"approved"},
+{"id":"product-4","kind":"product","corp":"HALCYON","text":"HomeSense™","description":"Knowing who's home","tag":"flavour","approval":"approved"},
+{"id":"product-5","kind":"product","corp":"IRONWATCH","text":"Trusted Resident™","description":"The status badge","tag":"flavour","approval":"approved"},
+{"id":"product-6","kind":"product","corp":"LUCIDA","text":"Rest Easy™","description":"The sleep programme","tag":"flavour","approval":"approved"},
+{"id":"product-7","kind":"product","corp":"HALCYON","text":"KettleReady™","description":"Your home ready before you arrive","tag":"flavour","approval":"approved"},
+{"id":"product-8","kind":"product","corp":"IRONWATCH","text":"Safety Score™","description":"The 0–100 score","tag":"flavour","approval":"approved"},
+{"id":"product-9","kind":"product","corp":"LUCIDA","text":"Dreamsave™","description":"Keeping your dreams","tag":"flavour","approval":"approved"},
+{"id":"product-10","kind":"product","corp":"HALCYON","text":"Comfort Score™","description":"The 0–100 score","tag":"flavour","approval":"approved"},
+{"id":"product-11","kind":"product","corp":"IRONWATCH","text":"FastLane™","description":"Skipping checkpoints","tag":"flavour","approval":"approved"},
+{"id":"product-12","kind":"product","corp":"LUCIDA","text":"Sleep Score™","description":"The 0–100 score","tag":"flavour","approval":"approved"},
+{"id":"product-13","kind":"product","corp":"HALCYON","text":"Everyone's Home™","description":"The family presence feed","tag":"flavour","approval":"approved"},
+{"id":"product-14","kind":"product","corp":"IRONWATCH","text":"NeighbourWatch™","description":"Reporting your neighbours","tag":"flavour","approval":"approved"},
+{"id":"product-15","kind":"product","corp":"LUCIDA","text":"CalmCloud™","description":"Thought backup","tag":"flavour","approval":"approved"}
 ]

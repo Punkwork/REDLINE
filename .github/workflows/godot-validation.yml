@@ -42,6 +42,7 @@ jobs:
           GODOT="Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$GODOT" --headless --path godot --editor --import --quit 2>&1 | tee /tmp/import.log
           "$GODOT" --headless --path godot --script res://tests/test_game.gd 2>&1 | tee /tmp/rules.log
+          "$GODOT" --headless --path godot --script res://tests/test_signal_carbon.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Verify screenshot states and large-hand interaction
         shell: bash
@@ -50,7 +51,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
           mkdir -p "$SHOT_DIR"
-          for script in shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel shot_friendly_lie shot_chrome shot_cartridges; do
+          for script in shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel shot_friendly_lie shot_chrome shot_cartridges shot_adp shot_adp_phase3 shot_signal_carbon; do
             xvfb-run -a -s '-screen 0 1600x1100x24' timeout 120 \
               "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
               --rendering-driver opengl3 --path godot --script "res://tests/${script}.gd" \

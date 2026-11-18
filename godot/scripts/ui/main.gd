@@ -34,6 +34,10 @@ var note_revision := 0
 var newsreel_index := 0
 var profile := PlayProfile.new()
 var personalized_ads := true
+var run_id := ""
+var defeat_entry := {}
+var carbon_open := false
+var punch_open := false
 var first_run := true
 var last_bloat := ""
 
@@ -295,6 +299,10 @@ func _build_layout() -> void:
 	add_child(overlay)
 
 func _new_run() -> void:
+	carbon_open = false
+	punch_open = false
+	defeat_entry.clear()
+	run_id = ""
 	_show_inspect("")
 	g = Game.new()
 	g.animate = true
@@ -304,6 +312,10 @@ func _new_run() -> void:
 
 func _start_as(who: String) -> void:
 	friendly.reset_session()
+	defeat_entry.clear()
+	carbon_open = false
+	punch_open = false
+	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	g.new_run(who)
 	profile.reset(g)
 	nr.rustler = CardDB.RUSTLERS[who].nulrem
@@ -318,6 +330,7 @@ func _start_as(who: String) -> void:
 # =====================================================================
 
 func _process(delta: float) -> void:
+	if g.phase == "DEAD" or carbon_open: return
 	idle += delta
 	if idle > 60.0:
 		idle = 0.0
@@ -464,12 +477,22 @@ func refresh() -> void:
 		spin_deferred = true   # don't rebuild (and restart) the reels mid-spin
 		return
 	profile.observe(g, personalized_ads)
+	if g.phase == "DEAD":
+		if defeat_entry.is_empty() or not defeat_entry.get("saved", true):
+			voice.stop()
+			if run_id.is_empty(): run_id = Crypto.new().generate_random_bytes(16).hex_encode()
+			defeat_entry = CarbonRecord.append_defeat(run_id, g)
+		_show_inspect("")
+
 	_detect_tumbles()
 	_observe_break_audio()
 	_handle_events()
 	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE"]
 	friendly.visible = friendly_active
-	for widget in legacy_widgets: widget.visible = not friendly_active
+	for widget in legacy_widgets: widget.visible = not friendly_active and g.phase != "DEAD"
+	if g.phase == "DEAD":
+		_build_overlay()
+		return
 	if friendly_active:
 		friendly.sync(g)
 		_build_overlay()
@@ -516,6 +539,11 @@ func _handle_events() -> void:
 			last_bloat = e.get("card", "")
 			bloat_inserted = bloat_inserted or CardDB.def(last_bloat).type == "BLOATWARE"
 		if e.t == "EV-14": bloat_inserted = true
+		if e.t == "PUNCH_CARD":
+			friendly.present_punch_arrival(e.corp)
+			best_rank = -1
+			best = {"t": "EV-33", "corp": e.corp}
+			continue
 		if e.t == "SLICE_DONE":
 			continue
 		var rank := PRIORITY.find(e.t)
@@ -524,11 +552,11 @@ func _handle_events() -> void:
 			best = e
 	g.events.clear()
 	if bloat_inserted: friendly.music.play_effect("bloat")
-	if not best.is_empty():
+	if not best.is_empty() and g.phase != "DEAD":
 		_speak_event(best)
 
 func _speak_event(e: Dictionary) -> void:
-	var ctx := {"corp": "HALCYON", "bloat": e.get("card", last_bloat), "rest": "SAFEHOUSE"}
+	var ctx := {"punch_cards": g.punch_cards, "corp": e.get("corp", g.corporation), "bloat": e.get("card", last_bloat), "rest": "SAFEHOUSE"}
 	if e.t == "EV-35":
 		ctx["cause"] = "TRACE" if g.lockdown else ""
 	var line := nr.pick(e.t, ctx)
@@ -1310,8 +1338,17 @@ func _card_view(id: String, uid: int, selected: bool = false) -> PanelContainer:
 
 func _build_overlay() -> void:
 	_clear(overlay)
+	if carbon_open:
+		_overlay_carbon()
+		return
+	if g.phase == "DEAD":
+		_overlay_relocation()
+		return
+	if punch_open:
+		_overlay_punches()
+		return
 	if confirming_end:
-		var v := _dim_box("END THIS RUN?", "Your Rustler fails and the run is over. You'll return to the start menu to choose a Rustler.", 620)
+		var v := _dim_box("END THIS RUN?", "Your Rustler fails and the run is over.", 620)
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 16)
 		var yes := Button.new()
@@ -1362,9 +1399,8 @@ func _build_overlay() -> void:
 				"cache": _overlay_options(g.pending.get("title", "DEAD AIR"), g.pending.get("description", "Choose a card to CACHE: it stays in your hand at the end of your turn."), g.pending.options, g.hand, func(u): g.choose(u); refresh())
 		"DEEPER": _overlay_deeper()
 		"REWARD": _overlay_reward()
-		"SAFEHOUSE": _overlay_safehouse()
+		"SAFEHOUSE", "DEAD_DROP": _overlay_safehouse()
 		"SLICE_DONE": _overlay_end("SLICE COMPLETE", "You made it through HALCYON's first rows.\nVITAE %d · CRED %d · TRACE %d · strikes %d · deck %d cards" % [g.vitae, g.cred, g.trace, g.strikes, g.run_deck.size()])
-		"DEAD": _overlay_end("VITAE 0", "The run is over.")
 
 func _confirm_end_run() -> void:
 	if responding or spinning:
@@ -1373,17 +1409,14 @@ func _confirm_end_run() -> void:
 	refresh()
 
 func _end_run() -> void:
-	## The Rustler fails: NUL/REM gets his line, then back to the start menu.
 	confirming_end = false
 	g.abandon()
 	refresh()
-	_clear(overlay)
-	await get_tree().create_timer(2.5).timeout
-	_new_run()
 
-func _dim_box(title: String, sub: String, w: float = 900) -> VBoxContainer:
+
+func _dim_box(title: String, sub: String, w: float = 900, shade := Color(0, 0, 0, 0.72)) -> VBoxContainer:
 	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.72)
+	dim.color = shade
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
 	dim.mouse_filter = Control.MOUSE_FILTER_STOP
 	overlay.add_child(dim)
@@ -1546,7 +1579,7 @@ func _overlay_reward() -> void:
 	v.add_child(b)
 
 func _overlay_safehouse() -> void:
-	var v := _dim_box("SAFEHOUSE", "Choose one. VITAE %d / %d." % [g.vitae, g.max_vitae], 700)
+	var v := _dim_box("DEAD DROP" if g.phase == "DEAD_DROP" else "SAFEHOUSE", "Choose one. VITAE %d / %d." % [g.vitae, g.max_vitae], 700)
 	var a := Button.new()
 	a.text = "Heal %d VITAE" % Game.SAFEHOUSE_HEAL
 	a.custom_minimum_size = Vector2(0, 52)
@@ -1556,6 +1589,7 @@ func _overlay_safehouse() -> void:
 	b.text = "COMPILE two different SCRIPTs sharing a tag (instead of healing)"
 	b.pressed.connect(func(): compile_open = true; compile_first = -1; refresh())
 	v.add_child(b)
+	v.add_child(_carbon_button())
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
@@ -1584,7 +1618,16 @@ func _overlay_select() -> void:
 		if LocalRecord.erase(PlayProfile.PATH):
 			profile.reset(g)
 			reset_ads.text = "Ad history cleared")
-	v.add_child(reset_ads)
+	var record_options := HBoxContainer.new()
+	record_options.add_child(reset_ads)
+	record_options.add_child(_carbon_button("DEAD DROP · "))
+	var clear_carbon := Button.new()
+	clear_carbon.text = "Clear lost Rustler record"
+	clear_carbon.pressed.connect(func():
+		if LocalRecord.erase(CarbonRecord.PATH):
+			clear_carbon.text = "Lost Rustler record cleared")
+	record_options.add_child(clear_carbon)
+	v.add_child(record_options)
 	var music_options := HBoxContainer.new()
 	music_options.add_child(_lbl("Music volume", 15, TEXT))
 	var volume_slider := HSlider.new()
@@ -1636,6 +1679,112 @@ func _overlay_select() -> void:
 		var w: String = who
 		b.pressed.connect(func(): _show_newsreel(w))
 		row.add_child(b)
+	_add_profile_ad(v)
+
+func _carbon_button(prefix: String = "") -> Button:
+	var button := Button.new()
+	button.text = prefix + ArchCopy.pool("carbon_title", "", true)[0].text
+	button.pressed.connect(func():
+		carbon_open = true
+		refresh())
+	return button
+
+func _overlay_relocation() -> void:
+	var skin := FriendlyLook.skin(defeat_entry.corp)
+	var room := EmptyWorkstation.new()
+	room.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.add_child(room)
+	room.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	room.resized.connect(room.queue_redraw)
+	var desk := _dim_box("", "", 810, Color.TRANSPARENT)
+	var panel := desk.get_parent() as PanelContainer
+	panel.add_theme_stylebox_override("panel", FriendlyLook.style(skin.plaque_ground, skin.plaque_accent, 2, skin.radius))
+	var margins := panel.get_theme_stylebox("panel") as StyleBoxFlat
+	margins.set_content_margin_all(30)
+	var copy := FriendlyLook.label(CarbonRecord.relocation(defeat_entry), 38, skin.plaque_ink, skin.display_font)
+	copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	desk.add_child(copy)
+	desk.add_child(FriendlyLook.label(defeat_entry.island, 24, skin.plaque_ink, skin.font))
+	var programme: String = ArchCopy.pool("programme", defeat_entry.corp)[0].text
+	desk.add_child(FriendlyLook.label(programme, 15, skin.plaque_ink, skin.font))
+	desk.add_child(_carbon_button())
+
+func _overlay_carbon() -> void:
+	var page := _dim_box("", "", 810)
+	var holder := page.get_parent() as PanelContainer
+	var generation := 2 if g.phase == "DEAD" else 4
+	var style := FriendlyLook.style(Color.TRANSPARENT)
+	style.content_margin_left = 58
+	style.content_margin_right = 48
+	style.content_margin_top = 36
+	style.content_margin_bottom = 46
+	holder.add_theme_stylebox_override("panel", style)
+	var sheet := SamizinePaper.new(generation)
+	overlay.add_child(sheet)
+	overlay.move_child(sheet, holder.get_index())
+	sheet.position = holder.position
+	holder.resized.connect(func(): sheet.size = holder.size)
+	sheet.size = holder.size
+	if g.phase != "DEAD":
+		page.add_child(FriendlyLook.label("DEAD DROP", 14, SamizinePaper.CARBON))
+	page.add_child(SamizinePaper.masthead(ArchCopy.pool("carbon_title", "", true)[0].text))
+	var records := [defeat_entry] if g.phase == "DEAD" else CarbonRecord.entries()
+	if records.is_empty():
+		page.add_child(FriendlyLook.label("No entries.", 20, SamizinePaper.CARBON, SamizinePaper.TYPEWRITER))
+	else:
+		var scroll := ScrollContainer.new()
+		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		scroll.custom_minimum_size.y = 136 if g.phase == "DEAD" else 390
+		page.add_child(scroll)
+		var list := VBoxContainer.new()
+		list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		list.add_theme_constant_override("separation", 16)
+		scroll.add_child(list)
+		var correction: String = ArchCopy.pool("carbon_correction")[0].text
+		for item in records:
+			var header := FriendlyLook.label("ISSUE %03d · %s" % [item.issue, item.rustler], 15, SamizinePaper.DITTO, SamizinePaper.STENCIL)
+			list.add_child(header)
+			var entry := RichTextLabel.new()
+			entry.fit_content = true
+			entry.scroll_active = false
+			entry.add_theme_font_override("normal_font", SamizinePaper.TYPEWRITER)
+			entry.add_theme_font_size_override("normal_font_size", 21)
+			entry.add_theme_color_override("default_color", SamizinePaper.CARBON)
+			entry.add_text("%s · %s · %s\nTaken to " % [item.date, item.corp, item.node])
+			entry.push_strikethrough()
+			entry.add_text(item.island)
+			entry.pop()
+			entry.push_font(SamizinePaper.MARKER_FONT)
+			entry.push_color(SamizinePaper.MARKER)
+			entry.add_text("  " + correction + ".")
+			entry.pop_all()
+			list.add_child(entry)
+	page.add_child(FriendlyLook.label("COPY %d OF 5 · READ IT, COPY IT, PASS IT ON" % generation, 14, SamizinePaper.DITTO, SamizinePaper.STENCIL))
+	if g.phase == "DEAD":
+		page.add_child(FriendlyLook.button("NEW RUN", _new_run, FriendlyLook.TONER, FriendlyLook.PAPER))
+	else:
+		page.add_child(FriendlyLook.button("BACK", func(): carbon_open = false; refresh(), FriendlyLook.TONER, FriendlyLook.PAPER))
+
+func open_punches() -> void:
+	punch_open = true
+	refresh()
+
+func _overlay_punches() -> void:
+	var page := _dim_box("", "", 820)
+	page.add_child(FriendlyLook.label("%d/3" % g.punch_cards.size(), 26, TEXT))
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 12)
+	page.add_child(row)
+	for corp in SignalCards.ORDER:
+		var card := PunchStock.new([corp] if g.punch_cards.has(corp) else [])
+		card.custom_minimum_size = Vector2(240, 128)
+		row.add_child(card)
+	if g.punch_cards.size() > 1:
+		var stack := PunchStock.new(g.punch_cards, false)
+		stack.custom_minimum_size = Vector2(240, 128)
+		stack.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		page.add_child(stack)
+	page.add_child(FriendlyLook.button("BACK", func(): punch_open = false; refresh()))
 
 func _show_newsreel(who: String) -> void:
 	var reel := AdpCopy.pick("newsreel", friendly_skin.corporation, newsreel_index)
@@ -1740,7 +1889,7 @@ func _overlay_deck(removing: bool) -> void:
 			b.tooltip_text = why.reason
 			b.pressed.connect(func(): g.decompile(card.uid); refresh())
 		else:
-			b.pressed.connect(func(): _show_inspect(card.id))
+			b.pressed.connect(func(): _show_inspect(card.id, true, card.uid))
 		list.add_child(b)
 	var close := Button.new()
 	close.text = "Back"
