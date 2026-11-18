@@ -1,6 +1,6 @@
 # PANOPTICON — ATOMIC DECO PUNK: MAKING THE SPLIT REALITY FELT
 **Version:** 0.5 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
-**Status:** **Approved (2026-11-17)**, except the "later" ideas, which have no build tasks yet. Approval history: Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1); the **hostile reveal growing with bleed** from 20% to 60% (§2); **Poiret One** for corporate headlines (§3.5); **Phase 1** and **Phase 3** (Part 3: bleed and sound; ads that know you, LUCIDA record edits, grafts). The designer also approved **SIGNAL-001: three First Signal punch cards** (§8); its presentation (§8.3) and build tasks (Phase 5) wait for approval. Still CONCEPT: Phase 2 and the "later" ideas. Open questions are in §7. Build only approved tasks.
+**Status:** **Approved (2026-11-17).** The designer approved ADP-R1 with a new definition of the zine (ZINE-001, §2.1), the hostile reveal growing from 20% to 60% (§2), Poiret One for corporate headlines (§3.5), Phases 1, 2, 3 and 5 of the build tasks, and SIGNAL-001, the three First Signal punch cards (§8). Only the "later" ideas are still CONCEPT, with no build tasks. No questions are open (§7). Build order: Phase 1 → 2 → 3 → 5, with Phase 4 fixtures as each lands.
 **Builds on:** *Atomic Deco Punk — DIRECTION* in `REDLINE_MASTER_DESIGN.md` §1; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`, VIS-001); CHROME-001; CARDS-001; RUSTLER-LOOK-001; FACADE-001 (`REDLINE_CORPORATE_FACADES.md`).
 **For:** Codex (Godot build, `godot/`).
 
