@@ -96,6 +96,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| HALCYON PLAYTEST 5 Windows build | Exported and verified the Windows x86-64 package with checklist v0.5. Windows launch and playtest are pending with the designer. | `98bad5f`, tag `playtest-5`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44232607877), [artifact](https://github.com/Punkwork/REDLINE/actions/runs/44232607877/artifacts/14395388972) |
 | HALCYON PLAYTEST 4 Windows build | Exported and verified the Windows x86-64 artifact with QA checklist v0.3. Windows launch and playtest are pending with the designer. | `b6b0971`, tag `playtest-4`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44202252857) |
 | FACADE-001 HALCYON copy | Designer approved the consent, remembered activity and reward lines for review in playtesting. | 2026-11-17 (designer; recorded by Codex) |
 | VIRUS-001 copy/move | Closed: WORM counters are **spent to break** (VIRUS-001); they don't spread to other ICE. The earlier copy-or-move question no longer applies (designer, 2026-11-15). | — (no change needed) |

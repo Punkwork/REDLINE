@@ -4,12 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — VIS-001: visual language "The Friendly Lie" handed to Codex (Claude)
-
-**Designer decision:** direction B chosen from three explorations (A Phosphor, B The Friendly Lie, C Watchtower): "I do really like the B option the friendly lie … I think this is a more suitable direction." Further requests in the same session: one encounter screen per corporation with its own background and palette; Rustlers draw 6 cards (maximum hand size not decided); show how the friendly face breaks and what full TRACE looks like; give ICE a personality that flips from cheery to lethal; put the mascots into the encounter screen; hand it to Codex.
-
-**Docs added:** `REDLINE_VISUAL_LANGUAGE.md` (Part 1 brief, Part 2 design, Part 3 build steps VIS-001a–g); `docs/visual/reference/` (10 PNGs), `docs/visual/backgrounds/` (4 placeholder JPGs), `docs/visual/mascots/` (9 SVGs). **Atomic Salvage deprecated (designer):** "I would deprecate that atomic salvage look." A deprecation note heads `REDLINE_UI_NULREM_Design_For_Claude.md` §1. §2.10 records that VIS-001 replaces the look of `REDLINE_UI_NULREM_Design_For_Claude.md` (Atomic Salvage) but keeps its requirements (drag-to-ICE chips, BW slits, no clipped text, REEL-001, END RUN, CRED meter, NUL/REM personality). **HANDOFF:** VIS-001 row (Codex, TO DO), a WAITING row (hand size, lethal threshold, proposal silhouettes). **Code changes:** none. **Tests:** none.
-
 ## 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex)
 
 **Commit tag:** `zeroed-tumble-step1`.
@@ -433,3 +427,16 @@ Removed free HOLD and documented non-CACHED discard and base draw of six. Moved 
 **Validation:** Godot 4.3 import and 361 rules checks passed. The ADP fixture passed 471 checks, including the wide encounter, backdrop layers and avatar scale.
 
 LOG-001: The oldest entry, ZEROED-001 and TUMBLE-001 readings confirmed (2026-11-16), moved to the archive unchanged.
+
+## 2026-11-17 — HALCYON PLAYTEST 5 Windows build (Codex)
+
+Exported `0.5.0-playtest.5` for Windows x86-64 from `98bad5f411adc9d30f59c4443288f9473a0067b9` (tag `playtest-5`). Local Godot 4.3 import passed, along with 361 rules checks, 17 ADP checks and all 11 screenshot scripts. GitHub Actions validated the push and uploaded the artifact. The downloaded `BUILD_COMMIT.txt`, README and QA checklist v0.5 matched the source, and the executable's SHA-256 verified as `f70ee7a007e564bbe78d5a7546a5756a08bad48a7513d9bfdca479d92221c0dd`. Windows launch and playtest remain pending with the designer. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44232607877) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44232607877/artifacts/14395388972)
+
+| Rustler | Clears / 30 | Deaths by Node | Survivor mean VITAE | Stalls |
+|---|---:|---|---:|---|
+| GENERALIST | 19 | CAPTCHA 6, TERMS & CONDITIONS 5 | 13.0 | 0 |
+| ECHO | 13 | TERMS & CONDITIONS 14, CAPTCHA 1, DOORBELL 2 | 13.8 | 0 |
+| RIOT | 16 | DOORBELL 4, CAPTCHA 3, TERMS & CONDITIONS 5 | 18.4 | 2 at DOORBELL |
+| VECTOR | 15 | CAPTCHA 5, TERMS & CONDITIONS 9, CONSENT WALL 1 | 11.2 | 0 |
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001: visual language "The Friendly Lie" handed to Codex (Claude).
