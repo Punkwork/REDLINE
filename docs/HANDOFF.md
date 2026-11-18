@@ -41,6 +41,8 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 **The Archipelago (ARCH-001, approved 2026-11-18):** build ARCH-1a–c from `REDLINE_ARCHIPELAGO.md` §8 (relocation defeat screen and *THE CARBON* page; local persistent *THE CARBON* record read at DEAD DROP; copy tables with guards: the full word "Archipelago" never on screen, "’Pelago" never in corporate or rules strings, "gulag" never on screen, island-purpose lines tagged `reveal`). Owner: Codex. Order: after ADP Phase 2, alongside Phase 5 (SIG-5d). No rules change.
 
+**SAMIZINE (ZINE-003, approved 2026-11-18):** the look for in-world underworld publications, spec in `REDLINE_SAMIZINE.md`, boards in `docs/visual/samizine/`. Owner: Codex. No separate build task: use it where ARCH-1a (the defeat screen's CARBON page) and ARCH-1b (the record at DEAD DROP) draw zine pages, and add the Special Elite font with its licence.
+
 **Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
 
 ---
@@ -99,6 +101,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| ZINE-003 SAMIZINE | Design canvas built and reviewed in three rounds; spec `REDLINE_SAMIZINE.md`, boards, review PDF and canvas sources in `docs/visual/samizine/`. ARCH-SLANG-001 (’Pelago) and ARCH-NAMES-001 / ARCH-LINES-001 recorded. | 2026-11-18 (designer; recorded by Claude) |
 | ADP §1.1 / ZINE-002 / ARCH-001 docs | Atompunk comparison (term stays); the zine as the underworld's samizdat; `REDLINE_ARCHIPELAGO.md` approved (decisions 1–4); ADP v0.8 links §8 to ARCH-001; decisions recorded in the master design doc. | 2026-11-18 (designer; recorded by Claude) |
 | HALCYON PLAYTEST 5 Windows build | Exported and verified the Windows x86-64 package with checklist v0.5. Windows launch and playtest are pending with the designer. | `98bad5f`, tag `playtest-5`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44232607877), [artifact](https://github.com/Punkwork/REDLINE/actions/runs/44232607877/artifacts/14395388972) |
 | HALCYON PLAYTEST 4 Windows build | Exported and verified the Windows x86-64 artifact with QA checklist v0.3. Windows launch and playtest are pending with the designer. | `b6b0971`, tag `playtest-4`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44202252857) |
