@@ -1649,3 +1649,26 @@ TESTS: 310 passed, 0 failed
 
 
 <!-- LOG-001: oldest whole entries appended on 2026-11-17 (Codex). -->
+
+## 2026-11-15 — UI-004: horizontal card-choice menus (Codex)
+
+**Request:** First Windows playtest showed HOLD and Generalist READY RIG cards wrapping vertically, hiding most choices. Display the cards horizontally.
+
+**Changed:** Replaced the shared choice menu's HFlowContainer with an HBoxContainer and explicitly enabled horizontal scrolling. All choice cards remain in one row; the full height fits above the scrollbar. This also fixes other menus using the same helper.
+
+**Verification:** Godot 4.3 full rules suite: 310 passed, 0 failed. The display-backed playtest-3 script passes with zero failures, including horizontal alignment/full-height checks for HOLD and READY RIG, an overflowing READY RIG fixture, and scrolling until its final card is fully visible. Ten fixture screenshots render.
+
+**Delivery:** Feature branch `codex/horizontal-choice-menus`, targeting `codex/halcyon-playtest-stabilization`. The existing Windows ZIP remains unchanged until this fix is merged and the stabilization workflow exports it.
+
+
+## 2026-11-16 — ZEROED-001: ICE STR floors at 0; ZEROED keyword, once per ICE; ROT-001 doc sync (Claude)
+
+**Designer decisions (2026-11-16):**
+- **ZEROED-001 (APPROVED):** "I think 0 str is a good bottom … it results in too much confusion and counting for the player." ICE STR can't go below 0; DSY-009's UNDERFLOW is withdrawn and ROT keeps its "minimum 0". A reduction past 0 is lost; spare ROT counters keep an ICE at 0 if it gains STR. MARGIN and OVERKILL stay (the game shows MARGIN).
+- **ZEROED keyword (APPROVED), "once per ICE":** a card's ZEROED bonus triggers if it takes target ICE from above 0 to 0. Each ICE can be ZEROED once per encounter; the first drop to 0 from any cause uses it up, so the ZEROED card has to land last. Floored ICE (DEADBOLT, SYNAPSE BARRIER, AMNESIA) and ICE starting at 0 can't be ZEROED. The "any cause" reading is Claude's write-up for the designer to confirm.
+- **Cards (PROPOSED):** NULL POINTER replaces INTEGER UNDERFLOW (target ICE at 0 STR: break 2 subroutines, BURNED); RIOT ZEROED examples FLATLINE (ZEROED: −4 TRACE), KNOCKOUT (ZEROED: break 1), SECOND WIND (ZEROED: +1 BW).
+- **ROT-001 sync:** remaining SIGYL labels in Card Pools, Rustlers, ICE Corp 1–3, Upgrades and Engines changed to TUMBLER; non-slice TUMBLERS still need slot counts.
+
+**Docs changed:** `REDLINE_DECK_SYNERGY.md` v1.1 (§0, §5.2, §5.3 rewritten, new §5.3a ZEROED, §7, §9.2, §10, §11, §12); Core Rules §5.3, §5.7 and amendments; Rustlers, Pacing amendments; HANDOFF (build item for Codex: revert negative STR from `playtest3-step4`, add ZEROED flag). **Code changes:** none. **Tests:** none.
+
+<!-- LOG-001: oldest whole entries appended on 2026-11-17 (Codex). -->

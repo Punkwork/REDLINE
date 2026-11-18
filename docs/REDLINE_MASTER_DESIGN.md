@@ -15,9 +15,17 @@ PANOPTICON is a cyberpunk rustler-versus-corporation, card-driven game with ICE 
 
 **Production direction (LOCKED):** **Godot 4** is the target production engine. The existing **Python/Pygame** build remains the gameplay reference and regression baseline; migration must preserve tested behaviour rather than inventing replacement rules.
 
-### Raygun Gothic and corporate surveillance — DIRECTION (2026-11-17)
+### Atomic Deco Punk — DIRECTION (2026-11-17)
 
-Raygun Gothic is the public face of a slightly askew cyberpunk world. The three corporations combine the geometric polish and faith in progress of Art Deco with the Atomic Age promise that technology will make life brighter, easier, and safer. Their public image is immaculate, relentlessly cheerful, and a little too sweet. Underneath it, surveillance is a business model. Each corporation watches to a different degree, and each packages that access as a benefit.
+**Atomic Deco Punk** is the designer’s term for PANOPTICON’s artistic language. Raygun Gothic is a visual reference for the corporate world. Atomic Deco Punk brings together the exuberance and faith in progress of the Atomic Age, the streamlined industrial design of Art Deco, and punk’s defiance and do-it-yourself craft. Engineers build and repair their own elektronix alongside the monolithic buildings and standardized processes of the great industrial corporations. Both groups inherit the same technological optimism and put it to different uses.
+
+**Visual design leads.** On the corporate side, make mass production and institutional scale visible in the repeated geometry, polished finishes and coordinated appliances. On the Rustler side, let the player see how a person built or repaired the thing they’re handling. Salvaged cartridge bodies, exposed wiring, hand-applied markings and photocopied controls belong to the same technological world as the seamless corporate products. Carry that relationship through environments, interfaces, props and cards.
+
+**Tone and language.** The three corporations sell access to home, street and mind in the language of comfort, public safety and care. Their product voices stay solicitous as routine interactions reveal how much they have observed. The Rustler’s language can be practical, irreverent and specific, with room for humour and unease.
+
+**Sound.** Explore period-inflected service chimes, well-damped mechanical clicks and reassuring voices on the corporate side. On the hand-built side, explore relay chatter, switch noise and irregular electronic hum. A familiar reassurance cue can acquire a different meaning when it plays during a surveillance reveal. Use these as sound directions to try in playtesting.
+
+**Player experience.** Let the player feel the appeal of the corporate promise before they realize what it costs. Then let the convenience become unnerving through specific details such as a service remembering an unreported trip or a polite appliance refusing to let them leave. Keep the corporate presentation composed as the situation turns threatening. The Rustler’s tools should feel like things people made to retain some agency in that world.
 
 This is a primary design principle for the game’s world, writing, and entire interface. Carry the same visual language through navigation, menus, account screens, consent prompts, dashboards, and status messages as well as the cards. Use stepped frames and symmetrical layouts, polished metal, and bright Atomic Age motifs. Let each corporation’s surveillance model shape what its interfaces ask for, what they remember, and what they present as a reward. Players should be able to feel the differences between the corporations in routine interactions.
 

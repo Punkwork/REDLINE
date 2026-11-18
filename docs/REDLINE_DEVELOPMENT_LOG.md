@@ -4,27 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-15 — UI-004: horizontal card-choice menus (Codex)
-
-**Request:** First Windows playtest showed HOLD and Generalist READY RIG cards wrapping vertically, hiding most choices. Display the cards horizontally.
-
-**Changed:** Replaced the shared choice menu's HFlowContainer with an HBoxContainer and explicitly enabled horizontal scrolling. All choice cards remain in one row; the full height fits above the scrollbar. This also fixes other menus using the same helper.
-
-**Verification:** Godot 4.3 full rules suite: 310 passed, 0 failed. The display-backed playtest-3 script passes with zero failures, including horizontal alignment/full-height checks for HOLD and READY RIG, an overflowing READY RIG fixture, and scrolling until its final card is fully visible. Ten fixture screenshots render.
-
-**Delivery:** Feature branch `codex/horizontal-choice-menus`, targeting `codex/halcyon-playtest-stabilization`. The existing Windows ZIP remains unchanged until this fix is merged and the stabilization workflow exports it.
-
-
-## 2026-11-16 — ZEROED-001: ICE STR floors at 0; ZEROED keyword, once per ICE; ROT-001 doc sync (Claude)
-
-**Designer decisions (2026-11-16):**
-- **ZEROED-001 (APPROVED):** "I think 0 str is a good bottom … it results in too much confusion and counting for the player." ICE STR can't go below 0; DSY-009's UNDERFLOW is withdrawn and ROT keeps its "minimum 0". A reduction past 0 is lost; spare ROT counters keep an ICE at 0 if it gains STR. MARGIN and OVERKILL stay (the game shows MARGIN).
-- **ZEROED keyword (APPROVED), "once per ICE":** a card's ZEROED bonus triggers if it takes target ICE from above 0 to 0. Each ICE can be ZEROED once per encounter; the first drop to 0 from any cause uses it up, so the ZEROED card has to land last. Floored ICE (DEADBOLT, SYNAPSE BARRIER, AMNESIA) and ICE starting at 0 can't be ZEROED. The "any cause" reading is Claude's write-up for the designer to confirm.
-- **Cards (PROPOSED):** NULL POINTER replaces INTEGER UNDERFLOW (target ICE at 0 STR: break 2 subroutines, BURNED); RIOT ZEROED examples FLATLINE (ZEROED: −4 TRACE), KNOCKOUT (ZEROED: break 1), SECOND WIND (ZEROED: +1 BW).
-- **ROT-001 sync:** remaining SIGYL labels in Card Pools, Rustlers, ICE Corp 1–3, Upgrades and Engines changed to TUMBLER; non-slice TUMBLERS still need slot counts.
-
-**Docs changed:** `REDLINE_DECK_SYNERGY.md` v1.1 (§0, §5.2, §5.3 rewritten, new §5.3a ZEROED, §7, §9.2, §10, §11, §12); Core Rules §5.3, §5.7 and amendments; Rustlers, Pacing amendments; HANDOFF (build item for Codex: revert negative STR from `playtest3-step4`, add ZEROED flag). **Code changes:** none. **Tests:** none.
-
 ## 2026-11-16 — ZEROED-001 cards approved; TUMBLE-001; LOG-001; Codex handoff (Claude)
 
 **Designer decisions (2026-11-16):**
@@ -430,3 +409,7 @@ Tagged `b6b0971e017e6e88929ff1a4a6e67cadfaa2f516` as `playtest-4`. [Actions vali
 ## 2026-11-17 — Playtest checklist v0.4 for HALCYON PLAYTEST 4 (Claude)
 
 **Designer instruction:** update the REDLINE Playtest QA Checklist with appropriate changes for the new build. `REDLINE_PLAYTEST_CHECKLIST.md` v0.4 and the live Sheet (now 84 rows) both: tie to build b6b0971 (`playtest-4`); add A3 (confirm build and BUILD_COMMIT; scope is HALCYON's first four rows, so IRONWATCH, LUCIDA, Central Node H3/J1/J2 and whole-corporation totals G5/I2/K2 are N/A) and L9 (Icepick drag feedback, CHROME-001); drop the *(after …)* marks on C12–C14, C16 and M5 now that they're built, with the built details (turn-start roll, SCRAMBLE, DOORBELL CAM reveal order, AUTO-RENEW STR 5 vs CAPTCHA STR 4). Run log gains a Build column. **Code changes:** none.
+
+## 2026-11-17 — Atomic Deco Punk design direction (Codex)
+
+Recorded the designer’s term and brief in the master design document. The direction covers corporate scale alongside hand-built elektronix, with visual design leading the tone, language, sound and emotional experience. Sound examples are directions to explore in playtesting. LOG-001 moved the oldest whole live entries to the archive unchanged.
