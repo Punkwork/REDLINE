@@ -4,3 +4,6 @@ https://github.com/google/fonts/tree/main/ofl/dmsans
 https://github.com/google/fonts/tree/main/ofl/spacemono
 
 Poiret One Regular and its SIL OFL 1.1 license were downloaded from https://github.com/google/fonts/tree/main/ofl/poiretone on 2026-11-17 for ADP-1f. Used for corporate display headlines only.
+
+- Stardos Stencil — Google Fonts, SIL OFL.
+- Permanent Marker — Google Fonts, Apache 2.0.

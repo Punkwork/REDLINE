@@ -160,6 +160,15 @@ func run() -> void:
  await test_backdrop_resize()
  g = start()
  await snapshot("adp-bleed-0",0.0)
+ check(view.leak.is_empty() and view.graffiti_count == 0, "zero bleed has no leaks or graffiti")
+ view.hover_uid = g.hand[0].uid
+ var now := Time.get_ticks_msec() / 1000.0
+ view.update_hesitation(3.9, now)
+ check(view.hesitation_turn == -1, "hesitation does not fire early")
+ view.update_hesitation(0.2, now)
+ check(view.hesitation_line == "No rush! Humans take a moment.", "ties prefer the main ICE")
+ check(g.enc.turn == 1, "hesitation does not advance play")
+ await snapshot("adp-hesitation",0.0)
 
  g.add_trace(20,false); main.refresh()
  check(is_equal_approx(view.surveillance_layer.modulate.a,0.2), "TRACE 20 reveals 20% without motion")
@@ -169,6 +178,13 @@ func run() -> void:
  g.add_trace(19,false); main.refresh()
  view.advance_bleed(float(AtomicDecoPunk.settings.bleed.ease_seconds) / 2.0)
  for wear in view.worn_panels: wear.update_wear(view.bleed,true,0.0)
+ # Seed only the cosmetic RNG to select a leak at the documented 1-in-2 rate.
+ for seed_value in 16:
+  view.voice_rng.seed = seed_value
+  main.note_revision += 1
+  view._process(0.0)
+  if not view.leak.is_empty(): break
+ check(not view.leak.is_empty() and view.graffiti_count == 2, "band B can show a leak and two tags")
  await snapshot("adp-bleed-04",0.4)
  view.advance_bleed(float(AtomicDecoPunk.settings.bleed.ease_seconds) / 2.0)
  check(is_equal_approx(view.surveillance_layer.modulate.a,0.6), "TRACE 39 finishes at 60%")
@@ -176,6 +192,7 @@ func run() -> void:
  main.reduced_motion = true
  g.add_trace(1,false); main.refresh()
  check(view.background.texture == view.skin.hostile_background and not view.surveillance_layer.visible, "Strike uses the existing full hostile background")
+ check(view.strike_overlay.find_children("*", "Label", true, false).any(func(label): return label.text == "SEE THIS"), "strike reply appears outside the modal")
  await snapshot("adp-strike",0.8)
  view.dismiss_strike()
  check(is_equal_approx(view.bleed,0.2), "dismissal restores the post-strike floor")

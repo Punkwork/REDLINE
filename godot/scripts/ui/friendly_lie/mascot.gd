@@ -70,6 +70,9 @@ func place(child: Control, pos: Vector2, extent: Vector2 = Vector2.ZERO) -> Cont
  child.position = pos
  if extent != Vector2.ZERO: child.size = extent
  add_child(child); return child
+var speech_copy: Label
+var normal_copy := ""
+
 func setup(owner_view, i: int, state: String) -> void:
  view = owner_view; ice_ref=view.game.enc.ice[i]; index = i; mood = state; custom_minimum_size = Vector2(480, 230); size = custom_minimum_size
  mouse_filter = Control.MOUSE_FILTER_PASS
@@ -176,9 +179,13 @@ func setup(owner_view, i: int, state: String) -> void:
  if id == "ACCEPT_ALL": speech_pos=Vector2(290,3); speech_size=Vector2(185,57)
  var soft_speech := speech.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; soft_speech.shadow_color=Color(0,0,0,0.10); soft_speech.shadow_size=12; soft_speech.shadow_offset=Vector2(0,5); speech.add_theme_stylebox_override("panel",soft_speech)
  place(speech,speech_pos,speech_size); speech.mouse_filter=Control.MOUSE_FILTER_IGNORE
- var copy_size:=18
- while copy_size>14 and view.skin.bold_font.get_multiline_string_size(line,HORIZONTAL_ALIGNMENT_LEFT,speech_size.x-24,copy_size).y>speech_size.y-18: copy_size-=1
- var copy := FriendlyLook.label(line,copy_size,ink,view.skin.bold_font); copy.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; copy.position=Vector2(12,10); copy.size=speech_size-Vector2(24,18); speech.add_child(copy)
+ normal_copy = line
+ speech_copy = FriendlyLook.label("", 18, ink, view.skin.bold_font)
+ speech_copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ speech_copy.position = Vector2(12, 10)
+ speech_copy.size = speech_size - Vector2(24, 18)
+ speech.add_child(speech_copy)
+ set_hesitation("")
  var d: Dictionary = view.game.ice_definition(ice)
  for sub in d.subs.size():
   if not Game._has_deadlock(d.subs[sub]): continue
@@ -239,3 +246,14 @@ func _process(delta: float) -> void:
  var shake := sin(clock*180)*2 if mood=="lethal" and previous_mood!="lethal" and clock<0.06 else 0.0
  position=base_position+motion_offset+Vector2(shake,bob)
  if is_instance_valid(glow): glow.modulate.a=0.65+0.35*(sin(clock*TAU)*0.5+0.5)
+
+func set_hesitation(line: String) -> void:
+ var text := normal_copy if line.is_empty() else line
+ if speech_copy.text == text: return
+ speech_copy.text = text
+ var font := speech_copy.get_theme_font("font")
+ var size_px := 18
+ while size_px > 10 and font.get_multiline_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, speech_copy.size.x, size_px).y > speech_copy.size.y:
+  size_px -= 1
+ speech_copy.add_theme_font_size_override("font_size", size_px)
+ speech_copy.tooltip_text = text

@@ -66,6 +66,25 @@ var drag_description:=""
 var bw_capacity := Game.BW_PER_TURN
 var last_encounter: Dictionary = {}
 var last_turn := -1
+var voice_rng := RandomNumberGenerator.new()
+var used_leaks := {}
+var leak := ""
+var note_serial := -1
+var graffiti: Control
+var graffiti_count := 0
+var mascots: Array[FriendlyMascot] = []
+var hover_card := -1
+var hover_time := 0.0
+var hesitation_cooldown := 0.0
+var hesitation_turn := -1
+var hesitation_index := {}
+var hesitation_ice := -1
+var hesitation_line := ""
+var hesitation_until := 0.0
+var early_toast := false
+var tomorrow_toast := false
+var toast_text: Label
+var toast_reply: Label
 func _ready() -> void:
  theme = FriendlyLook.THEME
  mouse_filter = Control.MOUSE_FILTER_PASS
@@ -85,6 +104,9 @@ func _ready() -> void:
  glitch_layer = Control.new(); glitch_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(glitch_layer)
  for y in [192,362,557,853]:
   var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
+ graffiti = Control.new()
+ graffiti.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ add_child(graffiti)
  node_tag = FriendlyLook.panel(FriendlyLook.TONER); node_tag.position = Vector2(40, 32); node_tag.size = Vector2(720, 86); node_tag.rotation_degrees = -1.0; add_child(node_tag)
  trace_tag = FriendlyLook.panel(FriendlyLook.TONER); trace_tag.position = Vector2(972, 32); trace_tag.size = Vector2(588, 106); trace_tag.rotation_degrees = 0.7; add_child(trace_tag)
  ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(150, 136); ice_scroll.size = Vector2(1300, 446); ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
@@ -131,10 +153,15 @@ func _ready() -> void:
  end_button = FriendlyLook.button("END TURN →", func(): ui._on_end_turn()); end_button.position = Vector2(1360, 842); end_button.size = Vector2(200, 65); end_button.add_theme_font_size_override("font_size", 20); add_child(end_button)
  var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), FriendlyLook.PAPER); deck.position = Vector2(1360, 916); deck.size = Vector2(200, 28); add_child(deck)
  end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), FriendlyLook.TONER, FriendlyLook.RED); end_run_button.position = Vector2(1360, 951); end_run_button.size = Vector2(200, 29); add_child(end_run_button)
- toast = FriendlyLook.panel(Color.WHITE,FriendlyLook.RED,1,18,3); toast.position=Vector2(530,110); toast.size=Vector2(540,34); toast.z_index=5; add_child(toast)
- var toast_text := FriendlyLook.label(skin.cracking_copy,15,skin.ink,skin.font); toast_text.position=Vector2(15,6); toast.add_child(toast_text); toast.hide()
- if skin.corporation!="HALCYON":
-  toast_text.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; toast_text.size=Vector2(420,42); toast.size=Vector2(450,54)
+ toast = FriendlyLook.panel(Color.WHITE, FriendlyLook.RED, 1, 10, 3)
+ at(self, toast, Vector2(40, 626), Vector2(200, 105))
+ toast.z_index = 5
+ toast_text = FriendlyLook.label(skin.cracking_copy, 15, FriendlyLook.TONER, skin.font)
+ toast_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ at(toast, toast_text, Vector2(8, 6), Vector2(184, 72))
+ toast_reply = FriendlyLook.label("", 14, FriendlyLook.TONER, ADP_MARKER)
+ at(toast, toast_reply, Vector2(8, 80), Vector2(184, 20))
+ toast.hide()
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
  motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
  motion_button.position=Vector2(1360,718); motion_button.size=Vector2(200,28); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
@@ -174,6 +201,8 @@ func sync(model: Game) -> void:
  if game.enc.is_empty(): return
  reduced_motion=ui.reduced_motion
  motion_button.text="REDUCED MOTION: " + ("ON" if reduced_motion else "OFF")
+ if not is_same(last_encounter, game.enc):
+  reset_voice()
  if not is_same(last_encounter,game.enc) or last_turn!=game.enc.turn: bw_capacity=maxi(Game.BW_PER_TURN,game.bw)
  else: bw_capacity=maxi(bw_capacity,game.bw)
  last_encounter=game.enc; last_turn=game.enc.turn
@@ -222,13 +251,15 @@ func _process(_dt: float) -> void:
  var context := ""
  if corporation_state=="mask_off": context="the mask is off. one more strike and we can't leave. "
  elif corporation_state=="cracking": context="%d TRACE to a strike. " % maxi(0,Game.MAX_TRACE-game.trace)
+ update_voice(_dt)
  note_text.text="NUL/REM: " + context + ui.nr_text.text
+ if not leak.is_empty(): note_text.text += "\n" + leak
  if last_note!=note_text.text:
   last_note=note_text.text; note_text.tooltip_text=note_text.text
   var fs:=12
   while fs>8 and FriendlyLook.MONO.get_multiline_string_size(note_text.text,HORIZONTAL_ALIGNMENT_LEFT,900,fs).y>36: fs-=1
   note_text.add_theme_font_size_override("font_size",fs)
- note_text.visible_ratio=ui.nr_text.visible_ratio if context=="" else 1.0
+ note_text.visible_ratio=ui.nr_text.visible_ratio if context=="" and leak.is_empty() else 1.0
  var now := Time.get_ticks_msec()/1000.0
  toast.visible=now<toast_until
  if strike_overlay.visible and now>=strike_until: dismiss_strike()
@@ -307,6 +338,7 @@ func build_rig() -> void:
   rig_row.add_child(FriendlyLook.button(d.name, func(): ui._show_inspect(c.id), FriendlyLook.TONER, FriendlyLook.PAPER))
 func build_ice() -> void:
  ice_scroll.position.x = 245 if game.enc.ice.size() >= 3 else 150
+ mascots.clear()
  clear(ice_row)
  for i in game.enc.ice.size():
   var column := VBoxContainer.new(); column.add_theme_constant_override("separation",9); column.custom_minimum_size.x=400 if game.enc.ice.size()==3 else 480; ice_row.add_child(column)
@@ -315,6 +347,7 @@ func build_ice() -> void:
   mascot.previous_mood=prior.get("mood", "")
   mascot.just_broken=not prior.is_empty() and game.enc.ice[i].broken.count(true)>prior.broken.count(true)
   mascot.setup(self,i,mood_for(i))
+  mascots.append(mascot)
   # Grow the animated illustration independently from its rules plaque.
   var width := 400.0 if game.enc.ice.size()==3 else 480.0
   var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25
@@ -322,6 +355,16 @@ func build_ice() -> void:
   stage.name = "MascotStage"
   stage.custom_minimum_size = Vector2(width, 238)
   column.add_child(drop_wrapper(stage,i,-1))
+  var plate := AdpCopy.pick("plate", skin.corporation, 0, {"ice": game.enc.ice[i].id})
+  if not plate.is_empty():
+   var plaque := FriendlyLook.label(plate.text, 10, FriendlyLook.TONER, skin.font)
+   plaque.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+   var enamel := FriendlyLook.panel(Color("#E2ECEB"))
+   enamel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+   enamel.add_child(plaque)
+   plaque.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+   column.add_child(enamel)
+   enamel.custom_minimum_size.y = 15
   var carrier := Control.new()
   carrier.name = "IllustrationScale"
   carrier.scale = Vector2.ONE * illustration_scale
@@ -520,14 +563,16 @@ func reset_session() -> void:
  music.set_active(false)
  bleed = 0.0; bleed_from = 0.0; bleed_target = 0.0; bleed_elapsed = 0.0
  if is_instance_valid(strike_overlay): strike_overlay.hide()
+ reset_voice()
+ hesitation_cooldown = 0.0
+ hesitation_index.clear()
 func update_corporation() -> void:
  var now := Time.get_ticks_msec()/1000.0
  state_before_refresh=corporation_state
  corporation_state="mask_off" if game.strikes>=2 else ("cracking" if game.trace>=20 or game.strikes==1 else "friendly")
  if not warned and previous_trace<20 and game.trace>=20:
-  warned=true; toast_until=now+3.0
-  if not reduced_motion:
-   toast.position.y=96; toast.create_tween().tween_property(toast,"position:y",110.0,0.18)
+  warned=true
+  show_voice_toast(skin.cracking_copy, now)
  if game.strikes>previous_strikes: music.play_strike()
  if game.strikes==1 and previous_strikes==0:
   strike_until=now+2.5; build_strike(); strike_overlay.show()
@@ -598,6 +643,10 @@ func build_strike() -> void:
  var dim := ColorRect.new(); dim.color=Color(0.05,0,0,0.5 if skin.corporation=="HALCYON" else 0.10); dim.size=Vector2(1600,1000); dim.mouse_filter=Control.MOUSE_FILTER_IGNORE; strike_overlay.add_child(dim)
  var modal := FriendlyLook.panel(Color("#140809"),FriendlyLook.RED,2,skin.radius); modal.position=Vector2(295,200); modal.size=Vector2(1010,400); strike_overlay.add_child(modal)
  modal.mouse_filter=Control.MOUSE_FILTER_PASS
+ var reply := AdpCopy.pick("reply", skin.corporation, 0, {"trigger": skin.strike_title})
+ if not reply.is_empty():
+  var tag := graffiti_label(reply)
+  at(strike_overlay, tag, Vector2(310, 178))
  var chrome_modal:=ChromeFrame.new(); chrome_modal.name="StrikeChrome"; chrome_modal.hostile=true; chrome_modal.radius=skin.radius; chrome_modal.size=modal.size; modal.add_child(chrome_modal)
  at(modal,FriendlyLook.label("TRACE STRIKE 1 OF 3",16,FriendlyLook.RED,FriendlyLook.BOLD),Vector2(32,30))
  at(modal,FriendlyLook.label(skin.strike_title,int(AtomicDecoPunk.settings.display.strike_headline_px),Color("#F6E7E7"),skin.display_font),Vector2(32,64))
@@ -647,3 +696,109 @@ func _drop_data(at: Vector2, data) -> void:
 func show_break_feedback(ice: Dictionary, subroutine: int, cost: int) -> void:
  feedback_message=("BROKEN" if ice.broken[subroutine] else "BREAK STEP")+" · "+game.ice_definition(ice).name+" · S%d\n%d BW spent · rules updated"%[subroutine+1,cost]
  feedback_until=Time.get_ticks_msec()/1000.0+2.5
+
+const ADP_STENCIL = preload("res://assets/fonts/StardosStencil-Regular.ttf")
+const ADP_MARKER = preload("res://assets/fonts/PermanentMarker-Regular.ttf")
+
+func reset_voice() -> void:
+ used_leaks.clear()
+ leak = ""
+ note_serial = -1
+ clear(graffiti)
+ graffiti_count = 0
+ hover_card = -1
+ hover_time = 0.0
+ hesitation_turn = -1
+ hesitation_ice = -1
+ hesitation_until = 0.0
+ early_toast = false
+ tomorrow_toast = false
+ toast_until = 0.0
+
+func graffiti_label(line: Dictionary) -> PanelContainer:
+ var paper := PanelContainer.new()
+ paper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ var style := StyleBoxFlat.new()
+ style.bg_color = FriendlyLook.TONER
+ style.set_content_margin_all(3)
+ paper.add_theme_stylebox_override("panel", style)
+ var font: Font = ADP_STENCIL if line.style == "S" else ADP_MARKER
+ if line.style == "P":
+  paper.add_child(PunchedLetters.new(line.text))
+ else:
+  var px := 12
+  while px > 8 and font.get_string_size(line.text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x > 194:
+   px -= 1
+  paper.add_child(FriendlyLook.label(line.text, px, FriendlyLook.PAPER, font))
+ return paper
+
+func show_voice_toast(line: String, now: float) -> void:
+ toast_text.text = line
+ toast_until = now + 3.0
+
+func update_voice(delta: float) -> void:
+ var now := Time.get_ticks_msec() / 1000.0
+ var band := AdpCopy.band(bleed)
+ if note_serial != ui.note_revision:
+  note_serial = ui.note_revision
+  leak = ""
+  var rate := int({"A": 4, "B": 2, "C": 1}.get(band, 0))
+  if rate > 0 and voice_rng.randi_range(1, rate) == 1:
+   var pool := AdpCopy.pool("leak", skin.corporation, {"band": band}).filter(
+    func(line): return not used_leaks.has(line.id))
+   if not pool.is_empty():
+    var line: Dictionary = pool[voice_rng.randi_range(0, pool.size() - 1)]
+    used_leaks[line.id] = true
+    leak = line.text
+ var targets := [Vector2(40, 568), Vector2(40, 593), Vector2(1360, 640), Vector2(1360, 675)]
+ var count := int({"A": 1, "B": 2, "C": 4}.get(band, 0))
+ while graffiti_count < count:
+  var line := AdpCopy.pick("graffiti", skin.corporation, graffiti_count + game.row)
+  if line.is_empty(): break
+  var tag := graffiti_label(line)
+  at(graffiti, tag, targets[graffiti_count])
+  graffiti_count += 1
+ if now >= toast_until:
+  if not early_toast and band in ["", "A"] and game.enc.turn >= 2:
+   early_toast = true
+   var line := AdpCopy.pick("toast_status", skin.corporation, game.row)
+   if not line.is_empty(): show_voice_toast(line.text, now)
+  elif band == "B" and not tomorrow_toast:
+   tomorrow_toast = true
+   var line := AdpCopy.pick("toast_tomorrow", skin.corporation, game.row)
+   if not line.is_empty(): show_voice_toast(line.text, now)
+ var reply := AdpCopy.pick("reply", skin.corporation, 0, {"trigger": toast_text.text})
+ toast_reply.text = reply.get("text", "") if band == "C" else ""
+ update_hesitation(delta, now)
+
+func update_hesitation(delta: float, now: float) -> void:
+ var eligible := game.phase == "PLAYER" and not strike_overlay.visible and dragging_uid < 0 and hover_uid >= 0 and not get_viewport().gui_is_dragging()
+ if not eligible or hover_card != hover_uid:
+  hover_time = 0.0
+  hover_card = hover_uid if eligible else -1
+ if eligible:
+  hover_time += delta
+  if hover_time >= 4.0 and now >= hesitation_cooldown and hesitation_turn != game.enc.turn:
+   var selected := -1
+   var highest := -1
+   for i in mascots.size():
+    var rank := ["cheery", "wary", "lethal"].find(mood_for(i))
+    if rank >= 0 and rank >= highest:
+     highest = rank
+     selected = i
+   if selected >= 0:
+    var ice: String = game.enc.ice[selected].id
+    var key := ice + mood_for(selected)
+    var index: int = hesitation_index.get(key, 0)
+    var ice_id := ice if skin.corporation == "HALCYON" else ""
+    var line := AdpCopy.pick("hesitation", skin.corporation, index, {"ice": ice_id, "mood": mood_for(selected)})
+    if not line.is_empty():
+     hesitation_index[key] = index + 1
+     hesitation_turn = game.enc.turn
+     hesitation_ice = selected
+     hesitation_line = line.text
+     hesitation_until = now + 3.0
+     hesitation_cooldown = now + 20.0
+ for i in mascots.size():
+  var line := hesitation_line if eligible and i == hesitation_ice and now < hesitation_until and hesitation_turn == game.enc.turn else ""
+  mascots[i].set_hesitation(line)

@@ -30,6 +30,8 @@ var deck_open := false
 var targeting := -1
 var konami_pos := 0
 var idle := 0.0
+var note_revision := 0
+var newsreel_index := 0
 var first_run := true
 var last_bloat := ""
 
@@ -530,6 +532,7 @@ func _speak_event(e: Dictionary) -> void:
 	if e.t == "EV-02" and first_run:
 		first_run = false
 		_save_flags()
+	note_revision += 1
 	nr_text.text = line.text
 	nr_mode.text = "%s · %s · %s" % [line.id, e.t, line.mode]
 	nr_text.visible_ratio = 0.0
@@ -1393,7 +1396,8 @@ func _dim_box(title: String, sub: String, w: float = 900) -> VBoxContainer:
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation", 14)
 	pc.add_child(v)
-	v.add_child(_lbl(title, 26, TEXT))
+	if title != "":
+		v.add_child(_lbl(title, 26, TEXT))
 	if sub != "":
 		var s := _lbl(sub, 14, DIM)
 		s.autowrap_mode = TextServer.AUTOWRAP_WORD
@@ -1610,8 +1614,23 @@ func _overlay_select() -> void:
 			c.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		b.add_child(col)
 		var w: String = who
-		b.pressed.connect(func(): _start_as(w))
+		b.pressed.connect(func(): _show_newsreel(w))
 		row.add_child(b)
+
+func _show_newsreel(who: String) -> void:
+	var reel := AdpCopy.pick("newsreel", friendly_skin.corporation, newsreel_index)
+	newsreel_index += 1
+	if reel.is_empty():
+		_start_as(who)
+		return
+	_clear(overlay)
+	var v := _dim_box("", "", 840)
+	var title := FriendlyLook.label(reel.title, 38, TEXT, friendly_skin.display_font)
+	v.add_child(title)
+	var narration := FriendlyLook.label(reel.text, 21, TEXT, friendly_skin.font)
+	narration.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	v.add_child(narration)
+	v.add_child(FriendlyLook.button("CONTINUE", func(): _start_as(who)))
 
 func _overlay_end(title: String, sub: String) -> void:
 	var v := _dim_box(title, sub, 700)

@@ -395,3 +395,11 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 Designer left the relocation lines to Claude's discretion ("generate a number of them, let's say 10 or 15, and I will review and approve"), then approved all 15 and the proposal to keep the first-draft names as programme small print ("Perfect- add them"). `REDLINE_ARCHIPELAGO.md` v0.4 §4.0: 15 numbered lines, five per corporation; small print *Halcyon Homesteads™*, *SafeHarbor Residences™*, *Long Rest Retreats™* under the generic island names; the defeat notice uses one approved line. Master design and HANDOFF updated (commit 7eeb5a7); the island name pool and anti-paper lines are still waiting. **Interpretations to confirm:** "Perfect- add them" read as approving both the 15 lines and the programme names; the small-print wording (community / property / home). **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex).
+
+## 2026-11-18 — ADP-001 Phase 2 and ADP-4a (Codex)
+
+Loaded the approved HALCYON, IRONWATCH and LUCIDA Phase 2 pack. The encounter uses cosmetic randomness for nonrepeating NUL/REM leaks, holds graffiti in reserved margins, shows approved status and Tomorrow toasts, and adds patent plates below the mascot illustrations. Hesitation changes only the live speech bubble. The run entry shows a corporate newsreel.
+
+**Interpretations to confirm:** status toast starts on turn two, temporary speech lasts three seconds, and the newsreel advances with Continue. The current HALCYON map offers the first corporation only, so the shared graffiti hint is reserved for future corporation progression.
+
+**Validation:** 361 rules checks passed. ADP-4a adds the hesitation capture and updates the bleed and strike frames.
