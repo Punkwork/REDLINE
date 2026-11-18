@@ -1,5 +1,5 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.4 · **Date:** 2026-11-17 *(0.3: 2026-11-17 · 0.2: 2026-11-15 · 0.1: 2026-11-13)* · **For build:** HALCYON PLAYTEST 4, `0.4.0-playtest.4`, commit b6b0971 (tag `playtest-4`)
+**Version:** 0.5 · **Date:** 2026-11-17 · **For build:** HALCYON PLAYTEST 5, `0.5.0-playtest.5` (tag `playtest-5`)
 
 Use one copy per playtest run. The live, fill-in version is the **REDLINE Playtest QA Checklist** Sheet ([link](https://claude.ai/artifact/1ARG6jjW9cp34EGq23drFk)) (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
@@ -14,7 +14,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 |---|---|---|---|---|
 | A1 | Log the run on the Run log tab (corporation, Rustler, result, minutes). | Every run logged | | |
 | A2 | Copy the end-of-run summary (button on the summary screen) into the Run log. | Summary pasted for every run | | |
-| A3 | Confirm the build: the selection screen shows HALCYON PLAYTEST 4 · 0.4.0-playtest.4. Copy `BUILD_COMMIT.txt` into the Run log. Mark out-of-scope checks N/A (see above). | Commit b6b0971 (tag `playtest-4`) | | |
+| A3 | Confirm the build: the selection screen shows HALCYON PLAYTEST 5 · ATOMIC DECO PUNK · 0.5.0-playtest.5. Copy `BUILD_COMMIT.txt` into the Run log. Mark out-of-scope checks N/A (see above). | Source revision from `BUILD_COMMIT.txt` | | |
 
 ## Opening Node
 
@@ -143,6 +143,9 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | L7 | Corporation states were clear: Cracking, Strike and Mask off looked different, and your cards and HUD never changed (VIS-001, RUSTLER-LOOK-001). | Yes | | |
 | L8 | The encounter looked like one product: atrium, ICE plaques and cartridges sat well together (CHROME-001, CARDS-001). Note anything that looked out of place. | Yes | | |
 | L9 | Dragging an Icepick onto an ICE outlined the legal rows, showed the exact BW cost and MARGIN before release, explained a refused target, and charged nothing for a refused drop (CHROME-001). | Always | | |
+| L10 | Install a PROGRAM in the left bay, hover and click it, and play each kind of SCRIPT in its drop zone. | Invalid drops spend nothing | | |
+| L11 | Right-click a hand card twice, then switch to fullscreen and check the backdrop and ICE faces. | 150% preview toggles and backdrop fills the window | | |
+| L12 | Watch and listen as TRACE rises. Try music volume, mute and reduced motion. | Art and mix follow the corporation state and settings | | |
 
 ## Bugs
 

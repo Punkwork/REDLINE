@@ -1,30 +1,21 @@
-# PANOPTICON — HALCYON PLAYTEST 4 (0.4.0-playtest.4)
+# PANOPTICON — HALCYON PLAYTEST 5 (0.5.0-playtest.5)
 
-This Windows build covers four Rustlers and HALCYON's first four map rows. The selection screen shows **HALCYON PLAYTEST 4 · ZEROED + TUMBLE · 0.4.0-playtest.4**. Record the Rustler, Node, turn, and cards with feedback.
+This Windows build covers four Rustlers and HALCYON's first four map rows. The selection screen shows **HALCYON PLAYTEST 5 · ATOMIC DECO PUNK · 0.5.0-playtest.5**. Record the Rustler, Node, turn, and cards with feedback.
 
 ## Get the Windows build
 
-Open the successful push run on `main` under **GitHub → Actions → Godot validation and Windows playtest build**. Download `PANOPTICON-HALCYON-PLAYTEST-4-0.4.0-playtest.4-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
+Open the successful push run on `main` under **GitHub → Actions → Godot validation and Windows playtest build**. Download `PANOPTICON-HALCYON-PLAYTEST-5-0.5.0-playtest.5-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
 
-Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt` contains the executable's SHA-256. Use the bundled **Playtest QA Checklist v0.3** (`REDLINE_PLAYTEST_CHECKLIST.md`). Mark checks for unavailable routes, features, or later mechanics **N/A**.
+Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt` contains the executable's SHA-256. Use the bundled **Playtest QA Checklist v0.5** (`REDLINE_PLAYTEST_CHECKLIST.md`). Mark checks for unavailable routes, features, or later mechanics **N/A**.
 
-## Changes since Playtest 3
+## Changes since Playtest 4
 
-- **ICE-AUDIT-001.** CAPTCHA is STR 4 and its pool is DISCARD 1, DEADLOCK, TRACE 2, DEADLOCK, TRACE 3. AUTO-RENEW starts at STR 5. DOORBELL CAM is STR 3 with PULP 4, CORTEX 1, and DEADLOCK, each hidden until it first fires. WATCHER still adds TRACE 1 when you play a CLOAK card. CONSENT FORM and REJECT ALL have PULP 3.
-- **PULP-001 / PULP-002.** At the start of each Rustler turn, unbroken fixed-value FORTRESS PULP subroutines roll their next value. The swing is usually −2 to +2, with a 30% chance of ±3 instead and a minimum roll of 1. The ICE and response strip show the number that will fire, accounting for SCRAMBLE and other reductions. Curves retain their patterns and show their next numbers, including curve B's shuffled sequence.
-- **DEPRECATE-001.** LOGIC BOMB and RELAY are out of play. CONSENT FORM has no passive, and SWITCHBOARD no longer grants one.
-- **READ-001 / CARDS-001.** The brown SCRIPT and blue-green PROTOCOL faces are darker for stronger text contrast. SCRIPT, PROGRAM, and PROTOCOL use distinct hardware cartridges, with external BW tabs and direct board printing. Bloatware uses the oxide-red Whirlwind cartridge.
-- **VIS-001 / CHROME-001.** HALCYON's Chrome Deco atrium, appliance mascots, and opaque enamel ICE plaques are in the encounter. Inspect rolled numbers and mood changes, the Cracking reveal, the Strike 1 modal, and the hostile background and Black ICE at Mask Off. The Rustler HUD keeps its photocopied zine styling.
-- **FACADE-ART-001.** IRONWATCH and LUCIDA art and skins are in the project, but their routes are unavailable in this Windows build. The repository's `docs/visual/fixtures/facade-001/` captures show their Opening Node presentations in all four states.
-
-## Next build — encounter controls
-
-These display and control changes, along with the hand cleanup change below, are on main for the next export. The published Windows Playtest 4 predates them.
-
-- Drag a PROGRAM into the gold connector in the left PROGRAM BAY. Hover or click an installed PROGRAM to read it. Icepicks can still be dragged to subroutines.
-- Drag a targeted SCRIPT to eligible ICE. Drop an untargeted SCRIPT on the upper half of the encounter. If you browse the hand with the arrow keys, Enter plays the selected card or begins target selection.
-- Right-click any hand card to view it at 150% size. Right-click the preview or that same card again, or press Escape, to close it.
-- ICE avatars and faces are 25% larger. The corporation backdrop fills the window, including in fullscreen.
+- **Atomic Deco Punk Phase 1.** TRACE and strikes gradually reveal HALCYON's surveillance backdrop. The Rustler HUD has toner wear and code strips, and the corporation uses Poiret One for display headlines. The prototype music mix follows the encounter state. Card actions have mechanical sound cues. Music volume, mute and reduced motion are available.
+- **Turn cleanup.** END TURN has no free HOLD prompt. Remaining non-CACHED cards go to discard after the response. The next Rustler turn draws six at base DRAW. Card-granted CACHE still applies.
+- **Encounter controls.** Drag a PROGRAM into the gold connector in the left PROGRAM BAY. Hover or click an installed PROGRAM to inspect it. Icepicks can still be dragged to subroutines.
+- **SCRIPTs and inspection.** Drag targeted SCRIPTs onto eligible ICE and untargeted SCRIPTs onto the upper half of the encounter. Enter plays the selected card or starts target selection when browsing by keyboard. Right-click a hand card for a centered 150% preview. Right-click the preview or the same card again, or press Escape, to close it.
+- **Display.** The backdrop fills the fullscreen window. ICE avatars and faces are 25% larger.
+- **Scope.** HALCYON's four-row route is playable. The IRONWATCH and LUCIDA facades are present in the project and their routes remain outside this build.
 
 ## What to try
 
@@ -108,7 +99,7 @@ they do not establish human balance or full-run deck-size targets.
 
 ## VIS-001 — The Friendly Lie encounter candidate
 
-The Friendly Lie encounter is included in Playtest 4. The repository stores its PNG fixtures in `docs/visual/fixtures/vis-001/`.
+The Friendly Lie encounter is included in Playtest 5. The repository stores its PNG fixtures in `docs/visual/fixtures/vis-001/`.
 
 - Corporate app background and mascot objects sit above the Rustler's paper/toner interface. The black scan tag under each mascot is the rules authority: STR, passive text, subroutine effects, DEADLOCK progress, hidden entries, broken history, viruses and ZEROED. Scroll the encounter area when there are extra rule rows. The white NEXT RESPONSE strip follows the actual upcoming response and scrolls horizontally if needed.
 - Cheery faces become wary when something on that ICE is broken or TRACE reaches 20. A shown next-response PULP hit of 5+ or positive CORTEX makes that ICE lethal; the working threshold is tunable in the main scene inspector. Biggest visible PULP and newly tumbled entries receive red chips. Hidden effects remain `? HIDDEN` until the existing reveal rule permits disclosure. BREACH knocks the mascots out while keeping the scans readable.
@@ -125,7 +116,7 @@ The turn-3 fixture advances two real Corporation Responses and resolves CAPTCHA'
 
 ## CHROME-001 — playable Chrome Deco encounter refinement
 
-The ten PNGs in `docs/visual/fixtures/chrome-001/` show the live Godot encounter included in Playtest 4.
+The ten PNGs in `docs/visual/fixtures/chrome-001/` show the live Godot encounter included in Playtest 5.
 
 The CAPTCHA fixture uses actual AUTO-RENEW/CAPTCHA stats and Generalist cards. AUTO-RENEW starts at STR 5 and CAPTCHA at STR 4. CONSENT FORM and REJECT ALL now show PULP 3, and CONSENT FORM has no passive. The atrium and pearl/chrome mascot shells are illustration assets; every face, rule, cost and control remains live. ICE rules now sit on pearl-enamel service plaques with slate lettering, silver edges and restrained teal accents. Hidden and broken chips use pale dashed/struck-through states; rules retain a solid backing against the architecture. Card art is a six-motif prototype atlas, reused by role while preserving authored card text. It does not introduce new cards or effects.
 

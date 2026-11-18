@@ -95,7 +95,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
-          name: PANOPTICON-HALCYON-PLAYTEST-4-0.4.0-playtest.4-Windows-x86_64
+          name: PANOPTICON-HALCYON-PLAYTEST-5-0.5.0-playtest.5-Windows-x86_64
           path: build/windows/
           if-no-files-found: error
           retention-days: 14
