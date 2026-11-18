@@ -1,6 +1,6 @@
 # PANOPTICON — ATOMIC DECO PUNK, PHASE 2 COPY PACK
-**Version:** 0.1 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001 (Phase 2: ADP-2a, 2b, 2c)
-**Status:** **FOR APPROVAL.** Phase 2 itself is approved (designer, 2026-11-17: "Phase 2 absolutely approved."); the words below are working copy for the designer to approve, change or strike. Codex can wire it up as written and swap lines later.
+**Version:** 1.0 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001 (Phase 2: ADP-2a, 2b, 2c)
+**Status:** **APPROVED IN FULL (2026-11-17).** Designer: "1,2 & 3 are approved in full." That covers all the copy as written (including the [hint] lines), the graffiti faces in §4, and the two references in §5 Q3. Copy stays tunable in playtesting like other working values; mark every line `approved` in data.
 **Spec:** `REDLINE_ATOMIC_DECO_PUNK.md` §4 (tone and language), §6.2 (hesitation), Part 3 Phase 2. **Voice sources:** NUL/REM in `REDLINE_MASTER_DESIGN.md` §7 and `REDLINE_BIBLE.md` §5; corporate voices in `REDLINE_CORPORATE_FACADES.md` (FACADE-001, §2a for HALCYON); slice ICE mood lines in VIS-001 and the 2026-11-17 development log.
 
 ---
@@ -222,9 +222,9 @@ A title card in **Poiret One** (the approved headline face) and one line of narr
 
 ---
 
-## 4. Lettering for graffiti (needs a designer choice)
+## 4. Lettering for graffiti (APPROVED 2026-11-17)
 
-Graffiti needs two Rustler faces next to Space Mono. Proposals, both free for games:
+Graffiti uses two Rustler faces next to Space Mono, both free for games:
 
 | Style | Proposal | Licence |
 |---|---|---|
@@ -236,12 +236,12 @@ Both fonts would go under `godot/assets/fonts/` with their licences and a line i
 
 ---
 
-## 5. For the designer
+## 5. Designer decisions (2026-11-17)
 
-1. Approve the copy as written, or mark lines to change or strike. The **[hint]** lines (three letter-spaced NUL/REM lines, the shared SAME SMILE tag, and the "Tomorrow, together." sign-off) are the ones to check most closely: are they oblique enough?
-2. Approve the graffiti faces (**Stardos Stencil** and **Permanent Marker**), or pick others?
-3. OK for NUL/REM's leaks to include one Carol Beer reference ("computer says no. — not now, carol.") and one Kraftwerk song title ("it's more fun to compute")? Both follow the Bible's reference rules.
+1. ~~Approve the copy, especially the [hint] lines?~~ **Approved in full.**
+2. ~~Graffiti faces?~~ **Stardos Stencil and Permanent Marker, approved.**
+3. ~~The Carol Beer and Kraftwerk references?~~ **Approved.**
 
 ## 6. For Codex (data shape, suggestion)
 
-Put this copy in its own data file, separate from the tuning values in `atomic_deco_punk.json` (suggested `godot/data/adp_copy.json`). Each line gets: `id`, `corp`, `kind` (`leak`, `graffiti`, `reply`, `hesitation`, `toast_status`, `toast_tomorrow`, `plate`, `newsreel`), `band` or `mood`, `ice` where it applies, `style` for graffiti (`M`/`S`/`P`), `text`, and `tag` (`flavour` or `hint`; nothing here is `reveal`, so the SIG-5d guard should pass on this whole file). Keep the designer's approval status per line (`proposed` / `approved`) so struck lines can be switched off without deleting them.
+Put this copy in its own data file, separate from the tuning values in `atomic_deco_punk.json` (suggested `godot/data/adp_copy.json`). Each line gets: `id`, `corp`, `kind` (`leak`, `graffiti`, `reply`, `hesitation`, `toast_status`, `toast_tomorrow`, `plate`, `newsreel`), `band` or `mood`, `ice` where it applies, `style` for graffiti (`M`/`S`/`P`), `text`, and `tag` (`flavour` or `hint`; nothing here is `reveal`, so the SIG-5d guard should pass on this whole file). Keep an approval status per line (`approved` for everything in this pack; `proposed` for new lines Codex writes, such as future IRONWATCH and LUCIDA ICE lines) so lines can be switched off without deleting them. Add Stardos Stencil and Permanent Marker under `godot/assets/fonts/` with their licences (OFL and Apache 2.0) and a line each in the fonts `SOURCES.md`.

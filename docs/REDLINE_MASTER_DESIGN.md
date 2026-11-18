@@ -56,6 +56,7 @@ Claude's response to the direction above, saved as **`docs/REDLINE_ATOMIC_DECO_P
 - **Phase 3 build tasks (ADP-3a–c):** **ads that know you** (written from local play data, with an off switch), **LUCIDA rewriting flavour lines in the event log** (never rules lines), and **grafts** (salvaged ICE parts as art on PATCHWORK-upgraded card instances; no rules effect). Designer: "for #3 yes i want two deliberately unsettling features"; "GRAFTS - yes - it's a great extension of the theme to salvage ice parts on upgraded cards". Build after Phase 1.
 
 - **Phase 2 build tasks (ADP-2a–c):** voice leaks and graffiti, ICE hesitation lines, corporate flavour vocabulary. Designer: "Phase 2 absolutely approved."
+- **Phase 2 copy pack approved in full** (`REDLINE_ADP_PHASE2_COPY.md`): all voice-leak lines, graffiti and replies, hesitation lines, trademarks, toasts, patent plates and newsreels, including the [hint] lines (NUL/REM's letter-spaced speech-synthesizer slips, the shared "SAME SMILE, DIFFERENT BADGE" tag, and the "Tomorrow, together." sign-off on every corporation's newsreels); the graffiti faces **Stardos Stencil** (stencil) and **Permanent Marker** (marker), with punched-hole letters drawn in code; and NUL/REM's Carol Beer and Kraftwerk references. Designer: "1,2 & 3 are approved in full."
 
 **Still CONCEPT (no build tasks yet):** the later ideas (HUD seam, industrial background layers, radio, defaced tourist map, DEAD DROP workbench, watching crowd).
 
