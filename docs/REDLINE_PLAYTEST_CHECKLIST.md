@@ -1,11 +1,11 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.3 · **Date:** 2026-11-17 *(0.2: 2026-11-15 · 0.1: 2026-11-13)*
+**Version:** 0.4 · **Date:** 2026-11-17 *(0.3: 2026-11-17 · 0.2: 2026-11-15 · 0.1: 2026-11-13)* · **For build:** HALCYON PLAYTEST 4, `0.4.0-playtest.4`, commit b6b0971 (tag `playtest-4`)
 
-Use one copy per playtest run. The live, fill-in version is the **PANOPTICON Playtest QA Checklist** Sheet (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
+Use one copy per playtest run. The live, fill-in version is the **REDLINE Playtest QA Checklist** Sheet ([link](https://claude.ai/artifact/1ARG6jjW9cp34EGq23drFk)) (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
 **For every run:** play one corporation heist (choose the corporation and Rustler on the main menu), then press **Copy summary to clipboard** on the summary screen and paste it into the Run log. The summary gives CRED earned and spent, purchases, cards added, and the route, which answers most of the Economy, Deck and Map checks.
 
-Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then. **v0.3 (2026-11-17):** checks for the designer decisions of 2026-11-17: rolled FORTRESS PULP and visible next values (PULP-001), TUMBLE-001, the HALCYON ICE audit (ICE-AUDIT-001), SHATTER (RIOT-003), card readability (READ-001), the encounter visuals (VIS-001 / CHROME-001 / CARDS-001) and the LOGIC BOMB / RELAY removal (DEPRECATE-001). Checks marked *(after X)* apply once X is in the build.
+Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then. **v0.3 (2026-11-17):** checks for the designer decisions of 2026-11-17: rolled FORTRESS PULP and visible next values (PULP-001), TUMBLE-001, the HALCYON ICE audit (ICE-AUDIT-001), SHATTER (RIOT-003), card readability (READ-001), the encounter visuals (VIS-001 / CHROME-001 / CARDS-001) and the LOGIC BOMB / RELAY removal (DEPRECATE-001). Checks marked *(after X)* apply once X is in the build. **v0.4 (2026-11-17):** for HALCYON PLAYTEST 4. The v0.3 checks are all in this build, so their *(after …)* marks are removed; A3 (confirm the build) and L9 (Icepick drag feedback) added; the Run log gains a Build column. **Scope of this build:** HALCYON's first four map rows only. Mark IRONWATCH and LUCIDA checks, the Central Node (H3, J1, J2) and whole-corporation totals (G5, I2, K2) **N/A**.
 
 
 ## Setup
@@ -14,6 +14,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 |---|---|---|---|---|
 | A1 | Log the run on the Run log tab (corporation, Rustler, result, minutes). | Every run logged | | |
 | A2 | Copy the end-of-run summary (button on the summary screen) into the Run log. | Summary pasted for every run | | |
+| A3 | Confirm the build: the selection screen shows HALCYON PLAYTEST 4 · 0.4.0-playtest.4. Copy `BUILD_COMMIT.txt` into the Run log. Mark out-of-scope checks N/A (see above). | Commit b6b0971 (tag `playtest-4`) | | |
 
 ## Opening Node
 
@@ -39,11 +40,11 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | C9 | VITAE lost per encounter (note each). | Early 2–3 · mid–late 3–4 for an on-curve deck (PACE-004) | | |
 | C10 | You broke a threat subroutine instead of rushing the DEADLOCKs, and it was worth it. | Most encounters past the Opening Node | | |
 | C11 | Rising threat (PULP curves, HARDENING, ESCALATE ↑) was noticed and planned around. | Yes | | |
-| C12 | Rolled FORTRESS PULP: the number shown before the Corporation Response was the number dealt (less your reductions) *(after PULP-001)*. | Always matched; no surprise | | |
-| C13 | Rolled PULP felt plannable: you saw a big swing (±3) a turn ahead and planned SHIELD or a break around it *(after PULP-001)*. | Yes; name any roll that felt unfair | | |
-| C14 | Every PULP curve showed its next value; COOKIE WALL never showed "PULP ?" *(after PULP-001)*. | Always | | |
+| C12 | Rolled FORTRESS PULP: the number shown on the ICE and in the response strip at the start of your turn was the number dealt, after SCRAMBLE and other reductions (PULP-001). | Always matched; no surprise | | |
+| C13 | Rolled PULP felt plannable: you saw a big swing (±3) a turn ahead and planned SHIELD or a break around it (PULP-001). | Yes; name any roll that felt unfair | | |
+| C14 | Every PULP curve showed its next value; COOKIE WALL showed a number, never "PULP ?" (PULP-001). | Always | | |
 | C15 | Breaking a TUMBLER subroutine removed it at once and the next unbroken one tumbled in; a broken DEADLOCK never reappeared (TUMBLE-001). | Always | | |
-| C16 | HALCYON after the audit: DOORBELL CAM felt deadly, CAPTCHA felt like a puzzle rather than a damage spike, AUTO-RENEW was the stronger ICE beside CAPTCHA *(after ICE-AUDIT-001)*. | Yes | | |
+| C16 | HALCYON after the audit: DOORBELL CAM felt deadly (PULP 4, CORTEX 1, DEADLOCK, each revealed as it first fires), CAPTCHA felt like a puzzle rather than a damage spike, and AUTO-RENEW (STR 5) was the stronger ICE beside CAPTCHA (STR 4) (ICE-AUDIT-001). | Yes | | |
 
 ## Rustler
 
@@ -141,6 +142,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | L6 | The angriest-looking ICE was the one about to hit hardest; mood matched the shown numbers (VIS-001, PULP-001). | Yes, before reading numbers | | |
 | L7 | Corporation states were clear: Cracking, Strike and Mask off looked different, and your cards and HUD never changed (VIS-001, RUSTLER-LOOK-001). | Yes | | |
 | L8 | The encounter looked like one product: atrium, ICE plaques and cartridges sat well together (CHROME-001, CARDS-001). Note anything that looked out of place. | Yes | | |
+| L9 | Dragging an Icepick onto an ICE outlined the legal rows, showed the exact BW cost and MARGIN before release, explained a refused target, and charged nothing for a refused drop (CHROME-001). | Always | | |
 
 ## Bugs
 
@@ -150,7 +152,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | M2 | "(Not yet implemented…)" lines in the log: copy them into Notes. | None | | |
 | M3 | A number or text that didn't match what a card or ICE says. | None | | |
 | M4 | Anything that blocked progress. | None | | |
-| M5 | LOGIC BOMB or RELAY appeared anywhere (rewards, decks, CONSENT FORM's passive) *(after DEPRECATE-001)*. | Never | | |
+| M5 | LOGIC BOMB or RELAY appeared anywhere: rewards, decks, or a passive on CONSENT FORM (DEPRECATE-001). | Never | | |
 
 ## Overall
 
@@ -161,4 +163,4 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 
 ## Run log fields
 
-Run · Date · Corporation · Rustler · Result (Cracked / Flatlined / Stopped) · Row reached · Minutes · Opener turns · CRED earned · CRED spent · Card rewards · Cards bought · Deck at end · Starter cards left · TRACE strikes · VITAE left · Fun (1–5) · Best moment · Worst moment · Run summary (paste)
+Run · Date · Build (BUILD_COMMIT) · Corporation · Rustler · Result (Cracked / Flatlined / Stopped) · Row reached · Minutes · Opener turns · CRED earned · CRED spent · Card rewards · Cards bought · Deck at end · Starter cards left · TRACE strikes · VITAE left · Fun (1–5) · Best moment · Worst moment · Run summary (paste)
