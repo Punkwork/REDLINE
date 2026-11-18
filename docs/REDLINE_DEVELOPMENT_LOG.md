@@ -4,25 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — ZEROED-001-cards: Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards (Codex)
-
-**Commit tag:** `zeroed-tumble-step2`.
-
-**Changed:** Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards
-
-**Interpretations to confirm:** None.
-
-**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
-
-```text
-sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 2.84; avg cleared-run turns 9.8
-sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; turns per non-stalled encounter 4.06; avg cleared-run turns 12.9
-sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; turns per non-stalled encounter 3.19; avg cleared-run turns 10.5
-sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
-TESTS: 331 passed, 0 failed
-```
-
-
 ## 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex)
 
 **Commit tag:** `zeroed-tumble-step3`.
@@ -427,3 +408,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 Design session in claude.ai, synced to the repo the same morning. **Atompunk (ADP §1.1):** the designer asked whether *atompunk* names the style. It covers the corporate half but not Deco or the DIY punk layer; **Atomic Deco Punk stays**, "atompunk" is the outward pitch shorthand. **ZINE-002 (direction):** the zine is how the underworld communicates, in samizdat's lineage, with the reasons it exists made explicit (every channel owned and listening, speech becomes data, the record is rewritable, the traced vanish, nobody speaks plainly): censorship by convenience, not prohibition. **ARCH-001 (APPROVED):** being traced means disappearing to the Archipelago. Designer: ARCH-R1 tone rules "1 y" (horror by absence, never a joke, corporations never name it, "gulag" never on screen); defeat framing and persistent THE CARBON record "2 y"; the islands are for "merging man with the machine one at a time, in order to build the synchronization signal to sync/merge all mankind at once with AI, tie into ending, sync testing"; no one comes back "4 no". **Docs:** `REDLINE_ATOMIC_DECO_PUNK.md` v0.8 (§1.1, §2.2, links in §4–§8); new `REDLINE_ARCHIPELAGO.md` v0.2; master design §1, §8 and §10; HANDOFF (ARCH-001 build note, a WAITING row for the working copy). **Interpretations to confirm:** the island names, *THE CARBON*, *NOTES FROM THE ARCHIPELAGO*; the historical summaries were written from general knowledge. **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex).
+
+## 2026-11-18 — ARCH-NAMES-001: islands named like care homes (Claude)
+
+Designer: "The island names should resemble names of long-term care residences and the more generic the name the better." `REDLINE_ARCHIPELAGO.md` v0.3 §4.0: generic nature-word + residence-word names, no ™ or brand in the name, the corporation only in small print; a working pool of nine names (Sunnyside Manor, Pine Ridge Residence, Willow Creek Lodge and others) and revised relocation lines; the defeat notice names the island. Master design ARCH-001 and the HANDOFF copy row updated. **Interpretations to confirm:** the name pool, the small-print lines, and checking final names against well-known real care chains. **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ZEROED-001-cards: Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards (Codex).

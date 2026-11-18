@@ -236,6 +236,7 @@ Detail, writing rules until the end, presentation, how to render the M0'B\*Loop 
 - **Defeat framing** ("2 y"): no death animation; a calm corporate relocation notice, then a page of the zine ledger *THE CARBON* ("Taken to the Archipelago."); a persistent, local-only record of every lost Rustler, read at DEAD DROP. Presentation only; no rule changes.
 - **What the islands are for** (designer-level answer, secret until the third card): "merging man with the machine one at a time, in order to build the synchronization signal to sync/merge all mankind at once with AI, tie into ending, sync testing." The reveal therefore has two parts: the corporations are one AI, and the Archipelago is where it rehearsed the merge on the people it took. Synchronization stays ambiguous (SIGNAL-001).
 - **No one comes back** ("4 no"): no rescue, return or escape, in rules or story.
+- **ARCH-NAMES-001 — island names** (designer direction, 2026-11-18): "The island names should resemble names of long-term care residences and the more generic the name the better." Generic nature-word + residence-word names (Sunnyside Manor, Pine Ridge Residence, Willow Creek Lodge); no ™ or brand in the name; the corporation only in small print ("A HALCYON Care Community"). Specific names are working copy, for approval.
 - **Build tasks ARCH-1a–c approved.** Working names and lines remain copy for approval.
 
 Detail: `REDLINE_ARCHIPELAGO.md`.

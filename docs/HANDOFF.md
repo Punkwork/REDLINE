@@ -91,7 +91,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ZINE-002 / ARCH-001 copy | Approve the working copy: the *THE CARBON* title, the *NOTES FROM THE ARCHIPELAGO* column, the three corporate island names, the relocation lines and the polite anti-paper lines. Can be decided with the next copy pack. The historical summaries (ADP §2.2.1, ARCH §2) need a fact-check before they inform on-screen text. | ADP §2.2; ARCH §4–6 | WAITING |
+| ZINE-002 / ARCH-001 copy | Approve the working copy: the *THE CARBON* title, the *NOTES FROM THE ARCHIPELAGO* column, the island name pool (generic care-home names, ARCH-NAMES-001), the relocation lines and the polite anti-paper lines. Can be decided with the next copy pack. The historical summaries (ADP §2.2.1, ARCH §2) need a fact-check before they inform on-screen text. | ADP §2.2; ARCH §4–6 | WAITING |
 
 ---
 
