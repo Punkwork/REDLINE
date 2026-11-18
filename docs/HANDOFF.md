@@ -21,6 +21,8 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 6. **Development log size (LOG-001).** Keep `REDLINE_DEVELOPMENT_LOG.md` under about **60 KB** so Claude can rewrite the project copy in one pass. When it grows past that, move the oldest dated entries, whole, to the end of `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` (oldest first, nothing reworded) and note the move in the log. Entries stay append-only; the archive is never edited except to append.
 
+7. **Builds come from `release`, not `main` (RELEASE-001, 2026-11-18).** Work lands on `main`. To cut a playtest build, fast-forward `release` to `main`, push, and tag the commit `playtest-N`; only `release` exports Windows builds. Nobody commits to `release` directly. A bad build is rebuilt from its tag or `release` is reset to the last good tag.
+
 **Statuses:** **TO DO** (decided, not started) · **IN PROGRESS** (name who) · **BUILT** (in code, needs a playtest or check) · **DONE** · **WAITING** (needs a designer decision).
 
 ---
@@ -42,6 +44,10 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 **The Archipelago (ARCH-001, approved 2026-11-18):** build ARCH-1a–c from `REDLINE_ARCHIPELAGO.md` §8 (relocation defeat screen and *THE CARBON* page; local persistent *THE CARBON* record read at DEAD DROP; copy tables with guards: the full word "Archipelago" never on screen, "’Pelago" never in corporate or rules strings, "gulag" never on screen, island-purpose lines tagged `reveal`). Owner: Codex. Order: after ADP Phase 2, alongside Phase 5 (SIG-5d). No rules change.
 
 **SAMIZINE (ZINE-003, approved 2026-11-18):** the look for in-world underworld publications, spec in `REDLINE_SAMIZINE.md`, boards in `docs/visual/samizine/`. Owner: Codex. No separate build task: use it where ARCH-1a (the defeat screen's CARBON page) and ARCH-1b (the record at DEAD DROP) draw zine pages, and add the Special Elite font with its licence.
+
+| ID | What to build | Spec | Owner | Status |
+|---|---|---|---|---|
+| **RELEASE-001** | Create the `release` branch from the current `main`. In `.github/workflows/godot-validation.yml`, change the three export conditions from `refs/heads/main` to `refs/heads/release` (keep validation on `main` pushes and PRs), and make sure a push to `release` triggers the workflow even when the path filter wouldn't. Tag each exported commit `playtest-N` (or document the manual tagging step). Add branch protection on `release` if available (fast-forward only, no direct commits). Update `REDLINE_CURRENT_STATUS.md` and the playtest guide's "how builds are made" notes. Cut the next playtest build through `release` to prove it. | Master §12, RELEASE-001 | Codex | TO DO |
 
 **Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
 
@@ -82,7 +88,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 - DSY-013: Tier 2 FREE TRIAL placement and other corporation maps. All three pushback definitions/triggers are tested. This four-row map is Tier 1, so the final pacing step removes the temporary Step 5 Tier 2 placement.
 - PACE-003/005: notation and engine support tested; no unspecified multipliers or ESCALATE assignments invented for existing ICE. The controlled UI fixture shows both.
 - DSY-014/PACE-007 Phase 7 HULL engines, and PACE-004/010 manual scoring remain with their existing owners below.
-- Windows export/launch: export runs on pushes to `main` (MAIN-001). Feature/PR CI verifies code/screenshots only. HALCYON PLAYTEST 4 is available. Windows launch and playtest are pending with the designer.
+- Windows export/launch: export runs on pushes to `release` (RELEASE-001; until Codex lands it, still on pushes to `main`, MAIN-001). Feature/PR CI verifies code/screenshots only. HALCYON PLAYTEST 4 is available. Windows launch and playtest are pending with the designer.
 - Conditional turn-4 BOOTING and PACE-006 safety valves intentionally excluded.
 
 ## Open asset provenance
