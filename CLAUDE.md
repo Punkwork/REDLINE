@@ -36,10 +36,10 @@ Copies of design docs kept outside this repository, such as Claude Project docs 
 - **The UI is built in code.** There is one scene (`godot/scenes/Main.tscn`) and no autoload singletons. Don't introduce scenes, autoloads or a signal bus unless the designer asks.
 
 **Map (details in `docs/ARCHITECTURE.md`)**
-- `godot/scripts/core/`: the rules engine and data (`game.gd`, `cards.gd`, `ice.gd`), NUL/REM, punch cards, THE CARBON record, local profile, copy guards.
-- `godot/scripts/ui/main.gd`: app shell, menus, map, settings. `godot/scripts/ui/friendly_lie/`: the encounter presentation (Friendly Lie, Chrome Deco, cartridges, Atomic Deco Punk, SAMIZINE).
-- `godot/data/`: copy tables and tunable presentation values (JSON), each line with its approval status.
-- `godot/tests/`: `test_*.gd` (headless checks) and `shot_*.gd` (screenshot fixtures, written to `docs/visual/fixtures/`).
+- `godot/scripts/core/`: the rules engine and data (`game.gd`, `cards.gd`, `ice.gd`), NUL/REM, punch cards, THE CARBON record, local JSON helper and copy guards.
+- `godot/scripts/ui/main.gd`: app shell, menus, map, settings. `godot/scripts/ui/friendly_lie/`: the encounter presentation (Friendly Lie, Chrome Deco, cartridges, Atomic Deco Punk, SAMIZINE), including the local ad profile in `play_profile.gd`.
+- `godot/data/`: copy tables and presentation tuning (JSON). ADP and ARCH copy have per-line approval fields.
+- `godot/tests/`: `test_*.gd` (headless checks) and `shot_*.gd` (screenshot fixtures, write to the directory in `SHOT_DIR`).
 
 **Do not**
 - **Refactor or restructure working code unless the designer asks.** Make the smallest change that does the job. If something should be refactored, propose it in HANDOFF instead.
@@ -50,14 +50,33 @@ Copies of design docs kept outside this repository, such as Claude Project docs 
 - **Send data off the machine.** Play stats, ads and THE CARBON stay in `user://`.
 
 **Tests (run before every commit that touches `godot/`)**
+
+From the repository root, set `GODOT` to the Godot 4.3 editor executable. Import before running scripts on a fresh checkout.
+
+```bash
+GODOT=/path/to/Godot_v4.3-stable_linux.x86_64
+"$GODOT" --headless --path godot --editor --import --quit
+"$GODOT" --headless --path godot --script res://tests/test_game.gd
+"$GODOT" --headless --path godot --script res://tests/test_adp.gd
+"$GODOT" --headless --path godot --script res://tests/test_signal_carbon.gd
 ```
-GODOT=/path/to/Godot_v4.3-stable
-$GODOT --headless --path godot --editor --import --quit
-$GODOT --headless --path godot --script res://tests/test_game.gd
-$GODOT --headless --path godot --script res://tests/test_adp.gd
-$GODOT --headless --path godot --script res://tests/test_signal_carbon.gd
+
+Screenshot fixtures need a display and a writable output directory. On display-less Linux, install Xvfb and xauth. Use a fresh user-data directory to keep fixture writes away from playtest records.
+
+```bash
+fixture_dir="$(mktemp -d)"
+export SHOT_DIR="$fixture_dir/screenshots"
+export XDG_DATA_HOME="$fixture_dir/user-data"
+mkdir -p "$SHOT_DIR" "$XDG_DATA_HOME"
+
+xvfb-run -a -s '-screen 0 1600x1100x24' "$GODOT" \
+  --audio-driver Dummy --rendering-driver opengl3 --path godot \
+  --script res://tests/shot_signal_carbon.gd
 ```
-Screenshot fixtures (need a display; CI uses `xvfb-run` and `--audio-driver Dummy --rendering-driver opengl3`): `shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel shot_friendly_lie shot_chrome shot_cartridges shot_adp shot_adp_phase3 shot_signal_carbon shot_facade`. The list in `.github/workflows/godot-validation.yml` is authoritative. Bot sims: `SIM=1 $GODOT --headless --path godot --script res://tests/test_game.gd`. Report pass/fail counts in the log; any `SCRIPT ERROR`, `Parse Error` or `Assertion failed` is a failure.
+
+On a desktop with a working display, run the Godot command directly. Use a disposable profile for fixtures on platforms that do not honor `XDG_DATA_HOME`. Substitute each `shot_*.gd` in the authoritative list in `.github/workflows/godot-validation.yml`. Run mouse-driven fixtures serially on a shared display.
+
+Use `SIM=1 "$GODOT" --headless --path godot --script res://tests/test_game.gd` to add bot simulations. `SIM_ONLY` can select one Rustler. Check both exit codes and logs. Any `SCRIPT ERROR`, `Parse Error` or `Assertion failed` is a failure. Report pass/fail counts in the log.
 
 ## 5. Builds (RELEASE-001)
 

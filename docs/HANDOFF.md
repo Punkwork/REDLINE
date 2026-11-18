@@ -40,12 +40,11 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
-**Claude Code migration (DEV-001, approved 2026-11-18), in this order:**
+**Claude Code migration (DEV-001, approved 2026-11-18):**
 
 | ID | What | Owner | Status |
 |---|---|---|---|
-| **DEV-001a** | Tag today's `main` as `pre-claude-code` and push the tag. Write `docs/ARCHITECTURE.md`: how `game.gd`, `cards.gd`, `ice.gd` and the other core scripts hold and change state; how `main.gd` and `friendly_lie/` read it and send player actions back; data files and their approval flags; save/`user://` files; how tests and fixtures work, including any setup the commands in `CLAUDE.md` §4 don't mention; known fragile spots and anything a newcomer must not touch casually; what is stubbed for the slice (Central Nodes, LUCIDA route, PATCHWORK, run resume). Correct `CLAUDE.md` §4 (and `AGENTS.md`, identically) where it's wrong. Mark `godot/CODEX_HANDOFF.md` as superseded by `docs/ARCHITECTURE.md`. Log and report the commit. | Codex | TO DO |
-| **DEV-001b** | Read-only audit, no code changes: read `CLAUDE.md`, `docs/ARCHITECTURE.md`, HANDOFF and the design docs; run the test commands; map the code; report where code and docs disagree, missing hooks, naming mismatches, and anything in `ARCHITECTURE.md` that's wrong. Write the findings into the log and propose fixes in HANDOFF for the designer. | Claude Code | TO DO (after DEV-001a; needs Godot 4.3 installed) |
+| **DEV-001b** | Read-only audit, no code changes: read `CLAUDE.md`, `docs/ARCHITECTURE.md`, HANDOFF and the design docs; run the test commands; map the code; report where code and docs disagree, missing hooks, naming mismatches, and anything in `ARCHITECTURE.md` that's wrong. Write the findings into the log and propose fixes in HANDOFF for the designer. | Claude Code | TO DO (needs Godot 4.3 installed) |
 
 **Integration beyond the HALCYON slice:** connect the presentation hooks to playable LUCIDA, PATCHWORK and run resume when those systems arrive. Tag playable Central Nodes with `central: true`. The slice's run-menu DEAD DROP opens THE CARBON; attach the same reader to the map's DEAD DROP when that Node is built. The reveal sequence and final punch-card art have their own design work.
 
@@ -111,6 +110,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| DEV-001a | Tagged baseline, wrote the developer system map, corrected the matching working agreements and retired the old Godot handoff. DEV-001b is next with Claude Code. | `pre-claude-code` at `0a357e7` · [Implementation log](REDLINE_DEVELOPMENT_LOG.md#2026-11-18--dev-001a-claude-code-handoff-codex) |
 | ZINE-002 / ARCH-001 copy (ARCH-COPY-001) | Approved: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the defeat framing copy and the polite anti-paper lines. Samizdat history (ADP §2.2.1) checked by the designer. | 2026-11-18 (designer: "All approved"; recorded by Claude) |
 | ZINE-003 SAMIZINE | Design canvas built and reviewed in three rounds; spec `REDLINE_SAMIZINE.md`, boards, review PDF and canvas sources in `docs/visual/samizine/`. ARCH-SLANG-001 (’Pelago) and ARCH-NAMES-001 / ARCH-LINES-001 recorded. | 2026-11-18 (designer; recorded by Claude) |
 | ADP §1.1 / ZINE-002 / ARCH-001 docs | Atompunk comparison (term stays); the zine as the underworld's samizdat; `REDLINE_ARCHIPELAGO.md` approved (decisions 1–4); ADP v0.8 links §8 to ARCH-001; decisions recorded in the master design doc. | 2026-11-18 (designer; recorded by Claude) |

@@ -4,14 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CHROME-001 step 1: real encounter layout and readability (Codex)
-
-**Direction:** designer: “I agree with your assessment. Work on those items in that order. Giving samples or examples in png format for each step”. Refine one playable CAPTCHA encounter in Chrome Deco, retaining actual rules and the Rustler paper layer. Working branch is unchanged; this feature locally includes the reviewed VIS-001 PR #11 dependency, which remains open.
-
-**Changed:** larger scan headings, rules and passive text; full-size scan panels; smaller illustration carriers preserve separate actor/flinch transforms. CHAIN tags sit in the rig strip; deck counters use three unclipped lines. Added a per-step screenshot fixture using real Generalist READY RIG, cards, AUTO-RENEW and CAPTCHA. All art/state values remain presentation only.
-
-**Sample:** `01-layout-and-readability.png`. Godot 4.3 stage-1 fixture reports zero failures, including actual card text fit and scan width. **Interpretations to confirm:** two-ICE silhouettes use 82% carriers to give rules more room; three-ICE carriers use 70%. These scales are working presentation values. No gameplay values changed.
-
 ## 2026-11-17 — CHROME-001 step 2: chrome/enamel mascot objects (Codex)
 
 **Changed:** layered silver/chrome rims, pearl/mint enamel, restrained Deco ribs and card-corner fan, more substantial speech bubbles and corporate name/wordmark. AUTO-RENEW retains its card/chip silhouette and CAPTCHA its eye/grid widget. Individual face parts and actual mood computations are retained; the Rustler paper layer is unchanged. Speech scales to fit rather than clipping.
@@ -402,3 +394,11 @@ LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — 
 ## 2026-11-18 — DEV-001: Claude Code takes over code development (Claude)
 
 Designer: "I want to migrate codex code development for the redline/panopticon project to Claude Code"; Claude (project) stays on design, Codex keeps isolated tasks. Approved Claude's adapted plan ("Go ahead, yes"): a `pre-claude-code` tag instead of a migration branch (MAIN-001/RELEASE-001); `.godot/` was already ignored; Codex writes the system map; the design spec stays in the existing docs. **Changed:** `CLAUDE.md` and `AGENTS.md` (identical) expanded with roles, session routine, Godot 4.3 / typed GDScript / UI-in-code conventions (one scene, no autoloads), the no-refactor guardrail, presentation never read by rules, readability and copy guards, test commands from the CI workflow, and the RELEASE-001 build flow. Master design: DEV-001 and register row. HANDOFF: roles updated; DEV-001a (Codex: checkpoint tag, `docs/ARCHITECTURE.md`, correct the test commands) and DEV-001b (Claude Code: read-only audit). **Interpretations to confirm:** `godot/CODEX_HANDOFF.md` to be marked superseded by ARCHITECTURE.md. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — DEV-001a: Claude Code handoff (Codex)
+
+Published `pre-claude-code` at `0a357e7`. Added [ARCHITECTURE.md](ARCHITECTURE.md) with the model/UI boundary, runtime data and approvals, local files, fixture setup, fragile dependencies and slice hooks. Corrected §4 in the identical working agreements, superseded the old Godot handoff and moved DEV-001a to Done. Claude Code takes DEV-001b next. No game code changed.
+
+**Validation:** Fresh Godot 4.3 import in a temporary checkout. Headless suites passed 361 rules checks, 17 bleed checks and 671 SIGNAL/CARBON checks. A display-backed SIGNAL/CARBON smoke test passed 22 checks and wrote seven PNGs to an isolated `SHOT_DIR` with temporary user data. The working agreements match byte for byte.
+
+LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — CHROME-001 step 1: real encounter layout and readability (Codex).
