@@ -286,6 +286,7 @@ engine/
 | ZINE-003 | SAMIZINE: the underworld's zine look (carbon, ditto, kidnapped corporate type, palimpsest, pocket wear, copy generations) | APPROVED | Designer, 2026-11-18 |
 | ARCH-001 | Being traced means disappearing to the Archipelago; ARCH-R1 tone rules; relocation defeat framing and persistent THE CARBON record; islands merge people one at a time to build the sync signal (secret until the third card); no one comes back | APPROVED | Designer, 2026-11-18 |
 | RELEASE-001 | Builds come only from a `release` branch fast-forwarded from `main`; each build tagged `playtest-N`; export no longer runs on pushes to `main` | APPROVED | Designer, 2026-11-18 |
+| DEV-001 | Claude Code is the main code developer; Claude (project) owns design; Codex takes isolated tasks on request; shared rules in CLAUDE.md = AGENTS.md | APPROVED | Designer, 2026-11-18 |
 | ICE-001 | PAPER CUT Strength 0 with minor damage/discard/DEADLOCK | CONCEPT | Earlier design proposal |
 
 ## 11. Open specification backlog
@@ -309,6 +310,13 @@ Designer: "when we produce a build, I want to produce them off the main, just in
 - **Every build is tagged** (`playtest-N`) on the exact commit it was built from, and the artifact records that commit (`BUILD_COMMIT.txt`, as now).
 - **Recovery:** a bad or corrupted build is rebuilt from its tag, or `release` is reset to the previous good tag. `main` is never touched by a build.
 - Replaces MAIN-001's rule that Windows exports run on pushes to `main`.
+
+### DEV-001 — Claude Code takes over code development (APPROVED, 2026-11-18)
+Designer: "I want to migrate codex code development for the redline/panopticon project to Claude Code", keeping Claude (Cowork / claude.ai) for design and Codex for isolated tasks; approved Claude's plan ("Go ahead, yes").
+- **Roles:** Claude Code is the main code developer (Godot build, tests, fixtures, CI, exports, current status). Claude in the "Panopticon" project owns design, playtest analysis, HANDOFF and the project doc copies. Codex takes small isolated tasks only when the designer asks.
+- **Shared rules** live in `CLAUDE.md` and `AGENTS.md`, kept identical: the working agreement, roles, session routine, Godot 4.3 / typed GDScript / UI-in-code conventions, a no-refactor-unless-asked guardrail, presentation never read by rules, readability and copy guards, test commands, and the RELEASE-001 build flow.
+- **Handoff sequence:** (1) Codex tags the checkpoint `pre-claude-code` on `main`, writes `docs/ARCHITECTURE.md` (system map), confirms the test commands, then steps back; (2) Claude Code's first session is a read-only audit comparing the code with `ARCHITECTURE.md` and the design docs, reporting mismatches before any new code; (3) normal development resumes from HANDOFF.
+- No branch for the migration: the `pre-claude-code` tag and the `playtest-6` build are the restore points (MAIN-001, RELEASE-001).
 
 ### Source/provenance note
 This consolidation uses prior PANOPTICON project conversation context and summaries of earlier handoff documents, notably `REDLINE_CURRENT_STATE_FOR_CLAUDE_2026-11-08.md`, `REDLINE_UI_NULREM_Design_For_Claude.md`, and earlier narrative notes. Their complete contents and the actual ZIP were **not accessible for direct inspection here**; therefore this is a careful baseline, **not a complete extraction of every past card or mechanic**. Missing specifics are explicitly marked VERIFY/OPEN rather than invented.

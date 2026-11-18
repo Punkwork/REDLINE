@@ -9,9 +9,10 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 1. **Work on `main`** (designer, 2026-11-17; replaces the 2026-11-15 rule that used `codex/halcyon-playtest-stabilization`). Follow the working agreement in `AGENTS.md` / `CLAUDE.md`: start from the latest `main`, record design decisions in `REDLINE_MASTER_DESIGN.md`, report the commit where finished work lives, and ask the designer before creating a branch. The former working branch was merged into `main` at a523502 and is no longer used.
 2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes them from `main`.
-3. **Who does what.**
-   - **Claude:** design docs and proposals, playtest analysis, this file, the project copies.
-   - **Codex:** the Godot build (`godot/`), tests, exports, `REDLINE_CURRENT_STATUS.md`.
+3. **Who does what (DEV-001, 2026-11-18; details in `CLAUDE.md` / `AGENTS.md`).**
+   - **Claude Code:** the Godot build (`godot/`), tests, fixtures, CI, exports, `REDLINE_CURRENT_STATUS.md`.
+   - **Claude (Panopticon project):** design docs and proposals, playtest analysis, this file, the project copies.
+   - **Codex:** small isolated tasks, only when the designer asks.
    - **Either:** small doc fixes that follow a decision already recorded.
    - **Only the designer** marks a decision APPROVED. A proposal stays PROPOSED until the designer says so in a session, and the session's log entry quotes or records that.
 4. **Every change has a decision ID** (e.g. REJECT-001) that appears in the design doc, in this file and in the development log.
@@ -38,6 +39,13 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 |---|---|---|---|---|
 | **PACE-004, 010** | Score each slice layer (BREACH WORK, REVEAL FLOOR, VITAE) from playtest 2's turns and VITAE; propose ICE changes. | Pacing §4.1, §9 | Claude | TO DO (needs playtest 2 data) |
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
+
+**Claude Code migration (DEV-001, approved 2026-11-18), in this order:**
+
+| ID | What | Owner | Status |
+|---|---|---|---|
+| **DEV-001a** | Tag today's `main` as `pre-claude-code` and push the tag. Write `docs/ARCHITECTURE.md`: how `game.gd`, `cards.gd`, `ice.gd` and the other core scripts hold and change state; how `main.gd` and `friendly_lie/` read it and send player actions back; data files and their approval flags; save/`user://` files; how tests and fixtures work, including any setup the commands in `CLAUDE.md` §4 don't mention; known fragile spots and anything a newcomer must not touch casually; what is stubbed for the slice (Central Nodes, LUCIDA route, PATCHWORK, run resume). Correct `CLAUDE.md` §4 (and `AGENTS.md`, identically) where it's wrong. Mark `godot/CODEX_HANDOFF.md` as superseded by `docs/ARCHITECTURE.md`. Log and report the commit. | Codex | TO DO |
+| **DEV-001b** | Read-only audit, no code changes: read `CLAUDE.md`, `docs/ARCHITECTURE.md`, HANDOFF and the design docs; run the test commands; map the code; report where code and docs disagree, missing hooks, naming mismatches, and anything in `ARCHITECTURE.md` that's wrong. Write the findings into the log and propose fixes in HANDOFF for the designer. | Claude Code | TO DO (after DEV-001a; needs Godot 4.3 installed) |
 
 **Integration beyond the HALCYON slice:** connect the presentation hooks to playable LUCIDA, PATCHWORK and run resume when those systems arrive. Tag playable Central Nodes with `central: true`. The slice's run-menu DEAD DROP opens THE CARBON; attach the same reader to the map's DEAD DROP when that Node is built. The reveal sequence and final punch-card art have their own design work.
 
