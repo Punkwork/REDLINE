@@ -1,6 +1,6 @@
 # PANOPTICON — THE ARCHIPELAGO: BEING TRACED MEANS DISAPPEARING
-**Version:** 0.5 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ARCH-001
-**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the programme small print and the 15 relocation lines are approved (ARCH-LINES-001); the island name pool is still working copy. On screen the Rustlers always say **’Pelago** (ARCH-SLANG-001, §3 rule 6). No rules change.
+**Version:** 0.7 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ARCH-001
+**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the programme small print and the 15 relocation lines are approved (ARCH-LINES-001); the defeat framing copy and the on-screen ’Pelago uses (§6) are approved too (ARCH-COPY-001, designer: "All approved"). The island names stay working copy until the designer checks them against real care homes. On screen the Rustlers always say **’Pelago** (ARCH-SLANG-001, §3 rule 6). No rules change.
 **Builds on:** ZINE-002 (`REDLINE_ATOMIC_DECO_PUNK.md` §2.2, especially reason 4 in §2.2.2, "the traced disappear from the record"); the Friendly Lie and the corporation states (`REDLINE_VISUAL_LANGUAGE.md`); FACADE-001; LUCIDA edits the record (ADP §6.3); SIGNAL-001 (ADP §8); defeat in `REDLINE_CORE_RULES.md` §4.
 
 ---
@@ -21,7 +21,7 @@ This is the other half of the samizdat lineage (ZINE-002). Samizdat existed part
 
 Panopticon borrows the **structure** of this (quiet removal, euphemism, an invisible network of islands, an edited record, an underground that remembers), not its imagery. It is an analogy, not a depiction.
 
-*(Written from general knowledge; fact-check before any of it informs on-screen text.)*
+*(Inspiration, not a source to match: Panopticon is a made-up world and doesn't have to resemble real history exactly. No fact-check needed; designer, 2026-11-18.)*
 
 ## 3. Tone rules (ARCH-R1, APPROVED 2026-11-18)
 
@@ -30,7 +30,7 @@ Designer: "1 y".
 1. **Horror by absence.** The game never shows what happens on the islands. No camps, guards, machines or suffering on screen. What the player sees is the gap: an empty chair, a name crossed out of a crew list, a corporate notice that's far too calm.
 2. **Never a joke.** Rustler irreverence stops here. Anything about the Archipelago is written in *THE CARBON*'s plain register (ADP §4.2): names, dates, places.
 3. **The corporations never say it.** Corporate copy never mentions arrest, capture or the Archipelago. People are *relocated*, *resting*, *retired from service*, *in good hands*. The euphemism is the horror.
-4. **"Archipelago" is the underworld's word.** It's what the zines call the network; the corporations have no name for it. **The word *gulag* is never used on screen.** "Archipelago" carries the echo for those who know it, without borrowing a real atrocity's name for a game system.
+4. **The ’Pelago is the underworld's word** (rule 6). It's what the zines call the network; the corporations have no name for it. **The word *gulag* is never used on screen.** The name carries the echo of the Archipelago for those who know it, without borrowing a real atrocity's name for a game system.
 5. **Respect and readability as always.** No graphic content; nothing in this doc may cover rule text or numbers (ADP-R1).
 6. **ARCH-SLANG-001 — the Rustlers say ’Pelago (APPROVED 2026-11-18).** Designer: "In all Rustler references to the archipelago should be written as pelago with an apostrophe before the P. Rustlers wouldn't use a 5-syllable word without shortening it." Every Rustler and underworld reference on screen (zines, *THE CARBON*, NUL/REM, graffiti, the map, the reveal) writes it **’Pelago**, with a typographic apostrophe (U+2019; search alias `'Pelago`). In all caps: **’PELAGO**. Lowercase in speech: *the ’pelago*. **’Pelago is the official in-game term, even at the very end** (designer, 2026-11-18: "Don't use the term archipelago, except in game documents. Pelago is the official in-game terminology to be used even at the very end."). "Archipelago" appears only in design documents, never on screen; the corporations never say either form.
 
@@ -47,9 +47,9 @@ Designer: **"The island names should resemble names of long-term care residences
 - **There are many islands, and the names repeat across corporations.** The same kind of name could belong to any of them, which quietly hints that they're one system (SIGNAL-001) without saying so.
 - **Avoid exact names of well-known real care chains** (check before final copy); generic word combinations are fine.
 
-**Working name pool (for approval):**
+**Island name pool (working copy; designer will check the names against real care homes later):**
 
-| Corporation | Working names | Small print (programme, APPROVED) |
+| Corporation | Island names (working copy) | Small print (programme, APPROVED) |
 |---|---|---|
 | **HALCYON** | Sunnyside Manor · Maple Grove Residence · Brookside Place | *A Halcyon Homesteads™ community* |
 | **IRONWATCH** | Pine Ridge Residence · Cedar Hill Care Centre · Stonebrook Lodge | *A SafeHarbor Residences™ property* |
@@ -99,7 +99,7 @@ Designer: "2 y".
 
 The rules stay exactly as they are (Core Rules §4: the run ends when VITAE reaches 0; the TRACE strike ladder in §7). What changes is how the game *frames* those moments.
 
-| Moment (existing rule) | Framing (working copy, for approval) |
+| Moment (existing rule) | Framing (APPROVED 2026-11-18) |
 |---|---|
 | **TRACE rising, Cracking** | Already the corporation noticing you. At high bleed, a corporate toast can slip and mention "accommodation" or "a quiet place" (leak table, ADP §4.3). |
 | **Strike modal** ("Stay where you are.") | The knock on the door. |
@@ -111,7 +111,7 @@ The rules stay exactly as they are (Core Rules §4: the run ends when VITAE reac
 
 **LUCIDA's version:** in LUCIDA runs, flavour lines about a lost Rustler can be quietly rewritten, the way unpersons were retouched out of photos (ADP §6.3 rules apply: flavour only, marked with ✎, rules lines never touched).
 
-## 6. Where the word appears on screen, as ’Pelago (working, for approval)
+## 6. Where the word appears on screen, as ’Pelago (APPROVED 2026-11-18)
 
 - **The zines:** *THE CARBON*'s entries ("Taken to the ’Pelago."); a recurring zine column, *NOTES FROM THE ’PELAGO* (rumours, unconfirmed, contradictory).
 - **The defeated-Rustler page** (§5).
@@ -135,7 +135,7 @@ Log under **ARCH-001** in `REDLINE_DEVELOPMENT_LOG.md`; note anything invented a
 
 | Step | What | Done when |
 |---|---|---|
-| **ARCH-1a** | **Defeat screen:** replace any death framing with the relocation notice (Poiret One, corporate skin of the run's corporation) followed by a *THE CARBON* page (Space Mono or a typewriter face, carbon-faded decoration that never touches glyph contrast). Reduced-motion version. | Defeat in a HALCYON fixture shows both; contrast passes 4.5:1. |
+| **ARCH-1a** | **Defeat screen:** replace any death framing with the relocation notice (Poiret One, corporate skin of the run's corporation) followed by a *THE CARBON* page in the SAMIZINE look (ZINE-003, `REDLINE_SAMIZINE.md`: Special Elite carbon body, pocket wear and copy-generation decoration that never touches glyph contrast). Reduced-motion version. | Defeat in a HALCYON fixture shows both; contrast passes 4.5:1. |
 | **ARCH-1b** | **THE CARBON record:** a local file (`user://carbon.json`) appending Rustler, issue number, corporation, Node and date on each defeat; viewable from DEAD DROP; deletable from settings. | Entries survive restarts; deleting the file empties the record; nothing leaves the machine. |
 | **ARCH-1c** | **Copy and guards:** the island name pool, programme small print and the 15 approved relocation lines (§4.0, approved status recorded per line) and the Archipelago lines (§6) added to the copy tables with approval status. Tests: the full word "Archipelago" never appears in any on-screen string; "’Pelago" (and `'Pelago`) never appears in a corporate-tagged or rules-tagged string; the word "gulag" never appears in any on-screen string; every line that states or explains what the islands are for is tagged `reveal` and covered by the SIG-5d guard. | The tests pass, and each fails when a line breaks its rule. |
 

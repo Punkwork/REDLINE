@@ -21,6 +21,8 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 6. **Development log size (LOG-001).** Keep `REDLINE_DEVELOPMENT_LOG.md` under about **60 KB** so Claude can rewrite the project copy in one pass. When it grows past that, move the oldest dated entries, whole, to the end of `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` (oldest first, nothing reworded) and note the move in the log. Entries stay append-only; the archive is never edited except to append.
 
+7. **Builds come from `release`, not `main` (RELEASE-001, 2026-11-18).** Work lands on `main`. To cut a playtest build, fast-forward `release` to `main`, push, and tag the commit `playtest-N`; only `release` exports Windows builds. Nobody commits to `release` directly. A bad build is rebuilt from its tag or `release` is reset to the last good tag.
+
 **Statuses:** **TO DO** (decided, not started) · **IN PROGRESS** (name who) · **BUILT** (in code, needs a playtest or check) · **DONE** · **WAITING** (needs a designer decision).
 
 ---
@@ -38,6 +40,10 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 | **DSY-014, PACE-007** | Phase 7 pools on the synergy grammar, with 2 HULL engines per Rustler pool. *(RIOT's ZEROED keyword written up: ZEROED-001.)* | Synergy §5.1, Pacing §6 | Claude | TO DO |
 
 **Integration beyond the HALCYON slice:** connect the presentation hooks to playable LUCIDA, PATCHWORK and run resume when those systems arrive. Tag playable Central Nodes with `central: true`. The slice's run-menu DEAD DROP opens THE CARBON; attach the same reader to the map's DEAD DROP when that Node is built. The reveal sequence and final punch-card art have their own design work.
+
+| ID | What to build | Spec | Owner | Status |
+|---|---|---|---|---|
+| **RELEASE-001** | Create the `release` branch from the current `main`. In `.github/workflows/godot-validation.yml`, change the three export conditions from `refs/heads/main` to `refs/heads/release` (keep validation on `main` pushes and PRs), and make sure a push to `release` triggers the workflow even when the path filter wouldn't. Tag each exported commit `playtest-N` (or document the manual tagging step). Add branch protection on `release` if available (fast-forward only, no direct commits). Update `REDLINE_CURRENT_STATUS.md` and the playtest guide's "how builds are made" notes. Cut the next playtest build through `release` to prove it. | Master §12, RELEASE-001 | Codex | TO DO |
 
 **Conditional (approved, build only if the condition is met):** PACE-003's BOOTING on the 4th turn, if playtest 2 shows the Opening Node breached before turn 4. PACE-006's safety valves (Max VITAE 35–40, full-clear heal 3, a second SAFEHOUSE), if playtests run too hot. PACE-009: watch RIOT's TRACE in longer encounters.
 
@@ -81,7 +87,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 - DSY-013: Tier 2 FREE TRIAL placement and other corporation maps. All three pushback definitions/triggers are tested. This four-row map is Tier 1, so the final pacing step removes the temporary Step 5 Tier 2 placement.
 - PACE-003/005: notation and engine support tested; no unspecified multipliers or ESCALATE assignments invented for existing ICE. The controlled UI fixture shows both.
 - DSY-014/PACE-007 Phase 7 HULL engines, and PACE-004/010 manual scoring remain with their existing owners below.
-- Windows export/launch: export runs on pushes to `main` (MAIN-001). Feature/PR CI verifies code/screenshots only. HALCYON PLAYTEST 4 is available. Windows launch and playtest are pending with the designer.
+- Windows export/launch: export runs on pushes to `release` (RELEASE-001; until Codex lands it, still on pushes to `main`, MAIN-001). Feature/PR CI verifies code/screenshots only. HALCYON PLAYTEST 4 is available. Windows launch and playtest are pending with the designer.
 - Conditional turn-4 BOOTING and PACE-006 safety valves intentionally excluded.
 
 ## Open asset provenance
@@ -92,7 +98,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ZINE-002 / ARCH-001 copy | Approve the working copy: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the island name pool (generic care-home names, ARCH-NAMES-001) and the polite anti-paper lines. (Relocation lines and programme names approved 2026-11-18: ARCH-LINES-001.) Can be decided with the next copy pack. The historical summaries (ADP §2.2.1, ARCH §2) need a fact-check before they inform on-screen text. | ADP §2.2; ARCH §4–6 | WAITING |
+| ARCH-NAMES-001 names | The nine island names are working copy: the designer will check them against real care homes later. | ARCH §4.0 | WAITING |
 
 ---
 
@@ -100,6 +106,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| ZINE-002 / ARCH-001 copy (ARCH-COPY-001) | Approved: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the defeat framing copy and the polite anti-paper lines. Samizdat history (ADP §2.2.1) checked by the designer. | 2026-11-18 (designer: "All approved"; recorded by Claude) |
 | ZINE-003 SAMIZINE | Design canvas built and reviewed in three rounds; spec `REDLINE_SAMIZINE.md`, boards, review PDF and canvas sources in `docs/visual/samizine/`. ARCH-SLANG-001 (’Pelago) and ARCH-NAMES-001 / ARCH-LINES-001 recorded. | 2026-11-18 (designer; recorded by Claude) |
 | ADP §1.1 / ZINE-002 / ARCH-001 docs | Atompunk comparison (term stays); the zine as the underworld's samizdat; `REDLINE_ARCHIPELAGO.md` approved (decisions 1–4); ADP v0.8 links §8 to ARCH-001; decisions recorded in the master design doc. | 2026-11-18 (designer; recorded by Claude) |
 | HALCYON PLAYTEST 5 Windows build | Exported and verified the Windows x86-64 package with checklist v0.5. Windows launch and playtest are pending with the designer. | `98bad5f`, tag `playtest-5`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44232607877), [artifact](https://github.com/Punkwork/REDLINE/actions/runs/44232607877/artifacts/14395388972) |

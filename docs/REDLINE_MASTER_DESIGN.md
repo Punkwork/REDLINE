@@ -239,6 +239,7 @@ Detail, writing rules until the end, presentation, how to render the M0'B\*Loop 
 - **No one comes back** ("4 no"): no rescue, return or escape, in rules or story.
 - **ARCH-NAMES-001 — island names** (designer direction, 2026-11-18): "The island names should resemble names of long-term care residences and the more generic the name the better." Generic nature-word + residence-word names (Sunnyside Manor, Pine Ridge Residence, Willow Creek Lodge); no ™ or brand in the name; the corporation only in small print ("A HALCYON Care Community"). Specific names are working copy, for approval. **Programme names approved (2026-11-18)** as the small print under each island: *Halcyon Homesteads™*, *SafeHarbor Residences™*, *Long Rest Retreats™*.
 - **ARCH-SLANG-001 — ’Pelago (APPROVED, 2026-11-18):** "In all Rustler references to the archipelago should be written as pelago with an apostrophe before the P. Rustlers wouldn't use a 5-syllable word without shortening it." On screen the Rustlers and the underworld always write **’Pelago** (’PELAGO in caps); the full word stays in design docs only and never appears on screen. Confirmed: "Pelago is the official in-game terminology to be used even at the very end."
+- **ARCH-COPY-001 — working copy approved (2026-11-18):** designer: "All approved". The *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the defeat framing copy and the polite anti-paper lines (ADP §2.2.3) are approved. The nine island names stay **working copy** until the designer checks them against real care homes. Historical background in the docs (samizdat, the Gulag) is inspiration, not a source to match, and needs no fact-check: "Don't verify history. This is a made-up world. It doesn't have to perfectly resemble the real world." (designer, 2026-11-18).
 - **ARCH-LINES-001 — relocation lines (APPROVED, 2026-11-18):** the designer left them to Claude's discretion, then approved all 15 ("Perfect- add them"); five per corporation, listed in `REDLINE_ARCHIPELAGO.md` §4.0.
 - **Build tasks ARCH-1a–c approved.** Working names and lines remain copy for approval.
 
@@ -284,6 +285,7 @@ engine/
 | ZINE-002 | The zine is the underworld's samizdat: how it communicates where every corporate channel listens; censorship by convenience, not prohibition | DIRECTION (examples for approval) | Designer, 2026-11-18 |
 | ZINE-003 | SAMIZINE: the underworld's zine look (carbon, ditto, kidnapped corporate type, palimpsest, pocket wear, copy generations) | APPROVED | Designer, 2026-11-18 |
 | ARCH-001 | Being traced means disappearing to the Archipelago; ARCH-R1 tone rules; relocation defeat framing and persistent THE CARBON record; islands merge people one at a time to build the sync signal (secret until the third card); no one comes back | APPROVED | Designer, 2026-11-18 |
+| RELEASE-001 | Builds come only from a `release` branch fast-forwarded from `main`; each build tagged `playtest-N`; export no longer runs on pushes to `main` | APPROVED | Designer, 2026-11-18 |
 | ICE-001 | PAPER CUT Strength 0 with minor damage/discard/DEADLOCK | CONCEPT | Earlier design proposal |
 
 ## 11. Open specification backlog
@@ -298,6 +300,15 @@ engine/
 - **Development Log:** chronological work and evidence; append-only by session.
 - **Current Status:** short operational snapshot; replace/update at each handoff.
 - Every new rule should receive an ID, status, and test expectation. Every implementation claim should identify a source file, commit, or passing test. A chat summary alone does not certify a build.
+
+### RELEASE-001 — Builds come from a `release` branch, tagged (APPROVED, 2026-11-18)
+Designer: "when we produce a build, I want to produce them off the main, just in case any products are corrupted"; approved the proposal ("Go").
+- **`main` stays the working branch.** All work lands there (MAIN-001 unchanged).
+- **A `release` branch is the only branch that produces builds.** When the designer asks for a playtest build, `main` is fast-forwarded into `release` (no new changes made on `release`; nobody commits to it directly).
+- **The Windows export runs only on pushes to `release`** (and on manual dispatch against `release`), not on pushes to `main`. Pushes and PRs to `main` still run validation (tests, screenshots).
+- **Every build is tagged** (`playtest-N`) on the exact commit it was built from, and the artifact records that commit (`BUILD_COMMIT.txt`, as now).
+- **Recovery:** a bad or corrupted build is rebuilt from its tag, or `release` is reset to the previous good tag. `main` is never touched by a build.
+- Replaces MAIN-001's rule that Windows exports run on pushes to `main`.
 
 ### Source/provenance note
 This consolidation uses prior PANOPTICON project conversation context and summaries of earlier handoff documents, notably `REDLINE_CURRENT_STATE_FOR_CLAUDE_2026-11-08.md`, `REDLINE_UI_NULREM_Design_For_Claude.md`, and earlier narrative notes. Their complete contents and the actual ZIP were **not accessible for direct inspection here**; therefore this is a careful baseline, **not a complete extraction of every past card or mechanic**. Missing specifics are explicitly marked VERIFY/OPEN rather than invented.
