@@ -28,6 +28,13 @@ var reduced_motion := false
 var hand_signature := ""
 var new_subroutines: Array = []
 var corporation_state := "friendly"
+var bleed := 0.0
+var bleed_from := 0.0
+var bleed_target := 0.0
+var bleed_elapsed := 0.0
+var bleed_label: Label
+var music: FriendlyMusic
+var worn_panels: Array[FriendlyRigWear] = []
 var previous_trace := 0
 var previous_strikes := 0
 var warned := false
@@ -61,9 +68,13 @@ func _ready() -> void:
  theme = FriendlyLook.THEME
  mouse_filter = Control.MOUSE_FILTER_PASS
  skin = ui.friendly_skin
+ music = FriendlyMusic.new()
+ add_child(music)
+ music.set_level(ui.music_volume, ui.music_muted)
+ visibility_changed.connect(func(): music.set_active(is_visible_in_tree()))
  app_ground = ColorRect.new(); app_ground.color = skin.ground; app_ground.position = Vector2.ZERO; app_ground.size = Vector2(1600, 1000); app_ground.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(app_ground)
  background = TextureRect.new(); background.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 1.0; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
- surveillance_layer=TextureRect.new(); surveillance_layer.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; surveillance_layer.texture=skin.hostile_background; surveillance_layer.size=Vector2(1600,1000); surveillance_layer.stretch_mode=TextureRect.STRETCH_SCALE; surveillance_layer.modulate.a=0.20; surveillance_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(surveillance_layer); surveillance_layer.hide()
+ surveillance_layer=TextureRect.new(); surveillance_layer.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; surveillance_layer.texture=skin.hostile_background; surveillance_layer.size=Vector2(1600,1000); surveillance_layer.stretch_mode=TextureRect.STRETCH_SCALE; surveillance_layer.modulate.a=AtomicDecoPunk.reveal(0.0); surveillance_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(surveillance_layer); surveillance_layer.hide()
  glitch_layer = Control.new(); glitch_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(glitch_layer)
  for y in [192,362,557,853]:
   var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
@@ -102,6 +113,23 @@ func _ready() -> void:
  feedback_label=FriendlyLook.label("",12,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD); feedback_label.position=Vector2(10,7); feedback_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; feedback_label.size=Vector2(330,70); feedback_panel.add_child(feedback_label)
  var log_paper:=FriendlyLook.panel(FriendlyLook.PAPER); log_paper.position=Vector2(248,577); log_paper.size=Vector2(1104,13); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
  log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 577); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
+ for panel in [node_tag, trace_tag, bottom_hud, note, rig_ground, piles_paper]:
+  var wear := FriendlyRigWear.new()
+  wear.code_strip = panel in [node_tag,trace_tag]
+  panel.add_child(wear, false, Node.INTERNAL_MODE_BACK)
+  worn_panels.append(wear)
+
+ var display: Dictionary = AtomicDecoPunk.settings.display
+ var sign := FriendlyLook.panel(skin.plaque_ground, skin.plaque_accent, 2, 10)
+ sign.name = "CorporateDisplay"
+ sign.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ at(self, sign, Vector2(590,16), Vector2(350,88))
+ var wordmark := FriendlyLook.label(skin.app_name, int(display.wordmark_px), skin.plaque_ink, skin.display_font)
+ var headline := FriendlyLook.label(skin.background_headline, int(display.background_headline_px), skin.plaque_ink, skin.display_font)
+ for title in [wordmark, headline]:
+  title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+ at(sign, wordmark, Vector2(12,4), Vector2(326,40))
+ at(sign, headline, Vector2(12,47), Vector2(326,32))
 func clear(node: Node) -> void:
  for child in node.get_children(): node.remove_child(child); child.queue_free()
 func at(parent: Node, control: Control, pos: Vector2, extent: Vector2 = Vector2.ZERO) -> Control:
@@ -131,6 +159,9 @@ func sync(model: Game) -> void:
  at(trace_tag, FriendlyLook.label("STRIKES " + "■".repeat(mini(3, game.strikes)) + "□".repeat(maxi(0, 3 - game.strikes)), 13, FriendlyLook.RED), Vector2(450, 12))
  at(trace_tag, FriendlyLook.label("CRED %d  ·  RESERVE %d/%d  ·  RAM %d/%d" % [game.cred, game.enc.reserve, game.enc.reserve_start, game.ram_used(), game.ram_total()], 12, FriendlyLook.RED if game.enc.reserve==0 else FriendlyLook.PAPER), Vector2(14, 45))
  var reserve := ProgressBar.new(); reserve.max_value=maxi(1,game.enc.reserve_start); reserve.value=game.enc.reserve; reserve.show_percentage=false; reserve.add_theme_stylebox_override("background",FriendlyLook.style(Color("#3A3A3A"))); reserve.add_theme_stylebox_override("fill",FriendlyLook.style(FriendlyLook.HIGHLIGHT)); at(trace_tag,reserve,Vector2(14,65),Vector2(264,3))
+ bleed_label = FriendlyLook.label("", 11, FriendlyLook.PAPER)
+ at(trace_tag, bleed_label, Vector2(448, 73))
+ update_bleed_readout()
  at(trace_tag, FriendlyLook.label("PAST 50% · THEY'RE LOOKING" if corporation_state=="cracking" else "FOOTPRINT %d/%d · %s · AMP %d" % [game.footprint(),game.footprint_cap(),game.footprint_band(),game.amp],11,FriendlyLook.RED if corporation_state=="cracking" else FriendlyLook.HIGHLIGHT),Vector2(14,73))
  var stats := [["BW", str(game.bw), FriendlyLook.HIGHLIGHT], ["VITAE", "%d/%d" % [game.vitae, game.max_vitae], FriendlyLook.PAPER], ["SHIELD", str(game.shield), FriendlyLook.PAPER], ["NEXT DRAW", str(game.draw_size()), FriendlyLook.PAPER]]
  for i in stats.size():
@@ -151,6 +182,10 @@ func sync(model: Game) -> void:
  log_text.tooltip_text = "\n".join(game.log)
 func _process(_dt: float) -> void:
  if not visible or not is_instance_valid(ui): return
+ advance_bleed(_dt)
+ music.set_active(true)
+ music.update_mix(bleed, reduced_motion, _dt)
+ for wear in worn_panels: wear.update_wear(bleed, reduced_motion, Time.get_ticks_msec() / 1000.0)
  var context := ""
  if corporation_state=="mask_off": context="the mask is off. one more strike and we can't leave. "
  elif corporation_state=="cracking": context="%d TRACE to a strike. " % maxi(0,Game.MAX_TRACE-game.trace)
@@ -251,6 +286,7 @@ func build_hand() -> void:
    c.position=card_positions.get(c.uid,destination+Vector2(0,7))
    c.motion=c.create_tween(); c.motion.tween_property(c,"position",destination,0.09).set_trans(Tween.TRANS_LINEAR)
 func begin_drag(data: Dictionary, source: Control) -> void:
+ if data.kind == "pick" and (dragging_uid != int(data.uid) or drag_kind != "pick"): music.play_effect("pick_drag")
  dragging_uid = data.uid; drag_kind = data.kind; drag_source = source; hover_uid = data.uid; drag_description=""
 func end_drag() -> void:
  dragging_uid = -1; drag_kind = ""; hover_uid = -1; drag_source = null; drag_description=""
@@ -402,6 +438,8 @@ func scan_tag(i: int) -> Control:
 
 func reset_session() -> void:
  feedback_until=0; feedback_message=""; end_drag(); mascot_history.clear(); card_positions.clear(); last_encounter={}; last_turn=-1; previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
+ music.set_active(false)
+ bleed = 0.0; bleed_from = 0.0; bleed_target = 0.0; bleed_elapsed = 0.0
  if is_instance_valid(strike_overlay): strike_overlay.hide()
 func update_corporation() -> void:
  var now := Time.get_ticks_msec()/1000.0
@@ -411,14 +449,35 @@ func update_corporation() -> void:
   warned=true; toast_until=now+3.0
   if not reduced_motion:
    toast.position.y=96; toast.create_tween().tween_property(toast,"position:y",110.0,0.18)
+ if game.strikes>previous_strikes: music.play_strike()
  if game.strikes==1 and previous_strikes==0:
   strike_until=now+2.5; build_strike(); strike_overlay.show()
   if not reduced_motion: strike_flash()
  if game.strikes>=2: strike_overlay.hide()
  previous_trace=game.trace; previous_strikes=game.strikes
+ update_bleed_target()
  apply_background()
+func update_bleed_target() -> void:
+ var target := AtomicDecoPunk.target(game.trace, game.strikes, strike_overlay.visible)
+ if target != bleed_target:
+  bleed_from = bleed
+  bleed_target = target
+  bleed_elapsed = 0.0
+ advance_bleed(0.0)
+func advance_bleed(delta: float) -> void:
+ if bleed == bleed_target: return
+ bleed_elapsed += delta
+ var weight := AtomicDecoPunk.ease_weight(bleed_elapsed, reduced_motion)
+ bleed = lerpf(bleed_from, bleed_target, weight) if weight < 1.0 else bleed_target
+ update_bleed_readout()
+ update_reveal_opacity()
+func update_bleed_readout() -> void:
+ if is_instance_valid(bleed_label): bleed_label.text = "BLEED %.2f" % bleed
+func update_reveal_opacity() -> void:
+ surveillance_layer.modulate.a = AtomicDecoPunk.reveal(bleed)
 func apply_background() -> void:
  surveillance_layer.visible=corporation_state=="cracking" and not strike_overlay.visible
+ update_reveal_opacity()
  var hostile := corporation_state=="mask_off" or strike_overlay.visible
  app_ground.color=Color("#14070A") if hostile else skin.ground
  var target: Texture2D = skin.hostile_background if hostile and skin.hostile_background!=null else skin.background
@@ -436,7 +495,7 @@ func apply_background() -> void:
  glitch_layer.visible=false
 func dismiss_strike() -> void:
  var was_visible := strike_overlay.visible
- strike_overlay.hide(); strike_until=0; apply_background()
+ strike_overlay.hide(); strike_until=0; update_bleed_target(); apply_background()
  if was_visible and not reduced_motion and skin.corporation=="HALCYON":
   var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(1090,265); tracer.z_index=150; add_child(tracer)
   var flight := tracer.create_tween().set_parallel(true); flight.tween_property(tracer,"position",Vector2(1445,780),0.35); flight.tween_property(tracer,"scale",Vector2(0.15,0.15),0.35); flight.chain().tween_callback(tracer.queue_free)
@@ -450,7 +509,7 @@ func build_strike() -> void:
  modal.mouse_filter=Control.MOUSE_FILTER_PASS
  var chrome_modal:=ChromeFrame.new(); chrome_modal.name="StrikeChrome"; chrome_modal.hostile=true; chrome_modal.radius=skin.radius; chrome_modal.size=modal.size; modal.add_child(chrome_modal)
  at(modal,FriendlyLook.label("TRACE STRIKE 1 OF 3",16,FriendlyLook.RED,FriendlyLook.BOLD),Vector2(32,30))
- at(modal,FriendlyLook.label(skin.strike_title,68,Color("#F6E7E7"),skin.bold_font),Vector2(32,64))
+ at(modal,FriendlyLook.label(skin.strike_title,int(AtomicDecoPunk.settings.display.strike_headline_px),Color("#F6E7E7"),skin.display_font),Vector2(32,64))
  var line := FriendlyLook.label(skin.strike_copy,20,Color("#E4B5B7"),skin.font); line.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; at(modal,line,Vector2(32,166),Vector2(660,70))
  if skin.corporation=="HALCYON":
   at(modal,FriendlyLook.label("+1 TRACER shuffled into your draw pile",15,FriendlyLook.HIGHLIGHT),Vector2(32,260))
@@ -488,7 +547,7 @@ func _can_drop_data(at: Vector2, data) -> bool:
  return not inst.is_empty() and not CardDB.def(inst.id).get("target",false) and game.can_play(inst.uid).ok
 func _drop_data(at: Vector2, data) -> void:
  if not _can_drop_data(at,data): return
- game.play_card(int(data.uid)); end_drag(); ui.refresh()
+ ui.play_seated_card(int(data.uid)); end_drag(); ui.refresh()
 
 func show_break_feedback(ice: Dictionary, subroutine: int, cost: int) -> void:
  feedback_message=("BROKEN" if ice.broken[subroutine] else "BREAK STEP")+" · "+game.ice_definition(ice).name+" · S%d\n%d BW spent · rules updated"%[subroutine+1,cost]

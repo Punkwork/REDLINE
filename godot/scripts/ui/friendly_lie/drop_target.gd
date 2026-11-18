@@ -24,7 +24,7 @@ func _drop_data(_at: Vector2, data) -> void:
   if view.game.break_sub(i,sub,int(data.uid)): view.show_break_feedback(ice_ref,sub,cost)
  elif data.kind=="card":
   var inst: Dictionary = view.game.find_card(int(data.uid))
-  view.game.play_card(int(data.uid),i if CardDB.def(inst.id).get("target",false) else -1)
+  view.ui.play_seated_card(int(data.uid),i if CardDB.def(inst.id).get("target",false) else -1)
  view.end_drag(); view.ui.refresh()
 func _process(_delta: float) -> void:
  if not is_visible_in_tree() or not is_instance_valid(view): return

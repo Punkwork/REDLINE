@@ -24,3 +24,5 @@ extends Resource
 @export var cracking_copy := "Is everything okay? We're just checking on you."
 @export var strike_title := "We see you."
 @export var strike_copy := "HALCYON has located you. We've added something to help us keep in touch."
+@export var display_font: Font = preload("res://assets/fonts/PoiretOne-Regular.ttf")
+@export var background_headline := "Good morning."

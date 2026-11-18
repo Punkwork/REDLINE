@@ -1,0 +1,86 @@
+{
+  "bleed": {
+    "friendly": 0.0,
+    "trace_start": 20,
+    "trace_end": 39,
+    "cracking_start": 0.2,
+    "cracking_end": 0.6,
+    "strike": 0.8,
+    "mask_off": 1.0,
+    "ease_seconds": 0.4
+  },
+  "reveal": {
+    "start": 0.2,
+    "end": 0.6
+  },
+  "wear": {
+    "edge_px": 3.0,
+    "shadow_px": 2.0,
+    "speckle_strength": 0.19,
+    "edge_darkening": 0.38,
+    "shadow_opacity": 0.5,
+    "tape_opacity": 0.9,
+    "tape_width_px": 29,
+    "tape_height_px": 6,
+    "code_opacity": 0.8,
+    "flicker_start": 0.6,
+    "flicker_strength": 0.16,
+    "flicker_hz": 2.0
+  },
+  "music": {
+    "default_volume": 0.55,
+    "fade_in_end": 0.6,
+    "mask_in_tune": 1.0,
+    "detune_cents": 35.0,
+    "wow_hz": 0.33,
+    "flutter_hz": 2.7,
+    "flutter_share": 0.16,
+    "wet_crossfade_depth": 0.22,
+    "pitch_fft_size": 0,
+    "chime_gain": 0.7,
+    "mix": [
+      [
+        0.0,
+        0.84,
+        0.045,
+        0.0
+      ],
+      [
+        0.2,
+        0.76,
+        0.17,
+        0.02
+      ],
+      [
+        0.6,
+        0.44,
+        0.72,
+        0.18
+      ],
+      [
+        0.8,
+        0.4,
+        0.78,
+        0.28
+      ],
+      [
+        1.0,
+        0.62,
+        0.88,
+        0.56
+      ]
+    ]
+  },
+  "display": {
+    "wordmark_px": 36,
+    "background_headline_px": 28,
+    "strike_headline_px": 68
+  },
+  "effects": {
+    "seat": 0.48,
+    "pick_drag": 0.3,
+    "break": 0.49,
+    "end_turn": 0.42,
+    "bloat": 0.42
+  }
+}

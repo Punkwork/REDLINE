@@ -54,6 +54,10 @@ var inspect: CenterContainer
 var voice: AudioStreamPlayer
 var voice_on := true
 var reduced_motion := false
+var music_volume: float = AtomicDecoPunk.settings.music.default_volume
+var music_muted := false
+var observed_break_encounter: Dictionary
+var observed_broken := 0
 var voice_btn: Button
 ## PLAY-001: the Corporation Response plays one subroutine at a time over at least 5 seconds.
 const RESPONSE_MIN_SECONDS := 5.0
@@ -124,11 +128,13 @@ func _load_flags() -> void:
 			first_run = not data.get("first_run_done", true)
 			voice_on = data.get("voice_on", true)
 			reduced_motion = data.get("reduced_motion", false)
+			music_volume = clampf(float(data.get("music_volume", music_volume)), 0.0, 1.0)
+			music_muted = data.get("music_muted", false)
 
 func _save_flags() -> void:
 	var f := FileAccess.open("user://redline_flags.json", FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on, "reduced_motion": reduced_motion}))
+		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on, "reduced_motion": reduced_motion, "music_volume": music_volume, "music_muted": music_muted}))
 
 func _build_layout() -> void:
 	var bg := ColorRect.new()
@@ -327,6 +333,7 @@ func _on_end_turn() -> void:
 	if responding:
 		return
 	targeting = -1
+	if g.phase == "PLAYER": friendly.music.play_effect("end_turn")
 	g.end_turn()
 	refresh()
 	if g.phase == "RESPONSE":
@@ -412,13 +419,16 @@ func _on_card(uid: int) -> void:
 		targeting = uid if targeting != uid else -1
 		refresh()
 		return
-	g.play_card(uid)
+	play_seated_card(uid)
 	refresh()
+
+func play_seated_card(uid: int, target: int = -1) -> void:
+	if g.play_card(uid, target): friendly.music.play_effect("seat")
 
 func _on_ice_clicked(i: int) -> void:
 	if targeting < 0:
 		return
-	g.play_card(targeting, i)
+	play_seated_card(targeting, i)
 	targeting = -1
 	refresh()
 
@@ -435,6 +445,7 @@ func refresh() -> void:
 		spin_deferred = true   # don't rebuild (and restart) the reels mid-spin
 		return
 	_detect_tumbles()
+	_observe_break_audio()
 	_handle_events()
 	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE"]
 	friendly.visible = friendly_active
@@ -466,14 +477,25 @@ func refresh() -> void:
 	piles.add_theme_color_override("font_color", Color("#ff6b78") if g.footprint_band() == "HEAVY" else Color("#9ad17a"))
 	_build_overlay()
 
+func _observe_break_audio() -> void:
+	var broken := 0
+	for ice in g.enc.get("ice", []): broken += ice.broken.count(true)
+	if is_same(g.enc, observed_break_encounter) and broken > observed_broken:
+		friendly.music.play_effect("break")
+	observed_break_encounter = g.enc
+	observed_broken = broken
+
 func _handle_events() -> void:
 	if g.events.is_empty():
 		return
 	var best := {}
 	var best_rank := 999
+	var bloat_inserted := false
 	for e in g.events:
 		if e.t == "EV-21":
 			last_bloat = e.get("card", "")
+			bloat_inserted = bloat_inserted or CardDB.def(last_bloat).type == "BLOATWARE"
+		if e.t == "EV-14": bloat_inserted = true
 		if e.t == "SLICE_DONE":
 			continue
 		var rank := PRIORITY.find(e.t)
@@ -481,6 +503,7 @@ func _handle_events() -> void:
 			best_rank = rank
 			best = e
 	g.events.clear()
+	if bloat_inserted: friendly.music.play_effect("bloat")
 	if not best.is_empty():
 		_speak_event(best)
 
@@ -1505,6 +1528,24 @@ func _overlay_select() -> void:
 	motion_option.button_pressed = reduced_motion
 	motion_option.toggled.connect(set_reduced_motion)
 	v.add_child(motion_option)
+	var music_options := HBoxContainer.new()
+	music_options.add_child(_lbl("Music volume", 15, TEXT))
+	var volume_slider := HSlider.new()
+	volume_slider.name = "MusicVolume"
+	volume_slider.max_value = 1.0
+	volume_slider.step = 0.01
+	volume_slider.value = music_volume
+	volume_slider.custom_minimum_size.x = 180
+	volume_slider.tooltip_text = "Music volume"
+	volume_slider.value_changed.connect(func(value): set_music(value, music_muted))
+	music_options.add_child(volume_slider)
+	var mute_option := CheckBox.new()
+	mute_option.name = "MuteMusic"
+	mute_option.text = "Mute music"
+	mute_option.button_pressed = music_muted
+	mute_option.toggled.connect(func(value): set_music(music_volume, value))
+	music_options.add_child(mute_option)
+	v.add_child(music_options)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
@@ -1700,3 +1741,10 @@ func set_reduced_motion(value: bool) -> void:
 		nr_text.visible_ratio = 1.0
 	_save_flags()
 	refresh()
+
+
+func set_music(level: float, muted: bool) -> void:
+	music_volume = level
+	music_muted = muted
+	friendly.music.set_level(level, muted)
+	_save_flags()

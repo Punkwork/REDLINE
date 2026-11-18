@@ -1672,3 +1672,14 @@ TESTS: 310 passed, 0 failed
 **Docs changed:** `REDLINE_DECK_SYNERGY.md` v1.1 (§0, §5.2, §5.3 rewritten, new §5.3a ZEROED, §7, §9.2, §10, §11, §12); Core Rules §5.3, §5.7 and amendments; Rustlers, Pacing amendments; HANDOFF (build item for Codex: revert negative STR from `playtest3-step4`, add ZEROED flag). **Code changes:** none. **Tests:** none.
 
 <!-- LOG-001: oldest whole entries appended on 2026-11-17 (Codex). -->
+
+## 2026-11-16 — ZEROED-001 cards approved; TUMBLE-001; LOG-001; Codex handoff (Claude)
+
+**Designer decisions (2026-11-16):**
+- **ZEROED-001 cards (APPROVED):** "Approved for all those card changes you made." NULL POINTER replaces INTEGER UNDERFLOW; FLATLINE, KNOCKOUT and SECOND WIND join RIOT's pool (`REDLINE_DECK_SYNERGY.md` §9.2).
+- **TUMBLE-001 (APPROVED):** "if a subroutine is broken, any unbroken subroutines slide 'tumble' into (its) place." Written up in Core Rules §5.4: a broken TUMBLER subroutine leaves the pool; the slots after it shift back; the next unbroken subroutine tumbles into the last slot, active at once; rotation skips broken subroutines and stops once every unbroken one is showing. Replaces "broken stays broken… rotates out and back in", and removes the REEL-001 confusion at its source. Two readings for the designer to confirm (HANDOFF, Waiting): a tumbled-in subroutine is active at once; and any drop to 0 uses up an ICE's ZEROED.
+- **LOG-001:** this log is split. Entries from 2026-11-08 to 2026-11-14 moved unchanged to `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`; the live log is kept under about 60 KB so the Claude project copy can be rewritten in one pass.
+
+**Docs changed:** Core Rules (§5.4, amendments), ICE Rules Bible (TUMBLER), ICE Corp 1 and Pacing (amendments), Deck Synergy (§9.2, §12), HANDOFF (a "Start here (Codex)" block listing today's build work in order; ZEROED-001, ZEROED-001 cards and TUMBLE-001 rows; two Waiting rows; LOG-001 rule). **Code changes:** none. **Tests:** none.
+
+<!-- LOG-001: oldest whole entries appended on 2026-11-17 (Codex). -->
