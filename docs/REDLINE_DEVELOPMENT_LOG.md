@@ -423,3 +423,7 @@ The full Godot 4.3 rules suite passed unchanged after each task (363 checks). Th
 - “Card seated” means an accepted hand play. A relay clunk marks a completed break, and a tape tear marks an insertion batch, including the first strike's TRACER.
 
 LOG-001 moved the oldest whole live entries to the archive unchanged.
+
+## 2026-11-17 — ADP-001 Phase 1 confirmations (Codex)
+
+Designer confirmed all four implementation interpretations from `53b00d7`: rig wear and the midpoint fixture, placeholder mix and reduced-motion audio behavior, Poiret One copy and sizes, and mechanical cue triggers. Recorded the approval in the master design document.
