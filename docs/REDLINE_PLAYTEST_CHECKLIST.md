@@ -1,9 +1,9 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.5 · **Date:** 2026-11-17 · **For build:** HALCYON PLAYTEST 5, `0.5.0-playtest.5` (tag `playtest-5`)
+**Version:** 0.6 · **Date:** 2026-11-18 · **For build:** HALCYON PLAYTEST 6, `0.6.0-playtest.6` (tag `playtest-6`)
 
 Use one copy per playtest run. The live, fill-in version is the **REDLINE Playtest QA Checklist** Sheet ([link](https://claude.ai/artifact/1ARG6jjW9cp34EGq23drFk)) (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
-**For every run:** play one corporation heist (choose the corporation and Rustler on the main menu), then press **Copy summary to clipboard** on the summary screen and paste it into the Run log. The summary gives CRED earned and spent, purchases, cards added, and the route, which answers most of the Economy, Deck and Map checks.
+**For every run:** choose a Rustler and play the available HALCYON route. Record the route, cards, CRED and result manually. Mark summary export and whole-heist checks N/A for this slice.
 
 Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then. **v0.3 (2026-11-17):** checks for the designer decisions of 2026-11-17: rolled FORTRESS PULP and visible next values (PULP-001), TUMBLE-001, the HALCYON ICE audit (ICE-AUDIT-001), SHATTER (RIOT-003), card readability (READ-001), the encounter visuals (VIS-001 / CHROME-001 / CARDS-001) and the LOGIC BOMB / RELAY removal (DEPRECATE-001). Checks marked *(after X)* apply once X is in the build. **v0.4 (2026-11-17):** for HALCYON PLAYTEST 4. The v0.3 checks are all in this build, so their *(after …)* marks are removed; A3 (confirm the build) and L9 (Icepick drag feedback) added; the Run log gains a Build column. **Scope of this build:** HALCYON's first four map rows only. Mark IRONWATCH and LUCIDA checks, the Central Node (H3, J1, J2) and whole-corporation totals (G5, I2, K2) **N/A**.
 
@@ -13,8 +13,19 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | ID | Check | Target / what good looks like | Result | Notes |
 |---|---|---|---|---|
 | A1 | Log the run on the Run log tab (corporation, Rustler, result, minutes). | Every run logged | | |
-| A2 | Copy the end-of-run summary (button on the summary screen) into the Run log. | Summary pasted for every run | | |
-| A3 | Confirm the build: the selection screen shows HALCYON PLAYTEST 5 · ATOMIC DECO PUNK · 0.5.0-playtest.5. Copy `BUILD_COMMIT.txt` into the Run log. Mark out-of-scope checks N/A (see above). | Source revision from `BUILD_COMMIT.txt` | | |
+| A2 | Record the available run details manually. | Rustler, Node, result and relevant cards logged | | |
+| A3 | Confirm the build: the selection screen shows HALCYON PLAYTEST 6 · ATOMIC DECO PUNK · 0.6.0-playtest.6. Copy `BUILD_COMMIT.txt` into the Run log. Mark out-of-scope checks N/A (see above). | Source revision from `BUILD_COMMIT.txt` | | |
+
+## Playtest 6 presentation
+
+| ID | Check | Target / what good looks like | Result | Notes |
+|---|---|---|---|---|
+| PT6-1 | Review a newsreel and hover a card for four seconds. | Corporate copy appears in its own space. Hesitation never covers rules or controls. | | |
+| PT6-2 | End a run, read the relocation notice, then reopen THE CARBON at DEAD DROP after restarting. | One loss persists locally. The nine island names are working copy. Settings can clear the ledger. | | |
+| PT6-3 | Disable Ads that know you and return to the run menu. | Personalized ads are absent. | | |
+
+Mark playable Central Node punch cards, LUCIDA record edits, PATCHWORK grafts and run resume N/A in this slice. Review their applicable screenshots separately.
+
 
 ## Opening Node
 

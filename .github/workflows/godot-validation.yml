@@ -2,9 +2,7 @@ name: Godot validation and Windows playtest build
 
 on:
   push:
-    paths:
-      - 'godot/**'
-      - '.github/workflows/godot-validation.yml'
+    branches: ['**']
   pull_request:
     paths:
       - 'godot/**'
@@ -42,6 +40,7 @@ jobs:
           GODOT="Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$GODOT" --headless --path godot --editor --import --quit 2>&1 | tee /tmp/import.log
           "$GODOT" --headless --path godot --script res://tests/test_game.gd 2>&1 | tee /tmp/rules.log
+          "$GODOT" --headless --path godot --script res://tests/test_adp.gd 2>&1 | tee -a /tmp/rules.log
           "$GODOT" --headless --path godot --script res://tests/test_signal_carbon.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Verify screenshot states and large-hand interaction
@@ -51,7 +50,7 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
           mkdir -p "$SHOT_DIR"
-          for script in shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel shot_friendly_lie shot_chrome shot_cartridges shot_adp shot_adp_phase3 shot_signal_carbon; do
+          for script in shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel shot_friendly_lie shot_chrome shot_cartridges shot_adp shot_adp_phase3 shot_signal_carbon shot_facade; do
             xvfb-run -a -s '-screen 0 1600x1100x24' timeout 120 \
               "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
               --rendering-driver opengl3 --path godot --script "res://tests/${script}.gd" \
@@ -70,7 +69,7 @@ jobs:
             /tmp/shot*.log
           retention-days: 14
       - name: Install matching Windows release template
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/release' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         shell: bash
         run: |
           curl --fail --location --retry 3 -o /tmp/templates.tpz \
@@ -80,7 +79,7 @@ jobs:
           mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
           cp /tmp/export/templates/* "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"
       - name: Export Windows playtest build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/release' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         shell: bash
         run: |
           mkdir -p build/windows
@@ -93,10 +92,10 @@ jobs:
           cp docs/REDLINE_PLAYTEST_CHECKLIST.md build/windows/
           (cd build/windows && sha256sum PANOPTICON_HALCYON_slice.exe > SHA256SUMS.txt)
       - name: Upload Windows playtest build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/release' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: actions/upload-artifact@v4
         with:
-          name: PANOPTICON-HALCYON-PLAYTEST-5-0.5.0-playtest.5-Windows-x86_64
+          name: PANOPTICON-HALCYON-PLAYTEST-6-0.6.0-playtest.6-Windows-x86_64
           path: build/windows/
           if-no-files-found: error
           retention-days: 14
