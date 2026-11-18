@@ -13,7 +13,9 @@ func _can_drop_data(_at: Vector2, data) -> bool:
   var info: Dictionary = view.game.break_info(i,sub,int(data.uid)); ok=info.ok
   tooltip_text="%d BW · MARGIN %d" % [info.cost,info.get("margin",0)] if ok else info.reason
   view.drag_description=view.game.ice_definition(ice_ref).name+" · S%d\n"%(sub+1)+tooltip_text
- elif data.kind=="card": ok=view.card_target_ok(int(data.uid),i)
+ elif data.kind=="card":
+  var encounter_position: Vector2 = view.get_global_transform().affine_inverse() * (get_global_transform() * _at)
+  ok=view.card_target_ok(int(data.uid),i) or view._can_drop_data(encounter_position,data)
  allowed=ok; queue_redraw()
  return ok
 func _drop_data(_at: Vector2, data) -> void:

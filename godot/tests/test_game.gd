@@ -818,7 +818,6 @@ func test_full_slice_path() -> void:
 
 func legacy_game(seed_value: int = -1) -> Game:
 	var g := Game.new(seed_value)
-	g.hold_enabled = false # Legacy fixtures test their original action, not the new optional prompt.
 	return g
 
 func sim_many() -> void:

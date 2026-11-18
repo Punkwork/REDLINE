@@ -93,7 +93,7 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 | G6 | Times you chose DECOMPILE over a card you liked *(after DSY-003)*. | At least once per corporation: a real choice | | |
 | G7 | REBOOTs per encounter *(after DSY-007)*. | About 1.5 on target; 2+ in the GHOST band | | |
 | G8 | A turn where the order of plays mattered *(after DSY-011, CHAIN)*. | Most encounters | | |
-| G9 | You held a card for a planned combo *(after DSY-012, HOLD 1)*. | Most encounters | | |
+| G9 | END TURN advances without a HOLD prompt. Cleanup discards non-CACHED cards and the next turn draws six at base DRAW. | Every turn | | |
 | G10 | Bloat tax: did you pay it, and was it fair? *(after DSY-001)* | Rare in good runs; a clear warning in bad ones | | |
 | G11 | At the Central Node, you could name your deck's loop in one sentence. | Yes | | |
 

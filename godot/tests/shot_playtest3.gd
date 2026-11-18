@@ -23,11 +23,9 @@ func _run() -> void:
  await snap("playtest3_deck_analysis")
  main.deck_open = false
  g.end_turn()
- check(g.pending.get("kind") == "hold", "HOLD UI opens")
- await snap("playtest3_hold")
- await check_choice_row("HOLD")
- g.choose(-1)
- if g.phase == "RESPONSE": g._continue_response()
+ check(g.phase == "RESPONSE", "END TURN starts the response without a hand-retention prompt")
+ g._continue_response()
+ await snap("playtest3_turn_cleanup")
  # SCAN fixture: model choice and UI rendered together.
  g.hand.clear(); g.bw = 30
  var scan := g._new_inst("PORT_SCAN"); g.hand.append(scan); g.play_card(scan.uid)

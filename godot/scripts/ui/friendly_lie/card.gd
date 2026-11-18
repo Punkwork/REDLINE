@@ -180,8 +180,10 @@ func _card_input(event: InputEvent) -> void:
   view.hand.browse(1 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else -1); accept_event(); return
  if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
   if event.pressed: drag_started = false
-  elif uid >= 0 and not drag_started and view.dragging_uid < 0: view.ui._on_card(uid)
- if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed: view.ui._show_inspect(card_id)
+  elif uid >= 0 and not drag_started and view.dragging_uid < 0 and CardDB.def(card_id).type not in ["PROGRAM", "SCRIPT"]: view.ui._on_card(uid)
+ if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+  view.ui.toggle_card_inspection(card_id, uid)
+  accept_event()
 func _get_drag_data(_at: Vector2):
  if uid < 0 or view.game.phase != "PLAYER" or not view.game.can_play(uid).ok: return null
  drag_started = true; placeholder = true; body.hide(); queue_redraw()

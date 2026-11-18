@@ -106,7 +106,7 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 | **EXPANDED MEMORY** | +1 RAM. |
 | **OVERCLOCKED BUS** | +1 BW on the first turn of each encounter. |
 | **SPARE SOCKET** | +1 CAP slot. Gain a random common CAP at the start of each corporation. |
-| **DEAD MAN'S POCKET** | Once per turn, you may CACHE 1 card for free. |
+| **DEAD MAN'S POCKET** | Deferred. Its HOLD enhancement is inactive under HAND-CLEANUP-001. |
 | **MONEY MULE** | Your Extractors extract 25% more CRED (rounded up). |
 | **SIGNAL BOOSTER** | You can see what's inside SIGNAL UNCLEAR Nodes before choosing them. |
 | **SCRAMBLED ID** | The first TRACE strike in each corporation has no penalty (TRACE still drops to 20). |
@@ -274,7 +274,7 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | ID | Change to this document |
 |---|---|
 | DSY-004 | **COMPILE** (alongside FUSE, §1.2a): 2 different SCRIPTs that share a tag become 1 card; summed cost (max 4 BW), both effects and tags; uses the PATCHWORK slot. — **APPROVED 2026-11-15** |
-| DSY-012 | **DEAD MAN'S POCKET** becomes "you may CACHE up to 2 cards for free each turn" (§2.2), since HOLD 1 gives everyone 1. — **APPROVED 2026-11-15** |
+| DSY-012 | **DEAD MAN'S POCKET** becomes "you may CACHE up to 2 cards for free each turn" (§2.2), since HOLD 1 gave everyone 1. — **SUPERSEDED by HAND-CLEANUP-001** |
 | DSY-001 / DSY-007 | New Ghostware candidates for the general pool: HEARTBEAT, MINIMAL INSTALL, DEDUPLICATOR, ONE-TRICK (`REDLINE_DECK_SYNERGY.md` §9.3). — **APPROVED 2026-11-15** |
 | PACE-006 | Safety valves held in reserve: Max VITAE 35 → 40, full-clear heal 3, a second SAFEHOUSE; used only if playtests run hot. — **APPROVED 2026-11-15** |
 | ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |

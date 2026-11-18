@@ -17,6 +17,15 @@ Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt`
 - **VIS-001 / CHROME-001.** HALCYON's Chrome Deco atrium, appliance mascots, and opaque enamel ICE plaques are in the encounter. Inspect rolled numbers and mood changes, the Cracking reveal, the Strike 1 modal, and the hostile background and Black ICE at Mask Off. The Rustler HUD keeps its photocopied zine styling.
 - **FACADE-ART-001.** IRONWATCH and LUCIDA art and skins are in the project, but their routes are unavailable in this Windows build. The repository's `docs/visual/fixtures/facade-001/` captures show their Opening Node presentations in all four states.
 
+## Next build — encounter controls
+
+These display and control changes, along with the hand cleanup change below, are on main for the next export. The published Windows Playtest 4 predates them.
+
+- Drag a PROGRAM into the gold connector in the left PROGRAM BAY. Hover or click an installed PROGRAM to read it. Icepicks can still be dragged to subroutines.
+- Drag a targeted SCRIPT to eligible ICE. Drop an untargeted SCRIPT on the upper half of the encounter. If you browse the hand with the arrow keys, Enter plays the selected card or begins target selection.
+- Right-click any hand card to view it at 150% size. Right-click the preview or that same card again, or press Escape, to close it.
+- ICE avatars and faces are 25% larger. The corporation backdrop fills the window, including in fullscreen.
+
 ## What to try
 
 | Mechanic | Rule and where to see it |
@@ -32,7 +41,7 @@ Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt`
 | SCAN | Play PORT SCAN. Its choice shows up to three top cards. Click cards to send to the bottom in click order; click again to undo. Finish SCAN, then draw one. Unselected cards retain order. |
 | BURN | GARBAGE COLLECT chooses another hand card to burn, then draws one. Burned cards return next Node; the permanent deck is not pruned. TAIL CALL retrieves a chosen SCRIPT from discard. |
 | CHAIN | HUD shows last card's tags. PIVOT follows CLOAK for −3 rather than −2 STR; COVER FIRE follows EXPLOIT for 5 rather than 3 SHIELD. HANDOFF follows CLOAK to draw one. KILL CHAIN draws once per bonus, at most twice per turn per copy. Playing Programs / Protocols changes the last card; Icepick actions do not. Resets each turn. |
-| HOLD 1 | END TURN opens an optional hand-card choice before end-turn effects. Pick one to CACHE or skip. It stays through cleanup until played or Node end. DEAD AIR and SMASH & GRAB still supply additional CACHE. Training disables HOLD. |
+| Hand cleanup | END TURN has no free HOLD prompt. Discard remaining non-CACHED cards after the response, then draw 6 at base DRAW on the next Rustler turn. Card-granted CACHE persists. |
 | TUMBLER TUMBLE | Breaking a slotted subroutine removes it for this encounter. Later slots slide back and the next unbroken pool entry wraps into the last slot, active immediately. It is breakable now and fires this turn if left unbroken. Rotation skips removed entries and stops when all survivors fit; spare slots show EMPTY. Partial DEADLOCK ×N breaks stay put until the last step. BOOTING and TRIPWIRE remain. Try CAPTCHA: break DISCARD or its first DEADLOCK and watch the incoming TRACE 2. Icepick, card and WORM breaks all tumble. |
 | STR floor / ZEROED | ICE STR bottoms at 0. Excess ordinary reduction is lost; later gains rise from 0. Spare ROT counters remain and keep holding STR at 0. The first drop from positive STR to 0, by any source, consumes that ICE’s one ZEROED for the encounter and shows a ZEROED marker. ICE starting at 0 or protected by a positive STR floor cannot be ZEROED. Only a card printing ZEROED receives a bonus. |
 | MARGIN / OVERKILL | Break buttons show effective Icepick STR minus ICE STR after required boosts. SCALPEL's OVERKILL 2 makes its break component free. TOLL and boosts remain additional costs. STACK SMASH counts EXPLOIT plays including itself. Normal reveal, BOOTING and SEQUENCED restrictions remain. |
@@ -68,12 +77,12 @@ acquisition flow or changed ICE numbers:
   and RECURRING DREAM (LUCIDA REBOOT → FORGET 1) likewise await their routes.
 - **Ghostware effect hooks:** HEARTBEAT (REBOOT −2 TRACE), MINIMAL INSTALL
   (GHOST Node starts with +1 AMP), ONE-TRICK (+1 BW/turn, no reward growth at
-  cap−4), DEAD MAN'S POCKET (HOLD 2). Acquisition is deferred. DEDUPLICATOR
+  cap−4), DEAD MAN'S POCKET (deferred). Acquisition is deferred. DEDUPLICATOR
   awaits FUSE.
 
 For a developer screen check, run `godot --path godot --script
 res://tests/shot_playtest3.gd` with an existing `SHOT_DIR` directory and display.
-It renders deck analysis, HOLD, SCAN, CULL/STR floor, reward roles, DECOMPILE,
+It renders deck analysis, hand cleanup, SCAN, CULL/STR floor, reward roles, DECOMPILE,
 COMPILE, ZEROED target highlighting/markers, TUMBLE motion and settled slots,
 and an explicitly controlled DEADLOCK ×2 / ESCALATE fixture.
 
@@ -129,7 +138,7 @@ For the interaction sample, drag the installed FORTRESS Icepick onto AUTO-RENEW 
 
 Rustler card types now have distinct physical constructions: SCRIPT instructions in stamped steel/Bakelite with fuse/resistor hardware; PROGRAM devices in cast aluminum with vacuum tubes and metal-can transistors; PROTOCOL relay carriers in celadon enamel with terminal blocks/wiring. Contacts and insertion rails make them read as heavy plug-in cartridges. Live rules print directly on the board faces alongside photocopied collage illustrations.
 
-BW is printed on a raised rating tab at the upper-right chassis edge, largely outside the white label. Common cards have a plain single-notch finish; uncommon cards add two indexing notches and a small brass fitting; rares use three notches and fine double-metal detail. Full rarity labels remain visible, so color alone is not required. STARTER stays STARTER; rarity/reward odds and costs are unchanged. The new frames are used in the hand, HOLD/READY RIG choices, reward offers and inspection. Protruding parts are included in hit-testing and choice-scroll padding. The shallower hand fan makes room for the hardware without a hand-size cap.
+BW is printed on a raised rating tab at the upper-right chassis edge, largely outside the white label. Common cards have a plain single-notch finish; uncommon cards add two indexing notches and a small brass fitting; rares use three notches and fine double-metal detail. Full rarity labels remain visible, so color alone is not required. STARTER stays STARTER; rarity/reward odds and costs are unchanged. The new frames are used in the hand, READY RIG choices, reward offers and inspection. Protruding parts are included in hit-testing and choice-scroll padding. The shallower hand fan makes room for the hardware without a hand-size cap.
 
 Card titles now print directly on each light face instead of a black strip: ivory instruction stock (SCRIPT), cool pearl instrument plate (PROGRAM), pale celadon enamel (PROTOCOL). The frames, external BW tabs and rarity details are unchanged.
 

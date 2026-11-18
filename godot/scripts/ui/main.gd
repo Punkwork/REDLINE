@@ -49,7 +49,10 @@ var piles: Label
 var nr_text: Label
 var nr_mode: Label
 var overlay: Control
-var inspect: CenterContainer
+var inspect: Control
+var inspected_id := ""
+var inspected_uid := -1
+var inspection_pinned := false
 ## VOICE-001: NUL/REM reads every line aloud (pre-recorded, tools/voice_nulrem.py). M toggles the voice.
 var voice: AudioStreamPlayer
 var voice_on := true
@@ -266,11 +269,15 @@ func _build_layout() -> void:
 	nr_mode = _lbl("", 11, Color("#3f9a68"))
 	nv.add_child(nr_mode)
 
-	inspect = CenterContainer.new()
+	inspect = Control.new()
 	inspect.position = Vector2(236, 100)
 	inspect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	inspect.visible = false
 	inspect.z_index = 10
+	inspect.gui_input.connect(func(event):
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			_show_inspect("")
+			inspect.accept_event())
 	add_child(inspect)
 	blocker = Control.new()   # swallows clicks while the reels spin
 	blocker.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -283,6 +290,7 @@ func _build_layout() -> void:
 	add_child(overlay)
 
 func _new_run() -> void:
+	_show_inspect("")
 	g = Game.new()
 	g.animate = true
 	g.phase = "SELECT"   # RUSTLER-001: choose a Rustler first
@@ -322,6 +330,10 @@ func _input(event: InputEvent) -> void:
 			konami_pos = 1 if event.keycode == KONAMI[0] else 0
 		if event.keycode == KEY_M:
 			_toggle_voice()
+		if event.keycode == KEY_ESCAPE and inspect.visible:
+			_show_inspect("")
+			get_viewport().set_input_as_handled()
+			return
 		if event.keycode == KEY_ESCAPE and targeting >= 0:
 			targeting = -1
 			refresh()
@@ -333,6 +345,7 @@ func _on_end_turn() -> void:
 	if responding:
 		return
 	targeting = -1
+	_show_inspect("")
 	if g.phase == "PLAYER": friendly.music.play_effect("end_turn")
 	g.end_turn()
 	refresh()
@@ -706,24 +719,45 @@ func _build_rig() -> void:
 func _make_inspectable(c: Control, id: String) -> void:
 	## FIX-002: hover (or click) an installed card to see the full card beside the rig.
 	c.mouse_filter = Control.MOUSE_FILTER_PASS
-	c.mouse_entered.connect(func(): _show_inspect(id))
-	c.mouse_exited.connect(func(): _show_inspect(""))
+	c.mouse_entered.connect(func(): hover_program(id))
+	c.mouse_exited.connect(leave_program)
 	c.gui_input.connect(func(ev):
 		if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
-			_show_inspect("" if inspect.visible else id))
+			toggle_card_inspection(id, -1))
 
-func _show_inspect(id: String) -> void:
+func toggle_card_inspection(id: String, uid: int) -> void:
+	if inspection_pinned and inspected_id == id and inspected_uid == uid:
+		_show_inspect("")
+		return
+	_show_inspect(id, true, uid)
+
+func hover_program(id: String) -> void:
+	if not inspection_pinned:
+		_show_inspect(id, false)
+
+func leave_program() -> void:
+	if not inspection_pinned:
+		_show_inspect("")
+
+func _show_inspect(id: String, pinned: bool = true, uid: int = -1) -> void:
 	_clear(inspect)
+	inspected_id = id
+	inspected_uid = uid
+	inspection_pinned = pinned and id != ""
 	inspect.visible = id != ""
-	if id != "":
-		var cv: Control
-		if is_instance_valid(friendly):
-			friendly.game=g
-			var paper := FriendlyCard.new(); paper.setup(friendly,id,-1); cv=paper
-		else: cv = _card_view(id, -1)
-		cv.custom_minimum_size = FriendlyCard.CARD_SIZE if cv is FriendlyCard else Vector2(200,270)
-		cv.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		inspect.add_child(cv)
+	if id == "": return
+
+	friendly.game = g
+	var paper := FriendlyCard.new()
+	paper.setup(friendly, id, -1)
+	var zoom := 1.5 if pinned else 1.0
+	inspect.size = FriendlyCard.PHYSICAL_RECT.size * zoom
+	inspect.position = (size - inspect.size) * 0.5 if pinned else Vector2(252, 157)
+	inspect.mouse_filter = Control.MOUSE_FILTER_STOP if pinned else Control.MOUSE_FILTER_IGNORE
+	paper.scale = Vector2.ONE * zoom
+	paper.position = -FriendlyCard.PHYSICAL_RECT.position * zoom
+	paper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	inspect.add_child(paper)
 
 func _build_ice() -> void:
 	_clear(ice_row)
@@ -1310,7 +1344,6 @@ func _build_overlay() -> void:
 					done.text = "Finish"
 					done.pressed.connect(func(): g.cull_strain(); refresh())
 					panel.add_child(done)
-				"hold": _overlay_options("HOLD %d" % g.pending.n, "Optionally CACHE a hand card before end-turn effects and the Corporation Response.", g.pending.options, g.hand, _on_hold_choice, "Finish turn / skip remaining HOLD", func(): _on_hold_choice(-1))
 				"scan":
 					_overlay_options("SCAN 3", "Click cards to bottom them, in selection order; click again to undo. Selected: %s" % " → ".join(g.pending.bottom.map(func(uid): return CardDB.def(g._find(g.pending.cards, uid).id).name)), g.pending.cards.map(func(c): return c.uid), g.pending.cards, func(u): g.choose(u); refresh(), "Finish SCAN, then draw 1", func(): g.finish_scan(); refresh())
 				"burn_hand": _overlay_options("GARBAGE COLLECT", "BURN another hand card for this Node, then draw 1.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
@@ -1668,11 +1701,6 @@ func _overlay_deck(removing: bool) -> void:
 		refresh())
 	v.add_child(close)
 
-func _on_hold_choice(uid: int) -> void:
-	g.choose(uid)
-	refresh()
-	if g.phase == "RESPONSE" and not responding: _play_response()
-
 func _overlay_compile() -> void:
 	var opts: Array = g.run_deck.filter(func(c): return CardDB.def(c.id).type == "SCRIPT" and not CardDB.def(c.id).has("compiled") and (compile_first == -1 or g.can_compile(compile_first, c.uid))).map(func(c): return c.uid)
 	_overlay_options("COMPILE", "Choose the first effect." if compile_first == -1 else "Choose the second effect. Order is final; compiled cards cannot be compiled or fused again.", opts, g.run_deck, func(uid):
@@ -1733,6 +1761,7 @@ func _install_friendly() -> void:
 	friendly.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(friendly)
 	move_child(friendly, blocker.get_index())
+	move_child(inspect, get_child_count() - 1)
 
 func set_reduced_motion(value: bool) -> void:
 	reduced_motion = value

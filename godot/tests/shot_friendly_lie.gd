@@ -19,7 +19,7 @@ func snap(name: String) -> void:
 func start(row: int=0, index: int=0) -> Game:
  main.reduced_motion=false
  main._start_as("GENERALIST")
- var g: Game=main.g; g.rng.seed=711; g.animate=false; g.hold_enabled=false
+ var g: Game=main.g; g.rng.seed=711; g.animate=false
  g.row=row; g.available=[index]; g.enter_node(index)
  if g.phase=="READY_RIG": g.skip_ready_rig()
  main.refresh()
@@ -114,7 +114,7 @@ func run() -> void:
  # Real rig drag onto a visible subroutine; invalid hidden drop is checked without payment.
  var pick:=install(g,"FORTRESS_ICEPICK"); main.refresh(); await settle(15)
  var chip: FriendlyRigChip
- for c in main.friendly.rig_row.get_children():
+ for c in main.friendly.program_slots.find_children("*", "FriendlyRigChip", true, false):
   if c is FriendlyRigChip and c.uid==pick: chip=c
  var target: FriendlyDropTarget
  for c in main.friendly.find_children("*","FriendlyDropTarget",true,false):

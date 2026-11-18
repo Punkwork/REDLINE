@@ -56,7 +56,6 @@ func _run() -> void:
 	_snap("playtest2_echo_paid")
 	main._on_break(0, 3)
 	main._on_end_turn()
-	if g.pending.get("kind", "") == "hold": main._on_hold_choice(-1)
 	await _settle()
 	_check(g.phase == "DEEPER", "nonfinal breached layer offers a choice")
 	_snap("playtest2_leave_warning")

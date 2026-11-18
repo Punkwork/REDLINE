@@ -16,7 +16,7 @@ func snapshot(name: String) -> void:
  print("shot ",name)
 func start() -> Game:
  main.reduced_motion=true; main._start_as("GENERALIST")
- var g: Game=main.g; g.rng.seed=711; g.animate=false; g.hold_enabled=false
+ var g: Game=main.g; g.rng.seed=711; g.animate=false
  g.row=0; g.available=[0]; g.enter_node(0)
  if g.phase=="READY_RIG":
   var uid: int=g.draw_pile.filter(func(c): return c.id=="FORTRESS_ICEPICK")[0].uid
@@ -63,7 +63,7 @@ func run() -> void:
  main.voice.stop(); main.voice.stream=null; main.queue_free(); await settle(); quit(1 if failures else 0)
 func interaction(g: Game) -> void:
  var chip: FriendlyRigChip
- for child in main.friendly.rig_row.get_children():
+ for child in main.friendly.program_slots.find_children("*", "FriendlyRigChip", true, false):
   if child is FriendlyRigChip: chip=child; break
  var target: FriendlyDropTarget
  for child in main.friendly.find_children("*","FriendlyDropTarget",true,false):
@@ -83,7 +83,7 @@ func interaction(g: Game) -> void:
  await snapshot("05b-broken-subroutine")
  check(main.friendly.feedback_label.text.contains("BROKEN") and main.friendly.mood_for(0)==("lethal" if main.friendly.biggest_hit()>=5 else "wary"),"successful break confirms cost; remaining roll determines mood")
  # An incompatible native drop must explain itself and spend no remaining BW.
- for child in main.friendly.rig_row.get_children():
+ for child in main.friendly.program_slots.find_children("*", "FriendlyRigChip", true, false):
   if child is FriendlyRigChip: chip=child; break
  for child in main.friendly.find_children("*","FriendlyDropTarget",true,false):
   if child.sub==0 and is_same(child.ice_ref,g.enc.ice[1]): target=child; break

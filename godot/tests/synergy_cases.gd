@@ -2,7 +2,6 @@ extends RefCounted
 var check: Callable
 func game(who: String = "GENERALIST") -> Game:
  var g := Game.new(400)
- g.hold_enabled = false
  g.new_run(who)
  return g
 func run() -> void:
@@ -115,25 +114,15 @@ func step3() -> void:
  var shield_before := g.shield
  g.play_card(cover.uid)
  check.call(g.shield == shield_before + 5, "COVER FIRE CHAIN EXPLOIT")
- var hold := game("ECHO"); hold.enter_node(0); hold.hold_enabled = true
- var uid: int = hold.hand[0].uid
- hold.end_turn()
- check.call(hold.phase == "CHOICE" and hold.pending.kind == "hold" and hold.pending.n == 1, "HOLD 1 offered at turn end")
- hold.choose(uid)
- check.call(hold._find(hold.hand, uid).cached and hold.enc.turn == 2, "HOLD survives cleanup and fresh draw")
- hold.end_turn(); hold.choose(-1)
- check.call(hold.enc.turn == 3, "HOLD can be skipped")
- var training := game("ECHO"); training.enter_node(0); training.hold_enabled = true
- training.node = training.node.duplicate(true); training.node.training = true
- training.end_turn()
- check.call(training.enc.turn == 2, "HOLD disabled in Training Node")
- var pocket := game("ECHO"); pocket.enter_node(0); pocket.hold_enabled = true
- pocket.ghostware.append("DEAD_MANS_POCKET")
- pocket.end_turn()
- var one: int = pocket.pending.options[0]; pocket.choose(one)
- check.call(pocket.phase == "CHOICE" and pocket.pending.n == 1, "DEAD MAN'S POCKET offers two choices")
- var two: int = pocket.pending.options[0]; pocket.choose(two)
- check.call(pocket.hand.filter(func(c): return c.cached).size() == 2, "two cards retained")
+ var cleanup := game("ECHO"); cleanup.enter_node(0)
+ var cached: Dictionary = cleanup.hand[0]
+ cached.cached = true
+ var old_hand: Array = cleanup.hand.slice(1)
+ cleanup.end_turn()
+ check.call(cleanup.phase == "PLAYER" and cleanup.enc.turn == 2, "END TURN proceeds directly to the next turn")
+ check.call(cleanup.hand.size() == Game.BASE_DRAW + 1, "draw six in addition to a cached card")
+ check.call(cleanup._find(cleanup.hand, cached.uid).cached, "genuine CACHE survives")
+ check.call(old_hand.all(func(card): return not cleanup._find(cleanup.discard, card.uid).is_empty()), "all uncached cards are discarded")
  var chain := game("ECHO"); chain.enter_node(0); chain.bw = 30
  chain.rack.append(chain._new_inst("KILL_CHAIN"))
  chain.hand.clear(); chain.draw_pile.clear(); chain.discard.clear()

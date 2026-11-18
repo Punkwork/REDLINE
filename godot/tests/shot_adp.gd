@@ -26,7 +26,6 @@ func start() -> Game:
  var g: Game = main.g
  g.rng.seed = 711
  g.animate = false
- g.hold_enabled = false
  g.row = 0
  g.available = [0]
  g.enter_node(0)
@@ -90,7 +89,7 @@ func test_effects(g: Game) -> void:
  main.refresh()
  check(effects == ["seat"], "accepted card sounds once")
  var pick_uid: int = g.installed[0].inst.uid
- var chip := view.rig_row.find_children("*", "FriendlyRigChip", true, false)[0] as Control
+ var chip := view.program_slots.find_children("*", "FriendlyRigChip", true, false)[0] as Control
  view.begin_drag({"kind":"pick","uid":pick_uid},chip)
  view.begin_drag({"kind":"pick","uid":pick_uid},chip)
  view.end_drag()
@@ -134,6 +133,22 @@ func take_audio() -> void:
   check(clip.save_to_wav(OS.get_environment("SHOT_DIR").path_join("adp-bleed-sweep.wav")) == OK, "save audio capture")
  AudioServer.remove_bus_effect(0,AudioServer.get_bus_effect_count(0)-1)
 
+func test_backdrop_resize() -> void:
+ var original_size := root.size
+ root.size = Vector2i(1600,900)
+ await settle()
+ check(view.size.x > 1600.0, "wide window expands the encounter viewport")
+ for layer in [view.app_ground, view.background, view.surveillance_layer]:
+  check(layer.get_rect().is_equal_approx(Rect2(Vector2.ZERO,view.size)), "backdrop fills the wide viewport")
+ view.reduced_motion = false
+ view.corporation_state = "mask_off"
+ view.apply_background()
+ check(is_instance_valid(view.fade_layer) and view.fade_layer.get_rect().is_equal_approx(Rect2(Vector2.ZERO,view.size)), "hostile crossfade also fills the viewport")
+ for carrier in view.find_children("IllustrationScale", "Control", true, false):
+  check(carrier.scale.is_equal_approx(Vector2.ONE * 0.82 * 1.25), "two-ICE lane avatars are 25% larger")
+ root.size = original_size
+ await settle()
+
 func run() -> void:
  main = load("res://scenes/Main.tscn").instantiate()
  root.add_child(main)
@@ -142,6 +157,8 @@ func run() -> void:
  view.music.effect_played.connect(func(id: String): effects.append(id))
  test_controls()
  var g := start()
+ await test_backdrop_resize()
+ g = start()
  await snapshot("adp-bleed-0",0.0)
 
  g.add_trace(20,false); main.refresh()

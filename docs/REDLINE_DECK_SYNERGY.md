@@ -23,7 +23,7 @@ Without changes, the current design pushes decks **toward about 40 cards or more
 |---|---|---|
 | **PRUNE** | Keep the deck at or below the corporation's cap, and strong | FOOTPRINT on screen, the bloat tax, DECOMPILE on every card reward, COMPILE, REFACTOR (§2–§3) |
 | **BUILD** | Put together a loop where cards feed each other | REBOOT payoffs, the **currency loop** (ZEROED and OVERKILL, virus cash-outs, AMP, CHARGE) (§4–§5) |
-| **STEER** | Choose the order of plays and plan across turns | EXPLOIT CHAIN, HOLD 1, SCAN, in-Node BURN (§4, §6) |
+| **STEER** | Choose the order of plays and plan across turns | EXPLOIT CHAIN, SCAN, in-Node BURN (§4, §6) |
 
 **The main idea:** a leaner deck draws its key cards more often. PANOPTICON should also **show** that, **pay off** for it (REBOOT), make it **cheap to pursue** (DECOMPILE), and make a **bloated deck cost TRACE**. A bigger deck leaves a bigger footprint, and in PANOPTICON that's how they find you.
 
@@ -208,10 +208,9 @@ Virus counters mostly pile up; WORM (VIRUS-001) is the first strain you spend. M
 - **Natural counters already in the game:** DOORBELL CAM (WATCHER) and WATCHDOG punish CLOAK chains; EMPATHY ENGINE and ROADBLOCK punish EXPLOIT chains; TRIPWIRE punishes many breaks. Chaining stays a decision, not autopilot.
 - **Pricing (CARD-001 addition):** a common's CHAIN bonus is about +50% of its main number; an uncommon's can be a different effect.
 
-### 6.2 HOLD 1 (DSY-012) [CHANGED: base rule]
-- **At the end of your turn, you may CACHE 1 card in your hand for free.**
-- **Why:** keeping one card lets you plan a combo for next turn deliberately. Spreading LUCIDA's "CACHE protects you" lesson to everyone fits that corporation's teaching role. With 30–35-card decks late in the run, HOLD 1 is what keeps a combo reliable. It also helps against TUMBLERS, whose next set of subroutines you only see at the start of your turn (ROT-001).
-- **Knock-on effects:** **DEAD MAN'S POCKET** (Ghostware) becomes "you may CACHE up to 2 cards for free each turn." ECHO's DEAD AIR and SMASH & GRAB's paid uninstall (RIOT-005) still matter (extra CACHE). The Training Node lock stays: HOLD 1 is off there.
+### 6.2 HOLD 1 (DSY-012) — superseded
+
+HAND-CLEANUP-001 removes the free HOLD choice. After the Corporation Response, discard remaining non-CACHED cards and draw six on the next turn at base DRAW. Card-granted CACHE still applies. DEAD MAN'S POCKET has no active HOLD enhancement.
 
 ---
 
@@ -291,14 +290,14 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | Document | Section | Change |
 |---|---|---|
 | Core Rules | §2 screen rule | FOOTPRINT and cap, REBOOT countdown, "Last played" tag (DSY-001/002/007/011) |
-| Core Rules | §3.2 | Add REBOOT; add HOLD 1 (DSY-007, DSY-012) |
+| Core Rules | §3.2 | REBOOT (DSY-007); free HOLD superseded (HAND-CLEANUP-001) |
 | Core Rules | §5.3 | ICE STR can't go below 0 (ZEROED-001 replaces UNDERFLOW); MARGIN shown in the break preview; ZEROED keyword (DSY-009, ZEROED-001) |
 | Core Rules | §8.1 | Bloat tax at ICE Node start, against the corporation's cap (DSY-001) |
 | Core Rules | §9.1 | DECOMPILE option on full-clear rewards; deck-size targets 18–22 / 24–29 / 30–35 replace "about 30 cards added" (DSY-003, DSY-006) |
 | Core Rules | §10.1 | FOOTPRINT cap per corporation (22 / 29 / 35) (DSY-001) |
 | Core Rules | §5.7 | ROT keeps "minimum 0" (ZEROED-001 reverses the DSY-009 removal) |
 | Card Pools | §1 | Value guide: CHAIN bonus ≈ +50%; REBOOT effects priced at about 1.5 triggers per encounter (DSY-007) |
-| Upgrades | §1.2 | COMPILE alongside FUSE (DSY-004); DEAD MAN'S POCKET → CACHE 2 (DSY-012) |
+| Upgrades | §1.2 | COMPILE alongside FUSE (DSY-004); DEAD MAN'S POCKET HOLD hook superseded |
 | Uplink & CAPS | §3.1 | REFACTOR service (DSY-005) |
 | Engines | §1 | REBOOT effects are ENGINE effects (DSY-007) |
 | Playtest checklist | G1, G5 + new | New targets and checks (§11) |
@@ -310,7 +309,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 **Order (each step can be played before the next):**
 1. **Economy and UI only, no new cards:** FOOTPRINT + cap + hit rate + COVERAGE, DECOMPILE, bloat tax, new targets (DSY-001/002/003/006). Uses today's pools. This alone answers "do decks land at 30–35, and do players feel the cap?"
 2. **REBOOT + SCAN + in-Node BURN** (DSY-007/008) with 4–6 example cards.
-3. **CHAIN + HOLD 1** (DSY-011/012).
+3. **CHAIN** (DSY-011).
 4. **STR floor / OVERKILL / ZEROED + virus cash-outs** (DSY-009/010, ZEROED-001).
 5. **COMPILE, REFACTOR, Ghostware, corporation pushback ICE** (DSY-004/005/013).
 6. **Phase 7** pools, built on the grammar in §5.1.
@@ -324,7 +323,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | G6 | Times you chose DECOMPILE over a card you liked | At least once per corporation: it was a real choice |
 | G7 | REBOOTs per encounter | About 1.5 on target; 2 or more in the GHOST band |
 | G8 | A turn where the order of plays mattered (CHAIN) | Most encounters |
-| G9 | Held a card (HOLD 1) for a planned combo | Most encounters |
+| G9 | Cleanup discards non-CACHED cards and the next turn draws its full DRAW | Every turn |
 | G10 | Bloat tax: did you ever pay it? Did it feel fair? | Rare in good runs; a clear warning in bad ones |
 | G11 | Could you name your deck's loop in one sentence at the Central Node? | Yes |
 
@@ -347,7 +346,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | ZEROED-001 cards | NULL POINTER replaces INTEGER UNDERFLOW; example ZEROED cards FLATLINE, KNOCKOUT, SECOND WIND (§9.2); ZEROED bonus ≈ 1 BW for a common. | **APPROVED 2026-11-16** (designer: "Approved for all those card changes"; working values) |
 | DSY-010 | **Virus cash-out** cards (CULL, HARVEST pattern), alongside WORM. | **APPROVED 2026-11-15** |
 | DSY-011 | **CHAIN [TAG]** keyword, based on the last card played this turn. | **APPROVED 2026-11-15** |
-| DSY-012 | **HOLD 1:** CACHE 1 card free at the end of each turn; DEAD MAN'S POCKET → 2. Off in the Training Node. | **APPROVED 2026-11-15** |
+| DSY-012 | Free HOLD and DEAD MAN'S POCKET enhancement. | **SUPERSEDED by HAND-CLEANUP-001** |
 | DSY-013 | **Corporation pushback:** FREE TRIAL, PATTERN ANALYSIS, RECURRING DREAM (working). | **APPROVED 2026-11-15** |
 | DSY-014 | **Synergy grammar for Phase 7:** each archetype is one currency loop (SOURCE / AMPLIFIER / CASH OUT / ROUTER) plus one lean-deck payoff, with at least one CASH OUT card. | **APPROVED 2026-11-15** |
 

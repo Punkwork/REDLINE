@@ -89,7 +89,7 @@ Each card can also carry **tags**, shown under the type:
 
 *Presentation (PLAY-001): the response takes at least 5 seconds; each subroutine flashes in turn, and its effects apply only as it flashes.*
 
-**4.5 Cleanup:** discard every card in your hand that isn't CACHED.
+**4.5 Cleanup (HAND-CLEANUP-001):** END TURN gives no free HOLD choice. After the Corporation Response (or when BREACH skips it), discard every non-CACHED card still in your hand. On your next Rustler turn, draw 6 cards at base DRAW in addition to any CACHED cards. Existing DRAW modifiers and card-granted CACHE still apply.
 
 **BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. This includes DEADLOCKs you haven't seen yet: a TUMBLER's hidden DEADLOCKs must each be broken as they rotate into a slot, and a VOID's once they have fired *(ROT-001, VOID-001)*. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped**. If more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**.
 
@@ -525,7 +525,8 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | DSY-007 | **REBOOT** (§3.2, §4.1): when you need to draw and your draw pile is empty, shuffle your discard pile into it, then keep drawing. "Whenever you REBOOT" effects are ENGINE effects. — **APPROVED 2026-11-15** |
 | DSY-009 | **MARGIN** (Icepick STR − ICE STR) shown in the break preview; **OVERKILL X** keyword. *(Its UNDERFLOW part, STR below 0 and ROT's minimum removed, is withdrawn by ZEROED-001.)* — **APPROVED 2026-11-15; amended 2026-11-16** |
 | DSY-011 | **CHAIN [TAG]** keyword: a bonus if the last card you played this turn had that tag. HUD shows "Last played". — **APPROVED 2026-11-15** |
-| DSY-012 | **HOLD 1:** at the end of your turn you may CACHE 1 card in hand for free (§3.2, §4.5). Off in the Training Node. — **APPROVED 2026-11-15** |
+| DSY-012 | **HOLD 1** was approved 2026-11-15 and superseded by **HAND-CLEANUP-001**. |
+| HAND-CLEANUP-001 | No free HOLD between turns. Discard remaining non-CACHED cards in cleanup and draw 6 at base DRAW on the next Rustler turn. — **APPROVED 2026-11-17** |
 | PACE-001 | Encounter length targets **4–5 turns early, 5–8 mid–late**, boss 7–8, escape 4–5, replace §10.5's 3–4 turns. — **APPROVED 2026-11-15** |
 | PACE-003 | **DEADLOCK ×N** subroutines need N breaks (§5.2). BOOTING moves to the 4th turn **only if** playtest 2 shows the Opening Node breached before turn 4 (would amend §10.1a). — **APPROVED 2026-11-15** |
 | PACE-005 | **ESCALATE ↑:** a TRACE, DISCARD or FORGET subroutine that grows by 1 each time it resolves (§5.2). — **APPROVED 2026-11-15** |

@@ -4,10 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-16 — ZEROED-001 and TUMBLE-001 readings confirmed (Claude)
-
-**Designer decision:** "Confirmed on both." (1) Any drop to 0 STR, from any source, uses up an ICE's one ZEROED; the bonus only comes from a card that prints ZEROED (Synergy §5.3a rule 2, Core Rules §5.3). (2) A TUMBLER subroutine that tumbles into a slot is active at once: breakable that turn, and it fires in that turn's Corporation Response if unbroken (Core Rules §5.4). Both readings were already written this way; the two WAITING rows in HANDOFF are closed. **Code changes:** none. **Tests:** none.
-
 ## 2026-11-17 — VIS-001: visual language "The Friendly Lie" handed to Codex (Claude)
 
 **Designer decision:** direction B chosen from three explorations (A Phosphor, B The Friendly Lie, C Watchtower): "I do really like the B option the friendly lie … I think this is a more suitable direction." Further requests in the same session: one encounter screen per corporation with its own background and palette; Rustlers draw 6 cards (maximum hand size not decided); show how the friendly face breaks and what full TRACE looks like; give ICE a personality that flips from cheery to lethal; put the mascots into the encounter screen; hand it to Codex.
@@ -427,3 +423,13 @@ LOG-001 moved the oldest whole live entries to the archive unchanged.
 ## 2026-11-17 — ADP-001 Phase 1 confirmations (Codex)
 
 Designer confirmed all four implementation interpretations from `53b00d7`: rig wear and the midpoint fixture, placeholder mix and reduced-motion audio behavior, Poiret One copy and sizes, and mechanical cue triggers. Recorded the approval in the master design document.
+
+## 2026-11-17 — HAND-CLEANUP-001 and CARD-CONTROLS-001 (Codex)
+
+Removed free HOLD and documented non-CACHED discard and base draw of six. Moved installed PROGRAMs to a left HUD bay with inspection and controls. Added drop zones for PROGRAMs and SCRIPTs and centered right-click inspection at 150%. Preserved existing response order, card-granted CACHE, draw modifiers and keyboard play. Windows export deferred.
+
+**ENCOUNTER-DISPLAY-001:** Anchored all backdrop layers to the viewport. Scaled ICE avatars and faces to 125%, with separate rules plaques.
+
+**Validation:** Godot 4.3 import and 361 rules checks passed. The ADP fixture passed 471 checks, including the wide encounter, backdrop layers and avatar scale.
+
+LOG-001: The oldest entry, ZEROED-001 and TUMBLE-001 readings confirmed (2026-11-16), moved to the archive unchanged.

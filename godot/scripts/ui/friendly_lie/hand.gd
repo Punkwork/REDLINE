@@ -33,3 +33,7 @@ func _gui_input(event: InputEvent) -> void:
   if event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]: browse(1 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else -1); accept_event()
  if event is InputEventKey and event.pressed:
   if event.keycode in [KEY_LEFT, KEY_RIGHT]: browse(1 if event.keycode == KEY_RIGHT else -1); accept_event()
+  elif event.keycode in [KEY_ENTER, KEY_KP_ENTER] and selected >= 0 and selected < get_child_count():
+   var card: FriendlyCard = get_child(selected)
+   card.view.ui._on_card(card.uid)
+   accept_event()

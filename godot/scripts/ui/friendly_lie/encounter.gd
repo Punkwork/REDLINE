@@ -17,6 +17,8 @@ var ice_row: HBoxContainer
 var response: HBoxContainer
 var hand: FriendlyHand
 var rig_row: HBoxContainer
+var program_bay: FriendlyProgramBay
+var program_slots: VBoxContainer
 var end_button: Button
 var end_run_button: Button
 var pile_text: Label
@@ -72,9 +74,14 @@ func _ready() -> void:
  add_child(music)
  music.set_level(ui.music_volume, ui.music_muted)
  visibility_changed.connect(func(): music.set_active(is_visible_in_tree()))
- app_ground = ColorRect.new(); app_ground.color = skin.ground; app_ground.position = Vector2.ZERO; app_ground.size = Vector2(1600, 1000); app_ground.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(app_ground)
- background = TextureRect.new(); background.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; background.texture = skin.background; background.position = Vector2.ZERO; background.size = Vector2(1600, 1000); background.stretch_mode = TextureRect.STRETCH_SCALE; background.modulate.a = 1.0; background.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(background)
- surveillance_layer=TextureRect.new(); surveillance_layer.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; surveillance_layer.texture=skin.hostile_background; surveillance_layer.size=Vector2(1600,1000); surveillance_layer.stretch_mode=TextureRect.STRETCH_SCALE; surveillance_layer.modulate.a=AtomicDecoPunk.reveal(0.0); surveillance_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(surveillance_layer); surveillance_layer.hide()
+ app_ground = ColorRect.new()
+ app_ground.color = skin.ground
+ app_ground.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ add_child(app_ground)
+ app_ground.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ background = add_backdrop(skin.background, 1.0)
+ surveillance_layer = add_backdrop(skin.hostile_background, AtomicDecoPunk.reveal(0.0))
+ surveillance_layer.hide()
  glitch_layer = Control.new(); glitch_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(glitch_layer)
  for y in [192,362,557,853]:
   var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
@@ -91,6 +98,32 @@ func _ready() -> void:
  var rig_ground := FriendlyLook.panel(FriendlyLook.TONER); rig_ground.position=Vector2(248,696); rig_ground.size=Vector2(1104,28); add_child(rig_ground)
  var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(248, 696); rig_scroll.size = Vector2(1104, 28); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
  rig_row = HBoxContainer.new(); rig_row.add_theme_constant_override("separation", 8); rig_scroll.add_child(rig_row)
+ program_bay = FriendlyProgramBay.new()
+ program_bay.encounter = self
+ program_bay.name = "ProgramBay"
+ program_bay.mouse_filter = Control.MOUSE_FILTER_PASS
+ program_bay.add_theme_stylebox_override("panel", FriendlyLook.style(FriendlyLook.TONER, FriendlyLook.HIGHLIGHT, 2))
+ at(self, program_bay, Vector2(40,153), Vector2(200,405))
+ at(program_bay, FriendlyLook.label("PROGRAM BAY", 15, FriendlyLook.PAPER, FriendlyLook.BOLD), Vector2(11,9))
+ var program_scroll := ScrollContainer.new()
+ program_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
+ program_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+ at(program_bay, program_scroll, Vector2(9,39), Vector2(182,300))
+ program_slots = VBoxContainer.new()
+ program_slots.name = "ProgramSlots"
+ program_slots.mouse_filter = Control.MOUSE_FILTER_PASS
+ program_slots.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+ program_slots.add_theme_constant_override("separation", 8)
+ program_scroll.add_child(program_slots)
+ var connector := FriendlyLook.panel(Color("#322B21"), FriendlyLook.HIGHLIGHT, 1, 3)
+ connector.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ at(program_bay, connector, Vector2(10,351), Vector2(180,44))
+ at(connector, FriendlyLook.label("DROP PROGRAM HERE", 12, FriendlyLook.HIGHLIGHT, FriendlyLook.BOLD), Vector2(9,6))
+ for pin in range(18):
+  var contact := ColorRect.new()
+  contact.color = FriendlyLook.HIGHLIGHT
+  contact.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  at(connector, contact, Vector2(10 + pin * 9,29), Vector2(5,8))
  hand = FriendlyHand.new(); hand.position = Vector2(248, 728); hand.size = Vector2(1104, 272); hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
  bottom_hud = FriendlyLook.panel(FriendlyLook.TONER); bottom_hud.position = Vector2(40, 770); bottom_hud.size = Vector2(200, 212); add_child(bottom_hud)
  var piles_paper:=FriendlyLook.panel(FriendlyLook.PAPER); piles_paper.position=Vector2(1358,766); piles_paper.size=Vector2(204,70); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
@@ -113,7 +146,7 @@ func _ready() -> void:
  feedback_label=FriendlyLook.label("",12,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD); feedback_label.position=Vector2(10,7); feedback_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; feedback_label.size=Vector2(330,70); feedback_panel.add_child(feedback_label)
  var log_paper:=FriendlyLook.panel(FriendlyLook.PAPER); log_paper.position=Vector2(248,577); log_paper.size=Vector2(1104,13); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
  log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 577); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
- for panel in [node_tag, trace_tag, bottom_hud, note, rig_ground, piles_paper]:
+ for panel in [node_tag, trace_tag, bottom_hud, note, rig_ground, piles_paper, program_bay]:
   var wear := FriendlyRigWear.new()
   wear.code_strip = panel in [node_tag,trace_tag]
   panel.add_child(wear, false, Node.INTERNAL_MODE_BACK)
@@ -220,25 +253,60 @@ func _process(_dt: float) -> void:
   flicker_frames=maxi(0,flicker_frames-1)
 func build_rig() -> void:
  clear(rig_row)
- rig_row.add_child(FriendlyLook.label("RIG / RACK · CHAIN " + ("/".join(game.enc.get("last_tags",[])) if not game.enc.get("last_tags",[]).is_empty() else "—"), 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
+ clear(program_slots)
+ rig_row.add_child(FriendlyLook.label("RACK · CHAIN " + ("/".join(game.enc.get("last_tags",[])) if not game.enc.get("last_tags",[]).is_empty() else "—"), 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
  for p in game.installed:
-  var d := CardDB.def(p.inst.id)
-  var text: String = d.name
-  if d.has("pick"): text += " · STR %d · BOOST %d / BREAK %d" % [game.pick_str(p), d.pick.boost_cost, d.pick.break_cost]
+  var id: String = p.inst.id
+  var uid: int = p.inst.uid
+  var d := CardDB.def(id)
+  var slot := VBoxContainer.new()
+  slot.mouse_filter = Control.MOUSE_FILTER_PASS
+  program_slots.add_child(slot)
+
   var chip: Button
   if d.has("pick"):
-   var draggable := FriendlyRigChip.new(); draggable.view=self; draggable.uid=p.inst.uid; draggable.text=text; draggable.pressed.connect(func(): ui._show_inspect(p.inst.id)); draggable.add_theme_color_override("font_color",FriendlyLook.PAPER); chip=draggable
-  else: chip=FriendlyLook.button(text,func(): ui._show_inspect(p.inst.id),FriendlyLook.TONER,FriendlyLook.PAPER)
-  chip.tooltip_text = game.card_text(p.inst.id); rig_row.add_child(chip)
+   var pick := FriendlyRigChip.new()
+   pick.view = self
+   pick.uid = uid
+   for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+    pick.add_theme_color_override(state, FriendlyLook.PAPER)
+   chip = pick
+  else:
+   chip = FriendlyLook.button(d.name, Callable(), FriendlyLook.TONER, FriendlyLook.PAPER)
+  chip.text = d.name
+  chip.clip_text = true
+  chip.mouse_filter = Control.MOUSE_FILTER_STOP
+  chip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+  chip.add_theme_font_size_override("font_size", 12)
+  chip.tooltip_text = game.card_text(id)
+  chip.pressed.connect(func(): ui.toggle_card_inspection(id, uid))
+  chip.mouse_entered.connect(func(): ui.hover_program(id))
+  chip.mouse_exited.connect(func(): ui.leave_program())
+  slot.add_child(chip)
+
+  var controls := HBoxContainer.new()
+  controls.mouse_filter = Control.MOUSE_FILTER_PASS
+  slot.add_child(controls)
   if d.has("pick"):
-   rig_row.add_child(FriendlyLook.button("+STR", func(): game.boost_pick(p.inst.uid); ui.refresh()))
-  if d.get("uninstall_cache", false):
-   var cache_action := FriendlyLook.button("UNINSTALL 1 BW", func(): game.uninstall_cache(p.inst.uid); ui.refresh()); cache_action.name="SmashGrabCache"; cache_action.disabled=game.bw<1 or game.hand.is_empty(); rig_row.add_child(cache_action)
-  rig_row.add_child(FriendlyLook.button("×", func(): game.unload(p.inst.uid); ui.refresh(), FriendlyLook.PAPER))
+   var stats := FriendlyLook.label("STR %d · BOOST %d · BREAK %d" % [game.pick_str(p), d.pick.boost_cost, d.pick.break_cost], 10, FriendlyLook.PAPER)
+   slot.add_child(stats)
+   slot.move_child(stats, 1)
+   var boost := FriendlyLook.button("+STR", func(): game.boost_pick(uid); ui.refresh())
+   boost.tooltip_text = "Boost %d BW · Break %d BW" % [d.pick.boost_cost, d.pick.break_cost]
+   controls.add_child(boost)
+  elif d.get("uninstall_cache", false):
+   var cache_action := FriendlyLook.button("UNINSTALL 1 BW", func(): game.uninstall_cache(uid); ui.refresh())
+   cache_action.name = "SmashGrabCache"
+   cache_action.disabled = game.bw < 1 or game.hand.is_empty()
+   controls.add_child(cache_action)
+  controls.add_child(FriendlyLook.button("×", func(): game.unload(uid); ui.leave_program(); ui.refresh(), FriendlyLook.PAPER))
+  for control in controls.get_children():
+   control.mouse_filter = Control.MOUSE_FILTER_PASS
  for c in game.rack:
   var d := CardDB.def(c.id)
   rig_row.add_child(FriendlyLook.button(d.name, func(): ui._show_inspect(c.id), FriendlyLook.TONER, FriendlyLook.PAPER))
 func build_ice() -> void:
+ ice_scroll.position.x = 245 if game.enc.ice.size() >= 3 else 150
  clear(ice_row)
  for i in game.enc.ice.size():
   var column := VBoxContainer.new(); column.add_theme_constant_override("separation",9); column.custom_minimum_size.x=400 if game.enc.ice.size()==3 else 480; ice_row.add_child(column)
@@ -247,9 +315,19 @@ func build_ice() -> void:
   mascot.previous_mood=prior.get("mood", "")
   mascot.just_broken=not prior.is_empty() and game.enc.ice[i].broken.count(true)>prior.broken.count(true)
   mascot.setup(self,i,mood_for(i))
-  # Scale the illustration carrier, not the actor's flinch transform or any rule text.
-  var stage:=Control.new(); stage.name="MascotStage"; stage.custom_minimum_size=Vector2(400 if game.enc.ice.size()==3 else 480,190); column.add_child(stage)
-  var carrier:=Control.new(); carrier.name="IllustrationScale"; carrier.scale=Vector2(0.70,0.70) if game.enc.ice.size()==3 else Vector2(0.82,0.82); carrier.position=Vector2(32 if game.enc.ice.size()==3 else 42,0); stage.add_child(carrier); carrier.add_child(mascot)
+  # Grow the animated illustration independently from its rules plaque.
+  var width := 400.0 if game.enc.ice.size()==3 else 480.0
+  var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25
+  var stage := Control.new()
+  stage.name = "MascotStage"
+  stage.custom_minimum_size = Vector2(width, 238)
+  column.add_child(drop_wrapper(stage,i,-1))
+  var carrier := Control.new()
+  carrier.name = "IllustrationScale"
+  carrier.scale = Vector2.ONE * illustration_scale
+  carrier.position.x = (width - mascot.size.x * illustration_scale) / 2.0
+  stage.add_child(carrier)
+  carrier.add_child(mascot)
   var scan := scan_tag(i); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
    scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
@@ -286,6 +364,7 @@ func build_hand() -> void:
    c.position=card_positions.get(c.uid,destination+Vector2(0,7))
    c.motion=c.create_tween(); c.motion.tween_property(c,"position",destination,0.09).set_trans(Tween.TRANS_LINEAR)
 func begin_drag(data: Dictionary, source: Control) -> void:
+ ui._show_inspect("")
  if data.kind == "pick" and (dragging_uid != int(data.uid) or drag_kind != "pick"): music.play_effect("pick_drag")
  dragging_uid = data.uid; drag_kind = data.kind; drag_source = source; hover_uid = data.uid; drag_description=""
 func end_drag() -> void:
@@ -475,6 +554,17 @@ func update_bleed_readout() -> void:
  if is_instance_valid(bleed_label): bleed_label.text = "BLEED %.2f" % bleed
 func update_reveal_opacity() -> void:
  surveillance_layer.modulate.a = AtomicDecoPunk.reveal(bleed)
+func add_backdrop(texture: Texture2D, opacity: float) -> TextureRect:
+ var layer := TextureRect.new()
+ layer.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+ layer.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+ layer.texture = texture
+ layer.modulate.a = opacity
+ layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ add_child(layer)
+ layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ return layer
+
 func apply_background() -> void:
  surveillance_layer.visible=corporation_state=="cracking" and not strike_overlay.visible
  update_reveal_opacity()
@@ -489,7 +579,8 @@ func apply_background() -> void:
   background_target=target
   if background_fade: background_fade.kill()
   if is_instance_valid(fade_layer): fade_layer.queue_free()
-  fade_layer=TextureRect.new(); fade_layer.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; fade_layer.texture=target; fade_layer.size=Vector2(1600,1000); fade_layer.modulate.a=0.0; fade_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(fade_layer); move_child(fade_layer,background.get_index()+1)
+  fade_layer = add_backdrop(target, 0.0)
+  move_child(fade_layer, background.get_index()+1)
   background_fade=create_tween(); background_fade.tween_property(fade_layer,"modulate:a",1.0,0.3)
   background_fade.tween_callback(func(): background.texture=target; fade_layer.queue_free())
  glitch_layer.visible=false
@@ -533,18 +624,22 @@ func card_target_ok(uid: int, i: int) -> bool:
  var inst := game.find_card(uid)
  if inst.is_empty(): return false
  var d := CardDB.def(inst.id)
+ if d.type == "PROGRAM" or not d.get("target",false): return false
  if d.has("target_types") and not d.target_types.has(game.ice_definition(game.enc.ice[i]).type): return false
  if d.has("target_type") and d.target_type!=game.ice_definition(game.enc.ice[i]).type: return false
  if d.has("breaker") and d.breaker.get("same_ice",false): return not game._breaker_targets(d.breaker,i).is_empty()
  return true
 func drop_wrapper(row: Control, i: int, sub: int) -> Control:
  var wrap := MarginContainer.new(); wrap.add_child(row)
- var drop := FriendlyDropTarget.new(); drop.view=self; drop.ice_ref=game.enc.ice[i]; drop.sub=sub; drop.mouse_filter=Control.MOUSE_FILTER_PASS; drop.tooltip_text=break_info(i,sub).get("reason", ""); wrap.add_child(drop)
+ var drop := FriendlyDropTarget.new(); drop.view=self; drop.ice_ref=game.enc.ice[i]; drop.sub=sub; drop.mouse_filter=Control.MOUSE_FILTER_PASS; drop.tooltip_text=break_info(i,sub).get("reason", "") if sub>=0 else ""; wrap.add_child(drop)
  return wrap
 func _can_drop_data(at: Vector2, data) -> bool:
- if not data is Dictionary or data.get("kind")!="card" or at.y>=696: return false
+ if not data is Dictionary or data.get("kind") != "card": return false
  var inst := game.find_card(int(data.uid))
- return not inst.is_empty() and not CardDB.def(inst.id).get("target",false) and game.can_play(inst.uid).ok
+ if inst.is_empty() or not game.can_play(inst.uid).ok: return false
+ var d := CardDB.def(inst.id)
+ if d.type == "PROGRAM" or d.get("target",false): return false
+ return at.y < (size.y * 0.5 if d.type == "SCRIPT" else 696.0)
 func _drop_data(at: Vector2, data) -> void:
  if not _can_drop_data(at,data): return
  ui.play_seated_card(int(data.uid)); end_drag(); ui.refresh()

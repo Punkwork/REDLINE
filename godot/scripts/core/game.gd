@@ -40,7 +40,6 @@ var compiled_queue: Array = []
 var compiled_owner: Dictionary = {}
 var compiled_target: Dictionary = {}
 var compiled_burn := false
-var hold_enabled := true
 var ghostware: Array[String] = []
 var amp := 0
 var reboots := 0
@@ -836,11 +835,6 @@ func _expire_temporary_cache() -> void:
 
 func end_turn() -> void:
 	if phase != "PLAYER": return
-	var options := hand.filter(func(c): return not c.cached or c.has("cache_turns")).map(func(c): return c.uid)
-	if hold_enabled and not node.get("training", false) and not str(node.get("id", "")).begins_with("TRAINING") and not options.is_empty():
-		pending = {"kind": "hold", "options": options, "n": 2 if ghostware.has("DEAD_MANS_POCKET") else 1}
-		phase = "CHOICE"
-		return
 	_end_turn_effects()
 
 func _end_turn_effects() -> void:
@@ -1007,20 +1001,6 @@ func _choose(uid: int) -> void:
 	if pending.is_empty():
 		return
 	var kind: String = pending.kind
-	if kind == "hold":
-		if uid != -1:
-			if not pending.options.has(uid): return
-			var card := _find(hand, uid)
-			if card.is_empty(): return
-			card.cached = true
-			card.erase("cache_turns")
-			pending.options.erase(uid)
-			pending.n -= 1
-			if pending.n > 0 and not pending.options.is_empty(): return
-		pending = {}
-		phase = "PLAYER"
-		_end_turn_effects()
-		return
 	if kind == "scan":
 		if pending.cards.any(func(c): return c.uid == uid):
 			if pending.bottom.has(uid): pending.bottom.erase(uid)

@@ -34,7 +34,6 @@ func _process(_d: float) -> bool:
 				return false
 			_snap("reel0_before")
 			main._on_end_turn()
-			if g.pending.get("kind", "") == "hold": main._on_hold_choice(-1)
 			step = 2
 			frames = 0
 		2:

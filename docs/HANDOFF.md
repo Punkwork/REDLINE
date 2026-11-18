@@ -47,6 +47,7 @@ ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below.
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| HAND-CLEANUP-001, CARD-CONTROLS-001, ENCOUNTER-DISPLAY-001 | Remove free HOLD, install and inspect PROGRAMs in the left bay, drop SCRIPTs on their play zones, toggle 150% card inspection, and fill fullscreen with the backdrop and enlarge ICE avatars by 25%. | **BUILT** — [Codex implementation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-17--hand-cleanup-001-and-card-controls-001-codex) |
 | ADP-001 Phase 1 (ADP-1a–f) | Bleed and hostile reveal, zine wear and barcode strips, three-stem prototype mix and mechanical effects, and corporate Poiret One display text. Review PNGs and audio in `docs/visual/fixtures/adp-001/`. | **BUILT** — [Codex implementation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-17--adp-001-phase-1-codex) |
 | FACADE-ART-001 | Four backgrounds, fourteen transparent shells, corporate palettes, prompt provenance, and eight Opening Node captures. | **BUILT** — [Codex art and validation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-17--facade-art-001-ironwatch-and-lucida-art-codex) |
 | DEPRECATE-001 | Removed LOGIC BOMB and RELAY; replaced the rare SCRIPT specimen with PAYDAY. | **BUILT** — `2bea490` |

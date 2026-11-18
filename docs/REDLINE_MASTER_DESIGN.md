@@ -123,6 +123,12 @@ COOKIE WALL keeps its TRACE 2 as the only FORTRESS TRACE. ACCEPT ALL, TERMS OF S
 - **Follow-ups decided (2026-11-17):** HALCYON gets matching non-fight copy (written in §2a); the IRONWATCH and LUCIDA art is generated **now**, before the HALCYON playtest; the escape ICE of both corporations **wait**. Designer: "for number one, yes. For number two, yes. And for number three, wait."
 - **HALCYON non-fight copy (APPROVED, 2026-11-17):** The designer approved the consent, remembered activity and reward copy in §2a and will review it in playtesting.
 ## 2. Player, corporation, and encounter loop
+
+**HAND-CLEANUP-001 (APPROVED, 2026-11-17):** DSY-012’s free HOLD choice is removed. END TURN proceeds through the existing response and cleanup. Remaining non-CACHED cards go to discard, and the next Rustler turn draws 6 at base DRAW in addition to already CACHED cards. Existing draw modifiers and card-granted CACHE continue to apply. DEAD MAN’S POCKET’s old HOLD 2 hook is inactive pending an independent effect.
+
+**CARD-CONTROLS-001 — PROGRAM bay and card inspection (APPROVED, 2026-11-17):** Install PROGRAM cards by dragging them into the PCI-style bay on the left HUD. Installed Programs appear there for hover and click inspection and retain their controls. Drop a targeted SCRIPT on eligible ICE, or an untargeted SCRIPT on the upper half of the encounter. Right-click enlarges a card to 150% and right-click again closes the preview.
+**ENCOUNTER-DISPLAY-001 (APPROVED, 2026-11-17):** Fill the fullscreen viewport with the encounter background in every corporation state. Enlarge ICE faces and animated avatars by 25% without scaling their rules plaques.
+
 The player is the **rustler**; the opposing system is the **corporation**. Encounters involve ICE, cards and breakers, damage/trace subroutines, and advancement gates. **LOCKED encounter order:**
 1. Rustler takes their action.
 2. On the corporation turn, **all remaining unbroken damage and Trace subroutines fire**.
