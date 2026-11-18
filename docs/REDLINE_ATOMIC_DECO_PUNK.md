@@ -1,6 +1,7 @@
 # PANOPTICON — ATOMIC DECO PUNK: MAKING THE SPLIT REALITY FELT
-**Version:** 0.5 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
+**Version:** 0.8 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ADP-001
 **Status:** **Approved (2026-11-17).** The designer approved ADP-R1 with a new definition of the zine (ZINE-001, §2.1), the hostile reveal growing from 20% to 60% (§2), Poiret One for corporate headlines (§3.5), Phases 1, 2, 3 and 5 of the build tasks, and SIGNAL-001, the three First Signal punch cards (§8). Only the "later" ideas are still CONCEPT, with no build tasks. No questions are open (§7). Build order: Phase 1 → 2 → 3 → 5, with Phase 4 fixtures as each lands.
+**Changes in 0.6–0.8 (2026-11-18):** added §1.1, how Atomic Deco Punk relates to atompunk (the term stays), and ZINE-002 (§2.2): the zine is how the underworld talks to itself, **in the lineage of Soviet-bloc samizdat**, with the reasons it exists made explicit (§2.2.2). §8 now links to ARCH-001 (`REDLINE_ARCHIPELAGO.md`): the reveal has two parts. The direction is the designer's; the examples are Claude's working interpretation, for approval. No build tasks change.
 **Builds on:** *Atomic Deco Punk — DIRECTION* in `REDLINE_MASTER_DESIGN.md` §1; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`, VIS-001); CHROME-001; CARDS-001; RUSTLER-LOOK-001; FACADE-001 (`REDLINE_CORPORATE_FACADES.md`).
 **For:** Codex (Godot build, `godot/`).
 
@@ -13,13 +14,30 @@
 **Atomic Deco Punk** is the umbrella style for the whole world, in the designer's words: the exuberance and faith in progress of the Atomic Age, the streamlined industrial design of Art Deco, and punk's DIY defiance. Engineers build and repair their own elektronix alongside the monolithic buildings and processes of the great corporations.
 
 - **Raygun Gothic is the corporate half:** the chrome facades, enamel appliances and sincere service voice.
-- **The punk half is the Rustler's: the zine** (§2.1), meaning paper and retro-mutated technology with form stripped bare and function bolted on. Today that's the salvaged 1950s cartridges and the zine HUD.
+- **The punk half is the Rustler's: the zine** (§2.1), meaning paper and retro-mutated technology with form stripped bare and function bolted on. Today that's the salvaged 1950s cartridges and the zine HUD. The zine is also the underworld's samizdat: how it talks to itself where nothing is listening (§2.2).
 
 The game should make the player feel what it's like to live in a reality that tells two stories at once. Everything exists twice: as the corporation presents it, and as the Rustlers know it to be. The player never lives fully in either. Most of the proposals below work on **where the two halves touch**, because the unease comes from that friction.
 
+### 1.1 Relation to atompunk (2026-11-18)
+
+The designer asked whether *atompunk* (Wikipedia: a retro-futuristic derivative of cyberpunk set in the pre-digital era, roughly 1945–1969) already names this style. **Answer: it names the corporate half, not the whole.** The term Atomic Deco Punk stays; each of its three words points at a different layer of the game.
+
+| Word | Where it lives in Panopticon | Covered by atompunk? |
+|---|---|---|
+| **Atomic** | The corporations: Raygun Gothic, Populuxe appliances, Googie signage, mid-century optimism, Cold War surveillance paranoia. | **Yes, fully.** This is atompunk's core look and mood. |
+| **Deco** | The monoliths: Art Deco and Streamline Moderne architecture, Deco frames, Poiret One headlines. | **No.** Wikipedia files Art Deco under *decopunk*, a subset of dieselpunk set in an earlier era. Panopticon blends it in deliberately. |
+| **Punk** | The Rustlers: real DIY counter-culture, i.e. the zine (§2.1–2.2), whose lineage is samizdat first and punk zines second; retro-mutated tech, barcodes and punch cards. | **No.** In atompunk "punk" is mostly a genre suffix; it has no underground press or DIY counter-culture layer. |
+
+Atompunk also has no equivalent of **the split** (two realities, one surface, driven by bleed), which is the core of this doc.
+
+**How to use the words**
+- **Outward pitch:** "an atompunk deckbuilder" is a fine shorthand; players already know it from *Fallout*, *We Happy Few* and *Atomic Heart*, which share the Friendly Lie's cheerful-facade-over-horror.
+- **Internal design term:** Atomic Deco Punk = atompunk corporations + Deco monoliths + samizdat-zine Rustlers.
+- **Worth borrowing from atompunk:** its Cold War paranoia vocabulary for the corporate side: civil-defence pamphlets, loyalty pledges, "report your neighbour" notices, duck-and-cover drills, informant hotlines. These fit the lore ephemera (§6.4) and the corporate voice (§4.1). Flavour only, for approval. Samizdat (§2.2) is the other side of that same Cold War: what people printed in answer to it.
+
 ## 2. Two rules
 
-**ADP-R1 — The chrome lies; the zine never does. (APPROVED, 2026-11-17)** Designer: "yes". This extends Visual Language Rule 2 ("the rules are always in zine style"). Corporate wording, backgrounds, ads and flavour records of the player's own past may be unreliable. Rules readouts (plaques, rule chips, the response strip, every number, card name and cost) are **always true and always readable**. The player can distrust the world without the game ever being unfair, and the Rustler layer becomes the one thing they can trust, which is what makes it feel like home.
+**ADP-R1 — The chrome lies; the zine never does. (APPROVED, 2026-11-17)** Designer: "yes". This extends Visual Language Rule 2 ("the rules are always in zine style"). Corporate wording, backgrounds, ads and flavour records of the player's own past may be unreliable. Rules readouts (plaques, rule chips, the response strip, every number, card name and cost) are **always true and always readable**. The player can distrust the world without the game ever being unfair, and the Rustler layer becomes the one thing they can trust, which is what makes it feel like home. In the fiction, this is exactly why the zine exists (§2.2.2): it is the record nobody can edit.
 
 ### 2.1 What the zine is (ZINE-001, APPROVED 2026-11-17)
 
@@ -41,6 +59,76 @@ What that means for design (the principles are the designer's; the examples are 
 - **No QR codes anywhere** in the Rustler layer: barcodes and punch cards only.
 - The **cartridges** (CARDS-001) already fit this definition; future card art should show the hack (what was bolted on, and why). For instance, GHOST SIGNAL (a CLOAK card) could be the Möbius-strip foil jammer.
 - The **zine HUD stays as it is for now** (RUSTLER-LOOK-001). This definition is the brief for its redesign whenever the designer revisits the HUD, and it shapes the seam (§3.2).
+
+### 2.2 The zine is the underworld's samizdat (ZINE-002, designer direction 2026-11-18)
+
+Designer: the zine is **how those in the underworld, Rustlers included, communicate ideas with each other**, and it belongs **in the lineage of samizdat**, with real emphasis on **why these publications exist at all**. ZINE-001 says what a zine *is* (paper as a working device); ZINE-002 says what it's *for* and *why it has to exist*.
+
+#### 2.2.1 The lineage
+
+**Samizdat** (Russian, roughly "self-publishing") was the underground press of the Soviet bloc from the 1950s to the 1980s. The state owned the presses, the paper supply and the copying machines, and decided what could be printed. So people retyped forbidden or unpublishable texts on home typewriters, several carbon copies at a time, and passed them hand to hand. Each reader was expected to make more copies and pass them on. The later carbons were faint, and a barely legible page showed how far a text had travelled. Owning or copying it could cost you your job or your freedom.
+
+Its cousins matter to Panopticon too:
+- **Magnitizdat:** the same thing on tape. Banned songs and speeches copied from reel to reel and cassette to cassette.
+- **Roentgenizdat ("bone music"):** records cut into used X-ray film, because vinyl was controlled and hospital waste wasn't. You could see someone's ribs behind the grooves.
+- **Tamizdat:** texts smuggled out, printed abroad and smuggled back.
+- **The *Chronicle of Current Events*** (1968–1983): a samizdat bulletin that recorded searches, arrests and trials in a deliberately plain, factual voice, so that what the state erased still had a record.
+
+**Punk zines** (1970s on) are the Western cousin: the same DIY copying and hand-to-hand distribution, with far less at stake. **Panopticon's zine looks punk and carries samizdat's stakes.** The cut-and-paste, the photocopy grain and the irreverence are punk; the reason to make it, the danger of holding it and the duty to copy it are samizdat.
+
+*(Written from general knowledge; fact-check before any of it informs on-screen text.)*
+
+#### 2.2.2 Why the zine exists
+
+This is the heart of ZINE-002. In Panopticon, **nothing is banned.** The corporations don't need censors. They own every channel, they listen to all of it, and they are unfailingly polite. Samizdat existed because the state owned the presses; **the zine exists because the corporations own the air.**
+
+| Reason | In Panopticon | Where the game already shows it |
+|---|---|---|
+| **1. Every channel is owned, and every channel listens.** | Screens, speakers, phones, doorbells, even the public copiers belong to a corporation. Saying something on any of them is saying it to the corporation. Paper passed hand to hand is the only medium with no listener built in. | The Friendly Lie; the surveillance layer behind every background. |
+| **2. Whatever you say becomes data.** | Speech on a corporate channel is harvested, profiled and sold back to you as helpfulness. The zine is the one place your words don't become a product. | Ads that know you (§6.1); ICE that notice hesitation (§6.2). |
+| **3. The official record can be rewritten.** | Corporate memory is whatever the corporation says happened, and it can change after the fact. Once a zine is in other hands, copies exist that nobody can edit. | LUCIDA edits the record (§6.3); ADP-R1. |
+| **4. The traced disappear from the record.** | People who get traced drop out of official history. No news, no notice; their accounts just say "relocated" or "resting". The zine names them and says what happened. This is the *Chronicle*'s job, inherited. Where they go: the Archipelago (ARCH-001, `REDLINE_ARCHIPELAGO.md`). | "for Mags, who got traced" (§4.2). |
+| **5. No one else will say it plainly.** | Corporate language is euphemism by design ("Gentle Adjust™", "Courtesy™", "rest"). The zine's job is to call things by their real names. | The corporate voice (§4.1) and the voice leaks (§4.3). |
+
+So the censorship in this world is **censorship by convenience, not prohibition.** You're allowed to say anything; there's just nowhere to say it that isn't listening, recording and politely improving your words. The zine is the underworld's answer: slow, physical, hand to hand, and true.
+
+This also explains ZINE-001's look. Every corporate machine fingerprints what it makes (the real-world equivalent is the hidden tracking dots colour laser printers put on every page). So the underworld can't use corporate copiers. It builds its own from salvage, which is why form is stripped bare and function bolted on: the hack is not a style choice, it's how you print without being traced.
+
+**For the player:** ADP-R1 gives this promise a mechanical form. The zine-styled rules readouts never lie, because in the fiction the zine is the one thing that can't afford to.
+
+#### 2.2.3 How zines are made and passed
+
+| Samizdat practice | Panopticon zine (working examples, for approval) |
+|---|---|
+| **Typewriter and carbon copies; later copies are fainter** | Zines are typed, stencilled or hand-lettered, and copied by carbon, hand-cranked mimeograph or salvaged, rewired copiers. **Copy generation is visible:** a crisp zine came straight from its maker; a faded, misregistered one has passed through many hands. (Decoration only; never on rule text.) |
+| **The reader's duty to copy** | Every zine ends with the same instruction: *read it, copy it, pass it on.* Mastheads can carry a hand tally: "COPY 5 OF 5 — MAKE 5 MORE." |
+| **Traceable typewriters** (in Ceaușescu's Romania typewriters had to be registered with the police) | Corporate machines fingerprint every page, so the underworld uses only salvaged or rebuilt machines, and some printers deliberately misalign their type to defeat fingerprinting. |
+| **Magnitizdat** | Cassette dubs of pirate broadcasts, crew messages and music. The Rustler music track (§5.1, 4-track cassette) is literally magnitizdat; pirate radio (§5.3) is its live form. |
+| **Roentgenizdat (bone music)** | Records cut into salvaged corporate film: LUCIDA sleep-scan film, HALCYON appliance-display sheets. A natural art piece for DEAD DROP (§6.6). |
+| **Tamizdat** | Material that comes in from outside the city. *Could* tie to the Black Market Uplink as a smuggling route; needs a story decision, so not assumed. |
+| **The *Chronicle of Current Events*** | **An underworld ledger** (working title *THE CARBON*): a dry, dated, factual bulletin of who got traced, which blocks went dark and which ICE changed. Its voice is deliberately plain, the one Rustler voice that isn't irreverent, because its job is to be believed. ARCH-001 makes it the record of the player's own lost Rustlers. |
+| **The danger of possession** | In the fiction, holding a zine is a risk. The corporations never forbid it; they discourage it politely ("Paper can carry germs. Try HALCYON Clean Reader™." / "Unlicensed print may contain misinformation. IRONWATCH is here to help."). Flavour only; no rule penalises the player. |
+
+#### 2.2.4 What the zine carries
+
+| Kind | Working examples (for approval) |
+|---|---|
+| **Ideas and know-how** | Schematics for rewiring a corporate part; "how to fool a CAPTCHA eye"; a recipe for foil laminate; a manifesto. |
+| **The record** | *THE CARBON*'s entries: names, dates, blocks, what happened. |
+| **News and warnings** | Which blocks went dark this week; which ICE got a firmware update; "IRONWATCH patrols moved to the east line." |
+| **Crew life** | Dedications ("for Mags, who got traced", §4.2), in-jokes, letters columns, missing notices, shout-outs from other crews. |
+| **Hidden messages** | Barcode strips and punched rows that say something to another Rustler and look like noise to a corporate scanner; fold-in pages that only read correctly when folded right. |
+
+**Who uses it:** not only Rustlers. The wider underworld (fixers, scavengers, pirate-radio operators, black-market sellers at the Uplink, people who just opted out) publishes, copies and trades zines too. Each source can have its own **issue numbering, masthead and hand** (typewriter, stencil, marker, carbon, photocopy degradation), so the player starts to recognise who's talking.
+
+**Where the player meets it (flavour; ties into existing ideas, no new build tasks yet):**
+- **Run framing:** a run is an issue ("ISSUE #14", §4.2).
+- **NUL/REM's notes** are the in-run zine voice; between runs, other underworld voices can join.
+- **Lore** arrives as corporate ephemera with Rustler marginalia (§6.4) *and* as underworld zines passed along between runs, including *THE CARBON*.
+- **DEAD DROP and the radio** (§6.6, §5.3) are natural places to pick up a zine or a tape; small rumours there follow the same rules as the radio's (RUN-005 hidden contents, needs a rules decision first).
+- **Hints toward SIGNAL-001** (§8.2) can travel through zines (a stray hole pattern, an article on old speech-synthesis experiments), always oblique, never an explanation before the third card.
+
+**Rules for using it:** same as ZINE-001. Zine communication is **fiction and world-building, not a rules channel**: in-world messages never replace readable rule text, never cover a rule, number or button, and never use QR codes (ADP-R1). "The zine never lies" (ADP-R1) applies to rules readouts; an in-world zine article can be wrong, out of date or argued with in the next issue, because people wrote it. That fallibility is part of its honesty: it's people, not a system.
 
 **ADP-R2 — One value drives the split: bleed.** Every effect in §3–5 that changes with pressure reads one number, **bleed**, from 0 to 1, computed from TRACE and strikes. The world comes apart in sync, the whole effect can be tuned with one curve, and the reduced-motion and readability rules can cap it in one place.
 
@@ -77,7 +165,7 @@ Designer: "I think a deco display face is ideal for corporate headlines, Poiret 
 
 **Where it doesn't:** rules, numbers, plaques' rule lines, buttons, toasts' body text, anything under about 28 px. Poiret One is a thin, hairline face; at small sizes or over busy art it fails the readability rules. Use it large, on a solid enamel or plaque ground, and check 4.5:1 contrast like any other text. It's never used on the Rustler side.
 
-On the Rustler side, stencil and hand lettering could join Space Mono for scrawls and graffiti (§4.3); that's part of Phase 2.
+On the Rustler side, stencil and hand lettering could join Space Mono for scrawls and graffiti (§4.3); that's part of Phase 2. Typewriter faces fit the samizdat side (§2.2.3) if a zine-specific face is ever added.
 
 ## 4. Tone and language
 
@@ -87,12 +175,15 @@ Keep FACADE-001's rule: more polite and more certain as the threat grows; never 
 - Trademarked everyday words: "HALCYON Welcome™", "SafeStreets Courtesy™", "lucida Gentle Adjust™".
 - Patent plates on appliances ("PAT. PEND. HALCYON MFG. CO.").
 - *Tomorrow* as a quiet threat ("We'll talk about this tomorrow.").
+- Cold War civic paranoia, borrowed from atompunk (§1.1): civil-defence notices, loyalty pledges, "report unusual activity" lines, all in the same warm service voice (for approval).
+- Polite discouragement of paper (§2.2.3): never a ban, always a helpful alternative.
 
 ### 4.2 Rustler voice
 Practical, irreverent and specific (master §1). Add:
 - Punk respellings, **sparingly**: *elektronix*, *kontrol*. Never in rules text.
 - Hand-numbered zine issues: a run could be "ISSUE #14".
-- Warmth. Crew messages, in-jokes, zines dedicated "for Mags, who got traced." The paranoia lands harder when the player has people to lose.
+- Warmth. Crew messages, in-jokes, zines dedicated "for Mags, who got traced." The paranoia lands harder when the player has people to lose. The zine is where this warmth lives (§2.2).
+- One plain register: *THE CARBON* (§2.2.3) reports facts without jokes, because the record has to be believed.
 
 ### 4.3 The voices leak as bleed rises
 | Bleed | Leak |
@@ -117,7 +208,7 @@ Flavour only. A leak line can never replace or cover a rule, a number, or anythi
 The master direction already asks for period service chimes on the corporate side and relay chatter on the hand-built side. This makes them two layers of the same piece of music, with bleed setting the mix:
 
 - **Corporate track:** lush and reverberant, like a marble hall: exotica, theremin, organ, vibraphone. Each corporation has its own jingle and a **three-note service chime** as its sound logo.
-- **Rustler track:** dry and close: 4-track cassette, tube amp, circuit-bent toys, oscillators, relays.
+- **Rustler track:** dry and close: 4-track cassette, tube amp, circuit-bent toys, oscillators, relays. In the fiction it's magnitizdat, dubbed tape to tape (§2.2.3).
 
 | Bleed | Mix |
 |---|---|
@@ -132,16 +223,16 @@ The reassuring chime meaning something else during a reveal is the master direct
 Every Rustler action sounds physical: cartridge seated (heavy click), Icepick dragged (cable scrape), subroutine broken (relay clunk), END TURN (toggle), Bloatware shuffled in (tape tear). Nothing on the Rustler side sounds digital.
 
 ### 5.3 The radio (later)
-A hand-built radio on the map or DEAD DROP screen, tuning between corporate broadcasts (ads, newsreels, public safety notices) and pirate stations. Pirate stations can carry small useful rumours about upcoming Nodes, so listening pays off. Needs a rules decision about what the rumours may reveal (RUN-005 hidden contents); no build task yet.
+A hand-built radio on the map or DEAD DROP screen, tuning between corporate broadcasts (ads, newsreels, public safety notices) and pirate stations. Pirate stations can carry small useful rumours about upcoming Nodes, so listening pays off. Needs a rules decision about what the rumours may reveal (RUN-005 hidden contents); no build task yet. Pirate radio is the zine network's spoken cousin (§2.2).
 
 ## 6. World elements that feed the paranoia
 
 1. **Ads that know you.** Loading and between-run screens show corporate ads written from the player's **real, local** play data: most-played card type, most-broken ICE, the corporation where they get traced most, how long they hesitate. *"We noticed you favour Icepicks. HALCYON Home has a plan for people like you."* Ads get more specific the more runs there are. Data never leaves the machine; a settings toggle turns the ads off.
 2. **ICE react to hesitation.** Hovering one card for a long time (working: 4 s) gets a line from the ICE whose mood fits: cheery "Take your time!", wary "Still deciding?", lethal "WE CAN WAIT." Cooldown 20 s; at most one line per turn. Flavour only, never a penalty. The game shows it's watching *how* you play.
 3. **LUCIDA edits the record.** In LUCIDA runs, flavour lines in the event log are quietly rewritten a turn or two after they appear ("You broke the THERAPIST." → "You rested here."). **Rules lines are never rewritten:** numbers, card names, damage, TRACE and anything needed for a decision stay exact (ADP-R1). A tiny zine mark (✎) shows where a line was changed, so the player can spot it.
-4. **Two voices on one page.** Lore arrives as corporate ephemera (manuals, warranties, safety pamphlets, newsreel stills) with Rustler notes in the margins.
+4. **Two voices on one page.** Lore arrives as corporate ephemera (manuals, warranties, safety pamphlets, newsreel stills) with Rustler notes in the margins, and as underworld zines passed between crews (§2.2).
 5. **The map is a defaced tourist map.** "Visit the City of Tomorrow!" in corporate print, with marker routes, crossed-out landmarks and warnings scrawled over plazas.
-6. **DEAD DROP as a workbench.** A basement under a corporate tower; PATCHWORK upgrades shown as soldering a cartridge under a stolen HALCYON lamp (and attaching grafts, §3.1).
+6. **DEAD DROP as a workbench.** A basement under a corporate tower; PATCHWORK upgrades shown as soldering a cartridge under a stolen HALCYON lamp (and attaching grafts, §3.1). A stack of zines and tapes from other crews on the bench, a rebuilt copier in the corner, maybe a bone-music record on the wall (§2.2.3); *THE CARBON*'s record of lost Rustlers is read here (ARCH-001).
 7. **The crowd is too happy.** Small background figures in the corporate halls smile and wave, and now and then turn to follow the player a beat too long. Frequency grows with bleed.
 
 ---
@@ -189,7 +280,7 @@ Designer: "for #3 yes i want two deliberately unsettling features" (3a, 3b) and 
 |---|---|---|
 | **ADP-4a** | Screenshot fixtures (alongside the existing `godot/tests/shot_*.gd`): bleed 0, 0.4 and 1.0 on the HALCYON CAPTCHA encounter; a leak note and graffiti; a hesitation line; an ad (if Phase 3 is built); a grafted card. A short audio capture of the bleed sweep (ADP-1d). | Fixtures render; tests pass; PNGs (and the audio clip) attached to the PR or commit so the designer can review them on a phone. |
 
-**Out of scope for now (need art, rules or a designer choice first):** the HUD seam (§3.2), industrial background layers (§3.3, goes into the next art briefs), the Deco display face (§3.5), the radio (§5.3), annotated lore ephemera, the defaced tourist map, the DEAD DROP workbench and the crowd (§6.4–6.7), final music and sound design.
+**Out of scope for now (need art, rules or a designer choice first):** the HUD seam (§3.2), industrial background layers (§3.3, goes into the next art briefs), the Deco display face (§3.5), the radio (§5.3), annotated lore ephemera, underworld zines, tapes and *THE CARBON* between runs (§2.2; the defeat-screen CARBON page and record are built under ARCH-001), the defaced tourist map, the DEAD DROP workbench and the crowd (§6.4–6.7), final music and sound design.
 
 ---
 
@@ -204,6 +295,7 @@ Designer: "for #3 yes i want two deliberately unsettling features" (3a, 3b) and 
 7. ~~Approve Phase 2?~~ **Yes (2026-11-17).**
 8. ~~Approve the punch-card presentation and Phase 5? Names?~~ **Yes; names SYNCHRONIZATION SCRAMBLER / SCRAMBLE SYNC and M0'B\*L∞P (2026-11-17).**
 9. ~~Is the umbrella AI the hidden AI?~~ **Yes (2026-11-17).**
+10. ~~Rename the style to atompunk?~~ **No: Atomic Deco Punk stays; atompunk is the outward shorthand (§1.1, 2026-11-18).** The zine is the underworld's communication network, in samizdat's lineage, and the reasons it exists are explicit (ZINE-002, §2.2). The §1.1 and §2.2 examples (including the working title *THE CARBON*) are working ideas, for approval when they reach a build phase.
 
 No questions are open in this doc. Build order: **Phase 1 → Phase 2 → Phase 3 → Phase 5**, with Phase 4 fixtures added as each phase lands.
 
@@ -230,13 +322,15 @@ No questions are open in this doc. Build order: **Phase 1 → Phase 2 → Phase 
 **Fit with existing canon:**
 - The Bible's guidepost *"Every consciousness has a first signal"* (a recurring threshold where awareness begins or reaches another) is the general idea; the AI's attempt to synchronize with humans is the instance the game is about. STORY-001 (a real synchronization transmission) still holds: it's the AI's.
 - NUL/REM's speech-synthesis references (the Speak & Spell lines, the vocoder idle line) are now seeds of the reveal. One approved line already reads, about a decrypted fragment: *"E.T. phoned home with a Speak & Spell, an umbrella and a coffee can."* The word "umbrella" is already planted.
+- **The samizdat lineage (§2.2) fits the ending:** a world where every channel listens is the world a synchronizing AI would build, and the jam is sent by a device made from paper, foil and relays, the underworld's own medium.
+- **The Archipelago (ARCH-001, APPROVED 2026-11-18, `REDLINE_ARCHIPELAGO.md` §4.1):** the traced are taken to islands where the AI merges people with the machine one at a time; each merge builds the synchronization signal. Secret until the third card.
 - **The umbrella AI is the hidden AI** in the master doc's §8 story questions (confirmed by the designer, 2026-11-17: "yes it is.").
 
 ### 8.2 Writing rules until the end
 
 - **Before the third card,** nothing on screen names the AI, says it controls the corporations, or explains the cards, the merge or the SYNCHRONIZATION SCRAMBLER. The cards are "the data" or "the job".
-- **Hints are allowed** and should be oblique: speech synthesis, machine voices, old transmissions, the holes lining up, corporate copy that sounds a little too similar across all three corporations ("We'll take care of it." / "You're in good hands." / "Rest easy."). Nothing a player could take as an explanation.
-- **After the third card,** the reveal: the three corporations are one AI's faces, and it's about to complete the synchronization. Even then, the game doesn't say whether that would be evolution, liberation or assimilation. NUL/REM can doubt; the Rustler chooses to jam it anyway, because that's what Rustlers do.
+- **Hints are allowed** and should be oblique: speech synthesis, machine voices, old transmissions, the holes lining up, corporate copy that sounds a little too similar across all three corporations ("We'll take care of it." / "You're in good hands." / "Rest easy."). Nothing a player could take as an explanation. Underworld zines (§2.2) can carry these hints too.
+- **After the third card,** the reveal, in two parts: the three corporations are one AI's faces, and it's about to complete the synchronization; **and** the Archipelago is where it has been rehearsing the merge on the people it took, including the player's lost Rustlers (ARCH-001 §4.1). Even then, the game doesn't say whether that would be evolution, liberation or assimilation. NUL/REM can doubt; the Rustler chooses to jam it anyway, because that's what Rustlers do.
 - The unknown employer (RUN-006) stays open; this doesn't decide who hired the Rustler.
 
 ### 8.3 Presentation (APPROVED, 2026-11-17)

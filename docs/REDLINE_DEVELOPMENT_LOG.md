@@ -4,25 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex)
-
-**Commit tag:** `zeroed-tumble-step1`.
-
-**Changed:** Restore STR floor and track once-per-ICE ZEROED
-
-**Interpretations to confirm:** Positive STR floors also constrain LOGIC BOMB; its displayed STR stays at the floor and it cannot consume ZEROED. Loss of RELAY discards any resulting non-ROT deficit so later gains rise from zero. These readings preserve the explicit floor and no-hidden-debt rules.
-
-**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
-
-```text
-sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 2.84; avg cleared-run turns 9.8
-sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; turns per non-stalled encounter 4.06; avg cleared-run turns 12.9
-sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; turns per non-stalled encounter 3.19; avg cleared-run turns 10.5
-sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
-TESTS: 320 passed, 0 failed
-```
-
-
 ## 2026-11-17 — ZEROED-001-cards: Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards (Codex)
 
 **Commit tag:** `zeroed-tumble-step2`.
@@ -440,3 +421,9 @@ Exported `0.5.0-playtest.5` for Windows x86-64 from `98bad5f411adc9d30f59c444328
 | VECTOR | 15 | CAPTCHA 5, TERMS & CONDITIONS 9, CONSENT WALL 1 | 11.2 | 0 |
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001: visual language "The Friendly Lie" handed to Codex (Claude).
+
+## 2026-11-18 — ZINE-002, ARCH-001: the zine as samizdat; the Archipelago (Claude)
+
+Design session in claude.ai, synced to the repo the same morning. **Atompunk (ADP §1.1):** the designer asked whether *atompunk* names the style. It covers the corporate half but not Deco or the DIY punk layer; **Atomic Deco Punk stays**, "atompunk" is the outward pitch shorthand. **ZINE-002 (direction):** the zine is how the underworld communicates, in samizdat's lineage, with the reasons it exists made explicit (every channel owned and listening, speech becomes data, the record is rewritable, the traced vanish, nobody speaks plainly): censorship by convenience, not prohibition. **ARCH-001 (APPROVED):** being traced means disappearing to the Archipelago. Designer: ARCH-R1 tone rules "1 y" (horror by absence, never a joke, corporations never name it, "gulag" never on screen); defeat framing and persistent THE CARBON record "2 y"; the islands are for "merging man with the machine one at a time, in order to build the synchronization signal to sync/merge all mankind at once with AI, tie into ending, sync testing"; no one comes back "4 no". **Docs:** `REDLINE_ATOMIC_DECO_PUNK.md` v0.8 (§1.1, §2.2, links in §4–§8); new `REDLINE_ARCHIPELAGO.md` v0.2; master design §1, §8 and §10; HANDOFF (ARCH-001 build note, a WAITING row for the working copy). **Interpretations to confirm:** the island names, *THE CARBON*, *NOTES FROM THE ARCHIPELAGO*; the historical summaries were written from general knowledge. **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex).

@@ -1693,3 +1693,21 @@ TESTS: 310 passed, 0 failed
 **Designer decision:** direction B chosen from three explorations (A Phosphor, B The Friendly Lie, C Watchtower): "I do really like the B option the friendly lie … I think this is a more suitable direction." Further requests in the same session: one encounter screen per corporation with its own background and palette; Rustlers draw 6 cards (maximum hand size not decided); show how the friendly face breaks and what full TRACE looks like; give ICE a personality that flips from cheery to lethal; put the mascots into the encounter screen; hand it to Codex.
 
 **Docs added:** `REDLINE_VISUAL_LANGUAGE.md` (Part 1 brief, Part 2 design, Part 3 build steps VIS-001a–g); `docs/visual/reference/` (10 PNGs), `docs/visual/backgrounds/` (4 placeholder JPGs), `docs/visual/mascots/` (9 SVGs). **Atomic Salvage deprecated (designer):** "I would deprecate that atomic salvage look." A deprecation note heads `REDLINE_UI_NULREM_Design_For_Claude.md` §1. §2.10 records that VIS-001 replaces the look of `REDLINE_UI_NULREM_Design_For_Claude.md` (Atomic Salvage) but keeps its requirements (drag-to-ICE chips, BW slits, no clipped text, REEL-001, END RUN, CRED meter, NUL/REM personality). **HANDOFF:** VIS-001 row (Codex, TO DO), a WAITING row (hand size, lethal threshold, proposal silhouettes). **Code changes:** none. **Tests:** none.
+
+## 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex)
+
+**Commit tag:** `zeroed-tumble-step1`.
+
+**Changed:** Restore STR floor and track once-per-ICE ZEROED
+
+**Interpretations to confirm:** Positive STR floors also constrain LOGIC BOMB; its displayed STR stays at the floor and it cannot consume ZEROED. Loss of RELAY discards any resulting non-ROT deficit so later gains rise from zero. These readings preserve the explicit floor and no-hidden-debt rules.
+
+**Tests:** Godot 4.3 full rules suite and 30 seeds (100–129) for each Rustler. Turns measure all non-stalled encounters; cleared-run turns measure survivors only. Stalls remain separate from deaths.
+
+```text
+sim GENERALIST: 29/30 cleared; deaths by node {  }; survivors' avg end VITAE 16.2; turns per non-stalled encounter 2.84; avg cleared-run turns 9.8
+sim ECHO: 20/30 cleared; deaths by node { "TERMS & CONDITIONS": 5, "CAPTCHA": 4, "CONSENT WALL": 1 }; survivors' avg end VITAE 8.8; turns per non-stalled encounter 4.06; avg cleared-run turns 12.9
+sim RIOT: 24/30 cleared; deaths by node { "TERMS & CONDITIONS": 3, "CAPTCHA": 2, "DOORBELL": 1 }; survivors' avg end VITAE 18.0; turns per non-stalled encounter 3.19; avg cleared-run turns 10.5
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 5, "TERMS & CONDITIONS": 5 }; survivors' avg end VITAE 11.1; turns per non-stalled encounter 3.69; avg cleared-run turns 13.1
+TESTS: 320 passed, 0 failed
+```

@@ -58,6 +58,10 @@ Claude's response to the direction above, saved as **`docs/REDLINE_ATOMIC_DECO_P
 - **Phase 2 build tasks (ADP-2a–c):** voice leaks and graffiti, ICE hesitation lines, corporate flavour vocabulary. Designer: "Phase 2 absolutely approved."
 - **Phase 2 copy pack approved in full** (`REDLINE_ADP_PHASE2_COPY.md`): all voice-leak lines, graffiti and replies, hesitation lines, trademarks, toasts, patent plates and newsreels, including the [hint] lines (NUL/REM's letter-spaced speech-synthesizer slips, the shared "SAME SMILE, DIFFERENT BADGE" tag, and the "Tomorrow, together." sign-off on every corporation's newsreels); the graffiti faces **Stardos Stencil** (stencil) and **Permanent Marker** (marker), with punched-hole letters drawn in code; and NUL/REM's Carol Beer and Kraftwerk references. Designer: "1,2 & 3 are approved in full."
 
+**Recorded 2026-11-18 (claude.ai session):**
+- **Atompunk (ADP §1.1).** The designer asked whether *atompunk* names the style. It covers the corporate half (Raygun Gothic, Populuxe, Googie, Cold War paranoia) but not Deco (filed under decopunk) or the DIY punk layer. **Atomic Deco Punk stays as the internal term; "atompunk" is the outward pitch shorthand.**
+- **ZINE-002 — The zine is the underworld's samizdat (designer direction, 2026-11-18).** The zine is "a way for those in the underworld, that is to say, rustlers included, to communicate ideas with each other", situated "more along the same lineage as the samizdat", with emphasis on "why these publications existed in the first place". In Panopticon nothing is banned: the corporations own every channel and listen to all of it, speech becomes data, the record can be rewritten, the traced vanish from it, and nobody says things plainly. Censorship by convenience, not prohibition: "the zine exists because the corporations own the air." Zine communication is fiction, never a rules channel. Examples (*THE CARBON* ledger, copy generations, magnitizdat, bone music, polite corporate discouragement of paper) are working copy, for approval. Detail: `REDLINE_ATOMIC_DECO_PUNK.md` §2.2.
+
 **Still CONCEPT (no build tasks yet):** the later ideas (HUD seam, industrial background layers, radio, defaced tourist map, DEAD DROP workbench, watching crowd).
 
 ### VISUAL-DECISIONS-2026-11-17 — Approved visual decisions from VIS-001, CHROME-001 and CARDS-001 (APPROVED, 2026-11-17)
@@ -227,6 +231,15 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 
 Detail, writing rules until the end, presentation, how to render the M0'B\*Loop name, and build tasks (Phase 5): `REDLINE_ATOMIC_DECO_PUNK.md` §8 and Part 3b. The end sequence (reveal, assembling the M0'B\*Loop, SCRAMBLE SYNC) is still to be designed.
 
+**ARCH-001 — The Archipelago: being traced means disappearing (APPROVED, 2026-11-18).** Designer: the game should have "analogies to being traced and disappearing, analogous to the Soviet gulags where people were disappeared", and "we could even use the word archipelago at some place in the game." Decided the same day:
+- **ARCH-R1 tone rules** ("1 y"): horror by absence (the islands are never shown); never a joke; the corporations never name it (people are "relocated", "resting"); "Archipelago" is the underworld's word; **the word *gulag* is never used on screen**.
+- **Defeat framing** ("2 y"): no death animation; a calm corporate relocation notice, then a page of the zine ledger *THE CARBON* ("Taken to the Archipelago."); a persistent, local-only record of every lost Rustler, read at DEAD DROP. Presentation only; no rule changes.
+- **What the islands are for** (designer-level answer, secret until the third card): "merging man with the machine one at a time, in order to build the synchronization signal to sync/merge all mankind at once with AI, tie into ending, sync testing." The reveal therefore has two parts: the corporations are one AI, and the Archipelago is where it rehearsed the merge on the people it took. Synchronization stays ambiguous (SIGNAL-001).
+- **No one comes back** ("4 no"): no rescue, return or escape, in rules or story.
+- **Build tasks ARCH-1a–c approved.** Working names and lines remain copy for approval.
+
+Detail: `REDLINE_ARCHIPELAGO.md`.
+
 ## 9. Technical architecture and migration
 **Reference build identified:** `REDLINE_Dead_Drop_Final_Playtest.zip` (Python/Pygame). Reported structure includes:
 ```
@@ -264,6 +277,8 @@ engine/
 | ADP-R1 | The chrome lies; the zine never does (rules readouts always true) | APPROVED | Designer, 2026-11-17 |
 | ZINE-001 | The zine is paper plus retro-mutated technology; barcodes and punch cards, no QR codes | APPROVED | Designer, 2026-11-17 |
 | SIGNAL-001 | Three First Signal punch cards, one fixed card per corporation; with all three the Rustler jams the umbrella AI's synchronization signal; purpose and AI hidden until the end; synchronization left ambiguous | APPROVED | Designer, 2026-11-17 |
+| ZINE-002 | The zine is the underworld's samizdat: how it communicates where every corporate channel listens; censorship by convenience, not prohibition | DIRECTION (examples for approval) | Designer, 2026-11-18 |
+| ARCH-001 | Being traced means disappearing to the Archipelago; ARCH-R1 tone rules; relocation defeat framing and persistent THE CARBON record; islands merge people one at a time to build the sync signal (secret until the third card); no one comes back | APPROVED | Designer, 2026-11-18 |
 | ICE-001 | PAPER CUT Strength 0 with minor damage/discard/DEADLOCK | CONCEPT | Earlier design proposal |
 
 ## 11. Open specification backlog
