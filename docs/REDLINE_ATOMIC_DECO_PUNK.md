@@ -1,6 +1,6 @@
 # PANOPTICON — ATOMIC DECO PUNK: MAKING THE SPLIT REALITY FELT
-**Version:** 0.3 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
-**Status:** **Mostly approved (2026-11-17).** Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1); the **hostile reveal growing with bleed** from 20% to 60% (§2); **Poiret One** for corporate headlines (§3.5); **Phase 1** and **Phase 3** (Part 3: bleed and sound; ads that know you, LUCIDA record edits, grafts). The designer also set a story direction, **SIGNAL-001: three punch cards** (§8), whose details are open. Still CONCEPT: Phase 2 and the "later" ideas. Open questions are in §7. Build only approved tasks.
+**Version:** 0.4 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
+**Status:** **Mostly approved (2026-11-17).** Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1); the **hostile reveal growing with bleed** from 20% to 60% (§2); **Poiret One** for corporate headlines (§3.5); **Phase 1** and **Phase 3** (Part 3: bleed and sound; ads that know you, LUCIDA record edits, grafts). The designer also approved **SIGNAL-001: three First Signal punch cards** (§8); its presentation (§8.3) and build tasks (Phase 5) wait for approval. Still CONCEPT: Phase 2 and the "later" ideas. Open questions are in §7. Build only approved tasks.
 **Builds on:** *Atomic Deco Punk — DIRECTION* in `REDLINE_MASTER_DESIGN.md` §1; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`, VIS-001); CHROME-001; CARDS-001; RUSTLER-LOOK-001; FACADE-001 (`REDLINE_CORPORATE_FACADES.md`).
 **For:** Codex (Godot build, `godot/`).
 
@@ -198,38 +198,62 @@ Designer: "for #3 yes i want two deliberately unsettling features" (3a, 3b) and 
 3. ~~Ads from real play data, LUCIDA rewriting the record, grafts?~~ **Yes to all three (2026-11-17).**
 4. ~~Should the hostile reveal grow with bleed?~~ **Yes, 20% to 60% (2026-11-17).**
 5. ~~Display face?~~ **Poiret One, for corporate headlines (2026-11-17).**
-6. ~~Should punch cards ever mean something in play?~~ **Yes: the three First Signal punch cards (SIGNAL-001, §8).** Its own open questions are in §8.
+6. ~~Should punch cards ever mean something in play?~~ **Yes: the three First Signal punch cards (SIGNAL-001, §8), now approved.**
 7. Approve **Phase 2** (voice leaks, hesitation lines, corporate vocabulary)?
+8. Approve the **punch-card presentation** (§8.3) and **Phase 5** (SIG-5a–d)? Keep the working names COUNTER-SIGNAL and MÖBIUS?
+9. Confirm the umbrella AI is the **hidden AI** in the master doc's story questions?
 
 ---
 
-## 8. SIGNAL-001 — The three punch cards (DIRECTION, 2026-11-17)
+## 8. SIGNAL-001 — The three punch cards (APPROVED, 2026-11-17)
 
 **The designer's direction:**
 
 > "Since this game is about the first signal (as one of the central themes) the player could be collecting 1 of 3 punch cards from each corporation in order to process an uplink signal that jams the umbrella corporation's signal that would finalize the merging of man and machine."
 
-**Working reading:** there are **three punch cards**, one held by each corporation. Taking a corporation's card is what the Rustler steals there. With all three, the Rustler can run a signal that **jams the umbrella corporation's signal**, the one that would complete the merging of human and machine.
+### 8.1 What's decided (designer, 2026-11-17)
 
-**How it fits what's already locked** (Master Design):
-- **RUN-006** says a full run is three corporations, and in each one the Rustler steals data central to the First Signal. The punch card **is** that data, made physical. It also fills RUN-006's open item "exact final victory trigger after the third corporation": processing the three cards.
-- **STORY-001 / §8:** the First Signal is a real synchronization transmission. The cards give the run a physical, collectable shape around it, and they're a natural form for the **cipher fragments** already in the world.
-- **ZINE-001:** this world's machine code is punch cards, so the most important data in the game is a punch card. The device that processes the three could be a zine device: a hand-built reader, foil and paper and relays (the designer's Möbius-strip foil antenna is a natural part of it).
-- **Atomic Deco Punk:** each card is a corporate artefact (that corporation's card stock, colour, emblem and patent print) carrying holes punched by something older. The Rustler's hand-built reader is what reads it. Corporate object, zine purpose.
+| Question | Answer |
+|---|---|
+| How many cards? | **One per corporation, three in total.** Designer: "Yes." |
+| What does the player know, and when? | **The purpose stays hidden until the end.** Designer: "yes." This keeps RUN-006: the Rustler doesn't know what the data means or who's behind it. |
+| The umbrella | **"Umbrella" is a description, not a name: it's an AI that controls all three corporations.** Designer: "it really is an AI who controls all corporations, it is unknown until after all 3 cards are attained." |
+| Its signal and the First Signal | **The First Signal is the first sign of consciousness in any being, from the cellular level to the macro.** In the game, the First Signal being referred to is the **machines' attempt to reach a higher consciousness by merging with humanity.** There have been many attempts through history. **Speech synthesis** was the machines' main method, which is why NUL/REM keeps referring to it; eventually they decided the way was **synchronization with humans**. Keep it vague until the end. |
+| A name for the jamming signal | "Any appropriate name will do." **Working names (Claude):** the signal is **the COUNTER-SIGNAL**; the hand-built device that reads the three cards and sends it is **the MÖBIUS**, after the designer's Möbius-strip foil antenna (ZINE-001). Both avoid "Uplink", which is the Black Market Uplink shop. |
+| Is jamming right? | **The game leaves doubt.** Designer: "it could be all 3" (evolution, liberation, assimilation). **The Rustler jams it because going against whatever the corporations want is the Rustler's MO**, not because the game says it's right. |
+| Can cards be lost or vary? | **No, for now.** Each run is discrete (roguelike), and each corporation always gives the same card: HALCYON's card, IRONWATCH's card, LUCIDA's card. |
 
-**Presentation proposals (CONCEPT):**
-- On BREACH of a corporation's central Node, the card arrives as a physical object (from a pneumatic tube or the core's slot, §3.3) and is added to a three-slot card holder taped into the zine HUD: "1/3", "2/3", "3/3".
-- Each card shows its holes. The holes of all three cards line up into one pattern only when they're stacked, so the player can see they belong together before knowing what they are.
-- NUL/REM reacts to each card; the existing First Signal lines (EV-33, "First Signal fragment decrypted") are a natural fit for card 1, 2 and 3.
+**Fit with existing canon:**
+- The Bible's guidepost *"Every consciousness has a first signal"* (a recurring threshold where awareness begins or reaches another) is the general idea; the AI's attempt to synchronize with humans is the instance the game is about. STORY-001 (a real synchronization transmission) still holds: it's the AI's.
+- NUL/REM's speech-synthesis references (the Speak & Spell lines, the vocoder idle line) are now seeds of the reveal. One approved line already reads, about a decrypted fragment: *"E.T. phoned home with a Speak & Spell, an umbrella and a coffee can."* The word "umbrella" is already planted.
+- *Interpretation to confirm:* the umbrella AI is the **hidden AI** in the master doc's §8 story questions.
 
-**Open questions for the designer:**
-1. **One card per corporation (three in total), or three per corporation of which the player takes one?** The working reading is one per corporation.
-2. **What the player knows, and when.** RUN-006 (LOCKED) says the Rustler doesn't fully understand the data or know who hired them. Does the purpose (jamming the umbrella corporation's signal) stay hidden until the third card, and only show at the end?
-3. **The umbrella corporation:** is it a new, fourth entity that owns HALCYON, IRONWATCH and LUCIDA? What's its name? (Avoid "Umbrella", which is Resident Evil's corporation.) Is it the employer, the enemy, or both?
-4. **Its signal and the First Signal:** is the umbrella corporation's signal the First Signal itself, a copy, or a second transmission built on it?
-5. **The name.** "Uplink" already means the **Black Market Uplink** shop (`REDLINE_UPLINK_AND_CAPS.md`). Should the jamming device have another name, such as *the jammer* or *the counter-signal*?
-6. **Synchronization stays ambiguous?** Master §8 keeps open whether synchronization is evolution, liberation or assimilation, and asks not to settle it early. Jamming the merge suggests the corporations' version is assimilation. Should the game leave room to doubt whether jamming it was right?
-7. **Can a card be lost** (for example on a failed run, or at a DEAD DROP choice), and is each corporation's card always the same, or does it vary by run?
+### 8.2 Writing rules until the end
 
-No build task until these are answered; the presentation proposals then become Phase 5.
+- **Before the third card,** nothing on screen names the AI, says it controls the corporations, or explains the cards, the merge or the COUNTER-SIGNAL. The cards are "the data" or "the job".
+- **Hints are allowed** and should be oblique: speech synthesis, machine voices, old transmissions, the holes lining up, corporate copy that sounds a little too similar across all three corporations ("We'll take care of it." / "You're in good hands." / "Rest easy."). Nothing a player could take as an explanation.
+- **After the third card,** the reveal: the three corporations are one AI's faces, and it's about to complete the synchronization. Even then, the game doesn't say whether that would be evolution, liberation or assimilation. NUL/REM can doubt; the Rustler chooses to jam it anyway, because that's what Rustlers do.
+- The unknown employer (RUN-006) stays open; this doesn't decide who hired the Rustler.
 
+### 8.3 Presentation (CONCEPT, for approval)
+
+- **Each card is a corporate artefact:** that corporation's card stock, colour, emblem and patent print (HALCYON mint and silver, IRONWATCH navy and brass, LUCIDA lilac and rose-copper), carrying holes that look older than the print.
+- **Arrival:** on BREACH of a corporation's central Node, the card comes out of the core's slot or a pneumatic tube (§3.3) as a physical object, with a NUL/REM line (EV-33 lines fit).
+- **The holder:** a three-slot card holder taped to the zine HUD, "1/3", "2/3", "3/3". (RUSTLER-LOOK-001 keeps the HUD as it is; this is a small addition to it, for approval.)
+- **The holes line up.** When the cards are shown stacked, their holes start forming one pattern; it's only complete with all three. The player can see they belong together long before knowing why.
+- **The end:** after the third card, the reveal (§8.2), then the MÖBIUS is assembled from paper, foil and relays, reads the three cards and sends the COUNTER-SIGNAL. This sequence needs its own script and storyboard; not part of the first build.
+
+---
+
+## Part 3b — Build tasks for SIGNAL-001 (Phase 5, waiting for approval of §8.3)
+
+Same rules as Part 3: log under **SIGNAL-001** in `REDLINE_DEVELOPMENT_LOG.md`; nothing in the encounter rules changes.
+
+| Step | What | Done when |
+|---|---|---|
+| **SIG-5a** | **Card data and run state:** one fixed punch-card definition per corporation (id, corporation, hole pattern, art references); the run records which cards the Rustler holds; a card is awarded on BREACH of that corporation's central Node; a new run starts with none. No loss, no variation (§8.1). | Tests: each corporation awards its own card exactly once per run; cards survive save/load within a run; a new run has none. |
+| **SIG-5b** | **Hole patterns:** three 12-column × 8-row hole patterns, designed so each one alone looks like ordinary data and the three stacked form one recognisable figure (placeholder figure is fine; the designer picks the final one). | A fixture shows each card alone and the three stacked. |
+| **SIG-5c** | **Card holder and arrival** (§8.3): the three-slot holder on the HUD; the arrival animation and NUL/REM line on BREACH; reduced-motion version. Placeholder card art in each corporation's colours. | Screenshots: holder at 0/3, 1/3 and 3/3; the arrival on a HALCYON central-Node BREACH. |
+| **SIG-5d** | **Writing guard** (§8.2): every line that mentions the AI, the merge or the COUNTER-SIGNAL is tagged `reveal`; a test fails if a `reveal` line can show before the third card. | The test passes, and fails when a `reveal` line is wired to an earlier trigger. |
+
+**Out of scope for now:** the end sequence (reveal, MÖBIUS assembly, COUNTER-SIGNAL), and the final card art and hole figure.

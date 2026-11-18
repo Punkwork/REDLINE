@@ -86,7 +86,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
 | ADP-001 | Phase 2 (voice leaks, hesitation lines, corporate vocabulary) not yet approved. Approved and ready for Codex: Phase 1 (ADP-1a–f), then Phase 3 (ADP-3a–c). | Claude, 2026-11-17 | Partly answered |
-| SIGNAL-001 | The seven questions in `REDLINE_ATOMIC_DECO_PUNK.md` §8: one card per corporation?; what the player knows and when (RUN-006); the umbrella corporation and its name; its signal vs the First Signal; a name that doesn't clash with the Black Market Uplink; keeping synchronization ambiguous; losing or varying cards. No build until answered. | Designer direction, recorded by Claude, 2026-11-17 | Open |
+| SIGNAL-001 | Decided except: approve the punch-card presentation (`REDLINE_ATOMIC_DECO_PUNK.md` §8.3) and Phase 5 (SIG-5a–d); keep the working names COUNTER-SIGNAL and MÖBIUS; confirm the umbrella AI is the hidden AI. No Phase 5 build until approved. | Designer, recorded by Claude, 2026-11-17 | Mostly answered |
 
 ---
 
