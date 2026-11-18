@@ -21,7 +21,7 @@ This is the other half of the samizdat lineage (ZINE-002). Samizdat existed part
 
 Panopticon borrows the **structure** of this (quiet removal, euphemism, an invisible network of islands, an edited record, an underground that remembers), not its imagery. It is an analogy, not a depiction.
 
-*(Written from general knowledge; fact-check before any of it informs on-screen text.)*
+*(Inspiration, not a source to match: Panopticon is a made-up world and doesn't have to resemble real history exactly. No fact-check needed; designer, 2026-11-18.)*
 
 ## 3. Tone rules (ARCH-R1, APPROVED 2026-11-18)
 

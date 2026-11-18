@@ -93,7 +93,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ARCH-NAMES-001 names | The nine island names are working copy: the designer will check them against real care homes later. (Also still open: a fact-check of the gulag summary, ARCH §2, before it informs on-screen text.) | ARCH §4.0, §2 | WAITING |
+| ARCH-NAMES-001 names | The nine island names are working copy: the designer will check them against real care homes later. | ARCH §4.0 | WAITING |
 
 ---
 

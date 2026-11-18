@@ -76,7 +76,7 @@ Its cousins matter to Panopticon too:
 
 **Punk zines** (1970s on) are the Western cousin: the same DIY copying and hand-to-hand distribution, with far less at stake. **Panopticon's zine looks punk and carries samizdat's stakes.** The cut-and-paste, the photocopy grain and the irreverence are punk; the reason to make it, the danger of holding it and the duty to copy it are samizdat.
 
-*(Checked by the designer, 2026-11-18: "Samizdat history all good.")*
+*(Inspiration, not a source to match: Panopticon is a made-up world and doesn't have to resemble real history exactly. Designer, 2026-11-18: "Samizdat history all good.")*
 
 #### 2.2.2 Why the zine exists
 
