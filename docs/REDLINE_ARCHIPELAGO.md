@@ -49,7 +49,7 @@ Designer: **"The island names should resemble names of long-term care residences
 
 **Island name pool (APPROVED 2026-11-18, ARCH-COPY-001):**
 
-| Corporation | Working names | Small print (programme, APPROVED) |
+| Corporation | Island names (APPROVED) | Small print (programme, APPROVED) |
 |---|---|---|
 | **HALCYON** | Sunnyside Manor · Maple Grove Residence · Brookside Place | *A Halcyon Homesteads™ community* |
 | **IRONWATCH** | Pine Ridge Residence · Cedar Hill Care Centre · Stonebrook Lodge | *A SafeHarbor Residences™ property* |

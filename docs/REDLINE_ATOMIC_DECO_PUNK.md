@@ -295,7 +295,7 @@ Designer: "for #3 yes i want two deliberately unsettling features" (3a, 3b) and 
 7. ~~Approve Phase 2?~~ **Yes (2026-11-17).**
 8. ~~Approve the punch-card presentation and Phase 5? Names?~~ **Yes; names SYNCHRONIZATION SCRAMBLER / SCRAMBLE SYNC and M0'B\*L∞P (2026-11-17).**
 9. ~~Is the umbrella AI the hidden AI?~~ **Yes (2026-11-17).**
-10. ~~Rename the style to atompunk?~~ **No: Atomic Deco Punk stays; atompunk is the outward shorthand (§1.1, 2026-11-18).** The zine is the underworld's communication network, in samizdat's lineage, and the reasons it exists are explicit (ZINE-002, §2.2). The §1.1 and §2.2 examples (including the working title *THE CARBON*) are working ideas, for approval when they reach a build phase.
+10. ~~Rename the style to atompunk?~~ **No: Atomic Deco Punk stays; atompunk is the outward shorthand (§1.1, 2026-11-18).** The zine is the underworld's communication network, in samizdat's lineage, and the reasons it exists are explicit (ZINE-002, §2.2). *THE CARBON*, the §2.2.3 practices and the anti-paper lines are approved (ARCH-COPY-001, 2026-11-18); the other §1.1 and §2.2 examples are working ideas, for approval when they reach a build phase.
 
 No questions are open in this doc. Build order: **Phase 1 → Phase 2 → Phase 3 → Phase 5**, with Phase 4 fixtures added as each phase lands.
 
