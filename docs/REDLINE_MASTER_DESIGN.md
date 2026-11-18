@@ -38,6 +38,52 @@ The surrealism comes from the sincerity of the sales pitch. A cheerful orbit ani
 - [Dr. Grordbort’s](https://www.gregbroadmore.com/portfolio/dr-grordborts) gives imagined space-age technology the heft and finish of fabricated objects.
 - [BioShock’s Rapture](https://irrationalgames.ghoststorygames.com/insider/from-the-vault-evolution/) carries Deco styling from its architecture into the machines people use.
 
+#### ADP-001 — Claude's response: making the split reality felt (CONCEPT, 2026-11-17)
+
+*Proposals only; nothing here is approved. Written in response to the direction above. It builds on approved work (The Friendly Lie, CHROME-001, CARDS-001, RUSTLER-LOOK-001, FACADE-001) and doesn't change any of it.*
+
+**Naming.** Atomic Deco Punk is the umbrella style for the whole world. Raygun Gothic is its corporate half; the salvaged cartridges and zine HUD are its punk half. The paranoia comes from the friction between the two, so most proposals below are about where they touch.
+
+**Guiding rule: the chrome lies, the zine never does.** This extends Visual Language Rule 2. Corporate wording, backgrounds, ads, and even flavour records of the player's own past can be unreliable. Rules readouts (plaques, chips, response strip, numbers) are always true. The player can distrust the world without the game ever being unfair, and the Rustler layer becomes the one thing they trust, which is what makes it feel like home.
+
+**Visual**
+
+| Proposal | What it does | How it would be built |
+|---|---|---|
+| **Salvage flows from corporation to rig** | Shows hand-built elektronix made from the monolith's own products. CARDS-001 already uses "salvaged cartridge bodies"; this makes the salvage traceable. | Corporate appliances are designed from one shared parts library (lenses, dials, fins, grilles, enamel panels). Cartridges reuse those parts with a Rustler treatment: scratched-off logos, tape, exposed wire, Dymo or marker labels. A PATCHWORK upgrade, or hardware recycled after an encounter, could graft a part from an ICE the player broke onto that card instance (art only; no rules change). |
+| **The seam as a visible object** | Shows where the two worlds meet. | For when the HUD is revisited (RUSTLER-LOOK-001 keeps it as is for now): alligator clips on the chrome bezel, ribbon cable running off-screen, hand-drilled holes. The HUD should look clipped onto a machine it was never designed for. |
+| **Industrial scale behind the facades** | The corporations become systems the player is small inside, not just storefronts. | Background layers: pneumatic tubes carrying data capsules, conveyor lines, mainframe halls. Stolen data could arrive as a physical capsule or punched card on BREACH. |
+| **A Deco display face for corporate headlines** | Gives the corporations monumental lettering, separate from the body text. | One open-licence Deco display face (e.g. Limelight or Poiret One) for wordmarks, plaques' titles and propaganda; DM Sans stays for body copy. Stencil and hand lettering added beside Space Mono on the Rustler side. |
+
+**Tone and language**
+
+- **Corporate voice:** keep the FACADE-001 rule (more polite and more certain as the threat grows). Add 1950s newsreel narration, trademarked everyday words ("HALCYON Welcome™"), patent plates on appliances, and *Tomorrow* used as a quiet threat.
+- **Rustler voice:** punk respellings used sparingly (*elektronix*, *kontrol*), hand-numbered zine issues (run numbers could be issue numbers), crew in-jokes. It needs warmth: crew messages, zines dedicated "for Mags, who got traced." Paranoia hits harder when the player has people to lose.
+- **The voices leak as TRACE rises.** Friendly: separate. Cracking: corporate phrasing creeps into NUL/REM's notes ("let's take a breath together. no. break it."), and Rustler graffiti appears on corporate surfaces. Mask off: both voices on the same surface. Flavour only; the rule text never changes.
+
+**Sound** (extends the sound direction above)
+
+- **Two tracks play at once, and TRACE sets the mix.** The corporate track is lush and reverberant (exotica, theremin, organ, a three-note service chime as each company's sound logo). The Rustler track is dry and close (4-track cassette, tube amp, circuit-bent toys, relays). Friendly: the corporate track dominates. Cracking: it picks up wow and flutter and drifts out of tune while the Rustler track pushes through. Mask off: the jingle is back in tune and cheerful, over a low drone. *Build:* layered stems with Godot 4's `AudioStreamSynchronized` (4.3+), stem volumes and detune driven by the bleed value (below).
+- **Every card play is mechanical:** cartridge seat, toggle, relay clunk, tape tear. Nothing digital on the Rustler side.
+- **A hand-built radio** (map or DEAD DROP screen) that tunes between corporate broadcasts and pirate stations. Pirate stations can carry small useful rumours about upcoming Nodes, so listening pays.
+
+**World elements that feed the paranoia**
+
+1. **Ads that know you.** Loading screens and between-run screens show corporate ads written from the player's real local play data ("We noticed you favour Icepicks. HALCYON Home has a plan for people like you."). They get more accurate over runs. Stored locally, never sent anywhere; a settings toggle turns it off.
+2. **ICE react to hesitation.** Hovering a card for a long time gets a mood line ("Take your time!" / "Still deciding?"). Flavour only, never a penalty; it shows the game is watching *how* you play.
+3. **LUCIDA edits the record.** In LUCIDA runs, flavour lines in the event log are quietly rewritten after the fact ("You rested here."). Rules lines stay true (guiding rule above). Needs the readability rules: the rewrite never touches a number, a card name, or anything the player needs to make a decision.
+4. **Two voices on one page.** Lore arrives as corporate ephemera (manuals, warranties, safety pamphlets, newsreels) annotated by Rustlers in the margins.
+5. **The map is a defaced tourist map.** "Visit the City of Tomorrow!" in corporate print, with marker routes, crossed-out landmarks and warnings scrawled over plazas.
+6. **DEAD DROP as a workbench.** A basement under a corporate tower; PATCHWORK upgrades are shown as soldering a cartridge under a stolen HALCYON lamp.
+7. **The crowd is too happy.** Background figures in the corporate halls smile and wave, and now and then turn to follow the player a beat too long.
+
+**One control for all of it: the bleed value.** One value from 0 to 1, computed from TRACE and strikes (working curve: Friendly 0, Cracking about 0.2–0.6 matching the approved 20% reveal at its start, Strike modal 0.8, Mask off 1.0). It drives the hostile-background reveal and glitch shader, the music mix and detune, how much the voices leak, how often the crowd looks and ICE comment, and how degraded the photocopy look of the Rustler layer is (toner noise, misregistration). The world comes apart in sync, the whole effect can be tuned in playtests with one curve, and the reduced-motion and readability rules can cap it in one place.
+
+**Questions for the designer**
+1. Adopt "the chrome lies, the zine never does" as a rule?
+2. Which proposals should be specified next? Suggested first: the bleed value and the two-track music, because the HALCYON slice can test both.
+3. Are play-data ads and LUCIDA's record edits wanted, given they deliberately unsettle the player?
+
 ### VISUAL-DECISIONS-2026-11-17 — Approved visual decisions from VIS-001, CHROME-001 and CARDS-001 (APPROVED, 2026-11-17)
 
 Only choices the designer explicitly made on 2026-11-17 are recorded here. Everything else in that work (final art, working values, and Codex's "Interpretations to confirm") remains under review; see `docs/HANDOFF.md`, *Waiting on the designer*. Detail: `docs/REDLINE_VISUAL_LANGUAGE.md`, `docs/REDLINE_DEVELOPMENT_LOG.md` (2026-11-17 entries), and `docs/visual/`.
