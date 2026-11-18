@@ -286,6 +286,8 @@ engine/
 | ZINE-003 | SAMIZINE: the underworld's zine look (carbon, ditto, kidnapped corporate type, palimpsest, pocket wear, copy generations) | APPROVED | Designer, 2026-11-18 |
 | ARCH-001 | Being traced means disappearing to the Archipelago; ARCH-R1 tone rules; relocation defeat framing and persistent THE CARBON record; islands merge people one at a time to build the sync signal (secret until the third card); no one comes back | APPROVED | Designer, 2026-11-18 |
 | RELEASE-001 | Builds come only from a `release` branch fast-forwarded from `main`; each build tagged `playtest-N`; export no longer runs on pushes to `main` | APPROVED | Designer, 2026-11-18 |
+| EVENT-002 | Every SIGNAL UNCLEAR event offers a choice, except AMBUSH; MAINTENANCE WINDOW becomes heal 6 VITAE **or** −5 TRACE | APPROVED | Designer, 2026-11-18 |
+| EVENT-003 | New 10th SIGNAL UNCLEAR event (working name CARE PACKAGE): +5 Max VITAE or a random rare card; odds: AMBUSH 20%, BROKER 5%, the other eight share 75% | APPROVED | Designer, 2026-11-18 |
 | UPL-006a | DATA PURGE (SIGNAL UNCLEAR): remove 1 card for **+7 TRACE** (was +5) or −5 VITAE | APPROVED | Designer, 2026-11-18 |
 | DOCS-001 | Which docs are current: authority order (master design → Core Rules → topic docs; amendment tables win) and a list of current vs history/lore-only docs in CLAUDE.md = AGENTS.md §6; older docs carry a "not current for rules" note | APPROVED | Designer, 2026-11-18 |
 | DEV-001 | Claude Code is the main code developer; Claude (project) owns design; Codex takes isolated tasks on request; shared rules in CLAUDE.md = AGENTS.md | APPROVED | Designer, 2026-11-18 |

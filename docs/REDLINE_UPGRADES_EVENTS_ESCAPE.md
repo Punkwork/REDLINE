@@ -195,9 +195,11 @@ Each corporation's payload is an **encrypted data core** taken from its Central 
 
 **OPEN (story):** what each Signal fragment says, how NUL/REM reacts, and what the three fragments reveal together. These belong to the World Bible and are left to the designer.
 
-## 3. SIGNAL UNCLEAR events (9)
+## 3. SIGNAL UNCLEAR events (10)
 
 Each SIGNAL UNCLEAR Node holds one random event. Choices are always shown with their full costs.
+
+**EVENT-002 — every event offers a choice, except AMBUSH (APPROVED 2026-11-18).** Designer: "Giving the rustler choices in each of these random rooms helps to make them feel less unfair." Every SIGNAL UNCLEAR event, current and future, gives the Rustler at least two options (declining counts). AMBUSH is the one exception: it stays a surprise fight.
 
 | Event | What happens |
 |---|---|
@@ -207,11 +209,12 @@ Each SIGNAL UNCLEAR Node holds one random event. Choices are always shown with t
 | **FRIENDLY RUSTLER** | Another Rustler offers a trade: give **1 card** from your deck, receive **1 random card one rarity higher** (rare stays rare). Or decline. |
 | **HONEYPOT** | Unguarded CRED. Choose: take **40 CRED** and **+10 TRACE**, or leave it. |
 | **BLACK CLINIC** | Choose: pay **6 VITAE** to apply **1 PATCHWORK**, or leave. |
-| **MAINTENANCE WINDOW** | The corporation's systems are down for a moment: **heal 6 VITAE** and **−5 TRACE**. No choice needed. |
+| **MAINTENANCE WINDOW** *(changed by EVENT-002)* | The corporation's systems are down for a moment. Choose: **heal 6 VITAE**, or **−5 TRACE**. |
 | **AMBUSH** | It was ICE all along: a **single-layer ICE encounter** from the current tier, with normal rewards. |
 | **BLACK MARKET BROKER** | A dealer with something special. Choose: pay **15 VITAE** for a **random Ghostware**, or decline. |
+| **CARE PACKAGE** *(new, EVENT-003; working name)* | Another crew left supplies. Choose: **+5 Max VITAE** for the rest of the run (current VITAE also rises by 5), or a **random rare card**. |
 
-**Odds (working):** AMBUSH 20%; BLACK MARKET BROKER 5%; the other seven share the rest equally.
+**Odds (working):** AMBUSH 20%; BLACK MARKET BROKER 5%; the other eight share the rest equally (about 9.4% each).
 
 **VITAE costs** (DATA PURGE, BLACK CLINIC, BLACK MARKET BROKER) can only be chosen if you'd be left with at least 1 VITAE. KILLSWITCH doesn't cover them (P5-010).
 
@@ -256,7 +259,7 @@ This replaces the temporary arrangement in `REDLINE_ICE_CORP1.md` §8.2a.
 5. **The 3 HALCYON Ghostware** (§2.3), with VOICE MIMIC worded as "fails". — **APPROVED 2026-11-12 (P5-005)**
 
    **Design note (P5-005):** TRACE subroutines may later be able to **succeed or fail** as a mechanic in their own right. A trace reduced to 0 is not the same as a trace that **fails**: effects that say "fails" stop the trace entirely, while effects that reduce TRACE only change the amount. Future card wording should keep the two distinct.
-6. **The 9 SIGNAL UNCLEAR events** and their odds (§3). — **APPROVED 2026-11-12 (P5-006)**
+6. **The 9 SIGNAL UNCLEAR events** and their odds (§3). — **APPROVED 2026-11-12 (P5-006)**; now 10 (EVENT-003) with a choice in every event but AMBUSH (EVENT-002), 2026-11-18
 7. **HALCYON escape ICE** and the escape layout (§4). — **APPROVED 2026-11-12 (P5-007)**
 8. **Earning Ghostware during infiltration:** fragments, fixer contracts, and 2–3 Ghostware for sale at every Uplink (100 / 75 CRED) plus the BLACK MARKET BROKER event (§2.4). — **APPROVED 2026-11-12 (P5-008)**
 9. **The payload is an encrypted data core:** 1 of 3 Ghostware active immediately (usable during the escape); the rest stays encrypted until you escape and is then decrypted as a First Signal fragment; fragment content left OPEN (§2.5). Supersedes "keep the payload only if you escape" (UPL-007). — **APPROVED 2026-11-12 (P5-009)**
