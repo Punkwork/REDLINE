@@ -32,6 +32,8 @@ var konami_pos := 0
 var idle := 0.0
 var note_revision := 0
 var newsreel_index := 0
+var profile := PlayProfile.new()
+var personalized_ads := true
 var first_run := true
 var last_bloat := ""
 
@@ -131,6 +133,7 @@ func _load_flags() -> void:
 		var data = JSON.parse_string(FileAccess.get_file_as_string("user://redline_flags.json"))
 		if data is Dictionary:
 			first_run = not data.get("first_run_done", true)
+			personalized_ads = data.get("personalized_ads", true)
 			voice_on = data.get("voice_on", true)
 			reduced_motion = data.get("reduced_motion", false)
 			music_volume = clampf(float(data.get("music_volume", music_volume)), 0.0, 1.0)
@@ -139,7 +142,7 @@ func _load_flags() -> void:
 func _save_flags() -> void:
 	var f := FileAccess.open("user://redline_flags.json", FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"first_run_done": not first_run, "voice_on": voice_on, "reduced_motion": reduced_motion, "music_volume": music_volume, "music_muted": music_muted}))
+		f.store_string(JSON.stringify({"first_run_done": not first_run, "personalized_ads": personalized_ads, "voice_on": voice_on, "reduced_motion": reduced_motion, "music_volume": music_volume, "music_muted": music_muted}))
 
 func _build_layout() -> void:
 	var bg := ColorRect.new()
@@ -302,6 +305,7 @@ func _new_run() -> void:
 func _start_as(who: String) -> void:
 	friendly.reset_session()
 	g.new_run(who)
+	profile.reset(g)
 	nr.rustler = CardDB.RUSTLERS[who].nulrem
 	if first_run:
 		g.events.append({"t": "EV-02"})
@@ -459,6 +463,7 @@ func refresh() -> void:
 	if spinning and spin_built:
 		spin_deferred = true   # don't rebuild (and restart) the reels mid-spin
 		return
+	profile.observe(g, personalized_ads)
 	_detect_tumbles()
 	_observe_break_audio()
 	_handle_events()
@@ -1565,6 +1570,21 @@ func _overlay_select() -> void:
 	motion_option.button_pressed = reduced_motion
 	motion_option.toggled.connect(set_reduced_motion)
 	v.add_child(motion_option)
+	var ads := CheckBox.new()
+	ads.text = "Ads that know you"
+	ads.button_pressed = personalized_ads
+	ads.toggled.connect(func(on):
+		personalized_ads = on
+		profile.reset(g)
+		_save_flags())
+	v.add_child(ads)
+	var reset_ads := Button.new()
+	reset_ads.text = "Clear ad history"
+	reset_ads.pressed.connect(func():
+		if LocalRecord.erase(PlayProfile.PATH):
+			profile.reset(g)
+			reset_ads.text = "Ad history cleared")
+	v.add_child(reset_ads)
 	var music_options := HBoxContainer.new()
 	music_options.add_child(_lbl("Music volume", 15, TEXT))
 	var volume_slider := HSlider.new()
@@ -1630,10 +1650,20 @@ func _show_newsreel(who: String) -> void:
 	var narration := FriendlyLook.label(reel.text, 21, TEXT, friendly_skin.font)
 	narration.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	v.add_child(narration)
+	_add_profile_ad(v)
 	v.add_child(FriendlyLook.button("CONTINUE", func(): _start_as(who)))
+
+func _add_profile_ad(column: VBoxContainer) -> void:
+	var ad := PlayProfile.ad(friendly_skin.corporation, personalized_ads)
+	if ad.is_empty(): return
+	column.add_child(FriendlyLook.label(ad.title, 28, TEXT, friendly_skin.display_font))
+	var text := FriendlyLook.label(ad.text, 17, TEXT, friendly_skin.font)
+	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	column.add_child(text)
 
 func _overlay_end(title: String, sub: String) -> void:
 	var v := _dim_box(title, sub, 700)
+	_add_profile_ad(v)
 	var b := Button.new()
 	b.text = "New run"
 	b.custom_minimum_size = Vector2(0, 52)

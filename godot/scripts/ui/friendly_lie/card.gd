@@ -132,6 +132,15 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   elif id=="CORTEX_BUFFER" or d.type=="PROTOCOL": index=5
   var tile:=AtlasTexture.new(); tile.atlas=atlas; tile.filter_clip=true; tile.region=Rect2(Vector2((index%3)*atlas.get_width()/3,(index/3 as int)*atlas.get_height()/2),Vector2(atlas.get_width()/3,atlas.get_height()/2))
   var illustration:=TextureRect.new(); illustration.name="TonerIllustration"; illustration.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; illustration.texture=tile; illustration.position=Vector2(16,art_y); illustration.size=Vector2(128,art_h); illustration.clip_contents=true; illustration.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED; illustration.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(illustration)
+  var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
+  if graft in Game.GRAFT_PARTS:
+   illustration.hide()
+   var overlay := GraftArt.new()
+   overlay.name = graft
+   overlay.position = illustration.position
+   overlay.size = illustration.size
+   overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+   body.add_child(overlay)
   var box := ArtBox.new(); box.position=Vector2(16,art_y); box.size=Vector2(128,art_h); box.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(box)
  if corp:
   var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(16,art_y); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)

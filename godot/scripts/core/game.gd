@@ -75,6 +75,12 @@ var animate := false          # UI plays the Corporation Response step by step (
 # --- output for UI and NUL/REM ---
 var events: Array = []        # [{t: "EV-07", ...}]
 var log: Array = []
+var log_tags := {}
+var lucida_pending: Array[Dictionary] = []
+var broken_ice := {}
+var strikes_by_corp := {}
+
+
 
 func _init(seed_value: int = -1) -> void:
 	if seed_value >= 0:
@@ -96,6 +102,11 @@ func new_run(who: String = "GENERALIST") -> void:
 	rustler = who
 	run_deck.clear()
 	log.clear()
+	log_tags.clear()
+	lucida_pending.clear()
+	played.clear()
+	broken_ice.clear()
+	strikes_by_corp.clear()
 	for id in CardDB.RUSTLERS[rustler].starter:
 		run_deck.append(_new_inst(id))
 	vitae = START_VITAE
@@ -207,6 +218,7 @@ func skip_ready_rig() -> void:
 
 func _start_encounter() -> void:
 	var L: Dictionary = node.layers[layer]
+	lucida_pending.clear()
 	enc = {"ice": [], "reserve": L.reserve, "reserve_start": L.reserve, "turn": 0, "breached": false,
 		"spam_filter_used": false, "cortex_buffer_used": false, "failsafe_used": false,
 		"reactive_said": false, "breaks_turn": 0, "ghost": false, "pending_discard": 0, "bw_drain": 0, "bw_drained": 0,
@@ -367,6 +379,7 @@ func _roll_fortress_pulp() -> void:
 
 func _start_turn() -> void:
 	enc.turn += 1
+	_update_lucida_record()
 	enc["last_tags"] = []
 	enc["tag_counts"] = {}
 	enc["chain_draws"] = {}
@@ -1223,6 +1236,9 @@ func _do_break(i: int, s: int) -> bool:
 	var ice: Dictionary = enc.ice[i]
 	ice.break_progress[s] += 1
 	ice.broken[s] = ice.break_progress[s] >= deadlock_steps(ice_definition(ice).subs[s])
+	if ice.broken[s]:
+		broken_ice[ice.id] = int(broken_ice.get(ice.id, 0)) + 1
+		if corporation == "LUCIDA": _say_flavour("break_notice")
 	if ice.broken[s] and ice_definition(ice).type == "TUMBLER":
 		var showing := active_subs(i)
 		if not showing.is_empty(): ice.rot = showing[0]
@@ -1471,6 +1487,8 @@ func add_trace(n: int, during_response: bool) -> void:
 
 func _strike() -> void:
 	strikes += 1
+	var corp := corporation
+	strikes_by_corp[corp] = int(strikes_by_corp.get(corp, 0)) + 1
 	match strikes:
 		1:
 			trace = 20
@@ -1529,8 +1547,46 @@ func _event(t: String, data: Dictionary = {}) -> void:
 	e["t"] = t
 	events.append(e)
 
+const LUCIDA_RECORD := {
+	"break_notice": ["You disturbed the quiet.", "You rested here."]
+}
+
 func _say(s: String) -> void:
+	log_tags[log.size()] = "rules"
 	log.append(s)
+
+func _say_flavour(key: String) -> void:
+	if not LUCIDA_RECORD.has(key): return
+	var index := log.size()
+	log_tags[index] = "flavour"
+	log.append(LUCIDA_RECORD[key][0])
+	lucida_pending.append({"index": index, "turn": enc.turn + 1 + index % 2, "key": key})
+
+func _update_lucida_record() -> void:
+	if corporation != "LUCIDA": return
+	for item in lucida_pending.duplicate():
+		if item.turn > enc.turn: continue
+		rewrite_flavour(item.index, LUCIDA_RECORD[item.key][1])
+		lucida_pending.erase(item)
+
+func rewrite_flavour(index: int, replacement: String) -> bool:
+	if log_tags.get(index) != "flavour" or index >= log.size(): return false
+	log[index] = "✎ " + replacement
+	return true
+
+const GRAFT_PARTS := ["CAPTCHA", "DOORBELL_CAM", "AUTO_RENEW"]
+
+# Called by PATCHWORK after the upgrade is applied to this physical cartridge.
+func attach_patchwork_graft(uid: int) -> String:
+	var instance := _find(run_deck, uid)
+	if instance.is_empty() or CardDB.def(instance.id).type == "BLOATWARE": return ""
+	if instance.has("graft"): return instance.graft
+	for part in GRAFT_PARTS:
+		if broken_ice.has(part):
+			instance.graft = part
+			return part
+	return ""
+
 
 func _shuffle(a: Array) -> void:
 	for i in range(a.size() - 1, 0, -1):

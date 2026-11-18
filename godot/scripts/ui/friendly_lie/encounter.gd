@@ -778,6 +778,7 @@ func update_hesitation(delta: float, now: float) -> void:
   hover_card = hover_uid if eligible else -1
  if eligible:
   hover_time += delta
+  if ui.personalized_ads: ui.profile.longest_hover = maxf(ui.profile.longest_hover, hover_time)
   if hover_time >= 4.0 and now >= hesitation_cooldown and hesitation_turn != game.enc.turn:
    var selected := -1
    var highest := -1
