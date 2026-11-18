@@ -1,6 +1,6 @@
 # PANOPTICON — ATOMIC DECO PUNK: MAKING THE SPLIT REALITY FELT
-**Version:** 0.1 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
-**Status:** **CONCEPT.** The designer asked for this doc and its build tasks (2026-11-17: *"yes save this as a design doc … with build tasks for codex"*). That isn't approval of the proposals. Build each phase in Part 3 only after the designer approves it; the questions in §7 are still open.
+**Version:** 0.2 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001
+**Status:** **Partly approved (2026-11-17).** Approved: **ADP-R1** with the designer's new definition of the zine (§2, §2.1), **Phase 1** (Part 3), and the two deliberately unsettling features, **ads that know you (ADP-3a)** and **LUCIDA record edits (ADP-3b)**. Everything else is still CONCEPT; the open questions are in §7. Build only approved tasks.
 **Builds on:** *Atomic Deco Punk — DIRECTION* in `REDLINE_MASTER_DESIGN.md` §1; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`, VIS-001); CHROME-001; CARDS-001; RUSTLER-LOOK-001; FACADE-001 (`REDLINE_CORPORATE_FACADES.md`).
 **For:** Codex (Godot build, `godot/`).
 
@@ -13,13 +13,34 @@
 **Atomic Deco Punk** is the umbrella style for the whole world, in the designer's words: the exuberance and faith in progress of the Atomic Age, the streamlined industrial design of Art Deco, and punk's DIY defiance. Engineers build and repair their own elektronix alongside the monolithic buildings and processes of the great corporations.
 
 - **Raygun Gothic is the corporate half:** the chrome facades, enamel appliances and sincere service voice.
-- **The punk half is the Rustler's:** salvaged 1950s cartridges and the photocopied zine HUD.
+- **The punk half is the Rustler's: the zine** (§2.1), meaning paper and retro-mutated technology with form stripped bare and function bolted on. Today that's the salvaged 1950s cartridges and the zine HUD.
 
 The game should make the player feel what it's like to live in a reality that tells two stories at once. Everything exists twice: as the corporation presents it, and as the Rustlers know it to be. The player never lives fully in either. Most of the proposals below work on **where the two halves touch**, because the unease comes from that friction.
 
 ## 2. Two rules
 
-**ADP-R1 — The chrome lies; the zine never does.** This extends Visual Language Rule 2 ("the rules are always in zine style"). Corporate wording, backgrounds, ads and flavour records of the player's own past may be unreliable. Rules readouts (plaques, rule chips, the response strip, every number, card name and cost) are **always true and always readable**. The player can distrust the world without the game ever being unfair, and the Rustler layer becomes the one thing they can trust, which is what makes it feel like home.
+**ADP-R1 — The chrome lies; the zine never does. (APPROVED, 2026-11-17)** Designer: "yes". This extends Visual Language Rule 2 ("the rules are always in zine style"). Corporate wording, backgrounds, ads and flavour records of the player's own past may be unreliable. Rules readouts (plaques, rule chips, the response strip, every number, card name and cost) are **always true and always readable**. The player can distrust the world without the game ever being unfair, and the Rustler layer becomes the one thing they can trust, which is what makes it feel like home.
+
+### 2.1 What the zine is (ZINE-001, APPROVED 2026-11-17)
+
+The designer redefined the zine for this world. It isn't only photocopied paper:
+
+> "it's zine and retro-mutated technology where form is stripped bare for bolted on function. So a zine could have the paper form a moebius strip in order to rig some foil-based antenna to jam a surveillance signal, using a version of QR codes, but in the form of barcodes and punchcards."
+
+What that means for design (the principles are the designer's; the examples are Claude's working interpretation):
+
+| Principle | Means | Examples |
+|---|---|---|
+| **Form stripped bare, function bolted on** | The opposite of the corporate shell. Nothing is there for looks; every part visibly does a job, and you can see how it was attached. | Exposed bolts, hose clamps, cable ties, solder blobs, tape; housings cut open; parts mounted on whatever was at hand. |
+| **Paper is a working material** | The zine is a device as well as a publication. Paper is folded, cut, twisted, laminated with foil and wired into working parts. | A Möbius strip of paper with a foil antenna that jams a surveillance signal; a folded paper horn as a speaker; a cut-out stencil as a signal mask; a strip of photocopied circuit as a fuse. |
+| **Retro-mutated technology** | Period technology (valves, relays, crystal radio, the 1950s cartridges) mutated by hand into something its makers never planned. | A corporate appliance part rewired into a cartridge (grafts, §3.1); a cartridge with a hand-wound coil bolted on. |
+| **The machine code is barcodes and punch cards** | This world's equivalent of QR codes. Rustlers write to machines in barcode strips and punched holes; it's how their paper talks to corporate systems. | A barcode strip printed along a zine's edge, punched-hole rows along a cartridge label, a punched-tape tail on a NUL/REM note, a jammer pattern made of punched holes. |
+
+**Rules for using it**
+- The codes are **decoration and world-building**, not a second rules channel. They never replace readable rule text (ADP-R1, readability rules). If a code ever needs to *mean* something in play, the designer decides that separately.
+- **No QR codes anywhere** in the Rustler layer: barcodes and punch cards only.
+- The **cartridges** (CARDS-001) already fit this definition; future card art should show the hack (what was bolted on, and why). For instance, GHOST SIGNAL (a CLOAK card) could be the Möbius-strip foil jammer.
+- The **zine HUD stays as it is for now** (RUSTLER-LOOK-001). This definition is the brief for its redesign whenever the designer revisits the HUD, and it shapes the seam (§3.2).
 
 **ADP-R2 — One value drives the split: bleed.** Every effect in §3–5 that changes with pressure reads one number, **bleed**, from 0 to 1, computed from TRACE and strikes. The world comes apart in sync, the whole effect can be tuned with one curve, and the reduced-motion and readability rules can cap it in one place.
 
@@ -46,8 +67,8 @@ For when the designer revisits the HUD (RUSTLER-LOOK-001 keeps it as is for now)
 ### 3.3 Industrial scale behind the facades (later, needs art)
 The corporations should feel like systems the player is a speck inside, not storefronts: pneumatic tubes carrying data capsules high in the atrium, conveyor lines, mainframe halls glimpsed through the Deco frames. Stolen data could arrive as a physical capsule or punched card on BREACH. This goes into the next round of background briefs (Corporate Facades §5), not into code.
 
-### 3.4 The photocopy wears under pressure
-The Rustler layer's photocopy look degrades with bleed: more toner speckle, slight misregistration of the panel shadows, darker edges. **Only on panel surfaces, borders and shadows, never on glyphs** (readability rule). At bleed 1.0 it should look like a 5th-generation copy, still fully readable.
+### 3.4 The rig wears under pressure
+The Rustler layer shows strain as bleed rises, like a hand-built rig running hot: more toner speckle and slight misregistration of the panel shadows (the paper), tape lifting at panel corners, foil crinkle and a faint flicker on the barcode and punched-hole strips (the bolted-on tech, §2.1). **Only on panel surfaces, borders, shadows and decorative strips, never on glyphs** (readability rule). At bleed 1.0 it should look like a rig held together by hand, still fully readable.
 
 ### 3.5 A Deco display face (needs a designer choice)
 DM Sans stays for corporate body copy. Corporate wordmarks, plaque titles, strike modals and propaganda could use one open-licence Deco display face, so the corporations read as monumental. Candidates: **Limelight**, **Poiret One** (both OFL, Google Fonts). On the Rustler side, stencil and hand lettering could join Space Mono for scrawls and graffiti (§4.3). No build task until the designer picks.
@@ -123,17 +144,19 @@ A hand-built radio on the map or DEAD DROP screen, tuning between corporate broa
 
 Build phase by phase, **each only after the designer approves it** (see §7). Log each step in `REDLINE_DEVELOPMENT_LOG.md` under **ADP-001**, note anything you had to invent as *Interpretations to confirm*, and record approved choices in `REDLINE_MASTER_DESIGN.md`. All numbers are tunable presentation values; put them in one data file (suggested `godot/data/atomic_deco_punk.json`). Names below are suggestions; adapt to the existing code. Re-run the rules suite after each task: **nothing in the rules changes**.
 
-### Phase 1 — Bleed and sound (testable in the HALCYON slice)
+### Phase 1 — Bleed and sound (APPROVED 2026-11-17; testable in the HALCYON slice)
+
+Designer: "2 yes".
 
 | Step | What | Where (current code) | Done when |
 |---|---|---|---|
 | **ADP-1a** | **Bleed value** (ADP-R2): a pure function of TRACE, strikes and whether the strike modal is showing, using the curve in §2. Smooth changes over ~400 ms; instant with `reduced_motion`. Expose the value for every presentation system; never read by rules code. | Computed next to `corporation_state` in `scripts/ui/friendly_lie/encounter.gd` (`update_corporation()`); the curve in the data file. | Unit tests cover each row of the §2 table, the post-strike floor of 0.2, and reduced motion. A debug readout shows bleed in the playtest build. |
-| **ADP-1b** | **Reveal follows bleed** (§2, needs §7 Q4): the `surveillance_layer` opacity follows bleed instead of switching on at Cracking; Strike and Mask off still swap to the full hostile background as now. | `apply_background()` in `encounter.gd`. | At TRACE 20 the reveal matches the approved 20%; it grows to the TRACE-39 value; Strike and Mask off look exactly as before. |
-| **ADP-1c** | **Photocopy wear** (§3.4): a CanvasItem shader on zine panel surfaces, borders and shadows (toner speckle, shadow misregistration up to 2 px, edge darkening), scaled by bleed. **Never applied to text nodes.** A cap for reduced motion (static speckle, no flicker). | Zine panels built in `encounter.gd` / `look.gd`; shader under `godot/themes/`. | Screenshots at bleed 0, 0.4 and 1.0 show the wear; every label still passes 4.5:1 contrast; no shader touches a glyph. |
+| **ADP-1b** | **Reveal follows bleed** (§2): the `surveillance_layer` opacity can follow bleed instead of switching on at Cracking; Strike and Mask off still swap to the full hostile background as now. **Q4 is still open:** build it behind a data flag `reveal_follows_bleed`, default **false** (fixed approved 20%). | `apply_background()` in `encounter.gd`. | With the flag off, Cracking looks exactly as now. With it on, TRACE 20 matches the approved 20% and grows to the TRACE-39 value. Strike and Mask off look exactly as before either way. |
+| **ADP-1c** | **Rig wear** (§3.4, updated for ZINE-001): a CanvasItem shader on zine panel surfaces, borders and shadows (toner speckle, shadow misregistration up to 2 px, edge darkening), scaled by bleed; plus simple overlays for lifting tape corners. Add a thin decorative barcode or punched-hole strip to the Node and TRACE tags (§2.1; no QR codes), which flickers faintly at high bleed. **Never applied to text nodes.** A cap for reduced motion (static speckle, no flicker). | Zine panels built in `encounter.gd` / `look.gd`; shader under `godot/themes/`. | Screenshots at bleed 0, 0.4 and 1.0 show the wear; every label still passes 4.5:1 contrast; no shader touches a glyph. |
 | **ADP-1d** | **Two-track music** (§5.1): an `AudioStreamSynchronized` (Godot 4.3+) with stems *corporate*, *rustler* and *drone*. Stem volumes follow bleed. Wow and flutter on the corporate stem: a slow LFO on its pitch (±0 cents at bleed 0, up to about ±35 cents at 0.6), back to exactly in tune at 1.0. The corporate chime on strike. Separate music volume setting. **Placeholder stems:** short loops are fine (generated tones or simple synthesis); final music is out of scope. Record every source in `godot/audio/SOURCES.md`. | New `scripts/ui/friendly_lie/music.gd`; stems under `godot/audio/music/`. | In a scripted run from TRACE 0 to Mask off, the mix and detune audibly follow the §5.1 table; the stems stay in sync; the volume slider and mute work. |
 | **ADP-1e** | **Mechanical card sounds** (§5.2): sound hooks for card seated, Icepick drag, subroutine broken, END TURN, Bloatware shuffled in. Placeholder samples are fine. | `hand.gd`, `drop_target.gd`, `encounter.gd`. | Each action plays its sound once; no sound plays on hover alone. |
 
-### Phase 2 — Voice (flavour text only)
+### Phase 2 — Voice (flavour text only; CONCEPT, not yet approved)
 
 | Step | What | Done when |
 |---|---|---|
@@ -141,7 +164,9 @@ Build phase by phase, **each only after the designer approves it** (see §7). Lo
 | **ADP-2b** | **Hesitation lines** (§6.2): a hover timer per card (threshold 4 s, cooldown 20 s, max one per turn), shown in the speech bubble of the ICE with the highest mood. Disabled while dragging. | Hovering 4 s shows the right mood line; it never repeats within the cooldown; nothing in the game state changes. |
 | **ADP-2c** | **Corporate flavour vocabulary** (§4.1): trademarked words in toasts and non-fight copy, patent plates on mascot shells, a newsreel line on the loading screen. | The HALCYON slice shows each at least once; the copy is logged for approval. |
 
-### Phase 3 — Paranoia features (only after the designer answers §7 Q3)
+### Phase 3 — Paranoia features (ADP-3a and ADP-3b APPROVED 2026-11-17; ADP-3c still CONCEPT)
+
+Designer: "for #3 yes i want two deliberately unsettling features". Build 3a and 3b after Phase 1. Grafts (3c) weren't part of that answer and wait.
 
 | Step | What | Done when |
 |---|---|---|
@@ -161,8 +186,9 @@ Build phase by phase, **each only after the designer approves it** (see §7). Lo
 
 ## 7. Questions for the designer
 
-1. Adopt **ADP-R1, "the chrome lies; the zine never does"**, as a rule?
-2. Approve **Phase 1** (bleed, photocopy wear, two-track music, card sounds) for the HALCYON slice?
-3. Are the deliberately unsettling features wanted: **ads from real play data** (§6.1) and **LUCIDA rewriting the record** (§6.3)? And grafts (§3.1)?
+1. ~~Adopt ADP-R1?~~ **Yes (2026-11-17)**, with the zine redefined (§2.1).
+2. ~~Approve Phase 1?~~ **Yes (2026-11-17).**
+3. ~~Ads from real play data and LUCIDA rewriting the record?~~ **Yes to both (2026-11-17).** Still open: **grafts** (§3.1, ADP-3c)?
 4. Should the hostile reveal **grow with bleed** through Cracking (from the approved 20% at TRACE 20 to about 60% at TRACE 39), or stay fixed at 20%?
 5. Display face for corporate headlines: Limelight, Poiret One, another, or none?
+6. **New, from ZINE-001:** should the barcodes and punch cards ever *mean* something in play (for example, a punched pattern you have to match to jam an ICE), or stay decoration and world-building?

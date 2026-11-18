@@ -85,7 +85,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
-| ADP-001 | The five questions in `REDLINE_ATOMIC_DECO_PUNK.md` §7: adopt "the chrome lies; the zine never does"; approve Phase 1 (bleed, photocopy wear, two-track music, card sounds); whether play-data ads, LUCIDA record edits and grafts are wanted; whether the Cracking reveal grows with bleed; a Deco display face. Codex: don't build any ADP phase until it's approved. | Claude, 2026-11-17 | Open |
+| ADP-001 | Still open in `REDLINE_ATOMIC_DECO_PUNK.md` §7: grafts (ADP-3c); whether the Cracking reveal grows with bleed (Q4); a Deco display face (Q5); whether barcodes and punch cards ever mean something in play (Q6). Approved and ready for Codex: Phase 1 (ADP-1a–e), then ADP-3a and ADP-3b. | Claude, 2026-11-17 | Partly answered |
 
 ---
 

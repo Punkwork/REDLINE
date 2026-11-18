@@ -38,14 +38,19 @@ The surrealism comes from the sincerity of the sales pitch. A cheerful orbit ani
 - [Dr. Grordbort’s](https://www.gregbroadmore.com/portfolio/dr-grordborts) gives imagined space-age technology the heft and finish of fabricated objects.
 - [BioShock’s Rapture](https://irrationalgames.ghoststorygames.com/insider/from-the-vault-evolution/) carries Deco styling from its architecture into the machines people use.
 
-#### ADP-001 — Making the split reality felt (CONCEPT, 2026-11-17)
+#### ADP-001 — Making the split reality felt (PARTLY APPROVED, 2026-11-17)
 
-Claude's response to the direction above, saved as **`docs/REDLINE_ATOMIC_DECO_PUNK.md`** at the designer's request, with build tasks for Codex. *Proposals only; nothing is approved. Build each phase only after the designer approves it.* It builds on The Friendly Lie, CHROME-001, CARDS-001, RUSTLER-LOOK-001 and FACADE-001 and changes none of them or any rule.
+Claude's response to the direction above, saved as **`docs/REDLINE_ATOMIC_DECO_PUNK.md`** at the designer's request, with build tasks for Codex. It builds on The Friendly Lie, CHROME-001, CARDS-001, RUSTLER-LOOK-001 and FACADE-001 and changes none of them or any rule.
 
-- **Proposed rules:** *ADP-R1, "the chrome lies; the zine never does"* (corporate wording, ads and flavour records may be unreliable; rules readouts are always true); *ADP-R2, one bleed value* (0–1, from TRACE and strikes) drives every pressure effect.
-- **Proposals:** salvaged corporate parts grafted onto cartridges; the photocopy look wearing with bleed; corporate and Rustler voices leaking into each other; two-track music whose mix and detune follow bleed; mechanical card sounds; ads written from local play data; ICE reacting to hesitation; LUCIDA rewriting flavour lines in the log; plus later ideas (HUD seam, industrial background layers, radio, defaced tourist map, DEAD DROP workbench, watching crowd).
-- **Build tasks:** Phase 1 bleed and sound (ADP-1a–e), Phase 2 voice (ADP-2a–c), Phase 3 paranoia features (ADP-3a–c), Phase 4 fixtures (ADP-4a).
-- **OPEN:** the five questions in the doc's §7 (adopt ADP-R1; approve Phase 1; whether play-data ads, LUCIDA record edits and grafts are wanted; whether the Cracking reveal grows with bleed; a Deco display face).
+**Approved by the designer (2026-11-17):**
+- **ADP-R1 — The chrome lies; the zine never does.** Corporate wording, backgrounds, ads and flavour records of the player's past may be unreliable; rules readouts (plaques, rule chips, the response strip, every number, card name and cost) are always true and always readable. Designer: "yes".
+- **ZINE-001 — The zine is redefined.** In this world the zine isn't only photocopied paper: "it's zine and retro-mutated technology where form is stripped bare for bolted on function. So a zine could have the paper form a moebius strip in order to rig some foil-based antenna to jam a surveillance signal, using a version of QR codes, but in the form of barcodes and punchcards." So: nothing on the Rustler side is there for looks; paper is a working material (folded, wired, foil-laminated into devices); period technology is mutated by hand; and the Rustlers' machine code is **barcodes and punch cards, never QR codes**. The codes are decoration and world-building, not a second rules channel, unless the designer decides otherwise (doc §7 Q6). The cartridges already fit; the zine HUD stays as is for now (RUSTLER-LOOK-001), and this definition is the brief for its eventual redesign. Detail and working examples: doc §2.1.
+- **Phase 1 build tasks (ADP-1a–e):** the bleed value (ADP-R2), the reveal following bleed behind a flag that stays off until Q4 is answered, rig wear on the zine panels (updated for ZINE-001), two-track music, mechanical card sounds. Designer: "2 yes".
+- **Two deliberately unsettling features:** **ads that know you** (written from local play data, with an off switch; ADP-3a) and **LUCIDA rewriting flavour lines in the event log** (never rules lines; ADP-3b). Designer: "for #3 yes i want two deliberately unsettling features". Build after Phase 1.
+
+**Still CONCEPT:** Phase 2 (voice leaks, hesitation lines, corporate vocabulary), grafts (ADP-3c), and the later ideas (HUD seam, industrial background layers, radio, defaced tourist map, DEAD DROP workbench, watching crowd).
+
+**OPEN:** grafts; whether the Cracking reveal grows with bleed (Q4); a Deco display face (Q5); whether barcodes and punch cards ever carry meaning in play (Q6).
 
 ### VISUAL-DECISIONS-2026-11-17 — Approved visual decisions from VIS-001, CHROME-001 and CARDS-001 (APPROVED, 2026-11-17)
 
