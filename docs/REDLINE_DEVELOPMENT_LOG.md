@@ -4,15 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — VIS-001a: fixed Rustler theme and corporation skin resources (Codex)
-
-**Commit tag:** `vis-001a`. Added DM Sans variable font (400/500/700 UI weights), Space Mono regular/bold, both SIL OFL licenses, fixed toner/paper/highlighter Rustler theme, and HALCYON/IRONWATCH/LUCIDA skin resources. HALCYON is selected for the slice; the other corporations are data only. Runtime copies of the supplied backgrounds and mascot SVGs are packaged under Godot assets so exports do not depend on files outside res://.
-
-**Interpretations to confirm:** only HALCYON has supplied hostile background art; the other two resources leave that texture unset rather than reusing HALCYON art. Corporate fonts and palettes are isolated from the invariant Rustler theme.
-
-**Validation:** Godot 4.3 editor import and script/resource parsing. No gameplay data or values changed. ZEROED/TUMBLE from PR #9 were integrated into this feature branch first; stabilization itself is unchanged.
-
-
 ## 2026-11-17 — VIS-001b: encounter scaffold and paper hand (Codex)
 
 **Commit tag:** `vis-001b`. Added a 1600×1000 encounter presentation inside the existing main controller: corporate app background, node/TRACE tags, reserve and deck data, fixed zine HUD, response strip, stationary NUL/REM note, RIG/RACK strip, END TURN and END RUN. Existing map/reward/choice flows remain with the controller. Six 146×218 paper cards use hard shadows and highlights; 7+ fan without changing deck or hand limits. Hover, wheel and arrow browsing bring each card forward. Bloatware uses the corporate font, rounded white body and red header.
@@ -395,6 +386,20 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 Designer left the relocation lines to Claude's discretion ("generate a number of them, let's say 10 or 15, and I will review and approve"), then approved all 15 and the proposal to keep the first-draft names as programme small print ("Perfect- add them"). `REDLINE_ARCHIPELAGO.md` v0.4 §4.0: 15 numbered lines, five per corporation; small print *Halcyon Homesteads™*, *SafeHarbor Residences™*, *Long Rest Retreats™* under the generic island names; the defeat notice uses one approved line. Master design and HANDOFF updated (commit 7eeb5a7); the island name pool and anti-paper lines are still waiting. **Interpretations to confirm:** "Perfect- add them" read as approving both the 15 lines and the programme names; the small-print wording (community / property / home). **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex).
+
+## 2026-11-18 — ARCH-SLANG-001: the Rustlers say ’Pelago (Claude)
+
+Designer: "In all Rustler references to the archipelago should be written as pelago with an apostrophe before the P." `REDLINE_ARCHIPELAGO.md` v0.5: tone rule 6; every on-screen Rustler/underworld reference (THE CARBON, *NOTES FROM THE ’PELAGO*, NUL/REM, graffiti, map, reveal) uses ’Pelago with U+2019; the full word stays in docs only; ARCH-1c guards updated (no "Archipelago" on screen; no "’Pelago" in corporate or rules strings). Master design and HANDOFF updated; the SAMIZINE design canvas updated to match. **Interpretations to confirm:** the full word never appears on screen, the reveal included. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — ARCH-SLANG-001 confirmed: ’Pelago even at the end (Claude)
+
+Designer: "Don't use the term archipelago, except in game documents. Pelago is the official in-game terminology to be used even at the very end." Closes the interpretation from the previous entry: the reveal says ’Pelago too. `REDLINE_ARCHIPELAGO.md` rule 6 and §6, and the master design, updated. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — ZINE-003: SAMIZINE, the underworld's zine look (Claude)
+
+Designer: "Let's build a unique new look for the zines in this game, a mashup between zines and samizdat. Something never before seen." Built as a design canvas (https://claude.ai/artifact/G84PwRDUPwMSvAYkBxmudW) with five boards: style sheet, THE CARBON #14 cover, the ledger page, NOTES FROM THE ’PELAGO over a Sunnyside Manor brochure, copy generations 1–5. Review rounds: (1) the rumour now reads "The lights and the walls, both. They're talking to each other. About you."; generations 3–5 more faded and offset; pocket wear (quarter folds, creases, frayed and grimy edges); (2) ’Pelago throughout (ARCH-SLANG-001). Accepted: "Perfect. Save whatever information is necessary, including the artifacts." **Docs:** new `REDLINE_SAMIZINE.md` (ZINE-003); `docs/visual/samizine/` (five PNG boards, review PDF v3, canvas sources, README); master design §1 and register; HANDOFF note and Done row. **Interpretations to confirm:** "Perfect" read as approving the SAMIZINE look; it applies to in-world publications and the defeat/DEAD DROP CARBON pages, not the HUD (RUSTLER-LOOK-001). New font: Special Elite (Apache 2.0). **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001a: fixed Rustler theme and corporation skin resources (Codex).
 
 ## 2026-11-18 — ADP-001 Phase 2 and ADP-4a (Codex)
 

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Copy generations one to five</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1240px; height: 440px; box-sizing: border-box; padding: 40px 48px; background: #DCDDD2; font-family: 'Special Elite', 'Courier New', monospace; color: #23277A; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: 3px; color: #2E3270">COPY GENERATIONS · HOW FAR HAS THIS PAGE TRAVELLED?</div>
+<div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #3B3F7E">Decoration only. Never applied to rule text.</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; flex-grow: 1">
+<div style="background: #F4F5EC; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 3px 3px 0 rgba(0,0,0,.12)">
+<div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #2E3270">GEN 1 · THE RIBBON</div>
+<div style="font-size: 19px; line-height: 1.45; color: #1C2070">Read it, copy it, pass it on.</div>
+<div style="font-size: 13px; color: #3B3F7E; margin-top: auto">Crisp. Straight from the maker's typewriter.</div>
+</div>
+<div style="background: #F0F1E7; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 3px 3px 0 rgba(0,0,0,.12); transform: rotate(-0.4deg)">
+<div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #2E3270">GEN 2 · FIRST CARBON</div>
+<div style="font-size: 19px; line-height: 1.45; color: #23277A; text-shadow: 0.8px 0.5px 0 rgba(35,39,122,.35)">Read it, copy it, pass it on.</div>
+<div style="font-size: 13px; color: #3B3F7E; margin-top: auto">A soft doubled edge.</div>
+</div>
+<div style="background: #ECEDE2; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 3px 3px 0 rgba(0,0,0,.12); transform: rotate(0.6deg)">
+<div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #2E3270">GEN 3 · DITTO RUN</div>
+<div style="font-size: 19px; line-height: 1.45; color: #6A4FA0; opacity: .82; text-shadow: 2.6px 1.2px 0 rgba(106,44,154,.42), -1.2px 0.4px 0 rgba(35,39,122,.22)">Read it, copy it, pass it on.</div>
+<div style="font-size: 13px; color: #3B3F7E; margin-top: auto">Ink drifts violet and pales; the ghost pulls away.</div>
+</div>
+<div style="background: #E6E7DB; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 3px 3px 0 rgba(0,0,0,.12); transform: rotate(-0.8deg)">
+<div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #2E3270">GEN 4 · REBUILT COPIER</div>
+<div style="font-size: 19px; line-height: 1.45; color: #6F6B94; opacity: .72; text-shadow: 4px 2px 0 rgba(79,74,126,.38), -2px 1px 0 rgba(17,17,17,.16); transform: skewX(-3deg) translateX(3px); filter: blur(0.3px)">Read it, copy it, pass it on.</div>
+<div style="font-size: 13px; color: #3B3F7E; margin-top: auto">Badly misregistered, on purpose: it defeats the fingerprint.</div>
+</div>
+<div style="background: #E0E1D4; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 3px 3px 0 rgba(0,0,0,.12); transform: rotate(1deg)">
+<div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #2E3270">GEN 5 · MANY HANDS</div>
+<div style="font-size: 19px; line-height: 1.45; color: #7E7C9A; opacity: .62; text-shadow: 5px 2.6px 0 rgba(94,92,128,.32), -2.4px 1.2px 0 rgba(94,92,128,.22); transform: skewX(-2deg) translateX(-2px) rotate(-1deg); filter: blur(0.7px)">Read it, copy it, pass it on.</div>
+<div style="font-size: 13px; color: #3B3F7E; margin-top: auto">Faint and soft. Someone carried this a long way.</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1240,"height":440}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
