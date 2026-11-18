@@ -1845,3 +1845,25 @@ Average end deck sizes GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.8
 **Changed:** hostile background is an illustrated edit of the same atrium/perspective, revealing clean observation galleries, cameras, processing rails and restraint cradles under controlled red light. Cracking exposes a restrained 20% glimpse beneath the existing warnings; strike 1 switches to the hostile lighting and a sculpted chrome modal; strike 2 keeps the revealed environment. Generated backgrounds contain no game text. The actual Game strike/TRACER/Black ICE transitions still own the state. Paper cards and counters keep their style.
 
 **Samples:** `04a-cracking.png`, `04b-first-strike.png`, `04c-mask-off.png`. Stage-4 Godot fixture reports zero failures, including readable cards/illustration bounds and scan widths in the three-ICE state. **Interpretations to confirm:** 20% Cracking reveal is a working compositing value; scene treatment and generated environment art are provisional. No game rule, TRACE threshold or card insertion behaviour changed.
+
+## 2026-11-17 — CHROME-001 step 5: clear interactions and refreshed five-step review set (Codex)
+
+**Commit tag:** `chrome-001-step5`. Legal subroutine targets get dashed lime outlines and a solid hover border; the separate top-center feedback panel shows the actual selected Icepick, target, BW cost and MARGIN, or the engine's rejection reason. Successful breaks confirm actual BW spent and update the struck rule/mood. The drag cursor is small; duplicate native tooltips are suppressed during drag to avoid covering rules. Raised/targeted hand cards get a lime paper edge. Normal click-to-break, hidden rules, immediate TUMBLE and reduced motion remain. Eight UI scripts run in CI, including native compatible/incompatible Chrome drags and bounded card illustrations. No core Game/CardDB/IceDB files or rule values were changed by CHROME-001.
+
+**Samples:** ten separate full-screen Godot PNGs: 01 layout, 02a cheery / 02b wary-lethal, 03 atrium, 04a Cracking / 04b strike / 04c Mask off, 05a legal target / 05b broken rule / 05c incompatible target. The first two steps were refreshed with the revised art and supersede the rejected flat/thin-rim samples. These are live captures, distinct from the generated concept benchmark. All samples are committed under `docs/visual/fixtures/chrome-001/`; workspace downloads also have a ZIP.
+
+**Validation:** Godot 4.3 imports; **357 rules checks passed, 0 failed**. All eight display-backed scripts exit 0 without script/assertion errors. Friendly Lie remains **170 checks, 0 failures** (including all 112 authored card texts); large-hand/playtest2/playtest3 checks report zero failures. All five per-step Chrome fixtures report zero failures, including native selected-pick cost/confirmation, incompatible-target explanation and no payment on a rejected drop. Render review caught and fixed an atlas TextureRect sizing issue; card illustration bounds are now checked. Thirty seeds per Rustler reproduce the pre-Chrome baseline:
+
+```text
+sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2
+sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5
+sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2
+sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7
+TESTS: 357 passed, 0 failed
+```
+
+GENERALIST also has two stalls, counted separately from deaths. Mean end decks GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE each.
+
+**Interpretations to confirm:** 2.5-second break confirmation and header placement are working UI choices. Illustrated shells, shared collage motifs and detailed backgrounds remain prototype art; final fidelity to the concept and undrawn ICE/copy await designer review. This implements one encounter direction, not a completed whole-game art collection. Audio development, Windows export and manual Windows playtest are deferred. One feature PR targets stabilization and includes unmerged PR #11/#9 dependencies; nothing was merged or pushed directly to the working branch. The guide/status/HANDOFF are updated in place; design documents and Claude project copies are unchanged.
+
+**Sample delivery:** `chrome-001-review` stores the ten selected PNGs. The download ZIP excludes unrelated regression screenshots; `chrome-001-step5` identifies the implementation commit.

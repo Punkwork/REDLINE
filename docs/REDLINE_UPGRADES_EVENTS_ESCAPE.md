@@ -216,7 +216,7 @@ Each SIGNAL UNCLEAR Node holds one random event. Choices are always shown with t
 
 **Odds (working):** AMBUSH 20%; BLACK MARKET BROKER 5%; the other eight share the rest equally (about 9.4% each).
 
-**Planned, in design (EVENT-004, DIRECTION 2026-11-18):** an 11th event offering a **dedicated, unusually powerful Ghostware** whose price is a **permanent Bloatware** card that can't be removed by normal means. Details are a design task in HANDOFF; not in the pool until approved.
+**Planned, in design (EVENT-004, DIRECTION 2026-11-18):** an 11th event offering a **dedicated, unusually powerful Ghostware** whose price is a **permanent Bloatware** card that can't be removed by normal means. **Each corporation has its own version.** Details are a design task in HANDOFF; not in the pool until approved.
 
 **VITAE costs** (DATA PURGE, BLACK CLINIC, BLACK MARKET BROKER) can only be chosen if you'd be left with at least 1 VITAE. KILLSWITCH doesn't cover them (P5-010).
 

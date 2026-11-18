@@ -4,28 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CHROME-001 step 5: clear interactions and refreshed five-step review set (Codex)
-
-**Commit tag:** `chrome-001-step5`. Legal subroutine targets get dashed lime outlines and a solid hover border; the separate top-center feedback panel shows the actual selected Icepick, target, BW cost and MARGIN, or the engine's rejection reason. Successful breaks confirm actual BW spent and update the struck rule/mood. The drag cursor is small; duplicate native tooltips are suppressed during drag to avoid covering rules. Raised/targeted hand cards get a lime paper edge. Normal click-to-break, hidden rules, immediate TUMBLE and reduced motion remain. Eight UI scripts run in CI, including native compatible/incompatible Chrome drags and bounded card illustrations. No core Game/CardDB/IceDB files or rule values were changed by CHROME-001.
-
-**Samples:** ten separate full-screen Godot PNGs: 01 layout, 02a cheery / 02b wary-lethal, 03 atrium, 04a Cracking / 04b strike / 04c Mask off, 05a legal target / 05b broken rule / 05c incompatible target. The first two steps were refreshed with the revised art and supersede the rejected flat/thin-rim samples. These are live captures, distinct from the generated concept benchmark. All samples are committed under `docs/visual/fixtures/chrome-001/`; workspace downloads also have a ZIP.
-
-**Validation:** Godot 4.3 imports; **357 rules checks passed, 0 failed**. All eight display-backed scripts exit 0 without script/assertion errors. Friendly Lie remains **170 checks, 0 failures** (including all 112 authored card texts); large-hand/playtest2/playtest3 checks report zero failures. All five per-step Chrome fixtures report zero failures, including native selected-pick cost/confirmation, incompatible-target explanation and no payment on a rejected drop. Render review caught and fixed an atlas TextureRect sizing issue; card illustration bounds are now checked. Thirty seeds per Rustler reproduce the pre-Chrome baseline:
-
-```text
-sim GENERALIST: 25/30 cleared; deaths by node { "CAPTCHA": 2, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 16.2
-sim ECHO: 17/30 cleared; deaths by node { "TERMS & CONDITIONS": 9, "CAPTCHA": 3, "CONSENT WALL": 1 }; survivors' avg end VITAE 9.5
-sim RIOT: 25/30 cleared; deaths by node { "CAPTCHA": 4, "TERMS & CONDITIONS": 1 }; survivors' avg end VITAE 15.2
-sim VECTOR: 20/30 cleared; deaths by node { "CAPTCHA": 6, "TERMS & CONDITIONS": 4 }; survivors' avg end VITAE 10.7
-TESTS: 357 passed, 0 failed
-```
-
-GENERALIST also has two stalls, counted separately from deaths. Mean end decks GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.87; average bloat tax 0.00 TRACE each.
-
-**Interpretations to confirm:** 2.5-second break confirmation and header placement are working UI choices. Illustrated shells, shared collage motifs and detailed backgrounds remain prototype art; final fidelity to the concept and undrawn ICE/copy await designer review. This implements one encounter direction, not a completed whole-game art collection. Audio development, Windows export and manual Windows playtest are deferred. One feature PR targets stabilization and includes unmerged PR #11/#9 dependencies; nothing was merged or pushed directly to the working branch. The guide/status/HANDOFF are updated in place; design documents and Claude project copies are unchanged.
-
-**Sample delivery:** `chrome-001-review` stores the ten selected PNGs. The download ZIP excludes unrelated regression screenshots; `chrome-001-step5` identifies the implementation commit.
-
 ## 2026-11-17 — CHROME-001 plaque revision: pearl enamel instead of black ICE panels (Codex)
 
 **Commit tag:** `chrome-001-enamel`.
@@ -414,3 +392,9 @@ Designer: one random room should give "+5 max vitae or choose a random rare card
 Designer: a random event offering "a specific ghostware that bestows a negative, a permanent bloatware in their deck that can't be removed through normal means"; it's "a benefit to the rustler, but because of how powerful it is, it comes with a negative"; a dedicated Ghostware (option B) that "needs designing". Recorded as DIRECTION in the master register, a "planned, in design" note in Upgrades §3, and a HANDOFF design task (Claude) carrying Claude's first-draft proposal (one Ghostware and Bloatware per corporation) and the open questions. Nothing approved beyond the direction. **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 4: the same atrium reveals its purpose (Codex).
+
+## 2026-11-18 — EVENT-004: one version per corporation (Claude)
+
+Designer: "each corp should have their own version of this 'reward'". Recorded in the master register, Upgrades §3 note and the HANDOFF design task (moved from open to decided). **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 5: clear interactions and refreshed five-step review set (Codex).
