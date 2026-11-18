@@ -165,7 +165,7 @@ Designer: "2 yes".
 
 ### Phase 2 — Voice (flavour text only; APPROVED 2026-11-17)
 
-Designer: "Phase 2 absolutely approved." Build after Phase 1.
+Designer: "Phase 2 absolutely approved." Build after Phase 1. **The copy for all three tasks is in `REDLINE_ADP_PHASE2_COPY.md`** (for the designer's approval; wire it up as written, with each line's approval status in the data so lines can be swapped or switched off).
 
 | Step | What | Done when |
 |---|---|---|

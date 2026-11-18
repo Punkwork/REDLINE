@@ -89,6 +89,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
+| ADP-001 Phase 2 copy | Approve the copy in `REDLINE_ADP_PHASE2_COPY.md` (voice leaks, graffiti and replies, hesitation lines, trademarks, toasts, patent plates, newsreels), especially the [hint] lines; pick graffiti faces (proposed: Stardos Stencil, Permanent Marker); OK the Carol Beer and Kraftwerk references (§5). Codex can build Phase 2 with the copy as written meanwhile. | Claude, 2026-11-17 | Open |
 
 ---
 
