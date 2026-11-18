@@ -4,15 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — VIS-001c: mascot silhouettes and independent scan tags (Codex)
-
-**Commit tag:** `vis-001c`. Recreated COOKIE WALL banner/cookie, CAPTCHA widget/grid/eye, DOORBELL pill/lens and AUTO-RENEW credit card. Added simple proposed ACCEPT ALL pill, REJECT ALL link, TERMS OF SERVICE document, CONSENT FORM clipboard and HOUSE CALL silhouette. Separate face features trace the supplied SVG coordinates. Primary corporate buttons represent DEADLOCKs; scan tags retain exact rule text, states, progress, hidden pool counts, passive rules and virus actions. Existing reel/tumble presentation is reused. Hidden effects remain hidden rather than being disclosed by decoration.
-
-**Interpretations to confirm — proposed copy (cheery / wary / lethal):** ACCEPT ALL: “Make yourself at home!” / “We noticed you hesitating.” / “YOUR CONSENT IS ASSUMED.” REJECT ALL: “You may change your preferences.” / “Are you absolutely sure?” / “THERE IS NO OPT OUT.” TERMS OF SERVICE: “A few little terms before we begin!” / “You haven't read the fine print.” / “YOU ALREADY AGREED.” CONSENT FORM: “Your choices matter to us!” / “We saved your preferences. All of them.” / “CONSENT IS MANDATORY.” HOUSE CALL: “Your technician is on the way!” / “Please stay where you are.” / “WE KNOW YOU'RE HOME.” FREE TRIAL (fallback for existing test data): “Try us. No strings attached!” / “Your trial is almost over.” / “YOU CANNOT CANCEL.” Proposal shapes follow the spec's table; final illustration remains out of scope.
-
-**Validation:** Godot 4.3 parsing and display-backed render checked against reference 08. Rule chips are independent of the corporate face and wording. Mascot/scan columns scroll only when the rule content needs more space, preserving text. No gameplay changes.
-
-
 ## 2026-11-17 — VIS-001d: per-ICE mood ladder and threat wording (Codex)
 
 **Commit tag:** `vis-001d`. Mood is computed from the actual next-response effects and broken state: cheery, wary, lethal, then knocked out on BREACH. Black ICE and Mask off force lethal. The main scene exposes `lethal_pulp_threshold` (default 5) for tuning. Facial features, panel colors/corners, speech and price-sticker wording follow mood; rule wording and values do not. New tumbled entries are remembered for the current turn; biggest visible PULP is red in both scan and response. Card-choice previews also use the paper card component.
@@ -401,3 +392,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 ## 2026-11-18 — ARCH-COPY-001: remaining working copy approved (Claude)
 
 Designer: "All approved" (asked about the HANDOFF WAITING row). Approved: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the nine island names, the defeat framing copy, the on-screen ’Pelago uses, and the polite anti-paper lines. `REDLINE_ARCHIPELAGO.md` v0.7, ADP §2.2.3, master design and HANDOFF updated (WAITING row moved to Done). Still to do before on-screen use: fact-check the historical summaries and check island names against well-known real care chains. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — ARCH-COPY-001 correction: island names stay working copy (Claude)
+
+Designer: "These are working copy names - will fact check later on care-home names. Samizdat history all good." The nine island names are working copy again (ARCH §4.0); a WAITING row in HANDOFF tracks the check. The samizdat history in ADP §2.2.1 is checked. The gulag summary (ARCH §2) still carries its fact-check note. **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001c: mascot silhouettes and independent scan tags (Codex).

@@ -1,6 +1,6 @@
 # PANOPTICON — THE ARCHIPELAGO: BEING TRACED MEANS DISAPPEARING
 **Version:** 0.7 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ARCH-001
-**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the programme small print and the 15 relocation lines are approved (ARCH-LINES-001); the island name pool, the defeat framing copy and the on-screen ’Pelago uses (§6) are approved too (ARCH-COPY-001, designer: "All approved"). On screen the Rustlers always say **’Pelago** (ARCH-SLANG-001, §3 rule 6). No rules change.
+**Status:** **APPROVED (2026-11-18).** The designer approved ARCH-R1, the tone rules (§3), and the defeat framing (§5); decided what the islands are for (§4.1: merging people with the machine one at a time to build the synchronization signal, tied to the ending); and ruled that no one comes back (§4). The build tasks in §8 are approved. Island names follow ARCH-NAMES-001 (§4.0: generic long-term care residence names); the programme small print and the 15 relocation lines are approved (ARCH-LINES-001); the defeat framing copy and the on-screen ’Pelago uses (§6) are approved too (ARCH-COPY-001, designer: "All approved"). The island names stay working copy until the designer checks them against real care homes. On screen the Rustlers always say **’Pelago** (ARCH-SLANG-001, §3 rule 6). No rules change.
 **Builds on:** ZINE-002 (`REDLINE_ATOMIC_DECO_PUNK.md` §2.2, especially reason 4 in §2.2.2, "the traced disappear from the record"); the Friendly Lie and the corporation states (`REDLINE_VISUAL_LANGUAGE.md`); FACADE-001; LUCIDA edits the record (ADP §6.3); SIGNAL-001 (ADP §8); defeat in `REDLINE_CORE_RULES.md` §4.
 
 ---
@@ -47,9 +47,9 @@ Designer: **"The island names should resemble names of long-term care residences
 - **There are many islands, and the names repeat across corporations.** The same kind of name could belong to any of them, which quietly hints that they're one system (SIGNAL-001) without saying so.
 - **Avoid exact names of well-known real care chains** (check before final copy); generic word combinations are fine.
 
-**Island name pool (APPROVED 2026-11-18, ARCH-COPY-001):**
+**Island name pool (working copy; designer will check the names against real care homes later):**
 
-| Corporation | Island names (APPROVED) | Small print (programme, APPROVED) |
+| Corporation | Island names (working copy) | Small print (programme, APPROVED) |
 |---|---|---|
 | **HALCYON** | Sunnyside Manor · Maple Grove Residence · Brookside Place | *A Halcyon Homesteads™ community* |
 | **IRONWATCH** | Pine Ridge Residence · Cedar Hill Care Centre · Stonebrook Lodge | *A SafeHarbor Residences™ property* |
