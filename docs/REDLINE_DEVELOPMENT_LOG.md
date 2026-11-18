@@ -4,12 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CHROME-001 step 2: chrome/enamel mascot objects (Codex)
-
-**Changed:** layered silver/chrome rims, pearl/mint enamel, restrained Deco ribs and card-corner fan, more substantial speech bubbles and corporate name/wordmark. AUTO-RENEW retains its card/chip silhouette and CAPTCHA its eye/grid widget. Individual face parts and actual mood computations are retained; the Rustler paper layer is unchanged. Speech scales to fit rather than clipping.
-
-**Samples:** `02a-mascots-cheery.png`, `02b-mascots-wary-and-lethal.png`. Godot stage-2 fixture reports zero failures: two actual Corporation Responses produce AUTO-RENEW STR 6 and the actual active CAPTCHA DEADLOCK can be broken to show lethal PULP 6. **Interpretations to confirm:** the six-layer silver rim and small geometric card fan are proposed construction details; the HALCYON wordmark is a placeholder. Background is deliberately still the old placeholder until step 3. No rule values changed.
-
 ## 2026-11-17 — CHROME-001 step 3: architectural atrium and illustrated materials (Codex)
 
 **Correction from designer:** “Those dont look anything like Chrome Deco corporate luxury above, photocopied Rustler resistance below”. The first thin-rim samples did not meet the target. A corrected concept PNG established the visual benchmark; this implementation now uses a dedicated pearl/celadon/chrome atrium, illustrated transparent appliance shells and monochrome collage card art. This replaces the blurred app placeholder for HALCYON. Face features, text and controls remain live and separate from artwork; the architecture contains no baked-in game UI. Paper cards and rules retain their own contrast.
@@ -406,3 +400,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — 
 ## 2026-11-18 — DOCS-001: which docs are current (Claude)
 
 Codex answered a question about Node types from outdated docs. Designer approved marking current versus outdated docs ("Yes"). `CLAUDE.md` = `AGENTS.md` §6 now gives the authority order (master design → Core Rules → topic docs; "Later amendments" tables win) and lists current docs and history/lore-only docs. One-line "not current for rules" notes added at the top of `REDLINE_BIBLE.md`, `PANOPTICON_CORE_DESIGN_AND_WORLDBUILDING.md`, `REDLINE_RULE_REVIEW_126.md`, `HALCYON_PLAYTEST3_IMPLEMENTATION.md` and `REDLINE_UI_NULREM_Design_For_Claude.md`; `REPOSITORY_STRUCTURE.md` updated. Master register and HANDOFF Done row. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — NAME-002 proposed: VITAE → SPARK, parked for review (Claude)
+
+Designer: VITAE "seems so out of place in this setting". After two rounds of options (NERVE, TICKER, GRIT, PULSE; then SPARK, STATIC, SPINE, INK), the designer chose SPARK as the candidate but wants to review it later "to see how much it fits before committing it". Recorded as a WAITING row in HANDOFF with the rationale, samples, alternatives and rename scope. Not a decision: nothing renamed, master design unchanged. **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 2: chrome/enamel mascot objects (Codex).

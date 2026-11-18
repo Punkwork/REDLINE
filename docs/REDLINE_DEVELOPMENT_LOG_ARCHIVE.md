@@ -1827,3 +1827,9 @@ Average end deck sizes GENERALIST/ECHO/RIOT/VECTOR: 15.03 / 14.83 / 18.27 / 14.8
 **Changed:** larger scan headings, rules and passive text; full-size scan panels; smaller illustration carriers preserve separate actor/flinch transforms. CHAIN tags sit in the rig strip; deck counters use three unclipped lines. Added a per-step screenshot fixture using real Generalist READY RIG, cards, AUTO-RENEW and CAPTCHA. All art/state values remain presentation only.
 
 **Sample:** `01-layout-and-readability.png`. Godot 4.3 stage-1 fixture reports zero failures, including actual card text fit and scan width. **Interpretations to confirm:** two-ICE silhouettes use 82% carriers to give rules more room; three-ICE carriers use 70%. These scales are working presentation values. No gameplay values changed.
+
+## 2026-11-17 — CHROME-001 step 2: chrome/enamel mascot objects (Codex)
+
+**Changed:** layered silver/chrome rims, pearl/mint enamel, restrained Deco ribs and card-corner fan, more substantial speech bubbles and corporate name/wordmark. AUTO-RENEW retains its card/chip silhouette and CAPTCHA its eye/grid widget. Individual face parts and actual mood computations are retained; the Rustler paper layer is unchanged. Speech scales to fit rather than clipping.
+
+**Samples:** `02a-mascots-cheery.png`, `02b-mascots-wary-and-lethal.png`. Godot stage-2 fixture reports zero failures: two actual Corporation Responses produce AUTO-RENEW STR 6 and the actual active CAPTCHA DEADLOCK can be broken to show lethal PULP 6. **Interpretations to confirm:** the six-layer silver rim and small geometric card fan are proposed construction details; the HALCYON wordmark is a placeholder. Background is deliberately still the old placeholder until step 3. No rule values changed.
