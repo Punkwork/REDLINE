@@ -110,6 +110,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | What | Commit / date |
 |---|---|---|
+| DOCS-001 | Agents were reading pre-redesign docs (Codex reported old Node types). `CLAUDE.md` / `AGENTS.md` §6 now lists which docs are current and the authority order; `REDLINE_BIBLE.md`, the 2026-11-10 core design doc, RULE-126, the Playtest 3 record and the old UI doc carry a "not current for rules" note. | 2026-11-18 (designer: "Yes"; Claude) |
 | DEV-001a | Tagged baseline, wrote the developer system map, corrected the matching working agreements and retired the old Godot handoff. DEV-001b is next with Claude Code. | `pre-claude-code` at `0a357e7` · [Implementation log](REDLINE_DEVELOPMENT_LOG.md#2026-11-18--dev-001a-claude-code-handoff-codex) |
 | ZINE-002 / ARCH-001 copy (ARCH-COPY-001) | Approved: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the defeat framing copy and the polite anti-paper lines. Samizdat history (ADP §2.2.1) checked by the designer. | 2026-11-18 (designer: "All approved"; recorded by Claude) |
 | ZINE-003 SAMIZINE | Design canvas built and reviewed in three rounds; spec `REDLINE_SAMIZINE.md`, boards, review PDF and canvas sources in `docs/visual/samizine/`. ARCH-SLANG-001 (’Pelago) and ARCH-NAMES-001 / ARCH-LINES-001 recorded. | 2026-11-18 (designer; recorded by Claude) |

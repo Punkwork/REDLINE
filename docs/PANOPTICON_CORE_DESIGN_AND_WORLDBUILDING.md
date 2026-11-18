@@ -1,5 +1,7 @@
 # PANOPTICON — Core Design & Worldbuilding
 
+> **Not current for rules (DOCS-001, 2026-11-18).** This is the 2026-11-10 design, before the 2026-11-12 redesign. Its rules, map and Node types are superseded by `REDLINE_CORE_RULES.md` and `REDLINE_MASTER_DESIGN.md` (see "Which docs are current" in `CLAUDE.md` §6). Worldbuilding here is still usable.
+
 > **NAME-001 (2026-11-13):** ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules). Terms in this document were updated to match; rule and decision IDs keep their original names (e.g. TRAINING-THREE-ICE-SENTRY-001). See `REDLINE_CORE_RULES.md` (NAME-001).
 
 **Date:** 2026-11-10  

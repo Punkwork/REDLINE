@@ -1,5 +1,7 @@
 # HALCYON PLAYTEST 3 implementation and verification
 
+> **Not current for rules (DOCS-001, 2026-11-18).** Historical record of the Playtest 3 build (2026-11-15). Current build status is in `REDLINE_CURRENT_STATUS.md` and `HANDOFF.md`; current rules in `REDLINE_CORE_RULES.md`.
+
 Target: `codex/halcyon-playtest-stabilization`; feature branch `codex/playtest3-synergy-pacing`, based on `8a2cbc8` (merged PRs #4 and #5). Seven ordered commits; no merge to main. Windows export is gated to the post-merge stabilization-branch push.
 
 All simulations use Godot 4.3, seeds 100–129, 30 runs per Rustler **per step**. Stalls at the 3000-action guard are not deaths or clears. End deck size includes permanent physical cards; bloat tax paid is actual TRACE after Rustler modifiers. Step 0 predates deck/tax instrumentation. Bot results are policy checks, not human balance evidence.

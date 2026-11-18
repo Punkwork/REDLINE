@@ -1,5 +1,7 @@
 # PANOPTICON Rule Review — RULE-126
 
+> **Not current for rules (DOCS-001, 2026-11-18).** Historical rule review (2026-11-11), kept for the record. Current rules are in `REDLINE_CORE_RULES.md`.
+
 **Status:** APPROVED AND LOCKED in the rule review
 **Title:** SyN DAMAGE Overflow
 **Decision:** User explicitly approved on 2026-11-11.

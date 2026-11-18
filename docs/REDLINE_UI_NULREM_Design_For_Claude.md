@@ -1,4 +1,6 @@
 # PANOPTICON — UI, Interactions & NUL/REM Character Design
+
+> **Not current for rules (DOCS-001, 2026-11-18).** Its look is replaced by `REDLINE_VISUAL_LANGUAGE.md` (VIS-001); its UI requirements still apply where that doc says so (§2.10). Rules and Node types: `REDLINE_CORE_RULES.md`.
 ## Claude implementation handoff · 2026-11-07
 
 **Scope:** Visual presentation, controls, selection screens, card readability, dialogue system and character writing. Engine combat rules and resource economy are specified separately in `REDLINE_ICEbreaker_Strength_Economy_Design_For_Claude.md`. Do not change combat rules to solve a rendering problem.

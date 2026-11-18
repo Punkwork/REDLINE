@@ -82,6 +82,20 @@ Use `SIM=1 "$GODOT" --headless --path godot --script res://tests/test_game.gd` t
 
 Work lands on `main`; pushes and PRs to `main` validate only. To cut a playtest build when the designer asks: fast-forward `release` to `main`, push, let the workflow export, verify the artifact (`BUILD_COMMIT.txt`, SHA-256, guide, checklist), and tag the commit `playtest-N`. Nobody commits to `release` directly. A bad build is rebuilt from its tag, or `release` is reset to the last good tag.
 
-## 6. Design docs
+## 6. Design docs: which are current (DOCS-001)
 
-Start with `docs/REDLINE_MASTER_DESIGN.md` (decisions and register) and `docs/HANDOFF.md` (what's next). Rules: `docs/REDLINE_CORE_RULES.md`. Look and tone: `docs/REDLINE_VISUAL_LANGUAGE.md`, `docs/REDLINE_ATOMIC_DECO_PUNK.md`, `docs/REDLINE_CORPORATE_FACADES.md`, `docs/REDLINE_SAMIZINE.md`, `docs/REDLINE_ARCHIPELAGO.md`. Implement what the docs say; where they're unclear, make the smallest reasonable choice and list it under Interpretations to confirm.
+When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register) wins, then **`docs/REDLINE_CORE_RULES.md`**, then the topic docs it names. Within a rules doc, its **"Later amendments"** tables win over older text in the same doc, even where that text wasn't edited.
+
+**Current**
+- What's next: `docs/HANDOFF.md`. What the build does now: `docs/ARCHITECTURE.md` ("Slice boundaries") and `docs/REDLINE_CURRENT_STATUS.md`. The HALCYON slice is only four map rows, so the code is not a full picture of the design.
+- Rules: `docs/REDLINE_CORE_RULES.md` (the map and Node types are §10).
+- Topic docs: `REDLINE_RUSTLERS.md`, `REDLINE_CARD_POOLS.md`, `REDLINE_ICE_CORP1.md`–`3.md`, `REDLINE_ICE_RULES_BIBLE.md`, `REDLINE_ICE_PASSIVES.md`, `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_UPGRADES_EVENTS_ESCAPE.md`, `REDLINE_ENGINES.md`, `REDLINE_DECK_SYNERGY.md`, `REDLINE_PACING.md`, `REDLINE_PLAYTEST_CHECKLIST.md`.
+- Look and tone: `REDLINE_VISUAL_LANGUAGE.md`, `REDLINE_ATOMIC_DECO_PUNK.md`, `REDLINE_ADP_PHASE2_COPY.md`, `REDLINE_CORPORATE_FACADES.md`, `REDLINE_SAMIZINE.md`, `REDLINE_ARCHIPELAGO.md`.
+
+**Not current for rules (history or lore only)**
+- `REDLINE_BIBLE.md`, `PANOPTICON_CORE_DESIGN_AND_WORLDBUILDING.md`: world, dialogue and the pre-redesign design. Use for lore, never for rules, Node types or numbers.
+- `REDLINE_RULE_REVIEW_126.md`, `HALCYON_PLAYTEST3_IMPLEMENTATION.md`, `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`: history.
+- `REDLINE_UI_NULREM_Design_For_Claude.md`: look replaced by VIS-001; requirements only where Visual Language §2.10 keeps them.
+- `godot/CODEX_HANDOFF.md`, `prototypes/python/`: superseded or reference only.
+
+Implement what the current docs say; where they're unclear, make the smallest reasonable choice and list it under Interpretations to confirm.

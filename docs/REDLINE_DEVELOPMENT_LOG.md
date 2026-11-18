@@ -402,3 +402,7 @@ Published `pre-claude-code` at `0a357e7`. Added [ARCHITECTURE.md](ARCHITECTURE.m
 **Validation:** Fresh Godot 4.3 import in a temporary checkout. Headless suites passed 361 rules checks, 17 bleed checks and 671 SIGNAL/CARBON checks. A display-backed SIGNAL/CARBON smoke test passed 22 checks and wrote seven PNGs to an isolated `SHOT_DIR` with temporary user data. The working agreements match byte for byte.
 
 LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — CHROME-001 step 1: real encounter layout and readability (Codex).
+
+## 2026-11-18 — DOCS-001: which docs are current (Claude)
+
+Codex answered a question about Node types from outdated docs. Designer approved marking current versus outdated docs ("Yes"). `CLAUDE.md` = `AGENTS.md` §6 now gives the authority order (master design → Core Rules → topic docs; "Later amendments" tables win) and lists current docs and history/lore-only docs. One-line "not current for rules" notes added at the top of `REDLINE_BIBLE.md`, `PANOPTICON_CORE_DESIGN_AND_WORLDBUILDING.md`, `REDLINE_RULE_REVIEW_126.md`, `HALCYON_PLAYTEST3_IMPLEMENTATION.md` and `REDLINE_UI_NULREM_Design_For_Claude.md`; `REPOSITORY_STRUCTURE.md` updated. Master register and HANDOFF Done row. **Code changes:** none. **Tests:** none.

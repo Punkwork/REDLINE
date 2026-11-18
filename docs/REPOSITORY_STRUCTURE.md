@@ -6,7 +6,7 @@ PANOPTICON is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the 
 
 - `docs/` — authoritative design and project-management documents.
   - `REDLINE_MASTER_DESIGN.md` — design authority; preserve LOCKED decisions unless explicitly revised.
-  - `REDLINE_BIBLE.md` — consolidated creative/world and design reference.
+  - `REDLINE_BIBLE.md` — world and dialogue reference (lore only; its rules predate the 2026-11-12 redesign, DOCS-001).
   - `REDLINE_CURRENT_STATUS.md` — current handoff and verified implementation status.
   - `REDLINE_DEVELOPMENT_LOG.md` — dated development history and decisions (recent entries; kept under about 60 KB).
   - `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` — older log entries, moved unchanged (LOG-001).

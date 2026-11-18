@@ -1,5 +1,7 @@
 # PANOPTICON — WORLD & DIALOGUE BIBLE
 
+> **Not current for rules (DOCS-001, 2026-11-18).** This is the world and dialogue reference. Its game rules, Node types and numbers predate the 2026-11-12 redesign. For current rules use `REDLINE_CORE_RULES.md` and `REDLINE_MASTER_DESIGN.md` (see "Which docs are current" in `CLAUDE.md` §6). Lore, characters and NUL/REM lines here are still usable.
+
 > **NAME-001 (2026-11-13):** in game rules, ICE types WALL / CODE GATE / SENTRY are now **FORTRESS / SIGYL / VOID**, and VOID damage is now **CORTEX** (same counters and rules); the rule sections from RULE-126 onward were updated. The world sections before them keep **VOID** as the in-world name for the erasure of consciousness, and CANON verse WL-003 is unchanged. **OPEN for designer review:** how in-world VOID relates to CORTEX damage and to VOID ICE (working reading: VOID ICE are what erase you; CORTEX is the counter the game tracks).
 
 **Document:** `REDLINE_BIBLE.md`  
