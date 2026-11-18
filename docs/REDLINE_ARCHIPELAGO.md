@@ -32,7 +32,7 @@ Designer: "1 y".
 3. **The corporations never say it.** Corporate copy never mentions arrest, capture or the Archipelago. People are *relocated*, *resting*, *retired from service*, *in good hands*. The euphemism is the horror.
 4. **"Archipelago" is the underworld's word.** It's what the zines call the network; the corporations have no name for it. **The word *gulag* is never used on screen.** "Archipelago" carries the echo for those who know it, without borrowing a real atrocity's name for a game system.
 5. **Respect and readability as always.** No graphic content; nothing in this doc may cover rule text or numbers (ADP-R1).
-6. **ARCH-SLANG-001 — the Rustlers say ’Pelago (APPROVED 2026-11-18).** Designer: "In all Rustler references to the archipelago should be written as pelago with an apostrophe before the P. Rustlers wouldn't use a 5-syllable word without shortening it." Every Rustler and underworld reference on screen (zines, *THE CARBON*, NUL/REM, graffiti, the map, the reveal) writes it **’Pelago**, with a typographic apostrophe (U+2019; search alias `'Pelago`). In all caps: **’PELAGO**. Lowercase in speech: *the ’pelago*. "Archipelago" in full stays the design-doc name for the system and never appears on screen; the corporations never say either form.
+6. **ARCH-SLANG-001 — the Rustlers say ’Pelago (APPROVED 2026-11-18).** Designer: "In all Rustler references to the archipelago should be written as pelago with an apostrophe before the P. Rustlers wouldn't use a 5-syllable word without shortening it." Every Rustler and underworld reference on screen (zines, *THE CARBON*, NUL/REM, graffiti, the map, the reveal) writes it **’Pelago**, with a typographic apostrophe (U+2019; search alias `'Pelago`). In all caps: **’PELAGO**. Lowercase in speech: *the ’pelago*. **’Pelago is the official in-game term, even at the very end** (designer, 2026-11-18: "Don't use the term archipelago, except in game documents. Pelago is the official in-game terminology to be used even at the very end."). "Archipelago" appears only in design documents, never on screen; the corporations never say either form.
 
 ## 4. What the Archipelago is (in the fiction)
 
@@ -117,7 +117,7 @@ The rules stay exactly as they are (Core Rules §4: the run ends when VITAE reac
 - **The defeated-Rustler page** (§5).
 - **The defaced map:** "’PELAGO" scrawled across the sea of corporate parkland.
 - **NUL/REM, rarely and plainly:** *"that block's on the ’pelago now."*
-- **The reveal** (after the third card): the moment the player learns the ’Pelago is one thing, and what it was for (NUL/REM says it the Rustler way too).
+- **The reveal** (after the third card): the moment the player learns the ’Pelago is one thing, and what it was for. Still ’Pelago here (confirmed by the designer).
 - **Never** in corporate copy, rules text, card names or numbers.
 
 ## 7. Decisions (designer, 2026-11-18)
