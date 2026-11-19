@@ -4,14 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — MAIN-001: HANDOFF points to main (Claude)
-
-**Designer instruction:** fix the contradiction between `HANDOFF.md` and the shared working agreement. Rule 1 now says to work on `main` under `AGENTS.md` / `CLAUDE.md` (the former working branch was merged at a523502); rule 2 and the session-start step say `main`. Added a MAIN-001 row to *Done*. **Found, not changed:** `.github/workflows/godot-validation.yml` only runs the Windows export on pushes to `codex/halcyon-playtest-stabilization` or `codex/zeroed-tumble-2026-11-16`, so pushes to `main` never export. CI belongs to Codex; raised with the designer. **Code changes:** none.
-
-## 2026-11-17 — MAIN-001: Windows export runs on main (Claude)
-
-**Designer instruction:** make the Windows export run from `main`. In `.github/workflows/godot-validation.yml`, the three Windows steps (install template, export, upload) now run on pushes to `main` instead of `codex/halcyon-playtest-stabilization` / `codex/zeroed-tumble-2026-11-16`. Validation, rules and screenshot steps are unchanged; the workflow still triggers only on changes under `godot/` or to the workflow file. HANDOFF's deferred Windows line updated to match.
-
 ## 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude)
 
 **Designer decision:** "B Each corp will have a different look. The HUD will probably change in the near future, but I want to keep it this way for now." The CARDS-001 hardware cards and the zine HUD/tags/END TURN/NUL/REM notes stay as they are; this is recorded as a deliberate exception to Visual Language Rule 1. Added RUSTLER-LOOK-001 to the master design doc and an amendment note under Rule 1 in `REDLINE_VISUAL_LANGUAGE.md`. **Code changes:** none.
@@ -437,3 +429,17 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CA
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: distinct board surface textures (Codex).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-DECISIONS-2026-11-17: approved visual decisions recorded in the master design doc (Claude).
+
+## 2026-11-19 — CARDS-002 deeper green PROGRAM; starters and PROTOCOL lamp settled (Claude)
+
+**Designer direction:** "Yes starters have no rarity. Go with deeper green. Protocol fix works."
+
+**Changed (preview patch, `review/cards-002` only):** PROGRAM laminate changes from olive `#90934F` to `#5A8048`, with mask `#172312`. That is hue 101°, 58° from mustard and 68° from blue-green, and darker than both; ivory is 14.8:1 on the mask. Recorded that starters carry no rarity mark and that the PROTOCOL lamp stays on the relay rail.
+
+**Validation:** preview fixture 0 failures at 3× and 1×, with all 444 texts fitting at 9 px or larger; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 with the patch applied.
+
+**Interpretations to confirm:** the exact green value `#5A8048`, chosen from four candidates.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: HANDOFF points to main (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: Windows export runs on main (Claude).

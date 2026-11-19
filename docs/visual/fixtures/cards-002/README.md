@@ -4,7 +4,7 @@
 
 **Status:** Design review, 2026-11-19. PROPOSED except where a line says designer direction.
 
-![All four card types with the glow treatment, plus rarities, the longest rules text and cached cards](iterations/PANOPTICON_PCB_Glow_Four_Types.jpg)
+![All four card types with the glow treatment and the deeper green PROGRAM, plus rarities, the longest rules text and cached cards](iterations/PANOPTICON_PCB_Glow_Four_Types_Deep_Green.jpg)
 
 ## Current review version: four-type glow treatment
 
@@ -13,11 +13,11 @@
 | Type | Board | Dark mask behind text | Example |
 |---|---|---|---|
 | SCRIPT | Mustard `#AE924D` (new) | `#2E2712` | [DEEP PROBE](captures/SCRIPT_DEEP_PROBE.png) |
-| PROGRAM | Olive `#90934F` | `#23261A` | [PASSKEY](captures/PROGRAM_PASSKEY.png) |
+| PROGRAM | Deeper green `#5A8048` (designer direction; replaces olive `#90934F`) | `#172312` | [PASSKEY](captures/PROGRAM_PASSKEY.png) |
 | PROTOCOL | Blue-green `#60938A` | `#14272A` | [TOOLBELT](captures/PROTOCOL_TOOLBELT.png) |
 | BLOATWARE | Corporate oxide-red face and Whirlwind art (unchanged) | `#2A1411` | [TRACER](captures/BLOATWARE_TRACER.png) |
 
-**Open palette question:** olive is 20° of hue from mustard, the closest pair in the set. Next to each other they read as different boards, but a deeper green PROGRAM would separate them more.
+**Deeper green PROGRAM (designer direction, 2026-11-19).** Olive was only 20° of hue from mustard. The deeper green `#5A8048` sits at hue 101°: 58° from mustard and 68° from blue-green. It is also darker than both, so the three Rustler boards differ in brightness as well as hue. Ivory is 14.8:1 on its mask.
 
 **Treatment, every type**
 - **Dark solder-mask panels** sit behind the title, the type plate and the rules. Each mask is a deep tint of its own board colour. No text sits on the bare board.
@@ -25,7 +25,7 @@
 - **Rustler type faces:** Chrome Deco bold for titles, Routed Gothic for the type plate, Barlow SemiBold and Bold for the rules.
 - **BLOATWARE** keeps the HALCYON corporate fonts for its facade. Its footer line ("We just want to stay in touch.") sits in dimmer ivory at the bottom of its rules panel.
 - **Layout:** each panel is placed from the type's own board area. The rules panels are 84 px tall for SCRIPT, 80 for PROGRAM, 79 for PROTOCOL and 84 for BLOATWARE, with an 11 px ceiling and a 9 px floor. All 444 card texts (every card, AMP 0–3) fit their own type's panel.
-- **Rarity:** a recessed lamp in each Rustler shell's top exterior, with 1, 2 or 3 lit cells (amber, green or violet) for Common, Uncommon and Rare. Starter and BLOATWARE cards have no lamp, and no printed rarity remains on any card.
+- **Rarity:** a recessed lamp in each Rustler shell's top exterior, with 1, 2 or 3 lit cells (amber, green or violet) for Common, Uncommon and Rare. On PROTOCOL it sits on the relay's lower rail (designer accepted). Starters have no rarity (designer direction), BLOATWARE has no lamp, and no printed rarity remains on any card.
 - **Cached** (designer direction): never printed on the card. A cached card shows one solid icy-cyan `#7FE3F0` glow just inside its board edge, the same whether it is temporary or held until played. The glow draws beneath the BW cost and every text panel. The hover tooltip reads `CACHED`, or `CACHED (temporary)` for a timed cache, which the designer kept for now.
 
 | Also captured | |
@@ -38,10 +38,8 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 
 **Interpretations to confirm**
 - The mask tints for each type.
-- The PROTOCOL lamp sits on the relay's lower rail, because that shell has no free strip on top.
 - The same circuit stencil appears on every Rustler type.
 - BLOATWARE keeps its corporate fonts.
-- Starters carry no rarity mark.
 
 ## Design sequence
 
@@ -60,6 +58,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 13. [Cache edge glow: cyan board-edge ring, solid or dashed, with the padlock](iterations/PANOPTICON_Mustard_PCB_05_Cache_Edge_Glow.jpg)
 14. [Single cache state: one solid cyan glow, no padlock](iterations/PANOPTICON_Mustard_PCB_05_Cache_Single_Glow.jpg)
 15. [All four card types with the glow treatment, mustard on SCRIPT](iterations/PANOPTICON_PCB_Glow_Four_Types.jpg)
+16. [Deeper green PROGRAM](iterations/PANOPTICON_PCB_Glow_Four_Types_Deep_Green.jpg)
 
 ## Reproduce the latest preview
 

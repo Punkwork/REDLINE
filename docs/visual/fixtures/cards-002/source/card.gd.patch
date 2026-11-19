@@ -1,5 +1,5 @@
 diff --git a/godot/scripts/ui/friendly_lie/card.gd b/godot/scripts/ui/friendly_lie/card.gd
-index b84ea75..5b513ae 100644
+index b84ea75..cfa84c9 100644
 --- a/godot/scripts/ui/friendly_lie/card.gd
 +++ b/godot/scripts/ui/friendly_lie/card.gd
 @@ -3,6 +3,48 @@ extends Control
@@ -22,7 +22,7 @@ index b84ea75..5b513ae 100644
 +## replaces SCRIPT's gold/brown; each mask is a deep tint of its own laminate.
 +const GLOW_TREATMENT := {
 + "SCRIPT": {"laminate": Color("#AE924D"), "mask": Color("#2E2712"), "lamp": Vector2(63, 6)},
-+ "PROGRAM": {"laminate": Color("#90934F"), "mask": Color("#23261A"), "lamp": Vector2(63, 16)},
++ "PROGRAM": {"laminate": Color("#5A8048"), "mask": Color("#172312"), "lamp": Vector2(63, 16)},
 + "PROTOCOL": {"laminate": Color("#60938A"), "mask": Color("#14272A"), "lamp": Vector2(100, 11)},
 + "BLOATWARE": {"mask": Color("#2A1411")},
 +}
