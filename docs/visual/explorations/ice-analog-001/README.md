@@ -35,3 +35,7 @@ Preserve Claude's mint HALCYON appliances, chrome, bakelite Rustler console, CRT
 3. Three-ICE arrangement shrinks consoles; check minimum key target dimensions.
 4. Mockup values and states are illustrative and are not rule proposals.
 5. The proposed visual exploration is **not approved** and should not be merged into the default encounter without the designer's explicit approval.
+
+### 2026-11-19 follow-up
+
+The animation harness now drives five **presentation-only** phases (idle, attention, telegraph, break reaction, tumble) with deterministic frame progression. This is a proof-of-concept motion pass, **not** the final mascot animation or authentic TUMBLE-001 reel. It has not been rendered or tested in Godot. The existing vector mascot placeholders remain; do not confuse them with approved mascot artwork.
