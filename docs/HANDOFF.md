@@ -65,6 +65,12 @@ DEV-001b is done (see *Done*). Its fixes are below.
 
 Hygiene, recorded and left alone under the no-refactor rule: the unused local `odds` in `_roll_rewards()`, the phase comment at `game.gd:21`, and mixed indentation between files. Fix each only when that code is next touched for an approved change.
 
+**Audio (approved direction 2026-11-19):**
+
+| ID | What to build | Spec | Owner | Status |
+|---|---|---|---|---|
+| **PIXEL-TRACE-001b** | Bit-crush the corporation's music with the TRACE pixel steps: a crush spike during each 0.5 s step transition, then a light held crush that deepens toward Mask off. Music bus only, so it mutes with music; plays with reduced motion on; no separate sound effect. Add the values to `atomic_deco_punk.json` and an audio capture per step for the designer to tune by ear. | Master PIXEL-TRACE-001b | Claude Code | TO DO |
+
 **Cards and hand (approved 2026-11-19):** CARDS-004 and HAND-MAX-001 are built; see Built below.
 
 **Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`. The TRACE-driven pixelation of the backdrop and ICE art (PIXEL-TRACE-001) is approved and built; see Built.

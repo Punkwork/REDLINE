@@ -557,3 +557,17 @@ A spike frame is captured, and `PIXEL-TRACE-001_Transition.gif` is in `docs/visu
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001: HALCYON non-fight copy approved (Codex).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — HALCYON PLAYTEST 4 Windows build (Codex).
+
+## 2026-11-19 — PIXEL-TRACE-001b: bit-crushed music with the pixel steps (Claude)
+
+**Designer:** asked what a transition sound could be. Of Claude's options, the designer chose bit-crushing the music: "Bit crushing the music or bgm is perfect. Save that idea somewhere appropriate."
+
+**Recorded:**
+- PIXEL-TRACE-001b in the master design doc, as an APPROVED direction that is not yet built. There is no separate sound effect. The corporation's music crushes with each pixel transition, and a held crush deepens toward Mask off (working proposal).
+- A Claude Code TO DO row in HANDOFF.
+
+**Code changes:** none.
+
+**Interpretations to confirm:**
+- the held crush per step (the designer approved the crush on the transition; holding it between steps is Claude's proposal);
+- the crush is on the music bus only, so the mechanical sounds stay clean.
