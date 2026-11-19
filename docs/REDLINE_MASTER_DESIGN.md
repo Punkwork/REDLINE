@@ -292,6 +292,7 @@ engine/
 | UPL-006a | DATA PURGE (SIGNAL UNCLEAR): remove 1 card for **+7 TRACE** (was +5) or −5 VITAE | APPROVED | Designer, 2026-11-18 |
 | DOCS-001 | Which docs are current: authority order (master design → Core Rules → topic docs; amendment tables win) and a list of current vs history/lore-only docs in CLAUDE.md = AGENTS.md §6; older docs carry a "not current for rules" note | APPROVED | Designer, 2026-11-18 |
 | DEV-001 | Claude Code is the main code developer; Claude (project) owns design; Codex takes isolated tasks on request; shared rules in CLAUDE.md = AGENTS.md | APPROVED | Designer, 2026-11-18 |
+| DEV-002 | Fixes from the DEV-001b audit (HANDOFF DEV-002a–i): doc syncs for slice route, HOUSE CALL and reserve rounding; ad/LUCIDA copy into approval-tracked data; wider copy-guard coverage; island-name placeholders; atomic flags write; ARCHITECTURE corrections; CI push path filter | PROPOSED | Claude Code, 2026-11-19 |
 | ICE-001 | PAPER CUT Strength 0 with minor damage/discard/DEADLOCK | CONCEPT | Earlier design proposal |
 
 ## 11. Open specification backlog

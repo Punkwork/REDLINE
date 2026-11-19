@@ -4,29 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CHROME-001 plaque revision: pearl enamel instead of black ICE panels (Codex)
-
-**Commit tag:** `chrome-001-enamel`.
-
-**Designer request:** “The black backgrounds on the ice in the images don’t work with the rest of the design. Find an appropriate change … atomic age /art deco / clean friendly corporation design.” Also: “Once approved, commit pr #12 to the shared game branch.” This authorizes the revision and a merge after designer approval of the result; no merge is performed in this revision.
-
-**Changed:** the ICE rule surfaces are now corporate pearl-enamel service plaques with dark slate text, silver edges/soft shadows, a restrained teal service mark and corporate heading font. Hidden/broken chips use pale surfaces while preserving dashed borders and strike-through. Costs remain legible; TUMBLER reel frames match the enamel. Legal target outlines use dark teal instead of lime against the light panels; invalid targets remain red. The Rustler paper/toner hand/HUD remain distinct. Dark hostile mascot shells still communicate Mask off; this removes the large black rule rectangles beneath them without hiding any rules.
-
-**Validation:** Godot 4.3 import and 357 rules checks pass; Friendly Lie 170 checks pass; all five Chrome screenshot stages pass, including actual legal/incompatible native drops and no payment on invalid drops. Refreshed ten full-screen PNGs and the download ZIP. Calculated text contrast: slate/enamel 11.64:1, muted text/enamel 6.25:1, muted text/broken chip 5.51:1, teal/enamel 7.06:1. No rule values changed. The five-step samples in the existing PR are updated in place.
-
-**Interpretations to confirm:** enamel plaques stay clean even in Mask off, reinforcing the corporation's immaculate administrative cruelty. Pearl #EDF4F0, slate #20343B and teal #165B55 are working presentation colors. Final art/fidelity approval remains with the designer. PR #12 remains open targeting `codex/halcyon-playtest-stabilization`; merge is pending that approval.
-
-## 2026-11-17 — CARDS-001: heavy type-specific 1950s slot cartridges (Codex)
-
-**Designer request:** distinct templates for Scripts/other types, subtle common/uncommon/rare differences, vacuum tubes/transistors/exposed wiring/metal/resistors; cards should feel heavy with protruding parts and BW costs mostly outside the white interior. The designer said “Looks good” to the blank carrier art; integrated rules/layout remain for review. No merge authorization for this finished revision is inferred from that art feedback.
-
-**Changed:** SCRIPT stamped steel/Bakelite fuse-and-resistor carrier; PROGRAM cast-aluminum/tube/transistor cassette; PROTOCOL celadon relay/terminal module. Paper labels and live rules sit on the chassis. BW mounts on the upper-right metal tab. Common is plain/single-notch, uncommon has two notches and a brass fitting, rare three notches and fine double-metal detail; full authored rarity labels remain. STARTER and BLOAT classifications remain. Three generated frames are prototype art; Bloatware retains its corporate treatment. Cards are 164×244 with component bounds extending 10 px sideways / 12 px vertically. A shallower hand fan, raised hand/rack spacing and padded choices protect the hardware; protrusions participate in hit-testing. Reward offers and inspection use the same carriers. No card definitions, rarity weights, costs or rules changed.
-
-**Validation:** Godot 4.3 imports; 357 rules pass and 30-seed bot summaries match the pre-card baseline (GENERALIST/ECHO/RIOT/VECTOR clears 25/17/25/20, survivor VITAE 16.2/9.5/15.2/10.7). Nine UI scripts pass. Cartridge fixture: 612 checks / zero failures, including all 112 authored rule texts, the longest legal shared-tag compiled SCRIPT pair, actual rarity, illustration bounds and 6-/8-/16-card protrusion bounds. Existing native hand clicks, HOLD/READY RIG, reward, SCAN/CULL/ZEROED/TUMBLE and five-second reduced-motion response checks remain. Nine individual close-up PNGs plus six/eight-card encounter captures are in `docs/visual/fixtures/cards-001/` and the downloadable ZIP.
-
-**Review:** physical finish details and motif reuse are proposed art choices. Labels/costs remain live data; no gameplay is baked into textures. The revised PR #12 remains open against the shared game branch and awaits designer approval before merge. Audio/Windows export are outside this task. Asset provenance, guide, status and the shared HANDOFF are updated in place.
-
-
 ## 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex)
 
 **Commit tag:** `cards-001-lightfaces`.
@@ -398,3 +375,35 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 Designer: "each corp should have their own version of this 'reward'". Recorded in the master register, Upgrades §3 note and the HANDOFF design task (moved from open to decided). **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 5: clear interactions and refreshed five-step review set (Codex).
+
+## 2026-11-19 — DEV-001b: read-only audit of code, docs and ARCHITECTURE.md (Claude Code)
+
+First Claude Code session (DEV-001, step 2). Pulled `main` at `83524d5`, read HANDOFF, this log, ARCHITECTURE.md, Core Rules, ICE Corp 1, Rustlers, the ADP Phase 3 spec and the CI workflow, then compared them with `godot/`. **Code changes:** none. The 312 modified `.import` files in the Windows checkout differ only in line endings (`core.autocrlf=true`), not in content. Fixes are proposed in HANDOFF as **DEV-002a–i** (PROPOSED).
+
+**Validation:** Godot 4.3 stable (Windows console build). The import was clean. `test_game.gd` **361 passed, 0 failed**; `test_adp.gd` **17 checks, 0 failures**; `test_signal_carbon.gd` **671 checks, 0 failures**. All three exited 0 with no `SCRIPT ERROR`, `Parse Error` or `Assertion failed`. Bot simulations (`SIM=1`) and the display fixtures were not run, since the audit was headless.
+
+**Confirmed to match the docs:** the shared stats (30 VITAE, 4 BW, DRAW 6, 4 RAM, TRACE 40, SAFEHOUSE heal 10, clean-Node bonus 5); all four starter decks and their card values (Rustlers §3–6, ECHO-005, RIOT-002/005, EXTRACT-002); every HALCYON ICE against ICE Corp 1 §5.0 and ICE-AUDIT-001; the TRACE strike ladder (Core Rules §7); the reward odds and the Tier 2 shift (PACE-008); the FOOTPRINT caps 22/29/35 (DSY-001); reserves 23/15 (PACE-008, as the playtest guide says). Engine guardrails also hold: one scene, no autoloads, GL Compatibility. Rules code never branches on grafts, LUCIDA edits, ads or bleed. A search of `godot/` code and data finds no "Archipelago", "gulag", QR or ASCII 'Pelago outside the guard and its tests. Every function and field that ARCHITECTURE names exists, and all 13 CI fixture scripts exist.
+
+**Where code and docs disagree:**
+1. **ICE Corp 1 §5.0 "Slice route"** still lists two-layer Nodes (CONSENT WALL, DOORBELL, TERMS & CONDITIONS). The code has one layer per Node, as PACE-008 requires. The doc is stale.
+2. **ICE Corp 1 §6** gives HOUSE CALL STR 5 and PULP 4 + 4. §5.0 and the code give STR 7 and PULP 6 + 6 (TUNE-001), but §5.0 only says it supersedes the Tier 1 table and §8.4.
+3. **The COOKIE BANNER reserve** is 15 in Core Rules §10.1a, ICE Corp 1 §8.2/§8.4 and the CORE-012 example. The code uses 23 (PACE-008 +50%, with 22.5 rounded up). Only the playtest guide records the rounding; the master doesn't.
+4. **The ad and LUCIDA-edit copy is hard-coded:** `PlayProfile.AD` (`play_profile.gd:5`) and `Game.LUCIDA_RECORD` (`game.gd:1574`). Neither has an approval field, neither is in `data/`, and the copy-guard test doesn't scan either. Codex's ADP-3 interpretation ("working copy") was never closed, and this copy shipped in `playtest-6`. CLAUDE.md §4's "ADP … copy have per-line approval fields" holds only for `adp_copy.json`.
+5. **The 15 approved relocation lines name the island homes** (Sunnyside Manor, Pine Ridge …), but those names are still working copy (ARCH-NAMES-001). Renaming an island means editing approved lines too. `CarbonRecord.ISLAND_INDEX` hard-codes which island each line names.
+6. **EVENT-002/003 (HANDOFF, Claude Code)** and UPL-006a's DATA PURGE have nothing to attach to: the slice map has only ICE and SAFEHOUSE Nodes, with no SIGNAL UNCLEAR.
+7. **The RELEASE-001 entry (2026-11-18) says the path filter stops doc-only pushes from exporting.** In `godot-validation.yml`, `paths` applies to `pull_request` only. Every push to any branch runs full validation, and every push to `release` exports, including doc-only fast-forwards.
+8. **CURRENT_STATUS** still quotes "357 rules checks" (now 361) and doesn't mention DEV-001.
+9. Nit: the GHOST SIGNAL card text says "BURNED." where Rustlers §3 says "BURNED for the rest of the Node."
+
+**What ARCHITECTURE.md gets wrong or leaves out:**
+1. **Local files:** it reads as if every record is written through LocalRecord's `.tmp` and rename. `redline_flags.json` is written directly by `main.gd` `_save_flags()` with no temp file and no LocalRecord.
+2. **Fixtures:** "the `shot_*.gd` scripts" misses `shot.gd`, which is in the CI list (CLAUDE.md §4 says the same). `shot.gd` and `shot_reel.gd` assert nothing and always exit 0, so CI catches only script errors in them. `shot.gd`'s header comment says it writes to `user://`, but it writes to `SHOT_DIR`.
+3. **Phases:** neither ARCHITECTURE nor the `game.gd:21` comment lists `SELECT` (set by `main.gd:309`) or `DECOMPILE`. `main.gd:1582` checks a `DEAD_DROP` phase that nothing sets: a dormant branch for the future DEAD DROP Node.
+4. **Copy guard:** it says new rendering paths use the shared guard. `AdpCopy.pool()` doesn't call `ArchCopy.valid_line()`; the data is covered only by the static test. In-code strings (`mascot.gd` lines, `PlayProfile.AD`, `LUCIDA_RECORD`, `main.gd` literals) aren't checked at all. No NUL/REM line has a `tag`, so the picker's reveal branch never fires; SIGNAL-001 rests on `valid_line()`'s secret-phrase check.
+5. **Not mapped:** `tests/synergy_cases.gd` (loaded by `test_game.gd`), `scripts/ui/icon.gd` (`RIcon`), the voice lookup `res://audio/nulrem/<line id>.ogg` (`main.gd:576`), `audio/nulrem/manifest.json` (no script reads it), and the export preset's `include_filter="data/*.json"` (runtime JSON outside `data/` won't ship).
+
+**Hygiene, recorded only (no change without the designer):** an unused local `odds` in `_roll_rewards()` (`game.gd:1357`); mixed indentation between files (tabs in `game.gd`, `cards.gd`, `ice.gd`; one space in `arch_copy.gd`, `carbon_record.gd`, `local_record.gd`, `signal_cards.gd` and most `friendly_lie/`).
+
+**Interpretations to confirm:** added a PROPOSED DEV-002 row to the master register so the proposals carry an ID (rule 6). On Windows, run tests with the `_console.exe` build so output reaches the shell.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 plaque revision: pearl enamel instead of black ICE panels (Codex), 2026-11-17 — CARDS-001: heavy type-specific 1950s slot cartridges (Codex).
