@@ -50,6 +50,10 @@ func _draw() -> void:
   for edge in [[rect.position,Vector2(rect.end.x,rect.position.y)],[Vector2(rect.end.x,rect.position.y),rect.end],[rect.end,Vector2(rect.position.x,rect.end.y)],[Vector2(rect.position.x,rect.end.y),rect.position]]: draw_dashed_line(edge[0],edge[1],FriendlyLook.SERVICE_TEAL,1,5)
 
 func _gui_input(event: InputEvent) -> void:
+ if sub>=0 and event.is_action_pressed("ui_accept") and has_focus():
+  var j: int = view.game.enc.ice.find(ice_ref)
+  if j>=0: view.break_action(j,sub); accept_event()
+  return
  if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT:
   var i: int = view.game.enc.ice.find(ice_ref)
   if i<0: return

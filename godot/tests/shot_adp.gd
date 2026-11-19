@@ -145,8 +145,9 @@ func test_backdrop_resize() -> void:
  view.apply_background()
  check(is_instance_valid(view.fade_layer) and view.fade_layer.get_rect().is_equal_approx(Rect2(Vector2.ZERO,view.size)), "hostile crossfade also fills the viewport")
  for carrier in view.find_children("IllustrationScale", "Control", true, false):
-  # ENCOUNTER-DISPLAY-001 enlarged avatars 25%; CARDS-004 gives up 44 px of the stage (x194/238) for the larger hand.
-  check(carrier.scale.is_equal_approx(Vector2.ONE * 0.82 * 1.25 * 194.0 / 238.0), "two-ICE lane avatars keep the CARDS-004 stage scale")
+  # ENCOUNTER-DISPLAY-001 enlarged avatars 25%; CARDS-004 gives up 44 px of the stage (x194/238) for the larger hand;
+  # ICE-ANALOG-001 grows them again (MASCOT_GROWTH) over the shorter analog console.
+  check(carrier.scale.is_equal_approx(Vector2.ONE * 0.82 * 1.25 * 194.0 / 238.0 * FriendlyEncounter.MASCOT_GROWTH), "two-ICE lane avatars keep the ICE-ANALOG-001 stage scale")
  root.size = original_size
  await settle()
 

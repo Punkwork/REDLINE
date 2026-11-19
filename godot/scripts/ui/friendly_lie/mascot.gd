@@ -235,6 +235,8 @@ func _process(delta: float) -> void:
  if not is_visible_in_tree() or not is_instance_valid(view) or not is_instance_valid(face) or view.game.enc.is_empty() or index>=view.game.enc.ice.size(): return
  clock+=delta
  var target: Vector2 = view.interaction_position()
+ var focus: Vector2 = view.mascot_focus(index) if view.has_method("mascot_focus") else Vector2.INF
+ if focus != Vector2.INF: target = focus
  var direction := (target-face.get_global_rect().get_center())/Vector2(260,180) if target!=Vector2.INF else Vector2.ZERO
  face.look=Vector2(clampf(direction.x,-1,1),clampf(direction.y,-1,1))
  if view.reduced_motion: return

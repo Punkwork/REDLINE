@@ -13,6 +13,10 @@ var bottom_hud: Panel
 const HAND_RECT := Rect2(16, 622, 1568, 378)
 const ICE_SCALE := 0.85
 const ICE_X := 800.0 - 1300.0 * ICE_SCALE / 2.0
+## ICE-ANALOG-001: bigger mascots on a taller stage; the analog console below is shorter than the old scan tag.
+const MASCOT_GROWTH := 1.18
+const STAGE_H := 229
+const CONSOLE_OVERLAP := -14   # the mascot peeks over the console's top edge
 ## Graffiti lands in free margins: under the Program Bay and under the TRACE panel.
 const GRAFFITI_SPOTS := [Vector2(40, 357), Vector2(1360, 262), Vector2(1360, 290), Vector2(1360, 318)]
 var note: Panel
@@ -132,12 +136,12 @@ func _ready() -> void:
  add_child(graffiti)
  node_tag = FriendlyLook.panel(FriendlyLook.TONER); node_tag.position = Vector2(40, 32); node_tag.size = Vector2(720, 86); node_tag.rotation_degrees = -1.0; add_child(node_tag)
  trace_tag = FriendlyLook.panel(FriendlyLook.TONER); trace_tag.position = Vector2(972, 32); trace_tag.size = Vector2(588, 106); trace_tag.rotation_degrees = 0.7; add_child(trace_tag)
- ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(ICE_X, 136); ice_scroll.size = Vector2(1300, 402); ice_scroll.scale = Vector2.ONE * ICE_SCALE; ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
+ ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(ICE_X, 136); ice_scroll.size = Vector2(1300, 426); ice_scroll.scale = Vector2.ONE * ICE_SCALE; ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
  ice_row = HBoxContainer.new(); ice_row.add_theme_constant_override("separation", 42); ice_row.alignment = BoxContainer.ALIGNMENT_CENTER; ice_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL; var ice_margin:=MarginContainer.new(); ice_margin.add_theme_constant_override("margin_top",10); ice_margin.size_flags_horizontal=Control.SIZE_EXPAND_FILL; ice_scroll.add_child(ice_margin); ice_margin.add_child(ice_row)
- var strip := FriendlyLook.panel(FriendlyLook.PAPER, FriendlyLook.TONER, 3); strip.position = Vector2(248, 486); strip.size = Vector2(1104, 49); add_child(strip)
+ var strip := FriendlyLook.panel(FriendlyLook.PAPER, FriendlyLook.TONER, 3); strip.position = Vector2(248, 498); strip.size = Vector2(1104, 49); add_child(strip)
  var rs := ScrollContainer.new(); rs.position = Vector2(10, 7); rs.size = Vector2(1084, 36); rs.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; strip.add_child(rs)
  response = HBoxContainer.new(); response.add_theme_constant_override("separation", 7); rs.add_child(response)
- note = FriendlyLook.panel(FriendlyLook.TONER); note.position = Vector2(248, 546); note.size = Vector2(1104, 44); note.rotation_degrees = -0.4; add_child(note)
+ note = FriendlyLook.panel(FriendlyLook.TONER); note.position = Vector2(248, 551); note.size = Vector2(1104, 40); note.rotation_degrees = -0.4; add_child(note)
  note_text = FriendlyLook.label("", 12, FriendlyLook.HIGHLIGHT); note_text.position = Vector2(10, 4); note_text.size = Vector2(900, 36); note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
  var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.position = Vector2(995, 7); voice.size = Vector2(100, 30); note.add_child(voice)
  var rig_ground := FriendlyLook.panel(FriendlyLook.TONER); rig_ground.position=Vector2(248,592); rig_ground.size=Vector2(1104,28); add_child(rig_ground)
@@ -208,14 +212,15 @@ func _ready() -> void:
   if e is InputEventMouseButton and e.pressed: dismiss_strike())
  feedback_panel=FriendlyLook.panel(FriendlyLook.TONER,FriendlyLook.HIGHLIGHT,2); feedback_panel.position=Vector2(606,32); feedback_panel.size=Vector2(350,82); feedback_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(feedback_panel); feedback_panel.hide()
  feedback_label=FriendlyLook.label("",12,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD); feedback_label.position=Vector2(10,7); feedback_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; feedback_label.size=Vector2(330,70); feedback_panel.add_child(feedback_label)
- var log_paper:=FriendlyLook.panel(FriendlyLook.PAPER); log_paper.position=Vector2(248,473); log_paper.size=Vector2(1104,13); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
- log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 473); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
+ var log_paper:=FriendlyLook.panel(FriendlyLook.PAPER); log_paper.position=Vector2(248,485); log_paper.size=Vector2(1104,13); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
+ log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 485); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
  for panel in [node_tag, trace_tag, bottom_hud, note, rig_ground, piles_paper, program_bay]:
   var wear := FriendlyRigWear.new()
   wear.code_strip = panel in [node_tag,trace_tag]
   panel.add_child(wear, false, Node.INTERNAL_MODE_BACK)
   worn_panels.append(wear)
 
+ build_key_tip()
  var display: Dictionary = AtomicDecoPunk.settings.display
  var sign := FriendlyLook.panel(skin.plaque_ground, skin.plaque_accent, 2, 10)
  sign.name = "CorporateDisplay"
@@ -378,9 +383,12 @@ func build_rig() -> void:
 func build_ice() -> void:
  ice_scroll.position.x = ICE_X
  mascots.clear()
+ key_nodes.clear()
+ hover_key = {}
+ if is_instance_valid(key_tip): key_tip.hide()
  clear(ice_row)
  for i in game.enc.ice.size():
-  var column := VBoxContainer.new(); column.add_theme_constant_override("separation",9); column.custom_minimum_size.x=400 if game.enc.ice.size()==3 else 480; ice_row.add_child(column)
+  var column := VBoxContainer.new(); column.add_theme_constant_override("separation",CONSOLE_OVERLAP); column.custom_minimum_size.x=400 if game.enc.ice.size()==3 else 480; ice_row.add_child(column)
   var mascot := FriendlyMascot.new()
   var prior := previous_mascot(i)
   mascot.previous_mood=prior.get("mood", "")
@@ -390,20 +398,13 @@ func build_ice() -> void:
   # Grow the animated illustration independently from its rules plaque.
   var width := 400.0 if game.enc.ice.size()==3 else 480.0
   # CARDS-004: the mascot stage gives up 44 px so the larger hand fits below.
-  var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25 * (194.0 / 238.0)
+  # ICE-ANALOG-001: the mascot grows about 18% (as far as the column width allows).
+  var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25 * (194.0 / 238.0) * MASCOT_GROWTH
   var stage := Control.new()
   stage.name = "MascotStage"
   var plate := AdpCopy.pick("plate", skin.corporation, 0, {"ice": game.enc.ice[i].id})
-  stage.custom_minimum_size = Vector2(width, 194 if plate.is_empty() else 210)
+  stage.custom_minimum_size = Vector2(width, STAGE_H)
   column.add_child(drop_wrapper(stage,i,-1))
-  if not plate.is_empty():
-   var plaque := FriendlyLook.label(plate.text, 10, FriendlyLook.TONER, skin.font)
-   plaque.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-   var enamel := FriendlyLook.panel(Color("#E2ECEB"))
-   enamel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-   enamel.add_child(plaque)
-   plaque.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-   at(stage, enamel, Vector2(0, 194), Vector2(width, 15))
   var carrier := Control.new()
   carrier.name = "IllustrationScale"
   carrier.scale = Vector2.ONE * illustration_scale
@@ -420,7 +421,7 @@ func build_ice() -> void:
   mascot.add_child(over)
   if first_text >= 0: mascot.move_child(over, first_text)
   if game.enc.ice[i].id == "AUTO_RENEW": add_shell_graffiti(mascot)
-  var scan := scan_tag(i); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
+  var scan := scan_tag(i, String(plate.get("text",""))); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
    scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
 func build_response() -> void:
@@ -538,64 +539,60 @@ func rule_chip(text: String, state: String = "normal", plaque: bool = false) -> 
   if not reduced_motion:
    overlay.ready.connect(func(): line.scale.x=0.0; var strike:=line.create_tween(); strike.tween_property(line,"scale:x",1.0,0.15))
  return chip
-func scan_tag(i: int) -> Control:
+func scan_tag(i: int, plate_text: String = "") -> Control:
+ ## ICE-ANALOG-001: the ICE readout as an analog console. Each subroutine is an instrument
+ ## key (glyph + value + BW chip); hover or focus opens the full rule (key_tip). The passive
+ ## line keeps its full text, and the NEXT RESPONSE strip keeps every rule in words.
  var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
  var panel := PanelContainer.new(); var scan_width:=380 if game.enc.ice.size()==3 else 440
  panel.custom_minimum_size=Vector2(scan_width,0)
  var candidates:=game.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction",0)>0 and game.can_play(c.uid).ok and game.would_zero(i,int(CardDB.def(c.id).get("zeroed_reduction",0))))
  var eligible:=not candidates.is_empty()
- var style := FriendlyLook.style(skin.plaque_ground,FriendlyLook.AMBER if eligible else Color("#A2B6BA"),3 if eligible else 2,12,5); style.shadow_color=Color("#243C4533"); style.shadow_offset=Vector2(0,4); style.set_content_margin_all(12); panel.add_theme_stylebox_override("panel",style)
+ var style := FriendlyLook.style(skin.plaque_ground,FriendlyLook.AMBER if eligible else CONSOLE_CHROME,3,16,6)
+ style.shadow_color=Color("#1A110A55"); style.shadow_offset=Vector2(0,5); style.set_content_margin_all(12); style.content_margin_top=10
+ panel.add_theme_stylebox_override("panel",style)
  if eligible: panel.tooltip_text="ZEROED available: "+" / ".join(candidates.map(func(c): return CardDB.def(c.id).name))
- var list := VBoxContainer.new(); list.add_theme_constant_override("separation",4); panel.add_child(list)
- var heading := HBoxContainer.new(); list.add_child(heading)
- var name := FriendlyLook.label(d.name,17,skin.plaque_ink,skin.bold_font); name.size_flags_horizontal=Control.SIZE_EXPAND_FILL; heading.add_child(name)
+ var list := VBoxContainer.new(); list.add_theme_constant_override("separation",5); panel.add_child(list)
+ var heading := HBoxContainer.new(); heading.add_theme_constant_override("separation",6); list.add_child(heading)
+ heading.add_child(console_plate(d.name.to_upper(),CONSOLE_GLASS,CONSOLE_CREAM,19,console_font(2)))
+ var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · ").trim_suffix(" · "),11,skin.plaque_muted,skin.bold_font)
+ meta.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; meta.size_flags_horizontal=Control.SIZE_EXPAND_FILL; meta.vertical_alignment=VERTICAL_ALIGNMENT_CENTER; meta.custom_minimum_size.x=60
+ heading.add_child(meta)
+ heading.add_child(console_plate("STR %d" % game.ice_str(i),CONSOLE_GLASS,CONSOLE_CREAM,19,console_font(1)))
  var delta: int = game.ice_str(i)-int(d.str)
- heading.add_child(FriendlyLook.label("STR %d%s" % [game.ice_str(i)," ↑%d" % delta if delta>0 else ""],15,skin.plaque_accent,FriendlyLook.BOLD))
- var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", ""),d.get("passive",d.get("ability", ""))]).replace(" ·  · "," · "),12,skin.plaque_muted)
- meta.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; meta.custom_minimum_size.x=scan_width-24; list.add_child(meta)
+ if delta!=0: heading.add_child(console_plate(("↑%d" if delta>0 else "↓%d") % absi(delta),Color("#2F7A4C") if delta>0 else Color("#B3261A"),Color.WHITE,15,console_font(0)))
  if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",10,skin.plaque_accent))
- var rows: Array = game.active_subs(i).duplicate()
+ var bank := HBoxContainer.new(); bank.alignment=BoxContainer.ALIGNMENT_CENTER; bank.add_theme_constant_override("separation",2); list.add_child(bank)
+ var active: Array = game.active_subs(i)
+ var shown: Array = []
+ if d.type == "TUMBLER": shown = active.duplicate()
+ else:
+  for s in d.subs.size(): shown.append(s)
+ for n in shown.size():
+  var s: int = shown[n]
+  if n>0: bank.add_child(chevron())
+  var key := build_key(i,s)
+  var slot: int = active.find(s)
+  var wrapped := key_wrapper(key,i,s)
+  if d.type=="TUMBLER" and slot>=0 and ui.spin.has(i) and not reduced_motion: bank.add_child(ui._reel(wrapped,null,slot,true))
+  elif d.type=="TUMBLER" and slot>=0 and ui.tumble.has(i) and not reduced_motion: bank.add_child(ui._tumble_reel(i,slot,s,wrapped))
+  else: bank.add_child(wrapped)
  if d.type == "TUMBLER":
+  # The reel column: the rest of the pool, spent subroutines struck through, unseen ones as "?".
+  var reel := PanelContainer.new(); var rs := FriendlyLook.style(CONSOLE_GLASS,CONSOLE_CHROME,2,8); rs.set_content_margin_all(5); reel.add_theme_stylebox_override("panel",rs)
+  reel.size_flags_vertical=Control.SIZE_SHRINK_CENTER
+  var column := GridContainer.new(); column.columns=2; column.add_theme_constant_override("h_separation",3); column.add_theme_constant_override("v_separation",3); reel.add_child(column)
+  var any := false
   for s in d.subs.size():
-   if ice.broken[s] and not rows.has(s): rows.append(s)
- elif d.type == "VOID":
-  for s in d.subs.size():
-   if not rows.has(s): rows.append(s)
- for s in rows:
-  var row := HBoxContainer.new(); row.add_theme_constant_override("separation",6)
-  var slot: int = game.active_subs(i).find(s)
-  var label := "SLOT %d · S%d" % [slot+1,s+1] if d.type=="TUMBLER" and slot>=0 else "S%d" % (s+1)
-  var tag := FriendlyLook.label(label,12,skin.plaque_muted); tag.custom_minimum_size.x=85; row.add_child(tag)
-  var hidden: bool = not ice.seen[s]
-  var words := []
-  if hidden: words.append("? HIDDEN")
-  else:
-   for e in d.subs[s]: words.append(effect_text(ice,e))
-  var loud := false
-  if not hidden:
-   for source in d.subs[s]:
-    var effect := game.effect_value(ice,source)
-    if effect.k=="PULP" and effect.get("curve", "")!="B" and int(effect.get("v",0))==biggest_hit() and biggest_hit()>0: loud=true
-  if new_subs(i).has(s) and not ice.broken[s]: tag.text += " · NEW"
-  var state := "broken" if ice.broken[s] else ("hidden" if hidden else ("deadlock" if Game._has_deadlock(d.subs[s]) else "normal"))
-  if not hidden and not ice.broken[s] and (loud or new_subs(i).has(s)): state="new"
-  var chip := rule_chip(" + ".join(words),state,true)
-  chip.tooltip_text = "\n".join(words); row.add_child(chip)
-  if ui._is_flash(ice,s):
-   var firing:=chip.get_theme_stylebox("panel").duplicate() as StyleBoxFlat; firing.border_color=skin.plaque_accent; firing.set_border_width_all(2); chip.add_theme_stylebox_override("panel",firing); ui._pulse(chip)
-  if not hidden and not ice.broken[s]:
-   var info := break_info(i,s)
-   var action := FriendlyLook.button("BREAK" if game.phase=="CHOICE" else ("%d BW" % info.get("cost",0) if info.ok else "—"),func(): break_action(i,s),Color("#DDEAE5") if skin.corporation=="HALCYON" else skin.plaque_ground,skin.plaque_ink)
-   action.add_theme_color_override("font_disabled_color",skin.plaque_muted); action.disabled = not info.ok; action.tooltip_text = info.get("reason", "") + (" · MARGIN %d" % info.margin if info.has("margin") else ""); row.add_child(action)
-  if Game.deadlock_steps(d.subs[s])>1: row.add_child(FriendlyLook.label("%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])],12,skin.plaque_ink))
-  var wrapped_row := drop_wrapper(row,i,s)
-  if d.type=="TUMBLER" and slot>=0 and ui.spin.has(i) and not reduced_motion:
-   var wrapped: Control = ui._reel(wrapped_row,null,slot,true); list.add_child(wrapped)
-  elif d.type=="TUMBLER" and slot>=0 and ui.tumble.has(i) and not reduced_motion: list.add_child(ui._tumble_reel(i,slot,s,wrapped_row))
-  else: list.add_child(wrapped_row)
- if game.hidden_count(i)>0 and d.type=="TUMBLER":
-  var pool := HBoxContainer.new(); pool.add_child(FriendlyLook.label("POOL",10,skin.plaque_muted)); pool.add_child(rule_chip("? HIDDEN ×%d" % game.hidden_count(i),"hidden",true)); list.add_child(pool)
- var passive := FriendlyLook.label(d.get("ability_text",""),12,skin.plaque_muted); passive.custom_minimum_size.x=scan_width-24; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(passive)
+   if active.has(s): continue
+   if not ice.seen[s] and not ice.broken[s]: continue
+   var mini := build_key(i,s,true); column.add_child(mini); any=true
+  for h in game.hidden_count(i):
+   var q := IceKey.new(); q.configure("HIDDEN","","hidden","",true); q.tooltip_text="Hidden in the pool until it tumbles in"; q.mouse_filter=Control.MOUSE_FILTER_PASS; column.add_child(q); any=true
+  if any:
+   var spacer := Control.new(); spacer.custom_minimum_size.x=10; bank.add_child(spacer); bank.add_child(reel)
+ var passive := FriendlyLook.label(d.get("ability_text",""),11,skin.plaque_muted); passive.custom_minimum_size.x=scan_width-24; passive.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ if not passive.text.is_empty(): list.add_child(passive)
  if not ice.virus.is_empty():
   var counts := []
   for strain in ice.virus:
@@ -603,9 +600,194 @@ func scan_tag(i: int) -> Control:
   var strains := FriendlyLook.label(" · ".join(counts),12,skin.plaque_accent); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
   if game.worm_ok(i): list.add_child(FriendlyLook.button("SPEND 2 WORM · BREAK 1",func(): game.use_worm(i); ui.refresh()))
  if game.pending.get("kind")=="patient_zero": list.add_child(FriendlyLook.button("INFECT THIS ICE",func(): game.choose_ice(i); ui.refresh()))
- var tape := ColorRect.new(); tape.color=skin.plaque_accent; tape.size=Vector2(76,3); tape.position=Vector2(scan_width/2-38,3); tape.rotation_degrees=0; tape.mouse_filter=Control.MOUSE_FILTER_IGNORE; var decoration := Control.new(); decoration.mouse_filter=Control.MOUSE_FILTER_IGNORE; panel.add_child(decoration); decoration.add_child(tape)
- panel.draw.connect(func(): panel.draw_line(Vector2(14,3),Vector2(panel.size.x-14,3),Color.WHITE,2,true))
+ if not plate_text.is_empty() and game.enc.ice.size() < 3:
+  # The ADP-2c patent plate (left off when three ICE share the row, to keep the passive line in view) moves from under the mascot to the foot of the console.
+  var plaque := FriendlyLook.label(plate_text, 9, skin.plaque_muted, skin.font); plaque.name="PatentPlate"
+  plaque.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER; plaque.clip_text=true; plaque.custom_minimum_size.x=scan_width-24
+  list.add_child(plaque)
  return panel
+
+const CONSOLE_GLASS := Color("#1A1714")
+const CONSOLE_CREAM := Color("#F4ECDA")
+const CONSOLE_CHROME := Color("#A9B3B6")
+const CONDENSED = preload("res://assets/fonts/BarlowCondensed-Bold.ttf")
+## Approved corporate captions per subroutine (VIS-001 §2.6), shown in the key tooltip.
+const KEY_FLAVOUR := {"AUTO_RENEW": ["Basic plan", "Plus plan", "Premium plan"], "CAPTCHA": ["Select every traffic light"]}
+var key_tip: PanelContainer
+var key_tip_list: VBoxContainer
+var hover_key := {}
+var key_nodes := {}
+
+func console_font(spacing: int) -> Font:
+ var f := FontVariation.new(); f.base_font = CONDENSED; f.spacing_glyph = spacing
+ return f
+
+func console_plate(text: String, bg: Color, ink: Color, px: int, font: Font) -> PanelContainer:
+ var plate := PanelContainer.new(); plate.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ var st := FriendlyLook.style(bg,Color.TRANSPARENT,0,6); st.content_margin_left=9; st.content_margin_right=9; st.content_margin_top=1; st.content_margin_bottom=1
+ plate.add_theme_stylebox_override("panel",st)
+ plate.add_child(FriendlyLook.label(text,px,ink,font))
+ return plate
+
+func chevron() -> Control:
+ var c := Control.new(); c.custom_minimum_size=Vector2(12,60); c.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ c.draw.connect(func():
+  var y := 14.0+30.0
+  c.draw_colored_polygon(PackedVector2Array([Vector2(3,y-6),Vector2(10,y),Vector2(3,y+6)]),Color("#B07A2A")))
+ return c
+
+func key_effects(ice: Dictionary, s: int) -> Array:
+ var out := []
+ for source in game.ice_definition(ice).subs[s]: out.append(game.effect_value(ice,source))
+ return out
+
+func build_key(i: int, s: int, mini: bool = false) -> IceKey:
+ var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
+ var key := IceKey.new()
+ var effects := key_effects(ice,s)
+ var hidden: bool = not ice.seen[s]
+ var main := {}
+ for e in effects:
+  if e.k != "DEADLOCK": main = e; break
+ var has_lock := Game._has_deadlock(d.subs[s])
+ var kind := "DEADLOCK" if main.is_empty() else String(main.k)
+ var value := ""
+ if not main.is_empty() and main.has("v"): value = ("−%d" if kind=="BW_DRAIN" else "%d") % int(main.v)
+ if kind=="DEADLOCK" and Game.deadlock_steps(d.subs[s])>1: value="%d/%d" % [ice.break_progress[s],Game.deadlock_steps(d.subs[s])]
+ var state := "ready"
+ if ice.broken[s]: state="broken"
+ elif hidden: state="hidden"
+ elif not mini:
+  var loud := false
+  if kind=="PULP" and main.get("curve","")!="B" and int(main.get("v",0))==biggest_hit() and biggest_hit()>0: loud=true
+  if loud: state="hit"
+  elif new_subs(i).has(s): state="new"
+ var chip := ""
+ if not mini and not ice.broken[s] and not hidden:
+  var info := break_info(i,s)
+  chip = ("FREE" if int(info.get("cost",0))==0 else "%d BW" % info.cost) if info.ok else "—"
+  key.locked = String(info.get("reason","")).begins_with("LOCKED")
+ key.configure(kind,value,state,chip,mini)
+ if not mini:
+  if not key_nodes.has(i): key_nodes[i] = {}
+  key_nodes[i][s] = key
+  key.firing = ui._is_flash(ice,s)
+  if has_lock and kind!="DEADLOCK": key.badge="lock"
+  elif key.locked: key.badge="lock"
+  elif main.get("curve","")=="B": key.badge="dice"
+  elif main.get("curve","")=="C": key.badge="hammer"
+  elif main.get("escalate",false): key.badge="up"
+  key.extra = maxi(0, effects.filter(func(e): return e.k!="DEADLOCK").size()-1)
+ else:
+  key.tooltip_text = key_rule_lines(i,s)[0]
+  key.mouse_filter = Control.MOUSE_FILTER_PASS
+ return key
+
+func key_wrapper(key: IceKey, i: int, s: int) -> Control:
+ var wrap := drop_wrapper(key,i,s)
+ var drop: FriendlyDropTarget = wrap.get_child(1)
+ drop.tooltip_text = ""   # the key tip replaces the native tooltip
+ drop.focus_mode = Control.FOCUS_ALL
+ drop.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+ var ice: Dictionary = game.enc.ice[i]
+ var show := func():
+  key.lit = true; key.queue_redraw()
+  var j: int = game.enc.ice.find(ice)
+  if j >= 0:
+   hover_key = {"ice": ice, "sub": s, "pos": key.get_global_rect().get_center()}
+   show_key_tip(j, s, key.get_global_rect())
+ var hide := func():
+  if drop.has_focus() or drop.get_global_rect().has_point(get_global_mouse_position()): return
+  key.lit = false; key.queue_redraw()
+  if hover_key.get("sub",-1)==s and is_same(hover_key.get("ice"),ice): hover_key = {}; key_tip.hide()
+ drop.mouse_entered.connect(show); drop.focus_entered.connect(show)
+ drop.mouse_exited.connect(hide)
+ drop.focus_exited.connect(hide)
+ return wrap
+
+func key_rule_lines(i: int, s: int) -> Array:
+ ## [title, rule lines...] in the rules engine's own words.
+ var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
+ if not ice.seen[s] and not ice.broken[s]: return ["? HIDDEN", "Revealed when it fires."]
+ var words := []; var rules := []
+ for source in d.subs[s]:
+  var e := game.effect_value(ice,source)
+  words.append(effect_text(ice,source))
+  rules.append(effect_rule(e))
+ return [" + ".join(words)] + rules
+
+func effect_rule(e: Dictionary) -> String:
+ var v := int(e.get("v",0))
+ var t := ""
+ match String(e.k):
+  "PULP": t = "Lose %d VITAE (SHIELD blocks)." % v
+  "TRACE": t = "Gain %d TRACE." % v
+  "DEADLOCK": t = "Blocks BREACH until broken."
+  "DISCARD": t = "Discard %d card%s at the start of your next turn." % [v, "" if v==1 else "s"]
+  "INSERT": t = "Put %d %s into your %s." % [v, e.get("card",""), String(e.get("to","draw pile")).replace("_"," ")]
+  "BW_DRAIN": t = "You have %d less BW next turn." % v
+  "CORTEX": t = "Gain %d CORTEX (−1 DRAW each)." % v
+  "FORGET": t = "%d random non-CACHED card%s in your hand go to the bottom of your draw pile." % [v, "" if v==1 else "s"]
+  _: t = ui._effect_word(e)
+ if e.get("curve","")=="B": t += " Random roll."
+ if e.get("curve","")=="C": t += " Hammer curve."
+ if e.get("escalate",false): t += " Grows each response."
+ return t
+
+func build_key_tip() -> void:
+ key_tip = PanelContainer.new(); key_tip.name="KeyTip"; key_tip.mouse_filter=Control.MOUSE_FILTER_IGNORE; key_tip.z_index=160
+ var st := FriendlyLook.style(Color("#F6EFDF"),CONSOLE_CHROME,3,12); st.set_content_margin_all(14); st.shadow_color=Color("#1A110A66"); st.shadow_size=10; st.shadow_offset=Vector2(0,6)
+ key_tip.add_theme_stylebox_override("panel",st)
+ key_tip_list = VBoxContainer.new(); key_tip_list.add_theme_constant_override("separation",5); key_tip.add_child(key_tip_list)
+ add_child(key_tip); key_tip.hide()
+
+func show_key_tip(i: int, s: int, anchor: Rect2) -> void:
+ if dragging_uid >= 0: return   # the drag header already explains a drop
+ clear(key_tip_list)
+ var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
+ var lines := key_rule_lines(i,s)
+ var slot: int = game.active_subs(i).find(s)
+ var where := ("SLOT %d · S%d" % [slot+1,s+1]) if d.type=="TUMBLER" and slot>=0 else "S%d" % (s+1)
+ key_tip_list.add_child(FriendlyLook.label(where + "  ·  " + d.name, 12, Color("#6B5A44"), skin.bold_font))
+ key_tip_list.add_child(FriendlyLook.label(lines[0], 22, IceKey.INK, CONDENSED))
+ var rule := FriendlyLook.label("Rule: " + " ".join(lines.slice(1)), 14, IceKey.INK, skin.font); rule.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; rule.custom_minimum_size.x=300; key_tip_list.add_child(rule)
+ var timing := "Broken." if ice.broken[s] else ("Fires in the next Corporation Response." if game.is_active(i,s) else "Not in a slot this turn.")
+ key_tip_list.add_child(FriendlyLook.label("Timing: " + timing, 14, IceKey.INK, skin.font))
+ if not ice.broken[s] and ice.seen[s]:
+  var info := break_info(i,s)
+  var text := ("Break: %s" % ("free" if int(info.get("cost",0))==0 else "%d BW" % info.cost)) if info.ok else "Break: " + String(info.get("reason","not now"))
+  var passive := String(d.get("passive",""))
+  if info.ok and passive=="TRIPWIRE": text += " · +1 TRACE (TRIPWIRE)"
+  if info.ok and info.has("margin"): text += " · margin %d" % info.margin
+  var b := FriendlyLook.label(text, 14, IceKey.INK if info.ok else Color("#9C1F15"), skin.bold_font); b.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; b.custom_minimum_size.x=300; key_tip_list.add_child(b)
+ var flavour: Array = KEY_FLAVOUR.get(ice.id, [])
+ if s < flavour.size():
+  key_tip_list.add_child(FriendlyLook.label("“%s” — %s" % [flavour[s], skin.corporation], 13, Color("#4A5355"), skin.font))
+ key_tip.reset_size()
+ await get_tree().process_frame
+ if not is_instance_valid(key_tip): return
+ key_tip.reset_size()
+ var local := get_global_transform().affine_inverse() * anchor.position
+ var local_end := get_global_transform().affine_inverse() * anchor.end
+ # Above the key, over the mascot art, so no other key, rule or card is covered;
+ # to the side only when there is no room above.
+ var x := clampf((local.x + local_end.x) / 2.0 - key_tip.size.x / 2.0, 10.0, 1590.0 - key_tip.size.x)
+ var y := local.y - 12.0 - key_tip.size.y
+ if y < 8.0:
+  var right := local_end.x + 14.0 + key_tip.size.x <= 1590.0
+  x = local_end.x + 14.0 if right else local.x - 14.0 - key_tip.size.x
+  y = clampf((local.y + local_end.y) / 2.0 - key_tip.size.y / 2.0, 8.0, 612.0 - key_tip.size.y)
+ key_tip.position = Vector2(x, y)
+ key_tip.show()
+
+func mascot_focus(index: int) -> Vector2:
+ ## Where a mascot looks: at the key it is about to fire, else at its key under the pointer.
+ if index >= game.enc.ice.size(): return Vector2.INF
+ var ice: Dictionary = game.enc.ice[index]
+ for s in game.ice_definition(ice).subs.size():
+  if ui._is_flash(ice,s) and key_nodes.has(index) and key_nodes[index].has(s) and is_instance_valid(key_nodes[index][s]): return key_nodes[index][s].get_global_rect().get_center()
+ if not hover_key.is_empty() and is_same(hover_key.ice, ice): return hover_key.pos
+ return Vector2.INF
 
 func reset_session() -> void:
  feedback_until=0; feedback_message=""; end_drag(); mascot_history.clear(); card_positions.clear(); last_encounter={}; last_turn=-1; previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
