@@ -127,7 +127,13 @@ Shared silkscreen `#F2E5C2` and contact holes `#24231C` stay outside names, illu
 4. **Extra CRED cost:** gold `#FFC861` N.
 5. **Target:** a crosshair on cards that need a target ICE.
 
-Compiled cards combine their parts' costs and target. The hover tooltip spells the icons out, for example "breaks TUMBLER · RAM 1". The Rustler title panel narrows to 114 px to make room. No card carries more than three icons; four would still clear every text panel. Every ink is at least 5.7:1 on the plate. **Built.**
+Compiled cards combine their parts' costs and target.
+
+**CARDS-005a — hardware styling and BLOATWARE (APPROVED, 2026-11-19).** Designer: "make them look like part of the hardware of the card. Right now they look very much out of place." The flat plates become **round indicators in the BW dial's style**: a pale steel bezel, a dark face and a glowing glyph with a glass glint. They are mounted on a brushed-steel rail screwed to the chassis. **BLOATWARE** (designer: "Yes") gets two icons:
+- a **"can't be played"** indicator (a slashed circle) on both TRACER and SPAM;
+- on TRACER, a **penalty lamp**: a lit red indicator with a dark "+3" for the TRACE added if it is held at the end of the turn. The number is read from the card's own rules text.
+
+An unplayable card's BW dial shows **"—"** instead of 0. The hover tooltip spells the icons out, for example "breaks TUMBLER · RAM 1". The Rustler title panel narrows to 114 px to make room. No card carries more than three icons; four would still clear every text panel. Every ink is at least 5.7:1 on the plate. **Built.**
 
 **HAND-MAX-001 — Maximum hand size 10 (APPROVED, 2026-11-19).** Replaces VIS-001's "no maximum for now". Designer: "We should determine a maximum hand size"; chose **10**. When a draw would take the hand past 10, **the draw stops and the card stays on the draw pile** (designer). Every card in hand counts toward 10, CACHED cards and Bloatware included. Evidence from 30-seed bot runs of the HALCYON slice: GENERALIST, RIOT and VECTOR never start a turn above 6. ECHO starts with 7 on 26% of its turns, 8 on 3%, 9 on 1.4% and 10 once, so today's play is never capped. *Interpretation to confirm:* any other effect that would move a card into a full hand (for example retrieving one from the discard pile) does nothing, and the card stays where it was.
 

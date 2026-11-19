@@ -69,6 +69,7 @@ func run() -> void:
   ["FORTRESS_ICEPICK", -1, "PROGRAM_FORTRESS_ICEPICK"],
   ["VOID_ICEPICK", -1, "PROGRAM_VOID_ICEPICK"],
   ["SKELETON_KEY", -1, "PROGRAM_SKELETON_KEY_ANY_TYPE"],
+  ["SPAM", -1, "BLOATWARE_SPAM"],
  ]
  for shot in shots:
   var card := FriendlyCard.new()
@@ -223,6 +224,14 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
   if contrast(ink, mask) < 4.5:
    fail(tag + ": an ink is below 4.5:1 on the mask")
 
+ # BLOATWARE: an unplayable card's dial shows a dash, not a cost.
+ if d.get("unplayable", false):
+  var dash := false
+  for child in body.get_children():
+   if child is Label and child.text == "—":
+    dash = true
+  if not dash:
+   fail(tag + ": unplayable card's dial does not show a dash")
  # Corner icons: the right set, in order, inside the card, clear of every text panel.
  var expected := FriendlyCard.corner_icons(d)
  var chips := []
@@ -240,7 +249,7 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
    for panel in ["TitlePanel", "TypePlate", "SolderRulesFrame"]:
     if body.get_node(panel).get_rect().intersects(chips[i].get_rect()):
      fail(tag + ": corner icon crosses " + panel)
-   if contrast(chips[i].ink(), FriendlyCard.CornerChip.PLATE) < 4.5:
+   if contrast(chips[i].ink(), chips[i].face()) < 4.5:
     fail(tag + ": corner icon ink below 4.5:1")
   if not chips.is_empty() and not FriendlyCard.corner_legend(expected) in card.tooltip_text:
    fail(tag + ": tooltip does not explain the corner icons")

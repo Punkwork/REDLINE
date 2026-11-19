@@ -298,57 +298,97 @@ class CacheEdgeGlow extends Control:
   for pass_ in [[4.0, 0.10], [2.6, 0.22], [1.4, 1.0]]:
    draw_polyline(ring, Color(glow, pass_[1]), pass_[0], true)
 
+class CornerRail extends Control:
+ ## A brushed-steel mounting rail behind the corner indicators, screwed to the chassis.
+ func _draw() -> void:
+  var r := Rect2(Vector2(size.x / 2.0 - 5, 0), Vector2(10, size.y))
+  draw_rect(Rect2(r.position + Vector2(1, 1.5), r.size).grow(1), Color(0, 0, 0, 0.35))
+  for i in range(int(r.size.x)):
+   var t := float(i) / r.size.x
+   draw_line(Vector2(r.position.x + i + 0.5, r.position.y), Vector2(r.position.x + i + 0.5, r.end.y), Color("#C9C5BC").lerp(Color("#6E6B64"), t), 1.0)
+  draw_rect(r, Color("#3A3833"), false, 1.0)
+  for y in [3.5, size.y - 3.5]:
+   var c := Vector2(size.x / 2.0, y)
+   draw_circle(c, 2.6, Color("#4A4842"), true, -1.0, true)
+   draw_circle(c, 2.0, Color("#B5B1A8"), true, -1.0, true)
+   draw_line(c + Vector2(-1.4, 1.0), c + Vector2(1.4, -1.0), Color("#4A4842"), 0.8, true)
+
 class CornerChip extends Control:
- ## One corner icon: an Icepick type (FORTRESS / TUMBLER / VOID / ANY), RAM,
- ## an extra TRACE or CRED cost, or TARGET.
- const PLATE := Color("#253237")
- const RIM := Color("#92866D")
+ ## One corner indicator, styled like the BW dial: steel bezel, dark face,
+ ## glowing glyph. Kinds: FORTRESS / TUMBLER / VOID / ANY, RAM, TRACE, CRED,
+ ## TARGET, and on BLOATWARE UNPLAYABLE and PENALTY (a lit red lamp).
+ const PLATE := Color("#29352F")
+ const BEZEL := Color("#D3DEDB")
  const INK := Color("#FFF3D0")
+ const LAMP := Color("#F07A5E")
+ const LAMP_INK := Color("#1A0F0C")
  var kind := ""
  var value := 0
 
  func ink() -> Color:
+  if kind == "PENALTY": return LAMP_INK
   return CORNER_TRACE if kind == "TRACE" else (CORNER_CRED if kind == "CRED" else INK)
 
+ func face() -> Color:
+  return LAMP if kind == "PENALTY" else PLATE
+
  func _draw() -> void:
-  var box := StyleBoxFlat.new()
-  box.bg_color = PLATE
-  box.border_color = ink() if kind in ["TRACE", "CRED"] else RIM
-  box.set_border_width_all(1)
-  box.set_corner_radius_all(5)
-  draw_style_box(box, Rect2(Vector2.ZERO, size))
   var c := size / 2.0
+  # Bezel: drop shadow, steel ring, recessed face, specular glint (as the BW dial).
+  draw_circle(c + Vector2(1, 1.5), 12.0, Color("#253237"), true, -1.0, true)
+  draw_circle(c, 11.5, BEZEL, true, -1.0, true)
+  draw_arc(c, 10.8, deg_to_rad(20), deg_to_rad(200), 20, Color("#8E9A97"), 1.2, true)
+  draw_circle(c, 9.5, face(), true, -1.0, true)
+  if kind == "PENALTY":
+   draw_circle(c + Vector2(-2, -2), 5.0, Color(1, 0.85, 0.75, 0.35), true, -1.0, true)
   var col := ink()
+  var glow := Color(col.r, col.g, col.b, 0.28)
   match kind:
    "FORTRESS":
-    draw_rect(Rect2(c.x - 6, c.y - 2, 12, 9), col)
-    for x in [-6.0, -1.5, 3.0]:
-     draw_rect(Rect2(c.x + x, c.y - 6, 3, 4), col)
+    for pass_ in [[glow, 1.5], [col, 0.0]]:
+     var g: float = pass_[1]
+     draw_rect(Rect2(c.x - 5 - g, c.y - 1 - g, 10 + g * 2, 7 + g * 2), pass_[0])
+     for x in [-5.0, -1.5, 2.0]:
+      draw_rect(Rect2(c.x + x - g, c.y - 4.5 - g, 3 + g * 2, 3.5 + g), pass_[0])
    "TUMBLER":
-    draw_arc(c, 6.5, deg_to_rad(-40), deg_to_rad(250), 24, col, 2.0, true)
-    var tip := c + Vector2(cos(deg_to_rad(-40)), sin(deg_to_rad(-40))) * 6.5
-    draw_colored_polygon(PackedVector2Array([tip + Vector2(-4, -2), tip + Vector2(3, -3), tip + Vector2(1, 4)]), col)
+    draw_arc(c, 5.5, deg_to_rad(-40), deg_to_rad(250), 24, glow, 3.4, true)
+    draw_arc(c, 5.5, deg_to_rad(-40), deg_to_rad(250), 24, col, 1.8, true)
+    var tip := c + Vector2(cos(deg_to_rad(-40)), sin(deg_to_rad(-40))) * 5.5
+    draw_colored_polygon(PackedVector2Array([tip + Vector2(-3.5, -2), tip + Vector2(2.5, -2.5), tip + Vector2(1, 3.5)]), col)
    "VOID":
-    draw_polyline(PackedVector2Array([c + Vector2(0, -8), c + Vector2(8, 0), c + Vector2(0, 8), c + Vector2(-8, 0), c + Vector2(0, -8)]), col, 2.0, true)
-    draw_circle(c, 2.0, col, true, -1.0, true)
+    var pts := PackedVector2Array([c + Vector2(0, -6.5), c + Vector2(6.5, 0), c + Vector2(0, 6.5), c + Vector2(-6.5, 0), c + Vector2(0, -6.5)])
+    draw_polyline(pts, glow, 3.4, true)
+    draw_polyline(pts, col, 1.8, true)
+    draw_circle(c, 1.7, col, true, -1.0, true)
    "ANY":
     for a in [0.0, 60.0, 120.0]:
-     var d := Vector2(cos(deg_to_rad(a)), sin(deg_to_rad(a))) * 7.0
-     draw_line(c - d, c + d, col, 2.0, true)
+     var d := Vector2(cos(deg_to_rad(a)), sin(deg_to_rad(a))) * 5.8
+     draw_line(c - d, c + d, glow, 3.4, true)
+     draw_line(c - d, c + d, col, 1.8, true)
    "TARGET":
-    draw_arc(c, 6.0, 0, TAU, 24, col, 1.6, true)
+    draw_arc(c, 5.0, 0, TAU, 24, glow, 3.0, true)
+    draw_arc(c, 5.0, 0, TAU, 24, col, 1.4, true)
     for d in [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]:
-     draw_line(c + d * 3.0, c + d * 9.5, col, 1.6, true)
+     draw_line(c + d * 2.5, c + d * 8.0, col, 1.4, true)
+   "UNPLAYABLE":
+    draw_arc(c, 5.8, 0, TAU, 24, glow, 3.4, true)
+    draw_arc(c, 5.8, 0, TAU, 24, col, 1.8, true)
+    draw_line(c + Vector2(-4, 4), c + Vector2(4, -4), col, 1.8, true)
    _:
-    # RAM, TRACE and CRED show their number; RAM adds memory-chip pins.
+    # RAM, TRACE, CRED and PENALTY show their number; RAM adds memory-chip pins.
     var font: Font = preload("res://assets/fonts/Barlow-Bold.ttf")
-    var text := ("+%d" if kind == "TRACE" else "%d") % value
-    var w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
-    draw_string(font, Vector2(c.x - w / 2.0, c.y + 5), text, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, col)
+    var text := ("+%d" if kind in ["TRACE", "PENALTY"] else "%d") % value
+    var px := 11 if text.length() > 1 else 12
+    var w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+    if kind != "PENALTY":
+     draw_string_outline(font, Vector2(c.x - w / 2.0, c.y + 4.5), text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 2, glow)
+    draw_string(font, Vector2(c.x - w / 2.0, c.y + 4.5), text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, col)
     if kind == "RAM":
-     for x in [-6.0, 0.0, 6.0]:
-      draw_line(Vector2(c.x + x, 1.5), Vector2(c.x + x, 3.5), col, 1.2)
-      draw_line(Vector2(c.x + x, size.y - 3.5), Vector2(c.x + x, size.y - 1.5), col, 1.2)
+     for x in [-3.5, 0.0, 3.5]:
+      draw_line(Vector2(c.x + x, c.y - 9.0), Vector2(c.x + x, c.y - 7.3), col, 1.0)
+      draw_line(Vector2(c.x + x, c.y + 7.3), Vector2(c.x + x, c.y + 9.0), col, 1.0)
+  # Glass glint over the face.
+  draw_arc(c, 7.6, deg_to_rad(200), deg_to_rad(250), 8, Color(1, 1, 1, 0.45), 1.0, true)
 
 ## The corner icons a card carries, top to bottom: Icepick type, RAM, extra
 ## TRACE cost, extra CRED cost, target. Each entry is [kind, value].
@@ -364,6 +404,13 @@ static func corner_icons(d: Dictionary) -> Array:
   out.append(["CRED", int(d.cred_cost)])
  if d.get("target", false):
   out.append(["TARGET", 0])
+ if d.type == "BLOATWARE":
+  out.append(["UNPLAYABLE", 0])
+  var held := RegEx.new()
+  held.compile("in your hand at the end of your turn: \\+(\\d+) TRACE")
+  var m := held.search(str(d.get("text", "")))
+  if m:
+   out.append(["PENALTY", int(m.get_string(1))])
  return out
 
 static func corner_legend(icons: Array) -> String:
@@ -374,6 +421,8 @@ static func corner_legend(icons: Array) -> String:
    "TRACE": words.append("+%d TRACE" % icon[1])
    "CRED": words.append("%d CRED" % icon[1])
    "TARGET": words.append("targets an ICE")
+   "UNPLAYABLE": words.append("can't be played")
+   "PENALTY": words.append("+%d TRACE if held at end of turn" % icon[1])
    "ANY": words.append("breaks any ICE type")
    _: words.append("breaks %s" % icon[0])
  return " · ".join(words)
@@ -549,11 +598,19 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
  add_glow(title, 4)
  var circle := CostCircle.new(); circle.position = Vector2(-5, 3); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
- var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, Color("#F2CD87") if corp else Color.WHITE, FriendlyLook.BOLD)
+ var cost_text := "—" if d.get("unplayable", false) else (str(view.game.card_cost(id)) if uid >= 0 else str(d.bw))
+ var cost := FriendlyLook.label(cost_text, 15, Color("#F2CD87") if corp else Color.WHITE, FriendlyLook.BOLD)
  cost.add_theme_color_override("font_shadow_color", Color("#D6B67580")); cost.add_theme_constant_override("shadow_offset_x", 0); cost.add_theme_constant_override("shadow_offset_y", 0); cost.add_theme_constant_override("shadow_outline_size", 2)
  cost.position = Vector2(-4, 3); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
  # CARDS-005: corner icons down the top-right edge.
  var icons := corner_icons(d)
+ if not icons.is_empty():
+  var rail := CornerRail.new()
+  rail.name = "CornerRail"
+  rail.position = CORNER_ORIGIN - Vector2(0, 2)
+  rail.size = Vector2(CORNER_CHIP, icons.size() * (CORNER_CHIP + CORNER_GAP) + 2)
+  rail.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(rail)
  for i in icons.size():
   var chip := CornerChip.new()
   chip.name = "Corner" + str(icons[i][0]).capitalize()

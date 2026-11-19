@@ -4,19 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude)
-
-**Designer:** "the rustler is always going to see what pulp damage the corporation is going to deliver next turn with that subroutine. So there is no surprise for the rustler." Recorded in the master design doc and Core Rules: the roll is made ahead of time (working timing: start of the Rustler turn), shown as an exact number, and that value fires; the lethal mood reads it. HANDOFF build row updated; the WAITING row now only asks about PULP-002 curves, including curve B's "PULP ?". **Code changes:** none.
-
-## 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude)
-
-**Designer:** approved Claude's recommendation ("Yes, record it that way."). PULP-002 curves A/B/C do not get the ±2/±3 roll; all curves show their next value before firing, so curve B drops "PULP ?". Recorded in the master design doc and Core Rules §5.2; HANDOFF build row updated, WAITING row closed. **Code changes:** none.
-
-## 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude)
-
-**Designer:** "yes, apply the same contrast fix as script" for PROTOCOL, whose blue-green face measured amber 4.18:1. `card.gd` now applies the soft face shade per type: SCRIPT #2A1C10 at 55%, PROTOCOL #0C1E1C at 45% (fitted to the face measured from `protocol.png`, 14,28,136,182). Measured after: PROTOCOL amber 6.68:1 / ivory 9.62:1; SCRIPT 6.69 / 9.64; PROGRAM unchanged 6.91 / 9.97. Validation: rules 357/0, cartridge UI 625/0, Chrome stages 1–5 0 failures; cards-001 and chrome-001 fixtures refreshed. Committed with [skip ci].
-**Designer:** "big swings equally likely up and down is okay" (PULP-001 ±3 sign 50/50), recorded in the master design doc. The start-of-turn roll timing and equal odds within −2..+2 remain working values.
-
 ## 2026-11-17 — Archive retired branches (Codex)
 
 At the designer's request, pushed and verified annotated archive tags for `docs/simplified-design` (`c42adc5`), `dev/training-node` (`61c1a8b`), `codex/playtest3-windows-smoke` (`af580e2`) and `backup/pre-authoritative-docs-2026-11-10` (`c87436e`). Verified the other eleven tips were ancestors of `main` before deleting all fifteen remote branches. Only `main` remains. PRs #1 and #3 are closed. Posted the archive link on PR #1 and updated the repository structure reference. LOG-001 moved the oldest whole entries to the archive unchanged.
@@ -503,3 +490,28 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RI
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude).
+
+## 2026-11-19 — CARDS-005a: hardware-style corner indicators; BLOATWARE icons (Claude)
+
+**Designer:**
+- "Yes" to the BLOATWARE icons and the dash on TRACER's dial.
+- "As for the icons on the top right corner, make them look like part of the hardware of the card. Right now they look very much out of place."
+
+**Changed (`card.gd`):**
+- `CornerChip` now draws a round indicator matching the BW dial: a drop shadow, a steel bezel `#D3DEDB` with a shaded lower arc, a face `#29352F`, a glyph with a soft glow, and a glass glint.
+- A new `CornerRail` (brushed steel with two screws) sits behind the stack.
+- BLOATWARE gets an `UNPLAYABLE` icon, and a `PENALTY` lamp (red face `#F07A5E`, dark number) whenever the rules text says "in your hand at the end of your turn: +N TRACE". That is TRACER's +3.
+- Unplayable cards show "—" on the BW dial.
+- The tooltip legend covers the new icons.
+
+**Fixture:** ink contrast is checked against each indicator's own face, so the penalty lamp is covered. Unplayable cards must show "—". There is a new SPAM capture.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
+
+**Interpretations to confirm:** the penalty lamp's red; reading the penalty from the rules text (the rules code hard-codes TRACER's +3); the rail's look.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude).
