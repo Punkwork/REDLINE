@@ -460,3 +460,8 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MA
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: Windows export runs on main (Claude).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude).
+
+## 2026-11-19 — CARDS-003a confirmed (Claude)
+
+**Designer:** "Great save those changes." This confirms the CARDS-003a interpretations: the THEN joiner, the "Hover for full text" hint, names and hover only for cards whose text doesn't fit, and the panel opening below the card when there is no room above. Master design and HANDOFF updated. **Code changes:** none.
+
