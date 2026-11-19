@@ -39,3 +39,18 @@ Preserve Claude's mint HALCYON appliances, chrome, bakelite Rustler console, CRT
 ### 2026-11-19 follow-up
 
 The animation harness now drives five **presentation-only** phases (idle, attention, telegraph, break reaction, tumble) with deterministic frame progression. This is a proof-of-concept motion pass, **not** the final mascot animation or authentic TUMBLE-001 reel. It has not been rendered or tested in Godot. The existing vector mascot placeholders remain; do not confuse them with approved mascot artwork.
+
+## Three ChatGPT concept mockups — binary import pending (2026-11-19)
+
+The designer selected three ChatGPT-generated concept PNGs as visual references. **The actual PNG files have not yet been uploaded to GitHub.** They currently exist as conversation downloads. Add the exact PNGs to this directory on the laptop (do not recreate them or substitute stock images), using these target names:
+
+1. `ICE_ANALOG_CONCEPT_01_HALCYON.png` — composite Friendly/Cracking encounter concept and detail.
+2. `ICE_ANALOG_CONCEPT_02_INSTRUMENT_KEYS.png` — instrument keys and visual states study.
+3. `ICE_ANALOG_CONCEPT_03_ENCOUNTER_TOOLTIP.png` — detailed encounter/tooltip concept.
+
+Source conversation filenames, respectively:
+- `a_detailed_highly_stylized_retro_futuristic_turn.png`
+- `a_highly_detailed_retro_futuristic_pixel_art_ui_co.png`
+- `a_detailed_cinematic_game_ui_illustration_in_a_re.png`
+
+After importing, confirm each PNG opens and update this README with its dimensions and checksum. These are **art-direction references, not authoritative gameplay values or Godot fixture screenshots**. Preserve original Claude mockups in `../encounter-analog-001/`.
