@@ -145,7 +145,7 @@ An unplayable card's BW dial shows **"—"** instead of 0. The hover tooltip spe
 - Works with the existing bleed: the hostile background that bleeds through from TRACE 20 is pixelated with the rest. Changes happen at once at each step, so reduced motion needs nothing extra.
 - **Presentation only.** Rules code never reads it.
 - The separate whole-game 16-bit look stays parked (`docs/visual/explorations/pixel-16bit/`).
-**Built (2026-11-19, commit COMMIT_PIXEL):** shader `godot/themes/trace_pixel.gdshader`; `AtomicDecoPunk.pixel_step()`; one full-screen layer after the backdrops and one per mascot placed before its first text, in `encounter.gd`. Fixture `shot_trace_pixel.gd` (in CI) captures the four levels and checks no text sits under a pixel layer. Captures: `docs/visual/fixtures/pixel-trace-001/`. *Interpretations to confirm:* the step values; the strike step; mascot detail drawn after a status tag stays sharp.
+**Built (2026-11-19, commit c063429):** shader `godot/themes/trace_pixel.gdshader`; `AtomicDecoPunk.pixel_step()`; one full-screen layer after the backdrops and one per mascot placed before its first text, in `encounter.gd`. Fixture `shot_trace_pixel.gd` (in CI) captures the four levels and checks no text sits under a pixel layer. Captures: `docs/visual/fixtures/pixel-trace-001/`. *Interpretations to confirm:* the step values; the strike step; mascot detail drawn after a status tag stays sharp.
 
 **Baseline verification (Codex, 2026-11-19).** The [DEV-001 validation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-19--dev-001-validate-the-card-and-hand-baseline-codex) records a Godot 4.3 rerun for CARDS-003 through CARDS-005a and HAND-MAX-001 at `2d5301a`.
 
