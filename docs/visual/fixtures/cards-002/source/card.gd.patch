@@ -1,8 +1,8 @@
 diff --git a/godot/scripts/ui/friendly_lie/card.gd b/godot/scripts/ui/friendly_lie/card.gd
-index b84ea75..3b81378 100644
+index b84ea75..d372662 100644
 --- a/godot/scripts/ui/friendly_lie/card.gd
 +++ b/godot/scripts/ui/friendly_lie/card.gd
-@@ -3,6 +3,17 @@ extends Control
+@@ -3,6 +3,24 @@ extends Control
  ## Paper UI only. Playing a card always goes through the existing Game API.
  const CARD_SIZE:=Vector2(164,244)
  const PHYSICAL_RECT:=Rect2(-10,-12,184,268)
@@ -16,11 +16,18 @@ index b84ea75..3b81378 100644
 +const MUSTARD_TYPE_MIN := 8
 +const MUSTARD_CACHE_RECT := Rect2(-12, 110, 18, 18)
 +const MUSTARD_INK := Color("#100D07")
++## Glow study: text sits on dark solder-mask panels instead of bare mustard.
++const MUSTARD_MASK := Color("#2E2712")
++const MUSTARD_GLOW_INK := Color("#FFF3D0")
++const MUSTARD_GLOW_NUMBER := Color("#FFC861")
++const MUSTARD_GLOW_HALO := Color(1.0, 0.86, 0.55, 0.32)
++const MUSTARD_TITLE_RECT := Rect2(13, 21, 124, 38)
++const MUSTARD_PLATE_PAD := 8.0
 +const MUSTARD_NUMBER := "([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)"
  const BOARD_PALETTE := {
   "SCRIPT": [Rect2(7,18,148,203), Color("#BD9547"), Color("#6C4A1D")],
   "PROGRAM": [Rect2(7,30,148,199), Color("#90934F"), Color("#4C522C")],
-@@ -29,6 +40,28 @@ class ArtBox extends Control:
+@@ -29,6 +47,28 @@ class ArtBox extends Control:
   func _draw() -> void:
    var r:=Rect2(Vector2.ZERO,size)
    for edge in [[r.position,Vector2(r.end.x,0)],[Vector2(r.end.x,0),r.end],[r.end,Vector2(0,r.end.y)],[Vector2(0,r.end.y),r.position]]: draw_dashed_line(edge[0],edge[1],FriendlyLook.GREY,1,5)
@@ -49,7 +56,7 @@ index b84ea75..3b81378 100644
  class CostCircle extends Control:
   func _draw() -> void:
    draw_circle(Vector2(14,15),15,Color("#253237"))
-@@ -59,6 +92,160 @@ class PrintedBoard extends Control:
+@@ -59,6 +99,185 @@ class PrintedBoard extends Control:
    draw_rect(Rect2(12, size.y - 4.5, 31, 4), SILK, false, 0.7)
    for pin in range(6):
     draw_circle(Vector2(15 + 5 * pin, bottom), 1.15, CONTACT, true, -1.0, true)
@@ -93,6 +100,9 @@ index b84ea75..3b81378 100644
 +  return box
 +
 +class SolderRuleFrame extends Control:
++ var fill := Color.TRANSPARENT
++ var leads := true
++ var pads := true
 + const TRACE_INK := Color("#E8DBB1")
 + const SOLDER := Color("#D7CAA5")
 + const PAD_EDGE := Color("#6F5933")
@@ -102,6 +112,12 @@ index b84ea75..3b81378 100644
 +  var right := size.x
 +  var bottom := size.y
 +  var corner := 4.0
++  if fill.a > 0:
++   draw_colored_polygon(PackedVector2Array([
++    Vector2(corner, 0), Vector2(right - corner, 0), Vector2(right, corner),
++    Vector2(right, bottom - corner), Vector2(right - corner, bottom),
++    Vector2(corner, bottom), Vector2(0, bottom - corner), Vector2(0, corner)
++   ]), fill)
 +  draw_polyline(PackedVector2Array([
 +   Vector2(corner, 0), Vector2(right - corner, 0), Vector2(right, corner),
 +   Vector2(right, bottom - corner), Vector2(right - corner, bottom),
@@ -109,6 +125,13 @@ index b84ea75..3b81378 100644
 +   Vector2(corner, 0)
 +  ]), TRACE_INK, 0.85, true)
 +
++  if not leads:
++   if not pads: return
++   for pad in [Vector2(corner, 0), Vector2(right - corner, 0), Vector2(0, bottom - corner), Vector2(right, bottom - corner)]:
++    draw_circle(pad, 2.25, PAD_EDGE, true, -1.0, true)
++    draw_circle(pad + Vector2(0, -0.18), 1.85, SOLDER, true, -1.0, true)
++    draw_circle(pad, 0.93, HOLE, true, -1.0, true)
++   return
 +  var left_joint := Vector2(45, bottom)
 +  var right_joint := Vector2(96, bottom)
 +  var left_lead := Vector2(51, bottom + 7)
@@ -163,7 +186,14 @@ index b84ea75..3b81378 100644
 +
 +static func mustard_rules_markup(rule: String) -> String:
 + var re := RegEx.new(); re.compile(MUSTARD_NUMBER)
-+ return "[center]" + re.sub(rule.replace("[", "[lb]"), "[b]$1[/b]", true) + "[/center]"
++ return "[center]" + re.sub(rule.replace("[", "[lb]"), "[b][color=#%s]$1[/color][/b]" % MUSTARD_GLOW_NUMBER.to_html(false), true) + "[/center]"
++
++## Soft phosphor halo: a zero-offset shadow outline in warm ivory.
++static func add_glow(control: Control, radius: int) -> void:
++ control.add_theme_color_override("font_shadow_color", MUSTARD_GLOW_HALO)
++ control.add_theme_constant_override("shadow_offset_x", 0)
++ control.add_theme_constant_override("shadow_offset_y", 0)
++ control.add_theme_constant_override("shadow_outline_size", radius)
 +
 +## Largest print size at which the rule fits the fixed frame, or 0 if it does
 +## not fit at MUSTARD_RULES_MIN. Measured in the bold face, which is the wider.
@@ -181,6 +211,7 @@ index b84ea75..3b81378 100644
 + frame.position = MUSTARD_RULES_RECT.position
 + frame.size = MUSTARD_RULES_RECT.size
 + frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
++ frame.fill = MUSTARD_MASK
 + var bounds := Rect2(Vector2.ZERO, frame.size).grow(-MUSTARD_RULES_INSET)
 + var print_size := maxi(mustard_rules_size(rule), MUSTARD_RULES_MIN)
 + var rules := RichTextLabel.new()
@@ -194,7 +225,8 @@ index b84ea75..3b81378 100644
 + rules.add_theme_font_override("bold_font", preload("res://assets/fonts/Preview-Barlow-Bold.ttf"))
 + rules.add_theme_font_size_override("normal_font_size", print_size)
 + rules.add_theme_font_size_override("bold_font_size", print_size)
-+ rules.add_theme_color_override("default_color", MUSTARD_INK)
++ rules.add_theme_color_override("default_color", MUSTARD_GLOW_INK)
++ add_glow(rules, 3)
 + rules.position = bounds.position
 + rules.size = Vector2(bounds.size.x, 0)
 + rules.text = mustard_rules_markup(rule)
@@ -210,7 +242,7 @@ index b84ea75..3b81378 100644
  func setup(owner_view, id: String, card_uid: int) -> void:
   view = owner_view; card_id = id; uid = card_uid
   custom_minimum_size = CARD_SIZE; size = custom_minimum_size
-@@ -71,7 +258,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
+@@ -71,7 +290,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   var label_top:=38 if d.type=="PROGRAM" else (30 if d.type=="PROTOCOL" else 24)
   var label_bottom:=218 if d.type=="PROGRAM" else 211
   if corp: label_top=60; label_bottom=212
@@ -220,7 +252,7 @@ index b84ea75..3b81378 100644
   body = Control.new(); body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); body.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(body)
   var bg := FriendlyLook.panel(Color.WHITE if corp else FriendlyLook.PAPER, FriendlyLook.RED if corp else FriendlyLook.TONER, 3, view.skin.radius / 2 if corp else 0)
   bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); bg.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(bg)
-@@ -87,6 +275,9 @@ func setup(owner_view, id: String, card_uid: int) -> void:
+@@ -87,6 +307,9 @@ func setup(owner_view, id: String, card_uid: int) -> void:
    board.size = bounds.size
    board.laminate = palette[1]
    board.face = palette[2]
@@ -230,7 +262,7 @@ index b84ea75..3b81378 100644
    board.mouse_filter = Control.MOUSE_FILTER_IGNORE
    body.add_child(board)
   # A stationary material layer sits behind printing, inset from chassis and contacts.
-@@ -122,9 +313,17 @@ func setup(owner_view, id: String, card_uid: int) -> void:
+@@ -122,9 +345,25 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   var grain_material:=ShaderMaterial.new(); grain_material.shader=grain_shader
   grain_material.set_shader_parameter("material_kind",["SCRIPT","PROGRAM","PROTOCOL","BLOATWARE"].find(d.type))
   grain.material=grain_material; body.add_child(grain)
@@ -246,19 +278,29 @@ index b84ea75..3b81378 100644
 + elif not corp:
    var finish:=CartridgeFinish.new(); finish.name="RarityFinish"; finish.rarity=rarity; finish.size=CARD_SIZE; body.add_child(finish)
 - var title_ink:=printed_ink
-+ var title_ink:=Color.WHITE if mustard_sample else printed_ink
++ var title_ink:=MUSTARD_GLOW_INK if mustard_sample else printed_ink
++ if mustard_sample:
++  var title_panel := SolderRuleFrame.new()
++  title_panel.name = "TitlePanel"
++  title_panel.fill = MUSTARD_MASK
++  title_panel.leads = false
++  title_panel.position = MUSTARD_TITLE_RECT.position; title_panel.size = MUSTARD_TITLE_RECT.size
++  title_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
++  body.add_child(title_panel)
   var head := FriendlyLook.panel(Color.TRANSPARENT)
   head.position = Vector2(15, label_top); head.size = Vector2(130, 40); head.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(head)
   var title := FriendlyLook.label(d.name.to_upper(), 10 if d.name.length() > 25 else (11 if d.name.length()>15 else 12), title_ink, view.skin.bold_font if corp else FriendlyLook.BOLD)
-@@ -133,10 +332,13 @@ func setup(owner_view, id: String, card_uid: int) -> void:
+@@ -133,10 +372,14 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   var title_font: Font=view.skin.bold_font if corp else FriendlyLook.BOLD
   while title_size>7 and title_font.get_multiline_string_size(title.text,HORIZONTAL_ALIGNMENT_LEFT,104,title_size).y>39: title_size-=1
   title.add_theme_font_size_override("font_size",title_size); body.add_child(title)
-+ if mustard_sample:
-+  title.add_theme_color_override("font_outline_color", Color("#24231C"))
-+  title.add_theme_constant_override("outline_size", 2)
-  if not corp:
+- if not corp:
 -  var separator:=ColorRect.new(); separator.color=Color("#9CADA666"); separator.position=Vector2(19,label_top+39); separator.size=Vector2(122,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(separator)
++ if mustard_sample:
++  title.position = MUSTARD_TITLE_RECT.position + Vector2(6, 0); title.size = MUSTARD_TITLE_RECT.size - Vector2(12, 0)
++  title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
++  add_glow(title, 4)
++ if not corp and not mustard_sample:
 +  var separator:=ColorRect.new(); separator.color=Color("#F2E5C2") if mustard_sample else Color("#9CADA666"); separator.position=Vector2(19,label_top+39); separator.size=Vector2(122,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(separator)
   var circle := CostCircle.new(); circle.position = Vector2(142, 5); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
 - var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, Color("#F2CD87"), FriendlyLook.BOLD)
@@ -266,7 +308,7 @@ index b84ea75..3b81378 100644
   cost.add_theme_color_override("font_shadow_color", Color("#D6B67580")); cost.add_theme_constant_override("shadow_offset_x", 0); cost.add_theme_constant_override("shadow_offset_y", 0); cost.add_theme_constant_override("shadow_outline_size", 2)
   cost.position = Vector2(143, 5); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
   var rule: String = view.game.card_text(id)
-@@ -147,7 +349,14 @@ func setup(owner_view, id: String, card_uid: int) -> void:
+@@ -147,7 +390,14 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   var art := FriendlyLook.label("" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
   art.position = Vector2(16, art_y); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
   var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
@@ -282,7 +324,7 @@ index b84ea75..3b81378 100644
    art.hide()
    var atlas:=preload("res://assets/friendly_lie/chrome/toner-illustrations.png")
    var index:=0
-@@ -165,12 +374,31 @@ func setup(owner_view, id: String, card_uid: int) -> void:
+@@ -165,12 +415,42 @@ func setup(owner_view, id: String, card_uid: int) -> void:
    add_graft_art(graft, Rect2(149, 75, 20, 22))
   if corp:
    var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(16,art_y); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
@@ -297,14 +339,25 @@ index b84ea75..3b81378 100644
 +  var stamp_size := MUSTARD_TYPE_MAX
 +  while stamp_size > MUSTARD_TYPE_MIN and stamp_font.get_string_size(stamp, HORIZONTAL_ALIGNMENT_LEFT, -1, stamp_size).x > MUSTARD_TYPE_RECT.size.x:
 +   stamp_size -= 1
-+  var type_stamp := FriendlyLook.label(stamp, stamp_size, printed_ink, stamp_font)
++  var stamp_w := stamp_font.get_string_size(stamp, HORIZONTAL_ALIGNMENT_LEFT, -1, stamp_size).x + MUSTARD_PLATE_PAD * 2
++  var plate := SolderRuleFrame.new()
++  plate.name = "TypePlate"
++  plate.fill = MUSTARD_MASK
++  plate.leads = false
++  plate.pads = false
++  plate.size = Vector2(minf(stamp_w, MUSTARD_TYPE_RECT.size.x + 4), MUSTARD_TYPE_RECT.size.y)
++  plate.position = Vector2(MUSTARD_TYPE_RECT.get_center().x - plate.size.x / 2.0, MUSTARD_TYPE_RECT.position.y)
++  plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
++  body.add_child(plate)
++  var type_stamp := FriendlyLook.label(stamp, stamp_size, MUSTARD_GLOW_INK, stamp_font)
 +  type_stamp.name = "TypeStamp"
 +  type_stamp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 +  type_stamp.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 +  type_stamp.clip_text = true
 +  # Routed Gothic is a single-stroke face; a 1 px outline in the same ink gives it weight at hand size.
-+  type_stamp.add_theme_color_override("font_outline_color", printed_ink)
++  type_stamp.add_theme_color_override("font_outline_color", MUSTARD_GLOW_INK)
 +  type_stamp.add_theme_constant_override("outline_size", 1)
++  add_glow(type_stamp, 2)
 +  body.add_child(type_stamp)
 +  var stamp_h := maxf(MUSTARD_TYPE_RECT.size.y, type_stamp.get_minimum_size().y)
 +  type_stamp.size = Vector2(MUSTARD_TYPE_RECT.size.x, stamp_h)
@@ -318,7 +371,7 @@ index b84ea75..3b81378 100644
   var cached: Dictionary = view.game._find(view.game.hand, uid)
   var cache_h := 18 if cached.get("cached", false) else 0
   var y := art_y+art_h+type_h+6
-@@ -180,14 +408,28 @@ func setup(owner_view, id: String, card_uid: int) -> void:
+@@ -180,14 +460,28 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   rules.add_theme_font_override("normal_font", font); rules.add_theme_font_size_override("normal_font_size", font_size); rules.add_theme_color_override("default_color", printed_ink)
   var re := RegEx.new(); re.compile("([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)")
   rules.text = re.sub(rule, "[outline_size=2][outline_color=#D6B67535][color=#F2CD87]$1[/color][/outline_color][/outline_size]", true)

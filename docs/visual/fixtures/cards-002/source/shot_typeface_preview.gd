@@ -155,13 +155,27 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
  if ink_bottom + MIN_GAP > FriendlyCard.MUSTARD_RULES_RECT.position.y:
   fail(tag + ": type stamp crowds the rules frame")
 
- # Title keeps its dark outline (white on mustard alone is 2.99:1).
- var outlined := false
+ # Glow study: title, type stamp and rules each sit on a dark mask panel,
+ # and every ink on that mask clears 4.5:1 (the halo is decoration only).
+ for panel in ["TitlePanel", "TypePlate", "SolderRulesFrame"]:
+  if not body.has_node(panel) or body.get_node(panel).fill != FriendlyCard.MUSTARD_MASK:
+   fail(tag + ": " + panel + " is not on the dark mask")
+ for ink in [FriendlyCard.MUSTARD_GLOW_INK, FriendlyCard.MUSTARD_GLOW_NUMBER]:
+  if contrast(ink, FriendlyCard.MUSTARD_MASK) < 4.5:
+   fail(tag + ": ink below 4.5:1 on the mask")
+ var title_ok := false
  for child in body.get_children():
   if child is Label and child.text == CardDB.def(face).name.to_upper():
-   outlined = child.get_theme_constant("outline_size") >= 2
- if not outlined:
-  fail(tag + ": title outline missing")
+   title_ok = child.get_theme_color("font_color") == FriendlyCard.MUSTARD_GLOW_INK and FriendlyCard.MUSTARD_TITLE_RECT.encloses(child.get_rect())
+ if not title_ok:
+  fail(tag + ": title is not glowing ivory inside its panel")
+ if stamp.get_theme_color("font_color") != FriendlyCard.MUSTARD_GLOW_INK or rules.get_theme_color("default_color") != FriendlyCard.MUSTARD_GLOW_INK:
+  fail(tag + ": stamp or rules not in glowing ivory")
+ var plate: Control = body.get_node("TypePlate")
+ if plate.pads:
+  fail(tag + ": plated pads on the type plate would touch the stamp")
+ if plate.get_rect().end.y > FriendlyCard.MUSTARD_RULES_RECT.position.y - 1:
+  fail(tag + ": type plate touches the rules panel")
 
  # Cached: never printed on the face; a badge outside the board instead.
  for child in body.find_children("*", "Label", true, false) + body.find_children("*", "RichTextLabel", true, false):
@@ -177,3 +191,13 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
    fail(tag + ": cache badge overlaps the board or shows the wrong turns")
   if not "CACHED" in card.tooltip_text:
    fail(tag + ": tooltip does not name the cached state")
+
+func luminance(c: Color) -> float:
+ var ch := [c.r, c.g, c.b]
+ for i in 3:
+  ch[i] = ch[i] / 12.92 if ch[i] <= 0.03928 else pow((ch[i] + 0.055) / 1.055, 2.4)
+ return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2]
+
+func contrast(a: Color, b: Color) -> float:
+ var la := luminance(a); var lb := luminance(b)
+ return (maxf(la, lb) + 0.05) / (minf(la, lb) + 0.05)

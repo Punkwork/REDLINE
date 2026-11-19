@@ -4,15 +4,19 @@
 
 **Status:** Design review, 2026-11-19. The fifth design is an alternate Rustler cartridge treatment. The review source is isolated from the playable build.
 
-![Review fixes: three rarities, two cached states and the longest-rules stress card](iterations/PANOPTICON_Mustard_PCB_05_Review_Fixes.jpg)
+![Glow study: text on dark solder-mask panels over the mustard board](iterations/PANOPTICON_Mustard_PCB_05_Glow_Mask.jpg)
 
-## Current review version
+## Current review version — glow study (2026-11-19, PROPOSED)
 
-- The whole board uses mustard laminate `#AE924D`, sampled from the designer's TV Typewriter PCB reference. The white title (with its `#24231C` outline) and BW numeral sit above the dark `#100D07` card text.
-- Routed Gothic prints the type and tags as one centred stamp line (`SCRIPT · EXPLOIT`) at 9 px, falling to 8 px if needed. A 1 px outline in the same ink gives the single-stroke face weight at hand size.
-- Barlow SemiBold prints the rules, with numbers and their units (`−4 STR`, `2`) in Barlow Bold. The rules sit inside a fixed 134 × 84 PCB trace frame, centred horizontally and vertically, at 11 px down to a 9 px floor.
-- Thin PCB traces outline the entire rules box. Plated through-holes and short branches connect it visually to an empty axial resistor footprint.
-- A recessed light in the top exterior of the cartridge shows rarity. It has three cells, filled left to right: one for Common, two for Uncommon, three for Rare. The card face omits the written rarity; the hover tooltip still names it.
+The designer found that dark text on bare mustard lacked contrast and asked whether the text should glow off the board. In this study no text sits directly on the mustard.
+
+- The board stays mustard laminate `#AE924D`, sampled from the designer's TV Typewriter PCB reference, with its circuit stencil, traces and contacts.
+- **Dark solder-mask panels** in `#2E2712` sit behind the title, the type stamp and the rules. The mask is 4.96:1 against the mustard, so each panel reads as a distinct printed area.
+- **Glowing ivory text** `#FFF3D0` (13.4:1 on the mask) has a soft zero-offset halo, `rgba(255, 219, 140, 0.32)`. The halo is decoration only; contrast is measured on the solid ink.
+- **Title:** Chrome Deco bold, centred vertically in a 124 × 38 chamfered mask panel with plated corner holes. The old dark outline and separator line are gone.
+- **Type stamp:** Routed Gothic, one centred line (`SCRIPT · EXPLOIT`) at 9 px, falling to 8 px if needed, on a small pill-shaped mask plate. The plate has no plated holes, so nothing touches the letters.
+- **Rules:** Barlow SemiBold, centred in a fixed 134 × 84 mask panel with traces, plated holes and the empty resistor footprint, at 11 px down to a 9 px floor. Numbers and their units are **Barlow Bold in phosphor amber** `#FFC861` (9.7:1 on the mask).
+- **Rarity:** a recessed light in the top exterior of the cartridge with three cells, filled left to right: one for Common, two for Uncommon, three for Rare. The card face omits the written rarity; the hover tooltip still names it.
 - **Cached** is never printed on the card. A padlock indicator is mounted on the cartridge's left ear, outside the board. A card held until played has a solid rim. A temporary cache breaks the rim into segments, one lit per remaining turn. The hover tooltip reads `CACHED` or `CACHED · TEMP (n turns)`.
 
 | Rarity | Light | Example |
@@ -37,7 +41,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 | Long rules would shrink to about 8 px | Stencil art shortened to 40 px and type plus tags merged to one line, so the frame grows from 67 to 84 px. Floor raised to 9 px; every card's rules at AMP 0–3 (444 texts) fit. |
 | Rarity shown by colour alone (amber and green differ by only 1.08:1 in brightness) | Lit-cell count, 1/2/3, alongside the colour. |
 | Numbers lost their emphasis | Barlow Bold for numbers in the dark ink (the old `#F2CD87` highlight would fail contrast on mustard). |
-| White title is 2.99:1 on mustard alone | Outline kept and now asserted by the fixture. |
+| White title is 2.99:1 on mustard alone | Superseded by the glow study: the title sits on its own dark mask panel. |
 | Thin left-aligned type lines crowding the frame | One centred stamp line with a weighting outline, at least 3 px clear of the frame. |
 
 ## Design sequence
@@ -53,6 +57,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 9. [Board traces, plated holes and resistor footprint](iterations/PANOPTICON_Mustard_PCB_05_Board_Trace_Frame.jpg)
 10. [Top-edge rarity lights](iterations/PANOPTICON_Mustard_PCB_05_Rarity_Lights.jpg)
 11. [Review fixes: cache padlock, segmented lights, taller frame, bold numbers](iterations/PANOPTICON_Mustard_PCB_05_Review_Fixes.jpg)
+12. [Glow study: ivory text on dark solder-mask panels, amber numbers](iterations/PANOPTICON_Mustard_PCB_05_Glow_Mask.jpg)
 
 ## Reproduce the latest preview
 
@@ -79,7 +84,7 @@ The capture fixture needs a display. It checks:
 - each lamp's tier and lit-cell count against the card's actual rarity;
 - the fixed frame, the 9 px floor, centring and fit of the rules, and bold numbers;
 - that the type stamp is one line and clear of the frame;
-- that the title keeps its outline;
+- that the title, type stamp and rules each sit on the dark mask, in glowing ivory, with every ink at least 4.5:1 on the mask and no plated holes on the type plate;
 - that `CACHED` never appears on the card face, and that the padlock appears only on cached cards, stays off the board, shows the right turn count and is named in the tooltip;
 - that every card's rules text at AMP 0–3 fits the frame at 9 px, and every Rustler type stamp fits one line at 8 px.
 

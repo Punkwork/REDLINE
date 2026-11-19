@@ -4,16 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex)
-
-**Commit tag:** `cards-001-board-palette`.
-
-**Designer choices:** A/C/D board colours selected for card faces; Whirlwind #3 selected as Bloatware prototype. The pale Bloatware plate was rejected (“No card should have a white background for the text”). Brown Bloatware was then rejected for matching SCRIPT; oxide-red D received “Perfect”. That confirms the D material choice; no approval of the entire PR/merge is inferred.
-
-**Changed:** tobacco-brown SCRIPT, earthy olive PROGRAM, muted blue-green PROTOCOL; direct light printing on real board-style textures. BLOATWARE now has the Whirlwind-inspired protective U-handle, paired tubes, open cage/stacked boards and oxide-red phenolic face. Names, costs and rules are live controls. TRACER/SPAM remain BLOATWARE with unchanged unplayability/clear/TRACE rules; both now use the same component-aware bounds as other cartridges. Cached Bloatware retains full rules and CACHED marker; optional corporate flavour footer yields space when cached. No white card text panels remain. A–D review labels denote the four types; source-reference letters A/C/D remain palette provenance.
-
-**Validation:** Godot 4.3 import, 357 rules checks and 170 Friendly Lie UI checks pass. Extended cartridge fixture passes 625 checks and covers all authored/compiled texts, both Bloatware examples including cached text, component bounds and a mixed-type hand. Selected older log entry appended unchanged to the archive under LOG-001. Asset sources/guide/status/HANDOFF and PNGs are updated. No card definitions, rarity weights, costs or gameplay values changed. PR #12 remains open for integrated review before merge.
-
 ## 2026-11-17 — CARDS-001: instrument amber accents (Codex)
 
 **Commit tag:** `cards-001-amber`. Replaced neon yellow-green with warm instrument amber (`#D6B675`) for the shared highlight and printed numeric highlights. The brass/gauge reference fits the selected brown, olive, teal and oxide-red boards. BW badges, selection accents and shared HUD controls inherit the same colour. No rules or costs changed.
@@ -421,3 +411,15 @@ Saved ten review sheets, three final Godot captures and the reproducible prototy
 **Interpretations to confirm:** padlock glyph and left-ear position; broken-rim turn segments for temporary cache; 1/2/3 lamp cells; bold numbers in place of the amber highlight; 84 px frame with a 40 px stencil; single-line type stamp with a 1 px weighting outline; Barlow Bold added under the same OFL.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex).
+
+## 2026-11-19 — CARDS-002 glow study on dark solder-mask panels (Claude)
+
+**Designer feedback:** "The text doesn't glow off the PCB boards… there's just not enough contrast between the text itself and the PCB boards." The designer asked for the next study on the review branch only.
+
+**Changed (preview patch, `review/cards-002` only):** added dark mask panels in `#2E2712` behind the title (124×38), the type stamp (a pill-shaped plate with no plated holes) and the rules (134×84). Text prints in ivory `#FFF3D0` with a soft halo; numbers print in Barlow Bold amber `#FFC861`. Removed the title's dark outline and the separator line. The fixture now asserts mask panels, glowing ivory ink, at least 4.5:1 for every ink on the mask, and no plated holes on the type plate.
+
+**Validation:** Godot 4.3 at baseline `0aa6091` with the patch: preview fixture 0 failures at 3× and 1×, with 444 rules texts fitting at 9 px or larger; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0.
+
+**Interpretations to confirm:** mask colour and panel shapes; halo strength (alpha 0.32, radius 3–4); amber for numbers; the type stamp on its own plate rather than inside the rules panel.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex).
