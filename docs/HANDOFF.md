@@ -195,3 +195,5 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 - **Claude Code / next build:** run Godot 4.3 screenshot and animation fixtures per exploration README, fix any parse/runtime issues, render and review six PNGs + GIF, run the full rules suite, replace vector mascot stand-ins with existing mascot art, and complete key/tooltips/reel behavior and contrast/accessibility audits.
 - **Designer:** review rendered visuals and VIS-001 §2.9 tooltip exception; only the designer can approve integration.
 - **Guardrails:** do not change rules or CARDS-004/005; do not integrate into default encounter; mockup numbers are illustrative.
+
+- **ICE-ANALOG-001 follow-up:** motion-phase scaffolding committed (idle/attention/telegraph/break/tumble). Still requires Godot validation, approved mascot asset substitution, actual TUMBLER reel implementation, and accessibility pass. No build acceptance yet.
