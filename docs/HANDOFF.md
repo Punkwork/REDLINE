@@ -69,7 +69,7 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **PIXEL-TRACE-001b** | Bit-crush the corporation's music with the TRACE pixel steps: a crush spike during each 0.5 s step transition, then a light held crush that deepens toward Mask off. Music bus only, so it mutes with music; plays with reduced motion on; no separate sound effect. Add the values to `atomic_deco_punk.json` and an audio capture per step for the designer to tune by ear. | Master PIXEL-TRACE-001b | Claude Code | TO DO |
+| **PIXEL-TRACE-001b** | Bit-crush the corporation's music with the TRACE pixel steps: a crush spike during each 0.5 s step transition, then a light held crush that deepens toward Mask off. Music bus only, so it mutes with music; plays with reduced motion on. A separate transition sound effect is also planned; the designer hasn't chosen it yet (see Waiting). Add the values to `atomic_deco_punk.json` and an audio capture per step for the designer to tune by ear. | Master PIXEL-TRACE-001b | Claude Code | TO DO |
 
 **Cards and hand (approved 2026-11-19):** CARDS-004 and HAND-MAX-001 are built; see Built below.
 
@@ -139,6 +139,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 | ID | Question | Where it came from | Status |
 |---|---|---|---|
+| PIXEL-TRACE-001c | **Which sound effect plays on a pixel-step transition?** It plays alongside the bit-crushed music (PIXEL-TRACE-001b). The designer hasn't decided yet. Options discussed: a TV detune (tube set losing horizontal hold), a teletype burst, a neon ballast buzz. | Designer, 2026-11-19 | WAITING |
 | NAME-002 (PROPOSED) | **Rename VITAE to SPARK?** Designer: VITAE "seems so out of place in this setting"; SPARK "works", to be reviewed later "to see how much it fits before committing it". Why SPARK: the stat is not health but how much of *you* the machine can't have. Every consciousness has a First Signal; the spark is that signal in you, and what the ’Pelago harvests for the synchronization (SIGNAL-001, ARCH-001). Hits dim it; at 0 your spark is taken. Period-true (radio spark gap). Samples: *SPARK 12 / 30*, *PULP 5 · SPARK −5*, NUL/REM "keep your spark low and your head lower." Considered and set aside: NERVE, TICKER, GRIT, PULSE (too close to PULP); runners-up STATIC, SPINE, INK. Optional extra: corporations name the same number in flavour copy only (HALCYON "Comfort Level", IRONWATCH "Wellness Index", LUCIDA "Restfulness"). Scope if approved: about 510 mentions in 21 docs, including LOCKED master entries (Vitae distinction, HUB-002 PATCH UP), and about 80 in code/data; Claude Code renames on screen with a guard test that VITAE never appears; no rule changes. | Designer, 2026-11-18 | WAITING (review later) |
 | ARCH-NAMES-001 names | The nine island names are working copy: the designer will check them against real care homes later. | ARCH §4.0 | WAITING |
 

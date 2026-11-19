@@ -571,3 +571,7 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — HA
 **Interpretations to confirm:**
 - the held crush per step (the designer approved the crush on the transition; holding it between steps is Claude's proposal);
 - the crush is on the music bus only, so the mechanical sounds stay clean.
+
+## 2026-11-19 — PIXEL-TRACE-001c: a transition sound effect, to be chosen (Claude)
+
+**Designer:** "There will be a sound as well for the transition but i have not yet determined." This corrects the previous entry: a pixel-step transition gets a sound effect as well as the bit-crushed music. The master design doc no longer says "no separate sound effect". HANDOFF has a WAITING row, PIXEL-TRACE-001c, listing the options discussed (TV detune, teletype burst, neon ballast buzz). **Code changes:** none.
