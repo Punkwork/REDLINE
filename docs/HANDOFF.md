@@ -197,3 +197,10 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 - **Guardrails:** do not change rules or CARDS-004/005; do not integrate into default encounter; mockup numbers are illustrative.
 
 - **ICE-ANALOG-001 follow-up:** motion-phase scaffolding committed (idle/attention/telegraph/break/tumble). Still requires Godot validation, approved mascot asset substitution, actual TUMBLER reel implementation, and accessibility pass. No build acceptance yet.
+
+
+### ICE-ANALOG-001 — designer-approved integration, implementation pending (2026-11-19)
+
+- **Approval:** the designer explicitly approved integrating ICE-ANALOG-001's visual changes into default encounters. The design is APPROVED; **the current scaffold is not a tested build**.
+- **Claude Code / next laptop build:** pull latest `main`; run Godot 4.3 import and rules suite, validate six screenshots and animation frames, replace mascot stand-ins with existing approved art, finish full icon set/reel, focus/hover tooltips, break affordances, reduced motion and 4.5:1 contrast, then integrate through the existing encounter presentation layer without modifying rules code or CARDS-004/005. Add/execute interaction and regression tests before treating integration as complete.
+- **Release gate:** don't claim integration, screenshots, GIF or passing tests until actually produced and inspected. Preserve SIGNAL-001 reveal guard and copy guards. Mockup values are illustrative only.
