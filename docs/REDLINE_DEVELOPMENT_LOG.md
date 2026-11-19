@@ -4,12 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex)
-
-**Commit tag:** `cards-001-amber-glow`. Designer requested glowing amber text instead of highlighted backgrounds. Numeric rule text now uses warm amber ink (`#F2CD87`) with a faint translucent amber halo; removed rectangular fills. External BW badges use a dark instrument face and glowing amber numerals. Board textures stay visible.
-
-**Interpretations to confirm:** restrained halo intensity and dark BW instrument face are proposed treatments. No gameplay changes. 625 cartridge UI checks pass; refreshed live-control comparison and card/hand PNGs. PR #12 remains open for review.
-
 ## 2026-11-17 — CARDS-001: distinct board surface textures (Codex)
 
 **Commit tag:** `cards-001-board-textures`. Added subtle stationary procedural material grain behind card printing: pressed phenolic fibres for brown SCRIPT, woven laminate for olive PROGRAM, brushed resin for teal PROTOCOL, mottled Bakelite for oxide-red BLOATWARE. Inset feathered bounds protect chassis and contacts; text/illustrations draw above the texture. Existing palette and amber text glow retained.
@@ -427,3 +421,15 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CA
 **Interpretations to confirm:** cyan as the cache colour; dashed for temporary rather than showing turns left; keeping the padlock alongside the glow.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: instrument amber accents (Codex).
+
+## 2026-11-19 — CARDS-002 single cache state (Claude)
+
+**Designer direction:** "No need for padlock. Yes cyan. … A card is cached or not. If it's for 1 turn or permanently, the icon shouldn't change."
+
+**Changed (preview patch, `review/cards-002` only):** removed the ear padlock and the dashed variant. A cached card now shows one solid cyan edge glow whatever its duration. The tooltip reads `CACHED`, plus `(temporary)` for a timed cache. The fixture asserts that the glow appears only on cached cards, that no padlock remains, that the glow clears every panel, and that it draws beneath the cost.
+
+**Validation:** preview fixture 0 failures at 3× and 1×; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 with the patch applied.
+
+**Interpretations to confirm:** keeping "(temporary)" in the tooltip.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex).

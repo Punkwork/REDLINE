@@ -4,7 +4,7 @@
 
 **Status:** Design review, 2026-11-19. The fifth design is an alternate Rustler cartridge treatment. The review source is isolated from the playable build.
 
-![Glow study with the cyan cache edge glow (bottom left: held; bottom middle: temporary)](iterations/PANOPTICON_Mustard_PCB_05_Cache_Edge_Glow.jpg)
+![Current review version: glowing text on dark mask panels; bottom left and middle are cached (one cyan edge glow)](iterations/PANOPTICON_Mustard_PCB_05_Cache_Single_Glow.jpg)
 
 ## Current review version — glow study (2026-11-19, PROPOSED)
 
@@ -17,7 +17,7 @@ The designer found that dark text on bare mustard lacked contrast and asked whet
 - **Type stamp:** Routed Gothic, one centred line (`SCRIPT · EXPLOIT`) at 9 px, falling to 8 px if needed, on a small pill-shaped mask plate. The plate has no plated holes, so nothing touches the letters.
 - **Rules:** Barlow SemiBold, centred in a fixed 134 × 84 mask panel with traces, plated holes and the empty resistor footprint, at 11 px down to a 9 px floor. Numbers and their units are **Barlow Bold in phosphor amber** `#FFC861` (9.7:1 on the mask).
 - **Rarity:** a recessed light in the top exterior of the cartridge with three cells, filled left to right: one for Common, two for Uncommon, three for Rare. The card face omits the written rarity; the hover tooltip still names it.
-- **Cached** is never printed on the card. The board edge glows **icy cyan** `#7FE3F0`, a colour no rarity lamp or text uses. The ring is solid for a card held until played and dashed for a temporary cache. It sits on the board under the BW cost circle, the title and the text panels, so it crosses no text or cost. The padlock on the left ear stays as the shape cue, so cached is never shown by colour alone: solid rim when held, one lit rim segment per remaining turn when temporary. The hover tooltip reads `CACHED` or `CACHED · TEMP (n turns)`.
+- **Cached** is never printed on the card. A cached card's board edge glows **icy cyan** `#7FE3F0` as one solid ring. There is a single state (designer, 2026-11-19): a card cached for one turn looks the same as one held until played, and the turns left are not shown. The ring sits on the board under the BW cost circle, the title and the text panels, so it crosses no text or cost. Its presence, not just its colour, is the cue. The hover tooltip reads `CACHED` or `CACHED (temporary)`.
 
 | Rarity | Light | Example |
 |---|---|---|
@@ -28,7 +28,7 @@ The designer found that dark text on bare mustard lacked contrast and asked whet
 | State | Capture |
 |---|---|
 | Cached until played | [DEEP PROBE, cached](captures/DEEP_PROBE_CACHED.png) |
-| Temporary cache, 2 turns left | [STRESS TEST, cached · temp](captures/STRESS_TEST_CACHED_TEMP.png) |
+| Temporary cache (looks the same as held) | [STRESS TEST, cached · temp](captures/STRESS_TEST_CACHED_TEMP.png) |
 | Longest rules in the pool (SLEDGE, 155 characters) at the 9 px floor | [Stress card](captures/LONGEST_RULES_STRESS.png) |
 
 The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) holds the same six cards rendered at hand size (164 × 244 on the 1600 × 1000 canvas).
@@ -37,7 +37,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 
 | Issue in the first review | Change |
 |---|---|
-| Printed `CACHED` tag landed inside the fixed rules frame | **Designer direction:** cached is an icon on the outside of the card, not text. Padlock on the left ear; the left edge stays visible when hand cards overlap. |
+| Printed `CACHED` tag landed inside the fixed rules frame | **Designer direction:** cached is not text on the card. Final: one cyan edge glow, with no padlock and no separate temporary state. |
 | Long rules would shrink to about 8 px | Stencil art shortened to 40 px and type plus tags merged to one line, so the frame grows from 67 to 84 px. Floor raised to 9 px; every card's rules at AMP 0–3 (444 texts) fit. |
 | Rarity shown by colour alone (amber and green differ by only 1.08:1 in brightness) | Lit-cell count, 1/2/3, alongside the colour. |
 | Numbers lost their emphasis | Barlow Bold for numbers in the dark ink (the old `#F2CD87` highlight would fail contrast on mustard). |
@@ -59,6 +59,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 11. [Review fixes: cache padlock, segmented lights, taller frame, bold numbers](iterations/PANOPTICON_Mustard_PCB_05_Review_Fixes.jpg)
 12. [Glow study: ivory text on dark solder-mask panels, amber numbers](iterations/PANOPTICON_Mustard_PCB_05_Glow_Mask.jpg)
 13. [Cache edge glow: cyan board-edge ring, solid or dashed, with the padlock](iterations/PANOPTICON_Mustard_PCB_05_Cache_Edge_Glow.jpg)
+14. [Single cache state: one solid cyan glow, no padlock](iterations/PANOPTICON_Mustard_PCB_05_Cache_Single_Glow.jpg)
 
 ## Reproduce the latest preview
 
@@ -86,7 +87,7 @@ The capture fixture needs a display. It checks:
 - the fixed frame, the 9 px floor, centring and fit of the rules, and bold numbers;
 - that the type stamp is one line and clear of the frame;
 - that the title, type stamp and rules each sit on the dark mask, in glowing ivory, with every ink at least 4.5:1 on the mask and no plated holes on the type plate;
-- that `CACHED` never appears on the card face; that the padlock and the cyan edge glow appear only on cached cards; that the glow is solid when held and dashed when temporary, stays outside every text panel and draws beneath the BW cost; that the padlock stays off the board and shows the right turn count; and that the tooltip names the state;
+- that `CACHED` never appears on the card face; that the cyan edge glow appears only on cached cards (and no padlock remains), stays outside every text panel and draws beneath the BW cost; and that the tooltip names the state;
 - that every card's rules text at AMP 0–3 fits the frame at 9 px, and every Rustler type stamp fits one line at 8 px.
 
 With the patch applied, the rules, ADP and SIGNAL/CARBON suites still pass (361/0, 17/0, 671/0).

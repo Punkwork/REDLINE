@@ -177,21 +177,18 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
  if plate.get_rect().end.y > FriendlyCard.MUSTARD_RULES_RECT.position.y - 1:
   fail(tag + ": type plate touches the rules panel")
 
- # Cached: never printed on the face; a badge outside the board instead.
+ # Cached: never printed on the face; one cyan edge glow, the same for a temporary cache.
  for child in body.find_children("*", "Label", true, false) + body.find_children("*", "RichTextLabel", true, false):
   if "CACHED" in child.text:
    fail(tag + ": CACHED printed on the card face")
  var entry: Dictionary = g._find(g.hand, uid)
  var is_cached: bool = entry.get("cached", false)
- if body.has_node("CacheBadge") != is_cached or body.has_node("CacheEdgeGlow") != is_cached:
-  fail(tag + ": cache badge presence mismatch")
+ if body.has_node("CacheBadge") or body.has_node("CacheEdgeGlow") != is_cached:
+  fail(tag + ": cache glow presence mismatch, or a leftover padlock")
  if is_cached:
-  var badge: Control = body.get_node("CacheBadge")
-  if badge.get_rect().end.x > BOARD_LEFT or badge.turns != int(entry.get("cache_turns", 0)):
-   fail(tag + ": cache badge overlaps the board or shows the wrong turns")
   var edge: Control = body.get_node_or_null("CacheEdgeGlow")
-  if edge == null or edge.temporary != entry.has("cache_turns"):
-   fail(tag + ": cache edge glow missing or wrong style")
+  if edge == null:
+   fail(tag + ": cache edge glow missing")
   else:
    # The glow (core plus 2 px halo) must stay outside every text panel.
    for child in body.get_children():
