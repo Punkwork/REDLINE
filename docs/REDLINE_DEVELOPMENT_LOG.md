@@ -4,10 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — Playtest checklist v0.4 for HALCYON PLAYTEST 4 (Claude)
-
-**Designer instruction:** update the REDLINE Playtest QA Checklist with appropriate changes for the new build. `REDLINE_PLAYTEST_CHECKLIST.md` v0.4 and the live Sheet (now 84 rows) both: tie to build b6b0971 (`playtest-4`); add A3 (confirm build and BUILD_COMMIT; scope is HALCYON's first four rows, so IRONWATCH, LUCIDA, Central Node H3/J1/J2 and whole-corporation totals G5/I2/K2 are N/A) and L9 (Icepick drag feedback, CHROME-001); drop the *(after …)* marks on C12–C14, C16 and M5 now that they're built, with the built details (turn-start roll, SCRAMBLE, DOORBELL CAM reveal order, AUTO-RENEW STR 5 vs CAPTCHA STR 4). Run log gains a Build column. **Code changes:** none.
-
 ## 2026-11-17 — Atomic Deco Punk design direction (Codex)
 
 Recorded the designer’s term and brief in the master design document. The direction covers corporate scale alongside hand-built elektronix, with visual design leading the tone, language, sound and emotional experience. Sound examples are directions to explore in playtesting. LOG-001 moved the oldest whole live entries to the archive unchanged.
@@ -575,3 +571,5 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — HA
 ## 2026-11-19 — PIXEL-TRACE-001c: a transition sound effect, to be chosen (Claude)
 
 **Designer:** "There will be a sound as well for the transition but i have not yet determined." This corrects the previous entry: a pixel-step transition gets a sound effect as well as the bit-crushed music. The master design doc no longer says "no separate sound effect". HANDOFF has a WAITING row, PIXEL-TRACE-001c, listing the options discussed (TV detune, teletype burst, neon ballast buzz). **Code changes:** none.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Playtest checklist v0.4 for HALCYON PLAYTEST 4 (Claude).
