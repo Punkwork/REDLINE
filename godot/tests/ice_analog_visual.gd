@@ -14,6 +14,10 @@ var elapsed: float=0.0
 var hovered: Vector2i=Vector2i(-1,-1)
 var focused: Vector2i=Vector2i(-1,-1)
 var illegal: bool=false
+var animation_phase: String="idle"
+var telegraph_slot: int=-1
+var break_flash: bool=false
+var tumble_progress: float=1.0
 var key_boxes: Array[Dictionary]=[]
 var font: Font=ThemeDB.fallback_font
 var icons: Dictionary={"PULP":"✸","TRACE":"◎","DEADLOCK":"▣","DISCARD":"↪","INSERT":"✉","BW":"⌁","CORTEX":"♧","CURVE":"✸","VOID":"?","BOOTING":"▣"}
@@ -81,9 +85,13 @@ func draw_console(r: Rect2,title: String,strength: String,keys: Array,idx: int,c
  var cx: float=r.position.x+r.size.x*0.50
  var cy: float=r.position.y+190
  var bob: float=0.0 if reduced_motion else sin(elapsed*(1.2 if idx==0 else 2.3)+idx)*5.0
+ if animation_phase=="break" and not reduced_motion:
+  bob-=12.0*abs(sin(elapsed*20.0))
  draw_circle(Vector2(cx,cy+bob),73.0 if not compact else 55.0,CREAM)
  draw_arc(Vector2(cx,cy+bob),73.0 if not compact else 55.0,0,TAU,40,COPPER,5)
  var eye_dx: float=0.0 if reduced_motion else 5.0*sin(elapsed*0.7)
+ if not reduced_motion and animation_phase=="attention": eye_dx=15.0
+ if not reduced_motion and animation_phase=="telegraph": eye_dx=-14.0
  for side in [-1,1]:
   draw_circle(Vector2(cx+side*24+eye_dx,cy-12+bob),5,INK)
  draw_arc(Vector2(cx,cy+15+bob),20,0.2,PI-0.2,18,INK,3)
@@ -97,6 +105,8 @@ func draw_console(r: Rect2,title: String,strength: String,keys: Array,idx: int,c
  for i in count:
   var data: Array=keys[i]
   var kr:=Rect2(start+i*(key_size+space),y,key_size,key_size)
+  if animation_phase=="tumble" and idx==1 and i==0 and not reduced_motion:
+   kr.position.y+=24.0*(1.0-tumble_progress)
   draw_key(kr,str(data[0]),str(data[1]),str(data[2]),idx,i)
   if i<count-1:
    label("›",Vector2(kr.end.x+1,y+key_size*0.64),20)
@@ -119,7 +129,8 @@ func draw_key(r: Rect2,kind: String,value: String,state: String,ice: int,slot: i
  if value!="": label(value,r.position+Vector2(r.size.x-29,r.size.y-13),27,CREAM if state=="hidden" else INK)
  if state=="broken":
   draw_line(r.position+Vector2(8,r.size.y-9),r.position+Vector2(r.size.x-8,9),INK,4)
- if state=="hit": draw_arc(r.get_center(),r.size.x*0.6,0,TAU,48,RED,3)
+ if state=="hit" or (animation_phase=="telegraph" and ice==1 and slot==telegraph_slot):
+  draw_arc(r.get_center(),r.size.x*0.6,0,TAU,48,RED,3)
  if state=="tumbled": label("↓",r.position+Vector2(r.size.x-16,16),18,RED)
  if kind=="DEADLOCK" and state=="broken": label("✓",r.position+Vector2(4,17),18,GREEN)
  if state!="hidden":
@@ -133,9 +144,10 @@ func draw_tooltip(_d: Dictionary) -> void:
  var kind: String="PULP"
  var value: String="6"
  var slot: int=1
- if hovered.x>=0:
+ var target: Vector2i=hovered if hovered.x>=0 else focused
+ if target.x>=0:
   for b in key_boxes:
-   if b["ice"]==hovered.x and b["slot"]==hovered.y:
+   if b["ice"]==target.x and b["slot"]==target.y:
     kind=b["kind"]; value=b["value"]; slot=b["slot"]+1
  var r:=Rect2(970,475,530,280)
  panel(r,CREAM)
