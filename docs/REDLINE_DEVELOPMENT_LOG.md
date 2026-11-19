@@ -415,3 +415,8 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 **Validation:** Godot 4.3 import passed. Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 and cartridge fixture 621/0. TRACER and SPAM captures match the baseline pixel for pixel.
 
 **Interpretations to confirm:** mustard SCRIPT, olive PROGRAM and blue-green PROTOCOL use darker print fields and share ivory perimeter traces and dark contacts. These exact palette values and trace layout await the designer's visual review.
+
+
+## 2026-11-19 — CARDS-002 Mustard PCB review archive (Codex)
+
+Saved ten review sheets, three final Godot captures and the reproducible prototype for the fifth cartridge design. The designer requested centred rules inside a fixed PCB trace frame and a single top-edge rarity light. The final capture fixture verified all three indicators, frame geometry, alignment and text fit in Godot 4.3. The archive is under `docs/visual/fixtures/cards-002/`.
