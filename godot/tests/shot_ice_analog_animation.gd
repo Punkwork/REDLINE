@@ -18,7 +18,7 @@ func _run() -> void:
  for i in 72:
   view.elapsed=float(i)/12.0
   view.animation_phase="idle" if i<12 else ("attention" if i<24 else ("telegraph" if i<36 else ("break" if i<48 else "tumble")))
-  view.telegraph_slot=(i-24)/4%2 if i>=24 and i<36 else -1
+  view.telegraph_slot=int((i-24)/4)%2 if i>=24 and i<36 else -1
   view.break_flash=i>=36 and i<48
   view.tumble_progress=clampf(float(i-48)/24.0,0.0,1.0)
   view.hovered=Vector2i(1,0) if i>=12 and i<24 else Vector2i(-1,-1)
