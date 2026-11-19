@@ -2870,3 +2870,8 @@ User confirms **all six ICE names** and **all existing Training Node values** fo
 ### ICE-ANALOG-001 — editable presentation scaffold (2026-11-19; PROPOSED, not APPROVED)
 
 An isolated Godot visual study and six-state screenshot harness were added on `main` for the HALCYON analog encounter direction. See `docs/visual/explorations/ice-analog-001/README.md`. All mockup values are illustrative, not rule changes. The fixture is not integrated into the default encounter. Existing mascot artwork, full motion, accessible tooltip behavior and validated renders remain outstanding; only the designer may approve integration. VIS-001 §2.9 exception (full key rule text via tooltip with persistent NEXT RESPONSE/passive text) remains open for review.
+
+
+### ICE-ANALOG-001 — designer approval to integrate (2026-11-19)
+
+**APPROVED by the designer in ChatGPT:** “Okay, well then I approve all of these changes to be integrated into the default encounters.” This supersedes the earlier review-only integration restriction for the **design direction**: Atomic Deco Punk ICE instrument keys, full-rule tooltip/readouts, larger expressive existing mascots, presentation animations and analog console treatment may be integrated into default encounters. All gameplay values in visual mockups are illustrative and do not change the authoritative rules. Existing CARDS-001/004/005 presentation and SIGNAL-001 reveal guard remain binding. **Implementation is not yet complete or validated.** Integration must preserve rules/presentation separation, accessibility, and the existing mascot artwork. The VIS-001 §2.9 tooltip exception is included in the approved direction, provided NEXT RESPONSE/passive rules remain legible without hover.
