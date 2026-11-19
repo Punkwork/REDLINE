@@ -572,3 +572,13 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Pl
 - ICE-ANALOG-001 moves full rule text to hover/focus (VIS-001 §2.9 to be revisited).
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — Atomic Deco Punk design direction (Codex), 2026-11-17 — ADP-001 Phase 1 (Codex).
+
+## 2026-11-19 — ICE-ANALOG-001: editable Godot visual study (Codex)
+
+**Designer:** requested the artistic direction from the three new PANOPTICON analog encounter concept renders be translated into an editable Godot fixture and committed for the next build. Designer clarified that all displayed numbers are illustrative mockup data, not proposed rule changes.
+
+**Committed:** isolated `godot/tests/ice_analog_visual.gd`, six-state `shot_ice_analog.gd`, animation-frame `shot_ice_analog_animation.gd`, editable vector key source and exploration README under `docs/visual/explorations/ice-analog-001/`. The files are source studies and do not alter gameplay, card assets or the default encounter.
+
+**Validation:** Godot 4.3 executable unavailable in this authoring environment; fixture has **not been run**, screenshots and GIF have **not been rendered**, rules suite has **not been rerun**. The mascot stand-ins, glyphs and animation are incomplete relative to §8. No approval claimed.
+
+**Interpretations to confirm:** (1) icon-only keys with full tooltip plus NEXT RESPONSE/passive text require VIS-001 §2.9 review; (2) 3-ICE key sizes must pass 44 px; (3) existing mascot artwork must replace the vector stand-ins; (4) mockup values are illustrative only; (5) animation/tooltip interactions need Godot validation before designer review.
