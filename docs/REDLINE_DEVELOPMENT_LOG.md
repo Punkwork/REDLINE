@@ -4,10 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude)
-
-**Designer decision:** "Okay, all those changes that you listed are all approved." Covers the CHROME-001 art review, CARDS-001 as a whole, and the VIS-001 details (hand size, lethal threshold, undrawn ICE silhouettes and wording, motion timings, Cracking after a strike). Recorded as VISUAL-APPROVALS-002 in the master design doc with the approved values. HANDOFF: the two matching *Waiting* rows moved to *Done*; the CARDS-001, CHROME-001 and VIS-001 *Built* rows note art approval with playtest still pending. The rules questions in *Waiting* are not covered. **Code changes:** none.
-
 ## 2026-11-17 — CHROME-001 / CARDS-001 / MAIN-001 follow-up (Codex)
 
 Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stages passed. Amber numbers on brown SCRIPT faces are harder to read. Synced status and handoff and documented nine assets, including oxide-red Whirlwind Bloatware. Exact prompts/model IDs and the corrected concept PNG were unavailable. No Windows export. LOG-001 moved the oldest whole live entry to the archive unchanged.
@@ -465,3 +461,4 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RU
 
 **Designer:** "Great save those changes." This confirms the CARDS-003a interpretations: the THEN joiner, the "Hover for full text" hint, names and hover only for cards whose text doesn't fit, and the panel opening below the card when there is no room above. Master design and HANDOFF updated. **Code changes:** none.
 
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude).
