@@ -4,22 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — VISUAL-DECISIONS-2026-11-17: approved visual decisions recorded in the master design doc (Claude)
-
-**Designer instruction:** record the approved visual decisions from VIS-001, CHROME-001 and CARDS-001 in `REDLINE_MASTER_DESIGN.md`, leaving out everything still waiting for review. Added the VISUAL-DECISIONS-2026-11-17 table after the Raygun Gothic section: The Friendly Lie, Atomic Salvage deprecated, 6-card draw, Chrome Deco encounter, no black ICE rule panels, type-specific cartridges, A/C/D board colours, no white card text backgrounds, oxide-red Whirlwind Bloatware, glowing amber numbers. Each row quotes the designer and cites its commit. Final art, working values and Interpretations to confirm stay in HANDOFF *Waiting on the designer*. LOG-001: the oldest whole entry (DSY-001/002/003/006, 2026-11-15) moved unchanged to the archive. **Code changes:** none.
-
-## 2026-11-17 — MAIN-001: HANDOFF points to main (Claude)
-
-**Designer instruction:** fix the contradiction between `HANDOFF.md` and the shared working agreement. Rule 1 now says to work on `main` under `AGENTS.md` / `CLAUDE.md` (the former working branch was merged at a523502); rule 2 and the session-start step say `main`. Added a MAIN-001 row to *Done*. **Found, not changed:** `.github/workflows/godot-validation.yml` only runs the Windows export on pushes to `codex/halcyon-playtest-stabilization` or `codex/zeroed-tumble-2026-11-16`, so pushes to `main` never export. CI belongs to Codex; raised with the designer. **Code changes:** none.
-
-## 2026-11-17 — MAIN-001: Windows export runs on main (Claude)
-
-**Designer instruction:** make the Windows export run from `main`. In `.github/workflows/godot-validation.yml`, the three Windows steps (install template, export, upload) now run on pushes to `main` instead of `codex/halcyon-playtest-stabilization` / `codex/zeroed-tumble-2026-11-16`. Validation, rules and screenshot steps are unchanged; the workflow still triggers only on changes under `godot/` or to the workflow file. HANDOFF's deferred Windows line updated to match.
-
-## 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude)
-
-**Designer decision:** "B Each corp will have a different look. The HUD will probably change in the near future, but I want to keep it this way for now." The CARDS-001 hardware cards and the zine HUD/tags/END TURN/NUL/REM notes stay as they are; this is recorded as a deliberate exception to Visual Language Rule 1. Added RUSTLER-LOOK-001 to the master design doc and an amendment note under Rule 1 in `REDLINE_VISUAL_LANGUAGE.md`. **Code changes:** none.
-
 ## 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude)
 
 **Designer decision:** "Okay, all those changes that you listed are all approved." Covers the CHROME-001 art review, CARDS-001 as a whole, and the VIS-001 details (hand size, lethal threshold, undrawn ICE silhouettes and wording, motion timings, Cracking after a strike). Recorded as VISUAL-APPROVALS-002 in the master design doc with the approved values. HANDOFF: the two matching *Waiting* rows moved to *Done*; the CARDS-001, CHROME-001 and VIS-001 *Built* rows note art approval with playtest still pending. The rules questions in *Waiting* are not covered. **Code changes:** none.
@@ -444,3 +428,35 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CA
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: distinct board surface textures (Codex).
+
+## 2026-11-19 — CARDS-003a: card names on the face, full text on hover (Claude)
+
+**Designer direction:** "I prefer the full text to show on a hover, as the solution. And on the card while it's in your hand, where the card text is, place the card names." It replaces the tall layout proposed in the previous entry.
+
+**Changed:**
+- `card.gd`: the tall layout is removed, so every card uses the standard panels.
+- When a card's rules don't fit at 9 px (`summary_rules`), the rules panel names the component cards in effect order, joined by a small THEN, with a "Hover for full text" footer.
+- Hovering shows `FullRulesPanel`: the full rules in a mask panel 220 px wide, sized to the text. It is placed above the card in screen space, so a scrolling reward row cannot clip it, and kept inside the window.
+- The tooltip drops the rules line for these cards.
+- The footer band in a rules panel is now 15 px and its line is centred in it, so it clears the plated pads on the panel edge; this applies to BLOATWARE's corporate line too.
+- `shot_cards_pcb`:
+  - sweeps 444 base texts, all of which must fit;
+  - sweeps the 1,008 compiled pairs: 901 fit on the face, and 107 show names with hover, where the names must fit at 9 px;
+  - checks the names and hint on a summary card;
+  - checks the footer's clearance from the pads;
+  - adds a hand-size hover capture, checking that the panel is visible, holds the full text, fits, stays on screen and doesn't cover the card.
+
+**Validation:**
+- Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 14 CI screenshot fixtures clean; `shot_cards_pcb` 0 failures at 3× and 1×.
+- The other CI fixtures' screenshots are unchanged.
+
+**Interpretations to confirm:** the THEN joiner; the hint line; only cards that don't fit use names and hover; the panel opens below the card if there is no room above.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-DECISIONS-2026-11-17: approved visual decisions recorded in the master design doc (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: HANDOFF points to main (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: Windows export runs on main (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude).

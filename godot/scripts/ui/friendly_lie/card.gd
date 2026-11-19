@@ -6,8 +6,8 @@ const PHYSICAL_RECT:=Rect2(-10,-12,184,268)
 const PCB_RULES_INSET := 5.0
 const PCB_RULES_MAX := 11
 const PCB_RULES_MIN := 9
-## Last resort for very long text (compiled cards), tall layout only: shrink rather than clip.
-const PCB_RULES_FLOOR := 7
+## Hover panel for cards whose full rules don't fit the face (compiled cards).
+const FULL_RULES_WIDTH := 220.0
 const PCB_TYPE_MAX := 9
 const PCB_TYPE_MIN := 8
 ## CARDS-002: card text sits on dark solder-mask panels, never on the bare board.
@@ -28,7 +28,7 @@ const CORP_FACE := Rect2(10, 58, 144, 153)
 
 ## Rects for the title panel, art, type plate, rules panel and cache edge,
 ## derived from each Rustler board (or the corporate face for BLOATWARE).
-static func glow_layout(type: String, tall := false) -> Dictionary:
+static func glow_layout(type: String) -> Dictionary:
  if type == "BLOATWARE":
   return {
    "title": Rect2(15, 60, 120, 26), "art": Rect2(16, 91, 128, 16),
@@ -37,14 +37,6 @@ static func glow_layout(type: String, tall := false) -> Dictionary:
   }
  var board: Rect2 = BOARD_RECT[type]
  var top := board.position.y
- if tall:
-  # Long text: the stencil slot collapses, the type plate moves up under the
-  # title and the rules panel takes the freed space at full glow-safe width.
-  return {
-   "title": Rect2(13, top + 3, 124, 38), "art": Rect2(),
-   "type": Rect2(16, top + 46, 128, 13), "rules": Rect2(12, top + 62, 138, board.end.y - 14 - (top + 62)),
-   "edge": Rect2(9.5, top - 0.5, 143, board.end.y - 2.5 - (top - 0.5)), "leads": true, "tall": true,
-  }
  return {
   "title": Rect2(13, top + 3, 124, 38), "art": Rect2(16, top + 48, 128, 40),
   "type": Rect2(16, top + 90, 128, 13), "rules": Rect2(13, top + 105, 134, board.end.y - 14 - (top + 105)),
@@ -62,6 +54,8 @@ const BOARD_RECT := {
 }
 var view
 var corporate:=false
+var summary_rules := false
+var full_rules: Control
 var card_id := ""
 var uid := -1
 var placeholder := false
@@ -311,17 +305,26 @@ static func add_glow(control: Control, radius: int) -> void:
 
 ## Largest print size at which the rule fits the frame, or 0 if it does not
 ## fit at PCB_RULES_MIN. Measured in the bold face, which is the wider.
-static func glow_rules_size(rule: String, frame_size: Vector2, bold: Font, footer := false, floor_size := PCB_RULES_MIN) -> int:
+static func glow_rules_size(rule: String, frame_size: Vector2, bold: Font, footer := false) -> int:
  var bounds := frame_size - Vector2.ONE * PCB_RULES_INSET * 2 - Vector2(0, FOOTER_H if footer else 0)
- for print_size in range(PCB_RULES_MAX, floor_size - 1, -1):
+ for print_size in range(PCB_RULES_MAX, PCB_RULES_MIN - 1, -1):
   if bold.get_multiline_string_size(rule, HORIZONTAL_ALIGNMENT_CENTER, bounds.x, print_size).y <= bounds.y:
    return print_size
  return 0
 
-const FOOTER_H := 12.0
+## Footer line inside a rules panel; the extra 3 px keeps it clear of the plated pads on the panel edge.
+const FOOTER_H := 15.0
 const FOOTER_INK := Color("#D9CCA8")
 
-static func build_glow_rules(rule: String, rect: Rect2, mask: Color, normal: Font, bold: Font, leads := true, footer := "", floor_size := PCB_RULES_MIN) -> Control:
+## The full rules in a mask panel sized to the text, for hover.
+static func build_full_rules_panel(rule: String, mask: Color, normal: Font, bold: Font) -> Control:
+ var inner_w := FULL_RULES_WIDTH - PCB_RULES_INSET * 2
+ var text_h := bold.get_multiline_string_size(rule, HORIZONTAL_ALIGNMENT_CENTER, inner_w, PCB_RULES_MAX).y
+ var panel := build_glow_rules(rule, Rect2(Vector2.ZERO, Vector2(FULL_RULES_WIDTH, ceilf(text_h) + PCB_RULES_INSET * 2 + 6)), mask, normal, bold, false)
+ panel.name = "FullRulesPanel"
+ return panel
+
+static func build_glow_rules(rule: String, rect: Rect2, mask: Color, normal: Font, bold: Font, leads := true, footer := "", markup := "") -> Control:
  var frame := SolderRuleFrame.new()
  frame.name = "SolderRulesFrame"
  frame.position = rect.position
@@ -341,11 +344,13 @@ static func build_glow_rules(rule: String, rect: Rect2, mask: Color, normal: Fon
   foot.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
   foot.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
   foot.clip_text = true
-  foot.position = Vector2(bounds.position.x, bounds.end.y)
-  foot.size = Vector2(bounds.size.x, FOOTER_H)
   foot.mouse_filter = Control.MOUSE_FILTER_IGNORE
   frame.add_child(foot)
- var print_size := maxi(glow_rules_size(rule, rect.size, bold, footer != "", floor_size), floor_size)
+  # Centre the line in the footer band, whatever height the label settles at.
+  var foot_h := maxf(FOOTER_H - 3, foot.get_minimum_size().y)
+  foot.size = Vector2(bounds.size.x, foot_h)
+  foot.position = Vector2(bounds.position.x, bounds.end.y + (FOOTER_H - 3) / 2.0 - foot_h / 2.0)
+ var print_size := maxi(glow_rules_size(rule, rect.size, bold, footer != ""), PCB_RULES_MIN)
  var rules := RichTextLabel.new()
  rules.name = "CenteredRules"
  rules.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -361,7 +366,7 @@ static func build_glow_rules(rule: String, rect: Rect2, mask: Color, normal: Fon
  add_glow(rules, 3)
  rules.position = bounds.position
  rules.size = Vector2(bounds.size.x, 0)
- rules.text = pcb_rules_markup(rule)
+ rules.text = markup if markup != "" else pcb_rules_markup(rule)
  frame.add_child(rules)
  # fit_content resizes the label once its text is laid out; keep the block
  # centred vertically inside the fixed frame whenever that happens.
@@ -385,8 +390,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var mask: Color = glow_mask(d.type)
  var rule: String = view.game.card_text(id)
  var rules_bold: Font = view.skin.bold_font if corp else preload("res://assets/fonts/Barlow-Bold.ttf")
- if not corp and glow_rules_size(rule, lay.rules.size, rules_bold) == 0:
-  lay = glow_layout(d.type, true)
+ # Rules too long for the face (compiled cards): the face names the cards; hover shows the full text.
+ summary_rules = not corp and glow_rules_size(rule, lay.rules.size, rules_bold) == 0
  body = Control.new(); body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); body.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(body)
  var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
  # Rustler boards: laminate with silkscreen and holes around the perimeter.
@@ -465,10 +470,6 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
  if corp:
   var corporate_art := CorporateArt.new(); corporate_art.position=lay.art.position; corporate_art.size=lay.art.size; corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
- elif lay.has("tall"):
-  # No art slot on a long card; a graft shows as a small part on the chassis edge.
-  if graft in Game.GRAFT_PARTS:
-   add_graft_art(graft, Rect2(149, 75, 20, 22))
  else:
   var stencil := CircuitStencil.new()
   stencil.name = "CircuitStencil"
@@ -512,7 +513,22 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var is_cached: bool = cached.get("cached", false)
  var footer := ("We just want to stay in touch." if id=="TRACER" else "Recommended for you.") if corp and not is_cached else ""
  var normal_font: Font = view.skin.font if corp else preload("res://assets/fonts/Barlow-SemiBold.ttf")
- body.add_child(build_glow_rules(rule, lay.rules, mask, normal_font, rules_bold, lay.leads, footer, PCB_RULES_FLOOR if lay.has("tall") else PCB_RULES_MIN))
+ if summary_rules:
+  var names := []
+  for part in d.get("compiled", [id]):
+   names.append(CardDB.def(part).name.to_upper())
+  var face := "\n".join(names)
+  var face_markup := "[center]" + ("\n[font_size=8][color=#%s]THEN[/color][/font_size]\n" % FOOTER_INK.to_html(false)).join(names) + "[/center]"
+  body.add_child(build_glow_rules(face, lay.rules, mask, normal_font, rules_bold, lay.leads, "Hover for full text", face_markup))
+  full_rules = build_full_rules_panel(rule, mask, normal_font, rules_bold)
+  full_rules.top_level = true
+  full_rules.z_index = 200
+  full_rules.visible = false
+  add_child(full_rules)
+  mouse_entered.connect(show_full_rules)
+  mouse_exited.connect(func(): full_rules.visible = false)
+ else:
+  body.add_child(build_glow_rules(rule, lay.rules, mask, normal_font, rules_bold, lay.leads, footer))
  # Cached: never printed; one cyan glow on the board, beneath the cost and every text panel.
  if is_cached:
   var edge := CacheEdgeGlow.new()
@@ -521,7 +537,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   edge.mouse_filter = Control.MOUSE_FILTER_IGNORE
   body.add_child(edge)
   body.move_child(edge, body.get_node("BoardMaterialGrain").get_index() + 1)
- tooltip_text = d.name + " · " + d.type + " · " + rarity + "\n" + rule
+ tooltip_text = d.name + " · " + d.type + " · " + rarity + ("" if summary_rules else "\n" + rule)
  if is_cached:
   tooltip_text += "\nCACHED" + (" (temporary)" if cached.has("cache_turns") else "")
  if uid >= 0:
@@ -531,6 +547,18 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   mouse_exited.connect(func(): view.hover_uid = -1; view.hand.release_card(self))
  gui_input.connect(_card_input)
  queue_redraw()
+## Above the card in screen space (never clipped by a scrolling row), kept inside the window.
+func show_full_rules() -> void:
+ var card_rect := get_global_rect()
+ var view_rect := get_viewport_rect()
+ var at := Vector2(card_rect.get_center().x - full_rules.size.x / 2.0, card_rect.position.y - full_rules.size.y - 8)
+ if at.y < view_rect.position.y + 4:
+  at.y = card_rect.end.y + 8
+ at.x = clampf(at.x, view_rect.position.x + 4, view_rect.end.x - full_rules.size.x - 4)
+ at.y = clampf(at.y, view_rect.position.y + 4, view_rect.end.y - full_rules.size.y - 4)
+ full_rules.global_position = at
+ full_rules.visible = true
+
 func add_graft_art(graft: String, bounds: Rect2) -> void:
  var overlay := GraftArt.new()
  overlay.name = graft

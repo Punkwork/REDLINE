@@ -65,7 +65,7 @@ func run() -> void:
   ["TRACER", 9003, "BLOATWARE_TRACER_CACHED"],
   ["SHATTER", -1, "SCRIPT_SHATTER_LONGEST_RULES"],
   ["TOOLBELT", 9004, "PROTOCOL_TOOLBELT_GRAFTED"],
-  ["COMPILED::SHATTER::BORROWED_CREDENTIALS", -1, "SCRIPT_COMPILED_LONGEST_TALL"],
+  ["COMPILED::SHATTER::BORROWED_CREDENTIALS", -1, "SCRIPT_COMPILED_LONGEST"],
  ]
  for shot in shots:
   var card := FriendlyCard.new()
@@ -82,47 +82,43 @@ func run() -> void:
    fail(shot[2] + ": could not save capture")
   surface.remove_child(card)
   card.queue_free()
+ await hover_capture(main, g)
  await process_frame
  print("CARDS-003 card checks: %d failure(s)" % failures)
  quit(1 if failures else 0)
 
-## Every card's rules (with AMP 0 to 3), and every compiled SCRIPT pair, must
-## fit: the standard panel at 9 px or larger, or else the tall layout at 7 px
-## or larger. Nothing may clip. Every type stamp must fit one line at 8 px.
+## Every base card's rules (AMP 0 to 3) must fit its panel at 9 px or larger.
+## A compiled SCRIPT pair either fits too, or its face names the component
+## cards (which must fit at 9 px) and hover shows the full text.
 func sweep_text_fit(g: Game, view) -> void:
  var saved_amp: int = g.amp
  var routed: Font = preload("res://assets/fonts/RoutedGothic.ttf")
  var barlow_bold: Font = preload("res://assets/fonts/Barlow-Bold.ttf")
- var texts := []
+ var tally := {"base": 0, "compiled on face": 0, "compiled names + hover": 0}
  for amp in range(4):
   g.amp = amp
   for id in CardDB.DEFS:
-   texts.append([id, CardDB.def(id).type, g.card_text(id)])
+   var d := CardDB.def(id)
+   var corp: bool = d.type == "BLOATWARE"
+   var bold: Font = view.skin.bold_font if corp else barlow_bold
+   if FriendlyCard.glow_rules_size(g.card_text(id), FriendlyCard.glow_layout(d.type).rules.size, bold, corp) < FriendlyCard.PCB_RULES_MIN:
+    fail("%s (%s, AMP %d): rules do not fit the panel at %d px" % [id, d.type, amp, FriendlyCard.PCB_RULES_MIN])
+   tally.base += 1
  g.amp = saved_amp
  var ids: Array = CardDB.DEFS.keys()
+ var rect: Rect2 = FriendlyCard.glow_layout("SCRIPT").rules
  for a in ids:
   if CardDB.def(a).type != "SCRIPT": continue
   for b in ids:
    if a == b or CardDB.def(b).type != "SCRIPT" or not CardDB.def(a).tags.any(func(t): return CardDB.def(b).tags.has(t)): continue
    var cid: String = "COMPILED::" + a + "::" + b
-   texts.append([cid, "SCRIPT", g.card_text(cid)])
- var tally := {"standard": 0, "tall": 0, "below 9 px": 0}
- for entry in texts:
-  var corp: bool = entry[1] == "BLOATWARE"
-  var bold: Font = view.skin.bold_font if corp else barlow_bold
-  if FriendlyCard.glow_rules_size(entry[2], FriendlyCard.glow_layout(entry[1]).rules.size, bold, corp) > 0:
-   tally.standard += 1
-   continue
-  if corp:
-   fail(entry[0] + ": BLOATWARE rules do not fit at 9 px")
-   continue
-  var size := FriendlyCard.glow_rules_size(entry[2], FriendlyCard.glow_layout(entry[1], true).rules.size, bold, false, FriendlyCard.PCB_RULES_FLOOR)
-  if size == 0:
-   fail(entry[0] + ": rules would clip even in the tall layout at %d px" % FriendlyCard.PCB_RULES_FLOOR)
-  else:
-   tally.tall += 1
-   if size < FriendlyCard.PCB_RULES_MIN:
-    tally["below 9 px"] += 1
+   if FriendlyCard.glow_rules_size(g.card_text(cid), rect.size, barlow_bold) > 0:
+    tally["compiled on face"] += 1
+    continue
+   var names: String = CardDB.def(a).name.to_upper() + "\nTHEN\n" + CardDB.def(b).name.to_upper()
+   if FriendlyCard.glow_rules_size(names, rect.size, barlow_bold, true) == 0:
+    fail(cid + ": component names do not fit the face at 9 px")
+   tally["compiled names + hover"] += 1
  for id in CardDB.DEFS:
   var d := CardDB.def(id)
   var corp: bool = d.type == "BLOATWARE"
@@ -130,15 +126,13 @@ func sweep_text_fit(g: Game, view) -> void:
   var font: Font = view.skin.font if corp else routed
   if font.get_string_size(stamp, HORIZONTAL_ALIGNMENT_LEFT, -1, FriendlyCard.PCB_TYPE_MIN).x > FriendlyCard.glow_layout(d.type).type.size.x:
    fail(id + ": type stamp does not fit one line")
- print("CARDS-003 text-fit sweep: %d texts (base cards at AMP 0-3 and compiled pairs): %s" % [texts.size(), str(tally)])
+ print("CARDS-003 text-fit sweep: %s" % str(tally))
 
 func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
  var body := card.body
  var d := CardDB.def(face)
  var mask: Color = FriendlyCard.glow_mask(d.type)
- var tall: bool = d.type != "BLOATWARE" and body.get_node("SolderRulesFrame").get_rect() == FriendlyCard.glow_layout(d.type, true).rules
- var lay: Dictionary = FriendlyCard.glow_layout(d.type, tall)
- var floor_size: int = FriendlyCard.PCB_RULES_FLOOR if tall else FriendlyCard.PCB_RULES_MIN
+ var lay: Dictionary = FriendlyCard.glow_layout(d.type)
  var tag := face + (" uid %d" % uid if uid >= 0 else "")
 
  # Rarity lamp: Rustler commons, uncommons and rares only; 1/2/3 lit cells.
@@ -155,13 +149,10 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
  if d.type == "BLOATWARE":
   if stencil != null:
    fail(tag + ": corporate card should not carry a Rustler stencil")
- elif tall:
-  if stencil != null:
-   fail(tag + ": tall layout should have no stencil")
  elif stencil == null or stencil.kind != d.type or stencil.get_rect() != lay.art:
   fail(tag + ": stencil missing, wrong type or moved")
  var graft: String = g._find(g.run_deck, uid).get("graft", "")
- if graft in Game.GRAFT_PARTS and not tall:
+ if graft in Game.GRAFT_PARTS:
   var art: Control = body.get_node_or_null(graft)
   if art == null or stencil.visible or art.get_rect() != lay.art:
    fail(tag + ": graft art missing or the stencil still shows")
@@ -172,16 +163,27 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
  var bounds := Rect2(Vector2.ZERO, frame.size).grow(-FriendlyCard.PCB_RULES_INSET)
  if frame.has_node("PanelFooter"):
   bounds.size.y -= FriendlyCard.FOOTER_H
+  var foot: Label = frame.get_node("PanelFooter")
+  var ink_bottom := foot.get_rect().get_center().y + foot.get_theme_font("font").get_height(foot.get_theme_font_size("font_size")) / 2.0
+  if ink_bottom > frame.size.y - 4:
+   fail(tag + ": footer line touches the plated pads on the panel edge")
  if frame.get_rect() != lay.rules or frame.fill != mask:
   fail(tag + ": rules panel moved or not on the type's mask")
- if rules.get_theme_font_size("normal_font_size") < floor_size:
+ if rules.get_theme_font_size("normal_font_size") < FriendlyCard.PCB_RULES_MIN:
   fail(tag + ": rules below the size floor")
  if rules.get_content_height() > bounds.size.y + 0.5 or not bounds.grow(0.5).encloses(rules.get_rect()):
   fail(tag + ": rules overflow the panel")
  if absf(rules.get_rect().get_center().y - bounds.get_center().y) > 0.5:
   fail(tag + ": rules not vertically centred")
  var digits := RegEx.new(); digits.compile("[0-9]")
- if digits.search(g.card_text(face)) and not rules.text.contains("[b]"):
+ if card.summary_rules:
+  # Too long for the face: it names the component cards, and hover holds the full text.
+  for part in d.compiled:
+   if not rules.text.contains(CardDB.def(part).name.to_upper()):
+    fail(tag + ": face does not name " + part)
+  if not frame.has_node("PanelFooter") or card.full_rules == null or "\n" + g.card_text(face) in card.tooltip_text:
+   fail(tag + ": hover hint or full-rules panel missing")
+ elif digits.search(g.card_text(face)) and not rules.text.contains("[b]"):
   fail(tag + ": numbers not set in bold")
 
  # Title and type plate on the mask, in glowing ivory.
@@ -235,3 +237,36 @@ func luminance(c: Color) -> float:
 func contrast(a: Color, b: Color) -> float:
  var la := luminance(a); var lb := luminance(b)
  return (maxf(la, lb) + 0.05) / (minf(la, lb) + 0.05)
+
+## A long compiled card at hand size with its full-rules hover panel showing.
+func hover_capture(main: Node, g: Game) -> void:
+ var surface := SubViewport.new()
+ surface.size = Vector2i(420, 520)
+ surface.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+ root.add_child(surface)
+ var backdrop := ColorRect.new(); backdrop.color = Color("#E6EEEA"); backdrop.size = Vector2(surface.size); surface.add_child(backdrop)
+ var id := "COMPILED::SHATTER::BORROWED_CREDENTIALS"
+ var card := FriendlyCard.new()
+ card.setup(main.friendly, id, -1)
+ card.position = Vector2(128, 262)
+ surface.add_child(card)
+ for step in range(3):
+  await process_frame
+ card.show_full_rules()
+ for step in range(4):
+  await process_frame
+ await RenderingServer.frame_post_draw
+ var panel: Control = card.full_rules
+ var rules: RichTextLabel = panel.get_node("CenteredRules")
+ var shown := Rect2(panel.global_position, panel.size)
+ if not panel.visible or not rules.text.contains("SLEDGE") or not rules.text.contains("HUSH"):
+  fail("hover panel hidden or missing the full text")
+ if rules.get_content_height() > panel.size.y - FriendlyCard.PCB_RULES_INSET * 2 + 0.5:
+  fail("hover panel text overflows")
+ if not Rect2(Vector2.ZERO, Vector2(surface.size)).encloses(shown) or shown.end.y > card.get_global_rect().position.y:
+  fail("hover panel off screen or covering the card")
+ var suffix := "" if OS.get_environment("CARD_SHOT_SCALE") in ["", "3"] else "_1x"
+ if surface.get_texture().get_image().save_png(OS.get_environment("SHOT_DIR").path_join("SCRIPT_COMPILED_HOVER" + suffix + ".png")) != OK:
+  fail("could not save hover capture")
+ card.full_rules.visible = false
+ surface.queue_free()

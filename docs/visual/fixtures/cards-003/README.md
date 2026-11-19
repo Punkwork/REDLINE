@@ -26,15 +26,16 @@ The playable build uses this card treatment for every card type. The design hist
   - One solid icy-cyan `#7FE3F0` glow just inside the board edge, the same for a temporary cache.
   - Never printed on the card. The hover tooltip reads `CACHED`, or `CACHED (temporary)` for a timed cache.
 - **Grafts:** a grafted card shows its graft art in the stencil slot.
-- **Long text (CARDS-003a, PROPOSED):** when a card's rules don't fit the standard panel at 9 px, the card switches to a tall layout. The stencil slot collapses, the type plate moves up under the title, and the rules panel fills the freed space at 138 px wide. This mostly affects compiled SAFEHOUSE cards: 107 of 1,008 compiled SCRIPT pairs. In the tall layout, rules may shrink to 8 or 7 px as a last resort rather than clip; that happens for 2 texts. A graft on a tall card shows as a small part on the chassis edge.
+- **Long text (CARDS-003a, designer direction):** when a card's full rules don't fit its panel at 9 px, the face names the component cards in the rules panel, in effect order, joined by a small THEN. A dim "Hover for full text" line sits underneath. Hovering shows the full rules in a mask panel above the card, sized to the text and kept on screen. Only compiled SAFEHOUSE cards need this: 107 of 1,008 compiled SCRIPT pairs. Every base card, and the other 901 compiled pairs, keep their full rules on the face.
 
-![The longest compiled card (295 characters) in the tall layout](CARDS-003_Compiled_Tall_Layout.jpg)
+![A long compiled card in hand with its full rules shown on hover](CARDS-003_Compiled_Hover.jpg)
 
 `godot/tests/shot_cards_pcb.gd` (in CI) renders these cards. It checks:
 
 - the layout, contrast, size floor and fit;
 - the rarity lamps and per-type stencils;
 - the cache glow and graft art;
-- every card's rules text at AMP 0–3, plus all 1,008 compiled SCRIPT pairs, with no clipping allowed.
+- every card's rules text at AMP 0–3 and all 1,008 compiled SCRIPT pairs: each either fits its panel at 9 px or shows the component names, with the full text on hover;
+- that the hover panel holds the full text, fits, stays on screen and does not cover the card.
 
 Set `CARD_SHOT_SCALE=1` for hand-size captures.
