@@ -110,5 +110,12 @@
       "levels": 10,
       "dither": 0.5
     }
+  },
+  "pixel_transition": {
+    "_note": "PIXEL-TRACE-001 transition between steps: spike coarser, then settle. Off with reduced motion.",
+    "spike_cells": 2,
+    "spike_levels": 0.5,
+    "spike_seconds": 0.15,
+    "settle_seconds": 0.35
   }
 }

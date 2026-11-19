@@ -56,6 +56,31 @@ func shot(name: String, cell: float) -> void:
  var dir := OS.get_environment("SHOT_DIR")
  if dir != "": img.save_png(dir.path_join(name + ".png"))
 
+func cell_now() -> float:
+ return float(view.pixel_material.get_shader_parameter("cell"))
+
+## The step change animates with motion on: a spike to coarser cells, then the new step.
+func test_transition() -> void:
+ var g := start()
+ await settle()
+ check(is_equal_approx(cell_now(), 1.0), "a new encounter starts sharp")
+ main.reduced_motion = false
+ main.refresh()
+ g.add_trace(20,false); main.refresh()
+ check(view.pixel_tween != null and view.pixel_tween.is_running(), "TRACE 20 starts a transition with motion on")
+ await create_timer(0.14).timeout
+ await RenderingServer.frame_post_draw
+ check(cell_now() > 2.0, "the transition spikes past the new step (cell %d)" % cell_now())
+ var dir := OS.get_environment("SHOT_DIR")
+ if dir != "": root.get_texture().get_image().save_png(dir.path_join("trace-pixel-transition-spike.png"))
+ await create_timer(0.6).timeout
+ await settle()
+ check(is_equal_approx(cell_now(), 2.0) and not view.pixel_tween.is_running(), "the transition settles on TRACE 20's step")
+ main.reduced_motion = true
+ main.refresh()
+ g.add_trace(10,false); main.refresh()
+ check(is_equal_approx(cell_now(), 3.0), "reduced motion changes the step at once")
+
 func run() -> void:
  main = load("res://scenes/Main.tscn").instantiate()
  root.add_child(main)
@@ -74,6 +99,7 @@ func run() -> void:
  check(g.strikes >= 2 and view.corporation_state == "mask_off", "reached Mask off")
  view._process(0.0)
  await shot("trace-pixel-mask-off", 5.0)
+ await test_transition()
  main.queue_free()
  await settle()
  print("PIXEL-TRACE-001 FIXTURE: %d checks, %d failures" % [checks, failures])

@@ -4,16 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — FACADE-001: HALCYON non-fight copy approved (Codex)
-
-Designer approved the consent, remembered activity and reward lines as written in Facades §2a and will review them in playtesting. Recorded the approval in the master design and moved the decision to Done in HANDOFF.
-
-## 2026-11-17 — HALCYON PLAYTEST 4 Windows build (Codex)
-
-Godot 4.3 pre-flight passed 363 rules checks and all ten screenshot scripts (five Chrome stages, 173 Friendly Lie checks, 621 cartridge checks). Seeds 100–129 reproduced 21/11/13/17 clears and 17.0/11.8/16.2/11.5 mean survivor VITAE for GENERALIST/ECHO/RIOT/VECTOR. One RIOT run stalled at DOORBELL.
-
-Tagged `b6b0971e017e6e88929ff1a4a6e67cadfaa2f516` as `playtest-4`. [Actions validation and export](https://github.com/Punkwork/REDLINE/actions/runs/44202252857) passed and uploaded `PANOPTICON-HALCYON-PLAYTEST-4-0.4.0-playtest.4-Windows-x86_64`. Verified `BUILD_COMMIT.txt`, the guide and checklist v0.3, and the executable SHA-256 `3736797caa582f92110473758f235397fe16b12373ea6f829d51b8bf8b16d8b2`. Windows launch and playtest are pending with the designer.
-
 ## 2026-11-17 — Playtest checklist v0.4 for HALCYON PLAYTEST 4 (Claude)
 
 **Designer instruction:** update the REDLINE Playtest QA Checklist with appropriate changes for the new build. `REDLINE_PLAYTEST_CHECKLIST.md` v0.4 and the live Sheet (now 84 rows) both: tie to build b6b0971 (`playtest-4`); add A3 (confirm build and BUILD_COMMIT; scope is HALCYON's first four rows, so IRONWATCH, LUCIDA, Central Node H3/J1/J2 and whole-corporation totals G5/I2/K2 are N/A) and L9 (Icepick drag feedback, CHROME-001); drop the *(after …)* marks on C12–C14, C16 and M5 now that they're built, with the built details (turn-start roll, SCRAMBLE, DOORBELL CAM reveal order, AUTO-RENEW STR 5 vs CAPTCHA STR 4). Run log gains a Build column. **Code changes:** none.
@@ -539,3 +529,31 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FA
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex).
+
+## 2026-11-19 — PIXEL-TRACE-001a: animated pixel step changes (Claude)
+
+**Designer:** "Commit the transitions to the next build." Asked whether that meant animating the step changes or cutting playtest-7, the designer chose "Animate the step changes".
+
+**Built (`encounter.gd`, `atomic_deco_punk.json` → `pixel_transition`):**
+- When the TRACE state asks for a new step, a tween spikes for 0.15 s to cells 2 px coarser than either step, with half the colour levels (at least 4) and full dither, then settles on the new step over 0.35 s.
+- Cells are rounded to whole pixels throughout.
+- With reduced motion, and on a new encounter, the step changes at once.
+- A rebuilt ICE row takes the look currently on screen.
+
+**Fixture (`shot_trace_pixel`):** new checks:
+- a transition starts with motion on;
+- the transition spikes past the new step and settles on TRACE 20's 2 px;
+- reduced motion changes the step at once.
+
+A spike frame is captured, and `PIXEL-TRACE-001_Transition.gif` is in `docs/visual/fixtures/pixel-trace-001/`.
+
+**Validation:** rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0; all 15 CI screenshot fixtures clean.
+
+**Interpretations to confirm:**
+- the spike size and timing;
+- a step down (dismissing a strike) uses the same spike;
+- no sound with the transition.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001: HALCYON non-fight copy approved (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — HALCYON PLAYTEST 4 Windows build (Codex).

@@ -84,6 +84,9 @@ var mascots: Array[FriendlyMascot] = []
 const TRACE_PIXEL := preload("res://themes/trace_pixel.gdshader")
 var pixel_material: ShaderMaterial
 var pixel_layers: Array[Control] = []
+var pixel_target := {}   # the step the TRACE state asks for
+var pixel_shown := {}    # what is on screen now (differs mid-transition)
+var pixel_tween: Tween
 var hover_card := -1
 var hover_time := 0.0
 var hesitation_cooldown := 0.0
@@ -608,6 +611,7 @@ func reset_session() -> void:
  feedback_until=0; feedback_message=""; end_drag(); mascot_history.clear(); card_positions.clear(); last_encounter={}; last_turn=-1; previous_trace=0; previous_strikes=0; warned=false; strike_until=0; toast_until=0; new_subroutines.clear(); hand_signature=""
  music.set_active(false)
  bleed = 0.0; bleed_from = 0.0; bleed_target = 0.0; bleed_elapsed = 0.0
+ pixel_target = {}  # a new encounter snaps to its step without a transition
  if is_instance_valid(strike_overlay): strike_overlay.hide()
  reset_voice()
  hesitation_cooldown = 0.0
@@ -645,11 +649,35 @@ func pixel_overlay(pos: Vector2, area: Vector2, full: bool) -> Control:
 func update_pixel() -> void:
  if pixel_material == null or game == null: return
  var step := AtomicDecoPunk.pixel_step(game.trace, game.strikes, is_instance_valid(strike_overlay) and strike_overlay.visible)
- pixel_material.set_shader_parameter("cell", float(step.cell))
- pixel_material.set_shader_parameter("levels", float(step.levels))
- pixel_material.set_shader_parameter("dither", float(step.dither))
+ if step == pixel_target:
+  apply_pixel(pixel_shown)  # new layers (a rebuilt ICE row) pick up the current look
+  return
+ var first := pixel_target.is_empty()
+ pixel_target = step
+ if pixel_tween: pixel_tween.kill()
+ if first or reduced_motion or pixel_shown.is_empty():
+  apply_pixel(step)
+  return
+ # PIXEL-TRACE-001 transition: a short glitch spike to coarser cells and fewer colours,
+ # then settle on the new step. Reduced motion changes at once.
+ var cfg: Dictionary = AtomicDecoPunk.settings.pixel_transition
+ var from := pixel_shown.duplicate()
+ var peak := {"cell": maxf(from.cell, step.cell) + float(cfg.spike_cells), "levels": maxf(minf(from.levels, step.levels) * float(cfg.spike_levels), 4.0), "dither": 1.0}
+ pixel_tween = create_tween()
+ pixel_tween.tween_method(func(t: float): apply_pixel(blend_pixel(from, peak, t)), 0.0, 1.0, float(cfg.spike_seconds))
+ pixel_tween.tween_method(func(t: float): apply_pixel(blend_pixel(peak, step, t)), 0.0, 1.0, float(cfg.settle_seconds))
+ pixel_tween.tween_callback(func(): apply_pixel(step))
+static func blend_pixel(a: Dictionary, b: Dictionary, t: float) -> Dictionary:
+ return {"cell": lerpf(a.cell, b.cell, t), "levels": lerpf(a.levels, b.levels, t), "dither": lerpf(a.dither, b.dither, t)}
+func apply_pixel(look: Dictionary) -> void:
+ if look.is_empty(): return
+ pixel_shown = look.duplicate()
+ var cell := float(roundi(float(look.cell)))  # whole cells only, so blocks stay square
+ pixel_material.set_shader_parameter("cell", cell)
+ pixel_material.set_shader_parameter("levels", float(look.levels))
+ pixel_material.set_shader_parameter("dither", float(look.dither))
  for layer in pixel_layers:
-  if is_instance_valid(layer): layer.visible = float(step.cell) > 1.0
+  if is_instance_valid(layer): layer.visible = cell > 1.0
 func update_bleed_target() -> void:
  update_pixel()
  var target := AtomicDecoPunk.target(game.trace, game.strikes, strike_overlay.visible)
