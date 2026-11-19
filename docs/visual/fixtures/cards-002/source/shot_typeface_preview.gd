@@ -123,6 +123,14 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
  if body.has_node("RarityFinish"):
   fail(tag + ": printed rarity finish still present")
 
+ # Each Rustler type has its own circuit stencil; BLOATWARE keeps its corporate art.
+ var stencil: Control = body.get_node_or_null("CircuitStencil")
+ if d.type == "BLOATWARE":
+  if stencil != null:
+   fail(tag + ": corporate card should not carry a Rustler stencil")
+ elif stencil == null or stencil.kind != d.type or stencil.get_rect() != lay.art:
+  fail(tag + ": stencil missing, wrong type or moved")
+
  # Rules panel: per-type rect, size floor, centred, bold numbers.
  var frame: Control = body.get_node("SolderRulesFrame")
  var rules: RichTextLabel = frame.get_node("CenteredRules")

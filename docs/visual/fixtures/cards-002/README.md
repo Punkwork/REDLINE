@@ -4,7 +4,7 @@
 
 **Status:** Design review, 2026-11-19. PROPOSED except where a line says designer direction.
 
-![All four card types with the glow treatment and the deeper green PROGRAM, plus rarities, the longest rules text and cached cards](iterations/PANOPTICON_PCB_Glow_Four_Types_Deep_Green.jpg)
+![All four card types with the glow treatment and the deeper green PROGRAM, plus rarities, the longest rules text and cached cards](iterations/PANOPTICON_PCB_Glow_Type_Stencils.jpg)
 
 ## Current review version: four-type glow treatment
 
@@ -23,7 +23,8 @@
 - **Dark solder-mask panels** sit behind the title, the type plate and the rules. Each mask is a deep tint of its own board colour. No text sits on the bare board.
 - **Glowing ivory text** `#FFF3D0` has a soft halo. Numbers print in Barlow Bold phosphor amber `#FFC861`. On every mask, ivory is at least 13.4:1 and amber at least 9.6:1.
 - **Rustler type faces:** Chrome Deco bold for titles, Routed Gothic for the type plate, Barlow SemiBold and Bold for the rules.
-- **BLOATWARE** keeps the HALCYON corporate fonts for its facade. Its footer line ("We just want to stay in touch.") sits in dimmer ivory at the bottom of its rules panel.
+- **Circuit stencil per Rustler type** (designer direction): SCRIPT has an edge-connector footprint, PROGRAM a DIP chip with pads on both sides and its orientation notch, and PROTOCOL a TO-5 transistor can between two coil inductors.
+- **BLOATWARE** keeps the HALCYON corporate fonts for its facade (designer direction). Its footer line ("We just want to stay in touch.") sits in dimmer ivory at the bottom of its rules panel.
 - **Layout:** each panel is placed from the type's own board area. The rules panels are 84 px tall for SCRIPT, 80 for PROGRAM, 79 for PROTOCOL and 84 for BLOATWARE, with an 11 px ceiling and a 9 px floor. All 444 card texts (every card, AMP 0–3) fit their own type's panel.
 - **Rarity:** a recessed lamp in each Rustler shell's top exterior, with 1, 2 or 3 lit cells (amber, green or violet) for Common, Uncommon and Rare. On PROTOCOL it sits on the relay's lower rail (designer accepted). Starters have no rarity (designer direction), BLOATWARE has no lamp, and no printed rarity remains on any card.
 - **Cached** (designer direction): never printed on the card. A cached card shows one solid icy-cyan `#7FE3F0` glow just inside its board edge, the same whether it is temporary or held until played. The glow draws beneath the BW cost and every text panel. The hover tooltip reads `CACHED`, or `CACHED (temporary)` for a timed cache, which the designer kept for now.
@@ -38,8 +39,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 
 **Interpretations to confirm**
 - The mask tints for each type.
-- The same circuit stencil appears on every Rustler type.
-- BLOATWARE keeps its corporate fonts.
+- The footprint chosen for each stencil.
 
 ## Design sequence
 
@@ -59,6 +59,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 14. [Single cache state: one solid cyan glow, no padlock](iterations/PANOPTICON_Mustard_PCB_05_Cache_Single_Glow.jpg)
 15. [All four card types with the glow treatment, mustard on SCRIPT](iterations/PANOPTICON_PCB_Glow_Four_Types.jpg)
 16. [Deeper green PROGRAM](iterations/PANOPTICON_PCB_Glow_Four_Types_Deep_Green.jpg)
+17. [A circuit stencil per Rustler type](iterations/PANOPTICON_PCB_Glow_Type_Stencils.jpg)
 
 ## Reproduce the latest preview
 
@@ -83,6 +84,7 @@ PREVIEW_SCALE=1 godot --audio-driver Dummy --rendering-driver opengl3 --path god
 The capture fixture needs a display. For every captured card it checks:
 
 - the rarity lamp's tier and 1/2/3 cells, and that no printed rarity remains;
+- that each Rustler card carries its own type's circuit stencil, and that BLOATWARE carries none;
 - the rules panel's per-type rect, its mask colour, the 9 px floor, centring, fit and bold numbers;
 - that the title panel and type plate sit on the type's mask, with glowing ivory text and no plated holes touching the plate's text;
 - that every ink is at least 4.5:1 on its mask;

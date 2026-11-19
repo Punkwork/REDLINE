@@ -4,14 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude)
-
-**Designer decision:** "B Each corp will have a different look. The HUD will probably change in the near future, but I want to keep it this way for now." The CARDS-001 hardware cards and the zine HUD/tags/END TURN/NUL/REM notes stay as they are; this is recorded as a deliberate exception to Visual Language Rule 1. Added RUSTLER-LOOK-001 to the master design doc and an amendment note under Rule 1 in `REDLINE_VISUAL_LANGUAGE.md`. **Code changes:** none.
-
-## 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude)
-
-**Designer decision:** "Okay, all those changes that you listed are all approved." Covers the CHROME-001 art review, CARDS-001 as a whole, and the VIS-001 details (hand size, lethal threshold, undrawn ICE silhouettes and wording, motion timings, Cracking after a strike). Recorded as VISUAL-APPROVALS-002 in the master design doc with the approved values. HANDOFF: the two matching *Waiting* rows moved to *Done*; the CARDS-001, CHROME-001 and VIS-001 *Built* rows note art approval with playtest still pending. The rules questions in *Waiting* are not covered. **Code changes:** none.
-
 ## 2026-11-17 — CHROME-001 / CARDS-001 / MAIN-001 follow-up (Codex)
 
 Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stages passed. Amber numbers on brown SCRIPT faces are harder to read. Synced status and handoff and documented nine assets, including oxide-red Whirlwind Bloatware. Exact prompts/model IDs and the corrected concept PNG were unavailable. No Windows export. LOG-001 moved the oldest whole live entry to the archive unchanged.
@@ -443,3 +435,17 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VI
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: HANDOFF points to main (Claude).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: Windows export runs on main (Claude).
+
+## 2026-11-19 — CARDS-002 circuit stencil per Rustler type (Claude)
+
+**Designer direction:** "Bloat should keep its corporate font. Each rustler type should get its own circuit stencil."
+
+**Changed (preview patch, `review/cards-002` only):** `MustardStencil` now draws one footprint per type: SCRIPT an edge connector (unchanged), PROGRAM a DIP chip with twelve pads and an orientation notch, and PROTOCOL a TO-5 can with three plated leads between two coil inductors. Traces end in plated vias. BLOATWARE keeps its corporate fonts and Whirlwind art. The fixture asserts each Rustler card's stencil type and position, and that BLOATWARE carries no stencil.
+
+**Validation:** preview fixture 0 failures at 3× and 1×; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 with the patch applied.
+
+**Interpretations to confirm:** the footprint chosen for each type.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude).
