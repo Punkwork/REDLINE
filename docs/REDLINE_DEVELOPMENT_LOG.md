@@ -4,16 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: distinct board surface textures (Codex)
-
-**Commit tag:** `cards-001-board-textures`. Added subtle stationary procedural material grain behind card printing: pressed phenolic fibres for brown SCRIPT, woven laminate for olive PROGRAM, brushed resin for teal PROTOCOL, mottled Bakelite for oxide-red BLOATWARE. Inset feathered bounds protect chassis and contacts; text/illustrations draw above the texture. Existing palette and amber text glow retained.
-
-**Interpretations to confirm:** these four material patterns and their restrained intensity are proposed for review. No gameplay changes. 625 cartridge UI checks pass. Refreshed four-type comparison and card/hand fixtures. Oldest whole log entry appended unchanged to the archive under LOG-001.
-
-## 2026-11-17 — VISUAL-DECISIONS-2026-11-17: approved visual decisions recorded in the master design doc (Claude)
-
-**Designer instruction:** record the approved visual decisions from VIS-001, CHROME-001 and CARDS-001 in `REDLINE_MASTER_DESIGN.md`, leaving out everything still waiting for review. Added the VISUAL-DECISIONS-2026-11-17 table after the Raygun Gothic section: The Friendly Lie, Atomic Salvage deprecated, 6-card draw, Chrome Deco encounter, no black ICE rule panels, type-specific cartridges, A/C/D board colours, no white card text backgrounds, oxide-red Whirlwind Bloatware, glowing amber numbers. Each row quotes the designer and cites its commit. Final art, working values and Interpretations to confirm stay in HANDOFF *Waiting on the designer*. LOG-001: the oldest whole entry (DSY-001/002/003/006, 2026-11-15) moved unchanged to the archive. **Code changes:** none.
-
 ## 2026-11-17 — MAIN-001: HANDOFF points to main (Claude)
 
 **Designer instruction:** fix the contradiction between `HANDOFF.md` and the shared working agreement. Rule 1 now says to work on `main` under `AGENTS.md` / `CLAUDE.md` (the former working branch was merged at a523502); rule 2 and the session-start step say `main`. Added a MAIN-001 row to *Done*. **Found, not changed:** `.github/workflows/godot-validation.yml` only runs the Windows export on pushes to `codex/halcyon-playtest-stabilization` or `codex/zeroed-tumble-2026-11-16`, so pushes to `main` never export. CI belongs to Codex; raised with the designer. **Code changes:** none.
@@ -433,3 +423,17 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CA
 **Interpretations to confirm:** none. The designer kept the "(temporary)" tooltip wording "for now" (2026-11-19).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex).
+
+## 2026-11-19 — CARDS-002 four-type glow study (Claude)
+
+**Designer request:** previews of the treatment on all four card types, with mustard replacing the colour that doesn't suit the rest or is too similar to another (Claude to choose).
+
+**Changed (preview patch, `review/cards-002` only):** the glow treatment now applies to every card type through a per-type layout (`glow_layout`) derived from each board, or from the corporate face for BLOATWARE. Mustard replaces SCRIPT's gold/brown. Each type has its own dark mask, and BLOATWARE keeps its corporate fonts and Whirlwind art, with its footer line inside the rules panel. Rarity lamps are placed per shell, and starters no longer carry the printed rarity finish. The fixture now covers all four types, the uncommon and rare lamps, the longest text (SHATTER, 155 characters), cached cards on three boards, and a per-type sweep of all 444 texts.
+
+**Validation:** preview fixture 0 failures at 3× and 1×; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 with the patch applied.
+
+**Interpretations to confirm:** mask tints; olive PROGRAM 20° of hue from mustard; PROTOCOL lamp on the relay rail; the same stencil on every Rustler type; corporate fonts kept on BLOATWARE; no rarity mark on starters.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: distinct board surface textures (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-DECISIONS-2026-11-17: approved visual decisions recorded in the master design doc (Claude).

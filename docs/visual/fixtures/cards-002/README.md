@@ -1,48 +1,47 @@
-# CARDS-002 — Mustard PCB cartridge review
+# CARDS-002 — PCB glow cartridges, all four card types
 
 **Review branch only.** This folder lives on `review/cards-002` and is never merged into `main` or `release` (designer, 2026-11-19). Nothing here is part of the playable build.
 
-**Status:** Design review, 2026-11-19. The fifth design is an alternate Rustler cartridge treatment. The review source is isolated from the playable build.
+**Status:** Design review, 2026-11-19. PROPOSED except where a line says designer direction.
 
-![Current review version: glowing text on dark mask panels; bottom left and middle are cached (one cyan edge glow)](iterations/PANOPTICON_Mustard_PCB_05_Cache_Single_Glow.jpg)
+![All four card types with the glow treatment, plus rarities, the longest rules text and cached cards](iterations/PANOPTICON_PCB_Glow_Four_Types.jpg)
 
-## Current review version — glow study (2026-11-19, PROPOSED)
+## Current review version: four-type glow treatment
 
-The designer found that dark text on bare mustard lacked contrast and asked whether the text should glow off the board. In this study no text sits directly on the mustard.
+**Palette.** Mustard `#AE924D` replaces SCRIPT's old gold/brown (`#BD9547` with a `#6C4A1D` face). That colour was nearly identical to mustard (hue 40° against 43°), so mustard could not sit anywhere else without leaving two golds side by side. The designer asked Claude to choose.
 
-- The board stays mustard laminate `#AE924D`, sampled from the designer's TV Typewriter PCB reference, with its circuit stencil, traces and contacts.
-- **Dark solder-mask panels** in `#2E2712` sit behind the title, the type stamp and the rules. The mask is 4.96:1 against the mustard, so each panel reads as a distinct printed area.
-- **Glowing ivory text** `#FFF3D0` (13.4:1 on the mask) has a soft zero-offset halo, `rgba(255, 219, 140, 0.32)`. The halo is decoration only; contrast is measured on the solid ink.
-- **Title:** Chrome Deco bold, centred vertically in a 124 × 38 chamfered mask panel with plated corner holes. The old dark outline and separator line are gone.
-- **Type stamp:** Routed Gothic, one centred line (`SCRIPT · EXPLOIT`) at 9 px, falling to 8 px if needed, on a small pill-shaped mask plate. The plate has no plated holes, so nothing touches the letters.
-- **Rules:** Barlow SemiBold, centred in a fixed 134 × 84 mask panel with traces, plated holes and the empty resistor footprint, at 11 px down to a 9 px floor. Numbers and their units are **Barlow Bold in phosphor amber** `#FFC861` (9.7:1 on the mask).
-- **Rarity:** a recessed light in the top exterior of the cartridge with three cells, filled left to right: one for Common, two for Uncommon, three for Rare. The card face omits the written rarity; the hover tooltip still names it.
-- **Cached** is never printed on the card. A cached card's board edge glows **icy cyan** `#7FE3F0` as one solid ring. There is a single state (designer, 2026-11-19): a card cached for one turn looks the same as one held until played, and the turns left are not shown. The ring sits on the board under the BW cost circle, the title and the text panels, so it crosses no text or cost. Its presence, not just its colour, is the cue. The hover tooltip reads `CACHED` or `CACHED (temporary)`.
+| Type | Board | Dark mask behind text | Example |
+|---|---|---|---|
+| SCRIPT | Mustard `#AE924D` (new) | `#2E2712` | [DEEP PROBE](captures/SCRIPT_DEEP_PROBE.png) |
+| PROGRAM | Olive `#90934F` | `#23261A` | [PASSKEY](captures/PROGRAM_PASSKEY.png) |
+| PROTOCOL | Blue-green `#60938A` | `#14272A` | [TOOLBELT](captures/PROTOCOL_TOOLBELT.png) |
+| BLOATWARE | Corporate oxide-red face and Whirlwind art (unchanged) | `#2A1411` | [TRACER](captures/BLOATWARE_TRACER.png) |
 
-| Rarity | Light | Example |
-|---|---|---|
-| Common | Warm amber `#F5CA76`, 1 cell | [DEEP PROBE](captures/DEEP_PROBE.png) |
-| Uncommon | Phosphor green `#94D98C`, 2 cells | [STRESS TEST](captures/STRESS_TEST.png) |
-| Rare | Soft violet `#BF9EF6`, 3 cells | [NULL POINTER](captures/NULL_POINTER.png) |
+**Open palette question:** olive is 20° of hue from mustard, the closest pair in the set. Next to each other they read as different boards, but a deeper green PROGRAM would separate them more.
 
-| State | Capture |
+**Treatment, every type**
+- **Dark solder-mask panels** sit behind the title, the type plate and the rules. Each mask is a deep tint of its own board colour. No text sits on the bare board.
+- **Glowing ivory text** `#FFF3D0` has a soft halo. Numbers print in Barlow Bold phosphor amber `#FFC861`. On every mask, ivory is at least 13.4:1 and amber at least 9.6:1.
+- **Rustler type faces:** Chrome Deco bold for titles, Routed Gothic for the type plate, Barlow SemiBold and Bold for the rules.
+- **BLOATWARE** keeps the HALCYON corporate fonts for its facade. Its footer line ("We just want to stay in touch.") sits in dimmer ivory at the bottom of its rules panel.
+- **Layout:** each panel is placed from the type's own board area. The rules panels are 84 px tall for SCRIPT, 80 for PROGRAM, 79 for PROTOCOL and 84 for BLOATWARE, with an 11 px ceiling and a 9 px floor. All 444 card texts (every card, AMP 0–3) fit their own type's panel.
+- **Rarity:** a recessed lamp in each Rustler shell's top exterior, with 1, 2 or 3 lit cells (amber, green or violet) for Common, Uncommon and Rare. Starter and BLOATWARE cards have no lamp, and no printed rarity remains on any card.
+- **Cached** (designer direction): never printed on the card. A cached card shows one solid icy-cyan `#7FE3F0` glow just inside its board edge, the same whether it is temporary or held until played. The glow draws beneath the BW cost and every text panel. The hover tooltip reads `CACHED`, or `CACHED (temporary)` for a timed cache, which the designer kept for now.
+
+| Also captured | |
 |---|---|
-| Cached until played | [DEEP PROBE, cached](captures/DEEP_PROBE_CACHED.png) |
-| Temporary cache (looks the same as held) | [STRESS TEST, cached · temp](captures/STRESS_TEST_CACHED_TEMP.png) |
-| Longest rules in the pool (SLEDGE, 155 characters) at the 9 px floor | [Stress card](captures/LONGEST_RULES_STRESS.png) |
+| Uncommon and Rare lamps | [STRESS TEST](captures/SCRIPT_STRESS_TEST_UNCOMMON.png) · [NULL POINTER](captures/SCRIPT_NULL_POINTER_RARE.png) |
+| Longest rules in the pool (SHATTER, 155 characters) | [SHATTER](captures/SCRIPT_SHATTER_LONGEST_RULES.png) |
+| Cached on each board | [SCRIPT](captures/SCRIPT_DEEP_PROBE_CACHED.png) · [PROGRAM, temporary](captures/PROGRAM_PASSKEY_CACHED_TEMP.png) · [BLOATWARE](captures/BLOATWARE_TRACER_CACHED.png) |
 
-The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) holds the same six cards rendered at hand size (164 × 244 on the 1600 × 1000 canvas).
+The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) holds the same cards rendered at hand size (164 × 244 on the 1600 × 1000 canvas).
 
-## Review fixes (2026-11-19, PROPOSED except where noted)
-
-| Issue in the first review | Change |
-|---|---|
-| Printed `CACHED` tag landed inside the fixed rules frame | **Designer direction:** cached is not text on the card. Final: one cyan edge glow, with no padlock and no separate temporary state. |
-| Long rules would shrink to about 8 px | Stencil art shortened to 40 px and type plus tags merged to one line, so the frame grows from 67 to 84 px. Floor raised to 9 px; every card's rules at AMP 0–3 (444 texts) fit. |
-| Rarity shown by colour alone (amber and green differ by only 1.08:1 in brightness) | Lit-cell count, 1/2/3, alongside the colour. |
-| Numbers lost their emphasis | Barlow Bold for numbers in the dark ink (the old `#F2CD87` highlight would fail contrast on mustard). |
-| White title is 2.99:1 on mustard alone | Superseded by the glow study: the title sits on its own dark mask panel. |
-| Thin left-aligned type lines crowding the frame | One centred stamp line with a weighting outline, at least 3 px clear of the frame. |
+**Interpretations to confirm**
+- The mask tints for each type.
+- The PROTOCOL lamp sits on the relay's lower rail, because that shell has no free strip on top.
+- The same circuit stencil appears on every Rustler type.
+- BLOATWARE keeps its corporate fonts.
+- Starters carry no rarity mark.
 
 ## Design sequence
 
@@ -60,6 +59,7 @@ The captures are at 3× hand size. [`captures/hand-size/`](captures/hand-size/) 
 12. [Glow study: ivory text on dark solder-mask panels, amber numbers](iterations/PANOPTICON_Mustard_PCB_05_Glow_Mask.jpg)
 13. [Cache edge glow: cyan board-edge ring, solid or dashed, with the padlock](iterations/PANOPTICON_Mustard_PCB_05_Cache_Edge_Glow.jpg)
 14. [Single cache state: one solid cyan glow, no padlock](iterations/PANOPTICON_Mustard_PCB_05_Cache_Single_Glow.jpg)
+15. [All four card types with the glow treatment, mustard on SCRIPT](iterations/PANOPTICON_PCB_Glow_Four_Types.jpg)
 
 ## Reproduce the latest preview
 
@@ -81,15 +81,16 @@ PREVIEW_SCALE=1 godot --audio-driver Dummy --rendering-driver opengl3 --path god
   --script res://tests/shot_typeface_preview.gd
 ```
 
-The capture fixture needs a display. It checks:
+The capture fixture needs a display. For every captured card it checks:
 
-- each lamp's tier and lit-cell count against the card's actual rarity;
-- the fixed frame, the 9 px floor, centring and fit of the rules, and bold numbers;
-- that the type stamp is one line and clear of the frame;
-- that the title, type stamp and rules each sit on the dark mask, in glowing ivory, with every ink at least 4.5:1 on the mask and no plated holes on the type plate;
-- that `CACHED` never appears on the card face; that the cyan edge glow appears only on cached cards (and no padlock remains), stays outside every text panel and draws beneath the BW cost; and that the tooltip names the state;
-- that every card's rules text at AMP 0–3 fits the frame at 9 px, and every Rustler type stamp fits one line at 8 px.
+- the rarity lamp's tier and 1/2/3 cells, and that no printed rarity remains;
+- the rules panel's per-type rect, its mask colour, the 9 px floor, centring, fit and bold numbers;
+- that the title panel and type plate sit on the type's mask, with glowing ivory text and no plated holes touching the plate's text;
+- that every ink is at least 4.5:1 on its mask;
+- that `CACHED` never appears on the card face, and that the cyan edge glow appears only on cached cards, follows the type's edge, stays outside every text panel and draws beneath the BW cost.
+
+It also sweeps every card's rules text at AMP 0–3 against its own type's panel, and every type stamp against one line at 8 px.
 
 With the patch applied, the rules, ADP and SIGNAL/CARBON suites still pass (361/0, 17/0, 671/0).
 
-The [preview source](source/) includes the patch, fixture and both font licences. [Routed Gothic](https://github.com/dse/routed-gothic/tree/365e340d64c55cb7c57940744773e6c833e3efd9) and [Barlow SemiBold and Bold](https://github.com/google/fonts/tree/main/ofl/barlow) are distributed under the SIL Open Font License; `Barlow-OFL.txt` covers both Barlow weights.
+The [preview source](source/) includes the patch, fixture and font licences. [Routed Gothic](https://github.com/dse/routed-gothic/tree/365e340d64c55cb7c57940744773e6c833e3efd9) and [Barlow SemiBold and Bold](https://github.com/google/fonts/tree/main/ofl/barlow) are distributed under the SIL Open Font License; `Barlow-OFL.txt` covers both Barlow weights.
