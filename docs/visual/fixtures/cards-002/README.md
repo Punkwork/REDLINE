@@ -2,7 +2,7 @@
 
 **Review branch only.** This folder lives on `review/cards-002` and is never merged into `main` or `release` (designer, 2026-11-19). Nothing here is part of the playable build.
 
-**Status:** Design review, 2026-11-19. PROPOSED except where a line says designer direction.
+**Status:** APPROVED by the designer on 2026-11-19 and built on `main` as **CARDS-003** (commit `9354e2f`). This branch stays as the review archive and is never merged; `main` holds the code, the fixture `godot/tests/shot_cards_pcb.gd` and the reference sheets in `docs/visual/fixtures/cards-003/`.
 
 ![All four card types with the glow treatment and the deeper green PROGRAM, plus rarities, the longest rules text and cached cards](iterations/PANOPTICON_PCB_Glow_Type_Stencils.jpg)
 
