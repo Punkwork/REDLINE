@@ -2865,3 +2865,8 @@ User confirms **all six ICE names** and **all existing Training Node values** fo
 **CRED reserves by layer:** 10 / 15 / 25 (total base 50); universal rounded-up 10% full-extraction bonuses +1 / +2 / +3, maximum total 56. Existing rules on turns, BW/RAM, 12-card Generalist deck, Icepicks, TRACE, VITAE, damage, extraction, BREACH, and reward resolution remain authoritative.
 
 **Next phase:** Implement an actually playable three-layer training-node prototype in **Godot**, edited/debugged using **Visual Studio**; validate established mechanics through playtesting before changing balance. This is a design freeze for the initial playtest, not a claim that implementation has been completed. Historical references to proposed ICE names/Strength/subroutines are superseded by this lock.
+
+
+### ICE-ANALOG-001 — editable presentation scaffold (2026-11-19; PROPOSED, not APPROVED)
+
+An isolated Godot visual study and six-state screenshot harness were added on `main` for the HALCYON analog encounter direction. See `docs/visual/explorations/ice-analog-001/README.md`. All mockup values are illustrative, not rule changes. The fixture is not integrated into the default encounter. Existing mascot artwork, full motion, accessible tooltip behavior and validated renders remain outstanding; only the designer may approve integration. VIS-001 §2.9 exception (full key rule text via tooltip with persistent NEXT RESPONSE/passive text) remains open for review.
