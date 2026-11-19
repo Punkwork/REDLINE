@@ -64,10 +64,58 @@ func _init() -> void:
 	test_smash_and_grab_cache()
 	test_node_card_reward_requires_full_clear()
 	test_full_slice_path()
+	test_hand_max()
 	if OS.get_environment("SIM") != "":
 		sim_many()
 	print("TESTS: %d passed, %d failed" % [passes, fails])
 	quit(1 if fails > 0 else 0)
+
+## HAND-MAX-001: the hand never holds more than 10 cards.
+func test_hand_max() -> void:
+	var g := legacy_game(7)
+	g.new_run()
+	g.enter_node(0)
+	g.choose_ready_rig(uid_of(g, g.draw_pile, "TUMBLER_ICEPICK"))
+	check(Game.MAX_HAND == 10, "maximum hand size is 10")
+	g.hand.clear()
+	g.draw_pile.clear()
+	g.discard.clear()
+	for _i in 20:
+		g.draw_pile.append(g._new_inst("PROBE"))
+	g.draw_cards(9)
+	check(g.hand.size() == 9 and g.draw_pile.size() == 11, "draws below the maximum are unaffected")
+	g.draw_cards(3)
+	check(g.hand.size() == 10 and g.draw_pile.size() == 10, "a draw past 10 stops; the rest stay on the draw pile")
+	g.draw_cards(1)
+	check(g.hand.size() == 10 and g.draw_pile.size() == 10, "drawing into a full hand takes nothing")
+	# A full hand stops before a REBOOT would shuffle the discard pile in.
+	g.draw_pile.clear()
+	g.discard.append(g._new_inst("PULP_SHIELD"))
+	var reboots_before: int = g.reboots
+	g.draw_cards(2)
+	check(g.reboots == reboots_before and g.discard.size() == 1 and g.hand.size() == 10, "a full hand never triggers a REBOOT")
+	# CACHED cards and Bloatware count toward the 10.
+	g.hand.clear()
+	for _i in 8:
+		g.hand.append(g._new_inst("PROBE"))
+	var held := g._new_inst("PULP_SHIELD"); held.cached = true; g.hand.append(held)
+	g.hand.append(g._new_inst("TRACER"))
+	for _i in 5:
+		g.draw_pile.append(g._new_inst("PROBE"))
+	var pile: int = g.draw_pile.size()
+	g.draw_cards(2)
+	check(g.hand.size() == 10 and g.draw_pile.size() == pile, "CACHED cards and Bloatware count toward the maximum")
+	# Moving a card into a full hand by other means does nothing; the card stays where it was.
+	var back := g._new_inst("DEEP_PROBE"); g.discard.append(back)
+	g.pending = {"kind": "retrieve", "options": [back.uid]}
+	g.phase = "CHOICE"
+	g.choose(back.uid)
+	check(g.hand.size() == 10 and not g._find(g.discard, back.uid).is_empty() and g.phase == "PLAYER", "retrieving into a full hand leaves the card in the discard pile")
+	var kit := g._new_inst("STRESS_TEST"); g.draw_pile.append(kit)
+	g.pending = {"kind": "field_kit", "options": [kit.uid]}
+	g.phase = "CHOICE"
+	g.choose(kit.uid)
+	check(g.hand.size() == 10 and not g._find(g.draw_pile, kit.uid).is_empty() and g.phase == "PLAYER", "FIELD KIT into a full hand leaves the card on the draw pile")
 
 func test_opening_node() -> void:
 	var g := legacy_game(1)

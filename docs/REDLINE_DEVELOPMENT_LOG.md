@@ -4,24 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — Archive retired branches (Codex)
-
-At the designer's request, pushed and verified annotated archive tags for `docs/simplified-design` (`c42adc5`), `dev/training-node` (`61c1a8b`), `codex/playtest3-windows-smoke` (`af580e2`) and `backup/pre-authoritative-docs-2026-11-10` (`c87436e`). Verified the other eleven tips were ancestors of `main` before deleting all fifteen remote branches. Only `main` remains. PRs #1 and #3 are closed. Posted the archive link on PR #1 and updated the repository structure reference. LOG-001 moved the oldest whole entries to the archive unchanged.
-
-## 2026-11-17 — FACADE-001: Raygun Gothic facades for IRONWATCH and LUCIDA proposed (Claude)
-
-**Designer instruction:** fit the Raygun Gothic direction to the corporation backgrounds and ICE. Added `REDLINE_CORPORATE_FACADES.md` (PROPOSED): a three-degrees table (HALCYON home / IRONWATCH street / LUCIDA mind: what each asks for, remembers and rewards); a shared Raygun Gothic kit; for IRONWATCH a civic security concourse (searchlight-fan motif) and for LUCIDA a wellness solarium (halo-orbit motif), each with a same-perspective hostile reveal, plaque colours (contrast checked: ink 13.8 / 12.6:1, accent 5.6 / 7.1:1), non-fight interface copy, strike and Mask-off lines, and every main-roster, Opening, Central and Black ICE as an appliance with silhouette, face, DEADLOCK button and cheery/wary/lethal lines; art-generation briefs matching the HALCYON asset format, with prompts to be recorded at generation time. Pointers added to Visual Language §2.3 and ICE Corp 2/3 §1; HANDOFF WAITING row FACADE-001. Nothing approved; master design doc unchanged. **Code changes:** none.
-
-## 2026-11-17 — Playtest checklist v0.3 and the live QA Sheet (Claude)
-
-Closes HANDOFF "Checklist v0.2". The live Sheet (claude.ai artifact "REDLINE Playtest QA Checklist", last changed 2026-11-15) was still on v0.1.1: updated B1/C1/K1 targets to the PACE values and added C9–C11 and G6–G11. `REDLINE_PLAYTEST_CHECKLIST.md` is now v0.3 with checks for today's decisions: C12–C14 (rolled PULP shown and dealt, plannable swings, curves show next value), C15 (TUMBLE-001), C16 (ICE-AUDIT-001), D4 (RIOT-003), L5 (READ-001), L6–L8 (moods, corporation states, visual coherence), M5 (DEPRECATE-001); the Sheet carries the same 82 rows. HANDOFF: PR #1 row closed (archived by Codex in 65a47f2). **Code changes:** none.
-
-## 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex)
-
-Removed the card and passive from runtime. CONSENT FORM retains its STR and subroutines. Updated regression coverage and replaced the rare SCRIPT sample with PAYDAY.
-
-**Interpretations to confirm:** The slice has no persisted run decks, so no legacy LOGIC BOMB runtime definition is needed. PAYDAY is the replacement sample.
-
 ## 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex)
 
 Applied the five approved ICE edits. DOORBELL CAM uses the existing VOID reveal progression and keeps WATCHER. Updated regression fixtures for the new values. Rules suite: 357 passed, zero failed.
@@ -515,3 +497,44 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PU
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude).
+
+## 2026-11-19 — CARDS-004 and HAND-MAX-001 built: 1.4× cards, fanned hand, hand limit 10 (Claude)
+
+**Designer:** "Yes to the fanned cards. Commit. Commit these icon and card changes to the next Build." The tuned fan values are approved.
+
+**Built:**
+- **HAND-MAX-001 (`game.gd`).** `MAX_HAND := 10`. `draw_cards` stops at 10 before any reshuffle or REBOOT. Retrieve and FIELD KIT into a full hand log "Hand full" and leave the card where it was.
+- **CARDS-004, cards (`card.gd`).** `DISPLAY_SCALE := 1.4`. `FriendlyCard.framed()` puts a card in a fixed-size holder, because containers ignore `scale`. The ready rig, reward offers, drag preview and inspection use it. Inspection is 1.4×, and 2.1× when pinned.
+- **CARDS-004, hand (`hand.gd`).** A centred fan. Overlap is 5% at 1–4 cards, then 8/10/18/26/35/43% at 5–10. The fan spans 20° in total, at most 4° per card. Each card pivots about its bottom centre, and the hovered card rises 36 px.
+- **CARDS-004, layout (`encounter.gd`).** The hand area is `Rect2(16, 622, 1568, 378)`. The ICE row is drawn at 85%, and the mascot stage is 194 px (was 238). The strips, NUL/REM bar and rack sit 104 px higher. The left and right columns are re-stacked. Graffiti uses four fixed spots, and the TRACER flight targets the new pile position.
+
+**Tests:**
+- `test_hand_max`: 8 rules checks.
+- `shot_hand`: hands of 6–10, with geometry checks: the hand stays clear of END RUN, the pile counters and the bottom HUD; the hover panel stays on screen; and contacts end at y ≤ 1050.
+- `shot_cartridges`: 6, 8 and 10 cards.
+- `shot_adp`: expectations updated for the new avatar scale.
+
+**Validation:**
+- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 14 CI screenshot fixtures clean.
+- 30-seed bots unchanged: 19/13/16/15.
+
+**Images saved:**
+- `docs/visual/fixtures/cards-004/`: mockups and build captures.
+- `docs/visual/fixtures/cards-005/`: the corner icons and BLOATWARE.
+- `docs/visual/explorations/pixel-16bit/`: the parked pixel mockups and script. Not a decision; review Saturday 2026-11-21.
+
+**Interpretations to confirm:**
+- the ICE row at 85% and the shorter mascot stage (mascots about 70% of their ENCOUNTER-DISPLAY-001 size);
+- at 9–10 cards, contact strips may run up to ~50 px past the bottom of the window (rules text and the hover panel always stay on screen);
+- the pre-existing BOOTING line that clips at the bottom of the ICE plaque is left as it was.
+
+**Release:** `release` was not cut. These changes go into the next playtest build when the designer asks for it.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Archive retired branches (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001: Raygun Gothic facades for IRONWATCH and LUCIDA proposed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Playtest checklist v0.3 and the live QA Sheet (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex).

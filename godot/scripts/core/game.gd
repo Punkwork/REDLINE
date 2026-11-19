@@ -6,6 +6,7 @@ extends RefCounted
 const MAX_TRACE := 40
 const BW_PER_TURN := 4
 const BASE_DRAW := 6   # DRAW-001 (was 5)
+const MAX_HAND := 10   # HAND-MAX-001: draws stop at 10; the card stays on the draw pile
 const BASE_RAM := 4
 const START_VITAE := 30
 const SAFEHOUSE_HEAL := 10
@@ -440,6 +441,8 @@ func draw_size() -> int:
 func draw_cards(n: int) -> void:
 	drawing_depth += 1
 	for i in n:
+		# HAND-MAX-001: a full hand stops the draw before any REBOOT.
+		if hand.size() >= MAX_HAND: break
 		if draw_pile.is_empty():
 			if discard.is_empty(): break
 			draw_pile.assign(discard)
@@ -1030,9 +1033,13 @@ func _choose(uid: int) -> void:
 			burned.append(card)
 			draw_cards(1)
 		"retrieve":
-			var card := _take_from(discard, uid)
-			if card.is_empty(): return
-			hand.append(card)
+			# HAND-MAX-001: retrieving into a full hand does nothing; the card stays in the discard pile.
+			if hand.size() >= MAX_HAND:
+				_say("Hand full (%d): the card stays in your discard pile." % MAX_HAND)
+			else:
+				var card := _take_from(discard, uid)
+				if card.is_empty(): return
+				hand.append(card)
 		"discard":
 			var c := _take_from(hand, uid)
 			if c.is_empty():
@@ -1061,8 +1068,12 @@ func _choose(uid: int) -> void:
 			burned.append(c)
 			draw_cards(1)
 		"field_kit":
-			var c := _take_from(draw_pile, uid)
-			hand.append(c)
+			# HAND-MAX-001: a full hand leaves the card on the draw pile.
+			if hand.size() >= MAX_HAND:
+				_say("Hand full (%d): the card stays on your draw pile." % MAX_HAND)
+			else:
+				var c := _take_from(draw_pile, uid)
+				hand.append(c)
 	pending = {}
 	phase = "PLAYER"
 

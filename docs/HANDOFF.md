@@ -65,12 +65,9 @@ DEV-001b is done (see *Done*). Its fixes are below.
 
 Hygiene, recorded and left alone under the no-refactor rule: the unused local `odds` in `_roll_rewards()`, the phase comment at `game.gd:21`, and mixed indentation between files. Fix each only when that code is next touched for an approved change.
 
-**Cards and hand (approved 2026-11-19):**
+**Cards and hand (approved 2026-11-19):** CARDS-004 and HAND-MAX-001 are built; see Built below.
 
-| ID | What to build | Spec | Owner | Status |
-|---|---|---|---|---|
-| **CARDS-004** | 1.4× cards (230 × 342) everywhere: hand, rewards, deck views, inspection. Centred hand that overlaps slightly from the start and more as it grows (5% at 1–4 cards, then 10/15/22/29/36/43% at 5–10), with a **gentle fan** of about 2° per card; hovered card raised. Move the stats column under a shorter Program Bay and the END TURN column under the TRACE panel; move the response strip, NUL/REM bar and rack up 104 px; lay out the ICE area again for the smaller height. The BW cost dial is already top-left (CARDS-004a, `9d7f081`). Update `shot_cards_pcb`, `shot_hand` and `shot_cartridges`, and the fixtures that place cards. | Master CARDS-004 | Claude Code | TO DO |
-| **HAND-MAX-001** | Maximum hand size 10. A draw past 10 stops and the card stays on the draw pile; CACHED cards and Bloatware count. Add rules tests (draw at 9 and at 10; CACHE fills; DRAW effects mid-turn). Re-run the bot sims. Replace the "No maximum hand size" note in `hand.gd`. | Core Rules amendment HAND-MAX-001 | Claude Code | TO DO |
+**Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`.
 
 **Integration beyond the HALCYON slice:** connect the presentation hooks to playable LUCIDA, PATCHWORK and run resume when those systems arrive. Tag playable Central Nodes with `central: true`. The slice's run-menu DEAD DROP opens THE CARBON; attach the same reader to the map's DEAD DROP when that Node is built. The reveal sequence and final punch-card art have their own design work.
 
@@ -83,6 +80,8 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| CARDS-004 | 1.4× cards in the hand, reward offers, ready rig, deck views and inspection. A centred, fanned hand: 5% overlap at 1–4 cards, then 8/10/18/26/35/43% at 5–10, a 20° fan (at most 4° per card), and the hovered card raised 36 px. The layout is reworked: ICE at 85%, the mascot stage 44 px shorter, the strips 104 px higher, and the side columns moved up. *Interpretations to confirm:* the ICE scale, the mascot size, and contact strips running up to ~50 px off-screen at 9–10 cards. Designer APPROVED 2026-11-19. Captures: `docs/visual/fixtures/cards-004/`. | **BUILT** — `COMMIT_CARDS004` |
+| HAND-MAX-001 | Maximum hand 10. A draw at 10 stops, and the card stays on the draw pile. Retrieve and FIELD KIT into a full hand do nothing. 8 rules tests; bot sims unchanged. Designer APPROVED 2026-11-19. | **BUILT** — `COMMIT_CARDS004` |
 | CARDS-005a | Corner icons restyled as dial-style steel indicators on a mounting rail. BLOATWARE gets a "can't be played" icon, and TRACER a red +3 penalty lamp; an unplayable card's dial shows "—". Designer APPROVED 2026-11-19. | **BUILT** — `b67dfc8` |
 | CARDS-005 | Corner icons down the top-right corner: Icepick type, RAM on PROGRAMs, extra TRACE and CRED costs, and a target crosshair. The tooltip explains them. Designer APPROVED 2026-11-19. | **BUILT** — `d450823` |
 | CARDS-003a | Long-text cards (compiled SAFEHOUSE cards that don't fit at 9 px) name their component cards on the face, with a "Hover for full text" line, and show the full rules in a mask panel above the card on hover. Designer direction 2026-11-19; it replaced the proposed tall layout. Interpretations confirmed by the designer ("Great save those changes"). | **BUILT** — `5b195bd` · [reference](visual/fixtures/cards-003/README.md) |

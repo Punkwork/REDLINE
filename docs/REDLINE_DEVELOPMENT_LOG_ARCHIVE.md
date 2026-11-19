@@ -1990,3 +1990,21 @@ Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stage
 
 **Designer:** "yes, apply the same contrast fix as script" for PROTOCOL, whose blue-green face measured amber 4.18:1. `card.gd` now applies the soft face shade per type: SCRIPT #2A1C10 at 55%, PROTOCOL #0C1E1C at 45% (fitted to the face measured from `protocol.png`, 14,28,136,182). Measured after: PROTOCOL amber 6.68:1 / ivory 9.62:1; SCRIPT 6.69 / 9.64; PROGRAM unchanged 6.91 / 9.97. Validation: rules 357/0, cartridge UI 625/0, Chrome stages 1–5 0 failures; cards-001 and chrome-001 fixtures refreshed. Committed with [skip ci].
 **Designer:** "big swings equally likely up and down is okay" (PULP-001 ±3 sign 50/50), recorded in the master design doc. The start-of-turn roll timing and equal odds within −2..+2 remain working values.
+
+## 2026-11-17 — Archive retired branches (Codex)
+
+At the designer's request, pushed and verified annotated archive tags for `docs/simplified-design` (`c42adc5`), `dev/training-node` (`61c1a8b`), `codex/playtest3-windows-smoke` (`af580e2`) and `backup/pre-authoritative-docs-2026-11-10` (`c87436e`). Verified the other eleven tips were ancestors of `main` before deleting all fifteen remote branches. Only `main` remains. PRs #1 and #3 are closed. Posted the archive link on PR #1 and updated the repository structure reference. LOG-001 moved the oldest whole entries to the archive unchanged.
+
+## 2026-11-17 — FACADE-001: Raygun Gothic facades for IRONWATCH and LUCIDA proposed (Claude)
+
+**Designer instruction:** fit the Raygun Gothic direction to the corporation backgrounds and ICE. Added `REDLINE_CORPORATE_FACADES.md` (PROPOSED): a three-degrees table (HALCYON home / IRONWATCH street / LUCIDA mind: what each asks for, remembers and rewards); a shared Raygun Gothic kit; for IRONWATCH a civic security concourse (searchlight-fan motif) and for LUCIDA a wellness solarium (halo-orbit motif), each with a same-perspective hostile reveal, plaque colours (contrast checked: ink 13.8 / 12.6:1, accent 5.6 / 7.1:1), non-fight interface copy, strike and Mask-off lines, and every main-roster, Opening, Central and Black ICE as an appliance with silhouette, face, DEADLOCK button and cheery/wary/lethal lines; art-generation briefs matching the HALCYON asset format, with prompts to be recorded at generation time. Pointers added to Visual Language §2.3 and ICE Corp 2/3 §1; HANDOFF WAITING row FACADE-001. Nothing approved; master design doc unchanged. **Code changes:** none.
+
+## 2026-11-17 — Playtest checklist v0.3 and the live QA Sheet (Claude)
+
+Closes HANDOFF "Checklist v0.2". The live Sheet (claude.ai artifact "REDLINE Playtest QA Checklist", last changed 2026-11-15) was still on v0.1.1: updated B1/C1/K1 targets to the PACE values and added C9–C11 and G6–G11. `REDLINE_PLAYTEST_CHECKLIST.md` is now v0.3 with checks for today's decisions: C12–C14 (rolled PULP shown and dealt, plannable swings, curves show next value), C15 (TUMBLE-001), C16 (ICE-AUDIT-001), D4 (RIOT-003), L5 (READ-001), L6–L8 (moods, corporation states, visual coherence), M5 (DEPRECATE-001); the Sheet carries the same 82 rows. HANDOFF: PR #1 row closed (archived by Codex in 65a47f2). **Code changes:** none.
+
+## 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex)
+
+Removed the card and passive from runtime. CONSENT FORM retains its STR and subroutines. Updated regression coverage and replaced the rare SCRIPT sample with PAYDAY.
+
+**Interpretations to confirm:** The slice has no persisted run decks, so no legacy LOGIC BOMB runtime definition is needed. PAYDAY is the replacement sample.

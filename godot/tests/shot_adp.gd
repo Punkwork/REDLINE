@@ -145,7 +145,8 @@ func test_backdrop_resize() -> void:
  view.apply_background()
  check(is_instance_valid(view.fade_layer) and view.fade_layer.get_rect().is_equal_approx(Rect2(Vector2.ZERO,view.size)), "hostile crossfade also fills the viewport")
  for carrier in view.find_children("IllustrationScale", "Control", true, false):
-  check(carrier.scale.is_equal_approx(Vector2.ONE * 0.82 * 1.25), "two-ICE lane avatars are 25% larger")
+  # ENCOUNTER-DISPLAY-001 enlarged avatars 25%; CARDS-004 gives up 44 px of the stage (x194/238) for the larger hand.
+  check(carrier.scale.is_equal_approx(Vector2.ONE * 0.82 * 1.25 * 194.0 / 238.0), "two-ICE lane avatars keep the CARDS-004 stage scale")
  root.size = original_size
  await settle()
 
@@ -192,7 +193,8 @@ func run() -> void:
  check(is_instance_valid(stamp), "a tag appears in the reserved shell strip")
  if is_instance_valid(stamp):
   for target in stamp.get_parent().find_children("*", "Button", false, false):
-   check(not stamp.get_global_rect().intersects(target.get_global_rect()), "shell graffiti stays clear of the mascot button")
+   # Half-pixel tolerance: the tag sits exactly on the button's edge, and the scaled ICE area adds float error.
+   check(not stamp.get_global_rect().grow(-0.5).intersects(target.get_global_rect()), "shell graffiti stays clear of the mascot button")
  view.advance_bleed(float(AtomicDecoPunk.settings.bleed.ease_seconds) / 2.0)
  check(is_equal_approx(view.surveillance_layer.modulate.a,0.6), "TRACE 39 finishes at 60%")
  view.set_process(true)

@@ -59,8 +59,8 @@ func run() -> void:
  await settle(2)
  for card in staging.get_children(): check_card(card)
  staging.queue_free()
- # Oversized fixture remains a fan, with no hand-size cap; account for protruding hardware.
- for count in [6,8,16]:
+ # Full hands (up to the HAND-MAX-001 maximum of 10) fan inside the hand area, hardware included.
+ for count in [6,8,10]:
   g.hand.clear()
   for i in count: g.hand.append(g._new_inst(EXAMPLES[i%EXAMPLES.size()]))
   main.refresh(); await settle()
@@ -68,7 +68,8 @@ func run() -> void:
    var rect:=FriendlyCard.PHYSICAL_RECT
    for point in [rect.position,Vector2(rect.end.x,rect.position.y),rect.end,Vector2(rect.position.x,rect.end.y)]:
     var world: Vector2=card.get_global_transform()*point
-    check(world.x>=248 and world.x<=1352 and world.y>=724 and world.y<=1000,"hardware fits hand and clears rig/buttons: %d %s"%[count,str(world)])
+    var area: Rect2=main.friendly.hand.get_global_rect()
+    check(world.x>=area.position.x-1 and world.x<=area.end.x+1 and world.y>=area.position.y and world.y<=1050,"hardware fits hand and clears rig/buttons: %d %s"%[count,str(world)])
   if count==6 or count==8:
    var path:=OS.get_environment("SHOT_DIR").path_join("encounter-cartridges-%d.png"%count)
    check(root.get_texture().get_image().save_png(path)==OK,"save encounter")

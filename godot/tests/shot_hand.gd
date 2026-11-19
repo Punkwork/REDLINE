@@ -66,7 +66,7 @@ func _bay_and_inspection() -> void:
  var first: FriendlyCard = view.hand.get_child(0)
  var first_position := first.get_global_rect().get_center()
  await _click(first_position,MOUSE_BUTTON_RIGHT)
- _check(main.inspect.visible and main.inspect.get_child(0).scale == Vector2(1.5,1.5), "right click enlarges a hand card to 150%")
+ _check(main.inspect.visible and main.inspect.get_child(0).scale.is_equal_approx(Vector2.ONE*1.5*FriendlyCard.DISPLAY_SCALE), "right click enlarges a hand card to 150% of its hand size")
  var preview: Rect2 = main.inspect.get_global_rect()
  _check(preview.get_center().is_equal_approx(Vector2(800,500)), "enlarged cartridge is centered")
  _snap("card_inspection_150_percent")
@@ -78,7 +78,7 @@ func _bay_and_inspection() -> void:
  _check(g.bw == before and g._installed_entry(program.uid).is_empty(), "clicking a hand PROGRAM does not install it")
  await _drag(first.get_global_rect().get_center(),Vector2(1510,230))
  _check(g.bw == before and g._installed_entry(program.uid).is_empty(), "drop away from the PROGRAM bay spends nothing")
- await _drag(first.get_global_rect().get_center(),Vector2(140,531))
+ await _drag(first.get_global_rect().get_center(),Vector2(140,326))
  _check(not g._installed_entry(program.uid).is_empty() and g.bw == before-1, "drop on the bay installs the PROGRAM exactly once")
  _check(view.program_slots.get_child_count() == 1, "installed PROGRAM is in the left bay")
  var chip: Button = view.program_slots.get_child(0).get_child(0)
@@ -114,17 +114,29 @@ func _geometry() -> void:
  var view: FriendlyEncounter=main.friendly
  _check(view.hand.get_child_count()==main.g.hand.size(),"every card has a view")
  var bound:=view.hand.get_global_rect()
- _check(bound.end.x<=view.end_button.position.x,"hand stays left of END TURN")
+ # CARDS-004: the full-width hand sits below END TURN, the pile counters, the stats and the rack.
+ _check(bound.position.y>=view.end_run_button.get_global_rect().end.y,"hand stays below the END TURN column")
  _check(not bound.intersects(view.pile_text.get_global_rect()),"hand stays clear of pile counters")
  for card in view.hand.get_children():
-  _check(card.size==FriendlyCard.CARD_SIZE,"cards retain their printed size")
-  _check(card.rest_position.x>=0 and card.rest_position.x+FriendlyCard.CARD_SIZE.x<=view.hand.size.x,"fan has no clipped outer cards")
+  _check(card.size==FriendlyCard.CARD_SIZE and is_equal_approx(card.scale.x,FriendlyCard.DISPLAY_SCALE),"cards keep their printed size, shown at 1.4x")
+  var rect:=FriendlyCard.PHYSICAL_RECT
+  for point in [rect.position,Vector2(rect.end.x,rect.position.y),rect.end,Vector2(rect.position.x,rect.end.y)]:
+   var world: Vector2=card.get_global_transform()*point
+   _check(world.x>=bound.position.x-1 and world.x<=bound.end.x+1 and world.y>=bound.position.y and world.y<=1050,"fanned card stays inside the hand area: %s"%str(world))
+   _check(not view.bottom_hud.get_global_rect().has_point(world) and not view.end_run_button.get_global_rect().has_point(world),"fanned card clears the side columns")
+  # Titles, costs and rules are always fully on screen; only the bottom contacts may run off the edge.
+  var frame: Control=card.body.get_node_or_null("SolderRulesFrame")
+  if frame:
+   var r: Rect2=frame.get_rect()
+   for point in [r.position,Vector2(r.end.x,r.position.y),r.end,Vector2(r.position.x,r.end.y)]:
+    _check((card.get_global_transform()*point).y<=1000,"rules panel fully on screen")
 func _run() -> void:
  main=load("res://scenes/Main.tscn").instantiate(); root.add_child(main)
  await _settle()
  main.reduced_motion = true
  await _bay_and_inspection()
- for count in [6,7,8,9,10,16]:
+ # HAND-MAX-001: the hand holds at most 10 cards.
+ for count in [6,7,8,9,10]:
   main._start_as("VECTOR"); var g: Game=main.g; g.enter_node(0); g.choose_ice(1)
   _check(g.phase=="PLAYER","PATIENT ZERO resolved")
   g.hand.clear()

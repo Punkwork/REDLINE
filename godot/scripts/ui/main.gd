@@ -786,7 +786,7 @@ func _show_inspect(id: String, pinned: bool = true, uid: int = -1) -> void:
 	friendly.game = g
 	var paper := FriendlyCard.new()
 	paper.setup(friendly, id, -1)
-	var zoom := 1.5 if pinned else 1.0
+	var zoom := (1.5 if pinned else 1.0) * FriendlyCard.DISPLAY_SCALE
 	inspect.size = FriendlyCard.PHYSICAL_RECT.size * zoom
 	inspect.position = (size - inspect.size) * 0.5 if pinned else Vector2(252, 157)
 	inspect.mouse_filter = Control.MOUSE_FILTER_STOP if pinned else Control.MOUSE_FILTER_IGNORE
@@ -1512,7 +1512,7 @@ func _overlay_options(title: String, sub: String, uids: Array, source: Array, on
 		cv.gui_input.connect(func(ev):
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				on_pick.call(u))
-		row.add_child(cv)
+		row.add_child(FriendlyCard.framed(cv))
 	if alt_text != "":
 		var b := Button.new()
 		b.text = alt_text
@@ -1567,7 +1567,7 @@ func _overlay_reward() -> void:
 			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
 				g.choose_reward(cid)
 				refresh())
-		var carrier := MarginContainer.new(); carrier.add_theme_constant_override("margin_top",14); carrier.add_theme_constant_override("margin_bottom",14); carrier.add_theme_constant_override("margin_left",12); carrier.add_theme_constant_override("margin_right",12); carrier.add_child(cv); offer.add_child(carrier)
+		var carrier := MarginContainer.new(); carrier.add_theme_constant_override("margin_top",14); carrier.add_theme_constant_override("margin_bottom",14); carrier.add_theme_constant_override("margin_left",12); carrier.add_theme_constant_override("margin_right",12); carrier.add_child(FriendlyCard.framed(cv)); offer.add_child(carrier)
 	var pruning := Button.new()
 	pruning.text = "DECOMPILE · remove a deck card instead"
 	pruning.pressed.connect(func(): g.begin_decompile(); refresh())

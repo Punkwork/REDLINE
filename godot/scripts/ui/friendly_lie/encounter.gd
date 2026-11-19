@@ -9,6 +9,12 @@ var surveillance_layer: TextureRect
 var node_tag: Panel
 var trace_tag: Panel
 var bottom_hud: Panel
+## CARDS-004 layout: 1.4x cards in a full-width hand; the ICE area scales to 85%.
+const HAND_RECT := Rect2(16, 622, 1568, 378)
+const ICE_SCALE := 0.85
+const ICE_X := 800.0 - 1300.0 * ICE_SCALE / 2.0
+## Graffiti lands in free margins: under the Program Bay and under the TRACE panel.
+const GRAFFITI_SPOTS := [Vector2(40, 357), Vector2(1360, 262), Vector2(1360, 290), Vector2(1360, 318)]
 var note: Panel
 var note_text: Label
 var log_text: Label
@@ -117,28 +123,28 @@ func _ready() -> void:
  add_child(graffiti)
  node_tag = FriendlyLook.panel(FriendlyLook.TONER); node_tag.position = Vector2(40, 32); node_tag.size = Vector2(720, 86); node_tag.rotation_degrees = -1.0; add_child(node_tag)
  trace_tag = FriendlyLook.panel(FriendlyLook.TONER); trace_tag.position = Vector2(972, 32); trace_tag.size = Vector2(588, 106); trace_tag.rotation_degrees = 0.7; add_child(trace_tag)
- ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(150, 136); ice_scroll.size = Vector2(1300, 446); ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
+ ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(ICE_X, 136); ice_scroll.size = Vector2(1300, 402); ice_scroll.scale = Vector2.ONE * ICE_SCALE; ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
  ice_row = HBoxContainer.new(); ice_row.add_theme_constant_override("separation", 42); ice_row.alignment = BoxContainer.ALIGNMENT_CENTER; ice_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL; var ice_margin:=MarginContainer.new(); ice_margin.add_theme_constant_override("margin_top",10); ice_margin.size_flags_horizontal=Control.SIZE_EXPAND_FILL; ice_scroll.add_child(ice_margin); ice_margin.add_child(ice_row)
- var strip := FriendlyLook.panel(FriendlyLook.PAPER, FriendlyLook.TONER, 3); strip.position = Vector2(248, 590); strip.size = Vector2(1104, 49); add_child(strip)
+ var strip := FriendlyLook.panel(FriendlyLook.PAPER, FriendlyLook.TONER, 3); strip.position = Vector2(248, 486); strip.size = Vector2(1104, 49); add_child(strip)
  var rs := ScrollContainer.new(); rs.position = Vector2(10, 7); rs.size = Vector2(1084, 36); rs.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; strip.add_child(rs)
  response = HBoxContainer.new(); response.add_theme_constant_override("separation", 7); rs.add_child(response)
- note = FriendlyLook.panel(FriendlyLook.TONER); note.position = Vector2(248, 650); note.size = Vector2(1104, 44); note.rotation_degrees = -0.4; add_child(note)
+ note = FriendlyLook.panel(FriendlyLook.TONER); note.position = Vector2(248, 546); note.size = Vector2(1104, 44); note.rotation_degrees = -0.4; add_child(note)
  note_text = FriendlyLook.label("", 12, FriendlyLook.HIGHLIGHT); note_text.position = Vector2(10, 4); note_text.size = Vector2(900, 36); note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
  var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.position = Vector2(995, 7); voice.size = Vector2(100, 30); note.add_child(voice)
- var rig_ground := FriendlyLook.panel(FriendlyLook.TONER); rig_ground.position=Vector2(248,696); rig_ground.size=Vector2(1104,28); add_child(rig_ground)
- var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(248, 696); rig_scroll.size = Vector2(1104, 28); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
+ var rig_ground := FriendlyLook.panel(FriendlyLook.TONER); rig_ground.position=Vector2(248,592); rig_ground.size=Vector2(1104,28); add_child(rig_ground)
+ var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(248, 592); rig_scroll.size = Vector2(1104, 28); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
  rig_row = HBoxContainer.new(); rig_row.add_theme_constant_override("separation", 8); rig_scroll.add_child(rig_row)
  program_bay = FriendlyProgramBay.new()
  program_bay.encounter = self
  program_bay.name = "ProgramBay"
  program_bay.mouse_filter = Control.MOUSE_FILTER_PASS
  program_bay.add_theme_stylebox_override("panel", FriendlyLook.style(FriendlyLook.TONER, FriendlyLook.HIGHLIGHT, 2))
- at(self, program_bay, Vector2(40,153), Vector2(200,405))
+ at(self, program_bay, Vector2(40,153), Vector2(200,200))
  at(program_bay, FriendlyLook.label("PROGRAM BAY", 15, FriendlyLook.PAPER, FriendlyLook.BOLD), Vector2(11,9))
  var program_scroll := ScrollContainer.new()
  program_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
  program_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
- at(program_bay, program_scroll, Vector2(9,39), Vector2(182,300))
+ at(program_bay, program_scroll, Vector2(9,39), Vector2(182,110))
  program_slots = VBoxContainer.new()
  program_slots.name = "ProgramSlots"
  program_slots.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -147,22 +153,22 @@ func _ready() -> void:
  program_scroll.add_child(program_slots)
  var connector := FriendlyLook.panel(Color("#322B21"), FriendlyLook.HIGHLIGHT, 1, 3)
  connector.mouse_filter = Control.MOUSE_FILTER_IGNORE
- at(program_bay, connector, Vector2(10,351), Vector2(180,44))
+ at(program_bay, connector, Vector2(10,151), Vector2(180,44))
  at(connector, FriendlyLook.label("DROP PROGRAM HERE", 12, FriendlyLook.HIGHLIGHT, FriendlyLook.BOLD), Vector2(9,6))
  for pin in range(18):
   var contact := ColorRect.new()
   contact.color = FriendlyLook.HIGHLIGHT
   contact.mouse_filter = Control.MOUSE_FILTER_IGNORE
   at(connector, contact, Vector2(10 + pin * 9,29), Vector2(5,8))
- hand = FriendlyHand.new(); hand.position = Vector2(248, 728); hand.size = Vector2(1104, 272); hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
- bottom_hud = FriendlyLook.panel(FriendlyLook.TONER); bottom_hud.position = Vector2(40, 770); bottom_hud.size = Vector2(200, 212); add_child(bottom_hud)
- var piles_paper:=FriendlyLook.panel(FriendlyLook.PAPER); piles_paper.position=Vector2(1358,766); piles_paper.size=Vector2(204,70); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
- pile_text = FriendlyLook.label("", 12, FriendlyLook.TONER); pile_text.position = Vector2(1364, 770); pile_text.size = Vector2(198, 64); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
- end_button = FriendlyLook.button("END TURN →", func(): ui._on_end_turn()); end_button.position = Vector2(1360, 842); end_button.size = Vector2(200, 65); end_button.add_theme_font_size_override("font_size", 20); add_child(end_button)
- var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), FriendlyLook.PAPER); deck.position = Vector2(1360, 916); deck.size = Vector2(200, 28); add_child(deck)
- end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), FriendlyLook.TONER, FriendlyLook.RED); end_run_button.position = Vector2(1360, 951); end_run_button.size = Vector2(200, 29); add_child(end_run_button)
+ hand = FriendlyHand.new(); hand.position = HAND_RECT.position; hand.size = HAND_RECT.size; hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
+ bottom_hud = FriendlyLook.panel(FriendlyLook.TONER); bottom_hud.position = Vector2(40, 416); bottom_hud.size = Vector2(200, 212); add_child(bottom_hud)
+ var piles_paper:=FriendlyLook.panel(FriendlyLook.PAPER); piles_paper.position=Vector2(1358,404); piles_paper.size=Vector2(204,70); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
+ pile_text = FriendlyLook.label("", 12, FriendlyLook.TONER); pile_text.position = Vector2(1364, 408); pile_text.size = Vector2(198, 64); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
+ end_button = FriendlyLook.button("END TURN →", func(): ui._on_end_turn()); end_button.position = Vector2(1360, 480); end_button.size = Vector2(200, 65); end_button.add_theme_font_size_override("font_size", 20); add_child(end_button)
+ var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), FriendlyLook.PAPER); deck.position = Vector2(1360, 554); deck.size = Vector2(200, 28); add_child(deck)
+ end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), FriendlyLook.TONER, FriendlyLook.RED); end_run_button.position = Vector2(1360, 589); end_run_button.size = Vector2(200, 29); add_child(end_run_button)
  toast = FriendlyLook.panel(Color.WHITE, FriendlyLook.RED, 1, 10, 3)
- at(self, toast, Vector2(40, 626), Vector2(200, 105))
+ at(self, toast, Vector2(1358, 150), Vector2(204, 105))
  toast.z_index = 5
  toast_text = FriendlyLook.label(skin.cracking_copy, 15, FriendlyLook.TONER, skin.font)
  toast_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -171,11 +177,11 @@ func _ready() -> void:
  at(toast, toast_reply, Vector2(8, 80), Vector2(184, 20))
  toast.hide()
  punch_arrival = FriendlyLook.panel(FriendlyLook.TONER, FriendlyLook.HIGHLIGHT, 1, 5)
- at(self, punch_arrival, Vector2(40, 626), Vector2(200, 105))
+ at(self, punch_arrival, Vector2(1358, 150), Vector2(204, 105))
  punch_arrival.clip_contents = true
  punch_arrival.hide()
  punch_holder = FriendlyLook.panel(FriendlyLook.TONER, FriendlyLook.PAPER, 1, 4)
- at(self, punch_holder, Vector2(40, 734), Vector2(200, 31))
+ at(self, punch_holder, Vector2(40, 380), Vector2(200, 31))
  punch_holder.clip_contents = true
  punch_count = FriendlyLook.label("", 13, FriendlyLook.PAPER, FriendlyLook.BOLD)
  at(punch_holder, punch_count, Vector2(8, 5))
@@ -186,15 +192,15 @@ func _ready() -> void:
  at(punch_holder, inspect_punches, Vector2(149, 2), Vector2(48, 26))
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
  motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
- motion_button.position=Vector2(1360,718); motion_button.size=Vector2(200,28); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
+ motion_button.position=Vector2(1360,356); motion_button.size=Vector2(200,28); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
  watcher_warning=FriendlyLook.panel(FriendlyLook.RED); watcher_warning.position=Vector2(1030,540); watcher_warning.size=Vector2(510,36); watcher_warning.z_index=150; watcher_warning.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(watcher_warning)
  watcher_text=FriendlyLook.label("",12,FriendlyLook.TONER,FriendlyLook.BOLD); watcher_text.position=Vector2(8,7); watcher_warning.add_child(watcher_text); watcher_warning.hide()
  strike_overlay.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed: dismiss_strike())
  feedback_panel=FriendlyLook.panel(FriendlyLook.TONER,FriendlyLook.HIGHLIGHT,2); feedback_panel.position=Vector2(606,32); feedback_panel.size=Vector2(350,82); feedback_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(feedback_panel); feedback_panel.hide()
  feedback_label=FriendlyLook.label("",12,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD); feedback_label.position=Vector2(10,7); feedback_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; feedback_label.size=Vector2(330,70); feedback_panel.add_child(feedback_label)
- var log_paper:=FriendlyLook.panel(FriendlyLook.PAPER); log_paper.position=Vector2(248,577); log_paper.size=Vector2(1104,13); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
- log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 577); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
+ var log_paper:=FriendlyLook.panel(FriendlyLook.PAPER); log_paper.position=Vector2(248,473); log_paper.size=Vector2(1104,13); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
+ log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(248, 473); log_text.size = Vector2(1104, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
  for panel in [node_tag, trace_tag, bottom_hud, note, rig_ground, piles_paper, program_bay]:
   var wear := FriendlyRigWear.new()
   wear.code_strip = panel in [node_tag,trace_tag]
@@ -361,7 +367,7 @@ func build_rig() -> void:
   var d := CardDB.def(c.id)
   rig_row.add_child(FriendlyLook.button(d.name, func(): ui._show_inspect(c.id), FriendlyLook.TONER, FriendlyLook.PAPER))
 func build_ice() -> void:
- ice_scroll.position.x = 245 if game.enc.ice.size() >= 3 else 150
+ ice_scroll.position.x = ICE_X
  mascots.clear()
  clear(ice_row)
  for i in game.enc.ice.size():
@@ -374,11 +380,12 @@ func build_ice() -> void:
   mascots.append(mascot)
   # Grow the animated illustration independently from its rules plaque.
   var width := 400.0 if game.enc.ice.size()==3 else 480.0
-  var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25
+  # CARDS-004: the mascot stage gives up 44 px so the larger hand fits below.
+  var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25 * (194.0 / 238.0)
   var stage := Control.new()
   stage.name = "MascotStage"
   var plate := AdpCopy.pick("plate", skin.corporation, 0, {"ice": game.enc.ice[i].id})
-  stage.custom_minimum_size = Vector2(width, 238 if plate.is_empty() else 254)
+  stage.custom_minimum_size = Vector2(width, 194 if plate.is_empty() else 210)
   column.add_child(drop_wrapper(stage,i,-1))
   if not plate.is_empty():
    var plaque := FriendlyLook.label(plate.text, 10, FriendlyLook.TONER, skin.font)
@@ -387,7 +394,7 @@ func build_ice() -> void:
    enamel.mouse_filter = Control.MOUSE_FILTER_IGNORE
    enamel.add_child(plaque)
    plaque.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-   at(stage, enamel, Vector2(0, 238), Vector2(width, 15))
+   at(stage, enamel, Vector2(0, 194), Vector2(width, 15))
   var carrier := Control.new()
   carrier.name = "IllustrationScale"
   carrier.scale = Vector2.ONE * illustration_scale
@@ -659,8 +666,8 @@ func dismiss_strike() -> void:
  var was_visible := strike_overlay.visible
  strike_overlay.hide(); strike_until=0; update_bleed_target(); apply_background()
  if was_visible and not reduced_motion and skin.corporation=="HALCYON":
-  var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(1090,265); tracer.z_index=150; add_child(tracer)
-  var flight := tracer.create_tween().set_parallel(true); flight.tween_property(tracer,"position",Vector2(1445,780),0.35); flight.tween_property(tracer,"scale",Vector2(0.15,0.15),0.35); flight.chain().tween_callback(tracer.queue_free)
+  var tracer := FriendlyCard.new(); tracer.setup(self,"TRACER",-1); tracer.position=Vector2(1090,265); tracer.scale=Vector2.ONE*FriendlyCard.DISPLAY_SCALE; tracer.z_index=150; add_child(tracer)
+  var flight := tracer.create_tween().set_parallel(true); flight.tween_property(tracer,"position",Vector2(1445,430),0.35); flight.tween_property(tracer,"scale",Vector2(0.15,0.15),0.35); flight.chain().tween_callback(tracer.queue_free)
 func strike_flash() -> void:
  var flash := ColorRect.new(); flash.color=Color("#E5484D55"); flash.size=Vector2(1600,1000); flash.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(flash); move_child(flash,glitch_layer.get_index()+1)
  var light := flash.create_tween(); light.tween_property(flash,"modulate:a",0.0,0.3); light.tween_callback(flash.queue_free)
@@ -782,7 +789,7 @@ func update_voice(delta: float) -> void:
     var line: Dictionary = pool[voice_rng.randi_range(0, pool.size() - 1)]
     used_leaks[line.id] = true
     leak = line.text
- var targets := [Vector2(40, 568), Vector2(40, 593), Vector2(1360, 640), Vector2(1360, 675)]
+ var targets := GRAFFITI_SPOTS
  var count := int({"A": 1, "B": 2, "C": 4}.get(band, 0))
  while graffiti_count < count:
   var index := SignalCards.ORDER.find(game.corporation)

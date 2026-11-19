@@ -3,6 +3,17 @@ extends Control
 ## Paper UI only. Playing a card always goes through the existing Game API.
 const CARD_SIZE:=Vector2(164,244)
 const PHYSICAL_RECT:=Rect2(-10,-12,184,268)
+## CARDS-004: cards are shown at 1.4x (230 x 342) in the hand, offers, choices and inspection.
+const DISPLAY_SCALE := 1.4
+
+## A layout holder so containers reserve room for a card shown at DISPLAY_SCALE.
+static func framed(card: Control) -> Control:
+ var holder := Control.new()
+ holder.custom_minimum_size = CARD_SIZE * DISPLAY_SCALE
+ holder.mouse_filter = Control.MOUSE_FILTER_PASS
+ card.scale = Vector2.ONE * DISPLAY_SCALE
+ holder.add_child(card)
+ return holder
 const PCB_RULES_INSET := 5.0
 const PCB_RULES_MAX := 11
 const PCB_RULES_MIN := 9
@@ -746,7 +757,7 @@ func _get_drag_data(_at: Vector2):
  if uid < 0 or view.game.phase != "PLAYER" or not view.game.can_play(uid).ok: return null
  drag_started = true; placeholder = true; body.hide(); queue_redraw()
  view.begin_drag({"kind": "card", "uid": uid}, self)
- var preview := FriendlyCard.new(); preview.setup(view, card_id, -1); preview.rotation_degrees = -3; preview.position = -CARD_SIZE/2; set_drag_preview(preview)
+ var preview := FriendlyCard.new(); preview.setup(view, card_id, -1); preview.scale = Vector2.ONE * DISPLAY_SCALE; preview.rotation_degrees = -3; preview.position = -CARD_SIZE * DISPLAY_SCALE / 2; set_drag_preview(preview)
  return {"kind": "card", "uid": uid}
 func _notification(what: int) -> void:
  if what == NOTIFICATION_DRAG_END and drag_started:
