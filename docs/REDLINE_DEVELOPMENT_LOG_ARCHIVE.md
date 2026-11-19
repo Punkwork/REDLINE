@@ -1949,3 +1949,15 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 ## 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude)
 
 **Designer decision:** "Okay, all those changes that you listed are all approved." Covers the CHROME-001 art review, CARDS-001 as a whole, and the VIS-001 details (hand size, lethal threshold, undrawn ICE silhouettes and wording, motion timings, Cracking after a strike). Recorded as VISUAL-APPROVALS-002 in the master design doc with the approved values. HANDOFF: the two matching *Waiting* rows moved to *Done*; the CARDS-001, CHROME-001 and VIS-001 *Built* rows note art approval with playtest still pending. The rules questions in *Waiting* are not covered. **Code changes:** none.
+
+## 2026-11-17 — CHROME-001 / CARDS-001 / MAIN-001 follow-up (Codex)
+
+Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stages passed. Amber numbers on brown SCRIPT faces are harder to read. Synced status and handoff and documented nine assets, including oxide-red Whirlwind Bloatware. Exact prompts/model IDs and the corrected concept PNG were unavailable. No Windows export. LOG-001 moved the oldest whole live entry to the archive unchanged.
+
+## 2026-11-17 — DEPRECATE-001: LOGIC BOMB and RELAY deprecated (Claude)
+
+**Designer decision:** "Let's deprecate logic bomb and relay for now. They don't work in the current rules environment." Recorded DEPRECATE-001 in the master design doc. Marked deprecated, not deleted, in Card Pools (LOGIC BOMB), ICE Passives, Core Rules §passives, Deck Synergy, ICE Corp 1 and the ICE Rules Bible (RELAY). CONSENT FORM and SWITCHBOARD have no passive for now. HANDOFF: ZEROED-001 interpretation closed; new Codex TO DO row to remove both from the build. Note: the approved CARDS-001 fixture `script-rare-logic_bomb.png` still shows LOGIC BOMB as a rarity sample. **Code changes:** none.
+
+## 2026-11-17 — READ-001: darker SCRIPT face for legible printing (Claude)
+
+**Designer instruction:** "make the contrast stronger so that the brown script cards are legible" (after Codex reported amber on brown SCRIPT was hard to read). Measured on the CARDS-001 fixtures: SCRIPT face (127,102,74) gave amber 3.55:1 and ivory 5.12:1 (amber below 4.5:1); PROGRAM amber 6.91:1. **Changed:** `godot/scripts/ui/friendly_lie/card.gd` adds a soft-edged `ScriptFaceShade` (#2A1C10 at 55%) over SCRIPT's face only, below the board grain, fitted to the face bounds measured from `script.png` (11,21,139,188). Result: face about (83,64,44), amber about 6.5:1, ivory about 9.3:1. Brown stays brown; chassis art, textures, colours of other types, rules and costs are unchanged. **Validation:** Godot 4.3 import; rules 357 passed, 0 failed; cartridge UI 625 checks, 0 failures; Chrome stages 1–5, 0 failures. Refreshed SCRIPT and encounter PNGs in `fixtures/cards-001/` and all ten in `fixtures/chrome-001/`; `four-card-types.png` is not produced by a checked-in script and was not refreshed. **Not changed:** PROTOCOL's blue-green face measures amber 4.18:1, also under 4.5:1; raised with the designer. Committed with [skip ci]: no Windows build.

@@ -534,3 +534,9 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | PACE-008 | **Fewer layers:** Tier 1 Nodes 1 layer, Tier 2 Nodes 1–2 (§8.1). Card reward odds re-based (§9.1): Tier 1 1-layer = 60/30/10; Tier 2 1-layer = 45/40/15; Tier 2 2-layer = 30/45/25. Run length assumes 10–11 encounters per corporation (§10.5). — **APPROVED 2026-11-15** |
 | ZEROED-001 | **ICE STR can't go below 0**; reductions past 0 are lost; ROT keeps its minimum 0 (§5.3, §5.7). **ZEROED** keyword, **once per ICE per encounter** (§5.3). Replaces DSY-009's UNDERFLOW: too much confusion and counting for the player. — **APPROVED 2026-11-16** (designer) |
 | TUMBLE-001 | **TUMBLE:** a broken TUMBLER subroutine drops out of the pool; the unbroken ones slide into its place and the next unbroken one tumbles into the last slot, active at once; the conveyor skips broken subroutines; rotation stops when every unbroken subroutine is showing (§5.4). Replaces "broken stays broken… rotates out and back in". — **APPROVED 2026-11-16** (designer) |
+
+### Later amendments (hand size, 2026-11-19)
+
+| ID | Change to this document |
+|---|---|
+| HAND-MAX-001 | **Maximum hand size 10.** Every card in hand counts, CACHED cards and Bloatware included. A draw that would take the hand past 10 stops, and the card stays on the draw pile (§4, draw step). *Interpretation to confirm:* any other effect that would move a card into a full hand does nothing. — **APPROVED 2026-11-19** |
