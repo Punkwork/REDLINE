@@ -4,43 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — Validate HALCYON and refresh fixtures (Codex)
-
-Godot 4.3 import passed, as did all 363 rules checks and all nine screenshot scripts, including 173 Friendly Lie and 621 cartridge checks and all five Chrome stages. Refreshed VIS-001, CHROME-001 and the three CARDS-001 encounter captures. The rare PAYDAY close-up was replaced in DEPRECATE-001. The other card close-ups matched their committed renders byte-for-byte. Design reference images were preserved.
-
-VIS-001 turn 3 now shows wary AUTO-RENEW and wary CAPTCHA, with TRACE 2 and TRACE 3 on CAPTCHA. CHROME-001 02b shows lethal AUTO-RENEW from its rolled PULP 6 and wary CAPTCHA with those same TRACE slots. CHROME-001 04a/04b start at turn 1 with wary mascots. In 04c, Mask Off still forces all mascots lethal.
-
-Seeds 100–129 per Rustler. Deaths are by Node and exclude 3,000-step guard stalls. No balance changes were made in response.
-
-| Rustler | Clears (baseline → now) | Deaths by Node (baseline → now) | Mean survivor VITAE |
-|---|---:|---|---:|
-| GENERALIST | 25 → 21 | CAPTCHA 2 → 6; TERMS & CONDITIONS 1 → 1; DOORBELL 0 → 2 | 16.2 → 17.0 |
-| ECHO | 17 → 11 | CAPTCHA 3 → 4; TERMS & CONDITIONS 9 → 14; CONSENT WALL 1 → 1 | 9.5 → 11.8 |
-| RIOT | 25 → 13 | CAPTCHA 4 → 3; TERMS & CONDITIONS 1 → 6; DOORBELL 0 → 7 | 15.2 → 16.2 |
-| VECTOR | 20 → 17 | CAPTCHA 6 → 2; TERMS & CONDITIONS 4 → 10; DOORBELL 0 → 1 | 10.7 → 11.5 |
-
-The baseline had two GENERALIST stalls. This run had one RIOT stall at DOORBELL. Adding rolls to the seeded Game RNG changes which random draws are consumed by other systems, so this comparison measures the combined changes.
-
-**Interpretations to confirm:** Kept the existing chronological PNG filenames even where the named mood now belongs to a different ICE or is absent. The four-type still comparison has no affected card or encounter state. No Windows build was started.
-
-LOG-001 moved the oldest whole live entries to the archive unchanged.
-
-## 2026-11-17 — FACADE-001 approved (Claude)
-
-**Designer:** "Correct. Approved." `REDLINE_CORPORATE_FACADES.md` is approved as written and recorded as FACADE-001 in the master design doc (three degrees of watching; IRONWATCH concourse and LUCIDA solarium with their hostile reveals; plaque colours; interface copy; ICE appliance list; art briefs). Status lines updated in the facades doc, ICE Corp 2/3 and Visual Language §2.3. HANDOFF: FACADE-001 moved to *Done*; its open questions 4–6 (HALCYON copy, when to generate art, escape ICE) remain WAITING. No art generated yet. **Code changes:** none.
-
-## 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude)
-
-**Designer:** "for number one, yes. For number two, yes. And for number three, wait." Wrote §2a in `REDLINE_CORPORATE_FACADES.md`: HALCYON's motif (sunrise fan) and non-fight copy (consent, remembered, reward proposed; status, cracking, strike and Mask-off lines reuse approved VIS-001 copy). Art for IRONWATCH and LUCIDA is to be generated now: HANDOFF Codex TO DO FACADE-ART-001. Escape ICE deferred. Master design doc FACADE-001 updated; HANDOFF WAITING row for the HALCYON copy review. **Code changes:** none.
-
-## 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex)
-
-Generated the 1586 × 992 concourse and solarium pairs from the approved briefs. Both hostile scenes were edited directly from their friendly originals. Cropped fourteen transparent Opening and Tier 1 shells from the two generated sheets. Recorded exact prompts, both hostile edits, the IRONWATCH retry, and references in `godot/assets/friendly_lie/chrome/SOURCES.md`. The skins provide the new art, opaque porcelain and pearl plaques, and approved Cracking and Strike copy. Escape ICE art is deferred.
-
-Validated with Godot 4.3 import, 363 rules checks, and eight `shot_facade.gd` captures in `docs/visual/fixtures/facade-001/`. Lowest measured plaque contrast, including the Strike scrim, was 5.20:1 for IRONWATCH and 5.47:1 for LUCIDA. No plaque contains image textures. HALCYON's existing Friendly Lie regression passed 173 checks. No Windows build.
-
-**Interpretations to confirm:** FRONT DESK and INTAKE are presentation fixtures using their documented Opening ICE. They hold their roster across the four states to review the artwork without implementing a new route or Black ICE. Mask Off previews the hostile environment and mood. The hostile edits maintain visually aligned framing, with small local rendering differences.
-
 ## 2026-11-17 — FACADE-001: HALCYON non-fight copy approved (Codex)
 
 Designer approved the consent, remembered activity and reward lines as written in Facades §2a and will review them in playtesting. Recorded the approval in the master design and moved the decision to Done in HANDOFF.
@@ -540,3 +503,39 @@ Pulled `main` at `2d5301a` and verified that `AGENTS.md` and `CLAUDE.md` match. 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: publish FORTRESS rolls before the response (Codex).
+
+## 2026-11-19 — PIXEL-TRACE-001: TRACE pixelates the corporation's picture (Claude)
+
+**Designer:** "the more trace and the madder/meaner the corporation gets, the more 16-bit the background and ice look. Or the reverse." Claude recommended more TRACE → more pixelated. The designer asked for a mockup at four levels, then approved it: "Looks good. Commit to the build."
+
+**Built:**
+- `godot/themes/trace_pixel.gdshader` reads the screen behind it and redraws it in square cells on one screen-aligned grid. It uses fewer colour levels and a 4×4 ordered dither, and samples at LOD 0 (stepped UVs otherwise pick a blurred mip and draw dark grid lines).
+- `AtomicDecoPunk.pixel_step()` picks the step from `atomic_deco_punk.json` → `pixel`:
+  - sharp below TRACE 20;
+  - 2 px / 24 levels at 20;
+  - 3 px / 16 at 30;
+  - 4 px / 12 on a strike;
+  - 5 px / 10 at Mask off.
+- `encounter.gd` adds one full-screen layer after the backdrops, and one per mascot inserted before the mascot's first child with text. Speech bubbles, status tags and graffiti therefore draw on top, sharp. All layers share one material.
+- New fixture `shot_trace_pixel.gd`, added to CI. It captures the four levels and checks that each layer is on only when active and that no text is drawn under a pixel layer.
+
+**Validation:**
+- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 15 CI screenshot fixtures clean.
+- A first local run reused one user-data folder after `shot_trace_pixel` had saved reduced motion. That made `shot_playtest3` miss its tumble animation and `shot_reel` wait forever for a spin. Both pass in a fresh folder, and in CI the new fixture runs last.
+
+**Images:** `docs/visual/fixtures/pixel-trace-001/`.
+
+**Interpretations to confirm:**
+- the step values;
+- a strike uses its own step (between TRACE 30 and Mask off);
+- mascot details drawn after a status tag stay sharp;
+- step changes are instant (no transition animation).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Validate HALCYON and refresh fixtures (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 approved (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex).

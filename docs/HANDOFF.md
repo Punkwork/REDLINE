@@ -67,7 +67,7 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 **Cards and hand (approved 2026-11-19):** CARDS-004 and HAND-MAX-001 are built; see Built below.
 
-**Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`.
+**Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`. The TRACE-driven pixelation of the backdrop and ICE art (PIXEL-TRACE-001) is approved and built; see Built.
 
 **Integration beyond the HALCYON slice:** connect the presentation hooks to playable LUCIDA, PATCHWORK and run resume when those systems arrive. Tag playable Central Nodes with `central: true`. The slice's run-menu DEAD DROP opens THE CARBON; attach the same reader to the map's DEAD DROP when that Node is built. The reveal sequence and final punch-card art have their own design work.
 
@@ -80,6 +80,7 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| PIXEL-TRACE-001 | As TRACE rises, the backdrop and ICE mascot art drop toward 16-bit in steps (sharp below 20; 2 px at 20, 3 px at 30, 4 px on a strike, 5 px at Mask off, with fewer colours and a light dither). Text, plaques, cards and buttons stay sharp. Presentation only. Designer APPROVED 2026-11-19. *Interpretations to confirm:* step values, the strike step. Captures: `docs/visual/fixtures/pixel-trace-001/`. | **BUILT** — `COMMIT_PIXEL` |
 | CARDS-004 | 1.4× cards in the hand, reward offers, ready rig, deck views and inspection. A centred, fanned hand: 5% overlap at 1–4 cards, then 8/10/18/26/35/43% at 5–10, a 20° fan (at most 4° per card), and the hovered card raised 36 px. The layout is reworked: ICE at 85%, the mascot stage 44 px shorter, the strips 104 px higher, and the side columns moved up. *Interpretations to confirm:* the ICE scale, the mascot size, and contact strips running up to ~50 px off-screen at 9–10 cards. Designer APPROVED 2026-11-19. Captures: `docs/visual/fixtures/cards-004/`. | **BUILT** — `02a2056` |
 | HAND-MAX-001 | Maximum hand 10. A draw at 10 stops, and the card stays on the draw pile. Retrieve and FIELD KIT into a full hand do nothing. 8 rules tests; bot sims unchanged. Designer APPROVED 2026-11-19. | **BUILT** — `02a2056` |
 | CARDS-005a | Corner icons restyled as dial-style steel indicators on a mounting rail. BLOATWARE gets a "can't be played" icon, and TRACER a red +3 penalty lamp; an unplayable card's dial shows "—". Designer APPROVED 2026-11-19. | **BUILT** — `b67dfc8` |

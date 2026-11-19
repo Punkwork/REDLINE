@@ -2018,3 +2018,40 @@ Applied the five approved ICE edits. DOORBELL CAM uses the existing VOID reveal 
 A seeded roll at the start of the Rustler turn is shared by the ICE, response strip, mood and resolution. PULP-002 curves keep their sequences and publish the next value, including curve B. SCRAMBLE applies after the roll.
 
 **Interpretations to confirm:** Each eligible unbroken subroutine gets an independent roll at turn start, even if the response is later skipped. Revealed effects drive mood; a hidden CORTEX subroutine does not tip off the player.
+
+## 2026-11-17 — Validate HALCYON and refresh fixtures (Codex)
+
+Godot 4.3 import passed, as did all 363 rules checks and all nine screenshot scripts, including 173 Friendly Lie and 621 cartridge checks and all five Chrome stages. Refreshed VIS-001, CHROME-001 and the three CARDS-001 encounter captures. The rare PAYDAY close-up was replaced in DEPRECATE-001. The other card close-ups matched their committed renders byte-for-byte. Design reference images were preserved.
+
+VIS-001 turn 3 now shows wary AUTO-RENEW and wary CAPTCHA, with TRACE 2 and TRACE 3 on CAPTCHA. CHROME-001 02b shows lethal AUTO-RENEW from its rolled PULP 6 and wary CAPTCHA with those same TRACE slots. CHROME-001 04a/04b start at turn 1 with wary mascots. In 04c, Mask Off still forces all mascots lethal.
+
+Seeds 100–129 per Rustler. Deaths are by Node and exclude 3,000-step guard stalls. No balance changes were made in response.
+
+| Rustler | Clears (baseline → now) | Deaths by Node (baseline → now) | Mean survivor VITAE |
+|---|---:|---|---:|
+| GENERALIST | 25 → 21 | CAPTCHA 2 → 6; TERMS & CONDITIONS 1 → 1; DOORBELL 0 → 2 | 16.2 → 17.0 |
+| ECHO | 17 → 11 | CAPTCHA 3 → 4; TERMS & CONDITIONS 9 → 14; CONSENT WALL 1 → 1 | 9.5 → 11.8 |
+| RIOT | 25 → 13 | CAPTCHA 4 → 3; TERMS & CONDITIONS 1 → 6; DOORBELL 0 → 7 | 15.2 → 16.2 |
+| VECTOR | 20 → 17 | CAPTCHA 6 → 2; TERMS & CONDITIONS 4 → 10; DOORBELL 0 → 1 | 10.7 → 11.5 |
+
+The baseline had two GENERALIST stalls. This run had one RIOT stall at DOORBELL. Adding rolls to the seeded Game RNG changes which random draws are consumed by other systems, so this comparison measures the combined changes.
+
+**Interpretations to confirm:** Kept the existing chronological PNG filenames even where the named mood now belongs to a different ICE or is absent. The four-type still comparison has no affected card or encounter state. No Windows build was started.
+
+LOG-001 moved the oldest whole live entries to the archive unchanged.
+
+## 2026-11-17 — FACADE-001 approved (Claude)
+
+**Designer:** "Correct. Approved." `REDLINE_CORPORATE_FACADES.md` is approved as written and recorded as FACADE-001 in the master design doc (three degrees of watching; IRONWATCH concourse and LUCIDA solarium with their hostile reveals; plaque colours; interface copy; ICE appliance list; art briefs). Status lines updated in the facades doc, ICE Corp 2/3 and Visual Language §2.3. HANDOFF: FACADE-001 moved to *Done*; its open questions 4–6 (HALCYON copy, when to generate art, escape ICE) remain WAITING. No art generated yet. **Code changes:** none.
+
+## 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude)
+
+**Designer:** "for number one, yes. For number two, yes. And for number three, wait." Wrote §2a in `REDLINE_CORPORATE_FACADES.md`: HALCYON's motif (sunrise fan) and non-fight copy (consent, remembered, reward proposed; status, cracking, strike and Mask-off lines reuse approved VIS-001 copy). Art for IRONWATCH and LUCIDA is to be generated now: HANDOFF Codex TO DO FACADE-ART-001. Escape ICE deferred. Master design doc FACADE-001 updated; HANDOFF WAITING row for the HALCYON copy review. **Code changes:** none.
+
+## 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex)
+
+Generated the 1586 × 992 concourse and solarium pairs from the approved briefs. Both hostile scenes were edited directly from their friendly originals. Cropped fourteen transparent Opening and Tier 1 shells from the two generated sheets. Recorded exact prompts, both hostile edits, the IRONWATCH retry, and references in `godot/assets/friendly_lie/chrome/SOURCES.md`. The skins provide the new art, opaque porcelain and pearl plaques, and approved Cracking and Strike copy. Escape ICE art is deferred.
+
+Validated with Godot 4.3 import, 363 rules checks, and eight `shot_facade.gd` captures in `docs/visual/fixtures/facade-001/`. Lowest measured plaque contrast, including the Strike scrim, was 5.20:1 for IRONWATCH and 5.47:1 for LUCIDA. No plaque contains image textures. HALCYON's existing Friendly Lie regression passed 173 checks. No Windows build.
+
+**Interpretations to confirm:** FRONT DESK and INTAKE are presentation fixtures using their documented Opening ICE. They hold their roster across the four states to review the artwork without implementing a new route or Black ICE. Mask Off previews the hostile environment and mood. The hostile edits maintain visually aligned framing, with small local rendering differences.

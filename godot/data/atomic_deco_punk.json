@@ -82,5 +82,33 @@
     "break": 0.49,
     "end_turn": 0.42,
     "bloat": 0.42
+  },
+  "pixel": {
+    "_note": "PIXEL-TRACE-001 (PROPOSED). Steps by TRACE and strikes; cell in framebuffer px. Presentation only.",
+    "friendly": {
+      "cell": 1,
+      "levels": 256,
+      "dither": 0.0
+    },
+    "trace_20": {
+      "cell": 2,
+      "levels": 24,
+      "dither": 0.6
+    },
+    "trace_30": {
+      "cell": 3,
+      "levels": 16,
+      "dither": 0.6
+    },
+    "strike": {
+      "cell": 4,
+      "levels": 12,
+      "dither": 0.6
+    },
+    "mask_off": {
+      "cell": 5,
+      "levels": 10,
+      "dither": 0.5
+    }
   }
 }

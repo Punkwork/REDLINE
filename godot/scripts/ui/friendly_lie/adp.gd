@@ -19,3 +19,12 @@ static func reveal(bleed: float) -> float:
  var curve: Dictionary = settings.bleed
  var ends: Dictionary = settings.reveal
  return lerpf(ends.start, ends.end, clampf(inverse_lerp(curve.cracking_start, curve.cracking_end, bleed), 0.0, 1.0))
+
+## PIXEL-TRACE-001 (PROPOSED): the pixel step for the backdrop and mascot art.
+static func pixel_step(trace: int, strikes: int, modal_open: bool) -> Dictionary:
+ var cfg: Dictionary = settings.pixel
+ if strikes >= 2: return cfg.mask_off
+ if modal_open or strikes == 1: return cfg.strike
+ if trace >= 30: return cfg.trace_30
+ if trace >= 20: return cfg.trace_20
+ return cfg.friendly

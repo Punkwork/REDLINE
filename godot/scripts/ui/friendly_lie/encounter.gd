@@ -80,6 +80,10 @@ var graffiti: Control
 var graffiti_count := 0
 var shell_graffiti := {}
 var mascots: Array[FriendlyMascot] = []
+# PIXEL-TRACE-001 (PROPOSED): one shared material quantizes the backdrop and mascot art.
+const TRACE_PIXEL := preload("res://themes/trace_pixel.gdshader")
+var pixel_material: ShaderMaterial
+var pixel_layers: Array[Control] = []
 var hover_card := -1
 var hover_time := 0.0
 var hesitation_cooldown := 0.0
@@ -115,6 +119,8 @@ func _ready() -> void:
  background = add_backdrop(skin.background, 1.0)
  surveillance_layer = add_backdrop(skin.hostile_background, AtomicDecoPunk.reveal(0.0))
  surveillance_layer.hide()
+ pixel_material = ShaderMaterial.new(); pixel_material.shader = TRACE_PIXEL
+ add_child(pixel_overlay(Vector2.ZERO, Vector2.ZERO, true))
  glitch_layer = Control.new(); glitch_layer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(glitch_layer)
  for y in [192,362,557,853]:
   var band := ColorRect.new(); band.color=Color("#E5484D29"); band.position=Vector2(0,y); band.size=Vector2(1600,3); band.mouse_filter=Control.MOUSE_FILTER_IGNORE; glitch_layer.add_child(band)
@@ -401,6 +407,15 @@ func build_ice() -> void:
   carrier.position.x = (width - mascot.size.x * illustration_scale) / 2.0
   stage.add_child(carrier)
   carrier.add_child(mascot)
+  # Only the art is pixelated: the layer goes in before the mascot's first child that
+  # carries text (status tag, speech bubble), so every text and the graffiti draw on top, crisp.
+  var over := pixel_overlay(Vector2.ZERO, mascot.size, false)
+  var first_text := -1
+  for child in mascot.get_children():
+   if child is Label or not child.find_children("*", "Label", true, false).is_empty():
+    first_text = child.get_index(); break
+  mascot.add_child(over)
+  if first_text >= 0: mascot.move_child(over, first_text)
   if game.enc.ice[i].id == "AUTO_RENEW": add_shell_graffiti(mascot)
   var scan := scan_tag(i); scan.size_flags_horizontal=Control.SIZE_SHRINK_CENTER; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
@@ -614,7 +629,29 @@ func update_corporation() -> void:
  previous_trace=game.trace; previous_strikes=game.strikes
  update_bleed_target()
  apply_background()
+func pixel_overlay(pos: Vector2, area: Vector2, full: bool) -> Control:
+ var holder := Control.new(); holder.name = "TracePixel"; holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ var copy := BackBufferCopy.new(); copy.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT; holder.add_child(copy)
+ var rect := ColorRect.new(); rect.material = pixel_material; rect.mouse_filter = Control.MOUSE_FILTER_IGNORE; holder.add_child(rect)
+ if full:
+  holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ else:
+  holder.position = pos; holder.size = area; rect.size = area
+ pixel_layers = pixel_layers.filter(func(c): return is_instance_valid(c))
+ holder.visible = false
+ pixel_layers.append(holder)
+ update_pixel()
+ return holder
+func update_pixel() -> void:
+ if pixel_material == null or game == null: return
+ var step := AtomicDecoPunk.pixel_step(game.trace, game.strikes, is_instance_valid(strike_overlay) and strike_overlay.visible)
+ pixel_material.set_shader_parameter("cell", float(step.cell))
+ pixel_material.set_shader_parameter("levels", float(step.levels))
+ pixel_material.set_shader_parameter("dither", float(step.dither))
+ for layer in pixel_layers:
+  if is_instance_valid(layer): layer.visible = float(step.cell) > 1.0
 func update_bleed_target() -> void:
+ update_pixel()
  var target := AtomicDecoPunk.target(game.trace, game.strikes, strike_overlay.visible)
  if target != bleed_target:
   bleed_from = bleed

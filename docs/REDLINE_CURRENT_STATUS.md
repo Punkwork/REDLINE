@@ -37,6 +37,8 @@ CARDS-004, CARDS-005/005a and HAND-MAX-001 (APPROVED and built 2026-11-19):
 
 Captures: `docs/visual/fixtures/cards-004/` and `cards-005/`.
 
+PIXEL-TRACE-001 (APPROVED and built 2026-11-19): as TRACE rises, the backdrop and ICE mascot art drop toward 16-bit in steps (TRACE 20, 30, a strike, Mask off). Text, plaques, cards and buttons stay sharp. Presentation only. Captures: `docs/visual/fixtures/pixel-trace-001/`.
+
 The intermediate CARDS-001 face revision removed black title bars and dark beige labels and explored ivory, pearl and pale celadon within the existing chassis.
 
 The selected board palette supersedes the pale label studies: SCRIPT uses A-family tobacco/khaki brown, PROGRAM C-family earthy olive, PROTOCOL D-family muted blue-green. BLOATWARE now uses the Whirlwind reference's handle/paired tubes/cage/plug-in board construction, with a distinct oxide-red phenolic face selected by the designer (“Perfect”). Text prints directly on subtly textured board material. Instrument-amber accents and glowing amber text are in the current card treatment. Bloatware's authored type, unplayability and clear/TRACE rules are unchanged.
