@@ -187,3 +187,11 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |
 | CHROME-001 / CARDS-001 source notes | Recorded available source and edit history for nine generated assets and corrected Whirlwind Bloatware. Exact prompts, model IDs and the corrected concept PNG are still missing. | 2026-11-17 (Codex) |
 | VIS-001 doc | `REDLINE_VISUAL_LANGUAGE.md` and `docs/visual/` (reference images, placeholder backgrounds, mascot SVGs) added for Codex. | 2026-11-17 (Claude) |
+
+
+### ICE-ANALOG-001 — next-build handoff (2026-11-19; PROPOSED)
+
+- **Source committed on main:** `godot/tests/ice_analog_visual.gd`, `shot_ice_analog.gd`, `shot_ice_analog_animation.gd`, `docs/visual/explorations/ice-analog-001/`. This is an **editable visual scaffold**, not an approved encounter UI.
+- **Claude Code / next build:** run Godot 4.3 screenshot and animation fixtures per exploration README, fix any parse/runtime issues, render and review six PNGs + GIF, run the full rules suite, replace vector mascot stand-ins with existing mascot art, and complete key/tooltips/reel behavior and contrast/accessibility audits.
+- **Designer:** review rendered visuals and VIS-001 §2.9 tooltip exception; only the designer can approve integration.
+- **Guardrails:** do not change rules or CARDS-004/005; do not integrate into default encounter; mockup numbers are illustrative.
