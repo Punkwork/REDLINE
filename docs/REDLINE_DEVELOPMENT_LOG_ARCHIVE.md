@@ -1889,3 +1889,13 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Validation:** Godot 4.3 imports; 357 rules pass and 30-seed bot summaries match the pre-card baseline (GENERALIST/ECHO/RIOT/VECTOR clears 25/17/25/20, survivor VITAE 16.2/9.5/15.2/10.7). Nine UI scripts pass. Cartridge fixture: 612 checks / zero failures, including all 112 authored rule texts, the longest legal shared-tag compiled SCRIPT pair, actual rarity, illustration bounds and 6-/8-/16-card protrusion bounds. Existing native hand clicks, HOLD/READY RIG, reward, SCAN/CULL/ZEROED/TUMBLE and five-second reduced-motion response checks remain. Nine individual close-up PNGs plus six/eight-card encounter captures are in `docs/visual/fixtures/cards-001/` and the downloadable ZIP.
 
 **Review:** physical finish details and motif reuse are proposed art choices. Labels/costs remain live data; no gameplay is baked into textures. The revised PR #12 remains open against the shared game branch and awaits designer approval before merge. Audio/Windows export are outside this task. Asset provenance, guide, status and the shared HANDOFF are updated in place.
+
+## 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex)
+
+**Commit tag:** `cards-001-lightfaces`.
+
+**Designer feedback:** black title backgrounds and dark beige card faces do not fit the chassis. Removed the opaque black title strip; dark titles now print directly on each inset face with a restrained separator. Generated edits preserve the three carriers and change only the blank face: near-white ivory instruction stock for SCRIPT, cool pearl instrument plate for PROGRAM, pale celadon enamel for PROTOCOL. Hardware, protrusions, outside BW tab, rarity details, authored metadata and rules are unchanged. The corporate Bloatware treatment remains separate.
+
+**Validation:** 357 rules checks and 612 cartridge UI checks pass, including authored/compiled text fit and protruding bounds. Five Chrome stages pass; refreshed nine close-ups, six/eight-card captures and ten encounter review PNGs. The earlier dated whole entry was appended unchanged to the archive under LOG-001 to keep this live log below about 60 KB.
+
+**Review:** material tint and direct-print title treatment are proposed visual refinements. PR #12 is updated, not merged; designer approval of the integrated revision is still required under the existing merge instruction. No gameplay data, rarity odds or costs changed.

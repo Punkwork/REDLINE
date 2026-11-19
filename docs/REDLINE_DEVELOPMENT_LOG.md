@@ -4,17 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex)
-
-**Commit tag:** `cards-001-lightfaces`.
-
-**Designer feedback:** black title backgrounds and dark beige card faces do not fit the chassis. Removed the opaque black title strip; dark titles now print directly on each inset face with a restrained separator. Generated edits preserve the three carriers and change only the blank face: near-white ivory instruction stock for SCRIPT, cool pearl instrument plate for PROGRAM, pale celadon enamel for PROTOCOL. Hardware, protrusions, outside BW tab, rarity details, authored metadata and rules are unchanged. The corporate Bloatware treatment remains separate.
-
-**Validation:** 357 rules checks and 612 cartridge UI checks pass, including authored/compiled text fit and protruding bounds. Five Chrome stages pass; refreshed nine close-ups, six/eight-card captures and ten encounter review PNGs. The earlier dated whole entry was appended unchanged to the archive under LOG-001 to keep this live log below about 60 KB.
-
-**Review:** material tint and direct-print title treatment are proposed visual refinements. PR #12 is updated, not merged; designer approval of the integrated revision is still required under the existing merge instruction. No gameplay data, rarity odds or costs changed.
-
-
 ## 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex)
 
 **Commit tag:** `cards-001-board-palette`.
@@ -420,3 +409,15 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 ## 2026-11-19 — CARDS-002 Mustard PCB review archive (Codex)
 
 Saved ten review sheets, three final Godot captures and the reproducible prototype for the fifth cartridge design. The designer requested centred rules inside a fixed PCB trace frame and a single top-edge rarity light. The final capture fixture verified all three indicators, frame geometry, alignment and text fit in Godot 4.3. The archive is under `docs/visual/fixtures/cards-002/`.
+
+## 2026-11-19 — CARDS-002 Mustard PCB review fixes (Claude)
+
+**Designer direction:** "at minimum cached to be not in text on the card … an icon somewhere along the outside of the card", and fix the other review issues by interpretation. Review-only: changes are in the `docs/visual/fixtures/cards-002/` preview patch and fixture; the playable build is unchanged.
+
+**Changed (preview patch):** CACHED is now a padlock indicator mounted on the cartridge's left ear, outside the board, with no text on the card. A held card has a solid rim; a temporary cache shows one lit rim segment per remaining turn. The wording moves to the hover tooltip. The rules frame grows from 134×67 to 134×84 by shortening the stencil to 40 px and merging type and tags into one centred Routed Gothic stamp. Rules have a 9 px floor and Barlow Bold numbers. The rarity lamp lights 1, 2 or 3 cells as well as changing colour. The fixture now covers cached and temporary states, a longest-rules stress card, a sweep of all 111 card texts at AMP 0–3 (444 texts), a no-`CACHED`-text guard, the title outline, and an optional hand-size capture (`PREVIEW_SCALE=1`).
+
+**Validation:** Godot 4.3 at the baseline `0aa6091` with the new patch: preview fixture 0 failures at 3× and 1×; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0.
+
+**Interpretations to confirm:** padlock glyph and left-ear position; broken-rim turn segments for temporary cache; 1/2/3 lamp cells; bold numbers in place of the amber highlight; 84 px frame with a 40 px stencil; single-line type stamp with a 1 px weighting outline; Barlow Bold added under the same OFL.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex).

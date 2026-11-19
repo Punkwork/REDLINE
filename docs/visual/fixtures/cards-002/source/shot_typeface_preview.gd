@@ -1,7 +1,19 @@
 extends SceneTree
+## CARDS-002 mustard PCB preview fixture. PREVIEW_SCALE (default 3) sets the
+## capture scale; 1 renders at hand size.
+
+const FACES := ["DEEP_PROBE", "STRESS_TEST", "NULL_POINTER"]
+const BOARD_LEFT := 7.0
+const MIN_GAP := 3.0
+
+var failures := 0
 
 func _initialize() -> void:
  call_deferred("run")
+
+func fail(message: String) -> void:
+ push_error(message)
+ failures += 1
 
 func run() -> void:
  var main: Node = load("res://scenes/Main.tscn").instantiate()
@@ -21,41 +33,147 @@ func run() -> void:
  main.refresh()
  for step in range(6):
   await process_frame
+
+ sweep_text_fit(g)
+
+ # Cached copies in hand: one held indefinitely, one temporary with 2 turns left.
+ g.hand.append({"uid": 9001, "id": "DEEP_PROBE", "cached": true})
+ g.hand.append({"uid": 9002, "id": "STRESS_TEST", "cached": true, "cache_turns": 2})
+
+ var scale := maxf(1.0, float(OS.get_environment("PREVIEW_SCALE"))) if OS.get_environment("PREVIEW_SCALE") != "" else 3.0
  var surface := SubViewport.new()
- surface.size = Vector2i(620, 860)
+ surface.size = Vector2i(roundi(206 * scale), roundi(286 * scale))
  surface.render_target_update_mode = SubViewport.UPDATE_ALWAYS
  root.add_child(surface)
  var backdrop := ColorRect.new()
  backdrop.color = Color("#E6EEEA")
- backdrop.size = Vector2(620, 860)
+ backdrop.size = Vector2(surface.size)
  surface.add_child(backdrop)
- var failures := 0
- for face in ["DEEP_PROBE", "STRESS_TEST", "NULL_POINTER"]:
+ var suffix := "" if scale == 3.0 else "_%dx" % int(scale)
+
+ var shots := [
+  ["DEEP_PROBE", -1, "DEEP_PROBE"],
+  ["STRESS_TEST", -1, "STRESS_TEST"],
+  ["NULL_POINTER", -1, "NULL_POINTER"],
+  ["DEEP_PROBE", 9001, "DEEP_PROBE_CACHED"],
+  ["STRESS_TEST", 9002, "STRESS_TEST_CACHED_TEMP"],
+  ["NULL_POINTER", -1, "LONGEST_RULES_STRESS"],
+ ]
+ for shot in shots:
   var card := FriendlyCard.new()
-  card.setup(main.friendly, face, -1)
-  card.position = Vector2(64, 58)
-  card.scale = Vector2(3, 3)
+  card.setup(main.friendly, shot[0], shot[1])
+  if shot[2] == "LONGEST_RULES_STRESS":
+   # Swap in the longest rules text in the card pool to show the size floor.
+   var longest := longest_rule(g)
+   var old := card.body.get_node("SolderRulesFrame")
+   card.body.remove_child(old)
+   old.free()
+   card.body.add_child(FriendlyCard.build_mustard_rules(longest))
+  card.position = Vector2(21, 19) * scale
+  card.scale = Vector2(scale, scale)
   surface.add_child(card)
   for step in range(5):
    await process_frame
   await RenderingServer.frame_post_draw
-  var lamp: Control = card.body.get_node("TopRarityLight")
-  if lamp.tier != CardDB.def(face).rarity or lamp.get_rect() != Rect2(63, 6, 37, 8) or card.body.has_node("RarityFinish"):
-   push_error(face + ": rarity indicator mismatch")
-   failures += 1
-  var frame: Control = card.body.get_node("SolderRulesFrame")
-  var rules: Label = frame.get_node("CenteredRules")
-  if frame.get_rect() != FriendlyCard.MUSTARD_RULES_RECT or not is_equal_approx(rules.get_rect().get_center().distance_to(frame.size / 2), 0):
-   push_error(face + ": rules box shifted")
-   failures += 1
-  if rules.horizontal_alignment != HORIZONTAL_ALIGNMENT_CENTER or rules.vertical_alignment != VERTICAL_ALIGNMENT_CENTER or rules.get_line_count() != rules.get_visible_line_count():
-   push_error(face + ": rules alignment or overflow")
-   failures += 1
-  var path := OS.get_environment("SHOT_DIR").path_join(face + ".png")
+  check_card(card, shot[0], shot[1], g)
+  var path := OS.get_environment("SHOT_DIR").path_join(shot[2] + suffix + ".png")
   if surface.get_texture().get_image().save_png(path) != OK:
-   push_error(face + ": could not save capture")
-   failures += 1
+   fail(shot[2] + ": could not save capture")
   surface.remove_child(card)
   card.queue_free()
  await process_frame
+ print("CARDS-002 preview checks: %d failure(s)" % failures)
  quit(1 if failures else 0)
+
+func longest_rule(g: Game) -> String:
+ var best := ""
+ for id in CardDB.DEFS:
+  var t: String = g.card_text(id)
+  if t.length() > best.length():
+   best = t
+ return best
+
+## Every card's rules (with AMP 0 to 3) must fit the fixed frame at 9 px or
+## larger, and every Rustler type stamp must fit one line at 8 px or larger.
+func sweep_text_fit(g: Game) -> void:
+ var saved_amp: int = g.amp
+ var font: Font = preload("res://assets/fonts/Preview-RoutedGothic.ttf")
+ var checked := 0
+ for amp in range(4):
+  g.amp = amp
+  for id in CardDB.DEFS:
+   var rule: String = g.card_text(id)
+   if FriendlyCard.mustard_rules_size(rule) < FriendlyCard.MUSTARD_RULES_MIN:
+    fail("%s (AMP %d): rules do not fit the frame at %d px" % [id, amp, FriendlyCard.MUSTARD_RULES_MIN])
+   checked += 1
+ g.amp = saved_amp
+ for id in CardDB.DEFS:
+  var d := CardDB.def(id)
+  if d.type == "BLOATWARE":
+   continue
+  var stamp := " · ".join([d.type] + Array(d.tags))
+  if font.get_string_size(stamp, HORIZONTAL_ALIGNMENT_LEFT, -1, FriendlyCard.MUSTARD_TYPE_MIN).x > FriendlyCard.MUSTARD_TYPE_RECT.size.x:
+   fail(id + ": type stamp does not fit one line")
+ print("CARDS-002 text-fit sweep: %d rules texts checked" % checked)
+
+func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
+ var body := card.body
+ var tag := face + (" uid %d" % uid if uid >= 0 else "")
+
+ # Rarity: lamp tier, position, and lit cell count (1/2/3) so colour is not the only cue.
+ var lamp: Control = body.get_node("TopRarityLight")
+ var rarity: String = CardDB.def(face).rarity
+ if lamp.tier != rarity or lamp.get_rect() != Rect2(63, 6, 37, 8) or body.has_node("RarityFinish"):
+  fail(tag + ": rarity indicator mismatch")
+ if lamp.lit_cells() != {"COMMON": 1, "UNCOMMON": 2, "RARE": 3}[rarity]:
+  fail(tag + ": rarity cell count mismatch")
+
+ # Rules: fixed frame, size floor, centred block inside the inset bounds.
+ var frame: Control = body.get_node("SolderRulesFrame")
+ var rules: RichTextLabel = frame.get_node("CenteredRules")
+ var bounds := Rect2(Vector2.ZERO, frame.size).grow(-FriendlyCard.MUSTARD_RULES_INSET)
+ if frame.get_rect() != FriendlyCard.MUSTARD_RULES_RECT:
+  fail(tag + ": rules frame moved")
+ if rules.get_theme_font_size("normal_font_size") < FriendlyCard.MUSTARD_RULES_MIN:
+  fail(tag + ": rules below the size floor")
+ if rules.get_content_height() > bounds.size.y + 0.5 or not bounds.grow(0.5).encloses(rules.get_rect()):
+  fail(tag + ": rules overflow the frame")
+ if absf(rules.get_rect().get_center().y - bounds.get_center().y) > 0.5:
+  fail(tag + ": rules not vertically centred")
+ if not rules.text.begins_with("[center]"):
+  fail(tag + ": rules not horizontally centred")
+ var digits := RegEx.new(); digits.compile("[0-9]")
+ if digits.search(g.card_text(face)) and not rules.text.contains("[b]"):
+  fail(tag + ": numbers not set in bold")
+
+ # Type stamp: one centred line, clear of the stencil above and the frame below.
+ var stamp: Label = body.get_node("TypeStamp")
+ if stamp.get_line_count() != 1 or stamp.get_theme_font_size("font_size") < FriendlyCard.MUSTARD_TYPE_MIN:
+  fail(tag + ": type stamp wraps or is too small")
+ var stamp_font: Font = stamp.get_theme_font("font")
+ var ink_bottom := stamp.get_rect().get_center().y + stamp_font.get_height(stamp.get_theme_font_size("font_size")) / 2.0
+ if ink_bottom + MIN_GAP > FriendlyCard.MUSTARD_RULES_RECT.position.y:
+  fail(tag + ": type stamp crowds the rules frame")
+
+ # Title keeps its dark outline (white on mustard alone is 2.99:1).
+ var outlined := false
+ for child in body.get_children():
+  if child is Label and child.text == CardDB.def(face).name.to_upper():
+   outlined = child.get_theme_constant("outline_size") >= 2
+ if not outlined:
+  fail(tag + ": title outline missing")
+
+ # Cached: never printed on the face; a badge outside the board instead.
+ for child in body.find_children("*", "Label", true, false) + body.find_children("*", "RichTextLabel", true, false):
+  if "CACHED" in child.text:
+   fail(tag + ": CACHED printed on the card face")
+ var entry: Dictionary = g._find(g.hand, uid)
+ var is_cached: bool = entry.get("cached", false)
+ if body.has_node("CacheBadge") != is_cached:
+  fail(tag + ": cache badge presence mismatch")
+ if is_cached:
+  var badge: Control = body.get_node("CacheBadge")
+  if badge.get_rect().end.x > BOARD_LEFT or badge.turns != int(entry.get("cache_turns", 0)):
+   fail(tag + ": cache badge overlaps the board or shows the wrong turns")
+  if not "CACHED" in card.tooltip_text:
+   fail(tag + ": tooltip does not name the cached state")
