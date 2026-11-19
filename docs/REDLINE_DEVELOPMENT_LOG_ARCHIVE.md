@@ -1909,3 +1909,23 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Changed:** tobacco-brown SCRIPT, earthy olive PROGRAM, muted blue-green PROTOCOL; direct light printing on real board-style textures. BLOATWARE now has the Whirlwind-inspired protective U-handle, paired tubes, open cage/stacked boards and oxide-red phenolic face. Names, costs and rules are live controls. TRACER/SPAM remain BLOATWARE with unchanged unplayability/clear/TRACE rules; both now use the same component-aware bounds as other cartridges. Cached Bloatware retains full rules and CACHED marker; optional corporate flavour footer yields space when cached. No white card text panels remain. A–D review labels denote the four types; source-reference letters A/C/D remain palette provenance.
 
 **Validation:** Godot 4.3 import, 357 rules checks and 170 Friendly Lie UI checks pass. Extended cartridge fixture passes 625 checks and covers all authored/compiled texts, both Bloatware examples including cached text, component bounds and a mixed-type hand. Selected older log entry appended unchanged to the archive under LOG-001. Asset sources/guide/status/HANDOFF and PNGs are updated. No card definitions, rarity weights, costs or gameplay values changed. PR #12 remains open for integrated review before merge.
+
+## 2026-11-17 — CARDS-001: instrument amber accents (Codex)
+
+**Commit tag:** `cards-001-amber`. Replaced neon yellow-green with warm instrument amber (`#D6B675`) for the shared highlight and printed numeric highlights. The brass/gauge reference fits the selected brown, olive, teal and oxide-red boards. BW badges, selection accents and shared HUD controls inherit the same colour. No rules or costs changed.
+
+**Interpretations to confirm:** exact amber hue is a visual proposal for designer review. PR #12 remains open.
+
+**Validation:** 357 rules checks and 625 cartridge UI checks pass; updated four-type PNG rendered from live Godot controls.
+
+## 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex)
+
+**Commit tag:** `cards-001-amber-glow`. Designer requested glowing amber text instead of highlighted backgrounds. Numeric rule text now uses warm amber ink (`#F2CD87`) with a faint translucent amber halo; removed rectangular fills. External BW badges use a dark instrument face and glowing amber numerals. Board textures stay visible.
+
+**Interpretations to confirm:** restrained halo intensity and dark BW instrument face are proposed treatments. No gameplay changes. 625 cartridge UI checks pass; refreshed live-control comparison and card/hand PNGs. PR #12 remains open for review.
+
+## 2026-11-17 — CARDS-001: distinct board surface textures (Codex)
+
+**Commit tag:** `cards-001-board-textures`. Added subtle stationary procedural material grain behind card printing: pressed phenolic fibres for brown SCRIPT, woven laminate for olive PROGRAM, brushed resin for teal PROTOCOL, mottled Bakelite for oxide-red BLOATWARE. Inset feathered bounds protect chassis and contacts; text/illustrations draw above the texture. Existing palette and amber text glow retained.
+
+**Interpretations to confirm:** these four material patterns and their restrained intensity are proposed for review. No gameplay changes. 625 cartridge UI checks pass. Refreshed four-type comparison and card/hand fixtures. Oldest whole log entry appended unchanged to the archive under LOG-001.

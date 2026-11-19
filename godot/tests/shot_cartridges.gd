@@ -14,9 +14,12 @@ func settle(n: int=6) -> void:
 func check_card(card: FriendlyCard) -> void:
  var d:=CardDB.def(card.card_id)
  for child in card.body.get_children():
-  if child is RichTextLabel: check(child.get_content_height()<=child.size.y+1,"full rules fit: "+card.card_id)
-  if child.name=="TonerIllustration": check(child.size.x<=128 and child.size.y<=44,"art stays inside its frame")
-  if child is CartridgeFinish: check(child.rarity==d.rarity,"authored rarity preserved")
+  # CARDS-003: rules sit in the rules panel; art in the type's art slot; rarity on the lamp.
+  if child.name=="SolderRulesFrame":
+   var rules: RichTextLabel=child.get_node("CenteredRules")
+   check(rules.get_content_height()<=child.size.y+1,"full rules fit: "+card.card_id)
+  if child.name=="CircuitStencil" or child is FriendlyCard.CorporateArt: check(FriendlyCard.glow_layout(d.type).art.encloses(child.get_rect()),"art stays inside its frame")
+  if child is FriendlyCard.RarityLight: check(child.tier==d.rarity,"authored rarity preserved")
  var shells:=card.find_children("SlotCartridge","TextureRect",true,false)
  check(shells.size()==1 and shells[0].size==FriendlyCard.PHYSICAL_RECT.size,"chassis extends beyond paper card")
 func run() -> void:

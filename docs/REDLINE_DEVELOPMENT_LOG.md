@@ -4,26 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: instrument amber accents (Codex)
-
-**Commit tag:** `cards-001-amber`. Replaced neon yellow-green with warm instrument amber (`#D6B675`) for the shared highlight and printed numeric highlights. The brass/gauge reference fits the selected brown, olive, teal and oxide-red boards. BW badges, selection accents and shared HUD controls inherit the same colour. No rules or costs changed.
-
-**Interpretations to confirm:** exact amber hue is a visual proposal for designer review. PR #12 remains open.
-
-**Validation:** 357 rules checks and 625 cartridge UI checks pass; updated four-type PNG rendered from live Godot controls.
-
-## 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex)
-
-**Commit tag:** `cards-001-amber-glow`. Designer requested glowing amber text instead of highlighted backgrounds. Numeric rule text now uses warm amber ink (`#F2CD87`) with a faint translucent amber halo; removed rectangular fills. External BW badges use a dark instrument face and glowing amber numerals. Board textures stay visible.
-
-**Interpretations to confirm:** restrained halo intensity and dark BW instrument face are proposed treatments. No gameplay changes. 625 cartridge UI checks pass; refreshed live-control comparison and card/hand PNGs. PR #12 remains open for review.
-
-## 2026-11-17 — CARDS-001: distinct board surface textures (Codex)
-
-**Commit tag:** `cards-001-board-textures`. Added subtle stationary procedural material grain behind card printing: pressed phenolic fibres for brown SCRIPT, woven laminate for olive PROGRAM, brushed resin for teal PROTOCOL, mottled Bakelite for oxide-red BLOATWARE. Inset feathered bounds protect chassis and contacts; text/illustrations draw above the texture. Existing palette and amber text glow retained.
-
-**Interpretations to confirm:** these four material patterns and their restrained intensity are proposed for review. No gameplay changes. 625 cartridge UI checks pass. Refreshed four-type comparison and card/hand fixtures. Oldest whole log entry appended unchanged to the archive under LOG-001.
-
 ## 2026-11-17 — VISUAL-DECISIONS-2026-11-17: approved visual decisions recorded in the master design doc (Claude)
 
 **Designer instruction:** record the approved visual decisions from VIS-001, CHROME-001 and CARDS-001 in `REDLINE_MASTER_DESIGN.md`, leaving out everything still waiting for review. Added the VISUAL-DECISIONS-2026-11-17 table after the Raygun Gothic section: The Friendly Lie, Atomic Salvage deprecated, 6-card draw, Chrome Deco encounter, no black ICE rule panels, type-specific cartridges, A/C/D board colours, no white card text backgrounds, oxide-red Whirlwind Bloatware, glowing amber numbers. Each row quotes the designer and cites its commit. Final art, working values and Interpretations to confirm stay in HANDOFF *Waiting on the designer*. LOG-001: the oldest whole entry (DSY-001/002/003/006, 2026-11-15) moved unchanged to the archive. **Code changes:** none.
@@ -431,3 +411,36 @@ New beyond the review: a grafted card shows its graft art in the stencil slot. F
 **Proposed (not done):** remove the unreachable pre-CARDS-003 card paths (toner illustration atlas, printed rarity finish, separator, text CACHED tag) from `card.gd`.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex).
+
+## 2026-11-19 — CARDS-003 cleanup; CARDS-003a long-text layout (Claude)
+
+**Designer approval:** "I approve code cleanup."
+
+**Cleanup:** `card.gd` setup now has a single CARDS-003 path; every card type uses it. Removed:
+- the toner illustration path and `ArtBox`;
+- the printed rarity finish (`cartridge_finish.gd` deleted);
+- the separator and old title strip;
+- the old rules box, its amber markup and the corporate footer label;
+- the text CACHED tag;
+- the superseded CARDS-002 palette colours (`BOARD_PALETTE` became `BOARD_RECT`) and `PCB_INK`.
+
+The `toner-illustrations.png` asset is kept. In `shot_cartridges`, three checks had been vacuous since CARDS-003 because the nodes they looked for no longer existed: rules fit, art frame and rarity. They now target the rules panel, the stencil or corporate art slot, and the rarity lamp.
+
+**Found during the cleanup:** with its rules-fit check live again, `shot_cartridges` failed on compiled SCRIPT cards (SAFEHOUSE COMPILE). On a display, 107 of 1,008 compiled pairs don't fit the fixed CARDS-003 rules panel at 9 px. The pre-CARDS-003 layout collapsed its art for long text. The CARDS-003 sweep covered only base cards.
+
+**CARDS-003a (PROPOSED, fix applied):** when rules don't fit the standard panel at 9 px, `glow_layout(type, true)` gives a tall layout. It drops the stencil, puts the type plate under the title, and makes the rules panel 138 px wide, filling the freed space. Rules there may shrink to 8 or 7 px as a last resort rather than clip; that applies to 2 texts. A graft on a tall card shows as a small part on the chassis edge, as before CARDS-003. `shot_cards_pcb` now sweeps 1,452 texts (base cards at AMP 0–3 plus every compiled pair) and fails on any clipping. It also captures the longest compiled card (295 characters).
+
+**Validation:**
+- Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 14 CI screenshot fixtures clean; `shot_cartridges` 601/0 and `shot_cards_pcb` 0 failures.
+- All 115 existing screenshots are pixel-identical to the pre-cleanup run; one new capture was added.
+- `shot_facade` still prints only its pre-existing "resources still in use at exit" warning.
+- Headless Godot measures text differently from a display (384 pairs against 107). The sweep runs on a display, as players do.
+
+**Interpretations to confirm:** CARDS-003a as a whole; the 7 px last resort; dropping the stencil on long cards.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: instrument amber accents (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: distinct board surface textures (Codex).

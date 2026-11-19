@@ -26,12 +26,15 @@ The playable build uses this card treatment for every card type. The design hist
   - One solid icy-cyan `#7FE3F0` glow just inside the board edge, the same for a temporary cache.
   - Never printed on the card. The hover tooltip reads `CACHED`, or `CACHED (temporary)` for a timed cache.
 - **Grafts:** a grafted card shows its graft art in the stencil slot.
+- **Long text (CARDS-003a, PROPOSED):** when a card's rules don't fit the standard panel at 9 px, the card switches to a tall layout. The stencil slot collapses, the type plate moves up under the title, and the rules panel fills the freed space at 138 px wide. This mostly affects compiled SAFEHOUSE cards: 107 of 1,008 compiled SCRIPT pairs. In the tall layout, rules may shrink to 8 or 7 px as a last resort rather than clip; that happens for 2 texts. A graft on a tall card shows as a small part on the chassis edge.
+
+![The longest compiled card (295 characters) in the tall layout](CARDS-003_Compiled_Tall_Layout.jpg)
 
 `godot/tests/shot_cards_pcb.gd` (in CI) renders these cards. It checks:
 
 - the layout, contrast, size floor and fit;
 - the rarity lamps and per-type stencils;
 - the cache glow and graft art;
-- every card's rules text at AMP 0–3.
+- every card's rules text at AMP 0–3, plus all 1,008 compiled SCRIPT pairs, with no clipping allowed.
 
 Set `CARD_SHOT_SCALE=1` for hand-size captures.
