@@ -586,3 +586,14 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 ### ICE-ANALOG-001 follow-up — motion scaffolding (2026-11-19)
 
 Added deterministic animation phases to the isolated visual fixture: idle, attention, telegraph, break reaction and tumble, plus animation-frame driver. These are illustrative presentation effects, not gameplay events. **Godot execution, rendered GIF, screenshot review and rules validation remain pending.** Existing mascots remain placeholders. Status remains PROPOSED.
+
+
+## 2026-11-19 — ICE-ANALOG-001 designer approval for default encounter integration
+
+**Designer approval (verbatim):** “Okay, well then I approve all of these changes to be integrated into the default encounters.”
+
+**Decision:** ICE-ANALOG-001's analog visual direction and proposed interface behaviors are **APPROVED for integration** into default encounters. This changes the earlier design-review-only restriction. The existing standalone Godot fixture is still incomplete and untested; **no default encounter integration has been performed in this entry**. All mockup numbers are illustrative, not rules amendments.
+
+**Next build:** Godot 4.3 execution, screenshot and GIF generation, existing mascot asset integration, accurate TUMBLER motion, accessibility and contrast verification, regression suite, then default encounter presentation integration. Do not change gameplay rules.
+
+**Interpretations to confirm:** whether any specific animation timings or sound cues require separate designer sign-off; final pixel fidelity to the saved HALCYON reference mockups.
