@@ -9,3 +9,6 @@ Poiret One Regular and its SIL OFL 1.1 license were downloaded from https://gith
 - Permanent Marker — Google Fonts, Apache 2.0.
 
 - Special Elite — Google Fonts, Apache 2.0.
+
+- Barlow SemiBold and Bold — Google Fonts, SIL OFL 1.1 (`Barlow-OFL.txt`); https://github.com/google/fonts/tree/main/ofl/barlow. CARDS-003 card rules and numbers.
+- Routed Gothic — SIL OFL 1.1 (`RoutedGothic-OFL.md`); https://github.com/dse/routed-gothic/tree/365e340d64c55cb7c57940744773e6c833e3efd9. CARDS-003 type plates.

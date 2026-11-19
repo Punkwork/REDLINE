@@ -3,6 +3,48 @@ extends Control
 ## Paper UI only. Playing a card always goes through the existing Game API.
 const CARD_SIZE:=Vector2(164,244)
 const PHYSICAL_RECT:=Rect2(-10,-12,184,268)
+const PCB_RULES_INSET := 5.0
+const PCB_RULES_MAX := 11
+const PCB_RULES_MIN := 9
+const PCB_TYPE_MAX := 9
+const PCB_TYPE_MIN := 8
+const PCB_INK := Color("#100D07")
+## CARDS-002: card text sits on dark solder-mask panels, never on the bare board.
+const PCB_GLOW_INK := Color("#FFF3D0")
+const PCB_GLOW_NUMBER := Color("#FFC861")
+const PCB_GLOW_HALO := Color(1.0, 0.86, 0.55, 0.32)
+const PCB_PLATE_PAD := 8.0
+const PCB_CACHE_GLOW := Color("#7FE3F0")
+## CARDS-002 (APPROVED 2026-11-19): every card type gets the PCB glow treatment.
+## Each mask is a deep tint of its own laminate; BLOATWARE keeps its corporate face.
+const GLOW_TREATMENT := {
+ "SCRIPT": {"laminate": Color("#AE924D"), "mask": Color("#2E2712"), "lamp": Vector2(63, 6)},
+ "PROGRAM": {"laminate": Color("#5A8048"), "mask": Color("#172312"), "lamp": Vector2(63, 16)},
+ "PROTOCOL": {"laminate": Color("#60938A"), "mask": Color("#14272A"), "lamp": Vector2(100, 11)},
+ "BLOATWARE": {"mask": Color("#2A1411")},
+}
+const CORP_FACE := Rect2(10, 58, 144, 153)
+
+## Rects for the title panel, art, type plate, rules panel and cache edge,
+## derived from each Rustler board (or the corporate face for BLOATWARE).
+static func glow_layout(type: String) -> Dictionary:
+ if type == "BLOATWARE":
+  return {
+   "title": Rect2(15, 60, 120, 26), "art": Rect2(16, 91, 128, 16),
+   "type": Rect2(16, 108, 128, 13), "rules": Rect2(15, 124, 130, 84),
+   "edge": Rect2(11, 57, 142, 155), "leads": false,
+  }
+ var board: Rect2 = BOARD_PALETTE[type][0]
+ var top := board.position.y
+ return {
+  "title": Rect2(13, top + 3, 124, 38), "art": Rect2(16, top + 48, 128, 40),
+  "type": Rect2(16, top + 90, 128, 13), "rules": Rect2(13, top + 105, 134, board.end.y - 14 - (top + 105)),
+  "edge": Rect2(9.5, top - 0.5, 143, board.end.y - 2.5 - (top - 0.5)), "leads": true,
+ }
+
+static func glow_mask(type: String) -> Color:
+ return GLOW_TREATMENT[type]["mask"]
+const PCB_NUMBER := "([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)"
 const BOARD_PALETTE := {
  "SCRIPT": [Rect2(7,18,148,203), Color("#BD9547"), Color("#6C4A1D")],
  "PROGRAM": [Rect2(7,30,148,199), Color("#90934F"), Color("#4C522C")],
@@ -29,6 +71,85 @@ class ArtBox extends Control:
  func _draw() -> void:
   var r:=Rect2(Vector2.ZERO,size)
   for edge in [[r.position,Vector2(r.end.x,0)],[Vector2(r.end.x,0),r.end],[r.end,Vector2(0,r.end.y)],[Vector2(0,r.end.y),r.position]]: draw_dashed_line(edge[0],edge[1],FriendlyLook.GREY,1,5)
+class CircuitStencil extends Control:
+ ## CARDS-002: one silkscreen footprint per Rustler type, drawn in a 128 x 40 slot.
+ ## SCRIPT: edge connector. PROGRAM: DIP chip. PROTOCOL: TO-5 can between two coils.
+ const SILK := Color("#F2E5C2")
+ const CORE := Color("#24231C")
+ var kind := "SCRIPT"
+
+ func via(at: Vector2, r := 2.5) -> void:
+  draw_circle(at, r, SILK, true, -1.0, true)
+  draw_circle(at, r * 0.56, CORE, true, -1.0, true)
+
+ func routes(list: Array) -> void:
+  for route in list:
+   draw_polyline(PackedVector2Array(route), SILK, 1.25, true)
+   via(route[0] if route[0].x < 64 else route[-1])
+
+ func _draw() -> void:
+  match kind:
+   "PROGRAM": draw_dip()
+   "PROTOCOL": draw_can()
+   _: draw_connector()
+
+ func draw_connector() -> void:
+  var connector := Rect2(35, 9, 58, 26)
+  draw_rect(connector, SILK, false, 1.6)
+  draw_arc(Vector2(35, 22), 13, PI / 2, PI * 1.5, 24, SILK, 1.6, true)
+  draw_arc(Vector2(93, 22), 13, -PI / 2, PI / 2, 24, SILK, 1.6, true)
+  for pin_x in [43, 53, 63, 73, 83]:
+   via(Vector2(pin_x, 22), 3.0)
+  routes([
+   [Vector2(7, 6), Vector2(15, 6), Vector2(22, 13), Vector2(26, 13)],
+   [Vector2(102, 31), Vector2(107, 31), Vector2(114, 38), Vector2(121, 38)],
+   [Vector2(11, 34), Vector2(18, 34), Vector2(22, 30)],
+   [Vector2(106, 14), Vector2(113, 7), Vector2(122, 7)],
+  ])
+
+ func draw_dip() -> void:
+  # Chip body with its orientation notch, and six pads on each side.
+  var body := Rect2(36, 12, 56, 17)
+  draw_rect(body, SILK, false, 1.6)
+  draw_arc(Vector2(body.position.x, body.get_center().y), 4.0, -PI / 2, PI / 2, 16, SILK, 1.4, true)
+  draw_circle(Vector2(body.position.x + 8, body.end.y - 4), 1.3, SILK, true, -1.0, true)
+  for i in range(6):
+   var x := 41.0 + i * 9.2
+   for y in [6.0, 35.0]:
+    draw_rect(Rect2(x - 2.2, y - 2.8, 4.4, 5.6), SILK)
+    draw_circle(Vector2(x, y), 1.1, CORE, true, -1.0, true)
+  routes([
+   [Vector2(7, 9), Vector2(16, 9), Vector2(22, 15), Vector2(36, 15)],
+   [Vector2(9, 32), Vector2(17, 32), Vector2(21, 26), Vector2(36, 26)],
+   [Vector2(92, 15), Vector2(106, 15), Vector2(112, 9), Vector2(121, 9)],
+   [Vector2(92, 26), Vector2(107, 26), Vector2(112, 32), Vector2(119, 32)],
+  ])
+
+ func draw_can() -> void:
+  # TO-5 can: outline, tab and three plated leads, between two coil footprints.
+  var c := Vector2(64, 21)
+  draw_arc(c, 13.0, 0, TAU, 40, SILK, 1.6, true)
+  var tab := c + Vector2(9.5, -9.5)
+  draw_polyline(PackedVector2Array([tab + Vector2(-2.5, -1), tab + Vector2(1.5, -5), tab + Vector2(5, -1.5), tab + Vector2(1, 2.5)]), SILK, 1.4, true)
+  for lead in [Vector2(-5.5, 3.5), Vector2(0, -5.5), Vector2(5.5, 3.5)]:
+   via(c + lead, 2.6)
+  for side in [-1.0, 1.0]:
+   var start := Vector2(64 + side * 19, 21)
+   var hump := 6.5
+   for i in range(4):
+    var center := start + Vector2(side * (hump * (i + 0.5)), 0)
+    draw_arc(center, hump / 2.0, PI, TAU, 12, SILK, 1.7, true)
+   draw_line(Vector2(64 + side * 13, 21), start, SILK, 1.6, true)
+   var end := start + Vector2(side * (hump * 4 + 4), 0)
+   draw_line(start + Vector2(side * hump * 4, 0), end, SILK, 1.6, true)
+   via(end, 2.8)
+  for route in [
+   [Vector2(9, 21), Vector2(9, 12), Vector2(15, 6), Vector2(24, 6)],
+   [Vector2(119, 21), Vector2(119, 30), Vector2(113, 36), Vector2(104, 36)],
+  ]:
+   draw_polyline(PackedVector2Array(route), SILK, 1.25, true)
+   via(route[-1])
+
 class CostCircle extends Control:
  func _draw() -> void:
   draw_circle(Vector2(14,15),15,Color("#253237"))
@@ -59,6 +180,191 @@ class PrintedBoard extends Control:
   draw_rect(Rect2(12, size.y - 4.5, 31, 4), SILK, false, 0.7)
   for pin in range(6):
    draw_circle(Vector2(15 + 5 * pin, bottom), 1.15, CONTACT, true, -1.0, true)
+class RarityLight extends Control:
+ const LAMPS := {
+  "COMMON": Color("#F5CA76"),
+  "UNCOMMON": Color("#94D98C"),
+  "RARE": Color("#BF9EF6"),
+ }
+ const CELLS := {"COMMON": 1, "UNCOMMON": 2, "RARE": 3}
+ var tier: String
+
+ func lit_cells() -> int:
+  return CELLS.get(tier, 0)
+
+ func _draw() -> void:
+  var light: Color = LAMPS[tier]
+  var housing := Rect2(Vector2.ZERO, size)
+  draw_style_box(make_box(Color("#3C372C"), Color("#92866D"), 1, 2), housing)
+  draw_style_box(make_box(Color("#211E19"), Color("#211E19"), 0, 1), housing.grow(-1))
+  # Three cells fill left to right (1 Common, 2 Uncommon, 3 Rare), so rarity
+  # never depends on colour alone. Unlit cells stay smoked glass.
+  var slot := housing.grow(-2)
+  var gap := 1.0
+  var cell_w := (slot.size.x - gap * 2) / 3.0
+  for cell in range(3):
+   var r := Rect2(slot.position.x + cell * (cell_w + gap), slot.position.y, cell_w, slot.size.y)
+   if cell < lit_cells():
+    draw_style_box(make_box(light.darkened(0.48), light.darkened(0.48), 0, 1), r)
+    draw_style_box(make_box(light, light, 0, 1), r.grow(-0.7))
+    draw_line(Vector2(r.position.x + 1.5, 2.8), Vector2(r.end.x - 1.5, 2.8), light.lightened(0.28), 0.5, true)
+   else:
+    draw_style_box(make_box(Color("#2E2A22"), Color("#2E2A22"), 0, 1), r)
+
+ func make_box(fill: Color, edge: Color, rim: int, radius: int) -> StyleBoxFlat:
+  var box := StyleBoxFlat.new()
+  box.bg_color = fill
+  box.border_color = edge
+  box.set_border_width_all(rim)
+  box.set_corner_radius_all(radius)
+  return box
+
+class SolderRuleFrame extends Control:
+ var fill := Color.TRANSPARENT
+ var leads := true
+ var pads := true
+ const TRACE_INK := Color("#E8DBB1")
+ const SOLDER := Color("#D7CAA5")
+ const PAD_EDGE := Color("#6F5933")
+ const HOLE := Color("#252219")
+
+ func _draw() -> void:
+  var right := size.x
+  var bottom := size.y
+  var corner := 4.0
+  if fill.a > 0:
+   draw_colored_polygon(PackedVector2Array([
+    Vector2(corner, 0), Vector2(right - corner, 0), Vector2(right, corner),
+    Vector2(right, bottom - corner), Vector2(right - corner, bottom),
+    Vector2(corner, bottom), Vector2(0, bottom - corner), Vector2(0, corner)
+   ]), fill)
+  draw_polyline(PackedVector2Array([
+   Vector2(corner, 0), Vector2(right - corner, 0), Vector2(right, corner),
+   Vector2(right, bottom - corner), Vector2(right - corner, bottom),
+   Vector2(corner, bottom), Vector2(0, bottom - corner), Vector2(0, corner),
+   Vector2(corner, 0)
+  ]), TRACE_INK, 0.85, true)
+
+  if not leads:
+   if not pads: return
+   for pad in [Vector2(corner, 0), Vector2(right - corner, 0), Vector2(0, bottom - corner), Vector2(right, bottom - corner)]:
+    draw_circle(pad, 2.25, PAD_EDGE, true, -1.0, true)
+    draw_circle(pad + Vector2(0, -0.18), 1.85, SOLDER, true, -1.0, true)
+    draw_circle(pad, 0.93, HOLE, true, -1.0, true)
+   return
+  var left_joint := Vector2(45, bottom)
+  var right_joint := Vector2(96, bottom)
+  var left_lead := Vector2(51, bottom + 7)
+  var right_lead := Vector2(90, bottom + 7)
+  draw_polyline(PackedVector2Array([
+   left_joint, Vector2(45, bottom + 3), Vector2(49, left_lead.y), left_lead
+  ]), TRACE_INK, 0.8, true)
+  draw_polyline(PackedVector2Array([
+   right_joint, Vector2(96, bottom + 3), Vector2(92, right_lead.y), right_lead
+  ]), TRACE_INK, 0.8, true)
+
+  # Empty axial resistor footprint, printed between its two plated lead holes.
+  draw_line(left_lead, Vector2(58, left_lead.y), TRACE_INK, 0.75, true)
+  draw_rect(Rect2(58, left_lead.y - 2.5, 25, 5), TRACE_INK, false, 0.75)
+  draw_line(Vector2(83, right_lead.y), right_lead, TRACE_INK, 0.75, true)
+  for pad in [
+   Vector2(corner, 0), Vector2(right - corner, 0),
+   Vector2(0, bottom - corner), Vector2(right, bottom - corner),
+   left_joint, right_joint, left_lead, right_lead
+  ]:
+   draw_circle(pad, 2.25, PAD_EDGE, true, -1.0, true)
+   draw_circle(pad + Vector2(0, -0.18), 1.85, SOLDER, true, -1.0, true)
+   draw_circle(pad, 0.93, HOLE, true, -1.0, true)
+
+class CacheEdgeGlow extends Control:
+ ## CARDS-002: a cached card's board edge glows icy cyan. One state:
+ ## a temporary cache looks the same as one held until played.
+
+ func _draw() -> void:
+  var r := Rect2(Vector2.ZERO, size)
+  var c := 6.0
+  var ring := PackedVector2Array([
+   Vector2(c, 0), Vector2(r.end.x - c, 0), Vector2(r.end.x, c),
+   Vector2(r.end.x, r.end.y - c), Vector2(r.end.x - c, r.end.y),
+   Vector2(c, r.end.y), Vector2(0, r.end.y - c), Vector2(0, c), Vector2(c, 0)])
+  var glow := PCB_CACHE_GLOW
+  # Halo first (wide, faint), then the bright core.
+  for pass_ in [[4.0, 0.10], [2.6, 0.22], [1.4, 1.0]]:
+   draw_polyline(ring, Color(glow, pass_[1]), pass_[0], true)
+
+static func pcb_rules_markup(rule: String) -> String:
+ var re := RegEx.new(); re.compile(PCB_NUMBER)
+ return "[center]" + re.sub(rule.replace("[", "[lb]"), "[b][color=#%s]$1[/color][/b]" % PCB_GLOW_NUMBER.to_html(false), true) + "[/center]"
+
+## Soft phosphor halo: a zero-offset shadow outline in warm ivory.
+static func add_glow(control: Control, radius: int) -> void:
+ control.add_theme_color_override("font_shadow_color", PCB_GLOW_HALO)
+ control.add_theme_constant_override("shadow_offset_x", 0)
+ control.add_theme_constant_override("shadow_offset_y", 0)
+ control.add_theme_constant_override("shadow_outline_size", radius)
+
+## Largest print size at which the rule fits the frame, or 0 if it does not
+## fit at PCB_RULES_MIN. Measured in the bold face, which is the wider.
+static func glow_rules_size(rule: String, frame_size: Vector2, bold: Font, footer := false) -> int:
+ var bounds := frame_size - Vector2.ONE * PCB_RULES_INSET * 2 - Vector2(0, FOOTER_H if footer else 0)
+ for print_size in range(PCB_RULES_MAX, PCB_RULES_MIN - 1, -1):
+  if bold.get_multiline_string_size(rule, HORIZONTAL_ALIGNMENT_CENTER, bounds.x, print_size).y <= bounds.y:
+   return print_size
+ return 0
+
+const FOOTER_H := 12.0
+const FOOTER_INK := Color("#D9CCA8")
+
+static func build_glow_rules(rule: String, rect: Rect2, mask: Color, normal: Font, bold: Font, leads := true, footer := "") -> Control:
+ var frame := SolderRuleFrame.new()
+ frame.name = "SolderRulesFrame"
+ frame.position = rect.position
+ frame.size = rect.size
+ frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ frame.fill = mask
+ frame.leads = leads
+ var bounds := Rect2(Vector2.ZERO, frame.size).grow(-PCB_RULES_INSET)
+ if footer != "":
+  bounds.size.y -= FOOTER_H
+  var foot := Label.new()
+  foot.name = "PanelFooter"
+  foot.text = footer
+  foot.add_theme_font_override("font", normal)
+  foot.add_theme_font_size_override("font_size", 8)
+  foot.add_theme_color_override("font_color", FOOTER_INK)
+  foot.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+  foot.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+  foot.clip_text = true
+  foot.position = Vector2(bounds.position.x, bounds.end.y)
+  foot.size = Vector2(bounds.size.x, FOOTER_H)
+  foot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  frame.add_child(foot)
+ var print_size := maxi(glow_rules_size(rule, rect.size, bold, footer != ""), PCB_RULES_MIN)
+ var rules := RichTextLabel.new()
+ rules.name = "CenteredRules"
+ rules.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ rules.bbcode_enabled = true
+ rules.scroll_active = false
+ rules.fit_content = true
+ rules.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ rules.add_theme_font_override("normal_font", normal)
+ rules.add_theme_font_override("bold_font", bold)
+ rules.add_theme_font_size_override("normal_font_size", print_size)
+ rules.add_theme_font_size_override("bold_font_size", print_size)
+ rules.add_theme_color_override("default_color", PCB_GLOW_INK)
+ add_glow(rules, 3)
+ rules.position = bounds.position
+ rules.size = Vector2(bounds.size.x, 0)
+ rules.text = pcb_rules_markup(rule)
+ frame.add_child(rules)
+ # fit_content resizes the label once its text is laid out; keep the block
+ # centred vertically inside the fixed frame whenever that happens.
+ var recentre := func() -> void:
+  rules.position = Vector2(bounds.position.x, bounds.position.y + (bounds.size.y - rules.size.y) / 2.0)
+ rules.resized.connect(recentre)
+ recentre.call()
+ return frame
+
 func setup(owner_view, id: String, card_uid: int) -> void:
  view = owner_view; card_id = id; uid = card_uid
  custom_minimum_size = CARD_SIZE; size = custom_minimum_size
@@ -71,7 +377,10 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var label_top:=38 if d.type=="PROGRAM" else (30 if d.type=="PROTOCOL" else 24)
  var label_bottom:=218 if d.type=="PROGRAM" else 211
  if corp: label_top=60; label_bottom=212
- var printed_ink:=Color("#FFF9E9")
+ var pcb_glow := GLOW_TREATMENT.has(d.type)
+ var lay: Dictionary = glow_layout(d.type) if pcb_glow else {}
+ var mask: Color = glow_mask(d.type) if pcb_glow else Color.TRANSPARENT
+ var printed_ink:=PCB_INK if pcb_glow else Color("#FFF9E9")
  body = Control.new(); body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); body.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(body)
  var bg := FriendlyLook.panel(Color.WHITE if corp else FriendlyLook.PAPER, FriendlyLook.RED if corp else FriendlyLook.TONER, 3, view.skin.radius / 2 if corp else 0)
  bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); bg.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(bg)
@@ -87,6 +396,9 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   board.size = bounds.size
   board.laminate = palette[1]
   board.face = palette[2]
+  if pcb_glow:
+   board.laminate = GLOW_TREATMENT[d.type]["laminate"]
+   board.face = board.laminate
   board.mouse_filter = Control.MOUSE_FILTER_IGNORE
   body.add_child(board)
  # A stationary material layer sits behind printing, inset from chassis and contacts.
@@ -122,9 +434,26 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var grain_material:=ShaderMaterial.new(); grain_material.shader=grain_shader
  grain_material.set_shader_parameter("material_kind",["SCRIPT","PROGRAM","PROTOCOL","BLOATWARE"].find(d.type))
  grain.material=grain_material; body.add_child(grain)
- if not corp:
+ if pcb_glow and RarityLight.LAMPS.has(rarity):
+  var lamp := RarityLight.new()
+  lamp.name = "TopRarityLight"
+  lamp.tier = rarity
+  lamp.position = GLOW_TREATMENT[d.type]["lamp"]
+  lamp.size = Vector2(37, 8)
+  lamp.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(lamp)
+ elif not corp and not pcb_glow:
+  # Under the glow treatment rarity is the lamp alone; starters carry none.
   var finish:=CartridgeFinish.new(); finish.name="RarityFinish"; finish.rarity=rarity; finish.size=CARD_SIZE; body.add_child(finish)
- var title_ink:=printed_ink
+ var title_ink:=PCB_GLOW_INK if pcb_glow else printed_ink
+ if pcb_glow:
+  var title_panel := SolderRuleFrame.new()
+  title_panel.name = "TitlePanel"
+  title_panel.fill = mask
+  title_panel.leads = false
+  title_panel.position = lay.title.position; title_panel.size = lay.title.size
+  title_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(title_panel)
  var head := FriendlyLook.panel(Color.TRANSPARENT)
  head.position = Vector2(15, label_top); head.size = Vector2(130, 40); head.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(head)
  var title := FriendlyLook.label(d.name.to_upper(), 10 if d.name.length() > 25 else (11 if d.name.length()>15 else 12), title_ink, view.skin.bold_font if corp else FriendlyLook.BOLD)
@@ -133,10 +462,14 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var title_font: Font=view.skin.bold_font if corp else FriendlyLook.BOLD
  while title_size>7 and title_font.get_multiline_string_size(title.text,HORIZONTAL_ALIGNMENT_LEFT,104,title_size).y>39: title_size-=1
  title.add_theme_font_size_override("font_size",title_size); body.add_child(title)
- if not corp:
-  var separator:=ColorRect.new(); separator.color=Color("#9CADA666"); separator.position=Vector2(19,label_top+39); separator.size=Vector2(122,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(separator)
+ if pcb_glow:
+  title.position = lay.title.position + Vector2(6, 0); title.size = lay.title.size - Vector2(12, 0)
+  title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+  add_glow(title, 4)
+ if not corp and not pcb_glow:
+  var separator:=ColorRect.new(); separator.color=Color("#F2E5C2") if pcb_glow else Color("#9CADA666"); separator.position=Vector2(19,label_top+39); separator.size=Vector2(122,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(separator)
  var circle := CostCircle.new(); circle.position = Vector2(142, 5); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
- var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, Color("#F2CD87"), FriendlyLook.BOLD)
+ var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, Color.WHITE if pcb_glow and not corp else Color("#F2CD87"), FriendlyLook.BOLD)
  cost.add_theme_color_override("font_shadow_color", Color("#D6B67580")); cost.add_theme_constant_override("shadow_offset_x", 0); cost.add_theme_constant_override("shadow_offset_y", 0); cost.add_theme_constant_override("shadow_outline_size", 2)
  cost.position = Vector2(143, 5); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
  var rule: String = view.game.card_text(id)
@@ -147,7 +480,20 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var art := FriendlyLook.label("" if corp else "[  %s  ]" % ("ICEPICK" if d.has("pick") else ("NUL/REM" if d.type == "PROTOCOL" else "↯")), 11, view.skin.deep if corp else FriendlyLook.TONER)
  art.position = Vector2(16, art_y); art.size = Vector2(128, art_h); art.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; art.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; body.add_child(art)
  var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
- if not corp and art_h>10:
+ if pcb_glow and not corp:
+  art.hide()
+  var stencil := CircuitStencil.new()
+  stencil.name = "CircuitStencil"
+  stencil.kind = d.type
+  stencil.position = lay.art.position
+  stencil.size = lay.art.size
+  stencil.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(stencil)
+  # A grafted card shows its graft in the art slot, in place of the stencil.
+  if graft in Game.GRAFT_PARTS:
+   stencil.hide()
+   add_graft_art(graft, lay.art)
+ elif not corp and art_h>10:
   art.hide()
   var atlas:=preload("res://assets/friendly_lie/chrome/toner-illustrations.png")
   var index:=0
@@ -164,13 +510,43 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  if not corp and art_h <= 10 and graft in Game.GRAFT_PARTS:
   add_graft_art(graft, Rect2(149, 75, 20, 22))
  if corp:
-  var corporate_art := CorporateArt.new(); corporate_art.position=Vector2(16,art_y); corporate_art.size=Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
- var category: String=d.type + (" · " + view.skin.corporation if corp else " · " + rarity)
+  var corporate_art := CorporateArt.new(); corporate_art.position=lay.art.position if pcb_glow else Vector2(16,art_y); corporate_art.size=lay.art.size if pcb_glow else Vector2(128,art_h); corporate_art.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(corporate_art)
+ var category: String = d.type + (" · " + view.skin.corporation if corp else " · " + rarity)
  if not corp and not d.tags.is_empty() and type_h>14: category+="\n"+" / ".join(d.tags)
- var type_line := FriendlyLook.label(category, 8, printed_ink, view.skin.font if corp else FriendlyLook.MONO)
- type_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; type_line.position = Vector2(16, art_y+art_h+3); type_line.size = Vector2(128, type_h); body.add_child(type_line)
+ if pcb_glow:
+  var stamp := " · ".join([d.type] + ([view.skin.corporation] if corp else Array(d.tags)))
+  var stamp_font: Font = view.skin.font if corp else preload("res://assets/fonts/RoutedGothic.ttf")
+  var stamp_size := PCB_TYPE_MAX
+  while stamp_size > PCB_TYPE_MIN and stamp_font.get_string_size(stamp, HORIZONTAL_ALIGNMENT_LEFT, -1, stamp_size).x > lay.type.size.x:
+   stamp_size -= 1
+  var stamp_w := stamp_font.get_string_size(stamp, HORIZONTAL_ALIGNMENT_LEFT, -1, stamp_size).x + PCB_PLATE_PAD * 2
+  var plate := SolderRuleFrame.new()
+  plate.name = "TypePlate"
+  plate.fill = mask
+  plate.leads = false
+  plate.pads = false
+  plate.size = Vector2(minf(stamp_w, lay.type.size.x + 4), lay.type.size.y)
+  plate.position = Vector2(lay.type.get_center().x - plate.size.x / 2.0, lay.type.position.y)
+  plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(plate)
+  var type_stamp := FriendlyLook.label(stamp, stamp_size, PCB_GLOW_INK, stamp_font)
+  type_stamp.name = "TypeStamp"
+  type_stamp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+  type_stamp.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+  type_stamp.clip_text = true
+  # Routed Gothic is a single-stroke face; a 1 px outline in the same ink gives it weight at hand size.
+  type_stamp.add_theme_color_override("font_outline_color", PCB_GLOW_INK)
+  type_stamp.add_theme_constant_override("outline_size", 1)
+  add_glow(type_stamp, 2)
+  body.add_child(type_stamp)
+  var stamp_h := maxf(lay.type.size.y, type_stamp.get_minimum_size().y)
+  type_stamp.size = Vector2(lay.type.size.x, stamp_h)
+  type_stamp.position = Vector2(lay.type.position.x, lay.type.get_center().y - stamp_h / 2.0)
+ else:
+  var type_line := FriendlyLook.label(category, 8, printed_ink, view.skin.font if corp else FriendlyLook.MONO)
+  type_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; type_line.position = Vector2(16, art_y+art_h+3); type_line.size = Vector2(128, type_h); body.add_child(type_line)
  var rules := RichTextLabel.new(); rules.mouse_filter = Control.MOUSE_FILTER_IGNORE; rules.bbcode_enabled = true; rules.scroll_active = false
- var font: Font = view.skin.font if corp else FriendlyLook.MONO
+ var font: Font = preload("res://assets/fonts/Barlow-SemiBold.ttf") if pcb_glow else (view.skin.font if corp else FriendlyLook.MONO)
  var cached: Dictionary = view.game._find(view.game.hand, uid)
  var cache_h := 18 if cached.get("cached", false) else 0
  var y := art_y+art_h+type_h+6
@@ -180,14 +556,31 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  rules.add_theme_font_override("normal_font", font); rules.add_theme_font_size_override("normal_font_size", font_size); rules.add_theme_color_override("default_color", printed_ink)
  var re := RegEx.new(); re.compile("([+−\\-]?[0-9]+(?: STR| BW| SHIELD| CRED| TRACE| RAM)?)")
  rules.text = re.sub(rule, "[outline_size=2][outline_color=#D6B67535][color=#F2CD87]$1[/color][/outline_color][/outline_size]", true)
- rules.position = Vector2(16, y); rules.size = Vector2(128, available); body.add_child(rules)
- if corp and cache_h==0:
+ if pcb_glow:
+  rules.free()
+  var footer := ("We just want to stay in touch." if id=="TRACER" else "Recommended for you.") if corp and cache_h==0 else ""
+  var normal_font: Font = view.skin.font if corp else preload("res://assets/fonts/Barlow-SemiBold.ttf")
+  var bold_font: Font = view.skin.bold_font if corp else preload("res://assets/fonts/Barlow-Bold.ttf")
+  body.add_child(build_glow_rules(rule, lay.rules, mask, normal_font, bold_font, lay.leads, footer))
+ else:
+  rules.position = Vector2(16, y); rules.size = Vector2(128, available); body.add_child(rules)
+ if corp and cache_h==0 and not pcb_glow:
   var footer := FriendlyLook.label("We just want to stay in touch." if id=="TRACER" else "Recommended for you.",8,printed_ink,view.skin.font)
   footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; footer.position=Vector2(16,192); footer.size=Vector2(128,19); body.add_child(footer)
- if cache_h > 0:
+ if cache_h > 0 and pcb_glow:
+  var edge := CacheEdgeGlow.new()
+  edge.name = "CacheEdgeGlow"
+  edge.position = lay.edge.position; edge.size = lay.edge.size
+  edge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(edge)
+  # Sit on the board, beneath the BW cost circle, title and every text panel.
+  body.move_child(edge, body.get_node("BoardMaterialGrain").get_index() + 1)
+ elif cache_h > 0:
   var cached_tag := FriendlyLook.label("CACHED" + (" · TEMP" if cached.has("cache_turns") else ""), 9, printed_ink, FriendlyLook.BOLD)
   cached_tag.position = Vector2(16, label_bottom-17); body.add_child(cached_tag)
  tooltip_text = d.name + " · " + d.type + " · " + rarity + "\n" + rule
+ if cache_h > 0 and pcb_glow:
+  tooltip_text += "\nCACHED" + (" (temporary)" if cached.has("cache_turns") else "")
  if uid >= 0:
   var chk: Dictionary = view.game.can_play(uid)
   if not chk.ok: tooltip_text += "\n" + chk.reason

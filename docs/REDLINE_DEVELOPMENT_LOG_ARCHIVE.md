@@ -1899,3 +1899,13 @@ GENERALIST also has two stalls, counted separately from deaths. Mean end decks G
 **Validation:** 357 rules checks and 612 cartridge UI checks pass, including authored/compiled text fit and protruding bounds. Five Chrome stages pass; refreshed nine close-ups, six/eight-card captures and ten encounter review PNGs. The earlier dated whole entry was appended unchanged to the archive under LOG-001 to keep this live log below about 60 KB.
 
 **Review:** material tint and direct-print title treatment are proposed visual refinements. PR #12 is updated, not merged; designer approval of the integrated revision is still required under the existing merge instruction. No gameplay data, rarity odds or costs changed.
+
+## 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex)
+
+**Commit tag:** `cards-001-board-palette`.
+
+**Designer choices:** A/C/D board colours selected for card faces; Whirlwind #3 selected as Bloatware prototype. The pale Bloatware plate was rejected (“No card should have a white background for the text”). Brown Bloatware was then rejected for matching SCRIPT; oxide-red D received “Perfect”. That confirms the D material choice; no approval of the entire PR/merge is inferred.
+
+**Changed:** tobacco-brown SCRIPT, earthy olive PROGRAM, muted blue-green PROTOCOL; direct light printing on real board-style textures. BLOATWARE now has the Whirlwind-inspired protective U-handle, paired tubes, open cage/stacked boards and oxide-red phenolic face. Names, costs and rules are live controls. TRACER/SPAM remain BLOATWARE with unchanged unplayability/clear/TRACE rules; both now use the same component-aware bounds as other cartridges. Cached Bloatware retains full rules and CACHED marker; optional corporate flavour footer yields space when cached. No white card text panels remain. A–D review labels denote the four types; source-reference letters A/C/D remain palette provenance.
+
+**Validation:** Godot 4.3 import, 357 rules checks and 170 Friendly Lie UI checks pass. Extended cartridge fixture passes 625 checks and covers all authored/compiled texts, both Bloatware examples including cached text, component bounds and a mixed-type hand. Selected older log entry appended unchanged to the archive under LOG-001. Asset sources/guide/status/HANDOFF and PNGs are updated. No card definitions, rarity weights, costs or gameplay values changed. PR #12 remains open for integrated review before merge.

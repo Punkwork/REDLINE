@@ -4,16 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex)
-
-**Commit tag:** `cards-001-board-palette`.
-
-**Designer choices:** A/C/D board colours selected for card faces; Whirlwind #3 selected as Bloatware prototype. The pale Bloatware plate was rejected (“No card should have a white background for the text”). Brown Bloatware was then rejected for matching SCRIPT; oxide-red D received “Perfect”. That confirms the D material choice; no approval of the entire PR/merge is inferred.
-
-**Changed:** tobacco-brown SCRIPT, earthy olive PROGRAM, muted blue-green PROTOCOL; direct light printing on real board-style textures. BLOATWARE now has the Whirlwind-inspired protective U-handle, paired tubes, open cage/stacked boards and oxide-red phenolic face. Names, costs and rules are live controls. TRACER/SPAM remain BLOATWARE with unchanged unplayability/clear/TRACE rules; both now use the same component-aware bounds as other cartridges. Cached Bloatware retains full rules and CACHED marker; optional corporate flavour footer yields space when cached. No white card text panels remain. A–D review labels denote the four types; source-reference letters A/C/D remain palette provenance.
-
-**Validation:** Godot 4.3 import, 357 rules checks and 170 Friendly Lie UI checks pass. Extended cartridge fixture passes 625 checks and covers all authored/compiled texts, both Bloatware examples including cached text, component bounds and a mixed-type hand. Selected older log entry appended unchanged to the archive under LOG-001. Asset sources/guide/status/HANDOFF and PNGs are updated. No card definitions, rarity weights, costs or gameplay values changed. PR #12 remains open for integrated review before merge.
-
 ## 2026-11-17 — CARDS-001: instrument amber accents (Codex)
 
 **Commit tag:** `cards-001-amber`. Replaced neon yellow-green with warm instrument amber (`#D6B675`) for the shared highlight and printed numeric highlights. The brass/gauge reference fits the selected brown, olive, teal and oxide-red boards. BW badges, selection accents and shared HUD controls inherit the same colour. No rules or costs changed.
@@ -419,3 +409,25 @@ Saved ten review sheets, three final Godot captures and the reproducible prototy
 **Interpretations to confirm:** the branch is never merged; the earlier "Mustard PCB review archive" entry is kept as history even though its folder now lives only on the branch.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex).
+
+## 2026-11-19 — CARDS-003 PCB glow cartridges in the build (Claude)
+
+**Designer approval:** "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot. This is good. Save to all git folder necessary." CARDS-003 is APPROVED and supersedes the CARDS-002 palette.
+
+**Changed:** `card.gd` takes the reviewed patch from `review/cards-002` (`8783b44`), with production names (`pcb_glow`, `PCB_*`, `CircuitStencil`). It gives:
+- per-type layout, masks, circuit stencils and rarity lamps;
+- ivory glow text with amber bold numbers;
+- a single cyan cache glow;
+- no printed rarity or CACHED text.
+
+New beyond the review: a grafted card shows its graft art in the stencil slot. Fonts `RoutedGothic.ttf`, `Barlow-SemiBold.ttf` and `Barlow-Bold.ttf` are added with OFL licences and listed in `SOURCES.md`. New fixture `godot/tests/shot_cards_pcb.gd` is added to the CI screenshot list; it prints `Assertion failed` so the CI log grep catches failures. Reference sheets are in `docs/visual/fixtures/cards-003/`.
+
+**Validation:** Godot 4.3. Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0. All 14 CI screenshot fixtures ran with no `SCRIPT ERROR`, `Parse Error` or `Assertion failed`. `shot_facade` prints one "resources still in use at exit" warning, which also appears on `main` without this change. `shot_cards_pcb` passed with 0 failures, and all 444 rules texts fit at 9 px or larger.
+
+**Interpretations to confirm:**
+- Grafted cards replace the stencil with graft art.
+- The old non-glow card paths stay in `card.gd` behind `pcb_glow`. They are now unreachable for all four types; removing them is proposed below rather than done (no-refactor rule).
+
+**Proposed (not done):** remove the unreachable pre-CARDS-003 card paths (toner illustration atlas, printed rarity finish, separator, text CACHED tag) from `card.gd`.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex).

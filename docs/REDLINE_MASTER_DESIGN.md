@@ -84,7 +84,7 @@ Only choices the designer explicitly made on 2026-11-17 are recorded here. Every
 
 **RUSTLER-LOOK-001 — Two Rustler styles kept on purpose (APPROVED, 2026-11-17).** The Rustler's cards are 1950s salvaged hardware (CARDS-001), while the Rustler HUD, Node and TRACE tags, END TURN and NUL/REM notes stay in the photocopied zine style. This is a deliberate exception to Visual Language Rule 1 ("Your side never changes"), not a mismatch to fix. Each corporation will have a different look. The HUD will probably change in the near future; until the designer decides that change, keep the HUD as it is. Designer: "B Each corp will have a different look. The HUD will probably change in the near future, but I want to keep it this way for now."
 
-**CARDS-002 — Rustler PCB palette (designer direction, 2026-11-19).** Use the designer's TV Typewriter PCB reference for the three Rustler cartridges. Place ivory silkscreen traces, pin headers and dark drilled contacts around the board perimeter. Corporate BLOATWARE retains its oxide-red Whirlwind board. The prototype palette below is pending visual review. Current cartridge silhouettes, rarity finishes, ivory text and amber numbers carry forward.
+**CARDS-002 — Rustler PCB palette (designer direction, 2026-11-19).** Use the designer's TV Typewriter PCB reference for the three Rustler cartridges. Place ivory silkscreen traces, pin headers and dark drilled contacts around the board perimeter. Corporate BLOATWARE retains its oxide-red Whirlwind board. The prototype palette below was reviewed and is superseded by CARDS-003. Current cartridge silhouettes, rarity finishes, ivory text and amber numbers carry forward.
 
 | Rustler card | Laminate edge | Print field |
 |---|---|---|
@@ -94,7 +94,22 @@ Only choices the designer explicitly made on 2026-11-17 are recorded here. Every
 
 Shared silkscreen `#F2E5C2` and contact holes `#24231C` stay outside names, illustrations and rules. Cap the light grain on the print fields to meet the 4.5:1 contrast floor for rule text and amber numbers.
 
-**CARDS-002 review variant — Mustard PCB cartridge (2026-11-19, review branch only).** The designer selected Routed Gothic for type and tags, Barlow SemiBold for centred rules, a fixed PCB-trace frame with plated holes and a resistor footprint, and a top exterior light in place of the printed rarity. The designer judged that it does not work yet: the text does not stand out from the board (it may need to glow off a darker panel). All review material — iterations, captures, the preview patch, fixture and fonts, and the 2026-11-19 review fixes — lives on the `review/cards-002` branch and is **never merged into `main` or `release`** (designer, 2026-11-19). [Review archive on the branch](https://github.com/Punkwork/redline/tree/review/cards-002/docs/visual/fixtures/cards-002/README.md).
+**CARDS-003 — PCB glow cartridges (APPROVED, 2026-11-19).** Supersedes the CARDS-002 palette table above and its rarity finishes, ivory print and amber-on-field numbers. Designer: "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot." It was reviewed in 17 iterations on the `review/cards-002` branch, which is never merged.
+
+| Type | Board | Dark mask | Circuit stencil |
+|---|---|---|---|
+| SCRIPT | Mustard `#AE924D` | `#2E2712` | Edge connector |
+| PROGRAM | Deeper green `#5A8048` | `#172312` | DIP chip |
+| PROTOCOL | Blue-green `#60938A` | `#14272A` | TO-5 can between two coils |
+| BLOATWARE | Corporate oxide-red face and Whirlwind art | `#2A1411` | None |
+
+- **Text never sits on the bare board.** The title, type plate and rules each sit on a dark solder-mask panel in the type's own tint. Text is ivory `#FFF3D0` with a soft halo, and numbers are Barlow Bold amber `#FFC861`; every ink is at least 4.5:1 on its mask (in practice 9.6:1 to 15.7:1).
+- **Fonts:** Rustler titles use Chrome Deco bold, the type plate Routed Gothic, and the rules Barlow SemiBold and Bold. BLOATWARE keeps its corporate fonts (designer).
+- **Layout:** each type's rules panel is placed from its own board. Rules fit between 11 px and a 9 px floor, and all 444 card texts (AMP 0–3) fit.
+- **Rarity:** a recessed lamp in the top exterior with 1, 2 or 3 lit cells (amber `#F5CA76`, green `#94D98C`, violet `#BF9EF6`). Starters have no rarity (designer). On PROTOCOL the lamp sits on the relay rail (designer). No printed rarity remains on any card.
+- **Cached:** never printed on the card (designer). One solid icy-cyan `#7FE3F0` glow sits just inside the board edge, beneath the cost and every text panel, and is the same for a temporary cache (designer). The tooltip reads `CACHED`, or `CACHED (temporary)` for a timed cache, kept for now (designer).
+- **Grafts:** a grafted card shows its graft art in the stencil slot.
+- Fixture: `godot/tests/shot_cards_pcb.gd`, in CI. Reference sheets: `docs/visual/fixtures/cards-003/`.
 
 **VISUAL-APPROVALS-002 — Prototype art and working values approved (APPROVED, 2026-11-17).** The designer approved every item below, which had been waiting for review. Designer: "Okay, all those changes that you listed are all approved." Numbers stay tunable presentation values; approval means build from them, not that they can never change. Sources: the 2026-11-17 VIS-001, CHROME-001 and CARDS-001 entries in `REDLINE_DEVELOPMENT_LOG.md`.
 
