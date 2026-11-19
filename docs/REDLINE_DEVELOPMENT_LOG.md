@@ -4,39 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — ADP-001 Phase 1 confirmations (Codex)
-
-Designer confirmed all four implementation interpretations from `53b00d7`: rig wear and the midpoint fixture, placeholder mix and reduced-motion audio behavior, Poiret One copy and sizes, and mechanical cue triggers. Recorded the approval in the master design document.
-
-## 2026-11-17 — HAND-CLEANUP-001 and CARD-CONTROLS-001 (Codex)
-
-Removed free HOLD and documented non-CACHED discard and base draw of six. Moved installed PROGRAMs to a left HUD bay with inspection and controls. Added drop zones for PROGRAMs and SCRIPTs and centered right-click inspection at 150%. Preserved existing response order, card-granted CACHE, draw modifiers and keyboard play. Windows export deferred.
-
-**ENCOUNTER-DISPLAY-001:** Anchored all backdrop layers to the viewport. Scaled ICE avatars and faces to 125%, with separate rules plaques.
-
-**Validation:** Godot 4.3 import and 361 rules checks passed. The ADP fixture passed 471 checks, including the wide encounter, backdrop layers and avatar scale.
-
-LOG-001: The oldest entry, ZEROED-001 and TUMBLE-001 readings confirmed (2026-11-16), moved to the archive unchanged.
-
-## 2026-11-17 — HALCYON PLAYTEST 5 Windows build (Codex)
-
-Exported `0.5.0-playtest.5` for Windows x86-64 from `98bad5f411adc9d30f59c4443288f9473a0067b9` (tag `playtest-5`). Local Godot 4.3 import passed, along with 361 rules checks, 17 ADP checks and all 11 screenshot scripts. GitHub Actions validated the push and uploaded the artifact. The downloaded `BUILD_COMMIT.txt`, README and QA checklist v0.5 matched the source, and the executable's SHA-256 verified as `f70ee7a007e564bbe78d5a7546a5756a08bad48a7513d9bfdca479d92221c0dd`. Windows launch and playtest remain pending with the designer. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44232607877) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44232607877/artifacts/14395388972)
-
-| Rustler | Clears / 30 | Deaths by Node | Survivor mean VITAE | Stalls |
-|---|---:|---|---:|---|
-| GENERALIST | 19 | CAPTCHA 6, TERMS & CONDITIONS 5 | 13.0 | 0 |
-| ECHO | 13 | TERMS & CONDITIONS 14, CAPTCHA 1, DOORBELL 2 | 13.8 | 0 |
-| RIOT | 16 | DOORBELL 4, CAPTCHA 3, TERMS & CONDITIONS 5 | 18.4 | 2 at DOORBELL |
-| VECTOR | 15 | CAPTCHA 5, TERMS & CONDITIONS 9, CONSENT WALL 1 | 11.2 | 0 |
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001: visual language "The Friendly Lie" handed to Codex (Claude).
-
-## 2026-11-18 — ZINE-002, ARCH-001: the zine as samizdat; the Archipelago (Claude)
-
-Design session in claude.ai, synced to the repo the same morning. **Atompunk (ADP §1.1):** the designer asked whether *atompunk* names the style. It covers the corporate half but not Deco or the DIY punk layer; **Atomic Deco Punk stays**, "atompunk" is the outward pitch shorthand. **ZINE-002 (direction):** the zine is how the underworld communicates, in samizdat's lineage, with the reasons it exists made explicit (every channel owned and listening, speech becomes data, the record is rewritable, the traced vanish, nobody speaks plainly): censorship by convenience, not prohibition. **ARCH-001 (APPROVED):** being traced means disappearing to the Archipelago. Designer: ARCH-R1 tone rules "1 y" (horror by absence, never a joke, corporations never name it, "gulag" never on screen); defeat framing and persistent THE CARBON record "2 y"; the islands are for "merging man with the machine one at a time, in order to build the synchronization signal to sync/merge all mankind at once with AI, tie into ending, sync testing"; no one comes back "4 no". **Docs:** `REDLINE_ATOMIC_DECO_PUNK.md` v0.8 (§1.1, §2.2, links in §4–§8); new `REDLINE_ARCHIPELAGO.md` v0.2; master design §1, §8 and §10; HANDOFF (ARCH-001 build note, a WAITING row for the working copy). **Interpretations to confirm:** the island names, *THE CARBON*, *NOTES FROM THE ARCHIPELAGO*; the historical summaries were written from general knowledge. **Code changes:** none. **Tests:** none.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ZEROED-001: Restore STR floor and track once-per-ICE ZEROED (Codex).
-
 ## 2026-11-18 — ARCH-NAMES-001: islands named like care homes (Claude)
 
 Designer: "The island names should resemble names of long-term care residences and the more generic the name the better." `REDLINE_ARCHIPELAGO.md` v0.3 §4.0: generic nature-word + residence-word names, no ™ or brand in the name, the corporation only in small print; a working pool of nine names (Sunnyside Manor, Pine Ridge Residence, Willow Creek Lodge and others) and revised relocation lines; the defeat notice names the island. Master design ARCH-001 and the HANDOFF copy row updated. **Interpretations to confirm:** the name pool, the small-print lines, and checking final names against well-known real care chains. **Code changes:** none. **Tests:** none.
@@ -597,3 +564,21 @@ Added deterministic animation phases to the isolated visual fixture: idle, atten
 **Next build:** Godot 4.3 execution, screenshot and GIF generation, existing mascot asset integration, accurate TUMBLER motion, accessibility and contrast verification, regression suite, then default encounter presentation integration. Do not change gameplay rules.
 
 **Interpretations to confirm:** whether any specific animation timings or sound cues require separate designer sign-off; final pixel fidelity to the saved HALCYON reference mockups.
+
+## 2026-11-19 — ICE-ANALOG-001 built; ENC-CONCEPT-001 direction and art briefs (Claude)
+
+**Codex review:** Codex's 18 commits added a standalone wireframe (`ice_analog_visual.gd`) not connected to the game, and recorded the designer's approval three times with contradictory statuses. Claude ran it in Godot 4.3 (it ran, but placeholder art and fake cards/stats). The designer confirmed the approval in session ("Yes, approved, incl. hover text"; scope "Whole encounter screen"; "Replace it" for the wireframe). Docs deduplicated (`c8cef09`); the three concept screenshots committed (`3eadd23`).
+
+**Built (ICE-ANALOG-001, `b3fdd42`):** analog ICE consoles in the real encounter: icon keys (`ice_key.gd`) with lamp, value and BW chip; key tip on hover/focus with the full rule, timing and break cost; Enter breaks a focused key; TUMBLER reel column; mascots +18%, peeking over the console, glancing at the hovered key and at each key as it fires. Barlow Condensed (OFL) added. Real fixture `shot_ice_analog.gd` replaces the wireframe.
+
+**Tests:** rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0; all 16 screenshot fixtures pass (`shot_adp`'s stage-scale check now includes `MASCOT_GROWTH`).
+
+**Designer direction (ENC-CONCEPT-001):** the interface follows the concept screenshots: frame from concept 3, cards and mascots from concept 2, left HUD mixing 2 and 3 with installed Programs in the CRT panel; art made in ChatGPT. Recorded in the master design doc; art briefs in `docs/visual/concept-art/ART_BRIEFS.md`; asset folders `godot/assets/concept/`. ENC-ANALOG-001's flip-clock HUD pass was set aside uncommitted.
+
+**Interpretations to confirm:**
+- Mascot growth stops at 18% (column width); the console overlaps the mascot stage by 14 px.
+- The patent plate moves to the foot of the console and is left off with three ICE.
+- Key tip opens above the key (over the mascot art); to the side only when there's no room.
+- Character proposals for the batch-2 ICE mascots and all card subjects are Claude's.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ADP-001 Phase 1 confirmations (Codex), 2026-11-17 — HAND-CLEANUP-001 and CARD-CONTROLS-001 (Codex), 2026-11-17 — HALCYON PLAYTEST 5 Windows build (Codex), 2026-11-18 — ZINE-002, ARCH-001: the zine as samizdat; the Archipelago (Claude).

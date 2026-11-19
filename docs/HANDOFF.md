@@ -73,11 +73,13 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 **Cards and hand (approved 2026-11-19):** CARDS-004 and HAND-MAX-001 are built; see Built below.
 
-**Encounter redesign (ENC-ANALOG-001 + ICE-ANALOG-001, APPROVED 2026-11-19):** the whole encounter screen in the analog / flip-clock / cockpit look, with icon + value ICE subroutines (full text on hover/focus) and bigger, livelier mascots. Spec `REDLINE_ENCOUNTER_ANALOG.md`; references `docs/visual/explorations/encounter-analog-001/` and `ice-analog-001/`.
+**Encounter redesign (ENC-CONCEPT-001, APPROVED direction 2026-11-19):** the interface follows the three concept screenshots: frame from concept 3, cards and mascots from concept 2, left HUD mixing 2 and 3 with installed Programs in the CRT panel. ICE-ANALOG-001's icon keys and key tips are built (`b3fdd42`) and get restyled to concept 3. ENC-ANALOG-001's flip-clock HUD is superseded. References: `docs/visual/explorations/ice-analog-001/`.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **ENC-ANALOG-001 / ICE-ANALOG-001** | Integrate into the real encounter (`friendly_lie/encounter.gd` and its components), presentation only: analog ICE consoles with icon + value keys, BW chips and hover/focus tooltips; mascots 25–35% larger with attention, telegraph and break behaviours; flip-clock HUD; split-flap NODE/TURN/STRIKES/RESERVE/DECK; END TURN button. Keep CARDS-001/004/005, PIXEL-TRACE-001, readability and copy guards. Replace Codex's standalone `ice_analog_visual.gd` fixture with a real `shot_*` fixture in CI. | `REDLINE_ENCOUNTER_ANALOG.md` | Claude Code | IN PROGRESS |
+| **ENC-CONCEPT-001 interface** | Rebuild the encounter presentation to concept 3 (top bar with CONDITION pill and HOSTILE REVEAL %, ICE consoles with arched corp tab, STR plate, keys, vertical reel, per-ICE passive and NEXT RESPONSE plates, tooltip with icon rows, round END TURN) with the concept-2 left HUD (CRT, VITAE/BW/PULP with icons, installed Programs). Presentation only; tests and fixtures green. | Master ENC-CONCEPT-001 | Claude Code | IN PROGRESS |
+| **ENC-CONCEPT-001 art** | Mascots (batch 1: AUTO_RENEW, CAPTCHA × 3 moods; batch 2: the rest of the slice) and card illustrations (batch 1: Generalist starter + SPAM/TRACER; batch 2: other starters) generated in ChatGPT. | `docs/visual/concept-art/ART_BRIEFS.md` | Designer | WAITING on the files |
+| **ENC-CONCEPT-001 wiring** | Load each art file as it lands (`godot/assets/concept/`), falling back to the current art. | same | Claude Code | TO DO (as art arrives) |
 
 **Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`. The TRACE-driven pixelation of the backdrop and ICE art (PIXEL-TRACE-001) is approved and built; see Built.
 
