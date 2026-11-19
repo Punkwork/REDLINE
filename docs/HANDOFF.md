@@ -76,6 +76,7 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 | IDs | Change | Commit reference |
 |---|---|---|
+| CARDS-002 | PCB laminate, silkscreen traces and contacts on SCRIPT, PROGRAM and PROTOCOL. Corporate BLOATWARE retains its oxide-red Whirlwind art. Palette values await visual review. | **BUILT** — [Codex implementation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-19--cards-002-rustler-pcb-palette-codex) |
 | HAND-CLEANUP-001, CARD-CONTROLS-001, ENCOUNTER-DISPLAY-001 | Remove free HOLD, install and inspect PROGRAMs in the left bay, drop SCRIPTs on their play zones, toggle 150% card inspection, and fill fullscreen with the backdrop and enlarge ICE avatars by 25%. | **BUILT** — [Codex implementation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-17--hand-cleanup-001-and-card-controls-001-codex) |
 | SIGNAL-001 (SIG-5a–d), ARCH-001 (ARCH-1a–c), ARCH-SLANG-001, ZINE-003, ADP-4a | Central-BREACH award hook, punch-card holder and reveal guard. Relocation notice, local SAMIZINE CARBON ledger and DEAD DROP reader. | **BUILT** — [Codex implementation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-18--signal-001-arch-001-and-adp-4a-codex) |
 | ADP-001 Phase 3 (ADP-3a–c), ADP-4a | Local ads and settings, guarded LUCIDA record edits, and instance grafts with fixtures. | **BUILT** — `3d767be` · [Codex implementation entry](REDLINE_DEVELOPMENT_LOG.md#2026-11-18--adp-001-phase-3-and-adp-4a-codex) |

@@ -84,6 +84,16 @@ Only choices the designer explicitly made on 2026-11-17 are recorded here. Every
 
 **RUSTLER-LOOK-001 — Two Rustler styles kept on purpose (APPROVED, 2026-11-17).** The Rustler's cards are 1950s salvaged hardware (CARDS-001), while the Rustler HUD, Node and TRACE tags, END TURN and NUL/REM notes stay in the photocopied zine style. This is a deliberate exception to Visual Language Rule 1 ("Your side never changes"), not a mismatch to fix. Each corporation will have a different look. The HUD will probably change in the near future; until the designer decides that change, keep the HUD as it is. Designer: "B Each corp will have a different look. The HUD will probably change in the near future, but I want to keep it this way for now."
 
+**CARDS-002 — Rustler PCB palette (designer direction, 2026-11-19).** Use the designer's TV Typewriter PCB reference for the three Rustler cartridges. Place ivory silkscreen traces, pin headers and dark drilled contacts around the board perimeter. Corporate BLOATWARE retains its oxide-red Whirlwind board. The prototype palette below is pending visual review. Current cartridge silhouettes, rarity finishes, ivory text and amber numbers carry forward.
+
+| Rustler card | Laminate edge | Print field |
+|---|---|---|
+| SCRIPT | Mustard `#BD9547` | `#6C4A1D` |
+| PROGRAM | Olive `#90934F` | `#4C522C` |
+| PROTOCOL | Blue-green `#60938A` | `#30574F` |
+
+Shared silkscreen `#F2E5C2` and contact holes `#24231C` stay outside names, illustrations and rules. Cap the light grain on the print fields to meet the 4.5:1 contrast floor for rule text and amber numbers.
+
 **VISUAL-APPROVALS-002 — Prototype art and working values approved (APPROVED, 2026-11-17).** The designer approved every item below, which had been waiting for review. Designer: "Okay, all those changes that you listed are all approved." Numbers stay tunable presentation values; approval means build from them, not that they can never change. Sources: the 2026-11-17 VIS-001, CHROME-001 and CARDS-001 entries in `REDLINE_DEVELOPMENT_LOG.md`.
 
 - **CHROME-001 (HALCYON encounter), commits 15ae99e–4c2135e:** the generated calm and hostile atrium art and the CAPTCHA/AUTO-RENEW appliance shells; six shared collage illustrations assigned by card role (no per-card art yet); a 20% reveal of the hostile atrium during Cracking; pearl-enamel ICE plaques (pearl `#EDF4F0`, slate `#20343B`, teal `#165B55`) that stay clean in Mask off; the layered silver rim, small Deco fan and placeholder HALCYON wordmark on mascots; mascot carriers at 82% with two ICE and 70% with three; a 2.5-second break confirmation in a header at the top of the screen.

@@ -3,6 +3,11 @@ extends Control
 ## Paper UI only. Playing a card always goes through the existing Game API.
 const CARD_SIZE:=Vector2(164,244)
 const PHYSICAL_RECT:=Rect2(-10,-12,184,268)
+const BOARD_PALETTE := {
+ "SCRIPT": [Rect2(7,18,148,203), Color("#BD9547"), Color("#6C4A1D")],
+ "PROGRAM": [Rect2(7,30,148,199), Color("#90934F"), Color("#4C522C")],
+ "PROTOCOL": [Rect2(7,23,148,198), Color("#60938A"), Color("#30574F")],
+}
 var view
 var corporate:=false
 var card_id := ""
@@ -30,6 +35,30 @@ class CostCircle extends Control:
   draw_circle(Vector2(13,13),14,Color("#D3DEDB"))
   draw_circle(Vector2(13,13),11.5,Color("#29352F"))
   draw_line(Vector2(3,3),Vector2(7,3),Color.WHITE,1,true)
+class PrintedBoard extends Control:
+ const SILK := Color("#F2E5C2")
+ const CONTACT := Color("#24231C")
+ var laminate: Color
+ var face: Color
+ func _draw() -> void:
+  var bounds := Rect2(Vector2.ZERO, size)
+  draw_rect(bounds, laminate)
+  draw_rect(bounds.grow(-5), face)
+  var right := size.x - 2.5
+  var bottom := size.y - 2.5
+  draw_polyline(PackedVector2Array([
+   Vector2(2.5, 34), Vector2(2.5, 8), Vector2(8, 2.5), Vector2(38, 2.5)
+  ]), SILK, 1.0, true)
+  draw_polyline(PackedVector2Array([
+   Vector2(right, bottom - 42), Vector2(right, bottom - 5),
+   Vector2(right - 5, bottom), Vector2(right - 44, bottom)
+  ]), SILK, 1.0, true)
+  for hole in [Vector2(2.5, 34), Vector2(38, 2.5), Vector2(right, bottom - 42), Vector2(right - 44, bottom)]:
+   draw_circle(hole, 1.8, SILK, true, -1.0, true)
+   draw_circle(hole, 1.0, CONTACT, true, -1.0, true)
+  draw_rect(Rect2(12, size.y - 4.5, 31, 4), SILK, false, 0.7)
+  for pin in range(6):
+   draw_circle(Vector2(15 + 5 * pin, bottom), 1.15, CONTACT, true, -1.0, true)
 func setup(owner_view, id: String, card_uid: int) -> void:
  view = owner_view; card_id = id; uid = card_uid
  custom_minimum_size = CARD_SIZE; size = custom_minimum_size
@@ -48,26 +77,18 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); bg.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(bg)
  bg.hide()
  var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
- # READ-001: the SCRIPT (brown, amber 3.55:1) and PROTOCOL (blue-green, amber 4.18:1)
- # faces were too light for amber/ivory printing. A soft-edged shade darkens only the
- # face, below the grain, to about amber 6.5-6.8:1, matching PROGRAM. Chassis art is untouched.
- var face_shade:={"SCRIPT":[Rect2(11,21,139,188),Color8(42,28,16),0.55],"PROTOCOL":[Rect2(14,28,136,182),Color8(12,30,28),0.45]}
- if face_shade.has(d.type):
-  var spec:Array=face_shade[d.type]; var r:Rect2=spec[0]; var c:Color=spec[1]
-  var shade:=ColorRect.new(); shade.name=d.type.capitalize()+"FaceShade"; shade.mouse_filter=Control.MOUSE_FILTER_IGNORE
-  shade.position=r.position; shade.size=r.size
-  var shade_shader:=Shader.new()
-  shade_shader.code="""shader_type canvas_item;
- uniform vec4 shade_color : source_color;
- uniform float shade_alpha = 0.5;
- void fragment() {
-  float edge=smoothstep(0.0,0.035,UV.x)*smoothstep(0.0,0.035,1.0-UV.x)*smoothstep(0.0,0.025,UV.y)*smoothstep(0.0,0.025,1.0-UV.y);
-  COLOR=vec4(shade_color.rgb,shade_alpha*edge);
- }
- """
-  var shade_material:=ShaderMaterial.new(); shade_material.shader=shade_shader; shade.material=shade_material
-  shade_material.set_shader_parameter("shade_color",c); shade_material.set_shader_parameter("shade_alpha",spec[2])
-  body.add_child(shade)
+ # CARDS-002: reserve the silkscreen and holes for the perimeter, outside the print area.
+ if BOARD_PALETTE.has(d.type):
+  var palette: Array = BOARD_PALETTE[d.type]
+  var bounds: Rect2 = palette[0]
+  var board := PrintedBoard.new()
+  board.name = "PrintedBoard"
+  board.position = bounds.position
+  board.size = bounds.size
+  board.laminate = palette[1]
+  board.face = palette[2]
+  board.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(board)
  # A stationary material layer sits behind printing, inset from chassis and contacts.
  var grain:=ColorRect.new(); grain.name="BoardMaterialGrain"; grain.mouse_filter=Control.MOUSE_FILTER_IGNORE
  var grain_rect:=Rect2(11,26,136,176)
@@ -92,7 +113,10 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   else if(material_kind==2) { material=(noise(p*vec2(2.0,0.075))-0.5)*0.75+grain*0.2; }
   else { material=(noise(p*0.10)-0.5)*0.6+(noise(p*0.43)-0.5)*0.4+grain*0.15; }
   float edge=smoothstep(0.0,0.035,UV.x)*smoothstep(0.0,0.035,1.0-UV.x)*smoothstep(0.0,0.025,UV.y)*smoothstep(0.0,0.025,1.0-UV.y);
-  COLOR=vec4(material>0.0 ? vec3(0.94,0.85,0.65) : vec3(0.12,0.16,0.12),abs(material)*0.26*edge);
+  float opacity=abs(material)*0.26;
+  // Bound the lightest Rustler grain so amber printing stays above 4.5:1.
+  if (material_kind != 3 && material > 0.0) { opacity=min(opacity,0.05); }
+  COLOR=vec4(material>0.0 ? vec3(0.94,0.85,0.65) : vec3(0.12,0.16,0.12),opacity*edge);
  }
  """
  var grain_material:=ShaderMaterial.new(); grain_material.shader=grain_shader
