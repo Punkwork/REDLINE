@@ -78,7 +78,6 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
 | **ENC-ANALOG-001 / ICE-ANALOG-001** | Integrate into the real encounter (`friendly_lie/encounter.gd` and its components), presentation only: analog ICE consoles with icon + value keys, BW chips and hover/focus tooltips; mascots 25–35% larger with attention, telegraph and break behaviours; flip-clock HUD; split-flap NODE/TURN/STRIKES/RESERVE/DECK; END TURN button. Keep CARDS-001/004/005, PIXEL-TRACE-001, readability and copy guards. Replace Codex's standalone `ice_analog_visual.gd` fixture with a real `shot_*` fixture in CI. | `REDLINE_ENCOUNTER_ANALOG.md` | Claude Code | IN PROGRESS |
-| **ICE-ANALOG-001 refs** | Commit the three ChatGPT concept PNGs under `docs/visual/explorations/ice-analog-001/` with the names in its README. | that README | Designer → Claude | WAITING on the files |
 
 **Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`. The TRACE-driven pixelation of the backdrop and ICE art (PIXEL-TRACE-001) is approved and built; see Built.
 

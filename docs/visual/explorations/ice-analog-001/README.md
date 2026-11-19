@@ -1,56 +1,21 @@
-# ICE-ANALOG-001 — editable encounter visual exploration (2026-11-19)
+# ICE-ANALOG-001 — reference images (APPROVED for integration, 2026-11-19)
 
-**Status: PROPOSED / REVIEW REQUIRED.** No gameplay or default encounter integration. The designer explicitly said that all mockup numbers are illustrative; do not reconcile them with the current ICE roster. PANOPTICON is the project name; REDLINE remains the repository name.
+ICE-ANALOG-001 and ENC-ANALOG-001 are approved for the default encounters (master design doc, 2026-11-19). These files are **art-direction references**, not rules: every number, card and ICE value in them is illustrative. The rules engine is the authority. Spec: `docs/REDLINE_ENCOUNTER_ANALOG.md`.
 
-## Source and outputs
+## The three ChatGPT concept images
 
-- `godot/tests/ice_analog_visual.gd`: editable Godot Control drawing source; standalone presentation, no model calls, no changes to cards or the playable scene.
-- `godot/tests/shot_ice_analog.gd`: captures six 1600×1000 visual states: friendly (turn 2, TRACE 12), cracking (turn 3, TRACE 30), tooltip, illegal break, VOID face-down, three ICE.
-- `godot/tests/shot_ice_analog_animation.gd`: captures 72 frames for an animation review.
-- `ice-instrument-keys.svg`: editable vector instrument-key study, seven icon families × six states.
-- Earlier baseline mockups: `../encounter-analog-001/HALCYON_CAPTCHA_A.png`, `HALCYON_CAPTCHA_B.png`, `HALCYON_CAPTCHA_B_ice_closeup.png`.
-- Additional concept renders produced in ChatGPT are **not yet committed**; this Godot source is a *structural study*, not a pixel-accurate recreation of those painted images.
+The designer's screenshots of the three concepts selected in ChatGPT (1334 × 750 each; the full-resolution originals were not available). Each shows a Friendly state, a Cracking state and a close-up.
 
-## Generate review screenshots
+| File | What it shows | SHA-256 |
+|---|---|---|
+| `ICE_ANALOG_CONCEPT_01_HALCYON.png` | Mascots peeking over chrome-framed mint consoles; rounded-square icon keys with lamps; TUMBLER reel column; tooltip plate on a stand. | `6c44faa8978abfd6e6d11d28ab6a4fbacc0e570c007ad0b5aa76a646bb80cf29` |
+| `ICE_ANALOG_CONCEPT_02_INSTRUMENT_KEYS.png` | Key states and a legend: ready (green lamp), biggest hit (red), broken, hidden (?), tumbled-in (amber), BOOTING (lock + clock). | `9dd31e20cd99b5b097c2db99aa684b58e5c1d1145623afebb75ac549a6a60edf` |
+| `ICE_ANALOG_CONCEPT_03_ENCOUNTER_TOOLTIP.png` | Detailed consoles, a vertical TUMBLER reel, and a tooltip plate: icon + name, Rule, Timing, Break, Passive, flavour line. | `8bdb03a939c295cc9e37b3de70a3c278bbf51d3f06d56a0a603676f69b1ec6b8` |
 
-Use the pinned Godot 4.3 editor. Import the Godot project before running the fixtures. From repository root, create a temporary output directory and run (with Xvfb on Linux):
+What the build takes from them: keys are **rounded squares** with a glyph and a numeral, a small lamp above each, and chevrons between them in firing order. The DEADLOCK is a red padlock key that turns green and open when broken. STR sits on a dark tile with a green ↑ / red ↓ change badge. TUMBLERs get a reel column showing the pool. The tooltip is a cream plate with labelled rows.
 
-```sh
-mkdir -p /tmp/ice-analog-review
-SHOT_DIR=/tmp/ice-analog-review godot --path godot --script res://tests/shot_ice_analog.gd
-SHOT_DIR=/tmp/ice-analog-review godot --path godot --script res://tests/shot_ice_analog_animation.gd
-ffmpeg -y -framerate 12 -i /tmp/ice-analog-review/ICE-ANALOG-001_anim_%03d.png -vf scale=800:-1 /tmp/ice-analog-review/ICE-ANALOG-001.gif
-```
+## Other files
 
-**Important:** This code has not yet been run in Godot 4.3 or validated with the rules suite in the authoring environment. Screenshots, GIF and tests must be generated/verified by the next build operator before review. Do not treat the frame harness as a completed animation: its current transitions are placeholders.
-
-## Design intent / remaining work
-
-Preserve Claude's mint HALCYON appliances, chrome, bakelite Rustler console, CRT and split-flap styling. Scale the existing mascot art by 25–35% rather than replacing it with new illustrations. Existing fixture mascots are vector *stand-ins*; replace with original approved art when asset loading is available. The instrument keys should use the existing HUD icon language, be 56–64 px at 1600×1000 (never below 44), and carry BW cost and non-colour state marks. The Godot fixture currently uses simple fallback glyphs and text and **does not meet the full visual brief**. It needs accurate artwork, accessibility/keyboard navigation, true legal break logic, TUMBLER reel motion, mascot telegraph/flinch, pixel-step behavior, contrast audit and fixture execution before integration.
-
-## Interpretations to confirm
-
-1. VIS-001 §2.9: icon-only keys move detailed rule wording to tooltip while NEXT RESPONSE and passive strips retain text.
-2. Mascot motion is ornamental, never the sole rules signal; reduced motion removes bob/tracking.
-3. Three-ICE arrangement shrinks consoles; check minimum key target dimensions.
-4. Mockup values and states are illustrative and are not rule proposals.
-5. The proposed visual exploration is **not approved** and should not be merged into the default encounter without the designer's explicit approval.
-
-### 2026-11-19 follow-up
-
-The animation harness now drives five **presentation-only** phases (idle, attention, telegraph, break reaction, tumble) with deterministic frame progression. This is a proof-of-concept motion pass, **not** the final mascot animation or authentic TUMBLE-001 reel. It has not been rendered or tested in Godot. The existing vector mascot placeholders remain; do not confuse them with approved mascot artwork.
-
-## Three ChatGPT concept mockups — binary import pending (2026-11-19)
-
-The designer selected three ChatGPT-generated concept PNGs as visual references. **The actual PNG files have not yet been uploaded to GitHub.** They currently exist as conversation downloads. Add the exact PNGs to this directory on the laptop (do not recreate them or substitute stock images), using these target names:
-
-1. `ICE_ANALOG_CONCEPT_01_HALCYON.png` — composite Friendly/Cracking encounter concept and detail.
-2. `ICE_ANALOG_CONCEPT_02_INSTRUMENT_KEYS.png` — instrument keys and visual states study.
-3. `ICE_ANALOG_CONCEPT_03_ENCOUNTER_TOOLTIP.png` — detailed encounter/tooltip concept.
-
-Source conversation filenames, respectively:
-- `a_detailed_highly_stylized_retro_futuristic_turn.png`
-- `a_highly_detailed_retro_futuristic_pixel_art_ui_co.png`
-- `a_detailed_cinematic_game_ui_illustration_in_a_re.png`
-
-After importing, confirm each PNG opens and update this README with its dimensions and checksum. These are **art-direction references, not authoritative gameplay values or Godot fixture screenshots**. Preserve original Claude mockups in `../encounter-analog-001/`.
+- `ice-instrument-keys.svg`: Codex's editable vector key study (exploratory).
+- The earlier Claude mockups are in `../encounter-analog-001/`.
+- Codex's standalone wireframe fixture (`godot/tests/ice_analog_visual.gd`, `shot_ice_analog.gd`, `shot_ice_analog_animation.gd`) is replaced by the real integration (designer, 2026-11-19: "Replace it").
