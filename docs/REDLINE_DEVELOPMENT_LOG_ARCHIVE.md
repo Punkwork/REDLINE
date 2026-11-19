@@ -1961,3 +1961,19 @@ Refreshed ten CHROME-001 PNGs from `main` with Godot 4.3. All five capture stage
 ## 2026-11-17 — READ-001: darker SCRIPT face for legible printing (Claude)
 
 **Designer instruction:** "make the contrast stronger so that the brown script cards are legible" (after Codex reported amber on brown SCRIPT was hard to read). Measured on the CARDS-001 fixtures: SCRIPT face (127,102,74) gave amber 3.55:1 and ivory 5.12:1 (amber below 4.5:1); PROGRAM amber 6.91:1. **Changed:** `godot/scripts/ui/friendly_lie/card.gd` adds a soft-edged `ScriptFaceShade` (#2A1C10 at 55%) over SCRIPT's face only, below the board grain, fitted to the face bounds measured from `script.png` (11,21,139,188). Result: face about (83,64,44), amber about 6.5:1, ivory about 9.3:1. Brown stays brown; chassis art, textures, colours of other types, rules and costs are unchanged. **Validation:** Godot 4.3 import; rules 357 passed, 0 failed; cartridge UI 625 checks, 0 failures; Chrome stages 1–5, 0 failures. Refreshed SCRIPT and encounter PNGs in `fixtures/cards-001/` and all ten in `fixtures/chrome-001/`; `four-card-types.png` is not produced by a checked-in script and was not refreshed. **Not changed:** PROTOCOL's blue-green face measures amber 4.18:1, also under 4.5:1; raised with the designer. Committed with [skip ci]: no Windows build.
+
+## 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude)
+
+**Designer decision:** "For number 4, they are rolled each time. They should be slightly variable so that the rustler can plan to some degree." Reverses the 2026-11-13 working assumption (fixed per subroutine). Recorded in the master design doc and the ICE Rules Bible. The roll's width, its on-screen display and its relation to PULP-002 curves are open; HANDOFF's PULP-001 row now asks those questions. Nothing to build until they're answered. **Code changes:** none.
+
+## 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude)
+
+**Designer decision:** "For number 3, that is correct." SHATTER lets SLEDGE break any one chosen ICE of any type this turn; SLEDGE then stays at STR 0 until the encounter ends and returns to STR 2 next encounter. Matches the build, so nothing changes in code. Recorded in the master design doc and Rustlers doc; HANDOFF row moved to *Done*.
+
+## 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude)
+
+**Designer:** a broken TUMBLER subroutine disappears at once and the next unbroken subroutine in sequence tumbles in; TUMBLERS still rotate once each turn. This is TUMBLE-001 (approved 2026-11-16, built `zeroed-tumble-step3`), so no DEADLOCK counter is needed. Added TUMBLE-001 to the master design doc (it was only in Core Rules) and closed the REEL-001 follow-up in HANDOFF. **Code changes:** none.
+
+## 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude)
+
+**Designer decisions:** "apply the changes to the Halcyon ICE now. That is before the playtest." and "the roll should be +2, -2 with once every 3 to 4 turns, a +3 or a -3." In-session choices: CAPTCHA's PULP 6 becomes TRACE 2; CONSENT FORM and REJECT ALL PULP 4 become PULP 3; the ±3 swing is a random ~30% chance, not a fixed rhythm. **Recorded:** ICE-AUDIT-001 and the PULP-001 roll in the master design doc; ICE Corp 1 §5.0 slice table; ICE Rules Bible audit note; Core Rules PULP X row. **Assumptions stated for confirmation:** a roll never goes below PULP 1; −2..+2 equally likely; ±3 sign 50/50; Game RNG. **HANDOFF:** two Codex TO DO rows (ICE-AUDIT-001, PULP-001 roll); new WAITING row PULP-001 display (pre-fire display, curves, lethal-mood threshold). **Code changes:** none.

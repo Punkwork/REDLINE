@@ -66,6 +66,9 @@ func run() -> void:
   ["SHATTER", -1, "SCRIPT_SHATTER_LONGEST_RULES"],
   ["TOOLBELT", 9004, "PROTOCOL_TOOLBELT_GRAFTED"],
   ["COMPILED::SHATTER::BORROWED_CREDENTIALS", -1, "SCRIPT_COMPILED_LONGEST"],
+  ["FORTRESS_ICEPICK", -1, "PROGRAM_FORTRESS_ICEPICK"],
+  ["VOID_ICEPICK", -1, "PROGRAM_VOID_ICEPICK"],
+  ["SKELETON_KEY", -1, "PROGRAM_SKELETON_KEY_ANY_TYPE"],
  ]
  for shot in shots:
   var card := FriendlyCard.new()
@@ -126,6 +129,20 @@ func sweep_text_fit(g: Game, view) -> void:
   var font: Font = view.skin.font if corp else routed
   if font.get_string_size(stamp, HORIZONTAL_ALIGNMENT_LEFT, -1, FriendlyCard.PCB_TYPE_MIN).x > FriendlyCard.glow_layout(d.type).type.size.x:
    fail(id + ": type stamp does not fit one line")
+ # Corner icons: at most four, so the stack ends above the type plate on every card.
+ var most := 0
+ var corner_ids: Array = CardDB.DEFS.keys()
+ for a in ids:
+  if CardDB.def(a).type != "SCRIPT": continue
+  for b in ids:
+   if a != b and CardDB.def(b).type == "SCRIPT" and CardDB.def(a).tags.any(func(t): return CardDB.def(b).tags.has(t)):
+    corner_ids.append("COMPILED::" + a + "::" + b)
+ for cid in corner_ids:
+  var n := FriendlyCard.corner_icons(CardDB.def(cid)).size()
+  most = maxi(most, n)
+  if n > 4:
+   fail(cid + ": more than four corner icons")
+ tally["most corner icons"] = most
  print("CARDS-003 text-fit sweep: %s" % str(tally))
 
 func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
@@ -205,6 +222,28 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
  for ink in [FriendlyCard.PCB_GLOW_INK, FriendlyCard.PCB_GLOW_NUMBER, FriendlyCard.FOOTER_INK]:
   if contrast(ink, mask) < 4.5:
    fail(tag + ": an ink is below 4.5:1 on the mask")
+
+ # Corner icons: the right set, in order, inside the card, clear of every text panel.
+ var expected := FriendlyCard.corner_icons(d)
+ var chips := []
+ for child in body.get_children():
+  if child is FriendlyCard.CornerChip:
+   chips.append(child)
+ if chips.size() != expected.size():
+  fail(tag + ": expected %d corner icons, found %d" % [expected.size(), chips.size()])
+ else:
+  for i in chips.size():
+   if chips[i].kind != expected[i][0] or chips[i].value != expected[i][1]:
+    fail(tag + ": corner icon %d is %s, expected %s" % [i, chips[i].kind, expected[i][0]])
+   if not Rect2(Vector2(-12, -14), Vector2(190, 270)).encloses(chips[i].get_rect()):
+    fail(tag + ": corner icon outside the cartridge")
+   for panel in ["TitlePanel", "TypePlate", "SolderRulesFrame"]:
+    if body.get_node(panel).get_rect().intersects(chips[i].get_rect()):
+     fail(tag + ": corner icon crosses " + panel)
+   if contrast(chips[i].ink(), FriendlyCard.CornerChip.PLATE) < 4.5:
+    fail(tag + ": corner icon ink below 4.5:1")
+  if not chips.is_empty() and not FriendlyCard.corner_legend(expected) in card.tooltip_text:
+   fail(tag + ": tooltip does not explain the corner icons")
 
  # Cached: never printed; one cyan edge glow, the same for a temporary cache.
  for child in body.find_children("*", "Label", true, false) + body.find_children("*", "RichTextLabel", true, false):

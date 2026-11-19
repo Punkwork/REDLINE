@@ -16,6 +16,12 @@ const PCB_GLOW_NUMBER := Color("#FFC861")
 const PCB_GLOW_HALO := Color(1.0, 0.86, 0.55, 0.32)
 const PCB_PLATE_PAD := 8.0
 const PCB_CACHE_GLOW := Color("#7FE3F0")
+## CARDS-005: icon chips stacked down the card's top-right corner.
+const CORNER_CHIP := 24.0
+const CORNER_ORIGIN := Vector2(145, 4)
+const CORNER_GAP := 2.0
+const CORNER_TRACE := Color("#FF8A7A")
+const CORNER_CRED := Color("#FFC861")
 ## CARDS-002 (APPROVED 2026-11-19): every card type gets the PCB glow treatment.
 ## Each mask is a deep tint of its own laminate; BLOATWARE keeps its corporate face.
 const GLOW_TREATMENT := {
@@ -38,7 +44,7 @@ static func glow_layout(type: String) -> Dictionary:
  var board: Rect2 = BOARD_RECT[type]
  var top := board.position.y
  return {
-  "title": Rect2(26, top + 3, 124, 38), "art": Rect2(16, top + 48, 128, 40),
+  "title": Rect2(26, top + 3, 114, 38), "art": Rect2(16, top + 48, 128, 40),
   "type": Rect2(16, top + 90, 128, 13), "rules": Rect2(13, top + 105, 134, board.end.y - 14 - (top + 105)),
   "edge": Rect2(9.5, top - 0.5, 143, board.end.y - 2.5 - (top - 0.5)), "leads": true,
  }
@@ -292,6 +298,86 @@ class CacheEdgeGlow extends Control:
   for pass_ in [[4.0, 0.10], [2.6, 0.22], [1.4, 1.0]]:
    draw_polyline(ring, Color(glow, pass_[1]), pass_[0], true)
 
+class CornerChip extends Control:
+ ## One corner icon: an Icepick type (FORTRESS / TUMBLER / VOID / ANY), RAM,
+ ## an extra TRACE or CRED cost, or TARGET.
+ const PLATE := Color("#253237")
+ const RIM := Color("#92866D")
+ const INK := Color("#FFF3D0")
+ var kind := ""
+ var value := 0
+
+ func ink() -> Color:
+  return CORNER_TRACE if kind == "TRACE" else (CORNER_CRED if kind == "CRED" else INK)
+
+ func _draw() -> void:
+  var box := StyleBoxFlat.new()
+  box.bg_color = PLATE
+  box.border_color = ink() if kind in ["TRACE", "CRED"] else RIM
+  box.set_border_width_all(1)
+  box.set_corner_radius_all(5)
+  draw_style_box(box, Rect2(Vector2.ZERO, size))
+  var c := size / 2.0
+  var col := ink()
+  match kind:
+   "FORTRESS":
+    draw_rect(Rect2(c.x - 6, c.y - 2, 12, 9), col)
+    for x in [-6.0, -1.5, 3.0]:
+     draw_rect(Rect2(c.x + x, c.y - 6, 3, 4), col)
+   "TUMBLER":
+    draw_arc(c, 6.5, deg_to_rad(-40), deg_to_rad(250), 24, col, 2.0, true)
+    var tip := c + Vector2(cos(deg_to_rad(-40)), sin(deg_to_rad(-40))) * 6.5
+    draw_colored_polygon(PackedVector2Array([tip + Vector2(-4, -2), tip + Vector2(3, -3), tip + Vector2(1, 4)]), col)
+   "VOID":
+    draw_polyline(PackedVector2Array([c + Vector2(0, -8), c + Vector2(8, 0), c + Vector2(0, 8), c + Vector2(-8, 0), c + Vector2(0, -8)]), col, 2.0, true)
+    draw_circle(c, 2.0, col, true, -1.0, true)
+   "ANY":
+    for a in [0.0, 60.0, 120.0]:
+     var d := Vector2(cos(deg_to_rad(a)), sin(deg_to_rad(a))) * 7.0
+     draw_line(c - d, c + d, col, 2.0, true)
+   "TARGET":
+    draw_arc(c, 6.0, 0, TAU, 24, col, 1.6, true)
+    for d in [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]:
+     draw_line(c + d * 3.0, c + d * 9.5, col, 1.6, true)
+   _:
+    # RAM, TRACE and CRED show their number; RAM adds memory-chip pins.
+    var font: Font = preload("res://assets/fonts/Barlow-Bold.ttf")
+    var text := ("+%d" if kind == "TRACE" else "%d") % value
+    var w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
+    draw_string(font, Vector2(c.x - w / 2.0, c.y + 5), text, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, col)
+    if kind == "RAM":
+     for x in [-6.0, 0.0, 6.0]:
+      draw_line(Vector2(c.x + x, 1.5), Vector2(c.x + x, 3.5), col, 1.2)
+      draw_line(Vector2(c.x + x, size.y - 3.5), Vector2(c.x + x, size.y - 1.5), col, 1.2)
+
+## The corner icons a card carries, top to bottom: Icepick type, RAM, extra
+## TRACE cost, extra CRED cost, target. Each entry is [kind, value].
+static func corner_icons(d: Dictionary) -> Array:
+ var out := []
+ if d.has("pick"):
+  out.append([str(d.pick.get("itype", "ANY")), 0])
+ if d.type == "PROGRAM":
+  out.append(["RAM", int(d.get("ram", 0))])
+ if int(d.get("trace_cost", 0)) > 0:
+  out.append(["TRACE", int(d.trace_cost)])
+ if int(d.get("cred_cost", 0)) > 0:
+  out.append(["CRED", int(d.cred_cost)])
+ if d.get("target", false):
+  out.append(["TARGET", 0])
+ return out
+
+static func corner_legend(icons: Array) -> String:
+ var words := []
+ for icon in icons:
+  match icon[0]:
+   "RAM": words.append("RAM %d" % icon[1])
+   "TRACE": words.append("+%d TRACE" % icon[1])
+   "CRED": words.append("%d CRED" % icon[1])
+   "TARGET": words.append("targets an ICE")
+   "ANY": words.append("breaks any ICE type")
+   _: words.append("breaks %s" % icon[0])
+ return " · ".join(words)
+
 static func pcb_rules_markup(rule: String) -> String:
  var re := RegEx.new(); re.compile(PCB_NUMBER)
  return "[center]" + re.sub(rule.replace("[", "[lb]"), "[b][color=#%s]$1[/color][/b]" % PCB_GLOW_NUMBER.to_html(false), true) + "[/center]"
@@ -466,6 +552,17 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, Color("#F2CD87") if corp else Color.WHITE, FriendlyLook.BOLD)
  cost.add_theme_color_override("font_shadow_color", Color("#D6B67580")); cost.add_theme_constant_override("shadow_offset_x", 0); cost.add_theme_constant_override("shadow_offset_y", 0); cost.add_theme_constant_override("shadow_outline_size", 2)
  cost.position = Vector2(-4, 3); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
+ # CARDS-005: corner icons down the top-right edge.
+ var icons := corner_icons(d)
+ for i in icons.size():
+  var chip := CornerChip.new()
+  chip.name = "Corner" + str(icons[i][0]).capitalize()
+  chip.kind = icons[i][0]
+  chip.value = icons[i][1]
+  chip.position = CORNER_ORIGIN + Vector2(0, i * (CORNER_CHIP + CORNER_GAP))
+  chip.size = Vector2(CORNER_CHIP, CORNER_CHIP)
+  chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  body.add_child(chip)
  # Art slot: the type's circuit stencil, a graft in its place, or BLOATWARE's corporate art.
  var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
  if corp:
@@ -538,6 +635,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
   body.add_child(edge)
   body.move_child(edge, body.get_node("BoardMaterialGrain").get_index() + 1)
  tooltip_text = d.name + " · " + d.type + " · " + rarity + ("" if summary_rules else "\n" + rule)
+ if not icons.is_empty():
+  tooltip_text += "\n" + corner_legend(icons)
  if is_cached:
   tooltip_text += "\nCACHED" + (" (temporary)" if cached.has("cache_turns") else "")
  if uid >= 0:

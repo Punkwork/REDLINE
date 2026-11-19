@@ -4,22 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude)
-
-**Designer decision:** "For number 4, they are rolled each time. They should be slightly variable so that the rustler can plan to some degree." Reverses the 2026-11-13 working assumption (fixed per subroutine). Recorded in the master design doc and the ICE Rules Bible. The roll's width, its on-screen display and its relation to PULP-002 curves are open; HANDOFF's PULP-001 row now asks those questions. Nothing to build until they're answered. **Code changes:** none.
-
-## 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude)
-
-**Designer decision:** "For number 3, that is correct." SHATTER lets SLEDGE break any one chosen ICE of any type this turn; SLEDGE then stays at STR 0 until the encounter ends and returns to STR 2 next encounter. Matches the build, so nothing changes in code. Recorded in the master design doc and Rustlers doc; HANDOFF row moved to *Done*.
-
-## 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude)
-
-**Designer:** a broken TUMBLER subroutine disappears at once and the next unbroken subroutine in sequence tumbles in; TUMBLERS still rotate once each turn. This is TUMBLE-001 (approved 2026-11-16, built `zeroed-tumble-step3`), so no DEADLOCK counter is needed. Added TUMBLE-001 to the master design doc (it was only in Core Rules) and closed the REEL-001 follow-up in HANDOFF. **Code changes:** none.
-
-## 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude)
-
-**Designer decisions:** "apply the changes to the Halcyon ICE now. That is before the playtest." and "the roll should be +2, -2 with once every 3 to 4 turns, a +3 or a -3." In-session choices: CAPTCHA's PULP 6 becomes TRACE 2; CONSENT FORM and REJECT ALL PULP 4 become PULP 3; the ±3 swing is a random ~30% chance, not a fixed rhythm. **Recorded:** ICE-AUDIT-001 and the PULP-001 roll in the master design doc; ICE Corp 1 §5.0 slice table; ICE Rules Bible audit note; Core Rules PULP X row. **Assumptions stated for confirmation:** a roll never goes below PULP 1; −2..+2 equally likely; ±3 sign 50/50; Game RNG. **HANDOFF:** two Codex TO DO rows (ICE-AUDIT-001, PULP-001 roll); new WAITING row PULP-001 display (pre-fire display, curves, lethal-mood threshold). **Code changes:** none.
-
 ## 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude)
 
 **Designer:** "the rustler is always going to see what pulp damage the corporation is going to deliver next turn with that subroutine. So there is no surprise for the rustler." Recorded in the master design doc and Core Rules: the roll is made ahead of time (working timing: start of the Rustler turn), shown as an exact number, and that value fires; the lethal mood reads it. HANDOFF build row updated; the WAITING row now only asks about PULP-002 curves, including curve B's "PULP ?". **Code changes:** none.
@@ -484,3 +468,38 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RE
 
 **Open:** what goes in the freed top-right corner. Proposed: a RAM chip on PROGRAMs (29 cards, RAM 0–2, not shown on the card today).
 
+## 2026-11-19 — CARDS-005 corner icons; CARDS-004 overlap and fan (Claude)
+
+**Designer:**
+- "I would rather they start to slightly overlap instead of squash them together so the sides aren't visible, and them overlap more as more cards in hand. We need to utilize the top right corner for icons."
+- To Claude's suggestions: "Yes i want all of them in the right corner. Gentle fan is perfect."
+
+**Changed (`card.gd`):**
+- A `CornerChip` stack down the top-right corner, from `corner_icons(def)`:
+  - the Icepick type (FORTRESS tower, TUMBLER arrow, VOID diamond, ANY asterisk);
+  - RAM on PROGRAMs;
+  - extra TRACE (red) and CRED (gold) costs;
+  - a target crosshair.
+- `corner_legend()` adds the icons to the tooltip.
+- The Rustler title panel narrows from 124 to 114 px.
+
+**Fixture (`shot_cards_pcb`):**
+- Checks each captured card's icons and their order, that they stay inside the cartridge and off every text panel, their ink contrast and the tooltip legend.
+- Adds FORTRESS, VOID and ANY Icepick captures.
+- Sweeps every base and compiled card for at most four icons; the most is 3.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
+
+**CARDS-004 updated (docs):**
+- The hand is centred and overlaps from the start, more as it grows: 5% at 1–4 cards, then 10, 15, 22, 29, 36 and 43% at 5–10. These are PROPOSED working values.
+- A gentle fan of about 2° per card (approved).
+
+**Interpretations to confirm:** the overlap values; the icon order; the glyph shapes.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude).
