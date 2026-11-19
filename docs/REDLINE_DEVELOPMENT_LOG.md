@@ -4,17 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex)
-
-**Commit tag:** `cards-001-lightfaces`.
-
-**Designer feedback:** black title backgrounds and dark beige card faces do not fit the chassis. Removed the opaque black title strip; dark titles now print directly on each inset face with a restrained separator. Generated edits preserve the three carriers and change only the blank face: near-white ivory instruction stock for SCRIPT, cool pearl instrument plate for PROGRAM, pale celadon enamel for PROTOCOL. Hardware, protrusions, outside BW tab, rarity details, authored metadata and rules are unchanged. The corporate Bloatware treatment remains separate.
-
-**Validation:** 357 rules checks and 612 cartridge UI checks pass, including authored/compiled text fit and protruding bounds. Five Chrome stages pass; refreshed nine close-ups, six/eight-card captures and ten encounter review PNGs. The earlier dated whole entry was appended unchanged to the archive under LOG-001 to keep this live log below about 60 KB.
-
-**Review:** material tint and direct-print title treatment are proposed visual refinements. PR #12 is updated, not merged; designer approval of the integrated revision is still required under the existing merge instruction. No gameplay data, rarity odds or costs changed.
-
-
 ## 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex)
 
 **Commit tag:** `cards-001-board-palette`.
@@ -420,3 +409,13 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 ## 2026-11-19 — CARDS-002 Mustard PCB review archive (Codex)
 
 Saved ten review sheets, three final Godot captures and the reproducible prototype for the fifth cartridge design. The designer requested centred rules inside a fixed PCB trace frame and a single top-edge rarity light. The final capture fixture verified all three indicators, frame geometry, alignment and text fit in Godot 4.3. The archive is under `docs/visual/fixtures/cards-002/`.
+
+## 2026-11-19 — CARDS-002 review archive moved to `review/cards-002` (Claude)
+
+**Designer direction:** CARDS-002 mustard review work stays out of `main`: "None of it's to be kept with the main build." The designer approved a review branch.
+
+**Changed:** created `review/cards-002` from `0f4a312` (the Codex review archive) and added the 2026-11-19 review fixes there (`d30b531`). Removed `docs/visual/fixtures/cards-002/` from `main`; the master design entry and HANDOFF now point to the branch. The playable build is unchanged, and the built CARDS-002 PCB palette (`0aa6091`) stays on `main`.
+
+**Interpretations to confirm:** the branch is never merged; the earlier "Mustard PCB review archive" entry is kept as history even though its folder now lives only on the branch.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex).
