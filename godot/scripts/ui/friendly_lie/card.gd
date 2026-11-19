@@ -38,7 +38,7 @@ static func glow_layout(type: String) -> Dictionary:
  var board: Rect2 = BOARD_RECT[type]
  var top := board.position.y
  return {
-  "title": Rect2(13, top + 3, 124, 38), "art": Rect2(16, top + 48, 128, 40),
+  "title": Rect2(26, top + 3, 124, 38), "art": Rect2(16, top + 48, 128, 40),
   "type": Rect2(16, top + 90, 128, 13), "rules": Rect2(13, top + 105, 134, board.end.y - 14 - (top + 105)),
   "edge": Rect2(9.5, top - 0.5, 143, board.end.y - 2.5 - (top - 0.5)), "leads": true,
  }
@@ -462,10 +462,10 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  title.position = lay.title.position + Vector2(6, 0); title.size = lay.title.size - Vector2(12, 0)
  title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
  add_glow(title, 4)
- var circle := CostCircle.new(); circle.position = Vector2(142, 5); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
+ var circle := CostCircle.new(); circle.position = Vector2(-5, 3); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
  var cost := FriendlyLook.label(str(view.game.card_cost(id)) if uid >= 0 else str(d.bw), 15, Color("#F2CD87") if corp else Color.WHITE, FriendlyLook.BOLD)
  cost.add_theme_color_override("font_shadow_color", Color("#D6B67580")); cost.add_theme_constant_override("shadow_offset_x", 0); cost.add_theme_constant_override("shadow_offset_y", 0); cost.add_theme_constant_override("shadow_outline_size", 2)
- cost.position = Vector2(143, 5); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
+ cost.position = Vector2(-4, 3); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
  # Art slot: the type's circuit stencil, a graft in its place, or BLOATWARE's corporate art.
  var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
  if corp:

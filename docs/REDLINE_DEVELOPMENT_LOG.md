@@ -473,3 +473,14 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CH
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: LOGIC BOMB and RELAY deprecated (Claude).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001: darker SCRIPT face for legible printing (Claude).
+
+## 2026-11-19 — CARDS-004a: BW cost dial top-left (Claude)
+
+**Designer:** "The bw cost could move to top left of card as we are not efficiently using the card space/corners for icons." This reverses the earlier answer to keep it top-right.
+
+**Changed:** in `card.gd`, the cost dial moves from (142, 5) to (−5, 3) on every card type, and the Rustler title panel shifts from x 13 to x 26 at the same 124 px width, clearing the dial and using the freed right side. BLOATWARE's title is unchanged; its face starts below the dial. Checked with a 7-card 1.4× hand mockup: every card's cost now shows; before, all but the last were covered.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean, including `shot_cards_pcb` (0 failures).
+
+**Open:** what goes in the freed top-right corner. Proposed: a RAM chip on PROGRAMs (29 cards, RAM 0–2, not shown on the card today).
+
