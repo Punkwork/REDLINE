@@ -4,14 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — CARDS-001: instrument amber accents (Codex)
-
-**Commit tag:** `cards-001-amber`. Replaced neon yellow-green with warm instrument amber (`#D6B675`) for the shared highlight and printed numeric highlights. The brass/gauge reference fits the selected brown, olive, teal and oxide-red boards. BW badges, selection accents and shared HUD controls inherit the same colour. No rules or costs changed.
-
-**Interpretations to confirm:** exact amber hue is a visual proposal for designer review. PR #12 remains open.
-
-**Validation:** 357 rules checks and 625 cartridge UI checks pass; updated four-type PNG rendered from live Godot controls.
-
 ## 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex)
 
 **Commit tag:** `cards-001-amber-glow`. Designer requested glowing amber text instead of highlighted backgrounds. Numeric rule text now uses warm amber ink (`#F2CD87`) with a faint translucent amber halo; removed rectangular fills. External BW badges use a dark instrument face and glowing amber numerals. Board textures stay visible.
@@ -423,3 +415,15 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CA
 **Interpretations to confirm:** mask colour and panel shapes; halo strength (alpha 0.32, radius 3–4); amber for numbers; the type stamp on its own plate rather than inside the rules panel.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex).
+
+## 2026-11-19 — CARDS-002 cache edge glow (Claude)
+
+**Designer question:** can cached show along the card's edge or border, as part of the card glowing in a different colour?
+
+**Changed (preview patch, `review/cards-002` only):** a cached card's board edge glows icy cyan `#7FE3F0` as a chamfered ring with a soft halo. It is solid when held until played and dashed for a temporary cache. The ring draws on the board, beneath the BW cost circle, title and text panels. The ear padlock stays as the shape cue. The fixture asserts that the glow appears only on cached cards, uses the right style, stays outside every text panel and draws beneath the cost.
+
+**Validation:** preview fixture 0 failures at 3× and 1×; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 with the patch applied.
+
+**Interpretations to confirm:** cyan as the cache colour; dashed for temporary rather than showing turns left; keeping the padlock alongside the glow.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: instrument amber accents (Codex).

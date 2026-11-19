@@ -183,12 +183,24 @@ func check_card(card: FriendlyCard, face: String, uid: int, g: Game) -> void:
    fail(tag + ": CACHED printed on the card face")
  var entry: Dictionary = g._find(g.hand, uid)
  var is_cached: bool = entry.get("cached", false)
- if body.has_node("CacheBadge") != is_cached:
+ if body.has_node("CacheBadge") != is_cached or body.has_node("CacheEdgeGlow") != is_cached:
   fail(tag + ": cache badge presence mismatch")
  if is_cached:
   var badge: Control = body.get_node("CacheBadge")
   if badge.get_rect().end.x > BOARD_LEFT or badge.turns != int(entry.get("cache_turns", 0)):
    fail(tag + ": cache badge overlaps the board or shows the wrong turns")
+  var edge: Control = body.get_node_or_null("CacheEdgeGlow")
+  if edge == null or edge.temporary != entry.has("cache_turns"):
+   fail(tag + ": cache edge glow missing or wrong style")
+  else:
+   # The glow (core plus 2 px halo) must stay outside every text panel.
+   for child in body.get_children():
+    if child is FriendlyCard.CostCircle and child.get_index() < edge.get_index():
+     fail(tag + ": cache glow draws over the BW cost")
+   var inner := edge.get_rect().grow(-2.0)
+   for panel in ["TitlePanel", "TypePlate", "SolderRulesFrame"]:
+    if not inner.encloses(body.get_node(panel).get_rect()):
+     fail(tag + ": cache glow crosses " + panel)
   if not "CACHED" in card.tooltip_text:
    fail(tag + ": tooltip does not name the cached state")
 
