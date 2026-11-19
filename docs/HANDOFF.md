@@ -73,6 +73,12 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 **Cards and hand (approved 2026-11-19):** CARDS-004 and HAND-MAX-001 are built; see Built below.
 
+**Encounter redesign (ENC-ANALOG-001, saved for later, 2026-11-19):** the analog / flip-clock / cockpit direction for the encounter screen. Not approved; the designer will return to it. Spec `REDLINE_ENCOUNTER_ANALOG.md`; mockups `docs/visual/explorations/encounter-analog-001/`.
+
+| ID | What to build | Spec | Owner | Status |
+|---|---|---|---|---|
+| **ICE-ANALOG-001** | Design review, not integration: icon + value subroutine keys with hover/focus rule tooltips, mascots 25–35% larger with attention/telegraph/break behaviours. Icon sheet, `shot_ice_analog.gd` captures of the two reference states plus tooltip, illegal break, VOID face-down and a 3-ICE layout, and a behaviour GIF. No rules changes; don't merge into the default encounter until approved. | `REDLINE_ENCOUNTER_ANALOG.md` §8 (the Codex prompt) | Codex (designer's request) | TO DO |
+
 **Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`. The TRACE-driven pixelation of the backdrop and ICE art (PIXEL-TRACE-001) is approved and built; see Built.
 
 **Integration beyond the HALCYON slice:** connect the presentation hooks to playable LUCIDA, PATCHWORK and run resume when those systems arrive. Tag playable Central Nodes with `central: true`. The slice's run-menu DEAD DROP opens THE CARBON; attach the same reader to the map's DEAD DROP when that Node is built. The reveal sequence and final punch-card art have their own design work.

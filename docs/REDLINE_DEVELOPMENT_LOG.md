@@ -4,29 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-17 — Atomic Deco Punk design direction (Codex)
-
-Recorded the designer’s term and brief in the master design document. The direction covers corporate scale alongside hand-built elektronix, with visual design leading the tone, language, sound and emotional experience. Sound examples are directions to explore in playtesting. LOG-001 moved the oldest whole live entries to the archive unchanged.
-
-## 2026-11-17 — ADP-001 Phase 1 (Codex)
-
-- **ADP-1a.** Pure presentation bleed curve, 400 ms ease, instant reduced motion and a TRACE-tag bleed readout. Added table and easing tests.
-- **ADP-1b.** Linked the Cracking reveal to bleed, from 20% at TRACE 20 to 60% at TRACE 39. Strike and Mask Off retain the full hostile background.
-- **ADP-1c.** Added a perimeter-only wear shader, lifted tape, and decorative barcodes on Node and TRACE. The barcode flicker stops with reduced motion.
-- **ADP-1d.** Three synchronized synthesized stems, tempo-preserving corporate pitch DSP, strike chime, and saved music level and mute.
-- **ADP-1f.** Added Poiret One and OFL provenance. Only the corporate wordmark (36 px), background line (28 px), and strike headline (68 px) use the face.
-- **ADP-1e.** Added mechanical sounds for accepted card play, Icepick drag, completed breaks, END TURN and Bloatware insertion. Hover is silent.
-
-The full Godot 4.3 rules suite passed unchanged after each task (363 checks). The phase added 17 unit checks and 448 capture, contrast, and interaction checks. The four PNGs and 11-second in-engine MP3 are in `docs/visual/fixtures/adp-001/`. No Windows export.
-
-**Interpretations to confirm:**
-- The rig shader treats the outer 3 px and a shadow offset up to 2 px. Tape lifts outside the lower corner and the barcode flicker starts above 0.6. The 0.40 still captures the midpoint of the eased 20-to-39 TRACE reveal.
-- The short synthesized cues, mix points, LFO rates, and gains are placeholders in `godot/data/atomic_deco_punk.json`. The parallel corporate DSP feed shares the synchronized transport because Godot 4.3 exposes gain only on its synchronized tracks. Reduced motion also disables pitch wobble. Music mute covers the stems and strike chime. Mechanical sounds remain audible.
-- The facade headlines use “Good morning.”, “Your block is safe.” and “Breathe in.” on solid corporate displays. The HUD checks verify the new display and readout colours. The inherited noninteractive Strike underlay remains dimmed.
-- “Card seated” means an accepted hand play. A relay clunk marks a completed break, and a tape tear marks an insertion batch, including the first strike's TRACER.
-
-LOG-001 moved the oldest whole live entries to the archive unchanged.
-
 ## 2026-11-17 — ADP-001 Phase 1 confirmations (Codex)
 
 Designer confirmed all four implementation interpretations from `53b00d7`: rig wear and the midpoint fixture, placeholder mix and reduced-motion audio behavior, Poiret One copy and sizes, and mechanical cue triggers. Recorded the approval in the master design document.
@@ -573,3 +550,25 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — HA
 **Designer:** "There will be a sound as well for the transition but i have not yet determined." This corrects the previous entry: a pixel-step transition gets a sound effect as well as the bit-crushed music. The master design doc no longer says "no separate sound effect". HANDOFF has a WAITING row, PIXEL-TRACE-001c, listing the options discussed (TV detune, teletype burst, neon ballast buzz). **Code changes:** none.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Playtest checklist v0.4 for HALCYON PLAYTEST 4 (Claude).
+
+## 2026-11-19 — ENC-ANALOG-001 saved; ICE-ANALOG-001 brief for Codex (Claude)
+
+**Designer:** asked for a full HALCYON encounter mockup built on the analog left-HUD unit (flip-clock PROGRAM reel, cockpit instruments), with the ICE redesigned to match and the 8-bit/16-bit work applied; asked for it to be elegant and "beautiful and inviting". Then: "save these mockups as I want to return to this elegant design and interface then incorporate it into the encounter screen", and a Codex prompt: redesign the ICE readout (not the mascots, which get a little bigger and more behaviour), subroutines as icons with a value, full text on rollover.
+
+**Recorded:**
+- ENC-ANALOG-001 (EXPLORATION) and ICE-ANALOG-001 (PROPOSED) in the master design doc and register.
+- New spec `docs/REDLINE_ENCOUNTER_ANALOG.md`, with the Codex prompt in §8.
+- Mockups in `docs/visual/explorations/encounter-analog-001/`: the CAPTCHA node Friendly (turn 2, TRACE 12) and Cracking (turn 3, TRACE 30, PIXEL-TRACE-001's 3 px step and 41% reveal), an ICE close-up, and the mockup sources.
+- HANDOFF: a Codex TO DO row for ICE-ANALOG-001 (design review only).
+
+**Code changes:** none. **Tests:** none.
+
+**Interpretations to confirm:**
+- The TRACE lamp lights when TRACE is high (≥ 30); the others light when low.
+- The HUD's PULP Nixie shows incoming PULP.
+- Program reel at 13 tiles with shortened names.
+- END TURN and DECK/DISCARD moved beside the response board to free the hand's width.
+- The cards in the mockups are placeholders, not a redesign.
+- ICE-ANALOG-001 moves full rule text to hover/focus (VIS-001 §2.9 to be revisited).
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — Atomic Deco Punk design direction (Codex), 2026-11-17 — ADP-001 Phase 1 (Codex).
