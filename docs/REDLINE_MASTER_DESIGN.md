@@ -102,7 +102,7 @@ Shared silkscreen `#F2E5C2` and contact holes `#24231C` stay outside names, illu
 
 **CARDS-002 cache edge glow (2026-11-19, review branch only, PROPOSED).** *Designer question:* can cached show along the card's edge, as part of the card glowing in a different colour? *Study:* a cached card's board edge glows icy cyan `#7FE3F0`, solid when held until played and dashed for a temporary cache. The glow draws beneath the BW cost, title and text panels. The ear padlock stays as the non-colour cue.
 
-**CARDS-002 single cache state (2026-11-19, review branch only; designer direction).** Designer: "No need for padlock. Yes cyan… A card is cached or not." A cached card shows one solid icy-cyan `#7FE3F0` edge glow. A temporary cache looks the same as one held until played, and turns left are not shown on the card. *PROPOSED:* the tooltip adds "(temporary)" for a timed cache.
+**CARDS-002 single cache state (2026-11-19, review branch only; designer direction).** Designer: "No need for padlock. Yes cyan… A card is cached or not." A cached card shows one solid icy-cyan `#7FE3F0` edge glow. A temporary cache looks the same as one held until played, and turns left are not shown on the card. The hover tooltip reads `CACHED`, adding "(temporary)" for a timed cache; the designer kept this "for now" on 2026-11-19.
 
 **VISUAL-APPROVALS-002 — Prototype art and working values approved (APPROVED, 2026-11-17).** The designer approved every item below, which had been waiting for review. Designer: "Okay, all those changes that you listed are all approved." Numbers stay tunable presentation values; approval means build from them, not that they can never change. Sources: the 2026-11-17 VIS-001, CHROME-001 and CARDS-001 entries in `REDLINE_DEVELOPMENT_LOG.md`.
 

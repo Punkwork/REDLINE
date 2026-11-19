@@ -430,6 +430,6 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CA
 
 **Validation:** preview fixture 0 failures at 3× and 1×; rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 with the patch applied.
 
-**Interpretations to confirm:** keeping "(temporary)" in the tooltip.
+**Interpretations to confirm:** none. The designer kept the "(temporary)" tooltip wording "for now" (2026-11-19).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex).
