@@ -1,6 +1,6 @@
 # PANOPTICON — ENCOUNTER SCREEN: ANALOG / FLIP-CLOCK / COCKPIT DIRECTION
-**Date:** 2026-11-19 · **Author:** Claude · **Decision IDs:** ENC-ANALOG-001 (the direction, EXPLORATION), ICE-ANALOG-001 (the Codex brief, PROPOSED)
-**Status:** EXPLORATION. Saved by the designer to return to ("I want to return to this elegant design and interface then incorporate it into the encounter screen. We have many screens to design."). Not approved for build. Nothing in the rules changes.
+**Date:** 2026-11-19 · **Author:** Claude · **Decision IDs:** ENC-ANALOG-001 (the whole-screen direction), ICE-ANALOG-001 (the ICE readout); both **APPROVED for integration 2026-11-19**
+**Status:** APPROVED for integration into the default encounters (designer, 2026-11-19: approved in ChatGPT, confirmed to Claude in session with scope "Whole encounter screen" and "Yes, approved, incl. hover text"). Not built yet; Claude Code is integrating. Nothing in the rules changes.
 
 ## 1. Where the mockups are
 - **In the repo:** `docs/visual/explorations/encounter-analog-001/` (screenshots, mockup sources, README).

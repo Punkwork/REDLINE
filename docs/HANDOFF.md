@@ -73,11 +73,12 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 
 **Cards and hand (approved 2026-11-19):** CARDS-004 and HAND-MAX-001 are built; see Built below.
 
-**Encounter redesign (ENC-ANALOG-001, saved for later, 2026-11-19):** the analog / flip-clock / cockpit direction for the encounter screen. Not approved; the designer will return to it. Spec `REDLINE_ENCOUNTER_ANALOG.md`; mockups `docs/visual/explorations/encounter-analog-001/`.
+**Encounter redesign (ENC-ANALOG-001 + ICE-ANALOG-001, APPROVED 2026-11-19):** the whole encounter screen in the analog / flip-clock / cockpit look, with icon + value ICE subroutines (full text on hover/focus) and bigger, livelier mascots. Spec `REDLINE_ENCOUNTER_ANALOG.md`; references `docs/visual/explorations/encounter-analog-001/` and `ice-analog-001/`.
 
 | ID | What to build | Spec | Owner | Status |
 |---|---|---|---|---|
-| **ICE-ANALOG-001** | Design review, not integration: icon + value subroutine keys with hover/focus rule tooltips, mascots 25–35% larger with attention/telegraph/break behaviours. Icon sheet, `shot_ice_analog.gd` captures of the two reference states plus tooltip, illegal break, VOID face-down and a 3-ICE layout, and a behaviour GIF. No rules changes; don't merge into the default encounter until approved. | `REDLINE_ENCOUNTER_ANALOG.md` §8 (the Codex prompt) | Codex (designer's request) | TO DO |
+| **ENC-ANALOG-001 / ICE-ANALOG-001** | Integrate into the real encounter (`friendly_lie/encounter.gd` and its components), presentation only: analog ICE consoles with icon + value keys, BW chips and hover/focus tooltips; mascots 25–35% larger with attention, telegraph and break behaviours; flip-clock HUD; split-flap NODE/TURN/STRIKES/RESERVE/DECK; END TURN button. Keep CARDS-001/004/005, PIXEL-TRACE-001, readability and copy guards. Replace Codex's standalone `ice_analog_visual.gd` fixture with a real `shot_*` fixture in CI. | `REDLINE_ENCOUNTER_ANALOG.md` | Claude Code | IN PROGRESS |
+| **ICE-ANALOG-001 refs** | Commit the three ChatGPT concept PNGs under `docs/visual/explorations/ice-analog-001/` with the names in its README. | that README | Designer → Claude | WAITING on the files |
 
 **Parked for exploration (designer, 2026-11-19):** a 16-bit pixel look for the whole game. Not approved; the designer reviews it on Saturday 2026-11-21. Mockups are in `docs/visual/explorations/pixel-16bit/`. The TRACE-driven pixelation of the backdrop and ICE art (PIXEL-TRACE-001) is approved and built; see Built.
 
@@ -187,20 +188,3 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |
 | CHROME-001 / CARDS-001 source notes | Recorded available source and edit history for nine generated assets and corrected Whirlwind Bloatware. Exact prompts, model IDs and the corrected concept PNG are still missing. | 2026-11-17 (Codex) |
 | VIS-001 doc | `REDLINE_VISUAL_LANGUAGE.md` and `docs/visual/` (reference images, placeholder backgrounds, mascot SVGs) added for Codex. | 2026-11-17 (Claude) |
-
-
-### ICE-ANALOG-001 — next-build handoff (2026-11-19; PROPOSED)
-
-- **Source committed on main:** `godot/tests/ice_analog_visual.gd`, `shot_ice_analog.gd`, `shot_ice_analog_animation.gd`, `docs/visual/explorations/ice-analog-001/`. This is an **editable visual scaffold**, not an approved encounter UI.
-- **Claude Code / next build:** run Godot 4.3 screenshot and animation fixtures per exploration README, fix any parse/runtime issues, render and review six PNGs + GIF, run the full rules suite, replace vector mascot stand-ins with existing mascot art, and complete key/tooltips/reel behavior and contrast/accessibility audits.
-- **Designer:** review rendered visuals and VIS-001 §2.9 tooltip exception; only the designer can approve integration.
-- **Guardrails:** do not change rules or CARDS-004/005; do not integrate into default encounter; mockup numbers are illustrative.
-
-- **ICE-ANALOG-001 follow-up:** motion-phase scaffolding committed (idle/attention/telegraph/break/tumble). Still requires Godot validation, approved mascot asset substitution, actual TUMBLER reel implementation, and accessibility pass. No build acceptance yet.
-
-
-### ICE-ANALOG-001 — designer-approved integration, implementation pending (2026-11-19)
-
-- **Approval:** the designer explicitly approved integrating ICE-ANALOG-001's visual changes into default encounters. The design is APPROVED; **the current scaffold is not a tested build**.
-- **Claude Code / next laptop build:** pull latest `main`; run Godot 4.3 import and rules suite, validate six screenshots and animation frames, replace mascot stand-ins with existing approved art, finish full icon set/reel, focus/hover tooltips, break affordances, reduced motion and 4.5:1 contrast, then integrate through the existing encounter presentation layer without modifying rules code or CARDS-004/005. Add/execute interaction and regression tests before treating integration as complete.
-- **Release gate:** don't claim integration, screenshots, GIF or passing tests until actually produced and inspected. Preserve SIGNAL-001 reveal guard and copy guards. Mockup values are illustrative only.

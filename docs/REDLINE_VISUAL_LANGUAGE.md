@@ -209,6 +209,8 @@ Other slice ICE: write three lines each in the same voice (friendly corporate โ
 
 ### 2.9 Accessibility
 
+> **Amended by ICE-ANALOG-001 (APPROVED 2026-11-19):** ICE subroutines show an icon and a value; the full rule text is in a hover/focus tooltip. The NEXT RESPONSE strip and the passive strip keep full text, so every rule stays readable without hovering. See `REDLINE_ENCOUNTER_ANALOG.md` ยง7.
+
 - Mood is never shown by color alone: the face, the silhouette's corners and the wording change too.
 - Text contrast at least 4.5:1 (rule chips are toner/highlighter or paper/toner).
 - The rules are always readable as text in the scan tag and response strip; the mascot is never the only place a rule appears.
