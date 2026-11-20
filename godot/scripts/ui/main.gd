@@ -464,8 +464,8 @@ func _on_ice_clicked(i: int) -> void:
 	targeting = -1
 	refresh()
 
-func _on_break(i: int, s: int) -> void:
-	g.break_sub(i, s)
+func _on_break(i: int, s: int, pick_uid: int = -1) -> void:
+	g.break_sub(i, s, pick_uid)
 	refresh()
 
 # =====================================================================

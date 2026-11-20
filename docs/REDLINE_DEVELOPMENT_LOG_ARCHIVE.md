@@ -2167,3 +2167,17 @@ Added a local, clearable play profile and the Ads that know you switch. Loading 
 **Interpretations to confirm:** the ad and record-edit wording is working copy, detailed ads start after two runs, and graft selection uses the first available part in the authored order. The LUCIDA fixture uses a controlled HALCYON encounter with the corporation flag set to LUCIDA, pending a playable route. PATCHWORK and in-progress run saves are absent from this slice. The graft fixture calls the upgrade hook directly and round-trips its deck data.
 
 **Validation:** 361 rules checks, 14 Phase 3 fixture checks and 607 Phase 2 fixture checks passed.
+
+## 2026-11-18 — SIGNAL-001, ARCH-001 and ADP-4a (Codex)
+
+Added fixed 12 × 8 punch-card patterns, the taped holder and stacked-card viewer. A final-layer BREACH on a tagged Central Node awards its corporation's card once per run and plays the arrival with NUL/REM's EV-33. The presentation snapshot round-trips punch cards and instance grafts. The copy guard requires all three distinct cards for reveal-tagged lines.
+
+The defeat screen holds on an empty workstation with the approved relocation copy and programme. THE CARBON follows with the Rustler, issue, corporation, Node, date and struck-out island name. The record stays local and is clearable from settings. DEAD DROP in the run menu opens the same ledger, which is also accessible from the slice's SAFEHOUSE.
+
+Synced ARCH-SLANG-001 and ZINE-003 from main during the build. Underworld copy uses ’Pelago. The guard rejects the full word and banned wording on screen, either spelling of the shortened name in corporate or rules copy, and untagged island-purpose lines. THE CARBON uses Special Elite, marker corrections, cut-out type and pocket wear confined to the paper margins. ADP-4a adds the punch cards, relocation, defeat page and DEAD DROP ledger captures and refreshes the Phase 2–3 fixtures. The bleed sweep audio is in the Phase 1 fixture set.
+
+**Interpretations to confirm:** the stacked holes make a temporary diamond, `central: true` marks a Central Node, and the arrival slides the card past a slot in a reserved HUD panel. The relocation notice advances with a button in either motion mode. END RUN counts as a defeat, as it does in Game. Working island names and the CARBON title remain marked proposed. SAMIZINE uses copy 2 for the defeat page and copy 4 for the archive, with static decorations. The LUCIDA edit fixture now uses the controlled INTAKE scene from the facade fixture. The HALCYON route ends before a playable Central Node and has no full in-progress save/resume. The arrival fixture appoints a stand-in Node without altering the map.
+
+**Validation:** Godot 4.3 passed 361 rules checks, 17 bleed math checks, 671 SIGNAL/CARBON and copy guard checks, 615 ADP fixture checks, 14 Phase 3 fixture checks, 22 SIGNAL/CARBON fixture checks, and 173 Friendly Lie checks. Chrome and facade display fixtures passed.
+
+LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — VIS-001b: encounter scaffold and paper hand (Codex), 2026-11-17 — VIS-001c: mascot silhouettes and independent scan tags (Codex), 2026-11-17 — VIS-001d: per-ICE mood ladder and threat wording (Codex), 2026-11-17 — VIS-001e: Cracking, strike disclosure and Mask off (Codex).

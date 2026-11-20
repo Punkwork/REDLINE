@@ -85,6 +85,18 @@ func run() -> void:
 	check(keys().any(func(k): return k.state == "broken"), "a broken key shows")
 	check_keys("cracking")
 	await snapshot("ICE-ANALOG-001_04_cracking")
+	# ENC-CONCEPT-001 program screen: one program on the CRT, ◀ ▶ rotate, +STR boosts the one shown.
+	var f = main.friendly
+	check(f.program_slots.get_child_count() == 1 and g.installed.size() == 2, "CRT shows one of two installed programs")
+	var shown: int = f.active_program
+	(f.find_child("NextProgram", true, false) as Button).pressed.emit(); await settle()
+	check(f.active_program != shown, "▶ brings the other program to the screen")
+	var boost: Button = f.find_child("BoostButton", true, false)
+	var entry: Dictionary = g._installed_entry(f.active_program); var str_before: int = g.pick_str(entry); g.bw = 6
+	main.refresh(); await settle(); boost = f.find_child("BoostButton", true, false)
+	boost.pressed.emit(); await settle()
+	check(g.pick_str(g._installed_entry(f.active_program)) > str_before, "+STR raises the shown Icepick's STR")
+	await snapshot("ENC-CONCEPT-001_07_program_screen")
 	# Mask off: two strikes bring HOUSE CALL in as a third ICE.
 	g.add_trace(40, false); main.friendly.dismiss_strike(); g.add_trace(40, false); main.refresh(); await settle()
 	check(g.enc.ice.size() == 3, "Black ICE joins (3 ICE)")

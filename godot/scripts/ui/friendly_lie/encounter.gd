@@ -33,6 +33,11 @@ var deck_count: Label
 var discard_count: Label
 var legend: Control
 var key_u := 1.0
+## ENC-CONCEPT-001 program screen: the CRT shows one installed program at a time (the active one);
+## ◀ ▶ (or the mouse wheel) rotate through the rig. A newly installed program becomes active.
+var active_program := -1
+var known_programs: Array = []
+var program_connector: Control
 const CONSOLE_OVERLAP := -14   # the mascot peeks over the console's top edge
 ## Graffiti lands in free margins: under the Program Bay and under the TRACE panel.
 ## ENC-CONCEPT-001: graffiti goes on the decal plate in the top bar, between the node plate and the corporate sign.
@@ -200,18 +205,23 @@ func _ready() -> void:
   at(program_bay, crt_screen, Vector2(25,28), Vector2(188,154))
   crt_picture = TextureRect.new(); crt_picture.name = "CrtPicture"; crt_picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; crt_picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
   crt_picture.mouse_filter = Control.MOUSE_FILTER_IGNORE; crt_picture.modulate = Color(1, 1, 1, 0.8); at(crt_screen, crt_picture, Vector2.ZERO, Vector2(188, 154))
+  var scrim := ColorRect.new(); scrim.name = "ProgramScrim"; scrim.color = Color(0.02, 0.06, 0.05, 0.72); scrim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  at(crt_screen, scrim, Vector2(2, 34), Vector2(184, 118))   # keeps the program readout off the skyline
  else:
   at(program_bay, crt_screen, Vector2(8,8), Vector2(208,224))
  var on_crt := painted("UI_CRT_MONITOR") != null
- var crt_l := [Vector2(8,3), Vector2(172,30), 32.0, Vector2(8,34), Vector2(6,48), Vector2(176,66), Vector2(6,120), Vector2(176,28)] if on_crt else [Vector2(14,6), Vector2(184,50), 58.0, Vector2(14,62), Vector2(10,80), Vector2(188,102), Vector2(10,186), Vector2(188,30)]
+ var crt_l := [Vector2(8,3), Vector2(172,30), 32.0, Vector2(8,34), Vector2(6,36), Vector2(176,116), Vector2(6,120), Vector2(176,28)] if on_crt else [Vector2(14,6), Vector2(184,50), 58.0, Vector2(14,62), Vector2(10,80), Vector2(188,102), Vector2(10,186), Vector2(188,30)]
  crt_status = FriendlyLook.label("", 11 if on_crt else 12, CRT_INK, console_font(2)); at(crt_screen, crt_status, crt_l[0], crt_l[1])
  crt_screen.draw.connect(func():
   for y in range(6, 220, 4): crt_screen.draw_line(Vector2(6, y), Vector2(202, y), Color(0.45, 1, 0.75, 0.035), 1)
   crt_screen.draw_line(Vector2(8, crt_l[2]), Vector2(crt_screen.size.x - 8, crt_l[2]), Color(CRT_INK, 0.4), 1))
- at(crt_screen, FriendlyLook.label("PROGRAMS", 10 if on_crt else 12, CRT_INK, console_font(3)), crt_l[3])
+ if not on_crt: at(crt_screen, FriendlyLook.label("PROGRAMS", 12, CRT_INK, console_font(3)), crt_l[3])
  var program_scroll := ScrollContainer.new()
  program_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
  program_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+ program_scroll.gui_input.connect(func(e):
+  if e is InputEventMouseButton and e.pressed and e.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+   cycle_program(-1 if e.button_index == MOUSE_BUTTON_WHEEL_UP else 1); program_scroll.accept_event())
  at(crt_screen, program_scroll, crt_l[4], crt_l[5])
  program_slots = VBoxContainer.new()
  program_slots.name = "ProgramSlots"
@@ -220,6 +230,7 @@ func _ready() -> void:
  program_slots.add_theme_constant_override("separation", 8)
  program_scroll.add_child(program_slots)
  var connector := FriendlyLook.panel(Color("#14302A"), CRT_INK, 1, 6)
+ program_connector = connector
  connector.mouse_filter = Control.MOUSE_FILTER_IGNORE
  at(crt_screen, connector, crt_l[6], crt_l[7])
  at(connector, FriendlyLook.label("DROP PROGRAM HERE", 11 if on_crt else 12, CRT_INK, console_font(2)), Vector2(10,1))
@@ -369,14 +380,20 @@ func build_rig() -> void:
  clear(rig_row)
  clear(program_slots)
  rig_row.add_child(FriendlyLook.label("RACK · CHAIN " + ("/".join(game.enc.get("last_tags",[])) if not game.enc.get("last_tags",[]).is_empty() else "—"), 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
- for p in game.installed:
+ sync_active_program()
+ if program_connector: program_connector.visible = game.installed.is_empty()
+ var shown := game.installed.filter(func(q): return q.inst.uid == active_program)
+ for p in shown:
   var id: String = p.inst.id
   var uid: int = p.inst.uid
   var d := CardDB.def(id)
   var slot := VBoxContainer.new()
+  slot.name = "ActiveProgram"
   slot.mouse_filter = Control.MOUSE_FILTER_PASS
+  slot.add_theme_constant_override("separation", 3)
   program_slots.add_child(slot)
 
+  # 0: the program's name plate; an Icepick's plate is what you drag onto a key.
   var chip: Button
   if d.has("pick"):
    var pick := FriendlyRigChip.new()
@@ -387,39 +404,90 @@ func build_rig() -> void:
    chip = pick
   else:
    chip = FriendlyLook.button(d.name, Callable(), FriendlyLook.TONER, FriendlyLook.PAPER)
-  chip.text = d.name
+  chip.text = ("✥ " if d.has("pick") else "") + d.name
   chip.clip_text = true
   chip.mouse_filter = Control.MOUSE_FILTER_STOP
   chip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+  chip.custom_minimum_size.y = 24
   chip.add_theme_font_size_override("font_size", 13)
   crt_chip(chip)
-  chip.tooltip_text = game.card_text(id)
+  chip.tooltip_text = (("Drag onto a subroutine key to break it.\n") if d.has("pick") else "") + game.card_text(id)
   chip.pressed.connect(func(): ui.toggle_card_inspection(id, uid))
   chip.mouse_entered.connect(func(): ui.hover_program(id))
   chip.mouse_exited.connect(func(): ui.leave_program())
   slot.add_child(chip)
 
+  # 1: what it does, in big type.
+  if d.has("pick"):
+   var row := HBoxContainer.new(); row.mouse_filter = Control.MOUSE_FILTER_IGNORE; slot.add_child(row)
+   var str_label := FriendlyLook.label("STR %d" % game.pick_str(p), 20, CRT_INK, CONDENSED); str_label.name = "ProgramStr"; row.add_child(str_label)
+   var breaks := FriendlyLook.label("breaks\n" + String(d.pick.itype), 10, Color(CRT_INK, 0.85), console_font(2)); breaks.size_flags_horizontal = Control.SIZE_EXPAND_FILL; breaks.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT; row.add_child(breaks)
+   slot.add_child(FriendlyLook.label("BREAK %d BW · BOOST +%d STR / %d BW" % [d.pick.break_cost, d.pick.boost_amt, d.pick.boost_cost], 10, CRT_INK, console_font(1)))
+  else:
+   var what := FriendlyLook.label(game.card_text(id), 10, CRT_INK, console_font(1)); what.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; what.custom_minimum_size = Vector2(170, 0); what.max_lines_visible = 3
+   slot.add_child(what)
+
+  # 2: actions — boost (Icepicks), uninstall-cache, unload.
   var controls := HBoxContainer.new()
   controls.mouse_filter = Control.MOUSE_FILTER_PASS
+  controls.add_theme_constant_override("separation", 4)
   slot.add_child(controls)
   if d.has("pick"):
-   var stats := FriendlyLook.label("STR %d · BOOST %d · BREAK %d" % [game.pick_str(p), d.pick.boost_cost, d.pick.break_cost], 10, FriendlyLook.PAPER)
-   slot.add_child(stats)
-   slot.move_child(stats, 1)
-   var boost := FriendlyLook.button("+STR", func(): game.boost_pick(uid); ui.refresh())
-   boost.tooltip_text = "Boost %d BW · Break %d BW" % [d.pick.boost_cost, d.pick.break_cost]
+   var chk := game.can_boost(uid)
+   var boost := FriendlyLook.button("+STR  · %d BW" % chk.cost, func(): game.boost_pick(uid); ui.refresh())
+   boost.name = "BoostButton"
+   boost.disabled = not chk.ok
+   boost.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+   boost.tooltip_text = "Raise this Icepick's STR by %d for the rest of the encounter." % d.pick.boost_amt
+   crt_action(boost)
    controls.add_child(boost)
   elif d.get("uninstall_cache", false):
    var cache_action := FriendlyLook.button("UNINSTALL 1 BW", func(): game.uninstall_cache(uid); ui.refresh())
    cache_action.name = "SmashGrabCache"
    cache_action.disabled = game.bw < 1 or game.hand.is_empty()
+   cache_action.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+   crt_action(cache_action)
    controls.add_child(cache_action)
-  controls.add_child(FriendlyLook.button("×", func(): game.unload(uid); ui.leave_program(); ui.refresh(), FriendlyLook.PAPER))
-  for control in controls.get_children():
-   control.mouse_filter = Control.MOUSE_FILTER_PASS
+  else:
+   var spacer := Control.new(); spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL; spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE; controls.add_child(spacer)
+  var unload := FriendlyLook.button("×", func(): game.unload(uid); ui.leave_program(); ui.refresh(), FriendlyLook.PAPER)
+  unload.name = "UnloadButton"; unload.tooltip_text = "Unload this program"; unload.custom_minimum_size = Vector2(26, 0); crt_action(unload)
+  controls.add_child(unload)
+
+  # 3: ◀ n/N ▶ when more than one program is installed.
+  if game.installed.size() > 1:
+   var nav := HBoxContainer.new(); nav.name = "ProgramNav"; nav.mouse_filter = Control.MOUSE_FILTER_PASS; slot.add_child(nav)
+   var prev := FriendlyLook.button("◀", func(): cycle_program(-1)); prev.name = "PrevProgram"; prev.custom_minimum_size = Vector2(34, 22); crt_action(prev); nav.add_child(prev)
+   var index := game.installed.find(p)
+   var count := FriendlyLook.label("PROGRAM %d / %d" % [index + 1, game.installed.size()], 10, CRT_INK, console_font(2)); count.size_flags_horizontal = Control.SIZE_EXPAND_FILL; count.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; nav.add_child(count)
+   var next := FriendlyLook.button("▶", func(): cycle_program(1)); next.name = "NextProgram"; next.custom_minimum_size = Vector2(34, 22); crt_action(next); nav.add_child(next)
  for c in game.rack:
   var d := CardDB.def(c.id)
   rig_row.add_child(FriendlyLook.button(d.name, func(): ui._show_inspect(c.id), FriendlyLook.TONER, FriendlyLook.PAPER))
+func sync_active_program() -> void:
+ var uids: Array = game.installed.map(func(q): return q.inst.uid)
+ for uid in uids:
+  if not known_programs.has(uid): active_program = uid   # a new install comes to the front
+ known_programs = uids
+ if not uids.has(active_program): active_program = int(uids[0]) if not uids.is_empty() else -1
+
+func cycle_program(step: int) -> void:
+ var uids: Array = game.installed.map(func(q): return q.inst.uid)
+ if uids.size() < 2: return
+ active_program = int(uids[(uids.find(active_program) + step + uids.size()) % uids.size()])
+ ui.leave_program(); build_rig()
+
+func active_pick() -> int:
+ ## The active program's uid when it is an Icepick, else -1.
+ var p: Dictionary = game._installed_entry(active_program)
+ return active_program if not p.is_empty() and CardDB.def(p.inst.id).has("pick") else -1
+
+func crt_action(button: Button) -> void:
+ ## A phosphor-green CRT button: dark glass, bright ink, readable when disabled.
+ crt_chip(button)
+ button.add_theme_font_size_override("font_size", 12)
+ button.add_theme_color_override("font_disabled_color", Color(CRT_INK, 0.45))
+
 func build_ice() -> void:
  ice_scroll.position.x = ICE_X
  mascots.clear()
@@ -508,12 +576,19 @@ func click_ice(i: int) -> void:
 func break_info(i: int, sub: int) -> Dictionary:
  if game.phase == "CHOICE" and game.pending.get("kind") == "card_break": return {"ok": game.card_break_ok(i,sub), "reason": "normal break limits", "cost": 0}
  if game.phase != "PLAYER": return {"ok": false, "reason": "Not your turn", "cost": 0}
+ # Clicking a key uses the program on the screen; if it can't, the cheapest Icepick that can.
+ var pick := active_pick()
+ if pick >= 0:
+  var mine := game.break_info(i,sub,pick)
+  if mine.ok: return mine
  return game.break_info(i,sub)
 func break_action(i: int, sub: int) -> void:
  if game.phase == "CHOICE" and game.pending.get("kind") == "card_break": game.choose_sub(i,sub); ui.refresh()
  else:
   var ice: Dictionary=game.enc.ice[i]; var before: int=ice.break_progress[sub]; var cost: int=game.bw
-  ui._on_break(i,sub)
+  var info := break_info(i,sub)
+  if info.get("ok", false) and info.has("uid"): active_program = int(info.uid)
+  ui._on_break(i,sub,int(info.get("uid",-1)))
   if ice.break_progress[sub]>before: show_break_feedback(ice,sub,cost-game.bw)
 func mood_for(i: int) -> String:
  if game.enc.get("breached",false): return "knocked_out"
@@ -923,6 +998,9 @@ func show_key_tip(i: int, s: int, anchor: Rect2) -> void:
  if not ice.broken[s] and ice.seen[s]:
   var info := break_info(i,s)
   var text := ("Break: %s" % ("free" if int(info.get("cost",0))==0 else "%d BW" % info.cost)) if info.ok else "Break: " + String(info.get("reason","not now"))
+  if info.ok and info.has("uid"):
+   var used: Dictionary = game._installed_entry(int(info.uid))
+   if not used.is_empty(): text += " with " + CardDB.def(used.inst.id).name + (" (+%d boost)" % info.boosts if int(info.get("boosts",0)) > 0 else "")
   var passive := String(d.get("passive",""))
   if info.ok and passive=="TRIPWIRE": text += " · +1 TRACE (TRIPWIRE)"
   if info.ok and info.has("margin"): text += " · margin %d" % info.margin

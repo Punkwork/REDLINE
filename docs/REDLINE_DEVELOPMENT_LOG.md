@@ -4,19 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — SIGNAL-001, ARCH-001 and ADP-4a (Codex)
-
-Added fixed 12 × 8 punch-card patterns, the taped holder and stacked-card viewer. A final-layer BREACH on a tagged Central Node awards its corporation's card once per run and plays the arrival with NUL/REM's EV-33. The presentation snapshot round-trips punch cards and instance grafts. The copy guard requires all three distinct cards for reveal-tagged lines.
-
-The defeat screen holds on an empty workstation with the approved relocation copy and programme. THE CARBON follows with the Rustler, issue, corporation, Node, date and struck-out island name. The record stays local and is clearable from settings. DEAD DROP in the run menu opens the same ledger, which is also accessible from the slice's SAFEHOUSE.
-
-Synced ARCH-SLANG-001 and ZINE-003 from main during the build. Underworld copy uses ’Pelago. The guard rejects the full word and banned wording on screen, either spelling of the shortened name in corporate or rules copy, and untagged island-purpose lines. THE CARBON uses Special Elite, marker corrections, cut-out type and pocket wear confined to the paper margins. ADP-4a adds the punch cards, relocation, defeat page and DEAD DROP ledger captures and refreshes the Phase 2–3 fixtures. The bleed sweep audio is in the Phase 1 fixture set.
-
-**Interpretations to confirm:** the stacked holes make a temporary diamond, `central: true` marks a Central Node, and the arrival slides the card past a slot in a reserved HUD panel. The relocation notice advances with a button in either motion mode. END RUN counts as a defeat, as it does in Game. Working island names and the CARBON title remain marked proposed. SAMIZINE uses copy 2 for the defeat page and copy 4 for the archive, with static decorations. The LUCIDA edit fixture now uses the controlled INTAKE scene from the facade fixture. The HALCYON route ends before a playable Central Node and has no full in-progress save/resume. The arrival fixture appoints a stand-in Node without altering the map.
-
-**Validation:** Godot 4.3 passed 361 rules checks, 17 bleed math checks, 671 SIGNAL/CARBON and copy guard checks, 615 ADP fixture checks, 14 Phase 3 fixture checks, 22 SIGNAL/CARBON fixture checks, and 173 Friendly Lie checks. Chrome and facade display fixtures passed.
-
-LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — VIS-001b: encounter scaffold and paper hand (Codex), 2026-11-17 — VIS-001c: mascot silhouettes and independent scan tags (Codex), 2026-11-17 — VIS-001d: per-ICE mood ladder and threat wording (Codex), 2026-11-17 — VIS-001e: Cracking, strike disclosure and Mask off (Codex).
 ## 2026-11-18 — ZINE-003 confirmed (Claude)
 
 Designer: "Yes all approved." Closes the interpretations in the ZINE-003 entry: the SAMIZINE look is approved, and it applies to in-world underworld publications and the THE CARBON pages (defeat screen, DEAD DROP record), not the HUD (RUSTLER-LOOK-001). **Code changes:** none. **Tests:** none.
@@ -597,3 +584,11 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 ## 2026-11-20 — RELEASE-001: HALCYON Playtest 7 (Claude)
 
 Designer asked for a playable build of the concept-2 layout. Bumped the version to 0.7.0-playtest.7 (project version, selection-screen line, workflow artifact name, playtest guide) in `5bb7d71`; ran test_game 369/0, test_adp 17/0 and test_signal_carbon 671/0 before committing. Fast-forwarded `release` to `5bb7d71`; [Actions run 44719708503](https://github.com/Punkwork/REDLINE/actions/runs/44719708503) passed every step and uploaded `PANOPTICON-HALCYON-PLAYTEST-7-0.7.0-playtest.7-Windows-x86_64` (95.8 MB). The `playtest-7` tag on `5bb7d71` still needs to be pushed: GitHub refused the tag push from this session (HTTP 403). The artifact could not be downloaded from this session, so its contents were checked through the workflow's own export checks rather than by hand.
+
+## 2026-11-20 — ENC-CONCEPT-001: program screen; mascot prompt for ACCEPT ALL / REJECT ALL (Claude)
+
+Designer, after Playtest 7: installed programs were unusable. A probe showed +STR did work, but the controls were tiny and crammed into a 66-px scroll over the CRT picture. Rebuilt the CRT readout as one active program (name plate to drag, STR, type, costs, +STR, ×, ◀ n/N ▶, mouse wheel), a dark scrim behind it, the "DROP PROGRAM HERE" plate only when nothing is installed, and key clicks that break with the program on screen first (`main._on_break` passes the pick uid to the existing `break_sub`). `shot_ice_analog` checks the rotate and +STR and captures the program screen. Wrote the batch-2a ChatGPT prompt for ACCEPT ALL and REJECT ALL in `ART_BRIEFS.md`.
+
+Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — SIGNAL-001, ARCH-001 and ADP-4a (Codex).
