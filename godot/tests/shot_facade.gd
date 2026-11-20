@@ -52,7 +52,7 @@ func check_plaques(view: FriendlyEncounter) -> float:
  for column in view.ice_row.get_children():
   var plaque: PanelContainer = column.get_child(1)
   var backing: StyleBoxFlat = plaque.get_theme_stylebox("panel")
-  check(backing.bg_color == view.skin.plaque_ground and backing.bg_color.a == 1.0, "plaque is solid corporate enamel")
+  check(backing.bg_color == view.console_ground() and backing.bg_color.a == 1.0, "plaque is solid corporate enamel")
   check(plaque.find_children("*", "TextureRect", true, false).is_empty(), "no art behind plaque text")
   check(plaque.size.x <= column.size.x + 1, "plaque fits the column")
   for label: Label in plaque.find_children("*", "Label", true, false):

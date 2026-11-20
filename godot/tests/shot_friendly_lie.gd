@@ -159,8 +159,9 @@ func run() -> void:
  var curve: Dictionary=g.ice_definition(g.enc.ice[0]).subs[2][0]
  var shown: String="PULP %d · RANDOM" % g.effect_value(g.enc.ice[0],curve).v
  check(main.friendly.effect_text(g.enc.ice[0],curve)==shown,"curve B publishes its next number on ICE")
- var response_text: Array=main.friendly.response.find_children("*","Label",true,false).map(func(label): return label.text)
- check(response_text.has(shown),"response strip publishes the same curve B number")
+ # ENC-CONCEPT-001: each ICE's NEXT RESPONSE plate carries its part of the response in words.
+ var response_text: Array=main.friendly.ice_row.find_children("NextResponse","PanelContainer",true,false).map(func(plate): return plate.get_child(0).text)
+ check(response_text.any(func(text): return text.contains(shown)),"NEXT RESPONSE plate publishes the same curve B number")
  main.set_reduced_motion(false)
  print("FRIENDLY LIE: %d checks, %d failures"%[checks,failures])
  main.voice.stop(); main.voice.stream=null
