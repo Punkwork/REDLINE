@@ -12,6 +12,8 @@ var just_broken := false
 var glow: Panel
 var applied_knockout := false
 var chrome: ChromeFrame
+## ENC-CONCEPT-001: painted character art (concept 2), when delivered for this ICE.
+var concept_art: TextureRect
 const WORDS := {
  "COOKIE_WALL": ["We use cookies to make your visit sweeter!", "You declined 2 cookies. Interesting.", "COOKIES ARE NOT OPTIONAL."],
  "CAPTCHA": ["Just one quick check!", "Hmm. Try that again.", "WRONG ANSWER."],
@@ -143,6 +145,7 @@ func setup(owner_view, i: int, state: String) -> void:
   if id!="AUTO_RENEW": place(FriendlyLook.panel(Color("#F2D77E"),Color.TRANSPARENT,0,6),Vector2(62,35),Vector2(35,26))
   place(FriendlyLook.label("•••• 4417",13,ink,view.skin.font),Vector2(62,147))
   var sticker := FriendlyLook.panel(FriendlyLook.RED if lethal else Color.WHITE,Color.TRANSPARENT,0,18)
+  sticker.name = "Sticker"
   place(sticker,Vector2(195,-4),Vector2(174,32))
   var words := "NO REFUNDS" if lethal else ("Renews next turn" if wary else "FREE for 30 days!")
   var sticker_text := FriendlyLook.label(words,13, FriendlyLook.TONER if lethal else view.skin.deep,view.skin.bold_font); sticker_text.position=Vector2(10,5); sticker.add_child(sticker_text)
@@ -208,6 +211,23 @@ func setup(owner_view, i: int, state: String) -> void:
   if done:
    action.modulate.a=0.85
   break # The primary button remains ticked when it drops out; further locks remain in the scan.
+ var art_mood := "lethal" if lethal else ("wary" if wary or mood == "knocked_out" else "cheery")
+ var art_path := "res://assets/concept/mascots/%s_%s.png" % [id, art_mood]
+ if ResourceLoader.exists(art_path):
+  # The painted character replaces the drawn appliance. The speech bubble and sticker stay;
+  # the shell's own DEADLOCK button goes, because the console's padlock key is that button now.
+  var sticker_node := get_node_or_null("Sticker")
+  for child in get_children():
+   if child != speech and child != sticker_node: child.visible = false
+  concept_art = TextureRect.new(); concept_art.name = "ConceptArt"; concept_art.texture = load(art_path)
+  concept_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; concept_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+  concept_art.mouse_filter = Control.MOUSE_FILTER_PASS
+  concept_art.position = Vector2(10, -64); concept_art.size = Vector2(294, 294); concept_art.pivot_offset = Vector2(147, 294)
+  concept_art.gui_input.connect(func(e):
+   if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: view.click_ice(index))
+  add_child(concept_art); move_child(concept_art, 0)
+  speech.position = Vector2(300, 6); speech.size = Vector2(176, 96); speech_copy.size = speech.size - Vector2(24, 18)
+  if sticker_node: sticker_node.position = Vector2(302, 112)
 
 func _ready() -> void:
  pivot_offset=Vector2(240,115)
@@ -240,6 +260,12 @@ func _process(delta: float) -> void:
  var direction := (target-face.get_global_rect().get_center())/Vector2(260,180) if target!=Vector2.INF else Vector2.ZERO
  face.look=Vector2(clampf(direction.x,-1,1),clampf(direction.y,-1,1))
  if view.reduced_motion: return
+ if is_instance_valid(concept_art):
+  # Painted characters can't move their eyes, so they lean toward what they watch and breathe.
+  concept_art.rotation = lerpf(concept_art.rotation, clampf(direction.x, -1.0, 1.0) * 0.07, 0.15)
+  var breathe := 1.0 + 0.012 * sin(clock * TAU / 2.6)
+  concept_art.scale = Vector2(2.0 - breathe, breathe)
+  if mood == "lethal": concept_art.position.x = 10.0 + sin(clock * 40.0) * 0.8
  var d: Dictionary = view.game.ice_definition(view.game.enc.ice[index])
  var bob := 0.0
  if mood=="cheery":

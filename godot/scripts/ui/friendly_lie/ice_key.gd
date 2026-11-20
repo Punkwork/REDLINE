@@ -61,7 +61,83 @@ func _box(r: Rect2, col: Color, radius: float, border: Color = Color.TRANSPARENT
 		sb.border_color = border; sb.set_border_width_all(int(bw))
 	draw_style_box(sb, r)
 
+const ART := "res://assets/concept/ui/"
+static var art_cache := {}
+
+static func art(name: String) -> Texture2D:
+	## ENC-CONCEPT-001 painted parts; null when a part hasn't been delivered (the vector look draws instead).
+	if not art_cache.has(name):
+		var path := ART + name + ".png"
+		art_cache[name] = load(path) if ResourceLoader.exists(path) else null
+	return art_cache[name]
+
 func _draw() -> void:
+	var cap := art("UI_KEY_READY")
+	if cap == null:
+		_draw_vector()
+		return
+	var kr := key_rect()
+	var c := kr.get_center()
+	var broken := state == "broken"
+	var hidden := state == "hidden"
+	var deadlock := kind == "DEADLOCK"
+	var cap_name := "UI_KEY_READY"
+	if hidden: cap_name = "UI_KEY_HIDDEN"
+	elif deadlock: cap_name = "UI_KEY_DEADLOCK_OPEN" if broken else "UI_KEY_DEADLOCK"
+	elif broken: cap_name = "UI_KEY_BROKEN"
+	elif state == "hit": cap_name = "UI_KEY_HIT"
+	elif state == "new": cap_name = "UI_KEY_TUMBLED"
+	if not small:
+		var lamp_name := "UI_KEY_LAMP_OFF"
+		if not broken and not hidden:
+			lamp_name = "UI_KEY_LAMP_RED" if state == "hit" else ("UI_KEY_LAMP_AMBER" if deadlock or locked or state == "new" else "UI_KEY_LAMP_GREEN")
+		var lamp := art(lamp_name)
+		if lamp: draw_texture_rect(lamp, Rect2(Vector2(c.x - 7, 0), Vector2(14, 14)), false)
+	if firing:
+		var a := 0.45 + 0.35 * sin(pulse * TAU * 2.0)
+		_box(kr.grow(4), Color(RED, 0.3 * a), 14)
+	if lit:
+		_box(kr.grow(6), Color.TRANSPARENT, 16, FOCUS, 2)
+	draw_texture_rect(art(cap_name), kr.grow(2), false)
+	var face := kr.grow(-kr.size.x * 0.16)
+	var light := deadlock or hidden
+	var icon_name := "ICON_HIDDEN" if hidden else ("ICON_DEADLOCK_OPEN" if deadlock and broken else ("ICON_" + kind))
+	var icon := art(icon_name + ("_LIGHT" if light else ""))
+	var with_value := value != "" and not small and not hidden
+	var tint := Color(1, 1, 1, 0.42 if broken and not deadlock else 1.0)
+	if icon:
+		var isz := face.size.y * (0.52 if with_value else 0.72)
+		var ic := c + (Vector2(0, -face.size.y * 0.17) if with_value else Vector2.ZERO)
+		draw_texture_rect(icon, Rect2(ic - Vector2(isz, isz) / 2.0, Vector2(isz, isz)), false, tint)
+	else:
+		_icon(kind, c + (Vector2(0, -face.size.y * 0.17) if with_value else Vector2.ZERO), face.size.y * (0.22 if with_value else 0.3), Color(INK, tint.a))
+	if with_value:
+		var fs := 24 if value.length() <= 2 else 18
+		var tw := FONT.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
+		draw_string(FONT, Vector2(c.x - tw.x / 2.0, face.end.y + 3), value, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(CREAM_INK if light else INK, tint.a))
+	if broken and not deadlock:
+		draw_line(face.position + Vector2(4, face.size.y - 4), face.position + Vector2(face.size.x - 4, 4), Color(INK, 0.8), 3.0, true)
+	if not small and (badge != "" or locked):
+		var bp := kr.position + Vector2(kr.size.x - 3, 3)
+		var bi := art("ICON_BOOTING_LIGHT") if locked else null
+		draw_circle(bp, 10.0, Color("#2E2016"))
+		if bi: draw_texture_rect(bi, Rect2(bp - Vector2(7, 7), Vector2(14, 14)), false)
+		else: _badge(bp)
+	if extra > 0 and not small:
+		var p := kr.position + Vector2(3, kr.size.y - 3)
+		draw_circle(p, 9.0, INK)
+		draw_string(FONT, p + Vector2(-7, 5), "+%d" % extra, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, FACE)
+	if cost != "" and not small:
+		var chip := Rect2(Vector2(size.x / 2.0 - 26, kr.end.y + 4), Vector2(52, CHIP_H + 1))
+		var chip_art := art("UI_BW_CHIP")
+		if chip_art: draw_texture_rect(chip_art, chip, false)
+		else: _box(chip, Color("#2E2016"), 9)
+		var cw := FONT_SEMI.get_string_size(cost, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
+		draw_string(FONT_SEMI, Vector2(chip.get_center().x - cw / 2.0, chip.position.y + 14), cost, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("#F4ECDA") if cost != "—" else Color("#B8A890"))
+
+const CREAM_INK := Color("#F6EEDC")
+
+func _draw_vector() -> void:
 	var kr := key_rect()
 	var c := kr.get_center()
 	var rad := 7.0 if small else 12.0

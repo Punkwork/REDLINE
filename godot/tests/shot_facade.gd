@@ -52,20 +52,19 @@ func check_plaques(view: FriendlyEncounter) -> float:
  for column in view.ice_row.get_children():
   var plaque: PanelContainer = column.get_child(1)
   var backing: StyleBoxFlat = plaque.get_theme_stylebox("panel")
+  # ENC-CONCEPT-001: with the painted console the panel shows through; console_ground() is that paint.
   check(backing.bg_color == view.console_ground() and backing.bg_color.a == 1.0, "plaque is solid corporate enamel")
   check(plaque.find_children("*", "TextureRect", true, false).is_empty(), "no art behind plaque text")
   check(plaque.size.x <= column.size.x + 1, "plaque fits the column")
   for label: Label in plaque.find_children("*", "Label", true, false):
    var bg := backing.bg_color
    if label.get_parent() is PanelContainer:
-    var chip: StyleBoxFlat = label.get_parent().get_theme_stylebox("panel")
-    bg = chip.bg_color
+    bg = FriendlyEncounter.style_ground(label.get_parent().get_theme_stylebox("panel"))
    minimum = minf(minimum, contrast(label.get_theme_color("font_color"), bg, scrim))
   for button: Button in plaque.find_children("*", "Button", true, false):
    var state := "disabled" if button.disabled else "normal"
-   var box: StyleBoxFlat = button.get_theme_stylebox(state)
    var ink := button.get_theme_color("font_disabled_color" if button.disabled else "font_color")
-   minimum = minf(minimum, contrast(ink, box.bg_color, scrim))
+   minimum = minf(minimum, contrast(ink, FriendlyEncounter.style_ground(button.get_theme_stylebox(state)), scrim))
  check(minimum >= 4.5, "minimum plaque contrast %.2f:1" % minimum)
  return minimum
 

@@ -3,8 +3,14 @@ extends Control
 ## Paper UI only. Playing a card always goes through the existing Game API.
 const CARD_SIZE:=Vector2(164,244)
 const PHYSICAL_RECT:=Rect2(-10,-12,184,268)
-## CARDS-004: cards are shown at 1.4x (230 x 342) in the hand, offers, choices and inspection.
-const DISPLAY_SCALE := 1.4
+## CARDS-004 showed cards at 1.4x. ENC-CONCEPT-001: the white concept cards are "a little bit
+## smaller" (designer), so the hand shows them at printed size; the CARDS-004 fan rules stay.
+const DISPLAY_SCALE := 1.0
+## The concept face sits on the printed card at this rect (frame art is 5:7).
+const CONCEPT_RECT := Rect2(0, 7, 164, 230)
+## Fixtures for the retired CARDS-001 cartridge face set this to keep checking that code path.
+static var legacy_face := false
+var concept := false
 
 ## A layout holder so containers reserve room for a card shown at DISPLAY_SCALE.
 static func framed(card: Control) -> Control:
@@ -539,6 +545,10 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  # Rules too long for the face (compiled cards): the face names the cards; hover shows the full text.
  summary_rules = not corp and glow_rules_size(rule, lay.rules.size, rules_bold) == 0
  body = Control.new(); body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); body.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(body)
+ var concept_frame := "res://assets/concept/cards/CARD_FRAME_%s.png" % d.type
+ if not legacy_face and ResourceLoader.exists(concept_frame):
+  build_concept_face(d, id, rule, corp, rarity, load(concept_frame))
+  return
  var shell:=TextureRect.new(); shell.name="SlotCartridge"; shell.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; shell.texture=load("res://assets/friendly_lie/cartridges/"+d.type.to_lower()+".png"); shell.stretch_mode=TextureRect.STRETCH_SCALE; shell.position=PHYSICAL_RECT.position; shell.size=PHYSICAL_RECT.size; shell.mouse_filter=Control.MOUSE_FILTER_IGNORE; body.add_child(shell)
  # Rustler boards: laminate with silkscreen and holes around the perimeter.
  if BOARD_RECT.has(d.type):
@@ -735,6 +745,15 @@ func add_graft_art(graft: String, bounds: Rect2) -> void:
  body.add_child(overlay)
 
 func _draw() -> void:
+ if concept:
+  var face := CONCEPT_RECT
+  draw_rect(Rect2(face.position + Vector2(3, 5), face.size), Color(0, 0, 0, 0.35))
+  if uid>=0 and (z_index==100 or view.ui.targeting==uid): draw_rect(face.grow(3), FriendlyLook.HIGHLIGHT, false, 3)
+  if placeholder:
+   for edge in [[face.position, Vector2(face.end.x, face.position.y)], [Vector2(face.end.x, face.position.y), face.end], [face.end, Vector2(face.position.x, face.end.y)], [Vector2(face.position.x, face.end.y), face.position]]:
+    draw_dashed_line(edge[0], edge[1], Color("#F4ECDA"), 2, 7)
+  elif is_instance_valid(body): body.move_to_front()
+  return
  draw_rect(Rect2(Vector2(4,22),size-Vector2(0,18)),FriendlyLook.TONER)
  if uid>=0 and (z_index==100 or view.ui.targeting==uid): draw_rect(PHYSICAL_RECT.grow(2),FriendlyLook.HIGHLIGHT,false,3)
  if placeholder:
@@ -769,3 +788,80 @@ func _notification(what: int) -> void:
 func _has_point(point: Vector2) -> bool:
  # Components and the BW tab are interactive even where they protrude beyond the label body.
  return PHYSICAL_RECT.has_point(point)
+
+## ENC-CONCEPT-001 (concept 2): a white card with the name in the title band and a small bright
+## picture; the full rules show on hover. Frames and pictures are ChatGPT art (ART_BRIEFS.md §3).
+func build_concept_face(d: Dictionary, id: String, rule: String, corp: bool, rarity: String, frame_tex: Texture2D) -> void:
+ concept = true
+ var k := CONCEPT_RECT.size.x / 600.0
+ var frame := TextureRect.new(); frame.name = "ConceptFrame"; frame.texture = frame_tex
+ frame.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; frame.stretch_mode = TextureRect.STRETCH_SCALE; frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ frame.position = CONCEPT_RECT.position; frame.size = CONCEPT_RECT.size; body.add_child(frame)
+ # The frame's picture window: x40–560, y165–680 of 600 x 840.
+ var window := Rect2(CONCEPT_RECT.position + Vector2(40, 165) * Vector2(k, CONCEPT_RECT.size.y / 840.0), Vector2(520, 515) * Vector2(k, CONCEPT_RECT.size.y / 840.0))
+ var clip := Control.new(); clip.name = "PictureWindow"; clip.clip_contents = true; clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ clip.position = window.position; clip.size = window.size; body.add_child(clip)
+ var picture_path := "res://assets/concept/cards/%s.png" % id
+ var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
+ if ResourceLoader.exists(picture_path):
+  var picture := TextureRect.new(); picture.name = "Picture"; picture.texture = load(picture_path)
+  picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED; picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  picture.position = Vector2.ZERO; picture.size = window.size; clip.add_child(picture)
+ else:
+  # No picture yet: the type's circuit stencil on a tint of the frame colour.
+  var tint := ColorRect.new(); tint.color = glow_mask(d.type).lerp(Color.WHITE, 0.15); tint.size = window.size; tint.mouse_filter = Control.MOUSE_FILTER_IGNORE; clip.add_child(tint)
+  if not corp:
+   var stencil := CircuitStencil.new(); stencil.name = "CircuitStencil"; stencil.kind = d.type; stencil.size = window.size; stencil.mouse_filter = Control.MOUSE_FILTER_IGNORE; clip.add_child(stencil)
+ if graft in Game.GRAFT_PARTS: add_graft_art(graft, window)
+ # Name in the title band, beside the cost.
+ var title_font: Font = preload("res://assets/fonts/BarlowCondensed-Bold.ttf")
+ var title := FriendlyLook.label(d.name.to_upper(), 18, Color("#1F1A14"), title_font)
+ title.name = "ConceptTitle"; title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+ var title_rect := Rect2(CONCEPT_RECT.position + Vector2(24, 3), Vector2(CONCEPT_RECT.size.x - 32, 38))
+ var px := 18
+ while px > 10 and title_font.get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, title_rect.size.x, px).y > title_rect.size.y: px -= 1
+ title.add_theme_font_size_override("font_size", px); title.position = title_rect.position; title.size = title_rect.size; body.add_child(title)
+ # BW cost in the frame's corner circle (CARDS-004a: top left).
+ var dial := Panel.new(); dial.name = "CostDial"; dial.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ var dial_style := StyleBoxFlat.new(); dial_style.bg_color = Color("#1F1A14"); dial_style.set_corner_radius_all(12); dial_style.border_color = Color("#C9B796"); dial_style.set_border_width_all(2)
+ dial.add_theme_stylebox_override("panel", dial_style); dial.position = Vector2(-4, 0); dial.size = Vector2(26, 26); body.add_child(dial)
+ var cost_text := "—" if d.get("unplayable", false) else (str(view.game.card_cost(id)) if uid >= 0 else str(d.bw))
+ var cost := FriendlyLook.label(cost_text, 16, Color.WHITE, title_font); cost.name = "Cost"
+ cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; cost.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; cost.position = dial.position; cost.size = dial.size; body.add_child(cost)
+ # Type line and CARDS-005 corner icons along the bottom strip.
+ var strip_y := CONCEPT_RECT.position.y + 690.0 * CONCEPT_RECT.size.y / 840.0
+ var stamp := " · ".join([d.type] + ([view.skin.corporation] if corp else Array(d.tags)))
+ var type_line := FriendlyLook.label(stamp, 9, Color("#5A4A3A"), preload("res://assets/fonts/BarlowCondensed-SemiBold.ttf")); type_line.name = "TypeStamp"
+ type_line.clip_text = true; type_line.position = Vector2(CONCEPT_RECT.position.x + 10, strip_y + 4); type_line.size = Vector2(90, 14); body.add_child(type_line)
+ var icons := corner_icons(d)
+ for i in icons.size():
+  var chip := CornerChip.new(); chip.name = "Corner" + str(icons[i][0]).capitalize(); chip.kind = icons[i][0]; chip.value = icons[i][1]
+  chip.size = Vector2(18, 18); chip.position = Vector2(CONCEPT_RECT.end.x - 8 - (i + 1) * 20, strip_y + 1)
+  chip.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(chip)
+ if RarityLight.LAMPS.has(rarity):
+  var lamp := RarityLight.new(); lamp.name = "TopRarityLight"; lamp.tier = rarity; lamp.size = Vector2(37, 8)
+  lamp.position = Vector2(CONCEPT_RECT.get_center().x - 18, CONCEPT_RECT.end.y - 9); lamp.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(lamp)
+ var cached: Dictionary = view.game._find(view.game.hand, uid)
+ var is_cached: bool = cached.get("cached", false)
+ if is_cached:
+  var edge := CacheEdgeGlow.new(); edge.name = "CacheEdgeGlow"; edge.position = CONCEPT_RECT.position; edge.size = CONCEPT_RECT.size; edge.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(edge)
+ # The rules: always one hover away (the face carries only the name and picture).
+ var normal_font: Font = view.skin.font if corp else preload("res://assets/fonts/Barlow-SemiBold.ttf")
+ var rules_bold: Font = view.skin.bold_font if corp else preload("res://assets/fonts/Barlow-Bold.ttf")
+ full_rules = build_full_rules_panel(rule, glow_mask(d.type), normal_font, rules_bold)
+ full_rules.top_level = true; full_rules.z_index = 200; full_rules.visible = false; add_child(full_rules)
+ summary_rules = true
+ tooltip_text = d.name + " · " + d.type + " · " + rarity
+ var icon_legend := corner_legend(icons)
+ if not icons.is_empty(): tooltip_text += "\n" + icon_legend
+ if is_cached: tooltip_text += "\nCACHED" + (" (temporary)" if cached.has("cache_turns") else "")
+ if uid >= 0:
+  var chk: Dictionary = view.game.can_play(uid)
+  if not chk.ok: tooltip_text += "\n" + chk.reason
+  mouse_entered.connect(func(): view.hover_uid = uid; view.hand.focus_card(self))
+  mouse_exited.connect(func(): view.hover_uid = -1; view.hand.release_card(self))
+ mouse_entered.connect(show_full_rules)
+ mouse_exited.connect(func(): full_rules.visible = false)
+ gui_input.connect(_card_input)
+ queue_redraw()

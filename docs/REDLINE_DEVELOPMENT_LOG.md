@@ -4,20 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — ARCH-LINES-001: relocation lines and programme names approved (Claude)
-
-Designer left the relocation lines to Claude's discretion ("generate a number of them, let's say 10 or 15, and I will review and approve"), then approved all 15 and the proposal to keep the first-draft names as programme small print ("Perfect- add them"). `REDLINE_ARCHIPELAGO.md` v0.4 §4.0: 15 numbered lines, five per corporation; small print *Halcyon Homesteads™*, *SafeHarbor Residences™*, *Long Rest Retreats™* under the generic island names; the defeat notice uses one approved line. Master design and HANDOFF updated (commit 7eeb5a7); the island name pool and anti-paper lines are still waiting. **Interpretations to confirm:** "Perfect- add them" read as approving both the 15 lines and the programme names; the small-print wording (community / property / home). **Code changes:** none. **Tests:** none.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex).
-
-## 2026-11-18 — ARCH-SLANG-001: the Rustlers say ’Pelago (Claude)
-
-Designer: "In all Rustler references to the archipelago should be written as pelago with an apostrophe before the P." `REDLINE_ARCHIPELAGO.md` v0.5: tone rule 6; every on-screen Rustler/underworld reference (THE CARBON, *NOTES FROM THE ’PELAGO*, NUL/REM, graffiti, map, reveal) uses ’Pelago with U+2019; the full word stays in docs only; ARCH-1c guards updated (no "Archipelago" on screen; no "’Pelago" in corporate or rules strings). Master design and HANDOFF updated; the SAMIZINE design canvas updated to match. **Interpretations to confirm:** the full word never appears on screen, the reveal included. **Code changes:** none. **Tests:** none.
-
-## 2026-11-18 — ARCH-SLANG-001 confirmed: ’Pelago even at the end (Claude)
-
-Designer: "Don't use the term archipelago, except in game documents. Pelago is the official in-game terminology to be used even at the very end." Closes the interpretation from the previous entry: the reveal says ’Pelago too. `REDLINE_ARCHIPELAGO.md` rule 6 and §6, and the master design, updated. **Code changes:** none. **Tests:** none.
-
 ## 2026-11-18 — ZINE-003: SAMIZINE, the underworld's zine look (Claude)
 
 Designer: "Let's build a unique new look for the zines in this game, a mashup between zines and samizdat. Something never before seen." Built as a design canvas (https://claude.ai/artifact/G84PwRDUPwMSvAYkBxmudW) with five boards: style sheet, THE CARBON #14 cover, the ledger page, NOTES FROM THE ’PELAGO over a Sunnyside Manor brochure, copy generations 1–5. Review rounds: (1) the rumour now reads "The lights and the walls, both. They're talking to each other. About you."; generations 3–5 more faded and offset; pocket wear (quarter folds, creases, frayed and grimy edges); (2) ’Pelago throughout (ARCH-SLANG-001). Accepted: "Perfect. Save whatever information is necessary, including the artifacts." **Docs:** new `REDLINE_SAMIZINE.md` (ZINE-003); `docs/visual/samizine/` (five PNG boards, review PDF v3, canvas sources, README); master design §1 and register; HANDOFF note and Done row. **Interpretations to confirm:** "Perfect" read as approving the SAMIZINE look; it applies to in-world publications and the defeat/DEAD DROP CARBON pages, not the HUD (RUSTLER-LOOK-001). New font: Special Elite (Apache 2.0). **Code changes:** none. **Tests:** none.
@@ -588,3 +574,22 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 **Interpretations to confirm:** HOSTILE REVEAL = the bleed reveal (0 / 20–60 / 100%); graffiti on the top-bar decal plate; NUL/REM note in the right column; per-ICE NEXT RESPONSE plates replace the shared strip; console enamel = plaque ground tinted toward the corp accent. Card faces and mascots wait for the ChatGPT art.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-18 — ARCH-NAMES-001: islands named like care homes (Claude).
+
+## 2026-11-19 — ENC-CONCEPT-001: ChatGPT art wired into the encounter (Claude)
+
+Designer: "yes please do" (wire the delivered ChatGPT art into the game). Imported from the designer's folder `PANOPTICON art` into `godot/assets/concept/`:
+- `ui/`: painted UI kit (frame, top bar, ICE console 9-slice, key caps and lamps, plates, pills, badges, END TURN states, tooltip plate, flip tile, reel window, CRT, vitals, BW chip) and the icon sheet sliced into single icons with cream `_LIGHT` variants. Seven files arrived under ChatGPT names and were renamed; large plates also have half-size `_S` copies.
+- `cards/`: CARD_FRAME_{PROGRAM,SCRIPT,PROTOCOL,BLOATWARE} and 10 card pictures (batch 1).
+- `mascots/`: AUTO_RENEW and CAPTCHA, cheery / wary / lethal.
+
+Wiring (presentation only; each part falls back to the drawn version when its file is missing):
+- ICE consoles drawn as a NinePatchRect of the painted console; keys use painted caps, lamps and icons; key tips use the painted tooltip plate.
+- Top bar, CRT, vitals, plates, buttons and END TURN use the painted parts (StyleBoxTexture). `FriendlyEncounter.style_ground()` gives contrast tests a ground colour for painted styles.
+- Mascots: when `<ICE_ID>_<mood>.png` exists, the concept art replaces the drawn mascot (speech bubble and sticker kept), leans toward the focused key, breathes, and trembles when lethal. PIXEL-TRACE-001 still applies.
+- Cards: concept face (white frame per type, picture window, name, cost dial, type stamp, corner chips); rules show on hover. `FriendlyCard.DISPLAY_SCALE` 1.4 → 1.0 (smaller cards, per the designer); the CARDS-004 fan rules are unchanged. Cards without a picture show a tinted stencil until batch 2. `shot_cartridges` and `shot_cards_pcb` set `FriendlyCard.legacy_face = true` so they keep checking the cartridge face.
+
+Tests (Godot 4.3, headless): test_game 369 passed, 0 failed; test_adp 17 checks, 0 failures; test_signal_carbon 671 checks, 0 failures. All 16 screenshot fixtures in the workflow list exit 0 with no SCRIPT ERROR, Parse Error or Assertion failed.
+
+Interpretations to confirm: cards at 1.0× (CARDS-004's 1.4× superseded for the concept face); card rules on hover only; UI_BACKDROP_MACHINE delivered but not used until the per-corp background decision.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ARCH-LINES-001: relocation lines and programme names approved (Claude); 2026-11-18 — ARCH-SLANG-001: the Rustlers say ’Pelago (Claude); 2026-11-18 — ARCH-SLANG-001 confirmed: ’Pelago even at the end (Claude).

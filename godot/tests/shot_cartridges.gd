@@ -23,6 +23,7 @@ func check_card(card: FriendlyCard) -> void:
  var shells:=card.find_children("SlotCartridge","TextureRect",true,false)
  check(shells.size()==1 and shells[0].size==FriendlyCard.PHYSICAL_RECT.size,"chassis extends beyond paper card")
 func run() -> void:
+ FriendlyCard.legacy_face = true   # ENC-CONCEPT-001 replaced this cartridge face in play; this fixture keeps checking its code.
  main=load("res://scenes/Main.tscn").instantiate(); root.add_child(main); main.voice_on=false; main.voice.stop(); await settle()
  main._start_as("GENERALIST"); var g: Game=main.g
  g.rng.seed=711; g.row=0; g.available=[0]; g.enter_node(0)

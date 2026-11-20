@@ -2131,3 +2131,17 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 Designer: "The island names should resemble names of long-term care residences and the more generic the name the better." `REDLINE_ARCHIPELAGO.md` v0.3 §4.0: generic nature-word + residence-word names, no ™ or brand in the name, the corporation only in small print; a working pool of nine names (Sunnyside Manor, Pine Ridge Residence, Willow Creek Lodge and others) and revised relocation lines; the defeat notice names the island. Master design ARCH-001 and the HANDOFF copy row updated. **Interpretations to confirm:** the name pool, the small-print lines, and checking final names against well-known real care chains. **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ZEROED-001-cards: Replace INTEGER UNDERFLOW with NULL POINTER and add RIOT ZEROED cards (Codex).
+
+## 2026-11-18 — ARCH-LINES-001: relocation lines and programme names approved (Claude)
+
+Designer left the relocation lines to Claude's discretion ("generate a number of them, let's say 10 or 15, and I will review and approve"), then approved all 15 and the proposal to keep the first-draft names as programme small print ("Perfect- add them"). `REDLINE_ARCHIPELAGO.md` v0.4 §4.0: 15 numbered lines, five per corporation; small print *Halcyon Homesteads™*, *SafeHarbor Residences™*, *Long Rest Retreats™* under the generic island names; the defeat notice uses one approved line. Master design and HANDOFF updated (commit 7eeb5a7); the island name pool and anti-paper lines are still waiting. **Interpretations to confirm:** "Perfect- add them" read as approving both the 15 lines and the programme names; the small-print wording (community / property / home). **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — TUMBLE-001: Remove broken TUMBLER subs and tumble immediately active replacements (Codex).
+
+## 2026-11-18 — ARCH-SLANG-001: the Rustlers say ’Pelago (Claude)
+
+Designer: "In all Rustler references to the archipelago should be written as pelago with an apostrophe before the P." `REDLINE_ARCHIPELAGO.md` v0.5: tone rule 6; every on-screen Rustler/underworld reference (THE CARBON, *NOTES FROM THE ’PELAGO*, NUL/REM, graffiti, map, reveal) uses ’Pelago with U+2019; the full word stays in docs only; ARCH-1c guards updated (no "Archipelago" on screen; no "’Pelago" in corporate or rules strings). Master design and HANDOFF updated; the SAMIZINE design canvas updated to match. **Interpretations to confirm:** the full word never appears on screen, the reveal included. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — ARCH-SLANG-001 confirmed: ’Pelago even at the end (Claude)
+
+Designer: "Don't use the term archipelago, except in game documents. Pelago is the official in-game terminology to be used even at the very end." Closes the interpretation from the previous entry: the reveal says ’Pelago too. `REDLINE_ARCHIPELAGO.md` rule 6 and §6, and the master design, updated. **Code changes:** none. **Tests:** none.

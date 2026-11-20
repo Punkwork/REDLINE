@@ -16,9 +16,9 @@ const ICE_X := 800.0 - 1300.0 * ICE_SCALE / 2.0
 ## ICE-ANALOG-001: bigger mascots on a taller stage; the analog console below is shorter than the old scan tag.
 const MASCOT_GROWTH := 1.18
 const STAGE_H := 236
-const ICE_AREA_H := 572.0   # x0.85 on screen: y114 to y600
+const ICE_AREA_H := 552.0   # x0.85 on screen: y114 to y583; the rack strip and log sit below
 const NOTE_W := 204.0
-const NOTE_H := 160.0
+const NOTE_H := 150.0
 const CRT_INK := Color("#7DFFB8")
 var crt_screen: Panel
 var crt_status: Label
@@ -143,40 +143,52 @@ func _ready() -> void:
  graffiti = Control.new()
  graffiti.mouse_filter = Control.MOUSE_FILTER_IGNORE
  add_child(graffiti)
- node_tag = Panel.new(); node_tag.add_theme_stylebox_override("panel", Analog.bakelite()); node_tag.position = Vector2(16, 10); node_tag.size = Vector2(400, 96); add_child(node_tag)
- var decal := Panel.new(); decal.name = "DecalPlate"; decal.add_theme_stylebox_override("panel", Analog.bakelite()); decal.position = Vector2(420, 10); decal.size = Vector2(164, 96); decal.mouse_filter = Control.MOUSE_FILTER_IGNORE; add_child(decal); move_child(decal, node_tag.get_index())
+ var screen_frame := painted("UI_FRAME")
+ if screen_frame:
+  var frame_rect := TextureRect.new(); frame_rect.name = "ScreenFrame"; frame_rect.texture = screen_frame; frame_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; frame_rect.stretch_mode = TextureRect.STRETCH_SCALE
+  frame_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE; frame_rect.position = Vector2.ZERO; frame_rect.size = Vector2(1600, 1000); add_child(frame_rect)
+ node_tag = Panel.new(); node_tag.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(node_tag, "UI_TOPBAR_S", Vector4(50, 30, 50, 30), Vector4(10, 10, 10, 10)); node_tag.position = Vector2(16, 10); node_tag.size = Vector2(400, 96); add_child(node_tag)
+ var decal := Panel.new(); decal.name = "DecalPlate"; decal.add_theme_stylebox_override("panel", Analog.bakelite()); decal.position = Vector2(420, 10); decal.size = Vector2(164, 96); decal.mouse_filter = Control.MOUSE_FILTER_IGNORE; paint_panel(decal, "UI_TOPBAR_S", Vector4(50, 30, 50, 30)); add_child(decal); move_child(decal, node_tag.get_index())
  decal.draw.connect(func():
   for k in 7: decal.draw_rect(Rect2(14, 14 + k * 11, 136, 4), Color(0, 0, 0, 0.35))
   for q in [Vector2(7, 7), Vector2(157, 7), Vector2(7, 89), Vector2(157, 89)]: decal.draw_circle(q, 3, Color("#B9A27A")))
- trace_tag = Panel.new(); trace_tag.add_theme_stylebox_override("panel", Analog.bakelite()); trace_tag.position = Vector2(950, 10); trace_tag.size = Vector2(634, 96); add_child(trace_tag)
+ trace_tag = Panel.new(); trace_tag.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(trace_tag, "UI_TOPBAR_S", Vector4(50, 30, 50, 30)); trace_tag.position = Vector2(950, 10); trace_tag.size = Vector2(634, 96); add_child(trace_tag)
  ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(ICE_X, 114); ice_scroll.size = Vector2(1300, ICE_AREA_H); ice_scroll.scale = Vector2.ONE * ICE_SCALE; ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
  ice_row = HBoxContainer.new(); ice_row.add_theme_constant_override("separation", 42); ice_row.alignment = BoxContainer.ALIGNMENT_CENTER; ice_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL; var ice_margin:=MarginContainer.new(); ice_margin.add_theme_constant_override("margin_top",10); ice_margin.size_flags_horizontal=Control.SIZE_EXPAND_FILL; ice_scroll.add_child(ice_margin); ice_margin.add_child(ice_row)
  # ENC-CONCEPT-001: each ICE carries its own NEXT RESPONSE plate (scan_tag); no shared strip.
  note = FriendlyLook.panel(FriendlyLook.TONER); note.position = Vector2(1360, 114); note.size = Vector2(224, 206); note.rotation_degrees = -0.6; note.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(note)  # PASS: a SCRIPT dropped on the note still plays
  note_text = FriendlyLook.label("", 12, FriendlyLook.HIGHLIGHT); note_text.position = Vector2(10, 8); note_text.size = Vector2(NOTE_W, NOTE_H); note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
- var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.position = Vector2(118, 172); voice.size = Vector2(96, 26); voice.add_theme_font_size_override("font_size", 11); note.add_child(voice)
- var rig_ground := Panel.new(); rig_ground.add_theme_stylebox_override("panel", Analog.glass(4, Color("#2A2622"))); rig_ground.position=Vector2(24,350); rig_ground.size=Vector2(208,22); add_child(rig_ground)
- var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(30, 351); rig_scroll.size = Vector2(198, 20); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
+ var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.position = Vector2(118, 172); voice.size = Vector2(96, 26); voice.add_theme_font_size_override("font_size", 11); paint_button(voice); note.add_child(voice)
+ var rig_ground := Panel.new(); rig_ground.add_theme_stylebox_override("panel", Analog.glass(4, Color("#2A2622"))); rig_ground.position=Vector2(248,584); rig_ground.size=Vector2(1104,18); add_child(rig_ground)
+ var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(256, 584); rig_scroll.size = Vector2(1090, 18); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
  rig_row = HBoxContainer.new(); rig_row.add_theme_constant_override("separation", 8); rig_scroll.add_child(rig_row)
  program_bay = FriendlyProgramBay.new()
  program_bay.encounter = self
  program_bay.name = "ProgramBay"
  program_bay.mouse_filter = Control.MOUSE_FILTER_PASS
  program_bay.add_theme_stylebox_override("panel", Analog.bakelite())
+ paint_panel(program_bay, "UI_CRT_MONITOR", Vector4.ZERO)
  at(self, program_bay, Vector2(16,114), Vector2(224,262))
  crt_screen = Panel.new(); crt_screen.name = "CrtScreen"; crt_screen.mouse_filter = Control.MOUSE_FILTER_PASS
  var screen_style := StyleBoxFlat.new(); screen_style.bg_color = Color("#0E1F1A"); screen_style.border_color = Color("#C9B796"); screen_style.set_border_width_all(3); screen_style.set_corner_radius_all(18)
  crt_screen.add_theme_stylebox_override("panel", screen_style)
- at(program_bay, crt_screen, Vector2(8,8), Vector2(208,224))
- crt_status = FriendlyLook.label("", 12, CRT_INK, console_font(2)); at(crt_screen, crt_status, Vector2(14,6), Vector2(184,50))
+ if painted("UI_CRT_MONITOR"):
+  # The painted monitor's own glass is the screen: x45–397, y50–340 of 448×520, drawn at half size.
+  screen_style.draw_center = false; screen_style.set_border_width_all(0)
+  at(program_bay, crt_screen, Vector2(26,28), Vector2(172,140))
+ else:
+  at(program_bay, crt_screen, Vector2(8,8), Vector2(208,224))
+ var on_crt := painted("UI_CRT_MONITOR") != null
+ var crt_l := [Vector2(8,2), Vector2(158,30), 30.0, Vector2(8,32), Vector2(6,46), Vector2(160,60), Vector2(6,108), Vector2(160,28)] if on_crt else [Vector2(14,6), Vector2(184,50), 58.0, Vector2(14,62), Vector2(10,80), Vector2(188,102), Vector2(10,186), Vector2(188,30)]
+ crt_status = FriendlyLook.label("", 11 if on_crt else 12, CRT_INK, console_font(2)); at(crt_screen, crt_status, crt_l[0], crt_l[1])
  crt_screen.draw.connect(func():
   for y in range(6, 220, 4): crt_screen.draw_line(Vector2(6, y), Vector2(202, y), Color(0.45, 1, 0.75, 0.035), 1)
-  crt_screen.draw_line(Vector2(14, 58), Vector2(194, 58), Color(CRT_INK, 0.4), 1))
- at(crt_screen, FriendlyLook.label("PROGRAMS", 12, CRT_INK, console_font(3)), Vector2(14,62))
+  crt_screen.draw_line(Vector2(8, crt_l[2]), Vector2(crt_screen.size.x - 8, crt_l[2]), Color(CRT_INK, 0.4), 1))
+ at(crt_screen, FriendlyLook.label("PROGRAMS", 10 if on_crt else 12, CRT_INK, console_font(3)), crt_l[3])
  var program_scroll := ScrollContainer.new()
  program_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
  program_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
- at(crt_screen, program_scroll, Vector2(10,80), Vector2(188,102))
+ at(crt_screen, program_scroll, crt_l[4], crt_l[5])
  program_slots = VBoxContainer.new()
  program_slots.name = "ProgramSlots"
  program_slots.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -185,21 +197,21 @@ func _ready() -> void:
  program_scroll.add_child(program_slots)
  var connector := FriendlyLook.panel(Color("#14302A"), CRT_INK, 1, 6)
  connector.mouse_filter = Control.MOUSE_FILTER_IGNORE
- at(crt_screen, connector, Vector2(10,186), Vector2(188,30))
- at(connector, FriendlyLook.label("DROP PROGRAM HERE", 12, CRT_INK, console_font(2)), Vector2(10,1))
+ at(crt_screen, connector, crt_l[6], crt_l[7])
+ at(connector, FriendlyLook.label("DROP PROGRAM HERE", 11 if on_crt else 12, CRT_INK, console_font(2)), Vector2(10,1))
  for pin in range(18):
   var contact := ColorRect.new()
   contact.color = Color(CRT_INK, 0.6)
   contact.mouse_filter = Control.MOUSE_FILTER_IGNORE
-  at(connector, contact, Vector2(10 + pin * 9,21), Vector2(5,5))
+  at(connector, contact, Vector2(10 + pin * 9, 20 if on_crt else 21), Vector2(5,4))
  hand = FriendlyHand.new(); hand.position = HAND_RECT.position; hand.size = HAND_RECT.size; hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
- bottom_hud = Panel.new(); bottom_hud.add_theme_stylebox_override("panel", Analog.bakelite()); bottom_hud.position = Vector2(16, 418); bottom_hud.size = Vector2(224, 196); add_child(bottom_hud)
+ bottom_hud = Panel.new(); bottom_hud.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(bottom_hud, "UI_VITALS_PANEL", Vector4.ZERO); bottom_hud.position = Vector2(16, 418); bottom_hud.size = Vector2(224, 200); add_child(bottom_hud)
  var piles_paper:=Panel.new(); piles_paper.add_theme_stylebox_override("panel", Analog.bakelite()); piles_paper.position=Vector2(1360,358); piles_paper.size=Vector2(224,64); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
  pile_text = FriendlyLook.label("", 13, Analog.CREAM, console_font(1)); pile_text.position = Vector2(1372, 362); pile_text.size = Vector2(204, 58); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
  end_button = FriendlyLook.button("END\nTURN", func(): ui._on_end_turn()); end_button.position = Vector2(1418, 428); end_button.size = Vector2(108, 108); style_end_turn(end_button); add_child(end_button)
  end_lamp = Analog.lamp(Color("#FFB020"), true, 14); at(self, end_lamp, Vector2(1538, 474))
- var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), Analog.BAKELITE, Analog.CREAM, 6, console_font(2)); deck.add_theme_font_size_override("font_size", 14); deck.position = Vector2(1360, 546); deck.size = Vector2(224, 30); add_child(deck)
- end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), Analog.BAKELITE_EDGE, Color("#F0A090"), 6, console_font(3)); end_run_button.add_theme_font_size_override("font_size", 14); end_run_button.position = Vector2(1360, 582); end_run_button.size = Vector2(224, 30); add_child(end_run_button)
+ var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), Analog.BAKELITE, Analog.CREAM, 6, console_font(2)); deck.add_theme_font_size_override("font_size", 14); paint_button(deck); deck.position = Vector2(1360, 546); deck.size = Vector2(224, 30); add_child(deck)
+ end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), Analog.BAKELITE_EDGE, Color("#F0A090"), 6, console_font(3)); end_run_button.add_theme_font_size_override("font_size", 14); paint_button(end_run_button); end_run_button.add_theme_color_override("font_color", Color("#FFB4A4")); end_run_button.position = Vector2(1360, 582); end_run_button.size = Vector2(224, 30); add_child(end_run_button)
  toast = FriendlyLook.panel(Color.WHITE, FriendlyLook.RED, 1, 10, 3)
  at(self, toast, Vector2(1360, 114), Vector2(224, 105))
  toast.z_index = 5
@@ -222,9 +234,11 @@ func _ready() -> void:
  punch_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
  punch_holder.add_child(punch_shadow)
  var inspect_punches := FriendlyLook.button("VIEW", func(): ui.open_punches(), FriendlyLook.TONER, FriendlyLook.PAPER)
+ paint_button(inspect_punches); inspect_punches.add_theme_font_override("font", console_font(2))
  at(punch_holder, inspect_punches, Vector2(170, 2), Vector2(48, 26))
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
  motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
+ paint_button(motion_button); motion_button.add_theme_font_override("font", console_font(2))
  motion_button.position=Vector2(1360,326); motion_button.size=Vector2(224,26); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
  watcher_warning=FriendlyLook.panel(FriendlyLook.RED); watcher_warning.position=Vector2(1030,540); watcher_warning.size=Vector2(510,36); watcher_warning.z_index=150; watcher_warning.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(watcher_warning)
  watcher_text=FriendlyLook.label("",12,FriendlyLook.TONER,FriendlyLook.BOLD); watcher_text.position=Vector2(8,7); watcher_warning.add_child(watcher_text); watcher_warning.hide()
@@ -401,13 +415,18 @@ func build_ice() -> void:
   var stage := Control.new()
   stage.name = "MascotStage"
   var plate := AdpCopy.pick("plate", skin.corporation, 0, {"ice": game.enc.ice[i].id})
-  stage.custom_minimum_size = Vector2(width, STAGE_H)
+  var painted_console := painted("UI_ICE_CONSOLE") != null
+  var k := width / 960.0
+  stage.custom_minimum_size = Vector2(width, 520.0 * k if painted_console else STAGE_H)
   column.add_child(drop_wrapper(stage,i,-1))
-  stage.add_child(ice_frame(width))
+  var frame := ice_frame(width)
+  stage.add_child(frame)
+  if painted_console:
+   column.resized.connect(func(): if is_instance_valid(frame): frame.size.y = maxf(1100.0, column.size.y / k))
   var carrier := Control.new()
   carrier.name = "IllustrationScale"
   carrier.scale = Vector2.ONE * illustration_scale
-  carrier.position = Vector2((width - mascot.size.x * illustration_scale) / 2.0, FRAME_TOP + 16.0)
+  carrier.position = Vector2((width - mascot.size.x * illustration_scale) / 2.0, (508.0 * k - 230.0 * illustration_scale) if painted_console else FRAME_TOP + 16.0)
   stage.add_child(carrier)
   carrier.add_child(mascot)
   # Only the art is pixelated: the layer goes in before the mascot's first child that
@@ -419,7 +438,7 @@ func build_ice() -> void:
     first_text = child.get_index(); break
   mascot.add_child(over)
   if first_text >= 0: mascot.move_child(over, first_text)
-  if game.enc.ice[i].id == "AUTO_RENEW": add_shell_graffiti(mascot)
+  if game.enc.ice[i].id == "AUTO_RENEW" and mascot.concept_art == null: add_shell_graffiti(mascot)
   var scan := scan_tag(i, String(plate.get("text",""))); scan.size_flags_horizontal=Control.SIZE_FILL; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
    scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
@@ -531,11 +550,18 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
  var candidates:=game.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction",0)>0 and game.can_play(c.uid).ok and game.would_zero(i,int(CardDB.def(c.id).get("zeroed_reduction",0))))
  var eligible:=not candidates.is_empty()
  var style := StyleBoxFlat.new(); style.bg_color = console_ground()
+ var on_paint := painted("UI_ICE_CONSOLE") != null
  style.border_color = FriendlyLook.AMBER if eligible else CONSOLE_CHROME
  style.border_width_left = 4; style.border_width_right = 4; style.border_width_bottom = 4; style.border_width_top = 0
  style.corner_radius_bottom_left = 22; style.corner_radius_bottom_right = 22
  style.shadow_color = Color("#1A110A66"); style.shadow_size = 8; style.shadow_offset = Vector2(0, 6)
  style.content_margin_left = 16; style.content_margin_right = 16; style.content_margin_top = 8; style.content_margin_bottom = 12
+ if on_paint:
+  # The painted mint panel shows through; console_ground() is that paint's colour, so text
+  # contrast is still checked against what the player sees.
+  style.draw_center = false; style.set_border_width_all(0); style.shadow_size = 0
+  style.content_margin_left = 30.0 * scan_width / 480.0; style.content_margin_right = style.content_margin_left; style.content_margin_bottom = 30
+  if eligible: style.set_border_width_all(3); style.border_color = FriendlyLook.AMBER
  panel.add_theme_stylebox_override("panel",style)
  if eligible: panel.tooltip_text="ZEROED available: "+" / ".join(candidates.map(func(c): return CardDB.def(c.id).name))
  var list := VBoxContainer.new(); list.add_theme_constant_override("separation",6); panel.add_child(list)
@@ -568,6 +594,7 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
  if d.type == "TUMBLER":
   # The reel column: the rest of the pool, spent subroutines struck through, unseen ones as "?".
   var reel := PanelContainer.new(); var rs := FriendlyLook.style(CONSOLE_GLASS,CONSOLE_CHROME,3,10); rs.set_content_margin_all(5); reel.add_theme_stylebox_override("panel",rs)
+  paint_panel(reel, "UI_REEL_WINDOW_S", Vector4(12, 16, 12, 16), Vector4(9, 12, 9, 12))
   reel.size_flags_vertical=Control.SIZE_SHRINK_CENTER
   var column := GridContainer.new(); column.columns=2; column.add_theme_constant_override("h_separation",3); column.add_theme_constant_override("v_separation",3); reel.add_child(column)
   var any := false
@@ -580,8 +607,9 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
   if any:
    var spacer := Control.new(); spacer.custom_minimum_size.x=10; bank.add_child(spacer); bank.add_child(reel)
  var passive_text := String(d.get("ability_text",""))
- if not passive_text.is_empty(): list.add_child(cream_plate("PASSIVE: " + passive_text, scan_width - 32, "PassivePlate"))
- list.add_child(cream_plate("NEXT RESPONSE: " + response_words(i), scan_width - 32, "NextResponse"))
+ var plate_w := scan_width - 2.0 * style.content_margin_left - 4.0
+ if not passive_text.is_empty(): list.add_child(cream_plate("PASSIVE: " + passive_text, plate_w, "PassivePlate"))
+ list.add_child(cream_plate("NEXT RESPONSE: " + response_words(i), plate_w, "NextResponse"))
  if not ice.virus.is_empty():
   var counts := []
   for strain in ice.virus:
@@ -592,7 +620,7 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
  if not plate_text.is_empty() and game.enc.ice.size() < 3:
   # The ADP-2c patent plate sits at the foot of the console.
   var plaque := FriendlyLook.label(plate_text, 9, CONSOLE_INK, skin.font); plaque.name="PatentPlate"
-  plaque.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER; plaque.clip_text=true; plaque.custom_minimum_size.x=scan_width-32
+  plaque.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER; plaque.clip_text=true; plaque.custom_minimum_size.x=plate_w
   list.add_child(plaque)
  return panel
 
@@ -601,6 +629,7 @@ const FRAME_TOP := 14.0
 
 func console_ground() -> Color:
  ## The console's enamel: the corporation's plaque ground tinted toward its accent (HALCYON: seafoam).
+ if painted("UI_ICE_CONSOLE") != null: return Color(143.0 / 255.0, 178.0 / 255.0, 144.0 / 255.0)   # sampled from UI_ICE_CONSOLE's lower panel
  return skin.plaque_ground.lerp(skin.accent, 0.42)
 
 func cream_plate(text: String, width: float, plate_name: String) -> PanelContainer:
@@ -624,6 +653,18 @@ func response_words(i: int) -> String:
  return " → ".join(steps) if not steps.is_empty() else "nothing"
 
 func ice_frame(width: float) -> Control:
+ var console_art := painted("UI_ICE_CONSOLE")
+ if console_art:
+  # The painted console spans the whole column (mascot window on top, keys and plates below);
+  # it scales to the column width and stretches only through its plain lower panel.
+  var patch := NinePatchRect.new(); patch.name = "IceFrame"; patch.texture = console_art; patch.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  patch.patch_margin_left = 60; patch.patch_margin_right = 60; patch.patch_margin_top = 530; patch.patch_margin_bottom = 90
+  var k := width / 960.0
+  patch.scale = Vector2(k, k); patch.size = Vector2(960, 1100)
+  return patch
+ return ice_frame_drawn(width)
+
+func ice_frame_drawn(width: float) -> Control:
  ## The top half of the console: an enamel body with a chrome rim, rivets and an arched corporate tab.
  var frame := Control.new(); frame.name = "IceFrame"; frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
  frame.size = Vector2(width, STAGE_H + 60.0); frame.position = Vector2.ZERO
@@ -664,7 +705,18 @@ func console_font(spacing: int) -> Font:
 
 func console_plate(text: String, bg: Color, ink: Color, px: int, font: Font) -> PanelContainer:
  var plate := PanelContainer.new(); plate.mouse_filter=Control.MOUSE_FILTER_IGNORE
- var st := FriendlyLook.style(bg,Color.TRANSPARENT,0,6); st.content_margin_left=9; st.content_margin_right=9; st.content_margin_top=1; st.content_margin_bottom=1
+ var st: StyleBox = null
+ var art := ""
+ if bg == CONSOLE_GLASS or bg == Color("#14070A") or bg == Color("#2A0606"): art = "UI_PLATE_DARK_S"
+ elif bg == CONSOLE_CREAM: art = "UI_PLATE_CREAM_S"
+ elif bg == Color("#2F7A4C"): art = "UI_PILL_GREEN_S" if px >= 16 and text.length() > 6 else "UI_BADGE_UP_S"
+ elif bg == Color("#B3261A"): art = "UI_PILL_RED_S" if px >= 16 and text.length() > 6 else "UI_BADGE_DOWN_S"
+ if not art.is_empty():
+  var badge := art.begins_with("UI_BADGE")
+  st = painted_box(art, Vector4(10, 9, 10, 9) if badge else Vector4(16, 9, 16, 9), Vector4(9, 2, 9, 2) if badge else Vector4(14, 3, 14, 3))
+ if st == null:
+  var flat := FriendlyLook.style(bg,Color.TRANSPARENT,0,6); flat.content_margin_left=9; flat.content_margin_right=9; flat.content_margin_top=1; flat.content_margin_bottom=1
+  st = flat
  plate.add_theme_stylebox_override("panel",st)
  plate.add_child(FriendlyLook.label(text,px,ink,font))
  return plate
@@ -778,6 +830,7 @@ func build_key_tip() -> void:
  key_tip = PanelContainer.new(); key_tip.name="KeyTip"; key_tip.mouse_filter=Control.MOUSE_FILTER_IGNORE; key_tip.z_index=160
  var st := FriendlyLook.style(Color("#F6EFDF"),CONSOLE_CHROME,3,12); st.set_content_margin_all(14); st.shadow_color=Color("#1A110A66"); st.shadow_size=10; st.shadow_offset=Vector2(0,6)
  key_tip.add_theme_stylebox_override("panel",st)
+ paint_panel(key_tip, "UI_TOOLTIP_PLATE_S", Vector4(34, 40, 26, 40), Vector4(34, 30, 26, 28))
  key_tip_list = VBoxContainer.new(); key_tip_list.add_theme_constant_override("separation",5); key_tip.add_child(key_tip_list)
  add_child(key_tip); key_tip.hide()
 
@@ -1204,21 +1257,21 @@ func build_trace_plate() -> void:
  elif hostile: reveal = 100
  at(trace_tag, console_plate("HOSTILE REVEAL  %d%%" % reveal, Color("#2A0606") if reveal > 0 else CONSOLE_GLASS, Color("#FF7A6A") if reveal > 0 else Analog.CREAM_DIM, 15, console_font(2)), Vector2(14, 52))
  at(trace_tag, amber_label("TURN", 12), Vector2(232, 10))
- at(trace_tag, Analog.tiles("%02d" % game.enc.turn, Vector2(24, 38), 28), Vector2(232, 28))
+ at(trace_tag, Analog.tiles("%02d" % game.enc.turn, Vector2(22, 32), 24), Vector2(232, 26))
  var hot := game.trace >= 20
  at(trace_tag, amber_label("TRACE", 12), Vector2(300, 10))
- at(trace_tag, Analog.tiles("%02d" % game.trace, Vector2(24, 38), 28, Color("#FF6A5A") if hot else Analog.CREAM), Vector2(300, 28))
- at(trace_tag, FriendlyLook.label("/40", 16, Analog.CREAM_DIM, console_font(1)), Vector2(352, 40))
- at(trace_tag, Analog.instrument("bars", roundi(game.trace / 4.0), 10, Vector2(80, 6), Color("#FF3A2A") if hot else Analog.GLOW), Vector2(300, 72))
+ at(trace_tag, Analog.tiles("%02d" % game.trace, Vector2(22, 32), 24, Color("#FF6A5A") if hot else Analog.CREAM), Vector2(300, 26))
+ at(trace_tag, FriendlyLook.label("/40", 15, Analog.CREAM_DIM, console_font(1)), Vector2(348, 34))
+ at(trace_tag, Analog.instrument("bars", roundi(game.trace / 4.0), 10, Vector2(80, 6), Color("#FF3A2A") if hot else Analog.GLOW), Vector2(300, 62))
  at(trace_tag, amber_label("STRIKES", 12), Vector2(398, 10))
  for k in 3: at(trace_tag, Analog.lamp(Analog.RED, k < game.strikes, 16), Vector2(400 + k * 24, 34))
  at(trace_tag, amber_label("RESERVE", 12), Vector2(486, 10))
- at(trace_tag, Analog.tiles("%02d" % game.enc.reserve, Vector2(20, 30), 22, Analog.GLOW if game.enc.reserve > 0 else Color("#FF6A5A")), Vector2(486, 28))
- at(trace_tag, FriendlyLook.label("/ %d CRED" % game.enc.reserve_start, 14, Analog.CREAM_DIM, console_font(1)), Vector2(532, 34))
- at(trace_tag, FriendlyLook.label("CRED %d · RAM %d/%d" % [game.cred, game.ram_used(), game.ram_total()], 13, Analog.CREAM, console_font(1)), Vector2(398, 62))
- at(trace_tag, FriendlyLook.label("PAST 50% · THEY'RE LOOKING" if corporation_state=="cracking" else "", 12, Color("#FF7A6A"), console_font(1)), Vector2(398, 78))
+ at(trace_tag, Analog.tiles("%02d" % game.enc.reserve, Vector2(20, 30), 22, Analog.GLOW if game.enc.reserve > 0 else Color("#FF6A5A")), Vector2(486, 26))
+ at(trace_tag, FriendlyLook.label("/ %d CRED" % game.enc.reserve_start, 14, Analog.CREAM_DIM, console_font(1)), Vector2(532, 32))
+ at(trace_tag, FriendlyLook.label("CRED %d · RAM %d/%d" % [game.cred, game.ram_used(), game.ram_total()], 12, Analog.CREAM, console_font(1)), Vector2(398, 58))
+ at(trace_tag, FriendlyLook.label("PAST 50% · THEY'RE LOOKING" if corporation_state=="cracking" else "", 11, Color("#FF9A8A"), console_font(1)), Vector2(398, 72))
  bleed_label = FriendlyLook.label("", 11, FriendlyLook.PAPER)
- at(trace_tag, bleed_label, Vector2(560, 64))
+ at(trace_tag, bleed_label, Vector2(530, 58))
  update_bleed_readout()
 
 func incoming_pulp() -> int:
@@ -1230,42 +1283,62 @@ func incoming_pulp() -> int:
    if e.k == "PULP": total += int(e.get("v", 0))
  return total
 
-func vital_row(y: float, icon_kind: String, label: String, col: Color, readout: String, gauge: Control) -> void:
- at(bottom_hud, Analog.icon(icon_kind, 22, col), Vector2(12, y + 2))
- at(bottom_hud, amber_label(label, 12), Vector2(42, y))
- var value := FriendlyLook.label(readout, 18, Analog.CREAM, CONDENSED); value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
- at(bottom_hud, value, Vector2(142, y - 4), Vector2(70, 22))
- at(bottom_hud, gauge, Vector2(42, y + 17))
+const VITAL_SLOTS := [23.0, 56.0, 88.0, 120.0, 152.0]   # UI_VITALS_PANEL's five recessed rows, at half size
+
+func vital_icon(kind: String, col: Color) -> Control:
+ var names := {"VITAE": "ICON_VITAE", "BW": "ICON_BW", "SHIELD": "ICON_SHIELD", "DRAW": "ICON_DRAW", "PULP": "ICON_PULP_LIGHT"}
+ var tex := painted(names.get(kind, ""))
+ if tex == null: return Analog.icon(kind, 20, col)
+ var r := TextureRect.new(); r.texture = tex; r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; r.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+ r.mouse_filter = Control.MOUSE_FILTER_IGNORE; r.custom_minimum_size = Vector2(20, 20); r.size = Vector2(20, 20)
+ if kind == "PULP": r.modulate = col
+ return r
+
+func vital_row(slot: int, icon_kind: String, label: String, col: Color, readout: String, gauge: Control) -> void:
+ var y: float = VITAL_SLOTS[slot]
+ at(bottom_hud, vital_icon(icon_kind, col), Vector2(16, y + 3))
+ at(bottom_hud, amber_label(label, 10), Vector2(42, y + 1))
+ var value := FriendlyLook.label(readout, 15, Analog.CREAM, CONDENSED); value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+ at(bottom_hud, value, Vector2(140, y - 2), Vector2(66, 18))
+ if gauge.custom_minimum_size.x > 0:
+  gauge.custom_minimum_size = Vector2(152, 6); gauge.size = gauge.custom_minimum_size
+  at(bottom_hud, gauge, Vector2(42, y + 17))
 
 func build_instruments() -> void:
- # Concept 2's vitals: an icon, a label, a segmented gauge and the number.
- vital_row(10, "VITAE", "VITAE", Color("#FF5A4A"), "%d/%d" % [game.vitae, game.max_vitae], Analog.instrument("bars", ceili(10.0 * game.vitae / maxf(1.0, game.max_vitae)), 10, Vector2(170, 8), Color("#FF3A2A")))
- vital_row(48, "BW", "BANDWIDTH", Color("#FFC84A"), "%d/%d" % [game.bw, bw_capacity], Analog.instrument("lamps", game.bw, mini(10, bw_capacity), Vector2(170, 12), Color("#FFB020")))
- vital_row(86, "SHIELD", "SHIELD", Color("#7FD0FF"), str(game.shield), Analog.instrument("bars", mini(12, game.shield), 12, Vector2(170, 8), Analog.BLUE))
+ # Concept 2's vitals on the painted panel: an icon, a label, a segmented gauge and the number.
+ vital_row(0, "VITAE", "VITAE", Color("#FF5A4A"), "%d/%d" % [game.vitae, game.max_vitae], Analog.instrument("bars", ceili(10.0 * game.vitae / maxf(1.0, game.max_vitae)), 10, Vector2(152, 6), Color("#FF3A2A")))
+ vital_row(1, "BW", "BANDWIDTH", Color("#FFC84A"), "%d/%d" % [game.bw, bw_capacity], Analog.instrument("lamps", game.bw, mini(10, bw_capacity), Vector2(152, 9), Color("#FFB020")))
+ vital_row(2, "SHIELD", "SHIELD", Color("#7FD0FF"), str(game.shield), Analog.instrument("bars", mini(12, game.shield), 12, Vector2(152, 6), Analog.BLUE))
  var pulp := incoming_pulp()
- vital_row(124, "PULP", "PULP INCOMING", Color("#FF8A3A"), str(pulp), Analog.instrument("bars", mini(12, pulp), 12, Vector2(170, 8), Color("#FF8A3A")))
- vital_row(162, "DRAW", "NEXT DRAW", Analog.CREAM, str(game.draw_size()), Control.new())
+ vital_row(3, "PULP", "PULP INCOMING", Color("#FF8A3A"), str(pulp), Analog.instrument("bars", mini(12, pulp), 12, Vector2(152, 6), Color("#FF8A3A")))
+ vital_row(4, "DRAW", "NEXT DRAW", Analog.CREAM, str(game.draw_size()), Control.new())
 
 func update_crt_status() -> void:
  var state: String = {"friendly": "FRIENDLY", "cracking": "CRACKING", "mask_off": "MASK OFF"}.get(corporation_state, "")
- crt_status.text = "%s\nNODE // %s\nSTATUS: %s" % [skin.corporation, String(game.node.name).to_upper(), state]
+ crt_status.text = "%s // %s\nSTATUS: %s" % [skin.corporation, String(game.node.name).to_upper(), state]
  crt_status.add_theme_color_override("font_color", CRT_INK if corporation_state == "friendly" else Color("#FF8FB8"))
 
 func style_end_turn(button: Button) -> void:
- ## A round red push-button in a chrome ring (concept 3).
+ ## The round red push-button in a chrome ring (concept 3); painted when the art is in.
  button.add_theme_font_override("font", console_font(3))
  button.add_theme_font_size_override("font_size", 22)
+ var art := {"normal": "UI_END_TURN", "hover": "UI_END_TURN", "pressed": "UI_END_TURN_PRESSED", "disabled": "UI_END_TURN_DISABLED"}
  for state in ["normal", "hover", "pressed", "disabled", "focus"]:
+  var painted_state: StyleBox = painted_box(art[state], Vector4.ZERO) if art.has(state) else null
+  if painted_state:
+   if state == "hover": (painted_state as StyleBoxTexture).modulate_color = Color(1.12, 1.08, 1.08)
+   button.add_theme_stylebox_override(state, painted_state); continue
   var st := StyleBoxFlat.new()
   st.bg_color = {"normal": Color("#C9271B"), "hover": Color("#E0382A"), "pressed": Color("#9C1F15"), "disabled": Color("#6E4A44"), "focus": Color.TRANSPARENT}[state]
   st.border_color = Color("#D5DBDD"); st.set_border_width_all(6); st.set_corner_radius_all(54); st.anti_aliasing = true
   if state in ["normal", "hover"]:
    st.shadow_color = Color("#00000088"); st.shadow_size = 8; st.shadow_offset = Vector2(0, 5)
   if state == "focus":
-   st.draw_center = false; st.border_color = FriendlyLook.SERVICE_TEAL; st.set_border_width_all(3)
+   st.draw_center = false; st.border_color = FriendlyLook.SERVICE_TEAL; st.set_border_width_all(3); st.set_corner_radius_all(54)
   button.add_theme_stylebox_override(state, st)
  for c in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color", "font_disabled_color"]:
   button.add_theme_color_override(c, Color.WHITE)
+ button.add_theme_color_override("font_outline_color", Color("#4A0A05")); button.add_theme_constant_override("outline_size", 4)
 
 func crt_chip(chip: Button) -> void:
  ## Installed Programs read as phosphor entries on the CRT.
@@ -1278,3 +1351,45 @@ func crt_chip(chip: Button) -> void:
  for c in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
   chip.add_theme_color_override(c, CRT_INK)
  chip.add_theme_font_override("font", console_font(2))
+
+# ---- ENC-CONCEPT-001: painted parts from ChatGPT (UI_KIT_BRIEF.md) ----
+
+func painted(name: String) -> Texture2D:
+ return IceKey.art(name)
+
+func painted_box(name: String, margins: Vector4, content: Vector4 = Vector4(-1, -1, -1, -1)) -> StyleBox:
+ ## A nine-slice of a painted part: margins = left, top, right, bottom in texture pixels.
+ var tex := painted(name)
+ if tex == null: return null
+ var st := StyleBoxTexture.new(); st.texture = tex
+ st.texture_margin_left = margins.x; st.texture_margin_top = margins.y; st.texture_margin_right = margins.z; st.texture_margin_bottom = margins.w
+ var c := margins if content.x < 0 else content
+ st.content_margin_left = c.x; st.content_margin_top = c.y; st.content_margin_right = c.z; st.content_margin_bottom = c.w
+ return st
+
+func paint_panel(panel: Control, name: String, margins: Vector4, content: Vector4 = Vector4(-1, -1, -1, -1)) -> void:
+ var st := painted_box(name, margins, content)
+ if st: panel.add_theme_stylebox_override("panel", st)
+
+func paint_button(button: Button) -> void:
+ var names := {"normal": "UI_BUTTON_S", "hover": "UI_BUTTON_HOVER_S", "pressed": "UI_BUTTON_PRESSED_S", "disabled": "UI_BUTTON_PRESSED_S", "focus": ""}
+ for state in names:
+  if names[state] == "":
+   var focus := StyleBoxFlat.new(); focus.draw_center = false; focus.border_color = FriendlyLook.SERVICE_TEAL; focus.set_border_width_all(2); focus.set_corner_radius_all(14)
+   button.add_theme_stylebox_override(state, focus); continue
+  var st := painted_box(names[state], Vector4(16, 10, 16, 10), Vector4(14, 3, 14, 3))
+  if st == null: return
+  button.add_theme_stylebox_override(state, st)
+ for c in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+  button.add_theme_color_override(c, Analog.CREAM)
+ button.add_theme_color_override("font_disabled_color", Analog.CREAM_DIM)
+
+## The colour a painted part shows behind text (sampled from each image), for contrast checks.
+const PAINT_GROUND := {"UI_PLATE_DARK_S": Color("#010000"), "UI_PLATE_CREAM_S": Color("#EDD9B4"), "UI_PILL_GREEN_S": Color("#015B0B"), "UI_PILL_RED_S": Color("#8B0101"), "UI_BADGE_UP_S": Color("#01480B"), "UI_BADGE_DOWN_S": Color("#6B0100"), "UI_TOOLTIP_PLATE_S": Color("#E9D1B0"), "UI_BUTTON_S": Color("#3F1407")}
+
+static func style_ground(style: StyleBox) -> Color:
+ if style is StyleBoxFlat: return (style as StyleBoxFlat).bg_color
+ if style is StyleBoxTexture and (style as StyleBoxTexture).texture:
+  var name: String = (style as StyleBoxTexture).texture.resource_path.get_file().get_basename()
+  return PAINT_GROUND.get(name, Color.BLACK)
+ return Color.BLACK

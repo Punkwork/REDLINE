@@ -82,16 +82,21 @@ func _box(r: Rect2, col: Color, radius: float) -> void:
 
 func _tiles() -> void:
 	# Split-flap cards: dark rounded card, a split line, metal hinge pins.
+	var painted_tile := IceKey.art("UI_FLIP_TILE")
 	for i in text.length():
 		var r := Rect2(Vector2(i * (tile.x + 2.0), 0), tile)
-		_box(Rect2(r.position + Vector2(0, 2), r.size), Color(0, 0, 0, 0.6), 4)
-		_box(r, Color("#262626"), 4)
-		_box(Rect2(r.position, Vector2(r.size.x, r.size.y * 0.48)), Color("#353535"), 4)
-		draw_rect(Rect2(r.position + Vector2(0, r.size.y * 0.48), Vector2(r.size.x, 2)), Color("#050505"))
+		if painted_tile:
+			draw_texture_rect(painted_tile, r, false)
+		else:
+			_box(Rect2(r.position + Vector2(0, 2), r.size), Color(0, 0, 0, 0.6), 4)
+			_box(r, Color("#262626"), 4)
+			_box(Rect2(r.position, Vector2(r.size.x, r.size.y * 0.48)), Color("#353535"), 4)
+			draw_rect(Rect2(r.position + Vector2(0, r.size.y * 0.48), Vector2(r.size.x, 2)), Color("#050505"))
 		var c := text[i]
 		if c != " ":
 			var w := FONT.get_string_size(c, HORIZONTAL_ALIGNMENT_LEFT, -1, font_px).x
 			draw_string(FONT, Vector2(r.position.x + (r.size.x - w) / 2.0, r.position.y + r.size.y * 0.5 + font_px * 0.36), c, HORIZONTAL_ALIGNMENT_LEFT, -1, font_px, ink)
+		if painted_tile: continue
 		var pin := Vector2(1.5, r.size.y * 0.32)
 		for x in [r.position.x + 0.5, r.end.x - 2.0]:
 			draw_rect(Rect2(Vector2(x, r.position.y + r.size.y * 0.34), pin), Color("#BDBDBD"))

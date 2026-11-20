@@ -14,6 +14,7 @@ func fail(message: String) -> void:
  failures += 1
 
 func run() -> void:
+ FriendlyCard.legacy_face = true   # ENC-CONCEPT-001 replaced this cartridge face in play; this fixture keeps checking its code.
  var main: Node = load("res://scenes/Main.tscn").instantiate()
  root.add_child(main)
  main.voice_on = false
