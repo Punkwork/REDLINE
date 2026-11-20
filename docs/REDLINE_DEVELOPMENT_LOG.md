@@ -4,12 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — ZINE-003: SAMIZINE, the underworld's zine look (Claude)
-
-Designer: "Let's build a unique new look for the zines in this game, a mashup between zines and samizdat. Something never before seen." Built as a design canvas (https://claude.ai/artifact/G84PwRDUPwMSvAYkBxmudW) with five boards: style sheet, THE CARBON #14 cover, the ledger page, NOTES FROM THE ’PELAGO over a Sunnyside Manor brochure, copy generations 1–5. Review rounds: (1) the rumour now reads "The lights and the walls, both. They're talking to each other. About you."; generations 3–5 more faded and offset; pocket wear (quarter folds, creases, frayed and grimy edges); (2) ’Pelago throughout (ARCH-SLANG-001). Accepted: "Perfect. Save whatever information is necessary, including the artifacts." **Docs:** new `REDLINE_SAMIZINE.md` (ZINE-003); `docs/visual/samizine/` (five PNG boards, review PDF v3, canvas sources, README); master design §1 and register; HANDOFF note and Done row. **Interpretations to confirm:** "Perfect" read as approving the SAMIZINE look; it applies to in-world publications and the defeat/DEAD DROP CARBON pages, not the HUD (RUSTLER-LOOK-001). New font: Special Elite (Apache 2.0). **Code changes:** none. **Tests:** none.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001a: fixed Rustler theme and corporation skin resources (Codex).
-
 ## 2026-11-18 — ADP-001 Phase 2 and ADP-4a (Codex)
 
 Loaded the approved HALCYON, IRONWATCH and LUCIDA Phase 2 pack. The encounter uses cosmetic randomness for nonrepeating NUL/REM leaks, holds graffiti in reserved margins, shows approved status and Tomorrow toasts, and adds patent plates below the mascot illustrations. Hesitation changes only the live speech bubble. The run entry shows a corporate newsreel.
@@ -597,3 +591,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 ## 2026-11-19 — ENC-CONCEPT-001: UI kit brief 2 (Claude)
 
 Designer: "what other UI elements can we request ChatGPT build based on the screenshot #2… I really like how the examples fill the screen with useful UI, with appealing proportions." Reviewed concept 2 against kit 1 and wrote `docs/visual/concept-art/UI_KIT_BRIEF_2.md`: one paste-once ChatGPT prompt for 13 blank painted parts (brand plate, corp sign, alarm plate, four CRT condition pictures, lamp stack, knob, vent, slot panel, comic bubble, TUMBLER drum, hand tray, END TURN box, legend card). No code changes. Interpretation to confirm: concept 2's SUPPORT box is not a rule, so its panel will hold the punch-card count or installed Programs.
+
+## 2026-11-19 — ENC-CONCEPT-001: UI kit brief 3 (Claude)
+
+Designer: "I want to get ChatGPT generating as many UI images for this as possible to get it as correct as possible… once those sets of images are generated you can do the layout." Wrote `docs/visual/concept-art/UI_KIT_BRIEF_3.md`: 16 more blank painted parts (concept-2 console, big key sockets, TURN plate, TRACE counter, dials, strike lamps, NUL/REM slip, deck/discard wells, card back, tray buttons, toggles, pipework, screws/rivets, key glow, log ticker, vignette). The concept-2 layout pass waits for kits 2 and 3. No code changes. Interpretation to confirm: the homes for information concept 2 leaves out (dials, tray, slip).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-18 — ZINE-003: SAMIZINE, the underworld's zine look (Claude).

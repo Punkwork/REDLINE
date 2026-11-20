@@ -2145,3 +2145,9 @@ Designer: "In all Rustler references to the archipelago should be written as pel
 ## 2026-11-18 — ARCH-SLANG-001 confirmed: ’Pelago even at the end (Claude)
 
 Designer: "Don't use the term archipelago, except in game documents. Pelago is the official in-game terminology to be used even at the very end." Closes the interpretation from the previous entry: the reveal says ’Pelago too. `REDLINE_ARCHIPELAGO.md` rule 6 and §6, and the master design, updated. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — ZINE-003: SAMIZINE, the underworld's zine look (Claude)
+
+Designer: "Let's build a unique new look for the zines in this game, a mashup between zines and samizdat. Something never before seen." Built as a design canvas (https://claude.ai/artifact/G84PwRDUPwMSvAYkBxmudW) with five boards: style sheet, THE CARBON #14 cover, the ledger page, NOTES FROM THE ’PELAGO over a Sunnyside Manor brochure, copy generations 1–5. Review rounds: (1) the rumour now reads "The lights and the walls, both. They're talking to each other. About you."; generations 3–5 more faded and offset; pocket wear (quarter folds, creases, frayed and grimy edges); (2) ’Pelago throughout (ARCH-SLANG-001). Accepted: "Perfect. Save whatever information is necessary, including the artifacts." **Docs:** new `REDLINE_SAMIZINE.md` (ZINE-003); `docs/visual/samizine/` (five PNG boards, review PDF v3, canvas sources, README); master design §1 and register; HANDOFF note and Done row. **Interpretations to confirm:** "Perfect" read as approving the SAMIZINE look; it applies to in-world publications and the defeat/DEAD DROP CARBON pages, not the HUD (RUSTLER-LOOK-001). New font: Special Elite (Apache 2.0). **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001a: fixed Rustler theme and corporation skin resources (Codex).
