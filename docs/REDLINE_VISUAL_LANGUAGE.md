@@ -209,6 +209,8 @@ Other slice ICE: write three lines each in the same voice (friendly corporate �
 
 ### 2.9 Accessibility
 
+> **HOVER-001 (APPROVED 2026-11-20):** every hover/focus box for a game object (card, CAP, Ghostware, program, ICE, subroutine key) shows a large, high-resolution image of the object beside its text. Master design §6 has the full rule.
+
 > **Amended by ICE-ANALOG-001 (APPROVED 2026-11-19):** ICE subroutines show an icon and a value; the full rule text is in a hover/focus tooltip. The NEXT RESPONSE strip and the passive strip keep full text, so every rule stays readable without hovering. See `REDLINE_ENCOUNTER_ANALOG.md` §7.
 
 - Mood is never shown by color alone: the face, the silhouette's corners and the wording change too.

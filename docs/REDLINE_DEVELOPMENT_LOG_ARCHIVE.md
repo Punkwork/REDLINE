@@ -2201,3 +2201,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 ## 2026-11-18 — No history fact-checks (Claude)
 
 Designer: "Don't verify history. This is a made-up world. It doesn't have to perfectly resemble the real world." Historical background (ADP §2.2.1, ARCH §2) is marked as inspiration, not a source to match; the fact-check notes and the HANDOFF item are removed. The island names remain working copy (care-home check). **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude)
+
+Designer wants builds produced off `main` "just in case any products are corrupted"; approved the proposal ("Go"). Decision in master §12 and the register: work stays on `main`; a `release` branch, fast-forwarded from `main` when a build is wanted, is the only branch that exports Windows builds; each build is tagged `playtest-N`; recovery is by tag. Replaces MAIN-001's export-on-`main` rule. HANDOFF: "How we work" item 7 and a Codex TO DO row (create `release`, move the three export conditions in `godot-validation.yml` from `refs/heads/main` to `refs/heads/release`, tagging, branch protection, prove it with the next build). Note: the workflow's path filter already means doc-only pushes don't trigger exports. **Code changes:** none (workflow change is Codex's). **Tests:** none.

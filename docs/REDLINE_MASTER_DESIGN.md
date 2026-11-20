@@ -275,6 +275,7 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 - Drag-to-ICE breaker interaction.
 - Explicit strength labels formatted **`[STR X]`**.
 - HUD tooltips to explain rules and stats without cluttering the primary view.
+- **HOVER-001 (APPROVED 2026-11-20, designer: "the hover text box should always include a large/high resolution image of the card or cap or ghostware etc. alongside the text"):** every hover or keyboard-focus box for a game object shows a **large, high-resolution image of that object beside its text**: cards (the full card face), CAPS (the vial), Ghostware (the badge), installed programs (their card), ICE (the avatar in its current mood) and subroutine keys (the key with its icon). The image comes from the full-resolution source art, never an upscaled thumbnail, and is at least twice the size the object has on screen (cards at least 1.5× their hand size). Image first (left, or top when there's no room), text beside it. Until an object's painted art exists, the box shows the best available stand-in (the drawn face or the placeholder), never an empty frame. The box must not cover the object being hovered, and the readability rules still apply (contrast at least 4.5:1, nothing crosses the text).
 - Ghostware rack **below RETURN**.
 - Signature Ghostware shown once with **`ORIGIN`**.
 - NUL/REM presented as a **retro CRT companion**, integrated into the game's interface and voice.
@@ -386,6 +387,7 @@ engine/
 | ENC-ANALOG-001 | Analog / flip-clock / cockpit encounter screen (whole screen) | APPROVED | Designer, 2026-11-19 (ChatGPT, confirmed in session); `REDLINE_ENCOUNTER_ANALOG.md` |
 | ICE-ANALOG-001 | Iconized ICE subroutine readout (icon + value; full text on hover/focus, amends VIS-001 §2.9) and larger, livelier mascots | APPROVED | Designer, 2026-11-19 (ChatGPT, confirmed in session); `REDLINE_ENCOUNTER_ANALOG.md` §7–8 |
 | ENC-CONCEPT-001 | Encounter interface from the concept screenshots: frame from concept 3, cards and mascots from concept 2, left HUD mixing 2 and 3; art from ChatGPT per Claude's briefs | APPROVED | Designer, 2026-11-19; `docs/visual/concept-art/ART_BRIEFS.md` |
+| HOVER-001 | Every hover/focus box for a game object shows a large, high-resolution image of the object beside its text (cards, CAPS, Ghostware, programs, ICE, keys) | APPROVED | Designer, 2026-11-20 (in session); §6 |
 
 ## 11. Open specification backlog
 **High priority:** retrieve the full reference ZIP and earlier detailed design notes; verify complete card/ICE catalog, costs, turn/action economy, Trace formulas, Vitae damage, Black ICE rules, virus mechanics, win/loss conditions, and exact PATCHWORK/Ghostware effects. Capture reproducible tests for every LOCKED rule. Define Godot migration milestones.

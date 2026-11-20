@@ -4,10 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude)
-
-Designer wants builds produced off `main` "just in case any products are corrupted"; approved the proposal ("Go"). Decision in master §12 and the register: work stays on `main`; a `release` branch, fast-forwarded from `main` when a build is wanted, is the only branch that exports Windows builds; each build is tagged `playtest-N`; recovery is by tag. Replaces MAIN-001's export-on-`main` rule. HANDOFF: "How we work" item 7 and a Codex TO DO row (create `release`, move the three export conditions in `godot-validation.yml` from `refs/heads/main` to `refs/heads/release`, tagging, branch protection, prove it with the next build). Note: the workflow's path filter already means doc-only pushes don't trigger exports. **Code changes:** none (workflow change is Codex's). **Tests:** none.
-
 ## 2026-11-18 — RELEASE-001: HALCYON PLAYTEST 6 (Codex)
 
 Merged the designer's changes through `bf0f05c` at `721303c`. Playtest 6 leaves all nine island names marked as working copy. All 15 relocation lines and the three programme bylines carry approved status. Godot 4.3 passed 361 rules checks, 17 bleed checks, 671 SIGNAL/CARBON guards and the 13 display scripts.
@@ -590,3 +586,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 Designer asked for room for CAPS (3 minimum, more later) and any number of Ghostware, possibly hovering along the top with rollover text. Built `build_cap_rack()` (3 placeholder slots right of the hand; `HAND_RECT` 80 px narrower) and `build_ghost_rail()` (ORIGIN plus `game.ghostware` as round badges hanging from the pipe above the ICE, shrinking to fit; tooltips give name and effect; painted icons picked up from `assets/concept/ghostware/GW_<NAME>.png`). Added §4 to `CHATGPT_PROMPTS_ROUND3.md` (CAP slot, 12 CAP vials, 30 Ghostware badges). Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ARCH-COPY-001 correction: island names stay working copy (Claude); 2026-11-18 — No history fact-checks (Claude).
+
+## 2026-11-20 — HOVER-001 recorded (Claude)
+
+Designer: "the hover text box should always include a large/high resolution image of the card or cap or ghostware etc. alongside the text. Commit that mouse over/hover rule." Recorded HOVER-001 as APPROVED in master §6 and the register, with a note in Visual Language §2.9: every hover/focus box for a game object shows a large, high-resolution image of it beside the text (at least 2× its on-screen size, cards at least 1.5×), image first, a stand-in until painted art exists, never covering the hovered object. Implementation is a TO DO in HANDOFF. No code changes.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude).
