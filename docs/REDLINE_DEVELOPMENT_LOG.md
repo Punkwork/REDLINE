@@ -4,14 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — DEV-001a: Claude Code handoff (Codex)
-
-Published `pre-claude-code` at `0a357e7`. Added [ARCHITECTURE.md](ARCHITECTURE.md) with the model/UI boundary, runtime data and approvals, local files, fixture setup, fragile dependencies and slice hooks. Corrected §4 in the identical working agreements, superseded the old Godot handoff and moved DEV-001a to Done. Claude Code takes DEV-001b next. No game code changed.
-
-**Validation:** Fresh Godot 4.3 import in a temporary checkout. Headless suites passed 361 rules checks, 17 bleed checks and 671 SIGNAL/CARBON checks. A display-backed SIGNAL/CARBON smoke test passed 22 checks and wrote seven PNGs to an isolated `SHOT_DIR` with temporary user data. The working agreements match byte for byte.
-
-LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — CHROME-001 step 1: real encounter layout and readability (Codex).
-
 ## 2026-11-18 — DOCS-001: which docs are current (Claude)
 
 Codex answered a question about Node types from outdated docs. Designer approved marking current versus outdated docs ("Yes"). `CLAUDE.md` = `AGENTS.md` §6 now gives the authority order (master design → Core Rules → topic docs; "Later amendments" tables win) and lists current docs and history/lore-only docs. One-line "not current for rules" notes added at the top of `REDLINE_BIBLE.md`, `PANOPTICON_CORE_DESIGN_AND_WORLDBUILDING.md`, `REDLINE_RULE_REVIEW_126.md`, `HALCYON_PLAYTEST3_IMPLEMENTATION.md` and `REDLINE_UI_NULREM_Design_For_Claude.md`; `REPOSITORY_STRUCTURE.md` updated. Master register and HANDOFF Done row. **Code changes:** none. **Tests:** none.
@@ -598,3 +590,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 ## 2026-11-20 — ChatGPT round 4 prompts: the other Node types and the map (Claude)
 
 Designer asked what else ChatGPT could make, "at least for the other node types". Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND4.md`: five underworld scenes (Uplink, SAFEHOUSE, DEAD DROP, Console Lab, SIGNAL UNCLEAR), Central Node and escape backgrounds for each corporation, a defaced tourist-map board per corporation and nine map Node badges. No code changes; wiring is a HANDOFF item. Interpretation to confirm: Rustler places share one underworld look rather than one per corporation.
+
+## 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude)
+
+Designer asked for the title-screen art (a panopticon prison building or one big eye) and character-select portraits. Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND5.md` with the written style guide built in (the designer had no reference images to hand): a day and a night title background combining both ideas (a round World's Fair prison whose central tower is a giant eye), a letterless emblem, and portraits of the GENERALIST, ECHO, RIOT and VECTOR with signature colours and props from REDLINE_RUSTLERS. No code changes.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — DEV-001a: Claude Code handoff (Codex).
