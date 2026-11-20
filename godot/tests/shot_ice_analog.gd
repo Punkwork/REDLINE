@@ -59,6 +59,8 @@ func run() -> void:
 	Input.warp_mouse(p); root.push_input(motion); await settle()
 	check_tip(target, "hover")
 	await snapshot("ICE-ANALOG-001_02_tooltip_hover")
+	var key_pic: Control = main.friendly.key_tip_image
+	check(key_pic.get_child_count() == 1 and key_pic.get_child(0).size.y >= 2.0 * 60.0, "key tip shows the key drawn large (HOVER-001)")
 	Input.warp_mouse(Vector2(20, 150)); var away := InputEventMouseMotion.new(); away.position = Vector2(20, 150); root.push_input(away); await settle()
 	# Keyboard focus on the first AUTO-RENEW key.
 	var first: IceKey = keys()[0]
@@ -85,6 +87,31 @@ func run() -> void:
 	check(keys().any(func(k): return k.state == "broken"), "a broken key shows")
 	check_keys("cracking")
 	await snapshot("ICE-ANALOG-001_04_cracking")
+	# HOVER-001: every hover box shows the object large beside its text, and never covers it.
+	var fx = main.friendly
+	var hand_card: FriendlyCard = fx.hand.get_child(0)
+	hand_card.mouse_entered.emit(); await settle(4)
+	var pic: Control = hand_card.full_rules.get_node_or_null("HoverPicture")
+	check(hand_card.full_rules.visible and pic != null and pic.get_child_count() == 1, "card hover shows the card drawn large")
+	check(pic != null and pic.size.y >= hand_card.get_global_rect().size.y * 1.45, "the hover card is about 1.5x the hand card")
+	await snapshot("HOVER-001_01_card")
+	hand_card.mouse_exited.emit(); await settle()
+	var cart: Control = fx.cart_rack.get_child(0)
+	cart.mouse_entered.emit(); await settle(4)
+	check(fx.obj_tip.visible and not fx.obj_tip.get_global_rect().intersects(cart.get_global_rect()), "program card hover shows a large card beside it")
+	await snapshot("HOVER-001_02_program")
+	cart.mouse_exited.emit(); await settle()
+	check(not fx.obj_tip.visible, "and hides again")
+	var badge: Control = fx.ghost_rail.get_child(1)
+	badge.mouse_entered.emit(); await settle(4)
+	check(fx.obj_tip.visible and not fx.obj_tip.get_global_rect().intersects(badge.get_global_rect()), "Ghostware hover shows the badge large")
+	await snapshot("HOVER-001_03_ghostware")
+	badge.mouse_exited.emit(); await settle()
+	var cap: Control = fx.cap_rack.get_node("CapSlot0")
+	cap.mouse_entered.emit(); await settle(4)
+	check(fx.obj_tip.visible and not fx.obj_tip.get_global_rect().intersects(cap.get_global_rect()), "CAP slot hover shows the slot large")
+	await snapshot("HOVER-001_04_cap")
+	cap.mouse_exited.emit(); await settle()
 	# ENC-CONCEPT-001 program screen: one program on the CRT, ◀ ▶ rotate, +STR boosts the one shown.
 	var f = main.friendly
 	check(f.program_slots.get_child_count() == 1 and g.installed.size() == 2, "CRT shows one of two installed programs")

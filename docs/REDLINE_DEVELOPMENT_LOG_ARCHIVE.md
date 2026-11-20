@@ -2205,3 +2205,11 @@ Designer: "Don't verify history. This is a made-up world. It doesn't have to per
 ## 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude)
 
 Designer wants builds produced off `main` "just in case any products are corrupted"; approved the proposal ("Go"). Decision in master §12 and the register: work stays on `main`; a `release` branch, fast-forwarded from `main` when a build is wanted, is the only branch that exports Windows builds; each build is tagged `playtest-N`; recovery is by tag. Replaces MAIN-001's export-on-`main` rule. HANDOFF: "How we work" item 7 and a Codex TO DO row (create `release`, move the three export conditions in `godot-validation.yml` from `refs/heads/main` to `refs/heads/release`, tagging, branch protection, prove it with the next build). Note: the workflow's path filter already means doc-only pushes don't trigger exports. **Code changes:** none (workflow change is Codex's). **Tests:** none.
+
+## 2026-11-18 — RELEASE-001: HALCYON PLAYTEST 6 (Codex)
+
+Merged the designer's changes through `bf0f05c` at `721303c`. Playtest 6 leaves all nine island names marked as working copy. All 15 relocation lines and the three programme bylines carry approved status. Godot 4.3 passed 361 rules checks, 17 bleed checks, 671 SIGNAL/CARBON guards and the 13 display scripts.
+
+Published `22eb17f7c283ebca140e2a3e908908c0c6c1165a` to `main` and created `release` at that revision. Windows export is gated to `release`. Verified the downloaded Windows x86-64 executable, `BUILD_COMMIT.txt`, README and checklist v0.6, and pushed `playtest-6` at the build revision. Executable SHA-256 is `63bc5013254b0bd656d89e60dd46cbc8264c361b3228733ba9690b922eb329ae`. GitHub denied the branch-protection request with HTTP 403. Designer Windows launch and playtesting are pending. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44314368001) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44314368001/artifacts/14431722167)
+
+LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — VIS-001f: live drag targets, mascot motion and reduced motion (Codex), 2026-11-17 — VIS-001g: live fixtures, readability and interaction regression (Codex).

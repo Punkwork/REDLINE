@@ -40,6 +40,9 @@ var known_programs: Array = []
 var program_connector: Control
 var ghost_rail: HBoxContainer   # Ghostware badges hanging from the pipe above the ICE, any number
 var cap_rack: Control           # CAP slots beside the hand (3 minimum; more later)
+var obj_tip: PanelContainer     # HOVER-001: the shared hover box (large picture + text)
+var obj_tip_owner: Control
+var key_tip_image: Control
 const CAP_SLOTS := 3
 var cart_rack: Control   # slim program cards sticking out of the CRT's top, one per installed program
 const CONSOLE_OVERLAP := -14   # the mascot peeks over the console's top edge
@@ -424,7 +427,7 @@ func build_rig() -> void:
   chip.custom_minimum_size.y = 24
   chip.add_theme_font_size_override("font_size", 13)
   crt_chip(chip)
-  chip.tooltip_text = (("Drag onto a subroutine key to break it.\n") if d.has("pick") else "") + game.card_text(id)
+  tip_on_hover(chip, func(): return [big_card(id), d.name, game.card_text(id), "Drag onto a subroutine key to break it." if d.has("pick") else ""])
   chip.pressed.connect(func(): ui.toggle_card_inspection(id, uid))
   chip.mouse_entered.connect(func(): ui.hover_program(id))
   chip.mouse_exited.connect(func(): ui.leave_program())
@@ -477,6 +480,60 @@ func build_rig() -> void:
  for c in game.rack:
   var d := CardDB.def(c.id)
   rig_row.add_child(FriendlyLook.button(d.name, func(): ui._show_inspect(c.id), FriendlyLook.TONER, FriendlyLook.PAPER))
+func build_obj_tip() -> void:
+ obj_tip = PanelContainer.new(); obj_tip.name = "ObjectTip"; obj_tip.mouse_filter = Control.MOUSE_FILTER_IGNORE; obj_tip.z_index = 170
+ var st := FriendlyLook.style(Color("#F6EFDF"), CONSOLE_CHROME, 3, 12); st.set_content_margin_all(14)
+ obj_tip.add_theme_stylebox_override("panel", st)
+ paint_panel(obj_tip, "UI_TOOLTIP_PLATE_S", Vector4(34, 40, 26, 40), Vector4(50, 30, 32, 28))
+ add_child(obj_tip); obj_tip.hide()
+
+func show_object_tip(anchor: Control, picture: Control, title: String, body: String, note: String = "") -> void:
+ ## HOVER-001: a large picture of the object beside its name and rules, placed next to the
+ ## object (never over it) and kept on screen.
+ if obj_tip == null: build_obj_tip()
+ clear(obj_tip)
+ obj_tip_owner = anchor
+ var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 14); row.mouse_filter = Control.MOUSE_FILTER_IGNORE; obj_tip.add_child(row)
+ ignore_mouse(picture); row.add_child(picture)
+ var text := VBoxContainer.new(); text.add_theme_constant_override("separation", 6); text.mouse_filter = Control.MOUSE_FILTER_IGNORE; row.add_child(text)
+ text.add_child(FriendlyLook.label(title, 20, IceKey.INK, CONDENSED))
+ var rule := FriendlyLook.label(body, 14, IceKey.INK, skin.font); rule.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; rule.custom_minimum_size.x = 260; text.add_child(rule)
+ if note != "":
+  var n := FriendlyLook.label(note, 13, Color("#4A5355"), skin.bold_font); n.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; n.custom_minimum_size.x = 260; text.add_child(n)
+ obj_tip.reset_size(); obj_tip.show()
+ await get_tree().process_frame
+ if not is_instance_valid(obj_tip) or obj_tip_owner != anchor: return
+ obj_tip.reset_size()
+ var a := anchor.get_global_rect(); var sz := obj_tip.size; var view_r := Rect2(Vector2(8, 8), Vector2(1584, 984))
+ var spots := [Vector2(a.end.x + 10, a.get_center().y - sz.y / 2.0), Vector2(a.get_center().x - sz.x / 2.0, a.end.y + 10),
+  Vector2(a.get_center().x - sz.x / 2.0, a.position.y - sz.y - 10), Vector2(a.position.x - sz.x - 10, a.get_center().y - sz.y / 2.0)]
+ var pick: Vector2 = spots[0]
+ for spot in spots:
+  var r := Rect2(spot, sz)
+  if view_r.encloses(r) and not r.intersects(a): pick = spot; break
+ pick.x = clampf(pick.x, view_r.position.x, view_r.end.x - sz.x); pick.y = clampf(pick.y, view_r.position.y, view_r.end.y - sz.y)
+ obj_tip.position = pick
+
+func hide_object_tip(anchor: Control) -> void:
+ if obj_tip and obj_tip_owner == anchor: obj_tip.hide(); obj_tip_owner = null
+
+func ignore_mouse(node: Node) -> void:
+ if node is Control: (node as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
+ for c in node.get_children(): ignore_mouse(c)
+
+func big_card(id: String, k: float = 1.1) -> Control:
+ ## A card face drawn large for a hover box (display-only copy).
+ var holder := Control.new(); holder.custom_minimum_size = FriendlyCard.CONCEPT_RECT.size * k + Vector2(0, FriendlyCard.CONCEPT_RECT.position.y * k)
+ var card := FriendlyCard.new(); card.setup(self, id, -1); card.scale = Vector2.ONE * k; holder.add_child(card)
+ return holder
+
+func tip_on_hover(target: Control, make: Callable) -> void:
+ ## Show the HOVER-001 box while the pointer (or keyboard focus) is on target.
+ target.tooltip_text = ""
+ var show := func(): var parts: Array = make.call(); show_object_tip(target, parts[0], parts[1], parts[2], parts[3] if parts.size() > 3 else "")
+ target.mouse_entered.connect(show); target.focus_entered.connect(show)
+ target.mouse_exited.connect(func(): hide_object_tip(target)); target.focus_exited.connect(func(): hide_object_tip(target))
+
 func ghostware_list() -> Array:
  ## The Rustler's ORIGIN Ghostware first, then any others the run has picked up.
  var rows := []
@@ -520,6 +577,17 @@ func build_ghost_rail() -> void:
    badge.text = initials.substr(0, 2); badge.add_theme_font_override("font", console_font(3)); badge.add_theme_font_size_override("font_size", int(d * 0.42))
    badge.add_theme_color_override("font_color", Analog.CREAM); badge.add_theme_color_override("font_hover_color", Color.WHITE)
   ghost_rail.add_child(badge)
+  var row_copy: Dictionary = row
+  tip_on_hover(badge, func():
+   var pic: Control
+   if ResourceLoader.exists(art_path):
+    var t := TextureRect.new(); t.texture = load(art_path); t.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; t.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED; t.custom_minimum_size = Vector2(128, 128); pic = t
+   else:
+    var big := Button.new(); big.custom_minimum_size = Vector2(128, 128); big.text = badge.text; big.add_theme_font_override("font", console_font(3)); big.add_theme_font_size_override("font_size", 48)
+    for st in ["normal", "disabled"]:
+     var f := (badge.get_theme_stylebox("normal") as StyleBoxFlat).duplicate() as StyleBoxFlat; f.set_corner_radius_all(64); f.set_border_width_all(5); big.add_theme_stylebox_override(st, f)
+    big.add_theme_color_override("font_color", Analog.CREAM); pic = big
+   return [pic, String(row_copy.name), String(row_copy.text) if String(row_copy.text) != "" else "Effect text arrives with the Ghostware data.", "ORIGIN GHOSTWARE" if row_copy.origin else "GHOSTWARE"])
 
 func build_cap_rack() -> void:
  ## CAPS (UPL rules §1): single-use, outside the deck, 3 slots to start. Empty placeholders until
@@ -540,6 +608,11 @@ func build_cap_rack() -> void:
    var glass := StyleBoxFlat.new(); glass.bg_color = Color("#10201C"); glass.set_corner_radius_all(int(w / 2.0)); glass.set_border_width_all(2); glass.border_color = Color("#6E8C82")
    slot.add_theme_stylebox_override("panel", glass)
   at(cap_rack, slot, Vector2(5.0 + float(k) * (w + 4.0), 20), Vector2(w, 126))
+  slot.focus_mode = Control.FOCUS_ALL
+  tip_on_hover(slot, func():
+   var big := Panel.new(); big.custom_minimum_size = Vector2(60, 240)
+   big.add_theme_stylebox_override("panel", slot.get_theme_stylebox("panel"))
+   return [big, "EMPTY CAP SLOT", "CAPS are single-use injectable code, outside your deck: flip, inject, discard. 0 BW, any time during your turn.", "Get CAPS at Uplinks, as a Node reward, or as a drop after a BREACH."])
 
 func build_cartridges() -> void:
  ## Each installed program is a slim card pushed into a slot on top of the CRT, like a
@@ -563,7 +636,8 @@ func build_cartridges() -> void:
   var pic_path := "res://assets/concept/cards/%s.png" % p.inst.id
   cart.texture_normal = frame if frame else null
   cart.ignore_texture_size = true; cart.stretch_mode = TextureButton.STRETCH_SCALE
-  cart.tooltip_text = d.name + ("  (on screen)" if on else "  (click to put on screen)")
+  var cart_id: String = p.inst.id
+  tip_on_hover(cart, func(): return [big_card(cart_id), d.name, game.card_text(cart_id), "On screen." if active_program == uid else "Click to put it on screen."])
   cart.focus_mode = Control.FOCUS_ALL
   cart.pressed.connect(func(): active_program = uid; ui.leave_program(); build_rig())
   if frame == null:
@@ -1104,12 +1178,21 @@ func build_key_tip() -> void:
  var st := FriendlyLook.style(Color("#F6EFDF"),CONSOLE_CHROME,3,12); st.set_content_margin_all(14); st.shadow_color=Color("#1A110A66"); st.shadow_size=10; st.shadow_offset=Vector2(0,6)
  key_tip.add_theme_stylebox_override("panel",st)
  paint_panel(key_tip, "UI_TOOLTIP_PLATE_S", Vector4(34, 40, 26, 40), Vector4(50, 30, 32, 28))
- key_tip_list = VBoxContainer.new(); key_tip_list.add_theme_constant_override("separation",5); key_tip.add_child(key_tip_list)
+ # HOVER-001: the key, drawn large, beside its rule.
+ var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 14); key_tip.add_child(row)
+ key_tip_image = CenterContainer.new(); key_tip_image.name = "KeyTipImage"; key_tip_image.custom_minimum_size = Vector2(150, 0); row.add_child(key_tip_image)
+ key_tip_list = VBoxContainer.new(); key_tip_list.add_theme_constant_override("separation",5); row.add_child(key_tip_list)
  add_child(key_tip); key_tip.hide()
 
 func show_key_tip(i: int, s: int, anchor: Rect2) -> void:
  if dragging_uid >= 0: return   # the drag header already explains a drop
  clear(key_tip_list)
+ clear(key_tip_image)
+ var small_key = key_nodes.get(i, {}).get(s)
+ if small_key and is_instance_valid(small_key):
+  var big := IceKey.new(); big.configure(small_key.kind, small_key.value, small_key.state, small_key.cost, false, 2.2)
+  big.badge = small_key.badge; big.extra = small_key.extra; big.locked = small_key.locked; big.firing = small_key.firing
+  big.mouse_filter = Control.MOUSE_FILTER_IGNORE; key_tip_image.add_child(big)
  var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
  var lines := key_rule_lines(i,s)
  var slot: int = game.active_subs(i).find(s)

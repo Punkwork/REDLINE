@@ -725,7 +725,14 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  gui_input.connect(_card_input)
  queue_redraw()
 ## Above the card in screen space (never clipped by a scrolling row), kept inside the window.
+const HOVER_SCALE := 1.1   # HOVER-001: hand cards are 0.72x, so the hover picture is about 1.5x the hand size
+
 func show_full_rules() -> void:
+ var picture := full_rules.get_node_or_null("HoverPicture")
+ if picture and picture.get_child_count() == 0 and not placeholder:
+  var big := FriendlyCard.new(); big.setup(view, card_id, -1); big.scale = Vector2.ONE * HOVER_SCALE
+  _ignore_mouse(big); picture.add_child(big)
+ if picture: full_rules.reset_size()
  var card_rect := get_global_rect()
  var view_rect := get_viewport_rect()
  var at := Vector2(card_rect.get_center().x - full_rules.size.x / 2.0, card_rect.position.y - full_rules.size.y - 8)
@@ -850,6 +857,14 @@ func build_concept_face(d: Dictionary, id: String, rule: String, corp: bool, rar
  var normal_font: Font = view.skin.font if corp else preload("res://assets/fonts/Barlow-SemiBold.ttf")
  var rules_bold: Font = view.skin.bold_font if corp else preload("res://assets/fonts/Barlow-Bold.ttf")
  full_rules = build_full_rules_panel(rule, glow_mask(d.type), normal_font, rules_bold)
+ # HOVER-001: the card drawn large beside its rules (filled in on first hover).
+ var hover_box := HBoxContainer.new(); hover_box.name = "HoverBox"; hover_box.add_theme_constant_override("separation", 10); hover_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ var picture := Control.new(); picture.name = "HoverPicture"; picture.mouse_filter = Control.MOUSE_FILTER_IGNORE; picture.custom_minimum_size = CONCEPT_RECT.size * HOVER_SCALE + Vector2(0, CONCEPT_RECT.position.y * HOVER_SCALE)
+ hover_box.add_child(picture)
+ var rules_column := CenterContainer.new(); rules_column.mouse_filter = Control.MOUSE_FILTER_IGNORE; hover_box.add_child(rules_column)
+ full_rules.custom_minimum_size = full_rules.size   # keep the glow panel's built size inside the container
+ rules_column.add_child(full_rules)
+ full_rules = hover_box
  full_rules.top_level = true; full_rules.z_index = 200; full_rules.visible = false; add_child(full_rules)
  summary_rules = true
  tooltip_text = d.name + " · " + d.type + " · " + rarity
@@ -865,3 +880,7 @@ func build_concept_face(d: Dictionary, id: String, rule: String, corp: bool, rar
  mouse_exited.connect(func(): full_rules.visible = false)
  gui_input.connect(_card_input)
  queue_redraw()
+
+func _ignore_mouse(node: Node) -> void:
+ if node is Control: (node as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
+ for c in node.get_children(): _ignore_mouse(c)
