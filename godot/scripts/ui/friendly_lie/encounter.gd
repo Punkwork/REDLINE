@@ -484,7 +484,7 @@ func build_obj_tip() -> void:
  obj_tip = PanelContainer.new(); obj_tip.name = "ObjectTip"; obj_tip.mouse_filter = Control.MOUSE_FILTER_IGNORE; obj_tip.z_index = 170
  var st := FriendlyLook.style(Color("#F6EFDF"), CONSOLE_CHROME, 3, 12); st.set_content_margin_all(14)
  obj_tip.add_theme_stylebox_override("panel", st)
- paint_panel(obj_tip, "UI_TOOLTIP_PLATE_S", Vector4(34, 40, 26, 40), Vector4(50, 30, 32, 28))
+ paint_panel(obj_tip, "UI_TOOLTIP_PLATE_S", Vector4(34, 40, 26, 40), Vector4(62, 34, 36, 32))   # clear of the plate's chrome and pointer
  add_child(obj_tip); obj_tip.hide()
 
 func show_object_tip(anchor: Control, picture: Control, title: String, body: String, note: String = "") -> void:
