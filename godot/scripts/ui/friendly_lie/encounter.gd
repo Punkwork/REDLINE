@@ -13,7 +13,7 @@ var bottom_hud: Panel
 ## ENC-CONCEPT-001 layout pass (concept 2): the hand sits in the copper tray between the deck
 ## and discard wells; the ICE consoles fill the middle band; the left column is CRT, punch
 ## cards, the NUL/REM slip and toggles; vitals sit bottom-left beside the tray.
-const HAND_RECT := Rect2(400, 778, 742, 214)
+const HAND_RECT := Rect2(400, 778, 662, 214)   # the CAP rack sits right of the hand (UPL caps rules: "beside your hand")
 const ICE_SCALE := 0.85
 const ICE_X := 264.0
 const ICE_TOP := 110.0
@@ -38,6 +38,9 @@ var key_u := 1.0
 var active_program := -1
 var known_programs: Array = []
 var program_connector: Control
+var ghost_rail: HBoxContainer   # Ghostware badges hanging from the pipe above the ICE, any number
+var cap_rack: Control           # CAP slots beside the hand (3 minimum; more later)
+const CAP_SLOTS := 3
 var cart_rack: Control   # slim program cards sticking out of the CRT's top, one per installed program
 const CONSOLE_OVERLAP := -14   # the mascot peeks over the console's top edge
 ## Graffiti lands in free margins: under the Program Bay and under the TRACE panel.
@@ -243,6 +246,7 @@ func _ready() -> void:
   contact.mouse_filter = Control.MOUSE_FILTER_IGNORE
   at(connector, contact, Vector2(10 + pin * 9, 20 if on_crt else 21), Vector2(5,4))
  build_tray()
+ build_cap_rack()
  hand = FriendlyHand.new(); hand.position = HAND_RECT.position; hand.size = HAND_RECT.size; hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
  bottom_hud = Panel.new(); bottom_hud.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(bottom_hud, "UI_VITALS_PANEL", Vector4.ZERO); bottom_hud.position = Vector2(16, 772); bottom_hud.size = Vector2(240, 214); add_child(bottom_hud)
  var piles_paper:=Panel.new(); piles_paper.add_theme_stylebox_override("panel", Analog.bakelite() if painted("UI_HAND_TRAY") == null else StyleBoxEmpty.new()); piles_paper.position=Vector2(1268,898); piles_paper.size=Vector2(142,50); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
@@ -306,6 +310,7 @@ func _ready() -> void:
  at(sign, wordmark, Vector2(10,4), Vector2(270,40))
  at(sign, headline, Vector2(10,47), Vector2(270,32))
  build_legend()
+ build_ghost_rail()
 func clear(node: Node) -> void:
  for child in node.get_children(): node.remove_child(child); child.queue_free()
 func at(parent: Node, control: Control, pos: Vector2, extent: Vector2 = Vector2.ZERO) -> Control:
@@ -388,6 +393,7 @@ func build_rig() -> void:
  rig_row.add_child(FriendlyLook.label("RACK · CHAIN " + ("/".join(game.enc.get("last_tags",[])) if not game.enc.get("last_tags",[]).is_empty() else "—"), 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
  sync_active_program()
  build_cartridges()
+ if ghost_rail: build_ghost_rail()
  if program_connector: program_connector.visible = game.installed.is_empty()
  var shown := game.installed.filter(func(q): return q.inst.uid == active_program)
  for p in shown:
@@ -471,6 +477,70 @@ func build_rig() -> void:
  for c in game.rack:
   var d := CardDB.def(c.id)
   rig_row.add_child(FriendlyLook.button(d.name, func(): ui._show_inspect(c.id), FriendlyLook.TONER, FriendlyLook.PAPER))
+func ghostware_list() -> Array:
+ ## The Rustler's ORIGIN Ghostware first, then any others the run has picked up.
+ var rows := []
+ if game == null: return rows
+ var r: Dictionary = CardDB.RUSTLERS.get(game.rustler, {})
+ if not r.is_empty(): rows.append({"name": String(r.origin), "text": String(r.origin_text), "origin": true})
+ for id in game.ghostware:
+  rows.append({"name": String(id).replace("_", " "), "text": "", "origin": false})
+ return rows
+
+func build_ghost_rail() -> void:
+ ## Ghostware badges hang from the copper pipe along the top of the ICE area, left to right,
+ ## shrinking to fit when there are many. Roll over a badge to read it.
+ if ghost_rail == null:
+  ghost_rail = HBoxContainer.new(); ghost_rail.name = "GhostwareRail"; ghost_rail.mouse_filter = Control.MOUSE_FILTER_PASS; ghost_rail.z_index = 40
+  ghost_rail.add_theme_constant_override("separation", 4)
+  at(self, ghost_rail, Vector2(272, 100), Vector2(1300, 30))
+ clear(ghost_rail)
+ var rows := ghostware_list()
+ if rows.is_empty(): return
+ var tag := console_plate("GHOSTWARE", Color("#1A1412"), Analog.CREAM_DIM, 10, console_font(3)); tag.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ ghost_rail.add_child(tag)
+ var d := clampf((1300.0 - 90.0) / float(rows.size()) - 4.0, 16.0, 28.0)
+ for row in rows:
+  var badge := Button.new(); badge.name = "Ghostware"; badge.custom_minimum_size = Vector2(d, d); badge.focus_mode = Control.FOCUS_ALL
+  badge.tooltip_text = ("ORIGIN GHOSTWARE · " if row.origin else "GHOSTWARE · ") + String(row.name) + ("\n" + String(row.text) if String(row.text) != "" else "")
+  var key := String(row.name).to_upper().replace(" ", "_").replace("'", "").replace("’", "")
+  var art_path := "res://assets/concept/ghostware/GW_%s.png" % key
+  var face := StyleBoxFlat.new(); face.bg_color = Color("#241A14"); face.set_corner_radius_all(int(d)); face.set_border_width_all(2)
+  face.border_color = Color("#E0B04A") if row.origin else Color("#9FB7AE")
+  for st in ["normal", "hover", "pressed", "focus"]:
+   var f := face.duplicate() as StyleBoxFlat
+   if st == "hover" or st == "focus": f.border_color = Color("#FFF1C2")
+   badge.add_theme_stylebox_override(st, f)
+  if ResourceLoader.exists(art_path):
+   var icon := TextureRect.new(); icon.texture = load(art_path); icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+   icon.mouse_filter = Control.MOUSE_FILTER_IGNORE; icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); badge.add_child(icon)
+  else:
+   # Placeholder until the painted icon arrives: the Ghostware's initials.
+   var initials := "".join(Array(String(row.name).split(" ")).map(func(w): return w.substr(0, 1)))
+   badge.text = initials.substr(0, 2); badge.add_theme_font_override("font", console_font(3)); badge.add_theme_font_size_override("font_size", int(d * 0.42))
+   badge.add_theme_color_override("font_color", Analog.CREAM); badge.add_theme_color_override("font_hover_color", Color.WHITE)
+  ghost_rail.add_child(badge)
+
+func build_cap_rack() -> void:
+ ## CAPS (UPL rules §1): single-use, outside the deck, 3 slots to start. Empty placeholders until
+ ## CAPS are in the build; the rack widens when a Rustler gains more slots.
+ cap_rack = Panel.new(); cap_rack.name = "CapRack"; cap_rack.mouse_filter = Control.MOUSE_FILTER_PASS
+ var sb := StyleBoxFlat.new(); sb.bg_color = Color(0.08, 0.05, 0.03, 0.7); sb.set_corner_radius_all(8); sb.set_border_width_all(1); sb.border_color = Color("#8A6A3A")
+ cap_rack.add_theme_stylebox_override("panel", sb)
+ at(self, cap_rack, Vector2(1066, 794), Vector2(76, 154))
+ centred("CAPS", 11, Analog.AMBER, console_font(3), Vector2(0, 3), Vector2(76, 14), cap_rack)
+ var slot_art := painted("UI_CAP_SLOT")
+ var w := (76.0 - 10.0 - 4.0 * float(CAP_SLOTS - 1)) / float(CAP_SLOTS)
+ for k in CAP_SLOTS:
+  var slot := Panel.new(); slot.name = "CapSlot%d" % k; slot.tooltip_text = "Empty CAP slot. CAPS are single-use: flip, inject, discard. 0 BW, any time in your turn."
+  slot.mouse_filter = Control.MOUSE_FILTER_STOP
+  if slot_art:
+   var st := StyleBoxTexture.new(); st.texture = slot_art; slot.add_theme_stylebox_override("panel", st)
+  else:
+   var glass := StyleBoxFlat.new(); glass.bg_color = Color("#10201C"); glass.set_corner_radius_all(int(w / 2.0)); glass.set_border_width_all(2); glass.border_color = Color("#6E8C82")
+   slot.add_theme_stylebox_override("panel", glass)
+  at(cap_rack, slot, Vector2(5.0 + float(k) * (w + 4.0), 20), Vector2(w, 126))
+
 func build_cartridges() -> void:
  ## Each installed program is a slim card pushed into a slot on top of the CRT, like a
  ## cartridge in a player: count the cards to count the programs. The one on screen sticks

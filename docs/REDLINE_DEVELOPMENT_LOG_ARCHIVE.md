@@ -2191,3 +2191,13 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 ## 2026-11-18 — ARCH-COPY-001: remaining working copy approved (Claude)
 
 Designer: "All approved" (asked about the HANDOFF WAITING row). Approved: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the nine island names, the defeat framing copy, the on-screen ’Pelago uses, and the polite anti-paper lines. `REDLINE_ARCHIPELAGO.md` v0.7, ADP §2.2.3, master design and HANDOFF updated (WAITING row moved to Done). Still to do before on-screen use: fact-check the historical summaries and check island names against well-known real care chains. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — ARCH-COPY-001 correction: island names stay working copy (Claude)
+
+Designer: "These are working copy names - will fact check later on care-home names. Samizdat history all good." The nine island names are working copy again (ARCH §4.0); a WAITING row in HANDOFF tracks the check. The samizdat history in ADP §2.2.1 is checked. The gulag summary (ARCH §2) still carries its fact-check note. **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001c: mascot silhouettes and independent scan tags (Codex).
+
+## 2026-11-18 — No history fact-checks (Claude)
+
+Designer: "Don't verify history. This is a made-up world. It doesn't have to perfectly resemble the real world." Historical background (ADP §2.2.1, ARCH §2) is marked as inspiration, not a source to match; the fact-check notes and the HANDOFF item are removed. The island names remain working copy (care-home check). **Code changes:** none. **Tests:** none.

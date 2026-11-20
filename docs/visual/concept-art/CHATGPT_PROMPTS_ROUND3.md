@@ -1,4 +1,4 @@
-# ENC-CONCEPT-001 — ChatGPT prompts, round 3 (cards, avatar families, corporation backgrounds)
+# ENC-CONCEPT-001 — ChatGPT prompts, round 3 (cards, avatar families, corporation backgrounds, CAPS and Ghostware)
 
 **Date:** 2026-11-20 · **Author:** Claude · **For:** the designer, to paste into ChatGPT
 **Why:** the designer asked (2026-11-20) for (1) pictures for every card still showing the green stencil, (2) avatars whose look tells you the corporation, what it does and its ICE type at a glance, with sentries fun to build, and (3) a new background for each corporation that fits the painted style and the corporation's services.
@@ -232,3 +232,79 @@ Make these ONE AT A TIME, in this order. After each, wait until I type "next".
 
 Reply "ready" and then make image 1.
 ```
+
+---
+
+## 4. CAPS and Ghostware (interface parts and icons)
+
+**Where they go (built 2026-11-20):** CAPS sit in a rack of **3 slots** in the hand tray, right of the hand (more slots later, the rack widens). **Ghostware** hang as round badges from the copper pipe along the top of the ICE area, any number, shrinking to fit; roll over a badge to read it. Until these icons arrive, the badges show initials and the CAP slots are plain glass tubes.
+
+**Attach as style references:** `UI_KEY_READY.png`, `UI_BW_CHIP.png`, `ICON_SHEET.png`.
+
+### 4a. CAP slot and the 12 CAPS
+
+```
+Small painted interface pieces for my game PANOPTICON, same atompunk style, materials and light as the attached parts (chrome, bakelite, brass, glass, soft top-left light). Rules for every image: transparent background, front-on and flat, NO text, letters or numbers, exact size and file name. CAPS are single-use injectable code: "flip, inject, discard".
+
+Make these ONE AT A TIME, in this order. After each, wait until I type "next".
+
+1. UI_CAP_SLOT.png — 80 × 320. An empty upright glass tube holder for one injector vial: chrome end caps top and bottom, dark glass, a small brass clip. Empty.
+2. CAP_BW_SPIKE.png — a lightning bolt in the vial.
+3. CAP_BULWARK.png — a tiny shield in the vial.
+4. CAP_FLUSH.png — a swirl draining away.
+5. CAP_NANOSUTURE.png — a stitched heart.
+6. CAP_CRACKER.png — a cracked padlock.
+7. CAP_JACK_OUT.png — a pulled plug and cord.
+8. CAP_REFRESH.png — cards fanning in a circular arrow.
+9. CAP_MEMORY_SPIKE.png — a glowing memory chip.
+10. CAP_STABILIZER.png — a gyroscope.
+11. CAP_ZERO_DAY.png — a key made of light.
+12. CAP_SYSTEM_RESTORE.png — a broom sweeping junk mail.
+13. CAP_NEW_IDENTITY.png — a mask being swapped.
+(For 2–13: each is CAP_<NAME>.png, 80 × 320, a slim glass injector vial with chrome ends that fits the slot above, glowing liquid in a colour of your choice, and a small symbol floating in the liquid as described.)
+
+Reply "ready" and then make image 1.
+```
+
+### 4b. Ghostware badge icons
+
+```
+Small round badge icons for my game PANOPTICON, same atompunk style as the attached parts. Ghostware are permanent hacker upgrades, a bit ghostly. Rules for every image: PNG, transparent background, 256 × 256, a round enamel badge face filling the image (no outer rim, the game draws the rim), one simple bold symbol in the centre, NO text, letters or numbers, exact file name. Drawback Ghostware use a red-tinted face.
+
+Make these ONE AT A TIME, in this order. After each, wait until I type "next".
+
+1. GW_READY_RIG.png — Generalist ORIGIN: a ready-to-go rig, a PROGRAM card already clicked into a deck.
+2. GW_LOW_PROFILE.png — ECHO ORIGIN: a flat cap pulled low over a quiet pair of eyes.
+3. GW_REDLINER.png — RIOT ORIGIN: a speedometer needle pinned in the red.
+4. GW_PATIENT_ZERO.png — VECTOR ORIGIN: a single green virus cell under a magnifying glass.
+5. GW_SUBDERMAL_PLATING.png — riveted armour plates under a patch of skin.
+6. GW_NEURAL_BUFFER.png — a brain in a padded glass jar.
+7. GW_EXPANDED_MEMORY.png — a memory stick with an extra stick bolted on.
+8. GW_OVERCLOCKED_BUS.png — a tiny bus with a rocket booster.
+9. GW_SPARE_SOCKET.png — an empty wall socket with a spare plug hanging ready.
+10. GW_DEAD_MANS_POCKET.png — a coat pocket with a hand slipping a card into it.
+11. GW_MONEY_MULE.png — a mule carrying sacks of coins.
+12. GW_SIGNAL_BOOSTER.png — a radio mast with big rings of signal.
+13. GW_SCRAMBLED_ID.png — an ID badge with its photo scrambled into squares.
+14. GW_BLACK_MIRROR.png — a black hand mirror with a red glint (drawback).
+15. GW_BLEEDING_EDGE.png — a razor blade dripping a drop of red (drawback).
+16. GW_BURNOUT_CHIP.png — a chip glowing hot with smoke curling off (drawback).
+17. GW_KILLSWITCH.png — a big red mushroom switch with a heartbeat line.
+18. GW_COLD_STORAGE.png — a frosty icebox with a card inside.
+19. GW_RECYCLER.png — a recycling arrows loop around a spark.
+20. GW_CHAOS_ENGINE.png — a whirling gear with four cards spinning off it.
+21. GW_LUCKY_STRIKE.png — a match striking with a four-leaf clover in the flame.
+22. GW_FIRST_CONTACT.png — a gloved hand touching a vault door with a spark.
+23. GW_SLEEPER_AGENT.png — a sleeping figure in a trench coat, one eye open.
+24. GW_LONG_MEMORY.png — an elephant's head with a knot in its trunk (drawback).
+25. GW_SIXTH_SENSE.png — an eye inside an open palm.
+26. GW_FIELD_MEDIC.png — a tin first-aid kit with a cross of tape.
+27. GW_STREET_CRED.png — a gold coin with sneaker treads on it.
+28. GW_PATCH_CABLE.png — a coiled cable with a stitched patch.
+29. GW_HEARTH_KEY.png — HALCYON's master key: a brass key with a little house on its bow.
+30. GW_VOICE_MIMIC.png — a parrot at a telephone mouthpiece.
+
+Reply "ready" and then make image 1.
+```
+
+Put CAP and slot files in `PANOPTICON art`; Claude moves `UI_CAP_SLOT` to `godot/assets/concept/ui/`, the CAPS to `godot/assets/concept/caps/` and the badges to `godot/assets/concept/ghostware/`.
