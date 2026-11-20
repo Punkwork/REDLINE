@@ -1,12 +1,12 @@
-# PANOPTICON — HALCYON PLAYTEST 6 (0.6.0-playtest.6)
+# PANOPTICON — HALCYON PLAYTEST 7 (0.7.0-playtest.7)
 
-This Windows build covers four Rustlers and HALCYON's first four map rows. The selection screen shows **HALCYON PLAYTEST 6 · ATOMIC DECO PUNK · 0.6.0-playtest.6**. Record the Rustler, Node, turn, and cards with feedback.
+This Windows build covers four Rustlers and HALCYON's first four map rows. The selection screen shows **HALCYON PLAYTEST 7 · ATOMIC DECO PUNK · 0.7.0-playtest.7**. Record the Rustler, Node, turn, and cards with feedback.
 
-Playtest 6 adds corporate newsreels and hesitation lines, local personalized ads, and a relocation notice followed by THE CARBON. Open the ledger from DEAD DROP in the run menu. The nine island names are working copy. See the repository fixtures for Central Node punch-card arrival, LUCIDA record edits and PATCHWORK grafts.
+Playtest 7 rebuilds the encounter screen in the painted concept interface (ENC-CONCEPT-001): ICE cabinets with the new AUTO-RENEW and CAPTCHA characters, icon keys with rules on hover, white card faces in a copper hand tray, the mushroom END TURN button and a KEY LEGEND card. ICE and cards without painted art yet use the older drawings. Playtest 6 added corporate newsreels and hesitation lines, local personalized ads, and a relocation notice followed by THE CARBON. Open the ledger from DEAD DROP in the run menu. The nine island names are working copy. See the repository fixtures for Central Node punch-card arrival, LUCIDA record edits and PATCHWORK grafts.
 
 ## Get the Windows build
 
-Open the successful Playtest 6 build on `release`. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44314368001) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44314368001/artifacts/14431722167) Download `PANOPTICON-HALCYON-PLAYTEST-6-0.6.0-playtest.6-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
+Open the successful Playtest 7 build on `release` (Actions run and artifact links are in `docs/HANDOFF.md`). Download `PANOPTICON-HALCYON-PLAYTEST-7-0.7.0-playtest.7-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
 
 Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt` contains the executable's SHA-256. Use the bundled **Playtest QA Checklist v0.5** (`REDLINE_PLAYTEST_CHECKLIST.md`). Mark checks for unavailable routes, features, or later mechanics **N/A**.
 
@@ -101,7 +101,7 @@ they do not establish human balance or full-run deck-size targets.
 
 ## VIS-001 — The Friendly Lie encounter candidate
 
-The Friendly Lie encounter is included in Playtest 6. The repository stores its PNG fixtures in `docs/visual/fixtures/vis-001/`.
+The Friendly Lie encounter is included in Playtest 7. The repository stores its PNG fixtures in `docs/visual/fixtures/vis-001/`.
 
 - Corporate app background and mascot objects sit above the Rustler's paper/toner interface. The black scan tag under each mascot is the rules authority: STR, passive text, subroutine effects, DEADLOCK progress, hidden entries, broken history, viruses and ZEROED. Scroll the encounter area when there are extra rule rows. The white NEXT RESPONSE strip follows the actual upcoming response and scrolls horizontally if needed.
 - Cheery faces become wary when something on that ICE is broken or TRACE reaches 20. A shown next-response PULP hit of 5+ or positive CORTEX makes that ICE lethal; the working threshold is tunable in the main scene inspector. Biggest visible PULP and newly tumbled entries receive red chips. Hidden effects remain `? HIDDEN` until the existing reveal rule permits disclosure. BREACH knocks the mascots out while keeping the scans readable.
@@ -118,7 +118,7 @@ The turn-3 fixture advances two real Corporation Responses and resolves CAPTCHA'
 
 ## CHROME-001 — playable Chrome Deco encounter refinement
 
-The ten PNGs in `docs/visual/fixtures/chrome-001/` show the live Godot encounter included in Playtest 6.
+The ten PNGs in `docs/visual/fixtures/chrome-001/` show the live Godot encounter included in Playtest 7.
 
 The CAPTCHA fixture uses actual AUTO-RENEW/CAPTCHA stats and Generalist cards. AUTO-RENEW starts at STR 5 and CAPTCHA at STR 4. CONSENT FORM and REJECT ALL now show PULP 3, and CONSENT FORM has no passive. The atrium and pearl/chrome mascot shells are illustration assets; every face, rule, cost and control remains live. ICE rules now sit on pearl-enamel service plaques with slate lettering, silver edges and restrained teal accents. Hidden and broken chips use pale dashed/struck-through states; rules retain a solid backing against the architecture. Card art is a six-motif prototype atlas, reused by role while preserving authored card text. It does not introduce new cards or effects.
 
