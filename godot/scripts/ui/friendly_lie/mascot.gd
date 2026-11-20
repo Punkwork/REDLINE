@@ -14,6 +14,24 @@ var applied_knockout := false
 var chrome: ChromeFrame
 ## ENC-CONCEPT-001: painted character art (concept 2), when delivered for this ICE.
 var concept_art: TextureRect
+## MOOD-PIXEL-001: the avatar resolves out of 16-bit when its mood changes, and while
+## lethal it pulses: 2 s in 16-bit, 2 s crisp. Reduced motion turns both off.
+const MOOD_PIXEL := preload("res://themes/mood_pixel.gdshader")
+const BIT16 := {"cell": 4.0, "levels": 24.0, "dither": 0.55}   # the 16-bit look on screen
+const CRISP := {"cell": 1.0, "levels": 256.0, "dither": 0.0}
+# A mood change: the old face drops into 16-bit, swaps to the new face at the 16-bit peak,
+# holds a moment, then resolves to full resolution.
+const DROP_SECONDS := 0.25
+const HOLD_SECONDS := 0.2
+const RESOLVE_SECONDS := 0.35
+const CHANGE_SECONDS := DROP_SECONDS + HOLD_SECONDS + RESOLVE_SECONDS
+var new_art: Texture2D
+var old_art: Texture2D
+const PULSE_HALF := 2.0      # seconds on, seconds off
+const PULSE_RAMP := 0.18     # quick slide between the two looks
+var fx_holder: Control
+var fx_mat: ShaderMaterial
+var fx_age := 0.0
 var console_two := false   # ENC-CONCEPT-001 layout pass: the character stands in concept 2's cabinet
 var art_x := 10.0
 const WORDS := {
@@ -221,13 +239,27 @@ func setup(owner_view, i: int, state: String) -> void:
   var sticker_node := get_node_or_null("Sticker")
   for child in get_children():
    if child != speech and child != sticker_node: child.visible = false
-  concept_art = TextureRect.new(); concept_art.name = "ConceptArt"; concept_art.texture = load(art_path)
+  concept_art = TextureRect.new(); concept_art.name = "ConceptArt"; new_art = load(art_path); concept_art.texture = new_art
+  # The face it is changing from, shown until the 16-bit peak of the transition.
+  if previous_mood != "" and previous_mood != mood and not view.reduced_motion:
+   var old_mood := "lethal" if previous_mood == "lethal" else ("wary" if previous_mood in ["wary", "knocked_out"] else "cheery")
+   var old_path := "res://assets/concept/mascots/%s_%s.png" % [id, old_mood]
+   if old_mood != art_mood and ResourceLoader.exists(old_path): old_art = load(old_path); concept_art.texture = old_art
   concept_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; concept_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
   concept_art.mouse_filter = Control.MOUSE_FILTER_PASS
   concept_art.position = Vector2(10, -64); concept_art.size = Vector2(294, 294); concept_art.pivot_offset = Vector2(147, 294)
   concept_art.gui_input.connect(func(e):
    if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: view.click_ice(index))
   add_child(concept_art); move_child(concept_art, 0)
+  # The 16-bit layer rides on the art itself, so it follows the lean and breathing.
+  fx_holder = Control.new(); fx_holder.name = "MoodPixel"; fx_holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  fx_holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+  var copy := BackBufferCopy.new(); copy.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT; fx_holder.add_child(copy)
+  fx_mat = ShaderMaterial.new(); fx_mat.shader = MOOD_PIXEL; fx_mat.set_shader_parameter("mask_tex", concept_art.texture)
+  var fx_rect := ColorRect.new(); fx_rect.material = fx_mat; fx_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  fx_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); fx_holder.add_child(fx_rect)
+  concept_art.add_child(fx_holder)
+  fx_holder.visible = false
   speech.position = Vector2(300, 6); speech.size = Vector2(176, 96); speech_copy.size = speech.size - Vector2(24, 18)
   if sticker_node: sticker_node.position = Vector2(302, 112)
   if console_two:
@@ -268,7 +300,41 @@ func _ready() -> void:
  for sub in view.game.ice_definition(view.game.enc.ice[index]).subs.size():
   if view.ui._is_flash(view.game.enc.ice[index],sub):
    var lunge := create_tween(); lunge.tween_property(self,"motion_offset",Vector2(0,12),0.12); lunge.tween_property(self,"motion_offset",Vector2.ZERO,0.12); break
+static func mood_look(mood_now: String, mood_before: String, age: float, now: float, reduced: bool, base_cell: float = 1.0) -> Dictionary:
+ ## What the avatar should look like: arriving from a mood change, pulsing while lethal, or crisp.
+ if reduced: return CRISP
+ if mood_before != "" and mood_before != mood_now and age < CHANGE_SECONDS:
+  # 0 → 1 → 1 → 0: crisp to 16-bit, hold, back to crisp
+  var amount := 1.0
+  if age < DROP_SECONDS: amount = age / DROP_SECONDS
+  elif age > DROP_SECONDS + HOLD_SECONDS: amount = 1.0 - (age - DROP_SECONDS - HOLD_SECONDS) / RESOLVE_SECONDS
+  var peak := maxf(BIT16.cell, base_cell * 2.0)
+  return {"cell": lerpf(1.0, peak, amount), "levels": lerpf(256.0, BIT16.levels if base_cell <= 1.0 else 10.0, amount), "dither": lerpf(0.0, BIT16.dither, amount)}
+ if mood_now == "lethal":
+  var phase := fmod(now, PULSE_HALF * 2.0)
+  # on for the first half, off for the second, with a short ramp at each edge
+  var on := clampf(minf(phase / PULSE_RAMP, (PULSE_HALF - phase) / PULSE_RAMP), 0.0, 1.0) if phase < PULSE_HALF else 0.0
+  # When TRACE has already pixelated the screen (PIXEL-TRACE-001), the pulse goes coarser still.
+  var peak := maxf(BIT16.cell, base_cell * 2.0)
+  return {"cell": lerpf(1.0, peak, on), "levels": lerpf(256.0, BIT16.levels if base_cell <= 1.0 else 10.0, on), "dither": lerpf(0.0, BIT16.dither, on)}
+ return CRISP
+
+func update_mood_fx(delta: float) -> void:
+ if fx_mat == null or not is_instance_valid(view): return
+ fx_age += delta
+ # Swap to the new face at the 16-bit peak.
+ if old_art != null and fx_age >= DROP_SECONDS and is_instance_valid(concept_art):
+  concept_art.texture = new_art; fx_mat.set_shader_parameter("mask_tex", new_art); old_art = null
+ var base: float = float(view.pixel_shown.get("cell", 1.0)) if view.get("pixel_shown") is Dictionary else 1.0
+ var look := mood_look(mood, previous_mood, fx_age, Time.get_ticks_msec() / 1000.0, view.reduced_motion, base)
+ var cell := float(roundi(float(look.cell)))
+ fx_holder.visible = cell > 1.0
+ fx_mat.set_shader_parameter("cell", cell)
+ fx_mat.set_shader_parameter("levels", float(look.levels))
+ fx_mat.set_shader_parameter("dither", float(look.dither))
+
 func _process(delta: float) -> void:
+ update_mood_fx(delta)
  if not is_visible_in_tree() or not is_instance_valid(view) or not is_instance_valid(face) or view.game.enc.is_empty() or index>=view.game.enc.ice.size(): return
  clock+=delta
  var target: Vector2 = view.interaction_position()

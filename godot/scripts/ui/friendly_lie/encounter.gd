@@ -23,7 +23,7 @@ const MASCOT_GROWTH := 1.18
 const STAGE_H := 236
 const ICE_AREA_H := 632.0 / ICE_SCALE   # on screen y110 to y742; the ticker sits below
 const NOTE_W := 196.0
-const NOTE_H := 108.0
+const NOTE_H := 96.0
 const CRT_INK := Color("#7DFFB8")
 var crt_screen: Panel
 var crt_status: Label
@@ -38,6 +38,7 @@ var key_u := 1.0
 var active_program := -1
 var known_programs: Array = []
 var program_connector: Control
+var cart_rack: Control   # slim program cards sticking out of the CRT's top, one per installed program
 const CONSOLE_OVERLAP := -14   # the mascot peeks over the console's top edge
 ## Graffiti lands in free margins: under the Program Bay and under the TRACE panel.
 ## ENC-CONCEPT-001: graffiti goes on the decal plate in the top bar, between the node plate and the corporate sign.
@@ -137,7 +138,7 @@ var arrival_until := 0.0
 func _ready() -> void:
  theme = FriendlyLook.THEME
  mouse_filter = Control.MOUSE_FILTER_PASS
- skin = ui.friendly_skin
+ skin = concept_backgrounds(ui.friendly_skin)
  music = FriendlyMusic.new()
  add_child(music)
  music.set_level(ui.music_volume, ui.music_muted)
@@ -179,11 +180,11 @@ func _ready() -> void:
  # ENC-CONCEPT-001: each ICE carries its own NEXT RESPONSE plate (scan_tag); no shared strip.
  # The NUL/REM note is a typed slip clipped under the CRT (concept-2 layout pass).
  var slip := painted("UI_NOTE_SLIP") != null
- note = FriendlyLook.panel(FriendlyLook.TONER); note.name = "NulRemNote"; note.position = Vector2(18, 432); note.size = Vector2(238, 196); note.rotation_degrees = -1.0 if slip else -0.6; note.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(note)  # PASS: a SCRIPT dropped on the note still plays
+ note = FriendlyLook.panel(FriendlyLook.TONER); note.name = "NulRemNote"; note.position = Vector2(18, 458); note.size = Vector2(238, 176); note.rotation_degrees = -1.0 if slip else -0.6; note.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(note)  # PASS: a SCRIPT dropped on the note still plays
  paint_panel(note, "UI_NOTE_SLIP", Vector4(60, 70, 40, 40), Vector4.ZERO)
- note_text = FriendlyLook.label("", 12, FriendlyLook.TONER if slip else FriendlyLook.HIGHLIGHT); note_text.position = Vector2(26, 74) if slip else Vector2(10, 8); note_text.size = Vector2(NOTE_W, NOTE_H); note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
- var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.name = "VoiceButton"; voice.position = Vector2(16, 666); voice.size = Vector2(118, 28); voice.add_theme_font_size_override("font_size", 11); paint_button(voice); add_child(voice)
- var legend_button := FriendlyLook.button("KEY LEGEND", func(): legend.visible = not legend.visible, FriendlyLook.TONER, FriendlyLook.PAPER); legend_button.name = "LegendButton"; legend_button.add_theme_font_size_override("font_size", 11); paint_button(legend_button); legend_button.add_theme_font_override("font", console_font(2)); at(self, legend_button, Vector2(138, 666), Vector2(118, 28))
+ note_text = FriendlyLook.label("", 12, FriendlyLook.TONER if slip else FriendlyLook.HIGHLIGHT); note_text.position = Vector2(26, 72) if slip else Vector2(10, 8); note_text.size = Vector2(NOTE_W, NOTE_H); note_text.clip_text = slip; note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
+ var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.name = "VoiceButton"; voice.position = Vector2(16, 670); voice.size = Vector2(118, 28); voice.add_theme_font_size_override("font_size", 11); paint_button(voice); add_child(voice)
+ var legend_button := FriendlyLook.button("KEY LEGEND", func(): legend.visible = not legend.visible, FriendlyLook.TONER, FriendlyLook.PAPER); legend_button.name = "LegendButton"; legend_button.add_theme_font_size_override("font_size", 11); paint_button(legend_button); legend_button.add_theme_font_override("font", console_font(2)); at(self, legend_button, Vector2(138, 670), Vector2(118, 28))
  build_left_trim()
  # The log and the rack run along a black-glass ticker under the ICE.
  var rig_ground := Panel.new(); rig_ground.name = "Ticker"; rig_ground.add_theme_stylebox_override("panel", Analog.glass(4, Color("#2A2622"))); paint_panel(rig_ground, "UI_TICKER", Vector4(40, 10, 40, 10), Vector4.ZERO); rig_ground.position=Vector2(264,744); rig_ground.size=Vector2(1320,24); add_child(rig_ground)
@@ -195,7 +196,9 @@ func _ready() -> void:
  program_bay.mouse_filter = Control.MOUSE_FILTER_PASS
  program_bay.add_theme_stylebox_override("panel", Analog.bakelite())
  paint_panel(program_bay, "UI_CRT_MONITOR", Vector4.ZERO)
- at(self, program_bay, Vector2(16,110), Vector2(240,279))
+ cart_rack = Control.new(); cart_rack.name = "ProgramCartridges"; cart_rack.mouse_filter = Control.MOUSE_FILTER_PASS
+ at(self, cart_rack, Vector2(16, 104), Vector2(240, 50))
+ at(self, program_bay, Vector2(16,140), Vector2(240,279))
  crt_screen = Panel.new(); crt_screen.name = "CrtScreen"; crt_screen.mouse_filter = Control.MOUSE_FILTER_PASS
  var screen_style := StyleBoxFlat.new(); screen_style.bg_color = Color("#0E1F1A"); screen_style.border_color = Color("#C9B796"); screen_style.set_border_width_all(3); screen_style.set_corner_radius_all(18)
  crt_screen.add_theme_stylebox_override("panel", screen_style)
@@ -249,7 +252,7 @@ func _ready() -> void:
  var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), Analog.BAKELITE, Analog.CREAM, 6, console_font(2)); deck.add_theme_font_size_override("font_size", 12); paint_button(deck); paint_tray_button(deck); deck.position = Vector2(1268, 798); deck.size = Vector2(142, 46); add_child(deck)
  end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), Analog.BAKELITE_EDGE, Color("#F0A090"), 6, console_font(3)); end_run_button.add_theme_font_size_override("font_size", 13); paint_button(end_run_button); end_run_button.add_theme_color_override("font_color", Color("#FFB4A4")); paint_tray_button(end_run_button, Color("#8A1408")); end_run_button.position = Vector2(1268, 848); end_run_button.size = Vector2(142, 46); add_child(end_run_button)
  toast = FriendlyLook.panel(Color.WHITE, FriendlyLook.RED, 1, 10, 3)
- at(self, toast, Vector2(18, 432), Vector2(238, 105))
+ at(self, toast, Vector2(18, 458), Vector2(238, 105))
  toast.z_index = 5
  toast_text = FriendlyLook.label(skin.cracking_copy, 15, FriendlyLook.TONER, skin.font)
  toast_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -258,11 +261,11 @@ func _ready() -> void:
  at(toast, toast_reply, Vector2(8, 80), Vector2(184, 20))
  toast.hide()
  punch_arrival = FriendlyLook.panel(FriendlyLook.TONER, FriendlyLook.HIGHLIGHT, 1, 5)
- at(self, punch_arrival, Vector2(18, 432), Vector2(238, 105))
+ at(self, punch_arrival, Vector2(18, 458), Vector2(238, 105))
  punch_arrival.clip_contents = true
  punch_arrival.hide()
  punch_holder = Panel.new(); var punch_style := Analog.bakelite(8); punch_style.shadow_size = 4; punch_holder.add_theme_stylebox_override("panel", punch_style)
- at(self, punch_holder, Vector2(16, 394), Vector2(240, 32))
+ at(self, punch_holder, Vector2(16, 422), Vector2(240, 32))
  punch_holder.clip_contents = true
  punch_count = FriendlyLook.label("", 13, FriendlyLook.PAPER, FriendlyLook.BOLD)
  at(punch_holder, punch_count, Vector2(8, 5))
@@ -275,7 +278,7 @@ func _ready() -> void:
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
  motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
  paint_button(motion_button); motion_button.add_theme_font_override("font", console_font(2))
- motion_button.position=Vector2(16,634); motion_button.size=Vector2(240,28); motion_button.add_theme_font_size_override("font_size",11); add_child(motion_button)
+ motion_button.position=Vector2(16,638); motion_button.size=Vector2(240,28); motion_button.add_theme_font_size_override("font_size",11); add_child(motion_button)
  watcher_warning=FriendlyLook.panel(FriendlyLook.RED); watcher_warning.position=Vector2(1030,540); watcher_warning.size=Vector2(510,36); watcher_warning.z_index=150; watcher_warning.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(watcher_warning)
  watcher_text=FriendlyLook.label("",12,FriendlyLook.TONER,FriendlyLook.BOLD); watcher_text.position=Vector2(8,7); watcher_warning.add_child(watcher_text); watcher_warning.hide()
  strike_overlay.gui_input.connect(func(e):
@@ -352,6 +355,9 @@ func _process(_dt: float) -> void:
   var fs:=12
   while fs>8 and FriendlyLook.MONO.get_multiline_string_size(note_text.text,HORIZONTAL_ALIGNMENT_LEFT,NOTE_W,fs).y>NOTE_H: fs-=1
   note_text.add_theme_font_size_override("font_size",fs)
+  # The label's own line height (theme spacing included) is the real measure on the paper slip.
+  while fs>8 and note_text.get_line_count()*(note_text.get_line_height()+note_text.get_theme_constant("line_spacing"))>NOTE_H:
+   fs-=1; note_text.add_theme_font_size_override("font_size",fs)
  note_text.visible_ratio=ui.nr_text.visible_ratio if context=="" and leak.is_empty() else 1.0
  var now := Time.get_ticks_msec()/1000.0
  punch_arrival.visible = now < arrival_until
@@ -381,6 +387,7 @@ func build_rig() -> void:
  clear(program_slots)
  rig_row.add_child(FriendlyLook.label("RACK · CHAIN " + ("/".join(game.enc.get("last_tags",[])) if not game.enc.get("last_tags",[]).is_empty() else "—"), 11, FriendlyLook.PAPER, FriendlyLook.BOLD))
  sync_active_program()
+ build_cartridges()
  if program_connector: program_connector.visible = game.installed.is_empty()
  var shown := game.installed.filter(func(q): return q.inst.uid == active_program)
  for p in shown:
@@ -464,6 +471,53 @@ func build_rig() -> void:
  for c in game.rack:
   var d := CardDB.def(c.id)
   rig_row.add_child(FriendlyLook.button(d.name, func(): ui._show_inspect(c.id), FriendlyLook.TONER, FriendlyLook.PAPER))
+func build_cartridges() -> void:
+ ## Each installed program is a slim card pushed into a slot on top of the CRT, like a
+ ## cartridge in a player: count the cards to count the programs. The one on screen sticks
+ ## out further. Click a card to put it on screen.
+ if cart_rack == null: return
+ clear(cart_rack)
+ var n := game.installed.size()
+ if n == 0: return
+ var w := 40.0
+ var gap := clampf((200.0 - w) / maxf(1.0, float(n - 1)), 0.0, 44.0) if n > 1 else 0.0
+ var start := 120.0 - (w + gap * float(n - 1)) / 2.0
+ for k in n:
+  var p: Dictionary = game.installed[k]
+  var d := CardDB.def(p.inst.id)
+  var uid: int = p.inst.uid
+  var on := uid == active_program
+  var cart := TextureButton.new(); cart.name = "Cartridge%d" % k
+  var frame_path := "res://assets/concept/cards/CARD_FRAME_%s.png" % String(d.type)
+  var frame: Texture2D = load(frame_path) if ResourceLoader.exists(frame_path) else null
+  var pic_path := "res://assets/concept/cards/%s.png" % p.inst.id
+  cart.texture_normal = frame if frame else null
+  cart.ignore_texture_size = true; cart.stretch_mode = TextureButton.STRETCH_SCALE
+  cart.tooltip_text = d.name + ("  (on screen)" if on else "  (click to put on screen)")
+  cart.focus_mode = Control.FOCUS_ALL
+  cart.pressed.connect(func(): active_program = uid; ui.leave_program(); build_rig())
+  if frame == null:
+   var plain := Panel.new(); plain.mouse_filter = Control.MOUSE_FILTER_IGNORE
+   plain.add_theme_stylebox_override("panel", FriendlyLook.style(Color("#F6F1E4"), Color("#2C7A8C"), 2, 3)); plain.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); cart.add_child(plain)
+  if ResourceLoader.exists(pic_path):
+   var pic := TextureRect.new(); pic.texture = load(pic_path); pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+   pic.mouse_filter = Control.MOUSE_FILTER_IGNORE; at(cart, pic, Vector2(4, 11), Vector2(w - 8, 22))
+  # the card rises out of the slot: the one on screen by 34 px, the others by 22
+  at(cart_rack, cart, Vector2(start + float(k) * (w + gap) if n > 1 else start, 6.0 if on else 17.0), Vector2(w, 56))
+  if on:
+   var lamp := Analog.lamp(Color("#4DFF6E"), true, 8); lamp.mouse_filter = Control.MOUSE_FILTER_IGNORE; at(cart, lamp, Vector2(w / 2.0 - 4, 1))
+
+func concept_backgrounds(base: CorporationSkin) -> CorporationSkin:
+ ## ENC-CONCEPT-001: a corporation's painted backgrounds replace its atrium when delivered
+ ## (res://assets/concept/backgrounds/BG_<CORP>_FRIENDLY.png and _HOSTILE.png).
+ var friendly := "res://assets/concept/backgrounds/BG_%s_FRIENDLY.png" % base.corporation
+ if not ResourceLoader.exists(friendly): return base
+ var painted_skin: CorporationSkin = base.duplicate()
+ painted_skin.background = load(friendly)
+ var hostile := "res://assets/concept/backgrounds/BG_%s_HOSTILE.png" % base.corporation
+ if ResourceLoader.exists(hostile): painted_skin.hostile_background = load(hostile)
+ return painted_skin
+
 func sync_active_program() -> void:
  var uids: Array = game.installed.map(func(q): return q.inst.uid)
  for uid in uids:
@@ -1653,9 +1707,9 @@ func build_pipework() -> void:
 
 func build_left_trim() -> void:
  ## Hardware under the left column's buttons: a vent grille, a valve and a pressure gauge.
- art_rect("UI_VENT_GRILLE", Vector2(18, 700), Vector2(150, 50))
- art_rect("UI_PIPE_VALVE", Vector2(170, 700), Vector2(44, 44))
- art_rect("UI_PIPE_GAUGE", Vector2(214, 700), Vector2(42, 44))
+ art_rect("UI_VENT_GRILLE", Vector2(18, 704), Vector2(150, 46))
+ art_rect("UI_PIPE_VALVE", Vector2(170, 704), Vector2(42, 42))
+ art_rect("UI_PIPE_GAUGE", Vector2(214, 704), Vector2(40, 42))
 
 func build_tray() -> void:
  ## Concept 2's copper tray: deck well, the hand, discard well, tray buttons, END TURN in the housing.

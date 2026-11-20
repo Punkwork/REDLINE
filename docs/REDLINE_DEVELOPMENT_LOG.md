@@ -4,16 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — ZINE-003 confirmed (Claude)
-
-Designer: "Yes all approved." Closes the interpretations in the ZINE-003 entry: the SAMIZINE look is approved, and it applies to in-world underworld publications and the THE CARBON pages (defeat screen, DEAD DROP record), not the HUD (RUSTLER-LOOK-001). **Code changes:** none. **Tests:** none.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001b: encounter scaffold and paper hand (Codex).
-
-## 2026-11-18 — ARCH-COPY-001: remaining working copy approved (Claude)
-
-Designer: "All approved" (asked about the HANDOFF WAITING row). Approved: the *THE CARBON* title, the *NOTES FROM THE ’PELAGO* column, the nine island names, the defeat framing copy, the on-screen ’Pelago uses, and the polite anti-paper lines. `REDLINE_ARCHIPELAGO.md` v0.7, ADP §2.2.3, master design and HANDOFF updated (WAITING row moved to Done). Still to do before on-screen use: fact-check the historical summaries and check island names against well-known real care chains. **Code changes:** none. **Tests:** none.
-
 ## 2026-11-18 — ARCH-COPY-001 correction: island names stay working copy (Claude)
 
 Designer: "These are working copy names - will fact check later on care-home names. Samizdat history all good." The nine island names are working copy again (ARCH §4.0); a WAITING row in HANDOFF tracks the check. The samizdat history in ADP §2.2.1 is checked. The gulag summary (ARCH §2) still carries its fact-check note. **Code changes:** none. **Tests:** none.
@@ -596,3 +586,11 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 ## 2026-11-20 — ENC-CONCEPT-001: ACCEPT ALL and REJECT ALL mascots (Claude)
 
 Imported the designer's six ChatGPT mascots (`ACCEPT_ALL_*`, `REJECT_ALL_*`, cheery/wary/lethal) into `godot/assets/concept/mascots/`; the game picks them up by name, so COOKIE BANNER now shows the painted bellhop twins. No code changes. Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
+
+## 2026-11-20 — MOOD-PIXEL-001, program cartridges, AVATAR-001 and ChatGPT round 3 (Claude)
+
+Designer asked for card pictures, per-corporation backgrounds, avatar families that read by corporation, job and ICE type (sentries fun to build), 16-bit mood transitions with a 2 s on / 2 s off lethal pulse, and slim program cards sticking out of the CRT. Built: `themes/mood_pixel.gdshader` (TRACE-pixel method masked by the avatar's alpha) and `FriendlyMascot.mood_look()` (drop to 16-bit, swap faces at the peak, resolve; lethal pulse, coarser over TRACE pixelation; off under reduced motion); `FriendlyEncounter.build_cartridges()` (one card per installed program on top of the CRT; the active one higher with a lamp; click to switch) with the left column moved down 30 px; `concept_backgrounds()` swaps in `assets/concept/backgrounds/BG_<CORP>_*.png` when delivered. The NUL/REM slip now fits its text by the label's real line height and clips. Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND3.md` (83 card pictures in four prompts, AVATAR-001 rules with build-a-sentry tables and the six remaining HALCYON avatars, six backgrounds). `shot_ice_analog` checks the pulse timing and captures the 16-bit phase.
+
+Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ZINE-003 confirmed (Claude); 2026-11-18 — ARCH-COPY-001: remaining working copy approved (Claude).

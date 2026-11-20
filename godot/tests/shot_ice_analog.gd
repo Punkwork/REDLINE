@@ -102,5 +102,23 @@ func run() -> void:
 	check(g.enc.ice.size() == 3, "Black ICE joins (3 ICE)")
 	check_keys("three ICE")
 	await snapshot("ICE-ANALOG-001_05_mask_off_three_ice")
+	# MOOD-PIXEL-001: lethal avatars pulse 2 s in 16-bit, 2 s crisp; a mood change arrives in 16-bit.
+	check(is_equal_approx(FriendlyMascot.mood_look("lethal", "lethal", 9.0, 0.9, false).cell, FriendlyMascot.BIT16.cell), "lethal: 16-bit in the first 2 s")
+	check(is_equal_approx(FriendlyMascot.mood_look("lethal", "lethal", 9.0, 3.0, false).cell, 1.0), "lethal: crisp in the next 2 s")
+	check(is_equal_approx(FriendlyMascot.mood_look("wary", "cheery", 0.0, 3.0, false).cell, 1.0), "a mood change starts from the crisp face")
+	check(is_equal_approx(FriendlyMascot.mood_look("wary", "cheery", FriendlyMascot.DROP_SECONDS + 0.1, 3.0, false).cell, FriendlyMascot.BIT16.cell), "drops to 16-bit for the swap")
+	check(is_equal_approx(FriendlyMascot.mood_look("wary", "cheery", FriendlyMascot.CHANGE_SECONDS, 3.0, false).cell, 1.0), "and resolves to full resolution")
+	check(is_equal_approx(FriendlyMascot.mood_look("lethal", "lethal", 9.0, 0.9, true).cell, 1.0), "reduced motion: no pulse")
+	main.friendly.reduced_motion = false
+	var lethal_art: Array = main.friendly.ice_row.find_children("MoodPixel", "", true, false)
+	check(not lethal_art.is_empty(), "painted avatars carry the 16-bit layer")
+	while fmod(Time.get_ticks_msec() / 1000.0, 4.0) < 0.5 or fmod(Time.get_ticks_msec() / 1000.0, 4.0) > 1.5: await process_frame
+	await settle(3)
+	check(lethal_art.any(func(n): return n.visible), "a lethal avatar is in 16-bit during the on phase")
+	await snapshot("MOOD-PIXEL-001_lethal_16bit")
+	while fmod(Time.get_ticks_msec() / 1000.0, 4.0) < 2.5 or fmod(Time.get_ticks_msec() / 1000.0, 4.0) > 3.5: await process_frame
+	await settle(3)
+	check(lethal_art.all(func(n): return not n.visible), "and crisp during the off phase")
+	main.friendly.reduced_motion = true
 	print("ICE-ANALOG-001: %d failures" % failures)
 	main.voice.stop(); main.voice.stream = null; main.queue_free(); await settle(); quit(1 if failures else 0)
