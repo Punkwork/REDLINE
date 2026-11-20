@@ -11,7 +11,7 @@ Attach `ICE_ANALOG_CONCEPT_02_INSTRUMENT_KEYS.png` to the ChatGPT conversation a
 - **No real people, brands or existing characters.**
 - **Transparent background (PNG)** for mascots. Card illustrations are full-bleed, with no border and no frame.
 - Keep each character **identical across its moods**: generate *cheery* first, then ask ChatGPT to edit that image for the other moods ("same character, same pose and framing, change only the expression and…").
-- Hand files over with the **exact file names** below. Put them in `godot/assets/concept/mascots/` and `godot/assets/concept/cards/`, or attach them in Claude and Claude will commit them.
+- Hand files over with the **exact file names** below. Put them in `godot/assets/concept/mascots/` and `godot/assets/concept/cards/` (frames too), or attach them in Claude and Claude will commit them.
 
 ### Shared style line (paste at the start of every prompt)
 
@@ -47,60 +47,77 @@ File names: `<ICE_ID>_cheery.png`, `<ICE_ID>_wary.png`, `<ICE_ID>_lethal.png`.
 | `DOORBELL_CAM` | A round chrome doorbell with one big camera-lens eye, a doorman's cap, small white gloves. Its eye should be clearly a lens. |
 | `HOUSE_CALL` | Black ICE. A repairman in overalls and a peaked cap pulled low, face in shadow except two glowing red eyes, a toolbox on the ledge. **One file only:** `HOUSE_CALL_lethal.png`. |
 
-## 3. Card illustrations
+## 3. Cards (the screenshot-2 card look)
 
-**Format:** PNG, **1024 × 1024**, full bleed, no text, no border. The game puts the title, cost dial and corner icons over the top band and the rules under the image, so keep the subject in the **middle 70%** with calm space at the top. These are the Rustler's side, the underworld's own tools: hand-built, salvaged, a bit punk. Barcodes and punched holes are fine as decoration; QR codes are not.
+**What the designer wants (2026-11-19):** "each card is essentially a little bit smaller. They're all white. They have bright colors on them… just essentially the word on the card, the name of the card, a little image that's in the color that the cards in the second screenshot… are." The face shows **the card's name and a small, brightly coloured picture** on a white card. The rules are read on hover (the existing card inspection), not printed on the face. The game draws the name, the BW cost and the corner icons itself, so the art has **no text**.
 
-**Tint by card type** (as in screenshot 2):
-- **PROGRAM**: teal-blue ground.
-- **SCRIPT**: salmon-pink ground.
-- **PROTOCOL**: mustard ground.
-- **BLOATWARE**: oxide red, styled as **corporate** junk (HALCYON mint and chrome leaking in).
+Two kinds of file make a card: one **blank card frame per type**, and one **picture per card**. Claude puts the picture in the frame's window and writes the name in its band.
+
+### 3.1 Card frames (four files)
+
+**Format:** PNG, transparent outside the card, **600 × 840** (5:7), no text.
+
+> A blank playing card for a 1950s retro-futurist card game, matching the cards in the reference image: clean white card stock with a faint paper grain and very slightly rounded corners, a thin printed border in **[TYPE COLOUR]**. At the top, an empty white title band about 18% of the card height, with a thin coloured rule under it. Below it, an empty rectangular picture window about 62% of the card height with a thin dark keyline. At the bottom, a narrow empty strip. A small empty circle in the top-left corner for a cost. No text, no symbols, no picture inside the window.
+
+| File | [TYPE COLOUR] |
+|---|---|
+| `CARD_FRAME_PROGRAM.png` | teal blue |
+| `CARD_FRAME_SCRIPT.png` | salmon pink |
+| `CARD_FRAME_PROTOCOL.png` | mustard yellow |
+| `CARD_FRAME_BLOATWARE.png` | oxide red |
+
+### 3.2 Card pictures
+
+**Format:** PNG, **600 × 520**, full bleed (it fills the frame's window), no text, no border.
+
+> Small bright illustration for a playing card, matching the card pictures in the reference image: flat bold screen-print colours with a few tones, simple strong silhouettes, a little halftone, cheerful 1950s retro-futurist feel. Background in **[TYPE COLOUR]** tones. Subject: **[SUBJECT]**. No text.
+
+Tint by type: **PROGRAM** teal-blue, **SCRIPT** salmon-pink, **PROTOCOL** mustard, **BLOATWARE** oxide red with HALCYON mint leaking in (it's corporate junk). These are the Rustler's tools: hand-built, salvaged, a bit punk. Barcodes and punched holes are fine; QR codes are not.
 
 File name: `<CARD_ID>.png`.
 
-### Batch 1: the Generalist starter deck and Bloatware
+#### Batch 1: the Generalist starter deck and Bloatware
 
 | CARD_ID | Type | Subject |
 |---|---|---|
-| `FORTRESS_ICEPICK` | PROGRAM | A heavy hand-forged ice pick wedged into a riveted steel vault door, sparks. |
-| `TUMBLER_ICEPICK` | PROGRAM | A slim lock-pick turning a spinning brass tumbler drum, reels blurring. |
-| `VOID_ICEPICK` | PROGRAM | A glowing pick reaching into a black hollow diamond in empty space. |
-| `BASIC_EXTRACTOR` | PROGRAM | A rubber hose siphoning glowing coins out of a corporate pipe into a tin can. |
-| `CORTEX_BUFFER` | PROGRAM | A foil-lined colander helmet with a little valve on top, held up proudly. |
+| `FORTRESS_ICEPICK` | PROGRAM | A heavy ice pick wedged into a riveted vault door, sparks. |
+| `TUMBLER_ICEPICK` | PROGRAM | A slim lock-pick turning a spinning brass tumbler drum. |
+| `VOID_ICEPICK` | PROGRAM | A glowing pick reaching into a black hollow diamond. |
+| `BASIC_EXTRACTOR` | PROGRAM | A hose siphoning glowing coins out of a pipe into a tin can. |
+| `CORTEX_BUFFER` | PROGRAM | A foil-lined colander helmet with a little valve on top. |
 | `PULP_SHIELD` | SCRIPT | A trash-can-lid shield covered in taped foil, deflecting a bolt. |
-| `PROBE` | SCRIPT | A gloved hand pushing a long needle probe into a chrome panel, a crack spreading. |
-| `GHOST_SIGNAL` | SCRIPT | A Möbius strip of paper with a foil antenna, a faint ghost silhouette slipping out of a surveillance beam. |
-| `SPAM` | BLOATWARE | A cheerful HALCYON envelope bursting with junk-mail coupons, clogging a mail slot. |
-| `TRACER` | BLOATWARE | A blinking mint tracking dot stuck to a jacket like a sticker, with a thin red beam leading off-screen. |
+| `PROBE` | SCRIPT | A gloved hand pushing a long needle probe into a chrome panel. |
+| `GHOST_SIGNAL` | SCRIPT | A ghost silhouette slipping out of a surveillance beam, a paper Möbius-strip antenna. |
+| `SPAM` | BLOATWARE | A cheerful envelope bursting with junk-mail coupons. |
+| `TRACER` | BLOATWARE | A blinking tracking dot stuck on a jacket, a thin red beam leading away. |
 
-### Batch 2: the other Rustlers' starter cards
+#### Batch 2: the other Rustlers' starter cards
 
 | CARD_ID | Type | Subject |
 |---|---|---|
 | `HUSH` | PROGRAM | A finger to masked lips beside a felt-wrapped lock pick. |
-| `BORROWED_CREDENTIALS` | SCRIPT | A forged ID badge on a lanyard, the photo replaced with a cut-out. |
-| `SLOW_DRIP` | PROGRAM | A dripping tap into a jar slowly filling with coins. |
-| `SMOKESCREEN` | SCRIPT | A smoke bomb made from a soup can, pink smoke billowing. |
-| `DEAD_AIR` | SCRIPT | A pirate radio with the needle on static, a sock stuffed in its speaker. |
-| `SLEDGE` | PROGRAM | A sledgehammer with a taped handle mid-swing into a wall. |
-| `BRUTE_FORCE` | SCRIPT | A shoulder slamming through a door, splinters flying. |
-| `OVERLOAD` | SCRIPT | A fuse box overflowing with sparks and jury-rigged wires. |
-| `FEEDBACK` | SCRIPT | A speaker cone blasting rings of sound back at a camera. |
-| `ADRENAL_SPIKE` | SCRIPT | A syringe-shaped battery, lightning in a glass tube. |
-| `SHATTER` | SCRIPT | A pane of chrome glass breaking into shards around a fist. |
-| `LAY_LOW` | SCRIPT | A figure hiding under a manhole cover, one eye peeking out. |
-| `SMASH_AND_GRAB` | PROGRAM | A crowbar and a burlap sack grabbing glowing data capsules from a smashed display case. |
+| `BORROWED_CREDENTIALS` | SCRIPT | A forged ID badge on a lanyard, the photo a cut-out. |
+| `SLOW_DRIP` | PROGRAM | A dripping tap filling a jar with coins. |
+| `SMOKESCREEN` | SCRIPT | A soup-can smoke bomb, pink smoke billowing. |
+| `DEAD_AIR` | SCRIPT | A pirate radio with a sock stuffed in its speaker. |
+| `SLEDGE` | PROGRAM | A taped sledgehammer mid-swing. |
+| `BRUTE_FORCE` | SCRIPT | A shoulder slamming through a door, splinters. |
+| `OVERLOAD` | SCRIPT | A fuse box overflowing with sparks. |
+| `FEEDBACK` | SCRIPT | A speaker blasting rings of sound back at a camera. |
+| `ADRENAL_SPIKE` | SCRIPT | A syringe-shaped battery with lightning inside. |
+| `SHATTER` | SCRIPT | A chrome pane breaking around a fist. |
+| `LAY_LOW` | SCRIPT | One eye peeking out from under a manhole cover. |
+| `SMASH_AND_GRAB` | PROGRAM | A crowbar and a sack grabbing glowing capsules from a smashed case. |
 | `STINGER` | PROGRAM | A wasp-shaped lock pick with a needle tail. |
-| `RUNTIME_ERROR` | SCRIPT | A corporate gear-machine jamming on a wrench thrown into its cogs. |
+| `RUNTIME_ERROR` | SCRIPT | A wrench jammed in the cogs of a corporate machine. |
 | `INJECT` | SCRIPT | A glowing green vial plugged into a chrome port. |
-| `REPLICATOR` | PROGRAM | A hand-cranked mimeograph spitting out green virus cells like copies. |
-| `OUTBREAK` | SCRIPT | Green virus spores spreading across a chrome panel. |
+| `REPLICATOR` | PROGRAM | A hand-cranked copier spitting out green virus cells. |
+| `OUTBREAK` | SCRIPT | Green spores spreading across a chrome panel. |
 
-Reward-pool cards (65) come later, in the same format, once batch 1 is in and the look is confirmed.
+Reward-pool cards come later in the same format, once batch 1 is in and the look is confirmed.
 
 ## 4. Hand-off checklist
 
-1. Generate batch 1 (`AUTO_RENEW` and `CAPTCHA` × 3 moods; then the 10 cards).
+1. Generate batch 1: `AUTO_RENEW` and `CAPTCHA` × 3 moods, the four card frames, then the 10 card pictures.
 2. Check: transparent background (mascots), no text anywhere, exact file names.
 3. Attach in Claude, or commit to the folders above. Claude wires them in and sends screenshots.
