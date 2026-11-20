@@ -594,3 +594,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 Designer: "Ok for ice - except for subroutines. They might have effects beyond their icon(s)." ICE avatars keep no extra hover box. The key tip now lists every effect of the subroutine as its own row with its icon (a key shows only its main icon), then what else touches it: DEADLOCK steps and progress, BOOTING locks, TUMBLE on TUMBLERS, and the ICE's passive. Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — DEV-001: Claude Code takes over code development (Claude).
+
+## 2026-11-20 — ChatGPT round 4 prompts: the other Node types and the map (Claude)
+
+Designer asked what else ChatGPT could make, "at least for the other node types". Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND4.md`: five underworld scenes (Uplink, SAFEHOUSE, DEAD DROP, Console Lab, SIGNAL UNCLEAR), Central Node and escape backgrounds for each corporation, a defaced tourist-map board per corporation and nine map Node badges. No code changes; wiring is a HANDOFF item. Interpretation to confirm: Rustler places share one underworld look rather than one per corporation.
