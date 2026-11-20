@@ -1199,7 +1199,32 @@ func show_key_tip(i: int, s: int, anchor: Rect2) -> void:
  var where := ("SLOT %d · S%d" % [slot+1,s+1]) if d.type=="TUMBLER" and slot>=0 else "S%d" % (s+1)
  key_tip_list.add_child(FriendlyLook.label(where + "  ·  " + d.name, 12, Color("#6B5A44"), skin.bold_font))
  key_tip_list.add_child(FriendlyLook.label(lines[0], 22, IceKey.INK, CONDENSED))
- var rule := FriendlyLook.label("Rule: " + " ".join(lines.slice(1)), 14, IceKey.INK, skin.font); rule.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; rule.custom_minimum_size.x=300; key_tip_list.add_child(rule)
+ # Every effect of the subroutine, one row each with its own icon: a key shows one icon, but a
+ # subroutine can do more than that (HOVER-001, designer 2026-11-20).
+ key_tip_list.add_child(FriendlyLook.label("Rule:", 12, Color("#6B5A44"), skin.bold_font))
+ if not ice.seen[s] and not ice.broken[s]:
+  var hid := FriendlyLook.label(" ".join(lines.slice(1)), 14, IceKey.INK, skin.font); hid.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; hid.custom_minimum_size.x=300; key_tip_list.add_child(hid)
+ else:
+  for source in d.subs[s]:
+   var e := game.effect_value(ice, source)
+   var effect_row := HBoxContainer.new(); effect_row.add_theme_constant_override("separation", 8); effect_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+   var icon_name := "ICON_" + String(e.k)
+   var icon_tex := IceKey.art(icon_name)
+   if icon_tex:
+    var ic := TextureRect.new(); ic.texture = icon_tex; ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED; ic.custom_minimum_size = Vector2(26, 26); effect_row.add_child(ic)
+   else:
+    effect_row.add_child(FriendlyLook.label("•", 16, IceKey.INK, CONDENSED))
+   var line := FriendlyLook.label(effect_rule(e), 14, IceKey.INK, skin.font); line.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; line.custom_minimum_size.x=266; effect_row.add_child(line)
+   key_tip_list.add_child(effect_row)
+ # What else touches this subroutine: multi-step DEADLOCK, BOOTING, TUMBLE, the ICE's passive.
+ var also := []
+ if Game.deadlock_steps(d.subs[s]) > 1: also.append("Takes %d breaks to open (%d done)." % [Game.deadlock_steps(d.subs[s]), ice.break_progress[s]])
+ var lock_info := break_info(i, s)
+ if String(lock_info.get("reason", "")).begins_with("LOCKED"): also.append(String(lock_info.reason) + ".")
+ if d.type == "TUMBLER": also.append("TUMBLE: when a subroutine is broken it drops out and the others slide along; the next one tumbles in.")
+ if String(d.get("ability_text", "")) != "": also.append("This ICE: " + String(d.ability_text))
+ for extra_line in also:
+  var al := FriendlyLook.label(extra_line, 13, Color("#4A5355"), skin.font); al.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; al.custom_minimum_size.x=300; key_tip_list.add_child(al)
  var timing := "Broken." if ice.broken[s] else ("Fires in the next Corporation Response." if game.is_active(i,s) else "Not in a slot this turn.")
  key_tip_list.add_child(FriendlyLook.label("Timing: " + timing, 14, IceKey.INK, skin.font))
  if not ice.broken[s] and ice.seen[s]:

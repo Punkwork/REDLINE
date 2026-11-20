@@ -4,10 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — DEV-001: Claude Code takes over code development (Claude)
-
-Designer: "I want to migrate codex code development for the redline/panopticon project to Claude Code"; Claude (project) stays on design, Codex keeps isolated tasks. Approved Claude's adapted plan ("Go ahead, yes"): a `pre-claude-code` tag instead of a migration branch (MAIN-001/RELEASE-001); `.godot/` was already ignored; Codex writes the system map; the design spec stays in the existing docs. **Changed:** `CLAUDE.md` and `AGENTS.md` (identical) expanded with roles, session routine, Godot 4.3 / typed GDScript / UI-in-code conventions (one scene, no autoloads), the no-refactor guardrail, presentation never read by rules, readability and copy guards, test commands from the CI workflow, and the RELEASE-001 build flow. Master design: DEV-001 and register row. HANDOFF: roles updated; DEV-001a (Codex: checkpoint tag, `docs/ARCHITECTURE.md`, correct the test commands) and DEV-001b (Claude Code: read-only audit). **Interpretations to confirm:** `godot/CODEX_HANDOFF.md` to be marked superseded by ARCHITECTURE.md. **Code changes:** none. **Tests:** none.
-
 ## 2026-11-18 — DEV-001a: Claude Code handoff (Codex)
 
 Published `pre-claude-code` at `0a357e7`. Added [ARCHITECTURE.md](ARCHITECTURE.md) with the model/UI boundary, runtime data and approvals, local files, fixture setup, fragile dependencies and slice hooks. Corrected §4 in the identical working agreements, superseded the old Godot handoff and moved DEV-001a to Done. Claude Code takes DEV-001b next. No game code changed.
@@ -592,3 +588,9 @@ Designer: "Yes build it now. Include that rule in the next build going forward."
 Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: HALCYON PLAYTEST 6 (Codex).
+
+## 2026-11-20 — HOVER-001: subroutine tips list every effect (Claude)
+
+Designer: "Ok for ice - except for subroutines. They might have effects beyond their icon(s)." ICE avatars keep no extra hover box. The key tip now lists every effect of the subroutine as its own row with its icon (a key shows only its main icon), then what else touches it: DEADLOCK steps and progress, BOOTING locks, TUMBLE on TUMBLERS, and the ICE's passive. Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — DEV-001: Claude Code takes over code development (Claude).
