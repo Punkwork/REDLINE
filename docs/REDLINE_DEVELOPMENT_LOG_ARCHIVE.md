@@ -2229,3 +2229,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged. 2026-11-17 — 
 ## 2026-11-18 — DOCS-001: which docs are current (Claude)
 
 Codex answered a question about Node types from outdated docs. Designer approved marking current versus outdated docs ("Yes"). `CLAUDE.md` = `AGENTS.md` §6 now gives the authority order (master design → Core Rules → topic docs; "Later amendments" tables win) and lists current docs and history/lore-only docs. One-line "not current for rules" notes added at the top of `REDLINE_BIBLE.md`, `PANOPTICON_CORE_DESIGN_AND_WORLDBUILDING.md`, `REDLINE_RULE_REVIEW_126.md`, `HALCYON_PLAYTEST3_IMPLEMENTATION.md` and `REDLINE_UI_NULREM_Design_For_Claude.md`; `REPOSITORY_STRUCTURE.md` updated. Master register and HANDOFF Done row. **Code changes:** none. **Tests:** none.
+
+## 2026-11-18 — NAME-002 proposed: VITAE → SPARK, parked for review (Claude)
+
+Designer: VITAE "seems so out of place in this setting". After two rounds of options (NERVE, TICKER, GRIT, PULSE; then SPARK, STATIC, SPINE, INK), the designer chose SPARK as the candidate but wants to review it later "to see how much it fits before committing it". Recorded as a WAITING row in HANDOFF with the rationale, samples, alternatives and rename scope. Not a decision: nothing renamed, master design unchanged. **Code changes:** none. **Tests:** none.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 2: chrome/enamel mascot objects (Codex).
