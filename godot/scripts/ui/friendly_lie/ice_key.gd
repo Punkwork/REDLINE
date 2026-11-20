@@ -38,16 +38,18 @@ func _init() -> void:
 
 const LAMP_H := 14.0
 
-func configure(k: String, v: String, s: String, chip: String, is_small: bool = false) -> void:
-	kind = k; value = v; state = s; cost = chip; small = is_small
-	var d := 30.0 if small else KEY
-	custom_minimum_size = Vector2(d + (0.0 if small else 8.0), d + (0.0 if small else LAMP_H) + (0.0 if small or chip == "" else CHIP_H + 4.0))
+var u := 1.0               # ENC-CONCEPT-001 layout pass: console keys scale with the console (concept 2's big keys)
+
+func configure(k: String, v: String, s: String, chip: String, is_small: bool = false, unit: float = 1.0) -> void:
+	kind = k; value = v; state = s; cost = chip; small = is_small; u = 1.0 if small else unit
+	var d := 30.0 if small else KEY * u
+	custom_minimum_size = Vector2(d + (0.0 if small else 8.0 * u), d + (0.0 if small else LAMP_H * u) + (0.0 if small or chip == "" else (CHIP_H + 4.0) * u))
 	size = custom_minimum_size
 	queue_redraw()
 
 func key_rect() -> Rect2:
-	var d := 30.0 if small else KEY
-	return Rect2(Vector2((size.x - d) / 2.0, 0.0 if small else LAMP_H), Vector2(d, d))
+	var d := 30.0 if small else KEY * u
+	return Rect2(Vector2((size.x - d) / 2.0, 0.0 if small else LAMP_H * u), Vector2(d, d))
 
 func _process(delta: float) -> void:
 	if firing:
@@ -92,11 +94,13 @@ func _draw() -> void:
 		if not broken and not hidden:
 			lamp_name = "UI_KEY_LAMP_RED" if state == "hit" else ("UI_KEY_LAMP_AMBER" if deadlock or locked or state == "new" else "UI_KEY_LAMP_GREEN")
 		var lamp := art(lamp_name)
-		if lamp: draw_texture_rect(lamp, Rect2(Vector2(c.x - 7, 0), Vector2(14, 14)), false)
+		if lamp: draw_texture_rect(lamp, Rect2(Vector2(c.x - 7 * u, 0), Vector2(14, 14) * u), false)
 	if firing:
 		var a := 0.45 + 0.35 * sin(pulse * TAU * 2.0)
 		_box(kr.grow(4), Color(RED, 0.3 * a), 14)
 	if lit:
+		var glow := art("UI_KEY_GLOW")
+		if glow: draw_texture_rect(glow, kr.grow(kr.size.x * 0.22), false)
 		_box(kr.grow(6), Color.TRANSPARENT, 16, FOCUS, 2)
 	draw_texture_rect(art(cap_name), kr.grow(2), false)
 	var face := kr.grow(-kr.size.x * 0.16)
@@ -112,28 +116,29 @@ func _draw() -> void:
 	else:
 		_icon(kind, c + (Vector2(0, -face.size.y * 0.17) if with_value else Vector2.ZERO), face.size.y * (0.22 if with_value else 0.3), Color(INK, tint.a))
 	if with_value:
-		var fs := 24 if value.length() <= 2 else 18
+		var fs := int((24 if value.length() <= 2 else 18) * u)
 		var tw := FONT.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
-		draw_string(FONT, Vector2(c.x - tw.x / 2.0, face.end.y + 3), value, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(CREAM_INK if light else INK, tint.a))
+		draw_string(FONT, Vector2(c.x - tw.x / 2.0, face.end.y + 3 * u), value, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(CREAM_INK if light else INK, tint.a))
 	if broken and not deadlock:
 		draw_line(face.position + Vector2(4, face.size.y - 4), face.position + Vector2(face.size.x - 4, 4), Color(INK, 0.8), 3.0, true)
 	if not small and (badge != "" or locked):
 		var bp := kr.position + Vector2(kr.size.x - 3, 3)
 		var bi := art("ICON_BOOTING_LIGHT") if locked else null
-		draw_circle(bp, 10.0, Color("#2E2016"))
-		if bi: draw_texture_rect(bi, Rect2(bp - Vector2(7, 7), Vector2(14, 14)), false)
+		draw_circle(bp, 10.0 * u, Color("#2E2016"))
+		if bi: draw_texture_rect(bi, Rect2(bp - Vector2(7, 7) * u, Vector2(14, 14) * u), false)
 		else: _badge(bp)
 	if extra > 0 and not small:
 		var p := kr.position + Vector2(3, kr.size.y - 3)
 		draw_circle(p, 9.0, INK)
 		draw_string(FONT, p + Vector2(-7, 5), "+%d" % extra, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, FACE)
 	if cost != "" and not small:
-		var chip := Rect2(Vector2(size.x / 2.0 - 26, kr.end.y + 4), Vector2(52, CHIP_H + 1))
+		var chip := Rect2(Vector2(size.x / 2.0 - 26 * u, kr.end.y + 4 * u), Vector2(52, CHIP_H + 1) * u)
 		var chip_art := art("UI_BW_CHIP")
 		if chip_art: draw_texture_rect(chip_art, chip, false)
 		else: _box(chip, Color("#2E2016"), 9)
-		var cw := FONT_SEMI.get_string_size(cost, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
-		draw_string(FONT_SEMI, Vector2(chip.get_center().x - cw / 2.0, chip.position.y + 14), cost, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("#F4ECDA") if cost != "—" else Color("#B8A890"))
+		var cfs := int(13 * u)
+		var cw := FONT_SEMI.get_string_size(cost, HORIZONTAL_ALIGNMENT_LEFT, -1, cfs).x
+		draw_string(FONT_SEMI, Vector2(chip.get_center().x - cw / 2.0, chip.position.y + chip.size.y * 0.74), cost, HORIZONTAL_ALIGNMENT_LEFT, -1, cfs, Color("#F4ECDA") if cost != "—" else Color("#B8A890"))
 
 const CREAM_INK := Color("#F6EEDC")
 

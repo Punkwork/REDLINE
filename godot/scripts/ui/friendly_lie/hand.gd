@@ -6,6 +6,8 @@ const OVERLAP := [0.05, 0.05, 0.05, 0.05, 0.05, 0.08, 0.10, 0.18, 0.26, 0.35, 0.
 const FAN_TOTAL_DEG := 20.0
 const FAN_MAX_STEP_DEG := 4.0
 const RAISE := 36.0
+## ENC-CONCEPT-001 layout pass: hand cards are drawn smaller so they sit inside the tray (concept 2).
+const HAND_SCALE := 0.72
 ## Cards sit this far below the top of the hand area, so the chassis hardware
 ## above each card (and a fanned card's lifted corner) clears the rack.
 const TOP_OFFSET := 24.0
@@ -21,7 +23,7 @@ static func fan_step_deg(count: int) -> float:
 func arrange() -> void:
  var count := get_child_count()
  if count == 0: return
- var k := FriendlyCard.DISPLAY_SCALE
+ var k := HAND_SCALE
  var w := FriendlyCard.PHYSICAL_RECT.size.x * k
  var step := fan_step_deg(count)
  var mid := (count - 1) / 2.0

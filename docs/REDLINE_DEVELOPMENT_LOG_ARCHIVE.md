@@ -2151,3 +2151,19 @@ Designer: "Don't use the term archipelago, except in game documents. Pelago is t
 Designer: "Let's build a unique new look for the zines in this game, a mashup between zines and samizdat. Something never before seen." Built as a design canvas (https://claude.ai/artifact/G84PwRDUPwMSvAYkBxmudW) with five boards: style sheet, THE CARBON #14 cover, the ledger page, NOTES FROM THE ’PELAGO over a Sunnyside Manor brochure, copy generations 1–5. Review rounds: (1) the rumour now reads "The lights and the walls, both. They're talking to each other. About you."; generations 3–5 more faded and offset; pocket wear (quarter folds, creases, frayed and grimy edges); (2) ’Pelago throughout (ARCH-SLANG-001). Accepted: "Perfect. Save whatever information is necessary, including the artifacts." **Docs:** new `REDLINE_SAMIZINE.md` (ZINE-003); `docs/visual/samizine/` (five PNG boards, review PDF v3, canvas sources, README); master design §1 and register; HANDOFF note and Done row. **Interpretations to confirm:** "Perfect" read as approving the SAMIZINE look; it applies to in-world publications and the defeat/DEAD DROP CARBON pages, not the HUD (RUSTLER-LOOK-001). New font: Special Elite (Apache 2.0). **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — VIS-001a: fixed Rustler theme and corporation skin resources (Codex).
+
+## 2026-11-18 — ADP-001 Phase 2 and ADP-4a (Codex)
+
+Loaded the approved HALCYON, IRONWATCH and LUCIDA Phase 2 pack. The encounter uses cosmetic randomness for nonrepeating NUL/REM leaks, holds graffiti in reserved margins, shows approved status and Tomorrow toasts, and adds patent plates below the mascot illustrations. Hesitation changes only the live speech bubble. The run entry shows a corporate newsreel.
+
+**Interpretations to confirm:** status toast starts on turn two, temporary speech lasts three seconds, and the newsreel advances with Continue. The current HALCYON map offers the first corporation only, so the shared graffiti hint is reserved for future corporation progression.
+
+**Validation:** 361 rules checks passed. ADP-4a adds the hesitation capture and updates the bleed and strike frames.
+
+## 2026-11-18 — ADP-001 Phase 3 and ADP-4a (Codex)
+
+Added a local, clearable play profile and the Ads that know you switch. Loading and end screens use local card plays, broken ICE, strikes and hesitation when the switch is on. The LUCIDA edit path tags log entries and only rewrites flavour. Graft assignment records fully broken ICE parts and stores the chosen part on the individual deck instance. ADP-4a adds the ad, edit and graft frames.
+
+**Interpretations to confirm:** the ad and record-edit wording is working copy, detailed ads start after two runs, and graft selection uses the first available part in the authored order. The LUCIDA fixture uses a controlled HALCYON encounter with the corporation flag set to LUCIDA, pending a playable route. PATCHWORK and in-progress run saves are absent from this slice. The graft fixture calls the upgrade hook directly and round-trips its deck data.
+
+**Validation:** 361 rules checks, 14 Phase 3 fixture checks and 607 Phase 2 fixture checks passed.

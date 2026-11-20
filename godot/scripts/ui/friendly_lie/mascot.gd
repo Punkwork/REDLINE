@@ -14,6 +14,8 @@ var applied_knockout := false
 var chrome: ChromeFrame
 ## ENC-CONCEPT-001: painted character art (concept 2), when delivered for this ICE.
 var concept_art: TextureRect
+var console_two := false   # ENC-CONCEPT-001 layout pass: the character stands in concept 2's cabinet
+var art_x := 10.0
 const WORDS := {
  "COOKIE_WALL": ["We use cookies to make your visit sweeter!", "You declined 2 cookies. Interesting.", "COOKIES ARE NOT OPTIONAL."],
  "CAPTCHA": ["Just one quick check!", "Hmm. Try that again.", "WRONG ANSWER."],
@@ -228,6 +230,21 @@ func setup(owner_view, i: int, state: String) -> void:
   add_child(concept_art); move_child(concept_art, 0)
   speech.position = Vector2(300, 6); speech.size = Vector2(176, 96); speech_copy.size = speech.size - Vector2(24, 18)
   if sticker_node: sticker_node.position = Vector2(302, 112)
+  if console_two:
+   # Concept 2: the character fills the cabinet's top-left; the comic bubble sits under the STR slot.
+   art_x = 0.0; concept_art.position = Vector2(0, 0)
+   speech.position = Vector2(326, 192); speech.size = Vector2(250, 128)
+   var bubble := IceKey.art("UI_SPEECH_BUBBLE")
+   if bubble and not lethal:
+    # The whole painted bubble stretches to the box; the words sit inside the ellipse, above the tail.
+    var bs := StyleBoxTexture.new(); bs.texture = bubble
+    speech.add_theme_stylebox_override("panel", bs)
+    speech_copy.position = Vector2(34, 18); speech_copy.size = Vector2(182, 66)
+    speech_copy.add_theme_color_override("font_color", Color("#2A1D0E"))
+   else:
+    speech_copy.position = Vector2(14, 10); speech_copy.size = speech.size - Vector2(28, 20)
+   if sticker_node: sticker_node.position = Vector2(4, 268)
+   speech_copy.text = ""; set_hesitation("")
 
 func _ready() -> void:
  pivot_offset=Vector2(240,115)
@@ -265,7 +282,7 @@ func _process(delta: float) -> void:
   concept_art.rotation = lerpf(concept_art.rotation, clampf(direction.x, -1.0, 1.0) * 0.07, 0.15)
   var breathe := 1.0 + 0.012 * sin(clock * TAU / 2.6)
   concept_art.scale = Vector2(2.0 - breathe, breathe)
-  if mood == "lethal": concept_art.position.x = 10.0 + sin(clock * 40.0) * 0.8
+  if mood == "lethal": concept_art.position.x = art_x + sin(clock * 40.0) * 0.8
  var d: Dictionary = view.game.ice_definition(view.game.enc.ice[index])
  var bob := 0.0
  if mood=="cheery":

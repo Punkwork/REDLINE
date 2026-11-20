@@ -76,7 +76,7 @@ func _bay_and_inspection() -> void:
  var before := g.bw
  await _click(first_position)
  _check(g.bw == before and g._installed_entry(program.uid).is_empty(), "clicking a hand PROGRAM does not install it")
- await _drag(first.get_global_rect().get_center(),Vector2(1510,230))
+ await _drag(first.get_global_rect().get_center(),Vector2(140,470))
  _check(g.bw == before and g._installed_entry(program.uid).is_empty(), "drop away from the PROGRAM bay spends nothing")
  await _drag(first.get_global_rect().get_center(),Vector2(140,326))
  _check(not g._installed_entry(program.uid).is_empty() and g.bw == before-1, "drop on the bay installs the PROGRAM exactly once")
@@ -98,12 +98,12 @@ func _bay_and_inspection() -> void:
  var untargeted: FriendlyCard = view.hand.get_child(1)
  await _drag(untargeted.get_global_rect().get_center(),Vector2(1505,660))
  _check(g.bw == before and not g.find_card(shield.uid).is_empty(), "non-targeted SCRIPT cannot be dropped on the lower half")
- await _drag(untargeted.get_global_rect().get_center(),Vector2(1510,225))
+ await _drag(untargeted.get_global_rect().get_center(),Vector2(140,470))
  _check(g.bw == before-1 and g.shield == 3, "non-targeted SCRIPT plays on the upper half")
 
  before = g.bw
  var targeted: FriendlyCard = view.hand.get_child(0)
- await _drag(targeted.get_global_rect().get_center(),Vector2(1510,225))
+ await _drag(targeted.get_global_rect().get_center(),Vector2(140,470))
  _check(g.bw == before and not g.find_card(probe.uid).is_empty(), "targeted SCRIPT requires ICE")
  var target: FriendlyDropTarget = view.find_children("*","FriendlyDropTarget",true,false).filter(func(candidate): return candidate.sub == -1 and is_same(candidate.ice_ref,g.enc.ice[0]))[0]
  var strength := g.ice_str(0)
@@ -114,11 +114,12 @@ func _geometry() -> void:
  var view: FriendlyEncounter=main.friendly
  _check(view.hand.get_child_count()==main.g.hand.size(),"every card has a view")
  var bound:=view.hand.get_global_rect()
- # CARDS-004: the full-width hand sits below END TURN, the pile counters, the stats and the rack.
- _check(bound.position.y>=view.end_run_button.get_global_rect().end.y,"hand stays below the END TURN column")
+ # ENC-CONCEPT-001 layout pass: the hand sits in the tray between the deck well and the tray buttons,
+ # clear of END TURN, the pile counters and the vitals.
+ _check(not bound.intersects(view.end_run_button.get_global_rect()) and not bound.intersects(view.end_button.get_global_rect()),"hand stays clear of the tray buttons and END TURN")
  _check(not bound.intersects(view.pile_text.get_global_rect()),"hand stays clear of pile counters")
  for card in view.hand.get_children():
-  _check(card.size==FriendlyCard.CARD_SIZE and is_equal_approx(card.scale.x,FriendlyCard.DISPLAY_SCALE),"cards keep their printed size, shown at 1.4x")
+  _check(card.size==FriendlyCard.CARD_SIZE and is_equal_approx(card.scale.x,FriendlyHand.HAND_SCALE),"cards keep their printed size, shown at HAND_SCALE")
   var rect:=FriendlyCard.PHYSICAL_RECT
   for point in [rect.position,Vector2(rect.end.x,rect.position.y),rect.end,Vector2(rect.position.x,rect.end.y)]:
    var world: Vector2=card.get_global_transform()*point
@@ -154,7 +155,7 @@ func _run() -> void:
   _check(last.get_global_rect().end.y<=1000,"raised card fits the viewport")
   _snap("hand_%02d_revealed"%count)
   var before:=g.bw
-  await _drag(last.get_global_rect().get_center(),Vector2(1510,230))
+  await _drag(last.get_global_rect().get_center(),Vector2(140,470))
   _check(g._find(g.hand,shield.uid).is_empty() and g.bw==before-1 and g.shield==3,"last card drag plays normally")
   _check(g.phase=="PLAYER","card drag does not trigger END TURN")
  main._start_as("RIOT"); var riot: Game=main.g; riot.enter_node(0)

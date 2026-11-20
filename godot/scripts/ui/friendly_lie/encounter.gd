@@ -10,24 +10,34 @@ var node_tag: Panel
 var trace_tag: Panel
 var bottom_hud: Panel
 ## CARDS-004 layout: 1.4x cards in a full-width hand; the ICE area scales to 85%.
-const HAND_RECT := Rect2(16, 622, 1568, 378)
+## ENC-CONCEPT-001 layout pass (concept 2): the hand sits in the copper tray between the deck
+## and discard wells; the ICE consoles fill the middle band; the left column is CRT, punch
+## cards, the NUL/REM slip and toggles; vitals sit bottom-left beside the tray.
+const HAND_RECT := Rect2(400, 778, 742, 214)
 const ICE_SCALE := 0.85
-const ICE_X := 800.0 - 1300.0 * ICE_SCALE / 2.0
+const ICE_X := 264.0
+const ICE_TOP := 110.0
+const ICE_W := 1320.0 / ICE_SCALE
 ## ICE-ANALOG-001: bigger mascots on a taller stage; the analog console below is shorter than the old scan tag.
 const MASCOT_GROWTH := 1.18
 const STAGE_H := 236
-const ICE_AREA_H := 552.0   # x0.85 on screen: y114 to y583; the rack strip and log sit below
-const NOTE_W := 204.0
-const NOTE_H := 150.0
+const ICE_AREA_H := 632.0 / ICE_SCALE   # on screen y110 to y742; the ticker sits below
+const NOTE_W := 196.0
+const NOTE_H := 108.0
 const CRT_INK := Color("#7DFFB8")
 var crt_screen: Panel
 var crt_status: Label
 var end_lamp: Analog
+var crt_picture: TextureRect
+var deck_count: Label
+var discard_count: Label
+var legend: Control
+var key_u := 1.0
 const CONSOLE_OVERLAP := -14   # the mascot peeks over the console's top edge
 ## Graffiti lands in free margins: under the Program Bay and under the TRACE panel.
 ## ENC-CONCEPT-001: graffiti goes on the decal plate in the top bar, between the node plate and the corporate sign.
-const GRAFFITI_SPOTS := [Vector2(426, 14), Vector2(426, 36), Vector2(426, 58), Vector2(426, 80)]
-const GRAFFITI_W := 152.0
+const GRAFFITI_SPOTS := [Vector2(328, 14), Vector2(328, 36), Vector2(328, 58), Vector2(328, 80)]
+const GRAFFITI_W := 136.0
 var note: Panel
 var note_text: Label
 var log_text: Label
@@ -147,20 +157,32 @@ func _ready() -> void:
  if screen_frame:
   var frame_rect := TextureRect.new(); frame_rect.name = "ScreenFrame"; frame_rect.texture = screen_frame; frame_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; frame_rect.stretch_mode = TextureRect.STRETCH_SCALE
   frame_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE; frame_rect.position = Vector2.ZERO; frame_rect.size = Vector2(1600, 1000); add_child(frame_rect)
- node_tag = Panel.new(); node_tag.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(node_tag, "UI_TOPBAR_S", Vector4(50, 30, 50, 30), Vector4(10, 10, 10, 10)); node_tag.position = Vector2(16, 10); node_tag.size = Vector2(400, 96); add_child(node_tag)
- var decal := Panel.new(); decal.name = "DecalPlate"; decal.add_theme_stylebox_override("panel", Analog.bakelite()); decal.position = Vector2(420, 10); decal.size = Vector2(164, 96); decal.mouse_filter = Control.MOUSE_FILTER_IGNORE; paint_panel(decal, "UI_TOPBAR_S", Vector4(50, 30, 50, 30)); add_child(decal); move_child(decal, node_tag.get_index())
+ build_pipework()
+ var top_bar := Panel.new(); top_bar.name = "TopBar"; top_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE; top_bar.add_theme_stylebox_override("panel", Analog.bakelite())
+ paint_panel(top_bar, "UI_TOPBAR_S", Vector4(50, 30, 50, 30)); at(self, top_bar, Vector2(10, 4), Vector2(1580, 104))
+ node_tag = Panel.new(); node_tag.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(node_tag, "UI_BRAND_PLATE", Vector4(110, 30, 30, 30), Vector4.ZERO); node_tag.position = Vector2(18, 10); node_tag.size = Vector2(298, 92); add_child(node_tag)
+ var decal := Panel.new(); decal.name = "DecalPlate"; decal.add_theme_stylebox_override("panel", Analog.bakelite()); decal.position = Vector2(320, 10); decal.size = Vector2(150, 92); decal.mouse_filter = Control.MOUSE_FILTER_IGNORE; paint_panel(decal, "UI_PLATE_DARK_S", Vector4(20, 14, 20, 14)); add_child(decal); move_child(decal, node_tag.get_index())
  decal.draw.connect(func():
-  for k in 7: decal.draw_rect(Rect2(14, 14 + k * 11, 136, 4), Color(0, 0, 0, 0.35))
-  for q in [Vector2(7, 7), Vector2(157, 7), Vector2(7, 89), Vector2(157, 89)]: decal.draw_circle(q, 3, Color("#B9A27A")))
- trace_tag = Panel.new(); trace_tag.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(trace_tag, "UI_TOPBAR_S", Vector4(50, 30, 50, 30)); trace_tag.position = Vector2(950, 10); trace_tag.size = Vector2(634, 96); add_child(trace_tag)
- ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(ICE_X, 114); ice_scroll.size = Vector2(1300, ICE_AREA_H); ice_scroll.scale = Vector2.ONE * ICE_SCALE; ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
+  for k in 7: decal.draw_rect(Rect2(14, 14 + k * 10, 122, 3), Color(1, 1, 1, 0.05))
+  var screw := painted("UI_SCREW")
+  for q in [Vector2(5, 5), Vector2(135, 5), Vector2(5, 77), Vector2(135, 77)]:
+   if screw: decal.draw_texture_rect(screw, Rect2(q, Vector2(10, 10)), false)
+   else: decal.draw_circle(q + Vector2(5, 5), 3, Color("#B9A27A")))
+ trace_tag = Panel.new(); trace_tag.add_theme_stylebox_override("panel", Analog.bakelite() if painted("UI_TURN_PLATE") == null else StyleBoxEmpty.new()); trace_tag.position = Vector2(476, 8); trace_tag.size = Vector2(808, 96); add_child(trace_tag)
+ ice_scroll = ScrollContainer.new(); ice_scroll.position = Vector2(ICE_X, ICE_TOP); ice_scroll.size = Vector2(ICE_W, ICE_AREA_H); ice_scroll.scale = Vector2.ONE * ICE_SCALE; ice_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; ice_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO; add_child(ice_scroll)
  ice_row = HBoxContainer.new(); ice_row.add_theme_constant_override("separation", 42); ice_row.alignment = BoxContainer.ALIGNMENT_CENTER; ice_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL; var ice_margin:=MarginContainer.new(); ice_margin.add_theme_constant_override("margin_top",10); ice_margin.size_flags_horizontal=Control.SIZE_EXPAND_FILL; ice_scroll.add_child(ice_margin); ice_margin.add_child(ice_row)
  # ENC-CONCEPT-001: each ICE carries its own NEXT RESPONSE plate (scan_tag); no shared strip.
- note = FriendlyLook.panel(FriendlyLook.TONER); note.position = Vector2(1360, 114); note.size = Vector2(224, 206); note.rotation_degrees = -0.6; note.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(note)  # PASS: a SCRIPT dropped on the note still plays
- note_text = FriendlyLook.label("", 12, FriendlyLook.HIGHLIGHT); note_text.position = Vector2(10, 8); note_text.size = Vector2(NOTE_W, NOTE_H); note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
- var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.position = Vector2(118, 172); voice.size = Vector2(96, 26); voice.add_theme_font_size_override("font_size", 11); paint_button(voice); note.add_child(voice)
- var rig_ground := Panel.new(); rig_ground.add_theme_stylebox_override("panel", Analog.glass(4, Color("#2A2622"))); rig_ground.position=Vector2(248,584); rig_ground.size=Vector2(1104,18); add_child(rig_ground)
- var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(256, 584); rig_scroll.size = Vector2(1090, 18); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
+ # The NUL/REM note is a typed slip clipped under the CRT (concept-2 layout pass).
+ var slip := painted("UI_NOTE_SLIP") != null
+ note = FriendlyLook.panel(FriendlyLook.TONER); note.name = "NulRemNote"; note.position = Vector2(18, 432); note.size = Vector2(238, 196); note.rotation_degrees = -1.0 if slip else -0.6; note.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(note)  # PASS: a SCRIPT dropped on the note still plays
+ paint_panel(note, "UI_NOTE_SLIP", Vector4(60, 70, 40, 40), Vector4.ZERO)
+ note_text = FriendlyLook.label("", 12, FriendlyLook.TONER if slip else FriendlyLook.HIGHLIGHT); note_text.position = Vector2(26, 74) if slip else Vector2(10, 8); note_text.size = Vector2(NOTE_W, NOTE_H); note_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; note.add_child(note_text)
+ var voice := FriendlyLook.button("VOICE / M", func(): ui._toggle_voice(), FriendlyLook.TONER, FriendlyLook.PAPER); voice.name = "VoiceButton"; voice.position = Vector2(16, 666); voice.size = Vector2(118, 28); voice.add_theme_font_size_override("font_size", 11); paint_button(voice); add_child(voice)
+ var legend_button := FriendlyLook.button("KEY LEGEND", func(): legend.visible = not legend.visible, FriendlyLook.TONER, FriendlyLook.PAPER); legend_button.name = "LegendButton"; legend_button.add_theme_font_size_override("font_size", 11); paint_button(legend_button); legend_button.add_theme_font_override("font", console_font(2)); at(self, legend_button, Vector2(138, 666), Vector2(118, 28))
+ build_left_trim()
+ # The log and the rack run along a black-glass ticker under the ICE.
+ var rig_ground := Panel.new(); rig_ground.name = "Ticker"; rig_ground.add_theme_stylebox_override("panel", Analog.glass(4, Color("#2A2622"))); paint_panel(rig_ground, "UI_TICKER", Vector4(40, 10, 40, 10), Vector4.ZERO); rig_ground.position=Vector2(264,744); rig_ground.size=Vector2(1320,24); add_child(rig_ground)
+ var rig_scroll := ScrollContainer.new(); rig_scroll.position = Vector2(284, 747); rig_scroll.size = Vector2(520, 18); rig_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; add_child(rig_scroll)
  rig_row = HBoxContainer.new(); rig_row.add_theme_constant_override("separation", 8); rig_scroll.add_child(rig_row)
  program_bay = FriendlyProgramBay.new()
  program_bay.encounter = self
@@ -168,18 +190,20 @@ func _ready() -> void:
  program_bay.mouse_filter = Control.MOUSE_FILTER_PASS
  program_bay.add_theme_stylebox_override("panel", Analog.bakelite())
  paint_panel(program_bay, "UI_CRT_MONITOR", Vector4.ZERO)
- at(self, program_bay, Vector2(16,114), Vector2(224,262))
+ at(self, program_bay, Vector2(16,110), Vector2(240,279))
  crt_screen = Panel.new(); crt_screen.name = "CrtScreen"; crt_screen.mouse_filter = Control.MOUSE_FILTER_PASS
  var screen_style := StyleBoxFlat.new(); screen_style.bg_color = Color("#0E1F1A"); screen_style.border_color = Color("#C9B796"); screen_style.set_border_width_all(3); screen_style.set_corner_radius_all(18)
  crt_screen.add_theme_stylebox_override("panel", screen_style)
  if painted("UI_CRT_MONITOR"):
-  # The painted monitor's own glass is the screen: x45–397, y50–340 of 448×520, drawn at half size.
+  # The painted monitor's own glass is the screen: x45–397, y50–340 of 448×520, drawn at 240/448.
   screen_style.draw_center = false; screen_style.set_border_width_all(0)
-  at(program_bay, crt_screen, Vector2(26,28), Vector2(172,140))
+  at(program_bay, crt_screen, Vector2(25,28), Vector2(188,154))
+  crt_picture = TextureRect.new(); crt_picture.name = "CrtPicture"; crt_picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; crt_picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+  crt_picture.mouse_filter = Control.MOUSE_FILTER_IGNORE; crt_picture.modulate = Color(1, 1, 1, 0.8); at(crt_screen, crt_picture, Vector2.ZERO, Vector2(188, 154))
  else:
   at(program_bay, crt_screen, Vector2(8,8), Vector2(208,224))
  var on_crt := painted("UI_CRT_MONITOR") != null
- var crt_l := [Vector2(8,2), Vector2(158,30), 30.0, Vector2(8,32), Vector2(6,46), Vector2(160,60), Vector2(6,108), Vector2(160,28)] if on_crt else [Vector2(14,6), Vector2(184,50), 58.0, Vector2(14,62), Vector2(10,80), Vector2(188,102), Vector2(10,186), Vector2(188,30)]
+ var crt_l := [Vector2(8,3), Vector2(172,30), 32.0, Vector2(8,34), Vector2(6,48), Vector2(176,66), Vector2(6,120), Vector2(176,28)] if on_crt else [Vector2(14,6), Vector2(184,50), 58.0, Vector2(14,62), Vector2(10,80), Vector2(188,102), Vector2(10,186), Vector2(188,30)]
  crt_status = FriendlyLook.label("", 11 if on_crt else 12, CRT_INK, console_font(2)); at(crt_screen, crt_status, crt_l[0], crt_l[1])
  crt_screen.draw.connect(func():
   for y in range(6, 220, 4): crt_screen.draw_line(Vector2(6, y), Vector2(202, y), Color(0.45, 1, 0.75, 0.035), 1)
@@ -204,16 +228,17 @@ func _ready() -> void:
   contact.color = Color(CRT_INK, 0.6)
   contact.mouse_filter = Control.MOUSE_FILTER_IGNORE
   at(connector, contact, Vector2(10 + pin * 9, 20 if on_crt else 21), Vector2(5,4))
+ build_tray()
  hand = FriendlyHand.new(); hand.position = HAND_RECT.position; hand.size = HAND_RECT.size; hand.focus_mode = Control.FOCUS_ALL; hand.mouse_filter = Control.MOUSE_FILTER_PASS; add_child(hand)
- bottom_hud = Panel.new(); bottom_hud.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(bottom_hud, "UI_VITALS_PANEL", Vector4.ZERO); bottom_hud.position = Vector2(16, 418); bottom_hud.size = Vector2(224, 200); add_child(bottom_hud)
- var piles_paper:=Panel.new(); piles_paper.add_theme_stylebox_override("panel", Analog.bakelite()); piles_paper.position=Vector2(1360,358); piles_paper.size=Vector2(224,64); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
- pile_text = FriendlyLook.label("", 13, Analog.CREAM, console_font(1)); pile_text.position = Vector2(1372, 362); pile_text.size = Vector2(204, 58); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
- end_button = FriendlyLook.button("END\nTURN", func(): ui._on_end_turn()); end_button.position = Vector2(1418, 428); end_button.size = Vector2(108, 108); style_end_turn(end_button); add_child(end_button)
- end_lamp = Analog.lamp(Color("#FFB020"), true, 14); at(self, end_lamp, Vector2(1538, 474))
- var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), Analog.BAKELITE, Analog.CREAM, 6, console_font(2)); deck.add_theme_font_size_override("font_size", 14); paint_button(deck); deck.position = Vector2(1360, 546); deck.size = Vector2(224, 30); add_child(deck)
- end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), Analog.BAKELITE_EDGE, Color("#F0A090"), 6, console_font(3)); end_run_button.add_theme_font_size_override("font_size", 14); paint_button(end_run_button); end_run_button.add_theme_color_override("font_color", Color("#FFB4A4")); end_run_button.position = Vector2(1360, 582); end_run_button.size = Vector2(224, 30); add_child(end_run_button)
+ bottom_hud = Panel.new(); bottom_hud.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(bottom_hud, "UI_VITALS_PANEL", Vector4.ZERO); bottom_hud.position = Vector2(16, 772); bottom_hud.size = Vector2(240, 214); add_child(bottom_hud)
+ var piles_paper:=Panel.new(); piles_paper.add_theme_stylebox_override("panel", Analog.bakelite() if painted("UI_HAND_TRAY") == null else StyleBoxEmpty.new()); piles_paper.position=Vector2(1268,898); piles_paper.size=Vector2(142,50); piles_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(piles_paper)
+ pile_text = FriendlyLook.label("", 10, Analog.CREAM, console_font(1)); pile_text.position = Vector2(1272, 900); pile_text.size = Vector2(136, 46); pile_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; add_child(pile_text)
+ end_button = FriendlyLook.button("END\nTURN", func(): ui._on_end_turn()); end_button.position = Vector2(1418, 774); end_button.size = Vector2(160, 180); style_end_turn(end_button); add_child(end_button)
+ end_lamp = Analog.lamp(Color("#FFB020"), true, 14); at(self, end_lamp, Vector2(1400, 778))
+ var deck := FriendlyLook.button("DECK / COVERAGE", func(): ui.deck_open = true; ui.refresh(), Analog.BAKELITE, Analog.CREAM, 6, console_font(2)); deck.add_theme_font_size_override("font_size", 12); paint_button(deck); paint_tray_button(deck); deck.position = Vector2(1268, 798); deck.size = Vector2(142, 46); add_child(deck)
+ end_run_button = FriendlyLook.button("END RUN", func(): ui._confirm_end_run(), Analog.BAKELITE_EDGE, Color("#F0A090"), 6, console_font(3)); end_run_button.add_theme_font_size_override("font_size", 13); paint_button(end_run_button); end_run_button.add_theme_color_override("font_color", Color("#FFB4A4")); paint_tray_button(end_run_button, Color("#8A1408")); end_run_button.position = Vector2(1268, 848); end_run_button.size = Vector2(142, 46); add_child(end_run_button)
  toast = FriendlyLook.panel(Color.WHITE, FriendlyLook.RED, 1, 10, 3)
- at(self, toast, Vector2(1360, 114), Vector2(224, 105))
+ at(self, toast, Vector2(18, 432), Vector2(238, 105))
  toast.z_index = 5
  toast_text = FriendlyLook.label(skin.cracking_copy, 15, FriendlyLook.TONER, skin.font)
  toast_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -222,11 +247,11 @@ func _ready() -> void:
  at(toast, toast_reply, Vector2(8, 80), Vector2(184, 20))
  toast.hide()
  punch_arrival = FriendlyLook.panel(FriendlyLook.TONER, FriendlyLook.HIGHLIGHT, 1, 5)
- at(self, punch_arrival, Vector2(1360, 114), Vector2(224, 105))
+ at(self, punch_arrival, Vector2(18, 432), Vector2(238, 105))
  punch_arrival.clip_contents = true
  punch_arrival.hide()
  punch_holder = Panel.new(); var punch_style := Analog.bakelite(8); punch_style.shadow_size = 4; punch_holder.add_theme_stylebox_override("panel", punch_style)
- at(self, punch_holder, Vector2(16, 382), Vector2(224, 31))
+ at(self, punch_holder, Vector2(16, 394), Vector2(240, 32))
  punch_holder.clip_contents = true
  punch_count = FriendlyLook.label("", 13, FriendlyLook.PAPER, FriendlyLook.BOLD)
  at(punch_holder, punch_count, Vector2(8, 5))
@@ -235,20 +260,20 @@ func _ready() -> void:
  punch_holder.add_child(punch_shadow)
  var inspect_punches := FriendlyLook.button("VIEW", func(): ui.open_punches(), FriendlyLook.TONER, FriendlyLook.PAPER)
  paint_button(inspect_punches); inspect_punches.add_theme_font_override("font", console_font(2))
- at(punch_holder, inspect_punches, Vector2(170, 2), Vector2(48, 26))
+ at(punch_holder, inspect_punches, Vector2(184, 3), Vector2(52, 26))
  strike_overlay = Control.new(); strike_overlay.name="StrikeOneModal"; strike_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); strike_overlay.mouse_filter=Control.MOUSE_FILTER_STOP; strike_overlay.z_index=200; add_child(strike_overlay); strike_overlay.hide()
  motion_button=FriendlyLook.button("REDUCED MOTION: OFF",func(): ui.set_reduced_motion(not ui.reduced_motion),FriendlyLook.PAPER)
  paint_button(motion_button); motion_button.add_theme_font_override("font", console_font(2))
- motion_button.position=Vector2(1360,326); motion_button.size=Vector2(224,26); motion_button.add_theme_font_size_override("font_size",10); add_child(motion_button)
+ motion_button.position=Vector2(16,634); motion_button.size=Vector2(240,28); motion_button.add_theme_font_size_override("font_size",11); add_child(motion_button)
  watcher_warning=FriendlyLook.panel(FriendlyLook.RED); watcher_warning.position=Vector2(1030,540); watcher_warning.size=Vector2(510,36); watcher_warning.z_index=150; watcher_warning.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(watcher_warning)
  watcher_text=FriendlyLook.label("",12,FriendlyLook.TONER,FriendlyLook.BOLD); watcher_text.position=Vector2(8,7); watcher_warning.add_child(watcher_text); watcher_warning.hide()
  strike_overlay.gui_input.connect(func(e):
   if e is InputEventMouseButton and e.pressed: dismiss_strike())
  feedback_panel=FriendlyLook.panel(FriendlyLook.TONER,FriendlyLook.HIGHLIGHT,2); feedback_panel.position=Vector2(606,32); feedback_panel.size=Vector2(350,82); feedback_panel.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(feedback_panel); feedback_panel.hide()
  feedback_label=FriendlyLook.label("",12,FriendlyLook.HIGHLIGHT,FriendlyLook.BOLD); feedback_label.position=Vector2(10,7); feedback_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; feedback_label.size=Vector2(330,70); feedback_panel.add_child(feedback_label)
- var log_paper:=FriendlyLook.panel(Color("#F4ECDA"), FriendlyLook.TONER, 0, 4); log_paper.position=Vector2(248,602); log_paper.size=Vector2(1104,15); log_paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(log_paper)
- log_text = FriendlyLook.label("", 10, FriendlyLook.TONER); log_text.position = Vector2(256, 603); log_text.size = Vector2(1092, 13); log_text.tooltip_text = "Chronological game log"; add_child(log_text)
+ log_text = FriendlyLook.label("", 11, Analog.CREAM, console_font(1)); log_text.position = Vector2(816, 748); log_text.size = Vector2(752, 16); log_text.clip_text = true; log_text.tooltip_text = "Chronological game log"; add_child(log_text)
  for panel in [node_tag, trace_tag, bottom_hud, note, rig_ground, piles_paper, program_bay]:
+  if panel == trace_tag and painted("UI_TURN_PLATE") != null: continue   # transparent holder of painted plates
   var wear := FriendlyRigWear.new()
   wear.code_strip = panel in [node_tag,trace_tag]
   panel.add_child(wear, false, Node.INTERNAL_MODE_BACK)
@@ -259,13 +284,14 @@ func _ready() -> void:
  var sign := FriendlyLook.panel(skin.plaque_ground, skin.plaque_accent, 2, 10)
  sign.name = "CorporateDisplay"
  sign.mouse_filter = Control.MOUSE_FILTER_IGNORE
- at(self, sign, Vector2(590,16), Vector2(350,88))
+ at(self, sign, Vector2(1290,12), Vector2(290,88))
  var wordmark := FriendlyLook.label(skin.app_name, int(display.wordmark_px), skin.plaque_ink, skin.display_font)
  var headline := FriendlyLook.label(skin.background_headline, int(display.background_headline_px), skin.plaque_ink, skin.display_font)
  for title in [wordmark, headline]:
   title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
- at(sign, wordmark, Vector2(12,4), Vector2(326,40))
- at(sign, headline, Vector2(12,47), Vector2(326,32))
+ at(sign, wordmark, Vector2(10,4), Vector2(270,40))
+ at(sign, headline, Vector2(10,47), Vector2(270,32))
+ build_legend()
 func clear(node: Node) -> void:
  for child in node.get_children(): node.remove_child(child); child.queue_free()
 func at(parent: Node, control: Control, pos: Vector2, extent: Vector2 = Vector2.ZERO) -> Control:
@@ -289,6 +315,8 @@ func sync(model: Game) -> void:
  pile_text.text = "DECK %d  ·  DISCARD %d\nFP %d/%d · %s\nREBOOT ~%d · AMP %d" % [game.draw_pile.size(), game.discard.size(),game.footprint(),game.footprint_cap(),game.footprint_band(),int(ceil(float(game.draw_pile.size())/maxi(1,game.draw_size()))),game.amp]
  end_button.disabled = game.phase != "PLAYER" or ui.responding
  end_lamp.on = not end_button.disabled; end_lamp.queue_redraw()
+ if deck_count: deck_count.text = "DECK %d" % game.draw_pile.size()
+ if discard_count: discard_count.text = "DISCARD %d" % game.discard.size()
  end_run_button.disabled = ui.responding
  track_new_subs()
  build_rig(); build_ice(); build_hand()
@@ -400,15 +428,18 @@ func build_ice() -> void:
  if is_instance_valid(key_tip): key_tip.hide()
  clear(ice_row)
  for i in game.enc.ice.size():
-  var column := VBoxContainer.new(); column.add_theme_constant_override("separation",CONSOLE_OVERLAP); column.custom_minimum_size.x=400 if game.enc.ice.size()==3 else 480; ice_row.add_child(column)
+  var two := painted("UI_ICE_CONSOLE_2") != null
+  var column := VBoxContainer.new(); column.add_theme_constant_override("separation",0 if two else CONSOLE_OVERLAP); column.custom_minimum_size.x=400 if game.enc.ice.size()==3 else 480; ice_row.add_child(column)
+  if two: column.custom_minimum_size.x = console_width()
   var mascot := FriendlyMascot.new()
+  mascot.console_two = two
   var prior := previous_mascot(i)
   mascot.previous_mood=prior.get("mood", "")
   mascot.just_broken=not prior.is_empty() and game.enc.ice[i].broken.count(true)>prior.broken.count(true)
   mascot.setup(self,i,mood_for(i))
   mascots.append(mascot)
   # Grow the animated illustration independently from its rules plaque.
-  var width := 400.0 if game.enc.ice.size()==3 else 480.0
+  var width := (400.0 if game.enc.ice.size()==3 else 480.0) if not two else console_width()
   # CARDS-004: the mascot stage gives up 44 px so the larger hand fits below.
   # ICE-ANALOG-001: the mascot grows about 18% (as far as the column width allows).
   var illustration_scale := (0.70 if game.enc.ice.size()==3 else 0.82) * 1.25 * (194.0 / 238.0) * MASCOT_GROWTH
@@ -417,16 +448,23 @@ func build_ice() -> void:
   var plate := AdpCopy.pick("plate", skin.corporation, 0, {"ice": game.enc.ice[i].id})
   var painted_console := painted("UI_ICE_CONSOLE") != null
   var k := width / 960.0
-  stage.custom_minimum_size = Vector2(width, 520.0 * k if painted_console else STAGE_H)
+  if two:
+   # Concept 2: the painted character fills the cabinet's top-left; a drawn appliance (no art yet)
+   # is scaled to stay left of the name and STR slots.
+   illustration_scale = (1.37 if mascot.concept_art != null else 0.95) * k
+   column.custom_minimum_size.y = ICE_AREA_H - 14.0   # the cabinet's plain foot stretches to the ticker
+  stage.custom_minimum_size = Vector2(width, (462.0 if two else 520.0) * k if (two or painted_console) else STAGE_H)
   column.add_child(drop_wrapper(stage,i,-1))
   var frame := ice_frame(width)
   stage.add_child(frame)
-  if painted_console:
-   column.resized.connect(func(): if is_instance_valid(frame): frame.size.y = maxf(1100.0, column.size.y / k))
+  if two or painted_console:
+   var min_h := 1000.0 if two else 1100.0
+   column.resized.connect(func(): if is_instance_valid(frame): frame.size.y = maxf(min_h, column.size.y / k))
   var carrier := Control.new()
   carrier.name = "IllustrationScale"
   carrier.scale = Vector2.ONE * illustration_scale
   carrier.position = Vector2((width - mascot.size.x * illustration_scale) / 2.0, (508.0 * k - 230.0 * illustration_scale) if painted_console else FRAME_TOP + 16.0)
+  if two: carrier.position = Vector2(34.0, 34.0) * k
   stage.add_child(carrier)
   carrier.add_child(mascot)
   # Only the art is pixelated: the layer goes in before the mascot's first child that
@@ -439,6 +477,7 @@ func build_ice() -> void:
   mascot.add_child(over)
   if first_text >= 0: mascot.move_child(over, first_text)
   if game.enc.ice[i].id == "AUTO_RENEW" and mascot.concept_art == null: add_shell_graffiti(mascot)
+  if two: console_heading(i, stage, k)
   var scan := scan_tag(i, String(plate.get("text",""))); scan.size_flags_horizontal=Control.SIZE_FILL; column.add_child(scan)
   if mood_for(i)=="knocked_out" and not reduced_motion:
    scan.ready.connect(func(): var peel:=scan.create_tween().set_parallel(true); peel.tween_property(scan,"rotation_degrees",1.5,0.4); peel.tween_property(scan,"position:y",scan.position.y+8,0.4))
@@ -541,11 +580,15 @@ func rule_chip(text: String, state: String = "normal", plaque: bool = false) -> 
    overlay.ready.connect(func(): line.scale.x=0.0; var strike:=line.create_tween(); strike.tween_property(line,"scale:x",1.0,0.15))
  return chip
 func scan_tag(i: int, plate_text: String = "") -> Control:
+ var two := painted("UI_ICE_CONSOLE_2") != null
  ## ENC-CONCEPT-001 (concept 3) with ICE-ANALOG-001 keys: the lower half of the ICE console.
  ## Power lamp and name plate, STR plate, icon keys (+ TUMBLER reel), the passive plate and this
  ## ICE's NEXT RESPONSE plate in full words. Hover or focus a key for its full rule.
  var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
- var panel := PanelContainer.new(); var scan_width:=400 if game.enc.ice.size()==3 else 480
+ var panel := PanelContainer.new(); var scan_width:=(400 if game.enc.ice.size()==3 else 480) if not two else int(console_width())
+ if two: panel.mouse_filter = Control.MOUSE_FILTER_PASS   # an untargeted SCRIPT dropped on the cabinet still plays
+ var k := scan_width / 960.0
+ key_u = clampf(k * 1.9, 0.8, 1.45) if two else 1.0
  panel.custom_minimum_size=Vector2(scan_width,0)
  var candidates:=game.hand.filter(func(c): return CardDB.def(c.id).get("zeroed_reduction",0)>0 and game.can_play(c.uid).ok and game.would_zero(i,int(CardDB.def(c.id).get("zeroed_reduction",0))))
  var eligible:=not candidates.is_empty()
@@ -562,10 +605,16 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
   style.draw_center = false; style.set_border_width_all(0); style.shadow_size = 0
   style.content_margin_left = 30.0 * scan_width / 480.0; style.content_margin_right = style.content_margin_left; style.content_margin_bottom = 30
   if eligible: style.set_border_width_all(3); style.border_color = FriendlyLook.AMBER
+ if two:
+  # Keys centred in the recessed band (the speaker grille keeps the band's left end).
+  var bank_h := (IceKey.KEY + IceKey.LAMP_H + IceKey.CHIP_H + 4.0) * key_u
+  style.content_margin_left = 50.0 * k; style.content_margin_right = 52.0 * k
+  style.content_margin_top = 3.0 * k + maxf(0.0, (233.0 * k - bank_h) / 2.0); style.content_margin_bottom = 40.0 * k
  panel.add_theme_stylebox_override("panel",style)
  if eligible: panel.tooltip_text="ZEROED available: "+" / ".join(candidates.map(func(c): return CardDB.def(c.id).name))
  var list := VBoxContainer.new(); list.add_theme_constant_override("separation",6); panel.add_child(list)
  var heading := HBoxContainer.new(); heading.add_theme_constant_override("separation",6); list.add_child(heading)
+ if two: heading.visible = false   # name, STR and type sit in the cabinet's top-right slots (console_heading)
  var power := Analog.lamp(Color("#4DFF6E") if not game.enc.get("breached",false) else Color("#3A3632"), not game.enc.get("breached",false), 14)
  power.size_flags_vertical = Control.SIZE_SHRINK_CENTER; heading.add_child(power)
  heading.add_child(console_plate(d.name.to_upper(),CONSOLE_GLASS,CONSOLE_CREAM,20,console_font(2)))
@@ -575,8 +624,14 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
  if delta!=0: heading.add_child(console_plate(("↑%d" if delta>0 else "↓%d") % absi(delta),Color("#2F7A4C") if delta>0 else Color("#B3261A"),Color.WHITE,16,console_font(0)))
  var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", "")]).trim_suffix(" · "),12,CONSOLE_INK,console_font(3))
  list.add_child(meta)
+ if two: meta.visible = false
  if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",11,CONSOLE_INK))
- var bank := HBoxContainer.new(); bank.alignment=BoxContainer.ALIGNMENT_CENTER; bank.add_theme_constant_override("separation",2); list.add_child(bank)
+ var bank := HBoxContainer.new(); bank.alignment=BoxContainer.ALIGNMENT_CENTER; bank.add_theme_constant_override("separation",2)
+ if two:
+  var band := MarginContainer.new(); band.name = "KeyBand"; band.add_theme_constant_override("margin_left", int(220.0 * k)); band.mouse_filter = Control.MOUSE_FILTER_PASS
+  band.custom_minimum_size.y = (IceKey.KEY + IceKey.LAMP_H + IceKey.CHIP_H + 4.0) * key_u
+  list.add_child(band); band.add_child(bank)
+ else: list.add_child(bank)
  var active: Array = game.active_subs(i)
  var shown: Array = []
  if d.type == "TUMBLER": shown = active.duplicate()
@@ -608,6 +663,9 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
    var spacer := Control.new(); spacer.custom_minimum_size.x=10; bank.add_child(spacer); bank.add_child(reel)
  var passive_text := String(d.get("ability_text",""))
  var plate_w := scan_width - 2.0 * style.content_margin_left - 4.0
+ if two:
+  # Drop below the band to the cabinet's plain foot (y710 of 1000).
+  var foot := Control.new(); foot.custom_minimum_size.y = maxf(4.0, 130.5 * k - (IceKey.KEY + IceKey.LAMP_H + IceKey.CHIP_H + 4.0) * key_u / 2.0 - 12.0); foot.mouse_filter = Control.MOUSE_FILTER_IGNORE; list.add_child(foot)
  if not passive_text.is_empty(): list.add_child(cream_plate("PASSIVE: " + passive_text, plate_w, "PassivePlate"))
  list.add_child(cream_plate("NEXT RESPONSE: " + response_words(i), plate_w, "NextResponse"))
  if not ice.virus.is_empty():
@@ -617,6 +675,7 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
   var strains := FriendlyLook.label(" · ".join(counts),12,Color("#7A1208"),console_font(1)); strains.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; list.add_child(strains)
   if game.worm_ok(i): list.add_child(FriendlyLook.button("SPEND 2 WORM · BREAK 1",func(): game.use_worm(i); ui.refresh()))
  if game.pending.get("kind")=="patient_zero": list.add_child(FriendlyLook.button("INFECT THIS ICE",func(): game.choose_ice(i); ui.refresh()))
+ key_u = 1.0
  if not plate_text.is_empty() and game.enc.ice.size() < 3:
   # The ADP-2c patent plate sits at the foot of the console.
   var plaque := FriendlyLook.label(plate_text, 9, CONSOLE_INK, skin.font); plaque.name="PatentPlate"
@@ -629,14 +688,16 @@ const FRAME_TOP := 14.0
 
 func console_ground() -> Color:
  ## The console's enamel: the corporation's plaque ground tinted toward its accent (HALCYON: seafoam).
+ if painted("UI_ICE_CONSOLE_2") != null: return Color("#93BBA4")   # sampled from UI_ICE_CONSOLE_2's plain panel
  if painted("UI_ICE_CONSOLE") != null: return Color(143.0 / 255.0, 178.0 / 255.0, 144.0 / 255.0)   # sampled from UI_ICE_CONSOLE's lower panel
  return skin.plaque_ground.lerp(skin.accent, 0.42)
 
 func cream_plate(text: String, width: float, plate_name: String) -> PanelContainer:
+ var px := 15 if painted("UI_ICE_CONSOLE_2") != null and width > 500.0 else 12
  var plate := PanelContainer.new(); plate.name = plate_name; plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
- var st := FriendlyLook.style(CONSOLE_CREAM, Color("#C9B796"), 1, 8); st.content_margin_left = 10; st.content_margin_right = 10; st.content_margin_top = 4; st.content_margin_bottom = 4
+ var st := FriendlyLook.style(CONSOLE_CREAM, Color("#C9B796"), 1, 8); st.content_margin_left = 10; st.content_margin_right = 10; st.content_margin_top = 4 if px < 14 else 7; st.content_margin_bottom = 4 if px < 14 else 7
  plate.add_theme_stylebox_override("panel", st)
- var label := FriendlyLook.label(text, 12, CONSOLE_INK, skin.medium_font)
+ var label := FriendlyLook.label(text, px, CONSOLE_INK, skin.medium_font)
  label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; label.custom_minimum_size.x = width - 20
  plate.add_child(label)
  return plate
@@ -652,7 +713,19 @@ func response_words(i: int) -> String:
   steps.append(" + ".join(words))
  return " → ".join(steps) if not steps.is_empty() else "nothing"
 
+func console_width() -> float:
+ return 470.0 if game.enc.ice.size() >= 3 else 700.0
+
 func ice_frame(width: float) -> Control:
+ var two_art := painted("UI_ICE_CONSOLE_2")
+ if two_art:
+  # Concept 2's cabinet: the character stands top-left, name and STR slots top-right, the keys
+  # in the recessed band (y465–698 of 1000), the plates below; only the plain foot stretches.
+  var cab := NinePatchRect.new(); cab.name = "IceFrame"; cab.texture = two_art; cab.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  cab.patch_margin_left = 60; cab.patch_margin_right = 60; cab.patch_margin_top = 720; cab.patch_margin_bottom = 60
+  var kk := width / 960.0
+  cab.scale = Vector2(kk, kk); cab.size = Vector2(960, 1000)
+  return cab
  var console_art := painted("UI_ICE_CONSOLE")
  if console_art:
   # The painted console spans the whole column (mascot window on top, keys and plates below);
@@ -722,10 +795,11 @@ func console_plate(text: String, bg: Color, ink: Color, px: int, font: Font) -> 
  return plate
 
 func chevron() -> Control:
- var c := Control.new(); c.custom_minimum_size=Vector2(12,60); c.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ var u := key_u
+ var c := Control.new(); c.custom_minimum_size=Vector2(12,60) * u; c.mouse_filter=Control.MOUSE_FILTER_IGNORE
  c.draw.connect(func():
-  var y := 14.0+30.0
-  c.draw_colored_polygon(PackedVector2Array([Vector2(3,y-6),Vector2(10,y),Vector2(3,y+6)]),Color("#B07A2A")))
+  var y := (14.0+30.0) * u
+  c.draw_colored_polygon(PackedVector2Array([Vector2(3,y-6) * Vector2(1, 1),Vector2(10*u,y),Vector2(3,y+6)]),Color("#B07A2A")))
  return c
 
 func key_effects(ice: Dictionary, s: int) -> Array:
@@ -759,7 +833,7 @@ func build_key(i: int, s: int, mini: bool = false) -> IceKey:
   var info := break_info(i,s)
   chip = ("FREE" if int(info.get("cost",0))==0 else "%d BW" % info.cost) if info.ok else "—"
   key.locked = String(info.get("reason","")).begins_with("LOCKED")
- key.configure(kind,value,state,chip,mini)
+ key.configure(kind,value,state,chip,mini,key_u)
  if not mini:
   if not key_nodes.has(i): key_nodes[i] = {}
   key_nodes[i][s] = key
@@ -830,7 +904,7 @@ func build_key_tip() -> void:
  key_tip = PanelContainer.new(); key_tip.name="KeyTip"; key_tip.mouse_filter=Control.MOUSE_FILTER_IGNORE; key_tip.z_index=160
  var st := FriendlyLook.style(Color("#F6EFDF"),CONSOLE_CHROME,3,12); st.set_content_margin_all(14); st.shadow_color=Color("#1A110A66"); st.shadow_size=10; st.shadow_offset=Vector2(0,6)
  key_tip.add_theme_stylebox_override("panel",st)
- paint_panel(key_tip, "UI_TOOLTIP_PLATE_S", Vector4(34, 40, 26, 40), Vector4(34, 30, 26, 28))
+ paint_panel(key_tip, "UI_TOOLTIP_PLATE_S", Vector4(34, 40, 26, 40), Vector4(50, 30, 32, 28))
  key_tip_list = VBoxContainer.new(); key_tip_list.add_theme_constant_override("separation",5); key_tip.add_child(key_tip_list)
  add_child(key_tip); key_tip.hide()
 
@@ -1236,7 +1310,28 @@ func present_punch_arrival(corp: String) -> void:
 func amber_label(text: String, px: int = 12) -> Label:
  return FriendlyLook.label(text, px, Analog.AMBER, console_font(3))
 
+func bakelite_panel(extent: Vector2) -> Panel:
+ var p := Panel.new(); p.add_theme_stylebox_override("panel", Analog.bakelite()); p.size = extent; p.mouse_filter = Control.MOUSE_FILTER_IGNORE; return p
+
+func art_rect(name: String, pos: Vector2, extent: Vector2, parent: Control = null) -> TextureRect:
+ ## A painted part placed as a picture (null when the part hasn't been delivered).
+ var tex := painted(name)
+ if tex == null: return null
+ var r := TextureRect.new(); r.name = name; r.texture = tex; r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; r.stretch_mode = TextureRect.STRETCH_SCALE
+ r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ at(parent if parent else self, r, pos, extent)
+ return r
+
 func build_node_plate() -> void:
+ if painted("UI_BRAND_PLATE"):
+  # Concept 2's brand plate: the brass starburst is painted; the game writes the name and tier.
+  at(node_tag, FriendlyLook.label("PANOPTICON", 26, Analog.CREAM, console_font(5)), Vector2(66, 12))
+  var tier_text := "OPENING" if game.is_opening() else String(game.node.get("tier", "TIER 1"))
+  var sub := FriendlyLook.label("RUSTLER INTERFACE · %s · LAYER %d/%d" % [tier_text, game.layer + 1, game.node.layers.size()], 12, Analog.CREAM_DIM, console_font(1))
+  var sub_px := 12
+  while sub_px > 9 and console_font(1).get_string_size(sub.text, HORIZONTAL_ALIGNMENT_LEFT, -1, sub_px).x > 218: sub_px -= 1
+  sub.add_theme_font_size_override("font_size", sub_px); at(node_tag, sub, Vector2(68, 50))
+  return
  # PANOPTICON wordmark with its eye, then the network/node plate.
  var eye := Analog.icon("EYE", 26, Analog.GLOW); at(node_tag, eye, Vector2(14, 10))
  at(node_tag, FriendlyLook.label("PANOPTICON", 22, Analog.CREAM, console_font(5)), Vector2(48, 6))
@@ -1246,32 +1341,61 @@ func build_node_plate() -> void:
  at(node_tag, plate, Vector2(14, 46))
  plate.custom_minimum_size.x = 370
 
+func reveal_percent() -> int:
+ var hostile := corporation_state == "mask_off" or strike_overlay.visible
+ if corporation_state == "cracking": return roundi(AtomicDecoPunk.reveal(bleed) * 100.0)
+ return 100 if hostile else 0
+
+func centred(text: String, px: int, col: Color, font: Font, pos: Vector2, extent: Vector2, parent: Control) -> Label:
+ var l := FriendlyLook.label(text, px, col, font); l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+ at(parent, l, pos, extent); return l
+
 func build_trace_plate() -> void:
+ ## Concept 2's top bar: TURN plate, TRACE counter, HOSTILE REVEAL alarm, the reserve dial;
+ ## a second row with the strike lamps, the TRACE bar or warning, CONDITION and CRED/RAM.
  var hostile := corporation_state == "mask_off" or strike_overlay.visible
  var cond := "MASK OFF" if hostile else corporation_state.to_upper()
- var cond_bg := Color("#2F7A4C") if corporation_state == "friendly" else (Color("#14070A") if hostile else Color("#B3261A"))
- var pill := console_plate("CONDITION: " + cond, cond_bg, Color.WHITE, 16, console_font(2))
- at(trace_tag, pill, Vector2(14, 12))
- var reveal := 0
- if corporation_state == "cracking": reveal = roundi(AtomicDecoPunk.reveal(bleed) * 100.0)
- elif hostile: reveal = 100
- at(trace_tag, console_plate("HOSTILE REVEAL  %d%%" % reveal, Color("#2A0606") if reveal > 0 else CONSOLE_GLASS, Color("#FF7A6A") if reveal > 0 else Analog.CREAM_DIM, 15, console_font(2)), Vector2(14, 52))
- at(trace_tag, amber_label("TURN", 12), Vector2(232, 10))
- at(trace_tag, Analog.tiles("%02d" % game.enc.turn, Vector2(22, 32), 24), Vector2(232, 26))
+ var reveal := reveal_percent()
  var hot := game.trace >= 20
- at(trace_tag, amber_label("TRACE", 12), Vector2(300, 10))
- at(trace_tag, Analog.tiles("%02d" % game.trace, Vector2(22, 32), 24, Color("#FF6A5A") if hot else Analog.CREAM), Vector2(300, 26))
- at(trace_tag, FriendlyLook.label("/40", 15, Analog.CREAM_DIM, console_font(1)), Vector2(348, 34))
- at(trace_tag, Analog.instrument("bars", roundi(game.trace / 4.0), 10, Vector2(80, 6), Color("#FF3A2A") if hot else Analog.GLOW), Vector2(300, 62))
- at(trace_tag, amber_label("STRIKES", 12), Vector2(398, 10))
- for k in 3: at(trace_tag, Analog.lamp(Analog.RED, k < game.strikes, 16), Vector2(400 + k * 24, 34))
- at(trace_tag, amber_label("RESERVE", 12), Vector2(486, 10))
- at(trace_tag, Analog.tiles("%02d" % game.enc.reserve, Vector2(20, 30), 22, Analog.GLOW if game.enc.reserve > 0 else Color("#FF6A5A")), Vector2(486, 26))
- at(trace_tag, FriendlyLook.label("/ %d CRED" % game.enc.reserve_start, 14, Analog.CREAM_DIM, console_font(1)), Vector2(532, 32))
- at(trace_tag, FriendlyLook.label("CRED %d · RAM %d/%d" % [game.cred, game.ram_used(), game.ram_total()], 12, Analog.CREAM, console_font(1)), Vector2(398, 58))
- at(trace_tag, FriendlyLook.label("PAST 50% · THEY'RE LOOKING" if corporation_state=="cracking" else "", 11, Color("#FF9A8A"), console_font(1)), Vector2(398, 72))
- bleed_label = FriendlyLook.label("", 11, FriendlyLook.PAPER)
- at(trace_tag, bleed_label, Vector2(530, 58))
+ var t := trace_tag
+ # TURN plate (cream label strip over a dark flip window).
+ if art_rect("UI_TURN_PLATE", Vector2(0, 2), Vector2(200, 66), t) == null: at(t, bakelite_panel(Vector2(200, 66)), Vector2(0, 2))
+ centred("TURN", 12, CONSOLE_INK, console_font(3), Vector2(22, 7), Vector2(156, 15), t)
+ at(t, Analog.tiles("%02d" % game.enc.turn, Vector2(24, 28), 24), Vector2(73, 27))
+ # TRACE counter: label window, two big flip digits, the cap.
+ if art_rect("UI_TRACE_COUNTER", Vector2(206, 2), Vector2(240, 66), t) == null: at(t, bakelite_panel(Vector2(240, 66)), Vector2(206, 2))
+ centred("TRACE", 15, Analog.AMBER, console_font(3), Vector2(228, 18), Vector2(78, 34), t)
+ at(t, Analog.tiles("%02d" % game.trace, Vector2(34, 38), 32, Color("#FF6A5A") if hot else Analog.CREAM), Vector2(311, 15))
+ centred("/%d" % Game.MAX_TRACE, 11, Analog.CREAM_DIM, console_font(0), Vector2(402, 17), Vector2(24, 34), t)
+ # HOSTILE REVEAL alarm: dim at 0, hot from 40%.
+ var alarm := "UI_ALARM_PLATE_HOT" if reveal >= 40 else "UI_ALARM_PLATE"
+ var alarm_ink := Color.WHITE if reveal >= 40 else (Color("#FF9A8A") if reveal > 0 else Analog.CREAM_DIM)
+ if art_rect(alarm, Vector2(452, 2), Vector2(200, 66), t) == null: at(t, console_plate("", Color("#2A0606"), alarm_ink, 12, console_font(0)), Vector2(452, 2))
+ centred("HOSTILE REVEAL", 12, alarm_ink, console_font(3), Vector2(462, 9), Vector2(180, 15), t)
+ centred("%d%%" % reveal, 28, alarm_ink, CONDENSED, Vector2(462, 24), Vector2(180, 36), t)
+ # RESERVE dial: the needle sweeps from empty (-135°) to full (+135°).
+ var full := float(game.enc.reserve) / maxf(1.0, float(game.enc.reserve_start))
+ if art_rect("UI_DIAL", Vector2(660, 2), Vector2(64, 64), t):
+  var needle := art_rect("UI_DIAL_NEEDLE", Vector2(660, 2), Vector2(64, 64), t)
+  if needle: needle.pivot_offset = Vector2(32, 32); needle.rotation = deg_to_rad(-135.0 + 270.0 * clampf(full, 0.0, 1.0))
+ at(t, amber_label("RESERVE", 11), Vector2(730, 4))
+ at(t, FriendlyLook.label("%d/%d" % [game.enc.reserve, game.enc.reserve_start], 20, Analog.GLOW if game.enc.reserve > 0 else Color("#FF6A5A"), CONDENSED), Vector2(730, 18))
+ at(t, FriendlyLook.label("CRED", 10, Analog.CREAM_DIM, console_font(2)), Vector2(730, 42))
+ bleed_label = FriendlyLook.label("", 10, Analog.CREAM_DIM)
+ at(t, bleed_label, Vector2(730, 54))
+ # Second row.
+ at(t, amber_label("STRIKES", 11), Vector2(4, 76))
+ for k in 3:
+  var lamp_art := "UI_STRIKE_LAMP_ON" if k < game.strikes else "UI_STRIKE_LAMP_OFF"
+  if art_rect(lamp_art, Vector2(66 + k * 22, 72), Vector2(20, 20), t) == null: at(t, Analog.lamp(Analog.RED, k < game.strikes, 16), Vector2(68 + k * 22, 74))
+ if corporation_state == "cracking":
+  at(t, FriendlyLook.label("PAST 50% · THEY'RE LOOKING", 11, Color("#FF9A8A"), console_font(1)), Vector2(212, 76))
+ else:
+  at(t, Analog.instrument("bars", roundi(game.trace / 4.0), 10, Vector2(228, 8), Color("#FF3A2A") if hot else Analog.GLOW), Vector2(212, 80))
+ var cond_bg := Color("#2F7A4C") if corporation_state == "friendly" else (Color("#14070A") if hostile else Color("#B3261A"))
+ var pill := console_plate("CONDITION: " + cond, cond_bg, Color.WHITE, 12, console_font(2)); pill.custom_minimum_size = Vector2(200, 22)
+ at(t, pill, Vector2(452, 72))
+ at(t, FriendlyLook.label("CRED %d · RAM %d/%d" % [game.cred, game.ram_used(), game.ram_total()], 11, Analog.CREAM, console_font(1)), Vector2(662, 76))
  update_bleed_readout()
 
 func incoming_pulp() -> int:
@@ -1283,7 +1407,7 @@ func incoming_pulp() -> int:
    if e.k == "PULP": total += int(e.get("v", 0))
  return total
 
-const VITAL_SLOTS := [23.0, 56.0, 88.0, 120.0, 152.0]   # UI_VITALS_PANEL's five recessed rows, at half size
+const VITAL_SLOTS := [25.0, 60.0, 94.0, 129.0, 163.0]   # UI_VITALS_PANEL's five recessed rows, drawn at 240/448
 
 func vital_icon(kind: String, col: Color) -> Control:
  var names := {"VITAE": "ICON_VITAE", "BW": "ICON_BW", "SHIELD": "ICON_SHIELD", "DRAW": "ICON_DRAW", "PULP": "ICON_PULP_LIGHT"}
@@ -1296,13 +1420,13 @@ func vital_icon(kind: String, col: Color) -> Control:
 
 func vital_row(slot: int, icon_kind: String, label: String, col: Color, readout: String, gauge: Control) -> void:
  var y: float = VITAL_SLOTS[slot]
- at(bottom_hud, vital_icon(icon_kind, col), Vector2(16, y + 3))
- at(bottom_hud, amber_label(label, 10), Vector2(42, y + 1))
- var value := FriendlyLook.label(readout, 15, Analog.CREAM, CONDENSED); value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
- at(bottom_hud, value, Vector2(140, y - 2), Vector2(66, 18))
+ at(bottom_hud, vital_icon(icon_kind, col), Vector2(17, y + 4))
+ at(bottom_hud, amber_label(label, 11), Vector2(45, y + 1))
+ var value := FriendlyLook.label(readout, 16, Analog.CREAM, CONDENSED); value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+ at(bottom_hud, value, Vector2(150, y - 2), Vector2(72, 19))
  if gauge.custom_minimum_size.x > 0:
-  gauge.custom_minimum_size = Vector2(152, 6); gauge.size = gauge.custom_minimum_size
-  at(bottom_hud, gauge, Vector2(42, y + 17))
+  gauge.custom_minimum_size = Vector2(163, 7); gauge.size = gauge.custom_minimum_size
+  at(bottom_hud, gauge, Vector2(45, y + 18))
 
 func build_instruments() -> void:
  # Concept 2's vitals on the painted panel: an icon, a label, a segmented gauge and the number.
@@ -1315,10 +1439,29 @@ func build_instruments() -> void:
 
 func update_crt_status() -> void:
  var state: String = {"friendly": "FRIENDLY", "cracking": "CRACKING", "mask_off": "MASK OFF"}.get(corporation_state, "")
+ if crt_picture:
+  var shot: String = "STRIKE" if strike_overlay.visible else {"friendly": "FRIENDLY", "cracking": "CRACKING", "mask_off": "MASKOFF"}.get(corporation_state, "FRIENDLY")
+  crt_picture.texture = painted("UI_CRT_SCREEN_" + shot)
  crt_status.text = "%s // %s\nSTATUS: %s" % [skin.corporation, String(game.node.name).to_upper(), state]
  crt_status.add_theme_color_override("font_color", CRT_INK if corporation_state == "friendly" else Color("#FF8FB8"))
 
 func style_end_turn(button: Button) -> void:
+ if painted("UI_END_TURN_BOX"):
+  # Concept 2: the red mushroom plunger on a bakelite box; END TURN is written on its cream plate
+  # (x40–280, y180–315 of 320×360).
+  button.add_theme_font_override("font", console_font(3)); button.add_theme_font_size_override("font_size", 22)
+  var states := {"normal": "UI_END_TURN_BOX", "hover": "UI_END_TURN_BOX_HOVER", "pressed": "UI_END_TURN_BOX_PRESSED", "disabled": "UI_END_TURN_BOX_DISABLED"}
+  var k := button.size.x / 320.0
+  for state in states:
+   var st := painted_box(states[state], Vector4.ZERO, Vector4(40, 180, 40, 45) * k)
+   button.add_theme_stylebox_override(state, st)
+  var focus := StyleBoxFlat.new(); focus.draw_center = false; focus.border_color = FriendlyLook.SERVICE_TEAL; focus.set_border_width_all(3); focus.set_corner_radius_all(16)
+  button.add_theme_stylebox_override("focus", focus)
+  for c in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+   button.add_theme_color_override(c, Color("#3A1A0A"))
+  button.add_theme_color_override("font_disabled_color", Color("#5A4636"))
+  button.add_theme_constant_override("outline_size", 0)
+  return
  ## The round red push-button in a chrome ring (concept 3); painted when the art is in.
  button.add_theme_font_override("font", console_font(3))
  button.add_theme_font_size_override("font_size", 22)
@@ -1384,8 +1527,93 @@ func paint_button(button: Button) -> void:
   button.add_theme_color_override(c, Analog.CREAM)
  button.add_theme_color_override("font_disabled_color", Analog.CREAM_DIM)
 
+func paint_tray_button(button: Button, ink: Color = Color("#3A1A0A")) -> void:
+ ## Concept 2's chunky tray button; the label is written on its cream plate.
+ var names := {"normal": "UI_TRAY_BUTTON", "hover": "UI_TRAY_BUTTON_HOVER", "pressed": "UI_TRAY_BUTTON_PRESSED", "disabled": "UI_TRAY_BUTTON_PRESSED"}
+ for state in names:
+  var st := painted_box(names[state], Vector4.ZERO, Vector4(14, 5, 14, 8))
+  if st == null: return
+  if state == "disabled": (st as StyleBoxTexture).modulate_color = Color(0.85, 0.82, 0.78)
+  button.add_theme_stylebox_override(state, st)
+ for c in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+  button.add_theme_color_override(c, ink)
+ button.add_theme_color_override("font_disabled_color", Color("#5A4636"))
+
+func console_heading(i: int, stage: Control, k: float) -> void:
+ ## Name, STR and type in the cabinet's top-right slots (name x505–855 y70–155, STR x672–893 y178–250).
+ var ice: Dictionary = game.enc.ice[i]; var d := game.ice_definition(ice)
+ var head := Control.new(); head.name = "ConsoleHeading"; head.mouse_filter = Control.MOUSE_FILTER_IGNORE; stage.add_child(head)
+ var power := Analog.lamp(Color("#4DFF6E") if not game.enc.get("breached",false) else Color("#3A3632"), not game.enc.get("breached",false), int(16 * k / 0.73))
+ at(head, power, Vector2(868, 100) * k)
+ var name_box := Vector2(330, 80) * k
+ var title := centred(d.name.to_upper(), int(44 * k), CONSOLE_CREAM, console_font(2), Vector2(515, 72) * k, name_box, head); title.name = "IceName"
+ var fs := int(44 * k)
+ while fs > 10 and console_font(2).get_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x > name_box.x - 8: fs -= 1
+ title.add_theme_font_size_override("font_size", fs)
+ centred("STR %d" % game.ice_str(i), int(40 * k), CONSOLE_CREAM, console_font(1), Vector2(680, 180) * k, Vector2(205, 66) * k, head).name = "IceStr"
+ var delta: int = game.ice_str(i) - int(d.str)
+ if delta != 0:
+  var badge := console_plate(("↑%d" if delta > 0 else "↓%d") % absi(delta), Color("#2F7A4C") if delta > 0 else Color("#B3261A"), Color.WHITE, int(28 * k), console_font(0))
+  at(head, badge, Vector2(578, 186) * k)
+ var meta := FriendlyLook.label(" · ".join([d.type, d.get("subtype", "")]).trim_suffix(" · "), int(maxf(11.0, 20.0 * k)), CONSOLE_INK, console_font(3))
+ meta.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+ at(head, meta, Vector2(505, 262) * k, Vector2(390, 30) * k)
+
+func build_pipework() -> void:
+ ## Copper pipes behind the panels, showing in the gaps (concept 2); a darker vignette at the edges.
+ var vignette := painted("UI_VIGNETTE")
+ if vignette:
+  var v := TextureRect.new(); v.name = "Vignette"; v.texture = vignette; v.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; v.stretch_mode = TextureRect.STRETCH_SCALE
+  v.mouse_filter = Control.MOUSE_FILTER_IGNORE; at(self, v, Vector2.ZERO, Vector2(1600, 1000))
+ var pipes := Control.new(); pipes.name = "Pipework"; pipes.mouse_filter = Control.MOUSE_FILTER_IGNORE; at(self, pipes, Vector2.ZERO, Vector2(1600, 1000))
+ var h := painted("UI_PIPE_H"); var v2 := painted("UI_PIPE_V"); var elbow := painted("UI_PIPE_ELBOW")
+ pipes.draw.connect(func():
+  if h: pipes.draw_texture_rect(h, Rect2(Vector2(20, 100), Vector2(1560, 18)), false)
+  if h: pipes.draw_texture_rect(h, Rect2(Vector2(20, 760), Vector2(1560, 18)), false)
+  if v2: pipes.draw_texture_rect(v2, Rect2(Vector2(251, 108), Vector2(18, 660)), false)
+  if elbow: pipes.draw_texture_rect(elbow, Rect2(Vector2(244, 94), Vector2(32, 32)), false))
+
+func build_left_trim() -> void:
+ ## Hardware under the left column's buttons: a vent grille, a valve and a pressure gauge.
+ art_rect("UI_VENT_GRILLE", Vector2(18, 700), Vector2(150, 50))
+ art_rect("UI_PIPE_VALVE", Vector2(170, 700), Vector2(44, 44))
+ art_rect("UI_PIPE_GAUGE", Vector2(214, 700), Vector2(42, 44))
+
+func build_tray() -> void:
+ ## Concept 2's copper tray: deck well, the hand, discard well, tray buttons, END TURN in the housing.
+ var tray_art := painted("UI_HAND_TRAY")
+ if tray_art == null: return
+ var tk := 222.0 / 360.0
+ var tray := NinePatchRect.new(); tray.name = "HandTray"; tray.texture = tray_art; tray.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ tray.patch_margin_left = 60; tray.patch_margin_right = 290; tray.patch_margin_top = 50; tray.patch_margin_bottom = 50
+ tray.scale = Vector2(tk, tk); tray.size = Vector2(1322.0 / tk, 360); at(self, tray, Vector2(262, 768))
+ for well in [["UI_DECK_WELL", Vector2(274, 794)], ["UI_DISCARD_WELL", Vector2(1146, 794)]]:
+  art_rect(well[0], well[1], Vector2(118, 154))
+ deck_count = centred("", 12, Analog.CREAM, console_font(2), Vector2(274, 950), Vector2(118, 16), self); deck_count.name = "DeckCount"
+ discard_count = centred("", 12, Analog.CREAM, console_font(2), Vector2(1146, 950), Vector2(118, 16), self); discard_count.name = "DiscardCount"
+ for l in [deck_count, discard_count]:
+  l.add_theme_color_override("font_outline_color", Color("#1A0A04")); l.add_theme_constant_override("outline_size", 4)
+
+func build_legend() -> void:
+ ## The key legend card (concept 2), toggled by KEY LEGEND; the game draws the lamps and words.
+ legend = Panel.new(); legend.name = "KeyLegend"; legend.mouse_filter = Control.MOUSE_FILTER_STOP; legend.z_index = 120
+ legend.add_theme_stylebox_override("panel", Analog.bakelite()); paint_panel(legend, "UI_LEGEND_CARD", Vector4.ZERO)
+ at(self, legend, Vector2(1272, 472), Vector2(308, 264))
+ var k := 308.0 / 560.0
+ var rows := [["UI_KEY_LAMP_GREEN", "Ready (will fire)"], ["UI_KEY_LAMP_RED", "Biggest hit (this response)"], ["UI_KEY_LAMP_OFF", "Broken (inactive)"], ["?", "Hidden (unrevealed)"], ["UI_KEY_LAMP_AMBER", "Tumbled in / DEADLOCK"], ["BOOT", "BOOTING (locks, opens later)"]]
+ for r in rows.size():
+  var cy: float = (82.0 + r * 66.0) * k
+  var mark: String = rows[r][0]
+  if mark == "?": centred("?", 16, Analog.CREAM, CONDENSED, Vector2(80 * k - 14, cy - 14), Vector2(28, 28), legend)
+  elif mark == "BOOT":
+   art_rect("ICON_BOOTING_LIGHT", Vector2(80 * k - 9, cy - 9), Vector2(18, 18), legend)
+  else: art_rect(mark, Vector2(80 * k - 9, cy - 9), Vector2(18, 18), legend)
+  at(legend, FriendlyLook.label(rows[r][1], 13, Analog.CREAM, console_font(1)), Vector2(130 * k, cy - 9), Vector2(380 * k, 18))
+ legend.gui_input.connect(func(e): if e is InputEventMouseButton and e.pressed: legend.hide())
+ legend.hide()
+
 ## The colour a painted part shows behind text (sampled from each image), for contrast checks.
-const PAINT_GROUND := {"UI_PLATE_DARK_S": Color("#010000"), "UI_PLATE_CREAM_S": Color("#EDD9B4"), "UI_PILL_GREEN_S": Color("#015B0B"), "UI_PILL_RED_S": Color("#8B0101"), "UI_BADGE_UP_S": Color("#01480B"), "UI_BADGE_DOWN_S": Color("#6B0100"), "UI_TOOLTIP_PLATE_S": Color("#E9D1B0"), "UI_BUTTON_S": Color("#3F1407")}
+const PAINT_GROUND := {"UI_TRAY_BUTTON": Color("#F2D8AD"), "UI_TRAY_BUTTON_HOVER": Color("#F2D8AD"), "UI_TRAY_BUTTON_PRESSED": Color("#E8CDA2"), "UI_END_TURN_BOX": Color("#EED0AB"), "UI_END_TURN_BOX_HOVER": Color("#EED0AB"), "UI_END_TURN_BOX_PRESSED": Color("#EED0AB"), "UI_END_TURN_BOX_DISABLED": Color("#D8C4A8"), "UI_NOTE_SLIP": Color("#F4DBB3"), "UI_BRAND_PLATE": Color("#2C0E06"), "UI_TICKER": Color("#1A1A19"), "UI_LEGEND_CARD": Color("#2A150F"), "UI_PLATE_DARK_S": Color("#010000"), "UI_PLATE_CREAM_S": Color("#EDD9B4"), "UI_PILL_GREEN_S": Color("#015B0B"), "UI_PILL_RED_S": Color("#8B0101"), "UI_BADGE_UP_S": Color("#01480B"), "UI_BADGE_DOWN_S": Color("#6B0100"), "UI_TOOLTIP_PLATE_S": Color("#E9D1B0"), "UI_BUTTON_S": Color("#3F1407")}
 
 static func style_ground(style: StyleBox) -> Color:
  if style is StyleBoxFlat: return (style as StyleBoxFlat).bg_color

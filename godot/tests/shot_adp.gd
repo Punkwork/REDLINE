@@ -147,7 +147,12 @@ func test_backdrop_resize() -> void:
  for carrier in view.find_children("IllustrationScale", "Control", true, false):
   # ENCOUNTER-DISPLAY-001 enlarged avatars 25%; CARDS-004 gives up 44 px of the stage (x194/238) for the larger hand;
   # ICE-ANALOG-001 grows them again (MASCOT_GROWTH) over the shorter analog console.
-  check(carrier.scale.is_equal_approx(Vector2.ONE * 0.82 * 1.25 * 194.0 / 238.0 * FriendlyEncounter.MASCOT_GROWTH), "two-ICE lane avatars keep the ICE-ANALOG-001 stage scale")
+  # ENC-CONCEPT-001 layout pass: in concept 2's cabinet the painted character scales with the console.
+  var stage_scale := 0.82 * 1.25 * 194.0 / 238.0 * FriendlyEncounter.MASCOT_GROWTH
+  if IceKey.art("UI_ICE_CONSOLE_2") != null:
+   var mascot: FriendlyMascot = carrier.get_child(0)
+   stage_scale = (1.37 if mascot.concept_art != null else 0.95) * 700.0 / 960.0
+  check(carrier.scale.is_equal_approx(Vector2.ONE * stage_scale), "two-ICE lane avatars keep the console stage scale")
  root.size = original_size
  await settle()
 

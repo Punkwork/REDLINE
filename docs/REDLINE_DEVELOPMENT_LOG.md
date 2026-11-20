@@ -4,22 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — ADP-001 Phase 2 and ADP-4a (Codex)
-
-Loaded the approved HALCYON, IRONWATCH and LUCIDA Phase 2 pack. The encounter uses cosmetic randomness for nonrepeating NUL/REM leaks, holds graffiti in reserved margins, shows approved status and Tomorrow toasts, and adds patent plates below the mascot illustrations. Hesitation changes only the live speech bubble. The run entry shows a corporate newsreel.
-
-**Interpretations to confirm:** status toast starts on turn two, temporary speech lasts three seconds, and the newsreel advances with Continue. The current HALCYON map offers the first corporation only, so the shared graffiti hint is reserved for future corporation progression.
-
-**Validation:** 361 rules checks passed. ADP-4a adds the hesitation capture and updates the bleed and strike frames.
-
-## 2026-11-18 — ADP-001 Phase 3 and ADP-4a (Codex)
-
-Added a local, clearable play profile and the Ads that know you switch. Loading and end screens use local card plays, broken ICE, strikes and hesitation when the switch is on. The LUCIDA edit path tags log entries and only rewrites flavour. Graft assignment records fully broken ICE parts and stores the chosen part on the individual deck instance. ADP-4a adds the ad, edit and graft frames.
-
-**Interpretations to confirm:** the ad and record-edit wording is working copy, detailed ads start after two runs, and graft selection uses the first available part in the authored order. The LUCIDA fixture uses a controlled HALCYON encounter with the corporation flag set to LUCIDA, pending a playable route. PATCHWORK and in-progress run saves are absent from this slice. The graft fixture calls the upgrade hook directly and round-trips its deck data.
-
-**Validation:** 361 rules checks, 14 Phase 3 fixture checks and 607 Phase 2 fixture checks passed.
-
 ## 2026-11-18 — SIGNAL-001, ARCH-001 and ADP-4a (Codex)
 
 Added fixed 12 × 8 punch-card patterns, the taped holder and stacked-card viewer. A final-layer BREACH on a tagged Central Node awards its corporation's card once per run and plays the arrival with NUL/REM's EV-33. The presentation snapshot round-trips punch cards and instance grafts. The copy guard requires all three distinct cards for reveal-tagged lines.
@@ -597,3 +581,15 @@ Designer: "what other UI elements can we request ChatGPT build based on the scre
 Designer: "I want to get ChatGPT generating as many UI images for this as possible to get it as correct as possible… once those sets of images are generated you can do the layout." Wrote `docs/visual/concept-art/UI_KIT_BRIEF_3.md`: 16 more blank painted parts (concept-2 console, big key sockets, TURN plate, TRACE counter, dials, strike lamps, NUL/REM slip, deck/discard wells, card back, tray buttons, toggles, pipework, screws/rivets, key glow, log ticker, vignette). The concept-2 layout pass waits for kits 2 and 3. No code changes. Interpretation to confirm: the homes for information concept 2 leaves out (dials, tray, slip).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-18 — ZINE-003: SAMIZINE, the underworld's zine look (Claude).
+
+## 2026-11-20 — ENC-CONCEPT-001: concept-2 layout pass with UI kits 2 and 3 (Claude)
+
+Designer: "both batches are in the folder now. do the full layout pass and send screenshots." Imported 48 kit-2/kit-3 parts from `PANOPTICON art` into `godot/assets/concept/ui/` (the cabinet arrived as "Empty seafoam chrome cabinet-1.png" and was resized to `UI_ICE_CONSOLE_2` 960×1000; the vignette was reduced to 800×500). Rebuilt the encounter layout around concept 2 (master ENC-CONCEPT-001 has the full list): painted top bar plates and dial; CRT pictures per condition; NUL/REM paper slip; ICE cabinets with the character top-left, name/STR slots, keys scaled with the console (`IceKey.u`), hover glow and comic bubble; ticker; hand tray with wells, tray buttons and the END TURN box; KEY LEGEND card; pipework and vignette. Presentation only; every part falls back to the drawn version when its file is missing.
+
+Test updates: `shot_hand` drops on the left column instead of the old right column, checks the hand against the tray buttons and END TURN, and checks `FriendlyHand.HAND_SCALE`; `shot_adp` checks the cabinet's stage scale; `shot_ice_analog` adds the KEY LEGEND capture.
+
+Tests (Godot 4.3, headless): test_game 369 passed, 0 failed; test_adp 17 checks, 0 failures; test_signal_carbon 671 checks, 0 failures. All 16 workflow screenshot fixtures exit 0 with no SCRIPT ERROR, Parse Error or Assertion failed.
+
+Interpretations to confirm: homes for the information concept 2 leaves out; hand cards at 0.72×; parts not used yet (see HANDOFF).
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ADP-001 Phase 2 and ADP-4a (Codex); 2026-11-18 — ADP-001 Phase 3 and ADP-4a (Codex).

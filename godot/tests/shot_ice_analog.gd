@@ -66,6 +66,13 @@ func run() -> void:
 	check_tip(first, "focus")
 	await snapshot("ICE-ANALOG-001_03_tooltip_focus")
 	drop_for(first).release_focus(); await settle()
+	# ENC-CONCEPT-001 layout pass: the KEY LEGEND card toggles over the right console.
+	var legend_button: Button = main.friendly.get_node("LegendButton")
+	legend_button.pressed.emit(); await settle()
+	check(main.friendly.legend.visible, "KEY LEGEND opens the legend card")
+	await snapshot("ENC-CONCEPT-001_06_key_legend")
+	legend_button.pressed.emit(); await settle()
+	check(not main.friendly.legend.visible, "KEY LEGEND closes it again")
 	# Cracking, turn 3: AUTO-RENEW hardened with S1 broken; CAPTCHA probed.
 	var c := g._new_inst("TUMBLER_ICEPICK"); g.hand.append(c); g.bw = 8; g.play_card(c.uid)
 	g.bw = 4; check(g.break_sub(0, 0), "break AUTO-RENEW S1")
