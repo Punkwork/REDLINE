@@ -592,3 +592,7 @@ Designer, after Playtest 7: installed programs were unusable. A probe showed +ST
 Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — SIGNAL-001, ARCH-001 and ADP-4a (Codex).
+
+## 2026-11-20 — ENC-CONCEPT-001: ACCEPT ALL and REJECT ALL mascots (Claude)
+
+Imported the designer's six ChatGPT mascots (`ACCEPT_ALL_*`, `REJECT_ALL_*`, cheery/wary/lethal) into `godot/assets/concept/mascots/`; the game picks them up by name, so COOKIE BANNER now shows the painted bellhop twins. No code changes. Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
