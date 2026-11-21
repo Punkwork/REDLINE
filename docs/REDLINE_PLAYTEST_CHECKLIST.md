@@ -1,5 +1,5 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.7 · **Date:** 2026-11-21 · **For build:** HALCYON PLAYTEST 7, `0.7.0-playtest.7` (`5bb7d71`; tag `playtest-7` pending)
+**Version:** 0.7 · **Date:** 2026-11-21 · **For build:** HALCYON PLAYTEST 7, `0.7.0-playtest.7` (`5bb7d71`, tag `playtest-7`)
 
 Build source `5bb7d71`. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44719708503) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44719708503/artifacts/14620644840) · Fill-in workbook for results: `docs/PANOPTICON_Playtest7_Checklist.xlsx` (upload it back to Claude).
 
