@@ -895,10 +895,10 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
  heading.add_child(console_plate("STR %d" % game.ice_str(i),CONSOLE_CREAM,CONSOLE_INK,20,console_font(1)))
  var delta: int = game.ice_str(i)-int(d.str)
  if delta!=0: heading.add_child(console_plate(("↑%d" if delta>0 else "↓%d") % absi(delta),Color("#2F7A4C") if delta>0 else Color("#B3261A"),Color.WHITE,16,console_font(0)))
- var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", "")]).trim_suffix(" · "),12,CONSOLE_INK,console_font(3))
+ var meta := FriendlyLook.label(" · ".join([d.type,d.get("subtype", "")]).trim_suffix(" · "),12,console_ink(),console_font(3))
  list.add_child(meta)
  if two: meta.visible = false
- if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",11,CONSOLE_INK))
+ if ice.get("zeroed",false): list.add_child(FriendlyLook.label("ZEROED · chance consumed",11,console_ink()))
  var bank := HBoxContainer.new(); bank.alignment=BoxContainer.ALIGNMENT_CENTER; bank.add_theme_constant_override("separation",2)
  if two:
   var band := MarginContainer.new(); band.name = "KeyBand"; band.add_theme_constant_override("margin_left", int(220.0 * k)); band.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -951,7 +951,7 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
  key_u = 1.0
  if not plate_text.is_empty() and game.enc.ice.size() < 3:
   # The ADP-2c patent plate sits at the foot of the console.
-  var plaque := FriendlyLook.label(plate_text, 9, CONSOLE_INK, skin.font); plaque.name="PatentPlate"
+  var plaque := FriendlyLook.label(plate_text, 9, console_ink(), skin.font); plaque.name="PatentPlate"
   plaque.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER; plaque.clip_text=true; plaque.custom_minimum_size.x=plate_w
   list.add_child(plaque)
  return panel
@@ -959,9 +959,27 @@ func scan_tag(i: int, plate_text: String = "") -> Control:
 const CONSOLE_INK := Color("#1F3A33")
 const FRAME_TOP := 14.0
 
+## ENC-CONCEPT-001 console colour (designer 2026-11-20: "yes add console colour"): each corporation's
+## ICE consoles in its own enamel. Painted per-corporation art (UI_ICE_CONSOLE_2_<CORP>.png) wins;
+## until it exists, console_tint.gdshader repaints the seafoam console. HALCYON keeps seafoam.
+const CONSOLE_ENAMEL := {"IRONWATCH": Color("#1F3A5F"), "LUCIDA": Color("#C9B6F2")}
+const CONSOLE_TINT := preload("res://themes/console_tint.gdshader")
+
+func console_art() -> Texture2D:
+ return painted("UI_ICE_CONSOLE_2_" + skin.corporation) if painted("UI_ICE_CONSOLE_2_" + skin.corporation) else painted("UI_ICE_CONSOLE_2")
+
+func console_tint_material() -> ShaderMaterial:
+ if painted("UI_ICE_CONSOLE_2_" + skin.corporation) or not CONSOLE_ENAMEL.has(skin.corporation): return null
+ var m := ShaderMaterial.new(); m.shader = CONSOLE_TINT; m.set_shader_parameter("target", CONSOLE_ENAMEL[skin.corporation])
+ return m
+
+func console_ink() -> Color:
+ ## Text straight on the console's enamel: dark ink on light enamel, cream on dark (navy).
+ return CONSOLE_CREAM if console_ground().get_luminance() < 0.35 else CONSOLE_INK
+
 func console_ground() -> Color:
  ## The console's enamel: the corporation's plaque ground tinted toward its accent (HALCYON: seafoam).
- if painted("UI_ICE_CONSOLE_2") != null: return Color("#93BBA4")   # sampled from UI_ICE_CONSOLE_2's plain panel
+ if painted("UI_ICE_CONSOLE_2") != null: return CONSOLE_ENAMEL.get(skin.corporation, Color("#93BBA4"))   # #93BBA4: UI_ICE_CONSOLE_2's plain panel
  if painted("UI_ICE_CONSOLE") != null: return Color(143.0 / 255.0, 178.0 / 255.0, 144.0 / 255.0)   # sampled from UI_ICE_CONSOLE's lower panel
  return skin.plaque_ground.lerp(skin.accent, 0.42)
 
@@ -994,7 +1012,8 @@ func ice_frame(width: float) -> Control:
  if two_art:
   # Concept 2's cabinet: the character stands top-left, name and STR slots top-right, the keys
   # in the recessed band (y465–698 of 1000), the plates below; only the plain foot stretches.
-  var cab := NinePatchRect.new(); cab.name = "IceFrame"; cab.texture = two_art; cab.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  var cab := NinePatchRect.new(); cab.name = "IceFrame"; cab.texture = console_art(); cab.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  cab.material = console_tint_material()
   cab.patch_margin_left = 60; cab.patch_margin_right = 60; cab.patch_margin_top = 720; cab.patch_margin_bottom = 60
   var kk := width / 960.0
   cab.scale = Vector2(kk, kk); cab.size = Vector2(960, 1000)
@@ -1865,7 +1884,7 @@ func console_heading(i: int, stage: Control, k: float) -> void:
  if delta != 0:
   var badge := console_plate(("↑%d" if delta > 0 else "↓%d") % absi(delta), Color("#2F7A4C") if delta > 0 else Color("#B3261A"), Color.WHITE, int(28 * k), console_font(0))
   at(head, badge, Vector2(578, 186) * k)
- var meta := FriendlyLook.label(" · ".join([d.type, d.get("subtype", "")]).trim_suffix(" · "), int(maxf(11.0, 20.0 * k)), CONSOLE_INK, console_font(3))
+ var meta := FriendlyLook.label(" · ".join([d.type, d.get("subtype", "")]).trim_suffix(" · "), int(maxf(11.0, 20.0 * k)), console_ink(), console_font(3))
  meta.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
  at(head, meta, Vector2(505, 262) * k, Vector2(390, 30) * k)
 

@@ -4,12 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — EVENT-004 direction: powerful Ghostware, permanent Bloatware (Claude)
-
-Designer: a random event offering "a specific ghostware that bestows a negative, a permanent bloatware in their deck that can't be removed through normal means"; it's "a benefit to the rustler, but because of how powerful it is, it comes with a negative"; a dedicated Ghostware (option B) that "needs designing". Recorded as DIRECTION in the master register, a "planned, in design" note in Upgrades §3, and a HANDOFF design task (Claude) carrying Claude's first-draft proposal (one Ghostware and Bloatware per corporation) and the open questions. Nothing approved beyond the direction. **Code changes:** none. **Tests:** none.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 4: the same atrium reveals its purpose (Codex).
-
 ## 2026-11-18 — EVENT-004: one version per corporation (Claude)
 
 Designer: "each corp should have their own version of this 'reward'". Recorded in the master register, Upgrades §3 note and the HANDOFF design task (moved from open to decided). **Code changes:** none. **Tests:** none.
@@ -602,3 +596,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 The designer sent ChatGPT's three IRONWATCH mockups (saved in `docs/visual/explorations/ironwatch-avatars/`). K9 UNIT's escalation matches the brief and becomes the reference image for the production prompts. Updated round 7 prompts 1–3: a large mood-coloured face turned to the viewer on every ICE (most lineup appliances had none), transparent backgrounds, and sharper PATTERN ANALYSIS, SHOCK TROOPER and SECURITY GUARD. Raised a per-corporation console colour as an idea.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-002/003: choices in every event; a 10th event (Claude).
+
+## 2026-11-20 — ENC-CONCEPT-001 console colour per corporation (Claude Code)
+
+Designer: "yes add console colour". ICE consoles now take the corporation's enamel: HALCYON seafoam (unchanged), IRONWATCH navy #1F3A5F, LUCIDA lilac #C9B6F2. `encounter.gd` loads `UI_ICE_CONSOLE_2_<CORP>.png` when present; otherwise the new `themes/console_tint.gdshader` repaints only the seafoam enamel (chrome, brass and dark slots keep their colour). `console_ground()` returns the corporation's enamel and `console_ink()` picks cream on dark enamel for the meta, ZEROED and patent labels. `shot_facade` now checks console ink contrast for every corporation. ChatGPT prompt for painted versions: `docs/visual/concept-art/CHATGPT_PROMPTS_CONSOLES.md`. Presentation only. **Tests:** test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 fixtures exit 0 with no script errors (shot_facade 0 failures, 8 captures).
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-004 direction: powerful Ghostware, permanent Bloatware (Claude).

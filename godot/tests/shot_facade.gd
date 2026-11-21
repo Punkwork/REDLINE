@@ -54,6 +54,8 @@ func check_plaques(view: FriendlyEncounter) -> float:
   var backing: StyleBoxFlat = plaque.get_theme_stylebox("panel")
   # ENC-CONCEPT-001: with the painted console the panel shows through; console_ground() is that paint.
   check(backing.bg_color == view.console_ground() and backing.bg_color.a == 1.0, "plaque is solid corporate enamel")
+  # ENC-CONCEPT-001 console colour: text straight on the console's own enamel stays readable.
+  check(contrast(view.console_ink(), view.console_ground(), Color(0, 0, 0, 0)) >= 4.5, "console ink on %s enamel" % view.skin.corporation)
   check(plaque.find_children("*", "TextureRect", true, false).is_empty(), "no art behind plaque text")
   check(plaque.size.x <= column.size.x + 1, "plaque fits the column")
   for label: Label in plaque.find_children("*", "Label", true, false):
