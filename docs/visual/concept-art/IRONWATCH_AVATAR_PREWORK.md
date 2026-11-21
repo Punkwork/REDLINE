@@ -1,6 +1,6 @@
 # AVATAR-001 — IRONWATCH prework (sources, roster, draft avatar concepts)
 
-**Date:** 2026-11-20 · **Author:** Claude · **Status:** PREWORK — nothing here is a decision until the designer approves it.
+**Date:** 2026-11-20 · **Author:** Claude · **Status:** PREWORK, answered 2026-11-20: the designer chose a cross between B and C with robot dogs and saucer drones, hatches that open on gas hoses, tiny guns, lasers and syringes as the mood worsens; uniforms yes, faces no; start from FACADE-001; mockups first. Prompts: `CHATGPT_PROMPTS_ROUND7_IRONWATCH.md`.
 **Why:** the designer asked for "some prework on designing the prompts for IRONWATCH" and to "pull up the history and guides for ironwatch", after the LUCIDA round (`CHATGPT_PROMPTS_ROUND6_LUCIDA.md`).
 
 ---
