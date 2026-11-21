@@ -4,10 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-18 — EVENT-002/003: choices in every event; a 10th event (Claude)
-
-Designer: one random room should give "+5 max vitae or choose a random rare card", and "Giving the rustler choices in each of these random rooms helps to make them feel less unfair." Answers: add it as a 10th event; MAINTENANCE WINDOW gets a choice; the rule covers every event except AMBUSH. Upgrades §3 now lists 10 events: EVENT-002 rule, MAINTENANCE WINDOW = heal 6 VITAE or −5 TRACE, new CARE PACKAGE, odds AMBUSH 20% / BROKER 5% / eight others about 9.4% each. Master register; HANDOFF row for Claude Code. **Interpretations to confirm:** the name CARE PACKAGE; +5 Max VITAE also raises current VITAE by 5 and lasts the run; MAINTENANCE WINDOW is either/or (it used to give both). **Code changes:** none. **Tests:** none.
-
 ## 2026-11-18 — EVENT-004 direction: powerful Ghostware, permanent Bloatware (Claude)
 
 Designer: a random event offering "a specific ghostware that bestows a negative, a permanent bloatware in their deck that can't be removed through normal means"; it's "a benefit to the rustler, but because of how powerful it is, it comes with a negative"; a dedicated Ghostware (option B) that "needs designing". Recorded as DIRECTION in the master register, a "planned, in design" note in Upgrades §3, and a HANDOFF design task (Claude) carrying Claude's first-draft proposal (one Ghostware and Bloatware per corporation) and the open questions. Nothing approved beyond the direction. **Code changes:** none. **Tests:** none.
@@ -600,3 +596,9 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 Designer answered the IRONWATCH prework: heavy civic machinery crossed with faceless authority, robot dogs and saucer drones, hidden hatches that open on gas hoses, tiny guns, lasers and especially syringes as the mood worsens; uniforms yes, faces no; FACADE-001 appliances as the base; mockups first. Recorded under AVATAR-001 and wrote `CHATGPT_PROMPTS_ROUND7_IRONWATCH.md` (3 mockups, then 67 images in three prompts, the four escape ICE newly designed). No code changes.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — UPL-006a: DATA PURGE costs +7 TRACE (Claude).
+
+## 2026-11-20 — IRONWATCH mockups reviewed (Claude)
+
+The designer sent ChatGPT's three IRONWATCH mockups (saved in `docs/visual/explorations/ironwatch-avatars/`). K9 UNIT's escalation matches the brief and becomes the reference image for the production prompts. Updated round 7 prompts 1–3: a large mood-coloured face turned to the viewer on every ICE (most lineup appliances had none), transparent backgrounds, and sharper PATTERN ANALYSIS, SHOCK TROOPER and SECURITY GUARD. Raised a per-corporation console colour as an idea.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-002/003: choices in every event; a 10th event (Claude).

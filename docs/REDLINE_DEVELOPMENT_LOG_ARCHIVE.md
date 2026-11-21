@@ -2245,3 +2245,7 @@ Designer sees the random events as "a source of great variability for the player
 Designer: "Data purge cost should be +7 trace or -5 vitae." Updated Upgrades §3, Core Rules (Node table and amendments), Uplink & CAPS §3.2, and the master register. DATA PURGE isn't in the HALCYON slice code yet, so there's nothing to rebuild; it lands with the SIGNAL UNCLEAR events (see EVENT-001). The historical UPL-006 approval line in Uplink & CAPS still quotes +5. **Code changes:** none. **Tests:** none.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 step 3: architectural atrium and illustrated materials (Codex).
+
+## 2026-11-18 — EVENT-002/003: choices in every event; a 10th event (Claude)
+
+Designer: one random room should give "+5 max vitae or choose a random rare card", and "Giving the rustler choices in each of these random rooms helps to make them feel less unfair." Answers: add it as a 10th event; MAINTENANCE WINDOW gets a choice; the rule covers every event except AMBUSH. Upgrades §3 now lists 10 events: EVENT-002 rule, MAINTENANCE WINDOW = heal 6 VITAE or −5 TRACE, new CARE PACKAGE, odds AMBUSH 20% / BROKER 5% / eight others about 9.4% each. Master register; HANDOFF row for Claude Code. **Interpretations to confirm:** the name CARE PACKAGE; +5 Max VITAE also raises current VITAE by 5 and lasts the run; MAINTENANCE WINDOW is either/or (it used to give both). **Code changes:** none. **Tests:** none.

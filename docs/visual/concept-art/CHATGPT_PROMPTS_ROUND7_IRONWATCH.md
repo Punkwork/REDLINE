@@ -11,6 +11,9 @@
 
 Order: run prompt 0, show Claude the mockups, adjust, then prompts 1–3.
 
+
+**Mockup review (2026-11-20, Claude):** mockups saved in `docs/visual/explorations/ironwatch-avatars/`. The K9 UNIT escalation is exactly the brief (sealed → hatches cracking with a syringe → every hatch open with syringes, lasers, guns and hoses), so that image is now the attached reference for prompts 1–3. Fixes folded into prompts 1–3: in the lineup most appliances had **no visible face** (fine for a museum shelf, unreadable in a game), so the style now demands a big face turned to the viewer that changes colour with the mood; the production images must have a **transparent** background (the mockups painted the hall in); PATTERN ANALYSIS came out as a film camera, SHOCK TROOPER as a bare shield and SECURITY GUARD as a cylinder, so their descriptions are sharper. Idea for the designer: the encounter mockup's **navy-and-gold consoles** suggest a console colour per corporation.
+
 ---
 
 ## 0. Mockups (3 images)
@@ -23,7 +26,7 @@ IRONWATCH is the street-security corporation: checkpoints, patrol drones, body c
 THE KEY RULES:
 - HEAVY AND FACELESS: weighty armoured machines with menace, never cute. Uniform details are fine (a peaked cap, a badge, a coat), but NO human faces: every face is a visor, lens, lamp, grille, scope or display. The K9 robot dog is the only animal face.
 - HIDDEN HATCHES: every ICE hides doors, panels and hatches that are invisible or closed when friendly. As the mood worsens they open, and weapons and instruments come out of all sorts of places: gas hoses, tiny guns, laser emitters, and especially SYRINGES (lots of syringes, on jointed arms). No gore, no blood.
-- A READABLE FACE ANYWAY, made from its own parts, and every ICE a DIFFERENT kind of face.
+- A BIG, OBVIOUS FACE: every ICE turns its face toward the viewer, and the face is large and clear even at small size: lamps, lenses, visor slits or grilles arranged as eyes and a mouth that glow and change with the mood (calm gold, narrowed amber, glaring red). An appliance with no visible face is wrong. Every ICE gets a DIFFERENT kind of face. Only the K9 UNIT may show metal fangs.
 - Its job stays readable: you can tell what security device it is.
 
 Body plan by ICE type: FORTRESS = heavy, wide and planted, a wall, gate, locker or vault with a barrier in front. TUMBLER = round, with something that visibly spins or rotates (a drum, a carousel, a dial, a turnstile). VOID (a sentry) = built around one big sensor (lens, searchlight, scope), on legs, a stalk, treads or hovering fins, with one "stinger" part, leaning toward you.
@@ -52,7 +55,7 @@ IRONWATCH is the street-security corporation: checkpoints, patrol drones, body c
 THE KEY RULES:
 - HEAVY AND FACELESS: weighty armoured machines with menace, never cute. Uniform details are fine (a peaked cap, a badge, a coat), but NO human faces: every face is a visor, lens, lamp, grille, scope or display. The K9 robot dog is the only animal face.
 - HIDDEN HATCHES: every ICE hides doors, panels and hatches that are invisible or closed when friendly. As the mood worsens they open, and weapons and instruments come out of all sorts of places: gas hoses, tiny guns, laser emitters, and especially SYRINGES (lots of syringes, on jointed arms). No gore, no blood.
-- A READABLE FACE ANYWAY, made from its own parts, and every ICE a DIFFERENT kind of face.
+- A BIG, OBVIOUS FACE: every ICE turns its face toward the viewer, and the face is large and clear even at small size: lamps, lenses, visor slits or grilles arranged as eyes and a mouth that glow and change with the mood (calm gold, narrowed amber, glaring red). An appliance with no visible face is wrong. Every ICE gets a DIFFERENT kind of face. Only the K9 UNIT may show metal fangs.
 - Its job stays readable: you can tell what security device it is.
 
 Body plan by ICE type: FORTRESS = heavy, wide and planted, a wall, gate, locker or vault with a barrier in front. TUMBLER = round, with something that visibly spins or rotates (a drum, a carousel, a dial, a turnstile). VOID (a sentry) = built around one big sensor (lens, searchlight, scope), on legs, a stalk, treads or hovering fins, with one "stinger" part, leaning toward you.
@@ -62,12 +65,12 @@ Each ICE has three moods, one image each, same machine, same framing; the escala
 - wary: hatches cracking open. A few panels slide back, one or two syringes, nozzles or gun barrels peek out, a hose uncoils, lenses narrow, a red beacon starts to glow.
 - lethal: fully armed and ornate. Every hidden door and hatch is open and bristling: gas hoses hissing, many tiny guns, laser emitters with red beams, and syringes on jointed arms everywhere. Harsh red beacon light, searchlight white, the badge emblem glowing red.
 
-Rules for every image: PNG, transparent background, 1024 × 1024. The ICE stands on, rolls on, or hovers just above a horizontal ledge along the bottom edge of the image, three-quarters view, in the left two-thirds of the image, the top of the machine about 60 px below the top edge. NO text, letters, numbers or logos anywhere (the badge has no writing). Exact file name.
+Use the attached K9 UNIT moods picture as the reference for style, detail and how far the hatches open in each mood. Rules for every image: PNG, TRANSPARENT background (no hall, no floor, no sky; only the machine and the ledge), 1024 × 1024. The ICE stands on, rolls on, or hovers just above a horizontal ledge along the bottom edge of the image, three-quarters view, in the left two-thirds of the image, the top of the machine about 60 px below the top edge. NO text, letters, numbers or logos anywhere (the badge has no writing). Exact file name.
 
 Make these ONE AT A TIME, in this order (cheery, then wary, then lethal for each). After each image, wait until I type "next".
 
 1–3. TURNSTILE_cheery / _wary / _lethal.png — FORTRESS. A heavy brass three-arm turnstile on a navy enamel plinth, the arms braced like a barrier. Face: a porthole display window showing two light-dots and a line.
-4–6. SECURITY_GUARD_cheery / _wary / _lethal.png — VOID. A porcelain-and-navy reception kiosk wearing a peaked officer's cap; a lens on a jointed periscope stalk peers over the counter. Face: the cap's visor with one round lens under it. Stinger: a baton arm from behind the counter.
+4–6. SECURITY_GUARD_cheery / _wary / _lethal.png — VOID. A porcelain-and-navy reception desk kiosk (a counter, not a cylinder) wearing a big peaked officer's cap on top; a lens on a jointed periscope stalk peers over the counter. Face: under the cap's visor, a dark band with one round glowing lens and a speaker grille. Stinger: a baton arm from behind the counter.
 7–9. CHECKPOINT_cheery / _wary / _lethal.png — FORTRESS. A striped boom-gate arm on a finned navy post, lowered across the way like a wall. Face: a round signal lamp on the post with a grille below it.
 10–12. BODY_CAM_cheery / _wary / _lethal.png — VOID. A badge-shaped chest camera (a gold seven-point star with a big lens) walking on short jointed legs. Face: the lens. Stinger: a clamp arm with a cuff.
 13–15. PATROL_DRONE_cheery / _wary / _lethal.png — VOID. A finned chrome flying saucer with a porcelain dome and a searchlight underneath, hovering. Face: the searchlight as one eye. Stinger: a net launcher under the rim.
@@ -88,7 +91,7 @@ IRONWATCH is the street-security corporation: checkpoints, patrol drones, body c
 THE KEY RULES:
 - HEAVY AND FACELESS: weighty armoured machines with menace, never cute. Uniform details are fine (a peaked cap, a badge, a coat), but NO human faces: every face is a visor, lens, lamp, grille, scope or display. The K9 robot dog is the only animal face.
 - HIDDEN HATCHES: every ICE hides doors, panels and hatches that are invisible or closed when friendly. As the mood worsens they open, and weapons and instruments come out of all sorts of places: gas hoses, tiny guns, laser emitters, and especially SYRINGES (lots of syringes, on jointed arms). No gore, no blood.
-- A READABLE FACE ANYWAY, made from its own parts, and every ICE a DIFFERENT kind of face.
+- A BIG, OBVIOUS FACE: every ICE turns its face toward the viewer, and the face is large and clear even at small size: lamps, lenses, visor slits or grilles arranged as eyes and a mouth that glow and change with the mood (calm gold, narrowed amber, glaring red). An appliance with no visible face is wrong. Every ICE gets a DIFFERENT kind of face. Only the K9 UNIT may show metal fangs.
 - Its job stays readable: you can tell what security device it is.
 
 Body plan by ICE type: FORTRESS = heavy, wide and planted, a wall, gate, locker or vault with a barrier in front. TUMBLER = round, with something that visibly spins or rotates (a drum, a carousel, a dial, a turnstile). VOID (a sentry) = built around one big sensor (lens, searchlight, scope), on legs, a stalk, treads or hovering fins, with one "stinger" part, leaning toward you.
@@ -98,7 +101,7 @@ Each ICE has three moods, one image each, same machine, same framing; the escala
 - wary: hatches cracking open. A few panels slide back, one or two syringes, nozzles or gun barrels peek out, a hose uncoils, lenses narrow, a red beacon starts to glow.
 - lethal: fully armed and ornate. Every hidden door and hatch is open and bristling: gas hoses hissing, many tiny guns, laser emitters with red beams, and syringes on jointed arms everywhere. Harsh red beacon light, searchlight white, the badge emblem glowing red.
 
-Rules for every image: PNG, transparent background, 1024 × 1024. The ICE stands on, rolls on, or hovers just above a horizontal ledge along the bottom edge of the image, three-quarters view, in the left two-thirds of the image, the top of the machine about 60 px below the top edge. NO text, letters, numbers or logos anywhere (the badge has no writing). Exact file name.
+Use the attached K9 UNIT moods picture as the reference for style, detail and how far the hatches open in each mood. Rules for every image: PNG, TRANSPARENT background (no hall, no floor, no sky; only the machine and the ledge), 1024 × 1024. The ICE stands on, rolls on, or hovers just above a horizontal ledge along the bottom edge of the image, three-quarters view, in the left two-thirds of the image, the top of the machine about 60 px below the top edge. NO text, letters, numbers or logos anywhere (the badge has no writing). Exact file name.
 
 Make these ONE AT A TIME, in this order (cheery, then wary, then lethal for each). After each image, wait until I type "next".
 
@@ -108,7 +111,7 @@ Make these ONE AT A TIME, in this order (cheery, then wary, then lethal for each
 10–12. ARMORY_cheery / _wary / _lethal.png — FORTRESS. A tall glass-fronted locker in navy and gold, racks visible behind the glass. Face: the brass lock plate and two keyholes as eyes.
 13–15. INTERROGATION_cheery / _wary / _lethal.png — TUMBLER. A gooseneck desk lamp bolted to a steel table, with a spinning card-file wheel beside it. Face: the lamp head, glaring down. Lethal: syringes and clamps rise from the table.
 16–18. SNIPER_NEST_cheery / _wary / _lethal.png — VOID. A long brass telescope rifle on a rooftop observatory dome. Face: the scope's round lens with crosshair. Stinger: the barrel.
-19–21. PATTERN_ANALYSIS_cheery / _wary / _lethal.png — VOID. A ticker-tape machine on a tripod with a pinboard of string and pins rising behind it like a crest. Face: two dial gauges as eyes and the typewriter keys as teeth. Stinger: a punch stylus.
+19–21. PATTERN_ANALYSIS_cheery / _wary / _lethal.png — VOID. A ticker-tape machine (NOT a film camera) on a tripod: a brass typewriter-like body spilling a long paper tape, with a cork pinboard of photos joined by red string rising behind it like a crest. Face: two round dial gauges as eyes and the row of typewriter keys as teeth. Stinger: a punch stylus.
 
 Reply "ready" and then make image 1.
 ```
@@ -123,7 +126,7 @@ IRONWATCH is the street-security corporation: checkpoints, patrol drones, body c
 THE KEY RULES:
 - HEAVY AND FACELESS: weighty armoured machines with menace, never cute. Uniform details are fine (a peaked cap, a badge, a coat), but NO human faces: every face is a visor, lens, lamp, grille, scope or display. The K9 robot dog is the only animal face.
 - HIDDEN HATCHES: every ICE hides doors, panels and hatches that are invisible or closed when friendly. As the mood worsens they open, and weapons and instruments come out of all sorts of places: gas hoses, tiny guns, laser emitters, and especially SYRINGES (lots of syringes, on jointed arms). No gore, no blood.
-- A READABLE FACE ANYWAY, made from its own parts, and every ICE a DIFFERENT kind of face.
+- A BIG, OBVIOUS FACE: every ICE turns its face toward the viewer, and the face is large and clear even at small size: lamps, lenses, visor slits or grilles arranged as eyes and a mouth that glow and change with the mood (calm gold, narrowed amber, glaring red). An appliance with no visible face is wrong. Every ICE gets a DIFFERENT kind of face. Only the K9 UNIT may show metal fangs.
 - Its job stays readable: you can tell what security device it is.
 
 Body plan by ICE type: FORTRESS = heavy, wide and planted, a wall, gate, locker or vault with a barrier in front. TUMBLER = round, with something that visibly spins or rotates (a drum, a carousel, a dial, a turnstile). VOID (a sentry) = built around one big sensor (lens, searchlight, scope), on legs, a stalk, treads or hovering fins, with one "stinger" part, leaning toward you.
@@ -133,12 +136,12 @@ Each ICE has three moods, one image each, same machine, same framing; the escala
 - wary: hatches cracking open. A few panels slide back, one or two syringes, nozzles or gun barrels peek out, a hose uncoils, lenses narrow, a red beacon starts to glow.
 - lethal: fully armed and ornate. Every hidden door and hatch is open and bristling: gas hoses hissing, many tiny guns, laser emitters with red beams, and syringes on jointed arms everywhere. Harsh red beacon light, searchlight white, the badge emblem glowing red.
 
-Rules for every image: PNG, transparent background, 1024 × 1024. The ICE stands on, rolls on, or hovers just above a horizontal ledge along the bottom edge of the image, three-quarters view, in the left two-thirds of the image, the top of the machine about 60 px below the top edge. NO text, letters, numbers or logos anywhere (the badge has no writing). Exact file name.
+Use the attached K9 UNIT moods picture as the reference for style, detail and how far the hatches open in each mood. Rules for every image: PNG, TRANSPARENT background (no hall, no floor, no sky; only the machine and the ledge), 1024 × 1024. The ICE stands on, rolls on, or hovers just above a horizontal ledge along the bottom edge of the image, three-quarters view, in the left two-thirds of the image, the top of the machine about 60 px below the top edge. NO text, letters, numbers or logos anywhere (the badge has no writing). Exact file name.
 
 Make these ONE AT A TIME, in this order (cheery, then wary, then lethal for each). After each image, wait until I type "next".
 
 1–3. DISPATCH_cheery / _wary / _lethal.png — TUMBLER. A radio switchboard with a rotating dial and a standing microphone, cables everywhere. Face: the big dial with two indicator lamps.
-4–6. SHOCK_TROOPER_cheery / _wary / _lethal.png — VOID. A riot shield on tracked legs with a chrome visor floating behind it, no person inside. Face: the visor slit. Stinger: a stun baton.
+4–6. SHOCK_TROOPER_cheery / _wary / _lethal.png — VOID. A tall riot shield walking on short tracked legs, and floating just above and behind it an empty chrome helmet with a visor, no person inside. Face: the glowing visor slit. Stinger: a stun baton that swings out from behind the shield.
 7–9. OVERWATCH_cheery / _wary / _lethal.png — VOID. IRONWATCH's central intelligence and its largest ICE: the stepped ziggurat clock tower itself, crowned with a ring of searchlights around one great lens, the searchlight-fan badge above. Face: the crown lens. Lethal: every searchlight swings onto the viewer and the tower's facade opens into hundreds of hatches.
 10–12. ROADBLOCK_cheery / _wary / _lethal.png — FORTRESS. A striped concrete-and-steel barrier on tank treads that rolls into place, hazard lamps on top. Face: twin hazard lamps and a grille.
 13–15. SPIKE_STRIP_cheery / _wary / _lethal.png — TUMBLER. A rotating drum on a wheeled frame that unrolls a coiled chain of spikes across the road. Face: the drum hub with two rivet eyes.
