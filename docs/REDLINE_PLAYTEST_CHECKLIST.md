@@ -1,13 +1,13 @@
 # PANOPTICON — Playtest QA checklist
-**Version:** 0.6 · **Date:** 2026-11-18 · **For build:** HALCYON PLAYTEST 6, `0.6.0-playtest.6` (tag `playtest-6`)
+**Version:** 0.7 · **Date:** 2026-11-21 · **For build:** HALCYON PLAYTEST 7, `0.7.0-playtest.7` (`5bb7d71`; tag `playtest-7` pending)
 
-Build source `22eb17f`. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44314368001) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44314368001/artifacts/14431722167)
+Build source `5bb7d71`. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44719708503) · [Windows artifact](https://github.com/Punkwork/REDLINE/actions/runs/44719708503/artifacts/14620644840) · Fill-in workbook for results: `docs/PANOPTICON_Playtest7_Checklist.xlsx` (upload it back to Claude).
 
 Use one copy per playtest run. The live, fill-in version is the **REDLINE Playtest QA Checklist** Sheet ([link](https://claude.ai/artifact/1ARG6jjW9cp34EGq23drFk)) (a column per run, with OK / Issue / Fail / N/A, plus a Run log tab). This file is the reference copy that lives with the design docs.
 
 **For every run:** choose a Rustler and play the available HALCYON route. Record the route, cards, CRED and result manually. Mark summary export and whole-heist checks N/A for this slice.
 
-Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then. **v0.3 (2026-11-17):** checks for the designer decisions of 2026-11-17: rolled FORTRESS PULP and visible next values (PULP-001), TUMBLE-001, the HALCYON ICE audit (ICE-AUDIT-001), SHATTER (RIOT-003), card readability (READ-001), the encounter visuals (VIS-001 / CHROME-001 / CARDS-001) and the LOGIC BOMB / RELAY removal (DEPRECATE-001). Checks marked *(after X)* apply once X is in the build. **v0.4 (2026-11-17):** for HALCYON PLAYTEST 4. The v0.3 checks are all in this build, so their *(after …)* marks are removed; A3 (confirm the build) and L9 (Icepick drag feedback) added; the Run log gains a Build column. **Scope of this build:** HALCYON's first four map rows only. Mark IRONWATCH and LUCIDA checks, the Central Node (H3, J1, J2) and whole-corporation totals (G5, I2, K2) **N/A**.
+Targets come from the approved design: Opening Node (OPEN-001), card rewards (CORE-010), economy (UPL-008), map (MAP-002), starter cards (BASIC-001) and run length (Core Rules §10.5). **v0.1.1:** G1 and G5 use the deck-size targets set by the designer on 2026-11-15 (30–35 cards by the end of LUCIDA; stage targets from `REDLINE_DECK_SYNERGY.md` DSY-006). **v0.2:** pacing (PACE-001) and deck-synergy (DSY) checks added, approved 2026-11-15. Checks marked *(after DSY-xxx)* apply once that mechanic is in the build; mark them N/A until then. **v0.3 (2026-11-17):** checks for the designer decisions of 2026-11-17: rolled FORTRESS PULP and visible next values (PULP-001), TUMBLE-001, the HALCYON ICE audit (ICE-AUDIT-001), SHATTER (RIOT-003), card readability (READ-001), the encounter visuals (VIS-001 / CHROME-001 / CARDS-001) and the LOGIC BOMB / RELAY removal (DEPRECATE-001). Checks marked *(after X)* apply once X is in the build. **v0.4 (2026-11-17):** for HALCYON PLAYTEST 4. The v0.3 checks are all in this build, so their *(after …)* marks are removed; A3 (confirm the build) and L9 (Icepick drag feedback) added; the Run log gains a Build column. **v0.7 (2026-11-21):** for HALCYON PLAYTEST 7, the ENC-CONCEPT-001 encounter. A3 updated; new section *Playtest 7 encounter* (PT7-1 to PT7-10); C2, L5, L8 and L10 reworded for the new screen. MOOD-PIXEL-001, HOVER-001, the CAPS rack and the rebuilt program screen came after this build, so they aren't checked here. **Scope of this build:** HALCYON's first four map rows only. Mark IRONWATCH and LUCIDA checks, the Central Node (H3, J1, J2) and whole-corporation totals (G5, I2, K2) **N/A**.
 
 
 ## Setup
@@ -16,7 +16,22 @@ Targets come from the approved design: Opening Node (OPEN-001), card rewards (CO
 |---|---|---|---|---|
 | A1 | Log the run on the Run log tab (corporation, Rustler, result, minutes). | Every run logged | | |
 | A2 | Record the available run details manually. | Rustler, Node, result and relevant cards logged | | |
-| A3 | Confirm the build: the selection screen shows HALCYON PLAYTEST 6 · ATOMIC DECO PUNK · 0.6.0-playtest.6. Copy `BUILD_COMMIT.txt` into the Run log. Mark out-of-scope checks N/A (see above). | Source revision from `BUILD_COMMIT.txt` | | |
+| A3 | Confirm the build: the selection screen shows HALCYON PLAYTEST 7 · ATOMIC DECO PUNK · 0.7.0-playtest.7. Copy `BUILD_COMMIT.txt` into the Run log. Mark out-of-scope checks N/A (see above). | Source revision from `BUILD_COMMIT.txt` | | |
+
+## Playtest 7 encounter
+
+| ID | Check | Target / what good looks like | Result | Notes |
+|---|---|---|---|---|
+| PT7-1 | Top bar: PANOPTICON plate, network/Node plate, CONDITION pill, HOSTILE REVEAL %, TURN / TRACE / RESERVE tiles and strike lamps (ENC-CONCEPT-001). | You could find every number you needed without hunting | | |
+| PT7-2 | ICE cabinets: AUTO-RENEW and CAPTCHA show their painted characters and change mood (cheery / wary / lethal); other ICE use the older drawings, scaled into the cabinet. | Painted ICE read clearly; mood matches the threat | | |
+| PT7-3 | Icon keys: each subroutine shows an icon and value; hover or focus shows the full rule; the KEY LEGEND card explains the icons (ICE-ANALOG-001). | You could read every subroutine; note any icon you had to look up twice | | |
+| PT7-4 | Each ICE has its own NEXT RESPONSE plate, replacing the shared response strip. | You could predict what each ICE would do next | | |
+| PT7-5 | White concept card faces: name, BW cost and corner icons on the face, rules on hover only. Cards without a painted picture show a tinted stencil. | You could play without hovering every card; note cards you kept hovering | | |
+| PT7-6 | Hand: smaller cards in the copper tray; overlap and fan grow with the card count; a draw at 10 cards stops and leaves the card on the draw pile (CARDS-004 fan, HAND-MAX-001). | Readable at 6–10 cards; no card lost at 10 | | |
+| PT7-7 | CONFIRM: hand cards at 0.72× are big enough, and the homes for strikes, reserve, CRED/RAM, deck, discard, END RUN and the NUL/REM note work. | Yes, or note what to move | | |
+| PT7-8 | Mushroom END TURN button, deck/discard wells and tray buttons. | Always clear what each does | | |
+| PT7-9 | Installed programs in the CRT. Known issue: the controls in this build are tiny (rebuilt after Playtest 7). Note anything else. | Record what got in your way | | |
+| PT7-10 | CONFIRM: TRACE pixel steps (sharp below 20; 2 px at 20, 3 px at 30, 4 px on a strike, 5 px at Mask off) and the short glitch on each change; instant with reduced motion (PIXEL-TRACE-001/001a). Text, keys and cards stay sharp. | Steps and timing feel right, or note values | | |
 
 ## Playtest 6 presentation
 
@@ -43,7 +58,7 @@ Mark playable Central Node punch cards, LUCIDA record edits, PATCHWORK grafts an
 | ID | Check | Target / what good looks like | Result | Notes |
 |---|---|---|---|---|
 | C1 | Typical encounter length. | Early 4–5 · mid–late 5–8 (PACE-001) | | |
-| C2 | The Corporation Response order (left to right, top to bottom) was readable in the log. | You could predict the next response | | |
+| C2 | The Corporation Response order (left to right, top to bottom) was readable in the log and on each ICE's NEXT RESPONSE plate. | You could predict the next response | | |
 | C3 | The break cost on each subroutine button matched what you actually paid. | Always matched | | |
 | C4 | Reactive ICE abilities (WATCHDOG, PATROL DRONE, K9 UNIT…) were noticed before they hurt. | No surprises after the first time | | |
 | C5 | Go deeper or leave felt like a real choice. Note how often you left early. | Both choices taken sometimes | | |
@@ -151,12 +166,12 @@ Mark playable Central Node punch cards, LUCIDA record edits, PATCHWORK grafts an
 | L2 | The log was readable and key events stood out. | Yes | | |
 | L3 | On the map, it was clear which Nodes you could reach. | Yes | | |
 | L4 | The Uplink was clear: prices, and why you couldn't buy something. | Yes | | |
-| L5 | Card text was readable on every card type, including brown SCRIPT and blue-green PROTOCOL (READ-001). | Readable at normal distance | | |
+| L5 | Card names, costs and hover rules were readable on every card type (READ-001; in this build, the concept card faces). | Readable at normal distance | | |
 | L6 | The angriest-looking ICE was the one about to hit hardest; mood matched the shown numbers (VIS-001, PULP-001). | Yes, before reading numbers | | |
 | L7 | Corporation states were clear: Cracking, Strike and Mask off looked different, and your cards and HUD never changed (VIS-001, RUSTLER-LOOK-001). | Yes | | |
-| L8 | The encounter looked like one product: atrium, ICE plaques and cartridges sat well together (CHROME-001, CARDS-001). Note anything that looked out of place. | Yes | | |
+| L8 | The encounter looked like one product: top bar, ICE cabinets, CRT, cards and hand tray sat well together (ENC-CONCEPT-001). Note anything that looked out of place. | Yes | | |
 | L9 | Dragging an Icepick onto an ICE outlined the legal rows, showed the exact BW cost and MARGIN before release, explained a refused target, and charged nothing for a refused drop (CHROME-001). | Always | | |
-| L10 | Install a PROGRAM in the left bay, hover and click it, and play each kind of SCRIPT in its drop zone. | Invalid drops spend nothing | | |
+| L10 | Install a PROGRAM in the CRT panel, hover and click it, and play each kind of SCRIPT in its drop zone. | Invalid drops spend nothing | | |
 | L11 | Right-click a hand card twice, then switch to fullscreen and check the backdrop and ICE faces. | 150% preview toggles and backdrop fills the window | | |
 | L12 | Watch and listen as TRACE rises. Try music volume, mute and reduced motion. | Art and mix follow the corporation state and settings | | |
 
