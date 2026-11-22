@@ -791,6 +791,8 @@ func break_action(i: int, sub: int) -> void:
 func mood_for(i: int) -> String:
  if game.enc.get("breached",false): return "knocked_out"
  var ice: Dictionary = game.enc.ice[i]
+ if Game.CORE_LOOP:  # FORM-001: the form follows STR and breaks (rules state), not TRACE
+  return game.ice_form(i).to_lower()
  if game.strikes>=2 or game.ice_definition(ice).get("black",false): return "lethal"
  for step in game.response_preview():
   if step.ice != i or step.skipped or step.hidden: continue

@@ -16,6 +16,10 @@
 | CACHE-001 | CACHE shows a duration in a card corner: ∞ = the encounter, or N turns. |
 | STRIP-001 | This build: Generalist only; TUMBLER rotation with no waiting floor (no BOOTING); VOID subroutines start face-down and a **PROBE reveals the top one**; fixed PULP; no passives, curves, rolls, CORTEX, bloat tax, COMPILE, viruses or other Rustlers. Basic Extractor and CORTEX BUFFER stay as inert cards. Card removal: DECOMPILE on the reward screen. |
 
+## 1a. ICE forms (FORM-001) and threat (FORM-002), 2026-11-21
+- **WARY:** current STR below half the printed STR. **LETHAL:** below half STR and at least half the subroutines broken (rounded up: 2 → 1, 3 → 2, 4 → 2, 5 → 3). LETHAL lasts the encounter; its PULP and TRACE deal double, parting shot included. Black ICE show the forms but never double. The mascot mood follows the form in this build.
+- **FORM-002:** every TRACE subroutine +2 and every PULP subroutine +1 (the table below shows the values before FORM-002; the build has them).
+
 ## 2. ICE in the build (`godot/scripts/core/ice.gd`)
 | ICE | Type | STR | Subroutines |
 |---|---|---|---|

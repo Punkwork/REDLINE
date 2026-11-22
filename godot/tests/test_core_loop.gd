@@ -10,6 +10,7 @@ func run(runner) -> void:
 	test_turn_001_draw()
 	test_void_probe_reveal()
 	test_pool_and_data()
+	test_forms()
 
 func opening(seed_value: int) -> Game:
 	var g := Game.new(seed_value)
@@ -110,3 +111,27 @@ func test_pool_and_data() -> void:
 			for sub in d.subs:
 				for e in sub:
 					t.check(e.k != "PULP_CURVE" and e.k != "CORTEX", "STRIP-001: %s has fixed PULP and no CORTEX" % id)
+
+func test_forms() -> void:
+	## FORM-001: WARY below half STR; LETHAL below half STR with half the subroutines broken (rounded up).
+	var g := opening(5)
+	g.bw = 20
+	t.check(g.ice_form(1) == "CHEERY", "FORM-001: REJECT ALL starts CHEERY")
+	g.play_card(t.put_in_hand(g, "PROBE"), 1)
+	g.play_card(t.put_in_hand(g, "PROBE"), 1)
+	t.check(g.ice_str(1) == 2 and g.ice_form(1) == "WARY", "FORM-001: STR 2 of 6 is WARY")
+	t.check(g.break_sub(1, 0), "break REJECT ALL's guard")
+	t.check(g.ice_form(1) == "WARY", "one of three broken: still WARY")
+	# Break ACCEPT ALL to 2 of 3 without reducing its STR: it stays WARY-free (STR is full)
+	t.check(g.break_sub(1, 1) and g.ice_form(1) == "LETHAL", "FORM-001: two of three broken below half STR: LETHAL")
+	var e: Dictionary = g.effect_value(g.enc.ice[1], {"k": "PULP", "v": 3})
+	t.check(e.v == 6, "FORM-001: LETHAL doubles PULP (3 → %d)" % e.v)
+	var tr: Dictionary = g.effect_value(g.enc.ice[1], {"k": "TRACE", "v": 3})
+	t.check(tr.v == 6, "FORM-001: LETHAL doubles TRACE")
+	g.enc.ice.push_front(g._new_ice("HOUSE_CALL"))
+	g.enc.ice[0].str_mod = -9
+	g.enc.ice[0].broken[0] = true
+	g._sync_strengths()
+	t.check(g.ice_form(0) == "LETHAL" and not g.enc.ice[0].get("lethal", false), "Black ICE show the LETHAL form")
+	t.check(g.effect_value(g.enc.ice[0], {"k": "PULP", "v": 5}).v == 5, "Black ICE never deal double")
+	t.check(IceDB.def("CAPTCHA").subs[2][0].v == 4 and IceDB.def("REJECT_ALL").subs[0][0].v == 3, "FORM-002: TRACE +2, PULP +1")

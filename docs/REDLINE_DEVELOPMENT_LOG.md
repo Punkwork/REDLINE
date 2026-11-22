@@ -591,3 +591,11 @@ The designer pushed `playtest-7` on `5bb7d71` from the local clone (`git -C … 
 
 Designer chose "option 1": skip the legacy screenshot fixtures in CI while `Game.CORE_LOOP` is true, since they stage full-game states the stripped build switches off (the first failure was `shot_rustlers` expecting VECTOR's card-break choice). `release` fast-forwarded to `37a72a4`; workflow [44970043672](https://github.com/Punkwork/REDLINE/actions/runs/44970043672) passed and exported `PANOPTICON-HALCYON-PLAYTEST-8-0.8.0-playtest.8-Windows-x86_64` (BUILD_COMMIT, SHA256SUMS, guide, both checklists). The `playtest-8` tag could not be pushed from this session (proxy); the designer pushes it from a local clone. **To restore the fixtures:** set `CORE_LOOP` to false, or update the fixtures for the core-loop build (HANDOFF).
 
+## 2026-11-21 — FORM-001 and FORM-002: ICE forms and more threat (Claude Code)
+
+Designer after Playtest 8: "a whole lot more fun to play", but too little damage and TRACE. Built in the core-loop build: TRACE subroutines +2, PULP subroutines +1 (FORM-002); `Game.ice_form()` gives CHEERY / WARY / LETHAL from STR and breaks, LETHAL is stored for the encounter and doubles PULP and TRACE in `effect_value` (so the keys, the response and the parting shot all show and deal the doubled value); Black ICE get the look only (FORM-001). The encounter's `mood_for()` follows the form when `CORE_LOOP` is on.
+
+**Tests:** `test_game.gd` 148 passed, 0 failed; ADP 17/0; SIGNAL/CARBON 671/0.
+**Bot sims (30 Generalist runs, before the Black ICE look change):** 15/30 cleared; deaths at CAPTCHA 11, TERMS & CONDITIONS 4; 3.3 turns per encounter; 10.1 PULP to VITAE per encounter; 0.00 unspent BW; 2.5 threat subs broken first per BREACH; parting shot 0.6 subs and 0.9 VITAE. The bot doesn't plan around LETHAL, so this is a worst case.
+
+**Interpretations to confirm:** "half its printed STR" uses the ICE's base STR, and "below half" is strict (STR 6 → WARY at 2 or less). A LETHAL ICE's mood stays lethal after its STR rises again.

@@ -1199,6 +1199,8 @@ func _sync_strengths() -> void:
 		if int(ice.get("last_str", current)) > 0 and current == 0 and not ice.get("zeroed_blocked", false) and floor_value == 0:
 			ice.zeroed = true
 		ice.last_str = current
+		if CORE_LOOP:
+			_update_form(i)
 
 func would_zero(i: int, reduction: int) -> bool:
 	var ice: Dictionary = enc.ice[i]
@@ -1886,6 +1888,36 @@ func virus_total(i: int) -> int:
 	return t
 
 func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
+	## FORM-001: a LETHAL ICE's PULP and TRACE subroutines deal double (core-loop build).
+	var out := _effect_value_base(ice, e)
+	if CORE_LOOP and ice.get("lethal", false) and out.k in ["PULP", "TRACE"]:
+		out = out.duplicate()
+		out.v = int(out.v) * 2
+	return out
+
+func ice_form(i: int) -> String:
+	## FORM-001: CHEERY, WARY (STR below half its printed STR) or LETHAL (below half STR and at least
+	## half its subroutines broken, rounded up; lasts the encounter). Black ICE show the forms but never deal double.
+	var ice: Dictionary = enc.ice[i]
+	if ice.get("lethal", false) or ice.get("lethal_form", false):
+		return "LETHAL"
+	return "WARY" if ice_str(i) * 2 < int(ice_definition(ice).str) else "CHEERY"
+
+func _update_form(i: int) -> void:
+	var ice: Dictionary = enc.ice[i]
+	var d := ice_definition(ice)
+	if ice.get("lethal", false) or ice.get("lethal_form", false):
+		return
+	var need := int(ceil(d.subs.size() / 2.0))
+	if ice_str(i) * 2 < int(d.str) and ice.broken.count(true) >= need:
+		if d.get("black", false):
+			ice["lethal_form"] = true   # the look only: Black ICE never deal double
+			return
+		ice["lethal"] = true
+		_say("%s turns LETHAL: its PULP and TRACE now deal double." % d.name)
+		_event("ICE_LETHAL", {"ice": ice.id})
+
+func _effect_value_base(ice: Dictionary, e: Dictionary) -> Dictionary:
 	var key := escalation_key(ice, e)
 	if e.k == "PULP":
 		for roll in ice.get("pulp_rolls", []):

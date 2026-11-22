@@ -36,6 +36,7 @@ Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
 | ID | What | Owner | Status |
 |---|---|---|---|
 | **STRIP-001, BW-001, PROBE-001, PROBE-003, BREACH-001, TURN-001, BURST-001, STR-001** | Rules and data behind `Game.CORE_LOOP` | Claude Code | **BUILT**, see the 2026-11-21 log entry; awaiting Playtest 8 |
+| **FORM-001, FORM-002** | ICE forms by STR and breaks (LETHAL doubles PULP and TRACE; Black ICE look only); TRACE +2, PULP +1 | Claude Code | **BUILT**, awaiting Playtest 9 |
 | **CACHE-001** | Engine: CACHED cards are discarded between layers (built). **UI: the ∞ / N-turn corner icon** | Claude Code | Engine BUILT; icon TO DO |
 | **PROBE-003 UI** | Show PROBE's cost while it's dragged over an ICE (the hand shows the cheapest cost today) | Claude Code | TO DO |
 | **STRIP-001 follow-ups** | Threat check after Playtest 8 (bot: CAPTCHA node deadliest); RIOT rethink; dead-card audit; re-baseline the PACE targets for 3 BW | Claude | WAITING on Playtest 8 |
