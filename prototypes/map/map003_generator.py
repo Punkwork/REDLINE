@@ -121,3 +121,54 @@ if __name__=="__main__" and "--v2" in sys.argv:
     rows,edges=made[3]
     for i,row in enumerate(rows): print("%2d  "%(i+1)+"  ".join("%-5s"%ab[q["t"]] for q in row))
     print("paths:",len(paths(rows,edges)))
+
+# --- MAP-003d v3: every path has at least 1 of each non-ICE Node type 3–8 (designer, 2026-11-22) ---
+# Types: Black Market Uplink, Uplink with Clinic, DEAD DROP, Console Lab, SAFEHOUSE, SIGNAL UNCLEAR.
+# 7 other Nodes per path: one of each type, plus one free slot. The Clinic counts as an Uplink, so the
+# MAP-003c rule (3+ SAFEHOUSE + Uplink, 1+ each) holds automatically.
+SIX=["UPLINK","CLINIC","DEAD DROP","CONSOLE LAB","SAFEHOUSE","SIGNAL"]
+ab["CLINIC"]="CLNC"
+def gen3(seed):
+    r=random.Random(seed+200000)
+    g=gen(seed)
+    if not g: return None
+    rows,edges=g
+    others=[q for row in rows for q in row if q["t"] not in("ICE","MINIBOSS","BOSS")]
+    pool=(SIX*10)[:len(others)]; r.shuffle(pool)
+    for q,t in zip(others,pool): q["t"]=t
+    for _ in range(400):
+        bad=None
+        def walk(ri,i,acc):
+            nonlocal bad
+            if bad: return
+            acc=acc+[(ri,i)]
+            if ri==len(rows)-1:
+                ts=[rows[a][b]["t"] for a,b in acc]
+                miss=[t for t in SIX if t not in ts]
+                if miss: bad=(acc,ts,miss)
+                return
+            for j in edges[ri][i]: walk(ri+1,j,acc)
+        walk(0,0,[])
+        if not bad: break
+        acc,ts,miss=bad
+        cand=[(a,b) for a,b in acc if rows[a][b]["t"] in SIX and ts.count(rows[a][b]["t"])>1]
+        if not cand: return None
+        a,b=r.choice(cand); rows[a][b]["t"]=r.choice(miss)
+    else: return None
+    if not all(runs_ok(p) for p in paths(rows,edges)): return None
+    return rows,edges
+if __name__=="__main__" and "--v3" in sys.argv:
+    ok=0; seed=0; made=[]
+    while ok<200 and seed<20000:
+        g=gen3(seed); seed+=1
+        if g:
+            ok+=1; made.append(g)
+            for p in paths(*g):
+                assert p[0]=="ICE" and p[15]=="BOSS" and p[8] in("ICE","MINIBOSS") and p.count("ICE")+(p[8]=="MINIBOSS")==8
+                assert all(t in p for t in SIX) and runs_ok(p)
+                s=p.count("SAFEHOUSE"); u=p.count("UPLINK")+p.count("CLINIC")
+                assert s+u>=3 and s>=1 and u>=1
+    print("v3: %d valid maps from %d seeds (%.0f%% accepted); every path checked" % (ok, seed, 100*ok/seed))
+    rows,edges=made[0]
+    for i,row in enumerate(rows): print("%2d  "%(i+1)+"  ".join("%-5s"%ab[q["t"]] for q in row))
+    print("paths:",len(paths(rows,edges)))

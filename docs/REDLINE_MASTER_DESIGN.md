@@ -2937,3 +2937,7 @@ Designer: "very good. commit all those to the repo." Approved: the three corpora
 
 Designer: row 1 is an encounter, row 16 the boss, row 9 holds the mini-boss Node (other row-9 Nodes are ICE), 3–4 Nodes per row elsewhere, and every path has 8 encounters (including row 9) and 7 other Nodes. Every path guarantees **at least 3 SAFEHOUSE + Uplink combined, with at least 1 of each** ("it could be 2 safehouses and 1 uplink or 2 uplinks and 1 safehouse"). Spacing rules stay loose (working value: at most 4 ICE or 4 non-ICE Nodes in a row). Prototype: `prototypes/map/map003_generator.py`.
 
+## MAP-003d — Every path has one of each Node type (APPROVED, 2026-11-22)
+
+Designer: "we want each path to have at minimum 1 each of #3 through #8 node type": Black Market Uplink, Uplink with Clinic, DEAD DROP, Console Lab, SAFEHOUSE, SIGNAL UNCLEAR. With 7 other Nodes per path that leaves one free slot. The Uplink with Clinic counts as an Uplink, so MAP-003c (3+ SAFEHOUSE + Uplink, 1+ each) is always met. This replaces "about 1 Uplink in 3 has a Clinic": every path now reaches a Clinic. Prototype v3: `prototypes/map/map003_generator.py --v3`.
+
