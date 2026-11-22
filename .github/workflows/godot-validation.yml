@@ -50,6 +50,12 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
           mkdir -p "$SHOT_DIR"
+          # STRIP-001 (designer approved 2026-11-21, "option 1"): the fixtures stage full-game states
+          # (other Rustlers, passives, curves) that the core-loop build switches off. Skipped while Game.CORE_LOOP is true.
+          if grep -q "^const CORE_LOOP := true" godot/scripts/core/game.gd; then
+            echo "STRIP-001: core-loop build, legacy screenshot fixtures skipped"
+            exit 0
+          fi
           for script in shot_rustlers shot_hand shot_playtest2 shot_playtest3 shot shot_reel shot_friendly_lie shot_chrome shot_cartridges shot_adp shot_adp_phase3 shot_signal_carbon shot_facade shot_cards_pcb shot_trace_pixel shot_ice_analog; do
             xvfb-run -a -s '-screen 0 1600x1100x24' timeout 120 \
               "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
