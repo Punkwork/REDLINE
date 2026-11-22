@@ -59,7 +59,7 @@ func _ready() -> void:
  for id in EFFECTS:
   var player := AudioStreamPlayer.new()
   player.stream = EFFECTS[id]
-  player.volume_db = linear_to_db(AtomicDecoPunk.settings.effects[id])
+  player.volume_db = linear_to_db(float(AtomicDecoPunk.settings.effects.get(id, 0.8)))   # PLAY-002 hits have no tuned volume yet
   add_child(player)
   effect_players[id] = player
 
