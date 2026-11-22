@@ -1188,7 +1188,16 @@ func effect_rule(e: Dictionary) -> String:
   "BW_DRAIN": t = "You have %d less BW next turn." % v
   "CORTEX": t = "Gain %d CORTEX (−1 DRAW each)." % v
   "FORGET": t = "%d random non-CACHED card%s in your hand go to the bottom of your draw pile." % [v, "" if v==1 else "s"]
+  # PT11-UI: the SUB-001 / RIDER-001 / AMEND-001 effects in plain words
+  "HARDEN": t = "HARDEN: this ICE gains %d STR for the rest of the encounter." % v
+  "SHIELD_BREAK": t = "SHIELD BREAK: your SHIELD drops to 0 when this fires, so PULP after it hits in full."
+  "RETALIATE": t = "RETALIATE: PULP %d for each subroutine already broken on this ICE (now PULP %d)." % [v, int(e.get("dmg", 0))]
+  "AMEND": t = "AMEND: this response, the ICE to its right deals +%d on each of its PULP subroutines." % v
   _: t = ui._effect_word(e)
+ if e.k == "TRACE" and not e.get("then", []).is_empty():
+  var riders := []
+  for r in e.then: riders.append(ui._effect_word(r))
+  t += " If any of this TRACE lands (not stopped by JAMMER, GHOST SIGNAL or PROXY CHAIN), also: %s." % ", ".join(riders)
  if e.get("curve","")=="B": t += " Random roll."
  if e.get("curve","")=="C": t += " Hammer curve."
  if e.get("escalate",false): t += " Grows each response."
@@ -1466,7 +1475,8 @@ func _can_drop_data(at: Vector2, data) -> bool:
  if inst.is_empty() or not game.can_play(inst.uid).ok: return false
  var d := CardDB.def(inst.id)
  if d.type == "PROGRAM" or d.get("target",false): return false
- return at.y < (size.y * 0.5 if d.type == "SCRIPT" else 696.0)
+ # PT11-UI: untargeted cards (PULP Shield, BURST, DEFRAG…) play when dropped anywhere above the hand tray.
+ return at.y < HAND_RECT.position.y - 10.0
 func _drop_data(at: Vector2, data) -> void:
  if not _can_drop_data(at,data): return
  ui.play_seated_card(int(data.uid)); end_drag(); ui.refresh()
@@ -1730,13 +1740,20 @@ func build_trace_plate() -> void:
  update_bleed_readout()
 
 func incoming_pulp() -> int:
- var total := 0
+ return incoming().pulp
+
+func incoming() -> Dictionary:
+ ## PT11-UI: what the next response (or, after a BREACH, the parting shot) will deal.
+ var out := {"pulp": 0, "trace": 0}
  for step in game.response_preview():
   if step.skipped or step.hidden: continue
+  if game.enc.get("breached", false) and game._has_deadlock(step.effects): continue
   for source in step.effects:
    var e := game.effect_value(game.enc.ice[step.ice], source)
-   if e.k == "PULP": total += int(e.get("v", 0))
- return total
+   if e.k == "PULP": out.pulp += int(e.get("v", 0))
+   elif e.k == "RETALIATE": out.pulp += int(e.get("dmg", 0))
+   elif e.k == "TRACE": out.trace += int(e.get("v", 0))
+ return out
 
 const VITAL_SLOTS := [25.0, 60.0, 94.0, 129.0, 163.0]   # UI_VITALS_PANEL's five recessed rows, drawn at 240/448
 
@@ -1764,8 +1781,11 @@ func build_instruments() -> void:
  vital_row(0, "VITAE", "VITAE", Color("#FF5A4A"), "%d/%d" % [game.vitae, game.max_vitae], Analog.instrument("bars", ceili(10.0 * game.vitae / maxf(1.0, game.max_vitae)), 10, Vector2(152, 6), Color("#FF3A2A")))
  vital_row(1, "BW", "BANDWIDTH", Color("#FFC84A"), "%d/%d" % [game.bw, bw_capacity], Analog.instrument("lamps", game.bw, mini(10, bw_capacity), Vector2(152, 9), Color("#FFB020")))
  vital_row(2, "SHIELD", "SHIELD", Color("#7FD0FF"), str(game.shield), Analog.instrument("bars", mini(12, game.shield), 12, Vector2(152, 6), Analog.BLUE))
- var pulp := incoming_pulp()
- vital_row(3, "PULP", "PULP INCOMING", Color("#FF8A3A"), str(pulp), Analog.instrument("bars", mini(12, pulp), 12, Vector2(152, 6), Color("#FF8A3A")))
+ var inc := incoming()
+ var pulp: int = inc.pulp
+ # PT11-UI: after a BREACH this row shows the parting shot you'll take at END TURN.
+ var breached: bool = game.enc.get("breached", false)
+ vital_row(3, "PULP", "PARTING SHOT" if breached else "PULP INCOMING", Color("#FF8A3A"), ("%d · T%d" % [pulp, inc.trace]) if breached else str(pulp), Analog.instrument("bars", mini(12, pulp), 12, Vector2(152, 6), Color("#FF8A3A")))
  vital_row(4, "DRAW", "NEXT DRAW", Analog.CREAM, str(game.draw_size()), Control.new())
 
 func update_crt_status() -> void:

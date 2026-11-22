@@ -720,6 +720,8 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  if uid >= 0:
   var chk: Dictionary = view.game.can_play(uid)
   if not chk.ok: tooltip_text += "\n" + chk.reason
+  # PT11-UI: a card you can't play right now (not enough BW, no target…) is dimmed by about 25%.
+  if not chk.ok and view.game.phase == "PLAYER": modulate = Color(0.72, 0.72, 0.72, 1.0)
   mouse_entered.connect(func(): view.hover_uid = uid; view.hand.focus_card(self))
   mouse_exited.connect(func(): view.hover_uid = -1; view.hand.release_card(self))
  gui_input.connect(_card_input)
@@ -874,6 +876,8 @@ func build_concept_face(d: Dictionary, id: String, rule: String, corp: bool, rar
  if uid >= 0:
   var chk: Dictionary = view.game.can_play(uid)
   if not chk.ok: tooltip_text += "\n" + chk.reason
+  # PT11-UI: a card you can't play right now (not enough BW, no target…) is dimmed by about 25%.
+  if not chk.ok and view.game.phase == "PLAYER": modulate = Color(0.72, 0.72, 0.72, 1.0)
   mouse_entered.connect(func(): view.hover_uid = uid; view.hand.focus_card(self))
   mouse_exited.connect(func(): view.hover_uid = -1; view.hand.release_card(self))
  mouse_entered.connect(show_full_rules)

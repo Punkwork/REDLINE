@@ -498,7 +498,18 @@ func _on_break(i: int, s: int, pick_uid: int = -1) -> void:
 # refresh
 # =====================================================================
 
+func _end_turn_label() -> void:
+	## PT11-UI: after a BREACH, END TURN says what the parting shot will cost.
+	end_btn.text = "END TURN"
+	end_btn.tooltip_text = ""
+	if g != null and not g.enc.is_empty() and g.enc.get("breached", false) and g.phase == "PLAYER":
+		var inc: Dictionary = friendly.incoming()
+		end_btn.tooltip_text = "Parting shot: PULP %d, TRACE %d" % [inc.pulp, inc.trace]
+		if inc.pulp + inc.trace == 0:
+			end_btn.tooltip_text = "Parting shot: nothing (everything showing is broken)"
+
 func refresh() -> void:
+	_end_turn_label()
 	# PT11-BUG-1: a pinned card closes when the screen moves on (reward, map, next encounter).
 	if inspection_pinned and g != null and g.phase != inspect_phase:
 		_show_inspect("")
@@ -1642,7 +1653,7 @@ func _overlay_safehouse() -> void:
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
-	v.add_child(_lbl("HALCYON PLAYTEST 11 · CORE LOOP · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	v.add_child(_lbl("HALCYON PLAYTEST 12 · CORE LOOP · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
 	var option := CheckBox.new()
 	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
 	option.button_pressed = g.ghost_draw_enabled
