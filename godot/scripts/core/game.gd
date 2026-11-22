@@ -23,6 +23,7 @@ var pulp_stats := {"incoming": 0, "absorbed": 0, "hits": 0, "black": 0, "encount
 var played := {}            # playtest stats: card id → times played
 ## STRIP-001 playtest stats for the bot sims (docs/REDLINE_CORE_LOOP.md §5).
 var core_stats := {"turns": 0, "unspent_bw": 0, "playable_left": 0, "playable_left_real": 0, "parting_vitae": 0, "parting_fired": 0, "threat_breaks": 0, "breaches": 0, "max_bw": 0}
+var acting_ice: Dictionary = {}   # the ICE whose subroutine is resolving (HARDEN)
 var purges_run := 0          # PURGE-001: run total, for playtest stats
 var rustler := "GENERALIST"   # RUSTLER-001: GENERALIST, ECHO, RIOT or VECTOR
 var phase := "MAP"            # MAP, READY_RIG, PLAYER, RESPONSE, CHOICE, DEEPER, REWARD, SAFEHOUSE, SLICE_DONE, DEAD
@@ -419,6 +420,8 @@ func _start_turn() -> void:
 	enc.breaks_turn = 0
 	for p in installed:
 		p.free_used = false
+		if CORE_LOOP:
+			p.boost = 0   # BOOST-001: Icepick boosts last until the end of your turn
 	enc["toolbelt_used"] = false
 	for ice in enc.ice:
 		ice.rainbow = -1
@@ -941,6 +944,7 @@ func _parting_shot() -> void:
 		if st.skipped or st.hidden or _has_deadlock(st.effects):
 			continue
 		var ice: Dictionary = enc.ice[st.ice]
+		acting_ice = ice
 		for e in st.effects:
 			_apply_effect(effect_value(ice, e))
 			if phase == "DEAD":
@@ -1034,6 +1038,7 @@ func response_step() -> Dictionary:
 		return {}
 	var st: Dictionary = response_queue.pop_front()
 	st.ref.seen[st.sub] = true   # VOID: revealed as it fires
+	acting_ice = st.ref
 	for e in st.effects:
 		_apply_effect(effect_value(st.ref, e))
 		var key := escalation_key(st.ref, e)
@@ -1073,6 +1078,13 @@ func _apply_effect(e: Dictionary) -> void:
 		"CORTEX": add_cortex(e.v)
 		"DEADLOCK": pass
 		"BW_DRAIN": enc.bw_drain += e.v
+		# SUB-001 (core loop): new subroutine effects
+		"HARDEN":
+			if not acting_ice.is_empty():
+				acting_ice.str_mod += int(e.v)
+				_sync_strengths()
+		"SHIELD_BREAK": shield = 0
+		"RETALIATE": take_pulp(int(e.get("dmg", 0)))
 		"FORGET":
 			for _n in int(e.v):
 				var opts := hand.filter(func(c): return not c.cached)
@@ -1890,9 +1902,13 @@ func virus_total(i: int) -> int:
 func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
 	## FORM-001: a LETHAL ICE's PULP and TRACE subroutines deal double (core-loop build).
 	var out := _effect_value_base(ice, e)
-	if CORE_LOOP and ice.get("lethal", false) and out.k in ["PULP", "TRACE"]:
+	if out.k == "RETALIATE":   # SUB-001: PULP X for each subroutine already broken on this ICE
 		out = out.duplicate()
-		out.v = int(out.v) * 2
+		out["dmg"] = int(out.v) * int(ice.get("broken", []).count(true))
+	if CORE_LOOP and ice.get("lethal", false) and out.k in ["PULP", "TRACE", "RETALIATE"]:
+		out = out.duplicate()
+		if out.k == "RETALIATE": out.dmg = int(out.dmg) * 2
+		else: out.v = int(out.v) * 2
 	return out
 
 func ice_form(i: int) -> String:

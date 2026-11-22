@@ -20,6 +20,21 @@
 - **WARY:** current STR below half the printed STR. **LETHAL:** below half STR and at least half the subroutines broken (rounded up: 2 → 1, 3 → 2, 4 → 2, 5 → 3). LETHAL lasts the encounter; its PULP and TRACE deal double, parting shot included. Black ICE show the forms but never double. The mascot mood follows the form in this build.
 - **FORM-002:** every TRACE subroutine +2 and every PULP subroutine +1 (the table below shows the values before FORM-002; the build has them).
 
+## 1b. BOOST-001 and SUB-001 (2026-11-21, after Playtest 9)
+- **BOOST-001:** Icepick boosts last until the end of your turn. PROBE lasts the encounter: cards buy lasting STR, BW buys STR for this turn.
+- **SUB-001 ICE** (supersedes the table below; ⊕ = two effects on one subroutine):
+
+| ICE | STR | Subroutines |
+|---|---|---|
+| ACCEPT ALL (TUMBLER, 1 slot) | 6 | PULP 3 · ⊕ PULP 2 + INSERT 1 SPAM → draw · PULP 3 |
+| REJECT ALL (TUMBLER, 1 slot) | 6 | ⊕ PULP 2 + TRACE 2 · DEADLOCK · HARDEN 1 · PULP 3 |
+| AUTO-RENEW (FORTRESS) | 7 | PULP 2 · HARDEN 1 · ⊕ PULP 2 + −1 BW next turn · PULP 3 · DEADLOCK ×2 |
+| CAPTCHA (TUMBLER, 2 slots) | 6 | DISCARD 1 · DEADLOCK · ⊕ TRACE 3 + DISCARD 1 · −1 BW next turn · DEADLOCK · TRACE 4 |
+| COOKIE WALL (FORTRESS) | 7 | PULP 2 · ⊕ TRACE 2 + PULP 2 · SHIELD BREAK · PULP 3 · DEADLOCK |
+| DOORBELL CAM (VOID) | 5 | PULP 4 · ⊕ CORTEX 1 + TRACE 2 · TRACE 3 · DEADLOCK |
+| TERMS OF SERVICE (FORTRESS) | 9 | PULP 4 · ⊕ INSERT SPAM → discard + PULP 2 · RETALIATE 2 · PULP 4 · DEADLOCK ×2 |
+| HOUSE CALL (Black VOID) | 9 | PULP 5 · PULP 5 |
+
 ## 2. ICE in the build (`godot/scripts/core/ice.gd`)
 | ICE | Type | STR | Subroutines |
 |---|---|---|---|

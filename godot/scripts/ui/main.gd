@@ -1128,6 +1128,12 @@ func _chip(e: Dictionary) -> Control:
 			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "DEADLOCK" + (" ×%d" % e.v if e.get("v", 1) > 1 else "")
 		"BW_DRAIN":
 			col = RIcon.COL.BW; icon = "BW"; word = "−%d BW next turn" % e.v
+		"SHIELD_BREAK":
+			col = RIcon.COL.PULP; icon = "PULP"; word = "SHIELD BREAK: your SHIELD drops to 0"
+		"HARDEN":
+			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "HARDEN: this ICE +%d STR" % e.v
+		"RETALIATE":
+			col = RIcon.COL.PULP; icon = "PULP"; word = "RETALIATE %d: PULP %d per broken subroutine" % [e.v, e.v]
 		"DISCARD":
 			col = RIcon.COL.TEAL; icon = "CARD"; word = "DISCARD %d next turn" % e.v
 		"INSERT":
@@ -1223,6 +1229,9 @@ func _effect_word(e: Dictionary) -> String:
 		"INSERT": return "INSERT %s" % e.card
 		"DEADLOCK": return "DEADLOCK"
 		"BW_DRAIN": return "−%d BW" % e.v
+		"SHIELD_BREAK": return "SHIELD BREAK"
+		"HARDEN": return "HARDEN +%d STR" % e.v
+		"RETALIATE": return "RETALIATE %d · PULP %d" % [e.v, int(e.get("dmg", 0))]
 		_: return "%s %d" % [e.k, e.get("v", 0)]
 
 func _circled(n: int) -> String:
@@ -1594,7 +1603,7 @@ func _overlay_safehouse() -> void:
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
-	v.add_child(_lbl("HALCYON PLAYTEST 9 · CORE LOOP · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	v.add_child(_lbl("HALCYON PLAYTEST 10 · CORE LOOP · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
 	var option := CheckBox.new()
 	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
 	option.button_pressed = g.ghost_draw_enabled

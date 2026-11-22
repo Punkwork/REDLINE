@@ -4,61 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-003 PCB glow cartridges in the build (Claude)
-
-**Designer approval:** "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot. This is good. Save to all git folder necessary." CARDS-003 is APPROVED and supersedes the CARDS-002 palette.
-
-**Changed:** `card.gd` takes the reviewed patch from `review/cards-002` (`8783b44`), with production names (`pcb_glow`, `PCB_*`, `CircuitStencil`). It gives:
-- per-type layout, masks, circuit stencils and rarity lamps;
-- ivory glow text with amber bold numbers;
-- a single cyan cache glow;
-- no printed rarity or CACHED text.
-
-New beyond the review: a grafted card shows its graft art in the stencil slot. Fonts `RoutedGothic.ttf`, `Barlow-SemiBold.ttf` and `Barlow-Bold.ttf` are added with OFL licences and listed in `SOURCES.md`. New fixture `godot/tests/shot_cards_pcb.gd` is added to the CI screenshot list; it prints `Assertion failed` so the CI log grep catches failures. Reference sheets are in `docs/visual/fixtures/cards-003/`.
-
-**Validation:** Godot 4.3. Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0. All 14 CI screenshot fixtures ran with no `SCRIPT ERROR`, `Parse Error` or `Assertion failed`. `shot_facade` prints one "resources still in use at exit" warning, which also appears on `main` without this change. `shot_cards_pcb` passed with 0 failures, and all 444 rules texts fit at 9 px or larger.
-
-**Interpretations to confirm:**
-- Grafted cards replace the stencil with graft art.
-- The old non-glow card paths stay in `card.gd` behind `pcb_glow`. They are now unreachable for all four types; removing them is proposed below rather than done (no-refactor rule).
-
-**Proposed (not done):** remove the unreachable pre-CARDS-003 card paths (toner illustration atlas, printed rarity finish, separator, text CACHED tag) from `card.gd`.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex).
-
-## 2026-11-19 — CARDS-003 cleanup; CARDS-003a long-text layout (Claude)
-
-**Designer approval:** "I approve code cleanup."
-
-**Cleanup:** `card.gd` setup now has a single CARDS-003 path; every card type uses it. Removed:
-- the toner illustration path and `ArtBox`;
-- the printed rarity finish (`cartridge_finish.gd` deleted);
-- the separator and old title strip;
-- the old rules box, its amber markup and the corporate footer label;
-- the text CACHED tag;
-- the superseded CARDS-002 palette colours (`BOARD_PALETTE` became `BOARD_RECT`) and `PCB_INK`.
-
-The `toner-illustrations.png` asset is kept. In `shot_cartridges`, three checks had been vacuous since CARDS-003 because the nodes they looked for no longer existed: rules fit, art frame and rarity. They now target the rules panel, the stencil or corporate art slot, and the rarity lamp.
-
-**Found during the cleanup:** with its rules-fit check live again, `shot_cartridges` failed on compiled SCRIPT cards (SAFEHOUSE COMPILE). On a display, 107 of 1,008 compiled pairs don't fit the fixed CARDS-003 rules panel at 9 px. The pre-CARDS-003 layout collapsed its art for long text. The CARDS-003 sweep covered only base cards.
-
-**CARDS-003a (PROPOSED, fix applied):** when rules don't fit the standard panel at 9 px, `glow_layout(type, true)` gives a tall layout. It drops the stencil, puts the type plate under the title, and makes the rules panel 138 px wide, filling the freed space. Rules there may shrink to 8 or 7 px as a last resort rather than clip; that applies to 2 texts. A graft on a tall card shows as a small part on the chassis edge, as before CARDS-003. `shot_cards_pcb` now sweeps 1,452 texts (base cards at AMP 0–3 plus every compiled pair) and fails on any clipping. It also captures the longest compiled card (295 characters).
-
-**Validation:**
-- Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0.
-- All 14 CI screenshot fixtures clean; `shot_cartridges` 601/0 and `shot_cards_pcb` 0 failures.
-- All 115 existing screenshots are pixel-identical to the pre-cleanup run; one new capture was added.
-- `shot_facade` still prints only its pre-existing "resources still in use at exit" warning.
-- Headless Godot measures text differently from a display (384 pairs against 107). The sweep runs on a display, as players do.
-
-**Interpretations to confirm:** CARDS-003a as a whole; the 7 px last resort; dropping the stencil on long cards.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: instrument amber accents (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: distinct board surface textures (Codex).
-
 ## 2026-11-19 — CARDS-003a: card names on the face, full text on hover (Claude)
 
 **Designer direction:** "I prefer the full text to show on a hover, as the solution. And on the card while it's in your hand, where the card text is, place the card names." It replaces the tall layout proposed in the previous entry.
@@ -599,3 +544,14 @@ Designer after Playtest 8: "a whole lot more fun to play", but too little damage
 **Bot sims (30 Generalist runs, before the Black ICE look change):** 15/30 cleared; deaths at CAPTCHA 11, TERMS & CONDITIONS 4; 3.3 turns per encounter; 10.1 PULP to VITAE per encounter; 0.00 unspent BW; 2.5 threat subs broken first per BREACH; parting shot 0.6 subs and 0.9 VITAE. The bot doesn't plan around LETHAL, so this is a worst case.
 
 **Interpretations to confirm:** "half its printed STR" uses the ICE's base STR, and "below half" is strict (STR 6 → WARY at 2 or less). A LETHAL ICE's mood stays lethal after its STR rises again.
+
+## 2026-11-21 — BOOST-001 and SUB-001 after Playtest 9 (Claude Code)
+
+Playtest 9 sheet (designer): the core loop is fun (PULP, PROBE, rewards and "wanted another run" all 5/5), but encounters took 2–3 turns, DOORBELL CAM was over in 2 and needed CORTEX, and spare BW went into boosts without a choice. Lethal came up once. Ten [UI] items recorded in HANDOFF.
+
+**Built** (core-loop build): boosts reset at the start of each turn (BOOST-001); new effects HARDEN, SHIELD_BREAK, RETALIATE (X × broken subs, doubled when LETHAL), CORTEX back on DOORBELL CAM; the SUB-001 ICE table (`REDLINE_CORE_LOOP.md` §1b). The UI labels the new effects; their key icons use the generic glyph for now.
+
+**Tests:** `test_game.gd` 168 passed, 0 failed; ADP 17/0; SIGNAL/CARBON 671/0.
+**Bot sims (30 Generalist runs):** 8/30 cleared; deaths at CAPTCHA 16, TERMS & CONDITIONS 6; 3.2 turns per encounter; 12.6 PULP to VITAE per encounter; 3.1 threat subs broken before each BREACH; parting shot 1.0 subs and 1.1 VITAE. The bot doesn't plan around HARDEN, SHIELD BREAK or lethal forms and lost far more than the designer in Playtest 9: a worst case.
+
+**Interpretations to confirm:** HARDEN stacks each time it fires; SHIELD BREAK removes all SHIELD when it fires, so PULP before it is still blocked; RETALIATE counts DEADLOCK breaks.

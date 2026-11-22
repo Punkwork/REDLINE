@@ -2316,3 +2316,58 @@ Saved ten review sheets, three final Godot captures and the reproducible prototy
 **Interpretations to confirm:** the branch is never merged; the earlier "Mustard PCB review archive" entry is kept as history even though its folder now lives only on the branch.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex).
+
+## 2026-11-19 — CARDS-003 PCB glow cartridges in the build (Claude)
+
+**Designer approval:** "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot. This is good. Save to all git folder necessary." CARDS-003 is APPROVED and supersedes the CARDS-002 palette.
+
+**Changed:** `card.gd` takes the reviewed patch from `review/cards-002` (`8783b44`), with production names (`pcb_glow`, `PCB_*`, `CircuitStencil`). It gives:
+- per-type layout, masks, circuit stencils and rarity lamps;
+- ivory glow text with amber bold numbers;
+- a single cyan cache glow;
+- no printed rarity or CACHED text.
+
+New beyond the review: a grafted card shows its graft art in the stencil slot. Fonts `RoutedGothic.ttf`, `Barlow-SemiBold.ttf` and `Barlow-Bold.ttf` are added with OFL licences and listed in `SOURCES.md`. New fixture `godot/tests/shot_cards_pcb.gd` is added to the CI screenshot list; it prints `Assertion failed` so the CI log grep catches failures. Reference sheets are in `docs/visual/fixtures/cards-003/`.
+
+**Validation:** Godot 4.3. Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0. All 14 CI screenshot fixtures ran with no `SCRIPT ERROR`, `Parse Error` or `Assertion failed`. `shot_facade` prints one "resources still in use at exit" warning, which also appears on `main` without this change. `shot_cards_pcb` passed with 0 failures, and all 444 rules texts fit at 9 px or larger.
+
+**Interpretations to confirm:**
+- Grafted cards replace the stencil with graft art.
+- The old non-glow card paths stay in `card.gd` behind `pcb_glow`. They are now unreachable for all four types; removing them is proposed below rather than done (no-refactor rule).
+
+**Proposed (not done):** remove the unreachable pre-CARDS-003 card paths (toner illustration atlas, printed rarity finish, separator, text CACHED tag) from `card.gd`.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: selected board colours and Whirlwind Bloatware (Codex).
+
+## 2026-11-19 — CARDS-003 cleanup; CARDS-003a long-text layout (Claude)
+
+**Designer approval:** "I approve code cleanup."
+
+**Cleanup:** `card.gd` setup now has a single CARDS-003 path; every card type uses it. Removed:
+- the toner illustration path and `ArtBox`;
+- the printed rarity finish (`cartridge_finish.gd` deleted);
+- the separator and old title strip;
+- the old rules box, its amber markup and the corporate footer label;
+- the text CACHED tag;
+- the superseded CARDS-002 palette colours (`BOARD_PALETTE` became `BOARD_RECT`) and `PCB_INK`.
+
+The `toner-illustrations.png` asset is kept. In `shot_cartridges`, three checks had been vacuous since CARDS-003 because the nodes they looked for no longer existed: rules fit, art frame and rarity. They now target the rules panel, the stencil or corporate art slot, and the rarity lamp.
+
+**Found during the cleanup:** with its rules-fit check live again, `shot_cartridges` failed on compiled SCRIPT cards (SAFEHOUSE COMPILE). On a display, 107 of 1,008 compiled pairs don't fit the fixed CARDS-003 rules panel at 9 px. The pre-CARDS-003 layout collapsed its art for long text. The CARDS-003 sweep covered only base cards.
+
+**CARDS-003a (PROPOSED, fix applied):** when rules don't fit the standard panel at 9 px, `glow_layout(type, true)` gives a tall layout. It drops the stencil, puts the type plate under the title, and makes the rules panel 138 px wide, filling the freed space. Rules there may shrink to 8 or 7 px as a last resort rather than clip; that applies to 2 texts. A graft on a tall card shows as a small part on the chassis edge, as before CARDS-003. `shot_cards_pcb` now sweeps 1,452 texts (base cards at AMP 0–3 plus every compiled pair) and fails on any clipping. It also captures the longest compiled card (295 characters).
+
+**Validation:**
+- Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 14 CI screenshot fixtures clean; `shot_cartridges` 601/0 and `shot_cards_pcb` 0 failures.
+- All 115 existing screenshots are pixel-identical to the pre-cleanup run; one new capture was added.
+- `shot_facade` still prints only its pre-existing "resources still in use at exit" warning.
+- Headless Godot measures text differently from a display (384 pairs against 107). The sweep runs on a display, as players do.
+
+**Interpretations to confirm:** CARDS-003a as a whole; the 7 px last resort; dropping the stencil on long cards.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: instrument amber accents (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: glowing text instead of amber blocks (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: distinct board surface textures (Codex).

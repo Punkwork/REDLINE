@@ -1,4 +1,4 @@
-# PANOPTICON — Playtest 8 sheet (core loop, STRIP-001)
+# PANOPTICON — Playtest sheet (core loop, STRIP-001)
 Keep it quick: one row per encounter. Rules for this build: `REDLINE_CORE_LOOP.md`.
 
 | Run | Node | Turns | VITAE lost | TRACE gained | Spare BW most turns? (Y/N) | Broke a threat before the DEADLOCK? (Y/N) | Parting shot taken (how much) | One-line note |

@@ -11,6 +11,7 @@ func run(runner) -> void:
 	test_void_probe_reveal()
 	test_pool_and_data()
 	test_forms()
+	test_sub_001()
 
 func opening(seed_value: int) -> Game:
 	var g := Game.new(seed_value)
@@ -110,7 +111,7 @@ func test_pool_and_data() -> void:
 			t.check(not d.has("passive") and not d.has("ability"), "STRIP-001: %s has no passive" % id)
 			for sub in d.subs:
 				for e in sub:
-					t.check(e.k != "PULP_CURVE" and e.k != "CORTEX", "STRIP-001: %s has fixed PULP and no CORTEX" % id)
+					t.check(e.k != "PULP_CURVE", "STRIP-001: %s has fixed PULP" % id)
 
 func test_forms() -> void:
 	## FORM-001: WARY below half STR; LETHAL below half STR with half the subroutines broken (rounded up).
@@ -134,4 +135,33 @@ func test_forms() -> void:
 	g._sync_strengths()
 	t.check(g.ice_form(0) == "LETHAL" and not g.enc.ice[0].get("lethal", false), "Black ICE show the LETHAL form")
 	t.check(g.effect_value(g.enc.ice[0], {"k": "PULP", "v": 5}).v == 5, "Black ICE never deal double")
-	t.check(IceDB.def("CAPTCHA").subs[2][0].v == 4 and IceDB.def("REJECT_ALL").subs[0][0].v == 3, "FORM-002: TRACE +2, PULP +1")
+	
+
+func test_sub_001() -> void:
+	var g := opening(6)
+	g.bw = 20
+	# BOOST-001: boosts end with the turn
+	var pick: Dictionary = g.installed[0]
+	g.boost_pick(pick.inst.uid)
+	t.check(g.pick_str(pick) == 3, "boost +1 this turn")
+	g.end_turn()
+	if g.phase == "CHOICE": g.choose(g.hand[0].uid)
+	t.check(g.pick_str(g.installed[0]) == 2, "BOOST-001: boost gone next turn")
+	# HARDEN, SHIELD_BREAK, RETALIATE
+	var ice: Dictionary = g.enc.ice[1]
+	var before := g.ice_str(1)
+	g.acting_ice = ice
+	g._apply_effect({"k": "HARDEN", "v": 1})
+	t.check(g.ice_str(1) == before + 1, "SUB-001: HARDEN +1 STR")
+	g.shield = 5
+	g._apply_effect({"k": "SHIELD_BREAK"})
+	t.check(g.shield == 0, "SUB-001: SHIELD BREAK")
+	ice.broken[0] = true
+	var r: Dictionary = g.effect_value(ice, {"k": "RETALIATE", "v": 2})
+	t.check(r.dmg == 2, "SUB-001: RETALIATE 2 with one broken = PULP 2")
+	ice["lethal"] = true
+	t.check(g.effect_value(ice, {"k": "RETALIATE", "v": 2}).dmg == 4, "LETHAL doubles RETALIATE")
+	var v := g.vitae
+	g.shield = 0
+	g._apply_effect(g.effect_value(ice, {"k": "RETALIATE", "v": 2}))
+	t.check(v - g.vitae == 4, "RETALIATE deals its PULP")

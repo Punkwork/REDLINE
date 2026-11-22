@@ -36,6 +36,8 @@ Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
 | ID | What | Owner | Status |
 |---|---|---|---|
 | **STRIP-001, BW-001, PROBE-001, PROBE-003, BREACH-001, TURN-001, BURST-001, STR-001** | Rules and data behind `Game.CORE_LOOP` | Claude Code | **BUILT**, see the 2026-11-21 log entry; awaiting Playtest 8 |
+| **BOOST-001, SUB-001** | Boosts last the turn; new subroutines, HARDEN, SHIELD BREAK, RETALIATE, CORTEX on VOIDs, DEADLOCK ×2 | Claude Code | **BUILT**, awaiting Playtest 10 |
+| **Playtest 9 UI list** | The ten [UI] items in the designer's Playtest 9 sheet: hover flicker at card overlaps and hand edges, encounter not centred on the corporation background, installed programs wider than the CRT, select screen says 4 BW, map shows ICE names (show layer count only), speech-bubble text not centred, remove the deck/discard wells to give the hand more room, cards as PC Engine HuCards (thickness, rounded corners, contacts; taller), VOICE / M doesn't mute NUL/REM | Claude Code | TO DO (batch after Playtest 10) |
 | **FORM-001, FORM-002** | ICE forms by STR and breaks (LETHAL doubles PULP and TRACE; Black ICE look only); TRACE +2, PULP +1 | Claude Code | **BUILT**, awaiting Playtest 9 |
 | **CACHE-001** | Engine: CACHED cards are discarded between layers (built). **UI: the ∞ / N-turn corner icon** | Claude Code | Engine BUILT; icon TO DO |
 | **PROBE-003 UI** | Show PROBE's cost while it's dragged over an ICE (the hand shows the cheapest cost today) | Claude Code | TO DO |
