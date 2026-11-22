@@ -36,6 +36,17 @@ func install(g: Game, id: String) -> void:
 	check(g.play_card(u), "install " + id)
 
 func _init() -> void:
+	if Game.CORE_LOOP:
+		# STRIP-001: the legacy suite checks the full-game values (4 BW, passives, curves, other Rustlers),
+		# which the stripped build switches off. It runs again when Game.CORE_LOOP is false.
+		load("res://tests/test_core_loop.gd").new().run(self)
+		test_full_slice_path()
+		test_hand_max()
+		if OS.get_environment("SIM") != "":
+			sim_rustler("GENERALIST")
+		print("TESTS: %d passed, %d failed" % [passes, fails])
+		quit(1 if fails > 0 else 0)
+		return
 	var cases = load("res://tests/synergy_cases.gd").new()
 	cases.check = check
 	cases.run()
@@ -889,6 +900,7 @@ func sim_rustler(who: String) -> void:
 	var measured_turns := 0
 	var measured_encounters := 0
 	var clear_turns := 0
+	var cs := {"turns": 0, "unspent_bw": 0, "playable_left": 0, "playable_left_real": 0, "parting_vitae": 0, "parting_fired": 0, "threat_breaks": 0, "breaches": 0, "max_bw": 0}
 	for seed in range(100, 130):
 		var g := Game.new(seed)
 		g.new_run(who)
@@ -916,6 +928,8 @@ func sim_rustler(who: String) -> void:
 			measured_turns += run_turns
 			measured_encounters += int(g.pulp_stats.encounters)
 		if g.phase == "SLICE_DONE": clear_turns += run_turns
+		for k in cs:
+			cs[k] = maxi(int(cs[k]), int(g.core_stats[k])) if k == "max_bw" else int(cs[k]) + int(g.core_stats[k])
 		deck_total += g.footprint()
 		tax_total += g.bloat_tax_paid
 		purges += g.purges_run
@@ -943,6 +957,8 @@ func sim_rustler(who: String) -> void:
 		avg += x
 	var en: float = max(1, ps.encounters)
 	print("  pulp %s: per encounter %.1f incoming (%.1f from Black ICE), %.1f absorbed by SHIELD, %.1f to VITAE, %.1f hits" % [who, ps.incoming / en, ps.black / en, ps.absorbed / en, (ps.incoming - ps.absorbed) / en, ps.hits / en])
+	if Game.CORE_LOOP:
+		print("  core-loop %s: per turn %.2f unspent BW, %.2f playable cards left (%.2f without Basic Extractor / CORTEX BUFFER); per BREACH %.2f threat subs broken first, parting shot %.2f subs and %.2f VITAE; highest BW from BURST %d" % [who, float(cs.unspent_bw) / maxi(1, cs.turns), float(cs.playable_left) / maxi(1, cs.turns), float(cs.playable_left_real) / maxi(1, cs.turns), float(cs.threat_breaks) / maxi(1, cs.breaches), float(cs.parting_fired) / maxi(1, cs.breaches), float(cs.parting_vitae) / maxi(1, cs.breaches), cs.max_bw])
 	print("  sim %s: %d/30 cleared; deaths by node %s; survivors' avg end VITAE %.1f; turns per non-stalled encounter %.2f; avg cleared-run turns %.1f" % [who, done, str(rows), avg / max(1, vit.size()), float(measured_turns) / maxi(1, measured_encounters), float(clear_turns) / maxi(1, done)])
 
 func needed_types(g: Game) -> Array:

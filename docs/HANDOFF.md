@@ -30,6 +30,17 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 ## To build (approved, not yet in the build)
 
+### STRIP-001: core-loop test build (designer, 2026-11-21)
+Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
+
+| ID | What | Owner | Status |
+|---|---|---|---|
+| **STRIP-001, BW-001, PROBE-001, PROBE-003, BREACH-001, TURN-001, BURST-001, STR-001** | Rules and data behind `Game.CORE_LOOP` | Claude Code | **BUILT**, see the 2026-11-21 log entry; awaiting Playtest 8 |
+| **CACHE-001** | Engine: CACHED cards are discarded between layers (built). **UI: the ∞ / N-turn corner icon** | Claude Code | Engine BUILT; icon TO DO |
+| **PROBE-003 UI** | Show PROBE's cost while it's dragged over an ICE (the hand shows the cheapest cost today) | Claude Code | TO DO |
+| **STRIP-001 follow-ups** | Threat check after Playtest 8 (bot: CAPTCHA node deadliest); RIOT rethink; dead-card audit; re-baseline the PACE targets for 3 BW | Claude | WAITING on Playtest 8 |
+| **Designer UI and interface list** | Bugs and missing Playtest 7 items the designer will list | Designer, then Claude Code | WAITING |
+
 ### Start here (Codex): decisions made 2026-11-16
 ZEROED-001, its RIOT cards, and TUMBLE-001 are built; see the tagged rows below. ROT-001 documentation sync and LOG-001 split were already completed in PR #8. No remaining Codex TO DO rows from this block. VIS-001 is built on `main`; see Built below for the review tag.
 

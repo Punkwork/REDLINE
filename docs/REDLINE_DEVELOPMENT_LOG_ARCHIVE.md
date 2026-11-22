@@ -2293,3 +2293,26 @@ First Claude Code session (DEV-001, step 2). Pulled `main` at `83524d5`, read HA
 **Interpretations to confirm:** added a PROPOSED DEV-002 row to the master register so the proposals carry an ID (rule 6). On Windows, run tests with the `_console.exe` build so output reaches the shell.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — CHROME-001 plaque revision: pearl enamel instead of black ICE panels (Codex), 2026-11-17 — CARDS-001: heavy type-specific 1950s slot cartridges (Codex).
+
+## 2026-11-19 — CARDS-002 Rustler PCB palette (Codex)
+
+**Designer direction:** adapt the supplied PCB photo for the Rustler cards and show all four card types, including corporate BLOATWARE. Added a presentation-only board layer to SCRIPT, PROGRAM and PROTOCOL.
+
+**Validation:** Godot 4.3 import passed. Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 and cartridge fixture 621/0. TRACER and SPAM captures match the baseline pixel for pixel.
+
+**Interpretations to confirm:** mustard SCRIPT, olive PROGRAM and blue-green PROTOCOL use darker print fields and share ivory perimeter traces and dark contacts. These exact palette values and trace layout await the designer's visual review.
+
+
+## 2026-11-19 — CARDS-002 Mustard PCB review archive (Codex)
+
+Saved ten review sheets, three final Godot captures and the reproducible prototype for the fifth cartridge design. The designer requested centred rules inside a fixed PCB trace frame and a single top-edge rarity light. The final capture fixture verified all three indicators, frame geometry, alignment and text fit in Godot 4.3. The archive is under `docs/visual/fixtures/cards-002/`.
+
+## 2026-11-19 — CARDS-002 review archive moved to `review/cards-002` (Claude)
+
+**Designer direction:** CARDS-002 mustard review work stays out of `main`: "None of it's to be kept with the main build." The designer approved a review branch.
+
+**Changed:** created `review/cards-002` from `0f4a312` (the Codex review archive) and added the 2026-11-19 review fixes there (`d30b531`). Removed `docs/visual/fixtures/cards-002/` from `main`; the master design entry and HANDOFF now point to the branch. The playable build is unchanged, and the built CARDS-002 PCB palette (`0aa6091`) stays on `main`.
+
+**Interpretations to confirm:** the branch is never merged; the earlier "Mustard PCB review archive" entry is kept as history even though its folder now lives only on the branch.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex).

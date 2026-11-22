@@ -619,7 +619,7 @@ func setup(owner_view, id: String, card_uid: int) -> void:
  title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
  add_glow(title, 4)
  var circle := CostCircle.new(); circle.position = Vector2(-5, 3); circle.size = Vector2(26, 26); circle.mouse_filter = Control.MOUSE_FILTER_IGNORE; body.add_child(circle)
- var cost_text := "—" if d.get("unplayable", false) else (str(view.game.card_cost(id)) if uid >= 0 else str(d.bw))
+ var cost_text := "—" if d.get("unplayable", false) else (str(view.game.card_cost(id, uid)) if uid >= 0 else str(d.bw))
  var cost := FriendlyLook.label(cost_text, 15, Color("#F2CD87") if corp else Color.WHITE, FriendlyLook.BOLD)
  cost.add_theme_color_override("font_shadow_color", Color("#D6B67580")); cost.add_theme_constant_override("shadow_offset_x", 0); cost.add_theme_constant_override("shadow_offset_y", 0); cost.add_theme_constant_override("shadow_outline_size", 2)
  cost.position = Vector2(-4, 3); cost.size = Vector2(25, 25); cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; body.add_child(cost)
@@ -833,7 +833,7 @@ func build_concept_face(d: Dictionary, id: String, rule: String, corp: bool, rar
  var dial := Panel.new(); dial.name = "CostDial"; dial.mouse_filter = Control.MOUSE_FILTER_IGNORE
  var dial_style := StyleBoxFlat.new(); dial_style.bg_color = Color("#1F1A14"); dial_style.set_corner_radius_all(12); dial_style.border_color = Color("#C9B796"); dial_style.set_border_width_all(2)
  dial.add_theme_stylebox_override("panel", dial_style); dial.position = Vector2(-4, 0); dial.size = Vector2(26, 26); body.add_child(dial)
- var cost_text := "—" if d.get("unplayable", false) else (str(view.game.card_cost(id)) if uid >= 0 else str(d.bw))
+ var cost_text := "—" if d.get("unplayable", false) else (str(view.game.card_cost(id, uid)) if uid >= 0 else str(d.bw))
  var cost := FriendlyLook.label(cost_text, 16, Color.WHITE, title_font); cost.name = "Cost"
  cost.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; cost.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; cost.position = dial.position; cost.size = dial.size; body.add_child(cost)
  # Type line and CARDS-005 corner icons along the bottom strip.

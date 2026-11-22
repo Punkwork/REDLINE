@@ -1585,10 +1585,11 @@ func _overlay_safehouse() -> void:
 	a.custom_minimum_size = Vector2(0, 52)
 	a.pressed.connect(func(): g.safehouse_heal(); refresh())
 	v.add_child(a)
-	var b := Button.new()
-	b.text = "COMPILE two different SCRIPTs sharing a tag (instead of healing)"
-	b.pressed.connect(func(): compile_open = true; compile_first = -1; refresh())
-	v.add_child(b)
+	if not Game.CORE_LOOP:   # STRIP-001: no COMPILE in the core-loop build (card removal is DECOMPILE on the reward screen)
+		var b := Button.new()
+		b.text = "COMPILE two different SCRIPTs sharing a tag (instead of healing)"
+		b.pressed.connect(func(): compile_open = true; compile_first = -1; refresh())
+		v.add_child(b)
 	v.add_child(_carbon_button())
 
 func _overlay_select() -> void:
@@ -1649,7 +1650,7 @@ func _overlay_select() -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
-	for who in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:
+	for who in (["GENERALIST"] if Game.CORE_LOOP else ["GENERALIST", "ECHO", "RIOT", "VECTOR"]):   # STRIP-001: Generalist only
 		var r: Dictionary = CardDB.RUSTLERS[who]
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(320, 300)

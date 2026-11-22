@@ -90,6 +90,7 @@ jobs:
           cp docs/HALCYON_PLAYTEST_GUIDE.md build/windows/README.md
           git rev-parse HEAD > build/windows/BUILD_COMMIT.txt
           cp docs/REDLINE_PLAYTEST_CHECKLIST.md build/windows/
+          cp docs/REDLINE_CORE_LOOP_CHECKLIST.md build/windows/
           (cd build/windows && sha256sum PANOPTICON_HALCYON_slice.exe > SHA256SUMS.txt)
       - name: Upload Windows playtest build
         if: github.ref == 'refs/heads/release' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')

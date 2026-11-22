@@ -4,7 +4,11 @@ extends RefCounted
 ## Rules: REDLINE_CORE_RULES.md v0.2 (§2 resources, §4 turn, §5 ICE, §6 damage, §7 TRACE, §8 Nodes, §9 rewards, §10.1a Opening Node).
 
 const MAX_TRACE := 40
-const BW_PER_TURN := 4
+## STRIP-001 (2026-11-21): the stripped core-loop test build. When true, the rules below apply:
+## BW-001 3 BW, PROBE-001/003, BREACH-001 parting shot, TURN-001 draw before the response, BURST-001,
+## CACHE-001 (CACHE ends with the encounter), no bloat tax and no FORTRESS PULP rolls. See docs/REDLINE_CORE_LOOP.md.
+const CORE_LOOP := true
+const BW_PER_TURN := 3 if CORE_LOOP else 4
 const BASE_DRAW := 6   # DRAW-001 (was 5)
 const MAX_HAND := 10   # HAND-MAX-001: draws stop at 10; the card stays on the draw pile
 const BASE_RAM := 4
@@ -17,6 +21,8 @@ var rng := RandomNumberGenerator.new()
 # --- run state ---
 var pulp_stats := {"incoming": 0, "absorbed": 0, "hits": 0, "black": 0, "encounters": 0}   # playtest stats
 var played := {}            # playtest stats: card id → times played
+## STRIP-001 playtest stats for the bot sims (docs/REDLINE_CORE_LOOP.md §5).
+var core_stats := {"turns": 0, "unspent_bw": 0, "playable_left": 0, "playable_left_real": 0, "parting_vitae": 0, "parting_fired": 0, "threat_breaks": 0, "breaches": 0, "max_bw": 0}
 var purges_run := 0          # PURGE-001: run total, for playtest stats
 var rustler := "GENERALIST"   # RUSTLER-001: GENERALIST, ECHO, RIOT or VECTOR
 var phase := "MAP"            # MAP, READY_RIG, PLAYER, RESPONSE, CHOICE, DEEPER, REWARD, SAFEHOUSE, SLICE_DONE, DEAD
@@ -169,7 +175,7 @@ func _complete_map_step() -> void:
 # =====================================================================
 
 func _start_ice_node() -> void:
-	node_tax_pending = true
+	node_tax_pending = not CORE_LOOP   # STRIP-001: no bloat tax in the core-loop build
 	amp = 1 if ghostware.has("MINIMAL_INSTALL") and footprint_band() == "GHOST" else 0
 	reboots = 0
 	pending_reboots = 0
@@ -291,7 +297,7 @@ func active_subs(i: int) -> Array:
 	var out := []
 	if d.type == "VOID":
 		# VOID-001: response n fires subs 1..n; each is revealed when it first fires.
-		for s in mini(ice.responses + 1, d.subs.size()):
+		for s in mini(maxi(ice.responses + 1, int(ice.get("reveal", 0))), d.subs.size()):
 			out.append(s)
 		return out
 	if d.type != "TUMBLER":
@@ -391,7 +397,9 @@ func _start_turn() -> void:
 		_rotate_tumblers()
 	else:
 		_mark_seen()
-	_roll_fortress_pulp()
+	if not CORE_LOOP:   # STRIP-001: fixed PULP, no FORTRESS rolls
+		_roll_fortress_pulp()
+	enc["probes"] = {}   # PROBE-003: PROBEs played on each ICE this turn
 	# DET-001: a DETAINER's −1 BW from the last Corporation Response lands on this turn.
 	bw = maxi(0, BW_PER_TURN - enc.bw_drain) + (1 if ghostware.has("ONE_TRICK") else 0)
 	enc.bw_drained = enc.bw_drain
@@ -422,7 +430,9 @@ func _start_turn() -> void:
 		n += 1
 	if enc.turn == 1 and _rack_has("READY_STANCE"):
 		n += _rack_count("READY_STANCE")
-	draw_cards(n)
+	# TURN-001: after the first turn, the hand was already drawn before the Corporation Response.
+	if enc.turn == 1 or not CORE_LOOP:
+		draw_cards(n)
 	phase = "PLAYER"
 	if is_opening() and enc.turn == 1:
 		_event("EV-04", {"corp": "HALCYON"})
@@ -531,8 +541,8 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Need another hand card to BURN"}
 	if d.get("unplayable", false):
 		return {"ok": false, "reason": "Can't be played"}
-	if bw < card_cost(inst.id):
-		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id)}
+	if bw < card_cost(inst.id, uid):
+		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id, uid)}
 	if cred < int(d.get("cred_cost", 0)):
 		return {"ok": false, "reason": "Need %d CRED" % d.cred_cost}
 	if d.has("target_types") and not enc.ice.any(func(ice): return d.target_types.has(ice_definition(ice).type)):
@@ -575,6 +585,10 @@ func play_card(uid: int, target: int = -1) -> bool:
 		var part := CardDB.def(part_id)
 		if part.has("target_types") and not part.target_types.has(ice_definition(enc.ice[target]).type): return false
 		if part.has("target_type") and part.target_type != ice_definition(enc.ice[target]).type: return false
+	var paid := card_cost(inst.id, uid, target)
+	if bw < paid:
+		_say("Need %d BW" % paid)
+		return false
 	_take_from(hand, uid)
 	inst["previous_tags"] = enc.get("last_tags", []).duplicate()
 	inst["chain_active"] = enc.get("last_tags", []).has(d.get("chain", ""))
@@ -582,7 +596,7 @@ func play_card(uid: int, target: int = -1) -> bool:
 	for tag in d.tags:
 		enc.tag_counts[tag] = int(enc.tag_counts.get(tag, 0)) + 1
 	played[inst.id] = int(played.get(inst.id, 0)) + 1
-	bw -= card_cost(inst.id)
+	bw -= paid
 	cred -= int(d.get("cred_cost", 0))
 	if d.type == "BLOATWARE":
 		burned.append(inst)  # SPAM: pay 1 BW to clear it
@@ -673,7 +687,12 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 				discard.append(inst)
 				phase = "CHOICE"
 		"PULP_SHIELD": shield += 3
-		"PROBE": reduce_ice_str(target, 2)
+		"PROBE":
+			reduce_ice_str(target, 2)
+			if CORE_LOOP and target >= 0:
+				var pid: String = enc.ice[target].id
+				enc.probes[pid] = int(enc.probes.get(pid, 0)) + 1
+				_probe_reveal(target)
 		# ECHO
 		"SMOKESCREEN":
 			shield += 2
@@ -763,15 +782,21 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"MIRROR":
 			shield += 3
 			draw_cards(1)
-		"DEEP_PROBE": reduce_ice_str(target, 4)
+		"DEEP_PROBE": reduce_ice_str(target, 5 if CORE_LOOP else 4)   # STR-001: −5 in the core-loop build
 		"STRESS_TEST":
 			for i in enc.ice.size():
 				reduce_ice_str(i, 1)
 		"DEFRAG": draw_cards(1)
 		"STIM_PATCH": draw_cards(2)
 		"BURST":
-			bw += 1
-			return true
+			if CORE_LOOP:   # BURST-001: 3 BW, gain 5 BW; this copy costs 1 more each play this encounter; not BURNED
+				bw += 5
+				core_stats.max_bw = maxi(int(core_stats.max_bw), bw)
+				enc["burst_plays"] = enc.get("burst_plays", {})
+				enc.burst_plays[inst.uid] = int(enc.burst_plays.get(inst.uid, 0)) + 1
+			else:
+				bw += 1
+				return true
 		"SCRUB": trace = max(0, trace - 4)
 		"BURN_NOTICE":
 			trace = trace / 2
@@ -853,6 +878,13 @@ func _expire_temporary_cache() -> void:
 
 func end_turn() -> void:
 	if phase != "PLAYER": return
+	core_stats.turns += 1
+	core_stats.unspent_bw += bw
+	for c in hand:
+		if can_play(c.uid).ok:
+			core_stats.playable_left += 1
+			if not c.id in ["BASIC_EXTRACTOR", "CORTEX_BUFFER"]:
+				core_stats.playable_left_real += 1
 	_end_turn_effects()
 
 func _end_turn_effects() -> void:
@@ -887,11 +919,61 @@ func _end_turn_effects() -> void:
 	if enc.turn >= 6 and enc.breaks_turn == 0 and not enc.breached:
 		_event("EV-10")
 	if enc.breached:
+		if CORE_LOOP:
+			_parting_shot()
+			if phase == "DEAD":
+				return
 		_say("BREACHED: Corporation Response skipped.")
 		_cleanup()
 		_after_breach()
 		return
+	if CORE_LOOP:   # TURN-001: discard and draw the next hand before the Corporation Response
+		_cleanup()
+		draw_cards(draw_size())
 	_begin_response()
+
+func _parting_shot() -> void:
+	## BREACH-001: every unbroken subroutine that is active (TUMBLER slot, FORTRESS) or revealed (VOID)
+	## fires once, left to right, top to bottom. Not a Corporation Response: nothing rotates or advances.
+	var fired := 0
+	var vitae_before := vitae
+	for st in response_preview():
+		if st.skipped or st.hidden or _has_deadlock(st.effects):
+			continue
+		var ice: Dictionary = enc.ice[st.ice]
+		for e in st.effects:
+			_apply_effect(effect_value(ice, e))
+			if phase == "DEAD":
+				return
+		fired += 1
+	core_stats.parting_fired += fired
+	core_stats.parting_vitae += vitae_before - vitae
+	if fired > 0:
+		_say("PARTING SHOT: %d unbroken subroutine(s) fire as you leave." % fired)
+	_event("PARTING_SHOT", {"fired": fired})
+
+func _probe_extra(target: int) -> int:
+	## PROBE-003: +1 BW for each PROBE already played on that ICE this turn. No target: the cheapest ICE.
+	var counts: Dictionary = enc.get("probes", {})
+	if target >= 0 and target < enc.ice.size():
+		return int(counts.get(enc.ice[target].id, 0))
+	var best := 999
+	for ice in enc.ice:
+		best = mini(best, int(counts.get(ice.id, 0)))
+	return 0 if best == 999 else best
+
+func _probe_reveal(i: int) -> void:
+	## STRIP-001: a PROBE on a VOID reveals its top face-down subroutine, which is then active and breakable.
+	var ice: Dictionary = enc.ice[i]
+	var d := ice_definition(ice)
+	if d.type != "VOID":
+		return
+	for s in d.subs.size():
+		if not ice.seen[s] and not ice.broken[s]:
+			ice.seen[s] = true
+			ice["reveal"] = maxi(int(ice.get("reveal", 0)), s + 1)
+			_say("PROBE reveals %s's subroutine %d." % [d.name, s + 1])
+			return
 
 # =====================================================================
 # Corporation Response (Core Rules §4.4)
@@ -978,7 +1060,8 @@ func response_finish() -> void:
 	enc.vanish = false
 	enc.skipped = false
 	enc.purged_now = false
-	_cleanup()
+	if not CORE_LOOP:   # TURN-001: the hand was already cleaned up and redrawn before the response
+		_cleanup()
 	if phase == "DEAD":
 		return
 	_start_turn()
@@ -1261,10 +1344,13 @@ func _do_break(i: int, s: int) -> bool:
 	var d := ice_definition(ice)
 	if _has_deadlock(d.subs[s]):
 		_event("EV-06")
+	elif not enc.breached:
+		core_stats.threat_breaks += 1
 	if enc.breaks_turn == 3:
 		_event("EV-12")
 	if not enc.breached and _all_deadlocks_broken():
 		enc.breached = true
+		core_stats.breaches += 1
 		_event("EV-07")
 		if node.get("central", false) and layer == node.layers.size() - 1:
 			_award_punch_card()
@@ -1338,6 +1424,10 @@ func go_deeper() -> void:
 		return
 	layer += 1
 	# Between layers: Programs, Protocols and CACHED cards stay; everything else in hand is discarded.
+	if CORE_LOOP:   # CACHE-001: ∞ CACHE lasts the encounter, so CACHED cards go too
+		for c in hand:
+			c.cached = false
+			c.erase("cache_turns")
 	_cleanup()
 	_start_encounter()
 
@@ -1684,9 +1774,14 @@ func find_card(uid: int) -> Dictionary:
 # Rustler cards: costs, card-based breaks, viruses (RUSTLER-001..008)
 # =====================================================================
 
-func card_cost(id: String) -> int:
+func card_cost(id: String, uid: int = -1, target: int = -1) -> int:
 	var d := CardDB.def(id)
 	var c: int = maxi(0, d.bw - (_rack_count("CLEAN_BUILD") if d.has("compiled") else 0))
+	if CORE_LOOP and not enc.is_empty():
+		if id == "BURST" and uid >= 0:
+			c += int(enc.get("burst_plays", {}).get(uid, 0))   # BURST-001
+		elif id == "PROBE":
+			c += _probe_extra(target)   # PROBE-003
 	# BERSERK: EXPLOIT SCRIPTS cost 1 less BW while TRACE is 20 or more.
 	if d.type == "SCRIPT" and d.tags.has("EXPLOIT") and trace >= 20 and _rack_has("BERSERK"):
 		c = maxi(0, c - 1)

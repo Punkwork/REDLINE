@@ -7,22 +7,23 @@ extends RefCounted
 const DEFS := {
 	# --- Generalist starter deck (Core Rules §13) ---
 	"FORTRESS_ICEPICK": {"name": "FORTRESS Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "FORTRESS", "str": 1, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "free_first": true},
-		"text": "STR 1. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break."},
+		"pick": {"itype": "FORTRESS", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "free_first": true},
+		"text": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break."},
 	"TUMBLER_ICEPICK": {"name": "TUMBLER Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "TUMBLER", "str": 3, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW."},
+		"pick": {"itype": "TUMBLER", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
+		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."},
 	"VOID_ICEPICK": {"name": "VOID Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "VOID", "str": 0, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW."},
+		"pick": {"itype": "VOID", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
+		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."},
 	"BASIC_EXTRACTOR": {"name": "Basic Extractor", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"extract": 3, "text": "End of your turn: extract 3 CRED."},
 	"CORTEX_BUFFER": {"name": "CORTEX BUFFER", "type": "PROGRAM", "tags": [], "bw": 1, "ram": 1, "rarity": "STARTER",
 		"text": "Once per encounter, prevent 1 CORTEX."},
 	"PULP_SHIELD": {"name": "PULP Shield", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER",
 		"text": "+3 SHIELD."},
-	"PROBE": {"name": "PROBE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "rarity": "STARTER", "target": true,
-		"text": "Target ICE: −2 STR this encounter."},
+	"PROBE": {"name": "PROBE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "rarity": "STARTER", "target": true,
+		"text": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine.",
+		"flavor": "The deeper you probe, the costlier it gets."},
 	"GHOST_SIGNAL": {"name": "GHOST SIGNAL", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 2, "rarity": "STARTER",
 		"text": "The first TRACE added in the next Corporation Response becomes 0. BURNED."},
 
@@ -62,13 +63,13 @@ const DEFS := {
 	"FAILSAFE": {"name": "FAILSAFE", "type": "PROTOCOL", "tags": [], "bw": 2, "rarity": "RARE",
 		"text": "The first time each encounter you would gain CORTEX, prevent all of it."},
 	"DEEP_PROBE": {"name": "DEEP PROBE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 2, "rarity": "COMMON", "target": true,
-		"text": "Target ICE: −4 STR this encounter."},
+		"text": "Target ICE: −5 STR this encounter."},
 	"STRESS_TEST": {"name": "STRESS TEST", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "rarity": "UNCOMMON",
 		"text": "Every ICE: −1 STR this encounter."},
 	"DEFRAG": {"name": "DEFRAG", "type": "SCRIPT", "tags": [], "bw": 0, "rarity": "COMMON", "text": "Draw 1."},
 	"STIM_PATCH": {"name": "STIM PATCH", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 2, "rarity": "UNCOMMON",
 		"text": "Draw 2. (+2 TRACE)"},
-	"BURST": {"name": "BURST", "type": "SCRIPT", "tags": [], "bw": 0, "rarity": "UNCOMMON", "text": "Gain 1 BW. BURNED."},
+	"BURST": {"name": "BURST", "type": "SCRIPT", "tags": [], "bw": 3, "rarity": "UNCOMMON", "text": "Gain 5 BW. Each time you play this card this encounter, it costs 1 more BW for the rest of the encounter."},
 	"CO_PROCESSOR": {"name": "CO-PROCESSOR", "type": "PROGRAM", "tags": ["HARDWARE"], "bw": 2, "ram": 0, "rarity": "UNCOMMON",
 		"ram_bonus": 1, "text": "+1 RAM."},
 	"SCRUB": {"name": "SCRUB", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON", "text": "−4 TRACE."},
@@ -458,11 +459,19 @@ static func def(id: String) -> Dictionary:
 		return {"name": a.name + " ⨯ " + b.name, "type": "SCRIPT", "tags": tags, "bw": mini(4, a.bw + b.bw), "trace_cost": int(a.get("trace_cost", 0)) + int(b.get("trace_cost", 0)), "cred_cost": int(a.get("cred_cost", 0)) + int(b.get("cred_cost", 0)), "rarity": "RARE", "compiled": [parts[1], parts[2]], "target": a.get("target", false) or b.get("target", false), "text": a.text + " THEN " + b.text}
 	return DEFS[id]
 
+## STRIP-001: reward cards allowed in the core-loop build (only break, defend and build; no switched-off systems).
+const CORE_POOL := ["BATTERING_RAM", "JACKHAMMER", "PASSKEY", "RAINBOW_TABLE", "TASER", "STUN_BATON", "SKELETON_KEY",
+	"MULTITOOL", "ADAPTER", "DEEP_PROBE", "STRESS_TEST", "BALANCED_LOAD", "HARDENED_SHELL", "FLINCH", "MIRROR",
+	"SURGE_PROTECTOR", "SCRUB", "PROXY_CHAIN", "BURN_NOTICE", "SPAM_FILTER", "UNINSTALLER", "PATCH_KIT", "DEFRAG",
+	"STIM_PATCH", "BURST", "CO_PROCESSOR", "RAM_UPGRADE", "FIELD_KIT", "TOOLBELT", "READY_STANCE"]
+
 static func reward_pool(pool: String, rarity: String) -> Array:
 	var out := []
 	for id in DEFS:
 		var d: Dictionary = DEFS[id]
 		if d.rarity != rarity or d.get("slice_excluded", false):
+			continue
+		if Game.CORE_LOOP and not CORE_POOL.has(id):
 			continue
 		var p: String = d.get("pool", "SHARED")
 		if p == pool:

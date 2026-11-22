@@ -4,29 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-002 Rustler PCB palette (Codex)
-
-**Designer direction:** adapt the supplied PCB photo for the Rustler cards and show all four card types, including corporate BLOATWARE. Added a presentation-only board layer to SCRIPT, PROGRAM and PROTOCOL.
-
-**Validation:** Godot 4.3 import passed. Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0 and cartridge fixture 621/0. TRACER and SPAM captures match the baseline pixel for pixel.
-
-**Interpretations to confirm:** mustard SCRIPT, olive PROGRAM and blue-green PROTOCOL use darker print fields and share ivory perimeter traces and dark contacts. These exact palette values and trace layout await the designer's visual review.
-
-
-## 2026-11-19 — CARDS-002 Mustard PCB review archive (Codex)
-
-Saved ten review sheets, three final Godot captures and the reproducible prototype for the fifth cartridge design. The designer requested centred rules inside a fixed PCB trace frame and a single top-edge rarity light. The final capture fixture verified all three indicators, frame geometry, alignment and text fit in Godot 4.3. The archive is under `docs/visual/fixtures/cards-002/`.
-
-## 2026-11-19 — CARDS-002 review archive moved to `review/cards-002` (Claude)
-
-**Designer direction:** CARDS-002 mustard review work stays out of `main`: "None of it's to be kept with the main build." The designer approved a review branch.
-
-**Changed:** created `review/cards-002` from `0f4a312` (the Codex review archive) and added the 2026-11-19 review fixes there (`d30b531`). Removed `docs/visual/fixtures/cards-002/` from `main`; the master design entry and HANDOFF now point to the branch. The playable build is unchanged, and the built CARDS-002 PCB palette (`0aa6091`) stays on `main`.
-
-**Interpretations to confirm:** the branch is never merged; the earlier "Mustard PCB review archive" entry is kept as history even though its folder now lives only on the branch.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CARDS-001: integrated light faces and printed titles (Codex).
-
 ## 2026-11-19 — CARDS-003 PCB glow cartridges in the build (Claude)
 
 **Designer approval:** "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot. This is good. Save to all git folder necessary." CARDS-003 is APPROVED and supersedes the CARDS-002 palette.
@@ -590,3 +567,23 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 ## 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude)
 
 The designer pushed `playtest-7` on `5bb7d71` from the local clone (`git -C … tag playtest-7 5bb7d71`, then push). Cloud Claude sessions can push branches but not tags: the session proxy refuses tag refs and the GitHub API tag path (HTTP 403). Future `playtest-N` tags go the same way, from the designer's machine. HANDOFF and checklist v0.7 updated. **Code changes:** none. **Tests:** none.
+
+## 2026-11-21 — STRIP-001: core-loop test build (Claude Code)
+
+**Designer, 2026-11-21:** "Let's build a stripped down test build with the extras stripped off and just focus on break, defend, and build." Decisions BW-001, PROBE-001, PROBE-003, BREACH-001, TURN-001, BURST-001, STR-001, CACHE-001 and STRIP-001 approved in the same session (quotes in the master design doc). Spec: `REDLINE_CORE_LOOP.md`.
+
+**Built** behind `Game.CORE_LOOP` (true): 3 BW; PROBE 0 BW with +1 BW per extra PROBE on the same ICE per turn; PROBE reveals a VOID's top face-down subroutine; DEEP PROBE −5; BURST 3 → 5 BW with a per-copy rising cost; parting shot on BREACH; discard and draw before the Corporation Response; CACHED cards discarded between layers; no bloat tax or FORTRESS rolls; starter Icepicks STR 2 / 1 BW boost; the slice ICE rewritten (STR +2, no passives, fixed PULP, no CORTEX, no BOOTING, COOKIE BANNER all PULP); reward pool limited to `CardDB.CORE_POOL`; Generalist-only select screen; no COMPILE at the SAFEHOUSE. The export bundles `REDLINE_CORE_LOOP_CHECKLIST.md`.
+
+**Tests:** `test_game.gd` 138 passed, 0 failed (new `test_core_loop.gd`; the legacy suite runs only when `CORE_LOOP` is false); `test_adp.gd` 17/0; `test_signal_carbon.gd` 671/0. Screenshot fixtures were not run locally (stopped for time); CI runs them on push.
+
+**Bot sims (30 Generalist runs):** 24/30 cleared; 5 deaths, all at the CAPTCHA node (AUTO-RENEW STR 7 + CAPTCHA); 1 stalled run at CAPTCHA. 6.7 turns per encounter; 6.5 PULP reaching VITAE per encounter (target 2–4); 0.00 unspent BW per turn; 2.38 playable cards left per turn (the inert cards were already installed, so the figure is the same without them); 2.57 threat subroutines broken before each BREACH; parting shot 0.52 subroutines and 0.34 VITAE per BREACH; earliest Opening BREACH turn 2. The bot plays every cheap card, so treat VITAE as an upper bound.
+
+**Interpretations to confirm**
+- A PROBE on a VOID reveals its top face-down subroutine and that subroutine becomes **active**, so it also fires in the next response. ("The deeper you probe, the riskier.")
+- Card removal uses the existing DECOMPILE option on the reward screen rather than a new SAFEHOUSE option; the SAFEHOUSE offers healing only.
+- The legacy rules suite is skipped while `CORE_LOOP` is true, because it asserts the full-game values.
+- Not yet done: the CACHE ∞ / N corner icon, and PROBE's cost shown while dragging over an ICE (HANDOFF rows).
+- The CAPTCHA node is the bot's danger spot (AUTO-RENEW's FORTRESS STR 7 against a STR 2 FORTRESS Icepick). Left as specified for the designer's playtest.
+
+**Log size (LOG-001):** moved the three oldest 2026-11-19 entries (CARDS-002) unchanged to the archive.
+
