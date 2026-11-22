@@ -22,8 +22,20 @@ Every subroutine effect and ICE mechanic in one place. **Order** is the sequence
 | 10 | **CORTEX X** | Gain X CORTEX: −1 DRAW each, until the next corporation. | 3 | VOID | CORTEX BUFFER, FAILSAFE | In build |
 | 11 | **TRACE X ▸ effect** | The effect after ▸ happens only if some of that TRACE lands. | 3 | TUMBLER, VOID | JAMMER, GHOST SIGNAL, PROXY CHAIN | In build |
 | 12 | **RETALIATE X** | PULP X for each subroutine already broken on this ICE. | 3 | FORTRESS | Break it before chipping; finish the ICE | In build |
-| 13 | **AMEND X** | This response, the ICE to its right deals +X on each PULP subroutine. | 4 | TUMBLER (support) | Break AMEND when it shows | In build |
+| 13 | **AMEND X** | This response, the ICE to its right deals +X on each PULP subroutine (doubled if that ICE is LETHAL). CONSENT FORM has AMEND 1 (TUNE-002, was 2). | 4 | TUMBLER (support) | Break AMEND when it shows | In build |
 | 14 | **FORGET X** | X random cards in hand go to the bottom of your draw pile. | 3 | LUCIDA ICE | CACHE | Designed, not in the core-loop build |
+
+## Mini-boss abilities (MINIBOSS-002)
+
+Each belongs to one mini-boss only. They are abilities, not subroutines: they can't be broken or disabled, and the map explains them before the player commits (`REDLINE_MINIBOSSES.md`).
+
+| Corporation | Mini-boss | Ability | What it does | Complexity | Player's answer | Status |
+|---|---|---|---|:-:|---|---|
+| HALCYON | MEMORY LANE (FORTRESS) | **FOND MEMORIES** | Every other Corporation Response, 2 MEMORY Bloatware are shuffled into your draw pile; each MEMORY in your hand at the end of your turn costs 2 SHIELD. | 3 | Finish fast; DEFRAG and UNINSTALLER clear MEMORY | Designed |
+| IRONWATCH | THE GRID (VOID) | **PROFILE** | Each response it adds one extra subroutine based on the card type you played most that turn (CLOAK → TRACE 3 ▸ PULP 2, EXPLOIT → HARDEN 2, Icepick breaks → RETALIATE 2, nothing → PULP 4), forecast live on a PROFILE plate. | 4 | Vary how you play each turn | Designed |
+| LUCIDA | REVERIE (TUMBLER) | **NIGHTMARES** | Each non-DEADLOCK subroutine you break goes into your draw pile as a NIGHTMARE card; in hand at the end of your turn it fires on you; pay 1 BW to destroy it for good. They vanish when the encounter ends. | 4 | Budget BW to clear NIGHTMAREs, or race the DEADLOCK | Designed |
+
+The mini-boss sits at row 9, so its ability is the one new thing on that Node; everything else on it uses effects already taught.
 
 ## ICE mechanics (not subroutines, also taught in order)
 
