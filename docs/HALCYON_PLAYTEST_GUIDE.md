@@ -1,12 +1,14 @@
-# PANOPTICON — HALCYON PLAYTEST 7 (0.7.0-playtest.7)
+# PANOPTICON — HALCYON PLAYTEST 8 (0.8.0-playtest.8)
 
-This Windows build covers four Rustlers and HALCYON's first four map rows. The selection screen shows **HALCYON PLAYTEST 7 · ATOMIC DECO PUNK · 0.7.0-playtest.7**. Record the Rustler, Node, turn, and cards with feedback.
+This Windows build is the **core-loop test** (STRIP-001): the Generalist only, HALCYON's first four map rows, and only break, defend and build. The selection screen shows **HALCYON PLAYTEST 8 · CORE LOOP · 0.8.0-playtest.8**. New rules: 3 BW a turn; PROBE costs 0 BW, +1 BW for each extra PROBE on the same ICE that turn, and reveals a VOID's face-down subroutine; BURST costs 3 and gives 5 BW, costing 1 more each time that copy is played; when you BREACH, every unbroken showing subroutine fires once as a parting shot; your next hand is drawn before the corporation acts; ICE are +2 STR, with no passives. Fill in `REDLINE_CORE_LOOP_CHECKLIST.md` (one row per encounter).
+
+The rest of this guide describes the full slice.
 
 Playtest 7 rebuilds the encounter screen in the painted concept interface (ENC-CONCEPT-001): ICE cabinets with the new AUTO-RENEW and CAPTCHA characters, icon keys with rules on hover, white card faces in a copper hand tray, the mushroom END TURN button and a KEY LEGEND card. ICE and cards without painted art yet use the older drawings. Playtest 6 added corporate newsreels and hesitation lines, local personalized ads, and a relocation notice followed by THE CARBON. Open the ledger from DEAD DROP in the run menu. The nine island names are working copy. See the repository fixtures for Central Node punch-card arrival, LUCIDA record edits and PATCHWORK grafts.
 
 ## Get the Windows build
 
-Open the successful Playtest 7 build on `release` (Actions run and artifact links are in `docs/HANDOFF.md`). Download `PANOPTICON-HALCYON-PLAYTEST-7-0.7.0-playtest.7-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
+Open the successful Playtest 7 build on `release` (Actions run and artifact links are in `docs/HANDOFF.md`). Open the latest build on `release`. Download `PANOPTICON-HALCYON-PLAYTEST-8-0.8.0-playtest.8-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
 
 Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt` contains the executable's SHA-256. Use the bundled **Playtest QA Checklist v0.5** (`REDLINE_PLAYTEST_CHECKLIST.md`). Mark checks for unavailable routes, features, or later mechanics **N/A**.
 
