@@ -2933,3 +2933,7 @@ Designer: "yes hardwired is perfect." A **HARDWIRED** card can never leave the d
 
 Designer: "very good. commit all those to the repo." Approved: the three corporate mission statements (IRONWATCH revised so every surface is a sensor that knows why you are there), and the mini-bosses **MEMORY LANE** (HALCYON; FOND MEMORIES: every other response, 2 MEMORY Bloatware into the draw pile, each in hand at end of turn costs 2 SHIELD; designer's mechanic, not a subroutine, can't be disabled), **THE GRID** (IRONWATCH; PROFILE) and **REVERIE** (LUCIDA; NIGHTMARES). Full text: `docs/REDLINE_MINIBOSSES.md`.
 
+## MAP-003c — Map generation rules (APPROVED, 2026-11-22)
+
+Designer: row 1 is an encounter, row 16 the boss, row 9 holds the mini-boss Node (other row-9 Nodes are ICE), 3–4 Nodes per row elsewhere, and every path has 8 encounters (including row 9) and 7 other Nodes. Every path guarantees **at least 3 SAFEHOUSE + Uplink combined, with at least 1 of each** ("it could be 2 safehouses and 1 uplink or 2 uplinks and 1 safehouse"). Spacing rules stay loose (working value: at most 4 ICE or 4 non-ICE Nodes in a row). Prototype: `prototypes/map/map003_generator.py`.
+

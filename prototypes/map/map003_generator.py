@@ -54,14 +54,70 @@ def paths(rows,edges):
         for j in edges[ri][i]: walk(ri+1,j,acc)
     walk(0,0,[]); return out
 ok=bad=0
-for s in range(1000):
+for s in (range(1000) if "--v2" not in sys.argv else []):
     g=gen(s)
     if not g: bad+=1; continue
     rows,edges=g
     good=all(len(p)==16 and p[0]=="ICE" and p[15]=="BOSS" and p[8] in("ICE","MINIBOSS") and p.count("ICE")+ (p[8]=="MINIBOSS")==8 and sum(t not in("ICE","MINIBOSS","BOSS") for t in p)==7 for p in paths(rows,edges)) and all(3<=len(x)<=4 for x in rows[1:15])
     ok+=good; bad+= not good
 print("valid maps", ok, "of 1000 (rejected", bad, ")")
-rows,edges=gen(int(sys.argv[1]) if len(sys.argv)>1 else 3)
+rows,edges=gen(int(sys.argv[1]) if len(sys.argv)>1 and sys.argv[1].isdigit() else 3)
 ab={"ICE":"ICE","MINIBOSS":"MINI","BOSS":"BOSS","SAFEHOUSE":"SAFE","UPLINK":"UPLK","DEAD DROP":"DROP","CONSOLE LAB":"LAB","SIGNAL":"SIG?"}
 for i,row in enumerate(rows): print("%2d  "%(i+1)+"  ".join("%-5s"%ab[q["t"]] for q in row))
 print("paths:",len(paths(rows,edges)))
+
+# --- MAP-003c v2: guarantees and loose spacing (designer, 2026-11-22) ---
+# Every path: at least 3 SAFEHOUSE + UPLINK combined, with at least 1 of each.
+# Loose spacing: no more than 4 ICE Nodes in a row and no more than 4 non-ICE Nodes in a row on any path.
+SU=("SAFEHOUSE","UPLINK")
+def path_stats(rows,edges):
+    best=None
+    for p in paths(rows,edges):
+        s=p.count("SAFEHOUSE"); u=p.count("UPLINK")
+        if s+u<3 or s<1 or u<1: return p
+    return None
+def runs_ok(p):
+    run=0; last=None
+    for t in p[1:15]:
+        k="ICE" if t in("ICE","MINIBOSS") else "OTHER"
+        run=run+1 if k==last else 1; last=k
+        if run>4: return False
+    return True
+def gen2(seed):
+    r=random.Random(seed+100000)
+    g=gen(seed)
+    if not g: return None
+    rows,edges=g
+    for _ in range(200):   # repair: turn other Nodes on a failing path into SAFEHOUSE / UPLINK
+        bad=None
+        def walk(ri,i,acc):
+            nonlocal bad
+            if bad: return
+            acc=acc+[(ri,i)]
+            if ri==len(rows)-1:
+                ts=[rows[a][b]["t"] for a,b in acc]; s=ts.count("SAFEHOUSE"); u=ts.count("UPLINK")
+                if s+u<3 or s<1 or u<1: bad=(acc,s,u)
+                return
+            for j in edges[ri][i]: walk(ri+1,j,acc)
+        walk(0,0,[])
+        if not bad: break
+        acc,s,u=bad
+        cand=[(a,b) for a,b in acc if rows[a][b]["t"] not in("ICE","MINIBOSS","BOSS")+SU]
+        if not cand: return None
+        a,b=r.choice(cand); rows[a][b]["t"]="SAFEHOUSE" if s<=u else "UPLINK"
+    else: return None
+    if not all(runs_ok(p) for p in paths(rows,edges)): return None
+    return rows,edges
+if __name__=="__main__" and "--v2" in sys.argv:
+    ok=0; tries=0; seed=0; made=[]
+    while ok<200:
+        g=gen2(seed); seed+=1; tries+=1
+        if g:
+            ok+=1; made.append(g)
+            for p in paths(*g):
+                s=p.count("SAFEHOUSE"); u=p.count("UPLINK")
+                assert p[0]=="ICE" and p[15]=="BOSS" and p[8] in("ICE","MINIBOSS") and p.count("ICE")+(p[8]=="MINIBOSS")==8 and s+u>=3 and s>=1 and u>=1 and runs_ok(p)
+    print("v2: 200 valid maps from %d seeds (%.0f%% accepted); every path checked" % (tries, 100*200/tries))
+    rows,edges=made[3]
+    for i,row in enumerate(rows): print("%2d  "%(i+1)+"  ".join("%-5s"%ab[q["t"]] for q in row))
+    print("paths:",len(paths(rows,edges)))
