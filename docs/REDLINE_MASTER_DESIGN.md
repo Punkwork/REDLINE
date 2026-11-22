@@ -2929,3 +2929,7 @@ Designer: "yes hardwired is perfect." A **HARDWIRED** card can never leave the d
 
 **BOON-001 details (designer, 2026-11-22):** the player may decline every boon offered ("For now yes"), and boons from different corporations **stack** for the rest of the run ("yes").
 
+## MINIBOSS-002 — Mission statements and the three mini-bosses (APPROVED, 2026-11-22)
+
+Designer: "very good. commit all those to the repo." Approved: the three corporate mission statements (IRONWATCH revised so every surface is a sensor that knows why you are there), and the mini-bosses **MEMORY LANE** (HALCYON; FOND MEMORIES: every other response, 2 MEMORY Bloatware into the draw pile, each in hand at end of turn costs 2 SHIELD; designer's mechanic, not a subroutine, can't be disabled), **THE GRID** (IRONWATCH; PROFILE) and **REVERIE** (LUCIDA; NIGHTMARES). Full text: `docs/REDLINE_MINIBOSSES.md`.
+
