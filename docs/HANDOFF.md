@@ -36,6 +36,9 @@ Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
 | ID | What | Owner | Status |
 |---|---|---|---|
 | **STRIP-001, BW-001, PROBE-001, PROBE-003, BREACH-001, TURN-001, BURST-001, STR-001** | Rules and data behind `Game.CORE_LOOP` | Claude Code | **BUILT**, see the 2026-11-21 log entry; awaiting Playtest 8 |
+| **RIDER-001, AMEND-001, DEFRAG-001, PLAY-002** | TRACE riders and JAMMER; CONSENT FORM with AMEND in TERMS & CONDITIONS; DEFRAG discard-then-draw; visible parting shot and per-type sounds (placeholders) | Claude Code | **BUILT**, awaiting Playtest 11 |
+| **PLAY-002 polish** | Final sounds, and per-type animations beyond the PULP shake (TRACE pulse, CORTEX static, card tear, ICE swell, glass); new effect icons on the keys | Claude Code | TO DO |
+| **[UI] Discard view** | While choosing a discard, let the player toggle back to the board (Playtest 10 sheet) | Claude Code | TO DO (with the UI batch) |
 | **BOOST-001, SUB-001** | Boosts last the turn; new subroutines, HARDEN, SHIELD BREAK, RETALIATE, CORTEX on VOIDs, DEADLOCK ×2 | Claude Code | **BUILT**, awaiting Playtest 10 |
 | **Playtest 9 UI list** | The ten [UI] items in the designer's Playtest 9 sheet: hover flicker at card overlaps and hand edges, encounter not centred on the corporation background, installed programs wider than the CRT, select screen says 4 BW, map shows ICE names (show layer count only), speech-bubble text not centred, remove the deck/discard wells to give the hand more room, cards as PC Engine HuCards (thickness, rounded corners, contacts; taller), VOICE / M doesn't mute NUL/REM | Claude Code | TO DO (batch after Playtest 10) |
 | **FORM-001, FORM-002** | ICE forms by STR and breaks (LETHAL doubles PULP and TRACE; Black ICE look only); TRACE +2, PULP +1 | Claude Code | **BUILT**, awaiting Playtest 9 |

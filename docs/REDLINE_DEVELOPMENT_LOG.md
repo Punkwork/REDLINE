@@ -4,38 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-003a: card names on the face, full text on hover (Claude)
-
-**Designer direction:** "I prefer the full text to show on a hover, as the solution. And on the card while it's in your hand, where the card text is, place the card names." It replaces the tall layout proposed in the previous entry.
-
-**Changed:**
-- `card.gd`: the tall layout is removed, so every card uses the standard panels.
-- When a card's rules don't fit at 9 px (`summary_rules`), the rules panel names the component cards in effect order, joined by a small THEN, with a "Hover for full text" footer.
-- Hovering shows `FullRulesPanel`: the full rules in a mask panel 220 px wide, sized to the text. It is placed above the card in screen space, so a scrolling reward row cannot clip it, and kept inside the window.
-- The tooltip drops the rules line for these cards.
-- The footer band in a rules panel is now 15 px and its line is centred in it, so it clears the plated pads on the panel edge; this applies to BLOATWARE's corporate line too.
-- `shot_cards_pcb`:
-  - sweeps 444 base texts, all of which must fit;
-  - sweeps the 1,008 compiled pairs: 901 fit on the face, and 107 show names with hover, where the names must fit at 9 px;
-  - checks the names and hint on a summary card;
-  - checks the footer's clearance from the pads;
-  - adds a hand-size hover capture, checking that the panel is visible, holds the full text, fits, stays on screen and doesn't cover the card.
-
-**Validation:**
-- Rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0.
-- All 14 CI screenshot fixtures clean; `shot_cards_pcb` 0 failures at 3× and 1×.
-- The other CI fixtures' screenshots are unchanged.
-
-**Interpretations to confirm:** the THEN joiner; the hint line; only cards that don't fit use names and hover; the panel opens below the card if there is no room above.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-DECISIONS-2026-11-17: approved visual decisions recorded in the master design doc (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: HANDOFF points to main (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: Windows export runs on main (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude).
-
 ## 2026-11-19 — CARDS-003a confirmed (Claude)
 
 **Designer:** "Great save those changes." This confirms the CARDS-003a interpretations: the THEN joiner, the "Hover for full text" hint, names and hover only for cards whose text doesn't fit, and the panel opening below the card when there is no room above. Master design and HANDOFF updated. **Code changes:** none.
@@ -557,3 +525,16 @@ Playtest 9 sheet (designer): the core loop is fun (PULP, PROBE, rewards and "wan
 **Interpretations to confirm:** HARDEN stacks each time it fires; SHIELD BREAK removes all SHIELD when it fires, so PULP before it is still blocked; RETALIATE counts DEADLOCK breaks.
 
 **Log size (LOG-001):** the two oldest entries were moved unchanged to the archive with the BOOST-001 commit. Playtest 10 exported from `236fa36` ([run](https://github.com/Punkwork/REDLINE/actions/runs/44979979788)).
+
+## 2026-11-21 — RIDER-001, AMEND-001, DEFRAG-001, PLAY-002 after Playtest 10 (Claude Code)
+
+Playtest 10 sheet: every question 5/5 (BURST not drawn); encounters 4–6 turns except TERMS & CONDITIONS (3, 2); discards mattered for the first time; parting shot on the final Node seemed missing. Checked: the engine fired it (TERMS OF SERVICE with only its DEADLOCK broken deals 12), but it landed instantly under the reward screen with a "Corporation Response is skipped" message. Now it plays through the response queue with a corrected message.
+
+**Built:** RIDER-001 (`"then"` riders on TRACE effects, applied only when `trace_gained_node` rises; JAMMER), AMEND-001 (CONSENT FORM support, AMEND bonus on the ICE to the right, cleared after each response), DEFRAG-001, PLAY-002 (parting shot via `response_queue`, `_effect_feedback()` sounds and PULP shake).
+
+**Tests:** `test_game.gd` 176 passed, 0 failed; ADP 17/0; SIGNAL/CARBON 672/0.
+**Bot sims (30 Generalist runs):** **0/30 cleared**; deaths CAPTCHA 16, TERMS & CONDITIONS 14; 3.0 turns per encounter; 12.3 PULP to VITAE per encounter. The bot ignores riders, AMEND and lethal forms and lost far more than the designer in Playtest 10 (2–14 VITAE per encounter), so this is a worst case, but TERMS & CONDITIONS is now the hardest Node: watch it.
+
+**Interpretations to confirm:** a rider fires once per TRACE subroutine if any TRACE lands (even 1 after PROXY CHAIN); JAMMER blocks whole TRACE subroutines, including ones combined with PULP (their PULP still hits); the placeholder sounds are synthesized, not final.
+
+**Log size (LOG-001):** older entries moved unchanged to the archive with this commit.

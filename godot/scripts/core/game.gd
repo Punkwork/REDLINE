@@ -544,6 +544,8 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Need another hand card to BURN"}
 	if d.get("unplayable", false):
 		return {"ok": false, "reason": "Can't be played"}
+	if CORE_LOOP and inst.id == "DEFRAG" and hand.size() < 2:
+		return {"ok": false, "reason": "Need another hand card to discard"}
 	if bw < card_cost(inst.id, uid):
 		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id, uid)}
 	if cred < int(d.get("cred_cost", 0)):
@@ -789,7 +791,14 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"STRESS_TEST":
 			for i in enc.ice.size():
 				reduce_ice_str(i, 1)
-		"DEFRAG": draw_cards(1)
+		"JAMMER": enc["jammer"] = 2   # RIDER-001: the first 2 TRACE subroutines next response add 0
+		"DEFRAG":
+			if CORE_LOOP:   # DEFRAG-001: discard 1 card, then draw 2
+				pending = {"kind": "discard", "n": 1, "then_draw": 2}
+				phase = "CHOICE"
+				_say("DEFRAG: choose a card to discard, then draw 2.")
+			else:
+				draw_cards(1)
 		"STIM_PATCH": draw_cards(2)
 		"BURST":
 			if CORE_LOOP:   # BURST-001: 3 BW, gain 5 BW; this copy costs 1 more each play this encounter; not BURNED
@@ -923,9 +932,8 @@ func _end_turn_effects() -> void:
 		_event("EV-10")
 	if enc.breached:
 		if CORE_LOOP:
-			_parting_shot()
-			if phase == "DEAD":
-				return
+			_begin_parting_shot()   # BREACH-001: played like a short response; finishes in response_finish()
+			return
 		_say("BREACHED: Corporation Response skipped.")
 		_cleanup()
 		_after_breach()
@@ -935,26 +943,26 @@ func _end_turn_effects() -> void:
 		draw_cards(draw_size())
 	_begin_response()
 
-func _parting_shot() -> void:
+func _begin_parting_shot() -> void:
 	## BREACH-001: every unbroken subroutine that is active (TUMBLER slot, FORTRESS) or revealed (VOID)
-	## fires once, left to right, top to bottom. Not a Corporation Response: nothing rotates or advances.
-	var fired := 0
-	var vitae_before := vitae
+	## fires once, left to right, top to bottom, through the response queue so the UI can show it.
+	## Not a Corporation Response: nothing rotates, reveals or advances.
+	phase = "RESPONSE"
+	response_queue = []
+	enc["resp_void"] = []
+	enc["parting"] = true
+	enc["parting_vitae"] = vitae
 	for st in response_preview():
 		if st.skipped or st.hidden or _has_deadlock(st.effects):
 			continue
-		var ice: Dictionary = enc.ice[st.ice]
-		acting_ice = ice
-		for e in st.effects:
-			_apply_effect(effect_value(ice, e))
-			if phase == "DEAD":
-				return
-		fired += 1
-	core_stats.parting_fired += fired
-	core_stats.parting_vitae += vitae_before - vitae
-	if fired > 0:
-		_say("PARTING SHOT: %d unbroken subroutine(s) fire as you leave." % fired)
-	_event("PARTING_SHOT", {"fired": fired})
+		st["ref"] = enc.ice[st.ice]
+		response_queue.append(st)
+	core_stats.parting_fired += response_queue.size()
+	if not response_queue.is_empty():
+		_say("PARTING SHOT: %d unbroken subroutine(s) fire as you leave." % response_queue.size())
+	_event("PARTING_SHOT", {"fired": response_queue.size()})
+	if not animate:
+		_continue_response()
 
 func _probe_extra(target: int) -> int:
 	## PROBE-003: +1 BW for each PROBE already played on that ICE this turn. No target: the cheapest ICE.
@@ -1050,6 +1058,16 @@ func response_step() -> Dictionary:
 func response_finish() -> void:
 	if phase == "DEAD":
 		return
+	for ice in enc.ice:
+		ice.erase("amend")   # AMEND lasts one response
+	enc.erase("jammer")   # JAMMER lasts one response
+	if enc.get("parting", false):
+		enc.parting = false
+		core_stats.parting_vitae += int(enc.parting_vitae) - vitae
+		_say("BREACHED.")
+		_cleanup()
+		_after_breach()
+		return
 	for ice in enc.get("resp_void", []):
 		ice.responses += 1
 	# HARDENING: +1 STR after each Corporation Response, up to +3 (a PURGE or BLACKOUT turn isn't a response).
@@ -1074,7 +1092,17 @@ func response_finish() -> void:
 func _apply_effect(e: Dictionary) -> void:
 	match e.k:
 		"PULP": take_pulp(e.v)
-		"TRACE": add_trace(e.v, true)
+		"TRACE":
+			# RIDER-001: TRACE X ▸ effect. The rider happens only if some of this TRACE lands.
+			if CORE_LOOP and int(enc.get("jammer", 0)) > 0:
+				enc.jammer -= 1   # JAMMER: this TRACE subroutine adds 0
+				_say("JAMMER: TRACE %d adds nothing." % e.v)
+				return
+			var before := trace_gained_node
+			add_trace(e.v, true)
+			if CORE_LOOP and trace_gained_node > before:
+				for rider in e.get("then", []):
+					_apply_effect(effect_value(acting_ice, rider))
 		"CORTEX": add_cortex(e.v)
 		"DEADLOCK": pass
 		"BW_DRAIN": enc.bw_drain += e.v
@@ -1085,6 +1113,10 @@ func _apply_effect(e: Dictionary) -> void:
 				_sync_strengths()
 		"SHIELD_BREAK": shield = 0
 		"RETALIATE": take_pulp(int(e.get("dmg", 0)))
+		"AMEND":   # AMEND-001: this response, the ICE to its right deals +X on each PULP subroutine
+			var k: int = enc.ice.find(acting_ice)
+			if k >= 0 and k + 1 < enc.ice.size():
+				enc.ice[k + 1]["amend"] = int(enc.ice[k + 1].get("amend", 0)) + int(e.v)
 		"FORGET":
 			for _n in int(e.v):
 				var opts := hand.filter(func(c): return not c.cached)
@@ -1143,8 +1175,11 @@ func _choose(uid: int) -> void:
 			pending.n -= 1
 			if pending.n > 0 and not hand.is_empty():
 				return
+			var then_draw := int(pending.get("then_draw", 0))
 			pending = {}
 			phase = "PLAYER"
+			if then_draw > 0:
+				draw_cards(then_draw)
 			return
 		"cache":
 			var cc := _find(hand, uid)
@@ -1368,7 +1403,7 @@ func _do_break(i: int, s: int) -> bool:
 		_event("EV-07")
 		if node.get("central", false) and layer == node.layers.size() - 1:
 			_award_punch_card()
-		_say("BREACH. Press END TURN: the Corporation Response is skipped.")
+		_say("BREACH. Press END TURN: unbroken subroutines fire a parting shot." if CORE_LOOP else "BREACH. Press END TURN: the Corporation Response is skipped.")
 	if d.get("passive", "") == "TRIPWIRE":
 		add_trace(1, false)
 	return true
@@ -1902,6 +1937,9 @@ func virus_total(i: int) -> int:
 func effect_value(ice: Dictionary, e: Dictionary) -> Dictionary:
 	## FORM-001: a LETHAL ICE's PULP and TRACE subroutines deal double (core-loop build).
 	var out := _effect_value_base(ice, e)
+	if out.k == "PULP" and int(ice.get("amend", 0)) > 0:
+		out = out.duplicate()
+		out.v = int(out.v) + int(ice.amend)
 	if out.k == "RETALIATE":   # SUB-001: PULP X for each subroutine already broken on this ICE
 		out = out.duplicate()
 		out["dmg"] = int(out.v) * int(ice.get("broken", []).count(true))

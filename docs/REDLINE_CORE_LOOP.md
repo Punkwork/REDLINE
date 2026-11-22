@@ -35,6 +35,12 @@
 | TERMS OF SERVICE (FORTRESS) | 9 | PULP 4 · ⊕ INSERT SPAM → discard + PULP 2 · RETALIATE 2 · PULP 4 · DEADLOCK ×2 |
 | HOUSE CALL (Black VOID) | 9 | PULP 5 · PULP 5 |
 
+## 1c. RIDER-001, AMEND-001, DEFRAG-001, PLAY-002 (2026-11-21, after Playtest 10)
+- **TRACE riders** (supersede §1b for these subroutines): REJECT ALL PULP 2 + TRACE 2 ▸ DISCARD 1 · COOKIE WALL TRACE 2 ▸ PULP 2 · CAPTCHA TRACE 3 ▸ DISCARD 1 and TRACE 4 ▸ HARDEN 1 · DOORBELL CAM TRACE 2 ▸ CORTEX 1 and TRACE 3 ▸ PULP 2. **JAMMER** (common, 1 BW, CLOAK) counters them.
+- **TERMS & CONDITIONS:** CONSENT FORM (support, left) + TERMS OF SERVICE. CONSENT FORM: TUMBLER, STR 6, 2 slots: TRACE 3 ▸ DISCARD 1 · DEADLOCK · AMEND 2 · HARDEN 1 · DEADLOCK.
+- **DEFRAG:** 0 BW, discard 1 card, then draw 2 (needs another card in hand).
+- **Parting shot** now plays through the response, one subroutine at a time. Placeholder synthesized sounds per type (PULP, TRACE, CORTEX, card effects, HARDEN/AMEND, SHIELD BREAK) in `godot/audio/sfx/hit-*.wav`; PULP shakes the screen unless reduced motion is on.
+
 ## 2. ICE in the build (`godot/scripts/core/ice.gd`)
 | ICE | Type | STR | Subroutines |
 |---|---|---|---|

@@ -66,7 +66,9 @@ const DEFS := {
 		"text": "Target ICE: −5 STR this encounter."},
 	"STRESS_TEST": {"name": "STRESS TEST", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "rarity": "UNCOMMON",
 		"text": "Every ICE: −1 STR this encounter."},
-	"DEFRAG": {"name": "DEFRAG", "type": "SCRIPT", "tags": [], "bw": 0, "rarity": "COMMON", "text": "Draw 1."},
+	"JAMMER": {"name": "JAMMER", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON",
+		"text": "In the next Corporation Response, the first 2 TRACE subroutines add 0 TRACE (their ▸ effects don't happen)."},
+	"DEFRAG": {"name": "DEFRAG", "type": "SCRIPT", "tags": [], "bw": 0, "rarity": "COMMON", "text": "Discard 1 card, then draw 2."},
 	"STIM_PATCH": {"name": "STIM PATCH", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 2, "rarity": "UNCOMMON",
 		"text": "Draw 2. (+2 TRACE)"},
 	"BURST": {"name": "BURST", "type": "SCRIPT", "tags": [], "bw": 3, "rarity": "UNCOMMON", "text": "Gain 5 BW. Each time you play this card this encounter, it costs 1 more BW for the rest of the encounter."},
@@ -462,7 +464,7 @@ static func def(id: String) -> Dictionary:
 ## STRIP-001: reward cards allowed in the core-loop build (only break, defend and build; no switched-off systems).
 const CORE_POOL := ["BATTERING_RAM", "JACKHAMMER", "PASSKEY", "RAINBOW_TABLE", "TASER", "STUN_BATON", "SKELETON_KEY",
 	"MULTITOOL", "ADAPTER", "DEEP_PROBE", "STRESS_TEST", "BALANCED_LOAD", "HARDENED_SHELL", "FLINCH", "MIRROR",
-	"SURGE_PROTECTOR", "SCRUB", "PROXY_CHAIN", "BURN_NOTICE", "SPAM_FILTER", "UNINSTALLER", "PATCH_KIT", "DEFRAG",
+	"SURGE_PROTECTOR", "SCRUB", "JAMMER", "PROXY_CHAIN", "BURN_NOTICE", "SPAM_FILTER", "UNINSTALLER", "PATCH_KIT", "DEFRAG",
 	"STIM_PATCH", "BURST", "CO_PROCESSOR", "RAM_UPGRADE", "FIELD_KIT", "TOOLBELT", "READY_STANCE"]
 
 static func reward_pool(pool: String, rarity: String) -> Array:

@@ -14,6 +14,13 @@ const EFFECTS := {
  "break": preload("res://audio/sfx/break.wav"),
  "end_turn": preload("res://audio/sfx/end-turn.wav"),
  "bloat": preload("res://audio/sfx/bloat.wav"),
+ # PLAY-002: placeholder synthesized hits, one per subroutine type (replace with final sounds).
+ "hit_pulp": preload("res://audio/sfx/hit-pulp.wav"),
+ "hit_trace": preload("res://audio/sfx/hit-trace.wav"),
+ "hit_cortex": preload("res://audio/sfx/hit-cortex.wav"),
+ "hit_card": preload("res://audio/sfx/hit-card.wav"),
+ "hit_harden": preload("res://audio/sfx/hit-harden.wav"),
+ "hit_shield": preload("res://audio/sfx/hit-shield.wav"),
 }
 
 var effect_players := {}

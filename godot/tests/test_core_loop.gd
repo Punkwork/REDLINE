@@ -12,6 +12,8 @@ func run(runner) -> void:
 	test_pool_and_data()
 	test_forms()
 	test_sub_001()
+	test_defrag_amend()
+	test_riders()
 
 func opening(seed_value: int) -> Game:
 	var g := Game.new(seed_value)
@@ -72,6 +74,7 @@ func test_parting_shot() -> void:
 
 func test_turn_001_draw() -> void:
 	var g := opening(3)
+	g.enc["jammer"] = 9   # keep TRACE riders (DISCARD) out of this count
 	var drawn_before := g.draw_pile.size() + g.discard.size() + g.hand.size()
 	g.end_turn()
 	if g.phase == "CHOICE":
@@ -165,3 +168,40 @@ func test_sub_001() -> void:
 	g.shield = 0
 	g._apply_effect(g.effect_value(ice, {"k": "RETALIATE", "v": 2}))
 	t.check(v - g.vitae == 4, "RETALIATE deals its PULP")
+
+func test_defrag_amend() -> void:
+	var g := opening(8)
+	g.bw = 5
+	var d: int = t.put_in_hand(g, "DEFRAG")
+	var n := g.hand.size()
+	t.check(g.play_card(d) and g.phase == "CHOICE" and g.pending.kind == "discard", "DEFRAG-001: asks for a discard")
+	g.choose(g.hand[0].uid)
+	t.check(g.phase == "PLAYER" and g.hand.size() == n - 2 + 2, "DEFRAG-001: discard 1, then draw 2 (hand %d)" % g.hand.size())
+	# AMEND-001 on the final Node
+	var h := Game.new(9)
+	h.new_run()
+	h.row = 2
+	h.available = [0]
+	h.enter_node(0)
+	if h.phase == "READY_RIG":
+		h.choose_ready_rig(t.uid_of(h, h.draw_pile, "FORTRESS_ICEPICK"))
+	t.check(h.enc.ice.map(func(i): return i.id) == ["CONSENT_FORM", "TERMS_OF_SERVICE"], "AMEND-001: CONSENT FORM supports TERMS OF SERVICE")
+	h.acting_ice = h.enc.ice[0]
+	h._apply_effect({"k": "AMEND", "v": 2})
+	t.check(h.effect_value(h.enc.ice[1], {"k": "PULP", "v": 4}).v == 6, "AMEND +2 on the ICE to its right")
+	h.response_finish()
+	t.check(h.effect_value(h.enc.ice[1], {"k": "PULP", "v": 4}).v == 4, "AMEND lasts one response")
+
+func test_riders() -> void:
+	var g := opening(10)
+	g.acting_ice = g.enc.ice[1]
+	var n := g.hand.size()
+	var rider := {"k": "TRACE", "v": 2, "then": [{"k": "DISCARD", "v": 1}]}
+	g._apply_effect(rider)
+	t.check(g.enc.pending_discard == 1, "RIDER-001: TRACE lands, so its DISCARD rider happens")
+	g.enc.pending_discard = 0
+	g.enc["jammer"] = 2
+	var tr := g.trace
+	g._apply_effect(rider)
+	t.check(g.trace == tr and g.enc.pending_discard == 0, "JAMMER: TRACE adds 0 and the rider doesn't happen")
+	t.check(CardDB.CORE_POOL.has("JAMMER"), "JAMMER is a core reward")

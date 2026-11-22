@@ -371,6 +371,24 @@ func _on_end_turn() -> void:
 	if g.phase == "RESPONSE":
 		_play_response()
 
+func _effect_feedback(effects: Array) -> void:
+	## PLAY-002: each subroutine type sounds different, so the Rustler hears what is happening.
+	var kinds := effects.map(func(e): return e.k)
+	var sfx := ""
+	if kinds.has("PULP") or kinds.has("RETALIATE"): sfx = "hit_pulp"
+	elif kinds.has("SHIELD_BREAK"): sfx = "hit_shield"
+	elif kinds.has("CORTEX"): sfx = "hit_cortex"
+	elif kinds.has("TRACE"): sfx = "hit_trace"
+	elif kinds.has("HARDEN") or kinds.has("AMEND"): sfx = "hit_harden"
+	elif kinds.has("DISCARD") or kinds.has("INSERT") or kinds.has("BW_DRAIN"): sfx = "hit_card"
+	if sfx != "": friendly.music.play_effect(sfx)
+	if sfx == "hit_pulp" and not reduced_motion:
+		var home := friendly.position
+		var tw := create_tween()
+		for k in 4:
+			tw.tween_property(friendly, "position", home + Vector2(randf_range(-6, 6), randf_range(-4, 4)), 0.035)
+		tw.tween_property(friendly, "position", home, 0.04)
+
 func _play_response() -> void:
 	responding = true
 	fired = []
@@ -383,6 +401,7 @@ func _play_response() -> void:
 		var st: Dictionary = g.response_queue[0]
 		flash = {"ref": st.ref, "sub": st.sub}
 		g.response_step()        # values change only now, as it flashes
+		_effect_feedback(st.effects)   # PLAY-002: a sound (and a shake for PULP) per effect type
 		refresh()
 		while friendly.visible and friendly.strike_overlay.visible:
 			await get_tree().process_frame
@@ -1124,6 +1143,8 @@ func _chip(e: Dictionary) -> Control:
 			col = RIcon.COL.CORTEX; icon = "CORTEX"; word = "CORTEX %d" % e.v
 		"TRACE":
 			col = RIcon.COL.TRACE; icon = "TRACE"; word = "TRACE %d" % e.v
+			for rider in e.get("then", []):   # RIDER-001
+				word += " ▸ " + _effect_word(rider) + " if any TRACE lands"
 		"DEADLOCK":
 			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "DEADLOCK" + (" ×%d" % e.v if e.get("v", 1) > 1 else "")
 		"BW_DRAIN":
@@ -1134,6 +1155,8 @@ func _chip(e: Dictionary) -> Control:
 			col = RIcon.COL.DEADLOCK; icon = "DEADLOCK"; word = "HARDEN: this ICE +%d STR" % e.v
 		"RETALIATE":
 			col = RIcon.COL.PULP; icon = "PULP"; word = "RETALIATE %d: PULP %d per broken subroutine" % [e.v, e.v]
+		"AMEND":
+			col = RIcon.COL.PULP; icon = "PULP"; word = "AMEND +%d: this response, the ICE to its right deals +%d on each PULP" % [e.v, e.v]
 		"DISCARD":
 			col = RIcon.COL.TEAL; icon = "CARD"; word = "DISCARD %d next turn" % e.v
 		"INSERT":
@@ -1230,6 +1253,11 @@ func _effect_word(e: Dictionary) -> String:
 		"DEADLOCK": return "DEADLOCK"
 		"BW_DRAIN": return "−%d BW" % e.v
 		"SHIELD_BREAK": return "SHIELD BREAK"
+		"AMEND": return "AMEND +%d" % e.v
+		"TRACE":
+			var w := "TRACE %d" % e.v
+			for rider in e.get("then", []): w += " ▸ " + _effect_word(rider)
+			return w
 		"HARDEN": return "HARDEN +%d STR" % e.v
 		"RETALIATE": return "RETALIATE %d · PULP %d" % [e.v, int(e.get("dmg", 0))]
 		_: return "%s %d" % [e.k, e.get("v", 0)]
@@ -1603,7 +1631,7 @@ func _overlay_safehouse() -> void:
 
 func _overlay_select() -> void:
 	var v := _dim_box("CHOOSE YOUR RUSTLER", "Same stats for all: 30 VITAE, 4 BW, DRAW 6, 4 RAM. They differ by deck and ORIGIN Ghostware.", 1360)
-	v.add_child(_lbl("HALCYON PLAYTEST 10 · CORE LOOP · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
+	v.add_child(_lbl("HALCYON PLAYTEST 11 · CORE LOOP · " + str(ProjectSettings.get_setting("application/config/version", "")), 12, DIM))
 	var option := CheckBox.new()
 	option.text = "Optional GHOST first-turn +1 DRAW (DSY-001b)"
 	option.button_pressed = g.ghost_draw_enabled
