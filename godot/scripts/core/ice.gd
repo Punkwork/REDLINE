@@ -19,12 +19,13 @@ const DEFS := {
 	"COOKIE_WALL": {"name": "COOKIE WALL", "type": "FORTRESS", "str": 7, "tier": "T1",
 		"subs": [[{"k": "PULP", "v": 2}], [{"k": "TRACE", "v": 2, "then": [{"k": "PULP", "v": 2}]}], [{"k": "SHIELD_BREAK"}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
 	"TERMS_OF_SERVICE": {"name": "TERMS OF SERVICE", "type": "FORTRESS", "str": 9, "tier": "T1",
-		"subs": [[{"k": "PULP", "v": 4}], [{"k": "INSERT", "card": "SPAM", "to": "discard", "v": 1}, {"k": "PULP", "v": 2}], [{"k": "RETALIATE", "v": 2}], [{"k": "PULP", "v": 4}], [{"k": "DEADLOCK", "v": 2}]]},
+		"subs": [[{"k": "PULP", "v": 3}], [{"k": "INSERT", "card": "SPAM", "to": "discard", "v": 1}, {"k": "PULP", "v": 2}], [{"k": "RETALIATE", "v": 2}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK", "v": 2}]]},
 	"AUTO_RENEW": {"name": "AUTO-RENEW", "type": "FORTRESS", "str": 7, "tier": "T1",
 		"subs": [[{"k": "PULP", "v": 2}], [{"k": "HARDEN", "v": 1}], [{"k": "PULP", "v": 2}, {"k": "BW_DRAIN", "v": 1}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK", "v": 2}]]},
+	# TUNE-002 (Playtest 11): AMEND 2 → 1 and TERMS OF SERVICE PULP 4 → 3.
 	# AMEND-001: CONSENT FORM supports TERMS OF SERVICE; its AMEND boosts the ICE to its right for that response.
 	"CONSENT_FORM": {"name": "CONSENT FORM", "type": "TUMBLER", "str": 6, "tier": "T1", "slots": 2,
-		"subs": [[{"k": "TRACE", "v": 3, "then": [{"k": "DISCARD", "v": 1}]}], [{"k": "DEADLOCK"}], [{"k": "AMEND", "v": 2}], [{"k": "HARDEN", "v": 1}], [{"k": "DEADLOCK"}]]},
+		"subs": [[{"k": "TRACE", "v": 3, "then": [{"k": "DISCARD", "v": 1}]}], [{"k": "DEADLOCK"}], [{"k": "AMEND", "v": 1}], [{"k": "HARDEN", "v": 1}], [{"k": "DEADLOCK"}]]},
 	"CAPTCHA": {"name": "CAPTCHA", "type": "TUMBLER", "str": 6, "tier": "T1", "slots": 2,
 		"subs": [[{"k": "DISCARD", "v": 1}], [{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 3, "then": [{"k": "DISCARD", "v": 1}]}], [{"k": "BW_DRAIN", "v": 1}], [{"k": "DEADLOCK"}], [{"k": "TRACE", "v": 4, "then": [{"k": "HARDEN", "v": 1}]}]]},
 	"DOORBELL_CAM": {"name": "DOORBELL CAM", "type": "VOID", "str": 5, "tier": "T1",

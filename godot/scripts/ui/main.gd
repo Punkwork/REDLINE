@@ -284,7 +284,8 @@ func _build_layout() -> void:
 	inspect.visible = false
 	inspect.z_index = 10
 	inspect.gui_input.connect(func(event):
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		# PT11-BUG-1: any click on a pinned card closes it (it used to need a right-click or Esc)
+		if event is InputEventMouseButton and event.pressed:
 			_show_inspect("")
 			inspect.accept_event())
 	add_child(inspect)
@@ -336,7 +337,13 @@ func _process(delta: float) -> void:
 		idle = 0.0
 		_speak_event({"t": "EV-37"})
 
+var inspect_phase := ""
+
 func _input(event: InputEvent) -> void:
+	# PT11-BUG-1: a click outside a pinned card closes it too, so it can never get stuck on screen.
+	if inspection_pinned and event is InputEventMouseButton and event.pressed \
+			and not Rect2(inspect.global_position, inspect.size).has_point(event.position):
+		_show_inspect("")
 	if event is InputEventMouseButton or event is InputEventKey:
 		idle = 0.0
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -492,6 +499,9 @@ func _on_break(i: int, s: int, pick_uid: int = -1) -> void:
 # =====================================================================
 
 func refresh() -> void:
+	# PT11-BUG-1: a pinned card closes when the screen moves on (reward, map, next encounter).
+	if inspection_pinned and g != null and g.phase != inspect_phase:
+		_show_inspect("")
 	if spinning and spin_built:
 		spin_deferred = true   # don't rebuild (and restart) the reels mid-spin
 		return
@@ -799,6 +809,7 @@ func _show_inspect(id: String, pinned: bool = true, uid: int = -1) -> void:
 	inspected_id = id
 	inspected_uid = uid
 	inspection_pinned = pinned and id != ""
+	inspect_phase = g.phase if g != null else ""
 	inspect.visible = id != ""
 	if id == "": return
 
