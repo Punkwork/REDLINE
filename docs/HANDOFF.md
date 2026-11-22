@@ -36,6 +36,8 @@ Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
 | ID | What | Owner | Status |
 |---|---|---|---|
 | **STRIP-001, BW-001, PROBE-001, PROBE-003, BREACH-001, TURN-001, BURST-001, STR-001** | Rules and data behind `Game.CORE_LOOP` | Claude Code | **BUILT**, see the 2026-11-21 log entry; awaiting Playtest 8 |
+| **MAP-003** | 14 Nodes (7 ICE + 7 mixed, one may be ICE) + boss per corporation; multiple paths; full CRED extraction reveals about 3 Nodes ahead; no escape | Claude (design), then Claude Code | WAITING on the open details in the master doc |
+| **EFFECTS-001** | ICE effect table and learning order (`REDLINE_ICE_EFFECTS.md`) | Claude | PROPOSED |
 | **RIDER-001, AMEND-001, DEFRAG-001, PLAY-002** | TRACE riders and JAMMER; CONSENT FORM with AMEND in TERMS & CONDITIONS; DEFRAG discard-then-draw; visible parting shot and per-type sounds (placeholders) | Claude Code | **BUILT**, awaiting Playtest 11 |
 | **PLAY-002 polish** | Final sounds, and per-type animations beyond the PULP shake (TRACE pulse, CORTEX static, card tear, ICE swell, glass); new effect icons on the keys | Claude Code | TO DO |
 | **[UI] Discard view** | While choosing a discard, let the player toggle back to the board (Playtest 10 sheet) | Claude Code | TO DO (with the UI batch) |
