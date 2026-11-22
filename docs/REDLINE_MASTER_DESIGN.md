@@ -2941,3 +2941,7 @@ Designer: row 1 is an encounter, row 16 the boss, row 9 holds the mini-boss Node
 
 Designer: "we want each path to have at minimum 1 each of #3 through #8 node type": Black Market Uplink, Uplink with Clinic, DEAD DROP, Console Lab, SAFEHOUSE, SIGNAL UNCLEAR. With 7 other Nodes per path that leaves one free slot. The Uplink with Clinic counts as an Uplink, so MAP-003c (3+ SAFEHOUSE + Uplink, 1+ each) is always met. This replaces "about 1 Uplink in 3 has a Clinic": every path now reaches a Clinic. Prototype v3: `prototypes/map/map003_generator.py --v3`.
 
+## MAP-003e, CLINIC-001 — Uplink and Clinic merged; Clinic pricing (APPROVED, 2026-11-22)
+
+Designer: "I AGREE" to merging the Black Market Uplink and the Uplink with Clinic into one **Uplink**: buy cards and CAPS, Wipe, REFACTOR, and a **Clinic counter** that removes CORTEX for CRED. Map: five other Node types (Uplink, DEAD DROP, Console Lab, SAFEHOUSE, SIGNAL UNCLEAR); every path has at least one of each and at least 3 SAFEHOUSE + Uplink combined (two free slots). Supersedes MAP-003d's six types. **CLINIC-001** (designer): "30 creds per, with a discount of 25% if they want to remove more. So around 50 cred to remove 2." Working rule: 30 CRED for one CORTEX; removing 2 or more in one visit costs 25% less in total, rounded up (2 = 45, 3 = 68, 4 = 90). Prototype v4: `prototypes/map/map003_generator.py --v4`.
+
