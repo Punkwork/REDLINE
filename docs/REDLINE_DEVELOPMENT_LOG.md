@@ -555,3 +555,5 @@ Playtest 9 sheet (designer): the core loop is fun (PULP, PROBE, rewards and "wan
 **Bot sims (30 Generalist runs):** 8/30 cleared; deaths at CAPTCHA 16, TERMS & CONDITIONS 6; 3.2 turns per encounter; 12.6 PULP to VITAE per encounter; 3.1 threat subs broken before each BREACH; parting shot 1.0 subs and 1.1 VITAE. The bot doesn't plan around HARDEN, SHIELD BREAK or lethal forms and lost far more than the designer in Playtest 9: a worst case.
 
 **Interpretations to confirm:** HARDEN stacks each time it fires; SHIELD BREAK removes all SHIELD when it fires, so PULP before it is still blocked; RETALIATE counts DEADLOCK breaks.
+
+**Log size (LOG-001):** the two oldest entries were moved unchanged to the archive with the BOOST-001 commit. Playtest 10 exported from `236fa36` ([run](https://github.com/Punkwork/REDLINE/actions/runs/44979979788)).
