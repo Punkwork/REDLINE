@@ -2927,3 +2927,5 @@ Designer, 2026-11-21: "The Rustler will encounter 14 nodes and then a final corp
 
 Designer: "yes hardwired is perfect." A **HARDWIRED** card can never leave the deck: Wipe, the Console Lab, DATA PURGE, DECOMPILE and FUSE can't remove it. It shows a small solder-joint marker on its face. Used by BOON-001's drawback boons and EVENT-004's permanent Bloatware.
 
+**BOON-001 details (designer, 2026-11-22):** the player may decline every boon offered ("For now yes"), and boons from different corporations **stack** for the rest of the run ("yes").
+
