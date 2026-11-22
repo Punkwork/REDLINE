@@ -2923,3 +2923,7 @@ Designer, 2026-11-21: "The Rustler will encounter 14 nodes and then a final corp
 
 **BOON-001** (designer's idea, details to design): at the start of each corporation, NUL/REM offers the Rustler **2 or 3 randomized boons**, chosen from that Rustler's pool, that last the run. Some are pure bonuses, some carry a drawback. Designer's examples: start with a special card in the deck; remove one card from the deck; exchange the ORIGIN Ghostware for a random Ghostware; +5 Max VITAE but start with +8 TRACE; +2 BW on the first turn of each encounter but a permanent Bloatware in the deck (e.g. +4 TRACE if it's in hand at the end of your turn). Needs a new card status for cards that can't be removed by any means (working name in HANDOFF; shared with EVENT-004's permanent Bloatware).
 
+## HARDWIRED-001 — Cards that can't be removed (APPROVED, 2026-11-22)
+
+Designer: "yes hardwired is perfect." A **HARDWIRED** card can never leave the deck: Wipe, the Console Lab, DATA PURGE, DECOMPILE and FUSE can't remove it. It shows a small solder-joint marker on its face. Used by BOON-001's drawback boons and EVENT-004's permanent Bloatware.
+
