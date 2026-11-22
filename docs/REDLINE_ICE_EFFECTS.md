@@ -3,11 +3,11 @@
 
 Every subroutine effect and ICE mechanic in one place. **Order** is the sequence in which a player meets each one, **one new thing per encounter**, so they learn by playing. With the MAP-003 structure (7–8 ICE Nodes plus a boss per corporation, `REDLINE_MASTER_DESIGN.md`), HALCYON has room to teach the core set, IRONWATCH the advanced set, and LUCIDA the expert set.
 
-**Complexity:** 1 = read once and understood · 2 = needs one encounter to learn · 3 = changes how you plan a turn · 4 = interacts with other rules or other ICE.
+**Player complexity** (how hard it is for the player to learn and play around; sortable in the Excel export): 1 = read once and understood · 2 = needs one encounter to learn · 3 = changes how you plan a turn · 4 = interacts with other rules or other ICE.
 
 ## Subroutine effects
 
-| Order | Effect | What it does | Complexity | Primary ICE type | Player's answer | Status |
+| Order | Effect | What it does | Player complexity | Primary ICE type | Player's answer | Status |
 |---:|---|---|:-:|---|---|---|
 | 1 | **PULP X** | Take X damage: SHIELD first, then VITAE. | 1 | FORTRESS | SHIELD cards, breaking it | In build |
 | 1 | **DEADLOCK** | Does nothing, but blocks BREACH until broken. Every main ICE has one. | 1 | All | Break it to BREACH | In build |
@@ -29,7 +29,7 @@ Every subroutine effect and ICE mechanic in one place. **Order** is the sequence
 
 Each belongs to one mini-boss only. They are abilities, not subroutines: they can't be broken or disabled, and the map explains them before the player commits (`REDLINE_MINIBOSSES.md`).
 
-| Corporation | Mini-boss | Ability | What it does | Complexity | Player's answer | Status |
+| Corporation | Mini-boss | Ability | What it does | Player complexity | Player's answer | Status |
 |---|---|---|---|:-:|---|---|
 | HALCYON | MEMORY LANE (FORTRESS) | **FOND MEMORIES** | Every other Corporation Response, 2 MEMORY Bloatware are shuffled into your draw pile; each MEMORY in your hand at the end of your turn costs 2 SHIELD. | 3 | Finish fast; DEFRAG and UNINSTALLER clear MEMORY | Designed |
 | IRONWATCH | THE GRID (VOID) | **PROFILE** | Each response it adds one extra subroutine based on the card type you played most that turn (CLOAK → TRACE 3 ▸ PULP 2, EXPLOIT → HARDEN 2, Icepick breaks → RETALIATE 2, nothing → PULP 4), forecast live on a PROFILE plate. | 4 | Vary how you play each turn | Designed |
@@ -39,7 +39,7 @@ The mini-boss sits at row 9, so its ability is the one new thing on that Node; e
 
 ## ICE mechanics (not subroutines, also taught in order)
 
-| Order | Mechanic | What it does | Complexity | Type | Status |
+| Order | Mechanic | What it does | Player complexity | Type | Status |
 |---:|---|---|:-:|---|---|
 | 1 | **TUMBLER rotation** | Only subroutines in the slots act; the pool rotates each turn; a break tumbles the next one in at once. | 2 | TUMBLER | In build |
 | 1 | **Parting shot** | At BREACH, every unbroken showing subroutine fires once. | 2 | All | In build |
