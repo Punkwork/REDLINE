@@ -255,3 +255,6 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |
 | CHROME-001 / CARDS-001 source notes | Recorded available source and edit history for nine generated assets and corrected Whirlwind Bloatware. Exact prompts, model IDs and the corrected concept PNG are still missing. | 2026-11-17 (Codex) |
 | VIS-001 doc | `REDLINE_VISUAL_LANGUAGE.md` and `docs/visual/` (reference images, placeholder backgrounds, mascot SVGs) added for Codex. | 2026-11-17 (Claude) |
+
+### ARCH-V2-001 — VAS-001 visual target (2026-11-23)
+Designer confirmed that the supplied 1536×864 PANOPTICON HALCYON mockup should be reproduced as closely as practical, including its dense mechanical console layout. Formal visual specification: `docs/architecture-v2/VAS-001.md`, cross-referenced with CAS-001. Original reference JPEG was supplied in chat and is NOT YET VERIFIED as a versioned GitHub asset; obtain it before visual implementation. Visual direction confirmed, but new assets, exact scene files and implementation still require milestone review. No gameplay/rules changes authorized.
