@@ -16,6 +16,7 @@ Read `AGENTS.md`, `CLAUDE.md`, `docs/REDLINE_MASTER_DESIGN.md`, `docs/HANDOFF.md
 - [VALIDATION.md](VALIDATION.md) — baseline evidence and acceptance gates.
 - [ARCHITECTURE_DECISIONS.md](ARCHITECTURE_DECISIONS.md) — rationale, trade-offs and approval status.
 - [COMPLIANCE_CHECKLIST.md](COMPLIANCE_CHECKLIST.md) — evidence-based review gate for architectural changes.
+- [STATIC_SOURCE_AUDIT.md](STATIC_SOURCE_AUDIT.md) — read-only code audit, risks, proposed first milestone and Claude Code handoff.
 
 ## Current implementation
 `godot/scenes/Main.tscn` and `scripts/ui/main.gd` currently construct most UI in code; `scripts/ui/friendly_lie/encounter.gd` renders the encounter. `scripts/core/game.gd`, `cards.gd`, and `ice.gd` are the initial rules reference. Existing `godot/tests/` and CI fixtures must continue to work unless a designer-approved migration changes their entrypoints.
