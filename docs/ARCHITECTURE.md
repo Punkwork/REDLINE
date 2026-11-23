@@ -2,6 +2,10 @@
 
 This is the developer map for the Godot 4.3 HALCYON slice in Punkwork/REDLINE. The checkout contains the game under `godot/`. Use [HANDOFF](HANDOFF.md) for active work and [the master design](REDLINE_MASTER_DESIGN.md) and [core rules](REDLINE_CORE_RULES.md) for approved behaviour. The `pre-claude-code` tag marks the DEV-001 baseline.
 
+## Approved target architecture (ARCH-V2-001, 2026-11-23)
+
+The sections below document the **existing four-node prototype**, not the completed full-game architecture. The designer approved a migration on `architecture-v2` toward a hybrid scene-based, component-driven, data-driven Godot 4.3 GL Compatibility architecture. `main` stays the stable prototype; existing rules and test behavior remain the initial reference. Meaningful reusable scenes, typed GDScript components, corporation presentation resources, and explicit rules/presentation boundaries are allowed on the migration branch. Do not assume these are already built. First propose component boundaries and a migration/test plan, then implement one representative playable encounter after review. No approved gameplay changes, automatic release changes, or merge into `main` are implied. See `AGENTS.md` and the ARCH-V2-001 master-design entry.
+
 ## Entry point and state flow
 
 `godot/project.godot` starts `res://scenes/Main.tscn` with the GL Compatibility renderer. The root Control runs `scripts/ui/main.gd` and constructs the rest of the UI in code. There are no autoloads. Main owns a `Game` and a `NulRem` picker. It opens at Rustler selection with a fresh model, then starts the selected Rustler's run and refreshes.
