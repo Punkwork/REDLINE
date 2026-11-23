@@ -14,6 +14,8 @@ Read `AGENTS.md`, `CLAUDE.md`, `docs/REDLINE_MASTER_DESIGN.md`, `docs/HANDOFF.md
 - [GAMEPLAY_INTERFACE.md](GAMEPLAY_INTERFACE.md) — state/action boundary and timing.
 - [MIGRATION_PLAN.md](MIGRATION_PLAN.md) — milestones, rollback, and approvals.
 - [VALIDATION.md](VALIDATION.md) — baseline evidence and acceptance gates.
+- [ARCHITECTURE_DECISIONS.md](ARCHITECTURE_DECISIONS.md) — rationale, trade-offs and approval status.
+- [COMPLIANCE_CHECKLIST.md](COMPLIANCE_CHECKLIST.md) — evidence-based review gate for architectural changes.
 
 ## Current implementation
 `godot/scenes/Main.tscn` and `scripts/ui/main.gd` currently construct most UI in code; `scripts/ui/friendly_lie/encounter.gd` renders the encounter. `scripts/core/game.gd`, `cards.gd`, and `ice.gd` are the initial rules reference. Existing `godot/tests/` and CI fixtures must continue to work unless a designer-approved migration changes their entrypoints.
