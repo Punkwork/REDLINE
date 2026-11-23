@@ -567,3 +567,7 @@ Created six proposed documents under `docs/architecture-v2/`: README, scene hier
 ## 2026-11-23 — ARCH-V2-001 decision history and compliance gate (ChatGPT)
 
 At the designer's request, added `docs/architecture-v2/ARCHITECTURE_DECISIONS.md` (curated rationale and approval boundaries) and `COMPLIANCE_CHECKLIST.md` (evidence-based review checklist). Linked them from the blueprint README and required consultation before significant architecture changes in identical AGENTS.md and CLAUDE.md. No gameplay code changed, no baseline tests run, and no unreviewed implementation details approved.
+
+## 2026-11-23 — ARCH-V2-001 static source audit (ChatGPT)
+
+Inspected GitHub source on `architecture-v2`: project/scene, UI/controller and interaction scripts, Game/CardDB/IceDB, and CI workflow. Added `docs/architecture-v2/STATIC_SOURCE_AUDIT.md` with source-grounded dependency map, proposed file structure, risks and regression matrix. Critical finding: current `CORE_LOOP := true` causes CI to skip legacy screenshot fixtures. No Godot execution, screenshot review, baseline verification or gameplay changes performed. Proposals remain subject to designer approval.
