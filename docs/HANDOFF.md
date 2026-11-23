@@ -34,7 +34,7 @@ This is the one list of work that has been **decided but not finished**, so Code
 |---|---|---|
 | Preserve `main` as prototype; use existing `architecture-v2` for rebuild | Designer / agents | BRANCH CREATED; governance updated |
 | Record exact prototype baseline commit, run existing tests, and create permanent baseline tag if approved | Claude Code | TO DO; no test/tag verification claimed |
-| Propose hybrid scene/component/data architecture, component boundaries, signals, resources, migration plan and acceptance tests | Claude Code (design review with Claude) | BLUEPRINT DRAFTED and STATIC SOURCE AUDIT and DEPENDENCY MAP added in `docs/architecture-v2/`; Claude Code runtime verification and designer architecture review required |
+| Propose hybrid scene/component/data architecture, component boundaries, signals, resources, migration plan and acceptance tests | Claude Code (design review with Claude) | BLUEPRINT DRAFTED and STATIC SOURCE AUDIT, DEPENDENCY MAP and proposed COMPONENT ARCHITECTURE SPEC (CAS-001) added in `docs/architecture-v2/`; Claude Code runtime verification and designer architecture review required |
 | Build one representative playable ICE encounter without changing approved rules | Claude Code | TO DO; after architecture review |
 | Compare behavior against prototype; demonstrate second corporation skin without duplicating the encounter UI | Claude Code | TO DO; after first encounter |
 | Plan integration, CI and future release policy; request explicit approval before any merge into `main` | Claude Code / designer | TO DO |
