@@ -91,6 +91,10 @@ Use `SIM=1 "$GODOT" --headless --path godot --script res://tests/test_game.gd` t
 - Record the exact `main` baseline SHA and passing tests before applying migration code. A permanent prototype tag is recommended but not yet created or verified. Do not claim a baseline was validated merely because this branch exists.
 - Keep designer-only approvals, decision IDs, copy guards, readability, privacy, CI and release protections intact. The new branch is not a blanket approval for implementation details.
 
+## Architecture documentation review (ARCH-V2-001)
+
+Before proposing or implementing a significant architecture change on `architecture-v2`, read `docs/architecture-v2/ARCHITECTURE_DECISIONS.md` and `docs/architecture-v2/COMPLIANCE_CHECKLIST.md` alongside the blueprint and authoritative rules. Document the relevant checklist results, evidence, exceptions, and designer review in the change handoff. A proposed scene hierarchy or resource contract is **not** automatically approved. This documentation review requirement does not authorize any gameplay or structural change by itself.
+
 ## 7. Design docs: which are current (DOCS-001)
 
 When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register) wins, then **`docs/REDLINE_CORE_RULES.md`**, then the topic docs it names. Within a rules doc, its **"Later amendments"** tables win over older text in the same doc, even where that text wasn't edited.
