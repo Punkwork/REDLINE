@@ -2953,3 +2953,12 @@ Playtest 11: the designer died at TERMS & CONDITIONS, losing 10 + 13 + 6 VITAE i
 ## PROBE-004 — PROBE is choose-one (APPROVED, 2026-11-22)
 
 Designer: "the card should do what it currently does OR reveal hidden subroutines on a VOID ice. Same costs". Core-loop build: PROBE reads *Choose one: target ICE −2 STR this encounter; or target VOID: reveal all its face-down subroutines.* Both modes share the PROBE-003 cost count; the −2 STR mode no longer reveals (replaces STRIP-001's "a PROBE reveals the top one"). *Interpretation to confirm:* "reveal hidden subroutines" = all of them.
+
+
+## ARCH-V2-001 — Full-game architecture and development branch (APPROVED, 2026-11-23)
+
+**Designer decisions:** The current Godot build is a playable four-node prototype, not the required architecture for the full game. The designer approved moving toward a hybrid scene-based, component-driven, data-driven Godot architecture, and explicitly approved `architecture-v2` as the primary development branch while `main` remains the stable prototype baseline. This supersedes the single-scene/no-new-scenes constraint **for the migration branch** and the earlier default-to-`main` development rule for architecture work. Existing prototype/release procedures remain intact unless separately approved for change.
+
+**Scope:** Meaningful reusable Godot scenes, typed GDScript components, data-driven corporation presentation/content, and strong rules/presentation separation. Preserve the existing validated rules and their tests as the initial behavioral reference; do not change card effects, balance, approved rules, copy guards or gameplay solely because the architecture changes. Start with a reviewed architecture plan and one complete playable ICE encounter, then verify behavior and scalability before broader migration. Exact scene layout, data schema, use of signals, migration steps, and future release/merge gate are **not yet approved**. No fork or new repository is required. Do not merge into `main` without explicit designer approval.
+
+**Status:** Architectural direction and branch policy APPROVED by designer; implementation not started. `architecture-v2` branch created from `main`; prototype tag and validation results not yet recorded.
