@@ -7,8 +7,8 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 ## How we work
 
-1. **Work on `main`** (designer, 2026-11-17; replaces the 2026-11-15 rule that used `codex/halcyon-playtest-stabilization`). Follow the working agreement in `AGENTS.md` / `CLAUDE.md`: start from the latest `main`, record design decisions in `REDLINE_MASTER_DESIGN.md`, report the commit where finished work lives, and ask the designer before creating a branch. The former working branch was merged into `main` at a523502 and is no longer used.
-2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes them from `main`.
+1. **Work on `architecture-v2` for the approved rebuild (ARCH-V2-001, designer 2026-11-23).** `main` is the preserved prototype baseline. Pull the latest `architecture-v2`, record decisions in the master design doc, report commit hashes, and ask before creating another branch or merging into `main`. This supersedes MAIN-001's `main`-first policy **for migration work only**; the former branch history remains unchanged.
+2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes migration copies from `architecture-v2` (prototype copies may remain on `main` and must be labeled).
 3. **Who does what (DEV-001, 2026-11-18; details in `CLAUDE.md` / `AGENTS.md`).**
    - **Claude Code:** the Godot build (`godot/`), tests, fixtures, CI, exports, `REDLINE_CURRENT_STATUS.md`.
    - **Claude (Panopticon project):** design docs and proposals, playtest analysis, this file, the project copies.
@@ -22,11 +22,24 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 6. **Development log size (LOG-001).** Keep `REDLINE_DEVELOPMENT_LOG.md` under about **60 KB** so Claude can rewrite the project copy in one pass. When it grows past that, move the oldest dated entries, whole, to the end of `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` (oldest first, nothing reworded) and note the move in the log. Entries stay append-only; the archive is never edited except to append.
 
-7. **Builds come from `release`, not `main` (RELEASE-001, 2026-11-18).** Work lands on `main`. To cut a playtest build, fast-forward `release` to `main`, push, and tag the commit `playtest-N`; only `release` exports Windows builds. Nobody commits to `release` directly. A bad build is rebuilt from its tag or `release` is reset to the last good tag.
+7. **Builds (RELEASE-001; ARCH-V2-001 amendment 2026-11-23).** Existing prototype releases remain tied to `main`/`release` and require designer approval. Architecture work lands on `architecture-v2` and does **not** trigger a migration release, move `release`, or merge into `main`. Define a new release gate before shipping the rebuilt game.
 
 **Statuses:** **TO DO** (decided, not started) · **IN PROGRESS** (name who) · **BUILT** (in code, needs a playtest or check) · **DONE** · **WAITING** (needs a designer decision).
 
 ---
+
+## Architecture migration — ARCH-V2-001 (APPROVED direction; implementation NOT STARTED)
+
+| Item | Owner | Status |
+|---|---|---|
+| Preserve `main` as prototype; use existing `architecture-v2` for rebuild | Designer / agents | BRANCH CREATED; governance being updated |
+| Record exact prototype baseline commit, run existing tests, and create permanent baseline tag if approved | Claude Code | TO DO; no test/tag verification claimed |
+| Propose hybrid scene/component/data architecture, component boundaries, signals, resources, migration plan and acceptance tests | Claude Code (design review with Claude) | TO DO; designer review required |
+| Build one representative playable ICE encounter without changing approved rules | Claude Code | TO DO; after architecture review |
+| Compare behavior against prototype; demonstrate second corporation skin without duplicating the encounter UI | Claude Code | TO DO; after first encounter |
+| Plan integration, CI and future release policy; request explicit approval before any merge into `main` | Claude Code / designer | TO DO |
+
+Existing gameplay and visual tasks below remain tracked; reassess their target branch and priority during migration planning rather than silently changing rules or treating them as completed.
 
 ## To build (approved, not yet in the build)
 
