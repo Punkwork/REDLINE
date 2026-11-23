@@ -2949,3 +2949,7 @@ Designer: "I AGREE" to merging the Black Market Uplink and the Uplink with Clini
 
 Playtest 11: the designer died at TERMS & CONDITIONS, losing 10 + 13 + 6 VITAE in 3 turns. Designer: "fix all including conditions tuning". **AMEND 2 → 1** on CONSENT FORM, and TERMS OF SERVICE's two PULP 4 subroutines → **PULP 3**. Everything else on the Node stays.
 
+
+## PROBE-004 — PROBE is choose-one (APPROVED, 2026-11-22)
+
+Designer: "the card should do what it currently does OR reveal hidden subroutines on a VOID ice. Same costs". Core-loop build: PROBE reads *Choose one: target ICE −2 STR this encounter; or target VOID: reveal all its face-down subroutines.* Both modes share the PROBE-003 cost count; the −2 STR mode no longer reveals (replaces STRIP-001's "a PROBE reveals the top one"). *Interpretation to confirm:* "reveal hidden subroutines" = all of them.

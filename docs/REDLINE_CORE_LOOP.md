@@ -9,12 +9,13 @@
 | BW-001 | BW refills to **3** each turn (was 4). DRAW stays 6. |
 | PROBE-001 | PROBE costs **0 BW** (−2 STR for the encounter). |
 | PROBE-003 | Each PROBE on the **same ICE in the same turn** costs 1 BW more than the last (0, 1, 2…). Counts every copy, resets each turn, PROBE only. The starter keeps **3 PROBEs** (PROBE-002 reversed). "The deeper you probe, the costlier it gets." |
+| PROBE-004 | PROBE is **choose-one**, same costs: *target ICE −2 STR this encounter*, **or** *target VOID: reveal all its face-down subroutines*. Both modes share the PROBE-003 cost count. The −2 STR mode no longer reveals. Reveal is unavailable if nothing is face-down; the choice appears only when PROBE is dropped on a VOID. (Designer, 2026-11-22.) |
 | BREACH-001 | **Parting shot:** at END TURN after a BREACH, every unbroken subroutine that is active (TUMBLER slot, FORTRESS) or revealed (VOID) fires once, left to right, top to bottom. Not a Corporation Response: nothing rotates or advances. |
 | TURN-001 | End of turn: end-of-turn effects → discard non-CACHED cards → **draw the next hand (6)** → Corporation Response → next turn. |
 | BURST-001 | **BURST** 3 BW: gain 5 BW. Each play costs that copy 1 more BW for the rest of the encounter. Per copy; resets each encounter; not BURNED; no BW cap. |
 | STR-001 | ICE STR **+2**; starter Icepicks all **STR 2, boost 1 BW → +1**; fallback STR limits +2; DEEP PROBE **−5**. |
 | CACHE-001 | CACHE shows a duration in a card corner: ∞ = the encounter, or N turns. |
-| STRIP-001 | This build: Generalist only; TUMBLER rotation with no waiting floor (no BOOTING); VOID subroutines start face-down and a **PROBE reveals the top one**; fixed PULP; no passives, curves, rolls, CORTEX, bloat tax, COMPILE, viruses or other Rustlers. Basic Extractor and CORTEX BUFFER stay as inert cards. Card removal: DECOMPILE on the reward screen. |
+| STRIP-001 | This build: Generalist only; TUMBLER rotation with no waiting floor (no BOOTING); VOID subroutines start face-down and a **PROBE in its reveal mode reveals all of them** (PROBE-004); fixed PULP; no passives, curves, rolls, CORTEX, bloat tax, COMPILE, viruses or other Rustlers. Basic Extractor and CORTEX BUFFER stay as inert cards. Card removal: DECOMPILE on the reward screen. |
 
 ## 1a. ICE forms (FORM-001) and threat (FORM-002), 2026-11-21
 - **WARY:** current STR below half the printed STR. **LETHAL:** below half STR and at least half the subroutines broken (rounded up: 2 → 1, 3 → 2, 4 → 2, 5 → 3). LETHAL lasts the encounter; its PULP and TRACE deal double, parting shot included. Black ICE show the forms but never double. The mascot mood follows the form in this build.

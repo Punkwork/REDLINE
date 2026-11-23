@@ -20,5 +20,6 @@ Keep it quick: one row per encounter. Rules for this build: `REDLINE_CORE_LOOP.m
 5. PULP mattered and I had to defend.
 6. Card rewards made my deck noticeably better.
 7. I wanted to play another run.
+8. On a VOID, choosing between PROBE's reveal and −2 STR was a real decision. (PROBE-004)
 
 **Bugs:** one line each: the screen, what you did, what happened.
