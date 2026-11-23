@@ -23,3 +23,5 @@ Read `AGENTS.md`, `CLAUDE.md`, `docs/REDLINE_MASTER_DESIGN.md`, `docs/HANDOFF.md
 
 ## Decision gate
 Claude Code should review these proposals against actual call sites, asset conventions, CI and tests, then provide a focused architecture decision package. **Do not create production scenes until the designer reviews and approves the specific plan.**
+
+- [DEPENDENCY_MAP.md](DEPENDENCY_MAP.md) — source-grounded call paths, coupling analysis, migration seams and validation questions.
