@@ -26,3 +26,5 @@ Claude Code should review these proposals against actual call sites, asset conve
 
 - [DEPENDENCY_MAP.md](DEPENDENCY_MAP.md) — source-grounded call paths, coupling analysis, migration seams and validation questions.
 - [COMPONENT_ARCHITECTURE_SPEC.md](COMPONENT_ARCHITECTURE_SPEC.md) — CAS-001 formal component contracts, ownership, lifecycle, target dependencies and gated migration.
+
+- [VAS-001.md](VAS-001.md) — designer-confirmed dense mechanical console visual target, proposed layout/asset/component specifications and vertical-slice fidelity acceptance.
