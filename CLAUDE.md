@@ -1,15 +1,15 @@
 # Working agreement for AI agents (Claude Code, Claude, Codex)
 
-This repository, Punkwork/REDLINE on `main`, is the shared source of truth for every agent working on PANOPTICON (a Godot 4.3 deck-building roguelike; the repo and file prefix are REDLINE, the game is PANOPTICON).
+This repository, Punkwork/REDLINE, with active architecture work on `architecture-v2`, is the shared source of truth for every agent working on PANOPTICON (a Godot 4.3 deck-building roguelike; the repo and file prefix are REDLINE, the game is PANOPTICON).
 
-This file and `AGENTS.md` are identical. Edit both together, word for word.
+`AGENTS.md` and `CLAUDE.md` must remain identical. Edit both together, word for word.
 
 ## 1. Rules for every agent
 
-1. **Start from the latest `main`.** Pull before you begin any work.
+1. **Start from the latest `architecture-v2` for the approved architecture migration (ARCH-V2-001).** Pull before beginning work. `main` remains the preserved prototype baseline; do not push migration work to `main`.
 2. **Record design decisions in `docs/REDLINE_MASTER_DESIGN.md`.** Other docs and chat transcripts do not count as decisions until they are in the master document.
 3. **Report the commit.** When work is finished, tell the user the commit hash where it lives.
-4. **Ask before creating a branch.** By default, work lands on `main`. The one standing exception is `release` (§5).
+4. **Branch policy (ARCH-V2-001):** the designer explicitly approved `architecture-v2` as the primary working branch for the rebuild. Work on this existing branch; ask before creating any further branches, merging into `main`, changing the repository default branch, or cutting a release. `main` remains unchanged until designer-authorized integration.
 5. **Only the designer approves.** A proposal stays PROPOSED until the designer approves it in a session. Never mark anything APPROVED yourself.
 6. **Every change carries a decision ID** (e.g. ARCH-001) in the design doc, `docs/HANDOFF.md` and `docs/REDLINE_DEVELOPMENT_LOG.md`.
 
@@ -33,7 +33,7 @@ Copies of design docs kept outside this repository, such as Claude Project docs 
 **Engine and style**
 - **Godot 4.3, GL Compatibility renderer.** Do not upgrade the engine or change project settings without the designer's approval.
 - **Typed GDScript**, as the existing code does (`var g: Game`, `func _ready() -> void`). Follow the folder layout and naming already in the repo.
-- **The UI is built in code.** There is one scene (`godot/scenes/Main.tscn`) and no autoload singletons. Don't introduce scenes, autoloads or a signal bus unless the designer asks.
+- **Existing prototype:** the UI is built in code, with one scene (`godot/scenes/Main.tscn`) and no autoloads. **Approved future direction (ARCH-V2-001):** design a hybrid scene-based, component-driven, data-driven UI. Reusable `.tscn` scenes, typed GDScript components, theme/resources and narrowly scoped signals are permitted on `architecture-v2` where justified by a reviewed architecture plan. Do not introduce global autoloads, a global signal bus, or unrelated refactors automatically. Preserve gameplay/presentation separation. This permission is not approval to implement every proposed scene or to rewrite the rules engine.
 
 **Map (details in `docs/ARCHITECTURE.md`)**
 - `godot/scripts/core/`: the rules engine and data (`game.gd`, `cards.gd`, `ice.gd`), NUL/REM, punch cards, THE CARBON record, local JSON helper and copy guards.
@@ -80,9 +80,18 @@ Use `SIM=1 "$GODOT" --headless --path godot --script res://tests/test_game.gd` t
 
 ## 5. Builds (RELEASE-001)
 
-Work lands on `main`; pushes and PRs to `main` validate only. To cut a playtest build when the designer asks: fast-forward `release` to `main`, push, let the workflow export, verify the artifact (`BUILD_COMMIT.txt`, SHA-256, guide, checklist), and tag the commit `playtest-N`. Nobody commits to `release` directly. A bad build is rebuilt from its tag, or `release` is reset to the last good tag.
+**Existing release workflow is preserved for the prototype:** `main` remains the stable baseline; `release` exports only when the designer authorizes a prototype playtest build using the established procedure. The `architecture-v2` migration does not automatically change the release branch or export workflow. Do not fast-forward `release` from `architecture-v2` or merge migration work into `main` without designer approval. Before a future migration release, explicitly design and approve its validation/export procedure.
 
-## 6. Design docs: which are current (DOCS-001)
+## 6. Approved architecture migration (ARCH-V2-001, designer 2026-11-23)
+
+- `architecture-v2` is the primary development branch for the full-game rebuild. `main` is the stable, preserved four-node prototype. No automatic merges between them.
+- Target: hybrid Godot 4.3 GL Compatibility architecture using scene composition for meaningful screens/widgets, reusable typed GDScript components, data-driven content and corporation presentation, and independent game rules. Scene boundaries and data formats must be proposed and reviewed before broad implementation.
+- Preserve and regression-test the proven rules engine (`game.gd`, `cards.gd`, `ice.gd`) as the initial behavior reference. No gameplay or balancing changes are authorized by this architecture decision.
+- First deliverable is an architecture plan and one fully playable representative ICE encounter; compare against existing behavior and tests. Expand only after validation. Prefer small testable modules over giant scripts or excessive tiny scenes.
+- Record the exact `main` baseline SHA and passing tests before applying migration code. A permanent prototype tag is recommended but not yet created or verified. Do not claim a baseline was validated merely because this branch exists.
+- Keep designer-only approvals, decision IDs, copy guards, readability, privacy, CI and release protections intact. The new branch is not a blanket approval for implementation details.
+
+## 7. Design docs: which are current (DOCS-001)
 
 When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register) wins, then **`docs/REDLINE_CORE_RULES.md`**, then the topic docs it names. Within a rules doc, its **"Later amendments"** tables win over older text in the same doc, even where that text wasn't edited.
 
