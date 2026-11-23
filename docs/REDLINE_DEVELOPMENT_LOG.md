@@ -563,3 +563,7 @@ Designer's sheet: run 1 died at TERMS & CONDITIONS (CONSENT FORM + TERMS OF SERV
 ## 2026-11-23 — ARCH-V2-001 blueprint folder drafted (ChatGPT)
 
 Created six proposed documents under `docs/architecture-v2/`: README, scene hierarchy, data model, gameplay interface, migration plan and validation. They are architecture proposals, not designer-approved implementation details. No Godot files or rules changed; baseline tests and tag remain pending. HANDOFF updated for designer review.
+
+## 2026-11-23 — ARCH-V2-001 decision history and compliance gate (ChatGPT)
+
+At the designer's request, added `docs/architecture-v2/ARCHITECTURE_DECISIONS.md` (curated rationale and approval boundaries) and `COMPLIANCE_CHECKLIST.md` (evidence-based review checklist). Linked them from the blueprint README and required consultation before significant architecture changes in identical AGENTS.md and CLAUDE.md. No gameplay code changed, no baseline tests run, and no unreviewed implementation details approved.
