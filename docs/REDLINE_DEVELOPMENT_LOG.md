@@ -579,3 +579,7 @@ Added `docs/architecture-v2/DEPENDENCY_MAP.md` based on inspected Godot source. 
 ## 2026-11-23 — ARCH-V2-001 formal component specification (ChatGPT)
 
 Created `docs/architecture-v2/COMPONENT_ARCHITECTURE_SPEC.md` (CAS-001) with 18 proposed component contracts, ownership and lifecycle, command/snapshot boundary, allowed dependencies, migration stages, acceptance matrix and open designer decisions. Based on existing source audit and architecture documents. This is a PROPOSAL only: no Godot execution, production scenes, gameplay changes, or implementation approval.
+
+## 2026-11-23 — ARCH-V2-001 VAS-001 visual architecture specification
+
+Designer confirmed faithful reproduction of the supplied 1536×864 dense mechanical console mockup as the vertical-slice visual target. Created `docs/architecture-v2/VAS-001.md` defining reference regions, approximate geometry, material/type tokens, Godot-native vs art-backed controls, visual states, modular asset inventory, viewport adaptations, screenshot comparison and milestone acceptance. The reference image is not yet confirmed uploaded to GitHub. Documentation only; no graphics or gameplay implementation, tests, or implementation approval.
