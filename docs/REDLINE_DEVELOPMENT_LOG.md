@@ -575,3 +575,7 @@ Inspected GitHub source on `architecture-v2`: project/scene, UI/controller and i
 ## 2026-11-23 — ARCH-V2-001 dependency map (ChatGPT)
 
 Added `docs/architecture-v2/DEPENDENCY_MAP.md` based on inspected Godot source. Traced click/drag card play, ICE break, targeted card, end-turn response, and UI refresh call paths; identified controller↔view coupling, direct Game dispatch from drop targets, and proposed staged migration seams. No runtime test, scene implementation, gameplay modification or architecture approval claimed.
+
+## 2026-11-23 — ARCH-V2-001 formal component specification (ChatGPT)
+
+Created `docs/architecture-v2/COMPONENT_ARCHITECTURE_SPEC.md` (CAS-001) with 18 proposed component contracts, ownership and lifecycle, command/snapshot boundary, allowed dependencies, migration stages, acceptance matrix and open designer decisions. Based on existing source audit and architecture documents. This is a PROPOSAL only: no Godot execution, production scenes, gameplay changes, or implementation approval.
