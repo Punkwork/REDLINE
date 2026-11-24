@@ -4,6 +4,8 @@ PANOPTICON is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the 
 
 ## Layout
 
+- [UI Design Bible](PANOPTICON_UI_DESIGN_BIBLE.md) — consolidated UI working specification and component register; UI proposals live in GitHub Issues.
+
 - `docs/` — authoritative design and project-management documents.
   - `REDLINE_MASTER_DESIGN.md` — design authority; preserve LOCKED decisions unless explicitly revised.
   - `REDLINE_BIBLE.md` — world and dialogue reference (lore only; its rules predate the 2026-11-12 redesign, DOCS-001).

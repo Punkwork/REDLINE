@@ -79,6 +79,18 @@ ENC-CONCEPT-001 supersedes the earlier flip-clock layout; ICE-ANALOG-001 icon ke
 **CARD-CONTROLS-001 — PROGRAM bay and card inspection (APPROVED, 2026-11-17):** Install PROGRAM cards by dragging them into the PCI-style bay on the left HUD. Installed Programs appear there for hover and click inspection and retain their controls. Drop a targeted SCRIPT on eligible ICE, or an untargeted SCRIPT on the upper half of the encounter. Right-click enlarges a card to 150% and right-click again closes the preview.
 
 ## 4. Consolidated source specifications
+
+### Navigation to imported specifications
+
+- [VIS-001 — Visual language](#source-1-docsredline_visual_languagemd)
+- [ENC/ICE-ANALOG-001 — Encounter and ICE](#source-2-docsredline_encounter_analogmd)
+- [Legacy UI and NUL/REM](#source-3-docsredline_ui_nulrem_design_for_claudemd)
+- [ADP-001 — Atomic Deco Punk](#source-4-docsredline_atomic_deco_punkmd)
+- [Painted UI kit 1](#source-5-docsvisualconcept-artui_kit_briefmd)
+- [Painted UI kit 2](#source-6-docsvisualconcept-artui_kit_brief_2md)
+- [Painted UI kit 3](#source-7-docsvisualconcept-artui_kit_brief_3md)
+
+Original source paths remain available for compatibility until the full dependency audit and narrative relocation are complete.
 The following imported sections preserve source wording and decision IDs for lossless migration. Historical layouts, proposed values, prompts and implementation notes are not new approvals. Source links and asset paths remain relative to their original source locations. The old documents remain available pending dependency and narrative relocation audit; do not maintain parallel new UI specifications.
 
 
