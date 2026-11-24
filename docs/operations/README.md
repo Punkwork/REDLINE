@@ -15,9 +15,9 @@ At 22:00 America/Toronto daily, ChatGPT consolidates reports, both registers, ac
 
 ## Project progress — OPS-002
 
-**Final goal:** complete, stable, designer-accepted three-corporation PANOPTICON game with validated Windows distribution. [Canonical milestone definitions and acceptance gates](../REDLINE_MASTER_DESIGN.md#ops-002--project-goals-milestones-and-progress-measurement-direction-2026-11-24).
+**Final goal:** commercially release a complete, designer-accepted PANOPTICON on Steam (OPS-002a); validated Windows distribution and creative quality are prerequisites. [Canonical milestone definitions and acceptance gates](../REDLINE_MASTER_DESIGN.md#ops-002--project-goals-milestones-and-progress-measurement-direction-2026-11-24).
 
-**Baseline: 2026-11-24 — provisional, awaiting designer confirmation.** Accepted final milestone gates: **0 evidenced / 8 proposed**. This is not 0% of work completed. Overall effort completion: **not yet measurable** (scope, weights and acceptance baseline pending). Existing substantial implementation is acknowledged below.
+**Baseline: 2026-11-24 — provisional, awaiting designer confirmation.** Accepted final milestone gates: **0 evidenced / 9 proposed**. This is not 0% of work completed. Overall effort completion: **not yet measurable** (scope, weights and acceptance baseline pending). Existing substantial implementation is acknowledged below.
 
 | ID | Milestone | Evidence-based stage | Next evidence / blocker |
 |---|---|---|---|
@@ -29,9 +29,12 @@ At 22:00 America/Toronto daily, ChatGPT consolidates reports, both registers, ac
 | M06 | Presentation / accessibility | Partial build | Existing VIS/CARDS work and pending UI/audio batch in HANDOFF; full-run validation |
 | M07 | Beta / release candidate | Not evidenced | Earlier Windows playtest export is not final release validation; current real Windows tests and defect gates |
 | M08 | Final acceptance | Not evidenced | Designer-approved scope and release candidate |
+| M09 | Commercial Steam launch | Not evidenced | Steamworks readiness, store/build review, launch authorization and public purchasability |
 
 Sources: [HANDOFF](../HANDOFF.md), [current build status](../REDLINE_CURRENT_STATUS.md) (dated and potentially stale), [master design](../REDLINE_MASTER_DESIGN.md), [dialogue architecture](../PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md). No fresh code/test audit performed for this baseline; architecture-v2 and current PR/issue state must be reconciled at review. No gate is asserted accepted without evidence.
 
 **Next proposed milestone focus:** M01 validation and M02 architecture reconciliation; designer selects actual priorities.
 
-**Daily update protocol:** During the existing 22:00 Toronto review, refresh this single snapshot, recording date, evidence links/commit, stage changes, accepted gates count, change from previous review, next gate and blockers. Link daily priorities and native issue/PR IDs to M01–M08. Preserve dated changes in DAILY_PRIORITIES.md rather than duplicating backlog. Missing evidence = unknown, not failure or completion. Only designer confirms acceptance and scope/weight changes. Do not equate gate count with effort percentage. No separate progress register for Claude.
+**Daily update protocol:** During the existing 22:00 Toronto review, refresh this single snapshot, recording date, evidence links/commit, stage changes, accepted gates count, change from previous review, next gate and blockers. Link daily priorities and native issue/PR IDs to M01–M09. Preserve dated changes in DAILY_PRIORITIES.md rather than duplicating backlog. Missing evidence = unknown, not failure or completion. Only designer confirms acceptance and scope/weight changes. Do not equate gate count with effort percentage. No separate progress register for Claude.
+
+OPS-002a: Steam commercial launch is designer-confirmed; M09 criteria are proposed. Track storefront and launch preparation alongside development, with no publication or spending without authorization. See [ultimate goal and launch gate](../REDLINE_MASTER_DESIGN.md#ops-002a--commercial-steam-release-direction-2026-11-24).
