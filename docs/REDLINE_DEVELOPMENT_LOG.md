@@ -562,3 +562,7 @@ Added 44 recovered entries (91c06e2), including 18 wording fragments. Interpreta
 ## 2026-11-24 — NUL-DIALOGUE-002: Dialogue architecture (Codex)
 
 Created complete 13-section Bible (db37cb9), cross-linked four companion documents, master and HANDOFF. Interpretations to confirm: schema, events, pacing, cooldowns, content targets and QA are proposals; no implementation approved. No code changes; tests not run (docs only). LOG-001: moved oldest dated entry unchanged to archive.
+
+## 2026-11-24 — OPS-001: Shared operations hub (Codex)
+
+Created shared registers, report template and agenda; linked native issues/PRs; updated identical agent instructions. Interpretations to confirm: session-end reports, native issues as to-dos, proposed agenda pending designer confirmation. No code or tests (docs only).
