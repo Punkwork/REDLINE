@@ -264,3 +264,7 @@ Created `PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md` (c4f815d) at designer request
 ### PHIL-002 — Algorithmic Reduction (DONE: documentation)
 
 All six explorations preserved in Philosophical Design Bible §09 (b711f53), with priority on recursive self-surveillance and disappearance of surprise. Apply PHIL-001 safeguards and four-question gate. No implementation authorized.
+
+### PHIL-003 — Gameplay Manifestations Catalogue (DONE: documentation)
+
+Created `PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md` (e34eebd). Append future philosophical examples with stable IDs and status; no implementation authorized.
