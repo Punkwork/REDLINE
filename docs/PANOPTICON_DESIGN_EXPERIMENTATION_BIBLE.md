@@ -192,3 +192,30 @@ EXP-M007 (PROPOSED): distinguish a printed ZEROED-triggered conditional BYPASS f
 ### EXP-X005 — RIOT starter engine viability (PROPOSED, not run)
 
 Compare baseline RIOT and candidate starter replacements on identical seeds. Measure first-turn legal breaks, BW, TRACE, BURN choices, deck circulation/REBOOT, ZEROED finishers, Icepick use, dead draws, multi-encounter cost escalation and final-layer performance. Compare flat 1 BW, escalating 1 BW and preferred escalating 0 BW + BURN; one copy preferred, additional copies only experimental. Test no sacrifice, no legal sub, positive STR floor, already-zero, TUMBLE/BOOTING/SEQUENCED, multiple copies, node reset and early BREACH. Risks: free opening burst, deck thinning too strong, redundant Icepicks, escalating cost makes signature card dead, excessive starter size. No measured balance claims or test authorization. 
+
+## 12 — TRACE mitigation: Ghostware and Protocols (TRACE-EXP-001, 2026-11-24)
+
+Origin: designer/ChatGPT discussion; designer requested preservation of all five ideas. Objective: diversify TRACE mitigation and conditional deck engines (M04). All PROPOSED, designer-endorsed for exploration, not adopted or authorized for implementation. Names provisional; check collisions. Acquisition, rarity, installation cost, RAM and duration follow applicable canonical type rules once specified; no new type rules adopted.
+
+| ID | Name | Type | Experimental text |
+|---|---|---|---|
+| EXP-C037 | SIGNAL DAMPENER | GHOSTWARE | Reduce all incoming TRACE gains by 1, to a minimum of 0. |
+| EXP-C038 | SILENT RUNNING | PROTOCOL | Reduce the first TRACE gain each turn by 2. |
+| EXP-C039 | CLEAN HANDSHAKE | PROTOCOL | Whenever you break a TRACE subroutine, lose 1 TRACE. |
+| EXP-C040 | SIGNAL SCRAMBLER | PROTOCOL | Whenever you ZERO an ICE, lose 2 TRACE. |
+| EXP-C041 | RADIO SILENCE | PROTOCOL | If you play no EXPLOIT cards during your turn, reduce the next corporate response's total TRACE by 2. |
+
+SIGNAL DAMPENER originally proposed as installed Protocol with permanent reduction of every TRACE source by 1 or 2; designer preferred Ghostware classification and 1 as initial value. Retain 2 as alternative for comparison. Proposed coverage includes self-inflicted TRACE such as FLATLINE, ICE subs and passives; exact coverage, threshold timing and stacking remain open. SIGNAL SCRAMBLER's ZERO wording is provisional: reconcile with canonical ZEROED first positive-to-zero transition and printed-finisher eligibility before implementation; do not silently change existing ZEROED rules.
+
+EXP-M008 (PROPOSED design hypothesis): Ghostware provides persistent fundamental rule modifiers; installed Protocols provide conditional effects responding to circumstances, actions or sequences. This is an exploratory distinction, not a universal type definition or replacement for current rules.
+
+| ID | Scenario | Expected under proposal / open question |
+|---|---|---|
+| EXP-S022 | SIGNAL DAMPENER: four separate TRACE gains of 4, 2 (card), 1 (passive), 3. | Modified gains 3, 1, 0, 2; total 6 instead of 10 if all sources covered. |
+| EXP-S023 | SIGNAL DAMPENER and FLATLINE (+2 TRACE, ZEROED −4 TRACE). | Proposed gain becomes +1; ZEROED relief unchanged, subject to meter floor and timing. |
+| EXP-S024 | SILENT RUNNING: first gain 3, second gain 2. | First becomes 1, second remains 2; clarify Rustler/corporate turn boundaries, zero-floor and first-event consumption. |
+| EXP-S025 | CLEAN HANDSHAKE: legally break two TRACE subs. | Lose 1 TRACE per break, subject to meter floor; distinguish breaking from suspension/bypass. |
+| EXP-S026 | SIGNAL SCRAMBLER: ICE STR3 reduced to 0, then later raised and reduced to 0 again. | First transition candidate for −2 TRACE; repeat trigger and ordinary reduction versus printed ZEROED finisher require explicit decision. |
+| EXP-S027 | RADIO SILENCE: no EXPLOIT played; next corporate response has gains 1 and 3. | Total 2 rather than 4 under aggregate interpretation; compare turn with EXPLOIT played (no discount). Clarify sequential application and threshold timing. |
+
+EXP-X006 (PROPOSED, not run): compare persistent per-source reduction (1 vs 2), first-gain reduction, break reward, ZEROED reward and EXPLOIT abstention on representative seeds. Measure TRACE thresholds, source frequency, opportunity cost, synergy with RIOT/FLATLINE, installation timing, duplicate stacking and whether passive reduction trivializes low-value TRACE. Clarify minimum zero, whether reductions apply before threshold checks, aggregate versus sequential corporate response handling, simultaneous triggers, zero-gain events and interaction with existing prevention. No balance evidence or implementation authorization.
