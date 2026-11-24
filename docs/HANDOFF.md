@@ -276,3 +276,7 @@ Added psychological effect grouping and concrete in-game examples to all 39 prop
 ### PHIL-004 — Demoralization (DONE: documentation; WAITING: design exploration)
 
 Preserved both designer-requested statements and safeguards in Philosophical Design Bible §10 (88ae456). Explore distinct manifestations without deliberately demoralizing players. No implementation authorized.
+
+### NUL-DIALOGUE-001 — Dialogue compendium (DONE: documentation)
+
+Created `PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md` (10d0d90) with 31 proposed lines and six thematic pairs. Cross-referenced foundational and philosophical design. Copy/canon review pending; no implementation authorized.
