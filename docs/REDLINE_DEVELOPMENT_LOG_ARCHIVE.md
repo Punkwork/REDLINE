@@ -2509,3 +2509,45 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PU
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude).
 
+
+## 2026-11-19 — CARDS-004 and HAND-MAX-001 built: 1.4× cards, fanned hand, hand limit 10 (Claude)
+
+**Designer:** "Yes to the fanned cards. Commit. Commit these icon and card changes to the next Build." The tuned fan values are approved.
+
+**Built:**
+- **HAND-MAX-001 (`game.gd`).** `MAX_HAND := 10`. `draw_cards` stops at 10 before any reshuffle or REBOOT. Retrieve and FIELD KIT into a full hand log "Hand full" and leave the card where it was.
+- **CARDS-004, cards (`card.gd`).** `DISPLAY_SCALE := 1.4`. `FriendlyCard.framed()` puts a card in a fixed-size holder, because containers ignore `scale`. The ready rig, reward offers, drag preview and inspection use it. Inspection is 1.4×, and 2.1× when pinned.
+- **CARDS-004, hand (`hand.gd`).** A centred fan. Overlap is 5% at 1–4 cards, then 8/10/18/26/35/43% at 5–10. The fan spans 20° in total, at most 4° per card. Each card pivots about its bottom centre, and the hovered card rises 36 px.
+- **CARDS-004, layout (`encounter.gd`).** The hand area is `Rect2(16, 622, 1568, 378)`. The ICE row is drawn at 85%, and the mascot stage is 194 px (was 238). The strips, NUL/REM bar and rack sit 104 px higher. The left and right columns are re-stacked. Graffiti uses four fixed spots, and the TRACER flight targets the new pile position.
+
+**Tests:**
+- `test_hand_max`: 8 rules checks.
+- `shot_hand`: hands of 6–10, with geometry checks: the hand stays clear of END RUN, the pile counters and the bottom HUD; the hover panel stays on screen; and contacts end at y ≤ 1050.
+- `shot_cartridges`: 6, 8 and 10 cards.
+- `shot_adp`: expectations updated for the new avatar scale.
+
+**Validation:**
+- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 14 CI screenshot fixtures clean.
+- 30-seed bots unchanged: 19/13/16/15.
+
+**Images saved:**
+- `docs/visual/fixtures/cards-004/`: mockups and build captures.
+- `docs/visual/fixtures/cards-005/`: the corner icons and BLOATWARE.
+- `docs/visual/explorations/pixel-16bit/`: the parked pixel mockups and script. Not a decision; review Saturday 2026-11-21.
+
+**Interpretations to confirm:**
+- the ICE row at 85% and the shorter mascot stage (mascots about 70% of their ENCOUNTER-DISPLAY-001 size);
+- at 9–10 cards, contact strips may run up to ~50 px past the bottom of the window (rules text and the hover panel always stay on screen);
+- the pre-existing BOOTING line that clips at the bottom of the ICE plaque is left as it was.
+
+**Release:** `release` was not cut. These changes go into the next playtest build when the designer asks for it.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Archive retired branches (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001: Raygun Gothic facades for IRONWATCH and LUCIDA proposed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Playtest checklist v0.3 and the live QA Sheet (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex).
+
