@@ -3071,3 +3071,7 @@ Designer explicitly established: BYPASS is possible only in encounters that are 
 ## EXP-DESIGN-001 — Design Experimentation Bible (DIRECTION, 2026-11-24)
 
 Designer requested one all-domain [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) for new ideas, scenarios, experimental cards and viability analysis. Initial BYPASS exploration recorded at 7e0928f42582a1faac5f552c4b98fa1e62509abe. Proposals are not rules; UI-WORKFLOW-001 native issue authority and existing topic catalogues remain. New document creation only; no consolidation or retirement while DOCS-MIG-001 gate open. No implementation authorized.
+
+## BACKCHANNEL-001 — Preferred experimental iteration (2026-11-24)
+
+Designer endorsed EXP-C029 BACKCHANNEL, 2 BW SCRIPT, supporting ICE STR <=2, suspend one non-DEADLOCK sub; bypass if all primary ICE subs broken by end of next Rustler turn, otherwise end suspension. [Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) (ddc4793ce6d41b500c1086c9d209fe61e07f64c7) owns detailed alternatives, scenarios and open questions. BYPASS-001 unchanged; no formal rule adoption or implementation authorized.
