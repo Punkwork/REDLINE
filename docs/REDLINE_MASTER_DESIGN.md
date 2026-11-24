@@ -2963,3 +2963,7 @@ Designer explicitly confirmed NUL/REM as a foundational design pillar and endors
 ## NUL-PILLAR-001a — Psychological Invisibility (DIRECTION, designer-confirmed 2026-11-23)
 
 The psychological experiment must remain invisible: never disclose, classify, quantify or announce player progression through the psychological framework, including retrospective summaries, dialogue, achievements or THE CARBON. Internalization is emergent player behaviour, not a programmed phase or status. Immediate transactions and real gameplay consequences remain understandable. See [NUL/REM and the self-built prison](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md#nul-pillar-001a--psychological-invisibility-designer-confirmed-foundational-constraint-2026-11-23). This is a foundational design constraint; proposed enforcement withdrawal, silence and disconnection mechanics are not authorized for implementation.
+
+## NUL-PILLAR-001b — Played under surveillance (DIRECTION, designer-confirmed 2026-11-23)
+
+**PANOPTICON is not a game about surveillance. It is a game played under surveillance.** Within fiction, perceived observation may shape obedience or resistance without delegated authority; it may also have no effect. The paradox of autonomy remains open: what does it mean to act freely? Experience is sufficient; no prescribed interpretation, psychological result or measurement is required. Preserve NUL-PILLAR-001a and local-only data safeguards. See [foundational NUL/REM design](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). No mechanics authorized.
