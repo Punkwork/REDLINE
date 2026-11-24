@@ -2999,3 +2999,7 @@ Designer requested thematic dialogue catalogue. Created [NUL/REM Dialogue Compen
 ## NUL-DIALOGUE-001a — Earlier dialogue recovery (2026-11-24)
 
 Expanded compendium to 75 entries (57 dialogue examples and 18 wording fragments) from earlier discussion and design records. Partial recovery, not exhaustive. All proposed; no implementation authorized.
+
+## NUL-DIALOGUE-002 — Dialogue architecture (DIRECTION, 2026-11-24)
+
+Designer requested completed [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md), 13 sections covering authored/procedural/template model, pacing, contextual selection, continuity, curation, schema, performance, content and QA. 150 instances per 70–75-minute run is provisional. Architecture and copy remain proposed; no runtime LLM, no rules or code changes authorized.
