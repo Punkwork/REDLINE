@@ -229,15 +229,15 @@ Designer-endorsed experimental direction: **BW represents immediate computationa
 | EXP-C042 | PAYDAY | PROGRAM — ICEPICK (FORTRESS) | 2 | 3 CRED: +1 STR; 5 CRED: break 1 FORTRESS subroutine. |
 | EXP-C043 | BRIBE | PROGRAM — ICEPICK (TUMBLER) | 3 | 4 CRED: +1 STR; 4 CRED: break 1 TUMBLER subroutine. |
 | EXP-C044 | MERCENARY | PROGRAM — ICEPICK (VOID) | 2 | 3 CRED: +1 STR; 6 CRED: break 1 VOID subroutine. |
-| EXP-C045 | BLACK BUDGET | PROTOCOL | — | 5 CRED: gain 1 BW. Once per turn. |
-| EXP-C046 | BOUNTY HUNTER | PROTOCOL | — | 4 CRED: target ICE −2 STR this encounter. Once per turn. |
-| EXP-C047 | HUSH MONEY | PROTOCOL | — | 5 CRED: lose 3 TRACE. Once per turn. |
-| EXP-C048 | INSIDER TRADING | PROTOCOL | — | 3 CRED: draw 1 card. Once per turn. |
-| EXP-C049 | RANSOM | PROTOCOL | — | 8 CRED: suspend one non-DEADLOCK subroutine until your next turn. Once per encounter. |
+| EXP-C045 | BLACK BUDGET | SCRIPT | 0 BW | 5 CRED: gain 1 BW. |
+| EXP-C046 | BOUNTY HUNTER | SCRIPT | 0 BW | 4 CRED: target ICE −2 STR this encounter. |
+| EXP-C047 | HUSH MONEY | SCRIPT | 0 BW | 5 CRED: lose 3 TRACE. |
+| EXP-C048 | INSIDER TRADING | SCRIPT | 0 BW | 3 CRED: draw 1 card. |
+| EXP-C049 | RANSOM | SCRIPT | 0 BW | 8 CRED: suspend one non-DEADLOCK subroutine until your next turn. |
 
-All PROPOSED. Names, prices, strengths, rarity, Protocol installation costs, RAM, boost duration and limits subject to review. Each of PAYDAY, BRIBE and MERCENARY costs 1 BW to install; RAM requirements are 1, 1 and 2 respectively; activation costs remain entirely CRED. Initial Icepick proposal: PAYDAY as above; BRIBE +1 STR for 1 BW, break for 4 CRED; MERCENARY +1 STR for 3 CRED, break for 1 BW. Superseded as preferred experiment by entirely CRED-powered activations. No arbitrary once-per-turn Icepick activation cap initially proposed; economic cost is primary balancing lever. No free activation or installation assumption.
+All PROPOSED. Names, prices, strengths, rarity, other deployment costs, RAM, boost duration and limits subject to review. Each of PAYDAY, BRIBE and MERCENARY costs 1 BW to install; RAM requirements are 1, 1 and 2 respectively; activation costs remain entirely CRED. Initial Icepick proposal: PAYDAY as above; BRIBE +1 STR for 1 BW, break for 4 CRED; MERCENARY +1 STR for 3 CRED, break for 1 BW. Superseded as preferred experiment by entirely CRED-powered activations. No arbitrary once-per-turn Icepick activation cap initially proposed; economic cost is primary balancing lever. No free activation or installation assumption.
 
-EXP-M009: extend M008 type distinction: SCRIPT immediate single-use; PROGRAM installed utility or ICEPICK (RAM required); PROTOCOL deployed to RACK for BW, no RAM, active for Node, with proposed conditional or manually activated abilities (potentially CRED cost); GHOSTWARE persistent non-card upgrade; BLOATWARE detrimental card type. Classification corrected against Core Rules §3.1; proposed activation effects remain experimental. Preserve triggered Protocols C038–041.
+EXP-M009: extend M008 type distinction: SCRIPT immediate single-use; PROGRAM installed utility or ICEPICK (RAM required); PROTOCOL deployed to RACK for BW, no RAM, active for Node, with primarily continuous, recurring, conditional or automatic triggered benefits; manual activation is an exception to explore; GHOSTWARE persistent non-card upgrade; BLOATWARE detrimental card type. Classification corrected against Core Rules §3.1; proposed activation effects remain experimental. Preserve triggered Protocols C038–041.
 
 EXP-M010: CAPITAL ENGINE archetype: extract CRED → activate Protocols/Icepicks → neutralize ICE efficiently → secure further CRED. Renewable BW versus accumulated wealth creates opportunity cost between combat and future purchases. RIOT STR reduction can reduce CRED expenditure; no RIOT exclusivity proposed.
 
@@ -247,7 +247,7 @@ EXP-M011: voluntary fictional surveillance income. Small individually useful inc
 |---|---|
 | Encounter history | +1 CRED per encounter |
 | Deck composition | +1 CRED per node |
-| Installation history | Reduced Protocol activation cost |
+| Installation history | Reduced activation cost (historical Protocol concept; reassess for revised SCRIPT classification) |
 | Route-selection history | Additional extraction income |
 | Purchasing history | Personalized discounts |
 | Continuous behavioural monitoring | Recurring CRED dividend |
@@ -262,7 +262,7 @@ NUL/REM may offer relevant arrangements after genuine CRED shortfalls or repeate
 | EXP-S031 | BLACK BUDGET, extraction and CRED generation combined. | Test conversion loops, caps and net income; no assumed self-financing. |
 | EXP-S032 | One CRED short of a useful activation; optional encounter-history offer available. | Small benefit may enable activation; refusal remains viable, no mandatory acceptance or inferred motive. |
 | EXP-S033 | Several small income arrangements accumulated over a run versus independent economy. | Compare combat efficiency, purchasing opportunity cost, diversity and viability; no predetermined psychological outcome. |
-| EXP-S034 | RANSOM on non-DEADLOCK versus DEADLOCK; HUSH MONEY near zero TRACE; repeated Protocol activation. | Verify timing, floor, frequency and legal targets; suspension not automatically break or BYPASS. |
+| EXP-S034 | RANSOM on non-DEADLOCK versus DEADLOCK; HUSH MONEY near zero TRACE; repeated SCRIPT plays after redraw and payment. | Verify timing, floor, frequency and legal targets; suspension not automatically break or BYPASS. |
 
 EXP-X007 (PROPOSED): compare conventional BW Icepicks, fully CRED-powered variants and historical hybrid alternatives on identical seeds; track CRED/BW, break rates, extraction, shop spending, deck synergy, zero-BW activation, insufficient funds, boost duration, stacking, activation limits, loops and run viability. Compare voluntary income arrangements against independent CRED generation; avoid tuning to compel disclosure. Test small marginal benefits, accumulated costs and ability to decline. No tests performed.
 
@@ -288,3 +288,17 @@ Candidate VOID-exclusive subroutine **UNLOAD**: The Rustler chooses one installe
 | EXP-S042 | All DEADLOCKs neutralized before response. | Existing BREACH response skip applies; UNLOAD does not fire. |
 
 EXP-X008 (PROPOSED): compare player-selected versus random removal and baseline without UNLOAD on identical seeds; track reinstall BW, RAM occupancy, income lost, Icepick availability, turns, deck diversity, meaningful sacrifice, recovery and frustration. Compare Program-heavy and SCRIPT-heavy decks, frequency/placement of UNLOAD, multiple VOID ICE, no eligible targets, selection UI during response, and interactions with existing paid/voluntary unload triggers (do not assume forced removal qualifies). Preserve viable Program investment and counterplay; no tests performed. 
+
+## 15 — Card-type identity and CRED SCRIPTS (CRED-EXP-001d, 2026-11-24)
+
+Designer-confirmed experimental revision: EXP-C045–049 BLACK BUDGET, BOUNTY HUNTER, HUSH MONEY, INSIDER TRADING and RANSOM are SCRIPT cards, 0 BW, with respective CRED costs 5/4/5/3/8. Effects unchanged; resolve once per play, no RAM, discard after resolution, normal redraw/REBOOT and payment required for reuse. Remove previous once-per-turn/encounter activation caps from preferred experiment; historical installed Protocol versions superseded, not erased from history. No new BURN restriction. Test repeated plays, draw/REBOOT loops, affordability and zero BW, especially BLACK BUDGET and INSIDER TRADING.
+
+EXP-M013 (PROPOSED design guidance, designer-endorsed distinctions):
+- SCRIPT purchases an immediate one-time effect; duration of resulting effect may extend beyond resolution. BW or CRED can pay for it.
+- PROGRAM invests in a reusable capability; installation BW and finite RAM create opportunity cost, generally a resource or other cost to activate; explore exceptions (including automatic utilities/Extractors). Persists until unloaded/cleared or Node ends; existing voluntary unload rules unchanged. Proposed VOID-only forced UNLOAD in §14 threatens investment.
+- PROTOCOL establishes an ongoing benefit or condition, deployed to RACK for BW, no RAM, primarily continuous, recurring, conditional, event-triggered or automatic protection for remainder of Node. Manual activation not default; exceptions exploratory.
+- GHOSTWARE permanently modifies capabilities or rules, non-card upgrade; BLOATWARE remains detrimental card type.
+- Programs are tools the Rustler operates; Protocols are conditions under which the Rustler operates. Distinction is how effect is accessed, not which resource pays.
+- Existing 16 Protocol designs in Card Pools/Deck Synergy and seven experimental automatic Protocols EXP-C009/010/012/038–041 retain classification. No changes to existing cards or canonical rules.
+
+EXP-S043: play each revised SCRIPT at zero BW with sufficient/insufficient CRED; resolve once and discard, no installed activation. EXP-S044: redraw via REBOOT and repay; compare repeated play and potential self-financing/draw loops, normal target legality, TRACE floor, suspension expiry. Extend X007 to compare revised CRED SCRIPTS with historical installed variants; no tests performed. Rarity and balance remain open. No implementation authorization.
