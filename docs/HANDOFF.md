@@ -252,3 +252,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 ### NUL-PILLAR-001b — design follow-up (WAITING)
 
 Preserve designer-confirmed principle: PANOPTICON is not a game about surveillance; it is a game played under surveillance. Perceived observation and delegated authority are distinct. Allow obedience, resistance or no effect without classifying players or requiring an experimental result. Review future proposals against NUL-PILLAR-001a/b in the foundational NUL/REM document. No implementation authorized.
+
+### NUL-PILLAR-001c — Four-Question Design Gate (WAITING)
+
+For every proposed NUL/REM mechanic, document strategic meaning, genuine agency, multiple psychological responses and philosophical significance without explanation. Reconsider failed or unresolved criteria before implementation; existing approval gates remain. See the foundational NUL/REM document and master decision NUL-PILLAR-001c. No implementation authorized.
