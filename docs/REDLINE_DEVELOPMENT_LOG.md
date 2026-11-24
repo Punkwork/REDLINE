@@ -561,3 +561,7 @@ Designer confirmed NUL/REM as a foundational pillar of PANOPTICON's psychologica
 ## 2026-11-23 — NUL-PILLAR-001a: Psychological Invisibility (Codex)
 
 Designer explicitly confirmed that the experiment must remain psychologically invisible: no disclosure, classification, quantification or announcement of psychological progression. Expanded the existing NUL/REM design document with internalization as an emergent outcome, proposed silent withdrawal of enforcement and disconnection, and withdrawal of the proposed explicit THE CARBON psychological reveal. Master design and HANDOFF updated. No code changes; tests not run (documentation only).
+
+## 2026-11-23 — NUL-PILLAR-001b: Played under surveillance (Codex)
+
+Recorded designer-confirmed philosophical distinction and paradox of autonomy in the NUL/REM document, master design and HANDOFF. Experience is sufficient; no prescribed psychological outcome or measurement. No code changes; tests not run (documentation only).
