@@ -552,3 +552,7 @@ Preserved all six designer-requested explorations in Philosophical Design Bible 
 ## 2026-11-24 — PHIL-003: Gameplay Manifestations Catalogue (Codex)
 
 Created living catalogue (e34eebd) with 39 proposed examples and one withdrawn example; stable GM IDs and principle tags. Linked Bible, master and HANDOFF. No code changes; tests not run (docs only). LOG-001: moved oldest two dated entries (CARDS-003a and CARDS-004/HAND-MAX-001) unchanged to archive.
+
+## 2026-11-24 — PHIL-003a: Catalogue expansion (Codex)
+
+Added designer-requested psychological effect and final concrete example columns (1fed957), primary grouping index, and withdrawn example annotation. Interpretations to confirm: grouping labels and illustrative scenarios are editorial hypotheses, not validated effects. No code changes; tests not run (docs only).
