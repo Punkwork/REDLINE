@@ -316,3 +316,7 @@ Record non-final encounter restriction; no BYPASS on final layer, including sing
 ### EXP-DESIGN-001 — Experimentation Bible (DONE: documentation)
 
 Created [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) (7e0928f); initial BYPASS proposals, cards, scenarios and tests remain exploratory. Existing UI issue workflow and migration blocker unchanged. No implementation task authorized.
+
+### BACKCHANNEL-001 — Preferred experimental card (DONE: documentation)
+
+EXP-C029 in Experimentation Bible (ddc4793); timing, legality and balance remain open. No implementation authorized.
