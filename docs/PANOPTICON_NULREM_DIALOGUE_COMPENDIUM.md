@@ -123,3 +123,16 @@ Recovered from earlier conversation context and the foundational design records.
 ## NUL-DIALOGUE-002 — Architecture reference
 
 See [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md) for proposed selection and delivery, schema, pacing and QA. This compendium remains the editorial register; draft copy is not automatically shipped.
+
+## NUL-DIALOGUE-003 — Economic dependency and tactical assistance (2026-11-24)
+
+Source: designer/ChatGPT discussion of CRED-powered Icepicks and voluntary surveillance. Designer requested preservation of these four lines verbatim. All PROPOSED, not approved shipping copy.
+
+| ID | Thematic contradiction | Dialogue | Contextual trigger | Psychological association | Paired dialogue reference | Status |
+|---|---|---|---|---|---|---|
+| NR-076 | Assistance versus economic dependency | You're one CRED short. I could arrange something. | Actual one-CRED shortfall for a relevant activation and an available fictional arrangement | Immediate relief; voluntary participation | — | PROPOSED |
+| NR-077 | Tactical autonomy versus surveillance | Given how frequently you use that Icepick, you might benefit from a recurring income arrangement. | Verified repeated use of CRED-powered Icepick; relevant fictional income offer available | Economic dependency; personalization | — | PROPOSED |
+| NR-078 | Helpfulness versus minimization of privacy | It's only your encounter history. You're not using it for anything. | Contextual discussion of an optional fictional encounter-history exchange | Normalization; perceived low cost of disclosure | — | PROPOSED |
+| NR-079 | Affection versus reinforcement of participation | We've earned 38 additional CRED through that arrangement. I thought you'd be pleased. | Actual additional fictional earnings equal 38 CRED; otherwise use separately reviewed numeric template | Reciprocity; perceived benefit; economic dependence | — | PROPOSED |
+
+Delivery: genuinely helpful, conversational, understated; not overtly sinister. These are independent candidate lines, not a mandatory sequence. Contextual triggers and associations are editorial proposals, not measured psychological states. NR-078 is character rhetoric, not factual privacy guidance; actual fictional exchange terms must remain intelligible and participation optional. No real player data exchange, fabricated earnings, or implementation authorization. CRED-powered Icepicks and income arrangements remain experimental. See Dialogue Architecture Bible for eligibility, factual accuracy, silence and copy guards.
