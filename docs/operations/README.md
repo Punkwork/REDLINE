@@ -38,3 +38,8 @@ Sources: [HANDOFF](../HANDOFF.md), [current build status](../REDLINE_CURRENT_STA
 **Daily update protocol:** During the existing 22:00 Toronto review, refresh this single snapshot, recording date, evidence links/commit, stage changes, accepted gates count, change from previous review, next gate and blockers. Link daily priorities and native issue/PR IDs to M01–M09. Preserve dated changes in DAILY_PRIORITIES.md rather than duplicating backlog. Missing evidence = unknown, not failure or completion. Only designer confirms acceptance and scope/weight changes. Do not equate gate count with effort percentage. No separate progress register for Claude.
 
 OPS-002a: Steam commercial launch is designer-confirmed; M09 criteria are proposed. Track storefront and launch preparation alongside development, with no publication or spending without authorization. See [ultimate goal and launch gate](../REDLINE_MASTER_DESIGN.md#ops-002a--commercial-steam-release-direction-2026-11-24).
+
+
+## UI proposal and development register — UI-WORKFLOW-001
+
+**UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes.
