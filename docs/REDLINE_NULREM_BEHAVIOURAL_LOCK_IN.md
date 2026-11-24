@@ -96,3 +96,7 @@ For each proposal, document a concise answer and supporting design rationale for
 ## PHIL-001 — Cross-system philosophical reference
 
 See [PANOPTICON Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md) for the broader philosophical framework, surveillance economy and architecture of choice. This document remains the detailed NUL/REM reference; no existing constraints or rules are superseded.
+
+## NUL-DIALOGUE-001 — Dialogue compendium
+
+See [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) for thematic contradictions, individual draft lines, contextual triggers and paired references. Character contradiction is a proposed expressive technique, not new canon. All copy remains PROPOSED.
