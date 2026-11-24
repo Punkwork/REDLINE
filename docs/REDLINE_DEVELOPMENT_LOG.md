@@ -569,3 +569,7 @@ Recorded designer-confirmed philosophical distinction and paradox of autonomy in
 ## 2026-11-23 — NUL-PILLAR-001c: Four-Question Design Gate (Codex)
 
 Recorded designer-requested NUL/REM mechanic review questions in foundational design, master design and HANDOFF. Failed or unresolved criteria require reconsideration; existing approvals remain. No code changes; tests not run (documentation only).
+
+## 2026-11-23 — PHIL-001: Philosophical Design Bible (Codex)
+
+Created the designer-requested eight-section Bible (c4f815d), including surveillance economy, curated rewards and both autonomy paradoxes. Cross-referenced master design, NUL/REM and HANDOFF. New mechanics remain PROPOSED. No code changes; tests not run (docs only).
