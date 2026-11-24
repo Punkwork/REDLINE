@@ -103,4 +103,6 @@ Implement what the current docs say; where they're unclear, make the smallest re
 
 ## 7. Shared development operations (OPS-001)
 
+**UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes.
+
 Read `docs/operations/README.md` at session start. At session end, file actual findings in the shared reports and registers on main, using the report template; link native GitHub issues and PRs rather than duplicating them. Daily review is 22:00 America/Toronto; next-day priorities require designer confirmation. No separate agent backlogs. Preserve existing approval and branch rules.
