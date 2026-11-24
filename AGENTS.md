@@ -99,3 +99,7 @@ When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register)
 - `godot/CODEX_HANDOFF.md`, `prototypes/python/`: superseded or reference only.
 
 Implement what the current docs say; where they're unclear, make the smallest reasonable choice and list it under Interpretations to confirm.
+
+## 7. Shared development operations (OPS-001)
+
+Read `docs/operations/README.md` at session start. At session end, file actual findings in the shared reports and registers on main, using the report template; link native GitHub issues and PRs rather than duplicating them. Daily review is 22:00 America/Toronto; next-day priorities require designer confirmation. No separate agent backlogs. Preserve existing approval and branch rules.
