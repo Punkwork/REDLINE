@@ -556,3 +556,7 @@ Created living catalogue (e34eebd) with 39 proposed examples and one withdrawn e
 ## 2026-11-24 — PHIL-003a: Catalogue expansion (Codex)
 
 Added designer-requested psychological effect and final concrete example columns (1fed957), primary grouping index, and withdrawn example annotation. Interpretations to confirm: grouping labels and illustrative scenarios are editorial hypotheses, not validated effects. No code changes; tests not run (docs only).
+
+## 2026-11-24 — PHIL-004: Demoralization (Codex)
+
+Preserved designer-requested autonomy burden and liberation paradox in Philosophical Design Bible §10 (88ae456), distinguishing two potential responses and prohibiting deliberate helplessness or disengagement. Master and HANDOFF updated. Interpretations to confirm: formal principle status and mechanics remain open. No code changes; tests not run (docs only).
