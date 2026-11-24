@@ -92,3 +92,7 @@ Evaluate every proposed NUL/REM mechanic against all four questions before imple
 4. **Can it communicate its philosophical significance without explaining it?** The experience must carry the meaning. No psychological exposition, classification, quantification or progression announcement, consistent with NUL-PILLAR-001a/b.
 
 For each proposal, document a concise answer and supporting design rationale for each question. If any answer is no or unresolved, reconsider the mechanic before implementation. Passing this review is necessary, not sufficient: designer approval and existing development gates remain required. This is a designer-facing review standard, never a player-facing score or feature. Ordinary nonmechanical companion dialogue need not provide a strategic benefit. No gameplay mechanic or rules change is authorized by this entry.
+
+## PHIL-001 — Cross-system philosophical reference
+
+See [PANOPTICON Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md) for the broader philosophical framework, surveillance economy and architecture of choice. This document remains the detailed NUL/REM reference; no existing constraints or rules are superseded.
