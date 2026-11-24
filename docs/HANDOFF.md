@@ -28,6 +28,10 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 ---
 
+## NUL-PILLAR-001 — foundational design follow-up (WAITING)
+
+Designer-confirmed creative direction, 2026-11-23. Read [REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md), archived in f2b938b. Claude (design): reconcile with BOON-001, current NUL/REM canon, SIGNAL-001, local profile and core-loop rules; develop domain-specific knowledge/confidence/authority and intervention proposals for designer review. No implementation authorized. Claude Code: no build task yet.
+
 ## To build (approved, not yet in the build)
 
 ### STRIP-001: core-loop test build (designer, 2026-11-21)
