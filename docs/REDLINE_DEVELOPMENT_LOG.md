@@ -529,3 +529,7 @@ LOG-001: oldest dated entry moved unchanged to archive.
 ## 2026-11-24 — DOCS-MIG-001 (ChatGPT)
 
 Designer authorized mandatory documentation migration gate and next-session UI completion priority. Identical agent instructions, Master Design, HANDOFF and shared daily priorities updated. UI reference repair 2f1727f remains partial; full dependency validation, editorial reconciliation and retirement outstanding. Documentation only; no Godot tests run.
+
+## 2026-11-24 — BYPASS-001 (ChatGPT)
+
+Recorded designer rule restricting BYPASS to non-final encounters of Nodes of up to three encounters in master, core rules and HANDOFF. Specific mechanics remain open. No code or tests; no documentation consolidation performed.
