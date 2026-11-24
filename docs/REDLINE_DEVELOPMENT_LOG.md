@@ -4,35 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-003a confirmed (Claude)
-
-**Designer:** "Great save those changes." This confirms the CARDS-003a interpretations: the THEN joiner, the "Hover for full text" hint, names and hover only for cards whose text doesn't fit, and the panel opening below the card when there is no room above. Master design and HANDOFF updated. **Code changes:** none.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude).
-
-## 2026-11-19 — CARDS-004 larger cards; HAND-MAX-001 maximum hand of 10 (Claude)
-
-**Designer:** "The cards in general should be larger, 16 bit or not." The designer chose 1.4× and a mockup first. After the mockup: "Have the cards slightly overlap based on the number of cards. We should determine a maximum hand size." Answers: maximum **10**; a draw past the maximum **stops, and the card stays on the draw pile**; the BW cost dial **stays top-right**.
-
-**Mockups (session only, not committed):**
-- Godot renders of the COOKIE BANNER encounter with 1.4× cards in a full-width hand, the side columns moved up, the strips moved up 104 px and the ICE area scaled to 77%.
-- A hover capture.
-- Hands of 6, 7, 8 and 10 cards. Overlap at those counts: none, about 15%, about 28% and about 43%.
-
-**Evidence (30-seed bot runs, HALCYON slice, hand size at the start of each player turn):**
-- GENERALIST, RIOT and VECTOR peak at 6. RIOT's many 1-card turns are its known DOORBELL guard stalls.
-- ECHO: 6 cards on 204 turns, 7 on 110, 8 on 12, 9 on 6, and 10 on 1 (of 426).
-
-**Recorded:** CARDS-004 and HAND-MAX-001 as APPROVED in the master design doc, with a note on VIS-001's old hand-size line. HAND-MAX-001 goes in a new Core Rules amendments table. HANDOFF has two Claude Code TO DO rows. **Code changes:** none yet.
-
-**Interpretations to confirm:** any non-draw effect that would move a card into a full hand (for example retrieval from discard) does nothing.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CHROME-001 / CARDS-001 / MAIN-001 follow-up (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: LOGIC BOMB and RELAY deprecated (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001: darker SCRIPT face for legible printing (Claude).
-
 ## 2026-11-19 — CARDS-004a: BW cost dial top-left (Claude)
 
 **Designer:** "The bw cost could move to top left of card as we are not efficiently using the card space/corners for icons." This reverses the earlier answer to keep it top-right.
@@ -577,3 +548,7 @@ Created the designer-requested eight-section Bible (c4f815d), including surveill
 ## 2026-11-23 — PHIL-002: Algorithmic Reduction (Codex)
 
 Preserved all six designer-requested explorations in Philosophical Design Bible §09 (b711f53), emphasizing recursive self-surveillance and disappearance of surprise. Master and HANDOFF updated. No code changes or tests (docs only).
+
+## 2026-11-24 — PHIL-003: Gameplay Manifestations Catalogue (Codex)
+
+Created living catalogue (e34eebd) with 39 proposed examples and one withdrawn example; stable GM IDs and principle tags. Linked Bible, master and HANDOFF. No code changes; tests not run (docs only). LOG-001: moved oldest two dated entries (CARDS-003a and CARDS-004/HAND-MAX-001) unchanged to archive.
