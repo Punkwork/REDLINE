@@ -320,3 +320,7 @@ Created [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.m
 ### BACKCHANNEL-001 — Preferred experimental card (DONE: documentation)
 
 EXP-C029 in Experimentation Bible (ddc4793); timing, legality and balance remain open. No implementation authorized.
+
+### NULL-POINTER-001 — Approved cost adjustment (WAITING: Claude Code)
+
+NULL POINTER 1 BW (formerly 2), all other properties unchanged. Deck Synergy §9.2 updated (08b5b6f). Synchronize runtime card definition and affected tests, validate; documentation-only change so far.
