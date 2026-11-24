@@ -533,3 +533,7 @@ Designer authorized mandatory documentation migration gate and next-session UI c
 ## 2026-11-24 — BYPASS-001 (ChatGPT)
 
 Recorded designer rule restricting BYPASS to non-final encounters of Nodes of up to three encounters in master, core rules and HANDOFF. Specific mechanics remain open. No code or tests; no documentation consolidation performed.
+
+## 2026-11-24 — EXP-DESIGN-001 (ChatGPT)
+
+Created all-domain experimentation Bible (7e0928f) with initial BYPASS proposals, experimental cards, scenarios and viability/test framework. Interpretations to confirm: stable ID scheme and editorial organization; all specific mechanics remain proposed. UI issue authority preserved; no consolidation, code or tests.
