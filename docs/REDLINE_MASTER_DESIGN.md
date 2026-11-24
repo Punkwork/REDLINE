@@ -3010,7 +3010,7 @@ Designer requested one shared operations hub for agents, native issues/PRs, dail
 
 ## OPS-002 — Project goals, milestones and progress measurement (DIRECTION, 2026-11-24)
 
-Designer requested an indicator of distance to the final goal. Proposed release goal: a complete, coherent, stable and designer-accepted PANOPTICON game, with a playable three-corporation run (RUN-006), approved rules/content, distinctive presentation and NUL/REM narrative, validated Windows distribution. Commercial release/store scope, dates and quantitative quality thresholds remain OPEN; this roadmap does not authorize new mechanics or release commitments.
+Designer requested an indicator of distance to the final goal. Proposed release goal: a complete, coherent, stable and designer-accepted PANOPTICON game, with a playable three-corporation run (RUN-006), approved rules/content, distinctive presentation and NUL/REM narrative, validated Windows distribution. Commercial release/store scope was initially OPEN; superseded by OPS-002a below. Dates and quantitative quality thresholds remain OPEN.
 
 ### Proposed milestone gates
 
@@ -3025,8 +3025,20 @@ Designer requested an indicator of distance to the final goal. Proposed release 
 | M07 | Beta / release candidate | End-to-end regression, real Windows playtests, packaging, save/config and performance checks pass; release-blocking defects resolved. |
 | M08 | Final release acceptance | Designer accepts release scope and candidate; reproducible versioned artifact, checksum, documentation and distribution readiness verified. |
 
-Milestones may overlap; M04–M06 are parallel workstreams, not a mandatory serial order. M07–M08 depend on earlier gates. No completion without linked evidence and designer acceptance where required. Current architecture-v2 branch is not assumed merged; reconcile its scope and evidence before baselining M02.
+Milestones may overlap; M04–M06 are parallel workstreams, not a mandatory serial order. M07–M09 depend on earlier gates (M09 added by OPS-002a). No completion without linked evidence and designer acceptance where required. Current architecture-v2 branch is not assumed merged; reconcile its scope and evidence before baselining M02.
 
 ### Progress measurement
 
 The [Operations Dashboard](operations/README.md#project-progress--ops-002) owns the live snapshot, not a duplicate roadmap. Report milestone gates accepted / total, plus per-gate stage (not started, design, built, verified, accepted, or unknown), blockers, next evidence and dated source/commit. Built is not verified; verified is not accepted. Gate count is a readiness indicator, not percentage of effort or time. Do not infer percent complete from commits, lines of code, documents or issue counts. Overall effort-weighted percentage remains unknown until designer confirms scope, milestone weights and measurable acceptance checklists; if adopted, calculate accepted weighted checklist items / total approved weight, show unknown coverage and record scope changes separately. Never silently inflate progress. Reopened gates reduce readiness. At 22:00 Toronto daily review, update snapshot from actual evidence, show change since last review, identify next gate and link proposed next-day priorities to milestone IDs. If no evidence changes, record no verified change. Existing governance and audit gates remain binding.
+
+## OPS-002a — Commercial Steam release (DIRECTION, 2026-11-24)
+
+Designer explicitly confirmed: “Panopticon needs to go to market. This is part of the intention of this project from the beginning. Steam is the intended platform.” This supersedes the earlier releasable-only goal.
+
+**Ultimate goal:** To develop and commercially release PANOPTICON on Steam as a complete, distinctive cyberpunk deckbuilding roguelike that combines strategically rewarding gameplay, meaningful replayability, a cohesive Atomic Deco Punk aesthetic and an emotionally compelling relationship between the Rustler and NUL/REM. Through mechanics, narrative and presentation, PANOPTICON explores surveillance, autonomy, voluntary imprisonment and the contradictions of protection, allowing players to discover these themes through experience rather than explicit explanation.
+
+**M08 — Final release acceptance (expanded proposed criteria):** all three corporations playable end to end; approved mechanics and content implemented, balanced and tested; approved NUL/REM dialogue, character and narrative integrated; philosophical ambitions expressed through experience; visual design, animation, sound and interface meet established artistic standards; replayability, pacing and strategic depth demonstrated through playtesting; release-blocking defects resolved; designer accepts final release candidate. Retain OPS-002 artifact, checksum, documentation and distribution evidence requirements.
+
+**M09 — Commercial Steam launch (new proposed gate):** Steamworks onboarding and applicable store/build review requirements satisfied; rights, licensing, store assets, pricing, launch configuration and support arrangements confirmed; designer authorizes launch; approved production build is publicly available for purchase on Steam, with store URL and release/build evidence recorded. Store preparation may proceed in parallel subject to authorization. Verify current Steam requirements before implementation. No actual publication, spending, pricing, launch date or account action authorized by this decision. Post-launch support scope remains open.
+
+Progress is measured not simply by how much of PANOPTICON has been built, but by how much closer it has come to fulfilling its intended player experience and reaching commercial launch. Nine gates now proposed; weights and acceptance thresholds remain open.
