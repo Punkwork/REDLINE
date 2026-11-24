@@ -222,7 +222,7 @@ EXP-X006 (PROPOSED, not run): compare persistent per-source reduction (1 vs 2), 
 
 ## 13 — CRED-powered combat and CAPITAL ENGINE (CRED-EXP-001, 2026-11-24)
 
-Designer-endorsed experimental direction: **BW represents immediate computational capacity. CRED represents accumulated purchasing power.** CRED-powered Icepicks circumvent computational limitations through wealth. Both STR increases and subroutine breaks consume zero BW during activation; installation cost is undecided. Conventional legality, matching ICE type and strength requirements remain applicable. No new shipping rules or implementation authorization.
+Designer-endorsed experimental direction: **BW represents immediate computational capacity. CRED represents accumulated purchasing power.** CRED-powered Icepicks circumvent computational limitations through wealth. Both STR increases and subroutine breaks consume zero BW during activation; installation costs 1 BW for each of EXP-C042–044 (designer-confirmed experimental revision CRED-EXP-001a). Conventional legality, matching ICE type and strength requirements remain applicable. No new shipping rules or implementation authorization.
 
 | ID | Card | Type | Base STR | Activation |
 |---|---|---|---|---|
@@ -235,7 +235,7 @@ Designer-endorsed experimental direction: **BW represents immediate computationa
 | EXP-C048 | INSIDER TRADING | PROTOCOL | — | 3 CRED: draw 1 card. Once per turn. |
 | EXP-C049 | RANSOM | PROTOCOL | — | 8 CRED: suspend one non-DEADLOCK subroutine until your next turn. Once per encounter. |
 
-All PROPOSED. Names, prices, strengths, rarity, installation costs, RAM, boost duration and limits subject to review. Initial Icepick proposal: PAYDAY as above; BRIBE +1 STR for 1 BW, break for 4 CRED; MERCENARY +1 STR for 3 CRED, break for 1 BW. Superseded as preferred experiment by entirely CRED-powered activations. No arbitrary once-per-turn Icepick activation cap initially proposed; economic cost is primary balancing lever. No free activation or installation assumption.
+All PROPOSED. Names, prices, strengths, rarity, Protocol installation costs, RAM, boost duration and limits subject to review. Each of PAYDAY, BRIBE and MERCENARY costs 1 BW to install; activation costs remain entirely CRED. Initial Icepick proposal: PAYDAY as above; BRIBE +1 STR for 1 BW, break for 4 CRED; MERCENARY +1 STR for 3 CRED, break for 1 BW. Superseded as preferred experiment by entirely CRED-powered activations. No arbitrary once-per-turn Icepick activation cap initially proposed; economic cost is primary balancing lever. No free activation or installation assumption.
 
 EXP-M009: extend M008 type distinction: SCRIPT immediate single-use; PROGRAM installed utility; ICEPICK installed breaking capability; PROTOCOL installed conditional or manually activated ability (potentially CRED cost); GHOSTWARE persistent rule modifier. Exploratory taxonomy only; reconcile with canonical definitions before adoption. Preserve triggered Protocols C038–041.
 
@@ -265,3 +265,5 @@ NUL/REM may offer relevant arrangements after genuine CRED shortfalls or repeate
 | EXP-S034 | RANSOM on non-DEADLOCK versus DEADLOCK; HUSH MONEY near zero TRACE; repeated Protocol activation. | Verify timing, floor, frequency and legal targets; suspension not automatically break or BYPASS. |
 
 EXP-X007 (PROPOSED): compare conventional BW Icepicks, fully CRED-powered variants and historical hybrid alternatives on identical seeds; track CRED/BW, break rates, extraction, shop spending, deck synergy, zero-BW activation, insufficient funds, boost duration, stacking, activation limits, loops and run viability. Compare voluntary income arrangements against independent CRED generation; avoid tuning to compel disclosure. Test small marginal benefits, accumulated costs and ability to decline. No tests performed.
+
+CRED-EXP-001a: designer specified 1 BW installation for all three proposed CRED-powered Icepicks. EXP-S035: install PAYDAY with 3 BW and 30 CRED, then perform S028 activations if legal; 2 BW and 11 CRED remain. At zero BW an uninstalled Icepick cannot pay installation, but an already installed one can activate with sufficient CRED. Add these cases to X007. No Protocol installation cost decision.
