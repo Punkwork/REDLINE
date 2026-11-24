@@ -296,3 +296,7 @@ Use `docs/operations/README.md` and shared reporting protocol; daily review 22:0
 ### OPS-002 — Milestone progress (DONE: documentation; WAITING: baseline confirmation)
 
 Master defines eight proposed gates; Operations Dashboard owns evidence-based progress. Daily review updates snapshot and links agenda to milestones. Reconcile architecture-v2 and current build evidence; designer confirms scope, weights and gate acceptance.
+
+### OPS-002a — Commercial Steam launch (DIRECTION)
+
+Designer confirmed actual commercial release on Steam as ultimate goal. Master expands M08 and proposes M09 launch gate; dashboard tracks nine gates. Steamworks status, pricing, launch date, weights and detailed acceptance remain to verify/decide. No account or publication action authorized.
