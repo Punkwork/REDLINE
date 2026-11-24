@@ -144,3 +144,7 @@ An independent run may offer greater variety, unexpected opportunities, unfamili
 **Open philosophical question:** When a system learns who you are by observing your choices, and then shapes your world according to what it has learned, are you discovering who you are or becoming who it believes you to be?
 
 Algorithmic Reduction complements Curated Autonomy (available choices) and Commodification of Autonomy (exchanges for benefits) by addressing representation and self-perception. Apply the four-question design gate and all PHIL-001 safeguards. The designer particularly emphasized the recursive loop and disappearance of surprise. No implementation authorized.
+
+## Companion catalogue — PHIL-003
+
+See [Philosophical Gameplay Manifestations Catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md) for the running register of concrete examples, permanent GM IDs and proposal status. Append future examples there; the Bible retains philosophical direction.
