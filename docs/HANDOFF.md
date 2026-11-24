@@ -284,3 +284,7 @@ Created `PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md` (10d0d90) with 31 proposed li
 ### NUL-DIALOGUE-001a — Earlier dialogue recovery (DONE: partial documentation)
 
 Added NR-032–075 (91c06e2), 26 earlier dialogue examples and 18 wording fragments. Full transcript completeness unverified; copy review pending.
+
+### NUL-DIALOGUE-002 — Dialogue architecture (DONE: documentation; WAITING: implementation approval)
+
+Created 13-section `PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md` (db37cb9). Review proposed schema, events, pacing and QA before implementation. All existing approval gates apply; no code authorized.
