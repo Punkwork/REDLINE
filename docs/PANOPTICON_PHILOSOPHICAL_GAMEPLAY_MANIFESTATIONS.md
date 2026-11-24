@@ -90,3 +90,7 @@ GM-040 — Explicit THE CARBON retrospective reveal of suspended enforcement and
 Append new examples with the next unused GM ID, date/source, system, circumstance, immediate benefit or choice, possible longer-term experience, principle tags, status, primary and secondary psychological effects, and a concrete in-game example as the final column. Keep related examples linked rather than silently replacing them. Preserve withdrawn and rejected ideas with rationale. When a proposal advances, link its separate decision ID, approved rules specification and implementation/validation evidence; catalogue inclusion alone is never approval. Before implementation answer all four questions from PHIL-001/NUL-PILLAR-001c: strategic meaning, genuine agency, multiple responses, significance without explanation. Reconsider unresolved criteria. No automatic implementation priority.
 
 The catalogue is designer-facing. Discovery belongs to the player.
+
+## NUL-DIALOGUE-002 — Dialogue architecture reference
+
+See [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md) for proposed contextual expression of dialogue manifestations. No manifestation status changes or implementation authorization.
