@@ -3075,3 +3075,7 @@ Designer requested one all-domain [Design Experimentation Bible](PANOPTICON_DESI
 ## BACKCHANNEL-001 — Preferred experimental iteration (2026-11-24)
 
 Designer endorsed EXP-C029 BACKCHANNEL, 2 BW SCRIPT, supporting ICE STR <=2, suspend one non-DEADLOCK sub; bypass if all primary ICE subs broken by end of next Rustler turn, otherwise end suspension. [Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) (ddc4793ce6d41b500c1086c9d209fe61e07f64c7) owns detailed alternatives, scenarios and open questions. BYPASS-001 unchanged; no formal rule adoption or implementation authorized.
+
+## NULL-POINTER-001 — Cost adjustment (APPROVED, 2026-11-24)
+
+Designer explicitly approved reducing NULL POINTER from 2 BW to 1 BW. All other properties unchanged. Deck Synergy §9.2 updated (08b5b6f6e0ea3b43d46924849fecb889d9a18955). Runtime card database remains at 2 BW pending Claude Code synchronization and tests; this request is documentation only.
