@@ -271,3 +271,20 @@ CRED-EXP-001a: designer specified 1 BW installation for all three proposed CRED-
 CRED-EXP-001b: designer clarified EXP-C042–044 are PROGRAM cards (ICEPICK specialization), requiring RAM under normal installation rules. RAM requirements (designer-confirmed experimental revision CRED-EXP-001c): PAYDAY 1 RAM, BRIBE 1 RAM, MERCENARY 2 RAM. Installation remains 1 BW, all boosts and breaks CRED-only. Test insufficient RAM and normal unload rules in X007. Other Protocol proposals unchanged.
 
 CRED-EXP-001c: designer specified PAYDAY 1 RAM, BRIBE 1 RAM, MERCENARY 2 RAM. All other experimental values unchanged. EXP-S036: with 4 available RAM, all three occupy 4 RAM; test insufficient RAM, unloading and competition with utility Programs in X007. No implementation authorization.
+
+## 14 — VOID forced Program uninstallation (VOID-EXP-001, 2026-11-24)
+
+EXP-M012 (PROPOSED): Programs reward investment in persistent infrastructure. VOID ICE threatens that investment. Designer brainstorming, not shipping approval. Program economics: initial BW, occupied RAM (foregone utility/coverage), ongoing BW/CRED activation, deck slots, persistence across Node encounters, vulnerability to removal, repeat installation BW and draw delay. Existing voluntary unload is 0 BW to discard (Core Rules §3.1); do not change it.
+
+Candidate VOID-exclusive subroutine **UNLOAD**: The Rustler chooses one installed Program. Uninstall it and place it in the discard pile. RAM immediately released; no BURN. Any installed Program including Icepicks and Extractors eligible. No installed Programs: no effect. Protocols and Ghostware immune. Normal reinstallation cost. Player choice preferred by designer; random selection retained as comparison, not preferred. No additional TRACE, CORTEX or reinstallation surcharge initially. Name provisional. Forced removal occurs during Corporation Response under existing VOID reveal/activation and break legality; no new rules approved. Progressive revelation can surprise on first execution, then allow prioritization; repeated executions threaten persistent infrastructure. Program-heavy versus SCRIPT-heavy deck vulnerability and MERCENARY's 2 RAM investment are hypotheses.
+
+| ID | Scenario | Expected under proposal / question |
+|---|---|---|
+| EXP-S037 | Four 1-RAM Programs installed: PAYDAY, BRIBE, Extractor, utility; UNLOAD fires. | Choose Extractor to preserve combat or Icepick to preserve income; chosen card discarded, 1 RAM freed. |
+| EXP-S038 | MERCENARY occupies 2 RAM; choose it for UNLOAD. | Release 2 RAM; lose VOID breaking access until reinstalled. |
+| EXP-S039 | No installed Programs, only Protocols/Ghostware. | No effect; no other target substituted. |
+| EXP-S040 | Hidden UNLOAD first fires, then repeats on later responses. | Test reveal, legal break counterplay, repeated selection and progressive loss; no forced random choice. |
+| EXP-S041 | Removed Program drawn again or REBOOT occurs. | Normal discard circulation and installation cost; verify boost/state reset and existing unload-trigger interactions before adoption. |
+| EXP-S042 | All DEADLOCKs neutralized before response. | Existing BREACH response skip applies; UNLOAD does not fire. |
+
+EXP-X008 (PROPOSED): compare player-selected versus random removal and baseline without UNLOAD on identical seeds; track reinstall BW, RAM occupancy, income lost, Icepick availability, turns, deck diversity, meaningful sacrifice, recovery and frustration. Compare Program-heavy and SCRIPT-heavy decks, frequency/placement of UNLOAD, multiple VOID ICE, no eligible targets, selection UI during response, and interactions with existing paid/voluntary unload triggers (do not assume forced removal qualifies). Preserve viable Program investment and counterplay; no tests performed. 
