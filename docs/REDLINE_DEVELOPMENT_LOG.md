@@ -564,3 +564,7 @@ Preserved designer-requested autonomy burden and liberation paradox in Philosoph
 ## 2026-11-24 — NUL-DIALOGUE-001: Dialogue compendium (Codex)
 
 Created thematic register of 31 proposed lines (10d0d90), including six paired contradictions. Linked foundational, philosophical, master and HANDOFF docs. Interpretations to confirm: suggested triggers, associations and pairings are editorial; no new canon or approved copy. No code changes; tests not run (docs only).
+
+## 2026-11-24 — NUL-DIALOGUE-001a: Earlier dialogue recovery (Codex)
+
+Added 44 recovered entries (91c06e2), including 18 wording fragments. Interpretations to confirm: contextual labels editorial; transcript recovery partial; all copy proposed. No code changes or tests (docs only).
