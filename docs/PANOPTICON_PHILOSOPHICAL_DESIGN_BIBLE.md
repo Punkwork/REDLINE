@@ -167,3 +167,7 @@ These are distinct, potentially overlapping responses, not sequential stages. Ne
 Design direction: preserve enjoyable, viable independent play, meaningful resistance, genuine competence, intelligible choices and opportunities for discovery. Explore relief through genuinely useful optional assistance rather than manufactured frustration, repeated unavoidable failure, punitive friction or deliberate erosion of player confidence. The Rustler's fictional relationship with institutional control can express these tensions without requiring the actual player to feel helpless. NUL/REM may offer support after naturally occurring difficulties; acceptance, refusal and indifference must remain meaningful possibilities. No psychological meters, classifications, authored explanatory reveals or prescribed outcomes. Discovery rather than disclosure.
 
 How the two forms manifest mechanically remains unresolved. Apply the four-question design gate and PHIL-001 safeguards. This entry preserves the designer's philosophical direction and constraint; it does not establish a seventh formal principle, approve mechanics, dialogue, or authorize implementation.
+
+## Companion dialogue reference — NUL-DIALOGUE-001
+
+See [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) for proposed philosophical expression through character contradiction. Preserve psychological invisibility and PHIL-004 safeguards.
