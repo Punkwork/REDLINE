@@ -4,31 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-005a: hardware-style corner indicators; BLOATWARE icons (Claude)
-
-**Designer:**
-- "Yes" to the BLOATWARE icons and the dash on TRACER's dial.
-- "As for the icons on the top right corner, make them look like part of the hardware of the card. Right now they look very much out of place."
-
-**Changed (`card.gd`):**
-- `CornerChip` now draws a round indicator matching the BW dial: a drop shadow, a steel bezel `#D3DEDB` with a shaded lower arc, a face `#29352F`, a glyph with a soft glow, and a glass glint.
-- A new `CornerRail` (brushed steel with two screws) sits behind the stack.
-- BLOATWARE gets an `UNPLAYABLE` icon, and a `PENALTY` lamp (red face `#F07A5E`, dark number) whenever the rules text says "in your hand at the end of your turn: +N TRACE". That is TRACER's +3.
-- Unplayable cards show "—" on the BW dial.
-- The tooltip legend covers the new icons.
-
-**Fixture:** ink contrast is checked against each indicator's own face, so the penalty lamp is covered. Unplayable cards must show "—". There is a new SPAM capture.
-
-**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
-
-**Interpretations to confirm:** the penalty lamp's red; reading the penalty from the rules text (the rules code hard-codes TRACER's +3); the rail's look.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude).
-
 ## 2026-11-19 — CARDS-004 and HAND-MAX-001 built: 1.4× cards, fanned hand, hand limit 10 (Claude)
 
 **Designer:** "Yes to the fanned cards. Commit. Commit these icon and card changes to the next Build." The tuned fan values are approved.
@@ -549,3 +524,8 @@ LOG-001: oldest dated entry moved unchanged to archive.
 ## 2026-11-24 — UI-WORKFLOW-001 (Codex)
 
 **UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes. Registered 15 stable component IDs in the UI Design Bible §1a. Documentation only; no Godot tests run. Native issue numbers selected to avoid duplicate proposal numbering. No labels, board or individual issues created in this change.
+
+
+## 2026-11-24 — DOCS-MIG-001 (ChatGPT)
+
+Designer authorized mandatory documentation migration gate and next-session UI completion priority. Identical agent instructions, Master Design, HANDOFF and shared daily priorities updated. UI reference repair 2f1727f remains partial; full dependency validation, editorial reconciliation and retirement outstanding. Documentation only; no Godot tests run.

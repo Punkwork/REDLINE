@@ -2482,3 +2482,30 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RE
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude).
 
+
+
+## 2026-11-19 — CARDS-005a: hardware-style corner indicators; BLOATWARE icons (Claude)
+
+**Designer:**
+- "Yes" to the BLOATWARE icons and the dash on TRACER's dial.
+- "As for the icons on the top right corner, make them look like part of the hardware of the card. Right now they look very much out of place."
+
+**Changed (`card.gd`):**
+- `CornerChip` now draws a round indicator matching the BW dial: a drop shadow, a steel bezel `#D3DEDB` with a shaded lower arc, a face `#29352F`, a glyph with a soft glow, and a glass glint.
+- A new `CornerRail` (brushed steel with two screws) sits behind the stack.
+- BLOATWARE gets an `UNPLAYABLE` icon, and a `PENALTY` lamp (red face `#F07A5E`, dark number) whenever the rules text says "in your hand at the end of your turn: +N TRACE". That is TRACER's +3.
+- Unplayable cards show "—" on the BW dial.
+- The tooltip legend covers the new icons.
+
+**Fixture:** ink contrast is checked against each indicator's own face, so the penalty lamp is covered. Unplayable cards must show "—". There is a new SPAM capture.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
+
+**Interpretations to confirm:** the penalty lamp's red; reading the penalty from the rules text (the rules code hard-codes TRACER's +3); the rail's look.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude).
+

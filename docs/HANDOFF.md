@@ -5,6 +5,10 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 ---
 
+## Blocking documentation migration — DOCS-MIG-001
+
+Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the mandatory migration gate in AGENTS.md / CLAUDE.md §8. Claude Code: full-checkout dependency scan, reference repairs, applicable validation and safe legacy retirement; ChatGPT/Claude: editorial reconciliation and narrative relocation. Prior repair commit 2f1727f. No subsequent consolidation until this gate passes. Status: OPEN; no retirement or full validation yet.
+
 ## How we work
 
 1. **Work on `main`** (designer, 2026-11-17; replaces the 2026-11-15 rule that used `codex/halcyon-playtest-stabilization`). Follow the working agreement in `AGENTS.md` / `CLAUDE.md`: start from the latest `main`, record design decisions in `REDLINE_MASTER_DESIGN.md`, report the commit where finished work lives, and ask the designer before creating a branch. The former working branch was merged into `main` at a523502 and is no longer used.

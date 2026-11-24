@@ -3046,3 +3046,20 @@ Designer explicitly confirmed: “Panopticon needs to go to market. This is part
 **M09 — Commercial Steam launch (new proposed gate):** Steamworks onboarding and applicable store/build review requirements satisfied; rights, licensing, store assets, pricing, launch configuration and support arrangements confirmed; designer authorizes launch; approved production build is publicly available for purchase on Steam, with store URL and release/build evidence recorded. Store preparation may proceed in parallel subject to authorization. Verify current Steam requirements before implementation. No actual publication, spending, pricing, launch date or account action authorized by this decision. Post-launch support scope remains open.
 
 Progress is measured not simply by how much of PANOPTICON has been built, but by how much closer it has come to fulfilling its intended player experience and reaching commercial launch. Nine gates now proposed; weights and acceptance thresholds remain open.
+
+
+## 8. Documentation migration gate (DOCS-MIG-001)
+
+Designer-authorized 2026-11-24. Consolidation must reduce clutter, not create parallel authorities. Work in controlled batches on main, with one atomic completion commit per batch. No subsequent consolidation batch may begin until the preceding batch passes this gate.
+
+Before declaring a batch complete:
+- Inventory source content and dependencies; preserve unique material, decision IDs, approval status, provenance and historical records. Relocate narrative or other out-of-scope material to its appropriate canonical destination before retirement.
+- Reconcile duplicates and superseded specifications against Master Design; do not silently resolve genuine design conflicts or change gameplay rules.
+- Repair active references across the entire tracked repository, including relative links, anchors, source code, tests, CI, packaging and asset manifests. Preserve historical records accurately; use immutable historical links where needed.
+- Validate all affected paths and anchors, and run applicable build/test checks if dependencies warrant them. Record commands, results, coverage and any unresolved failures. A partial scan or inaccessible files cannot count as a pass.
+- Retire superseded documents from the active tree once their content and dependencies are verified. Git history preserves originals; temporary redirects are exceptions, not permanent duplicate documentation.
+- Verify the final diff and canonical destinations, record the decision ID, evidence and completion commit in Master Design, HANDOFF and Development Log. Never mark an incomplete gate complete.
+
+Claude Code should perform full-checkout dependency scans and validation; ChatGPT/Claude reconcile editorial content and design intent. Use the same repository records, not parallel backlogs. Escalate only genuine design conflicts or blockers to the designer. No new branch or rules changes authorized.
+
+**Current blocking batch: UI-BIBLE-001.** Resume on 2026-11-25. Finish editorial reconciliation, narrative relocation, repository-wide dependency repair and validation, and legacy source retirement before starting any other documentation consolidation. Reference repair commit: 2f1727f698b4e5c084c5e3f12c280b68475565fa. Seven imported sources remain in the active tree; full validation has not passed. The existing daily review must carry this blocker into the next agenda until resolved.

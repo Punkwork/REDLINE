@@ -106,3 +106,20 @@ Implement what the current docs say; where they're unclear, make the smallest re
 **UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes.
 
 Read `docs/operations/README.md` at session start. At session end, file actual findings in the shared reports and registers on main, using the report template; link native GitHub issues and PRs rather than duplicating them. Daily review is 22:00 America/Toronto; next-day priorities require designer confirmation. No separate agent backlogs. Preserve existing approval and branch rules.
+
+
+## 8. Documentation migration gate (DOCS-MIG-001)
+
+Designer-authorized 2026-11-24. Consolidation must reduce clutter, not create parallel authorities. Work in controlled batches on main, with one atomic completion commit per batch. No subsequent consolidation batch may begin until the preceding batch passes this gate.
+
+Before declaring a batch complete:
+- Inventory source content and dependencies; preserve unique material, decision IDs, approval status, provenance and historical records. Relocate narrative or other out-of-scope material to its appropriate canonical destination before retirement.
+- Reconcile duplicates and superseded specifications against Master Design; do not silently resolve genuine design conflicts or change gameplay rules.
+- Repair active references across the entire tracked repository, including relative links, anchors, source code, tests, CI, packaging and asset manifests. Preserve historical records accurately; use immutable historical links where needed.
+- Validate all affected paths and anchors, and run applicable build/test checks if dependencies warrant them. Record commands, results, coverage and any unresolved failures. A partial scan or inaccessible files cannot count as a pass.
+- Retire superseded documents from the active tree once their content and dependencies are verified. Git history preserves originals; temporary redirects are exceptions, not permanent duplicate documentation.
+- Verify the final diff and canonical destinations, record the decision ID, evidence and completion commit in Master Design, HANDOFF and Development Log. Never mark an incomplete gate complete.
+
+Claude Code should perform full-checkout dependency scans and validation; ChatGPT/Claude reconcile editorial content and design intent. Use the same repository records, not parallel backlogs. Escalate only genuine design conflicts or blockers to the designer. No new branch or rules changes authorized.
+
+**Current blocking batch: UI-BIBLE-001.** Resume on 2026-11-25. Finish editorial reconciliation, narrative relocation, repository-wide dependency repair and validation, and legacy source retirement before starting any other documentation consolidation. Reference repair commit: 2f1727f698b4e5c084c5e3f12c280b68475565fa. Seven imported sources remain in the active tree; full validation has not passed. The existing daily review must carry this blocker into the next agenda until resolved.
