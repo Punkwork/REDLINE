@@ -2979,3 +2979,7 @@ Established [PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md](PANOPTICON_PHILOSOPHICAL_
 ## PHIL-002 — Algorithmic Reduction (DIRECTION, designer-confirmed 2026-11-23)
 
 Preserve six explorations in the [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md): reduction of identity, curiosity displaced by conformity, performance metrics, performance of identity, recursive self-surveillance and disappearance of surprise. Designer emphasizes the last two. Algorithmic Reduction concerns representation and self-perception; no psychological classification or predetermined outcome. All mechanics remain PROPOSED.
+
+## PHIL-003 — Gameplay Manifestations Catalogue (DIRECTION, 2026-11-24)
+
+Designer requested a living [catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md) of philosophical gameplay examples. Initial 39 proposed examples and one withdrawn example; stable GM IDs, principle tags and status. No mechanics authorized; existing approval gates remain.
