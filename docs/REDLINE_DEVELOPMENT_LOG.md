@@ -541,3 +541,7 @@ Created all-domain experimentation Bible (7e0928f) with initial BYPASS proposals
 ## 2026-11-24 — BACKCHANNEL-001 (ChatGPT)
 
 Saved designer-endorsed single-subroutine BACKCHANNEL iteration as EXP-C029, alternative versions, EXP-S009–011 and EXP-X004 in Experimentation Bible (ddc4793). Proposed terminology and timing questions retained. No rules, code, tests or consolidation.
+
+## 2026-11-24 — NULL-POINTER-001 (ChatGPT)
+
+Designer approved 1 BW instead of 2 for NULL POINTER; updated Deck Synergy §9.2 (08b5b6f), Master and HANDOFF. Runtime unchanged; no tests run.
