@@ -292,3 +292,7 @@ Created 13-section `PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md` (db37cb9). Revie
 ### OPS-001 — Shared operations hub (DONE: repository setup)
 
 Use `docs/operations/README.md` and shared reporting protocol; daily review 22:00 Toronto. Claude scheduling requires separate setup; designer confirms next-day agenda.
+
+### OPS-002 — Milestone progress (DONE: documentation; WAITING: baseline confirmation)
+
+Master defines eight proposed gates; Operations Dashboard owns evidence-based progress. Daily review updates snapshot and links agenda to milestones. Reconcile architecture-v2 and current build evidence; designer confirms scope, weights and gate acceptance.
