@@ -565,3 +565,7 @@ Designer explicitly confirmed that the experiment must remain psychologically in
 ## 2026-11-23 — NUL-PILLAR-001b: Played under surveillance (Codex)
 
 Recorded designer-confirmed philosophical distinction and paradox of autonomy in the NUL/REM document, master design and HANDOFF. Experience is sufficient; no prescribed psychological outcome or measurement. No code changes; tests not run (documentation only).
+
+## 2026-11-23 — NUL-PILLAR-001c: Four-Question Design Gate (Codex)
+
+Recorded designer-requested NUL/REM mechanic review questions in foundational design, master design and HANDOFF. Failed or unresolved criteria require reconsideration; existing approvals remain. No code changes; tests not run (documentation only).
