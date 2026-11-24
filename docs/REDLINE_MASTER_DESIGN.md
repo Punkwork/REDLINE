@@ -3107,3 +3107,7 @@ Designer clarified EXP-C042–044 are RAM-using PROGRAM Icepicks, 1 BW install, 
 ## CRED-EXP-001c — Icepick RAM requirements (ChatGPT)
 
 Designer specified PAYDAY 1 RAM, BRIBE 1 RAM, MERCENARY 2 RAM. Experimentation Bible §13 (a28329f275b87bd1d163e4e798cf5859b5e96958), EXP-S036; supersedes TBD RAM in CRED-EXP-001b. Other values unchanged. Experimental only; no code or tests.
+
+## VOID-EXP-001 (ChatGPT)
+
+Saved exploratory VOID-only UNLOAD, Rustler-selected Program removal to discard, Program opportunity costs, EXP-M012/S037–042/X008 in Experimentation Bible §14 (171674b7e8b34d0dd4dad805b9861da4e22b0d0b). No rules/code/tests or consolidation.
