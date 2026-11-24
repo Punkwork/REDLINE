@@ -573,3 +573,7 @@ Recorded designer-requested NUL/REM mechanic review questions in foundational de
 ## 2026-11-23 — PHIL-001: Philosophical Design Bible (Codex)
 
 Created the designer-requested eight-section Bible (c4f815d), including surveillance economy, curated rewards and both autonomy paradoxes. Cross-referenced master design, NUL/REM and HANDOFF. New mechanics remain PROPOSED. No code changes; tests not run (docs only).
+
+## 2026-11-23 — PHIL-002: Algorithmic Reduction (Codex)
+
+Preserved all six designer-requested explorations in Philosophical Design Bible §09 (b711f53), emphasizing recursive self-surveillance and disappearance of surprise. Master and HANDOFF updated. No code changes or tests (docs only).
