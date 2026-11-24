@@ -2995,3 +2995,7 @@ Preserve designer-confirmed statements in Philosophical Design Bible §10: demor
 ## NUL-DIALOGUE-001 — Dialogue compendium (DIRECTION, 2026-11-24)
 
 Designer requested thematic dialogue catalogue. Created [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) with 31 draft lines, grouped by contradiction, suggested contexts, psychological associations and paired references. All copy and triggers remain PROPOSED; no new canon or mechanics authorized.
+
+## NUL-DIALOGUE-001a — Earlier dialogue recovery (2026-11-24)
+
+Expanded compendium to 75 entries (57 dialogue examples and 18 wording fragments) from earlier discussion and design records. Partial recovery, not exhaustive. All proposed; no implementation authorized.
