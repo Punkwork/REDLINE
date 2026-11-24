@@ -119,3 +119,7 @@ Recovered from earlier conversation context and the foundational design records.
 - **Economic incentives:** NR-055
 - **Relationship and intervention:** NR-056, NR-057
 - **Language of delegation:** NR-058, NR-059, NR-060, NR-061, NR-062, NR-063, NR-064, NR-065, NR-066, NR-067, NR-068, NR-069, NR-070, NR-071, NR-072, NR-073, NR-074, NR-075
+
+## NUL-DIALOGUE-002 — Architecture reference
+
+See [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md) for proposed selection and delivery, schema, pacing and QA. This compendium remains the editorial register; draft copy is not automatically shipped.
