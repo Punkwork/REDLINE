@@ -566,3 +566,7 @@ Created complete 13-section Bible (db37cb9), cross-linked four companion documen
 ## 2026-11-24 — OPS-001: Shared operations hub (Codex)
 
 Created shared registers, report template and agenda; linked native issues/PRs; updated identical agent instructions. Interpretations to confirm: session-end reports, native issues as to-dos, proposed agenda pending designer confirmation. No code or tests (docs only).
+
+## 2026-11-24 — OPS-002: Milestone progress (Codex)
+
+Added proposed release goal, eight milestone gates and evidence-based measurement to master; initial provisional snapshot and daily update protocol in operations dashboard. Interpretations to confirm: release scope, gates, weights and baseline; architecture-v2 not audited. No code changes or tests (docs only).
