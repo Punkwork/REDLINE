@@ -2983,3 +2983,7 @@ Preserve six explorations in the [Philosophical Design Bible](PANOPTICON_PHILOSO
 ## PHIL-003 — Gameplay Manifestations Catalogue (DIRECTION, 2026-11-24)
 
 Designer requested a living [catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md) of philosophical gameplay examples. Initial 39 proposed examples and one withdrawn example; stable GM IDs, principle tags and status. No mechanics authorized; existing approval gates remain.
+
+## PHIL-003a — Catalogue psychological effects and concrete examples (DIRECTION, 2026-11-24)
+
+Designer requested Psychological Effect grouping and Concrete In-Game Example as the final column of the [catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md). Primary grouping plus secondary associations; hypothetical designer-facing labels, not measured outcomes. All examples remain proposals.
