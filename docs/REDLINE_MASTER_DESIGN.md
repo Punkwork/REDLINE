@@ -3067,3 +3067,7 @@ Claude Code should perform full-checkout dependency scans and validation; ChatGP
 ## BYPASS-001 — Non-final encounter eligibility (LOCKED, 2026-11-24)
 
 Designer explicitly established: BYPASS is possible only in encounters that are not the final encounter of a Node. A Node has up to three encounters. In a one-encounter Node BYPASS is prohibited; in a two-encounter Node only encounter 1 is eligible; in a three-encounter Node encounters 1 and 2 are eligible. No BYPASS on the final encounter. Eligibility alone does not grant a bypass. Specific triggers, targets, costs, consequences, passives, extraction and parting-shot interactions remain OPEN; earlier rapid-penetration and card ideas are proposals only. No implementation authorized by this record.
+
+## EXP-DESIGN-001 — Design Experimentation Bible (DIRECTION, 2026-11-24)
+
+Designer requested one all-domain [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) for new ideas, scenarios, experimental cards and viability analysis. Initial BYPASS exploration recorded at 7e0928f42582a1faac5f552c4b98fa1e62509abe. Proposals are not rules; UI-WORKFLOW-001 native issue authority and existing topic catalogues remain. New document creation only; no consolidation or retirement while DOCS-MIG-001 gate open. No implementation authorized.
