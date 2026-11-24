@@ -2967,3 +2967,7 @@ The psychological experiment must remain invisible: never disclose, classify, qu
 ## NUL-PILLAR-001b — Played under surveillance (DIRECTION, designer-confirmed 2026-11-23)
 
 **PANOPTICON is not a game about surveillance. It is a game played under surveillance.** Within fiction, perceived observation may shape obedience or resistance without delegated authority; it may also have no effect. The paradox of autonomy remains open: what does it mean to act freely? Experience is sufficient; no prescribed interpretation, psychological result or measurement is required. Preserve NUL-PILLAR-001a and local-only data safeguards. See [foundational NUL/REM design](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). No mechanics authorized.
+
+## NUL-PILLAR-001c — Four-Question Design Gate (DIRECTION, 2026-11-23)
+
+Designer requested preservation of the four questions as the NUL/REM mechanic review standard: Is it strategically meaningful? Does it preserve genuine player agency? Does it allow for multiple psychological responses? Can it communicate its philosophical significance without explaining it? Answer all four before implementation; reconsider any failed or unresolved criterion. Passing does not replace designer approval or existing development gates. See [NUL/REM foundational design](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). Designer-facing only; no gameplay changes authorized.
