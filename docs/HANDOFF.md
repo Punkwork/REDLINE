@@ -206,6 +206,8 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 ## Done
 
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes. Initial consolidation: `16265fb`. Follow-up: reconcile imported historical sections and references before retiring source files; no implementation approval implied.
+
 | ID | What | Commit / date |
 |---|---|---|
 | RELEASE-001 / HALCYON PLAYTEST 12 (PT11 fixes, TUNE-002) | Exported the Windows build. Tag: `git tag playtest-12 2845ecd && git push origin playtest-12` (designer). | `2845ecd`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/45025253088), [artifact](https://github.com/Punkwork/REDLINE/actions/runs/45025253088/artifacts/14754544395) |
