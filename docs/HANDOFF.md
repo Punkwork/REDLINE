@@ -312,3 +312,7 @@ Designer confirmed actual commercial release on Steam as ultimate goal. Master e
 ### BYPASS-001 — Encounter eligibility (designer decision; WAITING on mechanic specification)
 
 Record non-final encounter restriction; no BYPASS on final layer, including single-layer Nodes. Define triggers and resolution before implementation. No code task authorized.
+
+### EXP-DESIGN-001 — Experimentation Bible (DONE: documentation)
+
+Created [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) (7e0928f); initial BYPASS proposals, cards, scenarios and tests remain exploratory. Existing UI issue workflow and migration blocker unchanged. No implementation task authorized.
