@@ -171,3 +171,7 @@ How the two forms manifest mechanically remains unresolved. Apply the four-quest
 ## Companion dialogue reference — NUL-DIALOGUE-001
 
 See [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) for proposed philosophical expression through character contradiction. Preserve psychological invisibility and PHIL-004 safeguards.
+
+## NUL-DIALOGUE-002 — Dialogue architecture reference
+
+See [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md), especially §09 algorithmic curation: different players discover different aspects of one character. Preserve psychological invisibility and PHIL-004 safeguards.
