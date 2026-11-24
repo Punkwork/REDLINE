@@ -268,3 +268,7 @@ All six explorations preserved in Philosophical Design Bible §09 (b711f53), wit
 ### PHIL-003 — Gameplay Manifestations Catalogue (DONE: documentation)
 
 Created `PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md` (e34eebd). Append future philosophical examples with stable IDs and status; no implementation authorized.
+
+### PHIL-003a — Catalogue expansion (DONE: documentation)
+
+Added psychological effect grouping and concrete in-game examples to all 39 proposed entries (1fed957), annotated withdrawn GM-040, and updated maintenance instructions. No implementation authorized.
