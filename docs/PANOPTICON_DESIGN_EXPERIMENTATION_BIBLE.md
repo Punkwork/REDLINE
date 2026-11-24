@@ -143,3 +143,52 @@ New non-mechanical ideas use EXP-D IDs and link appropriate canonical domain doc
 | EXP-C029 / BACKCHANNEL-001 | Designer-endorsed preferred experimental iteration; timing and balance open | §04, EXP-S009–011, EXP-X004 |
 
 Initial population covers recent BYPASS discussion, not exhaustive recovery of all historical design ideas. Existing documents remain intact. No consolidation, code changes or playtests performed.
+
+## 11 — RIOT signature cards and ZEROED engine (RIOT-EXP-001, 2026-11-24)
+
+Origin: designer/ChatGPT discussion. Objective: distinguish RIOT through STR reduction, sequencing, direct breaks and temporary resource sacrifice. M01/M04. All new cards experimental, not adopted or authorized for implementation. Names and rarity subject to collision/balance review. Starter candidates are alternatives, not seven mandatory additions.
+
+### Existing baseline (references, not new proposals)
+
+See [Deck Synergy §5.3a and §9.2](REDLINE_DECK_SYNERGY.md), [card database](../godot/scripts/core/cards.gd) and [regression tests](../godot/tests/synergy_cases.gd). FLATLINE (common, 0 BW +2 TRACE): −2 STR, ZEROED −4 TRACE. KNOCKOUT (uncommon, 1 BW): −3 STR, ZEROED break one legal subroutine. SECOND WIND (uncommon, 0 BW): −1 STR, ZEROED gain 1 BW. NULL POINTER (rare, SCRIPT — EXPLOIT, BURNED): target STR 0, break two legal subs on same ICE including DEADLOCK; approved 1 BW under NULL-POINTER-001, runtime synchronization pending. All RIOT SCRIPT — EXPLOIT. STR reductions last encounter. ZEROED first positive-to-zero transition per ICE per encounter, any cause consumes it; only printed ZEROED finisher pays bonus. Excess reduction lost; ROT exception per Core Rules. Starting-zero and positive-floor ICE ineligible. Common bonus working value ~1 BW, uncommon break or BW; TRACE relief particularly useful for RIOT. INTEGER UNDERFLOW withdrawn. Tests inspected, not executed.
+
+### New cards
+
+| ID | Card | Cost | Preferred experimental effect | Status |
+|---|---|---|---|---|
+| EXP-C030 | STRUCTURAL WEAKNESS | 1 BW | Target FORTRESS −3 STR this encounter. | PROPOSED |
+| EXP-C031 | FRACTURE | 1 BW | Target ICE −1 STR this encounter; if it has a broken subroutine, additional −2 STR. | PROPOSED |
+| EXP-C032 | FIRST STRIKE | 1 BW | Target ICE −3 STR this encounter. If first card played this turn, reduce this card's cost by 1 BW. | REVISED, designer-endorsed |
+| EXP-C033 | EXPOSED CIRCUIT | 1 BW | Target ICE −1 STR per unbroken subroutine, maximum −3. | PROPOSED |
+| EXP-C034 | SABOTEUR | 1 BW | Target supporting ICE −3 STR; cannot target rightmost ICE. | PROPOSED |
+| EXP-C035 | CRITICAL MASS | 1 BW | Target ICE −1 STR; if current STR ≥5, −3 instead. | PROPOSED |
+| EXP-C036 | BREAKER BAR | 0 BW initially | BURN another card in hand as additional cost; break one legal subroutine on target ICE STR ≤3; increase this physical card's BW cost by 1 for remainder of node. | REVISED, designer-endorsed experimental direction |
+
+All are candidate RIOT-exclusive starter SCRIPT — EXPLOIT cards; classification for other candidates provisional. Reduction duration encounter proposed for all. FIRST STRIKE original alternative: −3 if first card, otherwise −1; superseded by unconditional −3 and first-card cost discount (not post-resolution BW gain). Can open at zero available BW if otherwise legal. FRACTURE rewards attack-first sequencing; CRITICAL MASS high-STR targets; EXPOSED CIRCUIT complex ICE (whether hidden subs count open); SABOTEUR BACKCHANNEL preparation; STRUCTURAL WEAKNESS type specialization. CRITICAL MASS can still consume ZEROED on low-STR targets; no automatic protection.
+
+### EXP-C036 — BREAKER BAR signature specification
+
+One copy in RIOT starter deck (designer confirmed); additional acquisition during run open. Any ICE type, DEADLOCK eligible subject to normal restrictions. Not itself BURNED. Player chooses another card to BURN; cannot pay without another eligible card. Base cost 0 BW preferred experimental variant, mandatory sacrifice; each successful play increases cost of that physical copy by 1 BW, independently, for current node, resets at next node. Costs 0/1/2/3/4 on first five plays plus sacrifice each time. Earlier alternatives retained: flat 1 BW, escalating from 1 BW, encounter or run duration (node chosen), two starter copies (superseded by one). Confirm precise payment/choice cancellation, COMPILE interaction, copied cards, BURN eligibility and persistence, REBOOT timing, UI cost display, and whether zero-cost first use is balanced. No implementation approval. Deck slot replacement not decided.
+
+### Additional BYPASS concepts
+
+EXP-M007 (PROPOSED): distinguish a printed ZEROED-triggered conditional BYPASS from a card that exploits already-zero supporting ICE (NULL POINTER-style payoff; overlaps EXP-M005/EXP-C007). No exact new card cost or text agreed. BYPASS-001 final-layer prohibition remains binding; no automatic bypass.
+
+### Scenarios
+
+| ID | Setup/actions | Expected under proposal / question |
+|---|---|---|
+| EXP-S012 | ICE STR5; illustrative PROBE −2 → STR3; KNOCKOUT −3. | ZEROED free legal break; compare alternatives below. |
+| EXP-S013 | Same STR3 after PROBE; SECOND WIND then FLATLINE. | STR2 then 0; FLATLINE bonus −4 TRACE, +2 TRACE cost, net −2 if sufficient TRACE. |
+| EXP-S014 | Same STR3; FLATLINE then SECOND WIND. | STR1 then 0; gain 1 BW, pay +2 TRACE; no FLATLINE bonus. |
+| EXP-S015 | Same STR3; ordinary reductions to 0 (e.g. two PROBEs). | No printed bonus; ZEROED spent. Later printed ZEROED cannot trigger; NULL POINTER still eligible. PROBE values illustrative, verify actual card definition. |
+| EXP-S016 | FIRST STRIKE first card against STR5 supporting ICE. | 0 BW, STR2, BACKCHANNEL eligible only where legal; BACKCHANNEL costs 2 BW and its own conditions apply. Later FIRST STRIKE costs 1 BW. |
+| EXP-S017 | Original BREAKER BAR variant: STR6 → FIRST STRIKE (0 BW) → BREAKER BAR (1 BW) → KNOCKOUT (1 BW) → NULL POINTER (1 BW). | Four legal breaks for 3 BW if all cards and four legal subs available. Historical scenario, superseded cost variant retained. |
+| EXP-S018 | Revised BREAKER BAR first use: same sequence as S017, plus another eligible card to BURN. | Four legal breaks for 2 BW plus one BURN; BREAKER BAR next cost 1. If no sacrifice or legal sub, cannot assume play succeeds. |
+| EXP-S019 | Repeated BREAKER BAR across encounters in same node; REBOOT with smaller available deck. | Cost increases per physical copy, BURN may accelerate circulation but sacrifices useful cards; new node resets cost. Test two copies independently if acquired. |
+| EXP-S020 | FRACTURE before vs after legal break; CRITICAL MASS on STR4 vs STR5; EXPOSED CIRCUIT on one vs three subs; SABOTEUR on supporting vs primary. | Compare threshold/ordering value, hidden subs, target legality and risk of consuming ZEROED. |
+| EXP-S021 | Supporting ICE STR3/2/0 on eligible vs final layer. | BREAKER BAR ≤3, BACKCHANNEL ≤2 subject to open final-layer suspension legality, ZEROED transition and NULL POINTER at 0 distinct; no final-layer BYPASS. |
+
+### EXP-X005 — RIOT starter engine viability (PROPOSED, not run)
+
+Compare baseline RIOT and candidate starter replacements on identical seeds. Measure first-turn legal breaks, BW, TRACE, BURN choices, deck circulation/REBOOT, ZEROED finishers, Icepick use, dead draws, multi-encounter cost escalation and final-layer performance. Compare flat 1 BW, escalating 1 BW and preferred escalating 0 BW + BURN; one copy preferred, additional copies only experimental. Test no sacrifice, no legal sub, positive STR floor, already-zero, TUMBLE/BOOTING/SEQUENCED, multiple copies, node reset and early BREACH. Risks: free opening burst, deck thinning too strong, redundant Icepicks, escalating cost makes signature card dead, excessive starter size. No measured balance claims or test authorization. 
