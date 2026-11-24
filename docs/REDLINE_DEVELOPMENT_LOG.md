@@ -4,16 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-004a: BW cost dial top-left (Claude)
-
-**Designer:** "The bw cost could move to top left of card as we are not efficiently using the card space/corners for icons." This reverses the earlier answer to keep it top-right.
-
-**Changed:** in `card.gd`, the cost dial moves from (142, 5) to (−5, 3) on every card type, and the Rustler title panel shifts from x 13 to x 26 at the same 124 px width, clearing the dial and using the freed right side. BLOATWARE's title is unchanged; its face starts below the dial. Checked with a 7-card 1.4× hand mockup: every card's cost now shows; before, all but the last were covered.
-
-**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean, including `shot_cards_pcb` (0 failures).
-
-**Open:** what goes in the freed top-right corner. Proposed: a RAM chip on PROGRAMs (29 cards, RAM 0–2, not shown on the card today).
-
 ## 2026-11-19 — CARDS-005 corner icons; CARDS-004 overlap and fan (Claude)
 
 **Designer:**
@@ -568,3 +558,7 @@ Created thematic register of 31 proposed lines (10d0d90), including six paired c
 ## 2026-11-24 — NUL-DIALOGUE-001a: Earlier dialogue recovery (Codex)
 
 Added 44 recovered entries (91c06e2), including 18 wording fragments. Interpretations to confirm: contextual labels editorial; transcript recovery partial; all copy proposed. No code changes or tests (docs only).
+
+## 2026-11-24 — NUL-DIALOGUE-002: Dialogue architecture (Codex)
+
+Created complete 13-section Bible (db37cb9), cross-linked four companion documents, master and HANDOFF. Interpretations to confirm: schema, events, pacing, cooldowns, content targets and QA are proposals; no implementation approved. No code changes; tests not run (docs only). LOG-001: moved oldest dated entry unchanged to archive.
