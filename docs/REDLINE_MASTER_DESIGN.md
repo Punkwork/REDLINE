@@ -273,6 +273,8 @@ The player is the **rustler**; the opposing system is the **corporation**. Encou
 Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), visit timing, and any other services require **VERIFY**; do not assume additional recovery options.
 
 ## 6. Interface and player experience
+
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes.
 **Established decisions:**
 - Fixed ICE inspection bay, avoiding unpredictable layout shifts.
 - Drag-to-ICE breaker interaction.
