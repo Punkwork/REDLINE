@@ -71,3 +71,13 @@ Preserve the following discussion as proposals, not authorized mechanics:
 - Earlier suggestion of a THE CARBON retrospective record explicitly reporting suspended enforcement and zero subsequent attempts is withdrawn as a player-facing psychological reveal. Do not use it to explain the experiment. A spontaneous discovery such as seeing another player freely remove cards and thinking “Wait. You can do that?” is preferable.
 
 Acceptance constraint for future design reviews: can the player understand immediate gameplay choices without being told that they are participating in a psychological progression system? Can they independently discover, resist or never experience the proposed phenomenon? No feature may announce that the experiment has succeeded. The final step belongs to the player.
+
+## NUL-PILLAR-001b — Played under surveillance (designer-confirmed direction, 2026-11-23)
+
+**PANOPTICON is not a game about surveillance. It is a game played under surveillance.**
+
+Surveillance is a fictional condition under which decisions are made, not merely a narrative subject. Perceived observation is distinct from delegated authority: awareness that NUL/REM remembers gameplay may influence behaviour even without enforcement or delegation. Obedience, deliberate resistance and attempts to become unpredictable may all be responses to observation; equally, a player may be unaffected. The philosophical paradox is: if both obedience and resistance can be influenced by surveillance, what does it mean to act freely?
+
+The designer confirmed that experiencing this question is sufficient for player and designer. The game need not establish a psychological result, infer motives, collect evidence of individual internalization or prescribe an interpretation. Identical actions can have different motives. No player-facing question, answer, classification, reveal or psychological progression indicator is required or permitted under NUL-PILLAR-001a. The experiment is an artistic experience, not a claim of scientific proof. Preserve genuine choices, strategic enjoyment and the possibility of no effect. Surveillance refers only to fictional local gameplay; no real-world monitoring or external telemetry.
+
+Three complementary principles: participatory imprisonment, psychological invisibility, and the paradox of autonomy. Future proposals should be strategically meaningful, allow genuine choices and diverse responses, and communicate through experience rather than explanation. Dialogue demonstrating memory without judgment or mechanical consequences is a candidate for exploration, not an approved mechanic. No implementation or rules change authorized.
