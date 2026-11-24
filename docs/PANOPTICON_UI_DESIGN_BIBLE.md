@@ -15,6 +15,36 @@ PANOPTICON's interface should express the craftsmanship, personality and materia
 - Design for accumulation without sacrificing legibility.
 - Consolidation first: extend this specification rather than creating new permanent UI briefs.
 
+## 1a. UI proposal governance and component register (UI-WORKFLOW-001)
+
+**UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes.
+
+### Stable component IDs
+
+| Component ID | Interface component |
+|---|---|
+| UI-HDR | Header and global indicators |
+| UI-GHW | Ghostware rail |
+| UI-VIT | Resource indicators |
+| UI-PRG | Installed Programs |
+| UI-ICE | ICE consoles and mascots |
+| UI-SUB | Subroutine instrument keys |
+| UI-RSP | Corporation Response |
+| UI-CAP | CAP rack |
+| UI-CRD | Card design |
+| UI-HND | Hand and card arrangement |
+| UI-HOV | Hover and inspection |
+| UI-CTL | Action controls |
+| UI-NUL | NUL/REM presentation |
+| UI-MAP | Network map |
+| UI-FRM | Interface framing and materials |
+
+IDs identify components, not proposals. Use the native GitHub issue number as the unique proposal identifier; include one or more component IDs in the issue title or body. Example: `[UI-VIT] Icon-first resource indicators`. Reuse IDs across iterations; do not renumber or recycle them. Extend this register when a new component is agreed.
+
+### Issue workflow
+
+Proposed → Design exploration → Designer review → Approved → In development → Validation → Complete. Rejected or superseded proposals retain their history and are closed with a reason. Each issue records component IDs, problem, proposed change, relevant Bible sections/decision IDs, mockup links and revisions, acceptance criteria, approval evidence, implementation commit/PR and validation evidence. Search existing issues before opening a new one. No implementation before designer approval. Store mockup assets in the existing visual asset directories and link them from the issue. Use issue comments for revisions; close only after validation or an explicit disposition. GitHub Projects and labels may provide views of the same issues, never a second backlog.
+
 ## 2. Current encounter direction and precedence
 ENC-CONCEPT-001 supersedes the earlier flip-clock layout; ICE-ANALOG-001 icon keys and HOVER-001 remain applicable. Later Master Design decisions override historical specifications below. The supplied November 24 mockup is illustrative, not a rules source.
 - Ghostware: persistent top rail, ORIGIN first with gold rim, acquired badges follow; hover/focus name and effect with high-resolution art. The old below-RETURN placement is superseded. Existing shrink-to-fit rule remains until reviewed; minimum size and overflow behavior are open. Show the first Ghostware in the next design mockup.
