@@ -2551,3 +2551,16 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Pl
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex).
 
+
+## 2026-11-19 — DEV-001: validate the card and hand baseline (Codex)
+
+Pulled `main` at `2d5301a` and verified that `AGENTS.md` and `CLAUDE.md` match. Reviewed HANDOFF, the day's development log, ARCHITECTURE and the master design for CARDS-003 through CARDS-005a and HAND-MAX-001.
+
+**Validation:** Godot 4.3 import passed. Rules 369 passed, ADP 17 passed and SIGNAL/CARBON 671 passed, with zero failures. Bot clears from 30 seeds per Rustler were GENERALIST 19, ECHO 13, RIOT 16 and VECTOR 15. The RIOT bot hit the existing DOORBELL step guard twice. All 14 CI screenshot fixtures passed on Xvfb with the GL Compatibility renderer. The hand fixture reported zero geometry failures for hands of 6–10, and the PCB fixture reported zero failures across 444 base texts and 1,008 compiled pairs. Of the compiled pairs, 107 used the names and hover panel.
+
+**Interpretations to confirm:** None from this verification. The open designer checks in HANDOFF are still pending. This verification adds no design decisions.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: publish FORTRESS rolls before the response (Codex).
+
