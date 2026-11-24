@@ -2445,3 +2445,40 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RE
 
 **Open:** what goes in the freed top-right corner. Proposed: a RAM chip on PROGRAMs (29 cards, RAM 0–2, not shown on the card today).
 
+
+## 2026-11-19 — CARDS-005 corner icons; CARDS-004 overlap and fan (Claude)
+
+**Designer:**
+- "I would rather they start to slightly overlap instead of squash them together so the sides aren't visible, and them overlap more as more cards in hand. We need to utilize the top right corner for icons."
+- To Claude's suggestions: "Yes i want all of them in the right corner. Gentle fan is perfect."
+
+**Changed (`card.gd`):**
+- A `CornerChip` stack down the top-right corner, from `corner_icons(def)`:
+  - the Icepick type (FORTRESS tower, TUMBLER arrow, VOID diamond, ANY asterisk);
+  - RAM on PROGRAMs;
+  - extra TRACE (red) and CRED (gold) costs;
+  - a target crosshair.
+- `corner_legend()` adds the icons to the tooltip.
+- The Rustler title panel narrows from 124 to 114 px.
+
+**Fixture (`shot_cards_pcb`):**
+- Checks each captured card's icons and their order, that they stay inside the cartridge and off every text panel, their ink contrast and the tooltip legend.
+- Adds FORTRESS, VOID and ANY Icepick captures.
+- Sweeps every base and compiled card for at most four icons; the most is 3.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
+
+**CARDS-004 updated (docs):**
+- The hand is centred and overlaps from the start, more as it grows: 5% at 1–4 cards, then 10, 15, 22, 29, 36 and 43% at 5–10. These are PROPOSED working values.
+- A gentle fan of about 2° per card (approved).
+
+**Interpretations to confirm:** the overlap values; the icon order; the glyph shapes.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude).
+
