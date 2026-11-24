@@ -3063,3 +3063,7 @@ Before declaring a batch complete:
 Claude Code should perform full-checkout dependency scans and validation; ChatGPT/Claude reconcile editorial content and design intent. Use the same repository records, not parallel backlogs. Escalate only genuine design conflicts or blockers to the designer. No new branch or rules changes authorized.
 
 **Current blocking batch: UI-BIBLE-001.** Resume on 2026-11-25. Finish editorial reconciliation, narrative relocation, repository-wide dependency repair and validation, and legacy source retirement before starting any other documentation consolidation. Reference repair commit: 2f1727f698b4e5c084c5e3f12c280b68475565fa. Seven imported sources remain in the active tree; full validation has not passed. The existing daily review must carry this blocker into the next agenda until resolved.
+
+## BYPASS-001 — Non-final encounter eligibility (LOCKED, 2026-11-24)
+
+Designer explicitly established: BYPASS is possible only in encounters that are not the final encounter of a Node. A Node has up to three encounters. In a one-encounter Node BYPASS is prohibited; in a two-encounter Node only encounter 1 is eligible; in a three-encounter Node encounters 1 and 2 are eligible. No BYPASS on the final encounter. Eligibility alone does not grant a bypass. Specific triggers, targets, costs, consequences, passives, extraction and parting-shot interactions remain OPEN; earlier rapid-penetration and card ideas are proposals only. No implementation authorized by this record.
