@@ -3079,3 +3079,7 @@ Designer endorsed EXP-C029 BACKCHANNEL, 2 BW SCRIPT, supporting ICE STR <=2, sus
 ## NULL-POINTER-001 — Cost adjustment (APPROVED, 2026-11-24)
 
 Designer explicitly approved reducing NULL POINTER from 2 BW to 1 BW. All other properties unchanged. Deck Synergy §9.2 updated (08b5b6f6e0ea3b43d46924849fecb889d9a18955). Runtime card database remains at 2 BW pending Claude Code synchronization and tests; this request is documentation only.
+
+## RIOT-EXP-001 — RIOT experimental card catalogue (ChatGPT)
+
+Designer requested preservation in Experimentation Bible §11 (bdc32508a880a9925010b0dde4bdbf0ac7b0fc57). EXP-C030–036, M007, S012–021, X005; revised FIRST STRIKE and one-copy BREAKER BAR with per-copy node escalation and BURN cost. Experimental only; NULL-POINTER-001 remains approved separately. No code or tests; UI migration gate unchanged.
