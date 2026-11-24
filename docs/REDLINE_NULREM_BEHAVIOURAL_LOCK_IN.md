@@ -81,3 +81,14 @@ Surveillance is a fictional condition under which decisions are made, not merely
 The designer confirmed that experiencing this question is sufficient for player and designer. The game need not establish a psychological result, infer motives, collect evidence of individual internalization or prescribe an interpretation. Identical actions can have different motives. No player-facing question, answer, classification, reveal or psychological progression indicator is required or permitted under NUL-PILLAR-001a. The experiment is an artistic experience, not a claim of scientific proof. Preserve genuine choices, strategic enjoyment and the possibility of no effect. Surveillance refers only to fictional local gameplay; no real-world monitoring or external telemetry.
 
 Three complementary principles: participatory imprisonment, psychological invisibility, and the paradox of autonomy. Future proposals should be strategically meaningful, allow genuine choices and diverse responses, and communicate through experience rather than explanation. Dialogue demonstrating memory without judgment or mechanical consequences is a candidate for exploration, not an approved mechanic. No implementation or rules change authorized.
+
+## NUL-PILLAR-001c — Four-Question Design Gate (designer-requested review standard, 2026-11-23)
+
+Evaluate every proposed NUL/REM mechanic against all four questions before implementation:
+
+1. **Is it strategically meaningful?** Identify its contribution to the deckbuilding experience, meaningful tradeoffs or player decisions. Philosophy alone is not sufficient justification for a mechanic.
+2. **Does it preserve genuine player agency?** Identify meaningful choices, including refusal, resistance and voluntary delegation with intelligible immediate consequences. A particular delegated action may be constrained under a separately approved rule; this does not authorize arbitrary restrictions or remove real-world controls.
+3. **Does it allow for multiple psychological responses?** Allow trust, resistance, indifference and no effect; never require a particular psychological outcome or infer a player's motives from their actions.
+4. **Can it communicate its philosophical significance without explaining it?** The experience must carry the meaning. No psychological exposition, classification, quantification or progression announcement, consistent with NUL-PILLAR-001a/b.
+
+For each proposal, document a concise answer and supporting design rationale for each question. If any answer is no or unresolved, reconsider the mechanic before implementation. Passing this review is necessary, not sufficient: designer approval and existing development gates remain required. This is a designer-facing review standard, never a player-facing score or feature. Ordinary nonmechanical companion dialogue need not provide a strategic benefit. No gameplay mechanic or rules change is authorized by this entry.
