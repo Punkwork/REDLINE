@@ -540,3 +540,7 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | ID | Change to this document |
 |---|---|
 | HAND-MAX-001 | **Maximum hand size 10.** Every card in hand counts, CACHED cards and Bloatware included. A draw that would take the hand past 10 stops, and the card stays on the draw pile (§4, draw step). *Interpretation to confirm:* any other effect that would move a card into a full hand does nothing. — **APPROVED 2026-11-19** |
+
+### Later amendment — BYPASS-001 (2026-11-24)
+
+Designer rule: BYPASS is permitted only in non-final encounters (ICE layers) of a Node, which has up to three encounters. It is prohibited in the final encounter, including a single-encounter Node. Eligibility is not automatic success; specific BYPASS effects and resolution remain open. See Master Design BYPASS-001.
