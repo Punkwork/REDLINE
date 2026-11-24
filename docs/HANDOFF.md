@@ -280,3 +280,7 @@ Preserved both designer-requested statements and safeguards in Philosophical Des
 ### NUL-DIALOGUE-001 — Dialogue compendium (DONE: documentation)
 
 Created `PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md` (10d0d90) with 31 proposed lines and six thematic pairs. Cross-referenced foundational and philosophical design. Copy/canon review pending; no implementation authorized.
+
+### NUL-DIALOGUE-001a — Earlier dialogue recovery (DONE: partial documentation)
+
+Added NR-032–075 (91c06e2), 26 earlier dialogue examples and 18 wording fragments. Full transcript completeness unverified; copy review pending.
