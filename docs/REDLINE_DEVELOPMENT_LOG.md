@@ -537,3 +537,7 @@ Recorded designer rule restricting BYPASS to non-final encounters of Nodes of up
 ## 2026-11-24 — EXP-DESIGN-001 (ChatGPT)
 
 Created all-domain experimentation Bible (7e0928f) with initial BYPASS proposals, experimental cards, scenarios and viability/test framework. Interpretations to confirm: stable ID scheme and editorial organization; all specific mechanics remain proposed. UI issue authority preserved; no consolidation, code or tests.
+
+## 2026-11-24 — BACKCHANNEL-001 (ChatGPT)
+
+Saved designer-endorsed single-subroutine BACKCHANNEL iteration as EXP-C029, alternative versions, EXP-S009–011 and EXP-X004 in Experimentation Bible (ddc4793). Proposed terminology and timing questions retained. No rules, code, tests or consolidation.
