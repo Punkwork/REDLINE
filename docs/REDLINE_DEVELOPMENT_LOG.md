@@ -560,3 +560,7 @@ Added designer-requested psychological effect and final concrete example columns
 ## 2026-11-24 — PHIL-004: Demoralization (Codex)
 
 Preserved designer-requested autonomy burden and liberation paradox in Philosophical Design Bible §10 (88ae456), distinguishing two potential responses and prohibiting deliberate helplessness or disengagement. Master and HANDOFF updated. Interpretations to confirm: formal principle status and mechanics remain open. No code changes; tests not run (docs only).
+
+## 2026-11-24 — NUL-DIALOGUE-001: Dialogue compendium (Codex)
+
+Created thematic register of 31 proposed lines (10d0d90), including six paired contradictions. Linked foundational, philosophical, master and HANDOFF docs. Interpretations to confirm: suggested triggers, associations and pairings are editorial; no new canon or approved copy. No code changes; tests not run (docs only).
