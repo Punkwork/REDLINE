@@ -2971,3 +2971,7 @@ The psychological experiment must remain invisible: never disclose, classify, qu
 ## NUL-PILLAR-001c — Four-Question Design Gate (DIRECTION, 2026-11-23)
 
 Designer requested preservation of the four questions as the NUL/REM mechanic review standard: Is it strategically meaningful? Does it preserve genuine player agency? Does it allow for multiple psychological responses? Can it communicate its philosophical significance without explaining it? Answer all four before implementation; reconsider any failed or unresolved criterion. Passing does not replace designer approval or existing development gates. See [NUL/REM foundational design](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). Designer-facing only; no gameplay changes authorized.
+
+## PHIL-001 — PANOPTICON Philosophical Design Bible (DIRECTION, designer-confirmed 2026-11-23)
+
+Established [PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md) as the cross-system philosophical reference. Consolidates participatory imprisonment, psychological invisibility, paradox of autonomy, commodification of autonomy and curated autonomy; preserves surveillance economy and three-card reward filtering explorations. Extend the four-question design review to mechanics expressing these principles. Existing rules, lore and approval gates remain authoritative; all new mechanics, values and algorithms remain PROPOSED.
