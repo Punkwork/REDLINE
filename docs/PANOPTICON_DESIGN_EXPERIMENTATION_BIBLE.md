@@ -219,3 +219,49 @@ EXP-M008 (PROPOSED design hypothesis): Ghostware provides persistent fundamental
 | EXP-S027 | RADIO SILENCE: no EXPLOIT played; next corporate response has gains 1 and 3. | Total 2 rather than 4 under aggregate interpretation; compare turn with EXPLOIT played (no discount). Clarify sequential application and threshold timing. |
 
 EXP-X006 (PROPOSED, not run): compare persistent per-source reduction (1 vs 2), first-gain reduction, break reward, ZEROED reward and EXPLOIT abstention on representative seeds. Measure TRACE thresholds, source frequency, opportunity cost, synergy with RIOT/FLATLINE, installation timing, duplicate stacking and whether passive reduction trivializes low-value TRACE. Clarify minimum zero, whether reductions apply before threshold checks, aggregate versus sequential corporate response handling, simultaneous triggers, zero-gain events and interaction with existing prevention. No balance evidence or implementation authorization.
+
+## 13 — CRED-powered combat and CAPITAL ENGINE (CRED-EXP-001, 2026-11-24)
+
+Designer-endorsed experimental direction: **BW represents immediate computational capacity. CRED represents accumulated purchasing power.** CRED-powered Icepicks circumvent computational limitations through wealth. Both STR increases and subroutine breaks consume zero BW during activation; installation cost is undecided. Conventional legality, matching ICE type and strength requirements remain applicable. No new shipping rules or implementation authorization.
+
+| ID | Card | Type | Base STR | Activation |
+|---|---|---|---|---|
+| EXP-C042 | PAYDAY | ICEPICK — FORTRESS | 2 | 3 CRED: +1 STR; 5 CRED: break 1 FORTRESS subroutine. |
+| EXP-C043 | BRIBE | ICEPICK — TUMBLER | 3 | 4 CRED: +1 STR; 4 CRED: break 1 TUMBLER subroutine. |
+| EXP-C044 | MERCENARY | ICEPICK — VOID | 2 | 3 CRED: +1 STR; 6 CRED: break 1 VOID subroutine. |
+| EXP-C045 | BLACK BUDGET | PROTOCOL | — | 5 CRED: gain 1 BW. Once per turn. |
+| EXP-C046 | BOUNTY HUNTER | PROTOCOL | — | 4 CRED: target ICE −2 STR this encounter. Once per turn. |
+| EXP-C047 | HUSH MONEY | PROTOCOL | — | 5 CRED: lose 3 TRACE. Once per turn. |
+| EXP-C048 | INSIDER TRADING | PROTOCOL | — | 3 CRED: draw 1 card. Once per turn. |
+| EXP-C049 | RANSOM | PROTOCOL | — | 8 CRED: suspend one non-DEADLOCK subroutine until your next turn. Once per encounter. |
+
+All PROPOSED. Names, prices, strengths, rarity, installation costs, RAM, boost duration and limits subject to review. Initial Icepick proposal: PAYDAY as above; BRIBE +1 STR for 1 BW, break for 4 CRED; MERCENARY +1 STR for 3 CRED, break for 1 BW. Superseded as preferred experiment by entirely CRED-powered activations. No arbitrary once-per-turn Icepick activation cap initially proposed; economic cost is primary balancing lever. No free activation or installation assumption.
+
+EXP-M009: extend M008 type distinction: SCRIPT immediate single-use; PROGRAM installed utility; ICEPICK installed breaking capability; PROTOCOL installed conditional or manually activated ability (potentially CRED cost); GHOSTWARE persistent rule modifier. Exploratory taxonomy only; reconcile with canonical definitions before adoption. Preserve triggered Protocols C038–041.
+
+EXP-M010: CAPITAL ENGINE archetype: extract CRED → activate Protocols/Icepicks → neutralize ICE efficiently → secure further CRED. Renewable BW versus accumulated wealth creates opportunity cost between combat and future purchases. RIOT STR reduction can reduce CRED expenditure; no RIOT exclusivity proposed.
+
+EXP-M011: voluntary fictional surveillance income. Small individually useful incentives can collectively support a CRED-powered deck. Illustrative offers, not approved prices or mechanics:
+
+| Fictional information shared | Benefit |
+|---|---|
+| Encounter history | +1 CRED per encounter |
+| Deck composition | +1 CRED per node |
+| Installation history | Reduced Protocol activation cost |
+| Route-selection history | Additional extraction income |
+| Purchasing history | Personalized discounts |
+| Continuous behavioural monitoring | Recurring CRED dividend |
+
+NUL/REM may offer relevant arrangements after genuine CRED shortfalls or repeated use; see NR-076–079 in [Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md). See [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md) for economic dependency rationale and safeguards. Fictional data only; intelligible voluntary terms; independent play remains viable. No actual surveillance, compulsory participation or psychological classification.
+
+| ID | Scenario | Expected under proposal / question |
+|---|---|---|
+| EXP-S028 | Already installed PAYDAY, 3 BW, 30 CRED, FORTRESS STR5 with two legal DEADLOCK subs. | Three boosts cost 9 CRED, two breaks cost 10; 11 CRED and all 3 BW remain, assuming legal activations. |
+| EXP-S029 | Same encounter with STR reduction Script first. | Trade BW for reduced CRED boost expenditure; compare resource efficiency and ZEROED interactions. |
+| EXP-S030 | CRED-powered Icepick at zero BW, sufficient CRED versus insufficient CRED. | Activation independent of BW; insufficient CRED cannot pay; test legality and no partial payment. |
+| EXP-S031 | BLACK BUDGET, extraction and CRED generation combined. | Test conversion loops, caps and net income; no assumed self-financing. |
+| EXP-S032 | One CRED short of a useful activation; optional encounter-history offer available. | Small benefit may enable activation; refusal remains viable, no mandatory acceptance or inferred motive. |
+| EXP-S033 | Several small income arrangements accumulated over a run versus independent economy. | Compare combat efficiency, purchasing opportunity cost, diversity and viability; no predetermined psychological outcome. |
+| EXP-S034 | RANSOM on non-DEADLOCK versus DEADLOCK; HUSH MONEY near zero TRACE; repeated Protocol activation. | Verify timing, floor, frequency and legal targets; suspension not automatically break or BYPASS. |
+
+EXP-X007 (PROPOSED): compare conventional BW Icepicks, fully CRED-powered variants and historical hybrid alternatives on identical seeds; track CRED/BW, break rates, extraction, shop spending, deck synergy, zero-BW activation, insufficient funds, boost duration, stacking, activation limits, loops and run viability. Compare voluntary income arrangements against independent CRED generation; avoid tuning to compel disclosure. Test small marginal benefits, accumulated costs and ability to decline. No tests performed.
