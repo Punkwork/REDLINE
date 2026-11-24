@@ -248,3 +248,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 | MAIN-001 status sync | Corrected the working line, merged PR status and Windows export trigger in the current build status. | 2026-11-17 (Codex) |
 | CHROME-001 / CARDS-001 source notes | Recorded available source and edit history for nine generated assets and corrected Whirlwind Bloatware. Exact prompts, model IDs and the corrected concept PNG are still missing. | 2026-11-17 (Codex) |
 | VIS-001 doc | `REDLINE_VISUAL_LANGUAGE.md` and `docs/visual/` (reference images, placeholder backgrounds, mascot SVGs) added for Codex. | 2026-11-17 (Claude) |
+
+### NUL-PILLAR-001b — design follow-up (WAITING)
+
+Preserve designer-confirmed principle: PANOPTICON is not a game about surveillance; it is a game played under surveillance. Perceived observation and delegated authority are distinct. Allow obedience, resistance or no effect without classifying players or requiring an experimental result. Review future proposals against NUL-PILLAR-001a/b in the foundational NUL/REM document. No implementation authorized.
