@@ -308,3 +308,7 @@ Master defines eight proposed gates; Operations Dashboard owns evidence-based pr
 ### OPS-002a — Commercial Steam launch (DIRECTION)
 
 Designer confirmed actual commercial release on Steam as ultimate goal. Master expands M08 and proposes M09 launch gate; dashboard tracks nine gates. Steamworks status, pricing, launch date, weights and detailed acceptance remain to verify/decide. No account or publication action authorized.
+
+### BYPASS-001 — Encounter eligibility (designer decision; WAITING on mechanic specification)
+
+Record non-final encounter restriction; no BYPASS on final layer, including single-layer Nodes. Define triggers and resolution before implementation. No code task authorized.
