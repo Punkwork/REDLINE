@@ -288,3 +288,7 @@ Added NR-032–075 (91c06e2), 26 earlier dialogue examples and 18 wording fragme
 ### NUL-DIALOGUE-002 — Dialogue architecture (DONE: documentation; WAITING: implementation approval)
 
 Created 13-section `PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md` (db37cb9). Review proposed schema, events, pacing and QA before implementation. All existing approval gates apply; no code authorized.
+
+### OPS-001 — Shared operations hub (DONE: repository setup)
+
+Use `docs/operations/README.md` and shared reporting protocol; daily review 22:00 Toronto. Claude scheduling requires separate setup; designer confirms next-day agenda.
