@@ -24,6 +24,7 @@ The game creates conditions in which these questions can be experienced, not an 
 | Paradox of Autonomy | Obedience and resistance may both be influenced by observation; a player may also be unaffected. |
 | Commodification of Autonomy | Privacy and independence can be exchanged for genuine benefits, even remarkably small ones. |
 | Curated Autonomy | Choices occur within an environment increasingly shaped by what the system believes the individual wants. |
+| Algorithmic Reduction | A system representing individuals through measurable behaviour may reshape their opportunities, incentives and self-perception around that representation. |
 
 These are complementary lenses, not sequential player states. The latter two are preserved as philosophical design direction; their mechanical expressions remain proposals.
 
@@ -117,3 +118,29 @@ Record rationale for each. Reconsider failed or unresolved criteria. Passing doe
 Preliminary assessment: paid telemetry and registered pricing offer real purchasing power and voluntary alternatives; recurring dividends require viable exit; financial delegation requires explicit scope and meaningful alternatives; personalized rewards require diversity and pivot viability. All remain proposals, not passed implementation reviews.
 
 The Design Bible can explain what the player must be allowed to discover for themselves.
+
+## 09 — PHIL-002: Algorithmic Reduction (designer-confirmed direction, 2026-11-23)
+
+Preserve all six explorations arising from the designer-supplied quotation about the algorithmic gaze, reduction, performance, conformity and recursive self-surveillance. Source attribution was not established; the quotation is inspiration, not player-facing copy. All mechanical examples remain PROPOSED.
+
+### 9.1 — Reduction of identity
+Four players acquiring defensive cards may be experimenting, recovering from damage, preparing for a corporation or genuinely preferring defence. The corporate profile collapses these distinct motives into one label. The profile becomes a substitute for the person; the system cannot reliably infer interiority from behaviour. Do not classify the actual player.
+
+### 9.2 — Replacement of curiosity with conformity
+Personalized rewards may favour familiar synergies while reducing exposure to strange cards, unfamiliar mechanics and unexpected combinations. A player may become more effective while their world becomes smaller. Optimization can come at the expense of possibility. Preserve viable independent play and meaningful strategic pivots; no approved weighting or exclusions.
+
+### 9.3 — Performance metrics
+Candidate operational summaries: CRED extracted, BW utilization, subroutines neutralized and program utilization. Legitimate gameplay statistics may influence what the player considers success, even without rewards. A measure can become a target rather than a useful proxy (Goodhart's law). Do not introduce psychological scores or mandate efficiency as the correct objective. Metrics and presentation remain proposals; presentation never feeds rules.
+
+### 9.4 — Performance of identity
+Candidate NUL/REM observations: “You're certainly thorough,” “You rarely leave CRED behind,” “You've always been resourceful,” and “That doesn't seem like you.” A player may act consistently with the perceived identity, contradict it, or ignore it. For example, they might risk additional extraction because they have been characterized as persistent. No motive can be inferred reliably. Preserve nontransactional companionship and existing copy guards; no dialogue approved here.
+
+### 9.5 — The recursive loop (priority exploration)
+The system observes actions, forms a representation and shapes opportunities or feedback. The player may then observe their own behaviour through the perceived eyes of the system, adapt their choices, and provide new evidence that reinforces or challenges the representation. Example: before acquiring a defensive card, a player wonders whether it will cause more defensive cards to appear. Even deliberate attempts to manipulate the recommendation system may reflect the influence of surveillance. This is a possible expression of internalization, not a programmed state or proof of compliance. A player may never consider the observer at all. No phase, score, announcement or prescribed result.
+
+### 9.6 — The disappearance of surprise (priority exploration)
+An independent run may offer greater variety, unexpected opportunities, unfamiliar strategies and uncertainty; a personalized run may offer relevance, consistency, established synergies and predictability. Neither is inherently superior. A player may complete a successful personalized run, then decline personalization on another run and encounter cards or combinations they never previously saw. The world was larger than their previous experience. Let this discovery occur naturally, without an explanatory reveal, achievement or notification. Preserve genuine benefits, viable independence, diversity and replayability; do not deliberately make either experience unenjoyable. No specific pool algorithm approved.
+
+**Open philosophical question:** When a system learns who you are by observing your choices, and then shapes your world according to what it has learned, are you discovering who you are or becoming who it believes you to be?
+
+Algorithmic Reduction complements Curated Autonomy (available choices) and Commodification of Autonomy (exchanges for benefits) by addressing representation and self-perception. Apply the four-question design gate and all PHIL-001 safeguards. The designer particularly emphasized the recursive loop and disappearance of surprise. No implementation authorized.
