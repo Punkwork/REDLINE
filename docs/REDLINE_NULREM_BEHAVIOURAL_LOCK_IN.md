@@ -100,3 +100,7 @@ See [PANOPTICON Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBL
 ## NUL-DIALOGUE-001 — Dialogue compendium
 
 See [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) for thematic contradictions, individual draft lines, contextual triggers and paired references. Character contradiction is a proposed expressive technique, not new canon. All copy remains PROPOSED.
+
+## NUL-DIALOGUE-002 — Dialogue architecture
+
+See [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md) for proposed authored/procedural/template model, contextual selection, pacing, continuity and QA. No new rules authorized.
