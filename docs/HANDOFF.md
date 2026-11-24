@@ -324,3 +324,7 @@ EXP-C029 in Experimentation Bible (ddc4793); timing, legality and balance remain
 ### NULL-POINTER-001 — Approved cost adjustment (WAITING: Claude Code)
 
 NULL POINTER 1 BW (formerly 2), all other properties unchanged. Deck Synergy §9.2 updated (08b5b6f). Synchronize runtime card definition and affected tests, validate; documentation-only change so far.
+
+## RIOT-EXP-001 — RIOT experimental card catalogue (ChatGPT)
+
+Designer requested preservation in Experimentation Bible §11 (bdc32508a880a9925010b0dde4bdbf0ac7b0fc57). EXP-C030–036, M007, S012–021, X005; revised FIRST STRIKE and one-copy BREAKER BAR with per-copy node escalation and BURN cost. Experimental only; NULL-POINTER-001 remains approved separately. No code or tests; UI migration gate unchanged.
