@@ -272,3 +272,7 @@ Created `PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md` (e34eebd). Append 
 ### PHIL-003a — Catalogue expansion (DONE: documentation)
 
 Added psychological effect grouping and concrete in-game examples to all 39 proposed entries (1fed957), annotated withdrawn GM-040, and updated maintenance instructions. No implementation authorized.
+
+### PHIL-004 — Demoralization (DONE: documentation; WAITING: design exploration)
+
+Preserved both designer-requested statements and safeguards in Philosophical Design Bible §10 (88ae456). Explore distinct manifestations without deliberately demoralizing players. No implementation authorized.
