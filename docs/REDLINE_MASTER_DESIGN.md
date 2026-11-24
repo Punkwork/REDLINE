@@ -2991,3 +2991,7 @@ Designer requested Psychological Effect grouping and Concrete In-Game Example as
 ## PHIL-004 — Demoralization and burden of autonomy (DIRECTION, 2026-11-24)
 
 Preserve designer-confirmed statements in Philosophical Design Bible §10: demoralization introduces surrender of autonomy for relief from its burden; if freedom becomes sufficiently exhausting, can surrendering it begin to feel like liberation? Distinguish perceived futility of resistance and declining confidence in independence. Explore without deliberately inducing helplessness, disengagement or frustration; preserve viable independent play. Manifestations unresolved; no mechanics authorized.
+
+## NUL-DIALOGUE-001 — Dialogue compendium (DIRECTION, 2026-11-24)
+
+Designer requested thematic dialogue catalogue. Created [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) with 31 draft lines, grouped by contradiction, suggested contexts, psychological associations and paired references. All copy and triggers remain PROPOSED; no new canon or mechanics authorized.
