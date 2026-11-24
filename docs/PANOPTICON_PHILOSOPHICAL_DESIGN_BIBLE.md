@@ -175,3 +175,21 @@ See [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) for 
 ## NUL-DIALOGUE-002 — Dialogue architecture reference
 
 See [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md), especially §09 algorithmic curation: different players discover different aspects of one character. Preserve psychological invisibility and PHIL-004 safeguards.
+
+## 11 — PHIL-005: Economic dependency and purchased freedom (2026-11-24)
+
+Designer-endorsed exploration: **Economic dependency as an instrument of voluntary surveillance.**
+
+**BW represents immediate computational capacity. CRED represents accumulated purchasing power.**
+
+**Surveillance becomes a means of acquiring computational freedom.**
+
+**The Rustler purchases freedom from one constraint by voluntarily accepting another.**
+
+CRED-powered Icepicks can preserve scarce BW by spending accumulated wealth instead. This creates genuine demand for CRED production, making even the smallest increment of income strategically meaningful. Optional fictional information exchanges, dividends and discounts can become attractive because they enable a concrete tactical action, not because narrative instructs the player to comply. The Rustler may acquire greater tactical autonomy at the potential expense of personal autonomy.
+
+Proposed reinforcing loop: voluntary sharing of fictional behavioural information → additional CRED → CRED-powered activations → preserved BW and combat efficiency → greater perceived value of participation. Each small exchange may be useful independently; accumulated arrangements may become an economic foundation of a deck. This is a hypothesis, not a required sequence or psychological outcome.
+
+NUL/REM can genuinely help after naturally occurring shortfalls or repeated Icepick use. His helpfulness and affection need not be sinister; character contradiction expresses the tension. See NR-076–079 in [Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md). Concrete cards, income examples and scenarios are maintained in [Experimentation Bible §13](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), CRED-EXP-001, rather than duplicated here.
+
+Connect to participatory imprisonment, commodification of autonomy, behavioural lock-in and PHIL-004. Preserve enjoyable and strategically viable independent play: surveillance attractive, not compulsory. No manufactured shortfalls or frustration to force participation; no actual personal data exchange, real-world surveillance, psychological meters or inference of player motives. Immediate fictional exchange terms and consequences intelligible. Observation alone grants no authority. Discovery rather than disclosure. Apply four-question gate before adoption. This is a designer-endorsed philosophical direction, not a new numbered foundational principle, approved mechanics or implementation authorization.
