@@ -148,3 +148,22 @@ Algorithmic Reduction complements Curated Autonomy (available choices) and Commo
 ## Companion catalogue — PHIL-003
 
 See [Philosophical Gameplay Manifestations Catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md) for the running register of concrete examples, permanent GM IDs and proposal status. Append future examples there; the Bible retains philosophical direction.
+
+
+## 10 — PHIL-004: Demoralization and the burden of autonomy (designer-confirmed direction, 2026-11-24)
+
+**Demoralization introduces the surrender of autonomy in exchange for relief from the burden of autonomy itself.**
+
+**Open philosophical question: If freedom becomes sufficiently exhausting, can surrendering it begin to feel like liberation?**
+
+The designer identifies demoralization as integral to exploring human responses to surveillance and the Panopticon, while explicitly rejecting the induction of helplessness or a desire to stop playing. Explore demoralization without deliberately demoralizing the player. Surveillance can contribute to these responses; neither is inevitable or proof of a psychological state.
+
+Distinguish two possible experiences:
+- Perceived futility of resistance: doubt that challenging an institution will meaningfully change circumstances.
+- Declining confidence in independence: doubt that one can function as effectively without the institution's assistance.
+
+These are distinct, potentially overlapping responses, not sequential stages. Neither is synonymous with clinical demoralization, depression or learned helplessness. Do not infer motives or diagnose the player.
+
+Design direction: preserve enjoyable, viable independent play, meaningful resistance, genuine competence, intelligible choices and opportunities for discovery. Explore relief through genuinely useful optional assistance rather than manufactured frustration, repeated unavoidable failure, punitive friction or deliberate erosion of player confidence. The Rustler's fictional relationship with institutional control can express these tensions without requiring the actual player to feel helpless. NUL/REM may offer support after naturally occurring difficulties; acceptance, refusal and indifference must remain meaningful possibilities. No psychological meters, classifications, authored explanatory reveals or prescribed outcomes. Discovery rather than disclosure.
+
+How the two forms manifest mechanically remains unresolved. Apply the four-question design gate and PHIL-001 safeguards. This entry preserves the designer's philosophical direction and constraint; it does not establish a seventh formal principle, approve mechanics, dialogue, or authorize implementation.
