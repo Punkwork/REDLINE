@@ -514,3 +514,7 @@ LOG-001 archived oldest dated entry unchanged: ## 2026-11-19 — CARDS-004 and H
 ## 2026-11-24 — TRACE-EXP-001 — TRACE mitigation concepts (ChatGPT)
 
 Designer requested preservation of SIGNAL DAMPENER (Ghostware) and four Protocols in Experimentation Bible §12 (bc9938aa034cf6a39c6114472b4688b056e6cf1f); EXP-C037–041, M008, S022–027, X006. Proposed type distinction, self-inflicted TRACE coverage and trigger timing remain experimental. No rules/code changes, tests or consolidation.
+
+## 2026-11-24 — NUL-DIALOGUE-003 — Economic dependency dialogue (ChatGPT)
+
+Designer requested preservation of four lines NR-076–079 in NUL/REM Dialogue Compendium (28cd6dea0d23821902a025414a3333724c4b365c). Verbatim dialogue; contextual triggers and associations proposed. No shipping approval, gameplay changes, tests or consolidation.
