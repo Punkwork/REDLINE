@@ -260,3 +260,7 @@ For every proposed NUL/REM mechanic, document strategic meaning, genuine agency,
 ### PHIL-001 — Philosophical Design Bible (DONE: documentation)
 
 Created `PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md` (c4f815d) at designer request. Consult for all philosophical mechanics, especially surveillance economy and curated card rewards. Apply four-question review; new mechanics remain proposals pending designer approval. No implementation authorized.
+
+### PHIL-002 — Algorithmic Reduction (DONE: documentation)
+
+All six explorations preserved in Philosophical Design Bible §09 (b711f53), with priority on recursive self-surveillance and disappearance of surprise. Apply PHIL-001 safeguards and four-question gate. No implementation authorized.
