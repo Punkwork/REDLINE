@@ -539,3 +539,8 @@ Added proposed release goal, eight milestone gates and evidence-based measuremen
 
 Designer confirmed actual Steam commercial launch, not merely release readiness. Master records creative goal, expanded M08 and proposed M09; dashboard and HANDOFF updated. Interpretations to confirm: detailed launch gate, pricing, schedule and weights. No code, tests, account or publication action.
 LOG-001: oldest dated entry moved unchanged to archive.
+
+
+## 2026-11-24 — UI-BIBLE-001 (Codex)
+
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes. Initial consolidation commit `16265fb`. Documentation only; Godot tests not run. Interpretations to confirm: overflow behavior and exact glyphs remain open; source retirement deferred.
