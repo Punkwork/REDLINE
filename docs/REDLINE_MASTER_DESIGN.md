@@ -2987,3 +2987,7 @@ Designer requested a living [catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFE
 ## PHIL-003a — Catalogue psychological effects and concrete examples (DIRECTION, 2026-11-24)
 
 Designer requested Psychological Effect grouping and Concrete In-Game Example as the final column of the [catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md). Primary grouping plus secondary associations; hypothetical designer-facing labels, not measured outcomes. All examples remain proposals.
+
+## PHIL-004 — Demoralization and burden of autonomy (DIRECTION, 2026-11-24)
+
+Preserve designer-confirmed statements in Philosophical Design Bible §10: demoralization introduces surrender of autonomy for relief from its burden; if freedom becomes sufficiently exhausting, can surrendering it begin to feel like liberation? Distinguish perceived futility of resistance and declining confidence in independence. Explore without deliberately inducing helplessness, disengagement or frustration; preserve viable independent play. Manifestations unresolved; no mechanics authorized.
