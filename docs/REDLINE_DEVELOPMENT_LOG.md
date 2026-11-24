@@ -4,18 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — DEV-001: validate the card and hand baseline (Codex)
-
-Pulled `main` at `2d5301a` and verified that `AGENTS.md` and `CLAUDE.md` match. Reviewed HANDOFF, the day's development log, ARCHITECTURE and the master design for CARDS-003 through CARDS-005a and HAND-MAX-001.
-
-**Validation:** Godot 4.3 import passed. Rules 369 passed, ADP 17 passed and SIGNAL/CARBON 671 passed, with zero failures. Bot clears from 30 seeds per Rustler were GENERALIST 19, ECHO 13, RIOT 16 and VECTOR 15. The RIOT bot hit the existing DOORBELL step guard twice. All 14 CI screenshot fixtures passed on Xvfb with the GL Compatibility renderer. The hand fixture reported zero geometry failures for hands of 6–10, and the PCB fixture reported zero failures across 444 base texts and 1,008 compiled pairs. Of the compiled pairs, 107 used the names and hover panel.
-
-**Interpretations to confirm:** None from this verification. The open designer checks in HANDOFF are still pending. This verification adds no design decisions.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: publish FORTRESS rolls before the response (Codex).
-
 ## 2026-11-19 — PIXEL-TRACE-001: TRACE pixelates the corporation's picture (Claude)
 
 **Designer:** "the more trace and the madder/meaner the corporation gets, the more 16-bit the background and ice look. Or the reverse." Claude recommended more TRACE → more pixelated. The designer asked for a mockup at four levels, then approved it: "Looks good. Commit to the build."
@@ -538,3 +526,10 @@ Designer specified PAYDAY 1 RAM, BRIBE 1 RAM, MERCENARY 2 RAM. Experimentation B
 ## 2026-11-24 — VOID-EXP-001 (ChatGPT)
 
 Saved exploratory VOID-only UNLOAD, Rustler-selected Program removal to discard, Program opportunity costs, EXP-M012/S037–042/X008 in Experimentation Bible §14 (171674b7e8b34d0dd4dad805b9861da4e22b0d0b). No rules/code/tests or consolidation.
+
+
+## 2026-11-24 — CRED-EXP-001d — CRED SCRIPTS and card-type identity (ChatGPT)
+
+Designer confirmed EXP-C045–049 as 0 BW SCRIPTS with existing CRED prices/effects, one resolution per play, normal discard/redraw, prior activation caps removed in preferred experiment. EXP-M013/S043–044, X007 extension in Experimentation Bible §15 (8d75932dad452669d6aefc0864bda40092e118df). Existing Protocols unchanged; experimental guidance only, no rules/code/tests or consolidation.
+
+LOG-001 moved oldest dated entry to archive unchanged: 2026-11-19 — DEV-001: validate the card and hand baseline (Codex).
