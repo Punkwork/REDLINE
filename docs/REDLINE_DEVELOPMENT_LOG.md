@@ -4,42 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-005 corner icons; CARDS-004 overlap and fan (Claude)
-
-**Designer:**
-- "I would rather they start to slightly overlap instead of squash them together so the sides aren't visible, and them overlap more as more cards in hand. We need to utilize the top right corner for icons."
-- To Claude's suggestions: "Yes i want all of them in the right corner. Gentle fan is perfect."
-
-**Changed (`card.gd`):**
-- A `CornerChip` stack down the top-right corner, from `corner_icons(def)`:
-  - the Icepick type (FORTRESS tower, TUMBLER arrow, VOID diamond, ANY asterisk);
-  - RAM on PROGRAMs;
-  - extra TRACE (red) and CRED (gold) costs;
-  - a target crosshair.
-- `corner_legend()` adds the icons to the tooltip.
-- The Rustler title panel narrows from 124 to 114 px.
-
-**Fixture (`shot_cards_pcb`):**
-- Checks each captured card's icons and their order, that they stay inside the cartridge and off every text panel, their ink contrast and the tooltip legend.
-- Adds FORTRESS, VOID and ANY Icepick captures.
-- Sweeps every base and compiled card for at most four icons; the most is 3.
-
-**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
-
-**CARDS-004 updated (docs):**
-- The hand is centred and overlaps from the start, more as it grows: 5% at 1–4 cards, then 10, 15, 22, 29, 36 and 43% at 5–10. These are PROPOSED working values.
-- A gentle fan of about 2° per card (approved).
-
-**Interpretations to confirm:** the overlap values; the icon order; the glyph shapes.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude).
-
 ## 2026-11-19 — CARDS-005a: hardware-style corner indicators; BLOATWARE icons (Claude)
 
 **Designer:**
@@ -570,3 +534,8 @@ Created shared registers, report template and agenda; linked native issues/PRs; 
 ## 2026-11-24 — OPS-002: Milestone progress (Codex)
 
 Added proposed release goal, eight milestone gates and evidence-based measurement to master; initial provisional snapshot and daily update protocol in operations dashboard. Interpretations to confirm: release scope, gates, weights and baseline; architecture-v2 not audited. No code changes or tests (docs only).
+
+## 2026-11-24 — OPS-002a: Commercial Steam release (Codex)
+
+Designer confirmed actual Steam commercial launch, not merely release readiness. Master records creative goal, expanded M08 and proposed M09; dashboard and HANDOFF updated. Interpretations to confirm: detailed launch gate, pricing, schedule and weights. No code, tests, account or publication action.
+LOG-001: oldest dated entry moved unchanged to archive.
