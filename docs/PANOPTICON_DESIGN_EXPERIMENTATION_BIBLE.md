@@ -226,9 +226,9 @@ Designer-endorsed experimental direction: **BW represents immediate computationa
 
 | ID | Card | Type | Base STR | Activation |
 |---|---|---|---|---|
-| EXP-C042 | PAYDAY | ICEPICK — FORTRESS | 2 | 3 CRED: +1 STR; 5 CRED: break 1 FORTRESS subroutine. |
-| EXP-C043 | BRIBE | ICEPICK — TUMBLER | 3 | 4 CRED: +1 STR; 4 CRED: break 1 TUMBLER subroutine. |
-| EXP-C044 | MERCENARY | ICEPICK — VOID | 2 | 3 CRED: +1 STR; 6 CRED: break 1 VOID subroutine. |
+| EXP-C042 | PAYDAY | PROGRAM — ICEPICK (FORTRESS) | 2 | 3 CRED: +1 STR; 5 CRED: break 1 FORTRESS subroutine. |
+| EXP-C043 | BRIBE | PROGRAM — ICEPICK (TUMBLER) | 3 | 4 CRED: +1 STR; 4 CRED: break 1 TUMBLER subroutine. |
+| EXP-C044 | MERCENARY | PROGRAM — ICEPICK (VOID) | 2 | 3 CRED: +1 STR; 6 CRED: break 1 VOID subroutine. |
 | EXP-C045 | BLACK BUDGET | PROTOCOL | — | 5 CRED: gain 1 BW. Once per turn. |
 | EXP-C046 | BOUNTY HUNTER | PROTOCOL | — | 4 CRED: target ICE −2 STR this encounter. Once per turn. |
 | EXP-C047 | HUSH MONEY | PROTOCOL | — | 5 CRED: lose 3 TRACE. Once per turn. |
@@ -237,7 +237,7 @@ Designer-endorsed experimental direction: **BW represents immediate computationa
 
 All PROPOSED. Names, prices, strengths, rarity, Protocol installation costs, RAM, boost duration and limits subject to review. Each of PAYDAY, BRIBE and MERCENARY costs 1 BW to install; activation costs remain entirely CRED. Initial Icepick proposal: PAYDAY as above; BRIBE +1 STR for 1 BW, break for 4 CRED; MERCENARY +1 STR for 3 CRED, break for 1 BW. Superseded as preferred experiment by entirely CRED-powered activations. No arbitrary once-per-turn Icepick activation cap initially proposed; economic cost is primary balancing lever. No free activation or installation assumption.
 
-EXP-M009: extend M008 type distinction: SCRIPT immediate single-use; PROGRAM installed utility; ICEPICK installed breaking capability; PROTOCOL installed conditional or manually activated ability (potentially CRED cost); GHOSTWARE persistent rule modifier. Exploratory taxonomy only; reconcile with canonical definitions before adoption. Preserve triggered Protocols C038–041.
+EXP-M009: extend M008 type distinction: SCRIPT immediate single-use; PROGRAM installed utility or ICEPICK (RAM required); PROTOCOL deployed to RACK for BW, no RAM, active for Node, with proposed conditional or manually activated abilities (potentially CRED cost); GHOSTWARE persistent non-card upgrade; BLOATWARE detrimental card type. Classification corrected against Core Rules §3.1; proposed activation effects remain experimental. Preserve triggered Protocols C038–041.
 
 EXP-M010: CAPITAL ENGINE archetype: extract CRED → activate Protocols/Icepicks → neutralize ICE efficiently → secure further CRED. Renewable BW versus accumulated wealth creates opportunity cost between combat and future purchases. RIOT STR reduction can reduce CRED expenditure; no RIOT exclusivity proposed.
 
@@ -267,3 +267,5 @@ NUL/REM may offer relevant arrangements after genuine CRED shortfalls or repeate
 EXP-X007 (PROPOSED): compare conventional BW Icepicks, fully CRED-powered variants and historical hybrid alternatives on identical seeds; track CRED/BW, break rates, extraction, shop spending, deck synergy, zero-BW activation, insufficient funds, boost duration, stacking, activation limits, loops and run viability. Compare voluntary income arrangements against independent CRED generation; avoid tuning to compel disclosure. Test small marginal benefits, accumulated costs and ability to decline. No tests performed.
 
 CRED-EXP-001a: designer specified 1 BW installation for all three proposed CRED-powered Icepicks. EXP-S035: install PAYDAY with 3 BW and 30 CRED, then perform S028 activations if legal; 2 BW and 11 CRED remain. At zero BW an uninstalled Icepick cannot pay installation, but an already installed one can activate with sufficient CRED. Add these cases to X007. No Protocol installation cost decision.
+
+CRED-EXP-001b: designer clarified EXP-C042–044 are PROGRAM cards (ICEPICK specialization), requiring RAM under normal installation rules. Exact RAM amount TBD; 1 RAM each suggested for testing, not confirmed. Installation remains 1 BW, all boosts and breaks CRED-only. Test insufficient RAM and normal unload rules in X007. Other Protocol proposals unchanged.
