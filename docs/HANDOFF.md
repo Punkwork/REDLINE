@@ -328,3 +328,7 @@ NULL POINTER 1 BW (formerly 2), all other properties unchanged. Deck Synergy §9
 ## RIOT-EXP-001 — RIOT experimental card catalogue (ChatGPT)
 
 Designer requested preservation in Experimentation Bible §11 (bdc32508a880a9925010b0dde4bdbf0ac7b0fc57). EXP-C030–036, M007, S012–021, X005; revised FIRST STRIKE and one-copy BREAKER BAR with per-copy node escalation and BURN cost. Experimental only; NULL-POINTER-001 remains approved separately. No code or tests; UI migration gate unchanged.
+
+## TRACE-EXP-001 — TRACE mitigation concepts (ChatGPT)
+
+Designer requested preservation of SIGNAL DAMPENER (Ghostware) and four Protocols in Experimentation Bible §12 (bc9938aa034cf6a39c6114472b4688b056e6cf1f); EXP-C037–041, M008, S022–027, X006. Proposed type distinction, self-inflicted TRACE coverage and trigger timing remain experimental. No rules/code changes, tests or consolidation.
