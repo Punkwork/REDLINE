@@ -68,6 +68,25 @@ Names, types and effects are provisional; check collisions against actual card p
 
 Dedicated bypass cards may be dead draws on final layers; dual-purpose alternatives could retain a separate non-bypass effect. Neither category approved. Passive suppression and concealment must not silently grant final-layer bypass.
 
+| EXP-C029 | BACKCHANNEL | SCRIPT | 2 BW; conditional delayed bypass with one non-DEADLOCK suspension; preferred iteration below. |
+
+### EXP-C029 — BACKCHANNEL (designer-endorsed preferred experimental iteration, 2026-11-24)
+
+**SCRIPT · 2 BW · rarity TBD**
+
+> Select a supporting ICE with STR 2 or less. Suspend one of its non-DEADLOCK subroutines.
+>
+> If all subroutines on the primary ICE are broken by the end of your next turn, BYPASS the selected ICE. Otherwise, end the suspension.
+
+BYPASS-001 applies. Primary ICE means rightmost ICE; supporting ICE means any ICE to its left (proposed terminology for this card, not a global rename). Designer endorsed the single-subroutine version for its variability. This is the preferred experimental design, not shipping rules or implementation authorization. Preserve 2 BW and STR 2 for initial balance evaluation.
+
+Immediate tactical utility: choose damage prevention or TRACE suppression; concentrate resources on primary ICE; successful completion bypasses supporting ICE. Failure retains the benefit of temporary suspension but does not grant bypass. Unlike rapid penetration (EXP-M001), requires all primary ICE subroutines, not only DEADLOCKS, and allows through the following Rustler turn.
+
+Alternatives retained for comparison: A normal supporting response until success; B suspend all supporting subs; C suppress TRACE only; D defer supporting consequences and resolve them on failure; E preferred single non-DEADLOCK suspension. Full suspension risks use solely as defense; deferred consequences add timing complexity.
+
+Open: STR eligibility at selection versus continuous; exact suspension and success timing; passive interactions; TUMBLE and hidden subs; parting shots; multiple targets/copies; early BREACH or encounter exit; whether final-layer play for suspension alone is legal (no final-layer BYPASS under any interpretation). No retroactive cancellation assumed. Check existing card-name collisions before adoption.
+
+
 ## 05 — Gameplay scenarios
 
 Illustrative ICE values, not canonical stats; assume legal matching Icepick and sufficient BW where stated, not a claim about actual card costs.
@@ -82,6 +101,10 @@ Illustrative ICE values, not canonical stats; assume legal matching Icepick and 
 | EXP-S006 | Eligible layer; reduce supporting STR2 to 0 with WEAK LINK; TUNNEL bypass; SLIPSTREAM gains 1 BW if installed/eligible. | Illustrative engine; no assumed free installation or guaranteed net BW gain. | ZEROED, RAM and frequency interactions. |
 | EXP-S007 | Three ICE, main DEADLOCKS broken turn 1. | Unresolved: bypass one, both, or neither supporting ICE. | Designer decision required. |
 | EXP-S008 | FAST TRACK on final layer, turn 2. | No bypass; locked rule takes precedence. | Test all card-enabled overrides. |
+
+| EXP-S009 | Eligible non-final layer: supporting FORTRESS STR2 with DEADLOCK, PULP4, TRACE2; primary SIGYL STR3 with DEADLOCK, PULP3, DEADLOCK. Play BACKCHANNEL for 2 BW; select PULP4 or TRACE2; break all three primary subs by end of next Rustler turn. | Selected sub suspended while pending; other supporting subs remain operative until bypass; success bypasses supporting ICE. | Compare tactical choices, actual legal BW and timing. |
+| EXP-S010 | Same setup, miss deadline with a primary sub unbroken. | No bypass; suspension ends. | Verify normal subsequent resolution and no retroactive effects. |
+| EXP-S011 | Same setup on final layer. | BYPASS prohibited; legality of suspension-only use unresolved. | Confirm card eligibility before implementation. |
 
 ## 06 — Archetypes and engines
 
@@ -103,6 +126,8 @@ Evaluate strategic depth, mechanical distinctiveness, deckbuilding potential, op
 | EXP-X002 | Dedicated versus dual-purpose cards create distinct deckbuilding choices. | Compare draw usefulness, dead draws on final layers, deck composition and player explanations. | Proposed, not run |
 | EXP-X003 | Bypass engine is not dominant or infinite. | Test STR reduction, repeated activations, resource payoffs and three-ICE cases; check final-layer invariant. | Proposed, not run |
 
+| EXP-X004 | BACKCHANNEL offers meaningful defensive/stealth choice without dominating direct breaking. | Compare PULP versus TRACE suspension, success/failure, 2 BW opportunity cost, STR reduction synergy and final-layer restriction; test S009–011 and timing edge cases. | Proposed, not run |
+
 Acceptance thresholds and fixtures require designer approval; use existing audit and test gates. Record actual results, build/commit, environment, seed, deviations and limitations; never label a hypothesis verified without evidence.
 
 ## 10 — Other design domains and decision register
@@ -115,5 +140,6 @@ New non-mechanical ideas use EXP-D IDs and link appropriate canonical domain doc
 | BYPASS-001 | Locked eligibility only | Master Design / Core Rules |
 | EXP-M001–006, EXP-C001–027, EXP-S001–008, EXP-X001–003, EXP-D001 | Proposed/illustrative; no implementation authorization | This document |
 | EXP-C028 | Deferred due to rules conflict | This document |
+| EXP-C029 / BACKCHANNEL-001 | Designer-endorsed preferred experimental iteration; timing and balance open | §04, EXP-S009–011, EXP-X004 |
 
 Initial population covers recent BYPASS discussion, not exhaustive recovery of all historical design ideas. Existing documents remain intact. No consolidation, code changes or playtests performed.
