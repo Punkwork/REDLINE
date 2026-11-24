@@ -256,3 +256,7 @@ Preserve designer-confirmed principle: PANOPTICON is not a game about surveillan
 ### NUL-PILLAR-001c — Four-Question Design Gate (WAITING)
 
 For every proposed NUL/REM mechanic, document strategic meaning, genuine agency, multiple psychological responses and philosophical significance without explanation. Reconsider failed or unresolved criteria before implementation; existing approval gates remain. See the foundational NUL/REM document and master decision NUL-PILLAR-001c. No implementation authorized.
+
+### PHIL-001 — Philosophical Design Bible (DONE: documentation)
+
+Created `PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md` (c4f815d) at designer request. Consult for all philosophical mechanics, especially surveillance economy and curated card rewards. Apply four-question review; new mechanics remain proposals pending designer approval. No implementation authorized.
