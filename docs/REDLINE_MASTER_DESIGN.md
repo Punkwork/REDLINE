@@ -3007,3 +3007,26 @@ Designer requested completed [NUL/REM Dialogue Architecture Bible](PANOPTICON_NU
 ## OPS-001 — Shared development operations (DIRECTION, 2026-11-24)
 
 Designer requested one shared operations hub for agents, native issues/PRs, daily reports, surprises and missing tools, 22:00 Toronto review and next-day agenda. See [Operations Hub](operations/README.md). No gameplay or approval changes.
+
+## OPS-002 — Project goals, milestones and progress measurement (DIRECTION, 2026-11-24)
+
+Designer requested an indicator of distance to the final goal. Proposed release goal: a complete, coherent, stable and designer-accepted PANOPTICON game, with a playable three-corporation run (RUN-006), approved rules/content, distinctive presentation and NUL/REM narrative, validated Windows distribution. Commercial release/store scope, dates and quantitative quality thresholds remain OPEN; this roadmap does not authorize new mechanics or release commitments.
+
+### Proposed milestone gates
+
+| ID | Milestone | Completion evidence |
+|---|---|---|
+| M01 | Validated core loop | Approved encounter rules and representative cards implemented; regression tests and designer playtest pass on identified build. |
+| M02 | Architecture and full corporation vertical slice | Designer confirms architecture migration disposition; complete HALCYON route, approved node types, rewards, services and boss flow integrated and tested; designer accepts slice. |
+| M03 | Full three-corporation run | HALCYON, IRONWATCH and LUCIDA playable end to end; transitions, bosses, run ending and approved First Signal guard validated. |
+| M04 | Gameplay content and balance | Approved Rustlers, cards, ICE, progression and economy content complete; representative seeds and human runs meet designer-approved balance criteria. |
+| M05 | Narrative and NUL/REM | Approved dialogue architecture and content, lore, boons and any separately approved philosophical mechanics integrated and tested; reveal, privacy and agency safeguards pass. |
+| M06 | Presentation and accessibility | Approved visual/audio direction, readable UI, input, settings and accessibility checks pass across the full run. |
+| M07 | Beta / release candidate | End-to-end regression, real Windows playtests, packaging, save/config and performance checks pass; release-blocking defects resolved. |
+| M08 | Final release acceptance | Designer accepts release scope and candidate; reproducible versioned artifact, checksum, documentation and distribution readiness verified. |
+
+Milestones may overlap; M04–M06 are parallel workstreams, not a mandatory serial order. M07–M08 depend on earlier gates. No completion without linked evidence and designer acceptance where required. Current architecture-v2 branch is not assumed merged; reconcile its scope and evidence before baselining M02.
+
+### Progress measurement
+
+The [Operations Dashboard](operations/README.md#project-progress--ops-002) owns the live snapshot, not a duplicate roadmap. Report milestone gates accepted / total, plus per-gate stage (not started, design, built, verified, accepted, or unknown), blockers, next evidence and dated source/commit. Built is not verified; verified is not accepted. Gate count is a readiness indicator, not percentage of effort or time. Do not infer percent complete from commits, lines of code, documents or issue counts. Overall effort-weighted percentage remains unknown until designer confirms scope, milestone weights and measurable acceptance checklists; if adopted, calculate accepted weighted checklist items / total approved weight, show unknown coverage and record scope changes separately. Never silently inflate progress. Reopened gates reduce readiness. At 22:00 Toronto daily review, update snapshot from actual evidence, show change since last review, identify next gate and link proposed next-day priorities to milestone IDs. If no evidence changes, record no verified change. Existing governance and audit gates remain binding.
