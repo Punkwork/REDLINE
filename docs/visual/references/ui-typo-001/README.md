@@ -18,4 +18,4 @@ The designer's four reference images for **UI-TYPO-001**, the dual visual langua
 
 Values shown (TRACE +4, +25 CRED, PULP −3, STR +1) are illustrative. Real flyouts take their text and numbers from engine state.
 
-**Resolution:** these copies are 640 × 360 (the catalogue 640 × 427), the size they arrived at. Higher-resolution originals can replace them under the same names.
+**Resolution:** 1280 × 720 (the catalogue 1280 × 853), replaced on 2026-11-25 13:36 with the designer's higher-resolution originals; the first upload was 640 × 360.
