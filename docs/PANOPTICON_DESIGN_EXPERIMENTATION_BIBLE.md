@@ -346,3 +346,34 @@ EXP-M015: subroutine modification reduces severity rather than breaking or suspe
 | EXP-S052 | Modified subroutine under lethal form, multiple modifiers and hidden reveal. | Determine order and duration; avoid negative values or unintended permanent changes. |
 
 EXP-X009: compare encounter-wide versus single-target cards on identical seeds and varying ICE counts; track BW, total STR reduced, legal breaks, ZEROED, cascading, deck slots, early dead draws and late efficiency. EXP-X010: compare numerical modification versus break, suspension and SHIELD, tracking damage/TRACE avoided, BURN opportunity cost, counterplay, timing and repeated effects. No tests performed; no implementation authorization.
+
+## 17 — Infiltration CAPS (CAP-EXP-001, 2026-11-24)
+
+Designer requested preservation of all twelve concepts, with no CRED pricing now. All PROPOSED; rarity, prices, exact activation windows, target eligibility and implementation remain open. CAPS are non-card single-use consumables; use distinct EXP-CAP IDs rather than inflating deck-card count. Existing UPL-001/002/004/005 rules and twelve approved CAPS unchanged. Map-level activation is a proposed extension, not an existing rule.
+
+| ID | Working name | Proposed effect |
+|---|---|---|
+| EXP-CAP001 | PORT SCAN | Reveal all ICE classifications in one accessible Node. |
+| EXP-CAP002 | DEEP SCAN | Reveal every encounter layer, ICE identity and base STR in one accessible Node. |
+| EXP-CAP003 | WIRETAP | Reveal partial security intelligence on all Nodes two rows ahead. |
+| EXP-CAP004 | FALSE IDENTITY | Enter your next eligible Node under an assumed identity, potentially bypassing its outer defences. |
+| EXP-CAP005 | GHOST ENTRY | Bypass one eligible supporting ICE in the opening encounter of your next Node. |
+| EXP-CAP006 | FALSE ALARM | Divert one supporting ICE from an upcoming Node. |
+| EXP-CAP007 | REMOTE EXPLOIT | All ICE in the opening encounter of your next Node start with 2 less STR. |
+| EXP-CAP008 | BLIND SPOT | Prevent TRACE gains during the first Corporation Response of your next Node. |
+| EXP-CAP009 | BACKDOOR | Skip the outer encounter layer of an eligible Node. |
+| EXP-CAP010 | DATA INTERCEPT | Reveal the potential CRED rewards of all immediately accessible Nodes. |
+| EXP-CAP011 | CLEAN SLATE | Erase selected corporate surveillance records of the Rustler. |
+| EXP-CAP012 | SPOOF | Conceal the Rustler's identity during their next eligible Node entry. |
+
+EXP-M016: CAPS bridge tactical combat and strategic infiltration without a second deck or meter. Existing three-slot inventory creates opportunity cost: carrying reconnaissance, preparatory or circumventive CAPS displaces combat emergency consumables. Explore purchases at Uplinks and existing reward/drop channels, not new acquisition rules. Illustrative loadouts: BULWARK/BW SPIKE/NANOSUTURE versus DEEP SCAN/FALSE IDENTITY/BACKDOOR. Information value depends on deck composition and route choice. Distinguish informational, preparatory and circumventive effects. Working names BACKDOOR and FALSE ALARM overlap earlier card concepts; preserve separate IDs, resolve naming before adoption. CLEAN SLATE concerns fictional records only, not real data; scope and consequences open. No assumed changes to TRACE, identity or authorization systems.
+
+| ID | Scenario | Question |
+|---|---|---|
+| EXP-S053 | PORT SCAN/DEEP SCAN/DATA INTERCEPT on adjacent alternatives; WIRETAP two rows ahead. | Reveal accurate precommitted information; test route value, no reroll or hidden mutation. |
+| EXP-S054 | REMOTE EXPLOIT/BLIND SPOT used before choosing next Node. | Test binding to next eligible Node, first encounter/response, expiry and unused effect handling. |
+| EXP-S055 | GHOST ENTRY/BACKDOOR/FALSE IDENTITY/FALSE ALARM on eligible and ineligible Nodes. | Preserve mandatory boss engagements, existing BYPASS restrictions and progression/reward integrity; no assumed free rewards or new escape rule. |
+| EXP-S056 | Full three-slot inventory, combat versus infiltration CAP choice. | Compare survivability, information value, CRED opportunity cost (prices TBD), consumption and acquisition. |
+| EXP-S057 | CLEAN SLATE/SPOOF with different fictional surveillance histories. | Define scope, duration and meaningful effect without exposing psychological profiling or assuming existing identity mechanics. |
+
+EXP-X011: compare combat-only, infiltration-only and mixed CAP loadouts on identical seeds; measure route choices, information usefulness, combat exposure, rewards forgone, slot pressure and recovery. Test invalid targets, cancellation, consumption timing, bootleg applicability, map visibility, progression and no-boss-skip constraints. No pricing or rarity decisions; no tests performed or implementation authorization.
