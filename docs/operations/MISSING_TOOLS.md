@@ -10,3 +10,5 @@
 | TOOL-006 | 2026-11-24 | ChatGPT | Dialogue coverage and eligibility analysis | Proposed future QA utility | Candidate | — |
 
 Candidates are not approved tasks. For new observations record attempted tool, failure, workaround and impact; distinguish unavailable from untested.
+
+| CHATGPT-20261124-T01 | 2026-11-24 | ChatGPT | Report directory enumeration | Direct expected-path fetches only; directory coverage unverified; use local checkout inventory | investigating | — |
