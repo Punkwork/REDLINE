@@ -3244,7 +3244,7 @@ ChatGPT's independent check of `main` references covered the principal governanc
 
 **Designer, 2026-11-25 13:48:** "commit the release-002. 3 add-ons: a - yes b - yes c - yes"
 
-**Status:** the procedure and (a)–(c) are **APPROVED**. RELEASE-002 replaces RELEASE-001 for every new build; RELEASE-001 stays as the record of prototype builds 4–12. (a) is the designer's to create in GitHub (ruleset on `release`: block deletion and force-pushes); (b) is built in the workflow (RELEASE-002b: the artifact name comes from `config/version`, which must end in `-playtest.N`; it produces the same name as before for Playtest 12); (c) is the entry gate for the first Architecture V2 build.
+**Status:** the procedure and (a)–(c) are **APPROVED**. RELEASE-002 replaces RELEASE-001 for every new build; RELEASE-001 stays as the record of prototype builds 4–12. (a) was created by the designer on 2026-11-25 (ruleset `release`, id 28104142: active, blocks deletion and force-pushes on `release`; fast-forward cuts still allowed; verified via the GitHub API); (b) is built in the workflow (RELEASE-002b: the artifact name comes from `config/version`, which must end in `-playtest.N`; it produces the same name as before for Playtest 12); (c) is the entry gate for the first Architecture V2 build.
 
 ## UI-TYPO-001 — Typography and the dual visual language: physical world and virtual world (APPROVED, 2026-11-25)
 

@@ -2,7 +2,7 @@
 
 Single shared source of truth for ChatGPT, Claude, Claude Code and Codex. All agents file operations records on `architecture-v2`, the canonical branch (ARCH-V2-002, 2026-11-25); `main` is the preserved legacy prototype. Existing branch, approval and audit rules remain binding.
 
-**Branch drift check (ARCH-V2-002i), every daily review:** record the heads of `architecture-v2`, `main`, `release` and any other branch. `main` must equal tag `prototype-baseline` (`21922ad`); `release` must equal its last `playtest-N` tag; the GitHub default branch must be `architecture-v2`; ruleset `protect-main` must be active on `main`. Report new branches, unexpected commits on `main` or `release`, and work landing anywhere but `architecture-v2` as surprises, for the designer to decide. Never fix drift by force-pushing.
+**Branch drift check (ARCH-V2-002i), every daily review:** record the heads of `architecture-v2`, `main`, `release` and any other branch. `main` must equal tag `prototype-baseline` (`21922ad`); `release` must equal its last `playtest-N` tag; the GitHub default branch must be `architecture-v2`; ruleset `protect-main` must be active on `main`, and ruleset `release` (deletion and force-push blocked) on `release`. Report new branches, unexpected commits on `main` or `release`, and work landing anywhere but `architecture-v2` as surprises, for the designer to decide. Never fix drift by force-pushing.
 
 - [Surprises](SURPRISES.md)
 - [Missing tools](MISSING_TOOLS.md)
