@@ -3119,3 +3119,7 @@ Designer confirmed EXP-C045–049 as 0 BW SCRIPTS with existing CRED prices/effe
 ## ICE-EXP-002 — Encounter-wide effects and subroutine modification (ChatGPT)
 
 Saved 20 proposed cards EXP-C050–069, mechanics M014–015, scenarios S045–052, experiments X009–010 in Experimentation Bible §16 (27d5fb2ea234eaa8b1ebc87dada42b021fee6b17). Designer's targeted -6 PULP this turn/BURN preserved; names/costs provisional, collisions flagged. No rules/code/tests or consolidation.
+
+## CAP-EXP-001 — Infiltration CAPS (ChatGPT)
+
+Saved twelve non-card CAP concepts EXP-CAP001–012, M016, S053–057 and X011 in Experimentation Bible §17 (98bc0b716700ad6aac90a6bc614b46496b5425c0). No CRED prices or rarities assigned; map activation and circumvention experimental. Existing CAPS rules unchanged. No code/tests or consolidation.
