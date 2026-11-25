@@ -59,7 +59,7 @@ Two distinct visual representations (designer, 2026-11-25; full wording in Maste
 - **Physical world, the UI:** 1950s Deco and Atomic Deco Punk. Bakelite and Formica, panels, knobs and switches, with a small CRT display.
 - **Virtual world:** a hyper-kinetic title flourish in the manner of Gaspar Noé's title sequences, full of motion and electric colour.
 
-Readability, reduced motion and the copy guards still govern both. Fonts, glyphs and the boundary between the two on each screen are open: see [#24](https://github.com/Punkwork/REDLINE/issues/24). Reference images: `docs/visual/references/ui-typo-001/` (pending upload).
+Readability, reduced motion and the copy guards still govern both. Fonts, glyphs and the boundary between the two on each screen are open: see [#24](https://github.com/Punkwork/REDLINE/issues/24). Reference images: [`visual/references/ui-typo-001/`](visual/references/ui-typo-001/README.md). They show the virtual world as event flyout titles over the unchanged console; the refined treatment (02) suits frequent events. Style only: their SYN, Neural-damage and extraction-bonus labels predate current rules.
 
 ## 3. Existing Master Design UI decisions (extract)
 **CARDS-003 — PCB glow cartridges (APPROVED, 2026-11-19).** Supersedes the CARDS-002 palette table above and its rarity finishes, ivory print and amber-on-field numbers. Designer: "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot." It was reviewed in 17 iterations on the `review/cards-002` branch, which is never merged.
