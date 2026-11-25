@@ -3147,3 +3147,13 @@ Designer-endorsed exploration: possibility of observation, fictional fear/anxiet
 ## SURV-OBSERVER-EXP-001 — The Internalized Observer
 
 Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation (1974, Francis Ford Coppola) as principal cinematic references. Recorded in Design Experimentation Bible §23, commit 307703473a5a9f3ec8a9fe0a6f34800815d2342b. Reference-only; no new rules, specifications, code or tests.
+
+## ARCH-V2-002 — `architecture-v2` is the canonical branch; `main` reconciled and preserved (APPROVED, 2026-11-25)
+
+**Designer, 2026-11-25:** "For number 1, yes, Architecture V2 is the main branch for the rebuild. This is the current direction moving forward, and so record that in master design. For the baseline tag, yes. Duplicate images, yes. Please delete the 1 copy. I do want the new branch as the default."
+
+**Decision:** `architecture-v2` is the canonical active branch moving forward and the GitHub default branch. `main` is the preserved legacy prototype and historical reference; its tip `21922ad` is tagged `prototype-baseline`. `main` was merged into `architecture-v2` once, with both histories preserved (merge `6b1acdd`), so the 182 documentation commits from `main` (UI-BIBLE-001, UI-WORKFLOW-001, DOCS-MIG-001, OPS-001/002, NUL-PILLAR-001, PHIL-001–005, NUL-DIALOGUE-*, experimental records) and the 43 ARCH-V2-001 commits now live together. Agent instructions (`AGENTS.md`, `CLAUDE.md`), HANDOFF, operations and status docs point to `architecture-v2`. The byte-identical duplicate VAS-001 reference image was removed.
+
+**Supersedes for branch choice only:** MAIN-001 (`main` as working branch) and the `main`-default wording in RELEASE-001. RELEASE-001's procedure still governs prototype builds from `main`; a release procedure for `architecture-v2` is not yet designed or approved. Everything else in ARCH-V2-001 is unchanged: the blueprint, CAS-001, scene hierarchy and VAS-001 implementation details remain PROPOSED, and no gameplay, balance or rules change is implied. Experimental records keep their status. DOCS-MIG-001 / UI-BIBLE-001 remains OPEN.
+
+**Interpretation to confirm:** the designer said "main branch for the rebuild" and "the current direction moving forward"; this is recorded as covering all project work (design, philosophy, operations and code), as in the 2026-11-25 reconciliation brief.

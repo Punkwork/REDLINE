@@ -4,116 +4,12 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — PIXEL-TRACE-001a: animated pixel step changes (Claude)
-
-**Designer:** "Commit the transitions to the next build." Asked whether that meant animating the step changes or cutting playtest-7, the designer chose "Animate the step changes".
-
-**Built (`encounter.gd`, `atomic_deco_punk.json` → `pixel_transition`):**
-- When the TRACE state asks for a new step, a tween spikes for 0.15 s to cells 2 px coarser than either step, with half the colour levels (at least 4) and full dither, then settles on the new step over 0.35 s.
-- Cells are rounded to whole pixels throughout.
-- With reduced motion, and on a new encounter, the step changes at once.
-- A rebuilt ICE row takes the look currently on screen.
-
-**Fixture (`shot_trace_pixel`):** new checks:
-- a transition starts with motion on;
-- the transition spikes past the new step and settles on TRACE 20's 2 px;
-- reduced motion changes the step at once.
-
-A spike frame is captured, and `PIXEL-TRACE-001_Transition.gif` is in `docs/visual/fixtures/pixel-trace-001/`.
-
-**Validation:** rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0; all 15 CI screenshot fixtures clean.
-
-**Interpretations to confirm:**
-- the spike size and timing;
-- a step down (dismissing a strike) uses the same spike;
-- no sound with the transition.
-
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001: HALCYON non-fight copy approved (Codex).
-
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — HALCYON PLAYTEST 4 Windows build (Codex).
-
-## 2026-11-19 — PIXEL-TRACE-001b: bit-crushed music with the pixel steps (Claude)
-
-**Designer:** asked what a transition sound could be. Of Claude's options, the designer chose bit-crushing the music: "Bit crushing the music or bgm is perfect. Save that idea somewhere appropriate."
-
-**Recorded:**
-- PIXEL-TRACE-001b in the master design doc, as an APPROVED direction that is not yet built. There is no separate sound effect. The corporation's music crushes with each pixel transition, and a held crush deepens toward Mask off (working proposal).
-- A Claude Code TO DO row in HANDOFF.
-
-**Code changes:** none.
-
-**Interpretations to confirm:**
-- the held crush per step (the designer approved the crush on the transition; holding it between steps is Claude's proposal);
-- the crush is on the music bus only, so the mechanical sounds stay clean.
-
-## 2026-11-19 — PIXEL-TRACE-001c: a transition sound effect, to be chosen (Claude)
-
-**Designer:** "There will be a sound as well for the transition but i have not yet determined." This corrects the previous entry: a pixel-step transition gets a sound effect as well as the bit-crushed music. The master design doc no longer says "no separate sound effect". HANDOFF has a WAITING row, PIXEL-TRACE-001c, listing the options discussed (TV detune, teletype burst, neon ballast buzz). **Code changes:** none.
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Playtest checklist v0.4 for HALCYON PLAYTEST 4 (Claude).
 
-## 2026-11-19 — ENC-ANALOG-001 saved; ICE-ANALOG-001 brief for Codex (Claude)
-
-**Designer:** asked for a full HALCYON encounter mockup built on the analog left-HUD unit (flip-clock PROGRAM reel, cockpit instruments), with the ICE redesigned to match and the 8-bit/16-bit work applied; asked for it to be elegant and "beautiful and inviting". Then: "save these mockups as I want to return to this elegant design and interface then incorporate it into the encounter screen", and a Codex prompt: redesign the ICE readout (not the mascots, which get a little bigger and more behaviour), subroutines as icons with a value, full text on rollover.
-
-**Recorded:**
-- ENC-ANALOG-001 (EXPLORATION) and ICE-ANALOG-001 (PROPOSED) in the master design doc and register.
-- New spec `docs/REDLINE_ENCOUNTER_ANALOG.md`, with the Codex prompt in §8.
-- Mockups in `docs/visual/explorations/encounter-analog-001/`: the CAPTCHA node Friendly (turn 2, TRACE 12) and Cracking (turn 3, TRACE 30, PIXEL-TRACE-001's 3 px step and 41% reveal), an ICE close-up, and the mockup sources.
-- HANDOFF: a Codex TO DO row for ICE-ANALOG-001 (design review only).
-
-**Code changes:** none. **Tests:** none.
-
-**Interpretations to confirm:**
-- The TRACE lamp lights when TRACE is high (≥ 30); the others light when low.
-- The HUD's PULP Nixie shows incoming PULP.
-- Program reel at 13 tiles with shortened names.
-- END TURN and DECK/DISCARD moved beside the response board to free the hand's width.
-- The cards in the mockups are placeholders, not a redesign.
-- ICE-ANALOG-001 moves full rule text to hover/focus (VIS-001 §2.9 to be revisited).
-
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — Atomic Deco Punk design direction (Codex), 2026-11-17 — ADP-001 Phase 1 (Codex).
-
-## 2026-11-19 — ICE-ANALOG-001: editable Godot visual study (Codex)
-
-**Designer:** requested the artistic direction from the three new PANOPTICON analog encounter concept renders be translated into an editable Godot fixture and committed for the next build. Designer clarified that all displayed numbers are illustrative mockup data, not proposed rule changes.
-
-**Committed:** isolated `godot/tests/ice_analog_visual.gd`, six-state `shot_ice_analog.gd`, animation-frame `shot_ice_analog_animation.gd`, editable vector key source and exploration README under `docs/visual/explorations/ice-analog-001/`. The files are source studies and do not alter gameplay, card assets or the default encounter.
-
-**Validation:** Godot 4.3 executable unavailable in this authoring environment; fixture has **not been run**, screenshots and GIF have **not been rendered**, rules suite has **not been rerun**. The mascot stand-ins, glyphs and animation are incomplete relative to §8. No approval claimed.
-
-**Interpretations to confirm:** (1) icon-only keys with full tooltip plus NEXT RESPONSE/passive text require VIS-001 §2.9 review; (2) 3-ICE key sizes must pass 44 px; (3) existing mascot artwork must replace the vector stand-ins; (4) mockup values are illustrative only; (5) animation/tooltip interactions need Godot validation before designer review.
-
-### ICE-ANALOG-001 follow-up — motion scaffolding (2026-11-19)
-
-Added deterministic animation phases to the isolated visual fixture: idle, attention, telegraph, break reaction and tumble, plus animation-frame driver. These are illustrative presentation effects, not gameplay events. **Godot execution, rendered GIF, screenshot review and rules validation remain pending.** Existing mascots remain placeholders. Status remains PROPOSED.
-
-
-## 2026-11-19 — ICE-ANALOG-001 designer approval for default encounter integration
-
-**Designer approval (verbatim):** “Okay, well then I approve all of these changes to be integrated into the default encounters.”
-
-**Decision:** ICE-ANALOG-001's analog visual direction and proposed interface behaviors are **APPROVED for integration** into default encounters. This changes the earlier design-review-only restriction. The existing standalone Godot fixture is still incomplete and untested; **no default encounter integration has been performed in this entry**. All mockup numbers are illustrative, not rules amendments.
-
-**Next build:** Godot 4.3 execution, screenshot and GIF generation, existing mascot asset integration, accurate TUMBLER motion, accessibility and contrast verification, regression suite, then default encounter presentation integration. Do not change gameplay rules.
-
-**Interpretations to confirm:** whether any specific animation timings or sound cues require separate designer sign-off; final pixel fidelity to the saved HALCYON reference mockups.
-
-## 2026-11-19 — ICE-ANALOG-001 built; ENC-CONCEPT-001 direction and art briefs (Claude)
-
-**Codex review:** Codex's 18 commits added a standalone wireframe (`ice_analog_visual.gd`) not connected to the game, and recorded the designer's approval three times with contradictory statuses. Claude ran it in Godot 4.3 (it ran, but placeholder art and fake cards/stats). The designer confirmed the approval in session ("Yes, approved, incl. hover text"; scope "Whole encounter screen"; "Replace it" for the wireframe). Docs deduplicated (`c8cef09`); the three concept screenshots committed (`3eadd23`).
-
-**Built (ICE-ANALOG-001, `b3fdd42`):** analog ICE consoles in the real encounter: icon keys (`ice_key.gd`) with lamp, value and BW chip; key tip on hover/focus with the full rule, timing and break cost; Enter breaks a focused key; TUMBLER reel column; mascots +18%, peeking over the console, glancing at the hovered key and at each key as it fires. Barlow Condensed (OFL) added. Real fixture `shot_ice_analog.gd` replaces the wireframe.
-
-**Tests:** rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0; all 16 screenshot fixtures pass (`shot_adp`'s stage-scale check now includes `MASCOT_GROWTH`).
-
-**Designer direction (ENC-CONCEPT-001):** the interface follows the concept screenshots: frame from concept 3, cards and mascots from concept 2, left HUD mixing 2 and 3 with installed Programs in the CRT panel; art made in ChatGPT. Recorded in the master design doc; art briefs in `docs/visual/concept-art/ART_BRIEFS.md`; asset folders `godot/assets/concept/`. ENC-ANALOG-001's flip-clock HUD pass was set aside uncommitted.
-
-**Interpretations to confirm:**
-- Mascot growth stops at 18% (column width); the console overlaps the mascot stage by 14 px.
-- The patent plate moves to the foot of the console and is left off with three ICE.
-- Key tip opens above the key (over the mascot art); to the side only when there's no room.
-- Character proposals for the batch-2 ICE mascots and all card subjects are Claude's.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ADP-001 Phase 1 confirmations (Codex), 2026-11-17 — HAND-CLEANUP-001 and CARD-CONTROLS-001 (Codex), 2026-11-17 — HALCYON PLAYTEST 5 Windows build (Codex), 2026-11-18 — ZINE-002, ARCH-001: the zine as samizdat; the Archipelago (Claude).
 
@@ -552,3 +448,16 @@ Designer-endorsed exploration: possibility of observation, fictional fear/anxiet
 ## 2026-11-24 — SURV-OBSERVER-EXP-001 — The Internalized Observer
 
 Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation (1974, Francis Ford Coppola) as principal cinematic references. Recorded in Design Experimentation Bible §23, commit 307703473a5a9f3ec8a9fe0a6f34800815d2342b. Reference-only; no new rules, specifications, code or tests.
+
+
+## 2026-11-25 — ARCH-V2-002: branch reconciliation; `architecture-v2` canonical (Claude)
+
+**Designer approval (2026-11-25):** `architecture-v2` is the main branch moving forward, to be recorded in Master Design; tag the baseline; delete the duplicate image; make the new branch the default. Recorded as ARCH-V2-002.
+
+- **Audit (Gate A):** `main` `21922ad`, `architecture-v2` `6cb5ed1`, common ancestor `f168046`; 182 main-only commits (about 40 decision IDs, 22 files, docs and agent files only) and 43 v2-only commits (ARCH-V2-001 governance, `docs/architecture-v2/`, VAS-001 image). Neither side changed Godot code, tests or CI. No open PRs; no GitHub Issues exist.
+- **Merge `6b1acdd`:** `git merge --no-ff` of `main` into `architecture-v2`. Conflicts in Master Design, HANDOFF and this log were additive; both sides kept, unreworded. A line check confirmed every line of both parents is present (lines missing from v2's log are LOG-001 moves already in the archive; HANDOFF rows edited on `main` keep `main`'s wording).
+- **Governance correction:** `AGENTS.md` and `CLAUDE.md` (still identical) now name `architecture-v2` in the header, §1, §3 session start, §8 operations and §9 migration gate (sections renumbered; HANDOFF and DAILY_PRIORITIES references updated). HANDOFF "How we work", `operations/README.md`, `REDLINE_CURRENT_STATUS.md` and `REPOSITORY_STRUCTURE.md` updated. Master Design entry ARCH-V2-002 added. Duplicate `PANOPTICON_VAS-001_reference_mockup (1).jpeg` removed (SHA-256 identical to the canonical file, `513af903…df25e`).
+- **Baseline and validation:** Godot 4.3.stable.official.77dcf97d8, headless, fresh `XDG_DATA_HOME`. On `main` `21922ad`: import exit 0; `test_game.gd` 176 passed / 0 failed (also with `SIM=1`); `test_adp.gd` 17 / 0; `test_signal_carbon.gd` 672 / 0. Same results on the merged tree. Relative Markdown links: 0 broken. Not run: screenshot fixtures (CI skips them while `Game.CORE_LOOP` is true), Windows export, any Windows playtest. Tag `prototype-baseline` on `21922ad`.
+- **Still open:** DOCS-MIG-001 / UI-BIBLE-001 (seven imported sources still in the tree; the UI Bible links them through `blob/main/...` URLs, which should become commit-pinned before retirement); a release procedure for `architecture-v2`; seeding GitHub Issues; external agent configurations that name `main`.
+- **Interpretations to confirm:** "main branch for the rebuild" is recorded as covering all project work, per the reconciliation brief.
+- **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-19 — PIXEL-TRACE-001a: animated pixel step changes (Claude), 2026-11-19 — PIXEL-TRACE-001b: bit-crushed music with the pixel steps (Claude), 2026-11-19 — PIXEL-TRACE-001c: a transition sound effect, to be chosen (Claude), 2026-11-19 — ENC-ANALOG-001 saved; ICE-ANALOG-001 brief for Codex (Claude), 2026-11-19 — ICE-ANALOG-001: editable Godot visual study (Codex), 2026-11-19 — ICE-ANALOG-001 designer approval for default encounter integration, 2026-11-19 — ICE-ANALOG-001 built; ENC-CONCEPT-001 direction and art briefs (Claude).

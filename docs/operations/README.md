@@ -1,6 +1,6 @@
 # PANOPTICON Development Operations Hub — OPS-001
 
-Single shared source of truth for ChatGPT, Claude, Claude Code and Codex. All agents use main for operations records even when reporting work on another branch. Existing branch, approval and audit rules remain binding.
+Single shared source of truth for ChatGPT, Claude, Claude Code and Codex. All agents file operations records on `architecture-v2`, the canonical branch (ARCH-V2-002, 2026-11-25); `main` is the preserved legacy prototype. Existing branch, approval and audit rules remain binding.
 
 - [Surprises](SURPRISES.md)
 - [Missing tools](MISSING_TOOLS.md)
@@ -22,7 +22,7 @@ At 22:00 America/Toronto daily, ChatGPT consolidates reports, both registers, ac
 | ID | Milestone | Evidence-based stage | Next evidence / blocker |
 |---|---|---|---|
 | M01 | Core loop | Built, acceptance pending | HANDOFF STRIP-001 and later playtest fixes; validate current build and outstanding playtest items |
-| M02 | Architecture + HALCYON slice | In progress / branch reconciliation needed | HANDOFF MAP-003 generator prototype; full route integration and architecture-v2 disposition not verified |
+| M02 | Architecture + HALCYON slice | In progress | HANDOFF MAP-003 generator prototype; full route integration not verified. Branch reconciliation done (ARCH-V2-002); Architecture V2 code not started |
 | M03 | Three-corporation run | Partial design / implementation unverified | RUN-006 defines full run; prove all routes, transitions and ending |
 | M04 | Content and balance | In progress | HANDOFF card/ICE and balance follow-ups; approved coverage and full-run tests |
 | M05 | Narrative / NUL/REM | Partial build + design | SIGNAL scaffolding in current-status record; dialogue architecture proposed; verify approved integration |

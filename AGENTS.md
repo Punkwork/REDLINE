@@ -1,15 +1,17 @@
 # Working agreement for AI agents (Claude Code, Claude, Codex)
 
-This repository, Punkwork/REDLINE, with active architecture work on `architecture-v2`, is the shared source of truth for every agent working on PANOPTICON (a Godot 4.3 deck-building roguelike; the repo and file prefix are REDLINE, the game is PANOPTICON).
+This repository, Punkwork/REDLINE, is the shared source of truth for every agent working on PANOPTICON (a Godot 4.3 deck-building roguelike; the repo and file prefix are REDLINE, the game is PANOPTICON).
+
+**Branches (ARCH-V2-002, designer 2026-11-25):** `architecture-v2` is the canonical active branch for all project work: code, design docs, philosophy and narrative, experimental records, governance, operations, tests and reference assets. `main` is the preserved legacy prototype and historical reference (tag `prototype-baseline` = `21922ad`); no new work goes to `main`. `release` holds designer-authorized builds only.
 
 `AGENTS.md` and `CLAUDE.md` must remain identical. Edit both together, word for word.
 
 ## 1. Rules for every agent
 
-1. **Start from the latest `architecture-v2` for the approved architecture migration (ARCH-V2-001).** Pull before beginning work. `main` remains the preserved prototype baseline; do not push migration work to `main`.
+1. **Start from the latest `architecture-v2` (ARCH-V2-001, ARCH-V2-002).** Pull before beginning work. `main` is the preserved legacy prototype; do not push new work of any kind to `main`.
 2. **Record design decisions in `docs/REDLINE_MASTER_DESIGN.md`.** Other docs and chat transcripts do not count as decisions until they are in the master document.
 3. **Report the commit.** When work is finished, tell the user the commit hash where it lives.
-4. **Branch policy (ARCH-V2-001):** the designer explicitly approved `architecture-v2` as the primary working branch for the rebuild. Work on this existing branch; ask before creating any further branches, merging into `main`, changing the repository default branch, or cutting a release. `main` remains unchanged until designer-authorized integration.
+4. **Branch policy (ARCH-V2-001, ARCH-V2-002):** all work lands on `architecture-v2`, which is also the repository default branch. Ask before creating any further branches, merging into `main`, changing the default branch, or cutting a release. `main` was merged into `architecture-v2` once (ARCH-V2-002) and is otherwise left unchanged.
 5. **Only the designer approves.** A proposal stays PROPOSED until the designer approves it in a session. Never mark anything APPROVED yourself.
 6. **Every change carries a decision ID** (e.g. ARCH-001) in the design doc, `docs/HANDOFF.md` and `docs/REDLINE_DEVELOPMENT_LOG.md`.
 
@@ -24,7 +26,7 @@ Copies of design docs kept outside this repository, such as Claude Project docs 
 
 ## 3. Session routine
 
-- **Start:** pull `main`; read `docs/HANDOFF.md`, then the latest entries of `docs/REDLINE_DEVELOPMENT_LOG.md`, then `docs/ARCHITECTURE.md` before touching code.
+- **Start:** pull `architecture-v2`; read `docs/HANDOFF.md`, then the latest entries of `docs/REDLINE_DEVELOPMENT_LOG.md`, then `docs/ARCHITECTURE.md` before touching code.
 - **End:** in `docs/HANDOFF.md`, move finished items to *Done* or *Built* with the commit; add new items. Add a dated log entry tagged `(Claude Code)`, `(Claude)` or `(Codex)`. Note anything you had to decide yourself under **Interpretations to confirm**.
 - **Log size (LOG-001):** keep the development log under about 60 KB; move the oldest whole entries, unchanged, to the end of `docs/REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` and note the move.
 
@@ -80,18 +82,18 @@ Use `SIM=1 "$GODOT" --headless --path godot --script res://tests/test_game.gd` t
 
 ## 5. Builds (RELEASE-001)
 
-**Existing release workflow is preserved for the prototype:** `main` remains the stable baseline; `release` exports only when the designer authorizes a prototype playtest build using the established procedure. The `architecture-v2` migration does not automatically change the release branch or export workflow. Do not fast-forward `release` from `architecture-v2` or merge migration work into `main` without designer approval. Before a future migration release, explicitly design and approve its validation/export procedure.
+**Existing release workflow is preserved for the prototype:** `main` remains the stable legacy baseline; `release` exports only when the designer authorizes a prototype playtest build using the established procedure. The `architecture-v2` migration does not automatically change the release branch or export workflow. Do not fast-forward `release` from `architecture-v2` or merge migration work into `main` without designer approval. Before a future migration release, explicitly design and approve its validation/export procedure (HANDOFF, ARCH-V2-002).
 
 ## 6. Approved architecture migration (ARCH-V2-001, designer 2026-11-23)
 
-- `architecture-v2` is the primary development branch for the full-game rebuild. `main` is the stable, preserved four-node prototype. No automatic merges between them.
+- `architecture-v2` is the primary development branch for the full-game rebuild and, under ARCH-V2-002, for all other project work. `main` is the stable, preserved four-node prototype. No automatic merges between them.
 - Target: hybrid Godot 4.3 GL Compatibility architecture using scene composition for meaningful screens/widgets, reusable typed GDScript components, data-driven content and corporation presentation, and independent game rules. Scene boundaries and data formats must be proposed and reviewed before broad implementation.
 - Preserve and regression-test the proven rules engine (`game.gd`, `cards.gd`, `ice.gd`) as the initial behavior reference. No gameplay or balancing changes are authorized by this architecture decision.
 - First deliverable is an architecture plan and one fully playable representative ICE encounter; compare against existing behavior and tests. Expand only after validation. Prefer small testable modules over giant scripts or excessive tiny scenes.
-- Record the exact `main` baseline SHA and passing tests before applying migration code. A permanent prototype tag is recommended but not yet created or verified. Do not claim a baseline was validated merely because this branch exists.
+- Prototype baseline: `main` at `21922ad`, tagged `prototype-baseline` (ARCH-V2-002, 2026-11-25). Recorded results: import exit 0; `test_game.gd` 176 passed / 0 failed (also with `SIM=1`); `test_adp.gd` 17 / 0; `test_signal_carbon.gd` 672 / 0. Screenshot fixtures are skipped while `Game.CORE_LOOP` is true; the Windows export was not run. Compare migration code against this baseline.
 - Keep designer-only approvals, decision IDs, copy guards, readability, privacy, CI and release protections intact. The new branch is not a blanket approval for implementation details.
 
-## Architecture documentation review (ARCH-V2-001)
+### Architecture documentation review (ARCH-V2-001)
 
 Before proposing or implementing a significant architecture change on `architecture-v2`, read `docs/architecture-v2/ARCHITECTURE_DECISIONS.md` and `docs/architecture-v2/COMPLIANCE_CHECKLIST.md` alongside the blueprint and authoritative rules. Document the relevant checklist results, evidence, exceptions, and designer review in the change handoff. A proposed scene hierarchy or resource contract is **not** automatically approved. This documentation review requirement does not authorize any gameplay or structural change by itself.
 
@@ -114,16 +116,16 @@ When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register)
 
 Implement what the current docs say; where they're unclear, make the smallest reasonable choice and list it under Interpretations to confirm.
 
-## 7. Shared development operations (OPS-001)
+## 8. Shared development operations (OPS-001)
 
 **UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes.
 
-Read `docs/operations/README.md` at session start. At session end, file actual findings in the shared reports and registers on main, using the report template; link native GitHub issues and PRs rather than duplicating them. Daily review is 22:00 America/Toronto; next-day priorities require designer confirmation. No separate agent backlogs. Preserve existing approval and branch rules.
+Read `docs/operations/README.md` at session start. At session end, file actual findings in the shared reports and registers on `architecture-v2`, using the report template; link native GitHub issues and PRs rather than duplicating them. Daily review is 22:00 America/Toronto; next-day priorities require designer confirmation. No separate agent backlogs. Preserve existing approval and branch rules.
 
 
-## 8. Documentation migration gate (DOCS-MIG-001)
+## 9. Documentation migration gate (DOCS-MIG-001)
 
-Designer-authorized 2026-11-24. Consolidation must reduce clutter, not create parallel authorities. Work in controlled batches on main, with one atomic completion commit per batch. No subsequent consolidation batch may begin until the preceding batch passes this gate.
+Designer-authorized 2026-11-24. Consolidation must reduce clutter, not create parallel authorities. Work in controlled batches on `architecture-v2`, with one atomic completion commit per batch. No subsequent consolidation batch may begin until the preceding batch passes this gate.
 
 Before declaring a batch complete:
 - Inventory source content and dependencies; preserve unique material, decision IDs, approval status, provenance and historical records. Relocate narrative or other out-of-scope material to its appropriate canonical destination before retirement.

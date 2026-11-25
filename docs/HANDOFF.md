@@ -7,12 +7,12 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 ## Blocking documentation migration — DOCS-MIG-001
 
-Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the mandatory migration gate in AGENTS.md / CLAUDE.md §8. Claude Code: full-checkout dependency scan, reference repairs, applicable validation and safe legacy retirement; ChatGPT/Claude: editorial reconciliation and narrative relocation. Prior repair commit 2f1727f. No subsequent consolidation until this gate passes. Status: OPEN; no retirement or full validation yet.
+Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the mandatory migration gate in AGENTS.md / CLAUDE.md §9 (renumbered from §8 by ARCH-V2-002). Claude Code: full-checkout dependency scan, reference repairs, applicable validation and safe legacy retirement; ChatGPT/Claude: editorial reconciliation and narrative relocation. Prior repair commit 2f1727f. No subsequent consolidation until this gate passes. Status: OPEN; no retirement or full validation yet.
 
 ## How we work
 
-1. **Work on `architecture-v2` for the approved rebuild (ARCH-V2-001, designer 2026-11-23).** `main` is the preserved prototype baseline. Pull the latest `architecture-v2`, record decisions in the master design doc, report commit hashes, and ask before creating another branch or merging into `main`. This supersedes MAIN-001's `main`-first policy **for migration work only**; the former branch history remains unchanged.
-2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes migration copies from `architecture-v2` (prototype copies may remain on `main` and must be labeled).
+1. **Work on `architecture-v2` (ARCH-V2-001, designer 2026-11-23; ARCH-V2-002, designer 2026-11-25: all project work, and the repository default branch).** `main` is the preserved prototype baseline. Pull the latest `architecture-v2`, record decisions in the master design doc, report commit hashes, and ask before creating another branch or merging into `main`. This supersedes MAIN-001's `main`-first policy **for migration work only**; the former branch history remains unchanged.
+2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes them from `architecture-v2` (ARCH-V2-002). `main` is the preserved legacy prototype.
 3. **Who does what (DEV-001, 2026-11-18; details in `CLAUDE.md` / `AGENTS.md`).**
    - **Claude Code:** the Godot build (`godot/`), tests, fixtures, CI, exports, `REDLINE_CURRENT_STATUS.md`.
    - **Claude (Panopticon project):** design docs and proposals, playtest analysis, this file, the project copies.
@@ -37,11 +37,14 @@ Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the ma
 | Item | Owner | Status |
 |---|---|---|
 | Preserve `main` as prototype; use existing `architecture-v2` for rebuild | Designer / agents | BRANCH CREATED; governance updated |
-| Record exact prototype baseline commit, run existing tests, and create permanent baseline tag if approved | Claude Code | TO DO; no test/tag verification claimed |
+| Record exact prototype baseline commit, run existing tests, and create permanent baseline tag if approved | Claude Code | **DONE** (ARCH-V2-002): `main` `21922ad` tagged `prototype-baseline`; import 0; test_game 176/0 (also SIM=1); test_adp 17/0; test_signal_carbon 672/0; fixtures skipped (CORE_LOOP), Windows export not run |
+| Reconcile `main` into `architecture-v2`; make `architecture-v2` canonical for all work and the default branch (ARCH-V2-002) | Claude Code | **DONE**: merge `6b1acdd`; governance correction in the following commit (see log) |
 | Propose hybrid scene/component/data architecture, component boundaries, signals, resources, migration plan and acceptance tests | Claude Code (design review with Claude) | BLUEPRINT DRAFTED and STATIC SOURCE AUDIT, DEPENDENCY MAP and proposed COMPONENT ARCHITECTURE SPEC (CAS-001) added in `docs/architecture-v2/`; Claude Code runtime verification and designer architecture review required |
 | Build one representative playable ICE encounter without changing approved rules | Claude Code | TO DO; after architecture review |
 | Compare behavior against prototype; demonstrate second corporation skin without duplicating the encounter UI | Claude Code | TO DO; after first encounter |
-| Plan integration, CI and future release policy; request explicit approval before any merge into `main` | Claude Code / designer | TO DO |
+| Design and approve a release procedure for builds from `architecture-v2` (RELEASE-001 still covers prototype builds from `main` only) | Claude Code / designer | TO DO |
+| Seed GitHub Issues for UI work (UI-WORKFLOW-001): none existed at reconciliation | Claude / Claude Code | TO DO |
+| Update external agent configurations that still name `main` (ChatGPT, Codex, automations) | Designer / ChatGPT | TO DO; not accessible to Claude |
 
 Existing gameplay and visual tasks below remain tracked; reassess their target branch and priority during migration planning rather than silently changing rules or treating them as completed.
 ## NUL-PILLAR-001 — foundational design follow-up (WAITING)

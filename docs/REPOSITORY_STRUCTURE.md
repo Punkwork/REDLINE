@@ -37,7 +37,7 @@ PANOPTICON is a cyberpunk runner-versus-corporation deckbuilder. Godot 4 is the 
 2. Keep the four authoritative documents intact; document approved changes and their rationale.
 3. Preserve the Python/Pygame prototype as reference evidence rather than silently converting or replacing it.
 4. Do not mark a feature implemented or tested without source and reproducible test evidence.
-5. Use the same repository checkout for VS Code, Codex, and Godot on a development computer; push/pull through GitHub. The working branch is named in `docs/HANDOFF.md` (currently `codex/halcyon-playtest-stabilization`); changes arrive as pull requests into it.
+5. Use the same repository checkout for VS Code, Codex, and Godot on a development computer; push/pull through GitHub. The working branch (`architecture-v2`, ARCH-V2-002) is named in `docs/HANDOFF.md` (currently `codex/halcyon-playtest-stabilization`); changes arrive as pull requests into it.
 6. Store project sources and legitimately redistributable assets, not passwords, credentials, temporary builds, or unlicensed materials.
 
 ## Initial repository setup

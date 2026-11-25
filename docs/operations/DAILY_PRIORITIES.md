@@ -5,7 +5,7 @@ Daily review at 22:00 America/Toronto. Append dated agendas for the next working
 
 ## 2026-11-25 — designer-confirmed carryover (DOCS-MIG-001)
 
-Priority: finish the UI documentation migration gate before any subsequent consolidation. See HANDOFF and AGENTS.md / CLAUDE.md §8 for the canonical scope and acceptance criteria. Status OPEN; repository-wide validation and legacy retirement not yet complete. Existing 22:00 review should reconcile this priority with current evidence, not duplicate it.
+Priority: finish the UI documentation migration gate before any subsequent consolidation. See HANDOFF and AGENTS.md / CLAUDE.md §9 for the canonical scope and acceptance criteria. Status OPEN; repository-wide validation and legacy retirement not yet complete. Existing 22:00 review should reconcile this priority with current evidence, not duplicate it.
 
 ## 2026-11-25 — proposed daily agenda (OPS-001, review 2026-11-24)
 
