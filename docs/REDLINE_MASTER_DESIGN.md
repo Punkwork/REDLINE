@@ -273,6 +273,10 @@ The player is the **rustler**; the opposing system is the **corporation**. Encou
 Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), visit timing, and any other services require **VERIFY**; do not assume additional recovery options.
 
 ## 6. Interface and player experience
+
+**UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes.
+
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes.
 **Established decisions:**
 - Fixed ICE inspection bay, avoiding unpredictable layout shifts.
 - Drag-to-ICE breaker interaction.
@@ -286,6 +290,8 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 **Visual direction:** arcade-neon/cyberpunk energy, retro computing, readable tactical information, and strong differentiation between flavour text and executable rules. Specific palette, fonts, screen dimensions, animations, accessibility settings, and final Godot scene hierarchy are **OPEN**.
 
 ## 7. NUL/REM — companion character bible
+
+**NUL-PILLAR-001 (2026-11-23, designer-confirmed direction):** NUL/REM is a foundational design pillar and the intimate expression of PANOPTICON's fictional psychological experiment. See [NUL/REM and the self-built prison](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md).
 **Core characterization (LOCKED/DIRECTION):** dry, morose, sarcastic; intelligent but not infallible; quietly protective of the rustler; steeped in classic videogame, hacker, and retro-computing history. The voice should feel like an exhausted machine that has seen too much and occasionally finds something genuinely wonderful.
 
 **CANON (2026-11-13) — Identity:** NUL/REM is **rev 0.08**, a salvaged, obsolete **personality ROM**, **manufactured in 1987**, referred to as **he**. He wants sleep and shutdown but is compelled to protect the Runner. Memories of events before 1987 (e.g. ARPANET going online in 1969) are the Unreliable Historian's impossible memories; their explanation stays OPEN. Source: `REDLINE_UI_NULREM_Design_For_Claude.md` §6. Approved example lines are Bible verses NR-002 to NR-008. **CANON trait (2026-11-13):** fastidious about germs despite having no body or immune system (Bible §5). **CANON trait (2026-11-13):** compelled to reference fictional computers from film and games (HAL 9000, WALL-E, Number 5, Proteus IV, Impossible Mission's “Stay a while. Stayyyyyyy forever!”, Evilspeak's Apple II, Little Britain's “Computer says no”, Columbo's K44 and MM7, Tron's Master Control Program, The Black Hole's robots, and Marvin, whom he insists he is nothing like) **CANON trait (2026-11-13):** 1982 is his special year (most of his memory chips' programming; his favourite music and films); he reminisces most about 1982 and 1987. **CANON trait (2026-11-13):** he considers himself too sophisticated for his work, though he'd rather do nothing at all. **DIRECTION:** his references assume the player knows the work, with no plot summaries or years other than 1982 and 1987 (Bible §5). and to make silly retro-game references (Bible §5).
@@ -2962,3 +2968,182 @@ Designer: "the card should do what it currently does OR reveal hidden subroutine
 **Scope:** Meaningful reusable Godot scenes, typed GDScript components, data-driven corporation presentation/content, and strong rules/presentation separation. Preserve the existing validated rules and their tests as the initial behavioral reference; do not change card effects, balance, approved rules, copy guards or gameplay solely because the architecture changes. Start with a reviewed architecture plan and one complete playable ICE encounter, then verify behavior and scalability before broader migration. Exact scene layout, data schema, use of signals, migration steps, and future release/merge gate are **not yet approved**. No fork or new repository is required. Do not merge into `main` without explicit designer approval.
 
 **Status:** Architectural direction and branch policy APPROVED by designer; implementation not started. `architecture-v2` branch created from `main`; prototype tag and validation results not yet recorded.
+## NUL-PILLAR-001 — NUL/REM and the self-built prison (DIRECTION, 2026-11-23)
+
+Designer explicitly confirmed NUL/REM as a foundational design pillar and endorsed knowledge, confidence and authority (explicit or assumed through repeated compliance) as the three conditions for behavioural intervention. NUL/REM actively solicits authority by offering real benefits in response to experienced difficulty. Pivotal designer example: near the end of corporation two, a habitual card retainer attempts to slim the deck and NUL/REM denies removal. Other designer examples: following safer route advice, delegating initial program installation for +1 first-turn BW, and advance ICE-type intelligence. Preserve the complete substantive discussion in [REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). Individual mechanics, thresholds, copy and implementation remain PROPOSED; no existing rules or reveal guards changed.
+
+## NUL-PILLAR-001a — Psychological Invisibility (DIRECTION, designer-confirmed 2026-11-23)
+
+The psychological experiment must remain invisible: never disclose, classify, quantify or announce player progression through the psychological framework, including retrospective summaries, dialogue, achievements or THE CARBON. Internalization is emergent player behaviour, not a programmed phase or status. Immediate transactions and real gameplay consequences remain understandable. See [NUL/REM and the self-built prison](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md#nul-pillar-001a--psychological-invisibility-designer-confirmed-foundational-constraint-2026-11-23). This is a foundational design constraint; proposed enforcement withdrawal, silence and disconnection mechanics are not authorized for implementation.
+
+## NUL-PILLAR-001b — Played under surveillance (DIRECTION, designer-confirmed 2026-11-23)
+
+**PANOPTICON is not a game about surveillance. It is a game played under surveillance.** Within fiction, perceived observation may shape obedience or resistance without delegated authority; it may also have no effect. The paradox of autonomy remains open: what does it mean to act freely? Experience is sufficient; no prescribed interpretation, psychological result or measurement is required. Preserve NUL-PILLAR-001a and local-only data safeguards. See [foundational NUL/REM design](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). No mechanics authorized.
+
+## NUL-PILLAR-001c — Four-Question Design Gate (DIRECTION, 2026-11-23)
+
+Designer requested preservation of the four questions as the NUL/REM mechanic review standard: Is it strategically meaningful? Does it preserve genuine player agency? Does it allow for multiple psychological responses? Can it communicate its philosophical significance without explaining it? Answer all four before implementation; reconsider any failed or unresolved criterion. Passing does not replace designer approval or existing development gates. See [NUL/REM foundational design](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). Designer-facing only; no gameplay changes authorized.
+
+## PHIL-001 — PANOPTICON Philosophical Design Bible (DIRECTION, designer-confirmed 2026-11-23)
+
+Established [PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md) as the cross-system philosophical reference. Consolidates participatory imprisonment, psychological invisibility, paradox of autonomy, commodification of autonomy and curated autonomy; preserves surveillance economy and three-card reward filtering explorations. Extend the four-question design review to mechanics expressing these principles. Existing rules, lore and approval gates remain authoritative; all new mechanics, values and algorithms remain PROPOSED.
+
+## PHIL-002 — Algorithmic Reduction (DIRECTION, designer-confirmed 2026-11-23)
+
+Preserve six explorations in the [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md): reduction of identity, curiosity displaced by conformity, performance metrics, performance of identity, recursive self-surveillance and disappearance of surprise. Designer emphasizes the last two. Algorithmic Reduction concerns representation and self-perception; no psychological classification or predetermined outcome. All mechanics remain PROPOSED.
+
+## PHIL-003 — Gameplay Manifestations Catalogue (DIRECTION, 2026-11-24)
+
+Designer requested a living [catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md) of philosophical gameplay examples. Initial 39 proposed examples and one withdrawn example; stable GM IDs, principle tags and status. No mechanics authorized; existing approval gates remain.
+
+## PHIL-003a — Catalogue psychological effects and concrete examples (DIRECTION, 2026-11-24)
+
+Designer requested Psychological Effect grouping and Concrete In-Game Example as the final column of the [catalogue](PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md). Primary grouping plus secondary associations; hypothetical designer-facing labels, not measured outcomes. All examples remain proposals.
+
+## PHIL-004 — Demoralization and burden of autonomy (DIRECTION, 2026-11-24)
+
+Preserve designer-confirmed statements in Philosophical Design Bible §10: demoralization introduces surrender of autonomy for relief from its burden; if freedom becomes sufficiently exhausting, can surrendering it begin to feel like liberation? Distinguish perceived futility of resistance and declining confidence in independence. Explore without deliberately inducing helplessness, disengagement or frustration; preserve viable independent play. Manifestations unresolved; no mechanics authorized.
+
+## NUL-DIALOGUE-001 — Dialogue compendium (DIRECTION, 2026-11-24)
+
+Designer requested thematic dialogue catalogue. Created [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) with 31 draft lines, grouped by contradiction, suggested contexts, psychological associations and paired references. All copy and triggers remain PROPOSED; no new canon or mechanics authorized.
+
+## NUL-DIALOGUE-001a — Earlier dialogue recovery (2026-11-24)
+
+Expanded compendium to 75 entries (57 dialogue examples and 18 wording fragments) from earlier discussion and design records. Partial recovery, not exhaustive. All proposed; no implementation authorized.
+
+## NUL-DIALOGUE-002 — Dialogue architecture (DIRECTION, 2026-11-24)
+
+Designer requested completed [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md), 13 sections covering authored/procedural/template model, pacing, contextual selection, continuity, curation, schema, performance, content and QA. 150 instances per 70–75-minute run is provisional. Architecture and copy remain proposed; no runtime LLM, no rules or code changes authorized.
+
+## OPS-001 — Shared development operations (DIRECTION, 2026-11-24)
+
+Designer requested one shared operations hub for agents, native issues/PRs, daily reports, surprises and missing tools, 22:00 Toronto review and next-day agenda. See [Operations Hub](operations/README.md). No gameplay or approval changes.
+
+## OPS-002 — Project goals, milestones and progress measurement (DIRECTION, 2026-11-24)
+
+Designer requested an indicator of distance to the final goal. Proposed release goal: a complete, coherent, stable and designer-accepted PANOPTICON game, with a playable three-corporation run (RUN-006), approved rules/content, distinctive presentation and NUL/REM narrative, validated Windows distribution. Commercial release/store scope was initially OPEN; superseded by OPS-002a below. Dates and quantitative quality thresholds remain OPEN.
+
+### Proposed milestone gates
+
+| ID | Milestone | Completion evidence |
+|---|---|---|
+| M01 | Validated core loop | Approved encounter rules and representative cards implemented; regression tests and designer playtest pass on identified build. |
+| M02 | Architecture and full corporation vertical slice | Designer confirms architecture migration disposition; complete HALCYON route, approved node types, rewards, services and boss flow integrated and tested; designer accepts slice. |
+| M03 | Full three-corporation run | HALCYON, IRONWATCH and LUCIDA playable end to end; transitions, bosses, run ending and approved First Signal guard validated. |
+| M04 | Gameplay content and balance | Approved Rustlers, cards, ICE, progression and economy content complete; representative seeds and human runs meet designer-approved balance criteria. |
+| M05 | Narrative and NUL/REM | Approved dialogue architecture and content, lore, boons and any separately approved philosophical mechanics integrated and tested; reveal, privacy and agency safeguards pass. |
+| M06 | Presentation and accessibility | Approved visual/audio direction, readable UI, input, settings and accessibility checks pass across the full run. |
+| M07 | Beta / release candidate | End-to-end regression, real Windows playtests, packaging, save/config and performance checks pass; release-blocking defects resolved. |
+| M08 | Final release acceptance | Designer accepts release scope and candidate; reproducible versioned artifact, checksum, documentation and distribution readiness verified. |
+
+Milestones may overlap; M04–M06 are parallel workstreams, not a mandatory serial order. M07–M09 depend on earlier gates (M09 added by OPS-002a). No completion without linked evidence and designer acceptance where required. Current architecture-v2 branch is not assumed merged; reconcile its scope and evidence before baselining M02.
+
+### Progress measurement
+
+The [Operations Dashboard](operations/README.md#project-progress--ops-002) owns the live snapshot, not a duplicate roadmap. Report milestone gates accepted / total, plus per-gate stage (not started, design, built, verified, accepted, or unknown), blockers, next evidence and dated source/commit. Built is not verified; verified is not accepted. Gate count is a readiness indicator, not percentage of effort or time. Do not infer percent complete from commits, lines of code, documents or issue counts. Overall effort-weighted percentage remains unknown until designer confirms scope, milestone weights and measurable acceptance checklists; if adopted, calculate accepted weighted checklist items / total approved weight, show unknown coverage and record scope changes separately. Never silently inflate progress. Reopened gates reduce readiness. At 22:00 Toronto daily review, update snapshot from actual evidence, show change since last review, identify next gate and link proposed next-day priorities to milestone IDs. If no evidence changes, record no verified change. Existing governance and audit gates remain binding.
+
+## OPS-002a — Commercial Steam release (DIRECTION, 2026-11-24)
+
+Designer explicitly confirmed: “Panopticon needs to go to market. This is part of the intention of this project from the beginning. Steam is the intended platform.” This supersedes the earlier releasable-only goal.
+
+**Ultimate goal:** To develop and commercially release PANOPTICON on Steam as a complete, distinctive cyberpunk deckbuilding roguelike that combines strategically rewarding gameplay, meaningful replayability, a cohesive Atomic Deco Punk aesthetic and an emotionally compelling relationship between the Rustler and NUL/REM. Through mechanics, narrative and presentation, PANOPTICON explores surveillance, autonomy, voluntary imprisonment and the contradictions of protection, allowing players to discover these themes through experience rather than explicit explanation.
+
+**M08 — Final release acceptance (expanded proposed criteria):** all three corporations playable end to end; approved mechanics and content implemented, balanced and tested; approved NUL/REM dialogue, character and narrative integrated; philosophical ambitions expressed through experience; visual design, animation, sound and interface meet established artistic standards; replayability, pacing and strategic depth demonstrated through playtesting; release-blocking defects resolved; designer accepts final release candidate. Retain OPS-002 artifact, checksum, documentation and distribution evidence requirements.
+
+**M09 — Commercial Steam launch (new proposed gate):** Steamworks onboarding and applicable store/build review requirements satisfied; rights, licensing, store assets, pricing, launch configuration and support arrangements confirmed; designer authorizes launch; approved production build is publicly available for purchase on Steam, with store URL and release/build evidence recorded. Store preparation may proceed in parallel subject to authorization. Verify current Steam requirements before implementation. No actual publication, spending, pricing, launch date or account action authorized by this decision. Post-launch support scope remains open.
+
+Progress is measured not simply by how much of PANOPTICON has been built, but by how much closer it has come to fulfilling its intended player experience and reaching commercial launch. Nine gates now proposed; weights and acceptance thresholds remain open.
+
+
+## 8. Documentation migration gate (DOCS-MIG-001)
+
+Designer-authorized 2026-11-24. Consolidation must reduce clutter, not create parallel authorities. Work in controlled batches on main, with one atomic completion commit per batch. No subsequent consolidation batch may begin until the preceding batch passes this gate.
+
+Before declaring a batch complete:
+- Inventory source content and dependencies; preserve unique material, decision IDs, approval status, provenance and historical records. Relocate narrative or other out-of-scope material to its appropriate canonical destination before retirement.
+- Reconcile duplicates and superseded specifications against Master Design; do not silently resolve genuine design conflicts or change gameplay rules.
+- Repair active references across the entire tracked repository, including relative links, anchors, source code, tests, CI, packaging and asset manifests. Preserve historical records accurately; use immutable historical links where needed.
+- Validate all affected paths and anchors, and run applicable build/test checks if dependencies warrant them. Record commands, results, coverage and any unresolved failures. A partial scan or inaccessible files cannot count as a pass.
+- Retire superseded documents from the active tree once their content and dependencies are verified. Git history preserves originals; temporary redirects are exceptions, not permanent duplicate documentation.
+- Verify the final diff and canonical destinations, record the decision ID, evidence and completion commit in Master Design, HANDOFF and Development Log. Never mark an incomplete gate complete.
+
+Claude Code should perform full-checkout dependency scans and validation; ChatGPT/Claude reconcile editorial content and design intent. Use the same repository records, not parallel backlogs. Escalate only genuine design conflicts or blockers to the designer. No new branch or rules changes authorized.
+
+**Current blocking batch: UI-BIBLE-001.** Resume on 2026-11-25. Finish editorial reconciliation, narrative relocation, repository-wide dependency repair and validation, and legacy source retirement before starting any other documentation consolidation. Reference repair commit: 2f1727f698b4e5c084c5e3f12c280b68475565fa. Seven imported sources remain in the active tree; full validation has not passed. The existing daily review must carry this blocker into the next agenda until resolved.
+
+## BYPASS-001 — Non-final encounter eligibility (LOCKED, 2026-11-24)
+
+Designer explicitly established: BYPASS is possible only in encounters that are not the final encounter of a Node. A Node has up to three encounters. In a one-encounter Node BYPASS is prohibited; in a two-encounter Node only encounter 1 is eligible; in a three-encounter Node encounters 1 and 2 are eligible. No BYPASS on the final encounter. Eligibility alone does not grant a bypass. Specific triggers, targets, costs, consequences, passives, extraction and parting-shot interactions remain OPEN; earlier rapid-penetration and card ideas are proposals only. No implementation authorized by this record.
+
+## EXP-DESIGN-001 — Design Experimentation Bible (DIRECTION, 2026-11-24)
+
+Designer requested one all-domain [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) for new ideas, scenarios, experimental cards and viability analysis. Initial BYPASS exploration recorded at 7e0928f42582a1faac5f552c4b98fa1e62509abe. Proposals are not rules; UI-WORKFLOW-001 native issue authority and existing topic catalogues remain. New document creation only; no consolidation or retirement while DOCS-MIG-001 gate open. No implementation authorized.
+
+## BACKCHANNEL-001 — Preferred experimental iteration (2026-11-24)
+
+Designer endorsed EXP-C029 BACKCHANNEL, 2 BW SCRIPT, supporting ICE STR <=2, suspend one non-DEADLOCK sub; bypass if all primary ICE subs broken by end of next Rustler turn, otherwise end suspension. [Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) (ddc4793ce6d41b500c1086c9d209fe61e07f64c7) owns detailed alternatives, scenarios and open questions. BYPASS-001 unchanged; no formal rule adoption or implementation authorized.
+
+## NULL-POINTER-001 — Cost adjustment (APPROVED, 2026-11-24)
+
+Designer explicitly approved reducing NULL POINTER from 2 BW to 1 BW. All other properties unchanged. Deck Synergy §9.2 updated (08b5b6f6e0ea3b43d46924849fecb889d9a18955). Runtime card database remains at 2 BW pending Claude Code synchronization and tests; this request is documentation only.
+
+## RIOT-EXP-001 — RIOT experimental card catalogue (ChatGPT)
+
+Designer requested preservation in Experimentation Bible §11 (bdc32508a880a9925010b0dde4bdbf0ac7b0fc57). EXP-C030–036, M007, S012–021, X005; revised FIRST STRIKE and one-copy BREAKER BAR with per-copy node escalation and BURN cost. Experimental only; NULL-POINTER-001 remains approved separately. No code or tests; UI migration gate unchanged.
+
+## TRACE-EXP-001 — TRACE mitigation concepts (ChatGPT)
+
+Designer requested preservation of SIGNAL DAMPENER (Ghostware) and four Protocols in Experimentation Bible §12 (bc9938aa034cf6a39c6114472b4688b056e6cf1f); EXP-C037–041, M008, S022–027, X006. Proposed type distinction, self-inflicted TRACE coverage and trigger timing remain experimental. No rules/code changes, tests or consolidation.
+
+## NUL-DIALOGUE-003 — Economic dependency dialogue (ChatGPT)
+
+Designer requested preservation of four lines NR-076–079 in NUL/REM Dialogue Compendium (28cd6dea0d23821902a025414a3333724c4b365c). Verbatim dialogue; contextual triggers and associations proposed. No shipping approval, gameplay changes, tests or consolidation.
+
+## CRED-EXP-001 / PHIL-005 — CRED-powered combat and economic dependency (ChatGPT)
+
+Designer requested preservation of eight cards EXP-C042–049, mechanics M009–011, scenarios S028–034 and experiment X007 in Experimentation Bible §13 (bf8d742d3783d4cdb2a11e17e62d442b7fc8de52), and economic dependency/purchased freedom in Philosophical Design Bible §11 (aaafd9993e811a2a8b1169a9e9f3ed68b97f0bf6). Fully CRED-powered Icepick activations consume no BW; installation costs open. All mechanics experimental; philosophical direction designer-endorsed, not a new formal pillar. NR-076–079 already saved. No rules/code changes, tests or consolidation; UI migration blocker unchanged.
+
+## CRED-EXP-001a — Icepick installation cost (ChatGPT)
+
+Designer specified 1 BW installation for PAYDAY, BRIBE and MERCENARY (EXP-C042–044); all activations remain CRED-only. Experimentation Bible §13 updated (9cfc95fe920dbfd5abfded3bccda06174cabec2b), including S035. Supersedes open installation cost in CRED-EXP-001 for these three cards only. Experimental, no code or tests.
+
+## CRED-EXP-001b — Program classification (ChatGPT)
+
+Designer clarified EXP-C042–044 are RAM-using PROGRAM Icepicks, 1 BW install, CRED-only activation. Exact RAM TBD; 1 RAM suggested only. Experimentation Bible §13 corrected (0045b0d693b7386b6a6a83c83ca194e92005d784); canonical Core Rules §3.1 unchanged. No code or tests.
+
+## CRED-EXP-001c — Icepick RAM requirements (ChatGPT)
+
+Designer specified PAYDAY 1 RAM, BRIBE 1 RAM, MERCENARY 2 RAM. Experimentation Bible §13 (a28329f275b87bd1d163e4e798cf5859b5e96958), EXP-S036; supersedes TBD RAM in CRED-EXP-001b. Other values unchanged. Experimental only; no code or tests.
+
+## VOID-EXP-001 (ChatGPT)
+
+Saved exploratory VOID-only UNLOAD, Rustler-selected Program removal to discard, Program opportunity costs, EXP-M012/S037–042/X008 in Experimentation Bible §14 (171674b7e8b34d0dd4dad805b9861da4e22b0d0b). No rules/code/tests or consolidation.
+
+## CRED-EXP-001d — CRED SCRIPTS and card-type identity (ChatGPT)
+
+Designer confirmed EXP-C045–049 as 0 BW SCRIPTS with existing CRED prices/effects, one resolution per play, normal discard/redraw, prior activation caps removed in preferred experiment. EXP-M013/S043–044, X007 extension in Experimentation Bible §15 (8d75932dad452669d6aefc0864bda40092e118df). Existing Protocols unchanged; experimental guidance only, no rules/code/tests or consolidation.
+
+## ICE-EXP-002 — Encounter-wide effects and subroutine modification (ChatGPT)
+
+Saved 20 proposed cards EXP-C050–069, mechanics M014–015, scenarios S045–052, experiments X009–010 in Experimentation Bible §16 (27d5fb2ea234eaa8b1ebc87dada42b021fee6b17). Designer's targeted -6 PULP this turn/BURN preserved; names/costs provisional, collisions flagged. No rules/code/tests or consolidation.
+
+## CAP-EXP-001 — Infiltration CAPS (ChatGPT)
+
+Saved twelve non-card CAP concepts EXP-CAP001–012, M016, S053–057 and X011 in Experimentation Bible §17 (98bc0b716700ad6aac90a6bc614b46496b5425c0). No CRED prices or rarities assigned; map activation and circumvention experimental. Existing CAPS rules unchanged. No code/tests or consolidation.
+
+## SURV-MEM-001 — Surveillance and memory (ChatGPT)
+
+DIRECTION, designer-confirmed: “As the player learns the game, the game learns the player.” “The system always remembers. It never forgets.” Pervasive fictional surveillance across runs. Five-stage table and proposed memory layers saved in Experimentation Bible §20 (57bfe20002567740e0e91cde85a809df280ce7e2); prior ICE-SURV-EXP-001 / SURV-EXP-001 proposals in §§18–19 (eb335be5b95c05488f3a966f5d90a47280675523). Philosophical Bible cross-reference. No approved mechanical changes, code, tests or consolidation. Interpretation: thematic persistence does not remove real-world local data reset or privacy controls.
+
+## CARBON-SURV-EXP-001 — Collective trust and individual authority
+
+Designer-endorsed philosophical exploration: keep THE CARBON (collective trust) and NUL/REM (personal autonomy) distinct. Corporate appropriation of trusted resistance spaces may erode collective trust and increase reliance on individual authority. “The system creates the conditions that make its own assistance necessary.” Full progression, examples, comparative framework and open questions preserved in [Design Experimentation Bible §21](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 02e46011863db27f2ac03ed922aa038358bc8a77. EXP-D003 / EXP-X013 remain proposed; no mandated psychological outcome, approved mechanics, code, tests or consolidation.
+
+## SURV-UNCERT-EXP-001 — The uncertainty of observation
+
+Designer-endorsed exploration: possibility of observation, fictional fear/anxiety/suspicion, ambiguity of coincidence, self-regulation and freedom exhaustion. Designer identified Francis Ford Coppola's The Conversation (1974) as reference. Preserve the “constant low hum anxiety” experiential direction as fictional atmosphere, not deliberate actual distress. Linked to SURV-MEM-001 and CARBON-SURV-EXP-001. Full tables, examples and safeguards in [Design Experimentation Bible §22](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 6b36c117b89c4f32edfef77c7241c8fb6db59a28. No approved mechanics, production dialogue, code, tests or consolidation.
+
+## SURV-OBSERVER-EXP-001 — The Internalized Observer
+
+Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation (1974, Francis Ford Coppola) as principal cinematic references. Recorded in Design Experimentation Bible §23, commit 307703473a5a9f3ec8a9fe0a6f34800815d2342b. Reference-only; no new rules, specifications, code or tests.

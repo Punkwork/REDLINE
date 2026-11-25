@@ -267,7 +267,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 |---|---|---|---|---|---|
 | **HANDOFF** | ECHO | Common | SCRIPT — CLOAK | 0 BW | −2 TRACE. **CHAIN CLOAK:** draw 1. |
 | **STACK SMASH** | RIOT | Uncommon | SCRIPT — EXPLOIT | 1 BW | Target ICE −1 STR for each EXPLOIT card you've played this turn (including this one). |
-| **NULL POINTER** *(replaces INTEGER UNDERFLOW, ZEROED-001)* | RIOT | Rare | SCRIPT — EXPLOIT | 2 BW | Target ICE at 0 STR: break 2 of its subroutines (DEADLOCKs included). Normal limits apply: only active or revealed subroutines, BOOTING and SEQUENCED respected. BURNED. |
+| **NULL POINTER** *(replaces INTEGER UNDERFLOW, ZEROED-001; NULL-POINTER-001)* | RIOT | Rare | SCRIPT — EXPLOIT | 1 BW | Target ICE at 0 STR: break 2 of its subroutines (DEADLOCKs included). Normal limits apply: only active or revealed subroutines, BOOTING and SEQUENCED respected. BURNED. |
 | **FLATLINE** *(ZEROED-001)* | RIOT | Common | SCRIPT — EXPLOIT | 0 BW, +2 TRACE | Target ICE −2 STR this encounter. **ZEROED:** −4 TRACE. |
 | **KNOCKOUT** *(ZEROED-001)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 1 BW | Target ICE −3 STR this encounter. **ZEROED:** break 1 of its subroutines (normal limits apply). |
 | **SECOND WIND** *(ZEROED-001)* | RIOT | Uncommon | SCRIPT — EXPLOIT | 0 BW | Target ICE −1 STR this encounter. **ZEROED:** gain 1 BW. |
@@ -351,3 +351,5 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | DSY-014 | **Synergy grammar for Phase 7:** each archetype is one currency loop (SOURCE / AMPLIFIER / CASH OUT / ROUTER) plus one lean-deck payoff, with at least one CASH OUT card. | **APPROVED 2026-11-15** |
 
 **Deliberately not proposed:** a hard deck-size cap (except the ONE-TRICK Ghostware), HP on ICE, or new damage types. The ENG-001 to ENG-005 engines are kept and connected to this system rather than replaced.
+
+**NULL-POINTER-001 (designer approved, 2026-11-24):** NULL POINTER cost reduced from 2 BW to 1 BW for balance. All other properties unchanged. Implementation synchronization pending.

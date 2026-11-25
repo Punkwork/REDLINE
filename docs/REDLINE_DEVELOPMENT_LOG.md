@@ -4,195 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — CARDS-003a confirmed (Claude)
-
-**Designer:** "Great save those changes." This confirms the CARDS-003a interpretations: the THEN joiner, the "Hover for full text" hint, names and hover only for cards whose text doesn't fit, and the panel opening below the card when there is no room above. Master design and HANDOFF updated. **Code changes:** none.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude).
-
-## 2026-11-19 — CARDS-004 larger cards; HAND-MAX-001 maximum hand of 10 (Claude)
-
-**Designer:** "The cards in general should be larger, 16 bit or not." The designer chose 1.4× and a mockup first. After the mockup: "Have the cards slightly overlap based on the number of cards. We should determine a maximum hand size." Answers: maximum **10**; a draw past the maximum **stops, and the card stays on the draw pile**; the BW cost dial **stays top-right**.
-
-**Mockups (session only, not committed):**
-- Godot renders of the COOKIE BANNER encounter with 1.4× cards in a full-width hand, the side columns moved up, the strips moved up 104 px and the ICE area scaled to 77%.
-- A hover capture.
-- Hands of 6, 7, 8 and 10 cards. Overlap at those counts: none, about 15%, about 28% and about 43%.
-
-**Evidence (30-seed bot runs, HALCYON slice, hand size at the start of each player turn):**
-- GENERALIST, RIOT and VECTOR peak at 6. RIOT's many 1-card turns are its known DOORBELL guard stalls.
-- ECHO: 6 cards on 204 turns, 7 on 110, 8 on 12, 9 on 6, and 10 on 1 (of 426).
-
-**Recorded:** CARDS-004 and HAND-MAX-001 as APPROVED in the master design doc, with a note on VIS-001's old hand-size line. HAND-MAX-001 goes in a new Core Rules amendments table. HANDOFF has two Claude Code TO DO rows. **Code changes:** none yet.
-
-**Interpretations to confirm:** any non-draw effect that would move a card into a full hand (for example retrieval from discard) does nothing.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CHROME-001 / CARDS-001 / MAIN-001 follow-up (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: LOGIC BOMB and RELAY deprecated (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001: darker SCRIPT face for legible printing (Claude).
-
-## 2026-11-19 — CARDS-004a: BW cost dial top-left (Claude)
-
-**Designer:** "The bw cost could move to top left of card as we are not efficiently using the card space/corners for icons." This reverses the earlier answer to keep it top-right.
-
-**Changed:** in `card.gd`, the cost dial moves from (142, 5) to (−5, 3) on every card type, and the Rustler title panel shifts from x 13 to x 26 at the same 124 px width, clearing the dial and using the freed right side. BLOATWARE's title is unchanged; its face starts below the dial. Checked with a 7-card 1.4× hand mockup: every card's cost now shows; before, all but the last were covered.
-
-**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean, including `shot_cards_pcb` (0 failures).
-
-**Open:** what goes in the freed top-right corner. Proposed: a RAM chip on PROGRAMs (29 cards, RAM 0–2, not shown on the card today).
-
-## 2026-11-19 — CARDS-005 corner icons; CARDS-004 overlap and fan (Claude)
-
-**Designer:**
-- "I would rather they start to slightly overlap instead of squash them together so the sides aren't visible, and them overlap more as more cards in hand. We need to utilize the top right corner for icons."
-- To Claude's suggestions: "Yes i want all of them in the right corner. Gentle fan is perfect."
-
-**Changed (`card.gd`):**
-- A `CornerChip` stack down the top-right corner, from `corner_icons(def)`:
-  - the Icepick type (FORTRESS tower, TUMBLER arrow, VOID diamond, ANY asterisk);
-  - RAM on PROGRAMs;
-  - extra TRACE (red) and CRED (gold) costs;
-  - a target crosshair.
-- `corner_legend()` adds the icons to the tooltip.
-- The Rustler title panel narrows from 124 to 114 px.
-
-**Fixture (`shot_cards_pcb`):**
-- Checks each captured card's icons and their order, that they stay inside the cartridge and off every text panel, their ink contrast and the tooltip legend.
-- Adds FORTRESS, VOID and ANY Icepick captures.
-- Sweeps every base and compiled card for at most four icons; the most is 3.
-
-**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
-
-**CARDS-004 updated (docs):**
-- The hand is centred and overlaps from the start, more as it grows: 5% at 1–4 cards, then 10, 15, 22, 29, 36 and 43% at 5–10. These are PROPOSED working values.
-- A gentle fan of about 2° per card (approved).
-
-**Interpretations to confirm:** the overlap values; the icon order; the glyph shapes.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude).
-
-## 2026-11-19 — CARDS-005a: hardware-style corner indicators; BLOATWARE icons (Claude)
-
-**Designer:**
-- "Yes" to the BLOATWARE icons and the dash on TRACER's dial.
-- "As for the icons on the top right corner, make them look like part of the hardware of the card. Right now they look very much out of place."
-
-**Changed (`card.gd`):**
-- `CornerChip` now draws a round indicator matching the BW dial: a drop shadow, a steel bezel `#D3DEDB` with a shaded lower arc, a face `#29352F`, a glyph with a soft glow, and a glass glint.
-- A new `CornerRail` (brushed steel with two screws) sits behind the stack.
-- BLOATWARE gets an `UNPLAYABLE` icon, and a `PENALTY` lamp (red face `#F07A5E`, dark number) whenever the rules text says "in your hand at the end of your turn: +N TRACE". That is TRACER's +3.
-- Unplayable cards show "—" on the BW dial.
-- The tooltip legend covers the new icons.
-
-**Fixture:** ink contrast is checked against each indicator's own face, so the penalty lamp is covered. Unplayable cards must show "—". There is a new SPAM capture.
-
-**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
-
-**Interpretations to confirm:** the penalty lamp's red; reading the penalty from the rules text (the rules code hard-codes TRACER's +3); the rail's look.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude).
-
-## 2026-11-19 — CARDS-004 and HAND-MAX-001 built: 1.4× cards, fanned hand, hand limit 10 (Claude)
-
-**Designer:** "Yes to the fanned cards. Commit. Commit these icon and card changes to the next Build." The tuned fan values are approved.
-
-**Built:**
-- **HAND-MAX-001 (`game.gd`).** `MAX_HAND := 10`. `draw_cards` stops at 10 before any reshuffle or REBOOT. Retrieve and FIELD KIT into a full hand log "Hand full" and leave the card where it was.
-- **CARDS-004, cards (`card.gd`).** `DISPLAY_SCALE := 1.4`. `FriendlyCard.framed()` puts a card in a fixed-size holder, because containers ignore `scale`. The ready rig, reward offers, drag preview and inspection use it. Inspection is 1.4×, and 2.1× when pinned.
-- **CARDS-004, hand (`hand.gd`).** A centred fan. Overlap is 5% at 1–4 cards, then 8/10/18/26/35/43% at 5–10. The fan spans 20° in total, at most 4° per card. Each card pivots about its bottom centre, and the hovered card rises 36 px.
-- **CARDS-004, layout (`encounter.gd`).** The hand area is `Rect2(16, 622, 1568, 378)`. The ICE row is drawn at 85%, and the mascot stage is 194 px (was 238). The strips, NUL/REM bar and rack sit 104 px higher. The left and right columns are re-stacked. Graffiti uses four fixed spots, and the TRACER flight targets the new pile position.
-
-**Tests:**
-- `test_hand_max`: 8 rules checks.
-- `shot_hand`: hands of 6–10, with geometry checks: the hand stays clear of END RUN, the pile counters and the bottom HUD; the hover panel stays on screen; and contacts end at y ≤ 1050.
-- `shot_cartridges`: 6, 8 and 10 cards.
-- `shot_adp`: expectations updated for the new avatar scale.
-
-**Validation:**
-- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
-- All 14 CI screenshot fixtures clean.
-- 30-seed bots unchanged: 19/13/16/15.
-
-**Images saved:**
-- `docs/visual/fixtures/cards-004/`: mockups and build captures.
-- `docs/visual/fixtures/cards-005/`: the corner icons and BLOATWARE.
-- `docs/visual/explorations/pixel-16bit/`: the parked pixel mockups and script. Not a decision; review Saturday 2026-11-21.
-
-**Interpretations to confirm:**
-- the ICE row at 85% and the shorter mascot stage (mascots about 70% of their ENCOUNTER-DISPLAY-001 size);
-- at 9–10 cards, contact strips may run up to ~50 px past the bottom of the window (rules text and the hover panel always stay on screen);
-- the pre-existing BOOTING line that clips at the bottom of the ICE plaque is left as it was.
-
-**Release:** `release` was not cut. These changes go into the next playtest build when the designer asks for it.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Archive retired branches (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001: Raygun Gothic facades for IRONWATCH and LUCIDA proposed (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Playtest checklist v0.3 and the live QA Sheet (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex).
-
-## 2026-11-19 — DEV-001: validate the card and hand baseline (Codex)
-
-Pulled `main` at `2d5301a` and verified that `AGENTS.md` and `CLAUDE.md` match. Reviewed HANDOFF, the day's development log, ARCHITECTURE and the master design for CARDS-003 through CARDS-005a and HAND-MAX-001.
-
-**Validation:** Godot 4.3 import passed. Rules 369 passed, ADP 17 passed and SIGNAL/CARBON 671 passed, with zero failures. Bot clears from 30 seeds per Rustler were GENERALIST 19, ECHO 13, RIOT 16 and VECTOR 15. The RIOT bot hit the existing DOORBELL step guard twice. All 14 CI screenshot fixtures passed on Xvfb with the GL Compatibility renderer. The hand fixture reported zero geometry failures for hands of 6–10, and the PCB fixture reported zero failures across 444 base texts and 1,008 compiled pairs. Of the compiled pairs, 107 used the names and hover panel.
-
-**Interpretations to confirm:** None from this verification. The open designer checks in HANDOFF are still pending. This verification adds no design decisions.
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: publish FORTRESS rolls before the response (Codex).
-
-## 2026-11-19 — PIXEL-TRACE-001: TRACE pixelates the corporation's picture (Claude)
-
-**Designer:** "the more trace and the madder/meaner the corporation gets, the more 16-bit the background and ice look. Or the reverse." Claude recommended more TRACE → more pixelated. The designer asked for a mockup at four levels, then approved it: "Looks good. Commit to the build."
-
-**Built:**
-- `godot/themes/trace_pixel.gdshader` reads the screen behind it and redraws it in square cells on one screen-aligned grid. It uses fewer colour levels and a 4×4 ordered dither, and samples at LOD 0 (stepped UVs otherwise pick a blurred mip and draw dark grid lines).
-- `AtomicDecoPunk.pixel_step()` picks the step from `atomic_deco_punk.json` → `pixel`:
-  - sharp below TRACE 20;
-  - 2 px / 24 levels at 20;
-  - 3 px / 16 at 30;
-  - 4 px / 12 on a strike;
-  - 5 px / 10 at Mask off.
-- `encounter.gd` adds one full-screen layer after the backdrops, and one per mascot inserted before the mascot's first child with text. Speech bubbles, status tags and graffiti therefore draw on top, sharp. All layers share one material.
-- New fixture `shot_trace_pixel.gd`, added to CI. It captures the four levels and checks that each layer is on only when active and that no text is drawn under a pixel layer.
-
-**Validation:**
-- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
-- All 15 CI screenshot fixtures clean.
-- A first local run reused one user-data folder after `shot_trace_pixel` had saved reduced motion. That made `shot_playtest3` miss its tumble animation and `shot_reel` wait forever for a spin. Both pass in a fresh folder, and in CI the new fixture runs last.
-
-**Images:** `docs/visual/fixtures/pixel-trace-001/`.
-
-**Interpretations to confirm:**
-- the step values;
-- a strike uses its own step (between TRACE 30 and Mask off);
-- mascot details drawn after a status tag stay sharp;
-- step changes are instant (no transition animation).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Validate HALCYON and refresh fixtures (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 approved (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex).
-
 ## 2026-11-19 — PIXEL-TRACE-001a: animated pixel step changes (Claude)
 
 **Designer:** "Commit the transitions to the next build." Asked whether that meant animating the step changes or cutting playtest-7, the designer chose "Animate the step changes".
@@ -583,3 +394,161 @@ Created `docs/architecture-v2/COMPONENT_ARCHITECTURE_SPEC.md` (CAS-001) with 18 
 ## 2026-11-23 — ARCH-V2-001 VAS-001 visual architecture specification
 
 Designer confirmed faithful reproduction of the supplied 1536×864 dense mechanical console mockup as the vertical-slice visual target. Created `docs/architecture-v2/VAS-001.md` defining reference regions, approximate geometry, material/type tokens, Godot-native vs art-backed controls, visual states, modular asset inventory, viewport adaptations, screenshot comparison and milestone acceptance. The reference image is not yet confirmed uploaded to GitHub. Documentation only; no graphics or gameplay implementation, tests, or implementation approval.
+## 2026-11-23 — NUL-PILLAR-001: NUL/REM foundational design direction (Codex)
+
+Designer confirmed NUL/REM as a foundational pillar of PANOPTICON's psychological experiment and requested preservation in GitHub. Recorded the substantive discussion, including the three conditions, implicit/explicit authority, active solicitation, deck-removal denial, safer routes, automated first install and advance ICE intelligence in `REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md` (f2b938b). Master design and HANDOFF cross-referenced. Individual mechanics remain proposals. **Code changes:** none; tests not run (documentation only). **Interpretations to confirm:** domain-specific authority, thresholds, revocation, intervention feedback, integration with existing canon and rules.
+
+## 2026-11-23 — NUL-PILLAR-001a: Psychological Invisibility (Codex)
+
+Designer explicitly confirmed that the experiment must remain psychologically invisible: no disclosure, classification, quantification or announcement of psychological progression. Expanded the existing NUL/REM design document with internalization as an emergent outcome, proposed silent withdrawal of enforcement and disconnection, and withdrawal of the proposed explicit THE CARBON psychological reveal. Master design and HANDOFF updated. No code changes; tests not run (documentation only).
+
+## 2026-11-23 — NUL-PILLAR-001b: Played under surveillance (Codex)
+
+Recorded designer-confirmed philosophical distinction and paradox of autonomy in the NUL/REM document, master design and HANDOFF. Experience is sufficient; no prescribed psychological outcome or measurement. No code changes; tests not run (documentation only).
+
+## 2026-11-23 — NUL-PILLAR-001c: Four-Question Design Gate (Codex)
+
+Recorded designer-requested NUL/REM mechanic review questions in foundational design, master design and HANDOFF. Failed or unresolved criteria require reconsideration; existing approvals remain. No code changes; tests not run (documentation only).
+
+## 2026-11-23 — PHIL-001: Philosophical Design Bible (Codex)
+
+Created the designer-requested eight-section Bible (c4f815d), including surveillance economy, curated rewards and both autonomy paradoxes. Cross-referenced master design, NUL/REM and HANDOFF. New mechanics remain PROPOSED. No code changes; tests not run (docs only).
+
+## 2026-11-23 — PHIL-002: Algorithmic Reduction (Codex)
+
+Preserved all six designer-requested explorations in Philosophical Design Bible §09 (b711f53), emphasizing recursive self-surveillance and disappearance of surprise. Master and HANDOFF updated. No code changes or tests (docs only).
+
+## 2026-11-24 — PHIL-003: Gameplay Manifestations Catalogue (Codex)
+
+Created living catalogue (e34eebd) with 39 proposed examples and one withdrawn example; stable GM IDs and principle tags. Linked Bible, master and HANDOFF. No code changes; tests not run (docs only). LOG-001: moved oldest two dated entries (CARDS-003a and CARDS-004/HAND-MAX-001) unchanged to archive.
+
+## 2026-11-24 — PHIL-003a: Catalogue expansion (Codex)
+
+Added designer-requested psychological effect and final concrete example columns (1fed957), primary grouping index, and withdrawn example annotation. Interpretations to confirm: grouping labels and illustrative scenarios are editorial hypotheses, not validated effects. No code changes; tests not run (docs only).
+
+## 2026-11-24 — PHIL-004: Demoralization (Codex)
+
+Preserved designer-requested autonomy burden and liberation paradox in Philosophical Design Bible §10 (88ae456), distinguishing two potential responses and prohibiting deliberate helplessness or disengagement. Master and HANDOFF updated. Interpretations to confirm: formal principle status and mechanics remain open. No code changes; tests not run (docs only).
+
+## 2026-11-24 — NUL-DIALOGUE-001: Dialogue compendium (Codex)
+
+Created thematic register of 31 proposed lines (10d0d90), including six paired contradictions. Linked foundational, philosophical, master and HANDOFF docs. Interpretations to confirm: suggested triggers, associations and pairings are editorial; no new canon or approved copy. No code changes; tests not run (docs only).
+
+## 2026-11-24 — NUL-DIALOGUE-001a: Earlier dialogue recovery (Codex)
+
+Added 44 recovered entries (91c06e2), including 18 wording fragments. Interpretations to confirm: contextual labels editorial; transcript recovery partial; all copy proposed. No code changes or tests (docs only).
+
+## 2026-11-24 — NUL-DIALOGUE-002: Dialogue architecture (Codex)
+
+Created complete 13-section Bible (db37cb9), cross-linked four companion documents, master and HANDOFF. Interpretations to confirm: schema, events, pacing, cooldowns, content targets and QA are proposals; no implementation approved. No code changes; tests not run (docs only). LOG-001: moved oldest dated entry unchanged to archive.
+
+## 2026-11-24 — OPS-001: Shared operations hub (Codex)
+
+Created shared registers, report template and agenda; linked native issues/PRs; updated identical agent instructions. Interpretations to confirm: session-end reports, native issues as to-dos, proposed agenda pending designer confirmation. No code or tests (docs only).
+
+## 2026-11-24 — OPS-002: Milestone progress (Codex)
+
+Added proposed release goal, eight milestone gates and evidence-based measurement to master; initial provisional snapshot and daily update protocol in operations dashboard. Interpretations to confirm: release scope, gates, weights and baseline; architecture-v2 not audited. No code changes or tests (docs only).
+
+## 2026-11-24 — OPS-002a: Commercial Steam release (Codex)
+
+Designer confirmed actual Steam commercial launch, not merely release readiness. Master records creative goal, expanded M08 and proposed M09; dashboard and HANDOFF updated. Interpretations to confirm: detailed launch gate, pricing, schedule and weights. No code, tests, account or publication action.
+LOG-001: oldest dated entry moved unchanged to archive.
+
+
+## 2026-11-24 — UI-BIBLE-001 (Codex)
+
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes. Initial consolidation commit `16265fb`. Documentation only; Godot tests not run. Interpretations to confirm: overflow behavior and exact glyphs remain open; source retirement deferred.
+
+
+## 2026-11-24 — UI-WORKFLOW-001 (Codex)
+
+**UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes. Registered 15 stable component IDs in the UI Design Bible §1a. Documentation only; no Godot tests run. Native issue numbers selected to avoid duplicate proposal numbering. No labels, board or individual issues created in this change.
+
+
+## 2026-11-24 — DOCS-MIG-001 (ChatGPT)
+
+Designer authorized mandatory documentation migration gate and next-session UI completion priority. Identical agent instructions, Master Design, HANDOFF and shared daily priorities updated. UI reference repair 2f1727f remains partial; full dependency validation, editorial reconciliation and retirement outstanding. Documentation only; no Godot tests run.
+
+## 2026-11-24 — BYPASS-001 (ChatGPT)
+
+Recorded designer rule restricting BYPASS to non-final encounters of Nodes of up to three encounters in master, core rules and HANDOFF. Specific mechanics remain open. No code or tests; no documentation consolidation performed.
+
+## 2026-11-24 — EXP-DESIGN-001 (ChatGPT)
+
+Created all-domain experimentation Bible (7e0928f) with initial BYPASS proposals, experimental cards, scenarios and viability/test framework. Interpretations to confirm: stable ID scheme and editorial organization; all specific mechanics remain proposed. UI issue authority preserved; no consolidation, code or tests.
+
+## 2026-11-24 — BACKCHANNEL-001 (ChatGPT)
+
+Saved designer-endorsed single-subroutine BACKCHANNEL iteration as EXP-C029, alternative versions, EXP-S009–011 and EXP-X004 in Experimentation Bible (ddc4793). Proposed terminology and timing questions retained. No rules, code, tests or consolidation.
+
+## 2026-11-24 — NULL-POINTER-001 (ChatGPT)
+
+Designer approved 1 BW instead of 2 for NULL POINTER; updated Deck Synergy §9.2 (08b5b6f), Master and HANDOFF. Runtime unchanged; no tests run.
+
+## 2026-11-24 — RIOT-EXP-001 — RIOT experimental card catalogue (ChatGPT)
+
+Designer requested preservation in Experimentation Bible §11 (bdc32508a880a9925010b0dde4bdbf0ac7b0fc57). EXP-C030–036, M007, S012–021, X005; revised FIRST STRIKE and one-copy BREAKER BAR with per-copy node escalation and BURN cost. Experimental only; NULL-POINTER-001 remains approved separately. No code or tests; UI migration gate unchanged.
+
+LOG-001 archived oldest dated entry unchanged: ## 2026-11-19 — CARDS-004 and HAND-MAX-001 built: 1.4× cards, fanned hand, hand limit 10 (Claude)
+
+## 2026-11-24 — TRACE-EXP-001 — TRACE mitigation concepts (ChatGPT)
+
+Designer requested preservation of SIGNAL DAMPENER (Ghostware) and four Protocols in Experimentation Bible §12 (bc9938aa034cf6a39c6114472b4688b056e6cf1f); EXP-C037–041, M008, S022–027, X006. Proposed type distinction, self-inflicted TRACE coverage and trigger timing remain experimental. No rules/code changes, tests or consolidation.
+
+## 2026-11-24 — NUL-DIALOGUE-003 — Economic dependency dialogue (ChatGPT)
+
+Designer requested preservation of four lines NR-076–079 in NUL/REM Dialogue Compendium (28cd6dea0d23821902a025414a3333724c4b365c). Verbatim dialogue; contextual triggers and associations proposed. No shipping approval, gameplay changes, tests or consolidation.
+
+## 2026-11-24 — CRED-EXP-001 / PHIL-005 — CRED-powered combat and economic dependency (ChatGPT)
+
+Designer requested preservation of eight cards EXP-C042–049, mechanics M009–011, scenarios S028–034 and experiment X007 in Experimentation Bible §13 (bf8d742d3783d4cdb2a11e17e62d442b7fc8de52), and economic dependency/purchased freedom in Philosophical Design Bible §11 (aaafd9993e811a2a8b1169a9e9f3ed68b97f0bf6). Fully CRED-powered Icepick activations consume no BW; installation costs open. All mechanics experimental; philosophical direction designer-endorsed, not a new formal pillar. NR-076–079 already saved. No rules/code changes, tests or consolidation; UI migration blocker unchanged.
+
+## 2026-11-24 — CRED-EXP-001a — Icepick installation cost (ChatGPT)
+
+Designer specified 1 BW installation for PAYDAY, BRIBE and MERCENARY (EXP-C042–044); all activations remain CRED-only. Experimentation Bible §13 updated (9cfc95fe920dbfd5abfded3bccda06174cabec2b), including S035. Supersedes open installation cost in CRED-EXP-001 for these three cards only. Experimental, no code or tests.
+
+## 2026-11-24 — CRED-EXP-001b — Program classification (ChatGPT)
+
+Designer clarified EXP-C042–044 are RAM-using PROGRAM Icepicks, 1 BW install, CRED-only activation. Exact RAM TBD; 1 RAM suggested only. Experimentation Bible §13 corrected (0045b0d693b7386b6a6a83c83ca194e92005d784); canonical Core Rules §3.1 unchanged. No code or tests.
+
+## 2026-11-24 — CRED-EXP-001c — Icepick RAM requirements (ChatGPT)
+
+Designer specified PAYDAY 1 RAM, BRIBE 1 RAM, MERCENARY 2 RAM. Experimentation Bible §13 (a28329f275b87bd1d163e4e798cf5859b5e96958), EXP-S036; supersedes TBD RAM in CRED-EXP-001b. Other values unchanged. Experimental only; no code or tests.
+
+## 2026-11-24 — VOID-EXP-001 (ChatGPT)
+
+Saved exploratory VOID-only UNLOAD, Rustler-selected Program removal to discard, Program opportunity costs, EXP-M012/S037–042/X008 in Experimentation Bible §14 (171674b7e8b34d0dd4dad805b9861da4e22b0d0b). No rules/code/tests or consolidation.
+
+
+## 2026-11-24 — CRED-EXP-001d — CRED SCRIPTS and card-type identity (ChatGPT)
+
+Designer confirmed EXP-C045–049 as 0 BW SCRIPTS with existing CRED prices/effects, one resolution per play, normal discard/redraw, prior activation caps removed in preferred experiment. EXP-M013/S043–044, X007 extension in Experimentation Bible §15 (8d75932dad452669d6aefc0864bda40092e118df). Existing Protocols unchanged; experimental guidance only, no rules/code/tests or consolidation.
+
+LOG-001 moved oldest dated entry to archive unchanged: 2026-11-19 — DEV-001: validate the card and hand baseline (Codex).
+
+## 2026-11-24 — ICE-EXP-002 — Encounter-wide effects and subroutine modification (ChatGPT)
+
+Saved 20 proposed cards EXP-C050–069, mechanics M014–015, scenarios S045–052, experiments X009–010 in Experimentation Bible §16 (27d5fb2ea234eaa8b1ebc87dada42b021fee6b17). Designer's targeted -6 PULP this turn/BURN preserved; names/costs provisional, collisions flagged. No rules/code/tests or consolidation.
+
+## 2026-11-24 — CAP-EXP-001 — Infiltration CAPS (ChatGPT)
+
+Saved twelve non-card CAP concepts EXP-CAP001–012, M016, S053–057 and X011 in Experimentation Bible §17 (98bc0b716700ad6aac90a6bc614b46496b5425c0). No CRED prices or rarities assigned; map activation and circumvention experimental. Existing CAPS rules unchanged. No code/tests or consolidation.
+
+LOG-001 moved oldest dated entry to archive unchanged: 2026-11-19 — PIXEL-TRACE-001: TRACE pixelates the corporation's picture (Claude).
+
+## 2026-11-24 — SURV-MEM-001 — Surveillance and memory (ChatGPT)
+
+DIRECTION, designer-confirmed: “As the player learns the game, the game learns the player.” “The system always remembers. It never forgets.” Pervasive fictional surveillance across runs. Five-stage table and proposed memory layers saved in Experimentation Bible §20 (57bfe20002567740e0e91cde85a809df280ce7e2); prior ICE-SURV-EXP-001 / SURV-EXP-001 proposals in §§18–19 (eb335be5b95c05488f3a966f5d90a47280675523). Philosophical Bible cross-reference. No approved mechanical changes, code, tests or consolidation. Interpretation: thematic persistence does not remove real-world local data reset or privacy controls.
+
+## 2026-11-24 — CARBON-SURV-EXP-001 — Collective trust and individual authority
+
+Designer-endorsed philosophical exploration: keep THE CARBON (collective trust) and NUL/REM (personal autonomy) distinct. Corporate appropriation of trusted resistance spaces may erode collective trust and increase reliance on individual authority. “The system creates the conditions that make its own assistance necessary.” Full progression, examples, comparative framework and open questions preserved in [Design Experimentation Bible §21](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 02e46011863db27f2ac03ed922aa038358bc8a77. EXP-D003 / EXP-X013 remain proposed; no mandated psychological outcome, approved mechanics, code, tests or consolidation.
+
+## 2026-11-24 — SURV-UNCERT-EXP-001 — The uncertainty of observation
+
+Designer-endorsed exploration: possibility of observation, fictional fear/anxiety/suspicion, ambiguity of coincidence, self-regulation and freedom exhaustion. Designer identified Francis Ford Coppola's The Conversation (1974) as reference. Preserve the “constant low hum anxiety” experiential direction as fictional atmosphere, not deliberate actual distress. Linked to SURV-MEM-001 and CARBON-SURV-EXP-001. Full tables, examples and safeguards in [Design Experimentation Bible §22](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 6b36c117b89c4f32edfef77c7241c8fb6db59a28. No approved mechanics, production dialogue, code, tests or consolidation.
+
+## 2026-11-24 — SURV-OBSERVER-EXP-001 — The Internalized Observer
+
+Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation (1974, Francis Ford Coppola) as principal cinematic references. Recorded in Design Experimentation Bible §23, commit 307703473a5a9f3ec8a9fe0a6f34800815d2342b. Reference-only; no new rules, specifications, code or tests.

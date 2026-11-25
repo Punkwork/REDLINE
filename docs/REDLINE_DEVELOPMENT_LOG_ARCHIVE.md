@@ -2403,3 +2403,201 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MA
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — MAIN-001: Windows export runs on main (Claude).
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RUSTLER-LOOK-001: two Rustler styles kept on purpose (Claude).
+
+
+## 2026-11-19 — CARDS-003a confirmed (Claude)
+
+**Designer:** "Great save those changes." This confirms the CARDS-003a interpretations: the THEN joiner, the "Hover for full text" hint, names and hover only for cards whose text doesn't fit, and the panel opening below the card when there is no room above. Master design and HANDOFF updated. **Code changes:** none.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — VISUAL-APPROVALS-002: prototype art and working values approved (Claude).
+
+## 2026-11-19 — CARDS-004 larger cards; HAND-MAX-001 maximum hand of 10 (Claude)
+
+**Designer:** "The cards in general should be larger, 16 bit or not." The designer chose 1.4× and a mockup first. After the mockup: "Have the cards slightly overlap based on the number of cards. We should determine a maximum hand size." Answers: maximum **10**; a draw past the maximum **stops, and the card stays on the draw pile**; the BW cost dial **stays top-right**.
+
+**Mockups (session only, not committed):**
+- Godot renders of the COOKIE BANNER encounter with 1.4× cards in a full-width hand, the side columns moved up, the strips moved up 104 px and the ICE area scaled to 77%.
+- A hover capture.
+- Hands of 6, 7, 8 and 10 cards. Overlap at those counts: none, about 15%, about 28% and about 43%.
+
+**Evidence (30-seed bot runs, HALCYON slice, hand size at the start of each player turn):**
+- GENERALIST, RIOT and VECTOR peak at 6. RIOT's many 1-card turns are its known DOORBELL guard stalls.
+- ECHO: 6 cards on 204 turns, 7 on 110, 8 on 12, 9 on 6, and 10 on 1 (of 426).
+
+**Recorded:** CARDS-004 and HAND-MAX-001 as APPROVED in the master design doc, with a note on VIS-001's old hand-size line. HAND-MAX-001 goes in a new Core Rules amendments table. HANDOFF has two Claude Code TO DO rows. **Code changes:** none yet.
+
+**Interpretations to confirm:** any non-draw effect that would move a card into a full hand (for example retrieval from discard) does nothing.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — CHROME-001 / CARDS-001 / MAIN-001 follow-up (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: LOGIC BOMB and RELAY deprecated (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001: darker SCRIPT face for legible printing (Claude).
+
+
+## 2026-11-19 — CARDS-004a: BW cost dial top-left (Claude)
+
+**Designer:** "The bw cost could move to top left of card as we are not efficiently using the card space/corners for icons." This reverses the earlier answer to keep it top-right.
+
+**Changed:** in `card.gd`, the cost dial moves from (142, 5) to (−5, 3) on every card type, and the Rustler title panel shifts from x 13 to x 26 at the same 124 px width, clearing the dial and using the freed right side. BLOATWARE's title is unchanged; its face starts below the dial. Checked with a 7-card 1.4× hand mockup: every card's cost now shows; before, all but the last were covered.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean, including `shot_cards_pcb` (0 failures).
+
+**Open:** what goes in the freed top-right corner. Proposed: a RAM chip on PROGRAMs (29 cards, RAM 0–2, not shown on the card today).
+
+
+## 2026-11-19 — CARDS-005 corner icons; CARDS-004 overlap and fan (Claude)
+
+**Designer:**
+- "I would rather they start to slightly overlap instead of squash them together so the sides aren't visible, and them overlap more as more cards in hand. We need to utilize the top right corner for icons."
+- To Claude's suggestions: "Yes i want all of them in the right corner. Gentle fan is perfect."
+
+**Changed (`card.gd`):**
+- A `CornerChip` stack down the top-right corner, from `corner_icons(def)`:
+  - the Icepick type (FORTRESS tower, TUMBLER arrow, VOID diamond, ANY asterisk);
+  - RAM on PROGRAMs;
+  - extra TRACE (red) and CRED (gold) costs;
+  - a target crosshair.
+- `corner_legend()` adds the icons to the tooltip.
+- The Rustler title panel narrows from 124 to 114 px.
+
+**Fixture (`shot_cards_pcb`):**
+- Checks each captured card's icons and their order, that they stay inside the cartridge and off every text panel, their ink contrast and the tooltip legend.
+- Adds FORTRESS, VOID and ANY Icepick captures.
+- Sweeps every base and compiled card for at most four icons; the most is 3.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
+
+**CARDS-004 updated (docs):**
+- The hand is centred and overlaps from the start, more as it grows: 5% at 1–4 cards, then 10, 15, 22, 29, 36 and 43% at 5–10. These are PROPOSED working values.
+- A gentle fan of about 2° per card (approved).
+
+**Interpretations to confirm:** the overlap values; the icon order; the glyph shapes.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: FORTRESS PULP rolled each time (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — RIOT-003: SHATTER readings confirmed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — REEL-001 follow-up closed; TUMBLE-001 reaffirmed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001 applied; PULP-001 roll size (Claude).
+
+
+
+## 2026-11-19 — CARDS-005a: hardware-style corner indicators; BLOATWARE icons (Claude)
+
+**Designer:**
+- "Yes" to the BLOATWARE icons and the dash on TRACER's dial.
+- "As for the icons on the top right corner, make them look like part of the hardware of the card. Right now they look very much out of place."
+
+**Changed (`card.gd`):**
+- `CornerChip` now draws a round indicator matching the BW dial: a drop shadow, a steel bezel `#D3DEDB` with a shaded lower arc, a face `#29352F`, a glyph with a soft glow, and a glass glint.
+- A new `CornerRail` (brushed steel with two screws) sits behind the stack.
+- BLOATWARE gets an `UNPLAYABLE` icon, and a `PENALTY` lamp (red face `#F07A5E`, dark number) whenever the rules text says "in your hand at the end of your turn: +N TRACE". That is TRACER's +3.
+- Unplayable cards show "—" on the BW dial.
+- The tooltip legend covers the new icons.
+
+**Fixture:** ink contrast is checked against each indicator's own face, so the penalty lamp is covered. Unplayable cards must show "—". There is a new SPAM capture.
+
+**Validation:** rules 361/0, ADP 17/0, SIGNAL/CARBON 671/0; all 14 CI screenshot fixtures clean.
+
+**Interpretations to confirm:** the penalty lamp's red; reading the penalty from the rules text (the rules code hard-codes TRACER's +3); the rail's look.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: rolled PULP is always shown before it fires (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: curves keep their patterns and show their next value (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — READ-001 extended to PROTOCOL; PULP-001 swing direction (Claude).
+
+
+## 2026-11-19 — CARDS-004 and HAND-MAX-001 built: 1.4× cards, fanned hand, hand limit 10 (Claude)
+
+**Designer:** "Yes to the fanned cards. Commit. Commit these icon and card changes to the next Build." The tuned fan values are approved.
+
+**Built:**
+- **HAND-MAX-001 (`game.gd`).** `MAX_HAND := 10`. `draw_cards` stops at 10 before any reshuffle or REBOOT. Retrieve and FIELD KIT into a full hand log "Hand full" and leave the card where it was.
+- **CARDS-004, cards (`card.gd`).** `DISPLAY_SCALE := 1.4`. `FriendlyCard.framed()` puts a card in a fixed-size holder, because containers ignore `scale`. The ready rig, reward offers, drag preview and inspection use it. Inspection is 1.4×, and 2.1× when pinned.
+- **CARDS-004, hand (`hand.gd`).** A centred fan. Overlap is 5% at 1–4 cards, then 8/10/18/26/35/43% at 5–10. The fan spans 20° in total, at most 4° per card. Each card pivots about its bottom centre, and the hovered card rises 36 px.
+- **CARDS-004, layout (`encounter.gd`).** The hand area is `Rect2(16, 622, 1568, 378)`. The ICE row is drawn at 85%, and the mascot stage is 194 px (was 238). The strips, NUL/REM bar and rack sit 104 px higher. The left and right columns are re-stacked. Graffiti uses four fixed spots, and the TRACER flight targets the new pile position.
+
+**Tests:**
+- `test_hand_max`: 8 rules checks.
+- `shot_hand`: hands of 6–10, with geometry checks: the hand stays clear of END RUN, the pile counters and the bottom HUD; the hover panel stays on screen; and contacts end at y ≤ 1050.
+- `shot_cartridges`: 6, 8 and 10 cards.
+- `shot_adp`: expectations updated for the new avatar scale.
+
+**Validation:**
+- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 14 CI screenshot fixtures clean.
+- 30-seed bots unchanged: 19/13/16/15.
+
+**Images saved:**
+- `docs/visual/fixtures/cards-004/`: mockups and build captures.
+- `docs/visual/fixtures/cards-005/`: the corner icons and BLOATWARE.
+- `docs/visual/explorations/pixel-16bit/`: the parked pixel mockups and script. Not a decision; review Saturday 2026-11-21.
+
+**Interpretations to confirm:**
+- the ICE row at 85% and the shorter mascot stage (mascots about 70% of their ENCOUNTER-DISPLAY-001 size);
+- at 9–10 cards, contact strips may run up to ~50 px past the bottom of the window (rules text and the hover panel always stay on screen);
+- the pre-existing BOOTING line that clips at the bottom of the ICE plaque is left as it was.
+
+**Release:** `release` was not cut. These changes go into the next playtest build when the designer asks for it.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Archive retired branches (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001: Raygun Gothic facades for IRONWATCH and LUCIDA proposed (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Playtest checklist v0.3 and the live QA Sheet (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — DEPRECATE-001: remove LOGIC BOMB and RELAY (Codex).
+
+
+## 2026-11-19 — DEV-001: validate the card and hand baseline (Codex)
+
+Pulled `main` at `2d5301a` and verified that `AGENTS.md` and `CLAUDE.md` match. Reviewed HANDOFF, the day's development log, ARCHITECTURE and the master design for CARDS-003 through CARDS-005a and HAND-MAX-001.
+
+**Validation:** Godot 4.3 import passed. Rules 369 passed, ADP 17 passed and SIGNAL/CARBON 671 passed, with zero failures. Bot clears from 30 seeds per Rustler were GENERALIST 19, ECHO 13, RIOT 16 and VECTOR 15. The RIOT bot hit the existing DOORBELL step guard twice. All 14 CI screenshot fixtures passed on Xvfb with the GL Compatibility renderer. The hand fixture reported zero geometry failures for hands of 6–10, and the PCB fixture reported zero failures across 444 base texts and 1,008 compiled pairs. Of the compiled pairs, 107 used the names and hover panel.
+
+**Interpretations to confirm:** None from this verification. The open designer checks in HANDOFF are still pending. This verification adds no design decisions.
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — ICE-AUDIT-001: apply HALCYON slice changes (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — PULP-001: publish FORTRESS rolls before the response (Codex).
+
+
+## 2026-11-19 — PIXEL-TRACE-001: TRACE pixelates the corporation's picture (Claude)
+
+**Designer:** "the more trace and the madder/meaner the corporation gets, the more 16-bit the background and ice look. Or the reverse." Claude recommended more TRACE → more pixelated. The designer asked for a mockup at four levels, then approved it: "Looks good. Commit to the build."
+
+**Built:**
+- `godot/themes/trace_pixel.gdshader` reads the screen behind it and redraws it in square cells on one screen-aligned grid. It uses fewer colour levels and a 4×4 ordered dither, and samples at LOD 0 (stepped UVs otherwise pick a blurred mip and draw dark grid lines).
+- `AtomicDecoPunk.pixel_step()` picks the step from `atomic_deco_punk.json` → `pixel`:
+  - sharp below TRACE 20;
+  - 2 px / 24 levels at 20;
+  - 3 px / 16 at 30;
+  - 4 px / 12 on a strike;
+  - 5 px / 10 at Mask off.
+- `encounter.gd` adds one full-screen layer after the backdrops, and one per mascot inserted before the mascot's first child with text. Speech bubbles, status tags and graffiti therefore draw on top, sharp. All layers share one material.
+- New fixture `shot_trace_pixel.gd`, added to CI. It captures the four levels and checks that each layer is on only when active and that no text is drawn under a pixel layer.
+
+**Validation:**
+- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
+- All 15 CI screenshot fixtures clean.
+- A first local run reused one user-data folder after `shot_trace_pixel` had saved reduced motion. That made `shot_playtest3` miss its tumble animation and `shot_reel` wait forever for a spin. Both pass in a fresh folder, and in CI the new fixture runs last.
+
+**Images:** `docs/visual/fixtures/pixel-trace-001/`.
+
+**Interpretations to confirm:**
+- the step values;
+- a strike uses its own step (between TRACE 30 and Mask off);
+- mascot details drawn after a status tag stay sharp;
+- step changes are instant (no transition animation).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Validate HALCYON and refresh fixtures (Codex).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 approved (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude).
+
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex).
+

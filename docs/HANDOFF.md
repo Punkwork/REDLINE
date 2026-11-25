@@ -5,6 +5,10 @@ This is the one list of work that has been **decided but not finished**, so Code
 
 ---
 
+## Blocking documentation migration — DOCS-MIG-001
+
+Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the mandatory migration gate in AGENTS.md / CLAUDE.md §8. Claude Code: full-checkout dependency scan, reference repairs, applicable validation and safe legacy retirement; ChatGPT/Claude: editorial reconciliation and narrative relocation. Prior repair commit 2f1727f. No subsequent consolidation until this gate passes. Status: OPEN; no retirement or full validation yet.
+
 ## How we work
 
 1. **Work on `architecture-v2` for the approved rebuild (ARCH-V2-001, designer 2026-11-23).** `main` is the preserved prototype baseline. Pull the latest `architecture-v2`, record decisions in the master design doc, report commit hashes, and ask before creating another branch or merging into `main`. This supersedes MAIN-001's `main`-first policy **for migration work only**; the former branch history remains unchanged.
@@ -40,6 +44,11 @@ This is the one list of work that has been **decided but not finished**, so Code
 | Plan integration, CI and future release policy; request explicit approval before any merge into `main` | Claude Code / designer | TO DO |
 
 Existing gameplay and visual tasks below remain tracked; reassess their target branch and priority during migration planning rather than silently changing rules or treating them as completed.
+## NUL-PILLAR-001 — foundational design follow-up (WAITING)
+
+**NUL-PILLAR-001a:** Designer-confirmed Psychological Invisibility is a binding design constraint for this work: no player-facing psychological progression disclosure, scores, classifications or announcements, including retrospective records. Internalization is emergent, not a programmed status. Review all future NUL/REM proposals against the expanded design document; no implementation authorized.
+
+Designer-confirmed creative direction, 2026-11-23. Read [REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md), archived in f2b938b. Claude (design): reconcile with BOON-001, current NUL/REM canon, SIGNAL-001, local profile and core-loop rules; develop domain-specific knowledge/confidence/authority and intervention proposals for designer review. No implementation authorized. Claude Code: no build task yet.
 
 ## To build (approved, not yet in the build)
 
@@ -121,9 +130,9 @@ Hygiene, recorded and left alone under the no-refactor rule: the unused local `o
 | **ENC-CONCEPT-001 interface** | Concept-3 frame built: top bar (PANOPTICON plate, network/node plate, decal plate for graffiti, CONDITION pill, HOSTILE REVEAL %, TURN/TRACE/RESERVE flip tiles, strike lamps); ICE consoles with arched corp tab, power lamp, STR plate, icon keys, reel column, PASSIVE and per-ICE NEXT RESPONSE plates; left CRT with status and installed Programs; vitals with icons (VITAE, BANDWIDTH, SHIELD, PULP INCOMING, NEXT DRAW); NUL/REM note and round red END TURN on the right. The shared response strip is replaced by per-ICE plates. Painted with the ChatGPT UI kit (console 9-slice, key caps, plates, END TURN, tooltip, CRT, vitals). | Master ENC-CONCEPT-001 | Claude Code | BUILT (commit in dev log 2026-11-19), awaiting designer review |
 | **ENC-CONCEPT-001 cards** | Smaller white concept-2 cards: ChatGPT card frame per type + picture per card, the game writing the name, BW cost and corner icons; rules on hover (no rules text on the face); a smaller hand that keeps the CARDS-004 fan rules (overlap and tilt grow with the card count); load `godot/assets/concept/cards/<CARD_ID>.png`. Built at `FriendlyCard.DISPLAY_SCALE` 1.0; cards without a picture show a tinted stencil. | same | Claude Code | BUILT, awaiting designer review |
 | **ENC-CONCEPT-001 art** | Mascots (batch 1: AUTO_RENEW, CAPTCHA × 3 moods; batch 2: the rest of the slice) and card illustrations (batch 1: Generalist starter + SPAM/TRACER; batch 2: other starters) generated in ChatGPT. Batch 1 delivered and imported (6 mascot moods, 4 frames, 10 pictures). | `docs/visual/concept-art/ART_BRIEFS.md` | Designer | Batch 1 DONE; batch 2 TO DO |
-| **ENC-CONCEPT-001 UI kit** | Painted interface parts from ChatGPT (console, key caps, top bar, CRT, vitals, END TURN, tooltip, frame, backdrop, icons) so the screen matches the concept screens. | `docs/visual/concept-art/UI_KIT_BRIEF.md` | Designer | DONE (delivered and imported; backdrop unused until the corp-background decision) |
-| **ENC-CONCEPT-001 UI kit 2** | The concept-2 parts not in kit 1: brand plate, corp sign, HOSTILE REVEAL alarm, CRT pictures per condition, lamp stack, knob, vent, slot panel, comic speech bubble, TUMBLER drum, hand tray, END TURN box, legend card. Claude wires each as it lands. | `docs/visual/concept-art/UI_KIT_BRIEF_2.md` | Designer (ChatGPT), then Claude Code | DONE (delivered); wired in the concept-2 layout pass, awaiting designer review |
-| **ENC-CONCEPT-001 UI kit 3** | Layout parts for concept 2: console with concept-2 inner layout, big key sockets, TURN plate, TRACE counter, dials, strike lamps, NUL/REM slip, deck/discard wells, card back, tray buttons, toggles, pipework, screws, key glow, log ticker, vignette. Then Claude does the concept-2 layout pass. *Interpretation to confirm:* homes for strikes, reserve, CRED/RAM, deck, discard, END RUN and the NUL/REM note. | `docs/visual/concept-art/UI_KIT_BRIEF_3.md` | Designer (ChatGPT), then Claude Code | DONE (delivered); wired in the concept-2 layout pass, awaiting designer review |
+| **ENC-CONCEPT-001 UI kit** | Painted interface parts from ChatGPT (console, key caps, top bar, CRT, vitals, END TURN, tooltip, frame, backdrop, icons) so the screen matches the concept screens. | `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (Source 5) | Designer | DONE (delivered and imported; backdrop unused until the corp-background decision) |
+| **ENC-CONCEPT-001 UI kit 2** | The concept-2 parts not in kit 1: brand plate, corp sign, HOSTILE REVEAL alarm, CRT pictures per condition, lamp stack, knob, vent, slot panel, comic speech bubble, TUMBLER drum, hand tray, END TURN box, legend card. Claude wires each as it lands. | `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (Source 6) | Designer (ChatGPT), then Claude Code | DONE (delivered); wired in the concept-2 layout pass, awaiting designer review |
+| **ENC-CONCEPT-001 UI kit 3** | Layout parts for concept 2: console with concept-2 inner layout, big key sockets, TURN plate, TRACE counter, dials, strike lamps, NUL/REM slip, deck/discard wells, card back, tray buttons, toggles, pipework, screws, key glow, log ticker, vignette. Then Claude does the concept-2 layout pass. *Interpretation to confirm:* homes for strikes, reserve, CRED/RAM, deck, discard, END RUN and the NUL/REM note. | `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (Source 7) | Designer (ChatGPT), then Claude Code | DONE (delivered); wired in the concept-2 layout pass, awaiting designer review |
 | **ENC-CONCEPT-001 concept-2 layout pass** | Full encounter layout rebuilt around kits 1–3 (see master ENC-CONCEPT-001). Unused for now: UI_TUMBLER_DRUM (too tall for the key band at this scale), UI_KEY_BIG_FRAME (concept 2's keys sit straight on the band), UI_SLOT_PANEL, UI_KNOB, UI_LAMP_STACK, UI_CARD_BACK, UI_SPEECH_BUBBLE_ALT. ICE without painted mascots (batch 2) still show the drawn appliance, scaled into the cabinet. | Master ENC-CONCEPT-001 | Claude Code | BUILT, awaiting designer review |
 | **ENC-CONCEPT-001 program screen** | CRT shows the active program with ◀ ▶ rotate, +STR, ×, drag-to-break; key clicks use the program on screen (fallback: cheapest Icepick). | Master ENC-CONCEPT-001 | Claude Code | BUILT, awaiting designer review (not yet in a playtest build) |
 | **ENC-CONCEPT-001 mascots batch 2a** | ACCEPT ALL and REJECT ALL, three moods each, from the prompt in `ART_BRIEFS.md`. Claude wires them when they're in the art folder (no code change needed: the files are picked up by name). | `docs/visual/concept-art/ART_BRIEFS.md` | Designer (ChatGPT), then Claude Code | DONE: all six imported and showing on COOKIE BANNER |
@@ -213,6 +222,10 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 ## Done
 
+**UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes. Component register: `docs/PANOPTICON_UI_DESIGN_BIBLE.md` §1a.
+
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes. Initial consolidation: `16265fb`. Follow-up: reconcile imported historical sections and references before retiring source files; no implementation approval implied.
+
 | ID | What | Commit / date |
 |---|---|---|
 | RELEASE-001 / HALCYON PLAYTEST 12 (PT11 fixes, TUNE-002) | Exported the Windows build. Tag: `git tag playtest-12 2845ecd && git push origin playtest-12` (designer). | `2845ecd`, [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/45025253088), [artifact](https://github.com/Punkwork/REDLINE/actions/runs/45025253088/artifacts/14754544395) |
@@ -258,3 +271,130 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 ### ARCH-V2-001 — VAS-001 visual target (2026-11-23)
 Designer confirmed that the supplied 1536×864 PANOPTICON HALCYON mockup should be reproduced as closely as practical, including its dense mechanical console layout. Formal visual specification: `docs/architecture-v2/VAS-001.md`, cross-referenced with CAS-001. Original reference JPEG is now available at [canonical reference](https://github.com/Punkwork/REDLINE/blob/architecture-v2/godot/assets/architecture_v2/references/PANOPTICON_VAS-001_reference_mockup.jpeg); GitHub blob verified. Visual direction confirmed, but new assets, exact scene files and implementation still require milestone review. No gameplay/rules changes authorized.
+### NUL-PILLAR-001b — design follow-up (WAITING)
+
+Preserve designer-confirmed principle: PANOPTICON is not a game about surveillance; it is a game played under surveillance. Perceived observation and delegated authority are distinct. Allow obedience, resistance or no effect without classifying players or requiring an experimental result. Review future proposals against NUL-PILLAR-001a/b in the foundational NUL/REM document. No implementation authorized.
+
+### NUL-PILLAR-001c — Four-Question Design Gate (WAITING)
+
+For every proposed NUL/REM mechanic, document strategic meaning, genuine agency, multiple psychological responses and philosophical significance without explanation. Reconsider failed or unresolved criteria before implementation; existing approval gates remain. See the foundational NUL/REM document and master decision NUL-PILLAR-001c. No implementation authorized.
+
+### PHIL-001 — Philosophical Design Bible (DONE: documentation)
+
+Created `PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md` (c4f815d) at designer request. Consult for all philosophical mechanics, especially surveillance economy and curated card rewards. Apply four-question review; new mechanics remain proposals pending designer approval. No implementation authorized.
+
+### PHIL-002 — Algorithmic Reduction (DONE: documentation)
+
+All six explorations preserved in Philosophical Design Bible §09 (b711f53), with priority on recursive self-surveillance and disappearance of surprise. Apply PHIL-001 safeguards and four-question gate. No implementation authorized.
+
+### PHIL-003 — Gameplay Manifestations Catalogue (DONE: documentation)
+
+Created `PANOPTICON_PHILOSOPHICAL_GAMEPLAY_MANIFESTATIONS.md` (e34eebd). Append future philosophical examples with stable IDs and status; no implementation authorized.
+
+### PHIL-003a — Catalogue expansion (DONE: documentation)
+
+Added psychological effect grouping and concrete in-game examples to all 39 proposed entries (1fed957), annotated withdrawn GM-040, and updated maintenance instructions. No implementation authorized.
+
+### PHIL-004 — Demoralization (DONE: documentation; WAITING: design exploration)
+
+Preserved both designer-requested statements and safeguards in Philosophical Design Bible §10 (88ae456). Explore distinct manifestations without deliberately demoralizing players. No implementation authorized.
+
+### NUL-DIALOGUE-001 — Dialogue compendium (DONE: documentation)
+
+Created `PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md` (10d0d90) with 31 proposed lines and six thematic pairs. Cross-referenced foundational and philosophical design. Copy/canon review pending; no implementation authorized.
+
+### NUL-DIALOGUE-001a — Earlier dialogue recovery (DONE: partial documentation)
+
+Added NR-032–075 (91c06e2), 26 earlier dialogue examples and 18 wording fragments. Full transcript completeness unverified; copy review pending.
+
+### NUL-DIALOGUE-002 — Dialogue architecture (DONE: documentation; WAITING: implementation approval)
+
+Created 13-section `PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md` (db37cb9). Review proposed schema, events, pacing and QA before implementation. All existing approval gates apply; no code authorized.
+
+### OPS-001 — Shared operations hub (DONE: repository setup)
+
+Use `docs/operations/README.md` and shared reporting protocol; daily review 22:00 Toronto. Claude scheduling requires separate setup; designer confirms next-day agenda.
+
+### OPS-002 — Milestone progress (DONE: documentation; WAITING: baseline confirmation)
+
+Master defines eight proposed gates; Operations Dashboard owns evidence-based progress. Daily review updates snapshot and links agenda to milestones. Reconcile architecture-v2 and current build evidence; designer confirms scope, weights and gate acceptance.
+
+### OPS-002a — Commercial Steam launch (DIRECTION)
+
+Designer confirmed actual commercial release on Steam as ultimate goal. Master expands M08 and proposes M09 launch gate; dashboard tracks nine gates. Steamworks status, pricing, launch date, weights and detailed acceptance remain to verify/decide. No account or publication action authorized.
+
+### BYPASS-001 — Encounter eligibility (designer decision; WAITING on mechanic specification)
+
+Record non-final encounter restriction; no BYPASS on final layer, including single-layer Nodes. Define triggers and resolution before implementation. No code task authorized.
+
+### EXP-DESIGN-001 — Experimentation Bible (DONE: documentation)
+
+Created [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md) (7e0928f); initial BYPASS proposals, cards, scenarios and tests remain exploratory. Existing UI issue workflow and migration blocker unchanged. No implementation task authorized.
+
+### BACKCHANNEL-001 — Preferred experimental card (DONE: documentation)
+
+EXP-C029 in Experimentation Bible (ddc4793); timing, legality and balance remain open. No implementation authorized.
+
+### NULL-POINTER-001 — Approved cost adjustment (WAITING: Claude Code)
+
+NULL POINTER 1 BW (formerly 2), all other properties unchanged. Deck Synergy §9.2 updated (08b5b6f). Synchronize runtime card definition and affected tests, validate; documentation-only change so far.
+
+## RIOT-EXP-001 — RIOT experimental card catalogue (ChatGPT)
+
+Designer requested preservation in Experimentation Bible §11 (bdc32508a880a9925010b0dde4bdbf0ac7b0fc57). EXP-C030–036, M007, S012–021, X005; revised FIRST STRIKE and one-copy BREAKER BAR with per-copy node escalation and BURN cost. Experimental only; NULL-POINTER-001 remains approved separately. No code or tests; UI migration gate unchanged.
+
+## TRACE-EXP-001 — TRACE mitigation concepts (ChatGPT)
+
+Designer requested preservation of SIGNAL DAMPENER (Ghostware) and four Protocols in Experimentation Bible §12 (bc9938aa034cf6a39c6114472b4688b056e6cf1f); EXP-C037–041, M008, S022–027, X006. Proposed type distinction, self-inflicted TRACE coverage and trigger timing remain experimental. No rules/code changes, tests or consolidation.
+
+## NUL-DIALOGUE-003 — Economic dependency dialogue (ChatGPT)
+
+Designer requested preservation of four lines NR-076–079 in NUL/REM Dialogue Compendium (28cd6dea0d23821902a025414a3333724c4b365c). Verbatim dialogue; contextual triggers and associations proposed. No shipping approval, gameplay changes, tests or consolidation.
+
+## CRED-EXP-001 / PHIL-005 — CRED-powered combat and economic dependency (ChatGPT)
+
+Designer requested preservation of eight cards EXP-C042–049, mechanics M009–011, scenarios S028–034 and experiment X007 in Experimentation Bible §13 (bf8d742d3783d4cdb2a11e17e62d442b7fc8de52), and economic dependency/purchased freedom in Philosophical Design Bible §11 (aaafd9993e811a2a8b1169a9e9f3ed68b97f0bf6). Fully CRED-powered Icepick activations consume no BW; installation costs open. All mechanics experimental; philosophical direction designer-endorsed, not a new formal pillar. NR-076–079 already saved. No rules/code changes, tests or consolidation; UI migration blocker unchanged.
+
+## CRED-EXP-001a — Icepick installation cost (ChatGPT)
+
+Designer specified 1 BW installation for PAYDAY, BRIBE and MERCENARY (EXP-C042–044); all activations remain CRED-only. Experimentation Bible §13 updated (9cfc95fe920dbfd5abfded3bccda06174cabec2b), including S035. Supersedes open installation cost in CRED-EXP-001 for these three cards only. Experimental, no code or tests.
+
+## CRED-EXP-001b — Program classification (ChatGPT)
+
+Designer clarified EXP-C042–044 are RAM-using PROGRAM Icepicks, 1 BW install, CRED-only activation. Exact RAM TBD; 1 RAM suggested only. Experimentation Bible §13 corrected (0045b0d693b7386b6a6a83c83ca194e92005d784); canonical Core Rules §3.1 unchanged. No code or tests.
+
+## CRED-EXP-001c — Icepick RAM requirements (ChatGPT)
+
+Designer specified PAYDAY 1 RAM, BRIBE 1 RAM, MERCENARY 2 RAM. Experimentation Bible §13 (a28329f275b87bd1d163e4e798cf5859b5e96958), EXP-S036; supersedes TBD RAM in CRED-EXP-001b. Other values unchanged. Experimental only; no code or tests.
+
+## VOID-EXP-001 (ChatGPT)
+
+Saved exploratory VOID-only UNLOAD, Rustler-selected Program removal to discard, Program opportunity costs, EXP-M012/S037–042/X008 in Experimentation Bible §14 (171674b7e8b34d0dd4dad805b9861da4e22b0d0b). No rules/code/tests or consolidation.
+
+## CRED-EXP-001d — CRED SCRIPTS and card-type identity (ChatGPT)
+
+Designer confirmed EXP-C045–049 as 0 BW SCRIPTS with existing CRED prices/effects, one resolution per play, normal discard/redraw, prior activation caps removed in preferred experiment. EXP-M013/S043–044, X007 extension in Experimentation Bible §15 (8d75932dad452669d6aefc0864bda40092e118df). Existing Protocols unchanged; experimental guidance only, no rules/code/tests or consolidation.
+
+## ICE-EXP-002 — Encounter-wide effects and subroutine modification (ChatGPT)
+
+Saved 20 proposed cards EXP-C050–069, mechanics M014–015, scenarios S045–052, experiments X009–010 in Experimentation Bible §16 (27d5fb2ea234eaa8b1ebc87dada42b021fee6b17). Designer's targeted -6 PULP this turn/BURN preserved; names/costs provisional, collisions flagged. No rules/code/tests or consolidation.
+
+## CAP-EXP-001 — Infiltration CAPS (ChatGPT)
+
+Saved twelve non-card CAP concepts EXP-CAP001–012, M016, S053–057 and X011 in Experimentation Bible §17 (98bc0b716700ad6aac90a6bc614b46496b5425c0). No CRED prices or rarities assigned; map activation and circumvention experimental. Existing CAPS rules unchanged. No code/tests or consolidation.
+
+## SURV-MEM-001 — Surveillance and memory (ChatGPT)
+
+DIRECTION, designer-confirmed: “As the player learns the game, the game learns the player.” “The system always remembers. It never forgets.” Pervasive fictional surveillance across runs. Five-stage table and proposed memory layers saved in Experimentation Bible §20 (57bfe20002567740e0e91cde85a809df280ce7e2); prior ICE-SURV-EXP-001 / SURV-EXP-001 proposals in §§18–19 (eb335be5b95c05488f3a966f5d90a47280675523). Philosophical Bible cross-reference. No approved mechanical changes, code, tests or consolidation. Interpretation: thematic persistence does not remove real-world local data reset or privacy controls.
+
+## CARBON-SURV-EXP-001 — Collective trust and individual authority
+
+Designer-endorsed philosophical exploration: keep THE CARBON (collective trust) and NUL/REM (personal autonomy) distinct. Corporate appropriation of trusted resistance spaces may erode collective trust and increase reliance on individual authority. “The system creates the conditions that make its own assistance necessary.” Full progression, examples, comparative framework and open questions preserved in [Design Experimentation Bible §21](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 02e46011863db27f2ac03ed922aa038358bc8a77. EXP-D003 / EXP-X013 remain proposed; no mandated psychological outcome, approved mechanics, code, tests or consolidation.
+
+## SURV-UNCERT-EXP-001 — The uncertainty of observation
+
+Designer-endorsed exploration: possibility of observation, fictional fear/anxiety/suspicion, ambiguity of coincidence, self-regulation and freedom exhaustion. Designer identified Francis Ford Coppola's The Conversation (1974) as reference. Preserve the “constant low hum anxiety” experiential direction as fictional atmosphere, not deliberate actual distress. Linked to SURV-MEM-001 and CARBON-SURV-EXP-001. Full tables, examples and safeguards in [Design Experimentation Bible §22](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 6b36c117b89c4f32edfef77c7241c8fb6db59a28. No approved mechanics, production dialogue, code, tests or consolidation.
+
+## SURV-OBSERVER-EXP-001 — The Internalized Observer
+
+Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation (1974, Francis Ford Coppola) as principal cinematic references. Recorded in Design Experimentation Bible §23, commit 307703473a5a9f3ec8a9fe0a6f34800815d2342b. Reference-only; no new rules, specifications, code or tests.

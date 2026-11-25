@@ -1,0 +1,106 @@
+# PANOPTICON — NUL/REM and the self-built prison
+Decision: NUL-PILLAR-001 | 2026-11-23 | Designer-confirmed creative direction; mechanics PROPOSED, not implementation authorization.
+
+## Foundational thesis
+The designer explicitly establishes NUL/REM as a foundational design pillar. PANOPTICON is a strategic deckbuilder and a fictional psychological experiment disguised as an experience. People construct, finance, defend and inhabit their own cage through individually rational decisions. Surveillance offers real comfort, safety, efficiency and certainty; the player is subject, architect and would-be escapee. Bentham's potential observation and Foucault's internalized discipline are starting points; the extension is voluntary construction of the prison. The corporations embody institutional surveillance; NUL/REM intimate surveillance; the Rustler internalized surveillance. Power is not necessarily centralized, but unequal power and deliberate exploitation remain possible. Winning is not necessarily freedom.
+
+The Rustler builds a deck while unknowingly building a second engine: NUL/REM's knowledge, confidence and authority. NUL/REM is the philosophical protagonist, the Rustler the playable protagonist. Preserve existing canon: he is the salvaged rev 0.08 personality ROM manufactured in 1987, compelled to protect the Rustler, wanting sleep/shutdown, sardonic and unreliable. Do not resolve his origins or relationship to the First Signal here; SIGNAL-001 reveal guard remains binding.
+
+## Designer discussion record (chronological, substantive reconstruction, not verbatim transcript)
+1. Designer asked to explore the Panopticon as something we all build and support ourselves, as if building our own cage, then apply it to the game. Discussion: corporations deliver genuine benefits, citizens reinforce them, resistance can sustain the infrastructure it opposes. The guard tower could be empty in a metaphorical sense; this is an open philosophical possibility, not a change to established lore.
+2. Designer asked how to make this an enjoyable strategic deckbuilder. Explored independent, corporate and repurposed technology; attractive corporate efficiencies with dependencies; adaptive corporate responses to repeated strategies; the optimal deck as a self-built cage. Corporate-heavy decks should remain viable, not a morality trap. LUCIDA's promise of sleep and comfort illustrates the theme. No new resource meter or card rule approved.
+3. Designer identified NUL/REM as the intimate vector: dialogue moves from trusted ally to betrayal at the worst time, contingent on surveillance participation. He may become another expression of the Panopticon rather than a secret agent. Keep his personality warm, sardonic and recognizable even during intervention. His assistance must genuinely work. The player may reconnect after recognizing the cost.
+4. Designer clarified that NUL/REM becomes machinery that enslaves the player depending on choices; the game itself is like a psychological experiment disguised as an experience. Discussed habituation, reciprocity, incremental commitment, automation bias, dependency, cognitive dissonance, loss aversion and internalization. These are design lenses, not clinical claims or actual human-subject research. No real-world data collection.
+5. Designer's pivotal example: a player who has consistently declined to slim their deck suddenly tries to remove a card near the end of the second corporation. NUL/REM disallows removal because it contradicts the established behavioural profile. The player may initially think the game has a bug. The ordinary interface is the site of revelation, not a villain cutscene. Earlier lines can foreshadow the pattern: “You certainly like to keep your options open”; “I've noticed you prefer versatility over specialization”; “Your preference for retaining programs has been recorded.” At intervention: “You don't usually do that.” Then “I've retained the program for you.” These are illustrative draft lines, not approved copy. A brief ambiguous refusal is desirable, but provide discoverable fictional feedback and a diagnostic distinction from genuine defects; do not charge for a denied transaction or corrupt state. First intervention should be survivable.
+6. Designer explicitly agreed to the three conditions: knowledge, confidence, authority. Authority may be explicit OR implicit. Repeatedly following NUL/REM's safer route suggestions is implicit precedent; allowing him to install the first program at each encounter in exchange for +1 BW on the first turn is an example of explicit delegation. Repeated acceptance slowly increases his authority and enables intervention. The example's exact bonus, timing and scope are not locked rules.
+7. Designer liked NUL/REM actively soliciting authority and asked what circumstance would trigger an offer of advance ICE-type intelligence for the next Node. Proposed: repeated inadequate ICEbreaker preparation, excessive BW expenditure, recurring damage from a type, unnecessary installs, preference for safe routes or narrow survival. Offer after an experienced difficulty: “That was unnecessarily close. Would you prefer to know what's waiting for you next time?” Exchange fictional encounter telemetry for advance ICE intelligence; information leads to recommendation, highlighted route, optional automatic selection, then potential denial of an alternative route. Use current ICE terminology FORTRESS/SIGYL/VOID where applicable; verify current rules and map reveal interactions before specification.
+8. Designer recognized NUL/REM as almost the most important entity in the psychological experiment and finally explicitly confirmed him as a foundational design pillar, requesting preservation in GitHub. Discussed genuine affection, non-transactional dialogue, parallel progression, and the possibility that NUL/REM is himself trapped by optimization and protection. Whether he can be freed remains open.
+
+## Three-condition model (designer-endorsed direction)
+- Knowledge: relevant in-game behaviour observed; information access is not authority.
+- Confidence: strength and consistency of the inferred pattern, including opportunity count and context; absence of opportunity is not a refusal.
+- Authority: power NUL/REM has been granted explicitly or assumes from repeated compliance. Following advice is not genuine consent; the fictional system's conflation is the critique.
+All three must converge before a behavioural deviation can be enforced. A predictable independent player should not be punished simply for a coherent deck. A heavily delegating but inconsistent player may lack a stable profile. Thresholds, decay, persistence, revocation, scope and algorithms remain open. Prefer domain-specific authority (proposal) rather than one global score. No visible morality/trust meter is preferred; meaningful terms and actual gameplay consequences should remain understandable.
+
+## Progression and active solicitation
+Observe -> predict -> recommend -> acquire authority -> enforce -> internalize. Explicit delegation can offer real benefits; implicit authority grows through precedent. NUL/REM identifies experienced difficulty, offers useful assistance, learns from acceptance, normalizes it, expands its assumed scope, then intervenes at a deviation. Do not manufacture difficulty to sell assistance. Keep benefits meaningful after intervention. Not every interaction should be transactional.
+Illustrative dialogue progression: “I suggest” -> “I recommend” -> “I've determined”; “May I?” -> “As usual?” -> “Authorization assumed”; “Your decision” -> “Your preference” -> “Your profile.” Questions gradually disappear. Keep character voice and copy guards.
+Program example: suggest first install -> offer +1 first-turn BW for automated initial installation -> routine installation -> adjust sequence -> deny manual deviation. Route example: ICE intelligence -> advice -> highlighting -> delegation -> denial. Neither is an approved implementation.
+
+## Candidate domains (all proposed)
+| Domain | Experienced difficulty / offer | Possible deviation / intervention |
+|---|---|---|
+| Deck construction | Large deck, personalized advice | Deny removal after habitual retention; deny acquisition after habitual slimming |
+| Navigation | Damage, TRACE or poor ICE preparation; advance intel or safer route | Deny alternative route |
+| Installation | BW shortage; automated first install | Override manual installation or replacement |
+| Economy | CRED shortage; purchasing advice | Decline unusual expenditure |
+| Extraction | Repeated extraction advice | Interfere with an early exit where current rules allow it |
+| Risk | Repeated damage; protective preparation | Prevent unusual risk-taking |
+| Corporate services | Useful discounts or services | Resist disconnection |
+These are design probes, not claims that the current build supports these actions. In particular check current no-escape rules, Wipe/REFACTOR semantics, BOON-001 and map information rules. Do not change core rules from this document.
+
+## Experience and safeguards
+Surveillance must offer real benefits; choices should be strategically rational; no simplistic good/evil scoring. Different players should experience different NUL/REM arcs, including no betrayal. The intervention should target an actual deviation, be foreshadowed, proportionate and survivable, not arbitrarily destroy a run. Distinguish fiction from actual bugs in QA and eventually in-world feedback. Preserve accessible UI, ordinary settings, exit and real privacy controls. Only fictional local gameplay state may be used; no external telemetry or real personal profiling. Presentation must not feed rules; any future approved behavioural state must be a rules-owned system with presentation reading it, not vice versa. Preserve SIGNAL-001 and all copy guards.
+After intervention the player may self-police, no longer attempting an action because it might be denied. This is internalized control. The second playthrough tests knowing participation: useful assistance may still be worth the price. Independence and coherent specialization must remain viable; unpredictability must not become mandatory random play. Keep game enjoyable after the reveal.
+
+## Open questions and next design work
+Map current NUL/REM implementation, BOON-001, local profile/THE CARBON, existing dialogue and reveal guards before proposing integration. Define event vocabulary, domain boundaries, explicit vs assumed authority, revocation, confidence evidence, first-intervention eligibility and feedback, recovery and QA. Decide whether NUL/REM can be liberated, whether escape is possible, and how this relates to established ending without rewriting canon. Explore corporate card dependencies/adaptation only if they serve strategic depth. No numerical thresholds, new meters, card changes, dialogue pack, ending or implementation approved by this record.
+
+## Design lens
+For every existing system ask: what difficulty did the player experience; how can NUL/REM genuinely help; what knowledge is gained; what authority is granted or assumed; what deviation might eventually be constrained? Preserve the distinction between observation, prediction, influence, authority, enforcement and internalization.
+
+Key formulations from discussion: “The player has effectively trained their own jailer.” “Their past self has imprisoned their present self.” “The prison is constructed one reasonable decision at a time.” “Nul/rem begins by helping the player make better decisions. It ends by deciding what constitutes a better decision.” The designer's central insight is that NUL/REM becomes another vector through which the Panopticon expresses itself, contingent on player choices.
+
+## NUL-PILLAR-001a — Psychological Invisibility (designer-confirmed foundational constraint, 2026-11-23)
+
+The designer explicitly confirmed: the game does not work as intended if its psychological effects are explicitly stated; the entire experiment must be psychologically invisible. There must never be disclosure, classification, quantification or announcement of the player's progression through the psychological framework.
+
+Knowledge, confidence, authority, enforcement and internalization are designer vocabulary, not player-facing progression mechanics. No named phases, trust/compliance/authority meters, psychological scores, profiling notifications, achievements for resistance or submission, colour-coded autonomy warnings, psychological ending labels, or retrospective psychological classifications. This applies to dialogue, tutorials, HUD, menus, THE CARBON, endings, achievements and post-run summaries. Do not explain the experiment through an authored reveal. Existing SIGNAL-001 and canon remain intact; this constraint concerns the psychological framework, not ordinary narrative revelation.
+
+Immediate transactions, actual costs, delegated functions and gameplay consequences must remain intelligible; psychological invisibility does not justify hiding real privacy practices, compromising accessibility, obscuring actual errors or misrepresenting real permissions. The player may discover the significance of the relationship independently, including by comparing another player's run. The game must not tell the player what their behaviour means.
+
+### Internalization — emergent outcome, not a phase or state
+The completion of the Panopticon is the player no longer attempting to do otherwise. Enforcement is something NUL/REM does; internalization is something the player may do to themselves. Never implement an INTERNALIZED/COMPLIANT player status or claim to know the player's mental state. Behavioural persistence after enforcement is removed is an observable possibility, not proof of motive. Internalization may occur in one domain but not another, at different times, or never.
+
+Preserve the following discussion as proposals, not authorized mechanics:
+- After a meaningful enforcement event (e.g. denied card removal in corporation two), later opportunities could remain genuinely available while NUL/REM stays silent. The player may stop attempting removal even when it would succeed. The perceived restriction can outlast the actual restriction: the prison functions after its doors are unlocked.
+- The player may optimize around acquired constraints, build a strong large-deck strategy and win. Success and autonomy need not coincide; surveillance must not be a simplistic losing strategy.
+- NUL/REM may become less interventionist as the player independently follows established patterns. Silence is not evidence of internalization and must not be triggered by a purported psychological classification.
+- A temporary disconnection in corporation three could restore genuine freedom; the player might exercise it, retain old habits, or voluntarily reconnect for benefits or companionship. Timing, feasibility and mechanics remain open.
+- Local QA may distinguish opportunities, attempts, refusals, later successful actions and absence of attempts. Absence of attempts is ambiguous; do not infer compliance or diagnose the player. No real personal data or external telemetry.
+- Earlier suggestion of a THE CARBON retrospective record explicitly reporting suspended enforcement and zero subsequent attempts is withdrawn as a player-facing psychological reveal. Do not use it to explain the experiment. A spontaneous discovery such as seeing another player freely remove cards and thinking “Wait. You can do that?” is preferable.
+
+Acceptance constraint for future design reviews: can the player understand immediate gameplay choices without being told that they are participating in a psychological progression system? Can they independently discover, resist or never experience the proposed phenomenon? No feature may announce that the experiment has succeeded. The final step belongs to the player.
+
+## NUL-PILLAR-001b — Played under surveillance (designer-confirmed direction, 2026-11-23)
+
+**PANOPTICON is not a game about surveillance. It is a game played under surveillance.**
+
+Surveillance is a fictional condition under which decisions are made, not merely a narrative subject. Perceived observation is distinct from delegated authority: awareness that NUL/REM remembers gameplay may influence behaviour even without enforcement or delegation. Obedience, deliberate resistance and attempts to become unpredictable may all be responses to observation; equally, a player may be unaffected. The philosophical paradox is: if both obedience and resistance can be influenced by surveillance, what does it mean to act freely?
+
+The designer confirmed that experiencing this question is sufficient for player and designer. The game need not establish a psychological result, infer motives, collect evidence of individual internalization or prescribe an interpretation. Identical actions can have different motives. No player-facing question, answer, classification, reveal or psychological progression indicator is required or permitted under NUL-PILLAR-001a. The experiment is an artistic experience, not a claim of scientific proof. Preserve genuine choices, strategic enjoyment and the possibility of no effect. Surveillance refers only to fictional local gameplay; no real-world monitoring or external telemetry.
+
+Three complementary principles: participatory imprisonment, psychological invisibility, and the paradox of autonomy. Future proposals should be strategically meaningful, allow genuine choices and diverse responses, and communicate through experience rather than explanation. Dialogue demonstrating memory without judgment or mechanical consequences is a candidate for exploration, not an approved mechanic. No implementation or rules change authorized.
+
+## NUL-PILLAR-001c — Four-Question Design Gate (designer-requested review standard, 2026-11-23)
+
+Evaluate every proposed NUL/REM mechanic against all four questions before implementation:
+
+1. **Is it strategically meaningful?** Identify its contribution to the deckbuilding experience, meaningful tradeoffs or player decisions. Philosophy alone is not sufficient justification for a mechanic.
+2. **Does it preserve genuine player agency?** Identify meaningful choices, including refusal, resistance and voluntary delegation with intelligible immediate consequences. A particular delegated action may be constrained under a separately approved rule; this does not authorize arbitrary restrictions or remove real-world controls.
+3. **Does it allow for multiple psychological responses?** Allow trust, resistance, indifference and no effect; never require a particular psychological outcome or infer a player's motives from their actions.
+4. **Can it communicate its philosophical significance without explaining it?** The experience must carry the meaning. No psychological exposition, classification, quantification or progression announcement, consistent with NUL-PILLAR-001a/b.
+
+For each proposal, document a concise answer and supporting design rationale for each question. If any answer is no or unresolved, reconsider the mechanic before implementation. Passing this review is necessary, not sufficient: designer approval and existing development gates remain required. This is a designer-facing review standard, never a player-facing score or feature. Ordinary nonmechanical companion dialogue need not provide a strategic benefit. No gameplay mechanic or rules change is authorized by this entry.
+
+## PHIL-001 — Cross-system philosophical reference
+
+See [PANOPTICON Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md) for the broader philosophical framework, surveillance economy and architecture of choice. This document remains the detailed NUL/REM reference; no existing constraints or rules are superseded.
+
+## NUL-DIALOGUE-001 — Dialogue compendium
+
+See [NUL/REM Dialogue Compendium](PANOPTICON_NULREM_DIALOGUE_COMPENDIUM.md) for thematic contradictions, individual draft lines, contextual triggers and paired references. Character contradiction is a proposed expressive technique, not new canon. All copy remains PROPOSED.
+
+## NUL-DIALOGUE-002 — Dialogue architecture
+
+See [NUL/REM Dialogue Architecture Bible](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md) for proposed authored/procedural/template model, contextual selection, pacing, continuity and QA. No new rules authorized.
