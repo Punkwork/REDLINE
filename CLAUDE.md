@@ -2,7 +2,7 @@
 
 This repository, Punkwork/REDLINE, is the shared source of truth for every agent working on PANOPTICON (a Godot 4.3 deck-building roguelike; the repo and file prefix are REDLINE, the game is PANOPTICON).
 
-**Branches (ARCH-V2-002, designer 2026-11-25):** `architecture-v2` is the canonical active branch for all project work: code, design docs, philosophy and narrative, experimental records, governance, operations, tests and reference assets. `main` is the preserved legacy prototype and historical reference (approved tag `prototype-baseline` = `21922ad`; creation pending, see §6); no new work goes to `main`. `release` holds designer-authorized builds only.
+**Branches (ARCH-V2-002, designer 2026-11-25):** `architecture-v2` is the canonical active branch for all project work: code, design docs, philosophy and narrative, experimental records, governance, operations, tests and reference assets. `main` is the preserved legacy prototype and historical reference (tag `prototype-baseline` = `21922ad`); no new work goes to `main`. `release` holds designer-authorized builds only.
 
 `AGENTS.md` and `CLAUDE.md` must remain identical. Edit both together, word for word.
 
@@ -90,7 +90,7 @@ Use `SIM=1 "$GODOT" --headless --path godot --script res://tests/test_game.gd` t
 - Target: hybrid Godot 4.3 GL Compatibility architecture using scene composition for meaningful screens/widgets, reusable typed GDScript components, data-driven content and corporation presentation, and independent game rules. Scene boundaries and data formats must be proposed and reviewed before broad implementation.
 - Preserve and regression-test the proven rules engine (`game.gd`, `cards.gd`, `ice.gd`) as the initial behavior reference. No gameplay or balancing changes are authorized by this architecture decision.
 - First deliverable is an architecture plan and one fully playable representative ICE encounter; compare against existing behavior and tests. Expand only after validation. Prefer small testable modules over giant scripts or excessive tiny scenes.
-- Prototype baseline: `main` at `21922ad`, to be tagged `prototype-baseline` (ARCH-V2-002, 2026-11-25; tag creation pending, done by the designer in GitHub). Recorded results: import exit 0; `test_game.gd` 176 passed / 0 failed (also with `SIM=1`); `test_adp.gd` 17 / 0; `test_signal_carbon.gd` 672 / 0. Screenshot fixtures are skipped while `Game.CORE_LOOP` is true; the Windows export was not run. Compare migration code against this baseline.
+- Prototype baseline: `main` at `21922ad`, tagged `prototype-baseline` (ARCH-V2-002, 2026-11-25; created by the designer as a GitHub pre-release). Recorded results: import exit 0; `test_game.gd` 176 passed / 0 failed (also with `SIM=1`); `test_adp.gd` 17 / 0; `test_signal_carbon.gd` 672 / 0. Screenshot fixtures are skipped while `Game.CORE_LOOP` is true; the Windows export was not run. Compare migration code against this baseline.
 - Keep designer-only approvals, decision IDs, copy guards, readability, privacy, CI and release protections intact. The new branch is not a blanket approval for implementation details.
 
 ### Architecture documentation review (ARCH-V2-001)
