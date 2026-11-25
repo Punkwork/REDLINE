@@ -197,3 +197,7 @@ Connect to participatory imprisonment, commodification of autonomy, behavioural 
 ## Surveillance and memory — SURV-MEM-001 (2026-11-24)
 
 Designer-confirmed central philosophical direction: **As the player learns the game, the game learns the player. The system always remembers. It never forgets.** The Panopticon is pervasive and persistent across runs. This is fictional thematic persistence, not actual personal surveillance or irreversible retention. Mechanical proposals and the five-stage progression are maintained in [Design Experimentation Bible §20](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md#20--surveillance-and-memory-the-system-always-remembers-surv-mem-001-2026-11-24); implementation remains unapproved. Preserve local-only gameplay data and player-controlled reset.
+
+## CARBON-SURV-EXP-001 — Collective trust and individual authority
+
+Designer-endorsed philosophical exploration: keep THE CARBON (collective trust) and NUL/REM (personal autonomy) distinct. Corporate appropriation of trusted resistance spaces may erode collective trust and increase reliance on individual authority. “The system creates the conditions that make its own assistance necessary.” Full progression, examples, comparative framework and open questions preserved in [Design Experimentation Bible §21](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 02e46011863db27f2ac03ed922aa038358bc8a77. EXP-D003 / EXP-X013 remain proposed; no mandated psychological outcome, approved mechanics, code, tests or consolidation.
