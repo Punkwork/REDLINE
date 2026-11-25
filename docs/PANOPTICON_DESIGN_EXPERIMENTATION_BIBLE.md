@@ -489,3 +489,12 @@ Designer-confirmed principal cinematic references for this exploration:
 - The Conversation (1974), directed by Francis Ford Coppola — surveillance, ambiguous information, sound, repetition and deteriorating certainty.
 
 Reference focus: “watching themselves being watched”; the observer becomes internalized. See §22 SURV-UNCERT-EXP-001. Cinematic references only; no new mechanics, audiovisual specifications or implementation authorized.
+
+### Additional cinematic references — SURV-OBSERVER-EXP-001a
+
+Designer requested three additional visual, stylistic and psychological references for The Internalized Observer:
+- Rosemary's Baby (1968, Roman Polanski): disappearance of refuge; intimate relationships, neighbours and trusted institutions implicated in a conspiracy; familiar domestic spaces become oppressive. Relate to collective trust and compromised sources of assistance.
+- Diabolique / Les Diaboliques (1955, Henri-Georges Clouzot; assumed original, edition to confirm): ambiguity, absence, anticipation and destabilization of certainty; distinguish observed events from interpretations. 
+- Invasion of the Body Snatchers (adaptation unspecified; 1956 Don Siegel and 1978 Philip Kaufman versions are candidate references): primarily psychological rather than visual; familiar outward identities conceal fundamental change, erosion of authentic identity and collective trust. Relate to THE CARBON retaining its familiar appearance while its ownership and communications change.
+
+These supplement, not replace, The Parallax View and The Conversation as principal references. Reference-only; no approved audiovisual specifications, mechanics or implementation. See §§21–23.
