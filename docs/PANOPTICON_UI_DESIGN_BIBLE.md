@@ -53,6 +53,14 @@ ENC-CONCEPT-001 supersedes the earlier flip-clock layout; ICE-ANALOG-001 icon ke
 - Keep full textual response/passive previews where required by ICE-ANALOG-001.
 - No implementation status is inferred from this consolidation.
 
+## 2a. Typography and the dual visual language (UI-TYPO-001, APPROVED 2026-11-25)
+
+Two distinct visual representations (designer, 2026-11-25; full wording in Master Design UI-TYPO-001):
+- **Physical world, the UI:** 1950s Deco and Atomic Deco Punk. Bakelite and Formica, panels, knobs and switches, with a small CRT display.
+- **Virtual world:** a hyper-kinetic title flourish in the manner of Gaspar Noé's title sequences, full of motion and electric colour.
+
+Readability, reduced motion and the copy guards still govern both. Fonts, glyphs and the boundary between the two on each screen are open: see [#24](https://github.com/Punkwork/REDLINE/issues/24). Reference images: `docs/visual/references/ui-typo-001/` (pending upload).
+
 ## 3. Existing Master Design UI decisions (extract)
 **CARDS-003 — PCB glow cartridges (APPROVED, 2026-11-19).** Supersedes the CARDS-002 palette table above and its rarity finishes, ivory print and amber-on-field numbers. Designer: "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot." It was reviewed in 17 iterations on the `review/cards-002` branch, which is never merged.
 

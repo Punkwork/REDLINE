@@ -3244,3 +3244,20 @@ ChatGPT's independent check of `main` references covered the principal governanc
 
 **Open for the designer:** approve, change or reject the procedure and (a)–(c). RELEASE-001 governs until then.
 
+## UI-TYPO-001 — Typography and the dual visual language: physical world and virtual world (APPROVED, 2026-11-25)
+
+**Designer, 2026-11-25 (13:17–13:19):** "On typography there needs to be 2 distinct visual representations. The physical world, represented by the UI - 50's deco and atomic punk aesthetic, bakelite and formica and panels and knobs and switches, with a small crt display. THe second representation is the virtual world, governed by a hyper-kinetic gaspar noe-like title flourish, full of motion and electric colour."
+
+**Decision:** PANOPTICON's typography and look have **two distinct visual representations**:
+
+| | **Physical world** | **Virtual world** |
+|---|---|---|
+| Where | The UI: the Rustler's console and everything they touch | The virtual world |
+| Look | 1950s Deco and Atomic Deco Punk: Bakelite and Formica, panels, knobs and switches, with a small CRT display | Governed by a hyper-kinetic title flourish in the manner of Gaspar Noé's title sequences: full of motion and electric colour |
+
+**Unchanged:** readability rules (contrast ≥ 4.5:1; nothing crosses rule text, numbers, names, costs or buttons; ADP-R1), reduced-motion settings, the copy guards and the rules engine. No gameplay change. Glyph choices, fonts and where exactly the boundary falls on each screen are open and go through the UI-TYPO-001 GitHub issue ([#24](https://github.com/Punkwork/REDLINE/issues/24)).
+
+**Reference images:** the four approved reference images are **pending upload** by the designer; they will be stored in `docs/visual/references/ui-typo-001/` and linked from the UI Design Bible and the issue.
+
+**Interpretations to confirm:** (1) the physical-world style covers the console UI, HUD, cards and controls, and the virtual-world style covers titles and moments inside the network (for example encounter and Node titles, corporation and event title cards); (2) the "small CRT display" is the CRT already on the console (ENC-CONCEPT-001), now the physical world's window onto the virtual one; (3) virtual-world motion stays off rules text and obeys reduced motion like every other effect.
+

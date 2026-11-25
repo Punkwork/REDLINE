@@ -23,12 +23,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — SIGNAL-001, ARCH-001 and ADP-4a (Codex).
 
-## 2026-11-20 — MOOD-PIXEL-001, program cartridges, AVATAR-001 and ChatGPT round 3 (Claude)
-
-Designer asked for card pictures, per-corporation backgrounds, avatar families that read by corporation, job and ICE type (sentries fun to build), 16-bit mood transitions with a 2 s on / 2 s off lethal pulse, and slim program cards sticking out of the CRT. Built: `themes/mood_pixel.gdshader` (TRACE-pixel method masked by the avatar's alpha) and `FriendlyMascot.mood_look()` (drop to 16-bit, swap faces at the peak, resolve; lethal pulse, coarser over TRACE pixelation; off under reduced motion); `FriendlyEncounter.build_cartridges()` (one card per installed program on top of the CRT; the active one higher with a lamp; click to switch) with the left column moved down 30 px; `concept_backgrounds()` swaps in `assets/concept/backgrounds/BG_<CORP>_*.png` when delivered. The NUL/REM slip now fits its text by the label's real line height and clips. Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND3.md` (83 card pictures in four prompts, AVATAR-001 rules with build-a-sentry tables and the six remaining HALCYON avatars, six backgrounds). `shot_ice_analog` checks the pulse timing and captures the 16-bit phase.
-
-Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
-
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ZINE-003 confirmed (Claude); 2026-11-18 — ARCH-COPY-001: remaining working copy approved (Claude).
 
 ## 2026-11-20 — CAPS rack and Ghostware rail (Claude)
@@ -444,3 +438,8 @@ Designer approved at 11:39. No UI issues existed. Created label `ui` and seven s
 
 Designer approved drafting at 11:39. Recorded RELEASE-002 in Master Design as **PROPOSED**; RELEASE-001 stays in force. Finding: `release` (`2845ecd`, Playtest 12) is an ancestor of `architecture-v2`, so builds can come from `architecture-v2` by fast-forward alone; the workflow already exports only on `release`, and `release` has no ruleset. The proposal covers version bump → CI → fast-forward cut → artifact check → designer tag → records, fix-forward recovery, and three separate options: (a) a `release` ruleset, (b) artifact name from the version, (c) an entry gate for the first V2 build. No workflow or branch changes made.
 - **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-20 — RELEASE-001: HALCYON Playtest 7 (Claude), 2026-11-20 — ENC-CONCEPT-001: program screen; mascot prompt for ACCEPT ALL / REJECT ALL (Claude), 2026-11-20 — ENC-CONCEPT-001: ACCEPT ALL and REJECT ALL mascots (Claude).
+
+## 2026-11-25 — UI-TYPO-001: typography and the dual visual language (Claude)
+
+Designer, 13:17–13:19: two distinct visual representations, the physical world (the UI: 1950s Deco and Atomic Deco Punk, Bakelite, Formica, panels, knobs, switches and a small CRT) and the virtual world (a hyper-kinetic, Gaspar Noé-style title flourish full of motion and electric colour). Recorded as APPROVED in Master Design, added as UI Design Bible §2a, and opened issue #24. The four reference images are still to come (`docs/visual/references/ui-typo-001/`). *Interpretations to confirm:* which elements belong to each world, the CRT as the existing console CRT, and the flourish staying off rules text under reduced motion.
+- **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-20 — MOOD-PIXEL-001, program cartridges, AVATAR-001 and ChatGPT round 3 (Claude).
