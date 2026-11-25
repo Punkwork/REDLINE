@@ -2704,3 +2704,32 @@ Added deterministic animation phases to the isolated visual fixture: idle, atten
 - Character proposals for the batch-2 ICE mascots and all card subjects are Claude's.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-19 — PIXEL-TRACE-001a: animated pixel step changes (Claude), 2026-11-19 — PIXEL-TRACE-001b: bit-crushed music with the pixel steps (Claude), 2026-11-19 — PIXEL-TRACE-001c: a transition sound effect, to be chosen (Claude), 2026-11-19 — ENC-ANALOG-001 saved; ICE-ANALOG-001 brief for Codex (Claude), 2026-11-19 — ICE-ANALOG-001: editable Godot visual study (Codex), 2026-11-19 — ICE-ANALOG-001 designer approval for default encounter integration, 2026-11-19 — ICE-ANALOG-001 built; ENC-CONCEPT-001 direction and art briefs (Claude) (ARCH-V2-002, 2026-11-25).
+
+## 2026-11-19 — ENC-CONCEPT-001: concept-3 interface in the encounter (Claude)
+
+**Built (presentation only):** the encounter screen re-laid out to concept 3 with a concept-2 left HUD: top bar (PANOPTICON plate, network/node plate, decal plate, CONDITION pill, HOSTILE REVEAL %, TURN/TRACE/RESERVE split-flap tiles, strike lamps, CRED/RAM, bleed); ICE consoles (enamel frame with arched corp tab, power lamp, name and STR plates, ICE-ANALOG-001 keys and reel column, PASSIVE plate, per-ICE NEXT RESPONSE plate, patent plate); left CRT with status and installed Programs (phosphor chips); vitals with icons and segment gauges (VITAE, BANDWIDTH lamps, SHIELD, PULP INCOMING, NEXT DRAW); right column with the NUL/REM note, piles and a round red END TURN with a ready lamp. New `analog.gd` draws tiles, lamps, gauges and icons. The flip-clock HUD pass (ENC-ANALOG-001) stays unbuilt.
+
+**Fixtures:** `shot_ice_analog.gd` added to CI. `shot_friendly_lie` reads the curve-B number from the NEXT RESPONSE plates; `shot_facade` compares the console ground. The note passes drops through so SCRIPTs still play when dropped on it (`shot_hand`).
+
+**Tests:** rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0; all 16 screenshot fixtures pass.
+
+**Interpretations to confirm:** HOSTILE REVEAL = the bleed reveal (0 / 20–60 / 100%); graffiti on the top-bar decal plate; NUL/REM note in the right column; per-ICE NEXT RESPONSE plates replace the shared strip; console enamel = plaque ground tinted toward the corp accent. Card faces and mascots wait for the ChatGPT art.
+
+## 2026-11-19 — ENC-CONCEPT-001: ChatGPT art wired into the encounter (Claude)
+
+Designer: "yes please do" (wire the delivered ChatGPT art into the game). Imported from the designer's folder `PANOPTICON art` into `godot/assets/concept/`:
+- `ui/`: painted UI kit (frame, top bar, ICE console 9-slice, key caps and lamps, plates, pills, badges, END TURN states, tooltip plate, flip tile, reel window, CRT, vitals, BW chip) and the icon sheet sliced into single icons with cream `_LIGHT` variants. Seven files arrived under ChatGPT names and were renamed; large plates also have half-size `_S` copies.
+- `cards/`: CARD_FRAME_{PROGRAM,SCRIPT,PROTOCOL,BLOATWARE} and 10 card pictures (batch 1).
+- `mascots/`: AUTO_RENEW and CAPTCHA, cheery / wary / lethal.
+
+Wiring (presentation only; each part falls back to the drawn version when its file is missing):
+- ICE consoles drawn as a NinePatchRect of the painted console; keys use painted caps, lamps and icons; key tips use the painted tooltip plate.
+- Top bar, CRT, vitals, plates, buttons and END TURN use the painted parts (StyleBoxTexture). `FriendlyEncounter.style_ground()` gives contrast tests a ground colour for painted styles.
+- Mascots: when `<ICE_ID>_<mood>.png` exists, the concept art replaces the drawn mascot (speech bubble and sticker kept), leans toward the focused key, breathes, and trembles when lethal. PIXEL-TRACE-001 still applies.
+- Cards: concept face (white frame per type, picture window, name, cost dial, type stamp, corner chips); rules show on hover. `FriendlyCard.DISPLAY_SCALE` 1.4 → 1.0 (smaller cards, per the designer); the CARDS-004 fan rules are unchanged. Cards without a picture show a tinted stencil until batch 2. `shot_cartridges` and `shot_cards_pcb` set `FriendlyCard.legacy_face = true` so they keep checking the cartridge face.
+
+Tests (Godot 4.3, headless): test_game 369 passed, 0 failed; test_adp 17 checks, 0 failures; test_signal_carbon 671 checks, 0 failures. All 16 screenshot fixtures in the workflow list exit 0 with no SCRIPT ERROR, Parse Error or Assertion failed.
+
+Interpretations to confirm: cards at 1.0× (CARDS-004's 1.4× superseded for the concept face); card rules on hover only; UI_BACKDROP_MACHINE delivered but not used until the per-corp background decision.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-19 — ENC-CONCEPT-001: concept-3 interface in the encounter (Claude), 2026-11-19 — ENC-CONCEPT-001: ChatGPT art wired into the encounter (Claude) (ARCH-V2-002 audit corrections, 2026-11-25).

@@ -276,7 +276,7 @@ Do not grant both in a single visit. Bounds (maximum Vitae / minimum Trace), vis
 
 **UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes.
 
-**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes.
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes.
 **Established decisions:**
 - Fixed ICE inspection bay, avoiding unpredictable layout shifts.
 - Drag-to-ICE breaker interaction.
@@ -2967,7 +2967,7 @@ Designer: "the card should do what it currently does OR reveal hidden subroutine
 
 **Scope:** Meaningful reusable Godot scenes, typed GDScript components, data-driven corporation presentation/content, and strong rules/presentation separation. Preserve the existing validated rules and their tests as the initial behavioral reference; do not change card effects, balance, approved rules, copy guards or gameplay solely because the architecture changes. Start with a reviewed architecture plan and one complete playable ICE encounter, then verify behavior and scalability before broader migration. Exact scene layout, data schema, use of signals, migration steps, and future release/merge gate are **not yet approved**. No fork or new repository is required. Do not merge into `main` without explicit designer approval.
 
-**Status:** Architectural direction and branch policy APPROVED by designer; implementation not started. `architecture-v2` branch created from `main`; prototype tag and validation results not yet recorded.
+**Status:** Architectural direction and branch policy APPROVED by designer; implementation not started. `architecture-v2` branch created from `main`; prototype tag and validation results not yet recorded. *Update (ARCH-V2-002, 2026-11-25): baseline recorded and tagged `prototype-baseline` on `21922ad`; see ARCH-V2-002.*
 ## NUL-PILLAR-001 — NUL/REM and the self-built prison (DIRECTION, 2026-11-23)
 
 Designer explicitly confirmed NUL/REM as a foundational design pillar and endorsed knowledge, confidence and authority (explicit or assumed through repeated compliance) as the three conditions for behavioural intervention. NUL/REM actively solicits authority by offering real benefits in response to experienced difficulty. Pivotal designer example: near the end of corporation two, a habitual card retainer attempts to slim the deck and NUL/REM denies removal. Other designer examples: following safer route advice, delegating initial program installation for +1 first-turn BW, and advance ICE-type intelligence. Preserve the complete substantive discussion in [REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md). Individual mechanics, thresholds, copy and implementation remain PROPOSED; no existing rules or reveal guards changed.
@@ -3058,7 +3058,7 @@ Progress is measured not simply by how much of PANOPTICON has been built, but by
 
 ## 8. Documentation migration gate (DOCS-MIG-001)
 
-Designer-authorized 2026-11-24. Consolidation must reduce clutter, not create parallel authorities. Work in controlled batches on main, with one atomic completion commit per batch. No subsequent consolidation batch may begin until the preceding batch passes this gate.
+Designer-authorized 2026-11-24. Consolidation must reduce clutter, not create parallel authorities. Work in controlled batches on `architecture-v2` (originally "on main" when authorized 2026-11-24; branch corrected by ARCH-V2-002, 2026-11-25, intent unchanged), with one atomic completion commit per batch. No subsequent consolidation batch may begin until the preceding batch passes this gate.
 
 Before declaring a batch complete:
 - Inventory source content and dependencies; preserve unique material, decision IDs, approval status, provenance and historical records. Relocate narrative or other out-of-scope material to its appropriate canonical destination before retirement.
@@ -3157,5 +3157,22 @@ Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation
 **Supersedes for branch choice only:** MAIN-001 (`main` as working branch) and the `main`-default wording in RELEASE-001. RELEASE-001's procedure still governs prototype builds from `main`; a release procedure for `architecture-v2` is not yet designed or approved. Everything else in ARCH-V2-001 is unchanged: the blueprint, CAS-001, scene hierarchy and VAS-001 implementation details remain PROPOSED, and no gameplay, balance or rules change is implied. Experimental records keep their status. DOCS-MIG-001 / UI-BIBLE-001 remains OPEN.
 
 **Completed by the designer (2026-11-25):** the agent session could not push tags or write repository settings, so the designer created tag `prototype-baseline` on `21922ad` (GitHub pre-release) and made the default-branch switch to `architecture-v2` was made by the designer on 2026-11-25 and verified via the GitHub API.
+
+**Recorded ARCH-V2-002 items and how each is put into practice:**
+
+| # | Item | Source | Where it is put into practice |
+|---|---|---|---|
+| a | `architecture-v2` is the canonical active branch for all project work | Designer, 2026-11-25 (quoted above) | AGENTS/CLAUDE header and §1; HANDOFF "How we work"; operations README |
+| b | `main` is the preserved legacy prototype; no new work goes to it | Designer, reconciliation brief 2026-11-25 | AGENTS/CLAUDE §1; daily branch-drift check (OPS-001) |
+| c | Reconcile by a history-preserving merge of `main` into `architecture-v2` | Designer, brief §7 and Gate B approval | Merge `6b1acdd` |
+| d | Tag the baseline `prototype-baseline` on `21922ad` | Designer, 2026-11-25 | Tag created by the designer; AGENTS/CLAUDE §6 |
+| e | Remove the duplicate VAS-001 reference image | Designer, 2026-11-25 | Commit `b03df7f` |
+| f | `architecture-v2` is the GitHub default branch | Designer, 2026-11-25 | Switched by the designer; AGENTS/CLAUDE §1 |
+| g | Architecture V2 takes precedence over legacy UI implementation conventions for future Godot UI | Designer, brief §6; restated in the 07:44 audit | AGENTS/CLAUDE §4 and §7 |
+| h | Atomic, decision-grouped commits wherever practical, not only for doc consolidation | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | AGENTS/CLAUDE §1 rule 7 |
+| i | Branch drift monitoring in the daily operations review | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | operations README; REPORT_TEMPLATE |
+| j | Protect `main` against unintended changes | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | AGENTS/CLAUDE §1; daily drift check. **GitHub branch protection is not enabled** (verified 2026-11-25: `protected: false`, no rulesets); agents cannot write repository settings, so the designer enables it |
+
+**Interpretation to confirm:** the 07:44 audit refers to "eight designer-approved ARCH-V2-002 decisions" without listing them. Items a–j above are every item found in the designer's messages and the brief; the designer or ChatGPT should confirm the intended list.
 
 **Interpretation to confirm:** the designer said "main branch for the rebuild" and "the current direction moving forward"; this is recorded as covering all project work (design, philosophy, operations and code), as in the 2026-11-25 reconciliation brief.

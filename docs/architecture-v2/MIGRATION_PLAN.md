@@ -6,7 +6,7 @@
 - Record exact `main` SHA, current Godot 4.3 version and renderer.
 - Import, run the three existing headless test suites and record pass/fail counts and logs.
 - Run relevant screenshot/input fixtures where a display is available; distinguish automated evidence from an actual Windows playtest.
-- Propose permanent `prototype-v1-final` tag on the verified `main` commit; do not mislabel incomplete verification.
+- Propose permanent `prototype-v1-final` tag on the verified `main` commit; do not mislabel incomplete verification. *(ARCH-V2-002, 2026-11-25: created as `prototype-baseline` on `21922ad`.)*
 - No changes to `main` or rules.
 
 ## Phase 1 — Architecture review

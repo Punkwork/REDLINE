@@ -14,6 +14,8 @@ This repository, Punkwork/REDLINE, is the shared source of truth for every agent
 4. **Branch policy (ARCH-V2-001, ARCH-V2-002):** all work lands on `architecture-v2`, which is also the repository default branch (switched by the designer 2026-11-25). Ask before creating any further branches, merging into `main`, changing the default branch, or cutting a release. `main` was merged into `architecture-v2` once (ARCH-V2-002) and is otherwise left unchanged.
 5. **Only the designer approves.** A proposal stays PROPOSED until the designer approves it in a session. Never mark anything APPROVED yourself.
 6. **Every change carries a decision ID** (e.g. ARCH-001) in the design doc, `docs/HANDOFF.md` and `docs/REDLINE_DEVELOPMENT_LOG.md`.
+7. **Atomic, decision-grouped commits (ARCH-V2-002h).** Wherever practical, put all changes for one decision in one commit (or one small, clearly labelled series), with the decision ID in the message. This applies to all work, not only documentation consolidation. Don't mix unrelated decisions in one commit.
+8. **Protect `main` (ARCH-V2-002j).** Never commit, push, merge, rebase, force-push or delete on `main` or the `prototype-baseline` tag. If `main` has moved from `prototype-baseline`, stop and report it to the designer.
 
 Copies of design docs kept outside this repository, such as Claude Project docs or chat attachments, may be stale. When they disagree with this repository, this repository wins.
 
@@ -35,7 +37,7 @@ Copies of design docs kept outside this repository, such as Claude Project docs 
 **Engine and style**
 - **Godot 4.3, GL Compatibility renderer.** Do not upgrade the engine or change project settings without the designer's approval.
 - **Typed GDScript**, as the existing code does (`var g: Game`, `func _ready() -> void`). Follow the folder layout and naming already in the repo.
-- **Existing prototype:** the UI is built in code, with one scene (`godot/scenes/Main.tscn`) and no autoloads. **Approved future direction (ARCH-V2-001):** design a hybrid scene-based, component-driven, data-driven UI. Reusable `.tscn` scenes, typed GDScript components, theme/resources and narrowly scoped signals are permitted on `architecture-v2` where justified by a reviewed architecture plan. Do not introduce global autoloads, a global signal bus, or unrelated refactors automatically. Preserve gameplay/presentation separation. This permission is not approval to implement every proposed scene or to rewrite the rules engine.
+- **Existing prototype:** the UI is built in code, with one scene (`godot/scenes/Main.tscn`) and no autoloads. **Approved future direction (ARCH-V2-001):** design a hybrid scene-based, component-driven, data-driven UI. Reusable `.tscn` scenes, typed GDScript components, theme/resources and narrowly scoped signals are permitted on `architecture-v2` where justified by a reviewed architecture plan. Do not introduce global autoloads, a global signal bus, or unrelated refactors automatically. Preserve gameplay/presentation separation. This permission is not approval to implement every proposed scene or to rewrite the rules engine. **Precedence (ARCH-V2-002g):** for new Godot UI on `architecture-v2`, the approved ARCH-V2-001 direction and reviewed `docs/architecture-v2/` plans govern how the UI is built; the prototype's code-built, single-scene conventions describe `main` only and do not bind new work. The prototype stays the behavioural reference.
 
 **Map (details in `docs/ARCHITECTURE.md`)**
 - `godot/scripts/core/`: the rules engine and data (`game.gd`, `cards.gd`, `ice.gd`), NUL/REM, punch cards, THE CARBON record, local JSON helper and copy guards.
@@ -100,6 +102,8 @@ Before proposing or implementing a significant architecture change on `architect
 ## 7. Design docs: which are current (DOCS-001)
 
 When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register) wins, then **`docs/REDLINE_CORE_RULES.md`**, then the topic docs it names. Within a rules doc, its **"Later amendments"** tables win over older text in the same doc, even where that text wasn't edited.
+
+**UI construction vs UI design:** how the UI is built follows ARCH-V2-001 and `docs/architecture-v2/` (§4, §6); what it looks like and says follows Master Design and the UI Design Bible.
 
 **Current**
 - UI working specification: `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (UI-BIBLE-001). Master Design decisions prevail; imported historical material is not a new approval. Extend the Bible instead of creating parallel UI briefs; legacy source paths remain during migration.

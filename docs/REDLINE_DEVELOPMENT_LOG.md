@@ -13,34 +13,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-17 — ADP-001 Phase 1 confirmations (Codex), 2026-11-17 — HAND-CLEANUP-001 and CARD-CONTROLS-001 (Codex), 2026-11-17 — HALCYON PLAYTEST 5 Windows build (Codex), 2026-11-18 — ZINE-002, ARCH-001: the zine as samizdat; the Archipelago (Claude).
 
-## 2026-11-19 — ENC-CONCEPT-001: concept-3 interface in the encounter (Claude)
-
-**Built (presentation only):** the encounter screen re-laid out to concept 3 with a concept-2 left HUD: top bar (PANOPTICON plate, network/node plate, decal plate, CONDITION pill, HOSTILE REVEAL %, TURN/TRACE/RESERVE split-flap tiles, strike lamps, CRED/RAM, bleed); ICE consoles (enamel frame with arched corp tab, power lamp, name and STR plates, ICE-ANALOG-001 keys and reel column, PASSIVE plate, per-ICE NEXT RESPONSE plate, patent plate); left CRT with status and installed Programs (phosphor chips); vitals with icons and segment gauges (VITAE, BANDWIDTH lamps, SHIELD, PULP INCOMING, NEXT DRAW); right column with the NUL/REM note, piles and a round red END TURN with a ready lamp. New `analog.gd` draws tiles, lamps, gauges and icons. The flip-clock HUD pass (ENC-ANALOG-001) stays unbuilt.
-
-**Fixtures:** `shot_ice_analog.gd` added to CI. `shot_friendly_lie` reads the curve-B number from the NEXT RESPONSE plates; `shot_facade` compares the console ground. The note passes drops through so SCRIPTs still play when dropped on it (`shot_hand`).
-
-**Tests:** rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0; all 16 screenshot fixtures pass.
-
-**Interpretations to confirm:** HOSTILE REVEAL = the bleed reveal (0 / 20–60 / 100%); graffiti on the top-bar decal plate; NUL/REM note in the right column; per-ICE NEXT RESPONSE plates replace the shared strip; console enamel = plaque ground tinted toward the corp accent. Card faces and mascots wait for the ChatGPT art.
-
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-18 — ARCH-NAMES-001: islands named like care homes (Claude).
-
-## 2026-11-19 — ENC-CONCEPT-001: ChatGPT art wired into the encounter (Claude)
-
-Designer: "yes please do" (wire the delivered ChatGPT art into the game). Imported from the designer's folder `PANOPTICON art` into `godot/assets/concept/`:
-- `ui/`: painted UI kit (frame, top bar, ICE console 9-slice, key caps and lamps, plates, pills, badges, END TURN states, tooltip plate, flip tile, reel window, CRT, vitals, BW chip) and the icon sheet sliced into single icons with cream `_LIGHT` variants. Seven files arrived under ChatGPT names and were renamed; large plates also have half-size `_S` copies.
-- `cards/`: CARD_FRAME_{PROGRAM,SCRIPT,PROTOCOL,BLOATWARE} and 10 card pictures (batch 1).
-- `mascots/`: AUTO_RENEW and CAPTCHA, cheery / wary / lethal.
-
-Wiring (presentation only; each part falls back to the drawn version when its file is missing):
-- ICE consoles drawn as a NinePatchRect of the painted console; keys use painted caps, lamps and icons; key tips use the painted tooltip plate.
-- Top bar, CRT, vitals, plates, buttons and END TURN use the painted parts (StyleBoxTexture). `FriendlyEncounter.style_ground()` gives contrast tests a ground colour for painted styles.
-- Mascots: when `<ICE_ID>_<mood>.png` exists, the concept art replaces the drawn mascot (speech bubble and sticker kept), leans toward the focused key, breathes, and trembles when lethal. PIXEL-TRACE-001 still applies.
-- Cards: concept face (white frame per type, picture window, name, cost dial, type stamp, corner chips); rules show on hover. `FriendlyCard.DISPLAY_SCALE` 1.4 → 1.0 (smaller cards, per the designer); the CARDS-004 fan rules are unchanged. Cards without a picture show a tinted stencil until batch 2. `shot_cartridges` and `shot_cards_pcb` set `FriendlyCard.legacy_face = true` so they keep checking the cartridge face.
-
-Tests (Godot 4.3, headless): test_game 369 passed, 0 failed; test_adp 17 checks, 0 failures; test_signal_carbon 671 checks, 0 failures. All 16 screenshot fixtures in the workflow list exit 0 with no SCRIPT ERROR, Parse Error or Assertion failed.
-
-Interpretations to confirm: cards at 1.0× (CARDS-004's 1.4× superseded for the concept face); card rules on hover only; UI_BACKDROP_MACHINE delivered but not used until the per-corp background decision.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ARCH-LINES-001: relocation lines and programme names approved (Claude); 2026-11-18 — ARCH-SLANG-001: the Rustlers say ’Pelago (Claude); 2026-11-18 — ARCH-SLANG-001 confirmed: ’Pelago even at the end (Claude).
 
@@ -463,3 +436,16 @@ Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation
 - **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-19 — PIXEL-TRACE-001a: animated pixel step changes (Claude), 2026-11-19 — PIXEL-TRACE-001b: bit-crushed music with the pixel steps (Claude), 2026-11-19 — PIXEL-TRACE-001c: a transition sound effect, to be chosen (Claude), 2026-11-19 — ENC-ANALOG-001 saved; ICE-ANALOG-001 brief for Codex (Claude), 2026-11-19 — ICE-ANALOG-001: editable Godot visual study (Codex), 2026-11-19 — ICE-ANALOG-001 designer approval for default encounter integration, 2026-11-19 — ICE-ANALOG-001 built; ENC-CONCEPT-001 direction and art briefs (Claude).
 - **Update 07:40:** the designer switched the GitHub default branch to `architecture-v2`; verified via the GitHub API. Tag `prototype-baseline` still pending.
 - **Update 07:42:** the designer published tag `prototype-baseline` on `21922ad` (GitHub pre-release); verified with `git ls-remote`. ARCH-V2-002 items complete.
+
+## 2026-11-25 — ARCH-V2-002: audit corrections (Claude)
+
+ChatGPT's independent audit (designer-relayed, 07:44) found three governance defects; all confirmed and corrected:
+- **AUDIT-001:** HANDOFF session routine said "pull `main`"; now `architecture-v2`.
+- **AUDIT-002:** HANDOFF said ARCH-V2-001 superseded MAIN-001 "for migration work only"; now ARCH-V2-002, all active work. HANDOFF item 7 (builds) likewise.
+- **AUDIT-003:** Master Design DOCS-MIG-001 said "batches on main"; now `architecture-v2`, with the original wording and the 2026-11-24 authorization kept in the text.
+- **Repo-wide scan:** every reference to `main` checked by hand (186 candidate lines). Also corrected: the UI Design Bible links in HANDOFF and Master Design pointed to the frozen copy on `main` (`blob/main/...`), now relative; ARCH-V2-001's stale status note; MIGRATION_PLAN's proposed tag name annotated. Left as history: RELEASE-001/MAIN-001 records, playtest build records, log and archive, legacy-source Codex prompts ("Repo: Punkwork/REDLINE on main" in ENCOUNTER_ANALOG and the UI Bible import), the UI Bible's seven `blob/main/...` source links (DOCS-MIG-001 work), third-party `blob/main` URLs (Google Fonts, gitignore). Scripts and CI contain no branch-specific `main` (CI validates every branch; exports only on `release`).
+- **ARCH-V2-002 items operationalized:** h atomic decision-grouped commits (AGENTS/CLAUDE §1.7), i daily branch-drift check (operations README, report template), j `main` protection (AGENTS/CLAUDE §1.8; GitHub protection verified **off**, designer TO DO), g Architecture V2 precedence for UI construction (AGENTS/CLAUDE §4, §7). Master Design lists items a–j with sources.
+- **Validation:** test_game 176/0, test_adp 17/0, test_signal_carbon 672/0; 0 broken relative links; AGENTS = CLAUDE; no files from either branch tip lost except the approved duplicate image; no decision ID from either tip's Master Design, Experimentation Bible, Manifestations, UI Bible, Core Rules or HANDOFF lost; no status line changed except the annotated ARCH-V2-001 status; `godot/`, tests, tools, CI and prototypes unchanged vs `prototype-baseline` except the VAS-001 image and its README.
+- **Interpretations to confirm:** the audit mentions eight ARCH-V2-002 decisions without listing them; Master Design records ten items (a–j) found in the designer's messages and the brief.
+
+- **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-19 — ENC-CONCEPT-001: concept-3 interface in the encounter (Claude), 2026-11-19 — ENC-CONCEPT-001: ChatGPT art wired into the encounter (Claude).

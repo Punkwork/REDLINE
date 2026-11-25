@@ -11,7 +11,7 @@ Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the ma
 
 ## How we work
 
-1. **Work on `architecture-v2` (ARCH-V2-001, designer 2026-11-23; ARCH-V2-002, designer 2026-11-25: all project work, and the repository default branch).** `main` is the preserved prototype baseline. Pull the latest `architecture-v2`, record decisions in the master design doc, report commit hashes, and ask before creating another branch or merging into `main`. This supersedes MAIN-001's `main`-first policy **for migration work only**; the former branch history remains unchanged.
+1. **Work on `architecture-v2` (ARCH-V2-001, designer 2026-11-23; ARCH-V2-002, designer 2026-11-25: all project work, and the repository default branch).** `main` is the preserved prototype baseline. Pull the latest `architecture-v2`, record decisions in the master design doc, report commit hashes, and ask before creating another branch or merging into `main`. ARCH-V2-002 supersedes MAIN-001's `main`-first policy **for all active project work**; the former branch history remains unchanged.
 2. **The repo is the source of truth.** `docs/` here is authoritative. The Claude project "Panopticon" holds copies (`claude/REDLINE_*.md`) for claude.ai chats; Claude refreshes them from `architecture-v2` (ARCH-V2-002). `main` is the preserved legacy prototype.
 3. **Who does what (DEV-001, 2026-11-18; details in `CLAUDE.md` / `AGENTS.md`).**
    - **Claude Code:** the Godot build (`godot/`), tests, fixtures, CI, exports, `REDLINE_CURRENT_STATUS.md`.
@@ -21,12 +21,12 @@ Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the ma
    - **Only the designer** marks a decision APPROVED. A proposal stays PROPOSED until the designer says so in a session, and the session's log entry quotes or records that.
 4. **Every change has a decision ID** (e.g. REJECT-001) that appears in the design doc, in this file and in the development log.
 5. **Session routine.**
-   - **Start:** pull `main`; read this file, then the latest entries of `REDLINE_DEVELOPMENT_LOG.md`.
+   - **Start:** pull `architecture-v2`; read this file, then the latest entries of `REDLINE_DEVELOPMENT_LOG.md`.
    - **End:** move finished items to *Done* (with the commit), add new items, and add a dated log entry that says who wrote it (`(Codex)` or `(Claude)`).
 
 6. **Development log size (LOG-001).** Keep `REDLINE_DEVELOPMENT_LOG.md` under about **60 KB** so Claude can rewrite the project copy in one pass. When it grows past that, move the oldest dated entries, whole, to the end of `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` (oldest first, nothing reworded) and note the move in the log. Entries stay append-only; the archive is never edited except to append.
 
-7. **Builds (RELEASE-001; ARCH-V2-001 amendment 2026-11-23).** Existing prototype releases remain tied to `main`/`release` and require designer approval. Architecture work lands on `architecture-v2` and does **not** trigger a migration release, move `release`, or merge into `main`. Define a new release gate before shipping the rebuilt game.
+7. **Builds (RELEASE-001; ARCH-V2-001 amendment 2026-11-23).** Existing prototype releases remain tied to `main`/`release` and require designer approval. All work lands on `architecture-v2` (ARCH-V2-002) and does **not** trigger a migration release, move `release`, or merge into `main`. Define a new release gate before shipping the rebuilt game.
 
 **Statuses:** **TO DO** (decided, not started) · **IN PROGRESS** (name who) · **BUILT** (in code, needs a playtest or check) · **DONE** · **WAITING** (needs a designer decision).
 
@@ -46,6 +46,9 @@ Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the ma
 | Design and approve a release procedure for builds from `architecture-v2` (RELEASE-001 still covers prototype builds from `main` only) | Claude Code / designer | TO DO |
 | Seed GitHub Issues for UI work (UI-WORKFLOW-001): none existed at reconciliation | Claude / Claude Code | TO DO |
 | Update external agent configurations that still name `main` (ChatGPT, Codex, automations) | Designer / ChatGPT | TO DO; not accessible to Claude |
+| Enable GitHub protection for `main` (block pushes, force-pushes and deletion), ARCH-V2-002j | Designer | TO DO; verified unprotected 2026-11-25; agents cannot write repository settings |
+| Refresh the Claude Project copies (`claude/*.md`) from `architecture-v2`; they predate ARCH-V2-001 and still say to work on `main` | Claude | TO DO |
+| Commit-pin the UI Bible's seven `blob/main/...` source links before retiring the sources (DOCS-MIG-001) | Claude Code | TO DO; part of UI-BIBLE-001 |
 
 Existing gameplay and visual tasks below remain tracked; reassess their target branch and priority during migration planning rather than silently changing rules or treating them as completed.
 ## NUL-PILLAR-001 — foundational design follow-up (WAITING)
@@ -228,7 +231,7 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 **UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes. Component register: `docs/PANOPTICON_UI_DESIGN_BIBLE.md` §1a.
 
-**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](https://github.com/Punkwork/REDLINE/blob/main/docs/PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes. Initial consolidation: `16265fb`. Follow-up: reconcile imported historical sections and references before retiring source files; no implementation approval implied.
+**UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes. Initial consolidation: `16265fb`. Follow-up: reconcile imported historical sections and references before retiring source files; no implementation approval implied.
 
 | ID | What | Commit / date |
 |---|---|---|

@@ -4,6 +4,7 @@ Date (Toronto):
 Agent:
 Session time:
 Branch / commit:
+Branch drift (heads of architecture-v2, main, release; main = prototype-baseline?):
 Work completed:
 Surprises (IDs and evidence, or none observed):
 Missing tools (IDs, attempts, workaround, or none observed):
