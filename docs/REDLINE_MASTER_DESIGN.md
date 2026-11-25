@@ -3219,7 +3219,7 @@ ChatGPT's independent check of `main` references covered the principal governanc
 
 **Completion commit:** the commit that adds this entry (see the development log). The gate's next batch may begin when the designer chooses it.
 
-## RELEASE-002 — Playtest builds from `architecture-v2` (PROPOSED, 2026-11-25)
+## RELEASE-002 — Playtest builds from `architecture-v2` (APPROVED with (a), (b) and (c), 2026-11-25)
 
 **Designer, 2026-11-25 11:39:** approved drafting the Architecture V2 release procedure ("approved for all 4"). **The procedure below is a proposal.** RELEASE-001 stays in force until the designer approves it.
 
@@ -3242,7 +3242,9 @@ ChatGPT's independent check of `main` references covered the principal governanc
 - **(b)** Name the artifact from the version in `project.godot` instead of a hand-edited string, so step 1 can't leave a stale name. This is a CI change.
 - **(c)** Before the first Architecture V2 build: the representative ICE encounter exists (ARCH-V2-001), its component tests and screenshot fixtures are in the CI list, and its behaviour matches the `prototype-baseline` test results.
 
-**Open for the designer:** approve, change or reject the procedure and (a)–(c). RELEASE-001 governs until then.
+**Designer, 2026-11-25 13:48:** "commit the release-002. 3 add-ons: a - yes b - yes c - yes"
+
+**Status:** the procedure and (a)–(c) are **APPROVED**. RELEASE-002 replaces RELEASE-001 for every new build; RELEASE-001 stays as the record of prototype builds 4–12. (a) is the designer's to create in GitHub (ruleset on `release`: block deletion and force-pushes); (b) is built in the workflow (RELEASE-002b: the artifact name comes from `config/version`, which must end in `-playtest.N`; it produces the same name as before for Playtest 12); (c) is the entry gate for the first Architecture V2 build.
 
 ## UI-TYPO-001 — Typography and the dual visual language: physical world and virtual world (APPROVED, 2026-11-25)
 

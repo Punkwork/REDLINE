@@ -82,9 +82,17 @@ On a desktop with a working display, run the Godot command directly. Use a dispo
 
 Use `SIM=1 "$GODOT" --headless --path godot --script res://tests/test_game.gd` to add bot simulations. `SIM_ONLY` can select one Rustler. Check both exit codes and logs. Any `SCRIPT ERROR`, `Parse Error` or `Assertion failed` is a failure. Report pass/fail counts in the log.
 
-## 5. Builds (RELEASE-001)
+## 5. Builds (RELEASE-002, designer 2026-11-25; replaces RELEASE-001)
 
-**Existing release workflow is preserved for the prototype:** `main` remains the stable legacy baseline; `release` exports only when the designer authorizes a prototype playtest build using the established procedure. The `architecture-v2` migration does not automatically change the release branch or export workflow. Do not fast-forward `release` from `architecture-v2` or merge migration work into `main` without designer approval. Before a future migration release, explicitly design and approve its validation/export procedure (HANDOFF, ARCH-V2-002).
+Only when the designer asks for a playtest build:
+1. **Prepare** one commit on `architecture-v2`: bump `config/version` in `godot/project.godot` (it must end in `-playtest.N`; the workflow names the build from it, RELEASE-002b) and update the bundled playtest guide and checklists.
+2. **Check:** CI passes on that commit.
+3. **Cut:** fast-forward `release` to that commit and push. Never commit to `release` directly, and never move it backwards.
+4. **Verify the artifact:** `BUILD_COMMIT.txt` matches, `SHA256SUMS.txt` matches the `.exe`, and the guide and checklists are present. An export is not a playtest; the designer's first launch is the hands-on check.
+5. **Tag:** the designer tags `playtest-N` (agent sessions can't push tags); the agent verifies it.
+6. **Record:** HANDOFF, development log and operations report, with commit, Actions run and artifact links.
+
+A bad build is fixed forward (new commit, new cut); an earlier build is rebuilt from its tag. Moving `release` backwards needs explicit designer approval each time. **First Architecture V2 build (RELEASE-002c):** only after the representative ICE encounter exists, its component tests and screenshot fixtures are in the CI list, and its behaviour matches the `prototype-baseline` results. `main` gets no new builds while it is frozen.
 
 ## 6. Approved architecture migration (ARCH-V2-001, designer 2026-11-23)
 

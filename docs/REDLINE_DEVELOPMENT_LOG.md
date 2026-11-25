@@ -25,15 +25,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ZINE-003 confirmed (Claude); 2026-11-18 — ARCH-COPY-001: remaining working copy approved (Claude).
 
-## 2026-11-20 — CAPS rack and Ghostware rail (Claude)
-
-Designer asked for room for CAPS (3 minimum, more later) and any number of Ghostware, possibly hovering along the top with rollover text. Built `build_cap_rack()` (3 placeholder slots right of the hand; `HAND_RECT` 80 px narrower) and `build_ghost_rail()` (ORIGIN plus `game.ghostware` as round badges hanging from the pipe above the ICE, shrinking to fit; tooltips give name and effect; painted icons picked up from `assets/concept/ghostware/GW_<NAME>.png`). Added §4 to `CHATGPT_PROMPTS_ROUND3.md` (CAP slot, 12 CAP vials, 30 Ghostware badges). Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
-
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ARCH-COPY-001 correction: island names stay working copy (Claude); 2026-11-18 — No history fact-checks (Claude).
-
-## 2026-11-20 — HOVER-001 recorded (Claude)
-
-Designer: "the hover text box should always include a large/high resolution image of the card or cap or ghostware etc. alongside the text. Commit that mouse over/hover rule." Recorded HOVER-001 as APPROVED in master §6 and the register, with a note in Visual Language §2.9: every hover/focus box for a game object shows a large, high-resolution image of it beside the text (at least 2× its on-screen size, cards at least 1.5×), image first, a stand-in until painted art exists, never covering the hovered object. Implementation is a TO DO in HANDOFF. No code changes.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude).
 
@@ -445,3 +437,8 @@ Designer, 13:17–13:19: two distinct visual representations, the physical world
 - **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-20 — MOOD-PIXEL-001, program cartridges, AVATAR-001 and ChatGPT round 3 (Claude).
 - **Update 13:30 — UI-TYPO-001 images:** the designer's four reference images added to `docs/visual/references/ui-typo-001/` with a README (aggressive flyouts, refined flyouts, title announcements, event typography catalogue; 640 × 360 and 640 × 427 as received). They show the virtual world as event flyout titles over the unchanged console. Flagged: SYN, Neural damage, the full-extraction bonus and "Runner" predate current rules (style reference only). Master Design, UI Bible §2a, HANDOFF and #24 updated.
 - **Update 13:38 — UI-TYPO-001 images:** replaced with the designer's 1280 × 720 originals (catalogue 1280 × 853), same names and content.
+
+## 2026-11-25 — RELEASE-002 approved; RELEASE-002b built (Claude)
+
+Designer, 13:48: "commit the release-002. 3 add-ons: a - yes b - yes c - yes". RELEASE-002 replaces RELEASE-001 for every new build; AGENTS/CLAUDE §5 and HANDOFF "How we work" now carry the procedure. **RELEASE-002b built:** a workflow step reads `config/version` from `godot/project.godot` (must end in `-playtest.N`, or the export fails) and names the artifact from it, replacing the hand-edited name. Checked locally: the workflow YAML parses and the step produces `PANOPTICON-HALCYON-PLAYTEST-12-0.12.0-playtest.12-Windows-x86_64`, the same name as before. The export only runs on `release`, so the step itself runs at the next cut. RELEASE-002a (ruleset on `release`) is the designer's to create; RELEASE-002c is the gate for the first Architecture V2 build.
+- **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-20 — CAPS rack and Ghostware rail (Claude), 2026-11-20 — HOVER-001 recorded (Claude).

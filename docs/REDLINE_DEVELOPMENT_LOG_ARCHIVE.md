@@ -2777,3 +2777,13 @@ Designer asked for card pictures, per-corporation backgrounds, avatar families t
 Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — MOOD-PIXEL-001, program cartridges, AVATAR-001 and ChatGPT round 3 (Claude) (UI-TYPO-001, 2026-11-25).
+
+## 2026-11-20 — CAPS rack and Ghostware rail (Claude)
+
+Designer asked for room for CAPS (3 minimum, more later) and any number of Ghostware, possibly hovering along the top with rollover text. Built `build_cap_rack()` (3 placeholder slots right of the hand; `HAND_RECT` 80 px narrower) and `build_ghost_rail()` (ORIGIN plus `game.ghostware` as round badges hanging from the pipe above the ICE, shrinking to fit; tooltips give name and effect; painted icons picked up from `assets/concept/ghostware/GW_<NAME>.png`). Added §4 to `CHATGPT_PROMPTS_ROUND3.md` (CAP slot, 12 CAP vials, 30 Ghostware badges). Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
+
+## 2026-11-20 — HOVER-001 recorded (Claude)
+
+Designer: "the hover text box should always include a large/high resolution image of the card or cap or ghostware etc. alongside the text. Commit that mouse over/hover rule." Recorded HOVER-001 as APPROVED in master §6 and the register, with a note in Visual Language §2.9: every hover/focus box for a game object shows a large, high-resolution image of it beside the text (at least 2× its on-screen size, cards at least 1.5×), image first, a stand-in until painted art exists, never covering the hovered object. Implementation is a TO DO in HANDOFF. No code changes.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — CAPS rack and Ghostware rail (Claude), 2026-11-20 — HOVER-001 recorded (Claude) (RELEASE-002, 2026-11-25).

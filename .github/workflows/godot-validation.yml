@@ -98,11 +98,20 @@ jobs:
           cp docs/REDLINE_PLAYTEST_CHECKLIST.md build/windows/
           cp docs/REDLINE_CORE_LOOP_CHECKLIST.md build/windows/
           (cd build/windows && sha256sum PANOPTICON_HALCYON_slice.exe > SHA256SUMS.txt)
+      - name: Name the build from the project version (RELEASE-002b)
+        if: github.ref == 'refs/heads/release' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        shell: bash
+        run: |
+          version="$(sed -n 's/^config\/version="\(.*\)"$/\1/p' godot/project.godot)"
+          if ! [[ "$version" =~ -playtest\.([0-9]+)$ ]]; then
+            echo "config/version '$version' must end in -playtest.N" >&2; exit 1
+          fi
+          echo "ARTIFACT_NAME=PANOPTICON-HALCYON-PLAYTEST-${BASH_REMATCH[1]}-${version}-Windows-x86_64" >> "$GITHUB_ENV"
       - name: Upload Windows playtest build
         if: github.ref == 'refs/heads/release' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: actions/upload-artifact@v4
         with:
-          name: PANOPTICON-HALCYON-PLAYTEST-12-0.12.0-playtest.12-Windows-x86_64
+          name: ${{ env.ARTIFACT_NAME }}
           path: build/windows/
           if-no-files-found: error
           retention-days: 14
