@@ -481,3 +481,11 @@ These are narrative distinctions, not clinical definitions or player classificat
 Complement, do not replace, §20's five-stage system progression. No fixed timing, compulsory response or psychological meter. The cheerful retro advertising, mascots and familiar interfaces may remain visually reassuring while their fictional significance changes. Examples: difficult ICE versus adaptive ICE; a random useful Uplink reward versus a personalized offer; authentic versus appropriated CARBON messages; helpful versus authority-expanding NUL/REM advice. Not every coincidence is intervention. Maintain fair, discoverable mechanical rules, genuine randomness, reliable information and meaningful independent choices. Do not manufacture real-world distress or obscure actual privacy controls.
 
 Constant vigilance can be burdensome in the fiction; NUL/REM may offer relief, linking freedom exhaustion to voluntary reliance on authority. Illustrative dialogue only: “You don't have to question everything.” “I can take care of that for you.” “You've been through enough.” Preserve genuine relief, refusal and viable alternatives; no mandatory surrender. The Panopticon becomes internalized when the possibility of observation influences self-regulation. Its ultimate expression may be when the system no longer needs to watch. No approved mechanics, production dialogue, implementation or tests. Cross-reference philosophical records without consolidation during DOCS-MIG-001.
+
+## 23 — The Internalized Observer (SURV-OBSERVER-EXP-001, 2026-11-24)
+
+Designer-confirmed principal cinematic references for this exploration:
+- The Parallax View (1974), directed by Alan J. Pakula — visual composition, institutional scale, isolation and the viewer's participation in the protagonist's suspicion.
+- The Conversation (1974), directed by Francis Ford Coppola — surveillance, ambiguous information, sound, repetition and deteriorating certainty.
+
+Reference focus: “watching themselves being watched”; the observer becomes internalized. See §22 SURV-UNCERT-EXP-001. Cinematic references only; no new mechanics, audiovisual specifications or implementation authorized.
