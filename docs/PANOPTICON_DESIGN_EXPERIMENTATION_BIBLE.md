@@ -377,3 +377,28 @@ EXP-M016: CAPS bridge tactical combat and strategic infiltration without a secon
 | EXP-S057 | CLEAN SLATE/SPOOF with different fictional surveillance histories. | Define scope, duration and meaningful effect without exposing psychological profiling or assuming existing identity mechanics. |
 
 EXP-X011: compare combat-only, infiltration-only and mixed CAP loadouts on identical seeds; measure route choices, information usefulness, combat exposure, rewards forgone, slot pressure and recovery. Test invalid targets, cancellation, consumption timing, bootleg applicability, map visibility, progression and no-boss-skip constraints. No pricing or rarity decisions; no tests performed or implementation authorization.
+
+
+## 18 — Experimental ICE types, subroutines and passives (ICE-SURV-EXP-001, 2026-11-24)
+
+Designer endorsed exploration and requested preservation of the five economic variations. All PROPOSED; no new ICE type, numerical balance, rule or implementation authorized. EXP-M017: surveillance-dependent ICE. Distinguish TRACE from fictional corporate knowledge and voluntary disclosure. Explore new ICE classifications, adaptive existing ICE, subroutine effects, passives and inter-ICE interactions without replacing canonical classifications.
+
+| Working name | Experimental effect |
+|---|---|
+| ASSET SEIZURE | Lose CRED proportional to voluntary disclosures or relevant corporate knowledge. |
+| GARNISHMENT | Lose a percentage of current CRED scaled by corporate knowledge. |
+| ACCOUNT FREEZE | Temporarily restrict access to a portion of CRED. |
+| RISK PREMIUM | Increase transaction costs with the relevant Corporation. |
+| PERSONALIZED PENALTY | Scale financial penalty according to observed in-run economic behaviour. |
+
+Names, formulas, floors, caps, scope, duration, break legality and recovery remain open. No numerical values adopted. Explore corporation-specific versus shared knowledge, deletion/spoofing and privacy-focused counterplay. Cross-reference §13 EXP-M011 and §17 CLEAN SLATE/SPOOF. Do not equate TRACE with knowledge.
+
+## 19 — Adaptive surveillance and the right to remain unpredictable (SURV-EXP-001, 2026-11-24)
+
+EXP-M018 / EXP-D002 (designer-endorsed exploration, PROPOSED): privacy must protect something meaningful to the player, not merely a fictional exchange meter. Explore private objectives, capabilities, intentions and fragmented identity. Use only fictional local in-run events, never actual personal information or psychological classification. Distinguish observed actions from fallible interpretations; no inferred motive treated as fact. Preserve meaningful refusal, independent play, deception and recovery.
+
+Progression hypothesis, not explicit phases or mandatory outcome: generic ads and impersonal encounters → recognition of recent purchases and recurring tactics → useful personalized offers/rewards → NUL/REM anticipation → adaptive ICE → possible player self-regulation. The same fictional knowledge that enables convenience can enable control. Do not announce phase transitions. Preserve presentation/rules separation: any future approved mechanical observation system must be explicitly rules-owned, never read ad or presentation profiles.
+
+Designer specifically extended the concept beyond selecting counter-ICE: familiar ICE itself may change behaviour based on prior observed play. Candidate adaptations (not approved): resistance to repeated STR reduction; UNLOAD against Program-heavy play; CRED seizure against accumulation; changed defensive priorities against DEADLOCK rushing; alternative damage against repeated PULP prevention; additional security against bypass; alternative disruption against TRACE suppression; passives responding to repeated tactical sequences. Explore STR, subroutines, passives, activation conditions and inter-ICE interactions. No live hidden rule mutation, retroactive counter or automatic perfect prediction assumed. Precommit bounded adaptations before encounters, communicate actionable changes and allow counterplay; preserve recognizable ICE identity. Corporate memory, observation permissions, confidence, timing, persistence, false signals and adaptation budget remain open.
+
+EXP-X012 (PROPOSED, not run): compare static ICE, selected counter-ICE and adaptive familiar ICE on matched seeds. Observe recognition, fairness, meaningful privacy choices, tactical diversity, deliberate deception, recovery, viability of specialized decks and whether players experience being known rather than merely punished. Compare generic-to-personal ads and NUL/REM commentary with mechanical adaptations; preserve local-only data, no actual profiling, and no compulsory psychological response. No tests or implementation authorized. Link philosophical and dialogue work to existing canonical domain records; no consolidation or relocation during DOCS-MIG-001.
