@@ -3219,3 +3219,28 @@ ChatGPT's independent check of `main` references covered the principal governanc
 
 **Completion commit:** the commit that adds this entry (see the development log). The gate's next batch may begin when the designer chooses it.
 
+## RELEASE-002 — Playtest builds from `architecture-v2` (PROPOSED, 2026-11-25)
+
+**Designer, 2026-11-25 11:39:** approved drafting the Architecture V2 release procedure ("approved for all 4"). **The procedure below is a proposal.** RELEASE-001 stays in force until the designer approves it.
+
+**Why:** RELEASE-001 cuts builds by fast-forwarding `release` to `main`, but `main` is now frozen (ARCH-V2-002). `release` (`2845ecd`, Playtest 12) is an ancestor of `architecture-v2`, so `release` can follow `architecture-v2` by fast-forward alone, with no history rewrite and no workflow trigger change. Exports already run only on `release` (`.github/workflows/godot-validation.yml`).
+
+**Proposed procedure (each build only when the designer asks for it):**
+1. **Prepare on `architecture-v2`:** one ARCH-V2-002h-style commit that bumps `config/version` in `godot/project.godot` and the artifact name in the workflow to the new playtest number, and updates the playtest guide and checklist bundled with the build.
+2. **Check:** CI on that commit passes (import, rules, ADP, SIGNAL/CARBON and any Architecture V2 component tests and fixtures in the workflow's list).
+3. **Cut:** fast-forward `release` to that commit and push. No commits are made on `release`, and it never moves backwards.
+4. **Verify the artifact:** `BUILD_COMMIT.txt` matches the commit, `SHA256SUMS.txt` matches the `.exe`, and the guide and checklists are present. A successful export is not a Windows playtest; the designer's first launch is the hands-on check.
+5. **Tag:** the designer tags the commit `playtest-N` (agent sessions can't push tags), then the agent verifies the tag.
+6. **Record:** HANDOFF *Done* row, development log entry and operations report, with the commit, Actions run and artifact links.
+
+**Recovery:** a bad build is fixed forward: a new commit on `architecture-v2`, then a new fast-forward cut. An earlier build is rebuilt by re-running the workflow on its tag. Resetting `release` backwards (a force-push) needs explicit designer approval each time.
+
+**Prototype builds:** none are planned while `main` is frozen. `prototype-baseline` and the `playtest-4`…`playtest-12` tags stay as recovery points.
+
+**Proposed alongside (each needs its own yes):**
+- **(a)** Add `release` to a ruleset blocking deletion and force-pushes, so it can only fast-forward. The designer creates it in GitHub, as with `protect-main`.
+- **(b)** Name the artifact from the version in `project.godot` instead of a hand-edited string, so step 1 can't leave a stale name. This is a CI change.
+- **(c)** Before the first Architecture V2 build: the representative ICE encounter exists (ARCH-V2-001), its component tests and screenshot fixtures are in the CI list, and its behaviour matches the `prototype-baseline` test results.
+
+**Open for the designer:** approve, change or reject the procedure and (a)–(c). RELEASE-001 governs until then.
+
