@@ -3173,6 +3173,29 @@ Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation
 | i | Branch drift monitoring in the daily operations review | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | operations README; REPORT_TEMPLATE |
 | j | Protect `main` against unintended changes | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | AGENTS/CLAUDE §1; daily drift check. GitHub ruleset `protect-main` created by the designer 2026-11-25 (active; blocks deletion, force-push, updates and creation on `main`; no bypass), verified via the GitHub API |
 
-**Interpretation to confirm:** the 07:44 audit refers to "eight designer-approved ARCH-V2-002 decisions" without listing them. Items a–j above are every item found in the designer's messages and the brief; the designer or ChatGPT should confirm the intended list.
+**Mapping of the eight decisions (ChatGPT re-audit, 2026-11-25 07:56):** 1 canonical branch = a; 2 history-preserving merge = c; 3 preserve and freeze `main` = b and j; 4 Architecture V2 precedence = g; 5 default branch = f; 6 atomic decision-grouped commits = h; 7 daily branch-drift monitoring = i; 8 formal decision ID = ARCH-V2-002 itself. Items d (baseline tag) and e (duplicate image) are separately authorized. The a–j register stands; no renumbering.
+
+**Acceptance record (2026-11-25):**
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| Both Git histories preserved | Verified (Claude) | `21922ad` and `6cb5ed1` are ancestors of `847de9b`; no `main` commit unreachable |
+| Approved decisions and experimental statuses preserved | Verified (Claude) | No decision ID lost from Master Design, Experimentation Bible, Manifestations, UI Bible, Core Rules or HANDOFF at either tip; only status-line change is the annotated ARCH-V2-001 note |
+| Architecture V2 specifications preserved | Verified (Claude) | Only change in `docs/architecture-v2/`: one-line tag annotation in MIGRATION_PLAN |
+| No unintended source-code changes | Verified (Claude) | `godot/`, tests, tools, CI, prototypes identical to `prototype-baseline` except the VAS-001 image and its README |
+| Local work preserved | Verified (Claude) | Session clone was fresh: no uncommitted, stashed or unpushed work; the trial-merge branch stayed local and was deleted; local and remote `architecture-v2` both `847de9b` |
+| Recovery points and rollback | Verified (Claude) | Recovery points: tag `prototype-baseline` (`21922ad`), `release` `2845ecd` and `playtest-N` tags, pre-merge v2 tip `6cb5ed1`. Rollback rehearsed in a discarded worktree: `git revert` of `847de9b 3ddbad9 89533e1 771636d dcdbeca b03df7f`, then `git revert -m 1 6b1acdd`, gives a tree identical to `6cb5ed1`. Never force-push |
+| Regression tests | Verified (Claude, recorded execution) | Godot 4.3 headless: import 0; test_game 176/0 (also SIM=1 on baseline); test_adp 17/0; test_signal_carbon 672/0, on baseline, merge and `3ddbad9` |
+| Baseline tag target | Verified (Claude, API/git) | `refs/tags/prototype-baseline` → `21922ad` |
+| `main` protection | Verified (Claude, API) | Ruleset `protect-main` (28076208): active, `refs/heads/main`, deletion / non_fast_forward / creation / update, no bypass |
+| Agent instructions consistent | Verified (Claude and ChatGPT) | AUDIT-001/002/003 corrected; AGENTS = CLAUDE |
+| ChatGPT automations aligned | Reported (ChatGPT) | Daily Review and Interface Improvement updated to `architecture-v2` |
+| Screenshot fixtures, Windows export, Windows playtest | Untested | Fixtures skipped while `Game.CORE_LOOP` is true; export and playtest not run |
+| Claude Project copies aligned | Outstanding | Copies predate ARCH-V2-001 (HANDOFF TO DO) |
+| Codex configuration aligned | Outstanding | Not accessible to Claude or ChatGPT |
+
+ChatGPT's independent check of `main` references covered the principal governance documents, not an exhaustive repository-wide scan; Claude's scan was repository-wide. Tag, ruleset and test evidence come from Claude's execution and API checks.
+
+**Status:** reconciliation recommended for acceptance by ChatGPT (re-audit 2026-11-25), **awaiting designer acceptance**. Full operational closure waits on the Claude Project copy refresh and Codex alignment.
 
 **Interpretation to confirm:** the designer said "main branch for the rebuild" and "the current direction moving forward"; this is recorded as covering all project work (design, philosophy, operations and code), as in the 2026-11-25 reconciliation brief.
