@@ -49,7 +49,7 @@ Copies of design docs kept outside this repository, such as Claude Project docs 
 - **Refactor or restructure working code unless the designer asks.** Make the smallest change that does the job. If something should be refactored, propose it in HANDOFF instead.
 - **Change rules behaviour** (anything in `game.gd`, `cards.gd`, `ice.gd` that affects play) except to implement an approved rule. The rules docs (`docs/REDLINE_CORE_RULES.md` and the docs it names) are the authority.
 - **Let presentation read into rules.** Bleed, mood, wear, voice and ads are presentation only; rules code never reads them.
-- **Break the readability rules:** text contrast at least 4.5:1; no effect, wear, graffiti or decoration may cross rule text, numbers, card names, costs or buttons (ADP-R1, `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (VIS-001 accessibility, Source 1 §2.9)).
+- **Break the readability rules:** text contrast at least 4.5:1; no effect, wear, graffiti or decoration may cross rule text, numbers, card names, costs or buttons (ADP-R1, `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (VIS-001 accessibility, Source 1 §2.9)). Only exception: UI-TYPO-001 event flyouts may pass over them for at most 1–2 seconds and must not hide anything (UI-TYPO-001a).
 - **Break the copy guards:** a `reveal` line never shows before the third punch card (SIGNAL-001); the full word "Archipelago" never appears on screen, the underworld writes **’Pelago** (U+2019), and neither form appears in corporate or rules strings (ARCH-SLANG-001); "gulag" never appears on screen; no QR codes anywhere.
 - **Send data off the machine.** Play stats, ads and THE CARBON stay in `user://`.
 
