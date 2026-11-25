@@ -302,3 +302,47 @@ EXP-M013 (PROPOSED design guidance, designer-endorsed distinctions):
 - Existing 16 Protocol designs in Card Pools/Deck Synergy and seven experimental automatic Protocols EXP-C009/010/012/038–041 retain classification. No changes to existing cards or canonical rules.
 
 EXP-S043: play each revised SCRIPT at zero BW with sufficient/insufficient CRED; resolve once and discard, no installed activation. EXP-S044: redraw via REBOOT and repay; compare repeated play and potential self-financing/draw loops, normal target legality, TRACE floor, suspension expiry. Extend X007 to compare revised CRED SCRIPTS with historical installed variants; no tests performed. Rarity and balance remain open. No implementation authorization.
+
+## 16 — Encounter-wide effects and subroutine modification (ICE-EXP-002, 2026-11-24)
+
+All PROPOSED; designer requested preservation for experimentation, not adoption. Names, costs, rarity and subtype provisional except designer-specified VOLTAGE REGULATOR effect, target, duration and BURN. BROADCAST is a candidate thematic keyword/subtype, not a new rule. BLACKOUT and CHAIN REACTION collide with EXP-C025 and C015; retain separate IDs, rename before adoption, do not overwrite earlier concepts.
+
+| ID | Working name | Type | BW | Effect |
+|---|---|---|---|---|
+| EXP-C050 | BROWNOUT | SCRIPT | 2 | All ICE lose 2 STR this encounter. |
+| EXP-C051 | POWER SURGE | SCRIPT | 1 | All ICE lose 1 STR this encounter. |
+| EXP-C052 | CASCADE FAILURE | SCRIPT | 2 | All ICE with at least one broken subroutine lose 3 STR this encounter. |
+| EXP-C053 | SYSTEM SHOCK | SCRIPT | 1 | All ICE with 5 STR or more lose 2 STR this encounter. |
+| EXP-C054 | BLACKOUT | SCRIPT | 3 | All ICE lose 4 STR this encounter. BURN. |
+| EXP-C055 | CARPET BOMB | SCRIPT | 3 | Break one subroutine on each ICE. |
+| EXP-C056 | CHAIN REACTION | SCRIPT | 2 | Break one subroutine on each ICE with 2 STR or less. |
+| EXP-C057 | SYSTEM COLLAPSE | SCRIPT | 1 | Break one subroutine on each ICE with 0 STR. |
+| EXP-C058 | JAMMER | SCRIPT | 2 | Break one TRACE subroutine on each ICE. |
+| EXP-C059 | PRECISION STRIKE | SCRIPT | 2 | Break one subroutine on each ICE that already has a broken subroutine. |
+| EXP-C060 | ATTRITION | PROTOCOL | 2 | At start of each Rustler turn, all ICE lose 1 STR this encounter. |
+| EXP-C061 | INTERFERENCE | PROTOCOL | 2 | On first turn of each encounter, all ICE lose 1 STR that encounter. |
+| EXP-C062 | DOMINO EFFECT | PROTOCOL | 2 | Whenever an ICE reaches 0 STR for the first time this encounter, all other ICE lose 1 STR. |
+| EXP-C063 | SYSTEMIC DECAY | PROTOCOL | 2 | Whenever you break the last subroutine on an ICE, all remaining ICE lose 2 STR. |
+| EXP-C064 | VOLTAGE REGULATOR | SCRIPT — EXPLOIT | 1 | Reduce PULP damage of all subroutines on target ICE by 6 this turn. BURN. Suggested Uncommon. |
+| EXP-C065 | SIGNAL ATTENUATOR | TBD | TBD | Reduce all TRACE subroutines on target ICE by 3 this turn. |
+| EXP-C066 | NEURAL INSULATION | TBD | TBD | Reduce all CORTEX subroutines on target ICE by 1 this turn. |
+| EXP-C067 | SURGE SUPPRESSOR | TBD | TBD | Reduce all PULP subroutines across all ICE by 2 this turn. |
+| EXP-C068 | SABOTAGE | TBD | TBD | Reduce all numerical STR-increasing subroutines on target ICE by 2 this turn. |
+| EXP-C069 | CIRCUIT DAMPENER | TBD | TBD | Reduce all PULP subroutines on target ICE by 1 for remainder of encounter. |
+
+EXP-M014: encounter-wide effects scale with ICE count, favor deeper encounters and create early-versus-late deckbuilding tradeoffs. Explore unconditional, STR-threshold, type-specific (FORTRESS/TUMBLER/VOID), state-dependent (broken subroutines/virus counters) and cascading effects. For multi-ICE breaks Rustler chooses one legal subroutine per eligible ICE; respect existing reveal/active restrictions. No implicit bypass, suspension or change to DEADLOCK rules. ZEROED interactions follow existing first positive-to-zero and printed-finisher eligibility; test trigger order, snapshot versus sequential eligibility, recursive cascades, TUMBLE and BREACH timing. No new keyword authorized.
+
+EXP-M015: subroutine modification reduces severity rather than breaking or suspending execution. Distinguish STR reduction, break, BYPASS, suspension, numerical modification and encounter-wide scope. For VOLTAGE REGULATOR each PULP subroutine independently loses 6, floor zero; lasts through ensuing Corporation Response, then expires; remains unbroken, other subs unchanged. BURN limits reuse. Test hidden/inactive subroutines, lethal multipliers and reduction order, stacking, duration and restoration, numerical floor, and distinction between modifying damage and SHIELD prevention. Exact timing and eligibility for hidden subs remain open; do not change canonical rules.
+
+| ID | Scenario | Expected / question |
+|---|---|---|
+| EXP-S045 | BROWNOUT versus 1/2/3 ICE each STR at least 2. | Total STR reduction 2/4/6 for 2 BW; test floor. |
+| EXP-S046 | BROWNOUT then SYSTEM COLLAPSE, including ICE already zero. | Break one legal sub per zero-STR ICE; no automatic ZEROED bonus. |
+| EXP-S047 | DOMINO EFFECT reduces other ICE to zero. | Test first-zero marker, cascade ordering and termination. |
+| EXP-S048 | Multi-ICE break with hidden VOID subs, rotating TUMBLER slots, DEADLOCK and no eligible subs. | Respect existing legality; test choice order, TUMBLE and BREACH. |
+| EXP-S049 | VOLTAGE REGULATOR on PULP 8, PULP 4, TRACE 3, DEADLOCK. | PULP 2/0, TRACE 3, DEADLOCK unchanged; no breaks; BURN card. |
+| EXP-S050 | Compare targeted -6 PULP BURN, encounter-wide -2 PULP and persistent targeted -1 PULP. | Measure damage avoided, BW, card circulation and encounter length. |
+| EXP-S051 | ATTRITION, INTERFERENCE and SYSTEMIC DECAY across encounters. | Test trigger timing, STR restoration, first-turn deployment, last-sub and no-target cases. |
+| EXP-S052 | Modified subroutine under lethal form, multiple modifiers and hidden reveal. | Determine order and duration; avoid negative values or unintended permanent changes. |
+
+EXP-X009: compare encounter-wide versus single-target cards on identical seeds and varying ICE counts; track BW, total STR reduced, legal breaks, ZEROED, cascading, deck slots, early dead draws and late efficiency. EXP-X010: compare numerical modification versus break, suspension and SHIELD, tracking damage/TRACE avoided, BURN opportunity cost, counterplay, timing and repeated effects. No tests performed; no implementation authorization.
