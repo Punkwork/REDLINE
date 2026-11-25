@@ -3156,6 +3156,6 @@ Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation
 
 **Supersedes for branch choice only:** MAIN-001 (`main` as working branch) and the `main`-default wording in RELEASE-001. RELEASE-001's procedure still governs prototype builds from `main`; a release procedure for `architecture-v2` is not yet designed or approved. Everything else in ARCH-V2-001 is unchanged: the blueprint, CAS-001, scene hierarchy and VAS-001 implementation details remain PROPOSED, and no gameplay, balance or rules change is implied. Experimental records keep their status. DOCS-MIG-001 / UI-BIBLE-001 remains OPEN.
 
-**Pending (2026-11-25):** the approved tag `prototype-baseline` on `21922ad` and the default-branch switch to `architecture-v2` could not be made from the agent session (GitHub refused tag pushes and repository-settings writes through its proxy); the designer makes them in GitHub.
+**Pending (2026-11-25):** the approved tag `prototype-baseline` on `21922ad` could not be created from the agent session (GitHub refused tag pushes through its proxy); the designer creates it in GitHub. The default-branch switch to `architecture-v2` was made by the designer on 2026-11-25 and verified via the GitHub API.
 
 **Interpretation to confirm:** the designer said "main branch for the rebuild" and "the current direction moving forward"; this is recorded as covering all project work (design, philosophy, operations and code), as in the 2026-11-25 reconciliation brief.

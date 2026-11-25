@@ -11,7 +11,7 @@ This repository, Punkwork/REDLINE, is the shared source of truth for every agent
 1. **Start from the latest `architecture-v2` (ARCH-V2-001, ARCH-V2-002).** Pull before beginning work. `main` is the preserved legacy prototype; do not push new work of any kind to `main`.
 2. **Record design decisions in `docs/REDLINE_MASTER_DESIGN.md`.** Other docs and chat transcripts do not count as decisions until they are in the master document.
 3. **Report the commit.** When work is finished, tell the user the commit hash where it lives.
-4. **Branch policy (ARCH-V2-001, ARCH-V2-002):** all work lands on `architecture-v2`, which the designer approved as the repository default branch (switch pending in GitHub settings; until then, select `architecture-v2` explicitly). Ask before creating any further branches, merging into `main`, changing the default branch, or cutting a release. `main` was merged into `architecture-v2` once (ARCH-V2-002) and is otherwise left unchanged.
+4. **Branch policy (ARCH-V2-001, ARCH-V2-002):** all work lands on `architecture-v2`, which is also the repository default branch (switched by the designer 2026-11-25). Ask before creating any further branches, merging into `main`, changing the default branch, or cutting a release. `main` was merged into `architecture-v2` once (ARCH-V2-002) and is otherwise left unchanged.
 5. **Only the designer approves.** A proposal stays PROPOSED until the designer approves it in a session. Never mark anything APPROVED yourself.
 6. **Every change carries a decision ID** (e.g. ARCH-001) in the design doc, `docs/HANDOFF.md` and `docs/REDLINE_DEVELOPMENT_LOG.md`.
 
