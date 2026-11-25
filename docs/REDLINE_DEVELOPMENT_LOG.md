@@ -4,42 +4,6 @@
 
 **LOG-001 (2026-11-16):** entries from 2026-11-08 to 2026-11-14 are in `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`, unchanged. Keep this file under about 60 KB (HANDOFF, "How we work" 6).
 
-## 2026-11-19 — PIXEL-TRACE-001: TRACE pixelates the corporation's picture (Claude)
-
-**Designer:** "the more trace and the madder/meaner the corporation gets, the more 16-bit the background and ice look. Or the reverse." Claude recommended more TRACE → more pixelated. The designer asked for a mockup at four levels, then approved it: "Looks good. Commit to the build."
-
-**Built:**
-- `godot/themes/trace_pixel.gdshader` reads the screen behind it and redraws it in square cells on one screen-aligned grid. It uses fewer colour levels and a 4×4 ordered dither, and samples at LOD 0 (stepped UVs otherwise pick a blurred mip and draw dark grid lines).
-- `AtomicDecoPunk.pixel_step()` picks the step from `atomic_deco_punk.json` → `pixel`:
-  - sharp below TRACE 20;
-  - 2 px / 24 levels at 20;
-  - 3 px / 16 at 30;
-  - 4 px / 12 on a strike;
-  - 5 px / 10 at Mask off.
-- `encounter.gd` adds one full-screen layer after the backdrops, and one per mascot inserted before the mascot's first child with text. Speech bubbles, status tags and graffiti therefore draw on top, sharp. All layers share one material.
-- New fixture `shot_trace_pixel.gd`, added to CI. It captures the four levels and checks that each layer is on only when active and that no text is drawn under a pixel layer.
-
-**Validation:**
-- Rules 369/0, ADP 17/0, SIGNAL/CARBON 671/0.
-- All 15 CI screenshot fixtures clean.
-- A first local run reused one user-data folder after `shot_trace_pixel` had saved reduced motion. That made `shot_playtest3` miss its tumble animation and `shot_reel` wait forever for a spin. Both pass in a fresh folder, and in CI the new fixture runs last.
-
-**Images:** `docs/visual/fixtures/pixel-trace-001/`.
-
-**Interpretations to confirm:**
-- the step values;
-- a strike uses its own step (between TRACE 30 and Mask off);
-- mascot details drawn after a status tag stay sharp;
-- step changes are instant (no transition animation).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — Validate HALCYON and refresh fixtures (Codex).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 approved (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-001 follow-ups: HALCYON copy, art now, escape ICE later (Claude).
-
-LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-17 — FACADE-ART-001: IRONWATCH and LUCIDA art (Codex).
-
 ## 2026-11-19 — PIXEL-TRACE-001a: animated pixel step changes (Claude)
 
 **Designer:** "Commit the transitions to the next build." Asked whether that meant animating the step changes or cutting playtest-7, the designer chose "Animate the step changes".
@@ -537,3 +501,9 @@ LOG-001 moved oldest dated entry to archive unchanged: 2026-11-19 — DEV-001: v
 ## 2026-11-24 — ICE-EXP-002 — Encounter-wide effects and subroutine modification (ChatGPT)
 
 Saved 20 proposed cards EXP-C050–069, mechanics M014–015, scenarios S045–052, experiments X009–010 in Experimentation Bible §16 (27d5fb2ea234eaa8b1ebc87dada42b021fee6b17). Designer's targeted -6 PULP this turn/BURN preserved; names/costs provisional, collisions flagged. No rules/code/tests or consolidation.
+
+## 2026-11-24 — CAP-EXP-001 — Infiltration CAPS (ChatGPT)
+
+Saved twelve non-card CAP concepts EXP-CAP001–012, M016, S053–057 and X011 in Experimentation Bible §17 (98bc0b716700ad6aac90a6bc614b46496b5425c0). No CRED prices or rarities assigned; map activation and circumvention experimental. Existing CAPS rules unchanged. No code/tests or consolidation.
+
+LOG-001 moved oldest dated entry to archive unchanged: 2026-11-19 — PIXEL-TRACE-001: TRACE pixelates the corporation's picture (Claude).
