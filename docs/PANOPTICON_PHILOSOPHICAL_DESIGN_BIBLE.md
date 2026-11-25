@@ -201,3 +201,7 @@ Designer-confirmed central philosophical direction: **As the player learns the g
 ## CARBON-SURV-EXP-001 — Collective trust and individual authority
 
 Designer-endorsed philosophical exploration: keep THE CARBON (collective trust) and NUL/REM (personal autonomy) distinct. Corporate appropriation of trusted resistance spaces may erode collective trust and increase reliance on individual authority. “The system creates the conditions that make its own assistance necessary.” Full progression, examples, comparative framework and open questions preserved in [Design Experimentation Bible §21](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 02e46011863db27f2ac03ed922aa038358bc8a77. EXP-D003 / EXP-X013 remain proposed; no mandated psychological outcome, approved mechanics, code, tests or consolidation.
+
+## SURV-UNCERT-EXP-001 — The uncertainty of observation
+
+Designer-endorsed exploration: possibility of observation, fictional fear/anxiety/suspicion, ambiguity of coincidence, self-regulation and freedom exhaustion. Designer identified Francis Ford Coppola's The Conversation (1974) as reference. Preserve the “constant low hum anxiety” experiential direction as fictional atmosphere, not deliberate actual distress. Linked to SURV-MEM-001 and CARBON-SURV-EXP-001. Full tables, examples and safeguards in [Design Experimentation Bible §22](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md), commit 6b36c117b89c4f32edfef77c7241c8fb6db59a28. No approved mechanics, production dialogue, code, tests or consolidation.
