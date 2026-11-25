@@ -449,3 +449,4 @@ ChatGPT's independent audit (designer-relayed, 07:44) found three governance def
 - **Interpretations to confirm:** the audit mentions eight ARCH-V2-002 decisions without listing them; Master Design records ten items (a–j) found in the designer's messages and the brief.
 
 - **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-19 — ENC-CONCEPT-001: concept-3 interface in the encounter (Claude), 2026-11-19 — ENC-CONCEPT-001: ChatGPT art wired into the encounter (Claude).
+- **Update 07:53 (ARCH-V2-002j):** the designer created GitHub ruleset `protect-main` (active, target `refs/heads/main`, rules deletion, non_fast_forward, creation, update; no bypass). Verified: `rules/branches/main` returns all four; `architecture-v2` has none. A first save targeted `Main` (case mismatch) and was corrected.

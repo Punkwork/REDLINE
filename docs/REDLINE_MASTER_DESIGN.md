@@ -3171,7 +3171,7 @@ Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation
 | g | Architecture V2 takes precedence over legacy UI implementation conventions for future Godot UI | Designer, brief §6; restated in the 07:44 audit | AGENTS/CLAUDE §4 and §7 |
 | h | Atomic, decision-grouped commits wherever practical, not only for doc consolidation | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | AGENTS/CLAUDE §1 rule 7 |
 | i | Branch drift monitoring in the daily operations review | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | operations README; REPORT_TEMPLATE |
-| j | Protect `main` against unintended changes | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | AGENTS/CLAUDE §1; daily drift check. **GitHub branch protection is not enabled** (verified 2026-11-25: `protected: false`, no rulesets); agents cannot write repository settings, so the designer enables it |
+| j | Protect `main` against unintended changes | Designer-relayed ChatGPT audit, 2026-11-25 07:44 | AGENTS/CLAUDE §1; daily drift check. GitHub ruleset `protect-main` created by the designer 2026-11-25 (active; blocks deletion, force-push, updates and creation on `main`; no bypass), verified via the GitHub API |
 
 **Interpretation to confirm:** the 07:44 audit refers to "eight designer-approved ARCH-V2-002 decisions" without listing them. Items a–j above are every item found in the designer's messages and the brief; the designer or ChatGPT should confirm the intended list.
 

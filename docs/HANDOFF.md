@@ -46,7 +46,7 @@ Designer-confirmed next session (2026-11-25): complete UI-BIBLE-001 under the ma
 | Design and approve a release procedure for builds from `architecture-v2` (RELEASE-001 still covers prototype builds from `main` only) | Claude Code / designer | TO DO |
 | Seed GitHub Issues for UI work (UI-WORKFLOW-001): none existed at reconciliation | Claude / Claude Code | TO DO |
 | Update external agent configurations that still name `main` (ChatGPT, Codex, automations) | Designer / ChatGPT | TO DO; not accessible to Claude |
-| Enable GitHub protection for `main` (block pushes, force-pushes and deletion), ARCH-V2-002j | Designer | TO DO; verified unprotected 2026-11-25; agents cannot write repository settings |
+| Enable GitHub protection for `main` (block pushes, force-pushes and deletion), ARCH-V2-002j | Designer | **DONE** 2026-11-25: ruleset `protect-main` (id 28076208), active, target `refs/heads/main`, rules deletion / non_fast_forward / creation / update, no bypass; verified via GitHub API |
 | Refresh the Claude Project copies (`claude/*.md`) from `architecture-v2`; they predate ARCH-V2-001 and still say to work on `main` | Claude | TO DO |
 | Commit-pin the UI Bible's seven `blob/main/...` source links before retiring the sources (DOCS-MIG-001) | Claude Code | TO DO; part of UI-BIBLE-001 |
 
