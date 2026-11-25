@@ -424,3 +424,35 @@ The Panopticon is pervasive, persistent and cumulative. The relationship between
 | Anticipation | The system predicts decisions and prepares the environment accordingly. |
 
 Organic progression, not announced phases or fixed timings. EXP-M019 (PROPOSED): distinguish encounter memory (immediate tactics), Rustler memory (current run capabilities and disclosures), and operator memory (fictional gameplay patterns across runs). Within-run mechanical adaptation and cross-run recognition/personalization are candidates, not adopted rules. Avoid escalating difficulty merely for repeated play. Local-only gameplay records, accessible real-world reset, no personal data or psychological profiling; fictional persistence does not override player control. Explore THE CARBON and NUL/REM relationships without assuming new authority or data access. See §19 and Philosophical Design Bible. No implementation or tests authorized.
+
+
+## 21 — THE CARBON: appropriation of resistance (CARBON-SURV-EXP-001, 2026-11-24)
+
+EXP-D003 (designer-endorsed philosophical exploration; mechanics PROPOSED). THE CARBON begins as a trusted channel for Rustlers to exchange warnings, discoveries, rumours and tactical advice, apparently outside corporate authority. As the player voluntarily relinquishes fictional privacy, corporations gradually appropriate this channel to communicate with and influence the player. The familiar space remains; its ownership becomes uncertain. Link SURV-MEM-001 and §§18–20.
+
+| Stage | Content | Intended possible psychological effect |
+|---|---|---|
+| Independent | Genuine Rustler warnings, advice, discoveries and rumours. | Solidarity and belonging. |
+| Contaminated | Occasional suspicious messages among genuine communications. | Uncertainty. |
+| Infiltrated | Anonymous messages offering unusually relevant advice. | Convenience and misplaced trust. |
+| Compromised | Messages reference purchases, routes and previous encounters. | Exposure and unease. |
+| Appropriated | Corporations communicate directly through THE CARBON. | Violation of a trusted space. |
+| Assimilated | Corporate and Rustler communications become difficult to distinguish. | Erosion of trust and shared identity. |
+
+Preserve familiar visual identity; no dramatic rebranding or announced compromise phases. Retain genuine messages throughout: corporate propaganda disguised as resistance, selectively amplified authentic messages, personalized recommendations and fictional route-influencing misinformation are alternatives to explore. Not all messages become false. Origin alone ceases to guarantee trustworthiness. Illustrative non-shipping messages: early “Watch the second layer. Cost me two Programs getting through.” Later “You might want to keep some RAM available. You've been relying heavily on installed Programs lately.” Compromised “Your current configuration suggests you would benefit from our enhanced protection service.” Subsequent run “Welcome back. We have retained your preferences.” Dialogue examples are exploratory pointers, not additions to the canonical dialogue catalogue.
+
+### Collective privacy and distinct surveillance manifestations
+
+Privacy is collective as well as individual. THE CARBON represents a community's ability to communicate outside institutional observation. Individual disclosure may inadvertently help corporations penetrate shared resistance spaces; the player loses more than personal anonymity. Resistance itself can become another corporate interface.
+
+| System | What is gradually compromised |
+|---|---|
+| NUL/REM | Personal autonomy |
+| THE CARBON | Collective trust |
+| Adaptive ICE | Tactical unpredictability |
+| Personalized rewards | Freedom of choice |
+| Persistent surveillance | Anonymity across time |
+
+Designer explicitly emphasized keeping THE CARBON and NUL/REM philosophically distinct: two different statements about pervasive surveillance, not interchangeable delivery channels. Their interaction is central: erosion of collective trust can produce greater dependence on an individual authority. A player uncertain whether THE CARBON messages are genuine may turn to NUL/REM to interpret or authenticate them. **The system creates the conditions that make its own assistance necessary.** This is a possible emergent feedback loop, not a mandated player response or automatic grant of authority. Preserve refusal, independent verification, genuine solidarity and viable alternatives; NUL/REM is not assumed to cause the compromise.
+
+Open questions: disclosure triggers and thresholds, corporation-specific access, message provenance and verification, scope of collective consequences, persistence across runs, recovery and deception, whether and how NUL/REM offers assistance, and how to preserve useful independent communication. No single privacy meter assumed. Fictional local gameplay information only; no actual user surveillance, network interception or real player messaging assumed. EXP-X013 (PROPOSED, not run): compare independent, mixed and increasingly appropriated message streams; assess recognition, trust, usefulness, perceived agency, voluntary reliance on NUL/REM and alternative responses. No approved mechanics, shipping dialogue, implementation or tests. Cross-reference Philosophical Design Bible and existing NUL/REM dialogue records without consolidation during DOCS-MIG-001.
