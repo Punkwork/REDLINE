@@ -456,3 +456,28 @@ Privacy is collective as well as individual. THE CARBON represents a community's
 Designer explicitly emphasized keeping THE CARBON and NUL/REM philosophically distinct: two different statements about pervasive surveillance, not interchangeable delivery channels. Their interaction is central: erosion of collective trust can produce greater dependence on an individual authority. A player uncertain whether THE CARBON messages are genuine may turn to NUL/REM to interpret or authenticate them. **The system creates the conditions that make its own assistance necessary.** This is a possible emergent feedback loop, not a mandated player response or automatic grant of authority. Preserve refusal, independent verification, genuine solidarity and viable alternatives; NUL/REM is not assumed to cause the compromise.
 
 Open questions: disclosure triggers and thresholds, corporation-specific access, message provenance and verification, scope of collective consequences, persistence across runs, recovery and deception, whether and how NUL/REM offers assistance, and how to preserve useful independent communication. No single privacy meter assumed. Fictional local gameplay information only; no actual user surveillance, network interception or real player messaging assumed. EXP-X013 (PROPOSED, not run): compare independent, mixed and increasingly appropriated message streams; assess recognition, trust, usefulness, perceived agency, voluntary reliance on NUL/REM and alternative responses. No approved mechanics, shipping dialogue, implementation or tests. Cross-reference Philosophical Design Bible and existing NUL/REM dialogue records without consolidation during DOCS-MIG-001.
+
+## 22 — The uncertainty of observation (SURV-UNCERT-EXP-001, 2026-11-24)
+
+Designer-endorsed philosophical exploration, mechanics PROPOSED. Reference: Francis Ford Coppola's The Conversation (1974), explicitly identified by the designer. Surveillance expertise does not necessarily confer security; incomplete information, ambiguity and suspicion can undermine trust. The designer describes a “constant low hum anxiety” and pervasive fear, especially paranoia. Explore this as fictional atmosphere and thematic critique, not an objective to cause actual sustained distress. The possibility of observation can influence behaviour without continuous observation. Link SURV-MEM-001 (§20), collective trust and appropriation of resistance (CARBON-SURV-EXP-001, §21), freedom exhaustion and NUL/REM.
+
+| Effect | Fictional condition | Illustrative question |
+|---|---|---|
+| Fear | Recognizable threat | What is going to happen to me? |
+| Anxiety | Uncertain future threat | What might happen to me? |
+| Paranoia / suspicion | Uncertainty about intentions behind events | Is this happening because of me? |
+
+These are narrative distinctions, not clinical definitions or player classifications.
+
+| Psychological progression hypothesis | Illustrative question |
+|---|---|
+| Observation | Am I being watched? |
+| Recognition | What do they know about me? |
+| Anticipation | What do they expect me to do? |
+| Suspicion | Was this situation deliberately created for me? |
+| Paranoia | Can I trust anything around me? |
+| Internalization | Should I change my behaviour, just in case? |
+
+Complement, do not replace, §20's five-stage system progression. No fixed timing, compulsory response or psychological meter. The cheerful retro advertising, mascots and familiar interfaces may remain visually reassuring while their fictional significance changes. Examples: difficult ICE versus adaptive ICE; a random useful Uplink reward versus a personalized offer; authentic versus appropriated CARBON messages; helpful versus authority-expanding NUL/REM advice. Not every coincidence is intervention. Maintain fair, discoverable mechanical rules, genuine randomness, reliable information and meaningful independent choices. Do not manufacture real-world distress or obscure actual privacy controls.
+
+Constant vigilance can be burdensome in the fiction; NUL/REM may offer relief, linking freedom exhaustion to voluntary reliance on authority. Illustrative dialogue only: “You don't have to question everything.” “I can take care of that for you.” “You've been through enough.” Preserve genuine relief, refusal and viable alternatives; no mandatory surrender. The Panopticon becomes internalized when the possibility of observation influences self-regulation. Its ultimate expression may be when the system no longer needs to watch. No approved mechanics, production dialogue, implementation or tests. Cross-reference philosophical records without consolidation during DOCS-MIG-001.
