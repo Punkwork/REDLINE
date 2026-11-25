@@ -1,6 +1,6 @@
 # ICE-ANALOG-001 — reference images (APPROVED for integration, 2026-11-19)
 
-ICE-ANALOG-001 and ENC-ANALOG-001 are approved for the default encounters (master design doc, 2026-11-19). These files are **art-direction references**, not rules: every number, card and ICE value in them is illustrative. The rules engine is the authority. Spec: `docs/REDLINE_ENCOUNTER_ANALOG.md`.
+ICE-ANALOG-001 and ENC-ANALOG-001 are approved for the default encounters (master design doc, 2026-11-19). These files are **art-direction references**, not rules: every number, card and ICE value in them is illustrative. The rules engine is the authority. Spec: `docs/REDLINE_ENCOUNTER_ANALOG.md` (retired by UI-BIBLE-001; now [UI Design Bible, Source 2](../../../PANOPTICON_UI_DESIGN_BIBLE.md#source-2-docsredline_encounter_analogmd)).
 
 ## The three ChatGPT concept images
 

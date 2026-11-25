@@ -1,7 +1,7 @@
 # PANOPTICON — SAMIZINE: THE UNDERWORLD'S ZINE LOOK
 **Version:** 1.0 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ZINE-003
 **Status:** **APPROVED (2026-11-18).** The designer asked for "a unique new look for the zines … a mashup between zines and samizdat. Something never before seen", reviewed it in three rounds (folds and wear, fainter generations, ’Pelago) and accepted it ("Perfect. Save whatever information is necessary, including the artifacts"). No rules change.
-**Builds on:** ZINE-001 (the zine as retro-mutated technology) and ZINE-002 (the zine as the underworld's samizdat), `REDLINE_ATOMIC_DECO_PUNK.md` §2.1–2.2; ARCH-001, ARCH-NAMES-001, ARCH-SLANG-001 (`REDLINE_ARCHIPELAGO.md`); the Rustler palette in `REDLINE_VISUAL_LANGUAGE.md` §2.2; RUSTLER-LOOK-001.
+**Builds on:** ZINE-001 (the zine as retro-mutated technology) and ZINE-002 (the zine as the underworld's samizdat), `REDLINE_ATOMIC_DECO_PUNK.md` (retired by UI-BIBLE-001; now [UI Design Bible, Source 4](PANOPTICON_UI_DESIGN_BIBLE.md#source-4-docsredline_atomic_deco_punkmd)) §2.1–2.2; ARCH-001, ARCH-NAMES-001, ARCH-SLANG-001 (`REDLINE_ARCHIPELAGO.md`); the Rustler palette in `REDLINE_VISUAL_LANGUAGE.md` (retired by UI-BIBLE-001; now [UI Design Bible, Source 1](PANOPTICON_UI_DESIGN_BIBLE.md#source-1-docsredline_visual_languagemd)) §2.2; RUSTLER-LOOK-001.
 **Art:** `docs/visual/samizine/` (PNG boards, review PDF, canvas sources). Live design canvas: https://claude.ai/artifact/G84PwRDUPwMSvAYkBxmudW
 
 ---

@@ -1846,7 +1846,7 @@ func crt_chip(chip: Button) -> void:
   chip.add_theme_color_override(c, CRT_INK)
  chip.add_theme_font_override("font", console_font(2))
 
-# ---- ENC-CONCEPT-001: painted parts from ChatGPT (UI_KIT_BRIEF.md) ----
+# ---- ENC-CONCEPT-001: painted parts from ChatGPT (UI Design Bible, Source 5) ----
 
 func painted(name: String) -> Texture2D:
  return IceKey.art(name)

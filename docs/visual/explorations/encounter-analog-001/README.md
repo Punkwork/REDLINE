@@ -1,6 +1,6 @@
 # Analog encounter mockups (ENC-ANALOG-001, EXPLORATION, 2026-11-19)
 
-**Not a decision.** The designer saved this direction to return to: "I want to return to this elegant design and interface then incorporate it into the encounter screen." Nothing here is built or approved. The spec is `docs/REDLINE_ENCOUNTER_ANALOG.md`.
+**Not a decision.** The designer saved this direction to return to: "I want to return to this elegant design and interface then incorporate it into the encounter screen." Nothing here is built or approved. The spec is `docs/REDLINE_ENCOUNTER_ANALOG.md` (retired by UI-BIBLE-001; now [UI Design Bible, Source 2](../../../PANOPTICON_UI_DESIGN_BIBLE.md#source-2-docsredline_encounter_analogmd)).
 
 | File | What it shows |
 |---|---|

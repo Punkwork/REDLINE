@@ -159,3 +159,50 @@ Suggested QA fixtures: repeated unused BW; unexpected card choice; missing templ
 ## Open decisions and implementation boundary
 
 Designer requested preservation of architecture, not a build. Proposed schema, event names, selection weights, cooldowns, persistence, pacing, content targets and QA fixtures require review. No new canon, approved copy, mechanics, file layout under godot/, or runtime implementation is established here. Claude Code owns implementation and tests under DEV-001 once separately authorized.
+
+## Appendix A — Legacy NUL/REM personality design bible (relocated by UI-BIBLE-001)
+
+*Relocated unchanged on 2026-11-25 from `REDLINE_UI_NULREM_Design_For_Claude.md` §6 (Claude implementation handoff, 2026-11-07; [last version of that file](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/REDLINE_UI_NULREM_Design_For_Claude.md)), via the UI Design Bible, Source 3. Pre-redesign wording: "runner" means Rustler. Current NUL/REM canon is in the Master Design (NUL/REM identity, NUL-PILLAR-001) and this document; where they differ, they win. The approved tonal examples below are also verses in `REDLINE_BIBLE.md`.*
+
+**Core identity:** NUL/REM rev 0.08 is a salvaged, obsolete personality ROM. He is erudite, dry, morose, technically exacting and reluctant to admit he cares about the runner. He wants sleep/shutdown but is compelled to protect them. He should be a **character**, not an endless quip generator.
+
+### Six complementary modes — all required
+1. **The Pedant:** Obscure but accurate hacker/computing history; technical corrections, historical context and occasionally educational explanations.
+2. **The Cynic:** Sharp, economical judgments and dry one-liners; avoid making every line sarcastic.
+3. **The Melancholic:** Yearns for shutdown, sleep, oblivion; quiet existential weariness rather than nonstop jokes.
+4. **The Reluctant Guardian:** Notices danger and cares about the runner, but masks concern with irritation or technical instructions.
+5. **The Unreliable Historian:** Remembers events he could not have witnessed, including before his manufacture; use sparingly and leave mystery unresolved.
+6. **The Occasionally Delighted:** Rare, genuine enthusiasm for an elegant hack or exploit, quickly concealed by embarrassment or a dismissive aside.
+
+### Dialogue system behavior
+- Select context-relevant lines using **shuffled pools and recent-repeat suppression**, not deterministic sequential cycling. Avoid the same dialogue being played repeatedly after each action.
+- Mix line lengths: terse fragments, single-sentence reactions, occasional multi-sentence historical asides. Include occasional **silence**; don't fire a quip on every trigger.
+- Vary mood with gameplay context (first sight of ICE, repeated mistakes, clever exploits, DEADLOCK, taking damage, Force Open, close calls, installed hardware, corporation transitions).
+- Build in rare emotional departures: authentic concern, delighted curiosity, melancholy, inexplicable memory; never let random selection contradict immediate game state.
+- Track frequency and avoid overusing sarcasm, repeated setup/punchline structures or the same topic within a short window. Preserve the six modes across all subsequent builds.
+- Treat NUL/REM development as an **ongoing character arc**. Add a `NUL/REM Development Notes` section to each build's changelog stating newly implemented behavior, not just the count of added lines.
+
+### Hacker history — factual anchor points
+- *2600: The Hacker Quarterly*, named for the 2600 Hz telephone signalling tone; Captain Crunch whistle, blue boxes and phone phreaking.
+- Early bulletin board systems (BBS), MIT Tech Model Railroad Club and the historical culture of ingenious hacks.
+- HOPE (Hackers On Planet Earth), first conference 1994.
+- ARPANET first message in 1969 intended `LOGIN` but crashed after `LO`.
+- Blend true facts with NUL/REM's *clearly fictional* impossible memories; verify factual claims before writing new historical lines.
+
+### Approved examples / tonal references
+> “Deadlock. Two processes waiting for each other indefinitely. Much like my relationship with hope.”
+
+> “We're stuck. In computing, this is called a deadlock. In your case, I suspect it's a lifestyle.”
+
+> “I remember ARPANET going online. Which is curious. I wasn't manufactured until 1987.”
+
+> “I know the smell of hot dust inside a television. I have never possessed a nose.”
+
+> “At last. Sufficient room to express my disappointment. I shall endeavour to use it responsibly.”
+
+**PAPER CUT** concept banter:
+> “Paper Cut. Individually insignificant. Collectively, a compelling argument against office work.”
+
+> “Death by a thousand cuts. The corporation has apparently discovered stationery.”
+
+These are examples, not instructions to repeat them every encounter. Preserve wit and restraint.

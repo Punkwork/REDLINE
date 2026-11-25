@@ -90,13 +90,26 @@ ENC-CONCEPT-001 supersedes the earlier flip-clock layout; ICE-ANALOG-001 icon ke
 - [Painted UI kit 2](#source-6-docsvisualconcept-artui_kit_brief_2md)
 - [Painted UI kit 3](#source-7-docsvisualconcept-artui_kit_brief_3md)
 
-Original source paths remain available for compatibility until the full dependency audit and narrative relocation are complete.
-The following imported sections preserve source wording and decision IDs for lossless migration. Historical layouts, proposed values, prompts and implementation notes are not new approvals. Source links and asset paths remain relative to their original source locations. The old documents remain available pending dependency and narrative relocation audit; do not maintain parallel new UI specifications.
+**Source documents retired (UI-BIBLE-001, DOCS-MIG-001 gate, 2026-11-25).** The seven sources below were imported unchanged and the originals removed from the active tree. Each heading links to the last version of the original file (commit `8ef0bbe`); git history keeps every earlier version. Mentions of the old file names inside the imported text refer to these sections:
+
+| Retired path | Now | Notes |
+|---|---|---|
+| `docs/REDLINE_VISUAL_LANGUAGE.md` | Source 1 | VIS-001. §2.9 amended by ICE-ANALOG-001. |
+| `docs/REDLINE_ENCOUNTER_ANALOG.md` | Source 2 | ENC-ANALOG-001; its flip-clock HUD is superseded by ENC-CONCEPT-001 (§2 above). |
+| `docs/REDLINE_UI_NULREM_Design_For_Claude.md` | Source 3 | Pre-redesign; not current for rules (DOCS-001). Atomic Salvage look deprecated by VIS-001. §6 (NUL/REM personality) relocated to [Dialogue Architecture, Appendix A](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md#appendix-a--legacy-nulrem-personality-design-bible-relocated-by-ui-bible-001). |
+| `docs/REDLINE_ATOMIC_DECO_PUNK.md` | Source 4 | ADP-001, ZINE-001/002, SIGNAL-001 presentation. |
+| `docs/visual/concept-art/UI_KIT_BRIEF.md` | Source 5 | ENC-CONCEPT-001 painted UI kit 1 (ChatGPT prompts; history). |
+| `docs/visual/concept-art/UI_KIT_BRIEF_2.md` | Source 6 | Painted UI kit 2. |
+| `docs/visual/concept-art/UI_KIT_BRIEF_3.md` | Source 7 | Painted UI kit 3. |
+
+**Editorial reconciliation.** Where an imported section disagrees with a later decision, the later decision wins (§2, §3 and the Master Design). The known supersessions are: Source 3's damage types, terms and screens (PHYSICAL/NEURAL/SYNAPTIC damage, Integrity, VANTABLACK/AEGIS, Pygame) predate the Core Rules redesign; Source 3's look and Source 1's mood table are replaced or amended as noted above; Source 2's HUD by ENC-CONCEPT-001; the old Ghostware placement by the top rail (§2). Codex prompts and "Repo … on main" lines inside imports are historical; current working instructions are in `AGENTS.md`. No genuine design conflict was found that needs a designer decision.
+
+The following imported sections preserve source wording and decision IDs for lossless migration. Historical layouts, proposed values, prompts and implementation notes are not new approvals. Relative links inside them resolve from this file. Do not maintain parallel new UI specifications.
 
 
 ---
 
-## Source 1: [docs/REDLINE_VISUAL_LANGUAGE.md](https://github.com/Punkwork/REDLINE/blob/main/docs/REDLINE_VISUAL_LANGUAGE.md)
+## Source 1: [docs/REDLINE_VISUAL_LANGUAGE.md](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/REDLINE_VISUAL_LANGUAGE.md)
 
 # PANOPTICON — VISUAL LANGUAGE: THE FRIENDLY LIE
 **Version:** 0.1 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** VIS-001
@@ -355,7 +368,7 @@ Build in this order and log each step in `REDLINE_DEVELOPMENT_LOG.md` under **VI
 
 ---
 
-## Source 2: [docs/REDLINE_ENCOUNTER_ANALOG.md](https://github.com/Punkwork/REDLINE/blob/main/docs/REDLINE_ENCOUNTER_ANALOG.md)
+## Source 2: [docs/REDLINE_ENCOUNTER_ANALOG.md](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/REDLINE_ENCOUNTER_ANALOG.md)
 
 # PANOPTICON — ENCOUNTER SCREEN: ANALOG / FLIP-CLOCK / COCKPIT DIRECTION
 **Date:** 2026-11-19 · **Author:** Claude · **Decision IDs:** ENC-ANALOG-001 (the whole-screen direction), ICE-ANALOG-001 (the ICE readout); both **APPROVED for integration 2026-11-19**
@@ -471,7 +484,7 @@ DELIVERABLES (design review first, integration after approval)
 
 ---
 
-## Source 3: [docs/REDLINE_UI_NULREM_Design_For_Claude.md](https://github.com/Punkwork/REDLINE/blob/main/docs/REDLINE_UI_NULREM_Design_For_Claude.md)
+## Source 3: [docs/REDLINE_UI_NULREM_Design_For_Claude.md](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/REDLINE_UI_NULREM_Design_For_Claude.md)
 
 # PANOPTICON — UI, Interactions & NUL/REM Character Design
 
@@ -528,48 +541,8 @@ DELIVERABLES (design review first, integration after approval)
 - End-turn button should feel like a chunky Commodore 64-era `RETURN`/`EXECUTE TURN` key.
 
 ## 6. NUL/REM — personality design bible
-**Core identity:** NUL/REM rev 0.08 is a salvaged, obsolete personality ROM. He is erudite, dry, morose, technically exacting and reluctant to admit he cares about the runner. He wants sleep/shutdown but is compelled to protect them. He should be a **character**, not an endless quip generator.
 
-### Six complementary modes — all required
-1. **The Pedant:** Obscure but accurate hacker/computing history; technical corrections, historical context and occasionally educational explanations.
-2. **The Cynic:** Sharp, economical judgments and dry one-liners; avoid making every line sarcastic.
-3. **The Melancholic:** Yearns for shutdown, sleep, oblivion; quiet existential weariness rather than nonstop jokes.
-4. **The Reluctant Guardian:** Notices danger and cares about the runner, but masks concern with irritation or technical instructions.
-5. **The Unreliable Historian:** Remembers events he could not have witnessed, including before his manufacture; use sparingly and leave mystery unresolved.
-6. **The Occasionally Delighted:** Rare, genuine enthusiasm for an elegant hack or exploit, quickly concealed by embarrassment or a dismissive aside.
-
-### Dialogue system behavior
-- Select context-relevant lines using **shuffled pools and recent-repeat suppression**, not deterministic sequential cycling. Avoid the same dialogue being played repeatedly after each action.
-- Mix line lengths: terse fragments, single-sentence reactions, occasional multi-sentence historical asides. Include occasional **silence**; don't fire a quip on every trigger.
-- Vary mood with gameplay context (first sight of ICE, repeated mistakes, clever exploits, DEADLOCK, taking damage, Force Open, close calls, installed hardware, corporation transitions).
-- Build in rare emotional departures: authentic concern, delighted curiosity, melancholy, inexplicable memory; never let random selection contradict immediate game state.
-- Track frequency and avoid overusing sarcasm, repeated setup/punchline structures or the same topic within a short window. Preserve the six modes across all subsequent builds.
-- Treat NUL/REM development as an **ongoing character arc**. Add a `NUL/REM Development Notes` section to each build's changelog stating newly implemented behavior, not just the count of added lines.
-
-### Hacker history — factual anchor points
-- *2600: The Hacker Quarterly*, named for the 2600 Hz telephone signalling tone; Captain Crunch whistle, blue boxes and phone phreaking.
-- Early bulletin board systems (BBS), MIT Tech Model Railroad Club and the historical culture of ingenious hacks.
-- HOPE (Hackers On Planet Earth), first conference 1994.
-- ARPANET first message in 1969 intended `LOGIN` but crashed after `LO`.
-- Blend true facts with NUL/REM's *clearly fictional* impossible memories; verify factual claims before writing new historical lines.
-
-### Approved examples / tonal references
-> “Deadlock. Two processes waiting for each other indefinitely. Much like my relationship with hope.”
-
-> “We're stuck. In computing, this is called a deadlock. In your case, I suspect it's a lifestyle.”
-
-> “I remember ARPANET going online. Which is curious. I wasn't manufactured until 1987.”
-
-> “I know the smell of hot dust inside a television. I have never possessed a nose.”
-
-> “At last. Sufficient room to express my disappointment. I shall endeavour to use it responsibly.”
-
-**PAPER CUT** concept banter:
-> “Paper Cut. Individually insignificant. Collectively, a compelling argument against office work.”
-
-> “Death by a thousand cuts. The corporation has apparently discovered stationery.”
-
-These are examples, not instructions to repeat them every encounter. Preserve wit and restraint.
+*Relocated by UI-BIBLE-001 (2026-11-25), unchanged, to [NUL/REM Dialogue Architecture, Appendix A](PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md#appendix-a--legacy-nulrem-personality-design-bible-relocated-by-ui-bible-001). It is narrative and character design, not UI.*
 
 ## 7. NUL/REM terminal presentation
 - Place the NUL/REM terminal wide across the upper gameplay area below the status bar, with green phosphor lettering and a permanent blinking block cursor at the end.
@@ -611,7 +584,7 @@ These are **approved design requirements and proposed content**, not claims that
 
 ---
 
-## Source 4: [docs/REDLINE_ATOMIC_DECO_PUNK.md](https://github.com/Punkwork/REDLINE/blob/main/docs/REDLINE_ATOMIC_DECO_PUNK.md)
+## Source 4: [docs/REDLINE_ATOMIC_DECO_PUNK.md](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/REDLINE_ATOMIC_DECO_PUNK.md)
 
 # PANOPTICON — ATOMIC DECO PUNK: MAKING THE SPLIT REALITY FELT
 **Version:** 0.8 · **Date:** 2026-11-18 · **Author:** Claude · **Decision ID:** ADP-001
@@ -985,7 +958,7 @@ Same rules as Part 3: log under **SIGNAL-001** in `REDLINE_DEVELOPMENT_LOG.md`; 
 
 ---
 
-## Source 5: [docs/visual/concept-art/UI_KIT_BRIEF.md](https://github.com/Punkwork/REDLINE/blob/main/docs/visual/concept-art/UI_KIT_BRIEF.md)
+## Source 5: [docs/visual/concept-art/UI_KIT_BRIEF.md](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/visual/concept-art/UI_KIT_BRIEF.md)
 
 # ENC-CONCEPT-001 — UI kit brief for ChatGPT (painted interface parts)
 
@@ -1111,7 +1084,7 @@ Start with the parts that change the look most: `UI_ICE_CONSOLE`, the seven `UI_
 
 ---
 
-## Source 6: [docs/visual/concept-art/UI_KIT_BRIEF_2.md](https://github.com/Punkwork/REDLINE/blob/main/docs/visual/concept-art/UI_KIT_BRIEF_2.md)
+## Source 6: [docs/visual/concept-art/UI_KIT_BRIEF_2.md](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/visual/concept-art/UI_KIT_BRIEF_2.md)
 
 # ENC-CONCEPT-001 — UI kit brief 2 for ChatGPT (the rest of concept 2)
 
@@ -1186,7 +1159,7 @@ Reply "ready" and then make part 1.
 
 ---
 
-## Source 7: [docs/visual/concept-art/UI_KIT_BRIEF_3.md](https://github.com/Punkwork/REDLINE/blob/main/docs/visual/concept-art/UI_KIT_BRIEF_3.md)
+## Source 7: [docs/visual/concept-art/UI_KIT_BRIEF_3.md](https://github.com/Punkwork/REDLINE/blob/8ef0bbe15ccd7eb7cf44f3ca8aaf98c910ee41c7/docs/visual/concept-art/UI_KIT_BRIEF_3.md)
 
 # ENC-CONCEPT-001 — UI kit brief 3 for ChatGPT (layout parts for concept 2)
 

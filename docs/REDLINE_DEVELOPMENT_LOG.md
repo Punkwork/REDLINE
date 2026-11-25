@@ -17,25 +17,7 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-18 — AR
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ARCH-LINES-001: relocation lines and programme names approved (Claude); 2026-11-18 — ARCH-SLANG-001: the Rustlers say ’Pelago (Claude); 2026-11-18 — ARCH-SLANG-001 confirmed: ’Pelago even at the end (Claude).
 
-## 2026-11-19 — ENC-CONCEPT-001: UI kit brief 2 (Claude)
-
-Designer: "what other UI elements can we request ChatGPT build based on the screenshot #2… I really like how the examples fill the screen with useful UI, with appealing proportions." Reviewed concept 2 against kit 1 and wrote `docs/visual/concept-art/UI_KIT_BRIEF_2.md`: one paste-once ChatGPT prompt for 13 blank painted parts (brand plate, corp sign, alarm plate, four CRT condition pictures, lamp stack, knob, vent, slot panel, comic bubble, TUMBLER drum, hand tray, END TURN box, legend card). No code changes. Interpretation to confirm: concept 2's SUPPORT box is not a rule, so its panel will hold the punch-card count or installed Programs.
-
-## 2026-11-19 — ENC-CONCEPT-001: UI kit brief 3 (Claude)
-
-Designer: "I want to get ChatGPT generating as many UI images for this as possible to get it as correct as possible… once those sets of images are generated you can do the layout." Wrote `docs/visual/concept-art/UI_KIT_BRIEF_3.md`: 16 more blank painted parts (concept-2 console, big key sockets, TURN plate, TRACE counter, dials, strike lamps, NUL/REM slip, deck/discard wells, card back, tray buttons, toggles, pipework, screws/rivets, key glow, log ticker, vignette). The concept-2 layout pass waits for kits 2 and 3. No code changes. Interpretation to confirm: the homes for information concept 2 leaves out (dials, tray, slip).
-
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-18 — ZINE-003: SAMIZINE, the underworld's zine look (Claude).
-
-## 2026-11-20 — ENC-CONCEPT-001: concept-2 layout pass with UI kits 2 and 3 (Claude)
-
-Designer: "both batches are in the folder now. do the full layout pass and send screenshots." Imported 48 kit-2/kit-3 parts from `PANOPTICON art` into `godot/assets/concept/ui/` (the cabinet arrived as "Empty seafoam chrome cabinet-1.png" and was resized to `UI_ICE_CONSOLE_2` 960×1000; the vignette was reduced to 800×500). Rebuilt the encounter layout around concept 2 (master ENC-CONCEPT-001 has the full list): painted top bar plates and dial; CRT pictures per condition; NUL/REM paper slip; ICE cabinets with the character top-left, name/STR slots, keys scaled with the console (`IceKey.u`), hover glow and comic bubble; ticker; hand tray with wells, tray buttons and the END TURN box; KEY LEGEND card; pipework and vignette. Presentation only; every part falls back to the drawn version when its file is missing.
-
-Test updates: `shot_hand` drops on the left column instead of the old right column, checks the hand against the tray buttons and END TURN, and checks `FriendlyHand.HAND_SCALE`; `shot_adp` checks the cabinet's stage scale; `shot_ice_analog` adds the KEY LEGEND capture.
-
-Tests (Godot 4.3, headless): test_game 369 passed, 0 failed; test_adp 17 checks, 0 failures; test_signal_carbon 671 checks, 0 failures. All 16 workflow screenshot fixtures exit 0 with no SCRIPT ERROR, Parse Error or Assertion failed.
-
-Interpretations to confirm: homes for the information concept 2 leaves out; hand cards at 0.72×; parts not used yet (see HANDOFF).
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — ADP-001 Phase 2 and ADP-4a (Codex); 2026-11-18 — ADP-001 Phase 3 and ADP-4a (Codex).
 
@@ -455,3 +437,15 @@ ChatGPT's independent audit (designer-relayed, 07:44) found three governance def
 - **Update 08:30 — Project copies (DEV-001):** designer chose "pointer + core docs" (full set is about 2.1 MB, over the 2 MB Project limit). Added `claude/README.md`; refreshed HANDOFF and CORE_RULES; added AGENTS_CLAUDE and ARCHITECTURE_V2_README; deleted TODO, MINIBOSSES and ICE_EFFECTS after checking the repo covers them, and the superseded reconciliation plan. Found: the Project's CORE_LOOP v0.2 spec contains text not in any repo version (ICE notes, bot-sim targets, playtest sheet, build prompt); kept, designer to decide. 21 older snapshots still to check before removal.
 - **Update 08:35 — Project copies done (DEV-001):** designer: "I don't think it's necessary to check those project copies. Just archive them. We have a whole new direction going forward." Then chose deletion (git history is the archive) and saving the Core Loop v0.2 spec to the repo. Added `docs/history/REDLINE_CORE_LOOP_v0.2_PROJECT_SPEC.md` (Project text unchanged under a history note); replaced the Project's CORE_LOOP with the repo version; deleted the 21 older Project copies. The Project now holds the README pointer and five current copies.
 - **Update 11:40 — Codex aligned (ARCH-V2-002):** Codex couldn't see the repo: its GitHub authorization had disappeared from GitHub's Authorized OAuth Apps (cause unknown; possibly the GitHub re-authorization this morning). The designer reconnected GitHub through Codex's plugins, created a REDLINE environment and ran a read-only check: `b1f14e6` from `architecture-v2` (Codex's local branch is named `work`, as usual for its cloud checkouts), AGENTS.md rules confirmed, `main` = `prototype-baseline` = `21922ad`, no Codex instruction or automation points work at `main`. External agent alignment is complete.
+
+## 2026-11-25 — UI-BIBLE-001 complete: documentation migration gate passed (Claude)
+
+Designer, 11:39: "approved for all 4. Continue." First batch: UI-BIBLE-001 under DOCS-MIG-001.
+- **Retired** the seven UI Bible sources (VISUAL_LANGUAGE, ENCOUNTER_ANALOG, UI_NULREM_Design_For_Claude, ATOMIC_DECO_PUNK, UI_KIT_BRIEF 1–3) after confirming each import matched its original line for line; 0 of 1,124 lines missing afterwards. Bible source headings now link to `8ef0bbe` (last commit with the originals) instead of `blob/main`.
+- **Relocated** Source 3 §6 (NUL/REM personality design bible) unchanged to Dialogue Architecture Appendix A.
+- **Reconciled:** Bible §4 maps retired paths to sections and lists known supersessions; no new design conflict found.
+- **Repaired** active references in Archipelago, SAMIZINE, ADP Phase 2 copy, Corporate Facades, Master Design, two exploration READMEs, the painted-UI asset README and an `encounter.gd` comment; repointed 12 log anchors moved earlier by LOG-001 to the archive. History records left as written.
+- **Validation:** 142 relative links, 0 broken files or anchors; Godot 4.3 import 0, test_game 176/0, test_adp 17/0, test_signal_carbon 672/0.
+- AGENTS/CLAUDE §7 and §9, HANDOFF and Master Design record the gate as passed. No batch open.
+
+- **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-19 — ENC-CONCEPT-001: UI kit brief 2 (Claude), 2026-11-19 — ENC-CONCEPT-001: UI kit brief 3 (Claude), 2026-11-20 — ENC-CONCEPT-001: concept-2 layout pass with UI kits 2 and 3 (Claude).

@@ -106,7 +106,7 @@ When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register)
 **UI construction vs UI design:** how the UI is built follows ARCH-V2-001 and `docs/architecture-v2/` (§4, §6); what it looks like and says follows Master Design and the UI Design Bible.
 
 **Current**
-- UI working specification: `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (UI-BIBLE-001). Master Design decisions prevail; imported historical material is not a new approval. Extend the Bible instead of creating parallel UI briefs; legacy source paths remain during migration.
+- UI working specification: `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (UI-BIBLE-001). Master Design decisions prevail; imported historical material is not a new approval. Extend the Bible instead of creating parallel UI briefs. Its seven legacy sources were retired by UI-BIBLE-001 (2026-11-25); the Bible's §4 maps each old path to its section.
 - What's next: `docs/HANDOFF.md`. What the build does now: `docs/ARCHITECTURE.md` ("Slice boundaries") and `docs/REDLINE_CURRENT_STATUS.md`. The HALCYON slice is only four map rows, so the code is not a full picture of the design.
 - Rules: `docs/REDLINE_CORE_RULES.md` (the map and Node types are §10).
 - Topic docs: `REDLINE_RUSTLERS.md`, `REDLINE_CARD_POOLS.md`, `REDLINE_ICE_CORP1.md`–`3.md`, `REDLINE_ICE_RULES_BIBLE.md`, `REDLINE_ICE_PASSIVES.md`, `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_UPGRADES_EVENTS_ESCAPE.md`, `REDLINE_ENGINES.md`, `REDLINE_DECK_SYNERGY.md`, `REDLINE_PACING.md`, `REDLINE_PLAYTEST_CHECKLIST.md`.
@@ -115,7 +115,7 @@ When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register)
 **Not current for rules (history or lore only)**
 - `REDLINE_BIBLE.md`, `PANOPTICON_CORE_DESIGN_AND_WORLDBUILDING.md`: world, dialogue and the pre-redesign design. Use for lore, never for rules, Node types or numbers.
 - `REDLINE_RULE_REVIEW_126.md`, `HALCYON_PLAYTEST3_IMPLEMENTATION.md`, `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md`: history.
-- Legacy UI/NUL/REM brief: see `PANOPTICON_UI_DESIGN_BIBLE.md`, Sources 1 and 3; narrative material remains pending relocation.
+- Legacy UI/NUL/REM brief: `PANOPTICON_UI_DESIGN_BIBLE.md`, Source 3 (history); its NUL/REM personality section is now Appendix A of `PANOPTICON_NULREM_DIALOGUE_ARCHITECTURE.md`.
 - `godot/CODEX_HANDOFF.md`, `prototypes/python/`: superseded or reference only.
 
 Implement what the current docs say; where they're unclear, make the smallest reasonable choice and list it under Interpretations to confirm.
@@ -141,4 +141,4 @@ Before declaring a batch complete:
 
 Claude Code should perform full-checkout dependency scans and validation; ChatGPT/Claude reconcile editorial content and design intent. Use the same repository records, not parallel backlogs. Escalate only genuine design conflicts or blockers to the designer. No new branch or rules changes authorized.
 
-**Current blocking batch: UI-BIBLE-001.** Resume on 2026-11-25. Finish editorial reconciliation, narrative relocation, repository-wide dependency repair and validation, and legacy source retirement before starting any other documentation consolidation. Reference repair commit: 2f1727f698b4e5c084c5e3f12c280b68475565fa. Seven imported sources remain in the active tree; full validation has not passed. The existing daily review must carry this blocker into the next agenda until resolved.
+**UI-BIBLE-001 batch: COMPLETE (2026-11-25).** Gate passed with the evidence recorded in Master Design (UI-BIBLE-001 completion). Seven sources retired, NUL/REM narrative relocated, references repaired and validated. No consolidation batch is open; the next one may begin when the designer chooses it.

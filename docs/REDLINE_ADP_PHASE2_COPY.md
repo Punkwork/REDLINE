@@ -1,7 +1,7 @@
 # PANOPTICON — ATOMIC DECO PUNK, PHASE 2 COPY PACK
 **Version:** 1.0 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** ADP-001 (Phase 2: ADP-2a, 2b, 2c)
 **Status:** **APPROVED IN FULL (2026-11-17).** Designer: "1,2 & 3 are approved in full." That covers all the copy as written (including the [hint] lines), the graffiti faces in §4, and the two references in §5 Q3. Copy stays tunable in playtesting like other working values; mark every line `approved` in data.
-**Spec:** `REDLINE_ATOMIC_DECO_PUNK.md` §4 (tone and language), §6.2 (hesitation), Part 3 Phase 2. **Voice sources:** NUL/REM in `REDLINE_MASTER_DESIGN.md` §7 and `REDLINE_BIBLE.md` §5; corporate voices in `REDLINE_CORPORATE_FACADES.md` (FACADE-001, §2a for HALCYON); slice ICE mood lines in VIS-001 and the 2026-11-17 development log.
+**Spec:** `REDLINE_ATOMIC_DECO_PUNK.md` (retired by UI-BIBLE-001; now [UI Design Bible, Source 4](PANOPTICON_UI_DESIGN_BIBLE.md#source-4-docsredline_atomic_deco_punkmd)) §4 (tone and language), §6.2 (hesitation), Part 3 Phase 2. **Voice sources:** NUL/REM in `REDLINE_MASTER_DESIGN.md` §7 and `REDLINE_BIBLE.md` §5; corporate voices in `REDLINE_CORPORATE_FACADES.md` (FACADE-001, §2a for HALCYON); slice ICE mood lines in VIS-001 and the 2026-11-17 development log.
 
 ---
 

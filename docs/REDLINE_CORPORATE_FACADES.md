@@ -1,7 +1,7 @@
 # PANOPTICON — CORPORATE FACADES: RAYGUN GOTHIC FOR EACH CORPORATION
 **Version:** 0.1 · **Date:** 2026-11-17 · **Author:** Claude · **Decision ID:** FACADE-001
 **Status:** **APPROVED 2026-11-17** by the designer ("Correct. Approved."); recorded as FACADE-001 in `REDLINE_MASTER_DESIGN.md`. Copy and numbers are working values. §6 questions 4–6 answered the same day; HALCYON's new interface copy (§2a) is PROPOSED.
-**Builds on:** the Raygun Gothic direction and VISUAL-DECISIONS-2026-11-17 / VISUAL-APPROVALS-002 / RUSTLER-LOOK-001 in `REDLINE_MASTER_DESIGN.md`; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md`); the HALCYON Chrome Deco encounter (CHROME-001). ICE rosters: `REDLINE_ICE_CORP1.md` to `CORP3.md`.
+**Builds on:** the Raygun Gothic direction and VISUAL-DECISIONS-2026-11-17 / VISUAL-APPROVALS-002 / RUSTLER-LOOK-001 in `REDLINE_MASTER_DESIGN.md`; The Friendly Lie (`REDLINE_VISUAL_LANGUAGE.md` (retired by UI-BIBLE-001; now [UI Design Bible, Source 1](PANOPTICON_UI_DESIGN_BIBLE.md#source-1-docsredline_visual_languagemd))); the HALCYON Chrome Deco encounter (CHROME-001). ICE rosters: `REDLINE_ICE_CORP1.md` to `CORP3.md`.
 
 **Goal:** give IRONWATCH and LUCIDA the same treatment HALCYON got in CHROME-001, so that each corporation is a polished Raygun Gothic facade that sells a **different degree of surveillance** as a customer benefit, and the player can feel the difference in routine interactions, not only in the fights.
 
