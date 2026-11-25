@@ -449,3 +449,8 @@ Designer, 11:39: "approved for all 4. Continue." First batch: UI-BIBLE-001 under
 - AGENTS/CLAUDE §7 and §9, HANDOFF and Master Design record the gate as passed. No batch open.
 
 - **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-19 — ENC-CONCEPT-001: UI kit brief 2 (Claude), 2026-11-19 — ENC-CONCEPT-001: UI kit brief 3 (Claude), 2026-11-20 — ENC-CONCEPT-001: concept-2 layout pass with UI kits 2 and 3 (Claude).
+
+## 2026-11-25 — UI-WORKFLOW-001: GitHub Issues seeded for UI work (Claude)
+
+Designer approved at 11:39. No UI issues existed. Created label `ui` and seven status labels matching the Bible's workflow (`status: proposed`, `design exploration`, `designer review`, `approved`, `in development`, `validation`, `complete`). Seeded 11 issues from HANDOFF and the UI Design Bible, each with component IDs, decision IDs, source, approval evidence and acceptance criteria: #13 HuCard cards (CARD-HUCARD-001), #14 Playtest 9 UI list, #15 discard view, #16 PROBE-003 drag cost, #17 CACHE-001 icon, #18 PLAY-002 polish, #19 Ghostware rail size/overflow, #20 resource indicator glyphs, #21 VAS-001 vertical slice, #22 ENC-CONCEPT-001 review, #23 legacy cartridge fixtures. Statuses copied from HANDOFF; none newly approved. HANDOFF rows now link their issue instead of repeating the backlog. *Interpretation to confirm:* the Playtest 9 list is one issue with a checklist rather than ten issues.
+
