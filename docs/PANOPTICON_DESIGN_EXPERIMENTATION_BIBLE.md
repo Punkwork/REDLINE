@@ -402,3 +402,25 @@ Progression hypothesis, not explicit phases or mandatory outcome: generic ads an
 Designer specifically extended the concept beyond selecting counter-ICE: familiar ICE itself may change behaviour based on prior observed play. Candidate adaptations (not approved): resistance to repeated STR reduction; UNLOAD against Program-heavy play; CRED seizure against accumulation; changed defensive priorities against DEADLOCK rushing; alternative damage against repeated PULP prevention; additional security against bypass; alternative disruption against TRACE suppression; passives responding to repeated tactical sequences. Explore STR, subroutines, passives, activation conditions and inter-ICE interactions. No live hidden rule mutation, retroactive counter or automatic perfect prediction assumed. Precommit bounded adaptations before encounters, communicate actionable changes and allow counterplay; preserve recognizable ICE identity. Corporate memory, observation permissions, confidence, timing, persistence, false signals and adaptation budget remain open.
 
 EXP-X012 (PROPOSED, not run): compare static ICE, selected counter-ICE and adaptive familiar ICE on matched seeds. Observe recognition, fairness, meaningful privacy choices, tactical diversity, deliberate deception, recovery, viability of specialized decks and whether players experience being known rather than merely punished. Compare generic-to-personal ads and NUL/REM commentary with mechanical adaptations; preserve local-only data, no actual profiling, and no compulsory psychological response. No tests or implementation authorized. Link philosophical and dialogue work to existing canonical domain records; no consolidation or relocation during DOCS-MIG-001.
+
+## 20 — Surveillance and memory: the system always remembers (SURV-MEM-001, 2026-11-24)
+
+Designer-confirmed central philosophical direction:
+
+> As the player learns the game, the game learns the player.
+>
+> The system always remembers. It never forgets.
+
+The Panopticon is pervasive, persistent and cumulative. The relationship between the player and the system extends beyond a single Rustler or run. This is a thematic commitment, not authorization for actual personal surveillance, irreversible data retention or a new gameplay rule.
+
+### The system learns the Rustler
+
+| Stage | Manifestation |
+|---|---|
+| Observation | Generic advertisements, impersonal encounters and observation of tactical decisions. |
+| Recognition | Personalized advertisements and commentary on recurring behaviours. |
+| Accommodation | Helpful recommendations, tailored rewards and economic incentives. |
+| Adaptation | ICE modifies its behaviour in response to previously observed tactics. |
+| Anticipation | The system predicts decisions and prepares the environment accordingly. |
+
+Organic progression, not announced phases or fixed timings. EXP-M019 (PROPOSED): distinguish encounter memory (immediate tactics), Rustler memory (current run capabilities and disclosures), and operator memory (fictional gameplay patterns across runs). Within-run mechanical adaptation and cross-run recognition/personalization are candidates, not adopted rules. Avoid escalating difficulty merely for repeated play. Local-only gameplay records, accessible real-world reset, no personal data or psychological profiling; fictional persistence does not override player control. Explore THE CARBON and NUL/REM relationships without assuming new authority or data access. See §19 and Philosophical Design Bible. No implementation or tests authorized.
