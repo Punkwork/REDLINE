@@ -3115,3 +3115,7 @@ Saved exploratory VOID-only UNLOAD, Rustler-selected Program removal to discard,
 ## CRED-EXP-001d — CRED SCRIPTS and card-type identity (ChatGPT)
 
 Designer confirmed EXP-C045–049 as 0 BW SCRIPTS with existing CRED prices/effects, one resolution per play, normal discard/redraw, prior activation caps removed in preferred experiment. EXP-M013/S043–044, X007 extension in Experimentation Bible §15 (8d75932dad452669d6aefc0864bda40092e118df). Existing Protocols unchanged; experimental guidance only, no rules/code/tests or consolidation.
+
+## ICE-EXP-002 — Encounter-wide effects and subroutine modification (ChatGPT)
+
+Saved 20 proposed cards EXP-C050–069, mechanics M014–015, scenarios S045–052, experiments X009–010 in Experimentation Bible §16 (27d5fb2ea234eaa8b1ebc87dada42b021fee6b17). Designer's targeted -6 PULP this turn/BURN preserved; names/costs provisional, collisions flagged. No rules/code/tests or consolidation.
