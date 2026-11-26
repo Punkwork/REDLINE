@@ -123,7 +123,15 @@ Reference coordinates are approximate (x, y, w, h in the 1536 × 864 reference).
 
 ### 3f. Cards (Batch 2; listed so the family is planned together; prompts follow with Batch 2)
 
-`V2_CARD_FRAME_<TYPE>.png` (360 × 500; top art window, cream rules field, coloured frame per type: EXPLOIT red, DEFENSE amber, CLOAK violet, ICEPICK green, as in the reference), `V2_CARD_COST.png` (128 × 128 white cost medallion with a black ring, blank), `V2_CARD_BACK.png`, and card illustrations for the playable hand.
+**Card body: CARD-HUCARD-001 (designer, 2026-11-22; reference photo `docs/visual/references/hucard_reference.png`) governs the shape; the VAS-001 mockup governs colour and finish.** Every hand card is a PC Engine HuCard-shaped card: portrait, credit-card proportions (about 54 × 85, **1 : 1.58**), rounded corners, a thin visible edge on the side and bottom in a slightly darker white (as thick as 3–4 stacked credit cards, **not** a chunky cartridge), **gold contacts along the bottom edge**, and a picture area slightly smaller than today's. Ignore the HuCard's black label area. No HuCard, NEC or game branding: shape and finish only. Cards are taller on screen than the prototype's. From the mockup: per-type colour framing around the art window (EXPLOIT red, DEFENSE amber, CLOAK violet, ICEPICK green), a cream rules field, the white cost medallion top-left. Card text follows the card rules already approved; icon-first (§2a) applies to how values are shown.
+
+| File | Size | Notes |
+|---|---|---|
+| `V2_CARD_BODY.png` | 540 × 854 (1 : 1.58) | Blank HuCard-shaped body: off-white card face, rounded corners, darker-white edge visible on the right side and bottom, row of **gold contacts along the bottom edge**. No art, no frame colour, no text. |
+| `V2_CARD_FRAME_<TYPE>.png` | 540 × 854 | Transparent overlay per type (EXPLOIT, DEFENSE, CLOAK, ICEPICK, …): the coloured frame around a slightly smaller art window, and the cream rules field, aligned to `V2_CARD_BODY`. |
+| `V2_CARD_COST.png` | 128 × 128 | White cost medallion with a black ring, blank. |
+| `V2_CARD_BACK.png` | 540 × 854 | HuCard-shaped back, no branding. |
+| Card illustrations | per card | For the playable hand. |
 
 ## 4. Built in the engine (Track B, Claude Code)
 
