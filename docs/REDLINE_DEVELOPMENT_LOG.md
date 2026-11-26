@@ -29,19 +29,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude).
 
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude).
-
-## 2026-11-20 — IRONWATCH avatar prework (Claude)
-
-Designer asked for prework on the IRONWATCH prompts and the corporation's history and guides. Gathered ICE_CORP2, FACADE-001 (including its per-ICE appliance table), ADP copy, the Archipelago programme, NUL/REM intros, AVATAR-001 and the existing (pre-concept, photoreal) IRONWATCH shells into `docs/visual/concept-art/IRONWATCH_AVATAR_PREWORK.md`, with a 23-ICE roster, draft concepts (the four escape ICE are new), three creature languages and four questions. No decisions made.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-001: expand the SIGNAL UNCLEAR events, after Playtest 6 (Claude).
-
-## 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude)
-
-Designer answered the IRONWATCH prework: heavy civic machinery crossed with faceless authority, robot dogs and saucer drones, hidden hatches that open on gas hoses, tiny guns, lasers and especially syringes as the mood worsens; uniforms yes, faces no; FACADE-001 appliances as the base; mockups first. Recorded under AVATAR-001 and wrote `CHATGPT_PROMPTS_ROUND7_IRONWATCH.md` (3 mockups, then 67 images in three prompts, the four escape ICE newly designed). No code changes.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — UPL-006a: DATA PURGE costs +7 TRACE (Claude).
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude); 2026-11-20 — IRONWATCH avatar prework (Claude); 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude).
 
 ## 2026-11-20 — IRONWATCH mockups reviewed (Claude)
 
@@ -430,3 +418,8 @@ Designer confirmed representative encounter as Priority 1, approved six-stage se
 ## 2026-11-26 — ARCH-V2-001 / CAS-001 / VAS-001: representative encounter runtime inventory (Claude Code)
 
 Authorized inventory only; no production code changed. Godot 4.3-stable `77dcf97d8`, Linux, GL Compatibility on Mesa llvmpipe. At `fc2923b`: import exit 0; `test_game.gd` 176 passed / 0 failed (also `SIM=1`); `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; no SCRIPT ERROR, Parse Error or Assertion failed. Matches `prototype-baseline`. Live N2A run under Xvfb (seed 711): response resolved once per step, CAPTCHA rotated, DISCARD choice opened; captures in `docs/visual/fixtures/arch-v2-inv-001/`. VAS-001 reference SHA-256 `513af903…df25e` recorded. Findings: two break dispatch paths (click via `main._on_break`, drag direct to `Game.break_sub`); `response_preview()` carries hidden effects; CI skips every screenshot fixture under CORE_LOOP. C01–C18 classification, proposed N2A encounter, Batch 1 file list and ownership, and designer decisions D1–D3 in [the report](operations/reports/2026-11-26-Claude-Code.md); [#21](https://github.com/Punkwork/REDLINE/issues/21), [#24](https://github.com/Punkwork/REDLINE/issues/24). Stopped for designer approval.
+
+## 2026-11-26 — ARCH-V2-003: Batch 1 ICE encounter components built (Claude Code)
+
+Designer approved Batch 1 in principle with UI alignment requirements (recorded in Master Design ARCH-V2-003, `0ae151b`). Built on `architecture-v2` (`1e07d20`, `8017aad`): EncounterController (C02), VisibleStateAdapter (C04), VasTokens + replaceable IcePanelLayout (C18), IceLane (C07), four-zone IcePanel (C08), SubroutineKey reusing Build 12's IceKey (C09), KeyInspector, provisional shared ResponseRail, EventFlyout (RUSTLER TURN / CORP COUNTERMEASURE) and a playable N2A sandbox (`scenes/architecture_v2/IceEncounterSandbox.tscn`). No rules, `Main.tscn`, legacy UI or project-setting changes. Tests (Godot 4.3, Linux): import 0; `test_game.gd` 176/0 (also SIM=1); `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; new `test_arch_v2_ice.gd` 124/0 (click/Enter/drop parity with direct Game across two responses, one Game call per intent, stale refs, hidden-info stripping, reconcile identity, flyout ≤ 1.5 s). `shot_arch_v2_ice.gd`: 19 captures incl. 1366×768, 1920×1080, 2560×1080 and a VAS-001 side-by-side; selection in `docs/visual/fixtures/arch-v2-batch1/`. Found and worked around a Godot 4.3 crash when a coroutine method returns without awaiting, and a teardown crash from focus signals during free. [#21](https://github.com/Punkwork/REDLINE/issues/21), [#24](https://github.com/Punkwork/REDLINE/issues/24).
+

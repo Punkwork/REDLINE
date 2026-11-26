@@ -103,3 +103,19 @@ Classification: **Reuse** as is · **Adapt** wrap or move existing code · **Com
 - **D3 · Reference canvas.** Author at 1536×864 inside a scaled container in the existing 1600×1000 project, with no project-setting change. Confirm, or approve a resolution change separately.
 
 **Interpretations to confirm (I'll proceed on these unless told otherwise):** flyout copy "RUSTLER TURN" (game term; the mockup's "RUNNER TURN" predates it) and "CORPORATION RESPONSE"; the sandbox scene is a dev harness reachable only from tests and the editor.
+
+---
+
+## Session 2: ARCH-V2-003 Batch 1 built (Claude Code)
+
+Date (Toronto): 2026-11-26 07:47 onward
+Branch / commit: `architecture-v2`; `0ae151b` (decision record), `1e07d20` (components), `8017aad` (tests, CI), plus the evidence/records commit carrying this entry.
+Branch drift: `main` = `prototype-baseline` = `21922ad`; `release` = `2845ecd`; no upstream commits arrived during the session.
+Work completed: Designer approved Batch 1 in principle with UI alignment requirements (Master Design ARCH-V2-003). Built C02, C04, C07, C08, C09, C18, KeyInspector, the provisional shared NEXT RESPONSE rail, the reusable EventFlyout and a playable N2A sandbox (`godot/scenes/architecture_v2/IceEncounterSandbox.tscn`; open in the editor with F6). Main.tscn, the rules engine, the legacy encounter and project settings are untouched.
+Test evidence: import 0; `test_game.gd` 176/0 (SIM=1 176/0); `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` **124/0**; `shot_arch_v2_ice.gd` 19 captures, 0 script errors. Selected captures: [`docs/visual/fixtures/arch-v2-batch1/`](../../visual/fixtures/arch-v2-batch1/README.md).
+Surprises: (1) Godot 4.3 segfaults when a method containing `await` returns without awaiting in some call paths (`IcePanel.set_model`); the await was removed. (2) Freeing a panel together with its inspector crashed through focus-exit signals during teardown; guarded. (3) Under software GL the real-time flyout finished before the first capture; fixtures now use `EventFlyout.hold_at()`.
+Missing tools: none. CI's new screenshot step installs Xvfb if the runner lacks it; the first CI run on these commits is the check.
+Blockers / unverified: Windows runtime; real-GPU rendering; CI run result pending at commit time. Cards, choice overlay, HUD and response interruption (C03) are Batches 2–3; the sandbox's hand/rig/choice widgets are labelled DEV stand-ins.
+Decisions genuinely needing the designer: none blocking. Interpretations to confirm are in HANDOFF (hover wording for type/STR, amber firing ring, dimmed fired rail steps, vertical centring at three ICE).
+Coordination (ARCH-V2-003 i): geometry and icons are provisional in `godot/themes/architecture_v2/ice_panel_layout.tres` (zones, sizes, `type_icons`, `str_icon`, `console_texture`, `portrait_frame_texture`) and `VasTokens` (palette, flyout colours/timing). Codex art lands by assigning textures there, with no code change; ChatGPT/Codex reference updates should be posted on [#21](https://github.com/Punkwork/REDLINE/issues/21) before geometry is locked.
+Recommended priorities: designer review of the captures against VAS-001; Codex visual fixture work against these components; then Batch 2 (C10–C12 hand/cards/rig, C15 choice overlay).

@@ -2823,3 +2823,15 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 Designer: creepy, nightmare LUCIDA avatars with no human features, some with mechanical tentacles, jellyfish-like or giant slugs, all very mechanical; build mockups. Rewrote `CHATGPT_PROMPTS_ROUND6_LUCIDA.md`: a shared style block with the nightmare rules (no gore, a face built from machine parts, the job still readable, uncanny even when cheery), a new prompt 0 for three mockups (lineup of all 21, ANIMA's three moods, an encounter-screen mockup), and all 21 creatures redesigned. Amendment recorded under AVATAR-001. No code changes.
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — NAME-002 proposed: VITAE → SPARK, parked for review (Claude).
+
+## 2026-11-20 — IRONWATCH avatar prework (Claude)
+
+Designer asked for prework on the IRONWATCH prompts and the corporation's history and guides. Gathered ICE_CORP2, FACADE-001 (including its per-ICE appliance table), ADP copy, the Archipelago programme, NUL/REM intros, AVATAR-001 and the existing (pre-concept, photoreal) IRONWATCH shells into `docs/visual/concept-art/IRONWATCH_AVATAR_PREWORK.md`, with a 23-ICE roster, draft concepts (the four escape ICE are new), three creature languages and four questions. No decisions made.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-001: expand the SIGNAL UNCLEAR events, after Playtest 6 (Claude).
+
+## 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude)
+
+Designer answered the IRONWATCH prework: heavy civic machinery crossed with faceless authority, robot dogs and saucer drones, hidden hatches that open on gas hoses, tiny guns, lasers and especially syringes as the mood worsens; uniforms yes, faces no; FACADE-001 appliances as the base; mockups first. Recorded under AVATAR-001 and wrote `CHATGPT_PROMPTS_ROUND7_IRONWATCH.md` (3 mockups, then 67 images in three prompts, the four escape ICE newly designed). No code changes.
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — UPL-006a: DATA PURGE costs +7 TRACE (Claude).
