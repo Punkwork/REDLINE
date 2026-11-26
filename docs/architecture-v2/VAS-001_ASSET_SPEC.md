@@ -33,6 +33,25 @@ Claude Code wires every delivered PNG through `ice_panel_layout.tres` and the V2
 
 **Generators rarely hit exact pixel sizes.** Ask for the stated aspect ratio at the largest size available; Claude Code resizes, trims and checks margins. Wrong aspect ratio or text in the image means a redo.
 
+## 2a. What the game puts inside each part: icon first (UI-BIBLE-001, ARCH-V2-003)
+
+The reference labels its instruments in words. PANOPTICON does not: **icons communicate, numbers quantify, hover panels explain, typography announces.** The resource HUD is icon-first, with values and meters visible and the explanatory label on hover/focus (UI-BIBLE-001, designer 2026-11-24/25). The painted parts are blank housings; this table is what the engine places in them. Words appear only in hover/focus panels, event flyouts, the ICE nameplate (kept by the designer), the game title and diegetic ad copy.
+
+| Part | Shows (persistent) | Hover / focus explains | Never shows |
+|---|---|---|---|
+| `V2_METER_ROW` ×5 (VITAE, BW, RAM, SHIELD, incoming PULP) | resource **icon** in the socket, **value** (e.g. 30/30) and the segmented **bar** | the resource name and what it does | the word VITAE, BANDWIDTH, RAM, SHIELD or PULP INCOMING |
+| `V2_FLIP_COUNTER` (turn) | a small **turn icon** on the brass band, the **number** on the flaps | "Turn n" | the word TURN |
+| `V2_GAUGE_HOUSING` (trace) | **TRACE icon**, **value / max**, the **bar** | TRACE and its threshold | the word TRACE |
+| `V2_ALARM_HOUSING` (hostile reveal) | its **icon** and the **%** | what the reveal means | the words HOSTILE REVEAL (content still open, designer question 1) |
+| `V2_GLASS_PLAQUE` (phase) | an **icon** for whose turn it is (Rustler / Corporation) | the phase name | "PHASE:" or a phase name in words; the change of phase is **announced** by the flyout (RUSTLER TURN / CORP COUNTERMEASURE), which is typography by design |
+| `V2_STATUS_STRIP` (ICE passive) | lamp + the passive's **icon** (+ number if it has one, e.g. +1 STR) | the passive's name and rule | the name HARDENING or its rule text |
+| `V2_NOTE_CARD` (active effects) | **icon stamps** for each effect in play, with any count | the effect's name and rule | typed rule text |
+| `V2_RAIL_CAPSULE` (response step) | the subroutine's **icon + number** | the step's rule | PULP 1 / DEADLOCK in words |
+| Medallions | type icon; STR **number** | "FORTRESS" etc.; "ICE STRENGTH: n" (ARCH-V2-003j) | — |
+| `V2_NAMEPLATE`, `V2_LOGO_PLATE`, `V2_AD_PLATE_HALCYON` | ICE name; game title; ad copy | — | — |
+
+*Correction (2026-11-26, designer):* earlier text in this spec planned word labels inside these housings ("blank label space", "game writes TURN / TRACE / PHASE", "HARDENING", typed active-effects text). That contradicted UI-BIBLE-001 and ARCH-V2-003 and is withdrawn; this table governs.
+
 ## 3. P0 parts list (first faithful slice)
 
 Reference coordinates are approximate (x, y, w, h in the 1536 × 864 reference).
@@ -70,7 +89,7 @@ Reference coordinates are approximate (x, y, w, h in the 1536 × 864 reference).
 | `V2_HEADER_BAR.png` | 3072 × 200 | 120 / 40 / 120 / 40 | 0,0,1536,100 | The full-width top fascia: brown bakelite and copper with chrome trim along the bottom edge. Plain between ends. |
 | `V2_LOGO_PLATE.png` | 820 × 190 | — | 0,0,410,95 | The PANOPTICON logo plate: dark enamel plate with a brass rim and the **starburst** at its left, **no lettering** (the game sets the title). |
 | `V2_FLIP_COUNTER.png` | 220 × 130 | — | TURN | Brass housing with two blank split-flap windows. |
-| `V2_GLASS_PLAQUE.png` | 520 × 110 | 40 / 24 / 40 / 24 | PHASE | Long black-glass plaque with a chrome rim. Blank (game writes the phase). |
+| `V2_GLASS_PLAQUE.png` | 520 × 110 | 40 / 24 / 40 / 24 | PHASE | Long black-glass plaque with a chrome rim. Blank (game shows a turn-owner icon; the phase name only on hover, §2a). |
 | `V2_GAUGE_HOUSING.png` | 480 × 130 | 40 / 24 / 40 / 24 | TRACE | Brass-rimmed black panel with a blank readout window and a blank horizontal bar-meter slot below it. |
 | `V2_ALARM_HOUSING.png` | 360 × 130 | 40 / 24 / 40 / 24 | HOSTILE REVEAL | Dark red-black glass in a brass rim. Blank. |
 | `V2_AD_PLATE_HALCYON.png` | 760 × 190 | — | halcyon home | Cream enamel ad plate with a chrome rim; at the **right**, a smiling 1950s pin-up woman (HALCYON's spokeswoman) leaning in. **Left two-thirds blank** for the game's ad copy. |
@@ -85,8 +104,8 @@ Reference coordinates are approximate (x, y, w, h in the 1536 × 864 reference).
 | `V2_CRT_LARGE.png` | 560 × 440 | — | 0,615,279,217 | The larger lower-left CRT in the same style. Screen area transparent. |
 | `V2_CRT_GLASS.png` | 400 × 300 | — | — | Curved glass overlay for the screens: soft highlight top left, darker corners, otherwise transparent. (Scanlines and glow are shaders.) |
 | `V2_METER_RACK.png` | 540 × 470 | 40 / 40 / 40 / 40 | 30,295,240,235 | Dark bakelite rack holding five meter rows; chrome edges. |
-| `V2_METER_ROW.png` | 520 × 84 | 70 / 20 / 30 / 20 | one row | One meter slot: round icon socket at left, blank label space, a blank segmented bar trough along the bottom. |
-| `V2_NOTE_CARD.png` | 560 × 240 | — | 10,540,270,110 | The ACTIVE EFFECTS paper card: off-white typed-card paper, slight curl, a **paperclip** at the top-left. Blank. |
+| `V2_METER_ROW.png` | 520 × 84 | 70 / 20 / 30 / 20 | one row | One meter slot: round **icon socket** at left, a small black-glass **value window** at right, and an empty segmented **bar trough** between them. No label space (icon-first, §2a). |
+| `V2_NOTE_CARD.png` | 560 × 240 | — | 10,540,270,110 | The active-effects paper card: off-white card, slight curl, a **paperclip** at the top-left. Blank; the game places rubber-stamp effect **icons** on it, never typed text (§2a). |
 
 ### 3e. Tray, counters, END TURN → `controls/` and `chassis/`
 
@@ -181,15 +200,15 @@ From `godot/assets/concept/ui/` and `godot/assets/concept/mascots/` (painted ENC
 2. **`V2_LOGO_PLATE`** (820 × 190): "The PANOPTICON logo plate from the top-left of the reference: dark enamel plate with a brass rim and the white **starburst** at its left. **No lettering at all.**"
 3. **`V2_FLIP_COUNTER`** (220 × 130): "The TURN counter housing from the reference: brass housing with two **blank** split-flap number windows."
 4. **`V2_GLASS_PLAQUE`** (520 × 110): "A long black-glass plaque with a chrome rim, like the PHASE plaque in the reference. Blank."
-5. **`V2_GAUGE_HOUSING`** (480 × 130): "The TRACE housing from the reference: brass-rimmed black panel with an empty readout window and an empty horizontal bar-meter slot below it. No numbers."
+5. **`V2_GAUGE_HOUSING`** (480 × 130): "The TRACE housing from the reference: brass-rimmed black panel with an empty readout window and an empty horizontal bar-meter slot below it. No numbers." (Delivered. The game shows the TRACE icon, value and bar; the word only on hover.)
 6. **`V2_ALARM_HOUSING`** (360 × 130): "The HOSTILE REVEAL housing: dark red-black glass in a brass rim. Blank."
 7. **`V2_AD_PLATE_HALCYON`** (760 × 190): "The halcyon home ad plate from the top right of the reference: cream enamel plate with a chrome rim and, at the **right**, the smiling 1950s woman leaning in. The **left two-thirds are blank**: no words."
 8. **`V2_CRT_SMALL`** (520 × 330): "The small CRT monitor at the top-left of the reference: chrome and brown bakelite housing, three small jewel lamps down the right side. The **screen area is transparent**."
 9. **`V2_CRT_LARGE`** (560 × 440): "The larger CRT monitor at the bottom-left of the reference, same style. Screen area transparent."
 10. **`V2_CRT_GLASS`** (400 × 300): "A transparent curved-glass overlay for an old CRT screen: a soft highlight at the top left and slightly darker corners, everything else transparent."
 11. **`V2_METER_RACK`** (540 × 470): "The dark bakelite rack holding the VITAE / BANDWIDTH / RAM / SHIELD / PULP meters in the reference, with chrome edges, **empty**: no meters, no labels."
-12. **`V2_METER_ROW`** (520 × 84): "One empty meter slot from that rack: a round icon socket at the left, blank label space, and an empty segmented bar trough along the bottom."
-13. **`V2_NOTE_CARD`** (560 × 240): "The ACTIVE EFFECTS paper card from the reference: off-white typed-card paper with a slight curl and a paperclip at the top-left. **Blank paper.**"
+12. **`V2_METER_ROW`** (520 × 84): "One empty meter slot from that rack, redesigned so it carries no words: a round chrome-ringed icon socket at the left end, a small black-glass number window at the right end, and between them a long empty recessed bar trough with faint segment divisions. No label area, no letters, no numbers, no icons."
+13. **`V2_NOTE_CARD`** (560 × 240): "The paper card from the bottom-left of the reference (where it says ACTIVE EFFECTS): off-white card with a slight curl and a paperclip at the top-left. **Completely blank paper**, no lines, no typing." (The game stamps effect icons on it.)
 
 ### 6d. Tray, counters, END TURN, chassis (conversation 3)
 
