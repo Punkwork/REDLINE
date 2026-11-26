@@ -28,5 +28,8 @@ Parts for the VAS-001 encounter screen, per [`docs/architecture-v2/VAS-001_ASSET
 | `crt/V2_CRT_GLASS.png` | 1448 × 1086 | — | ChatGPT (§6c-10); centre fully transparent overlay | ed89e5dd21e9 | PROPOSED |
 | `crt/V2_CRT_LARGE.png` | 1415 × 1112 | — | ChatGPT (§6c-9); screen transparent | f9a3c33bf1a8 | PROPOSED |
 | `crt/V2_CRT_SMALL.png` | 1535 × 990 | — | ChatGPT (§6c-8), trimmed; screen transparent, dark inner shadow | 735d83e5d0d7 | PROPOSED |
+| `controls/V2_METER_RACK.png` | 1334 × 1161 | — | ChatGPT (§6c-11), trimmed | e2825186225b | PROPOSED |
+| `controls/V2_METER_ROW.png` | 2145 × 367 | 100/30/330/30 | ChatGPT (§6c-12, icon-first prompt), trimmed; baked 11-segment dividers removed by Claude Code so the engine draws per-meter segment counts | 322da8ebf468 | PROPOSED |
+| `controls/V2_NOTE_CARD.png` | 1823 × 799 | — | ChatGPT (§6c-13), trimmed; blank paper for stamped effect icons | 3d9e45d9ed17 | PROPOSED |
 
-Conversation 1 (§6b) complete. Conversation 2 (§6c): parts 1–10 delivered; 11–13 (meter rack, meter row, note card) to come. All housings are blank; what the game places in them is icon-first per spec §2a (UI-BIBLE-001, ARCH-V2-003).
+Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Next: conversation 3 (§6d, tray, counters, END TURN, chassis). All housings are blank; what the game places in them is icon-first per spec §2a (UI-BIBLE-001, ARCH-V2-003).
