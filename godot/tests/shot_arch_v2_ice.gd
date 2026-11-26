@@ -165,6 +165,15 @@ func run() -> void:
 	await shot("v2_14_twelve_card_hand")
 	sb.hand_fan.cards()[5].release_focus()
 
+	# 10c. Optional carriage-return arrow between key rows (designer asked to see one; off by default).
+	await fresh()
+	quiet()
+	for p in sb.lane.panels(): p.layout.row_return_arrow = true; p.set_compact(true); p.set_compact(false)
+	sb.refresh()
+	await shot("v2_15_row_return_arrow_option")
+	for p in sb.lane.panels(): p.layout.row_return_arrow = false; p.set_compact(true); p.set_compact(false)
+	sb.refresh()
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

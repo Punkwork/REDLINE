@@ -51,6 +51,9 @@ extends Resource
 @export var chevron_width := 10.0
 @export var chevron_width_compact := 6.0
 @export var pool_gap := 14.0
+## Optional typewriter carriage-return arrow after the top row when keys wrap (ARCH-V2-003v; the
+## designer does not need it, off by default; shown once in a fixture for comparison).
+@export var row_return_arrow := false
 
 @export_group("Persistent status")
 @export var strip_height := 26.0

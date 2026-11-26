@@ -399,3 +399,7 @@ Designer layout change: the ICE enclosure spans the screen (panels 700 × 352; t
 
 Designer: counters horizontal and narrower under the meters, hand tray widened for up to 12 cards (left half of each visible), installed programs as HuCard cartridges sticking out of the CRT (click shows the program and activates it), subroutine keys right-aligned with a second row past four (5 = 2 over 3). Built `RigBay` (cartridges, program screen; selection sets `EncounterController.active_program`, no Game call), horizontal `CounterStack`, card size 140 × 221, `IcePanel.row_split`. New checks: 12-card half-visibility, counters under meters, cartridge selection, five-key row order and right alignment, six keys in two rows. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 167/0; 22 captures (CI count updated). (LOG-001: moved "2026-11-21 — FORM-001 and FORM-002: ICE forms and more threat (Claude Code)" to the archive.)
 
+## 2026-11-26 — ARCH-V2-003w: program actions on the CRT (Claude Code)
+
+Designer: effects such as Icepick BOOST are chosen from the CRT; six keys 3 + 3 approved; no row arrow needed (mock drawn). Added `EncounterController.request_boost / request_uninstall_cache / request_unload` (one Game call each) and CRT action keys in `RigBay.ProgramScreen`. New checks: BOOST from the CRT (+STR, BW spent, one call), EJECT removes the cartridge. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 170/0; 23 captures (CI count updated).
+

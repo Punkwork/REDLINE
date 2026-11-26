@@ -109,6 +109,31 @@ func request_choice(uid: int) -> bool:
 	_after()
 	return true
 
+# ----- Program actions from the CRT (ARCH-V2-003w; Build 12's rig actions). One Game call each.
+
+func request_boost(uid: int) -> bool:
+	if game.phase != "PLAYER" or not game.can_boost(uid).get("ok", false): return false
+	game_calls += 1
+	var ok := game.boost_pick(uid)
+	if ok: active_program = uid
+	_after()
+	return ok
+
+func request_uninstall_cache(uid: int) -> bool:
+	if not game.can_uninstall_cache(uid).get("ok", false): return false
+	game_calls += 1
+	var ok := game.uninstall_cache(uid)
+	_after()
+	return ok
+
+func request_unload(uid: int) -> bool:
+	if game.phase != "PLAYER" or game._installed_entry(uid).is_empty(): return false
+	game_calls += 1
+	game.unload(uid)
+	if active_program == uid: active_program = -1
+	_after()
+	return true
+
 # ----- Corporation Response: the existing Game step/finish contract, driven one call at a time.
 
 func end_turn() -> bool:

@@ -263,6 +263,10 @@ func _build_bank(m: Dictionary) -> void:
 			row.add_child(key)
 			_keys[int(m.keys[n].sub)] = key
 			n += 1
+		if r == 0 and split.size() > 1 and L.row_return_arrow:
+			var ret := ReturnArrow.new(); ret.name = "RowReturn"
+			ret.custom_minimum_size = Vector2(34, 60) * unit
+			row.add_child(ret)
 		if r == split.size() - 1 and (not m.pool.is_empty() or int(m.hidden_pool) > 0):
 			var gap := Control.new(); gap.custom_minimum_size.x = L.pool_gap; gap.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			row.add_child(gap)
@@ -388,3 +392,23 @@ func _strip_style() -> StyleBox:
 	var s := StyleBoxFlat.new(); s.bg_color = VasTokens.IVORY; s.border_color = VasTokens.CHROME_LO
 	s.set_border_width_all(2); s.set_corner_radius_all(14)
 	return s
+
+class ReturnArrow extends Control:
+	## A brass typewriter carriage-return mark (↵): the order continues on the row below.
+	func _init() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+	func _draw() -> void:
+		var w := size.x
+		var h := size.y
+		var brass := Color("#C8913A")
+		var dark := Color("#3A2414")
+		var top := Vector2(w * 0.72, h * 0.18)
+		var corner := Vector2(w * 0.72, h * 0.78)
+		var tip := Vector2(w * 0.12, h * 0.78)
+		for pass_i in 2:
+			var col := dark if pass_i == 0 else brass
+			var th := (w * 0.2) if pass_i == 0 else (w * 0.12)
+			draw_polyline(PackedVector2Array([top, corner, tip + Vector2(w * 0.18, 0)]), col, th, true)
+			var hw := w * (0.24 if pass_i == 0 else 0.18)
+			draw_colored_polygon(PackedVector2Array([tip, tip + Vector2(hw * 1.4, -hw), tip + Vector2(hw * 1.4, hw)]), col)
+		draw_circle(top, w * 0.07, brass)

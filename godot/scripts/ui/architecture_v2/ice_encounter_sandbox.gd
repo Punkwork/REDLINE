@@ -169,6 +169,12 @@ func _build_left_rail() -> void:
 	rig_bay.slot_y = CRT.position.y + 10.0
 	rig_bay.build(V2Art.tex("crt/V2_CRT_SMALL.png", CRT.size.x), V2Art.tex("crt/V2_CRT_GLASS.png", CRT.size.x))
 	rig_bay.selected.connect(func(uid): ctrl.active_program = uid; refresh())
+	rig_bay.action_requested.connect(func(kind, uid):
+		match kind:
+			"boost": ctrl.request_boost(uid)
+			"cache": ctrl.request_uninstall_cache(uid)
+			"eject": ctrl.request_unload(uid)
+		refresh())
 	stage.add_child(rig_bay)
 	effect_card = HudWidgets.EffectCard.new(); effect_card.name = "Effects"
 	effect_card.setup(NOTE.size, inspector); effect_card.position = NOTE.position; stage.add_child(effect_card)
@@ -326,8 +332,12 @@ func _refresh_rig() -> void:
 		var pk: Dictionary = d.get("pick", {})
 		progs.append({"uid": int(p.inst.uid), "name": String(d.name), "pick": d.has("pick"),
 			"str": game.pick_str(p) if d.has("pick") else 0, "text": String(d.get("text", "")),
-			"itype": String(pk.get("itype", "")), "break_cost": int(pk.get("break_cost", 0))})
-	rig_bay.sync(progs, ctrl.active_pick())
+			"itype": String(pk.get("itype", "")), "break_cost": int(pk.get("break_cost", 0)),
+			"boost": game.can_boost(int(p.inst.uid)) if d.has("pick") else {},
+			"cache": d.get("uninstall_cache", false), "cache_ok": game.can_uninstall_cache(int(p.inst.uid)).get("ok", false),
+			"can_unload": game.phase == "PLAYER" and not responding})
+	var act := ctrl.active_program if not game._installed_entry(ctrl.active_program).is_empty() else ctrl.active_pick()
+	rig_bay.sync(progs, act)
 
 func _refresh_hand() -> void:
 	for c in _hand_box.get_children(): _hand_box.remove_child(c); c.queue_free()

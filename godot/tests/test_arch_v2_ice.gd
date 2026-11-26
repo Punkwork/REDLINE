@@ -573,5 +573,22 @@ func test_rig_bay() -> void:
 	for c in c2: if c.active: raised = c.position.y < c2[0].position.y or c == c2[0]
 	check(raised, "the active cartridge sits raised in its slot")
 	check(sb.rig_bay.cartridges()[0].position.y < sb.CRT.position.y, "cartridges stick up above the CRT")
+	# ARCH-V2-003w: BOOST and EJECT are chosen on the CRT; each is one Game call, as Game rules it.
+	var kinds := sb.rig_bay.screen.actions().map(func(a): return a.kind)
+	check(kinds.has("boost") and kinds.has("eject"), "an Icepick on the CRT offers BOOST and EJECT (%s)" % [kinds])
+	var entry: Dictionary = sb.game._installed_entry(uid)
+	var str0 := sb.game.pick_str(entry)
+	var bw0 := sb.game.bw
+	var chk := sb.game.can_boost(uid)
+	var calls0 := sb.ctrl.game_calls
+	for a in sb.rig_bay.screen.actions():
+		if a.kind == "boost": a.pressed.emit(); break
+	await process_frame
+	check(sb.ctrl.game_calls == calls0 + 1 and sb.game.pick_str(sb.game._installed_entry(uid)) == str0 + int(chk.amt) and sb.game.bw == bw0 - int(chk.cost), "BOOST from the CRT: one Game call, +STR, BW spent")
+	var n_inst := sb.game.installed.size()
+	for a in sb.rig_bay.screen.actions():
+		if a.kind == "eject": a.pressed.emit(); break
+	await process_frame
+	check(sb.game.installed.size() == n_inst - 1 and sb.rig_bay.cartridges().size() == n_inst - 1, "EJECT unloads the program; its cartridge leaves the CRT")
 	sb.queue_free()
 	await process_frame
