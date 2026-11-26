@@ -405,3 +405,6 @@ Designer asked to remove the drawn glyph above the STR value (it obscured it): r
 
 Designer flagged that the spec planned word labels inside instrument housings (meter-row label space; TURN, TRACE, PHASE, HOSTILE REVEAL, HARDENING and typed active-effects text), contradicting the icon-first resource HUD (UI-BIBLE-001) and ARCH-V2-003. Added spec §2a (what each housing shows: icon + number; words only in hover/focus, flyouts, nameplate, title, ad copy), withdrew the label plans, rewrote the meter-row and note-card prompts. Painted parts are blank, so none needed redoing. Delivered so far (ChatGPT via designer, checked by Claude Code): conversation 1 complete (14 parts; TUMBLER/VOID/STR medallions built in-house on the FORTRESS rim), conversation 2 parts 1–10. Manifest `godot/assets/architecture_v2/MANIFEST.md`. [#21](https://github.com/Punkwork/REDLINE/issues/21).
 
+## 2026-11-26 — PHIL-001a: Philosophical Design Bible opening epigraph (Codex)
+
+The designer confirmed the placement and supplied the interview. Added the exact passage as the opening epigraph and linked its relevance to existing design sections. The interview transcript supports attribution to Fenigson as speaker. Original authorship is unverified. Checked the wording, heading links, and documentation scope. Godot tests were outside this documentation change.

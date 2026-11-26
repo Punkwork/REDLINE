@@ -2988,6 +2988,10 @@ Designer requested preservation of the four questions as the NUL/REM mechanic re
 
 Established [PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md) as the cross-system philosophical reference. Consolidates participatory imprisonment, psychological invisibility, paradox of autonomy, commodification of autonomy and curated autonomy; preserves surveillance economy and three-card reward filtering explorations. Extend the four-question design review to mechanics expressing these principles. Existing rules, lore and approval gates remain authoritative; all new mechanics, values and algorithms remain PROPOSED.
 
+## PHIL-001a — Opening epigraph (DIRECTION, designer-confirmed 2026-11-26)
+
+The designer placed the Efrat Fenigson passage as the opening epigraph of the [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md). Its design note links participatory confinement, the Internalized Observer, NUL/REM’s consent and authority, and the burden of autonomy. Scope is designer-facing editorial framing.
+
 ## PHIL-002 — Algorithmic Reduction (DIRECTION, designer-confirmed 2026-11-23)
 
 Preserve six explorations in the [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md): reduction of identity, curiosity displaced by conformity, performance metrics, performance of identity, recursive self-surveillance and disappearance of surprise. Designer emphasizes the last two. Algorithmic Reduction concerns representation and self-perception; no psychological classification or predetermined outcome. All mechanics remain PROPOSED.

@@ -1,5 +1,9 @@
 # PANOPTICON — Philosophical Design Bible
 
+> The most effective prison requires no walls. It is constructed from belief, maintained by obedience, decorated with illusions, and labeled freedom. The jailer is your consent.
+>
+> — Efrat Fenigson, [as heard on *The Adam O’Brien Show*](https://www.youtube.com/watch?v=9wlzgY_Wx3E&t=39s)
+
 Decision PHIL-001 | 2026-11-23 | Designer-confirmed document direction
 Designer-facing only. This consolidates NUL-PILLAR-001 through 001c and the subsequent economic and algorithmic design exploration. All candidate mechanics, numerical examples, dialogue and algorithms remain PROPOSED. The master design register and approved core rules retain authority.
 
@@ -14,6 +18,12 @@ Two questions must remain open:
 - If a system gives you everything it believes you want, but gradually removes the opportunity to discover what else you might want, has it increased your freedom or diminished it?
 
 The game creates conditions in which these questions can be experienced, not an argument with a predetermined conclusion. The experience itself is sufficient for player and designer. No required psychological result, moral judgment or scientific claim.
+
+### We build our own cage — PHIL-001a
+
+Genuine benefits give the Rustler reasons to participate in systems that can narrow their choices. The possibility of being watched can also shape what they attempt, even in the observer’s absence. See [The Internalized Observer](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md#23--the-internalized-observer-surv-observer-exp-001-2026-11-24).
+
+With [NUL/REM](#06--nulrem), accepting help repeatedly can establish a fictional precedent. [Consent and authority](#03--psychological-architecture) still distinguish that precedent from explicit delegation. [Freedom exhaustion](#10--phil-004-demoralization-and-the-burden-of-autonomy-designer-confirmed-direction-2026-11-24) asks why delegation can feel like relief. Preserve the Rustler’s agency through meaningful refusal and viable independent play.
 
 ## 02 — Foundational principles
 
