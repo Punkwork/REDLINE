@@ -1,0 +1,643 @@
+{
+ "decision": "ARCH-V2-005",
+ "statuses": {
+  "BUILT": "On the V2 screen and wired to real state",
+  "PLACEHOLDER": "On the V2 screen; content waits on another system",
+  "BATCH3": "Planned for Batch 3",
+  "BATCH4": "Planned for Batch 4 (integration / presentation)",
+  "OPEN": "Needs a designer decision",
+  "OUT": "Outside the encounter slice"
+ },
+ "rows": [
+  {
+   "id": "H01",
+   "area": "Header",
+   "element": "PANOPTICON brand plate",
+   "prototype": "encounter.gd top bar",
+   "v2": "Logo",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "H02",
+   "area": "Header",
+   "element": "Turn counter",
+   "prototype": "build_node_plate / TURN plate",
+   "v2": "Turn",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "H03",
+   "area": "Header",
+   "element": "Whose turn (phase)",
+   "prototype": "main phase label",
+   "v2": "Phase",
+   "status": "BUILT",
+   "next": "",
+   "note": "Half width (ARCH-V2-005)."
+  },
+  {
+   "id": "H04",
+   "area": "Header",
+   "element": "TRACE counter and bar",
+   "prototype": "build_trace_plate",
+   "v2": "Trace",
+   "status": "BUILT",
+   "next": "",
+   "note": "Half width; 10 cells of 2 TRACE (ARCH-V2-005)."
+  },
+  {
+   "id": "H05",
+   "area": "Header",
+   "element": "CAPS slots (3)",
+   "prototype": "build_cap_rack",
+   "v2": "CapRack",
+   "status": "PLACEHOLDER",
+   "next": "CAPS inventory in the rules engine (deferred beyond the slice)",
+   "note": "Empty slots; fills from game.caps when it exists (ARCH-V2-005)."
+  },
+  {
+   "id": "H06",
+   "area": "Header",
+   "element": "PROTOCOL rack",
+   "prototype": "ticker rack text",
+   "v2": "ProtocolRack",
+   "status": "BUILT",
+   "next": "",
+   "note": "3 slots, live from game.rack; more shows +n (ARCH-V2-005)."
+  },
+  {
+   "id": "H07",
+   "area": "Header",
+   "element": "Ghostware rail (any number, ORIGIN first)",
+   "prototype": "build_ghost_rail",
+   "v2": "",
+   "status": "OPEN",
+   "next": "Designer: home on the V2 screen",
+   "note": "Prototype hung badges along the top of the ICE area. Empty in the N2A slice."
+  },
+  {
+   "id": "H08",
+   "area": "Header",
+   "element": "Strike lamps (0-3) and LOCKDOWN",
+   "prototype": "build_strike / strike lamps",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C13 PlayerHUD; home to propose",
+   "note": "No strike or LOCKDOWN state on the V2 screen today."
+  },
+  {
+   "id": "H09",
+   "area": "Header",
+   "element": "HOSTILE REVEAL %",
+   "prototype": "reveal_percent / alarm housing",
+   "v2": "",
+   "status": "OPEN",
+   "next": "ARCH-V2-003q: content still open",
+   "note": ""
+  },
+  {
+   "id": "H10",
+   "area": "Header",
+   "element": "Node, LAYER and CRED reserve / EXTRACT",
+   "prototype": "build_node_plate, RESERVE dial",
+   "v2": "",
+   "status": "OPEN",
+   "next": "ARCH-V2-003q: content still open",
+   "note": ""
+  },
+  {
+   "id": "H11",
+   "area": "Header",
+   "element": "CRED",
+   "prototype": "CRED/RAM row",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C13 PlayerHUD",
+   "note": "RAM is built (meters)."
+  },
+  {
+   "id": "H12",
+   "area": "Header",
+   "element": "Corporation ad plate / sign",
+   "prototype": "CorporateDisplay",
+   "v2": "AdPlate",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "H13",
+   "area": "Header",
+   "element": "Graffiti decal (ADP)",
+   "prototype": "DecalPlate, graffiti_label",
+   "v2": "",
+   "status": "BATCH4",
+   "next": "C06 CorporationPresentation",
+   "note": ""
+  },
+  {
+   "id": "I01",
+   "area": "ICE",
+   "element": "Avatar with moods",
+   "prototype": "FriendlyMascot",
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "I02",
+   "area": "ICE",
+   "element": "Nameplate",
+   "prototype": "console_heading",
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "Drawn by IcePanel."
+  },
+  {
+   "id": "I03",
+   "area": "ICE",
+   "element": "Type badge (FORTRESS/TUMBLER/VOID)",
+   "prototype": "scan_tag",
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "Drawn by IcePanel; hover per ARCH-V2-003j."
+  },
+  {
+   "id": "I04",
+   "area": "ICE",
+   "element": "STR medallion",
+   "prototype": "scan_tag",
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "Number only (ARCH-V2-003k)."
+  },
+  {
+   "id": "I05",
+   "area": "ICE",
+   "element": "Subroutine keys and states",
+   "prototype": "IceKey, key_wrapper",
+   "v2": "Key_S*",
+   "status": "BUILT",
+   "next": "",
+   "note": "Includes DEADLOCK, BOOTING, hidden, broken."
+  },
+  {
+   "id": "I06",
+   "area": "ICE",
+   "element": "TUMBLER reel / face-down slots",
+   "prototype": "build_key reel",
+   "v2": "Reel",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "I07",
+   "area": "ICE",
+   "element": "PASSIVE plate",
+   "prototype": "PASSIVE plate",
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "Status strip drawn by IcePanel."
+  },
+  {
+   "id": "I08",
+   "area": "ICE",
+   "element": "Speech bubble (ADP-2b hesitation)",
+   "prototype": "update_hesitation",
+   "v2": "Bubble",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "I09",
+   "area": "ICE",
+   "element": "Key tips (HOVER-001)",
+   "prototype": "show_key_tip",
+   "v2": "KeyInspector",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "I10",
+   "area": "ICE",
+   "element": "Virus counters on ICE (WORM etc.)",
+   "prototype": "scan_tag virus row",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C08 add-on: counter chips on the panel",
+   "note": "Shown only inside the CULL choice today."
+  },
+  {
+   "id": "I11",
+   "area": "ICE",
+   "element": "Break feedback (cost spent)",
+   "prototype": "show_break_feedback",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C16 / flyouts",
+   "note": ""
+  },
+  {
+   "id": "I12",
+   "area": "ICE",
+   "element": "Strike overlay and lethal flash",
+   "prototype": "build_strike, strike_flash",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "M06 flyouts from Game.events",
+   "note": ""
+  },
+  {
+   "id": "I13",
+   "area": "ICE",
+   "element": "TRACE pixel steps (PIXEL-TRACE-001)",
+   "prototype": "update_pixel",
+   "v2": "",
+   "status": "BATCH4",
+   "next": "C06 presentation",
+   "note": ""
+  },
+  {
+   "id": "I14",
+   "area": "ICE",
+   "element": "Corporation console colour",
+   "prototype": "console_tint_material",
+   "v2": "",
+   "status": "BATCH4",
+   "next": "C06 CorporationPresentation",
+   "note": ""
+  },
+  {
+   "id": "R01",
+   "area": "Response",
+   "element": "NEXT RESPONSE",
+   "prototype": "per-ICE plates",
+   "v2": "ResponseRail",
+   "status": "BUILT",
+   "next": "",
+   "note": "Shared rail, provisional (ARCH-V2-003e)."
+  },
+  {
+   "id": "R02",
+   "area": "Response",
+   "element": "Step-by-step Corporation Response",
+   "prototype": "main._play_response",
+   "v2": "ResponseRail",
+   "status": "BUILT",
+   "next": "C03 ResponseSequencer port in Batch 3",
+   "note": "Minimal stand-in today."
+  },
+  {
+   "id": "R03",
+   "area": "Response",
+   "element": "PARTING SHOT after BREACH (PT11-UI 1)",
+   "prototype": "PULP INCOMING row",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C13/C14",
+   "note": ""
+  },
+  {
+   "id": "R04",
+   "area": "Response",
+   "element": "Log ticker",
+   "prototype": "log_text",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C14 ResponseQueue/Log",
+   "note": ""
+  },
+  {
+   "id": "R05",
+   "area": "Response",
+   "element": "Phase flyouts",
+   "prototype": "none",
+   "v2": "EventFlyout",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "R06",
+   "area": "Response",
+   "element": "Event flyouts from Game.events (EV-xx)",
+   "prototype": "toasts, punch arrival",
+   "v2": "EventFlyout",
+   "status": "BATCH3",
+   "next": "M06: drive from Game.events",
+   "note": "Widget exists; only phase announcements wired."
+  },
+  {
+   "id": "G01",
+   "area": "Rig",
+   "element": "CRT program screen",
+   "prototype": "build_rig",
+   "v2": "RigBay",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "G02",
+   "area": "Rig",
+   "element": "Program cartridges",
+   "prototype": "build_cartridges",
+   "v2": "RigBay",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "G03",
+   "area": "Rig",
+   "element": "BOOST / UNINSTALL / EJECT",
+   "prototype": "BoostButton, SmashGrabCache, UnloadButton",
+   "v2": "ProgramScreen",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "C01",
+   "area": "Hand",
+   "element": "Fanned hand",
+   "prototype": "FriendlyHand",
+   "v2": "HandFan",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "C02",
+   "area": "Hand",
+   "element": "Card inspector (HOVER-001)",
+   "prototype": "big_card",
+   "v2": "KeyInspector",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "C03",
+   "area": "Hand",
+   "element": "Targeting (CHOOSE AN ICE)",
+   "prototype": "drop on ICE",
+   "v2": "TargetPlaque",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "C04",
+   "area": "Hand",
+   "element": "Drag cards to play (PT11-UI 2)",
+   "prototype": "FriendlyDropTarget",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C10 drag path",
+   "note": "Click-to-play is built; drag-to-break from the rig is built."
+  },
+  {
+   "id": "C05",
+   "area": "Hand",
+   "element": "Dim unplayable cards (PT11-UI 4)",
+   "prototype": "FriendlyCard",
+   "v2": "HandFan",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "C06",
+   "area": "Hand",
+   "element": "CACHED corner icon (CACHE-001, #17)",
+   "prototype": "cache glow",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C11 CardView corner icon",
+   "note": ""
+  },
+  {
+   "id": "C07",
+   "area": "Hand",
+   "element": "Choice overlays",
+   "prototype": "main._overlay_options",
+   "v2": "ChoiceOverlay",
+   "status": "BUILT",
+   "next": "",
+   "note": "PATIENT ZERO variant not yet mapped."
+  },
+  {
+   "id": "C08",
+   "area": "Hand",
+   "element": "Toggle back to the board during a discard (#15)",
+   "prototype": "none",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C15",
+   "note": ""
+  },
+  {
+   "id": "C09",
+   "area": "Hand",
+   "element": "Deck and discard viewers",
+   "prototype": "DECK / COVERAGE buttons",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C16 inspect",
+   "note": ""
+  },
+  {
+   "id": "V01",
+   "area": "Vitals",
+   "element": "VITAE",
+   "prototype": "vital_row",
+   "v2": "MeterVITAE",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "V02",
+   "area": "Vitals",
+   "element": "BANDWIDTH",
+   "prototype": "vital_row",
+   "v2": "MeterBW",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "V03",
+   "area": "Vitals",
+   "element": "RAM",
+   "prototype": "CRED/RAM row",
+   "v2": "MeterRAM",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "V04",
+   "area": "Vitals",
+   "element": "SHIELD",
+   "prototype": "vital_row",
+   "v2": "MeterSHIELD",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "V05",
+   "area": "Vitals",
+   "element": "PULP INCOMING",
+   "prototype": "vital_row",
+   "v2": "MeterPULP",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "V06",
+   "area": "Vitals",
+   "element": "NEXT DRAW estimate",
+   "prototype": "vital_row",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C13 PlayerHUD",
+   "note": ""
+  },
+  {
+   "id": "V07",
+   "area": "Vitals",
+   "element": "CORTEX and BW drain",
+   "prototype": "CRT status",
+   "v2": "Effects",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "V08",
+   "area": "Vitals",
+   "element": "Deck / discard / burned counts",
+   "prototype": "deck/discard wells",
+   "v2": "Counters",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "F01",
+   "area": "Flow",
+   "element": "END TURN",
+   "prototype": "END TURN box",
+   "v2": "EndTurn",
+   "status": "BUILT",
+   "next": "",
+   "note": ""
+  },
+  {
+   "id": "F02",
+   "area": "Flow",
+   "element": "Leave Node / END RUN",
+   "prototype": "END RUN tray button",
+   "v2": "",
+   "status": "OPEN",
+   "next": "Designer: keep on the encounter screen?",
+   "note": ""
+  },
+  {
+   "id": "F03",
+   "area": "Flow",
+   "element": "NUL/REM note",
+   "prototype": "NulRemNote",
+   "v2": "",
+   "status": "OPEN",
+   "next": "NUL-DIALOGUE-002 not approved for build",
+   "note": ""
+  },
+  {
+   "id": "F04",
+   "area": "Flow",
+   "element": "Reduced motion setting",
+   "prototype": "motion button",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C16 settings",
+   "note": "Sandbox flag only."
+  },
+  {
+   "id": "F05",
+   "area": "Flow",
+   "element": "VOICE / M mute",
+   "prototype": "VoiceButton",
+   "v2": "",
+   "status": "BATCH3",
+   "next": "C16 settings",
+   "note": ""
+  },
+  {
+   "id": "F06",
+   "area": "Flow",
+   "element": "KEY LEGEND",
+   "prototype": "LegendButton",
+   "v2": "",
+   "status": "OPEN",
+   "next": "Hover panels may replace it",
+   "note": ""
+  },
+  {
+   "id": "F07",
+   "area": "Flow",
+   "element": "Outcome (BREACH, flatline)",
+   "prototype": "main overlays",
+   "v2": "Outcome",
+   "status": "BUILT",
+   "next": "",
+   "note": "Stand-in banner."
+  },
+  {
+   "id": "F08",
+   "area": "Flow",
+   "element": "Punch-card holder (SIGNAL-001)",
+   "prototype": "update_punch_holder",
+   "v2": "",
+   "status": "BATCH4",
+   "next": "C05 integration",
+   "note": ""
+  },
+  {
+   "id": "F09",
+   "area": "Flow",
+   "element": "Bleed and low-VITAE warning (ADP-1)",
+   "prototype": "advance_bleed",
+   "v2": "",
+   "status": "BATCH4",
+   "next": "C06 presentation",
+   "note": ""
+  },
+  {
+   "id": "F10",
+   "area": "Flow",
+   "element": "Reward, map and event screens",
+   "prototype": "main._overlay_*",
+   "v2": "",
+   "status": "OUT",
+   "next": "C17, outside the encounter slice",
+   "note": ""
+  }
+ ]
+}

@@ -188,6 +188,30 @@ func run() -> void:
 	for p in sb.lane.panels(): p.layout.row_return_arrow = false; p.set_compact(true); p.set_compact(false)
 	sb.refresh()
 
+	# 10d. ARCH-V2-005 header: half-width turn indicator and TRACE meter, CAPS and PROTOCOLS racks
+	# (3 slots each). Empty, then four PROTOCOLs deployed through the controller (the fourth shows
+	# as "+1"), with the hover panel on a filled slot. Plus a header crop for the art prompts.
+	await fresh()
+	quiet()
+	await shot("v2_18_header_slots_empty")
+	for id in ["SPAM_FILTER", "PROXY_CHAIN", "TOOLBELT", "SURGE_PROTECTOR"]:
+		var c := {"uid": sb.game.next_uid, "id": id}
+		sb.game.next_uid += 1
+		sb.game.hand.append(c)
+		sb.game.bw = 30
+		sb.ctrl.request_play(int(c.uid))
+	sb.game.bw = 3
+	sb.refresh()
+	var ps: Control = sb.protocol_rack.slots[0]
+	ps.grab_focus()
+	var full := await shot("v2_19_header_protocols_deployed")
+	sb.inspector.close(); ps.release_focus()
+	if full:
+		var hdr := full.get_region(Rect2i(Vector2i.ZERO, Vector2i(full.get_width(), mini(full.get_height(), int(sb.stage.position.y + 100.0 * sb.stage.scale.y)))))
+		hdr.save_png(out.path_join("v2_20_header_crop.png"))
+		print("shot v2_20_header_crop")
+		shots += 1
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

@@ -220,3 +220,26 @@ static func card_model(game: Game, c: Dictionary, where: String = "hand") -> Dic
 		"text": game.card_text(id) if game.has_method("card_text") else String(d.get("text", "")),
 		"target": bool(d.get("target", false)), "playable": bool(play.get("ok", false)), "reason": String(play.get("reason", "")),
 		"art": "res://assets/concept/cards/%s.png" % id}
+
+## ARCH-V2-005 header slots. Display models only; nothing here changes Game.
+## PROTOCOLs deployed this Node sit on the RACK (Core Rules §3: "Stays active for the whole Node").
+static func protocol_models(game: Game) -> Array:
+	var out := []
+	for c in game.rack:
+		var m := card_model(game, c, "rack")
+		m["kind"] = "PROTOCOL"
+		out.append(m)
+	return out
+
+## CAPS (UPL-001: 3 slots, single-use, 0 BW, your turn only). The CAPS inventory is not in the rules
+## engine yet (deferred beyond the slice), so this is empty until Game carries one; the slots show
+## as empty placeholders. Reads `game.caps` if a later build adds it ([{uid, id}] like other insts).
+static func cap_models(game: Game) -> Array:
+	var out := []
+	var caps: Variant = game.get("caps")
+	if caps is Array:
+		for c in caps:
+			var id := String(c.get("id", ""))
+			out.append({"uid": int(c.get("uid", -1)), "id": id, "name": id.replace("_", " "), "kind": "CAP",
+				"text": String(c.get("text", "")), "art": "res://assets/architecture_v2/caps/%s.png" % id})
+	return out

@@ -225,6 +225,20 @@ From `godot/assets/concept/ui/` and `godot/assets/concept/mascots/` (painted ENC
 7. **`V2_PIPE_V`** (48 × 512, tiles vertically): "A vertical polished chrome pipe segment with a highlight, tileable top to bottom."
 8. **`V2_PIPE_JOINT`** (96 × 96): "A chrome pipe joint with a red-capped fitting, like the ones on the right edge of the reference."
 
+### 6e. Header slots (conversation 4, ARCH-V2-005, 2026-11-26)
+
+The turn indicator and the TRACE meter are now half their former width, and the freed header holds two slot racks: CAPS (3 slots) and PROTOCOLS (3 slots). Until these files land the game draws placeholders (and nine-slices the old plaque and gauge housing). In a new conversation attach `PANOPTICON_VAS-001_reference_mockup.jpeg` **and** `docs/visual/fixtures/arch-v2-batch2/v2_header_slots_layout.png` (where each part goes), paste Message 1 (§6a), then one prompt at a time. Folders: `controls/` for 1–5, `icons/` for 6–7.
+
+1. **`V2_GLASS_PLAQUE_HALF`** (520 × 260, 2:1): "A short black-glass plaque with a chrome rim, the same material as the PHASE plaque in the reference but **half as long**: nearly square-ended, rounded corners, two tiny screws at the ends. Blank glass, no symbols."
+2. **`V2_GAUGE_HOUSING_HALF`** (480 × 310, about 3:2): "The TRACE housing from the reference made **half as wide**: brass-rimmed black panel with a small blank readout window in the upper half and a short, empty horizontal bar-meter slot along the bottom. No numbers, no markings."
+3. **`V2_SLOT_RACK`** (840 × 272, about 3:1): "A low horizontal rack plate that holds a row of plug-in slots: warm brown bakelite with a polished copper-and-chrome rim and a small screw at each end. At the **left end**, a small round chrome-ringed **icon socket** (empty). The rest of the plate is a plain, even, slightly recessed bed (the game places three separate slot parts on it). No slots painted, no text."
+4. **`V2_CAP_SOCKET`** (230 × 256): "One empty socket for a single-use capsule cartridge: a deep rounded-rectangle recess in dark bakelite with a thin brass collar and a faint inner shadow, like a fuse holder on a 1950s panel. Empty and dark inside, no capsule, no symbols."
+5. **`V2_PROTOCOL_SOCKET`** (230 × 256): "One empty card bay for a slim program card: a square-cornered recess in dark bakelite with a thin chrome frame and two tiny guide rails at the top and bottom, like a card slot on a 1950s console. Empty and dark inside, no card, no symbols."
+6. **`V2_ICON_CAPS_LIGHT`** (128 × 128): "A flat ivory (#F5E6C4) icon on a transparent background, no outline glow: a small capsule vial standing upright with a flip-off cap on top and a short needle at the bottom, half filled. Simple, bold, readable at 24 px."
+7. **`V2_ICON_PROTOCOL_LIGHT`** (128 × 128): "A flat ivory (#F5E6C4) icon on a transparent background: three thin cards stacked in a rack, each with a small round lamp at its right end. Simple, bold, readable at 24 px."
+
+*Icons 6–7 alternative:* the approved deck/discard/burned icons were drawn by Claude Code; it can draw these two the same way if ChatGPT's don't sit with them.
+
 ## 7. Acceptance check (per part, before committing)
 
 - [ ] Exact file name; aspect ratio as stated; size at least the stated size (Claude Code scales down).

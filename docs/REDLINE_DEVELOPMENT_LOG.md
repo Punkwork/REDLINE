@@ -33,19 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-21 — RIDER-001, AMEND-001, DEFRAG-001, PLAY-002 after Playtest 10 (Claude Code)
-
-Playtest 10 sheet: every question 5/5 (BURST not drawn); encounters 4–6 turns except TERMS & CONDITIONS (3, 2); discards mattered for the first time; parting shot on the final Node seemed missing. Checked: the engine fired it (TERMS OF SERVICE with only its DEADLOCK broken deals 12), but it landed instantly under the reward screen with a "Corporation Response is skipped" message. Now it plays through the response queue with a corrected message.
-
-**Built:** RIDER-001 (`"then"` riders on TRACE effects, applied only when `trace_gained_node` rises; JAMMER), AMEND-001 (CONSENT FORM support, AMEND bonus on the ICE to the right, cleared after each response), DEFRAG-001, PLAY-002 (parting shot via `response_queue`, `_effect_feedback()` sounds and PULP shake).
-
-**Tests:** `test_game.gd` 176 passed, 0 failed; ADP 17/0; SIGNAL/CARBON 672/0.
-**Bot sims (30 Generalist runs):** **0/30 cleared**; deaths CAPTCHA 16, TERMS & CONDITIONS 14; 3.0 turns per encounter; 12.3 PULP to VITAE per encounter. The bot ignores riders, AMEND and lethal forms and lost far more than the designer in Playtest 10 (2–14 VITAE per encounter), so this is a worst case, but TERMS & CONDITIONS is now the hardest Node: watch it.
-
-**Interpretations to confirm:** a rider fires once per TRACE subroutine if any TRACE lands (even 1 after PROXY CHAIN); JAMMER blocks whole TRACE subroutines, including ones combined with PULP (their PULP still hits); the placeholder sounds are synthesized, not final.
-
-**Log size (LOG-001):** older entries moved unchanged to the archive with this commit.
-
 ## 2026-11-22 — Playtest 11 results (Claude)
 
 Designer's sheet: run 1 died at TERMS & CONDITIONS (CONSENT FORM + TERMS OF SERVICE) on turn 3 after losing 10 + 13 + 6 VITAE; COOKIE WALL cost 9 VITAE in 2 turns (6 from the parting shot, whose size couldn't be read beforehand); AUTO-RENEW + CAPTCHA took 7 turns and 15 VITAE. Run 2 stopped at Node 3: the PROXY CHAIN rack overlay stayed on screen and covered the encounter (PT11-BUG-1). Scores: more plays than BW 4, threat-or-DEADLOCK 4, PROBE 5, BURST 3, PULP 5, rewards 5, another run 5. Bugs and UI items in HANDOFF (PT11-BUG-1, PT11-UI).
@@ -394,3 +381,6 @@ Designer: effects such as Icepick BOOST are chosen from the CRT; six keys 3 + 3 
 
 Designer started Batch 2. Built `CardView` (HuCard body drawn in the engine, type frame, cost medallion, rules field, gold contacts; states), the hand of CardViews in the fan, the card inspector (HOVER-001), ICE targeting (`IcePanel.set_targetable`, `IceLane.target_chosen`, CHOOSE AN ICE plaque), `ChoiceOverlay` (all current choice variants with the prototype's wording), controller choice intents. The DEV stand-in buttons are gone. New checks: hand UIDs and playability, click-to-play parity, targeting on/cancel/play parity, DISCARD overlay open/choose parity. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 182/0; 25 captures (CI count updated). Captures `docs/visual/fixtures/arch-v2-batch2/`. (LOG-001: moved "2026-11-21 — BOOST-001 and SUB-001 after Playtest 9 (Claude Code)" to the archive.)
 
+## 2026-11-26 — ARCH-V2-005: coverage table, coverage test, header CAPS and PROTOCOLS slots (Claude Code)
+
+Designer (18:22): build the coverage table, the test and the placeholders before Batch 3; CAPS and PROTOCOLS slots, 3 each, in the header; turn indicator and TRACE meter at half width; ChatGPT prompts and a layout image. Built `ENCOUNTER_COVERAGE.md` from `godot/tests/arch_v2_coverage.json` (63 rows; `tools/arch_v2_coverage_md.py`), `test_arch_v2_coverage.gd` (in CI), `HudWidgets.SlotRack/RackSlot/RackIcon`, `VisibleStateAdapter.protocol_models/cap_models`; phase plaque and TRACE gauge use half-width art when it lands and nine-slice the old parts meanwhile. ChatGPT prompts: VAS-ASSET-001 §6e; layout image `docs/visual/fixtures/arch-v2-batch2/v2_header_slots_layout.png`. Tests (Godot 4.3, headless): `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 182/0; `test_arch_v2_coverage.gd` 506/0; screenshots 28 (CI count updated). No rules change. (LOG-001: moved "2026-11-21 — RIDER-001, AMEND-001, DEFRAG-001, PLAY-002 after Playtest 10 (Claude Code)" to the archive.)

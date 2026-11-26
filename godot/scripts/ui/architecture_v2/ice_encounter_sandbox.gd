@@ -20,8 +20,15 @@ const HEADER := Rect2(0, 0, 1536, 96)
 const LOGO := Rect2(8, 4, 300, 89)
 const TURN_ICON := Rect2(320, 31, 32, 32)
 const TURN := Rect2(360, 13, 112, 69)
-const PHASE := Rect2(488, 16, 252, 63)
-const TRACE := Rect2(758, 11, 230, 74)
+## ARCH-V2-005 (designer 2026-11-26 18:22): the turn indicator and the TRACE meter are half their
+## former width (252 → 126, 230 → 115); the freed header holds the CAPS and PROTOCOLS racks, three
+## slots each to start.
+const PHASE := Rect2(488, 16, 126, 63)
+const TRACE := Rect2(626, 11, 115, 74)
+const CAPS := Rect2(756, 14, 210, 68)
+const PROTOCOLS := Rect2(976, 14, 210, 68)
+const CAP_SLOTS := 3        ## UPL-001: 3 CAP slots (Ghostware/Hardware may add more later)
+const PROTOCOL_SLOTS := 3   ## designer: "start with 3"; more deployed than slots shows "+n"
 const AD := Rect2(1196, 1, 306, 94)
 ## ARCH-V2-003s (designer 2026-11-26 15:34): the ICE enclosure spans the full width; the CRT moves
 ## to the lower left and holds the rig; the effects note sits under it; END TURN is a small brown
@@ -57,6 +64,8 @@ var meters := {}
 var turn_counter: HudWidgets.FlipCounter
 var phase_plaque: HudWidgets.PhasePlaque
 var trace_gauge: HudWidgets.TraceGauge
+var cap_rack: HudWidgets.SlotRack
+var protocol_rack: HudWidgets.SlotRack
 var counters: HudWidgets.CounterStack
 var effect_card: HudWidgets.EffectCard
 var signal_screen: HudWidgets.SignalScreen
@@ -169,6 +178,11 @@ func _build_header() -> void:
 	phase_plaque.setup(PHASE.size); phase_plaque.position = PHASE.position; stage.add_child(phase_plaque)
 	trace_gauge = HudWidgets.TraceGauge.new(); trace_gauge.name = "Trace"; trace_gauge.inspector = inspector
 	trace_gauge.setup(TRACE.size); trace_gauge.position = TRACE.position; stage.add_child(trace_gauge)
+	cap_rack = HudWidgets.SlotRack.new(); cap_rack.name = "CapRack"
+	cap_rack.setup(CAPS.size, "CAP", CAP_SLOTS, inspector); cap_rack.position = CAPS.position; stage.add_child(cap_rack)
+	protocol_rack = HudWidgets.SlotRack.new(); protocol_rack.name = "ProtocolRack"
+	protocol_rack.setup(PROTOCOLS.size, "PROTOCOL", PROTOCOL_SLOTS, inspector); protocol_rack.position = PROTOCOLS.position
+	stage.add_child(protocol_rack)
 	var ad := _art("chassis/V2_AD_PLATE_HALCYON.png", AD, "AdPlate")
 	# Approved HALCYON programme line (arch_copy.json, approval "approved").
 	var copy := _label("A Halcyon Homesteads™\ncommunity", 19, Color("#8E2A1E"), VasTokens.FONT_PLAQUE_SEMI)
@@ -296,6 +310,8 @@ func refresh() -> void:
 	turn_counter.set_value(int(game.enc.get("turn", 0)))
 	phase_plaque.set_phase(game.phase == "RESPONSE")
 	trace_gauge.set_value(game.trace)
+	cap_rack.set_items(VisibleStateAdapter.cap_models(game))
+	protocol_rack.set_items(VisibleStateAdapter.protocol_models(game))
 	meters.VITAE.set_value(game.vitae, game.max_vitae, 10, str(game.vitae), "VITAE %d / %d" % [game.vitae, game.max_vitae])
 	meters.BW.set_value(game.bw, Game.BW_PER_TURN, Game.BW_PER_TURN, str(game.bw), "BANDWIDTH %d" % game.bw)
 	meters.RAM.set_value(game.ram_used(), game.ram_total(), game.ram_total(), "%d/%d" % [game.ram_used(), game.ram_total()], "RAM %d / %d" % [game.ram_used(), game.ram_total()])

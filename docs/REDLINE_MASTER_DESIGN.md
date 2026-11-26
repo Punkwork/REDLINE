@@ -3355,3 +3355,14 @@ ChatGPT's independent check of `main` references covered the principal governanc
 
 **Status:** Batch 2 implementation PROPOSED; geometry, colours and the drawn card body await designer review.
 
+## ARCH-V2-005 — Before Batch 3: coverage table, coverage test, header slots (designer, 2026-11-26 18:22; implementation PROPOSED)
+
+**Designer, 2026-11-26 18:22:** "Yes build the coverage table, the test and these placeholders now. Before batch 3. I want CAPS slots on the ui as well start with 3. Protocols slots same. Now there is AMPLE room along the top. The turn indicator with runner and corp alternating icons can be 1/2 in width and the trace meter can be reduced to 1/2 size in width. CAps and protocol slots can easily be put there. give me the prompts and image for chatgpt and i'll get those built."
+
+**Built (PROPOSED for visual review):**
+- **(a) Coverage table** [`architecture-v2/ENCOUNTER_COVERAGE.md`](architecture-v2/ENCOUNTER_COVERAGE.md), generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`: 63 elements of the Build 12 encounter, each with its prototype source, its V2 node and a status (BUILT 35, PLACEHOLDER 1, BATCH3 15, BATCH4 5, OPEN 6, OUT 1). Gaps it surfaced: strikes and LOCKDOWN, CRED, virus counters on ICE, the CACHED icon, PARTING SHOT, NEXT DRAW, the log, PATIENT ZERO choice (Batch 3); Ghostware rail home, HOSTILE REVEAL, LAYER/EXTRACT, leave-Node control, NUL/REM note, KEY LEGEND (open).
+- **(b) Test** `godot/tests/test_arch_v2_coverage.gd` (in CI): every BUILT/PLACEHOLDER row's node is on the V2 screen; every other row says what is next; the Markdown matches the JSON; the header parts sit inside the header bar without overlapping; the PROTOCOL slots follow `game.rack` through real plays; drawing never changes Game.
+- **(c) Header:** turn indicator 252 → 126 px and TRACE meter 230 → 115 px (reference pixels); TRACE bar now 10 cells of 2 TRACE. In the freed space, left to right: **CAPS rack** (3 slots) and **PROTOCOLS rack** (3 slots), each with a group icon; names and rules on hover/focus. PROTOCOL slots are live (deployed PROTOCOLs, in order; more than three shows "+n" on the last slot, named on hover). CAP slots are empty placeholders: the CAPS inventory is not in the rules engine yet (UPL-001: 3 slots), and they fill from it when it is. Drawn placeholders until the ChatGPT parts land (VAS-ASSET-001 §6e).
+
+*Interpretations to confirm:* CAPS left of PROTOCOLS; "+n" overflow when more than three PROTOCOLs are deployed (the rules don't cap the RACK); TRACE bar at 2 TRACE per cell. No gameplay or rules change.
+
