@@ -46,6 +46,7 @@ The reference labels its instruments in words. PANOPTICON does not: **icons comm
 | `V2_GLASS_PLAQUE` (phase) | an **icon** for whose turn it is (Rustler / Corporation) | the phase name | "PHASE:" or a phase name in words; the change of phase is **announced** by the flyout (RUSTLER TURN / CORP COUNTERMEASURE), which is typography by design |
 | `V2_STATUS_STRIP` (ICE passive) | lamp + the passive's **icon** (+ number if it has one, e.g. +1 STR) | the passive's name and rule | the name HARDENING or its rule text |
 | `V2_NOTE_CARD` (active effects) | **icon stamps** for each effect in play, with any count | the effect's name and rule | typed rule text |
+| `V2_COUNTER_STACK` (deck, discard, burned) | an **icon** per window and its **number** (designer 2026-11-26: "Icon + number is perfect") | the pile's name and count | the words DECK, DISCARD, BURNED |
 | `V2_RAIL_CAPSULE` (response step) | the subroutine's **icon + number** | the step's rule | PULP 1 / DEADLOCK in words |
 | Medallions | type icon; STR **number** | "FORTRESS" etc.; "ICE STRENGTH: n" (ARCH-V2-003j) | — |
 | `V2_NAMEPLATE`, `V2_LOGO_PLATE`, `V2_AD_PLATE_HALCYON` | ICE name; game title; ad copy | — | — |
@@ -112,7 +113,7 @@ Reference coordinates are approximate (x, y, w, h in the 1536 × 864 reference).
 | File | Size | Nine-slice | Reference | Notes |
 |---|---|---|---|---|
 | `V2_TRAY.png` | 1860 × 524 | 120 / 60 / 120 / 80 | 279,602,930,262 | The physical card tray: brass and chrome lip along the bottom, dark recessed bed. Cards lie on it. Plain centre. |
-| `V2_COUNTER_STACK.png` | 300 × 390 | — | 1325,690,150,195 | Bronze housing with **three** blank black-glass readout windows stacked (deck, discard, burned). |
+| `V2_COUNTER_STACK.png` | 300 × 390 | — | 1325,690,150,195 | Bronze housing with **three** stacked black-glass readout windows (deck, discard, burned), each with a round **icon socket** at the left and a **number window** at the right; no label space (§2a). |
 | `V2_END_TURN.png` | 340 × 340 | — | 1490,680,170,170 | Round **domed brass-and-amber button** in a chrome ring, glowing warmly. Blank face. |
 | `V2_END_TURN_HOVER.png`, `_PRESSED.png`, `_DISABLED.png` | 340 × 340 | — | — | Hover: brighter glow. Pressed: dome pushed in, darker. Disabled: unlit, dull brass. Same geometry. |
 | `V2_LAMP_BAR.png` | 220 × 50 | — | above END TURN | Small chrome bar with three red jewel lamps (lit). |
@@ -221,7 +222,7 @@ From `godot/assets/concept/ui/` and `godot/assets/concept/mascots/` (painted ENC
 ### 6d. Tray, counters, END TURN, chassis (conversation 3)
 
 1. **`V2_TRAY`** (1860 × 524): "The physical tray the cards lie on in the reference: dark recessed bed with a brass and chrome lip along the bottom edge. No cards. Plain in the middle."
-2. **`V2_COUNTER_STACK`** (300 × 390): "The bronze housing at the bottom right of the reference with three stacked **blank** black-glass readout windows (where DECK / DISCARD / BURNED are). No words or numbers."
+2. **`V2_COUNTER_STACK`** (300 × 390): "The bronze housing at the bottom right of the reference, redesigned to carry no words: three stacked rows, each a dark black-glass strip with a small round chrome-ringed **icon socket** at the left end and a small **number window** at the right end. No DECK / DISCARD / BURNED, no letters, no numbers, no icons."
 3. **`V2_END_TURN`** (340 × 340): "The round END TURN button from the reference: a domed brass-and-amber button in a chrome ring, glowing warmly. **Blank face, no words.**"
 4. **`V2_END_TURN_HOVER`**, **`_PRESSED`**, **`_DISABLED`**: "The same button, identical size and position: (hover) glowing brighter; (pressed) dome pushed in and slightly darker; (disabled) unlit, dull brass."
 5. **`V2_LAMP_BAR`** (220 × 50): "The small chrome bar with three red jewel lamps above the END TURN button, lamps lit." Then **`V2_LAMP_BAR_OFF`**: "Same, lamps unlit."
