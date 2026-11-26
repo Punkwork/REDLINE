@@ -317,6 +317,10 @@ Created `PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md` (c4f815d) at designer request
 
 Placed the designer-selected epigraph and linked design note in the [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md). Recorded in the documentation commit titled `PHIL-001a: Open the Philosophical Design Bible with the Fenigson epigraph`.
 
+### PHIL-006 — Panoptic society (DONE: reference documentation)
+
+Reviewed the Into the Shadows transcript and added timestamped notes and design implications in the [Philosophical Design Bible §12](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md#12--phil-006-panoptic-society). Commit: `PHIL-006: Document panoptic society as a design reference`.
+
 ### PHIL-002 — Algorithmic Reduction (DONE: documentation)
 
 All six explorations preserved in Philosophical Design Bible §09 (b711f53), with priority on recursive self-surveillance and disappearance of surprise. Apply PHIL-001 safeguards and four-question gate. No implementation authorized.

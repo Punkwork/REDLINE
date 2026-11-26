@@ -31,28 +31,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude); 2026-11-20 — IRONWATCH avatar prework (Claude); 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude); 2026-11-20 — IRONWATCH mockups reviewed (Claude); 2026-11-20 — ENC-CONCEPT-001 console colour per corporation (Claude Code); 2026-11-21 — Designer calls: DEV-002b/c/h, PIXEL-TRACE-001c, PIXEL-16BIT-001, MOOD-PIXEL-001; checklist v0.7 (Claude).
 
-## 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude)
-
-The designer pushed `playtest-7` on `5bb7d71` from the local clone (`git -C … tag playtest-7 5bb7d71`, then push). Cloud Claude sessions can push branches but not tags: the session proxy refuses tag refs and the GitHub API tag path (HTTP 403). Future `playtest-N` tags go the same way, from the designer's machine. HANDOFF and checklist v0.7 updated. **Code changes:** none. **Tests:** none.
-
-## 2026-11-21 — STRIP-001: core-loop test build (Claude Code)
-
-**Designer, 2026-11-21:** "Let's build a stripped down test build with the extras stripped off and just focus on break, defend, and build." Decisions BW-001, PROBE-001, PROBE-003, BREACH-001, TURN-001, BURST-001, STR-001, CACHE-001 and STRIP-001 approved in the same session (quotes in the master design doc). Spec: `REDLINE_CORE_LOOP.md`.
-
-**Built** behind `Game.CORE_LOOP` (true): 3 BW; PROBE 0 BW with +1 BW per extra PROBE on the same ICE per turn; PROBE reveals a VOID's top face-down subroutine; DEEP PROBE −5; BURST 3 → 5 BW with a per-copy rising cost; parting shot on BREACH; discard and draw before the Corporation Response; CACHED cards discarded between layers; no bloat tax or FORTRESS rolls; starter Icepicks STR 2 / 1 BW boost; the slice ICE rewritten (STR +2, no passives, fixed PULP, no CORTEX, no BOOTING, COOKIE BANNER all PULP); reward pool limited to `CardDB.CORE_POOL`; Generalist-only select screen; no COMPILE at the SAFEHOUSE. The export bundles `REDLINE_CORE_LOOP_CHECKLIST.md`.
-
-**Tests:** `test_game.gd` 138 passed, 0 failed (new `test_core_loop.gd`; the legacy suite runs only when `CORE_LOOP` is false); `test_adp.gd` 17/0; `test_signal_carbon.gd` 671/0. Screenshot fixtures were not run locally (stopped for time); CI runs them on push.
-
-**Bot sims (30 Generalist runs):** 24/30 cleared; 5 deaths, all at the CAPTCHA node (AUTO-RENEW STR 7 + CAPTCHA); 1 stalled run at CAPTCHA. 6.7 turns per encounter; 6.5 PULP reaching VITAE per encounter (target 2–4); 0.00 unspent BW per turn; 2.38 playable cards left per turn (the inert cards were already installed, so the figure is the same without them); 2.57 threat subroutines broken before each BREACH; parting shot 0.52 subroutines and 0.34 VITAE per BREACH; earliest Opening BREACH turn 2. The bot plays every cheap card, so treat VITAE as an upper bound.
-
-**Interpretations to confirm**
-- A PROBE on a VOID reveals its top face-down subroutine and that subroutine becomes **active**, so it also fires in the next response. ("The deeper you probe, the riskier.")
-- Card removal uses the existing DECOMPILE option on the reward screen rather than a new SAFEHOUSE option; the SAFEHOUSE offers healing only.
-- The legacy rules suite is skipped while `CORE_LOOP` is true, because it asserts the full-game values.
-- Not yet done: the CACHE ∞ / N corner icon, and PROBE's cost shown while dragging over an ICE (HANDOFF rows).
-- The CAPTCHA node is the bot's danger spot (AUTO-RENEW's FORTRESS STR 7 against a STR 2 FORTRESS Icepick). Left as specified for the designer's playtest.
-
-**Log size (LOG-001):** moved the three oldest 2026-11-19 entries (CARDS-002) unchanged to the archive.
+LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
 ## 2026-11-21 — RELEASE-001: HALCYON PLAYTEST 8 (core loop) exported (Claude Code)
 
@@ -413,3 +392,6 @@ The designer confirmed the placement and supplied the interview. Added the exact
 
 Designer confirmed the VAS-001 image as the target and asked to start the composition pass. The sandbox is now laid out to the reference's coordinates with the 34 VAS-ASSET-001 painted parts: `V2Art` loads them pre-scaled (Lanczos) so they stay crisp; the ICE panel is the painted window with portrait left, nameplate + STR medallion top right, type medallion on the portrait corner, a key bed sized to the keys and the status strip (compact variant at three ICE keeps keys ≥ 44 px); the response rail is painted capsules with icon + number; meters, turn, phase, TRACE and the deck/discard/burned stack are icon + number with names on hover (VAS-ASSET-001 §2a); END TURN is an illuminated key (ARCH-V2-003m). No rules, `Main.tscn` or project-setting changes. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 127/0; `shot_arch_v2_ice.gd` 19 captures. Captures `docs/visual/fixtures/arch-v2-composition/`. Interpretations to confirm in HANDOFF. [#21](https://github.com/Punkwork/REDLINE/issues/21).
 
+## 2026-11-26 — PHIL-006: Panoptic society (Codex)
+
+Reviewed the full English auto-caption transcript linked by the designer. Added a timestamped design reference in Philosophical Design Bible §12 on self-discipline, institutional and peer oversight, language and collective agency. Checked dates, links and documentation scope. Godot tests were outside this edit.

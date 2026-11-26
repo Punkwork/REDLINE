@@ -2992,6 +2992,10 @@ Established [PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md](PANOPTICON_PHILOSOPHICAL_
 
 The designer placed the Efrat Fenigson passage as the opening epigraph of the [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md). Its design note links participatory confinement, the Internalized Observer, NUL/REM’s consent and authority, and the burden of autonomy. Scope is designer-facing editorial framing.
 
+## PHIL-006 — Panoptic society (DESIGN REFERENCE, 2026-11-26)
+
+Designer requested a transcript review. The [Philosophical Design Bible §12](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md#12--phil-006-panoptic-society) records source observations on self-regulation, institutions, oversight of supervisors, peer discipline, language and collective agency. Applications are interpretive worldbuilding notes subject to existing PHIL-001 safeguards.
+
 ## PHIL-002 — Algorithmic Reduction (DIRECTION, designer-confirmed 2026-11-23)
 
 Preserve six explorations in the [Philosophical Design Bible](PANOPTICON_PHILOSOPHICAL_DESIGN_BIBLE.md): reduction of identity, curiosity displaced by conformity, performance metrics, performance of identity, recursive self-surveillance and disappearance of surprise. Designer emphasizes the last two. Algorithmic Reduction concerns representation and self-perception; no psychological classification or predetermined outcome. All mechanics remain PROPOSED.
