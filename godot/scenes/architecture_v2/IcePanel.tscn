@@ -50,10 +50,10 @@ expand_mode = 1
 layout_mode = 0
 mouse_filter = 2
 
-[node name="Bank" type="HBoxContainer" parent="Controls"]
+[node name="Bank" type="VBoxContainer" parent="Controls"]
 layout_mode = 0
 mouse_filter = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="Status" type="Panel" parent="."]

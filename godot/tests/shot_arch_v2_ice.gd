@@ -154,6 +154,17 @@ func run() -> void:
 	sb.flyout.hold_at("rustler_turn", 0.6)
 	await shot("v2_13_reduced_motion_flyout")
 
+	# 10b. ARCH-V2-003u: a twelve-card hand (fixture-only stand-ins cycling the real hand), one lifted.
+	await fresh()
+	quiet()
+	sb.hand_fan.clear()
+	for k in 12:
+		var c: Dictionary = sb.game.hand[k % sb.game.hand.size()]
+		sb.hand_fan.add_card(sb._card_button(c, func(): pass))
+	sb.hand_fan.cards()[5].grab_focus()
+	await shot("v2_14_twelve_card_hand")
+	sb.hand_fan.cards()[5].release_focus()
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

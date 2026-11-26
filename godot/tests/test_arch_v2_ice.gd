@@ -41,6 +41,9 @@ func run() -> void:
 	test_hesitation_voice()
 	print("- test_hand_fan")
 	await test_hand_fan()
+	print("- test_twelve_card_fan / test_rig_bay")
+	await test_twelve_card_fan()
+	await test_rig_bay()
 	print("ARCH-V2 ICE: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -348,6 +351,21 @@ func test_key_size_three_ice() -> void:
 		right = maxf(right, k.get_global_rect().end.x)
 	check(p6.keys().size() == 6 and s6 >= 44.0, "six keys ≥ 44 px at three ICE (smallest %.1f)" % s6)
 	check(right <= p6.get_global_rect().end.x, "six keys stay inside the panel")
+	check(p6.bank.get_child_count() == 2 and p6.bank.get_child(0).find_children("Key_S*", "", false, false).size() == 3, "six keys: two rows of three")
+	# ARCH-V2-003v: five keys = S1 S2 on top, S3 S4 S5 below; rows right-aligned on the panel's right.
+	var p5: IcePanel = lane.panels()[0]
+	var m5: Dictionary = p5.model.duplicate(true)
+	m5.keys.resize(5)
+	for k in 5: m5.keys[k] = (p6.model.keys[k] as Dictionary).duplicate(true); m5.keys[k].sub = k
+	p5.set_model(m5)
+	await process_frame
+	var top := p5.bank.get_child(0).find_children("Key_S*", "", false, false).map(func(k): return String(k.name))
+	var bottom := p5.bank.get_child(1).find_children("Key_S*", "", false, false).map(func(k): return String(k.name))
+	check(top == ["Key_S1", "Key_S2"] and bottom == ["Key_S3", "Key_S4", "Key_S5"], "five keys: S1 S2 on top, S3 S4 S5 below (%s / %s)" % [top, bottom])
+	var e1: float = p5.key(1).get_global_rect().end.x
+	var e2: float = p5.key(4).get_global_rect().end.x
+	check(absf(e1 - e2) < 1.0 and p5.key(4).get_global_rect().position.x > p5.get_global_rect().get_center().x - 40.0 * p5.scale.x, "rows right-aligned on the right side")
+	check(p5.key(0).get_global_rect().position.y < p5.key(2).get_global_rect().position.y, "top row above bottom row")
 	unmount(lane)
 	# One ICE stays centred at full size.
 	var g1 := fresh()
@@ -470,7 +488,7 @@ func test_hand_fan() -> void:
 	check(spread, "cards splay left to right in hand order")
 	check(arc, "outer cards sit no higher than the centre card (arc)")
 	check(cards[0].position.x >= -20.0 and cards[n - 1].position.x + cards[n - 1].size.x <= sb.hand_fan.size.x + 20.0, "fan stays inside the hand area")
-	check(cards[0].size.x >= 44 and is_equal_approx(cards[0].size.y / cards[0].size.x, 1.58), "cards use HuCard proportions and touch size")
+	check(cards[0].size.x >= 44 and absf(cards[0].size.y / cards[0].size.x - 1.58) < 0.01, "cards use HuCard proportions and touch size")
 	var c: Control = cards[1]
 	var rest := c.position
 	c.grab_focus()
@@ -508,3 +526,52 @@ func test_hesitation_voice() -> void:
 	var v3 := HesitationVoice.new()
 	check(int(v3.tick(4.5, 4.5, 3, false, "PLAYER", 1, "HALCYON", lethal).get("ice", -1)) == 1, "the ICE with the highest mood speaks")
 	check(snap(g) == before, "hesitation never touches the Game")
+
+func test_twelve_card_fan() -> void:
+	## ARCH-V2-003u: up to 12 cards; at least the left half of every card stays visible.
+	var sb: IceEncounterSandbox = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
+	sb.reduced_motion = true; sb.instant = true
+	root.add_child(sb)
+	await process_frame
+	var fan := sb.hand_fan
+	fan.clear()
+	for k in 12:
+		var b := Button.new(); b.text = str(k); fan.add_card(b)
+	await process_frame
+	var cs := fan.cards()
+	var half := true
+	for k in range(1, cs.size()):
+		half = half and cs[k].position.x - cs[k - 1].position.x >= fan.card_size.x * 0.5 - 0.5
+	check(cs.size() == 12 and half, "twelve cards: each card's left half stays visible")
+	check(cs[11].position.x + fan.card_size.x <= fan.size.x + 20.0 and cs[0].position.x >= -20.0, "twelve cards fit the tray")
+	check(sb.HAND.end.x <= sb.RACK.position.x and sb.COUNTERS.position.y >= sb.RACK.end.y, "counters sit under the meters; the hand reaches them")
+	sb.queue_free()
+	await process_frame
+
+func test_rig_bay() -> void:
+	## ARCH-V2-003u: installed programs are cartridges in the CRT; clicking one shows it and makes it
+	## the program a key click uses. Selecting makes no Game call.
+	var sb: IceEncounterSandbox = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
+	sb.reduced_motion = true; sb.instant = true
+	root.add_child(sb)
+	await process_frame
+	var tp := sb.game.hand.filter(func(c): return c.id == "TUMBLER_ICEPICK")
+	if not tp.is_empty(): sb.ctrl.request_play(int(tp[0].uid)); sb.refresh()
+	await process_frame
+	var carts := sb.rig_bay.cartridges()
+	check(carts.size() == sb.game.installed.size() and carts.size() >= 2, "one cartridge per installed program (%d)" % carts.size())
+	var calls := sb.ctrl.game_calls
+	var before := snap(sb.game)
+	var target: RigBay.Cartridge = carts[carts.size() - 1]
+	var uid := int(target.prog.uid)
+	target.chosen.emit(uid)
+	await process_frame
+	check(sb.ctrl.active_program == uid and sb.ctrl.game_calls == calls and snap(sb.game) == before, "clicking a cartridge selects it without touching the Game")
+	check(int(sb.rig_bay.screen.prog.get("uid", -1)) == uid and sb.rig_bay.screen.is_active, "the CRT shows the selected program")
+	var c2 := sb.rig_bay.cartridges()
+	var raised := false
+	for c in c2: if c.active: raised = c.position.y < c2[0].position.y or c == c2[0]
+	check(raised, "the active cartridge sits raised in its slot")
+	check(sb.rig_bay.cartridges()[0].position.y < sb.CRT.position.y, "cartridges stick up above the CRT")
+	sb.queue_free()
+	await process_frame

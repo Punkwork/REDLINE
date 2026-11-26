@@ -180,17 +180,25 @@ class TraceGauge extends Explained:
 class CounterStack extends Control:
 	var art: Texture2D
 	var rows: Array = []
-	func setup(sz: Vector2, insp: KeyInspector) -> void:
-		size = sz; custom_minimum_size = sz; art = V2Art.tex("controls/V2_COUNTER_STACK.png", sz.x)
+	var horizontal := false
+	func setup(sz: Vector2, insp: KeyInspector, across: bool = false) -> void:
+		## across (ARCH-V2-003u): one row of three cells under the meters, on a drawn plate.
+		horizontal = across
+		size = sz; custom_minimum_size = sz
+		art = null if across else V2Art.tex("controls/V2_COUNTER_STACK.png", sz.x)
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 		var icons := ["V2_ICON_DECK_LIGHT", "V2_ICON_DISCARD_LIGHT", "V2_ICON_BURNED_LIGHT"]
 		for k in 3:
 			var row := CounterRow.new()
 			row.inspector = insp
-			# Row centres measured on the art: 26%, 53%, 80% of the height.
-			var cy: float = sz.y * [0.262, 0.533, 0.805][k]
-			row.position = Vector2(sz.x * 0.11, cy - sz.y * 0.11)
-			row.size = Vector2(sz.x * 0.78, sz.y * 0.22)
+			if across:
+				var cw := (sz.x - 16.0) / 3.0
+				row.position = Vector2(8 + k * cw, 8); row.size = Vector2(cw - 4, sz.y - 16)
+			else:
+				# Row centres measured on the art: 26%, 53%, 80% of the height.
+				var cy: float = sz.y * [0.262, 0.533, 0.805][k]
+				row.position = Vector2(sz.x * 0.11, cy - sz.y * 0.11)
+				row.size = Vector2(sz.x * 0.78, sz.y * 0.22)
 			row.ico = V2Art.tex("icons/%s.png" % icons[k], 64)
 			add_child(row)
 			rows.append(row)
@@ -201,6 +209,15 @@ class CounterStack extends Control:
 			rows[k].value = v[k]; rows[k].title = "%s: %d" % [names[k], v[k]]; rows[k].queue_redraw()
 	func _draw() -> void:
 		if art: draw_texture_rect(art, Rect2(Vector2.ZERO, size), false)
+		elif horizontal:
+			var sb := StyleBoxFlat.new(); sb.bg_color = Color("#1E1510"); sb.border_color = Color("#8A5A36")
+			sb.set_border_width_all(3); sb.set_corner_radius_all(10); sb.anti_aliasing = true
+			sb.shadow_color = Color(0, 0, 0, 0.45); sb.shadow_size = 4; sb.shadow_offset = Vector2(0, 2)
+			draw_style_box(sb, Rect2(Vector2.ZERO, size))
+			for k in rows.size():
+				var r: Control = rows[k]
+				var w := StyleBoxFlat.new(); w.bg_color = Color("#0E0A08"); w.set_corner_radius_all(6)
+				draw_style_box(w, Rect2(r.position, r.size))
 
 class CounterRow extends Explained:
 	var ico: Texture2D
@@ -209,7 +226,7 @@ class CounterRow extends Explained:
 		var h := size.y
 		var s := h * 0.82
 		# Socket centre at ~13% of the housing width → ~3% of this row; window centre at ~76% → 85%.
-		if ico: draw_texture_rect(ico, Rect2(Vector2(size.x * 0.17 - s / 2.0, (h - s) / 2.0), Vector2(s, s)), false)
+		if ico: draw_texture_rect(ico, Rect2(Vector2(maxf(3.0, size.x * 0.17 - s / 2.0), (h - s) / 2.0), Vector2(s, s)), false)
 		var font := VasTokens.FONT_READOUT
 		var px := int(h * 0.48)
 		var text := "%02d" % clampi(value, 0, 99)

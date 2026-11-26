@@ -30,13 +30,13 @@ const AD := Rect2(1196, 1, 306, 94)
 const ENCLOSURE := Rect2(6, 100, 1524, 499)
 const LANE := Rect2(40, 134, 1456, 354)
 const RAIL_HOUSING := Rect2(192, 494, 1152, 63)
-const CRT := Rect2(6, 604, 262, 168)
-const NOTE := Rect2(8, 778, 258, 80)
-const END_TURN := Rect2(1458, 792, 66, 66)   ## designer 15:37: the very bottom-right corner
-const TRAY := Rect2(272, 600, 930, 264)
-const HAND := Rect2(318, 592, 846, 262)   ## fan area: cards overhang the tray top like VAS-001
-const RACK := Rect2(1208, 608, 196, 206)
-const COUNTERS := Rect2(1410, 628, 120, 158)
+const CRT := Rect2(6, 632, 262, 156)   ## cartridges stick up above it (ARCH-V2-003u)
+const NOTE := Rect2(8, 794, 258, 66)
+const END_TURN := Rect2(1464, 794, 64, 64)   ## designer 15:37: the very bottom-right corner
+const TRAY := Rect2(272, 600, 984, 264)   ## ARCH-V2-003u: widened for up to 12 cards
+const HAND := Rect2(296, 592, 952, 264)   ## fan area: cards overhang the tray top like VAS-001
+const RACK := Rect2(1262, 604, 196, 196)
+const COUNTERS := Rect2(1262, 806, 196, 52)   ## horizontal, under the meters (ARCH-V2-003u)
 
 @export var auto_ready_rig := "FORTRESS_ICEPICK"
 @export var step_seconds := 0.45
@@ -60,7 +60,7 @@ var trace_gauge: HudWidgets.TraceGauge
 var counters: HudWidgets.CounterStack
 var effect_card: HudWidgets.EffectCard
 var signal_screen: HudWidgets.SignalScreen
-var _rig_box: VBoxContainer
+var rig_bay: RigBay
 var _hand_box: HBoxContainer
 var hand_fan: HandFan
 ## ADP-2b: hovering one card 4 s makes the moodiest ICE say an approved hesitation line.
@@ -162,15 +162,14 @@ func _build_header() -> void:
 func _build_left_rail() -> void:
 	## Lower left (ARCH-V2-003s): the CRT holds the rig (installed programs as draggable chips),
 	## the effects note sits under it.
-	var screen := Rect2(CRT.position + CRT.size * Vector2(0.14, 0.15), CRT.size * Vector2(0.64, 0.70))
-	var back := ColorRect.new(); back.color = Color("#06231A"); back.position = screen.position; back.size = screen.size
-	back.mouse_filter = Control.MOUSE_FILTER_IGNORE; stage.add_child(back)
-	_art("crt/V2_CRT_SMALL.png", CRT, "Crt")
-	_art("crt/V2_CRT_GLASS.png", screen, "CrtGlass")
-	_rig_box = VBoxContainer.new(); _rig_box.name = "Rig"
-	_rig_box.position = screen.position + Vector2(8, 8); _rig_box.size = screen.size - Vector2(16, 16)
-	_rig_box.add_theme_constant_override("separation", 5)
-	stage.add_child(_rig_box)
+	rig_bay = RigBay.new(); rig_bay.name = "RigBay"; rig_bay.inspector = inspector
+	rig_bay.position = Vector2.ZERO; rig_bay.size = REF
+	rig_bay.crt_rect = CRT
+	rig_bay.screen_rect = Rect2(CRT.position + CRT.size * Vector2(0.14, 0.15), CRT.size * Vector2(0.64, 0.70))
+	rig_bay.slot_y = CRT.position.y + 10.0
+	rig_bay.build(V2Art.tex("crt/V2_CRT_SMALL.png", CRT.size.x), V2Art.tex("crt/V2_CRT_GLASS.png", CRT.size.x))
+	rig_bay.selected.connect(func(uid): ctrl.active_program = uid; refresh())
+	stage.add_child(rig_bay)
 	effect_card = HudWidgets.EffectCard.new(); effect_card.name = "Effects"
 	effect_card.setup(NOTE.size, inspector); effect_card.position = NOTE.position; stage.add_child(effect_card)
 
@@ -216,6 +215,7 @@ func _build_tray() -> void:
 	## ARCH-V2-003o: the hand is fanned across the tray as in VAS-001; cards rise above the
 	## tray's top edge like the reference. Target and choice prompts use a plain row.
 	hand_fan = HandFan.new(); hand_fan.name = "HandFan"; hand_fan.reduced_motion = reduced_motion
+	hand_fan.card_size = Vector2(140, 221)   ## HuCard 1 : 1.58; twelve cards keep half of each showing
 	hand_fan.position = HAND.position; hand_fan.size = HAND.size; stage.add_child(hand_fan)
 	var v := VBoxContainer.new(); v.position = TRAY.position + Vector2(36, 26); v.size = TRAY.size - Vector2(72, 70)
 	v.add_theme_constant_override("separation", 6); v.mouse_filter = Control.MOUSE_FILTER_IGNORE; stage.add_child(v)
@@ -224,7 +224,7 @@ func _build_tray() -> void:
 	_hand_box.alignment = BoxContainer.ALIGNMENT_CENTER; _hand_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	v.add_child(_hand_box)
 	counters = HudWidgets.CounterStack.new(); counters.name = "Counters"
-	counters.setup(COUNTERS.size, inspector); counters.position = COUNTERS.position; stage.add_child(counters)
+	counters.setup(COUNTERS.size, inspector, true); counters.position = COUNTERS.position; stage.add_child(counters)
 	end_key = HudWidgets.EndTurnKey.new(); end_key.name = "EndTurn"; end_key.inspector = inspector
 	end_key.setup(Vector2(END_TURN.size.x, END_TURN.size.y)); end_key.position = END_TURN.position
 	end_key.pressed.connect(end_turn)
@@ -320,19 +320,14 @@ func _refresh_inspector() -> void:
 		inspector.close()
 
 func _refresh_rig() -> void:
-	for c in _rig_box.get_children(): _rig_box.remove_child(c); c.queue_free()
+	var progs := []
 	for p in game.installed:
 		var d := CardDB.def(p.inst.id)
-		var chip := HudWidgets.RigChip.new()
-		chip.inspector = inspector
-		chip.uid = int(p.inst.uid)
-		chip.pick = d.has("pick")
-		chip.str_value = game.pick_str(p) if chip.pick else 0
-		chip.active = ctrl.active_program == chip.uid
-		chip.ico = IceKey.art("ICON_BREAK_LIGHT") if chip.pick else IceKey.art("ICON_PASSIVE_LIGHT")
-		chip.title = String(d.name) + ("  ·  STR %d" % chip.str_value if chip.pick else "")
-		chip.custom_minimum_size = Vector2(0, 30)
-		_rig_box.add_child(chip)
+		var pk: Dictionary = d.get("pick", {})
+		progs.append({"uid": int(p.inst.uid), "name": String(d.name), "pick": d.has("pick"),
+			"str": game.pick_str(p) if d.has("pick") else 0, "text": String(d.get("text", "")),
+			"itype": String(pk.get("itype", "")), "break_cost": int(pk.get("break_cost", 0))})
+	rig_bay.sync(progs, ctrl.active_pick())
 
 func _refresh_hand() -> void:
 	for c in _hand_box.get_children(): _hand_box.remove_child(c); c.queue_free()

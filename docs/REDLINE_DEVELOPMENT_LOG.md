@@ -33,15 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-21 — FORM-001 and FORM-002: ICE forms and more threat (Claude Code)
-
-Designer after Playtest 8: "a whole lot more fun to play", but too little damage and TRACE. Built in the core-loop build: TRACE subroutines +2, PULP subroutines +1 (FORM-002); `Game.ice_form()` gives CHEERY / WARY / LETHAL from STR and breaks, LETHAL is stored for the encounter and doubles PULP and TRACE in `effect_value` (so the keys, the response and the parting shot all show and deal the doubled value); Black ICE get the look only (FORM-001). The encounter's `mood_for()` follows the form when `CORE_LOOP` is on.
-
-**Tests:** `test_game.gd` 148 passed, 0 failed; ADP 17/0; SIGNAL/CARBON 671/0.
-**Bot sims (30 Generalist runs, before the Black ICE look change):** 15/30 cleared; deaths at CAPTCHA 11, TERMS & CONDITIONS 4; 3.3 turns per encounter; 10.1 PULP to VITAE per encounter; 0.00 unspent BW; 2.5 threat subs broken first per BREACH; parting shot 0.6 subs and 0.9 VITAE. The bot doesn't plan around LETHAL, so this is a worst case.
-
-**Interpretations to confirm:** "half its printed STR" uses the ICE's base STR, and "below half" is strict (STR 6 → WARY at 2 or less). A LETHAL ICE's mood stays lethal after its STR rises again.
-
 ## 2026-11-21 — BOOST-001 and SUB-001 after Playtest 9 (Claude Code)
 
 Playtest 9 sheet (designer): the core loop is fun (PULP, PROBE, rewards and "wanted another run" all 5/5), but encounters took 2–3 turns, DOORBELL CAM was over in 2 and needed CORTEX, and spare BW went into boosts without a choice. Lethal came up once. Ten [UI] items recorded in HANDOFF.
@@ -403,4 +394,8 @@ Designer: avatars as large as VAS-001 (at least half the field), bubbles momenta
 ## 2026-11-26 — ARCH-V2-003s/t: full-width encounter layout, power-button END TURN, ADP-2b speech (Claude Code)
 
 Designer layout change: the ICE enclosure spans the screen (panels 700 × 352; three ICE 720 × 550), CRT with the rig and the effects note lower left, meters right of the hand, second CRT and side pipe removed, END TURN a small round brown power button in the bottom-right corner. Speech: `HesitationVoice` implements ADP-2b (4 s hover, highest mood, 20 s cooldown, once per turn, not while dragging) with the approved Copy Pack lines; 10 new checks. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 154/0; 21 captures.
+
+## 2026-11-26 — ARCH-V2-003u/v: 12-card hand, cartridge rig, right-side keys (Claude Code)
+
+Designer: counters horizontal and narrower under the meters, hand tray widened for up to 12 cards (left half of each visible), installed programs as HuCard cartridges sticking out of the CRT (click shows the program and activates it), subroutine keys right-aligned with a second row past four (5 = 2 over 3). Built `RigBay` (cartridges, program screen; selection sets `EncounterController.active_program`, no Game call), horizontal `CounterStack`, card size 140 × 221, `IcePanel.row_split`. New checks: 12-card half-visibility, counters under meters, cartridge selection, five-key row order and right alignment, six keys in two rows. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 167/0; 22 captures (CI count updated). (LOG-001: moved "2026-11-21 — FORM-001 and FORM-002: ICE forms and more threat (Claude Code)" to the archive.)
 

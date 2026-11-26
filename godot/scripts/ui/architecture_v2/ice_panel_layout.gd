@@ -22,13 +22,13 @@ extends Resource
 
 @export_group("Virtual expression (avatar)")
 @export var avatar_rect_normal := Rect2(16, 6, 320, 320)
-@export var avatar_rect_compact := Rect2(150, 62, 420, 420)
+@export var avatar_rect_compact := Rect2(8, 76, 392, 392)
 @export var portrait_inset := 0.0
 @export var portrait_radius := 0.0
 
 @export_group("Speech bubble (momentary overlay, 1–2 s; covers what is under it)")
-@export var bubble_rect_normal := Rect2(340, 64, 340, 150)
-@export var bubble_rect_compact := Rect2(380, 60, 320, 160)
+@export var bubble_rect_normal := Rect2(200, 40, 330, 150)
+@export var bubble_rect_compact := Rect2(220, 70, 320, 160)
 @export var bubble_font_size := 22
 @export var bubble_font_size_compact := 28
 @export var bubble_seconds := 1.6
@@ -43,8 +43,8 @@ extends Resource
 @export var str_font_size := 30
 
 @export_group("Tactical controls (keys float over the avatar's lower edge)")
-@export var bank_rect_normal := Rect2(22, 180, 656, 136)
-@export var bank_rect_compact := Rect2(20, 368, 680, 136)
+@export var bank_rect_normal := Rect2(340, 92, 344, 226)   ## right side (ARCH-V2-003v)
+@export var bank_rect_compact := Rect2(336, 94, 362, 404)
 @export var bank_rim := 8.0
 @export var key_unit_max := 1.15
 @export var key_unit_max_compact := 1.3

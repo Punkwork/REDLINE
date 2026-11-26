@@ -5,7 +5,8 @@ extends Control
 ##   Identity           nameplate (top right) with the STR medallion on its upper-right corner;
 ##                      the type medallion on the portrait's upper-left corner
 ##   Virtual expression the painted ICE portrait (left), mood from FORM-001
-##   Tactical controls  the horizontal bank of illuminated subroutine keys (C09) in a recessed bed,
+##   Tactical controls  the subroutine keys (C09), right-aligned; more than four go into two rows
+##                      (top row first, ARCH-V2-003v),
 ##                      plus the TUMBLER reel
 ##   Persistent status  the cream strip along the foot: power lamp and the passive's icon
 ## Icons communicate, numbers quantify, hover explains: no rule text on the panel. Unused space stays
@@ -39,7 +40,7 @@ var ice_ref: Dictionary = {}
 @onready var notes: Label = $Status/Row/Notes
 @onready var band: Panel = $Controls
 var bubble: SpeechBubble
-@onready var bank: HBoxContainer = $Controls/Bank
+@onready var bank: VBoxContainer = $Controls/Bank   # rows of keys (ARCH-V2-003v)
 
 var _keys := {}          # sub -> SubroutineKey (active bank)
 var _art_cache := {}
@@ -216,16 +217,22 @@ func set_model(m: Dictionary) -> void:
 	# Tactical controls
 	_build_bank(m)
 
+static func row_split(n: int) -> Array:
+	## ARCH-V2-003v (designer 2026-11-26 15:51): up to four keys in one row; more than four go into
+	## two rows, the top row holding the first ones and the bottom row the rest (5 → 2 + 3, 6 → 3 + 3).
+	## Order reads left to right, top row then bottom row.
+	if n <= 4: return [n]
+	return [n / 2, n - n / 2]
+
 func _build_bank(m: Dictionary) -> void:
 	var L := layout
 	var wanted := []
 	for k in m.keys: wanted.append(int(k.sub))
 	var unit := _unit(m)
-	# The bed hugs the keys (top-aligned under the nameplate); the rest stays open seafoam.
 	var br := L.bank_rect(compact)
-	var bed_h := minf(br.size.y, (IceKey.KEY + IceKey.LAMP_H + IceKey.CHIP_H + 4.0) * unit + 2.0 * L.bank_rim + 8.0)
-	band.size = Vector2(br.size.x, bed_h)
-	bank.size = band.size
+	band.size = br.size
+	bank.position = Vector2(L.bank_rim, L.bank_rim)
+	bank.size = br.size - Vector2(2.0 * L.bank_rim, 2.0 * L.bank_rim)
 	var reuse: bool = wanted == _keys.keys() and bank.get_child_count() > 0 and m.pool.is_empty() and int(m.hidden_pool) == 0 and not _has_pool()
 	if reuse:
 		for k in m.keys: _keys[int(k.sub)].set_model(k, unit)
@@ -236,38 +243,51 @@ func _build_bank(m: Dictionary) -> void:
 	for c in bank.get_children():
 		bank.remove_child(c); c.queue_free()
 	_keys.clear()
-	for n in m.keys.size():
-		if n > 0: bank.add_child(_chevron(unit))
-		var key := SubroutineKey.new()
-		key.name = "Key_S%d" % (int(m.keys[n].sub) + 1)
-		key.set_model(m.keys[n], unit)
-		key.drop_check = func(sub: int, uid: int) -> Dictionary: return drop_check.call(ice_ref, sub, uid) if drop_check.is_valid() else {"ok": false}
-		key.break_requested.connect(func(r, s, u): break_requested.emit(r, s, u))
-		key.inspect_requested.connect(func(k): if is_instance_valid(inspector): inspector.show_key(k, String(model.name)))
-		key.inspect_ended.connect(func(k): if is_instance_valid(inspector): inspector.close(k))
-		bank.add_child(key)
-		_keys[int(m.keys[n].sub)] = key
-	if not m.pool.is_empty() or int(m.hidden_pool) > 0:
-		var gap := Control.new(); gap.custom_minimum_size.x = L.pool_gap; gap.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		bank.add_child(gap)
-		bank.add_child(_reel(m))
+	var split := row_split(m.keys.size())
+	var n := 0
+	for r in split.size():
+		var row := HBoxContainer.new(); row.name = "Row%d" % (r + 1)
+		row.alignment = BoxContainer.ALIGNMENT_END
+		row.add_theme_constant_override("separation", 0)
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		bank.add_child(row)
+		for j in int(split[r]):
+			if j > 0: row.add_child(_chevron(unit))
+			var key := SubroutineKey.new()
+			key.name = "Key_S%d" % (int(m.keys[n].sub) + 1)
+			key.set_model(m.keys[n], unit)
+			key.drop_check = func(sub: int, uid: int) -> Dictionary: return drop_check.call(ice_ref, sub, uid) if drop_check.is_valid() else {"ok": false}
+			key.break_requested.connect(func(rf, s, u): break_requested.emit(rf, s, u))
+			key.inspect_requested.connect(func(k): if is_instance_valid(inspector): inspector.show_key(k, String(model.name)))
+			key.inspect_ended.connect(func(k): if is_instance_valid(inspector): inspector.close(k))
+			row.add_child(key)
+			_keys[int(m.keys[n].sub)] = key
+			n += 1
+		if r == split.size() - 1 and (not m.pool.is_empty() or int(m.hidden_pool) > 0):
+			var gap := Control.new(); gap.custom_minimum_size.x = L.pool_gap; gap.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			row.add_child(gap)
+			row.add_child(_reel(m))
 	if focused_sub >= 0 and _keys.has(focused_sub): _keys[focused_sub].grab_focus.call_deferred()
 
 func _has_pool() -> bool:
-	for c in bank.get_children():
-		if c.name == "Reel": return true
-	return false
+	return bank.find_child("Reel", true, false) != null
 
 func _unit(m: Dictionary) -> float:
-	## As large as the bed allows, up to key_unit_max (1.0 = 60 px caps).
+	## As large as the key area allows, up to key_unit_max (1.0 = 60 px caps), for the row layout.
 	var L := layout
 	var n: int = m.keys.size()
 	var pool_w := 0.0
 	if not m.pool.is_empty() or int(m.hidden_pool) > 0: pool_w = L.pool_gap + 2 * 30 + 3 + 16
 	var br := L.bank_rect(compact)
-	var room := br.size.x - 2.0 * L.bank_rim - pool_w - maxf(0, n - 1) * L.chevron(compact)
-	var fit := room / maxf(1.0, n * (IceKey.KEY + 4.0))
-	var tall := (br.size.y - 2.0 * L.bank_rim) / (IceKey.KEY + IceKey.LAMP_H + IceKey.CHIP_H + 4.0)
+	var split := row_split(n)
+	var fit := 99.0
+	for r in split.size():
+		var len := int(split[r])
+		var extra := pool_w if r == split.size() - 1 else 0.0
+		var room := br.size.x - 2.0 * L.bank_rim - extra - maxf(0, len - 1) * L.chevron(compact)
+		fit = minf(fit, room / maxf(1.0, len * (IceKey.KEY + 8.0)))
+	var rows := float(split.size())
+	var tall := (br.size.y - 2.0 * L.bank_rim - (rows - 1.0) * 6.0) / (rows * (IceKey.KEY + IceKey.LAMP_H + IceKey.CHIP_H + 4.0))
 	return clampf(minf(minf(L.unit_max(compact), fit), tall), 0.5, L.unit_max(compact))
 
 func _reel(m: Dictionary) -> Control:
