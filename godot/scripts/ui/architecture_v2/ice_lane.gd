@@ -13,7 +13,7 @@ var layout: IcePanelLayout
 var inspector: KeyInspector
 var drop_check: Callable
 var reduced_motion := false
-@export var gap := 34.0
+@export var gap := 24.0
 
 var _panels: Array = []   # IcePanel, in current ICE order
 
@@ -47,8 +47,11 @@ func sync(models: Array) -> void:
 		if not next.has(p):
 			remove_child(p); p.queue_free()
 	_panels = next
+	# Three ICE shrink the panels; the compact layout narrows the portrait so keys stay ≥ 44 px.
+	var compact := _panels.size() >= 3
 	for n in _panels.size():
 		move_child(_panels[n], n)
+		_panels[n].set_compact(compact)
 		_panels[n].set_model(models[n])
 	_arrange()
 

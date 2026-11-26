@@ -14,6 +14,8 @@ var value := 0
 var delta := 0          # STR above/below printed
 var texture: Texture2D
 var lit := false
+## Numeral size for the STR medallion (0 = derive from the diameter).
+var font_px := 0
 
 func _init() -> void:
 	focus_mode = Control.FOCUS_ALL
@@ -37,7 +39,14 @@ func set_badge(k: String, t: String, v: int, d: int, tex: Texture2D, diameter: f
 func _draw() -> void:
 	var r := size.x / 2.0
 	var c := size / 2.0
-	# Chrome rim, enamel face.
+	if texture:
+		# Painted medallion (rim and face included, VAS-ASSET-001): drawn whole; STR adds its number.
+		draw_circle(c + Vector2(0, 3), r * 0.96, Color(0, 0, 0, 0.35))
+		draw_texture_rect(texture, Rect2(Vector2.ZERO, size), false)
+		if lit: draw_arc(c, r + 3.0, 0, TAU, 48, VasTokens.FOCUS, 3.0, true)
+		if kind == "str": _number(c, r)
+		return
+	# Drawn fallback: chrome rim, enamel face.
 	draw_circle(c + Vector2(0, 3), r, Color(0, 0, 0, 0.35))
 	draw_circle(c, r, VasTokens.CHROME_LO)
 	draw_circle(c, r - 2.0, VasTokens.CHROME_HI)
@@ -45,11 +54,6 @@ func _draw() -> void:
 	draw_circle(c, r - 6.0, face_col)
 	if lit:
 		draw_arc(c, r + 3.0, 0, TAU, 48, VasTokens.FOCUS, 3.0, true)
-	if texture:
-		var s := (r - 8.0) * 2.0
-		draw_texture_rect(texture, Rect2(c - Vector2(s, s) / 2.0, Vector2(s, s)), false)
-		if kind == "str": _number(c, r)
-		return
 	if kind == "str":
 		# The number alone, centred (designer 2026-11-26: no glyph over the ICE STRENGTH value).
 		_number(c, r)
@@ -69,7 +73,8 @@ func _type_colour() -> Color:
 
 func _number(c: Vector2, r: float) -> void:
 	var text := str(value)
-	var fs := int(r * (1.15 if text.length() < 2 else 0.95))
+	var fs := font_px if font_px > 0 else int(r * (1.15 if text.length() < 2 else 0.95))
+	if text.length() > 1 and font_px > 0: fs = int(fs * 0.82)
 	var font := VasTokens.FONT_PLAQUE
 	var w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
 	var col := VasTokens.IVORY

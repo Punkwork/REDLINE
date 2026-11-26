@@ -124,9 +124,22 @@ static func response_model(game: Game, ctrl: EncounterController) -> Array:
 		if ctrl.is_firing(st.ref, st.sub): state = "firing"
 		elif st.done: state = "fired"
 		out.append({"ref": st.ref, "sub": st.sub, "ice_name": String(game.ice_definition(st.ref).name).to_upper(),
+			"ice_type": String(game.ice_definition(st.ref).type),
 			"kind": key.kind, "value": key.value, "badge": key.badge, "extra": key.extra,
 			"hidden": key.kind == "HIDDEN", "title": key.title, "state": state})
 	return out
+
+## PULP the next Corporation Response will deal from subroutines the Rustler can see (hidden steps
+## are not counted, so the readout discloses nothing). Before SHIELD.
+static func incoming_pulp(game: Game) -> int:
+	var total := 0
+	if game.enc.is_empty(): return 0
+	for step in game.response_preview():
+		if step.skipped or step.hidden: continue
+		for source in step.effects:
+			var e := game.effect_value(game.enc.ice[step.ice], source)
+			if e.k == "PULP": total += int(e.get("v", 0))
+	return total
 
 static func biggest_hit(game: Game) -> int:
 	var biggest := 0

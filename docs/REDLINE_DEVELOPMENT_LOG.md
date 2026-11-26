@@ -408,3 +408,8 @@ Designer flagged that the spec planned word labels inside instrument housings (m
 ## 2026-11-26 — PHIL-001a: Philosophical Design Bible opening epigraph (Codex)
 
 The designer confirmed the placement and supplied the interview. Added the exact passage as the opening epigraph and linked its relevance to existing design sections. The interview transcript supports attribution to Fenigson as speaker. Original authorship is unverified. Checked the wording, heading links, and documentation scope. Godot tests were outside this documentation change.
+
+## 2026-11-26 — ARCH-V2-003: composition pass to the VAS-001 reference (Claude Code)
+
+Designer confirmed the VAS-001 image as the target and asked to start the composition pass. The sandbox is now laid out to the reference's coordinates with the 34 VAS-ASSET-001 painted parts: `V2Art` loads them pre-scaled (Lanczos) so they stay crisp; the ICE panel is the painted window with portrait left, nameplate + STR medallion top right, type medallion on the portrait corner, a key bed sized to the keys and the status strip (compact variant at three ICE keeps keys ≥ 44 px); the response rail is painted capsules with icon + number; meters, turn, phase, TRACE and the deck/discard/burned stack are icon + number with names on hover (VAS-ASSET-001 §2a); END TURN is an illuminated key (ARCH-V2-003m). No rules, `Main.tscn` or project-setting changes. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 127/0; `shot_arch_v2_ice.gd` 19 captures. Captures `docs/visual/fixtures/arch-v2-composition/`. Interpretations to confirm in HANDOFF. [#21](https://github.com/Punkwork/REDLINE/issues/21).
+

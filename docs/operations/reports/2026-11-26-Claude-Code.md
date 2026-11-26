@@ -119,3 +119,9 @@ Blockers / unverified: Windows runtime; real-GPU rendering; CI run result pendin
 Decisions genuinely needing the designer: none blocking. Interpretations to confirm are in HANDOFF (hover wording for type/STR, amber firing ring, dimmed fired rail steps, vertical centring at three ICE).
 Coordination (ARCH-V2-003 i): geometry and icons are provisional in `godot/themes/architecture_v2/ice_panel_layout.tres` (zones, sizes, `type_icons`, `str_icon`, `console_texture`, `portrait_frame_texture`) and `VasTokens` (palette, flyout colours/timing). Codex art lands by assigning textures there, with no code change; ChatGPT/Codex reference updates should be posted on [#21](https://github.com/Punkwork/REDLINE/issues/21) before geometry is locked.
 Recommended priorities: designer review of the captures against VAS-001; Codex visual fixture work against these components; then Batch 2 (C10–C12 hand/cards/rig, C15 choice overlay).
+
+## ARCH-V2-003 composition pass (late session)
+
+- Encounter sandbox composed to the VAS-001 reference with the VAS-ASSET-001 painted parts; icon-first instruments; END TURN key. Captures `docs/visual/fixtures/arch-v2-composition/`.
+- Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 127/0; 19 screenshot captures, no script errors.
+- Open for designer: small CRT content; HOSTILE REVEAL / LAYER / EXTRACT content; DOORBELL CAM portrait; hand still DEV stand-ins (Batch 2).
