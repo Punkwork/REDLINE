@@ -108,7 +108,8 @@ func test_racks(sb: IceEncounterSandbox) -> void:
 	check(sb.protocol_rack.filled() == 0, "PROTOCOL slots empty at the start of the Node")
 	check(sb.cap_rack.slots[0].title == "EMPTY CAP SLOT", "empty CAP slot explains itself on hover")
 	for s in sb.cap_rack.slots + sb.protocol_rack.slots:
-		check(s.focus_mode == Control.FOCUS_ALL and s.size.x >= 44.0, "%s is focusable and at least 44 px wide" % s.name)
+		## Size follows the delivered rack art (ARCH-V2-005d): sockets are about 37 × 41 reference px.
+		check(s.focus_mode == Control.FOCUS_ALL and s.size.x >= 34.0 and s.size.y >= 38.0, "%s is focusable and at least 34 × 38 px" % s.name)
 	# Deploy PROTOCOLs through the controller, one call each; the rack follows game.rack.
 	var ids := ["SPAM_FILTER", "PROXY_CHAIN", "TOOLBELT", "SURGE_PROTECTOR"]
 	for k in ids.size():

@@ -25,8 +25,8 @@ const TURN := Rect2(360, 13, 112, 69)
 ## slots each to start.
 const PHASE := Rect2(488, 16, 126, 63)
 const TRACE := Rect2(626, 11, 115, 74)
-const CAPS := Rect2(756, 14, 210, 68)
-const PROTOCOLS := Rect2(976, 14, 210, 68)
+const CAPS := Rect2(748, 14, 219, 68)
+const PROTOCOLS := Rect2(973, 14, 219, 68)
 const CAP_SLOTS := 3        ## UPL-001: 3 CAP slots (Ghostware/Hardware may add more later)
 const PROTOCOL_SLOTS := 3   ## designer: "start with 3"; more deployed than slots shows "+n"
 const AD := Rect2(1196, 1, 306, 94)

@@ -40,7 +40,14 @@ Parts for the VAS-001 encounter screen, per [`docs/architecture-v2/VAS-001_ASSET
 | `controls/V2_PIPE_V.png` | 112 × 664 | tile (vertical) | ChatGPT (§6d-7); trimmed, re-cut to a repeating section and cross-faded by Claude Code (original top/bottom did not match) | 2d49842742af | PROPOSED |
 | `controls/V2_PIPE_JOINT.png` | 704 × 702 | — | ChatGPT (§6d-8), trimmed | a3f528595924 | PROPOSED |
 
-Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Conversation 3 (§6d) complete. All three conversations done; parts dropped in favour of engine states or icon-first design are noted in the spec.
+| `controls/V2_GLASS_PLAQUE_HALF.png` | 1724 × 576 | 230/120/230/120 | ChatGPT (§6e-1), trimmed; 3:1 (asked 2:1), drawn as a nine-slice at 126 × 63 | f290bf2b7f5a | PROPOSED |
+| `controls/V2_GAUGE_HOUSING_HALF.png` | 1515 × 944 | — | ChatGPT (§6e-2), trimmed; ten empty cells baked into the trough (the game lights them, 2 TRACE each) | c2331a365544 | PROPOSED |
+| `controls/V2_SLOT_RACK.png` | 2186 × 410 | 440/80/150/80 | ChatGPT (§6e-3), trimmed; 5.3:1 (asked 3:1), nine-sliced at 219 × 68 so the icon socket keeps its shape; sockets end up about 37 × 41 px | b2c7c613ec96 | PROPOSED |
+| `controls/V2_CAP_SOCKET.png` | 1089 × 1226 | — | ChatGPT (§6e-4), trimmed | b59b44bb9a87 | PROPOSED |
+| `controls/V2_PROTOCOL_SOCKET.png` | 1154 × 1266 | — | ChatGPT (§6e-5), trimmed | 39da937ab3bc | PROPOSED |
+| `icons/V2_ICON_CAPS_LIGHT.png` | 256 × 256 | — | ChatGPT (§6e-6), trimmed, squared and downscaled | af418f9191ce | PROPOSED |
+| `icons/V2_ICON_PROTOCOL_LIGHT.png` | 256 × 256 | — | ChatGPT (§6e-7), trimmed, squared and downscaled | 29551c4ab274 | PROPOSED |
+Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Conversation 3 (§6d) complete. All three conversations done; conversation 4 (§6e, header slots) delivered 2026-11-26; parts dropped in favour of engine states or icon-first design are noted in the spec.
 
 ## Revised ICE avatars (ARCH-V2-003p, 2026-11-26)
 

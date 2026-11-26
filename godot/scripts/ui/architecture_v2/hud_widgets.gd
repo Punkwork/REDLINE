@@ -115,8 +115,9 @@ class PhasePlaque extends Explained:
 		## ARCH-V2-005: half width. Uses V2_GLASS_PLAQUE_HALF when it lands; until then the full
 		## plaque as a nine-slice (manifest margins) so its rim isn't squeezed.
 		size = sz; custom_minimum_size = sz
-		art = V2Art.tex("controls/V2_GLASS_PLAQUE_HALF.png", sz.x)
-		if art == null: box = V2Art.nine("controls/V2_GLASS_PLAQUE.png", Vector4(140, 60, 140, 60), sz.y * 0.26)
+		## The delivered half plaque is 3:1 (asked 2:1): nine-sliced so the rounded ends and screws keep shape.
+		box = V2Art.nine("controls/V2_GLASS_PLAQUE_HALF.png", Vector4(230, 120, 230, 120), sz.y * 230.0 / 576.0)
+		if box == null: box = V2Art.nine("controls/V2_GLASS_PLAQUE.png", Vector4(140, 60, 140, 60), sz.y * 0.26)
 	func set_phase(is_corp: bool) -> void:
 		corp = is_corp; title = "CORPORATION RESPONSE" if corp else "RUSTLER TURN"; queue_redraw()
 	func _draw() -> void:
@@ -152,6 +153,7 @@ class PhasePlaque extends Explained:
 ## TRACE: icon, value, and a bar toward the 20 threshold (red past it).
 class TraceGauge extends Explained:
 	var art: Texture2D
+	var half_art := false
 	var ico: Texture2D
 	var value := 0
 	const THRESHOLD := 20
@@ -161,6 +163,7 @@ class TraceGauge extends Explained:
 		## as a nine-slice (manifest margins).
 		size = sz; custom_minimum_size = sz
 		art = V2Art.tex("controls/V2_GAUGE_HOUSING_HALF.png", sz.x)
+		half_art = art != null
 		if art == null: box = V2Art.nine("controls/V2_GAUGE_HOUSING.png", Vector4(130, 80, 130, 80), sz.y * 0.2)
 		ico = IceKey.art("ICON_TRACE_LIGHT")
 	func set_value(v: int) -> void:
@@ -170,14 +173,17 @@ class TraceGauge extends Explained:
 		elif box: draw_style_box(box, Rect2(Vector2.ZERO, size))
 		var h := size.y
 		var s := h * 0.34
-		if ico: draw_texture_rect(ico, Rect2(Vector2(size.x * 0.09, h * 0.16), Vector2(s, s)), false, VasTokens.IVORY)
+		## V2_GAUGE_HOUSING_HALF (measured): glass window x 9%–91%, y 13%–58%; trough with ten baked
+		## cells x 11.5%–87.5%, y 64.5%–77.5%. Older full housing: icon row at 16%, trough 67.5%–80.5%.
+		var row_y := h * (0.18 if half_art else 0.16)
+		if ico: draw_texture_rect(ico, Rect2(Vector2(size.x * (0.13 if half_art else 0.09), row_y), Vector2(s, s)), false, VasTokens.IVORY)
 		var font := VasTokens.FONT_READOUT
 		var px := int(h * 0.30)
 		var text := str(value)
 		var tw := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
-		draw_string(font, Vector2(size.x * 0.9 - tw, h * 0.16 + s * 0.5 + px * 0.36), text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, VasTokens.IVORY)
-		# Trough measured on the art: x 6%–94%, y 66%–82%.
-		var t := Rect2(size.x * 0.075, h * 0.675, size.x * 0.85, h * 0.13)
+		draw_string(font, Vector2(size.x * (0.86 if half_art else 0.9) - tw, row_y + s * 0.5 + px * 0.36), text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, VasTokens.IVORY)
+		var t := Rect2(size.x * 0.115, h * 0.645, size.x * 0.76, h * 0.13) if half_art \
+			else Rect2(size.x * 0.075, h * 0.675, size.x * 0.85, h * 0.13)
 		## ARCH-V2-005: at half width, 10 segments of 2 TRACE each (20 thin cells would blur).
 		var segs := 10
 		var gap := 1.5
@@ -187,7 +193,9 @@ class TraceGauge extends Explained:
 		for k in segs:
 			var on := k < lit
 			var col := VasTokens.WARNING if hot else VasTokens.AMBER
-			draw_rect(Rect2(t.position.x + k * (w + gap), t.position.y, w, t.size.y), col if on else Color(col, 0.10))
+			var cell := Rect2(t.position.x + k * (w + gap), t.position.y, w, t.size.y)
+			if on: draw_rect(cell, col)
+			elif not half_art: draw_rect(cell, Color(col, 0.10))   # the half housing paints its own empty cells
 		focus_ring()
 
 ## Deck, discard and burned: icon + number in each window (designer, ARCH-V2-003n).
@@ -401,25 +409,42 @@ class SignalScreen extends Control:
 class SlotRack extends Control:
 	var kind := "CAP"            # "CAP" or "PROTOCOL"
 	var slots: Array = []
-	var housing: Texture2D
+	var housing: StyleBox
 	var group_icon: Control
-	const ICON_W := 0.20         # group-icon socket, fraction of the width
+	const ICON_W := 0.20         # group-icon socket, fraction of the width (drawn placeholder)
+	## V2_SLOT_RACK (2186 × 410, measured): icon socket centre (285, 205), radius ~125; bed x 430–2040,
+	## y 80–335. Nine-sliced (left margin holds the socket) so the rack can be narrower than the art.
+	const ART := Vector2(2186, 410)
+	const MARGINS := Vector4(440, 80, 150, 80)
 	func setup(sz: Vector2, k: String, n: int, insp: KeyInspector) -> void:
 		kind = k; size = sz; custom_minimum_size = sz
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
-		housing = V2Art.tex("controls/V2_SLOT_RACK.png", sz.x)
+		var a := sz.y / ART.y   # art → reference px
+		housing = V2Art.nine("controls/V2_SLOT_RACK.png", MARGINS, MARGINS.x * a)
 		var gi := RackIcon.new(); gi.name = "GroupIcon"; gi.kind = k; gi.inspector = insp
 		gi.title = "CAPS" if k == "CAP" else "PROTOCOLS (RACK)"
 		gi.lines = ["Single-use. Flip, inject, discard. 0 BW, any time in your turn. 3 slots."] if k == "CAP" \
 			else ["Deployed PROTOCOLs stay active for the whole Node and return to your deck at Node end."]
-		gi.position = Vector2(6, 6); gi.size = Vector2(sz.x * ICON_W - 6, sz.y - 12)
+		var x0: float
+		var area: Rect2
+		if housing:
+			var d := 250.0 * a
+			gi.position = Vector2(285.0 * a - d / 2.0, 205.0 * a - d / 2.0); gi.size = Vector2(d, d)
+			x0 = 432.0 * a
+			area = Rect2(x0, 4, sz.x - x0 - 140.0 * a, sz.y - 8)
+		else:
+			gi.position = Vector2(6, 6); gi.size = Vector2(sz.x * ICON_W - 6, sz.y - 12)
+			x0 = sz.x * ICON_W + 2
+			area = Rect2(x0, 6, sz.x - x0 - 6, sz.y - 12)
 		add_child(gi); group_icon = gi
-		var x0 := sz.x * ICON_W + 2
-		var sw := (sz.x - x0 - 6 - 4.0 * (n - 1)) / n
+		var gap := 3.0
+		var sw := (area.size.x - gap * (n - 1)) / n
+		var sh := minf(area.size.y, sw / 0.9) if housing else area.size.y   # sockets are 0.9 : 1
 		for i in n:
 			var s := RackSlot.new(); s.name = "%sSlot%d" % [("Cap" if k == "CAP" else "Protocol"), i]
 			s.kind = k; s.inspector = insp
-			s.position = Vector2(x0 + i * (sw + 4), 6); s.size = Vector2(sw, sz.y - 12)
+			s.position = Vector2(area.position.x + i * (sw + gap), area.position.y + (area.size.y - sh) / 2.0)
+			s.size = Vector2(sw, sh)
 			add_child(s); slots.append(s)
 		set_items([])
 	func set_items(items: Array) -> void:
@@ -432,7 +457,7 @@ class SlotRack extends Control:
 	func filled() -> int:
 		return slots.filter(func(s): return not s.item.is_empty()).size()
 	func _draw() -> void:
-		if housing: draw_texture_rect(housing, Rect2(Vector2.ZERO, size), false); return
+		if housing: draw_style_box(housing, Rect2(Vector2.ZERO, size)); return
 		var sb := StyleBoxFlat.new(); sb.bg_color = Color("#1E1510"); sb.border_color = Color("#8A5A36")
 		sb.set_border_width_all(3); sb.set_corner_radius_all(12); sb.anti_aliasing = true
 		sb.shadow_color = Color(0, 0, 0, 0.45); sb.shadow_size = 4; sb.shadow_offset = Vector2(0, 2)
@@ -447,7 +472,7 @@ class RackIcon extends Explained:
 	var kind := "CAP"
 	func _draw() -> void:
 		var tex := V2Art.tex("icons/V2_ICON_%s_LIGHT.png" % ("CAPS" if kind == "CAP" else "PROTOCOL"), 64)
-		var s := minf(size.x, size.y) * 0.78
+		var s := minf(size.x, size.y) * (0.62 if tex else 0.78)
 		var c := size / 2.0
 		if tex: draw_texture_rect(tex, Rect2(c - Vector2(s, s) / 2.0, Vector2(s, s)), false); focus_ring(); return
 		HudWidgets.draw_group_glyph(self, kind, c, s, VasTokens.IVORY)
@@ -475,7 +500,12 @@ class RackSlot extends Explained:
 	func _draw() -> void:
 		var r := Rect2(Vector2.ZERO, size)
 		var socket := V2Art.tex("controls/V2_%s_SOCKET.png" % kind, size.x)
-		if socket: draw_texture_rect(socket, r, false)
+		if socket:
+			draw_texture_rect(socket, r, false)
+			## The sockets' dark windows (measured by eye on the art): CAP 17–83% × 16–83%,
+			## PROTOCOL 14–86% × 13–87% (the guide rails sit inside the top and bottom).
+			var f := Rect2(0.17, 0.16, 0.66, 0.67) if kind == "CAP" else Rect2(0.14, 0.17, 0.72, 0.66)
+			r = Rect2(size * f.position, size * f.size).grow(5)
 		else:
 			var sb := StyleBoxFlat.new(); sb.bg_color = Color("#0B0806"); sb.border_color = Color("#5A3E28")
 			sb.set_border_width_all(2); sb.set_corner_radius_all(10 if kind == "CAP" else 5); sb.anti_aliasing = true
@@ -483,7 +513,7 @@ class RackSlot extends Explained:
 			draw_line(Vector2(5, 3), Vector2(size.x - 5, 3), Color(0, 0, 0, 0.6), 2.0)   # inset shadow
 		var inner := r.grow(-5)
 		if item.is_empty():
-			HudWidgets.draw_group_glyph(self, kind, size / 2.0, minf(size.x, size.y) * 0.5, Color(VasTokens.IVORY, 0.14))
+			if not socket: HudWidgets.draw_group_glyph(self, kind, size / 2.0, minf(size.x, size.y) * 0.5, Color(VasTokens.IVORY, 0.14))
 		else:
 			var tex := CardView.art_for(String(item.get("art", "")))
 			if tex:
@@ -504,7 +534,7 @@ class RackSlot extends Explained:
 			draw_rect(inner, accent(), false, 2.0)
 		if not overflow.is_empty():
 			var t := "+%d" % overflow.size()
-			var px := 15
+			var px := 11
 			var font := VasTokens.FONT_READOUT
 			var tw := font.get_string_size(t, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
 			var badge := Rect2(Vector2(size.x - tw - 10, size.y - px - 8), Vector2(tw + 8, px + 4))
