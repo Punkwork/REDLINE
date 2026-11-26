@@ -38,6 +38,7 @@ var ice_ref: Dictionary = {}
 @onready var passive_chip: Button = $Status/Row/Passive
 @onready var notes: Label = $Status/Row/Notes
 @onready var band: Panel = $Controls
+var bubble: SpeechBubble
 @onready var bank: HBoxContainer = $Controls/Bank
 
 var _keys := {}          # sub -> SubroutineKey (active bank)
@@ -53,6 +54,8 @@ func setup(l: IcePanelLayout, insp: KeyInspector) -> void:
 
 func _ready() -> void:
 	if layout == null: layout = IcePanelLayout.load_default()
+	bubble = SpeechBubble.new(); bubble.name = "Bubble"; bubble.visible = false
+	add_child(bubble); move_child(bubble, $Expression.get_index() + 1)
 	_apply_layout()
 	for b in [type_badge, str_badge]:
 		b.inspect_requested.connect(_inspect_badge)
@@ -82,12 +85,15 @@ func set_compact(on: bool) -> void:
 func _apply_layout() -> void:
 	var L := layout
 	_laid_out_compact = int(compact)
-	custom_minimum_size = L.panel_size
-	size = L.panel_size
-	# Window: the painted chrome bezel and seafoam field (aspect matches the panel; stretched).
+	var psz := L.size_of(compact)
+	custom_minimum_size = psz
+	size = psz
+	# Window: the painted chrome bezel and seafoam field. Normal: stretched (aspect matches);
+	# compact (taller): nine-sliced so the bezel corners keep their shape.
 	window.position = Vector2.ZERO
-	window.size = L.panel_size
+	window.size = psz
 	window.texture = V2Art.tex(L.window_art, L.panel_size.x)
+	_set_window_nine(compact, psz)
 	if window.texture == null and not has_node("FallbackWindow"): _fallback_window()
 	# Virtual expression
 	var pr := L.portrait_rect(compact)
@@ -105,7 +111,7 @@ func _apply_layout() -> void:
 		n.position = Vector2.ZERO
 		n.size = inner.size
 	# Identity
-	var np := L.nameplate_rect()
+	var np := L.nameplate_rect(compact)
 	nameplate.position = np.position
 	nameplate.size = np.size
 	nameplate.texture = V2Art.tex(L.nameplate_art, np.size.x)
@@ -122,7 +128,14 @@ func _apply_layout() -> void:
 	bank.position = Vector2.ZERO
 	bank.size = br.size
 	# Persistent status
-	var sr := L.strip_rect()
+	var br2 := L.bubble_rect(compact)
+	bubble.position = br2.position
+	bubble.size = br2.size
+	bubble.font_px = L.bubble_font_size_compact if compact else L.bubble_font_size
+	bubble.art = V2Art.tex(L.bubble_art, br2.size.x)
+	bubble._fit()
+	bubble.queue_redraw()
+	var sr := L.strip_rect(compact)
 	status.position = sr.position
 	status.size = sr.size
 	var strip := V2Art.nine(L.status_strip_art, L.status_strip_margins, sr.size.y)
@@ -131,6 +144,32 @@ func _apply_layout() -> void:
 	status_row.position = Vector2(sr.size.y * 0.12, 0)
 	status_row.size = Vector2(sr.size.x - sr.size.y * 0.5, sr.size.y)
 	power.custom_minimum_size = Vector2(sr.size.y * 0.8, sr.size.y * 0.8)
+
+func _set_window_nine(on: bool, psz: Vector2) -> void:
+	## Compact panels are taller than the painted window: nine-slice it (margins given in
+	## reference px of the normal panel, converted to the source file's pixels).
+	var nine: Panel = get_node_or_null("WindowNine")
+	var src := V2Art.image(layout.window_art)
+	if not on or src == null:
+		if nine: nine.visible = false
+		window.visible = true
+		return
+	if nine == null:
+		nine = Panel.new(); nine.name = "WindowNine"; nine.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(nine); move_child(nine, window.get_index() + 1)
+	var k := float(src.get_width()) / layout.panel_size.x
+	var m := layout.compact_window_margins
+	nine.add_theme_stylebox_override("panel", V2Art.nine(layout.window_art, m * k, m.x))
+	nine.position = Vector2.ZERO
+	nine.size = psz
+	nine.visible = true
+	window.visible = false
+
+func say(text: String) -> void:
+	## The ICE's speech bubble (ARCH-V2-003p). Empty text hides it. Presentation only.
+	bubble.text = text
+	bubble.visible = text != ""
+	bubble.queue_redraw()
 
 func set_model(m: Dictionary) -> void:
 	model = m
@@ -149,7 +188,7 @@ func set_model(m: Dictionary) -> void:
 	var type_tex: Texture2D = V2Art.tex(String(L.type_icons[String(m.type)]), L.type_badge_size) if L.type_icons.has(String(m.type)) else null
 	type_badge.set_badge("type", String(m.type), 0, 0, type_tex, L.type_badge_size)
 	type_badge.position = pr.position - Vector2(L.type_badge_size, L.type_badge_size) / 2.0
-	var np := L.nameplate_rect()
+	var np := L.nameplate_rect(compact)
 	str_badge.font_px = L.str_font_size
 	str_badge.set_badge("str", String(m.type), int(m.str), int(m.str_delta), V2Art.tex(L.str_icon, L.str_badge_size), L.str_badge_size)
 	str_badge.position = Vector2(np.end.x, np.position.y) - Vector2(L.str_badge_size, L.str_badge_size) / 2.0
@@ -269,6 +308,10 @@ func keys() -> Array:
 func _set_portrait(id: String, mood: String) -> void:
 	var art_mood := "lethal" if mood == "lethal" else ("wary" if mood in ["wary", "knocked_out"] else "cheery")
 	var path := layout.portrait_pattern % [id, art_mood]
+	# Revised avatar for this mood, then the concept mascot, then the revised avatar's nearest mood.
+	for alt in [layout.portrait_fallback_pattern % [id, art_mood], layout.portrait_pattern % [id, "wary" if art_mood == "lethal" else "cheery"], layout.portrait_pattern % [id, "lethal"]]:
+		if ResourceLoader.exists(path): break
+		path = alt
 	if path == _art_key: return
 	var old := portrait.texture
 	_art_key = path

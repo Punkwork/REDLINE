@@ -1,0 +1,11 @@
+# Designer's ChatGPT art folder: inventory (2026-11-26, Claude Code)
+
+Source: the designer's PC, `C:\DocYou\vc\PanOpticon\PANOPTICON art` (reached through the desktop bridge). 584 files. This list says what exists so later batches use it before asking for new art. Only files copied into the repo (see `godot/assets/architecture_v2/MANIFEST.md`) are part of the build.
+
+- **ICE avatars, three moods each:** 55 ICE. HALCYON ones imported for ARCH-V2-003p. Missing moods: TERMS_OF_SERVICE wary, HOUSE_CALL cheery and wary. All: ACCEPT_ALL, AMNESIA, ANIMA, ARMORY, AUTO_RENEW, BARRICADE, BASELINE_SCAN, BLAST_DOOR, BODY_CAM, CAPTCHA, CHECKPOINT, CONSENT_FORM, COOKIE_WALL, CROWD_CONTROL, DEJA_VU, DISPATCH, DOORBELL_CAM, DREAMCATCHER, DREAM_AD, EGO_DEATH, EMPATHY_ENGINE, FOCUS_MODE, FREE_TRIAL, HOUSE_CALL, INTERROGATION, K9_UNIT, KEYCARD_READER, LETHAL_FORCE, LIMBIC_LOOP, MEMORY_BANK, MEMORY_PALACE, MOOD_SCANNER, NEURAL_HANDSHAKE, NEUROLINK, ONBOARDING, OVERWATCH, PATROL_DRONE, PATTERN_ANALYSIS, PURSUIT_DRONE, RECALL, REJECT_ALL, ROADBLOCK, SEARCHLIGHT, SECURITY_GUARD, SHOCK_TROOPER, SLEEP_PARALYSIS, SLEEP_TRACKER, SNIPER_NEST, SPIKE_STRIP, STUN_TURRET, SYNAPSE_BARRIER, TERMS_OF_SERVICE, THERAPIST, TURNSTILE, WAKE_SIGNAL.
+- **Card illustrations (600 × 520):** 98 files (e.g. PROBE, PULP_SHIELD, TUMBLER_ICEPICK, CORTEX_BUFFER, BASIC_EXTRACTOR). For Batch 2 (C10–C12) on the HuCard body.
+- **Card frames:** CARD_FRAME_PROGRAM / PROTOCOL / SCRIPT, a blank retro frame, a mustard protocol frame, a salmon script frame, an oxide-red Bloatware frame; card backs UI_CARD_BACK and "Atompunk Starburst Eye Card Back". None has the HuCard gold contacts (CARD-HUCARD-001), so the frame body still needs that treatment.
+- **Ghostware badges:** 30. **CAPs:** 12. **Rustlers:** RUSTLER_ECHO, GENERALIST, RIOT, VECTOR.
+- **Backgrounds:** 22 (corp central/escape/friendly/hostile for HALCYON, IRONWATCH, LUCIDA; maps; Node backgrounds); title backgrounds and emblem. **Node icons:** 9.
+- **UI parts (concept kits):** 83 `UI_*` files (most already in `godot/assets/concept/ui/`), plus about 100 descriptively named parts (lamps, pipes, buttons, plates, speech bubbles, CRT screens, icon sheets).
+- **References:** `Panioticon_V1_Build12_Screenshot.png`, IRONWATCH mockups, `Typography/` flyout boards (4).

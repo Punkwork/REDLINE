@@ -41,3 +41,9 @@ Parts for the VAS-001 encounter screen, per [`docs/architecture-v2/VAS-001_ASSET
 | `controls/V2_PIPE_JOINT.png` | 704 × 702 | — | ChatGPT (§6d-8), trimmed | a3f528595924 | PROPOSED |
 
 Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Conversation 3 (§6d) complete. All three conversations done; parts dropped in favour of engine states or icon-first design are noted in the spec.
+
+## Revised ICE avatars (ARCH-V2-003p, 2026-11-26)
+
+`avatars/<ICE_ID>_<cheery|wary|lethal>.png`: the designer's revised ChatGPT avatars (source folder on the designer's PC, `PANOPTICON art`), downscaled to 576 px with Lanczos, transparent backgrounds. The 11 HALCYON ICE in `ice.gd`; 30 files (TERMS_OF_SERVICE wary and HOUSE_CALL cheery/wary missing in the source). Older `assets/concept/mascots/` art is the fallback.
+
+`ice/V2_SPEECH_BUBBLE.png`: the source's "Blank cream comic speech bubble" (tail lower left), trimmed and downscaled to 640 px.

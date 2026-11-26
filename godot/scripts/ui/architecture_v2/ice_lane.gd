@@ -47,7 +47,7 @@ func sync(models: Array) -> void:
 		if not next.has(p):
 			remove_child(p); p.queue_free()
 	_panels = next
-	# Three ICE shrink the panels; the compact layout narrows the portrait so keys stay ≥ 44 px.
+	# Three ICE use the taller compact panel (ARCH-V2-003p): large avatar, keys below, keys ≥ 44 px.
 	var compact := _panels.size() >= 3
 	for n in _panels.size():
 		move_child(_panels[n], n)
@@ -58,8 +58,9 @@ func sync(models: Array) -> void:
 func _arrange() -> void:
 	var n := _panels.size()
 	if n == 0 or layout == null: return
-	var pw := layout.panel_size.x
-	var ph := layout.panel_size.y
+	var psz := layout.size_of(n >= 3)
+	var pw := psz.x
+	var ph := psz.y
 	var k := minf(1.0, minf((size.x - (n - 1) * gap) / (n * pw), size.y / ph))
 	var total := n * pw * k + (n - 1) * gap
 	var x0 := (size.x - total) / 2.0

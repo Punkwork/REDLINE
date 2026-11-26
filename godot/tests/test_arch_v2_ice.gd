@@ -37,6 +37,8 @@ func run() -> void:
 	await test_sandbox_response(true)
 	print("- test_inspector_keyboard")
 	await test_inspector_keyboard()
+	print("- test_hand_fan")
+	await test_hand_fan()
 	print("ARCH-V2 ICE: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -427,3 +429,37 @@ func test_inspector_keyboard() -> void:
 	joined = " ".join(ins.find_children("*", "Label", true, false).map(func(l): return l.text))
 	check(joined.strip_edges() == "ICE STRENGTH: %d" % g.ice_str(0), "STR badge shows ICE STRENGTH with the current STR (got '%s')" % joined)
 	unmount(lane)
+
+func test_hand_fan() -> void:
+	## ARCH-V2-003o: hand splayed and fanned like VAS-001; layout only, rules untouched.
+	var sb: IceEncounterSandbox = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
+	sb.reduced_motion = true
+	sb.instant = true
+	root.add_child(sb)
+	await process_frame
+	var before := snap(sb.game)
+	var cards := sb.hand_fan.cards()
+	check(cards.size() == sb.game.hand.size() and cards.size() > 1, "fan holds one card per hand card (%d)" % cards.size())
+	var n := cards.size()
+	var sym := true; var spread := true; var arc := true
+	for i in n:
+		var a: float = cards[i].rotation; var b: float = cards[n - 1 - i].rotation
+		sym = sym and absf(a + b) < 0.001
+		if i > 0: spread = spread and cards[i].position.x > cards[i - 1].position.x and cards[i].rotation >= cards[i - 1].rotation
+		arc = arc and cards[i].position.y >= cards[n / 2].position.y - 0.01
+	check(sym and cards[0].rotation < 0.0 and cards[n - 1].rotation > 0.0, "cards tilt away from the centre, symmetrically")
+	check(spread, "cards splay left to right in hand order")
+	check(arc, "outer cards sit no higher than the centre card (arc)")
+	check(cards[0].position.x >= -20.0 and cards[n - 1].position.x + cards[n - 1].size.x <= sb.hand_fan.size.x + 20.0, "fan stays inside the hand area")
+	check(cards[0].size.x >= 44 and is_equal_approx(cards[0].size.y / cards[0].size.x, 1.58), "cards use HuCard proportions and touch size")
+	var c: Control = cards[1]
+	var rest := c.position
+	c.grab_focus()
+	await process_frame
+	check(c.position.y < rest.y and c.z_index > n, "focused card lifts to the front")
+	c.release_focus()
+	await process_frame
+	check(c.position == rest, "card returns to its place")
+	check(snap(sb.game) == before, "fan interaction does not touch the Game")
+	sb.queue_free()
+	await process_frame

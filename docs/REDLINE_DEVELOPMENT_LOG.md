@@ -33,10 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-21 — RELEASE-001: HALCYON PLAYTEST 8 (core loop) exported (Claude Code)
-
-Designer chose "option 1": skip the legacy screenshot fixtures in CI while `Game.CORE_LOOP` is true, since they stage full-game states the stripped build switches off (the first failure was `shot_rustlers` expecting VECTOR's card-break choice). `release` fast-forwarded to `37a72a4`; workflow [44970043672](https://github.com/Punkwork/REDLINE/actions/runs/44970043672) passed and exported `PANOPTICON-HALCYON-PLAYTEST-8-0.8.0-playtest.8-Windows-x86_64` (BUILD_COMMIT, SHA256SUMS, guide, both checklists). The `playtest-8` tag could not be pushed from this session (proxy); the designer pushes it from a local clone. **To restore the fixtures:** set `CORE_LOOP` to false, or update the fixtures for the core-loop build (HANDOFF).
-
 ## 2026-11-21 — FORM-001 and FORM-002: ICE forms and more threat (Claude Code)
 
 Designer after Playtest 8: "a whole lot more fun to play", but too little damage and TRACE. Built in the core-loop build: TRACE subroutines +2, PULP subroutines +1 (FORM-002); `Game.ice_form()` gives CHEERY / WARY / LETHAL from STR and breaks, LETHAL is stored for the encounter and doubles PULP and TRACE in `effect_value` (so the keys, the response and the parting shot all show and deal the doubled value); Black ICE get the look only (FORM-001). The encounter's `mood_for()` follows the form when `CORE_LOOP` is on.
@@ -395,3 +391,8 @@ Designer confirmed the VAS-001 image as the target and asked to start the compos
 ## 2026-11-26 — PHIL-006: Panoptic society (Codex)
 
 Reviewed the full English auto-caption transcript linked by the designer. Added a timestamped design reference in Philosophical Design Bible §12 on self-discipline, institutional and peer oversight, language and collective agency. Checked dates, links and documentation scope. Godot tests were outside this edit.
+
+## 2026-11-26 — ARCH-V2-003o/p: fanned hand, large ICE avatars, speech-bubble room, revised avatar art (Claude Code)
+
+Designer answers to the composition-pass questions recorded as ARCH-V2-003q. Designer asked for the hand to be fanned as in VAS-001 (ARCH-V2-003o): new `HandFan` (cards spread, tilt from centre, arc, focus/hover lift; reduced motion snaps). Designer said three-ICE avatars were far too small and needed room for comic bubbles (ARCH-V2-003p): three ICE now use a taller nine-sliced panel (avatar ~160 px on screen, nameplate and bubble beside it, keys below); every panel reserves a `SpeechBubble` zone using the painted cream balloon. Reviewed the designer's local ChatGPT art folder (585 files: 55 ICE × 3 moods, ~100 card illustrations, Ghostware, CAPs, backgrounds, UI parts); imported the 30 revised avatars for the 11 HALCYON ICE (576 px, `godot/assets/architecture_v2/avatars/`; TERMS_OF_SERVICE wary and HOUSE_CALL cheery/wary are not in the folder and fall back). Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 138/0; 21 captures. (LOG-001: moved "2026-11-21 — RELEASE-001: HALCYON PLAYTEST 8 (core loop) exported (Claude Code)" to the archive.)
+

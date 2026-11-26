@@ -31,6 +31,7 @@ const ENCLOSURE := Rect2(272, 100, 1232, 499)
 const LANE := Rect2(312, 140, 1152, 346)
 const RAIL_HOUSING := Rect2(312, 494, 1152, 63)
 const TRAY := Rect2(272, 600, 930, 264)
+const HAND := Rect2(318, 592, 846, 262)   ## fan area: cards overhang the tray top like VAS-001
 const COUNTERS := Rect2(1214, 624, 132, 165)
 const END_TURN := Rect2(1372, 650, 112, 160)
 const PIPE_X := 1510.0
@@ -59,6 +60,7 @@ var effect_card: HudWidgets.EffectCard
 var signal_screen: HudWidgets.SignalScreen
 var _rig_box: VBoxContainer
 var _hand_box: HBoxContainer
+var hand_fan: HandFan
 var _prompt: Label
 var _banner: PanelContainer
 var _last_turn := 0
@@ -216,8 +218,12 @@ func _build_enclosure() -> void:
 
 func _build_tray() -> void:
 	_art("controls/V2_TRAY.png", TRAY, "Tray")
+	## ARCH-V2-003o: the hand is fanned across the tray as in VAS-001; cards rise above the
+	## tray's top edge like the reference. Target and choice prompts use a plain row.
+	hand_fan = HandFan.new(); hand_fan.name = "HandFan"; hand_fan.reduced_motion = reduced_motion
+	hand_fan.position = HAND.position; hand_fan.size = HAND.size; stage.add_child(hand_fan)
 	var v := VBoxContainer.new(); v.position = TRAY.position + Vector2(36, 26); v.size = TRAY.size - Vector2(72, 70)
-	v.add_theme_constant_override("separation", 6); stage.add_child(v)
+	v.add_theme_constant_override("separation", 6); v.mouse_filter = Control.MOUSE_FILTER_IGNORE; stage.add_child(v)
 	_prompt = _label("", 14, Color(VasTokens.IVORY, 0.75), VasTokens.FONT_PLAQUE_SEMI); v.add_child(_prompt)
 	_hand_box = HBoxContainer.new(); _hand_box.add_theme_constant_override("separation", 10)
 	_hand_box.alignment = BoxContainer.ALIGNMENT_CENTER; _hand_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -271,6 +277,7 @@ func refresh() -> void:
 	flyout.reduced_motion = reduced_motion
 	lane.reduced_motion = reduced_motion
 	signal_screen.reduced_motion = reduced_motion
+	hand_fan.reduced_motion = reduced_motion
 	if not game.enc.is_empty():
 		lane.sync(VisibleStateAdapter.ice_models(game, ctrl))
 		rail.sync(VisibleStateAdapter.response_model(game, ctrl))
@@ -334,10 +341,12 @@ func _refresh_rig() -> void:
 
 func _refresh_hand() -> void:
 	for c in _hand_box.get_children(): _hand_box.remove_child(c); c.queue_free()
+	hand_fan.clear()
+	_prompt.text = ""
 	if game.phase == "READY_RIG":
 		_prompt.text = "DEV · READY RIG"
 		for c in game.draw_pile.filter(func(c): return CardDB.def(c.id).type == "PROGRAM"):
-			_hand_box.add_child(_card_button(c, func(): ctrl.request_choice(int(c.uid))))
+			hand_fan.add_card(_card_button(c, func(): ctrl.request_choice(int(c.uid))))
 		return
 	if game.phase == "CHOICE":
 		var k := String(game.pending.get("kind", ""))
@@ -346,7 +355,7 @@ func _refresh_hand() -> void:
 			return
 		_prompt.text = "DEV · CHOOSE: %s" % k.to_upper().replace("_", " ")
 		var options: Array = game.pending.get("cards", game.hand)
-		for c in options: _hand_box.add_child(_card_button(c, func(): ctrl.request_choice(int(c.uid))))
+		for c in options: hand_fan.add_card(_card_button(c, func(): ctrl.request_choice(int(c.uid))))
 		return
 	if _pending_target >= 0:
 		_prompt.text = "DEV · CHOOSE AN ICE"
@@ -355,14 +364,13 @@ func _refresh_hand() -> void:
 			_hand_box.add_child(_button("→ " + String(m.name), func(): var u := _pending_target; _pending_target = -1; ctrl.request_play(u, r); refresh()))
 		_hand_box.add_child(_button("CANCEL", func(): _pending_target = -1; refresh()))
 		return
-	_prompt.text = "DEV · HAND (cards arrive in Batch 2)"
 	for c in game.hand:
 		var uid := int(c.uid)
 		var b := _card_button(c, func():
 			if CardDB.def(c.id).get("target", false): _pending_target = uid; refresh()
 			else: ctrl.request_play(uid))
 		b.disabled = not game.can_play(uid).ok or responding
-		_hand_box.add_child(b)
+		hand_fan.add_card(b)
 
 # ----- Small builders
 
@@ -370,7 +378,6 @@ func _card_button(c: Dictionary, on_press: Callable) -> Button:
 	## DEV stand-in in HuCard proportions (CARD-HUCARD-001: 1 : 1.58); Batch 2 replaces it.
 	var d := CardDB.def(c.id)
 	var b := _button("%s\n\n%d BW" % [String(d.name), int(d.get("bw", 0))], on_press)
-	b.custom_minimum_size = Vector2(112, 177)
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return b
 

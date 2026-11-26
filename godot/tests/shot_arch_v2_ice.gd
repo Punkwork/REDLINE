@@ -49,6 +49,21 @@ func prime() -> void:
 	sb.game.bw = 30
 	sb.refresh()
 
+func speak_all() -> void:
+	## Fixture only: an approved line per ICE and mood from data/adp_copy.json.
+	var lines: Array = []
+	var f := FileAccess.open("res://data/adp_copy.json", FileAccess.READ)
+	if f:
+		var d = JSON.parse_string(f.get_as_text())
+		if d is Dictionary: lines = d.get("lines", [])
+		elif d is Array: lines = d
+	for p in sb.lane.panels():
+		var said := ""
+		for l in lines:
+			if l is Dictionary and String(l.get("ice", "")) == String(p.model.id) and String(l.get("approval", "")) == "approved" and String(l.get("mood", "")) == String(p.model.mood):
+				said = String(l.text); break
+		p.say(said if said != "" else "…")
+
 func key(i: int, s: int) -> SubroutineKey:
 	return sb.lane.panel_for(sb.game.enc.ice[i]).key(s)
 
@@ -65,6 +80,9 @@ func run() -> void:
 	# 2. Opening at rest.
 	quiet()
 	await shot("v2_02_open_1600x1000")
+	speak_all()
+	await shot("v2_02b_open_bubbles")
+	for p in sb.lane.panels(): p.say("")
 	# 3. Hover: AUTO-RENEW S3, a two-effect subroutine (PULP 2 + BW drain), full rule in the inspector.
 	key(0, 2).mouse_entered.emit()
 	await shot("v2_03_hover_multi_effect")
@@ -119,6 +137,10 @@ func run() -> void:
 	sb.game.enc.ice.append(sb.game._new_ice("DOORBELL_CAM"))
 	sb.refresh()
 	await shot("v2_10_three_ice_void_hidden")
+	# 9b. Speech bubbles (ARCH-V2-003p): approved ADP mood lines, one per ICE, in the reserved room.
+	speak_all()
+	await shot("v2_10b_three_ice_bubbles")
+	for p in sb.lane.panels(): p.say("")
 	var vpanel: IcePanel = sb.lane.panels()[2]
 	vpanel.type_badge.grab_focus()
 	await shot("v2_11_void_type_inspector")
