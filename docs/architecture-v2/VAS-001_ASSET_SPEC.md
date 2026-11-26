@@ -5,7 +5,7 @@
 
 The reference is a painted composite. The game reaches it by assembling **separate painted parts** and drawing everything that changes on top: names, numbers, icons on keys, lamp states, glow and focus. The art stays blank; the game writes. Same rule as the ENC-CONCEPT-001 kits (UI Bible Sources 5–7), which worked.
 
-**Design principles that override the reference where they differ (ARCH-V2-003):** icons communicate, numbers quantify, hover panels explain, typography announces. No textual subroutine rows; subroutines are horizontal illuminated keys. ICE type icon on the portrait frame's upper-left corner; STR medallion on the nameplate's upper-right corner (no "FORTRESS • STR 5" plaque). "SENTRY" becomes VOID ICE. One shared NEXT RESPONSE rail. Values and ICE in the reference are illustrative.
+**Design principles that override the reference where they differ (ARCH-V2-003):** preserve negative space (ARCH-V2-003m); icons communicate, numbers quantify, hover panels explain, typography announces. No textual subroutine rows; subroutines are horizontal illuminated keys. ICE type icon on the portrait frame's upper-left corner; STR medallion on the nameplate's upper-right corner (no "FORTRESS • STR 5" plaque). "SENTRY" becomes VOID ICE. One shared NEXT RESPONSE rail. Values and ICE in the reference are illustrative.
 
 ---
 
@@ -114,10 +114,7 @@ Reference coordinates are approximate (x, y, w, h in the 1536 × 864 reference).
 |---|---|---|---|---|
 | `V2_TRAY.png` | 1860 × 524 | 120 / 60 / 120 / 80 | 279,602,930,262 | The physical card tray: brass and chrome lip along the bottom, dark recessed bed. Cards lie on it. Plain centre. |
 | `V2_COUNTER_STACK.png` | 300 × 390 | — | 1325,690,150,195 | Bronze housing with **three** stacked black-glass readout windows (deck, discard, burned), each with a round **icon socket** at the left and a **number window** at the right; no label space (§2a). |
-| `V2_END_TURN.png` | 340 × 340 | — | 1490,680,170,170 | Round **domed brass-and-amber button** in a chrome ring, glowing warmly. Blank face. |
-| `V2_END_TURN_HOVER.png`, `_PRESSED.png`, `_DISABLED.png` | 340 × 340 | — | — | Hover: brighter glow. Pressed: dome pushed in, darker. Disabled: unlit, dull brass. Same geometry. |
-| `V2_LAMP_BAR.png` | 220 × 50 | — | above END TURN | Small chrome bar with three red jewel lamps (lit). |
-| `V2_LAMP_BAR_OFF.png` | 220 × 50 | — | — | Same, unlit. |
+| ~~`V2_END_TURN` (+ states), `V2_LAMP_BAR` (+ off)~~ | — | — | 1490,680,170,170 | **Dropped (ARCH-V2-003m, designer 2026-11-26):** END TURN is an illuminated key from the subroutine-key family (Build 12 key art, larger), icon-first, lit when the turn can end; no dome, no lamp bar. Negative space. |
 | `V2_CHASSIS_TILE.png` | 512 × 512 | tileable | everywhere behind | Dark warm bronze machine backplate texture, seamless, subtle wear. Opaque. |
 | `V2_PIPE_V.png` | 48 × 512 | tileable vertically | right edge | Vertical chrome pipe segment with a highlight. |
 | `V2_PIPE_JOINT.png` | 96 × 96 | — | pipe ends | Chrome pipe joint with a red-capped fitting. |
@@ -158,7 +155,7 @@ From `godot/assets/concept/ui/` and `godot/assets/concept/mascots/` (painted ENC
 | Meter rack | `UI_VITALS_PANEL` | `V2_METER_RACK` / `V2_METER_ROW` |
 | Active-effects card | `UI_NOTE_SLIP` | `V2_NOTE_CARD` |
 | Tray | `UI_HAND_TRAY` | `V2_TRAY` |
-| END TURN | `UI_END_TURN_BOX` (+ states) | `V2_END_TURN` (+ states) |
+| END TURN | `UI_KEY_*` key art (larger key, icon-first; ARCH-V2-003m) | — (no new art) |
 | TURN / TRACE housings | `UI_TURN_PLATE`, `UI_TRACE_COUNTER`, `UI_FLIP_TILE` | `V2_FLIP_COUNTER`, `V2_GAUGE_HOUSING` |
 | Hover panel | `UI_TOOLTIP_PLATE` | — |
 | Pipes, screws, rivets | `UI_PIPE_*`, `UI_SCREW`, `UI_RIVET` | `V2_PIPE_*` |
@@ -223,9 +220,7 @@ From `godot/assets/concept/ui/` and `godot/assets/concept/mascots/` (painted ENC
 
 1. **`V2_TRAY`** (1860 × 524): "The physical tray the cards lie on in the reference: dark recessed bed with a brass and chrome lip along the bottom edge. No cards. Plain in the middle."
 2. **`V2_COUNTER_STACK`** (300 × 390): "The bronze housing at the bottom right of the reference, redesigned to carry no words: three stacked rows, each a dark black-glass strip with a small round chrome-ringed **icon socket** at the left end and a small **number window** at the right end. No DECK / DISCARD / BURNED, no letters, no numbers, no icons."
-3. **`V2_END_TURN`** (340 × 340): "The round END TURN button from the reference: a domed brass-and-amber button in a chrome ring, glowing warmly. **Blank face, no words.**"
-4. **`V2_END_TURN_HOVER`**, **`_PRESSED`**, **`_DISABLED`**: "The same button, identical size and position: (hover) glowing brighter; (pressed) dome pushed in and slightly darker; (disabled) unlit, dull brass."
-5. **`V2_LAMP_BAR`** (220 × 50): "The small chrome bar with three red jewel lamps above the END TURN button, lamps lit." Then **`V2_LAMP_BAR_OFF`**: "Same, lamps unlit."
+3.–5. ~~END TURN dome, its states and the lamp bar~~ **Dropped (ARCH-V2-003m):** END TURN uses the existing illuminated key art. Skip these prompts.
 6. **`V2_CHASSIS_TILE`** (512 × 512, seamless): "A seamless tileable texture of the dark warm bronze machine backplate seen between the panels of the reference. Subtle wear, even, no bright spots."
 7. **`V2_PIPE_V`** (48 × 512, tiles vertically): "A vertical polished chrome pipe segment with a highlight, tileable top to bottom."
 8. **`V2_PIPE_JOINT`** (96 × 96): "A chrome pipe joint with a red-capped fitting, like the ones on the right edge of the reference."
