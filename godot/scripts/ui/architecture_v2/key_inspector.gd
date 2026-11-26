@@ -39,7 +39,7 @@ func show_key(key: SubroutineKey, ice_name: String) -> void:
 	_clear()
 	subject = key
 	var m := key.model
-	var big := IceKey.new()
+	var big := LitKey.new()   # ARCH-V2-003r: the inspector shows the same lit button
 	big.configure(String(m.kind), String(m.value), String(m.state), String(m.cost_text), false, 2.0)
 	big.badge = String(m.get("badge", "")); big.extra = int(m.get("extra", 0)); big.locked = bool(m.get("locked", false))
 	big.mouse_filter = Control.MOUSE_FILTER_IGNORE

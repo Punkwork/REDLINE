@@ -24,7 +24,7 @@ func _init() -> void:
 	focus_mode = Control.FOCUS_ALL
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	face = IceKey.new()
+	face = LitKey.new()   # ARCH-V2-003r: raised, lit-from-within panel button
 	face.name = "Face"
 	add_child(face)
 	mouse_entered.connect(func(): _set_lit(true); inspect_requested.emit(self))

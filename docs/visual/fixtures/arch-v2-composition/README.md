@@ -5,3 +5,5 @@ The Architecture V2 encounter sandbox composed to the VAS-001 reference with the
 Compare with the Batch 1 captures in `../arch-v2-batch1/` (flat drawn components) and the reference side-by-side `v2_vas001_side_by_side.jpg`.
 
 **Update 2026-11-26 (ARCH-V2-003o/p):** the hand is fanned across the tray (`v2_02_open_1600x1000.jpg`); three ICE use the taller panel with large revised avatars and a speech-bubble zone (`v2_10_three_ice_void_hidden.jpg`, `v2_10b_three_ice_bubbles.jpg`); `v2_02b_open_bubbles.jpg` shows the bubble zone with two ICE. The bubble lines are approved ADP mood lines placed by the fixture; in play the bubble stays empty until its trigger is decided.
+
+**Update 2026-11-26 15:25 (ARCH-V2-003r):** large frameless avatars, thin bezel, raised lit keys floating over the avatar's foot (`v2_keys_zoom_2x.jpg` is a 2× crop), momentary speech bubbles (`v2_02b`, `v2_10b` hold them for the capture).

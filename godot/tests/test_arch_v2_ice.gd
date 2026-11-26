@@ -329,6 +329,23 @@ func test_key_size_three_ice() -> void:
 	check(smallest >= 44.0, "keys ≥ 44 px at three ICE (smallest %.1f)" % smallest)
 	for p in lane.panels():
 		check(p.position.x >= -0.5 and p.position.x + p.size.x * p.scale.x <= lane.size.x + 0.5, "panel inside lane")
+		# ARCH-V2-003r: the avatar is at least half the window's width and stands above the keys.
+		var av: Rect2 = p.layout.portrait_rect(true)
+		check(av.size.x >= 0.5 * p.size.x and av.position.y < p.layout.bank_rect(true).position.y, "avatar ≥ half the window and above the keys (%s)" % p.name)
+	# ARCH-V2-003r: six subroutines in a three-ICE panel still fit, ≥ 44 px, inside the window.
+	var p6: IcePanel = lane.panels()[0]
+	var m6: Dictionary = p6.model.duplicate(true)
+	var extra_key: Dictionary = (m6.keys[0] as Dictionary).duplicate(true); extra_key.sub = 5
+	m6.keys.append(extra_key)
+	p6.set_model(m6)
+	await process_frame
+	var s6 := 999.0
+	var right := 0.0
+	for k in p6.keys():
+		s6 = minf(s6, k.face.key_rect().size.x * p6.scale.x)
+		right = maxf(right, k.get_global_rect().end.x)
+	check(p6.keys().size() == 6 and s6 >= 44.0, "six keys ≥ 44 px at three ICE (smallest %.1f)" % s6)
+	check(right <= p6.get_global_rect().end.x, "six keys stay inside the panel")
 	unmount(lane)
 	# One ICE stays centred at full size.
 	var g1 := fresh()

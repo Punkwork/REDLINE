@@ -88,25 +88,24 @@ func _apply_layout() -> void:
 	var psz := L.size_of(compact)
 	custom_minimum_size = psz
 	size = psz
-	# Window: the painted chrome bezel and seafoam field. Normal: stretched (aspect matches);
-	# compact (taller): nine-sliced so the bezel corners keep their shape.
+	# Window: the painted chrome bezel and seafoam field, nine-sliced with a thin rim (ARCH-V2-003r)
+	# so the field, the avatar and the keys get the pixels. The stretched texture is the fallback.
 	window.position = Vector2.ZERO
 	window.size = psz
 	window.texture = V2Art.tex(L.window_art, L.panel_size.x)
-	_set_window_nine(compact, psz)
+	_set_window_nine(true, psz)
 	if window.texture == null and not has_node("FallbackWindow"): _fallback_window()
 	# Virtual expression
 	var pr := L.portrait_rect(compact)
-	frame.position = pr.position
-	frame.size = pr.size
-	frame.texture = V2Art.tex(L.portrait_frame_art, pr.size.x)
+	# Frameless avatar (transparent art) standing in the field: the biggest thing in the window.
+	frame.visible = false
 	var inner := pr.grow(-L.portrait_inset)
 	portrait_clip.position = inner.position
 	portrait_clip.size = inner.size
-	var clip := StyleBoxFlat.new()
-	clip.bg_color = Color("#CFE7DE")
-	clip.set_corner_radius_all(int(L.portrait_radius))
-	portrait_clip.add_theme_stylebox_override("panel", clip)
+	portrait_clip.clip_children = CanvasItem.CLIP_CHILDREN_DISABLED
+	portrait_clip.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	for n in [portrait, placeholder]:
 		n.position = Vector2.ZERO
 		n.size = inner.size
@@ -123,18 +122,21 @@ func _apply_layout() -> void:
 	var br := L.bank_rect(compact)
 	band.position = br.position
 	band.size = br.size
-	var bed := V2Art.nine(L.key_bed_art, L.key_bed_margins, L.bank_rim)
-	band.add_theme_stylebox_override("panel", bed if bed else _band_style())
+	# No bed: the keys float over the avatar's lower edge; their own drop shadows separate them.
+	band.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 	bank.position = Vector2.ZERO
 	bank.size = br.size
-	# Persistent status
+	# Speech bubble: a momentary overlay on top of everything in the panel.
 	var br2 := L.bubble_rect(compact)
+	move_child(bubble, get_child_count() - 1)
 	bubble.position = br2.position
 	bubble.size = br2.size
 	bubble.font_px = L.bubble_font_size_compact if compact else L.bubble_font_size
 	bubble.art = V2Art.tex(L.bubble_art, br2.size.x)
 	bubble._fit()
 	bubble.queue_redraw()
+	# Persistent status (under the keys, so floating keys and chips stay on top)
+	move_child(status, band.get_index())
 	var sr := L.strip_rect(compact)
 	status.position = sr.position
 	status.size = sr.size
@@ -157,19 +159,29 @@ func _set_window_nine(on: bool, psz: Vector2) -> void:
 	if nine == null:
 		nine = Panel.new(); nine.name = "WindowNine"; nine.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		add_child(nine); move_child(nine, window.get_index() + 1)
-	var k := float(src.get_width()) / layout.panel_size.x
-	var m := layout.compact_window_margins
-	nine.add_theme_stylebox_override("panel", V2Art.nine(layout.window_art, m * k, m.x))
+	nine.add_theme_stylebox_override("panel", V2Art.nine(layout.window_art, layout.window_margins, layout.window_rim))
 	nine.position = Vector2.ZERO
 	nine.size = psz
 	nine.visible = true
 	window.visible = false
 
-func say(text: String) -> void:
-	## The ICE's speech bubble (ARCH-V2-003p). Empty text hides it. Presentation only.
+var _say_tween: Tween
+
+func say(text: String, seconds: float = -1.0) -> void:
+	## Momentary speech (designer 2026-11-26, ARCH-V2-003r): the bubble covers what is under it for
+	## `seconds` (default layout.bubble_seconds, 1–2 s), then goes. seconds = 0 holds it (fixtures).
+	## Empty text hides it at once. Presentation only.
+	if _say_tween and _say_tween.is_valid(): _say_tween.kill()
 	bubble.text = text
 	bubble.visible = text != ""
+	bubble.modulate.a = 1.0
 	bubble.queue_redraw()
+	if text == "" or seconds == 0.0 or not is_inside_tree(): return
+	var hold := layout.bubble_seconds if seconds < 0.0 else seconds
+	_say_tween = create_tween()
+	_say_tween.tween_interval(hold)
+	if not reduced_motion: _say_tween.tween_property(bubble, "modulate:a", 0.0, 0.2)
+	_say_tween.tween_callback(func(): bubble.visible = false; bubble.modulate.a = 1.0)
 
 func set_model(m: Dictionary) -> void:
 	model = m
@@ -187,7 +199,7 @@ func set_model(m: Dictionary) -> void:
 	var pr := L.portrait_rect(compact)
 	var type_tex: Texture2D = V2Art.tex(String(L.type_icons[String(m.type)]), L.type_badge_size) if L.type_icons.has(String(m.type)) else null
 	type_badge.set_badge("type", String(m.type), 0, 0, type_tex, L.type_badge_size)
-	type_badge.position = pr.position - Vector2(L.type_badge_size, L.type_badge_size) / 2.0
+	type_badge.position = L.type_badge_center - Vector2(L.type_badge_size, L.type_badge_size) / 2.0
 	var np := L.nameplate_rect(compact)
 	str_badge.font_px = L.str_font_size
 	str_badge.set_badge("str", String(m.type), int(m.str), int(m.str_delta), V2Art.tex(L.str_icon, L.str_badge_size), L.str_badge_size)
