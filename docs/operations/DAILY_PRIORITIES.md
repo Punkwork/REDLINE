@@ -21,3 +21,15 @@ Source: [ChatGPT report](reports/2026-11-24-ChatGPT.md). Claude, Claude Code and
 | 6 | CAP-EXP-001, ICE-EXP-002, CRED-EXP-001d, VOID-EXP-001 (M04/M05) | Designer + Claude | Preserve proposals; defer implementation. Select later experiments after baseline/gate; no prices for infiltration CAPS yet. |
 
 Milestone snapshot: no new acceptance evidence, 0/9 proposed gates evidenced; effort percentage unknown. Steam goal unchanged. Status PROPOSED except existing rank 1 carryover. Designer confirmation required for agenda execution.
+
+## 2026-11-26 — proposed daily agenda (OPS-001, review 2026-11-25)
+Source: [ChatGPT review](reports/2026-11-25-ChatGPT.md), [Claude report](reports/2026-11-25-Claude.md), f6c7c64, adc7007, native issues #13–24. No separate Claude Code/Codex reports. Supersedes prior proposed branch reconciliation and UI migration carryover: Gate F accepted, UI-BIBLE-001 validated and completed in recorded evidence; DOCS-MIG-001 remains standing requirement, no next batch authorized. No new approvals.
+| Rank | Canonical reference | Proposed owner | Dependencies / evidence / decision |
+|---|---|---|---|
+| 1 | ARCH-V2-001 / CAS-001 / [#21](https://github.com/Punkwork/REDLINE/issues/21) (M02/M01) | Claude Code + Claude + designer | Review component boundaries, dependencies, runtime baseline and encounter/card interactions; designer approves representative slice scope before implementation. |
+| 2 | STRIP-001 / M01 / RELEASE-002c | Claude Code | After rank 1 approval, build one playable encounter preserving rules, compare prototype tests, component tests and screenshot fixtures; no release until gate passes. |
+| 3 | RELEASE-002 / ARCH-V2-002i / M07 | Designer + Claude Code | Reconcile missing playtest-12 tag against authorized 2845ecd; refresh current-status record and artifact/Windows evidence. No ref changes without authorization. Can run in parallel with rank 1. |
+| 4 | [#23](https://github.com/Punkwork/REDLINE/issues/23), [#24](https://github.com/Punkwork/REDLINE/issues/24), [#22](https://github.com/Punkwork/REDLINE/issues/22) (M06) | Claude Code + designer | Review legacy fixture disposition, approved flyout readability, built items; sequence with slice, no unrelated polish. |
+| 5 | OPS-001 | All agents | File actual dated reports, reconcile register status, maintain canonical branch; no duplicate tasks. |
+| 6 | MAP-003 / CAP-EXP-001 / ICE-EXP-002 / CRED-EXP-001d (M03/M04/M05) | Designer + Claude | Preserve experiments; encounter/card system first, node surveillance later; no implementation or further consolidation until chosen. |
+Status PROPOSED. 0/9 final gates evidenced; effort unknown. Designer confirmation required.
