@@ -159,11 +159,13 @@ From `godot/assets/concept/ui/` and `godot/assets/concept/mascots/` (painted ENC
 1. **`V2_ENCLOSURE_FRAME`** (2520 × 1020, about 5:2): "The large polished-chrome machine window that holds the two ICE windows in the reference: a thick rounded chrome rim with an inner lip and small rivets at the corners. The **entire centre is transparent**, only the rim is painted."
 2. **`V2_ENCLOSURE_BACK`** (512 × 512, seamless tile): "A seamless tileable texture of dark green-black recessed machine metal, the surface visible behind the ICE windows. Very subtle, even, no highlights."
 3. **`V2_ICE_WINDOW`** (1200 × 720, 5:3): "One ICE window from the reference (the AUTO-RENEW window), **empty**: heavy polished chrome bezel with rounded corners around a seafoam-mint enamel field with a soft lighter centre and slightly darker edges. No character, no plates, no lamps inside, just the bezel and the plain field."
-4. **`V2_ICE_WINDOW_HOVER`**: "The same window, identical in shape and size, with the chrome lit slightly brighter and a faint warm rim light."
+4. ~~`V2_ICE_WINDOW_HOVER`~~ **Dropped (2026-11-26):** generators don't reproduce a frame pixel-for-pixel, so the hover state is made in the engine by brightening `V2_ICE_WINDOW`'s chrome. Skip this prompt.
 5. **`V2_PORTRAIT_FRAME`** (440 × 440, square): "A slim inset chrome picture frame with rounded corners, the kind set into the seafoam panel to hold a portrait. **Centre transparent.**"
 6. **`V2_NAMEPLATE`** (600 × 120, 5:1): "The black glass name plate from the reference (the one reading AUTO-RENEW) with its chrome rim and a small screw at each end, **blank**."
 7. **`V2_MEDALLION_STR`** (256 × 256): "A round badge medallion: polished chrome rim around a plain dark enamel face. Blank face, no symbol."
 8. **`V2_MEDALLION_FORTRESS`** (256 × 256): "The same medallion, deep red enamel face, with a simple ivory **castle-tower icon** (crenellated top, small gate) in the centre."
+*Medallions (2026-11-26):* `V2_MEDALLION_FORTRESS` from ChatGPT sets the shared rim. ChatGPT's TUMBLER attempts had artifacts and the wrong symbol, so Claude Code builds `V2_MEDALLION_STR`, `_TUMBLER` (combination-lock dial, designer's choice) and `_VOID` (surveillance-camera lens, designer's direction) on that rim with flat ivory icons. Skip prompts 9 and 10.
+
 9. **`V2_MEDALLION_TUMBLER`** (256 × 256): "The same medallion, teal enamel face, with a simple ivory **rotating drum icon**: a slot-machine reel with a curved arrow around it."
 10. **`V2_MEDALLION_VOID`** (256 × 256): "The same medallion, near-black violet face, with a simple ivory **eye icon opening on darkness**, red iris, black pupil."
 11. **`V2_STATUS_STRIP`** (960 × 56, about 17:1): "The thin cream enamel strip along the bottom of the ICE window in the reference (where it says HARDENING), with a chrome edge and an empty round lamp socket at the left end. Blank."
