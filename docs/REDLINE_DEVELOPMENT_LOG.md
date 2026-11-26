@@ -33,19 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-21 — BOOST-001 and SUB-001 after Playtest 9 (Claude Code)
-
-Playtest 9 sheet (designer): the core loop is fun (PULP, PROBE, rewards and "wanted another run" all 5/5), but encounters took 2–3 turns, DOORBELL CAM was over in 2 and needed CORTEX, and spare BW went into boosts without a choice. Lethal came up once. Ten [UI] items recorded in HANDOFF.
-
-**Built** (core-loop build): boosts reset at the start of each turn (BOOST-001); new effects HARDEN, SHIELD_BREAK, RETALIATE (X × broken subs, doubled when LETHAL), CORTEX back on DOORBELL CAM; the SUB-001 ICE table (`REDLINE_CORE_LOOP.md` §1b). The UI labels the new effects; their key icons use the generic glyph for now.
-
-**Tests:** `test_game.gd` 168 passed, 0 failed; ADP 17/0; SIGNAL/CARBON 671/0.
-**Bot sims (30 Generalist runs):** 8/30 cleared; deaths at CAPTCHA 16, TERMS & CONDITIONS 6; 3.2 turns per encounter; 12.6 PULP to VITAE per encounter; 3.1 threat subs broken before each BREACH; parting shot 1.0 subs and 1.1 VITAE. The bot doesn't plan around HARDEN, SHIELD BREAK or lethal forms and lost far more than the designer in Playtest 9: a worst case.
-
-**Interpretations to confirm:** HARDEN stacks each time it fires; SHIELD BREAK removes all SHIELD when it fires, so PULP before it is still blocked; RETALIATE counts DEADLOCK breaks.
-
-**Log size (LOG-001):** the two oldest entries were moved unchanged to the archive with the BOOST-001 commit. Playtest 10 exported from `236fa36` ([run](https://github.com/Punkwork/REDLINE/actions/runs/44979979788)).
-
 ## 2026-11-21 — RIDER-001, AMEND-001, DEFRAG-001, PLAY-002 after Playtest 10 (Claude Code)
 
 Playtest 10 sheet: every question 5/5 (BURST not drawn); encounters 4–6 turns except TERMS & CONDITIONS (3, 2); discards mattered for the first time; parting shot on the final Node seemed missing. Checked: the engine fired it (TERMS OF SERVICE with only its DEADLOCK broken deals 12), but it landed instantly under the reward screen with a "Corporation Response is skipped" message. Now it plays through the response queue with a corrected message.
@@ -402,4 +389,8 @@ Designer: counters horizontal and narrower under the meters, hand tray widened f
 ## 2026-11-26 — ARCH-V2-003w: program actions on the CRT (Claude Code)
 
 Designer: effects such as Icepick BOOST are chosen from the CRT; six keys 3 + 3 approved; no row arrow needed (mock drawn). Added `EncounterController.request_boost / request_uninstall_cache / request_unload` (one Game call each) and CRT action keys in `RigBay.ProgramScreen`. New checks: BOOST from the CRT (+STR, BW spent, one call), EJECT removes the cartridge. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 170/0; 23 captures (CI count updated).
+
+## 2026-11-26 — ARCH-V2-004: Batch 2 cards, hand, targeting, choices (Claude Code)
+
+Designer started Batch 2. Built `CardView` (HuCard body drawn in the engine, type frame, cost medallion, rules field, gold contacts; states), the hand of CardViews in the fan, the card inspector (HOVER-001), ICE targeting (`IcePanel.set_targetable`, `IceLane.target_chosen`, CHOOSE AN ICE plaque), `ChoiceOverlay` (all current choice variants with the prototype's wording), controller choice intents. The DEV stand-in buttons are gone. New checks: hand UIDs and playability, click-to-play parity, targeting on/cancel/play parity, DISCARD overlay open/choose parity. Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 182/0; 25 captures (CI count updated). Captures `docs/visual/fixtures/arch-v2-batch2/`. (LOG-001: moved "2026-11-21 — BOOST-001 and SUB-001 after Playtest 9 (Claude Code)" to the archive.)
 

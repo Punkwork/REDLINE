@@ -61,14 +61,14 @@ var counters: HudWidgets.CounterStack
 var effect_card: HudWidgets.EffectCard
 var signal_screen: HudWidgets.SignalScreen
 var rig_bay: RigBay
-var _hand_box: HBoxContainer
 var hand_fan: HandFan
 ## ADP-2b: hovering one card 4 s makes the moodiest ICE say an approved hesitation line.
 var voice := HesitationVoice.new()
-var _prompt: Label
 var _banner: PanelContainer
 var _last_turn := 0
 var _pending_target := -1
+var choice: ChoiceOverlay
+var _target_plaque: Control
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -118,6 +118,22 @@ func _build() -> void:
 	flyout = EventFlyout.new(); flyout.name = "EventFlyout"; flyout.position = Vector2.ZERO; flyout.size = REF
 	flyout.band_y = 0.36
 	stage.add_child(flyout)
+	choice = ChoiceOverlay.new(); choice.name = "ChoiceOverlay"; choice.position = Vector2.ZERO; choice.size = REF
+	choice.inspector = inspector
+	choice.chosen.connect(func(u): ctrl.request_choice(u); refresh())
+	choice.secondary.connect(func(intent):
+		match intent:
+			"skip_ready_rig": ctrl.request_skip_ready_rig()
+			"finish_scan": ctrl.request_finish_scan()
+			"finish_cull": ctrl.request_cull("")
+		refresh())
+	choice.strain.connect(func(st): ctrl.request_cull(st); refresh())
+	stage.add_child(choice)
+	_target_plaque = _build_target_plaque()
+	lane.target_chosen.connect(func(r):
+		var u := _pending_target; _pending_target = -1
+		if u >= 0: ctrl.request_play(u, r)
+		refresh())
 	_banner = PanelContainer.new(); _banner.name = "Outcome"; stage.add_child(_banner)
 	_banner.add_theme_stylebox_override("panel", _box(Color(VasTokens.CHASSIS, 0.94), VasTokens.AMBER, 4, 18, 24))
 	var bb := VBoxContainer.new(); bb.alignment = BoxContainer.ALIGNMENT_CENTER; _banner.add_child(bb)
@@ -223,12 +239,6 @@ func _build_tray() -> void:
 	hand_fan = HandFan.new(); hand_fan.name = "HandFan"; hand_fan.reduced_motion = reduced_motion
 	hand_fan.card_size = Vector2(140, 221)   ## HuCard 1 : 1.58; twelve cards keep half of each showing
 	hand_fan.position = HAND.position; hand_fan.size = HAND.size; stage.add_child(hand_fan)
-	var v := VBoxContainer.new(); v.position = TRAY.position + Vector2(36, 26); v.size = TRAY.size - Vector2(72, 70)
-	v.add_theme_constant_override("separation", 6); v.mouse_filter = Control.MOUSE_FILTER_IGNORE; stage.add_child(v)
-	_prompt = _label("", 14, Color(VasTokens.IVORY, 0.75), VasTokens.FONT_PLAQUE_SEMI); v.add_child(_prompt)
-	_hand_box = HBoxContainer.new(); _hand_box.add_theme_constant_override("separation", 10)
-	_hand_box.alignment = BoxContainer.ALIGNMENT_CENTER; _hand_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	v.add_child(_hand_box)
 	counters = HudWidgets.CounterStack.new(); counters.name = "Counters"
 	counters.setup(COUNTERS.size, inspector, true); counters.position = COUNTERS.position; stage.add_child(counters)
 	end_key = HudWidgets.EndTurnKey.new(); end_key.name = "EndTurn"; end_key.inspector = inspector
@@ -340,39 +350,84 @@ func _refresh_rig() -> void:
 	rig_bay.sync(progs, act)
 
 func _refresh_hand() -> void:
-	for c in _hand_box.get_children(): _hand_box.remove_child(c); c.queue_free()
+	## C10 HandView: the hand as CardViews in the fan. Choices open the C15 overlay; a targeted card
+	## lights the ICE panels as targets (click one; ✕ or Esc cancels).
 	hand_fan.clear()
-	_prompt.text = ""
-	if game.phase == "READY_RIG":
-		_prompt.text = "DEV · READY RIG"
-		for c in game.draw_pile.filter(func(c): return CardDB.def(c.id).type == "PROGRAM"):
-			hand_fan.add_card(_card_button(c, func(): ctrl.request_choice(int(c.uid))))
-		return
-	if game.phase == "CHOICE":
-		var k := String(game.pending.get("kind", ""))
-		if k == "card_break":
-			_prompt.text = "DEV · CHOOSE A KEY"
-			return
-		_prompt.text = "DEV · CHOOSE: %s" % k.to_upper().replace("_", " ")
-		var options: Array = game.pending.get("cards", game.hand)
-		for c in options: hand_fan.add_card(_card_button(c, func(): ctrl.request_choice(int(c.uid))))
-		return
-	if _pending_target >= 0:
-		_prompt.text = "DEV · CHOOSE AN ICE"
-		for m in VisibleStateAdapter.ice_models(game, ctrl):
-			var r: Dictionary = m.ref
-			_hand_box.add_child(_button("→ " + String(m.name), func(): var u := _pending_target; _pending_target = -1; ctrl.request_play(u, r); refresh()))
-		_hand_box.add_child(_button("CANCEL", func(): _pending_target = -1; refresh()))
-		return
+	choice.open(_choice_spec())
+	var targeting := _pending_target >= 0 and game.phase == "PLAYER"
+	if not targeting: _pending_target = -1
+	lane.set_targeting(targeting)
+	_target_plaque.visible = targeting
 	for c in game.hand:
-		var uid := int(c.uid)
-		var b := _card_button(c, func():
-			if CardDB.def(c.id).get("target", false): _pending_target = uid; refresh()
-			else: ctrl.request_play(uid))
-		b.disabled = not game.can_play(uid).ok or responding
-		hand_fan.add_card(b)
+		var cv := _card_view(VisibleStateAdapter.card_model(game, c, "hand"))
+		cv.selected = int(c.uid) == _pending_target
+		if responding: cv.model.playable = false
+		hand_fan.add_card(cv)
 
-# ----- Small builders
+func _choice_spec() -> Dictionary:
+	## Existing wording from Build 12's overlays (main.gd), one variant per pending kind.
+	var cards_of := func(uids: Array, pile: Array) -> Array:
+		var out := []
+		for c in pile:
+			if uids.has(int(c.uid)): out.append(VisibleStateAdapter.card_model(game, c, "pick"))
+		return out
+	if game.phase == "READY_RIG":
+		return {"kind": "ready_rig", "title": "READY RIG", "text": "Generalist ORIGIN: choose one PROGRAM in your deck. It starts installed for free; your first hand stays full.",
+			"cards": cards_of.call(game.pending.get("options", []), game.draw_pile), "secondary": {"label": "Skip", "intent": "skip_ready_rig"}}
+	if game.phase != "CHOICE": return {}
+	var p: Dictionary = game.pending
+	var hand_uids: Array = game.hand.map(func(c): return int(c.uid))
+	match String(p.get("kind", "")):
+		"discard": return {"kind": "discard", "title": "DISCARD %d" % int(p.get("n", 1)), "text": "CAPTCHA: choose a card in your hand to discard.", "cards": cards_of.call(hand_uids, game.hand)}
+		"burn_hand": return {"kind": "burn_hand", "title": "GARBAGE COLLECT", "text": "BURN another hand card for this Node, then draw 1.", "cards": cards_of.call(p.options, game.hand)}
+		"retrieve": return {"kind": "retrieve", "title": "TAIL CALL", "text": "Choose a SCRIPT from discard.", "cards": cards_of.call(p.options, game.discard)}
+		"uninstaller": return {"kind": "uninstaller", "title": "UNINSTALLER", "text": "Choose a Bloatware in your hand to BURN.", "cards": cards_of.call(p.options, game.hand)}
+		"field_kit": return {"kind": "field_kit", "title": "FIELD KIT", "text": "Choose a PROGRAM from your draw pile.", "cards": cards_of.call(p.options, game.draw_pile)}
+		"cache": return {"kind": "cache", "title": String(p.get("title", "DEAD AIR")), "text": String(p.get("description", "Choose a card to CACHE: it stays in your hand at the end of your turn.")), "cards": cards_of.call(p.options, game.hand)}
+		"scan":
+			return {"kind": "scan", "title": "SCAN 3", "text": "Click cards to bottom them, in selection order; click again to undo.",
+				"cards": cards_of.call(p.cards.map(func(c): return int(c.uid)), p.cards), "selected": p.get("bottom", []),
+				"secondary": {"label": "Finish SCAN, then draw 1", "intent": "finish_scan"}}
+		"cull":
+			var strains := []
+			for st in p.ice_ref.virus:
+				if int(p.ice_ref.virus[st]) > 0: strains.append({"name": String(st), "n": int(p.ice_ref.virus[st])})
+			return {"kind": "cull", "title": "CULL", "text": "Choose up to %d more counters to remove." % int(p.get("n", 0)), "strains": strains,
+				"secondary": {"label": "Finish", "intent": "finish_cull"}}
+		"card_break": return {}   # chosen on the subroutine keys
+	return {}
+
+func _build_target_plaque() -> Control:
+	var pc := PanelContainer.new(); pc.name = "TargetPlaque"
+	var sb := StyleBoxFlat.new(); sb.bg_color = Color("#1E1510"); sb.border_color = VasTokens.FOCUS
+	sb.set_border_width_all(3); sb.set_corner_radius_all(14); sb.set_content_margin_all(10)
+	pc.add_theme_stylebox_override("panel", sb)
+	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 14); pc.add_child(row)
+	row.add_child(_label("CHOOSE AN ICE", 22, VasTokens.FOCUS, VasTokens.FONT_PLAQUE))
+	var x := _button("✕", func(): _pending_target = -1; refresh())
+	x.custom_minimum_size = Vector2(44, 44); x.tooltip_text = ""
+	row.add_child(x)
+	stage.add_child(pc)
+	pc.reset_size()
+	pc.position = Vector2(REF.x / 2.0 - 120, ENCLOSURE.position.y - 8)
+	pc.hide()
+	return pc
+
+func _unhandled_input(e: InputEvent) -> void:
+	if _pending_target >= 0 and e.is_action_pressed("ui_cancel"):
+		_pending_target = -1; refresh(); get_viewport().set_input_as_handled()
+
+func _card_view(m: Dictionary) -> CardView:
+	var cv := CardView.new()
+	cv.inspector = inspector
+	cv.set_model(m)
+	cv.set_meta("uid", int(m.uid))
+	cv.pressed.connect(func(u):
+		if _pending_target == u: _pending_target = -1; refresh(); return
+		if not bool(cv.model.get("playable", false)): return
+		if bool(m.get("target", false)): _pending_target = u; refresh()
+		else: ctrl.request_play(u); refresh())
+	return cv
 
 func _process(delta: float) -> void:
 	if game == null or game.enc.is_empty() or hand_fan == null: return
@@ -381,14 +436,6 @@ func _process(delta: float) -> void:
 	var said := voice.tick(delta, Time.get_ticks_msec() / 1000.0, uid, get_viewport().gui_is_dragging(), game.phase,
 		int(game.enc.get("turn", 0)), String(game.enc.get("corp", "HALCYON")), lane.panels().map(func(p): return p.model))
 	if not said.is_empty(): lane.panels()[int(said.ice)].say(String(said.text), voice.seconds)
-
-func _card_button(c: Dictionary, on_press: Callable) -> Button:
-	## DEV stand-in in HuCard proportions (CARD-HUCARD-001: 1 : 1.58); Batch 2 replaces it.
-	var d := CardDB.def(c.id)
-	var b := _button("%s\n\n%d BW" % [String(d.name), int(d.get("bw", 0))], on_press)
-	b.set_meta("uid", int(c.uid))
-	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	return b
 
 func _button(text: String, on_press: Callable) -> Button:
 	var b := Button.new(); b.text = text

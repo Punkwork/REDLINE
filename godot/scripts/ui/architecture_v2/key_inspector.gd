@@ -55,6 +55,28 @@ func show_key(key: SubroutineKey, ice_name: String) -> void:
 		_line(cost, 14, Color("#5E4B35"), VasTokens.FONT_RULES)
 	_place(key.get_global_rect())
 
+func show_card(card: CardView) -> void:
+	## HOVER-001: the large card beside its words (at least 1.5× its hand size).
+	_clear()
+	subject = card
+	var m := card.model
+	var big := CardView.new()
+	big.set_model(m)
+	big.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	big.focus_mode = Control.FOCUS_NONE
+	big.custom_minimum_size = CardView.BASE * 1.6
+	_image.add_child(big); _image.show()
+	_line(card.type_line(), 13, Color("#5E4B35"), VasTokens.FONT_PLAQUE_SEMI)
+	_line(String(m.get("name", "")), 24, VasTokens.SEAFOAM_INK, VasTokens.FONT_PLAQUE)
+	_rule("", String(m.get("text", "")))
+	var costs := "%d BW" % int(m.get("bw", 0))
+	if int(m.get("cred", 0)) > 0: costs += "  ·  %d CRED" % int(m.cred)
+	if int(m.get("trace", 0)) > 0: costs += "  ·  +%d TRACE" % int(m.trace)
+	_line("Cost: " + costs, 14, Color("#5E4B35"), VasTokens.FONT_RULES)
+	if not bool(m.get("playable", true)) and String(m.get("reason", "")) != "":
+		_line("Can't play now: " + String(m.reason), 14, Color("#8E2A1E"), VasTokens.FONT_RULES)
+	_place(card.get_global_rect())
+
 func show_info(heading: String, title: String, lines: Array, at: Rect2, who: Variant = null) -> void:
 	_clear()
 	subject = who

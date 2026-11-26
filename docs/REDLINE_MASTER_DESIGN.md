@@ -3340,3 +3340,18 @@ ChatGPT's independent check of `main` references covered the principal governanc
 - **(w) Designer answers, 2026-11-26 16:00–16:02:** (1) "there are multiple effects such as boost icepick that will be selected from the CRT": the CRT carries the selected program's actions as phosphor keys: BOOST (Icepicks; +STR for its BW cost, until the end of the turn, `Game.boost_pick`), UNINSTALL (cache programs such as SMASH & GRAB, `Game.uninstall_cache`) and EJECT (unload, 0 BW, `Game.unload`), the Build 12 rig actions, one Game call each through `EncounterController`. Clicking a cartridge still selects it and makes it the program key clicks use. (2) **Six keys split 3 + 3: APPROVED.** (3) No arrow between key rows needed; an optional brass carriage-return mark was drawn for comparison (`v2_15_row_return_arrow_option.jpg`), off by default.
 
 **Status:** Batch 1 **APPROVED IN PRINCIPLE**. Implemented as reversible technical foundations (see HANDOFF and the development log for commits). Component geometry, the drawn type/STR icons and the flyout treatment are **PROVISIONAL** and held in replaceable resources (`godot/themes/architecture_v2/ice_panel_layout.tres`, `VasTokens`) until the visual reference is agreed. No gameplay, rules or project-setting change.
+
+## ARCH-V2-004 — Batch 2: cards, hand, targeting and choices (STARTED by the designer, 2026-11-26 16:09; implementation PROPOSED)
+
+**Designer, 2026-11-26 16:09:** "Fine at this size. Start batch 2" (CRT action keys accepted at about 36 px).
+
+**Built (PROPOSED for visual review):**
+- **(a) C11 CardView: the HuCard card (CARD-HUCARD-001, VAS-ASSET-001 §3f).** Portrait 1 : 1.58, rounded corners, darker-white edge on the right and bottom, nine gold contacts along the bottom edge; type-coloured frame round the art window (EXPLOIT red, CLOAK violet, ICEPICK green, EXTRACTOR gold, VIRUS olive, HARDWARE steel; otherwise by card type), white BW cost medallion with a black ring top left, name and type line left-aligned (the left half of a fanned card identifies it), cream rules field (three lines; the full text is on hover). Drawn in the engine; a painted body can replace it later. States: playable, unplayable (dimmed; reason on hover), hover/focus (cyan edge), selected (thick cyan with glow). Card art: the existing illustrations in `godot/assets/concept/cards/` (the ten starter cards); the designer's folder holds 93 more for later imports.
+- **(b) HOVER-001 for cards:** hovering or focusing a card opens the inspector with the card at 1.6× beside its name, type, full rules and cost (and why it can't be played now).
+- **(c) C10 HandView:** the fan holds CardViews bound by instance UID; one click plays a card (one controller call).
+- **(d) Targeting:** a targeted card (e.g. PROBE) lights every ICE panel with a cyan ring and shows a CHOOSE AN ICE plaque with ✕; clicking a panel plays the card on that ICE; clicking the card again, ✕ or Esc cancels.
+- **(e) C15 ChoiceOverlay:** dims the console and shows a plaque with the choice's name, its existing wording (from the prototype overlays) and the candidates as cards: READY RIG (Skip), DISCARD, GARBAGE COLLECT, TAIL CALL, UNINSTALLER, FIELD KIT, CACHE, SCAN (selected cards cyan; Finish), CULL (strain buttons; Finish). card_break stays on the keys. Focus starts on the first card without popping the inspector.
+- Engineering: `EncounterController` gains `request_skip_ready_rig`, `request_finish_scan`, `request_cull`; every intent is one Game call; `VisibleStateAdapter.card_model` is read-only. No rules changes.
+
+**Status:** Batch 2 implementation PROPOSED; geometry, colours and the drawn card body await designer review.
+

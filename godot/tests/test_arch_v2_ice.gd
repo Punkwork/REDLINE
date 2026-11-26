@@ -44,6 +44,8 @@ func run() -> void:
 	print("- test_twelve_card_fan / test_rig_bay")
 	await test_twelve_card_fan()
 	await test_rig_bay()
+	print("- test_batch2_cards / targeting / choice")
+	await test_batch2_cards()
 	print("ARCH-V2 ICE: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -590,5 +592,76 @@ func test_rig_bay() -> void:
 		if a.kind == "eject": a.pressed.emit(); break
 	await process_frame
 	check(sb.game.installed.size() == n_inst - 1 and sb.rig_bay.cartridges().size() == n_inst - 1, "EJECT unloads the program; its cartridge leaves the CRT")
+	sb.queue_free()
+	await process_frame
+
+func test_batch2_cards() -> void:
+	## ARCH-V2-004 (Batch 2): C10/C11 hand of CardViews, ICE targeting, C15 choice overlay.
+	## Every intent is one Game call and matches the direct Game path on a twin.
+	var sb: IceEncounterSandbox = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
+	sb.reduced_motion = true; sb.instant = true
+	root.add_child(sb)
+	await process_frame
+	var twin := fresh()
+	var cards := sb.hand_fan.cards()
+	check(cards.size() == sb.game.hand.size() and cards.all(func(c): return c is CardView), "the hand is CardViews, one per hand card")
+	var uids_ok := true
+	for k in cards.size(): uids_ok = uids_ok and (cards[k] as CardView).uid() == int(sb.game.hand[k].uid)
+	check(uids_ok, "cards bind by instance UID, in hand order")
+	var play_ok := true
+	for cv in cards: play_ok = play_ok and bool((cv as CardView).model.playable) == bool(sb.game.can_play((cv as CardView).uid()).ok)
+	check(play_ok, "playable / unplayable follows Game.can_play")
+	# A plain card: one click plays it.
+	var plain: CardView = null
+	for cv in cards:
+		if bool(cv.model.playable) and not bool(cv.model.target): plain = cv; break
+	if plain:
+		var u := plain.uid()
+		var calls := sb.ctrl.game_calls
+		plain.pressed.emit(u)
+		twin.play_card(u)
+		await process_frame
+		check(sb.ctrl.game_calls == calls + 1 and snap(sb.game) == snap(twin), "clicking a card plays it (one call, same as Game)")
+	# A targeted card: click lights the ICE as targets; clicking a panel plays it on that ICE.
+	var probe: CardView = null
+	for cv in sb.hand_fan.cards():
+		if bool(cv.model.target) and bool(cv.model.playable): probe = cv; break
+	if probe:
+		var u := probe.uid()
+		probe.pressed.emit(u)
+		await process_frame
+		check(sb.lane.targeting and sb.lane.panels().all(func(p): return p.targetable), "a targeted card lights the ICE panels as targets")
+		var again: CardView = null
+		for cv in sb.hand_fan.cards(): if cv.uid() == u: again = cv
+		again.pressed.emit(u)
+		await process_frame
+		check(not sb.lane.targeting, "clicking the card again cancels targeting")
+		for cv in sb.hand_fan.cards(): if cv.uid() == u: again = cv
+		again.pressed.emit(u)
+		await process_frame
+		var calls := sb.ctrl.game_calls
+		var p1: IcePanel = sb.lane.panels()[1]
+		p1.target_chosen.emit(p1.ice_ref)
+		twin.play_card(u, 1)
+		await process_frame
+		check(sb.ctrl.game_calls == calls + 1 and snap(sb.game) == snap(twin) and not sb.lane.targeting, "choosing an ICE plays the card on it (one call, same as Game)")
+	# Choice overlay: a DISCARD choice opens with the hand as candidates; choosing resolves it.
+	sb.game.bw = 0; twin.bw = 0
+	await sb.end_turn()
+	twin.end_turn()
+	var d2 := Direct.new(twin); d2.respond()
+	sb.refresh()
+	await process_frame
+	if sb.game.phase == "CHOICE" and String(sb.game.pending.get("kind", "")) == "discard":
+		check(sb.choice.visible and sb.choice.cards().size() == sb.game.hand.size(), "DISCARD opens the choice overlay with every hand card")
+		var u := sb.choice.cards()[0].uid()
+		var calls := sb.ctrl.game_calls
+		sb.choice.chosen.emit(u)
+		twin.choose(u)
+		await process_frame
+		check(sb.ctrl.game_calls == calls + 1 and snap(sb.game) == snap(twin), "choosing in the overlay resolves the choice (one call, same as Game)")
+		check(not sb.choice.visible or sb.game.phase == "CHOICE", "overlay closes when the choice is done")
+	else:
+		check(not sb.choice.visible, "no choice pending: overlay closed (phase %s)" % sb.game.phase)
 	sb.queue_free()
 	await process_frame

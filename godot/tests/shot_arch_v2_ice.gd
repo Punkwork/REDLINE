@@ -160,10 +160,24 @@ func run() -> void:
 	sb.hand_fan.clear()
 	for k in 12:
 		var c: Dictionary = sb.game.hand[k % sb.game.hand.size()]
-		sb.hand_fan.add_card(sb._card_button(c, func(): pass))
+		sb.hand_fan.add_card(sb._card_view(VisibleStateAdapter.card_model(sb.game, c, "hand")))
 	sb.hand_fan.cards()[5].grab_focus()
 	await shot("v2_14_twelve_card_hand")
 	sb.hand_fan.cards()[5].release_focus()
+
+	# 10d. ARCH-V2-004: hover a card (inspector shows the large card, HOVER-001), then targeting.
+	await fresh()
+	quiet()
+	var hc: CardView = sb.hand_fan.cards()[1]
+	hc.grab_focus()
+	await shot("v2_16_card_hover_inspector")
+	hc.release_focus()
+	for cv in sb.hand_fan.cards():
+		if bool(cv.model.target) and bool(cv.model.playable):
+			cv.pressed.emit(cv.uid()); break
+	await shot("v2_17_targeting_choose_an_ice")
+	sb._pending_target = -1
+	sb.refresh()
 
 	# 10c. Optional carriage-return arrow between key rows (designer asked to see one; off by default).
 	await fresh()

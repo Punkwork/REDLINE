@@ -109,6 +109,28 @@ func request_choice(uid: int) -> bool:
 	_after()
 	return true
 
+## Choice-overlay secondary intents (C15): READY RIG skip, SCAN finish, CULL strain/finish.
+func request_skip_ready_rig() -> bool:
+	if game.phase != "READY_RIG": return false
+	game_calls += 1
+	game.skip_ready_rig()
+	_after()
+	return true
+
+func request_finish_scan() -> bool:
+	if game.phase != "CHOICE" or game.pending.get("kind") != "scan": return false
+	game_calls += 1
+	game.finish_scan()
+	_after()
+	return true
+
+func request_cull(strain: String = "") -> bool:
+	if game.phase != "CHOICE" or game.pending.get("kind") != "cull": return false
+	game_calls += 1
+	game.cull_strain(strain)
+	_after()
+	return true
+
 # ----- Program actions from the CRT (ARCH-V2-003w; Build 12's rig actions). One Game call each.
 
 func request_boost(uid: int) -> bool:

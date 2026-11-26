@@ -13,6 +13,10 @@ extends Control
 ## empty. Geometry and art come from IcePanelLayout. Never reads or calls Game.
 
 signal break_requested(ice_ref: Dictionary, sub: int, pick_uid: int)
+## ARCH-V2-004 targeting: a targeted card is waiting for an ICE; the whole panel is the target.
+signal target_chosen(ice_ref: Dictionary)
+var targetable := false
+var _target_cover: Button
 
 var layout: IcePanelLayout
 var inspector: KeyInspector
@@ -165,6 +169,26 @@ func _set_window_nine(on: bool, psz: Vector2) -> void:
 	nine.size = psz
 	nine.visible = true
 	window.visible = false
+
+func set_targetable(on: bool) -> void:
+	## Cyan glow round the window and one big hit area (keys are not in play while targeting).
+	targetable = on
+	if on and _target_cover == null:
+		_target_cover = Button.new(); _target_cover.name = "TargetCover"
+		_target_cover.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		for st in ["normal", "hover", "pressed", "focus", "disabled"]:
+			var ring := StyleBoxFlat.new(); ring.bg_color = Color(VasTokens.FOCUS, 0.10 if st == "hover" else 0.0)
+			ring.border_color = VasTokens.FOCUS; ring.set_border_width_all(8 if st in ["hover", "focus"] else 5)
+			ring.set_corner_radius_all(30); ring.anti_aliasing = true
+			_target_cover.add_theme_stylebox_override(st, ring)
+		_target_cover.pressed.connect(func(): if targetable: target_chosen.emit(ice_ref))
+		add_child(_target_cover)
+	if _target_cover:
+		_target_cover.visible = on
+		_target_cover.position = Vector2.ZERO
+		_target_cover.size = size
+		move_child(_target_cover, get_child_count() - 1)
+	queue_redraw()
 
 var _say_tween: Tween
 

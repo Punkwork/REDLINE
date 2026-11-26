@@ -6,6 +6,12 @@ extends Control
 ## scaling panels down to the lane width (keys stay ≥ 44 px at three ICE); one ICE stays centred.
 
 signal break_requested(ice_ref: Dictionary, sub: int, pick_uid: int)
+signal target_chosen(ice_ref: Dictionary)
+var targeting := false
+
+func set_targeting(on: bool) -> void:
+	targeting = on
+	for p in _panels: p.set_targetable(on)
 
 const PANEL_SCENE := preload("res://scenes/architecture_v2/IcePanel.tscn")
 
@@ -40,6 +46,7 @@ func sync(models: Array) -> void:
 			p.drop_check = drop_check
 			p.reduced_motion = reduced_motion
 			p.break_requested.connect(func(r, s, u): break_requested.emit(r, s, u))
+			p.target_chosen.connect(func(r): target_chosen.emit(r))
 			add_child(p)
 		p.name = "Ice_%d_%s" % [int(m.index), String(m.id)]
 		next.append(p)
