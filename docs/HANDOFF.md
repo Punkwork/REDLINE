@@ -55,6 +55,17 @@ This is the one list of work that has been **decided but not finished**, so Code
 Existing gameplay and visual tasks below remain tracked; reassess their target branch and priority during migration planning rather than silently changing rules or treating them as completed.
 **Priority 1 companion (UI-TYPO-001 / UI-TYPO-001a, 2026-11-26).** The designer confirmed the typography and motion exploration constraints and the parallel [M06 milestone](REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion). Carry the event inventory, hierarchy and motion requirements into CAS-001 review alongside [#21](https://github.com/Punkwork/REDLINE/issues/21). Follow [#24](https://github.com/Punkwork/REDLINE/issues/24) for UI work and approval evidence. Implementation and acceptance are pending.
 
+
+## 2026-11-26 — Representative encounter inventory authorization (ARCH-V2-001 / CAS-001 / VAS-001 / OPS-001)
+
+**Designer-confirmed Priority 1:** Representative playable ICE encounter. Designer approved the development sequence: ICE/subroutine interaction; card-playing interaction; resources/status; turn/response; encounter completion; visual/sensory refinement. VAS-001 canonical [mockup](https://github.com/Punkwork/REDLINE/blob/architecture-v2/godot/assets/architecture_v2/references/PANOPTICON_VAS-001_reference_mockup.jpeg) is central from the first component, not a late skin. Typography and motion (UI-TYPO-001/a, #24), including stage and transition announcements, are required in the representative encounter and developed in parallel. Exact treatments remain for review.
+
+**Explicit authorization:** “the 2 technical inventories are authorized.”
+- **Claude Code:** functional/runtime inventory of all CAS-001 C01–C18 contracts, existing source, dependencies, runtime and applicable tests; classify reuse/adapt/complete/build/validate; propose representative encounter and first C07–C09 batch with C02/C04/C18 dependencies, exact file ownership and evidence.
+- **Codex:** independent visual/asset inventory against VAS-001 and UI Bible; inspect existing art, fixtures, fonts, controls, typography, motion and announcement capabilities; classify reuse/adapt/create, identify gaps and propose isolated fixture tasks with file ownership.
+
+Both may start immediately on architecture-v2. Read AGENTS.md/CLAUDE.md and canonical specs first. Inventory and non-mutating runtime/test investigation only; no production edits, new branches, merges, release changes, rules changes or overlapping implementation. File actual findings in shared dated operations reports; link evidence and #21/#24, distinguish verified from unverified. Stop for designer review before production implementation. Detailed development prompts follow inventory findings. Other November 26 ranks remain proposed.
+
 ## NUL-PILLAR-001 — foundational design follow-up (WAITING)
 
 **NUL-PILLAR-001a:** Designer-confirmed Psychological Invisibility is a binding design constraint for this work: no player-facing psychological progression disclosure, scores, classifications or announcements, including retrospective records. Internalization is emergent, not a programmed status. Review all future NUL/REM proposals against the expanded design document; no implementation authorized.
