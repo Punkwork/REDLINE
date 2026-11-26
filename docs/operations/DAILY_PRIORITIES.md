@@ -33,3 +33,17 @@ Source: [ChatGPT review](reports/2026-11-25-ChatGPT.md), [Claude report](reports
 | 5 | OPS-001 | All agents | File actual dated reports, reconcile register status, maintain canonical branch; no duplicate tasks. |
 | 6 | MAP-003 / CAP-EXP-001 / ICE-EXP-002 / CRED-EXP-001d (M03/M04/M05) | Designer + Claude | Preserve experiments; encounter/card system first, node surveillance later; no implementation or further consolidation until chosen. |
 Status PROPOSED. 0/9 final gates evidenced; effort unknown. Designer confirmation required.
+
+
+## 2026-11-26 — retrospective designer confirmation of 2026-11-25 agenda (OPS-001)
+
+Designer explicitly confirmed the November 25 agenda on November 26 (Toronto time). Status: DESIGNER-CONFIRMED for the November 25 agenda only. Ranked priorities, owners and dependencies are those in the November 25 table above:
+
+1. Complete UI documentation migration.
+2. Reconcile architecture branches.
+3. Validate the current gameplay build.
+4. Establish reliable joint operations.
+5. Review network map implementation.
+6. Review experimental mechanics.
+
+Reconciliation: ranks 1 and 2 have subsequently been recorded complete in the November 26 proposed agenda and AGENTS.md; this historical confirmation does not reopen them. DOCS-MIG-001 remains a standing gate. The November 26 agenda remains PROPOSED pending separate designer confirmation. No new implementation, design approval, branch/ref changes or parallel backlog authorized by this entry.
