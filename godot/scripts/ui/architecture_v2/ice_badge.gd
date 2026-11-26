@@ -48,11 +48,11 @@ func _draw() -> void:
 	if texture:
 		var s := (r - 8.0) * 2.0
 		draw_texture_rect(texture, Rect2(c - Vector2(s, s) / 2.0, Vector2(s, s)), false)
-		if kind == "str": _number(c + Vector2(0, r * 0.18), r)
+		if kind == "str": _number(c, r)
 		return
 	if kind == "str":
-		_str_glyph(c + Vector2(0, -r * 0.42), r * 0.26)
-		_number(c + Vector2(0, r * 0.16), r)
+		# The number alone, centred (designer 2026-11-26: no glyph over the ICE STRENGTH value).
+		_number(c, r)
 		return
 	match ice_type:
 		"FORTRESS": _fortress(c, r * 0.5)
@@ -69,20 +69,13 @@ func _type_colour() -> Color:
 
 func _number(c: Vector2, r: float) -> void:
 	var text := str(value)
-	var fs := int(r * (0.95 if text.length() < 2 else 0.8))
+	var fs := int(r * (1.15 if text.length() < 2 else 0.95))
 	var font := VasTokens.FONT_PLAQUE
 	var w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
 	var col := VasTokens.IVORY
 	if delta > 0: col = Color("#FFB0A0")
 	elif delta < 0: col = Color("#9BF0B4")
 	draw_string(font, c + Vector2(-w.x / 2.0, fs * 0.36), text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, col)
-
-func _str_glyph(c: Vector2, s: float) -> void:
-	# A small hexagonal armour nut: "strength".
-	var pts := PackedVector2Array()
-	for k in 6: pts.append(c + Vector2.from_angle(TAU * k / 6.0 + PI / 6.0) * s)
-	draw_colored_polygon(pts, VasTokens.AMBER)
-	draw_circle(c, s * 0.4, VasTokens.PLAQUE)
 
 func _fortress(c: Vector2, s: float) -> void:
 	var ivory := VasTokens.IVORY
