@@ -29,23 +29,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude).
 
-## 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude)
-
-Designer asked for the title-screen art (a panopticon prison building or one big eye) and character-select portraits. Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND5.md` with the written style guide built in (the designer had no reference images to hand): a day and a night title background combining both ideas (a round World's Fair prison whose central tower is a giant eye), a letterless emblem, and portraits of the GENERALIST, ECHO, RIOT and VECTOR with signature colours and props from REDLINE_RUSTLERS. No code changes.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — DEV-001a: Claude Code handoff (Codex).
-
-## 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude)
-
-Designer asked for ICE avatars with very little resemblance to human features, for LUCIDA, each in the three trace-level moods. Recorded the amendment under AVATAR-001 in the master doc and wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND6_LUCIDA.md`: three paste-once prompts covering all 21 LUCIDA ICE from REDLINE_ICE_CORP3 (61 images), with the written style guide built in. No code changes.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — DOCS-001: which docs are current (Claude).
-
-## 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude)
-
-Designer: creepy, nightmare LUCIDA avatars with no human features, some with mechanical tentacles, jellyfish-like or giant slugs, all very mechanical; build mockups. Rewrote `CHATGPT_PROMPTS_ROUND6_LUCIDA.md`: a shared style block with the nightmare rules (no gore, a face built from machine parts, the job still readable, uncanny even when cheery), a new prompt 0 for three mockups (lineup of all 21, ANIMA's three moods, an encounter-screen mockup), and all 21 creatures redesigned. Amendment recorded under AVATAR-001. No code changes.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — NAME-002 proposed: VITAE → SPARK, parked for review (Claude).
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude).
 
 ## 2026-11-20 — IRONWATCH avatar prework (Claude)
 
@@ -442,3 +426,7 @@ Designer approved the visual exploration constraints in *UI Prototype Exploratio
 ## 2026-11-26 — ARCH-V2-001 / CAS-001 / VAS-001 / OPS-001 inventory authorization (ChatGPT)
 
 Designer confirmed representative encounter as Priority 1, approved six-stage sequence and mockup-first component development; typography/motion including stage and transition announcements required. Explicitly authorized Claude Code functional/runtime inventory and Codex visual/asset inventory, not production implementation. Scope and stopping gate in HANDOFF and DAILY_PRIORITIES (6db9bb0, 6d55a24). No gameplay, branch or release changes; no Godot tests run for this documentation update.
+
+## 2026-11-26 — ARCH-V2-001 / CAS-001 / VAS-001: representative encounter runtime inventory (Claude Code)
+
+Authorized inventory only; no production code changed. Godot 4.3-stable `77dcf97d8`, Linux, GL Compatibility on Mesa llvmpipe. At `fc2923b`: import exit 0; `test_game.gd` 176 passed / 0 failed (also `SIM=1`); `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; no SCRIPT ERROR, Parse Error or Assertion failed. Matches `prototype-baseline`. Live N2A run under Xvfb (seed 711): response resolved once per step, CAPTCHA rotated, DISCARD choice opened; captures in `docs/visual/fixtures/arch-v2-inv-001/`. VAS-001 reference SHA-256 `513af903…df25e` recorded. Findings: two break dispatch paths (click via `main._on_break`, drag direct to `Game.break_sub`); `response_preview()` carries hidden effects; CI skips every screenshot fixture under CORE_LOOP. C01–C18 classification, proposed N2A encounter, Batch 1 file list and ownership, and designer decisions D1–D3 in [the report](operations/reports/2026-11-26-Claude-Code.md); [#21](https://github.com/Punkwork/REDLINE/issues/21), [#24](https://github.com/Punkwork/REDLINE/issues/24). Stopped for designer approval.
