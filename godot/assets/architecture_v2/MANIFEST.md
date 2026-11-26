@@ -37,5 +37,6 @@ Parts for the VAS-001 encounter screen, per [`docs/architecture-v2/VAS-001_ASSET
 | `icons/V2_ICON_DISCARD_LIGHT.png` | 128 × 128 | — | Claude Code: flat ivory card dropping into a tray; designer approved 2026-11-26 | b18e60fdec0a | APPROVED (icon design) |
 | `icons/V2_ICON_BURNED_LIGHT.png` | 128 × 128 | — | Claude Code: flat ivory card with top-right corner burned away and flames along the edge; designer approved 2026-11-26 | 033fe1d51341 | APPROVED (icon design) |
 | `chassis/V2_CHASSIS_TILE.png` | 1254 × 1254 | tile | ChatGPT (§6d-6); seamless (seams checked) | d2637555254d | PROPOSED |
+| `controls/V2_PIPE_V.png` | 112 × 664 | tile (vertical) | ChatGPT (§6d-7); trimmed, re-cut to a repeating section and cross-faded by Claude Code (original top/bottom did not match) | 2d49842742af | PROPOSED |
 
 Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Conversation 3 (§6d): part 1 (tray) delivered; counter stack housing delivered (icons: V2_ICON_DECK_LIGHT, V2_ICON_DISCARD_LIGHT, V2_ICON_BURNED_LIGHT), chassis tile and pipes to come. END TURN dome and lamp bar dropped (ARCH-V2-003m). All housings are blank; what the game places in them is icon-first per spec §2a (UI-BIBLE-001, ARCH-V2-003).
