@@ -241,25 +241,39 @@ class EndTurnKey extends Explained:
 			accept_event()
 		elif e.is_action_pressed("ui_accept"):
 			accept_event(); pressed.emit()
+	func _has_point(p: Vector2) -> bool:
+		return p.distance_to(size / 2.0) <= size.x * 0.5
 	func _draw() -> void:
-		var lamp_s := size.x * 0.26
-		var lt := lamp_on if enabled else lamp_off
-		if lt: draw_texture_rect(lt, Rect2(Vector2((size.x - lamp_s) / 2.0, 0), Vector2(lamp_s, lamp_s)), false)
-		if enabled: draw_circle(Vector2(size.x / 2.0, lamp_s / 2.0), lamp_s * 0.9, Color(VasTokens.AMBER, 0.18))
-		var cs := size.x
-		var y := lamp_s + size.y * 0.04 + (3.0 if _down else 0.0)
-		var r := Rect2(Vector2(0, y), Vector2(cs, cs))
-		if cap: draw_texture_rect(cap, r, false, Color.WHITE if enabled else Color(0.7, 0.66, 0.6))
-		_glyph(r.get_center(), cs * 0.22, IceKey.INK if enabled else Color(IceKey.INK, 0.35))
+		## ARCH-V2-003s (designer 2026-11-26 15:34): a small round brown Bakelite power button, C64
+		## brown, raised, with a cream power symbol (circle with a notch). Lit amber ring when the
+		## turn can end; dull when it can't. Pressed: the cap drops into the socket.
+		var c := size / 2.0
+		var r := size.x * 0.5
+		var press := 2.5 if _down else 0.0
+		# Drop shadow, then glow when ready.
+		draw_circle(c + Vector2(0, 3), r * 0.98, Color(0, 0, 0, 0.45))
+		if enabled:
+			for k in 5:
+				draw_circle(c, r * (1.0 + 0.06 * (5 - k)), Color(VasTokens.AMBER, 0.05 + 0.03 * k))
+		# Socket ring (bronze) and dark recess.
+		draw_circle(c, r, Color("#6B5A4A"))
+		draw_circle(c, r * 0.9, Color("#15100C"))
+		# Lamp ring inside the socket.
+		draw_arc(c, r * 0.84, 0, TAU, 48, VasTokens.AMBER if enabled else Color("#4A3A2A"), r * 0.07, true)
+		# Cap: side (thickness) then face, C64 brown.
+		var cr := r * 0.72
+		var top := c + Vector2(0, -r * 0.06 + press)
+		draw_circle(top + Vector2(0, r * 0.1), cr, Color("#2E1C10"))
+		draw_circle(top, cr, Color("#6A4428") if enabled else Color("#4E3B2C"))
+		draw_circle(top + Vector2(0, -cr * 0.18), cr * 0.78, Color("#7E5534") if enabled else Color("#56422F"))
+		draw_arc(top, cr * 0.86, PI * 1.12, PI * 1.88, 24, Color(1, 1, 1, 0.22), cr * 0.1, true)
+		# Power symbol: an open circle with a notch at the top and a bar through the notch.
+		var ink := Color("#F4ECDA") if enabled else Color(0.85, 0.8, 0.72, 0.45)
+		var gr := cr * 0.42
+		draw_arc(top, gr, -PI * 0.5 + 0.62, PI * 1.5 - 0.62, 32, ink, cr * 0.12, true)
+		draw_line(top + Vector2(0, -gr * 1.18), top + Vector2(0, -gr * 0.1), ink, cr * 0.12, true)
 		if has_focus():
-			var f := StyleBoxFlat.new(); f.draw_center = false; f.set_border_width_all(3); f.border_color = VasTokens.FOCUS
-			f.set_corner_radius_all(int(cs * 0.18)); draw_style_box(f, r.grow(3))
-	func _glyph(c: Vector2, s: float, col: Color) -> void:
-		# Hand-over: a card passing to the right under a curved arrow.
-		draw_rect(Rect2(c + Vector2(-s * 1.1, -s * 0.35), Vector2(s * 0.9, s * 1.3)), col, false, s * 0.18)
-		draw_arc(c + Vector2(s * 0.2, s * 0.15), s * 0.95, PI * 1.1, PI * 1.85, 16, col, s * 0.2)
-		var tip := c + Vector2(s * 0.2, s * 0.15) + Vector2.from_angle(PI * 1.85) * s * 0.95
-		draw_colored_polygon(PackedVector2Array([tip + Vector2(s * 0.45, 0), tip + Vector2(-s * 0.15, -s * 0.38), tip + Vector2(-s * 0.05, s * 0.4)]), col)
+			draw_arc(c, r * 1.08, 0, TAU, 48, VasTokens.FOCUS, 3.0, true)
 
 ## The rig on the large CRT: installed programs as phosphor chips (tool icon + STR), draggable onto
 ## keys with Build 12's payload. Name and STR on hover.

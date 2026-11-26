@@ -20,6 +20,7 @@ var _base: Dictionary = {}           ## card -> Vector2 resting position
 var _tweens: Dictionary = {}
 
 func clear() -> void:
+	hovered = null
 	for c in _cards:
 		if is_instance_valid(c): remove_child(c); c.queue_free()
 	_cards.clear(); _base.clear(); _tweens.clear()
@@ -35,6 +36,9 @@ func add_card(c: Control) -> void:
 	c.focus_entered.connect(_lift.bind(c, true))
 	c.focus_exited.connect(_lift.bind(c, false))
 	_layout()
+
+## The card under the pointer (or keyboard focus), or null. Read by ADP-2b hesitation.
+var hovered: Control
 
 func cards() -> Array[Control]:
 	return _cards
@@ -62,6 +66,8 @@ func _layout() -> void:
 func _lift(c: Control, on: bool) -> void:
 	if not is_instance_valid(c) or not c.is_inside_tree() or not _base.has(c): return
 	var up := on
+	if on: hovered = c
+	elif hovered == c: hovered = null
 	var target: Vector2 = _base[c] - Vector2(0, hover_lift if up else 0.0)
 	c.z_index = 100 if up else _cards.find(c)
 	if _tweens.has(c) and is_instance_valid(_tweens[c]): (_tweens[c] as Tween).kill()

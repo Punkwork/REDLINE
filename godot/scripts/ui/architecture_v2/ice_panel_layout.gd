@@ -11,9 +11,9 @@ extends Resource
 ## upper-left corner; status strip along the foot. The bezel is nine-sliced thin so the field gets
 ## the pixels. Speech bubbles are momentary overlays and take no layout room.
 
-@export var panel_size := Vector2(586, 352)
+@export var panel_size := Vector2(700, 352)   ## ARCH-V2-003s: wider, the lane spans the screen
 ## Three ICE: same width, taller, so the lane's height goes to the avatar and keys.
-@export var compact_panel_size := Vector2(586, 550)
+@export var compact_panel_size := Vector2(720, 550)
 ## Window bezel: nine-slice margins in the painted file's pixels (its bezel is ~78 px of 1619, the
 ## corners ~130), and how wide the left margin is drawn (reference px): 27 draws the bezel ~16 px.
 @export var window_margins := Vector4(130, 130, 130, 130)
@@ -21,21 +21,21 @@ extends Resource
 @export var margin := 26.0
 
 @export_group("Virtual expression (avatar)")
-@export var avatar_rect_normal := Rect2(16, 10, 304, 304)
-@export var avatar_rect_compact := Rect2(93, 70, 400, 400)
+@export var avatar_rect_normal := Rect2(16, 6, 320, 320)
+@export var avatar_rect_compact := Rect2(150, 62, 420, 420)
 @export var portrait_inset := 0.0
 @export var portrait_radius := 0.0
 
 @export_group("Speech bubble (momentary overlay, 1–2 s; covers what is under it)")
-@export var bubble_rect_normal := Rect2(236, 64, 330, 150)
-@export var bubble_rect_compact := Rect2(250, 64, 320, 160)
+@export var bubble_rect_normal := Rect2(340, 64, 340, 150)
+@export var bubble_rect_compact := Rect2(380, 60, 320, 160)
 @export var bubble_font_size := 22
 @export var bubble_font_size_compact := 28
 @export var bubble_seconds := 1.6
 
 @export_group("Identity")
-@export var nameplate_rect_normal := Rect2(334, 30, 200, 52)
-@export var nameplate_rect_compact := Rect2(86, 22, 424, 56)
+@export var nameplate_rect_normal := Rect2(420, 30, 230, 52)
+@export var nameplate_rect_compact := Rect2(86, 22, 560, 56)
 @export var name_font_size := 30
 @export var type_badge_size := 60.0
 @export var type_badge_center := Vector2(46, 44)
@@ -43,8 +43,8 @@ extends Resource
 @export var str_font_size := 30
 
 @export_group("Tactical controls (keys float over the avatar's lower edge)")
-@export var bank_rect_normal := Rect2(22, 180, 542, 136)
-@export var bank_rect_compact := Rect2(18, 368, 550, 136)
+@export var bank_rect_normal := Rect2(22, 180, 656, 136)
+@export var bank_rect_compact := Rect2(20, 368, 680, 136)
 @export var bank_rim := 8.0
 @export var key_unit_max := 1.15
 @export var key_unit_max_compact := 1.3

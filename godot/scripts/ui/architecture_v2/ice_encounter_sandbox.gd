@@ -23,18 +23,20 @@ const TURN := Rect2(360, 13, 112, 69)
 const PHASE := Rect2(488, 16, 252, 63)
 const TRACE := Rect2(758, 11, 230, 74)
 const AD := Rect2(1196, 1, 306, 94)
-const CRT_SMALL := Rect2(8, 104, 258, 166)
-const RACK := Rect2(14, 276, 246, 214)
-const NOTE := Rect2(12, 496, 240, 105)
-const CRT_LARGE := Rect2(8, 606, 254, 200)
-const ENCLOSURE := Rect2(272, 100, 1232, 499)
-const LANE := Rect2(312, 140, 1152, 346)
-const RAIL_HOUSING := Rect2(312, 494, 1152, 63)
+## ARCH-V2-003s (designer 2026-11-26 15:34): the ICE enclosure spans the full width; the CRT moves
+## to the lower left and holds the rig; the effects note sits under it; END TURN is a small brown
+## power button; the meters move to the right of the hand. The second CRT
+## and the side pipe are gone. END TURN moved to the bottom-right corner (designer 15:37).
+const ENCLOSURE := Rect2(6, 100, 1524, 499)
+const LANE := Rect2(40, 134, 1456, 354)
+const RAIL_HOUSING := Rect2(192, 494, 1152, 63)
+const CRT := Rect2(6, 604, 262, 168)
+const NOTE := Rect2(8, 778, 258, 80)
+const END_TURN := Rect2(1458, 792, 66, 66)   ## designer 15:37: the very bottom-right corner
 const TRAY := Rect2(272, 600, 930, 264)
 const HAND := Rect2(318, 592, 846, 262)   ## fan area: cards overhang the tray top like VAS-001
-const COUNTERS := Rect2(1214, 624, 132, 165)
-const END_TURN := Rect2(1372, 650, 112, 160)
-const PIPE_X := 1510.0
+const RACK := Rect2(1208, 608, 196, 206)
+const COUNTERS := Rect2(1410, 628, 120, 158)
 
 @export var auto_ready_rig := "FORTRESS_ICEPICK"
 @export var step_seconds := 0.45
@@ -61,6 +63,8 @@ var signal_screen: HudWidgets.SignalScreen
 var _rig_box: VBoxContainer
 var _hand_box: HBoxContainer
 var hand_fan: HandFan
+## ADP-2b: hovering one card 4 s makes the moodiest ICE say an approved hesitation line.
+var voice := HesitationVoice.new()
 var _prompt: Label
 var _banner: PanelContainer
 var _last_turn := 0
@@ -106,11 +110,11 @@ func _build() -> void:
 	stage = Control.new(); stage.name = "Stage"; stage.size = REF; stage.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(stage)
 	inspector = KeyInspector.new()
-	_build_pipe()
 	_build_header()
 	_build_left_rail()
 	_build_enclosure()
 	_build_tray()
+	_build_meters()
 	flyout = EventFlyout.new(); flyout.name = "EventFlyout"; flyout.position = Vector2.ZERO; flyout.size = REF
 	flyout.band_y = 0.36
 	stage.add_child(flyout)
@@ -132,15 +136,6 @@ func _art(rel: String, r: Rect2, n: String) -> TextureRect:
 	var t := V2Art.rect(rel, r.position, r.size, n)
 	stage.add_child(t)
 	return t
-
-func _build_pipe() -> void:
-	var tile := V2Art.tex("controls/V2_PIPE_V.png", 20)
-	var p := TextureRect.new(); p.name = "Pipe"; p.texture = tile
-	p.stretch_mode = TextureRect.STRETCH_TILE; p.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	p.position = Vector2(PIPE_X, 90); p.size = Vector2(20, REF.y - 90); p.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	stage.add_child(p)
-	for y in [300.0, 640.0]:
-		_art("controls/V2_PIPE_JOINT.png", Rect2(PIPE_X - 8, y, 36, 36), "PipeJoint")
 
 func _build_header() -> void:
 	_art("chassis/V2_HEADER_BAR.png", HEADER, "HeaderBar")
@@ -165,37 +160,37 @@ func _build_header() -> void:
 	copy.position = Vector2(AD.size.x * 0.07, AD.size.y * 0.3); ad.add_child(copy)
 
 func _build_left_rail() -> void:
-	signal_screen = HudWidgets.SignalScreen.new(); signal_screen.name = "SignalScreen"
-	signal_screen.position = CRT_SMALL.position + CRT_SMALL.size * Vector2(0.15, 0.15); signal_screen.size = CRT_SMALL.size * Vector2(0.62, 0.70)
-	stage.add_child(signal_screen)
-	_art("crt/V2_CRT_SMALL.png", CRT_SMALL, "CrtSmall")
-	_art("crt/V2_CRT_GLASS.png", Rect2(signal_screen.position, signal_screen.size), "CrtSmallGlass")
+	## Lower left (ARCH-V2-003s): the CRT holds the rig (installed programs as draggable chips),
+	## the effects note sits under it.
+	var screen := Rect2(CRT.position + CRT.size * Vector2(0.14, 0.15), CRT.size * Vector2(0.64, 0.70))
+	var back := ColorRect.new(); back.color = Color("#06231A"); back.position = screen.position; back.size = screen.size
+	back.mouse_filter = Control.MOUSE_FILTER_IGNORE; stage.add_child(back)
+	_art("crt/V2_CRT_SMALL.png", CRT, "Crt")
+	_art("crt/V2_CRT_GLASS.png", screen, "CrtGlass")
+	_rig_box = VBoxContainer.new(); _rig_box.name = "Rig"
+	_rig_box.position = screen.position + Vector2(8, 8); _rig_box.size = screen.size - Vector2(16, 16)
+	_rig_box.add_theme_constant_override("separation", 5)
+	stage.add_child(_rig_box)
+	effect_card = HudWidgets.EffectCard.new(); effect_card.name = "Effects"
+	effect_card.setup(NOTE.size, inspector); effect_card.position = NOTE.position; stage.add_child(effect_card)
+
+func _build_meters() -> void:
+	## Right of the hand (ARCH-V2-003s): VITAE, BW, RAM, SHIELD, incoming PULP; icon + number.
 	_art("controls/V2_METER_RACK.png", RACK, "MeterRack")
 	var defs := [["VITAE", IceKey.art("ICON_VITAE"), Color("#E23B2E")], ["BW", IceKey.art("ICON_BW"), VasTokens.AMBER],
 		["RAM", null, Color("#7FE0D0")], ["SHIELD", IceKey.art("ICON_SHIELD"), Color("#6C8CFF")], ["PULP", IceKey.art("ICON_PULP_LIGHT"), Color("#FF7A4A")]]
-	var rw := RACK.size.x - 28.0
+	var rw := RACK.size.x - 24.0
 	var rh := rw / 5.84
 	for k in defs.size():
 		var m := HudWidgets.MeterRow.new(); m.name = "Meter" + defs[k][0]; m.inspector = inspector
 		m.setup(Vector2(rw, rh), defs[k][1], defs[k][2])
 		if defs[k][0] == "RAM": m.draw_glyph = "ram"
-		m.position = RACK.position + Vector2(14, 12 + k * (rh + (RACK.size.y - 24 - 5 * rh) / 4.0))
+		m.position = RACK.position + Vector2(12, 12 + k * (rh + (RACK.size.y - 24 - 5 * rh) / 4.0))
 		stage.add_child(m)
 		meters[defs[k][0]] = m
-	effect_card = HudWidgets.EffectCard.new(); effect_card.name = "Effects"
-	effect_card.setup(NOTE.size, inspector); effect_card.position = NOTE.position; stage.add_child(effect_card)
-	var screen := Rect2(CRT_LARGE.position + CRT_LARGE.size * Vector2(0.15, 0.15), CRT_LARGE.size * Vector2(0.70, 0.70))
-	var back := ColorRect.new(); back.color = Color("#06231A"); back.position = screen.position; back.size = screen.size
-	back.mouse_filter = Control.MOUSE_FILTER_IGNORE; stage.add_child(back)
-	_art("crt/V2_CRT_LARGE.png", CRT_LARGE, "CrtLarge")
-	_art("crt/V2_CRT_GLASS.png", screen, "CrtLargeGlass")
-	_rig_box = VBoxContainer.new(); _rig_box.name = "Rig"
-	_rig_box.position = screen.position + Vector2(10, 10); _rig_box.size = screen.size - Vector2(20, 20)
-	_rig_box.add_theme_constant_override("separation", 6)
-	stage.add_child(_rig_box)
 
 func _build_enclosure() -> void:
-	var inner := ENCLOSURE.grow(-30)
+	var inner := ENCLOSURE.grow(-24)
 	var back := TextureRect.new(); back.name = "EnclosureBack"; back.texture = V2Art.tex("chassis/V2_ENCLOSURE_BACK.png", 300)
 	back.stretch_mode = TextureRect.STRETCH_TILE; back.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	back.position = inner.position; back.size = inner.size; back.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -276,7 +271,7 @@ func refresh() -> void:
 	ctrl.rebind_if_new_encounter()
 	flyout.reduced_motion = reduced_motion
 	lane.reduced_motion = reduced_motion
-	signal_screen.reduced_motion = reduced_motion
+	if signal_screen: signal_screen.reduced_motion = reduced_motion
 	hand_fan.reduced_motion = reduced_motion
 	if not game.enc.is_empty():
 		lane.sync(VisibleStateAdapter.ice_models(game, ctrl))
@@ -374,10 +369,19 @@ func _refresh_hand() -> void:
 
 # ----- Small builders
 
+func _process(delta: float) -> void:
+	if game == null or game.enc.is_empty() or hand_fan == null: return
+	var h := hand_fan.hovered
+	var uid := int(h.get_meta("uid", -1)) if is_instance_valid(h) else -1
+	var said := voice.tick(delta, Time.get_ticks_msec() / 1000.0, uid, get_viewport().gui_is_dragging(), game.phase,
+		int(game.enc.get("turn", 0)), String(game.enc.get("corp", "HALCYON")), lane.panels().map(func(p): return p.model))
+	if not said.is_empty(): lane.panels()[int(said.ice)].say(String(said.text), voice.seconds)
+
 func _card_button(c: Dictionary, on_press: Callable) -> Button:
 	## DEV stand-in in HuCard proportions (CARD-HUCARD-001: 1 : 1.58); Batch 2 replaces it.
 	var d := CardDB.def(c.id)
 	var b := _button("%s\n\n%d BW" % [String(d.name), int(d.get("bw", 0))], on_press)
+	b.set_meta("uid", int(c.uid))
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return b
 

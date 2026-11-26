@@ -37,6 +37,8 @@ func run() -> void:
 	await test_sandbox_response(true)
 	print("- test_inspector_keyboard")
 	await test_inspector_keyboard()
+	print("- test_hesitation_voice")
+	test_hesitation_voice()
 	print("- test_hand_fan")
 	await test_hand_fan()
 	print("ARCH-V2 ICE: %d passed, %d failed" % [passed, failed])
@@ -104,7 +106,7 @@ class Direct:
 
 func mount_lane(g: Game, ctrl: EncounterController) -> IceLane:
 	var lane := IceLane.new()
-	lane.size = Vector2(1244, 412)
+	lane.size = IceEncounterSandbox.LANE.size   # the sandbox lane, reference px
 	lane.inspector = KeyInspector.new()
 	root.add_child(lane.inspector)
 	lane.drop_check = func(r, s, u): var i := ctrl.ice_index(r); return g.break_info(i, s, u) if i >= 0 else {"ok": false}
@@ -480,3 +482,29 @@ func test_hand_fan() -> void:
 	check(snap(sb.game) == before, "fan interaction does not touch the Game")
 	sb.queue_free()
 	await process_frame
+
+func test_hesitation_voice() -> void:
+	## ADP-2b through the V2 voice: 4 s hover, highest mood speaks, 20 s cooldown, once per turn,
+	## not while dragging, Rustler's turn only. Reads models only.
+	var g := fresh()
+	var ctrl := EncounterController.new(); ctrl.bind(g)
+	var models := VisibleStateAdapter.ice_models(g, ctrl)
+	var before := snap(g)
+	var v := HesitationVoice.new()
+	var r := v.tick(3.9, 3.9, 7, false, "PLAYER", 1, "HALCYON", models)
+	check(r.is_empty(), "no line before 4 s")
+	r = v.tick(0.2, 4.1, 7, false, "PLAYER", 1, "HALCYON", models)
+	check(not r.is_empty() and String(r.text) != "", "a line after 4 s on one card")
+	var v2 := HesitationVoice.new()
+	check(v2.tick(5.0, 5.0, 7, true, "PLAYER", 1, "HALCYON", models).is_empty(), "no line while dragging")
+	check(v2.tick(5.0, 5.0, 7, false, "RESPONSE", 1, "HALCYON", models).is_empty(), "no line outside the Rustler's turn")
+	v.tick(0.0, 5.0, -1, false, "PLAYER", 1, "HALCYON", models)
+	check(v.tick(5.0, 30.0, 8, false, "PLAYER", 1, "HALCYON", models).is_empty(), "at most once per turn")
+	v.tick(0.0, 30.0, -1, false, "PLAYER", 2, "HALCYON", models)
+	check(v.tick(5.0, 10.0, 8, false, "PLAYER", 2, "HALCYON", models).is_empty(), "20 s cooldown holds into the next turn")
+	v.tick(0.0, 30.0, -1, false, "PLAYER", 2, "HALCYON", models)
+	check(not v.tick(5.0, 35.0, 8, false, "PLAYER", 2, "HALCYON", models).is_empty(), "speaks again after the cooldown, next turn")
+	var lethal: Array = models.duplicate(true); lethal[1].mood = "lethal"
+	var v3 := HesitationVoice.new()
+	check(int(v3.tick(4.5, 4.5, 3, false, "PLAYER", 1, "HALCYON", lethal).get("ice", -1)) == 1, "the ICE with the highest mood speaks")
+	check(snap(g) == before, "hesitation never touches the Game")
