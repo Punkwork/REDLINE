@@ -60,7 +60,11 @@ func show_info(heading: String, title: String, lines: Array, at: Rect2, who: Var
 	subject = who
 	_image.hide()
 	if heading != "": _line(heading, 13, Color("#5E4B35"), VasTokens.FONT_PLAQUE_SEMI)
-	_line(title, 24, VasTokens.SEAFOAM_INK, VasTokens.FONT_PLAQUE)
+	var t := _line(title, 24, VasTokens.SEAFOAM_INK, VasTokens.FONT_PLAQUE)
+	if lines.is_empty() and heading == "":
+		# A one-line answer (ICE type, ICE STRENGTH) sizes to its words.
+		t.custom_minimum_size.x = 0
+		t.autowrap_mode = TextServer.AUTOWRAP_OFF
 	for l in lines: _rule("", String(l))
 	_place(at)
 

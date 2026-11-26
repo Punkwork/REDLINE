@@ -225,14 +225,13 @@ func _set_portrait(id: String, mood: String) -> void:
 		create_tween().tween_property(portrait, "modulate:a", 1.0, 0.25)
 
 func _inspect_badge(b: IceBadge) -> void:
+	## Designer 2026-11-26 (ARCH-V2-003j): the type badge shows the ICE type; the STR badge shows
+	## "ICE STRENGTH: n" with the ICE's current STR. Nothing else.
 	if not is_instance_valid(inspector): return
 	if b.kind == "type":
-		var t := String(model.type)
-		inspector.show_info("TYPE", ("VOID ICE" if t == "VOID" else t), [VisibleStateAdapter.TYPE_RULES.get(t, t)], b.get_global_rect(), b)
+		inspector.show_info("", String(model.type), [], b.get_global_rect(), b)
 	else:
-		var lines := ["To break this ICE's subroutines, an Icepick of its type must reach STR %d. Missing STR is boosted for BW; each key's chip already includes it." % int(model.str)]
-		if int(model.str_delta) != 0: lines.append("Printed STR %d; now %+d." % [int(model.str_base), int(model.str_delta)])
-		inspector.show_info("STRENGTH", "STR %d" % int(model.str), lines, b.get_global_rect(), b)
+		inspector.show_info("", "ICE STRENGTH: %d" % int(model.str), [], b.get_global_rect(), b)
 
 func _inspect_passive() -> void:
 	if is_instance_valid(inspector) and String(model.get("passive", "")) != "":

@@ -29,19 +29,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude).
 
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude); 2026-11-20 — IRONWATCH avatar prework (Claude); 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude).
-
-## 2026-11-20 — IRONWATCH mockups reviewed (Claude)
-
-The designer sent ChatGPT's three IRONWATCH mockups (saved in `docs/visual/explorations/ironwatch-avatars/`). K9 UNIT's escalation matches the brief and becomes the reference image for the production prompts. Updated round 7 prompts 1–3: a large mood-coloured face turned to the viewer on every ICE (most lineup appliances had none), transparent backgrounds, and sharper PATTERN ANALYSIS, SHOCK TROOPER and SECURITY GUARD. Raised a per-corporation console colour as an idea.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-002/003: choices in every event; a 10th event (Claude).
-
-## 2026-11-20 — ENC-CONCEPT-001 console colour per corporation (Claude Code)
-
-Designer: "yes add console colour". ICE consoles now take the corporation's enamel: HALCYON seafoam (unchanged), IRONWATCH navy #1F3A5F, LUCIDA lilac #C9B6F2. `encounter.gd` loads `UI_ICE_CONSOLE_2_<CORP>.png` when present; otherwise the new `themes/console_tint.gdshader` repaints only the seafoam enamel (chrome, brass and dark slots keep their colour). `console_ground()` returns the corporation's enamel and `console_ink()` picks cream on dark enamel for the meta, ZEROED and patent labels. `shot_facade` now checks console ink contrast for every corporation. ChatGPT prompt for painted versions: `docs/visual/concept-art/CHATGPT_PROMPTS_CONSOLES.md`. Presentation only. **Tests:** test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 fixtures exit 0 with no script errors (shot_facade 0 failures, 8 captures).
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-004 direction: powerful Ghostware, permanent Bloatware (Claude).
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude); 2026-11-20 — IRONWATCH avatar prework (Claude); 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude); 2026-11-20 — IRONWATCH mockups reviewed (Claude); 2026-11-20 — ENC-CONCEPT-001 console colour per corporation (Claude Code).
 
 ## 2026-11-21 — Designer calls: DEV-002b/c/h, PIXEL-TRACE-001c, PIXEL-16BIT-001, MOOD-PIXEL-001; checklist v0.7 (Claude)
 
@@ -426,3 +414,8 @@ Designer approved Batch 1 in principle with UI alignment requirements (recorded 
 ## 2026-11-26 — VAS-001 / UI-TYPO-001: approved visual fixtures (Codex)
 
 Built the standalone ICE and event typography scenes in `godot/tests/visual/`. Windows Godot 4.3 GL Compatibility capture checks passed for both. Baseline suites passed 176/0, 17/0 and 672/0. Rechecked the fixture captures on Batch 1 at `f7ad521`. Batch 1's automated suite passed 124/0 with CanvasItem/ObjectDB teardown warnings. The ICE study reads seeded N2A state. The typography study uses scripted payloads and compares full, reduced-motion and reduced-flash playback. Production wiring and review remain in [#21](https://github.com/Punkwork/REDLINE/issues/21) and [#24](https://github.com/Punkwork/REDLINE/issues/24).
+
+## 2026-11-26 — ARCH-V2-003j: ICE type and STR hover wording (Claude Code)
+
+Designer set the badge hover wording: the type badge shows only FORTRESS, TUMBLER or VOID; the STR badge shows only `ICE STRENGTH: n` (current STR). Implemented in `IcePanel._inspect_badge`; the self-written type explanations were removed from the adapter; one-line hover plates size to their words. `test_arch_v2_ice.gd` 125/0 (new STR check); baseline 176/17/672 unchanged; capture `docs/visual/fixtures/arch-v2-batch1/v2_11_void_type_inspector.jpg` refreshed. [#21](https://github.com/Punkwork/REDLINE/issues/21).
+

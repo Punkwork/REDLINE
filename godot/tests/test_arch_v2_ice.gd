@@ -420,5 +420,10 @@ func test_inspector_keyboard() -> void:
 	tb.grab_focus()
 	await process_frame
 	joined = " ".join(ins.find_children("*", "Label", true, false).map(func(l): return l.text))
-	check(joined.contains("VOID ICE"), "type badge explains VOID ICE")
+	check(joined.strip_edges() == "VOID", "type badge shows only the ICE type (got '%s')" % joined)
+	var sb_badge: IceBadge = lane.panels()[0].str_badge
+	sb_badge.grab_focus()
+	await process_frame
+	joined = " ".join(ins.find_children("*", "Label", true, false).map(func(l): return l.text))
+	check(joined.strip_edges() == "ICE STRENGTH: %d" % g.ice_str(0), "STR badge shows ICE STRENGTH with the current STR (got '%s')" % joined)
 	unmount(lane)

@@ -194,10 +194,3 @@ static func effect_rule(e: Dictionary) -> String:
 	if e.get("curve", "") == "C": t += " Hammer curve."
 	if e.get("escalate", false): t += " Grows each response."
 	return t
-
-## ICE type and STR explanations for the hover panel (REDLINE_ICE_RULES_BIBLE wording, shortened).
-const TYPE_RULES := {
-	"FORTRESS": "FORTRESS: every subroutine fires each Corporation Response, left to right. FORTRESSES hit hard.",
-	"TUMBLER": "TUMBLER: only the subroutines in its slots fire; it rotates one step at the start of each of your turns after the first. The rest wait face-down in the reel.",
-	"VOID": "VOID ICE: subroutines start face-down. Response 1 fires subroutine 1, then 1–2, then 1–3, revealing each as it first fires. Hidden subroutines can't be broken.",
-}
