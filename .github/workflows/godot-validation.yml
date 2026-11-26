@@ -42,7 +42,24 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_game.gd 2>&1 | tee /tmp/rules.log
           "$GODOT" --headless --path godot --script res://tests/test_adp.gd 2>&1 | tee -a /tmp/rules.log
           "$GODOT" --headless --path godot --script res://tests/test_signal_carbon.gd 2>&1 | tee -a /tmp/rules.log
+          # ARCH-V2-003: Architecture V2 ICE encounter components (parity with direct Game, hidden info, flyouts).
+          "$GODOT" --headless --path godot --script res://tests/test_arch_v2_ice.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
+      - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
+        shell: bash
+        env:
+          SHOT_DIR: ${{ github.workspace }}/build/screenshots
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          mkdir -p "$SHOT_DIR"
+          command -v xvfb-run >/dev/null || (sudo apt-get update -q && sudo apt-get install -y -q xvfb xauth)
+          export XDG_DATA_HOME="$(mktemp -d)"
+          xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
+            "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
+            --rendering-driver opengl3 --path godot --script res://tests/shot_arch_v2_ice.gd \
+            2>&1 | tee /tmp/shot_arch_v2_ice.log
+          if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_arch_v2_ice.log; then exit 1; fi
+          grep -q 'ARCH-V2 ICE screenshots: 19 written' /tmp/shot_arch_v2_ice.log
       - name: Verify screenshot states and large-hand interaction
         shell: bash
         env:
