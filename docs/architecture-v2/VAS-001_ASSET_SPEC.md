@@ -172,7 +172,7 @@ From `godot/assets/concept/ui/` and `godot/assets/concept/mascots/` (painted ENC
 12. **`V2_KEY_BED`** (900 × 260, about 7:2): "A recessed panel set into seafoam enamel, slightly darker seafoam with an inset shadow and a thin chrome lip, where a row of buttons will sit. Plain inside."
 13. **`V2_RAIL_HOUSING`** (2470 × 158, about 16:1): "The long NEXT RESPONSE rail from the reference: chrome and brass housing with **vent grilles at both ends** and a long black glass channel in the middle. Blank channel, no labels."
 14. **`V2_RAIL_CAPSULE`** (200 × 64): "A small rounded black-glass capsule with a chrome edge, like the PULP 1 / PULP 2 capsules on the rail. Blank."
-15. **`V2_RAIL_CAPSULE_LIT`**: "The same capsule, same size and shape, lit warm amber from behind as if powered on."
+15. ~~`V2_RAIL_CAPSULE_LIT`~~ **Dropped (2026-11-26):** the lit state is an engine amber backlight on `V2_RAIL_CAPSULE`, for exact alignment and so it follows the firing step. Skip this prompt.
 16. **`V2_RAIL_ARROW`** (40 × 48): "The small brass chevron arrow between rail capsules, pointing right."
 
 ### 6c. Header and left rail (conversation 2)
