@@ -2847,3 +2847,25 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 Designer: "yes add console colour". ICE consoles now take the corporation's enamel: HALCYON seafoam (unchanged), IRONWATCH navy #1F3A5F, LUCIDA lilac #C9B6F2. `encounter.gd` loads `UI_ICE_CONSOLE_2_<CORP>.png` when present; otherwise the new `themes/console_tint.gdshader` repaints only the seafoam enamel (chrome, brass and dark slots keep their colour). `console_ground()` returns the corporation's enamel and `console_ink()` picks cream on dark enamel for the meta, ZEROED and patent labels. `shot_facade` now checks console ink contrast for every corporation. ChatGPT prompt for painted versions: `docs/visual/concept-art/CHATGPT_PROMPTS_CONSOLES.md`. Presentation only. **Tests:** test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 fixtures exit 0 with no script errors (shot_facade 0 failures, 8 captures).
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-004 direction: powerful Ghostware, permanent Bloatware (Claude).
+
+## 2026-11-21 — Designer calls: DEV-002b/c/h, PIXEL-TRACE-001c, PIXEL-16BIT-001, MOOD-PIXEL-001; checklist v0.7 (Claude)
+
+Designer answered the open HANDOFF calls in a claude.ai session:
+- **DEV-002b** "CONFIRMED": PACE-008's +50% reserve rounds up (COOKIE BANNER 23, Tier 1 layer 15). Docs only; the code already rounds up.
+- **DEV-002c** "APPROVED": the ad and LUCIDA-edit wording that shipped in `playtest-6` is approved as it is. Closes the ADP-3 working-copy interpretation. Claude Code moves it into `data/adp_copy.json` with approval fields.
+- **DEV-002h** "YES": the `paths` filter also applies to `push`, so doc-only pushes skip validation and export. `shot.gd` and `shot_reel.gd` should fail when a PNG can't be saved.
+- **PIXEL-TRACE-001c** "NEON BALLAST BUZZ": the pixel-step transition sound. It's built with PIXEL-TRACE-001b.
+- **PIXEL-16BIT-001** "NO" to a 16-bit look for the whole game: "ONLY FOR TRANSITION from regular game images to each stage - on lethal - the ICE PULSE transitions in and out of 16-bit - 2 seconds each state". This matches MOOD-PIXEL-001 as built. Follow-ups: "back to normal after each transition" and, under reduced motion, "skip the pulse". Both confirm MOOD-PIXEL-001's behaviour; only its 0.8 s change timing is still open.
+- **NAME-002** "PARKED FOR NOW". **ARCH-NAMES-001** "STILL NOT YET CONFIRMED"; DEV-002e keeps waiting.
+
+Master design (PIXEL-TRACE-001c, PIXEL-16BIT-001, MOOD-PIXEL-001, register rows) and HANDOFF are updated.
+
+**Checklist v0.7** is for HALCYON PLAYTEST 7 (`5bb7d71`, the ENC-CONCEPT-001 encounter). It updates A3, adds a Playtest 7 encounter section (PT7-1 to PT7-10) and rewords C2, L5, L8 and L10 for the new screen. A fill-in workbook, `docs/PANOPTICON_Playtest7_Checklist.xlsx`, has 99 checks with 3 run columns, a Run log and a Summary of counts per run. It's generated from the markdown, and the designer uploads it back with results. Before the repo was connected, the claude.ai project briefly had a v0.7 and HANDOFF copy written for the pre-concept card build. The project copies are refreshed from this commit.
+
+**Tag:** `playtest-7` on `5bb7d71` is still missing. The git push and the GitHub API both refused the tag from this session (proxy policy, HTTP 403).
+
+**Interpretations to confirm:** the PIXEL-TRACE-001c buzz goes on the effects bus, so it plays with music muted and with reduced motion on.
+
+**Code changes:** none. **Tests:** none (docs and the checklist workbook only).
+
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-004: one version per corporation (Claude); 2026-11-19 — DEV-001b: read-only audit of code, docs and ARCHITECTURE.md (Claude Code).

@@ -29,29 +29,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude).
 
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude); 2026-11-20 — IRONWATCH avatar prework (Claude); 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude); 2026-11-20 — IRONWATCH mockups reviewed (Claude); 2026-11-20 — ENC-CONCEPT-001 console colour per corporation (Claude Code).
-
-## 2026-11-21 — Designer calls: DEV-002b/c/h, PIXEL-TRACE-001c, PIXEL-16BIT-001, MOOD-PIXEL-001; checklist v0.7 (Claude)
-
-Designer answered the open HANDOFF calls in a claude.ai session:
-- **DEV-002b** "CONFIRMED": PACE-008's +50% reserve rounds up (COOKIE BANNER 23, Tier 1 layer 15). Docs only; the code already rounds up.
-- **DEV-002c** "APPROVED": the ad and LUCIDA-edit wording that shipped in `playtest-6` is approved as it is. Closes the ADP-3 working-copy interpretation. Claude Code moves it into `data/adp_copy.json` with approval fields.
-- **DEV-002h** "YES": the `paths` filter also applies to `push`, so doc-only pushes skip validation and export. `shot.gd` and `shot_reel.gd` should fail when a PNG can't be saved.
-- **PIXEL-TRACE-001c** "NEON BALLAST BUZZ": the pixel-step transition sound. It's built with PIXEL-TRACE-001b.
-- **PIXEL-16BIT-001** "NO" to a 16-bit look for the whole game: "ONLY FOR TRANSITION from regular game images to each stage - on lethal - the ICE PULSE transitions in and out of 16-bit - 2 seconds each state". This matches MOOD-PIXEL-001 as built. Follow-ups: "back to normal after each transition" and, under reduced motion, "skip the pulse". Both confirm MOOD-PIXEL-001's behaviour; only its 0.8 s change timing is still open.
-- **NAME-002** "PARKED FOR NOW". **ARCH-NAMES-001** "STILL NOT YET CONFIRMED"; DEV-002e keeps waiting.
-
-Master design (PIXEL-TRACE-001c, PIXEL-16BIT-001, MOOD-PIXEL-001, register rows) and HANDOFF are updated.
-
-**Checklist v0.7** is for HALCYON PLAYTEST 7 (`5bb7d71`, the ENC-CONCEPT-001 encounter). It updates A3, adds a Playtest 7 encounter section (PT7-1 to PT7-10) and rewords C2, L5, L8 and L10 for the new screen. A fill-in workbook, `docs/PANOPTICON_Playtest7_Checklist.xlsx`, has 99 checks with 3 run columns, a Run log and a Summary of counts per run. It's generated from the markdown, and the designer uploads it back with results. Before the repo was connected, the claude.ai project briefly had a v0.7 and HANDOFF copy written for the pre-concept card build. The project copies are refreshed from this commit.
-
-**Tag:** `playtest-7` on `5bb7d71` is still missing. The git push and the GitHub API both refused the tag from this session (proxy policy, HTTP 403).
-
-**Interpretations to confirm:** the PIXEL-TRACE-001c buzz goes on the effects bus, so it plays with music muted and with reduced motion on.
-
-**Code changes:** none. **Tests:** none (docs and the checklist workbook only).
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — EVENT-004: one version per corporation (Claude); 2026-11-19 — DEV-001b: read-only audit of code, docs and ARCHITECTURE.md (Claude Code).
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude); 2026-11-20 — AVATAR-001 LUCIDA amendment and round 6 prompts (Claude); 2026-11-20 — Round 6 v2: LUCIDA as mechanical nightmares, mockups first (Claude); 2026-11-20 — IRONWATCH avatar prework (Claude); 2026-11-20 — AVATAR-001 IRONWATCH amendment and round 7 prompts (Claude); 2026-11-20 — IRONWATCH mockups reviewed (Claude); 2026-11-20 — ENC-CONCEPT-001 console colour per corporation (Claude Code); 2026-11-21 — Designer calls: DEV-002b/c/h, PIXEL-TRACE-001c, PIXEL-16BIT-001, MOOD-PIXEL-001; checklist v0.7 (Claude).
 
 ## 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude)
 
@@ -418,4 +396,8 @@ Built the standalone ICE and event typography scenes in `godot/tests/visual/`. W
 ## 2026-11-26 — ARCH-V2-003j: ICE type and STR hover wording (Claude Code)
 
 Designer set the badge hover wording: the type badge shows only FORTRESS, TUMBLER or VOID; the STR badge shows only `ICE STRENGTH: n` (current STR). Implemented in `IcePanel._inspect_badge`; the self-written type explanations were removed from the adapter; one-line hover plates size to their words. `test_arch_v2_ice.gd` 125/0 (new STR check); baseline 176/17/672 unchanged; capture `docs/visual/fixtures/arch-v2-batch1/v2_11_void_type_inspector.jpg` refreshed. [#21](https://github.com/Punkwork/REDLINE/issues/21).
+
+## 2026-11-26 — ARCH-V2-003k/l: STR medallion number only; VAS-ASSET-001 asset spec (Claude Code)
+
+Designer asked to remove the drawn glyph above the STR value (it obscured it): removed from `IceBadge`; the number is centred and slightly larger; captures refreshed. Designer agreed the asset split; wrote `docs/architecture-v2/VAS-001_ASSET_SPEC.md` (VAS-ASSET-001, PROPOSED): 2× reference sizes, nine-slice margins, P0 parts for ICE well, rail, header, left rail, tray/END TURN/chassis, engine-built effects, existing art reused now, three ready-to-paste ChatGPT conversations and an acceptance checklist. `test_arch_v2_ice.gd` 125/0. [#21](https://github.com/Punkwork/REDLINE/issues/21).
 
