@@ -3043,6 +3043,8 @@ Milestones may overlap; M04–M06 are parallel workstreams, not a mandatory seri
 
 **Designer-directed workstream (2026-11-26, UI-TYPO-001 / UI-TYPO-001a).** Priority 1 remains the **Representative ICE Encounter & Component Architecture** (M02, ARCH-V2-001 / CAS-001 / VAS-001). Develop typography and motion concurrently as a significant M06 milestone. The encounter supplies the visible event inventory, component seams and playable test surface. Typography and motion supply the hierarchy, tokens, feedback, accessibility and presentation requirements those components need. This checkpoint feeds the existing M06 full-run gate under OPS-002.
 
+**Designer approval (2026-11-26, VAS-001 / UI-TYPO-001).** Codex may build and verify the isolated C07–C09 ICE fixture and event typography and motion fixture under `godot/tests/visual/`. Claude Code retains production components, live event binding, response sequencing and CI. Specific visual treatments and production integration still require review. Track verification in [#21](https://github.com/Punkwork/REDLINE/issues/21) and [#24](https://github.com/Punkwork/REDLINE/issues/24).
+
 | Step | Deliverable and dependency |
 |---|---|
 | 1 · Establish direction | Use the approved [UI Bible constraints](PANOPTICON_UI_DESIGN_BIBLE.md#typography-and-motion-exploration-constraints-ui-typo-001--ui-typo-001a) and the four canonical mockups. |

@@ -68,6 +68,8 @@ Existing gameplay and visual tasks below remain tracked; reassess their target b
 
 Both may start immediately on architecture-v2. Read AGENTS.md/CLAUDE.md and canonical specs first. Inventory and non-mutating runtime/test investigation only; no production edits, new branches, merges, release changes, rules changes or overlapping implementation. File actual findings in shared dated operations reports; link evidence and #21/#24, distinguish verified from unverified. Stop for designer review before production implementation. Detailed development prompts follow inventory findings. Other November 26 ranks remain proposed.
 
+**Codex fixture assignments built (VAS-001 / UI-TYPO-001).** The designer approved the two isolated studies. Both can be run from `godot/tests/visual/` with Godot 4.3. Evidence and remaining production decisions are tracked in [#21](https://github.com/Punkwork/REDLINE/issues/21) and [#24](https://github.com/Punkwork/REDLINE/issues/24).
+
 ## NUL-PILLAR-001 — foundational design follow-up (WAITING)
 
 **NUL-PILLAR-001a:** Designer-confirmed Psychological Invisibility is a binding design constraint for this work: no player-facing psychological progression disclosure, scores, classifications or announcements, including retrospective records. Internalization is emergent, not a programmed status. Review all future NUL/REM proposals against the expanded design document; no implementation authorized.
