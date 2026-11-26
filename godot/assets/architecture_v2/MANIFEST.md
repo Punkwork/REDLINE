@@ -31,5 +31,6 @@ Parts for the VAS-001 encounter screen, per [`docs/architecture-v2/VAS-001_ASSET
 | `controls/V2_METER_RACK.png` | 1334 × 1161 | — | ChatGPT (§6c-11), trimmed | e2825186225b | PROPOSED |
 | `controls/V2_METER_ROW.png` | 2145 × 367 | 100/30/330/30 | ChatGPT (§6c-12, icon-first prompt), trimmed; baked 11-segment dividers removed by Claude Code so the engine draws per-meter segment counts | 322da8ebf468 | PROPOSED |
 | `controls/V2_NOTE_CARD.png` | 1823 × 799 | — | ChatGPT (§6c-13), trimmed; blank paper for stamped effect icons | 3d9e45d9ed17 | PROPOSED |
+| `controls/V2_TRAY.png` | 2159 × 617 | 140/120/140/150 | ChatGPT (§6d-1), trimmed; plain felt bed, brass lip and end caps | eccb431519ae | PROPOSED |
 
-Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Next: conversation 3 (§6d, tray, counters, END TURN, chassis). All housings are blank; what the game places in them is icon-first per spec §2a (UI-BIBLE-001, ARCH-V2-003).
+Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Conversation 3 (§6d): part 1 (tray) delivered; counter stack (icon + number, designer-approved), END TURN and states, lamp bar, chassis tile and pipes to come. All housings are blank; what the game places in them is icon-first per spec §2a (UI-BIBLE-001, ARCH-V2-003).
