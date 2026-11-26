@@ -438,3 +438,7 @@ Designer approved the visual exploration constraints in *UI Prototype Exploratio
 **Interpretations to confirm.** The named milestone sits within M06 and leaves the existing nine final gate definitions in place. The roadmap uses ordered steps and existing decision, component and issue IDs.
 
 **LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-20 — HOVER-001 built (Claude); 2026-11-20 — HOVER-001: subroutine tips list every effect (Claude); 2026-11-20 — ChatGPT round 4 prompts: the other Node types and the map (Claude).
+
+## 2026-11-26 — ARCH-V2-001 / CAS-001 / VAS-001 / OPS-001 inventory authorization (ChatGPT)
+
+Designer confirmed representative encounter as Priority 1, approved six-stage sequence and mockup-first component development; typography/motion including stage and transition announcements required. Explicitly authorized Claude Code functional/runtime inventory and Codex visual/asset inventory, not production implementation. Scope and stopping gate in HANDOFF and DAILY_PRIORITIES (6db9bb0, 6d55a24). No gameplay, branch or release changes; no Godot tests run for this documentation update.
