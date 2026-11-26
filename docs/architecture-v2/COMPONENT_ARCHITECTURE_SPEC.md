@@ -298,6 +298,12 @@ godot/tests/shot_arch_v2_encounter.gd         [candidate]
 ```
 These paths are illustrative and **must not be created solely because they appear here**.
 
+### Typography and motion dependency (UI-TYPO-001 / UI-TYPO-001a)
+
+The [parallel M06 milestone](../REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion) provides presentation requirements for the Priority 1 representative encounter. Review the event inventory and motion prototypes alongside the first-slice contract review. C02–C05 and C18 are candidate seams for presenting already-resolved visible events with reusable visual resources. Review placements and payloads with the owners of the ICE and subroutine views (C07–C09), card and rig views (C10–C12), HUD (C13), response context (C14), and reward presentation (C17). Cover phase and encounter transitions, action and ICE outcomes, resource and TRACE deltas, and approved extraction and acquisition feedback available in the slice.
+
+Review event identity and order, visible text/value source, component anchor, priority/consolidation, interruption and reduced-effect behavior. Keep presentation scheduling independent of C03's gameplay response sequencing. The same authoritative action resolves once with any presentation setting. A playback completion signal cannot advance rules; overlays must preserve required input, readable state and copy/reveal guards. Validate competing events and reduced effects with actual encounter events under the existing parity and fixture gates. Specific scene boundaries and signatures remain proposals for review in CAS-001 and [#21](https://github.com/Punkwork/REDLINE/issues/21), with UI work in [#24](https://github.com/Punkwork/REDLINE/issues/24).
+
 ## 9. Verification and acceptance matrix
 | Contract | Required evidence |
 |---|---|

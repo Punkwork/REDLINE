@@ -53,6 +53,8 @@ This is the one list of work that has been **decided but not finished**, so Code
 | Commit-pin the UI Bible's seven `blob/main/...` source links before retiring the sources (DOCS-MIG-001) | Claude | **DONE** 2026-11-25: pinned to `8ef0bbe`, the last commit with the originals |
 
 Existing gameplay and visual tasks below remain tracked; reassess their target branch and priority during migration planning rather than silently changing rules or treating them as completed.
+**Priority 1 companion (UI-TYPO-001 / UI-TYPO-001a, 2026-11-26).** The designer confirmed the typography and motion exploration constraints and the parallel [M06 milestone](REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion). Carry the event inventory, hierarchy and motion requirements into CAS-001 review alongside [#21](https://github.com/Punkwork/REDLINE/issues/21). Follow [#24](https://github.com/Punkwork/REDLINE/issues/24) for UI work and approval evidence. Implementation and acceptance are pending.
+
 ## NUL-PILLAR-001 — foundational design follow-up (WAITING)
 
 **NUL-PILLAR-001a:** Designer-confirmed Psychological Invisibility is a binding design constraint for this work: no player-facing psychological progression disclosure, scores, classifications or announcements, including retrospective records. Internalization is emergent, not a programmed status. Review all future NUL/REM proposals against the expanded design document; no implementation authorized.

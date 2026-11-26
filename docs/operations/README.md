@@ -28,7 +28,7 @@ At 22:00 America/Toronto daily, ChatGPT consolidates reports, both registers, ac
 | M03 | Three-corporation run | Partial design / implementation unverified | RUN-006 defines full run; prove all routes, transitions and ending |
 | M04 | Content and balance | In progress | HANDOFF card/ICE and balance follow-ups; approved coverage and full-run tests |
 | M05 | Narrative / NUL/REM | Partial build + design | SIGNAL scaffolding in current-status record; dialogue architecture proposed; verify approved integration |
-| M06 | Presentation / accessibility | Partial build | Existing VIS/CARDS work and pending UI/audio batch in HANDOFF; full-run validation |
+| M06 | Presentation / accessibility | Partial build; typography and motion checkpoint in design (2026-11-26) | [Typography & Motion milestone](../REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion) runs alongside Priority 1 M02. Next evidence: event inventory and type/colour/motion studies for [#24](https://github.com/Punkwork/REDLINE/issues/24) alongside [#21](https://github.com/Punkwork/REDLINE/issues/21) contract review. Full-run validation remains pending. |
 | M07 | Beta / release candidate | Not evidenced | Earlier Windows playtest export is not final release validation; current real Windows tests and defect gates |
 | M08 | Final acceptance | Not evidenced | Designer-approved scope and release candidate |
 | M09 | Commercial Steam launch | Not evidenced | Steamworks readiness, store/build review, launch authorization and public purchasability |

@@ -61,6 +61,25 @@ Two distinct visual representations (designer, 2026-11-25; full wording in Maste
 
 Readability, reduced motion and the copy guards still govern both. **Flyout exception (UI-TYPO-001a, 2026-11-25):** event flyouts may pass over screen elements, including rule text, numbers and buttons, for no more than 1–2 seconds and without hiding anything: what's underneath stays readable through the flyout (see-through or offset from key values), and nothing is removed while it shows (confirmed 2026-11-25). No other effect gets this exception. Confirmed: the physical style covers the console, HUD, cards and controls; the small CRT is the console's existing CRT. Fonts, glyphs and the boundary between the two on each screen are open: see [#24](https://github.com/Punkwork/REDLINE/issues/24). Reference images: [`visual/references/ui-typo-001/`](visual/references/ui-typo-001/README.md). They show the virtual world as event flyout titles over the unchanged console; the refined treatment (02) suits frequent events. Style only: their SYN, Neural-damage and extraction-bonus labels predate current rules.
 
+### Typography and motion exploration constraints (UI-TYPO-001 / UI-TYPO-001a)
+
+**Designer-approved exploration direction.** Typography is a first-class expressive part of PANOPTICON. Keep the tactile, persistent console visually stable and use transient digital typography for rhythm, tension and emphasis. Use the four existing mockups as the principal style references. Use the refined treatment for frequent events and reserve the aggressive treatment for exceptional moments. Event significance governs scale, composition, motion complexity and duration.
+
+| Tier | Purpose | Treatment |
+|---|---|---|
+| 1 · Cinematic | Major transitions, critical threats and significant accomplishments | Large, layered title composition, with expressive illustration where useful |
+| 2 · Phase | Rustler turn, Corporation Response and recurring encounter transitions | Consistent, immediately recognizable flyouts with a brief readable hold |
+| 3 · Mechanical | Damage, resources, program installation and ICE strength or state changes | Localized feedback anchored to the affected component |
+| 4 · Micro | Small numerical changes and routine indicator updates | In-place deltas, lamp pulses, icon illumination or counter movement |
+
+- Give event families recognizable movement. Prototype opposing directional sweeps for Rustler and Corporation phase announcements, a compact impact/reveal for breach, and localized motion for component feedback. Explore enter, reveal, hold and exit, with stable legible text during the hold.
+- Define semantic colour roles and reinforce them with text, iconography, composition and motion. Candidate roles are cyan for Rustler agency, vermilion for corporate authority, magenta for disruption, gold for achievement, green for restoration or functionality, violet for experimental psychological expression, and warm ivory for primary text.
+- Use non-destructive overlays driven by visible engine events. Keep text and numerical values live. Compose typography, illustrations, textures and effects independently. Prioritize or consolidate overlapping events and keep presentation from needlessly delaying play or changing gameplay order.
+- Preserve 4.5:1 contrast, copy guards and access to essential information. Apply the UI-TYPO-001a overlap exception only to flyouts and keep underlying information readable and in place throughout. Provide reduced-motion and reduced-flash treatments that preserve the same information and outcomes.
+- Explore kinetic announcements, localized feedback, corporate propaganda for introductions, and achievement treatments for extraction, Ghostware and CAPS. Psychological typography for NUL/REM, surveillance and loss of autonomy remains experimental. The study of a progressively institutional typographic voice carries no approved mechanic, progression trigger or production requirement.
+
+**For design and validation:** exact typefaces, glyphs, scale, palette values, motion direction, timing, easing and per-component contracts require review. All example timings and mockup copy are study inputs subject to current rules and the flyout exception. See the [Typography & Motion milestone](REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion) and [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
+
 ## 3. Existing Master Design UI decisions (extract)
 **CARDS-003 — PCB glow cartridges (APPROVED, 2026-11-19).** Supersedes the CARDS-002 palette table above and its rarity finishes, ivory print and amber-on-field numbers. Designer: "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot." It was reviewed in 17 iterations on the `review/cards-002` branch, which is never merged.
 

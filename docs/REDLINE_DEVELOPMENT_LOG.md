@@ -29,24 +29,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: builds come from a `release` branch (Claude).
 
-## 2026-11-20 — HOVER-001 built (Claude)
-
-Designer: "Yes build it now. Include that rule in the next build going forward." Cards: the concept face's hover box is now the card drawn large (`FriendlyCard.HOVER_SCALE` 1.1, a display-only copy) beside the rules panel. Keys: the key tip draws the key at 2.2× beside its text (`key_tip_image`). New shared box `FriendlyEncounter.show_object_tip()` / `tip_on_hover()` (large picture plus name, rule and note, placed beside the object and kept on screen; opens on hover and keyboard focus) for program cartridges, the CRT program, Ghostware badges and CAP slots. `shot_ice_analog` checks each box and that none covers its object, and captures them. Interpretation to confirm: no extra box for ICE avatars.
-
-Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — RELEASE-001: HALCYON PLAYTEST 6 (Codex).
-
-## 2026-11-20 — HOVER-001: subroutine tips list every effect (Claude)
-
-Designer: "Ok for ice - except for subroutines. They might have effects beyond their icon(s)." ICE avatars keep no extra hover box. The key tip now lists every effect of the subroutine as its own row with its icon (a key shows only its main icon), then what else touches it: DEADLOCK steps and progress, BOOTING locks, TUMBLE on TUMBLERS, and the ICE's passive. Tests: test_game 369/0, test_adp 17/0, test_signal_carbon 671/0; all 16 workflow fixtures pass.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-18 — DEV-001: Claude Code takes over code development (Claude).
-
-## 2026-11-20 — ChatGPT round 4 prompts: the other Node types and the map (Claude)
-
-Designer asked what else ChatGPT could make, "at least for the other node types". Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND4.md`: five underworld scenes (Uplink, SAFEHOUSE, DEAD DROP, Console Lab, SIGNAL UNCLEAR), Central Node and escape backgrounds for each corporation, a defaced tourist-map board per corporation and nine map Node badges. No code changes; wiring is a HANDOFF item. Interpretation to confirm: Rustler places share one underworld look rather than one per corporation.
-
 ## 2026-11-20 — ChatGPT round 5 prompts: title screen and Rustler portraits (Claude)
 
 Designer asked for the title-screen art (a panopticon prison building or one big eye) and character-select portraits. Wrote `docs/visual/concept-art/CHATGPT_PROMPTS_ROUND5.md` with the written style guide built in (the designer had no reference images to hand): a day and a night title background combining both ideas (a round World's Fair prison whose central tower is a giant eye), a letterless emblem, and portraits of the GENERALIST, ECHO, RIOT and VECTOR with signature colours and props from REDLINE_RUSTLERS. No code changes.
@@ -448,3 +430,11 @@ Designer, 13:48: "commit the release-002. 3 add-ons: a - yes b - yes c - yes". R
 Designer, 13:48: "#24 - 1 yes; 2 - Yes; 3 - sort of - i Imagine the flyouts would cover elements on screen but A - not for more than 1 -2 seconds B - would not hide anything". Readings 1 (event flyouts are the virtual world) and 2 (the console's existing CRT) confirmed. Reading 3 amended as **UI-TYPO-001a**: flyouts may pass over screen elements, including rule text, numbers and buttons, for at most 1–2 seconds and without hiding anything. This is the only exception to ADP-R1, now written into AGENTS/CLAUDE §4, the UI Bible §2a and Master Design. *Interpretation to confirm:* "would not hide anything" = what's underneath stays readable through the flyout and nothing is removed while it shows. Issue #24 updated.
 - **Update 14:26 — UI-TYPO-001a confirmed:** designer: "yes that is what i meant". "Without hiding anything" = what's underneath stays readable through the flyout (see-through or offset from key values) and nothing is removed while it shows. Master Design and UI Bible §2a updated; #24 updated. No open UI-TYPO-001 interpretations remain.
 - **Update 14:45 — RELEASE-002a done:** the designer created ruleset `release` (id 28104142): active, target `refs/heads/release`, rules deletion and non_fast_forward, no bypass. Verified: `rules/branches/release` returns both; `architecture-v2` has none. The first save had no target and was disabled; corrected. Daily drift check now includes it.
+
+## 2026-11-26 — UI-TYPO-001 / UI-TYPO-001a: Typography & Motion Design System milestone (Codex)
+
+Designer approved the visual exploration constraints in *UI Prototype Exploration* and directed the milestone to run alongside Priority 1 Representative ICE Encounter & Component Architecture. Recorded constraints in UI Bible §2a, the M06 checkpoint and acceptance steps in Master Design, and presentation dependencies in CAS-001. See [#24](https://github.com/Punkwork/REDLINE/issues/24) and [#21](https://github.com/Punkwork/REDLINE/issues/21). Psychological typography remains experimental. Documentation only. No gameplay, architecture implementation, release or migration-gate changes. Verified affected paths and anchors against the GitHub tree and document content. Godot tests were outside this documentation-only check. Implementation and acceptance evidence are pending.
+
+**Interpretations to confirm.** The named milestone sits within M06 and leaves the existing nine final gate definitions in place. The roadmap uses ordered steps and existing decision, component and issue IDs.
+
+**LOG-001:** moved the oldest dated entries to the archive unchanged: 2026-11-20 — HOVER-001 built (Claude); 2026-11-20 — HOVER-001: subroutine tips list every effect (Claude); 2026-11-20 — ChatGPT round 4 prompts: the other Node types and the map (Claude).
