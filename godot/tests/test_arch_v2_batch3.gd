@@ -142,7 +142,7 @@ func test_events() -> void:
 	g.add_trace(40 - g.trace, false); sb.refresh()
 	check(sb.last_events.any(func(e): return e.t == "EV-14"), "strike event read by the screen")
 	check(g.events.is_empty(), "events drained once")
-	check(sb.flyout.kind == "strike" or sb.flyout.queued().has("strike"), "TRACE STRIKE flyout")
+	check(sb.flyout.kind != "strike" and not sb.flyout.queued().has("strike") and not VasTokens.FLYOUT.has("strike"), "no TRACE STRIKE banner (ARCH-V2-006j)")
 	check(sb.eye.strikes == 1, "first strike lamp lit")
 	check(sb.flash.color.a > 0.0, "red wash on a strike")
 	# Second and third strikes: MASK OFF, then LOCKDOWN with its flyout.
@@ -162,7 +162,8 @@ func test_events() -> void:
 	await frames(); g = sb.game; sb.flyout.advance(10.0); sb.refresh()
 	g.add_trace(40 - g.trace, false); sb.refresh()
 	check(sb.flash.color.a == 0.0, "reduced motion: no red wash")
-	check(sb.flyout.kind == "strike", "reduced motion: flyout still announces")
+	g.add_trace(40 - g.trace, false); sb.refresh()
+	check(sb.flyout.kind == "mask_off", "reduced motion: banners still announce")
 	sb.queue_free(); await frames()
 	# Break feedback through a real paid break; virus chips from the ICE's counters.
 	sb = sandbox(); await frames(); g = sb.game
@@ -328,13 +329,13 @@ func test_sequencer() -> void:
 	sb = sandbox(); await frames(); g = sb.game
 	sb.instant = false; sb.step_seconds = 0.05
 	sb.flyout.advance(10.0)
-	sb.flyout.announce("strike")
-	check(sb.sequencer.hold.call(), "a strike flyout holds the response")
+	sb.flyout.announce("lockdown")
+	check(sb.sequencer.hold.call(), "a LOCKDOWN banner holds the response")
 	sb.end_turn()
 	await frames(4)
 	var before_q: int = g.response_queue.size()
 	check(sb.responding and before_q > 0 and sb.ctrl.fired.is_empty(), "nothing resolves while the flyout holds")
-	sb.flyout.advance(10.0); sb.flyout.advance(10.0)   # the strike, then the queued CORP COUNTERMEASURE
+	sb.flyout.advance(10.0); sb.flyout.advance(10.0)   # LOCKDOWN, then the queued CORP COUNTERMEASURE
 	await create_timer(0.6).timeout
 	check(sb.ctrl.fired.size() > 0 or not sb.responding, "response continues after the flyout")
 	sb.sequencer.cancel()

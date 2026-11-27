@@ -104,7 +104,7 @@ var sequencer := ResponseSequencer.new()
 var sfx := {}
 var last_effect_sound := ""
 ## Announcements the response waits for (Build 12 waited for its strike overlay).
-const HOLD_FOR := ["corp_countermeasure", "strike", "mask_off", "lockdown", "ice_lethal"]
+const HOLD_FOR := ["corp_countermeasure", "mask_off", "lockdown", "ice_lethal"]
 var nr_voice: AudioStreamPlayer
 var voice_on := true
 ## Tests point this at a scratch file so they never touch the player's settings.
@@ -112,7 +112,9 @@ var flags_path := FLAGS
 var nr_lines: Array = []     # what NUL/REM said this encounter, newest last
 ## R06: the last batch of Game.events this screen handled (tests read it).
 var last_events: Array = []
-const EVENT_FLYOUT := {"EV-14": "strike", "EV-15": "mask_off", "EV-16": "lockdown", "EV-07": "breached",
+## ARCH-V2-006j (designer 2026-11-26 20:35): no TRACE STRIKE banner; the first strike shows on the
+## eye's lamps with the red wash and NUL/REM.
+const EVENT_FLYOUT := {"EV-15": "mask_off", "EV-16": "lockdown", "EV-07": "breached",
 	"ICE_LETHAL": "ice_lethal", "PARTING_SHOT": "parting_shot", "EV-09": "full_extraction"}
 const FLASH_EVENTS := {"EV-14": 0.30, "EV-15": 0.38, "EV-16": 0.45, "ICE_LETHAL": 0.18}
 var ghost_reel: HudWidgets.GhostReel

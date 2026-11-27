@@ -392,3 +392,8 @@ Designer answered the coverage table's open rows (19:12, follow-ups 19:20). Reco
 ## 2026-11-26 — ARCH-V2-006: Batch 3 built (Claude Code)
 
 Designer: "start batch 3" (19:22). Built in five commits (3a header, 3b rail, 3c events, 3d cards, 3e speakers/settings/sequencer); every BATCH3 row of the coverage table is BUILT. Details and interpretations: Master ARCH-V2-006 (Batch 3 built). New `test_arch_v2_batch3.gd` in CI. Tests (Godot 4.3 headless): `test_game.gd` 176/0; `test_arch_v2_ice.gd` 204/0; `test_arch_v2_coverage.gd` 535/0; `test_arch_v2_batch3.gd` 94/0; screenshots 36. No rules change. (LOG-001: moved "2026-11-22 — Playtest 11 results (Claude)" to the archive.)
+
+## 2026-11-26 — ARCH-V2-006j: TRACE STRIKE banner removed; Batch 3 interpretations approved (Claude Code)
+
+Designer (20:35): remove the TRACE STRIKE banner, keep the rest under the typography rules; the other Batch 3 choices approved. Removed the banner and its token; the response no longer waits on it. Tests: `test_arch_v2_batch3.gd` 94/0, `test_arch_v2_ice.gd` 201/0. No rules change.
+
