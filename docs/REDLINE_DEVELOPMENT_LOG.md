@@ -391,5 +391,5 @@ Designer uploaded the seven ChatGPT parts from VAS-ASSET-001 §6e. Trimmed (alre
 
 ## 2026-11-26 — ARCH-V2-006: homes for the remaining encounter UI recorded (Claude Code)
 
-Designer answered the coverage table's open rows (19:12, follow-ups 19:20). Recorded in Master Design ARCH-V2-006 (a)–(g); coverage JSON and `ENCOUNTER_COVERAGE.md` updated (OPEN 0, BATCH3 20); ChatGPT prompts for the eye, Ghostware reel housing and speaker grille added as VAS-ASSET-001 §6f. 19:21: strike lamps under the eye and a LOCKDOWN flyout approved (006h). No code change.
+Designer answered the coverage table's open rows (19:12, follow-ups 19:20). Recorded in Master Design ARCH-V2-006 (a)–(g); coverage JSON and `ENCOUNTER_COVERAGE.md` updated (OPEN 0, BATCH3 20); ChatGPT prompts for the eye, Ghostware reel housing and speaker grille added as VAS-ASSET-001 §6f. 19:21: strike lamps under the eye and a LOCKDOWN flyout approved (006h); no log ticker, the log opens from the NEXT RESPONSE rail (006i). No code change.
 

@@ -57,7 +57,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | R01 | NEXT RESPONSE | per-ICE plates | `ResponseRail` | BUILT | — | Shared rail, provisional (ARCH-V2-003e). |
 | R02 | Step-by-step Corporation Response | main._play_response | `ResponseRail` | BUILT | C03 ResponseSequencer port in Batch 3 | Minimal stand-in today. |
 | R03 | PARTING SHOT after BREACH (PT11-UI 1) | PULP INCOMING row | — | BATCH3 | C13/C14 |  |
-| R04 | Log ticker | log_text | — | BATCH3 | C14 ResponseQueue/Log |  |
+| R04 | Encounter log | log_text | — | BATCH3 | Opens on hover, click or focus of the NEXT RESPONSE rail; no ticker (ARCH-V2-006i) |  |
 | R05 | Phase flyouts | none | `EventFlyout` | BUILT | — |  |
 | R06 | Event flyouts from Game.events (EV-xx) | toasts, punch arrival | `EventFlyout` | BATCH3 | M06: drive from Game.events | Widget exists; only phase announcements wired. |
 

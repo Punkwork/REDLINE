@@ -3380,6 +3380,7 @@ ChatGPT's independent check of `main` references covered the principal governanc
 - **(g) KEY LEGEND:** "that can be a rollover on the top left panopticon title & level and node indicator." The legend opens on hover/focus of the top-left eye, together with the tier/level and Node.
 
 - **(h) Strikes and LOCKDOWN (designer, 2026-11-26 19:21: "yes for strikes and lockdown. WE would need a text flyout for lockdown as in the typography examples from the weekend"):** three small lamps under the eye light as strikes land; at LOCKDOWN all three turn red with a lock mark. LOCKDOWN also gets an event flyout in the UI-TYPO-001 family (references `docs/visual/references/ui-typo-001/`, catalogue 04: the hot red/orange band of CORPORATION RESPONSE and DEADLOCK BREACHED, with a lock motif), within the UI-TYPO-001a limits (≤ 1.5 s, see-through, static under reduced motion). Wording proposed: **LOCKDOWN**.
+- **(i) No log ticker (designer, 2026-11-26 19:21: "yes no log ticker. opening the log on hover or click of next response rail is elegant solution"):** the encounter log opens on hover or click (and keyboard focus) of the NEXT RESPONSE rail; there is no scrolling ticker.
 
 Coverage table updated: no OPEN rows remain (`docs/architecture-v2/ENCOUNTER_COVERAGE.md`). New art: VAS-ASSET-001 §6f.
 

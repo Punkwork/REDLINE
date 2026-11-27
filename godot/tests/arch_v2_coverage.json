@@ -312,11 +312,11 @@
   {
    "id": "R04",
    "area": "Response",
-   "element": "Log ticker",
+   "element": "Encounter log",
    "prototype": "log_text",
    "v2": "",
    "status": "BATCH3",
-   "next": "C14 ResponseQueue/Log",
+   "next": "Opens on hover, click or focus of the NEXT RESPONSE rail; no ticker (ARCH-V2-006i)",
    "note": ""
   },
   {
