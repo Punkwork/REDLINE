@@ -33,10 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-23 — ARCH-V2-001 dependency map (ChatGPT)
-
-Added `docs/architecture-v2/DEPENDENCY_MAP.md` based on inspected Godot source. Traced click/drag card play, ICE break, targeted card, end-turn response, and UI refresh call paths; identified controller↔view coupling, direct Game dispatch from drop targets, and proposed staged migration seams. No runtime test, scene implementation, gameplay modification or architecture approval claimed.
-
 ## 2026-11-23 — ARCH-V2-001 formal component specification (ChatGPT)
 
 Created `docs/architecture-v2/COMPONENT_ARCHITECTURE_SPEC.md` (CAS-001) with 18 proposed component contracts, ownership and lifecycle, command/snapshot boundary, allowed dependencies, migration stages, acceptance matrix and open designer decisions. Based on existing source audit and architecture documents. This is a PROPOSAL only: no Godot execution, production scenes, gameplay changes, or implementation approval.
@@ -395,4 +391,8 @@ Designer chose the header gap for graffiti and the eye hover for punch cards. Bu
 ## 2026-11-26 — ARCH-V2-007d: V2 encounter integrated into the app (Claude Code)
 
 `main.gd` routes ICE encounters to the V2 screen (embedded `IceEncounterSandbox.attach`, `app_phase_changed`, `voice_toggled`); app overlays stay for map, READY RIG before the encounter, DEEPER, reward, SAFEHOUSE, run end; `"legacy_encounter": true` brings back Build 12's encounter. New `test_arch_v2_app.gd` (in CI) 13/0 and `shot_arch_v2_app.gd` (local captures). All suites pass: test_game 176/0, adp 17/0, signal/carbon 672/0, ice 202/0, coverage 550/0, batch3 110/0, batch4 53/0. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 static source audit (ChatGPT)" to the archive.)
+
+## 2026-11-26 — ARCH-V2-007e: behaviour comparison; Batch 4 complete (Claude Code)
+
+Rules engine and data identical to `prototype-baseline` (git diff empty). New `test_arch_v2_parity.gd` (CI): 30 encounters, 1,560 actions, V2 screen vs Build 12 direct path identical after every action. Fixed: the ResponseSequencer left a response with nothing to fire unfinished. Reported: CORE-LOOP-REWARD-GAP (rules, baseline). Batch 4 tests made timing-independent. Results: test_game 176/0 (SIM=1 too), adp 17/0, signal/carbon 672/0, ice 202/0, coverage 550/0, batch3 110/0, batch4 53/0, app 13/0, parity 1590/0; screenshots 43. RELEASE-002c conditions met. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 dependency map (ChatGPT)" to the archive.)
 

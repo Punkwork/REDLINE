@@ -25,7 +25,12 @@ var running := false
 var _epoch := 0
 
 func run() -> void:
-	if running or ctrl == null or not ctrl.response_pending(): return
+	if running or ctrl == null: return
+	if not ctrl.response_pending():
+		## Nothing left to fire (every visible subroutine broken, or a parting shot with nothing to
+		## fire): finish the response at once, as Build 12's loop does (found by test_arch_v2_parity).
+		if ctrl.game.phase == "RESPONSE": ctrl.finish_response(); finished.emit()
+		return
 	_epoch += 1
 	var epoch := _epoch
 	var enc_ref: Dictionary = ctrl.game.enc

@@ -87,9 +87,10 @@ func test_look() -> void:
 	# Animated transition (not reduced): a spike then the step.
 	sb.reduced_motion = false
 	g.trace = 25; sb.refresh()
-	await create_timer(0.08).timeout
+	sb._pixel_tween.pause()   # step the transition by hand so the check doesn't depend on timing
+	sb._pixel_tween.custom_step(0.12)
 	var mid := p0.trace_pixel_cell()
-	await create_timer(0.6).timeout
+	sb._pixel_tween.custom_step(1.0)
 	check(mid > float(AtomicDecoPunk.settings.pixel.trace_20.cell) and p0.trace_pixel_cell() == float(AtomicDecoPunk.settings.pixel.trace_20.cell), "transition spikes coarser, then settles (%.0f then %.0f)" % [mid, p0.trace_pixel_cell()])
 	# Mood flicker: a mood change drops the avatar into 16-bit and back; lethal pulses; reduced motion: none.
 	p0._mood_prev = "cheery"; p0._mood_now = "wary"; p0._mood_age = 0.3

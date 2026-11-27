@@ -2964,3 +2964,7 @@ At the designer's request, added `docs/architecture-v2/ARCHITECTURE_DECISIONS.md
 ## 2026-11-23 — ARCH-V2-001 static source audit (ChatGPT)
 
 Inspected GitHub source on `architecture-v2`: project/scene, UI/controller and interaction scripts, Game/CardDB/IceDB, and CI workflow. Added `docs/architecture-v2/STATIC_SOURCE_AUDIT.md` with source-grounded dependency map, proposed file structure, risks and regression matrix. Critical finding: current `CORE_LOOP := true` causes CI to skip legacy screenshot fixtures. No Godot execution, screenshot review, baseline verification or gameplay changes performed. Proposals remain subject to designer approval.
+
+## 2026-11-23 — ARCH-V2-001 dependency map (ChatGPT)
+
+Added `docs/architecture-v2/DEPENDENCY_MAP.md` based on inspected Godot source. Traced click/drag card play, ICE break, targeted card, end-turn response, and UI refresh call paths; identified controller↔view coupling, direct Game dispatch from drop targets, and proposed staged migration seams. No runtime test, scene implementation, gameplay modification or architecture approval claimed.

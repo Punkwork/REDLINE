@@ -52,6 +52,8 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_arch_v2_batch4.gd 2>&1 | tee -a /tmp/rules.log
           # ARCH-V2-007d: the V2 encounter inside the real app (map, encounter, reward, next Node).
           "$GODOT" --headless --path godot --script res://tests/test_arch_v2_app.gd 2>&1 | tee -a /tmp/rules.log
+          # ARCH-V2-007e: behaviour comparison, V2 screen vs Build 12's direct path on twin seeded games.
+          "$GODOT" --headless --path godot --script res://tests/test_arch_v2_parity.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash
