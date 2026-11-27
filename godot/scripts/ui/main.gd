@@ -20,6 +20,11 @@ const KONAMI := [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LE
 
 @export var lethal_pulp_threshold := 5
 var friendly: FriendlyEncounter
+## ARCH-V2-007d (C05): the Architecture V2 encounter screen is the game's encounter screen. Build 12's
+## FriendlyEncounter stays for comparison when the flags file sets "legacy_encounter": true.
+var v2: IceEncounterSandbox
+var use_v2 := true
+var _v2_refreshing := false
 var legacy_widgets: Array = []
 var friendly_skin: CorporationSkin = preload("res://themes/halcyon.tres")
 var g: Game
@@ -139,6 +144,7 @@ func _load_flags() -> void:
 			first_run = not data.get("first_run_done", true)
 			personalized_ads = data.get("personalized_ads", true)
 			voice_on = data.get("voice_on", true)
+			use_v2 = not bool(data.get("legacy_encounter", false))
 			reduced_motion = data.get("reduced_motion", false)
 			music_volume = clampf(float(data.get("music_volume", music_volume)), 0.0, 1.0)
 			music_muted = data.get("music_muted", false)
@@ -146,7 +152,7 @@ func _load_flags() -> void:
 func _save_flags() -> void:
 	var f := FileAccess.open("user://redline_flags.json", FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"first_run_done": not first_run, "personalized_ads": personalized_ads, "voice_on": voice_on, "reduced_motion": reduced_motion, "music_volume": music_volume, "music_muted": music_muted}))
+		f.store_string(JSON.stringify({"first_run_done": not first_run, "personalized_ads": personalized_ads, "voice_on": voice_on, "reduced_motion": reduced_motion, "music_volume": music_volume, "music_muted": music_muted, "legacy_encounter": not use_v2}))
 
 func _build_layout() -> void:
 	var bg := ColorRect.new()
@@ -354,8 +360,8 @@ func _input(event: InputEvent) -> void:
 				_speak_event({"t": "EV-39"})
 		else:
 			konami_pos = 1 if event.keycode == KONAMI[0] else 0
-		if event.keycode == KEY_M:
-			_toggle_voice()
+		if event.keycode == KEY_M and not (v2 != null and v2.visible):
+			_toggle_voice()   # in an encounter the V2 screen's speakers handle M
 		if event.keycode == KEY_ESCAPE and inspect.visible:
 			_show_inspect("")
 			get_viewport().set_input_as_handled()
@@ -524,13 +530,23 @@ func refresh() -> void:
 			defeat_entry = CarbonRecord.append_defeat(run_id, g)
 		_show_inspect("")
 
-	_detect_tumbles()
-	_observe_break_audio()
-	_handle_events()
 	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE"]
-	friendly.visible = friendly_active
+	var v2_active := friendly_active and v2 != null
+	if not v2_active:
+		_detect_tumbles()
+		_observe_break_audio()
+		_handle_events()   # in an encounter the V2 screen reads the events (flyouts, NUL/REM)
+	friendly.visible = friendly_active and not v2_active
+	if v2: v2.visible = v2_active
 	for widget in legacy_widgets: widget.visible = not friendly_active and g.phase != "DEAD"
 	if g.phase == "DEAD":
+		_build_overlay()
+		return
+	if v2_active:
+		_v2_refreshing = true
+		if v2.game != g: v2.attach(g)
+		else: v2.refresh()
+		_v2_refreshing = false
 		_build_overlay()
 		return
 	if friendly_active:
@@ -627,6 +643,7 @@ func _speak_event(e: Dictionary) -> void:
 
 func _toggle_voice() -> void:
 	voice_on = not voice_on
+	if v2: v2.voice_on = voice_on
 	if not voice_on:
 		voice.stop()
 	_update_voice_btn()
@@ -1429,6 +1446,8 @@ func _build_overlay() -> void:
 	if deck_open:
 		_overlay_deck(false)
 		return
+	if v2 != null and v2.visible and g.phase in ["READY_RIG", "CHOICE"]:
+		return   # the V2 encounter screen shows its own choices (C15)
 	match g.phase:
 		"DECOMPILE": _overlay_deck(true)
 		"SELECT": _overlay_select()
@@ -2019,10 +2038,20 @@ func _install_friendly() -> void:
 	friendly.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(friendly)
 	move_child(friendly, blocker.get_index())
+	if use_v2:
+		v2 = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
+		v2.embedded = true
+		v2.name = "EncounterV2"
+		v2.visible = false
+		add_child(v2)
+		move_child(v2, blocker.get_index())
+		v2.app_phase_changed.connect(func(_p): if not _v2_refreshing: refresh())
+		v2.voice_toggled.connect(func(on): voice_on = on; _update_voice_btn())
 	move_child(inspect, get_child_count() - 1)
 
 func set_reduced_motion(value: bool) -> void:
 	reduced_motion = value
+	if v2: v2.reduced_motion = value
 	if value and tween:
 		tween.kill()
 		nr_text.visible_ratio = 1.0
@@ -2034,4 +2063,5 @@ func set_music(level: float, muted: bool) -> void:
 	music_volume = level
 	music_muted = muted
 	friendly.music.set_level(level, muted)
+	if v2 and v2.music: v2.music.set_level(level, muted)
 	_save_flags()

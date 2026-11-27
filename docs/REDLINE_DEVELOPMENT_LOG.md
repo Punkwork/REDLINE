@@ -33,10 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-23 — ARCH-V2-001 static source audit (ChatGPT)
-
-Inspected GitHub source on `architecture-v2`: project/scene, UI/controller and interaction scripts, Game/CardDB/IceDB, and CI workflow. Added `docs/architecture-v2/STATIC_SOURCE_AUDIT.md` with source-grounded dependency map, proposed file structure, risks and regression matrix. Critical finding: current `CORE_LOOP := true` causes CI to skip legacy screenshot fixtures. No Godot execution, screenshot review, baseline verification or gameplay changes performed. Proposals remain subject to designer approval.
-
 ## 2026-11-23 — ARCH-V2-001 dependency map (ChatGPT)
 
 Added `docs/architecture-v2/DEPENDENCY_MAP.md` based on inspected Godot source. Traced click/drag card play, ICE break, targeted card, end-turn response, and UI refresh call paths; identified controller↔view coupling, direct Game dispatch from drop targets, and proposed staged migration seams. No runtime test, scene implementation, gameplay modification or architecture approval claimed.
@@ -395,4 +391,8 @@ Window enamel and ad plate per corporation (`CorporationLook`), PIXEL-TRACE-001 
 ## 2026-11-26 — ARCH-V2-007c: graffiti, punch cards, low VITAE, PATIENT ZERO (Claude Code)
 
 Designer chose the header gap for graffiti and the eye hover for punch cards. Built the graffiti stickers (max two, wrapped), punch cards on the eye hover with an arrival drop, the VITAE warning pulse, and PATIENT ZERO on the ICE windows (`EncounterController.request_choose_ice`). Coverage: every BATCH4 row BUILT except integration. Tests: batch4 53/0, batch3 110/0, ice 202/0, coverage 547/0; screenshots 43. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 decision history and compliance gate (ChatGPT)" to the archive.)
+
+## 2026-11-26 — ARCH-V2-007d: V2 encounter integrated into the app (Claude Code)
+
+`main.gd` routes ICE encounters to the V2 screen (embedded `IceEncounterSandbox.attach`, `app_phase_changed`, `voice_toggled`); app overlays stay for map, READY RIG before the encounter, DEEPER, reward, SAFEHOUSE, run end; `"legacy_encounter": true` brings back Build 12's encounter. New `test_arch_v2_app.gd` (in CI) 13/0 and `shot_arch_v2_app.gd` (local captures). All suites pass: test_game 176/0, adp 17/0, signal/carbon 672/0, ice 202/0, coverage 550/0, batch3 110/0, batch4 53/0. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 static source audit (ChatGPT)" to the archive.)
 

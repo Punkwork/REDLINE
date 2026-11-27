@@ -168,28 +168,45 @@ func _ready() -> void:
 	_build()
 	get_viewport().size_changed.connect(_fit)
 	_fit()
-	if game == null: start(SEED)
+	## The music plays only while the screen is shown (the app hides it outside encounters).
+	visibility_changed.connect(func(): if music: music.set_active(is_visible_in_tree()))
+	if game == null and not embedded: start(SEED)
 
 func start(seed: int, rustler: String = "GENERALIST") -> void:
-	game = Game.new(seed)
-	game.new_run(rustler)
-	game.rng.seed = seed
-	game.animate = true
-	game.row = 0
-	game.available = [0]
-	game.enter_node(0)   # N2A: AUTO-RENEW (FORTRESS) + CAPTCHA (TUMBLER)
-	if game.phase == "READY_RIG" and auto_ready_rig != "":
-		var pick := game.draw_pile.filter(func(c): return c.id == auto_ready_rig)
-		if not pick.is_empty(): game.choose_ready_rig(pick[0].uid)
-	nr.rustler = String(CardDB.RUSTLERS.get(rustler, {}).get("nulrem", "Generalist"))
+	var g := Game.new(seed)
+	g.new_run(rustler)
+	g.rng.seed = seed
+	g.animate = true
+	g.row = 0
+	g.available = [0]
+	g.enter_node(0)   # N2A: AUTO-RENEW (FORTRESS) + CAPTCHA (TUMBLER)
+	if g.phase == "READY_RIG" and auto_ready_rig != "":
+		var pick := g.draw_pile.filter(func(c): return c.id == auto_ready_rig)
+		if not pick.is_empty(): g.choose_ready_rig(pick[0].uid)
+	attach(g)
+
+## ARCH-V2-007d (C05): show a Game the app owns. The app (main.gd) calls this when a run starts and
+## refresh() whenever it changes the Game; the screen tells the app when the phase leaves the
+## encounter (app_phase_changed) so the app can show the map, reward or DEEPER choice.
+signal app_phase_changed(phase: String)
+signal voice_toggled(on: bool)
+## Inside the app: no sandbox Outcome banner (the app's overlays take over), no auto start.
+var embedded := false
+func attach(g: Game) -> void:
+	if sequencer and sequencer.running: sequencer.cancel()
+	responding = false
+	game = g
+	nr.rustler = String(CardDB.RUSTLERS.get(String(g.rustler), {}).get("nulrem", "Generalist")) if g.rustler != "" else "Generalist"
 	nr.corp = game.corporation
 	nr_lines.clear()
 	ctrl = EncounterController.new()
 	ctrl.bind(game)
 	ctrl.changed.connect(refresh)
 	ctrl.phase_changed.connect(_on_phase)
+	ctrl.phase_changed.connect(func(_o, n): app_phase_changed.emit(n))
 	_last_turn = 0
 	_banner.hide()
+	_graffiti_key = ""
 	refresh()
 	_announce_turn()
 
@@ -453,7 +470,7 @@ func _announce_turn() -> void:
 # ----- Refresh
 
 func refresh() -> void:
-	if game == null: return
+	if game == null or game.enc.is_empty() and embedded: return
 	ctrl.rebind_if_new_encounter()
 	flyout.reduced_motion = reduced_motion
 	lane.reduced_motion = reduced_motion
@@ -522,7 +539,7 @@ func refresh() -> void:
 	_refresh_rig()
 	_refresh_hand()
 	var done := not (game.phase in ["PLAYER", "RESPONSE", "CHOICE", "READY_RIG"])
-	_banner.visible = done and not responding
+	_banner.visible = done and not responding and not embedded
 	if _banner.visible:
 		var title: Label = _banner.find_child("Title", true, false)
 		title.text = "FLATLINED" if game.phase == "DEAD" else ("ENCOUNTER COMPLETE · " + game.phase)
@@ -576,6 +593,7 @@ func toggle_voice() -> void:
 	var flags := LocalRecord.read(flags_path)
 	flags["voice_on"] = voice_on
 	LocalRecord.write(flags_path, flags)
+	voice_toggled.emit(voice_on)
 	_refresh_speakers()
 
 func _refresh_speakers() -> void:
