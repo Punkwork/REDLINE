@@ -125,3 +125,110 @@ Recommended priorities: designer review of the captures against VAS-001; Codex v
 - Encounter sandbox composed to the VAS-001 reference with the VAS-ASSET-001 painted parts; icon-first instruments; END TURN key. Captures `docs/visual/fixtures/arch-v2-composition/`.
 - Tests: import 0; `test_game.gd` 176/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 127/0; 19 screenshot captures, no script errors.
 - Open for designer: small CRT content; HOSTILE REVEAL / LAYER / EXTRACT content; DOORBELL CAM portrait; hand still DEV stand-ins (Batch 2).
+
+## Session 3: Daily Joint Operations Review contribution (Claude Code)
+
+Prepared 2026-11-27 (Toronto) for the November 26 review. Source of truth: `Punkwork/REDLINE` `architecture-v2` at `7bdf1f2`. Window: 65 commits on `architecture-v2`, `8375e85` … `7bdf1f2`. Statuses: **BUILT** = working Godot code covered by tests; **FIXTURE** = screenshot captured from the running build; **APPROVED** = designer-approved design, not necessarily built; **PROPOSED** = not approved.
+
+### 1. UI Development and Implementation Progress
+
+| Component / Decision ID | Work Completed | Status | Evidence | Remaining Work |
+|---|---|---|---|---|
+| ARCH-V2-003 Batch 1 (CAS-001 C02, C04, C07–C09, C18, KeyInspector, NEXT RESPONSE rail, EventFlyout) | ICE panels, lane, meters, inspector, rail, flyout; playable N2A sandbox | BUILT, playable | `0ae151b`, `1e07d20`, `8017aad`; [batch1 fixtures](../../visual/fixtures/arch-v2-batch1/README.md) | none in scope |
+| ARCH-V2-003j–w / VAS-ASSET-001 | Composition pass to the VAS-001 reference with painted parts; icon-first instruments | BUILT | [composition fixtures](../../visual/fixtures/arch-v2-composition/) | designer review against VAS-001 (#21) |
+| ARCH-V2-004 Batch 2 (C10–C12 hand/cards/rig, C15 choice overlay) | HuCard hand, rig, choice overlay with peek / SHOW BOARD | BUILT, playable | `e58bb05`; [batch2 fixtures](../../visual/fixtures/arch-v2-batch2/) | — |
+| ARCH-V2-005 coverage table + placeholders | 64-row `ENCOUNTER_COVERAGE.md` generated from JSON; coverage test; CAPS and Protocol racks (3 each); TURN and TRACE at half width | BUILT | `581417a`, `e4f6a3f`; `test_arch_v2_coverage.gd` 549/0 | H05 CAPS is PLACEHOLDER (CAPS not in the engine) |
+| ARCH-V2-006a–i (remaining UI homes) | Eye in the corner, Ghostware reel, CRED/LAYER on the NEXT rail, NUL/REM speakers, log opens from the rail, KEY LEGEND on the logo hover | BUILT | `0ccad3c`, `d91f0f3`, `6a76097` | — |
+| ARCH-V2-006 Batch 3 (C03 ResponseSequencer, C13–C17) | Response pacing, interruption, pile viewer, HOSTILE REVEAL lamp, LOCKDOWN flyout | BUILT, playable | `d301cb4`, `33c2400`, `3cc643a`, `fcaddbe`, `b76aa2c`; `test_arch_v2_batch3.gd` 110/0; [batch3 fixtures](../../visual/fixtures/arch-v2-batch3/) | — |
+| ARCH-V2-006j–m | TRACE STRIKE banner removed; drag-to-target arrow; PROGRAM drag to the CRT; unplayable cards dim; §6f art; pulsing red pupil | BUILT, playable | `f936f8d`, `69319eb`, `a56cd52`, `6f7f208`, `8b4782f`, `c8ce9ef`, `5666a8b` | — |
+| ARCH-V2-007a–f Batch 4 | Corporation look (C06) and BG rooms in the ICE windows; V2 encounter embedded in `main.gd` (C05); twin-game parity test; graffiti hidden | BUILT, playable in the app | `dc20c18`, `2f5ca5a`, `df781cd`, `d26dc3d`, `8814c4d`, `b18a53d`, `f065a5d`; [batch4 fixtures](../../visual/fixtures/arch-v2-batch4/README.md) | map screen and MAP-003 port; IRONWATCH and LUCIDA ad copy |
+| CORE-LOOP-REWARD-GAP | `_roll_rewards` falls back to the SHARED pool when a Rustler's pool is empty (a baseline crash at full clear) | BUILT, designer-approved rules fix | `f065a5d`; `test_reward_pools_every_rustler` | — |
+| VAS-001 (Priority 1 visual slice) | The encounter now renders VAS-001 components from painted assets | BUILT in part; design not yet signed off | #21; fixtures above | designer review on #21 |
+| CAS-001 C01–C18 | All encounter components exist except the map/reward flow (F10) and leave-Node (F02), which are out of scope | BUILT except OUT rows | `ENCOUNTER_COVERAGE.md` | C01 app shell and the map follow ARCH-V2-001 review |
+| UI-TYPO-001 / UI-TYPO-001a, Typography & Motion (M06) | Event flyouts follow the UI-TYPO-001 catalogue (queue of 3, approved LOCKDOWN banner); the designer approved the exploration direction (`e397f05`, `f019da7`) | PARTIAL: flyouts BUILT; direction APPROVED; full system PROPOSED | #24; `v2_24_lockdown_flyout.jpg` | physical- and virtual-world fonts, motion spec, reduced-effect mode, architecture bindings |
+| Graffiti (H13) | Built, then hidden on designer instruction (`SHOW_GRAFFITI := false`) | OUT for now | ARCH-V2-007 | none until the designer revisits it |
+
+### 2. Repository Governance and Branch Drift
+
+| Branch | Current Commit | Expected State | Verification Status |
+|---|---|---|---|
+| `architecture-v2` (default branch) | `7bdf1f2` | active work | Verified; CI run [45985987078](https://github.com/Punkwork/REDLINE/actions/runs/45985987078) passed |
+| `main` | `21922ad` | = `prototype-baseline` (`21922ad`), frozen | Verified unchanged; ruleset protect-main 28076208 active |
+| `release` | `a6f4476` | Playtest 13, fast-forwarded from `2845ecd` on explicit designer approval | Verified; ruleset "release" 28104142 active (no deletion, no non-fast-forward, no bypass) |
+| `review/cards-002` | `070dae6` (2026-11-19) | not listed in CLAUDE.md branch policy | **Drift (pre-existing):** CARDS-002 review branch, archived as CARDS-003; not an ancestor of `architecture-v2` |
+| Tag `playtest-13` | absent | designer tags it (RELEASE-002 step 5) | **Not present**; no `playtest-12` tag found either |
+| Classic branch protection | 404 on `release` | rulesets used instead | Expected |
+
+### 3. Surprises
+
+| Finding | Significance | Recommended Action |
+|---|---|---|
+| CORE_LOOP left ECHO, RIOT and VECTOR with empty reward pools, so a full clear crashed `_roll_rewards` | Present in `prototype-baseline`; any run with these Rustlers could crash at reward time | Fixed with approval (`f065a5d`); confirm in the Playtest 13 run |
+| The parity test found the ResponseSequencer never finished a response with nothing to fire | Would have stalled turns in V2 | Fixed; parity now 80 encounters / 4,008 actions identical |
+| Timing tests (pixel step, lethal pulse) were flaky on CI | One red run (`b18a53d`, [45932650040](https://github.com/Punkwork/REDLINE/actions/runs/45932650040)) | Fixed with `custom_step` and a fixed clock (`f065a5d`) |
+| Header graffiti overflowed the gap | Readability risk (ADP-R1) | Hidden; no further work unless requested |
+
+### 4. Missing Tools, Blockers and Evidence
+
+| Item | Impact | Resolution Required | Owner |
+|---|---|---|---|
+| Artifact download blocked from this session | Playtest 13 contents verified from the CI log only ([artifact 15191118131](https://github.com/Punkwork/REDLINE/actions/runs/45985348390/artifacts/15191118131), 6 files, 206.6 MB) | Designer downloads it, checks `BUILD_COMMIT.txt` = `a6f4476` and `SHA256SUMS.txt`, and launches it | Designer |
+| No Windows runtime, real GPU or audio here | Rendering, audio and Windows behaviour unverified | Designer's first launch of Playtest 13 | Designer |
+| GitHub GraphQL blocked | Issue and PR data came from REST; Projects fields not read | none (REST is enough) | — |
+| `playtest-13` tag | RELEASE-002 step 5 incomplete | Designer pushes the tag; agent verifies | Designer, then Claude Code |
+| CAPS engine | H05 stays a placeholder | Approved CAPS rules (`REDLINE_UPLINK_AND_CAPS.md`) to implement | Designer |
+
+### 5. GitHub Issues and Pull Requests
+
+**Issues** (all open; this session did not change any of them)
+
+| Record | Description | Current Status | Next Action |
+|---|---|---|---|
+| [#13](https://github.com/Punkwork/REDLINE/issues/13) | HuCard cards | Approved; built in V2 Batch 2 | Add implementation links (`e58bb05`); designer closes |
+| [#14](https://github.com/Punkwork/REDLINE/issues/14) | PT9 list | Open | Re-triage against Playtest 13 |
+| [#15](https://github.com/Punkwork/REDLINE/issues/15) | Discard pile view | Built in V2 (`fcaddbe`) | Add evidence; designer closes |
+| [#16](https://github.com/Punkwork/REDLINE/issues/16) | Show PROBE cost while dragging | Not built | Candidate for Nov 27 |
+| [#17](https://github.com/Punkwork/REDLINE/issues/17) | CACHE icon | Built in V2 (`fcaddbe`) | Add evidence; designer closes |
+| [#18](https://github.com/Punkwork/REDLINE/issues/18) | PLAY-002 polish | Open | Re-triage |
+| [#19](https://github.com/Punkwork/REDLINE/issues/19) | Ghostware rail | Superseded by the Ghostware reel (ARCH-V2-006b) | Designer marks it superseded |
+| [#20](https://github.com/Punkwork/REDLINE/issues/20) | Icon-first resources | Largely built (composition pass) | Add evidence; designer review |
+| [#21](https://github.com/Punkwork/REDLINE/issues/21) | VAS-001 slice | Awaiting designer review | Review Batch 1–4 fixtures |
+| [#22](https://github.com/Punkwork/REDLINE/issues/22) | ENC-CONCEPT-001 | Open | — |
+| [#23](https://github.com/Punkwork/REDLINE/issues/23) | Legacy fixtures | Open | — |
+| [#24](https://github.com/Punkwork/REDLINE/issues/24) | UI-TYPO-001 Typography & Motion | Direction approved; spec in progress | Proposed font and motion spec for review |
+
+**Pull requests:** none open. #1–#12 were closed on 2026-11-17. Today's work went to `architecture-v2` as direct commits, per the branch policy.
+
+### 6. Proposed Friday, November 27 Agenda
+
+(Proposal only; the shared daily priorities need designer confirmation.)
+
+| Priority | Task / Decision ID | Owner | Dependencies | Expected Deliverable | Approval Required |
+|---|---|---|---|---|---|
+| 1 | Playtest 13 first launch and `playtest-13` tag (RELEASE-002) | Designer; Claude Code verifies | Artifact 15191118131 | Tag, launch notes, findings filed as issues | Designer |
+| 2 | Representative ICE encounter sign-off against `prototype-baseline` (ARCH-V2-001, RELEASE-002c) | Designer, Claude Code | Playtest 13 run | Comparison notes; fixes as new commits | Designer |
+| 3 | Typography & Motion spec, first pass (UI-TYPO-001, #24) | Claude (design), Claude Code (bindings) | #24 direction | Proposed font roles, motion timings, reduced-effect mode, wired to `VasTokens` behind a flag | Designer (PROPOSED until then) |
+| 4 | Map screen and MAP-003 generator port (CAS-001 C01 / F10) | Claude Code | Architecture plan review; BG_MAP_HALCYON clarification | Proposed scene boundary, then a playable map | Designer for the plan |
+| 5 | Issue hygiene: evidence on #13, #15, #17, #20; #19 superseded | Claude Code (links), Designer (closes) | none | Updated issues | Designer to close |
+| 6 | #16 PROBE cost while dragging | Claude Code | none | Small UI change and a test | Designer for the design |
+
+### 7. Designer Decisions Required
+
+| Decision | Recommendation | Impact of Delay |
+|---|---|---|
+| Push the `playtest-13` tag | Tag `a6f4476` after the first launch | RELEASE-002 record stays incomplete |
+| Do the circles and arrows on `BG_MAP_HALCYON.png` belong to the art? | Confirm before the map port | Blocks the map background choice |
+| Retire `review/cards-002` | Delete it; CARDS-003 is on `main` and in history | Ongoing branch-policy drift |
+| CAPS engine rules for H05 | Choose the CAPS batch after the map | CAPS slots stay placeholders |
+| IRONWATCH and LUCIDA ad plates and copy | Supply or approve the copy | Those corporations keep placeholder plates |
+| Interpretations to confirm (HANDOFF), e.g. room wash level | Review alongside the fixtures | Values stay provisional |
+| Close or update #13, #15, #17, #19 | Close #13, #15 and #17 after the evidence links; mark #19 superseded | The register disagrees with the build |
+
+### 8. Review Completion Status
+
+- **Completed and verified (CI on `a6f4476`, run [45985348390](https://github.com/Punkwork/REDLINE/actions/runs/45985348390); `7bdf1f2` run [45985987078](https://github.com/Punkwork/REDLINE/actions/runs/45985987078) also green):** import 0; `test_game.gd` 236/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 202/0; `test_arch_v2_coverage.gd` 549/0; `test_arch_v2_batch3.gd` 110/0; `test_arch_v2_batch4.gd` 50/0; `test_arch_v2_app.gd` 13/0; `test_arch_v2_parity.gd` 4088/0 (80 encounters, 4,008 actions identical); 42 screenshot captures, no script errors.
+- **Screenshots (from the running build, software GL):** [batch1](../../visual/fixtures/arch-v2-batch1/README.md), [composition](../../visual/fixtures/arch-v2-composition/), [batch2](../../visual/fixtures/arch-v2-batch2/), [batch3](../../visual/fixtures/arch-v2-batch3/), [batch4](../../visual/fixtures/arch-v2-batch4/README.md) (incl. `app_02_encounter_v2.jpg`, `v2_24_lockdown_flyout.jpg`).
+- **Built and approved:** Batches 1–4, the ARCH-V2-005/006/007 items above, and CORE-LOOP-REWARD-GAP. Playtest 13 build cut on designer approval.
+- **Incomplete:** Typography & Motion system (beyond flyouts); map and reward screens; CAPS; the graffiti stays hidden; issue records not updated.
+- **Outstanding validation:** Windows launch, real-GPU look, audio, artifact checksum check by the designer, `playtest-13` tag, VAS-001 sign-off (#21).
+- **Not verifiable from this session:** artifact contents beyond the CI log; anything on the designer's PC.
