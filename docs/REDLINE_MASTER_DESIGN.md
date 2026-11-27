@@ -3461,3 +3461,6 @@ Retire BOOTING, the passive ability locking DEADLOCK until Rustler turn three, f
 
 ## GUARD-001 — Optional DEADLOCK protection (designer approved direction 2026-11-27)
 GUARD is a supporting ICE subroutine protecting a linked DEADLOCK on another ICE. Breaking the protected DEADLOCK while GUARD remains unbroken triggers a consequence; breaking GUARD first avoids it. GUARD must never prohibit the DEADLOCK break or become a mandatory breach prerequisite. Exact consequence (candidate PULP or TRACE), magnitude, linking rules, timing and interaction with simultaneous breaks remain open for specification and balance. Supporting ICE need not have their own DEADLOCK. Include GUARD in Priority 2 HALCYON supporting ICE design and representative encounter coverage planning. INTERLOCK and ALARM LINK were unapproved alternatives in the BOOTING review and are not selected for development. No engine changes or final numerical rules authorized by this record.
+
+**Designer follow-up (2026-11-27 07:43, CAPS-TEST-001a):** "The player should get a prompt to discard one. But yes, we don't need it in this build." When a CAP is gained with all slots full, the player is prompted to discard one (UPL-001). Not in the next build; until then a full rack takes no CAP.
+
