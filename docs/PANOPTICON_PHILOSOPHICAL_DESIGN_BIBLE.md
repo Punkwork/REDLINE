@@ -243,3 +243,11 @@ These dimensions are distinct, not a shared meter. Information exchange is a can
 
 ## PHIL-CONSENT-001 — The Economics of Consent (designer approved 2026-11-27)
 Privacy has economic value; surrendering it can yield genuine immediate advantages and longer-term vulnerability. Consent is incentivized rather than compelled. Accumulated knowledge creates asymmetry of power; personalization may become control. Preserving anonymity must remain a viable strategic choice. Identity Verification is an approved Uplink design direction (UPL-IDENTITY-001), not a morality mechanic or mandatory progression. Specific mechanics remain experimental.
+
+## ECON-TRACE-001 / ECON-MARKET-001 — Three independent Uplink pricing layers (designer approved 2026-11-27)
+
+1. Market variability: independent random variation within ±5% of base price, representing changing supply, demand and black-market conditions. Prices remain stable during a visit; reopening the interface must not reroll them. Seeded reproducibility is the proposed implementation approach.
+2. TRACE risk premium: 0–10 = 0%; 11–20 = +2% to +3% linearly; 21–40 = +4% to +5% linearly. For T in 11–20 use 2+(T−11)/9 percent; for T in 21–40 use 4+(T−21)/19 percent. Integer TRACE bands are authoritative. Merchants charge more because corporate knowledge of the Rustler's activities and connections jeopardizes black-market operations and requires additional precautions. This does not imply merchant cooperation with corporations.
+3. Identity Verification incentives: voluntary disclosure may earn genuine commercial advantages because information has economic value (UPL-IDENTITY-001, PHIL-CONSENT-001). Anonymous commerce remains viable. Exact discounts and disclosure consequences require further design.
+
+The layers are independent, each with its own economic rationale, and may interact with other gameplay systems without new player-facing meters. Market variability is separate from TRACE; a higher-TRACE visit can still be cheaper than a lower-TRACE visit. Do not impose a shared ±5% cap that suppresses independent layers. Illustrative additive calculation before verification: 100 CRED, TRACE 40, market +2% = 107 CRED. Exact stacking with sales and verification, integer rounding, random distribution, and scope of affected services require confirmation before implementation. No engine changes authorized.

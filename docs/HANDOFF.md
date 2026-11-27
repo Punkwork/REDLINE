@@ -621,3 +621,6 @@ Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card
 
 ## PHIL-SURV-001 / TRACE-DEF-001 / UPL-IDENTITY-001 / PHIL-CONSENT-001 (2026-11-27)
 Designer approved surveillance distinctions, TRACE definition, Identity Verification and Economics of Consent. Documentation recorded in canonical topic docs and Master Design. Future work: review experimental disclosure mechanics and pricing before implementation; no engine changes authorized.
+
+## ECON-TRACE-001 / ECON-MARKET-001 (2026-11-27)
+Three-layer Uplink pricing direction approved; see REDLINE_UPLINK_AND_CAPS.md. Confirm stacking, rounding, distribution, affected services and identity discounts before implementation. Preserve encounter-first priorities.

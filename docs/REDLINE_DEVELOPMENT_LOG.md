@@ -296,3 +296,6 @@ Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card
 ## 2026-11-27 — PHIL-SURV-001 / TRACE-DEF-001 / UPL-IDENTITY-001 / PHIL-CONSENT-001 (ChatGPT)
 Designer explicitly approved the four linked design decisions. Updated Philosophy, Core Rules, Uplink, Experimentation, Master Design and Handoff. Documentation only; no gameplay changes or engine tests. LOG-001: moved 60 oldest whole dated entries unchanged to the end of the archive.
 Interpretations to confirm: exact pricing and disclosure mechanics remain experimental.
+
+## 2026-11-27 — ECON-TRACE-001 / ECON-MARKET-001 (ChatGPT)
+Designer approved proportional TRACE premiums, independent random market variation and Identity Verification incentives. Updated Uplink, Experimentation, Philosophy, Master and Handoff. Documentation only; no engine tests.
