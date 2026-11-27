@@ -353,3 +353,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 **Deliberately not proposed:** a hard deck-size cap (except the ONE-TRICK Ghostware), HP on ICE, or new damage types. The ENG-001 to ENG-005 engines are kept and connected to this system rather than replaced.
 
 **NULL-POINTER-001 (designer approved, 2026-11-24):** NULL POINTER cost reduced from 2 BW to 1 BW for balance. All other properties unchanged. Implementation synchronization pending.
+
+
+## CHAIN-002 — Foundational CHAIN revision (designer approved 2026-11-27)
+Canonical working specification: [PANOPTICON CHAIN Mechanics](PANOPTICON_CHAIN_MECHANICS.md). Supersedes DSY-011's two-card activation threshold: minimum three cards; third valid card instantiates a CHAIN instance and receives inherent −1 BW play-cost reduction before commitment, plus applicable card-specific bonus. Longer chains permitted; exact eligibility, extension discounts, termination, repeat instances, cost floor/precedence and card balance remain open. CHAIN-REP-001 remains Priority 2; coordinate CHAIN visibility and CHAIN ACTIVATED audiovisual feedback with UI-TYPO-001/a and M06. Existing engine and cards still reflect historical rules until implementation; no production change authorized by this documentation commit. CHAIN PULP remains deferred to IRONWATCH. See canonical specification for examples, audit, questions and acceptance plan.
