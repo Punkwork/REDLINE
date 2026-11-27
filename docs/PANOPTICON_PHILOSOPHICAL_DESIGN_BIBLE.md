@@ -230,3 +230,16 @@ Designer-endorsed exploration: possibility of observation, fictional fear/anxiet
 | **Society and solidarity** | The closing discussion asks whether networked visibility lets people find one another and organize, or alters how they think and experience themselves. [14:24–14:58](https://www.youtube.com/watch?v=pp6T6xV2nFg&t=864s) | A channel can make mutual aid possible and leave participants exposed at the same time. Ask who can reach whom, who can withdraw, and what remains visible afterward. See [surveillance and memory](#surveillance-and-memory--surv-mem-001-2026-11-24). |
 
 **Worldbuilding question.** Who can see whom, who can set or contest the standard, and what does each person gain or risk by being visible? The epigraph’s focus on consent sits alongside institutional arrangements a resident may have had no say in creating. A choice to cooperate can reflect trust, necessity, convenience or relief from [the burden of autonomy](#10--phil-004-demoralization-and-the-burden-of-autonomy-designer-confirmed-direction-2026-11-24). Carry these questions into fictional settings and writing under the existing [design safeguards](#07--design-safeguards).
+
+## PHIL-SURV-001 — Three dimensions of surveillance (designer approved 2026-11-27)
+
+| Dimension | Knowledge | Purpose |
+|---|---|---|
+| TRACE | Operational intelligence: the corporation's understanding of the Rustler's whereabouts and activities | Locate and deploy effective countermeasures |
+| Identity Verification | Commercial intelligence: identity, needs and disclosed information | Personalize offers and monetize knowledge |
+| NUL/REM | Behavioural intelligence: patterns, preferences and likely choices | Anticipate and influence decisions |
+
+These dimensions are distinct, not a shared meter. Information exchange is a candidate mechanic, not automatic. Operational invisibility does not necessarily constitute freedom. Preserve psychological invisibility and player agency.
+
+## PHIL-CONSENT-001 — The Economics of Consent (designer approved 2026-11-27)
+Privacy has economic value; surrendering it can yield genuine immediate advantages and longer-term vulnerability. Consent is incentivized rather than compelled. Accumulated knowledge creates asymmetry of power; personalization may become control. Preserving anonymity must remain a viable strategic choice. Identity Verification is an approved Uplink design direction (UPL-IDENTITY-001), not a morality mechanic or mandatory progression. Specific mechanics remain experimental.

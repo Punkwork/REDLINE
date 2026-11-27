@@ -152,3 +152,6 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 |---|---|
 | DSY-005 | **REFACTOR** Uplink service: once per visit, apply 1 PATCHWORK, FUSE or COMPILE for 50 CRED (working value) (§3.1). — **APPROVED 2026-11-15** |
 | PACE-008 | CRED reserves per layer +50% to keep 130–220 CRED per corporation with fewer layers (§4). — **APPROVED 2026-11-15** |
+
+## UPL-IDENTITY-001 — Identity Verification (designer approved 2026-11-27)
+Uplinks may offer voluntary Identity Verification: disclose information in exchange for genuine commercial advantages, with anonymous transactions remaining viable. This is an approved market design direction under PHIL-CONSENT-001. Candidate benefits include preferential pricing, exclusive inventory, restricted services, loyalty incentives and node information; candidate risks include targeted pricing, dependency and information sharing. Exact disclosures, prices, persistence, consequences and implementation remain unapproved. No mandatory verification, real-world data collection or automatic TRACE increase. The proposed bounded ±5% market variance is a separate pricing experiment, not a finalized formula.

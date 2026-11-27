@@ -3594,3 +3594,22 @@ Ghostware defines how the Rustler operates. Programs establish what the Rustler 
 | SCRIPT | Immediate execution | Individual actions and tactical interventions; resulting effects follow their specified durations |
 
 Protocols are encounter-duration analogues of Ghostware, but occupy deck space, require drawing and BW deployment, and must be redeployed in subsequent encounters. Ghostware does not require these steps. Protocols expire to discard after PARTING SHOT and associated effects resolve, before progression or rewards (PROTOCOL-DURATION-001/a/b). Programs persist across encounters within the node. Use the Ghostware catalogue as inspiration for Protocol design, balancing shorter duration, deployment opportunity cost and synergy; avoid introducing unnecessary mechanics. This is a design principle, not authorization to duplicate every Ghostware effect or change existing card rules.
+
+## PHIL-SURV-001 — Three dimensions of surveillance (designer approved 2026-11-27)
+
+| Dimension | Knowledge | Purpose |
+|---|---|---|
+| TRACE | Operational intelligence: the corporation's understanding of the Rustler's whereabouts and activities | Locate and deploy effective countermeasures |
+| Identity Verification | Commercial intelligence: identity, needs and disclosed information | Personalize offers and monetize knowledge |
+| NUL/REM | Behavioural intelligence: patterns, preferences and likely choices | Anticipate and influence decisions |
+
+These dimensions are distinct, not a shared meter. Information exchange is a candidate mechanic, not automatic. Operational invisibility does not necessarily constitute freedom. Preserve psychological invisibility and player agency.
+
+## PHIL-CONSENT-001 — The Economics of Consent (designer approved 2026-11-27)
+Privacy has economic value; surrendering it can yield genuine immediate advantages and longer-term vulnerability. Consent is incentivized rather than compelled. Accumulated knowledge creates asymmetry of power; personalization may become control. Preserving anonymity must remain a viable strategic choice. Identity Verification is an approved Uplink design direction (UPL-IDENTITY-001), not a morality mechanic or mandatory progression. Specific mechanics remain experimental.
+
+## TRACE-DEF-001 — TRACE definition (designer approved 2026-11-27)
+TRACE represents the extent of a corporation's actionable knowledge of the Rustler's whereabouts and activities. As TRACE increases, the corporation becomes increasingly capable of locating the Rustler and determining and deploying effective countermeasures. TRACE is not merely an alarm meter. Existing numerical thresholds, strikes, reset and countermeasure rules remain unchanged. Commercial identity disclosure and NUL/REM behavioural intelligence are distinct; no automatic TRACE linkage is authorized.
+
+## UPL-IDENTITY-001 — Identity Verification (designer approved 2026-11-27)
+Uplinks may offer voluntary Identity Verification: disclose information in exchange for genuine commercial advantages, with anonymous transactions remaining viable. This is an approved market design direction under PHIL-CONSENT-001. Candidate benefits include preferential pricing, exclusive inventory, restricted services, loyalty incentives and node information; candidate risks include targeted pricing, dependency and information sharing. Exact disclosures, prices, persistence, consequences and implementation remain unapproved. No mandatory verification, real-world data collection or automatic TRACE increase. The proposed bounded ±5% market variance is a separate pricing experiment, not a finalized formula.

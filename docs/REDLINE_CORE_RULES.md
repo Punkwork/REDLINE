@@ -544,3 +544,6 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 ### Later amendment — BYPASS-001 (2026-11-24)
 
 Designer rule: BYPASS is permitted only in non-final encounters (ICE layers) of a Node, which has up to three encounters. It is prohibited in the final encounter, including a single-encounter Node. Eligibility is not automatic success; specific BYPASS effects and resolution remain open. See Master Design BYPASS-001.
+
+## TRACE-DEF-001 — TRACE definition (designer approved 2026-11-27)
+TRACE represents the extent of a corporation's actionable knowledge of the Rustler's whereabouts and activities. As TRACE increases, the corporation becomes increasingly capable of locating the Rustler and determining and deploying effective countermeasures. TRACE is not merely an alarm meter. Existing numerical thresholds, strikes, reset and countermeasure rules remain unchanged. Commercial identity disclosure and NUL/REM behavioural intelligence are distinct; no automatic TRACE linkage is authorized.

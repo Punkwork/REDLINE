@@ -618,3 +618,6 @@ All ten must be obtainable through normal node completion card rewards in the re
 
 ## SYNERGY-PLAYTEST-002a — OVERCLOCK revision (2026-11-27)
 Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card each turn, draw 2 cards and gain 1 BW. Retain 2 BW deployment cost, encounter duration, once per turn per deployed copy, and all other SYNERGY-PLAYTEST-002 conventions. Supersedes the draw-only effect. Include immediate BW availability, trigger frequency and resource-loop tests. Documentation only; no engine changes.
+
+## PHIL-SURV-001 / TRACE-DEF-001 / UPL-IDENTITY-001 / PHIL-CONSENT-001 (2026-11-27)
+Designer approved surveillance distinctions, TRACE definition, Identity Verification and Economics of Consent. Documentation recorded in canonical topic docs and Master Design. Future work: review experimental disclosure mechanics and pricing before implementation; no engine changes authorized.
