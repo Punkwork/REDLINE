@@ -36,6 +36,9 @@ const AD := Rect2(1196, 1, 306, 94)
 ## ARCH-V2-007c (designer 2026-11-26): ADP graffiti stickers in the header gap before the ad plate.
 const GRAFFITI := Rect2(1092, 4, 104, 90)
 const GRAFFITI_MAX := 2
+## ARCH-V2-007f (designer 2026-11-26 22:12: "the graffiti isn't even necessary. i would remove it for
+## now"): off. The code stays so it can come back without rework.
+const SHOW_GRAFFITI := false
 const ADP_STENCIL := preload("res://assets/fonts/StardosStencil-Regular.ttf")
 const ADP_MARKER := preload("res://assets/fonts/PermanentMarker-Regular.ttf")
 ## ARCH-V2-003s (designer 2026-11-26 15:34): the ICE enclosure spans the full width; the CRT moves
@@ -659,6 +662,9 @@ func _update_pixel() -> void:
 ## ARCH-V2-007c: ADP graffiti (Build 12's counts: 1 sticker when the bleed reaches band A, 2 at B,
 ## 4 at C; approved lines from adp_copy.json, the last one shared across corporations at C).
 func _update_graffiti() -> void:
+	if not SHOW_GRAFFITI:
+		for c in graffiti.get_children(): graffiti.remove_child(c); c.queue_free()
+		return
 	var band := AdpCopy.band(AtomicDecoPunk.target(game.trace, game.strikes, false))
 	## Build 12 shows 1 / 2 / 4; the header gap holds two readable stickers, so it shows at most two
 	## (the newest two at band C). Interpretation to confirm (ARCH-V2-007c).

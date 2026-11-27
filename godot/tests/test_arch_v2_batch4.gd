@@ -98,12 +98,12 @@ func test_look() -> void:
 	check(p0.mood_pixel_on(), "mood change: the avatar drops into 16-bit")
 	p0._mood_age = 5.0; p0._process(0.0)
 	check(not p0.mood_pixel_on(), "and resolves")
+	# Lethal pulse, on a fixed clock (2 s in 16-bit, 2 s crisp) so the check never depends on timing.
+	p0.apply_mood_look(FriendlyMascot.mood_look("lethal", "wary", 5.0, 1.0, false, 1.0))
+	var on_phase := p0.mood_pixel_on()
+	p0.apply_mood_look(FriendlyMascot.mood_look("lethal", "wary", 5.0, 3.0, false, 1.0))
+	check(on_phase and not p0.mood_pixel_on(), "lethal: the avatar pulses into 16-bit and back")
 	p0._mood_prev = "wary"; p0._mood_now = "lethal"; p0._mood_age = 5.0
-	var on := false
-	for i in 50:
-		p0._process(0.1)
-		on = on or p0.mood_pixel_on()
-	check(on, "lethal: the avatar pulses into 16-bit")
 	p0.reduced_motion = true; p0._process(0.0)
 	check(not p0.mood_pixel_on(), "reduced motion: no flicker")
 	# Music: present, follows the bleed, strike chime on a strike.
@@ -117,17 +117,12 @@ func test_look() -> void:
 
 func test_rest() -> void:
 	var sb := sandbox(); await frames(); var g := sb.game
-	# Graffiti in the header gap: none while friendly; more as the bleed rises; inside the gap.
-	check(sb.graffiti_count() == 0, "no graffiti while friendly")
+	# Graffiti removed for now (ARCH-V2-007f): none at any bleed.
 	sb.reduced_motion = true
 	g.trace = 25; sb.refresh()
 	var a := sb.graffiti_count()
 	g.strikes = 2; sb.refresh()
-	var c := sb.graffiti_count()
-	check(a >= 1 and c > a and c <= 4, "graffiti grows with the bleed (%d then %d)" % [a, c])
-	var gap := Rect2(IceEncounterSandbox.GRAFFITI.position, IceEncounterSandbox.GRAFFITI.size)
-	check(sb.graffiti.position == gap.position and sb.graffiti.clip_contents, "graffiti stays inside the header gap")
-	check(gap.end.x <= IceEncounterSandbox.AD.position.x and gap.position.x >= IceEncounterSandbox.PROTOCOLS.end.x, "the gap is between PROTOCOLS and the ad plate")
+	check(a == 0 and sb.graffiti_count() == 0, "no graffiti on screen (removed for now)")
 	g.strikes = 0; g.trace = 0; sb.refresh()
 	# Punch cards: in the eye's hover; an arrival drops onto the eye.
 	check(String(sb.eye.lines[1]).begins_with("Punch cards 0 / 3"), "eye hover counts punch cards")

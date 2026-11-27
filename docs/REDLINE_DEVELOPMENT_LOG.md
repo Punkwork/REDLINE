@@ -33,10 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-23 — ARCH-V2-001 formal component specification (ChatGPT)
-
-Created `docs/architecture-v2/COMPONENT_ARCHITECTURE_SPEC.md` (CAS-001) with 18 proposed component contracts, ownership and lifecycle, command/snapshot boundary, allowed dependencies, migration stages, acceptance matrix and open designer decisions. Based on existing source audit and architecture documents. This is a PROPOSAL only: no Godot execution, production scenes, gameplay changes, or implementation approval.
-
 ## 2026-11-23 — ARCH-V2-001 VAS-001 visual architecture specification
 
 Designer confirmed faithful reproduction of the supplied 1536×864 dense mechanical console mockup as the vertical-slice visual target. Created `docs/architecture-v2/VAS-001.md` defining reference regions, approximate geometry, material/type tokens, Godot-native vs art-backed controls, visual states, modular asset inventory, viewport adaptations, screenshot comparison and milestone acceptance. The reference image is not yet confirmed uploaded to GitHub. Documentation only; no graphics or gameplay implementation, tests, or implementation approval.
@@ -395,4 +391,8 @@ Designer chose the header gap for graffiti and the eye hover for punch cards. Bu
 ## 2026-11-26 — ARCH-V2-007e: behaviour comparison; Batch 4 complete (Claude Code)
 
 Rules engine and data identical to `prototype-baseline` (git diff empty). New `test_arch_v2_parity.gd` (CI): 30 encounters, 1,560 actions, V2 screen vs Build 12 direct path identical after every action. Fixed: the ResponseSequencer left a response with nothing to fire unfinished. Reported: CORE-LOOP-REWARD-GAP (rules, baseline). Batch 4 tests made timing-independent. Results: test_game 176/0 (SIM=1 too), adp 17/0, signal/carbon 672/0, ice 202/0, coverage 550/0, batch3 110/0, batch4 53/0, app 13/0, parity 1590/0; screenshots 43. RELEASE-002c conditions met. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 dependency map (ChatGPT)" to the archive.)
+
+## 2026-11-26 — ARCH-V2-007f, CORE-LOOP-REWARD-GAP, Playtest 13 prepared (Claude Code)
+
+Designer (22:12): graffiti removed for now; reward fix approved; prepare Playtest 13. `Game._roll_rewards` falls back to SHARED when a Rustler pool is empty (new rules test: 60 checks; fails 30 without the fix). Parity: 4 Rustlers, 80 encounters, 4,008 actions identical. Flaky timing in the Batch 4 lethal-pulse check fixed (fixed clock). Version 0.13.0-playtest.13; guide and core-loop checklist updated. Tests: test_game 236/0 (SIM=1 too), adp 17/0, signal/carbon 672/0, ice 202/0, coverage, batch3 110/0, batch4 50/0, app 13/0, parity 4088/0. (LOG-001: moved "2026-11-23 — ARCH-V2-001 formal component specification (ChatGPT)" to the archive.)
 

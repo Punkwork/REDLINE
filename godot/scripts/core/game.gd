@@ -1522,6 +1522,16 @@ func _roll_rewards(cleared: int) -> Array:
 			cands = CardDB.reward_pool(pool, "COMMON")
 			for picked in out:
 				cands.erase(picked)
+		# CORE-LOOP-REWARD-GAP (designer 2026-11-26 22:12: "Rewards bug, yes"): a Rustler pool with no
+		# cards in this build (CORE_LOOP) falls back to the SHARED pool, same rarity, then COMMON.
+		if cands.is_empty() and pool != "SHARED":
+			for r in [rar, "COMMON"]:
+				cands = CardDB.reward_pool("SHARED", r)
+				for picked in out:
+					cands.erase(picked)
+				if not cands.is_empty(): break
+		if cands.is_empty():
+			continue
 		out.append(cands[rng.randi_range(0, cands.size() - 1)])
 	return out
 

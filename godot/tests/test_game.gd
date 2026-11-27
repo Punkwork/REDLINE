@@ -42,6 +42,7 @@ func _init() -> void:
 		load("res://tests/test_core_loop.gd").new().run(self)
 		test_full_slice_path()
 		test_hand_max()
+		test_reward_pools_every_rustler()   # CORE-LOOP-REWARD-GAP
 		if OS.get_environment("SIM") != "":
 			sim_rustler("GENERALIST")
 		print("TESTS: %d passed, %d failed" % [passes, fails])
@@ -74,6 +75,7 @@ func _init() -> void:
 	test_go_deeper_keeps_programs()
 	test_smash_and_grab_cache()
 	test_node_card_reward_requires_full_clear()
+	test_reward_pools_every_rustler()
 	test_full_slice_path()
 	test_hand_max()
 	if OS.get_environment("SIM") != "":
@@ -1113,3 +1115,15 @@ func bot_choice(g: Game) -> void:
 		"card_break": bot_choose_sub(g)
 		"patient_zero": g.choose_ice(main_ice(g))
 		_: g.choose(g.pending.get("options", [g.hand[0].uid if not g.hand.is_empty() else -1])[0])
+
+func test_reward_pools_every_rustler() -> void:
+	## CORE-LOOP-REWARD-GAP (designer 2026-11-26): every Rustler gets a 3-card reward at a full clear,
+	## at every depth, even when its own pool has no cards in this build (falls back to SHARED).
+	for who in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:
+		for depth in [1, 2, 3]:
+			for seed in [1, 2, 3, 4, 5]:
+				var g := Game.new(seed)
+				g.new_run(who)
+				var opts: Array = g._roll_rewards(depth)
+				check(opts.size() == 3 and opts.all(func(id): return CardDB.DEFS.has(id)), "%s reward depth %d seed %d: 3 cards" % [who, depth, seed])
+

@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 61 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 0 · OPEN 0 · OUT 2 · 64 rows.
+**Totals:** BUILT 60 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 0 · OPEN 0 · OUT 3 · 64 rows.
 
 | Status | Meaning |
 |---|---|
@@ -29,7 +29,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | H10 | LAYER count and layer CRED reserve | build_node_plate, RESERVE dial | `LayerMark` | BUILT | — | Ledger at the left end of the rail: LAYER hamburger, CRED, layer CRED (ARCH-V2-006d). |
 | H11 | CRED | CRED/RAM row | `CredValue` | BUILT | — | New CRED icon; red marching ants run left on extraction, then the value counts up (ARCH-V2-006d). |
 | H12 | Corporation ad plate / sign | CorporateDisplay | `AdPlate` | BUILT | — |  |
-| H13 | Graffiti decal (ADP) | DecalPlate, graffiti_label | `Graffiti` | BUILT | — | Header gap before the ad plate; at most two readable stickers (Build 12 shows up to 4) (ARCH-V2-007c). |
+| H13 | Graffiti decal (ADP) | DecalPlate, graffiti_label | — | OUT | Removed for now (designer 2026-11-26 22:12, ARCH-V2-007f) | Code kept behind SHOW_GRAFFITI. |
 
 ## ICE
 

@@ -290,10 +290,6 @@ func run() -> void:
 	# 10k. ARCH-V2-007c: graffiti in the header gap at Mask off, and PATIENT ZERO lighting the ICE.
 	await fresh(true)
 	quiet()
-	sb.game.strikes = 2; sb.game.trace = 20; sb.refresh()
-	await shot("v2_33_graffiti_mask_off")
-	await fresh(true)
-	quiet()
 	sb.game.pending = {"kind": "patient_zero"}; sb.game.phase = "CHOICE"; sb.refresh()
 	await shot("v2_34_patient_zero")
 

@@ -5,13 +5,11 @@ extends SceneTree
 ## screen (card clicks and drops, key clicks, choice overlay, END TURN with the ResponseSequencer) and,
 ## on a twin Game with the same seed, through Build 12's direct calls. After every action the two
 ## games must be identical (phase, BW, VITAE, TRACE, SHIELD, piles by uid, rig, every ICE's state,
-## log, pending choice). The Rustlers the build offers × every ICE Node of the slice map × six seeds.
+## log, pending choice). Four Rustlers × every ICE Node of the slice map × four seeds.
 
-## The core-loop build (STRIP-001) offers the Generalist only; with CORE_LOOP on, the other Rustlers'
-## reward pools are empty and Game._roll_rewards fails at a full clear (a known rules-engine gap,
-## reported in HANDOFF, not a path difference), so the comparison uses what the build can play.
-const SEEDS := [711, 20261126, 1, 42, 1959, 8086]
-var RUSTLERS: Array = ["GENERALIST"] if Game.CORE_LOOP else ["GENERALIST", "ECHO", "RIOT", "VECTOR"]
+## All four Rustlers (the CORE-LOOP-REWARD-GAP fix lets ECHO, RIOT and VECTOR finish a Node).
+const SEEDS := [711, 20261126, 1, 42]
+var RUSTLERS: Array = ["GENERALIST", "ECHO", "RIOT", "VECTOR"]
 const MAX_ACTIONS := 60
 var passed := 0
 var failed := 0

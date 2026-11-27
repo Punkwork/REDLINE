@@ -134,10 +134,10 @@
    "area": "Header",
    "element": "Graffiti decal (ADP)",
    "prototype": "DecalPlate, graffiti_label",
-   "v2": "Graffiti",
-   "status": "BUILT",
-   "next": "",
-   "note": "Header gap before the ad plate; at most two readable stickers (Build 12 shows up to 4) (ARCH-V2-007c)."
+   "v2": "",
+   "status": "OUT",
+   "next": "Removed for now (designer 2026-11-26 22:12, ARCH-V2-007f)",
+   "note": "Code kept behind SHOW_GRAFFITI."
   },
   {
    "id": "I01",
