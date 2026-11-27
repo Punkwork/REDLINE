@@ -405,3 +405,7 @@ Designer note: add READY RIG to the Ghostware slot for the next build. Recorded 
 
 Imported the designer's 30 Ghostware icons from `PANOPTICON art/Ghostware Icons` (1254 px → 256 px, 2.5 MB) into `godot/assets/concept/ghostware/`. The reel now shows READY RIG and the other ORIGINs as icons instead of initials. No code change: the reel already loaded `GW_<NAME>.png` by name. Added `test_origin_art` to `test_arch_v2_batch4.gd`. Tests: import 0; `test_arch_v2_batch4.gd` 62/0; `test_arch_v2_ice.gd` 202/0; `test_arch_v2_batch3.gd` 110/0; `shot_arch_v2_ice.gd` 42 captures, 0 script errors. Fixture: `docs/visual/fixtures/arch-v2-batch4/v2_02_ready_rig_reel_zoom.jpg`.
 
+## 2026-11-27 — RUSTLER-SELECT-001: Generalist portrait on the select screen (Claude Code)
+
+Imported `RUSTLER_GENERALIST.png` (1122 × 1402 → 561 × 701) to `godot/assets/concept/rustlers/`. `main.gd` `_overlay_select`: the portrait fills the select button (320 × 400); name, difficulty, quote, style and ORIGIN show on an opaque panel on hover or focus. Tests: import 0; `test_game.gd` 236/0; `test_adp.gd` 17/0; `test_signal_carbon.gd` 672/0; `test_arch_v2_ice.gd` 202/0; coverage 549/0; batch3 110/0; batch4 62/0; `test_arch_v2_app.gd` 21/0 (6 new checks); parity 4088/0; `shot_arch_v2_app.gd` 5 captures, 0 script errors. Fixtures: `docs/visual/fixtures/rustler-select/`. Note: `shot_arch_v2_app.gd` is not in the CI screenshot list.
+

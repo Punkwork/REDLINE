@@ -1754,7 +1754,44 @@ func _overlay_select() -> void:
 		col.add_child(ot)
 		for c in col.get_children():
 			c.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		b.add_child(col)
+		# RUSTLER-SELECT-001: with the designer's portrait, the card is the picture. The name, stars,
+		# quote, style and ORIGIN appear on an opaque panel while the card is hovered or focused.
+		var portrait_path := "res://assets/concept/rustlers/RUSTLER_%s.png" % who
+		if ResourceLoader.exists(portrait_path):
+			b.custom_minimum_size = Vector2(320, 400)
+			var portrait := TextureRect.new()
+			portrait.name = "Portrait"
+			portrait.texture = load(portrait_path)
+			portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			b.add_child(portrait)
+			portrait.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			portrait.offset_left = 8; portrait.offset_top = 8; portrait.offset_right = -8; portrait.offset_bottom = -8
+			var info := PanelContainer.new()
+			info.name = "RustlerInfo"
+			var bg := StyleBoxFlat.new()
+			bg.bg_color = Color(0.03, 0.04, 0.06, 1.0)
+			bg.set_content_margin_all(0)
+			info.add_theme_stylebox_override("panel", bg)
+			info.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			info.visible = false
+			b.add_child(info)
+			info.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			col.set_anchors_preset(Control.PRESET_TOP_LEFT)
+			var pad := MarginContainer.new()
+			pad.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			for side in ["left", "right", "top", "bottom"]:
+				pad.add_theme_constant_override("margin_" + side, 16)
+			pad.add_child(col)
+			info.add_child(pad)
+			var show_info := func(on: bool) -> void: info.visible = on
+			b.mouse_entered.connect(show_info.bind(true))
+			b.mouse_exited.connect(func(): info.visible = b.has_focus())
+			b.focus_entered.connect(show_info.bind(true))
+			b.focus_exited.connect(show_info.bind(false))
+		else:
+			b.add_child(col)
 		var w: String = who
 		b.pressed.connect(func(): _show_newsreel(w))
 		row.add_child(b)

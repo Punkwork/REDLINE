@@ -21,6 +21,11 @@ func run() -> void:
 	var app = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(app)
 	await process_frame
+	await shot("app_00_rustler_select")   # RUSTLER-SELECT-001
+	var card: Button = app.overlay.find_children("Portrait", "TextureRect", true, false)[0].get_parent()
+	card.mouse_entered.emit()
+	await shot("app_00b_rustler_select_hover")
+	card.mouse_exited.emit()
 	app._start_as("GENERALIST")
 	var g: Game = app.g
 	await shot("app_01_map")

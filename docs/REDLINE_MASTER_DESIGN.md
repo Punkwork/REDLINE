@@ -3419,3 +3419,7 @@ Designer: "for the next build add ready rig to the ghostware slot on the encount
 
 **Built (2026-11-27, Claude Code; PROPOSED for review):** the designer's 30 Ghostware icons (`PANOPTICON art/Ghostware Icons`) imported to `godot/assets/concept/ghostware/` at 256 × 256. The reel shows READY RIG's icon, with its rules text on hover; LOW PROFILE, REDLINER and PATIENT ZERO also get their icons, and so does any other Ghostware the run picks up.
 
+## RUSTLER-SELECT-001 — Rustler portrait on the select screen (designer, 2026-11-27 06:33–06:34; implementation PROPOSED for review)
+
+Designer: "add the generalist rustler image to the rustler select screen for the user to click on when selecting a rustler" and "i would use the image in place of the name. when the player rolls over the image they can see the text of what the generalist stats are, a quote, etc." Built: the portrait (`PANOPTICON art/Rustler Select/RUSTLER_GENERALIST.png`, imported at 561 × 701) fills the Generalist's select button, without the name. Hover or keyboard focus shows the name, difficulty, quote, style and ORIGIN on an opaque panel over the card (no picture behind the text; ADP-R1). Any Rustler with a `RUSTLER_<ID>.png` file gets the same treatment; the others keep the text card.
+

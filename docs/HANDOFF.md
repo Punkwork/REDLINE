@@ -95,6 +95,7 @@ Designer-confirmed creative direction, 2026-11-23. Read [REDLINE_NULREM_BEHAVIOU
 | ID | What | Owner | Status |
 |---|---|---|---|
 | **ARCH-V2-008a** | Add READY RIG to the Ghostware slot on the encounter screen. Now: the reel already lists READY RIG first as the Generalist's ORIGIN, but there is no `GW_READY_RIG.png`, so the slot shows the initials "RR". Needed: READY RIG art or icon in `godot/assets/concept/ghostware/`, its rules text on hover, and a screenshot fixture. | Claude Code | **BUILT** (`godot/assets/concept/ghostware/`, all 30 designer icons at 256 px; test in `test_arch_v2_batch4.gd`; fixture `docs/visual/fixtures/arch-v2-batch4/v2_02_ready_rig_reel_zoom.jpg`); ships in the next build |
+| **RUSTLER-SELECT-001** | The Rustler select screen shows the designer's portrait as the Rustler's button, in place of the name; hovering or focusing it shows the name, difficulty, quote, style and ORIGIN on an opaque panel. Generalist only (STRIP-001). ECHO, RIOT and VECTOR portraits are in the designer's `Rustler Select` folder for when they return. | Claude Code | **BUILT** (`main.gd`, `godot/assets/concept/rustlers/`; `test_arch_v2_app.gd`; fixtures `docs/visual/fixtures/rustler-select/`); ships in the next build |
 
 ### STRIP-001: core-loop test build (designer, 2026-11-21)
 Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
