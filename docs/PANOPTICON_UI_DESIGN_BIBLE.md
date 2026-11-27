@@ -1253,3 +1253,7 @@ Reply "ready" and then make part 1.
 - **Bottom:** the hand tray holds the deck well, the hand, the discard well, tray buttons (DECK / COVERAGE, END RUN, VIEW) and the END TURN box. Reduced motion and VOICE become toggles. The log is a one-line ticker.
 - **Glue:** pipes, valves, gauges, screws and rivets fill the gaps between panels, and the vignette darkens the edges so the bright parts stand out.
 - Each part falls back to the current drawing until its file exists. Presentation only.
+
+
+## CHAIN-002 — Foundational CHAIN revision (designer approved 2026-11-27)
+Canonical working specification: [PANOPTICON CHAIN Mechanics](PANOPTICON_CHAIN_MECHANICS.md). Supersedes DSY-011's two-card activation threshold: minimum three cards; third valid card instantiates a CHAIN instance and receives inherent −1 BW play-cost reduction before commitment, plus applicable card-specific bonus. Longer chains permitted; exact eligibility, extension discounts, termination, repeat instances, cost floor/precedence and card balance remain open. CHAIN-REP-001 remains Priority 2; coordinate CHAIN visibility and CHAIN ACTIVATED audiovisual feedback with UI-TYPO-001/a and M06. Existing engine and cards still reflect historical rules until implementation; no production change authorized by this documentation commit. CHAIN PULP remains deferred to IRONWATCH. See canonical specification for examples, audit, questions and acceptance plan.
