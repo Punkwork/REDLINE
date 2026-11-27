@@ -92,3 +92,26 @@ UI: communicate newly available options, actual draw/recovery/free-play/BW outco
 
 ## CHAIN-002d — Experiential acceptance (designer approved 2026-11-27)
 Design mantra: **Extend the turn. Expand the options. Reward ingenuity.** CHAIN creates confidence, momentum and a sense of mastery, as if the Rustler discovered a new level within a level. Contrast with surveillance-induced anxiety and restriction. Experiential acceptance criterion: the player should not merely understand that they executed a clever combination; they should feel clever for having discovered it. Reward discovery through typography, motion, sound and visible card changes, not solely numerical effects or a flyout. Anticipation, activation and momentum are proposed feedback phases; eligible card indicators, effective cost changes, localized payoff and newly available options should be legible. Specific animation, sound, card treatments and timing remain experimental; coordinate UI-TYPO-001/a, M06 and CHAIN-REP-001. Playtest whether players independently recognize opportunities, perceive the payoff and report confidence/momentum/mastery without obscuring tactical information; reduced effects must preserve information. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md. No engine changes.
+
+## CHAIN-003 — Experimental combination catalogue and playtest shortlist (2026-11-27)
+Designer authorized recording the exploration and selecting promising playtest candidates. All names, signatures, card statistics and specialized effects below are experimental, not final balance or production rules. Proposed grammar: ordered preceding fresh card plays satisfy a catalyst's signature; ordinary cards can be links; catalyst playable normally without activation. TAG and TYPE first; ACTION (actual resolved effect) and COST (printed versus effective unresolved) later. Preserve CHAIN-002/a/b/c/d: minimum three, distinct non-overlapping instances, third card −1 BW before commitment, turn extension identity and experiential acceptance.
+All catalysts below have illustrative base cost 1 BW, reduced to 0 on valid instantiation. Signature lists the first two links; third is named catalyst.
+| Catalyst | Ordered signature | Base effect | Additional CHAIN effect | Stage |
+|---|---|---|---|---|
+| OVERCLOCK | CLOAK → EXPLOIT | Draw 2 | None beyond inherent discount | First |
+| FEEDBACK LOOP | EXPLOIT → EXPLOIT | Draw 1 | Draw 1 more | Later |
+| SLIPSTREAM | CLOAK → CLOAK | Reduce TRACE 2 | Gain 1 BW | First |
+| RELAY | EXPLOIT → CLOAK | Draw 1 | Selected discard to hand | First |
+| BOOTSTRAP | PROGRAM → SCRIPT | Draw 1 | Gain 1 BW | First |
+| HANDSHAKE | SCRIPT → PROTOCOL | Draw 1 | Selected discard atop draw pile | First |
+| DAISY CHAIN | SCRIPT → SCRIPT | Draw 1 | Optionally play top draw card for 0 BW | First |
+| RECURSION | DRAW → DRAW | Draw 1 | Selected discard to hand | Later |
+| BROWNOUT | REDUCE STR → REDUCE STR | Reduce ICE STR 1 | Draw 2 | Later |
+| GHOST SIGNAL | REDUCE TRACE → GAIN SHIELD | Reduce TRACE 1 | Inspect top 3, draw one, reorder rest | Later |
+| BACKDOOR | REDUCE STR → BREAK SUB | Draw 1 | Gain 1 BW | Later |
+| LOW VOLTAGE | 0 BW card → 1+ BW card | Draw 1 | Draw 1 more | Later |
+| POWER SURGE | SPEND BW → GENERATE BW | Draw 1 | Gain 1 BW | Later |
+| COLD START | 0 BW card → 0 BW card | Draw 1 | Selected discard atop draw pile | Later |
+| ROOT ACCESS | PROGRAM → REDUCE STR | Draw 1 | Selected discard atop draw pile, optionally execute for 0 BW | Later |
+Action signatures require card plays, not standalone Icepick activations. Example: BW3/DRAW6; CLOAK 1BW, EXPLOIT 1BW, OVERCLOCK 0BW draws2; after first instance ends, hypothetical draw card A 0BW draws1, draw card B 1BW draws1, RECURSION 0BW draws1 and recovers discard. Six plays, five draws, two BW saved; no overlap. Illustrative later-stage scenario, not proof of available cards.
+First experimental shortlist: OVERCLOCK, SLIPSTREAM, RELAY, BOOTSTRAP, HANDSHAKE, DAISY CHAIN. RELAY replaces RECURSION in first cohort to keep grammar TAG/TYPE only. DAISY CHAIN requires explicit free-play legality, targeting, cancellation, pile visibility and recursion rules before implementation; stage it after simpler effects if necessary. Verify actual card costs and available BW, RAM, protocol slots, draw/discard availability, reward pool/fixtures, no self-recovery loops, and existing card name collisions. Resolve extension/termination and cost precedence before engine work. Test each independently, then combinations in representative HALCYON encounters; UI previews, CHAIN ACTIVATED, visible hand changes and localized reward feedback; measure agency, confidence, momentum, mastery and absence of dominant/infinite loops. No production implementation or final card balance authorized by this catalogue.
