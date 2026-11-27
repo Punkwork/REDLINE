@@ -456,3 +456,7 @@ Designer-endorsed exploration: possibility of observation, fictional fear/anxiet
 ## SURV-OBSERVER-EXP-001 — The Internalized Observer
 
 Designer confirmed The Parallax View (1974, Alan J. Pakula) and The Conversation (1974, Francis Ford Coppola) as principal cinematic references. Recorded in Design Experimentation Bible §23, commit 307703473a5a9f3ec8a9fe0a6f34800815d2342b. Reference-only; no new rules, specifications, code or tests.
+
+
+## SEQUENCE-002 — SEQUENCED revision (designer approved 2026-11-27)
+SEQUENCED permits breaks in any order. Each successful out-of-sequence break generates TRACE once if an earlier visible, active subroutine on the same ICE remains unbroken, regardless of how many are skipped. Previously broken, concealed and inactive subroutines do not count. This supersedes mandatory ordered breaking and retires standalone TRIPWIRE. TRACE magnitude remains open for balancing. Design SEQUENCED ICE with low-urgency earlier effects (e.g. INSERT SPAM or DISCARD) and a compelling later target (e.g. PULP 6 or AMEND on supporting ICE, increasing the right-hand ICE's PULP during the response). Examples are design patterns, not approved new ICE profiles. Preview the penalty before committing. Priority 2 representative encounter refinement; implementation and tests pending, no engine changes in this decision.
