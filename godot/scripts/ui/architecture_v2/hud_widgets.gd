@@ -899,3 +899,50 @@ class LogPanel extends PanelContainer:
 	func _gui_input(e: InputEvent) -> void:
 		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 			hide(); closed.emit(); accept_event()
+
+## ARCH-V2-006f: NUL/REM's speaker grille. NUL/REM speaks (pre-recorded voice); the grille glows
+## while it speaks, and hovering/focusing it shows the line's text (with the two before it). Clicking
+## it (or M) mutes and unmutes the voice; muted shows a slash. Uses controls/V2_SPEAKER_GRILLE.png
+## when it lands. Presentation only.
+class SpeakerGrille extends Explained:
+	signal toggled
+	var speaking := 0.0        # seconds of glow left
+	var muted := false
+	var reduced_motion := false
+	var art: Texture2D
+	var t := 0.0
+	func setup(sz: Vector2) -> void:
+		size = sz; custom_minimum_size = sz
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		art = V2Art.tex("controls/V2_SPEAKER_GRILLE.png", sz.x)
+		set_process(false)
+	func speak(seconds: float) -> void:
+		speaking = seconds; set_process(true); queue_redraw()
+	func _process(d: float) -> void:
+		speaking = maxf(0.0, speaking - d); t += d
+		if speaking <= 0.0: set_process(false)
+		queue_redraw()
+	func _gui_input(e: InputEvent) -> void:
+		if (e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT) or e.is_action_pressed("ui_accept"):
+			accept_event(); toggled.emit()
+	func _draw() -> void:
+		var r := Rect2(Vector2.ZERO, size)
+		var on := speaking > 0.0 and not muted
+		var glow := 1.0 if reduced_motion else 0.75 + 0.25 * sin(t * 14.0)
+		if on:
+			var g := StyleBoxFlat.new(); g.bg_color = Color(VasTokens.AMBER, 0.0); g.set_corner_radius_all(int(size.y / 2.0))
+			g.shadow_color = Color(VasTokens.AMBER, 0.45 * glow); g.shadow_size = 10; draw_style_box(g, r.grow(-2))
+		if art:
+			draw_texture_rect(art, r, false, Color(1.15, 1.05, 0.9) if on else Color.WHITE)
+		else:
+			var sb := StyleBoxFlat.new(); sb.bg_color = Color("#1A1310"); sb.border_color = Color("#C9CED0") if not muted else Color("#7E878A")
+			sb.set_border_width_all(3); sb.set_corner_radius_all(int(size.y / 2.0)); sb.anti_aliasing = true
+			draw_style_box(sb, r)
+			var col := Color(VasTokens.AMBER, 0.55 + 0.45 * glow) if on else Color("#6B5A4A")
+			var n := 5
+			for k in n:
+				var y := size.y * (0.26 + k * 0.12)
+				draw_line(Vector2(size.x * 0.18, y), Vector2(size.x * 0.82, y), col, 2.5, true)
+		if muted:
+			draw_line(Vector2(size.x * 0.2, size.y * 0.85), Vector2(size.x * 0.8, size.y * 0.15), Color("#FF3A2A"), 3.5, true)
+		focus_ring()

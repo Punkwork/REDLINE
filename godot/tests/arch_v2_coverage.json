@@ -294,10 +294,10 @@
    "area": "Response",
    "element": "Step-by-step Corporation Response",
    "prototype": "main._play_response",
-   "v2": "ResponseRail",
+   "v2": "ResponseSequencer",
    "status": "BUILT",
-   "next": "C03 ResponseSequencer port in Batch 3",
-   "note": "Minimal stand-in today."
+   "next": "",
+   "note": "C03 ported: Build 12 pacing (5 s shared), holds for strike/LOCKDOWN flyouts, one call per step, cancel-safe; effect sounds and PULP shake."
   },
   {
    "id": "R03",
@@ -564,30 +564,30 @@
    "area": "Flow",
    "element": "NUL/REM lines",
    "prototype": "NulRemNote",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "Voice; text on hover over two speaker grilles: below the left avatar and below the right ICE keys (ARCH-V2-006f)",
-   "note": "No ticker; keeps the screen clean."
+   "v2": "SpeakerL",
+   "status": "BUILT",
+   "next": "",
+   "note": "Voice plus two grilles (below the left avatar, below the right ICE); hover shows the last lines (ARCH-V2-006f)."
   },
   {
    "id": "F04",
    "area": "Flow",
    "element": "Reduced motion setting",
    "prototype": "motion button",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C16 settings",
-   "note": "Sandbox flag only."
+   "v2": "Stage",
+   "status": "BUILT",
+   "next": "",
+   "note": "Read from the app settings (redline_flags.json); flyouts, ants, wash, shake, fan and eye honour it. The toggle lives in the app settings menu."
   },
   {
    "id": "F05",
    "area": "Flow",
    "element": "VOICE / M mute",
    "prototype": "VoiceButton",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C16 settings",
-   "note": ""
+   "v2": "SpeakerR",
+   "status": "BUILT",
+   "next": "",
+   "note": "Click either grille or press M; saved to the app settings."
   },
   {
    "id": "F06",

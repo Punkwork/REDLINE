@@ -124,7 +124,7 @@ func run() -> void:
 	# Finish the response the rest of the way (the sandbox's own loop is parked on a long timer).
 	while sb.ctrl.response_pending(): sb.ctrl.step_response()
 	sb.ctrl.finish_response()
-	await create_timer(1.0).timeout   # let the parked sandbox loop wake and see nothing left to do
+	sb.sequencer.cancel()   # the parked sequencer stops without resolving anything more
 	sb.responding = false
 	sb.refresh()
 	sb.flyout.advance(10.0)

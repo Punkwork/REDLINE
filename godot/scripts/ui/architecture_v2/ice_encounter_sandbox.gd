@@ -42,6 +42,11 @@ const LANE := Rect2(40, 134, 1456, 354)
 const RAIL_HOUSING := Rect2(192, 494, 1152, 63)
 ## ARCH-V2-006d: LAYER and CRED over the rail's left vent grille.
 const LEDGER := Rect2(206, 502, 168, 47)
+## ARCH-V2-006f: NUL/REM's two speaker grilles: below the left avatar, and below the right ICE's keys.
+const SPEAKER_L := Rect2(70, 506, 96, 44)
+const SPEAKER_R := Rect2(1370, 506, 96, 44)
+const MAIN_UI := preload("res://scripts/ui/main.gd")   # its event priority list (Build 12's NUL/REM picks)
+const FLAGS := "user://redline_flags.json"
 const CRT := Rect2(6, 632, 262, 156)   ## cartridges stick up above it (ARCH-V2-003u)
 const NOTE := Rect2(8, 794, 258, 66)
 const END_TURN := Rect2(1464, 794, 64, 64)   ## designer 15:37: the very bottom-right corner
@@ -68,7 +73,8 @@ const KEY_LEGEND := [
 ]
 
 @export var auto_ready_rig := "FORTRESS_ICEPICK"
-@export var step_seconds := 0.45
+## C03: 0 = Build 12 pacing (the steps share 5 s); fixtures set a long gap to park mid-response.
+@export var step_seconds := 0.0
 @export var reduced_motion := false
 ## Tests/fixtures: resolve the response without waiting.
 var instant := false
@@ -92,6 +98,18 @@ var log_panel: HudWidgets.LogPanel
 var rail_log: HudWidgets.Explained
 var flash: ColorRect
 var pile_view: ChoiceOverlay
+var speakers: Array = []
+var nr := NulRem.new()
+var sequencer := ResponseSequencer.new()
+var sfx := {}
+var last_effect_sound := ""
+## Announcements the response waits for (Build 12 waited for its strike overlay).
+const HOLD_FOR := ["corp_countermeasure", "strike", "mask_off", "lockdown", "ice_lethal"]
+var nr_voice: AudioStreamPlayer
+var voice_on := true
+## Tests point this at a scratch file so they never touch the player's settings.
+var flags_path := FLAGS
+var nr_lines: Array = []     # what NUL/REM said this encounter, newest last
 ## R06: the last batch of Game.events this screen handled (tests read it).
 var last_events: Array = []
 const EVENT_FLYOUT := {"EV-14": "strike", "EV-15": "mask_off", "EV-16": "lockdown", "EV-07": "breached",
@@ -115,6 +133,12 @@ var _target_plaque: Control
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	## F04/F05: the app's saved settings (the same flags file the settings menu writes) apply here:
+	## reduced motion and NUL/REM's voice. Reduced motion set by a caller stays on.
+	var flags := LocalRecord.read(flags_path)
+	reduced_motion = reduced_motion or bool(flags.get("reduced_motion", false))
+	voice_on = bool(flags.get("voice_on", true))
+	nr_voice = AudioStreamPlayer.new(); nr_voice.name = "NulRemVoice"; add_child(nr_voice)
 	_build()
 	get_viewport().size_changed.connect(_fit)
 	_fit()
@@ -131,6 +155,9 @@ func start(seed: int, rustler: String = "GENERALIST") -> void:
 	if game.phase == "READY_RIG" and auto_ready_rig != "":
 		var pick := game.draw_pile.filter(func(c): return c.id == auto_ready_rig)
 		if not pick.is_empty(): game.choose_ready_rig(pick[0].uid)
+	nr.rustler = String(CardDB.RUSTLERS.get(rustler, {}).get("nulrem", "Generalist"))
+	nr.corp = game.corporation
+	nr_lines.clear()
 	ctrl = EncounterController.new()
 	ctrl.bind(game)
 	ctrl.changed.connect(refresh)
@@ -181,6 +208,11 @@ func _build() -> void:
 	flash = ColorRect.new(); flash.name = "Flash"; flash.color = Color(1.0, 0.1, 0.12, 0.0)
 	flash.mouse_filter = Control.MOUSE_FILTER_IGNORE; flash.size = REF; stage.add_child(flash)
 	stage.move_child(flash, flyout.get_index())
+	sequencer.name = "ResponseSequencer"
+	sequencer.hold = func() -> bool: return flyout.playing and HOLD_FOR.has(flyout.kind)
+	sequencer.step_resolved.connect(_effect_feedback)
+	sequencer.step_started.connect(func(_s): refresh())
+	add_child(sequencer)
 	_target_plaque = _build_target_plaque()
 	lane.target_chosen.connect(func(r):
 		var u := _pending_target; _pending_target = -1
@@ -302,6 +334,11 @@ func _build_enclosure() -> void:
 	rail.log_requested.connect(toggle_log)
 	stage.add_child(rail)
 	_art("chassis/V2_ENCLOSURE_FRAME.png", ENCLOSURE, "EnclosureFrame")
+	for k in 2:
+		var sp := HudWidgets.SpeakerGrille.new(); sp.name = "Speaker" + ("L" if k == 0 else "R"); sp.inspector = inspector
+		var r: Rect2 = SPEAKER_L if k == 0 else SPEAKER_R
+		sp.setup(r.size); sp.position = r.position; sp.toggled.connect(toggle_voice)
+		stage.add_child(sp); speakers.append(sp)
 	ledger = HudWidgets.RailLedger.new(); ledger.name = "Ledger"
 	ledger.setup(LEDGER.size, inspector); ledger.position = LEDGER.position; stage.add_child(ledger)
 
@@ -334,18 +371,38 @@ func end_turn() -> void:
 		await play_response()
 
 func play_response() -> void:
-	## Minimal C03 stand-in: light the key, resolve exactly one step, repeat; then finish once.
+	## C03: ResponseSequencer plays the response step by step (light, resolve one, repeat, finish once).
 	responding = true
 	refresh()
-	if not instant: await _wait(VasTokens.flyout_total() * 0.6)
-	while ctrl.response_pending() and game.phase == "RESPONSE":
-		ctrl.peek_response()
-		if not instant: await _wait(step_seconds * 0.5)
-		ctrl.step_response()
-		if not instant: await _wait(step_seconds)
-	if game.phase == "RESPONSE": ctrl.finish_response()
-	responding = false
+	sequencer.ctrl = ctrl
+	sequencer.instant = instant
+	sequencer.step_seconds = step_seconds
+	await sequencer.run()
+	if not is_inside_tree(): return
+	responding = sequencer.running
 	refresh()
+
+## PLAY-002 in V2: each resolved step sounds its effect type; PULP shakes the console briefly
+## (not under reduced motion).
+func _effect_feedback(effects: Array) -> void:
+	var kinds := effects.map(func(e): return String(e.get("k", "")))
+	var id := ""
+	if kinds.has("PULP") or kinds.has("RETALIATE"): id = "hit_pulp"
+	elif kinds.has("SHIELD_BREAK"): id = "hit_shield"
+	elif kinds.has("CORTEX"): id = "hit_cortex"
+	elif kinds.has("TRACE"): id = "hit_trace"
+	elif kinds.has("HARDEN") or kinds.has("AMEND"): id = "hit_harden"
+	elif kinds.has("DISCARD") or kinds.has("INSERT") or kinds.has("BW_DRAIN"): id = "hit_card"
+	if id == "" or not FriendlyMusic.EFFECTS.has(id): return
+	last_effect_sound = id
+	if not sfx.has(id):
+		var p := AudioStreamPlayer.new(); p.stream = FriendlyMusic.EFFECTS[id]; add_child(p); sfx[id] = p
+	sfx[id].play()
+	if id == "hit_pulp" and not reduced_motion and is_inside_tree():
+		var home := stage.position
+		var tw := create_tween()
+		for k in 4: tw.tween_property(stage, "position", home + Vector2(randf_range(-6, 6), randf_range(-4, 4)), 0.035)
+		tw.tween_property(stage, "position", home, 0.04)
 
 func _wait(s: float) -> void:
 	await get_tree().create_timer(s).timeout
@@ -373,6 +430,7 @@ func refresh() -> void:
 		lane.sync(VisibleStateAdapter.ice_models(game, ctrl))
 		rail.sync(VisibleStateAdapter.response_model(game, ctrl))
 	_handle_events()
+	_refresh_speakers()
 	_refresh_inspector()
 	turn_counter.set_value(int(game.enc.get("turn", 0)))
 	phase_plaque.set_phase(game.phase == "RESPONSE")
@@ -438,9 +496,51 @@ func _handle_events() -> void:
 		if FLASH_EVENTS.has(t) and not reduced_motion: _flash(FLASH_EVENTS[t])
 	_on_events(last_events)
 
-## Hook for the NUL/REM speakers (3e).
-func _on_events(_list: Array) -> void:
-	pass
+## ARCH-V2-006f: NUL/REM picks one line per batch of events (Build 12's priority order), speaks it
+## through the voice player (unless muted) and the grilles glow; the text waits on their hover.
+func _on_events(list: Array) -> void:
+	var best := {}
+	var best_rank := 999
+	for e in list:
+		var rank: int = MAIN_UI.PRIORITY.find(String(e.get("t", "")))
+		if rank >= 0 and rank < best_rank: best_rank = rank; best = e
+	if best.is_empty() or game.phase == "DEAD": return
+	var ctx := {"punch_cards": game.punch_cards, "corp": best.get("corp", game.corporation), "bloat": best.get("card", ""), "rest": "SAFEHOUSE"}
+	if best.t == "EV-35": ctx["cause"] = "TRACE" if game.lockdown else ""
+	say(nr.pick(String(best.t), ctx))
+
+func say(line: Dictionary) -> void:
+	if line.is_empty(): return
+	nr_lines.append(line)
+	var seconds: float = clampf(String(line.text).length() / 15.0, 1.5, 6.0)
+	nr_voice.stop()
+	var path := "res://audio/nulrem/%s.ogg" % String(line.id).replace(" ", "_")
+	if voice_on and ResourceLoader.exists(path):
+		var stream: AudioStream = load(path)
+		nr_voice.stream = stream
+		if nr_voice.is_inside_tree(): nr_voice.play()
+		seconds = maxf(1.0, stream.get_length())
+	for sp in speakers: sp.speak(seconds)
+	_refresh_speakers()
+
+func toggle_voice() -> void:
+	voice_on = not voice_on
+	if not voice_on: nr_voice.stop()
+	var flags := LocalRecord.read(flags_path)
+	flags["voice_on"] = voice_on
+	LocalRecord.write(flags_path, flags)
+	_refresh_speakers()
+
+func _refresh_speakers() -> void:
+	for sp in speakers:
+		sp.muted = not voice_on
+		sp.reduced_motion = reduced_motion
+		sp.title = "NUL/REM" + ("" if voice_on else " · VOICE OFF")
+		var recent := nr_lines.slice(maxi(0, nr_lines.size() - 3))
+		recent.reverse()
+		sp.lines = recent.map(func(l): return String(l.text)) if not recent.is_empty() else ["Nothing said yet."]
+		sp.lines.append("Click (or M) to " + ("mute the voice." if voice_on else "turn the voice on."))
+		sp.queue_redraw()
 
 func _flash(peak: float) -> void:
 	if not is_inside_tree(): return
@@ -580,6 +680,8 @@ func _build_target_plaque() -> Control:
 	return pc
 
 func _unhandled_input(e: InputEvent) -> void:
+	if e is InputEventKey and e.pressed and not e.echo and e.keycode == KEY_M:
+		toggle_voice(); get_viewport().set_input_as_handled(); return
 	if pile_view.visible and e.is_action_pressed("ui_cancel"):
 		pile_view.open({}); get_viewport().set_input_as_handled(); return
 	if log_panel.visible and e.is_action_pressed("ui_cancel"):

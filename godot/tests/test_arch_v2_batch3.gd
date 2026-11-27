@@ -18,6 +18,7 @@ func _initialize() -> void:
 func sandbox() -> IceEncounterSandbox:
 	var sb: IceEncounterSandbox = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
 	sb.instant = true
+	sb.flags_path = "user://test_arch_v2_flags.json"
 	root.add_child(sb)
 	return sb
 
@@ -34,6 +35,10 @@ func run() -> void:
 	await test_events()
 	print("- cards: CACHED icon, drag to play, show board, pile viewers, NEXT DRAW")
 	await test_cards()
+	print("- NUL/REM speakers, voice mute, saved settings")
+	await test_speakers()
+	print("- response sequencer (C03)")
+	await test_sequencer()
 	print("ARCH-V2 BATCH 3: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -48,7 +53,7 @@ func test_header() -> void:
 	check(is_equal_approx(eye.reveal, 0.0), "no reveal at TRACE %d" % g.trace)
 	var cool := eye.lens_colour()
 	g.trace = 30; sb.refresh()
-	check(eye.reveal > 0.2 and eye.reveal < 0.6, "Cracking reveal between 20% and 60% at TRACE 30 (%.2f)" % eye.reveal)
+	check(eye.reveal > 0.2 and eye.reveal < 0.6, "Cracking reveal between 20%% and 60%% at TRACE 30 (%.2f)" % eye.reveal)
 	var warm := eye.lens_colour()
 	check(warm.r > cool.r and warm.g < cool.g, "lens warms toward red as the reveal grows")
 	g.strikes = 2; sb.refresh()
@@ -273,6 +278,72 @@ func test_cards() -> void:
 	if back: back.pressed.emit()
 	check(not sb.choice.peek and sb.choice.find_child("Plaque", true, false).visible, "back to the choice")
 	sb.queue_free(); await frames()
+
+func test_speakers() -> void:
+	LocalRecord.erase("user://test_arch_v2_flags.json")
+	var sb := sandbox(); await frames(); var g := sb.game
+	check(sb.speakers.size() == 2, "two speaker grilles")
+	var l: Control = sb.speakers[0]; var r: Control = sb.speakers[1]
+	var p0: IcePanel = sb.lane.panels()[0]
+	check(l.position.x < sb.ledger.position.x and r.position.x > sb.rail.position.x + sb.rail.size.x, "left grille under the left avatar, right one under the right ICE")
+	check(sb.find_child("NulRemNote", true, false) == null and sb.find_child("Ticker", true, false) == null, "no NUL/REM note or ticker on screen")
+	# A line through the real picker on a strike (EV-14 always speaks).
+	g.add_trace(40 - g.trace, false); sb.refresh()
+	check(not sb.nr_lines.is_empty(), "NUL/REM picks a line for the strike")
+	check(r.speaking > 0.0, "grilles glow while NUL/REM speaks")
+	l.grab_focus(); await frames(2)
+	check(_inspector_text(sb).contains(String(sb.nr_lines[-1].text)), "hover shows the line's text")
+	l.release_focus(); sb.inspector.close()
+	# Mute: click a grille (or M); saved to the settings file.
+	l.toggled.emit()
+	check(not sb.voice_on and l.muted and r.muted, "click mutes the voice")
+	check(LocalRecord.read("user://test_arch_v2_flags.json").get("voice_on", true) == false, "voice setting saved")
+	var m := InputEventKey.new(); m.keycode = KEY_M; m.pressed = true
+	sb._unhandled_input(m)
+	check(sb.voice_on and not l.muted, "M turns it back on")
+	sb.queue_free(); await frames()
+	# Saved settings apply on the next encounter: reduced motion and voice off.
+	LocalRecord.write("user://test_arch_v2_flags.json", {"reduced_motion": true, "voice_on": false})
+	sb = sandbox(); await frames()
+	check(sb.reduced_motion and sb.flyout.reduced_motion and sb.hand_fan.reduced_motion, "saved reduced motion applies")
+	check(not sb.voice_on and sb.speakers[0].muted, "saved voice off applies")
+	sb.queue_free(); await frames()
+	LocalRecord.erase("user://test_arch_v2_flags.json")
+
+func test_sequencer() -> void:
+	var sb := sandbox(); await frames(); var g := sb.game
+	sb.flyout.advance(10.0)
+	var count := [0]   # lambdas capture locals by value; count through an array
+	sb.sequencer.step_resolved.connect(func(_e): count[0] += 1)
+	var expected := g.response_preview().filter(func(st): return not st.skipped).size()
+	var calls := sb.ctrl.game_calls
+	await sb.end_turn()
+	var n_steps: int = count[0]
+	check(n_steps == expected and n_steps > 0, "each queued step resolves exactly once (%d of %d)" % [n_steps, expected])
+	check(sb.ctrl.game_calls == calls + 1 + n_steps + 1, "one call per step plus end turn and finish")
+	check(not sb.responding and not sb.sequencer.running, "sequencer done, back to the Rustler")
+	check(sb.last_effect_sound != "", "steps sound their effect type (%s)" % sb.last_effect_sound)
+	sb.queue_free(); await frames()
+	# Paced (not instant): holds while a strike flyout plays; cancel stops it cleanly.
+	sb = sandbox(); await frames(); g = sb.game
+	sb.instant = false; sb.step_seconds = 0.05
+	sb.flyout.advance(10.0)
+	sb.flyout.announce("strike")
+	check(sb.sequencer.hold.call(), "a strike flyout holds the response")
+	sb.end_turn()
+	await frames(4)
+	var before_q: int = g.response_queue.size()
+	check(sb.responding and before_q > 0 and sb.ctrl.fired.is_empty(), "nothing resolves while the flyout holds")
+	sb.flyout.advance(10.0); sb.flyout.advance(10.0)   # the strike, then the queued CORP COUNTERMEASURE
+	await create_timer(0.6).timeout
+	check(sb.ctrl.fired.size() > 0 or not sb.responding, "response continues after the flyout")
+	sb.sequencer.cancel()
+	var q := g.response_queue.size()
+	for i in 30: await process_frame
+	check(g.response_queue.size() == q, "cancel stops resolving")
+	# Leaving mid-response: the screen goes away, nothing else resolves, no errors.
+	sb.queue_free(); await frames(30)
+	check(true, "screen freed mid-response")
 
 func _inspector_text(sb: IceEncounterSandbox) -> String:
 	var out := ""

@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 52 · PLACEHOLDER 1 · BATCH3 3 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
+**Totals:** BUILT 55 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
 
 | Status | Meaning |
 |---|---|
@@ -55,7 +55,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | ID | Element | Prototype source | V2 node | Status | Next | Note |
 |---|---|---|---|---|---|---|
 | R01 | NEXT RESPONSE | per-ICE plates | `ResponseRail` | BUILT | — | Shared rail, provisional (ARCH-V2-003e). |
-| R02 | Step-by-step Corporation Response | main._play_response | `ResponseRail` | BUILT | C03 ResponseSequencer port in Batch 3 | Minimal stand-in today. |
+| R02 | Step-by-step Corporation Response | main._play_response | `ResponseSequencer` | BUILT | — | C03 ported: Build 12 pacing (5 s shared), holds for strike/LOCKDOWN flyouts, one call per step, cancel-safe; effect sounds and PULP shake. |
 | R03 | PARTING SHOT after BREACH (PT11-UI 1) | PULP INCOMING row | `MeterPULP` | BUILT | — | PULP meter reads PARTING SHOT after BREACH; END TURN hover states it; rail drops DEADLOCKs. |
 | R04 | Encounter log | log_text | `RailLog` | BUILT | — | Hover the rail for the latest lines; click pins the full log; Esc closes (ARCH-V2-006i). |
 | R05 | Phase flyouts | none | `EventFlyout` | BUILT | — |  |
@@ -102,9 +102,9 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 |---|---|---|---|---|---|---|
 | F01 | END TURN | END TURN box | `EndTurn` | BUILT | — |  |
 | F02 | Leave Node / END RUN | END RUN tray button | — | OUT | Only on the menu of a CAP or card that allows leaving (ARCH-V2-006e) | No permanent button on the encounter screen. |
-| F03 | NUL/REM lines | NulRemNote | — | BATCH3 | Voice; text on hover over two speaker grilles: below the left avatar and below the right ICE keys (ARCH-V2-006f) | No ticker; keeps the screen clean. |
-| F04 | Reduced motion setting | motion button | — | BATCH3 | C16 settings | Sandbox flag only. |
-| F05 | VOICE / M mute | VoiceButton | — | BATCH3 | C16 settings |  |
+| F03 | NUL/REM lines | NulRemNote | `SpeakerL` | BUILT | — | Voice plus two grilles (below the left avatar, below the right ICE); hover shows the last lines (ARCH-V2-006f). |
+| F04 | Reduced motion setting | motion button | `Stage` | BUILT | — | Read from the app settings (redline_flags.json); flyouts, ants, wash, shake, fan and eye honour it. The toggle lives in the app settings menu. |
+| F05 | VOICE / M mute | VoiceButton | `SpeakerR` | BUILT | — | Click either grille or press M; saved to the app settings. |
 | F06 | KEY LEGEND | LegendButton | `Eye` | BUILT | — | Legend, tier, Node and layer on the eye hover (ARCH-V2-006g). |
 | F07 | Outcome (BREACH, flatline) | main overlays | `Outcome` | BUILT | — | Stand-in banner. |
 | F08 | Punch-card holder (SIGNAL-001) | update_punch_holder | — | BATCH4 | C05 integration |  |

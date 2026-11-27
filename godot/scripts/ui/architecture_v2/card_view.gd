@@ -84,7 +84,8 @@ func _get_drag_data(_at: Vector2) -> Variant:
 	ghost.custom_minimum_size = size * 0.85; ghost.size = size * 0.85; ghost.position = -ghost.size / 2.0
 	ghost.modulate = Color(1, 1, 1, 0.85); ghost.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	holder.add_child(ghost)
-	set_drag_preview(holder)
+	if get_viewport() and get_viewport().gui_is_dragging(): set_drag_preview(holder)
+	else: holder.queue_free()
 	return {"card_uid": uid()}
 
 func _notification(what: int) -> void:

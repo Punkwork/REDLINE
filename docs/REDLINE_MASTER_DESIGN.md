@@ -3384,3 +3384,16 @@ ChatGPT's independent check of `main` references covered the principal governanc
 
 Coverage table updated: no OPEN rows remain (`docs/architecture-v2/ENCOUNTER_COVERAGE.md`). New art: VAS-ASSET-001 §6f.
 
+## ARCH-V2-006 — Batch 3 built (designer: "start batch 3", 2026-11-26 19:22; implementation PROPOSED for review)
+
+Built on the V2 encounter screen, in five commits (see the development log). Every row of the coverage table that was BATCH3 is now BUILT (`docs/architecture-v2/ENCOUNTER_COVERAGE.md`: BUILT 55, PLACEHOLDER 1 (CAPS: no CAPS inventory in the engine), BATCH4 5, OUT 2). Captures: `docs/visual/fixtures/arch-v2-batch3/`. Tests: `godot/tests/test_arch_v2_batch3.gd` (in CI). No rules change.
+
+- **Header (006a/b/c/g/h):** the eye in the top-left corner (drawn until `V2_EYE` lands) with its lens as the hostile-reveal lamp and three strike lamps (LOCKDOWN: all red with a lock); hover: corporation, tier, Node, layer, reveal, strikes and the KEY LEGEND. Ghostware reel left of CAPS. Header shifted left; negative space before the ad plate.
+- **Rail (006d/i, PT11-UI 1):** ledger at the rail's left end (LAYER hamburger, CRED with a new CRED icon, layer CRED; red ants run left on extraction, then CRED counts up); log from the rail (hover: latest lines; click: full log; Esc closes); parting shot on the PULP meter and END TURN after a BREACH, rail without DEADLOCKs.
+- **Events:** flyouts from the Game's events: TRACE STRIKE, MASK OFF, LOCKDOWN, DEADLOCK BREACHED, LETHAL, PARTING SHOT, RESERVE EXTRACTED (queued, max 3, ≤ 1.5 s each); a short red wash on strikes and lethal ICE; "−n BW" at the key of a paid break; virus strain chips on each ICE.
+- **Cards:** click plays on release; drag to play (untargeted above the tray, targeted onto an ICE); CACHED corner icon (∞ or turns left); SHOW BOARD / BACK TO … on every choice (#15); deck (sorted by name), discard and burned viewers from the counters; NEXT DRAW on the deck hover.
+- **NUL/REM and settings (006f):** two speaker grilles (below the left avatar, below the right ICE); NUL/REM picks a line per batch of events (Build 12's priority list) and speaks it; hover shows the text; click or M mutes (saved). Reduced motion and voice come from the app settings file.
+- **C03 ResponseSequencer:** ported from Build 12: steps share 5 s, the response waits for CORP COUNTERMEASURE and strike/LOCKDOWN flyouts (max 3 s), one controller call per step, finish once, safe to cancel or leave mid-response; each step sounds its effect type (PLAY-002) and PULP shakes the console.
+
+*Interpretations to confirm:* flyout wording TRACE STRIKE, MASK OFF, LETHAL, PARTING SHOT, RESERVE EXTRACTED (DEADLOCK BREACHED and LOCKDOWN follow the catalogue); the KEY LEGEND wording; the response waiting for flyouts; deck viewer sorted by name (keeps draw order hidden); the speakers' click-to-mute; reduced motion toggled only from the app settings. Open from the table: PATIENT ZERO choice (VECTOR) still has no V2 overlay.
+
