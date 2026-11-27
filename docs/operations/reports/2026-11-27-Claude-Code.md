@@ -23,3 +23,14 @@ Recommended priorities:
 1. Representative ICE Encounter remains Priority 1.
 2. Designer to confirm I1–I5 and re-ID one MINIBOSS-003 decision.
 3. Then decide on a shared PRNG before the GDScript map port (report §8).
+
+## Session 2 (about 17:56–18:15, `architecture-v2`)
+
+Work completed: CONSISTENCY-001a, CSA-01 delivered and CSA-02 proposed ([document](../../architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md)). Stopped at the architecture approval gate.
+Surprises: CLAUDECODE-20261127-S03 (tests pin superseded PROBE behaviour), S04 (`architecture-v2` unprotected).
+Missing tools: none. Godot 4.3 was downloaded with its pinned hash for the session; the local `gh auth status` reports the token invalid, but API reads succeed.
+Blockers: designer decisions Q1–Q9; ruleset changes need the designer.
+Recommended priorities:
+1. Representative ICE Encounter.
+2. CSA-02 review.
+3. CSA-03 after approval.

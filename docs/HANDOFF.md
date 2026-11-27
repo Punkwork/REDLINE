@@ -99,6 +99,22 @@ Designer-confirmed creative direction, 2026-11-23. Read [REDLINE_NULREM_BEHAVIOU
 | **ARCH-V2-008b** | END RUN on the V2 encounter screen: a small, quiet plate centred under END TURN (Build 12's RUN-001 button). It asks for confirmation (YES, END THE RUN / KEEP PLAYING) before the run ends; unavailable during the Corporation Response. Also fixed: the app's dialogs now draw above the V2 screen's raised layers (hand cards showed through, and could be clicked, under the dialogs). | Claude Code | **BUILT** (`hud_widgets.gd` EndRunKey, sandbox, controller, `main.gd`; `test_arch_v2_app.gd`; fixtures `docs/visual/fixtures/end-run/`); ships in the next build |
 | **CAPS-TEST-001** | CAPS in the game for testing. Engine: the five common CAPS (BW SPIKE, BULWARK, FLUSH, NANOSUTURE, CRACKER; UPL-002), 3 slots, 0 BW, the Rustler's turn only, single use (UPL-001). The CAPTCHA Node's full clear adds a random common CAP alongside the card reward; the reward screen shows the vial and effect. V2 rack: the designer's vials; click injects; CRACKER aims at an ICE like a targeted card; hover shows the full vial. Not built: uncommon/rare CAPS, Uplink purchase, the 20% BREACH drop, Node-completion CAP choice. | Claude Code | **BUILT** (`cards.gd` CAPS, `game.gd` `use_cap` / `grant_random_cap`, adapter, controller, rack, `main.gd` reward; `test_game.gd` `test_caps`, `test_arch_v2_batch4.gd`; fixtures `docs/visual/fixtures/caps/`); ships in the next build. Full slots: a discard prompt is wanted later (designer, CAPS-TEST-001a), not in the next build. CRACKER confirmed: STR never below 0 or the ICE's minimum; hint "Drag onto an ICE" (CAPS-TEST-001b). *Interpretations to confirm:* CRACKER aims with the arrow, others inject on click; sockets show a close-up of the vial's glass and symbol |
 
+### CSA: Canonical Source Architecture (CONSISTENCY-001a, approved 2026-11-27)
+
+Proposal and audit: [`architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md`](architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md). Representative ICE Encounter stays priority 1.
+
+| ID | Deliverable | Depends on | Acceptance | Owner | Status |
+|---|---|---|---|---|---|
+| **CSA-01** | Authority, duplicate and consumer map; root causes; evidence (`tools/csa/scan_card_drift.py`, `architecture-v2/evidence/csa-01/`) | — | Evidence-backed inventory | Claude Code | **BUILT**, delivered for review |
+| **CSA-02** | Target architecture, migration plan, PROBE acceptance spec, enforcement plan, decisions Q1–Q9 | CSA-01 | Designer approval in Master Design | Designer | **WAITING** on the designer |
+| **CSA-03** | `cards.json` (one record per ID), loader, schema, parity test; conflict-resolution table for the designer | CSA-02 (Q1, Q2, Q4, Q7) | Loaded definitions equal `CardDB.DEFS`; baseline suites unchanged | Claude Code | TO DO |
+| **CSA-04** | Text templates, engine parameters, Inspector and Uplink contracts, generated doc blocks; PROBE-004a implemented (choose-one, both UI paths) | CSA-03 | PROBE B1–B9 and T1–T7 green | Claude Code | TO DO |
+| **CSA-05** | Python CI job (schema, IDs, references, drift, terms, traceability, AGENTS = CLAUDE, `tests/python`); spec tests in CI; PR path filter; ruleset proposal | CSA-03 | Each check proven by a negative test; designer decides the ruleset (Q5) | Claude Code, then designer | TO DO |
+| **CSA-06** | Retire hand card tables and appended decision copies (label historical); delete the `DEFS` constant; rewrite stale tests | CSA-04, CSA-05 | Scanner shows 0 independent active card definitions | Claude Code, with Claude (editorial) | TO DO |
+| **CSA-07** | Same pattern for ICE, CAPS and Ghostware | CSA-06 | As above, per entity | Claude Code | TO DO |
+
+*Interpretations to confirm:* PROBE's cost counter is per ICE instance (Q6); approved-unbuilt cards get records marked `implementation: pending`, experimental cards stay out (Q8).
+
 ### STRIP-001: core-loop test build (designer, 2026-11-21)
 Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
 

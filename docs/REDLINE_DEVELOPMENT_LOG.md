@@ -272,3 +272,12 @@ Assignment (designer): amend the corporation map generator for the approved Upli
 **CONSISTENCY-001** (approved while this work was in progress): repository-wide dependency search done. Mini-Boss pre-entry disclosure removed from `REDLINE_MINIBOSSES.md` and `REDLINE_ICE_EFFECTS.md`; superseded Master Design text labelled. Open: `REDLINE_CORE_RULES.md` §10 still describes the UPL-007 map; `REDLINE_UPLINK_AND_CAPS.md` Clinic text predates CLINIC-001; MINIBOSS-003 ID collision. Status: design approved, Python implementation validated, documentation partly reconciled, GDScript pending (report §9).
 
 *Interpretations to confirm:* I1–I5 in the report §7. Concerns before the port: report §8. Surprise CLAUDECODE-20261127-S01 (MINIBOSS-003 used twice). LOG-001: the 23 oldest entries archived (listed in the LOG-001 note).
+
+## 2026-11-27 — CONSISTENCY-001a: CSA-01 delivered, CSA-02 proposed (Claude Code)
+
+Designer assignment: Canonical Source Architecture. Complete CSA-01, prepare CSA-02, and stop at the approval gate. Result: [`architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md`](architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md), covering root causes RC1–RC8, the source inventory, consumer map, target architecture, migration plan with estimates, PROBE acceptance spec (B1–B9, T1–T7), enforcement plan, and decisions Q1–Q9. Evidence:
+- `tools/csa/scan_card_drift.py`: 34 active docs, 189 card-table rows; 35 text and 2 BW conflicts with CardDB; 56 names absent from CardDB.
+- PROBE-004a conformance on the live engine (`evidence/csa-01/probe_conformance.txt`): 5 of 7 fail. The STR mode also reveals; there is no reveal-all mode; the counter is keyed by ICE type; the text is stale; cancellation is not testable.
+- `architecture-v2` has no branch protection or ruleset; 28 of the last 40 CI runs were cancelled.
+
+Baseline at `c0e4acb` with Godot 4.3 stable: import 0; test_game 430/0; test_adp 17/0; test_signal_carbon 672/0; test_arch_v2_ice 202/0; coverage 548/0; batch3 110/0; batch4 76/0; app 29/0; parity 4,088/0. No engine, schema or settings change. Surprises CLAUDECODE-20261127-S03 and S04.

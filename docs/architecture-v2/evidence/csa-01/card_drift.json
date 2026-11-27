@@ -1,0 +1,423 @@
+{
+ "carddb_cards": 112,
+ "carddb_caps": 5,
+ "active_docs_scanned": 34,
+ "doc_card_rows": 189,
+ "doc_rows_matching_a_carddb_card": 124,
+ "rows_text_differs_from_carddb": 35,
+ "rows_bw_differs_from_carddb": 2,
+ "doc_card_names_absent_from_carddb": [
+  "ADAPTIVE DEFENCE",
+  "AFTERBURN",
+  "ATTRITION",
+  "BLACK BUDGET",
+  "BOOTSTRAP",
+  "BOUNTY HUNTER",
+  "BRIBE",
+  "BROWNOUT",
+  "BUFFER OVERFLOW",
+  "CARPET BOMB",
+  "CASCADE FAILURE",
+  "CHAIN REACTION",
+  "COUNTERINTELLIGENCE",
+  "DAISY CHAIN",
+  "DOMINO EFFECT",
+  "ESCALATION",
+  "FEEDBACK LOOP",
+  "FOLLOW THROUGH",
+  "FUZZ",
+  "GAIN STAGE",
+  "HANDSHAKE",
+  "HEADROOM",
+  "HOT STANDBY",
+  "HOT SWAP",
+  "HUSH MONEY",
+  "INSIDER TRADING",
+  "INTERFERENCE",
+  "JACK OF ALL TRADES",
+  "KEYLOGGER",
+  "LOGIC BOMB",
+  "MAXED OUT",
+  "MERCENARY",
+  "ORPHAN",
+  "OVERCLOCK",
+  "OVERDRIVE",
+  "PAGE OUT",
+  "PIPE",
+  "POWER SURGE",
+  "PRECISION STRIKE",
+  "QUANTUM CORE",
+  "RAM DISK",
+  "RANSOM",
+  "REACTIVE ARMOUR",
+  "REPRISE",
+  "ROOT ACCESS",
+  "SALVAGE",
+  "SANDBOX",
+  "SIGKILL",
+  "SIGNAL CHAIN",
+  "SLUSH FUND",
+  "STASH",
+  "SWAP FILE",
+  "SYSTEM COLLAPSE",
+  "SYSTEM SHOCK",
+  "SYSTEMIC DECAY",
+  "VOLTAGE REGULATOR"
+ ],
+ "carddb_cards_without_doc_row": [
+  "CLEAN BUILD",
+  "CULL",
+  "FLATLINE",
+  "HANDOFF",
+  "HARVEST",
+  "KNOCKOUT",
+  "NULL POINTER",
+  "SECOND WIND",
+  "SLOW DRIP",
+  "SPAM",
+  "STACK SMASH",
+  "TRACER"
+ ],
+ "cards_tabulated_in_more_than_one_doc": {
+  "PAYDAY": [
+   "docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md",
+   "docs/REDLINE_CARD_POOLS.md"
+  ],
+  "BLACKOUT": [
+   "docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md",
+   "docs/REDLINE_CARD_POOLS.md"
+  ],
+  "FORTRESS ICEPICK": [
+   "docs/REDLINE_CORE_RULES.md",
+   "docs/REDLINE_RUSTLERS.md"
+  ],
+  "TUMBLER ICEPICK": [
+   "docs/REDLINE_CORE_RULES.md",
+   "docs/REDLINE_RUSTLERS.md"
+  ],
+  "VOID ICEPICK": [
+   "docs/REDLINE_CORE_RULES.md",
+   "docs/REDLINE_RUSTLERS.md"
+  ],
+  "BASIC EXTRACTOR": [
+   "docs/REDLINE_CORE_RULES.md",
+   "docs/REDLINE_ENGINES.md",
+   "docs/REDLINE_RUSTLERS.md"
+  ],
+  "PULP SHIELD": [
+   "docs/REDLINE_CORE_RULES.md",
+   "docs/REDLINE_ENGINES.md",
+   "docs/REDLINE_RUSTLERS.md"
+  ],
+  "PROBE": [
+   "docs/REDLINE_CORE_RULES.md",
+   "docs/REDLINE_ENGINES.md",
+   "docs/REDLINE_RUSTLERS.md"
+  ],
+  "GHOST SIGNAL": [
+   "docs/REDLINE_CORE_RULES.md",
+   "docs/REDLINE_ENGINES.md",
+   "docs/REDLINE_RUSTLERS.md"
+  ]
+ },
+ "bw_diffs": [
+  {
+   "card": "BURST",
+   "doc": "docs/REDLINE_CARD_POOLS.md",
+   "line": 126,
+   "bw": 0,
+   "text": "Gain 1 BW. BURNED.",
+   "carddb_bw": 3
+  },
+  {
+   "card": "PROBE",
+   "doc": "docs/REDLINE_ENGINES.md",
+   "line": 111,
+   "bw": 1,
+   "text": "Target ICE: −2 STR this encounter.",
+   "carddb_bw": 0
+  }
+ ],
+ "text_diffs": [
+  {
+   "card": "PAYDAY",
+   "doc": "docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md",
+   "line": 229,
+   "bw": null,
+   "text": "3 CRED: +1 STR; 5 CRED: break 1 FORTRESS subroutine.",
+   "carddb": "Extract 12 CRED now. (+2 TRACE)"
+  },
+  {
+   "card": "BLACKOUT",
+   "doc": "docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md",
+   "line": 316,
+   "bw": null,
+   "text": "All ICE lose 4 STR this encounter. BURN.",
+   "carddb": "Skip the next Corporation Response. BURNED."
+  },
+  {
+   "card": "JAMMER",
+   "doc": "docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md",
+   "line": 320,
+   "bw": null,
+   "text": "Break one TRACE subroutine on each ICE.",
+   "carddb": "In the next Corporation Response, the first 2 TRACE subroutines add 0 TRACE (their ▸ effects don't happen)."
+  },
+  {
+   "card": "DEEP PROBE",
+   "doc": "docs/REDLINE_CARD_POOLS.md",
+   "line": 115,
+   "bw": 2,
+   "text": "Target ICE: −4 STR this encounter.",
+   "carddb": "Target ICE: −5 STR this encounter."
+  },
+  {
+   "card": "DEFRAG",
+   "doc": "docs/REDLINE_CARD_POOLS.md",
+   "line": 123,
+   "bw": 0,
+   "text": "Draw 1.",
+   "carddb": "Discard 1 card, then draw 2."
+  },
+  {
+   "card": "BURST",
+   "doc": "docs/REDLINE_CARD_POOLS.md",
+   "line": 126,
+   "bw": 0,
+   "text": "Gain 1 BW. BURNED.",
+   "carddb": "Gain 5 BW. Each time you play this card this encounter, it costs 1 more BW for the rest of the encounter."
+  },
+  {
+   "card": "SIDE CHANNEL",
+   "doc": "docs/REDLINE_CARD_POOLS.md",
+   "line": 173,
+   "bw": 2,
+   "text": "STR 3. Boost: 2 BW → +1 STR. Break: 2 BW.",
+   "carddb": "STR 3. Boost: 2 BW → +1 STR. Break: 2 BW. Any ICE type."
+  },
+  {
+   "card": "HOST TAKEOVER",
+   "doc": "docs/REDLINE_CARD_POOLS.md",
+   "line": 208,
+   "bw": 2,
+   "text": "Break 2 subroutines on target ICE with 5 or more virus counters.",
+   "carddb": "Break 2 subroutines on an ICE with 5 or more virus counters."
+  },
+  {
+   "card": "FORTRESS ICEPICK",
+   "doc": "docs/REDLINE_CORE_RULES.md",
+   "line": 366,
+   "bw": 1,
+   "text": "STR 1. Boost: 1 BW +1 STR. First break each turn free, then 1 BW per break.",
+   "carddb": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break."
+  },
+  {
+   "card": "FORTRESS ICEPICK",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 69,
+   "bw": 1,
+   "text": "STR 1. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break.",
+   "carddb": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break."
+  },
+  {
+   "card": "TUMBLER ICEPICK",
+   "doc": "docs/REDLINE_CORE_RULES.md",
+   "line": 367,
+   "bw": 1,
+   "text": "STR 3. Boost: 2 BW +1 STR. Break: 1 BW. *(Was the SIGYL Icepick; ROT-001.)*",
+   "carddb": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."
+  },
+  {
+   "card": "TUMBLER ICEPICK",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 70,
+   "bw": 1,
+   "text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW.",
+   "carddb": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."
+  },
+  {
+   "card": "VOID ICEPICK",
+   "doc": "docs/REDLINE_CORE_RULES.md",
+   "line": 368,
+   "bw": 1,
+   "text": "STR 0. Boost: 1 BW +1 STR. Break: 1 BW.",
+   "carddb": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."
+  },
+  {
+   "card": "VOID ICEPICK",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 71,
+   "bw": 1,
+   "text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW.",
+   "carddb": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."
+  },
+  {
+   "card": "BASIC EXTRACTOR",
+   "doc": "docs/REDLINE_ENGINES.md",
+   "line": 109,
+   "bw": 1,
+   "text": "End of your turn: extract 5 CRED.",
+   "carddb": "End of your turn: extract 3 CRED."
+  },
+  {
+   "card": "PROBE",
+   "doc": "docs/REDLINE_CORE_RULES.md",
+   "line": 372,
+   "bw": 0,
+   "text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",
+   "carddb": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine."
+  },
+  {
+   "card": "PROBE",
+   "doc": "docs/REDLINE_ENGINES.md",
+   "line": 111,
+   "bw": 1,
+   "text": "Target ICE: −2 STR this encounter.",
+   "carddb": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine."
+  },
+  {
+   "card": "PROBE",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 75,
+   "bw": 0,
+   "text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",
+   "carddb": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine."
+  },
+  {
+   "card": "PROBE",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 100,
+   "bw": 0,
+   "text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. *(ECHO-001: was 2.)*",
+   "carddb": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine."
+  },
+  {
+   "card": "PROBE",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 131,
+   "bw": 0,
+   "text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. *(RIOT-002: was 1.)*",
+   "carddb": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine."
+  },
+  {
+   "card": "PROBE",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 163,
+   "bw": 0,
+   "text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",
+   "carddb": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine."
+  },
+  {
+   "card": "GHOST SIGNAL",
+   "doc": "docs/REDLINE_CORE_RULES.md",
+   "line": 373,
+   "bw": 2,
+   "text": "The first TRACE added during the next Corporation Response is reduced to 0. BURNED for the rest of the Node.",
+   "carddb": "The first TRACE added in the next Corporation Response becomes 0. BURNED."
+  },
+  {
+   "card": "GHOST SIGNAL",
+   "doc": "docs/REDLINE_ENGINES.md",
+   "line": 112,
+   "bw": 2,
+   "text": "As Generalist.",
+   "carddb": "The first TRACE added in the next Corporation Response becomes 0. BURNED."
+  },
+  {
+   "card": "GHOST SIGNAL",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 76,
+   "bw": 2,
+   "text": "The first TRACE added in the next Corporation Response becomes 0. BURNED for the rest of the Node.",
+   "carddb": "The first TRACE added in the next Corporation Response becomes 0. BURNED."
+  },
+  {
+   "card": "GHOST SIGNAL",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 104,
+   "bw": 2,
+   "text": "As Generalist.",
+   "carddb": "The first TRACE added in the next Corporation Response becomes 0. BURNED."
+  },
+  {
+   "card": "GHOST SIGNAL",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 166,
+   "bw": 2,
+   "text": "As Generalist.",
+   "carddb": "The first TRACE added in the next Corporation Response becomes 0. BURNED."
+  },
+  {
+   "card": "PIVOT",
+   "doc": "docs/REDLINE_DECK_SYNERGY.md",
+   "line": 251,
+   "bw": 1,
+   "text": "Target ICE −2 STR this encounter. **CHAIN CLOAK:** −1 more.",
+   "carddb": "Target ICE −2 STR. CHAIN CLOAK: −1 more."
+  },
+  {
+   "card": "GARBAGE COLLECT",
+   "doc": "docs/REDLINE_DECK_SYNERGY.md",
+   "line": 254,
+   "bw": 0,
+   "text": "BURN 1 other card in your hand. Draw 1.",
+   "carddb": "BURN 1 other hand card for this Node. Draw 1."
+  },
+  {
+   "card": "TAIL CALL",
+   "doc": "docs/REDLINE_DECK_SYNERGY.md",
+   "line": 256,
+   "bw": 1,
+   "text": "Put a SCRIPT from your discard pile into your hand.",
+   "carddb": "Put a SCRIPT from discard into your hand."
+  },
+  {
+   "card": "FORCE REBOOT",
+   "doc": "docs/REDLINE_DECK_SYNERGY.md",
+   "line": 257,
+   "bw": 0,
+   "text": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
+   "carddb": "Shuffle discard into draw pile. This is a REBOOT. BURNED."
+  },
+  {
+   "card": "MINIMALIST",
+   "doc": "docs/REDLINE_DECK_SYNERGY.md",
+   "line": 259,
+   "bw": 1,
+   "text": "While your FOOTPRINT is in the **GHOST** band, your first break each turn costs 0 BW.",
+   "carddb": "While GHOST, your first break each turn costs 0 BW."
+  },
+  {
+   "card": "SCALPEL",
+   "doc": "docs/REDLINE_DECK_SYNERGY.md",
+   "line": 260,
+   "bw": 1,
+   "text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. **OVERKILL 2:** the break costs 0 BW.",
+   "carddb": "STR 2. Boost 1 BW: +1 STR. Break 1 BW. OVERKILL 2: break costs 0 BW."
+  },
+  {
+   "card": "ZERO FOOTPRINT",
+   "doc": "docs/REDLINE_DECK_SYNERGY.md",
+   "line": 262,
+   "bw": 1,
+   "text": "−1 TRACE for each card your FOOTPRINT is below the corporation's cap (maximum −10). BURNED.",
+   "carddb": "Reduce TRACE by cards below cap, maximum 10. BURNED."
+  },
+  {
+   "card": "BORROWED CREDENTIALS",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 98,
+   "bw": null,
+   "text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",
+   "carddb": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements and break costs. Costs 8 CRED."
+  },
+  {
+   "card": "SMASH & GRAB",
+   "doc": "docs/REDLINE_RUSTLERS.md",
+   "line": 136,
+   "bw": 1,
+   "text": "End of your turn: extract **3 CRED**. **+1 TRACE while your TRACE is under 20.** Spend **1 BW to uninstall** this Program and choose **another card in your hand** to CACHE until the **end of your next Rustler turn**. *(RIOT-005 supersedes RIOT-004 extraction.)*",
+   "carddb": "End turn: extract 3 CRED; +1 TRACE if below 20. 1 BW: uninstall this; CACHE another card in hand until the end of your next turn."
+  }
+ ]
+}

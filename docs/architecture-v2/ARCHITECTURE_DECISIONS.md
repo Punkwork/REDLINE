@@ -44,6 +44,7 @@ This is a curated, durable record of the architectural discussion, **not a verba
 | Rules/presentation separation | EXISTING GUARDRAIL | AGENTS.md and architecture docs |
 | Specific scene hierarchy | PROPOSED | SCENE_HIERARCHY.md |
 | New resource schema | PROPOSED | DATA_MODEL.md |
+| Canonical card data and drift enforcement (CSA-02) | PROPOSED | CANONICAL_SOURCE_ARCHITECTURE.md (CONSISTENCY-001a) |
 | Adapter API and signal design | PROPOSED | GAMEPLAY_INTERFACE.md |
 | Baseline tag and test results | PENDING VERIFICATION | VALIDATION.md |
 | Merge/release changes | NOT APPROVED | AGENTS.md |

@@ -1,0 +1,10 @@
+
+CORE_LOOP=true
+encounter DOORBELL_CAM hidden subs 4 STR 5
+B1 STR mode does not reveal | FAIL | hidden 4 -> 3, STR 5 -> 3
+B2 reveal mode reveals ALL, STR unchanged | FAIL | no mode parameter exists; one play reveals 1 of 4 and changes STR by -2
+B5 escalating cost across copies | PASS | costs 0 then 1
+B6 independent counter per ICE (two copies of the same ICE) | FAIL | cost on the second copy: 1 (counter keyed by ICE type id DOORBELL_CAM)
+B9 insufficient BW prevents the action | PASS | play_card returned false
+A  CardDB text equals approved printed rules | FAIL | CardDB: Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine.
+B8 cancellation without expenditure | FAIL | not testable: no choose-one step exists to cancel
