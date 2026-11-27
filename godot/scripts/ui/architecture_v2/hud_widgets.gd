@@ -45,6 +45,12 @@ class Explained extends Control:
 ## the window. Geometry fractions measured on the painted row.
 class MeterRow extends Explained:
 	var art: Texture2D
+	## F09 / ARCH-V2-007c: a warning pulse (low VITAE); steady red under reduced motion.
+	var warn := false:
+		set(v):
+			warn = v; set_process(v); queue_redraw()
+	var reduced_motion := false
+	var _t := 0.0
 	var ico: Texture2D
 	var draw_glyph := ""          # "ram" when no icon art exists
 	var value := 0
@@ -76,12 +82,20 @@ class MeterRow extends Explained:
 		for k in segments:
 			var cell := Rect2(t.position.x + k * (w + gap), t.position.y, w, t.size.y)
 			draw_rect(cell, colour if k < lit else Color(colour, 0.12))
+		if warn:
+			var a := 0.45 if reduced_motion else 0.25 + 0.25 * (0.5 + 0.5 * sin(_t * TAU * 1.2))
+			var g := StyleBoxFlat.new(); g.draw_center = false; g.border_color = Color(1.0, 0.2, 0.15, a + 0.3)
+			g.set_border_width_all(2); g.set_corner_radius_all(int(h / 2.0)); g.shadow_color = Color(1.0, 0.15, 0.1, a); g.shadow_size = 8
+			draw_style_box(g, r.grow(-1))
 		var font := VasTokens.FONT_READOUT
 		var px := int(h * 0.42)
 		var tw := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
 		var win_c := Vector2(size.x * 0.885, h * 0.5)
 		draw_string(font, Vector2(win_c.x - tw / 2.0, win_c.y + px * 0.36), text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, VasTokens.IVORY)
 		focus_ring()
+	func _process(d: float) -> void:
+		if not warn or reduced_motion: return
+		_t += d; queue_redraw()
 	func _ram_glyph(c: Vector2, s: float) -> void:
 		draw_rect(Rect2(c - Vector2(s, s) * 0.75, Vector2(s, s) * 1.5), Color("#7FE0D0"))
 		draw_rect(Rect2(c - Vector2(s, s) * 0.4, Vector2(s, s) * 0.8), Color("#0E2A26"))

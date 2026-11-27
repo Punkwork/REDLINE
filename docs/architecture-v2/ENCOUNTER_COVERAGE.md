@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 58 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 3 · OPEN 0 · OUT 2 · 64 rows.
+**Totals:** BUILT 61 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 0 · OPEN 0 · OUT 2 · 64 rows.
 
 | Status | Meaning |
 |---|---|
@@ -29,7 +29,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | H10 | LAYER count and layer CRED reserve | build_node_plate, RESERVE dial | `LayerMark` | BUILT | — | Ledger at the left end of the rail: LAYER hamburger, CRED, layer CRED (ARCH-V2-006d). |
 | H11 | CRED | CRED/RAM row | `CredValue` | BUILT | — | New CRED icon; red marching ants run left on extraction, then the value counts up (ARCH-V2-006d). |
 | H12 | Corporation ad plate / sign | CorporateDisplay | `AdPlate` | BUILT | — |  |
-| H13 | Graffiti decal (ADP) | DecalPlate, graffiti_label | — | BATCH4 | C06 CorporationPresentation |  |
+| H13 | Graffiti decal (ADP) | DecalPlate, graffiti_label | `Graffiti` | BUILT | — | Header gap before the ad plate; at most two readable stickers (Build 12 shows up to 4) (ARCH-V2-007c). |
 
 ## ICE
 
@@ -80,7 +80,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | C04 | Drag cards to play (PT11-UI 2) | FriendlyDropTarget | `HandFan` | BUILT | — | Click plays on release; drag: untargeted above the tray, targeted onto an ICE; one call each. |
 | C05 | Dim unplayable cards (PT11-UI 4) | FriendlyCard | `HandFan` | BUILT | — |  |
 | C06 | CACHED corner icon (CACHE-001, #17) | cache glow | `HandFan` | BUILT | — | Cyan disc on the art frame: ∞ (the encounter) or turns left; hover explains. |
-| C07 | Choice overlays | main._overlay_options | `ChoiceOverlay` | BUILT | — | PATIENT ZERO variant not yet mapped. |
+| C07 | Choice overlays | main._overlay_options | `ChoiceOverlay` | BUILT | — | All variants incl. PATIENT ZERO (on the ICE windows, ARCH-V2-007c). |
 | C08 | Toggle back to the board during a discard (#15) | none | `ChoiceOverlay` | BUILT | — | SHOW BOARD / BACK TO <choice> on every choice; kept across refreshes. |
 | C09 | Deck and discard viewers | DECK / COVERAGE buttons | `PileView` | BUILT | — | Click a counter: deck (sorted by name, order hidden), discard, burned. Esc or Close. |
 
@@ -108,6 +108,6 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | F05 | VOICE / M mute | VoiceButton | `SpeakerR` | BUILT | — | Click either grille or press M; saved to the app settings. |
 | F06 | KEY LEGEND | LegendButton | `Eye` | BUILT | — | Legend, tier, Node and layer on the eye hover (ARCH-V2-006g). |
 | F07 | Outcome (BREACH, flatline) | main overlays | `Outcome` | BUILT | — | Stand-in banner. |
-| F08 | Punch-card holder (SIGNAL-001) | update_punch_holder | — | BATCH4 | C05 integration |  |
-| F09 | Bleed and low-VITAE warning (ADP-1) | advance_bleed | — | BATCH4 | C06 presentation |  |
+| F08 | Punch-card holder (SIGNAL-001) | update_punch_holder | `Eye` | BUILT | — | On the eye hover (designer); a new card drops onto the eye (ARCH-V2-007c). |
+| F09 | Bleed and low-VITAE warning (ADP-1) | advance_bleed | `MeterVITAE` | BUILT | — | Bleed drives reveal, music, pixel steps, graffiti; VITAE meter pulses red at a quarter or less (ARCH-V2-007c). |
 | F10 | Reward, map and event screens | main._overlay_* | — | OUT | C17, outside the encounter slice |  |

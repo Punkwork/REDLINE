@@ -5,3 +5,5 @@
 - `v2_10_three_ice_void_hidden.jpg`: three ICE windows sharing the room.
 - `v2_31_corporation_ironwatch.jpg`, `v2_31_corporation_lucida.jpg`: the same screen dressed by IRONWATCH and LUCIDA (rooms, enamel; no ad plate yet).
 - `v2_32_trace30_pixel_step.jpg`: TRACE 30: the rooms and avatars at their pixel step; keys, plates and text sharp (007b).
+- `v2_33_graffiti_mask_off.jpg`: ADP graffiti in the header gap at Mask off (two stickers), 007c.
+- `v2_34_patient_zero.jpg`: PATIENT ZERO lights the ICE windows, 007c.

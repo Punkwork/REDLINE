@@ -33,10 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-23 — ARCH-V2-001 decision history and compliance gate (ChatGPT)
-
-At the designer's request, added `docs/architecture-v2/ARCHITECTURE_DECISIONS.md` (curated rationale and approval boundaries) and `COMPLIANCE_CHECKLIST.md` (evidence-based review checklist). Linked them from the blueprint README and required consultation before significant architecture changes in identical AGENTS.md and CLAUDE.md. No gameplay code changed, no baseline tests run, and no unreviewed implementation details approved.
-
 ## 2026-11-23 — ARCH-V2-001 static source audit (ChatGPT)
 
 Inspected GitHub source on `architecture-v2`: project/scene, UI/controller and interaction scripts, Game/CardDB/IceDB, and CI workflow. Added `docs/architecture-v2/STATIC_SOURCE_AUDIT.md` with source-grounded dependency map, proposed file structure, risks and regression matrix. Critical finding: current `CORE_LOOP := true` causes CI to skip legacy screenshot fixtures. No Godot execution, screenshot review, baseline verification or gameplay changes performed. Proposals remain subject to designer approval.
@@ -395,4 +391,8 @@ Designer supplied 22 `BG_` backgrounds from the art folder (staged from the desi
 ## 2026-11-26 — ARCH-V2-007b: corporation look on the V2 encounter (Claude Code)
 
 Window enamel and ad plate per corporation (`CorporationLook`), PIXEL-TRACE-001 and MOOD-PIXEL-001 in the V2 windows (`IcePanel.set_trace_pixel`, `apply_mood_look`; Build 12 shaders and timings reused), Build 12's music (`FriendlyMusic`) driven by bleed with the strike chime and effect sounds. Room crop biased to the floor (designer 21:41). Coverage I13, I14 BUILT. Tests: batch4 40/0, batch3 110/0, ice 202/0, coverage 545/0; screenshots 41. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 blueprint folder drafted (ChatGPT)" to the archive.)
+
+## 2026-11-26 — ARCH-V2-007c: graffiti, punch cards, low VITAE, PATIENT ZERO (Claude Code)
+
+Designer chose the header gap for graffiti and the eye hover for punch cards. Built the graffiti stickers (max two, wrapped), punch cards on the eye hover with an arrival drop, the VITAE warning pulse, and PATIENT ZERO on the ICE windows (`EncounterController.request_choose_ice`). Coverage: every BATCH4 row BUILT except integration. Tests: batch4 53/0, batch3 110/0, ice 202/0, coverage 547/0; screenshots 43. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 decision history and compliance gate (ChatGPT)" to the archive.)
 

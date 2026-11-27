@@ -33,6 +33,11 @@ const PROTOCOLS := Rect2(869, 14, 219, 68)
 const CAP_SLOTS := 3        ## UPL-001: 3 CAP slots (Ghostware/Hardware may add more later)
 const PROTOCOL_SLOTS := 3   ## designer: "start with 3"; more deployed than slots shows "+n"
 const AD := Rect2(1196, 1, 306, 94)
+## ARCH-V2-007c (designer 2026-11-26): ADP graffiti stickers in the header gap before the ad plate.
+const GRAFFITI := Rect2(1092, 4, 104, 90)
+const GRAFFITI_MAX := 2
+const ADP_STENCIL := preload("res://assets/fonts/StardosStencil-Regular.ttf")
+const ADP_MARKER := preload("res://assets/fonts/PermanentMarker-Regular.ttf")
 ## ARCH-V2-003s (designer 2026-11-26 15:34): the ICE enclosure spans the full width; the CRT moves
 ## to the lower left and holds the rig; the effects note sits under it; END TURN is a small brown
 ## power button; the meters move to the right of the hand. The second CRT
@@ -115,6 +120,9 @@ var pixel_shown := {}
 var pixel_target := {}
 var _pixel_tween: Tween
 var ad_plate: TextureRect
+var graffiti: Control
+var _graffiti_key := ""
+var punch_arrival: Control
 var ad_copy: Label
 ## Announcements the response waits for (Build 12 waited for its strike overlay).
 const HOLD_FOR := ["corp_countermeasure", "mask_off", "lockdown", "ice_lethal"]
@@ -234,6 +242,8 @@ func _build() -> void:
 	arrow = HudWidgets.TargetArrow.new(); arrow.name = "TargetArrow"; arrow.size = REF; stage.add_child(arrow)
 	_target_plaque = _build_target_plaque()
 	lane.target_chosen.connect(func(r):
+		if game.phase == "CHOICE" and String(game.pending.get("kind", "")) == "patient_zero":
+			ctrl.request_choose_ice(r); refresh(); return
 		var u := _pending_target; _pending_target = -1
 		if u >= 0: ctrl.request_play(u, r)
 		refresh())
@@ -279,6 +289,9 @@ func _build_header() -> void:
 	protocol_rack = HudWidgets.SlotRack.new(); protocol_rack.name = "ProtocolRack"
 	protocol_rack.setup(PROTOCOLS.size, "PROTOCOL", PROTOCOL_SLOTS, inspector); protocol_rack.position = PROTOCOLS.position
 	stage.add_child(protocol_rack)
+	graffiti = Control.new(); graffiti.name = "Graffiti"; graffiti.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	graffiti.position = GRAFFITI.position; graffiti.size = GRAFFITI.size; graffiti.clip_contents = true
+	stage.add_child(graffiti)
 	ad_plate = _art("chassis/V2_AD_PLATE_HALCYON.png", AD, "AdPlate")
 	# Approved programme line per corporation (CorporationLook.ad_plate; HALCYON only so far).
 	ad_copy = _label("", 19, Color("#8E2A1E"), VasTokens.FONT_PLAQUE_SEMI)
@@ -455,6 +468,7 @@ func refresh() -> void:
 		lane.set_look(CorporationLook.enamel(game.corporation), pixel_shown)
 		rail.sync(VisibleStateAdapter.response_model(game, ctrl))
 	_update_ad_plate()
+	_update_graffiti()
 	_handle_events()
 	_refresh_speakers()
 	_refresh_inspector()
@@ -466,7 +480,12 @@ func refresh() -> void:
 	eye.set_state(rev, game.strikes, game.lockdown)
 	eye.heading = VisibleStateAdapter.place_line(game)
 	eye.title = "LOCKDOWN" if game.lockdown else "THE EYE"
-	eye.lines = ["Hostile reveal %d%%. Strikes %d / 3%s." % [roundi(rev * 100.0), mini(game.strikes, 3), " · you can't leave this Node early" if game.lockdown else ""], "KEY LEGEND"]
+	eye.lines = ["Hostile reveal %d%%. Strikes %d / 3%s." % [roundi(rev * 100.0), mini(game.strikes, 3), " · you can't leave this Node early" if game.lockdown else ""],
+		"Punch cards %d / 3%s" % [game.punch_cards.size(), (": " + ", ".join(game.punch_cards)) if not game.punch_cards.is_empty() else ""], "KEY LEGEND"]
+	eye.picture = _punch_picture if not game.punch_cards.is_empty() else Callable()
+	## ARCH-V2-007c / F09: low VITAE (a quarter or less) makes the VITAE meter pulse red.
+	meters.VITAE.warn = game.vitae > 0 and game.vitae <= game.max_vitae / 4
+	meters.VITAE.reduced_motion = reduced_motion
 	ghost_reel.reduced_motion = reduced_motion
 	ghost_reel.set_items(VisibleStateAdapter.ghostware_models(game))
 	cap_rack.set_items(VisibleStateAdapter.cap_models(game))
@@ -521,6 +540,7 @@ func _handle_events() -> void:
 		if EVENT_FLYOUT.has(t): flyout.announce(EVENT_FLYOUT[t])
 		if FLASH_EVENTS.has(t) and not reduced_motion: _flash(FLASH_EVENTS[t])
 		if t in ["EV-14", "EV-15", "EV-16"]: music.play_strike()
+		if t == "PUNCH_CARD": _punch_arrives(String(e.get("corp", game.corporation)))
 	_on_events(last_events)
 
 ## ARCH-V2-006f: NUL/REM picks one line per batch of events (Build 12's priority order), speaks it
@@ -618,6 +638,77 @@ func _update_pixel() -> void:
 	_pixel_tween.tween_method(func(t: float): apply.call(FriendlyEncounter.blend_pixel(peak, step, t)), 0.0, 1.0, float(cfg.settle_seconds))
 	_pixel_tween.tween_callback(func(): apply.call(step.duplicate()))
 
+## ARCH-V2-007c: ADP graffiti (Build 12's counts: 1 sticker when the bleed reaches band A, 2 at B,
+## 4 at C; approved lines from adp_copy.json, the last one shared across corporations at C).
+func _update_graffiti() -> void:
+	var band := AdpCopy.band(AtomicDecoPunk.target(game.trace, game.strikes, false))
+	## Build 12 shows 1 / 2 / 4; the header gap holds two readable stickers, so it shows at most two
+	## (the newest two at band C). Interpretation to confirm (ARCH-V2-007c).
+	var full := int({"A": 1, "B": 2, "C": 4}.get(band, 0))
+	var count := mini(full, GRAFFITI_MAX)
+	var key := "%s|%s|%d" % [game.corporation, band, game.row]
+	if key == _graffiti_key: return
+	_graffiti_key = key
+	for c in graffiti.get_children(): graffiti.remove_child(c); c.queue_free()
+	var index := SignalCards.ORDER.find(game.corporation)
+	for k in count:
+		var n := full - count + k   # which of Build 12's stickers this is (the newest ones)
+		var shared := band == "C" and n == full - 1 and index > 0
+		var line := AdpCopy.pick("graffiti", "" if shared else game.corporation, n + game.row)
+		if line.is_empty(): break
+		var tag := _graffiti_sticker(line)
+		tag.name = "Sticker%d" % k
+		graffiti.add_child(tag)
+		tag.reset_size()
+		tag.position = Vector2(1 + (k % 2) * 3, 4 + k * 44)
+		tag.rotation_degrees = [-3.0, 2.5][k]
+
+func graffiti_count() -> int:
+	return graffiti.get_child_count()
+
+func _graffiti_sticker(line: Dictionary) -> PanelContainer:
+	var paper := PanelContainer.new(); paper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var st := StyleBoxFlat.new(); st.bg_color = FriendlyLook.TONER; st.set_content_margin_all(2)
+	paper.add_theme_stylebox_override("panel", st)
+	if String(line.get("style", "")) == "P":
+		paper.add_child(PunchedLetters.new(String(line.text)))
+	else:
+		## Two lines at most: the gap is narrow, so long lines wrap rather than shrink past reading.
+		var font: Font = ADP_STENCIL if String(line.get("style", "")) == "S" else ADP_MARKER
+		var px := 11
+		var w := GRAFFITI.size.x - 10
+		while px > 8 and font.get_string_size(String(line.text), HORIZONTAL_ALIGNMENT_LEFT, -1, px).x > w * 2.0 - 8: px -= 1
+		var l := FriendlyLook.label(String(line.text), px, FriendlyLook.PAPER, font)
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; l.custom_minimum_size.x = w
+		paper.add_child(l)
+	return paper
+
+## ARCH-V2-007c (designer: "Hover on the eye only"): the punch cards collected, drawn in the eye's
+## hover; a newly earned card drops onto the eye for a moment.
+func _punch_picture() -> Control:
+	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 6)
+	for corp in SignalCards.ORDER:
+		var c := PunchStock.new([corp] if game.punch_cards.has(corp) else [])
+		c.custom_minimum_size = Vector2(46, 30); row.add_child(c)
+	return row
+
+func _punch_arrives(corp: String) -> void:
+	if is_instance_valid(punch_arrival): punch_arrival.queue_free()
+	punch_arrival = PunchStock.new([corp]); punch_arrival.name = "PunchArrival"
+	punch_arrival.size = Vector2(92, 60)
+	var target := EYE.position + Vector2(EYE.size.x + 8, 8)
+	punch_arrival.position = target
+	stage.add_child(punch_arrival)
+	if reduced_motion or not is_inside_tree():
+		get_tree().create_timer(2.5).timeout.connect(func(): if is_instance_valid(punch_arrival): punch_arrival.queue_free()) if is_inside_tree() else null
+		return
+	punch_arrival.position.y = target.y - 70
+	var tw := create_tween()
+	tw.tween_property(punch_arrival, "position:y", target.y, 0.38).set_trans(Tween.TRANS_CUBIC)
+	tw.tween_interval(2.2)
+	tw.tween_property(punch_arrival, "modulate:a", 0.0, 0.4)
+	tw.tween_callback(punch_arrival.queue_free)
+
 func _update_ad_plate() -> void:
 	var ad := CorporationLook.ad_plate(game.corporation)
 	ad_plate.visible = not ad.is_empty()
@@ -675,8 +766,16 @@ func _refresh_hand() -> void:
 	## lights the ICE panels as targets (click one; ✕ or Esc cancels).
 	hand_fan.clear()
 	choice.open(_choice_spec())
-	var targeting := _pending_target >= 0 and game.phase == "PLAYER"
-	if not targeting: _pending_target = -1
+	var patient_zero := game.phase == "CHOICE" and String(game.pending.get("kind", "")) == "patient_zero"
+	var targeting := (_pending_target >= 0 and game.phase == "PLAYER") or patient_zero
+	if not targeting or patient_zero: _pending_target = -1
+	var plaque_text := "PATIENT ZERO: CHOOSE AN ICE TO INFECT (1 ROT)" if patient_zero else "CHOOSE AN ICE"
+	var plaque_label := _target_plaque.get_child(0).get_child(0) as Label
+	if plaque_label.text != plaque_text:
+		plaque_label.text = plaque_text
+		_target_plaque.get_child(0).get_child(1).visible = not patient_zero   # PATIENT ZERO can't be skipped
+		_target_plaque.reset_size()
+		_target_plaque.position.x = REF.x / 2.0 - _target_plaque.get_combined_minimum_size().x / 2.0
 	lane.set_targeting(targeting)
 	_target_plaque.visible = targeting and aiming_uid < 0   # the arrow replaces the plaque for the mouse
 	for c in game.hand:
@@ -716,6 +815,7 @@ func _choice_spec() -> Dictionary:
 			return {"kind": "cull", "title": "CULL", "text": "Choose up to %d more counters to remove." % int(p.get("n", 0)), "strains": strains,
 				"secondary": {"label": "Finish", "intent": "finish_cull"}}
 		"card_break": return {}   # chosen on the subroutine keys
+		"patient_zero": return {}  # chosen on the ICE windows (ARCH-V2-007c)
 	return {}
 
 func _build_target_plaque() -> Control:

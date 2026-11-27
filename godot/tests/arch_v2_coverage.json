@@ -134,10 +134,10 @@
    "area": "Header",
    "element": "Graffiti decal (ADP)",
    "prototype": "DecalPlate, graffiti_label",
-   "v2": "",
-   "status": "BATCH4",
-   "next": "C06 CorporationPresentation",
-   "note": ""
+   "v2": "Graffiti",
+   "status": "BUILT",
+   "next": "",
+   "note": "Header gap before the ad plate; at most two readable stickers (Build 12 shows up to 4) (ARCH-V2-007c)."
   },
   {
    "id": "I01",
@@ -447,7 +447,7 @@
    "v2": "ChoiceOverlay",
    "status": "BUILT",
    "next": "",
-   "note": "PATIENT ZERO variant not yet mapped."
+   "note": "All variants incl. PATIENT ZERO (on the ICE windows, ARCH-V2-007c)."
   },
   {
    "id": "C08",
@@ -624,20 +624,20 @@
    "area": "Flow",
    "element": "Punch-card holder (SIGNAL-001)",
    "prototype": "update_punch_holder",
-   "v2": "",
-   "status": "BATCH4",
-   "next": "C05 integration",
-   "note": ""
+   "v2": "Eye",
+   "status": "BUILT",
+   "next": "",
+   "note": "On the eye hover (designer); a new card drops onto the eye (ARCH-V2-007c)."
   },
   {
    "id": "F09",
    "area": "Flow",
    "element": "Bleed and low-VITAE warning (ADP-1)",
    "prototype": "advance_bleed",
-   "v2": "",
-   "status": "BATCH4",
-   "next": "C06 presentation",
-   "note": ""
+   "v2": "MeterVITAE",
+   "status": "BUILT",
+   "next": "",
+   "note": "Bleed drives reveal, music, pixel steps, graffiti; VITAE meter pulses red at a quarter or less (ARCH-V2-007c)."
   },
   {
    "id": "F10",

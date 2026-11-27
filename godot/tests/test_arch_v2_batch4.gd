@@ -29,6 +29,8 @@ func run() -> void:
 	await test_rooms()
 	print("- corporation look: enamel, ad plate, TRACE pixel steps, mood flicker, music (007b)")
 	await test_look()
+	print("- graffiti, punch cards, low VITAE, PATIENT ZERO (007c)")
+	await test_rest()
 	print("ARCH-V2 BATCH 4: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -111,3 +113,37 @@ func test_look() -> void:
 	check(sb.music.chime.playing, "strike chime triggered")
 	sb.queue_free(); await frames()
 
+
+func test_rest() -> void:
+	var sb := sandbox(); await frames(); var g := sb.game
+	# Graffiti in the header gap: none while friendly; more as the bleed rises; inside the gap.
+	check(sb.graffiti_count() == 0, "no graffiti while friendly")
+	sb.reduced_motion = true
+	g.trace = 25; sb.refresh()
+	var a := sb.graffiti_count()
+	g.strikes = 2; sb.refresh()
+	var c := sb.graffiti_count()
+	check(a >= 1 and c > a and c <= 4, "graffiti grows with the bleed (%d then %d)" % [a, c])
+	var gap := Rect2(IceEncounterSandbox.GRAFFITI.position, IceEncounterSandbox.GRAFFITI.size)
+	check(sb.graffiti.position == gap.position and sb.graffiti.clip_contents, "graffiti stays inside the header gap")
+	check(gap.end.x <= IceEncounterSandbox.AD.position.x and gap.position.x >= IceEncounterSandbox.PROTOCOLS.end.x, "the gap is between PROTOCOLS and the ad plate")
+	g.strikes = 0; g.trace = 0; sb.refresh()
+	# Punch cards: in the eye's hover; an arrival drops onto the eye.
+	check(String(sb.eye.lines[1]).begins_with("Punch cards 0 / 3"), "eye hover counts punch cards")
+	g.punch_cards.append("HALCYON"); g.events.append({"t": "PUNCH_CARD", "corp": "HALCYON"}); sb.refresh()
+	check(is_instance_valid(sb.punch_arrival) and sb.punch_arrival.visible, "a new punch card arrives at the eye")
+	check(sb.eye.picture.is_valid(), "eye hover shows the punch cards")
+	# Low VITAE: the VITAE meter pulses red at a quarter or less.
+	check(not sb.meters.VITAE.warn, "no warning at full VITAE")
+	g.vitae = g.max_vitae / 4; sb.refresh()
+	check(sb.meters.VITAE.warn, "VITAE meter warns at a quarter")
+	g.vitae = g.max_vitae; sb.refresh()
+	# PATIENT ZERO: the ICE windows light; clicking one infects it with 1 ROT (one call); no ✕.
+	g.pending = {"kind": "patient_zero"}; g.phase = "CHOICE"; sb.refresh(); await frames()
+	check(sb.lane.targeting and sb._target_plaque.visible, "PATIENT ZERO lights the ICE")
+	check(not sb.choice.visible, "no card overlay for PATIENT ZERO")
+	check(not sb._target_plaque.get_child(0).get_child(1).visible, "PATIENT ZERO can't be skipped")
+	var calls := sb.ctrl.game_calls
+	sb.lane.target_chosen.emit(g.enc.ice[1])
+	check(int(g.enc.ice[1].virus.get("ROT", 0)) == 1 and g.phase == "PLAYER" and sb.ctrl.game_calls == calls + 1, "chosen ICE gets 1 ROT, one call")
+	sb.queue_free(); await frames()

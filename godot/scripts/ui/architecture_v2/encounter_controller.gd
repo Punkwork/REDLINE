@@ -166,6 +166,15 @@ func end_turn() -> bool:
 	_after()
 	return true
 
+## ARCH-V2-007c: PATIENT ZERO (VECTOR ORIGIN): infect the chosen ICE with 1 ROT. One Game call.
+func request_choose_ice(ice_ref: Dictionary) -> bool:
+	var i := ice_index(ice_ref)
+	if i < 0 or game.phase != "CHOICE" or game.pending.get("kind", "") != "patient_zero": return false
+	game_calls += 1
+	game.choose_ice(i)
+	_after()
+	return true
+
 func response_pending() -> bool:
 	return game.phase == "RESPONSE" and not game.response_queue.is_empty()
 
