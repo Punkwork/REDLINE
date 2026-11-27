@@ -14,10 +14,10 @@
    "area": "Header",
    "element": "Brand mark: all-seeing eye (replaces the PANOPTICON plate)",
    "prototype": "encounter.gd top bar",
-   "v2": "Logo",
+   "v2": "Eye",
    "status": "BUILT",
-   "next": "Batch 3: eye replaces the plate (ARCH-V2-006a)",
-   "note": "Plate is built; the eye, top-left corner, is Batch 3."
+   "next": "",
+   "note": "Drawn eye until chassis/V2_EYE.png lands (ARCH-V2-006a)."
   },
   {
    "id": "H02",
@@ -74,30 +74,30 @@
    "area": "Header",
    "element": "Ghostware rail (any number, ORIGIN first)",
    "prototype": "build_ghost_rail",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "Header reel left of CAPS: one Ghostware visible, up/down arrows (ARCH-V2-006b)",
-   "note": "Hover shows full text and icon."
+   "v2": "GhostReel",
+   "status": "BUILT",
+   "next": "",
+   "note": "One visible, up/down arrows; hover shows text and art (ARCH-V2-006b)."
   },
   {
    "id": "H08",
    "area": "Header",
    "element": "Strike lamps (0-3) and LOCKDOWN",
    "prototype": "build_strike / strike lamps",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "Three lamps under the eye; LOCKDOWN: all red with a lock, plus a LOCKDOWN flyout (ARCH-V2-006h)",
-   "note": "No strike or LOCKDOWN state on the V2 screen today."
+   "v2": "Eye",
+   "status": "BUILT",
+   "next": "",
+   "note": "Three lamps under the eye; LOCKDOWN all red with a lock (ARCH-V2-006h). Flyout: R06."
   },
   {
    "id": "H09",
    "area": "Header",
-   "element": "HOSTILE REVEAL %",
+   "element": "HOSTILE REVEAL (alarm lamp)",
    "prototype": "reveal_percent / alarm housing",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "The eye is the alarm lamp: cool green to neon red as the reveal grows (ARCH-V2-006c)",
-   "note": "No % plate. The art reveal itself is Batch 4 presentation."
+   "v2": "Eye",
+   "status": "BUILT",
+   "next": "",
+   "note": "Eye lens cool green → neon red with the reveal (ARCH-V2-006c). Art reveal: I13/F09."
   },
   {
    "id": "H10",
@@ -594,10 +594,10 @@
    "area": "Flow",
    "element": "KEY LEGEND",
    "prototype": "LegendButton",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "Hover on the top-left eye, with tier/level and Node (ARCH-V2-006g)",
-   "note": ""
+   "v2": "Eye",
+   "status": "BUILT",
+   "next": "",
+   "note": "Legend, tier, Node and layer on the eye hover (ARCH-V2-006g)."
   },
   {
    "id": "F07",

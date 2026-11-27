@@ -23,8 +23,15 @@ class Explained extends Control:
 		focus_entered.connect(_show)
 		mouse_exited.connect(func(): if not has_focus(): _hide())
 		focus_exited.connect(_hide)
+	var heading := ""
+	var rows: Array = []              # icon rows ([kind, words]) for show_rich
+	var picture: Callable             # returns a Control drawn large in the panel (optional)
 	func _show() -> void:
-		if is_instance_valid(inspector) and title != "": inspector.show_info("", title, lines, get_global_rect(), self)
+		if not is_instance_valid(inspector) or title == "": queue_redraw(); return
+		if rows.is_empty() and not picture.is_valid() and heading == "":
+			inspector.show_info("", title, lines, get_global_rect(), self)
+		else:
+			inspector.show_rich(heading, title, lines, rows, get_global_rect(), self, picture.call() if picture.is_valid() else null)
 		queue_redraw()
 	func _hide() -> void:
 		if is_instance_valid(inspector): inspector.close(self)
@@ -561,3 +568,185 @@ static func draw_group_glyph(ci: CanvasItem, kind: String, c: Vector2, s: float,
 			var rr := Rect2(Vector2(c.x - s * 0.40, y), Vector2(s * 0.80, s * 0.18))
 			ci.draw_rect(rr, col, false, 2.0)
 			ci.draw_circle(Vector2(rr.position.x + rr.size.x - s * 0.10, rr.position.y + rr.size.y / 2.0), s * 0.045, col)
+
+## ARCH-V2-006a/c/g/h: the all-seeing eye in the top-left corner. Its lens is the HOSTILE REVEAL
+## alarm lamp: cool green with no reveal to near-neon red at full reveal, subtle. Three strike lamps
+## sit under it; at LOCKDOWN all three burn red with a lock mark. Hover/focus: tier, Node, reveal,
+## strikes, and the KEY LEGEND. Uses chassis/V2_EYE.png (white iris, tinted here) when it lands.
+class EyeLamp extends Explained:
+	var reveal := 0.0          # 0..1 hostile reveal (VisibleStateAdapter.hostile_reveal)
+	var strikes := 0
+	var lockdown := false
+	var reduced_motion := false
+	var t := 0.0
+	var art: Texture2D
+	const COOL := Color("#39E58C")
+	const HOT := Color("#FF2440")
+	func setup(sz: Vector2) -> void:
+		size = sz; custom_minimum_size = sz
+		art = V2Art.tex("chassis/V2_EYE.png", sz.x)
+	func _process(d: float) -> void:
+		if reduced_motion or reveal <= 0.0: return
+		t += d; queue_redraw()
+	func lens_colour() -> Color:
+		return COOL.lerp(HOT, clampf(reveal, 0.0, 1.0))
+	func set_state(r: float, st: int, lock: bool) -> void:
+		reveal = r; strikes = st; lockdown = lock
+		set_process(r > 0.0 and not reduced_motion)
+		queue_redraw()
+	func _draw() -> void:
+		var eye_d := minf(size.x, size.y - 18.0)
+		var c := Vector2(size.x / 2.0, eye_d / 2.0)
+		var r := eye_d / 2.0
+		var col := lens_colour()
+		# A slow, faint breath once the mask starts slipping (static under reduced motion).
+		var breath := 1.0 if reduced_motion or reveal <= 0.0 else 0.9 + 0.1 * sin(t * (1.5 + 3.0 * reveal))
+		if art:
+			draw_texture_rect(art, Rect2(c - Vector2(r, r), Vector2(eye_d, eye_d)), false)
+			draw_circle(c, r * 0.46, Color(col, 0.55 * breath))   # tint the white iris
+		else:
+			draw_circle(c + Vector2(0, 2), r, Color(0, 0, 0, 0.45))
+			draw_circle(c, r, Color("#8A5A36"))
+			draw_arc(c, r * 0.93, PI * 1.05, PI * 1.85, 24, Color("#F0C890"), r * 0.08, true)
+			draw_circle(c, r * 0.80, Color("#2A2522"))
+			draw_circle(c, r * 0.70, Color("#050404"))
+			for k in 6:
+				draw_circle(c, r * (0.52 - k * 0.07), Color(col, (0.10 + k * 0.10) * breath))
+			draw_circle(c, r * 0.10, Color(1, 1, 1, 0.85 * breath))
+			draw_circle(c + Vector2(-r * 0.32, -r * 0.34), r * 0.10, Color(1, 1, 1, 0.35))
+		# Strike lamps.
+		var lr := 5.5
+		for k in 3:
+			var p := Vector2(size.x / 2.0 + (k - 1) * 18.0, size.y - 11.0)
+			var lit := lockdown or k < strikes
+			draw_circle(p, lr + 1.5, Color("#1A1210"))
+			draw_circle(p, lr, (Color("#FF3030") if lockdown else Color("#FFB32E")) if lit else Color("#3A2A22"))
+			if lit: draw_circle(p, lr * 2.0, Color(Color("#FF3030") if lockdown else Color("#FFB32E"), 0.18))
+		if lockdown:
+			var lp := Vector2(size.x / 2.0 + 32.0, size.y - 12.0)
+			draw_rect(Rect2(lp + Vector2(-4, -1), Vector2(8, 7)), Color("#FF3030"))
+			draw_arc(lp + Vector2(0, -1), 3.0, PI, TAU, 10, Color("#FF3030"), 1.6, true)
+		if has_focus(): draw_arc(c, r + 3.0, 0, TAU, 40, VasTokens.FOCUS, 2.5, true)
+
+## ARCH-V2-006b: the Ghostware reel. One Ghostware shows in the window; the up/down arrows beside it
+## roll to the previous/next (ORIGIN first). Hover/focus the window: full name, text and the art large.
+## Uses controls/V2_GHOST_REEL.png when it lands; drawn until then.
+class GhostReel extends Control:
+	var items: Array = []     # [{name, text, origin, art}]
+	var index := 0
+	var inspector: KeyInspector
+	var window: Explained
+	var up: Button
+	var down: Button
+	var art: Texture2D
+	var roll := 0.0           # -1..1 drum offset while rolling (0 when still)
+	var reduced_motion := false
+	func setup(sz: Vector2, insp: KeyInspector) -> void:
+		size = sz; custom_minimum_size = sz; inspector = insp
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		art = V2Art.tex("controls/V2_GHOST_REEL.png", sz.x)
+		var aw := sz.x * 0.26
+		window = ReelWindow.new(); window.name = "GhostWindow"; window.inspector = insp; window.reel = self
+		window.position = Vector2(sz.x * 0.08, sz.y * 0.12); window.size = Vector2(sz.x * 0.62, sz.y * 0.76)
+		add_child(window)
+		up = _arrow("GhostUp", true, Rect2(sz.x - aw - 4, 6, aw, sz.y / 2.0 - 8))
+		down = _arrow("GhostDown", false, Rect2(sz.x - aw - 4, sz.y / 2.0 + 2, aw, sz.y / 2.0 - 8))
+		up.pressed.connect(func(): step(-1))
+		down.pressed.connect(func(): step(1))
+		set_items([])
+	func _arrow(n: String, is_up: bool, r: Rect2) -> Button:
+		var b := Button.new(); b.name = n; b.flat = true; b.focus_mode = Control.FOCUS_ALL
+		b.position = r.position; b.size = r.size
+		b.tooltip_text = ""
+		b.draw.connect(func():
+			var c := r.size / 2.0
+			var w := r.size.x * 0.32
+			var on := b.disabled == false
+			var col := VasTokens.IVORY if on else Color(VasTokens.IVORY, 0.25)
+			if b.is_hovered() or b.has_focus(): col = VasTokens.FOCUS
+			var pts := PackedVector2Array([c + Vector2(-w, w * 0.5), c + Vector2(w, w * 0.5), c + Vector2(0, -w * 0.6)]) if is_up \
+				else PackedVector2Array([c + Vector2(-w, -w * 0.5), c + Vector2(w, -w * 0.5), c + Vector2(0, w * 0.6)])
+			if art == null:
+				var sb := StyleBoxFlat.new(); sb.bg_color = Color("#2A1D16"); sb.border_color = Color("#B98A52")
+				sb.set_border_width_all(2); sb.set_corner_radius_all(5); b.draw_style_box(sb, Rect2(Vector2.ZERO, r.size))
+			b.draw_colored_polygon(pts, col))
+		add_child(b)
+		return b
+	func set_items(list: Array) -> void:
+		items = list
+		index = clampi(index, 0, maxi(0, items.size() - 1))
+		_sync()
+	func current() -> Dictionary:
+		return items[index] if index < items.size() else {}
+	func step(d: int) -> void:
+		if items.size() < 2: return
+		index = (index + d + items.size()) % items.size()
+		roll = 0.0 if reduced_motion else float(d)
+		_sync()
+		if window.has_focus() or window.get_global_rect().has_point(window.get_global_mouse_position()): window._show()
+	func _process(delta: float) -> void:
+		if roll == 0.0: set_process(false); return
+		roll = move_toward(roll, 0.0, delta * 6.0)
+		window.queue_redraw()
+	func _sync() -> void:
+		up.disabled = items.size() < 2; down.disabled = items.size() < 2
+		var it := current()
+		window.title = ("ORIGIN GHOSTWARE · " if it.get("origin", false) else "GHOSTWARE · ") + String(it.get("name", "")) if not it.is_empty() else "GHOSTWARE"
+		window.lines = [String(it.get("text", ""))] if String(it.get("text", "")) != "" else (["No Ghostware yet. Ghostware are permanent upgrades that are not cards."] if it.is_empty() else [])
+		if items.size() > 1: window.lines.append("%d of %d · use the arrows to roll" % [index + 1, items.size()])
+		up.queue_redraw(); down.queue_redraw(); window.queue_redraw()
+		set_process(roll != 0.0)
+	func _draw() -> void:
+		if art: draw_texture_rect(art, Rect2(Vector2.ZERO, size), false); return
+		var sb := StyleBoxFlat.new(); sb.bg_color = Color("#1E1510"); sb.border_color = Color("#8A5A36")
+		sb.set_border_width_all(3); sb.set_corner_radius_all(10); sb.anti_aliasing = true
+		draw_style_box(sb, Rect2(Vector2.ZERO, size))
+
+class ReelWindow extends Explained:
+	var reel: GhostReel
+	func _init() -> void:
+		super()
+		picture = func() -> Control:
+			var it := reel.current()
+			if it.is_empty(): return null
+			var big := GhostFace.new(); big.item = it; big.custom_minimum_size = Vector2(128, 128)
+			return big
+	func _draw() -> void:
+		var r := Rect2(Vector2.ZERO, size)
+		draw_rect(r, Color("#0B0806"))
+		var it := reel.current()
+		var off := reel.roll * size.y * 0.6
+		if not it.is_empty():
+			var s := minf(size.x, size.y) * 0.86
+			GhostFace.paint(self, it, Rect2(size / 2.0 - Vector2(s, s) / 2.0 + Vector2(0, off), Vector2(s, s)))
+		else:
+			draw_string(VasTokens.FONT_PLAQUE, Vector2(size.x / 2.0 - 4, size.y / 2.0 + 6), "–", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(VasTokens.IVORY, 0.25))
+		# Drum shading top and bottom.
+		for k in 6:
+			var a := 0.30 - k * 0.05
+			draw_rect(Rect2(0, k * 2.0, size.x, 2.0), Color(0, 0, 0, a))
+			draw_rect(Rect2(0, size.y - (k + 1) * 2.0, size.x, 2.0), Color(0, 0, 0, a))
+		draw_rect(r, Color("#E0B04A") if it.get("origin", false) else Color("#5A3E28"), false, 2.0)
+		focus_ring()
+
+## A Ghostware face: its painted art if there is one (assets/concept/ghostware/GW_<ID>.png), else
+## a round badge with initials (gold rim for ORIGIN), like the prototype.
+class GhostFace extends Control:
+	var item: Dictionary = {}
+	func _draw() -> void:
+		GhostFace.paint(self, item, Rect2(Vector2.ZERO, size))
+	static func paint(ci: CanvasItem, it: Dictionary, r: Rect2) -> void:
+		var path := String(it.get("art", ""))
+		var tex: Texture2D = CardView.art_for(path)
+		if tex:
+			ci.draw_texture_rect(tex, r, false); return
+		var c := r.get_center(); var rad := minf(r.size.x, r.size.y) / 2.0
+		ci.draw_circle(c, rad, Color("#E0B04A") if it.get("origin", false) else Color("#9FB7AE"))
+		ci.draw_circle(c, rad * 0.88, Color("#241A14"))
+		var words := String(it.get("name", "?")).split(" ", false)
+		var ini := ""
+		for w in words.slice(0, 2): ini += w.substr(0, 1)
+		var px := int(rad * 0.8)
+		var tw := VasTokens.FONT_PLAQUE.get_string_size(ini, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+		ci.draw_string(VasTokens.FONT_PLAQUE, c + Vector2(-tw / 2.0, px * 0.36), ini, HORIZONTAL_ALIGNMENT_LEFT, -1, px, VasTokens.IVORY)
+

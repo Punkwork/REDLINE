@@ -17,16 +17,19 @@ const REF := Vector2(1536, 864)
 const SEED := 711
 ## VAS-001 composition, reference pixels.
 const HEADER := Rect2(0, 0, 1536, 96)
-const LOGO := Rect2(8, 4, 300, 89)
-const TURN_ICON := Rect2(320, 31, 32, 32)
-const TURN := Rect2(360, 13, 112, 69)
-## ARCH-V2-005 (designer 2026-11-26 18:22): the turn indicator and the TRACE meter are half their
-## former width (252 → 126, 230 → 115); the freed header holds the CAPS and PROTOCOLS racks, three
-## slots each to start.
-const PHASE := Rect2(488, 16, 126, 63)
-const TRACE := Rect2(626, 11, 115, 74)
-const CAPS := Rect2(748, 14, 219, 68)
-const PROTOCOLS := Rect2(973, 14, 219, 68)
+## ARCH-V2-006a (designer 2026-11-26 19:20): the PANOPTICON plate is replaced by the all-seeing eye
+## in the very top-left corner, strike lamps under it; everything else moves left and the Ghostware
+## reel sits left of the CAPS rack. Negative space stays before the ad plate.
+const EYE := Rect2(10, 4, 76, 88)
+const TURN_ICON := Rect2(98, 31, 32, 32)
+const TURN := Rect2(136, 13, 112, 69)
+## ARCH-V2-005: the turn indicator and the TRACE meter are half their former width (252 → 126,
+## 230 → 115); the freed header holds the CAPS and PROTOCOLS racks, three slots each to start.
+const PHASE := Rect2(264, 16, 126, 63)
+const TRACE := Rect2(402, 11, 115, 74)
+const GHOST := Rect2(532, 12, 96, 72)
+const CAPS := Rect2(642, 14, 219, 68)
+const PROTOCOLS := Rect2(869, 14, 219, 68)
 const CAP_SLOTS := 3        ## UPL-001: 3 CAP slots (Ghostware/Hardware may add more later)
 const PROTOCOL_SLOTS := 3   ## designer: "start with 3"; more deployed than slots shows "+n"
 const AD := Rect2(1196, 1, 306, 94)
@@ -44,6 +47,23 @@ const TRAY := Rect2(272, 600, 984, 264)   ## ARCH-V2-003u: widened for up to 12 
 const HAND := Rect2(296, 592, 952, 264)   ## fan area: cards overhang the tray top like VAS-001
 const RACK := Rect2(1262, 604, 196, 196)
 const COUNTERS := Rect2(1262, 806, 196, 52)   ## horizontal, under the meters (ARCH-V2-003u)
+
+## ARCH-V2-006g: the KEY LEGEND, shown on the eye's hover. [icon, words]; key cap colours per ARCH-V2-003r.
+const KEY_LEGEND := [
+	["", "Key lit cream-amber: ready, will fire in the response."],
+	["", "Key bright red: the biggest PULP hit this response. Red: DEADLOCK."],
+	["", "Key amber: tumbled in this turn; dim amber: BOOTING. Unlit: broken."],
+	["HIDDEN_LIGHT", "Smoked glass: hidden until it fires."],
+	["PULP", "PULP: damage to VITAE (SHIELD absorbs it first)."],
+	["TRACE", "TRACE: at 40 you take a strike; the third strike is LOCKDOWN."],
+	["DISCARD", "DISCARD: discard cards from your hand."],
+	["CORTEX", "CORTEX: each counter is −1 DRAW."],
+	["BW_DRAIN", "BW DRAIN: less BANDWIDTH next turn."],
+	["DEADLOCK", "DEADLOCK: does nothing itself; break every DEADLOCK to BREACH."],
+	["INSERT", "INSERT: Bloatware goes into your deck."],
+	["BOOTING", "BOOTING: locked now, opens on a later turn."],
+	["PASSIVE", "PASSIVE: the ICE's standing ability."],
+]
 
 @export var auto_ready_rig := "FORTRESS_ICEPICK"
 @export var step_seconds := 0.45
@@ -64,6 +84,8 @@ var meters := {}
 var turn_counter: HudWidgets.FlipCounter
 var phase_plaque: HudWidgets.PhasePlaque
 var trace_gauge: HudWidgets.TraceGauge
+var eye: HudWidgets.EyeLamp
+var ghost_reel: HudWidgets.GhostReel
 var cap_rack: HudWidgets.SlotRack
 var protocol_rack: HudWidgets.SlotRack
 var counters: HudWidgets.CounterStack
@@ -164,9 +186,9 @@ func _art(rel: String, r: Rect2, n: String) -> TextureRect:
 
 func _build_header() -> void:
 	_art("chassis/V2_HEADER_BAR.png", HEADER, "HeaderBar")
-	var logo := _art("chassis/V2_LOGO_PLATE.png", LOGO, "Logo")
-	var title := _label("PANOPTICON", 40, VasTokens.AMBER, VasTokens.FONT_PLAQUE)
-	title.position = Vector2(LOGO.size.x * 0.27, LOGO.size.y * 0.18); logo.add_child(title)
+	eye = HudWidgets.EyeLamp.new(); eye.name = "Eye"; eye.inspector = inspector
+	eye.setup(EYE.size); eye.position = EYE.position; stage.add_child(eye)
+	eye.rows = KEY_LEGEND
 	var ti := TextureRect.new(); ti.name = "TurnIcon"; ti.texture = IceKey.art("ICON_TIMING_LIGHT")
 	ti.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; ti.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	ti.modulate = Color(VasTokens.IVORY, 0.85); ti.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -178,6 +200,8 @@ func _build_header() -> void:
 	phase_plaque.setup(PHASE.size); phase_plaque.position = PHASE.position; stage.add_child(phase_plaque)
 	trace_gauge = HudWidgets.TraceGauge.new(); trace_gauge.name = "Trace"; trace_gauge.inspector = inspector
 	trace_gauge.setup(TRACE.size); trace_gauge.position = TRACE.position; stage.add_child(trace_gauge)
+	ghost_reel = HudWidgets.GhostReel.new(); ghost_reel.name = "GhostReel"
+	ghost_reel.setup(GHOST.size, inspector); ghost_reel.position = GHOST.position; stage.add_child(ghost_reel)
 	cap_rack = HudWidgets.SlotRack.new(); cap_rack.name = "CapRack"
 	cap_rack.setup(CAPS.size, "CAP", CAP_SLOTS, inspector); cap_rack.position = CAPS.position; stage.add_child(cap_rack)
 	protocol_rack = HudWidgets.SlotRack.new(); protocol_rack.name = "ProtocolRack"
@@ -310,6 +334,14 @@ func refresh() -> void:
 	turn_counter.set_value(int(game.enc.get("turn", 0)))
 	phase_plaque.set_phase(game.phase == "RESPONSE")
 	trace_gauge.set_value(game.trace)
+	var rev := VisibleStateAdapter.hostile_reveal(game)
+	eye.reduced_motion = reduced_motion
+	eye.set_state(rev, game.strikes, game.lockdown)
+	eye.heading = VisibleStateAdapter.place_line(game)
+	eye.title = "LOCKDOWN" if game.lockdown else "THE EYE"
+	eye.lines = ["Hostile reveal %d%%. Strikes %d / 3%s." % [roundi(rev * 100.0), mini(game.strikes, 3), " · you can't leave this Node early" if game.lockdown else ""], "KEY LEGEND"]
+	ghost_reel.reduced_motion = reduced_motion
+	ghost_reel.set_items(VisibleStateAdapter.ghostware_models(game))
 	cap_rack.set_items(VisibleStateAdapter.cap_models(game))
 	protocol_rack.set_items(VisibleStateAdapter.protocol_models(game))
 	meters.VITAE.set_value(game.vitae, game.max_vitae, 10, str(game.vitae), "VITAE %d / %d" % [game.vitae, game.max_vitae])

@@ -81,7 +81,7 @@ func test_markdown(data: Dictionary) -> void:
 func test_header(sb: IceEncounterSandbox) -> void:
 	check(is_equal_approx(IceEncounterSandbox.PHASE.size.x, 252.0 / 2.0), "turn indicator is half its former width")
 	check(is_equal_approx(IceEncounterSandbox.TRACE.size.x, 230.0 / 2.0), "TRACE meter is half its former width")
-	var names := ["Logo", "TurnIcon", "Turn", "Phase", "Trace", "CapRack", "ProtocolRack", "AdPlate"]
+	var names := ["Eye", "TurnIcon", "Turn", "Phase", "Trace", "GhostReel", "CapRack", "ProtocolRack", "AdPlate"]
 	var rects := []
 	for n in names:
 		var c: Control = sb.stage.find_child(n, false, false)
@@ -94,7 +94,7 @@ func test_header(sb: IceEncounterSandbox) -> void:
 		for b in range(a + 1, rects.size()):
 			check(not rects[a][1].intersects(rects[b][1]), "%s and %s do not overlap" % [rects[a][0], rects[b][0]])
 	# Left to right: turn, phase, TRACE, CAPS, PROTOCOLS, ad.
-	var order := ["Turn", "Phase", "Trace", "CapRack", "ProtocolRack", "AdPlate"]
+	var order := ["Eye", "Turn", "Phase", "Trace", "GhostReel", "CapRack", "ProtocolRack", "AdPlate"]
 	for k in order.size() - 1:
 		var l: Control = sb.stage.find_child(order[k], false, false)
 		var r: Control = sb.stage.find_child(order[k + 1], false, false)

@@ -90,6 +90,21 @@ func show_info(heading: String, title: String, lines: Array, at: Rect2, who: Var
 	for l in lines: _rule("", String(l))
 	_place(at)
 
+## ARCH-V2-006: a panel with an optional picture (Ghostware art at full size) and icon rows (the
+## KEY LEGEND: [icon kind, words]); icon kinds are IceKey ICON_ names without the prefix.
+func show_rich(heading: String, title: String, lines: Array, rows: Array, at: Rect2, who: Variant = null, picture: Control = null) -> void:
+	_clear()
+	subject = who
+	if picture:
+		picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_image.add_child(picture); _image.show()
+	else: _image.hide()
+	if heading != "": _line(heading, 13, Color("#5E4B35"), VasTokens.FONT_PLAQUE_SEMI)
+	_line(title, 24, VasTokens.SEAFOAM_INK, VasTokens.FONT_PLAQUE)
+	for l in lines: _rule("", String(l))
+	for r in rows: _rule(String(r[0]), String(r[1]))
+	_place(at)
+
 func close(who: Variant = null) -> void:
 	if who != null and not is_same(who, subject): return
 	subject = null

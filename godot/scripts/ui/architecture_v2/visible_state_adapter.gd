@@ -243,3 +243,32 @@ static func cap_models(game: Game) -> Array:
 			out.append({"uid": int(c.get("uid", -1)), "id": id, "name": id.replace("_", " "), "kind": "CAP",
 				"text": String(c.get("text", "")), "art": "res://assets/architecture_v2/caps/%s.png" % id})
 	return out
+
+## ARCH-V2-006c: the hostile reveal as 0..1, from TRACE and strikes (the ADP bleed curve; Friendly 0,
+## Cracking 20%–60% from TRACE 20 to 39, strike 1 counts as Cracking, Mask off (2+ strikes) 100%).
+static func hostile_reveal(game: Game) -> float:
+	if game.strikes >= 2: return 1.0
+	if game.strikes == 0 and game.trace < 20: return 0.0
+	return AtomicDecoPunk.reveal(AtomicDecoPunk.target(game.trace, game.strikes, false))
+
+## ARCH-V2-006b: Ghostware for the reel, ORIGIN first (as the prototype's rail).
+static func ghostware_models(game: Game) -> Array:
+	var out := []
+	var r: Dictionary = CardDB.RUSTLERS.get(game.rustler, {})
+	if not r.is_empty():
+		out.append(_ghost(String(r.origin), String(r.origin_text), true))
+	for id in game.ghostware:
+		out.append(_ghost(String(id).replace("_", " "), "", false))
+	return out
+
+static func _ghost(n: String, text: String, origin: bool) -> Dictionary:
+	var key := n.to_upper().replace(" ", "_").replace("'", "").replace("’", "")
+	return {"name": n, "text": text, "origin": origin, "art": "res://assets/concept/ghostware/GW_%s.png" % key}
+
+## ARCH-V2-006g: where the run is, for the eye's hover.
+static func place_line(game: Game) -> String:
+	var n: Dictionary = game.node
+	var tier := String(n.get("tier", "T1")).replace("T", "TIER ")
+	var layers: Array = n.get("layers", [])
+	var lay := " · LAYER %d / %d" % [game.layer + 1, layers.size()] if layers.size() > 0 else ""
+	return "%s · %s · NODE %s %s%s" % [game.corporation, tier, String(n.get("id", "?")), String(n.get("name", "")), lay]
