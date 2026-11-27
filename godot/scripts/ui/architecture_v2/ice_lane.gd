@@ -78,6 +78,8 @@ func _arrange() -> void:
 
 ## ARCH-V2-007a: one continuous room behind all the windows. The image is fitted to cover the lane
 ## (keeping its aspect); each panel gets the part of it that lies behind its rectangle.
+@export_range(0.0, 1.0) var room_v_align := 0.85
+
 func set_room(friendly: Texture2D, hostile: Texture2D, reveal: float) -> void:
 	if friendly == null:
 		for p in _panels: p.set_room(null, null, Rect2(), 0.0)
@@ -85,7 +87,9 @@ func set_room(friendly: Texture2D, hostile: Texture2D, reveal: float) -> void:
 	var img := Vector2(friendly.get_width(), friendly.get_height())
 	var k := maxf(size.x / img.x, size.y / img.y)
 	var shown := img * k                          # the image's size on the lane
-	var off := (shown - size) / 2.0                # how much is cropped each side
+	## Horizontal crop centred; vertical crop biased down so more floor shows (designer 2026-11-26
+	## 21:41: "would rather see more floor"). 0 = top of the room, 1 = bottom.
+	var off := Vector2((shown.x - size.x) / 2.0, (shown.y - size.y) * room_v_align)
 	for p in _panels:
 		var r := Rect2(p.position, p.size * p.scale)
 		var uv := Rect2((r.position + off) / shown, r.size / shown)
