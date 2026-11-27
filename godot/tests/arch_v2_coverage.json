@@ -234,30 +234,30 @@
    "area": "ICE",
    "element": "Virus counters on ICE (WORM etc.)",
    "prototype": "scan_tag virus row",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C08 add-on: counter chips on the panel",
-   "note": "Shown only inside the CULL choice today."
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "Strain chips (initial + count) on the status strip; rule on hover. Checked in test_arch_v2_batch3."
   },
   {
    "id": "I11",
    "area": "ICE",
    "element": "Break feedback (cost spent)",
    "prototype": "show_break_feedback",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C16 / flyouts",
-   "note": ""
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "\"−n BW\" rises from the key a paid break used. Checked in test_arch_v2_batch3."
   },
   {
    "id": "I12",
    "area": "ICE",
    "element": "Strike overlay and lethal flash",
    "prototype": "build_strike, strike_flash",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "M06 flyouts from Game.events",
-   "note": ""
+   "v2": "Flash",
+   "status": "BUILT",
+   "next": "",
+   "note": "Red wash on strikes and lethal ICE (none under reduced motion) with TRACE STRIKE / MASK OFF / LOCKDOWN / LETHAL flyouts."
   },
   {
    "id": "I13",
@@ -335,9 +335,9 @@
    "element": "Event flyouts from Game.events (EV-xx)",
    "prototype": "toasts, punch arrival",
    "v2": "EventFlyout",
-   "status": "BATCH3",
-   "next": "M06: drive from Game.events",
-   "note": "Widget exists; only phase announcements wired."
+   "status": "BUILT",
+   "next": "",
+   "note": "Strike, MASK OFF, LOCKDOWN, DEADLOCK BREACHED, LETHAL, PARTING SHOT, RESERVE EXTRACTED; queued, ≤ 1.5 s each. Wording PROPOSED."
   },
   {
    "id": "G01",

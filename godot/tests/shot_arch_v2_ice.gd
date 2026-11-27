@@ -229,6 +229,18 @@ func run() -> void:
 	await shot("v2_23_parting_shot")
 	sb.end_key.release_focus(); sb.inspector.close()
 
+	# 10f. R06/I10: LOCKDOWN flyout mid-hold over the console (third strike), and virus chips.
+	await fresh()
+	quiet()
+	sb.game.add_trace(40 - sb.game.trace, false); sb.game.add_trace(40 - sb.game.trace, false); sb.game.add_trace(40 - sb.game.trace, false)
+	sb.refresh()
+	sb.flyout.hold_at("lockdown", 0.6)
+	await shot("v2_24_lockdown_flyout")
+	quiet()
+	sb.game.enc.ice[0].virus = {"ROT": 2, "WORM": 3}; sb.game.enc.ice[1].virus = {"LEECH": 1}
+	sb.refresh()
+	await shot("v2_25_virus_chips")
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

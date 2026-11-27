@@ -63,7 +63,7 @@ jobs:
             --rendering-driver opengl3 --path godot --script res://tests/shot_arch_v2_ice.gd \
             2>&1 | tee /tmp/shot_arch_v2_ice.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_arch_v2_ice.log; then exit 1; fi
-          grep -q 'ARCH-V2 ICE screenshots: 31 written' /tmp/shot_arch_v2_ice.log
+          grep -q 'ARCH-V2 ICE screenshots: 33 written' /tmp/shot_arch_v2_ice.log
       - name: Verify screenshot states and large-hand interaction
         shell: bash
         env:

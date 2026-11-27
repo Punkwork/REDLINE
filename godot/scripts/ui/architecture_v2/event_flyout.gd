@@ -22,6 +22,9 @@ var kind := ""
 var t := 0.0
 var playing := false
 var _queued := ""
+## R06: announcements that arrive while one plays wait their turn (at most QUEUE_MAX, oldest first).
+var _queue: Array = []
+const QUEUE_MAX := 3
 var _spec: Dictionary = {}
 
 const BAND_H := 118.0
@@ -37,9 +40,13 @@ func announce(k: String) -> void:
 	if not VasTokens.FLYOUT.has(k): return
 	if playing and k == kind: return
 	if playing:
-		_queued = k
+		if not _queue.has(k) and _queue.size() < QUEUE_MAX: _queue.append(k)
+		_queued = String(_queue[0]) if not _queue.is_empty() else ""
 		return
 	_start(k)
+
+func queued() -> Array:
+	return _queue.duplicate()
 
 func _start(k: String) -> void:
 	kind = k
@@ -53,6 +60,7 @@ func _start(k: String) -> void:
 ## Fixtures and design review: show an announcement frozen at time t (seconds into its 1.3 s run).
 func hold_at(k: String, at: float) -> void:
 	_queued = ""
+	_queue.clear()
 	_start(k)
 	set_process(false)
 	t = at
@@ -68,9 +76,10 @@ func advance(dt: float) -> void:
 		hide()
 		var done := kind
 		finished.emit(done)
-		if _queued != "" and _queued != done:
-			var next := _queued
-			_queued = ""
+		while not _queue.is_empty() and String(_queue[0]) == done: _queue.pop_front()
+		if not _queue.is_empty():
+			var next := String(_queue.pop_front())
+			_queued = String(_queue[0]) if not _queue.is_empty() else ""
 			_start(next)
 		else:
 			_queued = ""
@@ -150,4 +159,13 @@ func _draw() -> void:
 	draw_string_outline(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 14, Color(edge, 0.45 * text_alpha))
 	draw_string_outline(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 6, Color(0.04, 0.03, 0.03, text_alpha))
 	draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, Color(ink, text_alpha))
+	var glyph := String(_spec.get("glyph", ""))
+	if glyph != "":
+		# A padlock beside the title (open shackle for BREACHED), in the edge colour.
+		var g := Vector2(pos.x - px * 0.85, -px * 0.08)
+		var bw := px * 0.5; var bh := px * 0.4
+		draw_rect(Rect2(g + Vector2(-bw / 2.0, 0), Vector2(bw, bh)), Color(edge, text_alpha))
+		var sh := g + Vector2(0, 0) + (Vector2(bw * 0.28, -bh * 0.18) if glyph == "open_lock" else Vector2.ZERO)
+		draw_arc(sh, bw * 0.32, PI, TAU, 16, Color(edge, text_alpha), px * 0.08, true)
+		draw_circle(g + Vector2(0, bh * 0.45), px * 0.05, Color(0.04, 0.03, 0.03, text_alpha))
 	draw_set_transform_matrix(Transform2D.IDENTITY)

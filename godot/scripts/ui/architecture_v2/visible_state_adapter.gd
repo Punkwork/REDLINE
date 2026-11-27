@@ -42,7 +42,25 @@ static func ice_model(game: Game, ctrl: EncounterController, i: int, biggest: in
 		"keys": keys, "pool": pool, "hidden_pool": game.hidden_count(i) if tumbler else 0,
 		"broken": ice.broken.count(true), "subs": d.subs.size(),
 		"slots": int(d.get("slots", d.subs.size())) if tumbler else d.subs.size(),
+		"virus": virus_model(ice),
 	}
+
+## I10 (Core Rules §5.4 strains): virus counters on an ICE, in a fixed strain order.
+const STRAIN_RULE := {
+	"ROT": "−1 STR each (minimum 0).",
+	"SCRAMBLE": "This ICE's PULP −1 each when it acts.",
+	"BLIND": "This ICE's TRACE −1 each when it acts.",
+	"LEECH": "Extract 1 CRED each at the start of your turn.",
+	"WORM": "On your turn, remove 2 WORM to break 1 subroutine on this ICE (no Icepick, no BW).",
+}
+static func virus_model(ice: Dictionary) -> Array:
+	var out := []
+	var v: Dictionary = ice.get("virus", {})
+	for st in ["ROT", "SCRAMBLE", "BLIND", "LEECH", "WORM"]:
+		if int(v.get(st, 0)) > 0: out.append({"strain": st, "n": int(v[st]), "rule": STRAIN_RULE[st]})
+	for st in v:
+		if not STRAIN_RULE.has(st) and int(v[st]) > 0: out.append({"strain": String(st), "n": int(v[st]), "rule": ""})
+	return out
 
 static func key_model(game: Game, ctrl: EncounterController, i: int, s: int, order: int, biggest: int, mini: bool) -> Dictionary:
 	var ice: Dictionary = game.enc.ice[i]

@@ -37,6 +37,14 @@ const FONT_READOUT := preload("res://assets/fonts/SpaceMono-Bold.ttf")
 const FLYOUT := {
 	"rustler_turn": {"text": "RUSTLER TURN", "ink": Color("#FFF3D6"), "edge": Color("#29E3E8"), "band": Color("#0B3A40")},
 	"corp_countermeasure": {"text": "CORP COUNTERMEASURE", "ink": Color("#FFE9C8"), "edge": Color("#FF5A2A"), "band": Color("#4A0D08")},
+	## ARCH-V2-006h / R06 (PROPOSED wording and colours, UI-TYPO-001 catalogue 04 families):
+	"lockdown": {"text": "LOCKDOWN", "ink": Color("#FFF4EC"), "edge": Color("#FF2A3A"), "band": Color("#2A0305"), "glyph": "lock"},
+	"strike": {"text": "TRACE STRIKE", "ink": Color("#FFE9C8"), "edge": Color("#FF6A2A"), "band": Color("#4A1408")},
+	"mask_off": {"text": "MASK OFF", "ink": Color("#FFF4EC"), "edge": Color("#FF2A6A"), "band": Color("#2A0315")},
+	"breached": {"text": "DEADLOCK BREACHED", "ink": Color("#FFFAF2"), "edge": Color("#FF7A2A"), "band": Color("#1E0803"), "glyph": "open_lock"},
+	"ice_lethal": {"text": "LETHAL", "ink": Color("#FFF4F4"), "edge": Color("#FF2A55"), "band": Color("#2A030C")},
+	"parting_shot": {"text": "PARTING SHOT", "ink": Color("#FFE9C8"), "edge": Color("#FF8A3A"), "band": Color("#3A1A06")},
+	"full_extraction": {"text": "RESERVE EXTRACTED", "ink": Color("#FFF3D6"), "edge": Color("#3AE8A0"), "band": Color("#06301E")},
 }
 ## Refined-flyout timing (reference 02): enter 0–0.12 s, reveal to 0.25 s, hold to 1.10 s, exit by 1.30 s.
 ## UI-TYPO-001a caps any pass over rule text at 1–2 s; the total stays ≤ 1.5 s.

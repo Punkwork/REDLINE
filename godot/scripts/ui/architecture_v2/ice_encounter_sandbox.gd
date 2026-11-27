@@ -90,6 +90,12 @@ var eye: HudWidgets.EyeLamp
 var ledger: HudWidgets.RailLedger
 var log_panel: HudWidgets.LogPanel
 var rail_log: HudWidgets.Explained
+var flash: ColorRect
+## R06: the last batch of Game.events this screen handled (tests read it).
+var last_events: Array = []
+const EVENT_FLYOUT := {"EV-14": "strike", "EV-15": "mask_off", "EV-16": "lockdown", "EV-07": "breached",
+	"ICE_LETHAL": "ice_lethal", "PARTING_SHOT": "parting_shot", "EV-09": "full_extraction"}
+const FLASH_EVENTS := {"EV-14": 0.30, "EV-15": 0.38, "EV-16": 0.45, "ICE_LETHAL": 0.18}
 var ghost_reel: HudWidgets.GhostReel
 var cap_rack: HudWidgets.SlotRack
 var protocol_rack: HudWidgets.SlotRack
@@ -166,6 +172,10 @@ func _build() -> void:
 	choice.strain.connect(func(st): ctrl.request_cull(st); refresh())
 	stage.add_child(choice)
 	log_panel = HudWidgets.LogPanel.new(); stage.add_child(log_panel)
+	## I12: a brief red wash for strikes and lethal ICE (never under reduced motion).
+	flash = ColorRect.new(); flash.name = "Flash"; flash.color = Color(1.0, 0.1, 0.12, 0.0)
+	flash.mouse_filter = Control.MOUSE_FILTER_IGNORE; flash.size = REF; stage.add_child(flash)
+	stage.move_child(flash, flyout.get_index())
 	_target_plaque = _build_target_plaque()
 	lane.target_chosen.connect(func(r):
 		var u := _pending_target; _pending_target = -1
@@ -265,7 +275,9 @@ func _build_enclosure() -> void:
 	lane.drop_check = func(ice_ref: Dictionary, sub: int, uid: int) -> Dictionary:
 		var i := ctrl.ice_index(ice_ref)
 		return game.break_info(i, sub, uid) if i >= 0 and game.phase == "PLAYER" else {"ok": false}
-	lane.break_requested.connect(func(r, s, u): ctrl.request_break(r, s, u))
+	lane.break_requested.connect(func(r, s, u):
+		var bw_before := game.bw
+		if ctrl.request_break(r, s, u): _break_feedback(r, s, bw_before - game.bw))
 	stage.add_child(lane)
 	_art("controls/V2_RAIL_HOUSING.png", RAIL_HOUSING, "RailHousing")
 	## ARCH-V2-006i: the log opens from the rail. Hover on the rail's glass shows the latest lines;
@@ -348,6 +360,7 @@ func refresh() -> void:
 	if not game.enc.is_empty():
 		lane.sync(VisibleStateAdapter.ice_models(game, ctrl))
 		rail.sync(VisibleStateAdapter.response_model(game, ctrl))
+	_handle_events()
 	_refresh_inspector()
 	turn_counter.set_value(int(game.enc.get("turn", 0)))
 	phase_plaque.set_phase(game.phase == "RESPONSE")
@@ -394,6 +407,52 @@ func refresh() -> void:
 	if _banner.visible:
 		var title: Label = _banner.find_child("Title", true, false)
 		title.text = "FLATLINED" if game.phase == "DEAD" else ("ENCOUNTER COMPLETE · " + game.phase)
+
+## R06 / I12: this screen is the only reader of its Game's events (the sandbox owns its Game; at C05
+## integration the app shell hands them over). Each mapped event gets its flyout (queued, one at a
+## time); strikes and lethal ICE also get a short red wash. Never changes rules state.
+func _handle_events() -> void:
+	if game.events.is_empty(): return
+	last_events = game.events.duplicate()
+	game.events.clear()
+	for e in last_events:
+		var t := String(e.get("t", ""))
+		if t == "PARTING_SHOT" and int(e.get("fired", 0)) == 0: continue
+		if EVENT_FLYOUT.has(t): flyout.announce(EVENT_FLYOUT[t])
+		if FLASH_EVENTS.has(t) and not reduced_motion: _flash(FLASH_EVENTS[t])
+	_on_events(last_events)
+
+## Hook for the NUL/REM speakers (3e).
+func _on_events(_list: Array) -> void:
+	pass
+
+func _flash(peak: float) -> void:
+	if not is_inside_tree(): return
+	flash.color.a = peak
+	var tw := create_tween()
+	tw.tween_property(flash, "color:a", 0.0, 0.45)
+
+## I11: a small "−n BW" rises from the key a paid break used (none for free breaks).
+func _break_feedback(ice_ref: Dictionary, sub: int, spent: int) -> void:
+	if spent <= 0: return
+	var key: Control = null
+	for p in lane.panels():
+		if is_same(p.ice_ref, ice_ref): key = p.find_child("Key_S%d" % (sub + 1), true, false)
+	var at := key.get_global_rect().get_center() if key else get_viewport_rect().size / 2.0
+	var l := _label("−%d BW" % spent, 26, VasTokens.AMBER, VasTokens.FONT_PLAQUE)
+	l.name = "BreakFeedback"
+	l.add_theme_constant_override("outline_size", 6); l.add_theme_color_override("font_outline_color", Color(0.04, 0.03, 0.03))
+	l.z_index = 160; l.top_level = true
+	add_child(l)
+	l.reset_size()
+	l.global_position = at - l.size / 2.0
+	if reduced_motion or not is_inside_tree():
+		get_tree().create_timer(0.9).timeout.connect(l.queue_free) if is_inside_tree() else l.queue_free()
+		return
+	var tw := create_tween().set_parallel(true)
+	tw.tween_property(l, "global_position:y", l.global_position.y - 40.0, 0.8)
+	tw.tween_property(l, "modulate:a", 0.0, 0.8).set_delay(0.3)
+	tw.chain().tween_callback(l.queue_free)
 
 func toggle_log() -> void:
 	if log_panel.visible:

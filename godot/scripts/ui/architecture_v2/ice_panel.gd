@@ -238,6 +238,7 @@ func set_model(m: Dictionary) -> void:
 	passive_chip.visible = String(m.passive) != ""
 	passive_chip.custom_minimum_size = Vector2(L.strip_height * 0.82, L.strip_height * 0.82)
 	notes.visible = false
+	_sync_virus(m.get("virus", []))
 	# Tactical controls
 	_build_bank(m)
 
@@ -436,3 +437,33 @@ class ReturnArrow extends Control:
 			var hw := w * (0.24 if pass_i == 0 else 0.18)
 			draw_colored_polygon(PackedVector2Array([tip, tip + Vector2(hw * 1.4, -hw), tip + Vector2(hw * 1.4, hw)]), col)
 		draw_circle(top, w * 0.07, brass)
+
+## I10: one chip per virus strain on this ICE (strain initial + count); the rule on hover/focus.
+func _sync_virus(list: Array) -> void:
+	var row: Node = passive_chip.get_parent()
+	for c in row.get_children():
+		if c.name.begins_with("Virus_"): row.remove_child(c); c.queue_free()
+	var h := layout.strip_height * 0.82
+	for v in list:
+		var chip := VirusChip.new(); chip.name = "Virus_%s" % v.strain
+		chip.strain = String(v.strain); chip.n = int(v.n); chip.inspector = inspector
+		chip.title = "%s %d" % [v.strain, v.n]; chip.lines = [String(v.rule)] if String(v.rule) != "" else []
+		chip.custom_minimum_size = Vector2(h * 1.9, h)
+		row.add_child(chip)
+
+class VirusChip extends HudWidgets.Explained:
+	var strain := ""
+	var n := 0
+	const COL := {"ROT": Color("#9BCB3C"), "SCRAMBLE": Color("#E07AE0"), "BLIND": Color("#7FB7FF"), "LEECH": Color("#FFB32E"), "WORM": Color("#FF7A4A")}
+	func _draw() -> void:
+		var r := Rect2(Vector2.ZERO, size)
+		var col: Color = COL.get(strain, VasTokens.IVORY)
+		var sb := StyleBoxFlat.new(); sb.bg_color = Color("#14100C"); sb.border_color = col
+		sb.set_border_width_all(2); sb.set_corner_radius_all(int(size.y / 2.0)); sb.anti_aliasing = true
+		draw_style_box(sb, r)
+		var px := int(size.y * 0.6)
+		var t := "%s %d" % [strain.substr(0, 1), n]
+		var tw := VasTokens.FONT_PLAQUE.get_string_size(t, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+		draw_string(VasTokens.FONT_PLAQUE, Vector2((size.x - tw) / 2.0, size.y / 2.0 + px * 0.36), t, HORIZONTAL_ALIGNMENT_LEFT, -1, px, col)
+		focus_ring()
+

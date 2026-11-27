@@ -30,6 +30,8 @@ func run() -> void:
 	await test_header()
 	print("- rail: LAYER, CRED and extraction ants, log, parting shot")
 	await test_rail()
+	print("- events: flyouts, strikes, LOCKDOWN, wash, break feedback, virus chips")
+	await test_events()
 	print("ARCH-V2 BATCH 3: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -122,6 +124,63 @@ func test_rail() -> void:
 	var dl := false
 	for c in sb.rail.steps(): dl = dl or String(c.model.kind) == "DEADLOCK"
 	check(not dl, "parting-shot rail has no DEADLOCK")
+	sb.queue_free(); await frames()
+
+func test_events() -> void:
+	var sb := sandbox()
+	await frames()
+	var g := sb.game
+	sb.flyout.advance(10.0)
+	# A strike through the rules: TRACE reaches 40.
+	g.add_trace(40 - g.trace, false); sb.refresh()
+	check(sb.last_events.any(func(e): return e.t == "EV-14"), "strike event read by the screen")
+	check(g.events.is_empty(), "events drained once")
+	check(sb.flyout.kind == "strike" or sb.flyout.queued().has("strike"), "TRACE STRIKE flyout")
+	check(sb.eye.strikes == 1, "first strike lamp lit")
+	check(sb.flash.color.a > 0.0, "red wash on a strike")
+	# Second and third strikes: MASK OFF, then LOCKDOWN with its flyout.
+	g.add_trace(40 - g.trace, false); g.add_trace(40 - g.trace, false); sb.refresh()
+	check(g.lockdown and sb.eye.lockdown, "LOCKDOWN on the eye")
+	var kinds: Array = sb.flyout.queued(); kinds.append(sb.flyout.kind)
+	check(kinds.has("lockdown"), "LOCKDOWN flyout announced")
+	check(sb.flyout.queued().size() <= EventFlyout.QUEUE_MAX, "flyout queue capped")
+	var total := 0.0
+	while sb.flyout.playing and total < 20.0:
+		sb.flyout.advance(0.1); total += 0.1
+	check(not sb.flyout.playing and sb.flyout.queued().is_empty(), "queued flyouts play out")
+	check(total <= 1.5 * 4 + 0.2, "each flyout stays within 1.5 s (%.1f s for the queue)" % total)
+	sb.queue_free(); await frames()
+	# Reduced motion: flyouts still announce, no wash.
+	sb = sandbox(); sb.reduced_motion = true
+	await frames(); g = sb.game; sb.flyout.advance(10.0); sb.refresh()
+	g.add_trace(40 - g.trace, false); sb.refresh()
+	check(sb.flash.color.a == 0.0, "reduced motion: no red wash")
+	check(sb.flyout.kind == "strike", "reduced motion: flyout still announces")
+	sb.queue_free(); await frames()
+	# Break feedback through a real paid break; virus chips from the ICE's counters.
+	sb = sandbox(); await frames(); g = sb.game
+	sb.flyout.advance(10.0)
+	g.bw = 30
+	var tp := g.hand.filter(func(c): return c.id == "TUMBLER_ICEPICK")
+	if not tp.is_empty(): sb.ctrl.request_play(tp[0].uid)
+	g.bw = 30; sb.refresh(); await frames(2)
+	var panel: IcePanel = null
+	var sub := -1
+	for p in sb.lane.panels():
+		for k in p.model.keys:
+			if sub < 0 and bool(k.breakable) and int(k.cost) > 0: sub = int(k.sub); panel = p
+	check(sub >= 0, "a paid break is available")
+	if sub >= 0:
+		sb.lane.break_requested.emit(panel.ice_ref, sub, -1)
+		await frames(2)
+		check(sb.find_child("BreakFeedback", true, false) != null, "break shows the BW it spent")
+	g.enc.ice[0].virus = {"ROT": 2, "WORM": 3}; sb.refresh(); await frames(2)
+	panel = sb.lane.panels()[0]
+	var rot := panel.find_child("Virus_ROT", true, false)
+	check(rot != null and panel.find_child("Virus_WORM", true, false) != null, "virus chips on the ICE")
+	if rot:
+		rot.grab_focus(); await frames(2)
+		check(_inspector_text(sb).contains("ROT 2") and _inspector_text(sb).contains("STR"), "virus chip explains its strain")
 	sb.queue_free(); await frames()
 
 func _inspector_text(sb: IceEncounterSandbox) -> String:
