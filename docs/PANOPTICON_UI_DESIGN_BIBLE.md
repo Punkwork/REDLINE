@@ -1269,3 +1269,9 @@ Effective immediately, the proposed standalone CHAIN mechanic (CHAIN-002 through
 
 ## Uplink functional UI direction — UPLINK-SPEC-001
 Mechanical console with reusable V2 components, contextual hover/flyouts, no new economic meters. Component IDs UPL-UI-001–010 proposed, pending register audit and detailed UI approval. Distinct Mini-Boss map category icon; conceal identity and ability until entry (MINIBOSS-003). See Master Design.
+
+
+## UI-IDENTITY-001 — Architecture communicates allegiance (approved 2026-11-27)
+**Architecture communicates allegiance.** The physical and visual construction of an environment should communicate its relationship to institutional power, surveillance and individual autonomy. Corporate environments express standardization, order and institutional authority; the Underworld expresses salvaged, adapted technology, individualism and clandestine commerce. Distinction extends beyond palette to architecture, materials, lighting, atmosphere and psychological experience. The Underworld is not necessarily safe or beyond surveillance. BG_NODE_UPLINK_UNDERWORLD.png is the principal artistic reference for the Black Market Uplink.
+
+**Shared functionality. Distinct visual identity.** Reuse genuinely shared behavior, data bindings, transaction logic and interaction mechanisms, not necessarily visual presentation. Each Node may have its own artwork, materials, physical controls, animation and sound. Maintain interaction consistency without visual uniformity; never let component reuse dictate artistic direction or force premature abstraction. Apply this principle to Uplink decomposition and future Architecture V2 UI work. No implementation or asset changes authorized by this design record.
