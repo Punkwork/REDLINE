@@ -98,6 +98,9 @@ var log_panel: HudWidgets.LogPanel
 var rail_log: HudWidgets.Explained
 var flash: ColorRect
 var pile_view: ChoiceOverlay
+var arrow: HudWidgets.TargetArrow
+var aiming_uid := -1
+var _aim_moved := false
 var speakers: Array = []
 var nr := NulRem.new()
 var sequencer := ResponseSequencer.new()
@@ -215,6 +218,7 @@ func _build() -> void:
 	sequencer.step_resolved.connect(_effect_feedback)
 	sequencer.step_started.connect(func(_s): refresh())
 	add_child(sequencer)
+	arrow = HudWidgets.TargetArrow.new(); arrow.name = "TargetArrow"; arrow.size = REF; stage.add_child(arrow)
 	_target_plaque = _build_target_plaque()
 	lane.target_chosen.connect(func(r):
 		var u := _pending_target; _pending_target = -1
@@ -625,7 +629,7 @@ func _refresh_hand() -> void:
 	var targeting := _pending_target >= 0 and game.phase == "PLAYER"
 	if not targeting: _pending_target = -1
 	lane.set_targeting(targeting)
-	_target_plaque.visible = targeting
+	_target_plaque.visible = targeting and aiming_uid < 0   # the arrow replaces the plaque for the mouse
 	for c in game.hand:
 		var cv := _card_view(VisibleStateAdapter.card_model(game, c, "hand"))
 		cv.selected = int(c.uid) == _pending_target
@@ -702,7 +706,69 @@ func _card_view(m: Dictionary) -> CardView:
 		if bool(m.get("target", false)): _pending_target = u; refresh()
 		else: ctrl.request_play(u); refresh())
 	cv.drag_dropped.connect(_on_card_dropped)
+	cv.aim_started.connect(func(u): start_aim(u, cv))
 	return cv
+
+## ARCH-V2-006k: aim a targeted card. Press and hold the card: an arrow runs from it to the pointer
+## and the ICE light up; release over an ICE plays the card on it (one controller call); release
+## anywhere else cancels. A plain click (release on the card) keeps the arrow until the next click.
+## Esc or right-click cancels. Keyboard play keeps the CHOOSE AN ICE plaque.
+func start_aim(uid: int, cv: CardView) -> void:
+	if responding or game.phase != "PLAYER": return
+	aiming_uid = uid; _aim_moved = false
+	_pending_target = uid
+	inspector.close()
+	var r := cv.get_global_rect()
+	arrow.from = _to_stage(Vector2(r.get_center().x, r.position.y + 12.0))
+	arrow.to = _to_stage(get_global_mouse_position())
+	arrow.over = Rect2()
+	arrow.show(); arrow.queue_redraw()
+	cv.selected = true; cv.queue_redraw()
+	lane.set_targeting(true)
+
+func _to_stage(p: Vector2) -> Vector2:
+	return (p - stage.global_position) / stage.scale
+
+func _panel_at(global: Vector2) -> IcePanel:
+	for p in lane.panels():
+		if p.get_global_rect().has_point(global): return p
+	return null
+
+func aim_at(global: Vector2) -> void:
+	arrow.to = _to_stage(global)
+	var p := _panel_at(global)
+	arrow.over = Rect2(_to_stage(p.get_global_rect().position), p.get_global_rect().size / stage.scale) if p else Rect2()
+	if arrow.from.distance_to(arrow.to) > 24.0: _aim_moved = true
+	arrow.queue_redraw()
+
+func release_aim(global: Vector2) -> void:
+	if aiming_uid < 0: return
+	var p := _panel_at(global)
+	if p == null and not _aim_moved: return   # a plain click: keep aiming until the next click
+	var uid := aiming_uid
+	cancel_aim()
+	if p: ctrl.request_play(uid, p.ice_ref)
+	refresh()
+
+func cancel_aim() -> void:
+	aiming_uid = -1; _pending_target = -1
+	arrow.hide()
+	lane.set_targeting(false)
+
+func _input(e: InputEvent) -> void:
+	if aiming_uid < 0: return
+	if e is InputEventMouseMotion:
+		aim_at(e.global_position)
+	elif e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
+		if e.pressed:
+			# Click mode: the second click decides (on an ICE: play it there; elsewhere: cancel).
+			_aim_moved = true
+			release_aim(e.global_position)
+			get_viewport().set_input_as_handled()
+		else:
+			release_aim(e.global_position)
+	elif (e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_RIGHT and e.pressed) or e.is_action_pressed("ui_cancel"):
+		cancel_aim(); refresh(); get_viewport().set_input_as_handled()
 
 ## C04 (PT11-UI 2): a card dragged out of the hand. Untargeted cards play when dropped anywhere above
 ## the hand tray; targeted cards play on the ICE panel they were dropped on. One controller call.

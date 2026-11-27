@@ -13,6 +13,9 @@ signal pressed(uid: int)
 ## C04 (PT11-UI 2): a drag that ended over no drop target, with the global point it ended at. The
 ## screen decides: untargeted cards play when dropped above the hand tray; targeted ones on an ICE.
 signal drag_dropped(uid: int, at: Vector2)
+## ARCH-V2-006k (designer 2026-11-26 20:37): a targeted card is aimed, not dragged: press and hold
+## it and an arrow runs from the card to the pointer; release over an ICE to play it there.
+signal aim_started(uid: int)
 
 const BASE := Vector2(140, 221)
 const FACE := Color("#F6F1E4")
@@ -68,6 +71,8 @@ func _gui_input(e: InputEvent) -> void:
 	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
 		accept_event()
 		if e.pressed:
+			if draggable and bool(model.get("target", false)) and bool(model.get("playable", false)):
+				grab_focus(); aim_started.emit(uid()); return
 			_down = true; grab_focus()
 		elif _down:
 			_down = false
@@ -76,7 +81,7 @@ func _gui_input(e: InputEvent) -> void:
 		accept_event(); pressed.emit(uid())
 
 func _get_drag_data(_at: Vector2) -> Variant:
-	if not draggable or not bool(model.get("playable", false)): return null
+	if not draggable or not bool(model.get("playable", false)) or bool(model.get("target", false)): return null
 	_down = false; _dragging = true
 	if is_instance_valid(inspector): inspector.close(self)
 	var holder := Control.new()

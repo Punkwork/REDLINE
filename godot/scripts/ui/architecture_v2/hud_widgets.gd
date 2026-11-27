@@ -946,3 +946,40 @@ class SpeakerGrille extends Explained:
 		if muted:
 			draw_line(Vector2(size.x * 0.2, size.y * 0.85), Vector2(size.x * 0.8, size.y * 0.15), Color("#FF3A2A"), 3.5, true)
 		focus_ring()
+
+## ARCH-V2-006k: the targeting arrow. A curved line from the aimed card to the pointer, dotted trail
+## and an arrowhead; it turns bright and rings the ICE when the pointer is over a valid target.
+class TargetArrow extends Control:
+	var from := Vector2.ZERO
+	var to := Vector2.ZERO
+	var over := Rect2()        # the hovered ICE panel (stage coords); empty when none
+	func _init() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		hide()
+	func curve_point(t: float) -> Vector2:
+		var mid := (from + to) / 2.0
+		var lift := clampf(from.distance_to(to) * 0.35, 40.0, 220.0)
+		var ctrl := Vector2(mid.x - (to.x - from.x) * 0.25, minf(from.y, to.y) - lift)
+		return from.lerp(ctrl, t).lerp(ctrl.lerp(to, t), t)
+	func _draw() -> void:
+		var hot := over.has_area()
+		var col := VasTokens.FOCUS if hot else Color(VasTokens.IVORY, 0.92)
+		if hot:
+			var ring := StyleBoxFlat.new(); ring.draw_center = false; ring.border_color = VasTokens.FOCUS
+			ring.set_border_width_all(6); ring.set_corner_radius_all(30); ring.anti_aliasing = true
+			ring.shadow_color = Color(VasTokens.FOCUS, 0.4); ring.shadow_size = 14
+			draw_style_box(ring, over.grow(4))
+		var pts := PackedVector2Array()
+		var n := 32
+		for k in n + 1: pts.append(curve_point(float(k) / n))
+		draw_polyline(pts, Color(0, 0, 0, 0.45), 11.0, true)
+		draw_polyline(pts, col, 6.0, true)
+		# Arrowhead along the last segment.
+		var tip := pts[n]
+		var dir := (pts[n] - pts[n - 3]).normalized()
+		var side := Vector2(-dir.y, dir.x)
+		var head := PackedVector2Array([tip + dir * 10.0, tip - dir * 18.0 + side * 14.0, tip - dir * 18.0 - side * 14.0])
+		draw_colored_polygon(head, Color(0, 0, 0, 0.45))
+		draw_colored_polygon(PackedVector2Array([tip + dir * 7.0, tip - dir * 15.0 + side * 11.0, tip - dir * 15.0 - side * 11.0]), col)
+		draw_circle(from, 7.0, col)
+

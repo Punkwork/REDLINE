@@ -11,3 +11,4 @@ From `godot/tests/shot_arch_v2_ice.gd` at 1600 × 1000 (Godot 4.3, software GL).
 - `v2_26_cached_cards.jpg`: CACHED corner icons (∞ and 2 turns).
 - `v2_27_deck_viewer.jpg`: the deck viewer (sorted by name).
 - `v2_28_discard_show_board.jpg`: SHOW BOARD during a discard, with BACK TO DISCARD 1.
+- `v2_29_targeting_arrow.jpg`: aiming PROBE: the arrow from the card to CAPTCHA, which is ringed (ARCH-V2-006k).

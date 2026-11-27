@@ -255,6 +255,17 @@ func run() -> void:
 	await shot("v2_28_discard_show_board")
 	sb.choice.set_peek(false)
 
+	# 10h. ARCH-V2-006k: aiming PROBE with the targeting arrow, pointer over CAPTCHA.
+	await fresh()
+	quiet()
+	for c in sb.hand_fan.cards():
+		if c is CardView and bool(c.model.target) and bool(c.model.playable):
+			sb.start_aim(c.uid(), c)
+			sb.aim_at(sb.lane.panels()[1].get_global_rect().get_center() + Vector2(-60, 40))
+			break
+	await shot("v2_29_targeting_arrow")
+	sb.cancel_aim(); sb.refresh()
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

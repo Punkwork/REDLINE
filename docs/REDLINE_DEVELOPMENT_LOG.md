@@ -33,13 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-22 — Playtest 12: PT11 fixes and TUNE-002 (Claude Code)
-
-**PT11-BUG-1:** the stuck panel was the pinned card inspection (opened by clicking a rack card); it closed only on a right-click or Esc. It now closes on any click on it, a click outside it, or a phase change. **PLAY-002 fix:** the new hit sounds had no entry in the ADP effect volumes, so loading them threw an error and Playtest 11's per-type sounds never played; they now default to 0.8. **PT11-UI:** parting-shot total on the HUD and END TURN tooltip; untargeted cards drop anywhere above the hand tray; plain-word key tips for the new effects and riders; unplayable cards dim. **TUNE-002:** AMEND 1; TERMS OF SERVICE PULP 3.
-
-**Tests:** `test_game.gd` 176/0; headless start-up has no script errors. Screenshot fixtures stay skipped under `CORE_LOOP`.
-
-
 ## 2026-11-22 — PROBE-004: PROBE choose-one (Claude)
 
 **Designer:** PROBE does what it does now OR reveals hidden subroutines on a VOID, same costs. Recorded in the master design, `REDLINE_CORE_LOOP.md` (decision row, STRIP-001 VOID rule), HANDOFF (Claude Code TO DO) and checklist question 8. **Interpretations to confirm:** reveal = all face-down subroutines; the −2 STR mode no longer reveals; reveal unavailable with nothing face-down; the choice is shown only on a VOID. **Code changes:** none.
@@ -396,4 +389,8 @@ Designer: "start batch 3" (19:22). Built in five commits (3a header, 3b rail, 3c
 ## 2026-11-26 — ARCH-V2-006j: TRACE STRIKE banner removed; Batch 3 interpretations approved (Claude Code)
 
 Designer (20:35): remove the TRACE STRIKE banner, keep the rest under the typography rules; the other Batch 3 choices approved. Removed the banner and its token; the response no longer waits on it. Tests: `test_arch_v2_batch3.gd` 94/0, `test_arch_v2_ice.gd` 201/0. No rules change.
+
+## 2026-11-26 — ARCH-V2-006k: targeting arrow (Claude Code)
+
+Designer (20:37): aim targeted cards with an arrow instead of clicking an ICE. Built `HudWidgets.TargetArrow` and the aim flow in the sandbox (press and hold, arrow to the pointer, ring on the ICE under it, release to play; click mode and Esc/right-click cancel); targeted cards no longer start a plain drag. Tests: `test_arch_v2_batch3.gd` 103/0, `test_arch_v2_ice.gd` 201/0; screenshots 37. No rules change. (LOG-001: moved "2026-11-22 — Playtest 12: PT11 fixes and TUNE-002 (Claude Code)" to the archive.)
 

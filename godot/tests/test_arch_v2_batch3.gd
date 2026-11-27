@@ -39,6 +39,8 @@ func run() -> void:
 	await test_speakers()
 	print("- response sequencer (C03)")
 	await test_sequencer()
+	print("- targeting arrow (ARCH-V2-006k)")
+	await test_arrow()
 	print("ARCH-V2 BATCH 3: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -345,6 +347,57 @@ func test_sequencer() -> void:
 	# Leaving mid-response: the screen goes away, nothing else resolves, no errors.
 	sb.queue_free(); await frames(30)
 	check(true, "screen freed mid-response")
+
+func _mouse(btn_pressed: bool, at: Vector2) -> InputEventMouseButton:
+	var e := InputEventMouseButton.new(); e.button_index = MOUSE_BUTTON_LEFT; e.pressed = btn_pressed
+	e.position = at; e.global_position = at
+	return e
+
+func test_arrow() -> void:
+	var sb := sandbox(); await frames(); var g := sb.game
+	sb.flyout.advance(10.0)
+	var probe := _hand_card(sb, func(m): return bool(m.target) and bool(m.playable))
+	check(probe != null, "a playable PROBE")
+	if probe == null: sb.queue_free(); return
+	var pu := probe.uid()
+	check(probe._get_drag_data(Vector2.ZERO) == null, "targeted cards aren't dragged; they're aimed")
+	# Press and hold: the arrow appears, the ICE light up, no plaque.
+	probe._gui_input(_mouse(true, Vector2(20, 20)))
+	check(sb.aiming_uid == pu and sb.arrow.visible, "press and hold starts the arrow")
+	check(not sb._target_plaque.visible, "no CHOOSE AN ICE plaque while aiming with the mouse")
+	var panel: IcePanel = sb.lane.panels()[1]
+	var at := panel.get_global_rect().get_center()
+	var mv := InputEventMouseMotion.new(); mv.global_position = at; mv.position = at
+	sb._input(mv)
+	check(sb.arrow.over.has_area() and sb.arrow.from.distance_to(sb.arrow.to) > 24.0, "arrow follows to the ICE and rings it")
+	var str_before := int(panel.model.str)
+	var calls := sb.ctrl.game_calls
+	sb._input(_mouse(false, at))
+	await frames()
+	check(not g.hand.any(func(c): return int(c.uid) == pu), "release over the ICE plays the card")
+	check(sb.ctrl.game_calls == calls + 1, "with one controller call")
+	check(int(sb.lane.panels()[1].model.str) < str_before, "on that ICE")
+	check(not sb.arrow.visible and sb.aiming_uid < 0, "arrow gone")
+	# Release elsewhere cancels; nothing played.
+	var p2 := _hand_card(sb, func(m): return bool(m.target) and bool(m.playable))
+	if p2:
+		var u2 := p2.uid(); var n := g.hand.size()
+		p2._gui_input(_mouse(true, Vector2(20, 20)))
+		var away := sb.stage.global_position + Vector2(760, 820) * sb.stage.scale
+		var mv2 := InputEventMouseMotion.new(); mv2.global_position = away + Vector2(0, -300); sb._input(mv2)
+		sb._input(_mouse(false, away + Vector2(0, -300) if false else Vector2(5, 5)))
+		check(g.hand.size() == n and sb.aiming_uid < 0, "release away from the ICE cancels")
+		# Click mode: press and release on the card keeps the arrow; the next click decides.
+		await frames()
+		p2 = _hand_card(sb, func(m): return int(m.uid) == u2)
+		var c := p2.get_global_rect().get_center()
+		p2._gui_input(_mouse(true, c))
+		sb._input(_mouse(false, c))
+		check(sb.aiming_uid == u2 and sb.arrow.visible, "a plain click keeps aiming")
+		var esc := InputEventAction.new(); esc.action = "ui_cancel"; esc.pressed = true
+		sb._input(esc)
+		check(sb.aiming_uid < 0 and not sb.arrow.visible and g.hand.size() == n, "Esc cancels")
+	sb.queue_free(); await frames()
 
 func _inspector_text(sb: IceEncounterSandbox) -> String:
 	var out := ""
