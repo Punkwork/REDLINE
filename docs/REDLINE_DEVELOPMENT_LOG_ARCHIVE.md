@@ -2946,3 +2946,9 @@ Designer's sheet: run 1 died at TERMS & CONDITIONS (CONSENT FORM + TERMS OF SERV
 ## 2026-11-22 — PROBE-004: PROBE choose-one (Claude)
 
 **Designer:** PROBE does what it does now OR reveals hidden subroutines on a VOID, same costs. Recorded in the master design, `REDLINE_CORE_LOOP.md` (decision row, STRIP-001 VOID rule), HANDOFF (Claude Code TO DO) and checklist question 8. **Interpretations to confirm:** reveal = all face-down subroutines; the −2 STR mode no longer reveals; reveal unavailable with nothing face-down; the choice is shown only on a VOID. **Code changes:** none.
+
+## 2026-11-23 — ARCH-V2-001: architecture migration governance (ChatGPT)
+
+**Designer:** Approved a full-game hybrid scene-based, component-driven, data-driven Godot architecture instead of retaining the prototype's one-scene restriction. Explicitly chose `architecture-v2` as primary rebuild branch with `main` preserved as stable four-node prototype. The branch was created from `main`.
+
+**Documentation:** Updated AGENTS.md, CLAUDE.md, master design, HANDOFF, and architecture notes on `architecture-v2` only. No gameplay code changed. No prototype tag created; baseline tests, new scene plan, CI and release migration remain to do. **Interpretations to confirm:** specific scene/data architecture and when/how to merge or release the rebuild require designer review.

@@ -439,6 +439,9 @@ func refresh() -> void:
 	hand_fan.reduced_motion = reduced_motion
 	if not game.enc.is_empty():
 		lane.sync(VisibleStateAdapter.ice_models(game, ctrl))
+		## ARCH-V2-007a: the corporation's room through the ICE windows; HOSTILE shows through with the reveal.
+		var rooms := CorporationLook.rooms_for(game)
+		lane.set_room(rooms.friendly, rooms.hostile, VisibleStateAdapter.hostile_reveal(game))
 		rail.sync(VisibleStateAdapter.response_model(game, ctrl))
 	_handle_events()
 	_refresh_speakers()

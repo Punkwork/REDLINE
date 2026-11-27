@@ -33,12 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-23 — ARCH-V2-001: architecture migration governance (ChatGPT)
-
-**Designer:** Approved a full-game hybrid scene-based, component-driven, data-driven Godot architecture instead of retaining the prototype's one-scene restriction. Explicitly chose `architecture-v2` as primary rebuild branch with `main` preserved as stable four-node prototype. The branch was created from `main`.
-
-**Documentation:** Updated AGENTS.md, CLAUDE.md, master design, HANDOFF, and architecture notes on `architecture-v2` only. No gameplay code changed. No prototype tag created; baseline tests, new scene plan, CI and release migration remain to do. **Interpretations to confirm:** specific scene/data architecture and when/how to merge or release the rebuild require designer review.
-
 ## 2026-11-23 — ARCH-V2-001 blueprint folder drafted (ChatGPT)
 
 Created six proposed documents under `docs/architecture-v2/`: README, scene hierarchy, data model, gameplay interface, migration plan and validation. They are architecture proposals, not designer-approved implementation details. No Godot files or rules changed; baseline tests and tag remain pending. HANDOFF updated for designer review.
@@ -397,4 +391,8 @@ Designer (20:47). Built `HudWidgets.CrtDropGlow` and the CRT drop rule (PROGRAMs
 ## 2026-11-26 — ARCH-V2-006m: eye, Ghostware reel and speaker grille art wired; red pupil (Claude Code)
 
 Designer uploaded the three §6f parts. Trimmed, added with manifest rows, wired (eye iris tinted as a ring, pulsing red pupil dot; reel window and arrows on the painted buttons; grilles 96 × 48). Tests: `test_arch_v2_batch3.gd` 110/0, `test_arch_v2_ice.gd` 201/0, `test_arch_v2_coverage.gd` 538/0; screenshots 38. No rules change.
+
+## 2026-11-26 — ARCH-V2-007a: Batch 4 started; corporation rooms through the ICE windows (Claude Code)
+
+Designer supplied 22 `BG_` backgrounds from the art folder (staged from the designer's PC) and chose "Inside the ICE windows". Imported unchanged; built `CorporationLook` (C06), `corp_room.gdshader`, `IcePanel.set_room`, `IceLane.set_room` (one continuous room; HOSTILE blends in with the reveal). New `test_arch_v2_batch4.gd` in CI; coverage row I15. Tests: batch4 23/0, batch3 110/0, ice 202/0, coverage 545/0, test_game 176/0; screenshots 38. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001: architecture migration governance (ChatGPT)" to the archive.)
 

@@ -75,3 +75,19 @@ func _arrange() -> void:
 		var p: IcePanel = _panels[i]
 		p.scale = Vector2(k, k)
 		p.position = Vector2(x0 + i * (pw * k + gap), (size.y - ph * k) / 2.0)
+
+## ARCH-V2-007a: one continuous room behind all the windows. The image is fitted to cover the lane
+## (keeping its aspect); each panel gets the part of it that lies behind its rectangle.
+func set_room(friendly: Texture2D, hostile: Texture2D, reveal: float) -> void:
+	if friendly == null:
+		for p in _panels: p.set_room(null, null, Rect2(), 0.0)
+		return
+	var img := Vector2(friendly.get_width(), friendly.get_height())
+	var k := maxf(size.x / img.x, size.y / img.y)
+	var shown := img * k                          # the image's size on the lane
+	var off := (shown - size) / 2.0                # how much is cropped each side
+	for p in _panels:
+		var r := Rect2(p.position, p.size * p.scale)
+		var uv := Rect2((r.position + off) / shown, r.size / shown)
+		p.set_room(friendly, hostile, uv, reveal)
+

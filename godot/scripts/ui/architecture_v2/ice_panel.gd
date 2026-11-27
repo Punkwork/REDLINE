@@ -467,3 +467,34 @@ class VirusChip extends HudWidgets.Explained:
 		draw_string(VasTokens.FONT_PLAQUE, Vector2((size.x - tw) / 2.0, size.y / 2.0 + px * 0.36), t, HORIZONTAL_ALIGNMENT_LEFT, -1, px, col)
 		focus_ring()
 
+## ARCH-V2-007a: the corporation's room in this window, inside the bezel, behind the avatar. `uv`
+## is the part of the room behind this panel (the lane works it out so the windows read as one view).
+var _room: ColorRect
+const ROOM_SHADER := preload("res://themes/architecture_v2/corp_room.gdshader")
+func set_room(friendly: Texture2D, hostile: Texture2D, uv: Rect2, reveal: float) -> void:
+	if friendly == null:
+		if _room: _room.visible = false
+		return
+	if _room == null:
+		_room = ColorRect.new(); _room.name = "Room"; _room.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var m := ShaderMaterial.new(); m.shader = ROOM_SHADER; _room.material = m
+		add_child(_room)
+		var above: Node = get_node_or_null("WindowNine")
+		move_child(_room, (above.get_index() if above else window.get_index()) + 1)
+	var inset := layout.window_rim * 0.62
+	_room.position = Vector2(inset, inset)
+	_room.size = size - Vector2(inset, inset) * 2.0
+	_room.visible = true
+	var mat: ShaderMaterial = _room.material
+	mat.set_shader_parameter("friendly", friendly)
+	mat.set_shader_parameter("hostile", hostile)
+	mat.set_shader_parameter("has_hostile", 1.0 if hostile else 0.0)
+	mat.set_shader_parameter("reveal", reveal)
+	var pad := Vector2(inset, inset) / size   # the room's part shrinks with the inset
+	mat.set_shader_parameter("uv_rect", Vector4(uv.position.x + uv.size.x * pad.x, uv.position.y + uv.size.y * pad.y, uv.size.x * (1.0 - 2.0 * pad.x), uv.size.y * (1.0 - 2.0 * pad.y)))
+	mat.set_shader_parameter("size_px", _room.size)
+	mat.set_shader_parameter("radius_px", layout.window_rim * 0.8)
+
+func has_room() -> bool:
+	return _room != null and _room.visible
+

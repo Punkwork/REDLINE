@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 55 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
+**Totals:** BUILT 56 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 5 · OPEN 0 · OUT 2 · 64 rows.
 
 | Status | Meaning |
 |---|---|
@@ -49,6 +49,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | I12 | Strike overlay and lethal flash | build_strike, strike_flash | `Flash` | BUILT | — | Red wash on strikes and lethal ICE (none under reduced motion) with TRACE STRIKE / MASK OFF / LOCKDOWN / LETHAL flyouts. |
 | I13 | TRACE pixel steps (PIXEL-TRACE-001) | update_pixel | — | BATCH4 | C06 presentation |  |
 | I14 | Corporation console colour | console_tint_material | — | BATCH4 | C06 CorporationPresentation |  |
+| I15 | Corporation room behind the ICE (painted backgrounds) | concept_backgrounds, add_backdrop | `Room` | BUILT | — | Through the ICE windows as one continuous room; HOSTILE shows through with the reveal (ARCH-V2-007a). |
 
 ## Response
 

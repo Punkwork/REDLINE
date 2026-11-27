@@ -280,6 +280,16 @@
    "note": ""
   },
   {
+   "id": "I15",
+   "area": "ICE",
+   "element": "Corporation room behind the ICE (painted backgrounds)",
+   "prototype": "concept_backgrounds, add_backdrop",
+   "v2": "Room",
+   "status": "BUILT",
+   "next": "",
+   "note": "Through the ICE windows as one continuous room; HOSTILE shows through with the reveal (ARCH-V2-007a)."
+  },
+  {
    "id": "R01",
    "area": "Response",
    "element": "NEXT RESPONSE",
