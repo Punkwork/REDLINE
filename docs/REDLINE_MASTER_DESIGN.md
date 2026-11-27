@@ -3466,3 +3466,7 @@ GUARD is a supporting ICE subroutine protecting a linked DEADLOCK on another ICE
 
 **Designer follow-up (2026-11-27 07:44, CAPS-TEST-001b):** CRACKER's hover hint reads "Drag onto an ICE to inject (0 BW, your turn)." CRACKER's behaviour is confirmed: ICE STR never drops below 0, and never below an ICE's minimum STR where it has one. This settles interpretation (2) above.
 
+
+
+## REBOOT-SPAM-002 — Breakable reactive subroutine (designer approved 2026-11-27)
+Convert REBOOT SPAM from inherent ICE ability to breakable reactive subroutine. Preserve existing effect: each natural or explicitly forced REBOOT inserts one SPAM into the Rustler draw pile while the subroutine is active and unbroken. Breaking it prevents subsequent triggers while broken; it does not independently resolve during ordinary Corporation Countermeasure. No mandatory break prerequisite. Reconcile FREE TRIAL's existing inherent ability with the new subroutine in HALCYON coverage planning; exact TUMBLER slot/pool placement, visibility and rotation interactions require specification before implementation. Preserve historical records. Priority 2; implementation and regression tests pending, no engine changes in this documentation update. Rationale: preserve deck-cycling pressure while giving Rustler direct counterplay.
