@@ -14,7 +14,8 @@ CHAIN rewards deliberate card sequencing, deck construction and bandwidth effici
 - The inherent reward belongs to CHAIN itself, not individual card text.
 - Proposed implementation floor: 0 BW; no negative costs or implicit BW generation. Confirm with designer alongside cost-modifier precedence.
 - Multiple independent CHAIN instances may be instantiated within one Rustler turn; no once-per-turn activation restriction. Each valid new instance receives the inherent −1 BW instantiation discount.
-- Exact sequence eligibility, extension rewards, termination and overlap/reuse remain open. Do not treat illustrative patterns as approved rules.
+- CHAIN instances are distinct and non-overlapping. A card play used as a link in one instance cannot be reused in another instance. A new instance requires fresh card plays.
+- Exact sequence eligibility, extension rewards and termination remain open. Do not treat illustrative patterns as approved rules.
 
 ## 3. Lifecycle and existing baseline
 Initiation (first card, ordinary cost) -> formation (second card, ordinary cost) -> eligible third card (preview discount) -> successful play instantiates CHAIN -> card-specific bonus and activation feedback -> active instance eligible for extension under rules still to be specified.
@@ -52,7 +53,7 @@ CHAIN ACTIVATED: distinctive Atomic Deco-Punk virtual flyout, satisfying electro
 2. How are multi-tag, untagged, Programs, Protocols, compiled cards, forced plays and non-card actions handled?
 3. Does an incompatible card terminate the instance, start a new candidate sequence, or both? Does turn end always terminate it? Can CACHE prepare cards but not carry chain state?
 4. Does fourth/fifth valid link receive −1 BW again (sustained discount) or only third card (instantiation-only)? Both discussed; only instantiation discount approved.
-5. Multiple instances per turn are approved. Can sequences overlap or reuse prior links? How are instance IDs and extension counts tracked?
+5. Multiple distinct instances per turn are approved; overlap and reuse of prior links are prohibited. How are instance IDs and extension counts tracked?
 6. Which cards get card-specific bonuses, at instantiation only or also extension? How does KILL CHAIN count bonuses/instances? How are existing cards repriced?
 7. Cost floor, stacking/precedence with other discounts, legality at 0 remaining BW, cancellation and failed action handling.
 8. Infinite/repeating loops, draw and zero-cost chains; safeguards without arbitrary length caps.
@@ -67,7 +68,7 @@ CHAIN PULP: existing PATTERN ANALYSIS VOID ability inflicts 1 PULP per CHAIN bon
 2. Resolve open grammar and economics with designer; finalize card catalogue and fixtures.
 3. Specify visible state, action legality and event contracts with CAS-001; develop CHAIN ACTIVATED specimen with M06.
 4. Implement approved engine rules and UI together; no duplicate rule logic in presentation.
-5. Verify two cards never activate; valid third receives exactly −1 BW before affordability; invalid sequences do not; card-specific bonus correct; no duplicate activation; multiple independent instances in one turn, extension/reset/overlap cases per approved rules; previews match engine; reduced motion same outcomes; no hidden leaks; deterministic regression.
+5. Verify two cards never activate; valid third receives exactly −1 BW before affordability; invalid sequences do not; card-specific bonus correct; no duplicate activation; multiple independent instances in one turn, extension/reset cases and prohibition of overlap/reuse; previews match engine; reduced motion same outcomes; no hidden leaks; deterministic regression.
 6. Test deliberate combinations in HALCYON one-, two-, three-encounter nodes, actual Windows playtest, capture screenshots and feedback. Evaluate whether players identify opportunities without external explanation, deliberately sequence cards, understand cost and payoff, and find CHAIN satisfying without dominant or infinite loops.
 7. Designer acceptance required. No engine implementation or final card balance authorized by this document alone.
 
@@ -76,4 +77,8 @@ CHAIN PULP: existing PATTERN ANALYSIS VOID ability inflicts 1 PULP per CHAIN bon
 
 
 ## CHAIN-002a — Multiple instances per turn (designer approved 2026-11-27)
-Multiple independent CHAIN instances may be instantiated within a single Rustler turn, with no once-per-turn activation restriction. Each valid new instance receives its own inherent −1 BW instantiation cost reduction and applicable card-specific bonus. This resolves the repeat-instance eligibility question in CHAIN-002; sequence overlap, reuse of links, termination, extension discounts and any card-specific trigger caps remain unresolved or governed by their existing rules. Illustrative example: two distinct valid three-card sequences in one turn each receive a discount on their third card, subject to affordability and approved eligibility. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md. No engine changes.
+Multiple independent CHAIN instances may be instantiated within a single Rustler turn, with no once-per-turn activation restriction. Each valid new instance receives its own inherent −1 BW instantiation cost reduction and applicable card-specific bonus. This resolves the repeat-instance eligibility question in CHAIN-002; termination, extension discounts and any card-specific trigger caps remain unresolved or governed by their existing rules. Illustrative example: two distinct valid three-card sequences in one turn each receive a discount on their third card, subject to affordability and approved eligibility. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md. No engine changes.
+
+
+## CHAIN-002b — Distinct non-overlapping instances (designer approved 2026-11-27)
+CHAIN instances are distinct and cannot overlap or reuse previously played cards as links. A card-play event assigned to one CHAIN instance cannot count toward another; a new instance requires a fresh sequence. This resolves the overlap/reuse question in CHAIN-002 and CHAIN-002a. Example: plays A,B,C instantiate one CHAIN; B,C,D cannot instantiate another. After the first instance ends, three fresh eligible plays can instantiate another in the same turn. Exact termination, extension eligibility and discounts remain open; no new rules about replaying a physical card in a separate play event are established here. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md. No engine changes.
