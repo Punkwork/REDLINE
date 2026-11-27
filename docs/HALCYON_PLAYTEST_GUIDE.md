@@ -1,4 +1,22 @@
-# PANOPTICON — HALCYON PLAYTEST 12 (0.12.0-playtest.12)
+# PANOPTICON — HALCYON PLAYTEST 13 (0.13.0-playtest.13)
+
+This Windows build is the **core-loop test** (STRIP-001) with the **new encounter screen** (Architecture V2, ARCH-V2-003 to 007). The rules are the same as Playtest 12 (the rules engine is unchanged; one fix: every Rustler now gets a card reward at a full clear). The selection screen shows **HALCYON PLAYTEST 13 · CORE LOOP · 0.13.0-playtest.13**. Fill in `REDLINE_CORE_LOOP_CHECKLIST.md`, including its new *Playtest 13* section.
+
+**New in 13: the encounter screen.**
+- **Top bar:** the all-seeing eye (top left) is the hostile-reveal lamp (green to red, red pupil pulsing) with three strike lamps under it; hover it for the Node, layer, strikes, punch cards and the KEY LEGEND. Turn counter, whose turn, TRACE, the Ghostware reel (up/down arrows), CAPS slots (empty: CAPS aren't in this build) and PROTOCOL slots.
+- **ICE windows:** the corporation's room behind the avatars (the hostile room shows through as TRACE rises; the picture drops toward 16-bit), lit subroutine keys (hover for the full rule), virus counters, momentary speech bubbles.
+- **Rail:** NEXT RESPONSE in firing order; at its left end the layer marks, your CRED and the layer's CRED (red ants run left when you extract). Hover or click the rail for the log.
+- **Cards:** click a card to play it, or drag it above the tray. Targeted cards (PROBE): press and hold, drag the arrow onto an ICE, let go. PROGRAMs: drag onto the CRT (it glows) or click. Cards you can't play now are dimmed (hover says why). CACHED cards show ∞ or turns left. Every choice has SHOW BOARD.
+- **Bottom right:** VITAE, BW, RAM, SHIELD, incoming PULP (PARTING SHOT after a BREACH), then deck / discard / burned (click to view; NEXT DRAW on the deck's hover) and the round END TURN button.
+- **NUL/REM:** speaks; hover a speaker grille (either end of the rail) for the words; click it or press M to mute.
+- **Banners:** RUSTLER TURN, CORP COUNTERMEASURE, MASK OFF, LOCKDOWN, DEADLOCK BREACHED, LETHAL, PARTING SHOT, RESERVE EXTRACTED.
+- **The old screen**, for comparison: quit the game, open `%APPDATA%\Godot\app_userdata\PANOPTICON\redline_flags.json`, set `"legacy_encounter": true`, start again (set it back to `false` for the new screen).
+
+The map, rewards, SAFEHOUSE and menus keep their Playtest 12 look; they get rebuilt in a later batch.
+
+---
+
+# Playtest 12 notes (still apply)
 
 This Windows build is the **core-loop test** (STRIP-001): the Generalist only, HALCYON's first four map rows, and only break, defend and build. The selection screen shows **HALCYON PLAYTEST 12 · CORE LOOP · 0.12.0-playtest.12**. New in 12: fixes from Playtest 11 (a pinned card can no longer get stuck on screen; the per-type sounds now play), the parting shot total shows after a BREACH, untargeted cards can be dropped anywhere above the hand, key tips explain every effect, unplayable cards dim, and TERMS & CONDITIONS is eased (AMEND +1, TERMS OF SERVICE PULP 3). From 11: TRACE riders (TRACE X ▸ effect: the effect happens only if some of that TRACE lands) and the JAMMER card; CONSENT FORM joins TERMS & CONDITIONS and its AMEND makes TERMS OF SERVICE hit harder; DEFRAG discards 1 then draws 2; the parting shot plays on screen with a sound for each subroutine type. From 10: Icepick boosts last only until the end of your turn (PROBE still lasts the encounter); every ICE has 1–2 more subroutines, one with two effects; new effects HARDEN (ICE +STR), SHIELD BREAK and RETALIATE (PULP per broken subroutine); DOORBELL CAM deals CORTEX. From 9: ICE turn WARY below half STR, and LETHAL (PULP and TRACE double, Black ICE excepted) once they are also half broken; TRACE subroutines +2, PULP +1. Core-loop rules: 3 BW a turn; PROBE costs 0 BW, +1 BW for each extra PROBE on the same ICE that turn, and reveals a VOID's face-down subroutine; BURST costs 3 and gives 5 BW, costing 1 more each time that copy is played; when you BREACH, every unbroken showing subroutine fires once as a parting shot; your next hand is drawn before the corporation acts; ICE are +2 STR, with no passives. Fill in `REDLINE_CORE_LOOP_CHECKLIST.md` (one row per encounter).
 
@@ -8,7 +26,7 @@ Playtest 7 rebuilds the encounter screen in the painted concept interface (ENC-C
 
 ## Get the Windows build
 
-Open the successful Playtest 7 build on `release` (Actions run and artifact links are in `docs/HANDOFF.md`). Open the latest build on `release`. Download `PANOPTICON-HALCYON-PLAYTEST-12-0.12.0-playtest.12-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
+Open the successful Playtest 7 build on `release` (Actions run and artifact links are in `docs/HANDOFF.md`). Open the latest build on `release`. Download `PANOPTICON-HALCYON-PLAYTEST-13-0.13.0-playtest.13-Windows-x86_64`, extract it, and run `PANOPTICON_HALCYON_slice.exe`. The executable is unsigned and runs without installing Godot.
 
 Include the source revision from `BUILD_COMMIT.txt` in reports. `SHA256SUMS.txt` contains the executable's SHA-256. Use the bundled **Playtest QA Checklist v0.5** (`REDLINE_PLAYTEST_CHECKLIST.md`). Mark checks for unavailable routes, features, or later mechanics **N/A**.
 
