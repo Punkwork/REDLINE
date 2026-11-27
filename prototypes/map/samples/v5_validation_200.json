@@ -1,0 +1,122 @@
+{
+ "generator": "V5 (MAP-003f)",
+ "candidates": 200,
+ "accepted": 200,
+ "rejected": 0,
+ "rejected_reasons": [],
+ "acceptance_rate": 1.0,
+ "generation_seconds": 0.53,
+ "ms_per_map": 2.7,
+ "ms_worst_map": 35.9,
+ "validation_seconds": 9.54,
+ "maps_failing_validation": 0,
+ "failures": [],
+ "routes_validated": 1623047,
+ "routes_per_map": {
+  "min": 160,
+  "mean": 8115.2,
+  "max": 68868
+ },
+ "routes_by_uplinks": {
+  "2": 1110797,
+  "3": 512250
+ },
+ "routes_by_uplinks_pct": {
+  "2": 68.44,
+  "3": 31.56
+ },
+ "distribution_routes": {
+  "3-1-1-1-1": 512250,
+  "2-2-1-1-1": 267985,
+  "2-1-2-1-1": 272695,
+  "2-1-1-2-1": 254253,
+  "2-1-1-1-2": 315864
+ },
+ "distribution_pct": {
+  "3-1-1-1-1": 31.56,
+  "2-2-1-1-1": 16.51,
+  "2-1-2-1-1": 16.8,
+  "2-1-1-2-1": 15.67,
+  "2-1-1-1-2": 19.46
+ },
+ "maps_with_a_3_uplink_route": 154,
+ "maps_with_all_five_distributions": 2,
+ "minibosses": {
+  "maps_with_exactly_one": 200,
+  "routes_via_miniboss_pct": 33.2,
+  "per_map_via_pct_min_max": [
+   0.7,
+   64.4
+  ],
+  "row8_nodes_leading_to_it_mean": 2.03,
+  "rows1_8_nodes_that_can_still_avoid_pct": 100.0,
+  "rows1_8_nodes_that_can_reach_or_avoid_pct": 79.62
+ },
+ "spacing_longest_run_routes": {
+  "1": 1028,
+  "2": 359229,
+  "3": 800062,
+  "4": 462728
+ },
+ "placement_by_type": {
+  "UPLINK": {
+   "per_route": 2.32,
+   "mean_row": 7.89,
+   "rows_2_8_pct": 58.0
+  },
+  "SAFEHOUSE": {
+   "per_route": 1.17,
+   "mean_row": 8.52,
+   "rows_2_8_pct": 54.6
+  },
+  "DEAD DROP": {
+   "per_route": 1.17,
+   "mean_row": 8.66,
+   "rows_2_8_pct": 49.1
+  },
+  "CONSOLE LAB": {
+   "per_route": 1.16,
+   "mean_row": 9.1,
+   "rows_2_8_pct": 48.8
+  },
+  "SIGNAL": {
+   "per_route": 1.19,
+   "mean_row": 8.86,
+   "rows_2_8_pct": 50.9
+  },
+  "ICE": {
+   "per_route": 7.67,
+   "mean_row": 7.51,
+   "rows_2_8_pct": 42.7
+  }
+ },
+ "info_routes_4_ice_then_boss_pct": 0.15,
+ "generator_attempt_totals": {
+  "skeleton_attempts": 206,
+  "row_retries": 222,
+  "type_attempts": 201,
+  "type_steps": 69119
+ },
+ "determinism": {
+  "seeds": 25,
+  "in_process": true,
+  "fresh_processes_PYTHONHASHSEED_1_and_4242": true,
+  "ok": true
+ },
+ "v4": {
+  "candidates": 1000,
+  "accepted": 363,
+  "rate": 0.363,
+  "seconds": 40.484591484069824,
+  "meet_map003f": 7,
+  "with_dead_ends": 33,
+  "maps_by_failure_kind": {
+   "Uplink distribution": 314,
+   "MINIBOSS forced": 138,
+   "dead end": 33,
+   "spacing incl. row 1": 22
+  }
+ },
+ "total_seconds": 60.6,
+ "acceptance_vs_v4": "V5 100.0% vs V4 36.3% (V4 maps also meeting MAP-003f: 7 of 363)"
+}

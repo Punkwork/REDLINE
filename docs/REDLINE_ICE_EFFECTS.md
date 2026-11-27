@@ -27,7 +27,7 @@ Every subroutine effect and ICE mechanic in one place. **Order** is the sequence
 
 ## Mini-boss abilities (MINIBOSS-002)
 
-Each belongs to one mini-boss only. They are abilities, not subroutines: they can't be broken or disabled, and the map explains them before the player commits (`REDLINE_MINIBOSSES.md`).
+Each belongs to one mini-boss only. They are abilities, not subroutines: they can't be broken or disabled, and they stay hidden until the Rustler enters the Mini-Boss Node; the map shows the category only (MINIBOSS-003 / MAP-003f; `REDLINE_MINIBOSSES.md`).
 
 | Corporation | Mini-boss | Ability | What it does | Player complexity | Player's answer | Status |
 |---|---|---|---|:-:|---|---|

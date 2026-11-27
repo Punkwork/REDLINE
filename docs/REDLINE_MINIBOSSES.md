@@ -7,7 +7,7 @@
 - **LUCIDA:** "LUCIDA invites you to rest your weary mind in our tender care, where we soothe each anxious thought, tidy every troubled memory and dream alongside you, until there is no longer any distance between who you are and who we know you to be."
 
 ## Mini-bosses
-One per corporation, on some paths only (MINIBOSS-001, MAP-003b). Shown on the map with its ability explained. **Abilities:** at least one signature ability unique to that mini-boss; multiple complementary abilities permitted. Not subroutines; can't be broken or disabled. **Reward:** choose 1 of 3 rare cards + 1 Ghostware + 1 CAP + CRED.
+One per corporation, on some paths only (MINIBOSS-001, MAP-003b). Shown on the map as a distinct Mini-Boss Node that identifies the category only; its identity and ability stay hidden until the Rustler enters, and the fight is mandatory once entered (MINIBOSS-003 / MAP-003f, 2026-11-27, supersedes the earlier pre-entry explanation). **Abilities:** at least one signature ability unique to that mini-boss; multiple complementary abilities permitted. Not subroutines; can't be broken or disabled. **Reward:** choose 1 of 3 rare cards + 1 Ghostware + 1 CAP + CRED.
 
 | Corporation | Mini-boss | Type, STR | Subroutines (working) | Unique ability |
 |---|---|---|---|---|
