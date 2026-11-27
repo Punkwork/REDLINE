@@ -454,3 +454,7 @@ Designer: a full CAP rack should prompt the player to discard one; not needed in
 
 Hint changed to "Drag onto an ICE to inject (0 BW, your turn)." Added checks that CRACKER stops at STR 0 and at an ICE's minimum STR (behaviour unchanged). Tests: `test_game.gd` 430/0; `test_arch_v2_batch4.gd` 76/0.
 
+
+
+## REBOOT-SPAM-002 — Breakable reactive subroutine (designer approved 2026-11-27)
+Convert REBOOT SPAM from inherent ICE ability to breakable reactive subroutine. Preserve existing effect: each natural or explicitly forced REBOOT inserts one SPAM into the Rustler draw pile while the subroutine is active and unbroken. Breaking it prevents subsequent triggers while broken; it does not independently resolve during ordinary Corporation Countermeasure. No mandatory break prerequisite. Reconcile FREE TRIAL's existing inherent ability with the new subroutine in HALCYON coverage planning; exact TUMBLER slot/pool placement, visibility and rotation interactions require specification before implementation. Preserve historical records. Priority 2; implementation and regression tests pending, no engine changes in this documentation update. Rationale: preserve deck-cycling pressure while giving Rustler direct counterplay.
