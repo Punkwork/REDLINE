@@ -241,7 +241,7 @@ The turn indicator and the TRACE meter are now half their former width, and the 
 
 ### 6f. Eye, Ghostware reel, speaker grille (conversation 4 continued, ARCH-V2-006)
 
-Same conversation as §6e (or a new one with Message 1 and both attachments). Folders: `chassis/` for 1, `controls/` for 2–3. The game draws the CRED and LAYER icons itself (like the deck icons).
+Same conversation as §6e, or a new one with Message 1 and two attachments: `PANOPTICON_VAS-001_reference_mockup.jpeg` and `docs/visual/fixtures/arch-v2-batch3/v2_6f_layout.png` (where the eye, the reel and the two grilles go). Folders: `chassis/` for 1, `controls/` for 2–3. The game draws the CRED and LAYER icons itself (like the deck icons).
 
 1. **`V2_EYE`** (512 × 512): "A round all-seeing machine eye for the top-left corner of the console: a thick polished chrome and copper bezel with small rivets, around a deep convex glass lens. Inside the lens, a glowing iris that is **pure white to pale grey** (the game tints it from cool green to neon red), fading to black at the edge, with a small bright highlight at the top left. Our own design: no film likeness, no logo, no text. Transparent outside the bezel."
 2. **`V2_GHOST_REEL`** (360 × 272, about 4:3): "A small slot-machine reel window for the console header: a bakelite and chrome housing with one **square window** in the middle where a single symbol will show (empty, dark, with a slight curved-drum shading top and bottom, as if a reel turns behind it), and on the **right side** two small stacked chrome **arrow buttons**, one pointing up and one pointing down. No symbols in the window, no text."
