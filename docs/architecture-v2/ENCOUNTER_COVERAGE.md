@@ -24,7 +24,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | H05 | CAPS slots (3) | build_cap_rack | `CapRack` | PLACEHOLDER | CAPS inventory in the rules engine (deferred beyond the slice) | Empty slots; fills from game.caps when it exists (ARCH-V2-005). |
 | H06 | PROTOCOL rack | ticker rack text | `ProtocolRack` | BUILT | — | 3 slots, live from game.rack; more shows +n (ARCH-V2-005). |
 | H07 | Ghostware rail (any number, ORIGIN first) | build_ghost_rail | — | BATCH3 | Header reel left of CAPS: one Ghostware visible, up/down arrows (ARCH-V2-006b) | Hover shows full text and icon. |
-| H08 | Strike lamps (0-3) and LOCKDOWN | build_strike / strike lamps | — | BATCH3 | C13 PlayerHUD; home to propose | No strike or LOCKDOWN state on the V2 screen today. |
+| H08 | Strike lamps (0-3) and LOCKDOWN | build_strike / strike lamps | — | BATCH3 | Three lamps under the eye; LOCKDOWN: all red with a lock, plus a LOCKDOWN flyout (ARCH-V2-006h) | No strike or LOCKDOWN state on the V2 screen today. |
 | H09 | HOSTILE REVEAL % | reveal_percent / alarm housing | — | BATCH3 | The eye is the alarm lamp: cool green to neon red as the reveal grows (ARCH-V2-006c) | No % plate. The art reveal itself is Batch 4 presentation. |
 | H10 | LAYER count and layer CRED reserve | build_node_plate, RESERVE dial | — | BATCH3 | Left end of the NEXT RESPONSE rail: hamburger LAYER icon (1-3 lit), then CRED pair (ARCH-V2-006d) |  |
 | H11 | CRED | CRED/RAM row | — | BATCH3 | CRED icon + value left of the layer CRED; red marching ants flow left on extraction (ARCH-V2-006d) | RAM is built (meters). |
