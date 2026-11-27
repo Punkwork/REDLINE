@@ -3413,3 +3413,7 @@ Built on the V2 encounter screen, in five commits (see the development log). Eve
 - **Status:** Batch 4 BUILT. RELEASE-002c entry conditions are met: the representative ICE encounter exists and is the game's encounter; its component tests and screenshot fixtures run in CI; its behaviour matches the `prototype-baseline` results. A playtest build is cut only when the designer asks (RELEASE-002).
 - **(f) Designer decisions, 2026-11-26 22:12:** "the graffiti isn't even necessary. i would remove it for now" (graffiti off; code kept behind `SHOW_GRAFFITI`); "Rewards bug, yes" (**CORE-LOOP-REWARD-GAP fixed**: a Rustler pool with no cards in the build falls back to the SHARED pool, same rarity, then COMMON; rules test added to `test_game.gd`; parity test back to all four Rustlers); "yes prepare playtest 13" (RELEASE-002 step 1: `config/version` 0.13.0-playtest.13, guide and core-loop checklist updated).
 
+## ARCH-V2-008a — READY RIG in the Ghostware slot (designer, 2026-11-27 06:16; TO DO for the next build)
+
+Designer: "for the next build add ready rig to the ghostware slot on the encounter screen". The Ghostware reel (ARCH-V2-006b) already lists the Generalist's ORIGIN, READY RIG (RUSTLER-003), first, but shows only the initials "RR" because there is no reel art. The next build gives the slot READY RIG art and its rules text on hover. Presentation only: no rules change.
+

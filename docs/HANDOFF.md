@@ -90,6 +90,12 @@ Designer-confirmed creative direction, 2026-11-23. Read [REDLINE_NULREM_BEHAVIOU
 
 ## To build (approved, not yet in the build)
 
+### ARCH-V2-008a: next build (designer, 2026-11-27 06:16)
+
+| ID | What | Owner | Status |
+|---|---|---|---|
+| **ARCH-V2-008a** | Add READY RIG to the Ghostware slot on the encounter screen. Now: the reel already lists READY RIG first as the Generalist's ORIGIN, but there is no `GW_READY_RIG.png`, so the slot shows the initials "RR". Needed: READY RIG art or icon in `godot/assets/concept/ghostware/`, its rules text on hover, and a screenshot fixture. | Claude Code (art from the designer or drawn as a stand-in) | TO DO for the next build |
+
 ### STRIP-001: core-loop test build (designer, 2026-11-21)
 Spec: `REDLINE_CORE_LOOP.md`. Playtest sheet: `REDLINE_CORE_LOOP_CHECKLIST.md`.
 

@@ -397,3 +397,6 @@ Designer (22:12): graffiti removed for now; reward fix approved; prepare Playtes
 
 Designer (05:49): "Cut the Playtest 13 build: move `release` to `a6f4476`." Fast-forwarded `release` 2845ecd → a6f4476. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/45985348390) passed: test_game 236/0, adp 17/0, signal/carbon 672/0, ice 202/0, coverage 549/0, batch3 110/0, batch4 50/0, app 13/0, parity 4088/0 (80 encounters, 4,008 actions); 42 screenshots; export with no errors; [artifact](https://github.com/Punkwork/REDLINE/actions/runs/45985348390/artifacts/15191118131) `PANOPTICON-HALCYON-PLAYTEST-13-0.13.0-playtest.13-Windows-x86_64` (6 files, 206.6 MB). Artifact download is blocked from this session; contents verified from the log. Tag `playtest-13` waits on the designer. (LOG-001: moved "2026-11-23 — ARCH-V2-001 VAS-001 visual architecture specification" to the archive.)
 
+## 2026-11-27 — ARCH-V2-008a recorded (Claude Code)
+
+Designer note: add READY RIG to the Ghostware slot for the next build. Recorded in Master Design and HANDOFF (To build). Found: the reel already shows READY RIG first, but as "RR" initials, because `GW_READY_RIG.png` doesn't exist. Not built yet. No code changes, no tests run.
