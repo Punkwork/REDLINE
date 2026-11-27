@@ -3441,3 +3441,7 @@ SEQUENCED permits breaks in any order. Each successful out-of-sequence break gen
 
 ## TOLL-RETIRE-001 — TOLL retired (designer approved 2026-11-27)
 Retire TOLL (additional BW cost for breaking non-DEADLOCK subroutines) from active design, HALCYON expansion and mechanical coverage requirements. It adds resource pressure without sufficient new strategic decisions to justify cognitive load. Preserve historical records; reconsider only with explicit designer approval. Supersedes earlier active TOLL specifications. Priority 2: reconcile rule references and legacy engine support in a controlled implementation batch; no engine changes authorized by this documentation update. Design review principle: mechanical complexity should be earned through strategic depth.
+
+
+## MINIBOSS-001 — Unique signature abilities / FORTIFY (designer direction 2026-11-27)
+Each corporation has one mini-boss encounter, with a signature ability unique to that mini-boss. Reserve FORTIFY (formerly passive HARDENING) for one specific mini-boss as one of three candidate signature abilities; no standard ICE assignment. Existing HARDEN remains a distinct breakable subroutine. FORTIFY candidate retains +1 STR after each Corporation Countermeasure, maximum +3 bonus provisionally; final balance, corporation and ICE identity remain undecided. Signature abilities must justify complexity through strategic depth, agency, synergy, anticipation and cognitive-load value. No production implementation or roster changes in this documentation update.
