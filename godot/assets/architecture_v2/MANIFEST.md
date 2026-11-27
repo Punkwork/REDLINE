@@ -47,7 +47,10 @@ Parts for the VAS-001 encounter screen, per [`docs/architecture-v2/VAS-001_ASSET
 | `controls/V2_PROTOCOL_SOCKET.png` | 1154 × 1266 | — | ChatGPT (§6e-5), trimmed | 39da937ab3bc | PROPOSED |
 | `icons/V2_ICON_CAPS_LIGHT.png` | 256 × 256 | — | ChatGPT (§6e-6), trimmed, squared and downscaled | af418f9191ce | PROPOSED |
 | `icons/V2_ICON_PROTOCOL_LIGHT.png` | 256 × 256 | — | ChatGPT (§6e-7), trimmed, squared and downscaled | 29551c4ab274 | PROPOSED |
-Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Conversation 3 (§6d) complete. All three conversations done; conversation 4 (§6e, header slots) delivered 2026-11-26; parts dropped in favour of engine states or icon-first design are noted in the spec.
+| `chassis/V2_EYE.png` | 1200 × 1202 | — | ChatGPT (§6f-1), trimmed; white iris tinted green → red by the game; red pupil dot drawn by the game, pulsing (designer 2026-11-26 21:17) | eed34985167a | PROPOSED |
+| `controls/V2_GHOST_REEL.png` | 1394 × 1032 | — | ChatGPT (§6f-2), trimmed; window x 20–62% y 20–79%, arrow buttons x 70–88% | 2a05616c9963 | PROPOSED |
+| `controls/V2_SPEAKER_GRILLE.png` | 1736 × 840 | — | ChatGPT (§6f-3), trimmed; used twice | cf390da64e0d | PROPOSED |
+Conversation 1 (§6b) complete. Conversation 2 (§6c) complete (13 parts). Conversation 3 (§6d) complete. All three conversations done; conversation 4 (§6e, header slots; §6f, eye, reel, grille) delivered 2026-11-26; parts dropped in favour of engine states or icon-first design are noted in the spec.
 
 ## Revised ICE avatars (ARCH-V2-003p, 2026-11-26)
 

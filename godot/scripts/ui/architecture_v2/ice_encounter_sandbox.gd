@@ -43,8 +43,8 @@ const RAIL_HOUSING := Rect2(192, 494, 1152, 63)
 ## ARCH-V2-006d: LAYER and CRED over the rail's left vent grille.
 const LEDGER := Rect2(206, 502, 168, 47)
 ## ARCH-V2-006f: NUL/REM's two speaker grilles: below the left avatar, and below the right ICE's keys.
-const SPEAKER_L := Rect2(70, 506, 96, 44)
-const SPEAKER_R := Rect2(1370, 506, 96, 44)
+const SPEAKER_L := Rect2(70, 504, 96, 48)
+const SPEAKER_R := Rect2(1370, 504, 96, 48)
 const MAIN_UI := preload("res://scripts/ui/main.gd")   # its event priority list (Build 12's NUL/REM picks)
 const FLAGS := "user://redline_flags.json"
 const CRT := Rect2(6, 632, 262, 156)   ## cartridges stick up above it (ARCH-V2-003u)

@@ -394,3 +394,7 @@ Designer (20:37): aim targeted cards with an arrow instead of clicking an ICE. B
 
 Designer (20:47). Built `HudWidgets.CrtDropGlow` and the CRT drop rule (PROGRAMs install only when dropped on the CRT; click still installs); unplayable cards dim more (55 percent), driven by `Game.can_play` after every action. Commit `6f7f208`. Tests: `test_arch_v2_batch3.gd` 110/0; screenshots 38. No rules change. (LOG-001: moved "2026-11-22 — PROBE-004: PROBE choose-one (Claude)" to the archive.)
 
+## 2026-11-26 — ARCH-V2-006m: eye, Ghostware reel and speaker grille art wired; red pupil (Claude Code)
+
+Designer uploaded the three §6f parts. Trimmed, added with manifest rows, wired (eye iris tinted as a ring, pulsing red pupil dot; reel window and arrows on the painted buttons; grilles 96 × 48). Tests: `test_arch_v2_batch3.gd` 110/0, `test_arch_v2_ice.gd` 201/0, `test_arch_v2_coverage.gd` 538/0; screenshots 38. No rules change.
+

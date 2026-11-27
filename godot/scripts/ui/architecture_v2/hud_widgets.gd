@@ -586,13 +586,13 @@ class EyeLamp extends Explained:
 		size = sz; custom_minimum_size = sz
 		art = V2Art.tex("chassis/V2_EYE.png", sz.x)
 	func _process(d: float) -> void:
-		if reduced_motion or reveal <= 0.0: return
+		if reduced_motion: return
 		t += d; queue_redraw()
 	func lens_colour() -> Color:
 		return COOL.lerp(HOT, clampf(reveal, 0.0, 1.0))
 	func set_state(r: float, st: int, lock: bool) -> void:
 		reveal = r; strikes = st; lockdown = lock
-		set_process(r > 0.0 and not reduced_motion)
+		set_process(not reduced_motion)   # the red pupil always pulses (designer 2026-11-26 21:17)
 		queue_redraw()
 	func _draw() -> void:
 		var eye_d := minf(size.x, size.y - 18.0)
@@ -602,8 +602,10 @@ class EyeLamp extends Explained:
 		# A slow, faint breath once the mask starts slipping (static under reduced motion).
 		var breath := 1.0 if reduced_motion or reveal <= 0.0 else 0.9 + 0.1 * sin(t * (1.5 + 3.0 * reveal))
 		if art:
+			## V2_EYE (measured): pupil radius 0.14 r, white iris out to about 0.46 r. The iris is tinted
+			## as a ring so the pupil stays dark.
 			draw_texture_rect(art, Rect2(c - Vector2(r, r), Vector2(eye_d, eye_d)), false)
-			draw_circle(c, r * 0.46, Color(col, 0.55 * breath))   # tint the white iris
+			draw_arc(c, r * 0.30, 0, TAU, 64, Color(col, 0.42 * breath), r * 0.30, true)
 		else:
 			draw_circle(c + Vector2(0, 2), r, Color(0, 0, 0, 0.45))
 			draw_circle(c, r, Color("#8A5A36"))
@@ -614,6 +616,12 @@ class EyeLamp extends Explained:
 				draw_circle(c, r * (0.52 - k * 0.07), Color(col, (0.10 + k * 0.10) * breath))
 			draw_circle(c, r * 0.10, Color(1, 1, 1, 0.85 * breath))
 			draw_circle(c + Vector2(-r * 0.32, -r * 0.34), r * 0.10, Color(1, 1, 1, 0.35))
+		# The red pupil dot: always there, pulsing slowly (faster as the reveal grows); steady under
+		# reduced motion (designer 2026-11-26 21:17).
+		var beat := 1.0 if reduced_motion else 0.55 + 0.45 * (0.5 + 0.5 * sin(t * TAU * (0.5 + 1.0 * reveal)))
+		draw_circle(c, r * 0.13, Color(1.0, 0.1, 0.1, 0.22 * beat))
+		draw_circle(c, r * 0.075, Color(1.0, 0.12, 0.12, 0.55 + 0.45 * beat))
+		draw_circle(c + Vector2(-r * 0.02, -r * 0.025), r * 0.025, Color(1, 0.8, 0.8, 0.8 * beat))
 		# Strike lamps.
 		var lr := 5.5
 		for k in 3:
@@ -647,10 +655,14 @@ class GhostReel extends Control:
 		art = V2Art.tex("controls/V2_GHOST_REEL.png", sz.x)
 		var aw := sz.x * 0.26
 		window = ReelWindow.new(); window.name = "GhostWindow"; window.inspector = insp; window.reel = self
-		window.position = Vector2(sz.x * 0.08, sz.y * 0.12); window.size = Vector2(sz.x * 0.62, sz.y * 0.76)
+		## V2_GHOST_REEL (measured): window x 20–62%, y 20–79%; arrow buttons x 70–88%, y 21–46% / 51–76%.
+		var wr := Rect2(sz * Vector2(0.20, 0.20), sz * Vector2(0.42, 0.59)) if art else Rect2(sz.x * 0.08, sz.y * 0.12, sz.x * 0.62, sz.y * 0.76)
+		window.position = wr.position; window.size = wr.size
 		add_child(window)
-		up = _arrow("GhostUp", true, Rect2(sz.x - aw - 4, 6, aw, sz.y / 2.0 - 8))
-		down = _arrow("GhostDown", false, Rect2(sz.x - aw - 4, sz.y / 2.0 + 2, aw, sz.y / 2.0 - 8))
+		var ur := Rect2(sz * Vector2(0.70, 0.21), sz * Vector2(0.18, 0.25)) if art else Rect2(sz.x - aw - 4, 6, aw, sz.y / 2.0 - 8)
+		var dr := Rect2(sz * Vector2(0.70, 0.51), sz * Vector2(0.18, 0.25)) if art else Rect2(sz.x - aw - 4, sz.y / 2.0 + 2, aw, sz.y / 2.0 - 8)
+		up = _arrow("GhostUp", true, ur)
+		down = _arrow("GhostDown", false, dr)
 		up.pressed.connect(func(): step(-1))
 		down.pressed.connect(func(): step(1))
 		set_items([])
@@ -666,9 +678,13 @@ class GhostReel extends Control:
 			if b.is_hovered() or b.has_focus(): col = VasTokens.FOCUS
 			var pts := PackedVector2Array([c + Vector2(-w, w * 0.5), c + Vector2(w, w * 0.5), c + Vector2(0, -w * 0.6)]) if is_up \
 				else PackedVector2Array([c + Vector2(-w, -w * 0.5), c + Vector2(w, -w * 0.5), c + Vector2(0, w * 0.6)])
-			if art == null:
-				var sb := StyleBoxFlat.new(); sb.bg_color = Color("#2A1D16"); sb.border_color = Color("#B98A52")
-				sb.set_border_width_all(2); sb.set_corner_radius_all(5); b.draw_style_box(sb, Rect2(Vector2.ZERO, r.size))
+			if art:
+				# The painted buttons carry the arrows; the game adds hover/focus and a dim when idle.
+				if b.is_hovered() or b.has_focus(): b.draw_arc(c, minf(r.size.x, r.size.y) * 0.5, 0, TAU, 32, VasTokens.FOCUS, 2.0, true)
+				if not on: b.draw_circle(c, minf(r.size.x, r.size.y) * 0.46, Color(0, 0, 0, 0.45))
+				return
+			var sb := StyleBoxFlat.new(); sb.bg_color = Color("#2A1D16"); sb.border_color = Color("#B98A52")
+			sb.set_border_width_all(2); sb.set_corner_radius_all(5); b.draw_style_box(sb, Rect2(Vector2.ZERO, r.size))
 			b.draw_colored_polygon(pts, col))
 		add_child(b)
 		return b
@@ -713,7 +729,8 @@ class ReelWindow extends Explained:
 			return big
 	func _draw() -> void:
 		var r := Rect2(Vector2.ZERO, size)
-		draw_rect(r, Color("#0B0806"))
+		var painted := reel.art != null   # the painted reel has its own dark drum window
+		if not painted: draw_rect(r, Color("#0B0806"))
 		var it := reel.current()
 		var off := reel.roll * size.y * 0.6
 		if not it.is_empty():
@@ -721,12 +738,13 @@ class ReelWindow extends Explained:
 			GhostFace.paint(self, it, Rect2(size / 2.0 - Vector2(s, s) / 2.0 + Vector2(0, off), Vector2(s, s)))
 		else:
 			draw_string(VasTokens.FONT_PLAQUE, Vector2(size.x / 2.0 - 4, size.y / 2.0 + 6), "–", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(VasTokens.IVORY, 0.25))
-		# Drum shading top and bottom.
-		for k in 6:
+		# Drum shading top and bottom (painted on the art).
+		for k in (0 if painted else 6):
 			var a := 0.30 - k * 0.05
 			draw_rect(Rect2(0, k * 2.0, size.x, 2.0), Color(0, 0, 0, a))
 			draw_rect(Rect2(0, size.y - (k + 1) * 2.0, size.x, 2.0), Color(0, 0, 0, a))
-		draw_rect(r, Color("#E0B04A") if it.get("origin", false) else Color("#5A3E28"), false, 2.0)
+		if not painted or it.get("origin", false):
+			draw_rect(r, Color("#E0B04A") if it.get("origin", false) else Color("#5A3E28"), false, 2.0)
 		focus_ring()
 
 ## A Ghostware face: its painted art if there is one (assets/concept/ghostware/GW_<ID>.png), else
