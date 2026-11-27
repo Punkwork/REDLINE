@@ -3417,3 +3417,5 @@ Built on the V2 encounter screen, in five commits (see the development log). Eve
 
 Designer: "for the next build add ready rig to the ghostware slot on the encounter screen". The Ghostware reel (ARCH-V2-006b) already lists the Generalist's ORIGIN, READY RIG (RUSTLER-003), first, but shows only the initials "RR" because there is no reel art. The next build gives the slot READY RIG art and its rules text on hover. Presentation only: no rules change.
 
+**Built (2026-11-27, Claude Code; PROPOSED for review):** the designer's 30 Ghostware icons (`PANOPTICON art/Ghostware Icons`) imported to `godot/assets/concept/ghostware/` at 256 × 256. The reel shows READY RIG's icon, with its rules text on hover; LOW PROFILE, REDLINER and PATIENT ZERO also get their icons, and so does any other Ghostware the run picks up.
+

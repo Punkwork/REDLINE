@@ -31,6 +31,8 @@ func run() -> void:
 	await test_look()
 	print("- graffiti, punch cards, low VITAE, PATIENT ZERO (007c)")
 	await test_rest()
+	print("- ORIGIN Ghostware art in the reel (008a)")
+	test_origin_art()
 	print("ARCH-V2 BATCH 4: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -143,3 +145,13 @@ func test_rest() -> void:
 	sb.lane.target_chosen.emit(g.enc.ice[1])
 	check(int(g.enc.ice[1].virus.get("ROT", 0)) == 1 and g.phase == "PLAYER" and sb.ctrl.game_calls == calls + 1, "chosen ICE gets 1 ROT, one call")
 	sb.queue_free(); await frames()
+
+
+## ARCH-V2-008a: every Rustler's ORIGIN shows its icon and rules text in the Ghostware reel.
+func test_origin_art() -> void:
+	for rid in CardDB.RUSTLERS:
+		var g := Game.new(); g.rustler = rid
+		var m: Array = VisibleStateAdapter.ghostware_models(g)
+		check(not m.is_empty() and bool(m[0].origin), "%s: ORIGIN first in the reel" % rid)
+		check(ResourceLoader.exists(String(m[0].art)), "%s: %s has art" % [rid, m[0].name])
+		check(String(m[0].text) != "", "%s: %s has rules text for the hover" % [rid, m[0].name])

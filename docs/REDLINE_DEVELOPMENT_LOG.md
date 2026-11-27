@@ -400,3 +400,8 @@ Designer (05:49): "Cut the Playtest 13 build: move `release` to `a6f4476`." Fast
 ## 2026-11-27 — ARCH-V2-008a recorded (Claude Code)
 
 Designer note: add READY RIG to the Ghostware slot for the next build. Recorded in Master Design and HANDOFF (To build). Found: the reel already shows READY RIG first, but as "RR" initials, because `GW_READY_RIG.png` doesn't exist. Not built yet. No code changes, no tests run.
+
+## 2026-11-27 — ARCH-V2-008a built: Ghostware icons in the reel (Claude Code)
+
+Imported the designer's 30 Ghostware icons from `PANOPTICON art/Ghostware Icons` (1254 px → 256 px, 2.5 MB) into `godot/assets/concept/ghostware/`. The reel now shows READY RIG and the other ORIGINs as icons instead of initials. No code change: the reel already loaded `GW_<NAME>.png` by name. Added `test_origin_art` to `test_arch_v2_batch4.gd`. Tests: import 0; `test_arch_v2_batch4.gd` 62/0; `test_arch_v2_ice.gd` 202/0; `test_arch_v2_batch3.gd` 110/0; `shot_arch_v2_ice.gd` 42 captures, 0 script errors. Fixture: `docs/visual/fixtures/arch-v2-batch4/v2_02_ready_rig_reel_zoom.jpg`.
+

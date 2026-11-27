@@ -7,3 +7,8 @@
 - `v2_32_trace30_pixel_step.jpg`: TRACE 30: the rooms and avatars at their pixel step; keys, plates and text sharp (007b).
 - `v2_34_patient_zero.jpg`: PATIENT ZERO lights the ICE windows, 007c.
 - `app_01_map.jpg`, `app_02_encounter_v2.jpg`, `app_03_after_breach_reward.jpg`: the real app (`Main.tscn`): the map, an ICE Node on the V2 screen, and the app's reward overlay after the BREACH (007d; `godot/tests/shot_arch_v2_app.gd`).
+
+## ARCH-V2-008a (2026-11-27)
+
+- `v2_02_open_ready_rig_reel.jpg`: encounter opening with the READY RIG icon in the Ghostware reel.
+- `v2_02_ready_rig_reel_zoom.jpg`: the header, 2x zoom.
