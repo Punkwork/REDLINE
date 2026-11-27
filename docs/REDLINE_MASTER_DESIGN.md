@@ -3433,3 +3433,7 @@ Designer: "Next we need to test caps in the game. in this next BUild, i want you
 
 **Interpretations to confirm:** (1) if all 3 slots are full, no CAP is given (UPL-001 says you must discard one to take a new one; there is no discard prompt yet, and the slice has one CAPTCHA Node, so it can't happen in play); (2) CRACKER's −4 STR uses the same STR floor as card STR reductions; (3) in the rack, CRACKER is aimed with the arrow like a targeted card, and the others inject on click.
 
+
+
+## SEQUENCE-002 — SEQUENCED revision (designer approved 2026-11-27)
+SEQUENCED permits breaks in any order. Each successful out-of-sequence break generates TRACE once if an earlier visible, active subroutine on the same ICE remains unbroken, regardless of how many are skipped. Previously broken, concealed and inactive subroutines do not count. This supersedes mandatory ordered breaking and retires standalone TRIPWIRE. TRACE magnitude remains open for balancing. Design SEQUENCED ICE with low-urgency earlier effects (e.g. INSERT SPAM or DISCARD) and a compelling later target (e.g. PULP 6 or AMEND on supporting ICE, increasing the right-hand ICE's PULP during the response). Examples are design patterns, not approved new ICE profiles. Preview the penalty before committing. Priority 2 representative encounter refinement; implementation and tests pending, no engine changes in this decision.
