@@ -57,3 +57,18 @@ Reconciliation: ranks 1 and 2 have subsequently been recorded complete in the No
 - **Codex:** independent visual/asset inventory against VAS-001 and UI Bible; inspect existing art, fixtures, fonts, controls, typography, motion and announcement capabilities; classify reuse/adapt/create, identify gaps and propose isolated fixture tasks with file ownership.
 
 Both may start immediately on architecture-v2. Read AGENTS.md/CLAUDE.md and canonical specs first. Inventory and non-mutating runtime/test investigation only; no production edits, new branches, merges, release changes, rules changes or overlapping implementation. File actual findings in shared dated operations reports; link evidence and #21/#24, distinguish verified from unverified. Stop for designer review before production implementation. Detailed development prompts follow inventory findings. Other November 26 ranks remain proposed.
+
+## 2026-11-27 — designer-confirmed daily agenda (OPS-001; review 2026-11-26)
+
+Status: DESIGNER-CONFIRMED on November 27 (Toronto). Sources: November 26 consolidated ChatGPT review, [Codex inventory](reports/2026-11-26-Codex.md), Claude Code contribution (report commit `35bc3f2`, reviewed head `7bdf1f2`). Claude Code reports Batches 1–4 playable, 42 runtime screenshots, zero test failures and authorized Playtest 13 at `a6f4476`. These are agent-reported findings, not independently revalidated by ChatGPT. This agenda supersedes the earlier inventory-stage priorities for current work; historical entries remain intact.
+
+| Rank | Confirmed priority / canonical reference | Owner | Dependencies / deliverable |
+|---|---|---|---|
+| 1 | Playtest 13 Windows validation / RELEASE-002 | Designer; Claude Code support | [Artifact](https://github.com/Punkwork/REDLINE/actions/runs/45985348390/artifacts/15191118131); verify build commit and checksums, launch on Windows, test rendering/audio/input and complete encounters; record findings. |
+| 2 | Representative ICE encounter refinement / VAS-001 / CAS-001 / #21 | Designer + ChatGPT + Claude Code | PT13 and actual fixtures; evaluate ICE composition, keys, cards, hover, response feedback and negative space; prioritized evidence-backed corrections and designer acceptance. |
+| 3 | Typography and Motion Design System in parallel / UI-TYPO-001/a / M06 / #24 | ChatGPT + Claude + Codex + Claude Code | Physical/virtual typography, event hierarchy, timing, competing events, reduced effects and working Godot specimens; avoid duplicate production work. |
+| 4 | Targeted UI improvements / #16, #14, #18 and PT13 findings | Claude Code + Codex | Re-triage against current build; propose and test incremental corrections within approved scope. |
+| 5 | Repository and release reconciliation / OPS-001 / RELEASE-002 / DOCS-MIG-001 / UI-BIBLE-001 | Claude Code + designer | Evidence links for #13/#15/#17/#20; review #19 supersession; verify tag, branch drift, migration gate and current records. No issue closure or ref changes without required authorization. UI-BIBLE-001/DOCS-MIG-001 validation status to be reconciled against recorded evidence. |
+| 6 | Map and reward architecture planning ONLY / MAP-003 / C01 / C17 / F10 | Claude Code + designer | Proposed component boundaries and dependencies; no production map/reward implementation authorized by this agenda. |
+
+Designer explicitly approved these six priorities in this order. Agenda confirmation does not itself constitute final VAS-001 acceptance, approval of new rules or designs, branch/tag changes, issue closure, or authorization beyond existing implementation gates. CAPS and secondary gameplay experiments deferred. Canonical active branch remains architecture-v2; preserve shared backlog and agent ownership boundaries.
