@@ -33,9 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-23 — ARCH-V2-001 VAS-001 visual architecture specification
-
-Designer confirmed faithful reproduction of the supplied 1536×864 dense mechanical console mockup as the vertical-slice visual target. Created `docs/architecture-v2/VAS-001.md` defining reference regions, approximate geometry, material/type tokens, Godot-native vs art-backed controls, visual states, modular asset inventory, viewport adaptations, screenshot comparison and milestone acceptance. The reference image is not yet confirmed uploaded to GitHub. Documentation only; no graphics or gameplay implementation, tests, or implementation approval.
 ## 2026-11-23 — NUL-PILLAR-001: NUL/REM foundational design direction (Codex)
 
 Designer confirmed NUL/REM as a foundational pillar of PANOPTICON's psychological experiment and requested preservation in GitHub. Recorded the substantive discussion, including the three conditions, implicit/explicit authority, active solicitation, deck-removal denial, safer routes, automated first install and advance ICE intelligence in `REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md` (f2b938b). Master design and HANDOFF cross-referenced. Individual mechanics remain proposals. **Code changes:** none; tests not run (documentation only). **Interpretations to confirm:** domain-specific authority, thresholds, revocation, intervention feedback, integration with existing canon and rules.
@@ -395,4 +392,8 @@ Rules engine and data identical to `prototype-baseline` (git diff empty). New `t
 ## 2026-11-26 — ARCH-V2-007f, CORE-LOOP-REWARD-GAP, Playtest 13 prepared (Claude Code)
 
 Designer (22:12): graffiti removed for now; reward fix approved; prepare Playtest 13. `Game._roll_rewards` falls back to SHARED when a Rustler pool is empty (new rules test: 60 checks; fails 30 without the fix). Parity: 4 Rustlers, 80 encounters, 4,008 actions identical. Flaky timing in the Batch 4 lethal-pulse check fixed (fixed clock). Version 0.13.0-playtest.13; guide and core-loop checklist updated. Tests: test_game 236/0 (SIM=1 too), adp 17/0, signal/carbon 672/0, ice 202/0, coverage, batch3 110/0, batch4 50/0, app 13/0, parity 4088/0. (LOG-001: moved "2026-11-23 — ARCH-V2-001 formal component specification (ChatGPT)" to the archive.)
+
+## 2026-11-27 — RELEASE-002: HALCYON PLAYTEST 13 cut (Claude Code)
+
+Designer (05:49): "Cut the Playtest 13 build: move `release` to `a6f4476`." Fast-forwarded `release` 2845ecd → a6f4476. [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/45985348390) passed: test_game 236/0, adp 17/0, signal/carbon 672/0, ice 202/0, coverage 549/0, batch3 110/0, batch4 50/0, app 13/0, parity 4088/0 (80 encounters, 4,008 actions); 42 screenshots; export with no errors; [artifact](https://github.com/Punkwork/REDLINE/actions/runs/45985348390/artifacts/15191118131) `PANOPTICON-HALCYON-PLAYTEST-13-0.13.0-playtest.13-Windows-x86_64` (6 files, 206.6 MB). Artifact download is blocked from this session; contents verified from the log. Tag `playtest-13` waits on the designer. (LOG-001: moved "2026-11-23 — ARCH-V2-001 VAS-001 visual architecture specification" to the archive.)
 
