@@ -34,3 +34,12 @@ Recommended priorities:
 1. Representative ICE Encounter.
 2. CSA-02 review.
 3. CSA-03 after approval.
+
+## Session 3 (about 18:24–18:50, `architecture-v2`)
+
+Work completed: CSA-02 designer answers recorded (`98d37b5`): Q1, Q3, Q5 (direction), Q6, Q7, Q8 and Q9 approved; Q2 and Q4 open. Conflict table prepared for the designer as a Sheet (35 rows, 37 conflicts).
+Incident (my error, fixed forward in `fd9d0b5`): two of my scripts opened a file for writing before reading it.
+- `c0e4acb` cut `REDLINE_DEVELOPMENT_LOG_ARCHIVE.md` to 4 entries.
+- `98d37b5` cut `REDLINE_DEVELOPMENT_LOG.md` to 1 entry.
+
+Both were restored from history. All 431 entries that existed at `1b88af2` were verified present verbatim, and no history was rewritten. Evidence for CSA-05: a size or line-count drop on append-only records is machine-checkable and would have blocked both commits.
