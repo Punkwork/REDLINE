@@ -40,6 +40,8 @@ const AD := Rect2(1196, 1, 306, 94)
 const ENCLOSURE := Rect2(6, 100, 1524, 499)
 const LANE := Rect2(40, 134, 1456, 354)
 const RAIL_HOUSING := Rect2(192, 494, 1152, 63)
+## ARCH-V2-006d: LAYER and CRED over the rail's left vent grille.
+const LEDGER := Rect2(206, 502, 168, 47)
 const CRT := Rect2(6, 632, 262, 156)   ## cartridges stick up above it (ARCH-V2-003u)
 const NOTE := Rect2(8, 794, 258, 66)
 const END_TURN := Rect2(1464, 794, 64, 64)   ## designer 15:37: the very bottom-right corner
@@ -85,6 +87,9 @@ var turn_counter: HudWidgets.FlipCounter
 var phase_plaque: HudWidgets.PhasePlaque
 var trace_gauge: HudWidgets.TraceGauge
 var eye: HudWidgets.EyeLamp
+var ledger: HudWidgets.RailLedger
+var log_panel: HudWidgets.LogPanel
+var rail_log: HudWidgets.Explained
 var ghost_reel: HudWidgets.GhostReel
 var cap_rack: HudWidgets.SlotRack
 var protocol_rack: HudWidgets.SlotRack
@@ -160,6 +165,7 @@ func _build() -> void:
 		refresh())
 	choice.strain.connect(func(st): ctrl.request_cull(st); refresh())
 	stage.add_child(choice)
+	log_panel = HudWidgets.LogPanel.new(); stage.add_child(log_panel)
 	_target_plaque = _build_target_plaque()
 	lane.target_chosen.connect(func(r):
 		var u := _pending_target; _pending_target = -1
@@ -262,13 +268,25 @@ func _build_enclosure() -> void:
 	lane.break_requested.connect(func(r, s, u): ctrl.request_break(r, s, u))
 	stage.add_child(lane)
 	_art("controls/V2_RAIL_HOUSING.png", RAIL_HOUSING, "RailHousing")
+	## ARCH-V2-006i: the log opens from the rail. Hover on the rail's glass shows the latest lines;
+	## a click (on the glass or a step) pins the full log; Esc or another click closes it.
+	rail_log = HudWidgets.Explained.new(); rail_log.name = "RailLog"; rail_log.inspector = inspector
+	rail_log.position = RAIL_HOUSING.position; rail_log.size = RAIL_HOUSING.size
+	rail_log.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	rail_log.gui_input.connect(func(e):
+		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: toggle_log()
+		elif e.is_action_pressed("ui_accept"): toggle_log())
+	stage.add_child(rail_log)
 	rail = ResponseRail.new()
 	rail.height = 30.0
 	rail.position = RAIL_HOUSING.position + Vector2(RAIL_HOUSING.size.x * 0.16, RAIL_HOUSING.size.y * 0.18)
 	rail.size = Vector2(RAIL_HOUSING.size.x * 0.68, RAIL_HOUSING.size.y * 0.64)
 	rail.inspector = inspector
+	rail.log_requested.connect(toggle_log)
 	stage.add_child(rail)
 	_art("chassis/V2_ENCLOSURE_FRAME.png", ENCLOSURE, "EnclosureFrame")
+	ledger = HudWidgets.RailLedger.new(); ledger.name = "Ledger"
+	ledger.setup(LEDGER.size, inspector); ledger.position = LEDGER.position; stage.add_child(ledger)
 
 func _build_tray() -> void:
 	_art("controls/V2_TRAY.png", TRAY, "Tray")
@@ -348,8 +366,24 @@ func refresh() -> void:
 	meters.BW.set_value(game.bw, Game.BW_PER_TURN, Game.BW_PER_TURN, str(game.bw), "BANDWIDTH %d" % game.bw)
 	meters.RAM.set_value(game.ram_used(), game.ram_total(), game.ram_total(), "%d/%d" % [game.ram_used(), game.ram_total()], "RAM %d / %d" % [game.ram_used(), game.ram_total()])
 	meters.SHIELD.set_value(game.shield, 10, 10, str(game.shield), "SHIELD %d" % game.shield)
-	var incoming := VisibleStateAdapter.incoming_pulp(game)
-	meters.PULP.set_value(incoming, maxi(1, game.vitae), 10, str(incoming), "PULP INCOMING %d" % incoming)
+	var inc := VisibleStateAdapter.incoming(game)
+	var incoming: int = inc.pulp
+	if inc.parting:
+		meters.PULP.set_value(incoming, maxi(1, game.vitae), 10, str(incoming), "PARTING SHOT: PULP %d · TRACE %d" % [inc.pulp, inc.trace])
+		meters.PULP.lines = ["After a BREACH, the unbroken subroutines you can see fire once when you press END TURN. DEADLOCKs don't."]
+		end_key.title = "END TURN"
+		end_key.lines = ["Parting shot: PULP %d, TRACE %d." % [inc.pulp, inc.trace]] if inc.pulp + inc.trace > 0 else ["Parting shot: nothing (everything showing is broken)."]
+	else:
+		meters.PULP.set_value(incoming, maxi(1, game.vitae), 10, str(incoming), "PULP INCOMING %d" % incoming)
+		meters.PULP.lines = []
+		end_key.lines = []
+	var lg := VisibleStateAdapter.ledger(game)
+	ledger.reduced_motion = reduced_motion
+	ledger.set_values(lg.layers, lg.current, lg.cred, lg.reserve)
+	rail_log.title = "ENCOUNTER LOG"
+	rail_log.lines = game.log.slice(maxi(0, game.log.size() - 5)) if not game.log.is_empty() else ["Nothing yet."]
+	rail_log.lines.append("Click the rail for the full log.")
+	if log_panel.visible: log_panel.set_lines(game.log)
 	counters.set_counts(game.draw_pile.size(), game.discard.size(), _burned_count())
 	effect_card.set_stamps(_stamps())
 	end_key.set_enabled(not responding and game.phase == "PLAYER")
@@ -360,6 +394,15 @@ func refresh() -> void:
 	if _banner.visible:
 		var title: Label = _banner.find_child("Title", true, false)
 		title.text = "FLATLINED" if game.phase == "DEAD" else ("ENCOUNTER COMPLETE · " + game.phase)
+
+func toggle_log() -> void:
+	if log_panel.visible:
+		log_panel.hide(); return
+	inspector.close()
+	log_panel.set_lines(game.log)
+	log_panel.reset_size()
+	log_panel.position = Vector2(REF.x / 2.0 - log_panel.size.x / 2.0, RAIL_HOUSING.position.y - log_panel.size.y - 8)
+	log_panel.show()
 
 func _burned_count() -> int:
 	for k in ["burned", "burn_pile", "exiled"]:
@@ -462,6 +505,8 @@ func _build_target_plaque() -> Control:
 	return pc
 
 func _unhandled_input(e: InputEvent) -> void:
+	if log_panel.visible and e.is_action_pressed("ui_cancel"):
+		log_panel.hide(); get_viewport().set_input_as_handled(); return
 	if _pending_target >= 0 and e.is_action_pressed("ui_cancel"):
 		_pending_target = -1; refresh(); get_viewport().set_input_as_handled()
 

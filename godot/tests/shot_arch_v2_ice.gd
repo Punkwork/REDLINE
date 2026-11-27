@@ -212,6 +212,23 @@ func run() -> void:
 		print("shot v2_20_header_crop")
 		shots += 1
 
+	# 10e. ARCH-V2-006 Batch 3: extraction ants on the rail ledger (frozen mid-run), the log pinned
+	# from the rail, and the parting shot after a BREACH (PULP meter and END TURN hover).
+	await fresh()
+	quiet()
+	sb.game.extract(5); sb.refresh()
+	sb.ledger.set_process(false); sb.ledger.ants = 0.45; sb.ledger.queue_redraw()
+	await shot("v2_21_ledger_extraction_ants")
+	sb.ledger.finish()
+	sb.game.log.append_array(["AUTO-RENEW renews your subscription.", "You break S1 with FORTRESS ICEPICK (1 BW)."])
+	sb.toggle_log()
+	await shot("v2_22_log_from_rail")
+	sb.toggle_log()
+	sb.game.enc.breached = true; sb.refresh()
+	sb.end_key.grab_focus()
+	await shot("v2_23_parting_shot")
+	sb.end_key.release_focus(); sb.inspector.close()
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

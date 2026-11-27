@@ -750,3 +750,152 @@ class GhostFace extends Control:
 		var tw := VasTokens.FONT_PLAQUE.get_string_size(ini, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
 		ci.draw_string(VasTokens.FONT_PLAQUE, c + Vector2(-tw / 2.0, px * 0.36), ini, HORIZONTAL_ALIGNMENT_LEFT, -1, px, VasTokens.IVORY)
 
+
+## ARCH-V2-006d: the ledger at the left end of the NEXT RESPONSE rail. Left to right: the LAYER
+## mark (a hamburger of one bar per layer in the Node: current lit, cleared dim, later unlit), the
+## Rustler's CRED (CRED icon + value), then the layer's CRED reserve. When CRED is extracted, red
+## marching ants run LEFT from the reserve to the Rustler's CRED, which then counts up. Reduced
+## motion: no ants, the values change at once. Presentation only; values come from Game via the screen.
+class RailLedger extends Control:
+	var inspector: KeyInspector
+	var layer_mark: Explained
+	var cred_cell: Explained
+	var reserve_cell: Explained
+	var layers := 1
+	var current := 0
+	var cred := 0
+	var reserve := 0
+	var shown_cred := 0.0     # what the CRED window shows (lags during the ants)
+	var ants := 0.0           # seconds left of the ants run
+	var gained := 0
+	var reduced_motion := false
+	var cred_icon: Texture2D
+	const ANTS_S := 0.9
+	const COUNT_S := 0.45
+	var _count_t := 0.0
+	func setup(sz: Vector2, insp: KeyInspector) -> void:
+		size = sz; custom_minimum_size = sz; inspector = insp
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		cred_icon = V2Art.tex("icons/V2_ICON_CRED_LIGHT.png", 32)
+		var h := sz.y
+		layer_mark = _cell("LayerMark", Rect2(0, 0, h * 0.62, h))
+		cred_cell = _cell("CredValue", Rect2(h * 0.70, 0, sz.x * 0.40, h))
+		reserve_cell = _cell("LayerCred", Rect2(sz.x - sz.x * 0.30, 0, sz.x * 0.30, h))
+		set_process(false)
+	func _cell(n: String, r: Rect2) -> Explained:
+		var c := Explained.new(); c.name = n; c.inspector = inspector
+		c.position = r.position; c.size = r.size; c.draw.connect(queue_redraw)
+		add_child(c)
+		return c
+	func set_values(n_layers: int, cur: int, c: int, res: int) -> void:
+		layers = clampi(n_layers, 1, 3); current = clampi(cur, 0, layers - 1); reserve = res
+		if c > cred and not reduced_motion and is_inside_tree():
+			gained = c - cred
+			ants = ANTS_S; _count_t = 0.0
+			set_process(true)
+		elif ants <= 0.0:
+			shown_cred = c
+		cred = c
+		if reduced_motion: shown_cred = c; ants = 0.0
+		layer_mark.title = "LAYER %d / %d" % [current + 1, layers]
+		layer_mark.lines = ["This ICE Node has %d encounter layer%s." % [layers, "" if layers == 1 else "s"]]
+		cred_cell.title = "CRED %d" % cred
+		cred_cell.lines = ["Your CRED. Extractors take it from the layer's reserve."]
+		reserve_cell.title = "LAYER CRED %d" % reserve
+		reserve_cell.lines = ["CRED left to extract in this layer."]
+		queue_redraw()
+	## Tests and fixtures: run the animation to its end at once.
+	func finish() -> void:
+		ants = 0.0; shown_cred = cred; set_process(false); queue_redraw()
+	func _process(d: float) -> void:
+		if ants > 0.0:
+			ants = maxf(0.0, ants - d)
+		else:
+			_count_t += d
+			shown_cred = lerpf(float(cred - gained), float(cred), clampf(_count_t / COUNT_S, 0.0, 1.0))
+			if _count_t >= COUNT_S: shown_cred = cred; set_process(false)
+		queue_redraw()
+	func _draw() -> void:
+		var h := size.y
+		var glass := StyleBoxFlat.new(); glass.bg_color = Color("#0B0806"); glass.border_color = Color("#5A3E28")
+		glass.set_border_width_all(2); glass.set_corner_radius_all(int(h * 0.3)); glass.anti_aliasing = true
+		draw_style_box(glass, Rect2(Vector2.ZERO, size))
+		# LAYER hamburger.
+		var lm := Rect2(layer_mark.position, layer_mark.size)
+		var bw := lm.size.x * 0.56; var bh := h * 0.11
+		for k in 3:
+			var y := h * 0.30 + k * h * 0.2 - bh / 2.0
+			var col := Color(VasTokens.IVORY, 0.10)
+			if k < layers:
+				col = VasTokens.PHOSPHOR if k == current else (Color(VasTokens.PHOSPHOR, 0.30) if k < current else Color(VasTokens.IVORY, 0.35))
+			draw_rect(Rect2(lm.position.x + (lm.size.x - bw) / 2.0 + 4, y, bw, bh), col)
+		# Rustler's CRED: icon + value.
+		var cc := Rect2(cred_cell.position, cred_cell.size)
+		var s := h * 0.52
+		if cred_icon: draw_texture_rect(cred_icon, Rect2(cc.position + Vector2(2, (h - s) / 2.0), Vector2(s, s)), false, VasTokens.AMBER)
+		var font := VasTokens.FONT_READOUT
+		var px := int(h * 0.42)
+		var ct := str(roundi(shown_cred))
+		draw_string(font, Vector2(cc.position.x + s + 8, h / 2.0 + px * 0.36), ct, HORIZONTAL_ALIGNMENT_LEFT, -1, px, VasTokens.AMBER if ants <= 0.0 else VasTokens.IVORY)
+		# Layer reserve.
+		var rc := Rect2(reserve_cell.position, reserve_cell.size)
+		var rt := str(reserve)
+		var rw := font.get_string_size(rt, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+		draw_string(font, Vector2(rc.end.x - rw - 8, h / 2.0 + px * 0.36), rt, HORIZONTAL_ALIGNMENT_LEFT, -1, px, Color(VasTokens.IVORY, 0.75))
+		# Marching ants, right to left, between the reserve and the Rustler's CRED.
+		var x0 := cc.position.x + s + 8 + font.get_string_size(ct, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x + 6
+		var x1 := rc.end.x - rw - 14
+		if x1 > x0:
+			var y := h / 2.0
+			if ants > 0.0:
+				var phase := fmod((ANTS_S - ants) * 60.0, 12.0)
+				var x := x1 - phase
+				while x > x0:
+					draw_line(Vector2(maxf(x - 6.0, x0), y), Vector2(x, y), Color("#FF3A2A"), 2.5)
+					x -= 12.0
+				draw_colored_polygon(PackedVector2Array([Vector2(x0, y), Vector2(x0 + 7, y - 5), Vector2(x0 + 7, y + 5)]), Color("#FF3A2A"))
+			else:
+				var x := x1
+				while x > x0:
+					draw_line(Vector2(maxf(x - 3.0, x0), y), Vector2(x, y), Color(VasTokens.IVORY, 0.12), 1.5)
+					x -= 9.0
+		for c in [layer_mark, cred_cell, reserve_cell]:
+			if c.has_focus():
+				var f := StyleBoxFlat.new(); f.draw_center = false; f.set_border_width_all(2); f.border_color = VasTokens.FOCUS
+				f.set_corner_radius_all(6); draw_style_box(f, Rect2(c.position, c.size).grow(1))
+
+## ARCH-V2-006i: the encounter log, opened from the NEXT RESPONSE rail (hover shows the latest lines;
+## click pins the full log until clicked again or Esc). No ticker. Lines come from Game.log.
+class LogPanel extends PanelContainer:
+	var _list: VBoxContainer
+	var _scroll: ScrollContainer
+	signal closed
+	func _init() -> void:
+		name = "LogPanel"; z_index = 150
+		var st := StyleBoxFlat.new(); st.bg_color = Color("#120D0A", 0.96); st.border_color = VasTokens.BRONZE
+		st.set_border_width_all(3); st.set_corner_radius_all(14); st.set_content_margin_all(14)
+		st.shadow_color = Color(0, 0, 0, 0.5); st.shadow_size = 12
+		add_theme_stylebox_override("panel", st)
+		var col := VBoxContainer.new(); add_child(col)
+		var head := Label.new(); head.text = "ENCOUNTER LOG"; head.add_theme_font_override("font", VasTokens.FONT_PLAQUE)
+		head.add_theme_font_size_override("font_size", 22); head.add_theme_color_override("font_color", VasTokens.AMBER)
+		col.add_child(head)
+		_scroll = ScrollContainer.new(); _scroll.custom_minimum_size = Vector2(560, 300)
+		_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		col.add_child(_scroll)
+		_list = VBoxContainer.new(); _list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; _scroll.add_child(_list)
+		hide()
+	func set_lines(lines: Array) -> void:
+		for c in _list.get_children(): _list.remove_child(c); c.queue_free()
+		for l in lines:
+			var lab := Label.new(); lab.text = String(l); lab.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			lab.custom_minimum_size.x = 540
+			lab.add_theme_font_override("font", VasTokens.FONT_RULES); lab.add_theme_font_size_override("font_size", 15)
+			lab.add_theme_color_override("font_color", VasTokens.IVORY)
+			_list.add_child(lab)
+		_scroll.set_deferred("scroll_vertical", 1 << 20)   # newest line in view
+	func count() -> int:
+		return _list.get_child_count()
+	func _gui_input(e: InputEvent) -> void:
+		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
+			hide(); closed.emit(); accept_event()

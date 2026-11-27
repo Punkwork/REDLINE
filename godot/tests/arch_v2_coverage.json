@@ -104,20 +104,20 @@
    "area": "Header",
    "element": "LAYER count and layer CRED reserve",
    "prototype": "build_node_plate, RESERVE dial",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "Left end of the NEXT RESPONSE rail: hamburger LAYER icon (1-3 lit), then CRED pair (ARCH-V2-006d)",
-   "note": ""
+   "v2": "LayerMark",
+   "status": "BUILT",
+   "next": "",
+   "note": "Ledger at the left end of the rail: LAYER hamburger, CRED, layer CRED (ARCH-V2-006d)."
   },
   {
    "id": "H11",
    "area": "Header",
    "element": "CRED",
    "prototype": "CRED/RAM row",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "CRED icon + value left of the layer CRED; red marching ants flow left on extraction (ARCH-V2-006d)",
-   "note": "RAM is built (meters)."
+   "v2": "CredValue",
+   "status": "BUILT",
+   "next": "",
+   "note": "New CRED icon; red marching ants run left on extraction, then the value counts up (ARCH-V2-006d)."
   },
   {
    "id": "H12",
@@ -304,20 +304,20 @@
    "area": "Response",
    "element": "PARTING SHOT after BREACH (PT11-UI 1)",
    "prototype": "PULP INCOMING row",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C13/C14",
-   "note": ""
+   "v2": "MeterPULP",
+   "status": "BUILT",
+   "next": "",
+   "note": "PULP meter reads PARTING SHOT after BREACH; END TURN hover states it; rail drops DEADLOCKs."
   },
   {
    "id": "R04",
    "area": "Response",
    "element": "Encounter log",
    "prototype": "log_text",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "Opens on hover, click or focus of the NEXT RESPONSE rail; no ticker (ARCH-V2-006i)",
-   "note": ""
+   "v2": "RailLog",
+   "status": "BUILT",
+   "next": "",
+   "note": "Hover the rail for the latest lines; click pins the full log; Esc closes (ARCH-V2-006i)."
   },
   {
    "id": "R05",

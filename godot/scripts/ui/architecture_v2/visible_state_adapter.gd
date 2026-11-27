@@ -112,8 +112,11 @@ static func response_model(game: Game, ctrl: EncounterController) -> Array:
 			if ctrl.is_firing(st.ref, st.sub) and not steps.is_empty() and is_same(steps[-1].ref, st.ref) and steps[-1].sub == st.sub: continue
 			steps.append({"ref": st.ref, "sub": st.sub, "done": false})
 	else:
+		var breached: bool = game.enc.get("breached", false)
 		for st in game.response_preview():
 			if st.skipped: continue
+			# After a BREACH the rail previews the parting shot: no DEADLOCKs, no hidden steps (BREACH-001).
+			if breached and (st.hidden or game._has_deadlock(st.effects)): continue
 			steps.append({"ref": game.enc.ice[st.ice], "sub": st.sub, "done": false})
 	var biggest := biggest_hit(game)
 	for st in steps:
@@ -272,3 +275,25 @@ static func place_line(game: Game) -> String:
 	var layers: Array = n.get("layers", [])
 	var lay := " · LAYER %d / %d" % [game.layer + 1, layers.size()] if layers.size() > 0 else ""
 	return "%s · %s · NODE %s %s%s" % [game.corporation, tier, String(n.get("id", "?")), String(n.get("name", "")), lay]
+
+## PT11-UI / R03: what the next response deals, or after a BREACH what the parting shot deals at
+## END TURN (DEADLOCKs never fire in the parting shot). Visible steps only. PULP includes RETALIATE.
+static func incoming(game: Game) -> Dictionary:
+	var out := {"pulp": 0, "trace": 0, "parting": bool(game.enc.get("breached", false))}
+	if game.enc.is_empty(): return out
+	for step in game.response_preview():
+		if step.skipped or step.hidden: continue
+		if out.parting and game._has_deadlock(step.effects): continue
+		for source in step.effects:
+			var e := game.effect_value(game.enc.ice[step.ice], source)
+			if e.k == "PULP": out.pulp += int(e.get("v", 0))
+			elif e.k == "RETALIATE": out.pulp += int(e.get("dmg", 0))
+			elif e.k == "TRACE": out.trace += int(e.get("v", 0))
+	return out
+
+## ARCH-V2-006d: the ledger's values.
+static func ledger(game: Game) -> Dictionary:
+	var layers: Array = game.node.get("layers", [])
+	return {"layers": maxi(1, layers.size()), "current": game.layer, "cred": game.cred,
+		"reserve": int(game.enc.get("reserve", 0)) if not game.enc.is_empty() else 0}
+

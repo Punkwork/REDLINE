@@ -28,6 +28,8 @@ func run() -> void:
 	root.size = Vector2i(1600, 1000)
 	print("- header: eye, strikes, LOCKDOWN, legend, Ghostware reel")
 	await test_header()
+	print("- rail: LAYER, CRED and extraction ants, log, parting shot")
+	await test_rail()
 	print("ARCH-V2 BATCH 3: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -74,6 +76,52 @@ func test_header() -> void:
 	var before := [g.trace, g.strikes, g.ghostware.size(), g.bw]
 	sb.refresh(); sb.refresh()
 	check([g.trace, g.strikes, g.ghostware.size(), g.bw] == before, "refresh does not change Game")
+	sb.queue_free(); await frames()
+
+func test_rail() -> void:
+	var sb := sandbox()
+	await frames()
+	var g := sb.game
+	var lg := sb.ledger
+	check(lg.layers == 1 and lg.current == 0, "LAYER mark: N2A has one layer")
+	check(lg.reserve == int(g.enc.reserve) and lg.cred == g.cred, "ledger shows CRED and the layer reserve")
+	check(lg.cred_cell.position.x < lg.reserve_cell.position.x, "layer CRED sits right of the Rustler's CRED")
+	check(lg.position.x < sb.rail.position.x, "ledger sits at the left end of the rail")
+	# Extraction through the rules: ants run left, CRED counts up to the new value.
+	var before := g.cred
+	g.extract(5); sb.refresh()
+	check(g.cred == before + 5 and lg.cred == g.cred, "ledger has the new CRED")
+	check(lg.ants > 0.0 and roundi(lg.shown_cred) == before, "ants run before the count goes up")
+	for i in 90: await process_frame
+	lg.finish()
+	check(roundi(lg.shown_cred) == g.cred, "CRED window counts up to the new value")
+	sb.reduced_motion = true; sb.refresh()
+	g.extract(2); sb.refresh()
+	check(lg.ants == 0.0 and roundi(lg.shown_cred) == g.cred, "reduced motion: no ants, value at once")
+	sb.reduced_motion = false
+	# LAYER mark on a three-layer Node (display model only).
+	lg.set_values(3, 1, g.cred, 4)
+	check(lg.layers == 3 and lg.layer_mark.title == "LAYER 2 / 3", "three layers, second lit")
+	sb.refresh()
+	# Log: hover on the rail shows the latest lines; a click pins the full log; Esc closes.
+	g.log.append("Test line for the log.")
+	sb.refresh()
+	sb.rail_log.grab_focus(); await frames(2)
+	check(sb.inspector.visible and _inspector_text(sb).contains("Test line for the log."), "rail hover shows the latest log lines")
+	sb.rail_log.release_focus(); sb.inspector.close()
+	sb.toggle_log()
+	check(sb.log_panel.visible and sb.log_panel.count() == g.log.size(), "click pins the full log")
+	var esc := InputEventAction.new(); esc.action = "ui_cancel"; esc.pressed = true
+	sb._unhandled_input(esc)
+	check(not sb.log_panel.visible, "Esc closes the log")
+	check(sb.find_child("Ticker", true, false) == null, "no log ticker")
+	# Parting shot: after a BREACH the PULP meter and END TURN say what fires; the rail drops DEADLOCKs.
+	g.enc.breached = true; sb.refresh()
+	check(sb.meters.PULP.title.begins_with("PARTING SHOT"), "PULP meter becomes PARTING SHOT after BREACH")
+	check(sb.end_key.lines.size() == 1 and String(sb.end_key.lines[0]).begins_with("Parting shot"), "END TURN hover states the parting shot")
+	var dl := false
+	for c in sb.rail.steps(): dl = dl or String(c.model.kind) == "DEADLOCK"
+	check(not dl, "parting-shot rail has no DEADLOCK")
 	sb.queue_free(); await frames()
 
 func _inspector_text(sb: IceEncounterSandbox) -> String:

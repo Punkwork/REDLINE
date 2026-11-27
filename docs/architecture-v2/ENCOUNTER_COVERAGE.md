@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 39 · PLACEHOLDER 1 · BATCH3 16 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
+**Totals:** BUILT 43 · PLACEHOLDER 1 · BATCH3 12 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
 
 | Status | Meaning |
 |---|---|
@@ -26,8 +26,8 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | H07 | Ghostware rail (any number, ORIGIN first) | build_ghost_rail | `GhostReel` | BUILT | — | One visible, up/down arrows; hover shows text and art (ARCH-V2-006b). |
 | H08 | Strike lamps (0-3) and LOCKDOWN | build_strike / strike lamps | `Eye` | BUILT | — | Three lamps under the eye; LOCKDOWN all red with a lock (ARCH-V2-006h). Flyout: R06. |
 | H09 | HOSTILE REVEAL (alarm lamp) | reveal_percent / alarm housing | `Eye` | BUILT | — | Eye lens cool green → neon red with the reveal (ARCH-V2-006c). Art reveal: I13/F09. |
-| H10 | LAYER count and layer CRED reserve | build_node_plate, RESERVE dial | — | BATCH3 | Left end of the NEXT RESPONSE rail: hamburger LAYER icon (1-3 lit), then CRED pair (ARCH-V2-006d) |  |
-| H11 | CRED | CRED/RAM row | — | BATCH3 | CRED icon + value left of the layer CRED; red marching ants flow left on extraction (ARCH-V2-006d) | RAM is built (meters). |
+| H10 | LAYER count and layer CRED reserve | build_node_plate, RESERVE dial | `LayerMark` | BUILT | — | Ledger at the left end of the rail: LAYER hamburger, CRED, layer CRED (ARCH-V2-006d). |
+| H11 | CRED | CRED/RAM row | `CredValue` | BUILT | — | New CRED icon; red marching ants run left on extraction, then the value counts up (ARCH-V2-006d). |
 | H12 | Corporation ad plate / sign | CorporateDisplay | `AdPlate` | BUILT | — |  |
 | H13 | Graffiti decal (ADP) | DecalPlate, graffiti_label | — | BATCH4 | C06 CorporationPresentation |  |
 
@@ -56,8 +56,8 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 |---|---|---|---|---|---|---|
 | R01 | NEXT RESPONSE | per-ICE plates | `ResponseRail` | BUILT | — | Shared rail, provisional (ARCH-V2-003e). |
 | R02 | Step-by-step Corporation Response | main._play_response | `ResponseRail` | BUILT | C03 ResponseSequencer port in Batch 3 | Minimal stand-in today. |
-| R03 | PARTING SHOT after BREACH (PT11-UI 1) | PULP INCOMING row | — | BATCH3 | C13/C14 |  |
-| R04 | Encounter log | log_text | — | BATCH3 | Opens on hover, click or focus of the NEXT RESPONSE rail; no ticker (ARCH-V2-006i) |  |
+| R03 | PARTING SHOT after BREACH (PT11-UI 1) | PULP INCOMING row | `MeterPULP` | BUILT | — | PULP meter reads PARTING SHOT after BREACH; END TURN hover states it; rail drops DEADLOCKs. |
+| R04 | Encounter log | log_text | `RailLog` | BUILT | — | Hover the rail for the latest lines; click pins the full log; Esc closes (ARCH-V2-006i). |
 | R05 | Phase flyouts | none | `EventFlyout` | BUILT | — |  |
 | R06 | Event flyouts from Game.events (EV-xx) | toasts, punch arrival | `EventFlyout` | BATCH3 | M06: drive from Game.events | Widget exists; only phase announcements wired. |
 

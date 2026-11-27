@@ -10,6 +10,8 @@ extends Control
 
 var inspector: KeyInspector
 var height := 40.0
+## ARCH-V2-006i: a click on a step opens the log too (the screen connects this).
+signal log_requested
 var _row: HBoxContainer
 var _items: Array = []
 
@@ -44,6 +46,7 @@ func sync(model: Array) -> void:
 		cap.setup(st, n + 1, height)
 		cap.inspect_requested.connect(func(c): if is_instance_valid(inspector): inspector.show_info("RESPONSE STEP %d · %s" % [c.step, String(c.model.ice_name)], String(c.model.title), [], c.get_global_rect(), c))
 		cap.inspect_ended.connect(func(c): if is_instance_valid(inspector): inspector.close(c))
+		cap.gui_input.connect(func(e): if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT: log_requested.emit())
 		_row.add_child(cap)
 		_items.append(cap)
 
