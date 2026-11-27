@@ -566,3 +566,21 @@ At encounter completion, deployed Protocols expire and return to the discard pil
 
 ## PROTOCOL-DURATION-001b — Encounter cleanup timing (designer approved 2026-11-27)
 Protocols remain active through final DEADLOCK action and qualifying triggers, BREACH, remaining permitted Runner actions, END TURN and PARTING SHOT, including all associated triggered effects. After resolution and survival confirmation, expire deployed Protocols to discard exactly once, before encounter progression or node completion rewards. Fatal PARTING SHOT grants no successful completion rewards. Installed Programs and RAM allocation persist across encounters in the node. Apply cleanup consistently on normal progression, forced LOCKDOWN progression and early exit; next node draws a new hand from compiled deck. Existing game.gd go_deeper() retains Protocols between layers, a confirmed discrepancy requiring reconciliation. Claude Code to validate trigger ordering, pending choices, fatal response, card conservation, rack reset, Program persistence and next-node initialization with deterministic multi-encounter tests. Existing BREACH-001 parting-shot behavior remains intact. Documentation only; no engine changes or authorization to implement the ten candidate cards before specification review.
+
+
+## SYNERGY-PLAYTEST-002 — Approved ten-card playtest catalogue (2026-11-27)
+Designer approves all ten SYNERGY-PLAYTEST-001 candidates for playtest, with REACTIVE ARMOUR reduced to 1 BW; remaining proposed costs unchanged. No CRED deployment costs. Values are playtest baseline, not final balance.
+| Card | Type | BW | Effect |
+|---|---|---:|---|
+| REACTIVE ARMOUR | PROTOCOL | 1 | Whenever you play a card, gain 1 SHIELD. |
+| COUNTERINTELLIGENCE | PROTOCOL | 1 | Whenever you play a CLOAK, reduce TRACE by 1. |
+| OVERCLOCK | PROTOCOL | 2 | Upon playing your third card each turn, draw 2 cards. |
+| FEEDBACK LOOP | PROTOCOL | 1 | Whenever you ZERO an ICE, gain 1 BW. |
+| SALVAGE | PROTOCOL | 2 | First DEADLOCK broken each turn: return a selected discarded card to hand. |
+| ADAPTIVE DEFENCE | PROTOCOL | 1 | Whenever you install a PROGRAM, gain 3 SHIELD. |
+| FOLLOW THROUGH | SCRIPT | 1 | Target ICE -2 STR, additional -2 if previous card played was EXPLOIT. |
+| ESCALATION | SCRIPT | 1 | Target ICE -1 STR per EXPLOIT played this turn including itself. |
+| AFTERBURN | SCRIPT | 0 | Gain 4 SHIELD if at least three other cards played this turn. |
+| REPRISE | SCRIPT | 2 | Repeat effect of previous SCRIPT played this turn. |
+Protocol lifecycle PROTOCOL-DURATION-001/a/b mandatory. Successful card plays count, not Icepick or CAP activations; no Protocol self-trigger on deployment; independent copies, no additional trigger cap initially except printed limits. REPRISE repeats effect, not card-play event, cannot repeat itself; Claude Code must audit targeting, recursion, pending choices and legality, flag unresolved semantics rather than silently inventing rules. STR reductions encounter duration. No standalone CHAIN mechanic.
+All ten must be obtainable through normal node completion card rewards in the representative playtest (audit CORE_POOL/reward eligibility and rarity configuration). Designer also proposes UPLINK node to ensure specific cards are accessible for testing; recommended test-only fixed inventory of all ten, affordable CRED purchase prices, placement before subsequent combat, exact prices/placement and existing UPLINK architecture audit pending. Do not treat temporary inventory/prices as final economy. Preserve organic reward acquisition alongside deterministic fixtures and targeted purchase access. Include two-/three-encounter nodes, card display/hover, rack, trigger feedback, acquisition, deck persistence, lifecycle, loop prevention and regression tests. Priority 2E Card Synergy and Protocol Development; coordinate with representative encounter and typography/motion. Claude Code owns implementation and validation; this commit approves playtest content and reward inclusion, records UPLINK proposal for implementation planning, does not itself modify engine or authorize unrelated map expansion.
