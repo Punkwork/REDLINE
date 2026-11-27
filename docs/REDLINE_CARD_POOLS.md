@@ -53,7 +53,7 @@ Rule: every starter card is the weakest version of its role, with at least one c
 
 | Starter card | Who starts with it | Clear upgrades | Change made |
 |---|---|---|---|
-| PROBE (−2 STR) | All | DEEP PROBE (twice the effect per card), BALANCED LOAD, STRESS TEST, KEYLOGGER | — |
+| PROBE (−2 STR or reveal all hidden VOID subroutines; PROBE-004a) | All | DEEP PROBE (twice the effect per card), BALANCED LOAD, STRESS TEST, KEYLOGGER | — |
 | PULP Shield (+3 SHIELD) | All | HARDENED SHELL, MIRROR, SURGE PROTECTOR | — |
 | GHOST SIGNAL | Generalist, ECHO, VECTOR | SCRUB (not BURNED), PROXY CHAIN, VANISH | — |
 | Basic Extractor (3 CRED) | All | DATA SIPHON, SKIMMER | — |
@@ -236,3 +236,7 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | PACE-007 | Each Rustler pool needs at least 2 HULL engines by uncommon; reward cards show a DRILL / HULL / COVERAGE icon. — **APPROVED 2026-11-15** |
 | PACE-008 | Reward odds by layers cleared are re-based for the new layer counts (see Core Rules amendments) (§2). — **APPROVED 2026-11-15** |
 | ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |
+
+
+## PROBE-004a — Canonical PROBE wording and scope (APPROVED, 2026-11-27)
+Confirms PROBE-004 and extends its authoritative wording across Architecture V2, not only the Core Loop build. PROBE is a STARTER SCRIPT — EXPLOIT, base cost 0 BW. Printed rules: **Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.** Both modes share the same per-target, per-turn count across copies (0, 1, 2… BW); reset each turn. Reveal is available only on VOID with hidden subroutines; STR reduction does not reveal anything. Flavour: “The deeper you probe, the costlier it gets.” Supersedes conflicting older PROBE costs, automatic/top-only reveal and effect descriptions. Historical decisions remain historical. Claude Code follow-up: audit existing mode selection, engine, CardDB text, both UI paths and tests; reconcile discrepancies, verify both modes, shared cost, reset, invalid targets, cancellation and insufficient BW; run required Godot validation before committing code. Until validated, the existing CardDB description is known stale; no claim of runtime correction. Use approved wording in UI mockups.

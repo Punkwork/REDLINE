@@ -72,7 +72,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 1 | CORTEX BUFFER | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
-| 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. |
+| 3 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
 | 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED for the rest of the Node. |
 
 ### ORIGIN Ghostware — READY RIG
@@ -97,7 +97,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | **HUSH** *(signature)* | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 0. Boost: 2 BW → +1 STR. Break: 1 BW. *(BASIC-001: was STR 4, boost 1 BW. ECHO-002: STR 3 → 1; ECHO-004: → 0. ROT-001: SIGYL → TUMBLER.)* |
 | 1 | **BORROWED CREDENTIALS** *(fallback; replaces BACKDOOR)* | SCRIPT — EXPLOIT | **1 BW + 8 CRED** | Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
-| 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. *(ECHO-001: was 2.)* |
+| 3 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. *(ECHO-001: was 2.)* |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(ECHO-001: was 2.)* |
 | 1 | **SMOKESCREEN** | SCRIPT — CLOAK | 1 BW | +2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2. *(ECHO-003: was 2.)* |
 | 1 | **DEAD AIR** | SCRIPT — CLOAK | 0 BW | CACHE 1 card in your hand. |
@@ -128,7 +128,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | **BRUTE FORCE** *(fallback)* | SCRIPT — EXPLOIT | 1 BW, **+4 TRACE** | Break 1 subroutine on **any** ICE with STR 4 or less. |
 | 1 | **SHATTER** | SCRIPT — EXPLOIT | 1 BW, **+3 TRACE** | This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. *(Readings confirmed 2026-11-17: any one ICE of any type; STR 0 until the encounter ends.)* *(RIOT-002 new; RIOT-003 redesigned; RIOT-004 kept at +3 TRACE.)* |
 | 1 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, **+2 TRACE** | Target ICE: −2 STR this encounter. *(RIOT-002: was 2.)* |
-| 3 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. *(RIOT-002: was 1.)* |
+| 3 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. *(RIOT-002: was 1.)* |
 | 1 | **FEEDBACK** | SCRIPT — EXPLOIT | 2 BW | Target ICE: −1 STR this encounter for every 10 TRACE you have. |
 | 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, **+2 TRACE** | Gain 1 BW. *(BASIC-001: was 2 BW.)* |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(RIOT-002: was 2.)* |
@@ -160,7 +160,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 3 | **INJECT** | SCRIPT — EXPLOIT, VIRUS | 1 BW | INFECT 2 ROT. |
 | 1 | **REPLICATOR** | PROGRAM — VIRUS | 1 BW, 1 RAM | Start of your turn: on every ICE with virus counters, add 1 counter of each strain already on it. |
 | 1 | **OUTBREAK** | SCRIPT — VIRUS | 2 BW | Double the counters of every strain on target ICE. |
-| 1 | PROBE | SCRIPT — EXPLOIT | 1 BW | Target ICE: −2 STR this encounter. |
+| 1 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
 | 2 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | As Generalist. |
@@ -234,3 +234,7 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | PACE-009 | Rustler watch list for longer encounters, especially RIOT's TRACE (`REDLINE_PACING.md` §8). — **APPROVED 2026-11-15** |
 | ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |
 | ZEROED-001 | ICE STR can't go below 0; **ZEROED** keyword (once per ICE per encounter) joins RIOT's Phase 7 pool (`REDLINE_DECK_SYNERGY.md` §5.3a). — **APPROVED 2026-11-16** |
+
+
+## PROBE-004a — Canonical PROBE wording and scope (APPROVED, 2026-11-27)
+Confirms PROBE-004 and extends its authoritative wording across Architecture V2, not only the Core Loop build. PROBE is a STARTER SCRIPT — EXPLOIT, base cost 0 BW. Printed rules: **Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.** Both modes share the same per-target, per-turn count across copies (0, 1, 2… BW); reset each turn. Reveal is available only on VOID with hidden subroutines; STR reduction does not reveal anything. Flavour: “The deeper you probe, the costlier it gets.” Supersedes conflicting older PROBE costs, automatic/top-only reveal and effect descriptions. Historical decisions remain historical. Claude Code follow-up: audit existing mode selection, engine, CardDB text, both UI paths and tests; reconcile discrepancies, verify both modes, shared cost, reset, invalid targets, cancellation and insufficient BW; run required Godot validation before committing code. Until validated, the existing CardDB description is known stale; no claim of runtime correction. Use approved wording in UI mockups.
