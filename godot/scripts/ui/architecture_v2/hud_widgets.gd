@@ -279,6 +279,43 @@ class CounterRow extends Explained:
 
 ## END TURN as an illuminated key from the subroutine-key family (ARCH-V2-003m): jewel lamp above a
 ## cream cap carrying a hand-over glyph; lamp lit amber while the turn can end. "END TURN" on hover.
+## RUN-001 / ARCH-V2-008b (designer 2026-11-27): a small, quiet END RUN plate under END TURN, rarely
+## used but always there (Build 12 had it). Pressing it asks for confirmation before anything happens.
+class EndRunKey extends Explained:
+	signal pressed
+	var enabled := true
+	var _down := false
+	func setup(sz: Vector2) -> void:
+		size = sz; custom_minimum_size = sz
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		title = "END RUN"
+		lines = ["End this run. Your Rustler fails.", "You are asked to confirm first."]
+	func set_enabled(on: bool) -> void:
+		enabled = on; queue_redraw()
+	func _gui_input(e: InputEvent) -> void:
+		if not enabled: return
+		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
+			_down = e.pressed; queue_redraw()
+			if not e.pressed and Rect2(Vector2.ZERO, size).has_point(e.position): pressed.emit()
+			accept_event()
+		elif e.is_action_pressed("ui_accept"):
+			accept_event(); pressed.emit()
+	func _draw() -> void:
+		var r := Rect2(Vector2(0, 2.0 if _down else 0.0), size)
+		var sb := StyleBoxFlat.new()
+		sb.bg_color = VasTokens.BAKELITE.darkened(0.25)
+		sb.border_color = Color("#8a5a3c") if (has_focus() or is_hovered()) and enabled else Color("#5a3a28")
+		sb.set_border_width_all(1); sb.set_corner_radius_all(4)
+		draw_style_box(sb, r)
+		var px := 13
+		var t := "END RUN"
+		var tw := VasTokens.FONT_PLAQUE.get_string_size(t, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+		var ink := Color("#ff8f8f") if enabled else Color("#a08878")
+		draw_string(VasTokens.FONT_PLAQUE, Vector2((size.x - tw) / 2.0, r.position.y + size.y / 2.0 + px * 0.36), t, HORIZONTAL_ALIGNMENT_LEFT, -1, px, ink)
+		if has_focus(): focus_ring()
+	func is_hovered() -> bool:
+		return Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position())
+
 class EndTurnKey extends Explained:
 	signal pressed
 	var enabled := true
@@ -502,10 +539,13 @@ class RackIcon extends Explained:
 ## One slot. Empty: a recessed socket with a faint glyph. Filled: the item's art (or initials) in a
 ## lit frame (PROTOCOL blue-green per CARDS-003, CAP amber). Hover: name and rules.
 class RackSlot extends Explained:
+	signal inject(uid: int)   ## CAPS-TEST-001: a CAP slot was pressed (left button or Enter)
 	var kind := "CAP"
 	var item: Dictionary = {}
 	var overflow: Array = []
 	func refresh_title() -> void:
+		picture = Callable()
+		mouse_default_cursor_shape = Control.CURSOR_HELP
 		if item.is_empty():
 			title = "EMPTY CAP SLOT" if kind == "CAP" else "EMPTY PROTOCOL SLOT"
 			lines = ["CAPS are bought at Uplinks, chosen as Node rewards, or dropped after BREACH."] if kind == "CAP" \
@@ -515,7 +555,21 @@ class RackSlot extends Explained:
 			lines = [String(item.get("text", ""))] if String(item.get("text", "")) != "" else []
 			if not overflow.is_empty():
 				lines.append("Also deployed: " + ", ".join(overflow.map(func(o): return String(o.get("name", "")))))
+			if kind == "CAP":
+				lines.append("Drag to an ICE to inject (0 BW, your turn)." if bool(item.get("target", false)) \
+					else "Click to inject: 0 BW, any time in your turn. Single use.")
+				if bool(item.get("usable", false)): mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				var art := String(item.get("art", ""))
+				if ResourceLoader.exists(art):
+					picture = func() -> Control:   # HOVER-001: the full vial, large
+						var t := TextureRect.new(); t.texture = load(art)
+						t.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; t.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+						t.custom_minimum_size = Vector2(64, 192); return t
 		queue_redraw()
+	func _gui_input(e: InputEvent) -> void:
+		if kind != "CAP" or item.is_empty() or not bool(item.get("usable", false)): return
+		if (e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.pressed) or e.is_action_pressed("ui_accept"):
+			accept_event(); inject.emit(int(item.get("uid", -1)))
 	func accent() -> Color:
 		return Color("#3FB8A8") if kind == "PROTOCOL" else VasTokens.AMBER
 	func _draw() -> void:
@@ -537,7 +591,14 @@ class RackSlot extends Explained:
 			if not socket: HudWidgets.draw_group_glyph(self, kind, size / 2.0, minf(size.x, size.y) * 0.5, Color(VasTokens.IVORY, 0.14))
 		else:
 			var tex := CardView.art_for(String(item.get("art", "")))
-			if tex:
+			if tex and kind == "CAP":
+				# CAPS-TEST-001: the sockets are too small for a whole 1 : 3 vial, so they show a close-up
+				# of the glass around its symbol (the liquid colour and the icon); hover shows the full vial.
+				var ts := tex.get_size()
+				var gw := ts.x * 0.46                      # the glass body, measured on the vials
+				var gh := gw * inner.size.y / inner.size.x
+				draw_texture_rect_region(tex, inner, Rect2(Vector2((ts.x - gw) / 2.0, ts.y * 0.5 - gh / 2.0), Vector2(gw, gh)))
+			elif tex:
 				var ts := tex.get_size()
 				var k := maxf(inner.size.x / ts.x, inner.size.y / ts.y)
 				var src := Rect2((ts - inner.size / k) / 2.0, inner.size / k)

@@ -3423,3 +3423,13 @@ Designer: "for the next build add ready rig to the ghostware slot on the encount
 
 Designer: "add the generalist rustler image to the rustler select screen for the user to click on when selecting a rustler" and "i would use the image in place of the name. when the player rolls over the image they can see the text of what the generalist stats are, a quote, etc." Built: the portrait (`PANOPTICON art/Rustler Select/RUSTLER_GENERALIST.png`, imported at 561 × 701) fills the Generalist's select button, without the name. Hover or keyboard focus shows the name, difficulty, quote, style and ORIGIN on an opaque panel over the card (no picture behind the text; ADP-R1). Any Rustler with a `RUSTLER_<ID>.png` file gets the same treatment; the others keep the text card.
 
+## ARCH-V2-008b — END RUN on the encounter screen (designer, 2026-11-27 06:39; implementation PROPOSED for review)
+
+Designer: "add a general end the run button to the encounter screen. preferably below the end turn button. Something that the player will rarely use but should have. it existed in build 12." Built: a small, low-contrast-frame (text at least 4.5:1) END RUN plate centred under END TURN. It opens Build 12's existing confirmation (RUN-001; `Game.abandon()`), and is unavailable during the Corporation Response. The app's dialog layer now draws above the V2 screen, so nothing from the encounter shows through or takes clicks while a dialog is open.
+
+## CAPS-TEST-001 — CAPS in the game: common CAPS and a CAPTCHA bonus (designer, 2026-11-27 06:39; implementation PROPOSED for review)
+
+Designer: "Next we need to test caps in the game. in this next BUild, i want you to add a random common CAPS to the reward in addition to a card, in the CAPCHA node." This is a designer-directed rules addition for testing. It uses the approved CAPS rules (UPL-001: 3 slots, 0 BW, your turn only, single use; UPL-002: the five common CAPS and their effects) and adds a **test-only acquisition route**: a full clear of the CAPTCHA Node adds one random common CAP alongside the usual card reward. The other approved routes (Uplink purchase, the Node-completion CAP choice, the 20% BREACH drop) and the uncommon and rare CAPS are not built yet.
+
+**Interpretations to confirm:** (1) if all 3 slots are full, no CAP is given (UPL-001 says you must discard one to take a new one; there is no discard prompt yet, and the slice has one CAPTCHA Node, so it can't happen in play); (2) CRACKER's −4 STR uses the same STR floor as card STR reductions; (3) in the rack, CRACKER is aimed with the arrow like a targeted card, and the others inject on click.
+

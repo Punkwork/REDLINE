@@ -67,6 +67,9 @@ var discard: Array = []
 var burned: Array = []
 var installed: Array = []     # [{inst, boost}]
 var rack: Array = []          # protocol insts
+const CAP_SLOTS := 3          # UPL-001
+var caps: Array = []          # CAPS-TEST-001: [{uid, id}], at most CAP_SLOTS
+var reward_cap := ""          # the CAP added with the last Node reward ("" when none)
 var bw := 0
 var shield := 0
 var lockdown := false
@@ -105,6 +108,8 @@ func new_run(who: String = "GENERALIST") -> void:
 	amp = 0
 	bloat_tax_paid = 0
 	ghostware.clear()
+	caps.clear()
+	reward_cap = ""
 	compiled_queue.clear()
 	compiled_owner = {}
 	compiled_target = {}
@@ -1500,6 +1505,14 @@ func _finish_node(full: bool) -> void:
 		return
 	reward_note = "Full clear: completion reward (CAP or PATCHWORK) is not in this slice."
 	reward_options = [] if ghostware.has("ONE_TRICK") and footprint() >= footprint_cap() - 4 else _roll_rewards(layers_cleared)
+	reward_cap = ""
+	# CAPS-TEST-001 (designer 2026-11-27): the CAPTCHA Node also gives a random common CAP.
+	if String(node.get("name", "")) == "CAPTCHA":
+		var got := grant_random_cap("COMMON")
+		if got != "":
+			reward_note = "CAPTCHA bonus: %s added to your CAPS (%s)" % [CardDB.CAPS[got].name, CardDB.CAPS[got].text]
+		else:
+			reward_note = "CAPTCHA bonus: your CAP slots are full, so no CAP this time."
 	phase = "REWARD"
 	_event("EV-27")
 
@@ -1629,6 +1642,48 @@ func add_cortex(n: int) -> void:
 	if n > 0:
 		cortex += n
 		_event("EV-17")
+
+## CAPS-TEST-001: CAPS (UPL-001). Returns the CAP id added, or "" when the slots are full.
+func grant_random_cap(rarity: String) -> String:
+	if caps.size() >= CAP_SLOTS:
+		_say("CAP slots full: no CAP taken.")
+		return ""
+	var pool := CardDB.caps_of(rarity)
+	if pool.is_empty(): return ""
+	var id: String = pool[rng.randi_range(0, pool.size() - 1)]
+	caps.append({"uid": next_uid, "id": id})
+	next_uid += 1
+	reward_cap = id
+	_say("CAP added: %s." % CardDB.CAPS[id].name)
+	return id
+
+func cap_needs_target(uid: int) -> bool:
+	for c in caps:
+		if int(c.uid) == uid: return bool(CardDB.CAPS[c.id].get("target", false))
+	return false
+
+## Flip. Inject. Discard. 0 BW, any time in the Rustler's turn, never in the Corporation Response.
+func use_cap(uid: int, target: int = -1) -> bool:
+	if phase != "PLAYER" or enc.is_empty(): return false
+	var idx := -1
+	for k in caps.size():
+		if int(caps[k].uid) == uid: idx = k
+	if idx < 0: return false
+	var id: String = caps[idx].id
+	var d: Dictionary = CardDB.CAPS[id]
+	if d.get("target", false) and (target < 0 or target >= enc.ice.size()):
+		_say("Choose an ICE for %s." % d.name)
+		return false
+	match id:
+		"BW_SPIKE": bw += 2
+		"BULWARK": shield += 8
+		"FLUSH": trace = maxi(0, trace - 8)
+		"NANOSUTURE": heal(8)
+		"CRACKER": reduce_ice_str(target, 4)
+		_: return false
+	caps.remove_at(idx)
+	_say("CAP %s injected: %s" % [d.name, d.text])
+	return true
 
 func heal(n: int) -> void:
 	vitae = min(max_vitae, vitae + n)

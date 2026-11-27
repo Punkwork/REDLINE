@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 60 · PLACEHOLDER 1 · BATCH3 0 · BATCH4 0 · OPEN 0 · OUT 3 · 64 rows.
+**Totals:** BUILT 61 · PLACEHOLDER 0 · BATCH3 0 · BATCH4 0 · OPEN 0 · OUT 3 · 64 rows.
 
 | Status | Meaning |
 |---|---|
@@ -21,7 +21,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | H02 | Turn counter | build_node_plate / TURN plate | `Turn` | BUILT | — |  |
 | H03 | Whose turn (phase) | main phase label | `Phase` | BUILT | — | Half width (ARCH-V2-005). |
 | H04 | TRACE counter and bar | build_trace_plate | `Trace` | BUILT | — | Half width; 10 cells of 2 TRACE (ARCH-V2-005). |
-| H05 | CAPS slots (3) | build_cap_rack | `CapRack` | PLACEHOLDER | CAPS inventory in the rules engine (deferred beyond the slice) | Empty slots; fills from game.caps when it exists (ARCH-V2-005). |
+| H05 | CAPS slots (3) | build_cap_rack | `CapRack` | BUILT | Uncommon and rare CAPS; Uplink purchase; BREACH drop (UPL-001) | Common CAPS from game.caps with the designer vials; click injects, CRACKER aims (CAPS-TEST-001). |
 | H06 | PROTOCOL rack | ticker rack text | `ProtocolRack` | BUILT | — | 3 slots, live from game.rack; more shows +n (ARCH-V2-005). |
 | H07 | Ghostware rail (any number, ORIGIN first) | build_ghost_rail | `GhostReel` | BUILT | — | One visible, up/down arrows; hover shows text and art (ARCH-V2-006b). |
 | H08 | Strike lamps (0-3) and LOCKDOWN | build_strike / strike lamps | `Eye` | BUILT | — | Three lamps under the eye; LOCKDOWN all red with a lock (ARCH-V2-006h). Flyout: R06. |

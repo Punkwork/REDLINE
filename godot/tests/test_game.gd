@@ -43,6 +43,7 @@ func _init() -> void:
 		test_full_slice_path()
 		test_hand_max()
 		test_reward_pools_every_rustler()   # CORE-LOOP-REWARD-GAP
+		test_caps()   # CAPS-TEST-001
 		if OS.get_environment("SIM") != "":
 			sim_rustler("GENERALIST")
 		print("TESTS: %d passed, %d failed" % [passes, fails])
@@ -76,6 +77,7 @@ func _init() -> void:
 	test_smash_and_grab_cache()
 	test_node_card_reward_requires_full_clear()
 	test_reward_pools_every_rustler()
+	test_caps()
 	test_full_slice_path()
 	test_hand_max()
 	if OS.get_environment("SIM") != "":
@@ -1127,3 +1129,78 @@ func test_reward_pools_every_rustler() -> void:
 				var opts: Array = g._roll_rewards(depth)
 				check(opts.size() == 3 and opts.all(func(id): return CardDB.DEFS.has(id)), "%s reward depth %d seed %d: 3 cards" % [who, depth, seed])
 
+
+
+## CAPS-TEST-001 (designer 2026-11-27): the five common CAPS (UPL-001/002) and the CAPTCHA Node's bonus CAP.
+func _cap_game(seed: int) -> Game:
+	var g := Game.new(seed)
+	g.new_run("GENERALIST")
+	g.entered_corp = true
+	start_node(g, 1, 0, "")
+	return g
+
+func test_caps() -> void:
+	var g := Game.new(5)
+	g.new_run("GENERALIST")
+	check(g.caps.is_empty() and Game.CAP_SLOTS == 3, "CAPS: a run starts with no CAPS and 3 slots")
+	check(CardDB.caps_of("COMMON").size() == 5, "CAPS: five common CAPS")
+	# Each effect, 0 BW, consumed after use.
+	for id in CardDB.caps_of("COMMON"):
+		g = _cap_game(7)
+		check(g.phase == "PLAYER" and g.node.name == "CAPTCHA", "CAPS: in the CAPTCHA encounter for %s" % id)
+		g.caps.append({"uid": 9000, "id": id})
+		var bw0 := g.bw
+		var sh0 := g.shield
+		g.trace = 12
+		g.vitae = 10
+		var str0 := g.ice_str(1)
+		var tgt := 1 if id == "CRACKER" else -1
+		if id == "CRACKER":
+			check(not g.use_cap(9000, -1) and g.caps.size() == 1, "CAPS: CRACKER needs an ICE")
+		check(g.use_cap(9000, tgt), "CAPS: %s injects" % id)
+		check(g.caps.is_empty(), "CAPS: %s is gone after use" % id)
+		match id:
+			"BW_SPIKE": check(g.bw == bw0 + 2, "BW SPIKE: +2 BW")
+			"BULWARK": check(g.shield == sh0 + 8, "BULWARK: +8 SHIELD")
+			"FLUSH": check(g.trace == 4, "FLUSH: −8 TRACE")
+			"NANOSUTURE": check(g.vitae == 18, "NANOSUTURE: heal 8")
+			"CRACKER": check(g.ice_str(1) == str0 - 4, "CRACKER: −4 STR (%d → %d)" % [str0, g.ice_str(1)])
+		if id != "BW_SPIKE":
+			check(g.bw == bw0, "CAPS: %s costs 0 BW" % id)
+	# FLUSH floors TRACE at 0; NANOSUTURE doesn't pass max VITAE.
+	g = _cap_game(8)
+	g.caps = [{"uid": 1, "id": "FLUSH"}, {"uid": 2, "id": "NANOSUTURE"}]
+	g.trace = 3
+	g.use_cap(1); g.use_cap(2)
+	check(g.trace == 0 and g.vitae == g.max_vitae, "CAPS: FLUSH stops at 0 TRACE; NANOSUTURE stops at max VITAE")
+	# Only on the Rustler's turn.
+	g = _cap_game(9)
+	g.caps = [{"uid": 3, "id": "BULWARK"}]
+	g.phase = "RESPONSE"
+	check(not g.use_cap(3) and g.caps.size() == 1, "CAPS: not during the Corporation Response")
+	# The CAPTCHA Node's full clear adds a random common CAP alongside the card reward.
+	var seen := {}
+	for seed in range(1, 41):
+		g = _cap_game(seed)
+		g.enc.breached = true
+		g.end_turn()
+		check(g.phase == "REWARD" and g.reward_options.size() == 3, "CAPTCHA seed %d: card reward still offered" % seed)
+		check(g.caps.size() == 1 and CardDB.CAPS[g.caps[0].id].rarity == "COMMON" and g.reward_cap == g.caps[0].id, "CAPTCHA seed %d: one common CAP added" % seed)
+		check(g.reward_note.begins_with("CAPTCHA bonus:"), "CAPTCHA seed %d: the reward screen says so" % seed)
+		if not g.caps.is_empty(): seen[g.caps[0].id] = true
+		g.choose_reward(g.reward_options[0])
+		check(g.caps.size() == 1, "CAPTCHA seed %d: the CAP stays after the card is taken" % seed)
+	check(seen.size() == 5, "CAPTCHA: all five common CAPS turn up across 40 seeds (%d)" % seen.size())
+	# Full slots: no CAP. Other Nodes: no CAP.
+	g = _cap_game(11)
+	g.caps = [{"uid": 1, "id": "FLUSH"}, {"uid": 2, "id": "FLUSH"}, {"uid": 3, "id": "FLUSH"}]
+	g.enc.breached = true
+	g.end_turn()
+	check(g.caps.size() == 3 and g.reward_cap == "" and g.reward_note.contains("full"), "CAPTCHA: no CAP when the slots are full")
+	g = Game.new(12)
+	g.new_run("GENERALIST")
+	g.entered_corp = true
+	start_node(g, 1, 1, "")
+	g.enc.breached = true
+	g.end_turn()
+	check(g.phase in ["REWARD", "DEEPER"] and g.caps.is_empty(), "CONSENT WALL: no CAP")

@@ -253,17 +253,17 @@ static func protocol_models(game: Game) -> Array:
 		out.append(m)
 	return out
 
-## CAPS (UPL-001: 3 slots, single-use, 0 BW, your turn only). The CAPS inventory is not in the rules
-## engine yet (deferred beyond the slice), so this is empty until Game carries one; the slots show
-## as empty placeholders. Reads `game.caps` if a later build adds it ([{uid, id}] like other insts).
+## CAPS (UPL-001: 3 slots, single-use, 0 BW, your turn only). CAPS-TEST-001: Game.caps holds [{uid, id}];
+## names and text come from CardDB.CAPS; art is the designer's vial (assets/architecture_v2/caps/).
 static func cap_models(game: Game) -> Array:
 	var out := []
-	var caps: Variant = game.get("caps")
-	if caps is Array:
-		for c in caps:
-			var id := String(c.get("id", ""))
-			out.append({"uid": int(c.get("uid", -1)), "id": id, "name": id.replace("_", " "), "kind": "CAP",
-				"text": String(c.get("text", "")), "art": "res://assets/architecture_v2/caps/%s.png" % id})
+	for c in game.caps:
+		var id := String(c.get("id", ""))
+		var d: Dictionary = CardDB.CAPS.get(id, {})
+		out.append({"uid": int(c.get("uid", -1)), "id": id, "name": String(d.get("name", id.replace("_", " "))), "kind": "CAP",
+			"text": String(d.get("text", "")), "target": bool(d.get("target", false)),
+			"usable": game.phase == "PLAYER" and not game.enc.is_empty(),
+			"art": "res://assets/architecture_v2/caps/%s.png" % id})
 	return out
 
 ## ARCH-V2-006c: the hostile reveal as 0..1, from TRACE and strikes (the ADP bleed curve; Friendly 0,

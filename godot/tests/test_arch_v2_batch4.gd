@@ -33,6 +33,8 @@ func run() -> void:
 	await test_rest()
 	print("- ORIGIN Ghostware art in the reel (008a)")
 	test_origin_art()
+	print("- CAPS in the rack: inject, CRACKER aims (CAPS-TEST-001)")
+	await test_caps_rack()
 	print("ARCH-V2 BATCH 4: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -155,3 +157,45 @@ func test_origin_art() -> void:
 		check(not m.is_empty() and bool(m[0].origin), "%s: ORIGIN first in the reel" % rid)
 		check(ResourceLoader.exists(String(m[0].art)), "%s: %s has art" % [rid, m[0].name])
 		check(String(m[0].text) != "", "%s: %s has rules text for the hover" % [rid, m[0].name])
+
+
+## CAPS-TEST-001: the rack shows the run's CAPS with the designer's vials; a click injects (one controller
+## call); CRACKER aims at an ICE like a targeted card; nothing works during the Corporation Response.
+func test_caps_rack() -> void:
+	var sb := sandbox()
+	await frames(4)
+	var g: Game = sb.game
+	check(g.phase == "PLAYER", "sandbox on the Rustler's turn")
+	g.caps = [{"uid": 9001, "id": "BULWARK"}, {"uid": 9002, "id": "CRACKER"}]
+	sb.refresh(); await frames()
+	var slots: Array = sb.cap_rack.slots
+	check(String(slots[0].item.get("name", "")) == "BULWARK" and String(slots[1].item.get("name", "")) == "CRACKER" and slots[2].item.is_empty(), "rack shows BULWARK, CRACKER, one empty slot")
+	check(ResourceLoader.exists(String(slots[0].item.art)), "BULWARK uses the designer's vial art")
+	check(slots[0].picture.is_valid(), "hover shows the full vial (HOVER-001)")
+	check(slots[0].lines.any(func(l): return String(l).contains("+8 SHIELD")), "hover text gives the effect")
+	var sh0 := g.shield
+	var calls0: int = sb.ctrl.game_calls
+	var click := InputEventMouseButton.new(); click.button_index = MOUSE_BUTTON_LEFT; click.pressed = true
+	slots[0]._gui_input(click); await frames()
+	check(g.shield == sh0 + 8 and sb.ctrl.game_calls == calls0 + 1, "click injects BULWARK (+8 SHIELD, one Game call)")
+	check(g.caps.size() == 1 and String(sb.cap_rack.slots[0].item.get("name", "")) == "CRACKER", "BULWARK leaves the rack; CRACKER moves up")
+	# CRACKER: click arms the arrow, then click an ICE.
+	var str0 := g.ice_str(1)
+	sb.cap_rack.slots[0]._gui_input(click); await frames()
+	check(sb.aiming_cap and sb.arrow.visible and g.caps.size() == 1, "CRACKER arms the aiming arrow")
+	var panel = sb.lane.panels()[1]
+	sb.release_aim(panel.get_global_rect().get_center()); await frames()
+	check(g.ice_str(1) == str0 - 4 and g.caps.is_empty(), "CRACKER on CAPTCHA: −4 STR (%d → %d)" % [str0, g.ice_str(1)])
+	check(not sb.aiming_cap and not sb.arrow.visible, "arrow gone after injecting")
+	# Esc cancels an armed CRACKER without using it.
+	g.caps = [{"uid": 9003, "id": "CRACKER"}]
+	sb.refresh(); await frames()
+	sb.cap_rack.slots[0]._gui_input(click); await frames()
+	sb.cancel_aim(); sb.refresh(); await frames()
+	check(g.caps.size() == 1, "cancelled CRACKER stays in the rack")
+	# Not usable outside the Rustler's turn.
+	g.phase = "RESPONSE"; sb.refresh(); await frames()
+	check(not bool(sb.cap_rack.slots[0].item.get("usable", true)), "CAPS unusable during the Corporation Response")
+	sb.cap_rack.slots[0]._gui_input(click); await frames()
+	check(g.caps.size() == 1 and not sb.aiming_cap, "clicking does nothing then")
+	sb.queue_free(); await frames()

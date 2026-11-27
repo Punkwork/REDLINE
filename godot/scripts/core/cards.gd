@@ -467,6 +467,23 @@ const CORE_POOL := ["BATTERING_RAM", "JACKHAMMER", "PASSKEY", "RAINBOW_TABLE", "
 	"SURGE_PROTECTOR", "SCRUB", "JAMMER", "PROXY_CHAIN", "BURN_NOTICE", "SPAM_FILTER", "UNINSTALLER", "PATCH_KIT", "DEFRAG",
 	"STIM_PATCH", "BURST", "CO_PROCESSOR", "RAM_UPGRADE", "FIELD_KIT", "TOOLBELT", "READY_STANCE"]
 
+## CAPS-TEST-001 (designer 2026-11-27): the five common CAPS (REDLINE_UPLINK_AND_CAPS.md §2, UPL-002).
+## Single-use, outside the deck, 0 BW, the Rustler's turn only (UPL-001). Uncommon and rare CAPS are
+## not in the engine yet.
+const CAPS := {
+	"BW_SPIKE": {"name": "BW SPIKE", "rarity": "COMMON", "price": 20, "text": "+2 BW this turn."},
+	"BULWARK": {"name": "BULWARK", "rarity": "COMMON", "price": 20, "text": "+8 SHIELD."},
+	"FLUSH": {"name": "FLUSH", "rarity": "COMMON", "price": 20, "text": "−8 TRACE."},
+	"NANOSUTURE": {"name": "NANOSUTURE", "rarity": "COMMON", "price": 20, "text": "Heal 8 VITAE."},
+	"CRACKER": {"name": "CRACKER", "rarity": "COMMON", "price": 20, "text": "Target ICE: −4 STR this encounter.", "target": true},
+}
+
+static func caps_of(rarity: String) -> Array:
+	var out := []
+	for id in CAPS:
+		if CAPS[id].rarity == rarity: out.append(id)
+	return out
+
 static func reward_pool(pool: String, rarity: String) -> Array:
 	var out := []
 	for id in DEFS:

@@ -288,7 +288,7 @@ func _build_layout() -> void:
 	inspect.position = Vector2(236, 100)
 	inspect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	inspect.visible = false
-	inspect.z_index = 10
+	inspect.z_index = 310   # above the app dialogs (ARCH-V2-008b)
 	inspect.gui_input.connect(func(event):
 		# PT11-BUG-1: any click on a pinned card closes it (it used to need a right-click or Esc)
 		if event is InputEventMouseButton and event.pressed:
@@ -303,6 +303,7 @@ func _build_layout() -> void:
 	overlay = Control.new()
 	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.z_index = 300   # ARCH-V2-008b: app dialogs above the V2 screen's raised layers (hand 100, log 150, inspector 200)
 	add_child(overlay)
 
 func _new_run() -> void:
@@ -1624,6 +1625,25 @@ func _overlay_reward() -> void:
 	if g.reward_note != "":
 		sub += "\n" + g.reward_note
 	var v := _dim_box("CARD REWARD", sub, 900)
+	if g.reward_cap != "":
+		# CAPS-TEST-001: the CAPTCHA bonus CAP, already in the rack: the vial and its effect.
+		var cap_row := HBoxContainer.new()
+		cap_row.name = "RewardCap"
+		cap_row.add_theme_constant_override("separation", 12)
+		var vial_path := "res://assets/architecture_v2/caps/%s.png" % g.reward_cap
+		if ResourceLoader.exists(vial_path):
+			var vial := TextureRect.new()
+			vial.texture = load(vial_path)
+			vial.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			vial.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			vial.custom_minimum_size = Vector2(30, 90)
+			cap_row.add_child(vial)
+		var cap_text := VBoxContainer.new()
+		cap_text.alignment = BoxContainer.ALIGNMENT_CENTER
+		cap_text.add_child(_lbl("CAP ADDED: " + String(CardDB.CAPS[g.reward_cap].name), 18, Color("#ffd27a")))
+		cap_text.add_child(_lbl(String(CardDB.CAPS[g.reward_cap].text) + "  Single use, 0 BW, any time in your turn.", 13, TEXT))
+		cap_row.add_child(cap_text)
+		v.add_child(cap_row)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	v.add_child(row)
@@ -2084,6 +2104,7 @@ func _install_friendly() -> void:
 		move_child(v2, blocker.get_index())
 		v2.app_phase_changed.connect(func(_p): if not _v2_refreshing: refresh())
 		v2.voice_toggled.connect(func(on): voice_on = on; _update_voice_btn())
+		v2.end_run_requested.connect(_confirm_end_run)   # ARCH-V2-008b
 	move_child(inspect, get_child_count() - 1)
 
 func set_reduced_motion(value: bool) -> void:

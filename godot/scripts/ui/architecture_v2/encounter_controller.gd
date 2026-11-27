@@ -158,6 +158,26 @@ func request_unload(uid: int) -> bool:
 
 # ----- Corporation Response: the existing Game step/finish contract, driven one call at a time.
 
+## CAPS-TEST-001: inject a CAP (one Game call). CRACKER needs an ICE.
+func request_use_cap(uid: int, ice_ref: Variant = null) -> bool:
+	var target := -1
+	if ice_ref is Dictionary:
+		target = ice_index(ice_ref)
+		if target < 0: return false
+	if game.phase != "PLAYER": return false
+	game_calls += 1
+	var ok := game.use_cap(uid, target)
+	_after()
+	return ok
+
+## ARCH-V2-008b / RUN-001: the player ends the run (only between plays on their own turn or a choice).
+func end_run() -> bool:
+	if not (game.phase in ["PLAYER", "CHOICE", "READY_RIG"]): return false
+	game_calls += 1
+	game.abandon()
+	_after()
+	return true
+
 func end_turn() -> bool:
 	if game.phase != "PLAYER" or not is_current(): return false
 	game_calls += 1

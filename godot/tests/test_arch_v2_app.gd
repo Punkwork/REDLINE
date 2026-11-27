@@ -104,5 +104,41 @@ func run() -> void:
 	app.set_reduced_motion(true)
 	check(app.v2.reduced_motion, "reduced motion reaches the V2 screen")
 	app.set_reduced_motion(false)
+	await test_end_run()
 	print("ARCH-V2 APP: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
+
+
+## ARCH-V2-008b: END RUN under END TURN on the V2 screen; the app confirms before the run ends.
+func test_end_run() -> void:
+	var app = load("res://scenes/Main.tscn").instantiate()
+	root.add_child(app)
+	await frames(4)
+	app._start_as("GENERALIST")
+	await frames()
+	var g: Game = app.g
+	if g.enc.is_empty():
+		g.enter_node(g.available[0]); app.refresh(); await frames()
+	if g.phase == "READY_RIG" and g.enc.is_empty():
+		g.skip_ready_rig(); app.refresh(); await frames()
+	if g.phase == "READY_RIG":
+		app.v2.ctrl.request_skip_ready_rig(); await frames()
+	var key: Control = app.v2.end_run_key
+	check(key != null and key.visible and key.is_visible_in_tree(), "END RUN key on the V2 screen")
+	check(key.position.y > app.v2.end_key.position.y + app.v2.end_key.size.y and absf(key.position.x + key.size.x / 2.0 - (app.v2.end_key.position.x + app.v2.end_key.size.x / 2.0)) < 2.0, "END RUN sits centred below END TURN")
+	check(key.enabled, "END RUN available on the Rustler's turn")
+	key.pressed.emit(); await frames()
+	check(app.confirming_end and g.phase == "PLAYER", "END RUN asks first; the run goes on meanwhile")
+	var buttons: Array = app.overlay.find_children("*", "Button", true, false)
+	var keep = buttons.filter(func(b): return b.text == "KEEP PLAYING")
+	check(keep.size() == 1, "confirmation offers KEEP PLAYING")
+	if keep.size() == 1:
+		keep[0].pressed.emit(); await frames()
+	check(not app.confirming_end and g.phase == "PLAYER", "KEEP PLAYING returns to the encounter")
+	key.pressed.emit(); await frames()
+	var yes = app.overlay.find_children("*", "Button", true, false).filter(func(b): return b.text == "YES, END THE RUN")
+	check(yes.size() == 1, "confirmation offers YES, END THE RUN")
+	if yes.size() == 1:
+		yes[0].pressed.emit(); await frames()
+	check(g.phase == "DEAD", "the run ends (RUN-001)")
+	app.queue_free(); await frames()

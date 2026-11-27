@@ -37,6 +37,9 @@ func run() -> void:
 		app.refresh()
 	app.v2.flyout.advance(10.0)
 	await shot("app_02_encounter_v2")
+	app.v2.end_run_key.pressed.emit()
+	await shot("app_02b_end_run_confirm")   # ARCH-V2-008b
+	app.confirming_end = false; app.refresh()
 	for i in g.enc.ice.size():
 		var d := g.ice_definition(g.enc.ice[i])
 		for s in d.subs.size():
@@ -46,5 +49,26 @@ func run() -> void:
 	await app.v2.end_turn()
 	app.v2.flyout.advance(10.0)
 	await shot("app_03_after_breach_%s" % g.phase.to_lower())
+	# CAPS-TEST-001: take a card, enter CAPTCHA (row 2), clear it: card reward + the bonus CAP.
+	if g.phase == "REWARD": g.choose_reward(g.reward_options[0]); app.refresh()
+	if g.phase == "MAP" and g.available.has(0):
+		g.enter_node(0); app.refresh()
+		if g.phase == "READY_RIG" and g.enc.is_empty():
+			g.skip_ready_rig(); app.refresh()
+		for i in 4: await process_frame
+		if g.phase == "READY_RIG": app.v2.ctrl.request_skip_ready_rig()
+		g.enc.breached = true
+		app.v2.instant = true
+		await app.v2.end_turn()
+		app.v2.flyout.advance(10.0)
+		await shot("app_04_captcha_reward_cap")
+		if g.phase == "REWARD": g.choose_reward(g.reward_options[0]); app.refresh()
+		if g.phase == "MAP":
+			g.enter_node(g.available[g.available.size() - 1]); app.refresh()
+			if g.phase == "READY_RIG" and g.enc.is_empty(): g.skip_ready_rig(); app.refresh()
+			for i in 4: await process_frame
+			if g.phase == "READY_RIG": app.v2.ctrl.request_skip_ready_rig()
+			app.v2.flyout.advance(10.0); app.refresh()
+			await shot("app_05_cap_in_rack")
 	print("ARCH-V2 APP screenshots: %d written to %s" % [n, out])
 	quit(0)

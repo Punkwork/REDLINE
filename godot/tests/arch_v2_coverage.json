@@ -55,9 +55,9 @@
    "element": "CAPS slots (3)",
    "prototype": "build_cap_rack",
    "v2": "CapRack",
-   "status": "PLACEHOLDER",
-   "next": "CAPS inventory in the rules engine (deferred beyond the slice)",
-   "note": "Empty slots; fills from game.caps when it exists (ARCH-V2-005)."
+   "status": "BUILT",
+   "next": "Uncommon and rare CAPS; Uplink purchase; BREACH drop (UPL-001)",
+   "note": "Common CAPS from game.caps with the designer vials; click injects, CRACKER aims (CAPS-TEST-001)."
   },
   {
    "id": "H06",

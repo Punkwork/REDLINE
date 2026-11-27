@@ -58,6 +58,7 @@ const FLAGS := "user://redline_flags.json"
 const CRT := Rect2(6, 632, 262, 156)   ## cartridges stick up above it (ARCH-V2-003u)
 const NOTE := Rect2(8, 794, 258, 66)
 const END_TURN := Rect2(1464, 794, 64, 64)   ## designer 15:37: the very bottom-right corner
+const END_RUN := Rect2(1452, 870, 88, 24)   ## ARCH-V2-008b: under END TURN, small and quiet
 const TRAY := Rect2(272, 600, 984, 264)   ## ARCH-V2-003u: widened for up to 12 cards
 const HAND := Rect2(296, 592, 952, 264)   ## fan area: cards overhang the tray top like VAS-001
 const RACK := Rect2(1262, 604, 196, 196)
@@ -95,6 +96,7 @@ var rail: ResponseRail
 var inspector: KeyInspector
 var flyout: EventFlyout
 var end_key: HudWidgets.EndTurnKey
+var end_run_key: HudWidgets.EndRunKey
 var responding := false
 var meters := {}
 var turn_counter: HudWidgets.FlipCounter
@@ -110,6 +112,7 @@ var arrow: HudWidgets.TargetArrow
 var crt_glow: HudWidgets.CrtDropGlow
 var _dragging_program := -1
 var aiming_uid := -1
+var aiming_cap := false   ## CAPS-TEST-001: the arrow belongs to a CAP (CRACKER), not a card
 var _aim_moved := false
 var speakers: Array = []
 var nr := NulRem.new()
@@ -193,6 +196,7 @@ func start(seed: int, rustler: String = "GENERALIST") -> void:
 ## encounter (app_phase_changed) so the app can show the map, reward or DEEPER choice.
 signal app_phase_changed(phase: String)
 signal voice_toggled(on: bool)
+signal end_run_requested   ## ARCH-V2-008b: the app confirms, then ends the run (RUN-001)
 ## Inside the app: no sandbox Outcome banner (the app's overlays take over), no auto start.
 var embedded := false
 func attach(g: Game) -> void:
@@ -306,6 +310,9 @@ func _build_header() -> void:
 	ghost_reel.setup(GHOST.size, inspector); ghost_reel.position = GHOST.position; stage.add_child(ghost_reel)
 	cap_rack = HudWidgets.SlotRack.new(); cap_rack.name = "CapRack"
 	cap_rack.setup(CAPS.size, "CAP", CAP_SLOTS, inspector); cap_rack.position = CAPS.position; stage.add_child(cap_rack)
+	for slot in cap_rack.slots:
+		var sl: HudWidgets.RackSlot = slot
+		sl.inject.connect(func(u): inject_cap(u, sl))
 	protocol_rack = HudWidgets.SlotRack.new(); protocol_rack.name = "ProtocolRack"
 	protocol_rack.setup(PROTOCOLS.size, "PROTOCOL", PROTOCOL_SLOTS, inspector); protocol_rack.position = PROTOCOLS.position
 	stage.add_child(protocol_rack)
@@ -417,8 +424,21 @@ func _build_tray() -> void:
 	end_key.setup(Vector2(END_TURN.size.x, END_TURN.size.y)); end_key.position = END_TURN.position
 	end_key.pressed.connect(end_turn)
 	stage.add_child(end_key)
+	end_run_key = HudWidgets.EndRunKey.new(); end_run_key.name = "EndRun"; end_run_key.inspector = inspector
+	end_run_key.setup(END_RUN.size); end_run_key.position = END_RUN.position
+	end_run_key.pressed.connect(request_end_run)
+	stage.add_child(end_run_key)
 
 # ----- Flow
+
+func request_end_run() -> void:
+	## ARCH-V2-008b: never mid-response. Inside the app, main.gd asks for confirmation (RUN-001);
+	## the standalone sandbox ends the run through the controller.
+	if responding: return
+	if embedded:
+		end_run_requested.emit()
+	elif ctrl.end_run():
+		refresh()
 
 func end_turn() -> void:
 	if responding: return
@@ -539,6 +559,7 @@ func refresh() -> void:
 	counters.rows[2].lines = ["Click to see what's burned."]
 	effect_card.set_stamps(_stamps())
 	end_key.set_enabled(not responding and game.phase == "PLAYER")
+	end_run_key.set_enabled(not responding and game.phase in ["PLAYER", "CHOICE", "READY_RIG"])
 	_refresh_rig()
 	_refresh_hand()
 	var done := not (game.phase in ["PLAYER", "RESPONSE", "CHOICE", "READY_RIG"])
@@ -800,7 +821,7 @@ func _refresh_hand() -> void:
 		_target_plaque.get_child(0).get_child(1).visible = not patient_zero   # PATIENT ZERO can't be skipped
 		_target_plaque.reset_size()
 		_target_plaque.position.x = REF.x / 2.0 - _target_plaque.get_combined_minimum_size().x / 2.0
-	lane.set_targeting(targeting)
+	lane.set_targeting(targeting or (aiming_cap and game.phase == "PLAYER"))
 	_target_plaque.visible = targeting and aiming_uid < 0   # the arrow replaces the plaque for the mouse
 	for c in game.hand:
 		var cv := _card_view(VisibleStateAdapter.card_model(game, c, "hand"))
@@ -903,6 +924,24 @@ func start_aim(uid: int, cv: CardView) -> void:
 	cv.selected = true; cv.queue_redraw()
 	lane.set_targeting(true)
 
+## CAPS-TEST-001: inject a CAP from the rack. CRACKER aims like a targeted card (press and drag to an
+## ICE, or click then click the ICE); the others inject at once. One controller call.
+func inject_cap(uid: int, slot: Control) -> void:
+	if responding or game.phase != "PLAYER": return
+	if game.cap_needs_target(uid):
+		if aiming_uid >= 0: cancel_aim()
+		aiming_uid = uid; aiming_cap = true; _aim_moved = false
+		inspector.close()
+		var r := slot.get_global_rect()
+		arrow.from = _to_stage(Vector2(r.get_center().x, r.end.y - 4.0))
+		arrow.to = _to_stage(get_global_mouse_position())
+		arrow.over = Rect2()
+		arrow.show(); arrow.queue_redraw()
+		lane.set_targeting(true)
+	else:
+		ctrl.request_use_cap(uid)
+		refresh()
+
 func _to_stage(p: Vector2) -> Vector2:
 	return (p - stage.global_position) / stage.scale
 
@@ -923,12 +962,15 @@ func release_aim(global: Vector2) -> void:
 	var p := _panel_at(global)
 	if p == null and not _aim_moved: return   # a plain click: keep aiming until the next click
 	var uid := aiming_uid
+	var was_cap := aiming_cap
 	cancel_aim()
-	if p: ctrl.request_play(uid, p.ice_ref)
+	if p:
+		if was_cap: ctrl.request_use_cap(uid, p.ice_ref)
+		else: ctrl.request_play(uid, p.ice_ref)
 	refresh()
 
 func cancel_aim() -> void:
-	aiming_uid = -1; _pending_target = -1
+	aiming_uid = -1; _pending_target = -1; aiming_cap = false
 	arrow.hide()
 	lane.set_targeting(false)
 
