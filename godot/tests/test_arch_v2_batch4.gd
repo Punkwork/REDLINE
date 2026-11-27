@@ -183,6 +183,7 @@ func test_caps_rack() -> void:
 	var str0 := g.ice_str(1)
 	sb.cap_rack.slots[0]._gui_input(click); await frames()
 	check(sb.aiming_cap and sb.arrow.visible and g.caps.size() == 1, "CRACKER arms the aiming arrow")
+	check(sb.cap_rack.slots[0].lines.has("Drag onto an ICE to inject (0 BW, your turn)."), "CRACKER hint wording (CAPS-TEST-001b)")
 	var panel = sb.lane.panels()[1]
 	sb.release_aim(panel.get_global_rect().get_center()); await frames()
 	check(g.ice_str(1) == str0 - 4 and g.caps.is_empty(), "CRACKER on CAPTCHA: −4 STR (%d → %d)" % [str0, g.ice_str(1)])

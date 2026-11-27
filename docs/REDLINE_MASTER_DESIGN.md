@@ -3464,3 +3464,5 @@ GUARD is a supporting ICE subroutine protecting a linked DEADLOCK on another ICE
 
 **Designer follow-up (2026-11-27 07:43, CAPS-TEST-001a):** "The player should get a prompt to discard one. But yes, we don't need it in this build." When a CAP is gained with all slots full, the player is prompted to discard one (UPL-001). Not in the next build; until then a full rack takes no CAP.
 
+**Designer follow-up (2026-11-27 07:44, CAPS-TEST-001b):** CRACKER's hover hint reads "Drag onto an ICE to inject (0 BW, your turn)." CRACKER's behaviour is confirmed: ICE STR never drops below 0, and never below an ICE's minimum STR where it has one. This settles interpretation (2) above.
+

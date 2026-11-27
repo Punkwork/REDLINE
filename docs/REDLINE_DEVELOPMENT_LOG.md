@@ -450,3 +450,7 @@ GUARD is a supporting ICE subroutine protecting a linked DEADLOCK on another ICE
 
 Designer: a full CAP rack should prompt the player to discard one; not needed in the next build. Recorded in Master Design and HANDOFF. No code changes.
 
+## 2026-11-27 — CAPS-TEST-001b: CRACKER hint wording; STR limits tested (Claude Code)
+
+Hint changed to "Drag onto an ICE to inject (0 BW, your turn)." Added checks that CRACKER stops at STR 0 and at an ICE's minimum STR (behaviour unchanged). Tests: `test_game.gd` 430/0; `test_arch_v2_batch4.gd` 76/0.
+

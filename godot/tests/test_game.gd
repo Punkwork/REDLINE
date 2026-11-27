@@ -1173,6 +1173,14 @@ func test_caps() -> void:
 	g.trace = 3
 	g.use_cap(1); g.use_cap(2)
 	check(g.trace == 0 and g.vitae == g.max_vitae, "CAPS: FLUSH stops at 0 TRACE; NANOSUTURE stops at max VITAE")
+	# CAPS-TEST-001b: STR never drops below 0, nor below an ICE's minimum STR.
+	g = _cap_game(10)
+	g.caps = [{"uid": 4, "id": "CRACKER"}, {"uid": 5, "id": "CRACKER"}, {"uid": 6, "id": "CRACKER"}]
+	g.use_cap(4, 1); g.use_cap(5, 1)
+	check(g.ice_str(1) == 0, "CRACKER: STR stops at 0 (%d)" % g.ice_str(1))
+	g.enc.ice[0]["str_floor"] = 3
+	g.use_cap(6, 0)
+	check(g.ice_str(0) == maxi(3, int(g.ice_definition(g.enc.ice[0]).str) - 4), "CRACKER: STR stops at the ICE's minimum (%d)" % g.ice_str(0))
 	# Only on the Rustler's turn.
 	g = _cap_game(9)
 	g.caps = [{"uid": 3, "id": "BULWARK"}]

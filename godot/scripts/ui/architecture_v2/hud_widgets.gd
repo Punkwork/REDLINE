@@ -556,7 +556,7 @@ class RackSlot extends Explained:
 			if not overflow.is_empty():
 				lines.append("Also deployed: " + ", ".join(overflow.map(func(o): return String(o.get("name", "")))))
 			if kind == "CAP":
-				lines.append("Drag to an ICE to inject (0 BW, your turn)." if bool(item.get("target", false)) \
+				lines.append("Drag onto an ICE to inject (0 BW, your turn)." if bool(item.get("target", false)) \
 					else "Click to inject: 0 BW, any time in your turn. Single use.")
 				if bool(item.get("usable", false)): mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				var art := String(item.get("art", ""))
