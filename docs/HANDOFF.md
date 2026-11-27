@@ -106,7 +106,7 @@ Proposal and audit: [`architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md`](archite
 | ID | Deliverable | Depends on | Acceptance | Owner | Status |
 |---|---|---|---|---|---|
 | **CSA-01** | Authority, duplicate and consumer map; root causes; evidence (`tools/csa/scan_card_drift.py`, `architecture-v2/evidence/csa-01/`) | — | Evidence-backed inventory | Claude Code | **BUILT**, delivered for review |
-| **CSA-02** | Target architecture, migration plan, PROBE acceptance spec, enforcement plan, decisions Q1–Q9 | CSA-01 | Designer approval in Master Design | Designer | **WAITING** on the designer |
+| **CSA-02** | Target architecture, migration plan, PROBE acceptance spec, enforcement plan, decisions Q1–Q9 | CSA-01 | Designer approval in Master Design | Designer | **PARTLY APPROVED** 2026-11-27: Q1, Q3, Q5 (direction), Q6, Q7, Q8 and Q9 approved; **WAITING** on Q2, Q4 and the [conflict table](https://claude.ai/artifact/1Cw8TYzdiTscPtYLAXfsnF) (35 rows, 37 conflicts) |
 | **CSA-03** | `cards.json` (one record per ID), loader, schema, parity test; conflict-resolution table for the designer | CSA-02 (Q1, Q2, Q4, Q7) | Loaded definitions equal `CardDB.DEFS`; baseline suites unchanged | Claude Code | TO DO |
 | **CSA-04** | Text templates, engine parameters, Inspector and Uplink contracts, generated doc blocks; PROBE-004a implemented (choose-one, both UI paths) | CSA-03 | PROBE B1–B9 and T1–T7 green | Claude Code | TO DO |
 | **CSA-05** | Python CI job (schema, IDs, references, drift, terms, traceability, AGENTS = CLAUDE, `tests/python`); spec tests in CI; PR path filter; ruleset proposal | CSA-03 | Each check proven by a negative test; designer decides the ruleset (Q5) | Claude Code, then designer | TO DO |

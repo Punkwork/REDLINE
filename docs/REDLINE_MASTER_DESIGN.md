@@ -3686,3 +3686,19 @@ PROBE-004a is the first end-to-end acceptance case: demonstrate in a controlled 
 - RC8: audits produce reports, not checks.
 
 Scanner: 35 of 124 doc card rows differ from CardDB in text and 2 in BW; 56 tabulated names have no CardDB entry (10 are approved SYNERGY-PLAYTEST-002 cards). PROBE-004a conformance on the live engine: 5 of 7 checks fail. Proposed: `godot/data/cards.json` as the one record per card ID, loaded by CardDB (API unchanged), with engine parameters, generated text and doc views, Inspector and Uplink contracts, literal decision-tagged spec tests, a Python CI job and an optional ruleset. Designer decisions requested: Q1–Q9 (document §8). CSA-03 to CSA-07 not started; no schema, engine or settings change made.
+
+**CSA-02 designer answers (2026-11-27 18:24):**
+
+| Question | Designer's answer | Status |
+|---|---|---|
+| Q1 canonical format `godot/data/cards.json` | "yes. perfect" | **APPROVED** |
+| Q3 decision text only in Master Design; other docs reference the ID | "that works for me" | **APPROVED** |
+| Q5 enforcement | "whatever works best to ensure one Single source of truth for each element, and I can be the approver" | **APPROVED** in direction: a ruleset on `architecture-v2` requiring the CSA checks to pass, changes through pull requests, the designer as approver. The designer applies it once the CSA-05 checks exist |
+| Q6 PROBE cost counter per ICE instance | "yes per individual ice, correct" | **APPROVED** |
+| Q7 conflicts | "agreed. a later approved decision wins" | **APPROVED**; the designer reconciles the conflict table ([Sheet](https://claude.ai/artifact/1Cw8TYzdiTscPtYLAXfsnF)). Resolutions are recorded here when returned |
+| Q8 status format (approved-unbuilt cards in records as `pending`; experimental cards stay in the Experimentation Bible) | "that format is approved" | **APPROVED** |
+| Q9 retired mechanics (BOOTING, TOLL) | "approved for this process to retire in a controlled rules commit under their decision IDs" | **APPROVED** |
+| Q2 generated doc views (Card Pools, Rustlers) | not yet answered | OPEN |
+| Q4 build variants | asked where variant values would live; answered in session | OPEN |
+
+CSA-03 may start once Q2, Q4 and the conflict table are settled.
