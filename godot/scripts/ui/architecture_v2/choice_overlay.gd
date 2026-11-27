@@ -15,6 +15,11 @@ var inspector: KeyInspector
 var spec: Dictionary = {}
 var _cards: Array[CardView] = []
 var _panel: PanelContainer
+## C08 (#15): "peek" hides the plaque and the dimming so the board can be looked at (and hovered)
+## while a choice is pending; a BACK TO CHOICE button brings it back. Kept across rebuilds of the
+## same choice. View-only specs (spec.view) are used for the pile viewers (C09) and have no peek.
+var peek := false
+var _back: Button
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP   # modal: the console underneath takes no clicks
@@ -24,15 +29,20 @@ func _init() -> void:
 ## strains: [{name, n}]}. Empty spec closes the overlay.
 func open(s: Dictionary) -> void:
 	var same: bool = not spec.is_empty() and spec.get("kind") == s.get("kind") and _uids(spec) == _uids(s)
+	var same_kind: bool = not spec.is_empty() and spec.get("kind") == s.get("kind")
 	spec = s
 	if s.is_empty():
+		peek = false
 		hide(); _clear(); return
+	if not same_kind: peek = false
 	var keep_focus := -1
 	for c in _cards:
 		if is_instance_valid(c) and c.has_focus(): keep_focus = c.uid()
 	_clear()
 	_build()
 	show()
+	_apply_peek()
+	if peek: return
 	var target: Control = null
 	for c in _cards:
 		if c.uid() == keep_focus: target = c
@@ -51,7 +61,19 @@ func _clear() -> void:
 	for c in get_children(): remove_child(c); c.queue_free()
 
 func _draw() -> void:
-	if visible: draw_rect(Rect2(Vector2.ZERO, size), Color(0.05, 0.03, 0.02, 0.72))
+	if visible and not peek: draw_rect(Rect2(Vector2.ZERO, size), Color(0.05, 0.03, 0.02, 0.72))
+
+func set_peek(on: bool) -> void:
+	peek = on and not bool(spec.get("view", false))
+	_apply_peek()
+
+func _apply_peek() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE if peek else Control.MOUSE_FILTER_STOP
+	if is_instance_valid(_panel): _panel.visible = not peek
+	if is_instance_valid(_back):
+		_back.visible = peek
+		if peek: (func(): if is_instance_valid(_back) and _back.is_visible_in_tree(): _back.grab_focus()).call_deferred()
+	queue_redraw()
 
 func _build() -> void:
 	queue_redraw()
@@ -84,6 +106,7 @@ func _build() -> void:
 			cv.custom_minimum_size = CardView.BASE * k
 			var mm: Dictionary = m.duplicate(); mm.playable = true
 			cv.set_model(mm)
+			cv.draggable = false
 			cv.selected = sel.has(int(m.uid))
 			cv.pressed.connect(func(u): chosen.emit(u))
 			grid.add_child(cv)
@@ -98,9 +121,18 @@ func _build() -> void:
 	if not sec.is_empty():
 		var intent := String(sec.intent)
 		buttons.add_child(_button(String(sec.label), func(): secondary.emit(intent)))
+	if not bool(spec.get("view", false)):
+		var sb_btn := _button("SHOW BOARD", func(): set_peek(true)); sb_btn.name = "ShowBoard"
+		buttons.add_child(sb_btn)
 	if buttons.get_child_count() > 0: v.add_child(buttons)
 	_panel.reset_size()
 	_panel.position = (size - _panel.get_combined_minimum_size()) / 2.0
+	if not bool(spec.get("view", false)):
+		_back = _button("BACK TO %s" % String(spec.get("title", "CHOICE")), func(): set_peek(false)); _back.name = "BackToChoice"
+		add_child(_back)
+		_back.reset_size()
+		_back.position = Vector2((size.x - _back.get_combined_minimum_size().x) / 2.0, 108)
+		_back.visible = false
 
 func _button(text: String, cb: Callable) -> Button:
 	var b := Button.new(); b.text = text; b.custom_minimum_size = Vector2(0, 48)

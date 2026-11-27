@@ -404,10 +404,10 @@
    "area": "Hand",
    "element": "Drag cards to play (PT11-UI 2)",
    "prototype": "FriendlyDropTarget",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C10 drag path",
-   "note": "Click-to-play is built; drag-to-break from the rig is built."
+   "v2": "HandFan",
+   "status": "BUILT",
+   "next": "",
+   "note": "Click plays on release; drag: untargeted above the tray, targeted onto an ICE; one call each."
   },
   {
    "id": "C05",
@@ -424,10 +424,10 @@
    "area": "Hand",
    "element": "CACHED corner icon (CACHE-001, #17)",
    "prototype": "cache glow",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C11 CardView corner icon",
-   "note": ""
+   "v2": "HandFan",
+   "status": "BUILT",
+   "next": "",
+   "note": "Cyan disc on the art frame: ∞ (the encounter) or turns left; hover explains."
   },
   {
    "id": "C07",
@@ -444,20 +444,20 @@
    "area": "Hand",
    "element": "Toggle back to the board during a discard (#15)",
    "prototype": "none",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C15",
-   "note": ""
+   "v2": "ChoiceOverlay",
+   "status": "BUILT",
+   "next": "",
+   "note": "SHOW BOARD / BACK TO <choice> on every choice; kept across refreshes."
   },
   {
    "id": "C09",
    "area": "Hand",
    "element": "Deck and discard viewers",
    "prototype": "DECK / COVERAGE buttons",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C16 inspect",
-   "note": ""
+   "v2": "PileView",
+   "status": "BUILT",
+   "next": "",
+   "note": "Click a counter: deck (sorted by name, order hidden), discard, burned. Esc or Close."
   },
   {
    "id": "V01",
@@ -514,10 +514,10 @@
    "area": "Vitals",
    "element": "NEXT DRAW estimate",
    "prototype": "vital_row",
-   "v2": "",
-   "status": "BATCH3",
-   "next": "C13 PlayerHUD",
-   "note": ""
+   "v2": "Counters",
+   "status": "BUILT",
+   "next": "",
+   "note": "On the deck counter hover."
   },
   {
    "id": "V07",

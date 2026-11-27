@@ -241,6 +241,20 @@ func run() -> void:
 	sb.refresh()
 	await shot("v2_25_virus_chips")
 
+	# 10g. C06/C09/C08: a CACHED card (∞) in hand, the deck viewer, and SHOW BOARD during a discard.
+	await fresh()
+	quiet()
+	sb.game.hand[0].cached = true; sb.game.hand[1].cached = true; sb.game.hand[1].cache_turns = 2
+	sb.refresh()
+	await shot("v2_26_cached_cards")
+	sb.open_pile("deck")
+	await shot("v2_27_deck_viewer")
+	sb.pile_view.open({})
+	sb.game.pending = {"kind": "discard", "n": 1}; sb.game.phase = "CHOICE"; sb.refresh()
+	sb.choice.set_peek(true)
+	await shot("v2_28_discard_show_board")
+	sb.choice.set_peek(false)
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

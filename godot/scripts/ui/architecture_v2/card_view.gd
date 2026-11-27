@@ -10,6 +10,9 @@ extends Control
 ## Emits intent only; never calls Game.
 
 signal pressed(uid: int)
+## C04 (PT11-UI 2): a drag that ended over no drop target, with the global point it ended at. The
+## screen decides: untargeted cards play when dropped above the hand tray; targeted ones on an ICE.
+signal drag_dropped(uid: int, at: Vector2)
 
 const BASE := Vector2(140, 221)
 const FACE := Color("#F6F1E4")
@@ -25,6 +28,9 @@ var model: Dictionary = {}
 var inspector: KeyInspector
 var selected := false
 var show_rules := true
+var draggable := true
+var _down := false
+var _dragging := false
 static var _art_cache := {}
 
 func _init() -> void:
@@ -58,10 +64,33 @@ static func art_for(path: String) -> Texture2D:
 	return _art_cache[path]
 
 func _gui_input(e: InputEvent) -> void:
-	if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
-		accept_event(); grab_focus(); pressed.emit(uid())
+	## A click plays on release (so a press can become a drag); Enter/Space plays at once.
+	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
+		accept_event()
+		if e.pressed:
+			_down = true; grab_focus()
+		elif _down:
+			_down = false
+			if Rect2(Vector2.ZERO, size).has_point(e.position): pressed.emit(uid())
 	elif e.is_action_pressed("ui_accept"):
 		accept_event(); pressed.emit(uid())
+
+func _get_drag_data(_at: Vector2) -> Variant:
+	if not draggable or not bool(model.get("playable", false)): return null
+	_down = false; _dragging = true
+	if is_instance_valid(inspector): inspector.close(self)
+	var holder := Control.new()
+	var ghost := CardView.new(); ghost.set_model(model); ghost.draggable = false
+	ghost.custom_minimum_size = size * 0.85; ghost.size = size * 0.85; ghost.position = -ghost.size / 2.0
+	ghost.modulate = Color(1, 1, 1, 0.85); ghost.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	holder.add_child(ghost)
+	set_drag_preview(holder)
+	return {"card_uid": uid()}
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END and _dragging:
+		_dragging = false
+		if not get_viewport().gui_is_drag_successful(): drag_dropped.emit(uid(), get_global_mouse_position())
 
 ## Set before a programmatic focus (a choice opening) so the inspector waits for the player.
 var quiet_focus := false
@@ -152,6 +181,17 @@ func _draw() -> void:
 		_rr(c, Color("#C79A36"), 1.5 * k)
 		draw_rect(Rect2(c.position + Vector2(0.8, 0.8) * k, Vector2(c.size.x - 1.6 * k, c.size.y * 0.35)), Color("#F0D58A"))
 		draw_rect(Rect2(c.position + Vector2(0, c.size.y * 0.8), Vector2(c.size.x, c.size.y * 0.2)), Color("#7E5C1A"))
+	# CACHE-001 corner icon: a cyan disc on the art frame's top-right with ∞ (the encounter) or the
+	# turns left.
+	if bool(model.get("cached", false)):
+		var cc := Vector2(frame.end.x - 13 * k, frame.position.y + 13 * k)
+		draw_circle(cc, 12 * k, Color("#06262A"))
+		draw_arc(cc, 11 * k, 0, TAU, 24, Color("#4FE3E0"), 2.2 * k, true)
+		var turns := int(model.get("cache_turns", 0))
+		var ct := "∞" if turns <= 0 else str(turns)
+		var cpx2 := int((17 if turns <= 0 else 14) * k)
+		var cw2 := VasTokens.FONT_PLAQUE.get_string_size(ct, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx2).x
+		draw_string(VasTokens.FONT_PLAQUE, cc + Vector2(-cw2 / 2.0, cpx2 * 0.36), ct, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx2, Color("#BFFBF8"))
 	# Unplayable: dimmed (the reason is on hover).
 	if not bool(model.get("playable", true)):
 		_rr(body, Color(0.12, 0.09, 0.06, 0.38), 11 * k)

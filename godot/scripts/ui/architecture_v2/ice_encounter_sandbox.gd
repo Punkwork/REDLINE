@@ -91,6 +91,7 @@ var ledger: HudWidgets.RailLedger
 var log_panel: HudWidgets.LogPanel
 var rail_log: HudWidgets.Explained
 var flash: ColorRect
+var pile_view: ChoiceOverlay
 ## R06: the last batch of Game.events this screen handled (tests read it).
 var last_events: Array = []
 const EVENT_FLYOUT := {"EV-14": "strike", "EV-15": "mask_off", "EV-16": "lockdown", "EV-07": "breached",
@@ -172,6 +173,10 @@ func _build() -> void:
 	choice.strain.connect(func(st): ctrl.request_cull(st); refresh())
 	stage.add_child(choice)
 	log_panel = HudWidgets.LogPanel.new(); stage.add_child(log_panel)
+	pile_view = ChoiceOverlay.new(); pile_view.name = "PileView"; pile_view.position = Vector2.ZERO; pile_view.size = REF
+	pile_view.inspector = inspector
+	pile_view.secondary.connect(func(_i): pile_view.open({}))
+	stage.add_child(pile_view)
 	## I12: a brief red wash for strikes and lethal ICE (never under reduced motion).
 	flash = ColorRect.new(); flash.name = "Flash"; flash.color = Color(1.0, 0.1, 0.12, 0.0)
 	flash.mouse_filter = Control.MOUSE_FILTER_IGNORE; flash.size = REF; stage.add_child(flash)
@@ -309,6 +314,13 @@ func _build_tray() -> void:
 	hand_fan.position = HAND.position; hand_fan.size = HAND.size; stage.add_child(hand_fan)
 	counters = HudWidgets.CounterStack.new(); counters.name = "Counters"
 	counters.setup(COUNTERS.size, inspector, true); counters.position = COUNTERS.position; stage.add_child(counters)
+	for k in 3:
+		var pile: String = ["deck", "discard", "burned"][k]
+		var row: Control = counters.rows[k]
+		row.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		row.gui_input.connect(func(e):
+			if (e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT) or e.is_action_pressed("ui_accept"):
+				open_pile(pile))
 	end_key = HudWidgets.EndTurnKey.new(); end_key.name = "EndTurn"; end_key.inspector = inspector
 	end_key.setup(Vector2(END_TURN.size.x, END_TURN.size.y)); end_key.position = END_TURN.position
 	end_key.pressed.connect(end_turn)
@@ -398,6 +410,10 @@ func refresh() -> void:
 	rail_log.lines.append("Click the rail for the full log.")
 	if log_panel.visible: log_panel.set_lines(game.log)
 	counters.set_counts(game.draw_pile.size(), game.discard.size(), _burned_count())
+	## V06: NEXT DRAW on the deck counter's hover (CORTEX already lowers it).
+	counters.rows[0].lines = ["NEXT DRAW: %d card%s." % [game.draw_size(), "" if game.draw_size() == 1 else "s"], "Click to see your deck."]
+	counters.rows[1].lines = ["Click to see your discard pile."]
+	counters.rows[2].lines = ["Click to see what's burned."]
 	effect_card.set_stamps(_stamps())
 	end_key.set_enabled(not responding and game.phase == "PLAYER")
 	_refresh_rig()
@@ -564,6 +580,8 @@ func _build_target_plaque() -> Control:
 	return pc
 
 func _unhandled_input(e: InputEvent) -> void:
+	if pile_view.visible and e.is_action_pressed("ui_cancel"):
+		pile_view.open({}); get_viewport().set_input_as_handled(); return
 	if log_panel.visible and e.is_action_pressed("ui_cancel"):
 		log_panel.hide(); get_viewport().set_input_as_handled(); return
 	if _pending_target >= 0 and e.is_action_pressed("ui_cancel"):
@@ -579,7 +597,36 @@ func _card_view(m: Dictionary) -> CardView:
 		if not bool(cv.model.get("playable", false)): return
 		if bool(m.get("target", false)): _pending_target = u; refresh()
 		else: ctrl.request_play(u); refresh())
+	cv.drag_dropped.connect(_on_card_dropped)
 	return cv
+
+## C04 (PT11-UI 2): a card dragged out of the hand. Untargeted cards play when dropped anywhere above
+## the hand tray; targeted cards play on the ICE panel they were dropped on. One controller call.
+func _on_card_dropped(uid: int, at: Vector2) -> void:
+	if responding or game.phase != "PLAYER": return
+	var p := (at - stage.global_position) / stage.scale
+	if p.y >= TRAY.position.y: return
+	var c := game.hand.filter(func(x): return int(x.uid) == uid)
+	if c.is_empty(): return
+	var d := CardDB.def(String(c[0].id))
+	if bool(d.get("target", false)):
+		for panel in lane.panels():
+			if panel.get_global_rect().has_point(at):
+				_pending_target = -1
+				ctrl.request_play(uid, panel.ice_ref); refresh(); return
+		return
+	ctrl.request_play(uid); refresh()
+
+## C09: click a counter to see that pile (deck sorted by name, so its order stays hidden).
+func open_pile(pile: String) -> void:
+	var names := {"deck": "DECK", "discard": "DISCARD", "burned": "BURNED"}
+	var models := VisibleStateAdapter.pile_models(game, pile)
+	var text: String = {"deck": "Your draw pile, sorted by name (the draw order stays hidden).",
+		"discard": "Your discard pile, oldest first.", "burned": "Burned for this Node."}[pile]
+	if models.is_empty(): text = "Empty."
+	inspector.close()
+	pile_view.open({"kind": "view_" + pile, "view": true, "title": "%s · %d" % [names[pile], models.size()],
+		"text": text, "cards": models, "secondary": {"label": "Close", "intent": "close"}})
 
 func _process(delta: float) -> void:
 	if game == null or game.enc.is_empty() or hand_fan == null: return

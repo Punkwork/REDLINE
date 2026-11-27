@@ -73,6 +73,9 @@ func show_card(card: CardView) -> void:
 	if int(m.get("cred", 0)) > 0: costs += "  ·  %d CRED" % int(m.cred)
 	if int(m.get("trace", 0)) > 0: costs += "  ·  +%d TRACE" % int(m.trace)
 	_line("Cost: " + costs, 14, Color("#5E4B35"), VasTokens.FONT_RULES)
+	if bool(m.get("cached", false)):
+		var turns := int(m.get("cache_turns", 0))
+		_line("CACHED: stays in your hand " + ("for the rest of the encounter." if turns <= 0 else "for %d more turn%s." % [turns, "" if turns == 1 else "s"]), 14, Color("#1E6E6A"), VasTokens.FONT_RULES)
 	if not bool(m.get("playable", true)) and String(m.get("reason", "")) != "":
 		_line("Can't play now: " + String(m.reason), 14, Color("#8E2A1E"), VasTokens.FONT_RULES)
 	_place(card.get_global_rect())

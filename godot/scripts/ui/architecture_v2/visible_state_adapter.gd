@@ -240,7 +240,8 @@ static func card_model(game: Game, c: Dictionary, where: String = "hand") -> Dic
 		"tags": tags, "bw": int(d.get("bw", 0)), "cred": int(d.get("cred_cost", 0)), "trace": int(d.get("trace_cost", 0)),
 		"text": game.card_text(id) if game.has_method("card_text") else String(d.get("text", "")),
 		"target": bool(d.get("target", false)), "playable": bool(play.get("ok", false)), "reason": String(play.get("reason", "")),
-		"art": "res://assets/concept/cards/%s.png" % id}
+		"art": "res://assets/concept/cards/%s.png" % id,
+		"cached": bool(c.get("cached", false)), "cache_turns": int(c.get("cache_turns", 0))}
 
 ## ARCH-V2-005 header slots. Display models only; nothing here changes Game.
 ## PROTOCOLs deployed this Node sit on the RACK (Core Rules §3: "Stays active for the whole Node").
@@ -314,4 +315,12 @@ static func ledger(game: Game) -> Dictionary:
 	var layers: Array = game.node.get("layers", [])
 	return {"layers": maxi(1, layers.size()), "current": game.layer, "cred": game.cred,
 		"reserve": int(game.enc.get("reserve", 0)) if not game.enc.is_empty() else 0}
+
+## C09: a pile to view. The draw pile is shown sorted by name so its order is never disclosed;
+## discard and burned show in the order they arrived (newest last).
+static func pile_models(game: Game, pile: String) -> Array:
+	var src: Array = {"deck": game.draw_pile, "discard": game.discard, "burned": game.burned}.get(pile, [])
+	var out := src.map(func(c): return card_model(game, c, "pile"))
+	if pile == "deck": out.sort_custom(func(a, b): return String(a.name) < String(b.name))
+	return out
 

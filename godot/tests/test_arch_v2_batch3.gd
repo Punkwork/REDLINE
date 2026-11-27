@@ -32,6 +32,8 @@ func run() -> void:
 	await test_rail()
 	print("- events: flyouts, strikes, LOCKDOWN, wash, break feedback, virus chips")
 	await test_events()
+	print("- cards: CACHED icon, drag to play, show board, pile viewers, NEXT DRAW")
+	await test_cards()
 	print("ARCH-V2 BATCH 3: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -181,6 +183,95 @@ func test_events() -> void:
 	if rot:
 		rot.grab_focus(); await frames(2)
 		check(_inspector_text(sb).contains("ROT 2") and _inspector_text(sb).contains("STR"), "virus chip explains its strain")
+	sb.queue_free(); await frames()
+
+func _hand_card(sb: IceEncounterSandbox, pred: Callable) -> CardView:
+	for c in sb.hand_fan.cards():
+		if c is CardView and pred.call(c.model): return c
+	return null
+
+func test_cards() -> void:
+	var sb := sandbox()
+	await frames()
+	var g := sb.game
+	sb.flyout.advance(10.0)
+	# CACHED corner icon and its words.
+	g.hand[0].cached = true; sb.refresh(); await frames()
+	var cv := _hand_card(sb, func(m): return int(m.uid) == int(g.hand[0].uid))
+	check(cv != null and bool(cv.model.cached) and int(cv.model.cache_turns) == 0, "cached card carries ∞")
+	g.hand[0].cache_turns = 2; sb.refresh(); await frames()
+	cv = _hand_card(sb, func(m): return int(m.uid) == int(g.hand[0].uid))
+	check(int(cv.model.cache_turns) == 2, "cached card carries its turns left")
+	cv.grab_focus(); await frames(2)
+	check(_inspector_text(sb).contains("CACHED"), "inspector explains CACHED")
+	cv.release_focus(); sb.inspector.close()
+	g.hand[0].cached = false; g.hand[0].erase("cache_turns"); sb.refresh(); await frames()
+	# Click plays on release, so a press can become a drag.
+	var plain := _hand_card(sb, func(m): return bool(m.playable) and not bool(m.target))
+	var n0 := g.hand.size()
+	var down := InputEventMouseButton.new(); down.button_index = MOUSE_BUTTON_LEFT; down.pressed = true; down.position = Vector2(10, 10)
+	plain._gui_input(down)
+	check(g.hand.size() == n0, "press alone doesn't play")
+	var up := InputEventMouseButton.new(); up.button_index = MOUSE_BUTTON_LEFT; up.pressed = false; up.position = Vector2(10, 10)
+	plain._gui_input(up)
+	check(g.hand.size() == n0 - 1, "release plays the card")
+	await frames()
+	# Drag: untargeted dropped above the tray plays; dropped back on the tray does nothing.
+	var drag := _hand_card(sb, func(m): return bool(m.playable) and not bool(m.target))
+	check(drag._get_drag_data(Vector2.ZERO) is Dictionary, "playable card starts a drag")
+	var tray_pt := sb.stage.global_position + (IceEncounterSandbox.TRAY.position + Vector2(400, 60)) * sb.stage.scale
+	var n1 := g.hand.size()
+	sb._on_card_dropped(drag.uid(), tray_pt)
+	check(g.hand.size() == n1, "dropped on the tray: not played")
+	var above := sb.stage.global_position + Vector2(760, 300) * sb.stage.scale
+	var calls := sb.ctrl.game_calls
+	sb._on_card_dropped(drag.uid(), above)
+	check(g.hand.size() == n1 - 1 and sb.ctrl.game_calls == calls + 1, "dropped above the tray: played with one call")
+	await frames()
+	# Targeted card (PROBE): dropped on an ICE panel plays on that ICE.
+	var probe := _hand_card(sb, func(m): return bool(m.target) and bool(m.playable))
+	if probe:
+		var panel: IcePanel = sb.lane.panels()[1]
+		var str_before := int(panel.model.str)
+		var pu := probe.uid()
+		sb._on_card_dropped(pu, panel.get_global_rect().get_center())
+		await frames()
+		check(not g.hand.any(func(c): return int(c.uid) == pu), "targeted card dropped on an ICE is played")
+		check(int(sb.lane.panels()[1].model.str) < str_before, "and lands on that ICE")
+	else:
+		check(false, "a playable PROBE in hand")
+	var unplayable := CardView.new(); unplayable.set_model({"uid": 999, "playable": false})
+	check(unplayable._get_drag_data(Vector2.ZERO) == null, "unplayable card can't be dragged")
+	unplayable.free()
+	# NEXT DRAW on the deck counter; pile viewers.
+	check(String(sb.counters.rows[0].lines[0]) == "NEXT DRAW: %d cards." % g.draw_size(), "deck hover gives NEXT DRAW")
+	sb.open_pile("deck")
+	check(sb.pile_view.visible and sb.pile_view.cards().size() == g.draw_pile.size(), "deck viewer shows the draw pile")
+	var names := sb.pile_view.cards().map(func(c): return String(c.model.name))
+	var sorted := names.duplicate(); sorted.sort()
+	check(names == sorted, "deck viewer is sorted by name (order hidden)")
+	var esc := InputEventAction.new(); esc.action = "ui_cancel"; esc.pressed = true
+	sb._unhandled_input(esc)
+	check(not sb.pile_view.visible, "Esc closes the viewer")
+	sb.open_pile("discard")
+	check(sb.pile_view.visible and sb.pile_view.cards().size() == g.discard.size(), "discard viewer")
+	sb.pile_view.secondary.emit("close")
+	check(not sb.pile_view.visible, "Close closes the viewer")
+	sb.queue_free(); await frames()
+	# SHOW BOARD during a discard (#15): through a real CAPTCHA discard choice.
+	sb = sandbox(); await frames(); g = sb.game
+	g.pending = {"kind": "discard", "n": 1}; g.phase = "CHOICE"; sb.refresh(); await frames()
+	check(sb.choice.visible and not sb.choice.peek, "discard choice open")
+	var show := sb.choice.find_child("ShowBoard", true, false) as Button
+	check(show != null, "SHOW BOARD offered")
+	if show: show.pressed.emit()
+	check(sb.choice.peek and sb.choice.mouse_filter == Control.MOUSE_FILTER_IGNORE, "board visible, overlay lets the mouse through")
+	sb.refresh()
+	check(sb.choice.peek, "peek kept across refresh")
+	var back := sb.choice.find_child("BackToChoice", true, false) as Button
+	check(back != null and back.visible, "BACK TO DISCARD shown")
+	if back: back.pressed.emit()
+	check(not sb.choice.peek and sb.choice.find_child("Plaque", true, false).visible, "back to the choice")
 	sb.queue_free(); await frames()
 
 func _inspector_text(sb: IceEncounterSandbox) -> String:

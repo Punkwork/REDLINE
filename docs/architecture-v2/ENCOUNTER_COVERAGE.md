@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 47 · PLACEHOLDER 1 · BATCH3 8 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
+**Totals:** BUILT 52 · PLACEHOLDER 1 · BATCH3 3 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
 
 | Status | Meaning |
 |---|---|
@@ -76,12 +76,12 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | C01 | Fanned hand | FriendlyHand | `HandFan` | BUILT | — |  |
 | C02 | Card inspector (HOVER-001) | big_card | `KeyInspector` | BUILT | — |  |
 | C03 | Targeting (CHOOSE AN ICE) | drop on ICE | `TargetPlaque` | BUILT | — |  |
-| C04 | Drag cards to play (PT11-UI 2) | FriendlyDropTarget | — | BATCH3 | C10 drag path | Click-to-play is built; drag-to-break from the rig is built. |
+| C04 | Drag cards to play (PT11-UI 2) | FriendlyDropTarget | `HandFan` | BUILT | — | Click plays on release; drag: untargeted above the tray, targeted onto an ICE; one call each. |
 | C05 | Dim unplayable cards (PT11-UI 4) | FriendlyCard | `HandFan` | BUILT | — |  |
-| C06 | CACHED corner icon (CACHE-001, #17) | cache glow | — | BATCH3 | C11 CardView corner icon |  |
+| C06 | CACHED corner icon (CACHE-001, #17) | cache glow | `HandFan` | BUILT | — | Cyan disc on the art frame: ∞ (the encounter) or turns left; hover explains. |
 | C07 | Choice overlays | main._overlay_options | `ChoiceOverlay` | BUILT | — | PATIENT ZERO variant not yet mapped. |
-| C08 | Toggle back to the board during a discard (#15) | none | — | BATCH3 | C15 |  |
-| C09 | Deck and discard viewers | DECK / COVERAGE buttons | — | BATCH3 | C16 inspect |  |
+| C08 | Toggle back to the board during a discard (#15) | none | `ChoiceOverlay` | BUILT | — | SHOW BOARD / BACK TO <choice> on every choice; kept across refreshes. |
+| C09 | Deck and discard viewers | DECK / COVERAGE buttons | `PileView` | BUILT | — | Click a counter: deck (sorted by name, order hidden), discard, burned. Esc or Close. |
 
 ## Vitals
 
@@ -92,7 +92,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | V03 | RAM | CRED/RAM row | `MeterRAM` | BUILT | — |  |
 | V04 | SHIELD | vital_row | `MeterSHIELD` | BUILT | — |  |
 | V05 | PULP INCOMING | vital_row | `MeterPULP` | BUILT | — |  |
-| V06 | NEXT DRAW estimate | vital_row | — | BATCH3 | C13 PlayerHUD |  |
+| V06 | NEXT DRAW estimate | vital_row | `Counters` | BUILT | — | On the deck counter hover. |
 | V07 | CORTEX and BW drain | CRT status | `Effects` | BUILT | — |  |
 | V08 | Deck / discard / burned counts | deck/discard wells | `Counters` | BUILT | — |  |
 
