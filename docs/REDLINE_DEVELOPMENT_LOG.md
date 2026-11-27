@@ -462,3 +462,7 @@ Convert REBOOT SPAM from inherent ICE ability to breakable reactive subroutine. 
 
 ## REBOOT-SPAM-002a — ICE affinity and activation clarification (designer approved 2026-11-27)
 Finalize REBOOT-SPAM-002: VOID is the preferred but not exclusive ICE type; FORTRESS and TUMBLER remain eligible. Each natural or forced REBOOT inserts one SPAM into the draw pile per eligible REBOOT SPAM subroutine. Existing universal subroutine eligibility applies: revealed, active and unbroken; no concealed or inactive triggers, no independent Corporation Countermeasure execution. Apply existing TUMBLER rotation rules without exceptions. Reconcile FREE TRIAL's legacy inherent ability during implementation; exact roster placement and pool composition remain open. Include in Priority 2 mechanical coverage and regression planning. Documentation approval only; engine implementation pending.
+
+
+## REBOOT-FORGET-001 — LUCIDA-exclusive ability (designer approved 2026-11-27)
+Retain REBOOT FORGET as an inherent reactive ICE ability exclusive to LUCIDA: existing REBOOT trigger and FORGET 1 effect retained. Do not convert to a breakable reactive subroutine at this stage. Defer implementation/reconciliation and balance evaluation to LUCIDA development; explicitly exclude from current HALCYON representative encounter milestone. Existing RECURRING DREAM definition and legacy references to be reconciled during appropriate implementation work. No engine changes authorized by this record.
