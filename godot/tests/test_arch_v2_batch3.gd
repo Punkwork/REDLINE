@@ -225,7 +225,7 @@ func test_cards() -> void:
 	check(g.hand.size() == n0 - 1, "release plays the card")
 	await frames()
 	# Drag: untargeted dropped above the tray plays; dropped back on the tray does nothing.
-	var drag := _hand_card(sb, func(m): return bool(m.playable) and not bool(m.target))
+	var drag := _hand_card(sb, func(m): return bool(m.playable) and not bool(m.target) and String(m.type) != "PROGRAM")
 	check(drag._get_drag_data(Vector2.ZERO) is Dictionary, "playable card starts a drag")
 	var tray_pt := sb.stage.global_position + (IceEncounterSandbox.TRAY.position + Vector2(400, 60)) * sb.stage.scale
 	var n1 := g.hand.size()
@@ -248,6 +248,35 @@ func test_cards() -> void:
 		check(int(sb.lane.panels()[1].model.str) < str_before, "and lands on that ICE")
 	else:
 		check(false, "a playable PROBE in hand")
+	# ARCH-V2-006l: a PROGRAM installs only on the CRT; the CRT glows while one is dragged.
+	await frames()
+	var prog := _hand_card(sb, func(m): return String(m.type) == "PROGRAM" and bool(m.playable))
+	if prog:
+		var pu := prog.uid()
+		prog.drag_began.emit(pu)
+		check(sb.crt_glow.state == 1, "CRT glows while a PROGRAM is dragged")
+		var crt_pt := sb.stage.global_position + IceEncounterSandbox.CRT.get_center() * sb.stage.scale
+		sb.get_viewport().warp_mouse(crt_pt); sb._process(0.0)
+		prog.drag_finished.emit(pu)
+		check(sb.crt_glow.state == 0, "glow off when the drag ends")
+		var n2 := g.hand.size()
+		sb._on_card_dropped(pu, sb.stage.global_position + Vector2(760, 300) * sb.stage.scale)
+		check(g.hand.size() == n2, "PROGRAM dropped above the tray but off the CRT: not installed")
+		var inst := g.installed.size()
+		sb._on_card_dropped(pu, crt_pt)
+		check(g.installed.size() == inst + 1 and g.hand.size() == n2 - 1, "PROGRAM dropped on the CRT installs")
+	else:
+		check(false, "a playable PROGRAM in hand")
+	# ARCH-V2-006l: playable cards lit, the rest dimmed, refreshed as BW is spent.
+	g.bw = 0; sb.refresh(); await frames()
+	var lit := 0; var dim := 0
+	for c in sb.hand_fan.cards():
+		if not (c is CardView): continue
+		var ok: bool = g.can_play(c.uid()).get("ok", false)
+		check(bool(c.model.playable) == ok, "%s lit only if playable" % c.model.name)
+		if ok: lit += 1
+		else: dim += 1
+	check(dim > 0, "with 0 BW, cards that cost BW dim (%d dim, %d lit)" % [dim, lit])
 	var unplayable := CardView.new(); unplayable.set_model({"uid": 999, "playable": false})
 	check(unplayable._get_drag_data(Vector2.ZERO) == null, "unplayable card can't be dragged")
 	unplayable.free()

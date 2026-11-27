@@ -266,6 +266,15 @@ func run() -> void:
 	await shot("v2_29_targeting_arrow")
 	sb.cancel_aim(); sb.refresh()
 
+	# 10i. ARCH-V2-006l: a PROGRAM over the CRT (install glow), and cards dimmed when they can't be
+	# played (BW spent down to 0: only 0-cost cards stay lit).
+	await fresh()
+	quiet()
+	sb.game.bw = 0; sb.refresh()
+	sb.crt_glow.set_state(2)
+	await shot("v2_30_program_to_crt_and_dim")
+	sb.crt_glow.set_state(0)
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

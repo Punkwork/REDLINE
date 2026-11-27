@@ -16,6 +16,9 @@ signal drag_dropped(uid: int, at: Vector2)
 ## ARCH-V2-006k (designer 2026-11-26 20:37): a targeted card is aimed, not dragged: press and hold
 ## it and an arrow runs from the card to the pointer; release over an ICE to play it there.
 signal aim_started(uid: int)
+## ARCH-V2-006l: a drag began / ended (the screen lights the CRT while a PROGRAM is dragged).
+signal drag_began(uid: int)
+signal drag_finished(uid: int)
 
 const BASE := Vector2(140, 221)
 const FACE := Color("#F6F1E4")
@@ -23,6 +26,7 @@ const EDGE := Color("#BDB29A")
 const INK := Color("#2A1D0E")
 const SUB_INK := Color("#5E4B35")
 const RULES_BG := Color("#FBF3DC")
+const DIM := 0.55   ## how dark an unplayable card gets (ARCH-V2-006l)
 const TAG_COLORS := {"EXPLOIT": Color("#C8452F"), "CLOAK": Color("#7C4BA0"), "ICEPICK": Color("#3E8E5A"),
 	"EXTRACTOR": Color("#C9861E"), "VIRUS": Color("#7A9A2A"), "HARDWARE": Color("#5E6E7A"), "DEFENSE": Color("#D89A2A")}
 const TYPE_COLORS := {"PROGRAM": Color("#2E8C8A"), "SCRIPT": Color("#C2604E"), "PROTOCOL": Color("#B8921E"), "BLOATWARE": Color("#8E3A2A")}
@@ -91,12 +95,14 @@ func _get_drag_data(_at: Vector2) -> Variant:
 	holder.add_child(ghost)
 	if get_viewport() and get_viewport().gui_is_dragging(): set_drag_preview(holder)
 	else: holder.queue_free()
+	drag_began.emit(uid())
 	return {"card_uid": uid()}
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END and _dragging:
 		_dragging = false
 		if not get_viewport().gui_is_drag_successful(): drag_dropped.emit(uid(), get_global_mouse_position())
+		drag_finished.emit(uid())
 
 ## Set before a programmatic focus (a choice opening) so the inspector waits for the player.
 var quiet_focus := false
@@ -199,8 +205,10 @@ func _draw() -> void:
 		var cw2 := VasTokens.FONT_PLAQUE.get_string_size(ct, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx2).x
 		draw_string(VasTokens.FONT_PLAQUE, cc + Vector2(-cw2 / 2.0, cpx2 * 0.36), ct, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx2, Color("#BFFBF8"))
 	# Unplayable: dimmed (the reason is on hover).
+	## ARCH-V2-006l: cards you can play this turn are lit normally; a card you can't play now (not
+	## enough BW or RAM, wrong phase, no target...) dims; the reason is on hover.
 	if not bool(model.get("playable", true)):
-		_rr(body, Color(0.12, 0.09, 0.06, 0.38), 11 * k)
+		_rr(body, Color(0.10, 0.08, 0.06, DIM), 11 * k)
 	# Hover / focus / selected: cyan edge.
 	if lit or selected:
 		var f := StyleBoxFlat.new(); f.draw_center = false; f.border_color = Color("#4FE3E0") if selected else VasTokens.FOCUS

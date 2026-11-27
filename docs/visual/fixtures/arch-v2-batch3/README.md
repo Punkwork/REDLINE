@@ -12,3 +12,4 @@ From `godot/tests/shot_arch_v2_ice.gd` at 1600 × 1000 (Godot 4.3, software GL).
 - `v2_27_deck_viewer.jpg`: the deck viewer (sorted by name).
 - `v2_28_discard_show_board.jpg`: SHOW BOARD during a discard, with BACK TO DISCARD 1.
 - `v2_29_targeting_arrow.jpg`: aiming PROBE: the arrow from the card to CAPTCHA, which is ringed (ARCH-V2-006k).
+- `v2_30_program_to_crt_and_dim.jpg`: the CRT glowing as the install target, and the hand at 0 BW: only PROBE (0 BW) stays lit (ARCH-V2-006l).

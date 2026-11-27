@@ -983,3 +983,35 @@ class TargetArrow extends Control:
 		draw_colored_polygon(PackedVector2Array([tip + dir * 7.0, tip - dir * 15.0 + side * 11.0, tip - dir * 15.0 - side * 11.0]), col)
 		draw_circle(from, 7.0, col)
 
+## ARCH-V2-006l: the CRT as the install target. While a PROGRAM is dragged the screen glows phosphor
+## and a slot arrow shows above the set; over the CRT it brightens ("let go to install").
+class CrtDropGlow extends Control:
+	var screen := Rect2()
+	var slot_y := 0.0
+	var state := 0            # 0 off, 1 a PROGRAM is being dragged, 2 the pointer is over the CRT
+	var reduced_motion := false
+	var t := 0.0
+	func _init() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		set_process(false)
+	func set_state(s: int) -> void:
+		if s == state: return
+		state = s; set_process(s > 0 and not reduced_motion); queue_redraw()
+	func _process(d: float) -> void:
+		t += d; queue_redraw()
+	func _draw() -> void:
+		if state == 0: return
+		var pulse := 1.0 if reduced_motion else 0.8 + 0.2 * sin(t * 6.0)
+		var hot := state == 2
+		var col := Color(VasTokens.PHOSPHOR, (0.9 if hot else 0.55) * pulse)
+		var ring := StyleBoxFlat.new(); ring.bg_color = Color(VasTokens.PHOSPHOR, 0.18 if hot else 0.06)
+		ring.border_color = col; ring.set_border_width_all(5 if hot else 3); ring.set_corner_radius_all(14)
+		ring.shadow_color = Color(VasTokens.PHOSPHOR, 0.45 if hot else 0.2); ring.shadow_size = 16 if hot else 8
+		ring.anti_aliasing = true
+		draw_style_box(ring, screen.grow(4))
+		# Slot arrow above the set: where the cartridge goes in.
+		var c := Vector2(screen.get_center().x, slot_y - 18.0 - (0.0 if reduced_motion else 4.0 * sin(t * 6.0)))
+		var w := 16.0
+		draw_colored_polygon(PackedVector2Array([c + Vector2(-w, -w * 0.6), c + Vector2(w, -w * 0.6), c + Vector2(0, w * 0.7)]), col)
+		draw_line(c + Vector2(0, -w * 1.6), c + Vector2(0, -w * 0.6), col, 5.0)
+

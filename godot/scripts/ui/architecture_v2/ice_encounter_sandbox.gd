@@ -99,6 +99,8 @@ var rail_log: HudWidgets.Explained
 var flash: ColorRect
 var pile_view: ChoiceOverlay
 var arrow: HudWidgets.TargetArrow
+var crt_glow: HudWidgets.CrtDropGlow
+var _dragging_program := -1
 var aiming_uid := -1
 var _aim_moved := false
 var speakers: Array = []
@@ -289,6 +291,9 @@ func _build_left_rail() -> void:
 			"eject": ctrl.request_unload(uid)
 		refresh())
 	stage.add_child(rig_bay)
+	crt_glow = HudWidgets.CrtDropGlow.new(); crt_glow.name = "CrtDropGlow"; crt_glow.size = REF
+	crt_glow.screen = rig_bay.screen_rect; crt_glow.slot_y = rig_bay.slot_y
+	stage.add_child(crt_glow)
 	effect_card = HudWidgets.EffectCard.new(); effect_card.name = "Effects"
 	effect_card.setup(NOTE.size, inspector); effect_card.position = NOTE.position; stage.add_child(effect_card)
 
@@ -707,6 +712,10 @@ func _card_view(m: Dictionary) -> CardView:
 		else: ctrl.request_play(u); refresh())
 	cv.drag_dropped.connect(_on_card_dropped)
 	cv.aim_started.connect(func(u): start_aim(u, cv))
+	cv.drag_began.connect(func(u):
+		if String(m.get("type", "")) == "PROGRAM":
+			_dragging_program = u; crt_glow.reduced_motion = reduced_motion; crt_glow.set_state(1))
+	cv.drag_finished.connect(func(_u): _dragging_program = -1; crt_glow.set_state(0))
 	return cv
 
 ## ARCH-V2-006k: aim a targeted card. Press and hold the card: an arrow runs from it to the pointer
@@ -775,10 +784,14 @@ func _input(e: InputEvent) -> void:
 func _on_card_dropped(uid: int, at: Vector2) -> void:
 	if responding or game.phase != "PLAYER": return
 	var p := (at - stage.global_position) / stage.scale
-	if p.y >= TRAY.position.y: return
 	var c := game.hand.filter(func(x): return int(x.uid) == uid)
 	if c.is_empty(): return
 	var d := CardDB.def(String(c[0].id))
+	## ARCH-V2-006l: a PROGRAM installs only when dropped on the CRT (its glass or the slot above it).
+	if String(d.get("type", "")) == "PROGRAM":
+		if over_crt(at): ctrl.request_play(uid); refresh()
+		return
+	if p.y >= TRAY.position.y: return
 	if bool(d.get("target", false)):
 		for panel in lane.panels():
 			if panel.get_global_rect().has_point(at):
@@ -786,6 +799,11 @@ func _on_card_dropped(uid: int, at: Vector2) -> void:
 				ctrl.request_play(uid, panel.ice_ref); refresh(); return
 		return
 	ctrl.request_play(uid); refresh()
+
+func over_crt(global: Vector2) -> bool:
+	var p := _to_stage(global)
+	var zone := Rect2(CRT.position.x, rig_bay.slot_y - 60.0, CRT.size.x, CRT.end.y - rig_bay.slot_y + 60.0)
+	return zone.has_point(p)
 
 ## C09: click a counter to see that pile (deck sorted by name, so its order stays hidden).
 func open_pile(pile: String) -> void:
@@ -799,6 +817,7 @@ func open_pile(pile: String) -> void:
 		"text": text, "cards": models, "secondary": {"label": "Close", "intent": "close"}})
 
 func _process(delta: float) -> void:
+	if _dragging_program >= 0: crt_glow.set_state(2 if over_crt(get_global_mouse_position()) else 1)
 	if game == null or game.enc.is_empty() or hand_fan == null: return
 	var h := hand_fan.hovered
 	var uid := int(h.get_meta("uid", -1)) if is_instance_valid(h) else -1
