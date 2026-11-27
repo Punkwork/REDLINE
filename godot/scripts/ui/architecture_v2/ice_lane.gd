@@ -95,3 +95,9 @@ func set_room(friendly: Texture2D, hostile: Texture2D, reveal: float) -> void:
 		var uv := Rect2((r.position + off) / shown, r.size / shown)
 		p.set_room(friendly, hostile, uv, reveal)
 
+## ARCH-V2-007b: the corporation's enamel and the TRACE pixel step on every window.
+func set_look(enamel: Variant, pixel: Dictionary) -> void:
+	for p in _panels:
+		p.set_enamel(enamel)
+		p.set_trace_pixel(pixel)
+

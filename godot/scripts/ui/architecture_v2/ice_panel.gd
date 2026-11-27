@@ -231,6 +231,8 @@ func set_model(m: Dictionary) -> void:
 	str_badge.position = Vector2(np.end.x, np.position.y) - Vector2(L.str_badge_size, L.str_badge_size) / 2.0
 	# Virtual expression
 	_set_portrait(String(m.id), String(m.mood))
+	if String(m.mood) != _mood_now:
+		_mood_prev = _mood_now; _mood_now = String(m.mood); _mood_age = 0.0
 	portrait.modulate = Color(0.55, 0.55, 0.55) if m.breached else Color.WHITE
 	# Persistent status: power lamp, then the passive's icon (rule on hover/focus).
 	_power_on = not m.breached
@@ -497,4 +499,89 @@ func set_room(friendly: Texture2D, hostile: Texture2D, uv: Rect2, reveal: float)
 
 func has_room() -> bool:
 	return _room != null and _room.visible
+
+## ARCH-V2-007b: PIXEL-TRACE-001 in the V2 window. As TRACE rises the room and the avatar drop
+## toward 16-bit (square cells, fewer colours, dither); the keys, plates, bubble and text above stay
+## sharp. `look` is {cell, levels, dither} from AtomicDecoPunk.pixel_step (the screen animates it).
+const TRACE_PIXEL := preload("res://themes/trace_pixel.gdshader")
+const MOOD_PIXEL := preload("res://themes/mood_pixel.gdshader")
+var _pixel: Control
+var _pixel_mat: ShaderMaterial
+var pixel_base := 1.0
+func set_trace_pixel(look: Dictionary) -> void:
+	var cell := float(roundi(float(look.get("cell", 1.0))))
+	pixel_base = cell
+	if cell <= 1.0:
+		if _pixel: _pixel.visible = false
+		return
+	if _pixel == null:
+		_pixel = Control.new(); _pixel.name = "TracePixel"; _pixel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var copy := BackBufferCopy.new(); copy.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT; _pixel.add_child(copy)
+		_pixel_mat = ShaderMaterial.new(); _pixel_mat.shader = TRACE_PIXEL
+		var r := ColorRect.new(); r.name = "Cells"; r.material = _pixel_mat; r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_pixel.add_child(r)
+		add_child(_pixel); move_child(_pixel, $Expression.get_index() + 1)   # above room and avatar, below bubble and keys
+	var inset := layout.window_rim * 0.62
+	_pixel.position = Vector2(inset, inset); _pixel.size = size - Vector2(inset, inset) * 2.0
+	(_pixel.get_node("Cells") as ColorRect).size = _pixel.size
+	_pixel.visible = true
+	_pixel_mat.set_shader_parameter("cell", cell)
+	_pixel_mat.set_shader_parameter("levels", float(look.get("levels", 256.0)))
+	_pixel_mat.set_shader_parameter("dither", float(look.get("dither", 0.0)))
+
+func trace_pixel_cell() -> float:
+	return float(_pixel_mat.get_shader_parameter("cell")) if _pixel and _pixel.visible else 1.0
+
+## ARCH-V2-007b: MOOD-PIXEL-001 in V2. When the avatar's mood changes it drops into 16-bit and
+## resolves; while lethal it pulses 2 s in 16-bit, 2 s crisp (Build 12's timings and look, shared
+## with FriendlyMascot.mood_look). Masked by the avatar's own alpha. Off under reduced motion.
+var _mood_now := ""
+var _mood_prev := ""
+var _mood_age := 99.0
+var _mood_fx: Control
+var _mood_mat: ShaderMaterial
+func _process(delta: float) -> void:
+	_mood_age += delta
+	var look := FriendlyMascot.mood_look(_mood_now, _mood_prev, _mood_age, Time.get_ticks_msec() / 1000.0, reduced_motion, pixel_base)
+	apply_mood_look(look)
+
+func apply_mood_look(look: Dictionary) -> void:
+	var cell := float(roundi(float(look.cell)))
+	if cell <= 1.0 or portrait.texture == null:
+		if _mood_fx: _mood_fx.visible = false
+		return
+	if _mood_fx == null:
+		_mood_fx = Control.new(); _mood_fx.name = "MoodPixel"; _mood_fx.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var copy := BackBufferCopy.new(); copy.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT; _mood_fx.add_child(copy)
+		_mood_mat = ShaderMaterial.new(); _mood_mat.shader = MOOD_PIXEL
+		var r := ColorRect.new(); r.name = "Cells"; r.material = _mood_mat; r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_mood_fx.add_child(r)
+		portrait.add_child(_mood_fx)
+	# The fx rect covers exactly where the portrait texture is drawn (keep-aspect, centred), so the
+	# mask lines up with the avatar.
+	var ts := portrait.texture.get_size()
+	var k := minf(portrait.size.x / ts.x, portrait.size.y / ts.y)
+	var drawn := ts * k
+	_mood_fx.position = (portrait.size - drawn) / 2.0; _mood_fx.size = drawn
+	(_mood_fx.get_node("Cells") as ColorRect).size = drawn
+	_mood_mat.set_shader_parameter("mask_tex", portrait.texture)
+	_mood_mat.set_shader_parameter("cell", cell)
+	_mood_mat.set_shader_parameter("levels", float(look.levels))
+	_mood_mat.set_shader_parameter("dither", float(look.dither))
+	_mood_fx.visible = true
+
+func mood_pixel_on() -> bool:
+	return _mood_fx != null and _mood_fx.visible
+
+## ARCH-V2-007b: the corporation's enamel on the window's painted seafoam (IRONWATCH navy, LUCIDA
+## lilac; HALCYON keeps its seafoam). Chrome and brass keep their colour (console_tint shader).
+const CONSOLE_TINT := preload("res://themes/console_tint.gdshader")
+func set_enamel(target: Variant) -> void:
+	var nine: CanvasItem = get_node_or_null("WindowNine")
+	for n in [window, nine]:
+		if n == null: continue
+		if target == null: n.material = null
+		else:
+			var m := ShaderMaterial.new(); m.shader = CONSOLE_TINT; m.set_shader_parameter("target", target)
+			n.material = m
 

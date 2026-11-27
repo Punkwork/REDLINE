@@ -264,20 +264,20 @@
    "area": "ICE",
    "element": "TRACE pixel steps (PIXEL-TRACE-001)",
    "prototype": "update_pixel",
-   "v2": "",
-   "status": "BATCH4",
-   "next": "C06 presentation",
-   "note": ""
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "Room and avatar drop to the step with Build 12 transition; keys, plates, bubble and text stay sharp (ARCH-V2-007b)."
   },
   {
    "id": "I14",
    "area": "ICE",
    "element": "Corporation console colour",
    "prototype": "console_tint_material",
-   "v2": "",
-   "status": "BATCH4",
-   "next": "C06 CorporationPresentation",
-   "note": ""
+   "v2": "Ice_*",
+   "status": "BUILT",
+   "next": "",
+   "note": "console_tint on the window enamel (IRONWATCH navy, LUCIDA lilac); mostly behind the room now (ARCH-V2-007b)."
   },
   {
    "id": "I15",

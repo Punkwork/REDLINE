@@ -33,10 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-23 — ARCH-V2-001 blueprint folder drafted (ChatGPT)
-
-Created six proposed documents under `docs/architecture-v2/`: README, scene hierarchy, data model, gameplay interface, migration plan and validation. They are architecture proposals, not designer-approved implementation details. No Godot files or rules changed; baseline tests and tag remain pending. HANDOFF updated for designer review.
-
 ## 2026-11-23 — ARCH-V2-001 decision history and compliance gate (ChatGPT)
 
 At the designer's request, added `docs/architecture-v2/ARCHITECTURE_DECISIONS.md` (curated rationale and approval boundaries) and `COMPLIANCE_CHECKLIST.md` (evidence-based review checklist). Linked them from the blueprint README and required consultation before significant architecture changes in identical AGENTS.md and CLAUDE.md. No gameplay code changed, no baseline tests run, and no unreviewed implementation details approved.
@@ -395,4 +391,8 @@ Designer uploaded the three §6f parts. Trimmed, added with manifest rows, wired
 ## 2026-11-26 — ARCH-V2-007a: Batch 4 started; corporation rooms through the ICE windows (Claude Code)
 
 Designer supplied 22 `BG_` backgrounds from the art folder (staged from the designer's PC) and chose "Inside the ICE windows". Imported unchanged; built `CorporationLook` (C06), `corp_room.gdshader`, `IcePanel.set_room`, `IceLane.set_room` (one continuous room; HOSTILE blends in with the reveal). New `test_arch_v2_batch4.gd` in CI; coverage row I15. Tests: batch4 23/0, batch3 110/0, ice 202/0, coverage 545/0, test_game 176/0; screenshots 38. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001: architecture migration governance (ChatGPT)" to the archive.)
+
+## 2026-11-26 — ARCH-V2-007b: corporation look on the V2 encounter (Claude Code)
+
+Window enamel and ad plate per corporation (`CorporationLook`), PIXEL-TRACE-001 and MOOD-PIXEL-001 in the V2 windows (`IcePanel.set_trace_pixel`, `apply_mood_look`; Build 12 shaders and timings reused), Build 12's music (`FriendlyMusic`) driven by bleed with the strike chime and effect sounds. Room crop biased to the floor (designer 21:41). Coverage I13, I14 BUILT. Tests: batch4 40/0, batch3 110/0, ice 202/0, coverage 545/0; screenshots 41. No rules change. (LOG-001: moved "2026-11-23 — ARCH-V2-001 blueprint folder drafted (ChatGPT)" to the archive.)
 

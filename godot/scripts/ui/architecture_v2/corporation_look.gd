@@ -24,3 +24,18 @@ static func rooms_for(game: Game) -> Dictionary:
 	var friendly := room(corp, base)
 	if friendly == null and base != "FRIENDLY": friendly = room(corp, "FRIENDLY")
 	return {"friendly": friendly, "hostile": room(corp, "HOSTILE") if base == "FRIENDLY" else null}
+
+## Enamel for the ICE windows' painted seafoam (Build 12's CONSOLE_ENAMEL); null keeps seafoam.
+const ENAMEL := {"IRONWATCH": Color("#1F3A5F"), "LUCIDA": Color("#C9B6F2")}
+static func enamel(corp: String) -> Variant:
+	return ENAMEL.get(corp.to_upper(), null)
+
+## The header's ad plate and its approved line, per corporation. Only HALCYON has painted art and
+## approved copy today; others show no plate (negative space) until both exist.
+const AD_COPY := {"HALCYON": "A Halcyon Homesteads™\ncommunity"}
+static func ad_plate(corp: String) -> Dictionary:
+	var c := corp.to_upper()
+	var art := "chassis/V2_AD_PLATE_%s.png" % c
+	if not AD_COPY.has(c) or not ResourceLoader.exists(V2Art.ROOT + art): return {}
+	return {"art": art, "copy": AD_COPY[c]}
+

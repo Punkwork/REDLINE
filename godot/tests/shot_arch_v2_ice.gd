@@ -275,6 +275,18 @@ func run() -> void:
 	await shot("v2_30_program_to_crt_and_dim")
 	sb.crt_glow.set_state(0)
 
+	# 10j. ARCH-V2-007b: the same screen dressed by another corporation (IRONWATCH, LUCIDA), and
+	# HALCYON at TRACE 30 with the window at its pixel step (keys and plates sharp).
+	for corp in ["IRONWATCH", "LUCIDA"]:
+		await fresh()
+		quiet()
+		sb.game.corporation = corp; sb.refresh()
+		await shot("v2_31_corporation_%s" % corp.to_lower())
+	await fresh(true)
+	quiet()
+	sb.game.trace = 30; sb.refresh()
+	await shot("v2_32_trace30_pixel_step")
+
 	# 11. Responsive sizes (VAS-001 §4) and the reference comparison.
 	await fresh()
 	quiet()

@@ -2952,3 +2952,7 @@ Designer's sheet: run 1 died at TERMS & CONDITIONS (CONSENT FORM + TERMS OF SERV
 **Designer:** Approved a full-game hybrid scene-based, component-driven, data-driven Godot architecture instead of retaining the prototype's one-scene restriction. Explicitly chose `architecture-v2` as primary rebuild branch with `main` preserved as stable four-node prototype. The branch was created from `main`.
 
 **Documentation:** Updated AGENTS.md, CLAUDE.md, master design, HANDOFF, and architecture notes on `architecture-v2` only. No gameplay code changed. No prototype tag created; baseline tests, new scene plan, CI and release migration remain to do. **Interpretations to confirm:** specific scene/data architecture and when/how to merge or release the rebuild require designer review.
+
+## 2026-11-23 — ARCH-V2-001 blueprint folder drafted (ChatGPT)
+
+Created six proposed documents under `docs/architecture-v2/`: README, scene hierarchy, data model, gameplay interface, migration plan and validation. They are architecture proposals, not designer-approved implementation details. No Godot files or rules changed; baseline tests and tag remain pending. HANDOFF updated for designer review.

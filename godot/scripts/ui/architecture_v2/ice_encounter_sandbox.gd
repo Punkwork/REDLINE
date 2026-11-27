@@ -106,8 +106,16 @@ var _aim_moved := false
 var speakers: Array = []
 var nr := NulRem.new()
 var sequencer := ResponseSequencer.new()
-var sfx := {}
 var last_effect_sound := ""
+## ARCH-V2-007b: the corporation's music (Build 12's ADP stems: corporate / Rustler / drone, mixed by
+## bleed, strike chime) and its effect sounds; the TRACE pixel step as shown (animated).
+var music: FriendlyMusic
+var bleed := 0.0
+var pixel_shown := {}
+var pixel_target := {}
+var _pixel_tween: Tween
+var ad_plate: TextureRect
+var ad_copy: Label
 ## Announcements the response waits for (Build 12 waited for its strike overlay).
 const HOLD_FOR := ["corp_countermeasure", "mask_off", "lockdown", "ice_lethal"]
 var nr_voice: AudioStreamPlayer
@@ -146,6 +154,9 @@ func _ready() -> void:
 	reduced_motion = reduced_motion or bool(flags.get("reduced_motion", false))
 	voice_on = bool(flags.get("voice_on", true))
 	nr_voice = AudioStreamPlayer.new(); nr_voice.name = "NulRemVoice"; add_child(nr_voice)
+	music = FriendlyMusic.new(); music.name = "Music"; add_child(music)
+	music.set_level(float(flags.get("music_volume", AtomicDecoPunk.settings.music.default_volume)), bool(flags.get("music_muted", false)))
+	music.set_active(true)
 	_build()
 	get_viewport().size_changed.connect(_fit)
 	_fit()
@@ -268,11 +279,11 @@ func _build_header() -> void:
 	protocol_rack = HudWidgets.SlotRack.new(); protocol_rack.name = "ProtocolRack"
 	protocol_rack.setup(PROTOCOLS.size, "PROTOCOL", PROTOCOL_SLOTS, inspector); protocol_rack.position = PROTOCOLS.position
 	stage.add_child(protocol_rack)
-	var ad := _art("chassis/V2_AD_PLATE_HALCYON.png", AD, "AdPlate")
-	# Approved HALCYON programme line (arch_copy.json, approval "approved").
-	var copy := _label("A Halcyon Homesteads™\ncommunity", 19, Color("#8E2A1E"), VasTokens.FONT_PLAQUE_SEMI)
-	copy.add_theme_constant_override("line_spacing", -4)
-	copy.position = Vector2(AD.size.x * 0.07, AD.size.y * 0.3); ad.add_child(copy)
+	ad_plate = _art("chassis/V2_AD_PLATE_HALCYON.png", AD, "AdPlate")
+	# Approved programme line per corporation (CorporationLook.ad_plate; HALCYON only so far).
+	ad_copy = _label("", 19, Color("#8E2A1E"), VasTokens.FONT_PLAQUE_SEMI)
+	ad_copy.add_theme_constant_override("line_spacing", -4)
+	ad_copy.position = Vector2(AD.size.x * 0.07, AD.size.y * 0.3); ad_plate.add_child(ad_copy)
 
 func _build_left_rail() -> void:
 	## Lower left (ARCH-V2-003s): the CRT holds the rig (installed programs as draggable chips),
@@ -406,9 +417,7 @@ func _effect_feedback(effects: Array) -> void:
 	elif kinds.has("DISCARD") or kinds.has("INSERT") or kinds.has("BW_DRAIN"): id = "hit_card"
 	if id == "" or not FriendlyMusic.EFFECTS.has(id): return
 	last_effect_sound = id
-	if not sfx.has(id):
-		var p := AudioStreamPlayer.new(); p.stream = FriendlyMusic.EFFECTS[id]; add_child(p); sfx[id] = p
-	sfx[id].play()
+	music.play_effect(id)
 	if id == "hit_pulp" and not reduced_motion and is_inside_tree():
 		var home := stage.position
 		var tw := create_tween()
@@ -442,7 +451,10 @@ func refresh() -> void:
 		## ARCH-V2-007a: the corporation's room through the ICE windows; HOSTILE shows through with the reveal.
 		var rooms := CorporationLook.rooms_for(game)
 		lane.set_room(rooms.friendly, rooms.hostile, VisibleStateAdapter.hostile_reveal(game))
+		_update_pixel()
+		lane.set_look(CorporationLook.enamel(game.corporation), pixel_shown)
 		rail.sync(VisibleStateAdapter.response_model(game, ctrl))
+	_update_ad_plate()
 	_handle_events()
 	_refresh_speakers()
 	_refresh_inspector()
@@ -508,6 +520,7 @@ func _handle_events() -> void:
 		if t == "PARTING_SHOT" and int(e.get("fired", 0)) == 0: continue
 		if EVENT_FLYOUT.has(t): flyout.announce(EVENT_FLYOUT[t])
 		if FLASH_EVENTS.has(t) and not reduced_motion: _flash(FLASH_EVENTS[t])
+		if t in ["EV-14", "EV-15", "EV-16"]: music.play_strike()
 	_on_events(last_events)
 
 ## ARCH-V2-006f: NUL/REM picks one line per batch of events (Build 12's priority order), speaks it
@@ -583,6 +596,34 @@ func _break_feedback(ice_ref: Dictionary, sub: int, spent: int) -> void:
 	tw.tween_property(l, "global_position:y", l.global_position.y - 40.0, 0.8)
 	tw.tween_property(l, "modulate:a", 0.0, 0.8).set_delay(0.3)
 	tw.chain().tween_callback(l.queue_free)
+
+## ARCH-V2-007b: PIXEL-TRACE-001 step from TRACE and strikes, with Build 12's transition (a short
+## spike to coarser cells, then settle); instant under reduced motion.
+func _update_pixel() -> void:
+	var step := AtomicDecoPunk.pixel_step(game.trace, game.strikes, false)
+	if step == pixel_target: return
+	var first := pixel_target.is_empty()
+	pixel_target = step
+	if _pixel_tween: _pixel_tween.kill()
+	if first or reduced_motion or pixel_shown.is_empty() or not is_inside_tree():
+		pixel_shown = step.duplicate(); return
+	var cfg: Dictionary = AtomicDecoPunk.settings.pixel_transition
+	var from := pixel_shown.duplicate()
+	var peak := {"cell": maxf(from.cell, step.cell) + float(cfg.spike_cells), "levels": maxf(minf(from.levels, step.levels) * float(cfg.spike_levels), 4.0), "dither": 1.0}
+	var apply := func(look: Dictionary) -> void:
+		pixel_shown = look
+		lane.set_look(CorporationLook.enamel(game.corporation), look)
+	_pixel_tween = create_tween()
+	_pixel_tween.tween_method(func(t: float): apply.call(FriendlyEncounter.blend_pixel(from, peak, t)), 0.0, 1.0, float(cfg.spike_seconds))
+	_pixel_tween.tween_method(func(t: float): apply.call(FriendlyEncounter.blend_pixel(peak, step, t)), 0.0, 1.0, float(cfg.settle_seconds))
+	_pixel_tween.tween_callback(func(): apply.call(step.duplicate()))
+
+func _update_ad_plate() -> void:
+	var ad := CorporationLook.ad_plate(game.corporation)
+	ad_plate.visible = not ad.is_empty()
+	if ad.is_empty(): return
+	ad_plate.texture = V2Art.tex(String(ad.art), AD.size.x)
+	ad_copy.text = String(ad.copy)
 
 func toggle_log() -> void:
 	if log_panel.visible:
@@ -820,6 +861,11 @@ func open_pile(pile: String) -> void:
 		"text": text, "cards": models, "secondary": {"label": "Close", "intent": "close"}})
 
 func _process(delta: float) -> void:
+	if game != null and music != null:
+		## The music follows the ADP bleed (eased like Build 12): friendly stems give way to the drone.
+		var target := AtomicDecoPunk.target(game.trace, game.strikes, false)
+		bleed = target if reduced_motion else move_toward(bleed, target, delta / maxf(0.05, float(AtomicDecoPunk.settings.bleed.ease_seconds)))
+		music.update_mix(bleed, reduced_motion, delta)
 	if _dragging_program >= 0: crt_glow.set_state(2 if over_crt(get_global_mouse_position()) else 1)
 	if game == null or game.enc.is_empty() or hand_fan == null: return
 	var h := hand_fan.hovered
