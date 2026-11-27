@@ -3581,3 +3581,16 @@ All ten must be obtainable through normal node completion card rewards in the re
 
 ## SYNERGY-PLAYTEST-002a — OVERCLOCK revision (2026-11-27)
 Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card each turn, draw 2 cards and gain 1 BW. Retain 2 BW deployment cost, encounter duration, once per turn per deployed copy, and all other SYNERGY-PLAYTEST-002 conventions. Supersedes the draw-only effect. Include immediate BW availability, trigger frequency and resource-loop tests. Documentation only; no engine changes.
+
+
+## EFFECT-HIERARCHY-001 — Strategic roles and effect lifetimes (designer approved 2026-11-27)
+Ghostware defines how the Rustler operates. Programs establish what the Rustler can do. Protocols determine how the Rustler approaches an encounter. Scripts execute individual actions.
+
+| Category | Lifetime | Strategic role |
+|---|---|---|
+| GHOSTWARE | Entire run | Strategic identity and persistent build specialization |
+| PROGRAM | Current node | Installed infrastructure and sustained operational capabilities |
+| PROTOCOL | Current encounter | Tactical specialization and persistent conditional effects |
+| SCRIPT | Immediate execution | Individual actions and tactical interventions; resulting effects follow their specified durations |
+
+Protocols are encounter-duration analogues of Ghostware, but occupy deck space, require drawing and BW deployment, and must be redeployed in subsequent encounters. Ghostware does not require these steps. Protocols expire to discard after PARTING SHOT and associated effects resolve, before progression or rewards (PROTOCOL-DURATION-001/a/b). Programs persist across encounters within the node. Use the Ghostware catalogue as inspiration for Protocol design, balancing shorter duration, deployment opportunity cost and synergy; avoid introducing unnecessary mechanics. This is a design principle, not authorization to duplicate every Ghostware effect or change existing card rules.
