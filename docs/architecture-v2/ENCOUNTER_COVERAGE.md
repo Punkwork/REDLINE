@@ -2,7 +2,7 @@
 
 Every element the Build 12 encounter shows, and where it lives on the V2 encounter screen. Generated from `godot/tests/arch_v2_coverage.json` by `tools/arch_v2_coverage_md.py`; do not edit by hand. `godot/tests/test_arch_v2_coverage.gd` fails if a BUILT or PLACEHOLDER row has no node on the V2 screen, or if this file and the JSON disagree.
 
-**Totals:** BUILT 35 · PLACEHOLDER 1 · BATCH3 15 · BATCH4 5 · OPEN 6 · OUT 1 · 63 rows.
+**Totals:** BUILT 35 · PLACEHOLDER 1 · BATCH3 20 · BATCH4 5 · OPEN 0 · OUT 2 · 63 rows.
 
 | Status | Meaning |
 |---|---|
@@ -17,17 +17,17 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 
 | ID | Element | Prototype source | V2 node | Status | Next | Note |
 |---|---|---|---|---|---|---|
-| H01 | PANOPTICON brand plate | encounter.gd top bar | `Logo` | BUILT | — |  |
+| H01 | Brand mark: all-seeing eye (replaces the PANOPTICON plate) | encounter.gd top bar | `Logo` | BUILT | Batch 3: eye replaces the plate (ARCH-V2-006a) | Plate is built; the eye, top-left corner, is Batch 3. |
 | H02 | Turn counter | build_node_plate / TURN plate | `Turn` | BUILT | — |  |
 | H03 | Whose turn (phase) | main phase label | `Phase` | BUILT | — | Half width (ARCH-V2-005). |
 | H04 | TRACE counter and bar | build_trace_plate | `Trace` | BUILT | — | Half width; 10 cells of 2 TRACE (ARCH-V2-005). |
 | H05 | CAPS slots (3) | build_cap_rack | `CapRack` | PLACEHOLDER | CAPS inventory in the rules engine (deferred beyond the slice) | Empty slots; fills from game.caps when it exists (ARCH-V2-005). |
 | H06 | PROTOCOL rack | ticker rack text | `ProtocolRack` | BUILT | — | 3 slots, live from game.rack; more shows +n (ARCH-V2-005). |
-| H07 | Ghostware rail (any number, ORIGIN first) | build_ghost_rail | — | OPEN | Designer: home on the V2 screen | Prototype hung badges along the top of the ICE area. Empty in the N2A slice. |
+| H07 | Ghostware rail (any number, ORIGIN first) | build_ghost_rail | — | BATCH3 | Header reel left of CAPS: one Ghostware visible, up/down arrows (ARCH-V2-006b) | Hover shows full text and icon. |
 | H08 | Strike lamps (0-3) and LOCKDOWN | build_strike / strike lamps | — | BATCH3 | C13 PlayerHUD; home to propose | No strike or LOCKDOWN state on the V2 screen today. |
-| H09 | HOSTILE REVEAL % | reveal_percent / alarm housing | — | OPEN | ARCH-V2-003q: content still open |  |
-| H10 | Node, LAYER and CRED reserve / EXTRACT | build_node_plate, RESERVE dial | — | OPEN | ARCH-V2-003q: content still open |  |
-| H11 | CRED | CRED/RAM row | — | BATCH3 | C13 PlayerHUD | RAM is built (meters). |
+| H09 | HOSTILE REVEAL % | reveal_percent / alarm housing | — | BATCH3 | The eye is the alarm lamp: cool green to neon red as the reveal grows (ARCH-V2-006c) | No % plate. The art reveal itself is Batch 4 presentation. |
+| H10 | LAYER count and layer CRED reserve | build_node_plate, RESERVE dial | — | BATCH3 | Left end of the NEXT RESPONSE rail: hamburger LAYER icon (1-3 lit), then CRED pair (ARCH-V2-006d) |  |
+| H11 | CRED | CRED/RAM row | — | BATCH3 | CRED icon + value left of the layer CRED; red marching ants flow left on extraction (ARCH-V2-006d) | RAM is built (meters). |
 | H12 | Corporation ad plate / sign | CorporateDisplay | `AdPlate` | BUILT | — |  |
 | H13 | Graffiti decal (ADP) | DecalPlate, graffiti_label | — | BATCH4 | C06 CorporationPresentation |  |
 
@@ -101,11 +101,11 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | ID | Element | Prototype source | V2 node | Status | Next | Note |
 |---|---|---|---|---|---|---|
 | F01 | END TURN | END TURN box | `EndTurn` | BUILT | — |  |
-| F02 | Leave Node / END RUN | END RUN tray button | — | OPEN | Designer: keep on the encounter screen? |  |
-| F03 | NUL/REM note | NulRemNote | — | OPEN | NUL-DIALOGUE-002 not approved for build |  |
+| F02 | Leave Node / END RUN | END RUN tray button | — | OUT | Only on the menu of a CAP or card that allows leaving (ARCH-V2-006e) | No permanent button on the encounter screen. |
+| F03 | NUL/REM lines | NulRemNote | — | BATCH3 | Voice; text on hover over two speaker grilles: below the left avatar and below the right ICE keys (ARCH-V2-006f) | No ticker; keeps the screen clean. |
 | F04 | Reduced motion setting | motion button | — | BATCH3 | C16 settings | Sandbox flag only. |
 | F05 | VOICE / M mute | VoiceButton | — | BATCH3 | C16 settings |  |
-| F06 | KEY LEGEND | LegendButton | — | OPEN | Hover panels may replace it |  |
+| F06 | KEY LEGEND | LegendButton | — | BATCH3 | Hover on the top-left eye, with tier/level and Node (ARCH-V2-006g) |  |
 | F07 | Outcome (BREACH, flatline) | main overlays | `Outcome` | BUILT | — | Stand-in banner. |
 | F08 | Punch-card holder (SIGNAL-001) | update_punch_holder | — | BATCH4 | C05 integration |  |
 | F09 | Bleed and low-VITAE warning (ADP-1) | advance_bleed | — | BATCH4 | C06 presentation |  |

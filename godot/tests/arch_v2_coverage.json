@@ -1,5 +1,5 @@
 {
- "decision": "ARCH-V2-005",
+ "decision": "ARCH-V2-005, ARCH-V2-006",
  "statuses": {
   "BUILT": "On the V2 screen and wired to real state",
   "PLACEHOLDER": "On the V2 screen; content waits on another system",
@@ -12,12 +12,12 @@
   {
    "id": "H01",
    "area": "Header",
-   "element": "PANOPTICON brand plate",
+   "element": "Brand mark: all-seeing eye (replaces the PANOPTICON plate)",
    "prototype": "encounter.gd top bar",
    "v2": "Logo",
    "status": "BUILT",
-   "next": "",
-   "note": ""
+   "next": "Batch 3: eye replaces the plate (ARCH-V2-006a)",
+   "note": "Plate is built; the eye, top-left corner, is Batch 3."
   },
   {
    "id": "H02",
@@ -75,9 +75,9 @@
    "element": "Ghostware rail (any number, ORIGIN first)",
    "prototype": "build_ghost_rail",
    "v2": "",
-   "status": "OPEN",
-   "next": "Designer: home on the V2 screen",
-   "note": "Prototype hung badges along the top of the ICE area. Empty in the N2A slice."
+   "status": "BATCH3",
+   "next": "Header reel left of CAPS: one Ghostware visible, up/down arrows (ARCH-V2-006b)",
+   "note": "Hover shows full text and icon."
   },
   {
    "id": "H08",
@@ -95,18 +95,18 @@
    "element": "HOSTILE REVEAL %",
    "prototype": "reveal_percent / alarm housing",
    "v2": "",
-   "status": "OPEN",
-   "next": "ARCH-V2-003q: content still open",
-   "note": ""
+   "status": "BATCH3",
+   "next": "The eye is the alarm lamp: cool green to neon red as the reveal grows (ARCH-V2-006c)",
+   "note": "No % plate. The art reveal itself is Batch 4 presentation."
   },
   {
    "id": "H10",
    "area": "Header",
-   "element": "Node, LAYER and CRED reserve / EXTRACT",
+   "element": "LAYER count and layer CRED reserve",
    "prototype": "build_node_plate, RESERVE dial",
    "v2": "",
-   "status": "OPEN",
-   "next": "ARCH-V2-003q: content still open",
+   "status": "BATCH3",
+   "next": "Left end of the NEXT RESPONSE rail: hamburger LAYER icon (1-3 lit), then CRED pair (ARCH-V2-006d)",
    "note": ""
   },
   {
@@ -116,7 +116,7 @@
    "prototype": "CRED/RAM row",
    "v2": "",
    "status": "BATCH3",
-   "next": "C13 PlayerHUD",
+   "next": "CRED icon + value left of the layer CRED; red marching ants flow left on extraction (ARCH-V2-006d)",
    "note": "RAM is built (meters)."
   },
   {
@@ -555,19 +555,19 @@
    "element": "Leave Node / END RUN",
    "prototype": "END RUN tray button",
    "v2": "",
-   "status": "OPEN",
-   "next": "Designer: keep on the encounter screen?",
-   "note": ""
+   "status": "OUT",
+   "next": "Only on the menu of a CAP or card that allows leaving (ARCH-V2-006e)",
+   "note": "No permanent button on the encounter screen."
   },
   {
    "id": "F03",
    "area": "Flow",
-   "element": "NUL/REM note",
+   "element": "NUL/REM lines",
    "prototype": "NulRemNote",
    "v2": "",
-   "status": "OPEN",
-   "next": "NUL-DIALOGUE-002 not approved for build",
-   "note": ""
+   "status": "BATCH3",
+   "next": "Voice; text on hover over two speaker grilles: below the left avatar and below the right ICE keys (ARCH-V2-006f)",
+   "note": "No ticker; keeps the screen clean."
   },
   {
    "id": "F04",
@@ -595,8 +595,8 @@
    "element": "KEY LEGEND",
    "prototype": "LegendButton",
    "v2": "",
-   "status": "OPEN",
-   "next": "Hover panels may replace it",
+   "status": "BATCH3",
+   "next": "Hover on the top-left eye, with tier/level and Node (ARCH-V2-006g)",
    "note": ""
   },
   {

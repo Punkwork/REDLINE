@@ -389,3 +389,7 @@ Designer (18:22): build the coverage table, the test and the placeholders before
 
 Designer uploaded the seven ChatGPT parts from VAS-ASSET-001 §6e. Trimmed (already transparent), icons squared to 256 px, added to `controls/` and `icons/` with manifest rows. Wired: half plaque and slot rack as nine-slices (both wider than asked), TRACE lights the half housing's ten baked cells, sockets frame the slot contents in their windows, group icons sit in the rack's round socket. Racks 219 px wide (x 748 and 973); slots about 37 × 41 px; the coverage test's slot-size check follows the art (≥ 34 × 38). Tests: `test_arch_v2_ice.gd` 182/0; `test_arch_v2_coverage.gd` 506/0; screenshots 28. No rules change.
 
+## 2026-11-26 — ARCH-V2-006: homes for the remaining encounter UI recorded (Claude Code)
+
+Designer answered the coverage table's open rows (19:12, follow-ups 19:20). Recorded in Master Design ARCH-V2-006 (a)–(g); coverage JSON and `ENCOUNTER_COVERAGE.md` updated (OPEN 0, BATCH3 20); ChatGPT prompts for the eye, Ghostware reel housing and speaker grille added as VAS-ASSET-001 §6f. No code change.
+
