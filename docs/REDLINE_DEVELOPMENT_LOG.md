@@ -33,10 +33,6 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-20 — 
 
 LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-001: `playtest-7` tag pushed (Claude); 2026-11-21 — STRIP-001: core-loop test build (Claude Code).
 
-## 2026-11-22 — PROBE-004: PROBE choose-one (Claude)
-
-**Designer:** PROBE does what it does now OR reveals hidden subroutines on a VOID, same costs. Recorded in the master design, `REDLINE_CORE_LOOP.md` (decision row, STRIP-001 VOID rule), HANDOFF (Claude Code TO DO) and checklist question 8. **Interpretations to confirm:** reveal = all face-down subroutines; the −2 STR mode no longer reveals; reveal unavailable with nothing face-down; the choice is shown only on a VOID. **Code changes:** none.
-
 ## 2026-11-23 — ARCH-V2-001: architecture migration governance (ChatGPT)
 
 **Designer:** Approved a full-game hybrid scene-based, component-driven, data-driven Godot architecture instead of retaining the prototype's one-scene restriction. Explicitly chose `architecture-v2` as primary rebuild branch with `main` preserved as stable four-node prototype. The branch was created from `main`.
@@ -393,4 +389,8 @@ Designer (20:35): remove the TRACE STRIKE banner, keep the rest under the typogr
 ## 2026-11-26 — ARCH-V2-006k: targeting arrow (Claude Code)
 
 Designer (20:37): aim targeted cards with an arrow instead of clicking an ICE. Built `HudWidgets.TargetArrow` and the aim flow in the sandbox (press and hold, arrow to the pointer, ring on the ICE under it, release to play; click mode and Esc/right-click cancel); targeted cards no longer start a plain drag. Tests: `test_arch_v2_batch3.gd` 103/0, `test_arch_v2_ice.gd` 201/0; screenshots 37. No rules change. (LOG-001: moved "2026-11-22 — Playtest 12: PT11 fixes and TUNE-002 (Claude Code)" to the archive.)
+
+## 2026-11-26 — ARCH-V2-006l: PROGRAMs install on the CRT; unplayable cards dim (Claude Code)
+
+Designer (20:47). Built `HudWidgets.CrtDropGlow` and the CRT drop rule (PROGRAMs install only when dropped on the CRT; click still installs); unplayable cards dim more (55 percent), driven by `Game.can_play` after every action. Commit `6f7f208`. Tests: `test_arch_v2_batch3.gd` 110/0; screenshots 38. No rules change. (LOG-001: moved "2026-11-22 — PROBE-004: PROBE choose-one (Claude)" to the archive.)
 
