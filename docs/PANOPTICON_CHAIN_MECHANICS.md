@@ -1,0 +1,74 @@
+# PANOPTICON — CHAIN Mechanics Design Specification
+Decision: CHAIN-002 | 2026-11-27 | architecture-v2
+Status: foundational rules designer-approved; remaining specification and implementation pending.
+Scope: CHAIN-REP-001, Priority 2 representative encounter; companion UI-TYPO-001/a, M06, CAS-001, VAS-001.
+
+## 1. Design intent
+CHAIN rewards deliberate card sequencing, deck construction and bandwidth efficiency. It should feel like manipulating the machine, not an incidental two-card conditional bonus. Mechanical complexity must earn strategic depth. Make opportunity, activation and actual payoff intelligible without consulting a log.
+
+## 2. Approved foundational rules
+- Minimum three cards in a valid sequence. Two cards alone cannot instantiate CHAIN. This supersedes the two-card activation threshold in DSY-011.
+- Chains may extend beyond three cards; no fixed maximum has been approved.
+- A CHAIN instance is instantiated by the third card completing a valid sequence.
+- The instantiating card receives an inherent reduction of 1 BW to its play cost, in addition to applicable card-specific CHAIN bonuses. This is a cost reduction calculated before affordability and commitment, never a refund.
+- The inherent reward belongs to CHAIN itself, not individual card text.
+- Proposed implementation floor: 0 BW; no negative costs or implicit BW generation. Confirm with designer alongside cost-modifier precedence.
+- Exact sequence eligibility, extension rewards, termination and repeat instances remain open. Do not treat illustrative patterns as approved rules.
+
+## 3. Lifecycle and existing baseline
+Initiation (first card, ordinary cost) -> formation (second card, ordinary cost) -> eligible third card (preview discount) -> successful play instantiates CHAIN -> card-specific bonus and activation feedback -> active instance eligible for extension under rules still to be specified.
+Existing DSY-011 baseline: immediately preceding card's tag in same Rustler turn; Programs and Protocols count as plays; installed Icepick actions and CAPS do not change last played card; tags reset each turn. Engine tracks last_tags, tag_counts, chain_active and chain_draws. Preserve unaffected baseline provisionally; determine how these interact with new instance semantics before implementation. Failed/illegal actions should not instantiate a chain (proposed acceptance requirement).
+
+## 4. Existing cards and implementation audit
+Source: REDLINE_DECK_SYNERGY.md §6.1, §9; godot/scripts/core/cards.gd and game.gd (audit 2026-11-27).
+| Card | Current cost/type/tag | Existing effect under old DSY-011 |
+|---|---|---|
+| PIVOT | 1 BW SCRIPT EXPLOIT, common shared | −2 ICE STR; CHAIN CLOAK additional −1 STR |
+| COVER FIRE | 1 BW SCRIPT CLOAK, common shared | +3 SHIELD; CHAIN EXPLOIT additional +2 SHIELD |
+| HANDOFF | 0 BW SCRIPT CLOAK, common ECHO | −2 TRACE; CHAIN CLOAK draw 1 |
+| KILL CHAIN | 2 BW PROTOCOL, rare shared | Draw 1 per CHAIN bonus, max twice per turn per installed copy in current engine |
+All four are absent from current CORE_POOL reward list at audit. Existing effects are coded, not independently live-playtested in this audit. Card definitions and reward availability require reconciliation with CHAIN-002. PROXY CHAIN and CHAINSAW are names, not explicit CHAIN bonus cards. STACK SMASH counts EXPLOIT plays but is not explicit CHAIN.
+Generalist alternating CLOAK/EXPLOIT; ECHO CLOAK and REBOOT; RIOT EXPLOIT and ZEROED are established design directions. VECTOR/CRON no dedicated CHAIN archetype established here. COMPILE dual-tag bridges are future/full-game context, not current implementation authorization.
+
+## 5. Illustrative sequences and economics (not final eligibility or balance)
+Candidate patterns: EXPLOIT→EXPLOIT→EXPLOIT; CLOAK→CLOAK→CLOAK; CLOAK→EXPLOIT→EXPLOIT; EXPLOIT→EXPLOIT→CLOAK; CLOAK→EXPLOIT→CLOAK; EXPLOIT→CLOAK→EXPLOIT. These are examples, not exhaustive or approved pattern definitions.
+Example A: three eligible 1 BW cards, first two cost 1 each, third costs 0 after inherent discount. Total 2 BW instead of 3; baseline 3 BW leaves 1 BW for other actions. Third card additionally resolves its applicable CHAIN effect.
+Example B: if CLOAK→EXPLOIT→CLOAK is valid and COVER FIRE is the third card, it costs 0 BW instead of 1; if its current bonus is retained it grants 5 SHIELD instead of 3. Illustrative only.
+Example C: if EXPLOIT→CLOAK→EXPLOIT is valid and PIVOT completes it, it costs 0 BW instead of 1; if current bonus retained it reduces STR by 3 instead of 2.
+Example D: HANDOFF as eligible third card already costs 0; proposed floor means no BW generated, but its card-specific draw bonus still applies if eligible.
+Example E: KILL CHAIN installed earlier may amplify a qualifying bonus with draw; whether instantiation without a card-specific bonus counts, and extension triggers, remain open.
+Earlier two-card PIVOT/COVER FIRE combinations are historical examples only and no longer sufficient to instantiate CHAIN.
+Potential revised card bonuses discussed: PIVOT additional −3 STR, COVER FIRE additional +4 SHIELD, HANDOFF draw 2; KILL CHAIN retain pending balance. These are unapproved exploration, not replacements. Candidate catalogue target 8–12 CHAIN-capable cards plus amplifier, not approved quantity. Explore BW, draw, breaks, TRACE and CACHE payoffs. Baseline DRAW 6/BW 3 makes sequencing meaningful; zero-cost cards, CACHE, draw, deck pruning and BW generation influence reliability.
+
+## 6. UI and audiovisual design
+Designer-approved objective: make CHAIN obvious and fully implemented in current representative encounter. Designer endorsed CHAIN ACTIVATED typographic/motion moment.
+Proposed information states: potential (card has CHAIN effect); progression (first/second cards and relevant tags); ready (eligible third card, actual discounted cost before commitment); activated (successful instantiation); resolved (actual additional effect on card, ICE or resource).
+Use existing Architecture V2 components and authoritative visible-state adapter. Icons communicate; numbers quantify; hover/focus explains; typography announces. Candidate chain-link icon, illuminated eligibility indicator, visible original/effective cost where helpful, concise hover explanation of required sequence and bonus. No permanent explanatory text or reliance on colour alone. Do not leak concealed ICE information.
+CHAIN ACTIVATED: distinctive Atomic Deco-Punk virtual flyout, satisfying electromechanical audio, brief energy surge and localized effect resolution. Emotional intent: ingenuity and satisfaction. Coordinate event hierarchy, timing, competing events, reduced motion/effects, input non-interference, readability and accessibility with UI-TYPO-001/a and M06. Exact artwork, sound, placement and timing remain proposed. Avoid repetitive celebration for every extension until extension semantics approved.
+
+## 7. Open design questions
+1. What defines valid sequence: specific ordered tag patterns, same-tag runs, card-specific requirements, or another grammar? Are all cards eligible links or only CHAIN-tagged cards?
+2. How are multi-tag, untagged, Programs, Protocols, compiled cards, forced plays and non-card actions handled?
+3. Does an incompatible card terminate the instance, start a new candidate sequence, or both? Does turn end always terminate it? Can CACHE prepare cards but not carry chain state?
+4. Does fourth/fifth valid link receive −1 BW again (sustained discount) or only third card (instantiation-only)? Both discussed; only instantiation discount approved.
+5. Can multiple instances occur in a turn? Can sequences overlap or reuse prior links? How are instance IDs and extension counts tracked?
+6. Which cards get card-specific bonuses, at instantiation only or also extension? How does KILL CHAIN count bonuses/instances? How are existing cards repriced?
+7. Cost floor, stacking/precedence with other discounts, legality at 0 remaining BW, cancellation and failed action handling.
+8. Infinite/repeating loops, draw and zero-cost chains; safeguards without arbitrary length caps.
+9. Exact UI progression indicators, hover/focus content, audio and motion specimens, simultaneous event precedence.
+10. Reward pool inclusion, starter/fixture availability, archetype coverage and multi-encounter balance.
+
+## 8. Corporate reactive abilities
+CHAIN PULP: existing PATTERN ANALYSIS VOID ability inflicts 1 PULP per CHAIN bonus; IRONWATCH preferred, deferred to future IRONWATCH representative encounter. Do not confuse with current Rustler CHAIN scope. Reconcile trigger semantics with new instance rules later. REBOOT SPAM and GUARD are separate approved reactive subroutine workstreams.
+
+## 9. Delivery and acceptance
+1. Audit existing cards, engine, UI and tests; reconcile DSY-011 and current core-loop pool.
+2. Resolve open grammar and economics with designer; finalize card catalogue and fixtures.
+3. Specify visible state, action legality and event contracts with CAS-001; develop CHAIN ACTIVATED specimen with M06.
+4. Implement approved engine rules and UI together; no duplicate rule logic in presentation.
+5. Verify two cards never activate; valid third receives exactly −1 BW before affordability; invalid sequences do not; card-specific bonus correct; no duplicate activation; extension/reset/repeat cases per approved rules; previews match engine; reduced motion same outcomes; no hidden leaks; deterministic regression.
+6. Test deliberate combinations in HALCYON one-, two-, three-encounter nodes, actual Windows playtest, capture screenshots and feedback. Evaluate whether players identify opportunities without external explanation, deliberately sequence cards, understand cost and payoff, and find CHAIN satisfying without dominant or infinite loops.
+7. Designer acceptance required. No engine implementation or final card balance authorized by this document alone.
+
+## 10. Canonical references
+[Deck Synergy](REDLINE_DECK_SYNERGY.md) (DSY-011 historical threshold superseded), [Master Design](REDLINE_MASTER_DESIGN.md), [Handoff](HANDOFF.md), [Development Log](REDLINE_DEVELOPMENT_LOG.md), [Daily Priorities](operations/DAILY_PRIORITIES.md), [UI Design Bible](PANOPTICON_UI_DESIGN_BIBLE.md), [Card DB](../godot/scripts/core/cards.gd), [Game engine](../godot/scripts/core/game.gd).
