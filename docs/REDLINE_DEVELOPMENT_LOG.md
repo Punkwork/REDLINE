@@ -299,3 +299,16 @@ Interpretations to confirm: exact pricing and disclosure mechanics remain experi
 
 ## 2026-11-27 — ECON-TRACE-001 / ECON-MARKET-001 (ChatGPT)
 Designer approved proportional TRACE premiums, independent random market variation and Identity Verification incentives. Updated Uplink, Experimentation, Philosophy, Master and Handoff. Documentation only; no engine tests.
+
+
+## NODE-PURPOSE-001 — Non-combat Node service redesign (APPROVED 2026-11-27)
+
+Designer-approved amendment; supersedes conflicting earlier service descriptions, not MAP-003e route composition.
+
+- Uplink (commerce): eight cards, exactly five common, two uncommon, one rare; six shared and two Rustler-specific across those eight. Base prices 40/60/90 CRED; one random card 50% off. No basic cards, rerolls or repeat purchase of a slot. Three random CAPS, existing 60/30/10 rarity probabilities, no guaranteed rarity; existing prices and bootleg rules retained. WIPE and Clinic unchanged; existing market variability, TRACE premium and voluntary Identity Verification direction retained. REFACTOR removed from Uplink.
+- Console Lab (deck engineering): PATCHWORK and FUSE retained; REFACTOR is the collective modification concept. Standalone card removal belongs to Uplink WIPE. Detailed modification eligibility, repeat limits, recursive fusion, cross-modification, scaling, costs and per-visit limits deferred to dedicated review; do not infer new rules. COMPILE moved to experimentation, excluded from active development/gameplay; preserve prototype work and audit dependencies before disabling.
+- SAFEHOUSE (physical recovery): choose one free service per visit: PATCH UP restores 30% of maximum VITAE, capped at maximum; FORTIFY increases maximum VITAE by 6% and current VITAE by the same increment. Both round to nearest whole integer; FORTIFY cumulative for the run, no additional cap currently. No card upgrades or TRACE reduction.
+- DEAD DROP (surveillance evasion): choose one free service per visit: WIPE TRAIL reduces current TRACE by 20, floor zero; GHOST TRAIL reduces incoming TRACE by 50% throughout the next ICE Node, all encounters included, persists through intervening noncombat Nodes and expires on ICE Node exit. Active-effect icon direction. Fractional TRACE rounding, stacking and edge cases remain open; no physical healing.
+- SIGNAL UNCLEAR (discovery): retain ten-event catalogue provisionally; specific event unknown on entry approach, choices except AMBUSH, communicate costs and consequences before commitment. Separate event design review deferred; existing reveal exceptions remain subject to review. Incidental overlap is permissible, not a predictable substitute for dedicated services.
+
+Map redesign deferred to Claude Code/Codex review; MAP-003e remains baseline. Representative ICE encounter remains priority 1. Uplink implementation specification still requires transaction/inventory edge cases and UI review. No engine implementation authorized by this documentation amendment.

@@ -283,3 +283,16 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | DSY-001 / DSY-007 | New Ghostware candidates for the general pool: HEARTBEAT, MINIMAL INSTALL, DEDUPLICATOR, ONE-TRICK (`REDLINE_DECK_SYNERGY.md` §9.3). — **APPROVED 2026-11-15** |
 | PACE-006 | Safety valves held in reserve: Max VITAE 35 → 40, full-clear heal 3, a second SAFEHOUSE; used only if playtests run hot. — **APPROVED 2026-11-15** |
 | ROT-001 sync | Remaining SIGYL labels changed to **TUMBLER** (ICE types, Icepicks, card text). No numbers changed. — designer instruction 2026-11-16 |
+
+
+## NODE-PURPOSE-001 — Non-combat Node service redesign (APPROVED 2026-11-27)
+
+Designer-approved amendment; supersedes conflicting earlier service descriptions, not MAP-003e route composition.
+
+- Uplink (commerce): eight cards, exactly five common, two uncommon, one rare; six shared and two Rustler-specific across those eight. Base prices 40/60/90 CRED; one random card 50% off. No basic cards, rerolls or repeat purchase of a slot. Three random CAPS, existing 60/30/10 rarity probabilities, no guaranteed rarity; existing prices and bootleg rules retained. WIPE and Clinic unchanged; existing market variability, TRACE premium and voluntary Identity Verification direction retained. REFACTOR removed from Uplink.
+- Console Lab (deck engineering): PATCHWORK and FUSE retained; REFACTOR is the collective modification concept. Standalone card removal belongs to Uplink WIPE. Detailed modification eligibility, repeat limits, recursive fusion, cross-modification, scaling, costs and per-visit limits deferred to dedicated review; do not infer new rules. COMPILE moved to experimentation, excluded from active development/gameplay; preserve prototype work and audit dependencies before disabling.
+- SAFEHOUSE (physical recovery): choose one free service per visit: PATCH UP restores 30% of maximum VITAE, capped at maximum; FORTIFY increases maximum VITAE by 6% and current VITAE by the same increment. Both round to nearest whole integer; FORTIFY cumulative for the run, no additional cap currently. No card upgrades or TRACE reduction.
+- DEAD DROP (surveillance evasion): choose one free service per visit: WIPE TRAIL reduces current TRACE by 20, floor zero; GHOST TRAIL reduces incoming TRACE by 50% throughout the next ICE Node, all encounters included, persists through intervening noncombat Nodes and expires on ICE Node exit. Active-effect icon direction. Fractional TRACE rounding, stacking and edge cases remain open; no physical healing.
+- SIGNAL UNCLEAR (discovery): retain ten-event catalogue provisionally; specific event unknown on entry approach, choices except AMBUSH, communicate costs and consequences before commitment. Separate event design review deferred; existing reveal exceptions remain subject to review. Incidental overlap is permissible, not a predictable substitute for dedicated services.
+
+Map redesign deferred to Claude Code/Codex review; MAP-003e remains baseline. Representative ICE encounter remains priority 1. Uplink implementation specification still requires transaction/inventory edge cases and UI review. No engine implementation authorized by this documentation amendment.

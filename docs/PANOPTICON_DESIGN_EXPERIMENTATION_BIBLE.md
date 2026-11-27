@@ -544,3 +544,7 @@ Approved direction: voluntary Identity Verification with meaningful benefits and
 3. Identity Verification incentives: voluntary disclosure may earn genuine commercial advantages because information has economic value (UPL-IDENTITY-001, PHIL-CONSENT-001). Anonymous commerce remains viable. Exact discounts and disclosure consequences require further design.
 
 The layers are independent, each with its own economic rationale, and may interact with other gameplay systems without new player-facing meters. Market variability is separate from TRACE; a higher-TRACE visit can still be cheaper than a lower-TRACE visit. Do not impose a shared ±5% cap that suppresses independent layers. Illustrative additive calculation before verification: 100 CRED, TRACE 40, market +2% = 107 CRED. Exact stacking with sales and verification, integer rounding, random distribution, and scope of affected services require confirmation before implementation. No engine changes authorized.
+
+
+## COMPILE — deferred card combination experiment (NODE-PURPOSE-001, 2026-11-27)
+COMPILE combines different eligible cards into one containing their effects. Designer moved this from active design to experimentation because of combinatorial complexity. Preserve existing prototype work; exclude from active gameplay/development pending explicit reapproval and dependency audit. PATCHWORK and FUSE remain active design concepts pending dedicated rules review. See Master Design NODE-PURPOSE-001.
