@@ -51,7 +51,7 @@ To keep ICE comparable, each effect has a **threat value**. The total threat of 
 | Tier | Where | STR | Threat per Corporation Response | Reactive abilities |
 |---|---|---|---|---|
 | **Tier 1** | Rows 2–8, before the Mini-Boss (MAP-TIER-001, Core Rules §10.1) | 2–5 | 2–5 | At most 1, mild |
-| **Tier 2** | Rows 10–15, after the Mini-Boss (MAP-TIER-001, Core Rules §10.1) | 3–6 | 4–8 | At most 1 |
+| **Tier 2** | Row 9's ordinary ICE Nodes and rows 10–15 (MAP-TIER-001, Core Rules §10.1) | 3–6 | 4–8 | At most 1 |
 | **Boss** | Central Node | 6+ | 10–15 (whole encounter) | Yes |
 
 ### 2.3 Type identities

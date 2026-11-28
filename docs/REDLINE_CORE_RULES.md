@@ -290,6 +290,8 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 **Why [CORE-010]:** the target is **about 30 cards added in a winning run, in total**, of which **2–3 per corporation are bought** at Uplinks (UPL-008). A card after every BREACH gave about 45 card rewards per run. One per ICE Node on the way in gives 6–7 + the Central Node = **7–8 per corporation, about 22 per run** (MAP-002); with 6–9 cards bought, that's **28–31 cards**. Fewer, better choices keep decks lean and make each pick matter. The odds table keeps going deeper worth the risk now that the extra reward per layer is gone.
 
+**Recount for the 16-row map (estimate, Claude 2026-11-28; not a rule change):** every route has 8 ICE Nodes before the boss (MAP-003b), so a corporation offers up to **9 card rewards** (8 ICE Nodes, including the Mini-Boss's rare choice, + the boss), **about 27 per run**, plus 2–3 bought per corporation (UPL-008): about **33–36 cards offered**. That is above both CORE-010's "about 30 added" and DSY-006's end-of-corporation deck targets (18–22 / 24–29 / 30–35 from a 12-card start). Skipping rewards and DECOMPILE absorb some of it; whether the targets, the rewards or nothing should change is a designer decision (HANDOFF).
+
 ### 9.2 Extraction (CORE-012: reserve-only payouts)
 - Each encounter has a **CRED reserve**, larger in deeper layers.
 - **Extractors** (Programs) pay CRED from that reserve at the end of your turn.
@@ -316,11 +318,11 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 |---|---|---|
 | 1 | The **Opening Node** only (§10.1a), the first of the route's ICE Nodes | Opening |
 | 2–8 | 3–4 Nodes per row: ICE, or one of the five other Node types (§8.3) | **Tier 1** |
-| 9 | The **Mini-Boss** Node (not on every route; MINIBOSS-001, `REDLINE_MINIBOSSES.md`); the other row-9 Nodes are ICE | Mini-Boss; the other ICE Nodes Tier 1 *(interpretation to confirm)* |
+| 9 | The **Mini-Boss** Node (not on every route; MINIBOSS-001, `REDLINE_MINIBOSSES.md`); the other row-9 Nodes are ICE | Mini-Boss; the other ICE Nodes **Tier 2** (MAP-TIER-001a) |
 | 10–15 | 3–4 Nodes per row: ICE, or one of the five other Node types (§8.3) | **Tier 2** |
 | 16 | The corporation's **boss** (the Central Node, §10.2) | Boss |
 
-**ICE tiers by row [MAP-TIER-001, designer 2026-11-28]:** before the Mini-Boss, ICE Nodes draw Tier 1 ICE; after it, Tier 2. The rule is by row, so it holds whatever the generated map puts in each row. What each tier means (STR, threat, layers, rosters): `REDLINE_ICE_CORP1.md`–`3.md` §2 and `REDLINE_PACING.md`.
+**ICE tiers by row [MAP-TIER-001, MAP-TIER-001a, designer 2026-11-28]:** before the Mini-Boss (rows 2–8), ICE Nodes draw Tier 1 ICE; from the Mini-Boss row on (row 9's ordinary ICE Nodes and rows 10–15), Tier 2. The rule is by row, so it holds whatever the generated map puts in each row. What each tier means (STR, threat, layers, rosters): `REDLINE_ICE_CORP1.md`–`3.md` §2 and `REDLINE_PACING.md`.
 
 **Every route [MAP-003b, MAP-003c, MAP-003f]:**
 - **8 encounters before the boss:** the Opening Node, 6 more ICE Nodes, and row 9 (the Mini-Boss or an ICE Node).
@@ -356,7 +358,7 @@ There is no escape. UPL-007's 4-Node escape (countermeasure ICE, doubled TRACE, 
 Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE to max. Remove all CORTEX counters. Reset TRACE and strikes to 0.
 
 ### 10.5 Run length target [CHANGED by UPL-007]
-**75–100 minutes** for a full run (previously 45–75). **Breakdown not yet recomputed for MAP-003:** every route now has 8 encounters plus the boss and no escape (§10.1); the old estimate (about 16 encounters per corporation, including 3 escape encounters) is from the retired 10-row map. The Training Node playtest should measure real minutes per encounter before these numbers are fixed.
+**75–100 minutes** for a full run (previously 45–75). **Breakdown for the 16-row map (estimate, Claude 2026-11-28):** measured over every route of the 20 generated maps, an average route has the Opening Node (1 encounter), about 3.2 Tier 1 ICE Nodes (1 layer each), row 9 (an ordinary Tier 2 ICE Node with 2 layers on about 71% of routes, the Mini-Boss on 29%), about 2.8 Tier 2 ICE Nodes after it (1–2 layers each, PACE-008) and the 3-layer boss: **about 13 encounters per corporation, about 39 per run** (the old 10-row estimate was 16 and 48, including 3 escape encounters). At the PACE-001 turn targets that is broadly inside the target; the Training Node playtest should measure real minutes per encounter before these numbers are fixed. *Assumed:* the Mini-Boss is one encounter; Tier 2 Nodes average 1.5 layers.
 
 ---
 
@@ -618,6 +620,6 @@ REPRISE is the first approved application; its card-specific eligibility and tar
 
 | ID | Rule |
 |---|---|
-| MAP-TIER-001 | **ICE tier by row:** Tier 1 ICE before the Mini-Boss (rows 2–8), Tier 2 after it (rows 10–15) (§10.1). Replaces MAP-002's rows 2–5 / 6–9 split. *Interpretation to confirm:* row 9's ordinary ICE Nodes (2 layers) are Tier 1. |
+| MAP-TIER-001 | **ICE tier by row:** Tier 1 ICE before the Mini-Boss (rows 2–8), Tier 2 after it (rows 10–15) (§10.1). Replaces MAP-002's rows 2–5 / 6–9 split. **MAP-TIER-001a:** row 9's ordinary ICE Nodes (2 layers) are Tier 2. |
 | ESCAPE-ICE-001 | Each corporation's former escape ICE are regular **Tier 2** ICE (§10.3); the Black ICE that joined escape encounter 3 stay Black ICE. |
 | SIGNAL-002 | The First Signal item is a **Signal barcode** (was a punch card, SIGNAL-001): an extra item from each boss; the three barcodes overlaid form the Signal (§10.2). |

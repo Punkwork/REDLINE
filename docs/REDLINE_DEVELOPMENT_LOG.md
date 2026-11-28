@@ -51,15 +51,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: PROTOCOL-DURATI
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-27 — CONSISTENCY-001a: CSA-01 delivered, CSA-02 proposed (Claude Code).
 
-## 2026-11-27 — CSA-02 designer answers recorded; conflict table prepared (Claude Code)
-
-Designer approved Q1 (`cards.json`), Q3 (decision text only in Master Design), Q5 (direction: required checks, pull requests, the designer as approver), Q6 (PROBE counter per ICE instance), Q7 (a later approved decision wins), Q8 (status format) and Q9 (retire BOOTING and TOLL in a controlled rules commit). Q2 and Q4 are open. Conflict table for the designer ([Sheet](https://claude.ai/artifact/1Cw8TYzdiTscPtYLAXfsnF)): 35 rows (37 conflicts).
-- 16 value conflicts and 2 more with a BW difference;
-- 11 wording-only;
-- 3 name collisions with experimental cards;
-- 3 references (no action).
-
-Each row has a recommendation from the latest approved decision. Resolutions will be recorded in Master Design when returned. No code change.
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-27 — CSA-02 designer answers recorded; conflict table prepared (Claude Code).
 
 ## 2026-11-27 — CSA-02 approved; CSA-03 conflict resolutions recorded (Claude Code)
 
@@ -501,3 +493,7 @@ Designer, 15:24: Tier 1 before the Mini-Boss, Tier 2 after. Recorded in Master D
 ## 2026-11-28 — ESCAPE-ICE-001 and SIGNAL-002 (Claude)
 
 Designer, 15:27: the former escape ICE are regular Tier 2 ICE; the Signal barcode is an extra item from each boss, and the three barcodes overlaid form the Signal. Asked whether that is SIGNAL-001's punch card: "Same item, now a barcode." Recorded in Master Design and Core Rules (§10.2, §10.3, Later amendments). Escape sections in Upgrades/Events/Escape §4, ICE Corp 1 §8.2a, ICE Corp 2 §7 and ICE Corp 3 §8 labelled; payload §2.5 amended; UI Bible §8 notes the rename; copy-guard wording ("third Signal barcode") updated in AGENTS = CLAUDE, the NUL/REM dialogue architecture, Gameplay Interface, Archipelago and ADP Phase 2 copy. ZINE-001's general barcodes-and-punch-cards world-building is unchanged; history is untouched. Build work (on-screen text, barcode holder art, Tier 2 roster) handed to Claude Code in HANDOFF. Claude Project copies refreshed.
+
+## 2026-11-28 — MAP-TIER-001a; escape lines retired; run and card estimates (Claude)
+
+Designer, 15:37: row 9's ordinary ICE Nodes are Tier 2 (MAP-TIER-001a; Master Design, Core Rules §10.1, ICE Corp 1 §2.2). Escape lines in Pacing and Uplink & CAPS labelled retired (ESCAPE-ICE-001). Core Rules §10.5 and §9.1 get estimates for the 16-row map, measured over all 132,659 routes of the 20 generated maps (average route: 3.2 Tier 1 and 2.8 Tier 2 ICE Nodes besides the Opening Node and row 9; Mini-Boss on 29% of routes): about 13 encounters per corporation and 39 per run; up to 9 card rewards per corporation, so 33–36 cards offered per run with purchases, above the deck targets (designer question in HANDOFF). Claude Code prompt for the build work given to the designer. Claude Project copies refreshed.

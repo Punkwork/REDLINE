@@ -38,9 +38,9 @@ ICE have no HP, so an encounter doesn't end when something runs out of health. I
 | **Mid** | IRONWATCH | **5–7** | 7–8 | 8–9 | ~3 | ~4.75 | **25–35** |
 | **Late** | LUCIDA | **6–8** | 9–10 | 10–12 | ~4 | ~5.5 | **35–45** |
 | **Boss** | Central Nodes | **7–8** | stage OUTPUT | stage +3 | — | — | **stage × 1.3** |
-| **Escape** | Countermeasure ICE | **4–5** | stage OUTPUT | stage | — | — | **stage × 0.7** |
+| **Escape** *(retired: there is no escape, MAP-003; escape ICE are Tier 2 now, ESCAPE-ICE-001)* | Countermeasure ICE | **4–5** | stage OUTPUT | stage | — | — | **stage × 0.7** |
 
-**Why the escape is shorter:** TRACE is doubled and there's no leaving early, so long escape encounters would stack TRACE strikes. The escape should feel like a sprint.
+*(retired: there is no escape, MAP-003; escape ICE are Tier 2 now, ESCAPE-ICE-001)* **Why the escape is shorter:** TRACE is doubled and there's no leaving early, so long escape encounters would stack TRACE strikes. The escape should feel like a sprint.
 
 ### 2.1 Where the game is today (playtest slice 0.2.0-playtest.2)
 The HALCYON slice ICE are already much heavier than the original roster (`REDLINE_ICE_CORP1.md` §5.0): STR **4–7**, **3–5 subroutines**, and **two DEADLOCKs** on every TUMBLER (REJECT ALL, CONSENT FORM, CAPTCHA), which only become breakable as they rotate into a slot. Passives (TOLL, SEQUENCED, HARDENING) add more work. So the slice is probably **already near 4–5 turns** for BREACH WORK and the reveal floor.
@@ -94,7 +94,7 @@ A corporation gives about **30 VITAE + 10–20 healing** (SAFEHOUSE, MAINTENANCE
 | Early / early–mid | **2–3** | 5–8 |
 | Mid / late | **3–4** | 6–10 |
 | Central Node | **8–12** | 15+ |
-| Escape | **3–4** | 6–8 |
+| Escape *(retired: there is no escape, MAP-003; escape ICE are Tier 2 now, ESCAPE-ICE-001)* | **3–4** | 6–8 |
 
 **Design check:** simulate each new layer with a stage-typical deck. If it loses more than the on-curve figure, lower the threat before lowering the BREACH WORK. Length is the goal, damage is the cost. **Today's slice is above this budget for the bot** (§2.1); confirm with real play first.
 
@@ -156,7 +156,7 @@ At 4–8 turns per encounter and the current ~16 encounters per corporation, a r
 | Tier 1 (before the Mini-Boss, Core Rules §10.1) | 1–2 | **1** |
 | Tier 2 (after the Mini-Boss, Core Rules §10.1) | 2–3 | **1–2** |
 
-- Encounters per corporation: about **16 → 10–11** (about 6–7 ICE Nodes, the Central Node and 3 escape encounters). Total turns per corporation stay about the same (~56 → ~60).
+- Encounters per corporation: about **16 → 10–11** (about 6–7 ICE Nodes, the Central Node and 3 escape encounters). *(10-row map; for the 16-row map see Core Rules §10.5.)* Total turns per corporation stay about the same (~56 → ~60).
 - **Card rewards:** still one per **fully cleared** ICE Node (CORE-010, CORE-011). Fewer layers make a full clear easier, so fewer rewards are lost to leaving early. Card reward odds by layers cleared are re-based: **Tier 1, 1 layer** uses today's 1-layer odds; **Tier 2, 1 layer** uses today's 2-layer odds; **Tier 2, 2 layers** uses today's 3-layer odds.
 - **CRED reserves** per layer go up about **50%**, so CRED per corporation stays near 130–220 (UPL-008) with fewer layers. Longer layers also give Extractors more turns: at 3 CRED a turn (EXTRACT-002), a Basic Extractor empties a 15-CRED reserve in 5 turns, which matches the early target.
 - **Minutes per encounter** (checklist K1) rise to about **3–6**; the Corporation Response alone takes at least 5 seconds (PLAY-001). The playtest has to confirm the total.
@@ -185,7 +185,7 @@ Every ICE layer gets a **BREACH WORK score** and a **REVEAL FLOOR** next to its 
 
 **Stage-typical Icepicks (working):** early: starter Icepick, STR as printed; early–mid: +1 STR or a common upgrade (BATTERING RAM, PASSKEY, TASER); mid: an uncommon upgrade, boost 1 BW → +1 STR; late: an upgraded uncommon or rare, about +2 STR over today's printed values.
 
-**Order of work:** score the HALCYON slice first (COOKIE BANNER, CAPTCHA, CONSENT WALL, DOORBELL, TERMS & CONDITIONS), using playtest 2's measured turns and VITAE; then IRONWATCH and LUCIDA, then the Central Nodes and the escape ICE.
+**Order of work:** score the HALCYON slice first (COOKIE BANNER, CAPTCHA, CONSENT WALL, DOORBELL, TERMS & CONDITIONS), using playtest 2's measured turns and VITAE; then IRONWATCH and LUCIDA, then the Central Nodes and the former escape ICE (now Tier 2, ESCAPE-ICE-001).
 
 **Playtest checks (added to `REDLINE_PLAYTEST_CHECKLIST.md` v0.2):**
 

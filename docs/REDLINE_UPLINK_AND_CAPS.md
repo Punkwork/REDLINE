@@ -54,7 +54,7 @@ JACK OUT can be used at any time during your turn **between card plays**, includ
 4. **At the Central Node.** There's no fleeing the corporation's core.
 5. **After you've BREACHED the current layer.** Leave normally instead (Core Rules §8.2).
 
-*The escape limit added by UPL-007 was removed by UPL-009: JACK OUT works during the escape, moving you on to the next escape Node.*
+*The escape limit added by UPL-007 was removed by UPL-009. The escape itself was retired by MAP-003, so the point is now moot.*
 
 **Why:** the TRACE strikes now escalate in steps: the 1st makes playing harder, the 2nd makes escaping harder, the 3rd makes escaping impossible. JACK OUT stays a real emergency button everywhere else, and its cost (the CAP, the card reward and the Node reward) keeps it from becoming a cheap way to skip encounters.
 
@@ -93,7 +93,7 @@ See Core Rules §8.3: Console Lab removal, and the boundaries for DECOMPILE, FUS
 Uplinks follow the corporation map structure in Core Rules §10.1 (APPROVED 2026-11-12, UPL-007):
 - An **Uplink** appears in **row 4** and **row 7** of the 10 infiltration rows (MAP-002; was rows 3 and 6 of 9).
 - **Row 10** (just before the Central Node) offers **only Uplinks or DEAD DROPs**, so every route can reach at least one Uplink right before the boss.
-- **No Uplinks during the escape.**
+- ~~**No Uplinks during the escape.**~~ *(retired with the escape, MAP-003)*
 - Every Uplink has a Clinic (Core Rules §8.3).
 
 ---
@@ -105,7 +105,7 @@ Uplinks follow the corporation map structure in Core Rules §10.1 (APPROVED 2026
 Rough CRED per corporation, for balance:
 - **ICE Nodes on the way in:** about 6–7 per route (MAP-002), paying about **15–30 CRED each** with reasonable extraction (was 20–35).
 - **Central Node:** up to **35** (was 40).
-- **Escape encounters:** 10 each, spent at the next corporation.
+- ~~**Escape encounters:** 10 each, spent at the next corporation.~~ *(retired with the escape, MAP-003; the former escape ICE use Tier 2 reserves, ESCAPE-ICE-001)*
 - **Clean Node bonus:** about **+5–10**.
 - **Total:** roughly **130–220 CRED per corporation** (was 160–250).
 

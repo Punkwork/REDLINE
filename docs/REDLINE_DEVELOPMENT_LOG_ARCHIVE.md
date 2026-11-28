@@ -3649,3 +3649,13 @@ Designer assignment: Canonical Source Architecture. Complete CSA-01, prepare CSA
 - `architecture-v2` has no branch protection or ruleset; 28 of the last 40 CI runs were cancelled.
 
 Baseline at `c0e4acb` with Godot 4.3 stable: import 0; test_game 430/0; test_adp 17/0; test_signal_carbon 672/0; test_arch_v2_ice 202/0; coverage 548/0; batch3 110/0; batch4 76/0; app 29/0; parity 4,088/0. No engine, schema or settings change. Surprises CLAUDECODE-20261127-S03 and S04.
+
+## 2026-11-27 — CSA-02 designer answers recorded; conflict table prepared (Claude Code)
+
+Designer approved Q1 (`cards.json`), Q3 (decision text only in Master Design), Q5 (direction: required checks, pull requests, the designer as approver), Q6 (PROBE counter per ICE instance), Q7 (a later approved decision wins), Q8 (status format) and Q9 (retire BOOTING and TOLL in a controlled rules commit). Q2 and Q4 are open. Conflict table for the designer ([Sheet](https://claude.ai/artifact/1Cw8TYzdiTscPtYLAXfsnF)): 35 rows (37 conflicts).
+- 16 value conflicts and 2 more with a BW difference;
+- 11 wording-only;
+- 3 name collisions with experimental cards;
+- 3 references (no action).
+
+Each row has a recommendation from the latest approved decision. Resolutions will be recorded in Master Design when returned. No code change.
