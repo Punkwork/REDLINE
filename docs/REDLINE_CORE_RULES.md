@@ -69,17 +69,17 @@ Each card can also carry **tags**, shown under the type:
 
 ## 4. Turn structure
 
-*Reconciled 2026-11-28 with the build (TURN-001, confirmed by the designer as the current rule): the next hand is drawn at the **end** of your turn, before the Corporation Response. Items marked "core-loop build" are STRIP-001 decisions (BW-001, BOOST-001, BREACH-001) in force while `Game.CORE_LOOP` is on; whether they replace the full-design values is open with the designer (HANDOFF).*
+*Reconciled 2026-11-28 with the build. Confirmed by the designer as the current rules: TURN-001 (the next hand is drawn at the **end** of your turn, before the Corporation Response), BW-001 (3 BW), BOOST-001 (boosts last the turn) and BREACH-001 (parting shot).*
 
 **4.1 Start of your turn**
 1. **TUMBLERS rotate** one step (not on your first turn of an encounter; §5.4).
-2. Refill BW to 4 (core-loop build: 3, BW-001), minus any BW a DETAINER drained in the last Corporation Response (§5.5).
+2. Refill BW to **3** *(BW-001; was 4)*, minus any BW a DETAINER drained in the last Corporation Response (§5.5).
 3. Resolve "start of turn" effects (including virus strains, §5.7).
 4. Your SHIELD from last turn expires; "start of turn" SHIELD effects then apply.
 5. **First turn of each encounter only:** draw cards equal to your DRAW (6, reduced by CORTEX, §6). On every later turn your hand was already drawn at the end of your previous turn (4.3).
 6. **Resolve any DISCARD** that ICE dealt in the last Corporation Response: choose the cards from your hand. *(FIX-001.)*
 
-**4.2 Your turn:** play cards, install Programs, deploy Protocols, use Icepicks, in any order. You can **boost an installed Icepick** at any time on your turn by paying its boost cost; boosts last until the encounter ends *(FIX-002)* (core-loop build: until the end of your turn, BOOST-001). End when you choose by pressing **END TURN**.
+**4.2 Your turn:** play cards, install Programs, deploy Protocols, use Icepicks, in any order. You can **boost an installed Icepick** at any time on your turn by paying its boost cost; boosts last **until the end of your turn** *(BOOST-001; supersedes FIX-002's encounter-long boosts)*. End when you choose by pressing **END TURN**.
 
 **4.3 End of your turn** *(TURN-001)*
 1. Resolve "end of turn" effects (for example, Extractors pay out); temporary CACHE durations count down.
@@ -98,7 +98,7 @@ Each card can also carry **tags**, shown under the type:
 
 **4.5 Cleanup timing [CHANGED by TURN-001]:** HAND-CLEANUP-001 put the cleanup after the Corporation Response and the draw at the start of the next turn. TURN-001 moves both before the response (4.3). HAND-CLEANUP-001's other rules stand: no free HOLD, base DRAW, card-granted CACHE.
 
-**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. This includes DEADLOCKs you haven't seen yet: a TUMBLER's hidden DEADLOCKs must each be broken as they rotate into a slot, and a VOID's once they have fired *(ROT-001, VOID-001)*. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped** (core-loop build, BREACH-001: every unbroken subroutine that is active or revealed fires once as a **PARTING SHOT**, which is not a Corporation Response). If you survive, deployed Protocols expire (§3.1), your hand is discarded, and if more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**. Each new layer starts with a fresh draw (4.1.5).
+**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. This includes DEADLOCKs you haven't seen yet: a TUMBLER's hidden DEADLOCKs must each be broken as they rotate into a slot, and a VOID's once they have fired *(ROT-001, VOID-001)*. You can keep playing. When you press END TURN, end-of-turn effects resolve, then every unbroken subroutine that is active or revealed fires once as a **PARTING SHOT** *(BREACH-001)*: left to right, top to bottom; it is not a Corporation Response (nothing rotates or advances), and the Corporation Response is skipped. If you survive, deployed Protocols expire (§3.1), your hand is discarded, and if more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**. Each new layer starts with a fresh draw (4.1.5).
 
 **Defeat:** if VITAE reaches 0 at any moment, the run ends immediately.
 
@@ -199,7 +199,7 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 
 **Removing CORTEX:** all CORTEX counters are removed when you move to the next corporation. The Uplink Clinic (§8.3) removes them earlier, for CRED; nothing else restores CORTEX at a Node. Ordinary cards cannot remove CORTEX; it should stay frightening.
 
-**CORTEX-001 [CHANGED 2026-11-28]:** CORTEX hurts twice: the hand you hold now (a random discard per point) and every hand after (the counters). The discard is immediate; it can take any card in your hand, CACHED cards included. With too few cards in hand, discard only what is there: **no overflow damage**, and the counters are still added. Because you draw before the Corporation Response (§4.3), CORTEX from a response hits the hand you have just drawn. *(History: the 2026-11-12 redesign made CORTEX counters only, with no discard; CORTEX-001 brings back a discard, random and one per point, still without overflow. SyN damage stays removed; effects that make you choose discards say so directly, like "DISCARD 2.")*
+**CORTEX-001 [CHANGED 2026-11-28]:** CORTEX hurts twice: the hand you hold now (a random discard per point) and every hand after (the counters). The discard is immediate; it can take any card in your hand, CACHED cards included (designer-confirmed 2026-11-28). With too few cards in hand, discard only what is there: **no overflow damage**, and the counters are still added. Because you draw before the Corporation Response (§4.3), CORTEX from a response hits the hand you have just drawn. *(History: the 2026-11-12 redesign made CORTEX counters only, with no discard; CORTEX-001 brings back a discard, random and one per point, still without overflow. SyN damage stays removed; effects that make you choose discards say so directly, like "DISCARD 2.")*
 
 **If one effect deals both:** apply CORTEX first, then PULP.
 
@@ -569,6 +569,7 @@ Designer rule: BYPASS is permitted only in non-final encounters (ICE layers) of 
 | ID | Rule |
 |---|---|
 | TURN-001 | At the end of your turn: end-of-turn effects, discard non-CACHED cards, **draw your next hand**, then the Corporation Response; your next turn starts without a draw (the first turn of each encounter draws). Approved 2026-11-21 for the core-loop build (STRIP-001); **confirmed by the designer on 2026-11-28 as the current rule** and written into §4. |
+| BW-001, BOOST-001, BREACH-001 | **3 BW** per turn; Icepick boosts last **until the end of your turn**; at END TURN after BREACH, unbroken active or revealed subroutines fire once as a **PARTING SHOT**. Approved 2026-11-21 for the core-loop build; **confirmed by the designer on 2026-11-28 to replace the full-design rules** (4 BW, FIX-002 encounter-long boosts, skipped response). |
 
 ### Later amendment — CORTEX-001 (approved 2026-11-28)
 
