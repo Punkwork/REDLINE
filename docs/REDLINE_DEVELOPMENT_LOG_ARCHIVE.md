@@ -3659,3 +3659,74 @@ Designer approved Q1 (`cards.json`), Q3 (decision text only in Master Design), Q
 - 3 references (no action).
 
 Each row has a recommendation from the latest approved decision. Resolutions will be recorded in Master Design when returned. No code change.
+
+## 2026-11-27 — CSA-02 approved; CSA-03 conflict resolutions recorded (Claude Code)
+
+Designer: Q4 core-loop values are the only current ones (no variants); Q2 confirmed; Q5 noted. The conflict table was resolved by the designer ([Sheet](https://claude.ai/artifact/1Cw8TYzdiTscPtYLAXfsnF), revision 63) and recorded in Master Design. New rules decision: PIVOT rewritten without CHAIN; CHAIN is removed from current cards. Open:
+- CHAIN replacement text for COVER FIRE, KILL CHAIN and HANDOFF;
+- BURNED duration (encounter vs Node; 12 cards; Core Rules §3 and the engine say Node);
+- HOST TAKEOVER "Variant (both)";
+- "Rename experimental" on MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB.
+
+*Interpretation to confirm:* "Delete this card" on repeated rows retires the docs' hand-written copies, not the cards. No code change.
+
+## 2026-11-27 — BURNED-001 and CSA-03 follow-ups recorded (Claude Code)
+
+Designer answers:
+- BURNED lasts the rest of the encounter (BURNED-001; rules change, Core Rules and engine pending);
+- HOST TAKEOVER uses the doc wording;
+- MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB, COVER FIRE, KILL CHAIN and HANDOFF move to experimental.
+
+RIOT's starter deck is one card short (SMASH & GRAB) until redesigned. CSA-03 is ready to start. No code change.
+
+## 2026-11-27 — RIOT-006 and the retirement of repeated card text recorded (Claude Code)
+
+Designer: RIOT's starter replaces SMASH & GRAB with a 4th PROBE (15 cards; RIOT-006). Confirmed that repeated card text in other docs is retired in favour of the single record; the cards stay in the game. No code change yet.
+
+## 2026-11-27 — Last CSA-03 inputs approved (Claude Code)
+
+Designer approved:
+- cards show the engine text, marked temporary, until divergent behaviour is fixed;
+- rarity and pool for the ten SYNERGY-PLAYTEST-002 cards (seven Common, OVERCLOCK and SALVAGE Uncommon, REPRISE Rare; all shared, added to the current reward pool once implemented);
+- PATTERN ANALYSIS marked experimental.
+
+CSA-03 has no open inputs.
+
+## 2026-11-27 — CSA-03 C1: card data moved to `godot/data/cards.json` (Claude Code)
+
+CardDB now loads `godot/data/cards.json` (112 cards, 5 CAPS, starter decks, core pool, pool extras) and keeps its API; the GDScript constants are gone (`cards.gd` 31 KB → 6 KB). The data was written once from the old constants by a Godot exporter, so values, types and order are exact; it is read-only at run time as the constants were. No behaviour change. Evidence:
+- `test_csa_cards.gd` 273/0, comparing every `def()`, `roles()`, 16 compiled cards, every pool and rarity, `caps_of`, starter decks, order, types and read-only state against a snapshot of the old constants. Proven to fail on a changed PROBE BW and on a changed card order. Added to CI.
+- Baseline unchanged: test_game 430/0 (SIM=1 430/0), adp 17, signal_carbon 672, arch_v2_ice 202, coverage 548, batch3 110, batch4 76, app 29, parity 4,088.
+- `shot_arch_v2_ice` writes 42 captures. Against the pre-migration render the only differences match the render's own frame-to-frame noise (speaker-grille glow); card text is identical.
+- `tools/csa/validate_cards.py` valid; Python tests 28/0 (10 new).
+- Drift scan identical before and after.
+
+Next: C2 (status, decisions, RIOT-006, playtest records, experimental flags, PATTERN ANALYSIS).
+
+## 2026-11-27 — CSA-03 C2: status, decisions and approved card changes in `cards.json` (Claude Code)
+
+**Records:**
+- Every record has `status` (design: approved / playtest / experimental / historical; implementation: implemented / pending / divergent) and `decisions`. 43 of 122 records cite decisions; the backfill is open.
+- Divergent records keep the engine text and add `approved_text` and `divergence`: PROBE (PROBE-004a), PIVOT (CHAIN-PARK-001), and the 11 BURNED-001 cards.
+- Ten SYNERGY-PLAYTEST-002 records are `playtest` / `pending`, using the approved repository wording, OVERCLOCK per 002a, approved rarities and shared pool, with tags `unresolved`.
+
+**Loader:**
+- `CardDB.RECORDS` holds every record; `DEFS` excludes pending records.
+- `CORE_POOL` is the approved core pool restricted to built cards.
+- `reward_pool` never offers experimental or historical cards.
+
+**Approved changes applied:**
+- RIOT-006: SMASH & GRAB out of RIOT's starter, a 4th PROBE in.
+- Seven cards marked experimental.
+- PATTERN ANALYSIS marked experimental (`ice.gd`, status only).
+
+**Validator:** checks status values, decision IDs (Master Design or active rules docs), divergence reasons, starter and pool eligibility, and the copy guard on all text including pending cards. `--register` prints the open gaps.
+
+**Tests:**
+- `test_csa_cards.gd` 497/0: legacy fields equal the C1 snapshot, only metadata is added, RIOT-006 is the only approved change.
+- Python 38/0 (20 card-validator).
+- Baseline: test_game 430/0 (SIM=1 430/0), adp 17, signal_carbon 672, ice 202, coverage 548, batch3 110, batch4 76, app 29.
+- Parity is now 3,938 actions / 4,018 checks, all identical between the V2 and direct paths. The count changed only because RIOT's deck changed; temporarily restoring the old deck gives exactly 4,008 / 4,088 again.
+- `shot_arch_v2_ice` 42 captures.
+
+**Caught during the work:** adding pending IDs to the engine's `CORE_POOL` broke the existing check "every CORE_POOL card exists". The loader now filters it, which keeps that invariant.

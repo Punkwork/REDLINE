@@ -19,3 +19,13 @@ Session 09:10 (continued) — CORTEX-001, CARD-REVIEW-001 tests
 Work completed: CORTEX-001 built with the spec test test_spec_cortex (26/0, in CI); the CARD-REVIEW-001 test alignment restores CI (it was red at `eb3dfc5`).
 Surprises: CARD-REVIEW-001 (`eb3dfc5`) changed `cards.json` without the matching tests, so CI went red on architecture-v2.
 Blockers / unverified results: CARD-REVIEW-001's engine changes are open (STACK SMASH every ICE; REPRISE under EFFECT-REPEAT-001). CORTEX-001 interpretations are listed in HANDOFF (CACHED cards can be discarded; FAILSAFE prevents a whole hit).
+
+## Session ~20:00 — MAP-TIER-001 / ESCAPE-ICE-001, SIGNAL-002 (branch `claude/map-tier-signal-barcodes-rnkwy3`, from architecture-v2 `2dbbbef`)
+Branch drift: architecture-v2 `2dbbbef`; main `21922ad` = prototype-baseline (yes); release `a6f4476`. This session's harness required a `claude/` working branch, so the commits wait there to land on architecture-v2 (designer's call).
+Work completed: Tier 2 roster and placement by row (`8385d4f`); Signal barcodes wording and proposed art (`135d73a`); HANDOFF interpretation fix (`0b32ce0`); wrap-up (HANDOFF, log, LOG-001 archive move). Results in the development log entry of the same name.
+Surprises: the Tier 2 doc values predate STR-001 / SUB-001, so with the "quickest method" Tier 2 has fewer subroutines than today's Tier 1 (recorded in HANDOFF). The V2 eye's KEY LEGEND still explains BOOTING, which BOOTING-RETIRE-001 retired (not changed here).
+Missing tools: none observed (Godot 4.3 downloaded into the session; GitHub MCP for the issue).
+PR activity: none.
+To-dos: [#27](https://github.com/Punkwork/REDLINE/issues/27) (SIGNAL-002 barcode art, designer review).
+Blockers / unverified results: none for the build; the art awaits #27. No release.
+Recommended priorities: designer review of #27; playtest Tier 2 values; decide on landing the branch on architecture-v2.

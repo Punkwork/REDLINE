@@ -53,76 +53,9 @@ LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-27 — CO
 
 LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-27 — CSA-02 designer answers recorded; conflict table prepared (Claude Code).
 
-## 2026-11-27 — CSA-02 approved; CSA-03 conflict resolutions recorded (Claude Code)
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-27 — CSA-02 approved; CSA-03 conflict resolutions recorded (Claude Code), 2026-11-27 — BURNED-001 and CSA-03 follow-ups recorded (Claude Code), 2026-11-27 — RIOT-006 and the retirement of repeated card text recorded (Claude Code), 2026-11-27 — Last CSA-03 inputs approved (Claude Code).
 
-Designer: Q4 core-loop values are the only current ones (no variants); Q2 confirmed; Q5 noted. The conflict table was resolved by the designer ([Sheet](https://claude.ai/artifact/1Cw8TYzdiTscPtYLAXfsnF), revision 63) and recorded in Master Design. New rules decision: PIVOT rewritten without CHAIN; CHAIN is removed from current cards. Open:
-- CHAIN replacement text for COVER FIRE, KILL CHAIN and HANDOFF;
-- BURNED duration (encounter vs Node; 12 cards; Core Rules §3 and the engine say Node);
-- HOST TAKEOVER "Variant (both)";
-- "Rename experimental" on MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB.
-
-*Interpretation to confirm:* "Delete this card" on repeated rows retires the docs' hand-written copies, not the cards. No code change.
-
-## 2026-11-27 — BURNED-001 and CSA-03 follow-ups recorded (Claude Code)
-
-Designer answers:
-- BURNED lasts the rest of the encounter (BURNED-001; rules change, Core Rules and engine pending);
-- HOST TAKEOVER uses the doc wording;
-- MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB, COVER FIRE, KILL CHAIN and HANDOFF move to experimental.
-
-RIOT's starter deck is one card short (SMASH & GRAB) until redesigned. CSA-03 is ready to start. No code change.
-
-## 2026-11-27 — RIOT-006 and the retirement of repeated card text recorded (Claude Code)
-
-Designer: RIOT's starter replaces SMASH & GRAB with a 4th PROBE (15 cards; RIOT-006). Confirmed that repeated card text in other docs is retired in favour of the single record; the cards stay in the game. No code change yet.
-
-## 2026-11-27 — Last CSA-03 inputs approved (Claude Code)
-
-Designer approved:
-- cards show the engine text, marked temporary, until divergent behaviour is fixed;
-- rarity and pool for the ten SYNERGY-PLAYTEST-002 cards (seven Common, OVERCLOCK and SALVAGE Uncommon, REPRISE Rare; all shared, added to the current reward pool once implemented);
-- PATTERN ANALYSIS marked experimental.
-
-CSA-03 has no open inputs.
-
-## 2026-11-27 — CSA-03 C1: card data moved to `godot/data/cards.json` (Claude Code)
-
-CardDB now loads `godot/data/cards.json` (112 cards, 5 CAPS, starter decks, core pool, pool extras) and keeps its API; the GDScript constants are gone (`cards.gd` 31 KB → 6 KB). The data was written once from the old constants by a Godot exporter, so values, types and order are exact; it is read-only at run time as the constants were. No behaviour change. Evidence:
-- `test_csa_cards.gd` 273/0, comparing every `def()`, `roles()`, 16 compiled cards, every pool and rarity, `caps_of`, starter decks, order, types and read-only state against a snapshot of the old constants. Proven to fail on a changed PROBE BW and on a changed card order. Added to CI.
-- Baseline unchanged: test_game 430/0 (SIM=1 430/0), adp 17, signal_carbon 672, arch_v2_ice 202, coverage 548, batch3 110, batch4 76, app 29, parity 4,088.
-- `shot_arch_v2_ice` writes 42 captures. Against the pre-migration render the only differences match the render's own frame-to-frame noise (speaker-grille glow); card text is identical.
-- `tools/csa/validate_cards.py` valid; Python tests 28/0 (10 new).
-- Drift scan identical before and after.
-
-Next: C2 (status, decisions, RIOT-006, playtest records, experimental flags, PATTERN ANALYSIS).
-
-## 2026-11-27 — CSA-03 C2: status, decisions and approved card changes in `cards.json` (Claude Code)
-
-**Records:**
-- Every record has `status` (design: approved / playtest / experimental / historical; implementation: implemented / pending / divergent) and `decisions`. 43 of 122 records cite decisions; the backfill is open.
-- Divergent records keep the engine text and add `approved_text` and `divergence`: PROBE (PROBE-004a), PIVOT (CHAIN-PARK-001), and the 11 BURNED-001 cards.
-- Ten SYNERGY-PLAYTEST-002 records are `playtest` / `pending`, using the approved repository wording, OVERCLOCK per 002a, approved rarities and shared pool, with tags `unresolved`.
-
-**Loader:**
-- `CardDB.RECORDS` holds every record; `DEFS` excludes pending records.
-- `CORE_POOL` is the approved core pool restricted to built cards.
-- `reward_pool` never offers experimental or historical cards.
-
-**Approved changes applied:**
-- RIOT-006: SMASH & GRAB out of RIOT's starter, a 4th PROBE in.
-- Seven cards marked experimental.
-- PATTERN ANALYSIS marked experimental (`ice.gd`, status only).
-
-**Validator:** checks status values, decision IDs (Master Design or active rules docs), divergence reasons, starter and pool eligibility, and the copy guard on all text including pending cards. `--register` prints the open gaps.
-
-**Tests:**
-- `test_csa_cards.gd` 497/0: legacy fields equal the C1 snapshot, only metadata is added, RIOT-006 is the only approved change.
-- Python 38/0 (20 card-validator).
-- Baseline: test_game 430/0 (SIM=1 430/0), adp 17, signal_carbon 672, ice 202, coverage 548, batch3 110, batch4 76, app 29.
-- Parity is now 3,938 actions / 4,018 checks, all identical between the V2 and direct paths. The count changed only because RIOT's deck changed; temporarily restoring the old deck gives exactly 4,008 / 4,088 again.
-- `shot_arch_v2_ice` 42 captures.
-
-**Caught during the work:** adding pending IDs to the engine's `CORE_POOL` broke the existing check "every CORE_POOL card exists". The loader now filters it, which keeps that invariant.
+LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-27 — CSA-03 C1: card data moved to `godot/data/cards.json` (Claude Code), 2026-11-27 — CSA-03 C2: status, decisions and approved card changes in `cards.json` (Claude Code).
 
 ## 2026-11-27 — CSA-03 C3: approved card wording shown; CSA-03 built (Claude Code)
 
@@ -497,3 +430,12 @@ Designer, 15:27: the former escape ICE are regular Tier 2 ICE; the Signal barcod
 ## 2026-11-28 — MAP-TIER-001a; escape lines retired; run and card estimates (Claude)
 
 Designer, 15:37: row 9's ordinary ICE Nodes are Tier 2 (MAP-TIER-001a; Master Design, Core Rules §10.1, ICE Corp 1 §2.2). Escape lines in Pacing and Uplink & CAPS labelled retired (ESCAPE-ICE-001). Core Rules §10.5 and §9.1 get estimates for the 16-row map, measured over all 132,659 routes of the 20 generated maps (average route: 3.2 Tier 1 and 2.8 Tier 2 ICE Nodes besides the Opening Node and row 9; Mini-Boss on 29% of routes): about 13 encounters per corporation and 39 per run; up to 9 card rewards per corporation, so 33–36 cards offered per run with purchases, above the deck targets (designer question in HANDOFF). Claude Code prompt for the build work given to the designer. Claude Project copies refreshed.
+
+## 2026-11-28 — MAP-TIER-001 / ESCAPE-ICE-001 and SIGNAL-002 built (Claude Code)
+
+Brief from the designer (Claude Code session, after `2dbbbef`). The designer answered four questions before the roster was built (Master Design MAP-TIER-001b).
+- **MAP-TIER-001 / 001a / ESCAPE-ICE-001** (`8385d4f`): HALCYON's Tier 2 roster in `IceDB` (SMART LOCK, PANIC ROOM, LOYALTY PROGRAM, FIRMWARE UPDATE, NANNY CAM, HOME ASSISTANT, REPO DRONE, FREE TRIAL, ALARM PANEL, MOTION SENSOR, DEADBOLT, PANIC BUTTON). Values are the doc rows plus STR-001 and FORM-002 ("quickest method"). Abilities are held except DEADBOLT's STR floor 3. PURGE ALL is a new effect; PANIC BUTTON's TRACER goes into the draw pile. `Game.use_generated_map`: rows 2–8 keep the slice's Tier 1 encounters; row 9's ordinary ICE Nodes (2 layers) and rows 10–15 (1–2 layers from the map seed, `_tier2_node`) draw Tier 2 mains, with a Tier 1 support in layer 2 and reserves 15 / 20. These Nodes are marked `tier: T2`, which gives them PACE-008's reward odds, and the encounter plate reads TIER 1 / TIER 2. The Mini-Boss and the BOSS still use slice stand-ins.
+- **SIGNAL-002** (`135d73a`): the V2 eye hover reads "Signal barcodes n / 3". `SignalCards` gives each corporation 4 bars between shared guard bars; none overlap, and all three overlaid fill every Signal bar. `PunchStock` draws barcodes, and the eye hover adds the overlaid strip once 2+ are held. Code names and the saved `punch_cards` key are unchanged, and an old save loads (tested). The art is PROPOSED: [#27](https://github.com/Punkwork/REDLINE/issues/27) has the captures and four questions. Coverage F08, ENCOUNTER_COVERAGE.md and ARCHITECTURE.md are updated.
+- **UPLINK-SPEC-001** HANDOFF interpretation (2) corrected (`0b32ce0`).
+- **Tests (all exit 0, no SCRIPT ERROR / Parse Error / Assertion failed):** new test_map_tier 242/0 (in CI; a deliberate wrong-row mutation failed 38 checks), test_uplink_map 291/0 (rows 10–15 may have 1–2 layers), test_signal_carbon 693/0, test_arch_v2_batch4 77/0, test_game 453/0 (also with SIM=1), test_adp 17/0, arch_v2_ice 210/0, coverage 511/0, batch3 125/0, app 33/0, parity 4,017/0 (3,937 actions), csa_cards 557/0, CSA-04 47/0, spec probe 32/0, burned 29/0, pivot 54/0, cortex 26/0, card review 16/0, UI-TYPO-002 172/0, inspector 59/0, UI-PROTOCOL-001 135/0, note 56/0, PT13 10/0, map_uplink_ui 17/0. Canonical data checks: validate_cards VALID, gen_card_docs `--check` and export_maps `--check` in step, `tests/python` 88 OK, AGENTS = CLAUDE. Fixtures: shot_signal_barcodes 4 (new, in CI), shot_node_map 5, shot_uplink_room 3, shot_arch_v2_ice 42, shot_ui_protocol_001 6, shot_cred_cost 4/0. shot_signal_carbon (legacy) stays skipped under CORE_LOOP.
+- LOG-001: five 2026-11-27 entries moved to the archive (note above). No release.
