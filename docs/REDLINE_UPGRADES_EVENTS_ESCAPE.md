@@ -113,7 +113,7 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 | **DEAD MAN'S POCKET** | Deferred: its HOLD enhancement is inactive under HAND-CLEANUP-001. | payload only |
 | **MONEY MULE** | Your Extractors extract 25% more CRED (rounded up). | 100 CRED |
 | **SIGNAL BOOSTER** | You can see what's inside SIGNAL UNCLEAR Nodes before choosing them. | 100 CRED |
-| **SCRAMBLED ID** | The first TRACE strike in each corporation has no penalty (TRACE still drops to 20). | 100 CRED |
+| **SCRAMBLED ID** | Ignore the first TRACE in each turn. You cannot reduce your TRACE. | 100 CRED |
 | **BLACK MIRROR** *(drawback)* | **+1 BW every turn.** ⚠ **Start each corporation at 10 TRACE.** | 75 CRED |
 | **BLEEDING EDGE** *(drawback)* | **+1 DRAW every turn.** ⚠ **−8 Max VITAE.** | 75 CRED |
 | **BURNOUT CHIP** *(drawback)* | **Your Icepicks have +2 STR.** ⚠ **Whenever you take PULP damage, take 2 more.** *(GHOST-011: was 1 more.)* | 75 CRED |

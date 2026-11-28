@@ -3276,7 +3276,7 @@
 		"SCRAMBLED_ID": {
 			"name": "SCRAMBLED ID",
 			"set": "GENERAL",
-			"text": "The first TRACE strike in each corporation has no penalty (TRACE still drops to 20).",
+			"text": "Ignore the first TRACE in each turn. You cannot reduce your TRACE.",
 			"price": 100,
 			"status": {
 				"design": "approved",
@@ -3285,7 +3285,8 @@
 			"decisions": [
 				"P5-003",
 				"P5-004",
-				"P5-008"
+				"P5-008",
+				"GHOST-SCRAMBLED-001"
 			]
 		},
 		"BLACK_MIRROR": {

@@ -482,3 +482,7 @@ Designer 11:48: "make Ghostware have a single source of truth, just like was don
 - **Step 2 (ORIGIN text):** the four ORIGIN records carry their text; `CardDB.RUSTLERS[*].origin_text` reads it through `_origin_text()`.
 - **Tests:** `test_gen_card_docs.py` gains two tests (each of the 41 records shown in exactly one block; a hand edit or a record change fails `--check` until regenerated); `test_csa_cards.gd` checks each Rustler's ORIGIN text equals its record.
 - **Results:** validate_cards VALID (127 cards); gen_card_docs `--check` in step (6 docs); export_maps `--check` in step; `tests/python` 88 OK; test_game 453/0; test_csa_cards 557/0; parity 4,017/0 (3,937 actions); every other suite 0 failed.
+
+## 2026-11-28 — GHOST-SCRAMBLED-001: SCRAMBLED ID text (Claude Code)
+
+Designer 12:04–12:06, text only. The `SCRAMBLED_ID` record in `cards.json` now reads "Ignore the first TRACE in each turn. You cannot reduce your TRACE."; price 100 CRED unchanged; decision added. The Upgrades/Events/Escape §2.2 table was regenerated. The effect isn't built (Ghostware effects held). Checks: validate_cards VALID; gen_card_docs `--check` and export_maps `--check` in step; `tests/python` OK; test_csa_cards 557/0, test_uplink_map 291/0, test_map_uplink_ui 17/0, test_game 453/0.
