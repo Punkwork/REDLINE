@@ -6,6 +6,11 @@ on:
   pull_request:
     paths:
       - 'godot/**'
+      - 'docs/**'
+      - 'tools/**'
+      - 'tests/python/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
       - '.github/workflows/godot-validation.yml'
   workflow_dispatch:
 
@@ -25,6 +30,14 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      # CSA-04f / CONSISTENCY-001a: the canonical card data, its generated doc views and the Python checks
+      # (schema and decision IDs, generated-block drift, Node authority, agent-file equality).
+      - name: Canonical source checks (CSA)
+        shell: bash
+        run: |
+          python3 tools/csa/validate_cards.py
+          python3 tools/csa/gen_card_docs.py --check
+          python3 -m unittest discover -s tests/python
       - name: Install pinned Godot editor
         shell: bash
         run: |
@@ -66,6 +79,8 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_ui_inspector_001.gd 2>&1 | tee -a /tmp/rules.log
           # Playtest 13 notes: ledger inset, queued voice clips on one shared channel.
           "$GODOT" --headless --path godot --script res://tests/test_pt13_feedback.gd 2>&1 | tee -a /tmp/rules.log
+          # CSA-04: canonical card records reach their consumers (Inspector contract, Uplink contract).
+          "$GODOT" --headless --path godot --script res://tests/test_csa04_consumers.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash

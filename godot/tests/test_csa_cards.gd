@@ -33,6 +33,9 @@ const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", 
 	"ADRENAL_SPIKE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "BASIC_EXTRACTOR"]
 const PLAYTEST := ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "OVERCLOCK", "FEEDBACK_LOOP", "SALVAGE", "ADAPTIVE_DEFENCE",
 	"FOLLOW_THROUGH", "ESCALATION", "AFTERBURN", "REPRISE"]
+## CSA-04f (CSA-02 Q8): approved pool cards never built, recorded as `pending` so the generated doc views
+## are complete (Card Pools §3–4, CARD-003/004; in the core-loop pool by STRIP-001).
+const PENDING_POOL := ["KEYLOGGER", "STASH", "QUANTUM_CORE", "HOT_SWAP", "JACK_OF_ALL_TRADES"]
 const EXPERIMENTAL := ["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]
 
 func check(ok: bool, what: String) -> void:
@@ -82,7 +85,10 @@ func _initialize() -> void:
 		else:
 			check(same(CardDB.RUSTLERS[r], snap.rustlers[r]), "RUSTLERS[%s] unchanged (starter deck included)" % r)
 	# --- CSA-03 C2 ---
-	check(CardDB.RECORDS.size() == snap.def_keys.size() + PLAYTEST.size(), "records = the 112 cards + 10 playtest cards")
+	check(CardDB.RECORDS.size() == snap.def_keys.size() + PLAYTEST.size() + PENDING_POOL.size(), "records = the 112 cards + 10 playtest cards + 5 pending pool cards")
+	for id in PENDING_POOL:
+		check(CardDB.RECORDS.has(id) and not CardDB.DEFS.has(id) and CardDB.design_status(id) == "approved", "%s: recorded, approved, pending, never dealt or played" % id)
+		check(CardDB.DATA.core_pool.has(id) and not CardDB.CORE_POOL.has(id), "%s: in the core pool's data, joins CardDB.CORE_POOL once built" % id)
 	for id in PLAYTEST:
 		check(CardDB.RECORDS.has(id) and not CardDB.DEFS.has(id), "%s: recorded, pending, not dealt or played" % id)
 		check(CardDB.design_status(id) == "playtest" and CardDB.DATA.core_pool.has(id) and not CardDB.CORE_POOL.has(id),

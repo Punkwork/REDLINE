@@ -64,16 +64,20 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 ### Starter deck (12) — unchanged from Core Rules §13
 
+<!-- GENERATED:starter rustler=GENERALIST -->
+*Generated from `godot/data/cards.json` by `tools/csa/gen_card_docs.py`. Edit the card records, not this table.*
+
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
-| 1 | FORTRESS Icepick | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 1. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. |
-| 1 | TUMBLER Icepick | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. |
-| 1 | VOID Icepick | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
-| 1 | CORTEX BUFFER | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. |
-| 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
-| 3 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
-| 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED for the rest of the Node. |
+| 1 | **FORTRESS Icepick** | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. |
+| 1 | **TUMBLER Icepick** | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. |
+| 1 | **VOID Icepick** | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. |
+| 1 | **Basic Extractor** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
+| 1 | **CORTEX BUFFER** | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. |
+| 3 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
+| 3 | **PROBE** | SCRIPT — EXPLOIT | 0 BW | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
+| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
+<!-- /GENERATED -->
 
 ### ORIGIN Ghostware — READY RIG
 **At the start of each ICE Node, choose one PROGRAM in your deck and install it for free.** It doesn't come from your hand, so your first hand stays full.
@@ -92,16 +96,24 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 ### Starter deck (12)
 
+<!-- GENERATED:starter rustler=ECHO -->
+*Generated from `godot/data/cards.json` by `tools/csa/gen_card_docs.py`. Edit the card records, not this table.*
+
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
-| 1 | **HUSH** *(signature)* | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 0. Boost: 2 BW → +1 STR. Break: 1 BW. *(BASIC-001: was STR 4, boost 1 BW. ECHO-002: STR 3 → 1; ECHO-004: → 0. ROT-001: SIGYL → TUMBLER.)* |
-| 1 | **BORROWED CREDENTIALS** *(fallback; replaces BACKDOOR)* | SCRIPT — EXPLOIT | **1 BW + 8 CRED** | Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
-| 3 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. *(ECHO-001: was 2.)* |
-| 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(ECHO-001: was 2.)* |
-| 1 | **SMOKESCREEN** | SCRIPT — CLOAK | 1 BW | +2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2. *(ECHO-003: was 2.)* |
+| 1 | **HUSH** | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 0. Boost: 2 BW → +1 STR. Break: 1 BW. |
+| 1 | **BORROWED CREDENTIALS** | SCRIPT — EXPLOIT | 1 BW, 8 CRED | Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. |
+| 1 | **Basic Extractor** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
+| 3 | **PROBE** | SCRIPT — EXPLOIT | 0 BW | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
+| 3 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
+| 1 | **SMOKESCREEN** | SCRIPT — CLOAK | 1 BW | +2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2. |
 | 1 | **DEAD AIR** | SCRIPT — CLOAK | 0 BW | CACHE 1 card in your hand. |
-| 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | As Generalist. |
+| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
+<!-- /GENERATED -->
+
+**Signature:** HUSH. **Fallback:** BORROWED CREDENTIALS (replaces BACKDOOR, ECHO-005).
+
+*History (decision records in Master Design):* HUSH: BASIC-001 was STR 4 with a 1 BW boost; ECHO-002 STR 3 → 1; ECHO-004 → 0; ROT-001 SIGYL → TUMBLER. ECHO-001: PROBE and PULP Shield were 2 copies each. ECHO-003: SMOKESCREEN was 2 copies.
 
 > **ECHO-001 / ECHO-003 (2026-11-14):** SLOW DRIP left the starter deck for ECHO's reward pool (Common), making room for a 3rd PROBE and a 3rd PULP Shield. GHOST SIGNAL stays in the starter deck because it's a shared basic (BASIC-001); one SMOKESCREEN was removed instead.
 
@@ -122,19 +134,26 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 ### Starter deck (15 — RIOT-002/004)
 
+<!-- GENERATED:starter rustler=RIOT -->
+*Generated from `godot/data/cards.json` by `tools/csa/gen_card_docs.py`. Edit the card records, not this table.*
+
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
-| 1 | **SLEDGE** *(signature)* | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. **Each break: +1 TRACE.** |
-| 1 | **BRUTE FORCE** *(fallback)* | SCRIPT — EXPLOIT | 1 BW, **+4 TRACE** | Break 1 subroutine on **any** ICE with STR 4 or less. |
-| 1 | **SHATTER** | SCRIPT — EXPLOIT | 1 BW, **+3 TRACE** | This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. *(Readings confirmed 2026-11-17: any one ICE of any type; STR 0 until the encounter ends.)* *(RIOT-002 new; RIOT-003 redesigned; RIOT-004 kept at +3 TRACE.)* |
-| 1 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, **+2 TRACE** | Target ICE: −2 STR this encounter. *(RIOT-002: was 2.)* |
-| 3 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. *(RIOT-002: was 1.)* |
+| 1 | **SLEDGE** | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. Each break: +1 TRACE. |
+| 1 | **BRUTE FORCE** | SCRIPT — EXPLOIT | 1 BW, +4 TRACE | Break 1 subroutine on any ICE with STR 4 or less. (+4 TRACE) |
+| 1 | **SHATTER** | SCRIPT — EXPLOIT | 1 BW, +3 TRACE | This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. (+3 TRACE) |
+| 1 | **OVERLOAD** | SCRIPT — EXPLOIT | 0 BW, +2 TRACE | Target ICE: −2 STR this encounter. (+2 TRACE) |
+| 4 | **PROBE** | SCRIPT — EXPLOIT | 0 BW | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
 | 1 | **FEEDBACK** | SCRIPT — EXPLOIT | 2 BW | Target ICE: −1 STR this encounter for every 10 TRACE you have. |
-| 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, **+2 TRACE** | Gain 1 BW. *(BASIC-001: was 2 BW.)* |
-| 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. *(RIOT-002: was 2.)* |
-| 1 | **LAY LOW** | SCRIPT — CLOAK | 1 BW | −3 TRACE. *(BASIC-001: was −5.)* |
-| 1 | **SMASH & GRAB** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract **3 CRED**. **+1 TRACE while your TRACE is under 20.** Spend **1 BW to uninstall** this Program and choose **another card in your hand** to CACHE until the **end of your next Rustler turn**. *(RIOT-005 supersedes RIOT-004 extraction.)* |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
+| 1 | **ADRENAL SPIKE** | SCRIPT | 0 BW, +2 TRACE | Gain 1 BW. (+2 TRACE) |
+| 3 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
+| 1 | **LAY LOW** | SCRIPT — CLOAK | 1 BW | −3 TRACE. |
+| 1 | **Basic Extractor** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
+<!-- /GENERATED -->
+
+**Signature:** SLEDGE. **Fallback:** BRUTE FORCE.
+
+*History (decision records in Master Design):* SHATTER: new in RIOT-002, redesigned in RIOT-003, kept at +3 TRACE by RIOT-004; readings confirmed 2026-11-17 (any one ICE of any type; STR 0 until the encounter ends). RIOT-002: OVERLOAD was 2 copies, PROBE 1, PULP Shield 2. BASIC-001: ADRENAL SPIKE was 2 BW; LAY LOW was −5. SMASH & GRAB (RIOT-005) left the deck under RIOT-006.
 
 ### ORIGIN Ghostware — REDLINER
 **At the start of your turn, if your TRACE is 20 or more, gain 1 BW.**
@@ -153,17 +172,25 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 
 ### Starter deck (12)
 
+<!-- GENERATED:starter rustler=VECTOR -->
+*Generated from `godot/data/cards.json` by `tools/csa/gen_card_docs.py`. Edit the card records, not this table.*
+
 | Qty | Card | Type / tags | Cost | Effect |
 |---:|---|---|---|---|
-| 1 | **STINGER** *(signature)* | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 0 *(BASIC-001: was 2)*. Boost: 1 BW → +1 STR. Break: 1 BW. **Each break also INFECTs 1 ROT on that ICE.** |
-| 1 | **RUNTIME ERROR** *(fallback)* | SCRIPT — EXPLOIT, VIRUS | 2 BW, +1 TRACE | Break 1 subroutine on **any** ICE with 2 or more virus counters. |
-| 3 | **INJECT** | SCRIPT — EXPLOIT, VIRUS | 1 BW | INFECT 2 ROT. |
+| 1 | **STINGER** | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. Each break also INFECTs 1 ROT on that ICE. |
+| 1 | **RUNTIME ERROR** | SCRIPT — EXPLOIT, VIRUS | 2 BW, +1 TRACE | Break 1 subroutine on any ICE with 2 or more virus counters. (+1 TRACE) |
+| 3 | **INJECT** | SCRIPT — EXPLOIT, VIRUS | 1 BW | INFECT 2 ROT. (Each ROT: −1 STR.) |
 | 1 | **REPLICATOR** | PROGRAM — VIRUS | 1 BW, 1 RAM | Start of your turn: on every ICE with virus counters, add 1 counter of each strain already on it. |
 | 1 | **OUTBREAK** | SCRIPT — VIRUS | 2 BW | Double the counters of every strain on target ICE. |
-| 1 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
-| 2 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
-| 1 | Basic Extractor | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
-| 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | As Generalist. |
+| 1 | **PROBE** | SCRIPT — EXPLOIT | 0 BW | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
+| 2 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
+| 1 | **Basic Extractor** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
+| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
+<!-- /GENERATED -->
+
+**Signature:** STINGER. **Fallback:** RUNTIME ERROR.
+
+*History (decision records in Master Design):* STINGER: BASIC-001 was 2.
 
 ### ORIGIN Ghostware — PATIENT ZERO
 **At the start of each encounter, choose an ICE: INFECT 1 ROT on it.** *(VECTOR-001, 2026-11-14: was "on every ICE".)*

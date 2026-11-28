@@ -17,12 +17,12 @@ class LiveFile(unittest.TestCase):
         self.assertEqual(V.validate(), [])
 
     def test_counts(self):
-        self.assertEqual(len(LIVE["cards"]), 122)   # 112 engine cards + 10 SYNERGY-PLAYTEST-002 records (pending)
+        self.assertEqual(len(LIVE["cards"]), 127)   # 112 engine cards + 10 SYNERGY-PLAYTEST-002 + 5 CSA-04f pool records (pending)
         self.assertEqual(len(LIVE["caps"]), 5)
 
     def test_register(self):
         reg = V.register()
-        self.assertEqual(len(reg["pending"]), 10)
+        self.assertEqual(len(reg["pending"]), 15)   # CSA-04f: KEYLOGGER, STASH, QUANTUM CORE, HOT SWAP, JACK OF ALL TRADES
         self.assertEqual(sorted(reg["experimental"]), sorted(["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]))
         self.assertEqual(reg["divergent"], [])   # CSA-04d: PIVOT, the last divergent card, aligned
         self.assertNotIn("PROBE", [c for c, _ in reg["divergent"]])   # CSA-04b: PROBE aligned

@@ -2216,6 +2216,98 @@
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
 			]
+		},
+		"KEYLOGGER": {
+			"name": "KEYLOGGER",
+			"type": "PROGRAM",
+			"tags": [
+				"EXPLOIT"
+			],
+			"bw": 1,
+			"ram": 1,
+			"rarity": "UNCOMMON",
+			"text": "Start of your turn: choose an ICE; it gets −1 STR this encounter.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"CARD-003",
+				"STRIP-001"
+			]
+		},
+		"STASH": {
+			"name": "STASH",
+			"type": "SCRIPT",
+			"tags": [
+				"CLOAK"
+			],
+			"bw": 1,
+			"rarity": "COMMON",
+			"text": "CACHE up to 2 cards in your hand.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"CARD-003",
+				"STRIP-001"
+			]
+		},
+		"QUANTUM_CORE": {
+			"name": "QUANTUM CORE",
+			"type": "PROGRAM",
+			"tags": [
+				"HARDWARE"
+			],
+			"bw": 2,
+			"ram": 1,
+			"rarity": "RARE",
+			"text": "Start of your turn: gain 1 BW.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"CARD-003",
+				"STRIP-001"
+			]
+		},
+		"HOT_SWAP": {
+			"name": "HOT SWAP",
+			"type": "SCRIPT",
+			"tags": [],
+			"bw": 0,
+			"rarity": "COMMON",
+			"pool": "GENERALIST",
+			"text": "Unload one of your PROGRAMS, then install a PROGRAM from your hand for 0 BW.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"CARD-004",
+				"STRIP-001"
+			]
+		},
+		"JACK_OF_ALL_TRADES": {
+			"name": "JACK OF ALL TRADES",
+			"type": "SCRIPT",
+			"tags": [
+				"EXPLOIT"
+			],
+			"bw": 2,
+			"rarity": "RARE",
+			"pool": "GENERALIST",
+			"text": "If you have a FORTRESS, a TUMBLER and a VOID Icepick installed: on every ICE, break 1 subroutine for 0 BW using your matching Icepick. Each Icepick still needs enough STR.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"CARD-004",
+				"STRIP-001"
+			]
 		}
 	},
 	"caps": {
@@ -2388,7 +2480,12 @@
 		"FOLLOW_THROUGH",
 		"ESCALATION",
 		"AFTERBURN",
-		"REPRISE"
+		"REPRISE",
+		"KEYLOGGER",
+		"STASH",
+		"QUANTUM_CORE",
+		"HOT_SWAP",
+		"JACK_OF_ALL_TRADES"
 	],
 	"pool_extra": {
 		"ECHO": {
