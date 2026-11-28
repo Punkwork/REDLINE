@@ -44,6 +44,7 @@ func _init() -> void:
 		test_hand_max()
 		test_reward_pools_every_rustler()   # CORE-LOOP-REWARD-GAP
 		test_caps()   # CAPS-TEST-001
+		test_null_pointer_cost()   # NULL-POINTER-001
 		if OS.get_environment("SIM") != "":
 			sim_rustler("GENERALIST")
 		print("TESTS: %d passed, %d failed" % [passes, fails])
@@ -1138,6 +1139,17 @@ func _cap_game(seed: int) -> Game:
 	g.entered_corp = true
 	start_node(g, 1, 0, "")
 	return g
+
+## NULL-POINTER-001 (designer 2026-11-24): NULL POINTER costs 1 BW (was 2); 1 BW is paid on play.
+func test_null_pointer_cost() -> void:
+	var g := _cap_game(7)
+	g.reduce_ice_str(0, g.ice_str(0))
+	check(g.ice_str(0) == 0, "NULL POINTER: target ICE at 0 STR")
+	var u := g._new_inst("NULL_POINTER"); g.hand.append(u)
+	check(g.card_cost("NULL_POINTER", int(u.uid), 0) == 1, "NULL POINTER: costs 1 BW (NULL-POINTER-001)")
+	g.bw = 3
+	var ok := g.play_card(u.uid, 0)
+	check(ok and g.bw == 2 and not g._find(g.burned, u.uid).is_empty(), "NULL POINTER: playing it spends 1 BW and burns it")
 
 func test_caps() -> void:
 	var g := Game.new(5)

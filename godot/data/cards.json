@@ -1892,7 +1892,7 @@
 			"tags": [
 				"EXPLOIT"
 			],
-			"bw": 2,
+			"bw": 1,
 			"rarity": "RARE",
 			"pool": "RIOT",
 			"target": true,
@@ -1908,7 +1908,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"NULL-POINTER-001"
 			]
 		},
 		"FLATLINE": {

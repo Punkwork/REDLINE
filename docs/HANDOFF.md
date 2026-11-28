@@ -430,9 +430,9 @@ Created [Design Experimentation Bible](PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.m
 
 EXP-C029 in Experimentation Bible (ddc4793); timing, legality and balance remain open. No implementation authorized.
 
-### NULL-POINTER-001 — Approved cost adjustment (WAITING: Claude Code)
+### NULL-POINTER-001 — Approved cost adjustment (DONE 2026-11-28)
 
-NULL POINTER 1 BW (formerly 2), all other properties unchanged. Deck Synergy §9.2 updated (08b5b6f). Synchronize runtime card definition and affected tests, validate; documentation-only change so far.
+NULL POINTER 1 BW (formerly 2), all other properties unchanged. Built: `cards.json` record 1 BW with the decision ID; compiled cards that include it follow (sum of parts); behaviour test in `test_game.gd` (433/0); snapshot register in `test_csa_cards.gd` (507/0); Playtest Guide updated. Not in a playtest build yet. Note for CSA-05: `scan_card_drift.py` doesn't recognise NULL POINTER's Deck Synergy row, so it reports the card as having no doc row.
 
 ## RIOT-EXP-001 — RIOT experimental card catalogue (ChatGPT)
 

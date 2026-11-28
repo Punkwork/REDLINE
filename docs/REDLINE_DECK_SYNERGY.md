@@ -353,7 +353,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 
 **Deliberately not proposed:** a hard deck-size cap (except the ONE-TRICK Ghostware), HP on ICE, or new damage types. The ENG-001 to ENG-005 engines are kept and connected to this system rather than replaced.
 
-**NULL-POINTER-001 (designer approved, 2026-11-24):** NULL POINTER cost reduced from 2 BW to 1 BW for balance. All other properties unchanged. Implementation synchronization pending.
+**NULL-POINTER-001 (designer approved, 2026-11-24):** NULL POINTER cost reduced from 2 BW to 1 BW for balance. All other properties unchanged. Implemented 2026-11-28 (canonical record `godot/data/cards.json`).
 
 
 ## CHAIN-002 — Foundational CHAIN revision (designer approved 2026-11-27)

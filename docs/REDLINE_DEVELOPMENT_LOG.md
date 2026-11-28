@@ -39,9 +39,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-002d — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-005 — Termination rules (designer approved 2026-11-27); CHAIN-006 — Persistent cumulative reward direction (designer endorsed 2026-11-27); CHAIN-007 / CHAIN-008 — Balance constraints, extension economics and playtest roadmap (designer approved 2026-11-27).
 
-## CHAIN-009 — Extension precedence for CHAIN-capable cards (designer approved 2026-11-27)
-When a CHAIN-capable card is successfully played during an active CHAIN and satisfies that instance's continuation requirements, it extends the existing instance as an ordinary link. Resolve its normal base effect and the active instance's persistent reward; do not instantiate its own CHAIN, grant its own activation bonus or inherent third-link BW discount, replace the active instance, or stack persistent effects. The original catalyst retains ownership of continuation and rewards. If ineligible, apply CHAIN-005 termination and seed a fresh candidate with that play; no prior links may be reused. Exact continuation predicates remain open. Test eligible and ineligible catalyst plays, base effect resolution, no duplicate rewards/discounts, and fresh independent activation. Designer also requested at least three interacting CHAIN-capable cards for the economics playtest; OVERCLOCK, SLIPSTREAM and RELAY are proposed candidates, with specific effects and signatures still experimental. No engine changes.
-
+LOG-001 moved the oldest dated entry to the archive unchanged: CHAIN-009 — Extension precedence for CHAIN-capable cards (designer approved 2026-11-27).
 
 ## CHAIN-010 — Governing design principle (designer approved 2026-11-27)
 **Easy to understand. Difficult to assemble. Rewarding to sustain.**
@@ -421,4 +419,8 @@ Interpretations to confirm: the seven implementation choices in the UI Bible (UI
 ## 2026-11-28 — UI-INSPECTOR-001a: implementation choices approved (Claude Code)
 
 Designer, 05:25: all seven UI-INSPECTOR-001 implementation choices (UI Bible, UI-INSPECTOR-001 "Implementation") are approved as built in `9e37bf5`. Recorded in the UI Bible, Master Design and HANDOFF. Docs only; no `godot/` change. The PROBE mode prompt's visual review (`docs/visual/fixtures/probe-004a/`) and a hands-on playtest of the inspector remain open.
+
+## 2026-11-28 — NULL-POINTER-001: NULL POINTER costs 1 BW (Claude Code)
+
+Implemented the cost change approved on 2026-11-24. `godot/data/cards.json` NULL POINTER `bw` 2 → 1, with the decision ID; compiled cards follow (WRECKING BALL + NULL POINTER 3 → 2 BW). `test_csa_cards.gd` gained an `APPROVED_VALUES` register (507/0). `test_game.gd` gained an independent behaviour check, because the synergy cases don't run while `CORE_LOOP` is on: NULL POINTER costs 1 BW, playing it spends 1 BW and burns it (433/0; SIM=1 433/0). Playtest Guide, Deck Synergy, Master Design and HANDOFF updated. `validate_cards.py` VALID; drift report unchanged.
 
