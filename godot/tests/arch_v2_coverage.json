@@ -257,7 +257,7 @@
    "v2": "Flash",
    "status": "BUILT",
    "next": "",
-   "note": "Red wash on strikes and lethal ICE (none under reduced motion) with TRACE STRIKE / MASK OFF / LOCKDOWN / LETHAL flyouts."
+   "note": "Red wash on strikes (none under reduced motion); MASK OFF and LOCKDOWN flyouts. No TRACE STRIKE banner (ARCH-V2-006j); LETHAL has no wash or flyout, only its lens on the ICE (UI-TYPO-002)."
   },
   {
    "id": "I13",
@@ -347,7 +347,7 @@
    "v2": "EventFlyout",
    "status": "BUILT",
    "next": "",
-   "note": "Strike, MASK OFF, LOCKDOWN, DEADLOCK BREACHED, LETHAL, PARTING SHOT, RESERVE EXTRACTED; queued, ≤ 1.5 s each. Wording PROPOSED."
+   "note": "RUSTLER TURN, CORP COUNTERMEASURE, DEADLOCK BREACHED, LOCKDOWN, MASK OFF, PARTING SHOT, RESERVE EXTRACTED, each with its UI-TYPO-002 treatment (1.15–1.7 s targets, UI Bible §2b); queued, max 3. LETHAL is a lens on the affected ICE, not a flyout. Wording APPROVED."
   },
   {
    "id": "G01",

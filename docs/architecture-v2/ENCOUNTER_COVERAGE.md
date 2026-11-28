@@ -46,7 +46,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | I09 | Key tips (HOVER-001) | show_key_tip | `KeyInspector` | BUILT | — |  |
 | I10 | Virus counters on ICE (WORM etc.) | scan_tag virus row | `Ice_*` | BUILT | — | Strain chips (initial + count) on the status strip; rule on hover. Checked in test_arch_v2_batch3. |
 | I11 | Break feedback (cost spent) | show_break_feedback | `Ice_*` | BUILT | — | "−n BW" rises from the key a paid break used. Checked in test_arch_v2_batch3. |
-| I12 | Strike overlay and lethal flash | build_strike, strike_flash | `Flash` | BUILT | — | Red wash on strikes and lethal ICE (none under reduced motion) with TRACE STRIKE / MASK OFF / LOCKDOWN / LETHAL flyouts. |
+| I12 | Strike overlay and lethal flash | build_strike, strike_flash | `Flash` | BUILT | — | Red wash on strikes (none under reduced motion); MASK OFF and LOCKDOWN flyouts. No TRACE STRIKE banner (ARCH-V2-006j); LETHAL has no wash or flyout, only its lens on the ICE (UI-TYPO-002). |
 | I13 | TRACE pixel steps (PIXEL-TRACE-001) | update_pixel | `Ice_*` | BUILT | — | Room and avatar drop to the step with Build 12 transition; keys, plates, bubble and text stay sharp (ARCH-V2-007b). |
 | I14 | Corporation console colour | console_tint_material | `Ice_*` | BUILT | — | console_tint on the window enamel (IRONWATCH navy, LUCIDA lilac); mostly behind the room now (ARCH-V2-007b). |
 | I15 | Corporation room behind the ICE (painted backgrounds) | concept_backgrounds, add_backdrop | `Room` | BUILT | — | Through the ICE windows as one continuous room; HOSTILE shows through with the reveal (ARCH-V2-007a). |
@@ -60,7 +60,7 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | R03 | PARTING SHOT after BREACH (PT11-UI 1) | PULP INCOMING row | `MeterPULP` | BUILT | — | PULP meter reads PARTING SHOT after BREACH; END TURN hover states it; rail drops DEADLOCKs. |
 | R04 | Encounter log | log_text | `RailLog` | BUILT | — | Hover the rail for the latest lines; click pins the full log; Esc closes (ARCH-V2-006i). |
 | R05 | Phase flyouts | none | `EventFlyout` | BUILT | — |  |
-| R06 | Event flyouts from Game.events (EV-xx) | toasts, punch arrival | `EventFlyout` | BUILT | — | Strike, MASK OFF, LOCKDOWN, DEADLOCK BREACHED, LETHAL, PARTING SHOT, RESERVE EXTRACTED; queued, ≤ 1.5 s each. Wording PROPOSED. |
+| R06 | Event flyouts from Game.events (EV-xx) | toasts, punch arrival | `EventFlyout` | BUILT | — | RUSTLER TURN, CORP COUNTERMEASURE, DEADLOCK BREACHED, LOCKDOWN, MASK OFF, PARTING SHOT, RESERVE EXTRACTED, each with its UI-TYPO-002 treatment (1.15–1.7 s targets, UI Bible §2b); queued, max 3. LETHAL is a lens on the affected ICE, not a flyout. Wording APPROVED. |
 
 ## Rig
 

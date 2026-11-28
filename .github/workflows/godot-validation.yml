@@ -60,6 +60,8 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_spec_probe.gd 2>&1 | tee -a /tmp/rules.log
           "$GODOT" --headless --path godot --script res://tests/test_spec_burned.gd 2>&1 | tee -a /tmp/rules.log
           "$GODOT" --headless --path godot --script res://tests/test_spec_pivot.gd 2>&1 | tee -a /tmp/rules.log
+          # UI-TYPO-002 (M06): event typography and motion treatments, expectations from the approved table.
+          "$GODOT" --headless --path godot --script res://tests/test_ui_typo_002.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash
@@ -83,6 +85,13 @@ jobs:
             2>&1 | tee /tmp/shot_cred_cost.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_cred_cost.log; then exit 1; fi
           grep -q 'CRED COST: 4 passed, 0 failed' /tmp/shot_cred_cost.log
+          # UI-TYPO-002 (M06): the typography fixture on the production EventFlyout, lens and sandbox.
+          xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
+            "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
+            --rendering-driver opengl3 --path godot res://tests/visual/ui_typo_event_fixture.tscn \
+            2>&1 | tee /tmp/ui_typo_fixture.log
+          if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed|FIXTURE FAIL' /tmp/ui_typo_fixture.log; then exit 1; fi
+          grep -q 'UI-TYPO-002 event fixture: 32 screenshots · PASS' /tmp/ui_typo_fixture.log
       - name: Verify screenshot states and large-hand interaction
         shell: bash
         env:

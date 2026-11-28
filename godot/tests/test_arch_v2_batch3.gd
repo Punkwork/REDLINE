@@ -159,7 +159,7 @@ func test_events() -> void:
 	while sb.flyout.playing and total < 20.0:
 		sb.flyout.advance(0.1); total += 0.1
 	check(not sb.flyout.playing and sb.flyout.queued().is_empty(), "queued flyouts play out")
-	check(total <= 1.5 * 4 + 0.2, "each flyout stays within 1.5 s (%.1f s for the queue)" % total)
+	check(total <= VasTokens.flyout_total() * 4 + 0.2, "each flyout stays within its target (%.1f s for the queue)" % total)
 	sb.queue_free(); await frames()
 	# Reduced motion: flyouts still announce, no wash.
 	sb = sandbox(); sb.reduced_motion = true

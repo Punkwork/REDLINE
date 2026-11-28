@@ -38,6 +38,8 @@ static func ice_model(game: Game, ctrl: EncounterController, i: int, biggest: in
 		"type": String(d.type), "subtype": String(d.get("subtype", "")), "black": bool(d.get("black", false)),
 		"str": game.ice_str(i), "str_base": int(d.str), "str_delta": delta,
 		"mood": mood(game, i), "breached": bool(game.enc.get("breached", false)),
+		## UI-TYPO-002 LETHAL lens: the ICE has turned LETHAL (FORM-001); not Black ICE's look-only form.
+		"lethal": bool(ice.get("lethal", false)),
 		"passive": String(d.get("ability_text", "")), "zeroed": bool(ice.get("zeroed", false)),
 		"keys": keys, "pool": pool, "hidden_pool": game.hidden_count(i) if tumbler else 0,
 		"broken": ice.broken.count(true), "subs": d.subs.size(),

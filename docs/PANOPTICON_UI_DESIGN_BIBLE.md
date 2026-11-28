@@ -80,11 +80,44 @@ Readability, reduced motion and the copy guards still govern both. **Flyout exce
 - Preserve 4.5:1 contrast, copy guards and access to essential information. Apply the UI-TYPO-001a overlap exception only to flyouts and keep underlying information readable and in place throughout. Provide reduced-motion and reduced-flash treatments that preserve the same information and outcomes.
 - Explore kinetic announcements, localized feedback, corporate propaganda for introductions, and achievement treatments for extraction, Ghostware and CAPS. Psychological typography for NUL/REM, surveillance and loss of autonomy remains experimental. The study of a progressively institutional typographic voice carries no approved mechanic, progression trigger or production requirement.
 
-**For design and validation:** exact typefaces, glyphs, scale, palette values, motion direction, timing, easing and per-component contracts require review. All example timings and mockup copy are study inputs subject to current rules and the flyout exception. See the [Typography & Motion milestone](REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion) and [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
+**For design and validation:** exact typefaces, glyphs, scale, palette values, motion direction, timing, easing and per-component contracts require review. All example timings and mockup copy are study inputs subject to current rules and the flyout exception. See the [Typography & Motion milestone](REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion) and [issue #24](https://github.com/Punkwork/REDLINE/issues/24). The approved event treatments are in §2b.
 
 ### Bandwidth transition design acceptance (UI-TYPO-001 / M06, 2026-11-27)
 
 **DESIGN-APPROVED — designer confirmed 2026-11-27.** Bandwidth (BW) transitions follow the approved universal motion language. Use symbols, numbers and mathematical notation only in transient resource feedback; no explanatory words (including BLOCKED). The persistent physical BW indicator remains authoritative. No further BW visual exploration before the next build. Expenditure, gain, turn replenishment, rapid successive changes and insufficient-BW rejection are implementation and playtest cases, not open design tasks. Bind presentation to authoritative engine events without changing rules or delaying gameplay; reduced-motion and reduced-flash alternatives must preserve information. Implementation, accessibility validation and playtest acceptance remain pending; exact integration timings are not newly prescribed by this approval. Existing readability guards remain in force. Track delivery in [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
+
+## 2b. Event typography and motion treatments (UI-TYPO-002, M06, APPROVED 2026-11-27)
+
+**Current specification** (components UI-RSP and UI-ICE; [issue #24](https://github.com/Punkwork/REDLINE/issues/24)). The designer approved these eight treatments on 2026-11-27 (decision record: Master Design UI-TYPO-002). This section is their single current definition. It supersedes the provisional single-band treatment, the ≤ 1.5 s flyout timing of ARCH-V2-006f, and LETHAL as a global banner (ARCH-V2-006j). The wording was approved earlier (ARCH-V2-006f/j). Implementation values live once, as presentation tokens in `godot/scripts/ui/architecture_v2/vas_tokens.gd` (`FLYOUT`, `LETHAL_LENS`): timing per phase, type, colour, scale and easing. **Every timing is an initial playtest target.** Tune it there; don't restate it elsewhere.
+
+| Event (trigger) | Treatment | Target |
+|---|---|---|
+| **RUSTLER TURN** (Rustler turn starts) | **Kinetic Sweep:** condensed, forward-leaning type in warm ivory and cyan. Sweeps left to right with subtle directional momentum. | 1,300 ms |
+| **CORP COUNTERMEASURE** (Corporation Response starts) | **Institutional Transmission (B2):** a smaller, widely spaced vermilion CORP above a dominant, heavy, upright ivory COUNTERMEASURE, between horizontal rules. Irregular signal acquisition, a stable readable hold and an electronic fizzle exit. | 1,300 ms |
+| **DEADLOCK BREACHED** (EV-07) | **Kinetic Breakthrough:** DEADLOCK enters from the right and BREACHED from the left. Four principal cyan lines accelerate outward towards the screen edges, and contrasting amber and vermilion lines travel inward. | 1,500 ms |
+| **LOCKDOWN** (EV-16, third strike) | **Surveillance Convergence (L3):** concentric rectangular red frames contract inward around a deep crimson panel holding heavy, upright ivory type. A stable assertion, then electronic extinguishment. | 1,700 ms |
+| **MASK OFF** (EV-15, second strike) | **Masked Revelation:** oversized negative-space type reveals the Corporation's actual artwork through the letterforms. The mask then withdraws to show the complete image briefly before the encounter returns. | 1,700 ms |
+| **LETHAL** (an ICE turns LETHAL) | **Cold Recognition:** on the affected ICE only. A red optical lens inspired by HAL 9000, restrained thin uppercase type and unnerving stillness. It stays while the ICE is LETHAL. **No global announcement.** | Persists |
+| **PARTING SHOT** (parting shot with at least one subroutine firing) | **Corner Slingshot:** staggered, ascending diagonal type at 85% of the original proposed scale. A curved entry from the screen corner, a readable hold at the apex, then a rapid, accelerating retraction with a simultaneous fade. | 1,150 ms |
+| **RESERVE EXTRACTED** (EV-09) | **Atomic Ascension:** turquoise Atomic Age orbital trails swirl around the type and progressively light EXTRACTED in luminous gold, in step with the CRED reward feedback. | 1,700 ms |
+
+**Constraints for every treatment**
+- Art Deco and Atomic Age geometry (paired rules, concentric frames, orbits) carries aggressive, modern virtual type. The physical console stays stable underneath.
+- Each run stays inside the UI-TYPO-001a flyout exception (1–2 s). Every filled area is translucent and type is outlined, so what's under it stays readable and nothing is removed. Flyouts never take input.
+- LETHAL's lens is not a flyout, so ADP-R1 applies in full: it sits in the portrait zone and never crosses keys, plates, numbers or rule text.
+- One event at a time: arrivals queue (at most three, oldest first) and duplicates are dropped. The Corporation Response still waits for CORP COUNTERMEASURE, MASK OFF and LOCKDOWN. Presentation never changes gameplay, triggers, resolution order or resource calculations.
+- **Reduced motion:** a plain fade in place over the same duration, with the same information and no travel, scale, flicker or orbit. EXTRACTED shows fully gold. MASK OFF fades from its letters to the complete image. The LETHAL lens appears at once.
+- **No hazardous flashing:** at most three flashes in any second. CORP COUNTERMEASURE's signal acquisition steps between partial levels, never a full-contrast strobe.
+- Existing ICE state-change, card interaction and subroutine animations are kept. On a LETHAL ICE, the MOOD-PIXEL pulse continues alongside the lens.
+- Experimental CHAIN feedback is out of scope (CHAIN-PARK-001).
+
+**Implementation choices pending designer confirmation (UI-TYPO-002)**
+1. MASK OFF's "actual Corporation artwork" is that corporation's HOSTILE room (`BG_<CORP>_HOSTILE.png`, the face behind the friendly mask). To keep the console readable, the veil, the art in the letters and the complete image are at most 55% opaque, so the full image appears see-through, not solid.
+2. LOCKDOWN's padlock glyph and DEADLOCK BREACHED's open-lock glyph from the provisional treatment were dropped: L3 and Kinetic Breakthrough don't include them.
+3. DEADLOCK BREACHED and RESERVE EXTRACTED sit on a translucent band behind the type, for legibility. The approved descriptions don't mention a band.
+4. The LETHAL lens shows for the rules' LETHAL state only, not for Black ICE's look-only LETHAL form, which never deals double. LETHAL also loses its red screen wash, as that is a global announcement too.
+5. RESERVE EXTRACTED's gold completes as the CRED readout lands on its new value (the ledger's 0.9 s count-up and 0.45 s settle). If the flyout waits in the queue, a CRED count still in progress restarts with it; one that has already landed isn't replayed.
+6. RUSTLER TURN keeps the 76 px provisional scale, and PARTING SHOT is 85% of it (65 px).
 
 ## 3. Existing Master Design UI decisions (extract)
 **CARDS-003 — PCB glow cartridges (APPROVED, 2026-11-19).** Supersedes the CARDS-002 palette table above and its rarity finishes, ivory print and amber-on-field numbers. Designer: "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot." It was reviewed in 17 iterations on the `review/cards-002` branch, which is never merged.

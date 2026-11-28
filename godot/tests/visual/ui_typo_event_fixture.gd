@@ -1,42 +1,19 @@
 extends Control
-## UI-TYPO-001 / UI-TYPO-001a. Scripted specimens for the two visual languages.
-## Playback accepts presentation data only. SHOT_DIR enables deterministic capture.
+## UI-TYPO-001 / UI-TYPO-001a / UI-TYPO-002 (M06): the event typography and motion fixture, now driving
+## the production components: the Architecture V2 encounter (IceEncounterSandbox), its EventFlyout and
+## the ICE panels' LethalLens, with the real Game. No mock flyout lives here any more.
+## Interactive: a button per event (and LETHAL), reduced motion, and the real console underneath.
+## Capture (SHOT_DIR set): each treatment at enter, hold and exit, MASK OFF's withdrawn image, LETHAL
+## on one ICE, every treatment under reduced motion, a competing queue and an input pass-through
+## check. Prints "UI-TYPO-002 event fixture: PASS" and exits 0 when every check holds.
 
-const DISPLAY = preload("res://assets/fonts/BarlowCondensed-Bold.ttf")
-const MONO = preload("res://assets/fonts/SpaceMono-Bold.ttf")
-const RULE = preload("res://assets/fonts/DM-Sans.ttf")
-const BACKPLATE = preload("res://assets/concept/ui/UI_BACKDROP_MACHINE.png")
-const AUTO = preload("res://assets/concept/mascots/AUTO_RENEW_cheery.png")
-const CAPTCHA = preload("res://assets/concept/mascots/CAPTCHA_cheery.png")
-const IVORY := Color("#fff1d6")
-const GLASS := Color("#191513")
-const FLYOUT_FILL := Color("#1c1718")
-const SPAN := Vector2(720, 90)
-const CUES := {
-	"entry": {"title": "ICE ENCOUNTER", "colour": Color("#ffc577"), "rank": 2, "direction": -1},
-	"rustler": {"title": "RUSTLER TURN", "colour": Color("#6effee"), "rank": 2, "direction": -1},
-	"response": {"title": "CORP COUNTERMEASURE", "colour": Color("#ff987d"), "rank": 2, "direction": 1},
-	"break": {"title": "SUBROUTINE BROKEN", "colour": Color("#7df8e4"), "rank": 1, "direction": -1},
-	"trace": {"title": "TRACE", "colour": Color("#ff987d"), "rank": 1, "direction": 1},
-	"breach": {"title": "BREACH", "colour": Color("#ff91dc"), "rank": 3, "direction": 0}
-}
+const REF := Vector2i(1536, 864)
+const KINDS := ["rustler_turn", "corp_countermeasure", "breached", "lockdown", "mask_off", "parting_shot", "full_extraction"]
 
-var reduce_motion := false
-var reduce_flash := false
-var current: Dictionary = {}
-var pending: Array[Dictionary] = []
-var elapsed := 0.0
-var rail: Control
-var flyout: PanelContainer
-var headline: Label
-var note: Label
-var burst: Label
-var action: Button
-var action_count := 0
+var sb: IceEncounterSandbox
 var motion_toggle: CheckButton
-var flash_toggle: CheckButton
-var enamel: StyleBoxFlat
-
+var passed := true
+var shots := 0
 
 func _ready() -> void:
 	if get_parent() is Window and not OS.get_environment("SHOT_DIR").is_empty():
@@ -44,314 +21,106 @@ func _ready() -> void:
 		return
 	build()
 
+func fresh(reduced := false) -> void:
+	if is_instance_valid(sb): sb.queue_free(); await get_tree().process_frame
+	sb = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
+	sb.reduced_motion = reduced
+	sb.instant = true
+	sb.flags_path = "user://ui_typo_fixture_flags.json"
+	add_child(sb)
+	move_child(sb, 0)
+	await settle()
 
 func build() -> void:
-	var backdrop := TextureRect.new()
-	backdrop.texture = BACKPLATE
-	backdrop.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	backdrop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(backdrop)
-	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var margin := MarginContainer.new()
-	add_child(margin)
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 32)
-	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 10)
-	margin.add_child(stack)
-	var instruments := HBoxContainer.new()
-	instruments.add_theme_constant_override("separation", 12)
-	stack.add_child(instruments)
-	instruments.add_child(plaque("PANOPTICON   /   HALCYON", 32))
-	instruments.add_child(plaque("TURN 02     BW 3/3     VITAE 26/30", 22, MONO))
-	instruments.add_child(plaque("TRACE 12/40", 22, MONO))
-	rail = Control.new()
-	rail.custom_minimum_size.y = 144
-	rail.clip_contents = true
-	rail.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	rail.draw.connect(draw_streaks)
-	stack.add_child(rail)
-	flyout = PanelContainer.new()
-	flyout.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	flyout.hide()
-	rail.add_child(flyout)
-	enamel = style(FLYOUT_FILL, IVORY, 2)
-	flyout.add_theme_stylebox_override("panel", enamel)
-	var copy := HBoxContainer.new()
-	copy.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	copy.add_theme_constant_override("separation", 17)
-	flyout.add_child(copy)
-	burst = type_label("///", 54, DISPLAY)
-	copy.add_child(burst)
-	var lines := VBoxContainer.new()
-	lines.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	copy.add_child(lines)
-	var display_italic := FontVariation.new()
-	display_italic.base_font = DISPLAY
-	display_italic.variation_transform = Transform2D(Vector2.RIGHT, Vector2(-0.14, 1), Vector2.ZERO)
-	headline = type_label("", 49, display_italic)
-	lines.add_child(headline)
-	note = type_label("", 16, MONO)
-	lines.add_child(note)
-	var panels := HBoxContainer.new()
-	panels.add_theme_constant_override("separation", 14)
-	panels.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	stack.add_child(panels)
-	add_ice(panels, "AUTO-RENEW   /   FORTRESS   ·   STR 7", AUTO, "S1   PULP 2\nS2   HARDEN +1 STR\nS3   PULP 2 + BW DRAIN 1")
-	add_ice(panels, "CAPTCHA   /   TUMBLER   ·   STR 6", CAPTCHA, "S1   DISCARD 1\nS2   DEADLOCK\nPOOL   ·   4 FACE DOWN")
-	stack.add_child(plaque("NEXT RESPONSE    PULP 2  ›  HARDEN  ›  DISCARD 1", 24))
-	var controls := HBoxContainer.new()
-	stack.add_child(controls)
-	for event: String in CUES:
-		var button := Button.new()
-		button.text = CUES[event].title
-		button.custom_minimum_size.y = 44
-		button.pressed.connect(play_specimen.bind(event))
-		controls.add_child(button)
-	motion_toggle = effect_toggle(controls, "Reduced motion")
-	flash_toggle = effect_toggle(controls, "Reduced flash")
-	action = Button.new()
-	action.text = "END TURN"
-	action.custom_minimum_size.y = 44
-	action.pressed.connect(count_action)
-	controls.add_child(action)
+	await fresh()
+	var bar := HBoxContainer.new(); bar.name = "SpecimenBar"
+	bar.position = Vector2(12, 12)
+	var layer := CanvasLayer.new(); layer.layer = 10; add_child(layer); layer.add_child(bar)
+	for k in KINDS:
+		var b := Button.new(); b.text = String(VasTokens.FLYOUT[k].text)
+		b.pressed.connect(func(): sb.flyout.announce(k))
+		bar.add_child(b)
+	var lethal := Button.new(); lethal.text = "LETHAL"
+	lethal.pressed.connect(func():
+		var ice: Dictionary = sb.game.enc.ice[0]
+		ice["lethal"] = not ice.get("lethal", false)
+		sb.refresh())
+	bar.add_child(lethal)
+	motion_toggle = CheckButton.new(); motion_toggle.text = "Reduced motion"
+	motion_toggle.toggled.connect(func(on: bool): sb.reduced_motion = on; sb.refresh())
+	bar.add_child(motion_toggle)
 
+func settle(n := 6) -> void:
+	for i in n: await get_tree().process_frame
+	await RenderingServer.frame_post_draw
 
-func effect_toggle(parent: Control, mode: String) -> CheckButton:
-	var toggle := CheckButton.new()
-	toggle.text = mode
-	toggle.toggled.connect(set_effect_mode.bind(mode))
-	parent.add_child(toggle)
-	return toggle
+func expect(ok: bool, what: String) -> void:
+	if not ok:
+		passed = false
+		push_error("FIXTURE FAIL: " + what)
 
+func shot(name: String) -> void:
+	await settle()
+	var path := OS.get_environment("SHOT_DIR").path_join(name + ".png")
+	expect(get_viewport().get_texture().get_image().save_png(path) == OK, "saved " + name)
+	shots += 1
 
-func add_ice(parent: Control, title: String, art: Texture2D, terms: String) -> void:
-	var frame := PanelContainer.new()
-	frame.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	frame.add_theme_stylebox_override("panel", style(Color("#294640"), Color("#bda17d"), 4))
-	parent.add_child(frame)
-	var stack := VBoxContainer.new()
-	frame.add_child(stack)
-	stack.add_child(plaque(title, 26))
-	var body := HBoxContainer.new()
-	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	stack.add_child(body)
-	var mascot := TextureRect.new()
-	mascot.texture = art
-	mascot.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	mascot.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	mascot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_child(mascot)
-	var rules := plaque(terms, 21, RULE)
-	rules.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	body.add_child(rules)
-
-
-func type_label(value: String, points: int, font: Font) -> Label:
-	var label := Label.new()
-	label.text = value
-	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.add_theme_font_override("font", font)
-	label.add_theme_font_size_override("font_size", points)
-	label.add_theme_color_override("font_color", IVORY)
-	return label
-
-
-func plaque(value: String, points: int, font: Font = DISPLAY) -> Label:
-	var label := type_label(value, points, font)
-	label.add_theme_stylebox_override("normal", style(GLASS, Color("#a48258"), 2))
-	return label
-
-
-func style(fill: Color, edge: Color, width: int) -> StyleBoxFlat:
-	var box := StyleBoxFlat.new()
-	box.bg_color = fill
-	box.border_color = edge
-	box.set_border_width_all(width)
-	box.set_corner_radius_all(8)
-	box.content_margin_left = 18
-	box.content_margin_right = 18
-	box.content_margin_top = 6
-	box.content_margin_bottom = 6
-	return box
-
-
-func set_effect_mode(enabled: bool, mode: String) -> void:
-	if mode == "Reduced motion":
-		reduce_motion = enabled
-	else:
-		reduce_flash = enabled
-	paint()
-
-
-func count_action() -> void:
-	action_count += 1
-	action.text = "END TURN  ·  %d" % action_count
-
-
-func play_specimen(kind: String) -> void:
-	match kind:
-		"entry": enqueue(kind, "HALCYON  /  CAPTCHA")
-		"rustler": enqueue(kind, "TURN 02")
-		"response": enqueue(kind, "RESOLVING VISIBLE SUBROUTINES")
-		"break": enqueue(kind, "AUTO-RENEW  /  SLOT 1")
-		"trace": enqueue(kind, "", 2)
-		"breach": enqueue(kind, "DEADLOCKS CLEARED")
-
-
-func enqueue(kind: String, detail: String, delta := 0) -> void:
-	# Coalesce queued TRACE changes without displacing an announcement in its readable hold.
-	if kind == "trace":
-		for item in pending:
-			if item.kind == kind:
-				item.delta += delta
-				return
-	pending.append({"kind": kind, "detail": detail, "delta": delta})
-	if current.is_empty():
-		show_next()
-
-
-func show_next() -> void:
-	if pending.is_empty():
-		current = {}
-		flyout.hide()
-		rail.queue_redraw()
-		return
-	var chosen := 0
-	for index in pending.size():
-		if CUES[pending[index].kind].rank > CUES[pending[chosen].kind].rank:
-			chosen = index
-	current = pending.pop_at(chosen)
-	elapsed = 0
-	var cue: Dictionary = CUES[current.kind]
-	headline.text = cue.title if current.delta == 0 else "%s %+d" % [cue.title, current.delta]
-	headline.add_theme_font_size_override("font_size", 39 if cue.rank == 1 else 49)
-	note.text = current.detail if current.delta == 0 else "CORP COUNTERMEASURE"
-	burst.text = "✦" if cue.rank == 3 else ("///" if cue.direction < 0 else "\\\\\\")
-	burst.add_theme_color_override("font_color", cue.colour)
-	enamel.set_border_width_all(3 if cue.rank == 3 else 2)
-	flyout.show()
-	paint()
-
-
-func _process(delta: float) -> void:
-	if not current.is_empty():
-		advance(delta)
-
-
-func advance(delta: float) -> void:
-	elapsed += delta
-	if elapsed >= 1.30:
-		show_next()
-	else:
-		paint()
-
-
-func paint() -> void:
-	if current.is_empty():
-		return
-	var cue: Dictionary = CUES[current.kind]
-	var accent: Color = cue.colour
-	var focal := 46.0 if cue.rank == 1 else 70.0
-	var motion := 0.0
-	var opacity := 1.0
-	# Enter 0–.12, reveal .12–.25, hold .25–1.10, exit 1.10–1.30.
-	if not reduce_motion:
-		var enter := clampf(elapsed / 0.25, 0.0, 1.0)
-		var leave := clampf((elapsed - 1.10) / 0.20, 0.0, 1.0)
-		motion = (pow(1.0 - enter, 3) - leave) * focal * int(cue.direction)
-		opacity = clampf(elapsed / 0.12, 0.0, 1.0) * (1.0 - leave)
-	var rim := accent
-	if not reduce_flash and not reduce_motion and elapsed < 0.25:
-		rim = accent.lerp(IVORY, sin(elapsed / 0.25 * PI) * 0.26)
-	enamel.border_color = rim
-	flyout.modulate.a = opacity
-	var width := minf(rail.size.x, 570.0 if cue.rank == 1 else SPAN.x)
-	var floating := -0.028 if cue.direction < 0 else 0.028
-	flyout.rotation = 0 if reduce_motion else floating
-	flyout.size = Vector2(width, SPAN.y)
-	var anchor := rail.size.x * (0.32 if cue.rank == 1 and current.kind == "break" else 0.5)
-	var offset := clampf(anchor - width * 0.5, 0, rail.size.x - width)
-	flyout.position = Vector2(offset + motion, 20)
-	rail.queue_redraw()
-
-
-func draw_streaks() -> void:
-	if current.is_empty() or reduce_motion:
-		return
-	var cue: Dictionary = CUES[current.kind]
-	var tint: Color = cue.colour
-	var rect := flyout.get_rect()
-	var height := rect.position.y + rect.size.y * 0.5
-	var alpha := 0.20 if reduce_flash else 0.34
-	for band in range(3):
-		var width := 118.0 - band * 24.0
-		var y := height + (band - 1) * 15.0
-		tint.a = alpha * flyout.modulate.a
-		if cue.direction <= 0:
-			draw_streak(rect.position.x + 4, y, -width, tint)
-		if cue.direction >= 0:
-			draw_streak(rect.end.x - 4, y, width, tint)
-
-
-func draw_streak(x: float, y: float, length: float, tint: Color) -> void:
-	rail.draw_colored_polygon(PackedVector2Array([
-		Vector2(x, y - 5), Vector2(x + length, y + 2), Vector2(x, y + 5)
-	]), tint)
-
-
-func contrast(ink: Color, paper: Color) -> float:
-	return (ink.srgb_to_linear().get_luminance() + 0.05) / (paper.srgb_to_linear().get_luminance() + 0.05)
-
+func at(k: String, phase: String, frac := 0.5) -> float:
+	var T := VasTokens.flyout_timing(k)
+	var start := 0.0
+	for p in ["enter", "reveal", "hold", "exit"]:
+		if p == phase: return start + float(T[p]) * frac
+		start += float(T[p])
+	return start
 
 func capture() -> void:
-	var viewport := SubViewport.new()
-	viewport.size = Vector2i(1536, 864)
-	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	add_child(viewport)
-	var fixture: Control = load(scene_file_path).instantiate()
-	viewport.add_child(fixture)
-	fixture.set_process(false)
-	await get_tree().process_frame
-	var passed := contrast(IVORY, GLASS) >= 4.5 and contrast(IVORY, FLYOUT_FILL) >= 4.5
-	for cue: Dictionary in CUES.values():
-		passed = passed and contrast(cue.colour, FLYOUT_FILL) >= 4.5
-	for kind in ["entry", "rustler", "response", "break", "breach"]:
-		fixture.play_specimen(kind)
-		fixture.advance(0.50)
-		passed = await shot(viewport, "Type-" + kind) and passed
-		fixture.advance(0.81)
-	fixture.play_specimen("response")
-	fixture.play_specimen("trace")
-	fixture.play_specimen("trace")
-	fixture.play_specimen("breach")
-	fixture.action.grab_focus()
-	fixture.action.pressed.emit()
-	passed = passed and fixture.action_count == 1 and fixture.action.has_focus()
-	fixture.advance(1.31)
-	passed = passed and fixture.current.kind == "breach"
-	fixture.advance(1.31)
-	passed = passed and fixture.current.kind == "trace" and fixture.current.delta == 4
-	fixture.advance(0.50)
-	passed = await shot(viewport, "Type-competing-trace") and passed
-	fixture.advance(0.81)
-	fixture.flash_toggle.button_pressed = true
-	fixture.play_specimen("response")
-	fixture.advance(0.19)
-	passed = await shot(viewport, "Type-reduced-flash") and passed
-	fixture.motion_toggle.button_pressed = true
-	passed = passed and fixture.flyout.rotation == 0 and fixture.flyout.modulate.a == 1
-	passed = await shot(viewport, "Type-reduced-motion") and passed
-	fixture.advance(1.30)
-	passed = passed and not fixture.flyout.visible
-	print("UI-TYPO-001 event fixture: ", "PASS" if passed else "FAIL")
+	get_window().size = REF
+	await fresh()
+	expect(sb.flyout.mask_art != null and sb.flyout.missing_assets().is_empty(), "MASK OFF artwork bound")
+	# Each treatment at its entry, its readable hold and its exit.
+	for k in KINDS:
+		for phase in ["enter", "hold", "exit"]:
+			sb.flyout.hold_at(k, at(k, phase))
+			await shot("M06-%s-%s" % [k, phase])
+	# MASK OFF with the mask withdrawn: the complete image, still see-through.
+	sb.flyout.hold_at("mask_off", at("mask_off", "exit", 0.48))
+	expect(sb.flyout.band_opacity() <= EventFlyout.BAND_ALPHA + 0.001, "withdrawn mask stays translucent")
+	await shot("M06-mask_off-withdrawn")
+	# RESERVE EXTRACTED part-way: EXTRACTED part-lit while the CRED readout counts.
+	sb.flyout.hold_at("full_extraction", at("full_extraction", "reveal", 0.5))
+	await shot("M06-full_extraction-illuminating")
+	sb.flyout.advance(10.0)
+	# LETHAL: the lens on one ICE only, no flyout.
+	var ice: Dictionary = sb.game.enc.ice[1 if sb.game.enc.ice.size() > 1 else 0]
+	ice["lethal"] = true
+	sb.game._event("ICE_LETHAL", {"ice": ice.id})
+	sb.refresh()
+	for l in sb.lane.find_children("LethalLens", "LethalLens", true, false): (l as LethalLens).advance(2.0)
+	expect(not sb.flyout.playing, "LETHAL makes no global announcement")
+	expect(sb.lane.find_children("LethalLens", "LethalLens", true, false).filter(func(l): return l.active).size() == 1, "one LETHAL lens")
+	await shot("M06-lethal-lens")
+	ice["lethal"] = false; sb.refresh()
+	# Competing events: LOCKDOWN playing, MASK OFF and PARTING SHOT waiting their turn.
+	sb.flyout.announce("lockdown"); sb.flyout.announce("mask_off"); sb.flyout.announce("parting_shot")
+	sb.flyout.set_process(false)
+	sb.flyout.advance(at("lockdown", "hold"))
+	expect(sb.flyout.kind == "lockdown" and sb.flyout.queued() == ["mask_off", "parting_shot"], "competing events queue in order")
+	await shot("M06-competing-queue")
+	# Input passes through a playing flyout: the real END TURN key still ends the turn.
+	var turn0 := int(sb.game.enc.turn)
+	for pressed in [true, false]:
+		var ev := InputEventMouseButton.new()
+		ev.button_index = MOUSE_BUTTON_LEFT; ev.pressed = pressed
+		ev.position = sb.end_key.get_global_rect().get_center()
+		ev.global_position = ev.position
+		get_viewport().push_input(ev, true)   # viewport (not window) coordinates: the view is stretched
+		await get_tree().process_frame
+	# The fixture resolves the response at once, so a pressed END TURN shows as the next turn.
+	expect(int(sb.game.enc.turn) > turn0 or sb.game.phase != "PLAYER", "END TURN works under a playing flyout (turn %d → %d)" % [turn0, int(sb.game.enc.turn)])
+	# Reduced motion: every treatment as a plain fade in place, at its hold.
+	await fresh(true)
+	for k in KINDS:
+		sb.flyout.hold_at(k, at(k, "hold"))
+		await shot("M06-reduced-%s" % k)
+	print("UI-TYPO-002 event fixture: %d screenshots · %s" % [shots, "PASS" if passed else "FAIL"])
 	get_tree().quit(0 if passed else 1)
-
-
-func shot(viewport: SubViewport, name: String) -> bool:
-	await get_tree().process_frame
-	await RenderingServer.frame_post_draw
-	var path := OS.get_environment("SHOT_DIR").path_join(name + ".png")
-	return viewport.get_texture().get_image().save_png(path) == OK

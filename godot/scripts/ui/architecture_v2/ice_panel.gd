@@ -44,6 +44,8 @@ var ice_ref: Dictionary = {}
 @onready var notes: Label = $Status/Row/Notes
 @onready var band: Panel = $Controls
 var bubble: SpeechBubble
+## UI-TYPO-002 (M06): LETHAL's Cold Recognition lens, on this panel only, while the ICE is LETHAL.
+var lethal_lens: LethalLens
 @onready var bank: VBoxContainer = $Controls/Bank   # rows of keys (ARCH-V2-003v)
 
 var _keys := {}          # sub -> SubroutineKey (active bank)
@@ -61,6 +63,8 @@ func _ready() -> void:
 	if layout == null: layout = IcePanelLayout.load_default()
 	bubble = SpeechBubble.new(); bubble.name = "Bubble"; bubble.visible = false
 	add_child(bubble); move_child(bubble, $Expression.get_index() + 1)
+	lethal_lens = LethalLens.new(); lethal_lens.name = "LethalLens"
+	add_child(lethal_lens); move_child(lethal_lens, $Expression.get_index() + 1)
 	_apply_layout()
 	for b in [type_badge, str_badge]:
 		b.inspect_requested.connect(_inspect_badge)
@@ -234,6 +238,11 @@ func set_model(m: Dictionary) -> void:
 	if String(m.mood) != _mood_now:
 		_mood_prev = _mood_now; _mood_now = String(m.mood); _mood_age = 0.0
 	portrait.modulate = Color(0.55, 0.55, 0.55) if m.breached else Color.WHITE
+	# LETHAL lens: under the type medallion, on the portrait's left edge, clear of the keys and plates.
+	lethal_lens.reduced_motion = reduced_motion
+	lethal_lens.position = Vector2(maxf(L.window_rim + 4.0, L.type_badge_center.x - lethal_lens.size.x / 2.0),
+		L.type_badge_center.y + L.type_badge_size / 2.0 + 10.0)
+	lethal_lens.set_active(bool(m.get("lethal", false)))
 	# Persistent status: power lamp, then the passive's icon (rule on hover/focus).
 	_power_on = not m.breached
 	power.queue_redraw()

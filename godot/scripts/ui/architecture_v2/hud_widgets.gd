@@ -900,6 +900,14 @@ class RailLedger extends Control:
 	## Tests and fixtures: run the animation to its end at once.
 	func finish() -> void:
 		ants = 0.0; shown_cred = cred; set_process(false); queue_redraw()
+	## UI-TYPO-002 RESERVE EXTRACTED: restart a still-running gain so its count lands together with
+	## the flyout's gold EXTRACTED (the flyout's enter + reveal equals ANTS_S + COUNT_S). A gain that
+	## has already landed is left alone (no rewind).
+	func sync_reward() -> void:
+		if reduced_motion or gained <= 0: return
+		if ants > 0.0 or is_processing():
+			ants = ANTS_S; _count_t = 0.0; shown_cred = float(cred - gained)
+			set_process(true); queue_redraw()
 	func _process(d: float) -> void:
 		if ants > 0.0:
 			ants = maxf(0.0, ants - d)

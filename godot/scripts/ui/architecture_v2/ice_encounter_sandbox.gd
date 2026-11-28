@@ -131,7 +131,8 @@ var _graffiti_key := ""
 var punch_arrival: Control
 var ad_copy: Label
 ## Announcements the response waits for (Build 12 waited for its strike overlay).
-const HOLD_FOR := ["corp_countermeasure", "mask_off", "lockdown", "ice_lethal"]
+## UI-TYPO-002: LETHAL is no longer a flyout (its lens sits on the ICE), so nothing waits for it.
+const HOLD_FOR := ["corp_countermeasure", "mask_off", "lockdown"]
 var nr_voice: AudioStreamPlayer
 var voice_on := true
 ## Tests point this at a scratch file so they never touch the player's settings.
@@ -141,9 +142,11 @@ var nr_lines: Array = []     # what NUL/REM said this encounter, newest last
 var last_events: Array = []
 ## ARCH-V2-006j (designer 2026-11-26 20:35): no TRACE STRIKE banner; the first strike shows on the
 ## eye's lamps with the red wash and NUL/REM.
+## UI-TYPO-002 (M06, designer 2026-11-27): LETHAL has no global announcement (no flyout, no wash);
+## its Cold Recognition lens shows on the affected ICE from the ICE model.
 const EVENT_FLYOUT := {"EV-15": "mask_off", "EV-16": "lockdown", "EV-07": "breached",
-	"ICE_LETHAL": "ice_lethal", "PARTING_SHOT": "parting_shot", "EV-09": "full_extraction"}
-const FLASH_EVENTS := {"EV-14": 0.30, "EV-15": 0.38, "EV-16": 0.45, "ICE_LETHAL": 0.18}
+	"PARTING_SHOT": "parting_shot", "EV-09": "full_extraction"}
+const FLASH_EVENTS := {"EV-14": 0.30, "EV-15": 0.38, "EV-16": 0.45}
 var ghost_reel: HudWidgets.GhostReel
 var cap_rack: HudWidgets.SlotRack
 var protocol_rack: HudWidgets.SlotRack
@@ -241,6 +244,8 @@ func _build() -> void:
 	flyout = EventFlyout.new(); flyout.name = "EventFlyout"; flyout.position = Vector2.ZERO; flyout.size = REF
 	flyout.band_y = 0.36
 	stage.add_child(flyout)
+	## UI-TYPO-002 RESERVE EXTRACTED: EXTRACTED turns gold as the CRED readout lands (same clock).
+	flyout.started.connect(func(k: String): if k == "full_extraction" and ledger: ledger.sync_reward())
 	choice = ChoiceOverlay.new(); choice.name = "ChoiceOverlay"; choice.position = Vector2.ZERO; choice.size = REF
 	choice.inspector = inspector
 	choice.chosen.connect(func(u): ctrl.request_choice(u); refresh())
@@ -505,6 +510,8 @@ func refresh() -> void:
 	if game == null or game.enc.is_empty() and embedded: return
 	ctrl.rebind_if_new_encounter()
 	flyout.reduced_motion = reduced_motion
+	## UI-TYPO-002 MASK OFF: the corporation's actual artwork shows through the letterforms.
+	flyout.mask_art = CorporationLook.room(game.corporation, String(VasTokens.FLYOUT.mask_off.art_state))
 	lane.reduced_motion = reduced_motion
 	if signal_screen: signal_screen.reduced_motion = reduced_motion
 	hand_fan.reduced_motion = reduced_motion

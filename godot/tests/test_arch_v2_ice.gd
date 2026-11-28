@@ -156,7 +156,8 @@ func test_tokens_and_copy() -> void:
 			check(VasTokens.contrast(f.ink, under) >= 4.5 or VasTokens.contrast(Color(0.04, 0.03, 0.03), under) >= 4.5, "flyout %s readable over %s" % [k, ground.to_html()])
 	check(VasTokens.FLYOUT.rustler_turn.text == "RUSTLER TURN", "approved wording: RUSTLER TURN")
 	check(VasTokens.FLYOUT.corp_countermeasure.text == "CORP COUNTERMEASURE", "approved wording: CORP COUNTERMEASURE")
-	check(VasTokens.flyout_total() <= 1.5, "flyout total ≤ 1.5 s")
+	## UI-TYPO-002 (designer 2026-11-27) sets per-event targets up to 1.7 s, inside UI-TYPO-001a's 1–2 s.
+	for k in VasTokens.FLYOUT: check(VasTokens.flyout_total(k) <= VasTokens.FLYOUT_MAX_SECONDS, "flyout %s within the 2 s exception" % k)
 	# Copy guards over every new Architecture V2 source file.
 	var dir := DirAccess.open("res://scripts/ui/architecture_v2")
 	for f in dir.get_files():
@@ -395,7 +396,7 @@ func test_flyout() -> void:
 	while f.playing and f.kind == "rustler_turn":
 		f.advance(1.0 / 60.0); t += 1.0 / 60.0
 		peak = maxf(peak, f.band_opacity())
-	check(t <= 1.5 + 0.02, "first flyout done within 1.5 s (%.2f)" % t)
+	check(t <= VasTokens.flyout_total("rustler_turn") + 0.02, "first flyout done within its 1.3 s target (%.2f)" % t)
 	check(peak <= EventFlyout.BAND_ALPHA + 0.001, "band stays translucent")
 	check(f.playing and f.kind == "corp_countermeasure", "queued flyout follows")
 	f.advance(2.0)
