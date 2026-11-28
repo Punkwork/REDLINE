@@ -3806,4 +3806,6 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **Supersedes:** the provisional single-band flyout treatment and its ≤ 1.5 s timing (ARCH-V2-006f), the LOCKDOWN lock-motif banner (ARCH-V2-006h), and LETHAL as a global banner and red wash (ARCH-V2-006j). The approved wording stands. The UI-TYPO-001a 1–2 s flyout exception stands, and every target is inside it.
 
-**Status:** design approved; implementation built and validated in the UI-TYPO-002 commit (evidence in HANDOFF and the development log); implementation choices pending designer confirmation are listed in the UI Bible §2b. Hands-on playtest pending.
+**Status:** design approved; implementation built and validated in `37710c1` (evidence in HANDOFF and the development log). Hands-on playtest pending.
+
+**UI-TYPO-002a (designer, 2026-11-27 23:36: "all these are approved as is").** The six implementation choices listed in the UI Bible §2b are approved as built: MASK OFF uses the HOSTILE room art at most 55% opaque; the lock glyphs are dropped; DEADLOCK BREACHED and RESERVE EXTRACTED keep their legibility bands; the LETHAL lens shows for the rules' LETHAL state only and LETHAL has no red wash; a running CRED count restarts with a queued RESERVE EXTRACTED; 76 px scale, PARTING SHOT 65 px.

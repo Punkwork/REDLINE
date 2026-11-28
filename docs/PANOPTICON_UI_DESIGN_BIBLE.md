@@ -115,7 +115,7 @@ Readability, reduced motion and the copy guards still govern both. **Flyout exce
 - Existing ICE state-change, card interaction and subroutine animations are kept. On a LETHAL ICE, the MOOD-PIXEL pulse continues alongside the lens.
 - Experimental CHAIN feedback is out of scope (CHAIN-PARK-001).
 
-**Implementation choices pending designer confirmation (UI-TYPO-002)**
+**Implementation choices (UI-TYPO-002a, designer approved as is 2026-11-27 23:36)**
 1. MASK OFF's "actual Corporation artwork" is that corporation's HOSTILE room (`BG_<CORP>_HOSTILE.png`, the face behind the friendly mask). To keep the console readable, the veil, the art in the letters and the complete image are at most 55% opaque, so the full image appears see-through, not solid.
 2. LOCKDOWN's padlock glyph and DEADLOCK BREACHED's open-lock glyph from the provisional treatment were dropped: L3 and Kinetic Breakthrough don't include them.
 3. DEADLOCK BREACHED and RESERVE EXTRACTED sit on a translucent band behind the type, for legibility. The approved descriptions don't mention a band.
