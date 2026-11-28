@@ -7,6 +7,8 @@ extends RefCounted
 ## their decision IDs move into each record's "decisions" field (CSA-03 C2).
 const DATA_PATH := "res://data/cards.json"
 const SCHEMA := "panopticon.cards/1"
+## CSA-04i: a "{path}" placeholder in a rules-text template (declared before DATA, which uses it).
+static var _PLACEHOLDER := RegEx.create_from_string("\\{([A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z0-9_]+)*)\\}")
 static var DATA: Dictionary = _load_data()
 ## Every card record, including the approved playtest cards not yet built (status.implementation "pending").
 static var RECORDS: Dictionary = DATA.get("cards", {})
@@ -30,8 +32,72 @@ static func _load_data() -> Dictionary:
 		push_error("CardDB: %s is missing or is not %s" % [DATA_PATH, SCHEMA])
 		return {}
 	var data: Dictionary = _whole_numbers(parsed)
+	for id in data.get("cards", {}):
+		_render_record(data.cards[id])
 	_freeze(data)
 	return data
+
+## CSA-04i (CSA-02 elements 3–4): a record's "text" is a template whose numbers come from the record:
+## {trace_cost}, {pick.boost_cost}, {infect.ROT}; a key the record lacks is read from its "params"
+## ({shield}); an array step picks the element with that "id" ({modes.weaken.amount}). The loader keeps
+## the template in "text_template" and puts the rendered wording in "text", so every reader of def().text
+## sees finished text. tools/csa/card_text.py renders the same way for CI and the generated docs.
+
+static func _render_record(rec: Dictionary) -> void:
+	var t := String(rec.get("text", ""))
+	if t.contains("{"):
+		rec["text_template"] = t
+		rec["text"] = render(t, rec)
+	for m in rec.get("modes", []):
+		var l := String(m.get("label", ""))
+		if l.contains("{"):
+			m["label_template"] = l
+			m["label"] = render(l, m)
+
+## The number at a dotted path in a record, or null when there is none.
+static func resolve(rec: Dictionary, path: String) -> Variant:
+	var v: Variant = rec
+	for seg in path.split("."):
+		if v is Dictionary:
+			if v.has(seg): v = v[seg]
+			elif v.get("params") is Dictionary and v.params.has(seg): v = v.params[seg]
+			else: return null
+		elif v is Array:
+			var hit: Variant = null
+			for e in v:
+				if e is Dictionary and String(e.get("id", "")) == seg:
+					hit = e
+					break
+			if hit == null: return null
+			v = hit
+		else:
+			return null
+	return v if v is int else null
+
+static func render(template: String, rec: Dictionary) -> String:
+	var out := template
+	for m in _PLACEHOLDER.search_all(template):
+		var v: Variant = resolve(rec, m.get_string(1))
+		if v == null:
+			push_error("CardDB: no number at {%s} in \"%s\"" % [m.get_string(1), template])
+			continue
+		out = out.replace(m.get_string(0), str(v))
+	return out
+
+## CSA-04i: an engine number read from the card's canonical record, e.g. param("PROBE", "modes.weaken.amount").
+## `records` lets tests pass a modified copy (CSA T1). A missing path is an error, never a silent default.
+static func param(id: String, path: String, records: Dictionary = {}) -> int:
+	var rec: Dictionary = records.get(id, {}) if not records.is_empty() else RECORDS.get(id, {})
+	var v: Variant = resolve(rec, path)
+	if v == null:
+		push_error("CardDB.param: %s has no number at %s" % [id, path])
+		return 0
+	return v
+
+## CSA-04j: the card's rules text rendered from its template (CSA T1/T3).
+static func rules_text(id: String, records: Dictionary = {}) -> String:
+	var rec: Dictionary = records.get(id, {}) if not records.is_empty() else RECORDS.get(id, {})
+	return render(String(rec.get("text_template", rec.get("text", ""))), rec)
 
 static func _playable(records: Dictionary) -> Dictionary:
 	var out := {}
@@ -119,7 +185,7 @@ static func inspector_model(id: String, records: Dictionary = {}) -> Dictionary:
 		"classification": " · ".join([String(d.get("type", ""))] + tags.map(func(t): return String(t))),
 		"type": String(d.get("type", "")), "tags": tags,
 		"costs": {"bw": int(d.get("bw", 0)), "cred": int(d.get("cred_cost", 0)), "trace": int(d.get("trace_cost", 0))},
-		"rules": String(d.get("text", "")), "flavour": String(d.get("flavor", "")),
+		"rules": rules_text(id, records) if (records.has(id) or RECORDS.has(id)) else String(d.get("text", "")), "flavour": String(d.get("flavor", "")),
 		"art": art_path(id)}
 
 ## CARD-ART-001: a card's illustration. Imported art is JPEG (<ID>.jpg, 600x520, quality 92, 4:4:4);

@@ -22,6 +22,9 @@ import json
 import re
 import sys
 from pathlib import Path
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from card_text import rules_text  # noqa: E402  CSA-04j: render the template
 
 ROOT = Path(__file__).resolve().parents[2]
 CARDS = ROOT / "godot" / "data" / "cards.json"
@@ -81,7 +84,7 @@ def cards_block(data: dict, raw: str) -> str:
         c = data["cards"].get(i)
         if c is None:
             raise GenError("unknown card id %r" % i)
-        rows.append("| %s | %s | %s | %s | %s |" % (name(c), c.get("rarity", "").title(), cell(type_line(c)), cost(c), cell(c.get("text", ""))))
+        rows.append("| %s | %s | %s | %s | %s |" % (name(c), c.get("rarity", "").title(), cell(type_line(c)), cost(c), cell(rules_text(c))))
     return BANNER + "\n".join(rows) + "\n"
 
 
@@ -98,7 +101,7 @@ def starter_block(data: dict, raw: str) -> str:
     rows = ["| Qty | Card | Type / tags | Cost | Effect |", "|---:|---|---|---|---|"]
     for i, n in counts.items():
         c = data["cards"][i]
-        rows.append("| %d | %s | %s | %s | %s |" % (n, name(c), cell(type_line(c)), cost(c), cell(c.get("text", ""))))
+        rows.append("| %d | %s | %s | %s | %s |" % (n, name(c), cell(type_line(c)), cost(c), cell(rules_text(c))))
     return BANNER + "\n".join(rows) + "\n"
 
 

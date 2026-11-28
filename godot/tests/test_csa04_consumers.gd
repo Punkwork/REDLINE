@@ -26,6 +26,7 @@ func run() -> void:
 	await test_inspector_consumers()
 	test_uplink_contract()
 	test_card_art()
+	test_templates()
 	print("CSA-04 CONSUMERS: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -35,8 +36,11 @@ func test_inspector_model() -> void:
 	check(im.name == "PROBE" and im.classification == "SCRIPT · EXPLOIT" and im.costs.bw == 0, "contract: name, classification, cost")
 	check(im.flavour == "The deeper you probe, the costlier it gets." and String(im.art).ends_with("PROBE.png"), "contract: flavour and art")
 	# Propagation (T1/T3): a change to the canonical record changes what the Inspector says.
+	# CSA T1: the number lives once, in the record; the text, the engine parameter and the Inspector follow it.
 	var copy: Dictionary = CardDB.RECORDS.duplicate(true)
-	copy.PROBE.text = String(copy.PROBE.text).replace("−2", "−3")
+	copy.PROBE.modes[0].params.amount = 3
+	check(CardDB.param("PROBE", "modes.weaken.amount", copy) == 3 and CardDB.param("PROBE", "modes.weaken.amount") == 2, "T1: param() reads the record (copy 3, live 2)")
+	check(CardDB.rules_text("PROBE", copy).contains("−3 STR") and not CardDB.rules_text("PROBE", copy).contains("−2"), "T1: the rules text follows the record")
 	copy.PROBE.bw = 5
 	copy.PROBE.flavor = "changed"
 	var changed := CardDB.inspector_model("PROBE", copy)
@@ -137,3 +141,29 @@ func test_card_art() -> void:
 		if ResourceLoader.exists(CardDB.art_path(id)): with_art += 1
 	print("  card art coverage: %d of %d cards" % [with_art, CardDB.DEFS.size()])
 	check(with_art >= 93, "art coverage did not shrink (%d cards)" % with_art)
+
+## CSA-04i/j: templates render to finished text; engine parameters resolve; the gap is declared.
+func test_templates() -> void:
+	var raw := []
+	var off := []
+	for id in CardDB.RECORDS:
+		var d: Dictionary = CardDB.RECORDS[id]
+		if String(d.text).contains("{") or d.get("modes", []).any(func(m): return String(m.label).contains("{")): raw.append(id)
+		if CardDB.rules_text(id) != String(d.text): off.append(id)
+	check(raw.is_empty(), "no card shows a raw {placeholder} (%s)" % [raw])
+	check(off.is_empty(), "rules_text() equals the loaded text for every record (%s)" % [off])
+	check(CardDB.def("BRUTE_FORCE").text == "Break 1 subroutine on any ICE with STR 4 or less. (+4 TRACE)", "a templated card reads exactly as approved (BRUTE FORCE)")
+	check(CardDB.def("SKIMMER").text == "When installed: extract 4 CRED. End of your turn: extract 4 CRED.", "two fields with the same value render in place (SKIMMER)")
+	check(String(CardDB.RECORDS.PROBE.modes[0].label) == "−2 STR this encounter", "PROBE's mode label renders from its params")
+	check(CardDB.RECORDS.PULP_SHIELD.text_template == "+{shield} SHIELD.", "the template is kept for tools and tests")
+	# Every CardDB.param("ID", "path") in the scripts resolves against the live record.
+	var re := RegEx.create_from_string("CardDB\\.param\\(\"([A-Z_]+)\", \"([A-Za-z_.]+)\"")
+	var calls := 0
+	var bad := []
+	for f in ["res://scripts/core/game.gd", "res://scripts/ui/architecture_v2/ice_encounter_sandbox.gd"]:
+		for m in re.search_all(FileAccess.get_file_as_string(f)):
+			calls += 1
+			if CardDB.resolve(CardDB.RECORDS.get(m.get_string(1), {}), m.get_string(2)) == null: bad.append(m.get_string(0))
+	check(calls >= 30 and bad.is_empty(), "%d engine parameter reads, all resolve (%s)" % [calls, bad])
+	var in_code := CardDB.RECORDS.keys().filter(func(id): return CardDB.RECORDS[id].get("params_in_code", false))
+	print("  numbers still in code (params_in_code): %d of %d records" % [in_code.size(), CardDB.RECORDS.size()])

@@ -11,6 +11,9 @@ Later CSA-03 commits add status, decision and eligibility checks (see CANONICAL_
 """
 import glob, json, os, re, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from card_text import TemplateError, loose_digits, render   # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEFAULT = os.path.join(ROOT, "godot", "data", "cards.json")
 SCHEMA = "panopticon.cards/1"
@@ -132,6 +135,26 @@ def validate(path=DEFAULT):
         if not isinstance(up.get("decisions"), list) or not up.get("decisions"):
             errors.append("uplink: decisions must list the approving decision IDs")
 
+    # --- CSA-04i/j: rules-text templates and engine parameters ---
+    for cid, rec in cards.items():
+        if not isinstance(rec, dict): continue
+        if "params" in rec and (not isinstance(rec["params"], dict) or not all(isinstance(v, int) and not isinstance(v, bool) for v in rec["params"].values())):
+            errors.append("card %s: params must map names to whole numbers" % cid)
+            continue
+        for where, tpl, scope in [("text", rec.get("text", ""), rec)] + [("mode %s label" % m.get("id"), m.get("label", ""), m) for m in rec.get("modes", []) if isinstance(m, dict)]:
+            try:
+                render(str(tpl), scope)
+            except TemplateError as e:
+                errors.append("card %s: %s placeholder {%s} has no whole number in the record" % (cid, where, e.args[0]))
+        loose = loose_digits(str(rec.get("text", "")))
+        pending = rec.get("status", {}).get("implementation") == "pending"
+        if loose and not pending and not rec.get("params_in_code"):
+            errors.append("card %s: text writes %s instead of reading the record; use a {placeholder} or mark params_in_code" % (cid, loose))
+        if rec.get("params_in_code") and not loose:
+            errors.append("card %s: params_in_code but the text has no literal numbers; remove the flag" % cid)
+        if "params_in_code" in rec and rec["params_in_code"] is not True:
+            errors.append("card %s: params_in_code must be true or absent" % cid)
+
     # --- CSA-03 C2: status, decisions, eligibility, copy guard ---
     master, rest = decision_texts()
     def check_decisions(ids, where):
@@ -194,13 +217,14 @@ def register(path=DEFAULT):
     """The open gaps the records declare: divergent, pending and experimental cards."""
     with open(path, encoding="utf-8") as f:
         cards = json.load(f)["cards"]
-    out = {"divergent": [], "pending": [], "experimental": [], "no_decisions": []}
+    out = {"divergent": [], "pending": [], "experimental": [], "no_decisions": [], "params_in_code": []}
     for cid, rec in cards.items():
         st = rec.get("status", {})
         if st.get("implementation") == "divergent": out["divergent"].append((cid, rec.get("divergence", "")))
         if st.get("implementation") == "pending": out["pending"].append(cid)
         if st.get("design") == "experimental": out["experimental"].append(cid)
         if not rec.get("decisions"): out["no_decisions"].append(cid)
+        if rec.get("params_in_code"): out["params_in_code"].append(cid)
     return out
 
 
@@ -223,6 +247,7 @@ def main():
         print("  pending    %s" % ", ".join(reg["pending"]))
         print("  experimental (never rewards, not in starter decks): %s" % ", ".join(reg["experimental"]))
         print("  records with no decision ID yet: %d of %d" % (len(reg["no_decisions"]), len(d["cards"])))
+        print("  numbers still in code (params_in_code, CSA-04i): %d — %s" % (len(reg["params_in_code"]), ", ".join(reg["params_in_code"])))
     return 1 if errors else 0
 
 

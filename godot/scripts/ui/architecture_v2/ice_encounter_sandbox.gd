@@ -882,8 +882,7 @@ func _mode_spec() -> Dictionary:
 			"weaken":
 				o["art"] = "ice/V2_MEDALLION_STR.png"
 				o["value_inside"] = true
-				var num := RegEx.create_from_string("^[−+-]?\\d+").search(String(m.label))
-				o["value"] = num.get_string() if num else ""
+				o["value"] = "−%d" % CardDB.param(String(c[0].id), "modes.weaken.amount")   # CSA-04i
 			"reveal":
 				o["art"] = "ICON_HIDDEN_LIGHT"   # the hidden-subroutine icon, light variant for the dark key
 				o["value"] = "%d" % game.hidden_subs(target)

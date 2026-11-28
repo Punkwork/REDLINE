@@ -3918,6 +3918,8 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **CSA-04e–h built (Claude Code, 2026-11-28):** the Inspector content contract (`CardDB.inspector_model`), generated card views in Card Pools and Rustlers (`tools/csa/gen_card_docs.py`, checked in CI), the Black Market Uplink contract (`UplinkContract`, mirroring Core Rules §8.3), and the decision-ID backfill (120 of 127 records). Evidence: `architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md` §8a. Five approved, never-built pool cards are now recorded as `pending` (CSA-02 Q8). **Status:** built and validated; **04e–h accepted by the designer (2026-11-28 06:34)**. The designer kept plan elements 3–4 (`CardDB.param()`, `rules_text()` templates) in CSA-04 (06:35), so CSA-04 stays open until they are built.
 
+**CSA-04i/j built (Claude Code, 2026-11-28):** plan elements 3 and 4. `CardDB.param(id, path)` gives the engine each card's numbers from its record (26 core-loop cards, read in 37 places in `game.gd`), and a record's `text` is a template rendered from the same numbers (`CardDB.rules_text`, `tools/csa/card_text.py`; 69 records). No value or wording changed: every rendered text equals the approved text, and all behaviour suites are unchanged. Cards whose numbers remain in code say so with `params_in_code` (37: DEAD AIR and RAINBOW TABLE in the core loop, 35 switched-off cards); CI rejects any other literal number in card text. Evidence: `architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md` §8a. **Status:** built and validated, PROPOSED for designer acceptance; CSA-04 closes on acceptance.
+
 
 ## NODE-AUTHORITY-001 — Canonical Node authority and redundant definition retirement (APPROVED 2026-11-27)
 

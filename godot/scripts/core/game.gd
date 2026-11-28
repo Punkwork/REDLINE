@@ -432,12 +432,12 @@ func _start_turn() -> void:
 		ice.rainbow = -1
 	_sync_strengths()
 	if _rack_has("SURGE_PROTECTOR"):
-		shield += (2 + amp) * _rack_count("SURGE_PROTECTOR")
+		shield += (CardDB.param("SURGE_PROTECTOR", "shield") + amp) * _rack_count("SURGE_PROTECTOR")
 	var n := draw_size()
 	if enc.turn == 1 and ghost_draw_enabled and footprint_band() == "GHOST":
 		n += 1
 	if enc.turn == 1 and _rack_has("READY_STANCE"):
-		n += _rack_count("READY_STANCE")
+		n += _rack_count("READY_STANCE") * CardDB.param("READY_STANCE", "draw")
 	# TURN-001: after the first turn, the hand was already drawn before the Corporation Response.
 	if enc.turn == 1 or not CORE_LOOP:
 		draw_cards(n)
@@ -716,18 +716,18 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 				pending = {"kind": "retrieve", "options": opts, "card_uid": inst.uid}
 				discard.append(inst)
 				phase = "CHOICE"
-		"PULP_SHIELD": shield += 3
+		"PULP_SHIELD": shield += CardDB.param("PULP_SHIELD", "shield")
 		"PROBE":
 			# PROBE-004a: choose one. Both modes add to the same per-ICE, per-turn count (PROBE-003, Q6).
 			_probe_count_add(target)
 			if String(inst.get("mode", "weaken")) == "reveal":
 				_probe_reveal_all(target)
 			else:
-				reduce_ice_str(target, 2)
+				reduce_ice_str(target, CardDB.param("PROBE", "modes.weaken.amount"))
 		# ECHO
 		"SMOKESCREEN":
-			shield += 2
-			enc.smoke = 2
+			shield += CardDB.param("SMOKESCREEN", "shield")
+			enc.smoke = CardDB.param("SMOKESCREEN", "trace_less")
 		"DEAD_AIR":
 			var opts := []
 			for c in hand:
@@ -748,10 +748,10 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 			enc.blackout = true
 			return true
 		# RIOT
-		"OVERLOAD": reduce_ice_str(target, 2)
-		"FEEDBACK": reduce_ice_str(target, trace / 10)
-		"ADRENAL_SPIKE": bw += 1
-		"LAY_LOW": trace = maxi(0, trace - 3)
+		"OVERLOAD": reduce_ice_str(target, CardDB.param("OVERLOAD", "str_down"))
+		"FEEDBACK": reduce_ice_str(target, trace / CardDB.param("FEEDBACK", "per_trace") * CardDB.param("FEEDBACK", "str_down"))
+		"ADRENAL_SPIKE": bw += CardDB.param("ADRENAL_SPIKE", "bw_gain")
+		"LAY_LOW": trace = maxi(0, trace - CardDB.param("LAY_LOW", "trace_down"))
 		"SMASH": reduce_ice_str(target, 4)
 		"ROAR": draw_cards(2)
 		"CRASH_CART":
@@ -806,53 +806,53 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"GHOST_SIGNAL":
 			enc.ghost = true
 			return true
-		"HARDENED_SHELL": shield += 7
+		"HARDENED_SHELL": shield += CardDB.param("HARDENED_SHELL", "shield")
 		"FLINCH":
-			shield += 2
+			shield += CardDB.param("FLINCH", "shield")
 			return true
 		"MIRROR":
-			shield += 3
-			draw_cards(1)
-		"DEEP_PROBE": reduce_ice_str(target, 5 if CORE_LOOP else 4)   # STR-001: −5 in the core-loop build
+			shield += CardDB.param("MIRROR", "shield")
+			draw_cards(CardDB.param("MIRROR", "draw"))
+		"DEEP_PROBE": reduce_ice_str(target, CardDB.param("DEEP_PROBE", "str_down") if CORE_LOOP else 4)   # STR-001: −5 in the core-loop build
 		"STRESS_TEST":
 			for i in enc.ice.size():
-				reduce_ice_str(i, 1)
-		"JAMMER": enc["jammer"] = 2   # RIDER-001: the first 2 TRACE subroutines next response add 0
+				reduce_ice_str(i, CardDB.param("STRESS_TEST", "str_down"))
+		"JAMMER": enc["jammer"] = CardDB.param("JAMMER", "subroutines")   # RIDER-001: the first 2 TRACE subroutines next response add 0
 		"DEFRAG":
 			if CORE_LOOP:   # DEFRAG-001: discard 1 card, then draw 2
-				pending = {"kind": "discard", "n": 1, "then_draw": 2}
+				pending = {"kind": "discard", "n": CardDB.param("DEFRAG", "discard"), "then_draw": CardDB.param("DEFRAG", "draw")}
 				phase = "CHOICE"
-				_say("DEFRAG: choose a card to discard, then draw 2.")
+				_say("DEFRAG: choose a card to discard, then draw %d." % CardDB.param("DEFRAG", "draw"))
 			else:
 				draw_cards(1)
-		"STIM_PATCH": draw_cards(2)
+		"STIM_PATCH": draw_cards(CardDB.param("STIM_PATCH", "draw"))
 		"BURST":
 			if CORE_LOOP:   # BURST-001: 3 BW, gain 5 BW; this copy costs 1 more each play this encounter; not BURNED
-				bw += 5
+				bw += CardDB.param("BURST", "bw_gain")
 				core_stats.max_bw = maxi(int(core_stats.max_bw), bw)
 				enc["burst_plays"] = enc.get("burst_plays", {})
 				enc.burst_plays[inst.uid] = int(enc.burst_plays.get(inst.uid, 0)) + 1
 			else:
 				bw += 1
 				return true
-		"SCRUB": trace = max(0, trace - 4)
+		"SCRUB": trace = max(0, trace - CardDB.param("SCRUB", "trace_down"))
 		"BURN_NOTICE":
 			trace = trace / 2
 			return true
 		"PATCH_KIT":
-			heal(4)
+			heal(CardDB.param("PATCH_KIT", "heal"))
 			return true
 		"PAYDAY": extract(12)
 		"BALANCED_LOAD":
-			shield += 2
-			reduce_ice_str(target, 1)
+			shield += CardDB.param("BALANCED_LOAD", "shield")
+			reduce_ice_str(target, CardDB.param("BALANCED_LOAD", "str_down"))
 		"UNINSTALLER":
 			var opts := []
 			for c in hand:
 				if CardDB.def(c.id).type == "BLOATWARE":
 					opts.append(c.uid)
 			if opts.is_empty():
-				draw_cards(1)
+				draw_cards(CardDB.param("UNINSTALLER", "draw"))
 			else:
 				pending = {"kind": "uninstaller", "options": opts, "card_uid": inst.uid}
 				discard.append(inst)
@@ -993,11 +993,11 @@ func _begin_parting_shot() -> void:
 func _probe_extra(target: int) -> int:
 	## PROBE-003: +1 BW for each PROBE already played on that ICE this turn. No target: the cheapest ICE.
 	if target >= 0 and target < enc.ice.size():
-		return _probe_count(enc.ice[target])
+		return _probe_count(enc.ice[target]) * CardDB.param("PROBE", "escalation")
 	var best := 999
 	for ice in enc.ice:
 		best = mini(best, _probe_count(ice))
-	return 0 if best == 999 else best
+	return 0 if best == 999 else best * CardDB.param("PROBE", "escalation")
 
 func _probe_count(ice: Dictionary) -> int:
 	## Q6 (designer 2026-11-27): the count belongs to the ICE instance, so two copies of one ICE count apart.
@@ -1257,7 +1257,7 @@ func _choose(uid: int) -> void:
 		"uninstaller":
 			var c := _take_from(hand, uid)
 			burned.append(c)
-			draw_cards(1)
+			draw_cards(CardDB.param("UNINSTALLER", "draw"))
 		"field_kit":
 			# HAND-MAX-001: a full hand leaves the card on the draw pile.
 			if hand.size() >= MAX_HAND:
@@ -1358,7 +1358,7 @@ func break_info(i: int, s: int, pick_uid: int = -1) -> Dictionary:
 		if pk.itype != "ANY" and pk.itype != d.type and not shattered and not borrowed:
 			if not adapter:
 				continue
-			extra = 1
+			extra = CardDB.param("ADAPTER", "break_extra")
 		var need: int = max(0, ice_str(i) - pick_str(p))
 		var boosts := int(ceil(float(need) / float(pk.boost_amt)))
 		var boost_bw: int = boosts * pk.boost_cost
@@ -1704,7 +1704,7 @@ func add_cortex(n: int) -> void:
 			return
 		if _installed_has("CORTEX_BUFFER") and not enc.cortex_buffer_used:
 			enc.cortex_buffer_used = true
-			n -= 1
+			n -= CardDB.param("CORTEX_BUFFER", "prevent")
 	if n > 0:
 		cortex += n
 		_event("EV-17")
@@ -1777,7 +1777,7 @@ func add_trace(n: int, during_response: bool) -> void:
 			_say("GHOST SIGNAL: TRACE %d reduced to 0." % n)
 			return
 		if _rack_has("PROXY_CHAIN"):
-			n = max(0, n - _rack_count("PROXY_CHAIN"))
+			n = max(0, n - _rack_count("PROXY_CHAIN") * CardDB.param("PROXY_CHAIN", "trace_less"))
 	if n <= 0:
 		return
 	var before := trace
@@ -1959,7 +1959,7 @@ func card_cost(id: String, uid: int = -1, target: int = -1) -> int:
 	var c: int = maxi(0, d.bw - (_rack_count("CLEAN_BUILD") if d.has("compiled") else 0))
 	if CORE_LOOP and not enc.is_empty():
 		if id == "BURST" and uid >= 0:
-			c += int(enc.get("burst_plays", {}).get(uid, 0))   # BURST-001
+			c += int(enc.get("burst_plays", {}).get(uid, 0)) * CardDB.param("BURST", "cost_step")   # BURST-001
 		elif id == "PROBE":
 			c += _probe_extra(target)   # PROBE-003
 	# BERSERK: EXPLOIT SCRIPTS cost 1 less BW while TRACE is 20 or more.
@@ -2135,7 +2135,7 @@ func _virus_turn() -> void:
 			for i in enc.ice.size():
 				for k in enc.ice[i].virus.keys():
 					if enc.ice[i].virus[k] > 0:
-						infect(i, k, 1)
+						infect(i, k, CardDB.param("REPLICATOR", "counters"))
 	for i in enc.ice.size():
 		var l: int = int(enc.ice[i].virus.get("LEECH", 0))
 		if l > 0:
@@ -2332,6 +2332,7 @@ func card_text(id: String) -> String:
 	match id:
 		"WARM_BOOT": return "Whenever you REBOOT: +%d SHIELD (AMP included)." % (5 + amp)
 		"SHORT_LOOP": return "Whenever you REBOOT: +%d BW, draw %d (AMP included)." % [1 + amp, 2 + amp]
-		"SURGE_PROTECTOR", "PAIN_TOLERANCE": return d.text + " Current SHIELD: %d (AMP included)." % (2 + amp)
+		"SURGE_PROTECTOR": return d.text + " Current SHIELD: %d (AMP included)." % (CardDB.param("SURGE_PROTECTOR", "shield") + amp)
+		"PAIN_TOLERANCE": return d.text + " Current SHIELD: %d (AMP included)." % (2 + amp)
 		"SILENT_PARTNER": return d.text + " +%d AMP per payout." % amp
 	return d.text

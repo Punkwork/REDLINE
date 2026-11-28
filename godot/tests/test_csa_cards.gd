@@ -24,7 +24,7 @@ const APPROVED_TEXT := {
 ## card's BW is the sum of its parts' BW, so it follows its parts.
 const APPROVED_VALUES := {"NULL_POINTER": {"bw": 1}}   # NULL-POINTER-001 (designer 2026-11-24): 2 BW -> 1 BW
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
-const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved"]
+const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved", "params", "params_in_code", "text_template"]   # CSA-04i: params carry the numbers the text and engine used
 ## Approved new fields on single cards since the snapshot: id -> [fields].
 const APPROVED_FIELDS := {"PROBE": ["modes"], "PIVOT": ["zeroed_reduction"]}   # CSA-04b PROBE-004a; CSA-04d PIVOT
 ## Approved field removals since the snapshot: id -> [fields].

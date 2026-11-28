@@ -10,6 +10,9 @@ Markdown tables of the active docs, and lists approved PROBE-004a text versus th
 A prototype for the CSA-05 drift check; the proposal is docs/architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md.
 """
 import argparse, collections, glob, json, os, re
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from card_text import rules_text  # noqa: E402  CSA-04j: render the template
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Lore/history documents (AGENTS.md §7) and the decision records are not current card definitions.
@@ -21,7 +24,7 @@ RUSTLER_NAMES = {"ECHO", "RIOT", "VECTOR", "GENERALIST"}
 def card_db():
     """Card records from godot/data/cards.json (CSA-03: the single card source; CardDB loads it)."""
     data = json.load(open(os.path.join(ROOT, "godot/data/cards.json"), encoding="utf-8"))
-    out = {rec["name"].upper(): {"id": cid, "bw": rec["bw"], "text": rec.get("text", "")} for cid, rec in data["cards"].items()}
+    out = {rec["name"].upper(): {"id": cid, "bw": rec["bw"], "text": rules_text(rec)} for cid, rec in data["cards"].items()}
     return out, set(data.get("caps", {}))
 
 

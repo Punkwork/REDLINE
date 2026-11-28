@@ -19,7 +19,7 @@
 				"break_cost": 1,
 				"free_first": true
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. First break each turn free; then {pick.break_cost} BW per break.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -48,7 +48,7 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -73,7 +73,7 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -92,7 +92,7 @@
 			"ram": 1,
 			"rarity": "STARTER",
 			"extract": 3,
-			"text": "End of your turn: extract 3 CRED.",
+			"text": "End of your turn: extract {extract} CRED.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -110,7 +110,7 @@
 			"bw": 1,
 			"ram": 1,
 			"rarity": "STARTER",
-			"text": "Once per encounter, prevent 1 CORTEX.",
+			"text": "Once per encounter, prevent {prevent} CORTEX.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -118,7 +118,10 @@
 			"decisions": [
 				"CORE-001",
 				"NAME-001"
-			]
+			],
+			"params": {
+				"prevent": 1
+			}
 		},
 		"PULP_SHIELD": {
 			"name": "PULP Shield",
@@ -128,7 +131,7 @@
 			],
 			"bw": 1,
 			"rarity": "STARTER",
-			"text": "+3 SHIELD.",
+			"text": "+{shield} SHIELD.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -136,7 +139,10 @@
 			"decisions": [
 				"GENERALIST-001",
 				"GENERALIST-012"
-			]
+			],
+			"params": {
+				"shield": 3
+			}
 		},
 		"PROBE": {
 			"name": "PROBE",
@@ -150,14 +156,17 @@
 			"modes": [
 				{
 					"id": "weaken",
-					"label": "−2 STR this encounter"
+					"label": "−{amount} STR this encounter",
+					"params": {
+						"amount": 2
+					}
 				},
 				{
 					"id": "reveal",
 					"label": "Reveal all hidden subroutines (VOID)"
 				}
 			],
-			"text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",
+			"text": "Choose one: Target ICE: −{modes.weaken.amount} STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs {escalation} additional BW for each PROBE already played on the target ICE this turn.",
 			"flavor": "The deeper you probe, the costlier it gets.",
 			"status": {
 				"design": "approved",
@@ -169,7 +178,10 @@
 				"PROBE-004",
 				"PROBE-004a",
 				"CONSISTENCY-001a"
-			]
+			],
+			"params": {
+				"escalation": 1
+			}
 		},
 		"GHOST_SIGNAL": {
 			"name": "GHOST SIGNAL",
@@ -208,7 +220,7 @@
 				"break_cost": 1,
 				"free_first": true
 			},
-			"text": "STR 3. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. First break each turn free; then {pick.break_cost} BW per break.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -235,7 +247,7 @@
 				"break_cost": 1,
 				"free_first": true
 			},
-			"text": "STR 2. Boost: 1 BW → +2 STR. First break each turn free; then 1 BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. First break each turn free; then {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -260,7 +272,7 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR 3. Boost: 1 BW → +1 STR. Break: 1 BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -286,14 +298,15 @@
 				"break_cost": 1,
 				"double": true
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW for up to 2 subroutines on the same ICE.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW for up to 2 subroutines on the same ICE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params_in_code": true
 		},
 		"TASER": {
 			"name": "TASER",
@@ -311,7 +324,7 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -337,7 +350,7 @@
 				"break_cost": 1,
 				"shield_per_break": 2
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Each break: +2 SHIELD.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. Each break: +{pick.shield_per_break} SHIELD.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -362,7 +375,7 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on FORTRESS, TUMBLER and VOID.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. Works on FORTRESS, TUMBLER and VOID.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -381,7 +394,7 @@
 			"ram": 1,
 			"rarity": "COMMON",
 			"extract": 6,
-			"text": "End of your turn: extract 6 CRED.",
+			"text": "End of your turn: extract {extract} CRED.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -401,7 +414,7 @@
 			"rarity": "UNCOMMON",
 			"extract": 4,
 			"extract_on_install": 4,
-			"text": "When installed: extract 4 CRED. End of your turn: extract 4 CRED.",
+			"text": "When installed: extract {extract_on_install} CRED. End of your turn: extract {extract} CRED.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -420,14 +433,15 @@
 			"bw": 1,
 			"trace_cost": 2,
 			"rarity": "RARE",
-			"text": "Extract 12 CRED now. (+2 TRACE)",
+			"text": "Extract 12 CRED now. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params_in_code": true
 		},
 		"HARDENED_SHELL": {
 			"name": "HARDENED SHELL",
@@ -437,14 +451,17 @@
 			],
 			"bw": 2,
 			"rarity": "COMMON",
-			"text": "+7 SHIELD.",
+			"text": "+{shield} SHIELD.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params": {
+				"shield": 7
+			}
 		},
 		"FLINCH": {
 			"name": "FLINCH",
@@ -454,7 +471,7 @@
 			],
 			"bw": 0,
 			"rarity": "COMMON",
-			"text": "+2 SHIELD. BURNED.",
+			"text": "+{shield} SHIELD. BURNED.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -463,7 +480,10 @@
 				"BURNED-001",
 				"BURNED-001a",
 				"CARD-003"
-			]
+			],
+			"params": {
+				"shield": 2
+			}
 		},
 		"MIRROR": {
 			"name": "MIRROR",
@@ -473,14 +493,18 @@
 			],
 			"bw": 1,
 			"rarity": "UNCOMMON",
-			"text": "+3 SHIELD. Draw 1.",
+			"text": "+{shield} SHIELD. Draw {draw}.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params": {
+				"shield": 3,
+				"draw": 1
+			}
 		},
 		"SURGE_PROTECTOR": {
 			"name": "SURGE PROTECTOR",
@@ -488,14 +512,17 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "UNCOMMON",
-			"text": "Start of each of your turns: +2 SHIELD.",
+			"text": "Start of each of your turns: +{shield} SHIELD.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params": {
+				"shield": 2
+			}
 		},
 		"FAILSAFE": {
 			"name": "FAILSAFE",
@@ -521,7 +548,7 @@
 			"bw": 2,
 			"rarity": "COMMON",
 			"target": true,
-			"text": "Target ICE: −5 STR this encounter.",
+			"text": "Target ICE: −{str_down} STR this encounter.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -530,7 +557,10 @@
 				"STR-001",
 				"CONSISTENCY-001a",
 				"CARD-003"
-			]
+			],
+			"params": {
+				"str_down": 5
+			}
 		},
 		"STRESS_TEST": {
 			"name": "STRESS TEST",
@@ -540,14 +570,17 @@
 			],
 			"bw": 1,
 			"rarity": "UNCOMMON",
-			"text": "Every ICE: −1 STR this encounter.",
+			"text": "Every ICE: −{str_down} STR this encounter.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params": {
+				"str_down": 1
+			}
 		},
 		"JAMMER": {
 			"name": "JAMMER",
@@ -557,14 +590,17 @@
 			],
 			"bw": 1,
 			"rarity": "COMMON",
-			"text": "In the next Corporation Response, the first 2 TRACE subroutines add 0 TRACE (their ▸ effects don't happen).",
+			"text": "In the next Corporation Response, the first {subroutines} TRACE subroutines add 0 TRACE (their ▸ effects don't happen).",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"RIDER-001"
-			]
+			],
+			"params": {
+				"subroutines": 2
+			}
 		},
 		"DEFRAG": {
 			"name": "DEFRAG",
@@ -572,7 +608,7 @@
 			"tags": [],
 			"bw": 0,
 			"rarity": "COMMON",
-			"text": "Discard 1 card, then draw 2.",
+			"text": "Discard {discard} card, then draw {draw}.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -581,7 +617,11 @@
 				"DEFRAG-001",
 				"CONSISTENCY-001a",
 				"CARD-003"
-			]
+			],
+			"params": {
+				"discard": 1,
+				"draw": 2
+			}
 		},
 		"STIM_PATCH": {
 			"name": "STIM PATCH",
@@ -590,14 +630,17 @@
 			"bw": 0,
 			"trace_cost": 2,
 			"rarity": "UNCOMMON",
-			"text": "Draw 2. (+2 TRACE)",
+			"text": "Draw {draw}. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params": {
+				"draw": 2
+			}
 		},
 		"BURST": {
 			"name": "BURST",
@@ -605,7 +648,7 @@
 			"tags": [],
 			"bw": 3,
 			"rarity": "UNCOMMON",
-			"text": "Gain 5 BW. Each time you play this card this encounter, it costs 1 more BW for the rest of the encounter.",
+			"text": "Gain {bw_gain} BW. Each time you play this card this encounter, it costs {cost_step} more BW for the rest of the encounter.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -614,7 +657,11 @@
 				"BURST-001",
 				"CONSISTENCY-001a",
 				"CARD-003"
-			]
+			],
+			"params": {
+				"bw_gain": 5,
+				"cost_step": 1
+			}
 		},
 		"CO_PROCESSOR": {
 			"name": "CO-PROCESSOR",
@@ -626,7 +673,7 @@
 			"ram": 0,
 			"rarity": "UNCOMMON",
 			"ram_bonus": 1,
-			"text": "+1 RAM.",
+			"text": "+{ram_bonus} RAM.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -643,14 +690,17 @@
 			],
 			"bw": 1,
 			"rarity": "COMMON",
-			"text": "−4 TRACE.",
+			"text": "−{trace_down} TRACE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params": {
+				"trace_down": 4
+			}
 		},
 		"PROXY_CHAIN": {
 			"name": "PROXY CHAIN",
@@ -658,14 +708,17 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "UNCOMMON",
-			"text": "Whenever you would gain TRACE during a Corporation Response, gain 1 less.",
+			"text": "Whenever you would gain TRACE during a Corporation Response, gain {trace_less} less.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003"
-			]
+			],
+			"params": {
+				"trace_less": 1
+			}
 		},
 		"BURN_NOTICE": {
 			"name": "BURN NOTICE",
@@ -707,7 +760,7 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "UNCOMMON",
-			"text": "Choose a Bloatware in your hand: it's BURNED. Draw 1.",
+			"text": "Choose a Bloatware in your hand: it's BURNED. Draw {draw}.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -716,7 +769,10 @@
 				"BURNED-001",
 				"BURNED-001a",
 				"CARD-003"
-			]
+			],
+			"params": {
+				"draw": 1
+			}
 		},
 		"PATCH_KIT": {
 			"name": "PATCH KIT",
@@ -724,7 +780,7 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "UNCOMMON",
-			"text": "Heal 4 VITAE. BURNED.",
+			"text": "Heal {heal} VITAE. BURNED.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -733,7 +789,10 @@
 				"BURNED-001",
 				"BURNED-001a",
 				"CARD-003"
-			]
+			],
+			"params": {
+				"heal": 4
+			}
 		},
 		"FIELD_KIT": {
 			"name": "FIELD KIT",
@@ -778,14 +837,18 @@
 			"rarity": "COMMON",
 			"pool": "GENERALIST",
 			"target": true,
-			"text": "+2 SHIELD. Target ICE: −1 STR this encounter.",
+			"text": "+{shield} SHIELD. Target ICE: −{str_down} STR this encounter.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-004"
-			]
+			],
+			"params": {
+				"shield": 2,
+				"str_down": 1
+			}
 		},
 		"ADAPTER": {
 			"name": "ADAPTER",
@@ -795,14 +858,17 @@
 			"ram": 1,
 			"rarity": "UNCOMMON",
 			"pool": "GENERALIST",
-			"text": "Your Icepicks can break subroutines on any ICE type, for +1 BW per break.",
+			"text": "Your Icepicks can break subroutines on any ICE type, for +{break_extra} BW per break.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-004"
-			]
+			],
+			"params": {
+				"break_extra": 1
+			}
 		},
 		"RAM_UPGRADE": {
 			"name": "RAM UPGRADE",
@@ -815,7 +881,7 @@
 			"rarity": "UNCOMMON",
 			"pool": "GENERALIST",
 			"ram_bonus": 1,
-			"text": "+1 RAM.",
+			"text": "+{ram_bonus} RAM.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -831,14 +897,17 @@
 			"bw": 2,
 			"rarity": "UNCOMMON",
 			"pool": "GENERALIST",
-			"text": "On the first turn of each encounter, draw 1 extra card.",
+			"text": "On the first turn of each encounter, draw {draw} extra card.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-004"
-			]
+			],
+			"params": {
+				"draw": 1
+			}
 		},
 		"MULTITOOL": {
 			"name": "MULTITOOL",
@@ -857,7 +926,7 @@
 				"boost_amt": 1,
 				"break_cost": 2
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. Break: 2 BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -882,7 +951,7 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR 0. Boost: 2 BW → +1 STR. Break: 1 BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -929,7 +998,7 @@
 			"rarity": "STARTER",
 			"extract": 3,
 			"extract_quiet": 6,
-			"text": "End of your turn: extract 3 CRED. If you have gained no TRACE this encounter, extract 6 instead.",
+			"text": "End of your turn: extract {extract} CRED. If you have gained no TRACE this encounter, extract {extract_quiet} instead.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -947,7 +1016,7 @@
 			],
 			"bw": 1,
 			"rarity": "STARTER",
-			"text": "+2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2.",
+			"text": "+{shield} SHIELD. The first TRACE you gain during the next Corporation Response is reduced by {trace_less}.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -955,7 +1024,11 @@
 			"decisions": [
 				"RUSTLER-004",
 				"RUSTLER-007"
-			]
+			],
+			"params": {
+				"shield": 2,
+				"trace_less": 2
+			}
 		},
 		"DEAD_AIR": {
 			"name": "DEAD AIR",
@@ -973,7 +1046,8 @@
 			"decisions": [
 				"RUSTLER-004",
 				"RUSTLER-007"
-			]
+			],
+			"params_in_code": true
 		},
 		"MUFFLE": {
 			"name": "MUFFLE",
@@ -991,7 +1065,8 @@
 			},
 			"decisions": [
 				"CARD-005"
-			]
+			],
+			"params_in_code": true
 		},
 		"GHOST_STEP": {
 			"name": "GHOST STEP",
@@ -1009,7 +1084,8 @@
 			},
 			"decisions": [
 				"CARD-005"
-			]
+			],
+			"params_in_code": true
 		},
 		"PATIENCE": {
 			"name": "PATIENCE",
@@ -1027,7 +1103,8 @@
 			},
 			"decisions": [
 				"CARD-005"
-			]
+			],
+			"params_in_code": true
 		},
 		"DECOY_SIGNAL": {
 			"name": "DECOY SIGNAL",
@@ -1062,7 +1139,8 @@
 			},
 			"decisions": [
 				"CARD-005"
-			]
+			],
+			"params_in_code": true
 		},
 		"LONG_GAME": {
 			"name": "LONG GAME",
@@ -1078,7 +1156,8 @@
 			},
 			"decisions": [
 				"CARD-005"
-			]
+			],
+			"params_in_code": true
 		},
 		"VANISH": {
 			"name": "VANISH",
@@ -1117,7 +1196,7 @@
 				"boost_amt": 1,
 				"break_cost": 2
 			},
-			"text": "STR 3. Boost: 2 BW → +1 STR. Break: 2 BW. Any ICE type.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. Any ICE type.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1165,7 +1244,7 @@
 				"free_first": true,
 				"trace_per_break": 1
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. Each break: +1 TRACE.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. First break each turn free; then {pick.break_cost} BW per break. Each break: +{pick.trace_per_break} TRACE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1188,7 +1267,7 @@
 				"n": 1,
 				"max_str": 4
 			},
-			"text": "Break 1 subroutine on any ICE with STR 4 or less. (+4 TRACE)",
+			"text": "Break {breaker.n} subroutine on any ICE with STR {breaker.max_str} or less. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1208,7 +1287,7 @@
 			"trace_cost": 2,
 			"rarity": "STARTER",
 			"target": true,
-			"text": "Target ICE: −2 STR this encounter. (+2 TRACE)",
+			"text": "Target ICE: −{str_down} STR this encounter. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1216,7 +1295,10 @@
 			"decisions": [
 				"RUSTLER-005",
 				"RUSTLER-007"
-			]
+			],
+			"params": {
+				"str_down": 2
+			}
 		},
 		"FEEDBACK": {
 			"name": "FEEDBACK",
@@ -1227,7 +1309,7 @@
 			"bw": 2,
 			"rarity": "STARTER",
 			"target": true,
-			"text": "Target ICE: −1 STR this encounter for every 10 TRACE you have.",
+			"text": "Target ICE: −{str_down} STR this encounter for every {per_trace} TRACE you have.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1235,7 +1317,11 @@
 			"decisions": [
 				"RUSTLER-005",
 				"RUSTLER-007"
-			]
+			],
+			"params": {
+				"str_down": 1,
+				"per_trace": 10
+			}
 		},
 		"ADRENAL_SPIKE": {
 			"name": "ADRENAL SPIKE",
@@ -1244,7 +1330,7 @@
 			"bw": 0,
 			"trace_cost": 2,
 			"rarity": "STARTER",
-			"text": "Gain 1 BW. (+2 TRACE)",
+			"text": "Gain {bw_gain} BW. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1253,7 +1339,10 @@
 				"BASIC-001",
 				"RUSTLER-005",
 				"RUSTLER-007"
-			]
+			],
+			"params": {
+				"bw_gain": 1
+			}
 		},
 		"SHATTER": {
 			"name": "SHATTER",
@@ -1265,7 +1354,7 @@
 			"trace_cost": 3,
 			"rarity": "STARTER",
 			"target": true,
-			"text": "This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. (+3 TRACE)",
+			"text": "This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1284,7 +1373,7 @@
 			],
 			"bw": 1,
 			"rarity": "STARTER",
-			"text": "−3 TRACE.",
+			"text": "−{trace_down} TRACE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1293,7 +1382,10 @@
 				"BASIC-001",
 				"RUSTLER-005",
 				"RUSTLER-007"
-			]
+			],
+			"params": {
+				"trace_down": 3
+			}
 		},
 		"SMASH_AND_GRAB": {
 			"name": "SMASH & GRAB",
@@ -1308,7 +1400,7 @@
 			"extract_trace": 1,
 			"extract_trace_below": 20,
 			"uninstall_cache": true,
-			"text": "End turn: extract 3 CRED; +1 TRACE if below 20. 1 BW: uninstall this; CACHE another card in hand until the end of your next turn.",
+			"text": "End turn: extract {extract} CRED; +{extract_trace} TRACE if below {extract_trace_below}. 1 BW: uninstall this; CACHE another card in hand until the end of your next turn.",
 			"status": {
 				"design": "experimental",
 				"implementation": "implemented"
@@ -1318,7 +1410,8 @@
 				"CONSISTENCY-001a",
 				"RUSTLER-005",
 				"RUSTLER-007"
-			]
+			],
+			"params_in_code": true
 		},
 		"SMASH": {
 			"name": "SMASH",
@@ -1332,14 +1425,15 @@
 			"pool": "RIOT",
 			"target": true,
 			"target_type": "FORTRESS",
-			"text": "Target FORTRESS: −4 STR this encounter. (+3 TRACE)",
+			"text": "Target FORTRESS: −4 STR this encounter. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-006"
-			]
+			],
+			"params_in_code": true
 		},
 		"ROAR": {
 			"name": "ROAR",
@@ -1349,14 +1443,15 @@
 			"trace_cost": 3,
 			"rarity": "COMMON",
 			"pool": "RIOT",
-			"text": "Draw 2. (+3 TRACE)",
+			"text": "Draw 2. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-006"
-			]
+			],
+			"params_in_code": true
 		},
 		"CRASH_CART": {
 			"name": "CRASH CART",
@@ -1374,7 +1469,8 @@
 			},
 			"decisions": [
 				"CARD-006"
-			]
+			],
+			"params_in_code": true
 		},
 		"PAIN_TOLERANCE": {
 			"name": "PAIN TOLERANCE",
@@ -1390,7 +1486,8 @@
 			},
 			"decisions": [
 				"CARD-006"
-			]
+			],
+			"params_in_code": true
 		},
 		"BERSERK": {
 			"name": "BERSERK",
@@ -1406,7 +1503,8 @@
 			},
 			"decisions": [
 				"CARD-006"
-			]
+			],
+			"params_in_code": true
 		},
 		"WRECKING_BALL": {
 			"name": "WRECKING BALL",
@@ -1426,7 +1524,7 @@
 				"break_cost": 0,
 				"trace_per_break": 2
 			},
-			"text": "STR 3. Boost: 1 BW → +1 STR. Break: 0 BW, +2 TRACE.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW, +{pick.trace_per_break} TRACE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1453,7 +1551,7 @@
 				"break_cost": 0,
 				"trace_per_break": 2
 			},
-			"text": "STR 2. Boost: 1 BW → +1 STR. Break: 0 BW, +2 TRACE.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW, +{pick.trace_per_break} TRACE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1472,14 +1570,15 @@
 			"trace_cost": 5,
 			"rarity": "RARE",
 			"pool": "RIOT",
-			"text": "Break 1 subroutine on every ICE with STR 3 or less. (+5 TRACE)",
+			"text": "Break 1 subroutine on every ICE with STR 3 or less. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-006"
-			]
+			],
+			"params_in_code": true
 		},
 		"NO_WITNESSES": {
 			"name": "NO WITNESSES",
@@ -1499,7 +1598,8 @@
 				"BURNED-001",
 				"BURNED-001a",
 				"CARD-006"
-			]
+			],
+			"params_in_code": true
 		},
 		"STINGER": {
 			"name": "STINGER",
@@ -1518,7 +1618,7 @@
 				"break_cost": 1,
 				"rot_per_break": 1
 			},
-			"text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. Each break also INFECTs 1 ROT on that ICE.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. Each break also INFECTs {pick.rot_per_break} ROT on that ICE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1543,7 +1643,7 @@
 				"n": 1,
 				"min_virus": 2
 			},
-			"text": "Break 1 subroutine on any ICE with 2 or more virus counters. (+1 TRACE)",
+			"text": "Break {breaker.n} subroutine on any ICE with {breaker.min_virus} or more virus counters. (+{trace_cost} TRACE)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1566,7 +1666,7 @@
 			"infect": {
 				"ROT": 2
 			},
-			"text": "INFECT 2 ROT. (Each ROT: −1 STR.)",
+			"text": "INFECT {infect.ROT} ROT. (Each ROT: −1 STR.)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1585,7 +1685,7 @@
 			"bw": 1,
 			"ram": 1,
 			"rarity": "STARTER",
-			"text": "Start of your turn: on every ICE with virus counters, add 1 counter of each strain already on it.",
+			"text": "Start of your turn: on every ICE with virus counters, add {counters} counter of each strain already on it.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1593,7 +1693,10 @@
 			"decisions": [
 				"RUSTLER-006",
 				"RUSTLER-007"
-			]
+			],
+			"params": {
+				"counters": 1
+			}
 		},
 		"OUTBREAK": {
 			"name": "OUTBREAK",
@@ -1627,7 +1730,7 @@
 			"infect": {
 				"SCRAMBLE": 2
 			},
-			"text": "INFECT 2 SCRAMBLE. (Each SCRAMBLE: this ICE's PULP subroutines deal 1 less.)",
+			"text": "INFECT {infect.SCRAMBLE} SCRAMBLE. (Each SCRAMBLE: this ICE's PULP subroutines deal 1 less.)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1649,7 +1752,7 @@
 			"infect": {
 				"BLIND": 2
 			},
-			"text": "INFECT 2 BLIND. (Each BLIND: this ICE's TRACE subroutines add 1 less.)",
+			"text": "INFECT {infect.BLIND} BLIND. (Each BLIND: this ICE's TRACE subroutines add 1 less.)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1671,7 +1774,7 @@
 			"infect": {
 				"LEECH": 2
 			},
-			"text": "INFECT 2 LEECH. (Each LEECH: extract 1 CRED at the start of your turn.)",
+			"text": "INFECT {infect.LEECH} LEECH. (Each LEECH: extract 1 CRED at the start of your turn.)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1697,7 +1800,8 @@
 			},
 			"decisions": [
 				"CARD-007"
-			]
+			],
+			"params_in_code": true
 		},
 		"WORMHOLE": {
 			"name": "WORMHOLE",
@@ -1713,7 +1817,7 @@
 				"WORM": 1,
 				"ROT": 1
 			},
-			"text": "INFECT 1 WORM and 1 ROT. (WORM: on your turn, remove 2 WORM from an ICE to break 1 of its subroutines. Each ROT: −1 STR.)",
+			"text": "INFECT {infect.WORM} WORM and {infect.ROT} ROT. (WORM: on your turn, remove 2 WORM from an ICE to break 1 of its subroutines. Each ROT: −1 STR.)",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1746,7 +1850,8 @@
 			},
 			"decisions": [
 				"CARD-007"
-			]
+			],
+			"params_in_code": true
 		},
 		"INCUBATOR": {
 			"name": "INCUBATOR",
@@ -1762,7 +1867,8 @@
 			},
 			"decisions": [
 				"CARD-007"
-			]
+			],
+			"params_in_code": true
 		},
 		"PANDEMIC": {
 			"name": "PANDEMIC",
@@ -1799,7 +1905,7 @@
 				"min_virus": 5,
 				"same_ice": true
 			},
-			"text": "Break 2 subroutines on target ICE with 5 or more virus counters.",
+			"text": "Break {breaker.n} subroutines on target ICE with {breaker.min_virus} or more virus counters.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1825,7 +1931,8 @@
 				"BURNED-001a",
 				"BURNED-001b",
 				"ICE-004"
-			]
+			],
+			"params_in_code": true
 		},
 		"TRACER": {
 			"name": "TRACER",
@@ -1841,7 +1948,8 @@
 			},
 			"decisions": [
 				"ICE-004"
-			]
+			],
+			"params_in_code": true
 		},
 		"WARM_BOOT": {
 			"name": "WARM BOOT",
@@ -1859,7 +1967,8 @@
 			"decisions": [
 				"DSY-007",
 				"DSY-CARDS-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"ROLLING_RESTART": {
 			"name": "ROLLING RESTART",
@@ -1875,7 +1984,8 @@
 			"decisions": [
 				"DSY-007",
 				"DSY-CARDS-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"FORCE_REBOOT": {
 			"name": "FORCE REBOOT",
@@ -1910,7 +2020,8 @@
 			"decisions": [
 				"DSY-007",
 				"DSY-CARDS-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"PORT_SCAN": {
 			"name": "PORT SCAN",
@@ -1926,7 +2037,8 @@
 			"decisions": [
 				"DSY-008",
 				"DSY-CARDS-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"GARBAGE_COLLECT": {
 			"name": "GARBAGE COLLECT",
@@ -1943,7 +2055,8 @@
 				"CONSISTENCY-001a",
 				"BURNED-001",
 				"BURNED-001a"
-			]
+			],
+			"params_in_code": true
 		},
 		"TAIL_CALL": {
 			"name": "TAIL CALL",
@@ -1970,7 +2083,7 @@
 			"rarity": "COMMON",
 			"target": true,
 			"zeroed_reduction": 1,
-			"text": "Target ICE −1 STR this encounter. If target ICE STR is 0, break one of the target ICE subroutines for no cost.",
+			"text": "Target ICE −{zeroed_reduction} STR this encounter. If target ICE STR is 0, break one of the target ICE subroutines for no cost.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1998,7 +2111,8 @@
 			"decisions": [
 				"CHAIN-PARK-001",
 				"CONSISTENCY-001a"
-			]
+			],
+			"params_in_code": true
 		},
 		"KILL_CHAIN": {
 			"name": "KILL CHAIN",
@@ -2014,7 +2128,8 @@
 			"decisions": [
 				"CHAIN-PARK-001",
 				"CONSISTENCY-001a"
-			]
+			],
+			"params_in_code": true
 		},
 		"HANDOFF": {
 			"name": "HANDOFF",
@@ -2034,7 +2149,8 @@
 			"decisions": [
 				"CHAIN-PARK-001",
 				"CONSISTENCY-001a"
-			]
+			],
+			"params_in_code": true
 		},
 		"SCALPEL": {
 			"name": "SCALPEL",
@@ -2053,7 +2169,7 @@
 				"break_cost": 1,
 				"overkill": 2
 			},
-			"text": "STR 2. Boost 1 BW: +1 STR. Break 1 BW. OVERKILL 2: break costs 0 BW.",
+			"text": "STR {pick.str}. Boost {pick.boost_cost} BW: +{pick.boost_amt} STR. Break {pick.break_cost} BW. OVERKILL {pick.overkill}: break costs 0 BW.",
 			"status": {
 				"design": "experimental",
 				"implementation": "implemented"
@@ -2080,7 +2196,8 @@
 			"decisions": [
 				"DSY-009",
 				"DSY-CARDS-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"NULL_POINTER": {
 			"name": "NULL POINTER",
@@ -2097,7 +2214,7 @@
 				"same_ice": true,
 				"max_str": 0
 			},
-			"text": "Target ICE at 0 STR: break 2 subroutines, DEADLOCKs included. Normal limits apply. BURNED.",
+			"text": "Target ICE at 0 STR: break {breaker.n} subroutines, DEADLOCKs included. Normal limits apply. BURNED.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -2120,14 +2237,15 @@
 			"pool": "RIOT",
 			"target": true,
 			"zeroed_reduction": 2,
-			"text": "Target ICE −2 STR. ZEROED: −4 TRACE.",
+			"text": "Target ICE −{zeroed_reduction} STR. ZEROED: −4 TRACE.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"ZEROED-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"KNOCKOUT": {
 			"name": "KNOCKOUT",
@@ -2140,14 +2258,15 @@
 			"pool": "RIOT",
 			"target": true,
 			"zeroed_reduction": 3,
-			"text": "Target ICE −3 STR. ZEROED: break 1 subroutine (normal limits).",
+			"text": "Target ICE −{zeroed_reduction} STR. ZEROED: break 1 subroutine (normal limits).",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"ZEROED-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"SECOND_WIND": {
 			"name": "SECOND WIND",
@@ -2160,14 +2279,15 @@
 			"pool": "RIOT",
 			"target": true,
 			"zeroed_reduction": 1,
-			"text": "Target ICE −1 STR. ZEROED: gain 1 BW.",
+			"text": "Target ICE −{zeroed_reduction} STR. ZEROED: gain 1 BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"ZEROED-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"CULL": {
 			"name": "CULL",
@@ -2186,7 +2306,8 @@
 			},
 			"decisions": [
 				"DSY-010"
-			]
+			],
+			"params_in_code": true
 		},
 		"HARVEST": {
 			"name": "HARVEST",
@@ -2205,7 +2326,8 @@
 			},
 			"decisions": [
 				"DSY-010"
-			]
+			],
+			"params_in_code": true
 		},
 		"CLEAN_BUILD": {
 			"name": "CLEAN BUILD",
@@ -2222,7 +2344,8 @@
 			"decisions": [
 				"DSY-004",
 				"DSY-CARDS-001"
-			]
+			],
+			"params_in_code": true
 		},
 		"MINIMALIST": {
 			"name": "MINIMALIST",
@@ -2254,7 +2377,8 @@
 			},
 			"decisions": [
 				"CONSISTENCY-001a"
-			]
+			],
+			"params_in_code": true
 		},
 		"REACTIVE_ARMOUR": {
 			"name": "REACTIVE ARMOUR",

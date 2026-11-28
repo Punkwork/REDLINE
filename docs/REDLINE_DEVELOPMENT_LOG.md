@@ -392,3 +392,12 @@ Designer, 06:57: "Go ahead with jpeg format for 1/3 storage and upload all cards
 - Coverage: 93 of the 112 build cards now have art. The designer is painting the remaining 19. The 15 pending pool and Deck Synergy cards have no art yet.
 - Tests: `test_csa04_consumers` is 38/0, with six new art checks (lookup, 600×520 size, every file names a card, 83 JPEGs, coverage does not shrink). Every other suite is unchanged: test_game 433/0, adp 17/0, signal_carbon 672/0, parity 4,029/0, csa_cards 517/0, ui_typo_002 172/0, ui_inspector_001 59/0, pt13 10/0, Python 67/0. `shot_arch_v2_ice` passes. A one-off capture confirmed that the Inspector shows JPEG art (BRUTE FORCE).
 - Note: Godot re-encodes imported textures losslessly in exports (the existing import setting). The JPEG saving is in the repository, not the exported `.pck`.
+
+## 2026-11-28 — CSA-04i/j: engine parameters and rules-text templates (Claude Code)
+
+CSA-02 plan elements 3 and 4, kept in CSA-04 by the designer (06:35).
+- `CardDB.param(id, path)`: 26 core-loop cards have their numbers in `params` (or in existing fields such as `pick`, `breaker` and `trace_cost`). `game.gd` reads them in 37 places, and the V2 PROBE mode key reads `modes.weaken.amount`. Values are unchanged.
+- Templates: 69 records store `text` as a template. The Godot loader renders it and keeps `text_template`. `CardDB.rules_text(id)` and `tools/csa/card_text.py` (used by the validator, generated docs and drift scan) render identically. Every rendered text equals the approved text.
+- Enforcement: `validate_cards.py` rejects literal numbers in a built card's text unless the record says `params_in_code`, rejects stale flags and broken placeholders. `tests/python/test_card_text.py` (11 tests) checks that every parameter is read by the engine and every engine read resolves, and runs CSA T1 against a copy (text, `param()`, Inspector and `gen_card_docs --check` all follow one change).
+- Declared gap: 37 `params_in_code` records — DEAD AIR and RAINBOW TABLE in the core loop, and 35 cards switched off by STRIP-001.
+- Tests: `test_csa04_consumers` 47/0 (9 new); Python 78/0; every other suite unchanged (test_game 433/0, adp 17/0, signal_carbon 672/0, parity 4,029/0, csa_cards 517/0, spec PROBE 32/0, PIVOT 54/0, BURNED 29/0). Awaiting designer acceptance; CSA-04 closes on acceptance.

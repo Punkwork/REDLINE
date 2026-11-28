@@ -287,6 +287,8 @@ Requiring checks has consequences:
 | 04f | `tools/csa/gen_card_docs.py`: generated card views in Card Pools (11 tables) and Rustlers (4 starter decks); `--check` in CI; 5 approved never-built pool cards recorded as `pending` (Q8) | `169c28d` |
 | 04g | `UplinkContract`: services and Clinic mirrored from Core Rules §8.3 with a drift test; card eligibility from the reward pools (BASIC-001); base prices and shelf from the new `uplink` section of `cards.json` (UPL-008, UPLINK-SPEC-001); CAP prices from CAP records | `85e415f` |
 | 04h | Decision-ID backfill: 48 → 120 of 127 records cite decisions; a test fails on any new record without one | `3c53973` |
+| 04i | Plan element 3, `CardDB.param(id, path)`: the engine reads card numbers from the record. 26 core-loop cards gained `params`; `game.gd` reads them in 37 places through `param()` (and the V2 PROBE mode key one), values unchanged | see HANDOFF |
+| 04j | Plan element 4, templates: a record's `text` is a template (`{trace_cost}`, `{pick.boost_cost}`, `{shield}` from `params`, `{modes.weaken.amount}`); the loader renders it and keeps `text_template`; `CardDB.rules_text(id)`; Python twin `tools/csa/card_text.py` for the validator and generated docs. 69 records templated, every rendered text identical to before | see HANDOFF |
 
 **Consumer coverage (cards).**
 
@@ -309,11 +311,11 @@ Requiring checks has consequences:
 
 **No decision ID found (6):** CLEAN BUILD, PORT SCAN, ROLLING RESTART, SHORT LOOP, STACK SMASH, WARM BOOT, all Deck Synergy §9 "example cards" (approved with the document, DSY-001–014, but never approved as individual cards). PULP Shield was traced afterwards to GENERALIST-001 and GENERALIST-012, and the designer approved the six as cards (DSY-CARDS-001, 2026-11-28): **127 of 127 records cite decisions**.
 
-**Still open in CSA-04 (plan elements 3 and 4; designer 2026-11-28 06:35: "keep in csa 4"):**
-- `CardDB.param()`: engine numbers read from the record.
-- `rules_text()` templates.
-
-Card text is still stored literally in each record, and PIVOT, PROBE and NULL POINTER's numbers live in `game.gd`. The designer accepted 04e–h (06:34) and kept these two in CSA-04, so CSA-04 stays open until they are built.
+**Plan elements 3 and 4 (04i/j; kept in CSA-04 by the designer, 2026-11-28 06:35).** Built 2026-11-28, awaiting designer acceptance.
+- **Rules.** A number in a card's text is a placeholder that reads the record; the number exists once. The validator rejects a literal number in a built card's text unless the record declares `"params_in_code": true`, rejects that flag when the text has no literal, and rejects placeholders that don't resolve. A lone 0 ("STR 0", "costs 0 BW") and keyword reminder text ("(Each ROT: −1 STR.)") are not card numbers.
+- **Wiring.** `tests/python/test_card_text.py` fails when a record's parameter is not read by any `CardDB.param()` call (a number the text shows but the game ignores) or when an engine read does not resolve; `test_csa04_consumers` checks the same in Godot and that no card shows a raw placeholder. CSA T1 now runs as specified: changing `modes.weaken.amount` in a copy changes `param()`, `rules_text()`, the Inspector contract, and fails `gen_card_docs.py --check` until the docs are regenerated.
+- **Declared gap (`params_in_code`, 37 records).** Core loop: DEAD AIR ("CACHE 1": the choice prompt takes one card) and RAINBOW TABLE ("up to 2": the `double` flag). The other 35 are cards switched off in the core-loop build (STRIP-001), whose numbers stay in `game.gd` until those systems return; `validate_cards.py --register` lists them. The AMP wording in `game.card_text()` (WARM BOOT, SHORT LOOP, PAIN TOLERANCE, SILENT PARTNER) belongs to those cards and moves with them; SURGE PROTECTOR's reads its parameter.
+- **Semantic review stays human:** whether a template still reads well when its number changes (for example "Break {breaker.n} subroutine" if n became 2).
 
 ## 9. Remaining enforcement gaps (explicit)
 
