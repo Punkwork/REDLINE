@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """CSA-01 evidence scanner (Claude Code, 2026-11-27). Read-only; not a CI gate.
 
-Compares the card definitions in godot/scripts/core/cards.gd (CardDB.DEFS) with every card row in the
+Compares the card records in godot/data/cards.json (loaded by CardDB) with every card row in the
 Markdown tables of the active docs, and lists approved PROBE-004a text versus the engine text.
 
     python3 tools/csa/scan_card_drift.py            # summary
@@ -19,18 +19,10 @@ RUSTLER_NAMES = {"ECHO", "RIOT", "VECTOR", "GENERALIST"}
 
 
 def card_db():
-    src = open(os.path.join(ROOT, "godot/scripts/core/cards.gd"), encoding="utf-8").read()
-    part = src[src.index("const DEFS"):src.index("const STARTER_GENERALIST")]
-    keys = list(re.finditer(r'^\t"([A-Z0-9_]+)": \{', part, re.M))
-    out = {}
-    for k, nx in zip(keys, keys[1:] + [None]):
-        body = part[k.start():nx.start() if nx else len(part)]
-        name = re.search(r'"name": "([^"]+)"', body).group(1).upper()
-        text = re.search(r'"text": "((?:[^"\\]|\\.)*)"', body)
-        out[name] = {"id": k.group(1), "bw": int(re.search(r'"bw": (-?\d+)', body).group(1)),
-                     "text": text.group(1) if text else ""}
-    caps = set(re.findall(r'"([A-Z0-9_]+)": \{\s*"name": "[^"]+", "rarity"', src))
-    return out, caps
+    """Card records from godot/data/cards.json (CSA-03: the single card source; CardDB loads it)."""
+    data = json.load(open(os.path.join(ROOT, "godot/data/cards.json"), encoding="utf-8"))
+    out = {rec["name"].upper(): {"id": cid, "bw": rec["bw"], "text": rec.get("text", "")} for cid, rec in data["cards"].items()}
+    return out, set(data.get("caps", {}))
 
 
 def doc_rows():

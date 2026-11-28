@@ -1,438 +1,63 @@
 class_name CardDB
 extends RefCounted
-## Card definitions for the vertical slice.
-## Source: REDLINE_CORE_RULES.md §13, REDLINE_RUSTLERS.md §3, REDLINE_CARD_POOLS.md §3–4, REDLINE_ICE_CORP1.md §4.
-## All numbers are the docs' working values.
-
-const DEFS := {
-	# --- Generalist starter deck (Core Rules §13) ---
-	"FORTRESS_ICEPICK": {"name": "FORTRESS Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "FORTRESS", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "free_first": true},
-		"text": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break."},
-	"TUMBLER_ICEPICK": {"name": "TUMBLER Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "TUMBLER", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."},
-	"VOID_ICEPICK": {"name": "VOID Icepick", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "VOID", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."},
-	"BASIC_EXTRACTOR": {"name": "Basic Extractor", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"extract": 3, "text": "End of your turn: extract 3 CRED."},
-	"CORTEX_BUFFER": {"name": "CORTEX BUFFER", "type": "PROGRAM", "tags": [], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"text": "Once per encounter, prevent 1 CORTEX."},
-	"PULP_SHIELD": {"name": "PULP Shield", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER",
-		"text": "+3 SHIELD."},
-	"PROBE": {"name": "PROBE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "rarity": "STARTER", "target": true,
-		"text": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine.",
-		"flavor": "The deeper you probe, the costlier it gets."},
-	"GHOST_SIGNAL": {"name": "GHOST SIGNAL", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 2, "rarity": "STARTER",
-		"text": "The first TRACE added in the next Corporation Response becomes 0. BURNED."},
-
-	# --- Shared pool (Card Pools §3) ---
-	"BATTERING_RAM": {"name": "BATTERING RAM", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "COMMON",
-		"pick": {"itype": "FORTRESS", "str": 3, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "free_first": true},
-		"text": "STR 3. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break."},
-	"JACKHAMMER": {"name": "JACKHAMMER", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "UNCOMMON",
-		"pick": {"itype": "FORTRESS", "str": 2, "boost_cost": 1, "boost_amt": 2, "break_cost": 1, "free_first": true},
-		"text": "STR 2. Boost: 1 BW → +2 STR. First break each turn free; then 1 BW."},
-	"PASSKEY": {"name": "PASSKEY", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "COMMON",
-		"pick": {"itype": "TUMBLER", "str": 3, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 3. Boost: 1 BW → +1 STR. Break: 1 BW."},
-	"RAINBOW_TABLE": {"name": "RAINBOW TABLE", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "UNCOMMON",
-		"pick": {"itype": "TUMBLER", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "double": true},
-		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW for up to 2 subroutines on the same ICE."},
-	"TASER": {"name": "TASER", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "COMMON",
-		"pick": {"itype": "VOID", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW."},
-	"STUN_BATON": {"name": "STUN BATON", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "UNCOMMON",
-		"pick": {"itype": "VOID", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "shield_per_break": 2},
-		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Each break: +2 SHIELD."},
-	"SKELETON_KEY": {"name": "SKELETON KEY", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 2, "ram": 2, "rarity": "RARE",
-		"pick": {"itype": "ANY", "str": 3, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on FORTRESS, TUMBLER and VOID."},
-	"DATA_SIPHON": {"name": "DATA SIPHON", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "COMMON",
-		"extract": 6, "text": "End of your turn: extract 6 CRED."},
-	"SKIMMER": {"name": "SKIMMER", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 0, "ram": 1, "rarity": "UNCOMMON",
-		"extract": 4, "extract_on_install": 4, "text": "When installed: extract 4 CRED. End of your turn: extract 4 CRED."},
-	"PAYDAY": {"name": "PAYDAY", "type": "SCRIPT", "tags": ["EXTRACTOR", "EXPLOIT"], "bw": 1, "trace_cost": 2, "rarity": "RARE",
-		"text": "Extract 12 CRED now. (+2 TRACE)"},
-	"HARDENED_SHELL": {"name": "HARDENED SHELL", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 2, "rarity": "COMMON", "text": "+7 SHIELD."},
-	"FLINCH": {"name": "FLINCH", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 0, "rarity": "COMMON", "text": "+2 SHIELD. BURNED."},
-	"MIRROR": {"name": "MIRROR", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "UNCOMMON", "text": "+3 SHIELD. Draw 1."},
-	"SURGE_PROTECTOR": {"name": "SURGE PROTECTOR", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON",
-		"text": "Start of each of your turns: +2 SHIELD."},
-	"FAILSAFE": {"name": "FAILSAFE", "type": "PROTOCOL", "tags": [], "bw": 2, "rarity": "RARE",
-		"text": "The first time each encounter you would gain CORTEX, prevent all of it."},
-	"DEEP_PROBE": {"name": "DEEP PROBE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 2, "rarity": "COMMON", "target": true,
-		"text": "Target ICE: −5 STR this encounter."},
-	"STRESS_TEST": {"name": "STRESS TEST", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "rarity": "UNCOMMON",
-		"text": "Every ICE: −1 STR this encounter."},
-	"JAMMER": {"name": "JAMMER", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON",
-		"text": "In the next Corporation Response, the first 2 TRACE subroutines add 0 TRACE (their ▸ effects don't happen)."},
-	"DEFRAG": {"name": "DEFRAG", "type": "SCRIPT", "tags": [], "bw": 0, "rarity": "COMMON", "text": "Discard 1 card, then draw 2."},
-	"STIM_PATCH": {"name": "STIM PATCH", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 2, "rarity": "UNCOMMON",
-		"text": "Draw 2. (+2 TRACE)"},
-	"BURST": {"name": "BURST", "type": "SCRIPT", "tags": [], "bw": 3, "rarity": "UNCOMMON", "text": "Gain 5 BW. Each time you play this card this encounter, it costs 1 more BW for the rest of the encounter."},
-	"CO_PROCESSOR": {"name": "CO-PROCESSOR", "type": "PROGRAM", "tags": ["HARDWARE"], "bw": 2, "ram": 0, "rarity": "UNCOMMON",
-		"ram_bonus": 1, "text": "+1 RAM."},
-	"SCRUB": {"name": "SCRUB", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON", "text": "−4 TRACE."},
-	"PROXY_CHAIN": {"name": "PROXY CHAIN", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON",
-		"text": "Whenever you would gain TRACE during a Corporation Response, gain 1 less."},
-	"BURN_NOTICE": {"name": "BURN NOTICE", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 2, "rarity": "RARE",
-		"text": "Halve your TRACE (round down). BURNED."},
-	"SPAM_FILTER": {"name": "SPAM FILTER", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "COMMON",
-		"text": "The first Bloatware the corporation would INSERT each encounter goes to your discard pile instead."},
-	"UNINSTALLER": {"name": "UNINSTALLER", "type": "SCRIPT", "tags": [], "bw": 1, "rarity": "UNCOMMON",
-		"text": "Choose a Bloatware in your hand: it's BURNED. Draw 1."},
-	"PATCH_KIT": {"name": "PATCH KIT", "type": "SCRIPT", "tags": [], "bw": 1, "rarity": "UNCOMMON", "text": "Heal 4 VITAE. BURNED."},
-
-	# --- Generalist pool (Card Pools §4) ---
-	"FIELD_KIT": {"name": "FIELD KIT", "type": "SCRIPT", "tags": [], "bw": 1, "rarity": "COMMON", "pool": "GENERALIST",
-		"text": "Search your draw pile for a PROGRAM and put it in your hand."},
-	"TOOLBELT": {"name": "TOOLBELT", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "COMMON", "pool": "GENERALIST",
-		"text": "Your first Icepick boost each turn costs 0 BW."},
-	"BALANCED_LOAD": {"name": "BALANCED LOAD", "type": "SCRIPT", "tags": ["CLOAK", "EXPLOIT"], "bw": 1, "rarity": "COMMON", "pool": "GENERALIST",
-		"target": true, "text": "+2 SHIELD. Target ICE: −1 STR this encounter."},
-	"ADAPTER": {"name": "ADAPTER", "type": "PROGRAM", "tags": [], "bw": 1, "ram": 1, "rarity": "UNCOMMON", "pool": "GENERALIST",
-		"text": "Your Icepicks can break subroutines on any ICE type, for +1 BW per break."},
-	"RAM_UPGRADE": {"name": "RAM UPGRADE", "type": "PROGRAM", "tags": ["HARDWARE"], "bw": 1, "ram": 0, "rarity": "UNCOMMON", "pool": "GENERALIST",
-		"ram_bonus": 1, "text": "+1 RAM."},
-	"READY_STANCE": {"name": "READY STANCE", "type": "PROTOCOL", "tags": [], "bw": 2, "rarity": "UNCOMMON", "pool": "GENERALIST",
-		"text": "On the first turn of each encounter, draw 1 extra card."},
-	"MULTITOOL": {"name": "MULTITOOL", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "RARE", "pool": "GENERALIST",
-		"pick": {"itype": "ANY", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 2},
-		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 2 BW."},
-
-	# --- ECHO starter (Rustlers §4; HUSH is the TUMBLER Icepick since ROT-001) ---
-	"HUSH": {"name": "HUSH", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "TUMBLER", "str": 0, "boost_cost": 2, "boost_amt": 1, "break_cost": 1},
-		"text": "STR 0. Boost: 2 BW → +1 STR. Break: 1 BW."},
-	"BORROWED_CREDENTIALS": {"name": "BORROWED CREDENTIALS", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "cred_cost": 8, "rarity": "STARTER",
-		"target": true, "target_types": ["FORTRESS", "VOID"],
-		"text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements and break costs. Costs 8 CRED."},
-	"SLOW_DRIP": {"name": "SLOW DRIP", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"extract": 3, "extract_quiet": 6, "text": "End of your turn: extract 3 CRED. If you have gained no TRACE this encounter, extract 6 instead."},
-	"SMOKESCREEN": {"name": "SMOKESCREEN", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER",
-		"text": "+2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2."},
-	"DEAD_AIR": {"name": "DEAD AIR", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 0, "rarity": "STARTER",
-		"text": "CACHE 1 card in your hand."},
-
-	# --- ECHO pool (Card Pools §5) ---
-	"MUFFLE": {"name": "MUFFLE", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 0, "rarity": "COMMON", "pool": "ECHO", "text": "−2 TRACE."},
-	"GHOST_STEP": {"name": "GHOST STEP", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON", "pool": "ECHO", "text": "Draw 2."},
-	"PATIENCE": {"name": "PATIENCE", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON", "pool": "ECHO",
-		"text": "+4 SHIELD if you've gained no TRACE this encounter; otherwise +2 SHIELD."},
-	"DECOY_SIGNAL": {"name": "DECOY SIGNAL", "type": "SCRIPT", "tags": [], "bw": 1, "rarity": "COMMON", "pool": "ECHO",
-		"text": "Until the end of your turn, VOID reactive abilities do nothing."},
-	"SILENT_PARTNER": {"name": "SILENT PARTNER", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "UNCOMMON", "pool": "ECHO",
-		"text": "End of your turn: extract 2 CRED for each CLOAK card you played this turn."},
-	"LONG_GAME": {"name": "LONG GAME", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON", "pool": "ECHO",
-		"text": "While your TRACE is under 10, your Extractors extract +2 CRED each."},
-	"VANISH": {"name": "VANISH", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 2, "rarity": "UNCOMMON", "pool": "ECHO",
-		"text": "During the next Corporation Response, TRACE effects add nothing. BURNED."},
-	"SIDE_CHANNEL": {"name": "SIDE CHANNEL", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 2, "ram": 1, "rarity": "RARE", "pool": "ECHO",
-		"pick": {"itype": "ANY", "str": 3, "boost_cost": 2, "boost_amt": 1, "break_cost": 2},
-		"text": "STR 3. Boost: 2 BW → +1 STR. Break: 2 BW. Any ICE type."},
-	"BLACKOUT": {"name": "BLACKOUT", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 3, "rarity": "RARE", "pool": "ECHO",
-		"text": "Skip the next Corporation Response. BURNED."},
-
-	# --- RIOT starter (Rustlers §5) ---
-	"SLEDGE": {"name": "SLEDGE", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "FORTRESS", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "free_first": true, "trace_per_break": 1},
-		"text": "STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. Each break: +1 TRACE."},
-	"BRUTE_FORCE": {"name": "BRUTE FORCE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "trace_cost": 4, "rarity": "STARTER",
-		"breaker": {"n": 1, "max_str": 4}, "text": "Break 1 subroutine on any ICE with STR 4 or less. (+4 TRACE)"},
-	"OVERLOAD": {"name": "OVERLOAD", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 2, "rarity": "STARTER", "target": true,
-		"text": "Target ICE: −2 STR this encounter. (+2 TRACE)"},
-	"FEEDBACK": {"name": "FEEDBACK", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 2, "rarity": "STARTER", "target": true,
-		"text": "Target ICE: −1 STR this encounter for every 10 TRACE you have."},
-	"ADRENAL_SPIKE": {"name": "ADRENAL SPIKE", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 2, "rarity": "STARTER",
-		"text": "Gain 1 BW. (+2 TRACE)"},
-	# RIOT-003: SHATTER redesigned.
-	"SHATTER": {"name": "SHATTER", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "trace_cost": 3, "rarity": "STARTER", "target": true,
-		"text": "This turn, SLEDGE can break subroutines on target ICE of any type. At the end of your turn, SLEDGE drops to STR 0 for the rest of the encounter. (+3 TRACE)"},
-	"LAY_LOW": {"name": "LAY LOW", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "STARTER", "text": "−3 TRACE."},
-	"SMASH_AND_GRAB": {"name": "SMASH & GRAB", "type": "PROGRAM", "tags": ["EXTRACTOR"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"extract": 3, "extract_trace": 1, "extract_trace_below": 20, "uninstall_cache": true,
-		"text": "End turn: extract 3 CRED; +1 TRACE if below 20. 1 BW: uninstall this; CACHE another card in hand until the end of your next turn."},
-
-	# --- RIOT pool (Card Pools §6; SIGYL → TUMBLER) ---
-	"SMASH": {"name": "SMASH", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 3, "rarity": "COMMON", "pool": "RIOT",
-		"target": true, "target_type": "FORTRESS", "text": "Target FORTRESS: −4 STR this encounter. (+3 TRACE)"},
-	"ROAR": {"name": "ROAR", "type": "SCRIPT", "tags": [], "bw": 0, "trace_cost": 3, "rarity": "COMMON", "pool": "RIOT", "text": "Draw 2. (+3 TRACE)"},
-	"CRASH_CART": {"name": "CRASH CART", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON", "pool": "RIOT", "text": "−3 TRACE. +2 SHIELD."},
-	"PAIN_TOLERANCE": {"name": "PAIN TOLERANCE", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON", "pool": "RIOT",
-		"text": "Start of your turn: if your TRACE is 20 or more, +2 SHIELD."},
-	"BERSERK": {"name": "BERSERK", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON", "pool": "RIOT",
-		"text": "While your TRACE is 20 or more, your EXPLOIT SCRIPTS cost 1 less BW (minimum 0)."},
-	"WRECKING_BALL": {"name": "WRECKING BALL", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "UNCOMMON", "pool": "RIOT",
-		"pick": {"itype": "TUMBLER", "str": 3, "boost_cost": 1, "boost_amt": 1, "break_cost": 0, "trace_per_break": 2},
-		"text": "STR 3. Boost: 1 BW → +1 STR. Break: 0 BW, +2 TRACE."},
-	"CHAINSAW": {"name": "CHAINSAW", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "UNCOMMON", "pool": "RIOT",
-		"pick": {"itype": "VOID", "str": 2, "boost_cost": 1, "boost_amt": 1, "break_cost": 0, "trace_per_break": 2},
-		"text": "STR 2. Boost: 1 BW → +1 STR. Break: 0 BW, +2 TRACE."},
-	"FLASHPOINT": {"name": "FLASHPOINT", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 2, "trace_cost": 5, "rarity": "RARE", "pool": "RIOT",
-		"text": "Break 1 subroutine on every ICE with STR 3 or less. (+5 TRACE)"},
-	"NO_WITNESSES": {"name": "NO WITNESSES", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "RARE", "pool": "RIOT",
-		"text": "If your TRACE is 30 or more, set it to 10. BURNED."},
-
-	# --- VECTOR starter (Rustlers §6) ---
-	"STINGER": {"name": "STINGER", "type": "PROGRAM", "tags": ["ICEPICK"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"pick": {"itype": "VOID", "str": 0, "boost_cost": 1, "boost_amt": 1, "break_cost": 1, "rot_per_break": 1},
-		"text": "STR 0. Boost: 1 BW → +1 STR. Break: 1 BW. Each break also INFECTs 1 ROT on that ICE."},
-	"RUNTIME_ERROR": {"name": "RUNTIME ERROR", "type": "SCRIPT", "tags": ["EXPLOIT", "VIRUS"], "bw": 2, "trace_cost": 1, "rarity": "STARTER",
-		"breaker": {"n": 1, "min_virus": 2}, "text": "Break 1 subroutine on any ICE with 2 or more virus counters. (+1 TRACE)"},
-	"INJECT": {"name": "INJECT", "type": "SCRIPT", "tags": ["EXPLOIT", "VIRUS"], "bw": 1, "rarity": "STARTER", "target": true,
-		"infect": {"ROT": 2}, "text": "INFECT 2 ROT. (Each ROT: −1 STR.)"},
-	"REPLICATOR": {"name": "REPLICATOR", "type": "PROGRAM", "tags": ["VIRUS"], "bw": 1, "ram": 1, "rarity": "STARTER",
-		"text": "Start of your turn: on every ICE with virus counters, add 1 counter of each strain already on it."},
-	"OUTBREAK": {"name": "OUTBREAK", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 2, "rarity": "STARTER", "target": true,
-		"text": "Double the counters of every strain on target ICE."},
-
-	# --- VECTOR pool (Card Pools §7). INCUBATOR triggers on the corporation's PURGE (PURGE-001). ---
-	"SCRAMBLER": {"name": "SCRAMBLER", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 1, "rarity": "COMMON", "pool": "VECTOR", "target": true,
-		"infect": {"SCRAMBLE": 2}, "text": "INFECT 2 SCRAMBLE. (Each SCRAMBLE: this ICE's PULP subroutines deal 1 less.)"},
-	"BLINDFOLD": {"name": "BLINDFOLD", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 1, "rarity": "COMMON", "pool": "VECTOR", "target": true,
-		"infect": {"BLIND": 2}, "text": "INFECT 2 BLIND. (Each BLIND: this ICE's TRACE subroutines add 1 less.)"},
-	"LEECHWARE": {"name": "LEECHWARE", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 1, "rarity": "COMMON", "pool": "VECTOR", "target": true,
-		"infect": {"LEECH": 2}, "text": "INFECT 2 LEECH. (Each LEECH: extract 1 CRED at the start of your turn.)"},
-	"QUARANTINE": {"name": "QUARANTINE", "type": "SCRIPT", "tags": ["CLOAK"], "bw": 1, "rarity": "COMMON", "pool": "VECTOR", "target": true,
-		"text": "+1 SHIELD for each virus counter on target ICE (maximum +6)."},
-	"WORMHOLE": {"name": "WORMHOLE", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 1, "rarity": "UNCOMMON", "pool": "VECTOR", "target": true,
-		"infect": {"WORM": 1, "ROT": 1}, "text": "INFECT 1 WORM and 1 ROT. (WORM: on your turn, remove 2 WORM from an ICE to break 1 of its subroutines. Each ROT: −1 STR.)"},
-	"COCKTAIL": {"name": "COCKTAIL", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 2, "rarity": "UNCOMMON", "pool": "VECTOR", "target": true,
-		"infect": {"ROT": 1, "SCRAMBLE": 1, "BLIND": 1, "LEECH": 1, "WORM": 1}, "text": "INFECT 1 of each strain (ROT, SCRAMBLE, BLIND, LEECH, WORM)."},
-	"INCUBATOR": {"name": "INCUBATOR", "type": "PROTOCOL", "tags": [], "bw": 1, "rarity": "UNCOMMON", "pool": "VECTOR",
-		"text": "Whenever a PURGE removes virus counters from an ICE, INFECT 2 ROT on that ICE afterward."},
-	"PANDEMIC": {"name": "PANDEMIC", "type": "SCRIPT", "tags": ["VIRUS"], "bw": 3, "rarity": "RARE", "pool": "VECTOR", "target": true,
-		"text": "Copy all virus counters on target ICE onto every other ICE."},
-	"HOST_TAKEOVER": {"name": "HOST TAKEOVER", "type": "SCRIPT", "tags": ["VIRUS", "EXPLOIT"], "bw": 2, "rarity": "RARE", "pool": "VECTOR", "target": true,
-		"breaker": {"n": 2, "min_virus": 5, "same_ice": true}, "text": "Break 2 subroutines on an ICE with 5 or more virus counters."},
-
-	# --- Bloatware (ICE Corp 1 §4) ---
-	"SPAM": {"name": "SPAM", "type": "BLOATWARE", "tags": [], "bw": 1, "rarity": "BLOAT",
-		"text": "Can't be played normally. Pay 1 BW to clear it: it's BURNED for the rest of the Node."},
-	"TRACER": {"name": "TRACER", "type": "BLOATWARE", "tags": [], "bw": 0, "rarity": "BLOAT", "unplayable": true,
-		"text": "Can't be played. If TRACER is in your hand at the end of your turn: +3 TRACE."},
-	"WARM_BOOT": {
-		"name": "WARM BOOT",
-		"type": "PROTOCOL",
-		"bw": 1,
-		"rarity": "COMMON",
-		"tags": [
-			"ENGINE"
-		],
-		"text": "Whenever you REBOOT: +5 SHIELD."
-	},
-	"ROLLING_RESTART": {
-		"name": "ROLLING RESTART",
-		"type": "PROTOCOL",
-		"bw": 1,
-		"rarity": "UNCOMMON",
-		"tags": [],
-		"text": "Whenever you REBOOT: +1 AMP."
-	},
-	"FORCE_REBOOT": {
-		"name": "FORCE REBOOT",
-		"type": "SCRIPT",
-		"bw": 0,
-		"rarity": "UNCOMMON",
-		"tags": [],
-		"text": "Shuffle discard into draw pile. This is a REBOOT. BURNED."
-	},
-	"SHORT_LOOP": {
-		"name": "SHORT LOOP",
-		"type": "PROTOCOL",
-		"bw": 2,
-		"rarity": "RARE",
-		"tags": [
-			"ENGINE"
-		],
-		"text": "Whenever you REBOOT: gain 1 BW and draw 2."
-	},
-	"PORT_SCAN": {
-		"name": "PORT SCAN",
-		"type": "SCRIPT",
-		"bw": 0,
-		"rarity": "COMMON",
-		"tags": [],
-		"text": "SCAN 3, then draw 1."
-	},
-	"GARBAGE_COLLECT": {
-		"name": "GARBAGE COLLECT",
-		"type": "SCRIPT",
-		"bw": 0,
-		"rarity": "COMMON",
-		"tags": [],
-		"text": "BURN 1 other hand card for this Node. Draw 1."
-	},
-	"TAIL_CALL": {
-		"name": "TAIL CALL",
-		"type": "SCRIPT",
-		"bw": 1,
-		"rarity": "UNCOMMON",
-		"tags": [],
-		"text": "Put a SCRIPT from discard into your hand."
-	},
-	"PIVOT": {
-		"name": "PIVOT",
-		"type": "SCRIPT",
-		"tags": [
-			"EXPLOIT"
-		],
-		"bw": 1,
-		"rarity": "COMMON",
-		"target": true,
-		"chain": "CLOAK",
-		"text": "Target ICE −2 STR. CHAIN CLOAK: −1 more."
-	},
-	"COVER_FIRE": {
-		"name": "COVER FIRE",
-		"type": "SCRIPT",
-		"tags": [
-			"CLOAK"
-		],
-		"bw": 1,
-		"rarity": "COMMON",
-		"chain": "EXPLOIT",
-		"text": "+3 SHIELD. CHAIN EXPLOIT: +2 more."
-	},
-	"KILL_CHAIN": {
-		"name": "KILL CHAIN",
-		"type": "PROTOCOL",
-		"tags": [],
-		"bw": 2,
-		"rarity": "RARE",
-		"text": "Whenever you get a CHAIN bonus, draw 1 (maximum 2 per turn)."
-	},
-	"HANDOFF": {
-		"name": "HANDOFF",
-		"type": "SCRIPT",
-		"tags": [
-			"CLOAK"
-		],
-		"bw": 0,
-		"rarity": "COMMON",
-		"pool": "ECHO",
-		"chain": "CLOAK",
-		"text": "−2 TRACE. CHAIN CLOAK: draw 1."
-	},
-	"SCALPEL": {
-		"name": "SCALPEL",
-		"type": "PROGRAM",
-		"tags": [
-			"ICEPICK"
-		],
-		"bw": 1,
-		"ram": 1,
-		"rarity": "UNCOMMON",
-		"pick": {
-			"itype": "TUMBLER",
-			"str": 2,
-			"boost_cost": 1,
-			"boost_amt": 1,
-			"break_cost": 1,
-			"overkill": 2
-		},
-		"text": "STR 2. Boost 1 BW: +1 STR. Break 1 BW. OVERKILL 2: break costs 0 BW."
-	},
-	"STACK_SMASH": {
-		"name": "STACK SMASH",
-		"type": "SCRIPT",
-		"tags": [
-			"EXPLOIT"
-		],
-		"bw": 1,
-		"rarity": "UNCOMMON",
-		"pool": "RIOT",
-		"target": true,
-		"text": "Target ICE −1 STR per EXPLOIT played this turn, including this."
-	},
-	"NULL_POINTER": {"name": "NULL POINTER", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 2, "rarity": "RARE", "pool": "RIOT", "target": true,
-		"breaker": {"n": 2, "same_ice": true, "max_str": 0}, "text": "Target ICE at 0 STR: break 2 subroutines, DEADLOCKs included. Normal limits apply. BURNED."},
-	"FLATLINE": {"name": "FLATLINE", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "trace_cost": 2, "rarity": "COMMON", "pool": "RIOT", "target": true, "zeroed_reduction": 2,
-		"text": "Target ICE −2 STR. ZEROED: −4 TRACE."},
-	"KNOCKOUT": {"name": "KNOCKOUT", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 1, "rarity": "UNCOMMON", "pool": "RIOT", "target": true, "zeroed_reduction": 3,
-		"text": "Target ICE −3 STR. ZEROED: break 1 subroutine (normal limits)."},
-	"SECOND_WIND": {"name": "SECOND WIND", "type": "SCRIPT", "tags": ["EXPLOIT"], "bw": 0, "rarity": "UNCOMMON", "pool": "RIOT", "target": true, "zeroed_reduction": 1,
-		"text": "Target ICE −1 STR. ZEROED: gain 1 BW."},
-	"CULL": {
-		"name": "CULL",
-		"type": "SCRIPT",
-		"tags": [
-			"VIRUS"
-		],
-		"bw": 1,
-		"rarity": "COMMON",
-		"pool": "VECTOR",
-		"target": true,
-		"text": "Remove up to 3 virus counters from target ICE; +2 SHIELD each."
-	},
-	"HARVEST": {
-		"name": "HARVEST",
-		"type": "SCRIPT",
-		"tags": [
-			"VIRUS"
-		],
-		"bw": 0,
-		"rarity": "UNCOMMON",
-		"pool": "VECTOR",
-		"target": true,
-		"text": "Remove all LEECH from target ICE; extract 3 CRED each."
-	},
-	"CLEAN_BUILD": {
-		"name": "CLEAN BUILD",
-		"type": "PROTOCOL",
-		"tags": [],
-		"bw": 1,
-		"rarity": "UNCOMMON",
-		"pool": "GENERALIST",
-		"text": "Your COMPILED cards cost 1 less BW."
-	},
-	"MINIMALIST": {
-		"name": "MINIMALIST",
-		"type": "PROTOCOL",
-		"tags": [],
-		"bw": 1,
-		"rarity": "UNCOMMON",
-		"text": "While GHOST, your first break each turn costs 0 BW."
-	},
-	"ZERO_FOOTPRINT": {
-		"name": "ZERO FOOTPRINT",
-		"type": "SCRIPT",
-		"tags": [
-			"CLOAK"
-		],
-		"bw": 1,
-		"rarity": "RARE",
-		"text": "Reduce TRACE by cards below cap, maximum 10. BURNED."
-	},
-}
-
-const STARTER_GENERALIST := [
-	"FORTRESS_ICEPICK", "TUMBLER_ICEPICK", "VOID_ICEPICK", "BASIC_EXTRACTOR", "CORTEX_BUFFER",
-	"PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "PROBE", "PROBE", "PROBE", "GHOST_SIGNAL",
-]
-
-# ECHO-001: SLOW DRIP moved to ECHO's reward pool; ECHO starts with 3 PROBE and 3 PULP Shield.
-# ECHO-003: GHOST SIGNAL (a shared basic, BASIC-001) back in the starter deck; one SMOKESCREEN out.
-const STARTER_ECHO := [
-	"HUSH", "BORROWED_CREDENTIALS", "BASIC_EXTRACTOR", "PROBE", "PROBE", "PROBE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD",
-	"SMOKESCREEN", "DEAD_AIR", "GHOST_SIGNAL",
-]
+## Card definitions (CSA-03, CONSISTENCY-001a). The card records, CAPS, starter decks and reward pools live in
+## res://data/cards.json, the single authoritative source. This class loads it and keeps the API every caller
+## uses: DEFS, CAPS, STARTER_*, CORE_POOL, POOL_EXTRA, RUSTLERS, def(), reward_pool(), roles(), caps_of().
+## Edit cards in the JSON, not here. The comments that sat on the old constants are in git history (a278aee);
+## their decision IDs move into each record's "decisions" field (CSA-03 C2).
+const DATA_PATH := "res://data/cards.json"
+const SCHEMA := "panopticon.cards/1"
+static var DATA: Dictionary = _load_data()
+static var DEFS: Dictionary = DATA.get("cards", {})
+static var CAPS: Dictionary = DATA.get("caps", {})
+static var STARTER_GENERALIST: Array = DATA.get("starters", {}).get("GENERALIST", [])
+static var STARTER_ECHO: Array = DATA.get("starters", {}).get("ECHO", [])
+static var STARTER_RIOT: Array = DATA.get("starters", {}).get("RIOT", [])
+static var STARTER_VECTOR: Array = DATA.get("starters", {}).get("VECTOR", [])
 ## Cards offered in a Rustler's reward pool besides those tagged with "pool" (rarity used for the reward roll).
-const POOL_EXTRA := {"ECHO": {"SLOW_DRIP": "COMMON"}}
-# RIOT-002 (playtest): 15 cards. +1 SHATTER, +2 PROBE, +1 PULP Shield, −1 OVERLOAD.
-const STARTER_RIOT := [
-	"SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "FEEDBACK", "ADRENAL_SPIKE",
-	"PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "SMASH_AND_GRAB", "BASIC_EXTRACTOR",
-]
-const STARTER_VECTOR := [
-	"STINGER", "RUNTIME_ERROR", "INJECT", "INJECT", "INJECT", "REPLICATOR", "OUTBREAK", "PROBE",
-	"PULP_SHIELD", "PULP_SHIELD", "BASIC_EXTRACTOR", "GHOST_SIGNAL",
-]
+static var POOL_EXTRA: Dictionary = DATA.get("pool_extra", {})
+## STRIP-001: reward cards allowed in the core-loop build (only break, defend and build; no switched-off systems).
+static var CORE_POOL: Array = DATA.get("core_pool", [])
+
+static func _load_data() -> Dictionary:
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(DATA_PATH))
+	if not parsed is Dictionary or String(parsed.get("schema", "")) != SCHEMA:
+		push_error("CardDB: %s is missing or is not %s" % [DATA_PATH, SCHEMA])
+		return {}
+	var data: Dictionary = _whole_numbers(parsed)
+	_freeze(data)
+	return data
+
+static func _whole_numbers(v: Variant) -> Variant:
+	## JSON numbers arrive as floats. Every number in the card data is whole (tools/csa/validate_cards.py checks it).
+	if v is float and v == floorf(v):
+		return int(v)
+	if v is Dictionary:
+		var out := {}
+		for k in v:
+			out[k] = _whole_numbers(v[k])
+		return out
+	if v is Array:
+		var a := []
+		for x in v:
+			a.append(_whole_numbers(x))
+		return a
+	return v
+
+static func _freeze(v: Variant) -> void:
+	## Read-only, as the old constants were: nothing may change card data at run time.
+	if v is Dictionary:
+		for k in v:
+			_freeze(v[k])
+		v.make_read_only()
+	elif v is Array:
+		for x in v:
+			_freeze(x)
+		v.make_read_only()
+
 
 ## RUSTLER-001..008 (REDLINE_RUSTLERS.md). Shared stats: 30 VITAE, 4 BW, DRAW 6, 4 RAM.
-const RUSTLERS := {
+static var RUSTLERS: Dictionary = {
 	"GENERALIST": {"name": "THE GENERALIST", "quote": "A bit of everything. Enough of nothing.", "difficulty": 1,
 		"style": "Balanced: an Icepick for every ICE type.", "origin": "READY RIG",
 		"origin_text": "At the start of each ICE Node, choose one PROGRAM in your deck and install it for free.",
@@ -461,22 +86,8 @@ static func def(id: String) -> Dictionary:
 		return {"name": a.name + " ⨯ " + b.name, "type": "SCRIPT", "tags": tags, "bw": mini(4, a.bw + b.bw), "trace_cost": int(a.get("trace_cost", 0)) + int(b.get("trace_cost", 0)), "cred_cost": int(a.get("cred_cost", 0)) + int(b.get("cred_cost", 0)), "rarity": "RARE", "compiled": [parts[1], parts[2]], "target": a.get("target", false) or b.get("target", false), "text": a.text + " THEN " + b.text}
 	return DEFS[id]
 
-## STRIP-001: reward cards allowed in the core-loop build (only break, defend and build; no switched-off systems).
-const CORE_POOL := ["BATTERING_RAM", "JACKHAMMER", "PASSKEY", "RAINBOW_TABLE", "TASER", "STUN_BATON", "SKELETON_KEY",
-	"MULTITOOL", "ADAPTER", "DEEP_PROBE", "STRESS_TEST", "BALANCED_LOAD", "HARDENED_SHELL", "FLINCH", "MIRROR",
-	"SURGE_PROTECTOR", "SCRUB", "JAMMER", "PROXY_CHAIN", "BURN_NOTICE", "SPAM_FILTER", "UNINSTALLER", "PATCH_KIT", "DEFRAG",
-	"STIM_PATCH", "BURST", "CO_PROCESSOR", "RAM_UPGRADE", "FIELD_KIT", "TOOLBELT", "READY_STANCE"]
 
-## CAPS-TEST-001 (designer 2026-11-27): the five common CAPS (REDLINE_UPLINK_AND_CAPS.md §2, UPL-002).
-## Single-use, outside the deck, 0 BW, the Rustler's turn only (UPL-001). Uncommon and rare CAPS are
-## not in the engine yet.
-const CAPS := {
-	"BW_SPIKE": {"name": "BW SPIKE", "rarity": "COMMON", "price": 20, "text": "+2 BW this turn."},
-	"BULWARK": {"name": "BULWARK", "rarity": "COMMON", "price": 20, "text": "+8 SHIELD."},
-	"FLUSH": {"name": "FLUSH", "rarity": "COMMON", "price": 20, "text": "−8 TRACE."},
-	"NANOSUTURE": {"name": "NANOSUTURE", "rarity": "COMMON", "price": 20, "text": "Heal 8 VITAE."},
-	"CRACKER": {"name": "CRACKER", "rarity": "COMMON", "price": 20, "text": "Target ICE: −4 STR this encounter.", "target": true},
-}
+## CAPS-TEST-001 (designer 2026-11-27): the five common CAPS; data in res://data/cards.json ("caps").
 
 static func caps_of(rarity: String) -> Array:
 	var out := []

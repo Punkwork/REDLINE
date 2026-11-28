@@ -3430,3 +3430,23 @@ Retire TOLL (additional BW cost for breaking non-DEADLOCK subroutines) from acti
 
 ## MINIBOSS-001 — Unique signature abilities / FORTIFY (designer direction 2026-11-27)
 Each corporation has one mini-boss encounter, with a signature ability unique to that mini-boss. Reserve FORTIFY (formerly passive HARDENING) for one specific mini-boss as one of three candidate signature abilities; no standard ICE assignment. Existing HARDEN remains a distinct breakable subroutine. FORTIFY candidate retains +1 STR after each Corporation Countermeasure, maximum +3 bonus provisionally; final balance, corporation and ICE identity remain undecided. Signature abilities must justify complexity through strategic depth, agency, synergy, anticipation and cognitive-load value. No production implementation or roster changes in this documentation update.
+
+## MINIBOSS-003 — THE GRID: PROFILE + FORTIFY (designer approved 2026-11-27)
+IRONWATCH's mini-boss THE GRID retains its approved PROFILE ability and gains FORTIFY (formerly passive HARDENING), exclusive to THE GRID. FORTIFY grants +1 STR after each Corporation Countermeasure, maximum +3 bonus as a working balance value. PROFILE remains unchanged. Both are unique signature abilities, not breakable or disableable subroutines. Each corporate mini-boss must have at least one unique signature ability; multiple complementary abilities are permitted where strategically justified. Supersedes the single-ability implication of earlier mini-boss records and resolves FORTIFY's assignment. Preserve other mini-boss designs. Implementation and combined balance testing pending; no engine changes in this documentation update.
+
+## WATCHER-EXP-001 — WATCHER removed from standard ICE (designer approved 2026-11-27)
+Remove WATCHER from the standard ICE ability pool and HALCYON expansion/representative encounter mechanical coverage. Preserve as an experimental concept: each CLOAK card played generates 1 TRACE. Potential exceptional applications: mini-boss, specialized supporting ICE with meaningful counterplay, or discoverable/circumventable node security condition. None is approved for deployment. Evaluate strategic depth, agency, synergy, anticipation and cognitive load; test defensive deck viability, advance warning and viable counterplay. Design principle: abilities directly penalizing fundamental Rustler actions should be exceptional encounter conditions, not routine obstacles. Detailed experimental ownership: docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md. Supersedes standard WATCHER specifications; preserve historical records. No engine changes or production implementation authorized by this documentation update.
+
+## BOOTING-RETIRE-001 — BOOTING retired (designer approved 2026-11-27)
+Retire BOOTING, the passive ability locking DEADLOCK until Rustler turn three, from active design and representative encounter coverage. Mandatory waiting undermines efficient play and agency. Preserve historical records. Designer expressed interest in exploring optional protection of DEADLOCK by another subroutine or ICE, without making its removal mandatory; no replacement mechanic approved. Legacy rule/code reconciliation pending controlled implementation; no engine changes in this documentation update.
+
+## GUARD-001 — Optional DEADLOCK protection (designer approved direction 2026-11-27)
+GUARD is a supporting ICE subroutine protecting a linked DEADLOCK on another ICE. Breaking the protected DEADLOCK while GUARD remains unbroken triggers a consequence; breaking GUARD first avoids it. GUARD must never prohibit the DEADLOCK break or become a mandatory breach prerequisite. Exact consequence (candidate PULP or TRACE), magnitude, linking rules, timing and interaction with simultaneous breaks remain open for specification and balance. Supporting ICE need not have their own DEADLOCK. Include GUARD in Priority 2 HALCYON supporting ICE design and representative encounter coverage planning. INTERLOCK and ALARM LINK were unapproved alternatives in the BOOTING review and are not selected for development. No engine changes or final numerical rules authorized by this record.
+
+## 2026-11-27 — CAPS-TEST-001a recorded (Claude Code)
+
+Designer: a full CAP rack should prompt the player to discard one; not needed in the next build. Recorded in Master Design and HANDOFF. No code changes.
+
+## 2026-11-27 — CAPS-TEST-001b: CRACKER hint wording; STR limits tested (Claude Code)
+
+Hint changed to "Drag onto an ICE to inject (0 BW, your turn)." Added checks that CRACKER stops at STR 0 and at an ICE's minimum STR (behaviour unchanged). Tests: `test_game.gd` 430/0; `test_arch_v2_batch4.gd` 76/0.

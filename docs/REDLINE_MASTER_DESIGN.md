@@ -3745,3 +3745,5 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
   - Rare: REPRISE.
   - All shared, and added to the current reward pool. They become reward-eligible as each handler is implemented; until then they are `pending` and excluded.
 - **PATTERN ANALYSIS (ICE):** marked experimental. CHAIN_PULP has no trigger while CHAIN is parked; the definition is kept and stays out of maps until redesigned.
+
+**CSA-03 C1 built (Claude Code, 2026-11-27):** `godot/data/cards.json` is now the card source CardDB loads (API unchanged). Parity with the old constants is proven by `test_csa_cards.gd`; no behaviour change.

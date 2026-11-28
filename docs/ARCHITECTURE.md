@@ -39,10 +39,11 @@ Read `new_run()` → `enter_node()` → `_start_ice_node()` → `_start_encounte
 
 ## Data and approvals
 
-Runtime JSON lives in `godot/data/` and is included by the export preset. GDScript definitions hold card, ICE and map rules. Corporate themes and assets live in `godot/themes/` and `godot/assets/`.
+Runtime JSON lives in `godot/data/` and is included by the export preset. **Card data (CSA-03, CONSISTENCY-001a):** `cards.json` is the single source for card records, CAPS, starter decks and reward pools. `CardDB` (`cards.gd`) loads it read-only and keeps its API; edit cards in the JSON. `tools/csa/validate_cards.py` checks it, and `tests/test_csa_cards.gd` checks parity with the pre-migration constants. GDScript definitions still hold ICE and map rules. Corporate themes and assets live in `godot/themes/` and `godot/assets/`.
 
 | File | Consumer and meaning |
 |---|---|
+| `cards.json` | `CardDB` loads it: card records, CAPS, starter decks, core reward pool and pool extras (CSA-03). The single card source. |
 | `atomic_deco_punk.json` | `AtomicDecoPunk` and view components use it for presentation thresholds, timing, wear and sound. It is tuning data. |
 | `adp_copy.json` | `AdpCopy` picks approved, non-reveal text by corporation, kind and matching fields such as band or mood. |
 | `arch_copy.json` | `ArchCopy` validates lines, then checks `approval` and any reveal trigger. A caller must explicitly opt into proposed working copy. Island names use `approval: proposed` and `copy_status: working_copy`. Relocation lines and programme small print are approved. |
