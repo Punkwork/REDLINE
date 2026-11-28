@@ -810,7 +810,7 @@ func build_concept_face(d: Dictionary, id: String, rule: String, corp: bool, rar
  var window := Rect2(CONCEPT_RECT.position + Vector2(40, 165) * Vector2(k, CONCEPT_RECT.size.y / 840.0), Vector2(520, 515) * Vector2(k, CONCEPT_RECT.size.y / 840.0))
  var clip := Control.new(); clip.name = "PictureWindow"; clip.clip_contents = true; clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
  clip.position = window.position; clip.size = window.size; body.add_child(clip)
- var picture_path := "res://assets/concept/cards/%s.png" % id
+ var picture_path := CardDB.art_path(id)
  var graft: String = view.game._find(view.game.run_deck, uid).get("graft", "")
  if ResourceLoader.exists(picture_path):
   var picture := TextureRect.new(); picture.name = "Picture"; picture.texture = load(picture_path)

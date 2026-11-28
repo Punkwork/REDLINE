@@ -633,7 +633,7 @@ func build_cartridges() -> void:
   var cart := TextureButton.new(); cart.name = "Cartridge%d" % k
   var frame_path := "res://assets/concept/cards/CARD_FRAME_%s.png" % String(d.type)
   var frame: Texture2D = load(frame_path) if ResourceLoader.exists(frame_path) else null
-  var pic_path := "res://assets/concept/cards/%s.png" % p.inst.id
+  var pic_path := CardDB.art_path(p.inst.id)
   cart.texture_normal = frame if frame else null
   cart.ignore_texture_size = true; cart.stretch_mode = TextureButton.STRETCH_SCALE
   var cart_id: String = p.inst.id

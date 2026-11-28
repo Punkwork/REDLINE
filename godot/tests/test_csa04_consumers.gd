@@ -25,6 +25,7 @@ func run() -> void:
 	test_inspector_model()
 	await test_inspector_consumers()
 	test_uplink_contract()
+	test_card_art()
 	print("CSA-04 CONSUMERS: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -112,3 +113,27 @@ func test_uplink_contract() -> void:
 		print("  Uplink stock check %s: %s" % [r, "OK" if short.is_empty() else "; ".join(short)])
 	check(UplinkContract.stock_shortfalls("GENERALIST").is_empty(), "the current build can always stock a GENERALIST Uplink")
 
+
+## CARD-ART-001: imported card art is JPEG 600x520; the lookup prefers it; every art file names a real card.
+func test_card_art() -> void:
+	check(CardDB.art_path("PROBE").ends_with("PROBE.png"), "PNG art is still found where no JPEG exists")
+	check(CardDB.art_path("BRUTE_FORCE").ends_with("BRUTE_FORCE.jpg"), "JPEG art is preferred")
+	check(CardDB.inspector_model("HUSH").art == CardDB.art_path("HUSH"), "the inspector contract uses the art lookup")
+	var dir := "res://assets/concept/cards/"
+	var jpgs := 0
+	var bad := []
+	for f in DirAccess.get_files_at(dir):
+		if not (f.ends_with(".jpg") or f.ends_with(".png")) or f.begins_with("CARD_FRAME_"): continue
+		var id := f.get_basename()
+		if not CardDB.DEFS.has(id): bad.append(f)
+		if f.ends_with(".jpg"):
+			jpgs += 1
+			var t: Texture2D = load(dir + f)
+			if t == null or t.get_size() != Vector2(600, 520): bad.append(f + " size")
+	check(bad.is_empty(), "every card art file names a card and JPEGs are 600x520 (%s)" % [bad])
+	check(jpgs == 83, "83 imported JPEG card images (got %d)" % jpgs)
+	var with_art := 0
+	for id in CardDB.DEFS:
+		if ResourceLoader.exists(CardDB.art_path(id)): with_art += 1
+	print("  card art coverage: %d of %d cards" % [with_art, CardDB.DEFS.size()])
+	check(with_art >= 93, "art coverage did not shrink (%d cards)" % with_art)

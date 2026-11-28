@@ -383,3 +383,12 @@ Recorded designer approval of sections 1–8 in [Master Design §4](REDLINE_MAST
 ## 2026-11-28 — DSY-CARDS-001: Deck Synergy example cards approved (Claude Code)
 
 Designer, 06:57: "Approved all cards." WARM BOOT, SHORT LOOP, ROLLING RESTART, PORT SCAN, STACK SMASH and CLEAN BUILD cite the decision that introduced their mechanic (DSY-004, DSY-007, DSY-008, DSY-009) plus DSY-CARDS-001. Every card record now cites a decision (127 of 127), and `tests/python/test_csa_cards.py` fails on any new record without one. Record: `bddbdfb`. Data and docs only; `validate_cards.py` and the Python tests pass (67/0).
+
+## 2026-11-28 — CARD-ART-001: 83 card illustrations imported as JPEG (Claude Code)
+
+Designer, 06:57: "Go ahead with jpeg format for 1/3 storage and upload all cards."
+- 83 illustrations from the designer's `Card Images` folder are now `godot/assets/concept/cards/<CARD_ID>.jpg`: 600×520, JPEG quality 92, full colour resolution (4:4:4). That is 16 MB in total (about 195 KB each), against about 46 MB as PNG. HUSH uses the folder's `HUSH2`; BORROWED CREDENTIALS uses the original. The ten starter PNGs are unchanged.
+- `CardDB.art_path(id)` returns the `.jpg` when it exists, otherwise the `.png`. The Inspector contract, the encounter card face and the prototype hand card use it.
+- Coverage: 93 of the 112 build cards now have art. The designer is painting the remaining 19. The 15 pending pool and Deck Synergy cards have no art yet.
+- Tests: `test_csa04_consumers` is 38/0, with six new art checks (lookup, 600×520 size, every file names a card, 83 JPEGs, coverage does not shrink). Every other suite is unchanged: test_game 433/0, adp 17/0, signal_carbon 672/0, parity 4,029/0, csa_cards 517/0, ui_typo_002 172/0, ui_inspector_001 59/0, pt13 10/0, Python 67/0. `shot_arch_v2_ice` passes. A one-off capture confirmed that the Inspector shows JPEG art (BRUTE FORCE).
+- Note: Godot re-encodes imported textures losslessly in exports (the existing import setting). The JPEG saving is in the repository, not the exported `.pck`.

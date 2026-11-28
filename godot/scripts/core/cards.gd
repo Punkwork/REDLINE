@@ -120,7 +120,15 @@ static func inspector_model(id: String, records: Dictionary = {}) -> Dictionary:
 		"type": String(d.get("type", "")), "tags": tags,
 		"costs": {"bw": int(d.get("bw", 0)), "cred": int(d.get("cred_cost", 0)), "trace": int(d.get("trace_cost", 0))},
 		"rules": String(d.get("text", "")), "flavour": String(d.get("flavor", "")),
-		"art": "res://assets/concept/cards/%s.png" % id}
+		"art": art_path(id)}
+
+## CARD-ART-001: a card's illustration. Imported art is JPEG (<ID>.jpg, 600x520, quality 92, 4:4:4);
+## older art is PNG. Returns the .jpg when it exists, else the .png path (which may not exist: callers
+## already fall back to the drawn card face).
+static func art_path(id: String) -> String:
+	var jpg := "res://assets/concept/cards/%s.jpg" % id
+	if ResourceLoader.exists(jpg): return jpg
+	return "res://assets/concept/cards/%s.png" % id
 
 ## CAPS-TEST-001 (designer 2026-11-27): the five common CAPS; data in res://data/cards.json ("caps").
 
