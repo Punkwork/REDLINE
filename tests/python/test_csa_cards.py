@@ -163,9 +163,9 @@ class LiveFile(unittest.TestCase):
         reg = V.register()
         self.assertEqual(len(reg["pending"]), 5)    # CSA-04f: KEYLOGGER, STASH, QUANTUM CORE, HOT SWAP, JACK OF ALL TRADES (UI-PROTOCOL-001 built the ten playtest cards)
         self.assertEqual(sorted(reg["experimental"]), sorted(["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]))
-        # CSA-04d aligned PIVOT; CARD-REVIEW-001 (designer 2026-11-28) records STACK SMASH and VOID ICEPICK as
-        # divergent until their engine changes (REPRISE was aligned on 2026-11-28).
-        self.assertEqual(sorted(cid for cid, _ in reg["divergent"]), ["STACK_SMASH", "VOID_ICEPICK"])
+        # CSA-04d aligned PIVOT; CARD-REVIEW-001 (designer 2026-11-28) records STACK SMASH, TASER and VOID ICEPICK
+        # as divergent until their engine changes (REPRISE was aligned on 2026-11-28).
+        self.assertEqual(sorted(cid for cid, _ in reg["divergent"]), ["STACK_SMASH", "TASER", "VOID_ICEPICK"])
         self.assertNotIn("PROBE", [c for c, _ in reg["divergent"]])   # CSA-04b: PROBE aligned
         self.assertEqual(LIVE["starters"]["RIOT"].count("PROBE"), 4)   # RIOT-006
         self.assertNotIn("SMASH_AND_GRAB", LIVE["starters"]["RIOT"])

@@ -509,3 +509,7 @@ Designer, 10:13: REPRISE change approved, 2- and 3-layer Nodes approved as is, a
 ## 2026-11-28 — CARD-REVIEW-001 TASER (ChatGPT)
 
 Approved PARTING SHOT suppression recorded in canonical CardDB, Master and HANDOFF. Runtime divergent; flavor pending. No engine changes or tests run.
+
+## 2026-11-28 — CI fix for 08ce1eb; canonical data checks in AGENTS/CLAUDE (Claude Code)
+
+`08ce1eb` (CARD-REVIEW-001 TASER) made TASER divergent without updating the test that lists divergent cards, so CI failed (as `f02206d` did, fixed in `460680a`). The test now lists STACK SMASH, TASER and VOID ICEPICK. AGENTS.md and CLAUDE.md (identical) now require the canonical data checks before any commit that touches card data, maps or generated blocks; an agent that can't run them hands the data change to Claude Code (designer request, 11:27).

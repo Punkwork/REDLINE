@@ -53,6 +53,18 @@ Copies of design docs kept outside this repository, such as Claude Project docs 
 - **Break the copy guards:** a `reveal` line never shows before the third punch card (SIGNAL-001); the full word "Archipelago" never appears on screen, the underworld writes **’Pelago** (U+2019), and neither form appears in corporate or rules strings (ARCH-SLANG-001); "gulag" never appears on screen; no QR codes anywhere.
 - **Send data off the machine.** Play stats, ads and THE CARBON stay in `user://`.
 
+**Canonical data checks (run before every commit that touches `godot/data/cards.json`, `godot/data/maps/` or a doc with generated card blocks; designer 2026-11-28)**
+
+```bash
+python3 tools/csa/validate_cards.py
+python3 tools/csa/gen_card_docs.py          # regenerate the card blocks in the docs, then commit them too
+python3 tools/csa/gen_card_docs.py --check
+python3 tools/map/export_maps.py --check
+python3 -m unittest discover -s tests/python
+```
+
+All must pass in the same commit as the data change. If a change makes a card divergent or changes an approved value, update the tests that list them in that commit. An agent that can't run these checks does not commit card data: it records the decision (Master Design, the issue) and hands the data change to Claude Code.
+
 **Tests (run before every commit that touches `godot/`)**
 
 From the repository root, set `GODOT` to the Godot 4.3 editor executable. Import before running scripts on a fresh checkout.
