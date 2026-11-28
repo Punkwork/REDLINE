@@ -3727,8 +3727,10 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **PIVOT (CHAIN-PARK-001 follow-up, APPROVED):** "Chain mechanic is moved to Experimental. CHAIN should be removed from all current cards." New PIVOT text: **[1 BW] Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost.** (Designer's "taget" read as "target".) This is a rules change, implemented in a controlled rules commit with spec tests.
 
-**Open:**
-- CHAIN text on COVER FIRE, KILL CHAIN and HANDOFF: no replacement given.
-- Row 22: BURNED duration. The designer wrote "BURNED should be for the rest of the encounter", but Core Rules §3 and the engine use the rest of the Node. This changes a rule for 12 cards; awaiting confirmation and a decision ID.
-- Row 8: HOST TAKEOVER "Variant (both)", which conflicts with Q4 (no variants).
-- Rows 31, 32, 33, 35: MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB marked "Rename experimental", though they are not experimental cards.
+**Follow-up answers (designer, 2026-11-27, APPROVED):**
+- **BURNED-001 (rules change; ID assigned by Claude Code):** BURNED lasts **the rest of the encounter**, replacing "the rest of the Node" (Core Rules §3). Affects the 12 BURNED cards: GHOST SIGNAL, FLINCH, BURN NOTICE, UNINSTALLER, PATCH KIT, VANISH, BLACKOUT, NO WITNESSES, SPAM, FORCE REBOOT, NULL POINTER, ZERO FOOTPRINT. Core Rules, engine (`game.gd` `burned` reset at Node start/end) and tests change in a controlled rules commit with spec tests. GHOST SIGNAL prints "BURNED."
+- **Row 8 HOST TAKEOVER:** doc wording ("target ICE").
+- **Rows 31, 32, 33, 35:** MINIMALIST, SCALPEL, ZERO FOOTPRINT and SMASH & GRAB move to experimental (out of current cards).
+- **CHAIN cards:** COVER FIRE, KILL CHAIN and HANDOFF move to experimental. PIVOT stays, with its new text.
+
+**Consequence to note:** SMASH & GRAB is one of RIOT's 15 starter cards (`STARTER_RIOT`, RIOT-005), so RIOT's starter deck is one card short until it is redesigned. RIOT is not in the current core-loop build. ZERO FOOTPRINT is also a BURNED card, so it leaves the BURNED-001 list.

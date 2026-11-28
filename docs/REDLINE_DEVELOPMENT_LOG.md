@@ -293,3 +293,12 @@ Designer: Q4 core-loop values are the only current ones (no variants); Q2 confir
 - "Rename experimental" on MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB.
 
 *Interpretation to confirm:* "Delete this card" on repeated rows retires the docs' hand-written copies, not the cards. No code change.
+
+## 2026-11-27 — BURNED-001 and CSA-03 follow-ups recorded (Claude Code)
+
+Designer answers:
+- BURNED lasts the rest of the encounter (BURNED-001; rules change, Core Rules and engine pending);
+- HOST TAKEOVER uses the doc wording;
+- MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB, COVER FIRE, KILL CHAIN and HANDOFF move to experimental.
+
+RIOT's starter deck is one card short (SMASH & GRAB) until redesigned. CSA-03 is ready to start. No code change.
