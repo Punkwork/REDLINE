@@ -76,6 +76,8 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_spec_pivot.gd 2>&1 | tee -a /tmp/rules.log
           # CORTEX-001 (designer 2026-11-28): random discard + counter per unprevented point; TURN-001 timing.
           "$GODOT" --headless --path godot --script res://tests/test_spec_cortex.gd 2>&1 | tee -a /tmp/rules.log
+          # CARD-REVIEW-001: VOID ICEPICK reveal, TASER parting-shot suppression, STACK SMASH every ICE.
+          "$GODOT" --headless --path godot --script res://tests/test_spec_card_review.gd 2>&1 | tee -a /tmp/rules.log
           # UI-TYPO-002 (M06): event typography and motion treatments, expectations from the approved table.
           "$GODOT" --headless --path godot --script res://tests/test_ui_typo_002.gd 2>&1 | tee -a /tmp/rules.log
           # UI-INSPECTOR-001: the shared hover/rollover inspector, expectations from the approved specification.

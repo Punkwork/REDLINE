@@ -96,10 +96,10 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. Whenever you break a subroutine, reveal one remaining concealed subroutine on that ICE.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"STR-001",
@@ -116,9 +116,7 @@
 				"defensive_endurance": [
 					"support"
 				]
-			},
-			"approved_text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. Whenever you break a subroutine, reveal one remaining concealed subroutine on that ICE.",
-			"divergence": "Approved reveal after each successful break by this Icepick, next concealed subroutine in resolution order on the same ICE; no effect if none remain. Runtime reconciliation pending."
+			}
 		},
 		"BASIC_EXTRACTOR": {
 			"name": "Basic Extractor",
@@ -417,17 +415,15 @@
 				"boost_amt": 1,
 				"break_cost": 1
 			},
-			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
+			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. If TASER breaks at least one subroutine on an ICE, disable that ICE's PARTING SHOT.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"CARD-003",
 				"CARD-REVIEW-001"
 			],
-			"approved_text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. If TASER breaks at least one subroutine on an ICE, disable that ICE's PARTING SHOT.",
-			"divergence": "Approved encounter-local PARTING SHOT suppression after any successful TASER subroutine break on that ICE. Ordinary Corporation Responses unaffected; repeated breaks do not stack. Engine reconciliation pending.",
 			"strategy": {
 				"precision_breaching": [
 					"enabler"
@@ -2294,18 +2290,16 @@
 			"bw": 1,
 			"rarity": "UNCOMMON",
 			"pool": "RIOT",
-			"target": true,
-			"text": "Target ICE −1 STR per EXPLOIT played this turn, including this.",
+			"text": "Each ICE −{str_per} STR per EXPLOIT played this turn, including itself.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"DSY-009",
 				"DSY-CARDS-001",
 				"CARD-REVIEW-001"
 			],
-			"params_in_code": true,
 			"flavor": "One exploit. Widespread consequences.",
 			"strategy": {
 				"ice_suppression": [
@@ -2319,8 +2313,9 @@
 					"support"
 				]
 			},
-			"approved_text": "Each ICE −1 STR per EXPLOIT played this turn, including itself.",
-			"divergence": "Existing runtime targets one ICE. Approved revision affects each ICE in the current encounter without target selection; retain current runtime-facing target and text until atomic engine/data reconciliation. See CARD-REVIEW-001."
+			"params": {
+				"str_per": 1
+			}
 		},
 		"NULL_POINTER": {
 			"name": "NULL POINTER",

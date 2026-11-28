@@ -11,6 +11,10 @@ var failed := 0
 const APPROVED_CHANGES := {"RUSTLERS.RIOT.starter": "RIOT-006"}
 ## CSA-03 C3: approved wording now shown (CONSISTENCY-001a conflict table). id -> [field, new value].
 const APPROVED_TEXT := {
+	# CARD-REVIEW-001 (designer 2026-11-28), built 2026-11-28:
+	"VOID_ICEPICK": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Whenever you break a subroutine, reveal one remaining concealed subroutine on that ICE.",
+	"TASER": "STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. If TASER breaks at least one subroutine on an ICE, disable that ICE's PARTING SHOT.",
+	"STACK_SMASH": "Each ICE −1 STR per EXPLOIT played this turn, including itself.",
 	"TAIL_CALL": "Put a SCRIPT from your discard pile into your hand.",
 	"HOST_TAKEOVER": "Break 2 subroutines on target ICE with 5 or more virus counters.",
 	"FORCE_REBOOT": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
@@ -29,7 +33,7 @@ const METADATA := ["status", "decisions", "divergence", "approved_text", "unreso
 ## Approved new fields on single cards since the snapshot: id -> [fields].
 const APPROVED_FIELDS := {"PROBE": ["modes"], "PIVOT": ["zeroed_reduction"]}   # CSA-04b PROBE-004a; CSA-04d PIVOT
 ## Approved field removals since the snapshot: id -> [fields].
-const APPROVED_REMOVED := {"PIVOT": ["chain"]}   # CSA-04d, CHAIN-PARK-001: CHAIN removed from all current cards
+const APPROVED_REMOVED := {"PIVOT": ["chain"], "STACK_SMASH": ["target"]}   # CARD-REVIEW-001: STACK SMASH hits every ICE   # CSA-04d, CHAIN-PARK-001: CHAIN removed from all current cards
 const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "PROBE", "FEEDBACK",
 	"ADRENAL_SPIKE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "BASIC_EXTRACTOR"]
 ## SYNERGY-PLAYTEST-002 rarities (Master Design, playtest values): the shared reward pools that gain them.

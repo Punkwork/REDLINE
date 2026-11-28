@@ -71,7 +71,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 |---:|---|---|---|---|
 | 1 | **FORTRESS Icepick** | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. First break each turn free; then 1 BW per break. |
 | 1 | **TUMBLER Icepick** | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. |
-| 1 | **VOID Icepick** | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. |
+| 1 | **VOID Icepick** | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Whenever you break a subroutine, reveal one remaining concealed subroutine on that ICE. |
 | 1 | **Basic Extractor** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
 | 1 | **CORTEX BUFFER** | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. |
 | 3 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |

@@ -4054,3 +4054,8 @@ Designer approved all eight unique starter definitions (19 of 127 reviewed); dec
 ## CARD-REVIEW-001 — TASER revision (2026-11-28)
 
 Designer approved TASER's PARTING SHOT suppression and all proposed boundaries. Retain COMMON, STR 2, installation 1 BW, RAM 1, boost 1 BW/+1 STR, break 1 BW. After any successful TASER subroutine break, suppress that ICE's PARTING SHOT for this encounter only. Ordinary Corporation Responses unaffected; repeated breaks do not stack. Other ICE unaffected. Applies to any subroutine as interpreted from the approved proposed text. Canonical approved_text and divergence recorded pending engine reconciliation. Strategic roles: Precision Breaching, Program Synergy, Defensive Endurance — Enabler. Flavor not yet approved. Existing CSA/STRATEGY-001 acceptance required.
+
+## CARD-REVIEW-001 engine items approved and built; Ghostware single source (designer 2026-11-28 11:48)
+
+**Designer:** "the 4 card review items to build in the game are all approved. They all work as indicated. … we need to make Ghostware have a single source of truth, just like was done for cards. So I want you to perform CSA 06 and CSA 07 work. Primarily the first two steps"; 11:49: "hold the ghostware effects for later." Built: VOID ICEPICK reveals the next concealed subroutine on that ICE after each break; TASER's break turns off that ICE's PARTING SHOT for the encounter; STACK SMASH hits every ICE (no target); REPRISE was built earlier the same day. No card is divergent any more. Ghostware: the design-doc tables are generated from `cards.json` and ORIGIN text lives in the Ghostware records (CSA-06/07, this session). Ghostware engine effects are deferred by the designer.
+

@@ -513,3 +513,7 @@ Approved PARTING SHOT suppression recorded in canonical CardDB, Master and HANDO
 ## 2026-11-28 — CI fix for 08ce1eb; canonical data checks in AGENTS/CLAUDE (Claude Code)
 
 `08ce1eb` (CARD-REVIEW-001 TASER) made TASER divergent without updating the test that lists divergent cards, so CI failed (as `f02206d` did, fixed in `460680a`). The test now lists STACK SMASH, TASER and VOID ICEPICK. AGENTS.md and CLAUDE.md (identical) now require the canonical data checks before any commit that touches card data, maps or generated blocks; an agent that can't run them hands the data change to Claude Code (designer request, 11:27).
+
+## 2026-11-28 — CARD-REVIEW-001 engine items built (Claude Code)
+
+Designer, 11:48: the card-review items are approved. VOID ICEPICK reveals the next concealed subroutine after each of its breaks (`_reveal_next`). A TASER break sets the ICE's `no_parting_shot` flag for the encounter. STACK SMASH lowers every ICE by its EXPLOIT count (record: no target, `params.str_per`). Records are aligned and the generated doc blocks regenerated; no divergent cards remain. Tests: new `test_spec_card_review` 16/0 (in CI); test_csa_cards 553/0; Python 86; parity 4,017/0; every other suite 0 failed. Ghostware engine effects are held (11:49).

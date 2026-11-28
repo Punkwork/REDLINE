@@ -92,7 +92,7 @@ Rule: every starter card is the weakest version of its role, with at least one c
 | **JACKHAMMER** | Uncommon | PROGRAM — ICEPICK (FORTRESS) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +2 STR. First break each turn free; then 1 BW. |
 | **PASSKEY** | Common | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 3. Boost: 1 BW → +1 STR. Break: 1 BW. |
 | **RAINBOW TABLE** | Uncommon | PROGRAM — ICEPICK (TUMBLER) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW for up to 2 subroutines on the same ICE. |
-| **TASER** | Common | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. |
+| **TASER** | Common | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. If TASER breaks at least one subroutine on an ICE, disable that ICE's PARTING SHOT. |
 | **STUN BATON** | Uncommon | PROGRAM — ICEPICK (VOID) | 1 BW, 1 RAM | STR 2. Boost: 1 BW → +1 STR. Break: 1 BW. Each break: +2 SHIELD. |
 | **SKELETON KEY** | Rare | PROGRAM — ICEPICK (any type) | 2 BW, 2 RAM | STR 3. Boost: 2 BW → +1 STR. Break: 1 BW. Works on FORTRESS, TUMBLER and VOID. |
 <!-- /GENERATED -->

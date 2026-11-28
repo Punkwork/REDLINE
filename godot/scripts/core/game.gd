@@ -765,7 +765,9 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"ZERO_FOOTPRINT":
 			trace = maxi(0, trace - mini(10, maxi(0, footprint_cap() - footprint())))
 			return true
-		"STACK_SMASH": reduce_ice_str(target, int(enc.tag_counts.get("EXPLOIT", 0)))
+		"STACK_SMASH":   # CARD-REVIEW-001: every ICE in the encounter, no target
+			var n := int(enc.tag_counts.get("EXPLOIT", 0)) * CardDB.param("STACK_SMASH", "str_per")
+			for j in enc.ice.size(): reduce_ice_str(j, n)
 		"FLATLINE", "KNOCKOUT", "SECOND_WIND":
 			if reduce_ice_str(target, int(CardDB.def(inst.id).zeroed_reduction)):
 				match inst.id:
@@ -1114,6 +1116,8 @@ func _begin_parting_shot() -> void:
 	for st in response_preview():
 		if st.skipped or st.hidden or _has_deadlock(st.effects):
 			continue
+		if enc.ice[st.ice].get("no_parting_shot", false):
+			continue   # TASER broke a subroutine on this ICE (CARD-REVIEW-001)
 		st["ref"] = enc.ice[st.ice]
 		response_queue.append(st)
 	core_stats.parting_fired += response_queue.size()
@@ -1168,6 +1172,17 @@ func play_modes(id: String, target: int) -> Array:
 			"reveal":
 				if ice_definition(enc.ice[target]).type == "VOID" and hidden_subs(target) > 0: out.append("reveal")
 	return out
+
+## VOID ICEPICK (CARD-REVIEW-001): the next concealed subroutine on that ICE, in resolution order (top
+## to bottom), is revealed; nothing happens when none remain.
+func _reveal_next(ice: Dictionary) -> void:
+	var d := ice_definition(ice)
+	for s in d.subs.size():
+		if not ice.seen[s] and not ice.broken[s]:
+			ice.seen[s] = true
+			ice["reveal"] = maxi(int(ice.get("reveal", 0)), s + 1)
+			_say("VOID Icepick reveals a hidden subroutine on %s." % d.name)
+			return
 
 func _probe_reveal_all(i: int) -> void:
 	## PROBE-004a: reveal every hidden subroutine of the target VOID; each is then active and breakable.
@@ -1566,6 +1581,10 @@ func break_sub(i: int, s: int, pick_uid: int = -1) -> bool:
 	# Mark the break first: TRACE from the break can cause a strike that adds Black ICE on the left
 	# and shifts every ICE index.
 	_do_break(i, s)
+	# CARD-REVIEW-001 (designer 2026-11-28): card-specific break riders.
+	match String(p.inst.id):
+		"VOID_ICEPICK": _reveal_next(ice)          # reveal the next concealed subroutine on that ICE
+		"TASER": ice["no_parting_shot"] = true     # that ICE's PARTING SHOT is off for this encounter
 	if pk.get("rot_per_break", 0) > 0:
 		var v: Dictionary = ice.virus
 		infect(enc.ice.find(ice), "ROT", pk.rot_per_break)
