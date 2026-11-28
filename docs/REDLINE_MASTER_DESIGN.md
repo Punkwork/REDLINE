@@ -3734,3 +3734,7 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 - **CHAIN cards:** COVER FIRE, KILL CHAIN and HANDOFF move to experimental. PIVOT stays, with its new text.
 
 **Consequence to note:** SMASH & GRAB is one of RIOT's 15 starter cards (`STARTER_RIOT`, RIOT-005), so RIOT's starter deck is one card short until it is redesigned. RIOT is not in the current core-loop build. ZERO FOOTPRINT is also a BURNED card, so it leaves the BURNED-001 list.
+
+**Designer, 2026-11-27 19:30 (APPROVED):**
+- **RIOT-006 (ID assigned by Claude Code):** RIOT's starter deck replaces SMASH & GRAB with a 4th PROBE: "give riot +1 Probe. That brings the deck to 15 cards." The deck is SLEDGE, BRUTE FORCE, SHATTER, OVERLOAD, PROBE ×4, FEEDBACK, ADRENAL SPIKE, PULP Shield ×3, LAY LOW, Basic Extractor. Implemented in a controlled data commit (CSA-03 C2).
+- **Repeated card text in other docs:** confirmed. The extra copies are retired, all docs refer to the single record, and the cards stay in the game using the single record's text (CSA-06).

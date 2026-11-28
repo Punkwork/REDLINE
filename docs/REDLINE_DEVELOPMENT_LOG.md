@@ -302,3 +302,7 @@ Designer answers:
 - MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB, COVER FIRE, KILL CHAIN and HANDOFF move to experimental.
 
 RIOT's starter deck is one card short (SMASH & GRAB) until redesigned. CSA-03 is ready to start. No code change.
+
+## 2026-11-27 — RIOT-006 and the retirement of repeated card text recorded (Claude Code)
+
+Designer: RIOT's starter replaces SMASH & GRAB with a 4th PROBE (15 cards; RIOT-006). Confirmed that repeated card text in other docs is retired in favour of the single record; the cards stay in the game. No code change yet.
