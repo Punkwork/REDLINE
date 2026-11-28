@@ -2191,13 +2191,29 @@
 			"text": "Target ICE −1 STR per EXPLOIT played this turn, including this.",
 			"status": {
 				"design": "approved",
-				"implementation": "implemented"
+				"implementation": "divergent"
 			},
 			"decisions": [
 				"DSY-009",
-				"DSY-CARDS-001"
+				"DSY-CARDS-001",
+				"CARD-REVIEW-001"
 			],
-			"params_in_code": true
+			"params_in_code": true,
+			"flavor": "One exploit. Widespread consequences.",
+			"strategy": {
+				"ice_suppression": [
+					"payoff",
+					"bridge"
+				],
+				"exploit_synergy": [
+					"payoff"
+				],
+				"precision_breaching": [
+					"support"
+				]
+			},
+			"approved_text": "Each ICE −1 STR per EXPLOIT played this turn, including itself.",
+			"divergence": "Existing runtime targets one ICE. Approved revision affects each ICE in the current encounter without target selection; retain current runtime-facing target and text until atomic engine/data reconciliation. See CARD-REVIEW-001."
 		},
 		"NULL_POINTER": {
 			"name": "NULL POINTER",
@@ -2385,7 +2401,7 @@
 			"type": "PROTOCOL",
 			"tags": [],
 			"bw": 1,
-			"rarity": "COMMON",
+			"rarity": "UNCOMMON",
 			"text": "Whenever you play a card, gain {shield} SHIELD.",
 			"status": {
 				"design": "playtest",
@@ -2394,10 +2410,22 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"shield": 1
+			},
+			"flavor": "Protection through productivity.",
+			"strategy": {
+				"momentum": [
+					"payoff",
+					"bridge"
+				],
+				"defensive_endurance": [
+					"support",
+					"bridge"
+				]
 			}
 		},
 		"COUNTERINTELLIGENCE": {
@@ -2414,10 +2442,22 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"trace_down": 1
+			},
+			"flavor": "The less they know, the more you control.",
+			"strategy": {
+				"surveillance_evasion": [
+					"payoff",
+					"bridge"
+				],
+				"defensive_endurance": [
+					"support",
+					"bridge"
+				]
 			}
 		},
 		"OVERCLOCK": {
@@ -2426,7 +2466,7 @@
 			"tags": [],
 			"bw": 2,
 			"rarity": "UNCOMMON",
-			"text": "Upon playing your third card each turn, draw {draw} cards and gain {bw_gain} BW.",
+			"text": "Upon playing your fourth card each turn, draw {draw} cards and gain {bw_gain} BW.",
 			"status": {
 				"design": "playtest",
 				"implementation": "implemented"
@@ -2435,12 +2475,24 @@
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
 				"SYNERGY-PLAYTEST-002a",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
-				"nth": 3,
+				"nth": 4,
 				"draw": 2,
 				"bw_gain": 1
+			},
+			"flavor": "Beyond recommended operating limits.",
+			"strategy": {
+				"momentum": [
+					"payoff",
+					"enabler"
+				],
+				"precision_breaching": [
+					"support",
+					"bridge"
+				]
 			}
 		},
 		"FEEDBACK_LOOP": {
@@ -2449,7 +2501,7 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "COMMON",
-			"text": "Whenever you ZERO an ICE, gain {bw_gain} BW.",
+			"text": "Whenever you ZERO an ICE for the first time, gain {bw_gain} BW.",
 			"status": {
 				"design": "playtest",
 				"implementation": "implemented"
@@ -2457,10 +2509,25 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"bw_gain": 1
+			},
+			"flavor": "Nothing goes to waste. Not even failure.",
+			"strategy": {
+				"ice_suppression": [
+					"payoff",
+					"bridge"
+				],
+				"momentum": [
+					"enabler",
+					"bridge"
+				],
+				"exploit_synergy": [
+					"support"
+				]
 			}
 		},
 		"SALVAGE": {
@@ -2477,8 +2544,23 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
-			]
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
+			],
+			"flavor": "Obsolescence is a corporate invention.",
+			"strategy": {
+				"recursion": [
+					"enabler",
+					"bridge"
+				],
+				"precision_breaching": [
+					"payoff",
+					"bridge"
+				],
+				"momentum": [
+					"support"
+				]
+			}
 		},
 		"ADAPTIVE_DEFENCE": {
 			"name": "ADAPTIVE DEFENCE",
@@ -2494,10 +2576,22 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"shield": 3
+			},
+			"flavor": "Security improves with every unauthorized installation.",
+			"strategy": {
+				"program_synergy": [
+					"payoff",
+					"bridge"
+				],
+				"defensive_endurance": [
+					"enabler",
+					"bridge"
+				]
 			}
 		},
 		"FOLLOW_THROUGH": {
@@ -2517,11 +2611,26 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"str_down": 2,
 				"bonus": 2
+			},
+			"flavor": "Persistence is a security flaw.",
+			"strategy": {
+				"exploit_synergy": [
+					"payoff",
+					"enabler"
+				],
+				"ice_suppression": [
+					"support",
+					"bridge"
+				],
+				"precision_breaching": [
+					"support"
+				]
 			}
 		},
 		"ESCALATION": {
@@ -2541,10 +2650,26 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"str_per": 1
+			},
+			"flavor": "Failure compounds beautifully.",
+			"strategy": {
+				"exploit_synergy": [
+					"payoff",
+					"enabler"
+				],
+				"ice_suppression": [
+					"payoff",
+					"bridge"
+				],
+				"momentum": [
+					"payoff",
+					"bridge"
+				]
 			}
 		},
 		"AFTERBURN": {
@@ -2563,11 +2688,26 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"shield": 4,
 				"others": 3
+			},
+			"flavor": "Efficiency is a matter of perspective.",
+			"strategy": {
+				"momentum": [
+					"payoff",
+					"bridge"
+				],
+				"defensive_endurance": [
+					"support",
+					"bridge"
+				],
+				"surveillance_evasion": [
+					"support"
+				]
 			}
 		},
 		"REPRISE": {
@@ -2579,13 +2719,29 @@
 			"text": "Repeat effect of previous SCRIPT played this turn.",
 			"status": {
 				"design": "playtest",
-				"implementation": "implemented"
+				"implementation": "divergent"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"UI-PROTOCOL-001"
-			]
+				"UI-PROTOCOL-001",
+				"CARD-REVIEW-001",
+				"EFFECT-REPEAT-001"
+			],
+			"flavor": "Repetition is the mother of exploitation.",
+			"strategy": {
+				"recursion": [
+					"payoff",
+					"enabler",
+					"bridge"
+				],
+				"momentum": [
+					"support",
+					"bridge"
+				]
+			},
+			"approved_text": "ECHO the previous SCRIPT played this turn.",
+			"divergence": "Approved ECHO allows new legal target and mode selection and prohibits BURNED sources; existing engine repeats same target/mode and requires eligibility and penalty validation. See CARD-REVIEW-001."
 		},
 		"KEYLOGGER": {
 			"name": "KEYLOGGER",

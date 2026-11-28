@@ -415,3 +415,8 @@ All ten must be obtainable through normal node completion card rewards in the re
 
 ## SYNERGY-PLAYTEST-002a — OVERCLOCK revision (2026-11-27)
 Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card each turn, draw 2 cards and gain 1 BW. Retain 2 BW deployment cost, encounter duration, once per turn per deployed copy, and all other SYNERGY-PLAYTEST-002 conventions. Supersedes the draw-only effect. Include immediate BW availability, trigger frequency and resource-loop tests. Documentation only; no engine changes.
+
+
+### CARD-REVIEW-001 — current card review reference (2026-11-28)
+
+The eleven reviewed cards' current classifications and flavor are canonical in `godot/data/cards.json`; generate the matrix with `python3 tools/csa/validate_cards.py --strategy-matrix markdown`. The historical STACK SMASH example above is superseded by the approved revision in CardDB (approved_text until runtime reconciliation). See Master Design CARD-REVIEW-001 and HANDOFF. Do not maintain a second classification table.

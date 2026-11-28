@@ -425,3 +425,8 @@ Brief from the designer (07:38; issue #26). Commit `0b80808`.
 ## 2026-11-28 — EFFECT-REPEAT-001: ECHO approved (ChatGPT)
 
 Designer approved the universal effect-repetition distinction and explicit Protocol trigger boundary, requesting immediate Core Rules commit. Canonical definition in Core Rules; approval recorded in Master Design and implementation validation in HANDOFF. Existing Rustler name ECHO retained; mechanic distinguished in context. Documentation only; no runtime, CardDB, release or test changes. Runtime parity not verified.
+
+
+## 2026-11-28 — CARD-REVIEW-001: eleven-card consolidated review (ChatGPT)
+
+Designer authorized CardDB update for eleven existing cards. Added flavor and strategy metadata, REACTIVE_ARMOUR rarity, OVERCLOCK threshold and FEEDBACK_LOOP wording; recorded approved divergent revisions for REPRISE and STACK_SMASH. No pool changes, new IDs, runtime changes or release. JSON record replacement verified in memory; Godot and CSA tests not run. See Master Design and HANDOFF for implementation reconciliation and approval caveats.
