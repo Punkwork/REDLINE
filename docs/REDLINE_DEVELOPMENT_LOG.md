@@ -501,3 +501,7 @@ Designer, 10:13: REPRISE change approved, 2- and 3-layer Nodes approved as is, a
 - **Map.** Row 9's ICE Nodes have 2 layers and the BOSS 3. Unbuilt Nodes enter `NODE_ROOM` (`NodeRoomScreen`: painted room, name, LEAVE).
 - **Tests:** test_uplink_map 291/0 (layers, rooms, Ghostware stock and purchase), test_ui_protocol_001 135/0 (REPRISE: fresh target, penalties, BURNED source, PROBE modes and count, conservation), test_map_uplink_ui 17/0, Python 86. Unchanged: test_game 453/0, app 33/0, parity 3,997/0, csa_cards 548/0, CORTEX 26/0, every other suite 0 failed. Fixtures: shot_node_map 5 (3 rooms added), shot_uplink_room 3, shot_arch_v2_ice 42, shot_ui_protocol_001 6.
 - **Missing art:** HEARTBEAT, MINIMAL INSTALL, ONE-TRICK have no GW_ icons (initials shown). No release.
+
+## 2026-11-28 — CARD-REVIEW-001 Generalist review: generated docs and tests aligned (Claude Code)
+
+`f02206d` (Generalist starter review) changed `cards.json` (GHOST SIGNAL 2 → 1 BW; VOID ICEPICK declared divergent) without regenerating the Rustlers doc block or updating the tests, so the CSA checks failed. Regenerated `REDLINE_RUSTLERS.md` with `gen_card_docs.py`; the tests now expect GHOST SIGNAL at 1 BW and STACK SMASH + VOID ICEPICK as the divergent records. All suites pass (parity 4,017/0 over 3,937 actions with the cheaper GHOST SIGNAL). **Open (Claude Code):** VOID ICEPICK reveal-on-break and STACK SMASH every-ICE engine changes.

@@ -76,7 +76,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | **CORTEX BUFFER** | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. |
 | 3 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 3 | **PROBE** | SCRIPT — EXPLOIT | 0 BW | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
-| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
+| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 1 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
 <!-- /GENERATED -->
 
 ### ORIGIN Ghostware — READY RIG
@@ -108,7 +108,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 3 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 1 | **SMOKESCREEN** | SCRIPT — CLOAK | 1 BW | +2 SHIELD. The first TRACE you gain during the next Corporation Response is reduced by 2. |
 | 1 | **DEAD AIR** | SCRIPT — CLOAK | 0 BW | CACHE 1 card in your hand. |
-| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
+| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 1 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
 <!-- /GENERATED -->
 
 **Signature:** HUSH. **Fallback:** BORROWED CREDENTIALS (replaces BACKDOOR, ECHO-005).
@@ -185,7 +185,7 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 | 1 | **PROBE** | SCRIPT — EXPLOIT | 0 BW | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
 | 2 | **PULP Shield** | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 1 | **Basic Extractor** | PROGRAM — EXTRACTOR | 1 BW, 1 RAM | End of your turn: extract 3 CRED. |
-| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 2 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
+| 1 | **GHOST SIGNAL** | SCRIPT — CLOAK | 1 BW | The first TRACE added in the next Corporation Response becomes 0. BURNED. |
 <!-- /GENERATED -->
 
 **Signature:** STINGER. **Fallback:** RUNTIME ERROR.

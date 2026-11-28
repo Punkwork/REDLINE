@@ -22,7 +22,8 @@ const APPROVED_TEXT := {
 }
 ## Approved value changes on single cards since the snapshot: id -> {field: new value}. A compiled
 ## card's BW is the sum of its parts' BW, so it follows its parts.
-const APPROVED_VALUES := {"NULL_POINTER": {"bw": 1}}   # NULL-POINTER-001 (designer 2026-11-24): 2 BW -> 1 BW
+const APPROVED_VALUES := {"NULL_POINTER": {"bw": 1},   # NULL-POINTER-001 (designer 2026-11-24): 2 BW -> 1 BW
+	"GHOST_SIGNAL": {"bw": 1}}   # CARD-REVIEW-001 Generalist review (designer 2026-11-28): 2 BW -> 1 BW
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
 const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved", "params", "params_in_code", "text_template", "strategy", "flavor"]   # CARD-REVIEW-001: flavour and strategy metadata are content, not rules   # CSA-04i: params carry the numbers the text and engine used
 ## Approved new fields on single cards since the snapshot: id -> [fields].
