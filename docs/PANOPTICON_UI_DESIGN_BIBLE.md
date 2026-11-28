@@ -1355,7 +1355,7 @@ Implementation and designer playtest acceptance remain pending. Validate timing,
 
 **Implementation (2026-11-28; designer direction 2026-11-27 23:41–23:47, Master Design UI-INSPECTOR-001):** built in the one shared V2 inspector (`key_inspector.gd`), which every V2 hover source uses. The PROBE mode choice (PROBE-004a) is the first validated consumer: each mode is an icon-and-number key (the STR medallion with −2; the hidden-subroutine icon with the hidden count), and its words appear only in the inspector. Jost 3.7 was added with its OFL licence, and T1–T5 are central tokens (`VasTokens.TYPE`). `test_ui_inspector_001.gd` checks the approved values. Playtest acceptance is pending.
 
-*Implementation choices pending designer confirmation:*
+*Implementation choices (UI-INSPECTOR-001a, designer approved 2026-11-28 05:25):*
 1. A card's "artwork" is its illustration, not the whole card face. The card face stands in only when a card has no illustration.
 2. Keyboard focus opens at once, without the 150 ms hover delay.
 3. Placement is tried above the source first, then below, right and left. If none fits without covering the source (very small windows), it goes to the far corner.

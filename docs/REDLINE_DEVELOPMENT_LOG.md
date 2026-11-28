@@ -418,3 +418,7 @@ Designer direction 2026-11-27 23:41–23:47 (Master Design UI-INSPECTOR-001 impl
 
 Interpretations to confirm: the seven implementation choices in the UI Bible (UI-INSPECTOR-001, "Implementation").
 
+## 2026-11-28 — UI-INSPECTOR-001a: implementation choices approved (Claude Code)
+
+Designer, 05:25: all seven UI-INSPECTOR-001 implementation choices (UI Bible, UI-INSPECTOR-001 "Implementation") are approved as built in `9e37bf5`. Recorded in the UI Bible, Master Design and HANDOFF. Docs only; no `godot/` change. The PROBE mode prompt's visual review (`docs/visual/fixtures/probe-004a/`) and a hands-on playtest of the inspector remain open.
+
