@@ -112,7 +112,14 @@ Proposal and audit: [`architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md`](archite
 - decision IDs on 43 of 122 records;
 - CRED cost chip on the V2 card face (CRED-COST-001, approved 20:20), then BORROWED CREDENTIALS drops "Costs 8 CRED." (CSA-04).
 
-Playtest-card tags approved and recorded. GARBAGE COLLECT under BURNED-001 confirmed |
+Playtest-card tags approved and recorded. GARBAGE COLLECT under BURNED-001 confirmed.
+
+**CSA-04 alignment approved (20:27):**
+- BURNED cards return to the discard pile at encounter end (BURNED-001a);
+- cleared SPAM disappears for good (BURNED-001b);
+- PIVOT's free break is chosen by the Rustler.
+
+Planned order: CRED chip → PROBE → BURNED-001 → PIVOT, each with spec tests written first |
 | **CSA-04** | Text templates, engine parameters, Inspector and Uplink contracts, generated doc blocks; PROBE-004a implemented (choose-one, both UI paths) | CSA-03 | PROBE B1–B9 and T1–T7 green | Claude Code | TO DO |
 | **CSA-05** | Python CI job (schema, IDs, references, drift, terms, traceability, AGENTS = CLAUDE, `tests/python`); spec tests in CI; PR path filter; ruleset proposal | CSA-03 | Each check proven by a negative test; designer decides the ruleset (Q5) | Claude Code, then designer | TO DO |
 | **CSA-06** | Retire hand card tables and appended decision copies (label historical); delete the `DEFS` constant; rewrite stale tests | CSA-04, CSA-05 | Scanner shows 0 independent active card definitions | Claude Code, with Claude (editorial) | TO DO |

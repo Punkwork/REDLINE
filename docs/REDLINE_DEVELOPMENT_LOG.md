@@ -337,3 +337,12 @@ Designer:
 - approved a CRED cost chip on the V2 card face (CRED-COST-001), to build in CSA-04.
 
 `test_csa_cards.gd` 501/0; validator valid; Python 20/0.
+
+## 2026-11-27 — CSA-04 alignment decisions recorded (Claude Code)
+
+Designer restated PROBE-004a, matching the record. Approved:
+- BURNED cards go to the discard pile at encounter end (BURNED-001a);
+- cleared SPAM disappears for good and is not BURNED (BURNED-001b);
+- PIVOT's free break is chosen by the Rustler among normally breakable subroutines.
+
+Plan for CSA-04: CRED chip, then PROBE, then BURNED-001 (engine and Core Rules §3), then PIVOT. Each starts with spec tests written from the approved text. No code change in this entry.

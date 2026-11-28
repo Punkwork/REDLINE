@@ -3755,3 +3755,9 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 **Designer, 2026-11-27 20:20 (APPROVED):**
 - **SYNERGY-PLAYTEST-002 tags:** FOLLOW THROUGH EXPLOIT; ESCALATION EXPLOIT; AFTERBURN CLOAK; REPRISE none; the six Protocols none.
 - **CRED-COST-001 (ID assigned by Claude Code; UI):** the V2 card face shows a CRED cost chip with the number inside, beside the BW cost, only on cards with a CRED cost. BORROWED CREDENTIALS then drops "Costs 8 CRED." from its text. Built in CSA-04 with a screenshot for visual review.
+
+**Designer, 2026-11-27 20:27 (APPROVED), CSA-04 alignment:**
+- **PROBE (PROBE-004a, restated):** "0 BW; choose one: −2 STR on the target ICE or reveal (all) hidden subroutines on a target VOID (ICE). Probe costs +1BW for each Probe already played on target ICE this turn."
+- **BURNED-001a:** at the end of an encounter, that encounter's BURNED cards go to the **discard pile**, as expired Protocols do (PROTOCOL-DURATION-001a).
+- **BURNED-001b:** cleared SPAM (Bloatware, pay 1 BW) does not return: "it disappears forever." Clearing removes the card; it is not BURNED.
+- **PIVOT:** when its −1 STR brings the ICE to 0, the Rustler chooses which subroutine breaks free. Any subroutine they could normally break is eligible (visible, unbroken, usual order rules); there is no prompt when only one qualifies.
