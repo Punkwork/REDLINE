@@ -3816,3 +3816,18 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **UI-INSPECTOR-001a (designer, 2026-11-28 05:25):** the seven implementation choices in that section are approved as built: card illustration as the artwork (card face only as a fallback); keyboard focus opens at once; placement above, then below, right, left; the open inspector takes the pointer; type scales with the logical viewport against 1080 p; no artwork means a text-only column; PROBE's inspector shows the current cost instead of the escalation sentence.
 
+## PT13-FB-001 — Playtest 13 feedback (designer, 2026-11-28 05:44)
+
+Designer notes from HALCYON PLAYTEST 13 (first Architecture V2 build), as given:
+- (a) "The Encounter layer/Cred box looks overlaid over the grill below it. It should be 1-2 pixels smaller on each side."
+- (b) "Turn transitions look good."
+- (c) "audio plays over itself. IT should not, it should wait till the previous clip finished."
+- (d) "when rolling over a card in hand, if the cards cannot be played they are shadowed in hand, but they are also shadowed in the hover/rollover."
+
+**Built (Claude Code, 2026-11-28):**
+- (a) The LAYER/CRED ledger is inset 2 px on every side.
+- (c) Voice clips are queued on one channel shared by the app and the encounter screen: a new NUL/REM line waits for the one playing. At most one line waits, and a newer line replaces it, so the voice never falls far behind. Muting drops waiting lines.
+- (d) The inspector never dims a card; the reason it can't be played is given in words. Since UI-INSPECTOR-001 it shows the card's illustration, and its fallback card face is drawn undimmed.
+
+*Interpretation to confirm:* "clip" read as voice lines (NUL/REM). Sound effects and music still play at once, because a delayed effect would lag behind the action it reports. **Status:** built and validated; confirm in the next playtest build.
+

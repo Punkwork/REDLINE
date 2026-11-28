@@ -424,3 +424,11 @@ Designer, 05:25: all seven UI-INSPECTOR-001 implementation choices (UI Bible, UI
 
 Implemented the cost change approved on 2026-11-24. `godot/data/cards.json` NULL POINTER `bw` 2 → 1, with the decision ID; compiled cards follow (WRECKING BALL + NULL POINTER 3 → 2 BW). `test_csa_cards.gd` gained an `APPROVED_VALUES` register (507/0). `test_game.gd` gained an independent behaviour check, because the synergy cases don't run while `CORE_LOOP` is on: NULL POINTER costs 1 BW, playing it spends 1 BW and burns it (433/0; SIM=1 433/0). Playtest Guide, Deck Synergy, Master Design and HANDOFF updated. `validate_cards.py` VALID; drift report unchanged.
 
+## 2026-11-28 — PT13-FB-001: Playtest 13 feedback fixes (Claude Code)
+
+Designer notes (Master Design PT13-FB-001):
+- Ledger: `IceEncounterSandbox.LEDGER` is now `Rect2(208, 504, 164, 43)`, 2 px inside the Playtest 13 box on every side. Checked against close-up screenshots.
+- Voice: new `VoiceQueue` (an `AudioStreamPlayer`), owned by `main.gd` and passed to the V2 screen. A new clip waits for the one playing; one clip at most waits and the newest replaces it; mute clears. It is tested with real clips on the dummy audio driver.
+- Inspector: the fallback card face is drawn undimmed. Tests check that the illustration, the fallback and the "Can't play now" wording are all undimmed.
+- Tests: `test_pt13_feedback.gd` 10/0 (new, in CI) and `test_ui_inspector_001.gd` 59/0. All other suites unchanged (test_game 433/0, SIM=1 433/0; parity 4,029/0). `shot_arch_v2_ice` 42, `shot_cred_cost` 4/0, `shot_probe_modes` 3, typography fixture PASS; the app fixtures that drive `main.voice` (`shot`, `shot_reel`) are clean.
+

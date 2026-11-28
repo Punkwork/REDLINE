@@ -49,7 +49,8 @@ const ENCLOSURE := Rect2(6, 100, 1524, 499)
 const LANE := Rect2(40, 134, 1456, 354)
 const RAIL_HOUSING := Rect2(192, 494, 1152, 63)
 ## ARCH-V2-006d: LAYER and CRED over the rail's left vent grille.
-const LEDGER := Rect2(206, 502, 168, 47)
+## Playtest 13 note (designer 2026-11-28): inset 2 px a side so the box sits inside the grille.
+const LEDGER := Rect2(208, 504, 164, 43)
 ## ARCH-V2-006f: NUL/REM's two speaker grilles: below the left avatar, and below the right ICE's keys.
 const SPEAKER_L := Rect2(70, 504, 96, 48)
 const SPEAKER_R := Rect2(1370, 504, 96, 48)
@@ -133,7 +134,7 @@ var ad_copy: Label
 ## Announcements the response waits for (Build 12 waited for its strike overlay).
 ## UI-TYPO-002: LETHAL is no longer a flyout (its lens sits on the ICE), so nothing waits for it.
 const HOLD_FOR := ["corp_countermeasure", "mask_off", "lockdown"]
-var nr_voice: AudioStreamPlayer
+var nr_voice: VoiceQueue   # Playtest 13: queued; the app shell passes its own so both share one channel
 var voice_on := true
 ## Tests point this at a scratch file so they never touch the player's settings.
 var flags_path := FLAGS
@@ -173,7 +174,8 @@ func _ready() -> void:
 	var flags := LocalRecord.read(flags_path)
 	reduced_motion = reduced_motion or bool(flags.get("reduced_motion", false))
 	voice_on = bool(flags.get("voice_on", true))
-	nr_voice = AudioStreamPlayer.new(); nr_voice.name = "NulRemVoice"; add_child(nr_voice)
+	if nr_voice == null:
+		nr_voice = VoiceQueue.new(); nr_voice.name = "NulRemVoice"; add_child(nr_voice)
 	music = FriendlyMusic.new(); music.name = "Music"; add_child(music)
 	music.set_level(float(flags.get("music_volume", AtomicDecoPunk.settings.music.default_volume)), bool(flags.get("music_muted", false)))
 	music.set_active(true)
@@ -619,19 +621,17 @@ func say(line: Dictionary) -> void:
 	if line.is_empty(): return
 	nr_lines.append(line)
 	var seconds: float = clampf(String(line.text).length() / 15.0, 1.5, 6.0)
-	nr_voice.stop()
 	var path := "res://audio/nulrem/%s.ogg" % String(line.id).replace(" ", "_")
 	if voice_on and ResourceLoader.exists(path):
 		var stream: AudioStream = load(path)
-		nr_voice.stream = stream
-		if nr_voice.is_inside_tree(): nr_voice.play()
-		seconds = maxf(1.0, stream.get_length())
+		var wait := nr_voice.enqueue(stream)   # Playtest 13: waits for the clip already playing
+		seconds = maxf(1.0, wait + stream.get_length())
 	for sp in speakers: sp.speak(seconds)
 	_refresh_speakers()
 
 func toggle_voice() -> void:
 	voice_on = not voice_on
-	if not voice_on: nr_voice.stop()
+	if not voice_on: nr_voice.clear()
 	var flags := LocalRecord.read(flags_path)
 	flags["voice_on"] = voice_on
 	LocalRecord.write(flags_path, flags)

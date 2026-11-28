@@ -276,7 +276,7 @@ func _build_layout() -> void:
 	nt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	nh.add_child(nt)
 	nv.add_child(nh)
-	voice = AudioStreamPlayer.new()
+	voice = VoiceQueue.new()   # Playtest 13: one queued voice channel, shared with the V2 screen
 	add_child(voice)
 	_update_voice_btn()
 	nr_text = _lbl("", 15, RIcon.COL.NULREM)
@@ -534,7 +534,7 @@ func refresh() -> void:
 	profile.observe(g, personalized_ads)
 	if g.phase == "DEAD":
 		if defeat_entry.is_empty() or not defeat_entry.get("saved", true):
-			voice.stop()
+			(voice as VoiceQueue).clear()
 			if run_id.is_empty(): run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 			defeat_entry = CarbonRecord.append_defeat(run_id, g)
 		_show_inspect("")
@@ -637,12 +637,10 @@ func _speak_event(e: Dictionary) -> void:
 	if tween:
 		tween.kill()
 	var type_time: float = clamp(line.text.length() / 45.0, 0.6, 3.5)
-	voice.stop()
 	var path := "res://audio/nulrem/%s.ogg" % str(line.id).replace(" ", "_")
 	if voice_on and ResourceLoader.exists(path):
 		var stream: AudioStream = load(path)
-		voice.stream = stream
-		voice.play()
+		(voice as VoiceQueue).enqueue(stream)   # waits for a clip already playing (Playtest 13)
 		type_time = max(0.6, stream.get_length() * 0.92)   # type in step with the voice
 	if reduced_motion:
 		nr_text.visible_ratio = 1.0
@@ -654,7 +652,7 @@ func _toggle_voice() -> void:
 	voice_on = not voice_on
 	if v2: v2.voice_on = voice_on
 	if not voice_on:
-		voice.stop()
+		(voice as VoiceQueue).clear()   # mute drops waiting clips too
 	_update_voice_btn()
 	_save_flags()
 
@@ -2135,6 +2133,7 @@ func _install_friendly() -> void:
 	if use_v2:
 		v2 = load("res://scenes/architecture_v2/IceEncounterSandbox.tscn").instantiate()
 		v2.embedded = true
+		v2.nr_voice = voice   # one voice channel: NUL/REM never talks over itself across screens
 		v2.name = "EncounterV2"
 		v2.visible = false
 		add_child(v2)

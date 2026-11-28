@@ -289,7 +289,10 @@ func card_art(m: Dictionary) -> Variant:
 	var tex := CardView.art_for(String(m.get("art", "")))
 	if tex: return tex
 	var big := CardView.new()
-	big.set_model(m)
+	var face := m.duplicate()
+	face.playable = true   # Playtest 13: the hand dims unplayable cards; the inspector never does
+	face.selected = false
+	big.set_model(face)
 	big.focus_mode = Control.FOCUS_NONE
 	big.custom_minimum_size = CardView.BASE * 1.6
 	return big

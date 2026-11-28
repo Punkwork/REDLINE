@@ -164,6 +164,21 @@ func test_cleanup_and_rules() -> void:
 	var w := _words(sb.inspector)
 	check(w.has(String(card.model.name).to_upper()) and w.any(func(x): return x.ends_with("BW")), "card contract: name and cost")
 	check(snapshot(g) == before, "hovering changes no rules state")
+	# Playtest 13: an unplayable card is dimmed in the hand, never in the inspector.
+	var m: Dictionary = card.model.duplicate(); m.playable = false; m.reason = "needs 9 BW"
+	var art: Variant = sb.inspector.card_art(m)
+	check(art is Texture2D, "a card's inspector artwork is its illustration (never dimmed)")
+	m.art = "res://assets/concept/cards/__none__.png"
+	var face: Variant = sb.inspector.card_art(m)
+	check(face is CardView and bool((face as CardView).model.playable) and (face as CardView).modulate == Color.WHITE, "fallback card face is shown undimmed")
+	if face is Node: (face as Node).free()
+	card.model.playable = false; card.model.reason = "needs 9 BW"
+	card.mouse_entered.emit(); sb.inspector.advance(0.3); await frames()
+	var words := _words(sb.inspector)
+	check(words.any(func(w): return w.begins_with("Can't play now")), "the reason it can't be played is stated in words")
+	check(sb.inspector.find_children("*", "TextureRect", true, false).all(func(t): return t.modulate == Color.WHITE and t.self_modulate == Color.WHITE), "inspector artwork undimmed for an unplayable card")
+	card.mouse_exited.emit(); sb.inspector.clear(); sb.refresh(); await frames()
+	card = sb.hand_fan.find_children("*", "CardView", true, false)[0]   # the refresh rebuilt the hand
 	# A modal opening clears it.
 	sb.choice.open({"kind": "mode", "title": "PROBE", "text": "Choose one.", "options": [{"label": "Cancel", "intent": "mode_cancel"}]})
 	check(not sb.inspector.visible, "a modal opening clears the inspector")

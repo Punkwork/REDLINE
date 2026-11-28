@@ -64,6 +64,8 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_ui_typo_002.gd 2>&1 | tee -a /tmp/rules.log
           # UI-INSPECTOR-001: the shared hover/rollover inspector, expectations from the approved specification.
           "$GODOT" --headless --path godot --script res://tests/test_ui_inspector_001.gd 2>&1 | tee -a /tmp/rules.log
+          # Playtest 13 notes: ledger inset, queued voice clips on one shared channel.
+          "$GODOT" --headless --path godot --script res://tests/test_pt13_feedback.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash
