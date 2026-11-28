@@ -2,6 +2,8 @@ extends SceneTree
 ## CSA-04d spec test: PIVOT as approved by the designer, 2026-11-27 (CHAIN-PARK-001 follow-up).
 ##   Text: "[1 BW] Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of
 ##          the target ICE subroutines for no cost."
+##   PIVOT-001 (designer 2026-11-28 05:59): the text becomes "Target ICE −1 STR this encounter. If target
+##   ICE STR is 0, break one of the target ICE subroutines for no cost." An ICE already at 0 breaks too.
 ##   "Chain mechanic is moved to Experimental. CHAIN should be removed from all current cards."
 ##   Follow-up: the Rustler chooses which subroutine breaks. Any subroutine they could normally break is
 ##   eligible (visible, unbroken, usual order rules); there is no prompt when only one qualifies.
@@ -11,7 +13,7 @@ extends SceneTree
 var passed := 0
 var failed := 0
 
-const APPROVED := "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost."
+const APPROVED := "Target ICE −1 STR this encounter. If target ICE STR is 0, break one of the target ICE subroutines for no cost."   # PIVOT-001
 
 func check(ok: bool, what: String) -> void:
 	if ok: passed += 1
@@ -26,7 +28,8 @@ func _initialize() -> void:
 	zero_with_one_eligible_breaks_without_prompt()
 	hidden_and_out_of_order_not_eligible()
 	zero_with_none_eligible_breaks_nothing()
-	already_zero_does_not_break()
+	already_zero_breaks()
+	floor_above_zero_never_breaks()
 	no_chain_bonus()
 	record()
 	print("SPEC PIVOT: %d passed, %d failed" % [passed, failed])
@@ -127,12 +130,22 @@ func zero_with_none_eligible_breaks_nothing() -> void:
 	check(g.phase == "PLAYER" and g.pending.is_empty(), "nothing eligible: no prompt")
 	check(in_pile(g, c) == "discard", "PIVOT goes to discard")
 
-func already_zero_does_not_break() -> void:
+func already_zero_breaks() -> void:
+	# PIVOT-001: "If target ICE STR is 0" — an ICE already at 0 qualifies.
 	var g := game_with_wall(0)
 	g.enc.ice[0].zeroed = true
+	var c := play_pivot(g)
+	check(g.ice_str(0) == 0, "ICE already at 0 stays at 0")
+	check(g.phase == "CHOICE" and g.pending.get("card", "") == "PIVOT", "ICE already at 0: PIVOT offers its free break (PIVOT-001)")
+	g.choose_sub(0, 0)
+	check(g.enc.ice[0].broken.count(true) == 1, "ICE already at 0: one subroutine breaks for no cost")
+	check(g.bw == 4 and in_pile(g, c) == "discard", "only PIVOT's 1 BW is paid; PIVOT goes to discard")
+
+func floor_above_zero_never_breaks() -> void:
+	# An ICE whose STR can't fall to 0 never qualifies: the condition is the STR after the −1.
+	var g := game_with_wall(2)
 	play_pivot(g)
-	check(g.enc.ice[0].broken.count(true) == 0, "ICE already at 0: PIVOT does not reduce it to 0, so no break")
-	check(g.phase == "PLAYER", "ICE already at 0: no prompt")
+	check(g.ice_str(0) == 1 and g.enc.ice[0].broken.count(true) == 0 and g.phase == "PLAYER", "STR 2 -> 1: no break")
 
 func no_chain_bonus() -> void:
 	var g := game_with_wall(5)

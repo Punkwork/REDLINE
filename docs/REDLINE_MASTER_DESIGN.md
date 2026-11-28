@@ -3775,7 +3775,7 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **CSA-03 accepted** by the designer (2026-11-27 20:36). **CSA-04a built:** CRED-COST-001 chip on the V2 card face; BORROWED CREDENTIALS aligned. **CSA-04b built:** PROBE matches PROBE-004a in the engine and both UIs (spec test `test_spec_probe.gd`). **CSA-04c built:** BURNED-001/001a/001b in the engine (BURNED cards return to discard at encounter end; cleared SPAM is removed), GARBAGE COLLECT and SPAM text, Core Rules §3 BURNED definition (spec test `test_spec_burned.gd`). **CSA-04d built:** PIVOT plays its approved text (−1 STR this encounter; reaching 0 breaks one target subroutine for no cost, chosen by the Rustler, no prompt when only one qualifies) and has no CHAIN field (spec test `test_spec_pivot.gd`). No card record is divergent.
 
-**Designer, 2026-11-28 05:44:** BURNED-001 interpretations approved ("Burned 001 works"): Bloatware burned by UNINSTALLER does not return; SPAM reads "it disappears for good." The PROBE-004a mode prompt (revised to UI-INSPECTOR-001) passes visual review ("the probe mode prompt looks good"). The PIVOT interpretation stays open: PIVOT played on an ICE already at 0 STR breaks nothing.
+**Designer, 2026-11-28 05:44:** BURNED-001 interpretations approved ("Burned 001 works"): Bloatware burned by UNINSTALLER does not return; SPAM reads "it disappears for good." The PROBE-004a mode prompt (revised to UI-INSPECTOR-001) passes visual review ("the probe mode prompt looks good"). The PIVOT interpretation was settled by PIVOT-001 (below).
 
 
 ## NODE-AUTHORITY-001 — Canonical Node authority and redundant definition retirement (APPROVED 2026-11-27)
@@ -3832,4 +3832,8 @@ Designer notes from HALCYON PLAYTEST 13 (first Architecture V2 build), as given:
 - (d) The inspector never dims a card; the reason it can't be played is given in words. Since UI-INSPECTOR-001 it shows the card's illustration, and its fallback card face is drawn undimmed.
 
 *Interpretation to confirm:* "clip" read as voice lines (NUL/REM). Sound effects and music still play at once, because a delayed effect would lag behind the action it reports. **Status:** built and validated; confirm in the next playtest build.
+
+## PIVOT-001 — PIVOT breaks whenever the target is at 0 STR (APPROVED, designer 2026-11-28 05:59)
+
+**Designer:** "pivot text should be changed to 'Target ICE −1 STR this encounter. If target ICE STR is 0, break one of the target ICE subroutines for no cost.'" This answers the open CSA-04d interpretation: PIVOT played on an ICE already at 0 STR now breaks a subroutine too. The condition is the target's STR after the −1, whatever brought it there. Unchanged: 1 BW, −1 STR for the encounter, the Rustler chooses which eligible subroutine breaks, no prompt when only one qualifies. Supersedes the CSA-04d wording "If this reduces target ICE STR to 0". **Affects:** card:PIVOT. **Status:** built in the PIVOT-001 commit (canonical record, engine, `test_spec_pivot.gd`); playtest pending.
 

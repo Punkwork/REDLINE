@@ -1778,14 +1778,15 @@
 			"rarity": "COMMON",
 			"target": true,
 			"zeroed_reduction": 1,
-			"text": "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost.",
+			"text": "Target ICE −1 STR this encounter. If target ICE STR is 0, break one of the target ICE subroutines for no cost.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"CHAIN-PARK-001",
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"PIVOT-001"
 			]
 		},
 		"COVER_FIRE": {

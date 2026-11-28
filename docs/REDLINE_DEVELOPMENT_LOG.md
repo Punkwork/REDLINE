@@ -43,28 +43,7 @@ LOG-001 moved the oldest dated entry to the archive unchanged: CHAIN-009 — Ext
 
 LOG-001 moved the oldest dated entry to the archive unchanged: CHAIN-010 — Governing design principle (designer approved 2026-11-27).
 
-## CHAIN-PARK-001 — Designer decision: park explicit CHAIN mechanic (2026-11-27)
-Effective immediately, the proposed standalone CHAIN mechanic (CHAIN-002 through CHAIN-010, CHAIN-REP-001 and associated Priority 2E implementation/playtest roadmap) is PARKED / experimental, not an active production requirement or representative encounter acceptance gate. Preserve the complete historical exploration in docs/PANOPTICON_CHAIN_MECHANICS.md as an experimental reference indexed by docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md; do not delete it or treat prior approvals as current implementation authorization. Designer prefers elegant card-local sequencing and emergent synergy, citing Slay the Spire's per-card Block reward as inspiration. Explore existing Protocols as the natural vehicle for persistent conditional/per-card effects; use ordinary card effects for sequencing, draw, BW, pile manipulation and accumulated-action rewards. Preserve momentum, mastery, exceptional rather than routine combinations, resource-loop safeguards and clear audiovisual feedback without a separate CHAIN grammar, catalyst, link tracking or dedicated CHAIN UI requirement. Examples are exploratory, not approved new cards. Representative ICE encounter remains priority; remove standalone CHAIN work from active scope, retain general card synergy as a design exploration. Existing legacy DSY-011 CHAIN code/cards require Claude Code inventory and designer-approved retirement/reconciliation plan before production changes; no engine edits or issue closures in this decision. Future revival requires explicit designer approval.
-
-
-## SYNERGY-PLAYTEST-001 — Card-local synergy candidates (designer approved for playtest 2026-11-27)
-Preserve all ten candidates in the active representative ICE encounter playtest backlog, replacing the parked standalone CHAIN workstream within Priority 2E. Candidate effects below are experimental; costs, rarity, duration, targeting, stacking and balance remain to be finalized. No standalone CHAIN grammar required.
-
-| Card | Type | Candidate effect |
-|---|---|---|
-| REACTIVE ARMOUR | PROTOCOL | Whenever you play a card, gain 1 SHIELD. |
-| COUNTERINTELLIGENCE | PROTOCOL | Whenever you play a CLOAK, reduce TRACE by 1. |
-| OVERCLOCK | PROTOCOL | Whenever you play your third card each turn, draw 2 cards. |
-| FEEDBACK LOOP | PROTOCOL | Whenever you ZERO an ICE, gain 1 BW. |
-| SALVAGE | PROTOCOL | First time each turn you break a DEADLOCK, return a discarded card to your hand. |
-| ADAPTIVE DEFENCE | PROTOCOL | Whenever you install a PROGRAM, gain 3 SHIELD. |
-| FOLLOW THROUGH | SCRIPT | Reduce ICE STR by 2; reduce by 2 more if previous card played was an EXPLOIT. |
-| ESCALATION | SCRIPT | Reduce ICE STR by 1 for every EXPLOIT played this turn. |
-| AFTERBURN | SCRIPT | Gain 4 SHIELD if at least three cards have been played this turn. |
-| REPRISE | SCRIPT | Repeat the last SCRIPT played this turn, subject to restrictions. |
-
-Playtest individually and in combinations using controlled fixtures; include display/hover readability, Protocol rack status, trigger feedback, card order, resource economics, loop prevention and encounter relevance. Clarify whether the current card counts toward thresholds, trigger timing, replay legality and recursion before implementation. Check existing card names/IDs for collisions. Claude Code to prepare implementation/test plan; no production changes in this documentation batch. Canonical candidate register: docs/REDLINE_DECK_SYNERGY.md. CHAIN-PARK-001 remains in force.
-
+LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-PARK-001 — Designer decision: park explicit CHAIN mechanic (2026-11-27); SYNERGY-PLAYTEST-001 — Card-local synergy candidates (designer approved for playtest 2026-11-27).
 
 ## PROTOCOL-DURATION-001 — Designer-approved lifecycle distinction (2026-11-27)
 Deployed PROTOCOLS last the current encounter only; installed PROGRAMS persist across encounters within the current node, subject to existing removal rules. This supersedes earlier node-duration assumptions for Protocols, including SYNERGY-PLAYTEST-001 proposals. Validate encounter completion/transition cleanup, Protocol rack reset and cessation of expired triggers, Program/RAM persistence across two- and three-encounter nodes, and node-exit cleanup. Exact destination of expired Protocol cards and cleanup ordering relative to breach/reward triggers require review against existing lifecycle rules before implementation. Claude Code to audit existing engine, tests, UI and documentation for affected assumptions and include reconciliation in the representative encounter plan. No production code changes authorized by this documentation batch. Other proposed card costs and conventions remain pending review.
@@ -432,3 +411,8 @@ Designer notes (Master Design PT13-FB-001):
 ## 2026-11-28 — BURNED-001 interpretations and PROBE prompt approved (Claude Code)
 
 Designer, 05:44: "Burned 001 works" (both BURNED-001 interpretations approved) and "the probe mode prompt looks good" (PROBE-004a visual review passed). Recorded in Master Design (CSA-04 record) and HANDOFF. The PIVOT interpretation remains open. Docs only.
+
+## 2026-11-28 — PIVOT-001: PIVOT breaks whenever the target is at 0 STR (Claude Code)
+
+Designer decision 05:59 (Master Design PIVOT-001). Canonical record `PIVOT` text changed and decision ID added; engine (`game.gd` PIVOT) now checks the target's STR after the −1, not whether this play reduced it to 0. `test_spec_pivot.gd` 54/0: the new approved literal, an ICE already at 0 breaks (prompt, one break, 1 BW paid), and STR 2 → 1 doesn't break. `test_csa_cards` 507/0; test_game 433/0 (SIM=1 433/0); parity 3,949 actions / 4,029 checks unchanged; `validate_cards.py` VALID. Deck Synergy row updated; the Chain Mechanics historical note points to the record.
+

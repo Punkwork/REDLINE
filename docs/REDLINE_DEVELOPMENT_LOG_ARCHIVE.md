@@ -3513,3 +3513,24 @@ When a CHAIN-capable card is successfully played during an active CHAIN and sati
 ## CHAIN-010 — Governing design principle (designer approved 2026-11-27)
 **Easy to understand. Difficult to assemble. Rewarding to sustain.**
 CHAIN rarity should arise from strategic sequencing, card availability, preparation and resource constraints, not opaque rules. Evaluate activation and continuation signatures, card design and UI feedback against this principle, alongside CHAIN-007 and the established momentum/mastery intent. This approval does not finalize any proposed signatures or card values. No engine changes.
+
+## CHAIN-PARK-001 — Designer decision: park explicit CHAIN mechanic (2026-11-27)
+Effective immediately, the proposed standalone CHAIN mechanic (CHAIN-002 through CHAIN-010, CHAIN-REP-001 and associated Priority 2E implementation/playtest roadmap) is PARKED / experimental, not an active production requirement or representative encounter acceptance gate. Preserve the complete historical exploration in docs/PANOPTICON_CHAIN_MECHANICS.md as an experimental reference indexed by docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md; do not delete it or treat prior approvals as current implementation authorization. Designer prefers elegant card-local sequencing and emergent synergy, citing Slay the Spire's per-card Block reward as inspiration. Explore existing Protocols as the natural vehicle for persistent conditional/per-card effects; use ordinary card effects for sequencing, draw, BW, pile manipulation and accumulated-action rewards. Preserve momentum, mastery, exceptional rather than routine combinations, resource-loop safeguards and clear audiovisual feedback without a separate CHAIN grammar, catalyst, link tracking or dedicated CHAIN UI requirement. Examples are exploratory, not approved new cards. Representative ICE encounter remains priority; remove standalone CHAIN work from active scope, retain general card synergy as a design exploration. Existing legacy DSY-011 CHAIN code/cards require Claude Code inventory and designer-approved retirement/reconciliation plan before production changes; no engine edits or issue closures in this decision. Future revival requires explicit designer approval.
+
+## SYNERGY-PLAYTEST-001 — Card-local synergy candidates (designer approved for playtest 2026-11-27)
+Preserve all ten candidates in the active representative ICE encounter playtest backlog, replacing the parked standalone CHAIN workstream within Priority 2E. Candidate effects below are experimental; costs, rarity, duration, targeting, stacking and balance remain to be finalized. No standalone CHAIN grammar required.
+
+| Card | Type | Candidate effect |
+|---|---|---|
+| REACTIVE ARMOUR | PROTOCOL | Whenever you play a card, gain 1 SHIELD. |
+| COUNTERINTELLIGENCE | PROTOCOL | Whenever you play a CLOAK, reduce TRACE by 1. |
+| OVERCLOCK | PROTOCOL | Whenever you play your third card each turn, draw 2 cards. |
+| FEEDBACK LOOP | PROTOCOL | Whenever you ZERO an ICE, gain 1 BW. |
+| SALVAGE | PROTOCOL | First time each turn you break a DEADLOCK, return a discarded card to your hand. |
+| ADAPTIVE DEFENCE | PROTOCOL | Whenever you install a PROGRAM, gain 3 SHIELD. |
+| FOLLOW THROUGH | SCRIPT | Reduce ICE STR by 2; reduce by 2 more if previous card played was an EXPLOIT. |
+| ESCALATION | SCRIPT | Reduce ICE STR by 1 for every EXPLOIT played this turn. |
+| AFTERBURN | SCRIPT | Gain 4 SHIELD if at least three cards have been played this turn. |
+| REPRISE | SCRIPT | Repeat the last SCRIPT played this turn, subject to restrictions. |
+
+Playtest individually and in combinations using controlled fixtures; include display/hover readability, Protocol rack status, trigger feedback, card order, resource economics, loop prevention and encounter relevance. Clarify whether the current card counts toward thresholds, trigger timing, replay legality and recursion before implementation. Check existing card names/IDs for collisions. Claude Code to prepare implementation/test plan; no production changes in this documentation batch. Canonical candidate register: docs/REDLINE_DECK_SYNERGY.md. CHAIN-PARK-001 remains in force.

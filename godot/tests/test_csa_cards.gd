@@ -17,7 +17,7 @@ const APPROVED_TEXT := {
 	"PROBE": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",   # CSA-04b
 	"GARBAGE_COLLECT": "BURN 1 other card in your hand. Draw 1.",   # CSA-04c, BURNED-001
 	"SPAM": "Can't be played normally. Pay 1 BW to clear it: it disappears for good.",   # CSA-04c, BURNED-001b
-	"PIVOT": "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost.",   # CSA-04d, CHAIN-PARK-001
+	"PIVOT": "Target ICE −1 STR this encounter. If target ICE STR is 0, break one of the target ICE subroutines for no cost.",   # CSA-04d, CHAIN-PARK-001; PIVOT-001 wording
 	"BORROWED_CREDENTIALS": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",   # CRED-COST-001: the 8 CRED is on the card face
 }
 ## Approved value changes on single cards since the snapshot: id -> {field: new value}. A compiled

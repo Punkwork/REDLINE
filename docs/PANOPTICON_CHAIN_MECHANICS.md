@@ -23,7 +23,7 @@ Existing DSY-011 baseline: immediately preceding card's tag in same Rustler turn
 
 ## 4. Existing cards and implementation audit
 Source: REDLINE_DECK_SYNERGY.md §6.1, §9; godot/scripts/core/cards.gd and game.gd (audit 2026-11-27).
-*Historical audit.* CHAIN-PARK-001 later removed CHAIN from every current card. PIVOT now reads "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost." (built in CSA-04d), and COVER FIRE and HANDOFF are experimental. Current records: `godot/data/cards.json`.
+*Historical audit.* CHAIN-PARK-001 later removed CHAIN from every current card. PIVOT now reads "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost." (built in CSA-04d), and COVER FIRE and HANDOFF are experimental. Current records: `godot/data/cards.json`. *PIVOT-001 (2026-11-28) later changed this wording; current text: card record `PIVOT` in `godot/data/cards.json`.*
 | Card | Current cost/type/tag | Existing effect under old DSY-011 |
 |---|---|---|
 | PIVOT | 1 BW SCRIPT EXPLOIT, common shared | −2 ICE STR; CHAIN CLOAK additional −1 STR |

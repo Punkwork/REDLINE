@@ -680,9 +680,11 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 			extract(3 * int(enc.ice[target].virus.get("LEECH", 0)))
 			enc.ice[target].virus.erase("LEECH")
 		"PIVOT":
-			# CSA-04d (CHAIN-PARK-001 follow-up): −1 STR; reaching 0 breaks one target subroutine for free,
-			# chosen by the Rustler; no prompt when only one qualifies.
-			if reduce_ice_str(target, int(CardDB.def(inst.id).zeroed_reduction)):
+			# CSA-04d (CHAIN-PARK-001 follow-up) and PIVOT-001 (designer 2026-11-28): −1 STR; then, if the
+			# target is at 0 STR (whether this play or an earlier one put it there), break one of its
+			# subroutines for free, chosen by the Rustler; no prompt when only one qualifies.
+			reduce_ice_str(target, int(CardDB.def(inst.id).zeroed_reduction))
+			if ice_str(target) == 0:
 				var br := {"same_ice": true}
 				var options := _breaker_targets(br, target)
 				if options.size() == 1:
