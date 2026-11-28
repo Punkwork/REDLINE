@@ -47,50 +47,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-PARK-001 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: PROTOCOL-DURATION-001 — Designer-approved lifecycle distinction (2026-11-27).
 
-## PROTOCOL-DURATION-001a — Expiry destination (designer approved 2026-11-27)
-At encounter completion, deployed Protocols expire and return to the discard pile, not BURNED. They remain part of the compiled deck and may be drawn and redeployed through normal card circulation. Installed Programs persist for the node. At the beginning of the next node the Rustler draws a new hand from their compiled deck. This resolves the expiry destination question in PROTOCOL-DURATION-001; exact cleanup ordering relative to breach/reward triggers remains subject to lifecycle review. Test discard destination, no duplicate/lost cards, cessation of expired triggers, Program persistence, and next-node hand initialization. Documentation only; no engine changes.
-
-
-## PROTOCOL-DURATION-001b — Encounter cleanup timing (designer approved 2026-11-27)
-Protocols remain active through final DEADLOCK action and qualifying triggers, BREACH, remaining permitted Runner actions, END TURN and PARTING SHOT, including all associated triggered effects. After resolution and survival confirmation, expire deployed Protocols to discard exactly once, before encounter progression or node completion rewards. Fatal PARTING SHOT grants no successful completion rewards. Installed Programs and RAM allocation persist across encounters in the node. Apply cleanup consistently on normal progression, forced LOCKDOWN progression and early exit; next node draws a new hand from compiled deck. Existing game.gd go_deeper() retains Protocols between layers, a confirmed discrepancy requiring reconciliation. Claude Code to validate trigger ordering, pending choices, fatal response, card conservation, rack reset, Program persistence and next-node initialization with deterministic multi-encounter tests. Existing BREACH-001 parting-shot behavior remains intact. Documentation only; no engine changes or authorization to implement the ten candidate cards before specification review.
-
-
-## SYNERGY-PLAYTEST-002 — Approved ten-card playtest catalogue (2026-11-27)
-Designer approves all ten SYNERGY-PLAYTEST-001 candidates for playtest, with REACTIVE ARMOUR reduced to 1 BW; remaining proposed costs unchanged. No CRED deployment costs. Values are playtest baseline, not final balance.
-| Card | Type | BW | Effect |
-|---|---|---:|---|
-| REACTIVE ARMOUR | PROTOCOL | 1 | Whenever you play a card, gain 1 SHIELD. |
-| COUNTERINTELLIGENCE | PROTOCOL | 1 | Whenever you play a CLOAK, reduce TRACE by 1. |
-| OVERCLOCK | PROTOCOL | 2 | Upon playing your third card each turn, draw 2 cards. |
-| FEEDBACK LOOP | PROTOCOL | 1 | Whenever you ZERO an ICE, gain 1 BW. |
-| SALVAGE | PROTOCOL | 2 | First DEADLOCK broken each turn: return a selected discarded card to hand. |
-| ADAPTIVE DEFENCE | PROTOCOL | 1 | Whenever you install a PROGRAM, gain 3 SHIELD. |
-| FOLLOW THROUGH | SCRIPT | 1 | Target ICE -2 STR, additional -2 if previous card played was EXPLOIT. |
-| ESCALATION | SCRIPT | 1 | Target ICE -1 STR per EXPLOIT played this turn including itself. |
-| AFTERBURN | SCRIPT | 0 | Gain 4 SHIELD if at least three other cards played this turn. |
-| REPRISE | SCRIPT | 2 | Repeat effect of previous SCRIPT played this turn. |
-Protocol lifecycle PROTOCOL-DURATION-001/a/b mandatory. Successful card plays count, not Icepick or CAP activations; no Protocol self-trigger on deployment; independent copies, no additional trigger cap initially except printed limits. REPRISE repeats effect, not card-play event, cannot repeat itself; Claude Code must audit targeting, recursion, pending choices and legality, flag unresolved semantics rather than silently inventing rules. STR reductions encounter duration. No standalone CHAIN mechanic.
-All ten must be obtainable through normal node completion card rewards in the representative playtest (audit CORE_POOL/reward eligibility and rarity configuration). Designer also proposes UPLINK node to ensure specific cards are accessible for testing; recommended test-only fixed inventory of all ten, affordable CRED purchase prices, placement before subsequent combat, exact prices/placement and existing UPLINK architecture audit pending. Do not treat temporary inventory/prices as final economy. Preserve organic reward acquisition alongside deterministic fixtures and targeted purchase access. Include two-/three-encounter nodes, card display/hover, rack, trigger feedback, acquisition, deck persistence, lifecycle, loop prevention and regression tests. Priority 2E Card Synergy and Protocol Development; coordinate with representative encounter and typography/motion. Claude Code owns implementation and validation; this commit approves playtest content and reward inclusion, records UPLINK proposal for implementation planning, does not itself modify engine or authorize unrelated map expansion.
-
-
-## SYNERGY-PLAYTEST-002a — OVERCLOCK revision (2026-11-27)
-Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card each turn, draw 2 cards and gain 1 BW. Retain 2 BW deployment cost, encounter duration, once per turn per deployed copy, and all other SYNERGY-PLAYTEST-002 conventions. Supersedes the draw-only effect. Include immediate BW availability, trigger frequency and resource-loop tests. Documentation only; no engine changes.
-
-LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-27 — PHIL-SURV-001 / TRACE-DEF-001 / UPL-IDENTITY-001 / PHIL-CONSENT-001 (ChatGPT); 2026-11-27 — ECON-TRACE-001 / ECON-MARKET-001 (ChatGPT).
-
-## 2026-11-27 — MAP-003f / MINIBOSS-003: V5 map generator (Claude Code)
-
-Assignment (designer): amend the corporation map generator for the approved Uplink distribution; audit V4, build V5, keep V4, validate every route of at least 200 accepted maps. No engine, Uplink or map-UI changes.
-
-**Audit of V4:** 1,000 seeds, 363 accepted (36.3%). 33 accepted maps have dead-end Nodes: a row can be smaller than the number of ICE counts feeding it, and the path walker drops the dead routes silently. The spacing check skips the row-1 Opening Node (22 maps, 5,640 routes with 5 ICE in rows 1–5). 138 maps let a row-8 Node link only to the Mini-Boss. Only 7 of 363 meet MAP-003f. Repair-and-reject cycles under an upper bound on shared Nodes, so it was replaced.
-
-**Built:** `map003_generator.py --v5` (`gen5`): a skeleton kept feasible by an exact table for ICE count and spacing, then an exact backtracking search for types over per-Node min/max summaries. Bounded attempts, explicit `failed` status, no relaxation. Seeds are deterministic (string-seeded `random.Random`). The V1 block is now import-safe. V1–V4 output is unchanged (hash `908bba37…` over seeds 0–299; command-line output byte-identical).
-
-**Validated:** `validate_map003_v5.py`: 200/200 seeds accepted, 1,623,047 routes, 0 failures; 2 Uplinks 68.4% / 3 Uplinks 31.6%; distributions 3-1-1-1-1 31.6%, 2-2-1-1-1 16.5%, 2-1-2-1-1 16.8%, 2-1-1-2-1 15.7%, 2-1-1-1-2 19.5%. Mini-Boss on 33.2% of routes; avoidable from 100% of Nodes in rows 1–8. 2.7 ms mean, 47.5 ms worst per map. Determinism matched in-process and in fresh interpreters (`PYTHONHASHSEED` 1 / 4242). 1,000-map run: 8,007,197 routes, 0 failures. 10,000-seed scan: 0 failures. `python3 -m unittest tests/python/test_map003_v5.py`: 18 passed / 0 failed. A placement bias (Uplinks averaging row 9.7) was found and removed by weighting the type order (I3). No Godot files changed, so the Godot tests were not run.
-
-**CONSISTENCY-001** (approved while this work was in progress): repository-wide dependency search done. Mini-Boss pre-entry disclosure removed from `REDLINE_MINIBOSSES.md` and `REDLINE_ICE_EFFECTS.md`; superseded Master Design text labelled. Open: `REDLINE_CORE_RULES.md` §10 still describes the UPL-007 map; `REDLINE_UPLINK_AND_CAPS.md` Clinic text predates CLINIC-001; MINIBOSS-003 ID collision. Status: design approved, Python implementation validated, documentation partly reconciled, GDScript pending (report §9).
-
-*Interpretations to confirm:* I1–I5 in the report §7. Concerns before the port: report §8. Surprise CLAUDECODE-20261127-S01 (MINIBOSS-003 used twice). LOG-001: the 24 oldest entries archived (listed in the LOG-001 note).
+LOG-001 moved the oldest dated entries to the archive unchanged: PROTOCOL-DURATION-001a — Expiry destination (designer approved 2026-11-27), PROTOCOL-DURATION-001b — Encounter cleanup timing (designer approved 2026-11-27), SYNERGY-PLAYTEST-002 — Approved ten-card playtest catalogue (2026-11-27), SYNERGY-PLAYTEST-002a — OVERCLOCK revision (2026-11-27), 2026-11-27 — MAP-003f / MINIBOSS-003: V5 map generator (Claude Code).
 
 ## 2026-11-27 — CONSISTENCY-001a: CSA-01 delivered, CSA-02 proposed (Claude Code)
 
@@ -517,3 +474,11 @@ Approved PARTING SHOT suppression recorded in canonical CardDB, Master and HANDO
 ## 2026-11-28 — CARD-REVIEW-001 engine items built (Claude Code)
 
 Designer, 11:48: the card-review items are approved. VOID ICEPICK reveals the next concealed subroutine after each of its breaks (`_reveal_next`). A TASER break sets the ICE's `no_parting_shot` flag for the encounter. STACK SMASH lowers every ICE by its EXPLOIT count (record: no target, `params.str_per`). Records are aligned and the generated doc blocks regenerated; no divergent cards remain. Tests: new `test_spec_card_review` 16/0 (in CI); test_csa_cards 553/0; Python 86; parity 4,017/0; every other suite 0 failed. Ghostware engine effects are held (11:49).
+
+## 2026-11-28 — CSA-06/07: Ghostware single source (Claude Code)
+
+Designer 11:48: "make Ghostware have a single source of truth, just like was done for cards … CSA 06 and CSA 07 … the first two steps"; 11:49: Ghostware effects held.
+- **Step 1 (generated tables):** the hand Ghostware tables in Upgrades/Events/Escape §2.2–2.4, Deck Synergy §9.3, ICE Corp 2 §8 and ICE Corp 3 §9, and the four Rustler ORIGIN lines, are now `GENERATED:ghostware` blocks rendered from `cards.json` by `tools/csa/gen_card_docs.py`; `--check` (already in CI) catches drift. Design notes moved into each record's `note` field.
+- **Step 2 (ORIGIN text):** the four ORIGIN records carry their text; `CardDB.RUSTLERS[*].origin_text` reads it through `_origin_text()`.
+- **Tests:** `test_gen_card_docs.py` gains two tests (each of the 41 records shown in exactly one block; a hand edit or a record change fails `--check` until regenerated); `test_csa_cards.gd` checks each Rustler's ORIGIN text equals its record.
+- **Results:** validate_cards VALID (127 cards); gen_card_docs `--check` in step (6 docs); export_maps `--check` in step; `tests/python` 88 OK; test_game 453/0; test_csa_cards 557/0; parity 4,017/0 (3,937 actions); every other suite 0 failed.

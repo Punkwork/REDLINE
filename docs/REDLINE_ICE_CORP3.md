@@ -145,11 +145,15 @@ When you take ANIMA's core, LUCIDA tries to wake you before you can leave.
 
 ## 9. LUCIDA Ghostware set (3): stolen neural tech
 
-| Ghostware | Effect |
-|---|---|
-| **LUCID DREAM** | CORTEX can't reduce your DRAW below 3. |
-| **MEMORY BACKUP** | Whenever an ICE makes you FORGET, draw 1 card. *(Changed with ICE3-002a.)* |
-| **NEURAL FIREWALL** | The first CORTEX you would gain each encounter is prevented. |
+<!-- GENERATED:ghostware ids=LUCID_DREAM,MEMORY_BACKUP,NEURAL_FIREWALL -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **LUCID DREAM** | CORTEX can't reduce your DRAW below 3. | payload only |
+| **MEMORY BACKUP** | Whenever an ICE makes you FORGET, draw 1 card. *(Changed with ICE3-002a.)* | payload only |
+| **NEURAL FIREWALL** | The first CORTEX you would gain each encounter is prevented. | payload only |
+<!-- /GENERATED -->
 
 One of these is always among the 3 payload choices at ANIMA (P5-003).
 

@@ -3180,7 +3180,8 @@
 				"P5-003",
 				"P5-004",
 				"P5-008"
-			]
+			],
+			"note": "From the approved GHOST-001 example."
 		},
 		"NEURAL_BUFFER": {
 			"name": "NEURAL BUFFER",
@@ -3333,7 +3334,8 @@
 				"P5-003",
 				"P5-004",
 				"P5-008"
-			]
+			],
+			"note": "GHOST-011: was 1 more."
 		},
 		"KILLSWITCH": {
 			"name": "KILLSWITCH",
@@ -3349,7 +3351,8 @@
 				"P5-004",
 				"P5-010",
 				"P5-008"
-			]
+			],
+			"note": "Full rules: §2.2a."
 		},
 		"COLD_STORAGE": {
 			"name": "COLD STORAGE",
@@ -3495,7 +3498,8 @@
 			},
 			"decisions": [
 				"P5-004"
-			]
+			],
+			"note": "NODE-AUTHORITY-001: no longer at the DEAD DROP."
 		},
 		"STREET_CRED": {
 			"name": "STREET CRED",
@@ -3590,7 +3594,8 @@
 			},
 			"decisions": [
 				"P5-005"
-			]
+			],
+			"note": "HALCYON's master key to every door."
 		},
 		"VOICE_MIMIC": {
 			"name": "VOICE MIMIC",
@@ -3638,7 +3643,8 @@
 			},
 			"decisions": [
 				"ICE2-007"
-			]
+			],
+			"note": "An officer's ID, cloned."
 		},
 		"DASHCAM_FEED": {
 			"name": "DASHCAM FEED",
@@ -3675,7 +3681,8 @@
 			"decisions": [
 				"ICE3-008",
 				"ICE3-002a"
-			]
+			],
+			"note": "Changed with ICE3-002a."
 		},
 		"NEURAL_FIREWALL": {
 			"name": "NEURAL FIREWALL",
@@ -3693,7 +3700,7 @@
 			"name": "READY RIG",
 			"set": "ORIGIN",
 			"rustler": "GENERALIST",
-			"text": "",
+			"text": "At the start of each ICE Node, choose one PROGRAM in your deck and install it for free.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -3707,7 +3714,7 @@
 			"name": "LOW PROFILE",
 			"set": "ORIGIN",
 			"rustler": "ECHO",
-			"text": "",
+			"text": "Whenever you would gain TRACE, gain 1 less (minimum 0).",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -3721,7 +3728,7 @@
 			"name": "REDLINER",
 			"set": "ORIGIN",
 			"rustler": "RIOT",
-			"text": "",
+			"text": "At the start of your turn, if your TRACE is 20 or more, gain 1 BW.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -3735,16 +3742,18 @@
 			"name": "PATIENT ZERO",
 			"set": "ORIGIN",
 			"rustler": "VECTOR",
-			"text": "",
+			"text": "At the start of each encounter, choose an ICE: INFECT 1 ROT on it.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
 			},
 			"decisions": [
 				"RUSTLER-001",
-				"P5-003"
-			]
+				"P5-003",
+				"VECTOR-001"
+			],
+			"note": "VECTOR-001, 2026-11-14: was \"on every ICE\"."
 		}
 	},
-	"ghostware_about": "CSA-07 (designer 2026-11-28: 'We need a canonical database for ghostware'): one record per Ghostware. Effects: REDLINE_UPGRADES_EVENTS_ESCAPE.md §2, Deck Synergy §9.3, ICE Corp 2 §8, ICE Corp 3 §9; prices P5-008 (100 CRED, 75 with a drawback; corporation sets are payload-only, ORIGINs never offered). ORIGIN text lives in CardDB.RUSTLERS."
+	"ghostware_about": "CSA-07 (designer 2026-11-28): the single source for Ghostware. One record per Ghostware: name, set, effect text, drawback, price (P5-008; corporation sets and ORIGINs are never sold), note (provenance shown in the docs), status and decisions. The design docs show these records in generated blocks (tools/csa/gen_card_docs.py); CardDB.RUSTLERS reads ORIGIN text from here."
 }

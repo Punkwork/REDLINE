@@ -151,23 +151,28 @@ static func _freeze(v: Variant) -> void:
 		v.make_read_only()
 
 
+## CSA-06/07: ORIGIN text lives in the Ghostware record (cards.json `ghostware`), not here.
+static func _origin_text(id: String) -> String:
+	return String(Dictionary(GHOSTWARE.get(id, {})).get("text", ""))
+
+
 ## RUSTLER-001..008 (REDLINE_RUSTLERS.md). Shared stats: 30 VITAE, 4 BW, DRAW 6, 4 RAM.
 static var RUSTLERS: Dictionary = {
 	"GENERALIST": {"name": "THE GENERALIST", "quote": "A bit of everything. Enough of nothing.", "difficulty": 1,
 		"style": "Balanced: an Icepick for every ICE type.", "origin": "READY RIG",
-		"origin_text": "At the start of each ICE Node, choose one PROGRAM in your deck and install it for free.",
+		"origin_text": _origin_text("READY_RIG"),
 		"starter": STARTER_GENERALIST, "nulrem": "Generalist"},
 	"ECHO": {"name": "ECHO", "quote": "If they never notice you, you were never there.", "difficulty": 2,
 		"style": "Quiet: low TRACE, long encounters, more CRED. Strong vs TUMBLERS.", "origin": "LOW PROFILE",
-		"origin_text": "Whenever you would gain TRACE, gain 1 less (minimum 0).",
+		"origin_text": _origin_text("LOW_PROFILE"),
 		"starter": STARTER_ECHO, "nulrem": "ECHO"},
 	"RIOT": {"name": "RIOT", "quote": "Subtle is for people with time.", "difficulty": 3,
 		"style": "Loud: cheap cards that add TRACE; stronger above TRACE 20. Strong vs FORTRESSES.", "origin": "REDLINER",
-		"origin_text": "At the start of your turn, if your TRACE is 20 or more, gain 1 BW.",
+		"origin_text": _origin_text("REDLINER"),
 		"starter": STARTER_RIOT, "nulrem": "RIOT"},
 	"VECTOR": {"name": "VECTOR", "quote": "I don't break in. I wait for it to rot.", "difficulty": 2,
 		"style": "Viruses: weakens every ICE over time. Strong vs VOIDS.", "origin": "PATIENT ZERO",
-		"origin_text": "At the start of each encounter, choose an ICE: INFECT 1 ROT on it.",
+		"origin_text": _origin_text("PATIENT_ZERO"),
 		"starter": STARTER_VECTOR, "nulrem": "VECTOR"},
 }
 

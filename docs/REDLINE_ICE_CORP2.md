@@ -143,11 +143,15 @@ When you take OVERWATCH's data core, IRONWATCH closes the district.
 
 ## 8. IRONWATCH Ghostware set (3): confiscated gear
 
-| Ghostware | Effect |
-|---|---|
-| **KEVLAR WEAVE** | PULP from ICE subroutines deals 1 less to you (minimum 0). |
-| **BADGE CLONE** | At the start of each encounter, every VOID gets −1 STR. *(An officer's ID, cloned.)* |
-| **DASHCAM FEED** | Whenever you BREACH a layer, heal 3 VITAE. |
+<!-- GENERATED:ghostware ids=KEVLAR_WEAVE,BADGE_CLONE,DASHCAM_FEED -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **KEVLAR WEAVE** | PULP from ICE subroutines deals 1 less to you (minimum 0). | payload only |
+| **BADGE CLONE** | At the start of each encounter, every VOID gets −1 STR. *(An officer's ID, cloned.)* | payload only |
+| **DASHCAM FEED** | Whenever you BREACH a layer, heal 3 VITAE. | payload only |
+<!-- /GENERATED -->
 
 One of these is always among the 3 payload choices at OVERWATCH (P5-003).
 

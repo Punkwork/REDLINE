@@ -122,6 +122,12 @@ func _initialize() -> void:
 		"PROBE shows its approved PROBE-004a text and is no longer divergent (CSA-04b)")
 	check(CardDB.DEFS.is_read_only() and CardDB.DEFS.PROBE.is_read_only() and CardDB.STARTER_RIOT.is_read_only(), "card data read-only, as the constants were")
 	check(no_floats(CardDB.DATA), "no float values after loading (JSON numbers restored to int)")
+	# CSA-06/07 (designer 2026-11-28): ORIGIN text is read from its Ghostware record, one source.
+	for r in CardDB.RUSTLERS:
+		var gid := String(CardDB.RUSTLERS[r].origin).replace(" ", "_")
+		check(CardDB.GHOSTWARE.has(gid) and String(CardDB.GHOSTWARE[gid].get("set", "")) == "ORIGIN"
+			and CardDB.RUSTLERS[r].origin_text == String(CardDB.GHOSTWARE[gid].text) and String(CardDB.RUSTLERS[r].origin_text) != "",
+			"%s ORIGIN text is the %s Ghostware record's text" % [r, gid])
 	print("CSA CARDS: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 

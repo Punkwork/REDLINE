@@ -6,6 +6,7 @@ decks) show them in marked blocks that this tool writes; nobody edits inside a b
 
   <!-- GENERATED:cards ids=BATTERING_RAM,JACKHAMMER -->   one row per listed card, in that order
   <!-- GENERATED:starter rustler=GENERALIST -->           the Rustler's starter deck, with quantities
+  <!-- GENERATED:ghostware ids=HEARTBEAT,ONE_TRICK -->    one row per listed Ghostware (CSA-07), in that order
   ... generated table ...
   <!-- /GENERATED -->
 
@@ -28,9 +29,10 @@ from card_text import rules_text  # noqa: E402  CSA-04j: render the template
 
 ROOT = Path(__file__).resolve().parents[2]
 CARDS = ROOT / "godot" / "data" / "cards.json"
-DOCS = [ROOT / "docs" / "REDLINE_CARD_POOLS.md", ROOT / "docs" / "REDLINE_RUSTLERS.md"]
+DOCS = [ROOT / "docs" / n for n in ("REDLINE_CARD_POOLS.md", "REDLINE_RUSTLERS.md", "REDLINE_UPGRADES_EVENTS_ESCAPE.md",
+                                    "REDLINE_DECK_SYNERGY.md", "REDLINE_ICE_CORP2.md", "REDLINE_ICE_CORP3.md")]
 
-BLOCK = re.compile(r"(<!-- GENERATED:(cards|starter) ([^>]*?) -->\n)(.*?)(<!-- /GENERATED -->)", re.S)
+BLOCK = re.compile(r"(<!-- GENERATED:(cards|starter|ghostware) ([^>]*?) -->\n)(.*?)(<!-- /GENERATED -->)", re.S)
 BANNER = "*Generated from `godot/data/cards.json` by `tools/csa/gen_card_docs.py`. Edit the card records, not this table.*\n\n"
 
 
@@ -105,9 +107,39 @@ def starter_block(data: dict, raw: str) -> str:
     return BANNER + "\n".join(rows) + "\n"
 
 
+GHOST_BANNER = "*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*\n\n"
+
+
+def ghost_price(g: dict) -> str:
+    if "price" in g:
+        return "%d CRED" % g["price"]
+    return "never sold" if g.get("set") == "ORIGIN" else "payload only"
+
+
+def ghostware_block(data: dict, raw: str) -> str:
+    """CSA-07: Ghostware rows from the canonical records; the drawback after ⚠, provenance in italics."""
+    ids = [i for i in args_of(raw).get("ids", "").split(",") if i]
+    if not ids:
+        raise GenError("a ghostware block lists no ids")
+    rows = ["| Ghostware | Effect | Price |", "|---|---|---|"]
+    for i in ids:
+        g = data.get("ghostware", {}).get(i)
+        if g is None:
+            raise GenError("unknown Ghostware id %r" % i)
+        label = "**%s**" % g["name"] + (" *(drawback)*" if g.get("drawback") else "")
+        effect = g.get("text", "")
+        if g.get("drawback"):
+            effect = "**%s** ⚠ **%s**" % (effect, g["drawback"])
+        if g.get("note"):
+            effect += " *(%s)*" % g["note"]
+        rows.append("| %s | %s | %s |" % (label, cell(effect), ghost_price(g)))
+    return GHOST_BANNER + "\n".join(rows) + "\n"
+
+
 def render(text: str, data: dict) -> str:
     def sub(m):
-        body = cards_block(data, m.group(3)) if m.group(2) == "cards" else starter_block(data, m.group(3))
+        kind = m.group(2)
+        body = cards_block(data, m.group(3)) if kind == "cards" else (starter_block(data, m.group(3)) if kind == "starter" else ghostware_block(data, m.group(3)))
         return m.group(1) + body + m.group(5)
     return BLOCK.sub(sub, text)
 

@@ -277,12 +277,16 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | **CLEAN BUILD** | Generalist | Uncommon | PROTOCOL | 1 BW | Your COMPILED cards cost 1 less BW. |
 
 ### 9.3 Ghostware candidates
-| Ghostware | Effect |
-|---|---|
-| **HEARTBEAT** | Whenever you REBOOT, −2 TRACE. |
-| **MINIMAL INSTALL** | At the start of each ICE Node, if your FOOTPRINT is in the GHOST band, +1 AMP. |
-| **DEDUPLICATOR** | FUSE works on any card type, not only SCRIPTs. |
-| **ONE-TRICK** *(drawback)* | **+1 BW every turn.** ⚠ Your deck can't grow past the corporation's cap minus 4 (HALCYON 18, IRONWATCH 25, LUCIDA 31): at that size, the card reward screen offers only DECOMPILE or skip. |
+<!-- GENERATED:ghostware ids=HEARTBEAT,MINIMAL_INSTALL,DEDUPLICATOR,ONE_TRICK -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **HEARTBEAT** | Whenever you REBOOT, −2 TRACE. | 100 CRED |
+| **MINIMAL INSTALL** | At the start of each ICE Node, if your FOOTPRINT is in the GHOST band, +1 AMP. | 100 CRED |
+| **DEDUPLICATOR** | FUSE works on any card type, not only SCRIPTs. | 100 CRED |
+| **ONE-TRICK** *(drawback)* | **+1 BW every turn.** ⚠ **Your deck can't grow past the corporation's cap minus 4 (HALCYON 18, IRONWATCH 25, LUCIDA 31): at that size, the card reward screen offers only DECOMPILE or skip.** | 75 CRED |
+<!-- /GENERATED -->
 
 ---
 

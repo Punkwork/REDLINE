@@ -317,6 +317,10 @@ Requiring checks has consequences:
 - **Declared gap (`params_in_code`, 37 records).** Core loop: DEAD AIR ("CACHE 1": the choice prompt takes one card) and RAINBOW TABLE ("up to 2": the `double` flag). The other 35 are cards switched off in the core-loop build (STRIP-001), whose numbers stay in `game.gd` until those systems return; `validate_cards.py --register` lists them. The AMP wording in `game.card_text()` (WARM BOOT, SHORT LOOP, PAIN TOLERANCE, SILENT PARTNER) belongs to those cards and moves with them; SURGE PROTECTOR's reads its parameter.
 - **Semantic review stays human:** whether a template still reads well when its number changes (for example "Break {breaker.n} subroutine" if n became 2).
 
+## 8b. CSA-06/07 Ghostware single source (Claude Code, 2026-11-28)
+
+Designer 11:48. One record per Ghostware in `godot/data/cards.json` (`ghostware`, 41 records). Consumers: `CardDB.GHOSTWARE` (Uplink stock), `CardDB.RUSTLERS[*].origin_text` (via `_origin_text()`; main menu, Rustler select, visible-state adapter, encounter header), and generated `GENERATED:ghostware` blocks in Upgrades/Events/Escape §2.2–2.4, Deck Synergy §9.3, ICE Corp 2 §8, ICE Corp 3 §9 and Rustlers (ORIGIN). Enforcement: `gen_card_docs.py --check` (CI), `test_gen_card_docs.py` (coverage of all 41 records, hand-edit and record-change negatives), `test_csa_cards.gd` (ORIGIN text equals the record). Not covered: Ghostware *behaviour* (held by the designer); ICE and CAPS.
+
 ## 9. Remaining enforcement gaps (explicit)
 
 Until CSA-05 and Q5:

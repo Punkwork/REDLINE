@@ -91,7 +91,7 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 
 ### 2.1 Rules
 
-*Canonical records (CSA-07, 2026-11-28): every Ghostware below has one record in `godot/data/cards.json` (`ghostware`): name, set, effect, drawback, price (P5-008), status and decisions. Change a Ghostware there and here together.*
+*Single source (CSA-06/07, designer 2026-11-28): every Ghostware is one record in `godot/data/cards.json` (`ghostware`). The tables in this doc, Deck Synergy §9.3, ICE Corp 2 §8, ICE Corp 3 §9 and the Rustlers' ORIGIN sections are generated from those records by `tools/csa/gen_card_docs.py` and checked in CI; change the record, never a table.*
 
 - Ghostware is **permanent for the run**. There's **no limit** on how many you can have (stacking is supported; see the existing synergy principle).
 - **Payload (Central Node):** choose **1 of 3**: **1 from the corporation's own set** + **2 from the general pool**. The chosen Ghostware is **active immediately**, including during the escape (P5-009; see §2.5).
@@ -100,37 +100,45 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 
 ### 2.2 General pool (20)
 
-| Ghostware | Effect |
-|---|---|
-| **SUBDERMAL PLATING** | At the start of each Node, gain **6 SHIELD that lasts the whole Node** (not just one turn). *(From the approved GHOST-001 example.)* |
-| **NEURAL BUFFER** | +6 Max VITAE (and heal 6). |
-| **EXPANDED MEMORY** | +1 RAM. |
-| **OVERCLOCKED BUS** | +1 BW on the first turn of each encounter. |
-| **SPARE SOCKET** | +1 CAP slot. Gain a random common CAP at the start of each corporation. |
-| **DEAD MAN'S POCKET** | Deferred. Its HOLD enhancement is inactive under HAND-CLEANUP-001. |
-| **MONEY MULE** | Your Extractors extract 25% more CRED (rounded up). |
-| **SIGNAL BOOSTER** | You can see what's inside SIGNAL UNCLEAR Nodes before choosing them. |
-| **SCRAMBLED ID** | The first TRACE strike in each corporation has no penalty (TRACE still drops to 20). |
-| **BLACK MIRROR** *(drawback)* | **+1 BW every turn.** ⚠ Start each corporation at **10 TRACE**. |
-| **BLEEDING EDGE** *(drawback)* | **+1 DRAW every turn.** ⚠ **−8 Max VITAE.** |
-| **BURNOUT CHIP** *(drawback)* | **Your Icepicks have +2 STR.** ⚠ Whenever you take PULP damage, take 2 more. *(GHOST-011: was 1 more.)* |
-| **KILLSWITCH** | Once per Node, if **damage** would drop your VITAE to 0, it drops to 1 instead. *(Full rules: §2.2a.)* |
-| **COLD STORAGE** | CACHED cards cost 1 less BW. |
-| **RECYCLER** | Whenever a card is BURNED, gain 1 BW (once per turn). |
-| **CHAOS ENGINE** | Whenever you play your 4th card in a turn, draw 1. |
-| **LUCKY STRIKE** | Card rewards offer 4 cards instead of 3. |
-| **FIRST CONTACT** | The first ICE you meet in each Node gets −2 STR. |
-| **SLEEPER AGENT** | At the start of each corporation, add a random rare card to your deck. |
-| **LONG MEMORY** *(drawback)* | **+2 RAM.** ⚠ Your first card each turn costs 1 more BW. |
+<!-- GENERATED:ghostware ids=SUBDERMAL_PLATING,NEURAL_BUFFER,EXPANDED_MEMORY,OVERCLOCKED_BUS,SPARE_SOCKET,DEAD_MANS_POCKET,MONEY_MULE,SIGNAL_BOOSTER,SCRAMBLED_ID,BLACK_MIRROR,BLEEDING_EDGE,BURNOUT_CHIP,KILLSWITCH,COLD_STORAGE,RECYCLER,CHAOS_ENGINE,LUCKY_STRIKE,FIRST_CONTACT,SLEEPER_AGENT,LONG_MEMORY -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **SUBDERMAL PLATING** | At the start of each Node, gain 6 SHIELD that lasts the whole Node (not just one turn). *(From the approved GHOST-001 example.)* | 100 CRED |
+| **NEURAL BUFFER** | +6 Max VITAE (and heal 6). | 100 CRED |
+| **EXPANDED MEMORY** | +1 RAM. | 100 CRED |
+| **OVERCLOCKED BUS** | +1 BW on the first turn of each encounter. | 100 CRED |
+| **SPARE SOCKET** | +1 CAP slot. Gain a random common CAP at the start of each corporation. | 100 CRED |
+| **DEAD MAN'S POCKET** | Deferred: its HOLD enhancement is inactive under HAND-CLEANUP-001. | payload only |
+| **MONEY MULE** | Your Extractors extract 25% more CRED (rounded up). | 100 CRED |
+| **SIGNAL BOOSTER** | You can see what's inside SIGNAL UNCLEAR Nodes before choosing them. | 100 CRED |
+| **SCRAMBLED ID** | The first TRACE strike in each corporation has no penalty (TRACE still drops to 20). | 100 CRED |
+| **BLACK MIRROR** *(drawback)* | **+1 BW every turn.** ⚠ **Start each corporation at 10 TRACE.** | 75 CRED |
+| **BLEEDING EDGE** *(drawback)* | **+1 DRAW every turn.** ⚠ **−8 Max VITAE.** | 75 CRED |
+| **BURNOUT CHIP** *(drawback)* | **Your Icepicks have +2 STR.** ⚠ **Whenever you take PULP damage, take 2 more.** *(GHOST-011: was 1 more.)* | 75 CRED |
+| **KILLSWITCH** | Once per Node, if damage would drop your VITAE to 0, it drops to 1 instead. *(Full rules: §2.2a.)* | 100 CRED |
+| **COLD STORAGE** | CACHED cards cost 1 less BW. | 100 CRED |
+| **RECYCLER** | Whenever a card is BURNED, gain 1 BW (once per turn). | 100 CRED |
+| **CHAOS ENGINE** | Whenever you play your 4th card in a turn, draw 1. | 100 CRED |
+| **LUCKY STRIKE** | Card rewards offer 4 cards instead of 3. | 100 CRED |
+| **FIRST CONTACT** | The first ICE you meet in each Node gets −2 STR. | 100 CRED |
+| **SLEEPER AGENT** | At the start of each corporation, add a random rare card to your deck. | 100 CRED |
+| **LONG MEMORY** *(drawback)* | **+2 RAM.** ⚠ **Your first card each turn costs 1 more BW.** | 75 CRED |
+<!-- /GENERATED -->
 
 **Reserve (not in the starting game; can be added later):**
 
-| Ghostware | Effect |
-|---|---|
-| **SIXTH SENSE** | Draw 1 extra card on the first turn of each encounter. |
-| **FIELD MEDIC** | At every SAFEHOUSE, heal 5 extra VITAE. *(NODE-AUTHORITY-001: no longer at the DEAD DROP.)* |
-| **STREET CRED** | Start each corporation with 30 CRED. |
-| **PATCH CABLE** | Whenever you apply a PATCHWORK, heal 4 VITAE. |
+<!-- GENERATED:ghostware ids=SIXTH_SENSE,FIELD_MEDIC,STREET_CRED,PATCH_CABLE -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **SIXTH SENSE** | Draw 1 extra card on the first turn of each encounter. | 100 CRED |
+| **FIELD MEDIC** | At every SAFEHOUSE, heal 5 extra VITAE. *(NODE-AUTHORITY-001: no longer at the DEAD DROP.)* | 100 CRED |
+| **STREET CRED** | Start each corporation with 30 CRED. | 100 CRED |
+| **PATCH CABLE** | Whenever you apply a PATCHWORK, heal 4 VITAE. | 100 CRED |
+<!-- /GENERATED -->
 
 ### 2.2a KILLSWITCH rules (APPROVED 2026-11-13, P5-010)
 
@@ -145,11 +153,15 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 
 ### 2.3 HALCYON set (3) — stolen smart-home tech
 
-| Ghostware | Effect |
-|---|---|
-| **HEARTH KEY** | At the start of each encounter, every FORTRESS gets −1 STR. *(HALCYON's master key to every door.)* |
-| **VOICE MIMIC** | Once per encounter, the first TRACE subroutine that would resolve **fails**. |
-| **AD BLOCKER** | Bloatware the corporation INSERTs always goes to your discard pile, never your hand or draw pile. |
+<!-- GENERATED:ghostware ids=HEARTH_KEY,VOICE_MIMIC,AD_BLOCKER -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **HEARTH KEY** | At the start of each encounter, every FORTRESS gets −1 STR. *(HALCYON's master key to every door.)* | payload only |
+| **VOICE MIMIC** | Once per encounter, the first TRACE subroutine that would resolve fails. | payload only |
+| **AD BLOCKER** | Bloatware the corporation INSERTs always goes to your discard pile, never your hand or draw pile. | payload only |
+<!-- /GENERATED -->
 
 **Other corporations' sets:** IRONWATCH (KEVLAR WEAVE, BADGE CLONE, DASHCAM FEED) in `REDLINE_ICE_CORP2.md` §8; LUCIDA (LUCID DREAM, MEMORY BACKUP, NEURAL FIREWALL) in `REDLINE_ICE_CORP3.md` §9.
 

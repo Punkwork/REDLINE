@@ -87,3 +87,41 @@ class Drift(Copies):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class GhostwareSingleSource(unittest.TestCase):
+    """CSA-06/07 (designer 2026-11-28): every Ghostware record appears in a generated block, and the
+    generated Ghostware tables cannot drift from cards.json."""
+    def docs(self):
+        return [str(d) for d in G.DOCS]
+
+    def test_every_ghostware_record_is_shown_once(self):
+        import re
+        seen = []
+        for path in self.docs():
+            with open(path, encoding="utf-8") as f:
+                for m in re.finditer(r"<!-- GENERATED:ghostware ids=([A-Z0-9_,]+) -->", f.read()):
+                    seen += m.group(1).split(",")
+        with open(CARDS, encoding="utf-8") as f: ghost = json.load(f)["ghostware"]
+        self.assertEqual(sorted(seen), sorted(ghost), "each Ghostware record in exactly one generated block")
+
+    def test_hand_edit_or_record_change_fails_check(self):
+        tmp = tempfile.mkdtemp()
+        try:
+            docs = [shutil.copy(p, tmp) for p in self.docs()]
+            cards = shutil.copy(CARDS, tmp)
+            args = ["--cards", cards, "--docs", *docs]
+            self.assertEqual(G.main(args + ["--check"]), 0)
+            up = [d for d in docs if d.endswith("REDLINE_UPGRADES_EVENTS_ESCAPE.md")][0]
+            with open(up, encoding="utf-8") as f: text = f.read()
+            with open(up, "w", encoding="utf-8") as f: f.write(text.replace("+1 RAM.", "+2 RAM.", 1))
+            self.assertNotEqual(G.main(args + ["--check"]), 0, "hand edit in a Ghostware table is caught")
+            G.main(args)
+            with open(cards, encoding="utf-8") as f: data = json.load(f)
+            data["ghostware"]["EXPANDED_MEMORY"]["text"] = "+3 RAM."
+            with open(cards, "w", encoding="utf-8") as f: json.dump(data, f)
+            self.assertNotEqual(G.main(args + ["--check"]), 0, "a record change is caught until regenerated")
+            G.main(args)
+            self.assertEqual(G.main(args + ["--check"]), 0)
+        finally:
+            shutil.rmtree(tmp)

@@ -80,7 +80,15 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 <!-- /GENERATED -->
 
 ### ORIGIN Ghostware — READY RIG
-**At the start of each ICE Node, choose one PROGRAM in your deck and install it for free.** It doesn't come from your hand, so your first hand stays full.
+<!-- GENERATED:ghostware ids=READY_RIG -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **READY RIG** | At the start of each ICE Node, choose one PROGRAM in your deck and install it for free. | never sold |
+<!-- /GENERATED -->
+
+It doesn't come from your hand, so your first hand stays full.
 
 **Why:** the Generalist's weakness is setup time; five Programs compete for 4 RAM and 4 BW a turn. READY RIG makes the first turn of every Node feel smooth, which is exactly what a tutorial Rustler needs.
 
@@ -118,7 +126,14 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 > **ECHO-001 / ECHO-003 (2026-11-14):** SLOW DRIP left the starter deck for ECHO's reward pool (Common), making room for a 3rd PROBE and a 3rd PULP Shield. GHOST SIGNAL stays in the starter deck because it's a shared basic (BASIC-001); one SMOKESCREEN was removed instead.
 
 ### ORIGIN Ghostware — LOW PROFILE
-**Whenever you would gain TRACE, gain 1 less (minimum 0).**
+<!-- GENERATED:ghostware ids=LOW_PROFILE -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **LOW PROFILE** | Whenever you would gain TRACE, gain 1 less (minimum 0). | never sold |
+<!-- /GENERATED -->
+
 
 **Why:** it turns every small TRACE subroutine (TRACE 1–3) into nearly nothing, so ECHO can stay in an encounter turn after turn to fill both Extractors. It rewards ECHO's plan without making TRACE irrelevant: big TRACE hits still land.
 
@@ -156,7 +171,14 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 *History (decision records in Master Design):* SHATTER: new in RIOT-002, redesigned in RIOT-003, kept at +3 TRACE by RIOT-004; readings confirmed 2026-11-17 (any one ICE of any type; STR 0 until the encounter ends). RIOT-002: OVERLOAD was 2 copies, PROBE 1, PULP Shield 2. BASIC-001: ADRENAL SPIKE was 2 BW; LAY LOW was −5. SMASH & GRAB (RIOT-005) left the deck under RIOT-006.
 
 ### ORIGIN Ghostware — REDLINER
-**At the start of your turn, if your TRACE is 20 or more, gain 1 BW.**
+<!-- GENERATED:ghostware ids=REDLINER -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **REDLINER** | At the start of your turn, if your TRACE is 20 or more, gain 1 BW. | never sold |
+<!-- /GENERATED -->
+
 
 **Why:** RIOT's sweet spot is TRACE 20–39: 5 BW a turn, cheap loud cards, no strike yet. Every decision becomes "how much louder can I afford to be?" The Ghostware is named after the game, and it's the Rustler who lives closest to the red line.
 
@@ -193,7 +215,14 @@ VECTOR's starter deck uses only **ROT**. The other strains appear as card reward
 *History (decision records in Master Design):* STINGER: BASIC-001 was 2.
 
 ### ORIGIN Ghostware — PATIENT ZERO
-**At the start of each encounter, choose an ICE: INFECT 1 ROT on it.** *(VECTOR-001, 2026-11-14: was "on every ICE".)*
+<!-- GENERATED:ghostware ids=PATIENT_ZERO -->
+*Generated from `godot/data/cards.json` (`ghostware`) by `tools/csa/gen_card_docs.py`. Edit the Ghostware records, not this table.*
+
+| Ghostware | Effect | Price |
+|---|---|---|
+| **PATIENT ZERO** | At the start of each encounter, choose an ICE: INFECT 1 ROT on it. *(VECTOR-001, 2026-11-14: was "on every ICE".)* | never sold |
+<!-- /GENERATED -->
+
 
 **Why:** every ICE starts at −1 STR and is already a valid target for REPLICATOR, so VECTOR's engine starts on turn 1 instead of turn 2–3. It's especially strong against multi-ICE encounters, which is where VECTOR should shine.
 
