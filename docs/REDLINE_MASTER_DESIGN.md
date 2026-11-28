@@ -4033,3 +4033,7 @@ Protocol rules remain encounter duration, no RAM, independent copies, no self-tr
 
 **Designer:** "each copy triggers separately, and the pick is mandatory as the card was played. For the multi-layer nodes, I'd add at least 1 2-layer and 1 3-layer node to the Halcyon map. And yes, your fatal parting shot, your protocols stay in play when the run ends. But then the game is over." **SALVAGE:** each deployed copy triggers on its own, and its pick from the discard pile is mandatory (confirms the build). **Map:** the HALCYON map gets at least one 2-layer and one 3-layer ICE Node (approved; not built yet). **Fatal PARTING SHOT:** Protocols stay in play and the run ends (confirms the build).
 
+## UI-PROTOCOL-001 answers complete (designer 2026-11-28 09:39)
+
+**Designer:** clearing SPAM is not a card play; an ICE reaching 0 STR from ROT also counts for FEEDBACK LOOP; for the paperclip note, the CORTEX and BW-drain markers stay on it, icons are card art or a drawn symbol where there's no art, copies aren't grouped ("All good"). All eight UI-PROTOCOL-001 interpretations are now answered; items 2, 3, 4, 5, 6 and 8 confirm the build. **Queued for the next build, not started:** the REPRISE change (09:33 ruling) and the 2-layer and 3-layer HALCYON Nodes (09:36). The designer also wants the Node map and the Uplink room completed before that build.
+

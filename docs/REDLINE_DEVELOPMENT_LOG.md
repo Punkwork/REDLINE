@@ -472,3 +472,7 @@ Designer, 09:33: REPRISE follows CARD-REVIEW-001: fresh target and mode, no BURN
 ## 2026-11-28 — UI-PROTOCOL-001 answers (Claude Code)
 
 Designer, 09:36: SALVAGE triggers per copy and its pick is mandatory (as built); add at least one 2-layer and one 3-layer ICE Node to the HALCYON map (to build); on a fatal parting shot the Protocols stay and the run ends (as built).
+
+## 2026-11-28 — UI-PROTOCOL-001 answers complete (Claude Code)
+
+Designer, 09:39: SPAM clearing is not a card play; ROT reaching 0 STR counts for FEEDBACK LOOP; the paperclip note choices are confirmed. The REPRISE change and the 2- and 3-layer HALCYON Nodes are queued for the next build (not started); the Node map and Uplink room come first.
