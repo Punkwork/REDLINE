@@ -3702,3 +3702,33 @@ Scanner: 35 of 124 doc card rows differ from CardDB in text and 2 in BW; 56 tabu
 | Q4 build variants | asked where variant values would live; answered in session | OPEN |
 
 CSA-03 may start once Q2, Q4 and the conflict table are settled.
+
+**CSA-02 Q2/Q4/Q5 and CSA-03 conflict resolutions (designer, 2026-11-27 18:59; table: [Sheet](https://claude.ai/artifact/1Cw8TYzdiTscPtYLAXfsnF) revision 63).**
+- **Q4 (APPROVED):** "I choose the core-loop values become the only current ones." Core-loop values are current. Full-game values superseded by STR-001 and the core-loop build are historical, and cards get no `variants` block. This covers DEEP PROBE −4, starter Icepick STR 1 / 3 / 0 and boost 2 BW (BREAKER-STARTER-001/002, ROT-001 values).
+- **Q2 (APPROVED):** generated card views in `REDLINE_CARD_POOLS.md` (pool cards) and `REDLINE_RUSTLERS.md` (starter decks); other docs reference card IDs.
+- **Q5 (APPROVED, unchanged):** the designer applies the ruleset once the CSA-05 checks exist.
+
+**Resolutions (APPROVED):**
+
+| # | Card | Resolution |
+|---|---|---|
+| 1–3 | PAYDAY, BLACKOUT, JAMMER (Experimentation Bible) | Rename the experimental cards; live cards unchanged |
+| 4 | DEEP PROBE | −5 STR (engine) |
+| 5 | DEFRAG | "Discard 1 card, then draw 2." (DEFRAG-001) |
+| 6 | BURST | 3 BW, gain 5 BW, +1 BW per play this encounter (BURST-001) |
+| 7 | SIDE CHANNEL | Breaks any ICE type (engine) |
+| 9, 11, 13 | Starter Icepicks | STR 2, boost 1 BW → +1 STR (STR-001) |
+| 15 | BASIC EXTRACTOR | 3 CRED (EXTRACT-002) |
+| 16 | PROBE | PROBE-004a text |
+| 28–30 | GARBAGE COLLECT, TAIL CALL, FORCE REBOOT | Approved doc wording |
+| 34 | BORROWED CREDENTIALS | Doc wording (boost costs included); 8 CRED in the cost field |
+
+**Same card repeated in another doc** (rows 10, 12, 14, 17–21, 23–26: designer "duplicate … Delete this card"): the doc's hand-written copy is retired. These docs reference or generate from the single record (CSA-06, per Q2/Q3); the cards themselves stay in the game. *Interpretation to confirm.*
+
+**PIVOT (CHAIN-PARK-001 follow-up, APPROVED):** "Chain mechanic is moved to Experimental. CHAIN should be removed from all current cards." New PIVOT text: **[1 BW] Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost.** (Designer's "taget" read as "target".) This is a rules change, implemented in a controlled rules commit with spec tests.
+
+**Open:**
+- CHAIN text on COVER FIRE, KILL CHAIN and HANDOFF: no replacement given.
+- Row 22: BURNED duration. The designer wrote "BURNED should be for the rest of the encounter", but Core Rules §3 and the engine use the rest of the Node. This changes a rule for 12 cards; awaiting confirmation and a decision ID.
+- Row 8: HOST TAKEOVER "Variant (both)", which conflicts with Q4 (no variants).
+- Rows 31, 32, 33, 35: MINIMALIST, SCALPEL, ZERO FOOTPRINT, SMASH & GRAB marked "Rename experimental", though they are not experimental cards.
