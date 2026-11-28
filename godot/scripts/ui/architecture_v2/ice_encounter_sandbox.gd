@@ -218,6 +218,7 @@ func attach(g: Game) -> void:
 	ctrl.phase_changed.connect(_on_phase)
 	ctrl.phase_changed.connect(func(_o, n): app_phase_changed.emit(n))
 	_last_turn = 0
+	inspector.clear()   # UI-INSPECTOR-001: an encounter change clears the inspector
 	_banner.hide()
 	_graffiti_key = ""
 	refresh()
@@ -510,6 +511,7 @@ func refresh() -> void:
 	if game == null or game.enc.is_empty() and embedded: return
 	ctrl.rebind_if_new_encounter()
 	flyout.reduced_motion = reduced_motion
+	inspector.reduced_motion = reduced_motion
 	## UI-TYPO-002 MASK OFF: the corporation's actual artwork shows through the letterforms.
 	flyout.mask_art = CorporationLook.room(game.corporation, String(VasTokens.FLYOUT.mask_off.art_state))
 	lane.reduced_motion = reduced_motion
@@ -801,12 +803,13 @@ func _stamps() -> Array:
 
 func _refresh_inspector() -> void:
 	var s: Variant = inspector.subject
-	if s is SubroutineKey and is_instance_valid(s) and s.is_inside_tree() and inspector.visible:
+	if typeof(s) != TYPE_OBJECT: return   # (a freed source compares equal to null, so test the type)
+	if not is_instance_valid(s) or not (s as Node).is_inside_tree():
+		inspector.clear()   # UI-INSPECTOR-001: the source was removed
+	elif s is SubroutineKey and inspector.visible:
 		var p: Node = s.get_parent()
 		while p and not (p is IcePanel): p = p.get_parent()
 		inspector.show_key(s, String(p.model.name) if p else "")
-	elif s != null and not (is_instance_valid(s) and s.is_inside_tree()):
-		inspector.close()
 
 func _refresh_rig() -> void:
 	var progs := []
@@ -864,9 +867,32 @@ func _mode_spec() -> Dictionary:
 		return {}
 	var d := CardDB.def(String(c[0].id))
 	var legal := game.play_modes(String(c[0].id), target)
+	## ARCH-V2-003 / UI-INSPECTOR-001: each mode is a key with its icon and number; its words (the
+	## canonical mode label from cards.json), cost now and target are in the shared inspector.
 	var opts := []
+	var ice_name := String(game.ice_definition(game.enc.ice[target]).name).to_upper()
+	var cost := game.card_cost(String(c[0].id), int(c[0].uid), target)
+	var card_model := VisibleStateAdapter.card_model(game, c[0], "pick")
 	for m in d.get("modes", []):
-		if legal.has(String(m.id)): opts.append({"label": String(m.label), "intent": "mode:" + String(m.id)})
+		var id := String(m.id)
+		if not legal.has(id): continue
+		var o := {"label": String(m.label), "intent": "mode:" + id, "picture": card_model}
+		var lines := ["Target: %s." % ice_name]
+		match id:
+			"weaken":
+				o["art"] = "ice/V2_MEDALLION_STR.png"
+				o["value_inside"] = true
+				var num := RegEx.create_from_string("^[−+-]?\\d+").search(String(m.label))
+				o["value"] = num.get_string() if num else ""
+			"reveal":
+				o["art"] = "ICON_HIDDEN_LIGHT"   # the hidden-subroutine icon, light variant for the dark key
+				o["value"] = "%d" % game.hidden_subs(target)
+				lines.append("Hidden subroutines: %d." % game.hidden_subs(target))
+		## UI-INSPECTOR-001 card contract: artwork, name, classification, cost, effect (this mode),
+		## restrictions (target, what's hidden), flavour.
+		o["inspect"] = {"title": String(d.name), "classification": " · ".join([String(d.type)] + Array(d.get("tags", []))),
+			"cost": "%d BW" % cost, "effects": [String(m.label)], "restrictions": lines, "flavour": String(d.get("flavor", ""))}
+		opts.append(o)
 	opts.append({"label": "Cancel", "intent": "mode_cancel"})
 	return {"kind": "mode", "title": String(d.name), "text": "Choose one.", "options": opts}
 

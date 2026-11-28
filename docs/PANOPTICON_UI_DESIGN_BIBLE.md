@@ -100,7 +100,7 @@ Readability, reduced motion and the copy guards still govern both. **Flyout exce
 
 UI-INSPECTOR-001 and ICE inspectors use T1–T5 as applicable; node classifications use T2; tooltips use T4–T5; flavour quotations may use T5 italic. Critical information may use weight 600. Shared tokens supersede historical physical font and sizing prescriptions (including DM Sans in ADP-R1); preserve component-specific interaction rules and disclosure restrictions. Maintain icon-first presentation, minimum 4.5:1 text contrast, stable numerical alignment (tabular figures where supported), colour-independent meaning and appropriate resolution scaling. Do not introduce redundant labels. Virtual-world expressive typography remains separate.
 
-Implementation acceptance: actual Jost rendering in Godot; centralized tokens; inspector populated with authoritative game data; no clipping or overflow with long content; stable numerical alignment; readability at supported resolutions; existing icon-first presentation preserved; upstream font copyright and SIL Open Font License included. Implementation and designer playtest acceptance remain pending. Universal hover activation, dismissal and motion timing are not approved by this hierarchy. Track delivery in [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
+*Status 2026-11-28:* Jost is in the build and T1–T5 are centralized tokens, used by the shared inspector (UI-INSPECTOR-001); other physical components still use their earlier fonts. Implementation acceptance: actual Jost rendering in Godot; centralized tokens; inspector populated with authoritative game data; no clipping or overflow with long content; stable numerical alignment; readability at supported resolutions; existing icon-first presentation preserved; upstream font copyright and SIL Open Font License included. Implementation and designer playtest acceptance remain pending. Universal hover activation, dismissal and motion timing are not approved by this hierarchy. Track delivery in [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
 
 ### Bandwidth transition design acceptance (UI-TYPO-001 / M06, 2026-11-27)
 
@@ -1352,6 +1352,17 @@ Game-wide shared hover/rollover inspector. Enlarged object/card image anchored l
 - Architecture: one shared inspector system, content contract, activation/dismissal policy and shared typography tokens. Component-specific exceptions must reference this standard and retain only unique requirements. Preserve keyboard/controller accessibility, reduced-motion support and established readability requirements.
 
 Implementation and designer playtest acceptance remain pending. Validate timing, rapid switching, pointer transfer, edge avoidance, drag targeting, focus navigation, reduced motion, long content, disclosure and cleanup against actual Godot gameplay. Track under [issue #24](https://github.com/Punkwork/REDLINE/issues/24). No code changes authorized by this documentation approval alone.
+
+**Implementation (2026-11-28; designer direction 2026-11-27 23:41–23:47, Master Design UI-INSPECTOR-001):** built in the one shared V2 inspector (`key_inspector.gd`), which every V2 hover source uses. The PROBE mode choice (PROBE-004a) is the first validated consumer: each mode is an icon-and-number key (the STR medallion with −2; the hidden-subroutine icon with the hidden count), and its words appear only in the inspector. Jost 3.7 was added with its OFL licence, and T1–T5 are central tokens (`VasTokens.TYPE`). `test_ui_inspector_001.gd` checks the approved values. Playtest acceptance is pending.
+
+*Implementation choices pending designer confirmation:*
+1. A card's "artwork" is its illustration, not the whole card face. The card face stands in only when a card has no illustration.
+2. Keyboard focus opens at once, without the 150 ms hover delay.
+3. Placement is tried above the source first, then below, right and left. If none fits without covering the source (very small windows), it goes to the far corner.
+4. While open, the inspector takes the pointer (this is what keeps it open), so it blocks clicks on whatever is beneath it. Placement keeps it off its own source.
+5. Type sizes scale with the logical viewport height against the 1080 p baseline.
+6. Components that pass no artwork (badges, HUD and resource panels) show the text column alone. The KEY LEGEND keeps its icon rows.
+7. On the PROBE mode keys, Cancel and SHOW BOARD stay as text buttons (they are controls, not game objects). The inspector shows the current cost rather than the card's escalation sentence, and the full card text is on the card itself.
 
 
 ## UI-TYPE-001 — Game-wide typography exploration (approved 2026-11-27)

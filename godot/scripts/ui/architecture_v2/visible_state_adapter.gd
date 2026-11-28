@@ -243,6 +243,7 @@ static func card_model(game: Game, c: Dictionary, where: String = "hand") -> Dic
 		"text": game.card_text(id) if game.has_method("card_text") else String(d.get("text", "")),
 		"target": bool(d.get("target", false)), "playable": bool(play.get("ok", false)), "reason": String(play.get("reason", "")),
 		"art": "res://assets/concept/cards/%s.png" % id,
+		"flavor": String(d.get("flavor", "")),   # UI-INSPECTOR-001: subordinate flavour line
 		"cached": bool(c.get("cached", false)), "cache_turns": int(c.get("cache_turns", 0))}
 
 ## ARCH-V2-005 header slots. Display models only; nothing here changes Game.

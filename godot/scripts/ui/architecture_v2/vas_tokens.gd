@@ -32,6 +32,49 @@ const FONT_PLAQUE_SEMI := preload("res://assets/fonts/BarlowCondensed-SemiBold.t
 const FONT_RULES := preload("res://assets/fonts/DM-Sans.ttf")
 const FONT_READOUT := preload("res://assets/fonts/SpaceMono-Bold.ttf")
 
+# Physical typography (UI-TYPO-001, designer 2026-11-27): Jost, Atomic Deco, five shared levels.
+# Values are the approved baseline at 1920 × 1080 (UI Bible §2a "Physical typography hierarchy"),
+# scaled with the viewport by type_px(); tune them here, never per component. Jost 3.7, SIL OFL 1.1.
+const JOST := {
+	300: preload("res://assets/fonts/Jost-300-Light.ttf"),
+	400: preload("res://assets/fonts/Jost-400-Book.ttf"),
+	500: preload("res://assets/fonts/Jost-500-Medium.ttf"),
+	600: preload("res://assets/fonts/Jost-600-Semi.ttf"),
+}
+const JOST_ITALIC := preload("res://assets/fonts/Jost-400-BookItalic.ttf")
+const TYPE_BASE_HEIGHT := 1080.0
+const TYPE := {
+	"T1": {"px": 28, "weight": 500, "tracking": 2, "upper": true, "line": 1.15},    # identity / panel headings
+	"T2": {"px": 15, "weight": 300, "tracking": 2, "upper": true, "line": 1.20},    # classification / labels
+	"T3": {"px": 24, "weight": 500, "tracking": 1, "upper": false, "line": 1.15, "tabular": true},   # values, prices
+	"T4": {"px": 17, "weight": 400, "tracking": 0, "upper": false, "line": 1.40},   # mechanical descriptions
+	"T5": {"px": 14, "weight": 400, "tracking": 0, "upper": false, "line": 1.35},   # supplementary, restrictions, flavour
+}
+## Critical information may use weight 600 (UI-TYPO-001).
+const TYPE_CRITICAL_WEIGHT := 600
+static var _type_fonts := {}
+
+## The shared Font for a level (weight, tracking, tabular figures); `italic` for flavour (T5 only).
+static func type_font(level: String, italic := false, weight := 0) -> Font:
+	var t: Dictionary = TYPE[level]
+	var w: int = weight if weight > 0 else int(t.weight)
+	var key := "%s/%d/%s" % [level, w, italic]
+	if not _type_fonts.has(key):
+		var f := FontVariation.new()
+		f.base_font = JOST_ITALIC if italic else JOST[w]
+		f.spacing_glyph = int(t.tracking)
+		if t.get("tabular", false): f.opentype_features = {TextServerManager.get_primary_interface().name_to_tag("tnum"): 1}
+		_type_fonts[key] = f
+	return _type_fonts[key]
+
+## Pixel size of a level for a viewport of the given height (the baseline is 1080 px tall).
+static func type_px(level: String, viewport_h: float = TYPE_BASE_HEIGHT) -> int:
+	return maxi(9, roundi(float(TYPE[level].px) * viewport_h / TYPE_BASE_HEIGHT))
+
+## Text as the level sets it (T1 and T2 are uppercase).
+static func type_case(level: String, text: String) -> String:
+	return text.to_upper() if TYPE[level].upper else text
+
 # Flyout type (M06 / UI-TYPO-002): condensed and forward-leaning for Rustler agency, heavy and
 # upright for institutional authority, thin Art Deco capitals for LETHAL's cold recognition.
 const FONT_FLYOUT_CONDENSED := FONT_PLAQUE

@@ -3809,3 +3809,8 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 **Status:** design approved; implementation built and validated in `37710c1` (evidence in HANDOFF and the development log). Hands-on playtest pending.
 
 **UI-TYPO-002a (designer, 2026-11-27 23:36: "all these are approved as is").** The six implementation choices listed in the UI Bible §2b are approved as built: MASK OFF uses the HOSTILE room art at most 55% opaque; the lock glyphs are dropped; DEADLOCK BREACHED and RESERVE EXTRACTED keep their legibility bands; the LETHAL lens shows for the rules' LETHAL state only and LETHAL has no red wash; a running CRED count restarts with a queued RESERVE EXTRACTED; 76 px scale, PARTING SHOT 65 px.
+
+## UI-INSPECTOR-001 — Implementation direction (designer, 2026-11-27 23:41–23:47)
+
+**Designer:** "probe mode choice will need to confirm to the UI rules for hover/rollover" (23:41), then "UI-INSPECTOR-001 is what needs to be reviewed for the hover specifications - please review and conform for the probe mode choice menu" (23:44). Asked how far to go and about the missing font, the designer chose (23:47) to **implement UI-INSPECTOR-001 in the one shared inspector**, with the PROBE mode menu as its first validated consumer (all V2 hovers change together), and to **add Jost** from its upstream source with its SIL OFL licence. Specification: [UI Bible, final universal hover and rollover specification](PANOPTICON_UI_DESIGN_BIBLE.md#final-universal-hover-and-rollover-specification-designer-approved-2026-11-27). That section also lists the implementation choices pending confirmation. **Status:** built and validated (see HANDOFF and the development log); designer review and playtest pending.
+

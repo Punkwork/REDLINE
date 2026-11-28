@@ -88,7 +88,7 @@ func _gui_input(e: InputEvent) -> void:
 func _get_drag_data(_at: Vector2) -> Variant:
 	if not draggable or not bool(model.get("playable", false)) or bool(model.get("target", false)): return null
 	_down = false; _dragging = true
-	if is_instance_valid(inspector): inspector.close(self)
+	if is_instance_valid(inspector): inspector.clear()   # UI-INSPECTOR-001: a card drag dismisses it
 	var holder := Control.new()
 	var ghost := CardView.new(); ghost.set_model(model); ghost.draggable = false
 	ghost.custom_minimum_size = size * 0.85; ghost.size = size * 0.85; ghost.position = -ghost.size / 2.0

@@ -24,7 +24,17 @@ func run() -> void:
 	sb.play_targeted(int(c.uid), g.enc.ice[0]); sb.refresh()
 	for i in 8: await process_frame
 	var dir := OS.get_environment("SHOT_DIR")
+	var n := 0
 	if dir != "":
-		root.get_texture().get_image().save_png(dir.path_join("probe_modes_choice.png"))
-		print("PROBE MODES: 1 screenshot written to ", dir)
+		root.get_texture().get_image().save_png(dir.path_join("probe_modes_choice.png")); n += 1
+		# UI-INSPECTOR-001: each mode key's hover opens the shared inspector (artwork, card contract).
+		for id in ["weaken", "reveal"]:
+			var key: Control = sb.choice.find_child("Option_mode_" + id, true, false)
+			if key == null: continue
+			key.mouse_entered.emit(); sb.inspector.advance(0.5)
+			for i in 6: await process_frame
+			await RenderingServer.frame_post_draw
+			root.get_texture().get_image().save_png(dir.path_join("probe_modes_inspector_%s.png" % id)); n += 1
+			key.mouse_exited.emit(); sb.inspector.clear()
+		print("PROBE MODES: %d screenshots written to " % n, dir)
 	quit()

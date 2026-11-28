@@ -27,7 +27,9 @@ func _init() -> void:
 
 ## spec: {kind, title, text, cards: [card models], selected: [uids], secondary: {label, intent},
 ## strains: [{name, n}], options: [{label, intent}]}. Empty spec closes the overlay. `options` are plain
-## buttons that emit `secondary(intent)`, e.g. a card's modes (PROBE-004a, CSA-04b).
+## buttons that emit `secondary(intent)`, e.g. Cancel. An option with `art` is a ModeKey instead
+## (PROBE-004a modes, ARCH-V2-003 / HOVER-001): icon and number on the key, words only in the
+## inspector on hover or focus, beside the large card (`picture`, a card model).
 func open(s: Dictionary) -> void:
 	var same: bool = not spec.is_empty() and spec.get("kind") == s.get("kind") and _uids(spec) == _uids(s)
 	var same_kind: bool = not spec.is_empty() and spec.get("kind") == s.get("kind")
@@ -35,7 +37,9 @@ func open(s: Dictionary) -> void:
 	if s.is_empty():
 		peek = false
 		hide(); _clear(); return
-	if not same_kind: peek = false
+	if not same_kind:
+		peek = false
+		if is_instance_valid(inspector): inspector.clear()   # UI-INSPECTOR-001: a modal opening clears it
 	var keep_focus := -1
 	for c in _cards:
 		if is_instance_valid(c) and c.has_focus(): keep_focus = c.uid()
@@ -118,10 +122,19 @@ func _build() -> void:
 	for st in strains:
 		var name := String(st.name)
 		buttons.add_child(_button("%s (%d)" % [name, int(st.n)], func(): strain.emit(name)))
+	var keys := HBoxContainer.new(); keys.alignment = BoxContainer.ALIGNMENT_CENTER
+	keys.add_theme_constant_override("separation", 28)
 	for o in spec.get("options", []):
 		var oi := String(o.intent)
+		if o.has("art"):
+			var mk := ModeKey.new(); mk.name = "Option_" + oi.replace(":", "_")
+			mk.setup(o, inspector)
+			mk.pressed.connect(func(): secondary.emit(oi))
+			keys.add_child(mk)
+			continue
 		var ob := _button(String(o.label), func(): secondary.emit(oi)); ob.name = "Option_" + oi.replace(":", "_")
 		buttons.add_child(ob)
+	if keys.get_child_count() > 0: v.add_child(keys)
 	var sec: Dictionary = spec.get("secondary", {})
 	if not sec.is_empty():
 		var intent := String(sec.intent)
@@ -151,3 +164,59 @@ func _button(text: String, cb: Callable) -> Button:
 	b.add_theme_color_override("font_color", VasTokens.IVORY)
 	b.pressed.connect(cb)
 	return b
+
+## PROBE-004a mode key (ARCH-V2-003: icons communicate, numbers quantify, hover panels explain).
+## The face carries only the mode's icon and number; hover or keyboard focus opens the shared
+## inspector with the large card beside the mode's words (HOVER-001). Enter/Space or click chooses.
+class ModeKey extends Button:
+	const SIZE := Vector2(132, 132)
+	var art: Texture2D
+	var value := ""
+	var label := ""
+	var inspect: Dictionary = {}
+	var picture: Dictionary = {}
+	var inspector: KeyInspector
+	var inside := false   # the number sits in the icon (the STR medallion, as on the ICE's STR badge)
+	func setup(o: Dictionary, insp: KeyInspector) -> void:
+		inspector = insp
+		label = String(o.label)
+		value = String(o.get("value", ""))
+		var a := String(o.art)
+		art = IceKey.art(a) if a.begins_with("ICON_") else V2Art.tex(a, SIZE.x)   # key icons or V2 medallions
+		inside = bool(o.get("value_inside", false))
+		inspect = o.get("inspect", {})
+		picture = o.get("picture", {})
+		text = ""
+		custom_minimum_size = SIZE
+		focus_mode = Control.FOCUS_ALL
+		tooltip_text = ""
+		for st in ["normal", "hover", "pressed", "focus"]:
+			var s := StyleBoxFlat.new(); s.set_corner_radius_all(18); s.anti_aliasing = true
+			s.bg_color = Color("#2A1E16") if st == "normal" else Color("#3E2C1E")
+			s.border_color = VasTokens.FOCUS if st in ["focus", "hover"] else Color("#B07A44")
+			s.set_border_width_all(4 if st in ["focus", "hover"] else 2)
+			if st == "focus": s.draw_center = false
+			add_theme_stylebox_override(st, s)
+		mouse_entered.connect(_inspect)
+		focus_entered.connect(_inspect)
+		mouse_exited.connect(func(): if not has_focus() and is_instance_valid(inspector): inspector.close(self))
+		focus_exited.connect(func(): if is_instance_valid(inspector): inspector.close(self))
+	func _inspect() -> void:
+		## UI-INSPECTOR-001: the shared inspector with the card's content contract for this mode.
+		if not is_instance_valid(inspector): return
+		var m: Dictionary = picture.duplicate(); m.playable = true
+		inspector.show_object(self, inspector.card_art(m), String(inspect.get("title", label)), String(inspect.get("classification", "")),
+			String(inspect.get("cost", "")), inspect.get("effects", [label]), inspect.get("restrictions", []), String(inspect.get("flavour", "")))
+	func _draw() -> void:
+		var c := size / 2.0
+		var lift := 0.0 if inside else 12.0
+		if art:
+			var d := minf(size.x, size.y) * (0.78 if inside else 0.58)
+			draw_texture_rect(art, Rect2(c - Vector2(d, d) / 2.0 - Vector2(0, lift), Vector2(d, d)), false)
+		if value != "":
+			var f := VasTokens.FONT_READOUT
+			var px := 36
+			var w := f.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+			var pos := Vector2(c.x - w / 2.0, c.y + px * 0.36) if inside else Vector2(c.x - w / 2.0, size.y - 14.0)
+			draw_string_outline(f, pos, value, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 8, Color("#0A0807"))
+			draw_string(f, pos, value, HORIZONTAL_ALIGNMENT_LEFT, -1, px, VasTokens.IVORY)
