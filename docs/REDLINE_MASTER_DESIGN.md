@@ -3775,6 +3775,8 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **CSA-03 accepted** by the designer (2026-11-27 20:36). **CSA-04a built:** CRED-COST-001 chip on the V2 card face; BORROWED CREDENTIALS aligned. **CSA-04b built:** PROBE matches PROBE-004a in the engine and both UIs (spec test `test_spec_probe.gd`). **CSA-04c built:** BURNED-001/001a/001b in the engine (BURNED cards return to discard at encounter end; cleared SPAM is removed), GARBAGE COLLECT and SPAM text, Core Rules §3 BURNED definition (spec test `test_spec_burned.gd`). **CSA-04d built:** PIVOT plays its approved text (−1 STR this encounter; reaching 0 breaks one target subroutine for no cost, chosen by the Rustler, no prompt when only one qualifies) and has no CHAIN field (spec test `test_spec_pivot.gd`). No card record is divergent.
 
+**Designer, 2026-11-28 05:44:** BURNED-001 interpretations approved ("Burned 001 works"): Bloatware burned by UNINSTALLER does not return; SPAM reads "it disappears for good." The PROBE-004a mode prompt (revised to UI-INSPECTOR-001) passes visual review ("the probe mode prompt looks good"). The PIVOT interpretation stays open: PIVOT played on an ICE already at 0 STR breaks nothing.
+
 
 ## NODE-AUTHORITY-001 — Canonical Node authority and redundant definition retirement (APPROVED 2026-11-27)
 

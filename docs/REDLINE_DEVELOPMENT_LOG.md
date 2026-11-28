@@ -41,10 +41,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-005 — T
 
 LOG-001 moved the oldest dated entry to the archive unchanged: CHAIN-009 — Extension precedence for CHAIN-capable cards (designer approved 2026-11-27).
 
-## CHAIN-010 — Governing design principle (designer approved 2026-11-27)
-**Easy to understand. Difficult to assemble. Rewarding to sustain.**
-CHAIN rarity should arise from strategic sequencing, card availability, preparation and resource constraints, not opaque rules. Evaluate activation and continuation signatures, card design and UI feedback against this principle, alongside CHAIN-007 and the established momentum/mastery intent. This approval does not finalize any proposed signatures or card values. No engine changes.
-
+LOG-001 moved the oldest dated entry to the archive unchanged: CHAIN-010 — Governing design principle (designer approved 2026-11-27).
 
 ## CHAIN-PARK-001 — Designer decision: park explicit CHAIN mechanic (2026-11-27)
 Effective immediately, the proposed standalone CHAIN mechanic (CHAIN-002 through CHAIN-010, CHAIN-REP-001 and associated Priority 2E implementation/playtest roadmap) is PARKED / experimental, not an active production requirement or representative encounter acceptance gate. Preserve the complete historical exploration in docs/PANOPTICON_CHAIN_MECHANICS.md as an experimental reference indexed by docs/PANOPTICON_DESIGN_EXPERIMENTATION_BIBLE.md; do not delete it or treat prior approvals as current implementation authorization. Designer prefers elegant card-local sequencing and emergent synergy, citing Slay the Spire's per-card Block reward as inspiration. Explore existing Protocols as the natural vehicle for persistent conditional/per-card effects; use ordinary card effects for sequencing, draw, BW, pile manipulation and accumulated-action rewards. Preserve momentum, mastery, exceptional rather than routine combinations, resource-loop safeguards and clear audiovisual feedback without a separate CHAIN grammar, catalyst, link tracking or dedicated CHAIN UI requirement. Examples are exploratory, not approved new cards. Representative ICE encounter remains priority; remove standalone CHAIN work from active scope, retain general card synergy as a design exploration. Existing legacy DSY-011 CHAIN code/cards require Claude Code inventory and designer-approved retirement/reconciliation plan before production changes; no engine edits or issue closures in this decision. Future revival requires explicit designer approval.
@@ -432,3 +429,6 @@ Designer notes (Master Design PT13-FB-001):
 - Inspector: the fallback card face is drawn undimmed. Tests check that the illustration, the fallback and the "Can't play now" wording are all undimmed.
 - Tests: `test_pt13_feedback.gd` 10/0 (new, in CI) and `test_ui_inspector_001.gd` 59/0. All other suites unchanged (test_game 433/0, SIM=1 433/0; parity 4,029/0). `shot_arch_v2_ice` 42, `shot_cred_cost` 4/0, `shot_probe_modes` 3, typography fixture PASS; the app fixtures that drive `main.voice` (`shot`, `shot_reel`) are clean.
 
+## 2026-11-28 — BURNED-001 interpretations and PROBE prompt approved (Claude Code)
+
+Designer, 05:44: "Burned 001 works" (both BURNED-001 interpretations approved) and "the probe mode prompt looks good" (PROBE-004a visual review passed). Recorded in Master Design (CSA-04 record) and HANDOFF. The PIVOT interpretation remains open. Docs only.
