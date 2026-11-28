@@ -4067,3 +4067,7 @@ Designer approved TASER's PARTING SHOT suppression and all proposed boundaries. 
 ## CONSISTENCY-001 / MAP-003f — Core Rules §10 reconciled (Claude, 2026-11-28)
 
 Designer, 15:10: "fix those to match map 003F and today's build." Core Rules §10 (with §1 and one §9.1 sentence) now states the approved MAP-003 to MAP-003f map: 16 rows, 15 Nodes and the boss on every route, no escape. Closes D2 of the MAP-003f report. No new rule decided; Tier rows, escape ICE reuse and run-length estimates are open in HANDOFF.
+
+## MAP-TIER-001 — ICE tier by row on the 16-row map (APPROVED, designer 2026-11-28 15:24)
+
+**Designer:** "because the maps are randomly generated, I can't be sure which … rows we're going to have what tiers of ice, but I would say generally after the mini boss, it's all tier 2. Before mini boss, tier 1." Rule: ICE Nodes in rows 2–8 draw Tier 1 ICE; rows 10–15 draw Tier 2. Replaces MAP-002's rows 2–5 / 6–9 split. Current definition: Core Rules §10.1. *Interpretation to confirm:* row 9's ordinary ICE Nodes (the alternatives to the Mini-Boss, 2 layers) are Tier 1.

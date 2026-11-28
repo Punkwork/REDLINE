@@ -772,7 +772,8 @@ Designer, 15:10: "fix those to match map 003F and today's build. Then refresh th
 | AGENTS.md / CLAUDE.md, ARCHITECTURE.md Slice boundaries, CURRENT_STATUS pointer | Claude | **DONE** |
 | `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5 / §4 | Claude | **LABELLED** amended / superseded |
 | Claude Project copies (`claude/*.md`) | Claude | **REFRESHED** from this commit |
-| **Tier 1 / Tier 2 rows on the 16-row map** (MAP-002's split and `rules.json` `map.node_odds` retired with the 10-row map) | Designer | **WAITING** |
+| **Tier 1 / Tier 2 rows on the 16-row map** | Designer | **DECIDED** 2026-11-28 15:24 (MAP-TIER-001): Tier 1 before the Mini-Boss (rows 2–8), Tier 2 after (rows 10–15); Core Rules §10.1, ICE Corp 1–3 and Pacing updated. *Interpretation to confirm:* row 9's ordinary ICE Nodes are Tier 1 |
+| **MAP-TIER-001 build:** ICE Nodes in rows 10–15 use Tier 2 ICE | Claude Code | **TO DO**. Today every generated ICE Node cycles the slice's Tier 1 encounters (`Game.use_generated_map`); the only Tier 2 ICE in `ice.gd` is FREE TRIAL, so the HALCYON Tier 2 roster (ICE Corp 1 §2) has to be built first |
 | **Escape ICE** (`REDLINE_UPGRADES_EVENTS_ESCAPE.md` §4; escape sections of `REDLINE_ICE_CORP1.md`–`3.md`; escape lines in `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_PACING.md`): retire or reuse? | Designer, then Claude | **WAITING** |
 | **Run length and card-economy estimates** (Core Rules §9.1 "Why", §10.5) from the 10-row map | Claude | **TO DO** after Tier rows are set |
 | `HALCYON_PLAYTEST_GUIDE.md` still matches released Playtest 13 (four rows) | Claude Code | Update with the next build (RELEASE-002 step 1) |

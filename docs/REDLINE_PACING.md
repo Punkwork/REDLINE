@@ -153,8 +153,8 @@ At 4–8 turns per encounter and the current ~16 encounters per corporation, a r
 
 | Node | Layers now (ICE-008) | Proposed |
 |---|---|---|
-| Tier 1 (rows 2–5) | 1–2 | **1** |
-| Tier 2 (rows 6–9) | 2–3 | **1–2** |
+| Tier 1 (before the Mini-Boss, Core Rules §10.1) | 1–2 | **1** |
+| Tier 2 (after the Mini-Boss, Core Rules §10.1) | 2–3 | **1–2** |
 
 - Encounters per corporation: about **16 → 10–11** (about 6–7 ICE Nodes, the Central Node and 3 escape encounters). Total turns per corporation stay about the same (~56 → ~60).
 - **Card rewards:** still one per **fully cleared** ICE Node (CORE-010, CORE-011). Fewer layers make a full clear easier, so fewer rewards are lost to leaving early. Card reward odds by layers cleared are re-based: **Tier 1, 1 layer** uses today's 1-layer odds; **Tier 2, 1 layer** uses today's 2-layer odds; **Tier 2, 2 layers** uses today's 3-layer odds.

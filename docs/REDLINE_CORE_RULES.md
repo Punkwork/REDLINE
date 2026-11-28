@@ -312,12 +312,15 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 - **Map visibility [MAP-003a]:** the map always shows the next row's icons. Extracting every CRED from a Node reveals fuller paths **3 Nodes ahead**. The Mini-Boss shows as its own category icon only; its identity and ability stay hidden until you enter, and the fight is mandatory once you do (MINIBOSS-003 / MAP-003f).
 - **Structure [CHANGED by MAP-003, MAP-003b, MAP-003c]:** every corporation is a **16-row** map, and every route has **16 Nodes: 15 Nodes, then the boss**. **There is no escape:** once you beat the boss, you leave with your rewards and the corporation's Signal barcode (MAP-003). This replaces UPL-007's 10 infiltration rows → Central Node → 4-Node escape, and MAP-002's row table.
 
-| Row | Nodes |
-|---|---|
-| 1 | The **Opening Node** only (§10.1a), the first of the route's ICE Nodes |
-| 2–8, 10–15 | 3–4 Nodes per row: ICE, or one of the five other Node types (§8.3) |
-| 9 | The **Mini-Boss** Node (not on every route; MINIBOSS-001, `REDLINE_MINIBOSSES.md`); the other row-9 Nodes are ICE |
-| 16 | The corporation's **boss** (the Central Node, §10.2) |
+| Row | Nodes | ICE tier [MAP-TIER-001] |
+|---|---|---|
+| 1 | The **Opening Node** only (§10.1a), the first of the route's ICE Nodes | Opening |
+| 2–8 | 3–4 Nodes per row: ICE, or one of the five other Node types (§8.3) | **Tier 1** |
+| 9 | The **Mini-Boss** Node (not on every route; MINIBOSS-001, `REDLINE_MINIBOSSES.md`); the other row-9 Nodes are ICE | Mini-Boss; the other ICE Nodes Tier 1 *(interpretation to confirm)* |
+| 10–15 | 3–4 Nodes per row: ICE, or one of the five other Node types (§8.3) | **Tier 2** |
+| 16 | The corporation's **boss** (the Central Node, §10.2) | Boss |
+
+**ICE tiers by row [MAP-TIER-001, designer 2026-11-28]:** before the Mini-Boss, ICE Nodes draw Tier 1 ICE; after it, Tier 2. The rule is by row, so it holds whatever the generated map puts in each row. What each tier means (STR, threat, layers, rosters): `REDLINE_ICE_CORP1.md`–`3.md` §2 and `REDLINE_PACING.md`.
 
 **Every route [MAP-003b, MAP-003c, MAP-003f]:**
 - **8 encounters before the boss:** the Opening Node, 6 more ICE Nodes, and row 9 (the Mini-Boss or an ICE Node).
@@ -325,7 +328,7 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 - **Spacing (working value, MAP-003c):** at most 4 ICE or 4 non-ICE Nodes in a row.
 - Generator and its validation: `prototypes/map/map003_generator.py --v5` and `prototypes/map/MAP003F_V5_REPORT.md` (interpretations I1–I5 there await the designer). The build reads its exported maps from `godot/data/maps/map003_v5.json`.
 
-**Open (not yet decided for the 16-row map):** which rows use Tier 1 and Tier 2 ICE (MAP-002's rows 2–5 / 6–9 split and the `map.node_odds` ICE odds in `rules.json` belong to the retired 10-row map).
+MAP-002's rows 2–5 / 6–9 tier split and the `map.node_odds` ICE odds in `rules.json` belong to the retired 10-row map; MAP-TIER-001 replaces the split.
 
 ### 10.1a The Opening Node [NEW, OPEN-001]
 Every corporation starts with the same designed encounter, so every run gets **one guaranteed card reward per corporation** and every corporation teaches its main lesson before the random rows begin.
@@ -610,3 +613,9 @@ REPRISE is the first approved application; its card-specific eligibility and tar
 
 ### Later amendment — MAP-003 to MAP-003f reconciled into §10 (CONSISTENCY-001, 2026-11-28)
 §1, §9.1 and §10 rewritten to match the approved MAP-003, MAP-003a, MAP-003b, MAP-003c, MAP-003e and MAP-003f decisions (Master Design): 16 rows, 15 Nodes and the boss on every route, 2–3 Uplinks per route, no escape. This closes discrepancy D2 in `prototypes/map/MAP003F_V5_REPORT.md` §9. The UPL-007 and MAP-002 rows above are history. No new rule was decided by this edit; open points are marked in §10.
+
+### Later amendment — MAP-TIER-001 (designer, 2026-11-28)
+
+| ID | Rule |
+|---|---|
+| MAP-TIER-001 | **ICE tier by row:** Tier 1 ICE before the Mini-Boss (rows 2–8), Tier 2 after it (rows 10–15) (§10.1). Replaces MAP-002's rows 2–5 / 6–9 split. *Interpretation to confirm:* row 9's ordinary ICE Nodes (2 layers) are Tier 1. |

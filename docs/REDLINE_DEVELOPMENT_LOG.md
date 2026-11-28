@@ -491,3 +491,9 @@ Designer, 15:07–15:10: the docs still described the four-row slice and the esc
 - **Checks:** `tests/python` and `tools/csa/scan_node_authority.py` (results below in HANDOFF).
 
 *Interpretations to confirm:* MAP-003's "barcode for the signal" read as the payload's First Signal fragment, revealed on leaving after the boss (Core Rules §10.2).
+
+## 2026-11-28 — MAP-TIER-001: ICE tier by row (Claude)
+
+Designer, 15:24: Tier 1 before the Mini-Boss, Tier 2 after. Recorded in Master Design; Core Rules §10.1 row table gains an ICE tier column and a Later amendment row; ICE Corp 1–3 and Pacing now point to §10.1 instead of the old rows 2–5 / 6–9. Documentation only; the build still uses Tier 1 stand-ins everywhere (HANDOFF: Claude Code TO DO). Checks: `tests/python`, `scan_node_authority.py`. Claude Project copies refreshed.
+
+*Interpretation to confirm:* row 9's ordinary ICE Nodes are Tier 1.
