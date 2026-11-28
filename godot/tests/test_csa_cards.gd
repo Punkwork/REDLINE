@@ -31,6 +31,10 @@ const APPROVED_FIELDS := {"PROBE": ["modes"], "PIVOT": ["zeroed_reduction"]}   #
 const APPROVED_REMOVED := {"PIVOT": ["chain"]}   # CSA-04d, CHAIN-PARK-001: CHAIN removed from all current cards
 const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "PROBE", "FEEDBACK",
 	"ADRENAL_SPIKE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "BASIC_EXTRACTOR"]
+## SYNERGY-PLAYTEST-002 rarities (Master Design, playtest values): the shared reward pools that gain them.
+const PLAYTEST_REWARDS := {
+	"SHARED/COMMON": ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "FEEDBACK_LOOP", "ADAPTIVE_DEFENCE", "FOLLOW_THROUGH", "ESCALATION", "AFTERBURN"],
+	"SHARED/UNCOMMON": ["OVERCLOCK", "SALVAGE"], "SHARED/RARE": ["REPRISE"]}
 const PLAYTEST := ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "OVERCLOCK", "FEEDBACK_LOOP", "SALVAGE", "ADAPTIVE_DEFENCE",
 	"FOLLOW_THROUGH", "ESCALATION", "AFTERBURN", "REPRISE"]
 ## CSA-04f (CSA-02 Q8): approved pool cards never built, recorded as `pending` so the generated doc views
@@ -48,7 +52,9 @@ func _initialize() -> void:
 	var snap: Dictionary = str_to_var(FileAccess.get_file_as_string("res://tests/csa_carddb_snapshot.txt"))
 	check(not snap.is_empty(), "snapshot readable")
 	check(CardDB.DATA.get("schema", "") == CardDB.SCHEMA, "cards.json schema " + CardDB.SCHEMA)
-	check(CardDB.DEFS.keys() == snap.def_keys, "card order unchanged (reward pools iterate it)")
+	# UI-PROTOCOL-001: the ten playtest cards joined DEFS after the snapshot's cards; the snapshot's order is kept.
+	check(CardDB.DEFS.keys().filter(func(id): return not PLAYTEST.has(id)) == snap.def_keys, "card order unchanged (reward pools iterate it)")
+	check(CardDB.DEFS.keys().filter(func(id): return PLAYTEST.has(id)).size() == PLAYTEST.size(), "the ten playtest cards are dealt and played")
 	check(CardDB.CAPS.keys() == snap.cap_keys, "CAP order unchanged")
 	for id in snap.defs:
 		var old: Dictionary = snap.defs[id]
@@ -74,7 +80,10 @@ func _initialize() -> void:
 		check(same(legacy(CardDB.def(cid), exp), exp), "compiled %s unchanged apart from its parts' approved wording and cost" % cid)
 	for key in snap.pools:
 		var p: PackedStringArray = String(key).split("/")
-		check(same(CardDB.reward_pool(p[0], p[1]), snap.pools[key]), "reward_pool(%s) unchanged" % key)
+		var live: Array = CardDB.reward_pool(p[0], p[1])
+		check(same(live.filter(func(id): return not PLAYTEST.has(id)), snap.pools[key]), "reward_pool(%s) unchanged apart from the playtest cards" % key)
+		var added: Array = live.filter(func(id): return PLAYTEST.has(id))
+		check(same(added, PLAYTEST_REWARDS.get(key, [])), "reward_pool(%s) adds the approved playtest cards %s (SYNERGY-PLAYTEST-002)" % [key, added])
 	for r in snap.caps_of:
 		check(same(CardDB.caps_of(r), snap.caps_of[r]), "caps_of(%s) unchanged" % r)
 	for r in snap.rustlers:
@@ -89,14 +98,16 @@ func _initialize() -> void:
 	for id in PENDING_POOL:
 		check(CardDB.RECORDS.has(id) and not CardDB.DEFS.has(id) and CardDB.design_status(id) == "approved", "%s: recorded, approved, pending, never dealt or played" % id)
 		check(CardDB.DATA.core_pool.has(id) and not CardDB.CORE_POOL.has(id), "%s: in the core pool's data, joins CardDB.CORE_POOL once built" % id)
+	# UI-PROTOCOL-001 (designer 2026-11-28): the ten playtest cards are built; they stay "playtest" in design
+	# and join the core-loop reward pool (SYNERGY-PLAYTEST-002: obtainable through normal rewards).
 	for id in PLAYTEST:
-		check(CardDB.RECORDS.has(id) and not CardDB.DEFS.has(id), "%s: recorded, pending, not dealt or played" % id)
-		check(CardDB.design_status(id) == "playtest" and CardDB.DATA.core_pool.has(id) and not CardDB.CORE_POOL.has(id),
-			"%s: approved for the core pool (cards.json), joins CardDB.CORE_POOL once its handler is built" % id)
+		check(CardDB.RECORDS.has(id) and CardDB.DEFS.has(id), "%s: built, dealt and played (UI-PROTOCOL-001)" % id)
+		check(CardDB.design_status(id) == "playtest" and CardDB.CORE_POOL.has(id),
+			"%s: a playtest card in CardDB.CORE_POOL (SYNERGY-PLAYTEST-002)" % id)
 	for pool in ["SHARED", "GENERALIST", "ECHO", "RIOT", "VECTOR"]:
 		for rar in ["COMMON", "UNCOMMON", "RARE"]:
 			for id in CardDB.reward_pool(pool, rar):
-				check(not PLAYTEST.has(id) and not EXPERIMENTAL.has(id), "reward_pool(%s/%s) offers no pending or experimental card (%s)" % [pool, rar, id])
+				check(not PENDING_POOL.has(id) and not EXPERIMENTAL.has(id), "reward_pool(%s/%s) offers no pending or experimental card (%s)" % [pool, rar, id])
 	for id in EXPERIMENTAL:
 		check(CardDB.design_status(id) == "experimental" and CardDB.DEFS.has(id), "%s: experimental, its handler kept" % id)
 	for deck in [CardDB.STARTER_GENERALIST, CardDB.STARTER_ECHO, CardDB.STARTER_RIOT, CardDB.STARTER_VECTOR]:

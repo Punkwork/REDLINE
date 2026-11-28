@@ -161,7 +161,7 @@ class LiveFile(unittest.TestCase):
 
     def test_register(self):
         reg = V.register()
-        self.assertEqual(len(reg["pending"]), 15)   # CSA-04f: KEYLOGGER, STASH, QUANTUM CORE, HOT SWAP, JACK OF ALL TRADES
+        self.assertEqual(len(reg["pending"]), 5)    # CSA-04f: KEYLOGGER, STASH, QUANTUM CORE, HOT SWAP, JACK OF ALL TRADES (UI-PROTOCOL-001 built the ten playtest cards)
         self.assertEqual(sorted(reg["experimental"]), sorted(["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]))
         self.assertEqual(reg["divergent"], [])   # CSA-04d: PIVOT, the last divergent card, aligned
         self.assertNotIn("PROBE", [c for c, _ in reg["divergent"]])   # CSA-04b: PROBE aligned
@@ -216,7 +216,7 @@ class CatchesMistakes(unittest.TestCase):
         self.assertIn("starter cards must be current", self.errors(lambda d: d["starters"]["RIOT"].append("SMASH_AND_GRAB")))
 
     def test_pending_card_as_reward(self):
-        self.assertIn("cannot be a reward", self.errors(lambda d: d["pool_extra"]["ECHO"].update(REPRISE="RARE")))
+        self.assertIn("cannot be a reward", self.errors(lambda d: d["pool_extra"]["ECHO"].update(KEYLOGGER="RARE")))
 
     def test_experimental_card_in_core_pool(self):
         self.assertIn("core_pool holds experimental", self.errors(lambda d: d["core_pool"].append("SCALPEL")))

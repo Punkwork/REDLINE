@@ -202,7 +202,7 @@ func run() -> void:
 		sb.ctrl.request_play(int(c.uid))
 	sb.game.bw = 3
 	sb.refresh()
-	var ps: Control = sb.protocol_rack.slots[0]
+	var ps: Control = sb.protocol_note.icons[0]   # UI-PROTOCOL-001: the note replaced the header slots
 	ps.grab_focus()
 	var full := await shot("v2_19_header_protocols_deployed")
 	sb.inspector.close(); ps.release_focus()

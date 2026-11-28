@@ -24,14 +24,15 @@ const EYE := Rect2(10, 4, 76, 88)
 const TURN_ICON := Rect2(98, 31, 32, 32)
 const TURN := Rect2(136, 13, 112, 69)
 ## ARCH-V2-005: the turn indicator and the TRACE meter are half their former width (252 → 126,
-## 230 → 115); the freed header holds the CAPS and PROTOCOLS racks, three slots each to start.
+## 230 → 115); the freed header holds the CAPS rack, three slots to start (the PROTOCOLS rack beside it
+## was superseded by UI-PROTOCOL-001: active Protocols are on the paperclipped note).
 const PHASE := Rect2(264, 16, 126, 63)
 const TRACE := Rect2(402, 11, 115, 74)
 const GHOST := Rect2(532, 12, 96, 72)
 const CAPS := Rect2(642, 14, 219, 68)
-const PROTOCOLS := Rect2(869, 14, 219, 68)
 const CAP_SLOTS := 3        ## UPL-001: 3 CAP slots (Ghostware/Hardware may add more later)
-const PROTOCOL_SLOTS := 3   ## designer: "start with 3"; more deployed than slots shows "+n"
+## UI-PROTOCOL-001 (designer 2026-11-28): the three header PROTOCOL slots (ARCH-V2-005) are superseded
+## by the Active Protocol display on the paperclipped note (NOTE); their header space stays empty.
 const AD := Rect2(1196, 1, 306, 94)
 ## ARCH-V2-007c (designer 2026-11-26): ADP graffiti stickers in the header gap before the ad plate.
 const GRAFFITI := Rect2(1092, 4, 104, 90)
@@ -150,9 +151,8 @@ const EVENT_FLYOUT := {"EV-15": "mask_off", "EV-16": "lockdown", "EV-07": "breac
 const FLASH_EVENTS := {"EV-14": 0.30, "EV-15": 0.38, "EV-16": 0.45}
 var ghost_reel: HudWidgets.GhostReel
 var cap_rack: HudWidgets.SlotRack
-var protocol_rack: HudWidgets.SlotRack
 var counters: HudWidgets.CounterStack
-var effect_card: HudWidgets.EffectCard
+var protocol_note: HudWidgets.ProtocolNote   ## UI-PROTOCOL-001: active Protocols, from game.rack
 var signal_screen: HudWidgets.SignalScreen
 var rig_bay: RigBay
 var hand_fan: HandFan
@@ -330,9 +330,6 @@ func _build_header() -> void:
 	for slot in cap_rack.slots:
 		var sl: HudWidgets.RackSlot = slot
 		sl.inject.connect(func(u): inject_cap(u, sl))
-	protocol_rack = HudWidgets.SlotRack.new(); protocol_rack.name = "ProtocolRack"
-	protocol_rack.setup(PROTOCOLS.size, "PROTOCOL", PROTOCOL_SLOTS, inspector); protocol_rack.position = PROTOCOLS.position
-	stage.add_child(protocol_rack)
 	graffiti = Control.new(); graffiti.name = "Graffiti"; graffiti.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	graffiti.position = GRAFFITI.position; graffiti.size = GRAFFITI.size; graffiti.clip_contents = true
 	stage.add_child(graffiti)
@@ -362,8 +359,8 @@ func _build_left_rail() -> void:
 	crt_glow = HudWidgets.CrtDropGlow.new(); crt_glow.name = "CrtDropGlow"; crt_glow.size = REF
 	crt_glow.screen = rig_bay.screen_rect; crt_glow.slot_y = rig_bay.slot_y
 	stage.add_child(crt_glow)
-	effect_card = HudWidgets.EffectCard.new(); effect_card.name = "Effects"
-	effect_card.setup(NOTE.size, inspector); effect_card.position = NOTE.position; stage.add_child(effect_card)
+	protocol_note = HudWidgets.ProtocolNote.new(); protocol_note.name = "ProtocolNote"
+	protocol_note.setup(NOTE.size, inspector); protocol_note.position = NOTE.position; stage.add_child(protocol_note)
 
 func _build_meters() -> void:
 	## Right of the hand (ARCH-V2-003s): VITAE, BW, RAM, SHIELD, incoming PULP; icon + number.
@@ -549,7 +546,7 @@ func refresh() -> void:
 	ghost_reel.reduced_motion = reduced_motion
 	ghost_reel.set_items(VisibleStateAdapter.ghostware_models(game))
 	cap_rack.set_items(VisibleStateAdapter.cap_models(game))
-	protocol_rack.set_items(VisibleStateAdapter.protocol_models(game))
+	protocol_note.set_protocols(VisibleStateAdapter.protocol_models(game))
 	meters.VITAE.set_value(game.vitae, game.max_vitae, 10, str(game.vitae), "VITAE %d / %d" % [game.vitae, game.max_vitae])
 	meters.BW.set_value(game.bw, Game.BW_PER_TURN, Game.BW_PER_TURN, str(game.bw), "BANDWIDTH %d" % game.bw)
 	meters.RAM.set_value(game.ram_used(), game.ram_total(), game.ram_total(), "%d/%d" % [game.ram_used(), game.ram_total()], "RAM %d / %d" % [game.ram_used(), game.ram_total()])
@@ -577,7 +574,7 @@ func refresh() -> void:
 	counters.rows[0].lines = ["NEXT DRAW: %d card%s." % [game.draw_size(), "" if game.draw_size() == 1 else "s"], "Click to see your deck."]
 	counters.rows[1].lines = ["Click to see your discard pile."]
 	counters.rows[2].lines = ["Click to see what's burned."]
-	effect_card.set_stamps(_stamps())
+	protocol_note.set_stamps(_stamps())
 	end_key.set_enabled(not responding and game.phase == "PLAYER")
 	end_run_key.set_enabled(not responding and game.phase in ["PLAYER", "CHOICE", "READY_RIG"])
 	_refresh_rig()
@@ -913,7 +910,7 @@ func _choice_spec() -> Dictionary:
 	match String(p.get("kind", "")):
 		"discard": return {"kind": "discard", "title": "DISCARD %d" % int(p.get("n", 1)), "text": "CAPTCHA: choose a card in your hand to discard.", "cards": cards_of.call(hand_uids, game.hand)}
 		"burn_hand": return {"kind": "burn_hand", "title": "GARBAGE COLLECT", "text": "BURN another hand card for this encounter, then draw 1.", "cards": cards_of.call(p.options, game.hand)}
-		"retrieve": return {"kind": "retrieve", "title": "TAIL CALL", "text": "Choose a SCRIPT from discard.", "cards": cards_of.call(p.options, game.discard)}
+		"retrieve": return {"kind": "retrieve", "title": String(p.get("title", "TAIL CALL")), "text": String(p.get("text", "Choose a SCRIPT from discard.")), "cards": cards_of.call(p.options, game.discard)}
 		"uninstaller": return {"kind": "uninstaller", "title": "UNINSTALLER", "text": "Choose a Bloatware in your hand to BURN.", "cards": cards_of.call(p.options, game.hand)}
 		"field_kit": return {"kind": "field_kit", "title": "FIELD KIT", "text": "Choose a PROGRAM from your draw pile.", "cards": cards_of.call(p.options, game.draw_pile)}
 		"cache": return {"kind": "cache", "title": String(p.get("title", "DEAD AIR")), "text": String(p.get("description", "Choose a card to CACHE: it stays in your hand at the end of your turn.")), "cards": cards_of.call(p.options, game.hand)}

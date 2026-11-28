@@ -26,7 +26,7 @@ So cards are priced consistently, **1 BW is worth about**:
 - **+2 TRACE** on a card pays for about **1 BW** of extra effect (loud cards are cheaper).
 - **BURNED after use** (once per Node) allows about **+50% power**.
 - **Uncommon** cards are about **10–20% stronger** than common ones, or do something unusual. **Rare** cards can be about **30–40% stronger**, or break a rule.
-- **PROGRAMS** and **PROTOCOLS** last the whole Node, so they're priced on what they give **over about 3 turns**.
+- **PROGRAMS** last the whole Node, so they're priced on what they give **over about 3 turns**. *(PROTOCOLS now last one encounter and then go to the discard pile, PROTOCOL-DURATION-001/a/b and UI-PROTOCOL-001; Core Rules §3.1 owns their lifecycle.)*
 
 ---
 

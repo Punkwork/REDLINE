@@ -158,6 +158,23 @@ Mark playable Central Node punch cards, LUCIDA record edits, PATCHWORK grafts an
 | K2 | Minutes for the whole corporation. | 25–33 (75–100 per 3-corporation run) | | |
 | K3 | Any stretch that felt like a grind (where?). | None | | |
 
+## Protocols (UI-PROTOCOL-001)
+
+For the next representative playtest (issue #26). Protocol cards: REACTIVE ARMOUR, COUNTERINTELLIGENCE, OVERCLOCK, FEEDBACK LOOP, SALVAGE, ADAPTIVE DEFENCE, plus the four synergy SCRIPTS FOLLOW THROUGH, ESCALATION, AFTERBURN, REPRISE (SYNERGY-PLAYTEST-002, playtest values). They are in the shared reward pool.
+
+| ID | Check | Target / what good looks like | Result | Notes |
+|---|---|---|---|---|
+| PR-1 | Deploy a PROTOCOL: BW goes down by its cost, RAM doesn't change, the card leaves your hand and an icon appears on the paperclipped note at once. | Every time | | |
+| PR-2 | Deploy several, including two copies of one: one icon per card (copies are not grouped). Each copy fires on its own (two REACTIVE ARMOURs: +2 SHIELD per card played). | Icons match what you deployed | | |
+| PR-3 | Deploy more than the note shows (about 16): a scroll bar appears; the mouse wheel, the bar and Tab reach every icon. | No Protocol you can't reach | | |
+| PR-4 | Hover or Tab to an icon: the card inspector shows its name, cost, rules and "Active this encounter…"; OVERCLOCK and SALVAGE say when they've already fired this turn. | Always the right card | | |
+| PR-5 | Passive effects: REACTIVE ARMOUR +1 SHIELD per card; COUNTERINTELLIGENCE −1 TRACE per CLOAK; OVERCLOCK on your third card: draw 2, +1 BW, once a turn; FEEDBACK LOOP +1 BW when an ICE hits 0 STR (once per ICE); SALVAGE: first DEADLOCK broken each turn, pick a card from your discard pile; ADAPTIVE DEFENCE +3 SHIELD per PROGRAM installed. A Protocol never fires for its own deployment. | Each matches its card | | |
+| PR-6 | Synergy SCRIPTS: FOLLOW THROUGH −2 STR (−4 after an EXPLOIT); ESCALATION −1 STR per EXPLOIT this turn; AFTERBURN +4 SHIELD after 3 other cards; REPRISE repeats the last SCRIPT's effect on the same target (not after REPRISE, not a COMPILED card). | Each matches its card; note anything that surprised you | | |
+| PR-7 | Protocols stay active through BREACH, END TURN and the parting shot; then the note empties and the cards are in your discard pile (open the discard viewer). Programs stay installed. | Note is empty before the reward or next layer | | |
+| PR-8 | Same on LOCKDOWN (straight to the next layer) and when you leave a Node early. A fatal parting shot: no reward. | No Protocol carries over | | |
+| PR-9 | Card count: deck + hand + discard + BURNED + installed never loses or doubles a card across layers. | Counts add up | | |
+| PR-10 | The note doesn't hide the CORTEX or BW-drain stamps, the program CRT, the CAPS rack or the Ghostware reel. | Nothing else moved or got covered | | |
+
 ## UI & clarity
 
 | ID | Check | Target / what good looks like | Result | Notes |

@@ -81,6 +81,9 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_pt13_feedback.gd 2>&1 | tee -a /tmp/rules.log
           # CSA-04: canonical card records reach their consumers (Inspector contract, Uplink contract).
           "$GODOT" --headless --path godot --script res://tests/test_csa04_consumers.gd 2>&1 | tee -a /tmp/rules.log
+          # UI-PROTOCOL-001 (issue #26): Protocol lifecycle, the ten playtest cards, the Active Protocol note.
+          "$GODOT" --headless --path godot --script res://tests/test_ui_protocol_001.gd 2>&1 | tee -a /tmp/rules.log
+          "$GODOT" --headless --path godot --script res://tests/test_ui_protocol_note.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash
@@ -104,6 +107,13 @@ jobs:
             2>&1 | tee /tmp/shot_cred_cost.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_cred_cost.log; then exit 1; fi
           grep -q 'CRED COST: 4 passed, 0 failed' /tmp/shot_cred_cost.log
+          # UI-PROTOCOL-001: empty, several, overflow (top and end), inspector, reset after the encounter.
+          xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
+            "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
+            --rendering-driver opengl3 --path godot --script res://tests/shot_ui_protocol_001.gd \
+            2>&1 | tee /tmp/shot_ui_protocol_001.log
+          if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_ui_protocol_001.log; then exit 1; fi
+          grep -q 'UI-PROTOCOL-001 screenshots: 6 written (0 active after the encounter)' /tmp/shot_ui_protocol_001.log
           # UI-TYPO-002 (M06): the typography fixture on the production EventFlyout, lens and sandbox.
           xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
             "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \

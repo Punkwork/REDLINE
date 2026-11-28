@@ -62,12 +62,12 @@
   {
    "id": "H06",
    "area": "Header",
-   "element": "PROTOCOL rack",
+   "element": "Active PROTOCOLS (paperclip note)",
    "prototype": "ticker rack text",
-   "v2": "ProtocolRack",
+   "v2": "ProtocolNote",
    "status": "BUILT",
    "next": "",
-   "note": "3 slots, live from game.rack; more shows +n (ARCH-V2-005)."
+   "note": "UI-PROTOCOL-001: one icon per card in game.rack, any number, scrolls vertically; hover opens the shared inspector. Supersedes the 3 header slots (ARCH-V2-005)."
   },
   {
    "id": "H07",
@@ -534,10 +534,10 @@
    "area": "Vitals",
    "element": "CORTEX and BW drain",
    "prototype": "CRT status",
-   "v2": "Effects",
+   "v2": "ProtocolNote",
    "status": "BUILT",
    "next": "",
-   "note": ""
+   "note": "Stamps pinned at the right end of the Active PROTOCOLS note (UI-PROTOCOL-001)."
   },
   {
    "id": "V08",

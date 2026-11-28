@@ -424,6 +424,136 @@ class EffectCard extends Control:
 	func _draw() -> void:
 		if art: draw_texture_rect(art, Rect2(Vector2.ZERO, size), false)
 
+## UI-PROTOCOL-001 (designer 2026-11-28, issue #26): the paperclipped note card is the Active Protocol
+## display. One icon per active Protocol, no words; any number of them; the icon grid scrolls vertically
+## inside the paper when it outgrows it, and every icon stays reachable (wheel, scroll bar, Tab focus).
+## Hover or focus opens the shared inspector (UI-INSPECTOR-001) with the card's canonical content. The
+## models come from VisibleStateAdapter.protocol_models(game), i.e. straight from game.rack: no list of
+## its own. The CORTEX / BW-drain stamps that lived on this card stay, pinned at its right end.
+## Not approved yet, so kept plain: animation, grouping duplicates, the exact scroll treatment.
+class ProtocolNote extends Control:
+	## The paper inside V2_NOTE_CARD, as fractions of the art (1823 × 799, measured by eye): clear of
+	## the paperclip on the left and the curled corner on the right.
+	const PAPER := Rect2(0.155, 0.13, 0.80, 0.76)
+	const ICON := 22.0
+	const GAP := 4.0
+	var art: Texture2D
+	var inspector: KeyInspector
+	var scroll: ScrollContainer
+	var grid: HFlowContainer
+	var stamp_box: HBoxContainer
+	var icons: Array = []           # ProtocolIcon, in game.rack order
+	var _uids: Array = []
+	func setup(sz: Vector2, insp: KeyInspector) -> void:
+		size = sz; custom_minimum_size = sz; inspector = insp
+		art = V2Art.tex("controls/V2_NOTE_CARD.png", sz.x)
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		stamp_box = HBoxContainer.new(); stamp_box.name = "Stamps"; stamp_box.add_theme_constant_override("separation", 2)
+		stamp_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(stamp_box)
+		scroll = ScrollContainer.new(); scroll.name = "ProtocolScroll"
+		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+		scroll.follow_focus = true   # Tab to an icon below the fold scrolls it into view
+		var bar := scroll.get_v_scroll_bar()
+		bar.custom_minimum_size = Vector2(5, 0)
+		var thumb := StyleBoxFlat.new(); thumb.bg_color = Color("#6B2A1A", 0.55); thumb.set_corner_radius_all(2)
+		var track := StyleBoxFlat.new(); track.bg_color = Color("#6B2A1A", 0.10); track.set_corner_radius_all(2)
+		for k in ["grabber", "grabber_highlight", "grabber_pressed"]: bar.add_theme_stylebox_override(k, thumb)
+		bar.add_theme_stylebox_override("scroll", track)
+		add_child(scroll)
+		var pad := MarginContainer.new(); pad.name = "Pad"   # keeps the last column clear of the scroll bar
+		pad.add_theme_constant_override("margin_right", 8)
+		pad.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		scroll.add_child(pad)
+		grid = HFlowContainer.new(); grid.name = "ProtocolIcons"
+		grid.add_theme_constant_override("h_separation", int(GAP)); grid.add_theme_constant_override("v_separation", int(GAP))
+		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		pad.add_child(grid)
+		_layout()
+	func paper() -> Rect2:
+		## Whole pixels: the scroll range is in whole pixels, so a fractional page would hide a sliver.
+		return Rect2((size * PAPER.position).round(), (size * PAPER.size).floor())
+	func _layout() -> void:
+		var p := paper()
+		var sw := stamp_box.get_combined_minimum_size().x if stamp_box.get_child_count() > 0 else 0.0
+		stamp_box.position = Vector2(p.end.x - sw, p.position.y + (p.size.y - stamp_box.get_combined_minimum_size().y) / 2.0)
+		scroll.position = p.position
+		scroll.size = Vector2(p.size.x - (sw + 6.0 if sw > 0.0 else 0.0), p.size.y)
+	## Rebuild the icons when the RACK's cards change (by uid), otherwise refresh their contents in place.
+	func set_protocols(models: Array) -> void:
+		var uids := models.map(func(m): return int(m.uid))
+		if uids != _uids:
+			for c in grid.get_children(): grid.remove_child(c); c.queue_free()
+			icons.clear()
+			for m in models:
+				var ic := ProtocolIcon.new(); ic.name = "Protocol%d" % int(m.uid); ic.inspector = inspector
+				ic.custom_minimum_size = Vector2(ICON, ICON); ic.size = Vector2(ICON, ICON)
+				grid.add_child(ic); icons.append(ic)
+			_uids = uids
+		for k in models.size(): icons[k].set_model(models[k])
+	func set_stamps(list: Array) -> void:
+		for c in stamp_box.get_children(): stamp_box.remove_child(c); c.queue_free()
+		for st in list:
+			var e := Stamp.new(); e.inspector = inspector; e.ico = st.icon; e.n = int(st.n); e.title = String(st.title)
+			e.custom_minimum_size = Vector2(size.y * 0.42, size.y * 0.42)
+			stamp_box.add_child(e)
+		_layout()
+	func count() -> int:
+		return icons.size()
+	## Rows that fit in the paper, and rows the icons need (for the overflow tests and fixtures).
+	func visible_rows() -> int:
+		return maxi(1, int((scroll.size.y + GAP) / (ICON + GAP)))
+	func overflowing() -> bool:
+		return grid.get_combined_minimum_size().y > scroll.size.y + 0.5
+	func _draw() -> void:
+		if art: draw_texture_rect(art, Rect2(Vector2.ZERO, size), false)
+
+## One active Protocol on the note: its card art cropped square, or a drawn rack glyph when the card has
+## no art yet. No words; the inspector carries name, cost, effect and state.
+class ProtocolIcon extends Control:
+	var inspector: KeyInspector
+	var model: Dictionary = {}
+	var tex: Texture2D
+	func _init() -> void:
+		focus_mode = Control.FOCUS_ALL
+		mouse_filter = Control.MOUSE_FILTER_STOP
+		mouse_default_cursor_shape = Control.CURSOR_HELP
+		mouse_entered.connect(_show)
+		focus_entered.connect(_show)
+		mouse_exited.connect(func(): if not has_focus(): _hide())
+		focus_exited.connect(_hide)
+	func set_model(m: Dictionary) -> void:
+		model = m
+		tex = CardView.art_for(String(m.get("art", "")))
+		tooltip_text = ""
+		queue_redraw()
+	func _show() -> void:
+		if not is_instance_valid(inspector) or model.is_empty(): return
+		var m := model
+		var notes := [["Active this encounter. When the encounter ends it goes to your discard pile.", KeyInspector.INK_NOTE]]
+		if String(m.get("state", "")) != "": notes.append([String(m.state), KeyInspector.INK_NOTE])
+		inspector.show_object(self, inspector.card_art(m), String(m.get("name", "")), String(m.get("classification", "")),
+			"%d BW" % int(m.get("bw", 0)), [String(m.get("text", ""))], notes, String(m.get("flavor", "")))
+		queue_redraw()
+	func _hide() -> void:
+		if is_instance_valid(inspector): inspector.close(self)
+		queue_redraw()
+	func _draw() -> void:
+		var r := Rect2(Vector2.ZERO, size)
+		var ink := Color("#6B2A1A")
+		if tex:
+			var ts := tex.get_size()
+			var side := minf(ts.x, ts.y)
+			draw_texture_rect_region(tex, r.grow(-1), Rect2((ts - Vector2(side, side)) / 2.0, Vector2(side, side)))
+		else:
+			draw_rect(r.grow(-1), Color("#1E6E6A", 0.16))
+			HudWidgets.draw_group_glyph(self, "PROTOCOL", size / 2.0, size.x * 0.66, Color(ink, 0.8))
+		draw_rect(r.grow(-0.5), Color(ink, 0.85), false, 1.5)
+		if has_focus():
+			var f := StyleBoxFlat.new(); f.draw_center = false; f.set_border_width_all(2); f.border_color = VasTokens.FOCUS
+			f.set_corner_radius_all(4); draw_style_box(f, r.grow(2))
+
 class Stamp extends Explained:
 	var ico: Texture2D
 	var n := 0
@@ -482,7 +612,7 @@ class SlotRack extends Control:
 		var gi := RackIcon.new(); gi.name = "GroupIcon"; gi.kind = k; gi.inspector = insp
 		gi.title = "CAPS" if k == "CAP" else "PROTOCOLS (RACK)"
 		gi.lines = ["Single-use. Flip, inject, discard. 0 BW, any time in your turn. 3 slots."] if k == "CAP" \
-			else ["Deployed PROTOCOLs stay active for the whole Node and return to your deck at Node end."]
+			else ["Deployed PROTOCOLs stay active for the encounter, then go to your discard pile (Core Rules §3.1)."]
 		var x0: float
 		var area: Rect2
 		if housing:

@@ -2386,15 +2386,19 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "COMMON",
-			"text": "Whenever you play a card, gain 1 SHIELD.",
+			"text": "Whenever you play a card, gain {shield} SHIELD.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
-			]
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"shield": 1
+			}
 		},
 		"COUNTERINTELLIGENCE": {
 			"name": "COUNTERINTELLIGENCE",
@@ -2402,15 +2406,19 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "COMMON",
-			"text": "Whenever you play a CLOAK, reduce TRACE by 1.",
+			"text": "Whenever you play a CLOAK, reduce TRACE by {trace_down}.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
-			]
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"trace_down": 1
+			}
 		},
 		"OVERCLOCK": {
 			"name": "OVERCLOCK",
@@ -2418,16 +2426,22 @@
 			"tags": [],
 			"bw": 2,
 			"rarity": "UNCOMMON",
-			"text": "Upon playing your third card each turn, draw 2 cards and gain 1 BW.",
+			"text": "Upon playing your third card each turn, draw {draw} cards and gain {bw_gain} BW.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
-				"SYNERGY-PLAYTEST-002a"
-			]
+				"SYNERGY-PLAYTEST-002a",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"nth": 3,
+				"draw": 2,
+				"bw_gain": 1
+			}
 		},
 		"FEEDBACK_LOOP": {
 			"name": "FEEDBACK LOOP",
@@ -2435,15 +2449,19 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "COMMON",
-			"text": "Whenever you ZERO an ICE, gain 1 BW.",
+			"text": "Whenever you ZERO an ICE, gain {bw_gain} BW.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
-			]
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"bw_gain": 1
+			}
 		},
 		"SALVAGE": {
 			"name": "SALVAGE",
@@ -2454,11 +2472,12 @@
 			"text": "First DEADLOCK broken each turn: return a selected discarded card to hand.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
 			]
 		},
 		"ADAPTIVE_DEFENCE": {
@@ -2467,15 +2486,19 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "COMMON",
-			"text": "Whenever you install a PROGRAM, gain 3 SHIELD.",
+			"text": "Whenever you install a PROGRAM, gain {shield} SHIELD.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
-			]
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"shield": 3
+			}
 		},
 		"FOLLOW_THROUGH": {
 			"name": "FOLLOW THROUGH",
@@ -2486,15 +2509,20 @@
 			"bw": 1,
 			"rarity": "COMMON",
 			"target": true,
-			"text": "Target ICE −2 STR, additional −2 if previous card played was EXPLOIT.",
+			"text": "Target ICE −{str_down} STR, additional −{bonus} if previous card played was EXPLOIT.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
-			]
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"str_down": 2,
+				"bonus": 2
+			}
 		},
 		"ESCALATION": {
 			"name": "ESCALATION",
@@ -2505,15 +2533,19 @@
 			"bw": 1,
 			"rarity": "COMMON",
 			"target": true,
-			"text": "Target ICE −1 STR per EXPLOIT played this turn including itself.",
+			"text": "Target ICE −{str_per} STR per EXPLOIT played this turn including itself.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
-			]
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"str_per": 1
+			}
 		},
 		"AFTERBURN": {
 			"name": "AFTERBURN",
@@ -2523,15 +2555,20 @@
 			],
 			"bw": 0,
 			"rarity": "COMMON",
-			"text": "Gain 4 SHIELD if at least three other cards played this turn.",
+			"text": "Gain {shield} SHIELD if at least three other cards played this turn.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
-			]
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
+			],
+			"params": {
+				"shield": 4,
+				"others": 3
+			}
 		},
 		"REPRISE": {
 			"name": "REPRISE",
@@ -2542,11 +2579,12 @@
 			"text": "Repeat effect of previous SCRIPT played this turn.",
 			"status": {
 				"design": "playtest",
-				"implementation": "pending"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
-				"SYNERGY-PLAYTEST-002"
+				"SYNERGY-PLAYTEST-002",
+				"UI-PROTOCOL-001"
 			]
 		},
 		"KEYLOGGER": {

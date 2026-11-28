@@ -247,13 +247,19 @@ static func card_model(game: Game, c: Dictionary, where: String = "hand") -> Dic
 		"flavor": String(im.flavour),   # UI-INSPECTOR-001: subordinate flavour line
 		"cached": bool(c.get("cached", false)), "cache_turns": int(c.get("cache_turns", 0))}
 
-## ARCH-V2-005 header slots. Display models only; nothing here changes Game.
-## PROTOCOLs deployed this Node sit on the RACK (Core Rules §3: "Stays active for the whole Node").
+## UI-PROTOCOL-001: the active Protocols, one model per card in game.rack, in deployment order. Display
+## models only; nothing here changes Game. Deployed Protocols last the encounter (Core Rules §3.1).
+## `state` reports a once-per-turn trigger already spent this turn, read from the engine.
 static func protocol_models(game: Game) -> Array:
 	var out := []
 	for c in game.rack:
 		var m := card_model(game, c, "rack")
 		m["kind"] = "PROTOCOL"
+		var used := false
+		match String(c.id):
+			"OVERCLOCK": used = game.enc.get("overclock_used", {}).has(c.uid)
+			"SALVAGE": used = game.enc.get("salvage_used", {}).has(c.uid)
+		m["state"] = "Already triggered this turn." if used else ""
 		out.append(m)
 	return out
 

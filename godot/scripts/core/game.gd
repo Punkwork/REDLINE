@@ -405,6 +405,11 @@ func _start_turn() -> void:
 		_mark_seen()
 	if not CORE_LOOP:   # STRIP-001: fixed PULP, no FORTRESS rolls
 		_roll_fortress_pulp()
+	enc["cards_turn"] = 0         # SYNERGY-PLAYTEST-002: card plays this turn
+	enc["last_script"] = {}
+	enc["overclock_used"] = {}    # OVERCLOCK: once per turn per deployed copy (by uid)
+	enc["salvage_used"] = {}      # SALVAGE: first DEADLOCK broken each turn, per deployed copy
+	enc["salvage_due"] = 0
 	enc["probes"] = []   # PROBE-003/004a: [{ice, n}], PROBEs played on each ICE (by instance, Q6) this turn
 	# DET-001: a DETAINER's −1 BW from the last Corporation Response lands on this turn.
 	bw = maxi(0, BW_PER_TURN - enc.bw_drain) + (1 if ghostware.has("ONE_TRICK") else 0)
@@ -551,6 +556,12 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Can't be played"}
 	if CORE_LOOP and inst.id == "DEFRAG" and hand.size() < 2:
 		return {"ok": false, "reason": "Need another hand card to discard"}
+	if inst.id == "REPRISE":   # SYNERGY-PLAYTEST-002 (UI-PROTOCOL-001 playtest)
+		var again := reprise_source()
+		if again == "":
+			return {"ok": false, "reason": "No SCRIPT to repeat this turn"}
+		if again in ["DEFRAG", "GARBAGE_COLLECT"] and hand.size() < 2:
+			return {"ok": false, "reason": "Need another hand card for %s" % CardDB.def(again).name}
 	if bw < card_cost(inst.id, uid):
 		return {"ok": false, "reason": "Need %d BW" % card_cost(inst.id, uid)}
 	if cred < int(d.get("cred_cost", 0)):
@@ -574,6 +585,15 @@ func can_play(uid: int) -> Dictionary:
 
 func play_card(uid: int, target: int = -1, mode: String = "") -> bool:
 	## mode: for a card with modes (PROBE-004a), one of play_modes(id, target); "" means the card's first mode.
+	## UI-PROTOCOL-001 / SYNERGY-PLAYTEST-002: a successful play then fires the active Protocols' card-play
+	## triggers (never the copy that was just deployed) and any SALVAGE that a break left waiting.
+	var ok := _play_card(uid, target, mode)
+	if ok:
+		_after_card_played(uid)
+		_flush_salvage()
+	return ok
+
+func _play_card(uid: int, target: int, mode: String) -> bool:
 	var chk := can_play(uid)
 	if not chk.ok:
 		_say(chk.reason)
@@ -613,6 +633,12 @@ func play_card(uid: int, target: int = -1, mode: String = "") -> bool:
 	for tag in d.tags:
 		enc.tag_counts[tag] = int(enc.tag_counts.get(tag, 0)) + 1
 	played[inst.id] = int(played.get(inst.id, 0)) + 1
+	if d.type != "BLOATWARE":
+		enc["cards_turn"] = int(enc.get("cards_turn", 0)) + 1   # successful card plays this turn (OVERCLOCK, AFTERBURN)
+	enc["last_played"] = {"uid": inst.uid, "id": inst.id, "type": String(d.type), "tags": d.tags.duplicate()}
+	if d.type == "SCRIPT":   # REPRISE repeats the previous SCRIPT played this turn
+		enc["last_script_before"] = enc.get("last_script", {})
+		enc["last_script"] = {"id": "" if d.has("compiled") else String(inst.id), "mode": mode, "ice_ref": target_ice_ref(target)}
 	bw -= paid
 	cred -= int(d.get("cred_cost", 0))
 	if d.type == "BLOATWARE":
@@ -627,6 +653,7 @@ func play_card(uid: int, target: int = -1, mode: String = "") -> bool:
 	match d.type:
 		"PROGRAM":
 			installed.append({"inst": inst, "boost": 0, "free_used": false})
+			_on_program_installed()
 			if d.has("extract_on_install"):
 				extract(d.extract_on_install)
 			if d.get("ram_bonus", 0) > 0:
@@ -717,9 +744,35 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 				discard.append(inst)
 				phase = "CHOICE"
 		"PULP_SHIELD": shield += CardDB.param("PULP_SHIELD", "shield")
+		# SYNERGY-PLAYTEST-002 scripts (UI-PROTOCOL-001 playtest)
+		"FOLLOW_THROUGH":
+			var extra: int = CardDB.param("FOLLOW_THROUGH", "bonus") if inst.get("previous_tags", []).has("EXPLOIT") else 0
+			reduce_ice_str(target, CardDB.param("FOLLOW_THROUGH", "str_down") + extra)
+		"ESCALATION": reduce_ice_str(target, int(enc.tag_counts.get("EXPLOIT", 0)) * CardDB.param("ESCALATION", "str_per"))
+		"AFTERBURN":
+			if int(enc.get("cards_turn", 0)) - 1 >= CardDB.param("AFTERBURN", "others"):
+				shield += CardDB.param("AFTERBURN", "shield")
+		"REPRISE":
+			# Repeats the previous SCRIPT's effect, not its play: no card-play triggers, no PROBE count,
+			# the same target and mode. Interactive effects park their source, as COMPILED parts do.
+			var last: Dictionary = enc.get("last_script_before", {})
+			var part := inst.duplicate()
+			part.id = String(last.get("id", ""))
+			part["mode"] = String(last.get("mode", ""))
+			part["reprise"] = true   # previous_tags stay REPRISE's own: conditions read the board now
+			var t: int = enc.ice.find(last.get("ice_ref")) if last.get("ice_ref") != null else -1
+			if CardDB.def(part.id).get("target", false) and t < 0:
+				_say("REPRISE: the target is gone; nothing happens.")
+				return false
+			_say("REPRISE: %s again." % CardDB.def(part.id).name)
+			_resolve_script(part, t)
+			_take_from(discard, inst.uid); _take_from(burned, inst.uid)
+			if not pending.is_empty() and pending.get("card_uid", -1) == inst.uid:
+				discard.append(inst)   # the choice is open; REPRISE itself is already in the discard pile
 		"PROBE":
 			# PROBE-004a: choose one. Both modes add to the same per-ICE, per-turn count (PROBE-003, Q6).
-			_probe_count_add(target)
+			# A REPRISE repeats the effect, not the play, so it doesn't add to the count.
+			if not inst.get("reprise", false): _probe_count_add(target)
 			if String(inst.get("mode", "weaken")) == "reveal":
 				_probe_reveal_all(target)
 			else:
@@ -1201,6 +1254,7 @@ func _apply_effect(e: Dictionary) -> void:
 func choose(uid: int) -> void:
 	_choose(uid)
 	_resume_compiled()
+	_flush_salvage()
 
 func _choose(uid: int) -> void:
 	## Resolve a pending choice: discard, uninstaller, field_kit.
@@ -1305,6 +1359,8 @@ func _sync_strengths() -> void:
 			ice.str_mod += floor_value - _raw_strength(i)
 		var current := ice_str(i)
 		if int(ice.get("last_str", current)) > 0 and current == 0 and not ice.get("zeroed_blocked", false) and floor_value == 0:
+			if not ice.zeroed and _rack_has("FEEDBACK_LOOP"):   # SYNERGY-PLAYTEST-002: whenever you ZERO an ICE
+				bw += _rack_count("FEEDBACK_LOOP") * CardDB.param("FEEDBACK_LOOP", "bw_gain")
 			ice.zeroed = true
 		ice.last_str = current
 		if CORE_LOOP:
@@ -1435,6 +1491,7 @@ func break_sub(i: int, s: int, pick_uid: int = -1) -> bool:
 		infect(enc.ice.find(ice), "ROT", pk.rot_per_break)
 	if pk.get("trace_per_break", 0) > 0:
 		add_trace(pk.trace_per_break, false)
+	_flush_salvage()
 	return true
 
 func _do_break(i: int, s: int) -> bool:
@@ -1452,6 +1509,12 @@ func _do_break(i: int, s: int) -> bool:
 	_sync_strengths()
 	enc.breaks_turn += 1
 	var d := ice_definition(ice)
+	if _has_deadlock(d.subs[s]) and ice.broken[s]:
+		if not enc.has("salvage_used"): enc["salvage_used"] = {}
+		for card in rack:
+			if card.id == "SALVAGE" and not enc.salvage_used.has(card.uid):
+				enc.salvage_used[card.uid] = true
+				enc.salvage_due = int(enc.get("salvage_due", 0)) + 1
 	if _has_deadlock(d.subs[s]):
 		_event("EV-06")
 	elif not enc.breached:
@@ -1519,6 +1582,10 @@ static func _has_deadlock(effects: Array) -> bool:
 # =====================================================================
 
 func _after_breach() -> void:
+	# PROTOCOL-DURATION-001/a/b, UI-PROTOCOL-001 (Core Rules §3.1): BREACH, END TURN and PARTING SHOT have
+	# resolved and the Rustler survived. Deployed Protocols expire to the discard pile exactly once, before
+	# progression (go deeper, forced LOCKDOWN, leave early) or completion rewards.
+	_expire_protocols()
 	layers_cleared = layer + 1
 	if layer + 1 < node.layers.size():
 		if lockdown:
@@ -1533,7 +1600,8 @@ func go_deeper() -> void:
 	if phase != "DEEPER" and not lockdown:
 		return
 	layer += 1
-	# Between layers: Programs, Protocols and CACHED cards stay; everything else in hand is discarded.
+	# Between layers: Programs stay (RAM too); Protocols have already expired (_after_breach); everything
+	# else in hand is discarded.
 	if CORE_LOOP:   # CACHE-001: ∞ CACHE lasts the encounter, so CACHED cards go too
 		for c in hand:
 			c.cached = false
@@ -1930,6 +1998,59 @@ func _installed_has(id: String) -> bool:
 		if p.inst.id == id:
 			return true
 	return false
+
+## UI-PROTOCOL-001 / PROTOCOL-DURATION-001a: every deployed Protocol goes to the discard pile, once.
+func _expire_protocols() -> void:
+	for c in rack:
+		discard.append(c)
+	if not rack.is_empty():
+		_say("Protocols expire: %d to your discard pile." % rack.size())
+	rack = []
+
+## The ICE a play aims at, held by reference (an index can shift when Black ICE arrives).
+func target_ice_ref(target: int) -> Variant:
+	return enc.ice[target] if target >= 0 and target < enc.ice.size() else null
+
+## REPRISE: the SCRIPT it would repeat now, or "" (none this turn, a COMPILED card, or another REPRISE).
+func reprise_source() -> String:
+	if enc.is_empty(): return ""
+	var id := String(enc.get("last_script", {}).get("id", ""))
+	return "" if id == "REPRISE" else id
+
+## SYNERGY-PLAYTEST-002 card-play triggers of the active Protocols. Each deployed copy fires on its own;
+## a Protocol never fires for its own deployment (it joins the RACK during the play, so it is skipped).
+func _after_card_played(uid: int) -> void:
+	if enc.is_empty() or phase == "DEAD": return
+	var lp: Dictionary = enc.get("last_played", {})
+	if String(lp.get("type", "")) == "BLOATWARE": return   # clearing SPAM pays BW but isn't a card play here
+	if not enc.has("overclock_used"): enc["overclock_used"] = {}
+	for card in rack.duplicate():
+		if card.uid == uid: continue
+		match card.id:
+			"REACTIVE_ARMOUR": shield += CardDB.param("REACTIVE_ARMOUR", "shield")
+			"COUNTERINTELLIGENCE":
+				if lp.get("tags", []).has("CLOAK"): trace = maxi(0, trace - CardDB.param("COUNTERINTELLIGENCE", "trace_down"))
+			"OVERCLOCK":
+				if int(enc.get("cards_turn", 0)) == CardDB.param("OVERCLOCK", "nth") and not enc.overclock_used.has(card.uid):
+					enc.overclock_used[card.uid] = true
+					bw += CardDB.param("OVERCLOCK", "bw_gain")
+					draw_cards(CardDB.param("OVERCLOCK", "draw"))
+
+func _on_program_installed() -> void:
+	if not enc.is_empty():
+		shield += _rack_count("ADAPTIVE_DEFENCE") * CardDB.param("ADAPTIVE_DEFENCE", "shield")
+
+## SALVAGE: a waiting return opens as a choice once nothing else is pending (a DEADLOCK can break inside
+## another card's choice). With nothing in the discard pile it does nothing.
+func _flush_salvage() -> void:
+	if enc.is_empty() or phase != "PLAYER" or not pending.is_empty(): return
+	while int(enc.get("salvage_due", 0)) > 0:
+		enc.salvage_due -= 1
+		if discard.is_empty(): continue
+		pending = {"kind": "retrieve", "options": discard.map(func(c): return c.uid), "card_uid": -1,
+			"title": "SALVAGE", "text": "Choose a card in your discard pile to return to your hand."}
+		phase = "CHOICE"
+		return
 
 func _rack_has(id: String) -> bool:
 	return _rack_count(id) > 0

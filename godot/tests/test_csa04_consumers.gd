@@ -105,7 +105,7 @@ func test_uplink_contract() -> void:
 	var starters := []
 	for deck in [CardDB.STARTER_GENERALIST, CardDB.STARTER_ECHO, CardDB.STARTER_RIOT, CardDB.STARTER_VECTOR]: starters += deck
 	check(starters.all(func(id): return not sold.has(id)), "no starter or basic card is ever on the shelf (BASIC-001)")
-	check(not sold.has("KEYLOGGER") and not sold.has("REACTIVE_ARMOUR") and not sold.has("MINIMALIST"), "pending and experimental cards are never on the shelf")
+	check(not sold.has("KEYLOGGER") and not sold.has("STASH") and not sold.has("MINIMALIST"), "pending and experimental cards are never on the shelf")
 	# Propagation: a change to the canonical price table reaches the contract.
 	var copy: Dictionary = CardDB.DATA.duplicate(true)
 	copy.uplink.card_prices.COMMON = 55
