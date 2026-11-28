@@ -307,7 +307,7 @@ Requiring checks has consequences:
 - Starter origin: ECHO, RIOT and VECTOR cards that appeared in only that Rustler's first approved deck (RUSTLER-004–006, RUSTLER-007).
 - Confirmed in topic docs: SHATTER (RIOT-002–004), FLATLINE, KNOCKOUT and SECOND WIND (ZEROED-001), TRACER and SPAM (ICE-004).
 
-**No decision ID found (6):** CLEAN BUILD, PORT SCAN, ROLLING RESTART, SHORT LOOP, STACK SMASH, WARM BOOT, all Deck Synergy §9 "example cards" (approved with the document, DSY-001–014, but never approved as individual cards). They are listed in `tests/python/test_csa_cards.py`. PULP Shield was traced afterwards to GENERALIST-001 and GENERALIST-012 (121 of 127).
+**No decision ID found (6):** CLEAN BUILD, PORT SCAN, ROLLING RESTART, SHORT LOOP, STACK SMASH, WARM BOOT, all Deck Synergy §9 "example cards" (approved with the document, DSY-001–014, but never approved as individual cards). PULP Shield was traced afterwards to GENERALIST-001 and GENERALIST-012, and the designer approved the six as cards (DSY-CARDS-001, 2026-11-28): **127 of 127 records cite decisions**.
 
 **Still open in CSA-04 (plan elements 3 and 4; designer 2026-11-28 06:35: "keep in csa 4"):**
 - `CardDB.param()`: engine numbers read from the record.

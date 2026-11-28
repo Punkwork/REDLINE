@@ -14,7 +14,7 @@ with open(V.DEFAULT, encoding="utf-8") as f:
 
 # CSA-04h: cards with no traceable decision ID after the backfill. Shrink this list as IDs are found;
 # a new card record without a decision fails test_every_card_cites_a_decision.
-NO_DECISION_YET = {"CLEAN_BUILD", "PORT_SCAN", "ROLLING_RESTART", "SHORT_LOOP", "STACK_SMASH", "WARM_BOOT"}   # Deck Synergy §9 examples
+NO_DECISION_YET = set()   # DSY-CARDS-001 (2026-11-28) approved the last six; every card now cites a decision
 
 
 class LiveFile(unittest.TestCase):

@@ -1856,7 +1856,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-007",
+				"DSY-CARDS-001"
+			]
 		},
 		"ROLLING_RESTART": {
 			"name": "ROLLING RESTART",
@@ -1869,7 +1872,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-007",
+				"DSY-CARDS-001"
+			]
 		},
 		"FORCE_REBOOT": {
 			"name": "FORCE REBOOT",
@@ -1901,7 +1907,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-007",
+				"DSY-CARDS-001"
+			]
 		},
 		"PORT_SCAN": {
 			"name": "PORT SCAN",
@@ -1914,7 +1923,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-008",
+				"DSY-CARDS-001"
+			]
 		},
 		"GARBAGE_COLLECT": {
 			"name": "GARBAGE COLLECT",
@@ -2065,7 +2077,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-009",
+				"DSY-CARDS-001"
+			]
 		},
 		"NULL_POINTER": {
 			"name": "NULL POINTER",
@@ -2204,7 +2219,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-004",
+				"DSY-CARDS-001"
+			]
 		},
 		"MINIMALIST": {
 			"name": "MINIMALIST",

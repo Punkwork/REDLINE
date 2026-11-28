@@ -3978,3 +3978,7 @@ Designer notes from HALCYON PLAYTEST 13 (first Architecture V2 build), as given:
 
 **Designer:** "pivot text should be changed to 'Target ICE −1 STR this encounter. If target ICE STR is 0, break one of the target ICE subroutines for no cost.'" This answers the open CSA-04d interpretation: PIVOT played on an ICE already at 0 STR now breaks a subroutine too. The condition is the target's STR after the −1, whatever brought it there. Unchanged: 1 BW, −1 STR for the encounter, the Rustler chooses which eligible subroutine breaks, no prompt when only one qualifies. Supersedes the CSA-04d wording "If this reduces target ICE STR to 0". **Affects:** card:PIVOT. **Status:** built in the PIVOT-001 commit (canonical record, engine, `test_spec_pivot.gd`); playtest pending.
 
+## DSY-CARDS-001 — Deck Synergy §9 example cards approved as cards (APPROVED, designer 2026-11-28 06:57)
+
+**Designer:** "Approved all cards." Six cards listed as examples in Deck Synergy §9 are approved as cards, each under the decision that introduced its mechanic: WARM BOOT, SHORT LOOP and ROLLING RESTART (DSY-007, REBOOT); PORT SCAN (DSY-008, SCAN); STACK SMASH (DSY-009); CLEAN BUILD (DSY-004, COMPILE). Their current definitions are the canonical records in `godot/data/cards.json`, unchanged. **Affects:** card:WARM_BOOT, card:SHORT_LOOP, card:ROLLING_RESTART, card:PORT_SCAN, card:STACK_SMASH, card:CLEAN_BUILD. With this, every card record cites at least one decision (127 of 127), enforced by `tests/python/test_csa_cards.py`.
+
