@@ -105,15 +105,15 @@ Mark playable Central Node punch cards, LUCIDA record edits, PATCHWORK grafts an
 | F5 | Card prices (40 / 60 / 90 CRED) felt right. | Choices, not auto-buys | | |
 | F6 | CAP prices (20 / 35 / 55) and the BOOTLEG risk felt right. | Sometimes worth it | | |
 | F7 | Ghostware at 100 (75 with a drawback) was worth considering. | A real trade-off against cards | | |
-| F8 | Wipe (50, +25 each use) was used, and worth it. | Used at least once in a good run | | |
-| F9 | The Clinic (50 CRED to clear CORTEX) was worth it when you had CORTEX. | Yes | | |
+| F8 | Console Lab card removal (Core Rules §8.3) was used, and worth it. | Used at least once in a good run | | |
+| F9 | The Uplink Clinic (CORTEX repair, Core Rules §8.3) was worth it when you had CORTEX. | Yes | | |
 | F10 | Unspent CRED at the end of the corporation. | Little left over | | |
 
 ## Deck & rewards
 
 | ID | Check | Target / what good looks like | Result | Notes |
 |---|---|---|---|---|
-| G1 | Cards added vs removed this corporation (rewards + bought; removals by Wipe, Console Lab, data purge, FUSE). | About 8 added, about 2 removed (net +6 to +10) | | |
+| G1 | Cards added vs removed this corporation (rewards + bought; removals by Console Lab, DECOMPILE, data purge, FUSE). | About 8 added, about 2 removed (net +6 to +10) | | |
 | G2 | Reward choices were interesting; note how often you skipped. | At least 1 of 3 worth taking | | |
 | G3 | Going deeper gave noticeably better card choices. | Yes | | |
 | G4 | The full-clear completion CAP was worth going deeper for. | Sometimes | | |

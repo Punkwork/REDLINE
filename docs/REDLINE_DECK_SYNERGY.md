@@ -32,7 +32,7 @@ Without changes, the current design pushes decks **toward about 40 cards or more
 ## 1. Diagnosis: why the current design grows decks
 
 1. **The card-count target is about 40.** CORE-010 / UPL-008 aim for about 30 cards added to a 12-card starter (RIOT starts at 15), with only 3–5 removed: about 37–40 at the end of a run, above the 30–35 target.
-2. **Removal is scarce and gets more expensive.** Wipe costs 50, then 75, then 100 CRED; the Console Lab competes with PATCHWORK; data purge is a random event.
+2. **Removal is scarce and gets more expensive.** *(Diagnosis as of 2026-11-15; current removal rules: Core Rules §8.3.)* Wipe costs 50, then 75, then 100 CRED; the Console Lab competes with PATCHWORK; data purge is a random event.
 3. **Skipping a reward gives nothing.** On the reward screen, the only way to keep the deck lean is to give the reward up, so players take cards.
 4. **Deck size is invisible.** Nothing on screen shows how often a card comes up, and deck size decides whether a key card shows up in an encounter:
 
@@ -94,10 +94,10 @@ The ICE Node card reward becomes: **take 1 of 3 cards**, **or DECOMPILE** (remov
 - **Floor:** your deck can't go below **10 cards**.
 - **Coverage guard:** you can't remove a card if that would leave an ICE type with no breaker. The COVERAGE panel shows why. *(This keeps ICE3-002a's "never soft-locked" principle.)*
 - **Why:** every reward becomes a real **density versus coverage** choice: a better card, or one weak card fewer. Both improve the deck, in different ways. This is the main change in this proposal.
-- **Wipe** (Uplink) and **Console Lab removal** stay as they are, but are now extras rather than the main way to prune.
+- **Console Lab removal** (Core Rules §8.3; it replaced the Uplink Wipe, NODE-AUTHORITY-001) is an extra rather than the main way to prune.
 
 ### 3.2 COMPILE: two cards become one (DSY-004) [NEW]
-Wherever you can apply a PATCHWORK (Console Lab, SAFEHOUSE, Node completion, BLACK CLINIC, REFACTOR), you may **COMPILE** instead:
+*(COMPILE is experimental and excluded from active play, NODE-PURPOSE-001; where PATCHWORK is offered now: Core Rules §8.3.)* Wherever you can apply a PATCHWORK (Console Lab, SAFEHOUSE, Node completion, BLACK CLINIC, REFACTOR), you may **COMPILE** instead:
 - Choose **2 different SCRIPTs that share a tag**. They become **1 COMPILED card**.
 - **Cost:** the sum of both BW costs (maximum 4 BW), plus any TRACE or CRED either card costs. **Effect:** both effects, in an order you choose when compiling. **Tags:** both cards' tags.
 - Uses the card's one PATCHWORK slot; any existing PATCHWORK on either card is lost (the game warns you first). A compiled card can't be compiled or FUSED again.
@@ -105,6 +105,7 @@ Wherever you can apply a PATCHWORK (Console Lab, SAFEHOUSE, Node completion, BLA
 - **Why:** COMPILE saves no BW; it saves **draws**. Each draw does two jobs, and the deck shrinks by one. FUSE (same card, ×1.5) stays the better deal per BW; COMPILE is the flexible one. Compiled cards carry both tags, so they're natural CHAIN bridges (§6.1).
 
 ### 3.3 REFACTOR, a new Uplink service (DSY-005) [NEW]
+*Historical: REFACTOR was removed from the Uplink (NODE-PURPOSE-001) and is now the collective name for the Console Lab's modification services (Core Rules §8.3).*
 **Once per visit: apply 1 PATCHWORK, FUSE or COMPILE for 50 CRED.** It gives CRED somewhere to go that improves the deck without adding to it. **Economy watch:** EXTRACT-002 and CORE-012 lowered CRED income, so 50 CRED may be too expensive; price it from playtest 2's CRED totals.
 
 ### 3.4 Deck-size targets (DSY-006) [CHANGED: replaces CORE-010's "about 30 cards added"]
@@ -112,7 +113,7 @@ Wherever you can apply a PATCHWORK (Console Lab, SAFEHOUSE, Node completion, BLA
 
 | End of… | Target deck size | FOOTPRINT cap | What a typical corporation looks like |
 |---|---|---|---|
-| HALCYON | **18–22** | 22 | 6–7 rewards: about 5 taken, 1–2 DECOMPILE; 1–2 bought; 1 Wipe or FUSE |
+| HALCYON | **18–22** | 22 | 6–7 rewards: about 5 taken, 1–2 DECOMPILE; 1–2 bought; 1 Console Lab removal or FUSE |
 | IRONWATCH | **24–29** | 29 | About 5–6 taken, 1–2 DECOMPILE; 1–2 bought; a COMPILE or FUSE |
 | LUCIDA | **30–35** | 35 | About 6 taken, 1 DECOMPILE; 1–2 bought, to cover CORTEX and FORGET |
 
@@ -298,7 +299,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 | Core Rules | §5.7 | ROT keeps "minimum 0" (ZEROED-001 reverses the DSY-009 removal) |
 | Card Pools | §1 | Value guide: CHAIN bonus ≈ +50%; REBOOT effects priced at about 1.5 triggers per encounter (DSY-007) |
 | Upgrades | §1.2 | COMPILE alongside FUSE (DSY-004); DEAD MAN'S POCKET HOLD hook superseded |
-| Uplink & CAPS | §3.1 | REFACTOR service (DSY-005) |
+| Uplink & CAPS | §3.1 | REFACTOR service (DSY-005; historical, see Core Rules §8.3) |
 | Engines | §1 | REBOOT effects are ENGINE effects (DSY-007) |
 | Playtest checklist | G1, G5 + new | New targets and checks (§11) |
 

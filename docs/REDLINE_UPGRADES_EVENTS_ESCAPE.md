@@ -22,9 +22,7 @@
 ### 1.2 Where you get PATCHWORK
 | Source | How |
 |---|---|
-| **Console Lab** | Choose one: **apply 1 PATCHWORK free**, or **remove a card for 40 CRED** (CARD-002). |
-| **SAFEHOUSE** | Choose one: **heal 10 VITAE**, or **apply 1 PATCHWORK** (UPL-007). |
-| **Node completion reward** | One of the choices is a free PATCHWORK (Core Rules §9.3). |
+| **Console Lab** | The dedicated source of PATCHWORK; services and removal cost: Core Rules §8.3. |
 | **SIGNAL UNCLEAR** | The BLACK CLINIC event (§3). |
 
 ### 1.2a FUSE (APPROVED 2026-11-12, as part of P5-001)
@@ -37,7 +35,7 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 - **The main number(s) are multiplied by 1.5, rounded up:** SHIELD, STR reduction, CRED, TRACE removal, INFECT, cards drawn. **Costs are not multiplied** (BW, or TRACE the card adds).
 - **FUSE uses the card's one PATCHWORK slot:** a fused card can't take another mod. If either copy already had a PATCHWORK, it's lost when fused; the game warns you first.
 - **A fused card can't be fused again.**
-- **Where:** whenever you apply a PATCHWORK (Console Lab, SAFEHOUSE, Node completion reward, BLACK CLINIC) and you own 2 copies of a SCRIPT, **FUSE is always offered as an extra option** alongside the usual 3 mods.
+- **Where:** whenever you apply a PATCHWORK (Console Lab, BLACK CLINIC; Core Rules §8.3) and you own 2 copies of a SCRIPT, **FUSE is always offered as an extra option** alongside the usual 3 mods.
 - **Enhanced names:** each SCRIPT gets its own fused name, designed alongside the card. Until one is designed, it shows as **"[NAME] MK II"**.
 
 **Fused names for starter-deck duplicates:**
@@ -127,7 +125,7 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 | Ghostware | Effect |
 |---|---|
 | **SIXTH SENSE** | Draw 1 extra card on the first turn of each encounter. |
-| **FIELD MEDIC** | At every SAFEHOUSE and DEAD DROP, heal 5 extra VITAE. |
+| **FIELD MEDIC** | At every SAFEHOUSE, heal 5 extra VITAE. *(NODE-AUTHORITY-001: no longer at the DEAD DROP.)* |
 | **STREET CRED** | Start each corporation with 30 CRED. |
 | **PATCH CABLE** | Whenever you apply a PATCHWORK, heal 4 VITAE. |
 
@@ -254,7 +252,7 @@ This replaces the temporary arrangement in `REDLINE_ICE_CORP1.md` §8.2a.
 
 ## 5. Phase 5 decision record (all APPROVED, 2026-11-12)
 
-1. **PATCHWORK rules:** one per card; choose 1 of 3 mods; Console Lab gives 1 free PATCHWORK *or* a card removal for 40 CRED; plus **FUSE** (2 copies of a SCRIPT → 1 fused card at 1.5×, with an enhanced name; SCRIPTs only) (§1.1, §1.2, §1.2a). — **APPROVED 2026-11-12 (P5-001)**
+1. **PATCHWORK rules:** one per card; choose 1 of 3 mods; Console Lab gives 1 free PATCHWORK *or* a card removal for 40 CRED *(removal cost superseded by NODE-AUTHORITY-001: Core Rules §8.3)*; plus **FUSE** (2 copies of a SCRIPT → 1 fused card at 1.5×, with an enhanced name; SCRIPTs only) (§1.1, §1.2, §1.2a). — **APPROVED 2026-11-12 (P5-001)**
 2. **The 12 PATCHWORK mods** (§1.3). — **APPROVED 2026-11-12 (P5-002)**
 3. **Ghostware rules:** no limit; payload is 1 corporation-specific + 2 general; some with drawbacks; ORIGIN never offered (§2.1). — **APPROVED 2026-11-12 (P5-003)**
 4. **The 20 general Ghostware** (§2.2), with 4 more held in reserve. — **APPROVED 2026-11-12 (P5-004)**
@@ -287,12 +285,4 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 
 ## NODE-PURPOSE-001 — Non-combat Node service redesign (APPROVED 2026-11-27)
 
-Designer-approved amendment; supersedes conflicting earlier service descriptions, not MAP-003e route composition.
-
-- Uplink (commerce): eight cards, exactly five common, two uncommon, one rare; six shared and two Rustler-specific across those eight. Base prices 40/60/90 CRED; one random card 50% off. No basic cards, rerolls or repeat purchase of a slot. Three random CAPS, existing 60/30/10 rarity probabilities, no guaranteed rarity; existing prices and bootleg rules retained. WIPE and Clinic unchanged; existing market variability, TRACE premium and voluntary Identity Verification direction retained. REFACTOR removed from Uplink.
-- Console Lab (deck engineering): PATCHWORK and FUSE retained; REFACTOR is the collective modification concept. Standalone card removal belongs to Uplink WIPE. Detailed modification eligibility, repeat limits, recursive fusion, cross-modification, scaling, costs and per-visit limits deferred to dedicated review; do not infer new rules. COMPILE moved to experimentation, excluded from active development/gameplay; preserve prototype work and audit dependencies before disabling.
-- SAFEHOUSE (physical recovery): choose one free service per visit: PATCH UP restores 30% of maximum VITAE, capped at maximum; FORTIFY increases maximum VITAE by 6% and current VITAE by the same increment. Both round to nearest whole integer; FORTIFY cumulative for the run, no additional cap currently. No card upgrades or TRACE reduction.
-- DEAD DROP (surveillance evasion): choose one free service per visit: WIPE TRAIL reduces current TRACE by 20, floor zero; GHOST TRAIL reduces incoming TRACE by 50% throughout the next ICE Node, all encounters included, persists through intervening noncombat Nodes and expires on ICE Node exit. Active-effect icon direction. Fractional TRACE rounding, stacking and edge cases remain open; no physical healing.
-- SIGNAL UNCLEAR (discovery): retain ten-event catalogue provisionally; specific event unknown on entry approach, choices except AMBUSH, communicate costs and consequences before commitment. Separate event design review deferred; existing reveal exceptions remain subject to review. Incidental overlap is permissible, not a predictable substitute for dedicated services.
-
-Map redesign deferred to Claude Code/Codex review; MAP-003e remains baseline. Representative ICE encounter remains priority 1. Uplink implementation specification still requires transaction/inventory edge cases and UI review. No engine implementation authorized by this documentation amendment.
+*Reference only (NODE-AUTHORITY-001): current Node purposes and services are defined in Core Rules §8.3 ([Node authority](REDLINE_CORE_RULES.md#node-authority)); the decision and its history are in Master Design. The copy that stood here was retired (git history keeps it).*

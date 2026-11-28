@@ -42,8 +42,8 @@ So cards are priced consistently, **1 BW is worth about**:
 
 - Card rewards (once per **fully cleared** ICE Node, CORE-010 as amended by CORE-011; **none for leaving early**): **2 shared + 1 Rustler-specific** (approved RUSTLER-007). Each slot rolls its rarity separately.
 - **Rarity improves with depth** (CORE-010): the odds above are for a fully cleared 1-layer Node. Fully cleared 2-layer Nodes: 45/40/15%. Fully cleared 3-layer Nodes: 30/45/25%. Partial clears give no card reward (CORE-011).
-- **Node completion reward** (Core Rules §9.3): a CAP or a free PATCHWORK upgrade (no longer a card, since CORE-010).
-- **Console Lab card removal:** 40 CRED (working).
+- **Node completion reward:** see Core Rules §9.3.
+- **Console Lab card removal:** see Core Rules §8.3.
 
 ---
 

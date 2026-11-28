@@ -3448,6 +3448,7 @@ Retire TOLL (additional BW cost for breaking non-DEADLOCK subroutines) from acti
 
 
 ## MINIBOSS-001 — Unique signature abilities / FORTIFY (designer direction 2026-11-27)
+*Historical decision record: the reserved ability was later named ENTRENCH (NODE-AUTHORITY-001).*
 Each corporation has one mini-boss encounter, with a signature ability unique to that mini-boss. Reserve FORTIFY (formerly passive HARDENING) for one specific mini-boss as one of three candidate signature abilities; no standard ICE assignment. Existing HARDEN remains a distinct breakable subroutine. FORTIFY candidate retains +1 STR after each Corporation Countermeasure, maximum +3 bonus provisionally; final balance, corporation and ICE identity remain undecided. Signature abilities must justify complexity through strategic depth, agency, synergy, anticipation and cognitive-load value. No production implementation or roster changes in this documentation update.
 
 

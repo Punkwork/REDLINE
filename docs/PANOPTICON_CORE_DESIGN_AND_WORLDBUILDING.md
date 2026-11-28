@@ -54,7 +54,7 @@ This is an open inquiry, not a predetermined claim that humanity necessarily bec
 - **SYNAPTIC DAMAGE X:** X randomly selected cards from the Runner's current hand are discarded.
 - Neither of those two hand-discard effects reduces Vitae or permanently destroys cards.
 - **PURGE:** Reserved for corporation removal of virus counters.
-- **DEAD DROP:** Replaces Safehouse. Exactly one option: PATCH UP (+10 Vitae) or WIPE TRAIL (−20 Trace).
+- **DEAD DROP:** Replaces Safehouse. Exactly one option: PATCH UP (+10 Vitae) or WIPE TRAIL (−20 Trace). *(Historical; current Node services: Core Rules §8.3.)*
 - **Hardware:** Recycled once at encounter end.
 - **PATCHWORK:** Persists on individual card instances.
 - **Ghostware:** Permanent and non-card.
