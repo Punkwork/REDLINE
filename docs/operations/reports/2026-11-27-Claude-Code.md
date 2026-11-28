@@ -53,3 +53,12 @@ Missing tools: none. Godot 4.3 was downloaded with the pinned CI hash.
 To-dos: post implementation and validation evidence to [#24](https://github.com/Punkwork/REDLINE/issues/24) (UI-WORKFLOW-001). Not posted from this session without the designer's go-ahead.
 Blockers / unverified results: there has been no hands-on playtest or Windows export. Readability of the translucent MASK OFF image was judged from screenshots only.
 Recommended priorities: designer review of the §2b implementation choices, then playtest the timings.
+
+## Session 5 (about 23:41–00:30, `architecture-v2`)
+
+Work completed: UI-TYPO-002a approval recorded (`bd195f2`). UI-INSPECTOR-001 shared inspector and PROBE mode choice built (`9e37bf5`). See the development log.
+Surprises: the designer finalized UI-INSPECTOR-001 and T1–T5 (`d7cd999`, `15b281b`) while the first, HOVER-001-based revision was being written; that revision was redone against the final specification. Jost wasn't in the repository; it was fetched from upstream with the designer's approval. In Godot 4, a freed object compares equal to `null`, which hid a cleanup defect (fixed).
+Missing tools: raw.githubusercontent.com is blocked from the workspace; the upstream repository was cloned through the git proxy instead.
+To-dos: post the evidence to [#24](https://github.com/Punkwork/REDLINE/issues/24) (awaiting the designer's go-ahead).
+Blockers / unverified results: no hands-on playtest of the inspector timings or placement.
+

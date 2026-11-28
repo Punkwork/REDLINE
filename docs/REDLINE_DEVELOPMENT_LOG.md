@@ -402,3 +402,19 @@ Note: HANDOFF still lists CSA-04 as IN PROGRESS (Inspector model, Uplink contrac
 ## 2026-11-27 — UI-TYPO-002a: implementation choices approved (Claude Code)
 
 Designer, 23:36: "all these are approved as is." The six UI-TYPO-002 implementation choices (UI Bible §2b) are approved as built in `37710c1`. Recorded in the UI Bible, Master Design and HANDOFF; [evidence posted to #24](https://github.com/Punkwork/REDLINE/issues/24#issuecomment-7234127269). Docs only; no `godot/` change. Hands-on playtest of the timings remains open.
+
+## 2026-11-28 — UI-INSPECTOR-001: shared inspector; PROBE mode choice conforms (Claude Code)
+
+Designer direction 2026-11-27 23:41–23:47 (Master Design UI-INSPECTOR-001 implementation direction). Built in `9e37bf5`:
+- The shared V2 inspector (`key_inspector.gd`) now follows the approved specification. Every V2 hover source uses it. See the UI Bible for the list.
+- The PROBE-004a mode choice uses icon-and-number keys. Its words appear only in the inspector and come from `cards.json` and the engine.
+- Jost 3.7 was added from `indestructible-type/Jost@35f141c` with its OFL licence. T1–T5 are tokens.
+- Tests:
+  - `test_ui_inspector_001.gd`: 55/0. It is new, runs in CI, and takes its values from the approved specification.
+  - batch3: 125/0, with PROBE key and inspector checks.
+  - Unchanged: test_game 430/0 (SIM=1 430/0); adp 17; signal_carbon 672; arch_v2_ice 206; coverage 548; batch4 76; app 33; parity 3,949 actions / 4,029 checks; csa_cards 506; spec probe 32, burned 29, pivot 50; ui_typo_002 172; `shot_arch_v2_ice` 42 captures; `shot_cred_cost` 4/0; typography fixture PASS; Python 52/0; cards VALID.
+- Review images refreshed: `probe-004a` (choice and both inspectors) and `cred-cost-001` (its PROBE text was out of date).
+- Fixed while building: sandbox and inspector code compared a freed source with `null`. A freed object equals `null` in Godot 4, so a removed source never cleared the inspector. Both checks now test the type.
+
+Interpretations to confirm: the seven implementation choices in the UI Bible (UI-INSPECTOR-001, "Implementation").
+
