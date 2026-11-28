@@ -1765,17 +1765,35 @@ func take_pulp(n: int) -> void:
 		return
 	_check_low_vitae()
 
+## CORTEX-001 (designer 2026-11-28; Core Rules §6): each unprevented point of CORTEX discards one random
+## card from the hand at once (the hand drawn before the Corporation Response, TURN-001) and adds one
+## CORTEX counter (−1 DRAW each, minimum DRAW 1). A prevented point does neither. An empty hand only
+## stops the discards: no overflow damage. CACHED cards are in the hand, so they can be discarded.
 func add_cortex(n: int) -> void:
+	if n <= 0: return
 	if not enc.is_empty():
 		if _rack_has("FAILSAFE") and not enc.failsafe_used:
 			enc.failsafe_used = true
+			_say("FAILSAFE: CORTEX %d prevented." % n)
 			return
 		if _installed_has("CORTEX_BUFFER") and not enc.cortex_buffer_used:
 			enc.cortex_buffer_used = true
-			n -= CardDB.param("CORTEX_BUFFER", "prevent")
-	if n > 0:
-		cortex += n
-		_event("EV-17")
+			var stop := mini(n, CardDB.param("CORTEX_BUFFER", "prevent"))
+			n -= stop
+			_say("CORTEX BUFFER: %d CORTEX prevented." % stop)
+	if n <= 0: return
+	var lost := []
+	for _k in n:
+		if not hand.is_empty():
+			var card: Dictionary = hand[rng.randi_range(0, hand.size() - 1)]
+			_take_from(hand, card.uid)
+			card.cached = false
+			card.erase("cache_turns")
+			discard.append(card)
+			lost.append(String(CardDB.def(card.id).name))
+		cortex += 1
+	_say("CORTEX %d: %s" % [n, ("discarded at random: " + ", ".join(lost)) if not lost.is_empty() else "no cards in hand to discard"])
+	_event("EV-17", {"cortex": n, "discarded": lost.size()})
 
 ## CAPS-TEST-001: CAPS (UPL-001). Returns the CAP id added, or "" when the slots are full.
 func grant_random_cap(rarity: String) -> String:

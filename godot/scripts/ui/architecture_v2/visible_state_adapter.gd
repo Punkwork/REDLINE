@@ -215,7 +215,7 @@ static func effect_rule(e: Dictionary) -> String:
 		"DISCARD": t = "Discard %d card%s at the start of your next turn." % [v, "" if v == 1 else "s"]
 		"INSERT": t = "Put %d %s into your %s." % [v, e.get("card", ""), String(e.get("to", "draw pile")).replace("_", " ")]
 		"BW_DRAIN": t = "You have %d less BW next turn." % v
-		"CORTEX": t = "Gain %d CORTEX (−1 DRAW each)." % v
+		"CORTEX": t = "Discard %d random card%s from your hand now; gain %d CORTEX (−1 DRAW each)." % [v, "" if v == 1 else "s", v]   # CORTEX-001
 		"FORGET": t = "%d random non-CACHED card%s in your hand go to the bottom of your draw pile." % [v, "" if v == 1 else "s"]
 		"HARDEN": t = "HARDEN: this ICE gains %d STR for the rest of the encounter." % v
 		"SHIELD_BREAK": t = "SHIELD BREAK: your SHIELD drops to 0 when this fires, so PULP after it hits in full."

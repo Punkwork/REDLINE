@@ -14,3 +14,8 @@ PR activity: none.
 To-dos: [#26](https://github.com/Punkwork/REDLINE/issues/26) (UI-PROTOCOL-001 evidence posted).
 Blockers / unverified results: designer to decide whether BW-001, BOOST-001 and BREACH-001 replace the full-design values (Core Rules §4 marks them "core-loop build"). The playtest-13 tag is pending (designer).
 Recommended priorities: designer answers on the UI-PROTOCOL-001 interpretations, CSA-04i/j acceptance, and the next build go-ahead.
+
+Session 09:10 (continued) — CORTEX-001, CARD-REVIEW-001 tests
+Work completed: CORTEX-001 built with the spec test test_spec_cortex (26/0, in CI); the CARD-REVIEW-001 test alignment restores CI (it was red at `eb3dfc5`).
+Surprises: CARD-REVIEW-001 (`eb3dfc5`) changed `cards.json` without the matching tests, so CI went red on architecture-v2.
+Blockers / unverified results: CARD-REVIEW-001's engine changes are open (STACK SMASH every ICE; REPRISE under EFFECT-REPEAT-001). CORTEX-001 interpretations are listed in HANDOFF (CACHED cards can be discarded; FAILSAFE prevents a whole hit).

@@ -75,7 +75,7 @@ const KEY_LEGEND := [
 	["PULP", "PULP: damage to VITAE (SHIELD absorbs it first)."],
 	["TRACE", "TRACE: at 40 you take a strike; the third strike is LOCKDOWN."],
 	["DISCARD", "DISCARD: discard cards from your hand."],
-	["CORTEX", "CORTEX: each counter is −1 DRAW."],
+	["CORTEX", "CORTEX: each point discards a random card now and adds a counter; each counter is −1 DRAW."],   # CORTEX-001
 	["BW_DRAIN", "BW DRAIN: less BANDWIDTH next turn."],
 	["DEADLOCK", "DEADLOCK: does nothing itself; break every DEADLOCK to BREACH."],
 	["INSERT", "INSERT: Bloatware goes into your deck."],

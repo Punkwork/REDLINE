@@ -133,7 +133,7 @@ WHITE PICKET FENCE — FORTRESS — STR 3
 |---|---|
 | **PULP X** | Take X damage (SHIELD first, then VITAE). *(PULP-001, 2026-11-17: on a FORTRESS, X is rolled each time it fires: printed −2..+2, about 30% of rolls ±3 instead, never below 1. The roll is made ahead of time and shown, so the Rustler always knows the exact value before it fires.)* |
 | **PULP (curve)** | *(PULP-002)* Take the next value of the subroutine's PULP curve (SHIELD first, then VITAE). The curve moves one step each Corporation Response the ICE goes through (a PURGE or BLACKOUT turn doesn't count) and loops after 9. **A · SEQUENTIAL:** 2, 3, 4, 2, 3, 4, 2, 3, 4 (27). **B · RANDOM:** 5, 3, 2, 6, 2, 3, 6, 2, 1 in a random order for each ICE (30); the ICE card shows its next value *(PULP-001, 2026-11-17: was "PULP ?"; curves do not roll)*. **C · HAMMER:** 4, 3, 4, 9, 3, 4, 3, 8, 2 (40). SCRAMBLE lowers it like any PULP. |
-| **CORTEX X** | Gain X CORTEX counters (§6). |
+| **CORTEX X** | CORTEX damage X (§6): a random discard and a CORTEX counter per point. |
 | **−X BW** | You have X less BW on your next turn. The DETAINER's signature (§5.5). |
 | **DISCARD X** | Discard X cards of your choice **at the start of your next turn, after you draw** (FIX-001). |
 | **TRACE X** | Add X to your TRACE meter (§7). |
@@ -195,11 +195,11 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 | Damage | Effect | Blocked by |
 |---|---|---|
 | **PULP X** | Lose X VITAE. | SHIELD, point for point. |
-| **CORTEX X** | Gain X **CORTEX counters**. Each counter is −1 DRAW (DRAW can't go below 1). | Only cards that specifically say they prevent CORTEX. |
+| **CORTEX X** | For **each point**: discard **one random card** from your hand at once, and gain **one CORTEX counter**. Each counter is −1 DRAW for every later draw (DRAW can't go below 1). *(CORTEX-001.)* | Only cards that specifically say they prevent CORTEX. A prevented point does neither. SHIELD doesn't block it. |
 
 **Removing CORTEX:** all CORTEX counters are removed when you move to the next corporation. The Uplink Clinic (§8.3) removes them earlier, for CRED; nothing else restores CORTEX at a Node. Ordinary cards cannot remove CORTEX; it should stay frightening.
 
-**[CHANGED]** SyN damage is removed. CORTEX no longer forces discards or causes overflow damage. CORTEX already hurts by shrinking every future hand, so the extra rules weren't needed. Effects that make you discard now say so directly, like "DISCARD 2," with no overflow.
+**CORTEX-001 [CHANGED 2026-11-28]:** CORTEX hurts twice: the hand you hold now (a random discard per point) and every hand after (the counters). The discard is immediate; it can take any card in your hand, CACHED cards included. With too few cards in hand, discard only what is there: **no overflow damage**, and the counters are still added. Because you draw before the Corporation Response (§4.3), CORTEX from a response hits the hand you have just drawn. *(History: the 2026-11-12 redesign made CORTEX counters only, with no discard; CORTEX-001 brings back a discard, random and one per point, still without overflow. SyN damage stays removed; effects that make you choose discards say so directly, like "DISCARD 2.")*
 
 **If one effect deals both:** apply CORTEX first, then PULP.
 
@@ -411,7 +411,7 @@ When approved, this document **supersedes** the following. They stay in the Mast
 |---|---|
 | RULE-126, RULE-127, RULE-128 (SyN and overflow) | §6 — SyN removed |
 | RULE-129 + amendment (CORTEX → SyN → PULP order) | §6 — CORTEX then PULP |
-| CORTEX damage enhancement (discard + 5 PULP overflow) | §6 — CORTEX is counters only |
+| CORTEX damage enhancement (discard + 5 PULP overflow) | §6 — CORTEX is counters only *(since CORTEX-001, 2026-11-28: plus one random discard per point, no overflow)* |
 | DMG-001, DMG-002 (three damage types, three pools) | §6 — two types, one SHIELD pool |
 | SOFT-014, SOFT-015 (PULP prevention pools) | §2, §6 — SHIELD |
 | VITAE-CAPACITY-001 (no defined maximum) | §2 — Max VITAE 30, can be raised |
@@ -569,6 +569,12 @@ Designer rule: BYPASS is permitted only in non-final encounters (ICE layers) of 
 | ID | Rule |
 |---|---|
 | TURN-001 | At the end of your turn: end-of-turn effects, discard non-CACHED cards, **draw your next hand**, then the Corporation Response; your next turn starts without a draw (the first turn of each encounter draws). Approved 2026-11-21 for the core-loop build (STRIP-001); **confirmed by the designer on 2026-11-28 as the current rule** and written into §4. |
+
+### Later amendment — CORTEX-001 (approved 2026-11-28)
+
+| ID | Rule |
+|---|---|
+| CORTEX-001 | **Each unprevented point of CORTEX** discards one random card from your hand at once and adds one CORTEX counter (−1 DRAW each, minimum 1). Prevention stops both for each point it prevents. Too few cards: discard what's there; no overflow damage. Recovery (§6) and SHIELD rules unchanged; VOID stays an ICE type and CORTEX a damage type (NAME-001). Supersedes "CORTEX is counters only" (2026-11-12). |
 
 ## TRACE-DEF-001 — TRACE definition (designer approved 2026-11-27)
 TRACE represents the extent of a corporation's actionable knowledge of the Rustler's whereabouts and activities. As TRACE increases, the corporation becomes increasingly capable of locating the Rustler and determining and deploying effective countermeasures. TRACE is not merely an alarm meter. Existing numerical thresholds, strikes, reset and countermeasure rules remain unchanged. Commercial identity disclosure and NUL/REM behavioural intelligence are distinct; no automatic TRACE linkage is authorized.
