@@ -23,6 +23,9 @@ var friendly: FriendlyEncounter
 ## ARCH-V2-007d (C05): the Architecture V2 encounter screen is the game's encounter screen. Build 12's
 ## FriendlyEncounter stays for comparison when the flags file sets "legacy_encounter": true.
 var v2: IceEncounterSandbox
+## MAP-003f / UPLINK-SPEC-001: the V2 map board and the Black Market Uplink room (built on first use).
+var node_map: NodeMapScreen
+var uplink_room: UplinkRoom
 var use_v2 := true
 var _v2_refreshing := false
 var legacy_widgets: Array = []
@@ -327,6 +330,7 @@ func _start_as(who: String) -> void:
 	punch_open = false
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	g.new_run(who)
+	if use_v2: g.use_generated_map(g.rng.randi())   # MAP-003f: a validated V5 HALCYON map per run
 	profile.reset(g)
 	nr.rustler = CardDB.RUSTLERS[who].nulrem
 	if first_run:
@@ -539,7 +543,10 @@ func refresh() -> void:
 			defeat_entry = CarbonRecord.append_defeat(run_id, g)
 		_show_inspect("")
 
-	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE"]
+	var map_active := use_v2 and g.phase == "MAP" and g.map_seed >= 0
+	var uplink_active := g.phase == "UPLINK"
+	_show_screens(map_active, uplink_active)
+	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE", "UPLINK"]
 	var v2_active := friendly_active and v2 != null
 	if not v2_active:
 		_detect_tumbles()
@@ -547,8 +554,11 @@ func refresh() -> void:
 		_handle_events()   # in an encounter the V2 screen reads the events (flyouts, NUL/REM)
 	friendly.visible = friendly_active and not v2_active
 	if v2: v2.visible = v2_active
-	for widget in legacy_widgets: widget.visible = not friendly_active and g.phase != "DEAD"
+	for widget in legacy_widgets: widget.visible = not friendly_active and g.phase != "DEAD" and not map_active and not uplink_active
 	if g.phase == "DEAD":
+		_build_overlay()
+		return
+	if map_active or uplink_active:
 		_build_overlay()
 		return
 	if v2_active:
@@ -584,6 +594,25 @@ func refresh() -> void:
 	piles.autowrap_mode = TextServer.AUTOWRAP_WORD
 	piles.add_theme_color_override("font_color", Color("#ff6b78") if g.footprint_band() == "HEAVY" else Color("#9ad17a"))
 	_build_overlay()
+
+## MAP-003f / UPLINK-SPEC-001: the V2 map board and Uplink room replace the legacy map overlay.
+func _show_screens(map_active: bool, uplink_active: bool) -> void:
+	if map_active and node_map == null:
+		node_map = NodeMapScreen.new(); node_map.name = "NodeMap"; add_child(node_map); move_child(node_map, overlay.get_index())
+		node_map.node_chosen.connect(func(idx): g.enter_node(idx); refresh())
+	if uplink_active and uplink_room == null:
+		uplink_room = UplinkRoom.new(); uplink_room.name = "UplinkRoom"; add_child(uplink_room); move_child(uplink_room, overlay.get_index())
+		uplink_room.leave_requested.connect(func(): g.leave_uplink(); refresh())
+	if node_map:
+		node_map.visible = map_active
+		if map_active:
+			if node_map.game != g: node_map.attach(g)
+			else: node_map.refresh()
+	if uplink_room:
+		uplink_room.visible = uplink_active
+		if uplink_active:
+			if uplink_room.game != g or uplink_room.game.uplink == null: uplink_room.attach(g)
+			else: uplink_room.refresh()
 
 func _observe_break_audio() -> void:
 	var broken := 0
@@ -1487,7 +1516,7 @@ func _build_overlay() -> void:
 	match g.phase:
 		"DECOMPILE": _overlay_deck(true)
 		"SELECT": _overlay_select()
-		"MAP": _overlay_map()
+		"MAP": if node_map == null or not node_map.visible: _overlay_map()
 		"READY_RIG": _overlay_options("READY RIG", "Generalist ORIGIN: choose one PROGRAM in your deck. It starts installed for free; your first hand stays full.", g.pending.options, g.draw_pile, func(u): g.choose_ready_rig(u); refresh(), "Skip", func(): g.skip_ready_rig(); refresh())
 		"CHOICE":
 			match g.pending.kind:

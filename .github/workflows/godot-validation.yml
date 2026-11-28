@@ -37,6 +37,7 @@ jobs:
         run: |
           python3 tools/csa/validate_cards.py
           python3 tools/csa/gen_card_docs.py --check
+          python3 tools/map/export_maps.py --check   # MAP-003f: the game's maps match the validated generator
           python3 -m unittest discover -s tests/python
       - name: Install pinned Godot editor
         shell: bash
@@ -86,6 +87,9 @@ jobs:
           # UI-PROTOCOL-001 (issue #26): Protocol lifecycle, the ten playtest cards, the Active Protocol note.
           "$GODOT" --headless --path godot --script res://tests/test_ui_protocol_001.gd 2>&1 | tee -a /tmp/rules.log
           "$GODOT" --headless --path godot --script res://tests/test_ui_protocol_note.gd 2>&1 | tee -a /tmp/rules.log
+          # UPLINK-SPEC-001 / MAP-003f: the Uplink visit, the generated map, and their V2 screens.
+          "$GODOT" --headless --path godot --script res://tests/test_uplink_map.gd 2>&1 | tee -a /tmp/rules.log
+          "$GODOT" --headless --path godot --script res://tests/test_map_uplink_ui.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash
@@ -116,6 +120,16 @@ jobs:
             2>&1 | tee /tmp/shot_ui_protocol_001.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_ui_protocol_001.log; then exit 1; fi
           grep -q 'UI-PROTOCOL-001 screenshots: 6 written (0 active after the encounter)' /tmp/shot_ui_protocol_001.log
+          # UPLINK-SPEC-001 / MAP-003f: the Uplink room and the map board.
+          for script in shot_uplink_room shot_node_map; do
+            xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
+              "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
+              --rendering-driver opengl3 --path godot --script "res://tests/${script}.gd" \
+              2>&1 | tee "/tmp/${script}.log"
+            if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' "/tmp/${script}.log"; then exit 1; fi
+          done
+          grep -q 'UPLINK ROOM screenshots: 3 written' /tmp/shot_uplink_room.log
+          grep -q 'NODE MAP screenshots: 2 written' /tmp/shot_node_map.log
           # UI-TYPO-002 (M06): the typography fixture on the production EventFlyout, lens and sandbox.
           xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
             "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \

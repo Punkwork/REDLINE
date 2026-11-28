@@ -28,6 +28,7 @@ func run() -> void:
 	card.mouse_exited.emit()
 	app._start_as("GENERALIST")
 	var g: Game = app.g
+	g.map_rows = IceDB.MAP; g.map_seed = -1; app.refresh()   # this fixture walks the four-row slice route (the V5 map board has shot_node_map)
 	await shot("app_01_map")
 	if g.enc.is_empty(): g.enter_node(g.available[0]); app.refresh()
 	if g.phase == "READY_RIG" and g.enc.is_empty():

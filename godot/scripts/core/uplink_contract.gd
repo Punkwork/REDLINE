@@ -1,8 +1,8 @@
 class_name UplinkContract
 extends RefCounted
 ## CSA-04g (CSA-02 element 9; NODE-AUTHORITY-001): what the Black Market Uplink may offer and at which
-## base prices, read from the canonical sources only. The Uplink screen is not built yet; this is the
-## contract it, and any future reward or shop code, must consume.
+## base prices, read from the canonical sources only. UplinkVisit (the visit) and UplinkRoom (the screen)
+## consume it, as must any future reward or shop code.
 ##
 ## * Services and the Clinic: Core Rules §8.3 (#node-uplink) is the single definition. SERVICES, NEVER
 ##   and the CLINIC_* values below mirror it, and tests/python/test_uplink_contract.py fails if they and

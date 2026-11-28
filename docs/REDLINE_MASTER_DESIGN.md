@@ -4040,3 +4040,6 @@ Protocol rules remain encounter duration, no RAM, independent copies, no self-tr
 ## UPLINK-SPEC-001 — Visual recovery amendment (2026-11-28, designer / ChatGPT)
 
 Designer reconfirmed three upright CAP vials side by side in a wall-mounted three-capacitor/fuse-bank holder and authorized incorporation of recovered Uplink placements into the existing specification for Claude Code. Visual authority: [UI Design Bible, UPLINK-SPEC-001 visual placement recovery](PANOPTICON_UI_DESIGN_BIBLE.md#uplink-spec-001--visual-placement-recovery-designer-reconfirmed-2026-11-28). Prior November 27 conversation details are recovered summaries, not independently verified original transcript; original URL/mockup and exact coordinates remain unavailable. No new mechanics, no replacement background, no new governance system. Core Rules §8.3 supersedes historical WIPE service references.
+
+**UPLINK-SPEC-001 / MAP-003f built for review (Claude Code, 2026-11-28):** the map board, the generated HALCYON map in the app, the Uplink visit and the Uplink room, per the handoff above; evidence, interpretations and the Ghostware blocker in HANDOFF. **Status:** built and validated; first captures awaiting designer review. No release.
+

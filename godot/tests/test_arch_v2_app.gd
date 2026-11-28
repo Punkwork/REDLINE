@@ -92,7 +92,7 @@ func run() -> void:
 		if g.phase == "MAP":
 			var nxt := -1
 			for idx in g.available:
-				if String(IceDB.MAP[g.row + 1][idx].get("kind", "")) == "ICE": nxt = idx; break
+				if String(g.map_rows[g.row + 1][idx].get("kind", "")) == "ICE": nxt = idx; break
 			if nxt >= 0:
 				g.enter_node(nxt); app.refresh(); await frames()
 				if not g.enc.is_empty():

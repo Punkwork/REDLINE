@@ -69,6 +69,7 @@ var installed: Array = []     # [{inst, boost}]
 var rack: Array = []          # protocol insts
 const CAP_SLOTS := 3          # UPL-001
 var caps: Array = []          # CAPS-TEST-001: [{uid, id}], at most CAP_SLOTS
+var uplink: UplinkVisit = null   # UPLINK-SPEC-001: the open Black Market Uplink visit (phase "UPLINK")
 var reward_cap := ""          # the CAP added with the last Node reward ("" when none)
 var bw := 0
 var shield := 0
@@ -143,23 +144,91 @@ func _new_inst(id: String) -> Dictionary:
 	return inst
 
 func map_row(r: int) -> Array:
-	return IceDB.MAP[r]
+	return map_rows[r]
+
+## The run's corporation map. Defaults to the four-row HALCYON slice (IceDB.MAP); the app uses a
+## MAP-003f V5 map instead (use_generated_map). Rows of {id, kind, name, layers, next: [indices]}.
+var map_rows: Array = IceDB.MAP
+var map_seed := -1   # which generated map (index into godot/data/maps/map003_v5.json), -1 = slice
+const MAP_DATA := "res://data/maps/map003_v5.json"
+
+## MAP-003f (validated V5 generator, exported by tools/map/export_maps.py): the 16-row HALCYON map.
+## ICE Nodes take the slice's encounters (an interpretation until the HALCYON Node content is placed):
+## row 1 is the Opening Node (COOKIE BANNER); later ICE Nodes and the MINIBOSS cycle the four other
+## slice encounters by row and position; the BOSS is TERMS & CONDITIONS, the central Node. Uplinks and
+## SAFEHOUSEs are playable; DEAD DROP, CONSOLE LAB and SIGNAL Nodes are shown but not built (entering
+## one passes straight through). One layer each for now (the 2- and 3-layer Nodes are queued).
+func use_generated_map(k: int) -> void:
+	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(MAP_DATA))
+	if not data is Dictionary or data.get("maps", []).is_empty():
+		push_error("Game: %s is missing" % MAP_DATA)
+		return
+	var maps: Array = data.maps
+	map_seed = posmod(k, maps.size())
+	var m: Dictionary = maps[map_seed]
+	var later := [IceDB.MAP[1][0], IceDB.MAP[1][1], IceDB.MAP[2][1], IceDB.MAP[3][0]]   # CAPTCHA, CONSENT WALL, DOORBELL, TERMS
+	var rows := []
+	for ri in m.rows.size():
+		var row := []
+		var next_ids: Dictionary = {}
+		if ri + 1 < m.rows.size():
+			for j in m.rows[ri + 1].size(): next_ids[String(m.rows[ri + 1][j].id)] = j
+		for i in m.rows[ri].size():
+			var q: Dictionary = m.rows[ri][i]
+			var t := String(q.type)
+			var n := {"id": String(q.id), "kind": t, "name": t, "layers": [],
+				"next": (q.next as Array).map(func(x): return int(next_ids[String(x)]))}
+			match t:
+				"ICE", "MINIBOSS":
+					var src: Dictionary = IceDB.MAP[0][0] if ri == 0 else later[(ri + i) % later.size()]
+					n.kind = "ICE"
+					n.name = String(src.name)
+					n.layers = (src.layers as Array).duplicate(true)
+					if t == "MINIBOSS": n["miniboss"] = true
+				"BOSS":
+					var src: Dictionary = IceDB.MAP[3][0]
+					n.kind = "ICE"
+					n.name = String(src.name)
+					n.layers = (src.layers as Array).duplicate(true)
+					n["central"] = true
+				"UPLINK": n.name = "BLACK MARKET UPLINK"
+				"SAFEHOUSE": n.name = "SAFEHOUSE"
+				_: n["unbuilt"] = true
+			row.append(n)
+		rows.append(row)
+	map_rows = rows
 
 func enter_node(index: int) -> void:
 	if phase != "MAP" or not available.has(index):
 		return
 	var r := row + 1
-	node = IceDB.MAP[r][index]
+	node = map_rows[r][index]
 	path.append(node.id)
 	if not entered_corp:
 		entered_corp = true
 		_event("EV-03", {"corp": "HALCYON"})
+	if node.get("unbuilt", false):
+		# Not built in this slice (DEAD DROP, CONSOLE LAB, SIGNAL): pass straight through.
+		_say("%s: not in this build. You pass through." % node.name)
+		_complete_map_step()
+		return
+	if node.kind == "UPLINK":
+		# UPLINK-SPEC-001: stock on entry, no combat turn or reshuffle; leave_uplink() goes back to the map.
+		phase = "UPLINK"
+		uplink = UplinkVisit.open(self)
+		_say("BLACK MARKET UPLINK." if uplink.error == "" else uplink.error)
+		return
 	if node.kind == "SAFEHOUSE":
 		phase = "SAFEHOUSE"
 		_event("EV-28")
 		_say("SAFEHOUSE. Choose: heal %d VITAE, or a PATCHWORK upgrade (not in this slice)." % SAFEHOUSE_HEAL)
 		return
 	_start_ice_node()
+
+func leave_uplink() -> void:
+	if phase != "UPLINK": return
+	uplink = null
+	_complete_map_step()
 
 func safehouse_heal() -> void:
 	if phase != "SAFEHOUSE":
@@ -169,7 +238,7 @@ func safehouse_heal() -> void:
 
 func _complete_map_step() -> void:
 	row += 1
-	if row >= IceDB.MAP.size() - 1:
+	if row >= map_rows.size() - 1:
 		phase = "SLICE_DONE"
 		_event("SLICE_DONE")
 		return
