@@ -24,7 +24,7 @@ const APPROVED_TEXT := {
 ## card's BW is the sum of its parts' BW, so it follows its parts.
 const APPROVED_VALUES := {"NULL_POINTER": {"bw": 1}}   # NULL-POINTER-001 (designer 2026-11-24): 2 BW -> 1 BW
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
-const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved", "params", "params_in_code", "text_template"]   # CSA-04i: params carry the numbers the text and engine used
+const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved", "params", "params_in_code", "text_template", "strategy", "flavor"]   # CARD-REVIEW-001: flavour and strategy metadata are content, not rules   # CSA-04i: params carry the numbers the text and engine used
 ## Approved new fields on single cards since the snapshot: id -> [fields].
 const APPROVED_FIELDS := {"PROBE": ["modes"], "PIVOT": ["zeroed_reduction"]}   # CSA-04b PROBE-004a; CSA-04d PIVOT
 ## Approved field removals since the snapshot: id -> [fields].
@@ -33,8 +33,8 @@ const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", 
 	"ADRENAL_SPIKE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "BASIC_EXTRACTOR"]
 ## SYNERGY-PLAYTEST-002 rarities (Master Design, playtest values): the shared reward pools that gain them.
 const PLAYTEST_REWARDS := {
-	"SHARED/COMMON": ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "FEEDBACK_LOOP", "ADAPTIVE_DEFENCE", "FOLLOW_THROUGH", "ESCALATION", "AFTERBURN"],
-	"SHARED/UNCOMMON": ["OVERCLOCK", "SALVAGE"], "SHARED/RARE": ["REPRISE"]}
+	"SHARED/COMMON": ["COUNTERINTELLIGENCE", "FEEDBACK_LOOP", "ADAPTIVE_DEFENCE", "FOLLOW_THROUGH", "ESCALATION", "AFTERBURN"],
+	"SHARED/UNCOMMON": ["REACTIVE_ARMOUR", "OVERCLOCK", "SALVAGE"], "SHARED/RARE": ["REPRISE"]}   # CARD-REVIEW-001: REACTIVE ARMOUR UNCOMMON
 const PLAYTEST := ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "OVERCLOCK", "FEEDBACK_LOOP", "SALVAGE", "ADAPTIVE_DEFENCE",
 	"FOLLOW_THROUGH", "ESCALATION", "AFTERBURN", "REPRISE"]
 ## CSA-04f (CSA-02 Q8): approved pool cards never built, recorded as `pending` so the generated doc views

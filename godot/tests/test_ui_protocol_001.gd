@@ -178,32 +178,32 @@ func reactive_armour_and_counterintelligence() -> void:
 	check(g.trace == 0, "TRACE doesn't go below 0")
 
 func overclock_once_per_turn() -> void:
+	# CARD-REVIEW-001 (designer 2026-11-28): OVERCLOCK fires on the fourth successful card each turn.
 	var g := node_game()
 	for k in 6: g.draw_pile.append(g._new_inst("PULP_SHIELD"))
 	deploy(g, "OVERCLOCK")                     # card 1
-	g.play_card(give(g, "PULP_SHIELD").uid)     # card 2
+	for k in 2: g.play_card(give(g, "PULP_SHIELD").uid)     # cards 2, 3
 	var bw_before := g.bw
 	var hand_before := g.hand.size()
-	g.play_card(give(g, "PULP_SHIELD").uid)     # card 3: −1 BW to play, then +1 BW, draw 2
-	check(g.bw == bw_before - 1 + 1, "OVERCLOCK: +1 BW on the third card (SYNERGY-PLAYTEST-002a)")
-	check(g.hand.size() == hand_before + 2, "OVERCLOCK: draw 2 on the third card")
+	g.play_card(give(g, "PULP_SHIELD").uid)     # card 4: −1 BW to play, then +1 BW, draw 2
+	check(g.bw == bw_before - 1 + 1, "OVERCLOCK: +1 BW on the fourth card (SYNERGY-PLAYTEST-002a, CARD-REVIEW-001)")
+	check(g.hand.size() == hand_before + 2, "OVERCLOCK: draw 2 on the fourth card")
 	hand_before = g.hand.size()
-	g.play_card(give(g, "PULP_SHIELD").uid)     # card 4
+	g.play_card(give(g, "PULP_SHIELD").uid)     # card 5
 	check(g.hand.size() == hand_before, "OVERCLOCK fires once per turn")
 	g._start_turn()
 	prepare(g)
-	for k in 2: g.play_card(give(g, "PULP_SHIELD").uid)
+	for k in 3: g.play_card(give(g, "PULP_SHIELD").uid)
 	hand_before = g.hand.size()
 	g.play_card(give(g, "PULP_SHIELD").uid)
 	check(g.hand.size() == hand_before + 2, "OVERCLOCK resets at the start of the next turn")
-	# A copy deployed as the third card doesn't fire for itself.
+	# A copy deployed as the fourth card doesn't fire for itself (no retroactive trigger).
 	var h := node_game()
 	for k in 4: h.draw_pile.append(h._new_inst("PULP_SHIELD"))
-	h.play_card(give(h, "PULP_SHIELD").uid)
-	h.play_card(give(h, "PULP_SHIELD").uid)
+	for k in 3: h.play_card(give(h, "PULP_SHIELD").uid)
 	hand_before = h.hand.size()
 	deploy(h, "OVERCLOCK")
-	check(h.hand.size() == hand_before, "OVERCLOCK deployed as the third card doesn't fire for itself")
+	check(h.hand.size() == hand_before, "OVERCLOCK deployed as the fourth card doesn't fire for itself")
 
 func feedback_loop_on_zero() -> void:
 	var g := node_game()
