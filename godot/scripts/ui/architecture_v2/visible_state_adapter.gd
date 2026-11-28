@@ -188,6 +188,7 @@ static func effect_word(e: Dictionary) -> String:
 		"DEADLOCK": return "DEADLOCK"
 		"BW_DRAIN": return "−%d BW" % e.v
 		"SHIELD_BREAK": return "SHIELD BREAK"
+		"PURGE_ALL": return "PURGE ALL"
 		"AMEND": return "AMEND +%d" % e.v
 		"TRACE":
 			var w := "TRACE %d" % e.v
@@ -218,6 +219,7 @@ static func effect_rule(e: Dictionary) -> String:
 		"CORTEX": t = "Discard %d random card%s from your hand now; gain %d CORTEX (−1 DRAW each)." % [v, "" if v == 1 else "s", v]   # CORTEX-001
 		"FORGET": t = "%d random non-CACHED card%s in your hand go to the bottom of your draw pile." % [v, "" if v == 1 else "s"]
 		"HARDEN": t = "HARDEN: this ICE gains %d STR for the rest of the encounter." % v
+		"PURGE_ALL": t = "PURGE ALL: remove every virus counter from every ICE."
 		"SHIELD_BREAK": t = "SHIELD BREAK: your SHIELD drops to 0 when this fires, so PULP after it hits in full."
 		"RETALIATE": t = "RETALIATE: PULP %d for each subroutine already broken on this ICE (now PULP %d)." % [v, int(e.get("dmg", 0))]
 		"AMEND": t = "AMEND: this response, the ICE to its right deals +%d on each of its PULP subroutines." % v

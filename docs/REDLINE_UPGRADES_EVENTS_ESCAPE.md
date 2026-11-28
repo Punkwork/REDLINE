@@ -239,7 +239,7 @@ Each SIGNAL UNCLEAR Node holds one random event. Choices are always shown with t
 
 ## 4. HALCYON escape ICE — the security response
 
-> **ESCAPE-ICE-001 (designer, 2026-11-28):** with the escape retired (MAP-003), these ICE are now **regular Tier 2 ICE** for this corporation, used after the Mini-Boss (MAP-TIER-001, Core Rules §10.1). The escape layout, the doubled-TRACE notes and the 10-CRED escape reserves no longer apply; Tier 2 layers and reserves do. HOUSE CALL stays Black ICE.
+> **ESCAPE-ICE-001 (designer, 2026-11-28):** with the escape retired (MAP-003), these ICE are now **regular Tier 2 ICE** for this corporation, used after the Mini-Boss (MAP-TIER-001, Core Rules §10.1). The escape layout, the doubled-TRACE notes and the 10-CRED escape reserves no longer apply; Tier 2 layers and reserves do. HOUSE CALL stays Black ICE. Build values (MAP-TIER-001b, designer 2026-11-28): the table below plus STR-001 and FORM-002; abilities held except DEADBOLT's; PANIC BUTTON's TRACER goes into the draw pile.
 
 When you take THE HEARTH's payload, HALCYON stops being a friendly gadget company and starts acting like a security company. Its escape ICE are the **home-security** side of its products.
 

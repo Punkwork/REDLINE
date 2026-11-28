@@ -181,12 +181,17 @@ func use_generated_map(k: int) -> void:
 				"next": (q.next as Array).map(func(x): return int(next_ids[String(x)]))}
 			match t:
 				"ICE", "MINIBOSS":
-					var src: Dictionary = IceDB.MAP[0][0] if ri == 0 else later[(ri + i) % later.size()]
 					n.kind = "ICE"
-					n.name = String(src.name)
-					n.layers = (src.layers as Array).duplicate(true)
-					if ri == 8:   # row 9: 2 layers
-						n.layers.append(later[(ri + i + 1) % later.size()].layers[0].duplicate(true))
+					if t == "ICE" and ri >= 8:
+						# MAP-TIER-001 / 001a: row 9's ordinary ICE Nodes and rows 10–15 draw Tier 2 ICE.
+						_tier2_node(n, ri, i)
+					else:
+						var src: Dictionary = IceDB.MAP[0][0] if ri == 0 else later[(ri + i) % later.size()]
+						n.name = String(src.name)
+						n.layers = (src.layers as Array).duplicate(true)
+						if ri > 0: n["tier"] = "T1"
+						if ri == 8:   # row 9 (the Mini-Boss stand-in): 2 layers
+							n.layers.append(later[(ri + i + 1) % later.size()].layers[0].duplicate(true))
 					if t == "MINIBOSS": n["miniboss"] = true
 				"BOSS":   # 3 layers: CONSENT WALL, DOORBELL, then TERMS & CONDITIONS
 					n.kind = "ICE"
@@ -199,6 +204,23 @@ func use_generated_map(k: int) -> void:
 			row.append(n)
 		rows.append(row)
 	map_rows = rows
+
+func _tier2_node(n: Dictionary, ri: int, i: int) -> void:
+	## MAP-TIER-001 (designer 2026-11-28): a Tier 2 Node has 1–2 layers (PACE-008; row 9 always 2, MAP-TIER-001a), chosen
+	## from the map seed so a map always plays the same. Each layer has one Tier 2 main; layer 2 adds a Tier 1 support on
+	## the left (ICE Corp 1 §8.1). Reserves 15 / 20 (§8.2). Not drawn from the gameplay RNG.
+	var r := RandomNumberGenerator.new()
+	r.seed = hash("MAP-TIER-001:%d:%d:%d" % [map_seed, ri, i])
+	var count := 2 if ri == 8 else r.randi_range(1, 2)
+	var mains := IceDB.TIER2.duplicate()
+	var first: String = mains[r.randi_range(0, mains.size() - 1)]
+	mains.erase(first)
+	n.layers = [{"ice": [first], "reserve": IceDB.TIER2_RESERVE[0]}]
+	if count == 2:
+		var support: String = IceDB.TIER1[r.randi_range(0, IceDB.TIER1.size() - 1)]
+		n.layers.append({"ice": [support, mains[r.randi_range(0, mains.size() - 1)]], "reserve": IceDB.TIER2_RESERVE[1]})
+	n.name = String(IceDB.def(first).name)
+	n["tier"] = "T2"
 
 func enter_node(index: int) -> void:
 	if phase != "MAP" or not available.has(index):
@@ -1326,6 +1348,17 @@ func _apply_effect(e: Dictionary) -> void:
 			var k: int = enc.ice.find(acting_ice)
 			if k >= 0 and k + 1 < enc.ice.size():
 				enc.ice[k + 1]["amend"] = int(enc.ice[k + 1].get("amend", 0)) + int(e.v)
+		"PURGE_ALL":   # ICE Corp 1 §3 (FIRMWARE UPDATE): every ICE loses every virus counter; INCUBATOR still re-infects.
+			var incub := _rack_count("INCUBATOR")
+			var removed := 0
+			for i in enc.ice.size():
+				var had := virus_total(i)
+				removed += had
+				enc.ice[i].virus = {}
+				if had > 0 and incub > 0:
+					infect(i, "ROT", 2 * incub)
+			_sync_strengths()
+			_say("PURGE ALL: %d virus counters removed." % removed)
 		"FORGET":
 			for _n in int(e.v):
 				var opts := hand.filter(func(c): return not c.cached)

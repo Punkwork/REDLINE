@@ -1337,6 +1337,7 @@ func _effect_word(e: Dictionary) -> String:
 		"DEADLOCK": return "DEADLOCK"
 		"BW_DRAIN": return "−%d BW" % e.v
 		"SHIELD_BREAK": return "SHIELD BREAK"
+		"PURGE_ALL": return "PURGE ALL"
 		"AMEND": return "AMEND +%d" % e.v
 		"TRACE":
 			var w := "TRACE %d" % e.v

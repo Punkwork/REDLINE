@@ -92,6 +92,8 @@ jobs:
           # UPLINK-SPEC-001 / MAP-003f: the Uplink visit, the generated map, and their V2 screens.
           "$GODOT" --headless --path godot --script res://tests/test_uplink_map.gd 2>&1 | tee -a /tmp/rules.log
           "$GODOT" --headless --path godot --script res://tests/test_map_uplink_ui.gd 2>&1 | tee -a /tmp/rules.log
+          # MAP-TIER-001 / MAP-TIER-001a / ESCAPE-ICE-001: ICE tier by map row; HALCYON's Tier 2 roster.
+          "$GODOT" --headless --path godot --script res://tests/test_map_tier.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash

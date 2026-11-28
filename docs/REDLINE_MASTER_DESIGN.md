@@ -4081,3 +4081,11 @@ Designer, 15:10: "fix those to match map 003F and today's build." Core Rules §1
 ## MAP-TIER-001a — Row 9's ordinary ICE Nodes are Tier 2 (APPROVED, designer 2026-11-28 15:37)
 
 **Designer:** "Yes, row 9's ordinary ice node are tier 2." Settles MAP-TIER-001's interpretation: Tier 1 is rows 2–8; Tier 2 is row 9's ordinary ICE Nodes (the alternatives to the Mini-Boss) and rows 10–15. Current definition: Core Rules §10.1.
+
+## MAP-TIER-001b — HALCYON Tier 2 build answers (designer, 2026-11-28, Claude Code session)
+
+Asked before building the MAP-TIER-001 / ESCAPE-ICE-001 roster, the designer chose:
+- **Values: "quickest method"** (confirmed: "Yes, quickest method"): each Tier 2 ICE takes its doc values (ICE Corp 1 §5 Tier 2 table; Upgrades/Events/Escape §4) plus **STR-001** (+2 STR) and **FORM-002** (TRACE +2, PULP +1). No SUB-001 subroutines are invented and TUNE-001 is not applied. Working values, to be tuned after playtest; known effect: Tier 2 has fewer subroutines than today's Tier 1. FREE TRIAL stays as built.
+- **Reactive abilities: "DEADBOLT's floor only."** DEADBOLT keeps "Its STR can't be reduced below 3." SMART LOCK's +1 STR per response (HARDENING, now ENTRENCH, THE GRID's), NANNY CAM's and MOTION SENSOR's install triggers and REPO DRONE's TRACE 20+ bonus are held, not built.
+- **"PURGE ALL in, TRACER to draw":** FIRMWARE UPDATE's PURGE ALL is built as written; PANIC BUTTON inserts its TRACER into the **draw pile** (the doc said hand).
+- **Layout: "Yes, as proposed":** a Tier 2 Node has 1–2 layers chosen from the map seed (row 9's ordinary ICE Nodes always 2, MAP-TIER-001a); each layer has one Tier 2 main, and layer 2 adds a Tier 1 support on the left (ICE Corp 1 §8.1); CRED reserves 15 / 20 (§8.2); TUMBLER slot counts aren't designed (ROT-001 sync), so their whole pool is active.

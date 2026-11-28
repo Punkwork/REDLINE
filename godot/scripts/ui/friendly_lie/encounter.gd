@@ -1188,6 +1188,7 @@ func effect_rule(e: Dictionary) -> String:
   "BW_DRAIN": t = "You have %d less BW next turn." % v
   "CORTEX": t = "Gain %d CORTEX (−1 DRAW each)." % v
   "FORGET": t = "%d random non-CACHED card%s in your hand go to the bottom of your draw pile." % [v, "" if v==1 else "s"]
+  "PURGE_ALL": t = "PURGE ALL: remove every virus counter from every ICE."
   # PT11-UI: the SUB-001 / RIDER-001 / AMEND-001 effects in plain words
   "HARDEN": t = "HARDEN: this ICE gains %d STR for the rest of the encounter." % v
   "SHIELD_BREAK": t = "SHIELD BREAK: your SHIELD drops to 0 when this fires, so PULP after it hits in full."
@@ -1667,7 +1668,7 @@ func build_node_plate() -> void:
  if painted("UI_BRAND_PLATE"):
   # Concept 2's brand plate: the brass starburst is painted; the game writes the name and tier.
   at(node_tag, FriendlyLook.label("PANOPTICON", 26, Analog.CREAM, console_font(5)), Vector2(66, 12))
-  var tier_text := "OPENING" if game.is_opening() else String(game.node.get("tier", "TIER 1"))
+  var tier_text := "OPENING" if game.is_opening() else String(game.node.get("tier", "T1")).replace("T", "TIER ")
   var sub := FriendlyLook.label("RUSTLER INTERFACE · %s · LAYER %d/%d" % [tier_text, game.layer + 1, game.node.layers.size()], 12, Analog.CREAM_DIM, console_font(1))
   var sub_px := 12
   while sub_px > 9 and console_font(1).get_string_size(sub.text, HORIZONTAL_ALIGNMENT_LEFT, -1, sub_px).x > 218: sub_px -= 1
@@ -1676,7 +1677,7 @@ func build_node_plate() -> void:
  # PANOPTICON wordmark with its eye, then the network/node plate.
  var eye := Analog.icon("EYE", 26, Analog.GLOW); at(node_tag, eye, Vector2(14, 10))
  at(node_tag, FriendlyLook.label("PANOPTICON", 22, Analog.CREAM, console_font(5)), Vector2(48, 6))
- var tier := "OPENING" if game.is_opening() else String(game.node.get("tier", "TIER 1"))
+ var tier := "OPENING" if game.is_opening() else String(game.node.get("tier", "T1")).replace("T", "TIER ")
  at(node_tag, FriendlyLook.label("%s · LAYER %d/%d" % [tier, game.layer + 1, game.node.layers.size()], 13, Analog.CREAM_DIM, console_font(2)), Vector2(232, 12))
  var plate := console_plate("%s NETWORK  //  NODE: %s" % [skin.corporation, String(game.node.name).to_upper()], CONSOLE_CREAM, CONSOLE_INK, 16, console_font(1))
  at(node_tag, plate, Vector2(14, 46))

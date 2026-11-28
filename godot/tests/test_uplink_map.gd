@@ -178,13 +178,15 @@ func generated_map() -> void:
 			if n.next.is_empty(): bad.append(n.id + " (dead end)")
 	check(bad.is_empty(), "every Node links forward (%s)" % [bad])
 	check(g.map_rows.all(func(row): return row.all(func(n): return n.kind != "ICE" or not n.layers.is_empty())), "every ICE Node has an encounter")
-	# Layers (designer 2026-11-28): row 9's ICE Nodes have 2 layers, the BOSS 3, the rest 1.
+	# Layers (designer 2026-11-28): row 9's ICE Nodes have 2 layers, the BOSS 3, rows 1–8 one;
+	# rows 10–15 are Tier 2 Nodes with 1–2 layers (PACE-008, MAP-TIER-001).
 	var two := 0
 	var wrong := []
 	for ri in g.map_rows.size():
 		for n in g.map_rows[ri]:
 			if n.kind != "ICE": continue
 			var want := 3 if n.get("central", false) else (2 if ri == 8 else 1)
+			if ri >= 9 and ri <= 14: want = clampi(n.layers.size(), 1, 2)
 			if n.layers.size() != want: wrong.append(n.id)
 			if n.layers.size() == 2: two += 1
 	check(wrong.is_empty() and two >= 1 and g.map_rows[15][0].layers.size() == 3, "at least one 2-layer Node and the 3-layer BOSS (%s)" % [wrong])

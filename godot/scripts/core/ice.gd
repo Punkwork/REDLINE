@@ -33,6 +33,35 @@ const DEFS := {
 	"HOUSE_CALL": {"name": "HOUSE CALL", "type": "VOID", "str": 9, "tier": "BLACK", "black": true,
 		"subs": [[{"k": "PULP", "v": 5}], [{"k": "PULP", "v": 5}]]},
 	"FREE_TRIAL": {"name": "FREE TRIAL", "type": "TUMBLER", "str": 4, "tier": "T2", "slots": 2, "ability": "REBOOT_SPAM", "ability_text": "Whenever you REBOOT: INSERT 1 SPAM into draw.", "subs": [[{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
+	# MAP-TIER-001 / MAP-TIER-001a / ESCAPE-ICE-001 (designer 2026-11-28): HALCYON's Tier 2 roster, placed on row 9's
+	# ordinary ICE Nodes and rows 10–15 of the generated map. Sources: REDLINE_ICE_CORP1.md §5 Tier 2 table and the former
+	# escape ICE (REDLINE_UPGRADES_EVENTS_ESCAPE.md §4). Working values, designer's "quickest method" (2026-11-28): the doc
+	# values plus STR-001 (+2 STR) and FORM-002 (TRACE +2, PULP +1); no SUB-001 subroutines invented. Reactive abilities
+	# held (designer 2026-11-28) except DEADBOLT's STR floor; SMART LOCK's +1 STR is ENTRENCH, reserved for THE GRID.
+	# PANIC BUTTON's TRACER goes into the draw pile (designer 2026-11-28; the doc said hand). FREE TRIAL is unchanged.
+	"SMART_LOCK": {"name": "SMART LOCK", "type": "FORTRESS", "str": 8, "tier": "T2",
+		"subs": [[{"k": "PULP", "v": 4}, {"k": "DEADLOCK"}]]},
+	"PANIC_ROOM": {"name": "PANIC ROOM", "type": "FORTRESS", "str": 6, "tier": "T2",
+		"subs": [[{"k": "PULP", "v": 5}], [{"k": "DEADLOCK"}], [{"k": "DEADLOCK"}]]},
+	"LOYALTY_PROGRAM": {"name": "LOYALTY PROGRAM", "type": "TUMBLER", "str": 5, "tier": "T2",
+		"subs": [[{"k": "INSERT", "card": "SPAM", "to": "draw", "v": 1}], [{"k": "TRACE", "v": 4}, {"k": "DEADLOCK"}]]},
+	"FIRMWARE_UPDATE": {"name": "FIRMWARE UPDATE", "type": "TUMBLER", "str": 6, "tier": "T2",
+		"subs": [[{"k": "PURGE_ALL"}], [{"k": "PULP", "v": 4}], [{"k": "DEADLOCK"}]]},
+	"NANNY_CAM": {"name": "NANNY CAM", "type": "VOID", "str": 5, "tier": "T2",
+		"subs": [[{"k": "PULP", "v": 4}], [{"k": "TRACE", "v": 4}, {"k": "DEADLOCK"}]]},
+	"HOME_ASSISTANT": {"name": "HOME ASSISTANT", "type": "VOID", "str": 6, "tier": "T2",
+		"subs": [[{"k": "CORTEX", "v": 1}], [{"k": "PULP", "v": 3}, {"k": "DEADLOCK"}]]},
+	"REPO_DRONE": {"name": "REPO DRONE", "type": "VOID", "str": 5, "tier": "T2",
+		"subs": [[{"k": "PULP", "v": 5}], [{"k": "PULP", "v": 5}, {"k": "DEADLOCK"}]]},
+	"ALARM_PANEL": {"name": "ALARM PANEL", "type": "TUMBLER", "str": 5, "tier": "T2",
+		"subs": [[{"k": "TRACE", "v": 5}], [{"k": "DEADLOCK"}]]},
+	"MOTION_SENSOR": {"name": "MOTION SENSOR", "type": "VOID", "str": 5, "tier": "T2",
+		"subs": [[{"k": "PULP", "v": 4}, {"k": "DEADLOCK"}]]},
+	"DEADBOLT": {"name": "DEADBOLT", "type": "FORTRESS", "str": 8, "tier": "T2", "str_floor": 3,
+		"ability_text": "Its STR can't be reduced below 3.",
+		"subs": [[{"k": "PULP", "v": 5}], [{"k": "DEADLOCK"}]]},
+	"PANIC_BUTTON": {"name": "PANIC BUTTON", "type": "TUMBLER", "str": 4, "tier": "T2",
+		"subs": [[{"k": "INSERT", "card": "TRACER", "to": "draw", "v": 1}], [{"k": "DEADLOCK"}]]},
 	# CONSISTENCY-001a (designer 2026-11-27): experimental. CHAIN_PULP fires off the Rustler's CHAIN bonus, and CHAIN is parked
 	# (CHAIN-PARK-001); not on any map until redesigned. ICE data moves to a canonical record in CSA-07.
 	"PATTERN_ANALYSIS": {"name": "PATTERN ANALYSIS", "status": "experimental", "type": "VOID", "str": 4, "tier": "T2", "ability": "CHAIN_PULP", "subs": [[{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
@@ -52,6 +81,14 @@ const MAP := [
 	[{"id": "N4", "kind": "ICE", "name": "TERMS & CONDITIONS",
 		"layers": [{"ice": ["CONSENT_FORM", "TERMS_OF_SERVICE"], "reserve": 15}], "next": []}],
 ]
+
+## MAP-TIER-001: the ICE each tier draws from on the generated map (Core Rules §10.1). Tier 1 Nodes reuse the slice
+## encounters (`IceDB.MAP` rows 2–4); Tier 2 Nodes are built from TIER2 mains, with a TIER1 support beside the main in layer 2.
+const TIER1 := ["COOKIE_WALL", "TERMS_OF_SERVICE", "AUTO_RENEW", "CONSENT_FORM", "CAPTCHA", "DOORBELL_CAM"]
+const TIER2 := ["SMART_LOCK", "PANIC_ROOM", "LOYALTY_PROGRAM", "FIRMWARE_UPDATE", "NANNY_CAM", "HOME_ASSISTANT",
+	"REPO_DRONE", "FREE_TRIAL", "ALARM_PANEL", "MOTION_SENSOR", "DEADBOLT", "PANIC_BUTTON"]
+## ICE Corp 1 §8.2 (UPL-008) Tier 2 CRED reserves for layers 1 and 2.
+const TIER2_RESERVE := [15, 20]
 
 ## PULP-002: PULP curves, on the harder FORTRESSES (COOKIE WALL: B; TERMS OF SERVICE: C). A is defined for later ICE.
 ## A curve subroutine deals the next value of its sequence each Corporation Response
