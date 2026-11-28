@@ -286,7 +286,7 @@ Requiring checks has consequences:
 | 04e | `CardDB.inspector_model(id)`: the Inspector content contract (name, classification, costs, rules, flavour, art) from the record only; the V2 card model and the shared inspector (UI-INSPECTOR-001) read it | `c9d7516` |
 | 04f | `tools/csa/gen_card_docs.py`: generated card views in Card Pools (11 tables) and Rustlers (4 starter decks); `--check` in CI; 5 approved never-built pool cards recorded as `pending` (Q8) | `169c28d` |
 | 04g | `UplinkContract`: services and Clinic mirrored from Core Rules §8.3 with a drift test; card eligibility from the reward pools (BASIC-001); base prices and shelf from the new `uplink` section of `cards.json` (UPL-008, UPLINK-SPEC-001); CAP prices from CAP records | `85e415f` |
-| 04h | Decision-ID backfill: 48 → 120 of 127 records cite decisions; a test fails on any new record without one | this commit |
+| 04h | Decision-ID backfill: 48 → 120 of 127 records cite decisions; a test fails on any new record without one | `3c53973` |
 
 **Consumer coverage (cards).**
 
