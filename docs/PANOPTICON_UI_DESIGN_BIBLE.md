@@ -86,6 +86,22 @@ Readability, reduced motion and the copy guards still govern both. **Flyout exce
 
 **DESIGN-APPROVED — Atomic Deco (option A); Jost selected as the primary physical interface typeface.** Industrial and Hybrid are no longer active exploration candidates. Use geometric lettering, restrained ornament, expanded heading tracking and normal body tracking; lettering should feel manufactured into the console. Preserve icon-first HUD and readability requirements. Jost is distributed under the SIL Open Font License; retain the upstream copyright and license notice with distributed font assets. Proposed starting weights (not final acceptance): panel headings 300, instrument labels and mechanical descriptions 400, resource numerals and inspector titles 500, critical information 600. Exact sizes, tracking, weights and contrast require representative Godot/inspector validation. Virtual-world typography remains a separate design system. This selection supersedes earlier physical typography exploration candidates, not existing corporation-specific display or narrative treatments. Track delivery in [issue #24](https://github.com/Punkwork/REDLINE/issues/24). No font assets or code changed by this decision.
 
+### Physical typography hierarchy (UI-TYPO-001 / M06, 2026-11-27)
+
+**DESIGN-APPROVED — five shared physical typography levels, using Jost.** The following values are the implementation baseline at 1920 × 1080, adjustable through playtesting, not independently hardcoded per component.
+
+| Token | Purpose | Size (px) | Weight | Tracking (px) | Case | Line height |
+|---|---|---:|---:|---:|---|---:|
+| T1 | Object identity / major panel headings | 28 | 500 | +2 | Uppercase | 1.15 |
+| T2 | Classification / instrument labels | 15 | 300 | +2 | Uppercase | 1.20 |
+| T3 | Mechanical values / resource numerals / Uplink prices | 24 | 500 | +1 | As needed | 1.15 |
+| T4 | Mechanical descriptions / card rules | 17 | 400 | Normal | Sentence | 1.40 |
+| T5 | Supplementary information / restrictions / flavour | 14 | 400 | Normal | Sentence | 1.35 |
+
+UI-INSPECTOR-001 and ICE inspectors use T1–T5 as applicable; node classifications use T2; tooltips use T4–T5; flavour quotations may use T5 italic. Critical information may use weight 600. Shared tokens supersede historical physical font and sizing prescriptions (including DM Sans in ADP-R1); preserve component-specific interaction rules and disclosure restrictions. Maintain icon-first presentation, minimum 4.5:1 text contrast, stable numerical alignment (tabular figures where supported), colour-independent meaning and appropriate resolution scaling. Do not introduce redundant labels. Virtual-world expressive typography remains separate.
+
+Implementation acceptance: actual Jost rendering in Godot; centralized tokens; inspector populated with authoritative game data; no clipping or overflow with long content; stable numerical alignment; readability at supported resolutions; existing icon-first presentation preserved; upstream font copyright and SIL Open Font License included. Implementation and designer playtest acceptance remain pending. Universal hover activation, dismissal and motion timing are not approved by this hierarchy. Track delivery in [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
+
 ### Bandwidth transition design acceptance (UI-TYPO-001 / M06, 2026-11-27)
 
 **DESIGN-APPROVED — designer confirmed 2026-11-27.** Bandwidth (BW) transitions follow the approved universal motion language. Use symbols, numbers and mathematical notation only in transient resource feedback; no explanatory words (including BLOCKED). The persistent physical BW indicator remains authoritative. No further BW visual exploration before the next build. Expenditure, gain, turn replenishment, rapid successive changes and insufficient-BW rejection are implementation and playtest cases, not open design tasks. Bind presentation to authoritative engine events without changing rules or delaying gameplay; reduced-motion and reduced-flash alternatives must preserve information. Implementation, accessibility validation and playtest acceptance remain pending; exact integration timings are not newly prescribed by this approval. Existing readability guards remain in force. Track delivery in [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
