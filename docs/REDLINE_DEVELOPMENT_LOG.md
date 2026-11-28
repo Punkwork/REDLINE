@@ -328,3 +328,12 @@ CSA-03 is BUILT and awaiting acceptance. Carried open:
 - 15 divergences (CSA-04);
 - decision IDs on 43 of 122 records;
 - tags for the 10 playtest cards.
+
+## 2026-11-27 — Playtest-card tags and CRED-COST-001 approved (Claude Code)
+
+Designer:
+- confirmed GARBAGE COLLECT under BURNED-001;
+- approved the tags for the ten SYNERGY-PLAYTEST-002 cards (FOLLOW THROUGH and ESCALATION EXPLOIT, AFTERBURN CLOAK, the rest none), now in `cards.json` and no longer unresolved;
+- approved a CRED cost chip on the V2 card face (CRED-COST-001), to build in CSA-04.
+
+`test_csa_cards.gd` 501/0; validator valid; Python 20/0.

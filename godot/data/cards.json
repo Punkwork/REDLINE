@@ -2055,9 +2055,6 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"COUNTERINTELLIGENCE": {
@@ -2074,9 +2071,6 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"OVERCLOCK": {
@@ -2094,9 +2088,6 @@
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002",
 				"SYNERGY-PLAYTEST-002a"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"FEEDBACK_LOOP": {
@@ -2113,9 +2104,6 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"SALVAGE": {
@@ -2132,9 +2120,6 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"ADAPTIVE_DEFENCE": {
@@ -2151,15 +2136,14 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"FOLLOW_THROUGH": {
 			"name": "FOLLOW THROUGH",
 			"type": "SCRIPT",
-			"tags": [],
+			"tags": [
+				"EXPLOIT"
+			],
 			"bw": 1,
 			"rarity": "COMMON",
 			"target": true,
@@ -2171,15 +2155,14 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"ESCALATION": {
 			"name": "ESCALATION",
 			"type": "SCRIPT",
-			"tags": [],
+			"tags": [
+				"EXPLOIT"
+			],
 			"bw": 1,
 			"rarity": "COMMON",
 			"target": true,
@@ -2191,15 +2174,14 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"AFTERBURN": {
 			"name": "AFTERBURN",
 			"type": "SCRIPT",
-			"tags": [],
+			"tags": [
+				"CLOAK"
+			],
 			"bw": 0,
 			"rarity": "COMMON",
 			"text": "Gain 4 SHIELD if at least three other cards played this turn.",
@@ -2210,9 +2192,6 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		},
 		"REPRISE": {
@@ -2229,9 +2208,6 @@
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
 				"SYNERGY-PLAYTEST-002"
-			],
-			"unresolved": [
-				"tags"
 			]
 		}
 	},

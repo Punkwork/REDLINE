@@ -110,9 +110,9 @@ Proposal and audit: [`architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md`](archite
 | **CSA-03** | `cards.json` (one record per ID), loader, schema, parity test; conflict-resolution table for the designer | CSA-02 (Q1, Q2, Q4, Q7) | Loaded definitions equal `CardDB.DEFS`; baseline suites unchanged | Claude Code | **IN PROGRESS**: C1 **BUILT** (`112e124`, loader + parity); C2 **BUILT** (`fee7442`); C3 **BUILT** (approved wording). **CSA-03 BUILT**, awaiting designer acceptance. Open, carried into CSA-04 and later:
 - 15 divergent records (`python3 tools/csa/validate_cards.py --register`);
 - decision IDs on 43 of 122 records;
-- tags unresolved on the 10 playtest cards.
+- CRED cost chip on the V2 card face (CRED-COST-001, approved 20:20), then BORROWED CREDENTIALS drops "Costs 8 CRED." (CSA-04).
 
-*Interpretations to confirm:* GARBAGE COLLECT's BURN follows BURNED-001; BORROWED CREDENTIALS keeps "Costs 8 CRED." until the V2 card view draws CRED costs |
+Playtest-card tags approved and recorded. GARBAGE COLLECT under BURNED-001 confirmed |
 | **CSA-04** | Text templates, engine parameters, Inspector and Uplink contracts, generated doc blocks; PROBE-004a implemented (choose-one, both UI paths) | CSA-03 | PROBE B1–B9 and T1–T7 green | Claude Code | TO DO |
 | **CSA-05** | Python CI job (schema, IDs, references, drift, terms, traceability, AGENTS = CLAUDE, `tests/python`); spec tests in CI; PR path filter; ruleset proposal | CSA-03 | Each check proven by a negative test; designer decides the ruleset (Q5) | Claude Code, then designer | TO DO |
 | **CSA-06** | Retire hand card tables and appended decision copies (label historical); delete the `DEFS` constant; rewrite stale tests | CSA-04, CSA-05 | Scanner shows 0 independent active card definitions | Claude Code, with Claude (editorial) | TO DO |
