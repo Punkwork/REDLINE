@@ -743,7 +743,8 @@
 			],
 			"params": {
 				"draw": 2
-			}
+			},
+			"flavor": "Two good ideas and one bad alibi."
 		},
 		"BURST": {
 			"name": "BURST",
@@ -821,7 +822,8 @@
 			],
 			"params": {
 				"trace_less": 1
-			}
+			},
+			"flavor": "The operator knows me as the operator."
 		},
 		"BURN_NOTICE": {
 			"name": "BURN NOTICE",
@@ -840,7 +842,8 @@
 				"BURNED-001",
 				"BURNED-001a",
 				"CARD-003"
-			]
+			],
+			"flavor": "Please retain these ashes for your records."
 		},
 		"SPAM_FILTER": {
 			"name": "SPAM FILTER",
@@ -875,7 +878,8 @@
 			],
 			"params": {
 				"draw": 1
-			}
+			},
+			"flavor": "Thank you for uninstalling. The exit survey is mandatory."
 		},
 		"PATCH_KIT": {
 			"name": "PATCH KIT",
@@ -895,7 +899,8 @@
 			],
 			"params": {
 				"heal": 4
-			}
+			},
+			"flavor": "For temporary repairs to permanent employees."
 		},
 		"FIELD_KIT": {
 			"name": "FIELD KIT",
@@ -911,7 +916,8 @@
 			},
 			"decisions": [
 				"CARD-004"
-			]
+			],
+			"flavor": "If the latch sticks, hit the side with the dent."
 		},
 		"TOOLBELT": {
 			"name": "TOOLBELT",
@@ -927,7 +933,8 @@
 			},
 			"decisions": [
 				"CARD-004"
-			]
+			],
+			"flavor": "Everything I own fits on this belt. Everything I owe is in a filing cabinet."
 		},
 		"BALANCED_LOAD": {
 			"name": "BALANCED LOAD",
@@ -951,7 +958,8 @@
 			"params": {
 				"shield": 2,
 				"str_down": 1
-			}
+			},
+			"flavor": "I borrowed a little from their side of the meter."
 		},
 		"ADAPTER": {
 			"name": "ADAPTER",
@@ -971,7 +979,8 @@
 			],
 			"params": {
 				"break_extra": 1
-			}
+			},
+			"flavor": "The surplus shop had a drawer marked ‘Should fit.’"
 		},
 		"RAM_UPGRADE": {
 			"name": "RAM UPGRADE",
