@@ -24,7 +24,7 @@ class LiveFile(unittest.TestCase):
         reg = V.register()
         self.assertEqual(len(reg["pending"]), 10)
         self.assertEqual(sorted(reg["experimental"]), sorted(["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]))
-        self.assertIn("PIVOT", [c for c, _ in reg["divergent"]])
+        self.assertEqual(reg["divergent"], [])   # CSA-04d: PIVOT, the last divergent card, aligned
         self.assertNotIn("PROBE", [c for c, _ in reg["divergent"]])   # CSA-04b: PROBE aligned
         self.assertEqual(LIVE["starters"]["RIOT"].count("PROBE"), 4)   # RIOT-006
         self.assertNotIn("SMASH_AND_GRAB", LIVE["starters"]["RIOT"])
@@ -82,14 +82,29 @@ class CatchesMistakes(unittest.TestCase):
     def test_experimental_card_in_core_pool(self):
         self.assertIn("core_pool holds experimental", self.errors(lambda d: d["core_pool"].append("SCALPEL")))
 
+    @staticmethod
+    def make_divergent(d, card="DEFRAG"):
+        """No live card is divergent since CSA-04d, so the negative tests build one."""
+        r = d["cards"][card]
+        r["status"]["implementation"] = "divergent"
+        r["approved_text"] = r["text"] + " (approved)"
+        r["divergence"] = "test fixture"
+        return r
+
+    def test_divergent_fixture_is_valid(self):
+        self.assertEqual(self.errors(lambda d: self.make_divergent(d)), "")
+
     def test_divergent_without_reason(self):
-        self.assertIn("must say why", self.errors(lambda d: d["cards"]["PIVOT"].pop("divergence")))
+        self.assertIn("must say why", self.errors(lambda d: self.make_divergent(d).pop("divergence")))
 
     def test_divergence_on_implemented_record(self):
         self.assertIn("only for divergent", self.errors(lambda d: d["cards"]["DEFRAG"].update(divergence="x")))
 
     def test_approved_text_matching_text(self):
-        self.assertIn("no longer divergent", self.errors(lambda d: d["cards"]["PIVOT"].update(text=d["cards"]["PIVOT"]["approved_text"])))
+        def mutate(d):
+            r = self.make_divergent(d)
+            r["text"] = r["approved_text"]
+        self.assertIn("no longer divergent", self.errors(mutate))
 
     def test_decisions(self):
         self.assertIn("not a decision ID", self.errors(lambda d: d["cards"]["PROBE"].update(decisions=["probe four"])))

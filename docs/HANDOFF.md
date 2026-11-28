@@ -124,7 +124,8 @@ Planned order: CRED chip → PROBE → BURNED-001 → PIVOT, each with spec test
 - 04a CRED chip + BORROWED CREDENTIALS **BUILT**, PROPOSED for visual review (`docs/visual/fixtures/cred-cost-001/`).
 - 04b PROBE-004a **BUILT** (choose-one in both UIs, reveal-all, per-instance count; `test_spec_probe` 32/0), mode prompt PROPOSED for visual review (`docs/visual/fixtures/probe-004a/`).
 - 04c BURNED-001 **BUILT** (BURNED lasts the encounter, then discard; cleared SPAM removed; `test_spec_burned` 29/0, in CI). *Interpretations to confirm:* Bloatware burned by UNINSTALLER does not return either; SPAM's text reads "it disappears for good."
-- 04d PIVOT next. |
+- 04d PIVOT **BUILT** (−1 STR this encounter; reaching 0 breaks one target subroutine for free, the Rustler's choice through the existing break prompt in both UIs, automatic when only one qualifies; CHAIN field removed; `test_spec_pivot` 50/0, in CI). No card is divergent now. *Interpretation to confirm:* PIVOT played on an ICE already at 0 breaks nothing (it did not reduce STR to 0).
+- Next in CSA-04: Inspector model, Uplink contract, generated doc blocks, decision-ID backfill. |
 | **CSA-05** | Python CI job (schema, IDs, references, drift, terms, traceability, AGENTS = CLAUDE, `tests/python`); spec tests in CI; PR path filter; ruleset proposal | CSA-03 | Each check proven by a negative test; designer decides the ruleset (Q5) | Claude Code, then designer | TO DO |
 | **CSA-06** | Retire hand card tables and appended decision copies (label historical); delete the `DEFS` constant; rewrite stale tests | CSA-04, CSA-05 | Scanner shows 0 independent active card definitions | Claude Code, with Claude (editorial) | TO DO |
 | **CSA-07** | Same pattern for ICE, CAPS and Ghostware | CSA-06 | As above, per entity | Claude Code | TO DO |

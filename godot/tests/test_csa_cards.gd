@@ -17,12 +17,15 @@ const APPROVED_TEXT := {
 	"PROBE": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",   # CSA-04b
 	"GARBAGE_COLLECT": "BURN 1 other card in your hand. Draw 1.",   # CSA-04c, BURNED-001
 	"SPAM": "Can't be played normally. Pay 1 BW to clear it: it disappears for good.",   # CSA-04c, BURNED-001b
+	"PIVOT": "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost.",   # CSA-04d, CHAIN-PARK-001
 	"BORROWED_CREDENTIALS": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",   # CRED-COST-001: the 8 CRED is on the card face
 }
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
 const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved"]
 ## Approved new fields on single cards since the snapshot: id -> [fields].
-const APPROVED_FIELDS := {"PROBE": ["modes"]}   # CSA-04b, PROBE-004a
+const APPROVED_FIELDS := {"PROBE": ["modes"], "PIVOT": ["zeroed_reduction"]}   # CSA-04b PROBE-004a; CSA-04d PIVOT
+## Approved field removals since the snapshot: id -> [fields].
+const APPROVED_REMOVED := {"PIVOT": ["chain"]}   # CSA-04d, CHAIN-PARK-001: CHAIN removed from all current cards
 const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "PROBE", "FEEDBACK",
 	"ADRENAL_SPIKE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "BASIC_EXTRACTOR"]
 const PLAYTEST := ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "OVERCLOCK", "FEEDBACK_LOOP", "SALVAGE", "ADAPTIVE_DEFENCE",
@@ -46,6 +49,9 @@ func _initialize() -> void:
 		if APPROVED_TEXT.has(id):
 			check(CardDB.def(id).text == APPROVED_TEXT[id], "%s shows its approved wording (C3)" % id)
 			old = old.duplicate(true); old.text = APPROVED_TEXT[id]
+		for k in APPROVED_REMOVED.get(id, []):
+			check(not CardDB.def(id).has(k), "%s no longer has the approved-removed field %s" % [id, k])
+			old = old.duplicate(true); old.erase(k)
 		check(same(legacy(CardDB.def(id), old), old), "def(%s) unchanged apart from C2 metadata and C3 wording" % id)
 		check(only_metadata_added(CardDB.def(id), snap.defs[id]), "def(%s) adds only %s" % [id, METADATA])
 		check(same(CardDB.roles(id), snap.roles[id]), "roles(%s) unchanged" % id)

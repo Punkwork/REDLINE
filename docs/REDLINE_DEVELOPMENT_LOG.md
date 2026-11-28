@@ -35,21 +35,7 @@ LOG-001 archived the following oldest entries unchanged: 2026-11-21 — RELEASE-
 
 LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-26 — ARCH-V2-003w: program actions on the CRT (Claude Code), 2026-11-26 — ARCH-V2-004: Batch 2 cards, hand, targeting, choices (Claude Code), 2026-11-26 — ARCH-V2-005: coverage table, coverage test, header CAPS and PROTOCOLS slots (Claude Code), 2026-11-26 — ARCH-V2-005d: header slot art wired (Claude Code), 2026-11-26 — ARCH-V2-006: homes for the remaining encounter UI recorded (Claude Code), 2026-11-26 — ARCH-V2-006: Batch 3 built (Claude Code), 2026-11-26 — ARCH-V2-006j: TRACE STRIKE banner removed; Batch 3 interpretations approved (Claude Code), 2026-11-26 — ARCH-V2-006k: targeting arrow (Claude Code), 2026-11-26 — ARCH-V2-006l: PROGRAMs install on the CRT; unplayable cards dim (Claude Code), 2026-11-26 — ARCH-V2-006m: eye, Ghostware reel and speaker grille art wired; red pupil (Claude Code), 2026-11-26 — ARCH-V2-007a: Batch 4 started; corporation rooms through the ICE windows (Claude Code), 2026-11-26 — ARCH-V2-007b: corporation look on the V2 encounter (Claude Code), 2026-11-26 — ARCH-V2-007c: graffiti, punch cards, low VITAE, PATIENT ZERO (Claude Code), 2026-11-26 — ARCH-V2-007d: V2 encounter integrated into the app (Claude Code), 2026-11-26 — ARCH-V2-007e: behaviour comparison; Batch 4 complete (Claude Code), 2026-11-26 — ARCH-V2-007f, CORE-LOOP-REWARD-GAP, Playtest 13 prepared (Claude Code), 2026-11-27 — RELEASE-002: HALCYON PLAYTEST 13 cut (Claude Code), 2026-11-27 — ARCH-V2-008a recorded (Claude Code), 2026-11-27 — ARCH-V2-008a built: Ghostware icons in the reel (Claude Code), 2026-11-27 — RUSTLER-SELECT-001: Generalist portrait on the select screen (Claude Code), 2026-11-27 — ARCH-V2-008b: END RUN on the V2 encounter screen (Claude Code), 2026-11-27 — CAPS-TEST-001: CAPS in the game; CAPTCHA bonus CAP (Claude Code), SEQUENCE-002 — SEQUENCED revision (designer approved 2026-11-27), TOLL-RETIRE-001 — TOLL retired (designer approved 2026-11-27), MINIBOSS-001 — Unique signature abilities / FORTIFY (designer direction 2026-11-27), MINIBOSS-003 — THE GRID: PROFILE + FORTIFY (designer approved 2026-11-27), WATCHER-EXP-001 — WATCHER removed from standard ICE (designer approved 2026-11-27), BOOTING-RETIRE-001 — BOOTING retired (designer approved 2026-11-27), GUARD-001 — Optional DEADLOCK protection (designer approved direction 2026-11-27), 2026-11-27 — CAPS-TEST-001a recorded (Claude Code), 2026-11-27 — CAPS-TEST-001b: CRACKER hint wording; STR limits tested (Claude Code), REBOOT-SPAM-002 — Breakable reactive subroutine (designer approved 2026-11-27), REBOOT-SPAM-002a — ICE affinity and activation clarification (designer approved 2026-11-27), REBOOT-FORGET-001 — LUCIDA-exclusive ability (designer approved 2026-11-27), CHAIN-REP-001 — Representative encounter scope clarification (designer approved 2026-11-27), CHAIN-002 — Foundational CHAIN revision (designer approved 2026-11-27), CHAIN-002a — Multiple instances per turn (designer approved 2026-11-27), CHAIN-002b — Distinct non-overlapping instances (designer approved 2026-11-27), CHAIN-002c — Turn extension and deck manipulation (designer approved 2026-11-27).
 
-## CHAIN-002d — Experiential acceptance (designer approved 2026-11-27)
-Design mantra: **Extend the turn. Expand the options. Reward ingenuity.** CHAIN creates confidence, momentum and a sense of mastery, as if the Rustler discovered a new level within a level. Contrast with surveillance-induced anxiety and restriction. Experiential acceptance criterion: the player should not merely understand that they executed a clever combination; they should feel clever for having discovered it. Reward discovery through typography, motion, sound and visible card changes, not solely numerical effects or a flyout. Anticipation, activation and momentum are proposed feedback phases; eligible card indicators, effective cost changes, localized payoff and newly available options should be legible. Specific animation, sound, card treatments and timing remain experimental; coordinate UI-TYPO-001/a, M06 and CHAIN-REP-001. Playtest whether players independently recognize opportunities, perceive the payoff and report confidence/momentum/mastery without obscuring tactical information; reduced effects must preserve information. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md. No engine changes.
-
-
-## CHAIN-003 — Experimental catalogue and first playtest candidates (2026-11-27)
-See [canonical CHAIN specification](PANOPTICON_CHAIN_MECHANICS.md) for all 15 experimental combinations and proposed TAG/TYPE/ACTION/COST grammar. First experimental cohort: OVERCLOCK, SLIPSTREAM, RELAY, BOOTSTRAP, HANDSHAKE, DAISY CHAIN (TAG/TYPE only; free execution requires additional rule review). Priority 2E / CHAIN-REP-001; coordinate M06 and UI-TYPO-001/a. Designer authorized recording and candidate selection, not final card balance or production implementation. Resolve grammar, extension/termination and free-play safety before implementation; later ACTION/COST/mixed signatures retained for exploration. No engine changes.
-
-
-## CHAIN-003a — Experimental playtest development sequence (designer approved 2026-11-27)
-Proceed with the CHAIN-003 six-card experimental programme under Priority 2E / CHAIN-REP-001: (1) OVERCLOCK foundational activation and free draw, (2) SLIPSTREAM and BOOTSTRAP BW generation, (3) RELAY and HANDSHAKE pile manipulation, (4) DAISY CHAIN free execution after legality/recursion review, (5) integrated six-card interactions and multiple distinct instances. Finalize baseline activation, termination and extension rules with designer before implementation. First deliverable: OVERCLOCK mechanically, visually and audibly realized, coordinated with CAS-001 and UI-TYPO-001/a/M06. TAG/TYPE first, ACTION/COST/mixed deferred. Experimental card values and signatures remain subject to playtest; no production implementation in this commit. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md.
-
-
-## CHAIN-004 — Consecutive card-play eligibility (designer approved 2026-11-27)
-Only consecutive card plays determine CHAIN eligibility. Non-card encounter actions leave candidate and active CHAIN state unaffected: Icepick activation/boost, PROBE, CAP activation, inspection and cancelled plays do not insert links or interrupt the sequence. Successful Program installation and Protocol deployment count as card plays, consistent with existing baseline. Example: CLOAK card → PROBE → EXPLOIT card → Icepick activation → OVERCLOCK is consecutive in card-play history and eligible if its proposed signature is approved and satisfied. Existing no-overlap/no-reuse rule remains. Exact catalyst signature grammar, extension eligibility and discounts, incompatible-card termination/new candidate handling, turn/encounter boundary rules remain for explicit review. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md. No engine changes.
-
+LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-002d — Experiential acceptance (designer approved 2026-11-27); CHAIN-003 — Experimental catalogue and first playtest candidates (2026-11-27); CHAIN-003a — Experimental playtest development sequence (designer approved 2026-11-27); CHAIN-004 — Consecutive card-play eligibility (designer approved 2026-11-27).
 
 ## CHAIN-005 — Termination rules (designer approved 2026-11-27)
 1. Playing a card that cannot extend an active CHAIN terminates that instance.
@@ -382,3 +368,26 @@ Tests:
 Interpretations to confirm: UNINSTALLER-burned Bloatware does not return; SPAM's "disappears for good" wording.
 
 Next: CSA-04d, PIVOT.
+
+## 2026-11-27 — CSA-04d: PIVOT plays its approved text (Claude Code)
+
+PIVOT now does what CHAIN-PARK-001 and its follow-up say: 1 BW, target ICE −1 STR this encounter. If that brings the ICE to 0, one of its subroutines breaks for no cost. The Rustler picks through the existing card-break prompt, which both UIs already show. Eligible subroutines are those they could normally break: visible, unbroken, usual order. When only one qualifies, it breaks without a prompt. The CHAIN CLOAK bonus and the record's `chain` field are gone; the record gains `zeroed_reduction: 1`, as FLATLINE and KNOCKOUT have.
+
+No card record is divergent now.
+
+Docs:
+- Deck Synergy §9.1 row updated.
+- The CHAIN Mechanics §4 audit is labelled historical.
+- `HALCYON_PLAYTEST_GUIDE.md` is left as it is, because it describes builds already shipped.
+
+Tests:
+- `test_spec_pivot.gd` 50/0, new and in CI. Its expectations are literals from the approved text. Before the engine change, 19 of its checks failed.
+- `synergy_cases.gd`: the PIVOT CHAIN check now asserts −1 with no bonus.
+- `test_csa_cards` 506/0: approved text, the new field and the removed field are listed.
+- Python 21/0: the divergence negative tests build their own divergent fixture now that no live card is divergent.
+- Validator: VALID.
+- Other suites: test_game 430/0 (SIM=1 430/0); adp 17; signal_carbon 672; arch_v2_ice 202; coverage 548; batch3 115; batch4 76; app 33; spec_probe 32; spec_burned 29; parity 3,949 actions / 4,029 checks; `shot_arch_v2_ice` 42 captures.
+
+Interpretation to confirm: PIVOT on an ICE already at 0 breaks nothing.
+
+Next: the rest of CSA-04 (Inspector model, Uplink contract, generated doc blocks, decision-ID backfill).

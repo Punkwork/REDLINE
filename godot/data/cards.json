@@ -1777,18 +1777,16 @@
 			"bw": 1,
 			"rarity": "COMMON",
 			"target": true,
-			"chain": "CLOAK",
-			"text": "Target ICE −2 STR. CHAIN CLOAK: −1 more.",
+			"zeroed_reduction": 1,
+			"text": "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"CHAIN-PARK-001",
 				"CONSISTENCY-001a"
-			],
-			"approved_text": "Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost.",
-			"divergence": "CHAIN-PARK-001 / CONSISTENCY-001a: the engine still plays −2 STR with the CHAIN CLOAK bonus (DSY-011 \"chain\" field). Rules commit with spec tests."
+			]
 		},
 		"COVER_FIRE": {
 			"name": "COVER FIRE",

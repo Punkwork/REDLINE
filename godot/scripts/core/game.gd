@@ -679,7 +679,18 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 		"HARVEST":
 			extract(3 * int(enc.ice[target].virus.get("LEECH", 0)))
 			enc.ice[target].virus.erase("LEECH")
-		"PIVOT": reduce_ice_str(target, 3 if inst.get("chain_active", false) else 2)
+		"PIVOT":
+			# CSA-04d (CHAIN-PARK-001 follow-up): −1 STR; reaching 0 breaks one target subroutine for free,
+			# chosen by the Rustler; no prompt when only one qualifies.
+			if reduce_ice_str(target, int(CardDB.def(inst.id).zeroed_reduction)):
+				var br := {"same_ice": true}
+				var options := _breaker_targets(br, target)
+				if options.size() == 1:
+					_do_break(options[0].x, options[0].y)
+				elif options.size() > 1:
+					pending = {"kind": "card_break", "n": 1, "ice": target, "breaker": br, "card_uid": inst.uid, "card": "PIVOT"}
+					discard.append(inst)
+					phase = "CHOICE"
 		"COVER_FIRE": shield += 5 if inst.get("chain_active", false) else 3
 		"HANDOFF":
 			trace = maxi(0, trace - 2)

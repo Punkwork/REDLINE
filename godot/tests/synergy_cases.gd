@@ -105,7 +105,7 @@ func step3() -> void:
  var pivot := g._new_inst("PIVOT"); g.hand.append(pivot)
  var before := g.ice_str(0)
  g.play_card(pivot.uid, 0)
- check.call(g.ice_str(0) == maxi(0, before - 3), "PIVOT CHAIN CLOAK grants extra reduction")
+ check.call(g.ice_str(0) == maxi(0, before - 1), "PIVOT: −1 STR, no CHAIN bonus after CLOAK (CSA-04d, CHAIN-PARK-001)")
  var tags: Array = g.enc.last_tags.duplicate()
  g.installed.append({"inst": g._new_inst("TUMBLER_ICEPICK"), "boost": 5, "free_used": false})
  g.break_sub(0, 0)

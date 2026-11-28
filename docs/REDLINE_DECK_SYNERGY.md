@@ -248,7 +248,7 @@ Priced with CARD-001 (1 BW ≈ 3 SHIELD ≈ −2 STR ≈ −4 TRACE ≈ 1 card d
 ### 9.1 Shared pool candidates
 | Card | Rarity | Type / tags | Cost | Effect | Role |
 |---|---|---|---|---|---|
-| **PIVOT** | Common | SCRIPT — EXPLOIT | 1 BW | Target ICE −2 STR this encounter. **CHAIN CLOAK:** −1 more. | CHAIN teaching card |
+| **PIVOT** | Common | SCRIPT — EXPLOIT | 1 BW | Target ICE −1 STR this encounter. If this reduces target ICE STR to 0, break one of the target ICE subroutines for no cost. *(CHAIN-PARK-001: CHAIN removed; built in CSA-04d. Current record: `godot/data/cards.json`.)* | DRILL |
 | **COVER FIRE** | Common | SCRIPT — CLOAK | 1 BW | +3 SHIELD. **CHAIN EXPLOIT:** +2 more. | CHAIN teaching card |
 | **PORT SCAN** | Common | SCRIPT | 0 BW | SCAN 3, then draw 1. | ROUTER |
 | **GARBAGE COLLECT** | Common | SCRIPT | 0 BW | BURN 1 other card in your hand. Draw 1. | In-Node thinning |
