@@ -3,12 +3,17 @@
 
     python3 tools/csa/validate_cards.py              # exit 0 when valid
     python3 tools/csa/validate_cards.py path.json    # validate another file (tests use this)
+    python3 tools/csa/validate_cards.py --strategy-matrix markdown
+    python3 tools/csa/validate_cards.py --strategy-matrix json
+    python3 tools/csa/validate_cards.py --strategy-report
 
 Checks (C1): schema name; one record per ID with no duplicate keys anywhere in the file; required fields
 and their types on every card and CAP; known card types and rarities; every number whole (the Godot loader
 turns JSON numbers back into int); starter decks, the core pool and pool extras name existing cards.
 Later CSA-03 commits add status, decision and eligibility checks (see CANONICAL_SOURCE_ARCHITECTURE.md §7).
 """
+import argparse
+from collections import Counter
 import glob, json, os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -53,12 +58,19 @@ def _no_duplicates(pairs):
     return seen
 
 
+def load_canonical(path):
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f, object_pairs_hook=_no_duplicates)
+    if not isinstance(data, dict):
+        raise ValueError("canonical source must be an object")
+    return data
+
+
 def validate(path=DEFAULT):
     """Return a list of error strings; empty means valid."""
     errors = []
     try:
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f, object_pairs_hook=_no_duplicates)
+        data = load_canonical(path)
     except DuplicateKey as e:
         return ["%s (each ID may have one record only)" % e]
     except (OSError, ValueError) as e:
@@ -228,9 +240,184 @@ def register(path=DEFAULT):
     return out
 
 
+STRATEGY_FAMILIES = (
+    "momentum", "ice_suppression", "defensive_endurance", "recursion",
+    "surveillance_evasion", "program_synergy", "exploit_synergy", "precision_breaching",
+)
+STRATEGY_ROLES = ("enabler", "support", "payoff", "bridge")
+STRATEGY_SOURCES = {"CARDS": "cards", "CAPS": "caps", "GHOSTWARE": "ghostware"}
+STRATEGY_STATES = ("reviewed", "provisional", "unreviewed", "general_purpose", "invalid")
+
+
+def strategy_errors(strategy):
+    if not isinstance(strategy, dict):
+        return ["strategy must be an object"]
+    errors = []
+    for family, roles in sorted(strategy.items()):
+        if family not in STRATEGY_FAMILIES:
+            errors.append(f"unknown strategy family {family!r}")
+        if not isinstance(roles, list) or not roles:
+            errors.append(f"{family}: roles must be a non-empty array")
+            continue
+        seen = set()
+        for role in roles:
+            if not isinstance(role, str) or role not in STRATEGY_ROLES:
+                errors.append(f"{family}: unknown strategy role {role!r}")
+            elif role in seen:
+                errors.append(f"{family}: duplicate strategy role {role!r}")
+            else:
+                seen.add(role)
+    return sorted(errors)
+
+
+def matrix_is_consistent(cells, records):
+    expected_cells = [(family, role) for family in STRATEGY_FAMILIES for role in STRATEGY_ROLES]
+    expected = Counter(
+        (record["category"], record["id"], record["state"], family, role)
+        for record in records
+        for family, roles in (record["strategy"] or {}).items()
+        for role in roles
+    )
+    actual = Counter(
+        (item["category"], item["id"], item["state"], cell["family"], cell["role"])
+        for cell in cells for item in cell["entries"]
+    )
+    return [(cell["family"], cell["role"]) for cell in cells] == expected_cells and actual == expected
+
+
+def strategic_coverage(data, *, reviewed=(), read_error=None):
+    """Project canonical data. Only synthetic tests supply reviewed (category, ID) pairs."""
+    reviewed = set(reviewed)
+    dependencies = ["Revision-specific designer approval contract and baseline review pending."]
+    source_errors = [read_error] if read_error else []
+    invalid = []
+    records = []
+    totals = {}
+    cells = {
+        (family, role): {"family": family, "role": role, "entries": []}
+        for family in STRATEGY_FAMILIES for role in STRATEGY_ROLES
+    }
+    for category, key in STRATEGY_SOURCES.items():
+        totals[category] = None
+        if category == "GHOSTWARE" and key not in data:
+            dependencies.append("GHOSTWARE coverage incomplete until CSA-07 establishes its canonical source.")
+            continue
+        table = data.get(key)
+        if not isinstance(table, dict):
+            if not read_error:
+                source_errors.append(f"{category}: canonical '{key}' table is missing or malformed")
+            continue
+        totals[category] = len(table)
+        if category == "CARDS" and not table:
+            source_errors.append("CARDS: canonical 'cards' table must be non-empty")
+        for cid, record in sorted(table.items()):
+            if not isinstance(record, dict):
+                source_errors.append(f"{category} {cid}: canonical record must be an object")
+                continue
+            strategy = record.get("strategy")
+            errors = strategy_errors(strategy) if "strategy" in record else []
+            if errors:
+                state = "invalid"
+                invalid.append({"category": category, "id": cid, "errors": errors})
+                strategy = None
+            elif strategy is None:
+                state = "unreviewed"
+            elif (category, cid) in reviewed:
+                state = "reviewed" if strategy else "general_purpose"
+            else:
+                state = "provisional" if strategy else "unreviewed"
+            if strategy is not None:
+                strategy = {
+                    family: [role for role in STRATEGY_ROLES if role in strategy[family]]
+                    for family in STRATEGY_FAMILIES if family in strategy
+                }
+            item = {"category": category, "id": cid, "state": state}
+            records.append({**item, "strategy": strategy})
+            for family, roles in (strategy or {}).items():
+                for role in roles:
+                    cells[family, role]["entries"].append(item)
+    matrix = {"cells": list(cells.values()), "records": records}
+    counts = Counter(record["state"] for record in records)
+    gaps = [{"family": family, "role": role}
+            for (family, role), cell in cells.items() if not cell["entries"]]
+    consistent = not source_errors and matrix_is_consistent(matrix["cells"], records)
+    checks = {
+        "canonical_sources": "FAIL" if source_errors else "PASS",
+        "strategy_metadata": "FAIL" if invalid else "PASS",
+        "matrix_consistency": "PASS" if consistent else "FAIL",
+    }
+    report = {
+        "scope": "Diagnostic only. Checks cover source availability, strategy metadata and matrix consistency.",
+        "result": "FAIL" if "FAIL" in checks.values() else "PASS",
+        "checks": checks,
+        "canonical_totals": totals,
+        "classification_counts": {state: counts[state] for state in STRATEGY_STATES},
+        "classified_records": counts["reviewed"] + counts["provisional"],
+        "reviewed_records": counts["reviewed"] + counts["general_purpose"],
+        "unreviewed_records": counts["unreviewed"] + counts["provisional"] + counts["invalid"],
+        "records": records,
+        "invalid_metadata": invalid,
+        "source_errors": source_errors,
+        "coverage_gaps": gaps,
+        "outstanding_dependencies": dependencies,
+    }
+    return matrix, report
+
+
+def render_strategy_markdown(matrix, report):
+    lines = ["# Strategic Coverage Matrix", "",
+             "Empty cells indicate design opportunities.", "",
+             "| Family | Role | Records |", "| --- | --- | --- |"]
+    for cell in matrix["cells"]:
+        entries = ", ".join(
+            f'{entry["category"]} {entry["id"]} ({entry["state"]})' for entry in cell["entries"]
+        ).replace("|", r"\|").replace("\n", " ")
+        lines.append(f'| {cell["family"]} | {cell["role"]} | {entries or "Empty"} |')
+    lines.extend(["", "## Records without matrix entries", ""])
+    for item in matrix["records"]:
+        if item["strategy"]:
+            continue
+        label = item["state"]
+        if label == "unreviewed":
+            label += ", missing metadata" if item["strategy"] is None else ", empty strategy"
+        lines.append(f'- {item["category"]} {item["id"]} ({label})')
+    lines.extend(["", "## Outstanding dependencies", ""])
+    lines.extend(f"- {dependency}" for dependency in report["outstanding_dependencies"])
+    lines.extend(f"- {error}" for error in report["source_errors"])
+    lines.extend(f'- {item["category"]} {item["id"]}: {", ".join(item["errors"])}'
+                 for item in report["invalid_metadata"])
+    return "\n".join(lines) + "\n"
+
+
+def print_strategy(path, output):
+    try:
+        data = load_canonical(path)
+    except (OSError, ValueError) as error:
+        matrix, report = strategic_coverage({}, read_error=f"cannot read {path}: {error}")
+    else:
+        matrix, report = strategic_coverage(data)
+    if output == "markdown":
+        print(render_strategy_markdown(matrix, report), end="")
+    else:
+        if output == "json":
+            matrix["outstanding_dependencies"] = report["outstanding_dependencies"]
+            matrix["source_errors"] = report["source_errors"]
+            matrix["invalid_metadata"] = report["invalid_metadata"]
+        print(json.dumps(report if output == "report" else matrix, indent=2))
+    return int(report["result"] == "FAIL")
+
+
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    path = args[0] if args else DEFAULT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("path", nargs="?", default=DEFAULT)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--register", action="store_true")
+    mode.add_argument("--strategy-matrix", choices=("markdown", "json"))
+    mode.add_argument("--strategy-report", action="store_true", help="emit diagnostic JSON")
+    args = parser.parse_args()
+    path = args.path
+    if args.strategy_matrix or args.strategy_report:
+        return print_strategy(path, args.strategy_matrix or "report")
     errors = validate(path)
     for e in errors:
         print("ERROR:", e)
@@ -239,7 +426,7 @@ def main():
     print("cards.json: %d cards, %d CAPS, %d starter decks: %s" % (
         len(d.get("cards", {})), len(d.get("caps", {})), len(d.get("starters", {})),
         "VALID" if not errors else "%d error(s)" % len(errors)))
-    if not errors and "--register" in sys.argv:
+    if not errors and args.register:
         reg = register(path)
         print("\nOpen implementation gaps declared by the records:")
         for cid, why in reg["divergent"]:

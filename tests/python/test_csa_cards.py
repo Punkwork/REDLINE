@@ -2,7 +2,7 @@
 
     python3 -m unittest tests/python/test_csa_cards.py -v
 """
-import copy, json, os, sys, tempfile, unittest
+import copy, json, os, subprocess, sys, tempfile, unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(ROOT, "tools", "csa"))
@@ -15,6 +15,136 @@ with open(V.DEFAULT, encoding="utf-8") as f:
 # CSA-04h: cards with no traceable decision ID after the backfill. Shrink this list as IDs are found;
 # a new card record without a decision fails test_every_card_cites_a_decision.
 NO_DECISION_YET = set()   # DSY-CARDS-001 (2026-11-28) approved the last six; every card now cites a decision
+
+
+class StrategicCoverage(unittest.TestCase):
+    def setUp(self):
+        self.data = {
+            "cards": {
+                "MULTI": {"strategy": {"recursion": ["payoff"], "momentum": ["support", "enabler"]}},
+                "MISSING": {"status": {"design": "approved"}, "decisions": ["DSY-004"]},
+                "EMPTY": {"strategy": {}},
+                "GENERAL": {"strategy": {}},
+            },
+            "caps": {"SINGLE": {"strategy": {"momentum": ["enabler"]}}},
+        }
+        self.reviewed = {("CARDS", "MULTI"), ("CARDS", "GENERAL"), ("CARDS", "MISSING")}
+
+    def test_metadata_validation(self):
+        self.assertEqual(V.strategy_errors({"momentum": ["enabler"]}), [])
+        self.assertEqual(V.strategy_errors(self.data["cards"]["MULTI"]["strategy"]), [])
+        for strategy, message in [
+            (None, "must be an object"),
+            ([], "must be an object"),
+            ({"other": ["enabler"]}, "unknown strategy family"),
+            ({"momentum": ["other"]}, "unknown strategy role"),
+            ({"momentum": [{}]}, "unknown strategy role"),
+            ({"momentum": ["support", "support"]}, "duplicate strategy role"),
+            ({"momentum": "enabler"}, "non-empty array"),
+            ({"momentum": []}, "non-empty array"),
+        ]:
+            with self.subTest(strategy=strategy):
+                self.assertIn(message, " ".join(V.strategy_errors(strategy)))
+
+    def test_projection_and_diagnostic(self):
+        matrix, report = V.strategic_coverage(self.data, reviewed=self.reviewed)
+        self.assertEqual(report["canonical_totals"], {"CARDS": 4, "CAPS": 1, "GHOSTWARE": None})
+        self.assertEqual(report["classification_counts"], {
+            "reviewed": 1, "general_purpose": 1, "provisional": 1, "unreviewed": 2, "invalid": 0,
+        })
+        self.assertEqual(report["reviewed_records"], 2)
+        self.assertEqual(report["unreviewed_records"], 3)
+        self.assertEqual(report["classified_records"], 2)
+        self.assertEqual(report["result"], "PASS")
+        self.assertIn("CSA-07", " ".join(report["outstanding_dependencies"]))
+        self.assertEqual(len(report["coverage_gaps"]), 29)
+        self.assertEqual(len(matrix["cells"]), 32)
+        self.assertEqual({(cell["family"], cell["role"]) for cell in matrix["cells"]},
+                         {(family, role) for family in V.STRATEGY_FAMILIES for role in V.STRATEGY_ROLES})
+        self.assertEqual({
+            (cell["family"], cell["role"]): [(item["category"], item["id"], item["state"])
+                                           for item in cell["entries"]]
+            for cell in matrix["cells"] if cell["entries"]
+        }, {
+            ("momentum", "enabler"): [("CARDS", "MULTI", "reviewed"), ("CAPS", "SINGLE", "provisional")],
+            ("momentum", "support"): [("CARDS", "MULTI", "reviewed")],
+            ("recursion", "payoff"): [("CARDS", "MULTI", "reviewed")],
+        })
+        records = {record["id"]: record for record in matrix["records"]}
+        self.assertIsNone(records["MISSING"]["strategy"])
+        self.assertEqual(records["EMPTY"]["strategy"], {})
+        self.assertEqual(records["EMPTY"]["state"], "unreviewed")
+        self.assertEqual(records["GENERAL"]["state"], "general_purpose")
+        matrix["cells"][0]["entries"].pop()
+        self.assertFalse(V.matrix_is_consistent(matrix["cells"], matrix["records"]))
+        fixture_only, _ = V.strategic_coverage(self.data)
+        self.assertEqual(fixture_only["cells"][0]["entries"][0]["state"], "provisional")
+
+    def test_determinism(self):
+        matrix, report = V.strategic_coverage(self.data, reviewed=self.reviewed)
+        reordered = json.loads(json.dumps(self.data, sort_keys=True))
+        reordered["cards"]["MULTI"]["strategy"]["momentum"].reverse()
+        next_matrix, next_report = V.strategic_coverage(reordered, reviewed=self.reviewed)
+        self.assertEqual(json.dumps((matrix, report)), json.dumps((next_matrix, next_report)))
+        self.assertEqual(V.render_strategy_markdown(matrix, report),
+                         V.render_strategy_markdown(next_matrix, next_report))
+
+    def test_missing_sources_and_invalid_metadata(self):
+        del self.data["caps"]
+        self.data["cards"]["MULTI"]["strategy"] = None
+        matrix, report = V.strategic_coverage(self.data)
+        self.assertEqual(report["result"], "FAIL")
+        self.assertEqual(set(report["checks"].values()), {"FAIL"})
+        self.assertIn("CAPS", report["source_errors"][0])
+        self.assertEqual(report["invalid_metadata"], [
+            {"category": "CARDS", "id": "MULTI", "errors": ["strategy must be an object"]},
+        ])
+        self.assertTrue(all(not cell["entries"] for cell in matrix["cells"]))
+
+    def test_future_ghostware_source(self):
+        self.data["ghostware"] = {"SINGLE": {"strategy": {"recursion": ["bridge"]}}}
+        matrix, report = V.strategic_coverage(self.data, reviewed={("GHOSTWARE", "SINGLE")})
+        self.assertEqual(report["canonical_totals"]["GHOSTWARE"], 1)
+        self.assertEqual(report["classification_counts"]["reviewed"], 1)
+        self.assertNotIn("CSA-07", " ".join(report["outstanding_dependencies"]))
+        self.assertEqual(matrix["cells"][15]["entries"], [
+            {"category": "GHOSTWARE", "id": "SINGLE", "state": "reviewed"},
+        ])
+
+    def test_cli_and_live_data(self):
+        command = [sys.executable, V.__file__]
+        result = subprocess.run([*command, "--strategy-report"], capture_output=True, text=True)
+        report = json.loads(result.stdout)
+        self.assertEqual(result.returncode, int(report["result"] == "FAIL"))
+        self.assertEqual(report["canonical_totals"]["CARDS"], len(LIVE["cards"]))
+        self.assertEqual(report["canonical_totals"]["CAPS"], len(LIVE["caps"]))
+        for output in ("markdown", "json"):
+            result = subprocess.run([*command, "--strategy-matrix", output],
+                                    capture_output=True, text=True)
+            if output == "json":
+                self.assertEqual(len(json.loads(result.stdout)["cells"]), 32)
+            else:
+                self.assertEqual(sum(result.stdout.count(f"| {family} |")
+                                     for family in V.STRATEGY_FAMILIES), 32)
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "missing.json")
+            result = subprocess.run([*command, "--strategy-report", path], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("cannot read", json.loads(result.stdout)["source_errors"][0])
+            with open(path, "w", encoding="utf-8") as source:
+                source.write('{"cards": {}, "cards": {}}')
+            result = subprocess.run([*command, "--strategy-report", path], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("duplicate key", json.loads(result.stdout)["source_errors"][0])
+            with open(path, "w", encoding="utf-8") as source:
+                self.data["caps"]["SINGLE"]["strategy"] = {"momentum": []}
+                json.dump(self.data, source)
+            result = subprocess.run([*command, "--strategy-report", path], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1)
+            report = json.loads(result.stdout)
+            self.assertEqual(report["checks"]["strategy_metadata"], "FAIL")
+            self.assertEqual(report["checks"]["canonical_sources"], "PASS")
+            self.assertEqual(report["invalid_metadata"][0]["id"], "SINGLE")
 
 
 class LiveFile(unittest.TestCase):

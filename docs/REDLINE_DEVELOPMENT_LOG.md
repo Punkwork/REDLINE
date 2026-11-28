@@ -404,3 +404,9 @@ CSA-02 plan elements 3 and 4, kept in CSA-04 by the designer (06:35).
 
 ## 2026-11-28 — UI-PROTOCOL-001: Active Protocol display (ChatGPT)
 Designer approved unlimited active Protocols, paperclip panel and vertical overflow. Updated Core Rules, UI Design Bible, Master Design and HANDOFF; implementation/acceptance scope recorded in [issue #26](https://github.com/Punkwork/REDLINE/issues/26). Documentation only; no Godot changes, tests or release. Repository-wide dependency reconciliation and runtime validation remain open for Claude Code. Interpretations to confirm: animation, duplicate icon grouping and exact frame scrolling treatment not approved.
+
+## 2026-11-28 — STRATEGY-001: isolated Strategic Coverage Matrix (Codex)
+
+Added on-demand Markdown and JSON matrix generation and a JSON diagnostic to `tools/csa/validate_cards.py`. The canonical inventory contains 127 CARDS and five CAPS, all unreviewed for strategy. GHOSTWARE coverage is incomplete pending CSA-07. Diagnostic PASS covers source availability for the current catalog, metadata shape and matrix consistency. See [Issue #25](https://github.com/Punkwork/REDLINE/issues/25) for commands, commit and test evidence.
+
+Interpretations to confirm. A populated strategy without review evidence is provisional. An empty object without review evidence stays unreviewed. Synthetic tests supply typed record IDs to exercise reviewed and general-purpose states until revision-specific approvals are defined.
