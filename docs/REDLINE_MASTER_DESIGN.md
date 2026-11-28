@@ -3996,3 +3996,8 @@ Designer explicitly approved unlimited simultaneously active Protocols, the pape
 ## STRATEGY-001 — Isolated Strategic Coverage Matrix (2026-11-28)
 
 The designer authorized Codex to implement the additive strategy metadata checks and on-demand matrix and diagnostic report within the existing CSA Python tooling for [Issue #25](https://github.com/Punkwork/REDLINE/issues/25). Optional `strategy` metadata maps the approved families to one or more approved roles per family. Empty cells indicate design opportunities. Reviewed states use synthetic evidence in tests while the revision-specific approval contract is pending. The isolated authorization excludes production classifications, lifecycle enforcement, mandatory build blocking and GHOSTWARE canonicalization.
+
+
+## EFFECT-REPEAT-001 — ECHO (APPROVED, designer 2026-11-28)
+
+Designer approved the universal distinction between repeating an effect and playing a card, including the explicit Protocol trigger boundary, and requested immediate incorporation into Core Rules. Canonical definition: `REDLINE_CORE_RULES.md`, EFFECT-REPEAT-001. REPRISE is the first application. Documentation approval does not establish runtime parity; card-specific revisions remain in the separate consolidated card review.

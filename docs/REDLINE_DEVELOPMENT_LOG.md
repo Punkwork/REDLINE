@@ -420,3 +420,8 @@ Brief from the designer (07:38; issue #26). Commit `0b80808`.
 - **Tests.** New `test_ui_protocol_001` 130/0 (mechanics, the ten cards, two- and three-layer fixtures, LOCKDOWN, early exit, fatal PARTING SHOT, card conservation, rewards) and `test_ui_protocol_note` 56/0 (zero/one/many/overflow, every icon reachable and inspected, adjacent parts unmoved, reset). New fixture `shot_ui_protocol_001` (6 shots). Updated: `test_arch_v2_coverage` 511/0 (header rack rows), `test_csa_cards` 548/0 (playtest cards in the pools), Python 84/0. Unchanged: test_game 453/0 (433 before: more built cards), adp 17/0, signal_carbon 682/0, ICE 207/0, batch3 125/0, batch4 76/0, app 33/0, parity 4,029/0, spec PROBE 32/0, BURNED 29/0, PIVOT 54/0, typo 172/0, inspector 59/0, PT13 10/0, CSA-04 47/0. Fixtures: `shot_arch_v2_ice` 42, CRED 4/0, typography 32 PASS.
 - **Docs.** Playtest checklist *Protocols* PR-1–PR-10, playtest guide, Card Pools pricing note, VAS asset spec note; Master Design's old lifecycle line marked historical; the coverage table and `ENCOUNTER_COVERAGE.md` were regenerated.
 - **Interpretations to confirm:** listed in HANDOFF (UI-PROTOCOL-001). No build cut.
+
+
+## 2026-11-28 — EFFECT-REPEAT-001: ECHO approved (ChatGPT)
+
+Designer approved the universal effect-repetition distinction and explicit Protocol trigger boundary, requesting immediate Core Rules commit. Canonical definition in Core Rules; approval recorded in Master Design and implementation validation in HANDOFF. Existing Rustler name ECHO retained; mechanic distinguished in context. Documentation only; no runtime, CardDB, release or test changes. Runtime parity not verified.

@@ -578,3 +578,16 @@ Confirms PROBE-004 and extends its authoritative wording across Architecture V2,
 
 ## Protocol lifecycle clarification (§3.1; UI-PROTOCOL-001, approved 2026-11-28)
 The active RACK has no capacity limit and consumes no RAM. Deployed Protocols remain outside card circulation until expiry; each copy retains its independent effect. Per PROTOCOL-DURATION-001/a/b, effects remain active through final DEADLOCK, BREACH, permitted remaining Runner actions, END TURN and PARTING SHOT. After resolution and survival confirmation, expire to discard exactly once before encounter progression or completion rewards; fatal PARTING SHOT grants no successful completion rewards. Apply cleanup on normal progression, forced LOCKDOWN and early exit. Programs and RAM persist within the node; next node draws from compiled deck. Presentation authority: UI Design Bible, UI-PROTOCOL-001.
+
+
+## EFFECT-REPEAT-001 — ECHO (APPROVED, 2026-11-28)
+
+An **ECHO** repeats a previously played card's mechanical effect without playing that card again. This is a universal effect-repetition rule, distinct from the Rustler named ECHO.
+
+- The card initiating the ECHO is one normal card play; the repeated effect emits no additional card-play event, inherits no original mechanical tags, and increments no original card-play or tag-specific counters.
+- Protocols and other effects responding to card plays or played-card tags do not trigger from the ECHO itself.
+- Do not charge the original card's BW cost again. Retain associated penalties and consequences; reevaluate conditional effects and targeting requirements.
+- Legitimate downstream gameplay events still occur: for example, a first ZEROED event can trigger FEEDBACK LOOP, and the first DEADLOCK fully broken that turn can trigger SALVAGE. These are event triggers, not card-play triggers.
+- Recovering a card and subsequently playing it is a separate operation and generates a normal card-play event.
+
+REPRISE is the first approved application; its card-specific eligibility and targeting restrictions are separate from this universal rule.
