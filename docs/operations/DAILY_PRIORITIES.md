@@ -161,3 +161,17 @@ Pending designer confirmation. Evidence: [ChatGPT review](reports/2026-11-27-Cha
 | 6 | OPS-001 / DOCS-MIG-001 / UI-BIBLE-001; #13–20/#22/#23 | Claude Code + designer | Validate migration evidence before closure; reconcile issue evidence and supersession; recheck #16 against new PROBE; missing reports and release tag; decide legacy branch disposition. No closure/settings changes without authorization. |
 
 No new approvals or implementation authorized by this proposal. Preserve existing decisions and shared native issue register.
+
+
+## 2026-11-28 — Designer-confirmed agenda (2026-11-27, 22:57 Toronto)
+
+OPS-001 — Designer explicitly confirms the November 28 proposed agenda above, in this exact order:
+
+1. Representative ICE Encounter
+2. Canonical Source Architecture
+3. Typography and Motion Design System
+4. Protocol and Script playtest development
+5. Uplink and map integration
+6. Repository governance and documentation
+
+Retain the proposed agenda's owners, dependencies, blockers and decision gates. Confirmation establishes priority order only; it does not authorize new implementation, approvals, merges, branches, releases or issue closures beyond existing authorization. UI-BIBLE-001 / DOCS-MIG-001 remain open for review validation. All agents use this shared record on architecture-v2 (ARCH-V2-002).
