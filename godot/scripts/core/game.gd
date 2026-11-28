@@ -156,8 +156,9 @@ const MAP_DATA := "res://data/maps/map003_v5.json"
 ## ICE Nodes take the slice's encounters (an interpretation until the HALCYON Node content is placed):
 ## row 1 is the Opening Node (COOKIE BANNER); later ICE Nodes and the MINIBOSS cycle the four other
 ## slice encounters by row and position; the BOSS is TERMS & CONDITIONS, the central Node. Uplinks and
-## SAFEHOUSEs are playable; DEAD DROP, CONSOLE LAB and SIGNAL Nodes are shown but not built (entering
-## one passes straight through). One layer each for now (the 2- and 3-layer Nodes are queued).
+## SAFEHOUSEs are playable; DEAD DROP, CONSOLE LAB and SIGNAL Nodes open their painted room with only a
+## way out (services not built). Layers (designer 2026-11-28 09:36 / 10:13): the ICE Nodes of row 9,
+## which every route crosses, have 2 layers; the BOSS has 3; the rest 1.
 func use_generated_map(k: int) -> void:
 	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(MAP_DATA))
 	if not data is Dictionary or data.get("maps", []).is_empty():
@@ -184,12 +185,13 @@ func use_generated_map(k: int) -> void:
 					n.kind = "ICE"
 					n.name = String(src.name)
 					n.layers = (src.layers as Array).duplicate(true)
+					if ri == 8:   # row 9: 2 layers
+						n.layers.append(later[(ri + i + 1) % later.size()].layers[0].duplicate(true))
 					if t == "MINIBOSS": n["miniboss"] = true
-				"BOSS":
-					var src: Dictionary = IceDB.MAP[3][0]
+				"BOSS":   # 3 layers: CONSENT WALL, DOORBELL, then TERMS & CONDITIONS
 					n.kind = "ICE"
-					n.name = String(src.name)
-					n.layers = (src.layers as Array).duplicate(true)
+					n.name = String(IceDB.MAP[3][0].name)
+					n.layers = [later[1].layers[0].duplicate(true), later[2].layers[0].duplicate(true), later[3].layers[0].duplicate(true)]
 					n["central"] = true
 				"UPLINK": n.name = "BLACK MARKET UPLINK"
 				"SAFEHOUSE": n.name = "SAFEHOUSE"
@@ -208,9 +210,10 @@ func enter_node(index: int) -> void:
 		entered_corp = true
 		_event("EV-03", {"corp": "HALCYON"})
 	if node.get("unbuilt", false):
-		# Not built in this slice (DEAD DROP, CONSOLE LAB, SIGNAL): pass straight through.
-		_say("%s: not in this build. You pass through." % node.name)
-		_complete_map_step()
+		# DEAD DROP, CONSOLE LAB, SIGNAL (designer 2026-11-28 10:13: "rooms with backgrounds only"): the
+		# painted room and a way out; their services (Core Rules §8.3) aren't built yet.
+		phase = "NODE_ROOM"
+		_say("%s: services not in this build." % node.name)
 		return
 	if node.kind == "UPLINK":
 		# UPLINK-SPEC-001: stock on entry, no combat turn or reshuffle; leave_uplink() goes back to the map.
@@ -224,6 +227,10 @@ func enter_node(index: int) -> void:
 		_say("SAFEHOUSE. Choose: heal %d VITAE, or a PATCHWORK upgrade (not in this slice)." % SAFEHOUSE_HEAL)
 		return
 	_start_ice_node()
+
+func leave_room() -> void:
+	if phase != "NODE_ROOM": return
+	_complete_map_step()
 
 func leave_uplink() -> void:
 	if phase != "UPLINK": return
@@ -669,24 +676,25 @@ func _play_card(uid: int, target: int, mode: String) -> bool:
 		return false
 	var inst := _find(hand, uid)
 	var d := CardDB.def(inst.id)
-	if d.get("target", false) and (target < 0 or target >= enc.ice.size()):
+	var td := play_def(inst.id)   # targeting: REPRISE takes its SCRIPT's target and mode, chosen fresh
+	if td.get("target", false) and (target < 0 or target >= enc.ice.size()):
 		_say("Choose an ICE for %s." % d.name)
 		return false
-	if d.has("target_type") and ice_definition(enc.ice[target]).type != d.target_type:
-		_say("%s needs a %s." % [d.name, d.target_type])
+	if td.has("target_type") and ice_definition(enc.ice[target]).type != td.target_type:
+		_say("%s needs a %s." % [d.name, td.target_type])
 		return false
-	if d.has("target_types") and not d.target_types.has(ice_definition(enc.ice[target]).type):
+	if td.has("target_types") and not td.target_types.has(ice_definition(enc.ice[target]).type):
 		_say("Choose a FORTRESS or VOID for %s." % d.name)
 		return false
-	if d.has("breaker") and d.breaker.get("same_ice", false) and (target < 0 or _breaker_targets(d.breaker, target).is_empty()):
+	if td.has("breaker") and td.breaker.get("same_ice", false) and (target < 0 or _breaker_targets(td.breaker, target).is_empty()):
 		_say("Choose an ICE at STR 0." if d.breaker.has("max_str") else "Choose an ICE with 5 or more virus counters.")
 		return false
 	for part_id in d.get("compiled", []):
 		var part := CardDB.def(part_id)
 		if part.has("target_types") and not part.target_types.has(ice_definition(enc.ice[target]).type): return false
 		if part.has("target_type") and part.target_type != ice_definition(enc.ice[target]).type: return false
-	if d.has("modes"):
-		if mode == "": mode = String(d.modes[0].id)
+	if td.has("modes"):
+		if mode == "": mode = String(td.modes[0].id)
 		if not play_modes(inst.id, target).has(mode):
 			_say("Nothing hidden to reveal." if mode == "reveal" else "%s can't do that here." % d.name)
 			return false
@@ -695,7 +703,7 @@ func _play_card(uid: int, target: int, mode: String) -> bool:
 		_say("Need %d BW" % paid)
 		return false
 	_take_from(hand, uid)
-	if d.has("modes"): inst["mode"] = mode
+	if td.has("modes"): inst["mode"] = mode
 	inst["previous_tags"] = enc.get("last_tags", []).duplicate()
 	inst["chain_active"] = enc.get("last_tags", []).has(d.get("chain", ""))
 	enc["last_tags"] = d.tags.duplicate()
@@ -738,6 +746,8 @@ func _play_card(uid: int, target: int, mode: String) -> bool:
 				_resume_compiled()
 				return true
 			var burn := _resolve_script(inst, target)
+			if burn and String(enc.get("last_script", {}).get("id", "")) == String(inst.id):
+				enc.last_script["burned"] = true   # REPRISE can't repeat a BURNED SCRIPT (CARD-REVIEW-001)
 			if pending.is_empty() or pending.get("card_uid", -1) != uid:
 				if burn:
 					burned.append(inst)
@@ -822,26 +832,27 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 			if int(enc.get("cards_turn", 0)) - 1 >= CardDB.param("AFTERBURN", "others"):
 				shield += CardDB.param("AFTERBURN", "shield")
 		"REPRISE":
-			# Repeats the previous SCRIPT's effect, not its play: no card-play triggers, no PROBE count,
-			# the same target and mode. Interactive effects park their source, as COMPILED parts do.
-			var last: Dictionary = enc.get("last_script_before", {})
+			# CARD-REVIEW-001 / EFFECT-REPEAT-001 ECHO, designer ruling 2026-11-28 09:33: repeat the previous
+			# SCRIPT's effect (not its play) with a fresh legal target and mode; conditions read now; its
+			# penalties (+TRACE) apply again; a repeated PROBE counts as another PROBE on that ICE. No BW
+			# charge, no card-play triggers, no tag counters. Interactive effects park their source, as
+			# COMPILED parts do.
+			var src := String(enc.get("last_script_before", {}).get("id", ""))
 			var part := inst.duplicate()
-			part.id = String(last.get("id", ""))
-			part["mode"] = String(last.get("mode", ""))
-			part["reprise"] = true   # previous_tags stay REPRISE's own: conditions read the board now
-			var t: int = enc.ice.find(last.get("ice_ref")) if last.get("ice_ref") != null else -1
-			if CardDB.def(part.id).get("target", false) and t < 0:
-				_say("REPRISE: the target is gone; nothing happens.")
-				return false
-			_say("REPRISE: %s again." % CardDB.def(part.id).name)
-			_resolve_script(part, t)
+			part.id = src
+			part["mode"] = String(inst.get("mode", ""))
+			part["reprise"] = true
+			var sd := CardDB.def(src)
+			_say("REPRISE: %s again." % sd.name)
+			if int(sd.get("trace_cost", 0)) > 0: add_trace(int(sd.trace_cost), false)
+			_resolve_script(part, target)
 			_take_from(discard, inst.uid); _take_from(burned, inst.uid)
 			if not pending.is_empty() and pending.get("card_uid", -1) == inst.uid:
 				discard.append(inst)   # the choice is open; REPRISE itself is already in the discard pile
 		"PROBE":
 			# PROBE-004a: choose one. Both modes add to the same per-ICE, per-turn count (PROBE-003, Q6).
-			# A REPRISE repeats the effect, not the play, so it doesn't add to the count.
-			if not inst.get("reprise", false): _probe_count_add(target)
+			# A REPRISE of PROBE counts as another PROBE on that ICE (designer 2026-11-28 09:33).
+			_probe_count_add(target)
 			if String(inst.get("mode", "weaken")) == "reveal":
 				_probe_reveal_all(target)
 			else:
@@ -1147,7 +1158,7 @@ func play_modes(id: String, target: int) -> Array:
 	## The modes card `id` may be played in against ICE `target`, in card order; [] for cards without
 	## modes. PROBE-004a: "weaken" (−2 STR) on any ICE; "reveal" only on a VOID with hidden subroutines.
 	## Labels live in cards.json ("modes"); legality lives here.
-	var d := CardDB.def(id)
+	var d := play_def(id)
 	if not d.has("modes") or target < 0 or target >= enc.get("ice", []).size():
 		return []
 	var out := []
@@ -2098,11 +2109,26 @@ func _expire_protocols() -> void:
 func target_ice_ref(target: int) -> Variant:
 	return enc.ice[target] if target >= 0 and target < enc.ice.size() else null
 
-## REPRISE: the SCRIPT it would repeat now, or "" (none this turn, a COMPILED card, or another REPRISE).
+## REPRISE: the SCRIPT it would repeat now, or "" when the previous SCRIPT this turn is missing, a
+## COMPILED card, another REPRISE or BURNED (CARD-REVIEW-001: never skip back to an earlier SCRIPT).
 func reprise_source() -> String:
 	if enc.is_empty(): return ""
-	var id := String(enc.get("last_script", {}).get("id", ""))
-	return "" if id == "REPRISE" else id
+	var last: Dictionary = enc.get("last_script", {})
+	var id := String(last.get("id", ""))
+	return "" if id == "REPRISE" or last.get("burned", false) else id
+
+## The definition that decides a card's targeting and modes: REPRISE takes its SCRIPT's (CARD-REVIEW-001).
+func play_def(id: String) -> Dictionary:
+	var d := CardDB.def(id)
+	if id != "REPRISE": return d
+	var src := reprise_source()
+	if src == "": return d
+	var out := d.duplicate()
+	var sd := CardDB.def(src)
+	for k in ["target", "target_type", "target_types", "breaker", "modes"]:
+		if sd.has(k): out[k] = sd[k]
+	out["reprise_of"] = src
+	return out
 
 ## SYNERGY-PLAYTEST-002 card-play triggers of the active Protocols. Each deployed copy fires on its own;
 ## a Protocol never fires for its own deployment (it joins the RACK during the play, so it is skipped).

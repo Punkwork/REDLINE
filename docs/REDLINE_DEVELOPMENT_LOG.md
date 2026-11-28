@@ -492,3 +492,12 @@ Brief from the designer (09:51); handoff in `67099c1`.
 ## 2026-11-28 — CARD-REVIEW-001 Generalist starter review (ChatGPT)
 
 Eight unique starter cards approved; canonical flavor/strategy recorded, GHOST SIGNAL 1 BW, VOID ICEPICK approved reveal recorded as divergent. Core Rules cost reconciled. HANDOFF queues engine reconciliation and existing acceptance checks. No runtime tests run by ChatGPT; no release.
+
+## 2026-11-28 — REPRISE, multi-layer Nodes, Ghostware records, Node rooms (Claude Code)
+
+Designer, 10:13: REPRISE change approved, 2- and 3-layer Nodes approved as is, a canonical database for Ghostware, and DEAD DROP / Console Lab / SIGNAL as rooms with backgrounds only. The backgrounds were already in the repo.
+- **REPRISE.** `Game.play_def` gives REPRISE its previous SCRIPT's targeting and modes, chosen fresh. A BURNED previous SCRIPT blocks it (`last_script.burned`). The SCRIPT's +TRACE applies again, and a repeated PROBE adds to the PROBE count. The V2 card model and the mode keys read `play_def`. REPRISE's `cards.json` record is aligned (text "ECHO the previous SCRIPT played this turn.", implemented).
+- **Ghostware.** `cards.json` `ghostware` has 41 records (general 24 incl. the four Deck Synergy ones, reserve 4, HALCYON / IRONWATCH / LUCIDA 3 each, 4 ORIGINs) with set, effect, drawback, price (P5-008) and status/decisions. `validate_cards.py` checks them. `CardDB.GHOSTWARE` and `ghostware_for_sale()` read them, and `UplinkVisit` stocks and sells them. Only HEARTBEAT, MINIMAL INSTALL, ONE-TRICK and the ORIGINs have engine effects, so only those three are for sale.
+- **Map.** Row 9's ICE Nodes have 2 layers and the BOSS 3. Unbuilt Nodes enter `NODE_ROOM` (`NodeRoomScreen`: painted room, name, LEAVE).
+- **Tests:** test_uplink_map 291/0 (layers, rooms, Ghostware stock and purchase), test_ui_protocol_001 135/0 (REPRISE: fresh target, penalties, BURNED source, PROBE modes and count, conservation), test_map_uplink_ui 17/0, Python 86. Unchanged: test_game 453/0, app 33/0, parity 3,997/0, csa_cards 548/0, CORTEX 26/0, every other suite 0 failed. Fixtures: shot_node_map 5 (3 rooms added), shot_uplink_room 3, shot_arch_v2_ice 42, shot_ui_protocol_001 6.
+- **Missing art:** HEARTBEAT, MINIMAL INSTALL, ONE-TRICK have no GW_ icons (initials shown). No release.

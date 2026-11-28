@@ -19,9 +19,9 @@ const KIND_COL := {"ICE": Color("#C8452F"), "UPLINK": Color("#2E8C8A"), "SAFEHOU
 const KIND_TEXT := {"ICE": "ICE Node: an encounter with the corporation's ICE.",
 	"UPLINK": "Black Market Uplink: buy cards and CAPS; the Clinic removes CORTEX.",
 	"SAFEHOUSE": "SAFEHOUSE: recover VITAE.",
-	"DEAD DROP": "DEAD DROP: not in this build; you pass straight through.",
-	"CONSOLE LAB": "Console Lab: not in this build; you pass straight through.",
-	"SIGNAL": "SIGNAL (unclear): not in this build; you pass straight through."}
+	"DEAD DROP": "DEAD DROP: its services are not in this build yet.",
+	"CONSOLE LAB": "Console Lab: its services are not in this build yet.",
+	"SIGNAL": "SIGNAL (unclear): its services are not in this build yet."}
 
 var game: Game
 var stage: Control

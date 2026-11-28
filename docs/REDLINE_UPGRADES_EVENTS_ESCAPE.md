@@ -90,6 +90,9 @@ FUSE is a special PATCHWORK that combines **2 copies of the same SCRIPT** into *
 ## 2. GHOSTWARE
 
 ### 2.1 Rules
+
+*Canonical records (CSA-07, 2026-11-28): every Ghostware below has one record in `godot/data/cards.json` (`ghostware`): name, set, effect, drawback, price (P5-008), status and decisions. Change a Ghostware there and here together.*
+
 - Ghostware is **permanent for the run**. There's **no limit** on how many you can have (stacking is supported; see the existing synergy principle).
 - **Payload (Central Node):** choose **1 of 3**: **1 from the corporation's own set** + **2 from the general pool**. The chosen Ghostware is **active immediately**, including during the escape (P5-009; see §2.5).
 - Some Ghostware has a **drawback** alongside its benefit; the drawback is shown in red on the rack.

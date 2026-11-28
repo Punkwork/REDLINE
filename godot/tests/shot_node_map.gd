@@ -2,6 +2,7 @@ extends SceneTree
 ## MAP-003f: captures of the V2 map board for designer review, to SHOT_DIR:
 ##   map_01_start     a new run: row 1 open
 ##   map_02_midrun    after three Nodes: the walked path, the next choices open, a Node inspected
+##   room_dead_drop, room_console_lab, room_signal   the three Node rooms (painted room and LEAVE only)
 var out := ""
 var shots := 0
 
@@ -36,6 +37,7 @@ func run() -> void:
 		match g.phase:
 			"UPLINK": g.leave_uplink()
 			"SAFEHOUSE": g.safehouse_heal()
+			"NODE_ROOM": g.leave_room()
 			"MAP": pass
 			_:
 				if g.phase == "READY_RIG": g.skip_ready_rig()
@@ -45,5 +47,13 @@ func run() -> void:
 	p.grab_focus()
 	m.inspector.advance(0.5)
 	await shot("map_02_midrun")
+	m.queue_free()
+	var room := NodeRoomScreen.new()
+	root.add_child(room)
+	await frames()
+	for kind in ["DEAD DROP", "CONSOLE LAB", "SIGNAL"]:
+		g.node = {"kind": kind, "name": kind}
+		room.attach(g)
+		await shot("room_" + kind.to_lower().replace(" ", "_"))
 	print("NODE MAP screenshots: %d written" % shots)
 	quit()

@@ -242,7 +242,7 @@ static func card_model(game: Game, c: Dictionary, where: String = "hand") -> Dic
 	return {"uid": int(c.uid), "id": id, "name": String(im.name), "type": String(im.type), "classification": String(im.classification),
 		"tags": im.tags, "bw": int(im.costs.bw), "cred": int(im.costs.cred), "trace": int(im.costs.trace),
 		"text": game.card_text(id) if game.has_method("card_text") else String(im.rules),
-		"target": bool(CardDB.def(id).get("target", false)), "playable": bool(play.get("ok", false)), "reason": String(play.get("reason", "")),
+		"target": bool(game.play_def(id).get("target", false)), "playable": bool(play.get("ok", false)), "reason": String(play.get("reason", "")),
 		"art": String(im.art),
 		"flavor": String(im.flavour),   # UI-INSPECTOR-001: subordinate flavour line
 		"cached": bool(c.get("cached", false)), "cache_turns": int(c.get("cache_turns", 0))}

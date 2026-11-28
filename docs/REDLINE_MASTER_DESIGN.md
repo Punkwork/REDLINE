@@ -4046,3 +4046,8 @@ Designer reconfirmed three upright CAP vials side by side in a wall-mounted thre
 ## CARD-REVIEW-001 — Generalist starter review (2026-11-28, designer / ChatGPT)
 
 Designer approved all eight unique starter definitions (19 of 127 reviewed); deck composition unchanged. Canonical flavor and strategic roles are in CardDB. GHOST SIGNAL cost 2 → 1 BW, existing effect and BURNED unchanged. VOID ICEPICK retains all existing costs and STR; whenever it successfully breaks a subroutine, reveal the next remaining concealed subroutine on that same ICE in resolution order, no effect if none remain. VOID ICEPICK remains explicitly divergent until engine/data reconciliation. Other six cards unchanged mechanically. CORTEX BUFFER prevents both consequences of a prevented point under CORTEX-001. BASIC EXTRACTOR remains 3 CRED. No new cards or pools. Designer approved GHOST SIGNAL cost explicitly. Existing STRATEGY-001 / CSA revision-specific acceptance remains required.
+
+## Approvals and requests, designer 2026-11-28 10:13
+
+**Designer:** "Reprise change approved, 2 & 3 layer nodes approved as is. We need a canonical database for ghostware. Dead drop, console lab and signal backgrounds are in backgrounds folder on my pc"; asked for those three Nodes as "rooms with backgrounds only". Recorded: the REPRISE change (09:33 ruling) and the 2- and 3-layer HALCYON Nodes are approved for implementation; Ghostware gets canonical records (CSA-07 Ghostware, ahead of the rest of CSA-07); DEAD DROP, Console Lab and SIGNAL Nodes open their painted rooms, services not built. Built the same day; details and evidence in HANDOFF and the development log.
+

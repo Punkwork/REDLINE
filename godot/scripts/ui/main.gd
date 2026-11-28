@@ -26,6 +26,7 @@ var v2: IceEncounterSandbox
 ## MAP-003f / UPLINK-SPEC-001: the V2 map board and the Black Market Uplink room (built on first use).
 var node_map: NodeMapScreen
 var uplink_room: UplinkRoom
+var node_room: NodeRoomScreen   ## DEAD DROP / Console Lab / SIGNAL: painted room only (designer 2026-11-28)
 var use_v2 := true
 var _v2_refreshing := false
 var legacy_widgets: Array = []
@@ -544,9 +545,9 @@ func refresh() -> void:
 		_show_inspect("")
 
 	var map_active := use_v2 and g.phase == "MAP" and g.map_seed >= 0
-	var uplink_active := g.phase == "UPLINK"
+	var uplink_active := g.phase == "UPLINK" or g.phase == "NODE_ROOM"
 	_show_screens(map_active, uplink_active)
-	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE", "UPLINK"]
+	var friendly_active := not g.enc.is_empty() and g.phase not in ["SELECT", "MAP", "SAFEHOUSE", "DEAD", "SLICE_DONE", "UPLINK", "NODE_ROOM"]
 	var v2_active := friendly_active and v2 != null
 	if not v2_active:
 		_detect_tumbles()
@@ -600,6 +601,14 @@ func _show_screens(map_active: bool, uplink_active: bool) -> void:
 	if map_active and node_map == null:
 		node_map = NodeMapScreen.new(); node_map.name = "NodeMap"; add_child(node_map); move_child(node_map, overlay.get_index())
 		node_map.node_chosen.connect(func(idx): g.enter_node(idx); refresh())
+	var room_active := uplink_active and g.phase == "NODE_ROOM"
+	uplink_active = uplink_active and g.phase == "UPLINK"
+	if room_active and node_room == null:
+		node_room = NodeRoomScreen.new(); node_room.name = "NodeRoom"; add_child(node_room); move_child(node_room, overlay.get_index())
+		node_room.leave_requested.connect(func(): g.leave_room(); refresh())
+	if node_room:
+		node_room.visible = room_active
+		if room_active: node_room.attach(g)
 	if uplink_active and uplink_room == null:
 		uplink_room = UplinkRoom.new(); uplink_room.name = "UplinkRoom"; add_child(uplink_room); move_child(uplink_room, overlay.get_index())
 		uplink_room.leave_requested.connect(func(): g.leave_uplink(); refresh())

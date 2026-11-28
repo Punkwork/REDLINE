@@ -2809,10 +2809,10 @@
 			"tags": [],
 			"bw": 2,
 			"rarity": "RARE",
-			"text": "Repeat effect of previous SCRIPT played this turn.",
+			"text": "ECHO the previous SCRIPT played this turn.",
 			"status": {
 				"design": "playtest",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"SYNERGY-PLAYTEST-001",
@@ -2832,9 +2832,7 @@
 					"support",
 					"bridge"
 				]
-			},
-			"approved_text": "ECHO the previous SCRIPT played this turn.",
-			"divergence": "Approved ECHO allows new legal target and mode selection and prohibits BURNED sources; existing engine repeats same target/mode and requires eligibility and penalty validation. See CARD-REVIEW-001."
+			}
 		},
 		"KEYLOGGER": {
 			"name": "KEYLOGGER",
@@ -3158,5 +3156,586 @@
 			"BASIC-001",
 			"UPLINK-SPEC-001"
 		]
-	}
+	},
+	"ghostware": {
+		"SUBDERMAL_PLATING": {
+			"name": "SUBDERMAL PLATING",
+			"set": "GENERAL",
+			"text": "At the start of each Node, gain 6 SHIELD that lasts the whole Node (not just one turn).",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"NEURAL_BUFFER": {
+			"name": "NEURAL BUFFER",
+			"set": "GENERAL",
+			"text": "+6 Max VITAE (and heal 6).",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"EXPANDED_MEMORY": {
+			"name": "EXPANDED MEMORY",
+			"set": "GENERAL",
+			"text": "+1 RAM.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"OVERCLOCKED_BUS": {
+			"name": "OVERCLOCKED BUS",
+			"set": "GENERAL",
+			"text": "+1 BW on the first turn of each encounter.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"SPARE_SOCKET": {
+			"name": "SPARE SOCKET",
+			"set": "GENERAL",
+			"text": "+1 CAP slot. Gain a random common CAP at the start of each corporation.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"MONEY_MULE": {
+			"name": "MONEY MULE",
+			"set": "GENERAL",
+			"text": "Your Extractors extract 25% more CRED (rounded up).",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"SIGNAL_BOOSTER": {
+			"name": "SIGNAL BOOSTER",
+			"set": "GENERAL",
+			"text": "You can see what's inside SIGNAL UNCLEAR Nodes before choosing them.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"SCRAMBLED_ID": {
+			"name": "SCRAMBLED ID",
+			"set": "GENERAL",
+			"text": "The first TRACE strike in each corporation has no penalty (TRACE still drops to 20).",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"BLACK_MIRROR": {
+			"name": "BLACK MIRROR",
+			"set": "GENERAL",
+			"text": "+1 BW every turn.",
+			"drawback": "Start each corporation at 10 TRACE.",
+			"price": 75,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"BLEEDING_EDGE": {
+			"name": "BLEEDING EDGE",
+			"set": "GENERAL",
+			"text": "+1 DRAW every turn.",
+			"drawback": "−8 Max VITAE.",
+			"price": 75,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"BURNOUT_CHIP": {
+			"name": "BURNOUT CHIP",
+			"set": "GENERAL",
+			"text": "Your Icepicks have +2 STR.",
+			"drawback": "Whenever you take PULP damage, take 2 more.",
+			"price": 75,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"KILLSWITCH": {
+			"name": "KILLSWITCH",
+			"set": "GENERAL",
+			"text": "Once per Node, if damage would drop your VITAE to 0, it drops to 1 instead.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-010",
+				"P5-008"
+			]
+		},
+		"COLD_STORAGE": {
+			"name": "COLD STORAGE",
+			"set": "GENERAL",
+			"text": "CACHED cards cost 1 less BW.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"RECYCLER": {
+			"name": "RECYCLER",
+			"set": "GENERAL",
+			"text": "Whenever a card is BURNED, gain 1 BW (once per turn).",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"CHAOS_ENGINE": {
+			"name": "CHAOS ENGINE",
+			"set": "GENERAL",
+			"text": "Whenever you play your 4th card in a turn, draw 1.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"LUCKY_STRIKE": {
+			"name": "LUCKY STRIKE",
+			"set": "GENERAL",
+			"text": "Card rewards offer 4 cards instead of 3.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"FIRST_CONTACT": {
+			"name": "FIRST CONTACT",
+			"set": "GENERAL",
+			"text": "The first ICE you meet in each Node gets −2 STR.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"SLEEPER_AGENT": {
+			"name": "SLEEPER AGENT",
+			"set": "GENERAL",
+			"text": "At the start of each corporation, add a random rare card to your deck.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"LONG_MEMORY": {
+			"name": "LONG MEMORY",
+			"set": "GENERAL",
+			"text": "+2 RAM.",
+			"drawback": "Your first card each turn costs 1 more BW.",
+			"price": 75,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-003",
+				"P5-004",
+				"P5-008"
+			]
+		},
+		"DEAD_MANS_POCKET": {
+			"name": "DEAD MAN'S POCKET",
+			"set": "GENERAL",
+			"text": "Deferred: its HOLD enhancement is inactive under HAND-CLEANUP-001.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-004",
+				"DSY-012",
+				"HAND-CLEANUP-001"
+			]
+		},
+		"SIXTH_SENSE": {
+			"name": "SIXTH SENSE",
+			"set": "RESERVE",
+			"text": "Draw 1 extra card on the first turn of each encounter.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-004"
+			]
+		},
+		"FIELD_MEDIC": {
+			"name": "FIELD MEDIC",
+			"set": "RESERVE",
+			"text": "At every SAFEHOUSE, heal 5 extra VITAE.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-004"
+			]
+		},
+		"STREET_CRED": {
+			"name": "STREET CRED",
+			"set": "RESERVE",
+			"text": "Start each corporation with 30 CRED.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-004"
+			]
+		},
+		"PATCH_CABLE": {
+			"name": "PATCH CABLE",
+			"set": "RESERVE",
+			"text": "Whenever you apply a PATCHWORK, heal 4 VITAE.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-004"
+			]
+		},
+		"HEARTBEAT": {
+			"name": "HEARTBEAT",
+			"set": "GENERAL",
+			"text": "Whenever you REBOOT, −2 TRACE.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "implemented"
+			},
+			"decisions": [
+				"DSY-001",
+				"DSY-007"
+			]
+		},
+		"MINIMAL_INSTALL": {
+			"name": "MINIMAL INSTALL",
+			"set": "GENERAL",
+			"text": "At the start of each ICE Node, if your FOOTPRINT is in the GHOST band, +1 AMP.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "implemented"
+			},
+			"decisions": [
+				"DSY-001",
+				"DSY-007"
+			]
+		},
+		"DEDUPLICATOR": {
+			"name": "DEDUPLICATOR",
+			"set": "GENERAL",
+			"text": "FUSE works on any card type, not only SCRIPTs.",
+			"price": 100,
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"DSY-001",
+				"DSY-007"
+			]
+		},
+		"ONE_TRICK": {
+			"name": "ONE-TRICK",
+			"set": "GENERAL",
+			"text": "+1 BW every turn.",
+			"drawback": "Your deck can't grow past the corporation's cap minus 4 (HALCYON 18, IRONWATCH 25, LUCIDA 31): at that size, the card reward screen offers only DECOMPILE or skip.",
+			"price": 75,
+			"status": {
+				"design": "approved",
+				"implementation": "implemented"
+			},
+			"decisions": [
+				"DSY-001",
+				"DSY-007"
+			]
+		},
+		"HEARTH_KEY": {
+			"name": "HEARTH KEY",
+			"set": "HALCYON",
+			"text": "At the start of each encounter, every FORTRESS gets −1 STR.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-005"
+			]
+		},
+		"VOICE_MIMIC": {
+			"name": "VOICE MIMIC",
+			"set": "HALCYON",
+			"text": "Once per encounter, the first TRACE subroutine that would resolve fails.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-005"
+			]
+		},
+		"AD_BLOCKER": {
+			"name": "AD BLOCKER",
+			"set": "HALCYON",
+			"text": "Bloatware the corporation INSERTs always goes to your discard pile, never your hand or draw pile.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"P5-005"
+			]
+		},
+		"KEVLAR_WEAVE": {
+			"name": "KEVLAR WEAVE",
+			"set": "IRONWATCH",
+			"text": "PULP from ICE subroutines deals 1 less to you (minimum 0).",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"ICE2-007"
+			]
+		},
+		"BADGE_CLONE": {
+			"name": "BADGE CLONE",
+			"set": "IRONWATCH",
+			"text": "At the start of each encounter, every VOID gets −1 STR.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"ICE2-007"
+			]
+		},
+		"DASHCAM_FEED": {
+			"name": "DASHCAM FEED",
+			"set": "IRONWATCH",
+			"text": "Whenever you BREACH a layer, heal 3 VITAE.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"ICE2-007"
+			]
+		},
+		"LUCID_DREAM": {
+			"name": "LUCID DREAM",
+			"set": "LUCIDA",
+			"text": "CORTEX can't reduce your DRAW below 3.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"ICE3-008"
+			]
+		},
+		"MEMORY_BACKUP": {
+			"name": "MEMORY BACKUP",
+			"set": "LUCIDA",
+			"text": "Whenever an ICE makes you FORGET, draw 1 card.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"ICE3-008",
+				"ICE3-002a"
+			]
+		},
+		"NEURAL_FIREWALL": {
+			"name": "NEURAL FIREWALL",
+			"set": "LUCIDA",
+			"text": "The first CORTEX you would gain each encounter is prevented.",
+			"status": {
+				"design": "approved",
+				"implementation": "pending"
+			},
+			"decisions": [
+				"ICE3-008"
+			]
+		},
+		"READY_RIG": {
+			"name": "READY RIG",
+			"set": "ORIGIN",
+			"rustler": "GENERALIST",
+			"text": "",
+			"status": {
+				"design": "approved",
+				"implementation": "implemented"
+			},
+			"decisions": [
+				"RUSTLER-001",
+				"P5-003"
+			]
+		},
+		"LOW_PROFILE": {
+			"name": "LOW PROFILE",
+			"set": "ORIGIN",
+			"rustler": "ECHO",
+			"text": "",
+			"status": {
+				"design": "approved",
+				"implementation": "implemented"
+			},
+			"decisions": [
+				"RUSTLER-001",
+				"P5-003"
+			]
+		},
+		"REDLINER": {
+			"name": "REDLINER",
+			"set": "ORIGIN",
+			"rustler": "RIOT",
+			"text": "",
+			"status": {
+				"design": "approved",
+				"implementation": "implemented"
+			},
+			"decisions": [
+				"RUSTLER-001",
+				"P5-003"
+			]
+		},
+		"PATIENT_ZERO": {
+			"name": "PATIENT ZERO",
+			"set": "ORIGIN",
+			"rustler": "VECTOR",
+			"text": "",
+			"status": {
+				"design": "approved",
+				"implementation": "implemented"
+			},
+			"decisions": [
+				"RUSTLER-001",
+				"P5-003"
+			]
+		}
+	},
+	"ghostware_about": "CSA-07 (designer 2026-11-28: 'We need a canonical database for ghostware'): one record per Ghostware. Effects: REDLINE_UPGRADES_EVENTS_ESCAPE.md §2, Deck Synergy §9.3, ICE Corp 2 §8, ICE Corp 3 §9; prices P5-008 (100 CRED, 75 with a drawback; corporation sets are payload-only, ORIGINs never offered). ORIGIN text lives in CardDB.RUSTLERS."
 }

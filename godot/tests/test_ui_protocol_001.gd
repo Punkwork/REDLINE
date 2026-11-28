@@ -287,26 +287,46 @@ func synergy_scripts() -> void:
 	check(h.shield == 1, "AFTERBURN with two other cards: no +4; REACTIVE ARMOUR +1")
 
 func reprise() -> void:
+	# CARD-REVIEW-001 / EFFECT-REPEAT-001, designer ruling 2026-11-28 09:33: fresh target and mode, no
+	# BURNED source (never skip back), penalties repeat, a repeated PROBE counts as another PROBE.
 	var g := node_game()
+	g.enc.ice.append(g._new_ice("COOKIE_WALL"))
+	prepare(g)
 	check(not g.can_play(give(g, "REPRISE").uid).ok, "REPRISE: nothing to repeat before a SCRIPT this turn")
-	set_str(g, 0, 11)
-	g.play_card(give(g, "OVERLOAD").uid, 0)       # 11 -> 9
-	g.play_card(give(g, "FOLLOW_THROUGH").uid, 0)  # after EXPLOIT: 9 -> 5
+	set_str(g, 0, 11); set_str(g, 1, 11)
+	g.play_card(give(g, "OVERLOAD").uid, 0)       # ICE 0: 11 -> 9
+	g.play_card(give(g, "FOLLOW_THROUGH").uid, 0)  # after an EXPLOIT: 9 -> 5
 	var r: Dictionary = g.hand.filter(func(c): return c.id == "REPRISE")[0]
+	check(not g.play_card(r.uid), "REPRISE of a targeted SCRIPT needs a target")
 	var bw_before := g.bw
-	check(g.play_card(r.uid), "REPRISE plays after a SCRIPT")
-	check(g.bw == bw_before - 2, "REPRISE costs 2 BW")
-	check(g.ice_str(0) == 1, "REPRISE repeats FOLLOW THROUGH on the same ICE, its condition read now: the card before REPRISE (FOLLOW THROUGH) is an EXPLOIT, −4 (5 -> 1)")
+	check(g.play_card(r.uid, 1), "REPRISE plays on a fresh target (the other ICE)")
+	check(g.bw == bw_before - 2, "REPRISE costs 2 BW; the SCRIPT's own BW isn't charged")
+	check(g.ice_str(1) == 7 and g.ice_str(0) == 5, "FOLLOW THROUGH again on ICE 2; its condition read now (the card before REPRISE is an EXPLOIT): −4 (11 -> 7)")
 	check(where(g, r) == "discard", "REPRISE goes to the discard pile")
 	check(not g.can_play(give(g, "REPRISE").uid).ok, "REPRISE can't repeat a REPRISE")
-	# PROBE: repeating the effect isn't another PROBE played.
-	var p := node_game()
+	# Penalties repeat: OVERLOAD's +2 TRACE.
+	var t := node_game()
+	t.trace = 0
+	t.play_card(give(t, "OVERLOAD").uid, 0)
+	check(t.trace == 2, "OVERLOAD: +2 TRACE")
+	t.play_card(give(t, "REPRISE").uid, 0)
+	check(t.trace == 4, "REPRISE of OVERLOAD: its +2 TRACE applies again")
+	# A BURNED SCRIPT can't be repeated, and REPRISE doesn't skip back to an earlier one.
+	var b := node_game()
+	b.play_card(give(b, "OVERLOAD").uid, 0)
+	b.play_card(give(b, "FLINCH").uid)   # BURNED
+	check(not b.can_play(give(b, "REPRISE").uid).ok, "after a BURNED SCRIPT (FLINCH), REPRISE has nothing to repeat")
+	# PROBE: a fresh mode, and the repeat counts as another PROBE on that ICE.
+	var p := node_game(1, "DOORBELL_CAM")
+	for ice in p.enc.ice:
+		for k in ice.seen.size(): ice.seen[k] = false
 	set_str(p, 0, 9)
 	p.play_card(give(p, "PROBE").uid, 0, "weaken")
-	var cost_before := p.card_cost("PROBE", -1, 0)
-	p.play_card(give(p, "REPRISE").uid)
-	check(p.ice_str(0) == 5, "REPRISE repeats PROBE's −2 (9 −2 −2 = 5)")
-	check(p.card_cost("PROBE", -1, 0) == cost_before, "REPRISE doesn't add to the PROBE count on that ICE")
+	var cost1 := p.card_cost("PROBE", -1, 0)
+	check(p.play_modes("REPRISE", 0).has("reveal"), "REPRISE offers PROBE's modes, reveal included")
+	p.play_card(give(p, "REPRISE").uid, 0, "reveal")
+	check(p.hidden_subs(0) == 0 and p.ice_str(0) == 7, "REPRISE of PROBE in the other mode: reveal all (STR stays 7)")
+	check(p.card_cost("PROBE", -1, 0) == cost1 + 1, "the repeat counts as another PROBE on that ICE (next PROBE costs 1 more)")
 	# An interactive SCRIPT: the choice opens again; every card is still there once.
 	var d := node_game()
 	for k in 3: d.draw_pile.append(d._new_inst("PULP_SHIELD"))

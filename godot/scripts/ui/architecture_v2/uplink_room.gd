@@ -5,7 +5,8 @@ extends Control
 ## BG_NODE_UPLINK_UNDERWORLD.png, unchanged (UI-IDENTITY-001); the inventory sits in it:
 ##   * eight cards, four columns by two rows, on the recessed back wall;
 ##   * three CAPS upright side by side in a three-slot capacitor/fuse bank, mid-right under the cards;
-##   * three Ghostware medallions (aged green housing, brass rims) lower right under the CAPS;
+##   * three Ghostware medallions (aged green housing, brass rims) lower right under the CAPS, with the
+##     stocked Ghostware's icon and price (CSA-07 records);
 ##   * the cash register is where a purchase is confirmed (it lights and rings up the price);
 ##   * the security grille on the right, marked with a medical cross, is the CORTEX-only Clinic;
 ##   * the upper-left CRT (formerly WIPE) does nothing: WIPE is not an Uplink service (Core Rules §8.3).
@@ -129,6 +130,8 @@ func _build_ghostware() -> void:
 		var s := GhostSlot.new(); s.name = "GhostOffer%d" % k
 		s.position = GHOST_ROW.position + Vector2(k * w, 0)
 		s.size = Vector2(w, GHOST_ROW.size.y)
+		var idx := k
+		s.pressed.connect(func(): _buy_ghostware(idx))
 		stage.add_child(s)
 		ghost_slots.append(s)
 
@@ -188,7 +191,8 @@ func refresh() -> void:
 		tag.add_theme_color_override("font_color", Color("#8A1F12") if c.sale and not c.sold else INK)
 	for k in cap_slots.size():
 		cap_slots[k].set_offer(v.caps[k] if k < v.caps.size() else {}, game.cred)
-	for s in ghost_slots: s.set_offer({})
+	for k in ghost_slots.size():
+		ghost_slots[k].set_offer(v.ghostware[k] if k < v.ghostware.size() else {}, game.cred)
 	cred_label.text = "CRED %d" % game.cred
 	deck_label.text = "DECK %d" % game.run_deck.size()
 
@@ -210,6 +214,11 @@ func _buy_card(k: int) -> void:
 	if game == null or game.uplink == null: return
 	var price := int(game.uplink.cards[k].price)
 	if game.uplink.buy_card(k): _rung(price)
+
+func _buy_ghostware(k: int) -> void:
+	if game == null or game.uplink == null or k >= game.uplink.ghostware.size(): return
+	var price := int(game.uplink.ghostware[k].price)
+	if game.uplink.buy_ghostware(k): _rung(price)
 
 func _buy_cap(k: int) -> void:
 	var v := game.uplink
@@ -346,23 +355,64 @@ class CapSlot extends HudWidgets.Explained:
 			draw_string(f, tag.position + Vector2((tag.size.x - tw) / 2.0, 19), t, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, UplinkRoom.INK)
 		focus_ring()
 
-## One Ghostware medallion: recessed circular housing with a brass rim. Empty until Ghostware has
-## canonical records (CSA-07).
+## One Ghostware offer: a recessed circular medallion (aged green housing, brass rim) holding the
+## Ghostware's icon, with its price on the rim; sold offers stay, faded. Empty when there's no stock.
 class GhostSlot extends HudWidgets.Explained:
+	signal pressed
 	var offer: Dictionary = {}
-	func set_offer(o: Dictionary) -> void:
+	var affordable := false
+	var tex: Texture2D
+	func set_offer(o: Dictionary, cred: int = 0) -> void:
 		offer = o
-		title = "GHOSTWARE"
-		lines = ["No Ghostware in stock: Ghostware isn't sold until its records are canonical (CSA-07)."] if o.is_empty() else []
+		affordable = not o.is_empty() and not o.sold and cred >= int(o.price)
+		var id := String(o.get("id", ""))
+		var path := "res://assets/concept/ghostware/GW_%s.png" % id
+		tex = load(path) if id != "" and ResourceLoader.exists(path) else null
+		if o.is_empty():
+			title = "GHOSTWARE"
+			lines = ["Nothing on this shelf."]
+		else:
+			var d: Dictionary = CardDB.GHOSTWARE.get(id, {})
+			title = String(d.get("name", id))
+			heading = "GHOSTWARE"
+			lines = [String(d.get("text", ""))]
+			if d.has("drawback"): lines.append("Drawback: " + String(d.drawback))
+			lines.append("SOLD." if o.sold else "%d CRED. Permanent for the run." % int(o.price))
+			if not o.sold and not affordable: lines.append("Not enough CRED.")
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if affordable else Control.CURSOR_HELP
 		queue_redraw()
+	func _gui_input(e: InputEvent) -> void:
+		if not affordable: return
+		if (e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.pressed) or e.is_action_pressed("ui_accept"):
+			accept_event(); pressed.emit()
 	func _draw() -> void:
-		var c := size / 2.0
-		var r := minf(size.x, size.y) * 0.42
+		var c := Vector2(size.x / 2.0, size.y * 0.42)
+		var r := minf(size.x, size.y) * 0.38
 		draw_circle(c + Vector2(2, 3), r + 4, Color(0, 0, 0, 0.5))
 		draw_circle(c, r + 4, UplinkRoom.BRASS)
 		draw_circle(c, r, UplinkRoom.ENAMEL)
-		draw_circle(c, r * 0.72, UplinkRoom.ENAMEL_DARK)
-		draw_arc(c, r * 0.72, 0, TAU, 48, Color(UplinkRoom.TARNISH, 0.8), 2.0, true)
+		var inner := r * 0.8
+		draw_circle(c, inner, UplinkRoom.ENAMEL_DARK)
+		if tex:
+			var mod := Color(1, 1, 1, 0.35) if offer.get("sold", false) else Color.WHITE
+			draw_texture_rect(tex, Rect2(c - Vector2(inner, inner) * 0.92, Vector2(inner, inner) * 1.84), false, mod)
+		elif not offer.is_empty():   # no icon painted yet: the name's initials, as the Ghostware reel does
+			var words := String(CardDB.GHOSTWARE.get(String(offer.id), {}).get("name", "?")).replace("-", " ").split(" ", false)
+			var ini := ""
+			for w in words.slice(0, 2): ini += w.substr(0, 1)
+			var f := VasTokens.FONT_PLAQUE
+			var px := int(inner * 0.9)
+			var tw := f.get_string_size(ini, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x
+			draw_string(f, c + Vector2(-tw / 2.0, px * 0.36), ini, HORIZONTAL_ALIGNMENT_LEFT, -1, px, Color(VasTokens.IVORY, 0.4 if offer.get("sold", false) else 0.95))
+		draw_arc(c, inner, 0, TAU, 48, Color(UplinkRoom.TARNISH, 0.8), 2.0, true)
+		if not offer.is_empty():
+			var t := "SOLD" if offer.sold else "%d CRED" % int(offer.price)
+			var f := VasTokens.FONT_PLAQUE
+			var tw := f.get_string_size(t, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x
+			var tag := Rect2(Vector2((size.x - tw) / 2.0 - 6, size.y - 22), Vector2(tw + 12, 20))
+			draw_rect(tag, UplinkRoom.TAG)
+			draw_rect(tag, Color("#7A6A48"), false, 1.0)
+			draw_string(f, tag.position + Vector2(6, 15), t, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, UplinkRoom.INK)
 		focus_ring()
 
 ## The painted cash register: lights up and rings up the price after a purchase.

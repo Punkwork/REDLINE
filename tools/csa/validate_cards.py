@@ -27,6 +27,8 @@ RARITIES = {"STARTER", "COMMON", "UNCOMMON", "RARE", "BLOAT"}   # BLOAT: Bloatwa
 CAP_RARITIES = {"COMMON", "UNCOMMON", "RARE"}
 CARD_REQUIRED = {"name": str, "type": str, "tags": list, "bw": int, "rarity": str, "text": str}
 CAP_REQUIRED = {"name": str, "rarity": str, "price": int, "text": str}
+GHOST_REQUIRED = {"name": str, "set": str, "text": str}   # CSA-07 Ghostware records
+GHOST_SETS = {"GENERAL", "RESERVE", "HALCYON", "IRONWATCH", "LUCIDA", "ORIGIN"}
 RUSTLERS = {"GENERALIST", "ECHO", "RIOT", "VECTOR"}
 DESIGN = {"approved", "playtest", "experimental", "historical"}
 IMPLEMENTATION = {"implemented", "pending", "divergent"}
@@ -179,7 +181,26 @@ def validate(path=DEFAULT):
                 errors.append("%s: decision %s is not recorded in Master Design or the active rules docs" % (where, did))
     if data.get("uplink") is not None:
         check_decisions(data["uplink"].get("decisions", []), "uplink")
-    for kind, table in (("card", cards), ("CAP", caps)):
+    ghost = data.get("ghostware", {})
+    if not isinstance(ghost, dict):
+        errors.append("'ghostware' must be an object"); ghost = {}
+    for gid, rec in ghost.items():
+        if not gid or gid != gid.upper() or " " in gid:
+            errors.append("Ghostware ID %r must be UPPER_SNAKE_CASE" % gid)
+        if not isinstance(rec, dict):
+            errors.append("Ghostware %s: record must be an object" % gid); continue
+        for field, typ in GHOST_REQUIRED.items():
+            if not isinstance(rec.get(field), typ):
+                errors.append("Ghostware %s: %r must be %s" % (gid, field, typ.__name__))
+        if rec.get("set") not in GHOST_SETS:
+            errors.append("Ghostware %s: unknown set %r" % (gid, rec.get("set")))
+        if "price" in rec and (not isinstance(rec["price"], int) or isinstance(rec["price"], bool) or rec["price"] <= 0):
+            errors.append("Ghostware %s: price must be a positive whole number" % gid)
+        if rec.get("set") in ("ORIGIN", "HALCYON", "IRONWATCH", "LUCIDA") and "price" in rec:
+            errors.append("Ghostware %s: %s Ghostware is never sold (P5-003, P5-008)" % (gid, rec.get("set")))
+        if rec.get("set") == "ORIGIN" and rec.get("rustler") not in RUSTLERS:
+            errors.append("Ghostware %s: an ORIGIN names its Rustler" % gid)
+    for kind, table in (("card", cards), ("CAP", caps), ("Ghostware", ghost)):
         for cid, rec in table.items():
             if not isinstance(rec, dict):
                 continue

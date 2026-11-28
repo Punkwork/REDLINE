@@ -15,6 +15,13 @@ static var RECORDS: Dictionary = DATA.get("cards", {})
 ## The cards the engine can deal, play and reward: every record except "pending" ones (CSA-03 C2).
 static var DEFS: Dictionary = _playable(RECORDS)
 static var CAPS: Dictionary = DATA.get("caps", {})
+## CSA-07 (designer 2026-11-28): the canonical Ghostware records (cards.json "ghostware").
+static var GHOSTWARE: Dictionary = DATA.get("ghostware", {})
+
+## Ghostware the Black Market Uplink may sell (P5-008): priced, general pool, approved and built.
+static func ghostware_for_sale() -> Array:
+	return GHOSTWARE.keys().filter(func(id): return GHOSTWARE[id].has("price") and String(GHOSTWARE[id].set) == "GENERAL" \
+		and String(GHOSTWARE[id].status.design) == "approved" and String(GHOSTWARE[id].status.implementation) == "implemented")
 static var STARTER_GENERALIST: Array = DATA.get("starters", {}).get("GENERALIST", [])
 static var STARTER_ECHO: Array = DATA.get("starters", {}).get("ECHO", [])
 static var STARTER_RIOT: Array = DATA.get("starters", {}).get("RIOT", [])

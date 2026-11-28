@@ -862,7 +862,7 @@ func _mode_spec() -> Dictionary:
 	if game.phase != "PLAYER" or c.is_empty() or target < 0:
 		_mode_prompt = {}
 		return {}
-	var d := CardDB.def(String(c[0].id))
+	var d := game.play_def(String(c[0].id))   # REPRISE offers its SCRIPT's modes (CARD-REVIEW-001)
 	var legal := game.play_modes(String(c[0].id), target)
 	## ARCH-V2-003 / UI-INSPECTOR-001: each mode is a key with its icon and number; its words (the
 	## canonical mode label from cards.json), cost now and target are in the shared inspector.
@@ -879,7 +879,7 @@ func _mode_spec() -> Dictionary:
 			"weaken":
 				o["art"] = "ice/V2_MEDALLION_STR.png"
 				o["value_inside"] = true
-				o["value"] = "−%d" % CardDB.param(String(c[0].id), "modes.weaken.amount")   # CSA-04i
+				o["value"] = "−%d" % CardDB.param(String(d.get("reprise_of", c[0].id)), "modes.weaken.amount")   # CSA-04i
 			"reveal":
 				o["art"] = "ICON_HIDDEN_LIGHT"   # the hidden-subroutine icon, light variant for the dark key
 				o["value"] = "%d" % game.hidden_subs(target)
@@ -1061,7 +1061,7 @@ func _on_card_dropped(uid: int, at: Vector2) -> void:
 	var p := (at - stage.global_position) / stage.scale
 	var c := game.hand.filter(func(x): return int(x.uid) == uid)
 	if c.is_empty(): return
-	var d := CardDB.def(String(c[0].id))
+	var d := game.play_def(String(c[0].id))
 	## ARCH-V2-006l: a PROGRAM installs only when dropped on the CRT (its glass or the slot above it).
 	if String(d.get("type", "")) == "PROGRAM":
 		if over_crt(at): ctrl.request_play(uid); refresh()

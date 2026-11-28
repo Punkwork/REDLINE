@@ -8,7 +8,8 @@ extends RefCounted
 ##   exactly 5 COMMON / 2 UNCOMMON / 1 RARE, 6 from the shared pool and 2 from the Rustler's pool; one
 ##   card, uniformly at random, at half price. 3 unique CAPS. An impossible shelf is an explicit
 ##   configuration error (`error`), never a silently smaller shelf.
-## * Ghostware: no canonical records yet (CSA-07), so no Ghostware is stocked (`ghostware` stays empty).
+## * Ghostware (CSA-07 records, P5-008): up to 3 random Ghostware you don't own, from those for sale
+##   (general pool, approved and built), at their record price (100 CRED, 75 with a drawback).
 ## * Prices: base prices (UPL-008, CAP records) and the sale. Market variability and the TRACE premium
 ##   (ECON-MARKET-001, ECON-TRACE-001) await their own confirmation (UplinkContract); prices are locked
 ##   for the visit.
@@ -20,7 +21,7 @@ extends RefCounted
 var game: Game
 var cards: Array = []       # [{id, base, price, sale, sold}]
 var caps: Array = []        # [{id, price, sold}]
-var ghostware: Array = []   # empty until CSA-07 gives Ghostware canonical records
+var ghostware: Array = []   # [{id, price, sold}]
 var error := ""             # a stock configuration error, or ""
 var sold_log: Array = []    # [{kind, id, price}], this visit
 
@@ -55,6 +56,10 @@ func _stock() -> void:
 	for k in mini(n, cap_ids.size()):
 		var id: String = cap_ids.pop_at(game.rng.randi_range(0, cap_ids.size() - 1))
 		caps.append({"id": id, "price": UplinkContract.cap_base_price(id), "sold": false})
+	var gw: Array = CardDB.ghostware_for_sale().filter(func(id): return not game.ghostware.has(id))
+	for k in mini(3, gw.size()):
+		var id: String = gw.pop_at(game.rng.randi_range(0, gw.size() - 1))
+		ghostware.append({"id": id, "price": int(CardDB.GHOSTWARE[id].price), "sold": false})
 
 ## 8 unique cards: the rarity counts exactly, and exactly `rustler` of them from the Rustler's own pool.
 func _pick_cards(shelf: Dictionary) -> Array:
@@ -119,6 +124,20 @@ func buy_cap(i: int, replace_uid: int = -1) -> bool:
 	c.sold = true
 	sold_log.append({"kind": "CAP", "id": c.id, "price": c.price})
 	game._say("Bought %s for %d CRED." % [CardDB.CAPS[c.id].name, c.price])
+	return true
+
+func can_buy_ghostware(i: int) -> bool:
+	return i >= 0 and i < ghostware.size() and not ghostware[i].sold and game.cred >= int(ghostware[i].price)
+
+## Ghostware is permanent for the run and active at once (P5-003).
+func buy_ghostware(i: int) -> bool:
+	if not can_buy_ghostware(i): return false
+	var c: Dictionary = ghostware[i]
+	game.cred -= int(c.price)
+	game.ghostware.append(String(c.id))
+	c.sold = true
+	sold_log.append({"kind": "GHOSTWARE", "id": c.id, "price": c.price})
+	game._say("Bought %s for %d CRED." % [CardDB.GHOSTWARE[c.id].name, c.price])
 	return true
 
 ## The Clinic (Core Rules §8.3): CORTEX removal only, priced per visit quantity (CLINIC-001).

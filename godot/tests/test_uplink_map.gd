@@ -24,6 +24,7 @@ func _initialize() -> void:
 	stock_rules()
 	purchases()
 	caps_and_replacement()
+	ghostware_purchase()
 	clinic()
 	entry_and_exit()
 	generated_map()
@@ -66,7 +67,9 @@ func stock_rules() -> void:
 		var cu := {}
 		for c in v.caps: cu[c.id] = true
 		check(cu.size() == 3 and v.caps.all(func(c): return int(c.price) == 20), "seed %d: 3 unique CAPS at 20 CRED" % sd)
-		check(v.ghostware.is_empty(), "seed %d: no Ghostware stock until CSA-07 gives it canonical records" % sd)
+		var gw := v.ghostware.map(func(x): return String(x.id))
+		check(gw.size() == mini(3, CardDB.ghostware_for_sale().size()) and gw.all(func(id): return CardDB.ghostware_for_sale().has(id)), "seed %d: up to 3 Ghostware for sale (CSA-07, P5-008)" % sd)
+		check(v.ghostware.all(func(x): return int(x.price) == (75 if CardDB.GHOSTWARE[x.id].has("drawback") else 100)), "seed %d: Ghostware 100 CRED, 75 with a drawback (P5-008)" % sd)
 	# Seeded: the same run seed, the same stock.
 	check(visit(7).cards == visit(7).cards, "the same seed stocks the same shelf")
 	check(visit(7).cards != visit(8).cards, "a different seed stocks a different shelf")
@@ -107,6 +110,21 @@ func caps_and_replacement() -> void:
 	var w := visit(6)
 	w.game.cred = 100
 	check(w.buy_cap(1) and w.game.caps.size() == 1, "with a free slot the CAP goes straight to the rack")
+
+func ghostware_purchase() -> void:
+	var v := visit(11)
+	var g := v.game
+	check(not v.ghostware.is_empty(), "Ghostware on the shelf")
+	var id := String(v.ghostware[0].id)
+	g.cred = int(v.ghostware[0].price) - 1
+	check(not v.buy_ghostware(0) and not g.ghostware.has(id), "not enough CRED: nothing changes")
+	g.cred = 300
+	var price := int(v.ghostware[0].price)
+	check(v.buy_ghostware(0) and g.ghostware.has(id) and g.cred == 300 - price and v.ghostware[0].sold, "bought: permanent for the run, CRED paid, slot sold")
+	var w := UplinkVisit.open(g)
+	check(not w.ghostware.any(func(x): return String(x.id) == id), "an owned Ghostware isn't offered again")
+	check(not CardDB.ghostware_for_sale().any(func(x): return String(CardDB.GHOSTWARE[x].set) in ["ORIGIN", "HALCYON", "IRONWATCH", "LUCIDA"]), "ORIGINs and corporation sets are never sold")
+	check(CardDB.GHOSTWARE.size() == 41, "41 Ghostware records (20 general incl. DEAD MAN'S POCKET, 4 reserve, 4 synergy, 3 + 3 + 3 corporation, 4 ORIGIN)")
 
 func clinic() -> void:
 	var v := visit(2)
@@ -160,6 +178,26 @@ func generated_map() -> void:
 			if n.next.is_empty(): bad.append(n.id + " (dead end)")
 	check(bad.is_empty(), "every Node links forward (%s)" % [bad])
 	check(g.map_rows.all(func(row): return row.all(func(n): return n.kind != "ICE" or not n.layers.is_empty())), "every ICE Node has an encounter")
+	# Layers (designer 2026-11-28): row 9's ICE Nodes have 2 layers, the BOSS 3, the rest 1.
+	var two := 0
+	var wrong := []
+	for ri in g.map_rows.size():
+		for n in g.map_rows[ri]:
+			if n.kind != "ICE": continue
+			var want := 3 if n.get("central", false) else (2 if ri == 8 else 1)
+			if n.layers.size() != want: wrong.append(n.id)
+			if n.layers.size() == 2: two += 1
+	check(wrong.is_empty() and two >= 1 and g.map_rows[15][0].layers.size() == 3, "at least one 2-layer Node and the 3-layer BOSS (%s)" % [wrong])
+	# DEAD DROP, CONSOLE LAB, SIGNAL: their room, then back to the map.
+	var room_at := []
+	for ri in g.map_rows.size():
+		for i in g.map_rows[ri].size():
+			if room_at.is_empty() and g.map_rows[ri][i].get("unbuilt", false): room_at = [ri, i]
+	g.row = room_at[0] - 1; g.available = [room_at[1]]; g.phase = "MAP"
+	g.enter_node(room_at[1])
+	check(g.phase == "NODE_ROOM", "an unbuilt Node opens its room")
+	g.leave_room()
+	check(g.phase == "MAP" and g.row == room_at[0], "leaving the room goes back to the map")
 	# Walk a route: unbuilt Nodes pass through, Uplinks open and close, ICE Nodes start encounters.
 	g.row = -1
 	g.available = [0]
@@ -175,6 +213,7 @@ func generated_map() -> void:
 		match g.phase:
 			"UPLINK": g.leave_uplink()
 			"SAFEHOUSE": g.safehouse_heal()
+			"NODE_ROOM": g.leave_room()
 			"MAP": pass
 			_:
 				# An ICE encounter: finish it as a clear (the encounter itself is covered elsewhere).

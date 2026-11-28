@@ -129,7 +129,7 @@ jobs:
             if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' "/tmp/${script}.log"; then exit 1; fi
           done
           grep -q 'UPLINK ROOM screenshots: 3 written' /tmp/shot_uplink_room.log
-          grep -q 'NODE MAP screenshots: 2 written' /tmp/shot_node_map.log
+          grep -q 'NODE MAP screenshots: 5 written' /tmp/shot_node_map.log
           # UI-TYPO-002 (M06): the typography fixture on the production EventFlyout, lens and sandbox.
           xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
             "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
