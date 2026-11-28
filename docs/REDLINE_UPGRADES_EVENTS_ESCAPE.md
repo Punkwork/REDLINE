@@ -200,7 +200,7 @@ Fragments carry over between corporations. The fragment counter is shown beside 
 
 ### 2.5 What the payload is (APPROVED 2026-11-12, P5-009)
 
-> **Amended by MAP-003 (2026-11-21):** there is no escape. Part 1 stands; part 2's doubled TRACE during the escape no longer applies, and the core's reveal comes when you leave after the boss (Core Rules §10.2). Whether the fragment is revealed at once or at a later story beat is open.
+> **Amended by MAP-003 and SIGNAL-002 (2026-11-28):** there is no escape. Part 1 stands; part 2's doubled TRACE during the escape no longer applies. Part 3: the First Signal fragment is the corporation's **Signal barcode**, an extra item you get on beating the boss; the three barcodes overlaid form the Signal (Core Rules §10.2, SIGNAL-001/002).
 
 Each corporation's payload is an **encrypted data core** taken from its Central Node. It has three parts:
 
@@ -239,7 +239,7 @@ Each SIGNAL UNCLEAR Node holds one random event. Choices are always shown with t
 
 ## 4. HALCYON escape ICE — the security response
 
-> **Superseded by MAP-003 (2026-11-21):** the escape was retired, so these ICE have no place on the map. Kept as history and as a possible ICE source; reuse needs a designer decision.
+> **ESCAPE-ICE-001 (designer, 2026-11-28):** with the escape retired (MAP-003), these ICE are now **regular Tier 2 ICE** for this corporation, used after the Mini-Boss (MAP-TIER-001, Core Rules §10.1). The escape layout, the doubled-TRACE notes and the 10-CRED escape reserves no longer apply; Tier 2 layers and reserves do. HOUSE CALL stays Black ICE.
 
 When you take THE HEARTH's payload, HALCYON stops being a friendly gadget company and starts acting like a security company. Its escape ICE are the **home-security** side of its products.
 

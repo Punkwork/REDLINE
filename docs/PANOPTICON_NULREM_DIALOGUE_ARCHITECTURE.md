@@ -143,7 +143,7 @@ At 150 distinct deliveries, a 3x library is 450 entries, 5x is 750, 10x is 1,500
 
 Proposed acceptance checks before implementation approval and release:
 - Every delivered line is approved, eligible, factually accurate and grammatically complete; no unresolved tokens.
-- No reveal before third punch card; existing SIGNAL-001 and all repository copy guards pass, including rendered substitutions.
+- No reveal before the third Signal barcode; existing SIGNAL-001 and all repository copy guards pass, including rendered substitutions.
 - No unapproved action, cost, consent, authority or rule change is implied; required feedback remains intelligible.
 - Independent, delegated, unusual and repeated-choice scenarios all work; zero eligible optional lines yields silence.
 - Paired references resolve; explicit recalls require real prior delivery; no forced psychological progression.

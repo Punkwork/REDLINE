@@ -347,10 +347,10 @@ Details: `REDLINE_ICE_CORP1.md` §8.4, `REDLINE_ICE_CORP2.md` §6a, `REDLINE_ICE
 - Every route passes **2–3 Uplinks** (MAP-003f). Every Uplink has a Clinic (§8.3).
 
 ### 10.2 The boss (Central Node) and the payload [CHANGED by MAP-003]
-The row-16 boss is a boss-style ICE encounter (3 layers in the current build). Defeating it gives you the corporation's **payload**, an **encrypted data core**: choose **1 of 3 Ghostware**, **active immediately** (P5-009). With no escape, you leave with the payload and the corporation's **Signal barcode** as soon as the boss falls (MAP-003); NUL/REM decrypts the core into a **First Signal fragment**. See `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5.
+The row-16 boss is a boss-style ICE encounter (3 layers in the current build). Defeating it gives you the corporation's **payload**, an **encrypted data core**: choose **1 of 3 Ghostware**, **active immediately** (P5-009). Beating the boss also gives you the corporation's **Signal barcode**, an extra item (MAP-003, SIGNAL-001, SIGNAL-002): one fixed barcode per corporation, kept in the three-slot holder. The three barcodes, overlaid, form the First Signal; the full run's final act reads them (the M0'B\*L∞P and SCRAMBLE SYNC; end sequence still to be designed). With no escape, you leave with the payload and the barcode as soon as the boss falls. See `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5.
 
 ### 10.3 Escape [RETIRED by MAP-003, 2026-11-21]
-There is no escape. UPL-007's 4-Node escape (countermeasure ICE, doubled TRACE, one SAFEHOUSE) is history; see the Later amendments table and Master Design MAP-003.
+There is no escape. UPL-007's 4-Node escape (countermeasure ICE, doubled TRACE, one SAFEHOUSE) is history; see the Later amendments table and Master Design MAP-003. Each corporation's former escape ICE are now regular Tier 2 ICE (ESCAPE-ICE-001).
 
 ### 10.4 Moving to the next corporation
 Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE to max. Remove all CORTEX counters. Reset TRACE and strikes to 0.
@@ -619,3 +619,5 @@ REPRISE is the first approved application; its card-specific eligibility and tar
 | ID | Rule |
 |---|---|
 | MAP-TIER-001 | **ICE tier by row:** Tier 1 ICE before the Mini-Boss (rows 2–8), Tier 2 after it (rows 10–15) (§10.1). Replaces MAP-002's rows 2–5 / 6–9 split. *Interpretation to confirm:* row 9's ordinary ICE Nodes (2 layers) are Tier 1. |
+| ESCAPE-ICE-001 | Each corporation's former escape ICE are regular **Tier 2** ICE (§10.3); the Black ICE that joined escape encounter 3 stay Black ICE. |
+| SIGNAL-002 | The First Signal item is a **Signal barcode** (was a punch card, SIGNAL-001): an extra item from each boss; the three barcodes overlaid form the Signal (§10.2). |

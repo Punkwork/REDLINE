@@ -497,3 +497,7 @@ Designer, 15:07–15:10: the docs still described the four-row slice and the esc
 Designer, 15:24: Tier 1 before the Mini-Boss, Tier 2 after. Recorded in Master Design; Core Rules §10.1 row table gains an ICE tier column and a Later amendment row; ICE Corp 1–3 and Pacing now point to §10.1 instead of the old rows 2–5 / 6–9. Documentation only; the build still uses Tier 1 stand-ins everywhere (HANDOFF: Claude Code TO DO). Checks: `tests/python`, `scan_node_authority.py`. Claude Project copies refreshed.
 
 *Interpretation to confirm:* row 9's ordinary ICE Nodes are Tier 1.
+
+## 2026-11-28 — ESCAPE-ICE-001 and SIGNAL-002 (Claude)
+
+Designer, 15:27: the former escape ICE are regular Tier 2 ICE; the Signal barcode is an extra item from each boss, and the three barcodes overlaid form the Signal. Asked whether that is SIGNAL-001's punch card: "Same item, now a barcode." Recorded in Master Design and Core Rules (§10.2, §10.3, Later amendments). Escape sections in Upgrades/Events/Escape §4, ICE Corp 1 §8.2a, ICE Corp 2 §7 and ICE Corp 3 §8 labelled; payload §2.5 amended; UI Bible §8 notes the rename; copy-guard wording ("third Signal barcode") updated in AGENTS = CLAUDE, the NUL/REM dialogue architecture, Gameplay Interface, Archipelago and ADP Phase 2 copy. ZINE-001's general barcodes-and-punch-cards world-building is unchanged; history is untouched. Build work (on-screen text, barcode holder art, Tier 2 roster) handed to Claude Code in HANDOFF. Claude Project copies refreshed.

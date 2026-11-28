@@ -191,6 +191,8 @@ Lowered about 20% from the ICE-008 values (Tier 1: 15/20, Tier 2: 20/25/35, Cent
 | Opening Node (row 1) | 15 | — | — |
 
 ### 8.2a Escape encounters (map structure from UPL-007)
+
+> **ESCAPE-ICE-001 (designer, 2026-11-28):** with the escape retired (MAP-003), HALCYON's escape ICE (`REDLINE_UPGRADES_EVENTS_ESCAPE.md` §4) are now **regular Tier 2 ICE** for this corporation, used after the Mini-Boss (MAP-TIER-001, Core Rules §10.1). The escape layout, the doubled-TRACE notes and the 10-CRED escape reserves no longer apply; Tier 2 layers and reserves do. HOUSE CALL stays Black ICE.
 The escape (Core Rules §10.3) has **3 single-layer encounters** built from the corporation's **countermeasure ICE**, with TRACE gains doubled. For HALCYON, the escape uses its dedicated **security response** ICE (ALARM PANEL, MOTION SENSOR, DEADBOLT, PANIC BUTTON) with **HOUSE CALL** in the final encounter: see `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §4 (approved P5-007).
 
 ### 8.3 Example encounters

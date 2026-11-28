@@ -123,6 +123,8 @@ The lobby of an IRONWATCH site. Every route starts here (Core Rules §10.1a).
 
 ## 7. Escape ICE: the manhunt
 
+> **ESCAPE-ICE-001 (designer, 2026-11-28):** with the escape retired (MAP-003), these ICE are now **regular Tier 2 ICE** for this corporation, used after the Mini-Boss (MAP-TIER-001, Core Rules §10.1). The escape layout, the doubled-TRACE notes and the 10-CRED escape reserves no longer apply; Tier 2 layers and reserves do. LETHAL FORCE stays Black ICE.
+
 When you take OVERWATCH's data core, IRONWATCH closes the district.
 
 | ICE | Type | STR | Subroutines | Ability | Threat* |

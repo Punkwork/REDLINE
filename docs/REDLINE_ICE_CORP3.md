@@ -127,6 +127,8 @@ LUCIDA's new-user setup. Every route starts here (Core Rules §10.1a).
 
 ## 8. Escape ICE: waking up
 
+> **ESCAPE-ICE-001 (designer, 2026-11-28):** with the escape retired (MAP-003), these ICE are now **regular Tier 2 ICE** for this corporation, used after the Mini-Boss (MAP-TIER-001, Core Rules §10.1). The escape layout, the doubled-TRACE notes and the 10-CRED escape reserves no longer apply; Tier 2 layers and reserves do. EGO DEATH stays Black ICE.
+
 When you take ANIMA's core, LUCIDA tries to wake you before you can leave.
 
 | ICE | Type | STR | Subroutines | Ability | Threat* |

@@ -977,6 +977,8 @@ No questions are open in this doc. Build order: **Phase 1 → Phase 2 → Phase 
 
 ## 8. SIGNAL-001 — The three punch cards (APPROVED, 2026-11-17)
 
+> **SIGNAL-002 (designer, 2026-11-28):** the three items are now **Signal barcodes**, not punch cards: one per corporation, an extra item from each boss; the three barcodes **overlaid** form the Signal. Read "punch card" below as "Signal barcode" and "holes completing a pattern when stacked" as "bars completing the Signal when overlaid". Everything else in this section stands. The barcode look (holder, card stock, overlay) needs a presentation pass before the build changes (HANDOFF).
+
 **The designer's direction:**
 
 > "Since this game is about the first signal (as one of the central themes) the player could be collecting 1 of 3 punch cards from each corporation in order to process an uplink signal that jams the umbrella corporation's signal that would finalize the merging of man and machine."

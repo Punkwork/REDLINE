@@ -774,10 +774,13 @@ Designer, 15:10: "fix those to match map 003F and today's build. Then refresh th
 | Claude Project copies (`claude/*.md`) | Claude | **REFRESHED** from this commit |
 | **Tier 1 / Tier 2 rows on the 16-row map** | Designer | **DECIDED** 2026-11-28 15:24 (MAP-TIER-001): Tier 1 before the Mini-Boss (rows 2–8), Tier 2 after (rows 10–15); Core Rules §10.1, ICE Corp 1–3 and Pacing updated. *Interpretation to confirm:* row 9's ordinary ICE Nodes are Tier 1 |
 | **MAP-TIER-001 build:** ICE Nodes in rows 10–15 use Tier 2 ICE | Claude Code | **TO DO**. Today every generated ICE Node cycles the slice's Tier 1 encounters (`Game.use_generated_map`); the only Tier 2 ICE in `ice.gd` is FREE TRIAL, so the HALCYON Tier 2 roster (ICE Corp 1 §2) has to be built first |
-| **Escape ICE** (`REDLINE_UPGRADES_EVENTS_ESCAPE.md` §4; escape sections of `REDLINE_ICE_CORP1.md`–`3.md`; escape lines in `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_PACING.md`): retire or reuse? | Designer, then Claude | **WAITING** |
+| **Escape ICE** | Designer | **DECIDED** 2026-11-28 15:27 (ESCAPE-ICE-001): regular Tier 2 ICE; the three escape sections are labelled. Still to tidy: escape lines in `REDLINE_UPLINK_AND_CAPS.md` and `REDLINE_PACING.md` (Claude) |
+| **Signal barcode** | Designer | **DECIDED** 2026-11-28 15:27 (SIGNAL-002): SIGNAL-001's punch cards are now Signal barcodes, an extra item from each boss; three overlaid form the Signal. Core Rules §10.2, UI Bible §8 note, copy-guard wording in AGENTS = CLAUDE and four docs updated |
+| **SIGNAL-002 build:** on-screen "Punch cards n / 3" (V2 eye hover) and other player-facing text say Signal barcodes; the holder and `PunchStock` art become barcodes that overlay into the Signal | Claude Code (look: designer review, via a UI issue) | **TO DO**. Code identifiers (`punch_cards`, `PUNCH_CARD`, `SignalCards`) can stay until a rename is approved, since saved records use them |
+| **ESCAPE-ICE-001 build:** the escape ICE join each corporation's Tier 2 roster | Claude Code | **TO DO** with the MAP-TIER-001 build (row above) |
 | **Run length and card-economy estimates** (Core Rules §9.1 "Why", §10.5) from the 10-row map | Claude | **TO DO** after Tier rows are set |
 | `HALCYON_PLAYTEST_GUIDE.md` still matches released Playtest 13 (four rows) | Claude Code | Update with the next build (RELEASE-002 step 1) |
 
 Checks: `tests/python` 88 OK; `scan_node_authority.py` 0 documentation findings (2 runtime consumers pending, unchanged); `export_maps.py --check` and `gen_card_docs.py --check` in step; AGENTS.md = CLAUDE.md.
 
-*Interpretations to confirm:* MAP-003's "barcode for the signal" read as the payload's First Signal fragment, revealed on leaving after the boss (Core Rules §10.2).
+*Answered 2026-11-28 15:27 (SIGNAL-002):* MAP-003's "barcode for the signal" is SIGNAL-001's item, now a Signal barcode (Core Rules §10.2).

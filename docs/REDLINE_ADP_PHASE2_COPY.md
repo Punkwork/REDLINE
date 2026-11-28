@@ -9,7 +9,7 @@
 
 - **Flavour only.** No line here changes or replaces a rule, number, card name, cost, button or anything the player needs to decide (ADP-R1). Rules text keeps its own places.
 - **Approved copy stays as approved.** Nothing here rewrites an approved line (strike modals, Cracking toasts, ICE mood lines, Bloatware footers). Graffiti *replies* sit beside approved lines; they don't edit them.
-- **SIGNAL-001 writing rules (§8.2 of the spec).** No line names the umbrella AI, says it controls the corporations, or explains the punch cards or the merge. A few lines are **hints**: oblique, and marked **[hint]** below. Tag them `hint` in data; none of this pack is `reveal`.
+- **SIGNAL-001 writing rules (§8.2 of the spec).** No line names the umbrella AI, says it controls the corporations, or explains the Signal barcodes or the merge. A few lines are **hints**: oblique, and marked **[hint]** below. Tag them `hint` in data; none of this pack is `reveal`.
 - **Voice rules.**
   - **NUL/REM** notes are lowercase, dry and short, as in the existing zine notes. He's protective under the irritation (Reluctant Guardian), and his six modes all get a turn. References follow the Bible's style rule (the player already knows the work; no years except 1982 and 1987).
   - **Corporations** never raise their voice before Mask off, and get more polite and more certain as things get worse (FACADE-001). Lethal ICE lines are in capitals, like the approved ones.

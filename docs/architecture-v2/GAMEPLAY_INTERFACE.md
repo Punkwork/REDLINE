@@ -33,7 +33,7 @@ These are conceptual contracts, **not approved method signatures**.
 - Free-break limits, boosts, break targeting, and phase changes.
 - Drag/drop target previews versus actual actions.
 - Response animation ordering and reduced-motion mode.
-- SIGNAL-001 third-punch-card reveal, approved copy and ’Pelago restrictions.
+- SIGNAL-001 third-Signal-barcode reveal, approved copy and ’Pelago restrictions.
 - Persistent UID for duplicated card IDs, COMPILED cards, and grafts.
 
 ## Acceptance criteria
