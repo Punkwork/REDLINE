@@ -413,7 +413,7 @@ Interpretations to confirm. A populated strategy without review evidence is prov
 
 ## 2026-11-28 — UI-PROTOCOL-001: Protocol lifecycle, ten playtest cards, Active Protocol note (Claude Code)
 
-Brief from the designer (07:38; issue #26).
+Brief from the designer (07:38; issue #26). Commit `0b80808`.
 - **Engine (`game.gd`).** At encounter completion, Protocols expire to the discard pile once, in `_after_breach` (after BREACH, END TURN and PARTING SHOT, before progression or rewards), so normal progression, forced LOCKDOWN and leaving early all clean up. This fixes the go_deeper discrepancy noted in PROTOCOL-DURATION-001b. There is no RACK cap and no RAM use, and recursion reads the discard pile only. Card-play triggers run after each successful play (`_after_card_played`); a Protocol never fires for its own deployment. SALVAGE waits until no other choice is open (`_flush_salvage`), FEEDBACK LOOP hooks the ZEROED transition, and ADAPTIVE DEFENCE hooks PROGRAM installs. REPRISE repeats the previous SCRIPT's effect by the COMPILED-part pattern.
 - **Cards.** The ten SYNERGY-PLAYTEST-002 cards are `implemented` (design stays `playtest`), with parameters and templates (CSA-04i/j). They join the shared reward pool at their approved rarities.
 - **V2 screen.** `HudWidgets.ProtocolNote` on the paperclip note draws one icon per card in `game.rack` and scrolls vertically, with hover/focus through the shared inspector; the CORTEX/BW-drain stamps are kept. The three header PROTOCOL slots are removed. The SALVAGE choice reuses the retrieve overlay with its own title.
