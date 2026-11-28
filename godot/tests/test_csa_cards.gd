@@ -9,6 +9,13 @@ var failed := 0
 
 ## Approved data changes since the C1 snapshot: what -> decision ID. Everything else must match the snapshot.
 const APPROVED_CHANGES := {"RUSTLERS.RIOT.starter": "RIOT-006"}
+## CSA-03 C3: approved wording now shown (CONSISTENCY-001a conflict table). id -> [field, new value].
+const APPROVED_TEXT := {
+	"TAIL_CALL": "Put a SCRIPT from your discard pile into your hand.",
+	"HOST_TAKEOVER": "Break 2 subroutines on target ICE with 5 or more virus counters.",
+	"FORCE_REBOOT": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
+	"BORROWED_CREDENTIALS": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. Costs 8 CRED.",
+}
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
 const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved"]
 const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "PROBE", "FEEDBACK",
@@ -30,11 +37,19 @@ func _initialize() -> void:
 	check(CardDB.DEFS.keys() == snap.def_keys, "card order unchanged (reward pools iterate it)")
 	check(CardDB.CAPS.keys() == snap.cap_keys, "CAP order unchanged")
 	for id in snap.defs:
-		check(same(legacy(CardDB.def(id), snap.defs[id]), snap.defs[id]), "def(%s) unchanged apart from C2 metadata" % id)
+		var old: Dictionary = snap.defs[id]
+		if APPROVED_TEXT.has(id):
+			check(CardDB.def(id).text == APPROVED_TEXT[id], "%s shows its approved wording (C3)" % id)
+			old = old.duplicate(true); old.text = APPROVED_TEXT[id]
+		check(same(legacy(CardDB.def(id), old), old), "def(%s) unchanged apart from C2 metadata and C3 wording" % id)
 		check(only_metadata_added(CardDB.def(id), snap.defs[id]), "def(%s) adds only %s" % [id, METADATA])
 		check(same(CardDB.roles(id), snap.roles[id]), "roles(%s) unchanged" % id)
 	for cid in snap.compiled:
-		check(same(legacy(CardDB.def(cid), snap.compiled[cid]), snap.compiled[cid]), "compiled %s unchanged" % cid)
+		var exp: Dictionary = snap.compiled[cid].duplicate(true)
+		for part in String(cid).split("::").slice(1):
+			if APPROVED_TEXT.has(part):
+				exp.text = String(exp.text).replace(snap.defs[part].text, APPROVED_TEXT[part])
+		check(same(legacy(CardDB.def(cid), exp), exp), "compiled %s unchanged apart from its parts' C3 wording" % cid)
 	for key in snap.pools:
 		var p: PackedStringArray = String(key).split("/")
 		check(same(CardDB.reward_pool(p[0], p[1]), snap.pools[key]), "reward_pool(%s) unchanged" % key)

@@ -313,3 +313,18 @@ Next: C2 (status, decisions, RIOT-006, playtest records, experimental flags, PAT
 - `shot_arch_v2_ice` 42 captures.
 
 **Caught during the work:** adding pending IDs to the engine's `CORE_POOL` broke the existing check "every CORE_POOL card exists". The loader now filters it, which keeps that invariant.
+
+## 2026-11-27 — CSA-03 C3: approved card wording shown; CSA-03 built (Claude Code)
+
+Text updated where the engine already does what the approved wording says: TAIL CALL, HOST TAKEOVER, FORCE REBOOT and BORROWED CREDENTIALS ("boosts": HUSH's break against a borrowed ICE uses the normal boost calculation, `game.gd` `break_info`). BORROWED CREDENTIALS keeps "Costs 8 CRED." in its shown text, because the V2 card view (`card_view.gd`) draws only the BW cost; its approved text is stored as divergent. GARBAGE COLLECT is now divergent under BURNED-001, since its BURN uses the same `burned` pile. That makes 15 divergent records.
+
+Tests:
+- `test_csa_cards.gd` 501/0. Each wording change is named, and compiled cards are checked with their parts' new text.
+- All suites at their C2 counts (test_game 430, adp 17, signal_carbon 672, ice 202, coverage 548, batch3 110, batch4 76, app 29, parity 3,938 / 4,018).
+- Python 20/0.
+- Drift scan: 36 → 33 text conflicts.
+
+CSA-03 is BUILT and awaiting acceptance. Carried open:
+- 15 divergences (CSA-04);
+- decision IDs on 43 of 122 records;
+- tags for the 10 playtest cards.

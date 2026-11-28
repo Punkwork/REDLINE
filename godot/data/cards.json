@@ -822,15 +822,17 @@
 				"FORTRESS",
 				"VOID"
 			],
-			"text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements and break costs. Costs 8 CRED.",
+			"text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. Costs 8 CRED.",
 			"status": {
 				"design": "approved",
-				"implementation": "implemented"
+				"implementation": "divergent"
 			},
 			"decisions": [
 				"ECHO-005",
 				"CONSISTENCY-001a"
-			]
+			],
+			"approved_text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",
+			"divergence": "CONSISTENCY-001a: the 8 CRED belongs in the cost field (cred_cost), but the V2 card view draws only the BW cost; the text keeps \"Costs 8 CRED.\" until it does (CSA-04)."
 		},
 		"SLOW_DRIP": {
 			"name": "SLOW DRIP",
@@ -1614,7 +1616,7 @@
 				"min_virus": 5,
 				"same_ice": true
 			},
-			"text": "Break 2 subroutines on an ICE with 5 or more virus counters.",
+			"text": "Break 2 subroutines on target ICE with 5 or more virus counters.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
@@ -1687,7 +1689,7 @@
 			"bw": 0,
 			"rarity": "UNCOMMON",
 			"tags": [],
-			"text": "Shuffle discard into draw pile. This is a REBOOT. BURNED.",
+			"text": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
 			"status": {
 				"design": "approved",
 				"implementation": "divergent"
@@ -1735,11 +1737,14 @@
 			"text": "BURN 1 other hand card for this Node. Draw 1.",
 			"status": {
 				"design": "approved",
-				"implementation": "implemented"
+				"implementation": "divergent"
 			},
 			"decisions": [
-				"CONSISTENCY-001a"
-			]
+				"CONSISTENCY-001a",
+				"BURNED-001"
+			],
+			"approved_text": "BURN 1 other card in your hand. Draw 1.",
+			"divergence": "BURNED-001: the burned card should return after the encounter; the engine keeps it out until the Node ends (\"for this Node\" stays in the text until then)."
 		},
 		"TAIL_CALL": {
 			"name": "TAIL CALL",
@@ -1747,7 +1752,7 @@
 			"bw": 1,
 			"rarity": "UNCOMMON",
 			"tags": [],
-			"text": "Put a SCRIPT from discard into your hand.",
+			"text": "Put a SCRIPT from your discard pile into your hand.",
 			"status": {
 				"design": "approved",
 				"implementation": "implemented"
