@@ -391,3 +391,13 @@ Tests:
 Interpretation to confirm: PIVOT on an ICE already at 0 breaks nothing.
 
 Next: the rest of CSA-04 (Inspector model, Uplink contract, generated doc blocks, decision-ID backfill).
+
+## 2026-11-27 — NODE-AUTHORITY-001: canonical Node authority (Claude)
+
+Designer approved Core Rules §8.3 as the single Node authority and answered the eight conflicts reported in the pre-gate assessment (resolutions in Master Design). Docs only; no `godot/` file changed, so the Godot suites weren't rerun (no Godot binary in this session).
+- `8d80c62` AGENTS = CLAUDE §7: §8.3 wins for Node purposes and services; map authority unchanged.
+- `71f4a0f` Core Rules §8.3 rewritten as the canonical table (anchors, functional sovereignty, boundaries; DEAD DROP row added); §6 Clinic; §9.3 free PATCHWORK removed; Master Design decision record and historical labels; CSA source inventory.
+- `d076e8d` NODE-PURPOSE-001 and UPLINK-SPEC-001 copies retired to references (Master Design and this log keep them); Uplink Wipe and CARD-002 retired; Clinic at every Uplink; FIELD MEDIC SAFEHOUSE only; THE GRID's FORTIFY → ENTRENCH.
+- `debc114` `tools/csa/scan_node_authority.py` and `tests/python/test_node_authority.py` (13 tests: live check plus 9 negative on a temp copy); fixes the scan found.
+
+Validation: scanner 0 documentation findings over 83 active docs, 2 runtime consumers pending; `python3 -m unittest discover -s tests/python` 52/0; `validate_cards.py` valid; `scan_card_drift.py` output identical to `aae7f34`. Runtime compliance is not claimed: see HANDOFF (NODE-AUTHORITY-001).
