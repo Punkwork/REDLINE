@@ -4,7 +4,9 @@ As of 2026-11-18. Repository: `Punkwork/REDLINE`. Working branch: `architecture-
 
 **Latest Windows build.** HALCYON PLAYTEST 6 (`0.6.0-playtest.6`) was exported from `22eb17f` on `release` and tagged `playtest-6`. The package contains the ADP Phase 2 and 3 presentation, the punch-card scaffolding and the SAMIZINE CARBON ledger. The nine island names are working copy. The source revision, executable checksum and packaged guides were verified. Windows launch and designer playtesting are pending. [Download](https://github.com/Punkwork/REDLINE/actions/runs/44314368001/artifacts/14431722167) · [Actions run](https://github.com/Punkwork/REDLINE/actions/runs/44314368001)
 
-The Godot 4.3 HALCYON slice is at `0.6.0-playtest.6`, four Rustlers and the first-four-row HALCYON route. Full-clear rewards/DECOMPILE, deck analysis, REBOOT/AMP, CHAIN, virus cash-outs and SAFEHOUSE COMPILE (as built; superseded in the design, Core Rules §8.3) remain. Uplink, other corporation gameplay, PATCHWORK/FUSE, CAPS and Ghostware acquisition are outside the slice.
+**`architecture-v2` has moved past this page (2026-11-28):** the app now plays a generated 16-row HALCYON map (MAP-003f: 15 Nodes and the boss, no escape) with a playable Uplink; see [ARCHITECTURE.md](ARCHITECTURE.md) ("Slice boundaries") and the latest [development log](REDLINE_DEVELOPMENT_LOG.md) entries. The rest of this page describes `main`.
+
+On `main`, the Godot 4.3 HALCYON slice is at `0.6.0-playtest.6`, four Rustlers and the first-four-row HALCYON route. Full-clear rewards/DECOMPILE, deck analysis, REBOOT/AMP, CHAIN, virus cash-outs and SAFEHOUSE COMPILE (as built; superseded in the design, Core Rules §8.3) remain. Uplink, other corporation gameplay, PATCHWORK/FUSE, CAPS and Ghostware acquisition are outside the slice.
 
 ZEROED-001 floors ICE STR at 0 and records its once-per-encounter opportunity. NULL POINTER replaces INTEGER UNDERFLOW; RIOT's pool includes FLATLINE, KNOCKOUT and SECOND WIND. TUMBLE-001 removes broken subroutines from the circulating pool and makes replacements active immediately. Neither mechanic was altered by the visual work.
 

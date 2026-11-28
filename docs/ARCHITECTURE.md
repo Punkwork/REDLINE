@@ -22,7 +22,7 @@ Player input → main.gd or FriendlyEncounter → Game action
 |---|---|
 | `scripts/core/game.gd` (`Game`) | RefCounted rules model with an optional seed. Holds the route, Rustler, VITAE, CRED, TRACE, strikes, punch cards and run deck. Also holds the current Node and layer, `enc`, encounter piles, installed PROGRAMs, protocol rack, BW and shield. `phase`, `pending.kind` and `response_queue` drive prompts and continuations. |
 | `scripts/core/cards.gd` (`CardDB`) | Definitions keyed by base card ID, starter decks, Rustler definitions, reward pools and role lookups. `CardDB.def()` builds the combined definition for a `COMPILED::a::b` ID when asked. An instance has its own `uid`; two copies of the same ID can have different runtime or presentation state. |
-| `scripts/core/ice.gd` (`IceDB`) | ICE definitions, subroutine effect dictionaries, HALCYON map rows and routes, PULP curves and corporation tuning. Game instantiates mutable ICE state and can use a definition supplied by a fixture. |
+| `scripts/core/ice.gd` (`IceDB`) | ICE definitions, subroutine effect dictionaries, the four-row HALCYON slice map (`IceDB.MAP`, the test default; the app uses the generated map, see Slice boundaries), PULP curves and corporation tuning. Game instantiates mutable ICE state and can use a definition supplied by a fixture. |
 | `scripts/core/nulrem.gd` (`NulRem`) | Picks dialogue by event and context, with its own RNG, chance and repeat suppression. Main displays the line and plays matching audio when available. |
 | `scripts/core/signal_cards.gd` (`SignalCards`) | Corporation keys and punch-card artwork data. Normalizes saved identifiers and checks whether all three distinct corporation cards are held. |
 | `scripts/core/arch_copy.gd` (`ArchCopy`) | Filters relocation, ledger and lore copy by approval, audience and reveal eligibility. Also guards NUL/REM lines. |
@@ -83,7 +83,8 @@ Use a working display and GL renderer. On display-less Linux, install Xvfb and x
 
 | Feature | Implemented hook | Outside the playable slice |
 |---|---|---|
-| Central Nodes | Final-layer BREACH of a node marked `central: true` awards that corporation's card once. The holder and arrival have controlled fixtures. | HALCYON's four-row route ends before a playable Central Node. |
+| Map (MAP-003f) | `Game.use_generated_map(k)` builds `map_rows` from one of the 20 validated V5 maps in `godot/data/maps/map003_v5.json` (written by `tools/map/export_maps.py`, drift-checked in CI): 16 rows, 15 Nodes and the boss on every route, no escape. The app calls it for every new run; `NodeMapScreen` draws it. `IceDB.MAP` (the four-row slice) stays the default for tests. | ICE Nodes and the Mini-Boss reuse the slice's five encounters as stand-ins; the Mini-Boss has no unique ability yet. DEAD DROP, Console Lab and SIGNAL UNCLEAR open a painted room with no services (`NODE_ROOM`). |
+| Central Node (boss) | The row-16 BOSS is marked `central: true` (3 layers). Final-layer BREACH awards that corporation's card once. | No payload Ghostware choice or First Signal fragment yet. |
 | LUCIDA | Facade art/skin and flavour-log rewrite hooks. The controlled INTAKE fixture exercises them. | There is no playable LUCIDA route. |
 | PATCHWORK | `attach_patchwork_graft(uid)` stores the selected broken-ICE graft on a run-deck instance. The fixture calls the hook directly. | There is no playable PATCHWORK upgrade action. SAFEHOUSE COMPILE is a separate feature (as built; superseded in the design, Core Rules §8.3). |
 | Run resume | `save_presentation()` and `restore_presentation()` round-trip punch-card IDs and grafts keyed by UID on an already available deck. | There is no on-disk run snapshot or resume screen. |

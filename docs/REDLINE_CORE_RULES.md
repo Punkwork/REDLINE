@@ -13,7 +13,7 @@
 
 ## 1. The game in one paragraph
 
-You are a **Rustler**, a hacker for hire, with your AI companion **NUL/REM**. A run takes you through the networks of **three corporations**. Each network is a map of **Nodes**. Most Nodes are guarded by **ICE**, defensive programs you get past by playing cards from your deck and using **Icepicks** to break their **subroutines**. Each corporation is a heist: infiltrate to its **Central Node**, a boss encounter, take the payload, and **escape**. Get out of all three corporations to win the run. Reach 0 **VITAE** and the run is over.
+You are a **Rustler**, a hacker for hire, with your AI companion **NUL/REM**. A run takes you through the networks of **three corporations**. Each network is a map of **Nodes**. Most Nodes are guarded by **ICE**, defensive programs you get past by playing cards from your deck and using **Icepicks** to break their **subroutines**. Each corporation is a heist: infiltrate to its **Central Node**, a boss encounter, beat it and take the payload (there is no escape, MAP-003). Beat all three corporations to win the run. Reach 0 **VITAE** and the run is over.
 
 ---
 
@@ -277,7 +277,7 @@ Non-ICE Nodes don't shuffle or reset your deck.
 
 ### 9.1 Card reward at the end of each ICE Node [CHANGED by CORE-010]
 1. CRED your Extractors earned is banked the moment it's paid, layer by layer.
-2. **Once per fully cleared ICE Node**, after you **BREACH the final ICE layer** and complete the encounter: **choose 1 of 3 cards** to add to your deck, or skip. **Leaving early gives no card reward**, even if earlier layers were breached (CORE-011). There is **no** card reward after individual layers, and **none in the escape** (§10.3).
+2. **Once per fully cleared ICE Node**, after you **BREACH the final ICE layer** and complete the encounter: **choose 1 of 3 cards** to add to your deck, or skip. **Leaving early gives no card reward**, even if earlier layers were breached (CORE-011). There is **no** card reward after individual layers.
 3. **Deeper is better.** For a fully cleared Node, the rarity odds of each choice depend on its total number of cleared layers. These odds do not grant rewards for partial clears:
 
 | Layers cleared | Common | Uncommon | Rare |
@@ -309,20 +309,23 @@ Complete a Node without gaining any TRACE during it: **+5 CRED** (working value)
 ### 10.1 A corporation's network
 - A layered map of Nodes. You always move forward, and every route has the same number of Nodes.
 - Node icons on the map show **what probably lies ahead**: ICE, Uplink, DEAD DROP, Console Lab, SAFEHOUSE, or **SIGNAL UNCLEAR** (unknown). **[CHANGED]** Previously Nodes were fully hidden. Showing likely contents fits the surveillance theme (you're watching the corporation too) and makes route choice a real decision.
-- **Structure [CHANGED by UPL-007]:** a heist in three parts. Every route has **15 Nodes**: **10 infiltration rows → the Central Node → a 4-Node escape** **[CHANGED by MAP-002: was 9 rows]**. This replaces the earlier working size of 6 Nodes per route (CORE-009).
+- **Map visibility [MAP-003a]:** the map always shows the next row's icons. Extracting every CRED from a Node reveals fuller paths **3 Nodes ahead**. The Mini-Boss shows as its own category icon only; its identity and ability stay hidden until you enter, and the fight is mandatory once you do (MINIBOSS-003 / MAP-003f).
+- **Structure [CHANGED by MAP-003, MAP-003b, MAP-003c]:** every corporation is a **16-row** map, and every route has **16 Nodes: 15 Nodes, then the boss**. **There is no escape:** once you beat the boss, you leave with your rewards and the corporation's Signal barcode (MAP-003). This replaces UPL-007's 10 infiltration rows → Central Node → 4-Node escape, and MAP-002's row table.
 
-**Infiltration rows** (each row has 3–4 Nodes; each Node links forward to 2–3 Nodes in the next row). **Row 1 is always the corporation's Opening Node** **[NEW, OPEN-001]**: a single fixed Node that every route starts from (§10.1a).
-
-| Rows | Possible Nodes |
+| Row | Nodes |
 |---|---|
-| 1 | The **Opening Node** only (§10.1a) |
-| 2–5 (Tier 1 ICE) | ICE (80%), SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** in row 4 |
-| 6–9 (Tier 2 ICE) | ICE (70%), Console Lab, SIGNAL UNCLEAR, SAFEHOUSE; **Uplink** in row 7 |
-| 10 | **Uplink or DEAD DROP only:** the last chance to prepare |
+| 1 | The **Opening Node** only (§10.1a), the first of the route's ICE Nodes |
+| 2–8, 10–15 | 3–4 Nodes per row: ICE, or one of the five other Node types (§8.3) |
+| 9 | The **Mini-Boss** Node (not on every route; MINIBOSS-001, `REDLINE_MINIBOSSES.md`); the other row-9 Nodes are ICE |
+| 16 | The corporation's **boss** (the Central Node, §10.2) |
 
-**Why 10 rows [MAP-002]:** about **6–7 ICE Nodes per route** (measured: 6.2 on a random route plus about 0.2 AMBUSH events; up to about 9 on a route chosen for ICE), so about 7–8 card rewards per corporation with the Central Node. The ICE odds per row are in `rules.json` (`map.node_odds`).
+**Every route [MAP-003b, MAP-003c, MAP-003f]:**
+- **8 encounters before the boss:** the Opening Node, 6 more ICE Nodes, and row 9 (the Mini-Boss or an ICE Node).
+- **7 other Nodes:** **2–3 Uplinks** and **at least 1 each** of SAFEHOUSE, DEAD DROP, Console Lab and SIGNAL UNCLEAR. The five valid mixes (Uplink, SAFEHOUSE, DEAD DROP, Console Lab, SIGNAL UNCLEAR) are (3,1,1,1,1), (2,2,1,1,1), (2,1,2,1,1), (2,1,1,2,1) and (2,1,1,1,2). Every Uplink has a Clinic (§8.3, MAP-003e).
+- **Spacing (working value, MAP-003c):** at most 4 ICE or 4 non-ICE Nodes in a row.
+- Generator and its validation: `prototypes/map/map003_generator.py --v5` and `prototypes/map/MAP003F_V5_REPORT.md` (interpretations I1–I5 there await the designer). The build reads its exported maps from `godot/data/maps/map003_v5.json`.
 
-- **SAFEHOUSEs** appear in **1–2** of the 10 infiltration rows (never row 1, an Uplink row or row 10).
+**Open (not yet decided for the 16-row map):** which rows use Tier 1 and Tier 2 ICE (MAP-002's rows 2–5 / 6–9 split and the `map.node_odds` ICE odds in `rules.json` belong to the retired 10-row map).
 
 ### 10.1a The Opening Node [NEW, OPEN-001]
 Every corporation starts with the same designed encounter, so every run gets **one guaranteed card reward per corporation** and every corporation teaches its main lesson before the random rows begin.
@@ -338,26 +341,19 @@ Every corporation starts with the same designed encounter, so every run gets **o
 | LUCIDA | **INTAKE** (BASELINE SCAN + ONBOARDING) | FORGET takes random cards, and CACHED cards are safe. |
 
 Details: `REDLINE_ICE_CORP1.md` §8.4, `REDLINE_ICE_CORP2.md` §6a, `REDLINE_ICE_CORP3.md` §7a.
-- Every route can reach **at least 1 Uplink** (row 10 always offers one). Every Uplink has a Clinic (§8.3).
+- Every route passes **2–3 Uplinks** (MAP-003f). Every Uplink has a Clinic (§8.3).
 
-### 10.2 Central Node and the payload [CHANGED by UPL-007]
-A boss-style ICE encounter. Defeating it gives you the corporation's **payload**, an **encrypted data core**: choose **1 of 3 Ghostware**, **active immediately** (usable during the escape). The rest of the core stays encrypted until you escape, when NUL/REM decrypts it into a **First Signal fragment** **[CHANGED by P5-009]**. See `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5.
+### 10.2 The boss (Central Node) and the payload [CHANGED by MAP-003]
+The row-16 boss is a boss-style ICE encounter (3 layers in the current build). Defeating it gives you the corporation's **payload**, an **encrypted data core**: choose **1 of 3 Ghostware**, **active immediately** (P5-009). With no escape, you leave with the payload and the corporation's **Signal barcode** as soon as the boss falls (MAP-003); NUL/REM decrypts the core into a **First Signal fragment**. See `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5.
 
-### 10.3 Escape [NEW, UPL-007]
-After the Central Node, you have to get out:
-- **4 Nodes:** **3 single-layer ICE encounters** using that corporation's **countermeasure ICE**, plus **exactly 1 SAFEHOUSE**.
-- **TRACE gains are doubled** throughout the escape.
-- **No leaving early.** JACK OUT still works here, with its other limits (UPL-009): it moves you on to the next escape Node.
-- **No card rewards** in escape encounters (CORE-010). Extractors still earn CRED, which you spend at the next corporation's Uplinks.
-- No Uplinks, Console Labs or other upgrade Nodes, apart from the one SAFEHOUSE.
-- **TRACE is doubled because the corporation is tracking its own data core.**
-- Complete the escape to decrypt the core (a First Signal fragment) and move on. If VITAE reaches 0 during the escape, the run ends as normal.
+### 10.3 Escape [RETIRED by MAP-003, 2026-11-21]
+There is no escape. UPL-007's 4-Node escape (countermeasure ICE, doubled TRACE, one SAFEHOUSE) is history; see the Later amendments table and Master Design MAP-003.
 
 ### 10.4 Moving to the next corporation
 Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE to max. Remove all CORTEX counters. Reset TRACE and strikes to 0.
 
 ### 10.5 Run length target [CHANGED by UPL-007]
-**75–100 minutes** for a full run (previously 45–75). Roughly: about 6–7 ICE Nodes on the way in (≈12 encounters with layers) + the boss + 3 escape encounters ≈ **16 encounters per corporation**, **about 48 per run**, at 3–4 turns each (MAP-002 adds about one encounter per corporation). The Training Node playtest should measure real minutes per encounter before these numbers are fixed.
+**75–100 minutes** for a full run (previously 45–75). **Breakdown not yet recomputed for MAP-003:** every route now has 8 encounters plus the boss and no escape (§10.1); the old estimate (about 16 encounters per corporation, including 3 escape encounters) is from the retired 10-row map. The Training Node playtest should measure real minutes per encounter before these numbers are fixed.
 
 ---
 
@@ -611,3 +607,6 @@ An **ECHO** repeats a previously played card's mechanical effect without playing
 - Recovering a card and subsequently playing it is a separate operation and generates a normal card-play event.
 
 REPRISE is the first approved application; its card-specific eligibility and targeting restrictions are separate from this universal rule.
+
+### Later amendment — MAP-003 to MAP-003f reconciled into §10 (CONSISTENCY-001, 2026-11-28)
+§1, §9.1 and §10 rewritten to match the approved MAP-003, MAP-003a, MAP-003b, MAP-003c, MAP-003e and MAP-003f decisions (Master Design): 16 rows, 15 Nodes and the boss on every route, 2–3 Uplinks per route, no escape. This closes discrepancy D2 in `prototypes/map/MAP003F_V5_REPORT.md` §9. The UPL-007 and MAP-002 rows above are history. No new rule was decided by this edit; open points are marked in §10.

@@ -153,7 +153,7 @@ Regenerate any sample with `python3 prototypes/map/map003_generator.py --v5 <see
 | Documentation | Partly reconciled (table below) |
 | GDScript implementation and map UI | Pending |
 
-**Not fully reconciled:** D2, D3 and D4 remain open.
+**Not fully reconciled:** D3 and D4 remain open (D2 fixed 2026-11-28).
 
 **Search.** I ran `git grep` across all tracked files, excluding historical material (the log archive, `docs/history/`, and the lore-only documents named in AGENTS §7). Terms covered:
 - Uplink counts: "3+ SAFEHOUSE", "SAFEHOUSE + Uplink", "1 Uplink in 3", "at least 1 Uplink";
@@ -167,7 +167,7 @@ Regenerate any sample with `python3 prototypes/map/map003_generator.py --v5 <see
 |---|---|---|---|---|
 | D1 | `REDLINE_MINIBOSSES.md:10`; `REDLINE_ICE_EFFECTS.md:30` | Said the Mini-Boss ability is explained on the map, which MINIBOSS-003 explicitly supersedes | High (contradicts an approved rule) | **Fixed** in this commit (small doc fix that follows a recorded decision) |
 | D1a | `REDLINE_MASTER_DESIGN.md` MINIBOSS-001/MAP-003a and MAP-003e paragraphs | Historical text without a superseded marker | Low | **Labelled** superseded / amended in this commit; the decision text itself is unchanged |
-| D2 | `REDLINE_CORE_RULES.md:291–322` (§10) | Still describes the UPL-007 / MAP-002 map (15 Nodes, 10 infiltration rows, Central Node, escape, "at least 1 Uplink", "1 Uplink in 3 has a Clinic"). Superseded by MAP-003 to MAP-003f, but the owner section was never rewritten | High (the owner of current mechanics is stale) | **Open.** It spans several decisions, so it needs a design pass (Claude), designer review, and the CONSISTENCY-001 audit |
+| D2 | `REDLINE_CORE_RULES.md:291–322` (§10) | Still describes the UPL-007 / MAP-002 map (15 Nodes, 10 infiltration rows, Central Node, escape, "at least 1 Uplink", "1 Uplink in 3 has a Clinic"). Superseded by MAP-003 to MAP-003f, but the owner section was never rewritten | High (the owner of current mechanics is stale) | **Fixed** 2026-11-28 (Claude, designer-requested): Core Rules §10 rewritten; open points listed there and in HANDOFF |
 | D3 | `REDLINE_UPLINK_AND_CAPS.md:86, 97, 135` | "Clinic about 1 Uplink in 3", "50 CRED". Superseded by MAP-003d/e (every Uplink has the Clinic counter) and CLINIC-001 (30 CRED, 25% bulk discount). Predates MAP-003f | Medium | **Open**, for the CONSISTENCY-001 audit |
 | D4 | Master Design, HANDOFF, development log, `REDLINE_MINIBOSSES.md` | Decision ID MINIBOSS-003 names two decisions (THE GRID's PROFILE + FORTIFY, and the Mini-Boss disclosure in MAP-003f) | Medium (ambiguous references) | **Open**: designer to re-ID one (surprise CLAUDECODE-20261127-S01) |
 | D5 | `docs/HANDOFF.md` MAP-003c row | V4 described as the current generator | Low | **Labelled** superseded for route composition |

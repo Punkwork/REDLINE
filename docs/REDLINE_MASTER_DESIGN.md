@@ -4063,3 +4063,7 @@ Designer approved TASER's PARTING SHOT suppression and all proposed boundaries. 
 ## GHOST-SCRAMBLED-001 — SCRAMBLED ID text (designer, 2026-11-28 12:04–12:06)
 
 **Designer:** "update Ghostware #8, SCRAMBLED ID … Ignore the first trace in each corporation countermeasure. You cannot reduce your trace. … Keep the price at 100 CRED"; then "change each corporation counter measure to each turn … ignore the first trace in each turn"; "capitalizing is fine … keep the capitalization for every instance of trace in the rules"; "Yes only text change". SCRAMBLED ID now reads: **"Ignore the first TRACE in each turn. You cannot reduce your TRACE."** Price 100 CRED, unchanged. Replaces the P5-003/P5-004 text ("The first TRACE strike in each corporation has no penalty"). **Status:** text approved; effect not built (held with the other Ghostware effects). *Open for implementation:* whether "the first TRACE" is the first point or the first TRACE gain, and whether "cannot reduce" also blocks the strike reset to 20.
+
+## CONSISTENCY-001 / MAP-003f — Core Rules §10 reconciled (Claude, 2026-11-28)
+
+Designer, 15:10: "fix those to match map 003F and today's build." Core Rules §10 (with §1 and one §9.1 sentence) now states the approved MAP-003 to MAP-003f map: 16 rows, 15 Nodes and the boss on every route, no escape. Closes D2 of the MAP-003f report. No new rule decided; Tier rows, escape ICE reuse and run-length estimates are open in HANDOFF.

@@ -49,14 +49,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: PROTOCOL-DURATI
 
 LOG-001 moved the oldest dated entries to the archive unchanged: PROTOCOL-DURATION-001a — Expiry destination (designer approved 2026-11-27), PROTOCOL-DURATION-001b — Encounter cleanup timing (designer approved 2026-11-27), SYNERGY-PLAYTEST-002 — Approved ten-card playtest catalogue (2026-11-27), SYNERGY-PLAYTEST-002a — OVERCLOCK revision (2026-11-27), 2026-11-27 — MAP-003f / MINIBOSS-003: V5 map generator (Claude Code).
 
-## 2026-11-27 — CONSISTENCY-001a: CSA-01 delivered, CSA-02 proposed (Claude Code)
-
-Designer assignment: Canonical Source Architecture. Complete CSA-01, prepare CSA-02, and stop at the approval gate. Result: [`architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md`](architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md), covering root causes RC1–RC8, the source inventory, consumer map, target architecture, migration plan with estimates, PROBE acceptance spec (B1–B9, T1–T7), enforcement plan, and decisions Q1–Q9. Evidence:
-- `tools/csa/scan_card_drift.py`: 34 active docs, 189 card-table rows; 35 text and 2 BW conflicts with CardDB; 56 names absent from CardDB.
-- PROBE-004a conformance on the live engine (`evidence/csa-01/probe_conformance.txt`): 5 of 7 fail. The STR mode also reveals; there is no reveal-all mode; the counter is keyed by ICE type; the text is stale; cancellation is not testable.
-- `architecture-v2` has no branch protection or ruleset; 28 of the last 40 CI runs were cancelled.
-
-Baseline at `c0e4acb` with Godot 4.3 stable: import 0; test_game 430/0; test_adp 17/0; test_signal_carbon 672/0; test_arch_v2_ice 202/0; coverage 548/0; batch3 110/0; batch4 76/0; app 29/0; parity 4,088/0. No engine, schema or settings change. Surprises CLAUDECODE-20261127-S03 and S04.
+LOG-001 moved the oldest dated entry to the archive unchanged: 2026-11-27 — CONSISTENCY-001a: CSA-01 delivered, CSA-02 proposed (Claude Code).
 
 ## 2026-11-27 — CSA-02 designer answers recorded; conflict table prepared (Claude Code)
 
@@ -486,3 +479,15 @@ Designer 11:48: "make Ghostware have a single source of truth, just like was don
 ## 2026-11-28 — GHOST-SCRAMBLED-001: SCRAMBLED ID text (Claude Code)
 
 Designer 12:04–12:06, text only. The `SCRAMBLED_ID` record in `cards.json` now reads "Ignore the first TRACE in each turn. You cannot reduce your TRACE."; price 100 CRED unchanged; decision added. The Upgrades/Events/Escape §2.2 table was regenerated. The effect isn't built (Ghostware effects held). Checks: validate_cards VALID; gen_card_docs `--check` and export_maps `--check` in step; `tests/python` OK; test_csa_cards 557/0, test_uplink_map 291/0, test_map_uplink_ui 17/0, test_game 453/0.
+
+## 2026-11-28 — CONSISTENCY-001 / MAP-003f: map docs reconciled with the 16-row map (Claude)
+
+Designer, 15:07–15:10: the docs still described the four-row slice and the escape, and the Claude Project copies were older still; "fix those to match map 003F and today's build. Then refresh the project copies." Documentation only; no rule decided, no code or data changed.
+- **Core Rules §10** rewritten from the approved MAP-003 / 003a / 003b / 003c / 003e / 003f records: 16 rows, 15 Nodes and the boss on every route, row 9 Mini-Boss, 8 encounters + 7 other Nodes (2–3 Uplinks, 1+ each of the rest), no escape (§10.3 retired), visibility rule. §1 and one §9.1 sentence no longer mention the escape. Closes D2 in `prototypes/map/MAP003F_V5_REPORT.md` §9.
+- **AGENTS.md / CLAUDE.md** (identical), **ARCHITECTURE.md** (Slice boundaries: Map and Central Node rows; `ice.gd` line) and **REDLINE_CURRENT_STATUS.md** (pointer: the page describes `main`) now say what `architecture-v2` plays.
+- **REDLINE_UPGRADES_EVENTS_ESCAPE.md** §2.5 and §4 marked amended / superseded by MAP-003.
+- **Claude Project copies** refreshed from this commit.
+- **Not changed:** `HALCYON_PLAYTEST_GUIDE.md` still matches the released Playtest 13 build (four rows); it updates with the next build (RELEASE-002 step 1).
+- **Checks:** `tests/python` and `tools/csa/scan_node_authority.py` (results below in HANDOFF).
+
+*Interpretations to confirm:* MAP-003's "barcode for the signal" read as the payload's First Signal fragment, revealed on leaving after the boss (Core Rules §10.2).

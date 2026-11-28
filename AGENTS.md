@@ -129,7 +129,7 @@ When docs disagree: **`docs/REDLINE_MASTER_DESIGN.md`** (decisions and register)
 
 **Current**
 - UI working specification: `docs/PANOPTICON_UI_DESIGN_BIBLE.md` (UI-BIBLE-001). Master Design decisions prevail; imported historical material is not a new approval. Extend the Bible instead of creating parallel UI briefs. Its seven legacy sources were retired by UI-BIBLE-001 (2026-11-25); the Bible's §4 maps each old path to its section.
-- What's next: `docs/HANDOFF.md`. What the build does now: `docs/ARCHITECTURE.md` ("Slice boundaries") and `docs/REDLINE_CURRENT_STATUS.md`. The HALCYON slice is only four map rows, so the code is not a full picture of the design.
+- What's next: `docs/HANDOFF.md`. What the build does now: `docs/ARCHITECTURE.md` ("Slice boundaries") and `docs/REDLINE_CURRENT_STATUS.md`. On `architecture-v2` the app plays a generated 16-row HALCYON map (MAP-003f: 15 Nodes and the boss, no escape; `godot/data/maps/map003_v5.json`), but many Node services and ICE placements are still stand-ins, so the code is not a full picture of the design. The four-row slice map is kept only as the test default and on `main`.
 - Rules: `docs/REDLINE_CORE_RULES.md` (Node purposes and services are §8.3, NODE-AUTHORITY-001; the map is §10).
 - Topic docs: `REDLINE_RUSTLERS.md`, `REDLINE_CARD_POOLS.md`, `REDLINE_ICE_CORP1.md`–`3.md`, `REDLINE_ICE_RULES_BIBLE.md`, `REDLINE_ICE_PASSIVES.md`, `REDLINE_UPLINK_AND_CAPS.md`, `REDLINE_UPGRADES_EVENTS_ESCAPE.md`, `REDLINE_ENGINES.md`, `REDLINE_DECK_SYNERGY.md`, `REDLINE_PACING.md`, `REDLINE_PLAYTEST_CHECKLIST.md`.
 - Look and tone: `PANOPTICON_UI_DESIGN_BIBLE.md` (VIS-001 and ADP-001), `REDLINE_ADP_PHASE2_COPY.md`, `REDLINE_CORPORATE_FACADES.md`, `REDLINE_SAMIZINE.md`, `REDLINE_ARCHIPELAGO.md`.
