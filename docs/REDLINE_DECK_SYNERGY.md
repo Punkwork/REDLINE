@@ -211,7 +211,7 @@ Virus counters mostly pile up; WORM (VIRUS-001) is the first strain you spend. M
 
 ### 6.2 HOLD 1 (DSY-012) — superseded
 
-HAND-CLEANUP-001 removes the free HOLD choice. After the Corporation Response, discard remaining non-CACHED cards and draw six on the next turn at base DRAW. Card-granted CACHE still applies. DEAD MAN'S POCKET has no active HOLD enhancement.
+HAND-CLEANUP-001 removes the free HOLD choice: remaining non-CACHED cards are discarded at cleanup; card-granted CACHE still applies. Cleanup and draw timing: Core Rules §4.3 (TURN-001). DEAD MAN'S POCKET has no active HOLD enhancement.
 
 ---
 

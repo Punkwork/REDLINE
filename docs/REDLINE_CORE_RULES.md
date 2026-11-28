@@ -69,29 +69,36 @@ Each card can also carry **tags**, shown under the type:
 
 ## 4. Turn structure
 
+*Reconciled 2026-11-28 with the build (TURN-001, confirmed by the designer as the current rule): the next hand is drawn at the **end** of your turn, before the Corporation Response. Items marked "core-loop build" are STRIP-001 decisions (BW-001, BOOST-001, BREACH-001) in force while `Game.CORE_LOOP` is on; whether they replace the full-design values is open with the designer (HANDOFF).*
+
 **4.1 Start of your turn**
-1. Refill BW to 4, minus any BW a DETAINER drained in the last Corporation Response (§5.5).
-2. Your SHIELD from last turn expires.
-3. **TUMBLERS rotate** one step (not on your first turn of an encounter; §5.4).
-4. Resolve "start of turn" effects (including virus strains, §5.7).
-5. Draw cards equal to your DRAW (6).
-6. **Resolve any DISCARD** that ICE dealt in the last Corporation Response: choose the cards from your new hand. *(FIX-001: a DISCARD used to hit the old hand just before cleanup discarded it anyway.)*
+1. **TUMBLERS rotate** one step (not on your first turn of an encounter; §5.4).
+2. Refill BW to 4 (core-loop build: 3, BW-001), minus any BW a DETAINER drained in the last Corporation Response (§5.5).
+3. Resolve "start of turn" effects (including virus strains, §5.7).
+4. Your SHIELD from last turn expires; "start of turn" SHIELD effects then apply.
+5. **First turn of each encounter only:** draw cards equal to your DRAW (6, reduced by CORTEX, §6). On every later turn your hand was already drawn at the end of your previous turn (4.3).
+6. **Resolve any DISCARD** that ICE dealt in the last Corporation Response: choose the cards from your hand. *(FIX-001.)*
 
-**4.2 Your turn:** play cards, install Programs, deploy Protocols, use Icepicks, in any order. You can **boost an installed Icepick** at any time on your turn by paying its boost cost; boosts last until the encounter ends *(FIX-002)*. End when you choose by pressing **END TURN**.
+**4.2 Your turn:** play cards, install Programs, deploy Protocols, use Icepicks, in any order. You can **boost an installed Icepick** at any time on your turn by paying its boost cost; boosts last until the encounter ends *(FIX-002)* (core-loop build: until the end of your turn, BOOST-001). End when you choose by pressing **END TURN**.
 
-**4.3 End of your turn**
-1. Resolve "end of turn" effects (for example, Extractors pay out).
+**4.3 End of your turn** *(TURN-001)*
+1. Resolve "end of turn" effects (for example, Extractors pay out); temporary CACHE durations count down.
 2. Unused BW is lost.
+3. If the encounter is BREACHED, go to **BREACH** below instead.
+4. **Cleanup:** discard every non-CACHED card in your hand. There is no free HOLD choice (HAND-CLEANUP-001).
+5. **Draw your next hand:** cards equal to your DRAW, added to any CACHED cards.
+6. The **Corporation Response** follows (4.4). CORTEX it deals hits the hand you have just drawn (§6); DISCARD it deals waits for the start of your next turn (4.1.6).
 
 **4.4 Corporation Response:**
 1. **PURGE check** *(PURGE-001)*: if the virus counters on the encounter's ICE add up to the corporation's PURGE limit or more, it removes them all **instead of taking its turn**, and your turn begins (§5.7).
 2. Otherwise each ICE acts in turn, **left to right**. Each unbroken subroutine **that is active** resolves **top to bottom**: on a TUMBLER only the subroutines in its slots (§5.4); on a VOID, subroutines 1 to N on its Nth response, face-down ones included (§5.6). Broken subroutines do nothing.
+3. Your next turn begins (4.1), without a draw.
 
 *Presentation (PLAY-001): the response takes at least 5 seconds; each subroutine flashes in turn, and its effects apply only as it flashes.*
 
-**4.5 Cleanup (HAND-CLEANUP-001):** END TURN gives no free HOLD choice. After the Corporation Response (or when BREACH skips it), discard every non-CACHED card still in your hand. On your next Rustler turn, draw 6 cards at base DRAW in addition to any CACHED cards. Existing DRAW modifiers and card-granted CACHE still apply.
+**4.5 Cleanup timing [CHANGED by TURN-001]:** HAND-CLEANUP-001 put the cleanup after the Corporation Response and the draw at the start of the next turn. TURN-001 moves both before the response (4.3). HAND-CLEANUP-001's other rules stand: no free HOLD, base DRAW, card-granted CACHE.
 
-**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. This includes DEADLOCKs you haven't seen yet: a TUMBLER's hidden DEADLOCKs must each be broken as they rotate into a slot, and a VOID's once they have fired *(ROT-001, VOID-001)*. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped**. If more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**.
+**BREACH:** the moment every **DEADLOCK** subroutine in the encounter is broken, the encounter is **BREACHED**. This includes DEADLOCKs you haven't seen yet: a TUMBLER's hidden DEADLOCKs must each be broken as they rotate into a slot, and a VOID's once they have fired *(ROT-001, VOID-001)*. You can keep playing. When you press END TURN, end-of-turn effects resolve, then **the Corporation Response is skipped** (core-loop build, BREACH-001: every unbroken subroutine that is active or revealed fires once as a **PARTING SHOT**, which is not a Corporation Response). If you survive, deployed Protocols expire (§3.1), your hand is discarded, and if more layers remain you choose to go deeper or leave (§8.2); otherwise the Node ends and you get its rewards (§9.1) **[CHANGED by CORE-010]**. Each new layer starts with a fresh draw (4.1.5).
 
 **Defeat:** if VITAE reaches 0 at any moment, the run ends immediately.
 
@@ -539,7 +546,7 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 | DSY-009 | **MARGIN** (Icepick STR − ICE STR) shown in the break preview; **OVERKILL X** keyword. *(Its UNDERFLOW part, STR below 0 and ROT's minimum removed, is withdrawn by ZEROED-001.)* — **APPROVED 2026-11-15; amended 2026-11-16** |
 | DSY-011 | **CHAIN [TAG]** keyword: a bonus if the last card you played this turn had that tag. HUD shows "Last played". — **APPROVED 2026-11-15** |
 | DSY-012 | **HOLD 1** was approved 2026-11-15 and superseded by **HAND-CLEANUP-001**. |
-| HAND-CLEANUP-001 | No free HOLD between turns. Discard remaining non-CACHED cards in cleanup and draw 6 at base DRAW on the next Rustler turn. — **APPROVED 2026-11-17** |
+| HAND-CLEANUP-001 | No free HOLD between turns. Discard remaining non-CACHED cards in cleanup and draw 6 at base DRAW on the next Rustler turn. — **APPROVED 2026-11-17** *(Timing superseded by TURN-001: cleanup and draw happen before the Corporation Response, §4.3.)* |
 | PACE-001 | Encounter length targets **4–5 turns early, 5–8 mid–late**, boss 7–8, escape 4–5, replace §10.5's 3–4 turns. — **APPROVED 2026-11-15** |
 | PACE-003 | **DEADLOCK ×N** subroutines need N breaks (§5.2). BOOTING moves to the 4th turn **only if** playtest 2 shows the Opening Node breached before turn 4 (would amend §10.1a). — **APPROVED 2026-11-15** |
 | PACE-005 | **ESCALATE ↑:** a TRACE, DISCARD or FORGET subroutine that grows by 1 each time it resolves (§5.2). — **APPROVED 2026-11-15** |
@@ -556,6 +563,12 @@ The designer approved `REDLINE_DECK_SYNERGY.md` (DSY-001 to DSY-014) and `REDLIN
 ### Later amendment — BYPASS-001 (2026-11-24)
 
 Designer rule: BYPASS is permitted only in non-final encounters (ICE layers) of a Node, which has up to three encounters. It is prohibited in the final encounter, including a single-encounter Node. Eligibility is not automatic success; specific BYPASS effects and resolution remain open. See Master Design BYPASS-001.
+
+### Later amendment — TURN-001 (confirmed 2026-11-28)
+
+| ID | Rule |
+|---|---|
+| TURN-001 | At the end of your turn: end-of-turn effects, discard non-CACHED cards, **draw your next hand**, then the Corporation Response; your next turn starts without a draw (the first turn of each encounter draws). Approved 2026-11-21 for the core-loop build (STRIP-001); **confirmed by the designer on 2026-11-28 as the current rule** and written into §4. |
 
 ## TRACE-DEF-001 — TRACE definition (designer approved 2026-11-27)
 TRACE represents the extent of a corporation's actionable knowledge of the Rustler's whereabouts and activities. As TRACE increases, the corporation becomes increasingly capable of locating the Rustler and determining and deploying effective countermeasures. TRACE is not merely an alarm meter. Existing numerical thresholds, strikes, reset and countermeasure rules remain unchanged. Commercial identity disclosure and NUL/REM behavioural intelligence are distinct; no automatic TRACE linkage is authorized.

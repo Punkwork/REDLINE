@@ -430,3 +430,21 @@ Designer approved the universal effect-repetition distinction and explicit Proto
 ## 2026-11-28 — CARD-REVIEW-001: eleven-card consolidated review (ChatGPT)
 
 Designer authorized CardDB update for eleven existing cards. Added flavor and strategy metadata, REACTIVE_ARMOUR rarity, OVERCLOCK threshold and FEEDBACK_LOOP wording; recorded approved divergent revisions for REPRISE and STACK_SMASH. No pool changes, new IDs, runtime changes or release. JSON record replacement verified in memory; Godot and CSA tests not run. See Master Design and HANDOFF for implementation reconciliation and approval caveats.
+
+## 2026-11-28 — TURN-001: turn sequence traced, Core Rules §4 reconciled (Claude Code)
+
+The designer's brief (09:08): Core Rules §4 doesn't match the build, and the Rustler draws before the Corporation Response.
+
+**Execution order** at the Playtest 13 release commit `a6f4476` (RELEASE-002, Claude, 2026-11-26; `release` head) and on `architecture-v2`; the `end_turn` → `_begin_parting_shot` code is identical in both. `CORE_LOOP` is true. Line numbers are for `game.gd` on `architecture-v2`.
+1. `end_turn` (970) records stats, then `_end_turn_effects` (981): Extractors pay out, TRACER +3, temporary CACHE counts down (999), BW to 0 (1001), SHATTER's SLEDGE drop.
+2. If BREACHED (1012): PARTING SHOT (`_begin_parting_shot`, BREACH-001), then `response_finish` → `_cleanup` → `_after_breach` (Protocols expire, then go deeper / LOCKDOWN / leave / reward).
+3. Otherwise (1020, TURN-001): `_cleanup` discards non-CACHED cards, then `draw_cards(draw_size())`, where DRAW = 6 − CORTEX, minimum 1 (461), then `_begin_response` (1120): PURGE check, then subroutines in order. CORTEX adds counters (1220, `add_cortex`); DISCARD is deferred to `enc.pending_discard` (1240, FIX-001).
+4. `response_finish` (1172): no cleanup in the core loop (1200), then `_start_turn` (395): rotate, BW 3 − drain, start-of-turn effects, SHIELD reset (427), no draw after turn 1 (447), then the deferred DISCARD choice from the hand (452).
+
+**Provenance.** TURN-001 was approved by the designer on 2026-11-21 (quote in Master Design's STRIP-001 record) for the core-loop build and implemented in `dd46f07` (STRIP-001, Claude). It was recorded in `REDLINE_CORE_LOOP.md` and HANDOFF but never in Core Rules §4, which kept HAND-CLEANUP-001's order (2026-11-17). That is a documentation gap, not an undocumented engine change. The only sequence test is `test_core_loop.gd` `test_turn_001_draw`, which checks the 6-card hand and that there is no draw at turn start.
+
+**PT13 vs `architecture-v2`.** The turn sequence is unchanged. Encounter-end differences: BURNED cards return to the discard pile (`e4bfb6e`, CSA-04c, BURNED-001/001a/001b) and Protocols expire (`0b80808`, UI-PROTOCOL-001). The playtest-13 tag isn't on the remote yet (designer step, RELEASE-002 §5).
+
+**Docs.** Core Rules §4 is rewritten to the build, with a TURN-001 amendment row and HAND-CLEANUP-001's timing marked superseded. Deck Synergy §6.2 now points to Core Rules instead of restating the timing. Master Design and HANDOFF have records.
+
+**Escalated:** whether BW-001, BOOST-001 and BREACH-001 (core-loop build values, marked as such in §4) replace the full-design values. Documentation only; no engine change.

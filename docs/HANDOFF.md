@@ -727,3 +727,9 @@ Representative ICE Encounter and Protocol playtest scope: see [issue #26](https:
 ## CARD-REVIEW-001 — Eleven-card review: implementation reconciliation pending
 
 Claude Code: reconcile CardDB divergent STACK_SMASH and REPRISE to approved_text and Master Design CARD-REVIEW-001; migrate STACK_SMASH reduction to canonical parameter, remove target selection atomically with engine change, test one/two/three ICE and independent ZEROED triggers. REPRISE fresh legal target/mode, BURNED and REPRISE source rejection, ECHO event/penalty/choice handling, recursion and no-source legality. Verify OVERCLOCK fourth-card threshold and REACTIVE_ARMOUR rarity propagation to rewards/Uplink; update tests for all eleven, including SALVAGE, FEEDBACK_LOOP, ADAPTIVE_DEFENCE, FOLLOW_THROUGH, ESCALATION and AFTERBURN. Validate generated views, CSA, Godot and strategy diagnostics; reconcile historical topic descriptions and art paths. Do not cut a build with divergent records. No new cards, no release authorization. Issue #25 strict gate still pending; classifications are designer-approved design metadata, not formal validator acceptance.
+
+## TURN-001 reconciliation and CORTEX-001 (2026-11-28)
+| Item | Owner | Status |
+|---|---|---|
+| **TURN-001** turn sequence: Core Rules §4 reconciled with the build (draw before the Corporation Response, designer-confirmed 2026-11-28). Playtest 13 (`a6f4476`) and `architecture-v2` run the same END TURN sequence; the differences since PT13 are encounter-end only (BURNED-001 `e4bfb6e`, UI-PROTOCOL-001 `0b80808`). | Claude Code | **DOCUMENTATION RECONCILED** (commit in the development log). *Open for the designer:* do BW-001 (3 BW), BOOST-001 (boosts for the turn) and BREACH-001 (parting shot) replace the full-design values in Core Rules, or stay core-loop-build values? |
+
