@@ -147,3 +147,17 @@ All ten must be obtainable through normal node completion card rewards in the re
 
 ## SYNERGY-PLAYTEST-002a — OVERCLOCK revision (2026-11-27)
 Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card each turn, draw 2 cards and gain 1 BW. Retain 2 BW deployment cost, encounter duration, once per turn per deployed copy, and all other SYNERGY-PLAYTEST-002 conventions. Supersedes the draw-only effect. Include immediate BW availability, trigger frequency and resource-loop tests. Documentation only; no engine changes.
+
+## 2026-11-28 — Proposed next working day agenda (review 2026-11-27)
+Pending designer confirmation. Evidence: [ChatGPT review](reports/2026-11-27-ChatGPT.md), [Claude Code report](reports/2026-11-27-Claude-Code.md), reviewed head 9595786b, [CI](https://github.com/Punkwork/REDLINE/actions/runs/46096427208). Supersedes earlier proposed sequencing, not approvals.
+
+| Rank | Canonical work | Proposed owner | Dependencies / next evidence / decision |
+|---|---|---|---|
+| 1 | Representative ICE encounter VAS-001/CAS-001/#21; PT13 RELEASE-002 | Designer + Claude Code | Windows artifact checksum, launch, encounter feedback and parity; distinguish PT13 from newer head; tag PT13 only by designer; no new cut without approval. |
+| 2 | CONSISTENCY-001a CSA-04/05/06 | Claude Code; designer approval | CSA-03 accepted; 04a–d built, CI green. Complete consumer wiring and independent PROBE acceptance; CI schema/IDs/terms/generated drift/spec tests/Python/append-only log guard/agent equality; designer applies required-check ruleset after checks exist; retire duplicates only after validation. Resolve Q4 historical wording conflict and duplicate MINIBOSS-003 ID. |
+| 3 | M06 UI-TYPO-001/#24, UI-INSPECTOR-001 | ChatGPT/Claude design, Codex fixtures, Claude Code bindings | Review existing specimens and latest typography direction; inspector consumes canonical card data; verify readability/reduced effects and event motion. Designer accepts exact treatments. |
+| 4 | SYNERGY-PLAYTEST-002/a, PROTOCOL-DURATION-001/a/b | Claude Code + designer | Ten pending records; implement approved effects/lifecycle with spec tests and reward eligibility, no CHAIN revival; validate final DEADLOCK/PARTING SHOT/expiry, replay safety and multi-encounter persistence. Coordinate CSA batches. |
+| 5 | UPLINK-SPEC-001 / MAP-003f / NODE-PURPOSE-001 | Claude Code + designer/Codex | V5 prototype reported validated; resolve I1–I5 and shared PRNG, Python CI, Clinic docs; review technical dependencies and UI before port/integration. Use generator and developer inventory override, not bespoke route. |
+| 6 | OPS-001 / DOCS-MIG-001 / UI-BIBLE-001; #13–20/#22/#23 | Claude Code + designer | Validate migration evidence before closure; reconcile issue evidence and supersession; recheck #16 against new PROBE; missing reports and release tag; decide legacy branch disposition. No closure/settings changes without authorization. |
+
+No new approvals or implementation authorized by this proposal. Preserve existing decisions and shared native issue register.
