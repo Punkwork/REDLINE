@@ -17,8 +17,16 @@ class LiveFile(unittest.TestCase):
         self.assertEqual(V.validate(), [])
 
     def test_counts(self):
-        self.assertEqual(len(LIVE["cards"]), 112)
+        self.assertEqual(len(LIVE["cards"]), 122)   # 112 engine cards + 10 SYNERGY-PLAYTEST-002 records (pending)
         self.assertEqual(len(LIVE["caps"]), 5)
+
+    def test_register(self):
+        reg = V.register()
+        self.assertEqual(len(reg["pending"]), 10)
+        self.assertEqual(sorted(reg["experimental"]), sorted(["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]))
+        self.assertIn("PROBE", [c for c, _ in reg["divergent"]])
+        self.assertEqual(LIVE["starters"]["RIOT"].count("PROBE"), 4)   # RIOT-006
+        self.assertNotIn("SMASH_AND_GRAB", LIVE["starters"]["RIOT"])
 
 
 class CatchesMistakes(unittest.TestCase):
@@ -60,6 +68,34 @@ class CatchesMistakes(unittest.TestCase):
         self.assertIn("unknown card 'PR0BE'", self.errors(lambda d: d["starters"]["RIOT"].append("PR0BE")))
         self.assertIn("core_pool names unknown card", self.errors(lambda d: d["core_pool"].append("NOPE")))
         self.assertIn("pool_extra ECHO names unknown card", self.errors(lambda d: d["pool_extra"]["ECHO"].update(NOPE="COMMON")))
+
+    def test_invalid_status(self):
+        self.assertIn("status must be", self.errors(lambda d: d["cards"]["PROBE"]["status"].update(design="final")))
+
+    def test_experimental_card_in_starter_deck(self):
+        self.assertIn("starter cards must be current", self.errors(lambda d: d["starters"]["RIOT"].append("SMASH_AND_GRAB")))
+
+    def test_pending_card_as_reward(self):
+        self.assertIn("cannot be a reward", self.errors(lambda d: d["pool_extra"]["ECHO"].update(REPRISE="RARE")))
+
+    def test_experimental_card_in_core_pool(self):
+        self.assertIn("core_pool holds experimental", self.errors(lambda d: d["core_pool"].append("SCALPEL")))
+
+    def test_divergent_without_reason(self):
+        self.assertIn("must say why", self.errors(lambda d: d["cards"]["PIVOT"].pop("divergence")))
+
+    def test_divergence_on_implemented_record(self):
+        self.assertIn("only for divergent", self.errors(lambda d: d["cards"]["DEFRAG"].update(divergence="x")))
+
+    def test_approved_text_matching_text(self):
+        self.assertIn("no longer divergent", self.errors(lambda d: d["cards"]["PROBE"].update(text=d["cards"]["PROBE"]["approved_text"])))
+
+    def test_decisions(self):
+        self.assertIn("not a decision ID", self.errors(lambda d: d["cards"]["PROBE"].update(decisions=["probe four"])))
+        self.assertIn("not recorded", self.errors(lambda d: d["cards"]["PROBE"].update(decisions=["NOSUCH-999"])))
+
+    def test_banned_wording(self):
+        self.assertIn("banned wording", self.errors(lambda d: d["cards"]["REPRISE"].update(text="Back to the Archipelago.")))
 
     def test_bad_id_case(self):
         self.assertIn("UPPER_SNAKE_CASE", self.errors(lambda d: d["cards"].update(probe=d["cards"]["PROBE"])))

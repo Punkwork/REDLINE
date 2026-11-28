@@ -8,7 +8,10 @@ extends RefCounted
 const DATA_PATH := "res://data/cards.json"
 const SCHEMA := "panopticon.cards/1"
 static var DATA: Dictionary = _load_data()
-static var DEFS: Dictionary = DATA.get("cards", {})
+## Every card record, including the approved playtest cards not yet built (status.implementation "pending").
+static var RECORDS: Dictionary = DATA.get("cards", {})
+## The cards the engine can deal, play and reward: every record except "pending" ones (CSA-03 C2).
+static var DEFS: Dictionary = _playable(RECORDS)
 static var CAPS: Dictionary = DATA.get("caps", {})
 static var STARTER_GENERALIST: Array = DATA.get("starters", {}).get("GENERALIST", [])
 static var STARTER_ECHO: Array = DATA.get("starters", {}).get("ECHO", [])
@@ -17,7 +20,9 @@ static var STARTER_VECTOR: Array = DATA.get("starters", {}).get("VECTOR", [])
 ## Cards offered in a Rustler's reward pool besides those tagged with "pool" (rarity used for the reward roll).
 static var POOL_EXTRA: Dictionary = DATA.get("pool_extra", {})
 ## STRIP-001: reward cards allowed in the core-loop build (only break, defend and build; no switched-off systems).
-static var CORE_POOL: Array = DATA.get("core_pool", [])
+## Only cards the engine can play: an approved card that is still "pending" (e.g. SYNERGY-PLAYTEST-002) is listed
+## in cards.json's core_pool and joins this list automatically once its handler is built (CSA-03 C2).
+static var CORE_POOL: Array = _in_defs(DATA.get("core_pool", []))
 
 static func _load_data() -> Dictionary:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(DATA_PATH))
@@ -27,6 +32,23 @@ static func _load_data() -> Dictionary:
 	var data: Dictionary = _whole_numbers(parsed)
 	_freeze(data)
 	return data
+
+static func _playable(records: Dictionary) -> Dictionary:
+	var out := {}
+	for id in records:
+		if String(records[id].get("status", {}).get("implementation", "implemented")) != "pending":
+			out[id] = records[id]
+	out.make_read_only()
+	return out
+
+static func _in_defs(ids: Array) -> Array:
+	var out := ids.filter(func(id): return DEFS.has(id))
+	out.make_read_only()
+	return out
+
+static func design_status(id: String) -> String:
+	## "approved", "playtest", "experimental" or "historical" (CSA-03 C2; validated by tools/csa/validate_cards.py).
+	return String(RECORDS.get(id, {}).get("status", {}).get("design", ""))
 
 static func _whole_numbers(v: Variant) -> Variant:
 	## JSON numbers arrive as floats. Every number in the card data is whole (tools/csa/validate_cards.py checks it).
@@ -101,6 +123,8 @@ static func reward_pool(pool: String, rarity: String) -> Array:
 		var d: Dictionary = DEFS[id]
 		if d.rarity != rarity or d.get("slice_excluded", false):
 			continue
+		if String(d.get("status", {}).get("design", "approved")) in ["experimental", "historical"]:
+			continue   # CSA-03 C2: experimental and historical cards are never rewards
 		if Game.CORE_LOOP and not CORE_POOL.has(id):
 			continue
 		var p: String = d.get("pool", "SHARED")

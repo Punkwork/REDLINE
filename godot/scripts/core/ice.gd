@@ -33,7 +33,9 @@ const DEFS := {
 	"HOUSE_CALL": {"name": "HOUSE CALL", "type": "VOID", "str": 9, "tier": "BLACK", "black": true,
 		"subs": [[{"k": "PULP", "v": 5}], [{"k": "PULP", "v": 5}]]},
 	"FREE_TRIAL": {"name": "FREE TRIAL", "type": "TUMBLER", "str": 4, "tier": "T2", "slots": 2, "ability": "REBOOT_SPAM", "ability_text": "Whenever you REBOOT: INSERT 1 SPAM into draw.", "subs": [[{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}], [{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
-	"PATTERN_ANALYSIS": {"name": "PATTERN ANALYSIS", "type": "VOID", "str": 4, "tier": "T2", "ability": "CHAIN_PULP", "subs": [[{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
+	# CONSISTENCY-001a (designer 2026-11-27): experimental. CHAIN_PULP fires off the Rustler's CHAIN bonus, and CHAIN is parked
+	# (CHAIN-PARK-001); not on any map until redesigned. ICE data moves to a canonical record in CSA-07.
+	"PATTERN_ANALYSIS": {"name": "PATTERN ANALYSIS", "status": "experimental", "type": "VOID", "str": 4, "tier": "T2", "ability": "CHAIN_PULP", "subs": [[{"k": "PULP", "v": 3}], [{"k": "DEADLOCK"}]]},
 	"RECURRING_DREAM": {"name": "RECURRING DREAM", "type": "TUMBLER", "str": 4, "tier": "T2", "slots": 2, "ability": "REBOOT_FORGET", "subs": [[{"k": "FORGET", "v": 1}], [{"k": "TRACE", "v": 2}], [{"k": "DEADLOCK"}]]},
 }
 

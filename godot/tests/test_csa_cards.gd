@@ -1,5 +1,5 @@
 extends SceneTree
-## CSA-03 C1 (CONSISTENCY-001a): CardDB loads res://data/cards.json and must give exactly what the old
+## CSA-03 C1/C2 (CONSISTENCY-001a): CardDB loads res://data/cards.json and must give exactly what the old
 ## GDScript constants gave. csa_carddb_snapshot.txt was written from those constants at a278aee
 ## (var_to_str keeps types; key order is kept in def_keys / cap_keys). Approved changes to the data
 ## after C1 are listed in APPROVED_CHANGES, each with its decision ID; anything else that differs fails.
@@ -7,8 +7,15 @@ extends SceneTree
 var passed := 0
 var failed := 0
 
-## Approved data changes since the C1 snapshot: id -> decision ID. Empty in C1.
-const APPROVED_CHANGES := {}
+## Approved data changes since the C1 snapshot: what -> decision ID. Everything else must match the snapshot.
+const APPROVED_CHANGES := {"RUSTLERS.RIOT.starter": "RIOT-006"}
+## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
+const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved"]
+const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "PROBE", "FEEDBACK",
+	"ADRENAL_SPIKE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "BASIC_EXTRACTOR"]
+const PLAYTEST := ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "OVERCLOCK", "FEEDBACK_LOOP", "SALVAGE", "ADAPTIVE_DEFENCE",
+	"FOLLOW_THROUGH", "ESCALATION", "AFTERBURN", "REPRISE"]
+const EXPERIMENTAL := ["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]
 
 func check(ok: bool, what: String) -> void:
 	if ok: passed += 1
@@ -23,22 +30,56 @@ func _initialize() -> void:
 	check(CardDB.DEFS.keys() == snap.def_keys, "card order unchanged (reward pools iterate it)")
 	check(CardDB.CAPS.keys() == snap.cap_keys, "CAP order unchanged")
 	for id in snap.defs:
-		if APPROVED_CHANGES.has(id): continue
-		check(same(CardDB.def(id), snap.defs[id]), "def(%s) unchanged" % id)
+		check(same(legacy(CardDB.def(id), snap.defs[id]), snap.defs[id]), "def(%s) unchanged apart from C2 metadata" % id)
+		check(only_metadata_added(CardDB.def(id), snap.defs[id]), "def(%s) adds only %s" % [id, METADATA])
 		check(same(CardDB.roles(id), snap.roles[id]), "roles(%s) unchanged" % id)
 	for cid in snap.compiled:
-		check(same(CardDB.def(cid), snap.compiled[cid]), "compiled %s unchanged" % cid)
+		check(same(legacy(CardDB.def(cid), snap.compiled[cid]), snap.compiled[cid]), "compiled %s unchanged" % cid)
 	for key in snap.pools:
 		var p: PackedStringArray = String(key).split("/")
 		check(same(CardDB.reward_pool(p[0], p[1]), snap.pools[key]), "reward_pool(%s) unchanged" % key)
 	for r in snap.caps_of:
 		check(same(CardDB.caps_of(r), snap.caps_of[r]), "caps_of(%s) unchanged" % r)
 	for r in snap.rustlers:
-		check(same(CardDB.RUSTLERS[r], snap.rustlers[r]), "RUSTLERS[%s] unchanged (starter deck included)" % r)
+		if r == "RIOT":
+			var expected: Dictionary = snap.rustlers[r].duplicate(true)
+			expected.starter = RIOT_STARTER
+			check(same(CardDB.RUSTLERS[r], expected), "RUSTLERS[RIOT]: only the approved RIOT-006 starter change")
+		else:
+			check(same(CardDB.RUSTLERS[r], snap.rustlers[r]), "RUSTLERS[%s] unchanged (starter deck included)" % r)
+	# --- CSA-03 C2 ---
+	check(CardDB.RECORDS.size() == snap.def_keys.size() + PLAYTEST.size(), "records = the 112 cards + 10 playtest cards")
+	for id in PLAYTEST:
+		check(CardDB.RECORDS.has(id) and not CardDB.DEFS.has(id), "%s: recorded, pending, not dealt or played" % id)
+		check(CardDB.design_status(id) == "playtest" and CardDB.DATA.core_pool.has(id) and not CardDB.CORE_POOL.has(id),
+			"%s: approved for the core pool (cards.json), joins CardDB.CORE_POOL once its handler is built" % id)
+	for pool in ["SHARED", "GENERALIST", "ECHO", "RIOT", "VECTOR"]:
+		for rar in ["COMMON", "UNCOMMON", "RARE"]:
+			for id in CardDB.reward_pool(pool, rar):
+				check(not PLAYTEST.has(id) and not EXPERIMENTAL.has(id), "reward_pool(%s/%s) offers no pending or experimental card (%s)" % [pool, rar, id])
+	for id in EXPERIMENTAL:
+		check(CardDB.design_status(id) == "experimental" and CardDB.DEFS.has(id), "%s: experimental, its handler kept" % id)
+	for deck in [CardDB.STARTER_GENERALIST, CardDB.STARTER_ECHO, CardDB.STARTER_RIOT, CardDB.STARTER_VECTOR]:
+		for id in deck:
+			check(CardDB.design_status(id) == "approved" and CardDB.DEFS.has(id), "starter card %s is approved and built" % id)
+	check(CardDB.def("PROBE").text == snap.defs.PROBE.text and String(CardDB.RECORDS.PROBE.get("approved_text", "")).begins_with("Choose one"),
+		"PROBE shows the engine text; the approved PROBE-004a text is stored until CSA-04")
 	check(CardDB.DEFS.is_read_only() and CardDB.DEFS.PROBE.is_read_only() and CardDB.STARTER_RIOT.is_read_only(), "card data read-only, as the constants were")
 	check(no_floats(CardDB.DATA), "no float values after loading (JSON numbers restored to int)")
 	print("CSA CARDS: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
+
+func legacy(live: Dictionary, old: Dictionary) -> Dictionary:
+	## The live record restricted to the fields the snapshot had.
+	var out := {}
+	for k in old:
+		if live.has(k): out[k] = live[k]
+	return out
+
+func only_metadata_added(live: Dictionary, old: Dictionary) -> bool:
+	for k in live:
+		if not old.has(k) and not METADATA.has(k): return false
+	return true
 
 func same(a: Variant, b: Variant) -> bool:
 	## Deep equality that also compares types (1 is not 1.0) and array order.
