@@ -117,6 +117,21 @@ def validate(path=DEFAULT):
                 errors.append("pool_extra %s names unknown card %r" % (r, cid))
             if rar not in RARITIES:
                 errors.append("pool_extra %s %s: unknown rarity %r" % (r, cid, rar))
+    # --- CSA-04g: the Uplink card contract ---
+    up = data.get("uplink")
+    if up is not None:
+        prices = up.get("card_prices", {})
+        if set(prices) != {"COMMON", "UNCOMMON", "RARE"} or not all(isinstance(v, int) and v > 0 for v in prices.values()):
+            errors.append("uplink.card_prices must give a positive whole price for COMMON, UNCOMMON and RARE")
+        shelf = up.get("card_shelf", {})
+        size = shelf.get("size")
+        if not isinstance(size, int) or sum(shelf.get("rarity", {}).values()) != size or shelf.get("shared", 0) + shelf.get("rustler", 0) != size:
+            errors.append("uplink.card_shelf: rarity counts and shared + rustler must each add up to size")
+        if not 0 <= shelf.get("on_sale", 0) <= (size or 0) or not 0 < shelf.get("sale_percent_off", 0) <= 100:
+            errors.append("uplink.card_shelf: on_sale and sale_percent_off out of range")
+        if not isinstance(up.get("decisions"), list) or not up.get("decisions"):
+            errors.append("uplink: decisions must list the approving decision IDs")
+
     # --- CSA-03 C2: status, decisions, eligibility, copy guard ---
     master, rest = decision_texts()
     def check_decisions(ids, where):
@@ -127,6 +142,8 @@ def validate(path=DEFAULT):
                 errors.append("%s: %r is not a decision ID" % (where, did))
             elif did not in master and did not in rest:
                 errors.append("%s: decision %s is not recorded in Master Design or the active rules docs" % (where, did))
+    if data.get("uplink") is not None:
+        check_decisions(data["uplink"].get("decisions", []), "uplink")
     for kind, table in (("card", cards), ("CAP", caps)):
         for cid, rec in table.items():
             if not isinstance(rec, dict):

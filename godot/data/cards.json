@@ -2510,5 +2510,34 @@
 	"core_pool_decisions": [
 		"STRIP-001",
 		"SYNERGY-PLAYTEST-002"
-	]
+	],
+	"uplink": {
+		"about": "CSA-04g: the card side of the Black Market Uplink contract (UplinkContract). Services and the Clinic are Core Rules §8.3; stock rules are UPLINK-SPEC-001; card prices are UPL-008; CAP prices are on the CAP records.",
+		"card_prices": {
+			"COMMON": 40,
+			"UNCOMMON": 60,
+			"RARE": 90
+		},
+		"card_shelf": {
+			"size": 8,
+			"rarity": {
+				"COMMON": 5,
+				"UNCOMMON": 2,
+				"RARE": 1
+			},
+			"shared": 6,
+			"rustler": 2,
+			"on_sale": 1,
+			"sale_percent_off": 50
+		},
+		"cap_shelf": {
+			"size": 3
+		},
+		"decisions": [
+			"UPL-002",
+			"UPL-008",
+			"BASIC-001",
+			"UPLINK-SPEC-001"
+		]
+	}
 }

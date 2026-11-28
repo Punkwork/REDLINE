@@ -68,6 +68,8 @@ The Bible says black-market CAPS "aren't certified." To bring that in:
 
 ## 3. Black Market Uplink stock
 
+*UPLINK-SPEC-001 (2026-11-27) supersedes the card shelf in the table below: **8 cards, exactly 5 common / 2 uncommon / 1 rare, 6 shared + 2 from your Rustler's pool, one at half price** (see the UPLINK-SPEC-001 section). The current values are the `uplink` section of `godot/data/cards.json`, read by `UplinkContract` (CSA-04g); the table is kept as the original UPL-005 layout.*
+
 An Uplink always offers the same layout, so players learn it quickly:
 
 | Shelf | What's on it | Notes |

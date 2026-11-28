@@ -1,6 +1,8 @@
 extends SceneTree
 ## CSA-04 (CONSISTENCY-001a): the canonical card records reach their consumers.
 ## e: the Universal Object Inspector content contract (CardDB.inspector_model; CSA T3).
+## g: the Black Market Uplink contract (UplinkContract): services and Clinic (Core Rules §8.3), card
+##    eligibility (BASIC-001), base prices (UPL-008, UPL-002) and shelf shape (UPLINK-SPEC-001).
 ## Expectations that describe approved design are literals tagged with their decision IDs, never read
 ## back from cards.json; propagation is proven on a modified copy of the records, never the live file.
 
@@ -22,6 +24,7 @@ func _initialize() -> void:
 func run() -> void:
 	test_inspector_model()
 	await test_inspector_consumers()
+	test_uplink_contract()
 	print("CSA-04 CONSUMERS: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -68,3 +71,44 @@ func test_inspector_consumers() -> void:
 	check(words.has("SCRIPT · EXPLOIT") and words.has(PROBE_004A), "the inspector shows the contract's classification and rules")
 	k.queue_free(); cv.queue_free()
 	for i in 2: await process_frame
+
+func test_uplink_contract() -> void:
+	# Core Rules §8.3 (NODE-AUTHORITY-001): cards, CAPS, Ghostware and the Clinic; never removal or VITAE.
+	for s in ["CARDS", "CAPS", "GHOSTWARE", "CLINIC"]: check(UplinkContract.offers(s), "Uplink offers %s (§8.3)" % s)
+	for s in ["CARD_REMOVAL", "VITAE", "REFACTOR", "PATCHWORK", "FUSE"]: check(not UplinkContract.offers(s), "Uplink never offers %s (§8.3)" % s)
+	check(UplinkContract.CLINIC_REMOVES == "CORTEX", "the Clinic removes CORTEX only (§8.3)")
+	# CLINIC-001: 30 per counter; 25% off for 2 or more, rounded up: 2 = 45, 3 = 68, 4 = 90.
+	var clinic := {1: 30, 2: 45, 3: 68, 4: 90}
+	for n in clinic: check(UplinkContract.clinic_price(n) == clinic[n], "Clinic: %d CORTEX costs %d CRED (CLINIC-001)" % [n, clinic[n]])
+	# UPL-008: 40 / 60 / 90 CRED by rarity.
+	var prices := {"COMMON": 40, "UNCOMMON": 60, "RARE": 90}
+	for r in prices:
+		var ids := CardDB.reward_pool("SHARED", r)
+		check(not ids.is_empty() and ids.all(func(id): return UplinkContract.card_base_price(id) == prices[r]), "%s cards cost %d CRED (UPL-008)" % [r, prices[r]])
+	# UPL-002 / CAPS-TEST-001: common CAPS cost 20 CRED.
+	check(UplinkContract.cap_pool("COMMON").all(func(id): return UplinkContract.cap_base_price(id) == 20), "common CAPS cost 20 CRED (UPL-002)")
+	# UPLINK-SPEC-001: eight cards, exactly 5 common / 2 uncommon / 1 rare, 6 shared / 2 Rustler, one at half price.
+	var shelf := UplinkContract.card_shelf()
+	check(shelf.size == 8 and shelf.rarity == {"COMMON": 5, "UNCOMMON": 2, "RARE": 1} and shelf.shared == 6 and shelf.rustler == 2, "card shelf: 8 cards, 5/2/1, 6 shared + 2 Rustler (UPLINK-SPEC-001)")
+	check(shelf.on_sale == 1 and shelf.sale_percent_off == 50, "one card at half price (UPLINK-SPEC-001)")
+	# BASIC-001: starter and basic cards are never sold; nor are pending or experimental cards.
+	var sold := {}
+	for r in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:
+		for rar in ["COMMON", "UNCOMMON", "RARE"]:
+			var pool := UplinkContract.card_pool(r, rar)
+			for id in pool.shared + pool.rustler: sold[id] = true
+	var starters := []
+	for deck in [CardDB.STARTER_GENERALIST, CardDB.STARTER_ECHO, CardDB.STARTER_RIOT, CardDB.STARTER_VECTOR]: starters += deck
+	check(starters.all(func(id): return not sold.has(id)), "no starter or basic card is ever on the shelf (BASIC-001)")
+	check(not sold.has("KEYLOGGER") and not sold.has("REACTIVE_ARMOUR") and not sold.has("MINIMALIST"), "pending and experimental cards are never on the shelf")
+	# Propagation: a change to the canonical price table reaches the contract.
+	var copy: Dictionary = CardDB.DATA.duplicate(true)
+	copy.uplink.card_prices.COMMON = 55
+	var common_id: String = CardDB.reward_pool("SHARED", "COMMON")[0]
+	check(UplinkContract.card_base_price(common_id, copy) == 55 and UplinkContract.card_base_price(common_id) == 40, "a canonical price change reaches the contract; the live data is untouched")
+	# UPLINK-SPEC-001: no silent relaxation; shortfalls are reported, not filled.
+	for r in ["GENERALIST", "ECHO", "RIOT", "VECTOR"]:
+		var short := UplinkContract.stock_shortfalls(r)
+		print("  Uplink stock check %s: %s" % [r, "OK" if short.is_empty() else "; ".join(short)])
+	check(UplinkContract.stock_shortfalls("GENERALIST").is_empty(), "the current build can always stock a GENERALIST Uplink")
+
