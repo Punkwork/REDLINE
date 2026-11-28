@@ -133,7 +133,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"GENERALIST-001",
+				"GENERALIST-012"
+			]
 		},
 		"PROBE": {
 			"name": "PROBE",

@@ -45,9 +45,7 @@ LOG-001 moved the oldest dated entry to the archive unchanged: CHAIN-010 — Gov
 
 LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-PARK-001 — Designer decision: park explicit CHAIN mechanic (2026-11-27); SYNERGY-PLAYTEST-001 — Card-local synergy candidates (designer approved for playtest 2026-11-27).
 
-## PROTOCOL-DURATION-001 — Designer-approved lifecycle distinction (2026-11-27)
-Deployed PROTOCOLS last the current encounter only; installed PROGRAMS persist across encounters within the current node, subject to existing removal rules. This supersedes earlier node-duration assumptions for Protocols, including SYNERGY-PLAYTEST-001 proposals. Validate encounter completion/transition cleanup, Protocol rack reset and cessation of expired triggers, Program/RAM persistence across two- and three-encounter nodes, and node-exit cleanup. Exact destination of expired Protocol cards and cleanup ordering relative to breach/reward triggers require review against existing lifecycle rules before implementation. Claude Code to audit existing engine, tests, UI and documentation for affected assumptions and include reconciliation in the representative encounter plan. No production code changes authorized by this documentation batch. Other proposed card costs and conventions remain pending review.
-
+LOG-001 moved the oldest dated entries to the archive unchanged: PROTOCOL-DURATION-001 — Designer-approved lifecycle distinction (2026-11-27).
 
 ## PROTOCOL-DURATION-001a — Expiry destination (designer approved 2026-11-27)
 At encounter completion, deployed Protocols expire and return to the discard pile, not BURNED. They remain part of the compiled deck and may be drawn and redeployed through normal card circulation. Installed Programs persist for the node. At the beginning of the next node the Rustler draws a new hand from their compiled deck. This resolves the expiry destination question in PROTOCOL-DURATION-001; exact cleanup ordering relative to breach/reward triggers remains subject to lifecycle review. Test discard destination, no duplicate/lost cards, cessation of expired triggers, Program persistence, and next-node hand initialization. Documentation only; no engine changes.
@@ -424,4 +422,13 @@ Designer decision 05:59 (Master Design PIVOT-001). Canonical record `PIVOT` text
 - **04h** (`3c53973`): decision IDs backfilled from evidence (48 → 120 of 127 records; method in CSA §8a). A guard test fails on any new record without a decision.
 - Tests: `test_csa04_consumers` 32/0; `test_csa_cards` 517/0; Python 67/0; all other suites unchanged (test_game 433/0; parity 4,029/0). The previous push's CI passed (run 46138750547).
 - Open for the designer: CSA-04 acceptance, and whether `param()` and `rules_text()` templates belong to CSA-04 or CSA-06.
+
+## 2026-11-28 — CSA-04e–h accepted; PT13 audio confirmed; PULP Shield traced (Claude Code)
+
+Designer, 06:34–06:35:
+- CSA-04e–h accepted. `param()` and `rules_text()` templates stay in CSA-04, which remains open.
+- "sound effect never wait their turn only voice lines" confirms PT13-FB-001 (c) as built.
+- The Uplink screen background is `BG_NODE_UPLINK.png`, already in `godot/assets/concept/backgrounds/` (the image supplied is byte-identical).
+
+PULP Shield's record now cites GENERALIST-001 and GENERALIST-012 (121 of 127 records). The other six are Deck Synergy §9 example cards awaiting a designer ruling. Docs and data only; `validate_cards.py` and the Python tests pass.
 

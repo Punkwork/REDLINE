@@ -307,13 +307,13 @@ Requiring checks has consequences:
 - Starter origin: ECHO, RIOT and VECTOR cards that appeared in only that Rustler's first approved deck (RUSTLER-004–006, RUSTLER-007).
 - Confirmed in topic docs: SHATTER (RIOT-002–004), FLATLINE, KNOCKOUT and SECOND WIND (ZEROED-001), TRACER and SPAM (ICE-004).
 
-**No decision ID found (7):** CLEAN BUILD, PORT SCAN, PULP Shield (a Core Rules §13 basic), ROLLING RESTART, SHORT LOOP, STACK SMASH, WARM BOOT. These are listed in `tests/python/test_csa_cards.py`.
+**No decision ID found (6):** CLEAN BUILD, PORT SCAN, ROLLING RESTART, SHORT LOOP, STACK SMASH, WARM BOOT, all Deck Synergy §9 "example cards" (approved with the document, DSY-001–014, but never approved as individual cards). They are listed in `tests/python/test_csa_cards.py`. PULP Shield was traced afterwards to GENERALIST-001 and GENERALIST-012 (121 of 127).
 
-**Not done in CSA-04 (plan elements 3 and 4):**
+**Still open in CSA-04 (plan elements 3 and 4; designer 2026-11-28 06:35: "keep in csa 4"):**
 - `CardDB.param()`: engine numbers read from the record.
 - `rules_text()` templates.
 
-Card text is still stored literally in each record, and PIVOT, PROBE and NULL POINTER's numbers live in `game.gd`. The HANDOFF list for CSA-04 did not include them; the designer decides whether they stay in CSA-04 or move to CSA-06.
+Card text is still stored literally in each record, and PIVOT, PROBE and NULL POINTER's numbers live in `game.gd`. The designer accepted 04e–h (06:34) and kept these two in CSA-04, so CSA-04 stays open until they are built.
 
 ## 9. Remaining enforcement gaps (explicit)
 

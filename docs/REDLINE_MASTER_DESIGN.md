@@ -3777,7 +3777,7 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **Designer, 2026-11-28 05:44:** BURNED-001 interpretations approved ("Burned 001 works"): Bloatware burned by UNINSTALLER does not return; SPAM reads "it disappears for good." The PROBE-004a mode prompt (revised to UI-INSPECTOR-001) passes visual review ("the probe mode prompt looks good"). The PIVOT interpretation was settled by PIVOT-001 (below).
 
-**CSA-04e–h built (Claude Code, 2026-11-28):** the Inspector content contract (`CardDB.inspector_model`), generated card views in Card Pools and Rustlers (`tools/csa/gen_card_docs.py`, checked in CI), the Black Market Uplink contract (`UplinkContract`, mirroring Core Rules §8.3), and the decision-ID backfill (120 of 127 records). Evidence: `architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md` §8a. Five approved, never-built pool cards are now recorded as `pending` (CSA-02 Q8). **Status:** built and validated; awaiting designer acceptance.
+**CSA-04e–h built (Claude Code, 2026-11-28):** the Inspector content contract (`CardDB.inspector_model`), generated card views in Card Pools and Rustlers (`tools/csa/gen_card_docs.py`, checked in CI), the Black Market Uplink contract (`UplinkContract`, mirroring Core Rules §8.3), and the decision-ID backfill (120 of 127 records). Evidence: `architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md` §8a. Five approved, never-built pool cards are now recorded as `pending` (CSA-02 Q8). **Status:** built and validated; **04e–h accepted by the designer (2026-11-28 06:34)**. The designer kept plan elements 3–4 (`CardDB.param()`, `rules_text()` templates) in CSA-04 (06:35), so CSA-04 stays open until they are built.
 
 
 ## NODE-AUTHORITY-001 — Canonical Node authority and redundant definition retirement (APPROVED 2026-11-27)
@@ -3833,7 +3833,7 @@ Designer notes from HALCYON PLAYTEST 13 (first Architecture V2 build), as given:
 - (c) Voice clips are queued on one channel shared by the app and the encounter screen: a new NUL/REM line waits for the one playing. At most one line waits, and a newer line replaces it, so the voice never falls far behind. Muting drops waiting lines.
 - (d) The inspector never dims a card; the reason it can't be played is given in words. Since UI-INSPECTOR-001 it shows the card's illustration, and its fallback card face is drawn undimmed.
 
-*Interpretation to confirm:* "clip" read as voice lines (NUL/REM). Sound effects and music still play at once, because a delayed effect would lag behind the action it reports. **Status:** built and validated; confirm in the next playtest build.
+**Designer, 2026-11-28 06:35:** "sound effect never wait their turn only voice lines." Only voice lines queue; sound effects and music always play at once. **Status:** built and validated; confirm in the next playtest build.
 
 ## PIVOT-001 — PIVOT breaks whenever the target is at 0 STR (APPROVED, designer 2026-11-28 05:59)
 
