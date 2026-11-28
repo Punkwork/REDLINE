@@ -3777,6 +3777,8 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 
 **Designer, 2026-11-28 05:44:** BURNED-001 interpretations approved ("Burned 001 works"): Bloatware burned by UNINSTALLER does not return; SPAM reads "it disappears for good." The PROBE-004a mode prompt (revised to UI-INSPECTOR-001) passes visual review ("the probe mode prompt looks good"). The PIVOT interpretation was settled by PIVOT-001 (below).
 
+**CSA-04e–h built (Claude Code, 2026-11-28):** the Inspector content contract (`CardDB.inspector_model`), generated card views in Card Pools and Rustlers (`tools/csa/gen_card_docs.py`, checked in CI), the Black Market Uplink contract (`UplinkContract`, mirroring Core Rules §8.3), and the decision-ID backfill (120 of 127 records). Evidence: `architecture-v2/CANONICAL_SOURCE_ARCHITECTURE.md` §8a. Five approved, never-built pool cards are now recorded as `pending` (CSA-02 Q8). **Status:** built and validated; awaiting designer acceptance.
+
 
 ## NODE-AUTHORITY-001 — Canonical Node authority and redundant definition retirement (APPROVED 2026-11-27)
 

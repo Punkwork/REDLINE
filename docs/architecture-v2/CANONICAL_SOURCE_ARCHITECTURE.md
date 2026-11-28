@@ -278,12 +278,49 @@ Requiring checks has consequences:
 - Localisation of templates (out of scope).
 - `PANOPTICON_CHAIN_MECHANICS.md:125` lists "PROBE" among non-card actions. Either the term means something else there, or it is a conflict. Designer or Claude to clarify.
 
+## 8a. CSA-04 status and consumer coverage (Claude Code, 2026-11-28)
+
+| Step | What | Commit |
+|---|---|---|
+| 04a–d | CRED chip, PROBE-004a, BURNED-001, PIVOT (earlier) | see HANDOFF |
+| 04e | `CardDB.inspector_model(id)`: the Inspector content contract (name, classification, costs, rules, flavour, art) from the record only; the V2 card model and the shared inspector (UI-INSPECTOR-001) read it | `c9d7516` |
+| 04f | `tools/csa/gen_card_docs.py`: generated card views in Card Pools (11 tables) and Rustlers (4 starter decks); `--check` in CI; 5 approved never-built pool cards recorded as `pending` (Q8) | `169c28d` |
+| 04g | `UplinkContract`: services and Clinic mirrored from Core Rules §8.3 with a drift test; card eligibility from the reward pools (BASIC-001); base prices and shelf from the new `uplink` section of `cards.json` (UPL-008, UPLINK-SPEC-001); CAP prices from CAP records | `85e415f` |
+| 04h | Decision-ID backfill: 48 → 120 of 127 records cite decisions; a test fails on any new record without one | this commit |
+
+**Consumer coverage (cards).**
+
+| Consumer | Reads the canonical record through | Status |
+|---|---|---|
+| Rules engine (`game.gd`) | `CardDB.def()` (loaded from `cards.json`) | Covered (CSA-03) |
+| Reward pools | `CardDB.reward_pool()` | Covered (CSA-03) |
+| V2 card face, hand, rack | `VisibleStateAdapter.card_model()` → `CardDB.inspector_model()` | Covered (04e); `test_csa04_consumers` checks every card |
+| Shared inspector (UI-INSPECTOR-001) | the card model above | Covered (04e) |
+| Uplink shop code (services per Core Rules §8.3) | `UplinkContract` | Contract covered (04g); the screen isn't built |
+| Owner docs (Card Pools, Rustlers) | generated blocks | Covered (04f); CI `--check` |
+| Other docs (Deck Synergy, Engines, Core Rules, Playtest Guide) | hand tables | **Open: CSA-06.** Drift scan: 14 rows still differ in text, 1 in cost |
+| Build 12 prototype UI (`main.gd`) | `CardDB.def()` directly | Reads the record, not the Inspector contract; behavioural reference only |
+
+**Backfill method (04h).** Only links with documentary evidence were added:
+- Reviewed links: a decision whose own heading or register row defines or changes the card (17 links). Incidental mentions were rejected, such as RIOT-006's deck list; deck changes belong in `starter_decisions`.
+- Pool origin: membership in the pools as first approved (CARD-003–007), taken from the first committed Card Pools (`1296843`; 31 shared + 9 per Rustler).
+- Starter origin: ECHO, RIOT and VECTOR cards that appeared in only that Rustler's first approved deck (RUSTLER-004–006, RUSTLER-007).
+- Confirmed in topic docs: SHATTER (RIOT-002–004), FLATLINE, KNOCKOUT and SECOND WIND (ZEROED-001), TRACER and SPAM (ICE-004).
+
+**No decision ID found (7):** CLEAN BUILD, PORT SCAN, PULP Shield (a Core Rules §13 basic), ROLLING RESTART, SHORT LOOP, STACK SMASH, WARM BOOT. These are listed in `tests/python/test_csa_cards.py`.
+
+**Not done in CSA-04 (plan elements 3 and 4):**
+- `CardDB.param()`: engine numbers read from the record.
+- `rules_text()` templates.
+
+Card text is still stored literally in each record, and PIVOT, PROBE and NULL POINTER's numbers live in `game.gd`. The HANDOFF list for CSA-04 did not include them; the designer decides whether they stay in CSA-04 or move to CSA-06.
+
 ## 9. Remaining enforcement gaps (explicit)
 
 Until CSA-05 and Q5:
 1. Nothing blocks a push to `architecture-v2`.
-2. No check runs on docs or data.
-3. Python tests don't run in CI.
+2. ~~No check runs on docs or data.~~ *Since CSA-04f: CI runs `validate_cards.py` and the generated-block check on every push and on PRs touching docs, tools or data.*
+3. ~~Python tests don't run in CI.~~ *Since CSA-04f: CI runs `tests/python`.*
 4. Spec tests don't exist; the green suite includes a test of superseded PROBE behaviour.
 5. Retired terms are unchecked in code.
 6. Approved-unbuilt cards are unlisted.

@@ -25,7 +25,11 @@
 				"implementation": "implemented"
 			},
 			"decisions": [
-				"STR-001"
+				"STR-001",
+				"BREAKER-STARTER-002",
+				"BREAKER-STARTER-003",
+				"BREAKER-STARTER-004",
+				"BREAKER-STARTER-005"
 			]
 		},
 		"TUMBLER_ICEPICK": {
@@ -95,7 +99,8 @@
 			},
 			"decisions": [
 				"EXTRACT-002",
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"EXTRACT-001"
 			]
 		},
 		"CORTEX_BUFFER": {
@@ -110,7 +115,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CORE-001",
+				"NAME-001"
+			]
 		},
 		"PULP_SHIELD": {
 			"name": "PULP Shield",
@@ -202,7 +210,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"BASIC-001",
+				"CARD-003"
+			]
 		},
 		"JACKHAMMER": {
 			"name": "JACKHAMMER",
@@ -226,7 +237,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"PASSKEY": {
 			"name": "PASSKEY",
@@ -249,7 +262,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"RAINBOW_TABLE": {
 			"name": "RAINBOW TABLE",
@@ -273,7 +288,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"TASER": {
 			"name": "TASER",
@@ -296,7 +313,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"STUN_BATON": {
 			"name": "STUN BATON",
@@ -320,7 +339,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"SKELETON_KEY": {
 			"name": "SKELETON KEY",
@@ -343,7 +364,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"DATA_SIPHON": {
 			"name": "DATA SIPHON",
@@ -360,7 +383,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"SKIMMER": {
 			"name": "SKIMMER",
@@ -378,7 +403,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"PAYDAY": {
 			"name": "PAYDAY",
@@ -395,7 +422,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"HARDENED_SHELL": {
 			"name": "HARDENED SHELL",
@@ -410,7 +439,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"FLINCH": {
 			"name": "FLINCH",
@@ -427,7 +458,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"CARD-003"
 			]
 		},
 		"MIRROR": {
@@ -443,7 +475,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"SURGE_PROTECTOR": {
 			"name": "SURGE PROTECTOR",
@@ -456,7 +490,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"FAILSAFE": {
 			"name": "FAILSAFE",
@@ -469,7 +505,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"DEEP_PROBE": {
 			"name": "DEEP PROBE",
@@ -487,7 +525,8 @@
 			},
 			"decisions": [
 				"STR-001",
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"CARD-003"
 			]
 		},
 		"STRESS_TEST": {
@@ -503,7 +542,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"JAMMER": {
 			"name": "JAMMER",
@@ -535,7 +576,8 @@
 			},
 			"decisions": [
 				"DEFRAG-001",
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"CARD-003"
 			]
 		},
 		"STIM_PATCH": {
@@ -550,7 +592,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"BURST": {
 			"name": "BURST",
@@ -565,7 +609,8 @@
 			},
 			"decisions": [
 				"BURST-001",
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"CARD-003"
 			]
 		},
 		"CO_PROCESSOR": {
@@ -583,7 +628,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"SCRUB": {
 			"name": "SCRUB",
@@ -598,7 +645,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"PROXY_CHAIN": {
 			"name": "PROXY CHAIN",
@@ -611,7 +660,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"BURN_NOTICE": {
 			"name": "BURN NOTICE",
@@ -628,7 +679,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"CARD-003"
 			]
 		},
 		"SPAM_FILTER": {
@@ -642,7 +694,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-003"
+			]
 		},
 		"UNINSTALLER": {
 			"name": "UNINSTALLER",
@@ -657,7 +711,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"CARD-003"
 			]
 		},
 		"PATCH_KIT": {
@@ -673,7 +728,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"CARD-003"
 			]
 		},
 		"FIELD_KIT": {
@@ -688,7 +744,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-004"
+			]
 		},
 		"TOOLBELT": {
 			"name": "TOOLBELT",
@@ -702,7 +760,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-004"
+			]
 		},
 		"BALANCED_LOAD": {
 			"name": "BALANCED LOAD",
@@ -720,7 +780,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-004"
+			]
 		},
 		"ADAPTER": {
 			"name": "ADAPTER",
@@ -735,7 +797,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-004"
+			]
 		},
 		"RAM_UPGRADE": {
 			"name": "RAM UPGRADE",
@@ -753,7 +817,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-004"
+			]
 		},
 		"READY_STANCE": {
 			"name": "READY STANCE",
@@ -767,7 +833,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-004"
+			]
 		},
 		"MULTITOOL": {
 			"name": "MULTITOOL",
@@ -791,7 +859,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-004"
+			]
 		},
 		"HUSH": {
 			"name": "HUSH",
@@ -814,7 +884,11 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"BASIC-001",
+				"RUSTLER-004",
+				"RUSTLER-007"
+			]
 		},
 		"BORROWED_CREDENTIALS": {
 			"name": "BORROWED CREDENTIALS",
@@ -857,7 +931,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-004",
+				"RUSTLER-007"
+			]
 		},
 		"SMOKESCREEN": {
 			"name": "SMOKESCREEN",
@@ -872,7 +949,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-004",
+				"RUSTLER-007"
+			]
 		},
 		"DEAD_AIR": {
 			"name": "DEAD AIR",
@@ -887,7 +967,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-004",
+				"RUSTLER-007"
+			]
 		},
 		"MUFFLE": {
 			"name": "MUFFLE",
@@ -903,7 +986,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-005"
+			]
 		},
 		"GHOST_STEP": {
 			"name": "GHOST STEP",
@@ -919,7 +1004,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-005"
+			]
 		},
 		"PATIENCE": {
 			"name": "PATIENCE",
@@ -935,7 +1022,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-005"
+			]
 		},
 		"DECOY_SIGNAL": {
 			"name": "DECOY SIGNAL",
@@ -949,7 +1038,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-005"
+			]
 		},
 		"SILENT_PARTNER": {
 			"name": "SILENT PARTNER",
@@ -966,7 +1057,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-005"
+			]
 		},
 		"LONG_GAME": {
 			"name": "LONG GAME",
@@ -980,7 +1073,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-005"
+			]
 		},
 		"VANISH": {
 			"name": "VANISH",
@@ -998,7 +1093,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"CARD-005"
 			]
 		},
 		"SIDE_CHANNEL": {
@@ -1024,7 +1120,8 @@
 				"implementation": "implemented"
 			},
 			"decisions": [
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"CARD-005"
 			]
 		},
 		"BLACKOUT": {
@@ -1043,7 +1140,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"CARD-005"
 			]
 		},
 		"SLEDGE": {
@@ -1069,7 +1167,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-005",
+				"RUSTLER-007"
+			]
 		},
 		"BRUTE_FORCE": {
 			"name": "BRUTE FORCE",
@@ -1089,7 +1190,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-005",
+				"RUSTLER-007"
+			]
 		},
 		"OVERLOAD": {
 			"name": "OVERLOAD",
@@ -1106,7 +1210,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-005",
+				"RUSTLER-007"
+			]
 		},
 		"FEEDBACK": {
 			"name": "FEEDBACK",
@@ -1122,7 +1229,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-005",
+				"RUSTLER-007"
+			]
 		},
 		"ADRENAL_SPIKE": {
 			"name": "ADRENAL SPIKE",
@@ -1136,7 +1246,11 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"BASIC-001",
+				"RUSTLER-005",
+				"RUSTLER-007"
+			]
 		},
 		"SHATTER": {
 			"name": "SHATTER",
@@ -1153,7 +1267,11 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RIOT-002",
+				"RIOT-003",
+				"RIOT-004"
+			]
 		},
 		"LAY_LOW": {
 			"name": "LAY LOW",
@@ -1168,7 +1286,11 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"BASIC-001",
+				"RUSTLER-005",
+				"RUSTLER-007"
+			]
 		},
 		"SMASH_AND_GRAB": {
 			"name": "SMASH & GRAB",
@@ -1190,7 +1312,9 @@
 			},
 			"decisions": [
 				"RIOT-005",
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"RUSTLER-005",
+				"RUSTLER-007"
 			]
 		},
 		"SMASH": {
@@ -1210,7 +1334,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"ROAR": {
 			"name": "ROAR",
@@ -1225,7 +1351,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"CRASH_CART": {
 			"name": "CRASH CART",
@@ -1241,7 +1369,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"PAIN_TOLERANCE": {
 			"name": "PAIN TOLERANCE",
@@ -1255,7 +1385,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"BERSERK": {
 			"name": "BERSERK",
@@ -1269,7 +1401,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"WRECKING_BALL": {
 			"name": "WRECKING BALL",
@@ -1294,7 +1428,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"CHAINSAW": {
 			"name": "CHAINSAW",
@@ -1319,7 +1455,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"FLASHPOINT": {
 			"name": "FLASHPOINT",
@@ -1336,7 +1474,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-006"
+			]
 		},
 		"NO_WITNESSES": {
 			"name": "NO WITNESSES",
@@ -1354,7 +1494,8 @@
 			},
 			"decisions": [
 				"BURNED-001",
-				"BURNED-001a"
+				"BURNED-001a",
+				"CARD-006"
 			]
 		},
 		"STINGER": {
@@ -1379,7 +1520,11 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"BASIC-001",
+				"RUSTLER-006",
+				"RUSTLER-007"
+			]
 		},
 		"RUNTIME_ERROR": {
 			"name": "RUNTIME ERROR",
@@ -1400,7 +1545,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-006",
+				"RUSTLER-007"
+			]
 		},
 		"INJECT": {
 			"name": "INJECT",
@@ -1420,7 +1568,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-006",
+				"RUSTLER-007"
+			]
 		},
 		"REPLICATOR": {
 			"name": "REPLICATOR",
@@ -1436,7 +1587,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-006",
+				"RUSTLER-007"
+			]
 		},
 		"OUTBREAK": {
 			"name": "OUTBREAK",
@@ -1452,7 +1606,10 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"RUSTLER-006",
+				"RUSTLER-007"
+			]
 		},
 		"SCRAMBLER": {
 			"name": "SCRAMBLER",
@@ -1472,7 +1629,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"BLINDFOLD": {
 			"name": "BLINDFOLD",
@@ -1492,7 +1651,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"LEECHWARE": {
 			"name": "LEECHWARE",
@@ -1512,7 +1673,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"QUARANTINE": {
 			"name": "QUARANTINE",
@@ -1529,7 +1692,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"WORMHOLE": {
 			"name": "WORMHOLE",
@@ -1550,7 +1715,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"COCKTAIL": {
 			"name": "COCKTAIL",
@@ -1574,7 +1741,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"INCUBATOR": {
 			"name": "INCUBATOR",
@@ -1588,7 +1757,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"PANDEMIC": {
 			"name": "PANDEMIC",
@@ -1605,7 +1776,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"CARD-007"
+			]
 		},
 		"HOST_TAKEOVER": {
 			"name": "HOST TAKEOVER",
@@ -1629,7 +1802,8 @@
 				"implementation": "implemented"
 			},
 			"decisions": [
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"CARD-007"
 			]
 		},
 		"SPAM": {
@@ -1646,7 +1820,8 @@
 			"decisions": [
 				"BURNED-001",
 				"BURNED-001a",
-				"BURNED-001b"
+				"BURNED-001b",
+				"ICE-004"
 			]
 		},
 		"TRACER": {
@@ -1661,7 +1836,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"ICE-004"
+			]
 		},
 		"WARM_BOOT": {
 			"name": "WARM BOOT",
@@ -1930,7 +2107,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"ZEROED-001"
+			]
 		},
 		"KNOCKOUT": {
 			"name": "KNOCKOUT",
@@ -1948,7 +2127,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"ZEROED-001"
+			]
 		},
 		"SECOND_WIND": {
 			"name": "SECOND WIND",
@@ -1966,7 +2147,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"ZEROED-001"
+			]
 		},
 		"CULL": {
 			"name": "CULL",
@@ -1983,7 +2166,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-010"
+			]
 		},
 		"HARVEST": {
 			"name": "HARVEST",
@@ -2000,7 +2185,9 @@
 				"design": "approved",
 				"implementation": "implemented"
 			},
-			"decisions": []
+			"decisions": [
+				"DSY-010"
+			]
 		},
 		"CLEAN_BUILD": {
 			"name": "CLEAN BUILD",

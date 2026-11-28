@@ -416,3 +416,12 @@ Designer, 05:44: "Burned 001 works" (both BURNED-001 interpretations approved) a
 
 Designer decision 05:59 (Master Design PIVOT-001). Canonical record `PIVOT` text changed and decision ID added; engine (`game.gd` PIVOT) now checks the target's STR after the −1, not whether this play reduced it to 0. `test_spec_pivot.gd` 54/0: the new approved literal, an ICE already at 0 breaks (prompt, one break, 1 BW paid), and STR 2 → 1 doesn't break. `test_csa_cards` 507/0; test_game 433/0 (SIM=1 433/0); parity 3,949 actions / 4,029 checks unchanged; `validate_cards.py` VALID. Deck Synergy row updated; the Chain Mechanics historical note points to the record.
 
+## 2026-11-28 — CSA-04e–h: Inspector model, generated doc views, Uplink contract, decision backfill (Claude Code)
+
+- **04e** (`c9d7516`): `CardDB.inspector_model()`; the V2 card model and the inspector read it. `test_csa04_consumers` checks the PROBE-004a literal, propagation on a records copy, and every card.
+- **04f** (`169c28d`): `gen_card_docs.py` generates 11 Card Pools and 4 Rustlers tables; row notes became labelled history lines; KEYLOGGER, STASH, QUANTUM CORE, HOT SWAP and JACK OF ALL TRADES are recorded as `pending`. CI gained a CSA step (`validate_cards`, `gen --check`, Python tests), and the PR path filter now covers docs, tools and tests. Drift: rows whose text differs 25 → 14, cost differences 2 → 1.
+- **04g** (`85e415f`): `UplinkContract` and the `uplink` section of `cards.json`. `test_uplink_contract.py` fails if the contract and Core Rules §8.3 disagree. Stock check: only the GENERALIST can fill an Uplink in the current build (expected under STRIP-001).
+- **04h**: decision IDs backfilled from evidence (48 → 120 of 127 records; method in CSA §8a). A guard test fails on any new record without a decision.
+- Tests: `test_csa04_consumers` 32/0; `test_csa_cards` 517/0; Python 67/0; all other suites unchanged (test_game 433/0; parity 4,029/0). The previous push's CI passed (run 46138750547).
+- Open for the designer: CSA-04 acceptance, and whether `param()` and `rules_text()` templates belong to CSA-04 or CSA-06.
+

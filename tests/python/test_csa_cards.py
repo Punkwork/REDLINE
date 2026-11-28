@@ -12,9 +12,18 @@ with open(V.DEFAULT, encoding="utf-8") as f:
     LIVE = json.load(f)
 
 
+# CSA-04h: cards with no traceable decision ID after the backfill. Shrink this list as IDs are found;
+# a new card record without a decision fails test_every_card_cites_a_decision.
+NO_DECISION_YET = {"CLEAN_BUILD", "PORT_SCAN", "PULP_SHIELD", "ROLLING_RESTART", "SHORT_LOOP", "STACK_SMASH", "WARM_BOOT"}
+
+
 class LiveFile(unittest.TestCase):
     def test_live_cards_json_is_valid(self):
         self.assertEqual(V.validate(), [])
+
+    def test_every_card_cites_a_decision(self):
+        missing = {k for k, c in LIVE["cards"].items() if not c.get("decisions")}
+        self.assertEqual(missing, NO_DECISION_YET)   # fewer is progress: update the list
 
     def test_counts(self):
         self.assertEqual(len(LIVE["cards"]), 127)   # 112 engine cards + 10 SYNERGY-PLAYTEST-002 + 5 CSA-04f pool records (pending)
