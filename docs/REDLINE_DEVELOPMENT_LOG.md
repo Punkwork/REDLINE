@@ -468,3 +468,7 @@ Designer, 09:27: CSA-04 accepted and closed; do not cut the next Windows playtes
 ## 2026-11-28 — REPRISE ruling (Claude Code)
 
 Designer, 09:33: REPRISE follows CARD-REVIEW-001: fresh target and mode, no BURNED source, penalties repeat, and a repeated PROBE counts as another PROBE. Recorded in Master Design and HANDOFF; the engine change is pending (REPRISE stays divergent).
+
+## 2026-11-28 — UI-PROTOCOL-001 answers (Claude Code)
+
+Designer, 09:36: SALVAGE triggers per copy and its pick is mandatory (as built); add at least one 2-layer and one 3-layer ICE Node to the HALCYON map (to build); on a fatal parting shot the Protocols stay and the run ends (as built).
