@@ -1507,7 +1507,7 @@ func _build_overlay() -> void:
 					panel.add_child(done)
 				"scan":
 					_overlay_options("SCAN 3", "Click cards to bottom them, in selection order; click again to undo. Selected: %s" % " → ".join(g.pending.bottom.map(func(uid): return CardDB.def(g._find(g.pending.cards, uid).id).name)), g.pending.cards.map(func(c): return c.uid), g.pending.cards, func(u): g.choose(u); refresh(), "Finish SCAN, then draw 1", func(): g.finish_scan(); refresh())
-				"burn_hand": _overlay_options("GARBAGE COLLECT", "BURN another hand card for this Node, then draw 1.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
+				"burn_hand": _overlay_options("GARBAGE COLLECT", "BURN another hand card for this encounter, then draw 1.", g.pending.options, g.hand, func(u): g.choose(u); refresh())
 				"retrieve": _overlay_options("TAIL CALL", "Choose a SCRIPT from discard.", g.pending.options, g.discard, func(u): g.choose(u); refresh())
 				"discard": _overlay_options("DISCARD %d" % g.pending.n, "CAPTCHA: choose a card in your hand to discard.", g.hand.map(func(c): return c.uid), g.hand, func(u): g.choose(u); refresh())
 				"uninstaller": _overlay_options("UNINSTALLER", "Choose a Bloatware in your hand to BURN.", g.pending.options, g.hand, func(u): g.choose(u); refresh())

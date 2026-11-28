@@ -58,6 +58,7 @@ jobs:
           "$GODOT" --headless --path godot --script res://tests/test_csa_cards.gd 2>&1 | tee -a /tmp/rules.log
           # CSA-04b (PROBE-004a): spec test written from the approved text, independent of the engine.
           "$GODOT" --headless --path godot --script res://tests/test_spec_probe.gd 2>&1 | tee -a /tmp/rules.log
+          "$GODOT" --headless --path godot --script res://tests/test_spec_burned.gd 2>&1 | tee -a /tmp/rules.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/import.log /tmp/rules.log; then exit 1; fi
       - name: Architecture V2 ICE encounter screenshots (ARCH-V2-003; runs under CORE_LOOP)
         shell: bash

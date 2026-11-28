@@ -365,3 +365,20 @@ Tests:
 - `test_core_loop.gd`: the two checks that pinned the superseded top-only reveal now assert PROBE-004a.
 - Comparison bot presses the V2 mode button and mirrors it on the twin.
 - Results: batch3 115/0 (+5 V2 prompt checks); app 33/0 (+4 Build 12 prompt checks); parity 3,949 actions / 4,029 checks (PROBE no longer reveals by default); test_game 430/0 (SIM=1 430/0); csa_cards 502/0; Python 20/0; `shot_arch_v2_ice` 42.
+
+## 2026-11-27 — CSA-04c: BURNED lasts the encounter (Claude Code)
+
+BURNED-001, 001a and 001b are now in the engine. A BURNED card is out for the rest of the encounter; when the Rustler goes deeper, `_return_burned()` puts each one in the discard pile, as expired Protocols do. Bloatware never returns. Clearing SPAM (pay 1 BW) removes the card for good instead of burning it.
+
+Cards: the 11 BURNED records are `implemented`, with BURNED-001/001a in their decisions. GARBAGE COLLECT reads "BURN 1 other card in your hand. Draw 1."; SPAM reads "Can't be played normally. Pay 1 BW to clear it: it disappears for good." PIVOT is the only divergent record left.
+
+Other changes: the GARBAGE COLLECT prompt in both UIs and the pile viewer say "for this encounter"; Core Rules §3 BURNED definition updated.
+
+Tests:
+- `test_spec_burned.gd` 29/0 (new, in CI), with literal expectations from the approved text over a two-encounter node.
+- `test_csa_cards` 504/0 (the two approved texts added to `APPROVED_TEXT`); Python 20/0; validator VALID.
+- test_game 430/0 (SIM=1 430/0); adp 17/0; signal_carbon 672/0; arch_v2_ice 202/0; coverage 548/0; batch3 115/0; batch4 76/0; app 33/0; spec_probe 32/0; parity 3,949 actions / 4,029 checks.
+
+Interpretations to confirm: UNINSTALLER-burned Bloatware does not return; SPAM's "disappears for good" wording.
+
+Next: CSA-04d, PIVOT.

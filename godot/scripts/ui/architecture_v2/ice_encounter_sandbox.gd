@@ -880,7 +880,7 @@ func _choice_spec() -> Dictionary:
 	var hand_uids: Array = game.hand.map(func(c): return int(c.uid))
 	match String(p.get("kind", "")):
 		"discard": return {"kind": "discard", "title": "DISCARD %d" % int(p.get("n", 1)), "text": "CAPTCHA: choose a card in your hand to discard.", "cards": cards_of.call(hand_uids, game.hand)}
-		"burn_hand": return {"kind": "burn_hand", "title": "GARBAGE COLLECT", "text": "BURN another hand card for this Node, then draw 1.", "cards": cards_of.call(p.options, game.hand)}
+		"burn_hand": return {"kind": "burn_hand", "title": "GARBAGE COLLECT", "text": "BURN another hand card for this encounter, then draw 1.", "cards": cards_of.call(p.options, game.hand)}
 		"retrieve": return {"kind": "retrieve", "title": "TAIL CALL", "text": "Choose a SCRIPT from discard.", "cards": cards_of.call(p.options, game.discard)}
 		"uninstaller": return {"kind": "uninstaller", "title": "UNINSTALLER", "text": "Choose a Bloatware in your hand to BURN.", "cards": cards_of.call(p.options, game.hand)}
 		"field_kit": return {"kind": "field_kit", "title": "FIELD KIT", "text": "Choose a PROGRAM from your draw pile.", "cards": cards_of.call(p.options, game.draw_pile)}
@@ -1056,7 +1056,7 @@ func open_pile(pile: String) -> void:
 	var names := {"deck": "DECK", "discard": "DISCARD", "burned": "BURNED"}
 	var models := VisibleStateAdapter.pile_models(game, pile)
 	var text: String = {"deck": "Your draw pile, sorted by name (the draw order stays hidden).",
-		"discard": "Your discard pile, oldest first.", "burned": "Burned for this Node."}[pile]
+		"discard": "Your discard pile, oldest first.", "burned": "Burned for this encounter (BURNED-001)."}[pile]
 	if models.is_empty(): text = "Empty."
 	inspector.close()
 	pile_view.open({"kind": "view_" + pile, "view": true, "title": "%s · %d" % [names[pile], models.size()],

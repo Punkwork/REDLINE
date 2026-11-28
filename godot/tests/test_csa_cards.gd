@@ -15,6 +15,8 @@ const APPROVED_TEXT := {
 	"HOST_TAKEOVER": "Break 2 subroutines on target ICE with 5 or more virus counters.",
 	"FORCE_REBOOT": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
 	"PROBE": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",   # CSA-04b
+	"GARBAGE_COLLECT": "BURN 1 other card in your hand. Draw 1.",   # CSA-04c, BURNED-001
+	"SPAM": "Can't be played normally. Pay 1 BW to clear it: it disappears for good.",   # CSA-04c, BURNED-001b
 	"BORROWED_CREDENTIALS": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",   # CRED-COST-001: the 8 CRED is on the card face
 }
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.

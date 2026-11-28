@@ -171,14 +171,14 @@
 			"text": "The first TRACE added in the next Corporation Response becomes 0. BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"GHOST-SIGNAL-001",
 				"BURNED-001",
-				"CONSISTENCY-001a"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"CONSISTENCY-001a",
+				"BURNED-001a"
+			]
 		},
 		"BATTERING_RAM": {
 			"name": "BATTERING RAM",
@@ -423,12 +423,12 @@
 			"text": "+2 SHIELD. BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"MIRROR": {
 			"name": "MIRROR",
@@ -624,12 +624,12 @@
 			"text": "Halve your TRACE (round down). BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"SPAM_FILTER": {
 			"name": "SPAM FILTER",
@@ -653,12 +653,12 @@
 			"text": "Choose a Bloatware in your hand: it's BURNED. Draw 1.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"PATCH_KIT": {
 			"name": "PATCH KIT",
@@ -669,12 +669,12 @@
 			"text": "Heal 4 VITAE. BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"FIELD_KIT": {
 			"name": "FIELD KIT",
@@ -994,12 +994,12 @@
 			"text": "During the next Corporation Response, TRACE effects add nothing. BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"SIDE_CHANNEL": {
 			"name": "SIDE CHANNEL",
@@ -1039,12 +1039,12 @@
 			"text": "Skip the next Corporation Response. BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"SLEDGE": {
 			"name": "SLEDGE",
@@ -1350,12 +1350,12 @@
 			"text": "If your TRACE is 30 or more, set it to 10. BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"STINGER": {
 			"name": "STINGER",
@@ -1638,15 +1638,16 @@
 			"tags": [],
 			"bw": 1,
 			"rarity": "BLOAT",
-			"text": "Can't be played normally. Pay 1 BW to clear it: it's BURNED for the rest of the Node.",
+			"text": "Can't be played normally. Pay 1 BW to clear it: it disappears for good.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a",
+				"BURNED-001b"
+			]
 		},
 		"TRACER": {
 			"name": "TRACER",
@@ -1699,13 +1700,13 @@
 			"text": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"BURNED-001",
-				"CONSISTENCY-001a"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"CONSISTENCY-001a",
+				"BURNED-001a"
+			]
 		},
 		"SHORT_LOOP": {
 			"name": "SHORT LOOP",
@@ -1741,17 +1742,16 @@
 			"bw": 0,
 			"rarity": "COMMON",
 			"tags": [],
-			"text": "BURN 1 other hand card for this Node. Draw 1.",
+			"text": "BURN 1 other card in your hand. Draw 1.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"CONSISTENCY-001a",
-				"BURNED-001"
-			],
-			"approved_text": "BURN 1 other card in your hand. Draw 1.",
-			"divergence": "BURNED-001: the burned card should return after the encounter; the engine keeps it out until the Node ends (\"for this Node\" stays in the text until then)."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"TAIL_CALL": {
 			"name": "TAIL CALL",
@@ -1906,12 +1906,12 @@
 			"text": "Target ICE at 0 STR: break 2 subroutines, DEADLOCKs included. Normal limits apply. BURNED.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
-				"BURNED-001"
-			],
-			"divergence": "BURNED-001: BURNED lasts the rest of the encounter; the engine still keeps BURNED cards out until the Node ends."
+				"BURNED-001",
+				"BURNED-001a"
+			]
 		},
 		"FLATLINE": {
 			"name": "FLATLINE",

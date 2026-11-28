@@ -616,7 +616,7 @@ func play_card(uid: int, target: int = -1, mode: String = "") -> bool:
 	bw -= paid
 	cred -= int(d.get("cred_cost", 0))
 	if d.type == "BLOATWARE":
-		burned.append(inst)  # SPAM: pay 1 BW to clear it
+		# BURNED-001b (designer 2026-11-27): cleared SPAM does not return; it disappears for good.
 		_say("SPAM cleared.")
 		return true
 	var target_ref: Dictionary = enc.ice[target] if target >= 0 and target < enc.ice.size() else {}
@@ -1526,7 +1526,17 @@ func go_deeper() -> void:
 			c.cached = false
 			c.erase("cache_turns")
 	_cleanup()
+	_return_burned()
 	_start_encounter()
+
+func _return_burned() -> void:
+	## BURNED-001 / 001a (designer 2026-11-27): BURNED lasts the rest of the encounter; when the encounter
+	## ends its BURNED cards go to the discard pile. Bloatware never comes back (BURNED-001b; UNINSTALLER
+	## too, an interpretation to confirm). A Node's end still returns everything to the deck (§3.1).
+	for c in burned:
+		if String(CardDB.def(c.id).type) != "BLOATWARE":
+			discard.append(c)
+	burned = []
 
 func leave_node() -> void:
 	if phase != "DEEPER" or lockdown:

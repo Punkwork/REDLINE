@@ -63,7 +63,7 @@ Each card can also carry **tags**, shown under the type:
 ### 3.2 Card states
 
 - **CACHE:** a CACHED card stays in your hand at end of turn instead of being discarded. It stays until played or until the Node ends, **unless its card effect specifies an earlier expiry**. CACHED cards are extra; they don't reduce your DRAW. SMASH & GRAB's paid uninstall (RIOT-005) CACHES another hand card until the end of the Rustler's next turn; see `REDLINE_RUSTLERS.md` for the full approved effect.
-- **BURNED:** the card is removed from play for the rest of the Node and shuffled back into your deck when the next Node begins.
+- **BURNED:** the card is removed from play for the rest of the **encounter**; when the encounter ends, it goes to your discard pile (BURNED-001, BURNED-001a, designer 2026-11-27; was "the rest of the Node"). At a Node's end everything returns to your deck as usual. **Bloatware** never comes back: cleared SPAM disappears for good (BURNED-001b), and Bloatware BURNED any other way is removed too (interpretation to confirm).
 
 ---
 
