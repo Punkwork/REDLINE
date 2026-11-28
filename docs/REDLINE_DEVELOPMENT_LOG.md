@@ -306,3 +306,12 @@ RIOT's starter deck is one card short (SMASH & GRAB) until redesigned. CSA-03 is
 ## 2026-11-27 — RIOT-006 and the retirement of repeated card text recorded (Claude Code)
 
 Designer: RIOT's starter replaces SMASH & GRAB with a 4th PROBE (15 cards; RIOT-006). Confirmed that repeated card text in other docs is retired in favour of the single record; the cards stay in the game. No code change yet.
+
+## 2026-11-27 — Last CSA-03 inputs approved (Claude Code)
+
+Designer approved:
+- cards show the engine text, marked temporary, until divergent behaviour is fixed;
+- rarity and pool for the ten SYNERGY-PLAYTEST-002 cards (seven Common, OVERCLOCK and SALVAGE Uncommon, REPRISE Rare; all shared, added to the current reward pool once implemented);
+- PATTERN ANALYSIS marked experimental.
+
+CSA-03 has no open inputs.

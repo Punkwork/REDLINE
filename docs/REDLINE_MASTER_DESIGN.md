@@ -3738,3 +3738,10 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 **Designer, 2026-11-27 19:30 (APPROVED):**
 - **RIOT-006 (ID assigned by Claude Code):** RIOT's starter deck replaces SMASH & GRAB with a 4th PROBE: "give riot +1 Probe. That brings the deck to 15 cards." The deck is SLEDGE, BRUTE FORCE, SHATTER, OVERLOAD, PROBE ×4, FEEDBACK, ADRENAL SPIKE, PULP Shield ×3, LAY LOW, Basic Extractor. Implemented in a controlled data commit (CSA-03 C2).
 - **Repeated card text in other docs:** confirmed. The extra copies are retired, all docs refer to the single record, and the cards stay in the game using the single record's text (CSA-06).
+- **Divergent text (CSA-03):** where the engine does not yet match an approved card (PROBE, PIVOT, the BURNED-001 cards), the record stores the approved text, and cards show the current engine text in a field marked temporary until the behaviour is fixed. The validator lists every such card.
+- **SYNERGY-PLAYTEST-002 rarity and pool (playtest values, not final balance):**
+  - Common: REACTIVE ARMOUR, COUNTERINTELLIGENCE, FEEDBACK LOOP, ADAPTIVE DEFENCE, FOLLOW THROUGH, ESCALATION, AFTERBURN.
+  - Uncommon: OVERCLOCK, SALVAGE.
+  - Rare: REPRISE.
+  - All shared, and added to the current reward pool. They become reward-eligible as each handler is implemented; until then they are `pending` and excluded.
+- **PATTERN ANALYSIS (ICE):** marked experimental. CHAIN_PULP has no trigger while CHAIN is parked; the definition is kept and stays out of maps until redesigned.
