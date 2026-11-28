@@ -87,7 +87,7 @@ Raising STR alone breaks the game: fallback cards have limits (BRUTE FORCE: STR 
 Longer encounters mean more Corporation Responses, so the risk is the **total VITAE lost per encounter**, not any single hit.
 
 ### 4.1 VITAE budget (PACE-004)
-A corporation gives about **30 VITAE + 10–20 healing** (SAFEHOUSE, DEAD DROP, MAINTENANCE WINDOW). The target VITAE at the Central Node is 30–60% (checklist E1). So:
+A corporation gives about **30 VITAE + 10–20 healing** (SAFEHOUSE, MAINTENANCE WINDOW; the DEAD DROP has no healing, Core Rules §8.3). The target VITAE at the Central Node is 30–60% (checklist E1). So:
 
 | Encounter | VITAE lost by an on-curve deck | By an under-built deck |
 |---|---|---|

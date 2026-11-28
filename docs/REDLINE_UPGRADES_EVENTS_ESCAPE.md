@@ -23,7 +23,7 @@
 | Source | How |
 |---|---|
 | **Console Lab** | The dedicated source of PATCHWORK; services and removal cost: Core Rules §8.3. |
-| **SIGNAL UNCLEAR** | The BLACK CLINIC event (§3). |
+| **SIGNAL UNCLEAR** | The BLACK CLINIC event (§3; incidental overlap, Core Rules §8.3). |
 
 ### 1.2a FUSE (APPROVED 2026-11-12, as part of P5-001)
 
@@ -238,7 +238,7 @@ When you take THE HEARTH's payload, HALCYON stops being a friendly gadget compan
 | Escape encounter | ICE | CRED reserve |
 |---|---|---|
 | **1** | 1 random escape ICE | 10 |
-| **SAFEHOUSE** | (heal 10 VITAE or 1 PATCHWORK) | — |
+| **SAFEHOUSE** | (services: Core Rules §8.3) | — |
 | **2** | 2 random escape ICE | 10 |
 | **3** | 1 random escape ICE + **HOUSE CALL** (support, left) | 10 |
 

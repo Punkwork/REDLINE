@@ -56,7 +56,7 @@ Each card can also carry **tags**, shown under the type:
 
 ### 3.1a Starter cards are the weakest cards [NEW, BASIC-001 — structural rule]
 - **Every card in a starter deck is the weakest version of its role** (the shared basics PROBE, PULP Shield, GHOST SIGNAL and Basic Extractor, and each Rustler's own starter cards). Every card a Rustler can earn or buy is slightly or much better.
-- **Rustlers are trying to stop drawing their starter cards.** By the end of a good run, the deck should rarely draw an original card: rewards, purchases, Wipe, Console Lab removal and FUSE all serve that goal.
+- **Rustlers are trying to stop drawing their starter cards.** By the end of a good run, the deck should rarely draw an original card: rewards, purchases, Console Lab removal, DECOMPILE and FUSE all serve that goal.
 - **Basic and starter cards are never offered** as rewards, at the Black Market Uplink, or by events. Only the reward pools are.
 - **Design check:** every starter card must have at least one reward card that's a clear upgrade for the Rustler who starts with it. When one doesn't, weaken the starter card first (or make the ICE stronger), rather than raising rewards. The current audit is in `REDLINE_CARD_POOLS.md` §2.1.
 
@@ -331,7 +331,7 @@ Every corporation starts with the same designed encounter, so every run gets **o
 | LUCIDA | **INTAKE** (BASELINE SCAN + ONBOARDING) | FORGET takes random cards, and CACHED cards are safe. |
 
 Details: `REDLINE_ICE_CORP1.md` §8.4, `REDLINE_ICE_CORP2.md` §6a, `REDLINE_ICE_CORP3.md` §7a.
-- Every route can reach **at least 1 Uplink** (row 10 always offers one). About **1 Uplink in 3 has a Clinic**, shown on the map.
+- Every route can reach **at least 1 Uplink** (row 10 always offers one). Every Uplink has a Clinic (§8.3).
 
 ### 10.2 Central Node and the payload [CHANGED by UPL-007]
 A boss-style ICE encounter. Defeating it gives you the corporation's **payload**, an **encrypted data core**: choose **1 of 3 Ghostware**, **active immediately** (usable during the escape). The rest of the core stays encrypted until you escape, when NUL/REM decrypts it into a **First Signal fragment** **[CHANGED by P5-009]**. See `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §2.5.

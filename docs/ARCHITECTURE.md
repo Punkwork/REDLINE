@@ -85,5 +85,5 @@ Use a working display and GL renderer. On display-less Linux, install Xvfb and x
 |---|---|---|
 | Central Nodes | Final-layer BREACH of a node marked `central: true` awards that corporation's card once. The holder and arrival have controlled fixtures. | HALCYON's four-row route ends before a playable Central Node. |
 | LUCIDA | Facade art/skin and flavour-log rewrite hooks. The controlled INTAKE fixture exercises them. | There is no playable LUCIDA route. |
-| PATCHWORK | `attach_patchwork_graft(uid)` stores the selected broken-ICE graft on a run-deck instance. The fixture calls the hook directly. | There is no playable PATCHWORK upgrade action. SAFEHOUSE COMPILE is a separate feature. |
+| PATCHWORK | `attach_patchwork_graft(uid)` stores the selected broken-ICE graft on a run-deck instance. The fixture calls the hook directly. | There is no playable PATCHWORK upgrade action. SAFEHOUSE COMPILE is a separate feature (as built; superseded in the design, Core Rules §8.3). |
 | Run resume | `save_presentation()` and `restore_presentation()` round-trip punch-card IDs and grafts keyed by UID on an already available deck. | There is no on-disk run snapshot or resume screen. |

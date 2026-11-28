@@ -37,7 +37,7 @@ Program example: suggest first install -> offer +1 first-turn BW for automated i
 | Extraction | Repeated extraction advice | Interfere with an early exit where current rules allow it |
 | Risk | Repeated damage; protective preparation | Prevent unusual risk-taking |
 | Corporate services | Useful discounts or services | Resist disconnection |
-These are design probes, not claims that the current build supports these actions. In particular check current no-escape rules, Wipe/REFACTOR semantics, BOON-001 and map information rules. Do not change core rules from this document.
+These are design probes, not claims that the current build supports these actions. In particular check current no-escape rules, card removal and REFACTOR semantics (Core Rules §8.3), BOON-001 and map information rules. Do not change core rules from this document.
 
 ## Experience and safeguards
 Surveillance must offer real benefits; choices should be strategically rational; no simplistic good/evil scoring. Different players should experience different NUL/REM arcs, including no betrayal. The intervention should target an actual deviation, be foreshadowed, proportionate and survivable, not arbitrarily destroy a run. Distinguish fiction from actual bugs in QA and eventually in-world feedback. Preserve accessible UI, ordinary settings, exit and real privacy controls. Only fictional local gameplay state may be used; no external telemetry or real personal profiling. Presentation must not feed rules; any future approved behavioural state must be a rules-owned system with presentation reading it, not vice versa. Preserve SIGNAL-001 and all copy guards.
