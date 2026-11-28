@@ -43,7 +43,7 @@ Every card shows **one type** on its frame:
 |---|---|---|
 | **PROGRAM** | Install it: pay its BW and its **RAM** cost. It stays in play for the rest of the Node. Icepicks and Extractors are Programs. | Returns to your deck at Node end. You can **unload** it for 0 BW at any time in your turn; it goes to your discard pile. **[CHANGED]** This now applies to Hardware too (previously 1 BW to uninstall). |
 | **SCRIPT** | Play it for its BW cost; it resolves once. | Goes to your discard pile. |
-| **PROTOCOL** | Deploy it to your **RACK** for its BW cost. Uses no RAM. Stays active for the whole Node. | Returns to your deck at Node end. |
+| **PROTOCOL** | Deploy it to your active **RACK** for its BW cost. Uses no RAM; no maximum simultaneous active Protocols. Active cards are outside hand, draw and discard piles and cannot be retrieved by recursion. | Expires to discard exactly once at encounter completion, per §3.1 lifecycle clarification below. |
 | **BLOATWARE** | Junk cards the corporation puts into your deck. Each card says what it does. | Removed at Node end. |
 
 Each card can also carry **tags**, shown under the type:
@@ -226,7 +226,7 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 
 - An ICE Node has **1 to 3 encounters** ("layers"), each with its own ICE.
 - **At the start of the Node:** shuffle your whole deck and draw.
-- **Between layers:** Programs, Protocols and CACHED cards stay; everything else in hand is discarded; draw a fresh hand.
+- **Between layers:** Programs and CACHED cards stay; Protocols expire to discard per §3.1 lifecycle clarification; everything else in hand is discarded; draw a fresh hand.
 - **At the end of the Node:** everything returns to your deck.
 
 ### 8.2 Leaving early [NEW]
@@ -575,3 +575,6 @@ Every complete route must contain 2–3 Uplinks, at least one each SAFEHOUSE, DE
 
 ## PROBE-004a — Canonical PROBE wording and scope (APPROVED, 2026-11-27)
 Confirms PROBE-004 and extends its authoritative wording across Architecture V2, not only the Core Loop build. PROBE is a STARTER SCRIPT — EXPLOIT, base cost 0 BW. Printed rules: **Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.** Both modes share the same per-target, per-turn count across copies (0, 1, 2… BW); reset each turn. Reveal is available only on VOID with hidden subroutines; STR reduction does not reveal anything. Flavour: “The deeper you probe, the costlier it gets.” Supersedes conflicting older PROBE costs, automatic/top-only reveal and effect descriptions. Historical decisions remain historical. Claude Code follow-up: audit existing mode selection, engine, CardDB text, both UI paths and tests; reconcile discrepancies, verify both modes, shared cost, reset, invalid targets, cancellation and insufficient BW; run required Godot validation before committing code. Until validated, the existing CardDB description is known stale; no claim of runtime correction. Use approved wording in UI mockups.
+
+## Protocol lifecycle clarification (§3.1; UI-PROTOCOL-001, approved 2026-11-28)
+The active RACK has no capacity limit and consumes no RAM. Deployed Protocols remain outside card circulation until expiry; each copy retains its independent effect. Per PROTOCOL-DURATION-001/a/b, effects remain active through final DEADLOCK, BREACH, permitted remaining Runner actions, END TURN and PARTING SHOT. After resolution and survival confirmation, expire to discard exactly once before encounter progression or completion rewards; fatal PARTING SHOT grants no successful completion rewards. Apply cleanup on normal progression, forced LOCKDOWN and early exit. Programs and RAM persist within the node; next node draws from compiled deck. Presentation authority: UI Design Bible, UI-PROTOCOL-001.
