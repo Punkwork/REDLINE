@@ -432,3 +432,6 @@ Designer, 06:34–06:35:
 
 PULP Shield's record now cites GENERALIST-001 and GENERALIST-012 (121 of 127 records). The other six are Deck Synergy §9 example cards awaiting a designer ruling. Docs and data only; `validate_cards.py` and the Python tests pass.
 
+## 2026-11-28 — PLAYER-KNOWLEDGE-001: Priority 4B (Codex)
+
+Recorded designer approval of sections 1–8 in [Master Design §4](REDLINE_MASTER_DESIGN.md#player-knowledge-001--priority-4b-persistent-player-knowledge). Section 9 remains outside approval. Branch-wide Git search found no ID collision. Checked source tables, links and documentation scope. Implementation and behavioural validation remain pending.

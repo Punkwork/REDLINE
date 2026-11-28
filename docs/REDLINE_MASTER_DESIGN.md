@@ -265,6 +265,144 @@ The player is the **rustler**; the opposing system is the **corporation**. Encou
 ### Ghostware
 **LOCKED:** Ghostware consists of **permanent, non-card** upgrades. The interface includes a **Ghostware rack below RETURN**. **Signature Ghostware** is displayed once and marked **`ORIGIN`**; do not generate duplicate signature entries. Exact Ghostware catalog/effects: **VERIFY**.
 
+### PLAYER-KNOWLEDGE-001 — Priority 4B Persistent Player Knowledge
+
+**APPROVED by the designer, 2026-11-28, sections 1–8.** In [Development Governance Procedure](https://chatgpt.com/c/6b0ab21a-ec5c-83ea-9375-a93b5ec261cd), the designer confirmed, “PErfect.  lets commit this in the appropriate documentation.  I agree and approve with 1-8”. Section 9, “Proposed foundational design rules,” remains outside the approval.
+
+Data minimization governs the design. Retain only information needed for an identified gameplay purpose in progression, content discovery, strategic development or fictional surveillance. The specification describes the design scope. Serialization, exact measures of experimentation and mastery, and implementation remain pending.
+
+#### 1. Three levels of player knowledge
+
+**Level 1 — Essential game knowledge**
+
+Information necessary for persistent progression, unlocks and saved games.
+
+Mandatory · Minimal permanent storage
+
+**Level 2 — Strategic knowledge**
+
+Summarized information about card discovery, experimentation and strategic mastery.
+
+Derived from gameplay · Compact persistent records
+
+**Level 3 — Surveillance knowledge**
+
+Behavioural profiling, preferences, privacy concessions and NUL/REM's understanding of the Rustler.
+
+Governed by in-game privacy and surveillance mechanics
+
+Keep these levels logically separate. The progression system knowing that a card has been unlocked does not necessarily mean NUL/REM should have access to that knowledge.
+
+#### 2. Essential progression information
+
+Retain the minimum persistent information needed to administer unlocks.
+
+| Information | Storage method | Purpose |
+|--------|--------|--------|
+| Runs completed | Counter | Overall progression |
+| Runs won | Counter | First-victory detection |
+| Furthest corporation reached | Single value | Progression milestone |
+| CARDS unlocked | Set of content IDs | Unlock eligibility |
+| CAPS unlocked | Set of content IDs | Unlock eligibility |
+| GHOSTWARE unlocked | Set of content IDs | Unlock eligibility |
+| Unique achievements completed | Set of achievement IDs | Recognize accomplishments without duplication |
+| Last processed run ID | Single identifier | Prevent duplicate unlock rewards |
+
+A complete run history is unnecessary.
+
+#### 3. Card discovery and familiarity
+
+Retain these attributes per card.
+
+| Attribute | Data type | Purpose |
+|--------|--------|--------|
+| Unlocked | Yes/No | Available in acquisition pools |
+| Seen | Yes/No | Player has encountered the card |
+| Acquired | Yes/No | Player has added it to a deck |
+| Played | Yes/No | Player has actually used it |
+| Effect successfully triggered | Yes/No | Player has experienced its intended functionality |
+| Runs acquired in | Counter | Distinguish experimentation from repeated preference |
+| Runs successfully used in | Counter | Establish familiarity and experience |
+
+Track playing a card separately from successfully triggering its effect. For example, a player can install OVERCLOCK without playing enough cards in a turn to activate it. An illustrative OVERCLOCK record has **2** runs acquired in and **0** runs successfully used in. Apply the same general structure to CAPS and GHOSTWARE where applicable. Individual draws, plays, discards and inspections are unnecessary.
+
+#### 4. Strategic knowledge
+
+Assign internal strategic tags in the canonical card repository so relationships can be derived without retaining every card combination. The assignments below are illustrative. The tag vocabulary and specific assignments remain open.
+
+| Card | Proposed strategic tags |
+|--------|--------|
+| OVERCLOCK | Momentum, Card Draw, BW Generation |
+| AFTERBURN | Momentum, Defence |
+| REACTIVE ARMOUR | Momentum, Defence |
+| COUNTERINTELLIGENCE | Surveillance Evasion |
+| SALVAGE | Recursion |
+| REPRISE | Recursion, Script Synergy |
+| ESCALATION | ICE Suppression, Exploit Synergy |
+| ADAPTIVE DEFENCE | Program Synergy, Defence |
+
+Retain a small number of summarized familiarity measurements per strategic family. For example, the game could recognize substantial ICE suppression experience and limited recursion experience when considering which locked content might offer new opportunities. Familiarity states describe internal strategic knowledge and have no player-level or player-facing UI role. Exact measurements, thresholds and state definitions remain open.
+
+#### 5. Temporary run information
+
+| Temporary information | Used to determine |
+|--------|--------|
+| ICE nodes breached | Minimum unlock eligibility |
+| Corporations defeated | Unlock ceiling |
+| Optional mini-bosses defeated | Gameplay achievements |
+| Cards acquired during the run | Deck development |
+| Unique cards successfully used | Strategic experimentation |
+| Strategic effects successfully triggered | Synergy and mastery |
+| CAPS and GHOSTWARE activated | Content familiarity |
+| TRACE management | Surveillance evasion achievements |
+| Privacy decisions | Surveillance-related unlocks |
+| VITAE management | Risk management achievements |
+
+At run end, evaluate this information, update the persistent profile, determine unlocks and discard temporary information no longer needed.
+
+#### 6. Surveillance knowledge — a separate system
+
+Keep a compact, logically separate NUL/REM profile governed by in-game privacy and surveillance mechanics. This extends the existing Knowledge, Confidence and Authority framework in [NUL/REM and the self-built prison](REDLINE_NULREM_BEHAVIOURAL_LOCK_IN.md).
+
+| Attribute | What it represents |
+|--------|--------|
+| Knowledge | How much NUL/REM knows about the Rustler |
+| Confidence | How accurately it believes it can predict behaviour |
+| Authority | How much decision-making power the Rustler has granted it |
+| Privacy permissions | What information the system is permitted to access |
+| Strategic preferences | Which approaches the Rustler tends to favour |
+| Risk preference | Whether the Rustler tends toward caution or risk |
+| Assistance acceptance | Willingness to accept NUL/REM's recommendations |
+
+Update summarized behavioural tendencies as the player makes decisions. Keep fictional surveillance entirely local. Exclude actual personal information, external behavioural tracking and network telemetry.
+
+#### 7. Information we should deliberately avoid storing
+
+- Complete turn-by-turn gameplay histories.
+- Every card drawn, discarded or hovered over.
+- Mouse movements and individual clicks.
+- Exact timestamps of every action.
+- Historical copies of every deck.
+- Every possible card combination.
+- Complete dialogue interaction transcripts.
+- Actual personal information.
+
+Temporary diagnostic logging for development and playtesting should be separate from the production player profile.
+
+#### 8. Estimated storage requirements
+
+| Data category | Estimated storage |
+|--------|--------|
+| General progression | 1 KB |
+| 500 card discovery records | 8–20 KB |
+| 200 CAP and GHOSTWARE records | 3–8 KB |
+| Strategic profiles | 1–3 KB |
+| Surveillance profile | 1–3 KB |
+| Achievement records | 2–5 KB |
+| **Estimated total** | **16–40 KB** |
+
+These are illustrative estimates for compact serialized data, excluding active saved games and diagnostic logs. Actual storage depends on the implementation format. The estimates set no storage budget.
+
 ## 5. DEAD DROP recovery choice
 
 *Historical decision record. Current Node definitions: Core Rules §8.3 (NODE-AUTHORITY-001).* *PATCH UP moved to the SAFEHOUSE (NODE-PURPOSE-001); DEAD DROP has no physical healing.*
@@ -401,6 +539,7 @@ engine/
 | HOVER-001 | Every hover/focus box for a game object shows a large, high-resolution image of the object beside its text (cards, CAPS, Ghostware, programs, ICE, keys) | APPROVED | Designer, 2026-11-20 (in session); §6 |
 | PIXEL-TRACE-001c | Neon ballast buzz on each pixel-step transition, with the bit-crushed music (PIXEL-TRACE-001b) | APPROVED | Designer, 2026-11-21 |
 | PIXEL-16BIT-001 | 16-bit look for the whole game | REJECTED (16-bit only for transitions and the lethal pulse) | Designer, 2026-11-21 |
+| PLAYER-KNOWLEDGE-001 | [Priority 4B Persistent Player Knowledge, sections 1–8](#player-knowledge-001--priority-4b-persistent-player-knowledge) | APPROVED (design) | Designer, 2026-11-28 |
 
 ## 11. Open specification backlog
 **High priority:** retrieve the full reference ZIP and earlier detailed design notes; verify complete card/ICE catalog, costs, turn/action economy, Trace formulas, Vitae damage, Black ICE rules, virus mechanics, win/loss conditions, and exact PATCHWORK/Ghostware effects. Capture reproducible tests for every LOCKED rule. Define Godot migration milestones.

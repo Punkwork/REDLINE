@@ -309,6 +309,10 @@ Per-step results and interpretations: [HALCYON_PLAYTEST3_IMPLEMENTATION.md](HALC
 
 ## Done
 
+### PLAYER-KNOWLEDGE-001 — Priority 4B (documentation complete)
+
+[Master Design §4](REDLINE_MASTER_DESIGN.md#player-knowledge-001--priority-4b-persistent-player-knowledge) records the designer’s approval of sections 1–8. Section 9 remains outside the approval. Exact experimentation and mastery measurements, save-format review, implementation and behavioural validation remain open. Review the prototype’s separate [local ad profile](ARCHITECTURE.md#local-files) when planning integration. The documentation commit carries `PLAYER-KNOWLEDGE-001` in its subject.
+
 **UI-WORKFLOW-001 (designer-approved, 2026-11-24):** GitHub Issues are the single authoritative UI proposal and development register for Claude Code, Claude, Codex and ChatGPT. Use stable component IDs from the UI Design Bible. Keep proposal discussion, mockup links, acceptance criteria, designer approval, implementation links and validation evidence in the issue; do not duplicate the backlog in HANDOFF or separate agent files. Only the designer approves; record approved decisions in Master Design and update the UI Design Bible as applicable. Development Log records actual work and links to the issue. Daily operations review uses the same issues. No code or rules changes. Component register: `docs/PANOPTICON_UI_DESIGN_BIBLE.md` §1a.
 
 **UI-BIBLE-001 (designer direction, 2026-11-24):** [PANOPTICON UI Design Bible](PANOPTICON_UI_DESIGN_BIBLE.md) is the consolidated UI working specification, opening with “Visually rich but informationally restrained.” Icon-first resource HUD (Vitae, BW, RAM, Shield, incoming PULP), persistent top Ghostware rail and first ORIGIN badge in mockups. Existing decision IDs and rules authority remain unchanged. Source documents retained pending dependency/narrative audit; no parallel new UI briefs. No code changes. Initial consolidation: `16265fb`. Follow-up: reconcile imported historical sections and references before retiring source files; no implementation approval implied.
