@@ -43,3 +43,13 @@ Incident (my error, fixed forward in `fd9d0b5`): two of my scripts opened a file
 - `98d37b5` cut `REDLINE_DEVELOPMENT_LOG.md` to 1 entry.
 
 Both were restored from history. All 431 entries that existed at `1b88af2` were verified present verbatim, and no history was rewritten. Evidence for CSA-05: a size or line-count drop on append-only records is machine-checkable and would have blocked both commits.
+
+## Session 4 (about 22:55–23:30, `architecture-v2`)
+
+Branch / commit: started at `222e1e4`; upstream moved to `a87a00b` (three OPS-001/UI-TYPO-001 doc commits) and was rebased onto cleanly. The rebase put the new Bandwidth subsection under §2b; it was moved back into §2a before committing. `main` and `release` were not touched.
+Work completed: UI-TYPO-002, the M06 event typography and motion treatments (`37710c1`). See the development log entry for test counts.
+Surprises: HANDOFF lists CSA-04 as IN PROGRESS, but the request said "following completion of CSA-04". This work is independent of the open CSA-04 items. In GL Compatibility, `clip_children` masking works (probed before MASK OFF was built). The first input pass-through check in the fixture failed because of my synthetic click (window coordinates on a stretched view), not the flyout. A control case confirmed this, and it was fixed with `push_input(..., true)`.
+Missing tools: none. Godot 4.3 was downloaded with the pinned CI hash.
+To-dos: post implementation and validation evidence to [#24](https://github.com/Punkwork/REDLINE/issues/24) (UI-WORKFLOW-001). Not posted from this session without the designer's go-ahead.
+Blockers / unverified results: there has been no hands-on playtest or Windows export. Readability of the translucent MASK OFF image was judged from screenshots only.
+Recommended priorities: designer review of the §2b implementation choices, then playtest the timings.

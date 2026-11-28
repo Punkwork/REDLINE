@@ -37,17 +37,7 @@ LOG-001 moved the oldest dated entries to the archive unchanged: 2026-11-26 — 
 
 LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-002d — Experiential acceptance (designer approved 2026-11-27); CHAIN-003 — Experimental catalogue and first playtest candidates (2026-11-27); CHAIN-003a — Experimental playtest development sequence (designer approved 2026-11-27); CHAIN-004 — Consecutive card-play eligibility (designer approved 2026-11-27).
 
-## CHAIN-005 — Termination rules (designer approved 2026-11-27)
-1. Playing a card that cannot extend an active CHAIN terminates that instance.
-2. That card can immediately become the first link of a new CHAIN, without reusing any prior instance links.
-3. Ending the Rustler turn or leaving/completing the encounter clears all candidate and active CHAIN state.
-4. Termination never reverses previously earned CHAIN bonuses (ordinary effect durations still apply).
-Non-card encounter actions remain neutral per CHAIN-004, except explicit turn/encounter boundaries. Termination is automatic; no separate termination action required. These approved rules supersede earlier open termination questions. Extension eligibility, extension discounts and exact catalyst signature grammar remain open. Acceptance: incompatible successful play ends active instance and seeds new candidate; no overlap; turn/encounter boundary clears state; prior rewards retained; non-card actions preserve state. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md. No engine changes.
-
-
-## CHAIN-006 — Persistent cumulative reward direction (designer endorsed 2026-11-27)
-Preferred design direction: sustaining an instantiated CHAIN produces persistent cumulative rewards, encouraging the Rustler to discover an opportunity and rethink their intended turn strategy. Preserve escalating rewards explicitly for experimentation. Compare immediate fixed, banked fixed, immediate escalating and banked escalating delivery. Illustrative per-extension reward schedules: fixed 1,1,1 versus escalating 1,2,3; at six links totals 3 versus 6, assuming rewards begin at link four. Explore draw, BW, pile manipulation and tactical effects. Banked rewards require explicit settlement timing at incompatible play, turn end and encounter completion; cannot retroactively fund the terminating card without a separate rule. Test runaway draw/BW loops, player agency, opportunity cost, feedback and strategic redirection. Exact continuation eligibility, reward amounts, trigger on third link versus fourth, extension discount, settlement ordering and limits remain unresolved. No production mechanics or card values approved by this direction. Canonical specification: docs/PANOPTICON_CHAIN_MECHANICS.md.
-
+LOG-001 moved the oldest dated entries to the archive unchanged: CHAIN-005 — Termination rules (designer approved 2026-11-27); CHAIN-006 — Persistent cumulative reward direction (designer endorsed 2026-11-27).
 
 ## CHAIN-007 / CHAIN-008 — Balance constraints, extension economics and playtest roadmap (designer approved 2026-11-27)
 CHAIN-007: Exceptional, not routine. CHAIN complements normal encounter play; powerful extended instances must be earned through sequencing, availability, BW and preparation. Non-CHAIN decks remain competitive. Evaluate rewards against actual ICE threat; test escalating rewards and recursive/self-sustaining draw/BW/recovery loops. No universal length cap unless evidence warrants reconsideration. Track activation frequency, extension length, reward magnitude/efficiency, sustainability, opportunity cost, strategic redirection, encounter relevance and experiential mastery. Numerical thresholds remain experimental.
@@ -401,3 +391,16 @@ Designer approved Core Rules §8.3 as the single Node authority and answered the
 - `debc114` `tools/csa/scan_node_authority.py` and `tests/python/test_node_authority.py` (13 tests: live check plus 9 negative on a temp copy); fixes the scan found.
 
 Validation: scanner 0 documentation findings over 83 active docs, 2 runtime consumers pending; `python3 -m unittest discover -s tests/python` 52/0; `validate_cards.py` valid; `scan_card_drift.py` output identical to `aae7f34`. Runtime compliance is not claimed: see HANDOFF (NODE-AUTHORITY-001).
+
+## 2026-11-27 — UI-TYPO-002: M06 event typography and motion treatments (Claude Code)
+
+Designer approved eight event treatments for the next playable Architecture V2 build. The specification is the [UI Bible §2b](PANOPTICON_UI_DESIGN_BIBLE.md#2b-event-typography-and-motion-treatments-ui-typo-002-m06-approved-2026-11-27); Master Design has the decision record. Built in `37710c1`, extending `EventFlyout`, `VasTokens` and the existing event bindings. No rules or data changed.
+- Seven flyout treatments, each with its own timing, type, colour and easing tokens: Kinetic Sweep, Institutional Transmission (B2), Kinetic Breakthrough, Surveillance Convergence (L3), Masked Revelation (corporation HOSTILE art through `clip_children` letterforms, verified under GL Compatibility), Corner Slingshot (65 px = 85% of 76) and Atomic Ascension (gold completes with the CRED count through `RailLedger.sync_reward`).
+- LETHAL: new `LethalLens` on the affected ICE panel, from the ICE model's `lethal` flag. Its flyout, its red wash and the response hold for it are removed.
+- Reduced motion is a plain fade with the same information. CORP's acquisition flicker stays within 3 flashes a second.
+- Tests: `test_ui_typo_002.gd` 172/0 (new, in CI; expectations taken from the approved table). `ui_typo_event_fixture` now drives the production sandbox, flyout and lens: 32 captures, PASS, input passes through a held flyout (in CI). The old ≤ 1.5 s checks became per-event targets within UI-TYPO-001a.
+- Other suites unchanged from `222e1e4`: test_game 430/0 (SIM=1 430/0); adp 17; signal_carbon 672; arch_v2_ice 206/0 (was 202: three LETHAL contrast checks and one global 1.5 s check replaced by seven per-event checks); coverage 548; batch3 115; batch4 76; app 33; parity 3,949 actions / 4,029 checks; csa_cards 506; spec probe 32, burned 29, pivot 50; `shot_arch_v2_ice` 42 captures; `shot_cred_cost` 4/0; Python 52/0; `validate_cards.py` VALID.
+- Coverage I12 and R06 notes updated in the JSON; `ENCOUNTER_COVERAGE.md` regenerated with `tools/arch_v2_coverage_md.py`.
+
+Interpretations to confirm: UI Bible §2b, "Implementation choices pending designer confirmation" (six items).
+Note: HANDOFF still lists CSA-04 as IN PROGRESS (Inspector model, Uplink contract, generated doc blocks). This work touches none of those.
