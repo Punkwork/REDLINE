@@ -175,3 +175,8 @@ OPS-001 — Designer explicitly confirms the November 28 proposed agenda above, 
 6. Repository governance and documentation
 
 Retain the proposed agenda's owners, dependencies, blockers and decision gates. Confirmation establishes priority order only; it does not authorize new implementation, approvals, merges, branches, releases or issue closures beyond existing authorization. UI-BIBLE-001 / DOCS-MIG-001 remain open for review validation. All agents use this shared record on architecture-v2 (ARCH-V2-002).
+
+
+## 2026-11-28 — Designer-authorized agenda amendment (2026-11-27)
+
+OPS-001: All six confirmed priorities retain their existing rank. Under priority 6, remove UI-BIBLE-001 / DOCS-MIG-001 migration revalidation from outstanding work. Master Design records the designer-approved UI-BIBLE-001 completion and DOCS-MIG-001 gate pass on November 25, including preservation, dependency repair, link validation, tests and retirement evidence. See [completion record](../REDLINE_MASTER_DESIGN.md#ui-bible-001-completion--documentation-migration-gate-passed-docs-mig-001-2026-11-25). This supersedes earlier open-for-review wording. DOCS-MIG-001 remains a standing governance requirement for future migrations; reopen this completed batch only on new evidence of a defect. Other priority 6 tasks and all existing authorization gates remain unchanged. Recorded evidence reviewed; original tests not rerun. No implementation or issue closure authorized.
