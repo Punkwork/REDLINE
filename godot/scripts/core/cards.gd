@@ -108,6 +108,19 @@ static func def(id: String) -> Dictionary:
 		return {"name": a.name + " ⨯ " + b.name, "type": "SCRIPT", "tags": tags, "bw": mini(4, a.bw + b.bw), "trace_cost": int(a.get("trace_cost", 0)) + int(b.get("trace_cost", 0)), "cred_cost": int(a.get("cred_cost", 0)) + int(b.get("cred_cost", 0)), "rarity": "RARE", "compiled": [parts[1], parts[2]], "target": a.get("target", false) or b.get("target", false), "text": a.text + " THEN " + b.text}
 	return DEFS[id]
 
+## CSA-04e (CSA-02 element 9): the Universal Object Inspector's content contract for a card, built from
+## its canonical record and nothing else: name, classification, costs, rules text, flavour, art. The V2
+## card model and the shared inspector (UI-INSPECTOR-001) read it. `records` lets tests pass a modified
+## copy of the records to prove a canonical change reaches the Inspector (CSA T3).
+static func inspector_model(id: String, records: Dictionary = {}) -> Dictionary:
+	var d: Dictionary = records[id] if not records.is_empty() else def(id)
+	var tags: Array = d.get("tags", [])
+	return {"id": id, "name": String(d.get("name", id)),
+		"classification": " · ".join([String(d.get("type", ""))] + tags.map(func(t): return String(t))),
+		"type": String(d.get("type", "")), "tags": tags,
+		"costs": {"bw": int(d.get("bw", 0)), "cred": int(d.get("cred_cost", 0)), "trace": int(d.get("trace_cost", 0))},
+		"rules": String(d.get("text", "")), "flavour": String(d.get("flavor", "")),
+		"art": "res://assets/concept/cards/%s.png" % id}
 
 ## CAPS-TEST-001 (designer 2026-11-27): the five common CAPS; data in res://data/cards.json ("caps").
 

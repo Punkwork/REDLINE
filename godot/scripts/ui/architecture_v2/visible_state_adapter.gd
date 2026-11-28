@@ -234,16 +234,17 @@ static func effect_rule(e: Dictionary) -> String:
 ## CAS-001 C11 (ARCH-V2-004, Batch 2): a card's display model. `where` is "hand" (playability comes
 ## from Game.can_play) or "pick" (a choice candidate; always selectable). Read-only.
 static func card_model(game: Game, c: Dictionary, where: String = "hand") -> Dictionary:
+	## CSA-04e: static fields come from the Inspector content contract (CardDB.inspector_model), built
+	## from the canonical record; only live state (playability, the engine's current text) is added here.
 	var id := String(c.id)
-	var d := CardDB.def(id)
-	var tags: Array = d.get("tags", [])
+	var im := CardDB.inspector_model(id)
 	var play := game.can_play(int(c.uid)) if where == "hand" else {"ok": true, "reason": ""}
-	return {"uid": int(c.uid), "id": id, "name": String(d.get("name", id)), "type": String(d.get("type", "")),
-		"tags": tags, "bw": int(d.get("bw", 0)), "cred": int(d.get("cred_cost", 0)), "trace": int(d.get("trace_cost", 0)),
-		"text": game.card_text(id) if game.has_method("card_text") else String(d.get("text", "")),
-		"target": bool(d.get("target", false)), "playable": bool(play.get("ok", false)), "reason": String(play.get("reason", "")),
-		"art": "res://assets/concept/cards/%s.png" % id,
-		"flavor": String(d.get("flavor", "")),   # UI-INSPECTOR-001: subordinate flavour line
+	return {"uid": int(c.uid), "id": id, "name": String(im.name), "type": String(im.type), "classification": String(im.classification),
+		"tags": im.tags, "bw": int(im.costs.bw), "cred": int(im.costs.cred), "trace": int(im.costs.trace),
+		"text": game.card_text(id) if game.has_method("card_text") else String(im.rules),
+		"target": bool(CardDB.def(id).get("target", false)), "playable": bool(play.get("ok", false)), "reason": String(play.get("reason", "")),
+		"art": String(im.art),
+		"flavor": String(im.flavour),   # UI-INSPECTOR-001: subordinate flavour line
 		"cached": bool(c.get("cached", false)), "cache_turns": int(c.get("cache_turns", 0))}
 
 ## ARCH-V2-005 header slots. Display models only; nothing here changes Game.

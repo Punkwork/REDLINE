@@ -110,7 +110,7 @@ func show_card(card: CardView) -> void:
 			notes.append(["CACHED: stays in your hand " + ("for the rest of the encounter." if turns <= 0 else "for %d more turn%s." % [turns, "" if turns == 1 else "s"]), INK_NOTE])
 		if not bool(m.get("playable", true)) and String(m.get("reason", "")) != "":
 			notes.append(["Can't play now: " + String(m.reason), INK_WARN])
-		_object(card_art(m), String(m.get("name", "")), card.type_line(), costs, [String(m.get("text", ""))], notes, String(m.get("flavor", "")))
+		_object(card_art(m), String(m.get("name", "")), String(m.get("classification", card.type_line())), costs, [String(m.get("text", ""))], notes, String(m.get("flavor", "")))
 	_request(card, build)
 
 ## Any object by the content contract: artwork (Texture2D or Control), name, classification, cost,
