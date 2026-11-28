@@ -476,3 +476,7 @@ Designer, 09:36: SALVAGE triggers per copy and its pick is mandatory (as built);
 ## 2026-11-28 — UI-PROTOCOL-001 answers complete (Claude Code)
 
 Designer, 09:39: SPAM clearing is not a card play; ROT reaching 0 STR counts for FEEDBACK LOOP; the paperclip note choices are confirmed. The REPRISE change and the 2- and 3-layer HALCYON Nodes are queued for the next build (not started); the Node map and Uplink room come first.
+
+## 2026-11-28 — UPLINK-SPEC-001 visual recovery (ChatGPT)
+
+Designer reconfirmed the three upright CAP vials side by side in a wall-mounted fuse-bank and authorized repository handoff. Recovered visual placement summary recorded in UI Design Bible; Master Design records provenance; HANDOFF directs Claude Code to existing map and Uplink contracts. Original chat URL, annotated mockup, exact coordinates and asset path remain unverified; no invented pixel coordinates. Existing V5 validation reused. Documentation only; no engine/assets changed, no gameplay tests run, no release.
