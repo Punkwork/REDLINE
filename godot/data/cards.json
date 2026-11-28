@@ -136,11 +136,21 @@
 			"bw": 0,
 			"rarity": "STARTER",
 			"target": true,
-			"text": "Target ICE: −2 STR this encounter. Costs 1 BW more for each PROBE already played on that ICE this turn. A PROBE on a VOID reveals its top face-down subroutine.",
+			"modes": [
+				{
+					"id": "weaken",
+					"label": "−2 STR this encounter"
+				},
+				{
+					"id": "reveal",
+					"label": "Reveal all hidden subroutines (VOID)"
+				}
+			],
+			"text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",
 			"flavor": "The deeper you probe, the costlier it gets.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"PROBE-001",
@@ -148,9 +158,7 @@
 				"PROBE-004",
 				"PROBE-004a",
 				"CONSISTENCY-001a"
-			],
-			"approved_text": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",
-			"divergence": "PROBE-004a: the engine applies −2 STR and reveals the top hidden subroutine together; no choose-one, no reveal-all; the cost count is per ICE type, not per ICE (Q6). CSA-04."
+			]
 		},
 		"GHOST_SIGNAL": {
 			"name": "GHOST SIGNAL",

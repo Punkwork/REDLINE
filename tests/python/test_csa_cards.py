@@ -24,7 +24,8 @@ class LiveFile(unittest.TestCase):
         reg = V.register()
         self.assertEqual(len(reg["pending"]), 10)
         self.assertEqual(sorted(reg["experimental"]), sorted(["MINIMALIST", "SCALPEL", "ZERO_FOOTPRINT", "SMASH_AND_GRAB", "COVER_FIRE", "KILL_CHAIN", "HANDOFF"]))
-        self.assertIn("PROBE", [c for c, _ in reg["divergent"]])
+        self.assertIn("PIVOT", [c for c, _ in reg["divergent"]])
+        self.assertNotIn("PROBE", [c for c, _ in reg["divergent"]])   # CSA-04b: PROBE aligned
         self.assertEqual(LIVE["starters"]["RIOT"].count("PROBE"), 4)   # RIOT-006
         self.assertNotIn("SMASH_AND_GRAB", LIVE["starters"]["RIOT"])
 
@@ -88,7 +89,7 @@ class CatchesMistakes(unittest.TestCase):
         self.assertIn("only for divergent", self.errors(lambda d: d["cards"]["DEFRAG"].update(divergence="x")))
 
     def test_approved_text_matching_text(self):
-        self.assertIn("no longer divergent", self.errors(lambda d: d["cards"]["PROBE"].update(text=d["cards"]["PROBE"]["approved_text"])))
+        self.assertIn("no longer divergent", self.errors(lambda d: d["cards"]["PIVOT"].update(text=d["cards"]["PIVOT"]["approved_text"])))
 
     def test_decisions(self):
         self.assertIn("not a decision ID", self.errors(lambda d: d["cards"]["PROBE"].update(decisions=["probe four"])))

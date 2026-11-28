@@ -89,15 +89,16 @@ func request_break(ice_ref: Dictionary, sub: int, pick_uid: int = -1) -> bool:
 	_after()
 	return ok
 
-func request_play(uid: int, ice_ref: Variant = null) -> bool:
+func request_play(uid: int, ice_ref: Variant = null, mode: String = "") -> bool:
 	## Cards are batch 2 (C10–C12); the sandbox uses this for its plain dev hand.
+	## mode: for a card with modes (PROBE-004a), the one the Rustler chose; "" = the card's first mode.
 	var target := -1
 	if ice_ref is Dictionary:
 		target = ice_index(ice_ref)
 		if target < 0: return false
 	if game.phase != "PLAYER": return false
 	game_calls += 1
-	var ok := game.play_card(uid, target)
+	var ok := game.play_card(uid, target, mode)
 	_after()
 	return ok
 

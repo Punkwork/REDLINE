@@ -157,6 +157,9 @@ var voice := HesitationVoice.new()
 var _banner: PanelContainer
 var _last_turn := 0
 var _pending_target := -1
+## CSA-04b (PROBE-004a): a card with more than one legal mode against its target asks which one first.
+## {uid, ice_ref} while the prompt is open; cancelling calls nothing on Game.
+var _mode_prompt: Dictionary = {}
 var choice: ChoiceOverlay
 var _target_plaque: Control
 
@@ -242,6 +245,12 @@ func _build() -> void:
 	choice.inspector = inspector
 	choice.chosen.connect(func(u): ctrl.request_choice(u); refresh())
 	choice.secondary.connect(func(intent):
+		var it := String(intent)
+		if it.begins_with("mode:"):
+			var mp := _mode_prompt; _mode_prompt = {}
+			if not mp.is_empty(): ctrl.request_play(int(mp.uid), mp.ice_ref, it.substr(5))
+		elif it == "mode_cancel":
+			_mode_prompt = {}
 		match intent:
 			"skip_ready_rig": ctrl.request_skip_ready_rig()
 			"finish_scan": ctrl.request_finish_scan()
@@ -269,7 +278,7 @@ func _build() -> void:
 		if game.phase == "CHOICE" and String(game.pending.get("kind", "")) == "patient_zero":
 			ctrl.request_choose_ice(r); refresh(); return
 		var u := _pending_target; _pending_target = -1
-		if u >= 0: ctrl.request_play(u, r)
+		if u >= 0: play_targeted(u, r)
 		refresh())
 	_banner = PanelContainer.new(); _banner.name = "Outcome"; stage.add_child(_banner)
 	_banner.add_theme_stylebox_override("panel", _box(Color(VasTokens.CHASSIS, 0.94), VasTokens.AMBER, 4, 18, 24))
@@ -829,8 +838,35 @@ func _refresh_hand() -> void:
 		if responding: cv.model.playable = false
 		hand_fan.add_card(cv)
 
+func play_targeted(uid: int, ice_ref: Dictionary) -> void:
+	## A targeted card dropped, aimed or clicked onto an ICE. With more than one legal mode (PROBE-004a)
+	## the choice opens first; otherwise it plays at once.
+	var c := game.hand.filter(func(x): return int(x.uid) == uid)
+	if c.is_empty(): return
+	if game.play_modes(String(c[0].id), ctrl.ice_index(ice_ref)).size() > 1:
+		_mode_prompt = {"uid": uid, "ice_ref": ice_ref}
+		return
+	ctrl.request_play(uid, ice_ref)
+
+func _mode_spec() -> Dictionary:
+	if _mode_prompt.is_empty(): return {}
+	var c := game.hand.filter(func(x): return int(x.uid) == int(_mode_prompt.uid))
+	var target := ctrl.ice_index(_mode_prompt.ice_ref)
+	if game.phase != "PLAYER" or c.is_empty() or target < 0:
+		_mode_prompt = {}
+		return {}
+	var d := CardDB.def(String(c[0].id))
+	var legal := game.play_modes(String(c[0].id), target)
+	var opts := []
+	for m in d.get("modes", []):
+		if legal.has(String(m.id)): opts.append({"label": String(m.label), "intent": "mode:" + String(m.id)})
+	opts.append({"label": "Cancel", "intent": "mode_cancel"})
+	return {"kind": "mode", "title": String(d.name), "text": "Choose one.", "options": opts}
+
 func _choice_spec() -> Dictionary:
 	## Existing wording from Build 12's overlays (main.gd), one variant per pending kind.
+	var mode := _mode_spec()
+	if not mode.is_empty(): return mode
 	var cards_of := func(uids: Array, pile: Array) -> Array:
 		var out := []
 		for c in pile:
@@ -966,7 +1002,7 @@ func release_aim(global: Vector2) -> void:
 	cancel_aim()
 	if p:
 		if was_cap: ctrl.request_use_cap(uid, p.ice_ref)
-		else: ctrl.request_play(uid, p.ice_ref)
+		else: play_targeted(uid, p.ice_ref)
 	refresh()
 
 func cancel_aim() -> void:
@@ -1006,7 +1042,7 @@ func _on_card_dropped(uid: int, at: Vector2) -> void:
 		for panel in lane.panels():
 			if panel.get_global_rect().has_point(at):
 				_pending_target = -1
-				ctrl.request_play(uid, panel.ice_ref); refresh(); return
+				play_targeted(uid, panel.ice_ref); refresh(); return
 		return
 	ctrl.request_play(uid); refresh()
 

@@ -405,7 +405,7 @@ func _start_turn() -> void:
 		_mark_seen()
 	if not CORE_LOOP:   # STRIP-001: fixed PULP, no FORTRESS rolls
 		_roll_fortress_pulp()
-	enc["probes"] = {}   # PROBE-003: PROBEs played on each ICE this turn
+	enc["probes"] = []   # PROBE-003/004a: [{ice, n}], PROBEs played on each ICE (by instance, Q6) this turn
 	# DET-001: a DETAINER's −1 BW from the last Corporation Response lands on this turn.
 	bw = maxi(0, BW_PER_TURN - enc.bw_drain) + (1 if ghostware.has("ONE_TRICK") else 0)
 	enc.bw_drained = enc.bw_drain
@@ -572,7 +572,8 @@ func can_play(uid: int) -> Dictionary:
 		return {"ok": false, "reason": "Not enough RAM"}
 	return {"ok": true, "reason": ""}
 
-func play_card(uid: int, target: int = -1) -> bool:
+func play_card(uid: int, target: int = -1, mode: String = "") -> bool:
+	## mode: for a card with modes (PROBE-004a), one of play_modes(id, target); "" means the card's first mode.
 	var chk := can_play(uid)
 	if not chk.ok:
 		_say(chk.reason)
@@ -595,11 +596,17 @@ func play_card(uid: int, target: int = -1) -> bool:
 		var part := CardDB.def(part_id)
 		if part.has("target_types") and not part.target_types.has(ice_definition(enc.ice[target]).type): return false
 		if part.has("target_type") and part.target_type != ice_definition(enc.ice[target]).type: return false
+	if d.has("modes"):
+		if mode == "": mode = String(d.modes[0].id)
+		if not play_modes(inst.id, target).has(mode):
+			_say("Nothing hidden to reveal." if mode == "reveal" else "%s can't do that here." % d.name)
+			return false
 	var paid := card_cost(inst.id, uid, target)
 	if bw < paid:
 		_say("Need %d BW" % paid)
 		return false
 	_take_from(hand, uid)
+	if d.has("modes"): inst["mode"] = mode
 	inst["previous_tags"] = enc.get("last_tags", []).duplicate()
 	inst["chain_active"] = enc.get("last_tags", []).has(d.get("chain", ""))
 	enc["last_tags"] = d.tags.duplicate()
@@ -698,11 +705,12 @@ func _resolve_script(inst: Dictionary, target: int) -> bool:
 				phase = "CHOICE"
 		"PULP_SHIELD": shield += 3
 		"PROBE":
-			reduce_ice_str(target, 2)
-			if CORE_LOOP and target >= 0:
-				var pid: String = enc.ice[target].id
-				enc.probes[pid] = int(enc.probes.get(pid, 0)) + 1
-				_probe_reveal(target)
+			# PROBE-004a: choose one. Both modes add to the same per-ICE, per-turn count (PROBE-003, Q6).
+			_probe_count_add(target)
+			if String(inst.get("mode", "weaken")) == "reveal":
+				_probe_reveal_all(target)
+			else:
+				reduce_ice_str(target, 2)
 		# ECHO
 		"SMOKESCREEN":
 			shield += 2
@@ -971,26 +979,61 @@ func _begin_parting_shot() -> void:
 
 func _probe_extra(target: int) -> int:
 	## PROBE-003: +1 BW for each PROBE already played on that ICE this turn. No target: the cheapest ICE.
-	var counts: Dictionary = enc.get("probes", {})
 	if target >= 0 and target < enc.ice.size():
-		return int(counts.get(enc.ice[target].id, 0))
+		return _probe_count(enc.ice[target])
 	var best := 999
 	for ice in enc.ice:
-		best = mini(best, int(counts.get(ice.id, 0)))
+		best = mini(best, _probe_count(ice))
 	return 0 if best == 999 else best
 
-func _probe_reveal(i: int) -> void:
-	## STRIP-001: a PROBE on a VOID reveals its top face-down subroutine, which is then active and breakable.
+func _probe_count(ice: Dictionary) -> int:
+	## Q6 (designer 2026-11-27): the count belongs to the ICE instance, so two copies of one ICE count apart.
+	for e in enc.get("probes", []):
+		if is_same(e.ice, ice): return int(e.n)
+	return 0
+
+func _probe_count_add(i: int) -> void:
+	if i < 0 or i >= enc.ice.size(): return
+	if not enc.has("probes"): enc["probes"] = []
+	for e in enc.probes:
+		if is_same(e.ice, enc.ice[i]):
+			e.n = int(e.n) + 1
+			return
+	enc.probes.append({"ice": enc.ice[i], "n": 1})
+
+func hidden_subs(i: int) -> int:
+	## Subroutines on ICE i that are face-down and unbroken.
+	var n := 0
+	for s in enc.ice[i].seen.size():
+		if not enc.ice[i].seen[s] and not enc.ice[i].broken[s]: n += 1
+	return n
+
+func play_modes(id: String, target: int) -> Array:
+	## The modes card `id` may be played in against ICE `target`, in card order; [] for cards without
+	## modes. PROBE-004a: "weaken" (−2 STR) on any ICE; "reveal" only on a VOID with hidden subroutines.
+	## Labels live in cards.json ("modes"); legality lives here.
+	var d := CardDB.def(id)
+	if not d.has("modes") or target < 0 or target >= enc.get("ice", []).size():
+		return []
+	var out := []
+	for m in d.modes:
+		match String(m.id):
+			"weaken": out.append("weaken")
+			"reveal":
+				if ice_definition(enc.ice[target]).type == "VOID" and hidden_subs(target) > 0: out.append("reveal")
+	return out
+
+func _probe_reveal_all(i: int) -> void:
+	## PROBE-004a: reveal every hidden subroutine of the target VOID; each is then active and breakable.
 	var ice: Dictionary = enc.ice[i]
 	var d := ice_definition(ice)
-	if d.type != "VOID":
-		return
+	var shown := 0
 	for s in d.subs.size():
 		if not ice.seen[s] and not ice.broken[s]:
 			ice.seen[s] = true
 			ice["reveal"] = maxi(int(ice.get("reveal", 0)), s + 1)
-			_say("PROBE reveals %s's subroutine %d." % [d.name, s + 1])
-			return
+			shown += 1
+	_say("PROBE reveals %d hidden subroutine%s on %s." % [shown, "" if shown == 1 else "s", d.name])
 
 # =====================================================================
 # Corporation Response (Core Rules §4.4)

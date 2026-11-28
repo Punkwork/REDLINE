@@ -89,6 +89,8 @@ var spin_deferred := false
 var blocker: Control
 var endrun_btn: Button
 var confirming_end := false
+## CSA-04b (PROBE-004a): {uid, target} while a card with more than one legal mode asks which one.
+var mode_prompt: Dictionary = {}
 var flash := {}        # {ref, sub} of the subroutine firing now
 var fired: Array = []  # [{ref, sub}] already fired this response
 var resp_total := 0
@@ -487,11 +489,17 @@ func _on_card(uid: int) -> void:
 	play_seated_card(uid)
 	refresh()
 
-func play_seated_card(uid: int, target: int = -1) -> void:
-	if g.play_card(uid, target): friendly.music.play_effect("seat")
+func play_seated_card(uid: int, target: int = -1, mode: String = "") -> void:
+	if g.play_card(uid, target, mode): friendly.music.play_effect("seat")
 
 func _on_ice_clicked(i: int) -> void:
 	if targeting < 0:
+		return
+	var c := g.find_card(targeting)
+	if g.play_modes(String(c.id), i).size() > 1:
+		mode_prompt = {"uid": targeting, "target": i}
+		targeting = -1
+		refresh()
 		return
 	play_seated_card(targeting, i)
 	targeting = -1
@@ -1424,6 +1432,35 @@ func _build_overlay() -> void:
 	if punch_open:
 		_overlay_punches()
 		return
+	if not mode_prompt.is_empty():
+		var mc := g.find_card(int(mode_prompt.uid))
+		if g.phase != "PLAYER" or mc.is_empty():
+			mode_prompt = {}
+		else:
+			var md := CardDB.def(String(mc.id))
+			var legal := g.play_modes(String(mc.id), int(mode_prompt.target))
+			var mv := _dim_box(String(md.name), "Choose one.", 720)
+			var mrow := HBoxContainer.new()
+			mrow.add_theme_constant_override("separation", 16)
+			for m in md.get("modes", []):
+				if not legal.has(String(m.id)): continue
+				var mb := Button.new()
+				mb.text = String(m.label)
+				mb.custom_minimum_size = Vector2(220, 52)
+				var mid := String(m.id)
+				mb.pressed.connect(func():
+					var mp := mode_prompt
+					mode_prompt = {}
+					play_seated_card(int(mp.uid), int(mp.target), mid)
+					refresh())
+				mrow.add_child(mb)
+			var cancel := Button.new()
+			cancel.text = "Cancel"
+			cancel.custom_minimum_size = Vector2(160, 52)
+			cancel.pressed.connect(func(): mode_prompt = {}; refresh())
+			mrow.add_child(cancel)
+			mv.add_child(mrow)
+			return
 	if confirming_end:
 		var v := _dim_box("END THIS RUN?", "Your Rustler fails and the run is over.", 620)
 		var row := HBoxContainer.new()

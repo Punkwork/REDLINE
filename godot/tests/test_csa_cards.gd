@@ -14,10 +14,13 @@ const APPROVED_TEXT := {
 	"TAIL_CALL": "Put a SCRIPT from your discard pile into your hand.",
 	"HOST_TAKEOVER": "Break 2 subroutines on target ICE with 5 or more virus counters.",
 	"FORCE_REBOOT": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
+	"PROBE": "Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn.",   # CSA-04b
 	"BORROWED_CREDENTIALS": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",   # CRED-COST-001: the 8 CRED is on the card face
 }
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
 const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved"]
+## Approved new fields on single cards since the snapshot: id -> [fields].
+const APPROVED_FIELDS := {"PROBE": ["modes"]}   # CSA-04b, PROBE-004a
 const RIOT_STARTER := ["SLEDGE", "BRUTE_FORCE", "SHATTER", "OVERLOAD", "PROBE", "PROBE", "PROBE", "PROBE", "FEEDBACK",
 	"ADRENAL_SPIKE", "PULP_SHIELD", "PULP_SHIELD", "PULP_SHIELD", "LAY_LOW", "BASIC_EXTRACTOR"]
 const PLAYTEST := ["REACTIVE_ARMOUR", "COUNTERINTELLIGENCE", "OVERCLOCK", "FEEDBACK_LOOP", "SALVAGE", "ADAPTIVE_DEFENCE",
@@ -77,8 +80,8 @@ func _initialize() -> void:
 	for deck in [CardDB.STARTER_GENERALIST, CardDB.STARTER_ECHO, CardDB.STARTER_RIOT, CardDB.STARTER_VECTOR]:
 		for id in deck:
 			check(CardDB.design_status(id) == "approved" and CardDB.DEFS.has(id), "starter card %s is approved and built" % id)
-	check(CardDB.def("PROBE").text == snap.defs.PROBE.text and String(CardDB.RECORDS.PROBE.get("approved_text", "")).begins_with("Choose one"),
-		"PROBE shows the engine text; the approved PROBE-004a text is stored until CSA-04")
+	check(String(CardDB.def("PROBE").text).begins_with("Choose one") and not CardDB.RECORDS.PROBE.has("approved_text"),
+		"PROBE shows its approved PROBE-004a text and is no longer divergent (CSA-04b)")
 	check(CardDB.DEFS.is_read_only() and CardDB.DEFS.PROBE.is_read_only() and CardDB.STARTER_RIOT.is_read_only(), "card data read-only, as the constants were")
 	check(no_floats(CardDB.DATA), "no float values after loading (JSON numbers restored to int)")
 	print("CSA CARDS: %d passed, %d failed" % [passed, failed])
@@ -93,7 +96,7 @@ func legacy(live: Dictionary, old: Dictionary) -> Dictionary:
 
 func only_metadata_added(live: Dictionary, old: Dictionary) -> bool:
 	for k in live:
-		if not old.has(k) and not METADATA.has(k): return false
+		if not old.has(k) and not METADATA.has(k) and not APPROVED_FIELDS.get(String(live.get("name", "")).to_upper(), []).has(k): return false
 	return true
 
 func same(a: Variant, b: Variant) -> bool:

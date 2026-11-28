@@ -93,12 +93,15 @@ func test_void_probe_reveal() -> void:
 		g.choose_ready_rig(t.uid_of(g, g.draw_pile, "VOID_ICEPICK"))
 	t.check(g.enc.ice[0].id == "DOORBELL_CAM", "DOORBELL CAM encounter")
 	t.check(not g.enc.ice[0].seen[0], "VOID starts face-down")
+	# PROBE-004a (CSA-04b) supersedes STRIP-001's "a PROBE on a VOID reveals its top face-down sub":
+	# PROBE is choose-one, and its reveal mode reveals every hidden subroutine. Full spec: test_spec_probe.gd.
 	var p: int = t.put_in_hand(g, "PROBE")
 	g.play_card(p, 0)
-	t.check(g.enc.ice[0].seen[0] and g.sub_breakable(0, 0), "STRIP-001: PROBE reveals the top face-down sub; it is breakable")
+	t.check(not g.enc.ice[0].seen[0], "PROBE-004a: PROBE's −2 STR mode reveals nothing")
 	var p2: int = t.put_in_hand(g, "PROBE")
-	g.play_card(p2, 0)
-	t.check(g.enc.ice[0].seen[1] and g.sub_breakable(0, 1), "a second PROBE reveals the DEADLOCK")
+	g.play_card(p2, 0, "reveal")
+	t.check(g.enc.ice[0].seen[0] and g.enc.ice[0].seen[1] and g.sub_breakable(0, 0) and g.sub_breakable(0, 1),
+		"PROBE-004a: the reveal mode reveals every hidden subroutine; they are breakable")
 
 func test_pool_and_data() -> void:
 	for id in CardDB.CORE_POOL:

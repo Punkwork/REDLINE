@@ -105,6 +105,7 @@ func run() -> void:
 	check(app.v2.reduced_motion, "reduced motion reaches the V2 screen")
 	app.set_reduced_motion(false)
 	await test_end_run()
+	await test_build12_probe_modes()
 	print("ARCH-V2 APP: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -141,4 +142,42 @@ func test_end_run() -> void:
 	if yes.size() == 1:
 		yes[0].pressed.emit(); await frames()
 	check(g.phase == "DEAD", "the run ends (RUN-001)")
+	app.queue_free(); await frames()
+
+func _overlay_button(app, text: String) -> Button:
+	for b in app.overlay.find_children("", "Button", true, false):
+		if (b as Button).text == text: return b
+	return null
+
+func test_build12_probe_modes() -> void:
+	## CSA-04b (PROBE-004a) on Build 12's encounter (main.gd, legacy_encounter): select PROBE, click a
+	## VOID with hidden subroutines, and the app asks which mode; Cancel changes nothing.
+	var app = load("res://scenes/Main.tscn").instantiate()
+	root.add_child(app)
+	await frames(4)
+	app.use_v2 = false
+	app._start_as("GENERALIST")
+	await frames()
+	var g: Game = app.g
+	g.new_run(); g.enter_node(0)
+	if g.phase == "READY_RIG": g.choose_ready_rig(g.draw_pile.filter(func(c): return c.id == "TUMBLER_ICEPICK")[0].uid)
+	g.new_run(); g.row = 1; g.available = [1]; g.enter_node(1)   # DOORBELL CAM, a VOID, face-down
+	if g.phase == "READY_RIG": g.choose_ready_rig(g.draw_pile.filter(func(c): return c.id == "VOID_ICEPICK")[0].uid)
+	var c: Dictionary = g._new_inst("PROBE"); g.hand.append(c)
+	app.refresh(); await frames()
+	var hidden0 := g.hidden_subs(0)
+	var labels: Array = CardDB.def("PROBE").modes.map(func(m): return String(m.label))
+	app._on_card(int(c.uid)); app._on_ice_clicked(0); await frames()
+	check(not app.mode_prompt.is_empty() and g.hand.has(c), "Build 12: PROBE on a hidden VOID asks which mode before playing")
+	check(_overlay_button(app, labels[0]) != null and _overlay_button(app, labels[1]) != null and _overlay_button(app, "Cancel") != null,
+		"Build 12: the prompt offers both modes (labels from cards.json) and Cancel")
+	var cancel := _overlay_button(app, "Cancel")
+	if cancel: cancel.pressed.emit()
+	await frames()
+	check(app.mode_prompt.is_empty() and g.hand.has(c) and g.hidden_subs(0) == hidden0, "Build 12: Cancel changes nothing")
+	app._on_card(int(c.uid)); app._on_ice_clicked(0); await frames()
+	var reveal := _overlay_button(app, labels[1])
+	if reveal: reveal.pressed.emit()
+	await frames()
+	check(not g.hand.has(c) and g.hidden_subs(0) == 0, "Build 12: the reveal button reveals every hidden subroutine")
 	app.queue_free(); await frames()

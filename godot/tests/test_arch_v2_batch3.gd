@@ -41,6 +41,8 @@ func run() -> void:
 	await test_sequencer()
 	print("- targeting arrow (ARCH-V2-006k)")
 	await test_arrow()
+	print("- PROBE modes on the V2 screen (CSA-04b, PROBE-004a)")
+	await test_probe_modes()
 	print("ARCH-V2 BATCH 3: %d passed, %d failed" % [passed, failed])
 	quit(int(failed > 0))
 
@@ -432,3 +434,36 @@ func _inspector_text(sb: IceEncounterSandbox) -> String:
 	var out := ""
 	for l in sb.inspector.find_children("*", "Label", true, false): out += (l as Label).text + "\n"
 	return out
+
+func test_probe_modes() -> void:
+	## PROBE-004a: on a VOID with hidden subroutines the V2 screen asks which mode; Cancel calls nothing.
+	var sb := sandbox(); await frames()
+	var g := Game.new(1)
+	g.new_run(); g.enter_node(0)
+	g.choose_ready_rig(g.draw_pile.filter(func(c): return c.id == "TUMBLER_ICEPICK")[0].uid)
+	g.new_run(); g.row = 1; g.available = [1]; g.enter_node(1)   # DOORBELL CAM, a VOID, face-down
+	if g.phase == "READY_RIG": g.choose_ready_rig(g.draw_pile.filter(func(c): return c.id == "VOID_ICEPICK")[0].uid)
+	sb.attach(g); await frames()
+	var c: Dictionary = g._new_inst("PROBE"); g.hand.append(c); sb.refresh(); await frames()
+	var ref: Dictionary = g.enc.ice[0]
+	var hidden0 := g.hidden_subs(0)
+	var calls := sb.ctrl.game_calls
+	sb.play_targeted(int(c.uid), ref); sb.refresh(); await frames()
+	var weaken: Button = sb.choice.find_child("Option_mode_weaken", true, false)
+	var reveal: Button = sb.choice.find_child("Option_mode_reveal", true, false)
+	var cancel: Button = sb.choice.find_child("Option_mode_cancel", true, false)
+	check(sb.choice.visible and weaken != null and reveal != null and cancel != null, "PROBE on a hidden VOID opens the choice: −2 STR, reveal, cancel")
+	check(sb.ctrl.game_calls == calls, "opening the choice calls nothing on Game")
+	if cancel: cancel.pressed.emit()
+	sb.refresh(); await frames()
+	check(not sb.choice.visible and sb.ctrl.game_calls == calls and g.hand.has(c) and g.hidden_subs(0) == hidden0, "Cancel closes it and changes nothing")
+	sb.play_targeted(int(c.uid), ref); sb.refresh(); await frames()
+	reveal = sb.choice.find_child("Option_mode_reveal", true, false)
+	if reveal: reveal.pressed.emit()
+	sb.refresh(); await frames()
+	check(sb.ctrl.game_calls == calls + 1 and not g.hand.has(c) and g.hidden_subs(0) == 0, "the reveal button plays PROBE in its reveal mode: all hidden subroutines shown")
+	var c2: Dictionary = g._new_inst("PROBE"); g.hand.append(c2); g.bw = 5; sb.refresh(); await frames()
+	var str0 := g.ice_str(0)
+	sb.play_targeted(int(c2.uid), ref); sb.refresh(); await frames()
+	check(not sb.choice.visible and not g.hand.has(c2) and g.ice_str(0) == str0 - 2, "with nothing hidden, PROBE plays −2 STR without asking")
+	sb.queue_free(); await frames()

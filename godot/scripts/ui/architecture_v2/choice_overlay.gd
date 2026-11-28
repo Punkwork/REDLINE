@@ -26,7 +26,8 @@ func _init() -> void:
 	hide()
 
 ## spec: {kind, title, text, cards: [card models], selected: [uids], secondary: {label, intent},
-## strains: [{name, n}]}. Empty spec closes the overlay.
+## strains: [{name, n}], options: [{label, intent}]}. Empty spec closes the overlay. `options` are plain
+## buttons that emit `secondary(intent)`, e.g. a card's modes (PROBE-004a, CSA-04b).
 func open(s: Dictionary) -> void:
 	var same: bool = not spec.is_empty() and spec.get("kind") == s.get("kind") and _uids(spec) == _uids(s)
 	var same_kind: bool = not spec.is_empty() and spec.get("kind") == s.get("kind")
@@ -117,6 +118,10 @@ func _build() -> void:
 	for st in strains:
 		var name := String(st.name)
 		buttons.add_child(_button("%s (%d)" % [name, int(st.n)], func(): strain.emit(name)))
+	for o in spec.get("options", []):
+		var oi := String(o.intent)
+		var ob := _button(String(o.label), func(): secondary.emit(oi)); ob.name = "Option_" + oi.replace(":", "_")
+		buttons.add_child(ob)
 	var sec: Dictionary = spec.get("secondary", {})
 	if not sec.is_empty():
 		var intent := String(sec.intent)

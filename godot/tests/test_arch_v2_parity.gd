@@ -135,6 +135,16 @@ func act(sb: IceEncounterSandbox, a: Game, b: Game) -> String:
 			sb.start_aim(u, cv)
 			var at: Vector2 = sb.lane.panels()[t].get_global_rect().get_center()
 			sb.release_aim(at)
+			# CSA-04b (PROBE-004a): with more than one legal mode the V2 screen asks first; the bot
+			# presses the first mode's button on the overlay, and the twin plays the same mode directly.
+			if not sb._mode_prompt.is_empty():
+				sb.refresh()
+				var first := String(d.modes[0].id)
+				var btn: Button = sb.choice.find_child("Option_mode_" + first, true, false)
+				if btn == null: return "aim:%s (no mode button)" % String(c.id)
+				btn.pressed.emit()
+				b.play_card(u, t, first)
+				return "aim:%s/%s" % [String(c.id), first]
 			b.play_card(u, t)
 			return "aim:" + String(c.id)
 		if String(d.get("type", "")) == "PROGRAM":
