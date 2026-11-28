@@ -4021,3 +4021,7 @@ Protocol rules remain encounter duration, no RAM, independent copies, no self-tr
 
 **Designer:** "Yes, 3BW a turn, boost lasting 1 turn, and the parting shot replace the full design rules. The new Cortex discard can hit cache cards correct." BW-001 (3 BW), BOOST-001 (boosts last the turn) and BREACH-001 (parting shot) are no longer core-loop-only: they replace the full-design values (4 BW, FIX-002, skipped response) in Core Rules §4. CORTEX-001's random discard can take a CACHED card. Documentation only; the engine already does all four.
 
+## CSA-04 closed; no playtest build now (designer 2026-11-28 09:27)
+
+**Designer:** "CSA 4 is closed, it's accepted" and "don't cut the next Windows playtest build." CSA-04 (04a–j, including `CardDB.param()` and rules-text templates) is accepted and closed; next in the sequence is CSA-05. No Windows playtest build is to be cut for now.
+

@@ -460,3 +460,7 @@ Commits: `a3627dc` (TURN-001 docs), `939f676` (CARD-REVIEW-001 tests), `3c06ed0`
 ## 2026-11-28 — BW-001, BOOST-001, BREACH-001 general; CORTEX-001 CACHE ruling (Claude Code)
 
 Designer, 09:26: 3 BW a turn, boosts lasting one turn and the parting shot replace the full-design rules, and the CORTEX discard can hit CACHED cards. Core Rules §4 drops its "core-loop build" qualifiers, and the amendment row, Master Design, HANDOFF and §6 note are updated. Docs only; the engine already behaves this way.
+
+## 2026-11-28 — CSA-04 closed; no build (Claude Code)
+
+Designer, 09:27: CSA-04 accepted and closed; do not cut the next Windows playtest build. Recorded in Master Design, HANDOFF and the CSA document. Next: CSA-05.
