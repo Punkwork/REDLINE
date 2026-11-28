@@ -505,3 +505,7 @@ Designer, 10:13: REPRISE change approved, 2- and 3-layer Nodes approved as is, a
 ## 2026-11-28 — CARD-REVIEW-001 Generalist review: generated docs and tests aligned (Claude Code)
 
 `f02206d` (Generalist starter review) changed `cards.json` (GHOST SIGNAL 2 → 1 BW; VOID ICEPICK declared divergent) without regenerating the Rustlers doc block or updating the tests, so the CSA checks failed. Regenerated `REDLINE_RUSTLERS.md` with `gen_card_docs.py`; the tests now expect GHOST SIGNAL at 1 BW and STACK SMASH + VOID ICEPICK as the divergent records. All suites pass (parity 4,017/0 over 3,937 actions with the cheaper GHOST SIGNAL). **Open (Claude Code):** VOID ICEPICK reveal-on-break and STACK SMASH every-ICE engine changes.
+
+## 2026-11-28 — CARD-REVIEW-001 TASER (ChatGPT)
+
+Approved PARTING SHOT suppression recorded in canonical CardDB, Master and HANDOFF. Runtime divergent; flavor pending. No engine changes or tests run.

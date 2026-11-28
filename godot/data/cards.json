@@ -420,11 +420,25 @@
 			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
-				"implementation": "implemented"
+				"implementation": "divergent"
 			},
 			"decisions": [
-				"CARD-003"
-			]
+				"CARD-003",
+				"CARD-REVIEW-001"
+			],
+			"approved_text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. If TASER breaks at least one subroutine on an ICE, disable that ICE's PARTING SHOT.",
+			"divergence": "Approved encounter-local PARTING SHOT suppression after any successful TASER subroutine break on that ICE. Ordinary Corporation Responses unaffected; repeated breaks do not stack. Engine reconciliation pending.",
+			"strategy": {
+				"precision_breaching": [
+					"enabler"
+				],
+				"program_synergy": [
+					"enabler"
+				],
+				"defensive_endurance": [
+					"enabler"
+				]
+			}
 		},
 		"STUN_BATON": {
 			"name": "STUN BATON",
