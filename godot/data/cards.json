@@ -822,17 +822,16 @@
 				"FORTRESS",
 				"VOID"
 			],
-			"text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. Costs 8 CRED.",
+			"text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",
 			"status": {
 				"design": "approved",
-				"implementation": "divergent"
+				"implementation": "implemented"
 			},
 			"decisions": [
 				"ECHO-005",
-				"CONSISTENCY-001a"
-			],
-			"approved_text": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",
-			"divergence": "CONSISTENCY-001a: the 8 CRED belongs in the cost field (cred_cost), but the V2 card view draws only the BW cost; the text keeps \"Costs 8 CRED.\" until it does (CSA-04)."
+				"CONSISTENCY-001a",
+				"CRED-COST-001"
+			]
 		},
 		"SLOW_DRIP": {
 			"name": "SLOW DRIP",

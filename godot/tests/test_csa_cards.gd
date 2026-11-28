@@ -14,7 +14,7 @@ const APPROVED_TEXT := {
 	"TAIL_CALL": "Put a SCRIPT from your discard pile into your hand.",
 	"HOST_TAKEOVER": "Break 2 subroutines on target ICE with 5 or more virus counters.",
 	"FORCE_REBOOT": "Shuffle your discard pile into your draw pile (this is a REBOOT). BURNED.",
-	"BORROWED_CREDENTIALS": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs. Costs 8 CRED.",
+	"BORROWED_CREDENTIALS": "Choose a FORTRESS or VOID. This turn, HUSH can break its subroutines using normal Strength requirements, boosts and break costs.",   # CRED-COST-001: the 8 CRED is on the card face
 }
 ## Fields CSA-03 C2 adds to records. Every other field must equal the snapshot.
 const METADATA := ["status", "decisions", "divergence", "approved_text", "unresolved"]

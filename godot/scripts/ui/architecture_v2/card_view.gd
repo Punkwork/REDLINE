@@ -26,6 +26,7 @@ const EDGE := Color("#BDB29A")
 const INK := Color("#2A1D0E")
 const SUB_INK := Color("#5E4B35")
 const RULES_BG := Color("#FBF3DC")
+const CRED_FACE := Color("#FFD34D")   ## CRED-COST-001: the game's CRED gold (RIcon.COL.CRED)
 const DIM := 0.55   ## how dark an unplayable card gets (ARCH-V2-006l)
 const TAG_COLORS := {"EXPLOIT": Color("#C8452F"), "CLOAK": Color("#7C4BA0"), "ICEPICK": Color("#3E8E5A"),
 	"EXTRACTOR": Color("#C9861E"), "VIRUS": Color("#7A9A2A"), "HARDWARE": Color("#5E6E7A"), "DEFENSE": Color("#D89A2A")}
@@ -169,6 +170,18 @@ func _draw() -> void:
 	draw_string(cf, mc + Vector2(-cf.get_string_size(cost, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx).x / 2.0, cpx * 0.36), cost, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx, INK)
 	var bw_ico: Texture2D = IceKey.art("ICON_BW")
 	if bw_ico: draw_texture_rect(bw_ico, Rect2(mc + Vector2(7, 5) * k, Vector2(10, 10) * k), false)
+	# CRED-COST-001 (designer 2026-11-27 20:20): a gold CRED chip with the number inside, beside the BW
+	# medallion, only on cards with a CRED cost (e.g. BORROWED CREDENTIALS: 1 BW + 8 CRED).
+	var cred := int(model.get("cred", 0))
+	if cred > 0:
+		var gc := mc + Vector2(30, 0) * k
+		draw_circle(gc + Vector2(0, 1.5) * k, 14 * k, Color(0, 0, 0, 0.35))
+		draw_circle(gc, 14 * k, Color("#151515"))
+		draw_circle(gc, 11.5 * k, CRED_FACE)
+		var ct := str(cred)
+		draw_string(cf, gc + Vector2(-cf.get_string_size(ct, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx).x / 2.0, cpx * 0.36), ct, HORIZONTAL_ALIGNMENT_LEFT, -1, cpx, INK)
+		var cred_ico: Texture2D = V2Art.tex("icons/V2_ICON_CRED_LIGHT.png", 32)
+		if cred_ico: draw_texture_rect(cred_ico, Rect2(gc + Vector2(7, 5) * k, Vector2(10, 10) * k), false, INK)
 	# Name and type line, left-aligned.
 	var nf := VasTokens.FONT_PLAQUE
 	var name := String(model.get("name", "")).to_upper()

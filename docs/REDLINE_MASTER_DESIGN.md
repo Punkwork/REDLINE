@@ -3761,3 +3761,5 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 - **BURNED-001a:** at the end of an encounter, that encounter's BURNED cards go to the **discard pile**, as expired Protocols do (PROTOCOL-DURATION-001a).
 - **BURNED-001b:** cleared SPAM (Bloatware, pay 1 BW) does not return: "it disappears forever." Clearing removes the card; it is not BURNED.
 - **PIVOT:** when its −1 STR brings the ICE to 0, the Rustler chooses which subroutine breaks free. Any subroutine they could normally break is eligible (visible, unbroken, usual order rules); there is no prompt when only one qualifies.
+
+**CSA-03 accepted** by the designer (2026-11-27 20:36). **CSA-04a built:** CRED-COST-001 chip on the V2 card face; BORROWED CREDENTIALS aligned.

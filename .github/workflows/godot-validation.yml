@@ -72,6 +72,13 @@ jobs:
             2>&1 | tee /tmp/shot_arch_v2_ice.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_arch_v2_ice.log; then exit 1; fi
           grep -q 'ARCH-V2 ICE screenshots: 42 written' /tmp/shot_arch_v2_ice.log
+          # CRED-COST-001: the CRED chip on the V2 card face.
+          xvfb-run -a -s '-screen 0 2600x1500x24' timeout 120 \
+            "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
+            --rendering-driver opengl3 --path godot --script res://tests/shot_cred_cost.gd \
+            2>&1 | tee /tmp/shot_cred_cost.log
+          if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_cred_cost.log; then exit 1; fi
+          grep -q 'CRED COST: 4 passed, 0 failed' /tmp/shot_cred_cost.log
       - name: Verify screenshot states and large-hand interaction
         shell: bash
         env:
