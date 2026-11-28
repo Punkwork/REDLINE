@@ -266,6 +266,8 @@ The player is the **rustler**; the opposing system is the **corporation**. Encou
 **LOCKED:** Ghostware consists of **permanent, non-card** upgrades. The interface includes a **Ghostware rack below RETURN**. **Signature Ghostware** is displayed once and marked **`ORIGIN`**; do not generate duplicate signature entries. Exact Ghostware catalog/effects: **VERIFY**.
 
 ## 5. DEAD DROP recovery choice
+
+*Historical decision record. Current Node definitions: Core Rules §8.3 (NODE-AUTHORITY-001).* *PATCH UP moved to the SAFEHOUSE (NODE-PURPOSE-001); DEAD DROP has no physical healing.*
 **LOCKED:** **DEAD DROP** replaces the former **Safehouse** terminology. At DEAD DROP the rustler chooses **exactly one** option:
 - **PATCH UP** — restore **+10 Vitae**.
 - **WIPE TRAIL** — reduce **Trace by 20**.
@@ -373,7 +375,7 @@ engine/
 | PROG-002 | PATCHWORK persists per card instance | LOCKED | Prior project decision |
 | PROG-003 | Ghostware permanent and non-card | LOCKED | Prior project decision |
 | HUB-001 | DEAD DROP replaces Safehouse | LOCKED | Prior project decision |
-| HUB-002 | Exactly one: PATCH UP +10 Vitae / WIPE TRAIL −20 Trace | LOCKED | Prior project decision |
+| HUB-002 | Exactly one: PATCH UP +10 Vitae / WIPE TRAIL −20 Trace | LOCKED · *superseded by NODE-PURPOSE-001; current: Core Rules §8.3* | Prior project decision |
 | UI-001 | `[STR X]`, drag breaker to ICE, fixed inspection bay, HUD tooltips | LOCKED | Prior project decision |
 | UI-002 | Ghostware rack below RETURN; signature once with ORIGIN | LOCKED | Prior project decision |
 | BURN-001 | Preserve six NUL/REM personality modes | LOCKED | Prior project decision |
@@ -2949,6 +2951,8 @@ Designer: "we want each path to have at minimum 1 each of #3 through #8 node typ
 
 ## MAP-003e, CLINIC-001 — Uplink and Clinic merged; Clinic pricing (APPROVED, 2026-11-22)
 
+*Historical decision record. Current Node definitions: Core Rules §8.3 (NODE-AUTHORITY-001).* *Wipe and REFACTOR at the Uplink are superseded (NODE-PURPOSE-001, NODE-AUTHORITY-001); route composition and CLINIC-001 pricing stand.*
+
 Designer: "I AGREE" to merging the Black Market Uplink and the Uplink with Clinic into one **Uplink**: buy cards and CAPS, Wipe, REFACTOR, and a **Clinic counter** that removes CORTEX for CRED. Map: five other Node types (Uplink, DEAD DROP, Console Lab, SAFEHOUSE, SIGNAL UNCLEAR); every path has at least one of each and at least 3 SAFEHOUSE + Uplink combined (two free slots). Supersedes MAP-003d's six types. *(Route composition amended by MAP-003f, 2026-11-27: 2–3 Uplinks per route; other MAP-003e rules kept.)* **CLINIC-001** (designer): "30 creds per, with a discount of 25% if they want to remove more. So around 50 cred to remove 2." Working rule: 30 CRED for one CORTEX; removing 2 or more in one visit costs 25% less in total, rounded up (2 = 45, 3 = 68, 4 = 90). Prototype v4: `prototypes/map/map003_generator.py --v4`.
 
 ## TUNE-002 — TERMS & CONDITIONS eased (APPROVED, 2026-11-22)
@@ -3448,6 +3452,8 @@ Each corporation has one mini-boss encounter, with a signature ability unique to
 
 
 ## MINIBOSS-003 — THE GRID: PROFILE + FORTIFY (designer approved 2026-11-27)
+
+*Renamed by NODE-AUTHORITY-001: THE GRID's ability is now **ENTRENCH** (mechanics unchanged), so FORTIFY names only the SAFEHOUSE service. Current text: `REDLINE_MINIBOSSES.md`.*
 IRONWATCH's mini-boss THE GRID retains its approved PROFILE ability and gains FORTIFY (formerly passive HARDENING), exclusive to THE GRID. FORTIFY grants +1 STR after each Corporation Countermeasure, maximum +3 bonus as a working balance value. PROFILE remains unchanged. Both are unique signature abilities, not breakable or disableable subroutines. Each corporate mini-boss must have at least one unique signature ability; multiple complementary abilities are permitted where strategically justified. Supersedes the single-ability implication of earlier mini-boss records and resolves FORTIFY's assignment. Preserve other mini-boss designs. Implementation and combined balance testing pending; no engine changes in this documentation update.
 
 
@@ -3625,6 +3631,8 @@ The layers are independent, each with its own economic rationale, and may intera
 
 ## NODE-PURPOSE-001 — Non-combat Node service redesign (APPROVED 2026-11-27)
 
+*Historical decision record. Current Node definitions: Core Rules §8.3 (NODE-AUTHORITY-001).* *Amended by NODE-AUTHORITY-001: standalone card removal moved from Uplink WIPE to the Console Lab.*
+
 Designer-approved amendment; supersedes conflicting earlier service descriptions, not MAP-003e route composition.
 
 - Uplink (commerce): eight cards, exactly five common, two uncommon, one rare; six shared and two Rustler-specific across those eight. Base prices 40/60/90 CRED; one random card 50% off. No basic cards, rerolls or repeat purchase of a slot. Three random CAPS, existing 60/30/10 rarity probabilities, no guaranteed rarity; existing prices and bootleg rules retained. WIPE and Clinic unchanged; existing market variability, TRACE premium and voluntary Identity Verification direction retained. REFACTOR removed from Uplink.
@@ -3763,3 +3771,26 @@ CSA-03 may start once Q2, Q4 and the conflict table are settled.
 - **PIVOT:** when its −1 STR brings the ICE to 0, the Rustler chooses which subroutine breaks free. Any subroutine they could normally break is eligible (visible, unbroken, usual order rules); there is no prompt when only one qualifies.
 
 **CSA-03 accepted** by the designer (2026-11-27 20:36). **CSA-04a built:** CRED-COST-001 chip on the V2 card face; BORROWED CREDENTIALS aligned. **CSA-04b built:** PROBE matches PROBE-004a in the engine and both UIs (spec test `test_spec_probe.gd`). **CSA-04c built:** BURNED-001/001a/001b in the engine (BURNED cards return to discard at encounter end; cleared SPAM is removed), GARBAGE COLLECT and SPAM text, Core Rules §3 BURNED definition (spec test `test_spec_burned.gd`). **CSA-04d built:** PIVOT plays its approved text (−1 STR this encounter; reaching 0 breaks one target subroutine for no cost, chosen by the Rustler, no prompt when only one qualifies) and has no CHAIN field (spec test `test_spec_pivot.gd`). No card record is divergent.
+
+
+## NODE-AUTHORITY-001 — Canonical Node authority and redundant definition retirement (APPROVED 2026-11-27)
+
+**Designer approved.** `docs/REDLINE_CORE_RULES.md` §8.3 is the single source of truth for Node categories and identities, primary purposes, functional boundaries, permitted and prohibited services, service assignment, specialization exceptions and the relationships between Node functions. **The mechanical specification lives only there;** this record holds approval, rationale and provenance. Governance: AGENTS.md / CLAUDE.md §7. Map-generation authority (Core Rules §10, MAP-003e, MAP-003f) and the structured-data architecture for other entities are unchanged.
+
+**Principle: functional sovereignty.** A service belongs to a Node by its mechanical purpose, not its payment method, presentation or narrative justification. Predictable access to another Node's exclusive function needs explicit designer approval. SIGNAL UNCLEAR keeps its incidental-overlap exception (NODE-PURPOSE-001).
+
+**Amendments in this decision** (current wording in Core Rules §8.3):
+- Standalone permanent card removal moves from Uplink WIPE to the **Console Lab**. The Uplink offers no WIPE, VITAE restoration, deck engineering or dedicated TRACE reduction. The Clinic stays at the Uplink and removes CORTEX only, never VITAE (CLINIC-001 pricing kept).
+- HARDWIRED protections are kept.
+
+**Designer resolutions, 2026-11-27 22:36** (conflicts reported by Claude, not chosen silently):
+1. **Console Lab removal:** 50 CRED, +25 per further use that run; once per visit; a choice between removal and a PATCHWORK upgrade. Supersedes CARD-002 (40 CRED flat) and the old Uplink Wipe.
+2. **Uplink pricing layers** (market variability, TRACE premium, Identity Verification) **do not apply** to Console Lab services.
+3. **Scope of exclusivity:** the Console Lab is the only non-combat Node offering dedicated, predictable standalone card removal as a service. This doesn't supersede DECOMPILE (DSY-003), incidental removal in approved SIGNAL UNCLEAR events, or removal inherent in approved modification mechanics such as FUSE. DECOMPILE's mechanics, eligibility and reward timing are unchanged. Node specialization governs dedicated Node services, not every possible source of an effect.
+4. **Node completion reward** (Core Rules §9.3): the free PATCHWORK option is removed.
+5. **FIELD MEDIC** (reserve Ghostware) applies at the SAFEHOUSE only, not the DEAD DROP: reassigned, not treated as an exception.
+6. **Clinic availability:** at every Uplink (MAP-003e merge), replacing "about 1 Uplink in 3".
+7. **THE GRID's** mini-boss ability FORTIFY is renamed **ENTRENCH** (MINIBOSS-003), so FORTIFY names only the SAFEHOUSE service.
+8. **DATA PURGE** costs +7 TRACE or −5 VITAE, as in Core Rules (UPL-006a); the +5 TRACE text elsewhere is stale.
+
+**Status:** design approved; documentation reconciled in the NODE-AUTHORITY-001 commit series; **runtime implementation pending** (no Uplink, Clinic, Console Lab or DEAD DROP services exist in the engine yet; the SAFEHOUSE still heals a flat 10). Evidence, inventory and outstanding work: `docs/HANDOFF.md` (NODE-AUTHORITY-001) and the development log.

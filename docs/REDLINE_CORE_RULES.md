@@ -190,7 +190,7 @@ You can also **lower ICE STR** with cards like PROBE (−2 STR for the rest of t
 | **PULP X** | Lose X VITAE. | SHIELD, point for point. |
 | **CORTEX X** | Gain X **CORTEX counters**. Each counter is −1 DRAW (DRAW can't go below 1). | Only cards that specifically say they prevent CORTEX. |
 
-**Removing CORTEX:** all CORTEX counters are removed when you move to the next corporation. Specialized recovery Nodes (such as some Uplinks) can remove them earlier. Ordinary cards cannot remove CORTEX; it should stay frightening.
+**Removing CORTEX:** all CORTEX counters are removed when you move to the next corporation. The Uplink Clinic (§8.3) removes them earlier, for CRED; nothing else restores CORTEX at a Node. Ordinary cards cannot remove CORTEX; it should stay frightening.
 
 **[CHANGED]** SyN damage is removed. CORTEX no longer forces discards or causes overflow damage. CORTEX already hurts by shrinking every future hand, so the extra rules weren't needed. Effects that make you discard now say so directly, like "DISCARD 2," with no overflow.
 
@@ -239,16 +239,28 @@ You can't leave under LOCKDOWN.
 
 **JACK OUT CAP [CHANGED]:** use it **during** an encounter to escape immediately, as if you'd left after BREACH. You **move forward**, not back. This keeps the run strictly forward-only and fixes the old conflict with JACK OUT retreating. JACK OUT gives −5 TRACE and has timing limits (not during the Corporation Response, under LOCKDOWN, while a Black ICE has an unbroken subroutine, at the Central Node, or after BREACH): see `REDLINE_UPLINK_AND_CAPS.md` §2.1 (UPL-003).
 
-### 8.3 Other Nodes
+### 8.3 Other Nodes: the Node authority (NODE-AUTHORITY-001)
 
-| Node | What you can do |
-|---|---|
-| **Black Market Uplink** | Buy cards and CAPS with CRED; remove a card (Wipe); some have a Clinic to remove CORTEX. Full details: `REDLINE_UPLINK_AND_CAPS.md`. |
-| **DEAD DROP** | Choose one: PATCH UP (+10 VITAE) or WIPE TRAIL (−20 TRACE). |
-| **Console Lab** | Apply PATCHWORK upgrades to a card, or remove a card from your deck. |
-| **SAFEHOUSE** **[NEW]** | Choose one: heal 10 VITAE, or apply 1 PATCHWORK upgrade to a card. |
-| **SIGNAL UNCLEAR** | An unknown Node: an event, which may include a data purge (remove 1 card for +7 TRACE or −5 VITAE; UPL-006a). |
-| **Central Node** | The corporation's boss encounter (§10). |
+<a id="node-authority"></a>**This section is the single current definition** of Node categories and identities, primary Node purposes, functional boundaries, permitted and prohibited Node services, which services belong to which Node, the exceptions to Node specialization and how Node functions relate (NODE-AUTHORITY-001, designer 2026-11-27; AGENTS.md / CLAUDE.md §7). Other docs refer here; they don't restate it. Change Node purposes here and nowhere else, and record the decision in Master Design. Where the map puts each Node is §10 (MAP-003e, MAP-003f), not this section.
+
+**Functional sovereignty.** Each Node has one distinct primary function and strategic identity. A service belongs to a Node by its **mechanical purpose**, not by how it is paid for, how it looks or how the story justifies it. No Node may offer predictable access to a function that belongs exclusively to another Node without explicit designer approval.
+
+<a id="node-table"></a>
+| Node | Exclusive primary function | Services (current) | Never offers |
+|---|---|---|---|
+| <a id="node-uplink"></a>**Black Market Uplink** | **Commerce** | Buy cards, CAPS and Ghostware with CRED (stock, prices and transactions: `REDLINE_UPLINK_AND_CAPS.md`, UPLINK-SPEC-001). Every Uplink has a **Clinic** counter: specialized neurological repair that removes **CORTEX only**, 30 CRED per counter, 25% off the total when removing 2 or more in one visit, rounded up (2 = 45, 3 = 68, 4 = 90; CLINIC-001). The Uplink pricing layers (market variability, TRACE premium, Identity Verification; ECON-TRACE-001, ECON-MARKET-001, UPL-IDENTITY-001) apply to Uplink transactions only. | VITAE restoration (the Clinic never restores VITAE); standalone card removal (no WIPE); REFACTOR, PATCHWORK, FUSE or any other deck engineering; dedicated TRACE reduction |
+| <a id="node-console-lab"></a>**Console Lab** | **Deck engineering** | Choose one per visit: **a PATCHWORK upgrade** (free; FUSE offered where eligible: `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §1), or **permanently remove 1 card** from your deck: 50 CRED the first time in a run, +25 each further use that run (50, 75, 100…), once per visit. **HARDWIRED** cards can't be removed. The Uplink pricing layers don't apply to Console Lab services. REFACTOR is the collective name for the Lab's modification services. Modification eligibility, repeat limits, recursive fusion, cross-modification, scaling and costs await their own review (NODE-PURPOSE-001). | Card purchases; VITAE or CORTEX recovery; TRACE reduction |
+| <a id="node-safehouse"></a>**SAFEHOUSE** | **Physical recovery** | Choose one free service per visit: **PATCH UP** restores 30% of maximum VITAE, capped at maximum; **FORTIFY** raises maximum VITAE by 6% and current VITAE by the same amount, cumulative for the run, no further cap. Both round to the nearest whole number. The FIELD MEDIC Ghostware adds its healing here. | Card upgrades or other deck engineering; TRACE reduction |
+| <a id="node-dead-drop"></a>**DEAD DROP** | **Surveillance evasion** | Choose one free service per visit: **WIPE TRAIL** lowers current TRACE by 20 (not below 0); **GHOST TRAIL** halves incoming TRACE throughout the next ICE Node, all its encounters included; it persists through non-combat Nodes in between and ends when you leave that ICE Node. Fractional TRACE rounding, stacking and edge cases are still open. | VITAE recovery or other physical healing; card services |
+| <a id="node-signal-unclear"></a>**SIGNAL UNCLEAR** | **Discovery** | An unknown event: uncertainty, unexpected opportunities, decisions and risks (catalogue: `REDLINE_UPGRADES_EVENTS_ESCAPE.md` §3). Events may overlap other Nodes' functions **incidentally**, e.g. DATA PURGE (remove 1 card for +7 TRACE or −5 VITAE; UPL-006a) or BLACK CLINIC. Event balance is reviewed separately. | Predictable substitutes for another Node's dedicated service |
+| **Central Node** | Boss encounter | The corporation's boss encounter (§10). | — |
+
+<a id="node-boundaries"></a>**Boundaries and exceptions**
+- **Specialization governs dedicated Node services, not every source of an effect.** The Console Lab is the only non-combat Node with dedicated, predictable standalone card removal. That doesn't remove DECOMPILE (DSY-003, on the card reward; its mechanics, eligibility and timing are unchanged), incidental removal in approved SIGNAL UNCLEAR events, or removal inherent in approved modification mechanics such as FUSE. Card and Ghostware effects are not Node services.
+- **CORTEX repair and VITAE recovery are different functions:** CORTEX belongs to the Uplink Clinic (§6), VITAE recovery to the SAFEHOUSE.
+- **Rewards for clearing ICE Nodes** offer no deck-engineering service (§9.3).
+- **Environmental features** carry no service unless approved. The Uplink's CRT terminal artwork is decoration; its future interactive purpose hasn't been approved.
+- **Structured Node records** (a data file for Nodes) are not part of this decision; they're a candidate for review after CSA-07.
 
 Non-ICE Nodes don't shuffle or reset your deck.
 
@@ -278,7 +290,7 @@ Non-ICE Nodes don't shuffle or reset your deck.
 - Staying in an encounter longer to extract more is a risk you choose.
 
 ### 9.3 Node completion [NEW]
-Clearing **every** layer of an ICE Node gives one extra reward: choose a CAP or a free PATCHWORK upgrade. **[CHANGED by CORE-010]** The rare card option is removed; a full clear already gets the best card odds (§9.1), and this keeps card rewards at about 30 per run.
+Clearing **every** layer of an ICE Node gives one extra reward: a CAP. **[CHANGED by NODE-AUTHORITY-001]** The free PATCHWORK option is removed: deck engineering belongs to the Console Lab (§8.3). **[CHANGED by CORE-010]** The rare card option is removed; a full clear already gets the best card odds (§9.1), and this keeps card rewards at about 30 per run.
 
 ### 9.4 Clean Node bonus [NEW]
 Complete a Node without gaining any TRACE during it: **+5 CRED** (working value).

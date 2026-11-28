@@ -98,6 +98,7 @@ Scanner results (`tools/csa/scan_card_drift.py`, output `evidence/csa-01/card_dr
 | UI contracts | UI Bible; GitHub Issues (UI-WORKFLOW-001) | V2 components | — |
 | Technical contracts | `docs/architecture-v2/` | — | `DATA_MODEL.md` already names CardDB as the initial authority and defers the format decision |
 | Map generation | Master Design MAP-003f | `prototypes/map/map003_generator.py` V5 | Core Rules §10 (stale; MAP-003f report §9, D2) |
+| **Node purposes and services** (NODE-AUTHORITY-001, 2026-11-27) | **Core Rules §8.3** (`#node-authority`), the only independently maintained definition; AGENTS/CLAUDE §7 | None yet: `game.gd` has only the SAFEHOUSE flat heal (pending PATCH UP / FORTIFY). The Uplink build (UPLINK-SPEC-001) and future Console Lab, DEAD DROP and SAFEHOUSE services must take their service list from §8.3 | Retired to references by the NODE-AUTHORITY-001 series; checked by `tools/csa/scan_node_authority.py` (prototype for the CSA-05 drift job). Structured Node records not introduced; candidate after CSA-07 |
 
 **Reusable infrastructure.**
 - `godot/data/` JSON loaded by static vars (`ArchCopy`), included in the export preset.
