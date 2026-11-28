@@ -4025,3 +4025,7 @@ Protocol rules remain encounter duration, no RAM, independent copies, no self-tr
 
 **Designer:** "CSA 4 is closed, it's accepted" and "don't cut the next Windows playtest build." CSA-04 (04a–j, including `CardDB.param()` and rules-text templates) is accepted and closed; next in the sequence is CSA-05. No Windows playtest build is to be cut for now.
 
+## REPRISE ruling under CARD-REVIEW-001 (designer 2026-11-28 09:33)
+
+**Designer:** "Reprise is superseded by card review 001. You approve a fresh target and mode. No repeating a burned card. And penalties repeat. And it can count as another probe." REPRISE follows CARD-REVIEW-001 and EFFECT-REPEAT-001: the Rustler picks a fresh legal target and mode; a BURNED source can't be repeated (REPRISE doesn't skip back to an earlier SCRIPT); the source's penalties (for example its +TRACE) apply again; and repeating a PROBE **counts as another PROBE on that ICE** for PROBE-003's escalating cost. This ruling is the exception to EFFECT-REPEAT-001's "no tag-specific counters" for the PROBE count. **Supersedes** the UI-PROTOCOL-001 implementation interpretation (same target and mode, no PROBE count). **Status:** approved; engine change pending (REPRISE stays `divergent` in `cards.json` until it is built).
+

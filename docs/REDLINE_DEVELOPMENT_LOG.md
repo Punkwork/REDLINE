@@ -464,3 +464,7 @@ Designer, 09:26: 3 BW a turn, boosts lasting one turn and the parting shot repla
 ## 2026-11-28 — CSA-04 closed; no build (Claude Code)
 
 Designer, 09:27: CSA-04 accepted and closed; do not cut the next Windows playtest build. Recorded in Master Design, HANDOFF and the CSA document. Next: CSA-05.
+
+## 2026-11-28 — REPRISE ruling (Claude Code)
+
+Designer, 09:33: REPRISE follows CARD-REVIEW-001: fresh target and mode, no BURNED source, penalties repeat, and a repeated PROBE counts as another PROBE. Recorded in Master Design and HANDOFF; the engine change is pending (REPRISE stays divergent).
