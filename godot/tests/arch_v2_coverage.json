@@ -622,12 +622,12 @@
   {
    "id": "F08",
    "area": "Flow",
-   "element": "Punch-card holder (SIGNAL-001)",
+   "element": "Signal barcode holder (SIGNAL-001, SIGNAL-002; was the punch-card holder)",
    "prototype": "update_punch_holder",
    "v2": "Eye",
    "status": "BUILT",
    "next": "",
-   "note": "On the eye hover (designer); a new card drops onto the eye (ARCH-V2-007c)."
+   "note": "On the eye hover (designer), \"Signal barcodes n / 3\"; a new barcode drops onto the eye (ARCH-V2-007c). Barcode art PROPOSED (SIGNAL-002 UI issue): held barcodes overlay into the Signal."
   },
   {
    "id": "F09",

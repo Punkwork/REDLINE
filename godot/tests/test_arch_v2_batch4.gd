@@ -29,7 +29,7 @@ func run() -> void:
 	await test_rooms()
 	print("- corporation look: enamel, ad plate, TRACE pixel steps, mood flicker, music (007b)")
 	await test_look()
-	print("- graffiti, punch cards, low VITAE, PATIENT ZERO (007c)")
+	print("- graffiti, Signal barcodes, low VITAE, PATIENT ZERO (007c)")
 	await test_rest()
 	print("- ORIGIN Ghostware art in the reel (008a)")
 	test_origin_art()
@@ -128,11 +128,12 @@ func test_rest() -> void:
 	g.strikes = 2; sb.refresh()
 	check(a == 0 and sb.graffiti_count() == 0, "no graffiti on screen (removed for now)")
 	g.strikes = 0; g.trace = 0; sb.refresh()
-	# Punch cards: in the eye's hover; an arrival drops onto the eye.
-	check(String(sb.eye.lines[1]).begins_with("Punch cards 0 / 3"), "eye hover counts punch cards")
+	# Signal barcodes (SIGNAL-002, were punch cards): in the eye's hover; an arrival drops onto the eye.
+	check(String(sb.eye.lines[1]).begins_with("Signal barcodes 0 / 3"), "eye hover counts Signal barcodes")
+	check(not String(sb.eye.lines[1]).to_lower().contains("punch"), "eye hover no longer says punch cards")
 	g.punch_cards.append("HALCYON"); g.events.append({"t": "PUNCH_CARD", "corp": "HALCYON"}); sb.refresh()
-	check(is_instance_valid(sb.punch_arrival) and sb.punch_arrival.visible, "a new punch card arrives at the eye")
-	check(sb.eye.picture.is_valid(), "eye hover shows the punch cards")
+	check(is_instance_valid(sb.punch_arrival) and sb.punch_arrival.visible, "a new Signal barcode arrives at the eye")
+	check(sb.eye.picture.is_valid(), "eye hover shows the Signal barcodes")
 	# Low VITAE: the VITAE meter pulses red at a quarter or less.
 	check(not sb.meters.VITAE.warn, "no warning at full VITAE")
 	g.vitae = g.max_vitae / 4; sb.refresh()

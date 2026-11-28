@@ -17,13 +17,14 @@ func _draw() -> void:
  draw_rect(Rect2(Vector2.ZERO, size), bg)
  draw_rect(Rect2(Vector2.ONE, size - Vector2(2, 2)), fg, false, 1.0)
  if layers.is_empty(): return
- var cell := Vector2(size.x * 0.065, size.y * 0.084)
- var origin := Vector2(size.x * 0.17, size.y * 0.16)
- for corp in layers:
-  var pattern: Array = SignalCards.DATA[corp].holes
-  for row in pattern.size():
-   for column in pattern[row]:
-    draw_circle(origin + Vector2(column, row) * cell, cell.y * 0.35, fg)
- if stock and size.y > 45:
-  var font := FriendlyLook.MONO
-  draw_string(font, Vector2(8, size.y - 8), "%s · PAT. %s" % [spec.mark, spec.patent], HORIZONTAL_ALIGNMENT_LEFT, -1, 12, fg)
+ # SIGNAL-002 (PROPOSED art, designer review in a UI issue): a barcode, not punched holes. Several layers
+ # overlay into one strip, so the three corporations' barcodes together show the whole Signal.
+ var left := size.x * 0.08
+ var module := (size.x - left * 2.0) / float(SignalCards.MODULES)
+ var top := size.y * 0.14
+ var bottom := size.y * (0.70 if stock and size.y > 45 and size.x >= 140 else 0.86)
+ for bar in SignalCards.bars_for(layers):
+  draw_rect(Rect2(left + float(bar[0]) * module, top, maxf(1.0, float(bar[1]) * module), bottom - top), fg)
+ var caption := "%s · PAT. %s" % [spec.mark, spec.patent] if not spec.is_empty() else ""
+ if stock and size.y > 45 and FriendlyLook.MONO.get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x <= size.x - 16:
+  draw_string(FriendlyLook.MONO, Vector2(8, size.y - 8), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, fg)

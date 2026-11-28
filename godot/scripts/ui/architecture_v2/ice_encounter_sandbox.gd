@@ -538,7 +538,7 @@ func refresh() -> void:
 	eye.heading = VisibleStateAdapter.place_line(game)
 	eye.title = "LOCKDOWN" if game.lockdown else "THE EYE"
 	eye.lines = ["Hostile reveal %d%%. Strikes %d / 3%s." % [roundi(rev * 100.0), mini(game.strikes, 3), " · you can't leave this Node early" if game.lockdown else ""],
-		"Punch cards %d / 3%s" % [game.punch_cards.size(), (": " + ", ".join(game.punch_cards)) if not game.punch_cards.is_empty() else ""], "KEY LEGEND"]
+		"Signal barcodes %d / 3%s" % [game.punch_cards.size(), (": " + ", ".join(game.punch_cards)) if not game.punch_cards.is_empty() else ""], "KEY LEGEND"]
 	eye.picture = _punch_picture if not game.punch_cards.is_empty() else Callable()
 	## ARCH-V2-007c / F09: low VITAE (a quarter or less) makes the VITAE meter pulse red.
 	meters.VITAE.warn = game.vitae > 0 and game.vitae <= game.max_vitae / 4
@@ -743,13 +743,17 @@ func _graffiti_sticker(line: Dictionary) -> PanelContainer:
 		paper.add_child(l)
 	return paper
 
-## ARCH-V2-007c (designer: "Hover on the eye only"): the punch cards collected, drawn in the eye's
-## hover; a newly earned card drops onto the eye for a moment.
+## ARCH-V2-007c (designer: "Hover on the eye only"): the Signal barcodes collected (SIGNAL-002; code names
+## still say punch), drawn in the eye's hover; a newly earned barcode drops onto the eye for a moment.
 func _punch_picture() -> Control:
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 6)
 	for corp in SignalCards.ORDER:
 		var c := PunchStock.new([corp] if game.punch_cards.has(corp) else [])
 		c.custom_minimum_size = Vector2(46, 30); row.add_child(c)
+	if game.punch_cards.size() > 1:   # SIGNAL-002 (PROPOSED): the held barcodes overlaid, toward the Signal
+		var overlay := PunchStock.new(game.punch_cards, false)
+		overlay.name = "SignalOverlay"
+		overlay.custom_minimum_size = Vector2(92, 30); row.add_child(overlay)
 	return row
 
 func _punch_arrives(corp: String) -> void:

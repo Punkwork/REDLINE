@@ -28,7 +28,7 @@ func run() -> void:
  check(view.punch_count.text == "3/3", "full holder")
  await capture("signal-holder-3")
  main.open_punches()
- await capture("signal-hole-patterns")
+ await capture("signal-barcodes")
  main.punch_open = false
  g.take_pulp(g.vitae + g.shield)
  main.refresh()

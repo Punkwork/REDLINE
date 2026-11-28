@@ -108,6 +108,6 @@ Every element the Build 12 encounter shows, and where it lives on the V2 encount
 | F05 | VOICE / M mute | VoiceButton | `SpeakerR` | BUILT | — | Click either grille or press M; saved to the app settings. |
 | F06 | KEY LEGEND | LegendButton | `Eye` | BUILT | — | Legend, tier, Node and layer on the eye hover (ARCH-V2-006g). |
 | F07 | Outcome (BREACH, flatline) | main overlays | `Outcome` | BUILT | — | Stand-in banner. |
-| F08 | Punch-card holder (SIGNAL-001) | update_punch_holder | `Eye` | BUILT | — | On the eye hover (designer); a new card drops onto the eye (ARCH-V2-007c). |
+| F08 | Signal barcode holder (SIGNAL-001, SIGNAL-002; was the punch-card holder) | update_punch_holder | `Eye` | BUILT | — | On the eye hover (designer), "Signal barcodes n / 3"; a new barcode drops onto the eye (ARCH-V2-007c). Barcode art PROPOSED (SIGNAL-002 UI issue): held barcodes overlay into the Signal. |
 | F09 | Bleed and low-VITAE warning (ADP-1) | advance_bleed | `MeterVITAE` | BUILT | — | Bleed drives reveal, music, pixel steps, graffiti; VITAE meter pulses red at a quarter or less (ARCH-V2-007c). |
 | F10 | Reward, map and event screens | main._overlay_* | — | OUT | C17, outside the encounter slice |  |

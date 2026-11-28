@@ -17,16 +17,34 @@ func _initialize() -> void:
   g._award_punch_card()
   g._award_punch_card()
   check(g.punch_cards.count(corp) == 1, "Central Node card is unique: " + corp)
+  # SIGNAL-002: one fixed Signal barcode per corporation; its bars fit the strip between the guard bars.
   var spec: Dictionary = SignalCards.DATA[corp]
-  check(spec.holes.size() == 8, "Card has eight rows")
-  for row in spec.holes:
-   for column in row: check(column >= 0 and column < 12, "Hole fits twelve columns")
+  check(not spec.bars.is_empty(), "Barcode has bars: " + corp)
+  for bar in spec.bars: check(bar[0] >= 4 and bar[0] + bar[1] <= SignalCards.MODULES - 4, "Bar fits inside the guards: " + corp)
+ # SIGNAL-002: "the three barcodes overlaid form the Signal". Each holds part of it, none overlap, all three fill it.
+ var held := []
+ var seen := {}
+ for corp in SignalCards.ORDER:
+  for bar in SignalCards.DATA[corp].bars:
+   check(not seen.has(str(bar)), "Barcodes do not share a bar")
+   seen[str(bar)] = true
+  held.append(corp)
+  var shown: Array = SignalCards.bars_for(held)
+  var whole: bool = SignalCards.SIGNAL_BARS.all(func(b): return shown.has(b))
+  check(whole == (held.size() == 3), "The Signal is whole only when all three barcodes overlay (%d held)" % held.size())
+ check(seen.size() == SignalCards.SIGNAL_BARS.size(), "The three barcodes together hold every Signal bar")
+ check(SignalCards.bars_for([]) == SignalCards.GUARDS, "No barcode held: guard bars only")
  var restored := Game.new(77)
  restored.new_run("ECHO")
  restored.restore_presentation(JSON.parse_string(JSON.stringify(g.save_presentation())))
- check(restored.punch_cards == SignalCards.ORDER, "Punch cards survive a presentation save round trip")
+ check(restored.punch_cards == SignalCards.ORDER, "Signal barcodes survive a presentation save round trip")
+ # Old saves (SIGNAL-001 punch-card records) still load: same "punch_cards" key and corporation values.
+ var old_save := Game.new(77)
+ old_save.new_run("ECHO")
+ old_save.restore_presentation(JSON.parse_string('{"punch_cards": ["LUCIDA", "HALCYON"], "grafts": {}}'))
+ check(old_save.punch_cards == ["HALCYON", "LUCIDA"], "A SIGNAL-001 save loads as Signal barcodes")
  restored.new_run("ECHO")
- check(restored.punch_cards.is_empty(), "New run clears punch cards")
+ check(restored.punch_cards.is_empty(), "New run clears Signal barcodes")
  check(not SignalCards.may_reveal(["HALCYON", "HALCYON", "LUCIDA"]), "Three entries do not substitute for three distinct cards")
 
  for line in ArchCopy.lines:

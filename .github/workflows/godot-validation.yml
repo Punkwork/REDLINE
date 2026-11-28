@@ -124,8 +124,8 @@ jobs:
             2>&1 | tee /tmp/shot_ui_protocol_001.log
           if grep -E 'SCRIPT ERROR|Parse Error|Assertion failed' /tmp/shot_ui_protocol_001.log; then exit 1; fi
           grep -q 'UI-PROTOCOL-001 screenshots: 6 written (0 active after the encounter)' /tmp/shot_ui_protocol_001.log
-          # UPLINK-SPEC-001 / MAP-003f: the Uplink room and the map board.
-          for script in shot_uplink_room shot_node_map; do
+          # UPLINK-SPEC-001 / MAP-003f: the Uplink room and the map board. SIGNAL-002: the Signal barcodes.
+          for script in shot_uplink_room shot_node_map shot_signal_barcodes; do
             xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
               "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
               --rendering-driver opengl3 --path godot --script "res://tests/${script}.gd" \
@@ -134,6 +134,7 @@ jobs:
           done
           grep -q 'UPLINK ROOM screenshots: 3 written' /tmp/shot_uplink_room.log
           grep -q 'NODE MAP screenshots: 5 written' /tmp/shot_node_map.log
+          grep -q 'SIGNAL BARCODES: 4 written, 4 checks, 0 failures' /tmp/shot_signal_barcodes.log
           # UI-TYPO-002 (M06): the typography fixture on the production EventFlyout, lens and sandbox.
           xvfb-run -a -s '-screen 0 2600x1500x24' timeout 180 \
             "Godot_v${GODOT_VERSION}-stable_linux.x86_64" --audio-driver Dummy \
