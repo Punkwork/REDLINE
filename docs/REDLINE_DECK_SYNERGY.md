@@ -420,3 +420,5 @@ Designer adds +1 BW to OVERCLOCK's approved effect: upon playing your third card
 ### CARD-REVIEW-001 — current card review reference (2026-11-28)
 
 The eleven reviewed cards' current classifications and flavor are canonical in `godot/data/cards.json`; generate the matrix with `python3 tools/csa/validate_cards.py --strategy-matrix markdown`. The historical STACK SMASH example above is superseded by the approved revision in CardDB (approved_text until runtime reconciliation). See Master Design CARD-REVIEW-001 and HANDOFF. Do not maintain a second classification table.
+
+CARD-REVIEW-001 continuation (2026-11-28): eight Generalist starter definitions reviewed, 19/127 total. Use canonical CardDB strategy metadata and existing generated matrix; no separate classification table. Revision-specific acceptance pending.

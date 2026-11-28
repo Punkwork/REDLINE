@@ -29,8 +29,21 @@
 				"BREAKER-STARTER-002",
 				"BREAKER-STARTER-003",
 				"BREAKER-STARTER-004",
-				"BREAKER-STARTER-005"
-			]
+				"BREAKER-STARTER-005",
+				"CARD-REVIEW-001"
+			],
+			"flavor": "Ain't no mountain high enough.",
+			"strategy": {
+				"precision_breaching": [
+					"enabler"
+				],
+				"program_synergy": [
+					"enabler"
+				],
+				"momentum": [
+					"support"
+				]
+			}
 		},
 		"TUMBLER_ICEPICK": {
 			"name": "TUMBLER Icepick",
@@ -54,8 +67,18 @@
 				"implementation": "implemented"
 			},
 			"decisions": [
-				"STR-001"
-			]
+				"STR-001",
+				"CARD-REVIEW-001"
+			],
+			"flavor": "The combination is merely a suggestion.",
+			"strategy": {
+				"precision_breaching": [
+					"enabler"
+				],
+				"program_synergy": [
+					"enabler"
+				]
+			}
 		},
 		"VOID_ICEPICK": {
 			"name": "VOID Icepick",
@@ -76,11 +99,26 @@
 			"text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW.",
 			"status": {
 				"design": "approved",
-				"implementation": "implemented"
+				"implementation": "divergent"
 			},
 			"decisions": [
-				"STR-001"
-			]
+				"STR-001",
+				"CARD-REVIEW-001"
+			],
+			"flavor": "Stare into the abyss. Make it blink.",
+			"strategy": {
+				"precision_breaching": [
+					"enabler"
+				],
+				"program_synergy": [
+					"enabler"
+				],
+				"defensive_endurance": [
+					"support"
+				]
+			},
+			"approved_text": "STR {pick.str}. Boost: {pick.boost_cost} BW → +{pick.boost_amt} STR. Break: {pick.break_cost} BW. Whenever you break a subroutine, reveal one remaining concealed subroutine on that ICE.",
+			"divergence": "Approved reveal after each successful break by this Icepick, next concealed subroutine in resolution order on the same ICE; no effect if none remain. Runtime reconciliation pending."
 		},
 		"BASIC_EXTRACTOR": {
 			"name": "Basic Extractor",
@@ -100,8 +138,15 @@
 			"decisions": [
 				"EXTRACT-002",
 				"CONSISTENCY-001a",
-				"EXTRACT-001"
-			]
+				"EXTRACT-001",
+				"CARD-REVIEW-001"
+			],
+			"flavor": "A little off the top.",
+			"strategy": {
+				"program_synergy": [
+					"enabler"
+				]
+			}
 		},
 		"CORTEX_BUFFER": {
 			"name": "CORTEX BUFFER",
@@ -117,10 +162,20 @@
 			},
 			"decisions": [
 				"CORE-001",
-				"NAME-001"
+				"NAME-001",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"prevent": 1
+			},
+			"flavor": "Unauthorized thoughts detected.",
+			"strategy": {
+				"defensive_endurance": [
+					"support"
+				],
+				"program_synergy": [
+					"enabler"
+				]
 			}
 		},
 		"PULP_SHIELD": {
@@ -138,10 +193,23 @@
 			},
 			"decisions": [
 				"GENERALIST-001",
-				"GENERALIST-012"
+				"GENERALIST-012",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"shield": 3
+			},
+			"flavor": "Your safety is our primary concern.",
+			"strategy": {
+				"defensive_endurance": [
+					"enabler"
+				],
+				"surveillance_evasion": [
+					"support"
+				],
+				"momentum": [
+					"support"
+				]
 			}
 		},
 		"PROBE": {
@@ -177,10 +245,25 @@
 				"PROBE-003",
 				"PROBE-004",
 				"PROBE-004a",
-				"CONSISTENCY-001a"
+				"CONSISTENCY-001a",
+				"CARD-REVIEW-001"
 			],
 			"params": {
 				"escalation": 1
+			},
+			"strategy": {
+				"ice_suppression": [
+					"enabler"
+				],
+				"exploit_synergy": [
+					"enabler"
+				],
+				"precision_breaching": [
+					"enabler"
+				],
+				"momentum": [
+					"support"
+				]
 			}
 		},
 		"GHOST_SIGNAL": {
@@ -189,7 +272,7 @@
 			"tags": [
 				"CLOAK"
 			],
-			"bw": 2,
+			"bw": 1,
 			"rarity": "STARTER",
 			"text": "The first TRACE added in the next Corporation Response becomes 0. BURNED.",
 			"status": {
@@ -200,8 +283,18 @@
 				"GHOST-SIGNAL-001",
 				"BURNED-001",
 				"CONSISTENCY-001a",
-				"BURNED-001a"
-			]
+				"BURNED-001a",
+				"CARD-REVIEW-001"
+			],
+			"flavor": "Please disregard the absence of evidence.",
+			"strategy": {
+				"surveillance_evasion": [
+					"enabler"
+				],
+				"defensive_endurance": [
+					"support"
+				]
+			}
 		},
 		"BATTERING_RAM": {
 			"name": "BATTERING RAM",

@@ -4043,3 +4043,6 @@ Designer reconfirmed three upright CAP vials side by side in a wall-mounted thre
 
 **UPLINK-SPEC-001 / MAP-003f built for review (Claude Code, 2026-11-28):** the map board, the generated HALCYON map in the app, the Uplink visit and the Uplink room, per the handoff above; evidence, interpretations and the Ghostware blocker in HANDOFF. **Status:** built and validated; first captures awaiting designer review. No release.
 
+## CARD-REVIEW-001 — Generalist starter review (2026-11-28, designer / ChatGPT)
+
+Designer approved all eight unique starter definitions (19 of 127 reviewed); deck composition unchanged. Canonical flavor and strategic roles are in CardDB. GHOST SIGNAL cost 2 → 1 BW, existing effect and BURNED unchanged. VOID ICEPICK retains all existing costs and STR; whenever it successfully breaks a subroutine, reveal the next remaining concealed subroutine on that same ICE in resolution order, no effect if none remain. VOID ICEPICK remains explicitly divergent until engine/data reconciliation. Other six cards unchanged mechanically. CORTEX BUFFER prevents both consequences of a prevented point under CORTEX-001. BASIC EXTRACTOR remains 3 CRED. No new cards or pools. Designer approved GHOST SIGNAL cost explicitly. Existing STRATEGY-001 / CSA revision-specific acceptance remains required.

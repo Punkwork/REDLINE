@@ -389,7 +389,7 @@ Keep your deck, PATCHWORK and Ghostware (including the payload). Restore VITAE t
 | 1 | **CORTEX BUFFER** **[CHANGED]** | PROGRAM | 1 BW, 1 RAM | Once per encounter, prevent 1 CORTEX. *(Replaces SYN BUFFER, since SyN is removed. Deliberately not tagged CLOAK, so installing it doesn't power up WATCHDOG.)* |
 | 3 | PULP Shield | SCRIPT — CLOAK | 1 BW | +3 SHIELD. |
 | 3 | PROBE | SCRIPT — EXPLOIT | 0 BW base | Choose one: Target ICE: −2 STR this encounter. OR Target VOID: Reveal all hidden subroutines. Costs 1 additional BW for each PROBE already played on the target ICE this turn. |
-| 1 | GHOST SIGNAL | SCRIPT — CLOAK | 2 BW | The first TRACE added during the next Corporation Response is reduced to 0. BURNED for the rest of the Node. |
+| 1 | GHOST SIGNAL | SCRIPT — CLOAK | 1 BW | The first TRACE added during the next Corporation Response is reduced to 0. BURNED for the rest of the Node. |
 
 ---
 

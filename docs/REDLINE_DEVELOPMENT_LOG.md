@@ -488,3 +488,7 @@ Brief from the designer (09:51); handoff in `67099c1`.
 - **Uplink.** `UplinkVisit` builds a seeded shelf on entry (8 unique cards, 5/2/1, 6 shared + 2 Rustler, one at half price) and 3 CAPS. Purchases are atomic: cards go to the compiled deck and CAPS to the rack, with replacement when the rack is full. The Clinic removes CORTEX only. A developer override exists for playtest stock. `UplinkRoom` places these on BG_NODE_UPLINK_UNDERWORLD (4×2 cards, three-vial fuse bank, three Ghostware medallions, the register, the Clinic grille); `main.gd` shows the map and the room in place of the legacy map overlay.
 - **Tests:** new `test_uplink_map` 257/0, `test_map_uplink_ui` 17/0 and Python `test_map_export` (86 passed in all). Unchanged: test_game 453/0, app 33/0, parity 3,997/0, csa_cards 548/0, coverage 511/0, CSA-04 47/0, and every other suite 0 failed. Fixtures: `shot_uplink_room` 3, `shot_node_map` 2, `shot_arch_v2_ice` 42, `shot_ui_protocol_001` 6. `shot_arch_v2_app` (not in CI) now pins the slice route.
 - **Blocker:** Ghostware has no canonical records (CSA-07), so it isn't stocked. Interpretations are listed in HANDOFF. The queued REPRISE change and multi-layer Nodes are untouched. No release.
+
+## 2026-11-28 — CARD-REVIEW-001 Generalist starter review (ChatGPT)
+
+Eight unique starter cards approved; canonical flavor/strategy recorded, GHOST SIGNAL 1 BW, VOID ICEPICK approved reveal recorded as divergent. Core Rules cost reconciled. HANDOFF queues engine reconciliation and existing acceptance checks. No runtime tests run by ChatGPT; no release.
