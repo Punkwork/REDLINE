@@ -82,6 +82,10 @@ Readability, reduced motion and the copy guards still govern both. **Flyout exce
 
 **For design and validation:** exact typefaces, glyphs, scale, palette values, motion direction, timing, easing and per-component contracts require review. All example timings and mockup copy are study inputs subject to current rules and the flyout exception. See the [Typography & Motion milestone](REDLINE_MASTER_DESIGN.md#typography--motion-design-system-milestone-m06--priority-1-companion) and [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
 
+### Bandwidth transition design acceptance (UI-TYPO-001 / M06, 2026-11-27)
+
+**DESIGN-APPROVED — designer confirmed 2026-11-27.** Bandwidth (BW) transitions follow the approved universal motion language. Use symbols, numbers and mathematical notation only in transient resource feedback; no explanatory words (including BLOCKED). The persistent physical BW indicator remains authoritative. No further BW visual exploration before the next build. Expenditure, gain, turn replenishment, rapid successive changes and insufficient-BW rejection are implementation and playtest cases, not open design tasks. Bind presentation to authoritative engine events without changing rules or delaying gameplay; reduced-motion and reduced-flash alternatives must preserve information. Implementation, accessibility validation and playtest acceptance remain pending; exact integration timings are not newly prescribed by this approval. Existing readability guards remain in force. Track delivery in [issue #24](https://github.com/Punkwork/REDLINE/issues/24).
+
 ## 3. Existing Master Design UI decisions (extract)
 **CARDS-003 — PCB glow cartridges (APPROVED, 2026-11-19).** Supersedes the CARDS-002 palette table above and its rarity finishes, ivory print and amber-on-field numbers. Designer: "Go with this dark panel tint for now it works. Yes i want these stencil designs. Commit these changes to the cards for godot." It was reviewed in 17 iterations on the `review/cards-002` branch, which is never merged.
 
